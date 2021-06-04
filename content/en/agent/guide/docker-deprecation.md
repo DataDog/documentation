@@ -9,13 +9,13 @@ Kubernetes is deprecating Docker as a runtime starting after version 1.20, and s
 
 - GKE 1.19 [deprecated Docker and uses containerd by default, on new nodes][2].
 
-If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, and the Docker check does not work. This means that you will have to enable either the [containerd][3] or the [CRI-O][4] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
+If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, and the Docker check does not work. This means that you must enable either the [containerd][3] or the [CRI-O][4] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
 
-With version 7.27+ of the Datadog Agent, the Agent automatically detects the environment you are running, and you do not to make any configuration changes.
+With version 7.27+ of the Datadog Agent, the Agent automatically detects the environment you are running, and you do not need to make any configuration changes.
 
-**If you are using Agent < v7.26, then you will need to specify your container runtime socket path:**
+**If you are using Agent < v7.26, you must specify your container runtime socket path:**
 
-Note that you may need to update your existing monitors, dashboards and SLOs because metrics names will change—for example, from `docker.*` to `containerd.*`.
+**Note**: You may need to update your existing monitors, dashboards, and SLOs because metrics names will change—for example, from `docker.*` to `containerd.*`.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -33,7 +33,7 @@ criSocketPath:  /var/run/containerd/containerd.sock
 
 Remove any references to the Docker socket, as well as any Docker socket volume mounts.
 
-Use the environment variable `DD_CRI_SOCKET_PATH` to point to your container runtime socket path. This should be set on all Agent containers if using dedicated containers:
+Use the environment variable `DD_CRI_SOCKET_PATH` to point to your container runtime socket path. Set on all Agent containers if using dedicated containers:
 
 ```
 env:
@@ -41,7 +41,7 @@ env:
     value: /var/run/containerd/containerd.sock
 ```
 
-You will also have to mount the socket from your host to the Agent container:
+Mount the socket from your host to the Agent container:
 
 ```
 volumeMounts:
