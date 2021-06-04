@@ -92,11 +92,9 @@ In the Custom Metrics tab, this table lists the following information about your
 
 If you are looking for more details on your metrics, you can access the [Metric Summary](https://docs.datadoghq.com/metrics/summary/#overview). This can be viewed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
-{{< img src="account_management/billing/usage-metrics-04.png" alt="Custom Metrics" >}}
-
 This data can be downloaded as a CSV file.
 
-{{< img src="account_management/billing/usage-details-v2-05.png" alt="Custom Metrics" >}}
+{{< img src="account_management/billing/usage-metrics-04.png" alt="Custom Metrics" >}}
 
 ## Logs usage by index
 
@@ -109,7 +107,7 @@ In the Log Management tab, this table displays your hourly, daily, monthly, and 
 
 This data can be downloaded as a CSV file.
 
-{{< img src="account_management/billing/usage-details-v2-06.png" alt="Logs Usage by Index" >}}
+{{< img src="account_management/billing/usage-details-v3-02.png" alt="Logs Usage by Index" >}}
 
 ## Troubleshooting
 
