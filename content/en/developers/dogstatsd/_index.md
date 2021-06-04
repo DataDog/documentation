@@ -454,7 +454,6 @@ For more information, see the [DogStatsD module][1] documentation.
 | `Tags`                  | List of strings | Global tags applied to every metric, event, and service check.                                                                                                                                                      |
 | `Buffered`              | Boolean         | Used to pack multiple DogStatsD messages in one payload. When set to `true`, messages are buffered until the total size of the payload exceeds `MaxMessagesPerPayload` or 100ms after the payload started building. |
 | `MaxMessagesPerPayload` | Integer         | The maximum number of metrics, events, and/or service checks a single payload can contain. This option only takes effect when the client is buffered.                                                               |
-| `AsyncUDS`              | Boolean         | Used to switch between async and blocking mode for UDS. Blocking mode allows for error checking but does not guarantee that calls won't block the execution.                                                        |
 | `WriteTimeoutUDS`       | Integer         | The timeout after which a UDS packet is dropped.                                                                                                                                                                    |
 
 For more options, see [Datadog's GoDoc][1].
