@@ -79,6 +79,8 @@ In product specific tabs, you will see your hourly, daily, monthly, and annual u
 
 Most accounts have access to the feature Included Lines, which allows you to visually see how your usage is tracking over the month. The graphs on your Usage page now contain a line that shows usage already included in your plan.
 
+{{< img src="account_management/billing/usage-details-v3-01.png" alt="Commited Lines" >}}
+
 ## Top custom metrics
 
 In the Custom Metrics tab, this table lists the following information about your Top 5000 custom metrics month-to-date usage and most recent day usage (i.e., usage on the date of the last update):
@@ -91,7 +93,6 @@ In the Custom Metrics tab, this table lists the following information about your
 If you are looking for more details on your metrics, you can access the [Metric Summary](https://docs.datadoghq.com/metrics/summary/#overview). This can be viewed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
 {{< img src="account_management/billing/usage-metrics-04.png" alt="Custom Metrics" >}}
-
 
 This data can be downloaded as a CSV file.
 
