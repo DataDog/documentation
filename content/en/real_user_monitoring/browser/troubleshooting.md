@@ -10,7 +10,7 @@ further_reading:
       text: 'Content Security Policy'
 ---
 
-If you experience unexpected behavior with Datadog Browser RUM, this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog Browser RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
 
 ## Missing data
 
@@ -18,8 +18,9 @@ If you can't see any RUM data or if data is missing for some users:
 
 | Common causes                                                                                               | Recommended fix                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ad blockers prevent the Browser RUM SDK from being downloaded or from sending the data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. [Install the Browser RUM SDK with npm][3] and [forward the collected data through a proxy][4]. |
-| Network rules or VPN prevent the Browser RUM SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
+| Ad blockers prevent the Browser RUM SDK from being downloaded or sending data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. See the [Install the Browser RUM SDK with npm][3] and [forward the collected data through a proxy][4] docs. |
+| Network rules or VPNs prevent the Browser RUM SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
+| Scripts, packages, and clients initialized before the Browser RUM SDK can lead to missed logs, resources, and user actions. For example, initializing ApolloClient before the Browser RUM SDK may result in `graphql` requests not being logged as XHR resources in the RUM Explorer. | Check where the Browser RUM SDK is initialized and consider moving this step earlier in the execution of your application code.                                             |   
 
 Read the [Content Security Policy guidelines][6] and ensure your website grants access to the Browser RUM SDK CDN and the intake endpoint.
 
