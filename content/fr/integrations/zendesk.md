@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/zendesk/'
 draft: false
 git_integration_title: zendesk
 has_logo: true
+integration_id: zendesk
 integration_title: Zendesk
 is_public: true
 kind: integration

@@ -24,14 +24,10 @@ title: Android トレース収集
 1. `build.gradle` ファイルでライブラリを依存関係として宣言し、Gradle 依存関係を追加します。
 
     ```conf
-    repositories {
-        maven { url "https://dl.bintray.com/datadog/datadog-maven" }
-    }
-
     dependencies {
         implementation "com.datadoghq:dd-sdk-android:x.x.x"
     }
-   ```
+    ```
 
 2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][4]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][7]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
@@ -41,8 +37,8 @@ title: Android トレース収集
     class SampleApplication : Application() {
         override fun onCreate() {
             super.onCreate()
-            val configuration = Configuration.Builder().build()
-            val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+            val configuration = Configuration.Builder(tracesEnabled = true, ...).build()
+            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
             Datadog.initialize(this, credentials, configuration, trackingConsent)
         }
     }
@@ -53,10 +49,10 @@ title: Android トレース収集
    class SampleApplication : Application() {
        override fun onCreate() {
           super.onCreate()
-          val configuration = Configuration.Builder()
+          val configuration = Configuration.Builder(tracesEnabled = true, ...)
              .useEUEndpoints()
              .build()
-          val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+          val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
           Datadog.initialize(this, credentials, configuration, trackingConsent)
        }
    }
@@ -82,7 +78,7 @@ title: Android トレース収集
    ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されていることを確認します。
 
    ```kotlin
-    if(Datadog.isInitialized()){
+    if (Datadog.isInitialized()) {
         // your code here
     }
    ```
@@ -131,19 +127,15 @@ title: Android トレース収集
             tracer.activateSpan(childSpan).use {
                // Do something ...
             }  
-          }
-          catch(e:Error){
+          } catch(e: Error) {
             childSpan.error(e)
-          }
-          finally {
+          } finally {
             childSpan.finish()
           }
       }
-   }
-   catch(e:Error){
+   } catch(e: Error) {
      span.error(e)
-   }
-   finally {
+   } finally {
      span.finish()
    }
 
@@ -155,7 +147,7 @@ title: Android トレース収集
      val scope = tracer.activateSpan(span)
      scope.use {
         // Do something ...
-        doAsynWork {
+        doAsyncWork {
           // Step 2: reactivate the Span in the worker thread
            val scopeContinuation = tracer.scopeManager().activate(span)
            scopeContinuation.use {
@@ -163,11 +155,9 @@ title: Android トレース収集
            }
         }
       }   
-   }
-   catch(e:Error){
+   } catch(e: Error) {
      span.error(e)
-   }
-   finally{
+   } finally {
      span.finish()
    }
 
@@ -187,8 +177,8 @@ title: Android トレース収集
                tracedRequestBuilder.addHeader(key, value)
            }
    )
-    val request = tracedRequestBuilder.build()
-    // Dispatch the request and finish the span after.
+   val request = tracedRequestBuilder.build()
+   // Dispatch the request and finish the span after.
    ```
 
    * ステップ 2: サーバーコードのヘッダーからクライアントトレーサーコンテキストを抽出します。
@@ -202,7 +192,7 @@ title: Android トレース収集
                     .toMultimap()
                     .map { it.key to it.value.joinToString(";") }
                     .toMap()
-                    .toMutableMap()
+                    .entrySet()
                     .iterator()
             }
         )
@@ -233,6 +223,14 @@ title: Android トレース収集
     ```kotlin
     AndroidTracer.logErrorMessage(span, message)
     ```
+
+8. バッチ処理前にスパンのイベントで属性を変更する必要がある場合は、SDK の初期化時に `SpanEventMapper` を実装することで上記の処理を行えます。
+   ```kotlin
+      val config = Configuration.Builder(tracesEnabled = true, ...)
+                        // ...
+                        .setSpanEventMapper(spanEventMapper)
+                        .build()
+   ```
 
 ## インテグレーション
 
@@ -284,6 +282,65 @@ val request = Request.Builder()
 
 **注**: 複数のインターセプターを使用する場合、これを最初に呼び出す必要があります。
 
+### RxJava
+
+RxJava ストリーム内で継続的にトレースを提供するには、以下のステップに従う必要があります。
+1. [OpenTracing for RxJava][8] 依存関係をプロジェクトに追加し、**Readme** ファイルの指示に従います。
+   たとえば、継続的なトレースには、以下を追加します。
+   ```kotlin
+   TracingRxJava3Utils.enableTracing(GlobalTracer.get())
+   ```
+2. 次に、プロジェクトで Observable がサブスクライブされたときにスコープを開き、完了したら閉じます。
+   ストリームの演算子で作成されたスパンは、このスコープ（親スパン）内に表示されます。
+   ```kotlin
+   Single.fromSupplier{}
+        .subscribeOn(Schedulers.io())
+        .map { 
+            val span = GlobalTracer.get().buildSpan("<YOUR_OP_NAME>").start()
+            // ...
+            span.finish()
+        }
+       .doOnSubscribe {
+           val span = GlobalTracer.get()
+               .buildSpan("<YOUR_OP_NAME>")
+               .start()
+           GlobalTracer.get().scopeManager().activate(span)
+       }
+       .doFinally {
+           GlobalTracer.get().scopeManager().activeSpan()?.let {
+               it.finish()
+           }
+       }
+   ```
+### RxJava + Retrofit
+ネットワークリクエストに Retrofit を使用する RxJava ストリーム内の継続的トレースの場合:
+1. [Datadog Interceptor](#okhttp) を構成
+2. [Retrofit RxJava][9] アダプターを使用してネットワークリクエストに同期 Observables を使用。
+```kotlin
+Retrofit.Builder()
+   .baseUrl("<YOUR_URL>")
+   .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
+   .client(okHttpClient)
+   .build()
+```
+3. 以下のように、Rx ストリームの周りにスコープを開きます。
+```kotlin
+remoteDataSource.getData(query)
+   .subscribeOn(Schedulers.io())
+   .map { // ... } 
+   .doOnSuccess { 
+      localDataSource.persistData(it)
+   }
+   .doOnSubscribe { 
+      val span = GlobalTracer.get().buildSpan("<YOUR_OP_NAME>").start()
+      GlobalTracer.get().scopeManager().activate(span) 
+   }
+   .doFinally { 
+      GlobalTracer.get().scopeManager().activeSpan()?.let { 
+         it.finish() 
+      } 
+   }
+```
 ## バッチコレクション
 
 すべてのスパンは、最初にローカルデバイスにバッチで格納されます。各バッチはインテークの仕様に従います。ネットワークが利用可能で、Datadog SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドにあるときにネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
@@ -303,3 +360,5 @@ val request = Request.Builder()
 [5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
 [7]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=us
+[8]: https://github.com/opentracing-contrib/java-rxjava
+[9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3

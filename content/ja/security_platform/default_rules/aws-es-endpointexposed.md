@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-es-endpointexposed
 cloud: AWS
 disable_edit: true
+integration_id: amazon-vpc
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

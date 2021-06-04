@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/redmine/'
 draft: false
 git_integration_title: redmine
 has_logo: true
+integration_id: redmine
 integration_title: Redmine
 is_public: true
 kind: integration

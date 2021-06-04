@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/flowdock/'
 draft: false
 git_integration_title: flowdock
 has_logo: true
+integration_id: flowdock
 integration_title: Flowdock
 is_public: true
 kind: integration

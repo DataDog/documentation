@@ -85,10 +85,6 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
             resources:
             - deployments
             - replicasets
-            # Below are in case RBAC was not setup from the above linked "Cluster Agent Setup documentation"
-            - pods 
-            - nodes
-            - services
             verbs:
             - list
             - get
@@ -119,6 +115,50 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
 
 [1]: /ja/agent/cluster_agent/
 [2]: /ja/agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
+
+### カスタムタグをリソースに追加
+
+カスタムタグを Kubernetes リソースに追加すると、Kubernetes リソースビュ内のフィルタリングが容易になります。
+
+追加タグは、`DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` 環境変数を通して追加されます。
+
+**注**: これらのタグは、Kubernetes リソースビューでのみ表示されます。
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+公式の Helm チャートを使用している場合、[values.yaml][1] にそれぞれ `agents.containers.processAgent.env` および `clusterAgent.env` を設定して Process Agent と Cluster Agent の両方に環境変数を追加します。
+
+```yaml
+  agents:
+    containers:
+      processAgent:
+        env:
+          - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+            value: "tag1:value1 tag2:value2"
+  clusterAgent:
+    env:
+      - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+        value: "tag1:value1 tag2:value2"
+```
+
+
+次に、新しいリリースをデプロイします。
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Process Agent と Cluster Agent の両コンテナに環境変数を設定します。
+
+```yaml
+- name: DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS
+  value: "tag1:value1 tag2:value2"
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -170,12 +210,14 @@ Kubernetes Resources を有効にしている場合、`pod`、`deployment`、`Re
 
 複合クエリで複数の文字列検索を組み合わせるには、以下のブール演算子を使用します。
 
-|              |                                                                                                                                  |                                                                 |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
-| **演算子** | **説明**                                                                                                                  | **例**                                                     |
-| `AND`        | **積**: 両方の条件を含むイベントが選択されます (何も追加しなければ、AND がデフォルトで採用されます)。                           | java AND elasticsearch                                          |
-| `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                                                       | java OR python                                                  |
-| `NOT` / `!`  | **排他**: 後続の条件はイベントに含まれません。単語 `NOT` と文字 `!` のどちらを使用しても、同じ演算を行うことができます。 | java NOT elasticsearch <br> java !elasticsearch でも**同じ** |
+`AND`
+: **積**: 両方の条件を含むイベントが選択されます（何も追加しなければ、AND がデフォルトです）。<br>**例**: `java AND elasticsearch`
+
+`OR`
+: **和**: いずれかの条件を含むイベントが選択されます。<br> **例**: `java OR python`
+
+`NOT` / `!`
+: **排他**: 後続の条件はイベントに含まれません。単語  `NOT` または文字 `!` のどちらを使用しても、同じ演算を行うことができます。<br> **例**: `java NOT elasticsearch` または `java !elasticsearch`
 
 演算子をグループ化するには括弧を使用します。例: `(NOT (elasticsearch OR kafka) java) OR python`。
 
@@ -302,7 +344,7 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 * RBAC 設定によって Kubernetes のメタデータ収集を制限できます。[Datadog Agent の RBAC エンティティ][16]を参照してください。
 * Kubernetes の `health` 値は、コンテナの readiness プローブです。liveness プローブではありません。
 
-### Kubernetes リソースesources
+### Kubernetes リソース
 
 * データは一定の間隔で自動的に更新されます。ベータ版の更新間隔は変更される可能性があります。
 * 1000 以上のデプロイまたは ReplicaSets を持つクラスターでは、Cluster Agent からの CPU 使用率が上昇する場合があります。Helm チャートにはコンテナのスクラブを無効にするオプションがあります。詳細については、[Helm チャートリポジトリ][17]を参照してください。
