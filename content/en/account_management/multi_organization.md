@@ -81,8 +81,6 @@ The Overall Usage section summarizes your month-to-date usage of hosts, containe
 
 In the Individual Organization Usage section, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage. The "All" view is a table that lists by product the unadjusted, raw usage of your parent-organization and all child-organizations. To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
 
-{{< img src="account_management/multi-org-billable-v2.png" alt="Individual Absolute Usage" >}}
-
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
 To view only the usage that will count toward your bill, you can switch to the "Billable" view. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
