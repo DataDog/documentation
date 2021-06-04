@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/capistrano/'
 draft: false
 git_integration_title: capistrano
 has_logo: true
+integration_id: capistrano
 integration_title: Capistrano
 is_public: true
 kind: インテグレーション

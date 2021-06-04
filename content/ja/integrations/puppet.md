@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/puppet/'
 draft: false
 git_integration_title: puppet
 has_logo: true
+integration_id: puppet
 integration_title: Puppet
 is_public: true
 kind: インテグレーション

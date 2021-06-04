@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,11 +13,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/resin/README.md'
 display_name: Resin
+draft: false
 git_integration_title: resin
 guid: f7b4c3db-5e56-4ab7-bef7-9d4a347daaee
 integration_id: resin
 integration_title: Resin
-is_public: false
+is_public: true
 kind: integration
 maintainer: brent@bmontague.com
 manifest_version: 1.0.0
@@ -68,7 +72,7 @@ Le check Resin n'est pas inclus avec le package de l'[Agent Datadog][2] : vous 
 
 **resin.can_connect** :
 
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Resin qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Resin qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 

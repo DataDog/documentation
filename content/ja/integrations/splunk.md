@@ -9,6 +9,7 @@
 "draft": false
 "git_integration_title": "splunk"
 "has_logo": true
+"integration_id": ""
 "integration_title": "Splunk"
 "is_public": true
 "kind": "インテグレーション"

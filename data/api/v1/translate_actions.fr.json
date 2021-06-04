@@ -66,7 +66,7 @@
     "summary": "Récupérer tous les dashboards"
   },
   "CreateDashboard": {
-    "description": "Créez un dashboard à l'aide des options spécifiées.",
+    "description": "Créez un dashboard avec les options spécifiées. Lorsque vous définissez des requêtes dans vos widgets, repérez les requêtes pour lesquelles il faut ajouter les modificateurs `as_count()` ou `as_rate()`.\nConsultez la [documentation relative aux modificateurs intégrés à l'application] (https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#modificateurs-integres-a-l-application) pour en savoir plus.",
     "summary": "Créer un dashboard",
     "request_description": "Corps de requête pour la création d'un dashboard.",
     "request_schema_description": "Un dashboard est un outil vous permettant de surveiller visuellement, d'analyser et d'afficher des métriques de performance clés dans Datadog. Ces dernières facilitent la surveillance de l'état de votre infrastructure."
@@ -94,6 +94,42 @@
     "summary": "Mettre à jour une liste de dashboards",
     "request_description": "Corps de requête pour la mise à jour d'une liste de dashboards.",
     "request_schema_description": "Vos dashboards Datadog."
+  },
+  "CreatePublicDashboard": {
+    "description": "Partagez un dashboard privé spécifique. Les utilisateurs qui disposent de l'URL générée peuvent accéder au dashboard.",
+    "summary": "Créer un dashboard partagé",
+    "request_description": "Corps de requête pour la création d'un dashboard partagé.",
+    "request_schema_description": "L'objet de métadonnées associé au type de partage du dashboard."
+  },
+  "DeletePublicDashboard": {
+    "description": "Révoquez l'URL publique pour le dashboard associé à un token spécifique. Ce dashboard devient alors privé.",
+    "summary": "Révoquer une URL de dashboard partagé"
+  },
+  "GetPublicDashboard": {
+    "description": "Récupérez les métadonnées de partage d'un dashboard partagé existant associées au token spécifié.",
+    "summary": "Récupérer un dashboard partagé"
+  },
+  "UpdatePublicDashboard": {
+    "description": "Mettez à jour un dashboard partagé associé au token spécifié.",
+    "summary": "Mettre à jour un dashboard partagé",
+    "request_description": "Corps de requête pour la mise à jour d'un dashboard.",
+    "request_schema_description": "Mettez à jour les paramètres d'un dashboard partagé."
+  },
+  "DeletePublicDashboardInvitation": {
+    "description": "Révoquez, pour des adresses e-mail précises, les e-mails d'invitation envoyés précédemment et les sessions actives utilisées afin d'accéder à un dashboard partagé donné.",
+    "summary": "Révoquer des invitations de dashboard partagé",
+    "request_description": "Corps de requête pour la suppression d'une invitation à consulter un dashboard partagé.",
+    "request_schema_description": "Les données et métadonnées des invitations qui existent pour un dashboard partagé et qui sont renvoyées par l'API."
+  },
+  "GetPublicDashboardInvitations": {
+    "description": "Décrivez les invitations qui existent pour un dashboard partagé donné (avec pagination).",
+    "summary": "Récupérer toutes les invitations pour un dashboard partagé"
+  },
+  "SendPublicDashboardInvitation": {
+    "description": "Envoyez à des adresses spécifiques des e-mails contenant des liens d'accès à un dashboard partagé authentifié spécifique. Les adresses e-mail doivent déjà appartenir à la liste de partage du dashboard partagé authentifié.",
+    "summary": "Envoyer un e-mail d'invitation pour un dashboard partagé",
+    "request_description": "Corps de requête pour l'invitation à consulter un dashboard partagé.",
+    "request_schema_description": "Les données et métadonnées des invitations qui existent pour un dashboard partagé et qui sont renvoyées par l'API."
   },
   "DeleteDashboard": {
     "description": "Supprimez un dashboard à l'aide de l'ID spécifié.",
@@ -140,7 +176,7 @@
     "request_schema_description": "Les downtimes vous permettent de mieux contrôler les notifications d'un monitor en empêchant certains contextes de déclencher des alertes. Les paramètres de downtime, qui peuvent être planifiés avec une heure de début et de fin, désactivent toutes les alertes liées à des tags Datadog spécifiques."
   },
   "ListEvents": {
-    "description": "Le flux d'événements peut être interrogé et filtré par période, priorité, sources et tags.\n\n**Remarques** :\n- Si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères `%`,`\\`,`n` peuvent s'afficher dans votre sortie.\n\n- Cet endpoint renvoie jusqu'à `1000` résultats parmi les plus récents. Pour renvoyer davantage de résultats, identifiez le dernier timestamp du dernier résultat et définissez-le en tant que `end` de l'intervalle de requête pour paginer les résultats.",
+    "description": "Le flux d'événements peut être interrogé et filtré par période, priorité, source et tag.\n\n**Remarques** :\n- Si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères `%`,`\\`,`n` peuvent s'afficher dans votre sortie.\n\n- Cet endpoint renvoie jusqu'à `1000` résultats parmi les plus récents. Pour renvoyer davantage de résultats, identifiez le dernier timestamp du dernier résultat et définissez-le en tant que `end` de l'intervalle de requête pour paginer les résultats. Vous pouvez également utiliser le paramètre de page pour spécifier l'ensemble de `1000` résultats à renvoyer.",
     "summary": "Interroger le flux d'événements"
   },
   "CreateEvent": {
@@ -439,7 +475,7 @@
   },
   "ListLogs": {
     "description": "Cet endpoint renvoie les logs qui correspondent à une requête de recherche de logs. [Les résultats sont paginés][1].\n\n**Si vous songez à archiver les logs de votre organisation, nous vous conseillons d'utiliser les fonctionnalités d'archivage de Datadog plutôt que l'API Log List. Consultez la [documentation sur l'archivage de logs Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Récupérer une liste de logs",
+    "summary": "Search logs",
     "request_description": "Filtre de logs",
     "request_schema_description": "Objet à envoyer avec la requête pour récupérer une liste de logs de votre organisation."
   },
@@ -456,6 +492,12 @@
   "ListLogIndexes": {
     "description": "L'objet Index décrit la configuration d'un index de log. Cet endpoint renvoie un tableau des objets `LogIndex` de votre organisation.",
     "summary": "Récupérer tous les index"
+  },
+  "CreateLogsIndex": {
+    "description": "Créez un nouvel index. En cas de requête réussie, cet endpoint renvoie l'objet d'index transmis dans le corps de la requête.",
+    "summary": "Créer un index",
+    "request_description": "Objet contenant le nouvel index.",
+    "request_schema_description": "Objet décrivant un index de log Datadog."
   },
   "GetLogsIndex": {
     "description": "Récupérez un index de log de votre organisation. Cet endpoint ne prend aucun argument JSON.",
@@ -520,7 +562,7 @@
     "summary": "Récupérer tous les détails d'un monitor"
   },
   "CreateMonitor": {
-    "description": "Créez un monitor à l'aide des options spécifiées.\n\n#### Types de monitors\n\nVoici les types de monitor qui peuvent être sélectionnés :\n\n- Monitor d'anomalies : `query alert`\n- Monitor d'APM : `query alert` ou `trace-analytics alert`\n- Monitor composite : `composite`\n- Monitor personnalisé : `service check`\n- Monitor d'événement : `event alert`\n- Monitor de prévision : `query alert`\n- Monitor de host : `service check`\n- Monitor d'intégration : `query alert` ou `service check`\n- Monitor de live process : `process alert`\n- Log Monitor : `log alert`\n- Monitor de métrique : `metric alert`\n- Monitor réseau : `service check`\n- Monitor outlier : `query alert`\n- Monitor de processus : `service check`\n- Monitor RUM : `rum alert`\n- Monitor Watchdog : `event alert`\n\n#### Types de requête\n\n**Requête d'alerte de métrique**\n\nExemple : `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr` : avg, sum, max, min, change, ou pct_change\n- `time_window` : `last_#m` (où `#` doit être remplacé par 5, 10, 15 ou 30), `last_#h` (où `#` doit être remplacé par 1, 2 ou 4) ou `last_1d`.\n- `space_aggr` : avg, sum, min ou max.\n- `tags`  : un ou plusieurs tags (séparés par des virgules) ou *\n- `key` : la 'key' de la syntaxe de tags key:value. Définit une alerte distincte pour chaque tag du groupe (alertes multiples).\n- `operator` : <, <=, >, >=, == ou !=\n- `#` : un nombre entier ou un chiffre décimal utilisé pour définir le seuil.\n\nSi vous utilisez l'agrégateur temporel `_change_` ou `_pct_change_`, utilisez plutôt `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` avec :\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [En savoir plus](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (1, 5, 10, 15 ou 30), last\\_#h (1, 2 ou 4) ou last_#d (1 ou 2)\n- `timeshift` #m_ago (5, 10, 15 ou 30), #h_ago (1, 2 ou 4), ou 1d_ago.\n\nUtilisez ce paramètre pour créer un monitor outlier à l'aide de la requête suivante :\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**Requête de check de service**\n\nExemple : `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** : nom du check, par exemple `datadog.agent.up`\n- **`tags`** : un ou plusieurs tags entre guillemets (séparés par des virgules) ou « * ». Exemple : `.over(\"env:prod\", \"role:db\")`\n- **`count`** : doit être >= à votre seuil maximum (défini dans `options`). Par exemple, si vous souhaitez recevoir une notification à partir de 1 statut Critical, 3 statuts Ok et 2 statuts Warning, « count » doit prendre pour valeur 3. La valeur maximale est de 100.\n\n**Requête d'alerte d'événement**\n\nExemple : `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`** : la chaîne de requête de l'événement.\n- **`string_query`* : requête en texte libre à comparer au titre et au texte de l'événement.\n- **`sources`** : sources des événements (séparées par des virgules).\n- **`status`** : statuts des événements (séparés par des virgules). Valeurs autorisées : error, warn et info.\n- **`priority`** : priorités des événements (séparées par des virgules). Valeurs autorisées : low, normal ou all.\n- **`host`** : hosts transmettant des événements (séparés par des virgules).\n- **`tags`** : tags d'événement (séparés par des virgules).\n- **`excluded_tags`** : tags d'événement exclus (séparés par des virgules).\n- **`rollup`** : la méthode de cumulation des statistiques. `count` est actuellement la seule méthode prise en charge.\n- **`last`** : l'intervalle sur lequel les totaux doivent être cumulés. Exemples : 60s, 4h. Unités de temps prises en charge : s, m, h et j. Cette valeur ne doit pas dépasser 48 heures.\n\n**Requête d'alerte de processus**\n\nExemple : `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** : recherche en texte libre pour interroger les processus. Les processus renvoyés correspondent aux résultats de la page [Live Processes] (https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows).\n- **`tags`** : un ou plusieurs tags (séparés par des virgules)\n- **`timeframe`** : l'intervalle sur lequel les totaux doivent être cumulés. Exemples : 60s, 4h. Unités de temps prises en charge : s, m, h et j.\n- **`operator`** <, <=, >, >=, == ou !=\n- **`#`** : un nombre entier ou un chiffre décimal utilisé pour définir le seuil.\n\n**Requête d'alerte de logs**\n\nExemple : `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** : requête de recherche respectant la [syntaxe de recherche de log].(https://docs.datadoghq.com/logs/search_syntax/).\n- **`index_name`** : pour les organisations avec plusieurs index, l'index de log sur lequel la requête porte.\n- **`rollup_method`** : la méthode de cumulation des statistiques ; prend en charge `count`, `avg` et `cardinality`.\n- **`measure`** Pour `avg` et `cardinality`, indiquez la mesure ou le nom de la facette que vous souhaitez utiliser.\n- **`time_window`** #m (5, 10, 15 ou 30), #h (1, 2 ou 4, 24)\n- **`operator`** `<`, `<=`, `>`, `>=`, `==` ou `!=`.\n- **`#`** : un nombre entier ou un chiffre décimal utilisé pour définir le seuil.\n\n** Requête de monitor composite**\n\nExemple : `12345 && 67890`, où `12345` et `67890` sont les identifiants de monitors non composites.\n\n* **`name`** [*obligatoire*, *valeur par défaut* = **dynamique en fonction de la requête**] : le nom de l'alerte.\n* **`message`** [*obligatoire*, *valeur par défaut* = **dynamique en fonction de la requête**] : un message à inclure avec les notifications pour ce monitor.\nDes e-mails de notification peuvent être envoyés à des utilisateurs spécifiques en utilisant la même notation « @nomutilisateur » que pour les événements.\n* **`tags`** [*facultatif*, *valeur par défaut* = **liste vide**] : la liste des tags à associer à votre monitor. Lorsque vous récupérez tous les détails des monitors via l'API, utilisez l'argument `monitor_tags` pour filtrer les résultats en fonction de ces tags. Ces valeurs ne peuvent être utilisées qu'avec l'API et ne sont ni visibles ni modifiables dans l'interface Datadog.",
+    "description": "Créez un monitor à l'aide des options suivantes.\n\n#### Types de monitors\n\nVoici les types de monitors qui peuvent être sélectionnés :\n\n- Monitor d'anomalies : `query alert`\n- Monitor d'APM : `query alert` ou `trace-analytics alert`\n- Monitor composite : `composite`\n- Monitor personnalisé : `service check`\n- Monitor d'événement : `event alert`\n- Monitor de prévisions : `query alert`\n- Monitor de host : `service check`\n- Monitor d'intégration : `query alert` ou `service check`\n- Monitor de live process : `process alert`\n- Monitor de logs : `log alert`\n- Monitor de métrique : `metric alert`\n- Monitor réseau : `service check`\n- Monitor outlier : `query alert`\n- Monitor de processus : `service check`\n- Monitor RUM : `rum alert`\n- Monitor de SLO : `slo alert`\n- Monitor Watchdog : `event alert`\n- Monitor d'événement v2 : `event-v2 alert`\n\n#### Types de requêtes\n\n**Requête d'alerte de métrique**\nExemple : `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr` : avg, sum, max, min, change ou pct_change.\n- `time_window` : `last_#m` (`#` doit être compris entre 1 et 2880 selon le type de monitor), `last_#h` (`#` doit être compris entre 1 et 48 selon le type de monitor) ou `last_1d`.\n- `space_aggr` : avg, sum, min ou max.\n- `tags` : un ou plusieurs tags (séparés par des virgules) ou *.\n- `key` : la 'key' de la syntaxe de tag key:value. Définit une alerte distincte pour chaque tag du groupe (alertes multiples).\n- `operator` : <, <=, >, >=, == ou !=.\n- `#` : un nombre entier ou décimal utilisé pour définir le seuil.\n\nSi vous utilisez l'agrégateur temporel `_change_` ou `_pct_change_`, utilisez plutôt `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` avec :\n\n- `change_aggr` : change, pct_change.\n- `time_aggr` : avg, sum, max, min. ([En savoir plus](https://docs.datadoghq.com/monitors/monitor_types/#definir-les-conditions)\n- `time_window` : last\\_#m (entre 1 et 2880 selon le type de monitor), last\\_#h (entre 1 et 48 selon le type de monitor) ou last_#d (1 ou 2).\n- `timeshift` : #m_ago (5, 10, 15, ou 30), #h_ago (1, 2, ou 4) ou 1d_ago.\n\nPour créer un monitor outlier, utilisez la requête suivante :\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**Requête de check de service**\n\nExemple : `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** : le nom du check, par exemple `datadog.agent.up`.\n- **`tags`** : un ou plusieurs tags entre guillemets (séparés par des virgules) ou \"*\". Exemple : `.over(\"env:prod\", \"role:db\")`.\n- **`count`** : doit être supérieur ou égal à votre seuil maximum (défini dans `options`). Valeur maximale : 100.\nPar exemple, si vous souhaitez recevoir une notification à partir d'un statut critical, de trois statuts ok, et de deux statuts warn, `count` doit prendre pour valeur 3.\n\n**Requête d'alerte d'événement**\n\nExemple : `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`** : la chaîne de requête de l'événement.\n- **`string_query`** : la requête en texte libre à comparer au titre et au texte de l'événement.\n- **`sources`** : les sources des événements (séparées par des virgules).\n- **`status`** : les statuts des événements (séparés par des virgules). Valeur autorisées : error, warn et info.\n- **`priority`** : les priorités des événements (séparées par des virgules). Valeurs autorisées : low, normal ou all.\n- **`host`** : les hosts transmettant des événements (séparés par des virgules).\n- **`tags`** : les tags des événements (séparés par des virgules).\n- **`excluded_tags`** : les tags des événements exclus (séparés par des virgules).\n- **`rollup`** : la méthode de cumul des statistiques. `count` est actuellement la seule méthode prise en charge.\n- **`last`** : l'intervalle sur lequel les totaux doivent être cumulés. Exemples : 45m, 4h. Unités de temps prises en charge : m, h et d (jour). Cette valeur ne doit pas dépasser 48 heures.\n\n**REMARQUE** : uniquement disponible sur les sites US1 et EU.\n\n**Requête d'alerte d'événement v2**\n\nExemple : `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** : la requête de recherche respectant la [syntaxe de recherche de logs](https://docs.datadoghq.com/logs/search_syntax/).\n- **`rollup_method`** : la méthode de cumul des statistiques ; les méthodes `count`, `avg` et `cardinality` sont prises en charge.\n- **`measure`** - pour les `rollup_method` `avg` et `cardinality` : indiquez la mesure ou le nom de la facette à utiliser.\n- **`time_window`** : #m (5, 10, 15 ou 30) ou #h (1, 2, 4 ou 24).\n- **`operator`** : `<`, `<=`, `>`, `>=`, `==` ou `!=`.\n- **`#`** : un nombre entier ou décimal utilisé pour définir le seuil.\n\n**REMARQUE** : uniquement disponible sur les sites US1-FED et US3, en bêta fermée sur les sites EU et US1.\n\n**Requête d'alerte de processus**\n\nExemple : `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** : chaîne de recherche en texte libre pour interroger les processus.\nLes processus renvoyés correspondent aux résultats de la page [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) page.\n- **`tags`** : un ou plusieurs tags (séparés par des virgules)\n- **`timeframe`** : l'intervalle sur lequel les totaux doivent être cumulés. Exemples : 10m, 4h. Unités de temps prises en charge : s, m, h et d (jour)\n- **`operator`** : <, <=, >, >=, == ou !=.\n- **`#`** : un nombre entier ou décimal utilisé pour définir le seuil.\n\n**Requête d'alerte de logs**\n\nExemple : `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** : la requête de recherche respectant la [syntaxe de recherche de logs](https://docs.datadoghq.com/logs/search_syntax/).\n- **`index_name`** : pour les organisations avec plusieurs index, l'index de log sur lequel la requête porte.\n- **`rollup_method`** : la méthode de cumul des statistiques ; les méthodes `count`, `avg` et `cardinality` sont prises en charge.\n- **`measure`** - pour les `rollup_method` `avg` et `cardinality` : indiquez la mesure ou le nom de la facette à utiliser.\n- **`time_window`** : #m (entre 1 et 2880) ou #h (entre 1 et 48).\n- **`operator`** : `<`, `<=`, `>`, `>=`, `==` ou `!=`.\n- **`#`** : un nombre entier ou décimal utilisé pour définir le seuil.\n\n**Requête de monitor composite**\n\nExemple : `12345 && 67890`, où `12345` et `67890` sont les identifiants de monitors non composites.\n\n* **`name`** [*requis*, *valeur par défaut* = **dynamique, en fonction de la requête**] : le nom de l'alerte.\n* **`message`** [*requis*, *valeur par défaut* = **dynamique, en fonction de la requête**] : un message à inclure avec les notifications pour ce monitor.\nDes notifications par e-mail peuvent être envoyées à des utilisateurs spécifiques, en utilisant la même notation « '@nomutilisateur » que pour les événements.\n* **`tags`** [*facultatif*, *valeur par défaut* = **liste vide**] : la liste des tags à associer à votre monitor.\nLorsque vous récupérez tous les détails des monitors via l'API, utilisez l'argument `monitor_tags` pour filtrer les résultats en fonction de ces tags.\nCes valeurs ne peuvent être obtenues qu'avec l'API et ne sont ni visibles ni modifiables dans l'interface Datadog.\n\n**Requête d'alerte SLO**\n\nExemple : `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- **`slo_id`** : l'ID alphanumérique du SLO pour lequel vous configurez l'alerte.\n- **`time_window`** : l'intervalle du SLO cible pour lequel vous souhaitez envoyer une alerte. Valeurs autorisées : `7d`, `30d` ou `90d`.\n- **`operator`** : `>=` ou `>`.",
     "summary": "Créer un monitor",
     "request_description": "Corps de requête pour la création d'un monitor.",
     "request_schema_description": "Objet décrivant un monitor."
@@ -557,12 +599,16 @@
     "request_description": "Corps de requête pour la modification d'un monitor.",
     "request_schema_description": "Objet décrivant une requête de mise à jour de monitor."
   },
+  "ListMonitorDowntimes": {
+    "description": "Récupérez tous les downtimes du monitor spécifié.",
+    "summary": "Récupérer tous les downtimes d'un monitor"
+  },
   "MuteMonitor": {
     "description": "Désactivez le monitor spécifié.",
     "summary": "Désactiver un monitor"
   },
   "UnmuteMonitor": {
-    "description": "Réactivez le monitor spécifié.",
+    "description": "Réactivez le monitor spécifié",
     "summary": "Réactiver un monitor"
   },
   "GetMonthlyCustomReports": {
@@ -572,6 +618,30 @@
   "GetSpecifiedMonthlyCustomReports": {
     "description": "Récupérez les rapports personnalisés mensuels spécifiés.",
     "summary": "Récupérer les rapports personnalisés mensuels spécifiés"
+  },
+  "ListNotebooks": {
+    "description": "Récupérez tous les notebooks. Cette action permet également de rechercher les notebooks dont le nom ou le `handle` de l'auteur contient une `query` précise.",
+    "summary": "Récupérer tous les notebooks"
+  },
+  "CreateNotebook": {
+    "description": "Créez un notebook à l'aide des options spécifiées.",
+    "summary": "Créer un notebook",
+    "request_description": "La description au format JSON du notebook que vous souhaitez créer.",
+    "request_schema_description": "La description de la requête de création de notebook."
+  },
+  "DeleteNotebook": {
+    "description": "Supprimez un notebook à l'aide de l'ID spécifié.",
+    "summary": "Supprimer un notebook"
+  },
+  "GetNotebook": {
+    "description": "Récupérez un notebook à l'aide de l'ID spécifié.",
+    "summary": "Récupérer un notebook"
+  },
+  "UpdateNotebook": {
+    "description": "Mettez à jour un notebook à l'aide de l'ID spécifié.",
+    "summary": "Mettre à jour un notebook",
+    "request_description": "Mettez à jour le corps de la requête d'un notebook.",
+    "request_schema_description": "La description de la requête de mise à jour d'un notebook."
   },
   "ListOrgs": {
     "description": "Énumérez les organisations que vous gérez.",
@@ -604,7 +674,7 @@
     "summary": "Rechercher des métriques"
   },
   "SubmitMetrics": {
-    "description": "L'endpoint de métrique vous permet d'envoyer des données de séries temporelles afin de les représenter graphiquement sur les dashboards de Datadog. La limite de taille des charges utiles compressées est de 3,2 mégaoctets (3 200 000), tandis que celle des charges utiles non compressées est de 62 mégaoctets (62 914 560).\n\nSi vous envoyez directement des métriques à l'API Datadog sans passer par DogStatsD, attendez-vous à :\n\n- 64 bits pour le timestamp\n- 64 bits pour la valeur\n- 20 octets pour les noms de métriques\n- 50 octets pour les séries temporelles\n- La charge utile totale pèse environ 100 octets. Cependant, avec l'API DogStatsD, cette charge est compressée afin de réduire son poids.",
+    "description": "L'endpoint de métriques vous permet d'envoyer des données de série temporelle afin de les représenter graphiquement dans les dashboards de Datadog.\nLa limite de taille des charges utiles compressées est de 3,2 Mo (3 200 000 octets), tandis que celle des charges utiles non compressées est de 62 Mo (62 914 560 octets).\n\nSi vous envoyez directement des métriques à l'API Datadog sans passer par DogStatsD, vous pouvez compter :\n\n- 64 bits pour le timestamp\n- 32 bits pour la valeur\n- 20 octets pour les noms de métriques\n- 50 octets pour la série temporelle\n- La charge utile totale fait environ 100 octets. Cependant, avec l'API DogStatsD, cette charge est compressée afin de réduire son poids.",
     "summary": "Envoyer des métriques",
     "request_schema_description": "La charge utile des métriques."
   },
@@ -617,8 +687,8 @@
     "summary": "Récupérer les dépendances d'un service APM"
   },
   "ListSLOs": {
-    "description": "Récupérez plusieurs objets de service level objective grâce à leurs ID.",
-    "summary": "Rechercher des SLO"
+    "description": "Récupérez la liste des objets de SLO pour votre organisation.",
+    "summary": "Get all SLOs"
   },
   "CreateSLO": {
     "description": "Créez un objet de service level objective.",
@@ -633,8 +703,32 @@
     "request_schema_description": "Une carte des mappages entre les ID d'objet de service level objective et les intervalles de temps sous forme de tableau, qui indiquent les seuils à supprimer pour chaque ID."
   },
   "CheckCanDeleteSLO": {
-    "description": "Vérifiez si des SLO peuvent être supprimés. Par exemple, assurez-vous qu'un SLO peut être supprimé sans perturber un dashboard.",
+    "description": "Vérifiez si un SLO peut être supprimé, sans perturber le fonctionnement d'un dashboard, par exemple.",
     "summary": "Vérifier si des SLO peuvent être supprimés"
+  },
+  "ListSLOCorrection": {
+    "description": "Récupérez toutes les corrections de SLO.",
+    "summary": "Récupérer toutes les corrections de SLO"
+  },
+  "CreateSLOCorrection": {
+    "description": "Créez une correction de SLO.",
+    "summary": "Créer une correction de SLO",
+    "request_description": "Créez une correction de SLO.",
+    "request_schema_description": "Un objet qui définit une correction à appliquer à un SLO."
+  },
+  "DeleteSLOCorrection": {
+    "description": "Supprimez définitivement l'objet de correction de SLO spécifié.",
+    "summary": "Supprimer une correction de SLO"
+  },
+  "GetSLOCorrection": {
+    "description": "Récupérez une correction de SLO.",
+    "summary": "Récupérer une correction de SLO pour un SLO"
+  },
+  "UpdateSLOCorrection": {
+    "description": "Mettez à jour l'objet de correction de SLO spécifié.",
+    "summary": "Mettre à jour une correction de SLO",
+    "request_description": "L'objet de correction de SLO modifié.",
+    "request_schema_description": "Un objet qui définit une correction à appliquer à un SLO."
   },
   "DeleteSLO": {
     "description": "Supprimez définitivement l'objet de service level objective spécifié.\n\nSi un SLO est utilisé dans un dashboard, l'endpoint `DELETE /v1/slo/` renvoie une erreur 409 conflict parce que le SLO est intégré à un dashboard.",
@@ -683,22 +777,50 @@
     "summary": "Récupérer la liste de tous les tests"
   },
   "CreateTest": {
-    "description": "Créez un test Synthetic.",
+    "description": "Cet endpoint est obsolète. Pour créer un test, utilisez l'endpoint [Créer un test API](https://docs.datadoghq.com/api/latest/synthetics/#creer-un-test-api) ou [Créer un test Browser](https://docs.datadoghq.com/api/latest/synthetics/#creer-un-test-browser).",
     "summary": "Créer un test",
     "request_description": "Détails du test à créer.",
     "request_schema_description": "Objet contenant les détails de votre test Synthetic."
   },
+  "CreateSyntheticsAPITest": {
+    "description": "Créez un test API Synthetic.",
+    "summary": "Créer un test API",
+    "request_description": "Détails du test à créer.",
+    "request_schema_description": "Objet contenant les détails de votre test API Synthetic."
+  },
+  "GetAPITest": {
+    "description": "Récupérez la configuration détaillée associée à un test API Synthetic.",
+    "summary": "Récupérer un test API"
+  },
+  "UpdateAPITest": {
+    "description": "Modifiez la configuration d'un test API Synthetic.",
+    "summary": "Modifier un test API",
+    "request_description": "Nouveaux détails du test à enregistrer.",
+    "request_schema_description": "Objet contenant les détails de votre test API Synthetic."
+  },
+  "CreateSyntheticsBrowserTest": {
+    "description": "Créez un test Browser Synthetic.",
+    "summary": "Créer un test Browser",
+    "request_description": "Détails du test à créer.",
+    "request_schema_description": "Objet contenant les détails de votre test Browser Synthetic."
+  },
   "GetBrowserTest": {
     "description": "Récupérez la configuration détaillée (y compris les étapes) associée à un test Browser Synthetic.",
-    "summary": "Récupérer une configuration de test (Browser)"
+    "summary": "Récupérer un test Browser"
+  },
+  "UpdateBrowserTest": {
+    "description": "Modifiez la configuration d'un test Browser Synthetic.",
+    "summary": "Modifier un test Browser",
+    "request_description": "Nouveaux détails du test à enregistrer.",
+    "request_schema_description": "Objet contenant les détails de votre test Browser Synthetic."
   },
   "GetBrowserTestLatestResults": {
     "description": "Récupérez les résumés des 50 derniers résultats d'un test Browser Synthetic donné.",
-    "summary": "Récupérer les résumés des derniers résultats de test (Browser)"
+    "summary": "Récupérer les résumés des derniers résultats d'un test Browser"
   },
   "GetBrowserTestResult": {
     "description": "Récupérez un résultat complet spécifique pour un test Synthetic (Browser) donné.",
-    "summary": "Récupérer un résultat de test (Browser)"
+    "summary": "Récupérer le résultat d'un test Browser"
   },
   "DeleteTests": {
     "description": "Supprimez plusieurs tests Synthetic à l'aide de leurs ID.",
@@ -708,33 +830,37 @@
   },
   "TriggerCITests": {
     "description": "Déclenchez une série de tests Synthetic pour une intégration continue.",
-    "summary": "Déclencher des tests Synthetic spécifiques pour l'intégration continue",
+    "summary": "Déclencher des tests à partir de pipelines de CI/CD",
     "request_description": "Détails du test à déclencher.",
     "request_schema_description": "Objet décrivant les tests Synthetic à déclencher."
   },
   "GetTest": {
     "description": "Récupérez la configuration détaillée associée à un test Synthetic.",
-    "summary": "Récupérer une configuration de test (API)"
+    "summary": "Récupérer une configuration de test"
   },
   "UpdateTest": {
-    "description": "Modifiez la configuration d'un test Synthetic.",
+    "description": "Cet endpoint est obsolète. Pour créer un test, utilisez l'endpoint [Modifier un test API](https://docs.datadoghq.com/api/latest/synthetics/#modifier-un-test-api) ou [Modifier un test Browser](https://docs.datadoghq.com/api/latest/synthetics/#modifier-un-test-browser).",
     "summary": "Modifier un test",
     "request_description": "Nouveaux détails du test à enregistrer.",
     "request_schema_description": "Objet contenant les détails de votre test Synthetic."
   },
   "GetAPITestLatestResults": {
     "description": "Récupérez les résumés des 50 derniers résultats d'un test API Synthetic donné.",
-    "summary": "Récupérer les résumés des derniers résultats de test (API)"
+    "summary": "Récupérer les résumés des derniers résultats d'un test API"
   },
   "GetAPITestResult": {
     "description": "Récupérez un résultat complet spécifique pour un test Synthetic (API) donné.",
-    "summary": "Récupérer un résultat de test (API)"
+    "summary": "Récupérer un résultat de test API"
   },
   "UpdateTestPauseStatus": {
     "description": "Interrompez ou démarrez un test Synthetic en modifiant son statut.",
     "summary": "Interrompre ou démarrer un test",
     "request_description": "Statut sur lequel le test Synthetic donné doit être défini.",
     "request_schema_description": "Objet pour démarrer ou interrompre un test Synthetic existant."
+  },
+  "ListGlobalVariables": {
+    "description": "Récupérez la liste de toutes les variables globales Synthetic.",
+    "summary": "Récupérer toutes les variables globales"
   },
   "CreateGlobalVariable": {
     "description": "Créez une variable globale Synthetic.",
@@ -793,8 +919,12 @@
     "summary": "Récupérer l'utilisation horaire pour Lambda"
   },
   "GetUsageBillableSummary": {
-    "description": "Récupérez l'utilisation facturable de votre compte multi-org.",
-    "summary": "Récupérer l'utilisation facturable de votre compte multi-org"
+    "description": "Récupérez les données d'utilisation facturable de votre compte.",
+    "summary": "Récupérer les données d'utilisation facturable de votre compte"
+  },
+  "GetUsageComplianceMonitoring": {
+    "description": "Récupérez l'utilisation horaire pour la surveillance de la conformité.",
+    "summary": "Récupérer l'utilisation horaire pour la surveillance de la conformité"
   },
   "GetUsageFargate": {
     "description": "Récupérez l'utilisation horaire pour [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
@@ -816,9 +946,17 @@
     "description": "Récupérez l'utilisation horaire pour les spans ingérées.",
     "summary": "Récupérer l'utilisation horaire pour les spans ingérées"
   },
+  "GetUsageInternetOfThings": {
+    "description": "Récupérez l'utilisation horaire pour l'IoT.",
+    "summary": "Récupérer l'utilisation horaire pour l'IoT"
+  },
   "GetUsageLogs": {
     "description": "Récupérez l'utilisation horaire pour les logs.",
     "summary": "Récupérer l'utilisation horaire pour les logs"
+  },
+  "GetUsageLogsByRetention": {
+    "description": "Récupérez l'utilisation horaire pour les logs indexés selon la période de rétention.",
+    "summary": "Récupérer l'utilisation horaire des logs selon la rétention"
   },
   "GetUsageLogsByIndex": {
     "description": "Récupérez l'utilisation horaire pour les logs par index.",
@@ -845,7 +983,7 @@
     "summary": "Récupérer l'utilisation horaire pour les périphériques SNMP"
   },
   "GetUsageSummary": {
-    "description": "Récupérez l'utilisation de votre compte multi-org.",
+    "description": "Récupérez les données d'utilisation de votre compte multi-org. La fonctionnalité multi-org doit être activée.",
     "summary": "Récupérer l'utilisation de votre compte multi-org"
   },
   "GetUsageSynthetics": {
@@ -865,8 +1003,8 @@
     "summary": "Récupérer l'utilisation horaire pour les métriques custom"
   },
   "GetUsageTopAvgMetrics": {
-    "description": "Récupérez les principales [métriques custom](https://docs.datadoghq.com/developers/metrics/custom_metrics/) selon la moyenne horaire.",
-    "summary": "Récupérer les principales métriques custom selon la moyenne horaire"
+    "description": "Récupérez toutes les [métriques custom](https://docs.datadoghq.com/developers/metrics/custom_metrics/) selon la moyenne horaire. Le paramètre « month » vous permet d'obtenir une résolution des données du mois actuel, tandis que le paramètre « day » vous permet d'obtenir une résolution quotidienne. Vous devez impérativement définir l'un de ces deux paramètres (mais pas les deux).",
+    "summary": "Récupérer toutes les métriques custom selon la moyenne horaire"
   },
   "GetUsageTrace": {
     "description": "Récupérez l'utilisation horaire pour la recherche de traces.\n\n**Remarque** : cet endpoint a été renommé `/api/v1/usage/indexed-spans`.",
@@ -904,10 +1042,6 @@
     "description": "Vérifiez si la clé d'API (et non la clé d'application) est valide. Si elle n'est pas valide, un message d’erreur 403 est renvoyé.",
     "summary": "Valider la clé d'API"
   },
-  "ResolveMonitor": {
-    "description": "Résolvez un monitor.",
-    "summary": "Résoudre un monitor",
-    "request_description": "Tableau des groupes à résoudre pour un ID de monitor donné, p. ex. : `{\"id_monitor\": \"groupe_à_résoudre\"}`.\nIl est possible de spécifier plusieurs groupes par monitor, p. ex. : `resolve: [{\"id_monitor\": \"groupe_1\"}, {\"id_monitor\": \"groupe_2\"}]`.\nIl est également possible de résoudre tous les groupes déclenchés à l'aide du pseudo-groupe `ALL_GROUPS` :`resolve: [{\"id_monitor\": \"ALL_GROUPS\"}]`."},
   "SubmitTraces": {
     "description": "L'APM de Datadog vous permet de recueillir des métriques de performance en traçant votre code pour identifier les éléments lents ou inefficaces de votre application.\n\nLes données de tracing sont envoyées à l'Agent Datadog via une API HTTP. Nous proposons plusieurs [bibliothèques officielles](https://docs.datadoghq.com/tracing/#instrumenter-votre-application) afin de simplifier l'envoi de métriques à l'Agent Datadog. Toutefois, vous pouvez interagir directement avec l'API pour instrumenter les applications qui ne peuvent pas utiliser les bibliothèques ou qui sont écrites dans des langages qui ne possèdent pas encore de bibliothèque de tracing officielle.",
     "summary": "Envoyer des traces",
@@ -915,7 +1049,7 @@
     "request_schema_description": "Un tableau de traces."
   },
   "SubmitLog": {
-    "description": "Envoyez vos logs à votre plateforme Datadog par HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile : 5 Mo\n- Taille maximale d'un log : 256 Ko\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 500 entrées\n\nTous les logs dépassant 256 Ko sont acceptés et tronqués par le serveur :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 256 Ko et renvoie un code 2xx.\n- Pour une requête avec un plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 256 Ko et renvoie un code 2xx.\n\nNous vous conseillons d'envoyer des logs compressés. Ajoutez l'en-tête `Content-Encoding: gzip` à la requête lors de l'envoi de logs compressés.",
+    "description": "Envoyez vos logs à votre plate-forme Datadog via HTTP. Les limites par requête HTTP sont les suivantes :\n\n- Taille maximale du contenu par charge utile (sans compression) : 5 Mo\n- Taille maximale d'un log : 1 Mo\n- Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 1 000 entrées\n\nTous les logs dépassant 1 Mo sont acceptés et tronqués par Datadog :\n- Pour une requête avec un seul log, l'API réduit le log de façon à ce qu'il fasse 1 Mo et renvoie un code 2xx.\n- Pour une requête avec plusieurs logs, l'API traite tous les logs, réduit uniquement les logs dépassant 1 Mo et renvoie un code 2xx.\n\nNous vous conseillons de compresser vos logs avant de les envoyer.\nAjoutez l'en-tête `Content-Encoding: gzip` à la requête pour envoyer vos logs compressés.\n\nVoici les différents codes de statut renvoyés par l'API HTTP :\n- 200: OK\n- 400: Bad request (probablement une erreur dans la mise en forme de la charge utile)\n- 403: Permission issue (probablement une clé d'API non valide)\n- 413: Payload too large (taille du lot supérieure à 5 Mo une fois décompressé)\n- 5xx: Internal error (la requête sera renvoyée ultérieurement)",
     "summary": "Envoyer des logs",
     "request_description": "Log à envoyer (format JSON).",
     "request_schema_description": "Message de log structuré."

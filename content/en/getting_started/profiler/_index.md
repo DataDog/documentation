@@ -1,6 +1,19 @@
 ---
-title: Intro to Profiling
+title: Getting Started with Continuous Profiler
 kind: Documentation
+aliases:
+    - /tracing/profiling/intro_to_profiling
+    - /tracing/profiler/intro_to_profiling
+further_reading:
+    - link: '/tracing/profiler/'
+      tag: 'Documentation'
+      text: 'Continuous Profiler'
+    - link: '/tracing/profiler/enabling/'
+      tag: 'Documentation'
+      text: 'Enabling the Profiler'
+    - link: 'https://learn.datadoghq.com/course/view.php?id=18'
+      tag: 'Learning Center'
+      text: 'Introduction to Datadog'
 ---
 
 You may have heard that profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler before, it can seem like a dark art.
@@ -183,6 +196,10 @@ We've only skimmed the surface here but this should give you a sense of how to g
 {{< site-region region="us" >}}{{< /site-region >}}
 {{< site-region region="eu" >}}{{< /site-region >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://github.com/DataDog/dd-continuous-profiler-example
 [2]: https://docs.docker.com/compose/install/
 [3]: https://app.datadoghq.com/account/settings#api
@@ -190,4 +207,4 @@ We've only skimmed the surface here but this should give you a sense of how to g
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
-[8]: /tracing/profiler/getting_started/
+[8]: /tracing/profiler/enabling/

@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/mparticle/'
 draft: false
 git_integration_title: mparticle
 has_logo: true
+integration_id: mparticle
 integration_title: mParticle
 is_public: true
 kind: インテグレーション

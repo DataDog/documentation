@@ -23,6 +23,7 @@ To start collecting logs from your AWS services:
 
 **Note**: If you are in AWS us-east-1 region, leverage [Datadog-AWS Private Link][2].
 
+**Note**: Cloudformation creates an IAM policy which includes KMS:Decrypt for all resources. It is known that this does not align with Security hub best practice. The reason this permission is used is to decrypt objects from KMS encrypted S3 buckets to set up Lambda function, and which KMS key is used to encrypt the S3 buckets cannot be predicted. You can safely delete this permission after the installation successfully finished.
 
 ## Set up triggers
 
