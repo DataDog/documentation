@@ -68,20 +68,22 @@ The parent-organization can view the total and billable usage of all their organ
 
 The Multi-Org Usage tab shows the aggregate usage of the parent-organization and all its child-organizations. There are two sub-tabs on the Multi-Org Usage tab:
 
-* Overall Usage
-* Individual Usage
+* Overall
+* Individual
 
 ### Overall usage
 
 The Overall Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
 
-{{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
+{{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 
-### Individual usage
+### Individual Organization usage
 
-In the Individual Organization Usage section, you are able to view the usage of your child organizations as a percent of total usage. The "All" view is a table that lists by product the unadjusted, raw usage of your parent-organization and all child-organizations. To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
+In the Individual Organization Usage section, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage. The "All" view is a table that lists by product the unadjusted, raw usage of your parent-organization and all child-organizations. To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
 
-{{< img src="account_management/managing-multiorgs-02.png" alt="Month-to-Date Usage" >}}
+{{< img src="account_management/multi-org-billable-v2.png" alt="Individual Absolute Usage" >}}
+
+{{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
 To view only the usage that will count toward your bill, you can switch to the "Billable" view. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
 
