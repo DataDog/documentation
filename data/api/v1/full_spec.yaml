@@ -13136,9 +13136,13 @@ components:
         day:
           description: The day value from the user request that contains the returned
             usage data. (If day was used the request)
+          format: date-time
+          type: string
         month:
           description: The month value from the user request that contains the returned
             usage data. (If month was used the request)
+          format: date-time
+          type: string
         pagination:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
