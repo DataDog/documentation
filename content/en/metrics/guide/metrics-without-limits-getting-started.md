@@ -22,6 +22,8 @@ Review the [Metrics Without Limits™ FAQ][1].
 
    Datadog notifies you when the bulk configuration job is completed.
 
+   {{< img src="metrics/guide/bulk-tag-configuration.gif" alt="Applying bulk tag configuration"  style="width:80%;" >}}s
+
 ## Other tips
 
 You can set up alerts on your real-time estimated custom metrics usage metric so that you can correlate spikes in custom metrics with configurations.
@@ -49,7 +51,7 @@ This is not a bug -- your current proposed tag configuration doesn't reduce the 
 
   If a combination is in red, it is best to send that metric without using Metrics Without Limits (keep full cardinality).
 
-Therefore, you can have a resulting indexed custom metric volume greater than an ingested custom metric volume if the tag combination specified doesn't reduce the number of remaining tag value combinations enough to offset the 6x factor.
+Therefore, you can have a resulting indexed custom metric volume greater than an ingested custom metric volume if the tag combination specified does not reduce the number of remaining tag value combinations enough to offset the 6x factor.
 
 Here is a simplified example of how indexed greater than ingested can occur when you start with four tag value combinations on a gauge metric (in other words, four custom metrics):
 
