@@ -77,7 +77,7 @@ In product specific tabs, you will see your hourly, daily, monthly, and annual u
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
 
-Most accounts have access to the feature Included Lines, which allows you to visually see how your usage is tracking over the month. The graphs on your Usage page now contain an "Included" line that shows commitments per product plus any allowances (e.g., custom metrics, containers).
+Most accounts have access to the feature Included Lines, which allows you to see how your usage is tracking over the month. The graphs on your Usage page contain an "Included" line that shows commitments per product plus any allowances (such as, custom metrics, containers).
 
 {{< img src="account_management/billing/usage-details-v3-01.png" alt="Usage graph with an Included line" >}}
 
