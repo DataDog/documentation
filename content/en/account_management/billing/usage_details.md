@@ -45,7 +45,7 @@ Month-to-date usage of each product is calculated as follows:
 | Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month.                           |
 | Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                                                |
 | Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                                                |
-| Ingested Spans           | Shows the sum of all analyzed spans ingested over all hours in the current month.                                           |
+| Ingested Spans           | Shows the sum of all spans ingested over all hours in the current month.                                           |
 | Indexed Spans            | Shows the sum of all Indexed Spans indexed over all hours in the current month.                                             |
 | Analyzed Logs (Security) | Shows the sum of all analyzed log bytes ingested over all hours in the current month.                                       |
 | Serverless Functions     | Shows the average of the number of functions that are executed 1 or more times each hour in the current month.              |
