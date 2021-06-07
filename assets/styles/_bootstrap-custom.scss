@@ -2,31 +2,29 @@
   font-size: 16px;
 }
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins/breakpoints";
-@import "~bootstrap/scss/mixins/grid";
-@import "~bootstrap/scss/utilities/display";
-@import "~bootstrap/scss/utilities/spacing";
-
-
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../node_modules/bootstrap/scss/mixins/grid';
+@import '../../node_modules/bootstrap/scss/utilities/display';
+@import '../../node_modules/bootstrap/scss/utilities/spacing';
 
 /* Bootstrap variable customization here */
 $ddpurple:    #632CA6;
 $codesnippet-filename-bg: rgba(119,0,255, 0.15);
 
 $theme-colors: (
-        "primary": $ddpurple,
-        "secondary": #000,
-        "success": $green,
-        "info": $cyan,
-        "warning": $yellow,
-        "danger": $red,
-        "semi-trans": rgba(255, 255, 255, .5),
-        "light": $gray-100,
-        "dark": $gray-800,
-        "gradient": $ddpurple,
-        "white": #FFF
+  "primary": $ddpurple,
+  "secondary": #000,
+  "success": $green,
+  "info": $cyan,
+  "warning": $yellow,
+  "danger": $red,
+  "semi-trans": rgba(255, 255, 255, .5),
+  "light": $gray-100,
+  "dark": $gray-800,
+  "gradient": $ddpurple,
+  "white": #FFF
 );
 
 $spacer: 1rem !default;
@@ -73,7 +71,6 @@ $h6-font-size: 1rem;
 $headings-font-weight:600;
 
 $container-max-widths: (
-  // sm: 540px,
   md: 750px,
   lg: 970px,
   xl: 1170px
@@ -83,7 +80,7 @@ h2{
   font-weight: 200 !important;
 }
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./vendor/bootstrap-modules";
 
 /* beyond custom variables here and actual implementations that need to overwrite bootstrap */
 
@@ -110,11 +107,6 @@ h2{
   &:focus,
   &.focus {
     box-shadow: none;
-  }
-
-  &.disabled,
-  &:disabled {
-
   }
 
   &:not([disabled]):not(.disabled):active,
