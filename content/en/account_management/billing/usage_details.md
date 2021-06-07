@@ -107,7 +107,7 @@ In the Log Management tab, this table displays your hourly, daily, monthly, and 
 
 This data can be downloaded as a CSV file.
 
-{{< img src="account_management/billing/usage-details-v3-02.png" alt="Logs Usage by Index" >}}
+{{< img src="account_management/billing/usage-details-v3-03.png" alt="Logs Usage by Index" >}}
 
 ## Troubleshooting
 
