@@ -79,7 +79,7 @@ The Month-to-Date Total Usage section summarizes your month-to-date usage of hos
 
 {{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 
-Most accounts by default will be able to view "Billable" usage, which only shows usage that will contribute to your final bill. This view also breaks out on-demand usage above your commitments and allocations. Switching to the "All" view will show you all usage, including non-billable usage such as product trials.
+Most accounts by default can view "Billable" usage, which shows usage that contributes to your final bill. This view also breaks out on-demand usage above your commitments and allocations. The "All" view shows you all usage, including non-billable usage such as product trials.
 
 The Overall Usage section shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is “All” usage not “Billable” usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill. This information can be downloaded as a CSV file.
 
@@ -147,4 +147,3 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [8]: /monitors/manage_monitor/
 [9]: /account_management/billing/usage_details/
 [10]: /account_management/billing/usage_attribution/
-
