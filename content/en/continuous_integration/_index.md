@@ -13,17 +13,17 @@ further_reading:
 <div class="alert alert-info"><p>CI Visibility is in private beta. There are no billing implications for tracing pipelines and tests during this period. If you want to be added to the private beta, <a href="http://dtdg.co/ci-visibility-beta-request">fill out this form</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
 </div>
 
-Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, to monitor trends in test suite execution times, or to predict the effect a given commit will have on production CI, it also gives build engineers visibility into cross-organization CI health and trends in pipeline performance over time. 
+Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, to monitor trends in test suite execution times, or to see the effect a given commit has on the pipeline, it also gives build engineers visibility into cross-organization CI health and trends in pipeline performance over time. 
 
-CI Visibility brings to bear the power of all your favorite Datadog tools like dashboards, alerts, and Watchdog, to communicate the health of your CI environment and to focus your efforts in improving your team's ability to deliver quality code every time.
+CI Visibility brings CI metrics and data into Datadog dashboards so you can communicate the health of your CI environment and focus your efforts in improving your team's ability to deliver quality code every time.
 
-CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing production stoppages to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your development workflow code---integration tests and build pipelines---generating traces from the time a commit is pushed to your repository to when the pipeline is ready to be deployed, and use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
+CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing development outages to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your integration tests, generating traces from the time a commit is pushed to your repository to when the test suite is finished. Similarly, Datadog integrates with CI providers to gather pipeline metrics to track performance and results from the moment a commit enters the pipeline till it's ready to be deployed. Use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
 
 ## Gain insights into your pipelines
 
 The Datadog Pipelines page is useful for developers who keep an eye on the build pipeline for their service. It answers questions such as:
-- Is the pipeline for your service succeeding, especially on the production branch? 
-- If not, where does the problem originate?
+- Is the pipeline for your service succeeding, especially on the default branch? 
+- If not, what's the root cause?
 
 For build engineers, the Pipelines page provides:
 - An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches. 
@@ -38,22 +38,21 @@ CI pipeline data is available in [Dashboards][1] and [Notebooks][2], enabling bu
 If you're a developer, the Tests and Test Runs pages provide you with two kinds of information about your work: 
 
 - Low-level and immediate: 
-    - What tests are failing and why, with an emphasis on production test failures. 
-    - What your last commit's test results were. 
-    - The effect a branch will have on the time it takes to run your test suite, if you merge it to production. 
-    - The reliability of the results for a test run, or whether this test has a history of both passing and failing on the same commit.
-    - What tests you should improve because they're flaky.
+    - See what tests are failing and why. 
+    - See your last commit's test results. 
+    - View the wall time of your tests in your feature branch and compare it to the default branch, to identify if you're about to introduce a performance regression. 
+    - See what tests you should improve because they're flaky (passing and failing on the same commit).
 
 - High-level accumulation and trends: 
-    - The effects that changed code, added tests, and increased complexity have on your test suite performance over time. 
-    - Which commits or branches introduced test suite slow-downs. 
-    - Whether tests are becoming more or less flaky and unreliable over time.
+    - See the effects that changed code, added tests, and increased complexity have on your test suite performance over time. 
+    - See which tests have become slower over time and identify the commit that introduced the regression.
+    - Take advantage of Datadog's automatic test flakiness detection and tracking, which shows you which tests are becoming more or less unreliable over time.
 
 Test execution data is also available in [Dashboards][1] and [Notebooks][2]. 
 
 ## Ready to start?
 
-See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Datadog Agent for your CI provider and its architecture, information about CI product compatibility, and steps for instrumenting and configuring for CI data collection. Then start exploring Datadog CI Visibility views of the data with [Exploring Pipelines][5] and [Exploring Tests][6].
+See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Datadog with your CI providers, information about CI product compatibility, and steps for instrumenting and configuring for CI data collection. Then start exploring Datadog CI Visibility views of the data with [Exploring Pipelines][5] and [Exploring Tests][6].
 
 ## Further reading
 

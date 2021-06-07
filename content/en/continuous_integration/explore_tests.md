@@ -1,5 +1,5 @@
 ---
-title: Test-First View
+title: Exploring Tests
 kind: documentation
 further_reading:
     - link: "/continuous_integration/guides/find_flaky_tests/"

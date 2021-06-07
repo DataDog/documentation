@@ -1685,12 +1685,12 @@ main:
     parent: setup_pipelines
     identifier: ci_jenkins
     weight: 202
-  - name: Test-First View
+  - name: Exploring Tests
     url: continuous_integration/explore_tests/
     parent: ci
     identifier: explore_tests
     weight: 3
-  - name: Pipeline Performance
+  - name: Exploring Pipelines
     url: continuous_integration/explore_pipelines/
     parent: ci
     identifier: explore_pipelines
