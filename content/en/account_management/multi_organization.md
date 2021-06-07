@@ -66,26 +66,46 @@ To configure SAML for multi-organizations:
 
 The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`.
 
-The Multi-Org Usage tab shows the aggregate usage of the parent-organization and all its child-organizations. There are two sub-tabs on the Multi-Org Usage tab:
+The Multi-Org Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Multi-Org Usage page:
 
 * Overall
-* Individual
+* Individual Organization
 
 ### Overall usage
 
-The Overall Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
+This tab contains a Month-to-Date Total Usage section and an Overall Usage section.
+
+The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
 
 {{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 
+Most accounts by default will be able to view "Billable" usage, which only shows usage that will contribute to your final bill. This view also breaks out on-demand usage above your commitments and allocations. Switching to the "All" view will show you all usage, including non-billable usage such as product trials.
+
+The Overall Usage section shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is “All” usage not “Billable” usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill. This information can be downloaded as a CSV file.
+
+{{< img src="account_management/multi-org-v2-trends.png" alt="Overall Usage Long-term trends" >}}
+
+Both the Month-to-Date Total Usage section and the Overall Usage section can be filtered by clicking on product specific sub-tabs. In the "Log Management" sub-tab, you can view the Logs Usage by Index table, which displays your month-to-date and last month's indexed log usage by:
+
+* Index name
+* Organization
+* Retention period in days
+* Indexed log count broken down between live and rehydrated logs
+* The index's contribution percentage to the overall indexed log usage
+
+This data can be downloaded as a CSV file.
+
+{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Multi-org Logs Usage by Index" >}}
+
 ### Individual Organization usage
 
-In the Individual Organization Usage section, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage. The "All" view is a table that lists by product the unadjusted, raw usage of your parent-organization and all child-organizations. To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
+In the Individual Organization usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
 
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
-To view only the usage that will count toward your bill, you can switch to the "Billable" view. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
+The default view is the "Billable" view, which only shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill. If you switch to the "All" view, you will be able to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-The individual usage can be downloaded as a CSV file.
+To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name. 
 
 ## Usage attribution
 
@@ -127,3 +147,4 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [8]: /monitors/manage_monitor/
 [9]: /account_management/billing/usage_details/
 [10]: /account_management/billing/usage_attribution/
+

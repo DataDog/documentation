@@ -77,7 +77,7 @@ In product specific tabs, you will see your hourly, daily, monthly, and annual u
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
 
-Most accounts have access to the feature Included Lines, which allows you to visually see how your usage is tracking over the month. The graphs on your Usage page now contain a line that shows usage already included in your plan.
+Most accounts have access to the feature Included Lines, which allows you to visually see how your usage is tracking over the month. The graphs on your Usage page now contain an "Included" line that shows commitments per product plus any allowances (e.g., custom metrics, containers).
 
 {{< img src="account_management/billing/usage-details-v3-01.png" alt="Commited Lines" >}}
 
@@ -90,15 +90,15 @@ In the Custom Metrics tab, this table lists the following information about your
 * Max custom metrics per hour
 * The metric's contribution percentage to the overall custom metrics usage
 
-If you are looking for more details on your metrics, you can access the [Metric Summary](https://docs.datadoghq.com/metrics/summary/#overview). This can be viewed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
-
 This data can be downloaded as a CSV file.
+
+If you are looking for more details on your metrics, you can directly navigate to [Metrics Summary][5] from the Usage page. This can be accessed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
 {{< img src="account_management/billing/usage-metrics-04.png" alt="Custom Metrics" >}}
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs](https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview). The following information is provided:
+In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][6]. The following information is provided:
 
 * Index name
 * Retention period in days
@@ -119,3 +119,5 @@ For billing questions, contact your [Customer Success][4] Manager.
 [2]: /developers/metrics/custom_metrics/
 [3]: /help/
 [4]: mailto:success@datadoghq.com
+[5]: https://docs.datadoghq.com/metrics/summary/#overview
+[6]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
