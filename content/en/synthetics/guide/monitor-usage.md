@@ -17,7 +17,7 @@ further_reading:
 
 ---
 
-Synthetic tests come with [estimated usage metrics][1] allowing you to keep track of your usage. These metrics notably enable you to:
+Synthetic tests come with [estimated usage metrics][1] that allows you to keep track of your usage. These metrics notably enable you to:
 
 * Understand how your usage evolves over time
 * Visualize which teams, applications, or services are contributing the most to your Synthetics usage and have the largest coverage
@@ -43,4 +43,3 @@ You can graph and monitor these metrics against static thresholds as well as mac
 [4]: /synthetics/browser_tests
 [5]: /monitors/monitor_types/anomaly/
 [6]: /monitors/monitor_types/forecasts
-
