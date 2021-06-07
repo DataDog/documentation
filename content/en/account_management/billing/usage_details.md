@@ -92,7 +92,7 @@ In the Custom Metrics tab, this table lists the following information about your
 
 This data can be downloaded as a CSV file.
 
-If you are looking for more details on your metrics, you can directly navigate to [Metrics Summary][5] from the Usage page. This can be accessed by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
+For more details on your metrics, navigate to the [Metrics Summary][5] from the Usage page by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
 {{< img src="account_management/billing/usage-metrics-04.png" alt="Custom Metrics" >}}
 
