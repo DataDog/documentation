@@ -294,7 +294,6 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 
     ```ruby
     Datadog.configure do |c|
-      # This will enable the profiler
       c.profiling.enabled = true
       c.env = 'prod'
       c.service = 'my-web-app'
@@ -302,8 +301,7 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
     end
     ```
 
-    **Note**
-    For Rails applications you can create a `config/initializers/datadog.rb` file with the code configuration above.
+    **Note**: For Rails applications you can create a `config/initializers/datadog.rb` file with the code configuration above.
 
 
 4. Add the `ddtracerb exec` command to your Ruby application start command:
