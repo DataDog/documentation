@@ -1,11 +1,32 @@
 // API
 $ddpurple: #632ca6;
 
-.announcement_banner.open ~ header.scrolled ~ .container .api-nav {
-    top: 94px;
+.announcement.api {
+    .api-toolbar {
+        margin-top: 40px;
+
+        @include media-breakpoint-up(lg) {
+            margin-top: 0;
+        }
+    }
+
+    .main-api,
+    .sidenav-api {
+        @include media-breakpoint-up(lg) {
+            margin-top: -20px;
+        }
+    }
+
+    .scrolled {
+        .sidenav-api {
+            @include media-breakpoint-up(lg) {
+                top: 96px;
+            }
+        }
+    }
 }
 
-.announcement_banner.open ~ .container .main-api h2 {
+.announcement ~ .container .main-api h2 {
     margin-top: -175px;
     padding-top: 175px;
 }

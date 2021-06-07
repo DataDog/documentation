@@ -7,3 +7,24 @@
       box-shadow: $hover;
     }
 }
+
+// to-do:  this gradient is repeated in both corp-hugo and documentation, can we re-implement this in websites-modules?
+@mixin gradient($left, $right, $opacity_left: 1, $opacity_right: 1, $direction: 45deg) {
+  background: rgba($left, 1); /* Old browsers */
+  background: -moz-linear-gradient(
+      $direction,
+      rgba($left, $opacity_left) 0%,
+      rgba($right, $opacity_right) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+      $direction,
+      rgba($left, $opacity_left) 0%,
+      rgba($right, $opacity_right) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+      $direction,
+      rgba($left, $opacity_left) 0%,
+      rgba($right, $opacity_right) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632CA6', endColorstr='#c900d2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
