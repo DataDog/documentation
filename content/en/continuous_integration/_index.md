@@ -13,11 +13,11 @@ further_reading:
 <div class="alert alert-info"><p>CI Visibility is in private beta. There are no billing implications for tracing pipelines and tests during this period. If you want to be added to the private beta, <a href="http://dtdg.co/ci-visibility-beta-request">fill out this form</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
 </div>
 
-Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, or to predict the effect a given commit will have on production CI, it also gives build engineers visibility into trends in test executions times and pipeline performance over time. 
+Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, to monitor trends in test suite execution times, or to predict the effect a given commit will have on production CI, it also gives build engineers visibility into cross-organization CI health and trends in pipeline performance over time. 
 
 CI Visibility brings to bear the power of all your favorite Datadog tools like dashboards, alerts, and Watchdog, to communicate the health of your CI environment and to focus your efforts in improving your team's ability to deliver quality code every time.
 
-CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing stoppages to production to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your development workflow code---integration tests and build pipelines---generating traces from the time a commit is pushed to your repository to when the pipeline is ready to be deployed, and use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
+CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing production stoppages to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your development workflow code---integration tests and build pipelines---generating traces from the time a commit is pushed to your repository to when the pipeline is ready to be deployed, and use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
 
 ## Gain insights into your pipelines
 
@@ -42,7 +42,7 @@ If you're a developer, the Tests and Test Runs pages provide you with two kinds 
     - What your last commit's test results were. 
     - The effect a branch will have on the time it takes to run your test suite, if you merge it to production. 
     - The reliability of the results for a test run, or whether this test has a history of both passing and failing on the same commit.
-    - What tests you should update a test because they're flaky.
+    - What tests you should improve because they're flaky.
 
 - High-level accumulation and trends: 
     - The effects that changed code, added tests, and increased complexity have on your test suite performance over time. 
