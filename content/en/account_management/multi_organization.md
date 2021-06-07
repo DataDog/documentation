@@ -103,7 +103,7 @@ In the Individual Organization usage tab, you are able to view the usage of your
 
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
-The default view is the "Billable" view, which only shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill. If you switch to the "All" view, you will be able to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
+The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
 To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name. 
 
