@@ -1,322 +1,322 @@
 main_left:
   - identifier: product
     name: Product
-    url: "https://www.datadoghq.com/product/"
+    url: 'https://www.datadoghq.com/product/'
     weight: -500
   - identifier: features
     name: Features
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='features icon'>"
-    url: "https://www.datadoghq.com/product/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''features icon''>'
+    url: 'https://www.datadoghq.com/product/'
     weight: 1
     parent: product
   - identifier: integrations
     name: Integrations
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
-    url: "https://www.datadoghq.com/product/platform/integrations/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''integrations icon''>'
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
     weight: 2
     parent: product
   - identifier: dashboarding
     name: Dashboards
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
-    url: "https://www.datadoghq.com/product/platform/dashboards/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''dashboard icon''>'
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 3
     parent: product
   - identifier: infrastructure
     name: Infrastructure Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg' alt='infra icon'>"
-    url: "https://www.datadoghq.com/product/infrastructure-monitoring/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg'' alt=''infra icon''>'
+    url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
     weight: 4
     parent: product
   - identifier: logs
     name: Log Management
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
-    url: "https://www.datadoghq.com/product/log-management/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''log icon''>'
+    url: 'https://www.datadoghq.com/product/log-management/'
     weight: 5
     parent: product
   - identifier: apm
     name: APM
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
-    url: "https://www.datadoghq.com/product/apm/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''apm icon''>'
+    url: 'https://www.datadoghq.com/product/apm/'
     weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
-    url: "https://www.datadoghq.com/product/code-profiling/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''profiler icon''>'
+    url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
   - identifier: security
     name: Security Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: "https://www.datadoghq.com/product/security-monitoring/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
+    url: 'https://www.datadoghq.com/product/security-monitoring/'
     weight: 8
     parent: product
   - identifier: network
     name: Network Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
-    url: "https://www.datadoghq.com/product/network-monitoring/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
     weight: 9
     parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
-    url: "https://www.datadoghq.com/product/synthetic-monitoring/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 10
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg' alt='rum icon'>"
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 11
     parent: product
   - identifier: incident
     name: Incident Management
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/incidents.svg' alt='incident icon'>"
-    url: "https://www.datadoghq.com/product/incident-management/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
     weight: 12
     parent: product
   - identifier: serverless
     name: Serverless
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 13
     parent: product
   - identifier: alerts
     name: Alerts
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
-    url: "https://www.datadoghq.com/product/platform/alerts/"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
     weight: 14
     parent: product
   - identifier: api
     name: API
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/api.svg' alt='api icon'>"
-    url: "https://docs.datadoghq.com/api"
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
+    url: 'https://docs.datadoghq.com/api'
     weight: 15
     parent: product
   - identifier: customers
     name: Customers
-    url: "https://www.datadoghq.com/customers/"
+    url: 'https://www.datadoghq.com/customers/'
     weight: -480
   - identifier: pricing
     name: Pricing
-    url: "https://www.datadoghq.com/pricing/"
+    url: 'https://www.datadoghq.com/pricing/'
     weight: -480
   - identifier: solutions
     name: Solutions
-    url: "#"
+    url: '#'
     weight: -460
   - identifier: industry-financial
     name: Financial Services
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/financial-services/"
+    url: 'https://www.datadoghq.com/solutions/financial-services/'
     weight: -460
   - identifier: industry-manufacturing
     name: Manufacturing & Logistics
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
+    url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
     weight: -459
   - identifier: industry-healthcare
     name: Healthcare/Life Sciences
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/healthcare/"
+    url: 'https://www.datadoghq.com/solutions/healthcare/'
     weight: -458
   - identifier: industry-retail
     name: Retail/E-Commerce
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/retail-ecommerce/"
+    url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
     weight: -457
   - identifier: industry-public
     name: Public Sector
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/public-sector/"
+    url: 'https://www.datadoghq.com/solutions/public-sector/'
     weight: -456
   - identifier: industry-media
     name: Media & Entertainment
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/media-entertainment/"
+    url: 'https://www.datadoghq.com/solutions/media-entertainment/'
     weight: -455
   - identifier: industry-technology
     name: Technology
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/technology/"
+    url: 'https://www.datadoghq.com/solutions/technology/'
     weight: -454
   - identifier: industry-gaming
     name: Gaming
     parent: solutions
     title: industry
-    url: "https://www.datadoghq.com/solutions/gaming/"
+    url: 'https://www.datadoghq.com/solutions/gaming/'
     weight: -453
   - identifier: technology-aws
     name: Amazon Web Services
     parent: solutions
     title: technology
-    url: "https://www.datadoghq.com/solutions/aws/"
+    url: 'https://www.datadoghq.com/solutions/aws/'
     weight: -452
   - identifier: technology-azure
     name: Azure
     parent: solutions
     title: technology
-    url: "https://www.datadoghq.com/solutions/azure/"
+    url: 'https://www.datadoghq.com/solutions/azure/'
     weight: -451
   - identifier: technology-gcp
     name: Google Cloud Platform
     parent: solutions
     title: technology
-    url: "https://www.datadoghq.com/solutions/gcp/"
+    url: 'https://www.datadoghq.com/solutions/gcp/'
     weight: -450
   - identifier: technology-kubernetes
     name: Kubernetes
     parent: solutions
     title: technology
-    url: "https://www.datadoghq.com/solutions/kubernetes/"
+    url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
   - identifier: technology-openshift
     name: Red Hat OpenShift
     parent: solutions
     title: technology
-    url: "https://www.datadoghq.com/solutions/openshift/"
+    url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
   - identifier: usecase-migration
     name: Cloud Migration
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/cloud-migration/"
+    url: 'https://www.datadoghq.com/solutions/cloud-migration/'
     weight: -447
   - identifier: usecase-consolidate
     name: Monitoring Consolidation
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/monitoring-consolidation/"
+    url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
     weight: -446
   - identifier: usecase-devops
     name: DevOps
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/devops/"
+    url: 'https://www.datadoghq.com/solutions/devops/'
     weight: -445
   - identifier: usecase-testing
     name: Shift-Left Testing
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/shift-left-testing/"
+    url: 'https://www.datadoghq.com/solutions/shift-left-testing/'
     weight: -444
   - identifier: usecase-security
     name: Security Analytics
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/security-analytics/"
+    url: 'https://www.datadoghq.com/solutions/security-analytics/'
     weight: -443
   - identifier: usecase-compliance
     name: Compliance for CIS Benchmarks
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/security/cis-benchmarks/"
+    url: 'https://www.datadoghq.com/solutions/security/cis-benchmarks/'
     weight: -442
   - identifier: usecase-hybrid
     name: Hybrid Cloud Monitoring
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/"
+    url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
     weight: -441
   - identifier: usecase-iot
     name: IoT Monitoring
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/iot-monitoring/"
+    url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
     weight: -440
   - identifier: usecase-machine
     name: Machine Learning
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/machine-learning/"
+    url: 'https://www.datadoghq.com/solutions/machine-learning/'
     weight: -439
   - identifier: usecase-analytics
     name: Real-Time BI
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/business-analytics/"
+    url: 'https://www.datadoghq.com/solutions/business-analytics/'
     weight: -438
   - identifier: usecase-onprem
     name: On-Premises Monitoring
     parent: solutions
     title: usecase
-    url: "https://www.datadoghq.com/solutions/on-premises-monitoring/"
+    url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
     weight: -437
 main_right:
   - identifier: about
     name: About
-    url: "https://www.datadoghq.com/about/leadership/"
+    url: 'https://www.datadoghq.com/about/leadership/'
     weight: -490
   - name: Contact
     parent: about
-    url: "https://www.datadoghq.com/about/contact/"
+    url: 'https://www.datadoghq.com/about/contact/'
     weight: -490
   - name: Partners
     parent: about
-    url: "https://www.datadoghq.com/partner"
+    url: 'https://www.datadoghq.com/partner'
     weight: -480
   - name: Latest News
     parent: about
-    url: "https://www.datadoghq.com/about/latest-news/press-releases/"
+    url: 'https://www.datadoghq.com/about/latest-news/press-releases/'
     weight: -460
   - name: Leadership
     parent: about
-    url: "https://www.datadoghq.com/about/leadership/"
+    url: 'https://www.datadoghq.com/about/leadership/'
     weight: -440
   - name: Careers
     parent: about
-    url: "https://www.datadoghq.com/careers/"
+    url: 'https://www.datadoghq.com/careers/'
     weight: -420
   - name: Analyst Reports
     parent: about
-    url: "https://www.datadoghq.com/about/analyst/"
+    url: 'https://www.datadoghq.com/about/analyst/'
     weight: -415
   - name: Investor Relations
     parent: about
-    url: "https://investors.datadoghq.com/"
+    url: 'https://investors.datadoghq.com/'
     weight: -410
   - name: Awards
     parent: about
-    url: "https://www.datadoghq.com/about/awards/"
+    url: 'https://www.datadoghq.com/about/awards/'
     weight: -405
   - identifier: blog
     name: Blog
-    url: "https://www.datadoghq.com/blog/"
+    url: 'https://www.datadoghq.com/blog/'
     weight: -480
   - name: The Monitor
-    url: "https://www.datadoghq.com/blog/"
+    url: 'https://www.datadoghq.com/blog/'
     weight: 100
     parent: blog
   - name: Engineering
-    url: "https://www.datadoghq.com/blog/engineering/"
+    url: 'https://www.datadoghq.com/blog/engineering/'
     parent: blog
     weight: 200
   - name: Pup Culture
-    url: "https://www.datadoghq.com/blog/pup-culture/"
+    url: 'https://www.datadoghq.com/blog/pup-culture/'
     parent: blog
     weight: 300
   - name: Community
-    url: "https://www.datadoghq.com/blog/community/"
+    url: 'https://www.datadoghq.com/blog/community/'
     parent: blog
     weight: 400
   - identifier: docs
     name: Docs
-    url: "https://docs.datadoghq.com/"
+    url: 'https://docs.datadoghq.com/'
     weight: -470
   - identifier: login
     name: Login
-    url: "https://app.datadoghq.com/"
+    url: 'https://app.datadoghq.com/'
     weight: -460
   - identifier: get_started
     name: Get Started Free
-    url: "#"
+    url: '#'
     weight: -440
 main:
   - name: Getting Started
@@ -2284,7 +2284,7 @@ main:
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
     weight: 501
-  - name: "Submission - Agent Check "
+  - name: 'Submission - Agent Check '
     url: developers/metrics/agent_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_agent
@@ -2299,7 +2299,7 @@ main:
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_powershell
     weight: 504
-  - name: "Submission - API "
+  - name: 'Submission - API '
     url: api/v1/metrics/#submit-metrics
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
@@ -2344,7 +2344,7 @@ main:
     parent: dev_tools
     identifier: dev_tools_service_check
     weight: 7
-  - name: "Submission - Agent Check "
+  - name: 'Submission - Agent Check '
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
@@ -2492,140 +2492,140 @@ main:
     weight: 240000
 footer_product:
   - name: Features
-    url: "https://www.datadoghq.com/product/"
+    url: 'https://www.datadoghq.com/product/'
     weight: 100
   - name: Integrations
-    url: "https://www.datadoghq.com/product/platform/integrations/"
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
     weight: 105
   - name: Dashboards
-    url: "https://www.datadoghq.com/product/platform/dashboards/"
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 110
   - name: Log Management
-    url: "https://www.datadoghq.com/product/log-management/"
+    url: 'https://www.datadoghq.com/product/log-management/'
     weight: 115
   - name: APM
-    url: "https://www.datadoghq.com/product/apm/"
+    url: 'https://www.datadoghq.com/product/apm/'
     weight: 120
   - name: Continuous Profiler
-    url: "https://www.datadoghq.com/product/code-profiling/"
+    url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 121
   - name: Security Monitoring
-    url: "https://www.datadoghq.com/product/security-monitoring/"
+    url: 'https://www.datadoghq.com/product/security-monitoring/'
     weight: 123
   - name: Network Monitoring
-    url: "https://www.datadoghq.com/product/network-monitoring/"
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
     weight: 125
   - name: Synthetic Monitoring
-    url: "https://www.datadoghq.com/product/synthetic-monitoring/"
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 130
   - name: Real User Monitoring
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
   - name: Incident Management
-    url: "https://www.datadoghq.com/product/incident-management/"
+    url: 'https://www.datadoghq.com/product/incident-management/'
     weight: 136
   - name: Serverless
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alerts
-    url: "https://www.datadoghq.com/product/platform/alerts/"
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
     weight: 145
   - name: API
-    url: "https://docs.datadoghq.com/api/"
+    url: 'https://docs.datadoghq.com/api/'
     weight: 150
 footer_product_two:
   - name: Real User Monitoring
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
   - name: Serverless
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alerts
-    url: "https://www.datadoghq.com/product/platform/alerts/"
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
     weight: 145
   - name: API
-    url: "https://docs.datadoghq.com/api/"
+    url: 'https://docs.datadoghq.com/api/'
     weight: 150
 footer_product_three:
   - name: Pricing
-    url: "https://www.datadoghq.com/pricing/"
+    url: 'https://www.datadoghq.com/pricing/'
     weight: 100
   - name: Documentation
-    url: "https://docs.datadoghq.com/"
+    url: 'https://docs.datadoghq.com/'
     weight: 105
   - name: Support
-    url: "https://www.datadoghq.com/support/"
+    url: 'https://www.datadoghq.com/support/'
     weight: 110
   - name: Resources
-    url: "https://www.datadoghq.com/resources/"
+    url: 'https://www.datadoghq.com/resources/'
     weight: 150
   - name: Security
-    url: "https://www.datadoghq.com/security/"
+    url: 'https://www.datadoghq.com/security/'
     weight: 180
 footer_about:
   - name: COVID-19 Update
-    url: "https://www.datadoghq.com/coronavirus/"
+    url: 'https://www.datadoghq.com/coronavirus/'
     weight: 90
   - name: Contact Us
-    url: "https://www.datadoghq.com/about/contact/"
+    url: 'https://www.datadoghq.com/about/contact/'
     weight: 100
   - name: Partners
-    url: "https://www.datadoghq.com/partner-with-datadog/"
+    url: 'https://www.datadoghq.com/partner-with-datadog/'
     weight: 120
   - name: Press
-    url: "https://www.datadoghq.com/about/press/"
+    url: 'https://www.datadoghq.com/about/press/'
     weight: 130
   - name: Leadership
-    url: "https://www.datadoghq.com/about/leadership/"
+    url: 'https://www.datadoghq.com/about/leadership/'
     weight: 140
   - name: Careers
-    url: "https://www.datadoghq.com/careers/"
+    url: 'https://www.datadoghq.com/careers/'
     weight: 160
   - name: Legal
-    url: "https://www.datadoghq.com/legal/"
+    url: 'https://www.datadoghq.com/legal/'
     weight: 170
   - name: Investor Relations
-    url: "https://investors.datadoghq.com/"
+    url: 'https://investors.datadoghq.com/'
     weight: 175
   - name: Analyst Reports
-    url: "https://www.datadoghq.com/about/analyst/"
+    url: 'https://www.datadoghq.com/about/analyst/'
     weight: 180
 footer_blog:
   - name: English
-    url: "https://www.datadoghq.com/blog/"
+    url: 'https://www.datadoghq.com/blog/'
     weight: 100
   - name: Español
-    url: "https://www.datadoghq.com/es/blog/"
+    url: 'https://www.datadoghq.com/es/blog/'
     weight: 110
   - name: 日本語
-    url: "https://www.datadoghq.com/ja/blog/"
+    url: 'https://www.datadoghq.com/ja/blog/'
     weight: 120
 footer_social:
   - name: Twitter
-    url: "https://twitter.com/datadoghq"
+    url: 'https://twitter.com/datadoghq'
     weight: 130
     pre: twitter.svg
   - name: Instagram
-    url: "https://www.instagram.com/datadoghq/"
+    url: 'https://www.instagram.com/datadoghq/'
     weight: 140
     pre: instagram.svg
   - name: LinkedIn
-    url: "https://www.LinkedIn.com/company/datadog/"
+    url: 'https://www.LinkedIn.com/company/datadog/'
     weight: 160
     pre: linkedin.svg
   - name: Youtube
-    url: "https://www.youtube.com/user/DatadogHQ"
+    url: 'https://www.youtube.com/user/DatadogHQ'
     weight: 150
     pre: youtube.svg
 footer_sub:
   - name: Terms
-    url: "https://www.datadoghq.com/legal/terms/"
+    url: 'https://www.datadoghq.com/legal/terms/'
     weight: 100
   - name: Privacy
-    url: "https://www.datadoghq.com/legal/privacy/"
+    url: 'https://www.datadoghq.com/legal/privacy/'
     weight: 120
   - name: Cookies
-    url: "https://www.datadoghq.com/legal/cookies/"
+    url: 'https://www.datadoghq.com/legal/cookies/'
     weight: 130
 api:
   - name: Overview
@@ -2646,7 +2646,7 @@ api:
     identifier: aws-integration
     generated: true
   - name: Generate a new external ID
-    url: "#generate-a-new-external-id"
+    url: '#generate-a-new-external-id'
     identifier: generate-a-new-external-id
     parent: aws-integration
     generated: true
@@ -2658,7 +2658,7 @@ api:
       unstable: []
       order: 4
   - name: Set an AWS tag filter
-    url: "#set-an-aws-tag-filter"
+    url: '#set-an-aws-tag-filter'
     identifier: set-an-aws-tag-filter
     parent: aws-integration
     generated: true
@@ -2670,7 +2670,7 @@ api:
       unstable: []
       order: 2
   - name: Get all AWS tag filters
-    url: "#get-all-aws-tag-filters"
+    url: '#get-all-aws-tag-filters'
     identifier: get-all-aws-tag-filters
     parent: aws-integration
     generated: true
@@ -2682,7 +2682,7 @@ api:
       unstable: []
       order: 1
   - name: Delete a tag filtering entry
-    url: "#delete-a-tag-filtering-entry"
+    url: '#delete-a-tag-filtering-entry'
     identifier: delete-a-tag-filtering-entry
     parent: aws-integration
     generated: true
@@ -2694,7 +2694,7 @@ api:
       unstable: []
       order: 3
   - name: List namespace rules
-    url: "#list-namespace-rules"
+    url: '#list-namespace-rules'
     identifier: list-namespace-rules
     parent: aws-integration
     generated: true
@@ -2706,7 +2706,7 @@ api:
       unstable: []
       order: 5
   - name: Update an AWS integration
-    url: "#update-an-aws-integration"
+    url: '#update-an-aws-integration'
     identifier: update-an-aws-integration
     parent: aws-integration
     generated: true
@@ -2718,7 +2718,7 @@ api:
       unstable: []
       order: 9
   - name: Create an AWS integration
-    url: "#create-an-aws-integration"
+    url: '#create-an-aws-integration'
     identifier: create-an-aws-integration
     parent: aws-integration
     generated: true
@@ -2730,7 +2730,7 @@ api:
       unstable: []
       order: 8
   - name: List all AWS integrations
-    url: "#list-all-aws-integrations"
+    url: '#list-all-aws-integrations'
     identifier: list-all-aws-integrations
     parent: aws-integration
     generated: true
@@ -2742,7 +2742,7 @@ api:
       unstable: []
       order: 6
   - name: Delete an AWS integration
-    url: "#delete-an-aws-integration"
+    url: '#delete-an-aws-integration'
     identifier: delete-an-aws-integration
     parent: aws-integration
     generated: true
@@ -2758,7 +2758,7 @@ api:
     identifier: aws-logs-integration
     generated: true
   - name: Check permissions for log services
-    url: "#check-permissions-for-log-services"
+    url: '#check-permissions-for-log-services'
     identifier: check-permissions-for-log-services
     parent: aws-logs-integration
     generated: true
@@ -2770,7 +2770,7 @@ api:
       unstable: []
       order: 6
   - name: Enable an AWS Logs integration
-    url: "#enable-an-aws-logs-integration"
+    url: '#enable-an-aws-logs-integration'
     identifier: enable-an-aws-logs-integration
     parent: aws-logs-integration
     generated: true
@@ -2782,7 +2782,7 @@ api:
       unstable: []
       order: 5
   - name: Get list of AWS log ready services
-    url: "#get-list-of-aws-log-ready-services"
+    url: '#get-list-of-aws-log-ready-services'
     identifier: get-list-of-aws-log-ready-services
     parent: aws-logs-integration
     generated: true
@@ -2794,7 +2794,7 @@ api:
       unstable: []
       order: 4
   - name: Check that an AWS Lambda Function exists
-    url: "#check-that-an-aws-lambda-function-exists"
+    url: '#check-that-an-aws-lambda-function-exists'
     identifier: check-that-an-aws-lambda-function-exists
     parent: aws-logs-integration
     generated: true
@@ -2806,7 +2806,7 @@ api:
       unstable: []
       order: 7
   - name: Add AWS Log Lambda ARN
-    url: "#add-aws-log-lambda-arn"
+    url: '#add-aws-log-lambda-arn'
     identifier: add-aws-log-lambda-arn
     parent: aws-logs-integration
     generated: true
@@ -2818,7 +2818,7 @@ api:
       unstable: []
       order: 2
   - name: List all AWS Logs integrations
-    url: "#list-all-aws-logs-integrations"
+    url: '#list-all-aws-logs-integrations'
     identifier: list-all-aws-logs-integrations
     parent: aws-logs-integration
     generated: true
@@ -2830,7 +2830,7 @@ api:
       unstable: []
       order: 1
   - name: Delete an AWS Logs integration
-    url: "#delete-an-aws-logs-integration"
+    url: '#delete-an-aws-logs-integration'
     identifier: delete-an-aws-logs-integration
     parent: aws-logs-integration
     generated: true
@@ -2846,7 +2846,7 @@ api:
     identifier: authentication
     generated: true
   - name: Validate API key
-    url: "#validate-api-key"
+    url: '#validate-api-key'
     identifier: validate-api-key
     parent: authentication
     generated: true
@@ -2862,7 +2862,7 @@ api:
     identifier: azure-integration
     generated: true
   - name: Update Azure integration host filters
-    url: "#update-azure-integration-host-filters"
+    url: '#update-azure-integration-host-filters'
     identifier: update-azure-integration-host-filters
     parent: azure-integration
     generated: true
@@ -2874,7 +2874,7 @@ api:
       unstable: []
       order: 5
   - name: Update an Azure integration
-    url: "#update-an-azure-integration"
+    url: '#update-an-azure-integration'
     identifier: update-an-azure-integration
     parent: azure-integration
     generated: true
@@ -2886,7 +2886,7 @@ api:
       unstable: []
       order: 4
   - name: Create an Azure integration
-    url: "#create-an-azure-integration"
+    url: '#create-an-azure-integration'
     identifier: create-an-azure-integration
     parent: azure-integration
     generated: true
@@ -2898,7 +2898,7 @@ api:
       unstable: []
       order: 2
   - name: List all Azure integrations
-    url: "#list-all-azure-integrations"
+    url: '#list-all-azure-integrations'
     identifier: list-all-azure-integrations
     parent: azure-integration
     generated: true
@@ -2910,7 +2910,7 @@ api:
       unstable: []
       order: 1
   - name: Delete an Azure integration
-    url: "#delete-an-azure-integration"
+    url: '#delete-an-azure-integration'
     identifier: delete-an-azure-integration
     parent: azure-integration
     generated: true
@@ -2926,7 +2926,7 @@ api:
     identifier: dashboard-lists
     generated: true
   - name: Update items of a dashboard list
-    url: "#update-items-of-a-dashboard-list"
+    url: '#update-items-of-a-dashboard-list'
     identifier: update-items-of-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -2938,7 +2938,7 @@ api:
       unstable: []
       order: 3
   - name: Add Items to a Dashboard List
-    url: "#add-items-to-a-dashboard-list"
+    url: '#add-items-to-a-dashboard-list'
     identifier: add-items-to-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -2950,7 +2950,7 @@ api:
       unstable: []
       order: 2
   - name: Get items of a Dashboard List
-    url: "#get-items-of-a-dashboard-list"
+    url: '#get-items-of-a-dashboard-list'
     identifier: get-items-of-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -2962,7 +2962,7 @@ api:
       unstable: []
       order: 1
   - name: Delete items from a dashboard list
-    url: "#delete-items-from-a-dashboard-list"
+    url: '#delete-items-from-a-dashboard-list'
     identifier: delete-items-from-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -2974,7 +2974,7 @@ api:
       unstable: []
       order: 4
   - name: Update a dashboard list
-    url: "#update-a-dashboard-list"
+    url: '#update-a-dashboard-list'
     identifier: update-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -2986,7 +2986,7 @@ api:
       unstable: []
       order: 4
   - name: Get a dashboard list
-    url: "#get-a-dashboard-list"
+    url: '#get-a-dashboard-list'
     identifier: get-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -2998,7 +2998,7 @@ api:
       unstable: []
       order: 3
   - name: Delete a dashboard list
-    url: "#delete-a-dashboard-list"
+    url: '#delete-a-dashboard-list'
     identifier: delete-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -3010,7 +3010,7 @@ api:
       unstable: []
       order: 5
   - name: Create a dashboard list
-    url: "#create-a-dashboard-list"
+    url: '#create-a-dashboard-list'
     identifier: create-a-dashboard-list
     parent: dashboard-lists
     generated: true
@@ -3022,7 +3022,7 @@ api:
       unstable: []
       order: 2
   - name: Get all dashboard lists
-    url: "#get-all-dashboard-lists"
+    url: '#get-all-dashboard-lists'
     identifier: get-all-dashboard-lists
     parent: dashboard-lists
     generated: true
@@ -3038,7 +3038,7 @@ api:
     identifier: dashboards
     generated: true
   - name: Update a dashboard
-    url: "#update-a-dashboard"
+    url: '#update-a-dashboard'
     identifier: update-a-dashboard
     parent: dashboards
     generated: true
@@ -3050,7 +3050,7 @@ api:
       unstable: []
       order: 4
   - name: Get a dashboard
-    url: "#get-a-dashboard"
+    url: '#get-a-dashboard'
     identifier: get-a-dashboard
     parent: dashboards
     generated: true
@@ -3062,7 +3062,7 @@ api:
       unstable: []
       order: 5
   - name: Delete a dashboard
-    url: "#delete-a-dashboard"
+    url: '#delete-a-dashboard'
     identifier: delete-a-dashboard
     parent: dashboards
     generated: true
@@ -3074,7 +3074,7 @@ api:
       unstable: []
       order: 3
   - name: Send shared dashboard invitation email
-    url: "#send-shared-dashboard-invitation-email"
+    url: '#send-shared-dashboard-invitation-email'
     identifier: send-shared-dashboard-invitation-email
     parent: dashboards
     generated: true
@@ -3086,7 +3086,7 @@ api:
       unstable: []
       order: 6
   - name: Get all invitations for a shared dashboard
-    url: "#get-all-invitations-for-a-shared-dashboard"
+    url: '#get-all-invitations-for-a-shared-dashboard'
     identifier: get-all-invitations-for-a-shared-dashboard
     parent: dashboards
     generated: true
@@ -3098,7 +3098,7 @@ api:
       unstable: []
       order: 5
   - name: Revoke shared dashboard invitations
-    url: "#revoke-shared-dashboard-invitations"
+    url: '#revoke-shared-dashboard-invitations'
     identifier: revoke-shared-dashboard-invitations
     parent: dashboards
     generated: true
@@ -3110,7 +3110,7 @@ api:
       unstable: []
       order: 7
   - name: Update a shared dashboard
-    url: "#update-a-shared-dashboard"
+    url: '#update-a-shared-dashboard'
     identifier: update-a-shared-dashboard
     parent: dashboards
     generated: true
@@ -3122,7 +3122,7 @@ api:
       unstable: []
       order: 3
   - name: Get a shared dashboard
-    url: "#get-a-shared-dashboard"
+    url: '#get-a-shared-dashboard'
     identifier: get-a-shared-dashboard
     parent: dashboards
     generated: true
@@ -3134,7 +3134,7 @@ api:
       unstable: []
       order: 2
   - name: Revoke a shared dashboard URL
-    url: "#revoke-a-shared-dashboard-url"
+    url: '#revoke-a-shared-dashboard-url'
     identifier: revoke-a-shared-dashboard-url
     parent: dashboards
     generated: true
@@ -3146,7 +3146,7 @@ api:
       unstable: []
       order: 4
   - name: Create a shared dashboard
-    url: "#create-a-shared-dashboard"
+    url: '#create-a-shared-dashboard'
     identifier: create-a-shared-dashboard
     parent: dashboards
     generated: true
@@ -3158,7 +3158,7 @@ api:
       unstable: []
       order: 1
   - name: Create a new dashboard
-    url: "#create-a-new-dashboard"
+    url: '#create-a-new-dashboard'
     identifier: create-a-new-dashboard
     parent: dashboards
     generated: true
@@ -3170,7 +3170,7 @@ api:
       unstable: []
       order: 1
   - name: Get all dashboards
-    url: "#get-all-dashboards"
+    url: '#get-all-dashboards'
     identifier: get-all-dashboards
     parent: dashboards
     generated: true
@@ -3186,7 +3186,7 @@ api:
     identifier: downtimes
     generated: true
   - name: Get all downtimes for a monitor
-    url: "#get-all-downtimes-for-a-monitor"
+    url: '#get-all-downtimes-for-a-monitor'
     identifier: get-all-downtimes-for-a-monitor
     parent: downtimes
     generated: true
@@ -3198,7 +3198,7 @@ api:
       unstable: []
       order: 7
   - name: Update a downtime
-    url: "#update-a-downtime"
+    url: '#update-a-downtime'
     identifier: update-a-downtime
     parent: downtimes
     generated: true
@@ -3210,7 +3210,7 @@ api:
       unstable: []
       order: 6
   - name: Get a downtime
-    url: "#get-a-downtime"
+    url: '#get-a-downtime'
     identifier: get-a-downtime
     parent: downtimes
     generated: true
@@ -3222,7 +3222,7 @@ api:
       unstable: []
       order: 5
   - name: Cancel a downtime
-    url: "#cancel-a-downtime"
+    url: '#cancel-a-downtime'
     identifier: cancel-a-downtime
     parent: downtimes
     generated: true
@@ -3234,7 +3234,7 @@ api:
       unstable: []
       order: 4
   - name: Cancel downtimes by scope
-    url: "#cancel-downtimes-by-scope"
+    url: '#cancel-downtimes-by-scope'
     identifier: cancel-downtimes-by-scope
     parent: downtimes
     generated: true
@@ -3246,7 +3246,7 @@ api:
       unstable: []
       order: 3
   - name: Schedule a downtime
-    url: "#schedule-a-downtime"
+    url: '#schedule-a-downtime'
     identifier: schedule-a-downtime
     parent: downtimes
     generated: true
@@ -3258,7 +3258,7 @@ api:
       unstable: []
       order: 2
   - name: Get all downtimes
-    url: "#get-all-downtimes"
+    url: '#get-all-downtimes'
     identifier: get-all-downtimes
     parent: downtimes
     generated: true
@@ -3274,7 +3274,7 @@ api:
     identifier: embeddable-graphs
     generated: true
   - name: Revoke embed
-    url: "#revoke-embed"
+    url: '#revoke-embed'
     identifier: revoke-embed
     parent: embeddable-graphs
     generated: true
@@ -3286,7 +3286,7 @@ api:
       unstable: []
       order: 0
   - name: Enable embed
-    url: "#enable-embed"
+    url: '#enable-embed'
     identifier: enable-embed
     parent: embeddable-graphs
     generated: true
@@ -3298,7 +3298,7 @@ api:
       unstable: []
       order: 0
   - name: Get specific embed
-    url: "#get-specific-embed"
+    url: '#get-specific-embed'
     identifier: get-specific-embed
     parent: embeddable-graphs
     generated: true
@@ -3310,7 +3310,7 @@ api:
       unstable: []
       order: 0
   - name: Create embed
-    url: "#create-embed"
+    url: '#create-embed'
     identifier: create-embed
     parent: embeddable-graphs
     generated: true
@@ -3322,7 +3322,7 @@ api:
       unstable: []
       order: 0
   - name: Get all embeds
-    url: "#get-all-embeds"
+    url: '#get-all-embeds'
     identifier: get-all-embeds
     parent: embeddable-graphs
     generated: true
@@ -3338,7 +3338,7 @@ api:
     identifier: events
     generated: true
   - name: Get an event
-    url: "#get-an-event"
+    url: '#get-an-event'
     identifier: get-an-event
     parent: events
     generated: true
@@ -3350,7 +3350,7 @@ api:
       unstable: []
       order: 2
   - name: Post an event
-    url: "#post-an-event"
+    url: '#post-an-event'
     identifier: post-an-event
     parent: events
     generated: true
@@ -3362,7 +3362,7 @@ api:
       unstable: []
       order: 1
   - name: Query the event stream
-    url: "#query-the-event-stream"
+    url: '#query-the-event-stream'
     identifier: query-the-event-stream
     parent: events
     generated: true
@@ -3378,7 +3378,7 @@ api:
     identifier: gcp-integration
     generated: true
   - name: Update a GCP integration
-    url: "#update-a-gcp-integration"
+    url: '#update-a-gcp-integration'
     identifier: update-a-gcp-integration
     parent: gcp-integration
     generated: true
@@ -3390,7 +3390,7 @@ api:
       unstable: []
       order: 4
   - name: Create a GCP integration
-    url: "#create-a-gcp-integration"
+    url: '#create-a-gcp-integration'
     identifier: create-a-gcp-integration
     parent: gcp-integration
     generated: true
@@ -3402,7 +3402,7 @@ api:
       unstable: []
       order: 2
   - name: List all GCP integrations
-    url: "#list-all-gcp-integrations"
+    url: '#list-all-gcp-integrations'
     identifier: list-all-gcp-integrations
     parent: gcp-integration
     generated: true
@@ -3414,7 +3414,7 @@ api:
       unstable: []
       order: 1
   - name: Delete a GCP integration
-    url: "#delete-a-gcp-integration"
+    url: '#delete-a-gcp-integration'
     identifier: delete-a-gcp-integration
     parent: gcp-integration
     generated: true
@@ -3430,7 +3430,7 @@ api:
     identifier: hosts
     generated: true
   - name: Get the total number of active hosts
-    url: "#get-the-total-number-of-active-hosts"
+    url: '#get-the-total-number-of-active-hosts'
     identifier: get-the-total-number-of-active-hosts
     parent: hosts
     generated: true
@@ -3442,7 +3442,7 @@ api:
       unstable: []
       order: 2
   - name: Get all hosts for your organization
-    url: "#get-all-hosts-for-your-organization"
+    url: '#get-all-hosts-for-your-organization'
     identifier: get-all-hosts-for-your-organization
     parent: hosts
     generated: true
@@ -3454,7 +3454,7 @@ api:
       unstable: []
       order: 1
   - name: Unmute a host
-    url: "#unmute-a-host"
+    url: '#unmute-a-host'
     identifier: unmute-a-host
     parent: hosts
     generated: true
@@ -3466,7 +3466,7 @@ api:
       unstable: []
       order: 4
   - name: Mute a host
-    url: "#mute-a-host"
+    url: '#mute-a-host'
     identifier: mute-a-host
     parent: hosts
     generated: true
@@ -3482,7 +3482,7 @@ api:
     identifier: ip-ranges
     generated: true
   - name: List IP Ranges
-    url: "#list-ip-ranges"
+    url: '#list-ip-ranges'
     identifier: list-ip-ranges
     parent: ip-ranges
     generated: true
@@ -3498,7 +3498,7 @@ api:
     identifier: key-management
     generated: true
   - name: Edit an application key owned by current user
-    url: "#edit-an-application-key-owned-by-current-user"
+    url: '#edit-an-application-key-owned-by-current-user'
     identifier: edit-an-application-key-owned-by-current-user
     parent: key-management
     generated: true
@@ -3510,7 +3510,7 @@ api:
       unstable: []
       order: 0
   - name: Get one application key owned by current user
-    url: "#get-one-application-key-owned-by-current-user"
+    url: '#get-one-application-key-owned-by-current-user'
     identifier: get-one-application-key-owned-by-current-user
     parent: key-management
     generated: true
@@ -3522,7 +3522,7 @@ api:
       unstable: []
       order: 0
   - name: Delete an application key owned by current user
-    url: "#delete-an-application-key-owned-by-current-user"
+    url: '#delete-an-application-key-owned-by-current-user'
     identifier: delete-an-application-key-owned-by-current-user
     parent: key-management
     generated: true
@@ -3534,7 +3534,7 @@ api:
       unstable: []
       order: 0
   - name: Create an application key for current user
-    url: "#create-an-application-key-for-current-user"
+    url: '#create-an-application-key-for-current-user'
     identifier: create-an-application-key-for-current-user
     parent: key-management
     generated: true
@@ -3546,7 +3546,7 @@ api:
       unstable: []
       order: 0
   - name: Get all application keys owned by current user
-    url: "#get-all-application-keys-owned-by-current-user"
+    url: '#get-all-application-keys-owned-by-current-user'
     identifier: get-all-application-keys-owned-by-current-user
     parent: key-management
     generated: true
@@ -3558,7 +3558,7 @@ api:
       unstable: []
       order: 0
   - name: Edit an application key
-    url: "#edit-an-application-key"
+    url: '#edit-an-application-key'
     identifier: edit-an-application-key
     parent: key-management
     generated: true
@@ -3571,7 +3571,7 @@ api:
       unstable: []
       order: 9
   - name: Get an application key
-    url: "#get-an-application-key"
+    url: '#get-an-application-key'
     identifier: get-an-application-key
     parent: key-management
     generated: true
@@ -3583,7 +3583,7 @@ api:
       unstable: []
       order: 8
   - name: Delete an application key
-    url: "#delete-an-application-key"
+    url: '#delete-an-application-key'
     identifier: delete-an-application-key
     parent: key-management
     generated: true
@@ -3596,7 +3596,7 @@ api:
       unstable: []
       order: 10
   - name: Create an application key
-    url: "#create-an-application-key"
+    url: '#create-an-application-key'
     identifier: create-an-application-key
     parent: key-management
     generated: true
@@ -3608,7 +3608,7 @@ api:
       unstable: []
       order: 7
   - name: Get all application keys
-    url: "#get-all-application-keys"
+    url: '#get-all-application-keys'
     identifier: get-all-application-keys
     parent: key-management
     generated: true
@@ -3621,7 +3621,7 @@ api:
       unstable: []
       order: 6
   - name: Edit an API key
-    url: "#edit-an-api-key"
+    url: '#edit-an-api-key'
     identifier: edit-an-api-key
     parent: key-management
     generated: true
@@ -3634,7 +3634,7 @@ api:
       unstable: []
       order: 4
   - name: Get API key
-    url: "#get-api-key"
+    url: '#get-api-key'
     identifier: get-api-key
     parent: key-management
     generated: true
@@ -3647,7 +3647,7 @@ api:
       unstable: []
       order: 3
   - name: Delete an API key
-    url: "#delete-an-api-key"
+    url: '#delete-an-api-key'
     identifier: delete-an-api-key
     parent: key-management
     generated: true
@@ -3660,7 +3660,7 @@ api:
       unstable: []
       order: 5
   - name: Create an API key
-    url: "#create-an-api-key"
+    url: '#create-an-api-key'
     identifier: create-an-api-key
     parent: key-management
     generated: true
@@ -3673,7 +3673,7 @@ api:
       unstable: []
       order: 2
   - name: Get all API keys
-    url: "#get-all-api-keys"
+    url: '#get-all-api-keys'
     identifier: get-all-api-keys
     parent: key-management
     generated: true
@@ -3690,7 +3690,7 @@ api:
     identifier: logs
     generated: true
   - name: Get a list of logs
-    url: "#get-a-list-of-logs"
+    url: '#get-a-list-of-logs'
     identifier: get-a-list-of-logs
     parent: logs
     generated: true
@@ -3702,7 +3702,7 @@ api:
       unstable: []
       order: 3
   - name: Aggregate events
-    url: "#aggregate-events"
+    url: '#aggregate-events'
     identifier: aggregate-events
     parent: logs
     generated: true
@@ -3714,7 +3714,7 @@ api:
       unstable: []
       order: 1
   - name: Send logs
-    url: "#send-logs"
+    url: '#send-logs'
     identifier: send-logs
     parent: logs
     generated: true
@@ -3726,7 +3726,7 @@ api:
       unstable: []
       order: 1
   - name: Search logs
-    url: "#search-logs"
+    url: '#search-logs'
     identifier: search-logs
     parent: logs
     generated: true
@@ -3743,7 +3743,7 @@ api:
     identifier: logs-indexes
     generated: true
   - name: Update an index
-    url: "#update-an-index"
+    url: '#update-an-index'
     identifier: update-an-index
     parent: logs-indexes
     generated: true
@@ -3755,7 +3755,7 @@ api:
       unstable: []
       order: 4
   - name: Get an index
-    url: "#get-an-index"
+    url: '#get-an-index'
     identifier: get-an-index
     parent: logs-indexes
     generated: true
@@ -3767,7 +3767,7 @@ api:
       unstable: []
       order: 3
   - name: Create an index
-    url: "#create-an-index"
+    url: '#create-an-index'
     identifier: create-an-index
     parent: logs-indexes
     generated: true
@@ -3779,7 +3779,7 @@ api:
       unstable: []
       order: 2
   - name: Get all indexes
-    url: "#get-all-indexes"
+    url: '#get-all-indexes'
     identifier: get-all-indexes
     parent: logs-indexes
     generated: true
@@ -3791,7 +3791,7 @@ api:
       unstable: []
       order: 1
   - name: Update indexes order
-    url: "#update-indexes-order"
+    url: '#update-indexes-order'
     identifier: update-indexes-order
     parent: logs-indexes
     generated: true
@@ -3803,7 +3803,7 @@ api:
       unstable: []
       order: 6
   - name: Get indexes order
-    url: "#get-indexes-order"
+    url: '#get-indexes-order'
     identifier: get-indexes-order
     parent: logs-indexes
     generated: true
@@ -3819,7 +3819,7 @@ api:
     identifier: logs-pipelines
     generated: true
   - name: Update a pipeline
-    url: "#update-a-pipeline"
+    url: '#update-a-pipeline'
     identifier: update-a-pipeline
     parent: logs-pipelines
     generated: true
@@ -3831,7 +3831,7 @@ api:
       unstable: []
       order: 7
   - name: Get a pipeline
-    url: "#get-a-pipeline"
+    url: '#get-a-pipeline'
     identifier: get-a-pipeline
     parent: logs-pipelines
     generated: true
@@ -3843,7 +3843,7 @@ api:
       unstable: []
       order: 5
   - name: Delete a pipeline
-    url: "#delete-a-pipeline"
+    url: '#delete-a-pipeline'
     identifier: delete-a-pipeline
     parent: logs-pipelines
     generated: true
@@ -3855,7 +3855,7 @@ api:
       unstable: []
       order: 6
   - name: Create a pipeline
-    url: "#create-a-pipeline"
+    url: '#create-a-pipeline'
     identifier: create-a-pipeline
     parent: logs-pipelines
     generated: true
@@ -3867,7 +3867,7 @@ api:
       unstable: []
       order: 4
   - name: Get all pipelines
-    url: "#get-all-pipelines"
+    url: '#get-all-pipelines'
     identifier: get-all-pipelines
     parent: logs-pipelines
     generated: true
@@ -3879,7 +3879,7 @@ api:
       unstable: []
       order: 3
   - name: Update pipeline order
-    url: "#update-pipeline-order"
+    url: '#update-pipeline-order'
     identifier: update-pipeline-order
     parent: logs-pipelines
     generated: true
@@ -3891,7 +3891,7 @@ api:
       unstable: []
       order: 2
   - name: Get pipeline order
-    url: "#get-pipeline-order"
+    url: '#get-pipeline-order'
     identifier: get-pipeline-order
     parent: logs-pipelines
     generated: true
@@ -3907,7 +3907,7 @@ api:
     identifier: metrics
     generated: true
   - name: List distinct metric volumes by metric name
-    url: "#list-distinct-metric-volumes-by-metric-name"
+    url: '#list-distinct-metric-volumes-by-metric-name'
     identifier: list-distinct-metric-volumes-by-metric-name
     parent: metrics
     generated: true
@@ -3919,7 +3919,7 @@ api:
       unstable: []
       order: 7
   - name: Create a tag configuration
-    url: "#create-a-tag-configuration"
+    url: '#create-a-tag-configuration'
     identifier: create-a-tag-configuration
     parent: metrics
     generated: true
@@ -3932,7 +3932,7 @@ api:
         - v2
       order: 1
   - name: Update a tag configuration
-    url: "#update-a-tag-configuration"
+    url: '#update-a-tag-configuration'
     identifier: update-a-tag-configuration
     parent: metrics
     generated: true
@@ -3945,7 +3945,7 @@ api:
         - v2
       order: 3
   - name: List tag configuration by name
-    url: "#list-tag-configuration-by-name"
+    url: '#list-tag-configuration-by-name'
     identifier: list-tag-configuration-by-name
     parent: metrics
     generated: true
@@ -3958,7 +3958,7 @@ api:
         - v2
       order: 2
   - name: Delete a tag configuration
-    url: "#delete-a-tag-configuration"
+    url: '#delete-a-tag-configuration'
     identifier: delete-a-tag-configuration
     parent: metrics
     generated: true
@@ -3971,7 +3971,7 @@ api:
         - v2
       order: 4
   - name: List tags by metric name
-    url: "#list-tags-by-metric-name"
+    url: '#list-tags-by-metric-name'
     identifier: list-tags-by-metric-name
     parent: metrics
     generated: true
@@ -3983,7 +3983,7 @@ api:
       unstable: []
       order: 6
   - name: List tag configurations
-    url: "#list-tag-configurations"
+    url: '#list-tag-configurations'
     identifier: list-tag-configurations
     parent: metrics
     generated: true
@@ -3996,7 +3996,7 @@ api:
         - v2
       order: 5
   - name: Submit metrics
-    url: "#submit-metrics"
+    url: '#submit-metrics'
     identifier: submit-metrics
     parent: metrics
     generated: true
@@ -4008,7 +4008,7 @@ api:
       unstable: []
       order: 1
   - name: Search metrics
-    url: "#search-metrics"
+    url: '#search-metrics'
     identifier: search-metrics
     parent: metrics
     generated: true
@@ -4020,7 +4020,7 @@ api:
       unstable: []
       order: 4
   - name: Query timeseries points
-    url: "#query-timeseries-points"
+    url: '#query-timeseries-points'
     identifier: query-timeseries-points
     parent: metrics
     generated: true
@@ -4032,7 +4032,7 @@ api:
       unstable: []
       order: 5
   - name: Edit metric metadata
-    url: "#edit-metric-metadata"
+    url: '#edit-metric-metadata'
     identifier: edit-metric-metadata
     parent: metrics
     generated: true
@@ -4044,7 +4044,7 @@ api:
       unstable: []
       order: 3
   - name: Get metric metadata
-    url: "#get-metric-metadata"
+    url: '#get-metric-metadata'
     identifier: get-metric-metadata
     parent: metrics
     generated: true
@@ -4056,7 +4056,7 @@ api:
       unstable: []
       order: 2
   - name: Get active metrics list
-    url: "#get-active-metrics-list"
+    url: '#get-active-metrics-list'
     identifier: get-active-metrics-list
     parent: metrics
     generated: true
@@ -4072,7 +4072,7 @@ api:
     identifier: monitors
     generated: true
   - name: Unmute all monitors
-    url: "#unmute-all-monitors"
+    url: '#unmute-all-monitors'
     identifier: unmute-all-monitors
     parent: monitors
     generated: true
@@ -4084,7 +4084,7 @@ api:
       unstable: []
       order: 0
   - name: Mute all monitors
-    url: "#mute-all-monitors"
+    url: '#mute-all-monitors'
     identifier: mute-all-monitors
     parent: monitors
     generated: true
@@ -4096,7 +4096,7 @@ api:
       unstable: []
       order: 0
   - name: Unmute a monitor
-    url: "#unmute-a-monitor"
+    url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
     parent: monitors
     generated: true
@@ -4108,7 +4108,7 @@ api:
       unstable: []
       order: 0
   - name: Mute a monitor
-    url: "#mute-a-monitor"
+    url: '#mute-a-monitor'
     identifier: mute-a-monitor
     parent: monitors
     generated: true
@@ -4120,7 +4120,7 @@ api:
       unstable: []
       order: 0
   - name: Edit a monitor
-    url: "#edit-a-monitor"
+    url: '#edit-a-monitor'
     identifier: edit-a-monitor
     parent: monitors
     generated: true
@@ -4132,7 +4132,7 @@ api:
       unstable: []
       order: 3
   - name: Get a monitor's details
-    url: "#get-a-monitors-details"
+    url: '#get-a-monitors-details'
     identifier: get-a-monitors-details
     parent: monitors
     generated: true
@@ -4144,7 +4144,7 @@ api:
       unstable: []
       order: 4
   - name: Delete a monitor
-    url: "#delete-a-monitor"
+    url: '#delete-a-monitor'
     identifier: delete-a-monitor
     parent: monitors
     generated: true
@@ -4156,7 +4156,7 @@ api:
       unstable: []
       order: 5
   - name: Validate a monitor
-    url: "#validate-a-monitor"
+    url: '#validate-a-monitor'
     identifier: validate-a-monitor
     parent: monitors
     generated: true
@@ -4168,7 +4168,7 @@ api:
       unstable: []
       order: 7
   - name: Monitors search
-    url: "#monitors-search"
+    url: '#monitors-search'
     identifier: monitors-search
     parent: monitors
     generated: true
@@ -4180,7 +4180,7 @@ api:
       unstable: []
       order: 1
   - name: Monitors group search
-    url: "#monitors-group-search"
+    url: '#monitors-group-search'
     identifier: monitors-group-search
     parent: monitors
     generated: true
@@ -4192,7 +4192,7 @@ api:
       unstable: []
       order: 2
   - name: Check if a monitor can be deleted
-    url: "#check-if-a-monitor-can-be-deleted"
+    url: '#check-if-a-monitor-can-be-deleted'
     identifier: check-if-a-monitor-can-be-deleted
     parent: monitors
     generated: true
@@ -4204,7 +4204,7 @@ api:
       unstable: []
       order: 6
   - name: Create a monitor
-    url: "#create-a-monitor"
+    url: '#create-a-monitor'
     identifier: create-a-monitor
     parent: monitors
     generated: true
@@ -4216,7 +4216,7 @@ api:
       unstable: []
       order: 1
   - name: Get all monitor details
-    url: "#get-all-monitor-details"
+    url: '#get-all-monitor-details'
     identifier: get-all-monitor-details
     parent: monitors
     generated: true
@@ -4232,7 +4232,7 @@ api:
     identifier: notebooks
     generated: true
   - name: Update a notebook
-    url: "#update-a-notebook"
+    url: '#update-a-notebook'
     identifier: update-a-notebook
     parent: notebooks
     generated: true
@@ -4244,7 +4244,7 @@ api:
       unstable: []
       order: 0
   - name: Get a notebook
-    url: "#get-a-notebook"
+    url: '#get-a-notebook'
     identifier: get-a-notebook
     parent: notebooks
     generated: true
@@ -4256,7 +4256,7 @@ api:
       unstable: []
       order: 0
   - name: Delete a notebook
-    url: "#delete-a-notebook"
+    url: '#delete-a-notebook'
     identifier: delete-a-notebook
     parent: notebooks
     generated: true
@@ -4268,7 +4268,7 @@ api:
       unstable: []
       order: 0
   - name: Create a notebook
-    url: "#create-a-notebook"
+    url: '#create-a-notebook'
     identifier: create-a-notebook
     parent: notebooks
     generated: true
@@ -4280,7 +4280,7 @@ api:
       unstable: []
       order: 0
   - name: Get all notebooks
-    url: "#get-all-notebooks"
+    url: '#get-all-notebooks'
     identifier: get-all-notebooks
     parent: notebooks
     generated: true
@@ -4296,7 +4296,7 @@ api:
     identifier: organizations
     generated: true
   - name: Upload IdP metadata
-    url: "#upload-idp-metadata"
+    url: '#upload-idp-metadata'
     identifier: upload-idp-metadata
     parent: organizations
     generated: true
@@ -4308,7 +4308,7 @@ api:
       unstable: []
       order: 5
   - name: Update your organization
-    url: "#update-your-organization"
+    url: '#update-your-organization'
     identifier: update-your-organization
     parent: organizations
     generated: true
@@ -4320,7 +4320,7 @@ api:
       unstable: []
       order: 4
   - name: Get organization information
-    url: "#get-organization-information"
+    url: '#get-organization-information'
     identifier: get-organization-information
     parent: organizations
     generated: true
@@ -4332,7 +4332,7 @@ api:
       unstable: []
       order: 3
   - name: Create a child organization
-    url: "#create-a-child-organization"
+    url: '#create-a-child-organization'
     identifier: create-a-child-organization
     parent: organizations
     generated: true
@@ -4344,7 +4344,7 @@ api:
       unstable: []
       order: 1
   - name: List your managed organizations
-    url: "#list-your-managed-organizations"
+    url: '#list-your-managed-organizations'
     identifier: list-your-managed-organizations
     parent: organizations
     generated: true
@@ -4360,7 +4360,7 @@ api:
     identifier: pagerduty-integration
     generated: true
   - name: Update a single service object
-    url: "#update-a-single-service-object"
+    url: '#update-a-single-service-object'
     identifier: update-a-single-service-object
     parent: pagerduty-integration
     generated: true
@@ -4372,7 +4372,7 @@ api:
       unstable: []
       order: 3
   - name: Get a single service object
-    url: "#get-a-single-service-object"
+    url: '#get-a-single-service-object'
     identifier: get-a-single-service-object
     parent: pagerduty-integration
     generated: true
@@ -4384,7 +4384,7 @@ api:
       unstable: []
       order: 2
   - name: Delete a single service object
-    url: "#delete-a-single-service-object"
+    url: '#delete-a-single-service-object'
     identifier: delete-a-single-service-object
     parent: pagerduty-integration
     generated: true
@@ -4396,7 +4396,7 @@ api:
       unstable: []
       order: 4
   - name: Create a new service object
-    url: "#create-a-new-service-object"
+    url: '#create-a-new-service-object'
     identifier: create-a-new-service-object
     parent: pagerduty-integration
     generated: true
@@ -4416,7 +4416,7 @@ api:
     identifier: service-checks
     generated: true
   - name: Submit a Service Check
-    url: "#submit-a-service-check"
+    url: '#submit-a-service-check'
     identifier: submit-a-service-check
     parent: service-checks
     generated: true
@@ -4432,7 +4432,7 @@ api:
     identifier: service-dependencies
     generated: true
   - name: Get one APM service's dependencies
-    url: "#get-one-apm-services-dependencies"
+    url: '#get-one-apm-services-dependencies'
     identifier: get-one-apm-services-dependencies
     parent: service-dependencies
     generated: true
@@ -4445,7 +4445,7 @@ api:
         - v1
       order: 2
   - name: Get all APM service dependencies
-    url: "#get-all-apm-service-dependencies"
+    url: '#get-all-apm-service-dependencies'
     identifier: get-all-apm-service-dependencies
     parent: service-dependencies
     generated: true
@@ -4462,7 +4462,7 @@ api:
     identifier: service-level-objective-corrections
     generated: true
   - name: Update an SLO correction
-    url: "#update-an-slo-correction"
+    url: '#update-an-slo-correction'
     identifier: update-an-slo-correction
     parent: service-level-objective-corrections
     generated: true
@@ -4475,7 +4475,7 @@ api:
         - v1
       order: 4
   - name: Get an SLO correction for an SLO
-    url: "#get-an-slo-correction-for-an-slo"
+    url: '#get-an-slo-correction-for-an-slo'
     identifier: get-an-slo-correction-for-an-slo
     parent: service-level-objective-corrections
     generated: true
@@ -4488,7 +4488,7 @@ api:
         - v1
       order: 3
   - name: Delete an SLO correction
-    url: "#delete-an-slo-correction"
+    url: '#delete-an-slo-correction'
     identifier: delete-an-slo-correction
     parent: service-level-objective-corrections
     generated: true
@@ -4501,7 +4501,7 @@ api:
         - v1
       order: 5
   - name: Create an SLO correction
-    url: "#create-an-slo-correction"
+    url: '#create-an-slo-correction'
     identifier: create-an-slo-correction
     parent: service-level-objective-corrections
     generated: true
@@ -4514,7 +4514,7 @@ api:
         - v1
       order: 1
   - name: Get all SLO corrections
-    url: "#get-all-slo-corrections"
+    url: '#get-all-slo-corrections'
     identifier: get-all-slo-corrections
     parent: service-level-objective-corrections
     generated: true
@@ -4531,7 +4531,7 @@ api:
     identifier: service-level-objectives
     generated: true
   - name: Get an SLO's history
-    url: "#get-an-slos-history"
+    url: '#get-an-slos-history'
     identifier: get-an-slos-history
     parent: service-level-objectives
     generated: true
@@ -4544,7 +4544,7 @@ api:
         - v1
       order: 6
   - name: Update an SLO
-    url: "#update-an-slo"
+    url: '#update-an-slo'
     identifier: update-an-slo
     parent: service-level-objectives
     generated: true
@@ -4556,7 +4556,7 @@ api:
       unstable: []
       order: 3
   - name: Get an SLO's details
-    url: "#get-an-slos-details"
+    url: '#get-an-slos-details'
     identifier: get-an-slos-details
     parent: service-level-objectives
     generated: true
@@ -4568,7 +4568,7 @@ api:
       unstable: []
       order: 4
   - name: Delete an SLO
-    url: "#delete-an-slo"
+    url: '#delete-an-slo'
     identifier: delete-an-slo
     parent: service-level-objectives
     generated: true
@@ -4580,7 +4580,7 @@ api:
       unstable: []
       order: 5
   - name: Check if SLOs can be safely deleted
-    url: "#check-if-slos-can-be-safely-deleted"
+    url: '#check-if-slos-can-be-safely-deleted'
     identifier: check-if-slos-can-be-safely-deleted
     parent: service-level-objectives
     generated: true
@@ -4592,7 +4592,7 @@ api:
       unstable: []
       order: 7
   - name: Bulk Delete SLO Timeframes
-    url: "#bulk-delete-slo-timeframes"
+    url: '#bulk-delete-slo-timeframes'
     identifier: bulk-delete-slo-timeframes
     parent: service-level-objectives
     generated: true
@@ -4604,7 +4604,7 @@ api:
       unstable: []
       order: 8
   - name: Create an SLO object
-    url: "#create-an-slo-object"
+    url: '#create-an-slo-object'
     identifier: create-an-slo-object
     parent: service-level-objectives
     generated: true
@@ -4616,7 +4616,7 @@ api:
       unstable: []
       order: 1
   - name: Get all SLOs
-    url: "#get-all-slos"
+    url: '#get-all-slos'
     identifier: get-all-slos
     parent: service-level-objectives
     generated: true
@@ -4632,7 +4632,7 @@ api:
     identifier: slack-integration
     generated: true
   - name: Update a Slack integration channel
-    url: "#update-a-slack-integration-channel"
+    url: '#update-a-slack-integration-channel'
     identifier: update-a-slack-integration-channel
     parent: slack-integration
     generated: true
@@ -4644,7 +4644,7 @@ api:
       unstable: []
       order: 4
   - name: Get a Slack integration channel
-    url: "#get-a-slack-integration-channel"
+    url: '#get-a-slack-integration-channel'
     identifier: get-a-slack-integration-channel
     parent: slack-integration
     generated: true
@@ -4656,7 +4656,7 @@ api:
       unstable: []
       order: 3
   - name: Remove a Slack integration channel
-    url: "#remove-a-slack-integration-channel"
+    url: '#remove-a-slack-integration-channel'
     identifier: remove-a-slack-integration-channel
     parent: slack-integration
     generated: true
@@ -4668,7 +4668,7 @@ api:
       unstable: []
       order: 5
   - name: Create a Slack integration channel
-    url: "#create-a-slack-integration-channel"
+    url: '#create-a-slack-integration-channel'
     identifier: create-a-slack-integration-channel
     parent: slack-integration
     generated: true
@@ -4680,7 +4680,7 @@ api:
       unstable: []
       order: 2
   - name: Get all channels in a Slack integration
-    url: "#get-all-channels-in-a-slack-integration"
+    url: '#get-all-channels-in-a-slack-integration'
     identifier: get-all-channels-in-a-slack-integration
     parent: slack-integration
     generated: true
@@ -4692,7 +4692,7 @@ api:
       unstable: []
       order: 1
   - name: Add channels to Slack integration
-    url: "#add-channels-to-slack-integration"
+    url: '#add-channels-to-slack-integration'
     identifier: add-channels-to-slack-integration
     parent: slack-integration
     generated: true
@@ -4704,7 +4704,7 @@ api:
       unstable: []
       order: 0
   - name: Create a Slack integration
-    url: "#create-a-slack-integration"
+    url: '#create-a-slack-integration'
     identifier: create-a-slack-integration
     parent: slack-integration
     generated: true
@@ -4716,7 +4716,7 @@ api:
       unstable: []
       order: 0
   - name: Get info about a Slack integration
-    url: "#get-info-about-a-slack-integration"
+    url: '#get-info-about-a-slack-integration'
     identifier: get-info-about-a-slack-integration
     parent: slack-integration
     generated: true
@@ -4728,7 +4728,7 @@ api:
       unstable: []
       order: 0
   - name: Delete a Slack integration
-    url: "#delete-a-slack-integration"
+    url: '#delete-a-slack-integration'
     identifier: delete-a-slack-integration
     parent: slack-integration
     generated: true
@@ -4744,7 +4744,7 @@ api:
     identifier: snapshots
     generated: true
   - name: Take graph snapshots
-    url: "#take-graph-snapshots"
+    url: '#take-graph-snapshots'
     identifier: take-graph-snapshots
     parent: snapshots
     generated: true
@@ -4760,7 +4760,7 @@ api:
     identifier: synthetics
     generated: true
   - name: Edit a global variable
-    url: "#edit-a-global-variable"
+    url: '#edit-a-global-variable'
     identifier: edit-a-global-variable
     parent: synthetics
     generated: true
@@ -4772,7 +4772,7 @@ api:
       unstable: []
       order: 17
   - name: Get a global variable
-    url: "#get-a-global-variable"
+    url: '#get-a-global-variable'
     identifier: get-a-global-variable
     parent: synthetics
     generated: true
@@ -4784,7 +4784,7 @@ api:
       unstable: []
       order: 18
   - name: Delete a global variable
-    url: "#delete-a-global-variable"
+    url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
     parent: synthetics
     generated: true
@@ -4796,7 +4796,7 @@ api:
       unstable: []
       order: 19
   - name: Create a global variable
-    url: "#create-a-global-variable"
+    url: '#create-a-global-variable'
     identifier: create-a-global-variable
     parent: synthetics
     generated: true
@@ -4808,7 +4808,7 @@ api:
       unstable: []
       order: 16
   - name: Get all global variables
-    url: "#get-all-global-variables"
+    url: '#get-all-global-variables'
     identifier: get-all-global-variables
     parent: synthetics
     generated: true
@@ -4820,7 +4820,7 @@ api:
       unstable: []
       order: 15
   - name: Pause or start a test
-    url: "#pause-or-start-a-test"
+    url: '#pause-or-start-a-test'
     identifier: pause-or-start-a-test
     parent: synthetics
     generated: true
@@ -4832,7 +4832,7 @@ api:
       unstable: []
       order: 5
   - name: Get an API test result
-    url: "#get-an-api-test-result"
+    url: '#get-an-api-test-result'
     identifier: get-an-api-test-result
     parent: synthetics
     generated: true
@@ -4844,7 +4844,7 @@ api:
       unstable: []
       order: 10
   - name: Get an API test's latest results summaries
-    url: "#get-an-api-tests-latest-results-summaries"
+    url: '#get-an-api-tests-latest-results-summaries'
     identifier: get-an-api-tests-latest-results-summaries
     parent: synthetics
     generated: true
@@ -4856,7 +4856,7 @@ api:
       unstable: []
       order: 12
   - name: Edit a test
-    url: "#edit-a-test"
+    url: '#edit-a-test'
     identifier: edit-a-test
     parent: synthetics
     generated: true
@@ -4868,7 +4868,7 @@ api:
       unstable: []
       order: 26
   - name: Get a test configuration
-    url: "#get-a-test-configuration"
+    url: '#get-a-test-configuration'
     identifier: get-a-test-configuration
     parent: synthetics
     generated: true
@@ -4880,7 +4880,7 @@ api:
       unstable: []
       order: 25
   - name: Trigger tests from CI/CD pipelines
-    url: "#trigger-tests-from-ci/cd-pipelines"
+    url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
     parent: synthetics
     generated: true
@@ -4892,7 +4892,7 @@ api:
       unstable: []
       order: 6
   - name: Delete tests
-    url: "#delete-tests"
+    url: '#delete-tests'
     identifier: delete-tests
     parent: synthetics
     generated: true
@@ -4904,7 +4904,7 @@ api:
       unstable: []
       order: 14
   - name: Get a browser test result
-    url: "#get-a-browser-test-result"
+    url: '#get-a-browser-test-result'
     identifier: get-a-browser-test-result
     parent: synthetics
     generated: true
@@ -4916,7 +4916,7 @@ api:
       unstable: []
       order: 11
   - name: Get a browser test's latest results summaries
-    url: "#get-a-browser-tests-latest-results-summaries"
+    url: '#get-a-browser-tests-latest-results-summaries'
     identifier: get-a-browser-tests-latest-results-summaries
     parent: synthetics
     generated: true
@@ -4928,7 +4928,7 @@ api:
       unstable: []
       order: 13
   - name: Edit a browser test
-    url: "#edit-a-browser-test"
+    url: '#edit-a-browser-test'
     identifier: edit-a-browser-test
     parent: synthetics
     generated: true
@@ -4940,7 +4940,7 @@ api:
       unstable: []
       order: 4
   - name: Get a browser test
-    url: "#get-a-browser-test"
+    url: '#get-a-browser-test'
     identifier: get-a-browser-test
     parent: synthetics
     generated: true
@@ -4952,7 +4952,7 @@ api:
       unstable: []
       order: 8
   - name: Create a browser test
-    url: "#create-a-browser-test"
+    url: '#create-a-browser-test'
     identifier: create-a-browser-test
     parent: synthetics
     generated: true
@@ -4964,7 +4964,7 @@ api:
       unstable: []
       order: 2
   - name: Edit an API test
-    url: "#edit-an-api-test"
+    url: '#edit-an-api-test'
     identifier: edit-an-api-test
     parent: synthetics
     generated: true
@@ -4976,7 +4976,7 @@ api:
       unstable: []
       order: 3
   - name: Get an API test
-    url: "#get-an-api-test"
+    url: '#get-an-api-test'
     identifier: get-an-api-test
     parent: synthetics
     generated: true
@@ -4988,7 +4988,7 @@ api:
       unstable: []
       order: 7
   - name: Create an API test
-    url: "#create-an-api-test"
+    url: '#create-an-api-test'
     identifier: create-an-api-test
     parent: synthetics
     generated: true
@@ -5000,7 +5000,7 @@ api:
       unstable: []
       order: 1
   - name: Create a test
-    url: "#create-a-test"
+    url: '#create-a-test'
     identifier: create-a-test
     parent: synthetics
     generated: true
@@ -5012,7 +5012,7 @@ api:
       unstable: []
       order: 27
   - name: Get the list of all tests
-    url: "#get-the-list-of-all-tests"
+    url: '#get-the-list-of-all-tests'
     identifier: get-the-list-of-all-tests
     parent: synthetics
     generated: true
@@ -5024,7 +5024,7 @@ api:
       unstable: []
       order: 9
   - name: Edit a private location
-    url: "#edit-a-private-location"
+    url: '#edit-a-private-location'
     identifier: edit-a-private-location
     parent: synthetics
     generated: true
@@ -5036,7 +5036,7 @@ api:
       unstable: []
       order: 22
   - name: Get a private location
-    url: "#get-a-private-location"
+    url: '#get-a-private-location'
     identifier: get-a-private-location
     parent: synthetics
     generated: true
@@ -5048,7 +5048,7 @@ api:
       unstable: []
       order: 21
   - name: Delete a private location
-    url: "#delete-a-private-location"
+    url: '#delete-a-private-location'
     identifier: delete-a-private-location
     parent: synthetics
     generated: true
@@ -5060,7 +5060,7 @@ api:
       unstable: []
       order: 24
   - name: Create a private location
-    url: "#create-a-private-location"
+    url: '#create-a-private-location'
     identifier: create-a-private-location
     parent: synthetics
     generated: true
@@ -5072,7 +5072,7 @@ api:
       unstable: []
       order: 20
   - name: Get all locations (public and private)
-    url: "#get-all-locations-public-and-private"
+    url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
     parent: synthetics
     generated: true
@@ -5088,7 +5088,7 @@ api:
     identifier: tags
     generated: true
   - name: Update host tags
-    url: "#update-host-tags"
+    url: '#update-host-tags'
     identifier: update-host-tags
     parent: tags
     generated: true
@@ -5100,7 +5100,7 @@ api:
       unstable: []
       order: 4
   - name: Add tags to a host
-    url: "#add-tags-to-a-host"
+    url: '#add-tags-to-a-host'
     identifier: add-tags-to-a-host
     parent: tags
     generated: true
@@ -5112,7 +5112,7 @@ api:
       unstable: []
       order: 3
   - name: Get host tags
-    url: "#get-host-tags"
+    url: '#get-host-tags'
     identifier: get-host-tags
     parent: tags
     generated: true
@@ -5124,7 +5124,7 @@ api:
       unstable: []
       order: 2
   - name: Remove host tags
-    url: "#remove-host-tags"
+    url: '#remove-host-tags'
     identifier: remove-host-tags
     parent: tags
     generated: true
@@ -5136,7 +5136,7 @@ api:
       unstable: []
       order: 5
   - name: Get Tags
-    url: "#get-tags"
+    url: '#get-tags'
     identifier: get-tags
     parent: tags
     generated: true
@@ -5156,7 +5156,7 @@ api:
     identifier: tracing
     generated: true
   - name: Send traces
-    url: "#send-traces"
+    url: '#send-traces'
     identifier: send-traces
     parent: tracing
     generated: true
@@ -5172,7 +5172,7 @@ api:
     identifier: usage-metering
     generated: true
   - name: Get hourly usage for tracing without limits
-    url: "#get-hourly-usage-for-tracing-without-limits"
+    url: '#get-hourly-usage-for-tracing-without-limits'
     identifier: get-hourly-usage-for-tracing-without-limits
     parent: usage-metering
     generated: true
@@ -5184,7 +5184,7 @@ api:
       unstable: []
       order: 25
   - name: Get hourly usage for Trace Search
-    url: "#get-hourly-usage-for-trace-search"
+    url: '#get-hourly-usage-for-trace-search'
     identifier: get-hourly-usage-for-trace-search
     parent: usage-metering
     generated: true
@@ -5196,7 +5196,7 @@ api:
       unstable: []
       order: 6
   - name: Get all custom metrics by hourly average
-    url: "#get-all-custom-metrics-by-hourly-average"
+    url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average
     parent: usage-metering
     generated: true
@@ -5208,7 +5208,7 @@ api:
       unstable: []
       order: 5
   - name: Get hourly usage for custom metrics
-    url: "#get-hourly-usage-for-custom-metrics"
+    url: '#get-hourly-usage-for-custom-metrics'
     identifier: get-hourly-usage-for-custom-metrics
     parent: usage-metering
     generated: true
@@ -5220,7 +5220,7 @@ api:
       unstable: []
       order: 4
   - name: Get hourly usage for Synthetics Browser Checks
-    url: "#get-hourly-usage-for-synthetics-browser-checks"
+    url: '#get-hourly-usage-for-synthetics-browser-checks'
     identifier: get-hourly-usage-for-synthetics-browser-checks
     parent: usage-metering
     generated: true
@@ -5232,7 +5232,7 @@ api:
       unstable: []
       order: 10
   - name: Get hourly usage for Synthetics API Checks
-    url: "#get-hourly-usage-for-synthetics-api-checks"
+    url: '#get-hourly-usage-for-synthetics-api-checks'
     identifier: get-hourly-usage-for-synthetics-api-checks
     parent: usage-metering
     generated: true
@@ -5244,7 +5244,7 @@ api:
       unstable: []
       order: 9
   - name: Get hourly usage for Synthetics Checks
-    url: "#get-hourly-usage-for-synthetics-checks"
+    url: '#get-hourly-usage-for-synthetics-checks'
     identifier: get-hourly-usage-for-synthetics-checks
     parent: usage-metering
     generated: true
@@ -5256,7 +5256,7 @@ api:
       unstable: []
       order: 8
   - name: Get usage across your multi-org account
-    url: "#get-usage-across-your-multi-org-account"
+    url: '#get-usage-across-your-multi-org-account'
     identifier: get-usage-across-your-multi-org-account
     parent: usage-metering
     generated: true
@@ -5268,7 +5268,7 @@ api:
       unstable: []
       order: 16
   - name: Get hourly usage for SNMP devices
-    url: "#get-hourly-usage-for-snmp-devices"
+    url: '#get-hourly-usage-for-snmp-devices'
     identifier: get-hourly-usage-for-snmp-devices
     parent: usage-metering
     generated: true
@@ -5280,7 +5280,7 @@ api:
       unstable: []
       order: 18
   - name: Get hourly usage for RUM Sessions
-    url: "#get-hourly-usage-for-rum-sessions"
+    url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
     parent: usage-metering
     generated: true
@@ -5292,7 +5292,7 @@ api:
       unstable: []
       order: 13
   - name: Get hourly usage for profiled hosts
-    url: "#get-hourly-usage-for-profiled-hosts"
+    url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
     parent: usage-metering
     generated: true
@@ -5304,7 +5304,7 @@ api:
       unstable: []
       order: 24
   - name: Get hourly usage for Network Hosts
-    url: "#get-hourly-usage-for-network-hosts"
+    url: '#get-hourly-usage-for-network-hosts'
     identifier: get-hourly-usage-for-network-hosts
     parent: usage-metering
     generated: true
@@ -5316,7 +5316,7 @@ api:
       unstable: []
       order: 14
   - name: Get hourly usage for Network Flows
-    url: "#get-hourly-usage-for-network-flows"
+    url: '#get-hourly-usage-for-network-flows'
     identifier: get-hourly-usage-for-network-flows
     parent: usage-metering
     generated: true
@@ -5328,7 +5328,7 @@ api:
       unstable: []
       order: 15
   - name: Get hourly usage for Logs by Index
-    url: "#get-hourly-usage-for-logs-by-index"
+    url: '#get-hourly-usage-for-logs-by-index'
     identifier: get-hourly-usage-for-logs-by-index
     parent: usage-metering
     generated: true
@@ -5340,7 +5340,7 @@ api:
       unstable: []
       order: 3
   - name: Get hourly logs usage by retention
-    url: "#get-hourly-logs-usage-by-retention"
+    url: '#get-hourly-logs-usage-by-retention'
     identifier: get-hourly-logs-usage-by-retention
     parent: usage-metering
     generated: true
@@ -5352,7 +5352,7 @@ api:
       unstable: []
       order: 0
   - name: Get hourly usage for Logs
-    url: "#get-hourly-usage-for-logs"
+    url: '#get-hourly-usage-for-logs'
     identifier: get-hourly-usage-for-logs
     parent: usage-metering
     generated: true
@@ -5364,7 +5364,7 @@ api:
       unstable: []
       order: 2
   - name: Get hourly usage for IoT
-    url: "#get-hourly-usage-for-iot"
+    url: '#get-hourly-usage-for-iot'
     identifier: get-hourly-usage-for-iot
     parent: usage-metering
     generated: true
@@ -5376,7 +5376,7 @@ api:
       unstable: []
       order: 28
   - name: Get hourly usage for ingested spans
-    url: "#get-hourly-usage-for-ingested-spans"
+    url: '#get-hourly-usage-for-ingested-spans'
     identifier: get-hourly-usage-for-ingested-spans
     parent: usage-metering
     generated: true
@@ -5388,7 +5388,7 @@ api:
       unstable: []
       order: 26
   - name: Get hourly usage for indexed spans
-    url: "#get-hourly-usage-for-indexed-spans"
+    url: '#get-hourly-usage-for-indexed-spans'
     identifier: get-hourly-usage-for-indexed-spans
     parent: usage-metering
     generated: true
@@ -5400,7 +5400,7 @@ api:
       unstable: []
       order: 7
   - name: Get hourly usage for incident management
-    url: "#get-hourly-usage-for-incident-management"
+    url: '#get-hourly-usage-for-incident-management'
     identifier: get-hourly-usage-for-incident-management
     parent: usage-metering
     generated: true
@@ -5412,7 +5412,7 @@ api:
       unstable: []
       order: 27
   - name: Get hourly usage for hosts and containers
-    url: "#get-hourly-usage-for-hosts-and-containers"
+    url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: get-hourly-usage-for-hosts-and-containers
     parent: usage-metering
     generated: true
@@ -5424,7 +5424,7 @@ api:
       unstable: []
       order: 1
   - name: Get hourly usage for Fargate
-    url: "#get-hourly-usage-for-fargate"
+    url: '#get-hourly-usage-for-fargate'
     identifier: get-hourly-usage-for-fargate
     parent: usage-metering
     generated: true
@@ -5436,7 +5436,7 @@ api:
       unstable: []
       order: 11
   - name: Get hourly usage for Cloud Workload Security
-    url: "#get-hourly-usage-for-cloud-workload-security"
+    url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
     parent: usage-metering
     generated: true
@@ -5448,7 +5448,7 @@ api:
       unstable: []
       order: 31
   - name: Get hourly usage for CSPM
-    url: "#get-hourly-usage-for-cspm"
+    url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
     parent: usage-metering
     generated: true
@@ -5460,7 +5460,7 @@ api:
       unstable: []
       order: 30
   - name: Get billable usage across your account
-    url: "#get-billable-usage-across-your-account"
+    url: '#get-billable-usage-across-your-account'
     identifier: get-billable-usage-across-your-account
     parent: usage-metering
     generated: true
@@ -5472,7 +5472,7 @@ api:
       unstable: []
       order: 19
   - name: Get hourly usage for Lambda
-    url: "#get-hourly-usage-for-lambda"
+    url: '#get-hourly-usage-for-lambda'
     identifier: get-hourly-usage-for-lambda
     parent: usage-metering
     generated: true
@@ -5484,7 +5484,7 @@ api:
       unstable: []
       order: 12
   - name: Get hourly usage for audit logs
-    url: "#get-hourly-usage-for-audit-logs"
+    url: '#get-hourly-usage-for-audit-logs'
     identifier: get-hourly-usage-for-audit-logs
     parent: usage-metering
     generated: true
@@ -5496,7 +5496,7 @@ api:
       unstable: []
       order: 31
   - name: Get Usage Attribution
-    url: "#get-usage-attribution"
+    url: '#get-usage-attribution'
     identifier: get-usage-attribution
     parent: usage-metering
     generated: true
@@ -5509,7 +5509,7 @@ api:
         - v1
       order: 29
   - name: Get hourly usage for analyzed logs
-    url: "#get-hourly-usage-for-analyzed-logs"
+    url: '#get-hourly-usage-for-analyzed-logs'
     identifier: get-hourly-usage-for-analyzed-logs
     parent: usage-metering
     generated: true
@@ -5521,7 +5521,7 @@ api:
       unstable: []
       order: 17
   - name: Get specified monthly custom reports
-    url: "#get-specified-monthly-custom-reports"
+    url: '#get-specified-monthly-custom-reports'
     identifier: get-specified-monthly-custom-reports
     parent: usage-metering
     generated: true
@@ -5534,7 +5534,7 @@ api:
         - v1
       order: 23
   - name: Get the list of available monthly custom reports
-    url: "#get-the-list-of-available-monthly-custom-reports"
+    url: '#get-the-list-of-available-monthly-custom-reports'
     identifier: get-the-list-of-available-monthly-custom-reports
     parent: usage-metering
     generated: true
@@ -5547,7 +5547,7 @@ api:
         - v1
       order: 22
   - name: Get specified daily custom reports
-    url: "#get-specified-daily-custom-reports"
+    url: '#get-specified-daily-custom-reports'
     identifier: get-specified-daily-custom-reports
     parent: usage-metering
     generated: true
@@ -5560,7 +5560,7 @@ api:
         - v1
       order: 21
   - name: Get the list of available daily custom reports
-    url: "#get-the-list-of-available-daily-custom-reports"
+    url: '#get-the-list-of-available-daily-custom-reports'
     identifier: get-the-list-of-available-daily-custom-reports
     parent: usage-metering
     generated: true
@@ -5577,7 +5577,7 @@ api:
     identifier: users
     generated: true
   - name: Get a user permissions
-    url: "#get-a-user-permissions"
+    url: '#get-a-user-permissions'
     identifier: get-a-user-permissions
     parent: users
     generated: true
@@ -5589,7 +5589,7 @@ api:
       unstable: []
       order: 7
   - name: Get a user organization
-    url: "#get-a-user-organization"
+    url: '#get-a-user-organization'
     identifier: get-a-user-organization
     parent: users
     generated: true
@@ -5601,7 +5601,7 @@ api:
       unstable: []
       order: 6
   - name: Get a user invitation
-    url: "#get-a-user-invitation"
+    url: '#get-a-user-invitation'
     identifier: get-a-user-invitation
     parent: users
     generated: true
@@ -5613,7 +5613,7 @@ api:
       unstable: []
       order: 9
   - name: Send invitation emails
-    url: "#send-invitation-emails"
+    url: '#send-invitation-emails'
     identifier: send-invitation-emails
     parent: users
     generated: true
@@ -5625,7 +5625,7 @@ api:
       unstable: []
       order: 8
   - name: Update a user
-    url: "#update-a-user"
+    url: '#update-a-user'
     identifier: update-a-user
     parent: users
     generated: true
@@ -5638,7 +5638,7 @@ api:
       unstable: []
       order: 4
   - name: Get user details
-    url: "#get-user-details"
+    url: '#get-user-details'
     identifier: get-user-details
     parent: users
     generated: true
@@ -5651,7 +5651,7 @@ api:
       unstable: []
       order: 3
   - name: Disable a user
-    url: "#disable-a-user"
+    url: '#disable-a-user'
     identifier: disable-a-user
     parent: users
     generated: true
@@ -5664,7 +5664,7 @@ api:
       unstable: []
       order: 5
   - name: Create a user
-    url: "#create-a-user"
+    url: '#create-a-user'
     identifier: create-a-user
     parent: users
     generated: true
@@ -5677,7 +5677,7 @@ api:
       unstable: []
       order: 1
   - name: List all users
-    url: "#list-all-users"
+    url: '#list-all-users'
     identifier: list-all-users
     parent: users
     generated: true
@@ -5694,7 +5694,7 @@ api:
     identifier: webhooks-integration
     generated: true
   - name: Update a webhook
-    url: "#update-a-webhook"
+    url: '#update-a-webhook'
     identifier: update-a-webhook
     parent: webhooks-integration
     generated: true
@@ -5706,7 +5706,7 @@ api:
       unstable: []
       order: 3
   - name: Get a webhook integration
-    url: "#get-a-webhook-integration"
+    url: '#get-a-webhook-integration'
     identifier: get-a-webhook-integration
     parent: webhooks-integration
     generated: true
@@ -5718,7 +5718,7 @@ api:
       unstable: []
       order: 2
   - name: Delete a webhook
-    url: "#delete-a-webhook"
+    url: '#delete-a-webhook'
     identifier: delete-a-webhook
     parent: webhooks-integration
     generated: true
@@ -5730,7 +5730,7 @@ api:
       unstable: []
       order: 4
   - name: Create a webhooks integration
-    url: "#create-a-webhooks-integration"
+    url: '#create-a-webhooks-integration'
     identifier: create-a-webhooks-integration
     parent: webhooks-integration
     generated: true
@@ -5742,7 +5742,7 @@ api:
       unstable: []
       order: 1
   - name: Update a custom variable
-    url: "#update-a-custom-variable"
+    url: '#update-a-custom-variable'
     identifier: update-a-custom-variable
     parent: webhooks-integration
     generated: true
@@ -5754,7 +5754,7 @@ api:
       unstable: []
       order: 7
   - name: Get a custom variable
-    url: "#get-a-custom-variable"
+    url: '#get-a-custom-variable'
     identifier: get-a-custom-variable
     parent: webhooks-integration
     generated: true
@@ -5766,7 +5766,7 @@ api:
       unstable: []
       order: 6
   - name: Delete a custom variable
-    url: "#delete-a-custom-variable"
+    url: '#delete-a-custom-variable'
     identifier: delete-a-custom-variable
     parent: webhooks-integration
     generated: true
@@ -5778,7 +5778,7 @@ api:
       unstable: []
       order: 8
   - name: Create a custom variable
-    url: "#create-a-custom-variable"
+    url: '#create-a-custom-variable'
     identifier: create-a-custom-variable
     parent: webhooks-integration
     generated: true
@@ -5794,7 +5794,7 @@ api:
     identifier: cloud-workload-security
     generated: true
   - name: Get the latest Cloud Workload Security policy
-    url: "#get-the-latest-cloud-workload-security-policy"
+    url: '#get-the-latest-cloud-workload-security-policy'
     identifier: get-the-latest-cloud-workload-security-policy
     parent: cloud-workload-security
     generated: true
@@ -5811,7 +5811,7 @@ api:
     identifier: incident-services
     generated: true
   - name: Update an existing incident service
-    url: "#update-an-existing-incident-service"
+    url: '#update-an-existing-incident-service'
     identifier: update-an-existing-incident-service
     parent: incident-services
     generated: true
@@ -5824,7 +5824,7 @@ api:
         - v2
       order: 0
   - name: Get details of an incident service
-    url: "#get-details-of-an-incident-service"
+    url: '#get-details-of-an-incident-service'
     identifier: get-details-of-an-incident-service
     parent: incident-services
     generated: true
@@ -5837,7 +5837,7 @@ api:
         - v2
       order: 0
   - name: Delete an existing incident service
-    url: "#delete-an-existing-incident-service"
+    url: '#delete-an-existing-incident-service'
     identifier: delete-an-existing-incident-service
     parent: incident-services
     generated: true
@@ -5850,7 +5850,7 @@ api:
         - v2
       order: 0
   - name: Create a new incident service
-    url: "#create-a-new-incident-service"
+    url: '#create-a-new-incident-service'
     identifier: create-a-new-incident-service
     parent: incident-services
     generated: true
@@ -5863,7 +5863,7 @@ api:
         - v2
       order: 0
   - name: Get a list of all incident services
-    url: "#get-a-list-of-all-incident-services"
+    url: '#get-a-list-of-all-incident-services'
     identifier: get-a-list-of-all-incident-services
     parent: incident-services
     generated: true
@@ -5880,7 +5880,7 @@ api:
     identifier: incident-teams
     generated: true
   - name: Update an existing incident team
-    url: "#update-an-existing-incident-team"
+    url: '#update-an-existing-incident-team'
     identifier: update-an-existing-incident-team
     parent: incident-teams
     generated: true
@@ -5893,7 +5893,7 @@ api:
         - v2
       order: 0
   - name: Get details of an incident team
-    url: "#get-details-of-an-incident-team"
+    url: '#get-details-of-an-incident-team'
     identifier: get-details-of-an-incident-team
     parent: incident-teams
     generated: true
@@ -5906,7 +5906,7 @@ api:
         - v2
       order: 0
   - name: Delete an existing incident team
-    url: "#delete-an-existing-incident-team"
+    url: '#delete-an-existing-incident-team'
     identifier: delete-an-existing-incident-team
     parent: incident-teams
     generated: true
@@ -5919,7 +5919,7 @@ api:
         - v2
       order: 0
   - name: Create a new incident team
-    url: "#create-a-new-incident-team"
+    url: '#create-a-new-incident-team'
     identifier: create-a-new-incident-team
     parent: incident-teams
     generated: true
@@ -5932,7 +5932,7 @@ api:
         - v2
       order: 0
   - name: Get a list of all incident teams
-    url: "#get-a-list-of-all-incident-teams"
+    url: '#get-a-list-of-all-incident-teams'
     identifier: get-a-list-of-all-incident-teams
     parent: incident-teams
     generated: true
@@ -5949,7 +5949,7 @@ api:
     identifier: incidents
     generated: true
   - name: Update an existing incident
-    url: "#update-an-existing-incident"
+    url: '#update-an-existing-incident'
     identifier: update-an-existing-incident
     parent: incidents
     generated: true
@@ -5962,7 +5962,7 @@ api:
         - v2
       order: 0
   - name: Get the details of an incident
-    url: "#get-the-details-of-an-incident"
+    url: '#get-the-details-of-an-incident'
     identifier: get-the-details-of-an-incident
     parent: incidents
     generated: true
@@ -5975,7 +5975,7 @@ api:
         - v2
       order: 0
   - name: Delete an existing incident
-    url: "#delete-an-existing-incident"
+    url: '#delete-an-existing-incident'
     identifier: delete-an-existing-incident
     parent: incidents
     generated: true
@@ -5988,7 +5988,7 @@ api:
         - v2
       order: 0
   - name: Create an incident
-    url: "#create-an-incident"
+    url: '#create-an-incident'
     identifier: create-an-incident
     parent: incidents
     generated: true
@@ -6001,7 +6001,7 @@ api:
         - v2
       order: 0
   - name: Get a list of incidents
-    url: "#get-a-list-of-incidents"
+    url: '#get-a-list-of-incidents'
     identifier: get-a-list-of-incidents
     parent: incidents
     generated: true
@@ -6018,7 +6018,7 @@ api:
     identifier: logs-archives
     generated: true
   - name: Grant role to an archive
-    url: "#grant-role-to-an-archive"
+    url: '#grant-role-to-an-archive'
     identifier: grant-role-to-an-archive
     parent: logs-archives
     generated: true
@@ -6030,7 +6030,7 @@ api:
       unstable: []
       order: 7
   - name: List read roles for an archive
-    url: "#list-read-roles-for-an-archive"
+    url: '#list-read-roles-for-an-archive'
     identifier: list-read-roles-for-an-archive
     parent: logs-archives
     generated: true
@@ -6042,7 +6042,7 @@ api:
       unstable: []
       order: 6
   - name: Revoke role from an archive
-    url: "#revoke-role-from-an-archive"
+    url: '#revoke-role-from-an-archive'
     identifier: revoke-role-from-an-archive
     parent: logs-archives
     generated: true
@@ -6054,7 +6054,7 @@ api:
       unstable: []
       order: 8
   - name: Update an archive
-    url: "#update-an-archive"
+    url: '#update-an-archive'
     identifier: update-an-archive
     parent: logs-archives
     generated: true
@@ -6066,7 +6066,7 @@ api:
       unstable: []
       order: 4
   - name: Get an archive
-    url: "#get-an-archive"
+    url: '#get-an-archive'
     identifier: get-an-archive
     parent: logs-archives
     generated: true
@@ -6078,7 +6078,7 @@ api:
       unstable: []
       order: 3
   - name: Delete an archive
-    url: "#delete-an-archive"
+    url: '#delete-an-archive'
     identifier: delete-an-archive
     parent: logs-archives
     generated: true
@@ -6090,7 +6090,7 @@ api:
       unstable: []
       order: 5
   - name: Create an archive
-    url: "#create-an-archive"
+    url: '#create-an-archive'
     identifier: create-an-archive
     parent: logs-archives
     generated: true
@@ -6102,7 +6102,7 @@ api:
       unstable: []
       order: 2
   - name: Get all archives
-    url: "#get-all-archives"
+    url: '#get-all-archives'
     identifier: get-all-archives
     parent: logs-archives
     generated: true
@@ -6114,7 +6114,7 @@ api:
       unstable: []
       order: 1
   - name: Update archive order
-    url: "#update-archive-order"
+    url: '#update-archive-order'
     identifier: update-archive-order
     parent: logs-archives
     generated: true
@@ -6126,7 +6126,7 @@ api:
       unstable: []
       order: 10
   - name: Get archive order
-    url: "#get-archive-order"
+    url: '#get-archive-order'
     identifier: get-archive-order
     parent: logs-archives
     generated: true
@@ -6142,7 +6142,7 @@ api:
     identifier: logs-metrics
     generated: true
   - name: Update a log-based metric
-    url: "#update-a-log-based-metric"
+    url: '#update-a-log-based-metric'
     identifier: update-a-log-based-metric
     parent: logs-metrics
     generated: true
@@ -6154,7 +6154,7 @@ api:
       unstable: []
       order: 4
   - name: Get a log-based metric
-    url: "#get-a-log-based-metric"
+    url: '#get-a-log-based-metric'
     identifier: get-a-log-based-metric
     parent: logs-metrics
     generated: true
@@ -6166,7 +6166,7 @@ api:
       unstable: []
       order: 3
   - name: Delete a log-based metric
-    url: "#delete-a-log-based-metric"
+    url: '#delete-a-log-based-metric'
     identifier: delete-a-log-based-metric
     parent: logs-metrics
     generated: true
@@ -6178,7 +6178,7 @@ api:
       unstable: []
       order: 5
   - name: Create a log-based metric
-    url: "#create-a-log-based-metric"
+    url: '#create-a-log-based-metric'
     identifier: create-a-log-based-metric
     parent: logs-metrics
     generated: true
@@ -6190,7 +6190,7 @@ api:
       unstable: []
       order: 2
   - name: Get all log-based metrics
-    url: "#get-all-log-based-metrics"
+    url: '#get-all-log-based-metrics'
     identifier: get-all-log-based-metrics
     parent: logs-metrics
     generated: true
@@ -6206,7 +6206,7 @@ api:
     identifier: logs-restriction-queries
     generated: true
   - name: Grant role to a restriction query
-    url: "#grant-role-to-a-restriction-query"
+    url: '#grant-role-to-a-restriction-query'
     identifier: grant-role-to-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6219,7 +6219,7 @@ api:
         - v2
       order: 7
   - name: List roles for a restriction query
-    url: "#list-roles-for-a-restriction-query"
+    url: '#list-roles-for-a-restriction-query'
     identifier: list-roles-for-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6232,7 +6232,7 @@ api:
         - v2
       order: 6
   - name: Revoke role from a restriction query
-    url: "#revoke-role-from-a-restriction-query"
+    url: '#revoke-role-from-a-restriction-query'
     identifier: revoke-role-from-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6245,7 +6245,7 @@ api:
         - v2
       order: 8
   - name: Update a restriction query
-    url: "#update-a-restriction-query"
+    url: '#update-a-restriction-query'
     identifier: update-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6258,7 +6258,7 @@ api:
         - v2
       order: 4
   - name: Get a restriction query
-    url: "#get-a-restriction-query"
+    url: '#get-a-restriction-query'
     identifier: get-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6271,7 +6271,7 @@ api:
         - v2
       order: 3
   - name: Delete a restriction query
-    url: "#delete-a-restriction-query"
+    url: '#delete-a-restriction-query'
     identifier: delete-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6284,7 +6284,7 @@ api:
         - v2
       order: 5
   - name: Get all restriction queries for a given user
-    url: "#get-all-restriction-queries-for-a-given-user"
+    url: '#get-all-restriction-queries-for-a-given-user'
     identifier: get-all-restriction-queries-for-a-given-user
     parent: logs-restriction-queries
     generated: true
@@ -6297,7 +6297,7 @@ api:
         - v2
       order: 9
   - name: Get restriction query for a given role
-    url: "#get-restriction-query-for-a-given-role"
+    url: '#get-restriction-query-for-a-given-role'
     identifier: get-restriction-query-for-a-given-role
     parent: logs-restriction-queries
     generated: true
@@ -6310,7 +6310,7 @@ api:
         - v2
       order: 10
   - name: Create a restriction query
-    url: "#create-a-restriction-query"
+    url: '#create-a-restriction-query'
     identifier: create-a-restriction-query
     parent: logs-restriction-queries
     generated: true
@@ -6323,7 +6323,7 @@ api:
         - v2
       order: 2
   - name: List restriction queries
-    url: "#list-restriction-queries"
+    url: '#list-restriction-queries'
     identifier: list-restriction-queries
     parent: logs-restriction-queries
     generated: true
@@ -6340,7 +6340,7 @@ api:
     identifier: processes
     generated: true
   - name: Get all processes
-    url: "#get-all-processes"
+    url: '#get-all-processes'
     identifier: get-all-processes
     parent: processes
     generated: true
@@ -6356,7 +6356,7 @@ api:
     identifier: roles
     generated: true
   - name: Add a user to a role
-    url: "#add-a-user-to-a-role"
+    url: '#add-a-user-to-a-role'
     identifier: add-a-user-to-a-role
     parent: roles
     generated: true
@@ -6368,7 +6368,7 @@ api:
       unstable: []
       order: 10
   - name: Get all users of a role
-    url: "#get-all-users-of-a-role"
+    url: '#get-all-users-of-a-role'
     identifier: get-all-users-of-a-role
     parent: roles
     generated: true
@@ -6380,7 +6380,7 @@ api:
       unstable: []
       order: 9
   - name: Remove a user from a role
-    url: "#remove-a-user-from-a-role"
+    url: '#remove-a-user-from-a-role'
     identifier: remove-a-user-from-a-role
     parent: roles
     generated: true
@@ -6392,7 +6392,7 @@ api:
       unstable: []
       order: 11
   - name: Grant permission to a role
-    url: "#grant-permission-to-a-role"
+    url: '#grant-permission-to-a-role'
     identifier: grant-permission-to-a-role
     parent: roles
     generated: true
@@ -6404,7 +6404,7 @@ api:
       unstable: []
       order: 7
   - name: List permissions for a role
-    url: "#list-permissions-for-a-role"
+    url: '#list-permissions-for-a-role'
     identifier: list-permissions-for-a-role
     parent: roles
     generated: true
@@ -6416,7 +6416,7 @@ api:
       unstable: []
       order: 6
   - name: Revoke permission
-    url: "#revoke-permission"
+    url: '#revoke-permission'
     identifier: revoke-permission
     parent: roles
     generated: true
@@ -6428,7 +6428,7 @@ api:
       unstable: []
       order: 8
   - name: Update a role
-    url: "#update-a-role"
+    url: '#update-a-role'
     identifier: update-a-role
     parent: roles
     generated: true
@@ -6440,7 +6440,7 @@ api:
       unstable: []
       order: 4
   - name: Get a role
-    url: "#get-a-role"
+    url: '#get-a-role'
     identifier: get-a-role
     parent: roles
     generated: true
@@ -6452,7 +6452,7 @@ api:
       unstable: []
       order: 3
   - name: Delete role
-    url: "#delete-role"
+    url: '#delete-role'
     identifier: delete-role
     parent: roles
     generated: true
@@ -6464,7 +6464,7 @@ api:
       unstable: []
       order: 5
   - name: Create role
-    url: "#create-role"
+    url: '#create-role'
     identifier: create-role
     parent: roles
     generated: true
@@ -6476,7 +6476,7 @@ api:
       unstable: []
       order: 2
   - name: List roles
-    url: "#list-roles"
+    url: '#list-roles'
     identifier: list-roles
     parent: roles
     generated: true
@@ -6488,7 +6488,7 @@ api:
       unstable: []
       order: 1
   - name: List permissions
-    url: "#list-permissions"
+    url: '#list-permissions'
     identifier: list-permissions
     parent: roles
     generated: true
@@ -6504,7 +6504,7 @@ api:
     identifier: security-monitoring
     generated: true
   - name: Get a list of security signals
-    url: "#get-a-list-of-security-signals"
+    url: '#get-a-list-of-security-signals'
     identifier: get-a-list-of-security-signals
     parent: security-monitoring
     generated: true
@@ -6517,7 +6517,7 @@ api:
         - v2
       order: 6
   - name: Get a quick list of security signals
-    url: "#get-a-quick-list-of-security-signals"
+    url: '#get-a-quick-list-of-security-signals'
     identifier: get-a-quick-list-of-security-signals
     parent: security-monitoring
     generated: true
@@ -6530,7 +6530,7 @@ api:
         - v2
       order: 7
   - name: Update an existing rule
-    url: "#update-an-existing-rule"
+    url: '#update-an-existing-rule'
     identifier: update-an-existing-rule
     parent: security-monitoring
     generated: true
@@ -6542,7 +6542,7 @@ api:
       unstable: []
       order: 4
   - name: Get a rule's details
-    url: "#get-a-rules-details"
+    url: '#get-a-rules-details'
     identifier: get-a-rules-details
     parent: security-monitoring
     generated: true
@@ -6554,7 +6554,7 @@ api:
       unstable: []
       order: 3
   - name: Delete an existing rule
-    url: "#delete-an-existing-rule"
+    url: '#delete-an-existing-rule'
     identifier: delete-an-existing-rule
     parent: security-monitoring
     generated: true
@@ -6566,7 +6566,7 @@ api:
       unstable: []
       order: 5
   - name: Create a detection rule
-    url: "#create-a-detection-rule"
+    url: '#create-a-detection-rule'
     identifier: create-a-detection-rule
     parent: security-monitoring
     generated: true
@@ -6578,7 +6578,7 @@ api:
       unstable: []
       order: 2
   - name: List rules
-    url: "#list-rules"
+    url: '#list-rules'
     identifier: list-rules
     parent: security-monitoring
     generated: true
@@ -6590,7 +6590,7 @@ api:
       unstable: []
       order: 1
   - name: Update a security filter
-    url: "#update-a-security-filter"
+    url: '#update-a-security-filter'
     identifier: update-a-security-filter
     parent: security-monitoring
     generated: true
@@ -6602,7 +6602,7 @@ api:
       unstable: []
       order: 0
   - name: Get a security filter
-    url: "#get-a-security-filter"
+    url: '#get-a-security-filter'
     identifier: get-a-security-filter
     parent: security-monitoring
     generated: true
@@ -6614,7 +6614,7 @@ api:
       unstable: []
       order: 0
   - name: Delete a security filter
-    url: "#delete-a-security-filter"
+    url: '#delete-a-security-filter'
     identifier: delete-a-security-filter
     parent: security-monitoring
     generated: true
@@ -6626,7 +6626,7 @@ api:
       unstable: []
       order: 0
   - name: Create a security filter
-    url: "#create-a-security-filter"
+    url: '#create-a-security-filter'
     identifier: create-a-security-filter
     parent: security-monitoring
     generated: true
@@ -6638,7 +6638,7 @@ api:
       unstable: []
       order: 0
   - name: Get all security filters
-    url: "#get-all-security-filters"
+    url: '#get-all-security-filters'
     identifier: get-all-security-filters
     parent: security-monitoring
     generated: true
