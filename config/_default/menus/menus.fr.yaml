@@ -84,7 +84,7 @@ main_left:
   - identifier: alerts
     name: Alerts
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
-    url: "https://www.datadoghq.com/product/platform/alerts/"
+    url: "https://www.datadoghq.com/product/alerts/"
     weight: 14
     parent: product
   - identifier: api
@@ -3952,7 +3952,7 @@ footer_product:
     url: "https://www.datadoghq.com/product/serverless-monitoring/"
     weight: 140
   - name: Alertes
-    url: "https://www.datadoghq.com/product/platform/alerts/"
+    url: "https://www.datadoghq.com/product/alerts/"
     weight: 145
   - name: API
     url: api
@@ -3965,7 +3965,7 @@ footer_product_two:
     url: "https://www.datadoghq.com/product/serverless-monitoring/"
     weight: 140
   - name: Alertes
-    url: "https://www.datadoghq.com/product/platform/alerts/"
+    url: "https://www.datadoghq.com/product/alerts/"
     weight: 145
   - name: API
     url: api
