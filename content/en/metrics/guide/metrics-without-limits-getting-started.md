@@ -4,6 +4,8 @@ kind: guide
 is_beta: true
 ---
 
+<div class="alert alert-warning">This functionality is in private beta. To request access, contact your CSM or the <a href="url">Datadog Support team</a>.</div>
+
 ## Overview
 
 This guide covers how to get started with Metrics without Limits™ and quickly gain the most value from the feature. 
@@ -59,6 +61,6 @@ Here is a simplified example of how indexed greater than ingested can occur when
 
 
 [1]: /metrics/faq/metrics-without-limits/
-[2]: /TODO
+[2]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
 [3]: /account_management/rbac/permissions/?tab=ui#metrics
 [4]: /metrics/#time-and-space-aggregation
