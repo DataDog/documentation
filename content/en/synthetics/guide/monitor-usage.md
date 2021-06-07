@@ -31,7 +31,7 @@ To visualize or alert on your Synthetics usage, use the following queries:
 
 You can also scope or group these metrics by any tags associated with your test such as `team` or `application` for a higher level of refinement. 
 
-You can graph and monitor these metrics against static thresholds as well as machine learning based algorithms like [anomaly detection][5] or [forecast][6] to ensure you do not get alerted for expected usage growth.
+You can graph and monitor these metrics against static thresholds as well as use machine learning based algorithms like [anomaly detection][5] or [forecast][6] to ensure you do not get alerted for expected usage growth.
 
 ## Further Reading
 
