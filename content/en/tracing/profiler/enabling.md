@@ -273,11 +273,9 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace'
+    gem 'ddtrace', '>= 0.49.0'
     gem 'google-protobuf', '~> 3.0'
     ```
-
-    **Note**: Profiler is available in the `ddtrace` library for versions 0.49+.
 
 2. Install the gems with `bundle install`.
 
