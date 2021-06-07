@@ -128,7 +128,7 @@ When using **ddtrace-run**, the following [environment variable options][4] can 
 Enable debug logging in the tracer.
 
 `DATADOG_PATCH_MODULES`
-: Override the modules patched for this application execution. Follow the format: `PATCH_MODULES=module:patch,module:patch...`
+: Override the modules patched for this application execution. Follow the format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`
 
 It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][5] documentation for recommendations on how to configure these environment variables.
 
