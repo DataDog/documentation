@@ -35,7 +35,7 @@ col1:
     link: 'https://www.datadoghq.com/product/serverless-monitoring/'
     title: サーバーレス
   - name: alerts
-    link: 'https://www.datadoghq.com/product/platform/alerts/'
+    link: 'https://www.datadoghq.com/product/alerts/'
     title: アラート
 col2:
   - name: pricing
