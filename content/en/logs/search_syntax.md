@@ -58,22 +58,24 @@ To search for logs that contain `user=JaneDoe` in the message attribute use the 
 
 `user\=JaneDoe`
 
-### Facets search
+### Attributes search
 
-To search on a specific attribute, first [add it as a facet][2] and then add `@` to specify you are searching on a facet.
+To search on a specific attribute, add `@` to specify you are searching on an attribute.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
+For instance, if your attribute name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
 `@url:www.datadoghq.com`
 
 
 **Notes**:
 
-1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+1. It is **not** required to define a facet to search on attributes and tags.
 
-2. Searching for a facet value that contains special characters requires escaping or double quotes.
-For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
-To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
+2. Attributes searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+
+3. Searching for an attribute value that contains special characters requires escaping or double quotes.
+For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
+To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
 
 Examples:
 
@@ -93,7 +95,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
 
-Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
+Wildcard searches work within attributes and tags (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
 
 `service:*mongo`
 
@@ -105,11 +107,12 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 ### Search wildcard
 
-When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
+When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
 
 ## Numerical values
 
-Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
+In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`
 
@@ -136,6 +139,8 @@ You can add facets on arrays of strings or numbers. All values included in the a
 In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
+
+**Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 
 ## Saved searches
 
