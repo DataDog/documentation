@@ -33,13 +33,9 @@ Supported CI providers:
 * TravisCI
 * Bitrise
 
-## Prerequisites
-
-[Install the Datadog Agent to collect tests data][1].
-
 ## Installing the Swift testing SDK using SPM
 
-1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][2].
+1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
 2. Link your test targets with the library `DatadogSDKTesting` from the package. 
 
@@ -53,7 +49,7 @@ Supported CI providers:
 
 3. If you run UITests, also link the app running the tests with this library.
 
-    Alternatively, you can build the XCFramework from source code. Download the project at [dd-sdk-swift-testing][2] and run `make release`. The resulting framework `DatadogSDKTesting.xcframework` can be found at `./build/xcframework`.
+    Alternatively, you can build the XCFramework from source code. Download the project at [dd-sdk-swift-testing][1] and run `make release`. The resulting framework `DatadogSDKTesting.xcframework` can be found at `./build/xcframework`.
 
 ## Instrumenting your tests
 
@@ -370,5 +366,4 @@ You can also disable or enable specific auto-instrumentation in some of the test
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/setup_tests/agent/
-[2]: https://github.com/DataDog/dd-sdk-swift-testing
+[1]: https://github.com/DataDog/dd-sdk-swift-testing
