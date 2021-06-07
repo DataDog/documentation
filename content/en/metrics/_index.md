@@ -5,6 +5,8 @@ disable_sidebar: true
 aliases:
   - /graphing/metrics/
   - /metrics/introduction/
+  - /graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+  - /dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
 ---
 
 
