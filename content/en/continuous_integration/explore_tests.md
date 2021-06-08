@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests and letting you drill down into performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
+The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you drill down into performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
 
 ## Explore tests
 
@@ -20,7 +20,7 @@ The Tests page shows the _Branches_ view and the _Test Services_ view.
 
 The [Branches][2] view of the Tests page lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
 
-In this page, filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you) by enabling the **My branches** toggle and adding the email addresses you use in your Git configuration.
+In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you) by enabling the **My branches** toggle and adding the email addresses you use in your Git configuration.
 
 #### Test results
 
@@ -28,13 +28,13 @@ For each branch, the list shows test results for its latest commit: a consolidat
 
 #### Test suite performance
 
-There's also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which will be less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
+There's also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
 
 Hovering over the commit author avatar shows detailed information about the latest commit. 
 
 #### Drill down for more details
 
-Click on the row to see test suite run details showing information about test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
+Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
 
 Click into one of the test runs to see the test trace as a flame graph or a span list. The _Runs (n)_ list on the left lets you quickly access traces for each time the test has been run.
 
