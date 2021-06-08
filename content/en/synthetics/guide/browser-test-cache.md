@@ -14,7 +14,7 @@ further_reading:
 
 ---
 
-Browsers are killed after each test execution meaning there should not be any cache related issues on the client side.
+Browsers are killed after every test execution. This ensures your tests do not face cache related issues on the client side.
 
 ## Further Reading
 
