@@ -29,7 +29,7 @@ The pipeline execution list at the bottom shows all the times that pipeline (or 
 
 ### Explore connections to services, resources, logs, and network events
 
-Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The Executions (n) list on the left side gives you quick access to the data for each time the pipeline executed. 
+Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each time the pipeline executed. 
 
 Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to drill down to the Resource, Service, or Analytics page for the pipeline, stage, or job. You can also find complete tags information and links to related log events and network monitoring events.
 
