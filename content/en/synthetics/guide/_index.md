@@ -7,12 +7,12 @@ private: true
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Website uptime monitoring with SLOs{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-test-cache/" >}}Cache busting in Synthetic tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser Tests:" >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-test-cache/" >}}Avoiding cache issues in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
