@@ -43,7 +43,7 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
 </div>
 
-Define an anomaly detection rule when configuring a threshold isn't an option. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
+When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
 ## Define a Search Query
 
@@ -121,7 +121,7 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -191,13 +191,13 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ### Severity and notification
 
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
+Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
 In the “Notify” section, configure zero or more [notification targets][1].
 
 ### Time windows
 
-Datadog automatically detects the seasonality of the data and will generate a security signal once the data is determined to be anomalous.
+Datadog automatically detects the seasonality of the data and will generate a security signal when the data is determined to be anomalous.
 
 Once a signal is generated, the signal will remain "open" if the data remains anomalous and the last updated timestamp will be updated for the anomalous duration.
 
