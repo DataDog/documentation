@@ -17,7 +17,7 @@ Datadog Continuous Integration (CI) Visibility brings together information about
 
 CI Visibility brings CI metrics and data into Datadog dashboards so you can communicate the health of your CI environment and focus your efforts in improving your team's ability to deliver quality code every time.
 
-CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing development outages to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your tests, generating traces from your testing frameworks as they execute in CI. Similarly, Datadog integrates with CI providers to gather pipeline metrics to track performance and results from the moment a commit enters the pipeline till it's ready to be deployed. Use the data aggregated over time to track trends in performance of tests and builds and to identify what's most important to fix.
+CI Visibility helps you troubleshoot test failures and broken builds, connecting the most pressing development outages to the commits that caused them. With the same libraries you use to trace application performance with APM, you can instrument your tests, generating traces from your testing frameworks as they execute in CI. Similarly, Datadog integrates with CI providers to gather pipeline metrics to track performance and results from the moment a commit enters the pipeline until it is ready to be deployed. Use the data aggregated over time to track trends in performance of tests and builds and to identify what is most important to fix.
 
 ## Gain insights into your pipelines
 
