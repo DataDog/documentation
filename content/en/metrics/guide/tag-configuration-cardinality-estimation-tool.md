@@ -22,7 +22,7 @@ GET https://api.datadoghq.com/api/metric/estimate
 
 | Field                     | Type             | Description                                                                                                                                                                         |
 |---------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `metric_name` (*required) | string           | Name of the metric to estimate.                                                                                                                                                     |
+| `metric_name` (*required*) | string           | Name of the metric to estimate.                                                                                                                                                     |
 | `groups[]`                | lists of strings | Groups to include when estimating output of a timeseries.                                                                                                                           |
 | `hours_ago`               | intiger          | NEEDS DESCRIPTION. NEEDS RANGE. Default value is 49, values lower than 49 are unlikely to produce accurate results.                                                                 |
 | `timespan_h`              | intiger          | NEEDS DESCRIPTION. NEEDS RANGE. Default value is 6, and longer timespans gives a better estimate of how churn may impact a timeseries.                                              |
