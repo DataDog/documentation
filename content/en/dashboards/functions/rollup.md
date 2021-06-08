@@ -11,7 +11,7 @@ The `.rollup()` function is used to aggregate your metrics data inherently in ev
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
 
-**Note: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time/space (learn more [here][5]).
+**Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space (refer to the documentation on [rollup for distributions with percentiles][5] to learn more).
 
 The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `.rollup(<AGGREGATOR>,<INTERVAL>)` or `.rollup(<AGGREGATOR>)`.
 
