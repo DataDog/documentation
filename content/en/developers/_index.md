@@ -34,7 +34,7 @@ Developers have several choices for sending unsupported data to Datadog. The mai
     {{< nextlink href="/developers/integrations/" >}}<u>Integrations</u>: For more complex tasks, build a public or private Datadog integration. Public integrations can be shared with the community.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Types
+### Sending data by data types
 
 {{< whatsnext desc="Learn about the types of data you can submit to Datadog:" >}}
     {{< nextlink href="/developers/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
