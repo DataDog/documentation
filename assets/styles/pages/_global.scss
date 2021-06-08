@@ -343,14 +343,16 @@ h5 {
     margin-top: 14px;
 }
 
-.announcement_banner.open ~ .container .main {
-    h2,
-    h3,
-    h4,
-    h5 {
-        &:before {
-            margin-top: -110px;
-            height: 110px;
+.announcement {
+    .main {
+        h2,
+        h3,
+        h4,
+        h5 {
+            &:before {
+                margin-top: -110px;
+                height: 110px;
+            }
         }
     }
 }

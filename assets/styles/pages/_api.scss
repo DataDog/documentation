@@ -2,6 +2,12 @@
 $ddpurple: #632ca6;
 
 .announcement.api {
+    .main-api {
+        h2 {
+            margin-top: -175px;
+            padding-top: 175px;
+        }
+    }
     .api-toolbar {
         margin-top: 40px;
 
@@ -15,6 +21,10 @@ $ddpurple: #632ca6;
         @include media-breakpoint-up(lg) {
             margin-top: -20px;
         }
+
+        @include media-breakpoint-up(xl) {
+            margin-top: 30px;
+        }
     }
 
     .scrolled {
@@ -26,10 +36,6 @@ $ddpurple: #632ca6;
     }
 }
 
-.announcement ~ .container .main-api h2 {
-    margin-top: -175px;
-    padding-top: 175px;
-}
 
 .main-api {
     margin-bottom: 160px;
@@ -113,29 +119,6 @@ $ddpurple: #632ca6;
 }
 
 .api {
-    // These are temporary fixes until we refactor the announcement banner.
-    .announcement_banner.open ~ .container {
-        padding-top: 40px;
-
-        @include media-breakpoint-up(lg) {
-            padding-top: 0px;
-            margin-top: -20px;
-        }
-
-        @include media-breakpoint-up(xl) {
-            padding-top: 30px;
-            margin-top: 0;
-        }
-    }
-
-    .announcement_banner ~ .container {
-        padding-top: 20px;
-
-        @media (min-width: 992px) {
-            padding-top: 0px;
-        }
-    }
-
     .api-toolbar {
         font-weight: 600;
         height: auto;
