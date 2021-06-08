@@ -5,7 +5,7 @@ kind: guide
 
 _Flaky tests_ are tests that exhibit both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the test passes, that test is unreliable as proof of quality code. 
 
-Flaky tests introduce risk and unpredictability into your CI system and into your end product. Knowing which tests are flaky is left to institutional knowledge, developers lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
+Flaky tests introduce risk and unpredictability into your CI system and into your end product. When people have to remember which tests are flaky, they lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
 
 Go to the Test Service page to see the _Flaky Tests_ table for a given test service and branch. You can see all of the tests that are flaky in the time frame you have selected.
 
