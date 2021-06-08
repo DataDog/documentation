@@ -70,7 +70,7 @@ Configure the Jenkins plugin to send job logs to the Agent:
 
 3. Restart Jenkins for the changes to take effect.
 
-**Note**: Do not use the Jenkins UI interface to activate logs collection, as trace collection might be disabled when saving settings using the UI.
+**Note**: Do not use the Jenkins web GUI to activate logs collection, as trace collection might be disabled when saving settings using the GUI.
 
 
 ## Set the default branch name
@@ -148,13 +148,13 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 
 3. Restart Jenkins for the changes to take effect.
 
-**Note**: Do not use the Jenkins UI interface to configure global tags, as trace collection might be disabled when saving settings using the UI.
+**Note**: Do not use the Jenkins GUI to configure global tags, as trace collection might be disabled when saving settings using the GUI.
 
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, both [Pipelines][6] and [Pipeline Executions][7] pages will start populating with data after pipelines finish.
 
-Note that the Pipelines page shows data for only the default branch of each repository.
+**Note**: The Pipelines page shows data for only the default branch of each repository.
 
 
 ## Further reading

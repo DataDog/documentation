@@ -1,5 +1,5 @@
 ---
-title: Setup Tracing on a Gitlab Pipeline
+title: Setup Tracing on a GitLab Pipeline
 kind: documentation
 further_reading:
     - link: "/continuous_integration/explore_pipelines"
@@ -44,7 +44,7 @@ Test the integration with the *Test settings* button. After it's successful, cli
 
 As an alternative to using the native Datadog integration, you can use [webhooks][7] to send pipeline data to Datadog.
 
-**Note**: The native Datadog integration is the recommended approach and the one that will have active development. Use webhooks only if the native Datadog integration option is not available to you (for example, having an older GitLab version and you're not able to upgrade).
+**Note**: The native Datadog integration is the recommended approach and the one that is actively under development. Use webhooks only if the native Datadog integration option is not available to you (for example, you have an older GitLab version and you're not able to upgrade).
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 * **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v1/input/<API_KEY>` where `<API_KEY>` is available [here][6].
@@ -57,7 +57,7 @@ To set custom `env` or `service` parameters, use query parameters in the webhook
 
 After the integration is successfully configured, both [Pipelines][8] and [Pipeline Executions][9] pages will start populating with data after pipelines finish.
 
-Note that the Pipelines page shows data for only the default branch of each repository.
+**Note**: The Pipelines page shows data for only the default branch of each repository.
 
 
 ## Further reading
