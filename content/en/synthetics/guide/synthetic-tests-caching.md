@@ -17,6 +17,8 @@ Browsers are killed after every test execution. This ensures your Browser tests 
 
 ## API tests
 
+### HTTP tests
+
 You can leverage [local variables][1] to generate a random string to send with your payload and perform cache busting on your API tests.
 
 ## Further Reading
