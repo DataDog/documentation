@@ -12,7 +12,7 @@ further_reading:
 
 ## Prerequisite
 
-Install the [Datadog Agent][1] on the Jenkins master instance.
+Install the [Datadog Agent][1] on the Jenkins controller instance.
 
 ## Install the Datadog Jenkins plugin
 
@@ -83,7 +83,7 @@ If this happens, set the default branch manually using the `DD_GIT_DEFAULT_BRANC
 pipeline {
     agent any
     environment {
-        DD_GIT_DEFAULT_BRANCH = 'master'
+        DD_GIT_DEFAULT_BRANCH = 'main'
         ...
     }
     stages {
@@ -141,10 +141,10 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
     ```
 
     Global tags (`globalTags`)
-    : A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the master Jenkins instance.
+    : A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance.
 
     Global job tags (`globalJobTags`)
-    : A comma-separated list of regex to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the master Jenkins instance. Tags can reference match groups in the regex using the `$` symbol.
+    : A comma-separated list of regex to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.
 
 3. Restart Jenkins for the changes to take effect.
 
