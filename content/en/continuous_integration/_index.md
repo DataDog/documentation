@@ -10,7 +10,7 @@ further_reading:
       text: "Start exploring tests data to find and fix problem tests"
 ---
 
-<div class="alert alert-info"><p>CI Visibility is in private beta. There are no billing implications for tracing pipelines and tests during this period. If you want to be added to the private beta, <a href="http://dtdg.co/ci-visibility-beta-request">fill out this form</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
+<div class="alert alert-info"><p>CI Visibility is in private beta. There are no billing implications for tracing pipelines and tests during this period. If you want to be added to the private beta, <a href="https://app.datadoghq.com/ci/getting-started">sign up on the CI Visibility in-app Getting Started</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
 </div>
 
 Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, to monitor trends in test suite execution times, or to see the effect a given commit has on the pipeline, it also gives build engineers visibility into cross-organization CI health and trends in pipeline performance over time. 
@@ -41,7 +41,7 @@ If you're a developer, the Tests and Test Runs pages provide you with two kinds 
     - See what tests are failing and why. 
     - See your last commit's test results. 
     - View the wall time of your tests in your feature branch and compare it to the default branch, to identify if you're about to introduce a performance regression. 
-    - See what tests you should improve because they're flaky (passing and failing on the same commit).
+    - Find out if your commit introduces a new flaky test that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
 
 - High-level accumulation and trends: 
     - See the effects that changed code, added tests, and increased complexity have on your test suite performance over time. 
