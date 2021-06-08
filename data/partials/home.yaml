@@ -35,7 +35,7 @@ nav_sections:
       - title: Infrastructure
         link: infrastructure/
         icon: host-map.svg
-        desc: Track of your hosts, containers, processes, and serverless functions
+        desc: Track your hosts, containers, processes, and serverless functions
       - title: Metrics
         link: metrics/
         icon: metric.svg
@@ -80,6 +80,10 @@ nav_sections:
         link: watchdog/
         icon: watchdog.svg
         desc: Automatically see trends in your applications & infrastructure metrics
+      - title: CI Visibility 
+        link: continuous_integration/
+        icon: ci.svg
+        desc: Track the performance and reliability of your tests and pipelines
   - nav_section:
     - name: 'Configuration'
     - navtiles:
