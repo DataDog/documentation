@@ -25,7 +25,7 @@ Synthetic tests come with [estimated usage metrics][1] that allow you to keep tr
 
 To visualize or alert on your Synthetics usage, use the following queries:
 
-* [Single][2] and [Multistep API tests][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count().`
+* [Single][2] and [Multistep API tests][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 
 * [Browser tests][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
 
