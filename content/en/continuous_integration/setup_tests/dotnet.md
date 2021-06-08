@@ -59,7 +59,7 @@ To instrument your test suite, prefix your test command with `dd-trace`. For exa
 dd-trace dotnet test
 ```
 
-All tests will be instrumented automatically.
+All tests are instrumented automatically.
 
 ### Configuration settings
 
