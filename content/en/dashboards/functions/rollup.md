@@ -73,4 +73,4 @@ Rollups should usually be avoided in [monitor][4] queries, because of the possib
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [3]: /developers/metrics/type_modifiers/
 [4]: /monitors/monitor_types/metric/
-[5]: /metrics/faq/rollup-update-for-distributions-with-percentiles/
+[5]: /metrics/faq/rollup-for-distributions-with-percentiles/
