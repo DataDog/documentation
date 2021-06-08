@@ -17,7 +17,7 @@ The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `
 
 | Parameter  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
-| `<AGGREGATOR>` | Can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within a given time interval. |
+| `<AGGREGATOR>` | Can be `sum`, `min`, `max`, `count`, or `avg` and defines how data points are aggregated within a given time interval. |
 | `<INTERVAL>`   | Time (in seconds) of the interval between two data points displayed. Optional.                                            |
 
 You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
