@@ -36,7 +36,7 @@ Developers have several choices for sending unsupported data to Datadog. The mai
 
 ### Sending data by data types
 
-{{< whatsnext desc="Learn about the types of data you can submit to Datadog:" >}}
+{{< whatsnext desc="Learn about the types of data you can submit to Datadog and how to submit them:" >}}
     {{< nextlink href="/developers/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/events" >}}<u>Events</u>: Explore how to submit events to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Service Checks</u>: Explore how to submit service checks to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}
