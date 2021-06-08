@@ -2,10 +2,13 @@ $ddpurple: #632ca6;
 $highlightcolor: rgba(120, 71, 166, 0.15);
 
 body > header.scrolled ~ .container .mobile-toc-toggle {
-    top: 100px;
+    top: 110px;
 }
-.announcement_banner.open ~ .container .mobile-toc-toggle {
-    top: 130px;
+
+.announcement {
+    .mobile-toc-toggle {
+        top: 130px;
+    }
 }
 
 .mobile-toc-toggle {
@@ -209,11 +212,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
             }
         }
     }
-}
-
-// Mobile TOC
-.announcement_banner.open ~ .container .toc-container-mobile .toc {
-    padding-top: 90px;
 }
 
 .toc-container-mobile {
