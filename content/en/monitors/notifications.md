@@ -182,7 +182,7 @@ Log monitors can use facets as variables if the monitor is grouped by the facets
 For example, if your log monitor is grouped by the `facet`, the variable is:
 
 ```text
-{{ facet.name }}
+{{ @facet.name }}
 ```
 **Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
 
