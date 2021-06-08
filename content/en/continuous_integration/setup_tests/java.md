@@ -109,7 +109,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
 
 Run your tests using the `ci-app` profile, for example:
 ```
-mvn clean verify -Pci-app
+mvn clean verify -P ci-app
 ```
 ### Using Gradle
 
