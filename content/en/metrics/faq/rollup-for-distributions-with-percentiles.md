@@ -24,7 +24,7 @@ You’ll no longer need to specify an additional time aggregator (i.e. `.rollup(
 {{< img src="metrics/faq/rollup-for-distributions-with-percentiles/new-rollup-distUI.jpg" alt="New Rollup UI">}}
 
 ## Why can’t I specify a rollup/time aggregator anymore on distribution with  percentiles?
-The rollup `<aggregator>` parameter has no effect on distribution metrics queried with percentiles. That is, these two queries would both return the same p99 values calculated over one minute rollup intervals. 
+The rollup `<aggregator>` parameter has no effect on distribution metrics queried with percentiles. That is, these two queries would both return the same 99th percentile value calculated over one-minute rollup intervals. 
 Query #1: `p99:distribution.rollup(avg, 60)`
 Query #2: `p99:distribution.rollup(60)`
 
@@ -32,5 +32,4 @@ Unlike COUNT, GAUGE, RATE metric types which aggregate first in time and then in
 
 _Example: Suppose you’re graphing on a dashboard timeframe of the Past 4 hours, p99:distribution.rollup(60)_
 Datadog merges the sketch data server-side to represent a rollup interval of a minute (for every minute within the dashboard timeframe of 4 hours) and calculates server-side a p99 value for each minute interval.
-
 
