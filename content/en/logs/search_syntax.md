@@ -111,7 +111,7 @@ When searching for an attribute or tag value that contains special characters or
 
 ## Numerical values
 
-In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+To search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
 For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`

@@ -31,7 +31,7 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][27], [metric generation][10] from logs or [archive][9] forwarding or [rehydration][26]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][27], [metric generation][10] from logs, [archive][9] forwarding, or [rehydration][26]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
 ### Qualitative facets
 #### Dimensions
@@ -40,9 +40,9 @@ Use qualitative facets when you need:
 
 - To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][15] web access logs, enriched with the Datadog [GeoIP Processor][16].
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][17] logs to know how many users connect every day to your website.
-- To regularly **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging, or production environments.
+- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging, or production environments.
 
-**Note**: Although it is not required to create a facet to filter on an attribute value, defining one on the attributes regularly used during investigations can help reduce your time to resolution.
+**Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
 
 #### Types
 
