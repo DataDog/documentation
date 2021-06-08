@@ -24,8 +24,8 @@ GET https://api.datadoghq.com/api/metric/estimate
 |---------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `metric_name` (*required*) | string           | Name of the metric to estimate.                                                                                                                                                     |
 | `groups[]`                | lists of strings | Groups to include when estimating output of a timeseries.                                                                                                                           |
-| `hours_ago`               | intiger          | NEEDS DESCRIPTION. NEEDS RANGE. Default value is 49, values lower than 49 are unlikely to produce accurate results.                                                                 |
-| `timespan_h`              | intiger          | NEEDS DESCRIPTION. NEEDS RANGE. Default value is 6, and longer timespans gives a better estimate of how churn may impact a timeseries.                                              |
+| `hours_ago`               | intiger          | The number of hours to go back to get historical data. Default value is 49, values lower than 49 are unlikely to produce accurate results.                                                                 |
+| `timespan_h`              | intiger          | The number of hours before the `hours_ago` value to track. Datadog recommends a one hour time span.                                           |
 | `pct`                     | boolean          | Calculates the number of percentile output series instead of distribution, count or gauge. Defaults to `false`. Only works for distribution metrics, otherwise it returns an error. |
 
 ### Example
