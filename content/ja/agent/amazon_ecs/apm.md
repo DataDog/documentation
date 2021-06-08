@@ -16,43 +16,56 @@ further_reading:
 1. `gcr.io/datadoghq/agent` コンテナのタスク定義で次のパラメーターを設定します。`portMappings` ホスト / コンテナポートを `8126`（プロトコルは `tcp`）に設定します。
 
     {{< code-block lang="json" >}}
-    containerDefinitions": [
-    {
-      "name": "datadog-agent",
-      "image": "gcr.io/datadoghq/agent:latest",
-      "cpu": 10,
-      "memory": 256,
-      "essential": true,
-      "portMappings": [
-        {
-          "hostPort": 8126,
-          "protocol": "tcp",
-          "containerPort": 8126
-        }
-      ],
+containerDefinitions": [
+  {
+    "name": "datadog-agent",
+    "image": "gcr.io/datadoghq/agent:latest",
+    "cpu": 100,
+    "memory": 256,
+    "essential": true,
+    "portMappings": [
+      {
+        "hostPort": 8126,
+        "protocol": "tcp",
+        "containerPort": 8126
+      }
+    ],
+    ...
+  {{< /code-block >}}
+
+    {{< site-region region="us3,eu,gov" >}} 
+  Agent が正しい Datadog ロケーションにデータを送信できるよう、`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} の場合に以下の環境変数を設定します。
+
+  ```json
+  "environment": [
+       ...
+     {
+       "name": "DD_SITE",
+       "value": "<DATADOG_SITE>"
+     },
+     ...
+     ]
+   ...
+  ```
+  {{< /site-region >}}
+  **Agent v7.17 以下**の場合、以下の環境変数を追加します。
+   ```json
+   "environment": [
+        ...
+      {
+        "name": "DD_APM_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "DD_APM_NON_LOCAL_TRAFFIC",
+        "value": "true"
+      },
       ...
-    {{< /code-block >}}
+      ]
+   ...
+   ```
 
-    **Agent v7.17 以下**の場合、以下の環境変数を追加します。
-
-    {{< code-block lang="json" >}}
-    ...
-          "environment": [
-            ...
-          {
-            "name": "DD_APM_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_APM_NON_LOCAL_TRAFFIC",
-            "value": "true"
-          },
-          ...
-          ]
-    ...
-    {{< /code-block >}}
-
-    [Agent トレースの収集に使用できるすべての環境変数を参照してください][1]。
+   [Agent のトレースコレクションで利用可能なすべての環境変数はこちらをご覧ください][1]。
 
 2. アプリケーションコンテナでコンテナが実行されている基底の各インスタンスのプライベート IP アドレスを `DD_AGENT_HOST` 環境変数に割り当てます。これにより、アプリケーショントレースを Agent に送信できます。
 
@@ -93,8 +106,9 @@ os.environ['DD_AGENT_HOST'] = <EC2_PRIVATE_IP>
 
 ECS アプリケーションの変数が起動時に設定される場合は、`DD_AGENT_HOST` を使ってホスト名を環境変数として設定する**必要があります**。あるいは、Python、JavaScript、Ruby の場合は対象のホスト名をアプリケーションのソースコード内で設定することも可能です。Java と .NET の場合は、ECS タスクでホスト名を設定できます。たとえば、以下のとおりです。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,nodeJS,ruby,go,java,.NET,PHP" >}}
+
+{{< programming-lang lang="python" >}}
 
 ```python
 import requests
@@ -111,10 +125,11 @@ tracer.configure(hostname=get_aws_ip())
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
 
-[1]: https://docs.datadoghq.com/ja/tracing/setup/python/#change-agent-hostname
-{{% /tab %}}
 
-{{% tab "Node.js" %}}
+[1]: https://docs.datadoghq.com/ja/tracing/setup/python/#change-agent-hostname
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
 
 ```javascript
 const tracer = require('dd-trace').init();
@@ -128,10 +143,11 @@ const axios = require('axios');
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
-[1]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/#change-agent-hostname
-{{% /tab %}}
 
-{{% tab "Ruby" %}}
+[1]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/#change-agent-hostname
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
 
 ```ruby
 require 'ddtrace'
@@ -142,9 +158,9 @@ Datadog.configure do |c|
 end
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Go" %}}
+{{< programming-lang lang="go" >}}
 
 ```go
 package main
@@ -166,9 +182,9 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
         defer tracer.Stop()
 ```
 
-{{% /tab %}}
+{{< /programming-lang >}}
 
-{{% tab "Java" %}}
+{{< programming-lang lang="java" >}}
 
 このスクリプトを ECS タスク定義の `entryPoint` フィールドにコピーし、アプリケーション jar および引数フラグで値を更新します。
 
@@ -182,10 +198,11 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
-[1]: https://docs.datadoghq.com/ja/tracing/setup/java/#change-agent-hostname
-{{% /tab %}}
 
-{{% tab ".NET" %}}
+[1]: https://docs.datadoghq.com/ja/tracing/setup/java/#change-agent-hostname
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
 
 ```json
 "entryPoint": [
@@ -195,8 +212,9 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 ]
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
 
 ```json
 "entryPoint": [
@@ -229,9 +247,11 @@ env[DD_VERSION] = $DD_VERSION
 ```
 
 
+
 [1]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 ## その他の参考資料
 
