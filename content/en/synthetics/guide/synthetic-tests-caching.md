@@ -8,7 +8,6 @@ further_reading:
     - link: '/synthetics/api_tests/http_tests'
       tag: 'Documentation'
       text: 'Configure an HTTP test'
-      text: 'Best practices for creating end-to-end tests'
 
 ---
 
