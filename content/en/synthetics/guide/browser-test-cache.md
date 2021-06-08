@@ -14,7 +14,13 @@ further_reading:
 
 ---
 
-Browsers are killed after every test execution. This ensures your tests do not face cache related issues on the client side.
+## Browser tests
+
+Browsers are killed after every test execution. This ensures your browser tests do not face cache related issues on the client side.
+
+## API tests
+
+You can leverage unique [local variables][1] to perform cache busting on your API tests.
 
 ## Further Reading
 
