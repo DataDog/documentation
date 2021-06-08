@@ -5,7 +5,7 @@ further_reading:
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Configure a Browser Test'
-    - link: '/synthetics/browser_tests/actions'
+    - link: '/synthetics/api_tests/http_tests'
       tag: 'Documentation'
       text: 'Create Browser Test Steps'
     - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
