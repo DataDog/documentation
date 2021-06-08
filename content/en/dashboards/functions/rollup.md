@@ -6,7 +6,7 @@ aliases:
 ---
 
 `.rollup()`
-.rollup is used to aggregate your metrics data inherently in every metrics query. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides our defaults. This function enables you to define:
+The `.rollup()` function is used to aggregate your metrics data inherently in every metrics query. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides our defaults. This function enables you to define:
 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
