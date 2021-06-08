@@ -44,7 +44,7 @@ See the [Ruby tracer installation docs][2] for more details.
 
 ## Instrumenting your Cucumber tests
 
-Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
+The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
 
 To activate your integration:
 
@@ -76,7 +76,7 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 | --- | ----------- | ------- |
 | `enabled` | Specifies whether Cucumber tests should be traced. Useful for temporarily disabling tracing. `true` or `false` | `true` |
 | `service_name` | Specifies the service name used for `cucumber` instrumentation. | `'cucumber'` |
-| `operation_name` | Specifies an operation name used for `cucumber` instrumentation. Useful if you want rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'cucumber.test'` |
+| `operation_name` | Specifies an operation name used for `cucumber` instrumentation. Useful if you want to rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'cucumber.test'` |
 
 
 See also the [Ruby trace library documentation for Cucumber][3].
@@ -84,7 +84,7 @@ See also the [Ruby trace library documentation for Cucumber][3].
 
 ## Instrumenting your RSpec tests
 
-RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
+The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
 
 To activate your integration, add this to the `spec_helper.rb` file:
 
@@ -105,7 +105,7 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 | --- | ----------- | ------- |
 | `enabled` | Specifies whether RSpec tests should be traced. Useful for temporarily disabling tracing. `true` or `false` | `true` |
 | `service_name` | Specifies the service name used for `rspec` instrumentation. | `'rspec'` |
-| `operation_name` | Specifies an operation name used for `rspec` instrumentation. Useful if you want rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'rspec.example'` |
+| `operation_name` | Specifies an operation name used for `rspec` instrumentation. Useful if you want to rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'rspec.example'` |
 
 See also the [Ruby trace library documentation for RSpec][4].
 

@@ -1,5 +1,5 @@
 ---
-title: Continuous Integration Visibility
+title: Uploading JUnit test report files to Datadog
 kind: documentation
 further_reading:
     - link: "/continuous_integration/explore_tests"
@@ -77,13 +77,13 @@ Configure the `junit` command with following environment variables:
 : The environment you want your test results to appear in.
 
 `DD_SERVICE`
-: If you haven't specified a service through `--service`, you can do it with this env var.
+: If you haven't specified a service through `--service`, you can do it with this environment variable.
 
 `DD_TAGS`
 : Global tags to be applied to all spans in the format `key1:value1,key2:value2`. The resulting dictionary is merged with the content of the `--tags` parameter. If a `key` appears both in `--tags` and `DD_TAGS`, the value in `DD_TAGS` takes precedence.
 
 `DATADOG_SITE`
-: The Datadog site to upload to, for example `datadoghq.com` or `datadoghq.eu`.
+: The Datadog site to upload to. For example, `datadoghq.com` or `datadoghq.eu`.
 
 ## Optional dependencies
 

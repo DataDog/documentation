@@ -37,7 +37,7 @@ Supported CI providers:
 
 ### Using Maven
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible via [Maven Repository][2]: 
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]: 
 
 ```xml
 <profile>
@@ -144,7 +144,7 @@ Additionally, set the tracer prioritization type to `EnsureTrace` to avoid dropp
 |--------------------------|--------------------------|------------|-------------------------------------------------------------------|
 | `dd.prioritization.type` | `DD_PRIORITIZATION_TYPE` | `FAST_LANE` | Set to `ENSURE_TRACE` to avoid dropping tests spans by the tracer. |
 
-All [Datadog tracer configuration][5] options can be used to during test phase.
+All [Datadog tracer configuration][5] options can be used during the test phase.
 
 ### Recommended configuration
 
