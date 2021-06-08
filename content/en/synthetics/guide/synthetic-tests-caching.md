@@ -26,3 +26,4 @@ You can leverage [local variables][1] to generate a random string to send with y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/api_tests/http_tests?tab=requestoptions#create-local-variables
+[2]: /synthetics/api_tests/http_tests
