@@ -6,20 +6,19 @@ aliases:
 ---
 
 `.rollup()`
+.rollup is used to aggregate your metrics data inherently in every metrics query. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides our defaults. This function enables you to define:
 
-*Recommended for expert users only.*
+* The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
+* The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
 
-Appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1], i.e. this function enables you to define:
+**Note: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time/space (learn more [here][5]).
 
-* The time intervals for a given graph  ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
-* How data points are aggregated within a given time interval.
-
-The function takes two parameters, `<METHOD>` and optionally `<TIME>`: `.rollup(<METHOD>,<TIME>)` or `.rollup(<METHOD>)`.
+The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `.rollup(<AGGREGATOR>,<INTERVAL>)` or `.rollup(<AGGREGATOR>)`.
 
 | Parameter  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
-| `<METHOD>` | Can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within a given time interval. |
-| `<TIME>`   | Time (in seconds) of the interval between two data points displayed. Optional.                                            |
+| `<AGGREGATOR>` | Can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within a given time interval. |
+| `<INTERVAL>`   | Time (in seconds) of the interval between two data points displayed. Optional.                                            |
 
 You can use them individually or together, for instance `.rollup(sum,120)`. The following bar graph displays a week's worth of CPU usage for a host **without** using the `.rollup()` function:
 
@@ -34,10 +33,10 @@ The following bar graph displays the same metric, graphed using a day-long rollu
 
 | Function        | Description                                    | Example |
 |------------------|------------------------------------------------|------------------|
-| `moving_rollup` | Rollup to combine the points in the last X seconds. | `moving_rollup(<METRIC_NAME>, <TIME> , <METHOD>)` |
+| `moving_rollup` | Rollup to combine the points in the last X seconds. | `moving_rollup(<METRIC_NAME>, <INTERVAL> , <AGGREGATOR>)` |
 
 
-Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range—that is, the last X seconds. Like with `.rollup()`, `<METHOD>` can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within the given time interval.
+Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range—that is, the last X seconds. Like with `.rollup()`, `<AGGREGATOR>` can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within the given time interval.
 
 ## Rollup interval: enforced vs custom
 
@@ -74,3 +73,4 @@ Rollups should usually be avoided in [monitor][4] queries, because of the possib
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [3]: /developers/metrics/type_modifiers/
 [4]: /monitors/monitor_types/metric/
+[5]: /metrics/faq/rollup-update-for-distributions-with-percentiles/
