@@ -29,7 +29,7 @@ To visualize or alert on your Synthetics usage, use the following queries:
 
 * [Browser tests][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
 
-You can also scope or group these metrics by any tags associated with your test such as `team` or `application` for a higher level of refinement. 
+For a higher level of refinement, scope or group these metrics by tags associated with your test, such as `team` or `application`. 
 
 You can graph and monitor these metrics against static thresholds as well as use machine learning based algorithms like [anomaly detection][5] or [forecast][6] to ensure you do not get alerted for expected usage growth.
 
