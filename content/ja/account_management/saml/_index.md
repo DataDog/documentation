@@ -101,7 +101,7 @@ IdP が基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を
 
   1. <mrk mid="59" mtype="seg">**eduPersonPrincipalName**:</mrk> <mrk mid="60" mtype="seg">IdP は、属性の名前を `urn:mace:dir:attribute-def:eduPersonPrincipalName` に設定します。</mrk>
   2. <mrk mid="61" mtype="seg">**sn**:</mrk> <mrk mid="62" mtype="seg">IdP は、属性の名前を `urn:mace:dir:attribute-def:sn` に設定します。</mrk>
-  3. <mrk mid="63" mtype="seg">**givenName**:</mrk> <mrk mid="64" mtype="seg">IdP は、属性の名前を `urn:mace:dir:attribute-def:eduPersonPrincipalName` に設定します。</mrk>
+  3. <mrk mid="63" mtype="seg">**givenName**:</mrk> <mrk mid="64" mtype="seg">IdP は、属性の名前を `urn:mace:dir:attribute-def:givenName` に設定します。</mrk>
 
 <mrk mid="65" mtype="seg">**eduPersonPrincipalName** が AttributeStatement にある場合は、この属性の値がユーザー名として使用されます。</mrk><mrk mid="66" mtype="seg">**eduPersonPrincipalName** が AttributeStatement にない場合、ユーザー名は Subject の NameID から取得されます。</mrk><mrk mid="67" mtype="seg">NameID は、Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` を使用する必要があります。</mrk>
 
