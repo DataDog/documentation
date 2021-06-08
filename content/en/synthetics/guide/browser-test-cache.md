@@ -19,3 +19,5 @@ Browsers are killed after every test execution. This ensures your tests do not f
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/api_tests/http_tests?tab=requestoptions#create-local-variables
