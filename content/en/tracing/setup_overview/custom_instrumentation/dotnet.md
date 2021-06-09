@@ -21,7 +21,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
       tag: 'GitHub'
-      text: 'Examples of custom instrumentation'
+      text: '.NET code samples'
 ---
 <div class="alert alert-info">
 For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET setup instructions</a>.
