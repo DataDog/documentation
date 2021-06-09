@@ -40,6 +40,8 @@ To add the Datadog tracing library to your Node.js applications, follow these st
 npm install dd-trace --save
 ```
 
+**Note:** If you are using Node 8 or Node 10, this installation will fail.  Instead, use either `npm install dd-trace@latest-node8` or `npm install dd-trace@latest-node10` to supported tracer for these Node.js runtimes.
+
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
    Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm step 2 has been correctly done**.  The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
