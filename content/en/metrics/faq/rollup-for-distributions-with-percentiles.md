@@ -18,10 +18,10 @@ No - your existing queries are unaffected. The `.rollup <aggregator>` parameter 
 You no longer need to specify an additional time aggregator (i.e. `.rollup(avg)`) when you’ve already selected `p50`, `p75`, `p90`, `p95`, or `p99`. You only need to specify a rollup `<time interval>` which determines the interval of time your data is aggregated over. 
 
 **Old UI**
-{{< img src="metrics/faq/rollup-for-distributions-with-percentiles/old-rollup-distUI.jpg" alt="Old Rollup UI">}}
+{{< img src="metrics/faq/old-rollup-distUI.jpg" alt="Old Rollup UI">}}
 
 **New UI**
-{{< img src="metrics/faq/rollup-for-distributions-with-percentiles/new-rollup-distUI.jpg" alt="New Rollup UI">}}
+{{< img src="metrics/faq/new-rollup-distUI.jpg" alt="New Rollup UI">}}
 
 ## Why can’t I specify a rollup/time aggregator anymore on distribution with  percentiles?
 The rollup `<aggregator>` parameter has no effect on distribution metrics queried with percentiles. That is, these two queries would both return the same 99th percentile value calculated over one-minute rollup intervals. 
