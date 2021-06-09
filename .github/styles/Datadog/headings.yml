@@ -6,9 +6,11 @@ scope: heading
 match: $sentence
 exceptions:
   - ACLs
+  - ActiveMQ XML Integration
   - Agent
   - Agentless
   - Agents
+  - Airflow
   - Amazon
   - Amazon Web Services
   - APIs
@@ -24,6 +26,7 @@ exceptions:
   - Azure Event Hub
   - CakePHP
   - Cassandra Nodetool
+  - Cassandra Nodetool Integration
   - CentOS
   - Chef
   - Clipboard
@@ -40,6 +43,7 @@ exceptions:
   - Datadog for Government
   - Datadog Forwarder
   - Datadog Operator
+  - DatadogHook
   - Debian
   - Detection Rules
   - Docker
@@ -49,18 +53,25 @@ exceptions:
   - Envoy
   - Fargate
   - FastCGI
+  - Fluent Bit
   - Fluentd
+  - FireLens
   - FreeBSD
   - FreeSwitch
   - Further Reading
   - GeoIP
   - GitHub
+  - Gitlab Runner Integration
   - Google
   - Google Analytics
   - Google Cloud
   - Google Cloud Functions
   - GraphQL
+  - Gunicorn
   - HAProxy
+  - HDFS DataNode Integration
+  - HDFS NameNode Integration
+  - Helm
   - HostPort
   - I
   - IdP
@@ -76,6 +87,7 @@ exceptions:
   - JMXFetch
   - Journald
   - Kafka
+  - Kafka Consumer Integration
   - Kubernetes
   - Kubernetes Pod
   - Lambda
@@ -91,6 +103,8 @@ exceptions:
   - Log Rehydration
   - Logback
   - macOS
+  - MarkLogic
+  - Mesos Slave Integration
   - Metrics Explorer
   - Metrics without Limits
   - MongoDB
@@ -98,21 +112,30 @@ exceptions:
   - Network Address Translation
   - Network Device Monitoring
   - Network Performance Monitoring
+  - NGINX Plus
   - NixOS
   - Node
   - Notebook
   - Notebook List
   - npm
+  - NXLog
   - OkHttp
   - OneLogin
+  - OpenLDAP
   - OpenMetrics
+  - OpenShift
   - openSUSE
+  - OpenStack
   - OpenTelemetry
   - OpenTracing
   - OpenVPN
   - OpsWorks
+  - Oracle Instant Client
   - Phusion Passenger
+  - Postgres
+  - PowerDNS
   - Prometheus
+  - Prometheus Alertmanager
   - Puppet
   - Python
   - RabbitMQ
@@ -120,6 +143,7 @@ exceptions:
   - Real User Monitoring
   - Red Hat
   - Redis
+  - ReplicaSet
   - RocketPants
   - Root Cause Analysis
   - Route53
@@ -144,7 +168,11 @@ exceptions:
   - StackStorm
   - StatsD
   - sysOID
+  - System Core
+  - System Swap
+  - Teamcity
   - Terraform
+  - TokuMX
   - Tracing Without Limits
   - Trello
   - TypeScript
@@ -154,6 +182,8 @@ exceptions:
   - Unix Domain Socket
   - URLs
   - User Datagram Protocol
+  - Varnish
+  - Vertica
   - VMWare
   - vSphere
   - Watchdog
@@ -161,3 +191,4 @@ exceptions:
   - Webhook
   - WildFly
   - Windows
+  - ZooKeeper
