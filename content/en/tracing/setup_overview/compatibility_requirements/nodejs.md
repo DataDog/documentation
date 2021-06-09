@@ -17,20 +17,12 @@ further_reading:
 ### Versioning
 We follow [semver][1]. When a new major version is released it becomes our primary release line, where all new features, bug fixes and security patches land. Here’s an outline of what constitutes each type of semver change:
 
-**MAJOR**
-- Changes that are incompatible with previous versions.
-
-**MINOR**
-- Adding anything that is compatible with previous versions (i.e. does not break them).
-
-**PATCH**
-- Security fixes
-- Bug fixes
-
-Both major and minor release criteria include, but are not limited to:
-- API changes incompatible with previous versions.
-- Functionality changes incompatible with previous versions.
-- Dropping support for anything such as Node.js versions, supported libraries or other features.
+| Major          | Minor                                                          | Patch    |
+|---------------------------------|-------------------------------------------------------------------------|----------------------|
+| Changes that are incompatible with previous versions.                  | Adding anything that is compatible with previous versions (i.e. does not break them). | Security fixes        |
+| API changes incompatible with previous versions.                         | API additions                   | Bug fixes             |
+| Functionality changes incompatible with previous versions. | Functionality additions                                                 | |
+| Dropping support for anything such as Node.js versions, supported libraries or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries or other features.   |  |
 
 When a release has changes that could go in multiple semver categories, the highest one is chosen.  [Release notes][2] are posted with each github release.
 
