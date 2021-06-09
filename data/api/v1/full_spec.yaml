@@ -10428,6 +10428,10 @@ components:
             an alert.'
           format: int64
           type: integer
+        monitor_name:
+          description: The monitor name is used for the alert title as well as for
+            all monitor dashboard widgets and SLOs.
+          type: string
         monitor_options:
           description: 'Object containing the options for a Synthetic test as a monitor
 
@@ -10443,6 +10447,12 @@ components:
               minimum: 0
               type: integer
           type: object
+        monitor_priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
         noScreenshot:
           description: Prevents saving screenshots of the steps.
           type: boolean
@@ -11574,13 +11584,39 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_15day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_180day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_30day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_3day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_45day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_60day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_7day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_90day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_custom_retention_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_ingested_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        network_device_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_flow_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         rum_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
