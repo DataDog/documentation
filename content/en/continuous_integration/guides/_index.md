@@ -6,5 +6,5 @@ disable_sidebar: true
 ---
 
 {{< whatsnext desc="CI Visibility Guides:" >}}
-    {{< nextlink href="/continuous_integration/guides/find_flaky_tests" >}}Finding Flaky Tests{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/flaky_test_management" >}}Flaky Test Management{{< /nextlink >}}
 {{< /whatsnext >}}
