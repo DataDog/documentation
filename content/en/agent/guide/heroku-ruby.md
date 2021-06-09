@@ -7,13 +7,13 @@ further_reading:
   text: "Heroku Buildpack"
 ---
 
-Heroku is a very popular platform within Ruby developers and, more specifically, Ruby on Rails developers. Datadog supports Heroku and Ruby, so you are able to send your Heroku Ruby application metrics, logs, and traces to Datadog.
+Heroku is a popular platform within Ruby developers and, more specifically, Ruby on Rails developers. Datadog supports Heroku and Ruby, so you are able to send your Heroku Ruby application metrics, logs, and traces to Datadog.
 
 This guide walks you through the necessary steps to take a Rails application deployed to Heroku and get metrics, integrations data, logs, and traces sent to Datadog.
 
 ## Prerequisites
 
-To follow this guide we assume the following:
+This guide assumes the following:
 
 * You already have a Datadog account. If you don’t have one, you can [sign up for a free trial][1].
 * You already have a Heroku account. If you don’t have one, you can [sign up for their free tier][2].
@@ -22,20 +22,20 @@ To follow this guide we assume the following:
 
 ## Creating your Heroku application and deploying the sample Ruby application
 
-For this guide we are going to be using [Heroku’s Rails sample application][5]. This is a barebone Rails application that goes along their [Starting With Ruby article][6]. In that article you can get more detailed information about how to deploy a Ruby application in Heroku. In the present one we are going to be focusing on getting our application instrumented with Datadog.
+This guide uses [Heroku’s Rails sample application][5]. This is a barebone Rails application that goes along their [Starting With Ruby article][6], which provides more detailed information about how to deploy a Ruby application in Heroku. This guide focuses on instrumenting a Rails application with Datadog.
 
-The sample application has a dependency pg which will only resolve if you have [Postgres installed locally][7]. Please install Postgres before you proceed.
-You will know that Postgres is installed successfully when the command which psql returns a value on your command line (though your actual output may vary):
+The sample application has a dependency pg which will only resolve if you have [Postgres installed locally][7]. Install Postgres before you proceed.
+You can verify that Postgres is installed successfully by running the `psql` command. It returns output similar to the following:
 ```shell
 which psql
 /usr/local/bin/psql
 ```
 
-We are going to get the code from the sample application and deploy it, as it is, to a new Heroku application. 
+Get the code from the sample application and deploy it, as-is, to a new Heroku application. 
 
 ```shell
 # Decide a name for your application and export it as an environment variable
-# (In our case we will be choosing ruby-heroku-datadog)
+# (In this case, the name is ruby-heroku-datadog)
 export APPNAME=ruby-heroku-datadog
 
 # Get the sample application code
@@ -67,7 +67,7 @@ The way Datadog identifies your account is with an API key. [Log into your Datad
 
 {{< img src="agent/guide/heroku_ruby/apikey.png" alt="Datadog API keys section" >}}
 
-We will now deploy the Datadog agent into our application. We will do this using the [Datadog Heroku Buildpack][10]. You can learn more about [Heroku Buildpacks][11] and what they do in their official documentation.
+Now, deploy the Datadog Agent into your application. This guide makes use of the [Datadog Heroku Buildpack][10]. You can learn more about [Heroku Buildpacks][11] and what they do in their official documentation.
 
 ```shell
 # Enable Heroku Labs Dyno Metadata to set HEROKU_APP_NAME env variable automatically
@@ -85,7 +85,7 @@ git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog agent is now running in your application. Run the Datadog agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure everything is running correctly. You should look out for the following section:
+Once the build finishes, the Datadog Agent is now running in your application. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure everything is running correctly. You should look out for the following section:
 
 ```shell
 [...]
@@ -96,9 +96,9 @@ Once the build finishes, the Datadog agent is now running in your application. R
 [...]
 ```
 
-That output will tell us that the Datadog agent is running in our Heroku application and successfully linked to our Datadog account.
+This output signifies that the Datadog Agent is running in your Heroku application and successfully linked to your Datadog account.
 
-If we open now the [Host Map in Datadog][12] we can see that our dyno is reporting correctly in Datadog:
+If you now open the [Host Map in Datadog][12] you can see that your dyno is reporting correctly in Datadog:
 
 {{< img src="agent/guide/heroku_ruby/dyno_host.png" alt="Datadog Host Map" >}}
 
@@ -106,7 +106,7 @@ If we open now the [Host Map in Datadog][12] we can see that our dyno is reporti
 
 Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application.
 
-Heroku adds a Postgres database through an addon for every Rails application that gets deployed to Heroku. Let’s check that our application has the Postgres addon enabled:
+Heroku adds a Postgres database through an addon for every Rails application that gets deployed to Heroku. Check that our application has the Postgres addon enabled:
 
  ```shell
 heroku addons -a $APPNAME
@@ -123,7 +123,7 @@ heroku-postgresql (postgresql-infinite-14462)  hobby-dev  free   created
 The table above shows add-ons and the attachments to the current app (ruby-heroku-datadog) or other apps.
 ```
 
-Our example application already uses that database in its code, but we haven’t created the tables yet. Let’s do that:
+Your example application already uses that database in its code, but you haven’t created the tables yet. Do that now:
 
 ```shell
 heroku run rake db:migrate -a $APPNAME
@@ -138,11 +138,11 @@ Migrating to CreateWidgets (20140707111715)
 == 20140707111715 CreateWidgets: migrated (0.0247s) ===========================
 ```
 
-Now we can successfully visit the `/widgets` endpoint of your application, which uses that database.
+Now you can successfully visit the `/widgets` endpoint of your application, which uses that database.
 
-Let’s enable the Postgres Datadog integration.
+Enable the Postgres Datadog integration.
 
-The first thing that we will need to do is to retrieve the database credentials from Heroku
+The first thing that you will need to do is to retrieve the database credentials from Heroku:
 
 ```shell
 # Enter in the psql terminal
@@ -151,7 +151,7 @@ heroku pg:credentials:url DATABASE -a $APPNAME
 
 Integrations are enabled in a particular way when using the Datadog buildpack. You can learn how to enable any of the integrations in [the buildpack documentation][13].
 
-Create a `datadog/conf.d` folder at the root of our application:
+Create a `datadog/conf.d` folder at the root of your application:
 
 ```shell
 # Ensure that you are in the root directory of your application
@@ -161,7 +161,7 @@ cd ruby-getting-started
 mkdir -p datadog/conf.d/
 ```
 
-Create a configuration file called `postgres.yaml` replacing with your host, dbname, username and password with the information you got in the previous command:
+Create a configuration file called `postgres.yaml` replacing with your host, dbname, username, and password with the information you got in the previous command:
 
 ```yaml
    init_config:
@@ -210,7 +210,7 @@ git commit -m "Enable postgres integration"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog agent will start the Postgres check. Run the Datadog agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Postgres check is running correctly. You should look out for the following section:
+Once the build finishes, the Datadog Agent starts the Postgres check. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Postgres check is running correctly. You should look out for the following section:
 
 ```shell
 
@@ -247,13 +247,13 @@ Collector
 [...]
 ```
 
-Once we have checked that the Postgres check is running correctly, we can start having a look to the Postgres metrics that we have available in the [Metrics Summary][14] page:
+Once you have checked that the Postgres check is running correctly, you can start looking at the Postgres metrics available on the [Metrics Summary][14] page:
 
 {{< img src="agent/guide/heroku_ruby/postgres_metrics.png" alt="Datadog Metrics Explorer" >}}
 
 ## Traces
 
-To get distributed tracing from our Heroku Ruby application we will need to enable instrumentation first.
+To get distributed tracing from your Heroku Ruby application, enable instrumentation.
 
 ```shell
 # Ensure that you are in the folder with the application code
@@ -273,7 +273,7 @@ Install the gem with `bundle install`:
 bundle install
 ```
 
-Before committing the changes and pushing to Heroku, we are going to set [Unified Tagging][15] for our application:
+Before committing the changes and pushing to Heroku, set [Unified Tagging][15] for our application:
 
 ```shell
 # Set the environment of your application
@@ -295,16 +295,16 @@ git commit -m "Enable distributed tracing"
 git push heroku main
 ```
 
-During the build you will get some error messages about the tracer not being able to reach out the Datadog APM agent endpoint. This is normal, as during the build process the Datadog agent hasn’t started yet. You can ignore these messages:
+During the build you will get some error messages about the tracer not being able to reach the Datadog APM Agent endpoint. This is normal, as during the build process, the Datadog Agent hasn’t started yet. You can ignore these messages:
 
 ```
 remote:        Download Yarn at https://yarnpkg.com/en/docs/install
 remote:        E, [2021-05-14T10:21:27.664244 #478] ERROR -- ddtrace: [ddtrace] (/tmp/build_d5cedb1c/vendor/bundle/ruby/2.6.0/gems/ddtrace-0.48.0/lib/ddtrace/transport/http/client.rb:35:in `rescue in send_request') Internal error during HTTP transport request. Cause: Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126) Location: /tmp/build_d5cedb1c/vendor/ruby-2.6.6/lib/ruby/2.6.0/net/http.rb:949:in `rescue in block in connect'
 ```
 
-Once the build finishes, your application will start to send traces to Datadog. We recommend generating traffic to your application (for example, by visiting the /widgets page of your application) to get a good flow of traces.
+Once the build finishes, your application will start to send traces to Datadog. You can start generating traffic to your application (for example, by visiting the /widgets page of your application) to get a good flow of traces.
 
-Run the Datadog agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the APM agent is running correctly and sending traces to Datadog. You should look out for the following section:
+Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the APM agent is running correctly and sending traces to Datadog. You should look out for the following section:
 
 ```shell
 [...]
@@ -339,7 +339,7 @@ APM Agent
 [...]
 ```
 
-That output shows us that the APM agent is running correctly and sending traces to Datadog. 
+That output shows that the APM Agent is running correctly and sending traces to Datadog. 
 
 Navigating now to the [APM traces section][16] will show the traces coming in:
 
@@ -352,25 +352,25 @@ You can now navigate to the [Service list][17] to see all your application servi
 
 ## Logs
 
-The next feature that we are going to enable in our observability journey on Heroku are logs. We have two options on how to send logs from our application to Datadog, setting up a Heroku log drain or using the Datadog log agent directly. Each of those have their benefits and limitations, but the good news is that you can set up both! 
+Next, enable logs. There are two options on how to send logs from your application to Datadog: setting up a Heroku log drain or using the Datadog :og Agent directly. Each of those have their benefits and limitations, but the good news is that you can set up both! 
 
-The main disadvantage of the log drain is that currently it cannot correlate logs with traces, but this is possible using the Datadog agent.  
+The main disadvantage of the log drain is that currently it cannot correlate logs with traces, but this is possible using the Datadog Agent.  
 
-The main disadvantage of sending logs through the Datadog agent is that Heroku system logs and router logs won’t be sent (you can send these using the log drain method).
+The main disadvantage of sending logs through the Datadog Agent is that Heroku system logs and router logs won’t be sent (you can send these using the log drain method).
 
 ### Setting up a Heroku log drain
 
-Heroku has a native log router that will collect logs from all the dynos running in your application and will send them to Heroku. The logs include your application logs, the Heroku router logs, and the Heroku system dyno logs.
+Heroku has a native log router that collects logs from all the dynos running in your application and sends them to Heroku. The logs include your application logs, the Heroku router logs, and the Heroku system dyno logs.
 
 {{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku logs view" >}}
 
 The first method to send logs to Datadog is by setting up a Heroku log drain that will route the same logs received in Heroku to a different platform.
 
-One of the benefits of setting up the log drain is that you will be able to get the Heroku system logs into Datadog, which is not possible directly from the dyno. The main disadvantage is that it cannot correlate logs and traces (possible if sending logs with the Datadog agent).
+One of the benefits of setting up the log drain is that you will be able to get the Heroku system logs into Datadog, which is not possible directly from the dyno. The main disadvantage is that it cannot correlate logs and traces (possible if sending logs with the Datadog Agent).
 
 Setting up the Heroku log drain also opens the door to get dyno system metrics (CPU, memory) into Datadog.
 
-To set the Heroku log drain, from a terminal, run the following:
+To set up the Heroku log drain from a terminal, run the following:
 
 ```shell
 heroku drains:add "https://http-intake.logs.datadoghq.com/v1/input/$DD_API_KEY?ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
@@ -389,34 +389,34 @@ Once the drain has been set up, your Heroku logs will appear in the [log section
 
 #### Generating metrics from Heroku router logs
 
-Any traffic routed to your application will generate a Heroku router log:
+Any traffic routed to your application generates a Heroku router log:
 
 {{< img src="agent/guide/heroku_ruby/router_log.png" alt="Heroku router logs in Datadog" >}}
 
-As seen, the Heroku router logs get parsed automatically and `appname`, `dyno` and `dynotype` extracted as tags, thanks to the Heroku integration log pipeline:
+As seen, the Heroku router logs get parsed automatically. With the Heroku integration log pipeline, `appname`, `dyno`, and `dynotype` extracted as tags:
 
 {{< img src="agent/guide/heroku_ruby/grok_parser.png" alt="Heroku logs pipeline" >}}
 
-We can now generate a latency metric based on those parsed parameters.
+You can now generate a latency metric based on those parsed parameters.
 
 Navigate to Logs -> Generate Metrics and click on the “+ New Metric” button:
 
 {{< img src="agent/guide/heroku_ruby/new_custom_metric.png" alt="New log based metric" >}}
 
-Define the query as `Source:heroku` to filter all Heroku logs. And select the `Duration` measure. Also, we will want to be able to group that metric by `appname`, `dyno`, `dynotype`, `@http.url` and `@http.status_code`. Remember that metrics generated by log parsing are considered Custom Metrics. We recommend generating traffic to your application to get a good flow of new log entries.
+Define the query as `Source:heroku` to filter all Heroku logs. Select the `Duration` measure. Also, you will want to be able to group that metric by `appname`, `dyno`, `dynotype`, `@http.url`, and `@http.status_code`. Remember that metrics generated by log parsing are considered Custom Metrics. Datadog recommends generating traffic to your application to get a good flow of new log entries.
 
 Finally give your new metric a name and click on Create Metric:
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="Creation of a new log based metric" >}}
 
-Once the rule has been created and after waiting for some minutes to gather the new metrics and click on “See in Metric Explorer” to have a look to your new metric:
+Once the rule has been created, wait for a few minutes to gather the new metrics. Then, click on “See in Metric Explorer” to have a look to your new metric:
 
 {{< img src="agent/guide/heroku_ruby/generated_metric.png" alt="Log based available metrics" >}}
 {{< img src="agent/guide/heroku_ruby/metrics_explorer.png" alt="Metrics Explorer view" >}}
 
 #### Generating Datadog metrics from Heroku metric logs
 
-If [log-runtime-metrics][18] is set up for your application, Heroku will generate log entries with system metrics for each of the dynos:
+If [log-runtime-metrics][18] is set up for your application, Heroku generates log entries with system metrics for each of the dynos:
 
 {{< img src="agent/guide/heroku_ruby/dyno_memory_log.png" alt="Dyno memory usage log entry" >}}
 {{< img src="agent/guide/heroku_ruby/dyno_cpu_log.png" alt="Dyno CPU usage log entry" >}}
@@ -438,29 +438,29 @@ You can learn about what each of these values mean in [Heroku official documenta
 
 Follow the same steps explained on the previous section to generate metrics with 15 month retention for each of those measures.
 
-### Sending logs from the Datadog agent
+### Sending logs from the Datadog Agent
 
-The other option to send logs to Datadog is using Datadog agent to send logs directly from your application to Datadog, without using Heroku as a log router. The benefits of using the Datadog agent to send logs is that you will be able to use the Ruby integration to parse logs automatically without having to parse them yourself, and you will have log and tracing correlation.
+The other option to send logs to Datadog is using the Datadog Agent to send logs directly from your application to Datadog, without using Heroku as a log router. The benefits of using the Datadog Agent to send logs is that you can use the Ruby integration to parse logs automatically without having to parse them yourself, and you have access to log and tracing correlation.
 
-The only logs that we will be able to send with this method are the logs that are generated by your application (or the Rails framework). Heroku system logs and router logs won’t be sent (you can send these using the log drain method explained in the previous section).
+The only logs that can be sent with this method are the logs that are generated by your application (or the Rails framework). Heroku system logs and router logs won’t be sent (you can send these using the log drain method explained in the previous section).
 
 #### Sending Rails logs
 
-First, we will enable the logs agent:
+First, enable the Logs Agent:
 
 ```shell
 # Enable the logs agent in Datadog
 heroku config:add DD_LOGS_ENABLED=true -a $APPNAME
 ```
 
-To configure your Rails logs, Datadog recommends using lograge. Let’s set it up for a sample application.
+To configure your Rails logs, Datadog recommends using lograge. Set it up for a sample application.
 
 ```shell
 # Ensure that you are in the folder with the application code
 cd ruby-getting-started
 ```
 
-Edit your `Gemfile` and add the `lograge`:
+Edit your `Gemfile` and add `lograge`:
 
 ```ruby
 gem 'lograge'
@@ -497,7 +497,7 @@ Rails.application.configure do
 end
 ```
 
-Point the Datadog agent to the log path. 
+Point the Datadog Agent to the log path. 
 Create a folder at the root of the project called `datadog/conf.d`:
 
 ```shell
@@ -529,7 +529,7 @@ git commit -m "Add lograge"
 git push heroku main
 ```
 
-Once the build completes, run the Datadog agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Logs agent is running correctly and sending logs to Datadog. You should look out for the following section:
+Once the build completes, run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Logs Agent is running correctly and sending logs to Datadog. Look out for the following section:
 
 ```shell
 [...]
@@ -558,15 +558,15 @@ Logs Agent
 [...]
 ```
 
-That output shows us that the Logs agent is now running correctly and sending our Ruby application log to Datadog. 
+That output shows us that the Logs Agent is now running correctly and sending your Ruby application logs to Datadog. 
 
-Navigate now to [Logs in the Datadog application][21], and filter by `Source:ruby` to start seeing your Rails logs in Datadog.
+Navigate to [logs in Datadog][21] and filter by `Source:ruby` to start seeing your Rails logs in Datadog.
 
 {{< img src="agent/guide/heroku_ruby/ruby_logs.png" alt="Application generated logs" >}}
 
 #### Correlating logs and traces
 
-Once we have set up lograge, we can correlate the logs we get from our Rails application with the traces we are already generating.
+Once you have set up lograge, you can correlate the logs you get from your Rails application with the traces you are already generating.
 
 Edit the file called `config/initializers/lograge.rb` and add the following content to the file, under the `Rails.application.configure` section
 
@@ -604,19 +604,19 @@ git commit -m "Add log traces correlation"
 git push heroku main
 ```
 
-If you navigate now to [Logs in the Datadog application][22], the newer Rails logs will have their correlated trace:
+If you navigate to [logs in Datadog][22], the newer Rails logs have their correlated trace:
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="Log and traces correlation" >}}
 
 ## Summary
 
-In this guide we have taken a sample Rails application, deployed it to Heroku and instrumented it with Datadog to get metrics, dyno system metrics, logs and traces, as well as integrations set up.
+In this guide you have taken a sample Rails application, deployed it to Heroku, and instrumented it with Datadog to get metrics, dyno system metrics, logs, traces, and integrations set up.
 
 To continue instrumenting your application with other Datadog integrations, follow the same steps taken for the Postgres integration one, with the configuration files documented in the [official integrations documentation][23].
 
-## Appendix. Getting the Datadog agent status
+## Appendix: Getting the Datadog Agent status
 
-Getting the Datadog agent status is a good way to confirm that the Datadog agent is running correctly and to debug potential issues. First, SSH into your dyno using `heroku ps:exec`:
+Getting the Datadog Agent status is a good way to confirm that the Datadog Agent is running correctly and to debug potential issues. First, SSH into your dyno using `heroku ps:exec`:
 
 ```shell
 heroku ps:exec -a $APPNAME
@@ -629,7 +629,7 @@ heroku ps:exec -a $APPNAME
 ~ $
 ```
 
-You can ignore the warnings about the DD_API_KEY not being set. This is normal. The reason is that [Heroku doesn’t set configuration variables for the SSH session itself][24], but the Datadog agent process was able to access those.
+You can ignore the warnings about the `DD_API_KEY` not being set. This is normal. The reason is that [Heroku doesn’t set configuration variables for the SSH session itself][24], but the Datadog Agent process was able to access those.
 
 Once inside the SSH session, execute the Datadog status command:
 
