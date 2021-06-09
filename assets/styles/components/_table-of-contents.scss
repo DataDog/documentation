@@ -1,0 +1,350 @@
+$ddpurple: #632ca6;
+$highlightcolor: rgba(120, 71, 166, 0.15);
+
+body > header.scrolled ~ .container .mobile-toc-toggle {
+    top: 100px;
+}
+.announcement_banner.open ~ .container .mobile-toc-toggle {
+    top: 130px;
+}
+
+.mobile-toc-toggle {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 20px;
+    border-radius: 30px;
+    top: 100px;
+    width: 43px;
+    height: 43px;
+    z-index: 3;
+    box-shadow: 0px 3.28413px 8.21031px rgba(0, 0, 0, 0.2);
+
+    @media (min-width: 991px) {
+        display: none;
+    }
+
+    cursor: pointer;
+    cursor: pointer;
+    i.icon-small-bookmark {
+        border: 1px solid $ddpurple;
+        border-radius: 30px;
+        padding: 8px;
+        font-size: 25px;
+        color: white;
+        background-color: $ddpurple;
+        &:before {
+            position: relative;
+            top: 2px;
+        }
+    }
+    i.icon-small-x-2 {
+        border: none;
+        font-size: 15px;
+        color: #632ca6;
+        background-color: white;
+    }
+}
+
+// Common TOC styles
+#TableOfContents {
+    // all ul's
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        li {
+            a {
+                display: block;
+            }
+        }
+    }
+}
+// Desktop TOC
+.toc-container {
+    display: none;
+    padding-top: 95px;
+    
+    &.mobile-open {
+        top: 60px;
+        position: sticky;
+        max-width: 266px;
+        height: 100%;
+        right: 0px;
+        z-index: 3;
+    }
+    .toc {
+        margin-right: auto;
+        top: 100px;
+        max-height: 100vh;
+        padding-bottom: 150px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        @media (min-width: 1440px) {
+            margin-right: -40%;
+        }
+        h5 {
+            font-size: 18px;
+            font-weight: 600;
+            padding-bottom: 5px;
+            color: #000;
+        }
+        #TableOfContents {
+            // open adjacent ul to open link
+            .toc_open ~ ul {
+                display: block !important;
+            }
+
+            .toc_open ~ ul li:last-child a:last-child {
+                padding-bottom: 12px;
+            }
+
+            .toc a {
+                color: $darkGreyGrey;
+            }
+            .toc_open {
+                color: $studioViolet;
+                font-weight: 600;
+            }
+
+            .toc_open + ul a {
+                color: $studioViolet;
+                padding: 2px 0px 2px 15px;
+            }
+
+            // all scrolled link styles
+            .toc_scrolled {
+                border-left: 2px solid $studioViolet !important;
+            }
+
+            // level 1 list
+            & > ul {
+                & > li {
+                    // First top level item
+                    &:nth-child(1) > a {
+                        padding-top: 6px;
+                    }
+                    // First top level item
+                    &:last-child > a {
+                        padding-bottom: 6px;
+                    }
+                    &.toc_scrolled {
+                        background: none;
+                        & > a {
+                            position: relative;
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                background: $highlightcolor;
+                                top: 0;
+                                bottom: 0;
+                                right: 0;
+                                left: 0;
+                            }
+                        }
+                    }
+                    a {
+                        padding: 2px 0px 2px 10px;
+                        border-left: 2px solid $ddgray;
+                        font-size: 18px;
+                        &:lang(ja) {
+                            font-style: normal;
+                            font-weight: 300;
+                            font-size: 14px;
+                            line-height: 24px;
+                        }
+                    }
+                    // First level a tag
+                    & > a:first-child:not(.toc_open) {
+                        color: $dimGreyGrey;
+                    }
+
+                    // level 3 list
+                    & > ul {
+                        display: none;
+                        & > li {
+                            a {
+                                font-weight: normal;
+                                font-size: 18px;
+                                color: $darkGreyGrey;
+                            }
+
+                            // level 4 list
+                            & > ul {
+                                display: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media (min-width: 992px) {
+        display: block;
+        padding: 0 1rem;
+    }
+}
+
+.toc-title {
+    display: none;
+    @media (min-width: 991px) {
+        display: block;
+    }
+}
+
+.toc-edit-btn {
+    display: none;
+    @media (min-width: 991px) {
+        display: block;
+    }
+
+    a {
+        font-size: 18px;
+        &:lang(ja) {
+            font-size: 16px;
+
+            .toc-edit-btn img {
+                width: 35px;
+            }
+        }
+    }
+}
+
+// Mobile TOC
+.announcement_banner.open ~ .container .toc-container-mobile .toc {
+    padding-top: 90px;
+}
+
+.toc-container-mobile {
+    display: none;
+    padding: 105px 0 0 0;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    height: 100%;
+    background-color: white;
+    overflow-y: auto;
+
+    &.mobile-open {
+        display: block;
+        max-width: 266px;
+        z-index: 3;
+    }
+
+    .toc {
+        padding-top: 60px;
+
+        #TableOfContents {
+            // open adjacent ul to open link
+            .toc_open ~ ul {
+                display: block !important;
+            }
+
+            .toc a {
+                color: $darkGreyGrey;
+                font-size: 20px;
+            }
+            .toc_open {
+                color: $studioViolet;
+                font-weight: 600;
+            }
+
+            .toc_open + ul a {
+                color: $studioViolet;
+                padding: 10px 0px 10px 30px;
+            }
+
+            // all scrolled link styles
+            .toc_scrolled {
+                background: rgba(119, 74, 164, 0.05);
+            }
+
+            // level 1 list
+            & > ul {
+                & > li {
+                    border-bottom: 1px solid $ddgray;
+                    &.toc_scrolled {
+                        background: none;
+                        & > a {
+                            position: relative;
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                background: $highlightcolor;
+                                top: 0;
+                                bottom: 0;
+                                right: 0;
+                                left: 0;
+                            }
+                        }
+                    }
+                    a {
+                        padding: 10px 60px 10px 30px;
+                        display: flex;
+                        align-items: center;
+
+                        &.toc_open {
+                            padding: 10px 60px 10px 30px;
+                            &:after {
+                                font-family: 'Glyphter' !important;
+                                content: '\34'; // upward chevron
+                                position: absolute;
+                                right: 35px;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    // First level a tag
+                    & > a:first-child:not(.toc_open) {
+                        color: $dimGreyGrey;
+                        &:after {
+                            font-family: 'Glyphter' !important;
+                            content: '\31'; // downward chevron
+                            position: absolute;
+                            right: 35px;
+                            font-size: 12px;
+                            transform: translateY(2px);
+                        }
+                    }
+
+                    // level 2 list
+                    & > ul {
+                        display: none;
+                        & > li {
+                            border-bottom: none;
+                            a {
+                                font-weight: normal;
+                                color: $darkGreyGrey;
+                                padding-right: 1rem !important;
+                            }
+
+                            // level 3 list
+                            & > ul {
+                                display: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mobile-toc-bg {
+    display: none;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0;
+    z-index: 2;
+    &.mobile-toc-bg-open {
+        display: block;
+        opacity: 0.25;
+    }
+}

@@ -1,0 +1,132 @@
+.kind-404 {
+  font-weight: 200;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  line-height: 1.8em;
+
+  .font-semibold, .font-bold {
+    font-weight: 600!important;
+  }
+
+  .page404 {
+    padding: 15px 0 0 0;
+
+    min-height: calc(100vh - 708px);
+
+    p {
+        font-size: 22px;
+    }
+
+    .small {
+        font-weight: 200;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0;
+    }
+
+    .small+.small {
+        margin-top: 8px;
+    }
+
+
+    ul {
+        &.ul-strip {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          li {
+            list-style: none;
+            &::before {
+                content: "";
+            }
+          }
+        }
+      }
+
+    .bits-img {
+      position: relative;
+      top: 10px;
+    }
+
+    h1 {
+      font-weight: 200;
+      font-size: 68px;
+      line-height: 68px;
+      letter-spacing: 0;
+      margin: 0;
+      padding: 0;
+    }
+    h4 {
+        text-transform: none;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 28px;
+        letter-spacing: 0;
+        margin: 0;
+        padding: 0;
+    }
+    h5 {
+        margin: 0 0 0 0;
+        padding: 0;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+    }
+
+    @media screen and (min-width: 767px) {
+      padding: 60px 0 0;
+    }
+
+    @media screen and (min-width: 991px) {
+      min-height: calc(100vh - 471px);
+    }
+
+    .search-input-container-js {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+
+      .search-404 {
+        width: 100%;
+        font-size: 26px;
+        border-radius: 5px;
+        border: 1px solid #888888;
+        padding: 0px 36px 0px 12px;
+        height: 40px;
+      }
+
+      .search-404::-webkit-input-placeholder {
+        font-size: 26px;
+        color: #c7c7c7;
+        transform: translate3d(0, -2px, 0)
+      }
+
+      span {
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        padding: 10px;
+        font-weight: 800;
+        color: #888888;
+      }
+    }
+
+    .looking-for-container,
+    .helpful-pages-container {
+      a {
+        opacity: 1;
+        color: #7749a3;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  footer {
+    margin: 0;
+  }
+}

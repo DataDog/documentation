@@ -170,7 +170,7 @@ further_reading:
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="ファセットデモ"  style="width:80%;">}}
 
-### 定量的ファセット：メジャー
+### 定量 (メジャー)
 
 **必要に応じてメジャーを使用します。**
 * 複数のトレースから値を集計する。たとえば、Cassandra の行数にメジャーを作成し、リクエストされたファイルサイズの合計ごとに最上位の参照元または P95 を表示します。
@@ -240,7 +240,7 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 * [Timeseries](#timeseries)
 * [トップリスト](#top-list)
-* [表](#table)
+* [テーブル](#table)
 
 ### Timeseries
 
@@ -250,11 +250,11 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 {{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="時系列例"  style="width:90%;">}}
 
-### トップリスト
+### Toplist
 
 `継続時間`（またはファセットのユニーク値数）に基づいて、ファセットの上位の値を可視化します。
 
-次の App Analytics トップリストは、**pc99** の**サービス**の**継続時間**を上から示しています。
+以下の Analytics トップリストは、**pc99** の**サービス**の**継続時間**を上から示しています。
 
 {{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="トップリストの例"  style="width:90%;">}}
 
@@ -291,7 +291,7 @@ Analyticsをエクスポート
 
 ## ダッシュボード内のトレース
 
-トレース検索から[Analytics][4]をエクスポートするか、[ダッシュボード][15]でメトリクスおよびログと共に直接構築します。
+トレース検索から [Analytics][4] をエクスポートするか、[ダッシュボード][15]でメトリクスおよびログと共に直接構築します。 
 
 [時系列ウィジェットに関する詳細][16]
 
