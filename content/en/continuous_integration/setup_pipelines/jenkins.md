@@ -100,11 +100,11 @@ The Datadog plugin adds a `datadog` step that allows adding custom tags to your 
 In declarative pipelines, add the step to a top-level option block:
 
 ```groovy
-def DD_TEST = "bar"
+def DD_TYPE = "release"
 pipeline {
     agent any
     options {
-        datadog(tags: ["foo:bar", "bar:${DD_TEST}", "${DD_TEST}:value"])
+        datadog(tags: ["team:backend", "type:${DD_TYPE}", "${DD_TYPE}:canary"])
     }
     stages {
         stage('Example') {
@@ -119,7 +119,7 @@ pipeline {
 In scripted pipelines, wrap the relevant section with the `datadog` step:
 
 ```groovy
-datadog(tags: ["foo:bar", "bar:baz"]){
+datadog(tags: ["team:backend", "release:canary"]){
     node {
         stage('Example') {
             echo "Hello world."
