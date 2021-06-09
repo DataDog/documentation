@@ -13,13 +13,13 @@ further_reading:
 ## Compatibility
 
 Supported languages:
-* Swift 5.3+
+* Swift 5.2+
 * Objective-C 2.0+
 
 Supported platforms:
-* iOS 11.0+
+* iOS 12.0+
 * macOS 10.13+
-* tvOS 11.0+
+* tvOS 12.0+
 
 Supported CI providers:
 * Appveyor
@@ -63,6 +63,7 @@ For UITests, environment variables need to be set only in the test target, becau
 |--------------------------|-----------------------------|
 | `DD_TEST_RUNNER`           | `true`                         |
 | `DATADOG_CLIENT_TOKEN`     | Your current Datadog client token  |
+| `DD_ENDPOINT`            | The server endpoint of your Datadog Account: `us` (default), `us3`, `eu`, `gov`             |
 | `SRCROOT`                  | `$(SRCROOT)`                  |
 
 
@@ -151,13 +152,13 @@ Additional Git configuration for physical device testing:
 |`TRAVIS_BUILD_NUMBER`        | `$(TRAVIS_BUILD_NUMBER)`        |
 |`TRAVIS_BUILD_WEB_URL`       | `$(TRAVIS_BUILD_WEB_URL)`       |
 |`TRAVIS_JOB_WEB_URL`       | `$(TRAVIS_JOB_WEB_URL)`       |
+| `TRAVIS_REPO_SLUG`           | `$(TRAVIS_REPO_SLUG)`           |
+| `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
 
 Additional Git configuration for physical device testing:
 
 | Environment variable     | Value                           |
 | ---------------------------- | ------------------------------- |
-| `TRAVIS_REPO_SLUG`           | `$(TRAVIS_REPO_SLUG)`           |
-| `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
 | `TRAVIS_PULL_REQUEST_BRANCH` | `$(TRAVIS_PULL_REQUEST_BRANCH)` |
 | `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
 | `TRAVIS_COMMIT`              | `$(TRAVIS_COMMIT)`              |
@@ -173,12 +174,12 @@ Additional Git configuration for physical device testing:
 |`GITHUB_RUN_ID`     | `$(GITHUB_RUN_ID)`     |
 |`GITHUB_RUN_NUMBER` | `$(GITHUB_RUN_NUMBER)` |
 |`GITHUB_WORKFLOW` | `$(GITHUB_WORKFLOW)` |
+| `GITHUB_SHA`        | `$(GITHUB_SHA)`        |
 
 Additional Git configuration for physical device testing:
 
 | Environment variable     | Value                  |
 | ------------------- | ---------------------- |
-| `GITHUB_SHA`        | `$(GITHUB_SHA)`        |
 | `GITHUB_REF`        | `$(GITHUB_REF)`        |
 | `GITHUB_HEAD_REF` | `$(GITHUB_HEAD_REF)` |
 | `GITHUB_REPOSITORY` | `$(GITHUB_REPOSITORY)` |
@@ -233,13 +234,13 @@ Additional Git configuration for physical device testing:
 | `APPVEYOR_BUILD_ID`                      | `$(APPVEYOR_BUILD_ID)`                      |
 | `APPVEYOR_BUILD_NUMBER`                  | `$(APPVEYOR_BUILD_NUMBER)`                  |
 | `APPVEYOR_REPO_TAG_NAME`                 | `$(APPVEYOR_REPO_TAG_NAME)`                 |
+| `APPVEYOR_REPO_NAME`                     | `$(APPVEYOR_REPO_NAME)`                     |
 
 Additional Git configuration for physical device testing:
 
 | Environment variable     | Value                                     |
 | -------------------------------------- | ----------------------------------------- |
 | `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
-| `APPVEYOR_REPO_NAME`                     | `$(APPVEYOR_REPO_NAME)`                     |
 | `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
 | `APPVEYOR_REPO_BRANCH`                   | `$(APPVEYOR_REPO_BRANCH)`                   |
 
@@ -286,7 +287,6 @@ Additional Git configuration for physical device testing:
 | `GIT_REPOSITORY_URL`                          | `$(GIT_REPOSITORY_URL)`                          |
 | `BITRISE_GIT_COMMIT`                | `$(BITRISE_GIT_COMMIT)`                |
 | `BITRISE_GIT_BRANCH`                 | `$(BITRISE_GIT_BRANCH)`                 |
-| `BITRISEIO_GIT_BRANCH_DEST` | `$(BITRISEIO_GIT_BRANCH_DEST)` |
 | `BITRISE_GIT_TAG` | `$(BITRISE_GIT_TAG)` |
 | `GIT_CLONE_COMMIT_HASH` | `$(GIT_CLONE_COMMIT_HASH)` |
 | `BITRISE_GIT_MESSAGE` | `$(BITRISE_GIT_MESSAGE)` |
@@ -355,7 +355,7 @@ For Network auto-instrumentation, you can configure these additional settings:
 : URLs that you don't want to log or inject headers into (String List)
 
 `DD_ENABLE_RECORD_PAYLOAD`
-: Enables reporting a subset (512 bytes) of the payloads in requests and responses (Boolean)
+: Enables reporting a subset (1024 bytes) of the payloads in requests and responses (Boolean)
 
 `DD_MAX_PAYLOAD_SIZE`
 : Sets the maximum size reported from the payload. Default `1024` (Integer)
