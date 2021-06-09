@@ -177,8 +177,9 @@ yarn add @datadog/datadog-api-client
 
 #### Usage
 ```js
-import { v1 } from 'datadog-api-client';
+import { <VERSION> } from 'datadog-api-client';
 ```
+ **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
 {{< /programming-lang >}}
