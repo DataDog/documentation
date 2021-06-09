@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Light.woff2') format('woff2'),
+  url('../fonts/NationalWeb-Light.woff') format('woff'),
+  url('../fonts/NationalWeb-Light.eot') format('embedded-opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Semibold.woff2') format('woff2'),
+  url('../fonts/NationalWeb-Semibold.woff') format('woff'),
+  url('../fonts/NationalWeb-Semibold.eot') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'RobotoMono-Regular';
+  src: url('../fonts/RobotoMono-Regular.eot') format('embedded-opentype'),
+  url('../fonts/RobotoMono-Regular.woff') format('woff'),
+  url('../fonts/RobotoMono-Regular.ttf')  format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}

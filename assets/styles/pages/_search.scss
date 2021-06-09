@@ -1,0 +1,69 @@
+// search
+.tipue_search_content_text span {
+  font-weight: normal;
+  border-bottom: 1px solid #ccc;
+}
+.tipue_search_content_title,
+.tipue_search_content_title a {
+  margin-top: 20px;
+  font-size: 21px;
+  color:#000;
+  font-weight: 600;
+}
+.tipue_search_content_url,
+.tipue_search_content_url a {
+  color:#06c;
+}
+
+.hit .brdr {
+  border-right:1px solid #ccc;
+  padding-top:25px;
+  color:#838383;
+}
+
+// pagination
+.page_navigation
+{
+  margin: 51px 0 21px 0;
+}
+.page_link, .previous_link, .next_link
+{
+  padding: 0;
+  margin: 0;
+  font: 12px/1 'Open Sans', sans-serif;
+}
+.page_link, .previous_link, .next_link
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+.page_link, .previous_link, .next_link
+{
+  padding: 9px 15px 10px 15px;
+  background-color: #f1f1f1;
+  border: 1px solid #dcdcdc;
+  border-radius: 1px;
+  color: #333;
+  margin-right: 7px;
+  text-decoration: none;
+  text-align: center;
+}
+.page_link.active_page, .previous_link.active_page, .next_link.active_page
+{
+  padding: 9px 15px 10px 15px;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 1px;
+  color: #333;
+  margin-right: 7px;
+  text-align: center;
+}
+.page_link:hover, .previous_link:hover, .next_link:hover
+{
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+}
+
+// Breakpoint styles go here...

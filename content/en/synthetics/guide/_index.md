@@ -7,6 +7,7 @@ private: true
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Website uptime monitoring with SLOs{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoiding cache issues in Synthetic tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser Tests:" >}}

@@ -1,0 +1,161 @@
+// Black & White
+$white-base:            #ffffff;
+$white:                 #ffffff;
+$black:                 #000000;
+$black-base:            #000000;
+$black-translucent:     rgba(0, 0, 0, 0.3);
+$white-translucent:     rgba(255, 255, 255, 0.3);
+
+// Grayscale
+$gray-base:             #000000;
+$gray-darker:           #333333;
+$gray-dark:             #555555;
+$gray-darkish:          #666666;
+$gray:                  #888888;
+$gray-light:            #c7c7c7;
+$gray-lighter:          #eeeeee;
+$gray-lightest:         #f6f6f6;
+$gray-border:           #e6e6e6;
+
+// Brand - bs default swatches
+$brand-primary:         #632CA6;
+$brand-neue:            #70f;
+$brand-success:         #5cb85c;
+$brand-info:            #3399cc;
+$brand-warning:         #f0ad4e;
+$brand-danger:          #d9534f;
+$brand-yellow:          #fbc906;
+
+// Old brand swatch for record
+$brand-obsolete:        #7749a3;
+
+// Custom colors used in colors.scss for helper classes
+$governor-bay:          #3023AE;
+$amethyst-violet:       #955ED1;
+$cornflower-blue:       #6D87EF;
+$cranberry:             #E45893;
+$froly:                 #F2667F;
+$rose:                  #FF0078;
+$amethyst:              #9C58CB;
+$medium-orchid-violet:  #A651CA;
+$persimmon:             #FF635A;
+$lavender:              #C86DD7;
+$silver:                #c8c8c8;
+$slate-blue:            #7758D3;
+$studio:                #6E41BF;
+$tru-v:                 #7758D3;
+$wild-sand:             #F4F4F4;
+$mercury:               #E4E4E4;
+$dodger-blue:           #3D95FF;
+$alabaster:             #F8F8F8;
+$boulder:               #777777;
+$blue-ribbon:           #3345FF;
+$onahau:                #D3ECFF;
+$mine-shaft:            #333333;
+
+// Custom colors for API Actions
+$api-post:              #297A3F;
+$api-delete:            #B72A3A;
+$api-get:               #26759C;
+$api-put:               #5F3B83;
+$api-patch:             #906623;
+
+$bg-api-post:           #D9F3E0;
+$bg-api-delete:         #FBD6DB;
+$bg-api-get:            #EBF5FA;
+$bg-api-put:            #D6C9E3;
+$bg-api-patch:          #FFF0D4;
+
+// Color variables for helper classes
+$color-var: (
+  black:                $gray-base,
+  white:                $white-base,
+  primary:              $brand-primary,
+  purple:               $brand-primary,
+  yellow:               $brand-yellow,
+  gray-darker:          $gray-darker,
+  gray-darkish:          $gray-darkish,
+  gray-dark:            $gray-dark,
+  gray:                 $gray,
+  gray-light:           $gray-light,
+  gray-lighter:         $gray-lighter,
+  gray-lightest:        $gray-lightest,
+  gray-border:          $gray-border,
+  light-gray:           $gray-lighter,
+  studio:               $studio,
+  rose:                 $rose,
+  silver:               $silver,
+  wild-sand:            $wild-sand,
+  cornflower-blue:      $cornflower-blue,
+  froly:                $froly,
+  amethyst-violet:      $amethyst-violet,
+  amethyst:             $amethyst,
+  medium-orchid-violet: $medium-orchid-violet,
+  tru-v:                $tru-v,
+  cranberry:            $cranberry,
+  persimmon:            $persimmon,
+  mercury:              $mercury,
+  dodger-blue:          $dodger-blue,
+  alabaster:            $alabaster,
+  boulder:              $boulder,
+  blue-ribbon:          $blue-ribbon,
+  onahau:               $onahau,
+  mine-shaft:           $mine-shaft,
+  lavender:             $lavender,
+  governor-bay:         $governor-bay,
+  success:              $brand-success,
+  info:                 $brand-info,
+  warning:              $brand-warning,
+  danger:               $brand-danger,
+  neue:                 $brand-neue,
+  orch-green:           #9DDB16,
+  white-translucent:    rgba(255, 255, 255, 0.3),
+  black-translucent:    rgba(0, 0, 0, 0.3),
+  transparent:          transparent,
+  api-post:             $api-post,
+  api-delete:           $api-delete,
+  api-get:              $api-get,
+  api-put:              $api-put,
+  api-patch:            $api-patch,
+  bg-api-post:          $bg-api-post,
+  bg-api-delete:        $bg-api-delete,
+  bg-api-get:           $bg-api-get,
+  bg-api-put:           $bg-api-put,
+  bg-api-patch:         $bg-api-patch,
+);
+
+@each $name, $color in $color-var {
+  .border-#{"" + $name} {
+    border-color: $color!important;
+  }
+}
+
+@each $name, $color in $color-var {
+  .text-#{"" + $name} {
+    color: $color!important;
+  }
+}
+
+@each $name, $color in $color-var {
+  .font-#{"" + $name} {
+    color: $color!important;
+  }
+}
+
+@each $name, $color in $color-var {
+  .bg-#{"" + $name} {
+    background-color: $color !important;
+  }
+}
+
+::-moz-selection {
+  color: white;
+  text-shadow: none;
+  background: $brand-primary;
+}
+
+::selection {
+  color: white;
+  text-shadow: none;
+  background: $brand-primary;
+}

@@ -30,7 +30,7 @@ further_reading:
 
 ## エラー属性
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリング、グローバルコンテキスト、カスタムユーザーアクションの構成に関する情報は、[高度なコンフィギュレーション][3]をご覧ください。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[高度なコンフィギュレーション][3]をご覧ください。
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -158,6 +158,27 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
+## トラブルシューティング
+
+### "Script error" を修正する
+
+セキュリティ上の理由から、クロスオリジンスクリプトによりトリガーされるエラーの詳細はブラウザに表示されません。この場合、Error Details タブには "Script error." というエラーメッセージのみが表示されます。
+
+{{< img src="real_user_monitoring/browser/script-error.png" alt="リアルユーザーモニタリングでのスクリプトエラーの例" style="width:75%;" >}}
+
+クロスオリジンスクリプトについての詳細と、詳細が表示されない理由については [CORS][6] および [グローバルイベントハンドラーについてのこちらの注釈][7]を参照してください。このエラーが発生する原因としては以下のようなものがあります。
+- JavaScript ファイルが異なるホスト名 (例: `example.com` に `static.example.com` からのアセットが含まれるなど) でホスティングされている。
+- ウェブサイトに CDN 上でホストされる JavaScript ライブラリが含まれている。
+- ウェブサイトに、プロバイダーのサーバー上でホストされるサードパーティの JavaScript ライブラリが含まれている。
+
+以下の 2 つのステップに従ってクロスオリジンスクリプトを可視化します。
+1. `crossorigin="anonymous"` で JavaScript ライブラリをコールします。
+
+   `crossorigin="anonymous"` で、スクリプトをフェッチするリクエストが安全に実行されます。Cookie や HTTP 認証を介して機密データが転送されることはありません。
+
+2. `Access-Control-Allow-Origin` HTTP ヘッダーを構成します。　
+
+   このヘッダーで最も一般的な値は `Access-Control-Allow-Origin: *` で、すべてのオリジンとリソースのフェッチを許可します。代わりに、設定 (例: `Access-Control-Allow-Origin: www.example.com`) でリソースにアクセスできるオリジンの種類を制限することもできます。
 
 ## その他の参考資料
 
@@ -169,3 +190,5 @@ try {
 [3]: /ja/real_user_monitoring/browser/advanced_configuration/
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [5]: /ja/real_user_monitoring/error_tracking
+[6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes

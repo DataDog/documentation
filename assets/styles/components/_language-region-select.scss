@@ -1,0 +1,143 @@
+// API pages-specific styles
+.api {
+  .language-region-select-container {
+    padding: 1.5rem 0;
+
+    .language-select-container,
+    .region-select-container {
+      display: flex;
+      align-items: baseline;
+
+      p {
+        margin-right: 10px;
+
+        @-moz-document url-prefix() {
+          margin-top: 8px;
+        }
+      }
+
+      @-moz-document url-prefix() {
+        align-items: center;
+      }
+    }
+
+    .region-select-container {
+      margin-left: 30px;
+
+      a:first-of-type {
+
+        @-moz-document url-prefix() {
+          margin-top: 9px;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row !important;
+      padding: 0;
+
+      .region-select-container {
+        margin-top: 0;
+      }
+    }
+  }
+}
+// End API pages-specific styles
+
+aside.sidebar {
+  padding-left: 0;
+
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    top: 50px;
+    height: 100vh;
+    margin-bottom: 100px;
+  }
+}
+
+.language-region-select-container {
+  padding: 1.75rem 1rem;
+
+  p {
+    font-size: 14px !important;
+    line-height: 18px;
+    color: black !important;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: 4.05rem 1rem 1.4rem;
+  }
+
+  .region-select-container {
+    margin-left: 15px;
+
+    @include media-breakpoint-up(lg) {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+
+  .btn {
+    border: 1px solid $gray-light;
+    background: $gray-lightest;
+    border-radius: 4px;
+    height: 31px;
+    padding: 0rem 0.6rem 0.1rem;
+    color: $brand-primary;
+    width: 100px;
+    font-size: 16px;
+    line-height: 20px;
+    z-index: 3;
+
+    &:lang(ja) {
+      font-size: 14px;
+    }
+  }
+
+  .dropdown {
+    z-index: 2;
+
+    @include media-breakpoint-up(lg) {
+      z-index: unset;
+    }
+  }
+
+  .dropdown-menu {
+    padding: 0;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    min-width: 0rem;
+    width: 100px;
+    top: 6px !important;
+
+    .dropdown-item {
+      font-size: 16px;
+      line-height: 20px;
+      padding-left: 10px;
+      padding-bottom: 8px;
+
+      &:lang(ja) {
+        font-size: 15px;
+      }
+    }
+
+    a {
+      color: #212529;
+
+      &:hover {
+        background: $gray-lighter;
+        color: $brand-primary;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &:lang(ja) {
+    @include media-breakpoint-up(lg) {
+      padding-left: 15px;
+    }
+  }
+}

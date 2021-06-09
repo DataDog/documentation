@@ -23,7 +23,14 @@ This feature is currently in private beta. <a href="https://docs.datadoghq.com/h
 
 ## Automatic configuration
 
-Runtime metrics collection can be enabled with the `DD_RUNTIME_METRICS_ENABLED=true` environment parameter when running with `ddtrace-run`:
+Runtime metrics collection can be enabled with the `DD_RUNTIME_METRICS_ENABLED=true` environment parameter when running with `ddtrace-run`.
+
+If you are not using `ddtrace-run`, you can enable runtime metrics collection in code:
+
+```python
+from ddtrace.runtime import RuntimeMetrics
+RuntimeMetrics.enable()
+```
 
 Runtime metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
 

@@ -13136,9 +13136,13 @@ components:
         day:
           description: The day value from the user request that contains the returned
             usage data. (If day was used the request)
+          format: date-time
+          type: string
         month:
           description: The month value from the user request that contains the returned
             usage data. (If month was used the request)
+          format: date-time
+          type: string
         pagination:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
@@ -19165,19 +19169,27 @@ paths:
         **Service Check Query**
 
 
-        Example: `"check".over(tags).last(count).count_by_status()`
+        Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
         - **`check`** name of the check, e.g. `datadog.agent.up`
 
         - **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod",
-        "role:db")`
+        "role:db")`; **`over`** cannot be blank.
 
         - **`count`** must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
 
         For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
-        statuses, `count` should be 3.
+        statuses, `count` should be at least 3.
+
+        - **`group`** must be specified for check monitors. Per-check grouping is
+        already explicitly known for some service checks.
+
+        For example, Postgres integration monitors are tagged by `db`, `host`, and
+        `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
+        Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation
+        for more information.
 
 
         **Event Alert Query**
