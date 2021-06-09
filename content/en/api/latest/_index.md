@@ -178,7 +178,6 @@ yarn add @datadog/datadog-api-client
 #### Usage
 ```js
 import { v1 } from 'datadog-api-client';
-import * as fs from 'fs';
 ```
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
