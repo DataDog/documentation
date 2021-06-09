@@ -76,7 +76,7 @@ For more information, see the [JavaScript tracer installation docs][4].
     module.exports = require('jest-environment-node') 
     ``` 
 
-**Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` when initializing the tracer:
+**Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` (a value in milliseconds) when initializing the tracer:
 
 ```javascript
 require('dd-trace').init({
