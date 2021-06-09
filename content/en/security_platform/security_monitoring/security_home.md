@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "security_monitoring/default_rules"
   tag: "Documentation"
-  text: "Explore default log dection rules"
+  text: "Explore default log detection rules"
 - link: "/security_platform/security_monitoring/log_detection_rules"
   tag: "Documentation"
   text: "Follow the creating new Security Monitoring rules guide"
