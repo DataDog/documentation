@@ -27,7 +27,7 @@ We follow [semver][1]. When a new major version is released it becomes our prima
 - Security fixes
 - Bug fixes
 
-Both major and minor criteria include, but are not limited to:
+Both major and minor release criteria include, but are not limited to:
 - API changes incompatible with previous versions
 - Functionality changes incompatible with previous versions
 - Dropping support for anything such as Node.js versions, supported libraries or other features.
