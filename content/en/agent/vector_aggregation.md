@@ -24,7 +24,7 @@ process data before sending them to Datadog. Vector capability includes:
 * Log deduplication to avoid duplicated log to be send
 * Transforming logs using the [Vector Remap Language][2]
 
-** Note **: Only logs aggregation is supported, support for other data type (metrics, processes, traces, etc.)
+**Note**: Only logs aggregation is supported, support for other data type (metrics, processes, traces, etc.)
 is scheduled for later.
 
 ## Configuration
