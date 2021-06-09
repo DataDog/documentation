@@ -352,7 +352,7 @@ You can now navigate to the [Service list][17] to see all your application servi
 
 ## Logs
 
-Next, enable logs. There are two options on how to send logs from your application to Datadog: setting up a Heroku log drain or using the Datadog :og Agent directly. Each of those have their benefits and limitations, but the good news is that you can set up both! 
+Next, enable logs. There are two options on how to send logs from your application to Datadog: setting up a Heroku log drain or using the Datadog Log Agent directly. Each of those have their benefits and limitations, but the good news is that you can set up both!
 
 The main disadvantage of the log drain is that currently it cannot correlate logs with traces, but this is possible using the Datadog Agent.  
 
