@@ -14,5 +14,9 @@
   {
     "client": "datadog-api-client-ruby",
     "version": "v1.0.0"
+  },
+  {
+    "client": "datadog-api-client-typescript",
+    "version": "v1.0.0-beta.3"
   }
 ]
