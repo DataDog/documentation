@@ -1,5 +1,5 @@
 ---
-title: Finding Flaky Tests
+title: Flaky Test Management
 kind: guide
 ---
 
