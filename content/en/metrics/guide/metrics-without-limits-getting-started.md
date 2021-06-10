@@ -8,7 +8,7 @@ is_beta: true
 
 ## Overview
 
-This guide covers how to get started with Metrics without Limits™ and quickly gain the most value from the feature. 
+This guide covers how to get started with Metrics Without Limits™ and quickly gain the most value from the feature. 
 
 Review the [Metrics Without Limits™ FAQ][1].
 
@@ -57,7 +57,19 @@ Therefore, you can have a resulting indexed custom metric volume greater than an
 
 Here is a simplified example of how indexed greater than ingested can occur when you start with four tag value combinations on a gauge metric (in other words, four custom metrics):
 
+{{< img src="metrics/guide/before-mwl.jpg" alt="Flow chart with four custom metrics from two hosts"  style="width:80%;" >}}
 
+If you use Metrics Without Limits™ and configure on `{endpoint, status}`: 
+
+{{< img src="metrics/guide/before-mwl.jpg" alt="Flow chart with the hosts marked out with x"  style="width:80%;" >}}
+
+Without the hosts, this leaves three remaining tag combinations:
+
+1. `{endpoint:x, status:200}`
+2. `{endpoint:x, status:400}`
+3. `{endpoint:y, status:200}`
+
+However, for each of these three combinations, Metrics Without Limits™ stores six pre-aggregated values, so this results in **18 custom metrics total**.
 
 
 [1]: /metrics/faq/metrics-without-limits/
