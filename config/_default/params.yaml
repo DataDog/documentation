@@ -56,6 +56,12 @@ code_languages:
     extension: php
     name: php
     syntax: php
+  'ts':
+    extension: ts
+    name: typescript
+    syntax: typescript
+    command: tsc
+    example_file: example.ts
 
 code_language_ids:
     java: Java
@@ -67,6 +73,7 @@ code_language_ids:
     ruby: Ruby
     ruby-beta: Ruby [beta]
     go: Go
+    typescript: Typescript
     ".NET": ".NET"
     dotnet: ".NET"
     dotnet-core: ".NET Core"

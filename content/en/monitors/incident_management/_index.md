@@ -41,9 +41,9 @@ Use the Datadog Clipboard to gather multiple monitors and graphs and to generate
 
 #### From a monitor
 
-You can declare an incident directly from a monitor by clicking the export button on the graph and then clicking **Declare incident**. The incident creation modal appears, and the monitor is added into the incident as a signal.
+You can declare an incident directly from a monitor by clicking **Declare incident**. The incident creation modal appears, and the monitor is added into the incident as a signal.
 
-{{< img src="monitors/incidents/from-a-graph.png" alt="Create in incident from a monitor" style="width:80%;">}}
+{{< img src="monitors/incidents/incident-from-monitor.png" alt="Create an incident from a monitor" style="width:80%;">}}
 
 You can also add a monitor to an existing incident.
 

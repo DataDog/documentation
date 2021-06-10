@@ -48,7 +48,7 @@ left:
         title: サーバーレス
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''サーバーレスアイコン''>'
       - name: product_alerts
-        link: 'https://www.datadoghq.com/product/alerts/'
+        link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: アラート
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''アラートアイコン''>'
       - name: product_api

@@ -48,7 +48,7 @@ left:
         title: Informatique sans serveur
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
       - name: product_alerts
-        link: 'https://www.datadoghq.com/product/alerts/'
+        link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: Alertes
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
       - name: product_api
