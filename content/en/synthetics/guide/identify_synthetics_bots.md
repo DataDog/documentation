@@ -42,7 +42,7 @@ You can also identify Datadog robots by using some of the **default headers** at
 {{< tabs >}}
 {{% tab "Single & Multistep API Tests" %}}
 
-The following header is attached to all single and Multistep API tests:
+The following header is attached to all Single and Multistep API tests:
 
 `sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
 
