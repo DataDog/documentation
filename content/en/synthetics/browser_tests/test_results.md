@@ -53,7 +53,7 @@ Common failure reasons include:
 
 ## Errors
 
-The Errors panel shows the name of the error, description, type (`js`/`network`), and status (network status code).
+The Errors panel shows the error, its type (`js`/`network`), and status (network status code).
 
 The type of error is logged during interaction with the page. It corresponds to the errors collected between the time the page is opened and the time interaction with that page is realized.
 
