@@ -9,6 +9,7 @@ private: true
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-usage/" >}}Monitor Synthetics usage{{< /nextlink >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoiding cache issues in Synthetic tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser Tests:" >}}

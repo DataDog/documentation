@@ -172,7 +172,7 @@ Send custom metrics with [the StatsD protocol][17]:
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
-
+| `DD_DOGSTATSD_DISABLE`           | Disables sending custom metrics from the dogstatsd library.                                                                                                |
 Learn more about [DogStatsD over Unix Domain Sockets][18].
 
 ### Tagging

@@ -88,7 +88,6 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 |:----------------|:---------|:----------------|
 | CakePHP Console | 2.x      | Fully Supported |
 | Laravel Artisan | 5.x      | Fully Supported |
-| Symfony Console |          | _Coming Soon_   |
 
 To request support for additional CLI libraries, contact our awesome [support team][2].
 
@@ -101,17 +100,10 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
-| MongoDB - via [mongodb][4] extension                                    | *(Any Supported PHP)*      | _Coming Soon_   |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
 | PhpRedis                                                                | 3, 4, 5                    | Fully Supported |
 | Predis                                                                  | 1.1                        | Fully Supported |
-| AWS Couchbase                                                           | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS DynamoDB                                                            | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS ElastiCache                                                         | AWS PHP SDK 3              | _Coming Soon_   |
-| Doctrine ORM                                                            | 2                          | _Coming Soon_   |
-| ODBC                                                                    | *(Any Supported PHP)*      | _Coming Soon_   |
-| Solarium                                                                | 4.2                        | _Coming Soon_   |
 
 To request support for additional datastores, contact our awesome [support team][2].
 
@@ -122,8 +114,6 @@ To request support for additional datastores, contact our awesome [support team]
 | Curl       | *(Any Supported PHP)* | Fully Supported |
 | Guzzle     | 5.x                   | Fully Supported |
 | Guzzle     | 6.x                   | Fully Supported |
-| Beanstalkd |                       | _Coming Soon_   |
-| ReactPHP   |                       | _Coming Soon_   |
 
 To request support for additional libraries, contact our awesome [support team][2].
 
