@@ -37,9 +37,9 @@ Supported CI providers:
 
 To install the [JavaScript tracer][3], run:
 
-```bash
+{{< code-block lang="bash" >}}
 yarn add --dev dd-trace
-```
+{{< /code-block >}}
 
 For more information, see the [JavaScript tracer installation docs][4].
 
@@ -49,51 +49,50 @@ For more information, see the [JavaScript tracer installation docs][4].
 
 1. Install the `jest-circus` test runner:
 
-    ```bash
-    yarn add --dev jest-circus
-    ```
+    {{< code-block lang="bash" >}}
+yarn add --dev jest-circus
+{{< /code-block >}}
 
 2. Configure a custom [testEnvironment][5] and [testRunner][6] in your `jest.config.js` or however you are configuring [jest][7]:
 
-    ```javascript
-    // jest.config.js
-    module.exports = {
-      // ...
-      testRunner: 'jest-circus/runner',
-      // It may be another route. It refers to the file below.
-      testEnvironment: '<rootDir>/testEnvironment.js',
-      // ...
-    }
-    ```
+    {{< code-block lang="javascript" filename="jest.config.js" >}}
+module.exports = {
+  // ...
+  testRunner: 'jest-circus/runner',
+  // It may be another route. It refers to the file below.
+  testEnvironment: '<rootDir>/testEnvironment.js',
+  // ...
+}
+{{< /code-block >}}
 
     And in `testEnvironment.js`:
 
-    ```javascript
-    require('dd-trace').init({
-      service: 'ui-tests' // The name of the Test Service that will appear in the CI Tests tab.
-    })
-    // jest-environment-jsdom is an option too
-    module.exports = require('jest-environment-node') 
-    ``` 
+    {{< code-block lang="javascript" filename="testEnvironment.js" >}}
+require('dd-trace').init({
+  service: 'ui-tests' // The name of the Test Service that will appear in the CI Tests tab.
+})
+// jest-environment-jsdom is an option too
+module.exports = require('jest-environment-node') 
+{{< /code-block >}}
 
 **Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` (a value in milliseconds) when initializing the tracer:
 
-```javascript
+{{< code-block lang="javascript" >}}
 require('dd-trace').init({
   flushInterval: 300000
 })
-```
+{{< /code-block >}}
 
 ### Mocha instrumentation
 
 Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your your `package.json`:
 
-```javascript
+{{< code-block lang="javascript" >}}
 // package.json
 'scripts': {
   'test': 'mocha --require dd-trace/init'
 },
-```
+{{< /code-block >}}
 
 ## Disabling instrumentation in local development
 
@@ -103,23 +102,23 @@ If you want to disable the testing instrumentation for local development (where 
 
 When initializing the tracer, check whether you are in CI:
 
-```javascript
+{{< code-block lang="javascript" >}}
 require('dd-trace').init({
   enabled: !!process.env.CI // the environment variable to use depends on the CI provider
 })
-```
+{{< /code-block >}}
 
 ### Mocha
 
 Use different test scripts for CI and local development:
 
-```javascript
+{{< code-block lang="javascript" >}}
 // package.json
 'scripts': {
   'test': 'mocha',
   'test:ci': 'mocha --require dd-trace/init'
 },
-```
+{{< /code-block >}}
 
 ## Configuration settings
 

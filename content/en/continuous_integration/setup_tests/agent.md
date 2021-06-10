@@ -30,10 +30,10 @@ If your CI provider runs your tests in a container (such as on-prem CI providers
 
 To enable APM and disable the monitoring of the container, set the following environment variable on the Agent container:
 
-```
+{{< code-block lang="text" >}}
 DD_INSIDE_CI=true
 DD_HOSTNAME=none
-```
+{{< /code-block >}}
 
 This allows the tracer to send test results to port `8126` of the Agent container.
 
@@ -42,8 +42,7 @@ This allows the tracer to send test results to port `8126` of the Agent containe
 
 Regardless of which CI provider you use, if tests are run using Docker Compose, the Agent can be run as one service:
 
-```yaml
-# docker-compose.yml
+{{< code-block lang="yaml" filename="docker-compose.yml" >}}
 version: '3'
 services:
   datadog-agent:
@@ -59,12 +58,11 @@ services:
     build: .
     environment:
       - DD_AGENT_HOST=datadog-agent
-```
+{{< /code-block >}}
 
 Alternatively, share the same network namespace between the Agent container and the tests container:
 
-```yaml
-# docker-compose.yml
+{{< code-block lang="yaml" filename="docker-compose.yml" >}}
 version: '3'
 services:
   datadog-agent:
@@ -77,15 +75,15 @@ services:
   tests:
     build: .
     network_mode: "service:datadog-agent"
-```
+{{< /code-block >}}
 
 In this case, no `DD_AGENT_HOST` is required because it is `localhost` by default.
 
 Then, run your tests by providing your [Datadog API key][3] in the `DD_API_KEY` environment variable:
 
-```bash
+{{< code-block lang="bash" >}}
 DD_API_KEY=<MY_API_KEY> docker-compose up --build --abort-on-container-exit tests
-```
+{{< /code-block >}}
 
 **Note:** In this case, also pass along all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][4].
 
@@ -97,8 +95,7 @@ The following sections provide CI provider-specific instructions to run and conf
 
 To run the Agent in Azure Pipelines, define the Agent container in the [`resources` section][5] and link it with the job declaring it as a [`service` container][6]:
 
-```yaml
-# azure-pipeline.yml
+{{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
 variables:
   ddApiKey: $(DD_API_KEY)
 
@@ -119,7 +116,7 @@ jobs:
       dd_agent: dd_agent
     steps:
       - script: make test
-```
+{{< /code-block >}}
 
 Add your [Datadog API key][3] to your [project environment variables][7] with the key `DD_API_KEY`.
 
@@ -128,8 +125,7 @@ Add your [Datadog API key][3] to your [project environment variables][7] with th
 
 To run the Agent in GitLab, define the Agent container under [`services`][8]:
 
-```yaml
-# .gitlab-ci.yml
+{{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
 variables:
   DD_AGENT_HOST: "datadog-agent"
   DD_HOSTNAME: "none"
@@ -141,7 +137,7 @@ test:
     - name: datadog/agent:latest
   script:
     - make test
-```
+{{< /code-block >}}
 
 Add your [Datadog API key][3] to your [project environment variables][9] with the key `DD_API_KEY`.
 
@@ -150,7 +146,7 @@ Add your [Datadog API key][3] to your [project environment variables][9] with th
 
 To run the Agent in GitHub Actions, define the Agent container under [`services`][10]:
 
-```yaml
+{{< code-block lang="yaml" >}}
 jobs:
   test:
     services:
@@ -164,7 +160,7 @@ jobs:
           DD_INSIDE_CI: "true"
     steps:
       - run: make test
-```
+{{< /code-block >}}
 
 Add your [Datadog API key][3] to your [project secrets][11] with the key `DD_API_KEY`.
 
@@ -175,8 +171,7 @@ To run the Agent in CircleCI, launch the agent container before running tests by
 
 For example:
 
-```yaml
-# .circleci/config.yml
+{{< code-block lang="yaml" filename=".circleci/config.yml" >}}
 version: 2.1
 
 orbs:
@@ -196,7 +191,7 @@ workflows:
   test:
     jobs:
       - test
-```
+{{< /code-block >}}
 
 Add your [Datadog API key][3] to your [project environment variables][13] with the key `DD_API_KEY`.
 
