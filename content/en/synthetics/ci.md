@@ -435,7 +435,7 @@ In the global configuration file, you can configure the following options:
         "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
             "locations": ["aws:us-west-1"],
         "retry": { "count": 2, "interval": 300 },
-        "executionRule": "skipped",
+        "executionRule": "blocking",
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "variables": { "titleVariable": "new value" },
         "pollingTimeout": 180000

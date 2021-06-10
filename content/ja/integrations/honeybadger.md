@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/honeybadger/'
 draft: false
 git_integration_title: honeybadger
 has_logo: true
+integration_id: honeybadger
 integration_title: Honeybadger
 is_public: true
 kind: インテグレーション

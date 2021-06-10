@@ -9,6 +9,7 @@ content/en/api/**/*.go
 content/en/api/**/*.java
 content/en/api/**/*.pybeta
 content/en/api/**/*.rbbeta
+content/en/api/**/*.ts
 
 # Ignoring all automated content
 # Developers/integrations
@@ -168,4 +169,7 @@ Makefile.config
 data/permissions.json
 
 static/images/integrations_logos/2020w2.pdf
+
+# Generated resources from Hugo Pipes
+resources/_gen/
 

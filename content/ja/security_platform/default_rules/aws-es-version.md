@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-es-version
 cloud: AWS
 disable_edit: true
+integration_id: amazon-elasticsearch
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

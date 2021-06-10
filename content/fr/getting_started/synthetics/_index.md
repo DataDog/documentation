@@ -2,6 +2,9 @@
 title: Débuter avec la surveillance Synthetic
 kind: documentation
 further_reading:
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: Centre d'apprentissage
+    text: Présentation des tests Synthetic
   - link: /synthetics/browser_tests
     tag: Documentation
     text: En savoir plus sur les tests Browser
@@ -35,14 +38,9 @@ Si vous ne l'avez pas encore fait, créez un [compte Datadog][2].
 - [Créer un test Browser][4]
 - [Créer un test API][5]
 
-## Étapes suivantes
+## Pour aller plus loin
 
-{{< whatsnext desc="Une fois votre premier test Synthetic configuré, consultez les sections suivantes :">}}
-{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}En savoir plus sur les tests Browser{{< /nextlink >}}
-{{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}En savoir plus sur les tests API{{< /nextlink >}}
-{{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Créer un sous-test Browser{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres de surveillance Synthetic avancés{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://www.datadoghq.com/

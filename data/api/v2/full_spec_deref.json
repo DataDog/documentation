@@ -51244,7 +51244,7 @@
         }
       },
       "post": {
-        "description": "Create a security filter.",
+        "description": "Create a security filter.\n\nSee the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nfor more examples.",
         "operationId": "CreateSecurityFilter",
         "requestBody": {
           "content": {
@@ -51727,7 +51727,7 @@
         }
       },
       "get": {
-        "description": "Get the details of a specific security filter.",
+        "description": "Get the details of a specific security filter.\n\nSee the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nfor more examples.",
         "operationId": "GetSecurityFilter",
         "parameters": [
           {

@@ -10428,6 +10428,10 @@ components:
             an alert.'
           format: int64
           type: integer
+        monitor_name:
+          description: The monitor name is used for the alert title as well as for
+            all monitor dashboard widgets and SLOs.
+          type: string
         monitor_options:
           description: 'Object containing the options for a Synthetic test as a monitor
 
@@ -10443,6 +10447,12 @@ components:
               minimum: 0
               type: integer
           type: object
+        monitor_priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
         noScreenshot:
           description: Prevents saving screenshots of the steps.
           type: boolean
@@ -11380,6 +11390,23 @@ components:
           description: The custom metrics usage by tag(s).
           format: double
           type: number
+        cws_container_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s)
+          format: double
+          type: number
+        cws_container_usage:
+          description: The Cloud Workload Security container usage by tag(s)
+          format: double
+          type: number
+        cws_host_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s)
+          format: double
+          type: number
+        cws_host_usage:
+          description: The Cloud Workload Security host usage by tag(s)
+          format: double
+          type: number
         infra_host_percentage:
           description: The percentage of infrastructure host usage by tag(s).
           format: double
@@ -11450,6 +11477,29 @@ components:
           description: The network device usage by tag(s).
           format: double
           type: number
+      type: object
+    UsageAuditLogsHour:
+      description: Audit logs usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        lines_indexed:
+          description: The total number of audit logs lines indexed during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageAuditLogsResponse:
+      description: Response containing the audit logs usage for each hour for a given
+        organization.
+      properties:
+        usage:
+          description: Get hourly usage for audit logs.
+          items:
+            $ref: '#/components/schemas/UsageAuditLogsHour'
+          type: array
       type: object
     UsageBillableSummaryBody:
       description: Response with properties for each aggregated usage type.
@@ -11534,13 +11584,39 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         lambda_function_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_15day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_180day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_30day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_3day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_45day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_60day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_7day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_90day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_custom_retention_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_ingested_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        network_device_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_flow_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        prof_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         rum_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -11564,18 +11640,18 @@ components:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
-    UsageComplianceHour:
-      description: Compliance Monitoring usage for a given organization for a given
+    UsageCWSHour:
+      description: Cloud Workload Security usage for a given organization for a given
         hour.
       properties:
-        compliance_container_count:
-          description: The total number of compliance container hours from the start
-            of the given hour's month until the given hour.
+        cws_container_count:
+          description: "The total number of Cloud Workload Security container hours\
+            \ from the start of the given hour\u2019s month until the given hour."
           format: int64
           type: integer
-        compliance_host_count:
-          description: The total number of compliance hosts hours from the start of
-            the given hour's month until the given hour.
+        cws_host_count:
+          description: "The total number of Cloud Workload Security host hours from\
+            \ the start of the given hour\u2019s month until the given hour."
           format: int64
           type: integer
         hour:
@@ -11583,14 +11659,43 @@ components:
           format: date-time
           type: string
       type: object
-    UsageComplianceResponse:
-      description: The response containing the Compliance Monitoring usage for each
+    UsageCWSResponse:
+      description: Response containing the Cloud Workload Security usage for each
         hour for a given organization.
       properties:
         usage:
-          description: Get hourly usage for Compliance Monitoring.
+          description: Get hourly usage for Cloud Workload Security.
           items:
-            $ref: '#/components/schemas/UsageComplianceHour'
+            $ref: '#/components/schemas/UsageCWSHour'
+          type: array
+      type: object
+    UsageCloudSecurityPostureManagementHour:
+      description: Cloud Security Posture Management usage for a given organization
+        for a given hour.
+      properties:
+        container_count:
+          description: The total number of Cloud Security Posture Management containers
+            during a given hour.
+          format: int64
+          type: integer
+        host_count:
+          description: The total number of Cloud Security Posture Management hosts
+            during a given hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageCloudSecurityPostureManagementResponse:
+      description: The response containing the Cloud Security Posture Management usage
+        for each hour for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Cloud Security Posture Management.
+          items:
+            $ref: '#/components/schemas/UsageCloudSecurityPostureManagementHour'
           type: array
       type: object
     UsageCustomReportsAttributes:
@@ -12258,6 +12363,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        audit_logs_lines_indexed_sum:
+          description: Shows the sum of audit logs lines indexed over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for all organizations.
@@ -12283,14 +12393,6 @@ components:
             current date for all organizations.
           format: int64
           type: integer
-        compliance_container_count_sum:
-          description: Shows the sum of compliance containers over all hours in the
-            current date for all organizations.
-        compliance_host_count_sum:
-          description: Shows the sum of compliance hosts over all hours in the current
-            date for all organizations.
-          format: int64
-          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -12301,9 +12403,34 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_container_hwm:
+          description: Shows the high-water mark of Cloud Security Posture Management
+            containers over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cws_container_count_avg:
+          description: Shows the average of all distinct Cloud Workload Security containers
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Workload Security hosts
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         date:
@@ -12456,6 +12583,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        audit_logs_lines_indexed_sum:
+          description: Shows the sum of all audit logs lines indexed over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current date for the given org.
@@ -12481,14 +12613,6 @@ components:
             current date for the given org.
           format: int64
           type: integer
-        compliance_container_agg_sum:
-          description: Shows the sum of all compliance containers over all hours in
-            the current date for the given org.
-        compliance_host_agg_sum:
-          description: Shows the sum of all compliance hosts over all hours in the
-            current date for the given org.
-          format: int64
-          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
@@ -12499,9 +12623,34 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_hwm:
+          description: Shows the high-water mark of Cloud Security Posture Management
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        cws_container_count_avg:
+          description: Shows the average of all distinct Cloud Workload Security containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Workload Security hosts
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -12652,6 +12801,11 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        audit_logs_lines_indexed_agg_sum:
+          description: Shows the sum of all audit logs lines indexed over all hours
+            in the current months for all organizations.
+          format: int64
+          type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
             the current months for all organizations.
@@ -12682,14 +12836,6 @@ components:
             current months for all organizations.
           format: int64
           type: integer
-        compliance_container_agg_sum:
-          description: Shows the sum of all compliance containers over all hours in
-            the current months for all organizations.
-        compliance_host_agg_sum:
-          description: Shows the sum of all compliance hosts over all hours in the
-            current months for all organizations.
-          format: int64
-          type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current months for all organizations.
@@ -12700,9 +12846,35 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        cspm_container_avg_sum:
+          description: Shows the average number of Cloud Security Posture Management
+            containers over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_container_hwm_sum:
+          description: Shows the sum of the the high-water marks of Cloud Security
+            Posture Management containers over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
+        cspm_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         custom_ts_sum:
           description: Shows the average number of distinct custom metrics over all
             hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cws_containers_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security containers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cws_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Workload Security hosts
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         end_date:
@@ -13000,9 +13172,13 @@ components:
         day:
           description: The day value from the user request that contains the returned
             usage data. (If day was used the request)
+          format: date-time
+          type: string
         month:
           description: The month value from the user request that contains the returned
             usage data. (If month was used the request)
+          format: date-time
+          type: string
         pagination:
           $ref: '#/components/schemas/UsageAttributionPagination'
       type: object
@@ -19029,19 +19205,27 @@ paths:
         **Service Check Query**
 
 
-        Example: `"check".over(tags).last(count).count_by_status()`
+        Example: `"check".over(tags).last(count).by(group).count_by_status()`
 
 
         - **`check`** name of the check, e.g. `datadog.agent.up`
 
         - **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod",
-        "role:db")`
+        "role:db")`; **`over`** cannot be blank.
 
         - **`count`** must be at greater than or equal to your max threshold (defined
         in the `options`). It is limited to 100.
 
         For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
-        statuses, `count` should be 3.
+        statuses, `count` should be at least 3.
+
+        - **`group`** must be specified for check monitors. Per-check grouping is
+        already explicitly known for some service checks.
+
+        For example, Postgres integration monitors are tagged by `db`, `host`, and
+        `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
+        Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation
+        for more information.
 
 
         **Event Alert Query**
@@ -22905,6 +23089,54 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/usage/audit_logs:
+    get:
+      description: Get hourly usage for audit logs.
+      operationId: GetUsageAuditLogs
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAuditLogsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for audit logs
+      tags:
+      - Usage Metering
+      x-menu-order: 31
+      x-undo:
+        type: safe
   /api/v1/usage/aws_lambda:
     get:
       description: Get hourly usage for lambda.
@@ -22989,10 +23221,10 @@ paths:
       x-menu-order: 19
       x-undo:
         type: safe
-  /api/v1/usage/compliance-monitoring:
+  /api/v1/usage/cspm:
     get:
-      description: Get hourly usage for Compliance Monitoring.
-      operationId: GetUsageComplianceMonitoring
+      description: Get hourly usage for Cloud Security Posture Management (CSPM).
+      operationId: GetUsageCloudSecurityPostureManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
           for usage beginning at this hour.'
@@ -23017,7 +23249,7 @@ paths:
           content:
             application/json;datetime-format=rfc3339:
               schema:
-                $ref: '#/components/schemas/UsageComplianceResponse'
+                $ref: '#/components/schemas/UsageCloudSecurityPostureManagementResponse'
           description: OK
         '400':
           content:
@@ -23031,10 +23263,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get hourly usage for Compliance Monitoring
+      summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
       x-menu-order: 30
+      x-undo:
+        type: safe
+  /api/v1/usage/cws:
+    get:
+      description: Get hourly usage for Cloud Workload Security.
+      operationId: GetUsageCWS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCWSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Cloud Workload Security
+      tags:
+      - Usage Metering
+      x-menu-order: 31
       x-undo:
         type: safe
   /api/v1/usage/fargate:

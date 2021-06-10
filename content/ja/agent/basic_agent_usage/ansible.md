@@ -12,6 +12,11 @@ Ansible Datadog のロールは、Datadog Agent とインテグレーション�
 
 - Ansible v2.6 以上。
 - Debian と RHEL ベースの Linux ディストリビューション、および Windows のほとんどをサポートしていること。
+- Windows で Ansible 2.10+ を使うには、`ansible.windows` コレクションをインストールする必要があります。
+
+  ```shell
+  ansible-galaxy collection install ansible.windows
+  ```
 
 ### インストール
 
@@ -46,28 +51,29 @@ Datadog Agent をホストにデプロイするには、Datadog のロールと 
 | `datadog_disable_default_checks` | すべてのデフォルトチェックを削除するには、`true` に設定します。 |
 | `datadog_config`                           | メインの Agent コンフィギュレーションの設定。<br> - Agent v6 および v7 では `/etc/datadog-agent/datadog.yaml` <br> - Agent v5 では `/etc/dd-agent/datadog.conf`（`[Main]` セクションの下）                                                                                                               |
 | `datadog_config_ex`                        | （任意）`/etc/dd-agent/datadog.conf` に追加する INI セクション（Agent v5 のみ）。                                                                                                                                                                                                                      |
-| `datadog_apt_repo`                         | デフォルトの Datadog `apt` レポジトリを上書きします。                                                                                                                                                                                                                                                            |
+| `datadog_apt_repo`                         | デフォルトの Datadog `apt` リポジトリをオーバーライドします。リポジトリのメタデータが Datadog の署名キーで署名されている場合は、`signed-by` オプションを使用してください: `deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://yourrepo`                                                                 |
 | `datadog_apt_cache_valid_time`             | デフォルトの apt キャッシュの有効期限を上書きします（デフォルトでは 1 時間）。                                                                                                                                                                                                                                      |
-| `datadog_apt_key_url_new`                  | Datadog `apt` キーへのデフォルトの URL を上書きします。非推奨の `datadog_apt_key_url` 変数は、ロールから削除された期限切れのキー（キー ID : `382E94DE`）を参照します。                                                                                                                             |
+| `datadog_apt_key_url_new`                  | Datadog `apt` キーを取得する場所をオーバーライドします (非推奨の `datadog_apt_key_url` 変数は、ロールから削除されて期限切れとなったキーを参照します)。URL は通常、 キー `382E94DE` および `F14F620E` を含む GPG 鍵束となります。                            |
 | `datadog_yum_repo`                         | デフォルトの Datadog `yum` レポジトリを上書きします。                                                                                                                                                                                                                                                            |
+| `datadog_yum_repo_gpgcheck`                | デフォルトの `repo_gpgcheck` 値 (空白) をオーバーライドします。値が空白、かつカスタム `datadog_yum_repo` が使用されておらずシステムが RHEL/CentOS 8.1 でない場合 (dnf の[バグ](https://bugzilla.redhat.com/show_bug.cgi?id=1792506)の関係)、値は動的に `yes` に設定されます。そうでない場合は `no` が設定されます。Agent 5 では、repodata 署名認証は常にオフになっています。                                                                         |
 | `datadog_yum_gpgcheck`                     | デフォルトの `gpgcheck` の値 (`yes`) を上書き - パッケージ GPG 署名証明をオフにするには `no` を使用します。                                                                                                                                                                                                  |
 | `datadog_yum_gpgkey`                       | Agent v5 および v6（6.13 以下）のパッケージの検証に使用される Datadog `yum` キー（キー ID : `4172A230`）へのデフォルト URL を上書きします。                                                                                                                                                                               |
 | `datadog_yum_gpgkey_e09422b3`              | Agent 6.14 以上のパッケージの検証に使用される Datadog `yum` キー（キー ID : `E09422B3`）へのデフォルト URL を上書きします。                                                                                                                                                                                               |
 | `datadog_yum_gpgkey_e09422b3_sha256sum`    | `datadog_yum_gpgkey_e09422b3` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                   |
 | `datadog_zypper_repo`                      | デフォルトの Datadog `zypper` レポジトリを上書きします。                                                                                                                                                                                                                                                         |
+| `datadog_zypper_repo_gpgcheck`             | デフォルトの `repo_gpgcheck` 値 (空白) をオーバーライドします。値が空白、かつカスタム `datadog_zypper_repo` が使用されていない場合、値は動的に `yes` に設定されます。そうでない場合は `no` が設定されます。Agent 5 では、repodata 署名認証は常にオフになっています。                                                    |
 | `datadog_zypper_gpgcheck`                  | デフォルトの `gpgcheck` の値 (`yes`) を上書き - パッケージ GPG 署名証明をオフにするには `no` を使用します。                                                                                                                                                                                                  |
 | `datadog_zypper_gpgkey`                    | Agent v5 および v6（6.13 以下）のパッケージの検証に使用される Datadog `zypper` キー（キー ID : `4172A230`）へのデフォルト URL を上書きします。                                                                                                                                                                            |
 | `datadog_zypper_gpgkey_sha256sum`          | `datadog_zypper_gpgkey` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                         |
 | `datadog_zypper_gpgkey_e09422b3`           | Agent 6.14 以上のパッケージの検証に使用される Datadog `zypper` キー（キー ID : `E09422B3`）へのデフォルト URL を上書きします。                                                                                                                                                                                            |
 | `datadog_zypper_gpgkey_e09422b3_sha256sum` | `datadog_zypper_gpgkey_e09422b3` キーの、デフォルトのチェックサムを上書きします。                                                                                                                                                                                                                                |
 | `datadog_agent_allow_downgrade`            | `yes` に設定すると、apt ベースのプラットフォームで Agent のダウングレードが可能になります（注意事項あり。詳しくは `defaults/main.yml` を確認してください）。**注**: CentOS では、Ansible 2.4 以上でのみ可能になります。                                                                                                                             |
-| `use_apt_backup_keyserver`                 | `true` に設定すると、デフォルトではなくバックアップのキーサーバーを使用します。                                                                                                                                                                                                                                     |
 | `datadog_enabled`                          | `false` に設定すると、`datadog-agent` のサービスが開始されなくなります（デフォルトでは `true`）。                                                                                                                                                                                                                     |
 | `datadog_additional_groups`                | `datadog_user` に追加するグループのリスト、またはグループをコンマで区切ったリストの文字列（Linux のみ）。                                                                                                                                                                                    |
 | `datadog_windows_ddagentuser_name`         | 作成または使用する Windows ユーザーの名前。`<domain>\<user>` の形式で指定します（Windows のみ）。                                                                                                                                                                                                                   |
 | `datadog_windows_ddagentuser_password`     | ユーザーの作成、あるいはサービスの登録に使用するパスワード（Windows のみ）。                                                                                                                                                                                                                          |
 
-### インテグレーション
+### 統合
 
 Datadog インテグレーション（チェック）を構成するには、`datadog_checks` セクションにエントリを追加します。第 1 レベルのキーにチェックの名前を入力し、値にはコンフィギュレーションファイルに記載する YAML ペイロードを入力します。以下にその例を示します。
 
@@ -167,9 +173,11 @@ datadog_config:
 
 #### システムプローブ
 
-[ネットワークパフォーマンスモニタリング][7]（NPM）のシステムプローブを、`system_probe_config` 変数の下に構成します。その下にネストされる変数はすべて、`system-probe.yaml` に書き込まれます。
+システムプローブは `system_probe_config` 変数の下で構成されます。その下にネストされる変数はすべて、`system_probe_config` セクションの `system-probe.yaml` に書き込まれます。
 
-**注**: システムプローブを使用できるのは、Agent v6 以上の Linux のみです。
+[ネットワークパフォーマンスモニタリング][7]（NPM）は、 `network_config` 変数の下で構成されます。その下にネストされる変数はすべて、`network_config` セクションの `system-probe.yaml` に書き込まれます。
+
+**Note**: システムプローブを使用できるのは、Agent v6 以上の Linux のみです。NPM は v6.27+ 以降および v7.27 以降を搭載した Windows でサポートされています。
 
 #### 構成サンプル
 
@@ -180,17 +188,20 @@ datadog_config:
     scrub_args: true
     custom_sensitive_words: ['consul_token','dd_api_key']
 system_probe_config:
-  enabled: true
   sysprobe_socket: /opt/datadog-agent/run/sysprobe.sock
+network_config:
+  enabled: true
 ```
 
-変更が終わったら、以下の手順に従ってください。
+**注**: このコンフィギュレーションは Agent 6.24.1 以降および 7.24.1+ 以降で機能します。それ以前のバージョンの Agent については、[公開ドキュメント][8]の「system-probe の有効化」を参照してください。
+
+Linux の場合、この変更後、インストールした Agent のバージョンが 6.18.0 または 7.18.0 より前の場合は、以下のステップに従います。
 
 1. システムプローブを起動します: `sudo service datadog-agent-sysprobe start` **注**: ご使用のシステムで service ラッパーを使用できない場合は、代わりに次のコマンドを使用してください: `sudo initctl start datadog-agent-sysprobe`。
-2. [Agent を再起動します][8]: `sudo service datadog-agent restart`
+2. [Agent を再起動します][9]: `sudo service datadog-agent restart`
 3. システムプローブがブートから起動されるようにします: `sudo service enable datadog-agent-sysprobe`。
 
-手動でセットアップする場合は、[NPM][9] のドキュメントを参照してください。
+手動でセットアップする場合は、[NPM][8] のドキュメントを参照してください。
 
 #### Agent v5
 
@@ -204,12 +215,6 @@ datadog_config_ex:
     scrub_args: true
     custom_sensitive_words: "<最初の語>,<次の語>"
 ```
-
-### その他のタスク
-
-`pre_tasks` と `post_tasks` のフォルダーを使用して、ユーザー定義のタスクを実行できます。Datadog Ansible ロールにあるタスクの実行前には `pre_tasks` のタスクが、実行後には `post_tasks` のタスクが、必ず実行されます。
-
-サポート対象のプラットフォームでインストールタスクを行うと、`datadog_agent_install` 変数が登録されます。この変数を `post_tasks` で使用することにより、インストールタスクの結果をチェックできます。インストールタスクによって何かがインストールされると、`datadog_agent_install.changed` が `true` にセットされ、それ以外なら（要求したバージョンがすでにインストールされていたなど）`false` がセットされます。
 
 ## バージョン
 
@@ -260,6 +265,8 @@ Datadog Ansible ロールは、Linux のみを対象として、Datadog Agent v5
 | `datadog_agent5_yum_repo`    | `datadog_yum_repo`    |
 | `datadog_agent5_zypper_repo` | `datadog_zypper_repo` |
 
+バージョン 4.9.0 以降は APT キーが https://keys.datadoghq.com から取得されるようになったため、`use_apt_backup_keyserver` 変数は削除されました。
+
 #### Windows
 
 `datadog_windows_download_url` 変数が設定されていない場合は、`datadog_agent_major_version` に対応する Windows 公式 MSI パッケージが使用されます。
@@ -275,7 +282,7 @@ Datadog Ansible ロールは、Linux のみを対象として、Datadog Agent v5
 
 Agent v6 を v7 にアップグレードするには、`datadog_agent_major_version: 7` を使用して最新バージョンをインストールするか、`datadog_agent_version` を設定して Agent v7 のバージョンを指定します。Agent v5 から v6 へのアップグレードと同じ方法を使用してください。
 
-#### インテグレーション
+#### 統合
 
 **Agent v6.8 以上が対象**
 
@@ -285,6 +292,10 @@ Datadog インテグレーションを、バージョンを指定してインス
 
 - `install`: 指定したバージョンのインテグレーションをインストールします。
 - `remove`: インテグレーションを削除します。
+
+##### Datadog Marketplace
+
+[Datadog Marketplace](https://www.datadoghq.com/blog/datadog-marketplace/)  インテグレーションは `datadog_integration` リソース経由でインストールすることができます。Marketplace のインテグレーションは「サードパーティ」にあたるため、`third_party: true` の設定が必要です。次の例を参照してください。
 
 ##### 構文
 
@@ -335,7 +346,7 @@ Agent を以前のバージョンにダウングレードするには、
 
 以降では、Datadog Ansible ロールを使用する際の参考になるプレイブックのサンプルをいくつか紹介します。
 
-以下の例は、データを Datadog US（デフォルト）に送信し、ログを有効にして、チェックをいくつか構成します。
+以下の例では、データを Datadog US（デフォルト）に送信し、ログや NPM を有効にし、いくつかのチェックを構成します。
 
 ```yml
 - hosts: servers
@@ -385,7 +396,7 @@ Agent を以前のバージョンにダウングレードするには、
               - "source:nginx"
               - "<KEY>:<VALUE>"
 
-        #ログ収集はAgent 6 および 7 で可能
+        #ログ収集は Agent 6 および 7 で可能
         logs:
           - type: file
             path: /var/log/access.log
@@ -397,14 +408,14 @@ Agent を以前のバージョンにダウングレードするには、
             service: nginx
             source: nginx
             sourcecategory: http_web_access
-    # datadog_integration は Agent 6.8 以降で可能
+    # datadog_integration is available on Agent 6.8+
     datadog_integration:
       datadog-elastic:
         action: install
         version: 1.11.0
       datadog-postgres:
         action: remove
-    system_probe_config:
+    network_config:
       enabled: true
 ```
 
@@ -438,7 +449,7 @@ Agent を以前のバージョンにダウングレードするには、
 
 ### Windows
 
-Windows では、`become: yes` を使用するとロールがエラーになるため、このオプションを削除する必要があります。以下に、サンプルのプレイブックを Windows ホストで動作させるための方法を 2 つ説明します。
+Windows では `become: yes` オプションを削除して、ロールの失敗を回避します。以下に、サンプルのプレイブックを Windows ホストで動作させるための方法を 2 つ説明します。
 
 #### インベントリファイル
 
@@ -485,6 +496,8 @@ ansible_become=no
 
 ### Debian stretch
 
+**注:** この情報はバージョン 4.9.0 以前のロールに適用されます。4.9.0 以降、`apt_key` モジュールはロールで使用されなくなりました。
+
 Debian Stretch では、ロールが `apt_key` モジュールを使用する際にシステム依存性を追加しなければ、正しく動作できません。モジュールはその依存性（`dirmngr`）を提供していないため、現在のロールを使用するために、以下のコンフィギュレーションをプレイブックに追加してください。
 
 ```yml
@@ -496,12 +509,19 @@ Debian Stretch では、ロールが `apt_key` モジュールを使用する際
       apt:
         name: dirmngr
         state: present
-
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
-    datadog_api_key: "<DD_API_キー>"
+    datadog_api_key: "<YOUR_DD_API_KEY>"
 ```
+
+### Python 3 インタープリターを備えた CentOS 6/7 
+
+このロールで CentOS ベースのホストに Agent をインストールするために使用される `yum` Python モジュールは、Python 2 でのみ使用できます。ターゲットホストで Python 3 インタープリターが検出された場合、`dnf` パッケージマネージャーと `dnf` Python モジュールが使用されます。
+
+ただし、CentOS 8 以前の CentOS ベースのホストでは、`dnf` と `dnf` Python モジュールはデフォルトではインストールされてはいません。この場合、Python 3 インタープリターが使用されていると Agent をインストールできません。この状況が検出されるとこのロールは早期に失敗し、CentOS / RHEL 8 以降に Agent をインストールする際に Python 2 インタープリターが必要であることを示します。
+
+この早期の障害検出を回避するには（たとえば、`dnf` と `python3-dnf` パッケージがホストで利用可能な場合）、`datadog_ignore_old_centos_python3_error` 変数を `true` に設定します。
 
 ### Windows
 
@@ -523,6 +543,6 @@ Agent バージョン `6.14.0` と `6.14.1` には、Windows における重大�
 [5]: https://github.com/DataDog/integrations-core
 [6]: https://docs.datadoghq.com/ja/infrastructure/process/
 [7]: https://docs.datadoghq.com/ja/network_performance_monitoring/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[9]: https://docs.datadoghq.com/ja/network_performance_monitoring/installation/?tab=agent#setup
+[8]: https://docs.datadoghq.com/ja/network_performance_monitoring/installation/?tab=agent#setup
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [10]: https://app.datadoghq.com/help/agent_fix

@@ -16,6 +16,7 @@ further_reading:
     text: Python ログの収集、カスタマイズ、一元化方法
 git_integration_title: python
 has_logo: true
+integration_id: python
 integration_title: Python
 is_public: true
 kind: インテグレーション

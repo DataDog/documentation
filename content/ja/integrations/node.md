@@ -18,6 +18,7 @@ further_reading:
     text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
 git_integration_title: node
 has_logo: true
+integration_id: node
 integration_title: NodeJS
 is_public: true
 kind: インテグレーション

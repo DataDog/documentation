@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/pivotal/'
 draft: false
 git_integration_title: pivotal
 has_logo: true
+integration_id: pivotal
 integration_title: "Pivotal\_Tracker"
 is_public: true
 kind: integration

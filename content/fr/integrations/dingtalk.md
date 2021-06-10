@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/dingtalk/'
 draft: false
 git_integration_title: dingtalk
 has_logo: true
+integration_id: dingtalk
 integration_title: DingTalk
 is_public: true
 kind: integration
@@ -29,7 +30,7 @@ Intégrez DingTalk à Datadog pour :
 
 Pour installer l'intégration DingTalk, accédez à son [carré d'intégration][1] dans l'application Datadog.
 
-## Implémentation
+## Configuration
 
 Pour intégrer Datadog à votre groupe DingTalk :
 

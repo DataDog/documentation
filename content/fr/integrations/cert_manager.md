@@ -1,6 +1,8 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    Cert-Manager Overview Dashboard: assets/dashboards/certmanager_overview.json
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -13,11 +15,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/cert_manager/README.md'
 display_name: cert-manager
+draft: false
 git_integration_title: cert_manager
 guid: c9bdaf11-fe15-4892-ae30-47c5124144e5
 integration_id: cert-manager
 integration_title: cert-manager
-is_public: false
+is_public: true
 kind: integration
 maintainer: ara.pulido@datadoghq.com
 manifest_version: 1.0.0
@@ -36,15 +39,28 @@ supported_os:
 
 Ce check recueille des métriques à partir de [cert-manager][1].
 
+![Dashboard de présentation de cert-manager][2]
+
 ## Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
+#### Agent v7.26.0/v6.26.0 ou ultérieur
+
+Pour utiliser une intégration provenant du référentiel `integrations-extra` avec l'Agent Docker, nous vous recommandons de générer l'Agent avec l'intégration installée. Utilisez le Dockerfile suivant pour créer une version mise à jour de l'Agent comprenant l'intégration `cert_manager` issue de `integrations-extras` :
+
+```
+FROM gcr.io/datadoghq/agent:latest
+RUN agent integration install -r -t datadog-cert_manager==<VERSION_INTÉGRATION>
+```
+
+#### Versions antérieures de l'Agent
+
 Pour installer le check cert_manager sur votre host :
 
-1. Installez le [kit de développement][3].
+1. Installez le [kit de développement][4].
 2. Clonez le dépôt `integrations-extras` :
 
    ```shell
@@ -63,7 +79,7 @@ Pour installer le check cert_manager sur votre host :
    ddev -e release build cert_manager
    ```
 
-5. [Téléchargez le manifeste de l'Agent pour installer l'Agent Datadog en tant que DaemonSet][4].
+5. [Téléchargez le manifeste de l'Agent pour installer l'Agent Datadog en tant que DaemonSet][5].
 6. Créez deux `PersistentVolumeClaim`, un pour le code des checks et l'autre pour la configuration.
 7. Ajoutez-les en tant que volumes au modèle de pod de l'Agent, puis utilisez-les pour vos checks et votre configuration :
 
@@ -114,13 +130,13 @@ Pour installer le check cert_manager sur votre host :
 
 ### Configuration
 
-1. Modifiez le fichier `cert_manager.d/conf.yaml` dans le dossier `/confd` que vous avez ajouté au pod de l'Agent pour commencer à recueillir vos données de performance cert_manager. Consultez le [fichier d'exemple cert_manager.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `cert_manager.d/conf.yaml` dans le dossier `/confd` que vous avez ajouté au pod de l'Agent pour commencer à recueillir vos données de performance cert_manager. Consultez le [fichier d'exemple cert_manager.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][7].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `cert_manager` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][8] et cherchez `cert_manager` dans la section Checks.
 
 ## Données collectées
 
@@ -139,14 +155,15 @@ cert_manager n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://github.com/jetstack/cert-manager
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile
-[5]: https://github.com/DataDog/integrations-extras/blob/master/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/cert_manager/images/overview_dashboard.png
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile
+[6]: https://github.com/DataDog/integrations-extras/blob/master/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
+[10]: https://docs.datadoghq.com/fr/help/

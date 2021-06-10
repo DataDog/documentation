@@ -15,10 +15,6 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-warning">
-Logging into the Datadog mobile app with IdP-initiated SAML is an opt-in feature. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a> to have the feature enabled for your account before you alter your SAML configuration.
-</div>
-
 In order to use the Datadog mobile app with Identity Provider (IdP) Initiated SAML, you need to pass an additional Relay State through to Datadog to trigger the mobile app landing page on login. Once enabled, all sign ins from SAML for that particular app land on a the interstitial page before proceeding.
 
 - On **mobile devices** with the Datadog mobile app installed, users should **first log in with their identity provider using their mobile browser** (see the example with Google, below). Then, the app automatically captures the request and allows the user to sign in.

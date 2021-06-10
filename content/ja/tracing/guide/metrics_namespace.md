@@ -29,155 +29,181 @@ aliases:
 
 次の定義と組み合わせます。
 
-| パラメーター               | 説明                                                                                                                                                                                                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<スパン名>`                | 操作の名前または `span.name`（例: `redis.command`、`pylons.request`、`rails.request`、`mysql.query`）。                                                                                            |
-| `<メトリクスサフィックス>`       | メトリクスの名前（例: `duration`、`hits`、`span_count`）。以下のセクションを参照してください。                                                                                                                                               |
-| `<第_2_プライマリタグ>` | メトリクス名が [第 2 プライマリタグ][4]を考慮する場合、このタグはメトリクス名の一部です。                                                                                                                       |
-| `<タグ>`                | トレースメトリクスタグ、可能なタグは、`env`、`service`、`version`、`resource`、`sublayer_type`、`sublayer_service`、`http.status_code`、`http.status_class`、Datadog Agent タグ（ホストと第 2 プライマリタグを含む）です。**注:** スパンに設定されたタグは数に含められず、トレースメトリクスのタグとして利用できません。T |
+`<SPAN_NAME>`
+: 操作の名前または `span.name`（例: `redis.command`、`pylons.request`、`rails.request`、`mysql.query`）。
+
+`<METRIC_SUFFIX>`
+: メトリクスの名前（例: `duration`、`hits`、`span_count`）。以下のセクションを参照してください。
+
+`<2ND_PRIM_TAG>` 
+: メトリクス名が [第 2 プライマリタグ][4]を考慮する場合、このタグはメトリクス名の一部です。
+
+`<TAGS>`
+: トレースメトリクスタグ、可能なタグは、`env`、`service`、`version`、`resource`、`sublayer_type`、`sublayer_service`、`http.status_code`、`http.status_class`、Datadog Agent タグ（ホストと第 2 プライマリタグを含む）です。**注:** スパンに設定されたタグは数に含められず、トレースメトリクスのタグとして利用できません。
 
 ## メトリクスサフィックス
 
 ### Hits
 
-- `trace.<スパン名>.hits`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 特定のスパンのヒット数を表します。
-  - *メトリクスタイプ:* [COUNT][5]
-  - *タグ:* `env`、`service`、`version`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.hits`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 特定のスパンのヒット数を表します。<br>
+**メトリクスタイプ:** [COUNT][5]。<br>
+**タグ:** `env`、`service`、`version`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.hits.by_http_status`
-  - *前提条件:* このメトリクスは、HTTP メタデータが存在する場合、HTTP/WEB APM サービスに存在します。
-  - *説明:* 特定のスパンのヒット数を HTTP ステータスコード別に表します。
-  - *メトリクスタイプ:* [COUNT][5]
-  - *タグ:* `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.hits.by_http_status`
+: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 特定のスパンのブレイクダウンの HTTP ステータスコード別ヒット数を表します。<br>
+**メトリクスタイプ:** [COUNT][5]。<br>
+**タグ:** `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 ### パーセンタイル集計
 
-- `trace.<スパン名>.duration.by.resource_<第_2_プライマリタグ>_service.<パーセンタイル集計>`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* リソース、サービス、[第 2 プライマリタグ][4]による処理に費やされた合計時間を測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *パーセンタイル集計:* `100p`、`50p`、`75p`、`90p`、`95p`、`99p`
-  - *タグ:* `env`、`service`、`resource`、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 処理にかかる合計時間をリソース、サービス、[第 2 プライマリタグ][4]別に測定します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**パーセンタイル集計:** `100p`、`50p`、`75p`、`90p`、`95p`、`99p`<br>
+**タグ:** `env`、`service`、`resource`、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.duration.by.resource_service.<パーセンタイル集計>`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 各リソースとサービスの組み合わせの処理に費やされた合計時間を測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *パーセンタイル集計:* `100p`、`50p`、`75p`、`90p`、`95p`、`99p`
-  - *タグ:* `env`、`service`、`resource`
+`trace.<SPAN_NAME>.duration.by.resource_service.<PERCENTILE_AGGREGATION>`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** リソースとサービスの各組み合せの処理にかかる合計時間を測定します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**パーセンタイル集計:** `100p`、`50p`、`75p`、`90p`、`95p`、`99p`<br>
+**タグ:** `env`、`service`、`resource`。
 
-- `trace.<スパン名>.duration.by.<第_2_プライマリタグ>_service.<パーセンタイル集計>`
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 各[第 2 プライマリタグ][4]とサービスの組み合わせの処理に費やされた合計時間を測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *パーセンタイル集計:* `100p`、`50p`、`75p`、`90p`、`95p`、`99p`
-  - *タグ:* `env`、`service`、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration.by.<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** [第 2 プライマリタグ][4]とサービスの各組み合わせの処理にかかる合計時間を測定します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**パーセンタイル集計:** `100p`、`50p`、`75p`、`90p`、`95p`、`99p`<br>
+**タグ:** `env`、`service`、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.duration.by.service.<パーセンタイル集計>`
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 個々のスパンの期間を表します。これは、レイテンシーを追跡し、「ユーザーが経験した待機時間の中央値はどれくらいか？」や「最も遅い 1 %のユーザーはどれくらい待つ必要があるか？」などの質問に答えるために使用されます。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *パーセンタイル集計:* `100p`、`50p`、`75p`、`90p`、`95p`、`99p`
-  - *タグ:* `env`、`service`
+`trace.<SPAN_NAME>.duration.by.service.<PERCENTILE_AGGREGATION>`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 個々のスパンの期間を表します。これは、レイテンシーを追跡し、「ユーザーが経験した待機時間の中央値はどれくらいか？」や「最も遅い 1 %のユーザーはどれくらい待つ必要があるか？」などの質問に答えるために使用されます。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**パーセンタイル集計:** `100p`、`50p`、`75p`、`90p`、`95p`、`99p`<br>
+**タグ:** `env`、`service`。
 
 ### Errors
 
-- `trace.<スパン名>.errors`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 特定のスパンのエラー数を表します。
-  - *メトリクスタイプ:* [COUNT][5]
-  - *タグ:* `env`、`service`、`version`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.errors`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 特定のスパンのエラー数を表します。<br>
+**メトリクスタイプ:** [COUNT][5]。<br>
+**タグ:** `env`、`service`、`version`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.errors.by_http_status`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 特定のスパンのエラー数を表します。
-  - *メトリクスタイプ:* [COUNT][5]
-  - *タグ:* `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.errors.by_http_status`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 特定のスパンのエラー数を表します。<br>
+**メトリクスタイプ:** [COUNT][5]。<br>
+**タグ:** `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 
 ### スパン数
 
 **注**: これは非推奨のネームスペースです。
 
-- `trace.<スパン名>.span_count`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 特定の間隔で収集されたスパンの量を表します。
-  - *メトリクスタイプ:* [COUNT][5]
-  - *タグ:* `env`、`service`、`resource`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.span_count`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 特定のインターバルで収集されたスパンの量を表します。<br>
+**メトリクスタイプ:** [COUNT][5]。<br>
+**タグ:** `env`、`service`、`resource`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.span_count.by_http_status`:
-  - *前提条件:* このメトリクスは、HTTP メタデータが存在する場合、HTTP/WEB APM サービスに存在します。
-  - *説明:* 特定の間隔で収集されたスパンの量を HTTP ステータス別に表します。
-  - *メトリクスタイプ:* [COUNT][5]
-  - *タグ:* `env`、`service`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.span_count.by_http_status`
+: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 特定のインターバルブレイクダウンで収集されたスパンの量を HTTP ステータスコード別に表します。<br>
+**メトリクスタイプ:** [COUNT][5]。<br>
+**タグ:** `env`、`service`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 
 ### Duration
 
-- `trace.<スパン名>.duration`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* スパンのコレクションの合計時間を測定します。具体的には、ある間隔ですべてのスパンが費やした合計時間で、子プロセスの待機に費やされた時間を含みます。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** スパンの収集にかかる合計時間を計測します。具体的には、1 回のインターバルですべてのスパンにかかった総時間（子処理を待機していた時間を含む）です。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 ### 継続時間
-- `trace.<スパン名>.duration.by_http_status`:
-  - *前提条件:* このメトリクスは、HTTP メタデータが存在する場合、HTTP/WEB APM サービスに存在します。
-  - *説明:* 各 HTTP ステータスのスパンのコレクションの合計時間を測定します。具体的には、ある間隔ですべてのスパンが費やした時間と、特定の HTTP ステータスの相対的な割合で、子プロセスの待機に費やされた時間を含みます。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
 
-- `trace.<スパン名>.duration.by_service`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 各サービスの実際の処理に費やされた合計時間を測定します（つまり、子プロセスの待機に費やされた時間は除外されます）。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、`sublayer_service`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration.by_http_status`
+: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 各 HTTP ステータスのスパンの収集にかかる合計時間を計測します。具体的には、1 回のインターバルおよび特定の HTTP ステータスで、すべてのスパンにかかった相対時間（子処理を待機していた時間を含む）です。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.duration.by_type`:
-  - *前提条件:* このメトリクスは、すべての APM サービスに存在します。
-  - *説明:* 各[サービスタイプ][7]の実際の処理に費やされた合計時間を測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、`sublayer_type`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration.by_service`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 各サービスで実際にかかった総処理時間を計測します（子処理を待機していた時間は除外されます）。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、`sublayer_service`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.duration.by_type.by_http_status`:
-  - *前提条件:* このメトリクスは、HTTP メタデータが存在する場合、HTTP/WEB APM サービスに存在します。
-  - *説明:* 各[サービスタイプ][7]および HTTP ステータスの実際の処理に費やされた合計時間を測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、`sublayer_type`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration.by_type`
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
+<br>
+**説明:** 各[サービスタイプ][7]で実際にかかる処理の合計時間を計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、`sublayer_type`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.duration.by_service.by_http_status`:
-  - *前提条件:* このメトリクスは、HTTP メタデータが存在する場合、HTTP/WEB APM サービスに存在します。
-  - *説明:* 各[サービス][8]および HTTP ステータスの実際の処理に費やされた合計時間を測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、`sublayer_service`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.duration.by_type.by_http_status`
+: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 各[サービスタイプ][7]および HTTP ステータスコードで実際にかかった処理の合計時間を計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、`sublayer_type`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+
+`trace.<SPAN_NAME>.duration.by_service.by_http_status`
+: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 各[サービス][8]および HTTP ステータスコードで実際にかかった処理の合計時間を計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、`sublayer_service`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 ### Apdex
 
-- `trace.<スパン名>.apdex.by.resource_<第_2_プライマリタグ>_service`:
-  - *前提条件:* このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-  - *説明:* リソース、[第 2 プライマリタグ][4]およびサービスのすべての組み合わせの [Apdex][9] スコアを表します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`
+: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** リソース、[第 2 プライマリタグ][4]、サービスのすべての組み合わせの [Apdex][9] スコアを表します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.apdex.by.resource_service`:
-  - *前提条件:* このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-  - *説明:* リソースとウェブサービスの組み合わせごとに [Apdex][9] スコアを測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、`resource`
+`trace.<SPAN_NAME>.apdex.by.resource_service`
+: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** リソースとウェブサービスの各組み合わせの [Apdex][9] スコアを計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、`resource`
 
-- `trace.<スパン名>.apdex.by.<第_2_プライマリタグ>_service`:
-  - *前提条件:* このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-  - *説明:* [第 2 プライマリタグ][4]とウェブサービスの組み合わせごとに [Apdex][9] スコアを測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`、[第 2 プライマリタグ][4]
+`trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`
+: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** [第 2 プライマリタグ][4]とウェブサービスの各組み合わせの [Apdex][9] スコアを計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`、[第 2 プライマリタグ][4]。
 
-- `trace.<スパン名>.apdex.by.service`:
-  - *前提条件:* このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-  - *説明:* 各ウェブサービスの [Apdex][9] スコアを測定します。
-  - *メトリクスタイプ:* [GAUGE][6]
-  - *タグ:* `env`、`service`
+`trace.<SPAN_NAME>.apdex.by.service`
+: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
+<br>
+**説明:** 各ウェブサービスの [Apdex][9] スコアを計測します。<br>
+**メトリクスタイプ:** [GAUGE][6]。<br>
+**タグ:** `env`、`service`。
 
 ## その他の参考資料
 

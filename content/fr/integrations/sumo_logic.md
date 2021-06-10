@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/sumologic/'
 draft: false
 git_integration_title: sumo_logic
 has_logo: true
+integration_id: ''
 integration_title: Sumo Logic
 is_public: true
 kind: integration

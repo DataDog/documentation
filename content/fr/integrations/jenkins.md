@@ -44,6 +44,7 @@ Vous pouvez configurer votre plug-in de deux façons différentes pour transmett
 
 * **CONFIGURATION RECOMMANDÉE** : en utilisant un serveur DogStatsD ou un Agent Datadog en tant que redirecteur entre Jenking et Datadog.
   - La collecte de logs sur les builds fonctionne uniquement lorsqu'un Agent Datadog complet est installé.
+  - Pour les métriques envoyées depuis un host externe, l'Agent Datadog exige la configuration suivante pour DogStatsD : `dogstatsd_non_local_traffic: true`. Ce paramètre peut être configuré à l'aide du [fichier de configuration][17] `datadog.yaml`.
 * En envoyant directement les données à Datadog, via HTTP.
   - L'implémentation du client HTTP utilisée dispose d'un délai d'expiration d'une minute. En cas de problème de connexion avec Datadog, cela peut ralentir votre instance Jenkins.
 
@@ -67,7 +68,7 @@ Pour configurer votre plug-in Datadog, accédez à `Manage Jenkins -> Configure 
 1. Cliquez sur le bouton radio correspondant à l'option **Use the Datadog Agent to report to Datadog**.
 2. Indiquez le `hostname` et le `port` de votre serveur DogStatsD.
 3. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
-4. (Facultatif) Spécifiez votre port de collecte des logs et configurez la [collecte de logs](#collecte-de-logs), puis sélectionnez Enable Log Collection dans l'onglet Advanced.
+4. (Facultatif) Spécifiez votre port de collecte des logs et configurez la [collecte de logs](#collecte-de-logs-avec-l-Agent), puis sélectionnez Enable Log Collection dans l'onglet Advanced.
 5. Enregistrez votre configuration.
 
 #### Script Groovy
@@ -112,7 +113,7 @@ d.setTargetHost('localhost')
 d.setTargetPort(8125)
 
 // Si vous souhaitez recueillir les logs
-d.setLogCollectionPort(8125)
+d.setTargetLogCollectionPort(8125)
 
 // Personnalisation, voir la section dédiée ci-dessous
 d.setExcluded('job1,job2')
@@ -121,7 +122,7 @@ d.setExcluded('job1,job2')
 d.save()
 ```
 
-#### Variables d'environnement
+#### Avec des variables d'environnement
 
 Configurez votre plug-in Datadog avec des variables d'environnement à l'aide de la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH`, qui indique le processus de transmission à utiliser.
 
@@ -149,6 +150,7 @@ La journalisation repose sur l'utilisation de `java.util.Logger`, un logger qui 
 
 Le plug-in Datadog ajoute une étape "datadog" qui offre certaines options de configuration pour vos tâches basées sur des pipelines.
 Dans les pipelines déclaratifs, ajoutez l'étape à un bloc d'options de premier niveau comme suit :
+
 ```groovy
 pipeline {
     agent any
@@ -166,6 +168,7 @@ pipeline {
 ```
 
 Dans un pipeline scripté, incorporez la section concernée dans l'étape Datadog comme suit :
+
 ```groovy
 datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
   node {
@@ -185,8 +188,8 @@ Pour personnaliser votre configuration globale, dans Jenkins, accédez à `Manag
 | Tâches exclues           | Une liste d'expressions régulières séparées par des virgules servant à exclure certains noms de tâches de la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
 | Tâches incluses           | Une liste d'expressions régulières séparées par des virgules servant à inclure certains noms de tâches dans la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
 | Global tag file            | Chemin vers un fichier d'espace de travail contenant une liste de tags séparés par des virgules (fonctionnalité non compatible avec les tâches de pipeline).                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
-| Global tags                | Une liste de tags séparés par des virgules à appliquer à l'ensemble des métriques, événements et checks de service.                                                                                                                                                         | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
-| Global job tags            | Une liste d'expressions régulières séparées par des virgules permettant d'identifier une tâche, et une liste de tags à appliquer à cette tâche. **Remarque** : les tags peuvent faire référence à des groupes de correspondance dans l'expression régulière, à l'aide du caractère `$`. Exemple : `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3`. | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
+| Global tags                | Liste de tags séparés par des virgules à appliquer à l'ensemble des métriques, événements et checks de service. Les tags peuvent inclure des variables d'environnement définies dans l'instance jenkins master.                                                                                                                                                          | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
+| Global job tags            | Liste d'expressions régulières séparées par des virgules permettant d'identifier une tâche, et liste de tags à appliquer à cette tâche. Les tags peuvent inclure des variables d'environnement définies dans l'instance jenkins master. **Remarque** : les tags peuvent faire référence à des groupes de correspondance dans l'expression régulière, à l'aide du caractère `$`. Exemple : `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3`. | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
 | Send security audit events | Envoie le `Security Events Type` (type des événements de sécurité) des événements et métriques (fonctionnalité activée par défaut).                                                                                                                                                                | `DATADOG_JENKINS_PLUGIN_EMIT_SECURITY_EVENTS` |
 | Send system events         | Envoie le `System Events Type` (type des événements système) des événements et métriques (fonctionnalité activée par défaut).                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_EMIT_SYSTEM_EVENTS`   |
 | Enable Log Collection      | Recueille et envoie des logs sur les builds (fonctionnalité désactivée par défaut).                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS`   |
@@ -275,6 +278,7 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 | `jenkins.job.pause_duration`            | Durée pendant laquelle le build était en pause (en secondes).                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
 | `jenkins.job.started`                  | Taux de tâches commencées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.job.stage_duration`           | Durée des différentes étapes.                                 | `jenkins_url`, `job`, `user_id`, `stage_name`, `stage_depth`, `stage_parent`, `result` |
+| `jenkins.job.stage_pause_duration`     | Durée de la pause des différentes étapes (en millisecondes).         | `jenkins_url`, `job`, `user_id`, `stage_name`, `stage_depth`, `stage_parent`, `result` |
 | `jenkins.job.stage_completed`          | Taux d'étapes terminées.                                      | `jenkins_url`, `job`, `user_id`, `stage_name`, `stage_depth`, `stage_parent`, `result` |
 | `jenkins.job.waiting`                  | Délai d'attente d'exécution de la tâche (en millisecondes).           | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
 | `jenkins.node.count`                   | Nombre total de nœuds.                                           | `jenkins_url`                                                              |
@@ -303,7 +307,6 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 | `jenkins.user.authenticated`           | Taux d'utilisateurs en cours d'authentification.                                  | `jenkins_url`, `user_id`                                                   |
 | `jenkins.user.logout`                  | Taux d'utilisateurs en cours de déconnexion.                                     | `jenkins_url`, `user_id`                                                   |
 
-
 #### Collecte de logs avec l'Agent
 
 **Remarque** : cette configuration est uniquement valable si vous utilisez la [Configuration de l'Agent Datadog](#plug-in-transmission-dogstatsd).
@@ -314,12 +317,12 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
    logs_enabled: true
    ```
 
-
 2. Pour recueillir vos logs Jenkins, créez un [fichier source de collecte de logs personnalisé][13] pour votre Agent. Pour ce faire, créez un fichier `conf.yaml` au sein de `conf.d/jenkins.d` avec le contenu suivant :
-    ```
+
+    ```yaml
     logs:
-      - type: tcp 
-        port: <PORT> 
+      - type: tcp
+        port: <PORT>
         service: <SERVICE>
         source: jenkins
     ```
@@ -334,8 +337,7 @@ Le statut du build `jenkins.job.status` avec les tags par défaut : `jenkins_ur
 
 ## Suivi des problèmes
 
-Le système de suivi des problèmes intégré à GitHub vous permet de surveiller tous les problèmes liés à ce plug-in : [jenkinsci/datadog-plugin/issues][7].
-Cependant, compte tenu du processus d'hébergement des plug-ins Jenkins, certains problèmes peuvent également être publiés sur JIRA. Vous pouvez consulter [ce problème Jenkins][8] pour vérifier comment les problèmes sont publiés.
+Le système de suivi des problèmes intégré à GitHub vous permet de surveiller tous les problèmes liés à ce plug-in : [jenkinsci/datadog-plugin/issues][7]. Cependant, compte tenu du processus d'hébergement des plug-ins Jenkins, certains problèmes peuvent également être publiés sur JIRA. Vous pouvez consulter [ce problème Jenkins][8] pour vérifier comment les problèmes sont publiés.
 
 **Remarque** : voici les [bugs non résolus sur JIRA traitant de Datadog][9].
 
@@ -347,9 +349,7 @@ Consultez le fichier [CHANGELOG.md][10].
 
 Tout d'abord, **merci** de contribuer à ce projet.
 
-Lisez les [règles de contribution][11] (en anglais) avant d'envoyer un problème ou une pull request.
-Consultez le [document relatif au développement][12] (en anglais) pour obtenir des conseils et faire tourner un environnement de développement local rapide.
-
+Lisez les [règles de contribution][11] (en anglais) avant d'envoyer un problème ou une pull request. Consultez le [document relatif au développement][12] (en anglais) pour obtenir des conseils et faire tourner un environnement de développement local rapide.
 
 [1]: https://plugins.jenkins.io/datadog
 [2]: http://updates.jenkins-ci.org/download/war/1.632/jenkins.war
@@ -367,3 +367,4 @@ Consultez le [document relatif au développement][12] (en anglais) pour obtenir 
 [14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [15]: https://docs.datadoghq.com/fr/logs/log_collection/?tab=http
 [16]: https://raw.githubusercontent.com/jenkinsci/datadog-plugin/master/images/dashboard.png
+[17]: https://docs.datadoghq.com/fr/developers/dogstatsd/?tab=containeragent#
