@@ -69,6 +69,7 @@ Below are Datadog's tagging requirements:
     | `env_staging:east` | `env_staging` | `east`         |
 
 5. Tags shouldn't originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
+6. Limitations (such as downcasing) only apply to metric tags, not log attributes or span tags.
 
 ## Assigning tags
 
