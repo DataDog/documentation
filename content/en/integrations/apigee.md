@@ -30,12 +30,30 @@ Collect Apigee proxy logs to track errors, response time, duration, latency and 
 
 #### Log collection
 
+There are two methods available for collecting Apigee logs: using Apigee's JavaScript policy to send logs to Datadog, or, if you already have a syslog sever, using the Apigee MessageLogging policy type is to log to a syslog account. When configured for syslog, an API proxy will forward log messages from Apigee Edge to a remote syslog server.
+
+##### Syslog parameter
+
+Use the MessageLogging policy type with the syslog parameter. Include the Datadog logs intake endpoint, port, and protocol. For example:
+
+```json
+<MessageLogging name="LogToSyslog">
+    <DisplayName>datadog-logging</DisplayName>
+    <Syslog>
+        <Message><YOUR API KEY> test</Message>
+        <Host>intake.logs.datadoghq.com</Host>
+        <Port>10516</Port>
+        <Protocol>TCP</Protocol>
+    </Syslog>
+</MessageLogging>
+```
+
+##### Set up JavaScript policy to send Apigee logs to Datadog
 
 Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].
 
 The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][2].
 
-##### Set up JavaScript policy to send Apigee logs to Datadog
 1. Select the Apigee proxy from which you want to send logs to Datadog.
 2. In the selected proxy overview page, click on the 'DEVELOP' tab located in the top-right corner.
 
