@@ -362,6 +362,23 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 [1]: /agent/faq/template_variables/
 {{% /tab %}}
+{{% tab "Helm" %}}
+The following configuration defines the integration template for `redis` containers with a custom password parameter:
+```yaml
+  confd
+    redisdb.yaml: |-
+      ad_identifiers:
+        - redis
+      init_config:
+      instances:
+        - host: %%host%%
+          port: 6379
+          password: %%env_REDIS_PASSWORD%%
+```
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
+
+[1]: /agent/faq/template_variables/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Datadog Apache and HTTP check integrations
