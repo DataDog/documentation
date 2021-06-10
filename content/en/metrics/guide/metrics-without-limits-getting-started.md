@@ -51,7 +51,7 @@ This is not a bug -- your current proposed tag configuration doesn't reduce the 
 
   {{< img src="metrics/guide/mwl-table.jpg" alt="Table displaying time and space metrics in green and red"  style="width:80%;" >}}
 
-  If a combination is in red, it is best to send that metric without using Metrics Without Limits (keep full cardinality).
+  If a combination is in red, it is best to send that metric without using Metrics Without Limits™ (keep full cardinality).
 
 Therefore, you can have a resulting indexed custom metric volume greater than an ingested custom metric volume if the tag combination specified does not reduce the number of remaining tag value combinations enough to offset the 6x factor.
 
