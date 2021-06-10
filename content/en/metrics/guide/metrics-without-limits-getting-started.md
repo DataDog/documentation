@@ -4,7 +4,7 @@ kind: guide
 is_beta: true
 ---
 
-<div class="alert alert-warning">This functionality is in private beta. To request access, contact your CSM or the <a href="url">Datadog Support team</a>.</div>
+<div class="alert alert-warning">This functionality is in private beta. To request access, contact your CSM or the <a href="https://docs.datadoghq.com/help/">Datadog Support team</a>.</div>
 
 ## Overview
 
