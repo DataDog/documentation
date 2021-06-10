@@ -37,6 +37,14 @@ Define when events exceed a user-defined threshold. For example, if you create a
 
 Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `country` or `IP address`, a security signal will be generated whenever a new value is seen which has not been seen before.
 
+### Anomaly
+
+<div class="alert alert-warning">
+Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
+</div>
+
+When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
+
 ## Define a Search Query
 
 {{< tabs >}}
@@ -53,6 +61,7 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+
 
 #### Advanced options
 
@@ -102,6 +111,18 @@ For example, create a query for successful user authentication and set **detect 
 Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
 
 [1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "Anomaly" %}}
+
+Construct a search query using the same logic as a log explorer search.
+
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
+
+Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
+
+**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -162,6 +183,26 @@ To forget a value if it is not seen over a period of time, select an option from
 Set a maximum duration to keep updating a signal if new values are detected within a set time frame. For example, the same signal will update if any new value is detected within `1 hour`, for a maximum duration of `24 hours`.
 
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
+
+[1]: /monitors/notifications/?tab=is_alert#integrations
+{{% /tab %}}
+
+{{% tab "Anomaly" %}}
+
+### Severity and notification
+
+Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
+
+In the “Notify” section, configure zero or more [notification targets][1].
+
+### Time windows
+
+Datadog automatically detects the seasonality of the data and will generate a security signal when the data is determined to be anomalous.
+
+Once a signal is generated, the signal will remain "open" if the data remains anomalous and the last updated timestamp will be updated for the anomalous duration.
+
+A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
+
 
 [1]: /monitors/notifications/?tab=is_alert#integrations
 {{% /tab %}}
