@@ -83,7 +83,7 @@ main_left:
     parent: product
   - identifier: api
     name: API
-    pre: '<img class=''menu-icon'' src=''https://datadog-prod.imgix.net/img/icons/datadoghq-api-icon-2.svg'' alt=''api icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
     weight: 14
     parent: product
