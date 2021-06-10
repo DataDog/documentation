@@ -61,9 +61,9 @@ Here is a simplified example of how indexed greater than ingested can occur when
 
 If you use Metrics Without Limits™ and configure on `{endpoint, status}`: 
 
-{{< img src="metrics/guide/before-mwl.jpg" alt="Flow chart with the hosts marked out with x"  style="width:80%;" >}}
+{{< img src="metrics/guide/after-mwl.jpg" alt="Flow chart with the hosts marked out with x"  style="width:80%;" >}}
 
-Without the hosts, this leaves three remaining tag combinations:
+Without the host, this leaves three remaining tag combinations:
 
 1. `{endpoint:x, status:200}`
 2. `{endpoint:x, status:400}`
