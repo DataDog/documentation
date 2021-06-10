@@ -363,6 +363,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 [1]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 The following configuration defines the integration template for `redis` containers with a custom password parameter:
 ```yaml
   confd
