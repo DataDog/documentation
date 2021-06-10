@@ -28,7 +28,7 @@ To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collect
 
 By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][6] languages in each endpoint to see code examples from that library. To install each library:
 
-{{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go" >}}
+{{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go,typescript" >}}
 
 {{< programming-lang lang="java" >}}
 #### Installation
@@ -161,6 +161,27 @@ go get github.com/DataDog/datadog-api-client-go
 import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
 ```
  **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+{{< /programming-lang >}}
+
+{{< programming-lang lang="typescript" >}}
+#### Installation
+The package is under [@datadog/datadog-api-client][1] and can be installed through NPM or Yarn:
+
+```js
+# NPM
+npm install @datadog/datadog-api-client
+
+# Yarn
+yarn add @datadog/datadog-api-client
+```
+
+#### Usage
+```js
+import { <VERSION> } from 'datadog-api-client';
+```
+ **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+
+[1]: https://www.npmjs.com/package/@datadog/datadog-api-client
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
