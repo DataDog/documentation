@@ -14,6 +14,7 @@ aliases:
     {{< nextlink href="agent/faq/how-datadog-agent-determines-the-hostname" >}}How does Datadog determine the Agent hostname?{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity" >}}How do I install the Agent on a server with limited internet connectivity?{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
+    {{< nextlink href="agent/faq/macos-agent-run-as-system-service" >}}How do I set up the Agent to run as a system service on MacOS?{{< /nextlink >}}
     {{< nextlink href="agent/faq/error-restarting-agent-already-listening-on-a-configured-port" >}}Error Restarting Agent: Already Listening on a Configured Port{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-is-the-system-mem-used-metric-calculated" >}}How is the 'system.mem.used' metric calculated?{{< /nextlink >}}
     {{< nextlink href="agent/faq/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
