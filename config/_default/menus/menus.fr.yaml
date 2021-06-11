@@ -89,9 +89,9 @@ main_left:
     parent: product
   - identifier: api
     name: API
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/api.svg' alt='api icon'>"
-    url: "https://docs.datadoghq.com/api"
-    weight: 15
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''icône api''>'
+    url: 'https://docs.datadoghq.com/api'
+    weight: 14
     parent: product
   - identifier: customers
     name: Clients

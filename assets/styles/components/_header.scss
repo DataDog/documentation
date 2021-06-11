@@ -168,7 +168,8 @@ body > header {
                 // product menu
                 &.product-menu {
                     column-count: 2;
-                    height: 370px;
+                    height: 330px;
+                    -moz-height: 338px;
                     column-fill: auto;
 
                     img.menu-icon {
