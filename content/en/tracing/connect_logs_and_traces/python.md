@@ -72,8 +72,8 @@ def tracer_injection(logger, log_method, event_dict):
     trace_id, span_id = get_correlation_ids()
 
     # add ids to structlog event dictionary
-    event_dict['dd.trace_id'] = trace_id or 0
-    event_dict['dd.span_id'] = span_id or 0
+    event_dict['dd.trace_id'] = str(trace_id or 0)
+    event_dict['dd.span_id'] = str(span_id or 0)
 
     # add the env, service, and version configured for the tracer
     event_dict['dd.env'] = ddtrace.config.env or ""
