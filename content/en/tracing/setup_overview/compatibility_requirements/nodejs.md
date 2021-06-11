@@ -12,7 +12,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
-## Compatibility
+## Releases
 
 ### Versioning
 
