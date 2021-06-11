@@ -7,7 +7,7 @@ further_reading:
   text: "Learn more about the Datadog Agent"
 ---
 
-On MacOS, the Datadog Agent is installed as a user service (for the user that runs the install instructions). This allows the Datadog Agent GUI application to work (while logged in to the MacOS GUI as the user that performed the install), but the main drawback is that the Agent only runs when the user that performed the install is logged in using the MacOS GUI.
+On MacOS, the Datadog Agent is installed as a user service (for the user that runs the install instructions). This allows the Datadog Agent GUI system tray application to work (while logged in to the MacOS GUI as the user that performed the install), but the main drawback is that the Agent only runs when the user that performed the install is logged in using the MacOS GUI.
 
 Because of this, by default the Datadog Agent doesn't run in cases where no GUI access to the MacOS host is available. Additional steps are therefore required when installing & running the MacOS Datadog Agent with no GUI access.
 
@@ -46,7 +46,7 @@ sudo launchctl load /Library/LaunchDaemons/com.datadoghq.agent.plist
 This script reconfigures the Datadog Agent service to run as a launch daemon, with the following properties:
 - the service is automatically started when the host starts
 - the Agent processes run as the user that ran the above script (to avoid running as root)
-- the Datadog Agent GUI application won't be available.
+- the Datadog Agent GUI system tray application won't be available.
 
 
 ## Operations
