@@ -140,6 +140,7 @@ Additional Git configuration for physical device testing:
 | `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)`  |
 | `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`   |
 | `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`      |
+| `CI_COMMIT_MESSAGE` | `$(CI_COMMIT_MESSAGE)` |
 
 
 #### Travis
@@ -163,6 +164,7 @@ Additional Git configuration for physical device testing:
 | `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
 | `TRAVIS_COMMIT`              | `$(TRAVIS_COMMIT)`              |
 | `TRAVIS_TAG`           | `$(TRAVIS_TAG)`           |
+| `TRAVIS_COMMIT_MESSAGE`           | `$(TRAVIS_COMMIT_MESSAGE)`           |
 
 
 #### GitHub Actions
@@ -205,6 +207,9 @@ Additional Git configuration for physical device testing:
 | `BUILDKITE_REPO`                | `$(BUILDKITE_REPO)`                |
 | `BUILDKITE_BRANCH`              | `$(BUILDKITE_BRANCH)`              |
 | `BUILDKITE_TAG` | `$(BUILDKITE_TAG)` |
+| `BUILDKITE_MESSAGE` | `$(BUILDKITE_MESSAGE)` |
+| `BUILDKITE_BUILD_AUTHOR` | `$(BUILDKITE_BUILD_AUTHOR)` |
+| `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
 #### Bitbucket Pipelines
 
@@ -243,6 +248,9 @@ Additional Git configuration for physical device testing:
 | `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
 | `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
 | `APPVEYOR_REPO_BRANCH`                   | `$(APPVEYOR_REPO_BRANCH)`                   |
+| `APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED`                   | `$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)`                   |
+| `APPVEYOR_REPO_COMMIT_AUTHOR`                   | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`                   |
+| `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`                   | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`                   |
 
 
 #### Azure Pipelines
@@ -268,6 +276,9 @@ Additional Git configuration for physical device testing:
 | `SYSTEM_PULLREQUEST_SOURCECOMMITID` | `$(SYSTEM_PULLREQUEST_SOURCECOMMITID)` |
 | `SYSTEM_PULLREQUEST_SOURCEBRANCH` | `$(SYSTEM_PULLREQUEST_SOURCEBRANCH)` |
 | `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI` | `$(SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI)` |
+| `BUILD_SOURCEVERSIONMESSAGE` | `$(BUILD_SOURCEVERSIONMESSAGE)` |
+| `BUILD_REQUESTEDFORID` | `$(BUILD_REQUESTEDFORID)` |
+| `BUILD_REQUESTEDFOREMAIL` | `$(BUILD_REQUESTEDFOREMAIL)` |
 
 
 #### Bitrise
