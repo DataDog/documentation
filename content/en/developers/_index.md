@@ -24,7 +24,7 @@ Additionally, you may also be a partner who wants to build on Datadog and contri
 
 If there is data you want to monitor with Datadog that you are not seeing, before building something custom, consider the following Datadog products and integrations:
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="requests.html" links="requests" >}}
 
 ## Creating your own solution
 
