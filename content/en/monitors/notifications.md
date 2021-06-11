@@ -205,7 +205,7 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 {{ a.value }}
 ```
 
-Composite monitors can also utilise tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
+Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
 
 ### Conditional variables
 
