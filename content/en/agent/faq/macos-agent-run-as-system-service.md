@@ -51,16 +51,17 @@ This script reconfigures the Datadog Agent service to run as a launch daemon, wi
 
 ## Operations
 
-To operate the Datadog Agent service once the following script is executed, run (as the `root` user, or with `sudo`):
+The Datadog Agent service is managed with `launchctl`. After the above installation instructions have been run you can manage the Agent service with the following commands:
 
-- `launchctl list com.datadoghq.agent` to print the service status.
+| Description                   | Command                                                                                                                   |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Start Agent service           | `sudo launchctl start com.datadoghq.agent`                                                                                |
+| Stop Agent running service    | `sudo launchctl stop com.datadoghq.agent`                                                                                 |
+| Status of Agent service       | `sudo launchctl list com.datadoghq.agent`                                                                                 |
+| Disable Agent service         | `sudo launchctl disable system/com.datadoghq.agent`                                                                       |
+| Enable Agent service          | `sudo launchctl enable system/com.datadoghq.agent && sudo launchctl load /Library/LaunchDaemons/com.datadoghq.agent.plist`|
 
-- `launchctl stop com.datadoghq.agent` to stop the Agent.
 
-- `launchctl start com.datadoghq.agent` to start the Agent.
+Disabling the Agent prevents the list / start / stop commands from working, and prevents the Agent service from being started on reboot. 
 
-- `launchctl disable system/com.datadoghq.agent` to disable the Agent (ie. the above list / start / stop commands won’t work, and the service won’t be started when the host reboots). 
-
-- `launchctl enable system/com.datadoghq.agent` then `launchctl load /Library/LaunchDaemons/com.datadoghq.agent.plist` to enable the Agent.
-
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings#agent/mac
