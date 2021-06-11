@@ -15,9 +15,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
+    - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+      tag: 'Guide'
+      text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Manually Inject Trace and Span IDs
+## Manual injection
 
 The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
 

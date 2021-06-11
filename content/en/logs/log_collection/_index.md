@@ -106,21 +106,42 @@ Consult the [list of available supported integrations][4].
 
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections. Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][6].
 
-Endpoints that can be used to send logs to Datadog:
+Endpoints that can be used to send logs to Datadog, for SSL-encrypted connections:
 
-| Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
-|-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `{{< region-param key="tcp_endpoint" code="true" >}}`       | `{{< region-param key="tcp_endpoint_port" code="true" >}}` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
-| `{{< region-param key="agent_http_endpoint" code="true" >}}`  | `{{< region-param key="agent_http_port" code="true" >}}`   | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][7].                                                        |
-| `{{< region-param key="http_endpoint" code="true" >}}`  | `{{< region-param key="http_port" code="true" >}}`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][7].                                       |
-| `{{< region-param key="web_integrations_endpoint" code="true" >}}`  | `{{< region-param key="web_integrations_port" code="true" >}}`   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
-| `{{< region-param key="lambda_endpoint" code="true" >}}`  | `{{< region-param key="lambda_port" code="true" >}}`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
-| `{{< region-param key="lambda_http_endpoint" code="true" >}}`  | `{{< region-param key="lambda_http_port" code="true" >}}`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| `{{< region-param key="functions_endpoint" code="true" >}}`  | `{{< region-param key="functions_port" code="true" >}}`   | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
-| Endpoint for unencrypted connections | Port    | Description                                                                                              |
-|--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
-| `{{< region-param key="web_integrations_endpoint" code="true" >}}`          | `{{< region-param key="web_integrations_unencrypted_port" code="true" >}}` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unencrypted TCP connection. |
+`{{< region-param key="tcp_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="tcp_endpoint_port" code="true" >}}` <br>
+Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.
+
+`{{< region-param key="agent_http_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="agent_http_port" code="true" >}}`<br>
+Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][7].
+
+`{{< region-param key="http_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
+Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][7].
+
+`{{< region-param key="web_integrations_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
+Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.
+
+`{{< region-param key="lambda_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="lambda_port" code="true" >}}`<br>
+Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.
+
+`{{< region-param key="lambda_http_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="lambda_http_port" code="true" >}}`<br>
+Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.
+
+`{{< region-param key="functions_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="functions_port" code="true" >}}`<br>
+Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers.
+
+Endpoints that can be used to send logs to Datadog, for unencrypted connections:
+
+`{{< region-param key="web_integrations_endpoint" code="true" >}}`
+: **Port**: `{{< region-param key="web_integrations_unencrypted_port" code="true" >}}`<br>
+Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unencrypted TCP connection.
 
 ### Custom log forwarding
 

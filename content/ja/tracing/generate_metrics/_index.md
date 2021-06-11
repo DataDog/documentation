@@ -13,7 +13,7 @@ further_reading:
     text: 保持されたトレースに基づいて分析クエリとモニターを使用します。
 ---
 <div class="alert alert-warning">
-この機能は現在非公開ベータ版です。アカウントでこの機能をリクエストするか、一般に利用可能になったときに通知を受け取るには、<a href="https://docs.google.com/forms/d/1RlT0FNdFjiEzkQgxiCf77ugpW0w5a17X7JQ7E286jM4">このフォームに記入</a>してください。
+この機能は公開ベータ版です。ベータ機能ではありますが、スパンから生成されたメトリクスをモニターまたは製品運用のユースケースに使用することは推奨されていません。
 </div>
 
 ## スパンベースのメトリクスを生成する
@@ -24,17 +24,19 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 
 特定の固定クエリや比較にカスタムメトリクスを使用する一方、保持フィルターを作成することで、保持されたトレースとそのフレームグラフの任意のクエリと調査が可能になります。
 
-たとえば、カスタムメトリクスを使用すれば、異常を視覚化したり、ダッシュボードとモニターを作成したり、ビジネスコンテキストにとって重要なパラメーター全体の傾向を確認したりすることができます。生成されたすべてのメトリクスは、Datadog [カスタムメトリクス][2]として 15 か月間利用できます。
+**請求について:** 取り込まれたスパンから生成されたメトリクスは、[カスタムメトリクス][2] として請求されます。
+
+たとえば、カスタムメトリクスを異常検知の視覚化やダッシュボードおよびモニターの作成に使用して、ビジネスコンテキストにとって重要なさまざまなパラメーターの傾向を把握することができます。生成されたすべてのメトリクスは、Datadog [カスタムメトリクス][3]として 15 か月間利用可能です。
 
 | 理由                        | スパンから生成されたカスタムメトリクス                   | Retention Filters                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- |
-| 保持期間                     | 15ヶ月                    | 15 日             |
-| 異常検出                           | 生成されたメトリクスに基づいて[異常モニター][3]を作成します。                            | 分析を使用して過去 15 日間の動作を比較し、完全なトレースをドリルダウンして根本原因を調査します。                         |
+| 保持期間                     | 15 か月                    | 15 日             |
+| 異常検知                           | 生成されたメトリクスに基づき[異常検知モニター][4]を作成します。                            | 分析を使用して過去 15 日間の動作を比較し、完全なトレースをドリルダウンして根本原因を調査します。                         |
 | 完全なコンテキストで一致するトレースの調査                          | N/A - カスタムメトリクスは、関連するトレースを保持しません。                            | [保持フィルター][1]を使用して、ビジネスコンテキストに関連するトレースを正確に保持します。                            |
-| 動作の粒度                           | 重要なエンドポイントまたはその他のカーディナリティの低いグループのカスタムメトリクスを作成します。                        | 特定のエンドポイントに対して[検索と分析][4]を使用するか、[分析][5]の 'Group By' オプションを使用します。                    |
-| 予測または複雑な数学                          | 生成されたメトリクスに基づいて[予測モニター][6]を作成します。                          |   N/A                            |
+| 動作の粒度                           | 重要なエンドポイントまたはその他のカーディナリティの低いグループのカスタムメトリクスを作成します。                        | 特定のエンドポイントに[検索と分析][5]を使用するか、[分析][6]で 'Group By' オプションを使用します。                    |
+| 予測または複雑な数学                          | 生成されたメトリクスに基づき、[予測値モニター][7]を作成します。                          |   N/A                            |
 
-スパンからメトリクスを生成するには、[APM Setup and Configuration][7] ページで [Generate Metrics][8] タブを選択し、**New Metric** ボタンをクリックします。
+スパンからメトリクスを生成するには、[APM のセットアップとコンフィギュレーション][8] ページで [Generate Metrics][9] タブを選択し、**New Metric** ボタンをクリックします。
 
 <br>
 
@@ -45,7 +47,7 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="メトリクスの作成方法" >}}
 
-1. **メトリクスクエリを定義する:** 必要なデータセットにフィルタリング用のクエリを追加することから始めます。[クエリ構文][9]は、APM 検索と分析と同じです。
+1. **メトリクスクエリを定義する:** 必要なデータセットにフィルタリング用のクエリを追加することから始めます。[クエリ構文][10]は、APM 検索と分析と同じです。
 
 1. **追跡するフィールドを定義する:** `*` を選択してクエリに一致するすべてのスパンのカウントを生成するか、属性 (たとえば、`@cassandra_row_count`) を入力して数値を集計し、対応するカウント、最小、最大、合計、および平均の集計メトリクスを作成します。属性タイプがメジャーの場合、メトリクスの値はスパン属性の値です。
 
@@ -53,7 +55,7 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 
 1. **ライブ分析と検索クエリのプレビューを確認する:** クエリがデータの視覚化に与える影響と、クエリで考慮される一致するスパンをライブプレビューでリアルタイムに表示できます。
 
-1. **メトリクスに名前を付ける:** メトリクス名は、[メトリクス命名規則][10]に従う必要があります。`trace.*` で始まるメトリクス名は許可されておらず、保存されません。
+1. **メトリクスに名前を付ける:** メトリクス名は、[メトリクス命名規則][11]に従う必要があります。`trace.*` で始まるメトリクス名は許可されておらず、保存されません。
 
 **重要**: スパンベースのメトリクスはカスタムメトリクスと見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。
 
@@ -76,12 +78,13 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 
 
 [1]: /ja/tracing/trace_retention_and_ingestion
-[2]: https://docs.datadoghq.com/ja/developers/metrics/#overview
-[3]: /ja/monitors/monitor_types/anomaly/#overview
-[4]: /ja/tracing/trace_search_and_analytics/
-[5]: /ja/tracing/trace_search_and_analytics/query_syntax/#analytics-query
-[6]: /ja/monitors/monitor_types/forecasts/
-[7]: https://app.datadoghq.com/apm/getting-started
-[8]: https://app.datadoghq.com/apm/traces/generate-metrics
-[9]: /ja/tracing/trace_search_and_analytics/query_syntax/
-[10]: /ja/developers/metrics/#naming-metrics
+[2]: /ja/account_management/billing/custom_metrics/
+[3]: https://docs.datadoghq.com/ja/developers/metrics/#overview
+[4]: /ja/monitors/monitor_types/anomaly/#overview
+[5]: /ja/tracing/trace_search_and_analytics/
+[6]: /ja/tracing/trace_search_and_analytics/query_syntax/#analytics-query
+[7]: /ja/monitors/monitor_types/forecasts/
+[8]: https://app.datadoghq.com/apm/getting-started
+[9]: https://app.datadoghq.com/apm/traces/generate-metrics
+[10]: /ja/tracing/trace_search_and_analytics/query_syntax/
+[11]: /ja/developers/metrics/#naming-metrics

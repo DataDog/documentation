@@ -82,11 +82,11 @@ A trace is used to track the time spent by an application processing a request a
 
 A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags](#span-tags). For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, which creates a parent-child relationship between the spans.
 
-For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Analytics][14].
+For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.store_name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Analytics][14].
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
-## Top Level Span
+## Top level span
 
 A span is a top level span when it is the entrypoint method for a request to a service.  You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.  Services are also listed on the right when viewing a flamegraph.
 
@@ -98,8 +98,7 @@ For the example below, the top level spans are:
 
 {{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
 
-
-## Trace Metrics
+## Trace metrics
 
 [Trace metrics][15] are automatically collected and kept at a 15-month retention policy similar to any other [Datadog metric][2]. They can be used to identify and alert on hits, errors, or latency. Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` in the [Metric Summary][16].
 
@@ -117,7 +116,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
-## Trace Search and Analytics
+## Trace search and analytics
 
 [Search and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
 
@@ -143,19 +142,19 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
 
-## Retention Filters
+## Retention filters
 
 [Set tag-based filters][19] in the Datadog UI to index spans for 15 days for use with [Trace Search and Analytics](#trace-search-and-analytics)
 
-## Ingestion Controls
+## Ingestion controls
 
 [Send 100% of traces][20] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
-## Sublayer Metric
+## Sublayer metric
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
 
-## Execution Duration
+## Execution duration
 
 The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
 

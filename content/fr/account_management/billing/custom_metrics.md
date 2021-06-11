@@ -8,6 +8,8 @@ Si une métrique n'est pas envoyée depuis l'une des [plus de {{< translate key=
 
 **Les métrique custom se distinguent par une combinaison unique de nom de métrique et de valeurs de tag (tag host inclus)**.
 
+Votre volume mensuel facturable pour les métriques custom (indiqué sur la page Usage) désigne le nombre moyen de métriques custom distinctes pour toutes les heures du mois actuel.
+
 ## Calcul du nombre de métriques custom
 
 Le nombre de métriques custom associées à un nom de métrique donné dépend du [type de métrique envoyé][3]. Vous trouverez ci-dessous des exemples de calculs basés sur le scénario suivant :
@@ -106,6 +108,18 @@ Le nombre de combinaisons de valeurs de tag uniques envoyées pour une métrique
 
 Le nombre de métriques custom envoyées par une [métrique DISTRIBUTION][1] correspond au nombre de combinaisons uniques de nom de métrique et de valeurs de tag multiplié par cinq. Ainsi, la métrique `request.Latency` envoie **5\*4 = 20 métriques custom** au total.
 
+##### Ajout d'agrégations par centile
+
+Vous pouvez ajouter des agrégations par centile (`p50`, `p75`, `p90`, `p95` et `p99`) pour votre métrique de distribution, afin d'obtenir cinq fois plus de combinaisons uniques nom de métrique/valeur de tag (**5 \* 4 = 20 métriques customs**). Avec les agrégations par centile, le nombre total de métriques custom généré par cette métrique de distribution atteint 40 (**2 * (5 \* 4) = 40**).
+
+Le tableau ci-dessous résume l'impact de l'ajout d'agrégations par centile pour une distribution de métrique.
+
+| Métriques                                                                                    | Nombre de métriques custom facturables |
+|--------------------------------------------------------------------------------------------|-----------------------------------|
+| Nombre de métriques custom générées par une distribution standard (count, sum, min, max et avg)          | `5 * (combinaisons de valeurs de tag)`      |
+| Nombre de métriques custom générées par l'ajout des agrégations par centile (p50, p75, p90, p95 et p99)  | `5 * (combinaisons de valeurs de tag)`      |
+| Total                                                                                      | `2 * 5(combinaisons de valeurs de tag)`     |
+
 ##### Personnalisation du tagging
 
 Vous avez la possibilité de personnaliser les agrégations de [combinaisons de tags][2] créées pour une métrique DISTRIBUTION. Imaginons que vous souhaitiez uniquement conserver les tags `endpoint` et `status` pour la métrique `request.Latency`. Vous obtenez alors trois combinaisons de tags uniques :
@@ -116,27 +130,8 @@ Vous avez la possibilité de personnaliser les agrégations de [combinaisons de 
 
 Le nombre de métriques custom envoyées par une [métrique DISTRIBUTION][1] correspond au nombre de combinaisons uniques de nom de métrique et de valeurs de tag multiplié par cinq. Ainsi, une fois les tags personnalisés, la métrique `request.Latency` envoie **5\*3 = 15 métriques custom** au total.
 
-##### Ajout d'agrégations par centile
-
-Les agrégations par centile sont calculées de façon unique : en effet, **Datadog conserve cinq métriques custom pour chaque combinaison de valeurs de tag pouvant faire l'objet d'une requête** afin de pouvoir calculer les centiles de façon exacte (`p50`, `p75`, `p90`, `p95` et `p99`). Imaginons que vous ayez [activé les agrégations par centile][3] pour la métrique `request.Latency` et pour les tags `endpoint` et `status`, la granularité étant la même que précédemment. Le nombre de combinaisons de valeurs de tag pouvant faire l'objet d'une requête est de **huit** :
-
-- `endpoint:X`, `status:200`
-- `endpoint:X`, `status:400`
-- `endpoint:Y`, `status:200`
-- `endpoint:X`
-- `endpoint:Y`
-- `status:200`
-- `status:400`
-- `*`
-
-Une fois les agrégations par centile activées pour `request.Latency`, ce nom de métrique envoie **5\*8 = 40 métriques custom**.
-
-**Remarque** : seules les combinaisons de valeurs de tag qui font partie de vos données sont considérées comme des combinaisons pouvant faire l'objet d'une requête. Étant donné que la combinaison { `endpoint:Y`, `status:400` } n'a jamais été envoyée et n'existe donc pas dans vos données, elle n'est pas prise en compte lors du calcul du nombre de métriques custom.
-
-
 [1]: /fr/developers/metrics/types/?tab=distribution#definition
 [2]: /fr/metrics/distributions/#customize-tagging
-[3]: /fr/metrics/distributions/#aggregations
 {{% /tab %}}
 {{< /tabs >}}
 

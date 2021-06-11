@@ -22,5 +22,5 @@ jobs:
             "state": "success",
             "context": "preview",
             "description": `Check preview branch "${context.payload.pull_request.head.ref}"`,
-            "target_url": `https://docs-staging.datadoghq.com/${context.payload.pull_request.head.ref}/api/`
+            "target_url": `https://docs-staging.datadoghq.com/${context.payload.pull_request.head.ref}`
           })

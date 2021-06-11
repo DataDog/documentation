@@ -89,7 +89,7 @@ function activateCodeLangNav(activeLang) {
 
 function toggleCodeBlocks(activeLang) {
     activateCodeLangNav(activeLang);
-    // toggleMultiCodeLangNav(activeLang);
+    toggleMultiCodeLangNav(activeLang);
 
     // non-api page code blocks
     const codeWrappers = document.querySelectorAll('body:not(.api) [class*=js-code-snippet-wrapper]');
@@ -179,6 +179,6 @@ function toggleMultiCodeLangNav(codeLang) {
   }
 }
 
-// toggleMultiCodeLangNav(Cookies.get('code-lang') || '');
+toggleMultiCodeLangNav(Cookies.get('code-lang') || '');
 
 export { redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav, toggleMultiCodeLangNav };

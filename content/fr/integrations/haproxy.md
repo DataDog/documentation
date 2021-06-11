@@ -8,11 +8,23 @@ assets:
   logs:
     source: haproxy
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[HAProxy] Anomalous frontend request rate for host {{host.name}}': assets/monitors/request_rate.json
+    '[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_5xx.json
+    '[HAProxy] Anomalous number of frontend 5xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_4xx.json
+    '[HAProxy] Backend queue time went above 500ms for host: {{host.name}}': assets/monitors/backend_queue_time.json
+    '[HAProxy] Backend response time is above 500ms for host: {{host.name}}': assets/monitors/backend_rtime.json
+    '[HAProxy] High amount of backend session usage for host: {{host.name}}': assets/monitors/backend_sessions.json
+    '[HAProxy] High amount of frontend session usage for host: {{host.name}}': assets/monitors/frontend_sessions.json
+    '[HAProxy] High number of backend denied responses for host: {{host.name}}': assets/monitors/backend_dreq.json
+    '[HAProxy] High number of frontend denied requests for host: {{host.name}}': assets/monitors/frontend_dreq.json
+    '[HAProxy] Number of backend connection failures for host: {{host.name}} is above normal.': assets/monitors/backend_econ.json
+    '[HAProxy] Number of client-side request error for {{host.name}} is above normal.': assets/monitors/frontend_ereq.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    haproxy_processes: assets/saved_views/haproxy_processes.json
     response_time_overview: assets/saved_views/response_time.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
@@ -134,8 +146,6 @@ Modifiez le fichier `haproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
-
 Par défaut, Haproxy envoie des logs via UDP sur le port 514. L'Agent peut effectuer une écoute afin d'obtenir ces logs sur ce port. Toutefois, il est nécessaire de procéder à une élévation des privilèges pour toute association vers un numéro de port inférieur à 1024. Pour ce faire, suivez les instructions ci-dessous. Vous pouvez également choisir d'utiliser un autre port. Dans ce cas, ignorez l'étape 3.
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
@@ -181,32 +191,138 @@ Par défaut, Haproxy envoie des logs via UDP sur le port 514. L'Agent peut effe
 [2]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{% tab "Docker" %}}
 
-#### Environnement conteneurisé
+#### Docker
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Pour configurer ce check lorsque l'Agent est exécuté sur un conteneur :
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                                     |
-| -------------------- | ----------------------------------------- |
-| `<NOM_INTÉGRATION>` | `haproxy`                                 |
-| `<CONFIG_INIT>`      | vide ou `{}`                             |
-| `<CONFIG_INSTANCE>`  | `{"url": "https://%%host%%/admin?stats"}` |
+Définissez les [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur votre conteneur d'application :
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["haproxy"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"url": "https://%%host%%/admin?stats"}]'
+```
+
+##### Collecte de logs
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
+
+Définissez ensuite des [intégrations de logs][3] en tant qu'étiquettes Docker :
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<NOM_SERVICE>"}]'
+```
+
+[1]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+Pour configurer ce check lorsque l'Agent est exécuté sur Kubernetes :
+
+##### Collecte de métriques
+
+Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'annotations de pod sur votre conteneur d'application. Cette configuration peut également être réalisée avec [un fichier, une configmap ou une paire key/value][2].
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: haproxy
+  annotations:
+    ad.datadoghq.com/haproxy.check_names: '["haproxy"]'
+    ad.datadoghq.com/haproxy.init_configs: '[{}]'
+    ad.datadoghq.com/haproxy.instances: |
+      [
+        {
+          "url": "https://%%host%%/admin?stats"
+        }
+      ]
+spec:
+  containers:
+    - name: haproxy
+```
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
 
-| Paramètre      | Valeur                                                |
-| -------------- | ---------------------------------------------------- |
-| `<CONFIG_LOG>` | `{"source": "haproxy", "service": "<NOM_SERVICE>"}` |
+Définissez ensuite des [intégrations de logs][4] en tant qu'annotations de pod. Cette configuration peut également être réalisée avec [un fichier, une configmap ou une paire key/value][5].
 
-[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: haproxy
+  annotations:
+    ad.datadoghq.com/mongo.logs: '[{"source":"haproxy","service":"<NOM_SERVICE>"}]'
+spec:
+  containers:
+    - name: haproxy
+```
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset#configuration
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+Pour configurer ce check lorsque l'Agent est exécuté sur ECS :
+
+##### Collecte de métriques
+
+Définissez les [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur votre conteneur d'application :
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "haproxy",
+    "image": "haproxy:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"haproxy\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"url\": \"https://%%host%%/admin?stats\"}]"
+    }
+  }]
+}
+```
+
+##### Collecte de logs
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec ECS][2].
+
+Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker :
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "haproxy",
+    "image": "haproxy:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"haproxy\",\"service\":\"<SERVICE_NAME>\"}]"
+    }
+  }]
+}
+```
+
+[1]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 

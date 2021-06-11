@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/meraki/'
 draft: false
 git_integration_title: meraki
 has_logo: true
+integration_id: ''
 integration_title: Meraki
 is_public: true
 kind: integration

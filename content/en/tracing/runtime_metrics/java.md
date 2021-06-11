@@ -17,7 +17,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-## Automatic Configuration
+## Automatic configuration
 
 JVM metrics collection is enabled by default for Java tracer v0.29.0+. It can be disabled with one configuration parameter in the tracing client, either through a system property, `-Ddd.jmxfetch.enabled=false`, or through an environment variable, `DD_JMXFETCH_ENABLED=false`. As of v0.64.0+, you can also use the `DD_RUNTIME_METRICS_ENABLED=false` environment variable to disable it.
 

@@ -23,10 +23,9 @@ If you have not yet read the instructions for auto-instrumentation and setup, st
 
 This page details common use cases for adding and customizing observability with Datadog APM.
 
-## Adding Tags
+## Adding tags
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
-
 
 ### Add custom span tags
 
@@ -55,7 +54,6 @@ class ShoppingCartServlet extends AbstractHttpServlet {
 }
 ```
 
-
 ### Adding tags globally to all spans
 
 The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
@@ -65,8 +63,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
      -Ddd.tags=datacenter:njc,<TAG_KEY>:<TAG_VALUE> \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
-
-
 
 ### Set errors on a span
 
@@ -112,8 +108,6 @@ import java.io.StringWriter;
 
 **Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn’t the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
 
-
-
 ### Set tags & errors on a root span from a child span
 
 When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span. This can be useful to count an error or for measuring performance, or setting a dynamic tag for observability.
@@ -152,7 +146,7 @@ if (span != null && (span instanceof MutableSpan)) {
 
 <br>
 
-## Adding Spans
+## Adding spans
 
 If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flamegraphs or to measure execution times for pieces of code.
 
@@ -161,7 +155,7 @@ If modifying application code is not possible, use the environment variable `dd.
 If you have existing `@Trace` or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
 
 
-### DD Trace Methods
+### Datadog trace methods
 
 Using the `dd.trace.methods` system property, you can get visibility into unsupported frameworks without changing application code.
 
@@ -171,8 +165,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-ap
 
 The only difference between this approach and using `@Trace` annotations is the customization options for the operation and resource names.  With DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SessionManager.saveSession`.
 
-
-### Trace Annotations
+### Trace annotations
 
 Add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
 
@@ -192,7 +185,6 @@ public class SessionManager {
 }
 ```
 Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][7] if you have previously decorated your code.
-
 
 ### Manually creating a new span
 
@@ -229,8 +221,7 @@ class SomeClass {
 }
 ```
 
-
-### Extending Tracers
+### Extending tracers
 
 The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (e.g. based on a regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
 
@@ -294,12 +285,11 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 <br>
 
-## Trace Client & Agent Configuration
+## Trace client and Agent configuration
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-
-### B3 Headers Extraction and Injection
+### B3 headers extraction and injection
 
 Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
 
@@ -324,7 +314,7 @@ The value of the property or environment variable is a comma (or space) separate
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-### Resource Filtering
+### Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
 

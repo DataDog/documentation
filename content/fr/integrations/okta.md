@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/okta/'
 draft: false
 git_integration_title: okta
 has_logo: true
+integration_id: okta
 integration_title: Okta
 is_public: true
 kind: integration

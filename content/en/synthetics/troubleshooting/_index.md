@@ -16,13 +16,19 @@ further_reading:
 
 If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
-## Browser Tests
+## Browser tests
 
 ### Recording
 
 #### My website is not loading in the iframe
 
 After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up by clicking **Open in Popup** to record your journey.
+
+#### I'm seeing a "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner at the top of the iframe
+
+This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop up or change your URL to an `https` one to start recording on the page. 
+
+{{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
 
 #### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop up
 
@@ -34,6 +40,9 @@ If that happens, ensure the [Datadog extension][3] has the permissions to read a
 
 {{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true"  width="100%" >}}
 
+#### I'm unable to record steps on my application
+
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][4].
 
 #### I don't see the login page in the recorder. What is happening?
 
@@ -47,9 +56,9 @@ To be able to record your steps without logging out from your application, just 
 
 The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are consequently automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
-### Test Results
+### Test results
 
-#### My Mobile Small or Tablet browser test results keep failing
+#### My mobile small or tablet browser test results keep failing
 
 If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a very different architecture when running from a `Tablet` or a `Mobile Small`.  
 This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
@@ -74,16 +83,16 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true"  width="100%" >}}
 
-## API & Browser Tests
+## API and browser tests
 
 ### Unauthorized errors
 
 If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetic test.
 
 * Is your endpoint using **header-based authentication**?
-  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][4] or [Browser test][5].
-  * **Token based authentication**: extract your token with a first [HTTP test][4], create a [global variable][6] by parsing the response of that first test, and re-inject that variable in a second [HTTP][4] or [Browser test][8] requiring the authentication token.
-  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][4] or [Browser test][5].
+  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][5] or [Browser test][6].
+  * **Token based authentication**: extract your token with a first [HTTP test][5], create a [global variable][7] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][8] requiring the authentication token.
+  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][5] or [Browser test][6].
   
 * Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
 
@@ -99,6 +108,26 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][10]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
+## Private locations
+
+### My private location containers sometimes get killed `OOM`.
+
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My browser test results sometimes show `Page crashed` errors
+
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My tests are sometimes slower to execute 
+
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][11].
+
+### I'm seeing `TIMEOUT` errors on API tests executed from my private location
+
+This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
+
+{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -106,10 +135,11 @@ Synthetic tests by default do not [renotify][10]. This means that if you add you
 [1]: /help/
 [2]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [3]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /synthetics/api_tests/?tab=httptest#make-a-request
-[5]: /synthetics/browser_tests/#test-details
-[6]: /synthetics/settings/?tab=createfromhttptest#global-variables
-[7]: /synthetics/api_tests/?tab=httptest#use-global-variables
+[4]: https://chromeenterprise.google/policies/#ExtensionSettings
+[5]: /synthetics/api_tests/?tab=httptest#make-a-request
+[6]: /synthetics/browser_tests/#test-details
+[7]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [8]: /synthetics/browser_tests/#use-global-variables
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[11]: /synthetics/private_locations#private-location-total-hardware-requirements

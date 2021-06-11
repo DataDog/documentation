@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/gsuite/'
 draft: false
 git_integration_title: gsuite
 has_logo: true
+integration_id: ''
 integration_title: G Suite
 is_public: true
 kind: integration

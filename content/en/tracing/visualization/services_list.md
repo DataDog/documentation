@@ -55,7 +55,7 @@ Service color is used in [trace visualizations][8]. Select your service color to
 
 {{< img src="tracing/visualization/service_color.png" alt="Services colors"  style="width:30%;">}}
 
-## Selecting Columns
+## Selecting columns
 
 Choose what to display in your services list:
 

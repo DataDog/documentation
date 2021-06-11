@@ -63,9 +63,9 @@ If you are a partner developing for the Datadog Marketplace or community integra
     {{< nextlink href="/developers/integrations/" >}}<u>Integrations</u>: For more complex tasks, build a public or private Datadog integration. Public integrations can be shared with the community.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Types
+### Sending data by data types
 
-{{< whatsnext desc="Learn about the types of data you can submit to Datadog:" >}}
+{{< whatsnext desc="Learn about the types of data you can submit to Datadog and how to submit them:" >}}
     {{< nextlink href="/developers/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/events" >}}<u>Events</u>: Explore how to submit events to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Service Checks</u>: Explore how to submit service checks to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}

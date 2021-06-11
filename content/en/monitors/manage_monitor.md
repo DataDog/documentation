@@ -15,7 +15,7 @@ further_reading:
 
 Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
 
-{{< img src="monitors/manage_monitor/page.png" alt="manage monitor page"  >}}
+{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page"  >}}
 
 ## Search
 
@@ -55,18 +55,20 @@ There are a few caveats regarding quoted fields:
 
 Advanced search lets you filter monitors by any combination of monitor attributes:
 
-| Attribute    | Description                                                          |
-|--------------|----------------------------------------------------------------------|
-| Status       | The monitor status: `Triggered` (`Alert`, `Warn`, `No Data`) or `OK` |
-| Muted        | The muted state of the monitor: `true` or `false`                    |
-| Type         | The Datadog [monitor type][5]                                        |
-| Creator      | The creator of the monitor                                           |
-| Service      | Service tags used by you in the form `service:<VALUE>`.              |
-| Tag          | The [tags](#monitor-tags) assigned to the monitor                    |
-| Env          | Environment tags used by you in the form `env:<VALUE>`.              |
-| Scope        | Search tags listed in the `from` field of your monitor query.        |
-| Metric/Check | The metric or service check being monitored                          |
-| Notification | The person or service receiving a notification                       |
+| Attribute    | Description                                                                                     |
+|--------------|-------------------------------------------------------------------------------------------------|
+| Status       | The monitor status: `Triggered` (`Alert`, `Warn`, `No Data`) or `OK`                            |
+| Muted        | The muted state of the monitor: `true` or `false`                                               |
+| Type         | The Datadog [monitor type][5]                                                                   |
+| Creator      | The creator of the monitor                                                                      |
+| Service      | Service tags used by you in the form `service:<VALUE>`.                                         |
+| Tag          | The [tags](#monitor-tags) assigned to the monitor                                               |
+| Env          | Environment tags used by you in the form `env:<VALUE>`.                                         |
+| Scope        | Search tags listed in the `from` field of your monitor query.                                   |
+| Metric/Check | The metric or service check being monitored                                                     |
+| Notification | The person or service receiving a notification                                                  |
+| Muted left   | The time remaining before downtime stops muting the notification for this monitor. Searching for `muted_left:30m` returns all monitors that are still muted for at most 30 minutes. Supported units are seconds (`s`), minutes (`m`), hours (`h`), and weeks (`w`).    |
+| Muted elapsed | The time elapsed since a downtime started muting the notification for this monitor. Searching for `muted_elapsed:30d` returns all monitors that have been muted for at least 30 days. Supported units are seconds (`s`), minutes (`m`), hours (`h`), and weeks (`w`). |
 
 Check any number of boxes to find your monitors. The following rules apply:
 

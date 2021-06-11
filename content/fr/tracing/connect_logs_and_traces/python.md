@@ -91,7 +91,7 @@ Une fois le logger configuré, si vous exécutez une fonction tracée qui logue 
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
+{"event": "In tracer context", "dd": {"trace_id": 9982398928418628468, "span_id": 10130028953923355146, "env": "dev", "service": "hello", "version": "abc123"}}
 ```
 
 **Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][3] pour parser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et `dd.span_id` sont parsés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][4].

@@ -12,6 +12,7 @@ categories:
     - cloud
     - configuration & deployment
 ddtype: crawler
+integration_id: "cloudcheckr"
 ---
 
 {{< img src="integrations/cloudcheckr/EC2_Right_Sizing_Report.png" alt="ec2 right sizing report">}}

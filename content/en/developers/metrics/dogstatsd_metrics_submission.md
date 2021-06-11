@@ -23,7 +23,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 
 ## Functions
 
-After [installing DogStatsD][1], the functions below are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
+After you [install DogStatsD][1], the following functions are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
 
 | Parameter        | Type            | Required | Description                                                                                                                                                                                    |
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -34,11 +34,15 @@ After [installing DogStatsD][1], the functions below are available for submittin
 
 ### COUNT
 
-| Method                                                        | Description                                               | Storage type                                                                                                                                           |
-|---------------------------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to increment a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
-| `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`             | Used to decrement a COUNT metric.                         | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. |
-| `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Use to increment a COUNT metric from an arbitrary `Value` | Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. <br/><br/>**Note:** `count` is not supported in Python.</p>|
+`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
+: Used to increment a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
+
+`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
+: Used to decrement a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
+
+`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. 
+: **Note:** `count` is not supported in Python.
 
 **Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
 
@@ -46,7 +50,7 @@ After [installing DogStatsD][1], the functions below are available for submittin
 
 Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types][2] documentation.
 
-Run the following code to submit a DogStatsD `COUNT` metric to Datadog:
+Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -207,15 +211,14 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 
 ### GAUGE
 
-| Method                                                        | Datadog Storage type                                                                                                                                      |
-|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for the metric during the StatsD flush period. |
+`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for the metric during the StatsD flush period.
 
 #### Code examples
 
 Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
 
-Run the following code to submit a DogStatsD `GAUGE` metric to Datadog:
+Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -367,15 +370,14 @@ After running the code above, your metric data is available to graph in Datadog:
 
 ### SET
 
-| Method                                                      | Datadog Storage type                                                                                                                                           |
-|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period. |
+`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period.
 
 #### Code examples
 
 Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
-Run the following code to submit a DogStatsD `SET` metric to Datadog:
+Run the following code to submit a DogStatsD `SET` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -504,9 +506,8 @@ After running the code above, your metrics data is available to graph in Datadog
 
 ### HISTOGRAM
 
-| Method                                                            | Datadog Storage type                                                                                                                                              |
-|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
+`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more.
 
 #### Configuration
 
@@ -518,7 +519,7 @@ After running the code above, your metrics data is available to graph in Datadog
 The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 
-Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -676,9 +677,8 @@ After running the code above, your metrics data is available to graph in Datadog
 
 `TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute.
 
-| Method                                                        | Datadog Storage type                                                                                                                                              |
-|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
+`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
+: Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more.
 
 ##### Configuration
 
@@ -686,7 +686,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
+Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
@@ -780,15 +780,14 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 ### DISTRIBUTION
 
-| Method                                                | Datadog Storage type                                                                                         |
-|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][8] to learn more. |
+`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)`
+: Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][8] to learn more.
 
 #### Code examples
 
 The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
-Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 

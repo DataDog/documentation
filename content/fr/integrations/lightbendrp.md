@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/lightbendrp/'
 draft: false
 git_integration_title: lightbendrp
 has_logo: true
+integration_id: lightbendrp
 integration_title: Lightbend
 is_public: true
 kind: integration

@@ -5,7 +5,7 @@ guides:
     link_text: Consulter les guides
     link: getting_started/agent/
   - title: Configurer des intégrations
-    desc: "Apprenez à recueillir des métriques, des traces et des logs avec plus de 400\_intégrations."
+    desc: "Apprenez à recueillir des métriques, des traces et des logs avec plus de 450\_intégrations."
     link_text: Consulter les guides
     link: getting_started/integrations/
   - title: Débuter avec Datadog

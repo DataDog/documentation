@@ -1,4 +1,8 @@
 {
+  "cloud-workload-security": {
+    "name": "Cloud Workload Security",
+    "description": "Security signals generated based file and process activity in workloads."
+  },
   "dashboard-lists": {
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."

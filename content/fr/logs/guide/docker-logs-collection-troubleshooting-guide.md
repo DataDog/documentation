@@ -103,7 +103,7 @@ Pour que l'Agent de conteneur puisse recueillir des logs à partir de conteneurs
 
 Relancez le conteneur de l'Agent avec l'option `-v /var/run/docker.sock:/var/run/docker.sock:ro` pour l'autoriser à accéder au socket Docker.
 
-### Statut no errors
+### Statut sans erreur
 
 Si vos logs ne sont pas transmis à la plate-forme Datadog alors que le statut de l'Agent de logs est semblable à l'exemple de la section [Vérifier le statut de l'Agent](#verifier-le-statut-de-l-agent), il est possible que l'une des situations suivantes s'applique :
 
