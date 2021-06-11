@@ -35,9 +35,8 @@ To install the Ruby tracer:
 
 
     {{< code-block lang="ruby" >}}
-    gem 'ddtrace', 
-    :git => "git://github.com/DataDog/dd-trace-rb.git", 
-    :branch => "feature/test_mode"
+    source 'https://rubygems.org'
+    gem 'ddtrace', ">=0.50.0"
     {{< /code-block >}}
 
 2. Install the gem by running `bundle install`
