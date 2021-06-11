@@ -27,10 +27,10 @@ Install and enable the [Datadog Jenkins plugin][2] v2.1.1 or newer:
 
 When the configuration is correct, the Jenkins log shows lines similar to this after the restart:
 
-```
+{{< code-block lang="text" >}}
 INFO    datadog.trace.core.CoreTracer#<init>: New instance: DDTracer-62fcf62{ ... }
 INFO    datadog.trace.core.StatusLogger#logStatus: DATADOG TRACER CONFIGURATION { ... }
-```
+{{< /code-block >}}
 
 **Note**: Enabling the collection of traces using the Jenkins plugin is incompatible with running the Java APM tracer as a Java agent when launching Jenkins.
 
@@ -43,13 +43,13 @@ Enable log collection in the Agent:
 
 2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` (for Linux; [check here for other operating systems][4]) with the following contents. Make sure that `service` matches the `traceServiceName` provided earlier:
 
-```yaml
+{{< code-block lang="yaml" >}}
 logs:
   - type: tcp
     port: 10518
     service: my-jenkins-instance
     source: jenkins
-```
+{{< /code-block >}}
 
 3. [Restart the Agent][5] for the changes to take effect.
 
@@ -63,10 +63,10 @@ Configure the Jenkins plugin to send job logs to the Agent:
 
 2.  Add or modify the following lines:
 
-```xml
+{{< code-block lang="xml" >}}
 <targetLogCollectionPort>10518</targetLogCollectionPort>
 <collectBuildLogs>true</collectBuildLogs>
-```
+{{< /code-block >}}
 
 3. Restart Jenkins for the changes to take effect.
 
@@ -79,7 +79,7 @@ To report pipeline results, attach the default branch name (for example, `main`)
 
 If this happens, set the default branch manually using the `DD_GIT_DEFAULT_BRANCH` environment variable in your build. For example:
 
-```groovy
+{{< code-block lang="groovy" >}}
 pipeline {
     agent any
     environment {
@@ -90,7 +90,7 @@ pipeline {
         ...
     }
 }
-```
+{{< /code-block >}}
 ## Customization
 
 ### Setting custom tags for your pipelines
@@ -99,7 +99,7 @@ The Datadog plugin adds a `datadog` step that allows adding custom tags to your 
 
 In declarative pipelines, add the step to a top-level option block:
 
-```groovy
+{{< code-block lang="groovy" >}}
 def DD_TYPE = "release"
 pipeline {
     agent any
@@ -114,11 +114,11 @@ pipeline {
         }
     }
 }
-```
+{{< /code-block >}}
 
 In scripted pipelines, wrap the relevant section with the `datadog` step:
 
-```groovy
+{{< code-block lang="groovy" >}}
 datadog(tags: ["team:backend", "release:canary"]){
     node {
         stage('Example') {
@@ -126,7 +126,7 @@ datadog(tags: ["team:backend", "release:canary"]){
         }
     }
 }
-```
+{{< /code-block >}}
 
 ### Setting global custom tags
 
@@ -135,16 +135,14 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 1. Open the file `$JENKINS_HOME\org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration.xml`.
 2. Add or modify the following lines:
 
-    ```xml
+    {{< code-block lang="xml" >}}
     <globalTags>global_tag:global_value,global_tag2:${SOME_ENVVAR},${OTHER_ENVVAR}:global_tagvalue</globalTags>
     <globalJobTags>(.*?)_job_(*?)_release:someValue</globalJobTags>
-    ```
+    {{< /code-block >}}
 
-    Global tags (`globalTags`)
-    : A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance.
+    **Global tags** (`globalTags`): A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance.
 
-    Global job tags (`globalJobTags`)
-    : A comma-separated list of regex to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.
+    **Global job tags** (`globalJobTags`): A comma-separated list of regex to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.
 
 3. Restart Jenkins for the changes to take effect.
 

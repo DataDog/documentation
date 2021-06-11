@@ -18,17 +18,22 @@ If you are a GitLab.com user and you want to early-adopt this integration, [open
 If you manage your own GitLab installation and your version is recent enough, you can enable the feature flag yourself by executing the following commands that use GitLab's [Rails Runner][4] depending on your installation type:
 
 For Omnibus installations:
-```
+
+{{< code-block lang="shell" >}}
 sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
-```
+{{< /code-block >}}
+
 For installations from source:
-```
+
+{{< code-block lang="shell" >}}
 sudo -u git -H bundle exec rails runner -e production "Feature.enable(:datadog_ci_integration)"
-```
+{{< /code-block >}}
+
 For [Kubernetes deployments][5]:
-```
+
+{{< code-block lang="shell" >}}
 kubectl exec -it <task-runner-pod-name> -- /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
-```
+{{< /code-block >}}
 
 Once the feature flag is enabled, configure the integration on a per project basis by going to **Settings > Integrations > Datadog** for each project you want to instrument. Mark it as active and paste a valid [API key][6].
 
