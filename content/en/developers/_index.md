@@ -24,18 +24,7 @@ Additionally, you may also be a partner who wants to build on Datadog and contri
 
 If there is data you want to monitor with Datadog that you are not seeing, before building something custom, consider the following Datadog products and integrations:
 
-| Type                         | Details |
-|------------------------------|---------|
-| APM                          | Datadog's [APM & Distributed Tracing][3] provides out-of-the-box performance dashboards for web services, queues, and databases to monitor requests, errors, and latency. |
-| Cloud providers              | Major Cloud providers ([AWS][4], [GCP][5], [Azure][6], [Alibaba][7]) emit metrics through APIs. Through the integration tiles in your account, you can configure integrations that use Datadog servers to crawl and store copies of the metrics collected. |
-| Endpoint                     | For URL uptimes, use an [HTTP check][8] or [Synthetics][9] to validate if an endpoint or URL is running and accessible. Both work with public and private endpoints. |
-| Files and directories        | Measuring the age of files, the number of files in a directory, or the size of a directory can be accomplished with the [Directory check][10]. |
-| JMX Beans                    | JVM-based applications expose JMX metrics that Datadog can collect with the JMX integration. For example, the [JMX integration][11] is already used for official integrations like [Solr][12], [Tomcat][13], [Cassandra][14], etc. |
-| Logs                         | Most applications generate some type of log. Use Datadog's [Log Management][15] for base monitoring. |
-| Network traffic and SNMP     | Network devices, such as routers, switches, printers, emit SNMP metrics (Simple Network Management Protocol) which can be collected using [Network Device Monitoring][16]. Additionally, [Network Performance Monitoring][17] tracks all network traffic in and out of a host. |
-| OpenMetrics                  | The Agent includes [OpenMetrics and Prometheus checks][18] capable of scraping Prometheus endpoints. |
-| Processes                    | To collect resource usage metrics for specific running processes on any host (CPU, memory, I/O, etc.) use the [Processes integration][19]. To query across all your running processes for open-ended debugging use [Live Process Monitoring][20] (like htop without having to SSH).|
-| Windows Performance Counters | Windows services or applications that expose performance counters can be collected with the [PDH integration][21]. |
+{{< partial name="whats-next/whats-next.html" >}}
 
 ## Creating your own solution
 
