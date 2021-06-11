@@ -23,6 +23,7 @@ exceptions:
   - Azure
   - Azure App Service
   - Azure App Service Plan
+  - Azure Blob Storage
   - Azure Event Hub
   - CakePHP
   - Cassandra Nodetool
@@ -30,6 +31,7 @@ exceptions:
   - CentOS
   - Chef
   - Clipboard
+  - Cloud Pub Sub
   - CloudFormation
   - CloudSQL
   - CloudTrail
@@ -53,9 +55,9 @@ exceptions:
   - Envoy
   - Fargate
   - FastCGI
+  - FireLens
   - Fluent Bit
   - Fluentd
-  - FireLens
   - FreeBSD
   - FreeSwitch
   - Further Reading
@@ -84,6 +86,7 @@ exceptions:
   - Java
   - JavaScript
   - JBoss
+  - Jira
   - JMXFetch
   - Journald
   - Kafka
@@ -104,6 +107,7 @@ exceptions:
   - Logback
   - macOS
   - MarkLogic
+  - Meraki
   - Mesos Slave Integration
   - Metrics Explorer
   - Metrics without Limits
@@ -112,6 +116,7 @@ exceptions:
   - Network Address Translation
   - Network Device Monitoring
   - Network Performance Monitoring
+  - New Relic
   - NGINX Plus
   - NixOS
   - Node
@@ -124,11 +129,12 @@ exceptions:
   - OpenLDAP
   - OpenMetrics
   - OpenShift
-  - openSUSE
   - OpenStack
+  - openSUSE
   - OpenTelemetry
   - OpenTracing
   - OpenVPN
+  - OpsGenie
   - OpsWorks
   - Oracle Instant Client
   - Phusion Passenger
@@ -162,11 +168,14 @@ exceptions:
   - SLOs
   - socat
   - Social Security
+  - SQL Server
   - SQLDelight
   - SQLite
-  - SQL Server
+  - Stackdriver
   - StackStorm
   - StatsD
+  - Sumo Logic
+  - Syslog
   - sysOID
   - System Core
   - System Swap
@@ -175,6 +184,7 @@ exceptions:
   - TokuMX
   - Tracing Without Limits
   - Trello
+  - Twilio
   - TypeScript
   - Ubuntu
   - Unified Service Tagging
