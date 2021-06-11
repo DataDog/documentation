@@ -51,7 +51,7 @@ A `user-agent: Datadog/Synthetics` is also added.
 {{% /tab %}}
 {{% tab "Browser tests" %}}
 
-The following header is attached to all Browser tests:
+The following header is attached to all browser tests:
 
 `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
 
