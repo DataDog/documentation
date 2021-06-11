@@ -27,25 +27,25 @@ Supported CI providers:
 
 Install the `@datadog/datadog-ci` CLI:
 
-```bash
+{{< code-block lang="bash" >}}
 yarn global add @datadog/datadog-ci
-```
+{{< /code-block >}}
 
 ## Uploading test reports
 
 To upload your JUnit XML test reports to Datadog:
 
-```bash
+{{< code-block lang="bash" >}}
 datadog-ci junit upload [--service] [--tags] [--max-concurrency] [--dry-run] <paths>
-```
+{{< /code-block >}}
 
 For example:
 
-```bash
+{{< code-block lang="bash" >}}
 datadog-ci junit upload --service my-service \
   --tags key1:value1 --tags key2:value2 \
   unit-tests/junit-reports acceptance-tests/junit-reports e2e-tests/single-report.xml
-```
+{{< /code-block >}}
 
 `--service`
 : The name of the service you're uploading JUnit XML reports for.<br>

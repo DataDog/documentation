@@ -205,6 +205,8 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 {{ a.value }}
 ```
 
+Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
+
 ### Conditional variables
 
 Conditional variables use `if-else` logic to display a different message depending on the state of the monitor and the details of how it was triggered. These variables can be used within the subject or body of the notification message.

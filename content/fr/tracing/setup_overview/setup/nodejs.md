@@ -46,7 +46,7 @@ npm install dd-trace --save
 
    Lorsque vous utilisez un transpileur comme TypeScript, Webpack ou encore Babel, importez et initialisez la bibliothèque du traceur dans un fichier externe, puis importez tout le contenu du fichier pendant la conception de l'application.
 
-3. [Configurer l'Agent Datadog pour l'APM](#configure-the-datadog-agent-for-apm)
+3. [Configurer l'Agent Datadog pour l'APM](#configurer-l-agent-datadog-pour-l-apm)
 
 4. Ajoutez la [configuration](#configuration) de votre choix au traceur, par exemple les tags `service`, `env` et `version` pour bénéficier du [tagging de service unifié][2].
 
@@ -105,18 +105,23 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
 
 3. Après avoir instrumenté votre application, le client de tracing envoie, par défaut, les traces à `localhost:8126`. S'il ne s'agit pas du host et du port adéquats, modifiez-les en définissant les variables d'environnement ci-dessous :
 
-`DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`
 
-```sh
-DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
-```
+    ```sh
+    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    ```
 
-Pour utiliser un autre protocole (tel qu'UDS), spécifiez l'URL complète en tant que variable d'environnement `DD_TRACE_AGENT_URL` unique.
+    Pour utiliser un autre protocole (tel qu'UDS), spécifiez l'URL complète en tant que variable d'environnement `DD_TRACE_AGENT_URL` unique.
 
-```sh
-DD_TRACE_AGENT_URL=unix:<CHEMIN_SOCKET> node server
-```
+    ```sh
+    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+    ```
 
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Définissez `DD_SITE` dans l'Agent Datadog sur {{< region-param key="dd_site" code="true" >}} pour vous assurer que l'Agent envoie les données au bon site Datadog.
+
+{{< /site-region >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
@@ -147,38 +152,98 @@ Consultez les [paramètres du traceur][3] pour obtenir la liste des options d'in
 
 ## Configuration
 
-Les réglages du traceur peuvent être configurés en tant que paramètre de la méthode `init()` ou en tant que variables d'environnement.
+Les réglages du traceur peuvent être configurés via les paramètres suivants de la méthode `init()` ou via des variables d'environnement.
 
-### Tagging
+### Tags
 
-| Configuration         | Variable d'environnement         | Valeur par défaut     | Description                                                                                                                                                                                                                                                                |
-| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| env            | `DD_ENV`                     | `null`      | Définit l'environnement de l'application, p. ex. `prod`, `pre-prod` ou encore `stage`. Disponible à partir de la version 0.20.                                                                                                                                                                                                     |
-| service        | `DD_SERVICE`            | `null`      | Le nom de service à utiliser pour ce programme. Disponible pour les versions 0.20+                                                                                                                                                                                                                              |
-| version        | `DD_VERSION`            | `null`      | Le numéro de version de l'application. Par défaut, correspond à la valeur du champ version dans package.json. Disponible à partir de la version 0.20.
-| tags           | `DD_TAGS`                    | `{}`        | Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques runtime. Lorsque ce paramètre est passé en tant que variable d'environnement, son format correspond à `key:value,key:value`. Lorsqu'il est défini dans le code : `tracer.init({ tags: { foo: 'bar' } })`. Disponible à partir de la version 0.20.                                                                                                                            |
+
+`env`
+: **Variable d'environnement** : `DD_ENV`<br>
+**Valeur par défaut** : `null`<br>
+Définir l'environnement de votre application, par ex. `prod`, `pre-prod`, `stage`, etc. Disponible à partir de la version 0.20
+
+`service`
+: **Variable d'environnement** : `DD_SERVICE`<br>
+**Valeur par défaut** : `null`<br>
+Le nom de service utilisé pour ce programme. Disponible à partir de la version 0.20
+
+`version`
+: **Variable d'environnement** : `DD_VERSION`<br>
+**Valeur par défaut** : `null`<br>
+Le numéro de version de l'application. Par défaut, correspond à la valeur du champ version dans package.json. Disponible à partir de la version 0.20
+
+`tags`
+: **Variable d'environnement** : `DD_TAGS`<br>
+**Valeur par défaut** : `{}`<br>
+Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques runtime. Lorsque ce paramètre est passé en tant que variable d'environnement, son format correspond à `key:value,key:value`. Lorsqu'il est défini dans le code : `tracer.init({ tags: { foo: 'bar' } })`. Disponible à partir de la version 0.20
 
 Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` afin de définir les tags `env`, `service` et `version` pour vos services. Consultez la documentation sur le [tagging de service unifié][2] pour en savoir plus sur la configuration de ces variables d'environnement.
 
 ### Instrumentation
 
-| Configuration         | Variable d'environnement         | Valeur par défaut     | Description                                                                                                                                                                                                                                                                |
-| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enabled        | `DD_TRACE_ENABLED`           | `true`      | Indique si le traceur doit être activé.                                                                                                                                                                                                                                              |
-| debug          | `DD_TRACE_DEBUG`             | `false`     | Active la journalisation de debugging dans le traceur.                                                                                                                                                                                                                                        |
-| url            | `DD_TRACE_AGENT_URL`         | `null`      | L'URL de l'Agent de trace auquel le traceur transmet des données. Lorsque ce paramètre est défini, il est utilisé à la place du hostname et du port. Prend en charge les sockets de domaine Unix grâce au paramètre `apm_config.receiver_socket` de votre fichier `datadog.yaml` ou à la variable d'environnement `DD_APM_RECEIVER_SOCKET`. |
-| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | L'adresse de l'Agent auquel le traceur transmet des données.                                                                                                                                                                                                                       |
-| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | Le port de l'Agent de trace auquel le traceur transmet des données.                                                                                                                                                                                                                    |
-| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | Le port de l'Agent DogStatsD auquel les métriques sont transmises.                                                                                                                                                                                                             |
-| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Active l'injection automatique d'ID de trace dans les logs, pour les bibliothèques de journalisation prises en charge.                                                                                                                                                                                           |
-| sampleRate     | -                            | `1`         | Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.                                                                                                                                                                                                              |
-| flushInterval  | -                            | `2000`      | Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.                                                                                                                                                                                                |
-| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Indique si l'enregistrement des métriques runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.                                                                                                                                        |
-| experimental   | -                            | `{}`        | Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][4] pour en savoir plus sur les fonctionnalités expérimentales disponibles.                                                                                   |
-| plugins        | -                            | `true`      | Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.                                                                                                                                                                       |
-| - | `DD_TRACE_DISABLED_PLUGINS` | - | Une chaîne de noms d'intégration, séparés par des virgules, désactivées automatiquement à l'initialisation du traceur. Variable d'environnement uniquement. Exemple : `DD_TRACE_DISABLED_PLUGINS=express,dns`. |
-| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Token client pour le tracing sur navigateur. Peut être généré dans Datadog en accédant à **Integrations** -> **APIs**.                                                                                                                                                                             |
-| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | Chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque la journalisation de debugging est activée. Exemple : `error` ou `debug`.                                                                                                                                                             |
+`enabled`
+: **Variable d'environnement** : `DD_TRACE_ENABLED`<br>
+**Valeur par défaut** : `true`<br>
+Permet d'activer ou de désactiver le traceur.
+
+`debug`
+: **Variable d'environnement** : `DD_TRACE_DEBUG`<br>
+**Valeur par défaut** : `false`<br>
+Permet d'activer ou de désactiver les logs de debugging dans le traceur.
+
+`url`
+: **Variable d'environnement** : `DD_TRACE_AGENT_URL`<br>
+**Valeur par défaut** : `null`<br>
+L'URL de l'Agent de trace auquel le traceur transmet des données. Lorsque ce paramètre est défini, il est utilisé à la place du hostname et du port. Prend en charge les sockets de domaine Unix grâce au paramètre `apm_config.receiver_socket` de votre fichier `datadog.yaml` ou à la variable d'environnement `DD_APM_RECEIVER_SOCKET`.
+
+`hostname`
+: **Variable d'environnement** : `DD_TRACE_AGENT_HOSTNAME`<br>
+**Valeur par défaut** : `localhost`<br>
+L'adresse de l'Agent auquel le traceur transmet des données.
+
+`port`
+: **Variable d'environnement** : `DD_TRACE_AGENT_PORT`<br>
+**Valeur par défaut** : `8126`<br>
+Le port de l'Agent auquel le traceur transmet des données.
+
+`dogstatsd.port` 
+: **Variable d'environnement** : `DD_DOGSTATSD_PORT`<br>
+**Valeur par défaut** : `8125`<br>
+Le port de l'Agent DogStatsD auquel les métriques sont transmises.
+
+`logInjection`
+: **Variable d'environnement** : `DD_LOGS_INJECTION`<br>
+**Valeur par défaut** : `false`<br>
+Active l'injection automatique d'ID de trace dans les logs, pour les bibliothèques de journalisation prises en charge.
+
+`sampleRate`
+: **Valeur par défaut** : `1`<br>
+Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.
+
+`flushInterval`
+: **Valeur par défaut** : `2000`<br>
+Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.
+
+`runtimeMetrics` 
+: **Variable d'environnement** : `DD_RUNTIME_METRICS_ENABLED`<br>
+**Valeur par défaut** :  `false`<br>
+Indique si l'enregistrement des métriques runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.
+
+`experimental`
+: **Valeur par défaut** : `{}`<br>
+Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][4] pour en savoir plus sur les fonctionnalités expérimentales disponibles.
+
+`plugins`
+: **Valeur par défaut** : `true`<br>
+Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.
+
+`DD_TRACE_DISABLED_PLUGINS`
+: Une chaîne de noms d'intégration, séparés par des virgules, désactivées automatiquement à l'initialisation du traceur. Variable d'environnement uniquement. Exemple : `DD_TRACE_DISABLED_PLUGINS=express,dns`.
+
+`logLevel`
+: **Variable d'environnement** : `DD_TRACE_LOG_LEVEL`<br>
+**Valeur par défaut** : `debug`<br>
+Chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque les logs de debugging sont activés. Exemple : `error` ou `debug`.
 
 ## Pour aller plus loin
 

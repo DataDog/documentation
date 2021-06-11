@@ -33,10 +33,13 @@ To install the Ruby tracer:
 
 1. Add the `ddtrace` gem (version 0.50.0 or above) to your `Gemfile`:
 
-    ```ruby
-    source 'https://rubygems.org'
-    gem 'ddtrace', ">=0.50.0"
-    ```
+
+    {{< code-block lang="ruby" >}}
+    gem 'ddtrace', 
+    :git => "git://github.com/DataDog/dd-trace-rb.git", 
+    :branch => "feature/test_mode"
+    {{< /code-block >}}
+
 2. Install the gem by running `bundle install`
 
 See the [Ruby tracer installation docs][2] for more details.
@@ -47,7 +50,7 @@ The Cucumber integration traces executions of scenarios and steps when using the
 
 To activate your integration:
 
-```ruby
+{{< code-block lang="ruby" >}}
 require 'cucumber'
 require 'datadog/ci'
 
@@ -67,7 +70,7 @@ Around do |scenario, block|
   end
   block.call
 end
-```
+{{< /code-block >}}
 
 Where `options` is an optional `Hash` that accepts the following parameters:
 
@@ -87,7 +90,7 @@ The RSpec integration traces all executions of example groups and examples when 
 
 To activate your integration, add this to the `spec_helper.rb` file:
 
-```ruby
+{{< code-block lang="ruby" >}}
 require 'rspec'
 require 'datadog/ci'
 
@@ -96,7 +99,7 @@ Datadog.configure do |c|
   c.ci_mode.enabled = true
   c.use :rspec, options
 end
-```
+{{< /code-block >}}
 
 Where `options` is an optional `Hash` that accepts the following parameters:
 

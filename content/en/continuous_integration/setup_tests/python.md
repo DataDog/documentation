@@ -30,9 +30,9 @@ Supported CI providers:
 
 Install the Python tracer by running:
 
-```bash
+{{< code-block lang="bash" >}}
 pip install ddtrace
-```
+{{< /code-block >}}
 
 For more information, see the [Python tracer installation documentation][2].
 
@@ -40,23 +40,28 @@ For more information, see the [Python tracer installation documentation][2].
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`:
 
-```bash
+{{< code-block lang="bash" >}}
 pytest --ddtrace
-```
+{{< /code-block >}}
 
 You can also add the following configuration to any file used to configure `pytest` (such as `pytest.ini` or `setup.cfg`):
 
-```ini
+{{< code-block lang="ini" >}}
 [pytest]
 ddtrace = 1
-```
+{{< /code-block >}}
 
 ## Configuration parameters
 
-| Parameter  | Environment variable  | Default | Description       |
-|------------|-----------------------|---------|-------------------|
-| `ddtrace.config.pytest["service"]` | `DD_PYTEST_SERVICE` | `"pytest"` | The service name reported by default for pytest traces. |
-| `ddtrace.config.pytest["operation_name"]` | `DD_PYTEST_OPERATION_NAME` | `"pytest.test"` | The operation name reported by default for pytest traces. |
+`ddtrace.config.pytest["service"]` 
+: The service name reported by default for pytest traces.<br/>
+**Environment variable**: `DD_PYTEST_SERVICE`<br/>
+**Default**: `"pytest"`
+
+`ddtrace.config.pytest["operation_name"]`
+: The operation name reported by default for pytest traces.<br/>
+**Environment variable**: `DD_PYTEST_OPERATION_NAME`<br/>
+**Default**: `"pytest.test"`
 
 ## Further reading
 
