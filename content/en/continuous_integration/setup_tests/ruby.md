@@ -31,13 +31,14 @@ Supported CI providers:
 
 To install the Ruby tracer:
 
-1. Add the `ddtrace` gem to your `Gemfile` using the specified branch:
+1. Add the `ddtrace` gem (version 0.50.0 or above) to your `Gemfile`:
+
 
     {{< code-block lang="ruby" >}}
-gem 'ddtrace', 
-    :git => "git://github.com/DataDog/dd-trace-rb.git", 
-    :branch => "feature/test_mode"
-{{< /code-block >}}
+    source 'https://rubygems.org'
+    gem 'ddtrace', ">=0.50.0"
+    {{< /code-block >}}
+
 2. Install the gem by running `bundle install`
 
 See the [Ruby tracer installation docs][2] for more details.
