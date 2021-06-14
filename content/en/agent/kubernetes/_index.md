@@ -41,7 +41,9 @@ Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to star
 
 ## Installation
 
-**Note**: We have dedicated documentation and examples for [all major Kubernetes distributions][15] (GKE, EKS, AKS, OpenShift, Rancher, etc.)
+**Notes**:
+- We have dedicated documentation and examples for [all major Kubernetes distributions][15] (GKE, EKS, AKS, OpenShift, Rancher, etc.)
+- We have dedicated documentation and examples for [Kubernetes Control Plane monitoring][16].
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -496,3 +498,4 @@ See the [Agent Commands guides][14] to discover all the Docker Agent commands.
 [13]: /agent/guide/autodiscovery-management/
 [14]: /agent/guide/agent-commands/
 [15]: /agent/kubernetes/distributions
+[16]: /agent/kubernetes/control_plane
