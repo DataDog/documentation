@@ -51,7 +51,7 @@ Use the MessageLogging policy type with the syslog parameter on your API to log 
 </MessageLogging>
 ```
 
-##### Set up JavaScript policy to send Apigee logs to Datadog
+##### JavaScript policy
 
 Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].
 
@@ -143,7 +143,7 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**Note**: Add more flow variables into JavaScript from official [Apigee flow variable documentation][4].
+**Note**: Add more flow variables into JavaScript from the official [Apigee flow variable documentation][4].
 
 ## Troubleshooting
 
