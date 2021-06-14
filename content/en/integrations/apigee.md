@@ -30,12 +30,33 @@ Collect Apigee proxy logs to track errors, response time, duration, latency and 
 
 #### Log collection
 
+There are two methods available for collecting Apigee logs:
+
+1. Use Apigee's [JavaScript policy][1] to send logs to Datadog.
+2. If you already have a syslog server, use the Apigee [MessageLogging policy][2] type to log to a syslog account.
+
+##### Syslog parameter
+
+Use the MessageLogging policy type with the syslog parameter on your API to log custom messages to syslog. Include the Datadog logs intake endpoint ({{< region-param key="web_integrations_endpoint" code="true" >}}), port ({{< region-param key="web_integrations_port" code="true" >}}), and protocol for your region. For example:
+
+```json
+<MessageLogging name="LogToSyslog">
+    <DisplayName>datadog-logging</DisplayName>
+    <Syslog>
+        <Message><YOUR API KEY> test</Message>
+        <Host>intake.logs.datadoghq.com</Host>
+        <Port>10516</Port>
+        <Protocol>TCP</Protocol>
+    </Syslog>
+</MessageLogging>
+```
+
+##### JavaScript policy
 
 Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].
 
-The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][2].
+The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][3].
 
-##### Set up JavaScript policy to send Apigee logs to Datadog
 1. Select the Apigee proxy from which you want to send logs to Datadog.
 2. In the selected proxy overview page, click on the 'DEVELOP' tab located in the top-right corner.
 
@@ -122,17 +143,18 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**Note**: Add more flow variables into JavaScript from official [Apigee flow variable documentation][3].
+**Note**: Add more flow variables into JavaScript from the official [Apigee flow variable documentation][4].
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][4].
+Need help? Contact [Datadog support][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#naming-conventions
-[3]: https://docs.apigee.com/api-platform/reference/variables-reference
-[4]: /help/
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[3]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#naming-conventions
+[4]: https://docs.apigee.com/api-platform/reference/variables-reference
+[5]: /help/
