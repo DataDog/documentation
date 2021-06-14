@@ -193,7 +193,7 @@
             },
             "lvl1": ".main h1",
             "lvl2": ".main h2",
-            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -210,7 +210,7 @@
             "lvl2": ".main h2",
             "lvl3": ".main h3",
             "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -227,7 +227,7 @@
             "lvl2": ".main h2",
             "lvl3": ".main h3",
             "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
