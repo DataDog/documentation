@@ -8,7 +8,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
       tag: 'Blog'
       text: 'Introducing the Datadog quick nav menu'
-      
+
 ---
 
 This page gives a high level overview of the capabilities for the [Datadog site][1].
@@ -30,7 +30,7 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 
 [Datadog Log Management][5] lets you send and process every log produced by your applications and infrastructure. You can observe your logs in real-time using the Live Tail, without indexing them. You can ingest all of the logs from your applications and infrastructure, decide what to index dynamically with filters, and then store them in an archive.
 
-## APM & Distributed Tracing
+## APM & Continuous Profiler
 
 {{< img src="getting_started/apm.png" alt="apm dashboard"  >}}
 
