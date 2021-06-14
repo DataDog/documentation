@@ -24685,7 +24685,7 @@ paths:
         description: "Traces can be sent as an array of traces:\n\n    [ trace1, trace2,\
           \ trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span,\
           \ span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`,\
-          \ `resource`...\n\n[Learn more about the APM & Distributed Tracing terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\
+          \ `resource`...\n\n[Learn more about the APM & Continuous Profiler terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\
           \n**Note:** Each span within a trace should use the same `trace_id`.\nHowever,\
           \ `trace_id` and `span_id` must have different values."
         required: true

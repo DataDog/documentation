@@ -14,7 +14,7 @@ exceptions:
   - Amazon
   - Amazon Web Services
   - APIs
-  - APM & Distributed Tracing
+  - APM & Continuous Profiler
   - App Analytics
   - AuthN
   - Autodiscovery
