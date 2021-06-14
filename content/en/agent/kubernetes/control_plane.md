@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This section aims to document specificites and to provide good base configuration for monitoring the Kubernetes Control Plane. These configuration can then be customized to add any Datadog feature.
+This section aims to document specificities and to provide good base configurations for monitoring the Kubernetes Control Plane. You can then customize these configurations to add any Datadog feature.
 
 With four Datadog integrations for the [API Server][1], [ETCD][2], [Controller Manager][3], and [Scheduler][4], you can collect key metrics from all four components of the Kubernetes Control Plane.
 
@@ -34,7 +34,7 @@ With four Datadog integrations for the [API Server][1], [ETCD][2], [Controller M
 
 ### API Server
 
-The API Server integration is auto-configured and will be auto-discovered by the Datadog Agent.
+The API Server integration is automatically configured. The Datadog Agent discovers it automatically.
 
 ### ETCD
 
@@ -144,7 +144,7 @@ data:
 
 #### Insecure ports
 
-If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent will discover the integrations and starts collecting metrics without any additional configuration. 
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
 
 #### Secure ports
 
