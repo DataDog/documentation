@@ -1,5 +1,5 @@
 ---
-title: How do I set up the Agent to run as a system service on MacOS?
+title: How do I set up the Agent to run as a system service on macOS?
 kind: faq
 further_reading:
 - link: "/agent/"
@@ -7,13 +7,13 @@ further_reading:
   text: "Learn more about the Datadog Agent"
 ---
 
-On MacOS, the Datadog Agent is installed as a user service (for the user that runs the install instructions). This allows the Datadog Agent GUI system tray application to work (while logged in to the MacOS GUI as the user that performed the install), but the main drawback is that the Agent only runs when the user that performed the install is logged in using the MacOS GUI.
+On macOS, the Datadog Agent is installed as a user service (for the user that runs the install instructions). This allows the Datadog Agent GUI system tray application to work (while logged in to the macOS GUI as the user that performed the install), but the main drawback is that the Agent only runs when the user that performed the install is logged in using the macOS GUI.
 
-Because of this, by default the Datadog Agent doesn't run in cases where no GUI access to the MacOS host is available. Additional steps are therefore required when installing & running the MacOS Datadog Agent with no GUI access.
+Because of this, by default the Datadog Agent doesn't run in cases where no GUI access to the macOS host is available. Additional steps are therefore required when installing & running the macOS Datadog Agent with no GUI access.
 
 ## Install
 
-1. Connect to the host and [follow the Agent installation instructions][1] to install the MacOS Datadog Agent.
+1. Connect to the host and [follow the Agent installation instructions][1] to install the macOS Datadog Agent.
 
 2. As the user that ran the install, execute the following bash script:
 
