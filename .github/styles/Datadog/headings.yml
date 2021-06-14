@@ -13,6 +13,7 @@ exceptions:
   - Airflow
   - Amazon
   - Amazon Web Services
+  - APCu
   - APIs
   - APM & Distributed Tracing
   - App Analytics
@@ -71,6 +72,7 @@ exceptions:
   - GraphQL
   - Gunicorn
   - HAProxy
+  - HBase RegionServer Integration
   - HDFS DataNode Integration
   - HDFS NameNode Integration
   - Helm
@@ -78,6 +80,7 @@ exceptions:
   - I
   - IdP
   - IDs
+  - iLert
   - Incident Management
   - Ingress Controller
   - Internet Information Services
@@ -86,6 +89,8 @@ exceptions:
   - Java
   - JavaScript
   - JBoss
+  - JFrog
+  - JFrog Artifactory
   - Jira
   - JMXFetch
   - Journald
@@ -126,6 +131,7 @@ exceptions:
   - NXLog
   - OkHttp
   - OneLogin
+  - OPcache
   - OpenLDAP
   - OpenMetrics
   - OpenShift
@@ -172,6 +178,7 @@ exceptions:
   - SQLDelight
   - SQLite
   - Stackdriver
+  - StackPulse
   - StackStorm
   - StatsD
   - Sumo Logic
