@@ -498,22 +498,83 @@
               text: "Explore your services, resources and traces"
 
     - action: pull-and-push-file
-      branch: master
+      branch: priyanshi/rum_docs_revamp
       globs:
-      - 'docs/rum_collection.md'
+      - 'docs/rum_collection/rum_getting_started.md'
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'ios.md'
+        dest_path: '/real_user_monitoring/ios'
+        file_name: '_index.md'
         front_matters:
-          title: iOS RUM Collection
+          title: RUM iOS Monitoring
           kind: documentation
           beta: true
           description: "Collect RUM data from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/rum_getting_started.md"]
+
+         further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "Github"
+              text: "dd-sdk-ios Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: priyanshi/rum_docs_revamp
+      globs:
+      - 'docs/rum_collection/mobile_data_collected.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'data_collected.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/data_collected.md"]
+          title: RUM iOS Data Collected
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "Github"
+              text: "dd-sdk-ios Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: priyanshi/rum_docs_revamp
+      globs:
+      - 'docs/rum_collection/configure_rum_sdk.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'configure_rum_sdk.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/configure_rum_sdk.md"]
+          title: RUM iOS Advanced Configuration
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "Github"
+              text: "dd-sdk-ios Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
+    - action: pull-and-push-file
+      branch: priyanshi/rum_docs_revamp
+      globs:
+      - 'docs/advanced_configuration.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'troubleshooting.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/advanced_configuration.md"]
+          title: Troubleshooting
+          kind: documentation
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "Github"
+              text: "dd-sdk-ios Source code"
+            - link: "/real_user_monitoring"
+              tag: "Homepage"
+              text: "Explore Datadog RUM"
 
   - repo_name: dd-sdk-reactnative
     contents:
-
     - action: pull-and-push-file
       branch: main
       globs:
