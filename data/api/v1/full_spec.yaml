@@ -20994,6 +20994,20 @@ paths:
         required: false
         schema:
           type: string
+      - description: The number of SLOs to return in the response.
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
