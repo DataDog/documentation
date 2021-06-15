@@ -893,6 +893,15 @@ components:
           type: array
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
+        restricted_roles:
+          description: A list of role identifiers. Only the author and users associated
+            with at least one of these roles can edit this dashboard. Overrides the
+            `is_read_only` property if both are present. **This feature is currently
+            in beta.**
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         template_variable_presets:
           description: Array of template variables saved views.
           items:
@@ -7270,7 +7279,14 @@ components:
 
                 If a metric query only has one unit object, the second array element
                 is null.'
-              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              example:
+              - family: bytes
+                id: 2
+                name: byte
+                plural: bytes
+                scale_factor: 1.0
+                short_name: B
+              - null
               items:
                 $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
               nullable: true

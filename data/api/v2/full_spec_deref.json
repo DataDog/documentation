@@ -23101,9 +23101,9 @@
         "description": "List of rules.",
         "properties": {
           "data": {
-            "description": "TODO.",
+            "description": "Array containing the list of rules.",
             "items": {
-              "description": "Detection rule.",
+              "description": "Rule.",
               "properties": {
                 "cases": {
                   "description": "Cases for generating signals.",
@@ -23184,6 +23184,10 @@
                     "type": "object"
                   },
                   "type": "array"
+                },
+                "hasExtendedTitle": {
+                  "description": "Whether the notifications include the triggering group-by values in their title.",
+                  "type": "boolean"
                 },
                 "id": {
                   "description": "The ID of the rule.",
@@ -23437,6 +23441,11 @@
                   },
                   "type": "array"
                 },
+                "updateAuthorId": {
+                  "description": "User ID of the user who updated the rule.",
+                  "format": "int64",
+                  "type": "integer"
+                },
                 "version": {
                   "description": "The version of the rule.",
                   "format": "int64",
@@ -23631,6 +23640,11 @@
             },
             "type": "array"
           },
+          "hasExtendedTitle": {
+            "description": "Whether the notifications include the triggering group-by values in their title.",
+            "example": true,
+            "type": "boolean"
+          },
           "isEnabled": {
             "description": "Whether the rule is enabled.",
             "example": true,
@@ -23643,7 +23657,7 @@
           },
           "name": {
             "description": "The name of the rule.",
-            "example": "",
+            "example": "My security monitoring rule.",
             "type": "string"
           },
           "options": {
@@ -23860,7 +23874,7 @@
                 },
                 "query": {
                   "description": "Query to run on logs.",
-                  "example": "a < 3",
+                  "example": "a > 3",
                   "type": "string"
                 }
               },
@@ -24369,7 +24383,7 @@
           },
           "query": {
             "description": "Query to run on logs.",
-            "example": "a < 3",
+            "example": "a > 3",
             "type": "string"
           }
         },
@@ -24379,7 +24393,7 @@
         "type": "object"
       },
       "SecurityMonitoringRuleResponse": {
-        "description": "Detection rule.",
+        "description": "Rule.",
         "properties": {
           "cases": {
             "description": "Cases for generating signals.",
@@ -24460,6 +24474,10 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "hasExtendedTitle": {
+            "description": "Whether the notifications include the triggering group-by values in their title.",
+            "type": "boolean"
           },
           "id": {
             "description": "The ID of the rule.",
@@ -24713,6 +24731,11 @@
             },
             "type": "array"
           },
+          "updateAuthorId": {
+            "description": "User ID of the user who updated the rule.",
+            "format": "int64",
+            "type": "integer"
+          },
           "version": {
             "description": "The version of the rule.",
             "format": "int64",
@@ -24810,6 +24833,11 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "hasExtendedTitle": {
+            "description": "Whether the notifications include the triggering group-by values in their title.",
+            "example": true,
+            "type": "boolean"
           },
           "isEnabled": {
             "description": "Whether the rule is enabled.",
@@ -25050,6 +25078,13 @@
               "type": "string"
             },
             "type": "array"
+          },
+          "version": {
+            "description": "The version of the rule being updated.",
+            "example": 1,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
           }
         },
         "type": "object"
@@ -52343,9 +52378,9 @@
                   "description": "List of rules.",
                   "properties": {
                     "data": {
-                      "description": "TODO.",
+                      "description": "Array containing the list of rules.",
                       "items": {
-                        "description": "Detection rule.",
+                        "description": "Rule.",
                         "properties": {
                           "cases": {
                             "description": "Cases for generating signals.",
@@ -52426,6 +52461,10 @@
                               "type": "object"
                             },
                             "type": "array"
+                          },
+                          "hasExtendedTitle": {
+                            "description": "Whether the notifications include the triggering group-by values in their title.",
+                            "type": "boolean"
                           },
                           "id": {
                             "description": "The ID of the rule.",
@@ -52679,6 +52718,11 @@
                             },
                             "type": "array"
                           },
+                          "updateAuthorId": {
+                            "description": "User ID of the user who updated the rule.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
                           "version": {
                             "description": "The version of the rule.",
                             "format": "int64",
@@ -52835,6 +52879,11 @@
                     },
                     "type": "array"
                   },
+                  "hasExtendedTitle": {
+                    "description": "Whether the notifications include the triggering group-by values in their title.",
+                    "example": true,
+                    "type": "boolean"
+                  },
                   "isEnabled": {
                     "description": "Whether the rule is enabled.",
                     "example": true,
@@ -52847,7 +52896,7 @@
                   },
                   "name": {
                     "description": "The name of the rule.",
-                    "example": "",
+                    "example": "My security monitoring rule.",
                     "type": "string"
                   },
                   "options": {
@@ -53064,7 +53113,7 @@
                         },
                         "query": {
                           "description": "Query to run on logs.",
-                          "example": "a < 3",
+                          "example": "a > 3",
                           "type": "string"
                         }
                       },
@@ -53107,7 +53156,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule.",
+                  "description": "Rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -53188,6 +53237,10 @@
                         "type": "object"
                       },
                       "type": "array"
+                    },
+                    "hasExtendedTitle": {
+                      "description": "Whether the notifications include the triggering group-by values in their title.",
+                      "type": "boolean"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -53440,6 +53493,11 @@
                         "type": "string"
                       },
                       "type": "array"
+                    },
+                    "updateAuthorId": {
+                      "description": "User ID of the user who updated the rule.",
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "version": {
                       "description": "The version of the rule.",
@@ -53630,7 +53688,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule.",
+                  "description": "Rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -53711,6 +53769,10 @@
                         "type": "object"
                       },
                       "type": "array"
+                    },
+                    "hasExtendedTitle": {
+                      "description": "Whether the notifications include the triggering group-by values in their title.",
+                      "type": "boolean"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -53964,6 +54026,11 @@
                       },
                       "type": "array"
                     },
+                    "updateAuthorId": {
+                      "description": "User ID of the user who updated the rule.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
                     "version": {
                       "description": "The version of the rule.",
                       "format": "int64",
@@ -54099,6 +54166,11 @@
                       "type": "object"
                     },
                     "type": "array"
+                  },
+                  "hasExtendedTitle": {
+                    "description": "Whether the notifications include the triggering group-by values in their title.",
+                    "example": true,
+                    "type": "boolean"
                   },
                   "isEnabled": {
                     "description": "Whether the rule is enabled.",
@@ -54339,6 +54411,13 @@
                       "type": "string"
                     },
                     "type": "array"
+                  },
+                  "version": {
+                    "description": "The version of the rule being updated.",
+                    "example": 1,
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "type": "integer"
                   }
                 },
                 "type": "object"
@@ -54352,7 +54431,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule.",
+                  "description": "Rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -54433,6 +54512,10 @@
                         "type": "object"
                       },
                       "type": "array"
+                    },
+                    "hasExtendedTitle": {
+                      "description": "Whether the notifications include the triggering group-by values in their title.",
+                      "type": "boolean"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -54685,6 +54768,11 @@
                         "type": "string"
                       },
                       "type": "array"
+                    },
+                    "updateAuthorId": {
+                      "description": "User ID of the user who updated the rule.",
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "version": {
                       "description": "The version of the rule.",
