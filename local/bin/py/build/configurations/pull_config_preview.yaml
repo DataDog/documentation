@@ -510,7 +510,6 @@
           beta: true
           description: "Collect RUM data from your iOS applications."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/rum_getting_started.md"]
-
          further_reading:
             - link: "https://github.com/DataDog/dd-sdk-ios"
               tag: "Github"
@@ -521,7 +520,7 @@
     - action: pull-and-push-file
       branch: priyanshi/rum_docs_revamp
       globs:
-      - 'docs/rum_collection/mobile_data_collected.md'
+      - 'docs/rum_collection/data_collected.md'
       options:
         dest_path: '/real_user_monitoring/ios/'
         file_name: 'data_collected.md'
@@ -557,7 +556,7 @@
     - action: pull-and-push-file
       branch: priyanshi/rum_docs_revamp
       globs:
-      - 'docs/advanced_configuration.md'
+      - 'docs/rum_collection/advanced_configuration.md'
       options:
         dest_path: '/real_user_monitoring/ios/'
         file_name: 'troubleshooting.md'
