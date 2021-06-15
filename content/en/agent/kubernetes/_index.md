@@ -49,7 +49,7 @@ Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to star
 To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
 
 1. [Install Helm][1].
-2. Download the [Datadog `values.yaml` configuration file][2] as a reference; but to follow helm best-practice, it is recommended to create from scratch empty `values.yaml` file for your configuration, and define only the value(s) that need(s) to be overridden. It allows benefiting from the helm chart defaulting evolution.
+2. Create your `values.yaml`, Use the [Datadog `values.yaml` configuration file][2] as a reference; We recommend that your `values.yaml` only contains values that need to be overridden as it allows a smooth experience when upgrading Chart versions.
 3. If this is a fresh install, add the Helm Datadog repo:
     ```bash
     helm repo add datadog https://helm.datadoghq.com
