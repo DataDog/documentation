@@ -18,7 +18,7 @@ This guide covers how to get started with Metrics without Limits™ and quickly 
 
 3. Configure your Top 20 metrics on the Usage page, or [with the API][3].
 
-4. Use Bulk Metric Configuration (`*` syntax) to quickly configure tags on multiple metrics.
+   You can use bulk metric configuration (`*` syntax) to quickly configure tags on multiple metrics.
 
    {{< img src="metrics/guide/bulk-tag-configuration.gif" alt="Applying bulk tag configuration"  style="width:80%;" >}}
 
@@ -69,7 +69,7 @@ Without the host, this leaves three remaining tag combinations:
 2. `{endpoint:x, status:400}`
 3. `{endpoint:y, status:200}`
 
-However, for each of these three combinations, Metrics without Limits™ stores six pre-aggregated values, so this results in **18 custom metrics total**. Therefore, the metric is smaller when left unconfigured.
+However, for each of these three combinations, Metrics without Limits™ stores six pre-aggregated values, so this results in **18 custom metrics total**. Therefore, the metric count is smaller when left unconfigured.
 
 
 [1]: /metrics/faq/metrics-without-limits/
