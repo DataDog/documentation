@@ -1155,7 +1155,7 @@
       "type": "group",
       "widgets": [
         {
-          "definition": "[object Object]",
+          "definition": null,
           "layout": {
             "height": 0,
             "width": 0,
@@ -1175,7 +1175,7 @@
       "type": "group",
       "widgets": [
         {
-          "definition": "[object Object]",
+          "definition": {},
           "id": "integer",
           "layout": {
             "height": 0,
