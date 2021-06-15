@@ -4,7 +4,7 @@ kind: guide
 is_beta: true
 ---
 
-<div class="alert alert-warning">This functionality is in private beta. To request access, contact your CSM or the <a href="https://docs.datadoghq.com/help/">Datadog Support team</a>.</div>
+<div class="alert alert-warning">This functionality is in private beta.</div>
 
 ## Overview
 
@@ -14,11 +14,11 @@ Review the [Metrics without Limits™ FAQ][1].
 
 
 1. Begin by configuring your Top 20 metrics on the Usage page.
-   You can configure metrics both in the Metrics Summary UI and with the API.
+   You can [configure metrics][2] both in the Metrics Summary UI and with the API.
 
-   **Note:** If you're using the Create Tag Configuration API, use the [tag configuration cardinality estimator API][2] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. 
+   **Note:** If you're using the Create Tag Configuration API, use the [tag configuration cardinality estimator API][3] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. 
 
-   If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration. There are more cost savings from doing nothing to that metric than using Metrics without Limits™.
+   If the UI or the estimator API returns a resulting number of indexed that is [larger than ingested](#why-is-my-indexed-cm-volume-greater-than-ingested-cm-volume), do not save your tag configuration. 
 
 2. Use Bulk Metric Configuration to quickly configure tags on multiple metrics.
 
@@ -28,13 +28,13 @@ Review the [Metrics without Limits™ FAQ][1].
 
 ### Other tips
 
-You can set up alerts on your real-time estimated custom metrics usage metric so that you can correlate spikes in custom metrics with configurations.
+You can set up alerts on your real-time [estimated custom metrics usage][4] metric so that you can correlate spikes in custom metrics with configurations.
 
 
-[Role based access control][3] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
+[Role based access control][5] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
 
 
-Audit events allow you to trace any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes (search for “queryable tag configuration” or “percentile aggregations”) 
+Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes (search for “queryable tag configuration” or “percentile aggregations”) 
 
 ### Why is my indexed CM volume greater than ingested CM volume? 
 
@@ -47,7 +47,7 @@ This is not a bug -- your current proposed tag configuration doesn't reduce the 
 
 * When a count, gauge, or rate metric has been configured with Metrics without Limits™ given a specified tag configuration:
 
-  The original raw data must be recombined and aggregated prior to query time to preserve the accuracy of your query results and values. Because of this, Datadog stores six different time/space aggregations (shown below in with check marks) for each remaining tag value combination defined by your tag configuration. Refer to the docs on [the anatomy of a metric][4] to review what time/space aggregations are, and how they work. 
+  The original raw data must be recombined and aggregated prior to query time to preserve the accuracy of your query results and values. Because of this, Datadog stores six different time/space aggregations (shown below in with check marks) for each remaining tag value combination defined by your tag configuration. Refer to the docs on [the anatomy of a metric][6] to review what time/space aggregations are, and how they work. 
   |           | Time AVG  | Time SUM  | Time MIN  | Time MAX  |
   |-----------|-----------|-----------|-----------|-----------|
   | Space AVG | {{< X >}} | {{< X >}} |           |           |
@@ -77,6 +77,8 @@ However, for each of these three combinations, Metrics without Limits™ stores 
 
 
 [1]: /metrics/faq/metrics-without-limits/
-[2]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
-[3]: /account_management/rbac/permissions/?tab=ui#metrics
-[4]: /metrics/#time-and-space-aggregation
+[2]: /metrics/#create-a-tag-configuration
+[3]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
+[4]: /account_management/billing/usage_metrics/
+[5]: /account_management/rbac/permissions/?tab=ui#metrics
+[6]: /metrics/#time-and-space-aggregation
