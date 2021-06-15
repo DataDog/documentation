@@ -129,8 +129,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/error_tracking/android.md ;fi
 	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
-	@if [ content/en/real_user_monitoring/ios.md ]; then \
-	rm -f content/en/real_user_monitoring/ios.md ;fi
+	@if [ -d content/en/real_user_monitoring/ios ]; then \
+	find ./content/en/real_user_monitoring/ios -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/real_user_monitoring/reactnative.md ]; then \
 	rm -f content/en/real_user_monitoring/reactnative.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \

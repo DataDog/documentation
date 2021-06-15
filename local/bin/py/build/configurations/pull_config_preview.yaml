@@ -510,19 +510,13 @@
               tag: "Documentation"
               text: "Explore your services, resources and traces"
 
-    - action: pull-and-push-file
-      branch: master
+    - action: pull-and-push-folder
+      branch: priyanshi/rum_docs_revamp
       globs:
-      - 'docs/rum_collection.md'
+        - docs/rum_collection/*
       options:
-        dest_path: '/real_user_monitoring/'
-        file_name: 'ios.md'
-        front_matters:
-          title: iOS RUM Collection
-          kind: documentation
-          beta: true
-          description: "Collect RUM data from your iOS applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection.md"]
+        dest_dir: '/real_user_monitoring/ios/'
+        path_to_remove: 'docs/rum_collection/'
 
   - repo_name: dd-sdk-reactnative
     contents:
