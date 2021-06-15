@@ -542,7 +542,6 @@ Variables to replace in the test. This object should contain, as keys, the name 
 : **Type**: integer<br>
 The duration in milliseconds after which `datadog-ci` stops polling for test results. The default is 120,000 ms. At the CI level, test results completed after this duration are considered failed.
 
-
 **Note**: Tests' overrides take precedence over global overrides.
 
 **Example advanced test configuration file**:
