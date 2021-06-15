@@ -32,6 +32,8 @@ With four Datadog integrations for the [API Server][1], [ETCD][2], [Controller M
 
 ## Kubernetes with Kubeadm {#Kubeadm}
 
+The following configurations are tested on Kubernetes `v1.18+`.
+
 ### API Server
 
 The API Server integration is automatically configured. The Datadog Agent discovers it automatically.
