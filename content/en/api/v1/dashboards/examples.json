@@ -69,7 +69,7 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": "[object Object]",
+              "definition": {},
               "id": "integer",
               "layout": {
                 "height": 0,
@@ -111,7 +111,7 @@
         "title": "",
         "widgets": [
           {
-            "definition": "[object Object]",
+            "definition": null,
             "layout": {
               "height": 0,
               "width": 0,
@@ -148,7 +148,7 @@
         "title": "",
         "widgets": [
           {
-            "definition": "[object Object]",
+            "definition": {},
             "id": "integer",
             "layout": {
               "height": 0,
@@ -182,7 +182,10 @@
               "default_value": "*",
               "name": "exampleVar",
               "prefix": "test",
-              "visible_tags": "selectableValue1,selectableValue2"
+              "visible_tags": [
+                "selectableValue1",
+                "selectableValue2"
+              ]
             }
           ],
           "share_list": [
@@ -234,7 +237,10 @@
             "default_value": "*",
             "name": "exampleVar",
             "prefix": "test",
-            "visible_tags": "selectableValue1,selectableValue2"
+            "visible_tags": [
+              "selectableValue1",
+              "selectableValue2"
+            ]
           }
         ],
         "share_list": [
@@ -296,7 +302,10 @@
               "default_value": "*",
               "name": "exampleVar",
               "prefix": "test",
-              "visible_tags": "selectableValue1,selectableValue2"
+              "visible_tags": [
+                "selectableValue1",
+                "selectableValue2"
+              ]
             }
           ],
           "share_list": [
@@ -350,7 +359,10 @@
               "default_value": "*",
               "name": "exampleVar",
               "prefix": "test",
-              "visible_tags": "selectableValue1,selectableValue2"
+              "visible_tags": [
+                "selectableValue1",
+                "selectableValue2"
+              ]
             }
           ],
           "share_list": [
@@ -401,7 +413,10 @@
             "default_value": "*",
             "name": "exampleVar",
             "prefix": "test",
-            "visible_tags": "selectableValue1,selectableValue2"
+            "visible_tags": [
+              "selectableValue1",
+              "selectableValue2"
+            ]
           }
         ],
         "share_list": [
@@ -604,7 +619,7 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": "[object Object]",
+              "definition": {},
               "id": "integer",
               "layout": {
                 "height": 0,
@@ -676,7 +691,7 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": "[object Object]",
+              "definition": {},
               "id": "integer",
               "layout": {
                 "height": 0,
@@ -726,7 +741,7 @@
         "title": "",
         "widgets": [
           {
-            "definition": "[object Object]",
+            "definition": null,
             "layout": {
               "height": 0,
               "width": 0,
@@ -763,7 +778,7 @@
         "title": "",
         "widgets": [
           {
-            "definition": "[object Object]",
+            "definition": {},
             "id": "integer",
             "layout": {
               "height": 0,

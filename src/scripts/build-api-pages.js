@@ -460,14 +460,15 @@ const outputExample = (chosenExample, inputkey) => {
           ex = `[${outputExample(item, inputkey)}]`;
         } else if(typeof item === 'object') {
           // output 1 level of example array
-          if(inputkey && inputkey in item) {
-            ex = outputValue(item[inputkey]);
+          if(inputkey && item !== null && inputkey in item) {
+            if(item[inputkey] instanceof Array) {
+              ex = `[${outputExample(item[inputkey])}]`;
+            } else {
+              ex = `${outputExample(item[inputkey])}`;
+            }
           }
         } else {
-          ex += outputValue(item, true);
-          if (Object.is(arr.length - 1, key)) {
-            ex = ex.slice(0, -1);
-          }
+          ex += outputValue(item, !Object.is(arr.length - 1, key));
         }
       });
     } else if(typeof chosenExample === 'object') {
