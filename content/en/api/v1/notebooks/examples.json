@@ -92,7 +92,7 @@
               },
               "cells": [
                 {
-                  "attributes": "[object Object]",
+                  "attributes": {},
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -221,7 +221,7 @@
               },
               "cells": [
                 {
-                  "attributes": "[object Object]",
+                  "attributes": {},
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -290,7 +290,7 @@
               },
               "cells": [
                 {
-                  "attributes": "[object Object]",
+                  "attributes": {},
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
