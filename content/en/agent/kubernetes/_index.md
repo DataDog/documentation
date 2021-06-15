@@ -289,7 +289,7 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
-   kubectl apply -f agent_spec=/path/to/your/datadog-agent.yaml
+   kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 
 ## Cleanup
