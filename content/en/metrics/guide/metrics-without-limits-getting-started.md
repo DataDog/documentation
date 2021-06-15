@@ -14,7 +14,7 @@ Review the [Metrics without Limits™ FAQ][1].
 
 
 1. Begin by configuring your Top 20 metrics on the Usage page.
-   You can [configure metrics][2] both in the Metrics Summary UI and with the API.
+   You can configure metrics both in the Metrics Summary UI and [with the API][2].
 
    **Note:** If you're using the Create Tag Configuration API, use the [tag configuration cardinality estimator API][3] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. 
 
