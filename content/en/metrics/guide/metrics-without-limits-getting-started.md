@@ -18,7 +18,7 @@ Review the [Metrics without Limits™ FAQ][1].
 
    **Note:** If you're using the Create Tag Configuration API, use the [tag configuration cardinality estimator API][3] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. 
 
-   If the UI or the estimator API returns a resulting number of indexed that is [larger than ingested](#why-is-my-indexed-cm-volume-greater-than-ingested-cm-volume), do not save your tag configuration. 
+   If the UI or the estimator API returns a resulting number of indexed that is [larger than ingested](#why-is-my-indexed-volume-greater-than-ingested-volume), do not save your tag configuration. 
 
 2. Use Bulk Metric Configuration to quickly configure tags on multiple metrics.
 
