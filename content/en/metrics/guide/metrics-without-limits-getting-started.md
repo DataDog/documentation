@@ -75,7 +75,7 @@ However, for each of these three combinations, Metrics without Limits™ stores 
 
 
 [1]: /metrics/faq/metrics-without-limits/
-[2]: /metrics/#create-a-tag-configuration
+[2]: /api/latest/metrics/#create-a-tag-configuration
 [3]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
 [4]: /account_management/billing/usage_metrics/
 [5]: /account_management/rbac/permissions/?tab=ui#metrics
