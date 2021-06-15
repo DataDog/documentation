@@ -34,20 +34,18 @@ You can set up alerts on your real-time [estimated custom metrics usage][4] metr
 [Role based access control][5] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
 
 
-Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes (search for “queryable tag configuration” or “percentile aggregations”) 
+Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for “queryable tag configuration” or “percentile aggregations”.
 
-### Why is my indexed CM volume greater than ingested CM volume? 
+### Why is my indexed volume greater than ingested volume? 
 
 This is not a bug -- your current proposed tag configuration doesn't reduce the metric's cardinality enough to offset the effects of how Metrics without Limits™ is designed.
 
-* When a count, gauge, or rate metric isn't configured with Metrics without Limits™:
-
-  Datadog can slice, dice, and aggregate the appropriate raw data at query time to provide you mathematically accurate results. 
+* When a count, gauge, or rate metric **is not configured** with Metrics without Limits™, Datadog can slice, dice, and aggregate the appropriate raw data at query time to provide you mathematically accurate results. 
 
 
-* When a count, gauge, or rate metric has been configured with Metrics without Limits™ given a specified tag configuration:
+* When a count, gauge, or rate metric **is configured** with Metrics without Limits™, given a specified tag configuration, the original raw data must be recombined and aggregated prior to query time to preserve the accuracy of your query results and values. 
 
-  The original raw data must be recombined and aggregated prior to query time to preserve the accuracy of your query results and values. Because of this, Datadog stores six different time/space aggregations (shown below in with check marks) for each remaining tag value combination defined by your tag configuration. Refer to the docs on [the anatomy of a metric][6] to review what time/space aggregations are, and how they work. 
+Because of this, Datadog stores six different time/space aggregations (shown below with check marks) for each remaining tag value combination defined by your tag configuration. Refer to the docs on [the anatomy of a metric][6] to review what time/space aggregations are, and how they work. 
   |           | Time AVG  | Time SUM  | Time MIN  | Time MAX  |
   |-----------|-----------|-----------|-----------|-----------|
   | Space AVG | {{< X >}} | {{< X >}} |           |           |
@@ -55,7 +53,7 @@ This is not a bug -- your current proposed tag configuration doesn't reduce the 
   | Space MIN | {{< X >}} |           |           |           |
   | Space MAX | {{< X >}} |           |           |           |
   
-  If a combination does not have a check mark, it is best to send that metric without using Metrics without Limits™ (keep full cardinality).
+  If a combination you need for query does not have a check mark, it is best to not configure this particular metric with Metrics without Limits™ 
 
 Therefore, you can have a resulting indexed custom metric volume greater than an ingested custom metric volume if the tag combination specified does not reduce the number of remaining tag value combinations enough to offset the 6x factor.
 
@@ -73,7 +71,7 @@ Without the host, this leaves three remaining tag combinations:
 2. `{endpoint:x, status:400}`
 3. `{endpoint:y, status:200}`
 
-However, for each of these three combinations, Metrics without Limits™ stores six pre-aggregated values, so this results in **18 custom metrics total**.
+However, for each of these three combinations, Metrics without Limits™ stores six pre-aggregated values, so this results in **18 custom metrics total**. Therefore, the metric is smaller when left unconfigured.
 
 
 [1]: /metrics/faq/metrics-without-limits/
