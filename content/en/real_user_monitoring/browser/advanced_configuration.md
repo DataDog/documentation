@@ -21,7 +21,7 @@ further_reading:
 ## Enrich and control RUM data
 The RUM SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. Intercepting the RUM events allows you to:
 * Enrich your RUM events with additional context attributes
-* Modify your RUM events to modify their content, or redact sensitive sequences
+* Modify your RUM events to modify their content, or redact sensitive sequences (see [list of editable properties](#modify-the-content-of-rum-event))
 * Discard selected RUM events
 
 ```javascript
@@ -34,8 +34,8 @@ Starting with [version 2.13.0][3], `beforeSend` takes two arguments: the `event`
 |------------------|---------------------------|
 | View             | [Location][4]                  |
 | Action           | [Event][5]                     |
-| Resource (XHR)   | [XMLHttpRequest][6]            |
-| Resource (Fetch) | [Request][7] and [Response][8]      |
+| Resource (XHR)   | [XMLHttpRequest][6] and [PerformanceResourceTiming][9]            |
+| Resource (Fetch) | [Request][7], [Response][8], and [PerformanceResourceTiming][9]      |
 | Resource (Other) | [PerformanceResourceTiming][9] |
 | Error            | [Error][10]                     |
 | Long Task        | [PerformanceLongTaskTiming][11] |
