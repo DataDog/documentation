@@ -10,17 +10,15 @@ is_beta: true
 
 This guide covers how to get started with Metrics without Limits™ and quickly gain the most value from the feature. 
 
-Review the [Metrics without Limits™ FAQ][1].
+1. Review the [Metrics without Limits™ FAQ][1].
 
-
-1. Begin by configuring your Top 20 metrics on the Usage page.
-   You can configure metrics both in the Metrics Summary UI and [with the API][2].
-
-   **Note:** If you're using the Create Tag Configuration API, use the [tag configuration cardinality estimator API][3] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. 
+2. If you're using the Create Tag Configuration API, use the [tag configuration cardinality estimator API][2] first to validate the potential impact of your tag configurations prior to using the API above to create tag configurations. 
 
    If the UI or the estimator API returns a resulting number of indexed that is [larger than ingested](#why-is-my-indexed-volume-greater-than-ingested-volume), do not save your tag configuration. 
 
-2. Use Bulk Metric Configuration to quickly configure tags on multiple metrics.
+3. Configure your Top 20 metrics on the Usage page, or [with the API][3].
+
+4. Use Bulk Metric Configuration (`*` syntax) to quickly configure tags on multiple metrics.
 
    {{< img src="metrics/guide/bulk-tag-configuration.gif" alt="Applying bulk tag configuration"  style="width:80%;" >}}
 
@@ -75,8 +73,8 @@ However, for each of these three combinations, Metrics without Limits™ stores 
 
 
 [1]: /metrics/faq/metrics-without-limits/
-[2]: /api/latest/metrics/#create-a-tag-configuration
-[3]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
+[2]: /metrics/guide/tag-configuration-cardinality-estimation-tool/
+[3]: /api/latest/metrics/#create-a-tag-configuration
 [4]: /account_management/billing/usage_metrics/
 [5]: /account_management/rbac/permissions/?tab=ui#metrics
 [6]: /metrics/#time-and-space-aggregation
