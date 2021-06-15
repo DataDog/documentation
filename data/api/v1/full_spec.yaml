@@ -893,6 +893,15 @@ components:
           type: array
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
+        restricted_roles:
+          description: A list of role identifiers. Only the author and users associated
+            with at least one of these roles can edit this dashboard. Overrides the
+            `is_read_only` property if both are present. **This feature is currently
+            in beta.**
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         template_variable_presets:
           description: Array of template variables saved views.
           items:
