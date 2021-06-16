@@ -1,24 +1,33 @@
 ---
-title: RUM Advanced Configuration
+title: Modifying RUM Data and Context
 kind: documentation
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
+  - /real_user_monitoring/browser/advanced_configuration/
 further_reading:
-    - link: 'https://www.npmjs.com/package/@datadog/browser-rum'
-      tag: 'NPM'
-      text: 'datadog/browser-rum NPM package'
-    - link: '/real_user_monitoring/rum_explorer'
-      tag: 'Documentation'
-      text: 'Explore your views within Datadog'
-    - link: '/real_user_monitoring/rum_analytics'
-      tag: 'Documentation'
-      text: 'Build analytics upon your events'
-    - link: 'real_user_monitoring/browser/tracking_user_actions'
-      tag: 'Documentation'
-      text: 'Tracking custom user actions'
+- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+  tag: "Blog"
+  text: "Real User Monitoring"
+- link: "/real_user_monitoring/explorer/"
+  tag: "Documentation"
+  text: "Explore your views within Datadog"
+- link: "/real_user_monitoring/explorer/analytics/"
+  tag: "Documentation"
+  text: "Build analytics upon your events"
+- link: "/logs/processing/attributes_naming_convention/"
+  tag: "Documentation"
+  text: "Datadog Standard Attributes"
 ---
 
+There are various ways you can modify the data collected by RUM, to support your needs for:
+
+- Protecting sensitive data like personally identifiable information.
+- Connecting a user session with your internal identification of that user, to help with supporting.
+- Reducing how much RUM data you're collecting, through sampling the data.
+- Providing more context than what the default attributes provide about where the data is coming from.
+
 ## Control sensitive RUM data
+
 If your RUM data contains sensitive information that need redacting, configure the Browser SDK to redact sensitive sequences, or to discard selected RUM events, by using the `beforeSend` callback when you initialize RUM.
 
 This callback function gives you access to every event collected by the RUM SDK before they get sent to Datadog.
@@ -148,6 +157,7 @@ window.DD_RUM &&
 {{< /tabs >}}
 
 ## Identify user sessions
+
 Adding user information to your RUM sessions makes it easy to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
@@ -291,6 +301,7 @@ window.DD_RUM &&
 **Note**: For a sampled out session, all page views and associated telemetry for that session are not collected.
 
 ## Global context
+
 ### Add global context
 
 Once Real User Monitoring (RUM) is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
