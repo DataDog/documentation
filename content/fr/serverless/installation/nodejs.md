@@ -20,29 +20,29 @@ further_reading:
   - link: serverless/custom_metrics/
     tag: Documentation
     text: Envoyer des métriques custom depuis des applications sans serveur
+aliases:
+  - /fr/serverless/datadog_lambda_library/nodejs/
+  - /fr/serverless/guide/nodejs/
 ---
 ## Configuration requise
 
-Si vous n'avez pas encore réalisé la configuration :
+Si vous ne l'avez pas encore fait, installez l'[intégration AWS][1]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS. Après avoir installé l'[intégration AWS][1], suivez ces étapes pour instrumenter votre application afin d'envoyer des métriques, des logs et des traces à Datadog.
 
-- Installez [l'intégration AWS][1]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS.
-- Installez la [fonction Lambda du Forwarder Datadog][2], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda.
+{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrumenter des applications sans serveur AWS"  style="width:100%;">}}
 
-Après avoir installé l'[intégration AWS][1] et le [Forwarder Datadog][2], suivez ces étapes pour instrumenter votre application afin d'envoyer des métriques, des logs et des traces à Datadog.
+Si vous avez déjà configuré le plug-in Serverless Datadog à l'aide du Forwarder Datadog ou si vos fonctions Lambda sont déployées dans la région AWS GovCloud, consultez les [instructions d'installation ici][2].
 
 ## Configuration
 
 {{< tabs >}}
 {{% tab "Framework Serverless" %}}
 
-Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. Il configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
-
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter le profil de signature ARN de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][3] de votre fonction avant d'installer le plug-in Serverless Datadog.
+Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda, et configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
 
 Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes suivantes :
 
 1. Installez le plug-in Serverless Datadog :
-    ```
+      ```
     yarn add --dev serverless-plugin-datadog
     ```
 2. Ajoutez ce qui suit dans votre fichier `serverless.yml` :
@@ -54,20 +54,21 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
     ```
     custom:
       datadog:
-        forwarderArn: # The Datadog Forwarder ARN goes here.
+        addExtension: true
+        apiKey: # Your Datadog API Key goes here.
     ```
-    Pour en savoir plus sur l'ARN du Forwarder Datadog ou sur l'installation, cliquez [ici][2]. Pour obtenir des paramètres supplémentaires, consultez la [documentation du plug-in][1].
+   Recherchez votre clé d'API Datadog sur la [page de gestion des API][3]. Pour prendre connaissance des paramètres supplémentaires, consultez la [documentation du plug-in][1].
+
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
-[2]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[2]: /fr/serverless/libraries_integrations/extension
+[3]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
-<div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
-La [macro CloudFormation Datadog][1] transforme automatiquement votre modèle d'application SAM dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide de couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
+La [macro CloudFormation Datadog][1] transforme automatiquement votre modèle d'application SAM dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. De plus, elle configure vos fonctions de sorte à ce qu'elles envoient des métriques, des traces et des logs à Datadog via l'[extension Lambda Datadog][2].
 
-### Installer la macro CloudFormation Datadog
+### Install
 
 Exécutez la commande suivante avec vos [identifiants AWS][3] pour déployer une pile CloudFormation qui installe la ressource AWS de la macro. Vous ne devez installer la macro qu'une seule fois par région de votre compte. Remplacez `create-stack` par `update-stack` pour mettre à jour la macro vers la dernière version.
 
@@ -80,7 +81,7 @@ aws cloudformation create-stack \
 
 La macro est désormais déployée et utilisable.
 
-### Instrumenter la fonction
+### Instrumenter
 
 Dans votre fichier `template.yml`, ajoutez ce qui suit dans la section `Transform`, **après** la transformation `AWS::Serverless` pour SAM.
 
@@ -91,87 +92,84 @@ Transform:
     Parameters:
       stackName: !Ref "AWS::StackName"
       nodeLayerVersion: "<VERSION_COUCHE>"
-      forwarderArn: "<ARN_FORWARDER>"
+      extensionLayerVersion: "<VERSION_EXTENSION>"
       service: "<SERVICE>" # Facultatif
-      env: "<ENVIRONNEMENT>" # Facultatif
+      env: "<ENV>" # Facultatif
 ```
 
-Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par les valeurs appropriées, `<VERSION_COUCHE>` par la version de votre choix de la couche Lambda Datadog (voir les [dernières versions][4]) et `<ARN_FORWARDER>` par l'ARN du Forwarder (voir la [documentation relative au Forwarder][2]).
-
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter le profil de signature ARN de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][5] de votre fonction avant de pouvoir utiliser la macro.
+Remplacez `<SERVICE>` et `<ENV>` par les valeurs appropriées, `<VERSION_COUCHE>` par la [version de votre choix][4] de la bibliothèque Lambda Datadog, et `<VERSION_EXTENSION>` par la [version de votre choix][5] de l'extension Lambda Datadog.
 
 Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à la macro][1].
 
+
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[2]: /fr/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-js/releases
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[5]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-<div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
+La [bibliothèque CDK Constructs Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda, et configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
 
-La [macro CloudFormation Datadog][1] transforme automatiquement le modèle CloudFormation généré par AWS CDK dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide de couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
+### Installer la bibliothèque CDK Constructs Datadog
 
-### Installer la macro CloudFormation Datadog
-
-Exécutez la commande suivante avec vos [identifiants AWS][3] pour déployer une pile CloudFormation qui installe la ressource AWS de la macro. Vous ne devez installer la macro qu'**une seule fois** par région de votre compte. Remplacez `create-stack` par `update-stack` pour mettre à jour la macro vers la dernière version.
+Exécutez la commande Yarn ou NPM suivante dans votre projet CDK pour installer la bibliothèque CDK Constructs Datadog :
 
 ```sh
-aws cloudformation create-stack \
-  --stack-name datadog-serverless-macro \
-  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
-  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
-```
+#Yarn
+yarn add --dev datadog-cdk-constructs
 
-La macro est désormais déployée et utilisable.
+#NPM
+npm install datadog-cdk-constructs --save-dev
+```
 
 ### Instrumenter la fonction
 
-Ajoutez la transformation `DatadogServerless` ainsi que `CfnMapping` à votre objet `Stack` dans votre application AWS CDK. Consultez l'exemple de code ci-dessous en TypeScript (le fonctionnement est similaire dans d'autres langages).
+Importez le module `datadog-cdk-construct` dans votre application AWS CDK et ajoutez les configurations suivantes :
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
+import { Datadog } from "datadog-cdk-constructs";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    this.addTransform("DatadogServerless");
 
-    new cdk.CfnMapping(this, "Datadog", {
-      mapping: {
-        Parameters: {
-          nodeLayerVersion: "<VERSION_COUCHE>",
-          forwarderArn: "<ARN_FORWARDER>",
-          stackName: this.stackName,
-          service: "<SERVICE>", // Facultatif
-          env: "<ENVIRONNEMENT>", // Facultatif
-        },
-      },
+    const datadog = new Datadog(this, "Datadog", { 
+        nodeLayerVersion: <VERSION_COUCHE>, 
+        extensionLayerVersion: <VERSION_EXTENSION>, 
+        apiKey: <CLÉ_API_DATADOG>,
+        service: <SERVICE> // Facultatif
+        env: <ENV> // Facultatif 
     });
+    datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);    
   }
 }
 ```
 
-Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par les valeurs appropriées, `<VERSION_COUCHE>` par la version de votre choix de la couche Lambda Datadog (voir les [dernières versions][3]) et `<ARN_FORWARDER>` par l'ARN du Forwarder (consultez la [documentation relative au Forwarder][2]).
+Pour remplir les paramètres fictifs, procédez comme suit :
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter le profil de signature ARN de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][4] de votre fonction avant de pouvoir utiliser la macro.
+- Remplacez `<DATADOG_API_KEY>` par votre clé d'API Datadog sur la [page de gestion des API][3]. 
+- Remplacez `<SERVICE>` et `<ENV>` par les valeurs appropriées.
+- Remplacez `<VERSION_COUCHE>` par la version de votre choix de la couche Lambda Datadog (consultez les [dernières versions][2]).
+- Remplacez `<VERSION_EXTENSION>` par la version de votre choix de l'extension Lambda Datadog (consultez les [dernières versions][4]).
 
-Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à la macro][1].
+Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [page NPM relative au CDK Datadog][1] (en anglais).
 
-[1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
-[2]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[3]: https://github.com/DataDog/datadog-lambda-js/releases
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs
+[2]: https://github.com/DataDog/datadog-lambda-js/releases
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "Interface de ligne de commande Datadog" %}}
 
 <div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
-Utilisez l'interface de ligne de commande Datadog pour configurer l'instrumentation sur vos fonctions Lambda dans vos pipelines CI/CD. La commande de l'interface de ligne de commande ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog.
+Utilisez l'interface de ligne de commande Datadog pour configurer l'instrumentation sur vos fonctions Lambda dans vos pipelines CI/CD. La commande de l'interface de ligne de commande ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda. Elle configure vos fonctions de façon à envoyer des métriques, traces et logs à Datadog.
 
-### Installer l'interface de ligne de commande Datadog
+### Install
 
 Installez l'interface de ligne de commande Datadog avec NPM ou Yarn :
 
@@ -183,35 +181,42 @@ npm install -g @datadog/datadog-ci
 yarn global add @datadog/datadog-ci
 ```
 
-### Instrumenter la fonction
+### Instrumenter
 
-Exécutez la commande suivante avec vos [identifiants AWS][1]. Remplacez `<nomfonction>` et `<autre_nomfonction>` par le nom de vos fonctions Lambda, `<région_aws>` par le nom de la région AWS, `<version_couche>` par la version de votre choix de la couche Lambda Datadog (voir les [dernières versions][2]) et `<arn_forwarder>` par l'ARN du Forwarder (voir la [documentation relative au Forwarder][3]).
+Pour instrumenter la fonction, exécutez la commande suivante avec vos [identifiants AWS][1]. Remplacez `<nomfonction>` et `<autre_nomfonction>` par les noms de vos fonctions Lambda, `<région_aws>` par le nom de la région AWS, `<version_couche>` par la [version de votre choix][2] de la bibliothèque Lambda Datadog et `<version_extension>` par la [version de votre choix][3] de l'extension Lambda Datadog.
 
 ```sh
-datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région_aws> -v <version_couche> --forwarder <arn_forwarder>
+datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région_aws> -v <version_couche> -e <version_extension>
 ```
 
 Par exemple :
 
+{{< site-region region="us,us3,eu" >}}
+
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
 ```
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter le profil de signature ARN de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][5] de votre fonction avant de pouvoir l'instrumenter avec l'interface de ligne de commande Datadog.
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
+```
+{{< /site-region >}}
 
 Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à l'interface de ligne de commande][4].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://docs.datadoghq.com/fr/serverless/forwarder/
+[3]: https://gallery.ecr.aws/datadog/lambda-extension
 [4]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Image de conteneur" %}}
 
-### Installer la bibliothèque Lambda Datadog
+### Install
 
-Si vous déployez votre fonction Lambda en tant qu'image de conteneur, vous ne pourrez pas utiliser la bibliothèque Lambda Datadog en tant que couche. À la place, il vous faudra installer la bibliothèque Lambda Datadog directement dans l'image. Si vous utilisez le tracing Datadog, vous devrez également installer `dd-trace`.
+Si vous déployez votre fonction Lambda en tant qu'image de conteneur, vous ne pouvez pas utiliser la bibliothèque Lambda Datadog en tant que couche Lambda. À la place, vous devez installer la bibliothèque Lambda Datadog en tant que dépendance de votre fonction directement dans l'image. Si vous utilisez le tracing Datadog, vous devez également installer `dd-trace`.
 
 **NPM** :
 
@@ -221,35 +226,41 @@ npm install --save datadog-lambda-js dd-trace
 
 **Yarn** :
 
-
 ```sh
 yarn add datadog-lambda-js dd-trace
 ```
 
-Veuillez noter que la version mineure du package `datadog-lambda-js` correspond toujours à la version de la couche. Par exemple, `datadog-lambda-js v0.5.0` correspond au contenu de la version 5 de la couche.
+**Remarque** : la version mineure du package `datadog-lambda-js` correspond toujours à la version de la couche. Par exemple, `datadog-lambda-js v0.5.0` correspond au contenu de la version 5 de la couche.
+
+### Configurer
+
+
+### Installer l'extension Lambda Datadog
+
+Ajoutez l'extension Lambda Datadog à votre image de conteneur en ajoutant ce qui suit à votre Dockerfile :
+
+```
+COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+```
+
+Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `7`) ou par `latest`. Accédez au [référentiel Amazon ECR][1] pour consulter la liste complète des tags disponibles.
 
 ### Configurer la fonction
 
-1. Définissez la valeur `CMD` de votre image sur `node_modules/datadog-lambda-js/dist/handler.handler`. Pour ce faire, modifiez directement votre Dockerfile ou remplacez la valeur à l'aide d'AWS.
-2. Définissez la variable d'environnement `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, comme `myfunc.handler`.
-3. Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `true`.
-4. Définissez la variable d'environnement `DD_FLUSH_TO_LOG` sur `true`.
-5. Vous pouvez également définir des tags `service` et `env` pour votre fonction avec des valeurs correspondantes.
+1. Définissez la valeur `CMD` de votre image sur `node_modules/datadog-lambda-js/dist/handler.handler`. Vous pouvez effectuer cette opération dans AWS ou directement dans votre Dockerfile. **Remarque** : la valeur définie dans AWS remplace la valeur définie dans le Dockerfile, si vous avez défini les deux.
+2. Définissez les variables d'environnement suivantes dans  AWS :
+  - Définissez `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, par exemple `myfunc.handler`.
+  - Définissez `DD_TRACE_ENABLED` sur `true`.
+  - Définissez `DD_FLUSH_TO_LOG` sur `true`.
+  - Définissez `DD_API_KEY` sur votre clé d'API Datadog sur la [page de gestion des API][2]. 
+3. Si vous le souhaitez, ajoutez des tags `service` et `env` avec les valeurs appropriées dans votre fonction.
 
-### Abonner le Forwarder Datadog aux groupes de logs
-
-Pour pouvoir envoyer des métriques, traces et logs à Datadog, vous devez abonner la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
-
-1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][1].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][2].
-
-[1]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[2]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Personnalisé" %}}
 
-### Installer la bibliothèque Lambda Datadog
+### Install
 
 La bibliothèque Lambda Datadog peut être importée en tant que couche ou en tant que package JavaScript.
 
@@ -257,23 +268,38 @@ La version mineure du package `datadog-lambda-js` correspond toujours à la vers
 
 #### Utiliser la couche
 
-[Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en suivant le format suivant.
+[Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+
+{{< site-region region="us,us3,eu" >}} 
 
 ```
-# Pour les régions standard
 arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+```
 
-# Pour les régions us-gov
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```
 arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
+{{< /site-region >}}
 
 Les options `RUNTIME` disponibles sont `Node10-x` et `Node12-x`. Pour `VERSION`, consultez la [dernière version][2]. Exemple :
+
+{{< site-region region="us,us3,eu" >}} 
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
 
-Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter le profil de signature ARN de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][6] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:25
+```
+
+{{< /site-region >}}
 
 #### Utiliser le package
 
@@ -291,34 +317,62 @@ yarn add datadog-lambda-js
 
 Consultez la [dernière version][3].
 
-### Configurer la fonction
+
+### Installer l'extension Lambda Datadog
+
+[Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+
+{{< site-region region="us,us3,eu" >}} 
+
+```
+arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-Extension:<VERSION_EXTENSION>
+```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```
+arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-Extension:<VERSION_EXTENSION>
+```
+
+{{< /site-region >}}
+
+Pour `VERSION_EXTENSION`, consultez la [dernière version][4].
+
+### Configurer
+
+Pour configurer la fonction, suivez les étapes ci-dessous :
 
 1. Définissez le gestionnaire de votre fonction sur `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` si vous utilisez la couche, ou sur `node_modules/datadog-lambda-js/dist/handler.handler` si vous utilisez le package.
 2. Définissez la variable d'environnement `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, comme `myfunc.handler`.
 3. Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `true`.
-4. Définissez la variable d'environnement `DD_FLUSH_TO_LOG` sur `true`.
+4. Définissez la variable d'environnement `DD_API_KEY` sur votre clé d'API Datadog, disponible sur la [page de gestion des API][5]. 
 5. Vous pouvez également définir des tags `service` et `env` pour votre fonction avec des valeurs correspondantes.
-
-### Abonner le Forwarder Datadog aux groupes de logs
-
-Pour pouvoir envoyer des métriques, traces et logs à Datadog, vous devez abonner la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
-
-1. [Si ce n'est pas déjà le cas, installez le Forwarder Datadog][4].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][5].
-
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: https://docs.datadoghq.com/fr/serverless/forwarder/
-[5]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: https://gallery.ecr.aws/datadog/lambda-extension
+[5]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Explorer la surveillance sans serveur de Datadog
 
 Après avoir configuré votre fonction en suivant la procédure ci-dessus, vous pouvez visualiser vos métriques, logs et traces sur la [page Serverless principale][3].
+
+### Tagging de service unifié
+
+Bien que cette opération soit facultative, Datadog vous recommande fortement d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][4].
+
+### Collecter les logs à partir des ressources sans serveur AWS
+
+Les logs d'un environnement sans serveur générés par des ressources gérées, outre les fonctions Lambda AWS, peuvent être très utiles pour identifier la cause d'origine des problèmes liés à vos applications sans serveur. Nous vous recommandons de transmettre les logs provenant des ressources gérées suivantes à votre environnement :
+- API : API Gateway, AppSync, ALB
+- Files d'attente et flux : SQS, SNS, Kinesis
+- Datastores : DynamoDB, S3, RDS, etc.
+
+Pour collecter des logs depuis des ressources AWS autres que des fonctions Lambda, installez le [Forwarder Datadog][5] et configurez-le de façon à l'abonner à tous les groupes de logs CloudWatch des ressources gérées.
 
 ### Surveiller une logique opérationnelle personnalisée
 
@@ -371,14 +425,16 @@ exports.handler = async (event) => {
 };
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][4]. Pour en savoir plus sur l'instrumentation personnalisée, consultez la documentation de l'APM Datadog relative à l'[instrumentation personnalisée][5].
+Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][6]. Pour obtenir plus d'informations sur l'instrumentation personnalisée, consultez la [documentation dédiée][7].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/amazon_web_services/
-[2]: /fr/serverless/forwarder
+[2]: /fr/serverless/guide/datadog_forwarder_node
 [3]: https://app.datadoghq.com/functions
-[4]: /fr/serverless/custom_metrics?tab=nodejs
-[5]: /fr/tracing/custom_instrumentation/nodejs/
+[4]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[5]: /fr/serverless/libraries_integrations/forwarder
+[6]: /fr/serverless/custom_metrics?tab=nodejs
+[7]: /fr/tracing/custom_instrumentation/nodejs/
