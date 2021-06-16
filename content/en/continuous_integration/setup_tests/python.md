@@ -31,7 +31,7 @@ Supported CI providers:
 Install the Python tracer by running:
 
 {{< code-block lang="bash" >}}
-pip install ddtrace
+pip install "ddtrace>=0.50.0rc2"
 {{< /code-block >}}
 
 For more information, see the [Python tracer installation documentation][2].
@@ -53,7 +53,7 @@ ddtrace = 1
 
 ## Configuration parameters
 
-`ddtrace.config.pytest["service"]` 
+`ddtrace.config.pytest["service"]`
 : The service name reported by default for pytest traces.<br/>
 **Environment variable**: `DD_PYTEST_SERVICE`<br/>
 **Default**: `"pytest"`
