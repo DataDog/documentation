@@ -73,7 +73,7 @@ Learn how to configure your monitors for those use cases in [the example section
 Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
 To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5. 
 
-Example: different priority for `alert` and `warning` notifications:
+For example, you can set different priorities for `alert` and `warning` notifications:
 
 ```
 {{#is_alert}}
