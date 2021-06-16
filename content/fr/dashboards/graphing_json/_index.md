@@ -38,7 +38,7 @@ DASHBOARD_SCHEMA = {
 |----------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `title`              | chaîne           | Titre de votre dashboard.                                                                                                                  |
 | `description`        | chaîne           | Description du dashboard.                                                                                                             |
-| `layout_type`        | enum             | Type de disposition du dashboard. Valeurs autorisées : `ordered` (disposition du timeboard précédent) ou `free` (disposition du screenboard précédent).                |
+| `layout_type`        | enum             | Type de disposition du dashboard. Valeurs autorisées : `ordered` ou `free`.               |
 | `is_read_only`       | Booléen          | Indique si ce dashboard est en lecture seule. Si ce paramètre a pour valeur `True`, seuls l'auteur et les administrateurs peuvent effectuer des modifications.                     |
 | `template_variables` | tableau d'objets  | Liste des template variables utilisables dans ce dashboard. Consultez la [documentation relative au schéma des template variables](#schema-template-variables) pour en savoir plus. |
 | `notify_list`        | tableau de strings | Liste des handles des utilisateurs à notifier lorsque des changements sont apportés à ce dashboard.                                                               |
