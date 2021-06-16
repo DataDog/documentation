@@ -6,8 +6,10 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de réseau virtuel Azure.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_virtual_networks/'
+draft: false
 git_integration_title: azure_virtual_networks
 has_logo: true
+integration_id: ''
 integration_title: Réseau virtuel Microsoft Azure
 is_public: true
 kind: integration
@@ -18,10 +20,6 @@ short_description: Surveillez des métriques clés de réseau virtuel Azure.
 version: '1.0'
 ---
 ## Présentation
-
-<div class="alert alert-warning">
-Cette intégration est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez <a href="https://docs.datadoghq.com/help">l'assistance Datadog</a>.
-</div>
 
 Le réseau virtuel Azure (VNet) est le bloc de construction fondamental pour votre réseau privé dans Azure. Le réseau virtuel permet à de nombreux types de ressources Azure, telles que les machines virtuelles (VM) Azure, de communiquer de manière sécurisée entre elles, avec Internet et avec les réseaux locaux. Utilisez Datadog pour surveiller votre espace d'adressage disponible afin d'éviter de manquer d'espace dans les moments critiques.
 
@@ -39,8 +37,8 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 
 ## Données collectées
 ### Métriques
+{{< get-metrics-from-git "azure_virtual_networks" >}}
 
-Consultez [metadata.csv][2] pour découvrir la liste complète des métriques fournies par cette intégration.
 
 ### Événements
 L'intégration Réseau virtuel Azure n'inclut aucun événement.
