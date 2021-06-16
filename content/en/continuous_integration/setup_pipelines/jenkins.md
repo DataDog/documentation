@@ -35,6 +35,33 @@ INFO    datadog.trace.core.StatusLogger#logStatus: DATADOG TRACER CONFIGURATION 
 **Note**: Enabling the collection of traces using the Jenkins plugin is incompatible with running the Java APM tracer as a Java agent when launching Jenkins.
 
 
+## Enabling CI Visibility on the plugin
+
+While in beta, the UI to activate CI Visibility is hidden and needs to be manually configured following these steps:
+
+1. Open the file: `$JENKINS_HOME\org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration.xml`
+
+2. Add or modify the following lines:
+
+{{< code-block lang="xml" >}}
+<reportWith>DSD</reportWith>
+<targetHost>localhost</targetHost>
+<targetPort>8125</targetPort>
+<targetTraceCollectionPort>8126</targetTraceCollectionPort>
+<traceServiceName>jenkins</traceServiceName>
+<collectBuildTraces>true</collectBuildTraces>
+{{< /code-block >}}
+
+3. Restart Jenkins for the changes to take effect.
+
+If the configuration is correct, your Jenkins log should contain the following lines after restarting:
+
+{{< code-block lang="text" >}}
+INFO    datadog.trace.core.CoreTracer#<init>: New instance: DDTracer-62fcf62{ ... }
+INFO    datadog.trace.core.StatusLogger#logStatus: DATADOG TRACER CONFIGURATION { ... }
+{{< /code-block >}}
+
+
 ## Enable job log collection on the Agent
 
 Enable log collection in the Agent:
