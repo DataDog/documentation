@@ -102,7 +102,7 @@ class Build:
                     "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
+                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
                 sys.exit(1)
 
 
