@@ -8,6 +8,7 @@ aliases:
   - /logs/archives/s3/
   - /logs/archives/gcs/
   - /logs/archives/gcp/
+  - /logs/archives/
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"

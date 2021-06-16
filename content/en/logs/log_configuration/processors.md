@@ -2,6 +2,8 @@
 title: Processors
 kind: documentation
 description: "Parse your logs using the Grok Processor"
+aliases:
+  - /logs/processing/processors/
 further_reading:
 - link: "/logs/processing/pipelines/"
   tag: "Documentation"
