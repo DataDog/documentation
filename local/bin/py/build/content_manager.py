@@ -170,6 +170,6 @@ def prepare_content(configuration, github_token, extract_dir):
                 "\x1b[33mWARNING\x1b[0m: Downloading files failed, documentation is now in degraded mode.")
         else:
             print(
-                "\x1b[31mERROR\x1b[0m: Downloading files failed, stoping build.")
+                "\x1b[31mERROR\x1b[0m: Downloading files failed, stopping build.")
             sys.exit(1)
     return list_of_contents
