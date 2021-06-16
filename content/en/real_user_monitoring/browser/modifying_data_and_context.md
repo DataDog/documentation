@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Real User Monitoring"
+- link: "/real_user_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
@@ -19,7 +22,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-There are various ways you can modify the data collected by RUM, to support your needs for:
+There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
 
 - Protecting sensitive data like personally identifiable information.
 - Connecting a user session with your internal identification of that user, to help with supporting.
@@ -96,7 +99,7 @@ You can update the following event properties:
 |   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
 
-**Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][1].
+**Note**: The RUM SDK will ignore modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][2].
 
 ### Discard a RUM event
 
@@ -352,7 +355,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
 
 ### Replace global context
 
@@ -403,7 +406,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][3] for a better correlation of your data across the product.
 
 ### Read global context
 
@@ -442,5 +445,6 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[2]: /logs/processing/attributes_naming_convention/#user-related-attributes
+[1]: /real_user_monitoring/browser/data_collected/
+[2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[3]: /logs/processing/attributes_naming_convention/#user-related-attributes
