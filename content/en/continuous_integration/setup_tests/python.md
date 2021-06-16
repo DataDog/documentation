@@ -36,7 +36,7 @@ pip install ddtrace
 
 For more information, see the [Python tracer installation documentation][2].
 
-## Instrumenting your Pytest tests
+## Instrumenting your pytest tests
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`:
 

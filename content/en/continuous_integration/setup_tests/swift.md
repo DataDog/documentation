@@ -211,7 +211,7 @@ Additional Git configuration for physical device testing:
 | `BUILDKITE_BUILD_AUTHOR` | `$(BUILDKITE_BUILD_AUTHOR)` |
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
-#### Bitbucket Pipelines
+#### Bitbucket pipelines
 
 | Environment variable     | Value                              |
 | -------------------------- | ---------------------------------- |
@@ -228,7 +228,6 @@ Additional Git configuration for physical device testing:
 | `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)`      |
 | `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`              |
 | `BITBUCKET_TAG` | `$(BITBUCKET_TAG)` |
-
 
 #### AppVeyor
 
@@ -252,8 +251,7 @@ Additional Git configuration for physical device testing:
 | `APPVEYOR_REPO_COMMIT_AUTHOR`                   | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`                   |
 | `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`                   | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`                   |
 
-
-#### Azure Pipelines
+#### Azure pipelines
 
 | Environment variable     | Value                                   |
 | ------------------------------------ | --------------------------------------- |
@@ -279,7 +277,6 @@ Additional Git configuration for physical device testing:
 | `BUILD_SOURCEVERSIONMESSAGE` | `$(BUILD_SOURCEVERSIONMESSAGE)` |
 | `BUILD_REQUESTEDFORID` | `$(BUILD_REQUESTEDFORID)` |
 | `BUILD_REQUESTEDFOREMAIL` | `$(BUILD_REQUESTEDFOREMAIL)` |
-
 
 #### Bitrise
 
@@ -308,12 +305,11 @@ Additional Git configuration for physical device testing:
 | `GIT_CLONE_COMMIT_COMMITER_NAME` | `$(GIT_CLONE_COMMIT_COMMITER_NAME)` |
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL` | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)` |
 
-
 ## Running tests 
 
 After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs will be instrumented automatically.
 
-## UI Tests
+## UI tests
 
 For UITests, both the test target and the application running from the UITests must link with the framework. Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 

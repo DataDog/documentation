@@ -35,7 +35,7 @@ Supported CI providers:
 
 ## Installing the Java tracer
 
-### Using Maven
+### Maven
 
 Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]: 
 
@@ -61,7 +61,7 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 </profile>
 {{< /code-block >}}
 
-### Using Gradle
+### Gradle
 
 Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2].
 
@@ -77,7 +77,7 @@ dependencies {
 
 ## Instrumenting your tests
 
-### Using Maven
+### Maven
 
 Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent (use `-Ddd.integration.testng.enabled=true` if your testing framework is TestNG rather than JUnit):
 
@@ -113,7 +113,7 @@ Run your tests using the `ci-app` profile, for example:
 mvn clean verify -P ci-app
 {{< /code-block >}}
 
-### Using Gradle
+### Gradle
 
 Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property (use `-Ddd.integration.testng.enabled=true` if your testing framework is TestNG rather than JUnit):
 

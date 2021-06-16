@@ -27,7 +27,7 @@ To create a new log detection detection rule in Datadog, hover over **Security**
 
 For Security Monitoring, select **Log Detection** to analyze ingested logs in real-time.
 
-## Choose a Detection Method
+## Choose a detection method
 
 ### Threshold
 
@@ -45,7 +45,7 @@ Anomaly detection is currently in <a href="https://app.datadoghq.com/security/co
 
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
-## Define a Search Query
+## Define a search query
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -126,7 +126,7 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Set a Rule Case
+## Set a rule case
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -208,7 +208,7 @@ A signal will "close" regardless of whether or not the anomaly is still anomalou
 {{% /tab %}}
 {{< /tabs >}}
 
-## Say What's Happening
+## Say what's happening
 
 The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
 
