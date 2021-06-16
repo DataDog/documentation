@@ -1,6 +1,9 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    cri: assets/dashboards/overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cri/README.md'
 display_name: CRI
+draft: false
 git_integration_title: cri
 guid: 6eb96c6a-3e2d-4236-9387-fa3b0c455336
 integration_id: cri
@@ -31,7 +35,7 @@ supported_os:
 
 Ce check surveille une interface de runtime de conteneur (Container Runtime Interface ou CRI).
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -86,7 +90,7 @@ spec:
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][3] et cherchez `cri` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][2] et cherchez `cri` dans la section Checks.
 
 ## Données collectées
 
@@ -104,10 +108,9 @@ CRI n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.example
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[3]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
+[4]: https://docs.datadoghq.com/fr/help/
