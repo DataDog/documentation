@@ -40,7 +40,7 @@ The Browser SDK automatically tracks clicks. A click action is created if **all*
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Advanced Configuration][3].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][3].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|

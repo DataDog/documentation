@@ -156,28 +156,11 @@ The following diagram illustrates the RUM event hierarchy:
 
 ### View timing metrics 
 
-
-| Metric                              | Type        | Description                                                                                                                                                                                                                 |
-|----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.largest_contentful_paint` | number (ns) | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.                                                                                                |
-| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
-| `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening.                                                                               |
-| `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info on how view loading time is collected][10]|
-| `view.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                                                                            |
-| `view.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][12]                                                                                                               |
-| `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][13]. |
-| `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][14]                                                                             |
-| `view.load_event`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][15]                                                                                   |
-| `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
-| `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
-| `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
-| `view.action.count`      | number      | Count of all actions collected for this view.
-
+{{% rum-browser-data-pageview-metrics %}}
 
 ### Resource timing metrics
 
-Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][16].
+Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][10].
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -242,7 +225,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 #### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][17].
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][11].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -254,7 +237,7 @@ Source errors include code-level information about the error. More information a
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][18]. |
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][12]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
@@ -264,9 +247,9 @@ Source errors include code-level information about the error. More information a
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `action.id` | string | UUID of the user action. |
-| `action.type` | string | Type of the user action. For [Custom User Actions][19], it is set to `custom`. |
+| `action.type` | string | Type of the user action. For [Custom User Actions][13], it is set to `custom`. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions |
-| `action.name` | string | User-friendly name created (for example `Click on #checkout`). For [Custom User Actions][19], the action name given in the API call. |
+| `action.name` | string | User-friendly name created (for example `Click on #checkout`). For [Custom User Actions][13], the action name given in the API call. |
 
 
 ## Further Reading
@@ -282,13 +265,7 @@ Source errors include code-level information about the error. More information a
 [7]: /help/
 [8]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [9]: /synthetics/browser_tests/
-[10]: /real_user_monitoring/browser/monitoring_page_performance/#how-is-loading-time-calculated
-[11]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
-[16]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[17]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[18]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
-[19]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-user-actions
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[12]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
+[13]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-user-actions
