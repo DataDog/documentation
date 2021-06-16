@@ -1861,7 +1861,7 @@ main:
     parent: log_explorer
     weight: 505
   - name: Search Syntax
-    url: logs/log_explorer/search_syntax/
+    url: logs/explorer/search_syntax/
     parent: log_explorer
     weight: 506
   - name: Guides
