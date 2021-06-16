@@ -54,7 +54,7 @@ While in beta, the UI to activate CI Visibility is hidden and needs to be manual
 
 3. Restart Jenkins for the changes to take effect.
 
-If the configuration is correct, you should be able to see the following lines in the Jenkins log after restarting it:
+If the configuration is correct, your Jenkins log should contain the following lines after restarting:
 
 {{< code-block lang="text" >}}
 INFO    datadog.trace.core.CoreTracer#<init>: New instance: DDTracer-62fcf62{ ... }
