@@ -48,7 +48,7 @@ While in beta, the UI to activate CI Visibility is hidden and needs to be manual
 <targetHost>localhost</targetHost>
 <targetPort>8125</targetPort>
 <targetTraceCollectionPort>8126</targetTraceCollectionPort>
-<traceServiceName>my-jenkins-instance</traceServiceName>
+<traceServiceName>jenkins</traceServiceName>
 <collectBuildTraces>true</collectBuildTraces>
 {{< /code-block >}}
 
