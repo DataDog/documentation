@@ -1779,96 +1779,101 @@ main:
     identifier: other_integrations
     parent: log_collection
     weight: 111
+  - name: Log Configuration
+    url: logs/configuration/
+    parent: log_management
+    identifier: log_configuration
+    weight: 2
   - name: Processing
     url: logs/processing/
     parent: log_management
     identifier: log_processing
-    weight: 2
+    weight: 201
   - name: Pipelines
     url: logs/processing/pipelines/
     parent: log_processing
     identifier: log_pipelines
-    weight: 201
+    weight: 202
   - name: Processors
     url: logs/processing/processors/
     parent: log_processing
-    weight: 202
+    weight: 203
   - name: Parsing
     url: logs/processing/parsing/
     parent: log_processing
-    weight: 203
+    weight: 204
   - name: Attributes and Aliasing
     url: logs/processing/attributes_naming_convention/
     parent: log_processing
-    weight: 204
+    weight: 205
   - name: Generate Metrics
     url: logs/logs_to_metrics/
     parent: log_management
     identifier: log_to_metrics
-    weight: 3
-  - name: Archives
-    url: logs/archives/
-    parent: log_management
-    identifier: log_archives
-    weight: 4
-  - name: Rehydrate from Archives
-    url: logs/archives/rehydrating
-    parent: log_archives
-    weight: 401
+    weight: 206
   - name: Indexes
     url: logs/indexes
     parent: log_management
     identifier: log_indexes
-    weight: 5
+    weight: 207
+  - name: Archives
+    url: logs/archives/
+    parent: log_management
+    identifier: log_archives
+    weight: 208
+  - name: Rehydrate from Archives
+    url: logs/archives/rehydrating
+    parent: log_archives
+    weight: 209
+  - name: Connect Logs and Traces
+    url: tracing/connect_logs_and_traces/
+    parent: log_management
+    identifier: logs_traces_connection
+    weight: 3
+  - name: Correlate Logs with Metrics
+    url: logs/guide/correlate-logs-with-metrics/
+    parent: log_management
+    identifier: logs_metrics_correlation
+    weight: 4
   - name: Log Explorer
     url: logs/explorer/
     parent: log_management
     identifier: log_explorer
-    weight: 6
+    weight: 5
   - name: Live Tail
     url: logs/explorer/live_tail/
     parent: log_explorer
-    weight: 601
+    weight: 501
   - name: Log Side Panel
     url: logs/explorer/side_panel/
     parent: log_explorer
-    weight: 602
+    weight: 502
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 603
+    weight: 503
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 604
+    weight: 504
   - name: Watchdog Insights
     url: logs/explorer/watchdog_insights/
     parent: log_explorer
-    weight: 605
+    weight: 505
   - name: Search Syntax
     url: logs/search_syntax/
     parent: log_management
-    weight: 7
-  - name: Connect Logs and Traces
-    url: tracing/connect_logs_and_traces/?tab=java
-    parent: log_management
-    identifier: logs_traces_connection
-    weight: 8
-  - name: Correlate Logs with Metrics
-    url: logs/guide/correlate-logs-with-metrics
-    parent: log_management
-    identifier: logs_metrics_correlation
-    weight: 9
+    weight: 506
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 10
+    weight: 6
   - name: Security
     url: security/logs/
     parent: log_management
     identifier: log_security
-    weight: 11
+    weight: 7
   - name: Security Platform
     url: security_platform/
     pre: nav_security_monitoring
