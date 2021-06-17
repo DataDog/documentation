@@ -80,14 +80,14 @@ Check any number of boxes to find your monitors. The following rules apply:
 
 **Note**: For attributes with a large number of values across your monitors, use the attribute search bar to find the correct value.
 
-### Saved View
+### Saved view
 
 Leverage saved views to quickly jump to pre-set views in order to find monitors relevant to a given context like the monitors for your team or muted for more than 60 days:
 
 {{< img src="monitors/manage_monitor/overview.jpg" alt="Saved Views selection"  style="width:90%;" >}}
 
-Saved views are visibile by everyone in your organisation.
-Technically, a Saved View keeps track of:
+Saved views are visible by everyone in your organization.
+Technically, a saved view keeps track of:
 
 - The search query
 
@@ -99,7 +99,7 @@ Your existing Manage Monitor view is your default saved view. This configuration
 
 You can **temporarily** override your default saved view by completing any action in the UI or when opening links to the Manage Monitor page that embed a different configuration.
 
-At any moment, from the default view entry in the Views panel:
+From the default view entry in the Views panel:
 
 * **Reload** your default view by clicking on the entry.
 * **Update** your default view with the current parameters.
