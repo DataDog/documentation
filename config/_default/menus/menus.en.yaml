@@ -2435,7 +2435,7 @@ main:
     identifier: custom_checks_check_dogstatsd
     weight: 602
   - name: 'Submission - API '
-    url: api/latest/service-checks/
+    url: api/latest/service-checks/#submit-a-service-check
     parent: dev_service_checks
     identifier: service_check_api
     weight: 603
