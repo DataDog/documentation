@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
     - /agent/faq/agent-5-custom-agent-check/
+    - /developers/write_agent_check/
 further_reading:
 - link: "/developers/"
   tag: "Documentation"
