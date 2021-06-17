@@ -76,7 +76,7 @@ GlusterFS チェックは [Datadog Agent][2] パッケージに含まれてい�
         ## Increase the collection interval to reduce the frequency.
         ##
         ## This changes the collection interval of the check. For more information, see:
-        ## https://docs.datadoghq.com/developers/write_agent_check/#collection-interval
+        ## https://docs.datadoghq.com/developers/custom_checks/write_agent_check/#collection-interval
         #
         min_collection_interval: 60
    ```

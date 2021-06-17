@@ -29,7 +29,7 @@ private: true
     {{< nextlink href="tracing/guide/agent-obfuscation" >}}Obfuscation des traces de l'Agent{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Métriques d'application de tracing{{< /nextlink >}}
     {{< nextlink href="/api/?lang=python#tracing" >}}API des traces{{< /nextlink >}}
-    {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Bibliothèques du client de tracing{{< /nextlink >}}
+    {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}Bibliothèques du client de tracing{{< /nextlink >}}
     {{< nextlink href="tracing/guide/adding_metadata_to_spans/" >}}Ajouter des tags de span{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Configurer les tags primaires{{< /nextlink >}}
     {{< nextlink href="tracing/guide/app_analytics_agent_configuration/" >}}Configurer App Analytics avec l'Agent{{< /nextlink >}}

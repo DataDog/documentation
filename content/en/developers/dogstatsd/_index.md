@@ -503,7 +503,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/developers/events/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -514,8 +514,8 @@ If you're interested in learning more about the datagram format used by DogStats
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /developers/metrics/custom_metrics/
-[6]: /developers/events/dogstatsd/
+[6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
-[8]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[8]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /developers/metrics/

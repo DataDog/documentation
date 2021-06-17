@@ -8,7 +8,7 @@ further_reading:
   - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD について
-  - link: /developers/libraries/
+  - link: /developers/community/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
 ---

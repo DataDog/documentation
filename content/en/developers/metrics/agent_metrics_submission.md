@@ -2,7 +2,7 @@
 title: "Metric Submission: Custom Agent Check"
 kind: documentation
 further_reading:
-- link: "/developers/write_agent_check/"
+- link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
   text: "Write an Agent Custom Check"
 ---
@@ -230,7 +230,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/write_agent_check/
+[1]: /developers/custom_checks/write_agent_check/
 [2]: /developers/metrics/types/
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent

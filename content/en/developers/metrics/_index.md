@@ -13,7 +13,7 @@ further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
-- link: "/developers/libraries/"
+- link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 ---
@@ -82,4 +82,4 @@ You can also use one of the [Datadog official and community contributed API and 
 [9]: /developers/metrics/types/?tab=rate#metric-types
 [10]: /developers/metrics/types/?tab=count#metric-types
 [11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /developers/libraries/
+[12]: /developers/community/libraries/

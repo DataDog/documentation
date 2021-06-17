@@ -20,7 +20,7 @@ aliases:
     {{< nextlink href="tracing/guide/resource_monitor" >}}リソースメトリクスに基づいてモニターを構築する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}トレースアプリケーションメトリクス{{< /nextlink >}}
     {{< nextlink href="/api/v1/tracing/" >}}トレース API{{< /nextlink >}}
-    {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}トレーシングクライアントライブラリ{{< /nextlink >}}
+    {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}トレーシングクライアントライブラリ{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
