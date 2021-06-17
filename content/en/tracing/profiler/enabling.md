@@ -282,10 +282,10 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 3. You can auto-enable the profiler with environment variables:
 
     ```shell
-    DD_PROFILING_ENABLED=true
-    DD_ENV=prod
-    DD_SERVICE=my-web-app
-    DD_VERSION=1.0.3
+    export DD_PROFILING_ENABLED=true
+    export DD_ENV=prod
+    export DD_SERVICE=my-web-app
+    export DD_VERSION=1.0.3
     ```
 
     or in code:
