@@ -4883,6 +4883,11 @@ components:
             $ref: '#/components/schemas/Point'
           readOnly: true
           type: array
+        query_index:
+          description: The index of the series' query within the request.
+          format: int64
+          readOnly: true
+          type: integer
         scope:
           description: Metric scope, comma separated list of tags.
           example: host:foo,env:test
@@ -4893,6 +4898,13 @@ components:
           format: int64
           readOnly: true
           type: integer
+        tag_set:
+          description: Unique tags identifying this series.
+          items:
+            description: Unique tags identifying this series.
+            type: string
+          readOnly: true
+          type: array
         unit:
           description: 'Detailed information about the metric unit.
 
@@ -7279,7 +7291,14 @@ components:
 
                 If a metric query only has one unit object, the second array element
                 is null.'
-              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              example:
+              - family: bytes
+                id: 2
+                name: byte
+                plural: bytes
+                scale_factor: 1.0
+                short_name: B
+              - null
               items:
                 $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
               nullable: true
