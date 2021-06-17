@@ -26,7 +26,7 @@ After downloading the [Datadog extension][2], you are unable to see your website
 
 #### Some of my applications load in the iframe but some do not
 
-This means your applications and environemnts most likely have different restrictions causing some of them to be able to be visualized in an iframe, and some others not to.
+This means your applications and environments have different restrictions, which causes some of them to be visualized in an iframe while the others are not viewable.
 
 #### I'm seeing a "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner at the top of the iframe
 
