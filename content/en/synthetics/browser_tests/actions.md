@@ -18,7 +18,7 @@ Steps are a series of actions that you can record for a browser test, which you 
 
 The following steps are automatically recorded with the [Datadog browser test recorder extension][3]:
 
-## Click
+### Click
 
 [Datadog browser test recorder extension][3] automatically records clicks on your page. Specify the type of click you want your browser test to perform at execution time:
 
@@ -30,19 +30,19 @@ Choose from:
 * Double click
 * Contextual click (corresponds to a right click)
 
-## Type text
+### Type text
 
 [Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (forms, text areas, etc.):
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="100%">}}
 
-## Select option
+### Select option
 
 [Datadog browser test recorder extension][3] automatically records options being selected from `select` dropdown menu:
 
 {{< img src="synthetics/browser_tests/select_options.png" alt="Select options step"  style="width:60%;">}}
 
-## Upload file
+### Upload file
 
 You can record the uploading of files as a step. To record an **Upload** step you can:
 
@@ -57,7 +57,7 @@ This is limited to 10 files with a limit of 5MB each.
 
 The following steps can be manually added to a browser test by configuring them on the the browser test recorder page:
 
-## Assertion
+### Assertion
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:60%;">}}
 
@@ -65,35 +65,35 @@ Assertions allow you to validate that your browser test is in the state you expe
 
 Some assertions are performed on the **active page**. Active page refers to the page that has experienced the last interaction like using a **Click** or an **Assertion** on a given page element for instance.
 
-### Test an element's content
+#### Test an element's content
 
 Selects an element and checks if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".
 
-### Test an element's attribute
+#### Test an element's attribute
 
 Selects an element of your page and checks if one of its attributes matches the expected content. For instance, you could test that an `src` attribute value matches the path of the expected image.
 
-### Test that some text is present on the active page
+#### Test that some text is present on the active page
 
 Asserts that some specific text is present on the current page.
 
-### Test that some text is not present on the active page
+#### Test that some text is not present on the active page
 
 Asserts that some specific text is **NOT** present on the current page.
 
-### Test the content of the URL of the active page
+#### Test the content of the URL of the active page
 
 Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.
 
-### Test that an element is present on the active page
+#### Test that an element is present on the active page
 
 Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.
 
-### Test that an email was received
+#### Test that an email was received
 
 Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4], you consequently first need to create an email variable to be able to use a `Test that an email was received` assertion.
 
-### Test your UI with custom JavaScript
+#### Test your UI with custom JavaScript
 
 Test a custom assertion on the active page using your own JavaScript code.
 
@@ -127,41 +127,41 @@ return jQuery().jquery.startsWith('3.5.1')
 
 **Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
 
-### Test a downloaded file
+#### Test a downloaded file
 
 Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value.
 
 **Note**: You can find out more on how to test downloads on [this dedicated guide][6].
 
-## Navigation
+### Navigation
 
 {{< img src="synthetics/browser_tests/navigation_step.png" alt="Browser Test Navigation Step"  style="width:60%;">}}
 
-### Refresh a page
+#### Refresh a page
 
 Refresh the current page of the scenario.
 
-### Go to an email and click on a link
+#### Go to an email and click on a link
 
 This step allows you to access unique Synthetic mail inboxes after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on. This step brings your test to the corresponding page and allows you to move on with the rest of your journey from that specific page.
 
-### Follow a specific link
+#### Follow a specific link
 
 Go to a specific page.
 
 **Note**: You must prepend your URLs with `http` or `https` in the **Enter link URL** box.
 
-## Special actions
+### Special actions
 
 The [Datadog browser test recorder extension][3] is able to record most steps associated to user journeys you might want to monitor. However, some steps—such as **Hover**, **Press Key**, and **Scroll**—are not recorded automatically. Explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
 
-### Hover
+#### Hover
 
 To avoid generating a step at each element hovering during recording, this browser test step is not added through an actual hovering mechanism but using a dedicated step with a click.
 
 After selecting the **Hover** step, click on the element you want to choose to create a new step.
 
-### Press key
+#### Press key
 
 You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using the [Datadog browser test recorder extension][3]:
 
@@ -182,7 +182,7 @@ The below modifiers can also be applied to the inputted value:
 * Meta
 * Shift
 
-### Scroll
+#### Scroll
 
 Browser tests automatically scroll to the element they need to interact with. Consequently, in most cases, you do not need to manually add a scroll step. The scroll step should only be added when needed to trigger an additional network request, such as in an infinite scroll.
 
@@ -192,13 +192,17 @@ You need to specify the number of pixels your browser test should scroll vertica
 
 By default, the **Scroll** step scrolls on the whole page. If you need to scroll on a specific element (for instance a specific `<div>`), use the **Target Element** option to select the element you want your browser test to scroll on.
 
-## Variable
+#### Wait
 
-### Create a variable
+By default, Datadog waits for a page to be fully loaded before performing a step or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds.
+
+**Note**: This additional time is systematically added to **each run** of your browser test scenario.
+
+### Variable
 
 {{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables"  style="width:60%;">}}
 
-To create a variable, first give it a name then define its value from one of the following:
+To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [here](#using-variables).
 
 #### Pattern
 
@@ -265,30 +269,7 @@ Pick any global variables that was defined through [Synthetic  Monitoring Settin
 
 Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
-### Use the variable
-
-All steps input fields with a `{{` indication support variables:
-
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
-
-If you want to record a step leveraging a variable, you can use the little hand on your variable box:
-
-{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="100%" >}}
-
-At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`.
-At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
-
-Some variables only get computed at runtime (for example, variable from HTTP request or variable from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
-
-**Note:** If a variable gets assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
-
-## Wait
-
-By default, Datadog waits for a page to be fully loaded before performing a step or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds.
-
-**Note**: This additional time is systematically added to **each run** of your browser test scenario.
-
-## Subtests
+### Subtests
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest"  style="width:60%;">}}
 
@@ -298,13 +279,13 @@ Variables from subtests can be overriden in parent tests if you ensure the varia
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
-## HTTP requests
+### HTTP requests
 
 You can run HTTP requests as part of your browser tests.
 
 {{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step"  style="width:70%;" >}}
 
-### Setup
+#### Setup
 
 To define your HTTP request:
 
@@ -320,7 +301,7 @@ To define your HTTP request:
 
 {{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request"  style="width:60%;" >}}
 
-### Add assertions
+#### Add assertions
 
 Optionally, you can base your step success on assertions about the defined HTTP request:
 
@@ -337,7 +318,7 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 
-### Extract a variable from the response
+#### Extract a variable from the response
 
 You can also optionally extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
 
@@ -352,6 +333,29 @@ To parse your variable:
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Create a variable from HTTP request in Browser test" video="true"  width="80%" >}}
 
 Once created this variable can be used in the following steps of your browser test.
+
+## Using variables
+
+### On manually added steps
+
+All steps input fields with a `{{` indication support variables:
+
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
+
+To see all available variables, type `{{` in the input field and choose your variable of interest.
+
+### On automatically recorded steps
+
+If you want to record a step leveraging a variable, you can use the little hand on your variable box:
+
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="100%" >}}
+
+At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`.
+At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
+
+Some variables only get computed at runtime (for example, variable from HTTP request or variable from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
+
+**Note:** If a variable gets assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
 
 ## Further Reading
 
