@@ -22498,23 +22498,6 @@
         ],
         "type": "object"
       },
-      "SecurityFilterDeleteResponse": {
-        "description": "Response object which only includes the metadata.",
-        "properties": {
-          "meta": {
-            "description": "Optional metadata associated to the response.",
-            "properties": {
-              "warning": {
-                "description": "A warning message.",
-                "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          }
-        },
-        "type": "object"
-      },
       "SecurityFilterExclusionFilter": {
         "description": "Exclusion filter for the security filter.",
         "example": {
@@ -51650,32 +51633,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Response object which only includes the metadata.",
-                  "properties": {
-                    "meta": {
-                      "description": "Optional metadata associated to the response.",
-                      "properties": {
-                        "warning": {
-                          "description": "A warning message.",
-                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
           "204": {
-            "description": "No Content"
+            "description": "OK"
           },
           "403": {
             "content": {
