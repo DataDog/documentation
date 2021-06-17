@@ -29,7 +29,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 {{< img src="metrics/summary/facets.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
 
-## Configuration of Multiple Metrics 
+## Configuration of multiple metrics 
 There are two buttons that allow you to configure multiple metrics at a time: 
 
 {{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons"  style="width:75%;">}}
