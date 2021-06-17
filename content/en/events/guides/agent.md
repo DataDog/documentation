@@ -5,6 +5,8 @@ further_reading:
 - link: "/developers/write_agent_check/"
   tag: "Documentation"
   text: "Writing a Custom Agent Check"
+aliases:
+    - /developers/events/agent/
 ---
 
 ## Submission

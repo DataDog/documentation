@@ -395,6 +395,7 @@
           - link: '/real_user_monitoring/error_tracking/explorer'
             tag: 'Documentation'
             text: 'Visualize Error Tracking data in the Explorer'
+ 
   - repo_name: datadog-cloudformation-resources
     contents:
     - action: pull-and-push-file
@@ -402,12 +403,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/developers/'
+        dest_path: '/integrations/guide/'
         file_name: 'amazon_cloudformation.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
           title: Datadog-Amazon CloudFormation
           kind: documentation
+          aliases:
+            - /developers/amazon_cloudformation/
 
   - repo_name: dd-sdk-android
     contents:

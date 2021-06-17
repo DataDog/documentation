@@ -12,6 +12,8 @@ further_reading:
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "GitHub"
   text: "DogStatsD source code"
+aliases:
+    - /developers/events/dogstatsd/
 ---
 
 ## Submission
@@ -192,8 +194,8 @@ $statsd->event('An error occurred.',
   );
 ```
 
-[1]: https://app.datadoghq.com/account/settings#api
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
