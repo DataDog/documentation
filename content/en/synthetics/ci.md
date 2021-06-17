@@ -435,7 +435,7 @@ In the global configuration file, you can configure the following options:
         "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
             "locations": ["aws:us-west-1"],
         "retry": { "count": 2, "interval": 300 },
-        "executionRule": "skipped",
+        "executionRule": "blocking",
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "variables": { "titleVariable": "new value" },
         "pollingTimeout": 180000
@@ -540,7 +540,7 @@ Variables to replace in the test. This object should contain, as keys, the name 
 
 `pollingTimeout`
 : **Type**: integer<br>
-Duration after which synthetic tests are considered failed (in milliseconds).
+The duration in milliseconds after which `datadog-ci` stops polling for test results. The default is 120,000 ms. At the CI level, test results completed after this duration are considered failed.
 
 **Note**: Tests' overrides take precedence over global overrides.
 
@@ -587,11 +587,15 @@ You can configure on which url your test starts by providing a `startUrl` to you
 
 `URL`
 : Test's original starting URL <br>
-**Example**: `https://www.example.org:81/path/to/something?abc=123`
+**Example**: `https://www.example.org:81/path/to/something?abc=123#target`
 
 `DOMAIN`
 : Test's domain name<br>
 **Example**: `example.org`
+
+`HASH`
+: Test's hash<br>
+**Example**: `#target`
 
 `HOST`
 : Test's host<br>
@@ -625,10 +629,10 @@ You can configure on which url your test starts by providing a `startUrl` to you
 : Test's sub domain<br>
 **Example**: `www`
 
-For instance, if your test's starting URL is `https://www.example.org:81/path/to/something?abc=123`, it can be written as:
+For instance, if your test's starting URL is `https://www.example.org:81/path/to/something?abc=123#target`, it can be written as:
 
-* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}`
-* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
+* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
+* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
 ### Running tests

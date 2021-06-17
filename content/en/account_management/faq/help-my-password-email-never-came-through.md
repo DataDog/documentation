@@ -13,9 +13,17 @@ Confirm this from the team page as shown here:
 
 {{< img src="account_management/faq/handle_image.png" alt="handle image"  >}}
 
-Enter your email address in the password reset link:
+Enter your email address in the password reset link for your region:
 
-`https://app.datadoghq.com/account/forgot_password`
+
+{{< site-region region="us" >}}
+Datadog US Region: `https://app.datadoghq.com/account/forgot_password`
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+Datadog EU Region: `https://app.datadoghq.eu/account/forgot_password`
+{{< /site-region >}}
+
 
 If you have confirmed your email address is correct and you still have not received your password reset email, check your spam and filtered emails.  
 

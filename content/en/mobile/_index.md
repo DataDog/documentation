@@ -46,9 +46,7 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 ##### SAML IdP-Initiated Login
 
-If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][16]
-
-**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
+If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
 
 ## Monitors
 
@@ -64,15 +62,117 @@ For example, to filter on metric monitors related to the SRE team that is being 
 
 {{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. 
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
+
+## Incidents
+
+{{< img src="mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
+
+### Create an Incident
+
+1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
+2. Click the “+” button in the top right corner.
+3. Give your incident a title, severity, and commander.
+
+
+## Widgets
+
+### Monitor saved views
+
+{{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+View your [monitor saved views][13] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
+
+**Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
+
+#### Create a widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on the home screen.
+- Tap the “+” button on the top left corner of the screen.
+- Search for "Datadog" widgets.
+- Select your prefered size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
+- Place the widget in your desired, onscreen location.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Open the Android Widget Picker.
+- Either long press your home screen, or long press the Datadog app icon.
+- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Drag the Monitor Saved Views widget on your home screen.
+
+{{% /tab %}}
+{{< /tabs >}}
+#### Edit a widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Long press on the widget to configure.
+- Tap on "Edit Widget".
+- Tap on the individual saved view cell to select and deselect.
+- Reorder the views by dragging and dropping each cell.
+- Tap out of the widget to validate your selection and exit the configuration screen.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Tap on the widget title to configure.
+- Tap on "Saved views".
+- Tap on the individual saved view cell to select and deselect.
+- Reorder the views by dragging and dropping each cell.
+- Tap "Save" to validate your selection and exit the configuration screen.
+- Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
+
+{{% /tab %}}
+{{< /tabs >}}
+#### Multiple organizations
+
+You can display Saved Views from multiple organizations within the same widget. 
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- From the configuration screen, tap on "Organization".
+- Select a new organization (you might need to sign in).
+- Tap "Saved Views". Select saved views to display or leave it as is.
+- Tap "Save". The widget is now configured with saved views from a different organization.
+{{% /tab %}}
+{{< /tabs >}}
+#### Delete a widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Quick actions
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][12] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][14] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -94,7 +194,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][13].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][15].
 
 ## Handoff
 
@@ -107,7 +207,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][14].
+For more information on Handoff, refer to the [Apple Handoff Documentation][16].
 
 ## Account
 
@@ -115,7 +215,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][5]. You can also send a message in the [Datadog public Slack][15] [#mobile-app][16] channel.
+For help with troubleshooting, [contact Datadog support][17]. You can also send a message in the [Datadog public Slack][18] [#mobile-app][19] channel.
 
 ### Further Reading
 
@@ -125,16 +225,18 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /help/
+[5]: /account_management/saml/mobile-idp-login/
 [6]: /monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /monitors/monitor_types/
 [9]: /dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
-[12]: https://app.datadoghq.com/dashboard/lists/preset/5
-[13]: https://support.apple.com/en-us/HT209055
-[14]: https://support.apple.com/en-us/HT209455
-[15]: https://chat.datadoghq.com/
-[16]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[16]: https://docs.datadoghq.com/account_management/saml/mobile-idp-login/
+[12]: /monitors/incident_management
+[13]: /logs/explorer/saved_views/
+[14]: https://app.datadoghq.com/dashboard/lists/preset/5
+[15]: https://support.apple.com/en-us/HT209055
+[16]: https://support.apple.com/en-us/HT209455
+[17]: /help/
+[18]: https://chat.datadoghq.com/
+[19]: https://datadoghq.slack.com/archives/C0114D5EHNG

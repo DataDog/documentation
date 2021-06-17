@@ -11,6 +11,9 @@ further_reading:
   - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+    tag: 'Guide'
+    text: 'Ease troubleshooting with cross product correlation.'
 
 ---
 
@@ -40,7 +43,7 @@ To link browser test results, allow the URLs you want the APM integration header
 https://*.datadoghq.com/*
 ```
 
-## Supported Libraries
+## Supported libraries
 
 The following Datadog tracing libraries are supported:
 

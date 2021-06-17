@@ -8,12 +8,7 @@ further_reading:
   - link: /logs/faq/log-parsing-best-practice
     tag: Documentation
     text: "Log Parsing - Best Practices"
-beta: true
 ---
-
-<div class="alert alert-warning">
-The unparsed logs flagging feature is currently in private beta. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-</div>
 
 ## Overview
 Parsed logs are central to be able to use Datadog Log Management to its full capacity, for queries, monitors, aggregations or automatic enrichments such as sensitive data scanner.
@@ -44,9 +39,9 @@ This filter returns all indexed logs without custom attributes after the pipelin
 [Pattern aggregation][4] shows an aggregated view of the common patterns in the unparsed logs, which can kickstart your creation of custom pipelines.
 
 ## Create a metric to track for unparsed logs
-Querying for unparsed logs lets you select the unparsed _indexed_ logs. It's also a good practice to ensure that even the logs that you do not index are parsed, so that the content of your [archives][6] are structured.
+Querying for unparsed logs lets you select the unparsed _indexed_ logs. It's also a good practice to ensure that even the logs that you do not index are parsed, so that the content of your [archives][5] are structured.
 
-To create a metric for unparsed logs, create a [custom metric][5] using the `datadog.pipelines:false` query:
+To create a metric for unparsed logs, create a [custom metric][6] using the `datadog.pipelines:false` query:
 
 {{< img src="logs/guide/unparsed-logs/logs-unparsed-metric.jpg" alt="Generate logs.unparsed metric"  style="width:90%;">}}
 
@@ -71,8 +66,8 @@ To monitor the volume of unparsed logs:
 [2]: /integrations/#cat-log-collection
 [3]: /logs/explorer/
 [4]: /logs/explorer/#patterns
-[5]: /logs/logs_to_metrics/
-[6]: /logs/archives/?tab=awss3
+[5]: /logs/archives/?tab=awss3
+[6]: /logs/logs_to_metrics/
 [7]: /logs/indexes#set-daily-quota
 [8]: /monitors/monitor_types/metric/?tab=threshold#overview
 [9]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions

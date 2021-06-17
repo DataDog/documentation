@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/bugsnag/'
 draft: false
 git_integration_title: bugsnag
 has_logo: true
+integration_id: bugsnag
 integration_title: Bugsnag
 is_public: true
 kind: integration

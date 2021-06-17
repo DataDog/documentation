@@ -8,12 +8,18 @@ further_reading:
   - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
+  - link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
+    tag: "Blog"
+    text: "Start monitoring single-page applications"
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+    tag: 'Guide'
+    text: 'Ease troubleshooting with cross product correlation.'
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
 
-The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full front end and backend data through one lens.
+The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full frontend and backend data through one lens.
 
 Use frontend data from RUM, and backend, infrastructure, and log information from trace ID injection to quickly pinpoint issues anywhere in your stack and fully understand what your users are experiencing.
 
@@ -126,7 +132,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-origin: rum`
 : To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.
 
-`x-datadog-sampling-priority: 1` 
+`x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
 
 `x-datadog-sampled: 1`

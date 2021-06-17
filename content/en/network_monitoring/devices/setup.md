@@ -42,7 +42,7 @@ To monitor individual devices:
     init_config:
       loader: core
     instances:
-      - ip_address: "1.2.3.4"
+    - ip_address: "1.2.3.4"
       community_string: “sample-string”
       tags:
         - "key1:val1"

@@ -59,7 +59,7 @@ RUM action, error, resource and long task events contain information about the a
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
-| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs](#single-page-applications).|
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs](?tab=view#single-page-applications).|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url`                     | string | The view URL.                                                                                                  |
 | `view.url_hash`                     | string | The hash part of the URL.|
@@ -178,7 +178,7 @@ RUM view performance metrics are collected from both the [Paint Timing API][2] a
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
 
-| Metric                              | Type        | Decription                                                                                                                                                                                                                 |
+| Metric                              | Type        | Description                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.largest_contentful_paint` | number (ns) | Moment in the page load timeline in which the largest DOM object in the viewport (i.e. visible on screen) is rendered.                                                                                                |

@@ -61,7 +61,7 @@ span->SetTag(opentracing::ext::error, true);
 
 Error metadata may be set as additional tags on the same span as well.
 
-## Adding Spans
+## Adding spans
 
 ### Manually instrument a method
 
@@ -80,7 +80,7 @@ To manually instrument your code, install the tracer as in the [setup examples][
 } // ... or when they are destructed (root_span finishes here).
 ```
 
-### Inject & Extract context for Distributed Tracing
+### Inject and extract context for distributed tracing
 
 Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][8], which accept [generic `Reader` and `Writer` types][9]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
 
@@ -120,12 +120,11 @@ void example() {
 }
 ```
 
-## Trace Client & Agent Configuration
+## Trace client and Agent configuration
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-
-### B3 Headers Extraction and Injection
+### B3 headers extraction and injection
 
 Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
 
@@ -148,7 +147,7 @@ The value of the environment variable is a comma (or space) separated list of he
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-### Resource Filtering
+### Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page.
 

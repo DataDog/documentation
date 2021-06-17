@@ -10,15 +10,15 @@ Compliance Monitoring は、現在非公開ベータ版でご利用いただけ�
 
 ## 概要
 
-{{< img src="security_monitoring/overview_top.png" alt="Datadog Security Monitoring" >}}
+{{< img src="security_platform/security_monitoring/overview_top.png" alt="Datadog Security Monitoring" >}}
 
 Datadog セキュリティモニタリングおよびコンプライアンスモニタリングは、開発、運用、セキュリティチームを 1 つのプラットフォームでつなげます。1 つのダッシュボードに DevOps コンテンツ、営業用メトリクス、そしてセキュリティコンテンツを表示。アプリケーションおよびインフラストラクチャーへの標的型攻撃、脅威のインテルリストに一致するシステムと通信する IP、安全でない構成などの脅威をリアルタイムに検出し、セキュリティに関する問題をメール、Slack、Jira、PagerDuty、または Webhook を使用してチームに通知します。
 
-{{< img src="security_monitoring/takeover_ex.png" alt="Slack の例"  style="width:75%;">}}
+{{< img src="security_platform/security_monitoring/takeover_ex.png" alt="Slack の例"  style="width:75%;">}}
 
 脅威は、Datadog 内でセキュリティシグナルとして表面化され、[セキュリティシグナルエクスプローラー][1]で収集、トリアージされます。セキュリティシグナルは、Datadog セキュリティモニタリングの[検出ルール][2]により生成されます。検出ルールは、すぐに使用を開始できる状態で提供され、さまざまなソースの脅威を検出します。提供された検出ルールのクローンを作成し、コンフィギュレーションを変更することや、特定のユースケースに合わせて[新しいルール][3]を作成し追加することも可能です。
 
-{{< img src="security_monitoring/explorer.png" alt="セキュリティシグナルエクスプローラー"  >}}
+{{< img src="security_platform/security_monitoring/explorer.png" alt="セキュリティシグナルエクスプローラー"  >}}
 
 コンテナとホストに、ランタイムセキュリティおよび継続的なコンプライアンスモニタリングを有効にします。ホストまたはコンテナの主なファイルやディレクトリへの変更をリアルタイムで観察するには、**File Integrity Monitoring (FIM)** を使用します。または、Docker および Kubernetes によく使用される CIS コンプライアンスベンチマークで定義されるように、コンテナや Kubernetes クラスターをチェックしてコンフィギュレーションの問題を見つけるには、**Continuous Compliance** を使用します。
 

@@ -107,24 +107,14 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
-	@if [ content/en/serverless/forwarder.md ]; then \
-	rm -f content/en/serverless/forwarder.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/python.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/python.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/nodejs.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/nodejs.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/ruby.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/ruby.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/go.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/go.md ;fi
-	@if [ content/en/serverless/datadog_lambda_library/java.md ]; then \
-	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
-	@if [ content/en/serverless/serverless_integrations/plugin.md ]; then \
-	rm -f content/en/serverless/serverless_integrations/plugin.md ;fi
-	@if [ content/en/serverless/serverless_integrations/macro.md ]; then \
-	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
-	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
-	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
+	@if [ content/en/serverless/libraries_integrations/plugin.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/plugin.md ;fi
+	@if [ content/en/serverless/libraries_integrations/forwarder.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/forwarder.md ;fi
+	@if [ content/en/serverless/libraries_integrations/macro.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/macro.md ;fi
+	@if [ content/en/serverless/libraries_integrations/cli.md ]; then \
+	rm -f content/en/serverless/libraries_integrations/cli.md ;fi
 	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
 	rm -f content/en/real_user_monitoring/android/_index.md ;fi
 	@if [ content/en/real_user_monitoring/android/data_collected.md ]; then \
@@ -217,8 +207,10 @@ clean-python-examples:
 clean-ruby-examples:
 	@git clean -xdf content/en/api/**/*.rb*
 
+clean-typescript-examples:
+	@git clean -xdf content/en/api/**/*.ts*
 
-clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples
+clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples
 	@rm -rf examples
 
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -239,30 +231,39 @@ examples/datadog-api-client-ruby:
 	@git clone https://github.com/DataDog/datadog-api-client-ruby.git $@
 	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
-.PHONY: examples/go examples/java examples/python examples/ruby examples
+examples/datadog-api-client-typescript:
+	@git clone https://github.com/DataDog/datadog-api-client-typescript.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+
+.PHONY: examples/go examples/java examples/python examples/ruby examples/typescript examples
 
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
 examples/go: examples/datadog-api-client-go clean-go-examples
 	echo $(EXAMPLES_DIR)
-	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Go code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/java: examples/datadog-api-client-java clean-java-examples
-	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Java code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/python: examples/datadog-api-client-python clean-python-examples
-	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Python code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
-	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Ruby code examples, aborting build."; exit 1)
+
+	-cp -Rn examples/content ./
+
+examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
+	@cd examples/datadog-api-client-typescript; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Typescript code examples, aborting build."; exit 1)
 
 	-cp -Rn examples/content ./
 
 
-examples: examples/go examples/java examples/python examples/ruby
+examples: examples/go examples/java examples/python examples/ruby examples/typescript

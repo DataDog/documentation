@@ -3,9 +3,8 @@
   "api-redirect.js": "static/api-redirect.js",
   "dd-browser-logs-rum.js": "static/dd-browser-logs-rum.js",
   "lang-redirects.js": "static/lang-redirects.js",
-  "main-dd-css.css": "static/main-dd-css.css",
-  "main-dd-css.js": "static/main-dd-css.js",
   "main-dd-js.js": "static/main-dd-js.js",
   "region-redirects.js": "static/region-redirects.js",
+  "search.js": "static/search.js",
   "vendor.js": "static/vendor.js"
 }

@@ -6,21 +6,36 @@ scope: heading
 match: $sentence
 exceptions:
   - ACLs
+  - ActiveMQ XML Integration
   - Agent
+  - Agentless
   - Agents
+  - Airflow
   - Amazon
+  - Amazon Web Services
+  - APCu
   - APIs
   - APM & Distributed Tracing
+  - App Analytics
   - AuthN
   - Autodiscovery
+  - AWS Step Functions
+  - AWS Systems Manager
   - Azure
+  - Azure App Service
   - Azure App Service Plan
+  - Azure Blob Storage
+  - Azure Event Hub
   - CakePHP
   - Cassandra Nodetool
+  - Cassandra Nodetool Integration
   - CentOS
   - Chef
   - Clipboard
+  - Cloud Pub Sub
+  - CloudFormation
   - CloudSQL
+  - CloudTrail
   - CloudWatch
   - Cluster Agent
   - Continuous Profiler
@@ -29,102 +44,172 @@ exceptions:
   - Datadog
   - Datadog Agent Manager
   - Datadog for Government
+  - Datadog Forwarder
   - Datadog Operator
+  - DatadogHook
   - Debian
   - Detection Rules
   - Docker
   - Docker Swarm
   - Dockerfile
   - DogStatsD
+  - Envoy
   - Fargate
+  - FastCGI
+  - Firehose Nozzle
+  - FireLens
+  - Fluent Bit
+  - Fluentd
   - FreeBSD
   - FreeSwitch
   - Further Reading
   - GeoIP
   - GitHub
+  - Gitlab Runner Integration
   - Google
   - Google Analytics
   - Google Cloud
   - Google Cloud Functions
   - GraphQL
+  - Gunicorn
   - HAProxy
+  - HBase RegionServer Integration
+  - HDFS DataNode Integration
+  - HDFS NameNode Integration
+  - Helm
+  - HipChat
   - HostPort
   - I
   - IdP
   - IDs
+  - iLert
   - Incident Management
+  - Ingress Controller
+  - Internet Information Services
   - IoT
   - IPs
   - Java
+  - JavaScript
+  - JBoss
+  - JFrog
+  - JFrog Artifactory
+  - Jira
   - JMXFetch
   - Journald
+  - Kafka
+  - Kafka Consumer Integration
   - Kubernetes
   - Kubernetes Pod
   - Lambda
+  - Lambda Layer
+  - Lambda@Edge
   - LaunchDarkly
   - Linux
+  - Live Analytics
+  - Live Search
   - Live Tail
   - Log Explorer
   - Log Management
   - Log Rehydration
   - Logback
   - macOS
+  - MarkLogic
+  - Meraki
+  - Mesos Slave Integration
   - Metrics Explorer
+  - Metrics without Limits
   - MongoDB
   - MySQL
+  - Network Address Translation
   - Network Device Monitoring
   - Network Performance Monitoring
+  - New Relic
+  - NGINX Plus
   - NixOS
+  - Node
   - Notebook
   - Notebook List
   - npm
+  - NXLog
   - OkHttp
   - OneLogin
+  - OPcache
+  - OpenLDAP
   - OpenMetrics
+  - OpenShift
+  - OpenStack
   - openSUSE
   - OpenTelemetry
   - OpenTracing
   - OpenVPN
+  - OpsGenie
   - OpsWorks
+  - Oracle Instant Client
   - Phusion Passenger
-  - pre-NAT
+  - Pivotal Platform
+  - Postgres
+  - PowerDNS
   - Prometheus
+  - Prometheus Alertmanager
   - Puppet
   - Python
-  - Python
+  - RabbitMQ
   - Rails
   - Real User Monitoring
   - Red Hat
   - Redis
+  - ReplicaSet
   - RocketPants
   - Root Cause Analysis
+  - Route53
+  - Ruby
   - RumMonitor
   - SafeNet
   - Security Monitoring
   - Security Signal
   - Security Signals
   - SELinux
+  - Serverless Framework
+  - Service Checks
   - Siri
   - Slack
   - SLIs
   - SLOs
   - socat
   - Social Security
+  - SQL Server
   - SQLDelight
   - SQLite
+  - Stackdriver
+  - StackPulse
   - StackStorm
   - StatsD
+  - Sumo Logic
+  - Syslog
   - sysOID
+  - System Core
+  - System Swap
+  - Teamcity
   - Terraform
+  - TokuMX
+  - Tracing Without Limits
   - Trello
+  - Twilio
   - TypeScript
   - Ubuntu
+  - Unified Service Tagging
   - Unix
   - Unix Domain Socket
   - URLs
   - User Datagram Protocol
+  - Varnish
+  - Vertica
+  - VMWare
   - vSphere
   - Watchdog
   - Watchdog Insights
   - Webhook
+  - WildFly
   - Windows
+  - Xray
+  - ZooKeeper

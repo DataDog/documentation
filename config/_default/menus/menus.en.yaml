@@ -21,71 +21,77 @@ main_left:
     url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 3
     parent: product
+  - identifier: infrastructure
+    name: Infrastructure Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg'' alt=''infra icon''>'
+    url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
+    weight: 4
+    parent: product
   - identifier: logs
     name: Log Management
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''log icon''>'
     url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 4
+    weight: 5
     parent: product
   - identifier: apm
     name: APM
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''apm icon''>'
     url: 'https://www.datadoghq.com/product/apm/'
-    weight: 5
+    weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''profiler icon''>'
     url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 6
+    weight: 7
     parent: product
   - identifier: security
     name: Security Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
     url: 'https://www.datadoghq.com/product/security-monitoring/'
-    weight: 7
+    weight: 8
     parent: product
   - identifier: network
     name: Network Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
     url: 'https://www.datadoghq.com/product/network-monitoring/'
-    weight: 8
+    weight: 9
     parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 9
+    weight: 10
     parent: product
   - identifier: rum
     name: Real User Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 10
+    weight: 11
     parent: product
   - identifier: incident
     name: Incident Management
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
     url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: serverless
     name: Serverless
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: alerts
     name: Alerts
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 13
+    url: 'https://www.datadoghq.com/product/alerts/'
+    weight: 14
     parent: product
   - identifier: api
     name: API
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 14
+    weight: 15
     parent: product
   - identifier: customers
     name: Customers
@@ -363,55 +369,60 @@ main:
     url: getting_started/tracing/
     parent: getting_started
     weight: 7
+  - name: Profiler
+    identifier: getting_started_profiler
+    url: getting_started/profiler/
+    parent: getting_started
+    weight: 8
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 801
+    weight: 901
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 802
+    weight: 902
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 803
+    weight: 903
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1002
+    weight: 1102
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1003
+    weight: 1103
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1001
+    weight: 1101
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -944,111 +955,92 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
-  - name: Datadog Lambda Library
-    url: serverless/datadog_lambda_library
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
     parent: serverless
-    identifier: serverless_datadog_lambda_library
+    identifier: libraries_integrations
     weight: 2
-  - name: Python
-    url: serverless/datadog_lambda_library/python
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_python
-    weight: 201
-  - name: Node.js
-    url: serverless/datadog_lambda_library/nodejs
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_nodejs
-    weight: 202
-  - name: Ruby
-    url: serverless/datadog_lambda_library/ruby
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_ruby
-    weight: 203
-  - name: Go
-    url: serverless/datadog_lambda_library/go
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_go
-    weight: 204
-  - name: Java
-    url: serverless/datadog_lambda_library/java
-    parent: serverless_datadog_lambda_library
-    identifier: serverless_datadog_lambda_library_java
-    weight: 205
   - name: Datadog Lambda Extension
-    url: serverless/datadog_lambda_library/extension
-    parent: serverless_datadog_lambda_library
-    weight: 206
+    url: serverless/libraries_integrations/extension/
+    parent: libraries_integrations
+    weight: 201
+  - name: Datadog Lambda Library
+    url: serverless/libraries_integrations/library/
+    parent: libraries_integrations
+    weight: 202
   - name: Datadog Forwarder
-    url: serverless/forwarder
-    parent: serverless
-    weight: 3
-  - name: Enhanced Lambda Metrics
-    url: serverless/enhanced_lambda_metrics
-    parent: serverless
-    weight: 4
+    url: serverless/libraries_integrations/forwarder/
+    parent: libraries_integrations
+    weight: 203
+  - name: Datadog Serverless Plugin
+    url: serverless/libraries_integrations/plugin/
+    parent: libraries_integrations
+    weight: 204
+  - name: Datadog Serverless Macro
+    url: serverless/libraries_integrations/macro/
+    parent: libraries_integrations
+    weight: 205
+  - name: Datadog Serverless CLI
+    url: serverless/libraries_integrations/cli/
+    parent: libraries_integrations
+    weight: 206
+  - name: Lambda Code Signing
+    url: serverless/libraries_integrations/lambda_code_signing/
+    parent: libraries_integrations
+    weight: 207
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 5
+    weight: 3
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 501
+    weight: 301
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 502
+    weight: 302
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
-    weight: 6
-  - name: Insights
-    url: serverless/insights
+    identifier: custom_metrics
+    weight: 4
+  - name: Enhanced Lambda Metrics
+    url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 7
+    weight: 5
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
-    weight: 8
-  - name: Serverless Integrations
-    url: serverless/serverless_integrations
-    identifier: serverless_integrations
-    parent: serverless
-    weight: 9
-  - name: Datadog Serverless Plugin
-    url: serverless/serverless_integrations/plugin
-    parent: serverless_integrations
-    identifier: serverless_integrations_plugin
-    weight: 901
-  - name: Datadog Serverless Macro
-    url: serverless/serverless_integrations/macro
-    parent: serverless_integrations
-    identifier: serverless_integrations_macro
-    weight: 902
-  - name: Datadog Serverless CLI
-    url: serverless/serverless_integrations/cli
-    parent: serverless_integrations
-    identifier: serverless_integrations_cli
-    weight: 903
-  - name: Serverless Tagging
-    url: serverless/serverless_tagging
-    parent: serverless
-    weight: 10
+    weight: 6
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 11
+    weight: 7
+  - name: Insights
+    url: serverless/troubleshooting/insights
+    parent: serverless_troubleshooting
+    weight: 701
+  - name: Serverless Tagging
+    url: serverless/troubleshooting/serverless_tagging
+    parent: serverless_troubleshooting
+    weight: 702
   - name: Webpack Compatibility
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
-    weight: 1101
+    weight: 703
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 12
+    weight: 8
+  - name: Guides
+    url: serverless/guide/
+    identifier: serverless_guides
+    parent: serverless
+    weight: 9
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1202,6 +1194,11 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 801
+  - name: Notification Rules
+    url: monitors/incident_management/notification_rules
+    parent: incidents
+    identifier: notification_rules
+    weight: 802
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
@@ -1554,10 +1551,10 @@ main:
     parent: tracing
     identifier: profiler
     weight: 13
-  - name: Getting Started
-    url: tracing/profiler/getting_started
+  - name: Enabling the Profiler
+    url: tracing/profiler/enabling/
     parent: profiler
-    identifier: profiler_getting_started
+    identifier: profiler_enabling
     weight: 1301
   - name: Search Profiles
     url: tracing/profiler/search_profiles
@@ -1634,11 +1631,96 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1605
+  - name: CI Visibility
+    url: continuous_integration/
+    pre: nav_ci
+    identifier: ci
+    weight: 150000
+  - name: Tracing Tests
+    url: continuous_integration/setup_tests/
+    parent: ci
+    identifier: setup_tests
+    weight: 1
+  - name: Installing the Agent
+    url: continuous_integration/setup_tests/agent/
+    parent: setup_tests
+    identifier: ci_agent
+    weight: 101
+  - name: Tests in Containers
+    url: continuous_integration/setup_tests/containers/
+    parent: setup_tests
+    identifier: ci_containers
+    weight: 102
+  - name: .NET
+    url: continuous_integration/setup_tests/dotnet/
+    parent: setup_tests
+    identifier: ci_dotnet
+    weight: 103
+  - name: Java
+    url: continuous_integration/setup_tests/java/
+    parent: setup_tests
+    identifier: ci_java
+    weight: 104
+  - name: JavaScript
+    url: continuous_integration/setup_tests/javascript/
+    parent: setup_tests
+    identifier: ci_javascript
+    weight: 105
+  - name: Python
+    url: continuous_integration/setup_tests/python/
+    parent: setup_tests
+    identifier: ci_python
+    weight: 106
+  - name: Swift
+    url: continuous_integration/setup_tests/swift/
+    parent: setup_tests
+    identifier: ci_swift
+    weight: 107
+  - name: JUnit Report Uploads
+    url: continuous_integration/setup_tests/junit_upload/
+    parent: setup_tests
+    identifier: ci_junit
+    weight: 108
+  - name: Tracing Pipelines
+    url: continuous_integration/setup_pipelines/
+    parent: ci
+    identifier: setup_pipelines
+    weight: 2
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
+    weight: 201
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 202
+  - name: Exploring Tests
+    url: continuous_integration/explore_tests/
+    parent: ci
+    identifier: explore_tests
+    weight: 3
+  - name: Exploring Pipelines
+    url: continuous_integration/explore_pipelines/
+    parent: ci
+    identifier: explore_pipelines
+    weight: 4
+  - name: Guides
+    url: continuous_integration/guides/
+    parent: ci
+    identifier: ci_guides
+    weight: 5
+  - name: Troubleshooting
+    url: continuous_integration/troubleshooting/
+    parent: ci
+    identifier: ci_troubleshooting
+    weight: 6
   - name: Log Management
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 150000
+    weight: 160000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1792,41 +1874,110 @@ main:
     pre: nav_security_monitoring
     identifier: security_platform
     weight: 160000
-  - name: Getting Started
-    url: security_platform/getting_started
+  - name: Security Monitoring
+    url: security_platform/security_monitoring/
     parent: security_platform
-    identifier: security_monitoring_getting_started
+    identifier: security_monitoring
     weight: 1
+  - name: Getting Started
+    url: security_platform/security_monitoring/getting_started
+    parent: security_monitoring
+    identifier: security_monitoring_getting_started
+    weight: 101
+  - name: Security Home
+    url: security_platform/security_monitoring/security_home
+    parent: security_monitoring
+    identifier: security_monitoring_security_home
+    weight: 102
+  - name: Log Detection Rules
+    url: security_platform/security_monitoring/log_detection_rules
+    parent: security_monitoring
+    identifier: security_monitoring_log_detection_rules
+    weight: 103
+  - name: OOTB Rules
+    url: /security_platform/default_rules#cat-log-detection
+    parent: security_monitoring
+    identifier: security_monitoring_default_rules
+    weight: 104
+  - name: Signals Explorer
+    url: /security_platform/explorer
+    parent: security_monitoring
+    identifier: security_monitoring_signals_explorer
+    weight: 105
+  - name: Cloud Security Posture Management
+    url: security_platform/cspm/
+    parent: security_platform
+    identifier: cspm
+    weight: 2
+  - name: Getting Started
+    url: security_platform/cspm/getting_started
+    parent: cspm
+    identifier: cspm_getting_started
+    weight: 201
+  - name: Frameworks and Benchmarks
+    url: security_platform/cspm/frameworks_and_benchmarks
+    parent: cspm
+    weight: 202
+  - name: OOTB Rules
+    url: security_platform/cspm/configuration_rules
+    parent: cspm
+    identifier: cspm_default_rules
+    weight: 203
+  - name: Posture Findings
+    url: /security_platform/cspm/findings
+    parent: cspm
+    identifier: cspm_findings_explorer
+    weight: 204
+  - name: Cloud Workload Security
+    url: security_platform/cloud_workload_security/
+    parent: security_platform
+    identifier: cloud_workload_security
+    weight: 3
+  - name: Getting Started
+    url: security_platform/cloud_workload_security/getting_started
+    parent: cloud_workload_security
+    identifier: cws_getting_started
+    weight: 301
+  - name: Agent Expressions
+    url: security_platform/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 302
+  - name: Workload Security Rules
+    url: security_platform/cloud_workload_security/workload_security_rules
+    parent: cloud_workload_security
+    identifier: cws_workload_security_rules
+    weight: 303
+  - name: OOTB Rules
+    url: security_platform/default_rules#cat-workload-security
+    parent: cloud_workload_security
+    identifier: cws_workload_default_rules
+    weight: 304
+  - name: Signals Explorer
+    url: security_platform/explorer
+    parent: cloud_workload_security
+    identifier: cws_workload_signals_explorer
+    weight: 305
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
     identifier: security_rules
-    weight: 2
-  - name: Security Monitoring
-    url: security_platform/detection_rules/security_monitoring
-    parent: security_rules
-    identifier: security_monitoring_detection_rules
-    weight: 201
-  - name: Default Rules
-    url: security_platform/default_rules
-    parent: security_platform
-    identifier: default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
     identifier: signals_explorer
-    weight: 4
+    weight: 6
   - name: Guides
     url: security_platform/guide
     parent: security_platform
     identifier: security_platform_guides
-    weight: 5
+    weight: 7
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 170000
+    weight: 180000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -2462,7 +2613,7 @@ footer_product:
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alerts
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    url: 'https://www.datadoghq.com/product/alerts/'
     weight: 145
   - name: API
     url: 'https://docs.datadoghq.com/api/'
@@ -2475,7 +2626,7 @@ footer_product_two:
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alerts
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    url: 'https://www.datadoghq.com/product/alerts/'
     weight: 145
   - name: API
     url: 'https://docs.datadoghq.com/api/'
@@ -4029,18 +4180,6 @@ api:
         - MuteAllMonitors
       unstable: []
       order: 0
-  - name: Resolve Monitor
-    url: '#resolve-monitor'
-    identifier: resolve-monitor
-    parent: monitors
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - ResolveMonitor
-      unstable: []
-      order: 0
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
@@ -4173,6 +4312,70 @@ api:
         - ListMonitors
       unstable: []
       order: 2
+  - name: Notebooks
+    url: /api/latest/notebooks/
+    identifier: notebooks
+    generated: true
+  - name: Update a notebook
+    url: '#update-a-notebook'
+    identifier: update-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - UpdateNotebook
+      unstable: []
+      order: 0
+  - name: Get a notebook
+    url: '#get-a-notebook'
+    identifier: get-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetNotebook
+      unstable: []
+      order: 0
+  - name: Delete a notebook
+    url: '#delete-a-notebook'
+    identifier: delete-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteNotebook
+      unstable: []
+      order: 0
+  - name: Create a notebook
+    url: '#create-a-notebook'
+    identifier: create-a-notebook
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateNotebook
+      unstable: []
+      order: 0
+  - name: Get all notebooks
+    url: '#get-all-notebooks'
+    identifier: get-all-notebooks
+    parent: notebooks
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListNotebooks
+      unstable: []
+      order: 0
   - name: Organizations
     url: /api/latest/organizations/
     identifier: organizations
@@ -4652,7 +4855,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 16
+      order: 17
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -4664,7 +4867,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 17
+      order: 18
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -4676,7 +4879,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -4687,6 +4890,18 @@ api:
         - v1
       operationids:
         - CreateGlobalVariable
+      unstable: []
+      order: 16
+  - name: Get all global variables
+    url: '#get-all-global-variables'
+    identifier: get-all-global-variables
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListGlobalVariables
       unstable: []
       order: 15
   - name: Pause or start a test
@@ -4736,7 +4951,7 @@ api:
       operationids:
         - UpdateTest
       unstable: []
-      order: 25
+      order: 26
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: get-a-test-configuration
@@ -4748,7 +4963,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 24
+      order: 25
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: trigger-tests-from-ci/cd-pipelines
@@ -4880,7 +5095,7 @@ api:
       operationids:
         - CreateTest
       unstable: []
-      order: 26
+      order: 27
   - name: Get the list of all tests
     url: '#get-the-list-of-all-tests'
     identifier: get-the-list-of-all-tests
@@ -4904,7 +5119,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 20
+      order: 22
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -4928,7 +5143,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 23
+      order: 24
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -4940,7 +5155,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 19
+      order: 20
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -4952,7 +5167,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 22
+      order: 23
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
@@ -5065,9 +5280,9 @@ api:
         - GetUsageTrace
       unstable: []
       order: 6
-  - name: Get top custom metrics by hourly average
-    url: '#get-top-custom-metrics-by-hourly-average'
-    identifier: get-top-custom-metrics-by-hourly-average
+  - name: Get all custom metrics by hourly average
+    url: '#get-all-custom-metrics-by-hourly-average'
+    identifier: get-all-custom-metrics-by-hourly-average
     parent: usage-metering
     generated: true
     params:
@@ -5209,6 +5424,18 @@ api:
         - GetUsageLogsByIndex
       unstable: []
       order: 3
+  - name: Get hourly logs usage by retention
+    url: '#get-hourly-logs-usage-by-retention'
+    identifier: get-hourly-logs-usage-by-retention
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageLogsByRetention
+      unstable: []
+      order: 0
   - name: Get hourly usage for Logs
     url: '#get-hourly-usage-for-logs'
     identifier: get-hourly-usage-for-logs
@@ -5293,16 +5520,28 @@ api:
         - GetUsageFargate
       unstable: []
       order: 11
-  - name: Get hourly usage for Compliance Monitoring
-    url: '#get-hourly-usage-for-compliance-monitoring'
-    identifier: get-hourly-usage-for-compliance-monitoring
+  - name: Get hourly usage for Cloud Workload Security
+    url: '#get-hourly-usage-for-cloud-workload-security'
+    identifier: get-hourly-usage-for-cloud-workload-security
     parent: usage-metering
     generated: true
     params:
       versions:
         - v1
       operationids:
-        - GetUsageComplianceMonitoring
+        - GetUsageCWS
+      unstable: []
+      order: 31
+  - name: Get hourly usage for CSPM
+    url: '#get-hourly-usage-for-cspm'
+    identifier: get-hourly-usage-for-cspm
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCloudSecurityPostureManagement
       unstable: []
       order: 30
   - name: Get billable usage across your account
@@ -5329,6 +5568,18 @@ api:
         - GetUsageLambda
       unstable: []
       order: 12
+  - name: Get hourly usage for audit logs
+    url: '#get-hourly-usage-for-audit-logs'
+    identifier: get-hourly-usage-for-audit-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAuditLogs
+      unstable: []
+      order: 31
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
@@ -5623,6 +5874,23 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: Cloud Workload Security
+    url: /api/latest/cloud-workload-security/
+    identifier: cloud-workload-security
+    generated: true
+  - name: Get the latest Cloud Workload Security policy
+    url: '#get-the-latest-cloud-workload-security-policy'
+    identifier: get-the-latest-cloud-workload-security-policy
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DownloadCloudWorkloadPolicyFile
+      unstable:
+        - v2
+      order: 0
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
@@ -6346,19 +6614,6 @@ api:
       unstable:
         - v2
       order: 7
-  - name: Get the latest Runtime Security policy
-    url: '#get-the-latest-runtime-security-policy'
-    identifier: get-the-latest-runtime-security-policy
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - DowloadRuntimePolicyFile
-      unstable:
-        - v2
-      order: 0
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: update-an-existing-rule
@@ -6419,3 +6674,63 @@ api:
         - ListSecurityMonitoringRules
       unstable: []
       order: 1
+  - name: Update a security filter
+    url: '#update-a-security-filter'
+    identifier: update-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get a security filter
+    url: '#get-a-security-filter'
+    identifier: get-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityFilter
+      unstable: []
+      order: 0
+  - name: Delete a security filter
+    url: '#delete-a-security-filter'
+    identifier: delete-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityFilter
+      unstable: []
+      order: 0
+  - name: Create a security filter
+    url: '#create-a-security-filter'
+    identifier: create-a-security-filter
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityFilter
+      unstable: []
+      order: 0
+  - name: Get all security filters
+    url: '#get-all-security-filters'
+    identifier: get-all-security-filters
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityFilters
+      unstable: []
+      order: 0

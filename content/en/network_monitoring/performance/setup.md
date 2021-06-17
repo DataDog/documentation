@@ -25,9 +25,9 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 
 Network performance monitoring requires [Datadog Agent v6.14+][1].
 
-## Supported Platforms
+## Supported platforms
 
-### Operating Systems
+### Operating systems
 
 #### Linux OS
 
@@ -43,15 +43,19 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 **Note:** There is an exception to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
 
+#### Windows OS
+
+Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.1, for Windows versions 2012 and up.
+
 #### macOS
 
 Datadog Network Performance Monitoring does not currently support macOS platforms.
 
-### Container Setups
+### Containers
 
 NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities -- such as containers, tasks, pods, clusters, and deployments -- with out-of-the -box tags (such as `container_name`, `task_name`, `kube_service`).
 
-### Network Routing Tools
+### Network routing tools
 
 #### Istio
 
@@ -73,7 +77,7 @@ Network Performance Monitoring is compatible with **Cilium** installations, prov
 1) Cilium version 1.6 and above, and
 2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
 
-### Provisioning Systems
+### Provisioning systems
 
 Network Performance Monitoring supports use of the following provisioning systems:
 
@@ -162,10 +166,42 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
+### Windows systems
 
-[1]: /infrastructure/process
+[1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
+{{% /tab %}}
+{{% tab "Agent (Windows)" %}}
+Data collection for Windows relies on a filter driver for collecting network data.
+
+To enable network performance monitoring for Windows hosts:
+
+1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
+
+   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
+
+1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+
+    ```yaml
+    network_config:
+        enabled: true
+    ```
+3. [Restart the Agent][2].
+
+    For PowerShell (`powershell.exe`):
+    ```shell
+    restart-service -f datadogagent
+    ```
+    For Command Prompt (`cmd.exe`):
+    ```shell
+    net /y stop datadogagent && net start datadogagent
+    ```
+**Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
+
+
+[1]: /agent/basic_agent_usage/windows/?tab=commandline
+[2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

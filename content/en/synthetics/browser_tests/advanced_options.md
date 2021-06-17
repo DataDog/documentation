@@ -10,7 +10,7 @@ further_reading:
 
 ## User specified locator
 
-By default, [browser tests][1] use the Datadog locator system. It is recommended to only use custom selectors in edge cases as the Datadog locator system is what allows tests to be self-maintaining.
+By default, browser tests use the [Datadog locator system][1]. It is recommended to only use custom selectors in edge cases as the Datadog locator system is what allows tests to be self-maintaining.
 
 Custom selectors are created by performing a step of interest in the recorder (**click**, **hover**, **assert**, etc.) on any element of your page. This specifies the kind of step that needs to be performed.
 
@@ -55,19 +55,19 @@ You can prevent a step screenshot from being captured at test execution. This is
 
 [Subtests][5] advanced options also allow you to choose where you want your subtest to be played:
 
-* **Main (default)**: Subtest is played in your main tab, in sequence with other steps.
-* **New**: Subtest is played in a new tab, which is closed at the end of the subtest i.e. the tab cannot be reused.
-* **Specific tab**: Subtest is played in a numbered tab, which can be reused by other subtests.
+* **Main (default)**: Subtest is played in your main window, in sequence with other steps.
+* **New**: Subtest is played in a new window, which is closed at the end of the subtest i.e. the window cannot be reused.
+* **Specific window**: Subtest is played in a numbered window, which can be reused by other subtests.
 
 {{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Subtests" style="width:60%">}}
 
-Opening your subtest in the main tab means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new tab, or in a specific tab, means that the test starts running from the subtest start URL.
+Opening your subtest in the main window means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new window, or in a specific window, means that the test starts running from the subtest start URL.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/
+[1]: /synthetics/guide/browser-test-self-maintenance
 [2]: /synthetics/browser_tests/actions/
 [3]: /security/synthetics/
 [4]: /synthetics/browser_tests/?tab=privacy#test-configuration

@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/pusher/'
 draft: false
 git_integration_title: pusher
 has_logo: true
+integration_id: pusher
 integration_title: Pusher
 is_public: true
 kind: integration

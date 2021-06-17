@@ -69,7 +69,8 @@ def security_rules(content, content_dir):
                             f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
                             f"/security_monitoring/default_rules/{p.stem}"
                         ],
-                        "rule_category": []
+                        "rule_category": [],
+                        "integration_id": ""
                     }
 
                     # we need to get the path relative to the repo root for comparisons
@@ -83,7 +84,7 @@ def security_rules(content, content_dir):
                         if 'compliance' in relative_path:
                             page_data['rule_category'].append('Infrastructure Configuration')
                         else:
-                            page_data['rule_category'].append('Runtime Agent')
+                            page_data['rule_category'].append('Workload Security')
 
                     tags = data.get('tags', [])
                     if tags:
@@ -107,6 +108,12 @@ def security_rules(content, content_dir):
                         page_data["source"] = page_data["source"].lower()
                     if page_data.get("scope", None):
                         page_data["scope"] = page_data["scope"].lower()
+
+                    # integration id
+                    page_data["integration_id"] = page_data.get("scope", None) or page_data.get("source", "")
+                    cloud = page_data.get("cloud", None)
+                    if cloud and cloud == 'aws':
+                        page_data["integration_id"] = "amazon-{}".format(page_data["integration_id"])
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
@@ -157,7 +164,8 @@ def compliance_rules(content, content_dir):
                         "type": "security_rules",
                         "disable_edit": True,
                         "aliases": [f"{json_data.get('defaultRuleId', '').strip()}"],
-                        "source": f"{json_data.get('framework', {}).get('name', '').replace('cis-','')}"
+                        "source": f"{json_data.get('framework', {}).get('name', '').replace('cis-','')}",
+                        "integration_id": ""
                     }
 
                     for tag in json_data.get('tags', []):
@@ -169,6 +177,12 @@ def compliance_rules(content, content_dir):
                         page_data["source"] = page_data["source"].lower()
                     if page_data.get("scope", None):
                         page_data["scope"] = page_data["scope"].lower()
+
+                    # integration id
+                    page_data["integration_id"] = page_data.get("scope", None) or page_data.get("source", "")
+                    cloud = page_data.get("cloud", None)
+                    if cloud and cloud == 'aws':
+                        page_data["integration_id"] = "amazon-{}".format(page_data["integration_id"])
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())

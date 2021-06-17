@@ -29,14 +29,14 @@ further_reading:
 ---
 ## 概要
 
-Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。公式の [Docker イメージ][2]は Docker Hub と GCR からご利用いただけます。
+Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。公式の [Docker イメージ][2]は Docker Hub、GCR 、および ECR-Public からご利用いただけます。
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| Docker Hub                                             | GCR                                                             |
-|--------------------------------------------------------|-----------------------------------------------------------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| Docker Hub                                             | GCR                                                             |ECR-Public                                                            |
+|--------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------|
+| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
+| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
 
 ## セットアップ
 
@@ -49,7 +49,13 @@ Docker Agent をまだインストールしていない場合は、以下の手�
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 
-**注**: GCR 以外の別のレジストリを使用している場合は、必ずイメージを更新してください。
+ECR-Public の場合:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+```
+
+**注**: GCR または ECR-Public 以外の別のレジストリを使用している場合は、必ずイメージを更新してください。
 
 {{% /tab %}}
 {{% tab "Amazon Linux" %}}
@@ -59,11 +65,21 @@ Amazon Linux < v2 の場合:
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
+ECR-Public の場合:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+```
 
 Amazon Linux v2 の場合:
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+```
+ECR-Public の場合:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 {{% /tab %}}
@@ -75,6 +91,12 @@ Datadog Agent は、Windows Server 2019 (LTSC) とバージョン 1909 (SAC) で
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
 ```
 
+ECR-Public の場合:
+
+```shell
+docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
+```
+
 {{% /tab %}}
 {{% tab "非特権" %}}
 
@@ -83,13 +105,19 @@ docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
+ECR-Public の場合:
+
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
+```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 **注**: Docker Compose については、[Compose と Datadog Agent][9] を参照してください。
 
-## インテグレーション
+## 統合
 
 クラスター内で Agent を起動し、実行したら、[Datadog のオートディスカバリー機能][10]を使ってアプリケーションコンテナからメトリクスとログを自動的に収集します。
 
@@ -234,8 +262,10 @@ Agent チェックが Datadog にメトリクスを送信できない場合は�
 [1]: /ja/agent/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[4]: https://gallery.ecr.aws/datadog/agent
 [4]: https://hub.docker.com/r/datadog/docker-dd-agent
 [5]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
+[6]: https://gallery.ecr.aws/datadog/docker-dd-agent
 [6]: https://app.datadoghq.com/account/settings#agent/docker
 [7]: /ja/agent/basic_agent_usage/#supported-os-versions
 [8]: https://app.datadoghq.com/account/settings#api

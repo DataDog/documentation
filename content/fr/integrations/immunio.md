@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/immunio/'
 draft: false
 git_integration_title: immunio
 has_logo: true
+integration_id: immunio
 integration_title: Immunio
 is_public: true
 kind: integration
