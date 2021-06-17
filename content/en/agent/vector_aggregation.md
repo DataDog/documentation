@@ -106,7 +106,7 @@ transforms:
     inputs:
       - datadog_logs # It's the name of the preconfigured Datadog source
     source: |
-      .ddtags = add_datadog_tags!(.ddtags, ["sender:vector"])
+      .ddtags = .ddtags + ",sender:vector"
 
 sinks:
   to_datadog:
