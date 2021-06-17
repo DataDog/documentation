@@ -93,7 +93,7 @@ Technically, a Saved View keeps track of:
 
 #### Default view
 
-{{< img src="monitors/manage_monitor/default.png" alt="Default view"  style="width:50%;" >}}
+{{< img src="monitors/manage_monitor/default.jpg" alt="Default view"  style="width:50%;" >}}
 
 Your existing Manage Monitor view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization.
 
