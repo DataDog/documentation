@@ -2400,7 +2400,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 504
   - name: 'Submission - API '
-    url: api/v1/metrics/#submit-metrics
+    url: api/latest/metrics/#submit-metrics
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 505
@@ -2430,10 +2430,10 @@ main:
     identifier: custom_checks_check_dogstatsd
     weight: 602
   - name: 'Submission - API '
-    url: api/v1/service-checks/#submit-a-service-check
+    url: api/latest/service-checks/#submit-a-service-check
     parent: dev_tools_service_checks
     identifier: dev_tools_service_checks_api
-    weight: 6
+    weight: 603
   - name: Community
     url: developers/community/
     parent: dev_tools
