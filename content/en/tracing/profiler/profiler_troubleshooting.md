@@ -7,7 +7,7 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-{{< programming-lang-wrapper langs="java,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
 
 ## Missing profiles in the profile search page
@@ -123,6 +123,40 @@ Override templates let you specify profiling properties to override. However, th
     {{< code-block lang="text" filename="example-template.jfp" >}}
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     {{< /code-block >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+## Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Runtime type, version, and vendor (for example, Python 3.9.5)
+
+[1]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /help/
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+## Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Runtime type, version, and vendor (for example, Go 1.16.5)
+
+[1]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /help/
 
 ## Further Reading
 
