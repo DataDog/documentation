@@ -2422,23 +2422,23 @@ main:
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
-    identifier: dev_service_checks
+    identifier: dev_tools_service_checks
     weight: 6
   - name: Submission - Agent Check
     url: developers/service_checks/agent_service_checks_submission/
-    parent: dev_service_checks
+    parent: dev_tools_service_checks
     identifier: custom_checks_agent_check
     weight: 601
   - name: Submission - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
-    parent: dev_service_checks
+    parent: dev_tools_service_checks
     identifier: custom_checks_check_dogstatsd
     weight: 602
   - name: 'Submission - API '
-    url: api/latest/service-checks/#submit-a-service-check
-    parent: dev_service_checks
-    identifier: service_check_api
-    weight: 603
+    url: api/v1/service-checks/#submit-a-service-check
+    parent: dev_tools_service_checks
+    identifier: dev_tools_service_checks_api
+    weight: 6
   - name: Community
     url: developers/community/
     parent: dev_tools
