@@ -124,10 +124,6 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     {{< /code-block >}}
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -141,10 +137,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -157,10 +149,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
@@ -197,8 +185,8 @@ Without this flag, profiles for short-lived Resque jobs will be unavailable.
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 
+{{< /programming-lang >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-{{< /programming-lang >}}
