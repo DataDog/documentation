@@ -44,7 +44,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
-##### SAML IdP-Initiated Login
+##### SAML IdP initiated login
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
 
@@ -72,12 +72,11 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
 
-### Create an Incident
+### Create an incident
 
 1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
 2. Click the “+” button in the top right corner.
 3. Give your incident a title, severity, and commander.
-
 
 ## Widgets
 
