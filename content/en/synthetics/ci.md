@@ -582,7 +582,7 @@ The execution rule associated with the test is always the most restrictive one t
 
 #### Start URL
 
-You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL and the following environment variables:
+You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL with the following variables:
 
 
 `URL`
@@ -634,6 +634,8 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 * `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
+
+You can also leverage your own environment variables to customize your start URL. 
 
 ### Running tests
 
