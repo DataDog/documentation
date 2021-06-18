@@ -1676,21 +1676,16 @@ main:
     parent: setup_tests
     identifier: ci_python
     weight: 106
-  - name: Ruby
-    url: continuous_integration/setup_tests/ruby/
-    parent: setup_tests
-    identifier: ci_ruby
-    weight: 107
   - name: Swift
     url: continuous_integration/setup_tests/swift/
     parent: setup_tests
     identifier: ci_swift
-    weight: 108
+    weight: 107
   - name: JUnit Report Uploads
     url: continuous_integration/setup_tests/junit_upload/
     parent: setup_tests
     identifier: ci_junit
-    weight: 109
+    weight: 108
   - name: Tracing Pipelines
     url: continuous_integration/setup_pipelines/
     parent: ci

@@ -893,6 +893,15 @@ components:
           type: array
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
+        restricted_roles:
+          description: A list of role identifiers. Only the author and users associated
+            with at least one of these roles can edit this dashboard. Overrides the
+            `is_read_only` property if both are present. **This feature is currently
+            in beta.**
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         template_variable_presets:
           description: Array of template variables saved views.
           items:
@@ -4874,6 +4883,11 @@ components:
             $ref: '#/components/schemas/Point'
           readOnly: true
           type: array
+        query_index:
+          description: The index of the series' query within the request.
+          format: int64
+          readOnly: true
+          type: integer
         scope:
           description: Metric scope, comma separated list of tags.
           example: host:foo,env:test
@@ -4884,6 +4898,13 @@ components:
           format: int64
           readOnly: true
           type: integer
+        tag_set:
+          description: Unique tags identifying this series.
+          items:
+            description: Unique tags identifying this series.
+            type: string
+          readOnly: true
+          type: array
         unit:
           description: 'Detailed information about the metric unit.
 
@@ -4951,6 +4972,7 @@ components:
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
+      nullable: true
       properties:
         family:
           description: Unit family, allows for conversion between units of the same
@@ -7270,7 +7292,14 @@ components:
 
                 If a metric query only has one unit object, the second array element
                 is null.'
-              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              example:
+              - family: bytes
+                id: 2
+                name: byte
+                plural: bytes
+                scale_factor: 1.0
+                short_name: B
+              - null
               items:
                 $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
               nullable: true
@@ -20994,6 +21023,20 @@ paths:
         required: false
         schema:
           type: string
+      - description: The number of SLOs to return in the response.
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -21237,10 +21280,10 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"\
-              {{ slo.data[0].id }}\",\n      \"start\": {{ now_ts }},\n      \"end\"\
-              : {{ hour_later_ts }},\n      \"category\": \"Other\",\n      \"timezone\"\
-              : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
-              \   \"type\": \"correction\"\n  }\n}"
+              {{ slo.data[0].id }}\",\n      \"start\": {{ timestamp(\"now\") }},\n\
+              \      \"end\": {{ timestamp(\"now + 1h\") }},\n      \"category\":\
+              \ \"Other\",\n      \"timezone\": \"UTC\",\n      \"description\": \"\
+              Test Correction\"\n     },\n     \"type\": \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
       x-undo:

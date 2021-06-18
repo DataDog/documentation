@@ -41,13 +41,13 @@ Pour compléter cette documentation, vous pouvez vous informer sur le développe
 
 ### Processus de développement
 
-1. [Choisissez le type d'offre marketplace que vous souhaitez proposer.](#1-choose-an-integration-type)
-2. [Concevez une intégration bi-directionnelle.](#2-build-a-bi-directional-integration)
-3. [Dupliquez le référentiel Integrations Extras ou Marketplace.](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
-4. [Installez le kit de développement Datadog.](#4-install-and-run-the-datadog-development-toolkit)
-5. [Ajoutez à l'architecture du carré des métadonnées et des ressources prêtes à l'emploi (comme des dashboards et des moniteurs).](#5-populate-the-tile-scaffolding)
-6. [Envoyez une pull request.](#6-submit-a-pull-request)
-7. [Approuvez la publication du carré.](#7-approve-tile-for-release)
+1. [Choisissez le type d'offre marketplace que vous souhaitez proposer](#1-choisir-un-type-d-integration)
+2. [Concevez une intégration bi-directionnelle](#2-concevoir-une-integration-bi-directionnelle)
+3. [Dupliquez le référentiel Marketplace ou dupliquez le référentiel Integrations Extras](#3-dupliquer-le-referentiel-marketplace-ou-dupliquer-le-referentiel-integrations-extras)
+4. [Installez le kit de développement Datadog](#4-installer-et-executer-le-kit-de-developpement-datadog)
+5. [Renseignez les informations de l'architecture du carré avec des métadonnées et des ressources prêtes à l'emploi (comme des dashboards et des moniteurs)](#5-renseigner-les-informations-de-l'architecture-du-carre)
+6. [Envoyez une pull request](#6-envoyer-une-pull-request)
+7. [Approuvez la publication du carré](#7-approuver-la-publication-du-carre)
 
 ### 1. Choisir un type d'intégration
 
@@ -95,7 +95,7 @@ Les intégrations peuvent envoyer les données suivantes à Datadog :
 6. [Incidents][21]
 7. [Événements de sécurité][22]
 
-### 3. Dupliquer le référentiel Integrations Extras ou Marketplace
+### 3. Dupliquer le référentiel Marketplace ou dupliquer le référentiel Integrations Extras
 
 Les intégrations Datadog peuvent être développées pour notre [référentiel Marketplace][9] privé ou notre [référentiel Integrations Extras][10] open source. 
 
@@ -107,36 +107,59 @@ Les partenaires technologiques peuvent demander l'accès au référentiel Market
 
 La commande du kit de développement Datadog (`ddev`) permet de créer une architecture lors des premières étapes du développement de votre intégration. Elle génère un squelette de l'ensemble des ressources et des métadonnées pour votre carré.
 
-Veillez à installer Python 3.8 ou une version ultérieure.  
+Veillez à installer [Python 3.8 ou une version ultérieure][23].    
 
-Vous pouvez installer la dernière version publiée à partir du site [PyPI][23] :
+Pour éviter tout conflit éventuel dans l'environnement, dans le répertoire où vous avez dupliqué le référentiel, créez un environnement virtuel en exécutant ce qui suit :
 
-`python -m pip install --upgrade "datadog-checks-dev[cli]`
+```
+python3 -m pip install virtualenv --user
+```
+
+Installez la dernière version du kit de développement Datadog depuis [PyPI][24] en exécutant ce qui suit :
+
+```
+python -m pip install --upgrade "datadog-checks-dev[cli]"
+```
+
+**Remarque :** si vous utilisez le Z shell, vous aurez peut-être besoin d'ajouter des caractères d'échappement : 
+
+```
+python -m pip install --upgrade datadog-checks-dev\[cli\]
+``` 
 
 Définissez l'emplacement du référentiel cloné :
 
 #### Marketplace :
 
-`ddev config set marketplace /chemin/vers/marketplace`
-
-`ddev config set repo marketplace`
+```
+ddev config set marketplace /chemin/vers/répertoire_marketplace
+ddev config set repo marketplace
+```
 
 #### Integrations-Extras :
 
-`ddev config set extras /chemin/vers/integrations-extras`
-
-`ddev config set repo extras`
+```
+ddev config set extras /chemin/vers/répertoire_integrations-extras
+ddev config set repo extras
+```
 
 #### Offre avec uniquement un carré
 
-Pour les services et logiciels autonomes, ou si votre intégration utilise l'API Datadog et ne contient pas de code Python, le kit de développement prend en charge une commande réservée aux offres uniquement composées d'un carré. 
-`ddev create -t` 
+Pour les services et logiciels autonomes, ou si votre intégration utilise l'API Datadog et ne contient pas de code Python, le kit de développement prend en charge une commande réservée aux offres uniquement composées d'un carré.
+
+Dans le répertoire `marketplace` ou `integrations-extras` que vous avez spécifié ci-dessus, exécutez ce qui suit : 
+
+```
+ddev create -t tile "<Nom de l'offre>"
+```
 
 #### Intégration complète
 
-Pour créer l'architecture d'intégration complète, exécutez la commande ci-dessous : 
+Pour générer une architecture d'intégration complète, à partir du répertoire `marketplace` ou `integrations-extras` spécifié ci-dessus, exécutez ce qui suit : 
 
-`ddev create <Nom de l'offre>`
+```
+ddev create "<Nom de l'offre>"
+```
 
 ### 5. Renseigner les informations de l'architecture du carré
 
@@ -152,33 +175,38 @@ Les commandes ddev de la section précédente génèrent un squelette des dossie
 #### images
 
 * Stockez toutes les images utilisées dans votre fichier `README.md` dans le dossier `images`.
+* **Remarque :** n'incluez pas d'espace dans le nom des fichiers d'image.
 
 #### Manifest.json
 
 * Objet JSON incluant des éléments pour `display_name`, `public_title`, `author`, etc.
-* Vous trouverez plus d'informations sur les champs de `manifest.json` dans nos [références pour les ressources d'intégration][24].
-* Le [fichier README du référentiel Marketplace][25] privé contient des informations détaillées sur l'objet de tarification.
+* Vous trouverez plus d'informations sur les champs de `manifest.json` dans nos [références pour les ressources d'intégration][25]
+* Le [fichier README du référentiel Marketplace][26] privé contient des informations détaillées sur l'objet de tarification.
 
 #### Metadata.csv
 
-* Contient la liste des métriques prêtes à l'emploi incluses dans une intégration, y compris le nom, le type, l'intervalle et l'unité de la métrique.
-* Vous trouverez plus d'informations sur les champs de `metadata.csv` dans nos [références pour les ressources d'intégration][24].
+* Contient la liste des métriques prêtes à l'emploi incluses dans une intégration, y compris le nom, le type, l'intervalle et l'unité de la métrique. 
+* Vous trouverez plus d'informations sur les champs de `metadata.csv` dans nos [références pour les ressources d'intégration][25].
 * **Remarque :** toutes les métriques Marketplace sont considérées comme des métriques custom.
 
 #### Dashboards et monitors
 
 * Contient les dashboards et les monitors prêts à l'emploi (alertes) pour votre intégration. 
 * Vous pouvez créer des dashboards et des monitors directement sur votre compte sandbox et les exporter en tant que fichiers JSON.
-* Pour en savoir plus, consultez nos [meilleures pratiques pour la création de dashboards][26] (en anglais).
+* Pour en savoir plus, consultez nos [meilleures pratiques pour la création de dashboards][27] (en anglais).
 
-#### Logo
+#### Logos
 
-* Contient un SVG, que notre équipe DesignOps ajoute dans l'application Datadog pour les modes sombre et clair.
+* Contient au moins un SVG, que notre équipe DesignOps ajoute dans l'application Datadog pour les modes sombre et clair. Les fichiers SVG du logo peuvent être ajoutés au répertoire `assets`. Sinon, vous pouvez les placer dans un sous-répertoire `logos` dans `assets`.
 * **Remarque :** les partenaires technologiques sont responsables de l'obtention d'une licence pour les logos qu'ils soumettent.
 
 #### Changelog.md
 
 * Capture les notes et les informations de version, puis les affiche dans l'onglet Release Notes de votre carré. Ajoutez les notes de version dans l'ordre décroissant (dernière version en haut de la liste).
+
+#### Codeowners
+
+* Se trouve dans le répertoire `.github` et définit les individus ou les équipes responsables du code dans le répertoire. Pour en savoir plus sur la syntaxe, consultez la [documentation Github][28].
 
 #### Fichiers supplémentaires pour le marketplace
 
@@ -201,7 +229,7 @@ Une fois le carré de la pull request approuvé par nos équipes d'ingénierie e
 Une fois qu'une intégration bi-directionnelle officielle est activée, les partenaires technologiques ont la possibilité de rencontrer l'équipe marketing dédiée aux partenaires Datadog pour établir une stratégie de mise sur le marché conjointe. Cette solution permet notamment de prévoir ce qui suit :
 
 * L'ajout d'une citation de Datadog pour les communiqués de presse du partenaire
-* La publication d'un article dans le [blog Monitor de Datadog][27]
+* La publication d'un article sur le [blog de Datadog][29]
 * La participation d'un intervenant Datadog lors d'un webinaire du partenaire
 * Le relais des publications sur les réseaux sociaux
 
@@ -236,8 +264,10 @@ Si vous avez des questions, veuillez nous contacter à l'adresse techpartners@da
 [20]: /fr/api/latest/tracing/
 [21]: /fr/api/latest/incidents/
 [22]: /fr/api/latest/security-monitoring/
-[23]: https://pypi.org/project/datadog-checks-dev/
-[24]: /fr/developers/integrations/check_references/#manifest-file
-[25]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
-[26]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
-[27]: https://www.datadoghq.com/blog/
+[23]: https://www.python.org/downloads/
+[24]: https://pypi.org/project/datadog-checks-dev/
+[25]: /fr/developers/integrations/check_references/#manifest-file
+[26]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
+[27]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
+[28]: https://help.github.com/articles/about-codeowners/
+[29]: https://www.datadoghq.com/blog/

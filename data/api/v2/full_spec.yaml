@@ -4345,7 +4345,7 @@ components:
       description: List of rules.
       properties:
         data:
-          description: TODO.
+          description: Array containing the list of rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
           type: array
@@ -4411,6 +4411,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -4421,7 +4426,7 @@ components:
           type: string
         name:
           description: The name of the rule.
-          example: ''
+          example: My security monitoring rule.
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
@@ -4674,13 +4679,13 @@ components:
           type: string
         query:
           description: Query to run on logs.
-          example: a < 3
+          example: a > 3
           type: string
       required:
       - query
       type: object
     SecurityMonitoringRuleResponse:
-      description: Detection rule.
+      description: Rule.
       properties:
         cases:
           description: Cases for generating signals.
@@ -4701,6 +4706,10 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
         id:
           description: The ID of the rule.
           type: string
@@ -4732,6 +4741,10 @@ components:
             description: Tag.
             type: string
           type: array
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
         version:
           description: The version of the rule.
           format: int64
@@ -4765,6 +4778,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           type: boolean
@@ -4787,6 +4805,12 @@ components:
             description: Tag.
             type: string
           type: array
+        version:
+          description: The version of the rule being updated.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     SecurityMonitoringRuntimeAgentRule:
       description: The Agent rule.

@@ -1,0 +1,39 @@
+{{ $params := .Params }}
+
+{{ $npm_provider := .Page.Params.npm_provider }}
+
+{{ if (.Get 0 ) }}
+
+  {{ $.Scratch.Set "npm" (.Get 0) }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "npm" $npm_provider }}
+
+{{ end }}
+
+{{ $npm := $.Scratch.Get "npm" }}
+
+{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.npm) }}
+
+  <!-- get lang specific data file -->
+  {{ $.Scratch.Set "data" "" }}
+  {{ if ne $.Page.Lang "en"}}
+      {{ if (fileExists (print "data/npm/" $npm "." $.Page.Lang ".json")) }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.npm (print $npm "." $.Page.Lang)) }}
+      {{ else }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.npm $npm) }}
+      {{ end }}
+  {{ else }}
+      {{ $.Scratch.Set "data" (index $.Page.Site.Data.npm $npm) }}
+  {{ end }}
+  {{ $data := ($.Scratch.Get "data") }}
+
+  <ul>
+    {{ range $data }}
+        <li>{{ .name }}</li>
+    {{ end }}
+  </ul>
+
+
+{{ end }}

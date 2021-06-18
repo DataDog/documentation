@@ -13,6 +13,7 @@ exceptions:
   - Airflow
   - Amazon
   - Amazon Web Services
+  - APCu
   - APIs
   - APM & Distributed Tracing
   - App Analytics
@@ -55,6 +56,7 @@ exceptions:
   - Envoy
   - Fargate
   - FastCGI
+  - Firehose Nozzle
   - FireLens
   - Fluent Bit
   - Fluentd
@@ -71,13 +73,16 @@ exceptions:
   - GraphQL
   - Gunicorn
   - HAProxy
+  - HBase RegionServer Integration
   - HDFS DataNode Integration
   - HDFS NameNode Integration
   - Helm
+  - HipChat
   - HostPort
   - I
   - IdP
   - IDs
+  - iLert
   - Incident Management
   - Ingress Controller
   - Internet Information Services
@@ -86,6 +91,8 @@ exceptions:
   - Java
   - JavaScript
   - JBoss
+  - JFrog
+  - JFrog Artifactory
   - Jira
   - JMXFetch
   - Journald
@@ -126,6 +133,7 @@ exceptions:
   - NXLog
   - OkHttp
   - OneLogin
+  - OPcache
   - OpenLDAP
   - OpenMetrics
   - OpenShift
@@ -138,6 +146,7 @@ exceptions:
   - OpsWorks
   - Oracle Instant Client
   - Phusion Passenger
+  - Pivotal Platform
   - Postgres
   - PowerDNS
   - Prometheus
@@ -172,6 +181,7 @@ exceptions:
   - SQLDelight
   - SQLite
   - Stackdriver
+  - StackPulse
   - StackStorm
   - StatsD
   - Sumo Logic
@@ -201,4 +211,5 @@ exceptions:
   - Webhook
   - WildFly
   - Windows
+  - Xray
   - ZooKeeper

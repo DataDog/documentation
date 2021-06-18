@@ -23,6 +23,10 @@ Datadog supports a variety of open standards, including [OpenTelemetry][1] and [
 
 ## OpenTelemetry collector Datadog exporter
 
+<div class="alert alert-warning">
+The Datadog exporter version v0.28.0 (the current latest version at time of writing) has reports of an <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/3786">unintended issue</a> that may cause Traces exported to Datadog to not be retained past 15 minutes. This may cause unexpected behavior in the Datadog UI. The current recommended version of the Datadog Exporter is <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.27.0">v0.27.0</a>. Please <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
+</div>
+
 The OpenTelemetry Collector is a vendor-agnostic separate agent process for collecting and exporting telemetry data emitted by many processes. Datadog has [an exporter available within the OpenTelemetry Collector][3] to receive traces and metrics data from the OpenTelemetry SDKs, and to forward the data on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs](#connect-opentelemetry-traces-and-logs).
 
 You can [deploy the OpenTelemetry Collector using any of the supported methods][4], and configure it by adding a `datadog` exporter to your [OpenTelemetry configuration YAML file][5] along with your [Datadog API key][6]:
@@ -40,7 +44,7 @@ datadog:
     site: datadoghq.eu
 ```
 
-On each OpenTelemetry-instrumented application, set the resource attributes `development.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
 <!--- 1. Hostname set by another OpenTelemetry component -->
 1. Manually set hostname in configuration
