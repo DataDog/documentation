@@ -65,7 +65,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
     * **BAD**: Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. Pro plan members can visit the APM page in Datadog to begin a free 14-day trial.
     * **GOOD**: Datadog APM is included in Enterprise plans or as an upgrade from Pro plans. If you have a Pro plan, visit the APM page in Datadog to begin a free 14-day trial.
 
-* **Avoid the passive voice**: Prefer the active voice.
+* **Avoid the passive voice**: Prefer the active voice. If you think your sentence is in the passive voice, add the phrase "by zombies." If it still makes grammatical sense, it's in the passive voice. For example, "metrics are sent to the Datadog Agent `by zombies`"
     * **BAD**: "With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent."
     * **GOOD**: "With infrastructure monitoring, the Datadog Agent receives metrics and forwards them to Datadog. Similarly, the Datadog Agent can also receive tracing metrics."
 
@@ -126,7 +126,6 @@ Otherwise, here are some words and phrases to avoid or use sparingly:
 | A number of          | This is vague. Slightly less vague: "a few", "several", "many".                            |
 | [in the] Datadog app | No need for the definite article; use "[in] Datadog".                                      |
 | Product              | When referencing Datadog (e.g. "the Datadog product"), omit it or use "service"            |
-| Integration          | In the context of describing / discussing Agent checks, use "check".                       |
 | Please               | There's no reason to plead with the reader; maybe they'll read the docs, maybe they won't. |
 | Utilize              | Don't utilize utilize when you can use use.                                                |
 
@@ -151,7 +150,7 @@ Use text formatting to clarify and enhance content.
 | Formatting         | Rule                                                                                                                    | Example                                               |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | `` `backquote` `` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
-| `**Bold**`        | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
+| `**Bold**`        | Subjectively pointing the reader to something that they shouldn't miss.                                                   | **This is important**, not that.                      |
 | `*Italic*` or `_Italic_`        | Literally translated words, default values, functions, settings, and page names.                                        | Go the the *setting* page in your Datadog application |
 | `[Link][3]`       | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][5]. | Text with [a link][1]                                 |
 
