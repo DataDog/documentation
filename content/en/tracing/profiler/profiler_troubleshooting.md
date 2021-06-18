@@ -6,12 +6,19 @@ further_reading:
       tag: 'Documentation'
       text: 'APM Troubleshooting'
 ---
+
+{{< programming-lang-wrapper langs="java,ruby" >}}
+{{< programming-lang lang="java" >}}
+
 ## Missing profiles in the profile search page
 
 If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
-- Operating system type and version (for example, Linux Ubuntu 14.04.3)
+- Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
+
+[1]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /help/
 
 ## Reduce overhead from default setup
 
@@ -28,7 +35,7 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr
 
 ## Increase profiler information granularity
 
-If you want more granularity in your profiling data, you can specify `comprehensive` configuration. Note that this approach will increase your profiler overhead at the cost of further granularity. Comprehensive configuration has the following changes compared to the default:
+If you want more granularity in your profiling data, you can specify the `comprehensive` configuration. Note that this approach will increase your profiler overhead at the cost of further granularity. Comprehensive configuration has the following changes compared to the default:
 
 - Reduces sampling threshold to 10ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Enables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
@@ -90,7 +97,7 @@ The following OpenJDK 8 vendors are supported for Continuous Profiling because t
 | RedHat                      | u262                                                           |
 | Amazon (Corretto)           | u262                                                           |
 | Bell-Soft (Liberica)        | u262                                                           |
-| All vendors upstream builds             | u272                                                           |
+| All vendors upstream builds | u272                                                           |
 
 If your vendor is not on the list, [open a support ticket][2], we can let you know if we're planning to support it or if we already offer beta support.
 
@@ -121,5 +128,21 @@ Override templates let you specify profiling properties to override. However, th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+## Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Runtime type, version, and vendor (for example, Ruby 2.7.3)
+
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+{{< /programming-lang >}}
