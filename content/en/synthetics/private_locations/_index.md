@@ -595,7 +595,7 @@ Read more about [dimensioning private locations](#dimension-your-private-locatio
 
 ## Monitor your private locations
 
-Although it's important to initially try to dimension your private location with resources that are consistent with the number and type of tests to execute, the easiest way to know if you should downscale or upscale your private location is to monitor your containers. The recommended way to do so is by installing a [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] provides you with metrics about the health of your containers (memory usage and limits, CPU, disk, etc.) that you can then graph and be alerted on when resources start to go low.
+Although it's important to initially try to add dimension to your private location with resources that are consistent with the number and type of tests to execute, the easiest way to know if you should downscale or upscale your private location is to monitor your containers. The recommended way to do so is by installing the [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] provides you with metrics about the health of your containers (memory usage and limits, CPU, disk, etc.), which you can then use to graph and be alerted on low resources.
 
 ## Further Reading
 
