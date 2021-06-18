@@ -338,7 +338,7 @@ Once created this variable can be used in the following steps of your browser te
 
 ### On manually added steps
 
-All steps input fields with a `{{` indication support variables:
+All step input fields with a `{{` indication support variables:
 
 {{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
 
