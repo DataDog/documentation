@@ -202,7 +202,7 @@ By default, Datadog waits for a page to be fully loaded before performing a step
 
 {{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables"  style="width:60%;">}}
 
-To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [here](#using-variables).
+To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [Using variables](#using-variables).
 
 #### Pattern
 
