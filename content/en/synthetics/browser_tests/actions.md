@@ -194,7 +194,7 @@ By default, the **Scroll** step scrolls on the whole page. If you need to scroll
 
 #### Wait
 
-By default, Datadog waits for a page to be fully loaded before performing a step or a next step—with a timeout of 60 seconds. If you know a page or page element is taking more than 60 seconds to load, you can customize that timeout in the advanced options of your step or add a hardcoded wait step (max value of 300 seconds).
+By default, Datadog waits for a page to be fully loaded before performing a step or a next step—with a timeout of 60 seconds. If you know a page or page element is taking more than 60 seconds to load, you can customize that timeout in the [advanced options][2] of your step or add a hardcoded wait step (max value of 300 seconds).
 
 **Note**: This additional time is systematically added to **each run** of your browser test scenario.
 
