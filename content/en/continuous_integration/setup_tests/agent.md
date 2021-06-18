@@ -91,9 +91,9 @@ DD_API_KEY=<MY_API_KEY> docker-compose up --build --abort-on-container-exit test
 
 The following sections provide CI provider-specific instructions to run and configure the Agent to report test information.
 
-### Azure Pipelines
+### Azure pipelines
 
-To run the Agent in Azure Pipelines, define the Agent container in the [`resources` section][5] and link it with the job declaring it as a [`service` container][6]:
+To run the Agent in Azure pipelines, define the Agent container in the [`resources` section][5] and link it with the job declaring it as a [`service` container][6]:
 
 {{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
 variables:

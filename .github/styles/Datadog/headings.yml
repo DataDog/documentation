@@ -17,6 +17,7 @@ exceptions:
   - APIs
   - APM & Distributed Tracing
   - App Analytics
+  - AppVeyor
   - AuthN
   - Autodiscovery
   - AWS Step Functions
@@ -26,11 +27,14 @@ exceptions:
   - Azure App Service Plan
   - Azure Blob Storage
   - Azure Event Hub
+  - BitBucket
+  - BuildKite
   - CakePHP
   - Cassandra Nodetool
   - Cassandra Nodetool Integration
   - CentOS
   - Chef
+  - CircleCI
   - Clipboard
   - Cloud Pub Sub
   - CloudFormation
@@ -45,6 +49,7 @@ exceptions:
   - Datadog Agent Manager
   - Datadog for Government
   - Datadog Forwarder
+  - Datadog Lambda Extension
   - Datadog Operator
   - DatadogHook
   - Debian
@@ -65,6 +70,8 @@ exceptions:
   - Further Reading
   - GeoIP
   - GitHub
+  - GitHub Actions
+  - GitLab
   - Gitlab Runner Integration
   - Google
   - Google Analytics
@@ -77,6 +84,7 @@ exceptions:
   - HDFS DataNode Integration
   - HDFS NameNode Integration
   - Helm
+  - Heroku
   - HipChat
   - HostPort
   - I
@@ -91,6 +99,7 @@ exceptions:
   - Java
   - JavaScript
   - JBoss
+  - Jenkins
   - JFrog
   - JFrog Artifactory
   - Jira
@@ -99,7 +108,9 @@ exceptions:
   - Kafka
   - Kafka Consumer Integration
   - Kubernetes
+  - Kubernetes Engine
   - Kubernetes Pod
+  - Kubernetes Service
   - Lambda
   - Lambda Layer
   - Lambda@Edge
@@ -113,12 +124,14 @@ exceptions:
   - Log Rehydration
   - Logback
   - macOS
+  - Marketplace
   - MarkLogic
   - Meraki
   - Mesos Slave Integration
   - Metrics Explorer
   - Metrics without Limits
   - MongoDB
+  - MsTest
   - MySQL
   - Network Address Translation
   - Network Device Monitoring
@@ -148,6 +161,7 @@ exceptions:
   - Phusion Passenger
   - Pivotal Platform
   - Postgres
+  - PostgreSQL
   - PowerDNS
   - Prometheus
   - Prometheus Alertmanager
@@ -155,6 +169,7 @@ exceptions:
   - Python
   - RabbitMQ
   - Rails
+  - Rancher
   - Real User Monitoring
   - Red Hat
   - Redis
@@ -162,6 +177,7 @@ exceptions:
   - RocketPants
   - Root Cause Analysis
   - Route53
+  - RSpec
   - Ruby
   - RumMonitor
   - SafeNet

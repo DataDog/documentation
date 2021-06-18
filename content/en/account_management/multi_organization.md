@@ -52,7 +52,7 @@ For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated 
 
 Note: when using a custom subdomain, you will have to manually edit the links from the Datadog documentation with your subdomain name. For example a link redirecting to `https://**app**.datadoghq.com/account/settings` will become `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
 
-## Setting up SAML
+## Set up SAML
 
 SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
 
@@ -97,9 +97,9 @@ This data can be downloaded as a CSV file.
 
 {{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Multi-org Logs Usage by Index" >}}
 
-### Individual Organization usage
+### Individual organization usage
 
-In the Individual Organization usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
+On the Individual Organization usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
 
 {{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
 
