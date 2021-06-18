@@ -141,6 +141,28 @@ If you've configured the profiler and don't see profiles in the profile search p
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
 
+## Application triggers "stack level too deep (SystemStackError)" errors
+
+The profiler instruments the Ruby VM to track thread creation.
+This instrumentation is compatible with most other Ruby gems that also instrument thread creation, with a few exceptions.
+
+If you're using any of the below gems:
+
+* `rollbar`: Ensure you're using version 3.1.2 or newer.
+* `logging`: Disable `logging`'s thread context inheritance by setting the `LOGGING_INHERIT_CONTEXT` environment
+  variable to `false`.
+
+If you're still experiencing `SystemStackError` errors after following the above instructions,
+[open a support ticket](/help/) taking care to include the full backtrace leading to the error.
+
+## Missing profiles for Resque jobs
+
+When profiling [Resque](https://github.com/resque/resque) jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
+variable to `1`, as described in the
+[Resque documentation](https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks).
+
+Without this flag, profiles for short-lived Resque jobs will be unavailable.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
