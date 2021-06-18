@@ -1,0 +1,14 @@
+
+extends: existence
+message: "Use an em dash ('—') instead of '–'."
+link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#dashes"
+nonword: true
+level: error
+action:
+  name: edit
+  params:
+    - replace
+    - '-'
+    - '—'
+tokens:
+  - '–'
