@@ -28,7 +28,7 @@ On top of these API endpoints, Datadog provides and maintains a command line int
 
 ## API usage
 
-The trigger endpoint provides the list of triggered checks alongside their result identifiers. A polling endpoint is available to obtain the full results of the tests if they are available.
+The trigger endpoint provides the list of triggered tests alongside their result identifiers. A polling endpoint is available to obtain the full results of the tests if they are available.
 
 ### Trigger tests endpoint
 
