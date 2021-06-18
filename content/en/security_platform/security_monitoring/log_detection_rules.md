@@ -21,7 +21,7 @@ aliases:
 
 ## Overview
 
-To create a new log detection detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a new log detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
 
 ## Rule Type
 
