@@ -340,7 +340,7 @@ Once created this variable can be used in the following steps of your browser te
 
 All step input fields with a `{{` indication support variables:
 
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator" style="width:70%;">}}
 
 To see all available variables, type `{{` in the input field and choose your variable of interest.
 
