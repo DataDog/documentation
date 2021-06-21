@@ -32,9 +32,9 @@ To enable the Cluster Agent collection with Helm, update your [datadog-values.ya
     enabled: true
   ```
 
-This will automatically update the necessary RBAC files for the Cluster Agent and Datadog Agent, as well utilize the same API Key between both Agents.
+This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
 
-This will also automatically generate a random token in a `Secret` shared between both the Cluster Agent and the Datadog Agent. You can manually set this by specifying a token in the  `clusterAgent.token` configuration or by specifying an existing `Secret` name containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+This also automatically generates a random token in a `Secret` shared between both the Cluster Agent and the Datadog Agent. You can manually set this by specifying a token in the `clusterAgent.token` configuration. You can also manually set this by specifying an existing `Secret` name containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
 
 When set manually this token must be 32 alphanumeric characters.
 
@@ -66,7 +66,7 @@ If you are using Azure Kubernetes Service (AKS), you may require extra permissio
 
 ### Secure Cluster Agent to Agent communication
 
-The Datadog Agent and Cluster Agent require a token to secure their communication. So it is recommended to save this token in a `Secret` that both the Cluster Agent and Agent can reference into their Environment Variable `DD_CLUSTER_AGENT_AUTH_TOKEN`. As this will help maintain consistency and avoid the token being readable in the `PodSpec`.
+The Datadog Agent and Cluster Agent require a token to secure their communication. It is recommended that you save this token in a `Secret` that both the Datadog Agent and Cluster Agent can reference in the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN`. This helps to maintain consistency and to avoid the token being readable in the `PodSpec`.
 
 To create this token run this one line command to generate a `Secret` named `datadog-cluster-agent` with a `token` set. Replace the `<TOKEN>` with 32 alphanumeric characters.
   ```shell
@@ -74,7 +74,7 @@ To create this token run this one line command to generate a `Secret` named `dat
   ```
 **Note:** This creates a `Secret` in the default namespace. If you are in a custom namespace, update the namespace parameter of the command before running it.
 
-The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is already configured to refer to this `Secret` with the Environment Variable configuration:
+The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is already configured to refer to this `Secret` with the environment variable configuration:
   ```yaml
   - name: DD_CLUSTER_AGENT_AUTH_TOKEN
     valueFrom:
@@ -83,7 +83,7 @@ The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is al
         key: token
   ```
 
-You'll need to configure this Environment Variable in an identical way when [Configuring the Datadog Agent][4].
+This environment variable must be configured (using the same setup) when [Configuring the Datadog Agent][4].
 
 ### Create the Cluster Agent and its service
 
@@ -95,13 +95,13 @@ You'll need to configure this Environment Variable in an identical way when [Con
     * [`cluster-agent-deployment.yaml`: Cluster Agent manifest][8]
     * [`install_info-configmap.yaml`: Install Info Configmap][9]
 
-2. In the `secrets.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][10] encoded in base64. To get the base64 version of your Api Key you can run:
+2. In the `secrets.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][10] encoded in base64. To get the base64 version of your API key, you can run:
 
     ```shell
     echo -n '<Your API key>' | base64
     ```
 3. In the `secrets-application-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_APP_KEY_HERE` with [your Datadog Application key][11] encoded in base64.
-4. The `cluster-agent-deployment.yaml` manifest will refer to the token created previously in the `Secret` `datadog-cluster-agent` by *default*. If you are storing this token in an *alternative* way you will need to configure your Environment Variable `DD_CLUSTER_AGENT_AUTH_TOKEN` accordingly.
+4. The `cluster-agent-deployment.yaml` manifest will refers to the token created previously in the `Secret` `datadog-cluster-agent` by *default*. If you are storing this token in an *alternative* way, configure your `DD_CLUSTER_AGENT_AUTH_TOKEN` environment variable accordingly.
 5. Deploy these resources for the Cluster Agent Deployment to use:
     ```shell
     kubectl apply -f agent-services.yaml
@@ -114,7 +114,7 @@ You'll need to configure this Environment Variable in an identical way when [Con
     kubectl apply -f cluster-agent-deployment.yaml
     ```
 
-**Note**: In your Datadog Cluster Agent, set the Environment Variable `DD_SITE` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. It defaults to the `US` site `datadoghq.com`
+**Note**: In your Datadog Cluster Agent, set the environment variable `DD_SITE` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. It defaults to the `US` site `datadoghq.com`
 
 ### Verification
 
@@ -147,7 +147,7 @@ datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/
 
 After having set up the Datadog Cluster Agent, modify your Datadog Agent configuration to communicate with the Datadog Cluster Agent. You can reference the provided [daemonset.yaml manifest][13] for a full example.
 
-In your existing `Daemonset` [manifest file][2] set the Environment Variable `DD_CLUSTER_AGENT_ENABLED` to `true`. As well as set the `DD_CLUSTER_AGENT_AUTH_TOKEN` using the same syntax used in [Secure Cluster-Agent-to-Agent Communication][14].
+In your existing `Daemonset` [manifest file][2] set the environment variable `DD_CLUSTER_AGENT_ENABLED` to `true`. Then, set the `DD_CLUSTER_AGENT_AUTH_TOKEN` using the same syntax used in [Secure Cluster-Agent-to-Agent Communication][14].
 
   ```yaml
   - name: DD_CLUSTER_AGENT_ENABLED
@@ -159,7 +159,7 @@ In your existing `Daemonset` [manifest file][2] set the Environment Variable `DD
         key: token
   ```
 
-After redeploying your `Daemonset` with these configurations in place the Datadog Agent should be able to communicate with the Cluster Agent.
+After redeploying your `Daemonset` with these configurations in place, the Datadog Agent is able to communicate with the Cluster Agent.
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
 [2]: /agent/kubernetes/?tab=daemonset
