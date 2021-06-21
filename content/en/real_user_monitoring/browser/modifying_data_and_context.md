@@ -172,9 +172,9 @@ The following attributes are **optional** but it is recommended to provide **at 
 
 | Attribute  | Type | Description                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | String | Unique user identifier.                                                                                  |
-| usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| `usr.id`    | String | Unique user identifier.                                                                                  |
+| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
+| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
 **Note**: Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
