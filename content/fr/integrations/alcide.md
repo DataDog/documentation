@@ -14,6 +14,7 @@ name: alcide
 public_title: Intégration Datadog/Alcide
 short_description: Importer et traiter vos logs Alcide
 version: '1.0'
+integration_id: alcide
 ---
 ## Présentation
 

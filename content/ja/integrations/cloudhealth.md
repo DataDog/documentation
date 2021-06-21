@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/cloudhealth/'
 draft: false
 git_integration_title: cloudhealth
 has_logo: true
+integration_id: cloudhealth
 integration_title: Cloudhealth
 is_public: true
 kind: インテグレーション

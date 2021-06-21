@@ -160,6 +160,27 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### Script error
+
+For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows an error with the minimal message "Script error."
+
+{{< img src="real_user_monitoring/browser/script-error.png" alt="Real User Monitoring script error example" style="width:75%;" >}}
+
+For more information about cross-origin scripts and why details are hidden, see [CORS][6] and [this Note on Global Event Handlers][7]. Some possible reasons for this error include:
+- Your JavaScript files are hosted on a different hostname (for instance, `example.com` includes assets from `static.example.com`).
+- Your website includes JavaScript libraries hosted on a CDN.
+- Your website includes third-party JavaScript libraries hosted on the provider's servers.
+
+Get visibility into cross-origin scripts by following these two steps:
+1. Call JavaScript libraries with `crossorigin="anonymous"`.
+
+    With `crossorigin="anonymous"`, the request to fetch the script is performed securely. No sensitive data is forwarded via cookies or HTTP authentication.
+
+2. Configure the `Access-Control-Allow-Origin` HTTP header.
+
+    The most common value for this header is `Access-Control-Allow-Origin: *`, which allows all origins to fetch the resource. Instead, restrict which origins can access your resources by setting, for example `Access-Control-Allow-Origin: www.example.com`.
 
 ## Further Reading
 
@@ -171,3 +192,5 @@ try {
 [3]: /real_user_monitoring/browser/advanced_configuration/
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [5]: /real_user_monitoring/error_tracking
+[6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes

@@ -15,39 +15,42 @@ Datadog を Okta アプリケーションとしてセットアップする場合
 
 ## 一般設定の詳細
 
-* **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion
-    (注: IdP 始動のログインを使用する場合は、Datadog で IdP 始動のログインを有効にした後に生成される、ID 固有の公開 URL を使用してください。この URL は、'[Configure SAML][1]' ページの 'Assertion Consumer Service URL' フィールドにあります。URL の例: `https://app.datadoghq.com/account/saml/assertion/id/` 。この URL は、**Recipient URL** フィールドと **Destination URL** フィールドにも適用されます。)
-
-* **Recipient URL**: https://app.datadoghq.com/account/saml/assertion (または、Okta で「Use this for Recipient URL and Destination URL」チェックボックスをオンにします。)
-
-* **Destination URL**: https://app.datadoghq.com/account/saml/assertion (または、Okta で「Use this for Recipient URL and Destination URL」チェックボックスをオンにします。)
-
-* **Audience URI (SP Entity ID)**: https://app.datadoghq.com/account/saml/metadata.xml
-
-* **Default Relay State**:
-
-* **Name ID Format**: EmailAddress
-
-* **Response**: Signed
-
-* **Assertion Signature**: Signed
-
-* **Signature Algorithm**: RSA_SHA256
-
-* **Digest Algorithm**: SHA256
-* **Assertion Encryption**: アサーションは暗号化できますが、暗号化されていないアサーションも許可されます。
-* **SAML Single Logout**: Disabled
-* **authnContextClassRef**: PasswordProtectedTransport
-* **Honor Force Authentication**: Yes
-* **SAML Issuer ID**: `http://www.okta.com/`
+|Okta IDP 入力フィールド   | 予測値 |
+|---|---|
+| シングルサインオン URL  | Assertion Consumer Service URL (この URL は [Configure SAML][1] ページの *Assertion Consumer Service URL* フィールドで確認できます)  |
+| Recipient URL   | Assertion Consumer Service URL (または *Use this for Recipient URL and Destination URL* チェックボックスをオンにします)  |
+| Destination URL   | Assertion Consumer Service URL (または *Use this for Recipient URL and Destination URL* チェックボックスをオンにします)  |
+| Audience URI (SP Entity ID)   | サービスプロバイダーのエンティティ ID (この URL は [Configure SAML][1] ページの *Service Provider Entity ID* フィールドで確認できます) |
+| Name ID Format  | EmailAddress |
+| 応答 | Signed  |
+| Assertion Signature | Signed |
+| Signature Algorithm  | SHA256   |
+| Assertion Encryption  | アサーションは暗号化できますが、暗号化されていないアサーションも許可されます。  |
+| SAML Single Logout   | Disabled  |
+| authnContextClassRef  | PasswordProtectedTransport |
+| Honor Force Authentication  | 〇  |
+| SAML Issuer ID  | `http://www.okta.com/${org.externalKey}`  |
 
 ## 属性ステートメントの詳細
 
-* **NameFormat**: urn:oasis:names:tc:SAML:2.0:attrname-format:uri
-* **sn**: user.lastName
-* **givenName**: user.firstName
+| 名前  |名前形式 (オプション)   | 値  |
+|---|---|---|
+| NameFormat   | URI リファレンス | `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`  |
+| sn  | URI リファレンス  | `user.lastName` |
+| givenName  | URI リファレンス  | `user.firstName`  |
 
-Datadog アカウントの SAML 構成の詳細については、[SAML に関するドキュメント][2]を参照してください。カスタムサブドメイン機能をご使用の場合も、同じドキュメントで詳細をご確認いただけます。
+## グループ属性ステートメント (オプション)
+
+これは [AuthN Mapping][4] を使用している場合にのみ必要です。
+
+| 名前  |Name Format (オプション)   | 値  |
+|---|---|---|
+| memberOf   | 指定なし| 正規表現 `.*` に一致 (このメソッドはすべてのグループを取得します。お使いのユースケースに適合しない場合は IDP 管理者にお問い合わせください)  |
+
+
+
+
+Datadog アカウントの SAML 構成の詳細については、[SAML に関するドキュメントページ][2]を参照してください。
 
 Okta でアプリケーションの構成が完了する前に `IDP.XML` ファイルを Datadog にアップロードする必要がある場合は、[SAML テンプレートアプリ用の idp.xml メタデータファイルの取得に関する記事][3]で、フィールドプレースホルダーの説明を参照してください。
 
@@ -58,3 +61,4 @@ Okta でアプリケーションの構成が完了する前に `IDP.XML` ファ�
 [1]: https://app.datadoghq.com/saml/saml_setup
 [2]: /ja/account_management/saml/
 [3]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App
+[4]: /ja/account_management/saml/#mapping-saml-attributes-to-datadog-roles

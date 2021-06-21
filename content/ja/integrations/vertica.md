@@ -51,6 +51,12 @@ Vertica チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 vertica のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `vertica.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [vertica.d/conf.yaml][3] を参照してください。
 
+#### SSL の有効化
+
+Vertica インテグレーションは、SSL を使用した Vertica への接続をサポートします。これを有効にするには、`conf.yaml` の `use_tls` を `true` にします。
+
+注: Vertica インテグレーションのバージョン 1.9.0 以前では、`tls_verify` を `true` にします。レガシーのサポートとして、`tls_verify` が明示的に `true` に設定されている場合、`use_tls` は `true` に設定されます。
+
 #### Vertica の準備
 
 Datadog Agent のデータベースユーザーを作成します。[vsql][4] から、スーパーユーザーとしてデータベースに接続します。次に、`CREATE USER` ステートメントを実行します。

@@ -23,7 +23,7 @@ If you have not yet read the instructions for auto-instrumentation and setup, st
 
 This page details common use cases for adding and customizing observability with Datadog APM.
 
-## Adding Tags
+## Adding tags
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
@@ -126,7 +126,7 @@ span := tracer.StartSpan(“mainOp”, tracer.ResourceName("/user"), tracer.Chil
 span, ctx := tracer.StartSpanFromContext(ctx, “mainOp”, tracer.ResourceName("/user"))
 ```
 
-### Asynchronous Traces
+### Asynchronous traces
 
 ```go
 func main() {
@@ -141,7 +141,7 @@ func main() {
 }
 ```
 
-### Distributed Tracing
+### Distributed tracing
 
 Create a distributed [trace][7] by manually propagating the tracing context:
 
@@ -192,11 +192,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## Trace Client & Agent Configuration
+## Trace client and Agent configuration
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
 
-### B3 Headers Extraction and Injection
+### B3 headers extraction and injection
 
 The Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
 
@@ -218,7 +218,7 @@ If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
-### Resource Filtering
+### Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
 

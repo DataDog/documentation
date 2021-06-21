@@ -71,6 +71,21 @@ Learn how to configure your monitors for those use cases in [the example section
 ### Priority
 
 Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5. 
+
+For example, you can set different priorities for `alert` and `warning` notifications:
+
+```
+{{#is_alert}}
+{{override_priority 'P1'}}
+ ...
+{{/is_alert}}
+
+{{#is_warning}}
+{{override_priority 'P4'}}
+...
+{{/is_warning}}
+```
 
 ## Notify your team
 
@@ -136,6 +151,18 @@ Use template variables to customize your monitor notifications. The built-in var
 
 Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][13].
 
+#### Local time
+
+Use the `local_time` function to transform a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to show the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
+
+```
+{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+```
+
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`. 
+Refer to the [list of tz database time zones][15], particularly the TZ database name column, to see the list of available time zone values.
+
 ### Tag variables
 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
@@ -170,7 +197,7 @@ Log monitors can use facets as variables if the monitor is grouped by the facets
 For example, if your log monitor is grouped by the `facet`, the variable is:
 
 ```text
-{{ facet.name }}
+{{ @facet.name }}
 ```
 **Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
 
@@ -192,6 +219,8 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 ```text
 {{ a.value }}
 ```
+
+Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
 
 ### Conditional variables
 
@@ -524,3 +553,4 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/
+[15]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

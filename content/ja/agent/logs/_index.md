@@ -23,7 +23,7 @@ further_reading:
 
 ## ログ収集を有効にする
 
-Datadog Agent では、ログの収集はデフォルトで**無効**になっています。ホスト Agent でこれを有効にする方法については、以下の手順を参照してください。Agent を Kuberentes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][2]または [Docker ログ収集][3]のドキュメントを参照してください。
+Datadog Agent では、ログの収集はデフォルトで**無効**になっています。ホスト Agent でこれを有効にする方法については、以下の手順を参照してください。Agent を Kubernetes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][2]または [Docker ログ収集][3]のドキュメントを参照してください。
 
 ホストで実行されている Agent でログ収集を有効にするには、Agent の[メインコンフィギュレーションファイル][4] (`datadog.yaml`) を次のように更新します。
 
@@ -71,8 +71,6 @@ logs:
     service: "<APP_NAME>"
     source: "<SOURCE>"
 ```
-
-**注**: ログのファイルを追跡する場合、**Windows** 用 Datadog Agent v6 および v7 では、ログファイルが UTF8 でエンコードされている必要があります。
 
 [1]: /ja/agent/guide/agent-configuration-files/
 {{% /tab %}}

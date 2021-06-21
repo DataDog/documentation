@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/dyn/'
 draft: false
 git_integration_title: dyn
 has_logo: true
+integration_id: ''
 integration_title: Dyn
 is_public: true
 kind: integration

@@ -1,4 +1,8 @@
+import { getQueryParameterByName } from '../helpers/browser';
+
 function codeTabs() {
+    const tab = getQueryParameterByName('tab');
+    
     if ($('.code-tabs').length > 0) {
         // page load set code tab titles
         $('.code-tabs .tab-content')
@@ -17,20 +21,6 @@ function codeTabs() {
                     `<a class="dropdown-item" href="#" data-lang="${lang}">${title}</a>`
                 );
             });
-
-        // page load if we have a lang in url activate those tabs, otherwise activate first
-        const sPageURL = decodeURIComponent(
-            window.location.search.substring(1)
-        );
-        const sURLVariables = sPageURL.split('&');
-        const tab = sURLVariables
-            .filter(function (item) {
-                return item.split('=')[0] === 'tab';
-            })
-            .map(function (item) {
-                return item.split('=')[1];
-            })
-            .toString();
 
         // clicking a tab open them all
         $('.code-tabs .nav-tabs a').click(function (e) {
@@ -75,16 +65,16 @@ function codeTabs() {
             }
         });
 
-        // activate language from url or first
-        if (tab === '') {
-            $('.code-tabs .nav-tabs li:first a').click();
-        } else {
-            const match = $(`.code-tabs .nav-tabs a[data-lang="${tab}"]:first`);
-            if (match.length) {
-                match.click();
+        if (tab !== '') {
+            const selectedLanguageTab = document.querySelector(`a[data-lang="${tab}"]`);
+
+            if (selectedLanguageTab) {
+                selectedLanguageTab.click();
             } else {
-                $('.code-tabs .nav-tabs li:first a').click();
+                document.querySelector('.code-tabs .nav-tabs li a').click();
             }
+        } else {
+            document.querySelector('.code-tabs .nav-tabs li a').click();
         }
     }
 }

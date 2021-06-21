@@ -7,6 +7,9 @@ aliases:
   - /graphing/infrastructure/network_performance_monitor/
   - /network_performance_monitoring/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
+  tag: "Blog"
+  link: "Monitor cloud architecture and app dependencies with Datadog NPM"
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"

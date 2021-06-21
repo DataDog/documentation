@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/chef/'
 draft: false
 git_integration_title: chef
 has_logo: true
+integration_id: chef
 integration_title: Chef
 is_public: true
 kind: インテグレーション

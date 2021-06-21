@@ -51,7 +51,7 @@ private: true
 | Amazon Fsx                    | AWSFSX                     |
 | Amazon Gamelift               | GAMELIFT                   |
 | Amazon Glue                   | GLUE                       |
-| Amazon Health                 | HEALTH                     |
+| Amazon Health                 | AMAZON HEALTH              |
 | Amazon Inspector              | INSPECTOR                  |
 | Amazon Iot                    | IOT                        |
 | Amazon Kinesis                | KINESIS                    |

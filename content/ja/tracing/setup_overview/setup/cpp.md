@@ -92,7 +92,7 @@ g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentraci
 ./tracer_example
 ```
 
-### ダイナミックローディング
+### 動的な読み込み
 
 ```bash
 get_latest_release() {
@@ -218,20 +218,59 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ### 環境変数
 
-| 変数 | バージョン | デフォルト | 注 |
-|----------|---------|---------|------|
-| `DD_AGENT_HOST` | v0.3.6 | `localhost` | トレースが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。 |
-| `DD_TRACE_AGENT_PORT` | v0.3.6 | `8126` | トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。 |
-| `DD_TRACE_AGENT_URL` | v1.1.4 | | トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。この URL は http、https、unix のアドレススキームをサポートしています。 |
-| `DD_ENV` | v1.0.0 | | 指定された場合、特定の値を持つ `env` タグを生成されたすべてのスパンに追加します。 |
-| `DD_SERVICE` | v1.1.4 | | 指定された場合、デフォルトのサービス名を設定します。指定しない場合、TracerOptions または JSON コンフィギュレーション経由でサービス名を設定する必要があります。 |
-| `DD_TRACE_ANALYTICS_ENABLED` | v1.1.3 | `false` | アプリケーションに対して App Analytics をグローバルに有効化します。 |
-| `DD_TRACE_ANALYTICS_SAMPLE_RATE` | v1.1.3 | | App Analytics のサンプリングレートを設定します。設定時に `DD_TRACE_ANALYTICS_ENABLED` をオーバーライドします。`0.0`〜`1.0` の浮動小数点数となります。 |
-| `DD_TRACE_SAMPLING_RULES` | v1.1.4 | `[{"sample_rate": 1.0}]` | JSON のオブジェクト配列です。各オブジェクトの "sample_rate" フィールドは必須となります。"name" および "service" フィールドは任意項目です。"sample_rate" の値は 0.0 ～ 1.0 (それぞれの値を含む) の間でなければなりません。構成された順に、トレースのサンプルレートを決定するためのルールが適用されます。 |
-| `DD_VERSION` | v1.1.4 | | 指定された場合、特定の値を持つ `version` タグを生成されたすべてのスパンに追加します。 |
-| `DD_TAGS` | v1.1.4 | | 指定された場合、生成されたすべてのスパンにタグを追加します。`key:value` ペアのカンマ区切りリストとなります。 |
-| `DD_PROPAGATION_STYLE_INJECT` | v0.4.1 | `Datadog` | トレーシングヘッダーの挿入時に使用する伝搬のスタイルです。`Datadog`、`B3`、または `Datadog B3` となります。 |
-| `DD_PROPAGATION_STYLE_EXTRACT` | v0.4.1 | `Datadog` | トレーシングヘッダーの抽出時に使用する伝搬のスタイルです。`Datadog`、`B3`、または `Datadog B3` となります。 |
+`DD_AGENT_HOST` 
+: **バージョン**: v0.3.6 <br>
+**デフォルト**: `localhost` <br>
+トレースが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。
+
+`DD_TRACE_AGENT_PORT` 
+: **バージョン**: v0.3.6 <br>
+**デフォルト**: `8126` <br>
+トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。
+
+`DD_TRACE_AGENT_URL` 
+: **バージョン**: v1.1.4 <br>
+トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。この URL は http、https、unix のアドレススキームをサポートしています。
+
+`DD_ENV` 
+: **バージョン**: v1.0.0 <br>
+指定された場合、特定の値を持つ `env` タグを生成されたすべてのスパンに追加します。
+
+`DD_SERVICE` 
+: **バージョン**: v1.1.4 <br>
+指定された場合、デフォルトのサービス名を設定します。指定しない場合、TracerOptions または JSON コンフィギュレーション経由でサービス名を設定する必要があります。
+
+`DD_TRACE_ANALYTICS_ENABLED` 
+: **バージョン**: v1.1.3 <br>
+**デフォルト**: `false` <br>
+アプリケーションに対して App Analytics をグローバルに有効化します。
+
+`DD_TRACE_ANALYTICS_SAMPLE_RATE` 
+: **バージョン**: v1.1.3 <br>
+App Analytics のサンプリングレートを設定します。設定時に `DD_TRACE_ANALYTICS_ENABLED` をオーバーライドします。`0.0`〜`1.0` の浮動小数点数となります。
+
+`DD_TRACE_SAMPLING_RULES` 
+: **バージョン**: v1.1.4 <br>
+**デフォルト**: `[{"sample_rate": 1.0}]` <br>
+JSON のオブジェクト配列です。各オブジェクトの "sample_rate" フィールドは必須となります。"name" および "service" フィールドは任意項目です。"sample_rate" の値は 0.0 ～ 1.0 (それぞれの値を含む) の間でなければなりません。構成された順に、トレースのサンプルレートを決定するためのルールが適用されます。
+
+`DD_VERSION` 
+: **バージョン**: v1.1.4 <br>
+指定された場合、特定の値を持つ `version` タグを生成されたすべてのスパンに追加します。
+
+`DD_TAGS` 
+: **バージョン**: v1.1.4 <br>
+指定された場合、生成されたすべてのスパンにタグを追加します。`key:value` ペアのカンマ区切りリストとなります。
+
+`DD_PROPAGATION_STYLE_INJECT` 
+: **バージョン**: v0.4.1 <br>
+**デフォルト**: `Datadog` <br>
+トレーシングヘッダーの挿入時に使用する伝搬のスタイルです。`Datadog`、`B3`、または `Datadog B3` となります。
+
+`DD_PROPAGATION_STYLE_EXTRACT` 
+: **バージョン**: v0.4.1 <br>
+**デフォルト**: `Datadog` <br>
+トレーシングヘッダーの抽出時に使用する伝搬のスタイルです。`Datadog`、`B3`、または `Datadog B3` となります。
 
 ## その他の参考資料
 

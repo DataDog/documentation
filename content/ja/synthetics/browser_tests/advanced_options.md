@@ -9,7 +9,7 @@ further_reading:
 ---
 ## ユーザー指定のロケーター
 
-デフォルトでは、[ブラウザテスト][1]には Datadog のロケーターシステムが使用されます。テストを自己管理できるのはこのロケーターシステムだけです。したがって、カスタムロケーターは特別な理由がある場合にのみ使用することをお勧めします。
+デフォルトでは、ブラウザテストには [Datadog のロケーターシステム][1]が使用されます。テストを自己管理できるのは、Datadog ロケーターシステムだけであるため、特別な理由がある場合にのみカスタムセレクターを使用することをおすすめします。
 
 カスタムロケーターを作成するには、ページ上にある任意の要素に対し、テストしたいステップ（**クリックする**、**マウスをかざす**、**アサートする**など）をレコーダー内で実行することで、実行すべきステップの種類を指定します。
 
@@ -42,22 +42,32 @@ further_reading:
 
 {{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="タイムアウト" style="width:25%">}}
 
+## スクリーンショットのキャプチャを防ぐ
+
+テストの実行時に手順のスクリーンショットがキャプチャされないようにできます。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する詳細は、[こちら][3]でご確認ください。
+
+{{< img src="synthetics/browser_tests/advanced_options/screenshot_capture_option.png" alt="スクリーンショットのキャプチャオプション" style="width:50%">}}
+
+**注:** この機能は、ブラウザテストのコンフィギュレーションの[高度なオプション][4]として、グローバルテストレベルでも利用可能です。
+
 ## サブテスト
 
-[Subtests][3] の高度なオプションで、サブテストを実行する場所を指定することもできます。
+[サブテスト][5]の高度なオプションで、サブテストを実行する場所を指定することもできます。
 
-* **Main（デフォルト）**: サブテストはメインのタブで、他のステップに続いて実行されます。
-* **New**: サブテストは新しいタブで実行され、終了時にタブが閉じます。つまり、他のテストではそのタブを使用できません。
-* **Specific tab**: タブテストは番号の付いたタブで実行されます。そのため、他のテストでもそのタブを使用できます。
+* **Main（デフォルト）**: サブテストはメインのウィンドウで、他のステップに続いて実行されます。
+* **New**: サブテストは新しいウィンドウで実行され、終了時にタブが閉じます。つまり、他のテストではそのウィンドウを使用できません。
+* **Specific window**: サブテストは番号の付いたウィンドウで実行されます。そのため、他のテストでもそのウィンドウを使用できます。
 
 {{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="サブテスト" style="width:60%">}}
 
-Main を選んだ場合、サブテストはメインのテストに続いて、先行するステップと同じ URL で実行されます。New あるいは Specific Tab を選んだ場合、サブテストの開始 URL でテストが実行されます。
+サブテストをメインウィンドウで開くと、サブテストはメインのテストに続いて、先行するステップと同じ URL で実行されます。新しいウィンドウまたは特定のウィンドウで開くと、テストはサブテストの開始 URL で実行されます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/browser_tests/
+[1]: /ja/synthetics/guide/browser-test-self-maintenance
 [2]: /ja/synthetics/browser_tests/actions/
-[3]: /ja/synthetics/browser_tests/actions/#subtests
+[3]: /ja/security/synthetics/
+[4]: /ja/synthetics/browser_tests/?tab=privacy#test-configuration
+[5]: /ja/synthetics/browser_tests/actions/#subtests

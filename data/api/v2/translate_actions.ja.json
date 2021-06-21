@@ -234,25 +234,33 @@
   },
   "ListTagConfigurations": {
     "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
-    "summary": "タグ付けコンフィギュレーションの一覧表示"
+    "summary": "タグコンフィギュレーションを一覧表示する"
+  },
+  "ListTagsByMetricName": {
+    "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",
+    "summary": "メトリクス名でタグを一覧表示する"
   },
   "DeleteTagConfiguration": {
     "description": "メトリクスのタグ付けコンフィギュレーションを削除します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
-    "summary": "タグ付けコンフィギュレーションを削除"
+    "summary": "タグコンフィギュレーションを削除する"
   },
   "ListTagConfigurationByName": {
     "description": "特定のメトリクス名のタグ付けコンフィギュレーションを返します。",
-    "summary": "タグ付けコンフィギュレーションを名前で一覧表示"
+    "summary": "タグコンフィギュレーションを名前で一覧表示する"
   },
   "UpdateTagConfiguration": {
     "description": "メトリクスまたは分散型メトリクスのパーセンタイル集計のタグ付けコンフィギュレーションを更新します。`Manage Tags for Metrics` 権限を持つ\nユーザーが発行したアプリケーションキーのみを使用できます。",
-    "summary": "タグ付けコンフィギュレーションを更新",
+    "summary": "タグコンフィギュレーションを更新する",
     "request_schema_description": "タグ付けコンフィギュレーションを編集したいメトリクスを含むオブジェクトをリクエストします。"
   },
   "CreateTagConfiguration": {
-    "description": "count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。オプションで任意の分散型メトリクスについてのパーセンタイル集計を含めることもできます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
-    "summary": "タグ付けコンフィギュレーションを作成",
+    "description": "既存の count/gauge/rate/distribution メトリクスについて、クエリが可能なタグキーの一覧を作成および定義します。オプションで任意の分散型メトリクスについてのパーセンタイル集計を含めることもできます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみを使用できます。",
+    "summary": "タグコンフィギュレーションを作成する",
     "request_schema_description": "タグを構成したいメトリクスを含むオブジェクトをリクエストします。"
+  },
+  "ListVolumesByMetricName": {
+    "description": "特定のメトリクス名の個別のメトリクスボリュームを表示します。\n\nカスタムディストリビューションメトリクスは、取り込まれたカスタムメトリクスボリュームとインデックス化されたカスタムメトリクスボリュームの両方を返します。\nMetrics without Limits™ のベータ版をご利用の場合、すべてのメトリクスが取り込まれたボリュームとインデックス化されたボリュームの両方を返します。\n他の製品のアプリ内で生成されたカスタムメトリクスは、取り込まれたボリュームに対し `null` を返します。",
+    "summary": "メトリクス名で個別のメトリクスボリュームを一覧表示する"
   },
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
@@ -311,6 +319,34 @@
     "description": "ロールにユーザーを追加する。",
     "summary": "ロールにユーザーを追加する",
     "request_schema_description": "ユーザーとの関係。"
+  },
+  "DownloadCloudWorkloadPolicyFile": {
+    "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、\n .policy ファイルとしてダウンロードします。それからこのファイルは　\nAgent にデプロイされ、環境で実行中のポリシーを更新します。",
+    "summary": "最新のクラウドワークロードセキュリティポリシーを取得"
+  },
+  "ListSecurityFilters": {
+    "description": "構成されたセキュリティフィルターとその定義のリストを取得します。",
+    "summary": "すべてのセキュリティフィルターを取得"
+  },
+  "CreateSecurityFilter": {
+    "description": "セキュリティフィルターを作成します。",
+    "summary": "セキュリティフィルターを作成",
+    "request_description": "新しいセキュリティフィルターの定義。",
+    "request_schema_description": "作成したいセキュリティフィルターを含むオブジェクトをリクエストします。"
+  },
+  "DeleteSecurityFilter": {
+    "description": "特定のセキュリティフィルターを削除します。",
+    "summary": "セキュリティフィルターを削除"
+  },
+  "GetSecurityFilter": {
+    "description": "特定のセキュリティフィルターの詳細を取得します。",
+    "summary": "セキュリティフィルターを取得"
+  },
+  "UpdateSecurityFilter": {
+    "description": "特定のセキュリティフィルターを更新します。\nリクエストが正常に完了すると、セキュリティフィルターオブジェクトを返します。",
+    "summary": "セキュリティフィルターを更新",
+    "request_description": "セキュリティフィルターの新たな定義。",
+    "request_schema_description": "新しいセキュリティフィルターの本文。"
   },
   "ListSecurityMonitoringRules": {
     "description": "規則のリスト。",

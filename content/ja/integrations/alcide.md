@@ -14,6 +14,7 @@ name: alcide
 public_title: Datadog-Alcide インテグレーション
 short_description: Alcide のログを収集・処理
 version: '1.0'
+integration_id: alcide
 ---
 ## 概要
 

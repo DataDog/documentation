@@ -21,71 +21,77 @@ main_left:
     url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 3
     parent: product
+  - identifier: infrastructure
+    name: Infrastructure Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg'' alt=''infra icon''>'
+    url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
+    weight: 4
+    parent: product
   - identifier: logs
     name: Log Management
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''log icon''>'
     url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 4
+    weight: 5
     parent: product
   - identifier: apm
     name: APM
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''apm icon''>'
     url: 'https://www.datadoghq.com/product/apm/'
-    weight: 5
+    weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''profiler icon''>'
     url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 6
+    weight: 7
     parent: product
   - identifier: security
     name: Security Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
     url: 'https://www.datadoghq.com/product/security-monitoring/'
-    weight: 7
+    weight: 8
     parent: product
   - identifier: network
     name: Network Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
     url: 'https://www.datadoghq.com/product/network-monitoring/'
-    weight: 8
+    weight: 9
     parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 9
+    weight: 10
     parent: product
   - identifier: rum
     name: Real User Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 10
+    weight: 11
     parent: product
   - identifier: incident
     name: Incident Management
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
     url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: serverless
     name: Serverless
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: alerts
     name: Alerts
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 13
+    url: 'https://www.datadoghq.com/product/alerts/'
+    weight: 14
     parent: product
   - identifier: api
     name: API
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 14
+    weight: 15
     parent: product
   - identifier: customers
     name: Customers
@@ -363,55 +369,60 @@ main:
     url: getting_started/tracing/
     parent: getting_started
     weight: 7
+  - name: Profiler
+    identifier: getting_started_profiler
+    url: getting_started/profiler/
+    parent: getting_started
+    weight: 8
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 801
+    weight: 901
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 802
+    weight: 902
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 803
+    weight: 903
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1002
+    weight: 1102
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1003
+    weight: 1103
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1001
+    weight: 1101
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -1183,6 +1194,11 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 801
+  - name: Notification Rules
+    url: monitors/incident_management/notification_rules
+    parent: incidents
+    identifier: notification_rules
+    weight: 802
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
@@ -1535,10 +1551,10 @@ main:
     parent: tracing
     identifier: profiler
     weight: 13
-  - name: Getting Started
-    url: tracing/profiler/getting_started
+  - name: Enabling the Profiler
+    url: tracing/profiler/enabling/
     parent: profiler
-    identifier: profiler_getting_started
+    identifier: profiler_enabling
     weight: 1301
   - name: Search Profiles
     url: tracing/profiler/search_profiles
@@ -1615,11 +1631,96 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1605
+  - name: CI Visibility
+    url: continuous_integration/
+    pre: nav_ci
+    identifier: ci
+    weight: 150000
+  - name: Tracing Tests
+    url: continuous_integration/setup_tests/
+    parent: ci
+    identifier: setup_tests
+    weight: 1
+  - name: Installing the Agent
+    url: continuous_integration/setup_tests/agent/
+    parent: setup_tests
+    identifier: ci_agent
+    weight: 101
+  - name: Tests in Containers
+    url: continuous_integration/setup_tests/containers/
+    parent: setup_tests
+    identifier: ci_containers
+    weight: 102
+  - name: .NET
+    url: continuous_integration/setup_tests/dotnet/
+    parent: setup_tests
+    identifier: ci_dotnet
+    weight: 103
+  - name: Java
+    url: continuous_integration/setup_tests/java/
+    parent: setup_tests
+    identifier: ci_java
+    weight: 104
+  - name: JavaScript
+    url: continuous_integration/setup_tests/javascript/
+    parent: setup_tests
+    identifier: ci_javascript
+    weight: 105
+  - name: Python
+    url: continuous_integration/setup_tests/python/
+    parent: setup_tests
+    identifier: ci_python
+    weight: 106
+  - name: Swift
+    url: continuous_integration/setup_tests/swift/
+    parent: setup_tests
+    identifier: ci_swift
+    weight: 107
+  - name: JUnit Report Uploads
+    url: continuous_integration/setup_tests/junit_upload/
+    parent: setup_tests
+    identifier: ci_junit
+    weight: 108
+  - name: Tracing Pipelines
+    url: continuous_integration/setup_pipelines/
+    parent: ci
+    identifier: setup_pipelines
+    weight: 2
+  - name: GitLab
+    url: continuous_integration/setup_pipelines/gitlab/
+    parent: setup_pipelines
+    identifier: ci_gitlab
+    weight: 201
+  - name: Jenkins
+    url: continuous_integration/setup_pipelines/jenkins/
+    parent: setup_pipelines
+    identifier: ci_jenkins
+    weight: 202
+  - name: Exploring Tests
+    url: continuous_integration/explore_tests/
+    parent: ci
+    identifier: explore_tests
+    weight: 3
+  - name: Exploring Pipelines
+    url: continuous_integration/explore_pipelines/
+    parent: ci
+    identifier: explore_pipelines
+    weight: 4
+  - name: Guides
+    url: continuous_integration/guides/
+    parent: ci
+    identifier: ci_guides
+    weight: 5
+  - name: Troubleshooting
+    url: continuous_integration/troubleshooting/
+    parent: ci
+    identifier: ci_troubleshooting
+    weight: 6
   - name: Log Management
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 150000
+    weight: 160000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1876,7 +1977,7 @@ main:
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 170000
+    weight: 180000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -2512,7 +2613,7 @@ footer_product:
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alerts
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    url: 'https://www.datadoghq.com/product/alerts/'
     weight: 145
   - name: API
     url: 'https://docs.datadoghq.com/api/'
@@ -2525,7 +2626,7 @@ footer_product_two:
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
   - name: Alerts
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    url: 'https://www.datadoghq.com/product/alerts/'
     weight: 145
   - name: API
     url: 'https://docs.datadoghq.com/api/'
@@ -4079,18 +4180,6 @@ api:
         - MuteAllMonitors
       unstable: []
       order: 0
-  - name: Resolve Monitor
-    url: '#resolve-monitor'
-    identifier: resolve-monitor
-    parent: monitors
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - ResolveMonitor
-      unstable: []
-      order: 0
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
@@ -5431,16 +5520,28 @@ api:
         - GetUsageFargate
       unstable: []
       order: 11
-  - name: Get hourly usage for Compliance Monitoring
-    url: '#get-hourly-usage-for-compliance-monitoring'
-    identifier: get-hourly-usage-for-compliance-monitoring
+  - name: Get hourly usage for Cloud Workload Security
+    url: '#get-hourly-usage-for-cloud-workload-security'
+    identifier: get-hourly-usage-for-cloud-workload-security
     parent: usage-metering
     generated: true
     params:
       versions:
         - v1
       operationids:
-        - GetUsageComplianceMonitoring
+        - GetUsageCWS
+      unstable: []
+      order: 31
+  - name: Get hourly usage for CSPM
+    url: '#get-hourly-usage-for-cspm'
+    identifier: get-hourly-usage-for-cspm
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageCloudSecurityPostureManagement
       unstable: []
       order: 30
   - name: Get billable usage across your account
@@ -5467,6 +5568,18 @@ api:
         - GetUsageLambda
       unstable: []
       order: 12
+  - name: Get hourly usage for audit logs
+    url: '#get-hourly-usage-for-audit-logs'
+    identifier: get-hourly-usage-for-audit-logs
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageAuditLogs
+      unstable: []
+      order: 31
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution

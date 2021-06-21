@@ -18,6 +18,7 @@ further_reading:
     text: Surveillance Node.js avec l'APM et le tracing distribué de Datadog
 git_integration_title: node
 has_logo: true
+integration_id: node
 integration_title: NodeJS
 is_public: true
 kind: integration

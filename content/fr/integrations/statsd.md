@@ -11,6 +11,7 @@ assets:
 categories:
   - monitoring
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -127,13 +128,11 @@ Le check StatsD n'inclut aucun événement.
 
 ### Checks de service
 
-**statsd.is_up** :
+**statsd.is_up** :<br>
+Renvoie `CRITICAL` si le serveur StatsD ne répond à la requête de statut de santé de l'Agent. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie `CRITICAL` si le serveur StatsD ne répond pas à la requête de statut de santé de l'Agent. Si ce n'est pas le cas, renvoie `OK`.
-
-**statsd.can_connect** :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à recueillir des métriques à propos de StatsD. Si ce n'est pas le cas, renvoie OK.
+**statsd.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir de métriques à propos de StatsD. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
