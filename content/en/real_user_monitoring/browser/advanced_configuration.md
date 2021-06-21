@@ -40,6 +40,8 @@ Starting with [version 2.13.0][3], `beforeSend` takes two arguments: the `event`
 | Error            | [Error][10]                     |
 | Long Task        | [PerformanceLongTaskTiming][11] |
 
+Learn more in the [Enrich and control RUM data guide][12].
+
 ### Enrich RUM events
 
 Along with attributes added with the [global context API](#global-context), you can add more context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
@@ -54,7 +56,7 @@ datadogRum.init({
     ...,
     beforeSend: (event, context) => {
         // collect a RUM resource's response headers
-        if (event.resource && event.resource.type === 'fetch') {
+        if (event.type = 'resource' && event.resource.type === 'fetch') {
             event.context = {...event.context, responseHeaders: context.response.headers}
         }
     },
@@ -70,7 +72,7 @@ DD_RUM.onReady(function() {
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
-            if (event.resource && event.resource.type === 'fetch') {
+            if (event.type = 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -87,7 +89,7 @@ window.DD_RUM &&
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
-            if (event.resource && event.resource.type === 'fetch') {
+            if (event.type = 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -522,3 +524,4 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
+[12]: /real_user_monitoring/guide/enrich-and-control-rum-data
