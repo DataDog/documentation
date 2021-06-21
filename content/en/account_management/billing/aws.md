@@ -19,6 +19,8 @@ Use the [Datadog-AWS integration tile][1] to control your metric collection. Go 
 
 **Note**: Datadog does not charge for ELB metrics, as they can’t be filtered out.
 
+**Note**: Host resource exclusion settings apply to both EC2 and its attached EBS volumes. 
+
 When adding limits to existing AWS accounts within the integration tile, the previously discovered instances could stay in the [Infrastructure List][3] up to 2 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
 Hosts with a running Agent still display and are included in billing. Using the limit option is only applicable to EC2 instances without a running Agent.
