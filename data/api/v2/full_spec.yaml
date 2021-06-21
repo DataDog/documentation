@@ -4188,12 +4188,6 @@ components:
       required:
       - data
       type: object
-    SecurityFilterDeleteResponse:
-      description: Response object which only includes the metadata.
-      properties:
-        meta:
-          $ref: '#/components/schemas/SecurityFilterMeta'
-      type: object
     SecurityFilterExclusionFilter:
       description: Exclusion filter for the security filter.
       example:
@@ -8272,14 +8266,8 @@ paths:
       parameters:
       - $ref: '#/components/parameters/SecurityFilterID'
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SecurityFilterDeleteResponse'
-          description: OK
         '204':
-          description: No Content
+          description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
