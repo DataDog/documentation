@@ -88,7 +88,7 @@ Helm または Datadog 演算子を使用せずに Admission Controller を有�
 `agent-services.yaml` の下に以下を追加します。
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
----
+
 apiVersion: v1
 kind: Service
 metadata:
