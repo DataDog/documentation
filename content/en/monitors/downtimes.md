@@ -64,7 +64,7 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 
 **Example 2: Mute notifications for a specific environment of a monitor grouped by `env` and `service`**
 
-1. To schedule downtime on one of the groups (in this case, `env:dev`), that group is entered in the `Group scope` field.
+1. To schedule downtime on one of the groups (in this case, `env:dev`), enter that group in the `Group scope` field.
 2. **Preview affected monitors** indicates that the monitor chosen is still in scope, so alerts for the group `env:dev` are muted during the scheduled downtime.
 
 {{< img src="monitors/downtimes/downtime_examplebyname2_downtime.jpg" alt="downtime by monitor name with dev environment in scope" style="width:80%;">}}
