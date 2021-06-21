@@ -62,6 +62,18 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 
 4. To schedule a downtime on more than one group (e.g. `service:synthesizer`, `service:consul`, etc.), you can create an additional downtime per group. 
 
+**Example 2: Mute notifications for a specific environment of a monitor grouped by `env` and `service`**
+
+1. To schedule downtime on one of the groups (in this case, `env:dev`), enter that group in the `Group scope` field.
+2. **Preview affected monitors** indicates that the monitor chosen is still in scope, so alerts for the group `env:dev` are muted during the scheduled downtime.
+
+{{< img src="monitors/downtimes/downtime_examplebyname2_downtime.jpg" alt="downtime by monitor name with dev environment in scope" style="width:80%;">}}
+
+3. Scheduled downtime begins, and alerts are muted for the group `env:dev` **and** any service related to the `dev` environment.
+
+{{< img src="monitors/downtimes/downtime_examplebyname2_monitor.jpg" alt="group status shows dev environment and related services muted during downtime" style="width:80%;">}}
+
+4. To schedule a downtime on more than one “group by” (e.g. `env:dev` AND `service:web-store`), add the additional scope to the downtime.
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
 
