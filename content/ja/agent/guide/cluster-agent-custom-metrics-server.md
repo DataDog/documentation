@@ -71,7 +71,7 @@ default       datadog-cluster-agent           ClusterIP   192.168.254.197   <non
 
 ```
 
-### External Metrics Provider を登録する
+### 外部メトリクスプロバイダー
 
 Datadog Cluster Agent が起動して実行されたら、これをサービスに External Metrics Provider として登録し、ポート `443` を公開します。そのためには、次の RBAC ルールを適用します。
 
