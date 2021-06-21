@@ -13,7 +13,7 @@ further_reading:
       text: 'Collect your Prometheus metrics'
     - link: '/agent/kubernetes/integrations'
       tag: 'Documentation'
-      text: 'Collect automatically your applications metrics and logs'
+      text: 'Collect automatically your application metrics and logs'
     - link: '/agent/guide/autodiscovery-management'
       tag: 'Documentation'
       text: 'Limit data collection to a subset of containers only'
