@@ -133,7 +133,7 @@ The following table presents the list of collected resources and the minimal Age
 The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
 
 {{< tabs >}}
-{{% tab "Helm" %}
+{{% tab "Helm" %}}
 
 If you are using the official [Datadog Helm Chart][1]:
 
@@ -147,7 +147,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
-{{% tab "DaemonSet" %}
+{{% tab "DaemonSet" %}}
 
 The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][1] for configuration.
 
