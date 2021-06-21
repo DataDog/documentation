@@ -47,56 +47,57 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-1. [Cluster Agent][1] version >= 1.11.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
+[Cluster Agent][1] version >= 1.11.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
 
-    - Set the Cluster Agent container with the following environment variable:
+1. Set the Cluster Agent container with the following environment variable:
 
-        ```yaml
-          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-            value: "true"
-        ```
+    ```yaml
+      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+        value: "true"
+    ```
 
-    - Set the Cluster Agent ClusterRole with the following RBAC permissions.
+2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
+
     Note in particular that for the `apps` apiGroups, Live Containers need
     permissions to collect common kubernetes resources (`pods`, `services`,
     `nodes`, etc.), which should be already in the RBAC if you followed [Cluster
     Agent Setup documentation][2]. But if they are missing, ensure they are
     added (after `deployments`, `replicasets`):
 
-        ```yaml
-          ClusterRole:
-          - apiGroups:  # To create the datadog-cluster-id ConfigMap
-            - ""
-            resources:
-            - configmaps
-            verbs:
-            - create
-            - get
-            - update
-          ...
-          - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-            - ""
-            resources:
-            - namespaces
-            verbs:
-            - get
-          ...
-          - apiGroups:  # To collect new resource types
-            - "apps"
-            resources:
-            - deployments
-            - replicasets
-            verbs:
-            - list
-            - get
-            - watch
-          ...
-        ```
+    ```yaml
+      ClusterRole:
+      - apiGroups:  # To create the datadog-cluster-id ConfigMap
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - create
+        - get
+        - update
+      ...
+      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+        - ""
+        resources:
+        - namespaces
+        verbs:
+        - get
+      ...
+      - apiGroups:  # To collect new resource types
+        - "apps"
+        resources:
+        - deployments
+        - replicasets
+        verbs:
+        - list
+        - get
+        - watch
+      ...
+    ```
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap isn't created by the Cluster Agent, the Agent pod will not be able to collect resources. In such a case, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap, and then restart the Agent pod.
 
-2. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
+3. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
     ```yaml
     - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
@@ -151,14 +152,14 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 
 The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][1] for configuration.
 
-    - Set the Cluster Agent container with the following environment variable:
+1. Set the Cluster Agent container with the following environment variable:
 
-        ```yaml
-          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-            value: "true"
-        ```
+    ```yaml
+      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+        value: "true"
+    ```
 
-    - Set the Cluster Agent ClusterRole with the following RBAC permissions.
+2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
 
     Note particularly that for the `apps` apiGroups, Live Containers need permissions
     to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.),
@@ -166,39 +167,40 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
     documentation][1]. But if they are missing, ensure they are added (after
     `deployments`, `replicasets`):
 
-        ```yaml
-          ClusterRole:
-          - apiGroups:  # To create the datadog-cluster-id ConfigMap
-            - ""
-            resources:
-            - configmaps
-            verbs:
-            - create
-            - get
-            - update
-          ...
-          - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-            - ""
-            resources:
-            - namespaces
-            verbs:
-            - get
-          ...
-          - apiGroups:  # To collect new resource types
-            - "apps"
-            resources:
-            - deployments
-            - replicasets
-            verbs:
-            - list
-            - get
-            - watch
-        ```
+    ```yaml
+      ClusterRole:
+      - apiGroups:  # To create the datadog-cluster-id ConfigMap
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - create
+        - get
+        - update
+      ...
+      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+        - ""
+        resources:
+        - namespaces
+        verbs:
+        - get
+      ...
+      - apiGroups:  # To collect new resource types
+        - "apps"
+        resources:
+        - deployments
+        - replicasets
+        verbs:
+        - list
+        - get
+        - watch
+    ```
+
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.
 
-2. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
+3. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
     ```yaml
     - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
