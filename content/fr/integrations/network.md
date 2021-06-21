@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/network/README.md'
 display_name: Network
+draft: false
 git_integration_title: network
 guid: 43631795-8a1f-404d-83ae-397639a84050
 integration_id: system
@@ -45,7 +47,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Le check Network est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Network est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 Pour recueillir des métriques avec cette intégration, assurez-vous que le module conntrack est activé sur votre host. Si ce n'est pas le cas, exécutez :
 
@@ -54,6 +56,8 @@ sudo modprobe nf_conntrack
 sudo modprobe nf_conntrack_ipv4
 sudo modprobe nf_conntrack_ipv6
 ```
+
+*Remarque* : vous devrez peut-être installer le binaire conntrack sur l'image de l'Agent.
 
 ### Configuration
 
@@ -69,6 +73,15 @@ sudo modprobe nf_conntrack_ipv6
      ## the command `netstat` from the system package `net-tools` to be installed
      #
      - collect_connection_state: false
+
+     ## @param collect_connection_queues - boolean - optional
+     ## Set to true to enable connection queues collection
+     ## Note: connection queues collections require both
+     ## `collect_connection_state` and `collect_connection_queues` to be true
+     ## because it also requires the command `ss` from system package `iproute2` or
+     ## the command `netstat` from the system package `net-tools` to be installed
+     #
+     - collect_connection_queues: false
    ```
 
 2. [Redémarrez l'Agent][5] pour prendre en compte le changement de configuration.
