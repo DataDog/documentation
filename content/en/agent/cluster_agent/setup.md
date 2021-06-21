@@ -164,7 +164,7 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
 [2]: /agent/kubernetes/?tab=daemonset
 [3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
-[4]: /agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agen
+[4]: /agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agent
 [5]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
 [6]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/secret-api-key.yaml
 [7]: https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
