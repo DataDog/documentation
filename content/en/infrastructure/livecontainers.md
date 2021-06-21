@@ -94,7 +94,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
         ```
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
-    If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not be able to collect resources. In such a case update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and then restart the Agent pod.
+    If the `cluster-id` ConfigMap isn't created by the Cluster Agent, the Agent pod will not be able to collect resources. In such a case, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap, and then restart the Agent pod.
 
 2. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
@@ -117,7 +117,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 
 ### Resource collection compatibility matrix
 
-The following table presents the list of collected resources and the minimal Agent, Cluster Agent and helm chart versions for each.
+The following table presents the list of collected resources and the minimal Agent, Cluster Agent and Helm chart versions for each.
 
 | Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
 |---|---|---|---|
@@ -138,7 +138,7 @@ The Kubernetes resources view for Live Containers used to require [Agent version
 If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version above 2.4.5 and before 2.10.0. Starting from chart version 2.10.0 onwards, refer to the [latest configuration instructions][18] instead.
-  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][2] file.
 - Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
 - Deploy a new release.
 
@@ -396,7 +396,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle between the **Pods**, **Deployments**, **ReplicaSets**, **Services**, **Nodes** and **Clusters** views in the **View** dropdown menu in the top left corner of the page. Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Pods**, **Deployments**, **ReplicaSets**, **Services**, **Nodes**, and **Clusters** views in the **View** dropdown menu in the top left corner of the page. Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
 #### Cluster map
 
