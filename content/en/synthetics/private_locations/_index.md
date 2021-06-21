@@ -576,12 +576,14 @@ Once you know about the [**total** requirements for your private location](#priv
   * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
   * Assign `total private location resource requirements / number of workers` resources to each private location container.
 
+
 **Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, your private location requires ~ 1.5 core CPU, ~ 10GiB memory, and ~ 100MiB disk. If you want to distribute these resources across two workers, the [`concurrency` parameter][15] should be set to `5`, and each worker should be allocated ~ 750mCores CPU, ~ 5GiB memory, and ~ 50MiB disk.
 
 #### Queueing mechanism
 
 When there are several workers associated with a private location, each worker requests a number of tests to run that depends on its [`concurrency` parameter][15] and on the number of additional test runs that can be assigned to it.   
-** Example:** Ten tests are scheduled to run simultaneously on a private location that has two workers running. If worker 1 is running two tests, it can request three additional tests to run. If worker 2 is not running any tests, it can request the five following tests. The remaining two tests can be requested by which ever worker has finished running its test first (which ever worker has available slots).
+
+**Example:** Ten tests are scheduled to run simultaneously on a private location that has two workers running. If worker 1 is running two tests, it can request three additional tests to run. If worker 2 is not running any tests, it can request the five following tests. The remaining two tests can be requested by which ever worker has finished running its test first (which ever worker has available slots).
 
 ## Scale your private location
 
@@ -590,6 +592,10 @@ Because you can run several containers for one single private location with a si
 You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
 Read more about [dimensioning private locations](#dimension-your-private-location).
+
+## Monitor your private locations
+
+Although it's important to initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to monitor your containers. The recommended way to do so is by installing the [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] provides you with metrics about the health of your containers (memory usage and limits, CPU, disk, etc.), which you can then use to graph and be alerted on low resources.
 
 ## Further Reading
 
@@ -610,3 +616,4 @@ Read more about [dimensioning private locations](#dimension-your-private-locatio
 [13]: /synthetics/multistep?tab=requestoptions
 [14]: /synthetics/browser_tests/?tab=requestoptions
 [15]: /synthetics/private_locations/configuration#advanced-configuration
+[16]: /agent/

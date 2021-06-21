@@ -7,8 +7,10 @@ ddtype: crawler
 dependencies: []
 description: L'intégration Segment permet de recueillir des métriques de diffusion d'événements pour les destinations de votre espace de travail.
 doc_link: 'https://docs.datadoghq.com/integrations/segment/'
+draft: false
 git_integration_title: segment
 has_logo: true
+integration_id: ''
 integration_title: Segment
 is_public: true
 kind: integration
@@ -25,11 +27,14 @@ Associez Segment pour :
 - Visualiser des métriques de diffusion d'événements pour les destinations en mode cloud.
 - Analyser des données (comme la répartition des métriques par espace de travail ou par destination) à l'aide du système de tags de Datadog.
 
-## Implémentation
+**Remarque** : ces métriques ont été conçues pour diffuser des événements à des destinations comme Snowflake ou Amplitude. Elles ne servent pas à diffuser des événements depuis des applications instrumentées vers Segment.
+
+## Configuration
 
 ### Installation
 
 Accédez au [carré d'intégration][1] et accordez à Datadog un accès `workspace:read` à un espace de travail en cliquant sur le lien `Add WorkSpace` pour lancer un processus d'authentification via Oauth2.
+L'utilisateur Segment qui accorde à Datadog un accès à cet espace de travail doit avoir le rôle `workspace owner`.
 
 ## Données collectées
 

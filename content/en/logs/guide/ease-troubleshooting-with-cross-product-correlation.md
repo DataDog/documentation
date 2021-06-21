@@ -54,12 +54,11 @@ Proxy logs provide more information than application logs as they cover more ent
 
 The application tracer generates trace IDs by default. This can be changed by injecting `x-datadog-trace-id` into HTTP Request headers.
 
-{{< tabs >}}
-{{% tab "NGINX" %}}
+#### NGINX
 
 ##### Setup opentracing
 
-Follow [NGINX tracing integration][1].
+Follow [NGINX tracing integration][13].
 
 ##### Inject trace ID in logs
 
@@ -79,7 +78,7 @@ http {
 
 1. Clone the NGINX pipeline.
 
-2. Customize the first [grok parser][2]:
+2. Customize the first [grok parser][14]:
    - In **Parsing rules**, replace the first parsing rule with:
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
@@ -89,13 +88,7 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. Add a [trace ID remapper][3] on `dd.trace_id` attribute.
-
-[1]:/tracing/setup_overview/proxy_setup/?tab=nginx
-[2]:/logs/processing/processors/?tab=ui#grok-parser
-[3]:/logs/processing/processors/?tab=ui#trace-remapper
-{{% /tab %}}
-{{< /tabs >}}
+3. Add a [trace ID remapper][15] on `dd.trace_id` attribute.
 
 ### Correlate database logs
 
@@ -107,14 +100,13 @@ For example, production slow queries are hard to reproduce and analyze without i
 
 #### How?
 
-{{< tabs >}}
-{{% tab "PostgreSQL" %}}
+#### PostgreSQL
 
 ##### Enrich your database logs
 
-PostgreSQL default logs are not detailed. Follow [this integration guide][1] to enrich them.
+PostgreSQL default logs are not detailed. Follow [this integration guide][5] to enrich them.
 
-The slow query guideline also requires a rich plan explanation on slow queries. For execution plan results, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
+Slow query best practices also suggests logging execution plans of slow statements automatically, so you don't have to run `EXPLAIN` by hand. To run `EXPLAIN` automatically, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
 ```conf
 session_preload_libraries = 'auto_explain'
@@ -123,11 +115,11 @@ auto_explain.log_min_duration = '500ms'
 
 Queries longer than 500ms log their execution plan.
 
-**Note**: `auto_explain.log_analyze = 'true'` provides even more information, but greatly impacts performance. For more information, see the [official documentation][2].
+**Note**: `auto_explain.log_analyze = 'true'` provides even more information, but greatly impacts performance. For more information, see the [official documentation][6].
 
 ##### Inject trace_id into your database logs
 
-Inject `trace_id` into most of your database logs with [SQL comments][3]. Here is an example with Flask and SQLAlchemy:
+Inject `trace_id` into most of your database logs with [SQL comments][7]. Here is an example with Flask and SQLAlchemy:
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
@@ -146,24 +138,16 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
 
 Clone and customize the PostgreSQL pipeline:
 
-1. Add a new [grok parser][4]:
+1. Add a new [grok parser][8]:
    ```text
    extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
    ```
 
-2. Add a [trace ID remapper][5] on `dd.trace_id` attribute.
+2. Add a [trace ID remapper][9] on `dd.trace_id` attribute.
 
 Here is an example of a slow query execution plan from a slow trace:
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:80%;" >}}
-
-[1]: /integrations/postgres/?tab=host#log-collection
-[2]: https://www.postgresql.org/docs/13/auto-explain.html
-[3]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
-[4]: /logs/processing/processors/?tab=ui#grok-parser
-[5]: /logs/processing/processors/?tab=ui#trace-remapper
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Correlate frontend products
 
@@ -171,7 +155,7 @@ Here is an example of a slow query execution plan from a slow trace:
 
 #### Why?
 
-[Browser logs][5] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
+[Browser logs][10] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
 
@@ -179,7 +163,7 @@ Correlating your browser logs with RUM also eases [aggressive sampling strategy 
 
 #### How?
 
-Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][6]. [Matching configuration between RUM and logs SDK][7] is required.
+Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][11]. [Matching configuration between RUM and logs SDK][12] is required.
 
 ## Correlate user experience with server behavior
 
@@ -203,7 +187,7 @@ Use the RUM correlation to:
 
 #### How?
 
-Follow the [connect RUM and Traces][8] documentation. RUM view information is available in the [Trace view][9] and trace information is available in the [Session view][10].
+Follow the [connect RUM and Traces][13] documentation. RUM view information is available in the [Trace view][14] and trace information is available in the [Session view][15].
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:80%;" >}}
 
@@ -219,21 +203,29 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:80%;" >}}
 
-Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][11] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
+Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][16] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
 
 #### How?
 
-For this feature, follow the [enable APM integration on Synthetic settings][12] documentation.
+For this feature, follow the [enable APM integration on Synthetic settings][17] documentation.
 
+[13]:/tracing/setup_overview/proxy_setup/?tab=nginx
+[14]:/logs/processing/processors/?tab=ui#grok-parser
+[15]:/logs/processing/processors/?tab=ui#trace-remapper
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
 [3]: /tracing/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /logs/log_collection/javascript/
-[6]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
-[7]: /real_user_monitoring/browser/#initialization-parameters
-[8]: /real_user_monitoring/connect_rum_and_traces
-[9]: https://app.datadoghq.com/apm/traces
-[10]: https://app.datadoghq.com/rum/explorer
-[11]: /synthetics/browser_tests/
-[12]: /synthetics/apm
+[5]: /integrations/postgres/?tab=host#log-collection
+[6]: https://www.postgresql.org/docs/13/auto-explain.html
+[7]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
+[8]: /logs/processing/processors/?tab=ui#grok-parser
+[9]: /logs/processing/processors/?tab=ui#trace-remapper
+[10]: /logs/log_collection/javascript/
+[11]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
+[12]: /real_user_monitoring/browser/#initialization-parameters
+[13]: /real_user_monitoring/connect_rum_and_traces
+[14]: https://app.datadoghq.com/apm/traces
+[15]: https://app.datadoghq.com/rum/explorer
+[16]: /synthetics/browser_tests/
+[17]: /synthetics/apm

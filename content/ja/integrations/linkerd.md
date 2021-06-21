@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
   logs: {}
@@ -128,8 +130,8 @@ curl <linkerd_prometheus_endpoint>
 
 ### サービスのチェック
 
-`linkerd.prometheus.health`:
-Agent が Prometheus エンドポイントへの接続に失敗した場合は、CRITICAL を返します。それ以外の場合は、UP を返します。
+**linkerd.prometheus.health**:<br>
+Agent が Prometheus エンドポイントへの接続に失敗した場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

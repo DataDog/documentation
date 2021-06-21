@@ -41,17 +41,18 @@ Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to star
 
 ## Installation
 
+**Note**: We have dedicated documentation and examples for [all major Kubernetes distributions][15] (GKE, EKS, AKS, OpenShift, Rancher, etc.)
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
 To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
 
 1. [Install Helm][1].
-2. Download the [Datadog `values.yaml` configuration file][2].
-3. If this is a fresh install, add the Helm Datadog repo and the Helm stable repo (for Kube State Metrics chart):
+2.  Using the [Datadog `values.yaml` configuration file][2] as a reference, create your `values.yaml`. Datadog recommends that your `values.yaml` only contain values that need to be overridden, as it allows a smooth experience when upgrading chart versions.
+3. If this is a fresh install, add the Helm Datadog repo:
     ```bash
     helm repo add datadog https://helm.datadoghq.com
-    helm repo add stable https://charts.helm.sh/stable
     helm repo update
     ```
 4. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
@@ -288,7 +289,7 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
-   kubectl apply -f agent_spec=/path/to/your/datadog-agent.yaml
+   kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 
 ## Cleanup
@@ -493,3 +494,4 @@ See the [Agent Commands guides][14] to discover all the Docker Agent commands.
 [12]: /security/agent/#secrets-management
 [13]: /agent/guide/autodiscovery-management/
 [14]: /agent/guide/agent-commands/
+[15]: /agent/kubernetes/distributions

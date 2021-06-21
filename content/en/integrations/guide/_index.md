@@ -11,4 +11,5 @@ private: true
     {{< nextlink href="integrations/guide/prometheus-metrics" tag="Prometheus" >}}Mapping Prometheus metrics to Datadog metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag="Prometheus" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="metric" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Request Datadog Integrations{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -46,11 +46,11 @@ Facet panels mirror the tags in your search bar query. Switch between the facet 
 
 #### Custom facets
 
-Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu:
+Aggregate and filter your traffic data by any tags in Datadog network page. An include list of tags is provided by default, which you can find in the search bar dropdown menu:
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
 
-Whitelisted tags include `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
+Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
 1. Select the `+` button on the top right of the facet panels.
 2. Enter the relevant tag you want to create a custom facet upon.
@@ -117,7 +117,7 @@ Filtering by specific AWS cloud services can help pinpoint latency, assess datab
 - **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
 - **To view integration metrics for a service**: In the Network Page, click a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
 
-NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and others listed in the [supported services][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and other [AWS services][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
 
 ### DNS resolution
 
@@ -209,7 +209,7 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/search_syntax/
-[2]: https://docs.datadoghq.com/network_monitoring/performance/network_map/
-[3]: https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go#L177
+[1]: /logs/search_syntax/
+[2]: /network_monitoring/performance/network_map/
+[3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /logs/explorer/saved_views/

@@ -13,7 +13,7 @@ Datadog Cloud Workload Security (CWS) detects threats to your production workloa
 
 Cloud Workload Security uses the Datadog Agent, so if you’re already using Datadog to monitor your environment, there’s no need to provision additional resources or introduce new agents. If you don't already have the Datadog Agent set up, [start with setting up the Agent][1]. As a part of the Datadog platform, you can easily combine real-time threat detection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
-## Get Started
+## Get started
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cloud_workload_security/getting_started">}}Complete setup and configuration{{< /nextlink >}}

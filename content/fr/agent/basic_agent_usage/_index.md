@@ -50,11 +50,11 @@ Par défaut, l'Agent ouvre 3 [ports][3] sur Linux et 4 sur Windows et OSX :
 | 5002 | Dessert le serveur graphique sur Windows et OSX.                                                   |
 | 8125 | Utilisé pour le serveur DogStatsD afin de recevoir des métriques externes.                                  |
 
-### Le Collector
+### Collector
 
 Le Collector récupère toutes les métriques standard toutes les 15 secondes. L'Agent v6 intègre un interpréteur Python 2.7 pour exécuter les intégrations et les [checks custom][4].
 
-### Le Forwarder
+### Forwarder
 
 Le Forwarder de l'Agent envoie les métriques à Datadog via HTTPS. Une mise en mémoire tampon est effectuée afin d'assurer la bonne transmission des métriques en cas de problème de communication. Les métriques sont mises en mémoire tampon jusqu'à ce que la taille du tampon ou le nombre de requêtes en attente d'envoi atteigne un certain seuil. Les métriques les plus anciennes sont alors supprimées de façon à limiter l'empreinte mémoire du Forwarder. Les logs sont envoyés à Datadog via TCP avec chiffrement SSL.
 
@@ -127,29 +127,32 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 
 3. Pour des raisons de sécurité, l'interface graphique est **uniquement** accessible à partir de l'interface réseau locale (`localhost`/`127.0.0.1`). Vous devez donc utiliser le même host que celui sur lequel l'Agent est exécuté. En d'autres termes, vous ne pouvez pas exécuter l'Agent sur une machine virtuelle ou un conteneur et y accéder à partir de la machine du host.
 
-## Versions des systèmes d'exploitation prises en charge
+## Plateformes prises en charge
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Système d'exploitation                                              | Versions prises en charge                                |
-|-------------------------------------------------|---------------------------------------------------|
-| [Amazon][1]                                     | Amazon Linux 2                                    |
-| [Debian x86_64][2] avec systemd                 | Debian 7 (wheezy) et versions ultérieures                                |
-| [Debian x86_64][2] avec SysVinit                | Debian 7 (wheezy) et versions ultérieures avec l'Agent 6.6.0+                |
-| [Ubuntu x86_64][3]                              | Ubuntu 14.04 et versions ultérieures                                     |
-| [RedHat/CentOS x86_64][4]                       | RedHat/CentOS 6 et versions ultérieures                                  |
-| [Docker][5]                                     | 1.12 et versions ultérieures                                     |
-| [Kubernetes][6]                                 | 1.3 et versions ultérieures                                      |
-| [SUSE Enterprise Linux x86_64][7] avec systemd  | SUSE 11 SP4 et versions ultérieures                                      |
-| [SUSE Enterprise Linux x86_64][7] avec SysVinit | SUSE 11 SP4 avec l'Agent 7.16.0+                      |
-| [Fedora x86_64][8]                              | Fedora 26 et versions ultérieures                                        |
-| [macOS][9]                                      | macOS 10.12 et versions ultérieures                                      |
-| [Windows Server 64 bits][10]                     | Windows Server 2008r2 et versions ultérieures, et Server Core (Nano non pris en charge) |
-| [Windows 64 bits][10]                            | Windows 7 et versions ultérieures                                        |
-| [Système d'exploitation Windows Azure Stack HCI][10]                | Toutes les versions                                      |
+| Plateforme                                 | Versions prises en charge                                        |
+|------------------------------------------|-----------------------------------------------------------|
+| [Amazon Linux][1]                        | Amazon Linux 2                                            |
+| [Debian][2] avec systemd                 | Debian 7 (wheezy) et versions ultérieures                                        |
+| [Debian][2] avec SysVinit                | Debian 7 (wheezy) et versions ultérieures avec l'Agent 6.6.0+                        |
+| [Ubuntu][3]                              | Ubuntu 14.04 et versions ultérieures                                             |
+| [RedHat/CentOS][4]                       | RedHat/CentOS 6 et versions ultérieures                                          |
+| [Docker][5]                              | 1.12 et versions ultérieures                                             |
+| [Kubernetes][6]                          | 1.3 et versions ultérieures                                              |
+| [SUSE Enterprise Linux][7] avec systemd  | SUSE 11 SP4 et versions ultérieures                                              |
+| [SUSE Enterprise Linux][7] avec SysVinit | SUSE 11 SP4 avec l'Agent 7.16.0+                              |
+| [Fedora][8]                              | Fedora 26 et versions ultérieures                                                |
+| [macOS][9]                               | macOS 10.12 et versions ultérieures                                              |
+| [Windows Server][10]                     | Windows Server 2008 R2+ et Server Core (Nano Server non pris en charge) |
+| [Windows][10]                            | Windows 7 et versions ultérieures                                                |
+| [Système d'exploitation Windows Azure Stack HCI][10]         | Toutes les versions                                              |
 
-**Remarque** : l'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
+**Remarques** : 
+- Les packages en version 64 bits x86 sont disponibles pour toutes les plateformes de cette liste. Les packages Arm v8 sont disponibles pour toutes les plateformes, à l'exception de Windows et macOS.
+- L'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
+- Les versions 6 et ultérieures de l'Agent Datadog prennent en charge Windows Server 2008 R2, avec les dernières mises à jour Windows installées. Toutefois, Windows Server 2008 R2 fait état d'un [problème connu relatif à la dérive de l'horloge et à Go][12].
 
 [1]: /fr/agent/basic_agent_usage/amazonlinux/
 [2]: /fr/agent/basic_agent_usage/deb/
@@ -162,28 +165,27 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 [9]: /fr/agent/basic_agent_usage/osx/
 [10]: /fr/agent/basic_agent_usage/windows/
 [11]: /fr/agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Système d'exploitation                                | Versions prises en charge     |
-|-----------------------------------|------------------------|
-| [Amazon][1]                       | Amazon Linux 2         |
-| [Debian x86_64][2]                | Debian 7 (wheezy) et versions ultérieures     |
-| [Ubuntu x86_64][3]                | Ubuntu 12.04 et versions ultérieures          |
-| [RedHat/CentOS x86_64][4]         | RedHat/CentOS 5 et versions ultérieures       |
-| [Docker][5]                       | 1.12 et versions ultérieures          |
-| [Kubernetes][6]                   | Version 1.3 à 1.8     |
-| [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 et versions ultérieures           |
-| [Fedora x86_64][8]                | Fedora 26 et versions ultérieures             |
-| [macOS][9]                        | macOS 10.10 et versions ultérieures           |
-| [Windows Server 64 bits][10]       | Windows Server 2008r2 et versions ultérieures |
-| [Windows 64 bits][10]              | Windows 7 et versions ultérieures             |
+| Plateforme                   | Versions prises en charge     |
+|----------------------------|------------------------|
+| [Amazon Linux][1]          | Amazon Linux 2         |
+| [Debian][2]                | Debian 7 (wheezy) et versions ultérieures     |
+| [Ubuntu][3]                | Ubuntu 12.04 et versions ultérieures          |
+| [RedHat/CentOS][4]         | RedHat/CentOS 5 et versions ultérieures       |
+| [Docker][5]                | 1.12 et versions ultérieures          |
+| [Kubernetes][6]            | Version 1.3 à 1.8     |
+| [SUSE Enterprise Linux][7] | SUSE 11 SP4 et versions ultérieures           |
+| [Fedora][8]                | Fedora 26 et versions ultérieures             |
+| [macOS][9]                 | macOS 10.10 et versions ultérieures           |
+| [Windows Server][10]       | Windows Server 2008r2 et versions ultérieures |
+| [Windows][10]              | Windows 7 et versions ultérieures             |
 
 **Remarques** :
 
 - L'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
-
-- Le système d'exploitation Windows Server 2008 R2 et ultérieur est pris en charge, mais il doit disposer des dernières mises à jour afin d'exécuter les versions 7 et ultérieures de l'Agent Datadog. Il présente également [un problème connu relatif au décalage de l'horloge et à Go][12].
 
 [1]: /fr/agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /fr/agent/basic_agent_usage/deb/
@@ -200,7 +202,7 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 {{% /tab %}}
 {{% tab "Agent Unix" %}}
 
-| Système d'exploitation       | Versions prises en charge                        |
+| Plateforme | Versions prises en charge                        |
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
@@ -245,7 +247,7 @@ L'interface de ligne de commande pour l'Agent v6 est basée sur un système de 
 <CHEMIN_BINAIRE_AGENT> check --help
 ```
 
-## Charge système de l'Agent
+## Charge de l'Agent
 
 Vous trouverez ci-dessous un exemple de la consommation en ressources de l'Agent Datadog. Les tests ont été effectués sur une instance `c5.xlarge` de machine EC2 AWS (4 VCPU/8 Go de RAM), où le `datadog-agent` de base était exécuté avec un check de processus pour surveiller l'Agent. La consommation en ressources de l'Agent peut augmenter avec davantage d'intégrations.
 L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le nombre de beans exposés par les JVM surveillées. L'activation des Agents de traces et de processus augmente également la consommation en ressources.
@@ -331,13 +333,15 @@ Remarque : si vous souhaitez mettre à jour manuellement une intégration spéc
 
 ### Site Datadog
 
-Pour envoyer les données de votre Agent vers le [site européen de Datadog][10], modifiez le [fichier de configuration principal de l'Agent][11] `datadog.yaml` et définissez le paramètre `site` sur :
+Modifiez le [fichier de configuration principal de l'Agent][10] `datadog.yaml` pour définir le paramètre `site` (valeur par défaut : `datadoghq.com`).
 
-`site: datadoghq.eu`
+```yaml
+site: {{< region-param key="dd_site" >}}
+```
 
 ### Emplacement des logs
 
-[Consultez la documentation relative aux fichiers de log de l'Agent][12].
+[Consultez la documentation relative aux fichiers de log de l'Agent][11].
 
 ## Pour aller plus loin
 
@@ -352,6 +356,5 @@ Pour envoyer les données de votre Agent vers le [site européen de Datadog][10]
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: /fr/agent/guide/integration-management/
 [9]: /fr/agent/guide/agent-configuration-files/
-[10]: https://app.datadoghq.eu
-[11]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /fr/agent/guide/agent-log-files/
+[10]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /fr/agent/guide/agent-log-files/

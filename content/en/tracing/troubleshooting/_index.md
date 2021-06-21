@@ -13,7 +13,7 @@ further_reading:
   text: "APM metrics sent by the Datadog Agent"
 ---
 
-If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance.  We also recommend regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
 
 ## Confirm APM setup and Agent status
 
@@ -21,7 +21,7 @@ During startup, Datadog tracing libraries emit logs that reflect the configurati
 
 ## Tracer debug logs
 
-To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because  Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
+To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
@@ -42,7 +42,7 @@ Datadog truncates the following strings if they exceed the indicated number of c
 
 Additionally, the number of [span tags][6] present on any span cannot exceed 250.
 
-For a given 10 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, please contact [support][1] to discuss your use case.
+For a given 10 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
 - 1000 unique environments and service combinations
 - 30 unique host groups per environment
@@ -56,7 +56,7 @@ Within Datadog Agent logs, if you see error messages about rate limits or max ev
 
 ## Modifying, discarding, or obfuscating spans
 
-There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security and Agent Customization][8] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see the [Security and Agent Customization][8] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1] and provide us with details of your desired outcome.
 
 ## Troubleshooting data requested by Datadog Support
 
@@ -78,7 +78,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
-    When adjusting the log level to `debug` or `trace` mode, please take into consideration that these will significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). We recommend these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
+    When adjusting the log level to `debug` or `trace` mode, take into consideration that these will significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). We recommend these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
 
     **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][7], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 

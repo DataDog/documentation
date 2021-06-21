@@ -19,7 +19,7 @@ further_reading:
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
 
-The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full front end and backend data through one lens.
+The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full frontend and backend data through one lens.
 
 Use frontend data from RUM, and backend, infrastructure, and log information from trace ID injection to quickly pinpoint issues anywhere in your stack and fully understand what your users are experiencing.
 

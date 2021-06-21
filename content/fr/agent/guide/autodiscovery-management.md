@@ -11,7 +11,7 @@ further_reading:
 ---
 Par défaut, l'Agent Datadog découvre automatiquement tous les conteneurs disponibles. Pour restreindre son périmètre de découverte et limiter la collecte de données uniquement à un sous-ensemble de conteneurs, utilisez une configuration dédiée pour inclure ou exclure des conteneurs.
 
-**Remarque** : ces paramètres n'ont aucun effet sur les métriques `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent toujours en compte l'ensemble des conteneurs.
+**Remarque**: ces paramètres n'ont aucun effet sur les métriques `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent en compte l'ensemble des conteneurs.
 
 Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre périmètre Autodiscovery avec les instructions de l'onglet [Agent](?tab=agent). Si vous exécutez l'Agent en tant que conteneur, configurez votre périmètre Autodiscovery avec les instructions de l'onglet [Agent conteneurisé](?tab=Agent-conteneurise).
 
@@ -20,6 +20,8 @@ Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre pér
 Excluez des conteneurs du périmètre Autodiscovery de l'Agent avec une règle d'exclusion basée sur leur paramètre `name`, `image` ou `kube_namespace`. Cela vous permet de ne recueillir **AUCUNE DONNÉE** de ces conteneurs. Si un conteneur correspond à l'expression de la règle d'exclusion, il n'est pas inclus, à moins qu'il ne corresponde d'abord à l'expression de la règle d'inclusion.
 
 **Remarque** : les règles d'exclusion prennent en charge les expressions régulières. Celles-ci sont définies sous forme de liste de chaînes séparées par des virgules.
+
+**Remarque** : pour exclure tous les conteneurs, vous pouvez utiliser `name:.*`, `image:.*` ou `kube_namespace:.*`. Notez qu'il n'est pas possible de configurer `.*` sans un préfixe `name:`, `image:` ou `kube_namespace:`.
 
 {{< tabs >}}
 {{% tab "Agent conteneurisé" %}}
@@ -148,7 +150,7 @@ Avec les **versions 7.20+ de l'Agent**, pour inclure un conteneur Docker donné
 DD_CONTAINER_INCLUDE = "image:<NOM_IMAGE>"
 ```
 
-Avec les **versions <= 7.19 de l'Agent**, pour supprimer un conteneur Docker donné avec l'**image** `<NOM_IMAGE>` d'Autodiscovery, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Avec les **versions <= 7.19+ de l'Agent**, pour inclure un conteneur Docker donné avec l'**image** `<NOM_IMAGE>` d'Autodiscovery, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```shell
 DD_AC_INCLUDE = "image:<NOM_IMAGE>"
@@ -169,7 +171,7 @@ DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
 
-Avec les **versions <= 7.19 de l'Agent**, pour supprimer un conteneur Docker donné avec le **nom** `<NOM_IMAGE>` d'Autodiscovery, ajoutez la variable d'environnement suivante à l'Agent Datadog :
+Avec les **versions <= 7.19+ de l'Agent**, pour inclure un conteneur Docker donné avec le **nom** `<NOM_IMAGE>` d'Autodiscovery, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
 ```shell
 DD_AC_INCLUDE = "name:<NOM>"

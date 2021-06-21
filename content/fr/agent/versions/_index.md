@@ -12,6 +12,16 @@ further_reading:
     tag: FAQ
     text: "Nouveautés de l'Agent\_v6"
 ---
+<div class="alert alert-info"><p>
+Il est recommandé d'installer chaque nouvelle version mineure et chaque patch de l'Agent Datadog, ou de le mettre à jour au moins tous les mois.</p>
+<p>
+Pour bénéficier des nouvelles fonctionnalités et des derniers correctifs, il est nécessaire d'installer la dernière version majeure de l'Agent Datadog, ainsi que les mises à niveau ultérieures. Nous publions régulièrement de nouvelles versions, ce qui fait qu'il peut être difficile de gérer les mises à jour à l'échelle de votre entreprise. Toutefois, cela ne signifie pas que vous devez attendre la sortie d'une nouvelle version majeure pour mettre à jour l'Agent. La fréquence de mises à jour adéquate pour votre organisation dépend de votre infrastructure et de vos pratiques en matière de gestion de configuration. Nous vous conseillons néanmoins de mettre à jour l'Agent tous les mois.</p>
+<p>
+Pour mettre à jour les composants principaux de l'Agent Datadog depuis et vers une version mineure sur un host donné, exécutez la <a href="https://app.datadoghq.com/account/settings#agent">commande d'installation correspondant à votre plate-forme</a>.</p>
+<p>
+Les numéros des nouvelles versions de l'Agent Datadog respectent les règles  <a href="https://semver.org/">SemVer</a>.</p>
+</div>
+
 ## Changements entre les différentes versions majeures de l'Agent
 
 {{< tabs >}}

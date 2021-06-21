@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If your Python Lambda functions are written in [Python 3.6 or less][2], you previously set up Datadog Serverless using the Datadog Forwarder or your Lambda functions are not deployed to the `us-east-1`, `eu-west-1` or `eu-south-1` regions, see the [installation instructions here][3].
+If your Python Lambda functions are written in [Python 3.6 or less][2], you previously set up Datadog Serverless using the Datadog Forwarder or your Lambda functions are deployed to AWS GovCloud, see the [installation instructions here][3].
 
 ## Configuration
 
@@ -114,7 +114,7 @@ More information and additional parameters can be found in the [macro documentat
 
 The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
-### Install the Datadog CDK Construct Library
+### Install the Datadog CDK constructs library
 
 Run the following command in your CDK project:
 

@@ -4,15 +4,15 @@ kind: documentation
 aliases:
     - /tracing/profiling/search_profiles
 further_reading:
-    - link: 'tracing/profiler/getting_started'
+    - link: 'tracing/profiler/enabling'
       tag: 'Documentation'
-      text: 'Enable continuous profiler for your application.'
-    - link: 'tracing/profiler/intro_to_profiling'
+      text: 'Enable continuous profiler for your application'
+    - link: 'getting_started/profiler'
       tag: 'Documentation'
-      text: 'Intro to profiling.'
+      text: 'Getting Started with Profiler'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
-      text: 'Introducing always-on production profiling in Datadog.'
+      text: 'Introducing always-on production profiling in Datadog'
 ---
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
@@ -133,21 +133,32 @@ Exceptions
 Once enabled, the following profile types are collected:
 
 
-CPU
-: Shows the time each function spent running on the CPU.
+CPU Time
+: Shows the time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep is not captured in this profile, see Mutex and Block profile.
 
-Allocation
-: Shows the amount of heap memory allocated by each function since the start of the application, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.
-
-Allocation Count
+Allocations
 : Shows the number of objects allocated in heap memory by each function since the start of the application, including allocations which were subsequently freed. This is useful for investigating garbage collection load.
 
-Heap
-: Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.
+Allocated Memory
+: Shows the amount of heap memory allocated by each function since the start of the application, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.
 
-Heap Count
+Heap Live Objects
 : Shows the number of objects allocated in heap memory by each function, and which objects remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.
 
+Heap Live Size
+: Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.
+
+Mutex
+: Shows the time functions have been waiting on mutexes since the start of the application. The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile.
+
+Block
+: Shows the time functions have been waiting on mutexes and channel operations since the start of the application. Sleep, GC, Network and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This will tell you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][1] research for more in-depth information.
+
+Goroutines
+: Shows a snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and shows the number of goroutines they utilize. Applications that are extremely latency sensitive and utilize a large number of goroutines (> 10.000) should be aware that enabling this profile requires O(N) stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][2] research for more in-depth information.
+
+[1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
+[2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 

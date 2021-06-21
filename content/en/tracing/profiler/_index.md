@@ -4,12 +4,12 @@ kind: Documentation
 aliases:
     - /tracing/profiling
 further_reading:
-    - link: 'tracing/profiler/getting_started'
+    - link: '/tracing/profiler/enabling'
       tag: 'Documentation'
       text: 'Enable continuous profiler for your application.'
-    - link: 'tracing/profiler/intro_to_profiling'
+    - link: 'getting_started/profiler'
       tag: 'Documentation'
-      text: 'Intro to profiling.'
+      text: 'Getting Started with Continuous Profiler'
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
@@ -32,11 +32,11 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 Continuous profiler is designed to run in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
-## Getting Started
+## Getting started
 
 Profiling your service to visualize all your stack traces in one place takes just minutes.
 
-### Instrument Your Application
+### Instrument your application
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
@@ -44,9 +44,9 @@ To get notified when a private beta is available for the **Node**, **PHP**, or *
 
 ## Guide to using the profiler
 
-The [Intro to Profiling][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## Explore Datadog Profiler
+## Explore Datadog profiler
 
 After you've configured your application to send profiles to Datadog, start getting insights into your code performance:
 
@@ -73,7 +73,7 @@ Application processes that have both [APM distributed tracing][4] and continuous
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /tracing/profiler/intro_to_profiling/
+[2]: /getting_started/profiler/
 [3]: /tracing/profiling/search_profiles
 [4]: /tracing/
 [5]: /tracing/profiler/connect_traces_and_profiles/
