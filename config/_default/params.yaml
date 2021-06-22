@@ -1,4 +1,5 @@
 environment: default
+integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
 imgix:
   header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
   header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"
@@ -55,6 +56,12 @@ code_languages:
     extension: php
     name: php
     syntax: php
+  'ts':
+    extension: ts
+    name: typescript
+    syntax: typescript
+    command: tsc
+    example_file: example.ts
 
 code_language_ids:
     java: Java
@@ -66,6 +73,7 @@ code_language_ids:
     ruby: Ruby
     ruby-beta: Ruby [beta]
     go: Go
+    typescript: Typescript
     ".NET": ".NET"
     dotnet: ".NET"
     dotnet-core: ".NET Core"

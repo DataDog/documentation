@@ -21,6 +21,7 @@ aliases:
     - /integrations/cloud_foundry/
 doc_link: /integrations/pivotal_platform/
 ddtype: check
+integration_id: "pivotal-platform"
 ---
 
 ## Overview

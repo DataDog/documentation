@@ -24,7 +24,7 @@ further_reading:
 
 セキュリティシグナルの検索結果が、セキュリティシグナルテーブルに表示されます。
 
-{{< img src="security_monitoring/explorer/ss_table.png" alt="セキュリティシグナルテーブル"  >}}
+{{< img src="security_platform/security_monitoring/explorer/ss_table.png" alt="セキュリティシグナルテーブル"  >}}
 
 テーブルのコンテンツを、使用可能なファセットのリストで絞り込むことができます。右上に表示される **Options** ボタンを使用して、セキュリティシグナルテーブルのコンテンツを要件や好みに応じて構成できます。
 
@@ -32,13 +32,13 @@ further_reading:
 
 セキュリティシグナルをクリックすると、セキュリティシグナルパネルが開いて詳細が表示されます。
 
-{{< img src="security_monitoring/explorer/signal_1.png" alt="セキュリティシグナル"  >}}
+{{< img src="security_platform/security_monitoring/explorer/signal_1.png" alt="セキュリティシグナル"  >}}
 
 問題を選別する際に最初に必要になる情報が、セキュリティシグナルパネルの最上部に表示されます。これらの情報から、シグナルの重要度や生成日時を判断したり、規則の設定にアクセスしたり、シグナルをチームメイトとすばやく共有したりできます。
 
 FIRST SEEN と LAST SEEN の日時は更新され、過去にないデータが新しく表示されているのか、それとも攻撃が続いているのかを確認できます。また、何を基準にグループ化しているかも、このセクションに表示されます。この例では、`usr.name` でグループ化するように規則が構成されています。その下には、規則に設定されたタグが表示されています。
 
-{{< img src="security_monitoring/explorer/signal_2.png" alt="セキュリティシグナル"  >}}
+{{< img src="security_platform/security_monitoring/explorer/signal_2.png" alt="セキュリティシグナル"  >}}
 
 アクティビティをよりよく理解するために、セキュリティシグナルパネルは、シグナルをトリガーするすべてのログのタグと属性を要約するため、ログエクスプローラーにピボットすることなくトラブルシューティングを行うことができます。たとえば、ユーザーアカウントにログインしようとしている IP のリスト、または認証サービスを実行している AWS アカウントとアベイラビリティーゾーンを一目で判断できます。
 
@@ -48,7 +48,7 @@ FIRST SEEN と LAST SEEN の日時は更新され、過去にないデータが�
 
 - `Event Attributes` は、セキュリティシグナルの優先順位付けとフィルタリングを行うときに役立ちます。たとえば、ユーザーまたはエンティティがその無害な動作の一部としてセキュリティルールをトリガーした、またはコンプライアンス制御がすべての環境に適用されるべきではないと判断する場合があります。Event Attributes タブの任意の属性をクリックしてドロップダウンメニューを生成し、**Never trigger signals for **`<value>`**** を選択して、セキュリティシグナルエクスプローラー内に表示されるものを微調整します。このメニューから、属性に関連するログをフィルタリングまたは表示することもできます。
 
-  {{< img src="security_monitoring/explorer/never_trigger_signal_option.png" alt="設定値の信号をトリガーしないオプション" >}}
+  {{< img src="security_platform/security_monitoring/explorer/never_trigger_signal_option.png" alt="設定値の信号をトリガーしないオプション" >}}
 
 - `Samples` には、シグナルがトリガーされた理由に関するコンテキストを提供するログサンプルのリストが含まれています。完全なログを表示するには、サンプルのいずれかをクリックしてください。
 
@@ -58,7 +58,7 @@ FIRST SEEN と LAST SEEN の日時は更新され、過去にないデータが�
 
 ページの左上隅にある _Signal Mode_ ボタンをクリックすると、セキュリティシグナルテーブルとセキュリティシグナル分析の間でモードが切り替わります。
 
-{{< img src="security_monitoring/explorer/visualize_analytics1.png" alt="分析を表示"  >}}
+{{< img src="security_platform/security_monitoring/explorer/visualize_analytics1.png" alt="分析を表示"  >}}
 
 セキュリティ規則エンジンによってセキュリティシグナルが生成されたら、セキュリティシグナルのクエリをグラフ化して、最大値、最小値、パーセンタイル、ユニーク数などを確認できます。
 

@@ -1,9 +1,14 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Scylla Overview: assets/dashboards/overview.json
-  logs: {}
-  monitors: {}
+  logs:
+    source: scylla
+  metrics_metadata: metadata.csv
+  monitors:
+    '[Scylla] Server is shutting down': assets/monitors/instance_down.json
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/scylla/README.md'
 display_name: Scylla
+draft: false
 git_integration_title: scylla
 guid: 875e4d62-831b-4929-bea1-57e5c7016d65
 integration_id: scylla
@@ -45,7 +51,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Le check Scylla est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Scylla est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -94,7 +100,8 @@ Consultez la [documentation de Datadog][6] pour découvrir comment configurer l'
 
 ### Checks de service
 
-`scylla.prometheus.health` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques. Si ce n'est pas le cas, renvoie `OK`.
+**scylla.prometheus.health** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 

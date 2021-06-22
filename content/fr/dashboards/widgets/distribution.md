@@ -12,22 +12,22 @@ further_reading:
     tag: Documentation
     text: Créer des dashboards avec JSON
 ---
-Le widget Distribution est une autre manière d'afficher les métriques agrégées en fonction d'un ou de plusieurs tags, tels que des *hosts*. Contrairement à la [carte thermique][1], l'axe des abscisses d'un graphique de distribution représente la quantité plutôt que le temps.
+Le widget Distribution affiche des données agrégées en fonction d'un ou de plusieurs tags, tels que des *hosts*. Contrairement à la [carte thermique][1], l'axe des abscisses d'un graphique de distribution représente une quantité plutôt qu'une durée.
 
-Cette visualisation affiche une seule requête de métrique. Les requêtes supplémentaires sont ignorées.
+Cette visualisation affiche une seule requête. Les requêtes supplémentaires sont ignorées.
 
 **Remarque** : la détection des singularités n'est pas possible avec cette visualisation.
 
-{{< img src="dashboards/widgets/distribution/distribution.png" alt="Distribution"  >}}
+{{< img src="dashboards/widgets/distribution/distribution.png" alt="Graphique de distribution">}}
 
 ## Configuration
 
-{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Distribution"  style="width:80%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Vue éditeur du graphique de distribution"  style="width:100%;">}}
 
 ### Configuration
 
-Configurez votre requête de métrique comme d'habitude. Notez que ce type de visualisation est uniquement utile lorsque les métriques sont agrégées en fonction de clés de tag, p. ex. pour chaque `host`.
-Utilisez les réglages `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos données en fonction des tags associés.
+Configurez votre requête de métrique comme d'habitude. Les visualisations de distribution prennent en charge les métriques, les live processes, la latence des requêtes APM, les événements de log et les événements RUM. Notez que ce type de visualisation sert uniquement lorsque les données sont agrégées en fonction de clés de tag, p. ex. pour chaque `host`.
+Utilisez les commandes `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos données en fonction des tags associés.
 
 ### Options
 
@@ -39,9 +39,21 @@ Utilisez les réglages `avg`/`max`/`min`/`sum by`/etc. pour visualiser vos donn�
 
 Choisissez si votre widget doit afficher un intervalle personnalisé ou l'intervalle global du screenboard (disponible sur les screenboards uniquement).
 
-##### Légende
+#### Marqueurs
 
-Utilisez *Show legend on graph* pour activer/désactiver l'affichage de la légende sur votre widget. Vous pouvez également sélectionner le nombre d'entrées à afficher si vous le souhaitez.
+Avec les distributions de requêtes de l'APM, vous pouvez ajouter des marqueurs de centile sur l'axe des abscisses.
+
+{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Préférences des commandes des marqueurs"  style="width:80%;">}}
+
+#### Commandes des axes des abscisses et des ordonnées
+
+Les commandes des axes sont disponibles dans l'interface ainsi que dans l'éditeur JSON. Elles vous permettent d'accomplir les actions suivantes :
+
+* Définir l'axe des abscisses et l'axe des ordonnées sur des intervalles spécifiques
+* Modifier automatiquement les limites de l'axe des abscisses en fonction d'un seuil basé sur un pourcentage ou sur une valeur absolue ; pour supprimer les singularités, ce seuil peut être appliqué aux deux extrémités du graphique (limite inférieure et limite supérieure), ou à une seule d'entre elles
+* Passer d'une échelle linéaire à une échelle logarithmique pour l'axe des ordonnées, et inversement
+
+{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Préférences des commandes des axes de distribution"  style="width:80%;">}}
 
 #### Titre
 
@@ -51,56 +63,26 @@ Affichez un titre personnalisé pour votre widget en cochant la case `Show a Tit
 
 Définissez sa taille et son alignement si vous le souhaitez.
 
+## Plein écran
+
+Outre les [options standard d'affichage en plein écran][2], vous pouvez utiliser les commandes de l'axe des abscisses pour zoomer sur les données d'un certain centile.
+
+{{< img src="dashboards/widgets/distribution/distribution_fullscreen.png" alt="Graphique de distribution en plein écran"  style="width:80%;">}}
+
+
 ## API
 
-Le [schéma JSON][2] utilisé pour le widget Distribution est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][3] pour en savoir plus.
 
-```text
-DISTIBUTION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["distribution"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][4] utilisé pour le widget Distribution est le suivant :
 
-| Paramètre     | Type             | Obligatoire | Description                                                                                                                                                  |
-|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | chaîne           | oui      | Type de widget. Utilisez `distribution` pour le widget Distribution.                                                                                              |
-| `requests`    | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][3] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
-| `title`       | chaîne           | non       | Titre de votre widget.                                                                                                                                        |
-| `show_legend` | booléen          | non       | Afficher la légende pour ce widget (screenboard uniquement)                                                                                                           |
-
-Propriétés supplémentaires autorisées dans l'objet `request` :
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {"palette": {"type": "string"}},
-    "additionalProperties": false
-  }
-}
-```
-
-| Paramètre       | Type   | Obligatoire | Description                           |
-|-----------------|--------|----------|---------------------------------------|
-| `style.palette` | chaîne | non       | Palette de couleurs à appliquer au widget. |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/dashboards/widgets/heat_map/
-[2]: /fr/dashboards/graphing_json/widget_json/
-[3]: /fr/dashboards/graphing_json/request_json/
+[2]: /fr/dashboards/widgets/#full-screen
+[3]: /fr/api/v1/dashboards/
+[4]: /fr/dashboards/graphing_json/widget_json/

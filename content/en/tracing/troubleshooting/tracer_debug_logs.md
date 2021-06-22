@@ -3,7 +3,7 @@ title: Tracer Debug Logs
 kind: Documentation
 ---
 
-### Enable Tracer debug mode
+## Enable debug mode
 
 Use Datadog debug settings to diagnose issues or audit trace data. We don't recommend enabling debug mode in production systems, because it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
 
@@ -20,8 +20,8 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
 ```
 
-[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 
+[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -41,7 +41,7 @@ Datadog.configure do |c|
 end
 ```
 
-**Application Logs**:
+**Application Logs**
 
 By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
 
@@ -60,8 +60,8 @@ Datadog::Tracer.log.info { "this is typically called by tracing code" }
 
 See [the API documentation][1] for more details.
 
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 
+[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -91,7 +91,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Application Logs**:
+**Application Logs**
 
 By default, logging from this library is disabled. In order to get debugging information and errors sent to logs, set the `debug` options to `true` in the [init()][1] method.
 
@@ -125,12 +125,12 @@ If neither of these log entries is present, then no request was sent to the Agen
 
 For more tracer settings, check out the [API documentation][5].
 
+
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 [2]: /agent/troubleshooting/
 [3]: /help/
 [4]: /agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -157,12 +157,12 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
 
 There are two types of logs that are created in these paths:
-1. **Logs from native code:** In 1.21.0 and higher, these logs are saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
+1. **Logs from native code:** In 1.26.0 and higher, these logs are saved as `dotnet-tracer-native-<processname>-<processid>.log`. From version 1.21.0 to 1.25.x, these logs were saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
 2. **Logs from managed code:** In 1.21.0 and higher, these logs are saved `dotnet-tracer-managed-<processname>-<date>.log`. In 1.20.x and older versions, this was stored as `dotnet-tracer-<processname>-<date>.log`.
 
 
-[1]: /tracing/setup/dotnet/#configuration
 
+[1]: /tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
@@ -175,8 +175,8 @@ If you are using an Apache server, use the `ErrorLog` directive.
 If you are using an NGINX server, use the `error_log` directive.
 If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
-[1]: https://www.php-fig.org/psr/psr-3
 
+[1]: https://www.php-fig.org/psr/psr-3
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -194,7 +194,7 @@ make install
 
 {{< /programming-lang-wrapper >}}
 
-### Review Tracer debug logs
+## Review debug logs
 
 When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
 
@@ -350,8 +350,6 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
-
-For performance reasons, the tracer writes each unique log message at most once in a 60 second period. For more visibility during debugging, disable rate limiting by setting the environment variable `DD_TRACE_LOGGING_RATE=0`.
 
 **Logs from native code:**
 

@@ -50,7 +50,7 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 ### Multi-factor authentication
 
-Browser tests can reproduce any actions a regular user can take inside their Chrome browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a Chrome browser, you can record it when setting up your browser test. Some MFA providers might however detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Browser tests can reproduce any actions a regular user can take inside their browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a browser, you can record it when setting up your browser test. Some MFA providers might however detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
 If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
@@ -65,7 +65,7 @@ The second way to ensure that your Datadog Browser tests can login into your app
 - Cookies
 - Basic, Digest, Bearer or NTLM credentials
 
-These are set at every test execution and consequently allow you to start the recording of your steps directly post login. 
+These are set at every test execution and on every step of your browser test, consequently allowing you to start the recording of your steps directly post login. 
 
 {{< img src="synthetics/guide/app_that_requires_login/browser_test_conf.png" alt="Login to your app with browser test configuration options">}}
 

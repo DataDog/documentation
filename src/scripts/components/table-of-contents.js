@@ -184,11 +184,15 @@ function onLoadTOCHandler() {
     if (isTOCDisabled() && tocContainer) {
         document.querySelector('.js-toc-title').classList.add('d-none');
         document.querySelector('.js-toc').classList.add('d-none');
-        tocMobileToggle.classList.add('d-none');
+        if(tocMobileToggle) {
+          tocMobileToggle.classList.add('d-none');
+        }
     } else if (window.innerWidth < 991 && tocContainer) {
         tocContainer.classList.remove('toc-container');
         tocContainer.classList.add('toc-container-mobile');
-        tocMobileToggle.classList.remove('d-none');
+        if(tocMobileToggle) {
+          tocMobileToggle.classList.remove('d-none');
+        }
     }
 }
 
@@ -197,12 +201,19 @@ window.addEventListener('resize', function() {
     tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
 
     if (isTOCDisabled() && tocContainer) {
-        document.querySelector('.js-toc-title').classList.add('d-none');
-        tocMobileToggle.classList.add('d-none');
+        const tocTitle = document.querySelector('.js-toc-title');
+        if(tocTitle) {
+          tocTitle.classList.add('d-none');
+        }
+        if(tocMobileToggle) {
+          tocMobileToggle.classList.add('d-none');
+        }
     } else if (window.innerWidth < 991 && tocContainer) {
         tocContainer.classList.remove('toc-container');
         tocContainer.classList.add('toc-container-mobile');
-        tocMobileToggle.classList.remove('d-none');
+        if(tocMobileToggle) {
+          tocMobileToggle.classList.remove('d-none');
+        }
     } else if (tocContainer) {
         closeMobileTOC();
         tocContainer.classList.add('toc-container');
@@ -213,10 +224,18 @@ window.addEventListener('resize', function() {
 export function closeMobileTOC() {
     if (!isTOCDisabled()) {
         tocContainer = document.querySelector('.js-toc-container');
-        tocContainer.classList.remove('mobile-open');
-        tocMobileBackdrop.classList.remove('mobile-toc-bg-open');
-        tocCloseIcon.classList.add('d-none');
-        tocBookIcon.classList.remove('d-none');
+        if(tocContainer) {
+          tocContainer.classList.remove('mobile-open');
+        }
+        if(tocMobileBackdrop) {
+          tocMobileBackdrop.classList.remove('mobile-toc-bg-open');
+        }
+        if(tocCloseIcon) {
+          tocCloseIcon.classList.add('d-none');
+        }
+        if(tocBookIcon) {
+          tocBookIcon.classList.remove('d-none');
+        }
     }
 }
 

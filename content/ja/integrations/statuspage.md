@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/statuspage/'
 draft: false
 git_integration_title: statuspage
 has_logo: true
+integration_id: statuspage
 integration_title: StatusPage.io
 is_public: true
 kind: インテグレーション

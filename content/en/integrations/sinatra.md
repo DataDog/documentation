@@ -18,6 +18,7 @@ supported_os:
     - linux
     - mac_os
     - windows
+integration_id: "sinatra"
 ---
 
 ## Overview

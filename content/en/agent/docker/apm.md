@@ -39,6 +39,7 @@ For example, the following command allows the Agent to receive traces from your 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
+{{< site-region region="us" >}} 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -48,16 +49,42 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```shell
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -p 127.0.0.1:8126:8126/tcp \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              gcr.io/datadoghq/agent:latest
+```
+Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
+{{< site-region region="us" >}} 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```shell
+docker run -d -p 127.0.0.1:8126:8126/tcp \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              gcr.io/datadoghq/agent:latest
+```
+Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
+{{< /site-region >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -103,7 +130,7 @@ Then start the Agent and the application container, connected to the network pre
 
 {{< tabs >}}
 {{% tab "Standard" %}}
-
+{{< site-region region="us" >}} 
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
@@ -115,7 +142,27 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
+# Application
+docker run -d --name app \
+              --network <NETWORK_NAME> \
+              -e DD_AGENT_HOST=datadog-agent \
+              company/app:latest
+```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}}
 
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network <NETWORK_NAME> \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              gcr.io/datadoghq/agent:latest
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
@@ -123,8 +170,11 @@ docker run -d --name app \
               company/app:latest
 ```
 
+Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
+{{< /site-region >}}
 {{% /tab %}}
 {{% tab "Windows" %}}
+{{< site-region region="us" >}} 
 
 ```bash
 # Datadog Agent
@@ -134,14 +184,32 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
-
 # Application
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
+{{< /site-region >}}
+{{< site-region region="us3,eu,gov" >}} 
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network "<NETWORK_NAME>" \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              gcr.io/datadoghq/agent:latest
+# Application
+docker run -d --name app \
+              --network "<NETWORK_NAME>" \
+              -e DD_AGENT_HOST=datadog-agent \
+              company/app:latest
+```
+Where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}, so that the Agent sends data to the right Datadog location.
 
+{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 

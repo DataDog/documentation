@@ -2,6 +2,8 @@
 aliases:
   - /ja/integrations/winservices
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   metrics_metadata: metadata.csv
@@ -108,7 +110,7 @@ Windows Service チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**windows_service.state**:
+**windows_service.state**:<br>
 Agent は、`services` で構成された各 Windows Service に対して、'service:<service_name>' のタグを付けてサービスチェックを送信します。各サービスチェックは、Windows のステータスに応じて以下のステータスを取ります。
 
 | Windows のステータス   | windows_service.state |
@@ -121,6 +123,8 @@ Agent は、`services` で構成された各 Windows Service に対して、'ser
 | Pause Pending    | WARNING               |
 | Paused           | WARNING               |
 | Unknown          | UNKNOWN               |
+
+権限の制限または不正確な名前により Agent がサービスにアクセスできない場合、サービスチェックは `UNKNOWN` を報告します。
 
 ## トラブルシューティング
 

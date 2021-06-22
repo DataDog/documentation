@@ -27,7 +27,6 @@ is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
-metric_prefix: snmp.
 metric_to_check:
   - snmp.cefcFRUPowerAdminStatus
   - snmp.devClientCount

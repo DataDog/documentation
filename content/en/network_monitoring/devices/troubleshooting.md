@@ -15,13 +15,17 @@ Use the information below for troubleshooting Datadog Network Device Monitoring.
 
 ## Terminology
 
-**SNMP** - Simple network management protocol - A network protocol that is used to collect information about bare metal networking gear.
+SNMP - Simple network management protocol
+: A network protocol that is used to collect information about bare metal networking gear.
 
-**OID** - Object identifier - A unique ID or address on a device that when polled returns the response code of that value. For example, OIDs are CPU or device fan speed.
+OID - Object identifier
+: A unique ID or address on a device that when polled returns the response code of that value. For example, OIDs are CPU or device fan speed.
 
-**sysOID** - System object identifier - A specific address that defines the device type. All devices have a unique ID that defines it. For example, the Meraki base sysOID is `1.3.6.1.4.1.29671`.
+sysOID - System object identifier
+: A specific address that defines the device type. All devices have a unique ID that defines it. For example, the Meraki base sysOID is `1.3.6.1.4.1.29671`.
 
-**MIB** - Managed information base - A database or list of all the possible OIDs and their definitions that are related to the MIB. For example, the `IF-MIB` (interface MIB) contains all the OIDs for descriptive information about a device's interface.
+MIB - Managed information base
+: A database or list of all the possible OIDs and their definitions that are related to the MIB. For example, the `IF-MIB` (interface MIB) contains all the OIDs for descriptive information about a device's interface.
 
 ## FAQ
 
@@ -67,6 +71,18 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 
 1. Try loosening ACLs/firewall rules for your devices.
 2. Run `snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6` from the host your Agent is running on. If you get a timeout without any response, there is likely something blocking the Datadog Agent from collecting metrics from your device.
+
+#### What do I do if Datadog supports a vendor or device type but my specific model isn’t supported? 
+
+- Contact [Datadog support][1] to put in a request to support your specific model.
+- Extend your profiles to support additional `sysobjectid` values. 
+    For example, if you want to monitor another type of Cisco CSR, you can modify the ISR profile directly to list another `sysobjectid` like this: 
+    
+    ```
+		snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
+    ```
+
+**Note**: If you do not know the `sysobjectid` of your device, try doing an Internet search or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
 
 
 ## Further Reading

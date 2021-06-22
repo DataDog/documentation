@@ -45,6 +45,9 @@ class Integrations:
         self.data_service_checks_dir = (
             join(self.data_dir, "service_checks") + sep
         )
+        self.data_npm_dir = (
+            join(self.data_dir, "npm") + sep
+        )
         self.content_integrations_dir = (
             join(self.content_dir, "integrations") + sep
         )
@@ -100,6 +103,9 @@ class Integrations:
         makedirs(self.data_integrations_dir, exist_ok=True)
         makedirs(
             self.data_service_checks_dir, exist_ok=True
+        )
+        makedirs(
+            self.data_npm_dir, exist_ok=True
         )
         makedirs(
             self.content_integrations_dir, exist_ok=True
@@ -230,6 +236,9 @@ class Integrations:
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
+
+            elif file_name.endswith("defaults.go"):
+                self.process_npm_integrations(file_name)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -407,6 +416,33 @@ class Integrations:
             file_name,
             self.data_service_checks_dir + new_file_name,
         )
+
+    def process_npm_integrations(self, file_name):
+        """
+        Save the defaults.go file from AWS as a json file
+        /data/npm/aws.json
+        """
+
+        dict_npm = {}
+        with open(file_name) as fh:
+
+            line_list = filter(None, fh.read().splitlines())
+
+            for line in line_list:
+                if line.endswith("service{"):
+                    integration = line.split('"')[1]
+                    dict_npm[integration] = {"name": integration}
+
+        new_file_name = "{}aws.json".format(self.data_npm_dir)
+
+        with open(
+                file=new_file_name,
+                mode="w",
+                encoding="utf-8",
+            ) as f:
+                json.dump(
+                    dict_npm, f, indent = 2, sort_keys = True
+                )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
@@ -620,6 +656,16 @@ class Integrations:
                 0,
             )
 
+        # if __init__.py exists lets grab the integration id
+        integration_id = ""
+        initpy = "{0}{1}{2}".format(dirname(file_name), sep, "__init__.py")
+        if exists(initpy):
+            with open(initpy) as f:
+                # look for ID = "integration-name" and extract
+                matches = re.search("^ID\s*=\s*(?:\'|\")([A-Z-a-z-_0-9]+)(?:\'|\")$", f.read(), re.MULTILINE)
+                if matches:
+                    integration_id = matches.group(1)
+
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
@@ -635,7 +681,7 @@ class Integrations:
                     new_file_name = f_name
 
                 result = self.add_integration_frontmatter(
-                    new_file_name, result, dependencies
+                    new_file_name, result, dependencies, integration_id
                 )
 
                 with open(out_name, "w", ) as out:
@@ -648,7 +694,7 @@ class Integrations:
                         final_file.write(final_text)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[]
+        self, file_name, content, dependencies=[], integration_id=""
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -681,6 +727,7 @@ class Integrations:
                     del item[0]["type"]
                 item[0]["dependencies"] = dependencies
                 item[0]["draft"] = not item[0].get("is_public", False)
+                item[0]["integration_id"] = item[0].get("integration_id", integration_id)
                 fm = yaml.safe_dump(
                     item[0], width=150, default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()

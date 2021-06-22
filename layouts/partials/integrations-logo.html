@@ -1,0 +1,114 @@
+<!--
+{{/*
+------------------
+Description:
+------------------
+
+Builds a string to the integration logo.
+:param basename: string of integration name without any variant or extension e.g "aws" or "amazon-ecs"
+:param variant: string of the variant e.g "avatar" or "small" or "large"
+:return: the string to the integration logo image or an empty string on failure
+
+------------------
+Usage:
+------------------
+
+With an exact integration id
+
+{{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "amazon-alb" "variant" "avatar") }}
+<img src="{{ $int_logo }}" />
+
+With an exact integration alias
+
+{{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "aws_alb" "variant" "avatar") }}
+<img src="{{ $int_logo }}" />
+
+Both of these should return the same image.
+*/}}
+-->
+{{- $dot := . -}}
+{{- $ctx := .context -}}
+{{- $basename := (lower .basename) -}}
+{{- $variant := .variant | default "large" -}}
+{{- $extension := .extension | default ".svg" -}}
+{{- $img_url := $ctx.Site.Params.integrations_img_url -}}
+{{- $imagesJSON := getJSON "https://s3.amazonaws.com/origin-static-assets/websites-integrations/images.json" -}}
+{{- $integrationLogosList := index $imagesJSON "integrationLogosList" | default slice -}}
+{{- $integrationAliasList := index $imagesJSON "aliases" | default dict -}}
+{{- if (eq (len $integrationLogosList) 0) -}}
+  {{- errorf "Integration image json integrationLogosList missing" -}}
+{{- end -}}
+{{- if (eq (len $integrationAliasList) 0) -}}
+  {{- errorf "Integration image json integrationAliasList missing" -}}
+{{- end -}}
+{{- $output_image := "" -}}
+{{- $imageExists := false -}}
+
+<!--{{/* Check the exact image we want exists using external list */}}-->
+{{- range $manifestBasename := $integrationLogosList -}}
+  {{- if eq $basename $manifestBasename -}}
+    {{- $imageExists = true -}}
+  {{- end -}}
+{{- end -}}
+
+<!--{{/* Check to see if we are passing an alias instead */}}-->
+{{- if not $imageExists -}}
+  {{- range $aliasBaseName, $actualImgBaseName := $integrationAliasList -}}
+    {{- if eq $basename $aliasBaseName -}}
+      {{- $imageExists = true -}}
+      {{- $basename = $actualImgBaseName -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!--{{/* Lets check for an amazon naming scheme amazon-??? */}}-->
+{{- if not $imageExists -}}
+  {{- range $manifestBasename := $integrationLogosList -}}
+    {{- if eq (print "amazon-" $basename) $manifestBasename -}}
+      {{- $imageExists = true -}}
+      {{- $basename = (print "amazon-" $basename) }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!--{{/* Lets check for an aws naming scheme aws-???? */}}-->
+{{- if not $imageExists -}}
+  {{- range $manifestBasename := $integrationLogosList -}}
+    {{- if eq (print "aws-" $basename) $manifestBasename -}}
+      {{- $imageExists = true -}}
+      {{- $basename = (print "aws-" $basename) }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!--{{/* Lets try convert _ to - as we may have passed name not id */}}-->
+{{- if not $imageExists -}}
+  {{- range $manifestBasename := $integrationLogosList -}}
+    {{- if eq (replace $basename "_" "-") $manifestBasename -}}
+      {{- $imageExists = true -}}
+      {{- $basename = (replace $basename "_" "-") }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!--{{/* Build the image path and return it or return empty string */}}-->
+{{- if $imageExists -}}
+    {{- $output_image = (printf "%s%s_%s%s" $img_url $basename $variant $extension) | safeURL -}}
+{{- else -}}
+    <!-- try to fallback to the static image -->
+    {{- $fname := print ($basename | lower) ".png" }}
+    {{- $src := (print "images/integrations_logos/" $fname) -}}
+    {{- if (fileExists (print "static/" $src)) -}}
+      <!--{{/* {{- warnf "missing integration svg %q falling back to %q" $basename $fname -}} */}}-->
+      {{- $output_image = (print site.Params.img_url $src) -}}
+    {{- else -}}
+      {{- if eq $ctx.Page.Language.Lang "en" -}}
+        <!-- For security monitoring its an accepted that certain categories won't have an image to fall back to agent.svg, lets reduce that noise -->
+        {{- if not (in (slice "runtime security" "file integrity monitoring") $basename) -}}
+          {{- warnf "missing integration svg %q called from %q" $basename $ctx.Page.Permalink -}}
+        {{- end -}}
+        {{- $output_image = "" -}}
+      {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $output_image -}}

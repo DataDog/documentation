@@ -42,7 +42,7 @@ PHP APM supports the following SAPI's:
 
 ### Integrations
 
-#### Web Framework Compatibility
+#### Web framework compatibility
 
 By default, Datadog **supports all PHP web frameworks** out of the box, with either framework-level instrumentation, or generic web tracing.
 
@@ -80,7 +80,7 @@ Note that even if you don't see your web framework in this list, it is supported
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][2].
 
-#### CLI Library Compatibility
+#### CLI library compatibility
 
 Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
 
@@ -88,11 +88,10 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 |:----------------|:---------|:----------------|
 | CakePHP Console | 2.x      | Fully Supported |
 | Laravel Artisan | 5.x      | Fully Supported |
-| Symfony Console |          | _Coming Soon_   |
 
 To request support for additional CLI libraries, contact our awesome [support team][2].
 
-#### Datastore Compatibility
+#### Datastore compatibility
 
 | Module                                                                  | Versions                   | Support Type    |
 |-------------------------------------------------------------------------|----------------------------|-----------------|
@@ -101,29 +100,20 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
-| MongoDB - via [mongodb][4] extension                                    | *(Any Supported PHP)*      | _Coming Soon_   |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
 | PhpRedis                                                                | 3, 4, 5                    | Fully Supported |
 | Predis                                                                  | 1.1                        | Fully Supported |
-| AWS Couchbase                                                           | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS DynamoDB                                                            | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS ElastiCache                                                         | AWS PHP SDK 3              | _Coming Soon_   |
-| Doctrine ORM                                                            | 2                          | _Coming Soon_   |
-| ODBC                                                                    | *(Any Supported PHP)*      | _Coming Soon_   |
-| Solarium                                                                | 4.2                        | _Coming Soon_   |
 
 To request support for additional datastores, contact our awesome [support team][2].
 
-#### Library Compatibility
+#### Library compatibility
 
 | Module     | Versions              | Support Type    |
 |:-----------|:----------------------|:----------------|
 | Curl       | *(Any Supported PHP)* | Fully Supported |
 | Guzzle     | 5.x                   | Fully Supported |
 | Guzzle     | 6.x                   | Fully Supported |
-| Beanstalkd |                       | _Coming Soon_   |
-| ReactPHP   |                       | _Coming Soon_   |
 
 To request support for additional libraries, contact our awesome [support team][2].
 
@@ -135,9 +125,9 @@ The call stack is limited on PHP 5. See the [deep call stack troubleshooting pag
 
 Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
-### PCNTL (Process control)
+### PCNTL
 
-We currently do not offer support for [pcntl][7]. Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
+We currently do not offer support for [PCNTL][7] (Process control). Tracing applications that use functions such as `pcntl_fork` may result in unpredictable results.
 
 ## Further Reading
 

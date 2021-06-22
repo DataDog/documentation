@@ -2,6 +2,7 @@
 
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
+import { updateQueryParameter, deleteQueryParameter, getQueryParameterByName } from '../helpers/browser';
 
 export function initializeIntegrations() {
     let finderState = 0; // closed
@@ -73,27 +74,30 @@ export function initializeIntegrations() {
     const mixer = mixitup(container, config);
 
     controls.addEventListener('click', function(e) {
-        // e.preventDefault();
         handleButtonClick(e.target, filters);
+
+        if (e.target.dataset.filter && e.target.dataset.filter !== 'all') {
+            deleteQueryParameter('q');
+        }
+
         // trigger same active on mobile
-        // $('.integrations-select').val('#'+e.target.getAttribute('href').substr(1));
         const mobileBtn = controls.querySelector(
             `[data-filter="${e.target.getAttribute('data-filter')}"]`
         );
         activateButton(mobileBtn, mobilefilters);
-        // return false;
     });
 
     mobilecontrols.addEventListener('click', function(e) {
         e.stopPropagation();
-        // e.preventDefault();
         handleButtonClick(e.target, mobilefilters);
+
         // trigger same active on desktop
         const desktopBtn = controls.querySelector(
             `[data-filter="${e.target.getAttribute('data-filter')}"]`
         );
+
         activateButton(desktopBtn, filters);
-        // return false;
+
         pop.style.display = 'none';
         $(window).scrollTop(0);
     });
@@ -108,6 +112,12 @@ export function initializeIntegrations() {
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
             updateData(e.target.value.toLowerCase(), true);
+
+            if (window.location.hash && window.location.hash !== 'all') {
+                window.location.hash = '#all';
+            }
+
+            updateQueryParameter('q', e.target.value.toLowerCase());
 
             if (
                 e.target.value.length > 0 &&
@@ -174,6 +184,7 @@ export function initializeIntegrations() {
     function updateData(filter, isSearch) {
         const show = [];
         const hide = [];
+
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
             const domitem = document.getElementById(`mixid_${item.id}`);
@@ -224,7 +235,6 @@ export function initializeIntegrations() {
                         (isSearch && !filter)
                     ) {
                         domitem.classList.remove('grayscale');
-                        // show.push(item);
                     } else {
                         const name = item.name ? item.name.toLowerCase() : '';
                         const publicTitle = item.public_title
@@ -240,10 +250,8 @@ export function initializeIntegrations() {
                                 item.tags.indexOf(filter.substr(1)) !== -1)
                         ) {
                             domitem.classList.remove('grayscale');
-                            // show.push(item);
                         } else {
                             domitem.classList.add('grayscale');
-                            // hide.push(item);
                         }
                     }
                 }
@@ -257,12 +265,44 @@ export function initializeIntegrations() {
         }
     }
 
+    // Handle search query param filtering on page load.
+    const handleQueryParamFilter = () => {
+        const searchQueryParameter = getQueryParameterByName('q', window.location.href);
+
+        if (searchQueryParameter) {
+            // Search query parameter should take priority if both param & category hash are present in URL.
+            if (window.location.hash) {
+                window.location.hash = '#all';
+            }
+
+            updateData(searchQueryParameter, true);
+
+            search.value = searchQueryParameter;
+
+            if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+                window.DD_LOGS.logger.log(
+                    'Integrations Search',
+                    {
+                        browser: {
+                            integrations: {
+                                search: searchQueryParameter.toLowerCase()
+                            }
+                        }
+                    },
+                    'info'
+                );
+            }
+        }
+    }
+
     // Set controls the active controls on startup
     activateButton(controls.querySelector('[data-filter="all"]'), filters);
     activateButton(
         mobilecontrols.querySelector('[data-filter="all"]'),
         mobilefilters
     );
+
+    handleQueryParamFilter();
 
     $(window).on('hashchange', function() {
         let currentCat = '';

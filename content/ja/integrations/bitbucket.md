@@ -14,6 +14,7 @@ further_reading:
     text: 'Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法'
 git_integration_title: bitbucket
 has_logo: true
+integration_id: bitbucket
 integration_title: Bitbucket
 is_public: true
 kind: インテグレーション

@@ -29,12 +29,12 @@ Datadog では、メトリクス、モニター、ダッシュボード、ノー
 
 ダッシュボードでグラフを構成するには、次のプロセスに従ってください。
 
-1. [視覚化に使用するウィジェットを選択する](#select-your-visualization)
-2. [グラフ化するメトリクスを選択する](#choose-the-metric-to-graph)
+1. [視覚化の方法を選択](#select-your-visualization)
+2. [グラフ化するメトリクスを選択](#choose-the-metric-to-graph)
 3. [フィルター](#filter)
-4. [集計、ロールアップする](#aggregate-and-rollup)
-5. [追加の関数を適用する](#advanced-graphing)
-6. [グラフのタイトルを決める](#create-a-title)
+4. [集計、ロールアップ](#aggregate-and-rollup)
+5. [追加の関数を適用](#advanced-graphing)
+6. [グラフのタイトルを作成](#create-a-title)
 
 ### 視覚化に使用するウィジェットを選択する
 
@@ -50,9 +50,9 @@ Datadog では、メトリクス、モニター、ダッシュボード、ノー
 
 {{< img src="dashboards/querying/filter.png" alt="グラフの作成フィルター"  style="width:75%;" >}}
 
-`from` ドロップダウン内の高度なフィルタリングを使用して、以下のようなブール型フィルター済みクエリを評価することも可能です。
+`from` ドロップダウン内の[高度なフィルタリング][11]を使用して、以下のようなブール型またはワイルドカードでフィルタリングされたクエリを評価することも可能です。
 
-{{< img src="dashboards/querying/booleanfilters.png" alt="ブール型フィルターでグラフ作成"  style="width:75%;" >}}
+{{< img src="dashboards/querying/booleanfilters.png" alt="ブール型フィルターでグラフを作成"  style="width:75%;" >}} 
 
 タグの詳細は、[タグ付け][6]に関するドキュメントを参照してください。
 
@@ -94,6 +94,8 @@ JSON ビューの使用方法については、[JSON を使用したグラフ作
 
 各メトリクスを別々にグラフに表示するには、コンマ (`,`) を使用します（例: `a, b, c`）。
 
+**注**: コンマを使用したクエリは視覚化でのみサポートされ、モニターでは機能しません。モニターで複数のメトリクスを組み合わせるには、[ブール演算子][12]または算術演算子を使用します。
+
 #### 整数を使用したメトリクスの演算
 
 グラフでメトリクス値の表示方法を変更するには、算術演算を実行します。たとえば、特定のメトリクスの 2 倍の値を視覚化するには、グラフエディターで **Advanced...** リンクをクリックします。次に、`Formula` ボックスに計算式 (この例では `a * 2`) を入力します。
@@ -130,10 +132,10 @@ jvm.heap_memory / jvm.heap_memory_max
 
 APM 統計データを使用してグラフを構成するには、次の手順に従います。
 
-1. [視覚化に使用するウィジェットを選択する](#select-your-visualization) (same as for Metrics)
-2. [詳細レベルを選択します](#level-of-detail)
-3. [パラメーターを選択します](#apm-stats-parameters)
-4. [グラフのタイトルを決める](#create-a-title) (same as for Metrics)
+1. [視覚化の方法を選択](#select-your-visualization) (メトリクスと同様)
+2. [詳細レベルを選択](#level-of-detail)
+3. [パラメーターを選択](#apm-stats-parameters)
+4. [グラフのタイトルを作成](#create-a-title) (メトリクスと同様)
 
 ### 詳細レベル
 1 つ以上のサービス、リソース、またはスパンの統計を表示する詳細レベルを選択します。(これらのすべてがすべてのウィジェットタイプで使用できるわけではありません。)
@@ -163,3 +165,5 @@ APM 統計データを使用してグラフを構成するには、次の手順�
 [8]: /ja/dashboards/functions/rollup/
 [9]: /ja/dashboards/functions/#apply-functions-optional
 [10]: /ja/events/#event-query-language
+[11]: /ja/metrics/advanced-filtering/
+[12]: /ja/metrics/advanced-filtering/#boolean-filtered-queries

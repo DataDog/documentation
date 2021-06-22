@@ -84,7 +84,7 @@ If your tags don't follow [tags best practices][2] and don't use the `key:value`
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
 * `service:web*`  matches every trace that has a services starting with `web`
-* `@url:data*`  matches every trace that has a `url` starting by `data`.
+* `@url:data*`  matches every trace that has a `url` starting with `data`.
 
 ### Numerical values
 
@@ -114,7 +114,7 @@ If an attribute is called `user.first name`, perform a search on this attribute 
 
 `@user.first\ name:myvalue`
 
-### Saved Searches
+### Saved searches
 
 Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
@@ -122,17 +122,17 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 To delete a saved search, click on the bin icon under the Trace search drop-down.
 
-## Time Range
+## Time range
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][3]):
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
-## Trace Stream
+## Trace stream
 
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
-### Displaying a full Trace
+### Displaying a full trace
 
 Click on any trace to see more details about it:
 
@@ -171,7 +171,7 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
-### Quantitative facets: measures
+### Quantitative (measures)
 
 **Use measures when you need to:**
 * Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
@@ -188,7 +188,7 @@ Measures support units (time in seconds or size in bytes) for handling of orders
 Scale duration into nanoseconds for all span tags flowing in with the arithmetic processor. Use a `*1000000` multiplier on span tags from `service:A`, and a `*1000` multiplier on span tags from `service:B`.
 Use `duration:>20ms` (see search syntax for reference) to consistently query span tags from both services at once, and see an aggregated result of max one minute.
 
-### Create a Facet
+### Create a facet
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
@@ -196,13 +196,13 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
 
-### Facet Panel
+### Facet panel
 
 Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel"  style="width:30%;">}}
 
-## Analytics Overview
+## Analytics overview
 
 Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
 
@@ -251,11 +251,11 @@ The following timeseries Analytics shows the evolution of the **pc99** **duratio
 
 {{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
-### Top List
+### Top list
 
 Visualize the top values from a facet according to their `Duration` (or a facet unique count of values).
 
-The following Top List Analytics shows the top **pc99** **duration** of **Service**:
+The following top list analytics shows the top **pc99** **duration** of **Service**:
 
 {{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
@@ -273,7 +273,7 @@ The following Table Log Analytics shows the evolution of the **top Status Codes*
 
 {{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example"  style="width:90%;">}}
 
-## Related Traces
+## Related traces
 
 Select or click on a section of the graph to either zoom in the graph or see the list of [traces][10] corresponding to your selection:
 
@@ -290,9 +290,9 @@ Export your Analytics:
 
 **Note:** Analytics can be exported only when powered by [indexed spans][14].
 
-## Traces in Dashboard
+## Traces in dashboard
 
-Export [Analytics][4] from the Trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
+Export [Analytics][4] from the trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
 
 [Learn more about the timeseries widget][16].
 

@@ -53,11 +53,39 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 ### Renotify
 
-Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. If enabled, you are given the option to include an escalation message sent any time the monitor renotifies. The original notification message is also included.
+Enable monitor renotification (optional) to remind your team that a problem is not solved. 
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
+The escalation message can be added in the following ways:
+
+* In the `{{#is_renotify}}` block in the original notification message (recommended).
+* In the *escalation_message* field in the app.
+* With the `escalation_message` attribute in the API.
+
+If you use the `{{#is_renotify}}` block, keep in mind that the original notification message is also included in the renotification, so:
+
+1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
+2. Send the escalation message to a subset of groups.
+
+Learn how to configure your monitors for those use cases in [the example section](#examples).
 
 ### Priority
 
 Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5. 
+
+For example, you can set different priorities for `alert` and `warning` notifications:
+
+```
+{{#is_alert}}
+{{override_priority 'P1'}}
+ ...
+{{/is_alert}}
+
+{{#is_warning}}
+{{override_priority 'P4'}}
+...
+{{/is_warning}}
+```
 
 ## Notify your team
 
@@ -69,7 +97,7 @@ Use this section to send notifications to your team through email, Slack, PagerD
 Disk space is low @ops-team@company.com
 ```
 
-### @notification
+### Notifications
 
 `@notifications` can be sent to:
 
@@ -123,16 +151,36 @@ Use template variables to customize your monitor notifications. The built-in var
 
 Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][13].
 
+#### Local time
+
+Use the `local_time` function to transform a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to show the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
+
+```
+{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+```
+
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`. 
+Refer to the [list of tz database time zones][15], particularly the TZ database name column, to see the list of available time zone values.
+
 ### Tag variables
 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
+For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-For example, if your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+**Notes**: Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
-**Notes**:
+#### Multi-alert group by host
 
-* Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
-* Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. 
+To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+Some specific host metadata are available as well:
+
+- Agent Version : {{host.metadata_agent_version}}
+- Machine       : {{host.metadata_machine}}
+- Platform      : {{host.metadata_platform}}
+- Processor     : {{host.metadata_processor}}
+
 
 #### Tag key with period
 
@@ -149,7 +197,7 @@ Log monitors can use facets as variables if the monitor is grouped by the facets
 For example, if your log monitor is grouped by the `facet`, the variable is:
 
 ```text
-{{ facet.name }}
+{{ @facet.name }}
 ```
 **Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
 
@@ -171,6 +219,8 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 ```text
 {{ a.value }}
 ```
+
+Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
 
 ### Conditional variables
 
@@ -200,9 +250,11 @@ The following conditional variables are available:
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
-| `{{#is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
+| `{{#is_priority 'value'}}` | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
 | `{{#is_unknown}}`          | The monitor is in the unknown state                                |
 | `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
+| `{{#is_renotify}}`         | The monitor is renotifying                                         |
+| `{{^is_renotify}}`         | The monitor is not renotifying.                                    |
 
 #### Examples
 
@@ -314,6 +366,46 @@ To notify your dev team if a triggering host has the name `production`, use the 
 ```
 
 {{% /tab %}}
+{{% tab "is_renotify" %}}
+
+To send an escalation message to a different destination just for the `production` environment:
+
+```text
+{{#is_renotify}}
+{{#is_match "env" "production"}}
+  This is an escalation message sent to @dev-team@company.com
+{{/is_match}}
+{{/is_renotify}}
+```
+
+To send a different escalation message that does not contain the original message details, use a combination of `{{^is_renotify}}` and `{{#is_renotify}}` blocks:
+
+```text
+{{^is_renotify}}
+This monitor is alerting and sending a first message @dev-team@company.com
+
+To solve this monitor follow the steps:
+1. Go there
+2. Do this
+{{/is_renotify}}
+
+This part is generic and sent both for the first trigger and the escalation message.
+
+{{#is_renotify}}
+  This is the escalation message @dev-team@company.com
+{{/is_renotify}}
+
+```
+
+On monitor renotification, users will get the following escalation message:
+
+```
+This part is generic and sent both for the first trigger and the escalation message.
+
+This is the escalation message @dev-team@company.com
+``` 
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Test notifications
@@ -334,6 +426,8 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
+Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
+
 ### Variables {#variables-test-notification}
 
 Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
@@ -348,7 +442,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 
 ### Dynamic links
 
-Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can of provide links to pages within Datadog such as dashboards, the host map, and monitors.
+Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
 
 {{< tabs >}}
 {{% tab "Dashboards" %}}
@@ -459,3 +553,4 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: /monitors/faq/what-are-recovery-thresholds/
+[15]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

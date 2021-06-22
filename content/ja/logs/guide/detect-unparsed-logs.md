@@ -22,7 +22,7 @@ beta: true
 
 1. [パースされていないログの検出](#detect-unparsed-logs)
 2. [パースされていないログのクエリ](#query-for-unparsed-logs)
-3. [パースされていないログを追跡するメトリクスを作成します](#create-a-metric-to-track-fro-unparsed-logs)
+3. [パースされていないログを追跡するメトリクスを作成します](#create-a-metric-to-track-for-unparsed-logs)
 4. [パースされていないログの量を監視します](#monitor-the-volume-of-unparsed-logs)
 
 

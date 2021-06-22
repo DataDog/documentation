@@ -3,49 +3,38 @@ title: Ruby ログとトレースの接続
 kind: ドキュメント
 description: Ruby ログとトレースを接続して Datadog で関連付けます。
 further_reading:
-  - link: tracing/manual_instrumentation
-    tags: トレースの加工
-    text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
-  - link: tracing/opentracing
-    tags: トレースの加工
-    text: アプリケーション全体に Opentracing を実装します。
-  - link: tracing/visualization/
-    tag: APM の UI を利用する
-    text: サービス、リソース、トレースの詳細
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
-## トレースおよびスパン ID を手動で挿入する
+## トレース相関
 
-ロギングなどの多くの場合において、相互参照を容易にするために、トレース ID を他のイベントまたはデータストリームに関連付けると便利です。トレーサーは、`active_correlation` を介して現在アクティブなトレースの相関識別子を生成できます。これは、これらの他のデータソースを修飾するために使用できます。
+ロギングなどの多くの場合において、相互参照を容易にするために、トレース ID を他のイベントまたはデータストリームに関連付けると便利です。
+
+### Rails アプリケーションでのロギング
+
+#### 自動挿入
+
+Rails アプリケーションの場合は、デフォルトのロガー (`ActiveSupport::TaggedLogging`) または `lograge` を使用し、`rails` インスツルメンテーションのコンフィギュレーションオプション `log_injection` を `true` に設定するか、環境変数を `DD_LOGS_INJECTION=true` に設定することでトレース相関インジェクションを自動的に有効化できます。
 
 ```ruby
-# トレースがアクティブな場合...
-Datadog.tracer.trace('correlation.example') do
-  # #<Datadog::Correlation::Identifier> を返します
-  correlation = Datadog.tracer.active_correlation
-  correlation.trace_id # => 5963550561812073440
-  correlation.span_id # => 2232727802607726424
-  correlation.env # => 'production' (DD_ENV から派生)
-  correlation.service # => 'billing-api' (DD_SERVICE から派生)
-  correlation.version # => '2.5.17' (DD_VERSION から派生)
-end
+# config/initializers/datadog.rb
+require 'ddtrace'
 
-# トレースがアクティブでない場合...
-correlation = Datadog.tracer.active_correlation
-# #<Datadog::Correlation::Identifier> を返します
-correlation = Datadog.tracer.active_correlation
-correlation.trace_id # => 0
-correlation.span_id # => 0
-correlation.env # => 'production' (DD_ENV から派生)
-correlation.service # => 'billing-api' (DD_SERVICE から派生)
-correlation.version # => '2.5.17' (DD_VERSION から派生)
+Datadog.configure do |c|
+  c.use :rails, log_injection: true
+end
 ```
 
-#### Lograge を使用して Rails アプリケーションにロギングする場合（推奨）
+**注:** `lograge` ユーザーで `initializers/lograge.rb` コンフィギュレーションファイルに `lograge.custom_options` を定義している場合は、Rails がイニシャライザーをアルファベット順で読み込む関係で自動のトレース相関付けがうまく機能しない場合があります。これは、`initializers/datadog.rb` が `initializers/lograge.rb` イニシャライザーで上書きされてしまうためです。_既存の_ `lograge.custom_options` で自動のトレース相関付けを行う場合は、以下の[マニュアル (Lograge)](#manual-lograge) をご利用ください。
 
-[Rails アプリケーションで Lograge をセットアップ][1]した後、環境構成ファイル (例: `config/environments/production.rb`) の `custom_options` ブロックを変更してトレース ID を追加します:
+#### 手動挿入
+##### Lograge
+
+[Rails アプリケーションで Lograge をセットアップ][1]した後、環境構成ファイル (例: `config/environments/production.rb`) の `custom_options` ブロックを手動で変更してトレース ID を追加します。
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -68,11 +57,9 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-#### Rails アプリケーションにロギングする場合
+##### `ActiveSupport::TaggedLogging`
 
-`ActiveSupport::TaggedLogging` ロガーで構成された Rails アプリケーションは相関 ID をタグとしてログ出力に付加することができます。デフォルトの Rails ロガーはこのタグ付けロギングを実装し、相関タグの追加を簡単にしています。
-
-Rails 環境コンフィギュレーションファイルに、以下を追加します。
+デフォルトの `ActiveSupport::TaggedLogging` ロガーで構成された Rails アプリケーションは相関 ID をタグとしてログ出力に付加することができます。`ActiveSupport::TaggedLogging` でトレース相関を有効にするには、Rails の環境コンフィギュレーションファイルで以下を追加します。
 
 ```ruby
 Rails.application.configure do
@@ -91,7 +78,7 @@ end
 # [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
-#### Ruby アプリケーションにロギングする場合
+### Ruby アプリケーションでのロギング
 
 ロガーに相関 ID を追加するには、`Datadog.tracer.active_correlation` がある相関 ID を取得するログフォーマッタを追加し、これをメッセージに追加します。
 
@@ -131,15 +118,8 @@ logger.warn('これはトレースされないオペレーションです。')
 Datadog.tracer.trace('my.operation') { logger.warn('これはトレースされるオペレーションです。') }
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] これはトレースされるオペレーションです。
 ```
-
-**注**: [Datadog ログインテグレーション][2]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確実にする必要があります。詳しくは、[このトピックの FAQ][3] を参照してください。
-
-[Ruby ロギングのドキュメントを参照][2]して Ruby ログインテグレーションを適切に構成し、Ruby ログが自動的にパースされるようにしてください。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/logs/log_collection/ruby/
-[2]: /ja/logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: /ja/logs/log_collection/ruby/

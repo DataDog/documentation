@@ -1,6 +1,9 @@
 ---
 title: Tracing distribué
 kind: documentation
+aliases:
+  - /fr/tracing/serverless_functions
+  - /fr/tracing/setup_overview/serverless_functions/
 further_reading:
   - link: tracing/serverless_functions
     tag: Documentation

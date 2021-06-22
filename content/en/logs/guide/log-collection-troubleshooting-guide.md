@@ -139,7 +139,7 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [1]: /logs/
 [2]: /help/
 [3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /agent/logs/#send-logs-over-https
+[4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /integrations/journald/

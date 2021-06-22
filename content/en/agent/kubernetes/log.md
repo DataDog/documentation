@@ -24,7 +24,7 @@ The Agent has two ways to collect logs: from the [Docker socket][1], and from th
 * Docker is not the runtime, **or**
 * More than 10 containers are used on each node
 
-The Docker API is optimized to get logs from one container at a time, when there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the Kubernetes log files logic.
+The Docker API is optimized to get logs from one container at a time; when there are many containers in the same node, collecting logs through the Docker socket might be consuming much more resources than going through the Kubernetes log files logic.
 
 ## Log collection
 

@@ -14,6 +14,7 @@ name: carbon_black
 public_title: Datadog-Carbon Black Integration
 short_description: Collect your Carbon Black Defense Logs
 version: '1.0'
+integration_id: "carbonblack"
 ---
 
 ## Overview

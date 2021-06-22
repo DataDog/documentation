@@ -22,6 +22,7 @@ supported_os:
     - windows
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md']
+integration_id: "system"
 ---
 
 ## Overview

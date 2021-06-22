@@ -52,5 +52,4 @@ const getCookieByName = (name) => {
     return value;
 }
 
-
 export {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName}

@@ -6,6 +6,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
     tag: Blog
     text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
+  - link: 'https://learn.datadoghq.com/course/view.php?id=37'
+    tag: Centre d'apprentissage
+    text: Découvrir comment exécuter des tests Synthetic dans des pipelines de CI/CD
   - link: /synthetics/browser_tests/
     tag: Documentation
     text: Configurer un test Browser
@@ -14,6 +17,7 @@ further_reading:
     text: Configurer un test API
 ---
 En plus d'exécuter des tests à des intervalles prédéfinis, vous avez la possibilité d'exécuter des tests Datadog Synthetic ponctuellement à l'aide d'endpoints d'API. Ces tests peuvent être exécutés au sein de vos pipelines d'intégration continue (CI), de façon à bloquer le déploiement des branches susceptibles de nuire au bon fonctionnement de votre produit.
+
 Les tests CI/CD Synthetic peuvent également être utilisés pour **exécuter des tests dans le cadre de votre processus CD**, afin d'évaluer l'état de votre application de production dès la fin d'un déploiement. Cela vous permet de détecter les régressions éventuelles susceptibles d'avoir un impact sur vos utilisateurs et de déclencher automatiquement un rollback si un test critique échoue.
 
 Cette fonction réduit les pertes de temps liées à la correction de problèmes en production et vous aide à identifier le plus tôt possible les bugs et régressions qui surviennent.
@@ -385,52 +389,67 @@ Pour configurer votre client, les clés d'API et d'application Datadog doivent �
 
 3. Dans un fichier de configuration globale :
 
-     Vous pouvez également créer un fichier de configuration JSON pour spécifier des options plus avancées. Définissez le chemin vers ce fichier à l'aide du flag `--config` [lorsque vous lancez vos tests](#execution-de-tests). Nommez votre fichier de configuration globale `datadog-ci.json` pour ne pas avoir à modifier le chemin par défaut.
+     Le fichier de configuration JSON globale peut spécifier des options avancées supplémentaires. Définissez le chemin vers ce fichier à l'aide du flag `--config` [lorsque vous lancez vos tests](#execution-des-tests). Nommez votre fichier de configuration globale `datadog-ci.json` pour ne pas avoir à modifier le chemin par défaut.
 
-    * **apiKey** : la clé d'API utilisée pour interroger l'API Datadog.
-    * **appKey** : la clé d'application utilisée pour interroger l'API Datadog.
-    * **datadogSite** : l'instance Datadog à laquelle la requête est envoyée. Valeur par défaut : `datadoghq.com`. Votre site Datadog est {{< region-param key="dd_site" code="true" >}}.
-    * **files** : l'expression globale utilisée pour les fichiers de configuration des tests Synthetic.
-    * **global** : les configurations à appliquer à tous les tests Synthetic ([consultez ci-dessous la description de chaque champ](#configurer-des-tests)).
-    * **proxy** : le proxy à utiliser pour les connexions sortantes vers Datadog. Les clés `host` et `port` sont des arguments obligatoires. Par défaut, la clé `protocol` a pour valeur `http`. Elle peut prendre pour valeur `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` ou `pac+https`. La bibliothèque [proxy-agent][3] est utilisée pour configurer le proxy.
-    * **subdomain** : le nom du sous-domaine personnalisé permettant d'accéder à votre application Datadog. Si l'URL utilisée pour accéder à Datadog est `myorg.datadoghq.com`, la valeur de `subdomain` doit alors être définie sur `myorg`.
+Vous pouvez définir les options suivantes dans le fichier de configuration globale :
 
-    **Exemple de fichier de configuration globale** :
+`apiKey`
+: La clé d'API utilisée pour interroger l'API Datadog.
 
-    ```json
-    {
-        "apiKey": "<DATADOG_API_KEY>",
-        "appKey": "<DATADOG_APPLICATION_KEY>",
-        "datadogSite": "datadoghq.com",
-        "files": "{,!(node_modules)/**/}*.synthetics.json",
-        "global": {
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"fakeContent\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-                "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "executionRule": "skipped",
-            "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new value" },
-            "pollingTimeout": 180000
-        },
-        "proxy": {
-          "auth": {
-            "username": "login",
-            "password": "pwd"
-          },
-          "host": "127.0.0.1",
-          "port": 3128,
-          "protocol": "http"
-        },
-        "subdomain": "subdomainname"
-    }
-    ```
+`appKey`
+: La clé d'application utilisée pour interroger l'API Datadog.
+
+`datadogSite`
+: L'instance Datadog à laquelle la requête est envoyée. Valeur par défaut : `datadoghq.com`. Votre site Datadog est {{< region-param key="dd_site" code="true" >}}.
+
+`files`
+: L'expression globale utilisée pour les fichiers de configuration des tests Synthetic.
+
+`global`
+: Les configurations à appliquer à tous les tests Synthetic ([consultez ci-dessous la description de chaque champ](#configurer-des-tests)).
+
+`proxy`
+: Le proxy à utiliser pour les connexions sortantes vers Datadog. Les clés `host` et `port` sont des arguments obligatoires. Par défaut, la clé `protocol` a pour valeur `http`. Elle peut prendre pour valeur `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` ou `pac+https`. La bibliothèque [proxy-agent][3] est utilisée pour configurer le proxy.
+
+`subdomain`
+: Le nom du sous-domaine personnalisé permettant d'accéder à votre application Datadog. Si l'URL utilisée pour accéder à Datadog est `myorg.datadoghq.com`, la valeur de `subdomain` doit alors être définie sur `myorg`.
+
+**Exemple de fichier de configuration globale** :
+
+```json
+{
+    "apiKey": "<CLÉ_API_DATADOG>",
+    "appKey": "<CLÉ_APPLICATION_DATADOG>",
+    "datadogSite": "datadoghq.com",
+    "files": "{,!(node_modules)/**/}*.synthetics.json",
+    "global": {
+        "allowInsecureCertificates": true,
+        "basicAuth": { "username": "test", "password": "test" },
+        "body": "{\"fakeContent\":true}",
+        "bodyType": "application/json",
+        "cookies": "name1=value1;name2=value2;",
+        "deviceIds": ["laptop_large"],
+        "followRedirects": true,
+        "headers": { "<NOUVEL_ENTÊTE>": "<NOUVELLE_VALEUR>" },
+            "locations": ["aws:us-west-1"],
+        "retry": { "count": 2, "interval": 300 },
+        "executionRule": "skipped",
+        "startUrl": "{{URL}}?static_hash={{HASH-STATIQUE}}",
+        "variables": { "titleVariable": "nouvelle valeur" },
+        "pollingTimeout": 180000
+    },
+    "proxy": {
+      "auth": {
+        "username": "login",
+        "password": "pwd"
+      },
+      "host": "127.0.0.1",
+      "port": 3128,
+      "protocol": "http"
+    },
+    "subdomain": "subdomainname"
+}
+```
 
 ### Configurer des tests
 
@@ -457,27 +476,69 @@ Par défaut, les tests utilisent leur configuration d'origine. Vous pouvez la co
 
 Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de remplacer certains (ou l'ensemble) des paramètres de vos tests en utilisant les paramètres ci-dessous. Si vous souhaitez modifier la configuration de tous vos tests, ces mêmes paramètres peuvent être définis au niveau du [fichier de configuration globale](#configurer-le-client).
 
-* **allowInsecureCertificates** (booléen) : désactiver les vérifications de certificat lors des tests HTTP.
-* **basicAuth** (_objet_) : identifiants à utiliser lorsqu'une authentification basique est nécessaire lors d'un test HTTP ou Browser.
-     * **username** (_chaîne_) : nom d'utilisateur à utiliser pour l'authentification basique.
-     * **password** (_chaîne_) : mot de passe à utiliser lors de l'authentification basique.
-* **body** (_chaîne_) : données à envoyer avec les tests HTTP.
-* **bodyType** (_chaîne_) : type de données envoyées avec les tests HTTP.
-* **cookies** (_chaîne_) : chaîne utilisée en tant qu'en-tête de cookie dans un test HTTP ou Browser.
-* **deviceIds** (_tableau_) : liste des appareils sur lesquels le test Browser s'exécute.
-* **followRedirects** (_booléen_) : indique s'il faut suivre ou non les redirections dans les tests HTTP.
-* **headers** (_objet_) : en-têtes à remplacer dans le test HTTP ou Browser. La clé de cet objet est définie sur le nom de l'en-tête à remplacer, et sa valeur sur la nouvelle valeur de l'en-tête.
-* **locations** (_tableau_) : liste des emplacements à partir desquels le test s'exécute.
-* **retry** (_objet_) : stratégie définissant le comportement à adopter pour les nouvelles tentatives de test.
-     * **count** (_nombre entier_) : nombre de tentatives à effectuer en cas d'échec d'un test.
-     * **interval** (_nombre entier_) : intervalle entre chaque tentative (en millisecondes).
-* **executionRule** (_chaîne_) : règle d'exécution du test définissant le comportement de l'interface de ligne de commande en cas d'échec du test.
-     * **blocking** : l'interface de ligne de commande renvoie une erreur si le test échoue.
-     * **non_blocking** : l'interface de ligne de commande affiche seulement un avertissement si le test échoue.
-     * **skipped** : le test n'est pas du tout exécuté.
-* **startUrl** (_chaîne_) : nouvelle URL de départ à fournir au test HTTP ou Browser.
-* **variables** (_objet_) : variables à remplacer dans le test. La clé de cet objet est définie sur le nom de la variable à remplacer, et sa valeur sur la nouvelle valeur de la variable.
-* **pollingTimeout** (_entier_) : la durée après laquelle un test Synthetic est considéré comme un échec (en millisecondes).
+
+`allowInsecureCertificates`
+: **Type** : booléen <br>
+Désactive les vérifications de certificat lors des tests HTTP.
+
+`basicAuth`
+: **Type** : objet <br>
+Identifiants à utiliser lorsqu'une authentification basique est nécessaire lors d'un test HTTP ou Browser.
+  - `username`: chaîne. Nom d'utilisateur à utiliser pour l'authentification basique.
+  - `password`: chaîne. Mot de passe à utiliser lors de l'authentification basique.
+
+`body`
+: **Type** : chaîne<br>
+Données à envoyer avec les tests HTTP.
+
+`bodyType`
+: **Type** : chaîne<br>
+Type des données envoyées avec les tests HTTP.
+
+`cookies`
+: **Type** : chaîne<br>
+Chaîne utilisée en tant qu'en-tête de cookie dans un test HTTP ou Browser.
+
+`deviceIds`
+: **Type** : tableau<br>
+Liste des appareils sur lesquels le test Browser s'exécute.
+
+`followRedirects`
+: **Type** : booléen<br>
+Indique s'il faut suivre ou non les redirections dans les tests HTTP.
+
+`headers`
+: **Type** : objet<br>
+En-têtes à remplacer dans le test HTTP ou Browser. Les clés de cet objet sont définies sur le nom des en-têtes à remplacer, et ses valeurs sur la nouvelle valeur des en-têtes.
+
+`locations`
+: **Type** : tableau<br>
+Liste des emplacements à partir desquels le test s'exécute.
+
+`retry`
+: **Type** : objet<br>
+Stratégie définissant le comportement à adopter pour les nouvelles tentatives du test :
+  - `count` : nombre entier. Nombre de tentatives à effectuer en cas d'échec d'un test.
+  - `interval` : nombre entier. Intervalle entre chaque tentative (en millisecondes).
+
+`executionRule`
+: **Type** : chaîne<br>
+Règle d'exécution du test définissant le comportement de l'interface de ligne de commande en cas d'échec du test :
+  - `blocking` : l'interface de ligne de commande renvoie une erreur si le test échoue.
+  - `non_blocking` : l'interface de ligne de commande affiche seulement un avertissement si le test échoue.
+  - `skipped` : le test n'est pas du tout exécuté.
+
+`startUrl`
+: **Type** : chaîne<br>
+Nouvelle URL de départ à fournir au test HTTP ou Browser.
+
+`variables`
+: **Type** : objet<br>
+Variables à remplacer dans le test. Les clés de cet objet sont définies sur le nom des variables à remplacer, et ses valeurs sur la nouvelle valeur des variables.
+
+`pollingTimeout`
+: **Type** : nombre entier<br>
+Durée (en millisecondes) après laquelle `datadog-ci` doit arrêter de récupérer les résultats des tests. Les résultats de tests générés après ce délai sont considérés comme des résultats d'échec de test au niveau du pipeline de CI.
 
 **Remarque** : les nouvelles configurations de test sont prioritaires sur les configurations globales.
 
@@ -521,23 +582,55 @@ La règle d'exécution associée au test est toujours la règle la plus restrict
 
 Vous pouvez configurer l'URL de départ de votre test en indiquant la `startUrl` de l'objet de votre test. Pour créer votre propre URL de départ, utilisez l'une des parties de l'URL de départ d'origine de votre test et les variables d'environnement suivantes :
 
-| Variable d'environnement | Description                  | Exemple                                                |
-|----------------------|------------------------------|--------------------------------------------------------|
-| `URL`                | URL de départ d'origine du test | `https://www.example.org:81/chemin/vers/element?abc=123` |
-| `DOMAIN`             | Nom de domaine du test           | `example.org`                                          |
-| `HOST`               | Host du test                  | `www.example.org:81`                                   |
-| `HOSTNAME`           | Hostname du test              | `www.example.org`                                      |
-| `ORIGIN`             | Origine du test                | `https://www.example.org:81`                           |
-| `PARAMS`             | Paramètres de la requête du test      | `?abc=123`                                             |
-| `PATHNAME`           | Chemin de l'URl du test              | `/chemin/vers/element`                                   |
-| `PORT`               | Port du host du test             | `81`                                                   |
-| `PROTOCOL`           | Protocole du test              | `https:`                                               |
-| `SUBDOMAIN`          | Sous-domaine du test            | `www`                                                  |
 
-Par exemple, si l'URL de départ de votre test est `https://www.example.org:81/chemin/vers/element?abc=123`, elle peut s'écrire sous la forme suivante :
+`URL`
+: URL de départ d'origine du test. <br>
+**Exemple** : `https://www.example.org:81/chemin/vers/element?abc=123#target`.
 
-* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}`
-* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
+`DOMAIN`
+: Nom de domaine du test.<br>
+**Exemple** : `example.org`.
+
+`HASH`
+: Hash du test.<br>
+**Exemple** : `#target`.
+
+`HOST`
+: Host du test.<br>
+**Exemple** : `www.example.org:81`.
+
+`HOSTNAME`
+: Hostname du test.<br>
+**Exemple** : `www.example.org`.
+
+`ORIGIN`
+: Origine du test.<br>
+**Exemple** : `https://www.example.org:81`.
+
+`PARAMS`
+: Paramètres de la requête du test.<br>
+**Exemple** : `?abc=123`.
+
+`PATHNAME`
+: Chemin de l'URI du test.<br>
+**Exemple** : `/chemin/vers/element`.
+
+`PORT`
+: Port du host du test.<br>
+**Exemple** : `81`.
+
+`PROTOCOL`
+: Protocole du test.<br>
+**Exemple** : `https:`.
+
+`SUBDOMAIN`
+: Sous-domaine du test.<br>
+**Exemple** : `www`.
+
+Par exemple, si l'URL de départ de votre test est `https://www.example.org:81/chemin/vers/element?abc=123#target`, elle peut s'écrire sous la forme suivante :
+
+* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
+* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
 ### Exécution des tests

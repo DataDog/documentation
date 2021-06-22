@@ -150,7 +150,7 @@ Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][12].
 [1]: /fr/logs
 [2]: /fr/help
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
-[4]: /fr/agent/logs/#send-logs-over-https
+[4]: /fr/agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /fr/integrations/journald/

@@ -40,36 +40,37 @@ Datadog の ネットワークパフォーマンスモニタリング (NPM) は 
 - Amazon Linux 2
 - CentOS/RHEL 7.6 以降
 
-**注:** [DNS 解決][4]機能は [CentOS/RHEL 7.6][3]ではサポートされていませんが、CentOS/RHEL 8 以降で利用可能です。
+**注:** [CentOS/RHEL 7.6 以降][2]の要件は、kernel 4.4.0 以降では適用外です。[DNS 解決][3]機能は CentOS/RHEL 7.6 ではサポートされていません。
 
 #### Windows OS
 
-データ収集はデバイスドライバを使用して行われ、[Windows Server 2016 以降の公開ベータ版][2]で利用できます。
+データ収集はデバイスドライバを使用して行われ、Datadog Agent バージョン 7.27.1、Windows バージョン 2012 以降でサポートされます。
 
 #### macOS
 
 Datadog ネットワークパフォーマンスモニタリングは現在 macOS プラットフォームをサポートしていません。
 
-### コンテナのセットアップ
+### コンテナ
 
-NPM は [Docker][13]、[Kubernetes][14]、[ECS][15] およびその他のコンテナ技術をサポートしており、コンテナ化およびオーケストレーションされた環境のアーキテクチャとパフォーマンスの可視化に役立ちます。Datadog のコンテナインテグレーションでは、コンテナ、タスク、ポッド、クラスター、デプロイなど目で見て分かりやすいエンティティごとに、システムに内蔵されたタグ (`container_name`、`task_name`、`kube_service` など) を使用してトラフィックを集約することができます。
+NPM は [Docker][4]、[Kubernetes][5]、[ECS][6] およびその他のコンテナ技術をサポートしており、コンテナ化およびオーケストレーションされた環境のアーキテクチャとパフォーマンスの可視化に役立ちます。Datadog のコンテナインテグレーションでは、コンテナ、タスク、ポッド、クラスター、デプロイなど目で見て分かりやすいエンティティごとに、システムに内蔵されたタグ (`container_name`、`task_name`、`kube_service` など) を使用してトラフィックを集約することができます。
 
 ### ネットワークルーティングツール
 
-#### Istio 
+#### Istio
 
 NPM ではコンテナ、ポッド、サービス間のネットワークコミュニケーションを、Istio のサービスメッシュでマッピングすることができます。
 
 Datadog は、Istio 環境のあらゆる側面を監視するため、以下のことも実現できます。
-- [ログ][6]を使用して、Envoy および Istio の Control Plane の健全性を評価。
-- リクエスト、帯域幅、リソース消費の[メトリクス][6]でサービスメッシュのパフォーマンスを詳しく確認。
-- [APM[[7] でメッシュを実行してアプリケーションの分散型トレースの詳細を確認。
+
+- [ログ][7]を使用して、Envoy および Istio の Control Plane の健全性を評価。
+- リクエスト、帯域幅、リソース消費の[メトリクス][7]でサービスメッシュのパフォーマンスを詳しく確認。
+- [APM][8] でメッシュを実行してアプリケーションの分散型トレースの詳細を確認。
 
 NPM は Istio v1.6.4 以降および [Datadog Agent v7.24.1 以降][1] でサポートされています。
 
-Istio 環境での Datadog の使用について、詳細は [Istio のブログをご参照ください][8]。
+Istio 環境での Datadog の使用について、詳細は [Istio のブログをご参照ください][9]。
 
-#### Cilium 
+#### Cilium
 
 ネットワークパフォーマンスモニタリングは、次の要件が満たされている場合、**Cilium** インストールと互換性があります。
 1) Cilium バージョン 1.6 以降、および
@@ -79,18 +80,16 @@ Istio 環境での Datadog の使用について、詳細は [Istio のブログ
 
 ネットワークパフォーマンスモニタリングは次のプロビジョニングシステムの使用をサポートしています。
 
-- Daemonset / Helm 1.38.11 以降: [Datadog Helm チャート][9]を参照してください
-- Chef 12.7 以降: [Datadog Chef レシピ][10]を参照してください
-- Ansible 2.6 以降: [Datadog Ansible ロール][11]を参照してください
+- Daemonset / Helm 1.38.11 以降: [Datadog Helm チャート][10]を参照してください
+- Chef 12.7 以降: [Datadog Chef レシピ][11]を参照してください
+- Ansible 2.6 以降: [Datadog Ansible ロール][12]を参照してください
 
 ## セットアップ
-
-ネットワークパフォーマンスモニタリングを有効にするには、ご使用中のシステム設定に基づいて、[Agent の主要コンフィギュレーションファイル][12]で構成します。
 
 このツールの狙いと強みが、ネットワークエンドポイント間のトラフィック分析とネットワークの依存関係のマッピングであるため、価値を最大化するために、インフラストラクチャーの重要なサブセット、そして**_少なくとも 2 つのホスト_**にインストールすることが推奨されます。
 
 {{< tabs >}}
-{{% tab "Agent" %}}
+{{% tab "Agent (Linux)" %}}
 
 Datadog Agent を使用してネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
 
@@ -121,7 +120,7 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
 
     **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに `sudo service datadog-agent-sysprobe start` のコマンドで実行し、`datadog-agent` が起動する前にブート時に実行開始されるよう設定します。
 
-5. [Agent を再起動します][2]
+5. [Agent を再起動します][2]。
 
     ```shell
     sudo systemctl restart datadog-agent
@@ -160,7 +159,7 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [Agent を再起動します][2]
+5. [Agent を再起動します][2]。
 
 **注**: 上記の手順では、システムに複数の SELinux ユーティリティ (`checkmodule`、`semodule`、`semodule_package`、`semanage`、`restorecon`) をインストールする必要があります。これらは標準ディストリビューション (Ubuntu、Debian、RHEL、CentOS、SUSE) のほとんどで利用可能です。インストール方法について、詳しくはお使いのディストリビューションを確認してください。
 
@@ -168,31 +167,26 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 
 ### Windows システム
 
-Windows システムのデータ収集は、Windows Server バージョン 2016 以降の公開ベータ版で利用できます。
-**注**: NPM は現在、Windows ホストのみを監視し、Windows コンテナは監視していません。DNS メトリクス収集は、Windows システムではサポートされていません。
+[1]: /ja/infrastructure/process/?tab=linuxwindows#installation
+[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
+{{% /tab %}}
+{{% tab "Agent (Windows)" %}}
+Windows のデータ収集は、ネットワークデータ収集用のフィルタードライバに依存します。
 
 Windows ホストのネットワークパフォーマンスモニタリングを有効にするには
 
-1. Datadog Agent の[このカスタムビルド][4]をインストールします。
-2. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
+1. [Datadog Agent][1]（バージョン 7.27.1 以降）をインストールし、ネットワークドライバコンポーネントを有効にします。
+
+   インストール時に `ADDLOCAL="MainApplication,NPM"` を `msiexec` コマンドに渡すか、Agent のインストールを GUI で実行する際に "Network Performance Monitoring" を選択します。
+
+1. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
 
     ```yaml
-    system_probe_config:
-        ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable the System Probe.
-        #
+    network_config:
         enabled: true
     ```
-3. `C:\ProgramData\Datadog\datadog.yaml` を編集し、有効フラグを `true` に設定します。
-
-    ```yaml
-    process_config:
-        ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable the System Probe.
-        #
-        enabled: true
-    ```
-4. [Agent を再起動します][2]。
+3. [Agent を再起動します][2]。
 
    PowerShell (`powershell.exe`) の場合: 
     ```shell
@@ -202,11 +196,11 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
+**注**: NPM は現在、Windows ホストのみを監視し、Windows コンテナは監視していません。DNS メトリクス収集は、Windows システムではサポートされていません。
 
-[1]: /ja/infrastructure/process/?tab=linuxwindows#installation
+
+[1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
-[4]: https://s3.amazonaws.com/ddagent-windows-unstable/datadog-agent-7.23.2-beta1-1-x86_64.msi
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -216,12 +210,12 @@ Kubernetes で Helm を使用してネットワークパフォーマンスのモ
   networkMonitoring:
       enabled: true
   ```
-値は values.yaml に追加してください。Helm チャートのバージョン 2.4.39 以降が必要です。詳細は [Datadog Helm チャート][4]を参照してください。
+値は values.yaml に追加してください。Helm チャートのバージョン 2.4.39 以降が必要です。詳細は [Datadog Helm チャート][1]を参照してください。
 
 Helm をお使いでない場合は、Kubernetes を使用してネットワークパフォーマンスモニタリングを新規で有効化することができます。
 
-1. [datadog-agent.yaml マニフェスト][1]をダウンロードします。
-2. `<API_キー>` を、ご使用の [Datadog API キー][2]に置き換えます。
+1. [datadog-agent.yaml マニフェスト][2]テンプレートをダウンロードします。
+2. `<DATADOG_API_KEY>` を、ご使用の [Datadog API キー][3]に置き換えます。
 3. 任意 - **Datadog サイトを設定**。Datadog EU サイトをご利用中の場合、`datadog-agent.yaml` マニフェストで `DD_SITE` 環境変数を `datadoghq.eu` に設定します。
 4. 次のコマンドで **DaemonSet をデプロイ**します。
 
@@ -229,7 +223,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
     kubectl apply -f datadog-agent.yaml
     ```
 
-すでに [マニフェストを適用して Agent を稼働させている][3]場合
+すでに [マニフェストを適用して Agent を稼働させている][4]場合
 
 1. `datadog-agent` テンプレートにアノテーション `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` を追加します。
 
@@ -344,10 +338,10 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
     ```
 
 
-[1]: /resources/yaml/datadog-agent-npm.yaml
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: /ja/agent/kubernetes/
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: /resources/yaml/datadog-agent-npm.yaml
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: /ja/agent/kubernetes/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -412,18 +406,16 @@ AWS ECS での設定については、[AWS ECS][1] ドキュメントページ�
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /ja/network_monitoring/performance/setup/
-[3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /ja/network_monitoring/performance/network_page#dns-resolution
-[5]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
-[6]: https://docs.datadoghq.com/ja/integrations/istio/
-[7]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
-[8]: https://www.datadoghq.com/blog/istio-datadog/
-[9]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[10]: https://github.com/DataDog/chef-datadog
-[11]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[12]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[13]: https://docs.datadoghq.com/ja/integrations/docker_daemon/
-[14]: https://docs.datadoghq.com/ja/agent/kubernetes/
-[15]: https://docs.datadoghq.com/ja/agent/amazon_ecs/
+[2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
+[3]: /ja/network_monitoring/performance/network_page#dns-resolution
+[4]: https://docs.datadoghq.com/ja/network_monitoring/performance/setup/?tab=agent#windows-systems
+[5]: https://docs.datadoghq.com/ja/integrations/docker_daemon/
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/
+[7]: https://docs.datadoghq.com/ja/integrations/istio/
+[8]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
+[9]: https://www.datadoghq.com/blog/istio-datadog/
+[10]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[11]: https://github.com/DataDog/chef-datadog
+[12]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe

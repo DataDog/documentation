@@ -27,7 +27,6 @@ is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
-metric_prefix: snmp.
 metric_to_check:
   - snmp.cefcFRUPowerAdminStatus
   - snmp.devClientCount
@@ -54,7 +53,7 @@ Cisco アプライアンスから、以下を含む SNMP メトリクスを収�
 - Cisco ISR
 - Cisco UC Virtual Machines
 
-監視されるメトリクスの詳細については、[SNMP インテグレーションタイル][2]を参照してください。
+監視対象となるメトリクスの詳細については、[SNMP インテグレーションタイル][2]を参照してください。
 
 ## セットアップ
 

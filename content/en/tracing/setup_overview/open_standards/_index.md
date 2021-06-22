@@ -12,13 +12,20 @@ further_reading:
 - link: "/tracing/connect_logs_and_traces/opentelemetry"
   tag: "Documentation"
   text: "Connect OpenTelemetry Traces and Logs"
+- link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
+  tag: "Blog"
+  text: "Learn more about AWS’s managed Lambda Layer for OpenTelemetry"
 aliases:
 
 
 ---
 Datadog supports a variety of open standards, including [OpenTelemetry][1] and [OpenTracing][2].
 
-## OpenTelemetry Collector Datadog exporter
+## OpenTelemetry collector Datadog exporter
+
+<div class="alert alert-warning">
+The Datadog exporter version v0.28.0 (the current latest version at time of writing) has reports of an <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/3786">unintended issue</a> that may cause Traces exported to Datadog to not be retained past 15 minutes. This may cause unexpected behavior in the Datadog UI. The current recommended version of the Datadog Exporter is <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.27.0">v0.27.0</a>. Please <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
+</div>
 
 The OpenTelemetry Collector is a vendor-agnostic separate agent process for collecting and exporting telemetry data emitted by many processes. Datadog has [an exporter available within the OpenTelemetry Collector][3] to receive traces and metrics data from the OpenTelemetry SDKs, and to forward the data on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs](#connect-opentelemetry-traces-and-logs).
 
@@ -37,7 +44,7 @@ datadog:
     site: datadoghq.eu
 ```
 
-On each OpenTelemetry-instrumented application, set the resource attributes `development.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+On each OpenTelemetry-instrumented application, set the resource attributes `deployment.environment`, `service.name`, and `service.version` using [the language's SDK][1]. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][7]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
 <!--- 1. Hostname set by another OpenTelemetry component -->
 1. Manually set hostname in configuration
@@ -51,7 +58,7 @@ On each OpenTelemetry-instrumented application, set the resource attributes `dev
 The OpenTelemetry Collector is configured by adding a [pipeline][8] to your `otel-collector-configuration.yml` file. Supply the relative path to this configuration file when you start the collector by passing it in via the `--config=<path/to/configuration_file>` command line argument. For examples of supplying a configuration file, see the [environment specific setup](#environment-specific-setup) section below or the [OpenTelemetry Collector documentation][9].
 
 The exporter assumes you have a pipeline that uses the `datadog` exporter, and includes a [batch processor][10] configured with the following:
-  - A required `timeout` setting of `10s` (10 seconds). A batch representing 10 seconds of traces is a constraint of Datadog's API Intake for Trace Related Statistics. 
+  - A required `timeout` setting of `10s` (10 seconds). A batch representing 10 seconds of traces is a constraint of Datadog's API Intake for Trace Related Statistics.
   <div class="alert alert-info"><strong>Important!</strong> Without this <code>timeout</code> setting, trace related metrics including <code>.hits</code>, <code>.errors</code>, and <code>.duration</code> for different services and service resources will be inaccurate over periods of time.</div>
 
 <div class="alert alert-warning">
@@ -117,12 +124,12 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:latest`][12].
 
-3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include: 
+3.  Determine which ports to open on your container. OpenTelemetry traces are sent to the OpenTelemetry Collector over TCP or UDP on a number of ports, which must be exposed on the container.  By default, traces are sent over OTLP/gRPC on port `55680`, but common protocols and their ports include:
 
       - Zipkin/HTTP on port `9411`
       - Jaeger/gRPC on port `14250`
       - Jaeger/HTTP on port `14268`
-      - Jaeger/Compact on port (UDP) `6831` 
+      - Jaeger/Compact on port (UDP) `6831`
       - OTLP/gRPC on port `55680`
       - OTLP/HTTP on port `55681`
 
@@ -134,7 +141,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
       -v $(pwd)/otel_collector_config.yaml:/etc/otel/config.yaml \
       otel/opentelemetry-collector-contrib
       ```
-  
+
 5. Configure your application with the appropriate resource attributes for unified service tagging by [adding metadata](#opentelemetry-collector-datadog-exporter)
 
 ##### Receive traces from other containers
@@ -149,9 +156,9 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
     ```
     docker network create <NETWORK_NAME>
     ```
-  
+
 4. Run the OpenTelemetry Collector container and application container in the same network. **Note**: When running the application container, ensure the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the OpenTelemetry Collector. In the example below, this is `opentelemetry-collector`.
- 
+
     ```
     # Datadog Agent
     docker run -d --name opentelemetry-collector \
@@ -170,7 +177,7 @@ Run an Opentelemetry Collector container to receive traces either from the [inst
 
 The OpenTelemetry Collector can be run in two types of [deployment scenarios][4]:
 
-- As an OpenTelemetry Collector agent running on the same host as the application in a sidecar or daemonset; or 
+- As an OpenTelemetry Collector agent running on the same host as the application in a sidecar or daemonset; or
 
 - As a standalone service, for example a container or deployment, typically per-cluster, per-datacenter, or per-region.
 
@@ -180,7 +187,7 @@ When deploying the OpenTelemetry Collector as a daemonset, refer to [the example
 
 On the application container, use the downward API to pull the host IP. The application container needs an environment variable that points to `status.hostIP`. The OpenTelemetry Application SDKs expect this to be named `OTEL_EXPORTER_OTLP_ENDPOINT`. Use the [below example snippet](#example-kubernetes-opentelemetry-application-configuration) as a guide.
 
-##### Example Kubernetes OpenTelemetry Collector configuration
+##### Example Kubernetes OpenTelemetry collector configuration
 
 A full example Kubernetes manifest for deploying the OpenTelemetry Collector as both daemonset and standalone collector [can be found here][13]. Modify the example to suit your environment. The key sections that are specific to Datadog are as follows:
 
@@ -297,7 +304,7 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conju
 
   - Each of the supported languages also has support for [sending OpenTracing data to Datadog][18].
 
-  - [Python][19], [Ruby][20], and [NodeJS][21] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent. 
+  - [Python][19], [Ruby][20], and [NodeJS][21] also have language-specific OpenTelemetry Datadog span exporters, which export traces directly from OpenTelemetry tracing clients to a Datadog Agent.
 
 ## Further Reading
 

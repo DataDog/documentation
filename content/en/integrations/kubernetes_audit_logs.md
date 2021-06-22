@@ -28,6 +28,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/'
       tag: 'Blog'
       text: 'Key Kubernetes audit logs for monitoring cluster security'
+integration_id: "kubernetes-audit-logs"
 ---
 
 ## Overview

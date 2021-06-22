@@ -45,7 +45,7 @@ Datadog provides out of the box graphs for any given resource:
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
 
-### Export to Timeboard
+### Export to timeboard
 
 On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Timeboard][4].
 
@@ -59,7 +59,7 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
 
-## Span Summary
+## Span summary
 
 For a given resource, Datadog provides you a [span][5] analysis breakdown of all matching traces:
 
@@ -67,12 +67,17 @@ For a given resource, Datadog provides you a [span][5] analysis breakdown of all
 
 The displayed metrics represent, per span:
 
-| Metric            | Description                                                                                                                                        |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Avg Span/trace`  | Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.                     |
-| `% of traces`     | Percentage of traces including the current resource where the span is present at least once.                                                       |
-| `Avg duration`    | Average duration of the span, for traces including the current resource, where the span is present at least once.                                  |
-| `Avg % Exec Time` | Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once. |
+`Avg Spans/trace`
+: Average number of occurrences of the span, for traces including the current resource, where the span is present at least once.
+
+`% of Traces`
+: Percentage of traces including the current resource where the span is present at least once.
+
+`Avg Duration`
+: Average duration of the span, for traces including the current resource, where the span is present at least once.
+
+`Avg % Exec Time` 
+: Average ratio of execution time for which the span was active, for traces including the current resource, where the span is present at least once.
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (i.e.: spans without children).
 

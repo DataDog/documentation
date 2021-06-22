@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_virtual_networks/'
 draft: false
 git_integration_title: azure_virtual_networks
 has_logo: true
+integration_id: ''
 integration_title: Microsoft Azure Virtual Network
 is_public: true
 kind: インテグレーション

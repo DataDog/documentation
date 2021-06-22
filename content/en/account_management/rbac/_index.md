@@ -30,11 +30,14 @@ By granting permissions to roles, any user who is associated with that role rece
 
 ## Datadog default roles
 
-| Role                       | Description                                                                                                                                                                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Datadog Admin Role**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][2]. They can also promote standard users to administrators.                                          |
-| **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.                      |
-| **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][2] with someone outside their unit. |
+Datadog Admin Role
+: Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][2]. They can also promote standard users to administrators.
+
+Datadog Standard Role
+: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.
+
+Datadog Read Only Role
+: Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][2] with someone outside their unit.
 
 ## Custom roles
 
@@ -134,6 +137,10 @@ Find an example of how to delete a Role in the [Datadog Create Role API document
 {{% /tab %}}
 {{< /tabs >}}
 
+## Restrict access to dashboards and monitors
+
+Once you have RBAC roles set up, you can restrict access to dashboards and monitors by user role. For more information, see the [Dashboard Permissions docs][8] and the [Monitors Permissions docs][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -145,3 +152,5 @@ Find an example of how to delete a Role in the [Datadog Create Role API document
 [5]: /notebooks/
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
+[8]: /dashboards/#restrict-access
+[9]: /getting_started/application/monitors/#restrict-access
