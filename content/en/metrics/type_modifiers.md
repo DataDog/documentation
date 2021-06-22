@@ -4,6 +4,7 @@ kind: documentation
 aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
+ - /developers/metrics/type_modifiers/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
