@@ -6,7 +6,7 @@ widget_type: Timeseries
 aliases:
   - /ja/graphing/widgets/network/
 further_reading:
-  - link: /network_performance_monitoring/
+  - link: /network_monitoring/performance/
     tag: ドキュメント
     text: ネットワークパフォーマンスモニタリング
   - link: /dashboards/screenboards/
@@ -56,6 +56,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/network_performance_monitoring/
+[1]: /ja/network_monitoring/performance
 [2]: /ja/api/v1/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/

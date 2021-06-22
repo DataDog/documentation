@@ -129,17 +129,21 @@ aliases:
 
 * [Can I limit the number of VMs that are pulled in via the VMWare integration?][52]
 
+## VSphere
+
+* [Troubleshooting duplicated hosts with vSphere][53]
+
 ## Webhooks
 
-* [How to make a Trello Card using Webhooks][53]
+* [How to make a Trello Card using Webhooks][54]
 
 ## Windows
 
-* [How to add event log files to the `Win32_NTLogEvent` WMI class][54]
-* [Collect Custom Windows Performance Counters over WMI][55]
-* [Windows Status Based Check][56]
-* [How to monitor events from the Windows Event Logs][57]
-* [How to retrieve WMI metrics][58]
+* [How to add event log files to the `Win32_NTLogEvent` WMI class][55]
+* [Collect Custom Windows Performance Counters over WMI][56]
+* [Windows Status Based Check][57]
+* [How to monitor events from the Windows Event Logs][58]
+* [How to retrieve WMI metrics][59]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -193,9 +197,10 @@ aliases:
 [50]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
 [51]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
 [52]: /integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
-[53]: /integrations/faq/how-to-make-trello-card-using-webhooks/
-[54]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
-[55]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
-[56]: /integrations/faq/windows-status-based-check/
-[57]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs/
-[58]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[53]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[54]: /integrations/faq/how-to-make-trello-card-using-webhooks/
+[55]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
+[56]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
+[57]: /integrations/faq/windows-status-based-check/
+[58]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs/
+[59]: /integrations/faq/how-to-retrieve-wmi-metrics/
