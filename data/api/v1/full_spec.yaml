@@ -10487,7 +10487,11 @@ components:
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
-          $ref: '#/components/schemas/SyntheticsTickInterval'
+          description: The frequency at which to run the Synthetic test (in seconds).
+          format: int64
+          maximum: 604800
+          minimum: 30
+          type: integer
       type: object
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
@@ -10609,32 +10613,6 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
-    SyntheticsTickInterval:
-      description: The frequency at which to run the Synthetic test (in seconds).
-      enum:
-      - 30
-      - 60
-      - 300
-      - 900
-      - 1800
-      - 3600
-      - 21600
-      - 43200
-      - 86400
-      - 604800
-      format: int64
-      type: integer
-      x-enum-varnames:
-      - THIRTY_SECONDS
-      - MINUTE
-      - FIVE_MINUTES
-      - FIFTEEN_MINUTES
-      - THIRTY_MINUTES
-      - HOUR
-      - SIX_HOURS
-      - TWELVE_HOURS
-      - DAY
-      - WEEK
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -16695,33 +16673,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
@@ -16758,33 +16709,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
@@ -16825,33 +16749,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Set an AWS tag filter
       tags:
       - AWS Integration
