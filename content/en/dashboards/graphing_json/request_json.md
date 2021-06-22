@@ -139,9 +139,9 @@ You can also add, subtract, multiply, and divide a series. Note that Datadog doe
 
 ## Examples
 
-{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="Graphing with JSON"  style="width:75%;" >}} 
+{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="Graphing with JSON"  style="width:75%;" >}}
 
-Here is the JSON for the above example showing `average` of network bytes received for a specific devic and host and grouped by account. 
+Here is the JSON for the above example showing `average` of network bytes received for a specific devic and host and grouped by account.
 
 ```text
 "requests": [
@@ -170,9 +170,9 @@ Here is the JSON for the above example showing `average` of network bytes receiv
 ```
 
 
-{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="Rate example"  style="width:75%;" >}} 
+{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="Rate example"  style="width:75%;" >}}
 
-Here is an example using the `rate()` function, which takes only a single metric as a parameter. 
+Here is an example using the `rate()` function, which takes only a single metric as a parameter.
 
 
 ```json
@@ -266,9 +266,9 @@ Here is an example using the `week_before()` Timeshift function:
     ]
 ```
 
-Here is another example showing how to graph a ratio of `error` to `info` logs and then apply Timeshift function.
+Here is another example showing how to graph a ratio of `error` to `info` logs and then apply a Timeshift function.
 
-{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="Ratio example"  style="width:75%;" >}} 
+{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="Ratio example"  style="width:75%;" >}}
 
 ```json
 {
