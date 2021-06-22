@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Whether you are using metrics, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality. This page describes querying with the graphic editor. Advanced users can create and edit graphs with JSON. To learn more, see [Graphing with JSON][1].
+Whether you are using metrics, logs, traces, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality. This page describes querying with the graphic editor. Advanced users can create and edit graphs with JSON. To learn more, see [Graphing with JSON][1].
 
 ## Graphing editor
 
@@ -85,13 +85,52 @@ When switching to the JSON view, the query looks like this:
 "q": "avg:system.disk.free{*}.rollup(avg, 60)"
 ```
 
+The full JSON looks like this:
+
+```text
+{
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.disk.free{*}.rollup(avg, 60)"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ],
+    "yaxis": {
+        "scale": "linear",
+        "min": "auto",
+        "max": "auto",
+        "include_zero": true,
+        "label": ""
+    },
+    "markers": []
+}
+```
+
 For more about using the JSON view, see [Graphing with JSON][1].
 
 ### Advanced graphing
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][9].
 
-Datadog also supports the ability to graph your metrics with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
