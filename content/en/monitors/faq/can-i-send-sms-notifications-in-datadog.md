@@ -13,6 +13,14 @@ further_reading:
 Many of our customers use the [webhooks integration][1] to send alerts to an SMS service like Twilio.  
 We have [a blog post][2] which should help you achieve this.
 
+Another option is to send a SMS via an email. To configure this in Datadog, use the email relative to your cell phone provider. A few examples are listed below:
+
+AT&T: phonenumber@txt.att.net
+T-Mobile: phonenumber@tmomail.net
+Sprint: phonenumber@messaging.sprintpcs.com
+Verizon: phonenumber@vtext.com or phonenumber@vzwpix.com
+Virgin Mobile: phonenumber@vmobl.com
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/webhooks/
