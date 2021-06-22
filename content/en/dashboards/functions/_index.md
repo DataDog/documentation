@@ -23,7 +23,7 @@ aliases:
 
 ## Overview
 
-Functions can be applied to your queries by using the `Formula` box in the graphing editor. Most of the functions are applied as the last step (after [time][1] and [space aggregation][2]).
+Functions can be applied to your queries by clicking `+` icon in the graphing editor. Most of the functions are applied as the last step (after [time][1] and [space aggregation][2]).
 
 Here is an example showing how to apply Exclusion function to exclude certain values of your metric.
 
