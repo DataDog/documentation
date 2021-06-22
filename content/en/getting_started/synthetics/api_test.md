@@ -10,7 +10,7 @@ further_reading:
       text: 'Learn more about API tests'
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
-      text: 'Learn about Private locations'
+      text: 'Learn about private locations'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -27,7 +27,7 @@ further_reading:
 
 [API tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**.
 
-The example below demonstrates the creation of an API test to ensure your website is up and providing responses in a given period of time.
+The example below demonstrates the creation of an API test to ensure that your website is up and is providing responses in a given period of time.
 
 ### Configure the request
 
@@ -47,11 +47,11 @@ The example below demonstrates the creation of an API test to ensure your websit
 
 Datadog automatically populates basic assertions about your endpoint's response. Assertions define the alert condition and are customizable. 
 
-In this example, three default assertions populate after testing the URL:
+In this example, three default assertions populate after the URL is tested:
 
 {{< img src="getting_started/synthetics/assertions-example.png" alt="Browser test failure"  style="width:90%;">}}
 
-To add a custom assertion, you can click anywhere in the response preview or click **New Assertion**.
+To add a custom assertion, click anywhere in the response preview or click **New Assertion**.
 
 {{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure"  style="width:90%;">}}
 
@@ -75,7 +75,7 @@ After a location fails, retries immediately run.
 
 **Note**: By default, the wait time for a failed test to retry is 300ms. This interval can be configured via the [Synthetics API][3].
 
-To receive alerts when your endpoint goes down for three minutes on two different locations, you can set up an alerting condition such as:
+To receive alerts when your endpoint goes down for three minutes on two different locations, set up an alerting condition such as:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
@@ -93,7 +93,7 @@ When you're ready to run your test, click **Save Test**.
 
 The API test details page displays an overview of the test configuration, the global uptime associated with the tested endpoint by location, graphs about response time and network timings, and a list of test results and events.
 
-To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. You can review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
+To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
