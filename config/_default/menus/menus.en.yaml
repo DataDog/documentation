@@ -2361,7 +2361,7 @@ main:
     parent: dev_tools_integrations
     weight: 404
   - name: Custom Metrics
-    url: metrics/
+    url: metrics/custom_metrics/
     parent: metrics_top_level
     identifier: metrics_custom_metrics
     weight: 999
