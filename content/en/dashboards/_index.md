@@ -40,7 +40,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][2].
+Search, view, or create dashboards and lists on the [Dashboard List][1] page.
 
 {{< img src="dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
 
@@ -153,12 +153,11 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 <div class="alert alert-warning">
 RBAC restrict access to dashboards is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][3] documentation.
+Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][2] documentation.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /help/
 [3]: /account_management/rbac/
