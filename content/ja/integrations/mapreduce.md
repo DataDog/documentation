@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    mapreduce: assets/dashboards/mapreduce_dashboard.json
   logs:
     source: mapreduce
   metrics_metadata: metadata.csv
