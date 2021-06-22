@@ -110,7 +110,7 @@ Windows では、`secret_backend_command` として設定される実行可能�
 
 * `ddagentuser`（Agent の実行に使用したユーザー）の読み取り/実行を持っている。
 * `Administrators` グループ、ビルトインローカルシステムアカウント、または Agent ユーザーコンテキスト（デフォルトでは `ddagentuser`）以外のユーザーまたはグループの権限を持っていない。
-* 有効な Win32 アプリケーションであるため、Agent はそれを実行できる。
+* 有効な Win32 アプリケーションであるため、Agent で実行できます（たとえば、PowerShell または Python スクリプトは機能しません）。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -249,7 +249,7 @@ Kubernetes では、ポッド内で[シークレットをファイルとして�
 シークレットが `/etc/secret-volume` 内でマウントされている場合は、以下の環境変数を使用してください。
 
 ```
-DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 

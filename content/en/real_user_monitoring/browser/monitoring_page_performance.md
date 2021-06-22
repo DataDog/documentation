@@ -27,7 +27,10 @@ RUM view events collect extensive performance metrics for every single page view
 - **Dashboards**: provides you with a high-level view of your application's performance. For example, the out-of-the-box [Performance Overview dashboard][1] can be filtered on [default attributes][2] collected by RUM to surface issues impacting a subset of users. This dashboard can be cloned and customized to your specific needs. All [RUM performance metrics](#all-performance-metrics) can be used in dashboard queries.
 - **RUM waterfall**: accessible for every single RUM view event in the [RUM Explorer][3], it lets you troubleshoot the performance of a specific page view. It shows how your website assets and resources, long tasks, and frontend errors affect performance for your end users, at the page level.
 
-### Core Web Vitals
+### Core web vitals
+<div class="alert alert-warning"> 
+  <strong>Note:</strong>The core web vitals metrics are available in Datadog from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.0.0+.
+</div>
 
 [Google's Core Web Vitals][4] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 

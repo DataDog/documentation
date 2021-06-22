@@ -71,7 +71,7 @@ import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
 
 Vous pouvez également consulter directement les bibliothèques :
 
-{{< partial name="api/sdk-languages.html" >}} 
+{{< partial name="api/sdk-languages.html" >}}
 </br>
 Vous cherchez à prendre en main l'application ? Consultez notre documentation générale [Débuter avec Datadog][7].
 
@@ -85,4 +85,4 @@ Vous cherchez à prendre en main l'application ? Consultez notre documentation 
 [4]: /fr/api/v1/using-the-api/
 [5]: https://brew.sh
 [6]: https://docs.datadoghq.com/fr/developers/libraries/
-[7]: /fr/getting_started/application/ß
+[7]: /fr/getting_started/application/

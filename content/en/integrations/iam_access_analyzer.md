@@ -19,6 +19,7 @@ manifest_version: 1.0
 name: iam_access_analyzer
 public_title: Datadog-AWS Identity and Access Management Access Analyzer
 version: 1.0
+integration_id: "iam-access-analyzer"
 ---
 
 ## Overview

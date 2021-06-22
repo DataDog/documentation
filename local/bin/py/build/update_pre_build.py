@@ -67,7 +67,8 @@ class Build:
                     Int.process_integrations(content, marketplace=True)
                 elif (content["action"] == "pull-and-push-folder"):
                     pull_and_push_folder(content, self.content_dir)
-
+                elif content["action"] == "npm-integrations":
+                    Int.process_integrations(content)
                 elif content["action"] == "pull-and-push-file":
                     pull_and_push_file(content, self.content_dir)
                 elif content["action"] in ("security-rules", "compliance-rules"):
@@ -101,7 +102,7 @@ class Build:
                     "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
             else:
                 print(
-                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stoping build.")
+                    "\x1b[31mERROR\x1b[0m: Integration merge failed, stopping build.")
                 sys.exit(1)
 
 

@@ -26,8 +26,9 @@
     <source srcset="{{ $url }}&auto=format&w=360 1x, {{ $url }}&auto=format&w=360&dpr=2 2x" media="(min-width: 0px)">
     <img width="{{$img_width}}"
          height="{{$img_height}}"
-         class="{{ if $img_class }} {{ $img_class }} {{ end }}{{ if not ($disable_lazy) }} lazyload {{ end }}"
+         class="{{ if $img_class }}{{ $img_class }}{{ end }}"
          srcset="{{ $url }}&auto=format&w=807"
          style="{{ if $img_style }}{{ $img_style | safeCSS }}{{ end }}"
+         loading="lazy"
          alt="{{ if $img_alt }}{{ $img_alt }}{{end}}">
 </picture>

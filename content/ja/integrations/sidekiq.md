@@ -55,15 +55,15 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
 1. `dogstatsd-ruby` [gem][3] をインストールします。
 
    ```
-    gem install dogstatsd-ruby --version '~> 4'
+    gem install dogstatsd-ruby
    ```
 
-2. これをイニシャライザに含めることにより、Sidekiq Pro メトリクス収集を有効にします。
+2. Sidekiq Pro メトリクス収集を初期化子に含めることで有効にします。コンテナ化されたデプロイの場合は、`localhost` を Agent のコンテナのアドレスに更新します。
 
    ```ruby
         require 'datadog/statsd' # gem 'dogstatsd-ruby'
 
-        Sidekiq::Pro.dogstatsd = ->{ Datadog::Statsd.new('metrics.example.com', 8125, namespace:'sidekiq') }
+        Sidekiq::Pro.dogstatsd = ->{ Datadog::Statsd.new('localhost', 8125, namespace:'sidekiq') }
 
         Sidekiq.configure_server do |config|
           config.server_middleware do |chain|

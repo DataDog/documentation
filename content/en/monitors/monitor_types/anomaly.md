@@ -39,15 +39,16 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 
 ### Set alert conditions
 
-* Trigger an alert if the values have been `above or below`, `above`, or `below`
-* the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours.
-* Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours.
+Trigger an alert if the values have been `above or below`, `above`, or `below` the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours. Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours.
 
-**Anomaly detection** - With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
+Anomaly detection
+: With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
 
-**Trigger window** - How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
+Trigger window
+: How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
-**Recovery window** - How much time is required for the metric to not be considered anomalous so the alert recovers.
+Recovery window
+: How much time is required for the metric to not be considered anomalous so the alert recovers.
 
 #### Advanced options
 
@@ -55,32 +56,48 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
 
-| Option                      | Description                                                                                                                |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Deviations                  | The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].                |
-| Algorithm                   | The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).                          |
-| [Seasonality](#seasonality) | The seasonality (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric. |
-| [Daylight&nbsp;savings][4]  | Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality.                                  |
-| [Rollup][5]                 | The rollup interval.                                                                                                       |
-| Thresholds                  | The percentage of points that need to be anomalous for alerting, warning, and recovery.                                    |
+
+Deviations 
+: The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].
+
+Algorithm
+: The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
+
+Seasonality 
+: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
+
+Daylight savings
+: Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
+
+Rollup  
+: The [rollup interval][5].
+
+Thresholds
+: The percentage of points that need to be anomalous for alerting, warning, and recovery.
 
 ##### Seasonality
 
-| Option | Description                                                                                                                                   |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Hourly | The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc. |
-| Daily  | The algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.                           |
-| Weekly | The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.   |
+Hourly
+: The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
+
+Daily
+: The algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.
+
+Weekly
+: The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
 ##### Anomaly detection algorithms
 
-| Option | Use case                                                                                       | Description                                                                                                                                                                                                                                                           |
-|--------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Basic  | Metrics with no repeating seasonal pattern                                                     | Uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.                                         |
-| Agile  | Seasonal metrics expected to shift, the algorithm should quickly adjust to metric level shifts | A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.                                                |
-| Robust | Seasonal metrics expected to be stable, slow level shifts are considered anomalies             | A [seasonal-trend decomposition][7] algorithm, it is very stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g. if the level of a metric shifts due to a code change.) |
+Basic
+: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends. 
+
+Agile
+: Use when metrics are seasonal and expected to shift. The algorithm quickly adjusts to metric level shifts. A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.
+
+Robust
+: Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is very stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g. if the level of a metric shifts due to a code change.)
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
@@ -95,7 +112,7 @@ In this example, the metric exhibits a sudden level shift. `Agile` adjusts more 
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2"  style="width:90%;">}}
 
-This example shows how the algorithms react to an hour-long anomaly. `Robust` completely ignores this anomaly. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
+This example shows how the algorithms react to an hour-long anomaly. `Robust` does not adjust the bounds for the anomaly in this scenario since it reacts more slowly to abrupt changes. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
 
@@ -127,16 +144,35 @@ The `query` property in the request body should contain a query string in the fo
 avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<count_default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
-* `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`
-* `metric_query`: a standard Datadog metric query (e.g., `sum:trace.flask.request.hits{service:web-app}.as_count()`)
-* `algorithm`: `basic`, `agile`, or `robust`
-* `deviations`: a positive number; controls the sensitivity of the anomaly detection
-* `direction`: the directionality of anomalies that should trigger an alert; `above`, `below`, or `both`
-* `alert_window`: the timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`)
-* `interval`: a positive integer representing the number of seconds in the rollup interval; we recommend that the `interval` be at least a fifth of the `alert_window` duration
-* `count_default_zero`: use `true` for most monitors; only set to `false` if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero
-* `seasonality`: `hourly`, `daily`, or `weekly`; exclude this parameter when using the `basic` algorithm
-* `threshold`: a positive number no larger than 1; the fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger
+`query_window`
+: A timeframe like `last_4h` or `last_7d`. The time window displayed in graphs in notifications. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`.
+
+`metric_query`
+: A standard Datadog metric query (e.g., `sum:trace.flask.request.hits{service:web-app}.as_count()`).
+
+`algorithm`
+: `basic`, `agile`, or `robust`.
+
+`deviations`
+: A positive number; controls the sensitivity of the anomaly detection.
+
+`direction`
+: The directionality of anomalies that should trigger an alert: `above`, `below`, or `both`.
+
+`alert_window`
+: The timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`).
+
+`interval`
+: A positive integer representing the number of seconds in the rollup interval. We recommend that the `interval` be at least a fifth of the `alert_window` duration.
+
+`count_default_zero`
+: Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
+
+`seasonality`
+: `hourly`, `daily`, or `weekly`. Exclude this parameter when using the `basic` algorithm.
+
+`threshold`
+: A positive number no larger than 1. The fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger.
 
 Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
 
@@ -148,15 +184,12 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 Most of the properties under `options` in the request body are the same as for other query alerts, except for `thresholds` and `threshold_windows`.
 
-**`thresholds`**
+`thresholds`
+: Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
+: The `critical` `threshold` should match the `threshold` used in the `query`.
 
-Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
-
-The `critical` `threshold` should match the `threshold` used in the `query`.
-
-**`threshold_windows`**
-
-Anomaly monitors have a `threshold_windows` property in `options`. `threshold_windows` must include both two properties—`trigger_window` and `recovery_window`. These windows are expressed as timeframe strings, such as `last_10m` or `last_1h`. The `trigger_window` must match the `alert_window` from the `query`. The `trigger_window` is the time range which is analyzed for anomalies when evaluating whether a monitor should trigger. The `recovery_window` is the time range that analyzed for anomalies when evaluating whether a triggered monitor should recover.
+`threshold_windows`
+: Anomaly monitors have a `threshold_windows` property in `options`. `threshold_windows` must include both two properties—`trigger_window` and `recovery_window`. These windows are expressed as timeframe strings, such as `last_10m` or `last_1h`. The `trigger_window` must match the `alert_window` from the `query`. The `trigger_window` is the time range which is analyzed for anomalies when evaluating whether a monitor should trigger. The `recovery_window` is the time range that analyzed for anomalies when evaluating whether a triggered monitor should recover.
 
 A standard configuration of thresholds and threshold window looks like:
 

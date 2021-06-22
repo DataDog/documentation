@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_data_explorer/'
 draft: false
 git_integration_title: azure_data_explorer
 has_logo: true
+integration_id: ''
 integration_title: Microsoft Azure Data Explorer
 is_public: true
 kind: integration

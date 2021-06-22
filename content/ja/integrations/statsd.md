@@ -11,6 +11,7 @@ assets:
 categories:
   - monitoring
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:

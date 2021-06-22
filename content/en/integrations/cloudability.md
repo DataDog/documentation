@@ -12,7 +12,7 @@ categories:
     - cloud
     - Cost Management
 ddtype: crawler
-
+integration_id: "cloudability"
 ---
 
 ## Overview

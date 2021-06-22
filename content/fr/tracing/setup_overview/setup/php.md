@@ -30,7 +30,7 @@ Pour obtenir la liste complète des versions de langage et des bibliothèques pr
 
 ## Installation et démarrage
 
-### Suivre la documentation intégrée à l'application (conseillé)
+### Suivre la documentation dans l'application (conseillé)
 
 Suivez les [instructions de démarrage rapide][2] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
 
@@ -58,12 +58,16 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
 
 3. Après avoir instrumenté votre application, le client de tracing envoie, par défaut, les traces à `localhost:8126`. S'il ne s'agit pas du host et du port adéquats, modifiez-les en définissant les variables d'environnement ci-dessous :
 
-`DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`.
+    `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`
 
-Consultez la [configuration du traceur][2] pour découvrir comment définir ces variables.
+    Consultez la [configuration des variables d'environnement](#configuration-des-variables-d-environnement) pour découvrir comment définir ces variables.
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Définissez `DD_SITE` dans l'Agent Datadog sur {{< region-param key="dd_site" code="true" >}} pour vous assurer que l'Agent envoie les données au bon site Datadog.
+
+{{< /site-region >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /fr/tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
@@ -182,46 +186,143 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 ### Configuration des variables d'environnement
 
-| Variable d'environnement                              | Valeur par défaut     | Remarque                                                                                                                                           |
-|-------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_AGENT_HOST`                           | `localhost` | Nom du host de l'Agent                                                                                                                            |
-| `DD_AUTOFINISH_SPANS`                     | `false`     | Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé                                                                            |
-| `DD_DISTRIBUTED_TRACING`                  | `true`      | Définit si le tracing distribué doit être activé ou non                                                                                                          |
-| `DD_ENV`                                  | `null`      | Définit l'environnement de l'application, par exemple `prod`, `pre-prod` ou encore `stage`. Ajouté dans la version `0.47.0`.                                         |
-| `DD_PRIORITY_SAMPLING`                    | `true`      | Active ou désactive l'échantillonnage prioritaire                                                                                                            |
-| `DD_SERVICE`                              | `null`      | Le nom de l'application par défaut. Pour les versions < 0.47.0, il s'agit de `DD_SERVICE_NAME`.                                                                          |
-| `DD_SERVICE_MAPPING`                      | `null`      | Modifie le nom par défaut d'une intégration APM. Vous pouvez remplacer le nom de plusieurs intégrations à la fois. Utilisez par exemple `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (voir la section [Noms des intégrations](#noms-des-integrations)). |
-| `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | Délai de nouvelle tentative du disjoncteur configurable basé sur IPC (en millisecondes)                                                                            |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Délai maximum autorisé pour la configuration de la connexion de l'Agent (en millisecondes)                                                                          |
-| `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Délai d'expiration de la connexion de l'Agent (en millisecondes)                                                                                                 |
-| `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`         | Nombre maximal de tentatives du disjoncteur configurable basé sur IPC (en millisecondes)                                                                                |
-| `DD_TRACE_AGENT_PORT`                     | `8126`      | Port de l'Agent                                                                                                                          |
-| `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | Délai d'expiration du transfert de la requête de l'Agent (en millisecondes)                                                                                           |
-| `DD_TRACE_AGENT_URL`                      | `null`      | L'URL de l'Agent, qui l'emporte sur `DD_AGENT_HOST` et sur `DD_TRACE_AGENT_PORT`. Exemple : `https://localhost:8126`. Ajoutée dans la version `0.47.1`. |
-| `DD_TRACE_AUTO_FLUSH_ENABLED`             | `false`     | Vider automatiquement le traceur lorsque toutes les spans sont finalisées ; définir sur `true` conjointement à `DD_TRACE_GENERATE_ROOT_SPAN=0` pour tracer les processus à exécution longue |
-| `DD_TRACE_CLI_ENABLED`                    | `false`     | Active le tracing de scripts PHP depuis le CLI                                                                                                     |
-| `DD_TRACE_DEBUG`                          | `false`     | Active le [mode debugging](#mappage-personnalisé-de-l-URL-a-la-ressource) pour le traceur                                                                            |
-| `DD_TRACE_ENABLED`                        | `true`      | Active le traceur partout                                                                                                                     |
-| `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Générer automatiquement une span de premier niveau ; définir sur `false` conjointement à `DD_TRACE_AUTO_FLUSH_ENABLED=1` pour tracer les processus à exécution longue    |
-| `DD_TAGS`                                 | `null`      | Tags à appliquer à toutes les spans, p. ex. : `key1:value1,key2:value2`. Ajoutée dans la version `0.47.0`                                                 |
-| `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Définir le nom de service des requêtes HTTP sur `host-<hostname>`. Par exemple, un appel `curl_exec()` vers `https://datadoghq.com` prendra le nom de service `host-datadoghq.com` au lieu du nom de service par défaut `curl`. |
-| `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`     | `false`     | Définit le nom de service pour les opérations des clients Redis sur `redis-<hostname>`. Ajouté dans la version `0.51.0`                            |
-| `DD_TRACE_<INTÉGRATION>_ENABLED`          | `true`      | Active ou désactive une intégration. Par défaut, toutes les intégrations sont activées (voir la section [Noms des intégration](#nom-des-integrations)). Pour les versions antérieures à la version `0.47.1`, il s'agit du paramètre `DD_INTEGRATIONS_DISABLED`, qui accepte une liste d'intégrations à désactiver au format CSV, p. ex. : `curl,mysqli`. |
-| `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Enregistre la durée de compilation de la requête (en millisecondes) dans la span de premier niveau                                                               |
-| `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Définissez cette variable d'environnement sur `true` afin d'activer l'instrumentation automatique pour les applications qui n'utilisent pas de chargeur automatique                                                    |
-| `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`    | `null`      | Liste d'expressions regex au format CSV qui identifie les fragments de chemin correspondant aux ID (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)). |
-| `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`  | `null`      | Liste de mappages d'URI au format CSV afin de normaliser les noms de ressources pour les requêtes entrantes (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)). |
-| `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`  | `null`      | Liste de mappages d'URI au format CSV afin de normaliser les noms de ressources pour les requêtes sortantes (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)). |
-| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | Taux d'échantillonnage des traces (entre `0.0` et `1.0` par défaut). Pour les versions inférieures à `0.36.0`, ce paramètre est `DD_SAMPLING_RATE`.           |
-| `DD_TRACE_SAMPLING_RULES`                 | `null`      | Chaîne encodée au format JSON pour configurer le taux d'échantillonnage. Exemples : définir le taux d'échantillonnage sur 20 % : `[{"sample_rate": 0.2}]`. Définir le taux d'échantillonnage sur 10 % pour les services commençant par « a » et pour les noms de span commençant par « b » et définir le taux d'échantillonnage sur 20 % pour tous les autres services : `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` (voir la section [Noms des intégrations](#noms-des-integrations)). |
-| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Activer les URL en tant que noms de ressources (voir la section [Mapper les noms de ressources à une URL normalisée](#mapper-les-noms-de-ressources-a-une-url-normalisee)).                            |
-| `DD_VERSION`                              | `null`      | Définit la version d'une application dans les traces et logs, par exemple : `1.2.3`, `6c44da20`, `2020.02.13`. Ajoutée dans la version `0.47.0`.                    |
+`DD_AGENT_HOST`
+: **Valeur par défaut** : `localhost` <br>
+Le hostname de l'Agent.
+
+`DD_AUTOFINISH_SPANS`
+: **Valeur par défaut** : `false`<br>
+Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé.
+
+`DD_DISTRIBUTED_TRACING`
+: **Valeur par défaut** : `true`<br>
+Définit si le tracing distribué doit être activé ou non.
+
+`DD_ENV`
+: **Valeur par défaut** : `null`<br>
+Définit l'environnement de l'application, par exemple `prod`, `pre-prod` ou encore `stage`. Ajoutée avec la version `0.47.0`.
+
+`DD_PRIORITY_SAMPLING`
+: **Valeur par défaut** : `true`<br>
+Définit si l'échantillonnage prioritaire doit être activé ou non.
+
+`DD_SERVICE`
+: **Valeur par défaut** : `null`<br>
+Nom de l'application par défaut. Pour les versions < 0.47.0, il s'agit du paramètre `DD_SERVICE_NAME`.
+
+`DD_SERVICE_MAPPING`
+: **Valeur par défaut** : `null`<br>
+Modifie le nom par défaut d'une intégration APM. Vous pouvez remplacer le nom de plusieurs intégrations à la fois. Utilisez par exemple `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (voir la section [Noms des intégrations](#noms-des-integrations)).
+
+`DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
+: **Valeur par défaut** : `5000`<br>
+Délai (en millisecondes) avant une nouvelle tentative du disjoncteur basé sur les communications inter-processus.
+
+`DD_TRACE_AGENT_CONNECT_TIMEOUT`
+: **Valeur par défaut** : `100`<br>
+Délai maximum autorisé (en millisecondes) pour la configuration de la connexion de l'Agent.
+
+`DD_TRACE_AGENT_CONNECT_TIMEOUT`
+: **Valeur par défaut** : `100`<br>
+Délai d'expiration (en millisecondes) de la connexion de l'Agent.
+
+`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` 
+: **Valeur par défaut** : `3`<br>
+Nombre maximal de tentatives du disjoncteur basé sur les communications inter-processus.
+
+`DD_TRACE_AGENT_PORT`
+: **Valeur par défaut** : `8126`<br>
+Numéro de port de l'Agent.
+
+`DD_TRACE_AGENT_TIMEOUT`
+: **Valeur par défaut** : `500`<br>
+Délai d'expiration (en millisecondes) du transfert de la requête de l'Agent.
+
+`DD_TRACE_AGENT_URL`
+: **Valeur par défaut** : `null`<br>
+URL de l'Agent, qui a la priorité sur `DD_AGENT_HOST` et sur `DD_TRACE_AGENT_PORT`. Exemple : `https://localhost:8126`. Ajoutée avec la version `0.47.1`.
+
+`DD_TRACE_AUTO_FLUSH_ENABLED`
+: **Valeur par défaut** : `false`<br>
+Vide automatiquement le traceur lorsque toutes les spans sont finalisées ; définissez cette variable sur `true` conjointement à `DD_TRACE_GENERATE_ROOT_SPAN=0` pour tracer les processus à exécution longue.
+
+`DD_TRACE_CLI_ENABLED`
+: **Valeur par défaut** : `false`<br>
+Active le tracing des scripts PHP depuis l'interface de ligne de commande.
+
+`DD_TRACE_DEBUG`
+: **Valeur par défaut** : `false`<br>
+Active le [mode debugging](#mappage-personnalise-de-l-url-a-la-ressource) pour le traceur.
+
+`DD_TRACE_ENABLED`
+: **Valeur par défaut** : `true`<br>
+Active le traceur partout.
+
+`DD_TRACE_GENERATE_ROOT_SPAN`
+: **Valeur par défaut** : `true`<br>
+Génère automatiquement une span de premier niveau ; définissez cette variable sur `false` conjointement à `DD_TRACE_AUTO_FLUSH_ENABLED=1` pour tracer les processus à exécution longue.
+
+`DD_TAGS`
+: **Valeur par défaut** : `null`<br>
+Tags à appliquer à toutes les spans, p. ex. : `key1:value1,key2:value2`. Ajoutée avec la version `0.47.0`.
+
+`DD_TRACE_HEADER_TAGS`
+: **Valeur par défaut** : `null`<br>
+CSV des noms d'en-tête qui sont ajoutés à la span racine en tant que tags.
+
+`DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
+: **Valeur par défaut** : `false`<br>
+Définit le nom de service des requêtes HTTP sur `host-<hostname>`. Par exemple, un appel `curl_exec()` vers `https://datadoghq.com` prendra le nom de service `host-datadoghq.com` au lieu du nom de service par défaut `curl`.
+
+`DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
+: **Valeur par défaut** : `false`<br>
+Définit le nom de service pour les opérations des clients Redis sur `redis-<hostname>`. Ajoutée avec la version `0.51.0`.
+
+`DD_TRACE_<INTEGRATION>_ENABLED`
+: **Valeur par défaut** : `true`<br>
+Active ou désactive une intégration. Par défaut, toutes les intégrations sont activées (voir la section [Noms des intégration](#nom-des-integrations)). Pour les versions antérieures à la version `0.47.1`, il s'agit du paramètre `DD_INTEGRATIONS_DISABLED`, qui accepte une liste d'intégrations à désactiver au format CSV, p. ex. : `curl,mysqli`.
+
+`DD_TRACE_MEASURE_COMPILE_TIME`
+: **Valeur par défaut** : `true`<br>
+Enregistre la durée de compilation de la requête (en millisecondes) dans la span de premier niveau.
+
+`DD_TRACE_NO_AUTOLOADER`
+: **Valeur par défaut** : `false`<br>
+Définissez cette variable d'environnement sur `true` afin d'activer l'instrumentation automatique pour les applications qui n'utilisent pas de chargeur automatique.
+
+`DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
+: **Valeur par défaut** : `null`<br>
+Liste d'expressions régulières au format CSV qui identifie les fragments de chemin correspondant aux ID (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)).
+
+`DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
+: **Valeur par défaut** : `null`<br>
+Liste de mappages d'URI au format CSV permettant de normaliser les noms de ressources pour les requêtes entrantes (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)).
+
+`DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
+: **Valeur par défaut** : `null`<br>
+Liste de mappages d'URI au format CSV permettant de normaliser les noms de ressources pour les requêtes sortantes (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)).
+
+`DD_TRACE_SAMPLE_RATE`
+: **Valeur par défaut** : `1.0`<br>
+Taux d'échantillonnage des traces (entre `0.0` et `1.0` par défaut). Pour les versions inférieures à `0.36.0`, il s'agit du paramètre `DD_SAMPLING_RATE`.
+
+`DD_TRACE_SAMPLING_RULES`
+: **Valeur par défaut** : `null`<br>
+Chaîne encodée au format JSON permettant de configurer le taux d'échantillonnage. Pour définir le taux d'échantillonnage sur 20 % : `'[{"sample_rate": 0.2}]'`. Pour définir le taux d'échantillonnage sur 10 % pour les services commençant par « a » et pour les noms de span commençant par « b », et définir le taux d'échantillonnage sur 20 % pour tous les autres services :`'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`. Voir la section [Noms des intégrations](#noms-des-integrations)). Veuillez noter que vous **devez** ajouter des apostrophes (`'`) autour de l'objet JSON pour éviter les problèmes d'échappement des guillemets doubles (`"`).
+
+`DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
+: **Valeur par défaut** : `true`<br>
+Active les URL en tant que noms de ressources (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)).
+
+`DD_VERSION`
+: **Valeur par défaut** : `null`<br>
+Définit la version d'une application dans les traces et logs. Exemples : `1.2.3`, `6c44da20`, `2020.02.13`. Ajoutée avec la version `0.47.0`.
 
 #### Noms des intégrations
 
 Le tableau ci-dessous répertorie les noms de service par défaut pour chaque intégration. Modifiez les noms de service avec `DD_SERVICE_MAPPING`.
 
-Utilisez ces noms lorsque vous définissez un paramètre pour une intégration spécifique, tel que `DD_TRACE_<INTÉGRATION>_ANALYTICS_ENABLED`. Exemple pour Laravel : `DD_TRACE_LARAVEL_ANALYTICS_ENABLED`.
+Utilisez ces noms lorsque vous définissez un paramètre pour une intégration spécifique, tel que `DD_TRACE_<INTÉGRATION>_ENABLED`. Exemple pour Laravel : `DD_TRACE_LARAVEL_ENABLED`.
 
 | Intégration       | Service Name      |
 |-------------------|-------------------|
@@ -245,7 +346,7 @@ Utilisez ces noms lorsque vous définissez un paramètre pour une intégration s
 | Yii               | `yii`             |
 | ZendFramework     | `zendframework`   |
 
-#### Mapper les noms de ressources à une URL normalisée
+#### Mapper les noms de ressources à un URI normalisé
 
 <div class="alert alert-warning">
 <strong>Paramètre obsolète :</strong> À partir de la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a>, l'ancien paramètre <code>DD_TRACE_RESOURCE_URI_MAPPING</code> est obsolète. Il continuera à fonctionner pendant un certain temps, mais nous vous conseillons vivement d'utiliser les nouveaux paramètres spécifiés dans ce paragraphe pour éviter tout problème une fois l'ancien paramètre supprimé.
@@ -284,26 +385,37 @@ Certains cas ne sont pas couverts par la normalisation automatique appliquée.
 
 Deux catégories de scénarios ne sont pas couvertes par la normalisation automatique :
 
-  - Le fragment de chemin à normaliser présente un format reproductible et peut se trouver partout dans l'URL, par exemple `id<number>` dans l'exemple ci-dessus. Ce scénario est couvert par le paramètre `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` ci-dessous.
+  - Le fragment de chemin à normaliser présente un pattern reproductible et peut se trouver partout dans l'URL. Dans l'exemple ci-dessus, il s'agit de `id<nombre>`. Dans cette situation, vous pouvez utiliser le paramètre `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`.
   - Le fragment de chemin peut être n'importe quoi, et le fragment de chemin précédent indique qu'une valeur doit être normalisée. Par exemple, `/cities/new-york` nous indique que `new-york` doit être normalisé, car c'est le nom d'une ville. Ce scénario est couvert par les paramètres `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` et `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` respectivement pour les requêtes entrantes et sortantes.
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-Ce paramètre est une liste au format CSV d'expressions regex appliquées indépendamment à chaque fragment de chemin. Par exemple, si le paramètre `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` est défini sur `^id\d+$` pour le premier exemple `/using/prefix/id123/for/id`, les expressions regex seront appliquées à tous les fragments `using`, `prefix`, `id123`, `for` et `id`. Le nom de ressource normalisé final sera `GET /using/prefix/?/for/id`.
+Ce paramètre correspond à une ou plusieurs expressions régulières, au format CSV, appliquées indépendamment à chaque fragment de chemin. Par exemple, si le paramètre `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` est défini sur `^id\d+$` pour le chemin `/using/prefix/id123/for/id`, les expressions régulières sont appliquées à tous les fragments `using`, `prefix`, `id123`, `for` et `id`.
 
-Notez que plusieurs expressions régulières séparées par une virgule peuvent être ajoutées : `^id\d+$,code\d+$`. La virgule `,` n'étant pas échappée, elle ne peut pas être utilisée dans l'expression régulière.
+| URL                          | Expression régulière     | Nom de ressource attendu       |
+|:-----------------------------|:----------|:-----------------------------|
+| `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
+
+Puisque cette variable est au format CSV, le caractère `,` (virgule) n'est pas échappé. Il ne peut donc pas être utilisé dans vos expressions régulières.
 
 ###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` et `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
-Ce paramètre est une liste d'expressions au format CSV qui peut contenir une wildcard `*`. Par exemple, si vous ajoutez l'expression `cities/*`, cela signifie que chaque fois que le fragment `cities` est trouvé lors de l'analyse d'une URL, alors le fragment suivant (le cas échéant) sera remplacé par `?`. Les expressions sont appliquées à toutes les profondeurs ; par conséquent, la règle suivante entraînera la normalisation de `/cities/new-york` et `/nested/cities/new-york` dans le tableau ci-dessus.
+Ce paramètre correspond à une liste de patterns au format CSV qui peut contenir un wildcard `*`. Par exemple, si vous ajoutez le pattern `cities/*`, chaque fois que le fragment `cities` est trouvé lors de l'analyse d'une URL, le fragment suivant (le cas échéant) est alors remplacé par `?`. Les patterns sont appliqués à toutes les profondeurs ; par conséquent, la règle suivante entraînera la normalisation de `/cities/new-york` et `/nested/cities/new-york` dans le tableau ci-dessus.
 
 Les expressions peuvent être appliquées à une partie d'un fragment spécifique. Par exemple, `path/*-fix` normalisera l'URL `/some/path/changing-fix/nested` en `/some/path/?-fix/nested`
 
 Notez que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` s'applique uniquement aux requêtes entrantes (par exemple, les frameworks Web), tandis que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` s'applique uniquement aux requêtes sortantes (par exemple, les requêtes `curl` et `guzzle`).
 
+### Restrictions liées à `open_basedir`
+
+Si vous utilisez le paramètre [`open_basedir`][11], `/opt/datadog-php` doit être ajouté à la liste des répertoires autorisés.
+Lorsque l'application est exécutée dans un conteneur Docker, le chemin `/proc/self` doit également être ajouté à la liste des répertoires autorisés.
+
 ## Mise à niveau
 
 Pour mettre à niveau le traceur PHP, [téléchargez la dernière version][5] et suivez les mêmes étapes que lors de l'[installation de l'extension](#installer-l-extension).
+
+Une fois l'installation terminée, redémarrez PHP (PHP-FPM ou le SAPI Apache).
 
 **Remarque** : si vous utilisez une mise en cache secondaire dans OPcache en définissant le paramètre `opcache.file_cache`, supprimez le dossier de cache.
 
@@ -353,3 +465,4 @@ Si aucun core dump n'a été généré, vérifiez les configurations suivantes e
 [8]: /fr/tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /fr/tracing/setup/nginx/#nginx-and-fastcgi
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

@@ -21,7 +21,7 @@ Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live c
 
 Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
 
-{{< img src="infrastructure/livecontainers/livecontainersoverview.png" alt="Live containers with summaries"  >}}
+{{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="Live containers with summaries" >}}
 
 ## Configuration
 
@@ -29,17 +29,16 @@ Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technol
 
 The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][5]. This feature allows you to monitor the state of pods, deployments and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
-Kubernetes resources for Live Containers requires [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] prior to the configurations below.
+Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][6] and [Cluster Agent version >= 1.11.0][7] prior to the configurations below.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
 If you are using the official [Datadog Helm Chart][1]:
 
-- Use chart version 2.4.5 or above
+- Use chart version 2.10.0 or above
   **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
-- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
-- Deploy a new release
+- Deploy a new release.
 
 In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
 
@@ -48,54 +47,160 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-1. [Cluster Agent][1] version >= 1.9.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
+[Cluster Agent][1] version >= 1.11.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
 
-    - Set the Cluster Agent container with the following environment variable:
+1. Set the Cluster Agent container with the following environment variable:
 
-        ```yaml
-          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-            value: "true"
-        ```
+    ```yaml
+      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+        value: "true"
+    ```
 
-    - Set the Cluster Agent ClusterRole with the following RBAC permissions. 
-Note particularly that for the `apps` apiGroups, Live Containers need permissions 
-to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.), 
-which should be already in the RBAC if you followed [Cluster Agent Setup 
-documentation][2]. But if they are missing, ensure they are added (after 
-`deployments`, `replicasets`):
-        ```yaml
-          ClusterRole:
-          - apiGroups:  # To create the datadog-cluster-id CM
-            - ""
-            resources:
-            - configmaps
-            verbs:
-            - create
-            - get
-            - update
-          ...
-          - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-            - ""
-            resources:
-            - namespaces
-            verbs:
-            - get
-          ...
-          - apiGroups:  # To collect new resource types
-            - "apps"
-            resources:
-            - deployments
-            - replicasets
-            verbs:
-            - list
-            - get
-            - watch
-        ```
+2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
+
+    Note in particular that for the `apps` apiGroups, Live Containers need
+    permissions to collect common kubernetes resources (`pods`, `services`,
+    `nodes`, etc.), which should be already in the RBAC if you followed [Cluster
+    Agent Setup documentation][2]. But if they are missing, ensure they are
+    added (after `deployments`, `replicasets`):
+
+    ```yaml
+      ClusterRole:
+      - apiGroups:  # To create the datadog-cluster-id ConfigMap
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - create
+        - get
+        - update
+      ...
+      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+        - ""
+        resources:
+        - namespaces
+        verbs:
+        - get
+      ...
+      - apiGroups:  # To collect new resource types
+        - "apps"
+        resources:
+        - deployments
+        - replicasets
+        verbs:
+        - list
+        - get
+        - watch
+      ...
+    ```
+    These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
+
+    If the `cluster-id` ConfigMap isn't created by the Cluster Agent, the Agent pod will not be able to collect resources. In such a case, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap, and then restart the Agent pod.
+
+3. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
+
+    ```yaml
+    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+      value: "true"
+    ```
+
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must add the following options in the `env` section of both the Cluster Agent and the Process Agent:
+
+  ```yaml
+  - name: DD_CLUSTER_NAME
+    value: "<YOUR_CLUSTER_NAME>"
+  ```
+
+[1]: /agent/cluster_agent/
+[2]: /agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
+
+### Resource collection compatibility matrix
+
+The following table presents the list of collected resources and the minimal Agent, Cluster Agent and Helm chart versions for each.
+
+| Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
+|---|---|---|---|
+| Clusters | 7.27.0 | 1.12.0 | 2.10.0 |
+| Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
+| Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
+| Pods | 7.27.0 | 1.11.0 | 2.10.0 |
+| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
+| Services | 7.27.0 | 1.11.0 | 2.10.0 |
+
+### Instructions for previous Agent and Cluster Agent versions.
+
+The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+If you are using the official [Datadog Helm Chart][1]:
+
+- Use chart version above 2.4.5 and before 2.10.0. Starting from chart version 2.10.0 onwards, refer to the [latest configuration instructions][18] instead.
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][2] file.
+- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
+- Deploy a new release.
+
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][1] for configuration.
+
+1. Set the Cluster Agent container with the following environment variable:
+
+    ```yaml
+      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+        value: "true"
+    ```
+
+2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
+
+    Note particularly that for the `apps` apiGroups, Live Containers need permissions
+    to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.),
+    which should be already in the RBAC if you followed [Cluster Agent Setup
+    documentation][1]. But if they are missing, ensure they are added (after
+    `deployments`, `replicasets`):
+
+    ```yaml
+      ClusterRole:
+      - apiGroups:  # To create the datadog-cluster-id ConfigMap
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - create
+        - get
+        - update
+      ...
+      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+        - ""
+        resources:
+        - namespaces
+        verbs:
+        - get
+      ...
+      - apiGroups:  # To collect new resource types
+        - "apps"
+        resources:
+        - deployments
+        - replicasets
+        verbs:
+        - list
+        - get
+        - watch
+    ```
+
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.
 
-2. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
+3. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
     ```yaml
     - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
@@ -114,8 +219,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
     value: "<YOUR_CLUSTER_NAME>"
   ```
 
-[1]: /agent/cluster_agent/
-[2]: /agent/cluster_agent/setup/
+[1]: /agent/cluster_agent/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -211,20 +315,22 @@ If you've enabled Kubernetes Resources, strings such as `pod`, `deployment`, `Re
 
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
-|              |                                                                                                                                  |                                                                 |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
-| **Operator** | **Description**                                                                                                                  | **Example**                                                     |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
-| `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
-| `NOT` / `!`  | **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation | java NOT elasticsearch <br> **equivalent:** java !elasticsearch |
+`AND`
+: **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)<br> **Example**: `java AND elasticsearch`
+
+`OR`
+: **Union**: either term is contained in the selected events <br> **Example**: `java OR python`
+
+`NOT` / `!`
+: **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation<br> **Example**: `java NOT elasticsearch` or `java !elasticsearch`
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python`.
 
 ### Filtering and pivoting
 
-The screenshot below displays a system that has been filtered down to a Kubernetes cluster of nine nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
+The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 25 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned"  style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/filter-by.png" alt="A system that has been filter down to a Kubernetes cluster of 25 nodes"  style="width:80%;">}}
 
 Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivoted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
 
@@ -273,9 +379,9 @@ The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the scatter plot analytic [in the Containers page][1] click on the *Show Summary graph* button and select the "Scatter Plot" tab:
+You can switch between the “Scatter Plot” and “Timeseries” tabs in the collapsable **Summary Graphs** section in the Containers page:
 
-{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection"  style="width:80%;">}}
 
 By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot displays the individual containers and hosts that contribute to the group.
 
@@ -293,7 +399,21 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle between the **Pods**, **Deployments**, **ReplicaSets**, and **Services** views in the **View** dropdown menu in the top left corner of the page. Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **Services**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
+
+Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
+
+{{< img src="infrastructure/livecontainers/kubernetes-resources-view.png" alt="A data table organize by field"  style="width:80%;">}}
+
+#### Group by functionality and facets
+
+Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the “Group by” bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
+
+{{< img src="infrastructure/livecontainers/group-by.gif" alt="An example of grouping by team"  style="width:80%;">}}
+
+You can also leverage facets on the left hand side of the page to quickly group resources or filter for resources you care most about, such as pods with a CrashLoopBackOff pod status.
+
+{{< img src="infrastructure/livecontainers/crashloopbackoff.gif" alt="An example of grouping the CrashLoopBackOff pod status"  style="width:80%;">}}
 
 #### Cluster map
 
@@ -301,9 +421,21 @@ A Kubernetes Cluster Map gives you a bigger picture of your pods and Kubernetes 
 
 Drill down into resources from Cluster Maps by click on any circle or group to populate a detailed panel.
 
+You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the pods by.
+
+{{< img src="infrastructure/livecontainers/cluster-map.gif" alt="A cluster map with customized groups and filters"  style="width:80%;">}}
+
 #### Information panel
 
-Click on any row in the table or on any object in a Cluster Map to view information about a specific resource in a side panel. This panel is useful for troubleshooting and finding information about a selected container or resource, such as:
+Click on any row in the table or on any object in a Cluster Map to view information about a specific resource in a side panel.
+
+{{< img src="infrastructure/livecontainers/information-panel.gif" alt="A view of resources in the side panel"  style="width:80%;">}}
+
+For a detailed dashboard of this resource, click the View Dashboard in the top right corner of this panel.
+
+{{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="A link to a pod dashboard from Live Containers overview"  style="width:80%;">}}
+
+This panel is useful for troubleshooting and finding information about a selected container or resource, such as:
 
 * [**Logs**][11]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
 * [**Metrics**][12]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
@@ -334,7 +466,7 @@ Streaming logs can be searched with simple string matching. For more details abo
 
 #### Indexed logs
 
-You can see logs that you have chosen to index and persist by selecting a corresponding timeframe. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an `Error` status, type `status:error` into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
+You can see indexed logs that you have chosen to index and persist by selecting a corresponding timeframe. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an Error status, type status:error into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
 
 {{< img src="infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel"  style="width:100%;">}}
 

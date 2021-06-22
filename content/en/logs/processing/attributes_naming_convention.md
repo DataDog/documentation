@@ -47,6 +47,7 @@ Below is a list of reserved attributes that are automatically ingested with logs
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
 | `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][6] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
+| `trace_id` | This corresponds to the Trace ID used for traces. It is used to [correlate your log with its trace][28].                                                                                                                                 |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in Live Tail, where it is indexed for full text search.                                    |
 
 ## Standard attributes
@@ -296,3 +297,4 @@ See the [associated documentation][26] for additional information.
 [25]: /logs/explorer/facets/#aliased-facets
 [26]: /logs/explorer/facets/#alias-facets
 [27]: /logs/search_syntax/#tags
+[28]: /tracing/connect_logs_and_traces/

@@ -625,9 +625,6 @@ Find below an example of the GeoIP Parser that extracts gelocation from the `net
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example"  style="width:60%;">}}
 
-**Note**: This processor uses GeoLite2 data created by [MaxMind][1].
-
-[1]: https://www.maxmind.com
 {{% /tab %}}
 {{% tab "API" %}}
 

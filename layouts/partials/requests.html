@@ -1,0 +1,35 @@
+{{ $dot := . }}
+
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $dot.Page.Lang "en"}}
+  {{ if (fileExists (print "data/partials/requests" $dot.Page.Lang ".yaml")) }}
+    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "requests." $dot.Page.Lang)) }}
+  {{ else }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.requests }}
+  {{ end }}
+{{ else }}
+  {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.requests }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
+<!-- desktop site -->
+<table>
+  <tbody>
+    {{ range (index $datafile .Params.links) }}
+      <tr>
+        <td>
+          <a href="{{ .link | absLangURL }}">
+            <div class="card-body text-center">
+                {{ $src := (print "icons/" .image)}}
+                {{ $url := (print ($dot.Site.Params.img_url) "images/" $src) | safeURL }}
+                <img src="{{ $url }}" alt="logo" style="max-width:none !important;height:50px !important;">
+            </div>
+          </a>
+        </td>
+        <td><strong>{{.name}}</strong></td>
+        <td>{{.description}}</td>
+      </tr>
+    {{ end }}
+  </tbody>
+</table>

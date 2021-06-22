@@ -48,6 +48,7 @@ The following units may be associated with metrics submitted to Datadog:
 | CURRENT     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
 | POTENTIAL   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
 | APM         | span                                                                                                                                                                                                                                                                                                                       |
+| SYNTHETICS  | run                                                                                                                                                                                                                                                                                                                        |
 
 ## Number formatting
 

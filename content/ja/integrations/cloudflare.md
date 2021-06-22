@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/cloudflare/'
 draft: false
 git_integration_title: cloudflare
 has_logo: true
+integration_id: ''
 integration_title: Cloudflare
 is_public: true
 kind: インテグレーション

@@ -78,7 +78,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
    ```shell
    # example
    root@hostname:~# npm list -g --depth=0 | grep 'lighthouse'
-   └── lighthouse@5.6.0
+   |_ lighthouse@5.6.0
    ```
 
    - Si ce n'est pas le cas (la commande ci-dessus ne génère aucun résultat), installez-le :
@@ -112,7 +112,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
       ```shell
       # example
       root@hostname:~# npm list -g --depth=0 | grep 'puppeteer'
-      └── puppeteer@1.12.2
+      |_ puppeteer@1.12.2
       ```
 
       + Si ce n'est pas le cas (la commande ci-dessus ne génère aucun résultat), installez-le :

@@ -162,6 +162,8 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 | usr.name  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
 | usr.email | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
 
+**注**: 推奨される属性に加えてさらに属性を追加することで、フィルタリング機能を向上できます。たとえば、ユーザープランに関する情報や、所属するユーザーグループなどを追加します。
+
 ユーザーセッションを識別するには、`setUser` API を使用します。
 
 {{< tabs >}}
@@ -170,7 +172,9 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 datadogRum.setUser({
     id: '1234',
     name: 'John Doe',
-    email: 'john@doe.com'
+    email: 'john@doe.com',
+    plan: 'premium',
+    ...
 })
 ```
 
@@ -181,7 +185,9 @@ DD_RUM.onReady(function() {
     DD_RUM.setUser({
         id: '1234',
         name: 'John Doe',
-        email: 'john@doe.com'
+        email: 'john@doe.com',
+        plan: 'premium',
+        ...
     })
 })
 ```
@@ -192,8 +198,37 @@ DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
     name: 'John Doe',
-    email: 'john@doe.com'
+    email: 'john@doe.com',
+    plan: 'premium',
+    ...
 })
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ユーザー ID を削除
+
+`removeUser` API で、以前に設定されたユーザーを消去します。この後に収集されたすべての RUM イベントにユーザー情報は含まれません。
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.removeUser()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.removeUser()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.removeUser()
 ```
 
 {{% /tab %}}
@@ -395,5 +430,5 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/browser-sdk/blob/master/packages/rum-core/src/rumEvent.types.ts
+[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [2]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes

@@ -8,6 +8,7 @@
 "draft": false
 "git_integration_title": "git"
 "has_logo": true
+"integration_id": "git"
 "integration_title": "Git"
 "is_public": true
 "kind": "integration"

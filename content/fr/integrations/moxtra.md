@@ -8,6 +8,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/moxtra/'
 draft: false
 git_integration_title: moxtra
 has_logo: true
+integration_id: moxtra
 integration_title: Moxtra
 is_public: true
 kind: integration

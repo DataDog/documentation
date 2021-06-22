@@ -151,6 +151,8 @@ apm_config:
 
 * `remove_query_string`: true に設定すると、URL に含まれるクエリ文字列が難読化されます。
 * `remove_paths_with_digits`: true に設定すると、数字を含む URL のパスセグメントが "?" で置換されます。
+
+
 [1]: /ja/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Stack Traces" %}}

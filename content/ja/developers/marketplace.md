@@ -43,7 +43,7 @@ Datadog のお客様は、[インテグレーション][2]ページまたは [Da
 
 1. [出品したい Marketplace 製品のタイプを選択します](#1-choose-an-integration-type)
 2. [双方向のインテグレーションを構築します](#2-build-a-bi-directional-integration)
-3. [Marketplace または Integrations Extras リポジトリのいずれかを複製します](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
+3. [Marketplace リポジトリを複製するか、Integrations Extras リポジトリをフォークします](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
 4. [Datadog Development Toolkit をインストールします](#4-install-and-run-the-datadog-development-toolkit)
 5. [タイルスキャフォールディングにメタデータとすぐに使用できるアセット (ダッシュボードやモニターなど) を入力します](#5-populate-the-tile-scaffolding)
 6. [プルリクエストを送信します](#6-submit-a-pull-request)
@@ -95,7 +95,7 @@ Datadog から情報をプルすることも役立つ場合がありますが、
 6. [インシデント][21]
 7. [セキュリティイベント][22]
 
-### 3. Marketplace または Integrations Extras リポジトリのいずれかを複製します
+### 3. Marketplace リポジトリを複製するか、Integrations Extras リポジトリをフォークします
 
 Datadog インテグレーションは、非公開の [Marketplace リポジトリ][9]またはオープンソースの [Integrations Extras リポジトリ][10]のいずれか用に開発できます。
 
@@ -107,36 +107,59 @@ Datadog インテグレーションは、非公開の [Marketplace リポジト�
 
 Datadog Development Toolkit コマンド (`ddev`) を使用すると、タイルのすべてのアセットとメタデータのスケルトンをスピンアップすることで、インテグレーションを最初に開発するときにスキャフォールディングを作成できます。
 
-Python 3.8 以降がインストールされていることを確認します。
+[Python 3.8 以降][23]がインストールされていることを確認します。
 
-最新リリースバージョンは [PyPI][23] からインストールできます。
+潜在的な環境の競合を防ぐために、リポジトリを複製したディレクトリで次を実行して仮想環境を作成します。
 
-`python -m pip install --upgrade "datadog-checks-dev[cli]`
+```
+python3 -m pip install virtualenv --user
+```
+
+次を実行して、[PyPI][24] から Datadog Development Toolkit の最新バージョンをインストールします。
+
+```
+python -m pip install --upgrade "datadog-checks-dev[cli]"
+```
+
+**注:** Z シェルを使用している場合は、エスケープ文字を使用する必要があります。
+
+```
+python -m pip install --upgrade datadog-checks-dev\[cli\]
+``` 
 
 次の場所を複製されたリポジトリに設定します。
 
 #### Marketplace:
 
-`ddev config set marketplace /path/to/marketplace`
-
-`ddev config set repo marketplace`
+```
+ddev config set marketplace /path/to/marketplace_directory
+ddev config set repo marketplace
+```
 
 #### Integrations-Extras:
 
-`ddev config set extras /path/to/integrations-extras`
-
-`ddev config set repo extras`
+```
+ddev config set extras /path/to/integrations-extras_directory
+ddev config set repo extras
+```
 
 #### タイルのみの出品
 
 スタンドアロンのソフトウェアとサービスの場合、またはインテグレーションが Datadog API を使用していて、Python コードが含まれていない場合、Development Toolkit はタイルのみのコマンドをサポートします。
-`ddev create -t` 
+
+上記で指定した `marketplace` または `integrations-extras` ディレクトリで以下を実行します。
+
+```
+ddev create -t tile "<Offering Name>"
+```
 
 #### 完全なインテグレーション
 
-完全なインテグレーションスキャフォールディングの場合、次を実行します。
+インテグレーションの完全なスキャフォールディングを生成するには、上記で指定した `marketplace` または `integrations-extras` ディレクトリから以下を実行します。
 
-`ddev create <Offering Name>`
+```
+ddev create "<Offering Name>"
+```
 
 ### 5. タイルスキャフォールディングにデータを入力します
 
@@ -152,33 +175,38 @@ Python 3.8 以降がインストールされていることを確認します。
 #### 画像
 
 * `README.md` ファイルで使用されているすべての画像を `images` フォルダに保存します。
+* **注:** 画像ファイル名にはスペースを含めないようにしてください。
 
 #### Manifest.json
 
 * `display_name`、`public_title`、`author` などの要素を含む JSON オブジェクト。
-* `manifest.json` フィールドの詳細については、[インテグレーションアセットリファレンス][24]を参照してください。
-* 価格設定オブジェクトの詳細は、非公開の [Marketplace README][25] に記載されています。
+* `manifest.json` フィールドの詳細については、[インテグレーションアセットリファレンス][25]を参照してください。
+* 価格設定オブジェクトの詳細は、非公開の [Marketplace README][26] に記載されています。
 
 #### Metadata.csv
 
 * メトリクス名、タイプ、間隔、単位など、インテグレーションに含まれるすぐに使用できるメトリクスのリストが含まれています。
-* `metadata.csv` フィールドの詳細については、[インテグレーションアセットリファレンス][24]を参照してください。
+* `metadata.csv` フィールドの詳細については、[インテグレーションアセットリファレンス][25]を参照してください。
 * **注:** すべての Marketplace メトリクスは、カスタムメトリクスとしてカウントされます。
 
 #### ダッシュボードとモニター
 
 * インテグレーション用のすぐに使用できるダッシュボードとモニター (アラート) が含まれています。
 * サンドボックスアカウントでダッシュボードとモニターを直接作成し、JSON ファイルとしてエクスポートできます。
-* 詳細については、[ダッシュボードのベストプラクティス][26]ドキュメントを参照してください。
+* 詳細については、[ダッシュボードのベストプラクティス][27]ドキュメントを参照してください。
 
 #### ロゴ
 
-* DesignOps チームが Datadog アプリ全体にライトモードとダークモードの両方で実装する SVG で構成されています。
+* DesignOps チームが Datadog アプリ全体にライトモードとダークモードの両方で実装する SVG で構成されています。ロゴの SVG ファイルは `assets` ディレクトリに追加するか、`assets` 下の `logos` サブディレクトリに配置することができます。
 * **注:** テクノロジーパートナーは、提出するロゴのライセンスに責任を負います。
 
 #### Changelog.md
 
 * リリースノートとバージョン情報をキャプチャし、タイルの “Release Notes” タブに表示します。リリースノートを降順で追加します (最新バージョンが上部)。
+
+#### コードオーナー
+
+* 共有された `.github` ディレクトリでリポジトリ内のコードに責任を持つ個人またはチームのことを指します。構文についてのヘルプは[Github のドキュメント][28]を参照してください。
 
 #### 追加の Marketplace ファイル
 
@@ -201,7 +229,7 @@ Marketplace リポジトリの Azure DevOps にアクセスする必要がある
 公式の双方向インテグレーションが開始されると、テクノロジーパートナーは、Datadog のパートナーマーケティングチームと会って、次のような共同の市場開拓戦略を調整することができます。
 
 * パートナーのプレスリリースの Datadog 見積もり
-* [Datadog モニター][27]のブログ投稿
+* [Datadog モニター][29]内のブログ記事
 * パートナーウェビナーの Datadog スピーカー
 * ソーシャルメディア投稿の増幅
 
@@ -236,8 +264,10 @@ Marketplace リポジトリの Azure DevOps にアクセスする必要がある
 [20]: /ja/api/latest/tracing/
 [21]: /ja/api/latest/incidents/
 [22]: /ja/api/latest/security-monitoring/
-[23]: https://pypi.org/project/datadog-checks-dev/
-[24]: /ja/developers/integrations/check_references/#manifest-file
-[25]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
-[26]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
-[27]: https://www.datadoghq.com/blog/
+[23]: https://www.python.org/downloads/
+[24]: https://pypi.org/project/datadog-checks-dev/
+[25]: /ja/developers/integrations/check_references/#manifest-file
+[26]: https://github.com/DataDog/marketplace/blob/master/README.md#faq
+[27]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
+[28]: https://help.github.com/articles/about-codeowners/
+[29]: https://www.datadoghq.com/blog/

@@ -59,47 +59,94 @@ further_reading:
 
 
 {{< site-region region="us" >}}
-| フィルター                          | 説明                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `sources:github,chef`           | GitHub または Chef からのイベントを表示。                                                |
-| `tags:env-prod,db`              | #env-prod または #db のタグがあるイベントを表示。                                      |
-| `hosts:i-0ade23e6,db.myapp.com` | i-0ade23e6 または db.myapp.com からのイベントを表示。                                   |
-| `status:error`                  | エラーステータスのイベントを表示 (`error`、`warning`、`success` をサポート) 。    |
-| `priority:low`                  | 優先度の低いイベントのみを表示 (`low` または `normal` をサポート、デフォルトは `all`)。 |
+
+
+`sources:github,chef` 
+: GitHub または Chef からのイベントを表示します。
+
+`tags:env-prod,db` 
+: #env-prod または #db でタグ付けされたイベントを表示します。
+
+`hosts:i-0ade23e6,db.myapp.com`
+: i-0ade23e6 または db.myapp.com からのイベントを表示します。
+
+`status:error` 
+: error ステータスのイベントを表示します (サポートされるステータス: `error`、`warning`、`success`)。
+
+`priority:low` 
+: 優先度が低い (low) イベントのみを表示します (サポートされる優先度: `low` 、`normal`、デフォルトは `all`)。
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
-| フィルター                          | 説明                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `sources:github,chef`           | GitHub または Chef からのイベントを表示。                                               |
-| `tags:env-prod,db`              | #env-prod または #db のタグがあるイベントを表示。                                      |
-| `hosts:i-0ade23e6,db.myapp.com` | i-0ade23e6 または db.myapp.com からのイベントを表示。                                   |
-| `status:error`                  | エラーステータスのイベントを表示 (`error`、`warning`、`success` をサポート) 。    |
-| `priority:low`                  | 優先度の低いイベントのみを表示 (`low` または `normal` をサポート、デフォルトは `all`)。 |
+
+`sources:github,chef` 
+: GitHub または Chef からのイベントを表示します。
+
+`tags:env-prod,db` 
+: #env-prod または #db でタグ付けされたイベントを表示します。
+
+`hosts:i-0ade23e6,db.myapp.com`
+: i-0ade23e6 または db.myapp.com からのイベントを表示します。
+
+`status:error` 
+: error ステータスのイベントを表示します (サポートされるステータス: `error`、`warning`、`success`)。
+
+`priority:low` 
+: 優先度が低い (low) イベントのみを表示します (サポートされる優先度: `low` 、`normal`、デフォルトは `all`)。
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-| フィルター                          | 説明                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `source:github,chef`           | GitHub または Chef からのイベントを表示。                                               |
-| `host:i-0ade23e6,db.myapp.com` | i-0ade23e6 または db.myapp.com からのイベントを表示。                                   |
-| `service:kafka`                | `kafka` サービスからのイベントを表示。    |
-| `status:error`                 | エラーステータスのイベントを表示 (`error`、`warning`、`success` をサポート) 。    |
-| `role:`                        |     |
-| `availability-zone:us-east-1a` | `us-east-1a` AWS アベイラビリティーゾーン (AZ) のイベントを表示。  |
-| `container_id:foo`             | ID `foo` を持つコンテナからのイベントを表示。   |
-| `@evt.name:foo`                | `foo` という名前のイベントを表示。  |
+
+`source:github,chef` 
+: GitHub または Chef からのイベントを表示します。
+
+`host:i-0ade23e6,db.myapp.com` 
+: i-0ade23e6 または db.myapp.com からのイベントを表示します。
+
+`service:kafka`                
+: `kafka` サービスからのイベントを表示します。
+
+`status:error` 
+: error ステータスのイベントを表示します (サポートされるステータス: `error`、`warning`、`success`)。
+
+`role:`                        
+: 
+
+`availability-zone:us-east-1a` 
+: `us-east-1a` AWS アベイラビリティーゾーン (AZ) でイベントを表示します。
+
+`container_id:foo`             
+: ID が `foo` のコンテナからのイベントを表示します。
+
+`@evt.name:foo`                
+: `foo` という名前のイベントを表示します。
 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
-| フィルター                          | 説明                                                                    |
-|---------------------------------|--------------------------------------------------------------------------------|
-| `source:github,chef`           | GitHub または Chef からのイベントを表示します。                                               |
-| `host:i-0ade23e6,db.myapp.com` | i-0ade23e6 または db.myapp.com からのイベントを表示します。                                   |
-| `service:kafka`                | `kafka` サービスからのイベントを表示します。    |
-| `status:error`                 | error ステータスのイベントを表示します。(サポートされるステータス: `error`、`warning`、`success`)。    |
-| `role:`                        |     |
-| `availability-zone:us-east-1a` | `us-east-1a` AWS アベイラビリティーゾーン (AZ) のイベントを表示します。  |
-| `container_id:foo`             | ID `foo` を持つコンテナからのイベントを表示します。   |
-| `@evt.name:foo`                | `foo` という名前のイベントを表示します。  |
+
+`source:github,chef` 
+: GitHub または Chef からのイベントを表示します。
+
+`host:i-0ade23e6,db.myapp.com` 
+: i-0ade23e6 または db.myapp.com からのイベントを表示します。
+
+`service:kafka`                
+: `kafka` サービスからのイベントを表示します。
+
+`status:error` 
+: error ステータスのイベントを表示します (サポートされるステータス: `error`、`warning`、`success`)。
+
+`role:`                        
+: 
+
+`availability-zone:us-east-1a` 
+: `us-east-1a` AWS アベイラビリティーゾーン (AZ) でイベントを表示します。
+
+`container_id:foo`             
+: ID が `foo` のコンテナからのイベントを表示します。
+
+`@evt.name:foo`                
+: `foo` という名前のイベントを表示します。
 
 {{< /site-region >}}
 
@@ -151,29 +198,45 @@ further_reading:
 
 より高度な検索には、次のような Datadog イベントクエリ言語を使用します。
 
-| フィルター                                            | 説明                                                               |
-|---------------------------------------------------|---------------------------------------------------------------------------|
-| `tags:env-prod OR db`                             | #env-prod または #db でタグ付けされたイベントを表示します。                                 |
-| `tags:security-group:sg-123 AND role:common-node` | `#security-group:sg-123` と `#role:common-node` でタグ付けされたイベントを表示します。 |
-| `cloud_provider:* NOT "azure"`                    | "azure" でタグ付けされたプロバイダーを除くすべてのクラウドプロバイダーを表示します。             |
+`tags:env-prod OR db`
+: #env-prod または #db でタグ付けされたイベントを表示します。
+
+`tags:security-group:sg-123 AND role:common-node` 
+: `#security-group:sg-123` と `#role:common-node` でタグ付けされたイベントを表示します。タグ
+
+`cloud_provider:* NOT "azure"` 
+: "azure" でタグ付けされたプロバイダーを除くすべてのクラウドプロバイダーを表示します。
 
 タグ検索機能を使用して、同じケータグを持つすべてのイベントを検索します。たとえば、
 
-| フィルター               | 説明                                                                          |
-|----------------------|--------------------------------------------------------------------------------------|
-| `tags:<KEY>:<VALUE>` | `<KEY>:<VALUE>` タグを持つイベントを表示します。                                           |
-| `<KEY>:*`            | `<KEY>` がアタッチされたすべてのイベントを表示します。                                          |
-| `<KEY>`:`<REGEX>`    | `<VALUE>` と `<REGEX>`が一致する`<KEY>:<VALUE>` タグを持つすべてのイベントを表示します。 |
-| `tags:<KEY>`         | 無効な検索方法です。                                                          |
-| `<KEY>:<VALUE>`      | 無効な検索方法です。                                                          |
+`tags:<KEY>:<VALUE>` 
+: `<KEY>:<VALUE>` タグを持つイベントを表示します。
+
+`<KEY>:*` 
+: `<KEY>` がアタッチされたすべてのイベントを表示します。
+
+`<KEY>`:`<REGEX>` 
+: `<VALUE>` と `<REGEX>` が一致する `<KEY>:<VALUE>` タグを持つすべてのイベントを表示します。
+
+`tags:<KEY>` 
+: 無効な検索方法です。
+
+`<KEY>:<VALUE>`
+: 無効な検索方法です。
 
 複合クエリで複数の条件を組み合わせるには、以下のブール演算子を使用します。
 
-| 演算子 | 説明                                                                                                           | 例                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。        | `redis_* AND down`                        |
-| `OR`     | **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。 | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND` 
+: **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。
+: **例**: `redis_* AND down`
+
+`OR` 
+: **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。
+: **例**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT` 
+: **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。
+: **例**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
 **注**: ブールロジックなど一部の高度なクエリ言語では、イベントストリームページでのみ機能し、グラフタイルやダッシュボードウィジェットでは利用できません。
 
@@ -191,29 +254,45 @@ sources:nagios,chef status:error cassandra
 
 より高度な検索には、次のような Datadog イベントクエリ言語を使用します。
 
-| フィルター                                            | 説明                                                               |
-|---------------------------------------------------|---------------------------------------------------------------------------|
-| `tags:env-prod OR db`                             | #env-prod または #db でタグ付けされたイベントを表示します。                                 |
-| `tags:security-group:sg-123 AND role:common-node` | `#security-group:sg-123` と `#role:common-node` でタグ付けされたイベントを表示します。 |
-| `cloud_provider:* NOT "azure"`                    | "azure" でタグ付けされたプロバイダーを除くすべてのクラウドプロバイダーを表示します。             |
+`tags:env-prod OR db`
+: #env-prod または #db でタグ付けされたイベントを表示します。
+
+`tags:security-group:sg-123 AND role:common-node` 
+: `#security-group:sg-123` と `#role:common-node` でタグ付けされたイベントを表示します。タグ
+
+`cloud_provider:* NOT "azure"` 
+: "azure" でタグ付けされたプロバイダーを除くすべてのクラウドプロバイダーを表示します。
 
 タグ検索機能を使用して、同じケータグを持つすべてのイベントを検索します。たとえば、
 
-| フィルター               | 説明                                                                          |
-|----------------------|--------------------------------------------------------------------------------------|
-| `tags:<KEY>:<VALUE>` | `<KEY>:<VALUE>` タグを持つイベントを表示します。                                           |
-| `<KEY>:*`            | `<KEY>` がアタッチされたすべてのイベントを表示します。                                          |
-| `<KEY>`:`<REGEX>`    | `<VALUE>` と `<REGEX>`が一致する`<KEY>:<VALUE>` タグを持つすべてのイベントを表示します。 |
-| `tags:<KEY>`         | 無効な検索方法です。                                                          |
-| `<KEY>:<VALUE>`      | 無効な検索方法です。                                                          |
+`tags:<KEY>:<VALUE>` 
+: `<KEY>:<VALUE>` タグを持つイベントを表示します。
+
+`<KEY>:*` 
+: `<KEY>` がアタッチされたすべてのイベントを表示します。
+
+`<KEY>`:`<REGEX>` 
+: `<VALUE>` と `<REGEX>` が一致する `<KEY>:<VALUE>` タグを持つすべてのイベントを表示します。
+
+`tags:<KEY>` 
+: 無効な検索方法です。
+
+`<KEY>:<VALUE>`
+: 無効な検索方法です。
 
 複合クエリで複数の条件を組み合わせるには、以下のブール演算子を使用します。
 
-| 演算子 | 説明                                                                                                           | 例                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。        | `redis_* AND down`                        |
-| `OR`     | **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。 | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND` 
+: **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。
+: **例**: `redis_* AND down`
+
+`OR` 
+: **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。
+: **例**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT` 
+: **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。
+: **例**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
 
 **注**: ブールロジックなど一部の高度なクエリ言語では、イベントストリームページでのみ機能し、グラフタイルやダッシュボードウィジェットでは利用できません。
 
@@ -233,13 +312,19 @@ sources:nagios,chef status:error cassandra
 
 複合クエリで複数の条件を組み合わせるには、以下のブール演算子を使用します。
 
-| 演算子 | 説明                                                                                                           | 例                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。        | `redis_* AND down`                        |
-| `OR`     | **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。 | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND` 
+: **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。
+: **例**: `redis_* AND down`
 
-[6]: logs/search_syntax/
+`OR` 
+: **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。
+: **例**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT` 
+: **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。
+: **例**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
+
+[6]: /ja/logs/search_syntax/
 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
@@ -249,13 +334,19 @@ sources:nagios,chef status:error cassandra
 
 複合クエリで複数の条件を組み合わせるには、以下のブール演算子を使用します。
 
-| 演算子 | 説明                                                                                                           | 例                                   |
-|----------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `AND`    | **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。        | `redis_* AND down`                        |
-| `OR`     | **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。                               | `sources:nagios,chef directory OR Mixlib` |
-| `NOT`    | **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。 | `-tags:<KEY>:<VALUE> NOT "<STRING>"`      |
+`AND` 
+: **積**: 両方の条件を含むイベントが選択されます (タグの場合は、何も追加しなければ、`AND` がデフォルトです)。
+: **例**: `redis_* AND down`
 
-[7]: logs/search_syntax/
+`OR` 
+: **和**: いずれかの条件を含むイベントが選択されます。タグの場合はカンマ (`,`) を使用します。
+: **例**: `sources:nagios,chef directory OR Mixlib`
+
+`NOT` 
+: **排他**: 後続の条件はイベントに含まれません。この演算子は文字列に対してのみ機能します。タグの場合は直前に `-` を使用します。
+: **例**: `-tags:<KEY>:<VALUE> NOT "<STRING>"`
+
+[7]: /ja/logs/search_syntax/
 
 {{< /site-region >}}
 
@@ -278,15 +369,26 @@ sources:nagios,chef status:error cassandra
 
 Datadog は `@notifications` をサポートします。たとえば、
 
-| 例                                 | 説明                                                                                      |
-|-----------------------------------------|--------------------------------------------------------------------------------------------------|
-| `@support-datadog`                      | イベントに直接投稿された際に、Datadog サポートチケットを作成します（コメントを含む）。 |
-| `@all`                                  | オーガニゼーションの全メンバーに通知を送信します。                                        |
-| `@john`                                 | `john` という名前のユーザーに通知します。                                                                  |
-| `@test@example.com`                     | `test@example.com` へメールを送信します。                                                            |
-| `@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` | 指定した Slack チャンネルに、イベントやグラフを投稿します。                                         |
-| `@webhook`                              | Webhook をアラートまたはトリガーします。[Webhooks に関するブログ記事][7]を参照してください。                              |
-| `@pagerduty`                            | Pagerduty にアラートを送信します。`@pagerduty-acknowledge` と `@pagerduty-resolve` も使用できます。 |
+`@support-datadog` 
+: イベントに直接投稿された際に、Datadog サポートチケットを作成します（コメントを含む）。
+
+`@all` 
+: `@all` – オーガニゼーションの全メンバーに通知を送信します。
+
+`@john`                                 
+: `john` という名前のユーザーに通知します。
+
+`@test@example.com`
+: 電子メールを `test@example.com` に送信します。
+
+`@slack-<SLACK_ACCOUNT>-<CHANNEL_NAME>` 
+: 指定した Slack チャンネルに、イベントやグラフを投稿します。
+
+`@webhook` 
+: Webhook をアラートまたはトリガーします。[Webhooks に関するブログ記事][7]を参照してください。
+
+`@pagerduty`
+: Pagerduty にアラートを送信します。`@pagerduty-acknowledge` と `@pagerduty-resolve` も使用できます。
 
 ## その他の参考資料
 
@@ -296,6 +398,6 @@ Datadog は `@notifications` をサポートします。たとえば、
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://app.datadoghq.eu/event/stream
 [4]: https://gov.datadoghq.com/event/stream
-[5]: logs/explorer/saved_views/
-[6]: logs/search_syntax/
+[5]: /ja/logs/explorer/saved_views/
+[6]: /ja/logs/search_syntax/
 [7]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

@@ -2,7 +2,7 @@
 aliases:
   - /fr/real_user_monitoring/setup
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md'
+  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md'
 kind: documentation
 title: Surveillance Browser RUM
 ---

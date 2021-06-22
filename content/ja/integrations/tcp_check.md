@@ -118,9 +118,8 @@ TCP チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**`tcp.can_connect`**:
-
-設定した`ホスト`および`ポート`に Agent が接続できない場合は、DOWN を返します。それ以外の場合は、UP を返します。
+**tcp.can_connect**:<br>
+設定された `host` および `port` に Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 Datadog でこのサービスチェックのアラート条件を作成するには、[Create Monitor][4] ページで **Integration** ではなく **Network** をクリックしてください。
 

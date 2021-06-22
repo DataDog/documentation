@@ -19,7 +19,7 @@ Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_inges
 
 **Note**: to use App Analytics, you must be using Agent v6.7+.
 
-## Automatic Configuration
+## Automatic configuration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
@@ -127,7 +127,7 @@ To enable App Analytics for Nginx:
 
 After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
-## Configure Additional Services (optional)
+## Configure additional services (optional)
 
 ### Configure by integration
 
@@ -262,7 +262,7 @@ Integration names can be found on the [integrations table][1].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Database Services
+### Database services
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}

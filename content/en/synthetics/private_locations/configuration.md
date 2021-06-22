@@ -27,68 +27,118 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 **Note:** Arguments set in the launch command have precedence over the configuration file. However, these options are not stored and are consequently only prevalent for a given launch.
 
-## Configuration Options
+## Configuration options
 
-### Datadog Site Configuration
+### Datadog site configuration
 
-| Option | Type | Default | Description |
-| ------ | ---- | ------- | ----------- |
-| `site` | String | `datadoghq.com` | Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}. |
+`site`
+: **Type**: String <br>
+**Default**: `datadoghq.com`<br>
+Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}.
 
-### DNS Configuration 
+### DNS configuration
 
-* The two below parameters can be used to customize DNS resolution on your **API tests**:
+The two below parameters can be used to customize DNS resolution on your **API tests**:
 
-| Option | Type | Default | Description |
-| ------ | ---- | ------- | ----------- |
-| `dnsUseHost` | Boolean | `true` | Use host local DNS configuration first (e.g., the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any. |
-| `dnsServer` | Array of Strings | `["8.8.8.8","1.1.1.1"]` | DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`). |
+`dnsUseHost`
+: **Type**: Boolean <br>
+**Default**: `true`<br>
+Use host local DNS configuration first (e.g., the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any.
 
-* On **browser tests**, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (e.g., using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
+`dnsServer`
+: **Type**: Array of Strings <br>
+**Default**: `["8.8.8.8","1.1.1.1"]`<br>
+DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`).
 
-### Reserved IPs Configuration
+On **browser tests**, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (e.g., using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
 
-| Option | Type | Default | Description |
-| -------| ---- | ------- | ----------- |
-| `enableDefaultBlockedIpRanges`| Boolean | `false` | Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter. |
-| `allowedIPRanges` | Array of Strings | `none` | Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (e.g., `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
-| `blockedIPRanges` | Array of Strings | `none` | Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (e.g. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
+### Reserved IPs configuration
+
+`enableDefaultBlockedIpRanges`
+: **Type**: Boolean <br>
+**Default**: `false`<br>
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter.
+
+`allowedIPRanges`
+: **Type**: Array of Strings <br>
+**Default**: `none`<br>
+Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (e.g., `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
+
+`blockedIPRanges`
+: **Type**: Array of Strings <br>
+**Default**: `none`<br>
+Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (e.g. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
 
 **Note:** The `whitelistedRange` and `blacklistedRange` parameters are now deprecated and should be replaced by the above listed ones.
 
-### Proxy Configuration
+### Proxy configuration
 
-| Option | Type | Default | Description |
-| -------| ---- | ------- | ----------- |
-| `proxyDatadog` | String | `none` | Proxy URL used by the private location to send requests to Datadog (e.g., `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`). |
-| `proxyTestRequests` | String | `none` | Proxy URL used by the private location to send test requests to the endpoint. |
-| `proxyIgnoreSSLErrors` | Boolean | `false` | Discard SSL errors when private location is using a proxy to send requests to Datadog. |
+`proxyDatadog`
+: **Type**: String <br>
+**Default**: `none`<br>
+Proxy URL used by the private location to send requests to Datadog (e.g., `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+
+`proxyTestRequests`
+: **Type**: String <br>
+**Default**: `none`<br>
+Proxy URL used by the private location to send test requests to the endpoint.
+
+`proxyIgnoreSSLErrors`
+: **Type**: Boolean <br>
+**Default**: `false`<br>
+Discard SSL errors when private location is using a proxy to send requests to Datadog.
 
 **Note:** The `proxy` parameter is now deprecated and should be replaced by `proxyDatadog`.
 
-### Advanced Configuration
+### Advanced configuration
 
-| Option | Type | Default | Description |
-| -------| ---- | ------- | ----------- |
-| `concurrency` | Number | `10` | Maximum number of tests executed in parallel. |
-| `maxTimeout` | Number | `60000` | Maximum test execution duration for API tests (in milliseconds). |
+`concurrency`
+: **Type**: Number <br>
+**Default**: `10`<br>
+Maximum number of tests executed in parallel.
 
-## Private Root Certificates
+`maxTimeout`
+: **Type**: Number <br>
+**Default**: `60000`<br>
+Maximum test execution duration for API tests (in milliseconds).
+
+## Private root certificates
 
 You can upload custom root certificates to your private locations to have your API and Browser tests perform SSL handshake using your own `.pem` files. When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs`, the same way your private location configuration file is mounted. These certificates are then considered trusted CA and used as such at test runtime.
 
 **Note**: This feature is supported for versions 1.5.3+ of the private location Docker image.
 
-## Private Locations Admin
+## Private locations admin
 
-| Option | Type | Default | Description |
-| -------| ---- | ------- | ----------- |
-| `config` | String | `/etc/datadog/synthetics-check-runner.json` | Path to JSON configuration file. |
-| `logFormat` | String | `pretty` | Format log output between `"pretty"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog. |
-| `verbosity` | Number | `3` | Verbosity level (e.g., `-v`, `-vv`, `-vvv`, ...). |
-| `dumpConfig` | Boolean | `none` | Display worker configuration parameters without secrets. |
-| `dumpFullConfig` | Boolean | `none` | Display full worker configuration parameters. |
-| `help` | Boolean | `none` | Show help. |
+`config`
+: **Type**: String <br>
+**Default**: `/etc/datadog/synthetics-check-runner.json`<br>
+Path to JSON configuration file.
+
+`logFormat`
+: **Type**: String <br>
+**Default**: `pretty`<br>
+Format log output between `"pretty"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.
+
+`verbosity`
+: **Type**: Number <br>
+**Default**: `3`<br>
+Verbosity level (e.g., `-v`, `-vv`, `-vvv`, ...).
+
+`dumpConfig`
+: **Type**: Boolean <br>
+**Default**: `none`<br>
+Display worker configuration parameters without secrets.
+
+`dumpFullConfig`
+: **Type**: Boolean <br>
+**Default**: `none`<br>
+Display full worker configuration parameters.
+
+`help`
+: **Type**: Boolean <br>
+**Default**: `none`<br>
+Show help.
 
 **Note**: Private Location containers output logs to stdout/stderr without saving them within the container.
 

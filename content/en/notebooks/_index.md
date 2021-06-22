@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
+- link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
+  tag: "Blog"
+  text: "Tell data-driven stories with Collaborative Notebooks"
 - link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Create a Screenboard"
@@ -14,15 +17,15 @@ further_reading:
 
 ## Overview
 
-Notebooks combine graphs and text in a linear, cell-based format. They are designed to help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
+Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
-{{< img src="notebooks/demo_notebook.png" alt="demo notebook"  style="width:100%;">}}
+{{< img src="notebooks/demo_notebook.png" alt="demo notebook"  style="width:90%;">}}
 
 ## Live collaboration
 
 Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time; indicators also appear beside any cell that another user is currently editing.
 
-{{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks"  style="width:100%;">}}
+{{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks"  style="width:90%;">}}
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
@@ -32,11 +35,15 @@ Everyone on your team can open or edit any notebook, but a notebook can only be 
 
 To add a comment, select some text or hover over a graph. The **Add comment** button will appear to the right of the cell.
 
-{{< img src="notebooks/add_comment.png" alt="add a comment to text"  style="width:100%;">}}
+{{< img src="notebooks/add_comment.png" alt="add a comment to text"  style="width:90%;">}}
 
 To edit or delete a comment you wrote, click the menu on the top-right of your comment.
 
-{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook"  style="width:100%;">}}
+{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook"  style="width:90%;">}}
+
+View or re-open resolved comments in the Comment History, available in the Notebook cog menu.
+
+{{< img src="notebooks/comment_history.png" alt="edit comment in notebook"  style="width:90%;">}}
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
@@ -47,6 +54,10 @@ The [Notebook List][1] allows you to view and search previously created notebook
 
 * **My Notebooks**: Notebooks created by you.
 * **Other Notebooks**: Notebooks created by other members of your team.
+
+The Notebook List also displays preset templates and tutorials. Edit these templates directly, and click **Clone** to save your changes.
+
+{{< img src="notebooks/templates.png" alt="templates on the notebook list page"  style="width:80%;">}}
 
 ## New Notebook
 
@@ -84,13 +95,22 @@ To insert cells, use the **+** button that appears to the left of the cell. To s
 
 ### Time frames
 
-By default, all graph cells adhere to the global time frame set in the notebook header. However, individual cells can be unlocked from the global time and set to an independent time frame. This allows for the comparison of metrics over multiple, distinct periods of time within a single notebook, which is suited for incident investigations.
+By default, all graph cells are linked to the global time frame set in the notebook header.
 
-To set an individual time frame, click the clock icon in the top-right corner of a graph cell. Then, uncheck *Lock this cell to global time frame* and set your preferred time frame:
-
-{{< img src="notebooks/time_selector.png" alt="Time Selector"  style="width:60%;">}}
+To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The Notebook URL will update to reflect this new time frame without saving it to the Notebook.
 
 **Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
+
+{{< img src="notebooks/global_time.png" alt="Notebook Time Selector"  style="width:90%;">}}
+
+
+To save this time as the Notebook’s default, click **Update Default**. The reset button will discard your changes to time.
+
+Individual cells can be unlinked from the global time and set to an independent time frame.
+
+{{< img src="notebooks/cell_time.png" alt="Cell Time Selector"  style="width:90%;">}}
+
+To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
 ### Expand
 

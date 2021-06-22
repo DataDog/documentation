@@ -4,7 +4,7 @@ kind: guide
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: "Présentation de Datadog\_Synthetics"
+    text: Présentation de la surveillance Synthetic Datadog
   - link: synthetics/
     tag: Documentation
     text: Gérer vos checks
@@ -12,11 +12,13 @@ further_reading:
     tag: Documentation
     text: Configurer un test Browser
 ---
+## Présentation
+
 Les applications Web peuvent faire appel à un vaste nombre de logiques différentes. Bien que les tests de bout en bout constitués d'interactions simples (telles que des clics et des saisies) suffisent le plus souvent à tester un site Web, il est parfois nécessaire d'aller plus loin et de vérifier des interactions complexes pour s'assurer que les transactions commerciales clés se déroulent normalement dans votre application.
 
 ## Tester le chargement d'un fichier
 
-Vous pouvez **charger un fichier** pour valider la dernière étape d'un workflow fonctionnel visant à tester la création d'un profil. Lorsqu'un fichier est chargé avec l'enregistreur de test, les tests Browser de Datadog Synthetics identifient automatiquement le fichier chargé et créent une [étape `Upload file` correspondante][1]. Le fichier est ensuite à nouveau chargé à chaque exécution du test.
+Vous pouvez **charger un fichier** pour valider la dernière étape d'un workflow fonctionnel visant à tester la création de profil. Lorsqu'un fichier est chargé avec l'enregistreur de test, les tests Browser Datadog Synthetic identifient automatiquement le fichier chargé et créent une [étape `Upload file` correspondante][1]. Le fichier est ensuite à nouveau chargé à chaque exécution du test.
 
 {{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Charger un fichier" video="true"  width="100%">}}
 
@@ -24,7 +26,7 @@ Vous pouvez **charger un fichier** pour valider la dernière étape d'un workflo
 
 Le **téléchargement de fichiers** est une autre action couramment effectuée par les utilisateurs sur les applications Web : il peut par exemple s'agir de télécharger la confirmation d'une commande à partir d'un site Web de e-commerce ou d'exporter un relevé de compte au format PDF ou CSV.
 
-Les tests browser de Datadog et l'assertion `Test a downloaded file` vous permettent de vérifier que les fichiers téléchargeables à partir de votre application Web sont correctement transférés (par exemple, à partir de votre serveur FTP). L'assertion peut être utilisée pour vérifier que le nom, la taille et les données d'un fichier téléchargé sont corrects.
+Les tests Browser de Datadog et l'assertion `Test a downloaded file` vous permettent de vérifier que les fichiers téléchargeables à partir de votre application Web sont correctement transférés (par exemple, à partir de votre serveur FTP). L'assertion peut être utilisée pour vérifier que le nom, la taille et les données d'un fichier téléchargé sont corrects.
 
 Pour configurer un test browser avec cette assertion :
 

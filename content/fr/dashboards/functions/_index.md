@@ -28,12 +28,13 @@ Vous pouvez appliquer des fonctions à vos requêtes à l'aide de la zone `Formu
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro ou différentes de null.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : excluez certaines valeurs de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rollup" >}}Cumul : contrôlez le nombre de points de données bruts utilisés. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
 

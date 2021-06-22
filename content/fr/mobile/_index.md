@@ -21,7 +21,7 @@ Vous pouvez vous connecter à l'aide de l'authentification standard, de l'authen
 
 #### Activation du protocole SAML
 
-La connexion via le protocole SAML nécessite la configuration et l'authentification de votre fournisseur SAML auprès de Datadog. Pour la connexion SAML initiée par le fournisseur d'identité, consultez la remarque à la fin de cette section. Pour procéder à l'authentification SAML :
+La connexion via le protocole SAML nécessite la configuration et l'authentification de votre fournisseur SAML auprès de Datadog. Pour la connexion SAML initiée par un fournisseur d'identité, consultez la fin de cette section. Pour procéder à l'authentification SAML :
 
 1. Cliquez sur le bouton « Using Single Sign-On (SAML)? ».
 2. Saisissez votre adresse professionnelle, puis envoyez l'e-mail.
@@ -43,7 +43,10 @@ Si vous le souhaitez, vous pouvez également vous authentifier à l'aide d'un co
 
 En cliquant sur **Authorize** lors de la connexion, vous associez l'appareil mobile utilisé à votre compte. Pour des raisons de sécurité, vous devrez effectuer ce processus une fois par mois.
 
-**Remarque** : la connexion SAML initiée par un fournisseur d'identité pour l'app mobile est actuellement disponible en version bêta. Contactez l'[assistance Datadog][5] pour exiger un accès à la bêta, ou si vous rencontrez des problèmes lors du processus d'authentification SAML.
+##### Connexion SAML initiée par un fournisseur d'identité
+
+Si vous recevez systématiquement une erreur lorsque vous essayez de vous connecter via SAML, il est possible que votre fournisseur d'identité impose une connexion initiée par un fournisseur d'identité. Pour découvrir comment activer ce type de connexion, consultez notre [page dédiée][16].
+
 
 ## Monitors
 
@@ -59,9 +62,111 @@ Par exemple, pour filtrer les monitors de métrique associés à l'équipe SRE q
 
 {{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="page Dashboards">}}
 
-Sur la page Dashboards, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog. Filtrez rapidement vos dashboards à l'aide des vues enregistrées des templates variables. Pour en savoir plus sur les vues enregistrées des templates variables, consultez la section relative aux[ vues enregistrées des dashboards][9]. Cliquez sur un dashboard pour ces vues.
+Sur la page Dashboards, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog. Filtrez rapidement vos dashboards grâce aux vues enregistrées des templates variables. Pour en savoir plus sur les vues enregistrées des templates variables, consultez la [section relative aux vues enregistrées des dashboards][9]. Cliquez sur un dashboard pour l'afficher.
 
 **Remarque :** pour configurer ou modifier un dashboard, vous devez [vous connecter depuis un navigateur][10]. Pour en savoir plus, consultez la section [Dashboards][11].
+
+## Incidents
+
+{{< img src="mobile/incidents.png" alt="page Incidents" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+La page Incidents de l'application mobile Datadog vous permet de consulter, de rechercher et de filtrer tous les incidents accessibles de votre compte Datadog. Vous pouvez ainsi réagir rapidement et résoudre vos problèmes, où que vous soyez. Il est également possible de déclarer et de modifier des incidents, ainsi que de communiquer facilement avec vos équipes grâce aux intégrations Slack, Zoom, etc. Pour en savoir plus sur les incidents, consultez la [documentation relative à la gestion des incidents Datadog][17].
+
+### Créer un incident
+
+1. Cliquez sur l'onglet Incidents dans le menu du bas pour accéder à la liste des incidents.
+2. Cliquez sur le bouton « + » dans le coin supérieur droit.
+3. Attribuez un titre, une gravité et une personne responsable (commander).
+
+
+## Widgets
+
+### Vues enregistrées de monitors
+
+{{< img src="mobile/widgets.png" alt="page Widget" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+Accédez à vos [vues enregistrées de monitors][18] depuis l'écran d'accueil grâce aux widgets Datadog. Touchez la cellule d'une vue enregistrée pour ouvrir l'écran Monitor Search dans l'app. Votre vue enregistrée s'affiche alors.
+
+**Remarque** : si vous ne disposez d'aucune vue enregistrée de monitor, le widget affiche par défaut tous les monitors.
+
+#### Créer un widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Appuyez longuement sur l'écran d'accueil.
+- Touchez le bouton « + » dans le coin supérieur gauche de l'écran.
+- Recherchez les widgets Datadog.
+- Sélectionnez la taille de votre choix (medium pour un maximum de 3 vues enregistrées, large pour 6).
+- Placez le widget à l'emplacement de votre choix.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Ouvrez l'outil de sélection de widgets Android.
+- Appuyez longuement sur l'écran d'accueil ou sur l'icône de l'app Datadog.
+- Touchez Widgets. Si vous avez des raccourcis d'application, cette option peut être remplacée par une simple icône, en haut à droite de la bulle.
+- Faites glisser le widget de vos vues enregistrées de monitors sur votre écran d'accueil.
+
+{{% /tab %}}
+{{< /tabs >}}
+#### Modifier un widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+- Appuyez longuement sur le widget pour le configurer.
+- Touchez Edit Widget.
+- Touchez la cellule d'une vue enregistrée pour la sélectionner ou la désélectionner.
+- Pour modifier l'ordre des vues, faites glisser et déposez chaque cellule.
+- Touchez un emplacement en dehors du widget pour valider votre sélection et quitter l'écran de configuration.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Touchez le titre d'un widget pour le configurer.
+- Touchez Saved Views.
+- Touchez la cellule d'une vue enregistrée pour la sélectionner ou la désélectionner.
+- Pour modifier l'ordre des vues, faites glisser et déposez chaque cellule.
+- Touchez Save pour valider votre sélection et quitter l'écran de configuration.
+- Faites défiler le widget pour afficher d'autres vues enregistrées. Appuyez longuement sur le widget pour modifier sa taille selon vos besoins.
+
+{{% /tab %}}
+{{< /tabs >}}
+#### Plusieurs organisations
+
+Vous pouvez afficher les vues enregistrées de plusieurs organisations au sein d'un même widget.
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Toutes les organisations auxquelles vous êtes connecté s'affichent dans l'écran de configuration. Si vous ne trouvez pas une certaine organisation, vous devrez peut-être vous reconnecter.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+- Depuis l'écran de configuration, touchez Organization.
+- Sélectionnez une nouvelle organisation (vous devrez peut-être vous connecter).
+- Touchez Saved Views. Sélectionnez les vues enregistrées à afficher, ou ne modifiez pas la disposition.
+- Touchez Save. Le widget est désormais configuré avec les vues enregistrées d'une nouvelle organisation.
+{{% /tab %}}
+{{< /tabs >}}
+#### Supprimer un widget
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+Pour supprimer un widget, appuyez sur le bouton « - » dans le coin supérieur gauche du widget lorsque vous modifiez votre écran d'accueil. Vous pouvez également appuyer longuement sur le widget, puis sélectionner l'option Remove Widget.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Appuyez longuement sur un widget pour le supprimer. Vous pouvez également le faire glisser et le déposer sur le bouton de suppression.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Actions rapides
 
@@ -132,3 +237,6 @@ Si vous avez besoin d'aide pour résoudre d'éventuels problèmes, [contactez l'
 [14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[16]: https://docs.datadoghq.com/fr/account_management/saml/mobile-idp-login/
+[17]: https://docs.datadoghq.com/fr/monitors/incident_management
+[18]: https://docs.datadoghq.com/fr/logs/explorer/saved_views/

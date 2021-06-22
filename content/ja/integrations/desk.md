@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/desk/'
 draft: false
 git_integration_title: desk
 has_logo: true
+integration_id: desk
 integration_title: Desk
 is_public: true
 kind: インテグレーション

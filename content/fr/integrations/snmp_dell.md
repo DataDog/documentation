@@ -25,7 +25,6 @@ is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
-metric_prefix: snmp.
 metric_to_check:
   - snmp.fanSpeed
   - snmp.systemStateChassisStatus
@@ -71,7 +70,7 @@ L'intégration Dell n'inclut aucun événement.
 
 Documentation, liens et articles supplémentaires utiles :
 
-* [Surveiller des périphériques SNMP avec Datadog][4]
+* [Surveiller des périphériques SNMP avec Datadog][3]
 
 [1]: https://docs.datadoghq.com/fr/network_performance_monitoring/devices/data
 [2]: https://docs.datadoghq.com/fr/network_performance_monitoring/devices/setup

@@ -13,7 +13,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
   tag: "Blog"
   text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
-- link: "https://www.datadoghq.com/pricing/?product=apm#apm-what-is-considered-as-a-host-for-azure-app-services"
+- link: "https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler-what-is-considered-as-a-host-for-azure-app-services"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
 ---
