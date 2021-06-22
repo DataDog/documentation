@@ -61,7 +61,7 @@ Select some **Managed Locations** or **Private Locations** to run your test from
 
 #### Specify test frequency
 
-Select the interval of time you want to run your test.
+Select the frequency of your test runs.
 
 #### Define alert conditions
 
@@ -73,7 +73,7 @@ Retry x time before location is marked as failed
 
 After a location fails, retries immediately run.
 
-**Note**: By default, the wait time for a failed test to retry is 300ms. This interval can be configured via the [Synthetics API][3].
+**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure the interval with the [Synthetics API][3].
 
 To receive alerts when your endpoint goes down for three minutes on two different locations, set up an alerting condition such as:
 
@@ -108,4 +108,3 @@ With Datadog's [APM integration with Synthetic Monitoring][5], you can access th
 [3]: /api/v1/synthetics/#create-or-clone-a-test
 [4]: /integrations/
 [5]: /synthetics/apm/
-[6]: /getting-started/synthetics/private_location/
