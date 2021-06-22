@@ -25,6 +25,8 @@ aliases:
 
 Functions can be applied to your queries by clicking `+` icon in the graphing editor. Most of the functions are applied as the last step (after [time][1] and [space aggregation][2]).
 
+{{< img src="dashboards/functions/addingfunctions.png" alt="Add function"  style="width:75%;" >}} 
+
 Here is an example showing how to apply Exclusion function to exclude certain values of your metric.
 
 {{< img src="dashboards/functions/exclusion_example.png" alt="Exclusion example with Toplist"  style="width:75%;" >}} 
