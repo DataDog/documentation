@@ -150,7 +150,7 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 
 {{< img src="dashboards/faq/metric_graph_8.png" alt="metric_graph_8"  style="width:75%;">}}
 
-#### as_count と as_rate
+#### カウントとレート
 
 `as_count` と `as_rate` は、StatsD/DogStatsD から送信されたレートとカウンターに固有の時間集計関数です。これらを使用して、メトリクスを 1 秒あたりのレートとして表示したり、元のカウント数として表示したりすることができます。
 構文: rollup を追加する代わりに、`.as_count()` または `.as_rate()` を使用できます。

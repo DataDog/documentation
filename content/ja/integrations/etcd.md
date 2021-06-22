@@ -11,6 +11,7 @@ assets:
   monitors: {}
   saved_views:
     etcd_overview: assets/saved_views/etcd_overview.json
+    etcd_processes: assets/saved_views/etcd_processes.json
   service_checks: assets/service_checks.json
 categories:
   - orchestration
