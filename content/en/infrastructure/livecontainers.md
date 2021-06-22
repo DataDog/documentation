@@ -149,15 +149,16 @@ The Kubernetes resources view for Live Containers used to require [Agent version
 
 If you are using the official [Datadog Helm Chart][1]:
 
-- Use chart version above 2.4.5 and before 2.10.0. Starting from chart version 2.10.0 onwards, refer to the [latest configuration instructions][18] instead.
-  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][2] file.
-- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
+- Use chart version above 2.4.5 and before 2.10.0. Starting from chart version 2.10.0 onwards, refer to the [latest configuration instructions][2] instead.
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][3] file.
+- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][3]
 - Deploy a new release.
 
-In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][3].
 
 [1]: https://github.com/DataDog/helm-charts
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[2]: /infrastructure/livecontainers/#configuration
+[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
