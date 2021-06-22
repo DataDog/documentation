@@ -9,7 +9,8 @@ assets:
   metrics_metadata: metadata.csv
   monitors:
     brick status: assets/monitors/brick_status.json
-  saved_views: {}
+  saved_views:
+    glusterfs_processes: assets/saved_views/glusterfs_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store

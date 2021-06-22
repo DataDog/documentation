@@ -15,8 +15,11 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
-## トレースおよびスパン ID を手動で挿入する
+## 手動挿入
 
 Go トレーサーは、スパン情報と、`%v` 形式の指定子を使ったログステートメントの印刷を可能にします。
 
