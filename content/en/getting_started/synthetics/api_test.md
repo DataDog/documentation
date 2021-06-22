@@ -57,7 +57,11 @@ To add a custom assertion, click anywhere in the response preview or click **New
 
 #### Select locations 
 
-Select some **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **Private Locations** to run your test from.
+
+Your managed locations often include public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select **Private Locations** instead.
+
+For more information, see the [Private Locations](https://docs.datadoghq.com/getting_started/synthetics/private_location) documentation.
 
 #### Specify test frequency
 
