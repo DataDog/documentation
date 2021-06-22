@@ -160,4 +160,4 @@ Click the settings modal for the whole dashboard, and select *Permissions*. Use 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[3]: /account_management/rbac/
+[2]: /account_management/rbac/
