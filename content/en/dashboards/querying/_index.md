@@ -82,7 +82,7 @@ This query creates a single line that represents the total available disk space,
 When switching to the JSON view, the query looks like this:
 
 ```text
-"q": "avg:system.disk.free{*}.rollup(avg, 60)"
+"query": "avg:system.disk.free{*}.rollup(avg, 60)"
 ```
 
 The full JSON looks like this:
