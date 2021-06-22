@@ -45,6 +45,8 @@ The context is made of the Browser APIs that trigger the event creation. The con
 | Error            | [Error][10]                     |
 | Long Task        | [PerformanceLongTaskTiming][11] |
 
+More details about the structure of context objects is available in the [Browser SDK repository][12].
+
 ## Examples
 
 ### Collect HTTP headers from a Fetch response
@@ -277,3 +279,4 @@ The following tabs show the information contained in the `beforeSend` event and 
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
+[12]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/domainContext.types.ts
