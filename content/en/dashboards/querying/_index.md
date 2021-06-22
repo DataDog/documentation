@@ -49,7 +49,7 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
 
-{{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter"  style="width:75%;" >}}
 
 You can also use [advanced filtering][11] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
 
@@ -75,9 +75,9 @@ In practice, metrics are collected by the Agent every 15-20 seconds. So one day'
 
 To manually rollup the data, use the [rollup function][8]. Click the plus sign to the right of the aggregation group and choose `rollup` from the dropdown. Then choose how you want to aggregate the data and the interval in seconds.
 
-This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 60-second buckets:
+This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 1 min buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example.png" alt="rollup example"  style="width:90%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="rollup example"  style="width:90%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -140,7 +140,7 @@ To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
-{{< img src="dashboards/querying/arithmetic_2.png" alt="Arithmetic 2"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply"  style="width:75%;" >}}
 
 #### Arithmetic between two metrics
 
@@ -152,13 +152,26 @@ jvm.heap_memory / jvm.heap_memory_max
 
 Use the **Advanced...** option in the graph editor and select **Add Query**. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
-Then in the `Formula` box, enter the arithmetic (`a / b` for this example):
+Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
 
-{{< img src="dashboards/querying/arithmetic_3.png" alt="Arithmetic 3"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio"  style="width:75%;" >}}
 
-To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
+Here is another example showing how you can graph the ratio between `error` logs and `info` logs.
+
+```text
+status:error / status:info
+```
+
+{{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio"  style="width:75%;" >}}
+
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
+
+### Create an alias
+
+You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
+
+{{< img src="dashboards/querying/custom_alias.png" alt="Custom alias"  style="width:75%;" >}}
 
 ### Create a title
 
