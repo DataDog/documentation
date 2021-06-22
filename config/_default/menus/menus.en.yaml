@@ -2361,44 +2361,44 @@ main:
     parent: dev_tools_integrations
     weight: 404
   - name: Custom Metrics
-    url: developers/metrics/
+    url: metrics/
     parent: metrics_top_level
-    identifier: dev_tools_metrics
+    identifier: metrics_custom_metrics
     weight: 999
   - name: Metrics Types
-    url: developers/metrics/types/
+    url: metrics/types/
     parent: metrics_top_level
     identifier: dev_tools_metrics_metrics_type
     weight: 905
   - name: 'Submission - Agent Check '
-    url: developers/metrics/agent_metrics_submission/
-    parent: dev_tools_metrics
+    url: metrics/agent_metrics_submission/
+    parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
     weight: 502
   - name: Submission - DogStatsD
-    url: developers/metrics/dogstatsd_metrics_submission/
-    parent: dev_tools_metrics
+    url: metrics/dogstatsd_metrics_submission/
+    parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
     weight: 503
   - name: Submission - Powershell
-    url: developers/metrics/powershell_metrics_submission
-    parent: dev_tools_metrics
+    url: metrics/powershell_metrics_submission
+    parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
     weight: 504
   - name: 'Submission - API '
     url: api/v1/metrics/#submit-metrics
-    parent: dev_tools_metrics
+    parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 505
   - name: Metric Type Modifiers
-    url: developers/metrics/type_modifiers/
-    parent: dev_tools_metrics
-    identifier: dev_tools_metrics_modifiers
+    url: metrics/type_modifiers/
+    parent: metrics_custom_metrics
+    identifier: metrics_modifiers
     weight: 506
   - name: Metrics Units
-    url: developers/metrics/units/
+    url: metrics/units/
     parent: metrics_top_level
-    identifier: dev_tools_metrics_units
+    identifier: metrics_units
     weight: 906
   - name: Events
     url: developers/events/
