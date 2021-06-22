@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    marathon-overview: assets/dashboards/marathon-overview_dashboard.json
   logs:
     source: marathon
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    marathon_processes: assets/saved_views/marathon_processes.json
   service_checks: assets/service_checks.json
 categories:
   - configuration & deployment

@@ -13,6 +13,7 @@ aliases:
   - /ja/tracing/guide/adding_metadata_to_spans
   - /ja/tracing/advanced/adding_metadata_to_spans/
   - /ja/tracing/custom_instrumentation
+  - /ja/tracing/setup_overview/custom_instrumentation/undefined
 further_reading:
   - link: tracing/guide/instrument_custom_method
     text: カスタムメソッドをインスツルメントして、ビジネスロジックを詳細に可視化する
