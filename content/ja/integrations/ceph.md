@@ -8,6 +8,8 @@ assets:
     source: ceph
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    ceph_processes: assets/saved_views/ceph_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
