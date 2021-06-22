@@ -33,7 +33,8 @@
 
     <p>
       <strong>{{ .check }}</strong><br>
-      {{ .description | markdownify }}
+      {{ .description | markdownify }}<br>
+      <i>Statuses: {{ range $i, $e := .statuses }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}</i>
     </p>
 
   {{ end }}
