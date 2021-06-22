@@ -15,30 +15,42 @@ further_reading:
 The general format for the `REQUEST_SCHEMA` is an array of one or more `requests`:
 
 ```text
-"requests": [
-  {
-    "q": "function(aggregation method:metric{scope} [by {group}])"
-  }
-]
+
+   "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "per_hour(query)"
+                },
+                {
+                    "formula": "query1"
+                },
+                {
+                    "formula": "query1 / 100"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query",
+                    "query": "avg:system.load.5{*}"
+                },
+                {
+                    "data_source": "logs",
+                    "name": "query1",
+                    "search": {
+                        "query": "status:error"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                }
+            ]
 ```
-
-If your `requests` parameter has multiple `requests`, the widget displays all of them:
-
-```text
-"requests": [
-  {
-    "q": "<METRIC_1>{<SCOPE_1>}"
-  },
-  {
-    "apm_query": "<METRIC_2>{<SCOPE_2>}"
-  },
-  {
-    "log_query": "<METRIC_3>{<SCOPE_3>}"
-  }
-]
-```
-
-{{< img src="dashboards/graphing_json/multi-lines.png" alt="multi lines"  >}}
 
 ## Functions
 
@@ -52,7 +64,7 @@ In most cases, the number of data points available outnumbers the maximum number
 
 #### Metrics
 
-Metrics are the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][2]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
+Your data source such as metrics, logs, or traces are the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][2]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 
 ## Scope
 
@@ -81,11 +93,41 @@ The following example graphs 5-minute load and its double:
 
 ```json
 {
-  "viz": "timeseries",
-  "requests": [
-    {"q": "system.load.5{intake} * 2"},
-    {"q": "system.load.5{intake}"}
-  ]
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "query1"
+                },
+                {
+                    "formula": "2 * query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.load.5{*}"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ],
+    "yaxis": {
+        "scale": "linear",
+        "min": "auto",
+        "max": "auto",
+        "include_zero": true,
+        "label": ""
+    },
+    "markers": []
 }
 ```
 
@@ -95,106 +137,203 @@ You can also add, subtract, multiply, and divide a series. Note that Datadog doe
 {"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
 ```
 
-## Stacked series
+## Examples
 
-{{< img src="dashboards/graphing_json/slice-n-stack.png" alt="slice and stack"  >}}
+{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="Graphing with JSON"  style="width:75%;" >}} 
 
-In the case of related timeseries, you can draw them as stacked areas by using the following syntax:
+Here is the JSON for the above example showing `average` of network bytes received for a specific devic and host and grouped by account. 
 
 ```text
 "requests": [
-  {
-    "q": "metric1{scope}, metric2{scope}, metric3{scope}"
-  }
-]
+        {
+            "formulas": [
+                {
+                    "formula": "query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.net.bytes_rcvd{device:eth0,host:dsg-demo-1} by {account}"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ]
 ```
 
-Instead of one query per chart, you can aggregate all queries into one and concatenate the queries.
 
-## Slice-n-Stack
+{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="Rate example"  style="width:75%;" >}} 
 
-You can represent a metric shared across hosts and stack the results. For instance, when selecting a tag that applies to more than 1 host, you see that ingress and egress traffic is nicely stacked to give you the sum as well as the split per host. This is useful to spot wild swings in the distribution of network traffic.
+Here is an example using the `rate()` function, which takes only a single metric as a parameter. 
 
-Here's how to do it for any metric:
 
-```text
-"requests" [
-  {
-    "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
-  }
-]
+```json
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "per_hour(query1)"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.load.5{*} by {host}"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ]
 ```
 
-Note that in this case, you can only have 1 query. But you can also split by device or a combination of both:
-
-```text
-"requests" [
-  {
-    "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
-  }
-]
-```
-
-To get traffic for all the tagged hosts, split by host and network device.
-
-#### Examples
-
-Here is an example using the `rate()` function, which takes only a single metric as a parameter. Other functions, with the exception of `top()` and `top_offset()`, have identical syntax.
+Here is the same example using Toplist.
 
 ```json
 {
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
-      "stacked": false
-    }
-  ]
+    "viz": "toplist",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "limit": {
+                        "count": 10,
+                        "order": "desc"
+                    },
+                    "formula": "query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.load.5{role:db} by {host}",
+                    "aggregator": "avg"
+                }
+            ],
+            "response_format": "scalar",
+            "conditional_formats": []
+        }
+    ]
 }
 ```
 
-Here is an example using the `top()` function:
+Here is an example using the `week_before()` Timeshift function:
+
+```json
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "week_before(query1)"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "logs",
+                    "name": "query1",
+                    "search": {
+                        "query": ""
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line"
+        }
+    ]
+```
+
+Here is another example showing how to graph a ratio of `error` to `info` logs and then apply Timeshift function.
+
+{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="Ratio example"  style="width:75%;" >}} 
 
 ```json
 {
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
-      "stacked": false
-    }
-  ]
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "query1 / query2",
+                    "alias": "Ratio of Error to Info"
+                },
+                {
+                    "formula": "week_before(query1 / query2)"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "logs",
+                    "name": "query1",
+                    "search": {
+                        "query": "status:error"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                },
+                {
+                    "data_source": "logs",
+                    "name": "query2",
+                    "search": {
+                        "query": "status:info"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ],
+    "yaxis": {
+        "scale": "linear",
+        "min": "auto",
+        "max": "auto",
+        "include_zero": true,
+        "label": ""
+    },
+    "markers": []
 }
 ```
 
-This shows the graphs for the five series with the highest peak `system.cpu.iowait` values in the query window.
-
-To look at the hosts with the 6th through 10th highest values (for example), use `top_offset` instead:
-
-```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
-      "stacked": false
-    }
-  ]
-}
-```
-
-Here is an example using the `week_before()` function:
-
-```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
-    }
-  ]
-}
-```
 
 ## Further Reading
 
