@@ -8,6 +8,9 @@ further_reading:
     - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Learn more about API tests'
+    - link: '/getting_started/synthetics/private_location'
+      tag: 'Documentation'
+      text: 'Learn about private locations'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -22,60 +25,83 @@ further_reading:
 
 ## Create an API test
 
-[API tests][1] help you **monitor your API endpoints and alert** you when they are failing or become too slow. These tests verify that your applications are responding to requests and meet any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**.
+[API tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**.
 
-In this example, an API test is created to ensure your website is constantly up and providing responses in a specific amount of time.
+The example below demonstrates the creation of an API test to ensure that your website is up and is providing responses in a given period of time.
 
 ### Configure the request
 
 1. In the Datadog application, hover over **[UX Monitoring][2]** in the left hand menu and select **Synthetic Test**.
 2. In the top right corner, click the **New Test** button.
 3. Select **API test**.
-4. Define the configuration of your API test:
+4. Define your API request:
 
-    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, which is a test web application.
-    - Select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags help to keep things organized and allow you to quickly find the tests you're interested in on the homepage.
-    - Choose from the **Managed Locations** to run your test from.
-    - Click the **Test URL** button.
+    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application.
+    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
+    - You can set environment tags such as `env:prod` and `app:shopist` and additional tags on your test. Tags allow you to stay organized and quickly find test you're interested in on the homepage.
+    - Click **Test URL**.
 
 {{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration"  style="width:60%;">}}
 
-#### Define your alert conditions
+#### Define assertions
 
-After clicking Test URL, basic assertions based on your endpoint's response are automatically populated. Assertions define the alert condition and can be customized. In this example, three default assertions are populated when testing the URL:
+Datadog automatically populates basic assertions about your endpoint's response. Assertions define the alert condition and are customizable. 
+
+In this example, three default assertions populate after the URL is tested:
 
 {{< img src="getting_started/synthetics/assertions-example.png" alt="Browser test failure"  style="width:90%;">}}
 
-These assertions define the alert condition and can be customized. To add a custom assertion, directly click on the response preview or click the New Assertion button to add an assertion manually (e.g., body contains Shop.ist)
+To add a custom assertion, click anywhere in the response preview or click **New Assertion**.
 
 {{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure"  style="width:90%;">}}
 
-You can set up an alerting condition in order to only be alerted if your endpoint goes down for three minutes, on two different locations:
+#### Select locations 
 
-```text
-An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
-```
+Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
-You can also decide after how many failures you want a location to be considered as fail. Retries will be run immediately after the location fails. You can configure the test using the option below:
+Your managed locations often include public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select **Private Locations** instead.
+
+For more information, see [Getting Started with Private Locations][6].
+
+#### Specify test frequency
+
+Select the frequency of your test runs.
+
+#### Define alert conditions
+
+You can specify the number of failures per location before the location is considered failed:
 
 ```text
 Retry x time before location is marked as failed
 ```
 
-**Note**: By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][3].
+After a location fails, retries immediately run.
 
-Once alert conditions are set, create a message for the alert and specify what services and team members receive the alert notification email and click **Save Test**. You can also use [integrations][4], such as Slack, PagerDuty, webhooks, etc., to receive alert notifications.
+**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure the interval with the [Synthetics API][3].
+
+To receive alerts when your endpoint goes down for three minutes on two different locations, set up an alerting condition such as:
+
+```text
+An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
+```
+
+#### Notify your team
+
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][4] such as Slack, PagerDuty, and webhooks.
+
+You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
+
+When you're ready to run your test, click **Save Test**. 
 
 ### Test results
 
-The API test details page includes details about the test configuration, uptime associated with the tested endpoint, historical graphs for response time and network timings, as well as the list of individual test results and events.
+The API test details page displays an overview of the test configuration, the global uptime associated with the tested endpoint by location, graphs about response time and network timings, and a list of test results and events.
 
-To troubleshoot a failed test, scroll to the Test Results section and click on one of the failing test results. Review the failed assertions and response details such as returned status code, response time, and associated headers and body to diagnose the issue.
+To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
-Datadog also has an [APM integration with Synthetic Monitoring][5] which allows you to go from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
+With Datadog's [APM integration with Synthetic Monitoring][5], you can access the root cause of a failed test run with a trace generated from the test run.
 
 ## Further Reading
 
@@ -86,3 +112,4 @@ Datadog also has an [APM integration with Synthetic Monitoring][5] which allows 
 [3]: /api/v1/synthetics/#create-or-clone-a-test
 [4]: /integrations/
 [5]: /synthetics/apm/
+[6]: /getting_started/synthetics/private_location
