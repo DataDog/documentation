@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
+- link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
+  tag: "Blog"
+  text: "Best practices for shift-left testing"
 
 ---
 
