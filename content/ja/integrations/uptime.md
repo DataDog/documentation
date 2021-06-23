@@ -7,10 +7,11 @@ assets:
 categories:
   - os & system
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md'
 display_name: Uptime
+draft: false
 git_integration_title: uptime
 guid: 5da2ddb8-ecf7-4971-a3ee-e42752efc1f5
 integration_id: uptime
@@ -43,7 +44,7 @@ supported_os:
 
 ### コンフィギュレーション
 
-Uptime アカウント内で Datadog のインテグレーションを有効にするには、[Alerting > Push Notifications][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
+Uptime アカウント内で Datadog のインテグレーションを有効にするには、[Notifications > Integrations][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
 
 下記は、Uptime アカウントで Datadog を構成する際に表示されるフィールドです。
 shell
@@ -74,6 +75,6 @@ Uptime チェックには、サービスのチェック機能は含まれませ�
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptime/images/snapshot.png
-[2]: https://uptime.com/push-notifications/manage
+[2]: https://uptime.com/integrations/manage/
 [3]: https://github.com/DataDog/integrations-extras/blob/master/uptime/metadata.csv
 [4]: https://docs.datadoghq.com/ja/help/

@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
   logs: {}
@@ -15,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md'
 display_name: Linkerd
+draft: false
 git_integration_title: linkerd
 guid: 9aa60dff-4baf-4112-9177-f9c3814dd513
 integration_id: linkerd
@@ -127,8 +130,8 @@ Suivez simplement les exemples fournis dans la [configuration par défaut][7].
 
 ### Checks de service
 
-`linkerd.prometheus.health` :
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter au endpoint Prometheus. Si ce n'est pas le cas, renvoie UP.
+**linkerd.prometheus.health** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au endpoint Prometheus. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

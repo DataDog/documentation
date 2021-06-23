@@ -37,7 +37,7 @@ supported_os:
   - mac_os
   - windows
 ---
-[!Nomad ダッシュボード][1]
+![Nomad ダッシュボード][1]
 
 ## 概要
 

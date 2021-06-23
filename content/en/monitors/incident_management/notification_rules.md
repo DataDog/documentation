@@ -12,7 +12,7 @@ This feature is in open beta. Email <a href="mailto:support@datadoghq.com">suppo
 
 Notification Rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use Notification Rules to ensure key stakeholders are always made aware of high priority incidents or to notify external systems whenever a new incident is declared or updated.
 
-## Configuring Notification Rules
+## Configuration
 
 To configure a new Notification Rule:
 
@@ -27,7 +27,7 @@ To configure a new Notification Rule:
 
 {{< img src="monitors/incidents/notification_rules_config.jpeg" alt="Notification Rules Config"  style="width:80%;">}}
 
-## Managing Notification Rules
+## Management
 
 In the *Notification Rules* section of your [Incident Settings][1], you can perform the following operations to manage your Notification Rules.
 

@@ -2,13 +2,13 @@
 title: Custom Metrics
 kind: documentation
 aliases:
-  - /metrics/
   - /guides/metrics/
   - /metrictypes/
   - /units/
   - /developers/metrics/datagram_shell
   - /developers/metrics/custom_metrics/
   - /getting_started/custom_metrics
+  - /developers/metrics/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"

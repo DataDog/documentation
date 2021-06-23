@@ -178,7 +178,7 @@ Monolog 構成でフォーマッタを構成します。以下のフォーマッ
 
 このアプリケーションで APM が有効になっている場合、[APM PHP ロギングの指示に従って][2]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
 
-### Agent 構成
+### Agent の構成
 
 `conf.d/` フォルダーに次の内容の `php.d/conf.yaml` ファイルを作成します。
 
@@ -356,7 +356,7 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 {{% /tab %}}
 {{< /tabs >}}
 
-## Monolog とフレームワークのインテグレーション
+## Monolog フレームワークのインテグレーション
 
 Monolog は次のフレームワークに含まれます。
 
@@ -365,7 +365,6 @@ Monolog は次のフレームワークに含まれます。
 * [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
-* [CakePHP][8]
 
 Monolog をフレームワークに統合し、次にロガーを構成します。
 
@@ -534,45 +533,6 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-### CakePHP
-
-まず、この依存関係を `composer.json` ファイルに追加し、
-`composer update` を実行します。
-
-```json
-{"require": {"cakephp/monolog": "*"}}
-```
-
-次に、`app/Config/bootstrap.php` にインクルードするログ構成ファイル (例: `app/Config/log.php`) を作成します。
-
-```php
-<?php
-  include 'log.php';
-```
-
-基本的な構成 (Cake が行うことを Monolog で行う) は次のようになります。
-
-```text
-CakePlugin::load('Monolog');
-```
-
-最後に、ファイルにログを記録します。
-
-```text
-CakeLog::config('debug', array(
-  'engine' => 'Monolog.Monolog',
-  'channel' => 'app',
-  'handlers' => array(
-    'Stream' => array(
-      LOGS . 'application-json.log',
-      'formatters' => array(
-        'Json' => array("")
-      )
-    )
-  )
-));
-```
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -584,4 +544,3 @@ CakeLog::config('debug', array(
 [5]: /ja/logs/log_collection/php/#laravel
 [6]: /ja/logs/log_collection/php/#silex
 [7]: /ja/logs/log_collection/php/#lumen
-[8]: /ja/logs/log_collection/php/#cakephp

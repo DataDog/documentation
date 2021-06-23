@@ -9,6 +9,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
     text: Présentation de la surveillance Synthetic Datadog
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: Centre d'apprentissage
+    text: Présentation des tests Synthetic
   - link: /getting_started/synthetics/api_test
     tag: Documentation
     text: Débuter avec les tests HTTP
@@ -20,11 +23,11 @@ further_reading:
 
 Les tests HTTP vous permettent d'**envoyer des requêtes HTTP aux endpoints d'API de vos applications** pour vérifier qu'elles répondent aux requêtes et respectent les conditions que vous avez définies, comme le temps de réponse global, le code de statut, ainsi que les contenus de l'en-tête ou du corps du message.
 
-Les tests HTTP peuvent être exécutés depuis des [**emplacements gérés**][1] et des [**emplacements privés**][2], selon que vous souhaitez surveiller vos endpoints à l'extérieur ou au sein de votre réseau. Les tests HTTP peuvent être exécutés **selon un programme**, **à la demande** ou directement **dans vos [pipelines de CI/CD][3]**.
+Les tests HTTP peuvent être exécutés depuis des [**emplacements gérés**][1] et des [**emplacements privés**][2], selon que vous souhaitez surveiller vos endpoints à l'extérieur ou à l'intérieur de votre réseau. Les tests HTTP peuvent être exécutés **selon un programme**, **à la demande** ou directement **dans vos [pipelines CI/CD][3]**.
 
 ## Configuration
 
-Après avoir sélectionné le type de test que vous souhaitez créer ([`HTTP`][4], [`SSL`][5], [`TCP`][6] ou [`DNS`][7]), vous pouvez définir votre requête de test.
+Après avoir sélectionné le type de test que vous souhaitez créer ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7]) ou [test `ICMP`][8]) vous pouvez définir votre requête de test.
 
 ### Définir la requête
 
@@ -54,7 +57,12 @@ Après avoir sélectionné le type de test que vous souhaitez créer ([`HTTP`][4
   {{% tab "Certificat" %}}
 
   * **Ignore server certificate error** : sélectionnez cette option pour que votre test HTTP poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
-  * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client et la clé privée associée.
+  * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client (`.crt`) et la clé privée associée (`.key`) au format `PEM`. Vous pouvez utiliser la bibliothèque `openssl` pour convertir vos certificats. Par exemple, vous pouvez convertir un certificat `PKCS12` en certificat et clé privée au format `PEM`.
+
+  ```
+  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+  ```
 
   {{% /tab %}}
 
@@ -65,10 +73,18 @@ Après avoir sélectionné le type de test que vous souhaitez créer ([`HTTP`][4
 
   {{% /tab %}}
 
+  {{% tab "Confidentialité" %}}
+
+  * **Do not save response body** : sélectionnez cette option pour désactiver l'enregistrement du corps de la réponse au moment de l'exécution. Cela peut être utile pour s'assurer qu'aucune donnée sensible ne figure dans les résultats de test. Utilisez cette option avec précaution, car elle peut rendre plus difficile le dépannage des problèmes. Pour en savoir plus sur les recommandations de sécurité, cliquez [ici][1].
+
+
+[1]: /fr/security/synthetics
+  {{% /tab %}}
+
   {{< /tabs >}}
 
 3. **Donnez un nom** à votre test HTTP.
-4. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test HTTP. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][8].
+4. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test HTTP. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][9].
 6. Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test HTTP. Les tests HTTP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez surveiller vos endpoints à l'extérieur ou au sein de votre réseau.
 
 Cliquez sur **Test URL** pour essayer la configuration de requête. Un aperçu de la réponse s'affiche sur le côté droit de votre écran.
@@ -90,14 +106,14 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 
 | Type          | Opérateur                                                                                               | Type de valeur                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _Chaîne_ <br> _[Regex][10]_ <br> _Chaîne_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][10]_                                      |
-| response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _Chaîne_ <br> _[Regex][11]_ <br> _Chaîne_, _[Regex][11]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][11]                                      |
+| temps de réponse | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
 
 **Remarque** : les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
 
-Vous pouvez créer jusqu'à 10 assertions par test API en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse :
+Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New Assertion** ou en sélectionnant directement l'aperçu de la réponse :
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Définir les assertions pour votre test HTTP" style="width:90%;" >}}
 
@@ -114,7 +130,7 @@ Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if a
 
 #### Nouvelle tentative rapide
 
-Votre test peut déclencher de nouvelles tentatives en cas d'échec. Par défaut, les tentatives sont effectuées 300 ms après le premier échec. Cet intervalle peut être configuré via l'[API][11].
+Votre test peut déclencher de nouvelles tentatives en cas d'échec. Par défaut, les tentatives sont effectuées 300 ms après le premier échec. Cet intervalle peut être configuré via l'[API][12].
 
 La disponibilité d'un emplacement est calculée pour chaque évaluation (quels que soient les résultats du dernier test avant l'évaluation). La disponibilité totale est calculée selon les conditions d'alerte configurées. Les notifications envoyées se basent sur la disponibilité totale.
 
@@ -122,9 +138,9 @@ La disponibilité d'un emplacement est calculée pour chaque évaluation (quels 
 
 Votre test envoie une notification selon les [conditions d'alerte](#definir-des-conditions-d-alerte) définies au préalable. Référez-vous à cette section pour définir les conditions et le message à envoyer à vos équipes.
 
-1. [Tout comme pour les monitors][12], sélectionnez **les utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification` au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
+1. [Tout comme pour les monitors][13], sélectionnez **les utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification` au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
 
-2. Saisissez un **message** de notification pour le test. Ce champ accepte [le format de mise en forme Markdown][13] standard ainsi que les [variables conditionnelles][14] suivantes :
+2. Saisissez un **message** de notification pour le test. Ce champ accepte le [format de mise en forme Markdown][14] standard, ainsi que les [variables conditionnelles][15] suivantes :
 
     | Variable conditionnelle       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -146,19 +162,26 @@ Cliquez sur **Save** pour enregistrer votre test. Datadog se charge alors de son
 
 ### Créer des variables locales
 
-Vous pouvez créer des variables locales en définissant leurs valeurs sur l'un des builtins disponibles ci-dessous :
+Vous pouvez créer des variables locales en cliquant sur **Create Local Variable** en haut à droite du formulaire de configuration de votre test. Vous pouvez définir leurs valeurs sur l'un des builtins disponibles ci-dessous :
 
-| Pattern                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | Génère une chaîne numérique de `n` chiffres.                                                                 |
-| `{{ alphabetic(n) }}`      | Génère une chaîne alphabétique de `n` lettres.                                                            |
-| `{{ alphanumeric(n) }}`    | Génère une chaîne alphanumérique de `n` caractères.                                                       |
-| `{{ date(n, format) }}`    | Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test + `n` jours.        |
-| `{{ timestamp(n, unit) }}` | Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/- `n` unités choisies. |
+`{{ numeric(n) }}`
+: Génère une chaîne numérique de `n` chiffres.
+
+`{{ alphabetic(n) }}`
+: Génère une chaîne alphabétique de `n` lettres.
+
+`{{ alphanumeric(n) }}`
+: Génère une chaîne alphanumérique de `n` caractères.
+
+`{{ date(n, format) }}`
+: Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test  + `n` jours.
+
+`{{ timestamp(n, unit) }}` 
+: Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/-  `n` unités choisies.
 
 ### Utiliser des variables
 
-Les [variables globales définies sur la page `Settings`][15] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
+Les [variables globales définies sur la page `Settings`][16] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests SSL.
 Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité :
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests API" video="true" width="90%" >}}
@@ -167,13 +190,24 @@ Pour afficher la liste de vos variables, saisissez `{{` dans le champ souhaité�
 
 Un test est considéré comme `FAILED` s'il ne répond pas à une ou plusieurs de ses assertions ou si la requête a échoué prématurément. Dans certains cas, le test peut en effet échouer sans que les assertions n'aient pu être comparées à l'endpoint. Voici la liste des erreurs concernées :
 
-| Erreur             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONNRESET`       | La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.                                                                                                                                                                                                                                                         |
-| DNS               | L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, configuration des entrées DNS incorrecte, etc.                                                                                                                                                                                                                                                                                                                  |
-| `INVALID_REQUEST` | La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | La connexion SSL n'a pas pu être effectuée. [Consultez la page relative aux erreurs pour en savoir plus][16].                                                                                                                                                                                                                                                                                                                                                      |
-| `TIMEOUT`         | La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreur `TIMEOUT` peuvent se produire. <br> - Une erreur `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de la connexion au socket TCP. <br> - Une erreur `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de son traitement global (qui comprend la connexion au socket TCP, le transfert de données et les assertions). |
+
+
+`CONNRESET`
+: La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.
+
+`DNS`
+: L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, configuration des entrées DNS incorrecte, etc.
+
+`INVALID_REQUEST` 
+: La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
+
+`SSL`
+: La connexion SSL n'a pas pu être établie. [Pour en savoir plus, consultez la page relative aux erreurs][17].
+
+`TIMEOUT`
+: La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreur `TIMEOUT` peuvent se produire :
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de la connexion au socket TCP. 
+  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indique que la requête a expiré lors de son traitement global (qui comprend la connexion au socket TCP, le transfert de données et les assertions).
 
 ## Pour aller plus loin
 
@@ -186,12 +220,13 @@ Un test est considéré comme `FAILED` s'il ne répond pas à une ou plusieurs d
 [5]: /fr/synthetics/api_tests/ssl_tests
 [6]: /fr/synthetics/api_tests/tcp_tests
 [7]: /fr/synthetics/api_tests/dns_tests
-[8]: /fr/synthetics/search/#search
-[9]: https://restfulapi.net/json-jsonpath/
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /fr/api/v1/synthetics/#create-a-test
-[12]: /fr/monitors/notifications/?tab=is_alert#notification
-[13]: https://www.markdownguide.org/basic-syntax/
-[14]: /fr/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /fr/synthetics/settings/#global-variables
-[16]: /fr/synthetics/api_tests/errors/#ssl-errors
+[8]: /fr/synthetics/api_tests/icmp_tests
+[9]: /fr/synthetics/search/#search
+[10]: https://restfulapi.net/json-jsonpath/
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[12]: /fr/api/v1/synthetics/#create-a-test
+[13]: /fr/monitors/notifications/?tab=is_alert#notification
+[14]: https://www.markdownguide.org/basic-syntax/
+[15]: /fr/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[16]: /fr/synthetics/settings/#global-variables
+[17]: /fr/synthetics/api_tests/errors/#ssl-errors

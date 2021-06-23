@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /fr/graphing/correlations/
 further_reading:
-  - link: /dashboards
+  - link: /dashboards/
     tag: Documentation
     text: Dashboards Datadog
-  - link: /notebooks
+  - link: /notebooks/
     tag: Documentation
     text: Notebooks Datadog
-  - link: /tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: Page Service APM
-  - link: /watchdog
+  - link: /watchdog/
     tag: Documentation
     text: Watchdog
 ---

@@ -417,9 +417,11 @@ Depuis la page [Metrics Explorer][23] de Datadog, recherchez des métriques qui 
 
 ### Métriques
 
-Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog (`cloudfoundry.nozzle`). L'Agent Datadog n'envoie pas de métriques spéciales, mais uniquement les métriques habituelles des checks d'Agent que vous avez définis dans la configuration de runtime du Director (et, par défaut, les métriques [système][24], [réseau][25], [disque][26] et [NTP][27]).
+Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog (`cloudfoundry.nozzle`). L'Agent Datadog n'envoie pas de métriques spéciales, mais uniquement les métriques habituelles des checks d'Agent que vous avez définis dans la configuration de runtime du Director, et, par défaut, les métriques [système][24], [réseau][25], [disque][26] et [NTP][27].
 
 Le Firehose Nozzle de Datadog recueille uniquement les CounterEvents (en tant que métriques et non en tant qu'événements), les ValueMetrics et les ContainerMetrics. Il ignore les LogMessages et les Errors.
+
+Les métriques disponibles peuvent varier en fonction de la version de PCF et du déploiement. Datadog recueille les métriques counter et gauge générées par l'[API Loggregator v2][28]. Consultez la [documentation PCF][29] (en anglais) pour obtenir la liste des métriques générées par défaut.
 
 {{< get-metrics-from-git "cloud_foundry">}}
 
@@ -427,16 +429,16 @@ Le Firehose Nozzle de Datadog recueille uniquement les CounterEvents (en tant qu
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: /fr/integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /fr/developers/metrics/dogstatsd_metrics_submission
+[5]: /fr/developers/metrics/dogstatsd_metrics_submission/
 [6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [7]: https://github.com/cloudfoundry/multi-buildpack
 [8]: https://github.com/cloudfoundry/multi-buildpack#usage
 [9]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
 [10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [11]: https://github.com/cf-platform-eng/meta-buildpack
-[12]: /fr/tracing/setup
-[13]: /fr/agent/logs/proxy
-[14]: /fr/libraries
+[12]: /fr/tracing/setup/
+[13]: /fr/agent/logs/proxy/
+[14]: /fr/libraries/
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
 [17]: https://bosh.io/docs/runtime-config.html#addons
@@ -450,3 +452,5 @@ Le Firehose Nozzle de Datadog recueille uniquement les CounterEvents (en tant qu
 [25]: /fr/integrations/network/#metrics
 [26]: /fr/integrations/disk/#metrics
 [27]: /fr/integrations/ntp/#metrics
+[28]: https://github.com/cloudfoundry/loggregator-api
+[29]: https://docs.cloudfoundry.org/running/all_metrics.html

@@ -8,7 +8,9 @@ assets:
   logs:
     source: coredns
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[CoreDNS] Cache hits count low': assets/monitors/coredns_cache_hits_low.json
+    '[CoreDNS] Request duration high': assets/monitors/coredns_request_duration_high.json
   service_checks: assets/service_checks.json
 categories:
   - コンテナ

@@ -63,8 +63,10 @@ Along with attributes added with the [global context API](#global-context), you 
 
 {{< tabs >}}
 {{% tab "NPM" %}}
+
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
+
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
@@ -111,7 +113,6 @@ window.DD_RUM &&
 {{< /tabs >}}
 
 **Note**: The RUM SDK ignores:
-
 - Attributes added outside of `event.context`.
 - Modifications made to a RUM view event context.
 
@@ -173,14 +174,14 @@ You can update the following event properties:
 |-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
 |   `view.url`            |   String  |   The URL of the active web page.                            |
 |   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
-|   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.  |
-|   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.     |
-|   `error.stack `        |   String  |   The stack trace or complementary information about the error.         |
-|   `error.resource.url`  |   String  |   The resource URL that triggered the error.                            |
-|   `resource.url`        |   String  |   The resource URL.                                                     |
-| `context`               | Object    | Attributes added via the [global context API](#global-context) or when generating events manually (for example, `addError` and `addAction`). RUM view events `context` is read-only.                     |
+|   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
+|   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
+|   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
+|   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
+|   `resource.url`        |   String  |   The resource URL.                                                                                 |
+|   `context`        |   Object  |   Attributes added via the [global context API](#global-context) or when generating events manually (for example, `addError` and `addAction`). RUM view events `context` is read-only.                                                                                 |
 
-**Note**: The RUM SDK ignores modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][12].
+**Note**: The RUM SDK ignores modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][1].
 
 ### Discard a RUM event
 
@@ -436,7 +437,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][12] for a better correlation of your data across the product.
 
 ### Replace global context
 
@@ -487,7 +488,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][12] for a better correlation of your data across the product.
 
 ### Read global context
 

@@ -166,6 +166,7 @@ You can configure the profiler using the following environment variables:
 | Environment Variable    | Keyword Argument to `Profiler` | Type                       | Description                                                         |
 | ------------------------|------------------------------- | -------------------------- | --------------------------------------------------------------------|
 | `DD_PROFILING_ENABLED`  |                                | Boolean                    | Set to `true` to enable profiler.                                   |
+| `DD_PROFILING_HEAP_ENABLED` |                            | Boolean                    | Set to `true` to enable memory heap profiling. (ddtrace 0.50+)      |
 | `DD_SERVICE`            | `service`                      | String                     | The Datadog [service][4] name.                                      |
 | `DD_ENV`                | `env`                          | String                     | The Datadog [environment][5] name, for example, `production`.       |
 | `DD_VERSION`            | `version`                      | String                     | The version of your application.                                    |
@@ -282,10 +283,10 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 3. You can auto-enable the profiler with environment variables:
 
     ```shell
-    DD_PROFILING_ENABLED=true
-    DD_ENV=prod
-    DD_SERVICE=my-web-app
-    DD_VERSION=1.0.3
+    export DD_PROFILING_ENABLED=true
+    export DD_ENV=prod
+    export DD_SERVICE=my-web-app
+    export DD_VERSION=1.0.3
     ```
 
     or in code:

@@ -162,7 +162,7 @@ try {
 
 ## Troubleshooting
 
-### Fixing "Script error."
+### Script error
 
 For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows an error with the minimal message "Script error."
 

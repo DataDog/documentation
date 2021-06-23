@@ -9,6 +9,8 @@ assets:
     source: supervisord
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    supervisord_processes: assets/saved_views/supervisord_processes.json
   service_checks: assets/service_checks.json
 categories:
   - os & system

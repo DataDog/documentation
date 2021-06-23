@@ -11,7 +11,8 @@ assets:
     Marklogic high load: assets/recommended_monitors/marklogic_high_load.json
     Marklogic long requests: assets/recommended_monitors/marklogic_long_requests.json
     Marklogic low cache: assets/recommended_monitors/marklogic_low_cache.json
-  saved_views: {}
+  saved_views:
+    marklogic_processes: assets/saved_views/marklogic_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store

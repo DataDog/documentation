@@ -2,12 +2,9 @@
 title: Dashboard de visualisation des performances RUM
 kind: documentation
 further_reading:
-  - link: /real_user_monitoring/installation/advanced_configuration
-    tag: Documentation
-    text: Configuration avancée pour la collecte de données RUM
   - link: /real_user_monitoring/explorer
     tag: Documentation
-    text: Explorez vos vues dans Datadog
+    text: Explorer vos vues dans Datadog
 ---
 Le dashboard de visualisation des performances offre une vue d'ensemble de vos applications RUM. Il est divisé en trois sections :
 

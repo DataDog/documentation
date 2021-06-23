@@ -893,6 +893,15 @@ components:
           type: array
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
+        restricted_roles:
+          description: A list of role identifiers. Only the author and users associated
+            with at least one of these roles can edit this dashboard. Overrides the
+            `is_read_only` property if both are present. **This feature is currently
+            in beta.**
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         template_variable_presets:
           description: Array of template variables saved views.
           items:
@@ -4874,6 +4883,11 @@ components:
             $ref: '#/components/schemas/Point'
           readOnly: true
           type: array
+        query_index:
+          description: The index of the series' query within the request.
+          format: int64
+          readOnly: true
+          type: integer
         scope:
           description: Metric scope, comma separated list of tags.
           example: host:foo,env:test
@@ -4884,6 +4898,13 @@ components:
           format: int64
           readOnly: true
           type: integer
+        tag_set:
+          description: Unique tags identifying this series.
+          items:
+            description: Unique tags identifying this series.
+            type: string
+          readOnly: true
+          type: array
         unit:
           description: 'Detailed information about the metric unit.
 
@@ -4951,6 +4972,7 @@ components:
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
+      nullable: true
       properties:
         family:
           description: Unit family, allows for conversion between units of the same
@@ -7270,7 +7292,14 @@ components:
 
                 If a metric query only has one unit object, the second array element
                 is null.'
-              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              example:
+              - family: bytes
+                id: 2
+                name: byte
+                plural: bytes
+                scale_factor: 1.0
+                short_name: B
+              - null
               items:
                 $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
               nullable: true
@@ -9127,7 +9156,6 @@ components:
               type: string
             targetValue:
               description: The path target value to compare to.
-              type: object
           type: object
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
@@ -10459,7 +10487,11 @@ components:
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
-          $ref: '#/components/schemas/SyntheticsTickInterval'
+          description: The frequency at which to run the Synthetic test (in seconds).
+          format: int64
+          maximum: 604800
+          minimum: 30
+          type: integer
       type: object
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
@@ -10581,32 +10613,6 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
-    SyntheticsTickInterval:
-      description: The frequency at which to run the Synthetic test (in seconds).
-      enum:
-      - 30
-      - 60
-      - 300
-      - 900
-      - 1800
-      - 3600
-      - 21600
-      - 43200
-      - 86400
-      - 604800
-      format: int64
-      type: integer
-      x-enum-varnames:
-      - THIRTY_SECONDS
-      - MINUTE
-      - FIVE_MINUTES
-      - FIFTEEN_MINUTES
-      - THIRTY_MINUTES
-      - HOUR
-      - SIX_HOURS
-      - TWELVE_HOURS
-      - DAY
-      - WEEK
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -16667,33 +16673,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
@@ -16730,33 +16709,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
@@ -16797,33 +16749,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Set an AWS tag filter
       tags:
       - AWS Integration
@@ -21251,10 +21176,10 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"\
-              {{ slo.data[0].id }}\",\n      \"start\": {{ now_ts }},\n      \"end\"\
-              : {{ hour_later_ts }},\n      \"category\": \"Other\",\n      \"timezone\"\
-              : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
-              \   \"type\": \"correction\"\n  }\n}"
+              {{ slo.data[0].id }}\",\n      \"start\": {{ timestamp(\"now\") }},\n\
+              \      \"end\": {{ timestamp(\"now + 1h\") }},\n      \"category\":\
+              \ \"Other\",\n      \"timezone\": \"UTC\",\n      \"description\": \"\
+              Test Correction\"\n     },\n     \"type\": \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
       x-undo:
@@ -21891,8 +21816,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
         type: unsafe
   /api/v1/synthetics/tests/api/{public_id}:
     get:

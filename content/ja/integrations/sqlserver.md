@@ -2,7 +2,9 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    SQLServer-Overview: assets/dashboards/SQLServer-Overview_dashboard.json
+    sqlserver: assets/dashboards/sqlserver_dashboard.json
   logs:
     source: sqlserver
   metrics_metadata: metadata.csv

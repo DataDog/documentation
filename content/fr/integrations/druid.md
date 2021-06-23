@@ -6,6 +6,7 @@ assets:
     Druid Overview: assets/dashboards/overview.json
   logs:
     source: druid
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/druid/README.md'
 display_name: Druid
+draft: false
 git_integration_title: druid
 guid: 8abd92f8-7383-45f2-a412-d6ee960baa15
 integration_id: druid
@@ -56,7 +58,7 @@ Les étapes décrites ci-dessous sont toutes les deux nécessaires pour faire fo
 
 #### Étape 1 : configurez Druid de façon à recueillir ses métriques de santé et ses checks de service
 
-Configurez le check Druid inclus avec le paquet de l'[Agent Datadog][5] pour recueillir ses métriques de santé et ses checks de service.
+Configurez le check Druid inclus avec le package de l'[Agent Datadog][5] pour recueillir ses métriques de santé et ses checks de service.
 
 1. Modifiez le fichier `druid.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos checks de service Druid. Consultez le [fichier d'exemple druid.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 2. [Redémarrez l'Agent][7].
@@ -147,12 +149,10 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 ### Checks de service
 
-**druid.process.can_connect** :
-
+**druid.process.can_connect** :<br>
 Renvoie `CRITICAL` si le check ne parvient pas à se connecter au processus Druid. Si ce n'est pas le cas, renvoie `OK`.
 
-**druid.process.health** :
-
+**druid.process.health** :<br>
 Renvoie `CRITICAL` si le processus Druid n'est pas sain. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
