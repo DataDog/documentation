@@ -194,6 +194,12 @@ For example, if your tag is `dot.key.test:five` and your monitor is grouped by `
 {{[dot.key.test].name}}
 ```
 
+If the tag is on an event and you're using an event monitor, use:
+
+```text
+{{ event.tags.[dot.key.test] }}
+```
+
 #### Log facet variables
 
 Log monitors can use facets as variables if the monitor is grouped by the facets.
