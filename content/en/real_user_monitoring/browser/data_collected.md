@@ -26,7 +26,9 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-The RUM SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes). For example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`). There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" RUM events and the attribute `resource.method` is associated with "resource" RUM events. 
+The RUM SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`). 
+
+There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
 
 This page provides descriptions of each of the metrics and attributes collected. For guidance on what you can do with this data, see:
 - [Modifying Data and Context][1]
@@ -37,7 +39,7 @@ This page provides descriptions of each of the metrics and attributes collected.
 
 ## Default attributes
 
-Each of these event types has the following attributes attached by default. So you can use them regardless of the RUM event type being queried.
+Each of these event types has the following attributes attached by default, so you can use them regardless of the RUM event type being queried.
 
 ### Core
 
