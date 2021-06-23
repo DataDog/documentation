@@ -61,7 +61,7 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Your managed locations often include public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select **Private Locations** instead.
 
-For more information, see the [Private Locations](https://docs.datadoghq.com/getting_started/synthetics/private_location) documentation.
+For more information, see [Getting Started with Private Locations][6].
 
 #### Specify test frequency
 
