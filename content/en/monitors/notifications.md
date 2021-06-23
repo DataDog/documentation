@@ -54,6 +54,9 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 ### Renotify
 
 Enable monitor renotification (optional) to remind your team that a problem is not solved. 
+
+  {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify"  style="width:70%;" >}}
+
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
 The escalation message can be added in the following ways:
 
