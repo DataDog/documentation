@@ -32,7 +32,7 @@ To limit the search, specify the field name:
 | Title   | Search the text in the monitor's title.                | `title:text`   |
 | Message | Search the text in the monitor's notification message. | `message:text` |
 
-Additionally, you can search for a monitor using the ID, for example: `1234567`. The monitor's ID is available on the [monitor status page][2].
+Additionally, you can search for a monitor using the ID, for example: `id:1234567`. The monitor's ID is available on the [monitor status page][2].
 
 #### Query
 
