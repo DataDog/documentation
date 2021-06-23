@@ -2,10 +2,15 @@
 aliases:
   - /ja/integrations/phpfpm
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    php-fpm: assets/dashboards/php-fpm_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    php-fpm_processes: assets/saved_views/php-fpm_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -186,9 +191,8 @@ PHP-FPM チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`php_fpm.can_ping`:
-
-構成された `ping_url` でエージェントが PHP-FPM を ping できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**php_fpm.can_ping**:<br>
+構成された `ping_url` で Agent が PHP-FPM を ping できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

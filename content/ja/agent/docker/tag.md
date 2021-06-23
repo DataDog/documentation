@@ -66,6 +66,17 @@ docker_labels_as_tags:
 {{< /tabs >}}
 
 ## 環境変数をタグとして抽出
+
+Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][2] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+
+| 環境変数               | 説明                                    |
+|------------------------------------|------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                |
+| `DD_DOCKER_ENV_AS_TAGS`            | docker コンテナー環境変数を抽出します |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                             |
+| `DD_CHECKS_TAG_CARDINALITY`        | タグをチェックメトリクスに追加します                      |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | タグをカスタムメトリクスに追加します                     |
+
 Agent v7.20 以降では、コンテナ化された Agent は Docker ラベルからタグを自動検出できます。このプロセスにより、Agent は、Agent の `datadog.yaml` ファイルを変更することなく、コンテナによって発行されたすべてのデータにカスタムタグを関連付けることができます。
 
 タグは次の形式で追加する必要があります。
@@ -116,3 +127,4 @@ docker_env_as_tags:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
+[2]: /ja/agent/docker/?tab=standard#tagging
