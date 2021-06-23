@@ -112,3 +112,4 @@ With Datadog's [APM integration with Synthetic Monitoring][5], you can access th
 [3]: /api/v1/synthetics/#create-or-clone-a-test
 [4]: /integrations/
 [5]: /synthetics/apm/
+[6]: /getting_started/synthetics/private_location
