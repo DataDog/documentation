@@ -16,36 +16,36 @@ further_reading:
 
 ### Versioning
 
-We follow [semver][1]. When a new major version is released it becomes our primary release line, where all new features, bug fixes and security patches land. Here’s an outline of what constitutes each type of semver change:
+Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here’s an outline of what constitutes each type of semver change:
 
 | Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
-| Changes that are incompatible with previous versions.                  | Adding anything that is compatible with previous versions (i.e. does not break them). | Security fixes        |
+| Changes that are incompatible with previous versions.                  | Adding anything that is compatible with previous versions (does not break them). | Security fixes        |
 | API changes incompatible with previous versions.                         | API additions                   | Bug fixes             |
 | Functionality changes incompatible with previous versions. | Functionality additions                                                 | |
-| Dropping support for anything such as Node.js versions, supported libraries or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries or other features.   |  |
+| Dropping support for anything such as Node.js versions, supported libraries, or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries, or other features.   |  |
 
-When a release has changes that could go in multiple semver categories, the highest one is chosen.  [Release notes][2] are posted with each github release.
+When a release has changes that could go in multiple semver categories, the highest one is chosen.  [Release notes][2] are posted with each GitHub release.
 
 ### Maintenance
 
-Maintenance mode is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of dd-trace enter maintenance mode upon the release of the subsequent major version of dd-trace. This lasts for one year after the release date of that subsequent version.
+_Maintenance mode_ is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of `dd-trace` enter maintenance mode upon the release of the subsequent major version of dd-trace. The maintenance mode period lasts for one year after the release date of that subsequent version.
 
-For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, then the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
+For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
 
-If you have any questions or concerns about our support for a particular version of dd-trace-js, please [reach out to support][3] to discuss.
+If you have any questions or concerns about our support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
 
 ### Node.js Version Support
 
-When the Node.js project drops support for an LTS major release line (i.e. when it goes EOL), we will drop support in the next major version of dd-trace we release.
-We will support that EOL version of Node.js for at least another year on a maintenance mode basis in the last major release line of dd-trace that supports it.
+When the Node.js project drops support for an LTS major release line (when it goes EOL), support for it is dropped in the next major version of `dd-trace`.
+The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
 
-Some issues cannot be solved in dd-trace and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it’s not possible to solve the issue.
-We will not make new releases of dd-trace providing specific support for Non-LTS Node.js major release lines (i.e. odd numbered versions)
+Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it’s not possible to solve the issue without moving to another non-EOL release.
+We do not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
 
-For the best level of support, we recommend always running the latest LTS release of Node.js, and the latest major version of dd-trace. Whatever release line of Node.js you use, we also encourage using the latest version of Node.js on that release line, to ensure you have the latest security fixes.
+For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
 
-For more information about Node.js release, refer to the [official Node.js documentation][4].
+For more information about Node.js release, see the [official Node.js documentation][4].
 
 ## Supported integrations
 
