@@ -85,7 +85,7 @@ class Integrations:
             re.DOTALL,
         )
         self.regex_service_check = re.compile(
-            r"(#{3} Service Checks\n)([\s\S]*does not include any service checks at this time.)([\s\S]*)(#{2} Troubleshooting\n)",
+            r"(#{3} Service Checks\n)([\s\S]*for a list of service checks provided by this integration.)([\s\S]*)(#{2} Troubleshooting\n)",
             re.DOTALL,
         )
         self.regex_fm = re.compile(
