@@ -41,6 +41,44 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
     {{< img src="integrations/faq/azure_enable_diagnostics.png" alt="azure enable diagnostics"   style="width:70%">}}
 
+## Automated log collection
+
+### Naming conflicts
+
+Having Azure resources that have the same resource name as one of the default parameters can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. We would suggest renaming the default parameter with a unique name that does not already exist within your environment.
+
+For example, use the -EventhubName flag to change the default name of the eventhub resource, if you already possess an eventhub named 'datadog-eventhub'. 
+
+{{< code-block lang="powershell" filename="Example" >}}
+
+./resource_deploy.ps1 -ApiKey <your_api_key> -SubscriptionId <your_subscription_id> -EventhubName <new-name>
+
+{{< /code-block >}}
+
+**Note:** Navigate to the [Optional Parameters][4] section to find the list of configurable parameters. 
+
+**Note:** If you are re-running the script due to this failure, it is also advised that you remove the entire resource group to create a fresh execution. 
+
+### Unregistered resource provider
+
+If your script execution is failing due to the error **The subscription is not registered to use namespace ‘Microsoft.EventHub’**:
+
+Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
+
+{{< code-block lang="powershell" filename="Example" >}}
+
+az provider register --namespace Microsoft.EventHub
+
+{{< /code-block >}}
+
+### Exceeding log quota
+
+Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer? 
+
+Ensure that you have not exceeded your [daily quota][5] for log retention.
+
+**Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -48,3 +86,5 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 [1]: https://portal.azure.com
 [2]: https://manage.windowsazure.com
 [3]: /help/
+[4]: https://docs-staging.datadoghq.com/mitheysh.asokan/FAQ-Forwarder/integrations/azure/#optional-parameters
+[5]: https://docs.datadoghq.com/logs/indexes/#set-daily-quota
