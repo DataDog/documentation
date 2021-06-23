@@ -389,7 +389,7 @@ window.DD_RUM &&
 
 ### Add global context
 
-Once Real User Monitoring (RUM) is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
+Once RUM is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -441,7 +441,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 
 ### Replace global context
 
-Once Real User Monitoring (RUM) is initialized, replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
+Once RUM is initialized, replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -492,7 +492,7 @@ window.DD_RUM &&
 
 ### Read global context
 
-Once Real User Monitoring (RUM) is initialized, read the global context with the `getRumGlobalContext()` API:
+Once RUM is initialized, read the global context with the `getRumGlobalContext()` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
