@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    gunicorn: assets/dashboards/gunicorn_dashboard.json
   logs:
     source: gunicorn
   metrics_metadata: metadata.csv
@@ -11,6 +12,7 @@ assets:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    gunicorn_processes: assets/saved_views/gunicorn_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:

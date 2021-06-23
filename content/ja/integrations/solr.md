@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    solr: assets/dashboards/solr_dashboard.json
   logs:
     source: solr
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    solr_processes: assets/saved_views/solr_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
