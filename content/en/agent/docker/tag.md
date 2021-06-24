@@ -21,31 +21,31 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 ### Out of the box tagging
 
-The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached automaticaly depends on the agent [cardinality configuration][1].
+The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
 
-| Tag               | Cardinality  | Requirement                                    |
-|-------------------|--------------|------------------------------------------------|
-| container_name    | high         | n/a                                            |
-| container_id      | high         | n/a                                            |
-| rancher_container | high         | rancher environment                            |
-| mesos_task        | orchestrator | mesos environment                              |
-| docker_image      | low          | n/a                                            |
-| image_name        | low          | n/a                                            |
-| short_image       | low          | n/a                                            |
-| image_tag         | low          | n/a                                            |
-| swarm_service     | low          | swarm environment                              |
-| swarm_namespace   | low          | swarm environment                              |
-| rancher_stack     | low          | rancher environment                            |
-| rancher_service   | low          | rancher environment                            |
-| env               | low          | [unified service tagging][2] enabled           |
-| version           | low          | [unified service tagging][2] enabled           |
-| service           | low          | [unified service tagging][2] enabled           |
-| marathon_app      | low          | marathon environment                           |
-| chronos_job       | low          | mesos environment                              |
-| chronos_job_owner | low          | mesos environment                              |
-| nomad_task        | low          | nomad environment                              |
-| nomad_job         | low          | nomad environment                              |
-| nomad_group       | low          | nomad environment                              |
+| Tag                 | Cardinality  | Requirement                          |
+|---------------------|--------------|--------------------------------------|
+| `container_name`    | High         | N/A                                  |
+| `container_id`      | High         | N/A                                  |
+| `rancher_container` | High         | Rancher environment                  |
+| `mesos_task`        | Orchestrator | Mesos environment                    |
+| `docker_image`      | Low          | N/A                                  |
+| `image_name`        | Low          | N/A                                  |
+| `short_image`       | Low          | N/A                                  |
+| `image_tag`         | Low          | N/A                                  |
+| `swarm_service`     | Low          | Swarm environment                    |
+| `swarm_namespace`   | Low          | Swarm environment                    |
+| `rancher_stack`     | Low          | Rancher environment                  |
+| `rancher_service`   | Low          | Rancher environment                  |
+| `env`               | Low          | [Unified service tagging][2] enabled |
+| `version`           | Low          | [Unified service tagging][2] enabled |
+| `service`           | Low          | [Unified service tagging][2] enabled |
+| `marathon_app`      | Low          | Marathon environment                 |
+| `chronos_job`       | Low          | Mesos environment                    |
+| `chronos_job_owner` | Low          | Mesos environment                    |
+| `nomad_task`        | Low          | Nomad environment                    |
+| `nomad_job`         | Low          | Nomad environment                    |
+| `nomad_group`       | Low          | Nomad environment                    |
 
 
 ### Unified service tagging
