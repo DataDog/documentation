@@ -40,7 +40,7 @@ The Browser SDK automatically tracks clicks. A click action is created if **all*
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][3].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -143,6 +143,5 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#scrub-sensitive-data-from-your-rum-data
+[1]: /real_user_monitoring/browser/modifying_data_and_context/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/browser/modifying_data_and_context/

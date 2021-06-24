@@ -63,4 +63,4 @@ The Browser RUM SDK relies on cookies to store session information and follow a 
 [3]: /real_user_monitoring/browser/#npm
 [4]: /real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /real_user_monitoring/faq/content_security_policy/
-[6]: /real_user_monitoring/browser/data_collected/?tab=session
+[6]: /real_user_monitoring/browser/data_collected/#session-metrics

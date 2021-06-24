@@ -181,7 +181,7 @@ You can update the following event properties:
 |   `resource.url`        |   String  |   The resource URL.                                                                                 |
 |   `context`        |   Object  |   Attributes added via the [global context API](#global-context) or when generating events manually (for example, `addError` and `addAction`). RUM view events `context` is read-only.                                                                                 |
 
-**Note**: The RUM SDK ignores modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][1].
+**Note**: The RUM SDK ignores modifications made to event properties not listed above. Find out about all event properties on the [Browser SDK repository][12].
 
 ### Discard a RUM event
 
@@ -437,7 +437,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][12] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][13] for a better correlation of your data across the product.
 
 ### Replace global context
 
@@ -488,7 +488,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Follow the [Datadog naming convention][12] for a better correlation of your data across the product.
+**Note**: Follow the [Datadog naming convention][13] for a better correlation of your data across the product.
 
 ### Read global context
 
@@ -527,7 +527,7 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[1]: /real_user_monitoring/browser/data_collected/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -538,4 +538,5 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [11]: /real_user_monitoring/guide/enrich-and-control-rum-data
-[12]: /logs/processing/attributes_naming_convention/#user-related-attributes
+[12]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[13]: /logs/processing/attributes_naming_convention/#user-related-attributes
