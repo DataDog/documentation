@@ -47,7 +47,7 @@ iLert と統合すると、以下のことができます。
 
 ## セットアップ
 
-### iLert
+### iLert で
 
 #### Datadog アラートソースを作成します
 
@@ -63,7 +63,7 @@ iLert と統合すると、以下のことができます。
 
    ![iLert Alert Source View][3]
 
-### Datadog
+### Datadog で
 
 #### アラートチャネルとして iLert Webhook を追加します
 

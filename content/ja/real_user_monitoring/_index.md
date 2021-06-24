@@ -69,11 +69,14 @@ Datadog のリアルユーザーモニタリング (RUM) は、個々のユー�
 
 [エラー追跡][4]を使用して、外れ値およびエラー、タイムアウト、クラッシュのグループに関する自動アラートを取得し、MTTR を大幅に削減します。
 
+{{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="RUM エラー追跡">}}
+
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:/ja/real_user_monitoring/dashboards
 [2]:/ja/real_user_monitoring/explorer/analytics
-[4]:/ja/real_user_monitoring/error_tracking
-[1]: /ja/real_user_monitoring/connect_rum_and_traces
+[3]:/ja/real_user_monitoring/error_tracking
+[4]: /ja/real_user_monitoring/connect_rum_and_traces

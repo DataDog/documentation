@@ -84,5 +84,5 @@ import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
 [3]: https://run.pstmn.io/button.svg
 [4]: /ja/api/v1/using-the-api/
 [5]: https://brew.sh
-[6]: https://docs.datadoghq.com/ja/developers/community/libraries/
+[6]: https://docs.datadoghq.com/ja/developers/libraries/
 [7]: /ja/getting_started/application/
