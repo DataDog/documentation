@@ -67,8 +67,6 @@ View your [backend traces, logs, infrastructure metrics][1] down to the exact li
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
 
-{{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="RUM error tracking">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
