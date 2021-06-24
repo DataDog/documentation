@@ -395,7 +395,7 @@ Datadog supports `@notifications`, for example:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/events/
+[1]: /events/guides/
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://app.datadoghq.eu/event/stream
 [4]: https://gov.datadoghq.com/event/stream

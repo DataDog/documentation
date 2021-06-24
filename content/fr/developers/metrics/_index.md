@@ -13,7 +13,7 @@ further_reading:
   - link: /developers/dogstatsd/
     tag: Documentation
     text: En savoir plus sur DogStatsD
-  - link: /developers/libraries/
+  - link: /developers/community/libraries/
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
 ---
@@ -80,4 +80,4 @@ Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et s
 [9]: /fr/developers/metrics/types/?tab=rate#metric-types
 [10]: /fr/developers/metrics/types/?tab=count#metric-types
 [11]: /fr/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /fr/developers/libraries/
+[12]: /fr/developers/community/libraries/

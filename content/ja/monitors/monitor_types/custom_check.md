@@ -82,7 +82,7 @@ Datadog で[カスタムチェックモニター][5]を作成するには、メ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/
-[2]: /ja/developers/write_agent_check/
+[2]: /ja/developers/custom_checks/write_agent_check/
 [3]: /ja/developers/dogstatsd/
 [4]: /ja/api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom

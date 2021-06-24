@@ -83,7 +83,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
-[2]: /developers/write_agent_check/
+[2]: /developers/custom_checks/write_agent_check/
 [3]: /developers/dogstatsd/
 [4]: /api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom

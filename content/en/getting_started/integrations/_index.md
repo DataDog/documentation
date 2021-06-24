@@ -184,7 +184,7 @@ tagging
 [7]: /api/
 [8]: /integrations/node/
 [9]: /integrations/python/
-[10]: /developers/write_agent_check/
+[10]: /developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
@@ -198,7 +198,7 @@ tagging
 [21]: /agent/guide/agent-commands/#restart-the-agent
 [22]: /developers/integrations/new_check_howto/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /developers/write_agent_check/#collection-interval
+[24]: /developers/custom_checks/write_agent_check/#collection-interval
 [25]: /getting_started/tagging/
 [26]: /getting_started/agent/#setup
 [27]: /agent/guide/agent-commands/#agent-status-and-information

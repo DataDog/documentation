@@ -211,7 +211,7 @@ To send metrics, events, or service checks on containerized environments, refer 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[1]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /developers/dogstatsd/
 [4]: /agent/kubernetes/apm/
