@@ -1,90 +1,80 @@
 ---
-title: Azure Troubleshooting
+title: Azure Status and Count Metrics
 kind: faq
-further_reading:
-- link: "/integrations/azure/"
-  tag: "Documentation"
-  text: "Azure integration"
+aliases:
+  - /integrations/faq/azure-vm-status-is-not-reporting
 ---
 
-## Find your tenant name
+## Overview
 
-1. Navigate to [portal.azure.com][1].
-2. In the left sidebar, select **Azure Active Directory**.
-3. Under **Properties**, your tenant name is the **Directory ID** value.
+Datadog generates two additional metrics for each resource monitored with the [Azure integration][1]: `azure.*.status` and `azure.*.count`. For example, Azure Virtual Machines monitored by Datadog reports `azure.vm.status` and `azure.vm.count`. These two metrics cover similar information.
 
-Your tenant name is also available from the URL when using the [classic portal][2]. It is the text in between (**not including**) the `@` and `#` symbol:
+The `azure.*.count` metric is an improvement over `azure.*.status`, which will be deprecated.
 
-{{< img src="integrations/faq/azure_tenant_url.png" alt="azure tenant url"   style="width:70%">}}
+## Count metric
 
-## Unable to login
+The `azure.*.count` metric provides two fundamental pieces of information:
 
-If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][3]. When possible, attach a screenshot.
+- The number of resources of that type.
+- The status of each resource as reported by Azure.
 
-## Missing metrics
+The `azure.*.count` metric is created in the same namespace as the other metrics for that resource type, for example: `azure.network_loadbalancers.count`. It includes all of the same metadata tags as the other metrics in that namespace, plus as additional tag for `status`.
 
-Ensure you completed the installation process, which includes giving read permissions to the Azure application for the subscriptions you want to monitor.
+### Use cases
 
-For ARM deployed virtual machines, you must also turn on Diagnostics and select the VM metrics you would like to collect. See **Enable Diagnostics** below for instructions.
+Use the `azure.*.count` metric to:
 
-For other missing metrics, contact [Datadog support][3].
+- Create a view of the number of Virtual Machines broken out by their status over time by graphing `azure.vm.count` over everything and summing by `status`.
+- Create query widgets in dashboards to display the number of a given resource type. Use any available tags to scope the count to a relevant aggregation such as region, resource group, kind, or status.
+- Create monitors to alert you about the status of different Azure resources.
 
-### Enable diagnostics
+**Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This will not affect monitors or widgets scoped to a specific status.
+You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using ‘.fill(null)’. 
 
-Turning on Diagnostics allows ARM deployed VMs to collect logging information which includes metrics for CPU, Network, etc. Follow these instructions:
+For most resource types, the possible statuses are:
 
-1. Navigate to the [Azure portal][1] and locate your VM.
-2. Click on **Diagnostics settings** under the **Monitoring** section.
-3. Pick a storage account and click **Enable guest-level monitoring**.
-4. By default, basic metrics and logs are enabled. Adjust based on your preferences.
-5. Click **Save** to save any changes.
+- Running
+- Unavailable
+- Unknown
+- Degraded
+- Failed
 
-    {{< img src="integrations/faq/azure_enable_diagnostics.png" alt="azure enable diagnostics"   style="width:70%">}}
+Virtual machines have more detailed statuses, including:
 
-## Automated log collection
+- Running
+- Stopped_deallocated
+- Stopped
+- Unknown
+- Unavailable
+- Degraded
+- Failed
 
-### Naming conflicts
+If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
 
-Having Azure resources that have the same resource name as one of the default parameters can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. We would suggest renaming the default parameter with a unique name that does not already exist within your environment.
+## Status metric
 
-For example, use the -EventhubName flag to change the default name of the eventhub resource, if you already possess an eventhub named 'datadog-eventhub'. 
+The `azure.*.status` metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
 
-{{< code-block lang="powershell" filename="Example" >}}
+### Differences
 
-./resource_deploy.ps1 -ApiKey <your_api_key> -SubscriptionId <your_subscription_id> -EventhubName <new-name>
+The key differences between the `.status` and `.count` metric:
 
-{{< /code-block >}}
+- `azure.*.count` includes all resources that exist in the Azure account while `azure.*.status` only reports the number of available resources.
+- `azure.*.count` includes a `status` tag, which reports the specific availability state for the resource while `azure.*.status` only includes the standard tags for the resource type.
+- `azure.*.count` includes improvements in the accuracy and reliability of the metric value.
 
-**Note:** Navigate to the [Optional Parameters][4] section to find the list of configurable parameters. 
+## Troubleshooting
 
-**Note:** If you are re-running the script due to this failure, it is also advised that you remove the entire resource group to create a fresh execution. 
+If your Azure integration is reporting metrics but not `azure.*.status`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
 
-### Unregistered resource provider
+Using the Azure Command Line Interface:
+```bash
+azure login # Login to the Azure user associated with your Datadog account
+azure config mode arm
+azure provider register Microsoft.ResourceHealth
+```
 
-If your script execution is failing due to the error **The subscription is not registered to use namespace ‘Microsoft.EventHub’**:
+The `azure.*.status` metric should show in Datadog within 5 - 10 minutes.
 
-Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
-
-{{< code-block lang="powershell" filename="Example" >}}
-
-az provider register --namespace Microsoft.EventHub
-
-{{< /code-block >}}
-
-### Exceeding log quota
-
-Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer? 
-
-Ensure that you have not exceeded your [daily quota][5] for log retention.
-
-**Note:** It is advised that you take at least five minutes after the execution of the script to start looking for logs in the Logs Explorer.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://portal.azure.com
-[2]: https://manage.windowsazure.com
-[3]: /help/
-[4]: https://docs-staging.datadoghq.com/mitheysh.asokan/FAQ-Forwarder/integrations/azure/#optional-parameters
-[5]: https://docs.datadoghq.com/logs/indexes/#set-daily-quota
+[1]: /integrations/azure/
+[2]: /dashboards/faq/interpolation-the-fill-modifier-explained/
