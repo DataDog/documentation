@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Writing a Custom Agent Check"
 aliases:
-    - /events/guides/agent/
+    - /events/agent/
 ---
 
 ## Submission

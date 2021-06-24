@@ -4,7 +4,6 @@ kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
     - /agent/faq/agent-5-custom-agent-check/
-    - /developers/custom_checks/write_agent_check/
 further_reading:
 - link: "/developers/"
   tag: "Documentation"
@@ -116,7 +115,7 @@ class LSCheck(AgentCheck):
 
 A common use case for writing a custom Agent check is that you might want to send Datadog metrics from your load balancer. First, follow the steps in [Configuration](#configuration). Then, follow these steps to expand the files to send data from your load balancer:
 
-1. Replace the code in checkvalue.py with the following (replacing the value of `lburl` with the address of your load balancer:
+1. Replace the code in checkvalue.py with the following (replacing the value of `lburl` with the address of your load balancer):
   ```python
     import urllib2
     import simplejson
@@ -132,7 +131,7 @@ A common use case for writing a custom Agent check is that you might want to sen
 
         self.gauge('coreapp.update.value', data["value"])
   ```
-2. Update the `checkvalue.yaml` file (replacing the ipaddress with your loadbalancer’s ip address):
+2. Update the `checkvalue.yaml` file (replacing `ipaddress` with your load balancer's IP address):
   ```yaml
     init_config:
 

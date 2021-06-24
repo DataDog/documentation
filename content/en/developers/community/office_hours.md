@@ -2,7 +2,7 @@
 title: Community Office Hours
 type: documentation
 aliases:
-   - /developers/community/office_hours/
+   - /developers/office_hours/
 ---
 
 Datadog runs twice monthly code reviews and office hours to assist community members who are contributing to Datadog [open source projects](#list-of-open-source-projects).

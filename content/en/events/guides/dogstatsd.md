@@ -13,7 +13,7 @@ further_reading:
   tag: "GitHub"
   text: "DogStatsD source code"
 aliases:
-    - /events/guides/dogstatsd/
+    - /developers/events/dogstatsd/
 ---
 
 ## Submission

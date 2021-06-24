@@ -14,9 +14,9 @@ Services checks allow you to characterize the status of a service to monitor it 
 
 Service checks at the cluster level offer another effective way to monitor distributed or redundant systems that can withstand some failures. Use these alerts for architectures where individual hosts run multiple services, because they can surface the degradation of the service even if the hosts running that service remain available (and would pass a host-level health check).
 
-You can set up monitoring and an alert for when a critical, non-redundant service is lost, or if a cluster is on the verge of failure due to widespread node loss. Other critiacl alerts could be a drop in request throughput or an increase in request latency.
+You can set up monitoring and an alert for when a critical, non-redundant service is lost, or if a cluster is on the verge of failure due to widespread node loss. Other critical alerts could be a drop in request throughput or an increase in request latency.
 
-You might need to set up a service check if an integration does not have one natively or for an internal service that you want to see up or down status.
+You might need to set up a service check if an integration does not have one natively or for an internal service that you want to monitor for up or down status.
 
 To use service checks, first set up the check:
 
