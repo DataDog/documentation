@@ -50,13 +50,9 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-   **`Linux`**:
+
    ```shell
       datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
-   ```
-   **`Windows`**:
-   ```shell
-      agent.exe integration install -t datadog-ping==<INTEGRATION_VERSION>
    ```
    <INTEGRATION_VERSION> はインテグレーションのバージョンです。datadog-ping の最初のバージョンは 1.0.0 で、その他のバージョンは [CHANGELOG][6] でご確認いただけます。
 3. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。

@@ -4,7 +4,7 @@ This document is a guide to writing and editing documentation for the [Datadog D
 
 ## Language
 
-- Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.  
+- Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], etc. in the English language. This is the default language for all `*.md` files.  
 - Use the standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
 
 ## General principles
@@ -59,12 +59,6 @@ Avoid using Latin abbreviations "i.e." or "e.g.". Use "that is" or "for example"
 Avoid using passive voice in favor of active voice. If you think your sentence is in the passive voice, add the phrase "by zombies". If it still makes grammatical sense, it's in the passive voice. For example, "metrics are sent to the Datadog Agent `by zombies`"
 - **Recommended**: "With infrastructure monitoring, the Datadog Agent receives metrics and forwards them to Datadog. Similarly, the Datadog Agent can also receive tracing metrics."
 - **Not recommended**: "With Datadog infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog Agent."
-
-### Inclusive language
-
-Use inclusive language unless you are referencing third-party technologies such as Redis' master/slave nodes. The Datadog docs follow the inclusive language best practices described in the [Terminology, Power and Inclusive Language](https://tools.ietf.org/id/draft-knodel-terminology-02.html) document from the Center for Democracy & Technology.
-- **Recommended**: "Primary/secondary, disallowlist/allowlist"
-- **Not recommended**: "Master/slave, blacklist/whitelist"
 
 ### Pronouns
 

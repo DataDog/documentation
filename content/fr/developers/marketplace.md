@@ -254,7 +254,7 @@ Si vous avez des questions, veuillez nous contacter à l'adresse techpartners@da
 [10]: https://github.com/DataDog/integrations-extras
 [11]: https://chat.datadoghq.com/
 [12]: /fr/developers/integrations/
-[13]: /fr/developers/custom_checks/prometheus/
+[13]: /fr/developers/prometheus/
 [14]: /fr/developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
 [15]: /fr/developers/dogstatsd/?tab=hostagent
 [16]: /fr/api/

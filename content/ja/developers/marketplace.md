@@ -254,7 +254,7 @@ Marketplace リポジトリの Azure DevOps にアクセスする必要がある
 [10]: https://github.com/DataDog/integrations-extras
 [11]: https://chat.datadoghq.com/
 [12]: /ja/developers/integrations/
-[13]: /ja/developers/custom_checks/prometheus/
+[13]: /ja/developers/prometheus/
 [14]: /ja/developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
 [15]: /ja/developers/dogstatsd/?tab=hostagent
 [16]: /ja/api/

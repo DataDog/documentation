@@ -233,6 +233,10 @@ The available [environment variables][2] depend on the version of the C++ tracer
 | v1.10 | v0.4.2 |
 | v1.9 | v0.3.6 |
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> jorie/metrics/nav-reorg
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
