@@ -85,14 +85,13 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 By default, DogStatsD listens on UDP port **8125**, so you need to bind this port to your host port when running the Agent in a container. If your StatsD metrics come from outside of `localhost`you must set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` to allow metric collection. In order to run the Agent with the DogStatsd server up, execute the following command:
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              datadog/dogstatsd:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1]:
