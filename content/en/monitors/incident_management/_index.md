@@ -8,6 +8,8 @@ description: Create and manage incidents
 <div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
 {{< /site-region >}}
 
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}
+
 Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
 Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
@@ -71,6 +73,8 @@ Once you declare an incident from Slack, it generates an incident channel.
 
 For more information about the Datadog Slack integration, check out [the docs][3].
 
+For non-EU customers who use Slack, [sign up for beta access][5] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
+
 ### Describing the incident
 
 No matter where you create an incident, it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
@@ -117,50 +121,6 @@ The default includes the statuses **Active**, **Stable**, and **Resolved**. **Co
 * Resolved: Incident no longer affecting others and investigations complete.
 * Completed: All remediation complete.
 
-#### Assessment fields
-
-Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][5]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
-
-* **Root Cause**: This text field allows you to enter the description of the root cause, triggers, and contributing factors of the incident.
-* **Detection Method**: Specify how the incident was detected with these default options: customer, employee, monitor, other, or unknown.
-* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][6].
-    * If you are not using Datadog APM, you can upload service names as a CSV. Any values uploaded via CSV are only be available within Incident Management for incident assessment purposes.
-    * Datadog deduplicates service names case-insensitively, so if you use "My Service" or "my service", only the manually added one is shown.
-    * Datadog overrides APM service names in favor of the manually uploaded list.
-    * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
-    * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM
-* **Teams**: Populated from a CSV upload. Any values uploaded via CSV are only available within Incident Management for incident assessment purposes.
-
-## Example workflow
-
-### Discover an issue
-
-Consider a scenario in which you are looking at a dashboard, and you notice that one particular service is showing an especially high error count. Using the Export button in the upper right of a widget, you can declare an incident.
-
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}
-
-### Declare an incident and assemble your team
-
-Use the New Incident modal to assemble your team and notify them. The graph from which you created the incident is automatically attached as a signal. Attach any other signals that would give your team the necessary context to begin resolving this issue. The Slack and PagerDuty integrations enable you to send notifications through those services.
-
-{{< img src="monitors/incidents/workflow-2-modal-1.png" alt="New Incident"  style="width:60%;">}}
-
-### Communicate and begin troubleshooting
-
-If you have the [Datadog Slack app][3] installed, the Slack integration can automatically create a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
-
-For non-EU customers who use Slack, [sign up for beta access][7] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
-
-{{< img src="monitors/incidents/workflow-3-slack-1-1.png" alt="Communicate"  style="width:80%;">}}
-
-### Update the incident and generate a postmortem
-
-Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be used to track if all remediation steps are complete. This status can be enabled in [Incident Settings][2].
-
-{{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
-
-You can update the status and severity in the `Properties` section of each incident.
-
 As the status of an incident changes, Datadog tracks time-to-resolution as follows:
 
 | Status Transition | Resolved Timestamp |
@@ -169,23 +129,41 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 | `Active` to `Resolved` to `Completed`, `Active` to `Completed` to `Resolved` | Unchanged |
 | `Active` to `Completed` to `Active` to `Resolved` | Overridden on last transition |
 
-Once an incident is moved to resolved, you will be able to generate a postmortem automatically.
+#### Assessment fields
 
-{{< img src="monitors/incidents/postmortem.png" alt="Automatically generate a postmortem" style="width:80%;">}}
+Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][6]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
 
-### Follow up and learn from the incident
+* **Root Cause**: This text field allows you to enter the description of the root cause, triggers, and contributing factors of the incident.
+* **Detection Method**: Specify how the incident was detected with these default options: customer, employee, monitor, other, or unknown.
+* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][7].
+    * If you are not using Datadog APM, you can upload service names as a CSV. Any values uploaded via CSV are only be available within Incident Management for incident assessment purposes.
+    * Datadog deduplicates service names case-insensitively, so if you use "My Service" or "my service", only the manually added one is shown.
+    * Datadog overrides APM service names in favor of the manually uploaded list.
+    * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
+    * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM
+* **Teams**: Populated from a CSV upload. Any values uploaded via CSV are only available within Incident Management for incident assessment purposes.
 
-Create mitigation or post-incident remediation tasks. You can track any of your tasks here by adding tasks in the text field, setting a due date, and assigning a team member. You can complete them by checking off the box when they are done.
+## Integrations
 
-Link to a postmortem document, look back on exactly what went wrong, and add follow-up tasks. Postmortems created in Datadog [Notebooks][8] support live collaboration; to link to an existing notebook, click the plus under `Other Docs`. Click the linked notebook to edit with teammates in real-time.
+In addition to integrating with [Slack][3], Incident Management also integrates with:
 
-{{< img src="monitors/incidents/workflow-5-postmortem-1.png" alt="Postmortem"  style="width:60%;">}}
+- [PagerDuty][8] to send incident notifications to PagerDuty.
+- [Jira][9] to create a Jira ticket for an incident.
+- [Webhooks][10] to send incident notifications using webhooks (for example, [sending SMS to Twilio][11]).
+
+## Ready to try it out?
+
+Work through an example workflow in our [Getting Started with Incident Management][12].
 
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
 [3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [4]: https://docs.datadoghq.com/integrations/slack/?tab=slackapplicationus
-[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[6]: /tracing/#2-instrument-your-application
-[7]: https://app.datadoghq.com/incidents/ddslackapp
-[8]: https://app.datadoghq.com/notebook/list
+[5]: https://app.datadoghq.com/incidents/ddslackapp
+[6]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[7]: /tracing/#2-instrument-your-application
+[8]: https://docs.datadoghq.com/integrations/pagerduty/#overview
+[9]: https://docs.datadoghq.com/integrations/jira/#overview
+[10]: https://docs.datadoghq.com/integrations/webhooks/#overview
+[11]: https://docs.datadoghq.com/integrations/webhooks/#sending-sms-through-twilio
+[12]: /getting_started/incident_management
