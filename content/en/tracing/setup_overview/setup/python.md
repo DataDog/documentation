@@ -155,7 +155,7 @@ Enable web framework and library instrumentation. When `false`, the application 
 : **Default**: `localhost`<br>
 Override the address of the trace Agent host that the default tracer attempts to submit traces to.
 
-`DATADOG_TRACE_AGENT_PORT`
+`DD_TRACE_AGENT_PORT`
 : **Default**: `8126`<br>
 Override the port that the default tracer submit traces to.
 
