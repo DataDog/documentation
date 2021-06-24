@@ -55,6 +55,7 @@ logs_config:
 * `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
+デフォルトで、Datadog Agent はポート `443` を使用して HTTPS 経由でログを Datadog に送信します。
 
 [1]: /ja/agent/guide/agent-configuration-files/
 {{% /tab %}}

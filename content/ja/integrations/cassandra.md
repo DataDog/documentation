@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     cassandra-overview: assets/dashboards/cassandra_overview.json
+    cassandra-overview-screenboard: assets/dashboards/cassandra_overview_screenboard.json
     cassandra-read: assets/dashboards/cassandra_read.json
     cassandra-sstables: assets/dashboards/cassandra_sstable.json
     cassandra-write: assets/dashboards/cassandra_write.json
@@ -11,6 +12,8 @@ assets:
     source: cassandra
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    cassandra_processes: assets/saved_views/cassandra_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -203,6 +206,10 @@ Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含ま�
 
 2. [Agent を再起動します][13]。
 
+#### ログの収集
+
+Cassandra Nodetool ログは Cassandra インテグレーションにより収集されます。[Cassandra のログ収集の手順][14]をご確認ください。
+
 ### 検証
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `cassandra_nodetool` を探します。
@@ -246,3 +253,4 @@ Agent は、監視対象のクラスターのノードごとにこのサービ�
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [12]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example
 [13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[14]: https://github.com/DataDog/integrations-core/tree/master/cassandra#log-collection

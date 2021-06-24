@@ -38,17 +38,19 @@ supported_os:
 
 このチェックは、Kubernetes Control Plane の一部である [Kubernetes Controller Manager][1] を監視します。
 
+**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
+
 ## セットアップ
 
 ### インストール
 
-Kube_controller_manager チェックは [Datadog Agent][2] パッケージに含まれているため、
+Kubernetes Controller Manager チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
 このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。通常、これは 
-Container-as-a-Service クラスターでは公開されません。
+サービスとしてのコンテナ クラスターでは公開されません。
 
 1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][2] を参照してください。
 
@@ -71,7 +73,7 @@ Agent がメトリクスのエンドポイントに到達できない場合は `
 
 ### イベント
 
-Kube_controller_manager には、イベントは含まれません。
+Kubernetes Controller Manager チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 

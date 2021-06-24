@@ -26,7 +26,7 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: cloud_foundry_api.
-metric_to_check: ''
+metric_to_check: cloud_foundry_api.events.count
 name: cloud_foundry_api
 public_title: Datadog-Cloud Foundry API インテグレーション
 short_description: Cloud Foundry 監査イベントの収集。
