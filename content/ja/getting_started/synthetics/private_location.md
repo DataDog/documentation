@@ -5,8 +5,11 @@ further_reading:
   - link: /getting_started/synthetics/api_test
     tag: ドキュメント
     text: 初めての API テストを作成する
-  - link: /synthetics/private_locations
+  - link: /getting_started/synthetics/browser_test
     tag: ドキュメント
+    text: 初めてのブラウザテストを作成する
+  - link: /synthetics/private_locations
+    tag: Documentation
     text: プライベートロケーションの詳細
 ---
 <div class="alert alert-warning">
@@ -73,11 +76,9 @@ further_reading:
 
 3. テストを作成しましょう！
 
-{{< whatsnext desc="プライベートロケーションを設定した後:">}}
-{{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}初めての API テストを作成する{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics/browser_test" tag="Documentation" >}}初めてのブラウザテストを作成する{{< /nextlink >}}
-{{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}プライベートロケーションの詳細{{< /nextlink >}}
-{{< /whatsnext >}}
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/synthetics/api_test/
 [2]: https://app.vagrantup.com/ubuntu/boxes/xenial64

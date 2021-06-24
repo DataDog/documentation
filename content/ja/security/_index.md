@@ -11,6 +11,9 @@ further_reading:
   - link: /security/agent/
     tag: Documentation
     text: Agent のセキュリティ
+  - link: /security/synthetics/
+    tag: Documentation
+    text: Synthetics モニタリングセキュリティ
   - link: /security/other/
     tag: Documentation
     text: セキュリティに関するその他の考慮事項
