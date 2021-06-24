@@ -42,9 +42,9 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 | kube_app_component          | low          | pod label `app.kubernetes.io/component`                                 | pod label must exist                                |
 | kube_app_part_of            | low          | pod label `app.kubernetes.io/part-of`                                   | pod label must exist                                |
 | kube_app_managed_by         | low          | pod label `app.kubernetes.io/managed-by`                                | pod label must exist                                |
-| env                         | low          | pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | pod label or container envvar must exist            |
-| version                     | low          | pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | pod label or container envvar must exist            |
-| service                     | low          | pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | `pod label or container envvar must exist           |
+| env                         | low          | pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | [unified service tagging][2] enabled                |
+| version                     | low          | pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | [unified service tagging][2] enabled                |
+| service                     | low          | pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | [unified service tagging][2] enabled                |
 | pod_phase                   | low          | pod status                                                              | n/a                                                 |
 | oshift_deployment_config    | low          | pod annotation `openshift.io/deployment-config.name`                    | openshift environment and pod annotation must exist |
 | kube_ownerref_kind          | low          | pod ownerref                                                            | pod must have an owner                              |
@@ -61,9 +61,9 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 
 The agent can also attach kubernetes environement information as "host tags".
 
-| Tag               | Cardinality | Source                                      | Requirement                          |
-|-------------------|-------------|---------------------------------------------|--------------------------------------|
-| kube_cluster_name | low         | `DD_CLUSTER_NAME` envvar                    | `DD_CLUSTER_NAME` envvar must be set |
+| Tag               | Cardinality | Source                                                         | Requirement                                                    |
+|-------------------|-------------|----------------------------------------------------------------|----------------------------------------------------------------|
+| kube_cluster_name | low         | `DD_CLUSTER_NAME` envvar or cloud provider integration         | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
 | kube_node_role    | low         | node label `node-role.kubernetes.io/<role>` | Node label must exist                |
 
 

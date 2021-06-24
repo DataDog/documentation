@@ -37,9 +37,9 @@ The Agent can autodiscover and attach tags to all data emitted by containers. Th
 | swarm_namespace   | low          | swarm environment                              |
 | rancher_stack     | low          | rancher environment                            |
 | rancher_service   | low          | rancher environment                            |
-| env               | low          | container label or container envvar must exist |
-| version           | low          | container label or container envvar must exist |
-| service           | low          | container label or container envvar must exist |
+| env               | low          | [unified service tagging][2] enabled           |
+| version           | low          | [unified service tagging][2] enabled           |
+| service           | low          | [unified service tagging][2] enabled           |
 | marathon_app      | low          | marathon environment                           |
 | chronos_job       | low          | mesos environment                              |
 | chronos_job_owner | low          | mesos environment                              |
