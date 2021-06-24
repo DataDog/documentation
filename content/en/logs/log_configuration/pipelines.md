@@ -2,6 +2,8 @@
 title: Pipelines
 kind: documentation
 description: "Parse your logs using the Grok Processor"
+aliases:
+  - /logs/processing/pipelines/
 further_reading:
 - link: "/logs/processing/processors/"
   tag: "Documentation"

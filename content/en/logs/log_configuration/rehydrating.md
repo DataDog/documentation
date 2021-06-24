@@ -4,6 +4,7 @@ kind: Documentation
 description: "Capture log events from your archives back into Datadog."
 aliases:
   - /logs/historical-views
+  - /logs/archives/rehydrating/
 ---
 
 ## Overview
@@ -16,13 +17,13 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 {{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views"  style="width:75%;">}}
 
-Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives. 
+Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives.
 
 ### Add new historical views
 
 1. **Choose the time period** for which you wish to rehydrate log events.
 
-2. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query. 
+2. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 
 3. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
@@ -121,7 +122,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 {{% tab "Azure Storage" %}}
 
-Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1]. 
+Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role"  style="width:75%;">}}
 

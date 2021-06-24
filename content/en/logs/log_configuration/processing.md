@@ -4,6 +4,7 @@ kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 aliases:
   - /logs/faq/integration-pipeline-reference
+  - /logs/processing/
 further_reading:
 - link: "/logs/processing/pipelines/"
   tag: "Documentation"

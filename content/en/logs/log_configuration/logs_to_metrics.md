@@ -3,6 +3,7 @@ title: Generate Metrics from Ingested Logs
 kind: documentation
 aliases:
     - /logs/processing/logs_to_metrics/
+    - /logs/logs_to_metrics/
 description: 'Generate Metrics from Ingested Logs.'
 further_reading:
     - link: 'logs/processing/processors'
