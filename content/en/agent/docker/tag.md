@@ -19,9 +19,38 @@ The Datadog Agent can create and assign tags to all metrics, traces, and logs em
 
 If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
+### Out of the box tagging
+
+The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached automaticaly depends on the agent [cardinality configuration][1].
+
+| Tag               | Cardinality  | Requirement                                    |
+|-------------------|--------------|------------------------------------------------|
+| container_name    | high         | n/a                                            |
+| container_id      | high         | n/a                                            |
+| rancher_container | high         | rancher environment                            |
+| mesos_task        | orchestrator | mesos environment                              |
+| docker_image      | low          | n/a                                            |
+| image_name        | low          | n/a                                            |
+| short_image       | low          | n/a                                            |
+| image_tag         | low          | n/a                                            |
+| swarm_service     | low          | swarm environment                              |
+| swarm_namespace   | low          | swarm environment                              |
+| rancher_stack     | low          | rancher environment                            |
+| rancher_service   | low          | rancher environment                            |
+| env               | low          | container label or container envvar must exist |
+| version           | low          | container label or container envvar must exist |
+| service           | low          | container label or container envvar must exist |
+| marathon_app      | low          | marathon environment                           |
+| chronos_job       | low          | mesos environment                              |
+| chronos_job_owner | low          | mesos environment                              |
+| nomad_task        | low          | nomad environment                              |
+| nomad_job         | low          | nomad environment                              |
+| nomad_group       | low          | nomad environment                              |
+
+
 ### Unified service tagging
 
-As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
 
 ## Extract labels as tags
 
@@ -68,7 +97,7 @@ docker_labels_as_tags:
 
 ## Extract environment variables as tags
 
-Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][2]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][3]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -120,6 +149,8 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -127,5 +158,6 @@ docker_env_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
-[2]: /agent/docker/?tab=standard#tagging
+[1]: /agent/docker/tag/#extract-environment-variables-as-tags
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /agent/docker/?tab=standard#tagging

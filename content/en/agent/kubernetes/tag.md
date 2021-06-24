@@ -19,11 +19,59 @@ The Agent can create and assign tags to all metrics, traces, and logs emitted by
 
 If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
+## Out of the box tags
+
+The Agent can autodiscover and attach tags to all data emitted by the entire pods or an individual container within this pod. The list of tags attached automaticaly depends on the agent [cardinality configuration][1].
+
+| Tag                         | Cardinality  | Source                                                                  | Requirement                                         |
+|-----------------------------|--------------|-------------------------------------------------------------------------|-----------------------------------------------------|
+| container_id                | high         | pod status                                                              | n/a                                                 |
+| display_container_name      | high         | pod status                                                              | n/a                                                 |
+| pod_name                    | orchestrator | pod metadata                                                            | n/a                                                 |
+| oshift_deployment           | orchestrator | pod annotation `openshift.io/deployment.name`                           | openshift environment and pod annotation must exist |
+| kube_ownerref_name          | orchestrator | pod ownerref                                                            | pod must have an owner                              |
+| kube_job                    | orchestrator | pod ownerref                                                            | pod must be attached to a job                       |
+| kube_replica_set            | orchestrator | pod ownerref                                                            | pod must be attached to a replicaset                |
+| kube_service                | orchestrator | kubernetes service discovery                                            | pod is behind a kubernetes service                  |
+| kube_daemon_set             | low          | pod ownerref                                                            | pod must be attached to a daemonset                 |
+| kube_container_name         | low          | pod status                                                              | n/a                                                 |
+| kube_namespace              | low          | pod metadata                                                            | n/a                                                 |
+| kube_app_name               | low          | pod label `app.kubernetes.io/name`                                      | pod label must exist                                |
+| kube_app_instance           | low          | pod label `app.kubernetes.io/instance`                                  | pod label must exist                                |
+| kube_app_version            | low          | pod label `app.kubernetes.io/version`                                   | pod label must exist                                |
+| kube_app_component          | low          | pod label `app.kubernetes.io/component`                                 | pod label must exist                                |
+| kube_app_part_of            | low          | pod label `app.kubernetes.io/part-of`                                   | pod label must exist                                |
+| kube_app_managed_by         | low          | pod label `app.kubernetes.io/managed-by`                                | pod label must exist                                |
+| env                         | low          | pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | pod label or container envvar must exist            |
+| version                     | low          | pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | pod label or container envvar must exist            |
+| service                     | low          | pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | `pod label or container envvar must exist           |
+| pod_phase                   | low          | pod status                                                              | n/a                                                 |
+| oshift_deployment_config    | low          | pod annotation `openshift.io/deployment-config.name`                    | openshift environment and pod annotation must exist |
+| kube_ownerref_kind          | low          | pod ownerref                                                            | pod must have an owner                              |
+| kube_deployment             | low          | pod ownerref                                                            | pod must be attached to a deployment                |
+| kube_replication_controller | low          | pod ownerref                                                            | pod must be attached to a replication controller    |
+| kube_stateful_set           | low          | pod ownerref                                                            | pod must be attached to a statefulset               |
+| persistentvolumeclaim       | low          | pod spec                                                                | a pvc must be attached to the pod                   |
+| kube_cronjob                | low          | pod ownerref                                                            | pod must be attached to a cronjob                   |
+| image_name                  | low          | pod spec                                                                | n/a                                                 |
+| short_image                 | low          | pod spec                                                                | n/a                                                 |
+| image_tag                   | low          | pod spec                                                                | n/a                                                 |
+
+### Host tag
+
+The agent can also attach kubernetes environement information as "host tags".
+
+| Tag               | Cardinality | Source                                      | Requirement                          |
+|-------------------|-------------|---------------------------------------------|--------------------------------------|
+| kube_cluster_name | low         | `DD_CLUSTER_NAME` envvar                    | `DD_CLUSTER_NAME` envvar must be set |
+| kube_node_role    | low         | node label `node-role.kubernetes.io/<role>` | Node label must exist                |
+
+
 ## Tag Autodiscovery
 
 Starting with Agent v6.10+, the Agent can autodiscover tags from Pod annotations. It allows the Agent to associate tags to all data emitted by the entire pods or an individual container within this pod.
 
-As a best practice in containerized environments, Datadog recommends using unified service tagging to help unify tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+As a best practice in containerized environments, Datadog recommends using unified service tagging to help unify tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
 
 To apply a `<TAG_KEY>:<TAG_VALUE>` tag to all data emitted by a given pod and collected by the Agent use the following annotation on your pod:
 
@@ -39,7 +87,7 @@ annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][2].
+Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][3].
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
@@ -146,7 +194,7 @@ kubernetes_pod_labels_as_tags:
   *: <PREFIX>_%%label%%
 ```
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][2] for more information.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /account_management/billing/custom_metrics
@@ -206,5 +254,6 @@ kubernetes_pod_annotations_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
-[2]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
+[1]: /agent/docker/tag/#extract-environment-variables-as-tags
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
