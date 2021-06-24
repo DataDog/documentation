@@ -1780,101 +1780,96 @@ main:
     identifier: other_integrations
     parent: log_collection
     weight: 111
-  - name: Log Configuration
-    url: logs/log_configuration/
-    parent: log_management
-    identifier: log_configuration
-    weight: 2
   - name: Processing
-    url: logs/log_configuration/processing/
-    parent: log_configuration
+    url: logs/processing/
+    parent: log_management
     identifier: log_processing
-    weight: 201
+    weight: 2
   - name: Pipelines
-    url: logs/log_configuration/pipelines/
-    parent: log_configuration
+    url: logs/processing/pipelines/
+    parent: log_processing
     identifier: log_pipelines
-    weight: 202
+    weight: 201
   - name: Processors
-    url: logs/log_configuration/processors/
-    parent: log_configuration
-    weight: 203
+    url: logs/processing/processors/
+    parent: log_processing
+    weight: 202
   - name: Parsing
-    url: logs/log_configuration/parsing/
-    parent: log_configuration
-    weight: 204
+    url: logs/processing/parsing/
+    parent: log_processing
+    weight: 203
   - name: Attributes and Aliasing
-    url: logs/log_configuration/attributes_naming_convention/
-    parent: log_configuration
-    weight: 205
+    url: logs/processing/attributes_naming_convention/
+    parent: log_processing
+    weight: 204
   - name: Generate Metrics
-    url: logs/log_configuration/logs_to_metrics/
-    parent: log_configuration
+    url: logs/logs_to_metrics/
+    parent: log_management
     identifier: log_to_metrics
-    weight: 206
-  - name: Indexes
-    url: logs/log_configuration/indexes
-    parent: log_configuration
-    identifier: log_indexes
-    weight: 207
-  - name: Archives
-    url: logs/log_configuration/archives/
-    parent: log_configuration
-    identifier: log_archives
-    weight: 208
-  - name: Rehydrate from Archives
-    url: logs/log_configuration/rehydrating
-    parent: log_configuration
-    weight: 209
-  - name: Connect Logs and Traces
-    url: tracing/connect_logs_and_traces/
-    parent: log_management
-    identifier: logs_traces_connection
     weight: 3
-  - name: Correlate Logs with Metrics
-    url: logs/guide/correlate-logs-with-metrics/
+  - name: Archives
+    url: logs/archives/
     parent: log_management
-    identifier: logs_metrics_correlation
+    identifier: log_archives
     weight: 4
+  - name: Rehydrate from Archives
+    url: logs/archives/rehydrating
+    parent: log_archives
+    weight: 401
+  - name: Indexes
+    url: logs/indexes
+    parent: log_management
+    identifier: log_indexes
+    weight: 5
   - name: Log Explorer
     url: logs/explorer/
     parent: log_management
     identifier: log_explorer
-    weight: 5
+    weight: 6
   - name: Live Tail
     url: logs/explorer/live_tail/
     parent: log_explorer
-    weight: 501
+    weight: 601
   - name: Log Side Panel
     url: logs/explorer/side_panel/
     parent: log_explorer
-    weight: 502
+    weight: 602
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 503
+    weight: 603
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 504
+    weight: 604
   - name: Watchdog Insights
     url: logs/explorer/watchdog_insights/
     parent: log_explorer
-    weight: 505
+    weight: 605
   - name: Search Syntax
-    url: logs/explorer/search_syntax/
-    parent: log_explorer
-    weight: 506
+    url: logs/search_syntax/
+    parent: log_management
+    weight: 7
+  - name: Connect Logs and Traces
+    url: tracing/connect_logs_and_traces/?tab=java
+    parent: log_management
+    identifier: logs_traces_connection
+    weight: 8
+  - name: Correlate Logs with Metrics
+    url: logs/guide/correlate-logs-with-metrics
+    parent: log_management
+    identifier: logs_metrics_correlation
+    weight: 9
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 6
+    weight: 10
   - name: Security
     url: security/logs/
     parent: log_management
     identifier: log_security
-    weight: 7
+    weight: 11
   - name: Security Platform
     url: security_platform/
     pre: nav_security_monitoring
@@ -2096,10 +2091,10 @@ main:
     parent: rum_browser
     identifier: rum_data_collected
     weight: 101
-  - name: Advanced Configuration
-    url: real_user_monitoring/browser/advanced_configuration/
+  - name: Modifying Data and Context
+    url: real_user_monitoring/browser/modifying_data_and_context/
     parent: rum_browser
-    identifier: rum_advanced
+    identifier: rum_modify
     weight: 102
   - name: Monitoring Page Performance
     url: real_user_monitoring/browser/monitoring_page_performance/
