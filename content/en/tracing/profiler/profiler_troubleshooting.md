@@ -186,6 +186,7 @@ Without this flag, profiles for short-lived Resque jobs will be unavailable.
 [2]: /help/
 
 {{< /programming-lang >}}
+{{< /programming-lang >}}
 
 ## Further Reading
 
