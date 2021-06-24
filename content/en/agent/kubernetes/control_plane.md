@@ -150,7 +150,7 @@ If the insecure ports of your Controller Manager and Scheduler instances are ena
 
 #### Secure ports
 
-Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targetting their secure ports.
+Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
