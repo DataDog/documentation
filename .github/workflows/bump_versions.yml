@@ -5,6 +5,8 @@ on:
 
 jobs:
   sdk-versions:
+    # Don't trigger on schedule event when in a fork
+    if: github.repository == 'DataDog/documentation'
     runs-on: ubuntu-latest
     steps:
       - id: set-versions
