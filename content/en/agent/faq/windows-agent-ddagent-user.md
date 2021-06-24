@@ -17,6 +17,9 @@ The account gains the following rights during installation:
 * It has remote login disabled
 * It has network login disabled
 
+**Note**: The installer doesn't add the account it creates to the `Users` groups by default.
+If you encounter permission issues running the Datadog Agent service, make sure the account under which the service runs is in the `Users` group.
+
 **Note**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
 
 ## Installation
