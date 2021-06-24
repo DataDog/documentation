@@ -32,7 +32,7 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                            | Pod must have an owner                              |
 | `kube_job`                    | Orchestrator | Pod ownerref                                                            | Pod must be attached to a job                       |
 | `kube_replica_set`            | Orchestrator | Pod ownerref                                                            | Pod must be attached to a replica set               |
-| `kube_service`                | Orchestrator | kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
+| `kube_service`                | Orchestrator | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
 | `kube_daemon_set`             | Low          | Pod ownerref                                                            | Pod must be attached to a DaemonSet                 |
 | `kube_container_name`         | Low          | Pod status                                                              | N/A                                                 |
 | `kube_namespace`              | Low          | Pod metadata                                                            | N/A                                                 |
@@ -51,7 +51,7 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 | `kube_deployment`             | Low          | Pod ownerref                                                            | Pod must be attached to a deployment                |
 | `kube_replication_controller` | Low          | Pod ownerref                                                            | Pod must be attached to a replication controller    |
 | `kube_stateful_set`           | Low          | Pod ownerref                                                            | Pod must be attached to a statefulset               |
-| `persistentvolumeclaim`       | Low          | Pod spec                                                                | A pvc must be attached to the pod                   |
+| `persistentvolumeclaim`       | Low          | Pod spec                                                                | A PVC must be attached to the pod                   |
 | `kube_cronjob`                | Low          | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
 | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
 | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
@@ -59,7 +59,7 @@ The Agent can autodiscover and attach tags to all data emitted by the entire pod
 
 ### Host tag
 
-The agent can also attach kubernetes environment information as "host tags".
+The Agent can attach Kubernetes environment information as "host tags".
 
 | Tag                 | Cardinality | Source                                                 | Requirement                                                    |
 |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
