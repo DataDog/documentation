@@ -33,7 +33,7 @@ To pull custom AWS tags for an EC2 instance through the Datadog Agent without us
 2. Attach a policy to the IAM role that includes the permission `ec2:DescribeTags`.
 3. Start the Datadog Agent container with the environment variable `DD_COLLECT_EC2_TAGS=true`.
 
-**Note**: for backwards compatibility, Agent will also try using EC2 instance role if ECS task role is unavailable or has insufficient permissions.
+**Note**: For backwards compatibility, the Agent will also try using the EC2 instance role if the ECS task role is unavailable or has insufficient permissions.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
 {{% /tab %}}
