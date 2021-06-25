@@ -86,7 +86,7 @@ require('dd-trace').init({
 
 ### Mocha instrumentation
 
-Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your your `package.json`:
+Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your `package.json`:
 
 {{< code-block lang="javascript" >}}
 // package.json
@@ -123,19 +123,22 @@ Use different test scripts for CI and local development:
 
 ## Known limitations
 
-[Mocha >=9.0.0][8] has gone ESM-first to load test files. That means that if you're using ES modules (for example, by defining your test files with the .mjs extension), **you will have limited instrumentation**: we will be able to detect your tests, but we won't have visibility within your test. If you want to know if Node is treating your code as ES Modules, you can read further [here][9].
+### ES Modules
+[Mocha >=9.0.0][8] has gone ESM-first to load test files. That means that if ES modules are used (for example, by defining test files with the .mjs extension), **the instrumentation will be limited**: tests will still be detected, but there won't be visibility within your test. If you want to read more about ES modules, you can do it [here][9].
 
+### Browser tests
+The Javascript Tracer does not support browsers. This means that if you're running browser tests with `mocha` or `jest`, there won't be visibility within the test itself.
 
 ## Best practices
 
-The following practices will help you take full advantage of your testing framework and CI Visibility.
+The following practices allow to take full advantage of the testing framework and CI Visibility.
 
 
 ### Parameterized tests
 
-Whenever possible, try to leverage the tools the testing frameworks provide for parameterized tests. For example, for `jest`:
+Whenever possible, leverage the tools the testing frameworks provide for parameterized tests. For example, for `jest`:
 
-Try to avoid:
+Avoid this:
 {{< code-block lang="javascript" >}}
 [[1,2,3], [3,4,7]].forEach((a,b,expected) => {
   test('sums correctly', () => {
@@ -144,17 +147,16 @@ Try to avoid:
 })
 {{< /code-block >}}
 
-And use instead the supported [`test.each`][10]:
+And use instead the supported [`test.each`][10] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, we support [`mocha-each`][11]:
+For `mocha`, [`mocha-each`][11] is supported:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
-
 forEach([
   [1,2,3],
   [3,4,7]
