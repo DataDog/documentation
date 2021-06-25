@@ -293,7 +293,7 @@ data:
 **Notes:**
 
 - The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
-- When targetting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Example:
+- When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Example:
 
 ```
 apiVersion: kubeadm.k8s.io/v1beta2
