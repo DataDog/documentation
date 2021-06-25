@@ -2,7 +2,7 @@
 title: "Envoi de checks de service\_: check de l'Agent"
 kind: documentation
 further_reading:
-  - link: /developers/write_agent_check/
+  - link: /developers/custom_checks/write_agent_check/
     tag: Documentation
     text: Écrire un check d'Agent custom
 ---
@@ -81,7 +81,7 @@ class MyClass(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/write_agent_check/
+[1]: /fr/developers/custom_checks/write_agent_check/
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/agent/guide/agent-commands/#agent-information

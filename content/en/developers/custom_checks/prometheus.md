@@ -13,6 +13,7 @@ further_reading:
   text: "Create a new Integration"
 aliases:
   - /developers/openmetrics/
+  - /developers/prometheus/
 ---
 
 ## Overview

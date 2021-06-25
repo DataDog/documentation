@@ -142,7 +142,7 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/developers/write_agent_check/#collection-interval
+[4]: https://docs.datadoghq.com/ja/developers/custom_checks/write_agent_check/#collection-interval
 [5]: https://docs.datadoghq.com/ja/getting_started/tagging/
 [6]: https://www.datadoghq.com/blog/the-power-of-tagged-metrics
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

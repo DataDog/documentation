@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Events Guides
 kind: documentation
 further_reading:
 - link: "/events/"
@@ -8,14 +8,16 @@ further_reading:
 - link: "/monitors/monitor_types/event/"
   tag: "Documentation"
   text: "Event monitors"
+aliases:
+    - /events/
 ---
 
-An event represents any record of activity noteworthy for engineers (devs, ops, and security).
+An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to progamatically send events:
 
 {{< whatsnext desc="Submit events to Datadog with:">}}
-    {{< nextlink href="/developers/events/agent" >}}Custom Agent Check{{< /nextlink >}}
-    {{< nextlink href="/developers/events/dogstatsd" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/developers/events/email" >}}Email{{< /nextlink >}}
+    {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
+    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/events/guides/email/" >}}Email{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 

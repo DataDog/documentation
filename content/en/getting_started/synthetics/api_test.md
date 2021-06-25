@@ -61,7 +61,7 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Your managed locations often include public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select **Private Locations** instead.
 
-For more information, see [Getting Started with Private Locations][6].
+For more information, see [Getting Started with Private Locations][3].
 
 #### Specify test frequency
 
@@ -77,7 +77,7 @@ Retry x time before location is marked as failed
 
 After a location fails, retries immediately run.
 
-**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure the interval with the [Synthetics API][3].
+**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure the interval with the [Synthetics API][4].
 
 To receive alerts when your endpoint goes down for three minutes on two different locations, set up an alerting condition such as:
 
@@ -87,7 +87,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][4] such as Slack, PagerDuty, and webhooks.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][5] such as Slack, PagerDuty, and webhooks.
 
 You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
@@ -101,7 +101,7 @@ To troubleshoot a failed test, scroll down to **Test Results** and click on a fa
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][5], you can access the root cause of a failed test run with a trace generated from the test run.
+With Datadog's [APM integration with Synthetic Monitoring][6], you can access the root cause of a failed test run with a trace generated from the test run.
 
 ## Further Reading
 
@@ -109,7 +109,7 @@ With Datadog's [APM integration with Synthetic Monitoring][5], you can access th
 
 [1]: /synthetics/api_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /api/v1/synthetics/#create-or-clone-a-test
-[4]: /integrations/
-[5]: /synthetics/apm/
-[6]: /getting_started/synthetics/private_location
+[3]: /getting_started/synthetics/private_location
+[4]: /api/v1/synthetics/#create-or-clone-a-test
+[5]: /integrations/
+[6]: /synthetics/apm/

@@ -2,7 +2,8 @@
 title: Events with email
 kind: documentation
 aliases:
-- /guides/eventsemail
+    - /developers/events/email/
+    - /guides/eventsemail
 ---
 
 If your application does not have an existing [Datadog integration][1], and you don't want to create a [custom Agent check][2], you can send events with email.
