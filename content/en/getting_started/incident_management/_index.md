@@ -34,13 +34,13 @@ This guide walks you through using the Datadog app for declaring an incident, up
 
 ## Walking through an incident from issue detection to resolution
 
-### Declaring an Incident
+### Declaring an incident
 
 **Scenario:** A monitor is alerting on a high number of errors which may be slowing down several services. It's unclear whether customers are being impacted.
 
-For this guide, we are using the [Datadog Clipboard][2] to declare an incident.
+This guide describes using the [Datadog Clipboard][2] to declare an incident.
 
-1. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**
+1. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 
    Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
@@ -207,7 +207,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
 2. Click **Edit** in the _Properties_ box and change the status to _stable_.
 
-3. Click **Save.**
+3. Click **Save**.
 
 4. Go to the _Communications_ tab.
 
@@ -225,7 +225,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
     You can create customized templates by clicking on **Manage Templates** > **New Template**. Group templates together using the _Category_ field.
 
-### Resolution / Postmortem
+### Resolution and postmortem
 
 **Scenario:** It's been confirmed that the issue no longer impacts customers and that you've resolved the issue. The team wants a postmortem to look back on what went wrong.
 
@@ -247,11 +247,11 @@ In the _Communications_ section, you can send out a notification updating the st
 
     {{< img src="getting_started/incident_management/generate_postmortem.png" alt="Generate Postmortem" responsive="true" style="width:80%;">}}
 
-7. Click **Generate Postmortem.**
+7. Click **Generate Postmortem**.
 
 8. For the timeline section, select **Marked as Important** so that only the _Important_ events are added to the postmortem.
 
-9. Click **Generate.**
+9. Click **Generate**.
 
     The postmortem will be generated as a Datadog Notebook, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future. Datadog Notebook supports live collaboration so you can edit it with your teammates in real-time.
 
@@ -263,7 +263,7 @@ Datadog Incident Management can be customized with different severity and status
 
 You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Notification Rules][8] documentation.
 
-To customize Incident Management, go to the [incident settings page][9]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click on **Get Started**). Then on the top right corner, click **Settings**.
+To customize Incident Management, go to the [incident settings page][9]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top right corner, click **Settings**.
 
 {{< img src="getting_started/incident_management/im_settings_button.png" alt="Settings" responsive="true" style="width:100%;">}} 
 
@@ -271,12 +271,12 @@ To customize Incident Management, go to the [incident settings page][9]. From th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/integrations/slack/?tab=slackapplicationus#overview
-[2]:/monitors/incident_management/datadog_clipboard
-[3]:/notebooks/#overview
-[4]:/monitors/incident_management/#from-a-graph
-[5]:/monitors/incident_management/#from-a-monitor
-[6]:/api/latest/incidents/#create-an-incident
-[7]:/incident_management/#status-levels
-[8]:/monitors/incident_management/notification_rules
-[9]:/incidents/settings
+[1]: /integrations/slack/
+[2]: /monitors/incident_management/datadog_clipboard
+[3]: /notebooks/#overview
+[4]: /monitors/incident_management/#from-a-graph
+[5]: /monitors/incident_management/#from-a-monitor
+[6]: /api/latest/incidents/#create-an-incident
+[7]: /monitors/incident_management/#status-levels
+[8]: /monitors/incident_management/notification_rules
+[9]: https://app.datadoghq.com/incidents/settings
