@@ -130,7 +130,7 @@ To troubleshoot a failed test, scroll down to **Test Results** and click on a fa
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][5], you can access the root cause of a failed test run with a trace generated from the test run.
+With Datadog's [APM integration with Synthetic Monitoring][5], you can access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
 ## Further Reading
 
