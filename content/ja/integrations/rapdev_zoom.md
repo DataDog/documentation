@@ -91,7 +91,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 5. RapDev Zoom ジオ概要
 
 ## サポート
-サポートまたは機能リクエストについては、以下の連絡先より RapDev.io にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: integrations@rapdev.io
 - セールス: sales@rapdev.io
