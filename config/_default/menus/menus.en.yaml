@@ -1068,19 +1068,17 @@ main:
   - name: Metrics Types
     url: metrics/types/
     parent: metrics_top_level
-    identifier: dev_tools_metrics_metrics_type
     weight: 3
   - name: Metrics Units
     url: metrics/units/
     parent: metrics_top_level
-    identifier: metrics_units
     weight: 4
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
     weight: 5
-   - name: Custom Metrics
+  - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
     identifier: metrics_custom_metrics
