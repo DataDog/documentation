@@ -263,7 +263,7 @@ Datadog Incident Management can be customized with different severity and status
 
 You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Notification Rules][8] documentation.
 
-To customize Incident Management, go to the [incident settings page][9]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click on **Get Started**). Then on the top right corner, click **Settings**.
+To customize Incident Management, go to the [incident settings page][9]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top right corner, click **Settings**.
 
 {{< img src="getting_started/incident_management/im_settings_button.png" alt="Settings" responsive="true" style="width:100%;">}} 
 
