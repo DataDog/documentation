@@ -269,7 +269,7 @@ This alert was triggered on {{ @machine_id.name }}
 タグに `db` が含まれない場合に異なる通知を送信するには、以下のように条件の否認を使用します。
 
 ```text
-{{^#is_match "role.name" "db"}}
+{{^is_match "role.name" "db"}}
   ロールタグに `db` が含まれない場合に表示されます。
   @slack-example
 {{/is_match}}

@@ -334,7 +334,7 @@ The `is_match` condition also supports matching multiple strings:
 To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
-{{^#is_match "role.name" "db"}}
+{{^is_match "role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
