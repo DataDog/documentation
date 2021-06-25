@@ -24,7 +24,7 @@ further_reading:
 
 [Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations and devices. These tests verify that your applications are responding to requests and users can perform business transactions as expected.
 
-The example below demonstrates the creation of a browser test, which maps a user's journey from adding an item to a cart to successfully checking out. 
+The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
 {{< img src="getting_started/synthetics/browser-test.png" alt="Browser test"  style="width:90%;" >}}
 
@@ -88,11 +88,11 @@ Once your test configuration has saved, Datadog prompts you to download and inst
 
 To begin recording your test steps, click **Start Recording**. 
 
-You can navigate through your page in the iframe to the right of the recording button. By selecting a div, image, or any area of your page, Datadog records and creates your steps in the browser test. For more information, see [Browser Test Steps][7].
+Navigate through the page in the iframe to the right of the recording button. When you select a div, image, or any area of the page, Datadog records and creates your steps in the browser test. For more information, see [Browser Test Steps][7].
 
 To end recording your test steps, click **Stop Recording**.
 
-The example below demonstrates how to map a user journey from adding an item to a cart to successfully checking out:
+The example below demonstrates how to map a user journey from adding an item to a cart to successfully checking out in `https://www.shopist.io`:
 
 1. Navigate to one of the furniture sections on the example website such as **Chairs** and select **Add to cart**.
 2. Click on **Cart** and **Checkout**.
@@ -128,9 +128,9 @@ In the example below, the test failed as the result of a server timeout.
 
 The resource, `https://api.shopist.io/checkout.json`, posted a status and the target source of this issue is a controller linked to checkout.
 
-With Datadog's [APM integration with Synthetic Monitoring][8], you can access the root cause of a failed test run with a trace generated from the test run. 
+With Datadog's [APM integration with Synthetic Monitoring][8], you can access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab. 
 
-To link browser test results with APM, whitelist the URLs you want to add to the APM integration headers. 
+To link browser test results with APM, add the allowlist the URLs you want to add to the APM integration headers. 
 
 For wildcards, use `*`. For example, `https://*.datadoghq.com/*`.
 
