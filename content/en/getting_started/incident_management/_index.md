@@ -34,7 +34,7 @@ This guide walks you through using the Datadog app for declaring an incident, up
 
 ## Walking through an incident from issue detection to resolution
 
-### Declaring an Incident
+### Declaring an incident
 
 **Scenario:** A monitor is alerting on a high number of errors which may be slowing down several services. It's unclear whether customers are being impacted.
 
