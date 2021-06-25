@@ -77,16 +77,12 @@ Datadog の [Synthetic モニタリングとの APM インテグレーション]
 
 ## その他の参考資料
 
-<<<<<<< HEAD
-{{< partial name="whats-next/whats-next.html" >}}
-=======
 {{< whatsnext desc="最初の API テストを設定したら、以下をご参照ください。">}}
     {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}API テストについてより詳しく学ぶ{{< /nextlink >}}
     {{< nextlink href="/synthetics/identify_synthetics_bots" tag="Documentation" >}}API テスト用の Synthetic ボットを特定する方法を学ぶ{{< /nextlink >}}
     {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}高度な Synthetic モニタリング設定を構成する{{< /nextlink >}}
 {{< nextlink href="/api/v1/synthetics/#create-a-test" tag="API Docs" >}}Synthetic テストをプログラムで作成する{{< /nextlink >}}
 {{< /whatsnext >}}
->>>>>>> jorie/metrics/nav-reorg
 
 [1]: /ja/synthetics/api_tests/
 [2]: https://app.datadoghq.com/synthetics/list

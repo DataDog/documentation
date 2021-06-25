@@ -44,11 +44,7 @@ Datadog クラウドセキュリティポスチャ管理 (CSPM) は、お使い�
 
 {{< img src="security_platform/cspm/getting_started/frameworks.png" alt="フレームワークの概要" style="width:100%;">}}
 
-<<<<<<< HEAD
-## はじめましょう
-=======
 ## 開始する
->>>>>>> jorie/metrics/nav-reorg
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cspm/getting_started">}}CSPM スキャン用のクラウド環境を構成します。{{< /nextlink >}}
