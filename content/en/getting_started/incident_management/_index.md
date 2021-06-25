@@ -251,7 +251,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
 8. For the timeline section, select **Marked as Important** so that only the _Important_ events are added to the postmortem.
 
-9. Click **Generate.**
+9. Click **Generate**.
 
     The postmortem will be generated as a Datadog Notebook, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future. Datadog Notebook supports live collaboration so you can edit it with your teammates in real-time.
 
