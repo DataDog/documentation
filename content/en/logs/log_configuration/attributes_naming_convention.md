@@ -2,11 +2,8 @@
 title: Attributes and Aliasing
 kind: documentation
 description: 'Learn about attributes and how to support a naming convention'
-<<<<<<< HEAD
-=======
 aliases:
   - /logs/processing/attributes_naming_convention/
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 further_reading:
     - link: 'logs/processing/pipelines'
       tag: 'Documentation'
@@ -238,11 +235,7 @@ All attributes and measures are prefixed by `dns`.
 | `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
 | `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
 | `dns.answer.name`    | `string` | The IP address that the DNS answers with.                                 |
-<<<<<<< HEAD
-| `dns.answer.type`    | `string` | A [two octet code][24] which specifies the DNS answer type.               |
-=======
 | `dns.answer.type`    | `string` | A [two octet code][26] which specifies the DNS answer type.               |
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
@@ -260,11 +253,7 @@ All attributes are prefixed by `evt`.
 
 Creating an alias for a source attribute that maps to a destination attribute allows logs to carry both the source and destination attributes.
 
-<<<<<<< HEAD
-Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][25] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
-=======
 Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][27] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 
 **Additional details regarding aliasing**:
 
@@ -277,11 +266,7 @@ Users can interact with either the aliased (source) or standard (destination) fa
 - Attributes can only be aliased to standard attributes.
 - To respect the JSON structure of logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
 
-<<<<<<< HEAD
-See the [associated documentation][26] for additional information.
-=======
 See the [associated documentation][28] for additional information.
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 
 ## Further Reading
 

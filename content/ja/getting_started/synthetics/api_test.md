@@ -12,18 +12,8 @@ further_reading:
     tag: ドキュメント
     text: API テスト用の Synthetic ボットを特定する方法を学ぶ
   - link: /synthetics/settings/
-<<<<<<< HEAD
-<<<<<<< HEAD
     tag: Documentation
     text: 高度な Synthetic モニタリング設定を構成する
-=======
-    tag: ドキュメント
-    text: 高度な Synthetics モニタリング設定を構成する
->>>>>>> datadog-api-spec/generated/1041
-=======
-    tag: Documentation
-    text: 高度な Synthetic モニタリング設定を構成する
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
   - link: '/api/v1/synthetics/#create-a-test'
     tag: API ドキュメント
     text: Synthetic テストをプログラムで作成

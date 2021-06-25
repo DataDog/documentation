@@ -69,11 +69,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-<<<<<<< HEAD
 `date("pattern"[, "timezoneId"[, "localeId"]])` 
-=======
-`date("pattern"[, "timezoneId"[, "localeId"]])`
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
 
 `regex("pattern")`

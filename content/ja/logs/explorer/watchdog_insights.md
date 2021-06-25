@@ -25,11 +25,7 @@ Watchdog Insights を使用すると、ログを探索するときに受け取�
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
-<<<<<<< HEAD
 ## Watchdog Insights の操作
-=======
-## ナビゲーション
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 
 Watchdog Insights バナーがログエクスプローラーの結果ページに表示され、現在のクエリに関連するインサイトが表示されます。
 
@@ -74,13 +70,6 @@ Watchdog Insights バナーがログエクスプローラーの結果ページ�
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="エラー外れ値サイドパネル" style="width:60%;" >}}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> datadog-api-spec/generated/1041
-=======
->>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
