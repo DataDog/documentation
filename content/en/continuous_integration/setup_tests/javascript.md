@@ -15,8 +15,9 @@ further_reading:
 Supported test frameworks:
 * Jest >=24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
-  * Only [`jest-circus`][1] is supported as a `testRunner`. 
+  * Only [`jest-circus`][1] is supported as a `testRunner`.
 * Mocha >=5.2.0
+  * Mocha >=9.0.0 has [**partial support**](#known-limitations).
 
 Supported CI providers:
 * Appveyor
@@ -72,7 +73,7 @@ require('dd-trace').init({
   service: 'ui-tests' // The name of the Test Service that will appear in the CI Tests tab.
 })
 // jest-environment-jsdom is an option too
-module.exports = require('jest-environment-node') 
+module.exports = require('jest-environment-node')
 {{< /code-block >}}
 
 **Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` (a value in milliseconds) when initializing the tracer:
@@ -120,6 +121,52 @@ Use different test scripts for CI and local development:
 },
 {{< /code-block >}}
 
+## Known limitations
+
+[Mocha >=9.0.0][8] has gone ESM-first to load test files. That means that if you're using ES modules (for example, by defining your test files with the .mjs extension), **you will have limited instrumentation**: we will be able to detect your tests, but we won't have visibility within your test. If you want to know if Node is treating your code as ES Modules, you can read further [here][9].
+
+
+## Best practices
+
+The following practices will help you take full advantage of your testing framework and CI Visibility.
+
+
+### Parameterized tests
+
+Whenever possible, try to leverage the tools the testing frameworks provide for parameterized tests. For example, for `jest`:
+
+Try to avoid:
+{{< code-block lang="javascript" >}}
+[[1,2,3], [3,4,7]].forEach((a,b,expected) => {
+  test('sums correctly', () => {
+    expect(a+b).toEqual(expected)
+  })
+})
+{{< /code-block >}}
+
+And use instead the supported [`test.each`][10]:
+{{< code-block lang="javascript" >}}
+test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
+  expect(a+b).toEqual(expected)
+})
+{{< /code-block >}}
+
+For `mocha`, we support [`mocha-each`][11]:
+{{< code-block lang="javascript" >}}
+const forEach = require('mocha-each');
+
+forEach([
+  [1,2,3],
+  [3,4,7]
+])
+.it('adds %i and %i then returns %i', (a,b,expected) => {
+  expect(a+b).to.equal(expected)
+});
+{{< /code-block >}}
+
+By using this approach, both the testing framework and CI Visibility will be able to tell your tests apart.
+
+
 ## Configuration settings
 
 | Environment variable           | Recommendation                                                         |
@@ -137,3 +184,7 @@ Use different test scripts for CI and local development:
 [5]: https://jestjs.io/docs/en/configuration#testenvironment-string
 [6]: https://jestjs.io/docs/en/configuration#testrunner-string
 [7]: https://jestjs.io/docs/en/configuration
+[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[11]: https://github.com/ryym/mocha-each
