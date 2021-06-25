@@ -207,7 +207,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
 2. Click **Edit** in the _Properties_ box and change the status to _stable_.
 
-3. Click **Save.**
+3. Click **Save**.
 
 4. Go to the _Communications_ tab.
 
