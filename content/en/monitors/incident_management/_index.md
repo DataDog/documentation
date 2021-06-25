@@ -158,7 +158,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
 [3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[4]: https://docs.datadoghq.com/integrations/slack/?tab=slackapplicationus
+[4]: /integrations/slack/
 [5]: https://app.datadoghq.com/incidents/ddslackapp
 [6]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [7]: /tracing/#2-instrument-your-application
