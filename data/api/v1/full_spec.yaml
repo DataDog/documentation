@@ -16772,7 +16772,7 @@ paths:
 
           For more information about your AWS account Role name,
 
-          see the [Datadog AWS integration configuration info](https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation).'
+          see the [Datadog AWS integration configuration info](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).'
         required: true
       responses:
         '200':

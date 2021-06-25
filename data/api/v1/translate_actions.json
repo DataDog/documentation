@@ -282,7 +282,7 @@
   "CreateNewAWSExternalID": {
     "description": "Generate a new AWS external ID for a given AWS account ID and role name pair.",
     "summary": "Generate a new external ID",
-    "request_description": "Your Datadog role delegation name.\nFor more information about your AWS account Role name,\nsee the [Datadog AWS integration configuration info](https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation).",
+    "request_description": "Your Datadog role delegation name.\nFor more information about your AWS account Role name,\nsee the [Datadog AWS integration configuration info](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).",
     "request_schema_description": "Returns the AWS account associated with this integration."
   },
   "DeleteAWSLambdaARN": {
