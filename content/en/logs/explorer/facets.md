@@ -31,16 +31,29 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
+{{< site-region region="gov,us3" >}}
 **Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][14], [metric generation][10] from logs, [archive][9] forwarding, or [rehydration][15]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+{{< /site-region >}}
 
 ### Qualitative facets
 #### Dimensions
 
 Use qualitative facets when you need:
 
-- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging, or production environments.
-- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][15] web access logs, enriched with the Datadog [GeoIP Processor][16].
-- To **count unique values**. For instance, create a facet on `user.email` from your [Kong][17] logs to know how many users connect every day to your website.
+- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].
+- To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
+{{< site-region region="gov,us3" >}}
+- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
+{{< /site-region >}}
+{{< site-region region="us,eu" >}}
+- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
+
+**Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
+{{< /site-region >}}
 
 #### Types
 
@@ -51,9 +64,9 @@ Qualitative facets can have a string or numerical (integer) type. While assignin
 
 Use measures when you need:
 
-- To **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][18] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
-- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][19] tasks, and see the list of servers having the most runs taking more than 10s.
-- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][20] microservice. You can then search all the logs, starting with the one with the highest amount.
+- To **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][20] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
+- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][21] tasks, and see the list of servers having the most runs taking more than 10s.
+- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][22] microservice. You can then search all the logs, starting with the one with the highest amount.
 
 #### Types
 
@@ -70,7 +83,7 @@ Measures support units in **time** or **size** for easier handling of orders of 
 
 Unit is a property of the measure itself, not of the field. For example, consider a `duration` measure in nanoseconds: you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
 
-1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][21]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
+1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][23]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
 2. Use `duration:>20ms` (see [search syntax][1] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
 
 ## Facet panel
@@ -105,7 +118,7 @@ Hidden facets have no impact aside from the log explorer (for instance: live tai
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][22]. Hidden facets is part of the context saved in a saved view.
+Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view.
 
 ### Group facets
 
@@ -139,11 +152,11 @@ You may wish to keep the non-standard _aliased_ version of the facet if you are 
 
 Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
 
-Facets on [Reserved Attributes][23] and most [Standard Attributes][24] are available by default.
+Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are available by default.
 
 ### Index facet
 
-The index facet is a specific facet that appears only if your organization has [multiple indexes][25], and/or if you have active [historical views][26]. Use this facet if you want to scope down your query to a subset of your indexes.
+The index facet is a specific facet that appears only if your organization has [multiple indexes][27], and/or if you have active [historical views][15]. Use this facet if you want to scope down your query to a subset of your indexes.
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
@@ -179,7 +192,7 @@ Autocomplete based on the content in logs of the current views helps you to defi
 
 ### Alias facets
 
-Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][24] for reference.
+Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][26] for reference.
 
 Use aliasing as an option to smoothly realign teams that rely on inconsistent naming conventions. With aliasing, you can have them all using the standard facet emerging for your organization.
 
@@ -192,7 +205,7 @@ When aliasing an _aliased_ facet towards a _standard_ facet:
 - Users can use either aliased and standard facets for troubleshooting. You may prefer the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
 - Users are nudged to use the standard facet in place of the aliased one.
 
-To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][27] ones existing for your organization.
+To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][14] ones existing for your organization.
 
 {{< img src="logs/explorer/facet/alias_modal.png" alt="alias modal" style="width:30%;">}}
 
@@ -219,17 +232,17 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [11]: /logs/processing/pipelines/
 [12]: /logs/indexes/#indexes-filters
 [13]: /logs/indexes/#exclusion-filters
-[14]: /getting_started/tagging/assigning_tags/
-[15]: /integrations/nginx/
-[16]: /logs/processing/processors/?tab=ui#geoip-parser
-[17]: /integrations/kong/
-[18]: /integrations/varnish/
-[19]: /integrations/ansible/
-[20]: /integrations/python/
-[21]: /logs/processing/processors/?tab=ui#arithmetic-processor
-[22]: /logs/explorer/saved_views/
-[23]: /logs/processing/attributes_naming_convention/#reserved-attributes
-[24]: /logs/processing/attributes_naming_convention/
-[25]: /logs/indexes/#indexes
-[26]: /logs/archives/rehydrating/
-[27]: /logs/processing/attributes_naming_convention/#standard-attribute-list
+[14]: /logs/processing/attributes_naming_convention/#standard-attribute-list
+[15]: /logs/archives/rehydrating/
+[16]: /integrations/nginx/
+[17]: /logs/processing/processors/?tab=ui#geoip-parser
+[18]: /integrations/kong/
+[19]: /getting_started/tagging/assigning_tags/
+[20]: /integrations/varnish/
+[21]: /integrations/ansible/
+[22]: /integrations/python/
+[23]: /logs/processing/processors/?tab=ui#arithmetic-processor
+[24]: /logs/explorer/saved_views/
+[25]: /logs/processing/attributes_naming_convention/#reserved-attributes
+[26]: /logs/processing/attributes_naming_convention/
+[27]: /logs/indexes/#indexes
