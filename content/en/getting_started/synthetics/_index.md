@@ -22,13 +22,15 @@ further_reading:
 
 ## Overview
 
-Datadog Synthetic Monitoring offers two different ways to monitor your applications: API tests to monitor the uptime of your API endpoints and browser tests to check key user journeys. Your tests can be run either from managed locations or from private locations. Synthetic Monitoring helps you ensure uptime, identify regional issues, and make sure key web transactions can be performed on your application.
+Datadog Synthetic Monitoring allows you to monitor uptime, identify regional issues, and ensure key business transactions can perform on your applications.
+
+There are three ways to monitor your applications: API tests to monitor the uptime of your API endpoints, multistep API tests to link several HTTP requests, and browser tests to record key user journeys. You can run tests from publicly managed locations or run tests from private locations to monitor internal-facing applications and private URLs. 
 
 {{< img src="synthetics/synthetics_home.png" alt="Synthetic Monitoring home page" >}}
 
-By unifying Synthetic Monitoring data with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetic Monitoring][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
+With Synthetic Monitoring data, you can observe your systems' perfomance and user experience. The [Synthetic Monitoring][1] homepage displays real-time status updates, response times, and uptimes along with your metrics, logs, and traces.
 
-The following guides show you how to set up your first Synthetic tests with Datadog. Follow the sections below to learn how to create a browser or API test and configure a test with a private location to monitor internal-facing applications or any private URLs.
+To set up your first Synthetic test with Datadog, follow the sections below to learn how to create an API test, multistep API test, or browser test. 
 
 ## Prerequisites
 
@@ -36,9 +38,10 @@ If you haven't already, create a [Datadog account][2].
 
 ## Configure your first test
 
-- [Create a private location][3] (if needed)
+- [Create a private location][3] (as needed)
 - [Create a browser test][4]
 - [Create an API test][5]
+- [Create a multistep API test][5]
 
 ## Further Reading
 
