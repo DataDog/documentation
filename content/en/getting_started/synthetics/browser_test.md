@@ -132,7 +132,7 @@ With Datadog's [APM integration with Synthetic Monitoring][8], you can access th
 
 To link browser test results with APM, whitelist the URLs you want to add to the APM integration headers. 
 
-For wildcards, use `*`. For example, `https://*.datadoghq.com/*`
+For wildcards, use `*`. For example, `https://*.datadoghq.com/*`.
 
 ## Further Reading
 
