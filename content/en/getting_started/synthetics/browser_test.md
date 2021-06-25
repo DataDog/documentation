@@ -38,8 +38,8 @@ Datadog records every test execution as a **Test Result**.
 4. Define your browser test:
 
     - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test web application.
-    - You can select **Advanced Options** to use custom request headers, authentication credentials, proxy URLs, or cookies. 
-    - You can set environment tags such as `env:prod` and `app:shopist` and additional tags on your test. Tags allow you to stay organized and quickly find tests you're interested in on the homepage.
+    - Select **Advanced Options** to use custom request headers, authentication credentials, proxy URLs, or cookies. 
+    - Set environment tags, for example `env:prod` and `app:shopist`, and additional tags for your test. Tags allow you to stay organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 
 
 #### Select locations
@@ -52,13 +52,13 @@ For more information, see [Getting Started with Private Locations][10].
 
 #### Specify test frequency
 
-Select the frequency of your test runs.
+Select the frequency that your test runs.
 
 #### Define alert conditions
 
 Select the circumstances in which you want a test to send notification alerts.
 
-You can specify the number of failures per browser and device before the test is considered failed:
+Specify the number of failures per browser and device before the test is considered failed:
 
 ```text
 Retry 1 time after 300 ms in case of failure
@@ -76,9 +76,9 @@ An alert is triggered if your test fails for 0 minutes from any 3 of 13 location
 
 Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][4] such as Slack, PagerDuty, and webhooks.
 
-You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
+Set a time for your alert notification to re-notify if the alert has not been resolved, and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
-When you're ready to run your test, click **Save Details & Record Test**.
+When you're ready to record your test, click **Save Details & Record Test**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test"  style="width:90%;">}}
 
@@ -118,7 +118,7 @@ You can wait for your test to generate results in **Test Results** or click **Ru
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failed test result. Review screenshots, core web vitals, potential errors, resources, and traces for each step to diagnose the issue. 
 
-When you look at screenshots leading up to the failed step, you can identify the root cause of the failure more easily. Click on resources, errors, and traces that appear next to the duration graph to access **Errors & Warnings**, **Resources**, and **Traces**. 
+ To identify the root cause of the failure more easily, look at screenshots leading up to the failed step. Click on resources, errors, and traces that appear next to the duration graph to access **Errors & Warnings**, **Resources**, and **Traces**. 
 
 **Errors and Warnings** display JavaScript and network errors, **Resources** display the resource providing this status, and **Traces** map the entirety of the request in seconds. 
 
@@ -128,7 +128,7 @@ In the example below, the test failed as the result of a server timeout.
 
 The resource, `https://api.shopist.io/checkout.json`, posted a status and the target source of this issue is a controller linked to checkout.
 
-With Datadog's [APM integration with Synthetic Monitoring][8], you can access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab. 
+With Datadog's [APM integration with Synthetic Monitoring][8],  access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab. 
 
 To link browser test results with APM, add the allowlist the URLs you want to add to the APM integration headers. 
 
