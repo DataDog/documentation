@@ -110,15 +110,15 @@ Creating a multistep API test slightly differs from creating an API test. You ca
 
     - Add a name to your test HTTP request step.
     - Specify the URL you want to query. 
-    - You can select **Advanced Options** to add request options, request body, certificates, and proxies.
+    -  Select **Advanced Options** to add request options, request body, certificates, and proxies.
     - Click **Test URL**. 
-    - You can optionally add new assertions, enable execution parameters, and extract variables from the response content.
+    - Optionally, add new assertions, enable execution parameters, and extract variables from the response content.
     - Click **Save Step**.
 
 6. Click **Add Another Step** to add another step. You can create up to ten steps. 
 7. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
 
-When you're ready to run your test, click **Save Test**. 
+When you're ready to create your test, click **Save Test**. 
 
 For more information, see [Multistep API Tests][7].
 
@@ -130,7 +130,7 @@ To troubleshoot a failed test, scroll down to **Test Results** and click on a fa
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][5], you can access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
+With Datadog's [APM integration with Synthetic Monitoring][5], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
 ## Further Reading
 
