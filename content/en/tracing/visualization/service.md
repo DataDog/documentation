@@ -67,6 +67,7 @@ Datadog provides out of the box graphs for any given Service:
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][5]:
 
+
 {{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard"  style="width:40%;">}}
 
 ### Latency distribution
