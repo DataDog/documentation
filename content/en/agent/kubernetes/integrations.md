@@ -376,7 +376,7 @@ The following configuration defines the integration template for `redis` contain
           port: 6379
           password: %%env_REDIS_PASSWORD%%
 ```
-As a result, the agent will contain a `redis.yaml` file within its `/confd` directory with the above configuration.
+As a result, the agent will contain a `redis.yaml` file with the above configuration in the `/confd` directory.
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
 [1]: /agent/faq/template_variables/
