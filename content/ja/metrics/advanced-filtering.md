@@ -34,9 +34,12 @@ further_reading:
 - `IN`, `in`
 - `NOT IN`, `not in`
 
+<<<<<<< HEAD
 **注:** 記号のブール構文 (`!`、`,`) は、機能的な構文演算子 (`NOT`、`AND`、`OR`、`IN`、`NOT IN`) と一緒に使用できません。以下のクエリは _無効_ とみなされます。
 `avg:mymetric{env:prod AND resource_name NOT IN (!resource_name:A, !resource_name:B)}`
 
+=======
+>>>>>>> datadog-api-spec/generated/1041
 #### ブールでフィルタリングされたクエリの例
 
 ```
@@ -52,6 +55,7 @@ avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1
 {{< img src="metrics/advanced-filtering/ex2.gif" alt="例 2"  style="width:80%;" >}}
 
 
+<<<<<<< HEAD
 ```
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
@@ -59,14 +63,20 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 {{< img src="metrics/advanced-filtering/NOTIN.jpg" alt="例 3"  style="width:80%;" >}}
 
 
+=======
+>>>>>>> datadog-api-spec/generated/1041
 ### ワイルドカードでフィルタリングされたクエリ
 
 タグ値のプレフィックスとサフィックスのワイルドカードマッチングがサポートされています。
 -  `pod_name: web-*` 
+<<<<<<< HEAD
 -  `cluster:*-trace`
 
 **注**: 同じフィルターでのプレフィックスとサフィックスのワイルドカードマッチングはサポートされていません。
 
+=======
+-  `cluster:*-trace`.
+>>>>>>> datadog-api-spec/generated/1041
 
 #### ワイルドカードでフィルタリングされたクエリの例
 
@@ -80,9 +90,17 @@ avg:system.disk.in_use{!device:/dev/loop*} by {device}
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
+<<<<<<< HEAD
 {{< img src="metrics/advanced-filtering/wildcards2.jpg" alt="例 2"  style="width:80%;" >}}
 
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+=======
+{{< img src="metrics/advanced-filtering/wildcards2.png" alt="例 2"  style="width:80%;" >}}
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+>>>>>>> datadog-api-spec/generated/1041

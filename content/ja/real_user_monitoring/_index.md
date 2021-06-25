@@ -76,5 +76,5 @@ Datadog のリアルユーザーモニタリング (RUM) は、個々のユー�
 
 [1]:/ja/real_user_monitoring/dashboards
 [2]:/ja/real_user_monitoring/explorer/analytics
-[3]:/ja/real_user_monitoring/error_tracking
-[4]: /ja/real_user_monitoring/connect_rum_and_traces
+[4]:/ja/real_user_monitoring/error_tracking
+[1]: /ja/real_user_monitoring/connect_rum_and_traces

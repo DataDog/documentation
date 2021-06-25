@@ -69,7 +69,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])`
+`date("pattern"[, "timezoneId"[, "localeId"]])` 
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
 
 `regex("pattern")`
@@ -180,7 +180,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 `uppercase`
 : Returns the upper-cased string.
 
-`keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])`
+`keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` 
 : Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).
 
 `xml`

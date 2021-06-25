@@ -54,9 +54,6 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 ### Renotify
 
 Enable monitor renotification (optional) to remind your team that a problem is not solved. 
-
-  {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify"  style="width:70%;" >}}
-
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
 The escalation message can be added in the following ways:
 
@@ -425,7 +422,7 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][15] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][14] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
 
@@ -562,4 +559,3 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
 [14]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[15]: /monitors/faq/what-are-recovery-thresholds/

@@ -25,7 +25,7 @@ Watchdog Insights を使用すると、ログを探索するときに受け取�
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
-## ナビゲーション
+## Watchdog Insights の操作
 
 Watchdog Insights バナーがログエクスプローラーの結果ページに表示され、現在のクエリに関連するインサイトが表示されます。
 
@@ -41,7 +41,9 @@ Watchdog Insights バナーがログエクスプローラーの結果ページ�
 
 各インサイトには、独自の組み込みインタラクションと詳細なトラブルシューティング資料を含むサイドパネルが付属しています。インサイトの相互作用とサイドパネルは、[Watchdog Insight のタイプ](#watchdog-insights-collections)によって異なります。
 
-## 収集
+
+## Watchdog Insights コレクション
+
 
 ### エラー外れ値
 
@@ -70,6 +72,10 @@ Watchdog Insights バナーがログエクスプローラーの結果ページ�
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="エラー外れ値サイドパネル" style="width:60%;" >}}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> datadog-api-spec/generated/1041
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
