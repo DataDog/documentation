@@ -18,18 +18,18 @@ to Vector that will aggregate data from multiple incoming Agent:
 
 `Agents ---> Vector ---> Datadog`
 
-This scenario differs from using a <a href="/agent/proxy">proxy</a> in the extend that Vector is able to
+This scenario differs from using a [proxy][2] in the extend that Vector is able to
 process data before sending them to Datadog. Vector capabilities include, among others:
 * Log sampling
 * Log deduplication to avoid duplicated log to be send
-* Transforming logs using the [Vector Remap Language][2]
+* Transforming logs using the [Vector Remap Language][3]
 
 
 **Note**: Only logs aggregation is supported, support for other data type (metrics, processes, traces, etc.)
-is scheduled for later.
+will be available later.
 
 **Note**: Vector can also directly collect logs from alternative sources, if doing so it is likely that those 
-third party logs won't come with proper tagging. A convenient way of <a href="/getting_started/tagging/">adding tags</a>, source or service values is to do so using the [Vector Remap Language][2].
+third party logs won't come with proper tagging. A convenient way of [adding tags][4], source or service values is to do so using the [Vector Remap Language][3].
 
 ## Configuration
 
@@ -43,10 +43,10 @@ logs_config:
 ```
 
 ### Vector configuration
-To receive logs from Datadog Agent Vector should be configured with a [datadog_logs source][3].
-To send logs to Datadog, Vector should be configured with at least one [datadog_logs sink][4].
+To receive logs from Datadog Agent Vector should be configured with a [datadog_logs source][5].
+To send logs to Datadog, Vector should be configured with at least one [datadog_logs sink][6].
 
-Please check the official [Vector documentation][5] for all available configuration parameters and
+Please check the official [Vector documentation][7] for all available configuration parameters and
 all transforms that can be applied to logs while they are processed by Vector.
 
 Sample configuration that simply add a tag to every log using the Vector Remap Language:
@@ -87,11 +87,11 @@ agents:
     logs_no_ssl: true # If TLS/SSL is not enabled on the vector side
 ```
 
-For additional details about the Datadog chart, please check <a href="/agent/kubernetes/?tab=helm">this page</a>.
+For additional details about the Datadog chart, please check [this page][8].
 
-Vector provide an [offical chart for aggregating data][6] that comes with a Datadog
+Vector provide an [offical chart for aggregating data][9] that comes with a Datadog
 logs source preconfigured. For more information about installing Vector using Helm
-please refer to the [official Vector documentation][7].
+please refer to the [official Vector documentation][10].
 
 To ultimately sent logs to Datadog, a `datadog_logs` sinks need to be added to the Vector
 configuration. The Vector's chart easily support adding additional sinks in its `values.yaml` file.
@@ -121,14 +121,29 @@ sinks:
       enabled: true
 ```
 
+## Manipulating Datadog Logs with Vector
+
+Logs sent to Vector can benefit from the full capabilities of Vector, including [VRL][3] manipulation.
+When received by Vector, logs sent by a Datadog Agent are structured using the expected schema when
+submitting logs directly to the Datadog API, please refer to the [API documention][11]
+for a complete schema description.
+
+Logs collected by Vector from other sources can be fully enriched according to
+[Datadog recommandation][4], VRL can be used to adjust those logs to fill relevant
+fields according to the expected schema. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://vector.dev/
-[2]: https://vector.dev/docs/reference/configuration/transforms/remap/
-[3]: https://vector.dev/docs/reference/configuration/sources/datadog_logs/
-[4]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
-[5]: https://vector.dev/docs/reference/configuration/
-[6]: https://github.com/timberio/vector/tree/master/distribution/helm/vector-aggregator
-[7]: https://vector.dev/docs/setup/installation/package-managers/helm/
+[2]: /agent/proxy
+[3]: https://vector.dev/docs/reference/configuration/transforms/remap/
+[4]: /getting_started/tagging
+[5]: https://vector.dev/docs/reference/configuration/sources/datadog_logs/
+[6]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
+[7]: https://vector.dev/docs/reference/configuration/
+[8]: /agent/kubernetes/?tab=helm
+[9]: https://github.com/timberio/vector/tree/master/distribution/helm/vector-aggregator
+[10]: https://vector.dev/docs/setup/installation/package-managers/helm/
+[11]: api/latest/logs/#send-logs
