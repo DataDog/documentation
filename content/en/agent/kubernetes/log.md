@@ -368,7 +368,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-You can customize logs collection per integration within `confd` as well. This method mounts the desired configuration onto the agent container.
+You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the agent container.
   ```yaml
   confd:
     <INTEGRATION_NAME>.yaml: |-
