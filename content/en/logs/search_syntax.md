@@ -77,7 +77,7 @@ For example, for a facet `my_facet` with the value `hello:world`, search using: 
 To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
 {{< /site-region >}}
 
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 To search on a specific attribute, add `@` to specify you are searching on an attribute.
 
 For instance, if your attribute name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
@@ -118,7 +118,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
 {{< /site-region >}}
 
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 Wildcard searches work within attributes and tags (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
 {{< /site-region >}}
 
@@ -136,7 +136,7 @@ However, this search term does not return logs that contain the string `NETWORK`
 When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
 {{< /site-region >}}
 
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
 {{< /site-region >}}
 
@@ -146,7 +146,7 @@ When searching for an attribute or tag value that contains special characters or
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 {{< /site-region >}}
 
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
 For instance, retrieve all logs that have a response time over 100ms with:
 {{< /site-region >}}
@@ -177,7 +177,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 {{< /site-region >}}
 

@@ -35,7 +35,7 @@ Facets also allow you to manipulate your logs in your [log monitors][4], log wid
 **Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 {{< /site-region >}}
 
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 **Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][27], [metric generation][10] from logs, [archive][9] forwarding, or [rehydration][26]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 {{< /site-region >}}
 
@@ -49,7 +49,7 @@ Use qualitative facets when you need:
 {{< site-region region="gov,us3" >}}
 - To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging, or production environments.
 {{< /site-region >}}
-{{< site-region region="us1,eu" >}}
+{{< site-region region="us,eu" >}}
 - To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging, or production environments.
 
 **Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
