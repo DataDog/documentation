@@ -57,7 +57,6 @@ Use qualitative facets when you need:
 
 - To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].
 
-
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
 
 {{< site-region region="gov,us3" >}}
