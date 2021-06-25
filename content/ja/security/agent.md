@@ -61,7 +61,7 @@ Detadog のセキュリティにバグを発見された場合は、[security@da
 
 ## 非特権ユーザーとして実行
 
-デフォルトでは、Agent は Linux では `dd-agent` ユーザーとして、[Windows][18] では `ddagentuser` アカウントとして実行されます。`system-probe` および `security-agent` サービスは例外で、Linux では `root` として、Windows では `LOCAL_SYSTEM` として実行する必要があります
+デフォルトでは、Agent は Linux では `dd-agent` ユーザーとして、[Windows][18] では `ddagentuser` アカウントとして実行されます。`system-probe` および `security-agent` サービスは例外で、Linux では `root` として、Windows では `LOCAL_SYSTEM` として実行する必要があります。
 
 ## 機密情報管理
 

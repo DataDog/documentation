@@ -235,7 +235,7 @@ All attributes and measures are prefixed by `dns`.
 | `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
 | `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
 | `dns.answer.name`    | `string` | The IP address that the DNS answers with.                                 |
-| `dns.answer.type`    | `string` | A [two octet code][24] which specifies the DNS answer type.               |
+| `dns.answer.type`    | `string` | A [two octet code][26] which specifies the DNS answer type.               |
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
@@ -253,7 +253,7 @@ All attributes are prefixed by `evt`.
 
 Creating an alias for a source attribute that maps to a destination attribute allows logs to carry both the source and destination attributes.
 
-Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][25] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
+Users can interact with either the aliased (source) or standard (destination) faceted attribute. However, users are [encouraged][27] to use the standard facet rather than the aliased one. This provides guidance towards the naming convention, and discourages users from building assets (such as saved views or dashboards) based on non-standard content.
 
 **Additional details regarding aliasing**:
 
@@ -266,7 +266,7 @@ Users can interact with either the aliased (source) or standard (destination) fa
 - Attributes can only be aliased to standard attributes.
 - To respect the JSON structure of logs, it is not possible to have one standard attribute as the child of another (for example `user` and `user.name` cannot both be standard attributes).
 
-See the [associated documentation][26] for additional information.
+See the [associated documentation][28] for additional information.
 
 ## Further Reading
 
@@ -284,17 +284,19 @@ See the [associated documentation][26] for additional information.
 [10]: /integrations/amazon_elb/
 [11]: /integrations/nginx/
 [12]: /integrations/haproxy/
-[13]: /integrations/cassandra/
-[14]: /integrations/mysql/
-[15]: /integrations/amazon_rds/
-[16]: /integrations/elastic/
-[17]: /logs/processing/processors/#remapper
-[18]: /tracing/app_analytics/search/
-[19]: /integrations/rsyslog/
-[20]: /integrations/nxlog/
-[21]: /integrations/syslog_ng/
-[22]: /integrations/fluentd/
-[23]: /integrations/logstash/
-[24]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
-[25]: /logs/explorer/facets/#aliased-facets
-[26]: /logs/explorer/facets/#alias-facets
+[13]: /logs/processing/processors/#url-parser
+[14]: /logs/processing/processors/#user-agent-parser
+[15]: /integrations/cassandra/
+[16]: /integrations/mysql/
+[17]: /integrations/amazon_rds/
+[18]: /integrations/elastic/
+[19]: /logs/processing/processors/#remapper
+[20]: /tracing/app_analytics/search/
+[21]: /integrations/rsyslog/
+[22]: /integrations/nxlog/
+[23]: /integrations/syslog_ng/
+[24]: /integrations/fluentd/
+[25]: /integrations/logstash/
+[26]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+[27]: /logs/explorer/facets/#aliased-facets
+[28]: /logs/explorer/facets/#alias-facets
