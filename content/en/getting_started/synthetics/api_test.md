@@ -96,11 +96,11 @@ When you're ready to run your test, click **Save Test**.
 
 ## Create a multistep API test
 
-Multistep API tests also **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your services are responding to HTTP requests and meeting any conditions you define, such as **response time**, **HTTP status code**, and **header or body contents**. 
+Multistep API tests chain multiple HTTP requests together, allowing you to configure API tests on complex backend systems. 
 
 ### Configure the test
 
-Creating a multistep API test slightly differs from creating an API test. You can link HTTP requests and create variables from the request response data in **Define steps**. 
+When you create a multistep API test, you can chain a sequence of HTTP requests and create variables from the request response data in **Define steps**. 
 
 1. In the Datadog application, hover over **[UX Monitoring][2]** in the left hand menu and select **Synthetic Test**.
 2. In the top right corner, click the **New Test** button.
