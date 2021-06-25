@@ -12,11 +12,19 @@ further_reading:
 
 ## Overview
 
+<<<<<<< HEAD
 Metric units are displayed automatically on timeseries graphs, query value widgets, top lists, etc.
 
 {{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units"  style="width:100%;">}}
 
 On timeseries graphs, move your cursor over any graph to see the relevant units. The raw data is automatically converted to readable display units such as fractions of a second (ms) and millions of bytes per second (MiB/s).
+=======
+Metric units are displayed automatically in places such as on timeseries graphs, query value widgets, and top lists.
+
+{{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units"  style="width:100%;">}}
+
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. The raw data is automatically converted to readable display units such as fractions of a second (ms) and millions of bytes per second (MiB/s).
+>>>>>>> 6f7266203b87580f0e8ced27e78cf6ab1499f69f
 
 Units are also displayed at the bottom of timeboard graphs, and metric descriptions are available by selecting **Metrics Info** from the gear dropdown:
 
@@ -73,7 +81,7 @@ For unitless metrics, Datadog uses the [SI suffixes][2] `K`, `M`, `G`, and `T`. 
 
 ### Unit handling
 
-Units are automatically converted on your graphs into different units for readability.
+Units are automatically formatted on your graphs for readability.
 
 #### Examples
 

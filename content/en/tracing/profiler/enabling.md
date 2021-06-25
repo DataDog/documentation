@@ -88,11 +88,11 @@ The following profiling features are available depending on your Python version:
 
 |      Feature         | Supported Python versions          |
 |----------------------|------------------------------------|
-| Wall time profiling  | Python >= 2.7                      |
-| CPU time profiling   | Python >= 2.7 on POSIX platforms   |
-| Exception profiling  | Python >= 3.7 on POSIX platforms   |
-| Lock profiling       | Python >= 2.7                      |
-| Memory profiling     | Python >= 3.5                      |
+| Wall time profiling  | Python >= 2.7                      |
+| CPU time profiling   | Python >= 2.7 on POSIX platforms   |
+| Exception profiling  | Python >= 3.7 on POSIX platforms   |
+| Lock profiling       | Python >= 2.7                      |
+| Memory profiling     | Python >= 3.5                      |
 
 **Installation**
 
@@ -144,7 +144,7 @@ When your process forks using `os.fork`, the profiler is actually stopped in
 the child process and needs to be restarted. For Python 3.7+ on Unix platforms,
 a new profiler is automatically started.
 
-If you use Python < 3.7, or run on a non-Unix platform, you need to manually
+If you use Python < 3.7, or run on a non-Unix platform, you need to manually
 start a new profiler in your child process.
 
 ```python
@@ -166,6 +166,7 @@ You can configure the profiler using the following environment variables:
 | Environment Variable    | Keyword Argument to `Profiler` | Type                       | Description                                                         |
 | ------------------------|------------------------------- | -------------------------- | --------------------------------------------------------------------|
 | `DD_PROFILING_ENABLED`  |                                | Boolean                    | Set to `true` to enable profiler.                                   |
+| `DD_PROFILING_HEAP_ENABLED` |                            | Boolean                    | Set to `true` to enable memory heap profiling. (ddtrace 0.50+)      |
 | `DD_SERVICE`            | `service`                      | String                     | The Datadog [service][4] name.                                      |
 | `DD_ENV`                | `env`                          | String                     | The Datadog [environment][5] name, for example, `production`.       |
 | `DD_VERSION`            | `version`                      | String                     | The version of your application.                                    |
