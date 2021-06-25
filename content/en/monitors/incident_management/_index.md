@@ -153,7 +153,7 @@ In addition to integrating with [Slack][3], Incident Management also integrates 
 
 ## Ready to try it out?
 
-Work through an example workflow in our [Getting Started with Incident Management][12].
+Work through an example workflow in the [Getting Started with Incident Management][12] guide.
 
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
