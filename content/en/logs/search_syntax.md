@@ -63,14 +63,14 @@ To search for logs that contain `user=JaneDoe` in the message attribute use the 
 {{< site-region region="gov,us3" >}}
 To search on a specific attribute, first [add it as a facet][2] and then add `@` to specify you are searching on a facet.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
+For instance, if your attribute name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
 
 `@url:www.datadoghq.com`
 
 
 **Notes**:
 
-1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+1. It is **not** required to define a facet to search on attributes and tags.
 
 2. Searching for a facet value that contains special characters requires escaping or double quotes.
 For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
