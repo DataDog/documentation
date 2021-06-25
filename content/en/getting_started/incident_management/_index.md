@@ -247,7 +247,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
     {{< img src="getting_started/incident_management/generate_postmortem.png" alt="Generate Postmortem" responsive="true" style="width:80%;">}}
 
-7. Click **Generate Postmortem.**
+7. Click **Generate Postmortem**.
 
 8. For the timeline section, select **Marked as Important** so that only the _Important_ events are added to the postmortem.
 
