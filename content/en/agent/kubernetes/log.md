@@ -208,6 +208,7 @@ Each tab in sections below shows a different way to apply integration templates 
 * [Kubernetes pod annotations](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
+* [Helm](?tab=helm#configuration)
 
 ### Configuration
 
@@ -365,6 +366,22 @@ With the key-value store enabled as a template source, the Agent looks for templ
 [1]: /integrations/consul/
 [2]: /agent/guide/agent-commands/
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+You can customize logs collection per integration within `confd` as well. This method mounts the desired configuration onto the agent container.
+  ```yaml
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      init_config:
+      instances:
+        (...)
+      logs:
+        <LOGS_CONFIG>
+  ```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Examples - Datadog Redis integration
@@ -445,6 +462,22 @@ etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+The following configuration defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs:
+  ```yaml
+  confd:
+    redis.yaml: |-
+      ad_identifiers:
+        - redis
+      logs:
+        - source: redis
+        - service: redis
+  ```
+
+Note that the above configuration would collect only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
 
 {{% /tab %}}
 {{< /tabs >}}
