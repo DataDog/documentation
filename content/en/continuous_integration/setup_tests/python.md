@@ -11,6 +11,9 @@ further_reading:
 ---
 ## Compatibility
 
+Supported Test Frameworks:
+* Pytest 3.0+
+
 Supported CI providers:
 * Appveyor
 * Azure Pipelines
