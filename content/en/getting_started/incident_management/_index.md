@@ -271,12 +271,12 @@ To customize Incident Management, go to the [incident settings page][9]. From th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/integrations/slack/
-[2]:/monitors/incident_management/datadog_clipboard
-[3]:/notebooks/#overview
-[4]:/monitors/incident_management/#from-a-graph
-[5]:/monitors/incident_management/#from-a-monitor
-[6]:/api/latest/incidents/#create-an-incident
+[1]: /integrations/slack/
+[2]: /monitors/incident_management/datadog_clipboard
+[3]: /notebooks/#overview
+[4]: /monitors/incident_management/#from-a-graph
+[5]: /monitors/incident_management/#from-a-monitor
+[6]: /api/latest/incidents/#create-an-incident
 [7]: /monitors/incident_management/#status-levels
-[8]:/monitors/incident_management/notification_rules
-[9]:/incidents/settings
+[8]: /monitors/incident_management/notification_rules
+[9]: https://app.datadoghq.com/incidents/settings
