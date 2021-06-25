@@ -97,7 +97,7 @@ The example below demonstrates how to map a user journey from adding an item to 
 1. Navigate to one of the furniture sections on the example website such as **Chairs** and select **Add to cart**.
 2. Click on **Cart** and **Checkout**.
 3. Under **Add New**, select **Assertion** and click **“Test that some text is present on the active page”**.
-4. To confirm the words “Thank you!” appear after checking out, enter "Thank you!" in the **Value** field.
+4. To confirm the words “Thank you!” appear after checking out, enter `Thank you!` in the **Value** field.
 5. Press **Save & Quit**.
 
 To ensure your browser test ends up on the expected page and identifies the expected element, the final step must be an **Assertion**.
@@ -118,7 +118,7 @@ You can wait for your test to generate results in **Test Results** or click **Ru
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failed test result. Review screenshots, core web vitals, potential errors, resources, and traces for each step to diagnose the issue. 
 
-When you look at screenshots leading up to the failed step, you can identify the root cause of the failure more easily. You can also click on resources, errors, and traces that appear next to the duration graph to access **Errors & Warnings**, **Resources**, and **Traces**. 
+When you look at screenshots leading up to the failed step, you can identify the root cause of the failure more easily. Click on resources, errors, and traces that appear next to the duration graph to access **Errors & Warnings**, **Resources**, and **Traces**. 
 
 **Errors and Warnings** display JavaScript and network errors, **Resources** display the resource providing this status, and **Traces** map the entirety of the request in seconds. 
 
@@ -130,7 +130,9 @@ The resource, `https://api.shopist.io/checkout.json`, posted a status and the ta
 
 With Datadog's [APM integration with Synthetic Monitoring][8], you can access the root cause of a failed test run with a trace generated from the test run. 
 
-To link browser test results with APM, whitelist the URLs you want to add to the APM integration headers. For wildcards, use `*`. For example, `https://*.datadoghq.com/*`
+To link browser test results with APM, whitelist the URLs you want to add to the APM integration headers. 
+
+For wildcards, use `*`. For example, `https://*.datadoghq.com/*`
 
 ## Further Reading
 
