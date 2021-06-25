@@ -162,8 +162,8 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [5]: https://app.datadoghq.com/incidents/ddslackapp
 [6]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [7]: /tracing/#2-instrument-your-application
-[8]: https://docs.datadoghq.com/integrations/pagerduty/#overview
-[9]: https://docs.datadoghq.com/integrations/jira/#overview
-[10]: https://docs.datadoghq.com/integrations/webhooks/#overview
-[11]: https://docs.datadoghq.com/integrations/webhooks/#sending-sms-through-twilio
+[8]: /integrations/pagerduty/
+[9]: /integrations/jira/
+[10]: /integrations/webhooks/
+[11]: /integrations/webhooks/#sending-sms-through-twilio
 [12]: /getting_started/incident_management

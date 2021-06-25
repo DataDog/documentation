@@ -225,7 +225,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
     You can create customized templates by clicking on **Manage Templates** > **New Template**. Group templates together using the _Category_ field.
 
-### Resolution / Postmortem
+### Resolution and postmortem
 
 **Scenario:** It's been confirmed that the issue no longer impacts customers and that you've resolved the issue. The team wants a postmortem to look back on what went wrong.
 
@@ -271,12 +271,12 @@ To customize Incident Management, go to the [incident settings page][9]. From th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/integrations/slack/?tab=slackapplicationus#overview
+[1]:/integrations/slack/
 [2]:/monitors/incident_management/datadog_clipboard
 [3]:/notebooks/#overview
 [4]:/monitors/incident_management/#from-a-graph
 [5]:/monitors/incident_management/#from-a-monitor
 [6]:/api/latest/incidents/#create-an-incident
-[7]:/incident_management/#status-levels
+[7]: /monitors/incident_management/#status-levels
 [8]:/monitors/incident_management/notification_rules
 [9]:/incidents/settings
