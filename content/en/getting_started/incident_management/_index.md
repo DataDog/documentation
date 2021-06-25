@@ -40,7 +40,7 @@ This guide walks you through using the Datadog app for declaring an incident, up
 
 This guide describes using the [Datadog Clipboard][2] to declare an incident.
 
-1. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**
+1. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 
    Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
