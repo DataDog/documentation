@@ -160,4 +160,5 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 [16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
 [17]: /ja/help/
 [18]: /ja/logs/live_tail/#overview
-[19]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[19]: https://www.timeanddate.com/worldclock/converter.html
+[20]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

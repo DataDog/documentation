@@ -190,7 +190,7 @@ Or check out the libraries directly:
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-Trying to get started with the application instead? Check out our general [Getting Started docs][7].
+Trying to get started with the application instead? Check out Datadogs general [Getting Started docs][7].
 
 ## Further Reading
 
@@ -201,9 +201,5 @@ Trying to get started with the application instead? Check out our general [Getti
 [3]: https://run.pstmn.io/button.svg
 [4]: /api/v1/using-the-api/
 [5]: https://brew.sh
-<<<<<<< HEAD
 [6]: https://docs.datadoghq.com/developers/community/libraries/
-=======
-[6]: https://docs.datadoghq.com/developers/libraries/
->>>>>>> jorie/metrics/nav-reorg
 [7]: /getting_started/application/

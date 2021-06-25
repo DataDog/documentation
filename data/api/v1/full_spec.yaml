@@ -10613,35 +10613,6 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
-<<<<<<< HEAD
-=======
-    SyntheticsTickInterval:
-      description: The frequency at which to run the Synthetic test (in seconds).
-      enum:
-      - 30
-      - 60
-      - 300
-      - 900
-      - 1800
-      - 3600
-      - 21600
-      - 43200
-      - 86400
-      - 604800
-      format: int64
-      type: integer
-      x-enum-varnames:
-      - THIRTY_SECONDS
-      - MINUTE
-      - FIVE_MINUTES
-      - FIFTEEN_MINUTES
-      - THIRTY_MINUTES
-      - HOUR
-      - SIX_HOURS
-      - TWELVE_HOURS
-      - DAY
-      - WEEK
->>>>>>> jorie/metrics/nav-reorg
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -11673,64 +11644,6 @@ components:
           description: An array of objects regarding usage of billable summary.
           items:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
-          type: array
-      type: object
-    UsageCWSHour:
-      description: Cloud Workload Security usage for a given organization for a given
-        hour.
-      properties:
-        cws_container_count:
-          description: "The total number of Cloud Workload Security container hours\
-            \ from the start of the given hour\u2019s month until the given hour."
-          format: int64
-          type: integer
-        cws_host_count:
-          description: "The total number of Cloud Workload Security host hours from\
-            \ the start of the given hour\u2019s month until the given hour."
-          format: int64
-          type: integer
-        hour:
-          description: The hour for the usage.
-          format: date-time
-          type: string
-      type: object
-    UsageCWSResponse:
-      description: Response containing the Cloud Workload Security usage for each
-        hour for a given organization.
-      properties:
-        usage:
-          description: Get hourly usage for Cloud Workload Security.
-          items:
-            $ref: '#/components/schemas/UsageCWSHour'
-          type: array
-      type: object
-    UsageCloudSecurityPostureManagementHour:
-      description: Cloud Security Posture Management usage for a given organization
-        for a given hour.
-      properties:
-        container_count:
-          description: The total number of Cloud Security Posture Management containers
-            during a given hour.
-          format: int64
-          type: integer
-        host_count:
-          description: The total number of Cloud Security Posture Management hosts
-            during a given hour.
-          format: int64
-          type: integer
-        hour:
-          description: The hour for the usage.
-          format: date-time
-          type: string
-      type: object
-    UsageCloudSecurityPostureManagementResponse:
-      description: The response containing the Cloud Security Posture Management usage
-        for each hour for a given organization.
-      properties:
-        usage:
-          description: Get hourly usage for Cloud Security Posture Management.
-          items:
-            $ref: '#/components/schemas/UsageCloudSecurityPostureManagementHour'
           type: array
       type: object
     UsageCWSHour:
@@ -16760,36 +16673,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-<<<<<<< HEAD
-=======
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
->>>>>>> jorie/metrics/nav-reorg
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
@@ -16826,36 +16709,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-<<<<<<< HEAD
-=======
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
->>>>>>> jorie/metrics/nav-reorg
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
@@ -16896,36 +16749,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-<<<<<<< HEAD
-=======
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
->>>>>>> jorie/metrics/nav-reorg
       summary: Set an AWS tag filter
       tags:
       - AWS Integration

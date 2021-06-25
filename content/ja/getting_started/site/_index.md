@@ -7,10 +7,10 @@ Datadog では、世界中でさまざまなサイトを提供しています。
 
 | サイト    | サイト URL                  | 場所 |
 |---------|---------------------------|----------|
-| US1     | https://app.datadoghq.com | US       |
-| US3     | https://us3.datadoghq.com | US       |
-| EU1     | https://app.datadoghq.eu  | EU       |
-| US1-FED | https://app.ddog-gov.com  | US       |
+| US1     | `https://app.datadoghq.com` | US       |
+| US3     | `https://us3.datadoghq.com` | US       |
+| EU1     | `https://app.datadoghq.eu`  | EU       |
+| US1-FED | `https://app.ddog-gov.com`  | US       |
 
 ## 使用している Datadog サイトを知る方法
 
