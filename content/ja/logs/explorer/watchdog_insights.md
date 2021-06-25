@@ -25,7 +25,7 @@ Watchdog Insights を使用すると、ログを探索するときに受け取�
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
-## ナビゲーション
+## ナビゲーションgit 
 
 Watchdog Insights バナーがログエクスプローラーの結果ページに表示され、現在のクエリに関連するインサイトが表示されます。
 
