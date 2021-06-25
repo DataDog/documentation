@@ -33,19 +33,35 @@ Facets also allow you to manipulate your logs in your [log monitors][4], log wid
 
 {{< site-region region="gov,us3" >}}
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. 
+**Note**: You do not need facets to support [log processing][1], [livetail search][2], [archive][3] forwarding, rehydration, or [metric generation][4] from logs. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
+[1]: /logs/processing/processors/
+[2]: /logs/live_tail/
+[3]: /logs/archives/
+[4]: /logs/logs_to_metrics/
+[5]: /logs/processing/pipelines/
+[6]: /logs/indexes/#indexes-filters
+[7]: /logs/indexes/#exclusion-filters
 
 {{< /site-region >}}
 
 {{< site-region region="us,eu" >}}
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][14], [metric generation][10] from logs, [archive][9] forwarding, or [rehydration][15]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. 
+**Note**: You do not need facets to support [log processing][1], [livetail search][2], [log explorer search][8], [metric generation][4] from logs, [archive][3] forwarding, or [rehydration][9]. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
+[1]: /logs/processing/processors/
+[2]: /logs/live_tail/
+[3]: /logs/archives/
+[4]: /logs/logs_to_metrics/
+[5]: /logs/processing/pipelines/
+[6]: /logs/indexes/#indexes-filters
+[7]: /logs/indexes/#exclusion-filters
+[8]: /logs/processing/attributes_naming_convention/#standard-attribute-list
+[9]: /logs/archives/rehydrating/
 
 {{< /site-region >}}
 
@@ -55,23 +71,22 @@ In all these contexts, autocomplete capabilities rely on existing facets, but an
 
 Use qualitative facets when you need:
 
-- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].
+- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].<br/><br/>
 
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
 
 {{< site-region region="gov,us3" >}}
+- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][1] to scope troubleshooting down to development, staging, or production environments.
 
-- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
-
+[1]: /getting_started/tagging/assigning_tags/
 
 {{< /site-region >}}
-
 {{< site-region region="us,eu" >}}
-
-- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
+- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][1] to scope troubleshooting down to development, staging, or production environments.
 
 **Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
 
+[1]: /getting_started/tagging/assigning_tags/
 
 {{< /site-region >}}
 
@@ -245,19 +260,9 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [4]: /monitors/monitor_types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
-[7]: /logs/processing/processors/
-[8]: /logs/live_tail/
-[9]: /logs/archives/
-[10]: /logs/logs_to_metrics/
-[11]: /logs/processing/pipelines/
-[12]: /logs/indexes/#indexes-filters
-[13]: /logs/indexes/#exclusion-filters
-[14]: /logs/processing/attributes_naming_convention/#standard-attribute-list
-[15]: /logs/archives/rehydrating/
 [16]: /integrations/nginx/
 [17]: /logs/processing/processors/?tab=ui#geoip-parser
 [18]: /integrations/kong/
-[19]: /getting_started/tagging/assigning_tags/
 [20]: /integrations/varnish/
 [21]: /integrations/ansible/
 [22]: /integrations/python/
