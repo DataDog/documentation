@@ -32,27 +32,48 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
 {{< site-region region="gov,us3" >}}
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. 
+
+In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+
+
 {{< /site-region >}}
 
 {{< site-region region="us,eu" >}}
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][14], [metric generation][10] from logs, [archive][9] forwarding, or [rehydration][15]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][14], [metric generation][10] from logs, [archive][9] forwarding, or [rehydration][15]. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. 
+
+In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
+
+
 {{< /site-region >}}
 
 ### Qualitative facets
+
 #### Dimensions
 
 Use qualitative facets when you need:
 
 - To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].
+
+
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
+
 {{< site-region region="gov,us3" >}}
+
 - To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
+
+
 {{< /site-region >}}
+
 {{< site-region region="us,eu" >}}
+
 - To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
 
 **Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
+
+
 {{< /site-region >}}
 
 #### Types
