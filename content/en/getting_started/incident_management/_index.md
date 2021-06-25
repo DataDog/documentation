@@ -38,7 +38,7 @@ This guide walks you through using the Datadog app for declaring an incident, up
 
 **Scenario:** A monitor is alerting on a high number of errors which may be slowing down several services. It's unclear whether customers are being impacted.
 
-For this guide, we are using the [Datadog Clipboard][2] to declare an incident.
+This guide describes using the [Datadog Clipboard][2] to declare an incident.
 
 1. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**
 
