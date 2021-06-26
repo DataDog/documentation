@@ -28,7 +28,7 @@ En tant qu'auteur du code, vous êtes alors responsable de son maintien. Vous ê
 
 Tous les détails, y compris les prérequis, les exemples de code et plus encore, se trouvent dans la documentation relative à la [création d'une intégration][2].
 
-[1]: https://docs.datadoghq.com/fr/developers/write_agent_check/
+[1]: https://docs.datadoghq.com/fr/developers/custom_checks/write_agent_check/
 [2]: /fr/developers/integrations/new_check_howto
 [3]: https://github.com/DataDog/integrations-extras
-[4]: https://docs.datadoghq.com/fr/developers/office_hours/
+[4]: https://docs.datadoghq.com/fr/developers/community/office_hours/

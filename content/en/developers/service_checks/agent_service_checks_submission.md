@@ -2,7 +2,7 @@
 title: "Service Check Submission: Agent Check"
 kind: documentation
 further_reading:
-- link: "/developers/write_agent_check/"
+- link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
   text: "Write an Agent Custom Check"
 ---
@@ -82,7 +82,7 @@ class MyClass(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/write_agent_check/
+[1]: /developers/custom_checks/write_agent_check/
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /agent/guide/agent-commands/#agent-information

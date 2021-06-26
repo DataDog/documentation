@@ -82,7 +82,7 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/
-[2]: /fr/developers/write_agent_check/
+[2]: /fr/developers/custom_checks/write_agent_check/
 [3]: /fr/developers/dogstatsd/
 [4]: /fr/api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom

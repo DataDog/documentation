@@ -65,7 +65,7 @@ Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agréga
 [1]: /fr/developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /fr/tracing/guide/terminology/
 [3]: /fr/agent/guide/network/#open-ports
-[4]: /fr/developers/write_agent_check/
+[4]: /fr/developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
 [6]: /fr/developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}

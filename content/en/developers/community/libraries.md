@@ -4,6 +4,7 @@ kind: documentation
 aliases:
    - /libraries/
    - /developers/faq/monitoring-akka/
+   - /developers/libraries/
 ---
 
 ## API and DogStatsD client libraries

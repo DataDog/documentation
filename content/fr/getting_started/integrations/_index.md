@@ -163,7 +163,7 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 [7]: /fr/api/
 [8]: /fr/integrations/node/
 [9]: /fr/integrations/python/
-[10]: /fr/developers/write_agent_check/
+[10]: /fr/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /fr/developers/integrations/new_check_howto/#developer-toolkit
@@ -177,7 +177,7 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 [21]: /fr/agent/guide/agent-commands/#restart-the-agent
 [22]: /fr/developers/integrations/new_check_howto/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /fr/developers/write_agent_check/#collection-interval
+[24]: /fr/developers/custom_checks/write_agent_check/#collection-interval
 [25]: /fr/getting_started/tagging/
 [26]: /fr/getting_started/agent/#setup
 [27]: /fr/agent/guide/agent-commands/#agent-status-and-information

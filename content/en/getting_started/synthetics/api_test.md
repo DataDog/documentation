@@ -62,7 +62,7 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Your managed locations often include public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select **Private Locations** instead.
 
-For more information, see [Getting Started with Private Locations][6].
+For more information, see [Getting Started with Private Locations][3].
 
 #### Specify test frequency
 
@@ -78,7 +78,7 @@ Retry x time before location is marked as failed
 
 After a location fails, retries immediately run.
 
-**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure the interval with the [Synthetics API][3].
+**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure the interval with the [Synthetics API][4].
 
 To receive alerts when your endpoint goes down for three minutes on two different locations, set up an alerting condition such as:
 
@@ -88,7 +88,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][4] such as Slack, PagerDuty, and webhooks.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][5] such as Slack, PagerDuty, and webhooks.
 
 You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 

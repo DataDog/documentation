@@ -15,7 +15,6 @@ content/en/api/**/*.ts
 # Ignoring all automated content
 # Developers/integrations
 content/en/developers/integrations/*.md
-content/en/developers/amazon_cloudformation.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -55,6 +54,7 @@ data/integrations/
 !content/en/integrations/kubernetes_audit_logs.md
 !content/en/integrations/apigee.md
 !content/en/integrations/snyk.md
+!content/en/integrations/guide/amazon_cloudformation.md
 
 # Ignore the marketplace images that get pulled
 static/images/marketplace

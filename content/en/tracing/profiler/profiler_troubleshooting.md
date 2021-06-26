@@ -50,9 +50,9 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr
 
 If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:
 
-{{< code-block lang="text" filename="example-template.jfp" >}}
+```
 jdk.InitialSystemProperty#enabled=false
-{{< /code-block >}}
+```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
@@ -60,11 +60,11 @@ jdk.InitialSystemProperty#enabled=false
 
 To turn off allocation profiling, disable the following events in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
 
-{{< code-block lang="text" filename="example-template.jfp" >}}
+```
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
 jdk.OldObjectSample#enabled=false
-{{< /code-block >}}
+```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
@@ -72,9 +72,9 @@ jdk.OldObjectSample#enabled=false
 
 To turn off memory leak detection, disable the following event in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
 
-{{< code-block lang="text" filename="example-template.jfp" >}}
+```
 jdk.OldObjectSample#enabled=false
-{{< /code-block >}}
+```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
@@ -112,17 +112,17 @@ Override templates let you specify profiling properties to override. However, th
 
 2. Add your desired overrides to the jfp file. For example, to disable allocation profiling and JVM system properties, your `dd-profiler-overrides.jfp` file would look like the following:
 
-    {{< code-block lang="text" filename="example-template.jfp" >}}
+    ```
     jdk.ObjectAllocationInNewTLAB#enabled=false
     jdk.ObjectAllocationOutsideTLAB#enabled=false
     jdk.InitialSystemProperty#enabled=false
-    {{< /code-block >}}
+    ```
 
 3. When running your application with `dd-java-agent`, your service invocation must point to the override file with `-Ddd.profiling.jfr-template-override-file=</path/to/override.jfp>`, for example:
 
-    {{< code-block lang="text" filename="example-template.jfp" >}}
+    ```
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
-    {{< /code-block >}}
+    ```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
