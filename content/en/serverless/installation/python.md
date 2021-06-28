@@ -297,6 +297,8 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
+Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines or from your local command-line interface. The CLI command automatically adds the Datadog Lambda library and extension to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
+
 ### Install
 
 Install the Datadog CLI with NPM or Yarn:

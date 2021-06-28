@@ -58,7 +58,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
         addExtension: true
         apiKey: # Your Datadog API Key goes here.
     ```
-    Find your Datadog API key from the [API Management page][3]. For additional settings, see the [plugin documentation][1].
+    Find your Datadog API key on the [API Management page][3]. For additional settings, see the [plugin documentation][1].
 
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
