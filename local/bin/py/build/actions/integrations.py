@@ -681,9 +681,10 @@ class Integrations:
             if manifest_json.get("is_public", False):
                 out_name = self.content_integrations_dir + new_file_name
 
-                # if the same integration exists in multiple locations try name md after manifest name entry
+                # if the same integration exists in multiple locations try name md file differently
+                # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:
-                    f_name = manifest_json.get("name", new_file_name)
+                    f_name = integration_id or manifest_json.get("name", "") or new_file_name
                     f_name = f_name if f_name.endswith('.md') else f_name + ".md"
                     out_name = self.content_integrations_dir + f_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
@@ -745,7 +746,8 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = {"kind": "integration"}
+                fm = yaml.safe_dump({"kind": "integration"}, width=150, default_style='"', default_flow_style=False,
+                                    allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
         )
