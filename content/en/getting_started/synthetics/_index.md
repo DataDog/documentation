@@ -52,3 +52,4 @@ If you haven't already, create a [Datadog account][2].
 [3]: /getting_started/synthetics/private_location/
 [4]: /getting_started/synthetics/browser_test/
 [5]: /getting_started/synthetics/api_test/
+[6]: /getting_started/synthetics/api_test/#create-a-multistep-api-test
