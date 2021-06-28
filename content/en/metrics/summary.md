@@ -34,7 +34,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 {{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons"  style="width:75%;">}}
 
-* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics
+* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
 
 {{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles"  style="width:75%;">}}
 
