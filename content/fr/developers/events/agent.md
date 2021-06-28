@@ -2,7 +2,7 @@
 title: Événements avec un check custom d'Agent
 kind: documentation
 further_reading:
-  - link: /developers/custom_checks/write_agent_check/
+  - link: /developers/write_agent_check/
     tag: Documentation
     text: Écrire un check custom d'Agent
 ---
@@ -109,7 +109,7 @@ Voici un exemple d'utilisation d'un check custom d'Agent permettant d'envoyer r�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/developers/custom_checks/write_agent_check/
+[1]: /fr/developers/write_agent_check/
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/agent/guide/agent-commands/#agent-information

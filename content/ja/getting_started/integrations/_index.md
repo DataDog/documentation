@@ -183,7 +183,7 @@ tagging
 [7]: /ja/api/
 [8]: /ja/integrations/node/
 [9]: /ja/integrations/python/
-[10]: /ja/developers/custom_checks/write_agent_check/
+[10]: /ja/developers/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /ja/developers/integrations/new_check_howto/#developer-toolkit
@@ -197,7 +197,7 @@ tagging
 [21]: /ja/agent/guide/agent-commands/#restart-the-agent
 [22]: /ja/developers/integrations/new_check_howto/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /ja/developers/custom_checks/write_agent_check/#collection-interval
+[24]: /ja/developers/write_agent_check/#collection-interval
 [25]: /ja/getting_started/tagging/
 [26]: /ja/getting_started/agent/#setup
 [27]: /ja/agent/guide/agent-commands/#agent-status-and-information

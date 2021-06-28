@@ -128,4 +128,4 @@ sudo systemctl restart prometheus.service alertmanager.service
 [6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: https://docs.datadoghq.com/ja/agent/prometheus/
-[9]: https://docs.datadoghq.com/ja/developers/custom_checks/prometheus/
+[9]: https://docs.datadoghq.com/ja/developers/prometheus/

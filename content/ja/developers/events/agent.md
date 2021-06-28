@@ -2,7 +2,7 @@
 title: カスタム Agent チェックを使用したイベント
 kind: documentation
 further_reading:
-  - link: /developers/custom_checks/write_agent_check/
+  - link: /developers/write_agent_check/
     tag: ドキュメント
     text: カスタム Agent チェックの書き方
 ---
@@ -109,7 +109,7 @@ self.event(
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/developers/custom_checks/write_agent_check/
+[1]: /ja/developers/write_agent_check/
 [2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
 [4]: /ja/agent/guide/agent-commands/#agent-information

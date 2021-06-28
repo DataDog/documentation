@@ -50,7 +50,7 @@ Datadog には、作成したモニターへの変更を通知するオプショ
 
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: /ja/api/v1/monitors/
-[3]: /ja/developers/community/libraries/#managing-monitors
+[3]: /ja/developers/libraries/#managing-monitors
 [4]: /ja/monitors/monitor_types/host/
 [5]: /ja/monitors/monitor_types/metric/
 [6]: /ja/monitors/monitor_types/anomaly/

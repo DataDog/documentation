@@ -46,6 +46,6 @@ Agent の構成ファイルの「histogram_percentiles」行を次のように�
 
 [1]: /ja/developers/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[3]: /ja/developers/community/libraries/
+[3]: /ja/developers/libraries/
 [4]: /ja/developers/metrics/histograms/
 [5]: /ja/developers/faq/characteristics-of-datadog-histograms/

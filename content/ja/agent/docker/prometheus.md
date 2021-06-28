@@ -190,7 +190,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/custom_checks/prometheus/
+[5]: /ja/developers/prometheus/
 [6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [7]: https://app.datadoghq.com/metric/summary
 [8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

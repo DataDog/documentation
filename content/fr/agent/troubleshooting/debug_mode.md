@@ -60,6 +60,8 @@ Pour activer le mode debugging pour l'Agent de conteneur, utilisez `DD_LOG_LEVEL
 agent config set log_level debug
 ```
 
+Si l'Agent de trace se trouve dans un conteneur dédié, contrairement au conteneur de l'Agent, vous ne pouvez **pas** modifier le niveau de log du conteneur de trace-agent. Lorsque vous définissez la variable `dd_log_level` sur `debug`, il est nécessaire de redéployer le conteneur de trace-agent.
+
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

@@ -310,7 +310,7 @@ La commande `status` de l'Agent devrait indiquer que l'instance de check est en 
 [2]: /fr/agent/cluster_agent/
 [3]: /fr/agent/cluster_agent/setup/
 [4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[5]: /fr/developers/custom_checks/write_agent_check/
+[5]: /fr/developers/write_agent_check/
 [6]: /fr/integrations/mysql/
 [7]: /fr/agent/faq/template_variables/
 [8]: /fr/getting_started/tagging/unified_service_tagging
