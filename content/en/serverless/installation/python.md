@@ -369,7 +369,7 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-<div class="alert alert-info">If you are not using a serverless development tool that we support, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="/?tab=datadogcli">Datadog CLI</a>.</div>
+<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.</div>
 
 ### Install the Datadog Lambda library
 
