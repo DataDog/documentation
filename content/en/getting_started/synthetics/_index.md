@@ -41,7 +41,7 @@ If you haven't already, create a [Datadog account][2].
 - [Create a private location][3] (as needed)
 - [Create a browser test][4]
 - [Create an API test][5]
-- [Create a multistep API test][5]
+- [Create a multistep API test][6]
 
 ## Further Reading
 
