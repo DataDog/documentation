@@ -42,7 +42,7 @@ The example below demonstrates the creation of an API test to ensure that your w
     - You can set environment tags such as `env:prod` and `app:shopist` and additional tags on your test. Tags allow you to stay organized and quickly find test you're interested in on the homepage.
     - Click **Test URL**.
 
-{{< img src="getting_started/synthetics/api-test-config-2.png" alt="API test configuration"  style="width:60%;">}}
+{{< img src="getting_started/synthetics/api-test-config-2.jpg" alt="API test configuration"  style="width:60%;">}}
 
 #### Define assertions
 
