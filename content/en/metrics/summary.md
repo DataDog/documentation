@@ -38,7 +38,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 {{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles"  style="width:75%;">}}
 
-* **Configure Tags**: Configure tags on multiple distribution metrics (Metrics without Limits* beta users will be able to use this functionality on counts,gauges,rates as well)
+* **Configure Tags**: Configure tags on multiple distribution metrics (Metrics without Limits* beta users will be able to use this functionality on counts, gauges, and rates as well).
 
 {{< img src="metrics/summary/bulkconfig.gif" alt="Bulk Metric Tag Configuration"  style="width:75%;">}} 
 
