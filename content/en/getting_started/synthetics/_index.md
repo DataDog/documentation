@@ -28,7 +28,7 @@ There are three ways to monitor your applications: API tests to monitor the upti
 
 {{< img src="synthetics/synthetics_home.png" alt="Synthetic Monitoring home page" >}}
 
-With Synthetic Monitoring data, you can observe your systems' perfomance and user experience. The [Synthetic Monitoring][1] homepage displays real-time status updates, response times, and uptimes along with your metrics, logs, and traces.
+With Synthetic Monitoring data, observe your systems' performance and user experience. The [Synthetic Monitoring][1] homepage displays real-time status updates, response times, and uptimes along with your metrics, logs, and traces.
 
 To set up your first Synthetic test with Datadog, follow the sections below to learn how to create an API test, multistep API test, or browser test. 
 
