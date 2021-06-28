@@ -224,7 +224,7 @@ datadog:
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/custom_checks/prometheus/
+[5]: /ja/developers/prometheus/
 [6]: /ja/integrations/guide/prometheus-metrics
 [7]: /ja/agent/kubernetes/#installation
 [8]: /ja/getting_started/tagging/

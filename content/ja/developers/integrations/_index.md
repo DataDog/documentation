@@ -28,7 +28,7 @@ aliases:
 
 前提条件やサンプルコードなどの詳細については[新しいインテグレーションの設定][2]ドキュメントを参照してください。
 
-[1]: https://docs.datadoghq.com/ja/developers/custom_checks/write_agent_check/
+[1]: https://docs.datadoghq.com/ja/developers/write_agent_check/
 [2]: /ja/developers/integrations/new_check_howto
 [3]: https://github.com/DataDog/integrations-extras
-[4]: https://docs.datadoghq.com/ja/developers/community/office_hours/
+[4]: https://docs.datadoghq.com/ja/developers/office_hours/

@@ -8,7 +8,7 @@ further_reading:
   - link: /developers/dogstatsd/
     tag: Documentation
     text: En savoir plus sur DogStatsD
-  - link: /developers/community/libraries/
+  - link: /developers/libraries/
     tag: Documentation
     text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
 ---

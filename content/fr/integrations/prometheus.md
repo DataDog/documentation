@@ -128,4 +128,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [6]: https://docs.datadoghq.com/fr/help/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: https://docs.datadoghq.com/fr/agent/prometheus/
-[9]: https://docs.datadoghq.com/fr/developers/custom_checks/prometheus/
+[9]: https://docs.datadoghq.com/fr/developers/prometheus/

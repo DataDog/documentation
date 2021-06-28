@@ -21,6 +21,7 @@ kind: インテグレーション
 maintainer: '@platinummonkey'
 manifest_version: 1.0.0
 metric_prefix: upsc.
+metric_to_check: upsc.battery.charge
 name: upsc
 public_title: Datadog-UPSC インテグレーション
 short_description: UPS バッテリーの UPSC 統計コレクター

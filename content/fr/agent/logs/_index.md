@@ -72,8 +72,6 @@ logs:
     source: "<SOURCE>"
 ```
 
-**Remarque** : si vous lisez les logs d'un fichier avec l'Agent v6 ou v7 sous **Windows**, vérifiez que ces fichiers sont encodés au format UTF8.
-
 [1]: /fr/agent/guide/agent-configuration-files/
 {{% /tab %}}
 

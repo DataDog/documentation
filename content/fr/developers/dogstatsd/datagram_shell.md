@@ -210,7 +210,7 @@ Pour envoyer des métriques, des événements ou des checks de service sur des e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/community/libraries/#api-and-dogstatsd-client-libraries
+[1]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /fr/developers/dogstatsd/
 [4]: /fr/agent/kubernetes/apm/

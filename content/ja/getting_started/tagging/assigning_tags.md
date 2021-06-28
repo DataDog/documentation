@@ -406,5 +406,5 @@ def algorithm_two():
 [6]: /ja/agent/docker/?tab=standard#tagging
 [7]: /ja/tracing/setup/
 [8]: /ja/developers/dogstatsd/
-[9]: /ja/developers/community/libraries/
+[9]: /ja/developers/libraries/
 [10]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key

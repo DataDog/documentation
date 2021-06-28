@@ -13,9 +13,9 @@ further_reading:
 Un événement représente n'importe quelle activité pouvant s'avérer pertinente pour les équipes d'ingénierie (dev, ops et responsables de la sécurité).
 
 {{< whatsnext desc="Il existe plusieurs façons d'envoyer des événements à Datadog :">}}
-    {{< nextlink href="/events/guides/agent" >}}Check custom d'Agent{{< /nextlink >}}
-    {{< nextlink href="/events/guides/dogstatsd" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/events/guides/email" >}}E-mail{{< /nextlink >}}
+    {{< nextlink href="/developers/events/agent" >}}Check custom d'Agent{{< /nextlink >}}
+    {{< nextlink href="/developers/events/dogstatsd" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/developers/events/email" >}}E-mail{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}API Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
