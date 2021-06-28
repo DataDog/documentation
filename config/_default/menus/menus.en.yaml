@@ -2422,31 +2422,6 @@ main:
     parent: dev_tools
     identifier: marketplace
     weight: 4
-  - name: Events
-    url: developers/events/
-    parent: dev_tools
-    identifier: dev_tools_events
-    weight: 6
-  - name: Custom Agent Check
-    url: developers/events/agent/
-    parent: dev_tools_events
-    identifier: dev_tools_events_agent
-    weight: 601
-  - name: DogStatsD
-    url: developers/events/dogstatsd/
-    parent: dev_tools_events
-    identifier: dev_tools_events_dogstatsd
-    weight: 602
-  - name: Email
-    url: developers/events/email/
-    parent: dev_tools_events
-    identifier: dev_tools_events_mail
-    weight: 603
-  - name: API
-    url: api/v1/events/#post-an-event
-    parent: dev_tools_events
-    identifier: dev_tools_events_api
-    weight: 604
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
@@ -2467,29 +2442,24 @@ main:
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
     weight: 703
-  - name: Libraries
-    url: developers/libraries/
+  - name: Community
+    url: developers/community/
     parent: dev_tools
+    identifier: dev_community
     weight: 8
+  - name: Libraries
+    url: developers/community/libraries/
+    parent: dev_community
+    weight: 801
   - name: Community Office Hours
-    url: developers/office_hours/
-    parent: dev_tools
-    weight: 9
+    url: developers/community/office_hours/
+    parent: dev_community
+    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
     weight: 10
-  - name: Marketplace
-    url: developers/marketplace/
-    parent: dev_tools
-    identifier: marketplace
-    weight: 11
-  - name: Amazon CloudFormation
-    url: developers/amazon_cloudformation/
-    parent: dev_tools
-    identifier: dev_tools_aws_cloudformation
-    weight: 12
   - name: API
     url: api/
     pre: nav_api
