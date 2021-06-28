@@ -16772,7 +16772,7 @@ paths:
 
           For more information about your AWS account Role name,
 
-          see the [Datadog AWS integration configuration info](https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation).'
+          see the [Datadog AWS integration configuration info](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).'
         required: true
       responses:
         '200':
@@ -19203,7 +19203,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -19253,7 +19253,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48)
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -25018,11 +25018,12 @@ tags:
     \ permission."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
-    a metric or check that you care about,
+    a metric or check that you care about and
 
-    notifying your team when some defined threshold is exceeded.
+    notifies your team when a defined threshold has exceeded.
 
-    Refer to the Creating Monitors page for more information on creating monitors.'
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
