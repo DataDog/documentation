@@ -320,6 +320,12 @@ Tracing:
     - name: scala-opentracing
       link: https://github.com/Colisweb/scala-opentracing
       authors: Colisweb
+  - Finagle:
+    - name: datadog-finagle
+      link: https://github.com/DataDog/datadog-finagle
+      official: true
+      authors: Datadog
+      notes: Reports Finagle traces to Datadog.
 Serverless:
   - Lambda:
     - name: datadog-lambda-python
