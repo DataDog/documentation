@@ -25,7 +25,6 @@ is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
-metric_prefix: snmp.
 metric_to_check:
   - snmp.jnxDcuStatsPackets
   - snmp.jnxVirtualChassisPortInPkts
@@ -47,7 +46,7 @@ Juniper Networks では、ルーター、スイッチ、ネットワーク管理
 - Juniper MX ルーター
 - Juniper SRX ファイアウォール
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
+監視対象となるメトリクスの詳細については、[収集される NDM データ][1]のセクションを参照してください。
 
 ## セットアップ
 
@@ -57,7 +56,7 @@ SNMP インテグレーションをインストールして構成するには、
 
 ### メトリクス
 
-監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
+監視対象となるメトリクスの詳細については、[収集される NDM データ][1]のセクションを参照してください。
 
 ### サービスのチェック
 
@@ -72,7 +71,9 @@ Juniper には、イベントは含まれません。
 お役に立つドキュメント、リンクや記事:
 
 - [Datadog での SNMP モニタリング][3]
+- [Datadog を使用した Juniper ネットワークデバイスの監視][4]
 
-[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data/
-[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
+[1]: https://docs.datadoghq.com/ja/network_monitoring/devices/data/
+[2]: https://docs.datadoghq.com/ja/network_monitoring/devices/setup/
 [3]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[4]: https://www.datadoghq.com/blog/monitor-juniper-network-devices-with-datadog/

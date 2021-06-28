@@ -36,9 +36,7 @@ If you haven't already, create a [Datadog account][1]. Install the Agent on a ho
 
 ## Plan
 
-Determine the purpose of the dashboard you’re creating. A dashboard can help you and your teammates focus on the right work. A team dashboard reminds you what’s high priority, what needs attention now, and what you’re succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need that they often have to dig for. SLO and SLI details make for an excellent team dashboard.
-
-Also, determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
+Determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
 
 A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good _executive dashboard_ can show that you are working on the most important things, how much a service is costing you, or whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to drill down into the answer.
 

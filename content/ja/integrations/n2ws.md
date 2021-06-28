@@ -62,7 +62,7 @@ N2WS Backup and Recovery インスタンスは、Datadog モニタリングサ�
         [external_monitoring]
         enabled=True
         ```
-    - `service apache2 restart` を実行します。
+    - `service apache2 restart` を実行します
 
 3.  ##### N2WS インスタンスに Datadog Agent をインストールします。
     Datadog にログインし、Integrations -> Agent -> Ubuntu に移動します

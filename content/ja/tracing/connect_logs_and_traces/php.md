@@ -15,13 +15,16 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
-## トレースおよびスパン ID を自動的に挿入します
+## 自動挿入
 
 PHP にロギングを実装するさまざまな方法があり<span class="x x-first x-last">、</span>PHP の組み込みエラーロギング API が完全に回避されている場合、Datadog PHP トレースライブラリは、トレースとスパン <span class="x x-first x-last">ID</span> をログに自動的に挿入できることが確実ではありません。
 PHP ログとトレースを手動で接続する方法については、以下のセクションをご覧ください。
 
-## トレースおよびスパン ID を手動で挿入する
+## 手動挿入
 
 <div class="alert alert-warning">
 注: 関数 <code>\DDTrace\trace_id()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a> で導入されています。

@@ -114,7 +114,7 @@ More information and additional parameters can be found in the [macro documentat
 
 The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
-### Install the Datadog CDK Construct Library
+### Install the Datadog CDK constructs library
 
 Run the following command in your CDK project:
 

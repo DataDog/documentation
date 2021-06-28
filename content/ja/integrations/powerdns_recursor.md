@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    powerdns: assets/dashboards/powerdns_dashboard.json
   logs:
     source: powerdns
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    powerdns_processes: assets/saved_views/powerdns_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web

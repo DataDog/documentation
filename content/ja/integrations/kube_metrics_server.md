@@ -98,9 +98,8 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 ### サービスのチェック
 
-`kube_metrics_server.prometheus.health`:
-
-Agent がメトリクスのエンドポイントに到達できない場合は、CRITICAL を返します。
+**kube_metrics_server.prometheus.health**:<br>
+Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
 
 ### イベント
 

@@ -49,7 +49,7 @@ Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to star
 To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
 
 1. [Install Helm][1].
-2. Download the [Datadog `values.yaml` configuration file][2].
+2.  Using the [Datadog `values.yaml` configuration file][2] as a reference, create your `values.yaml`. Datadog recommends that your `values.yaml` only contain values that need to be overridden, as it allows a smooth experience when upgrading chart versions.
 3. If this is a fresh install, add the Helm Datadog repo:
     ```bash
     helm repo add datadog https://helm.datadoghq.com
@@ -289,7 +289,7 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
-   kubectl apply -f agent_spec=/path/to/your/datadog-agent.yaml
+   kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 
 ## Cleanup
@@ -460,7 +460,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 Additional examples are available on the [Container Discover Management][13] page.
 
-**Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
+**Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted.
 
 ### Misc
 

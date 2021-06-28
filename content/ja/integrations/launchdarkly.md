@@ -21,6 +21,7 @@
 "maintainer": "support@launchdarkly"
 "manifest_version": "1.0.1"
 "metric_prefix": "launchdarkly_relay."
+"metric_to_check": "launchdarkly_relay.connections_env_platformCategory_userAgent"
 "name": "launchdarkly"
 "public_title": "Datadog-LaunchDarkly インテグレーション"
 "short_description": "Datadog の LaunchDarkly の変更を監視する"

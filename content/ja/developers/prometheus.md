@@ -1,5 +1,5 @@
 ---
-title: カスタム OpenMetrics チェックの書き方
+title: Custom OpenMetrics Check
 kind: documentation
 further_reading:
   - link: /agent/prometheus/
@@ -223,23 +223,18 @@ Prometheus および OpenMetrics の基本インテグレーションに関す�
 
 追加のコンフィギュレーションオプションのデフォルト値を含めることで、OpenMetrics チェックをさらに改良できます。
 
-### `ignore_metrics`
+`ignore_metrics`
+: メトリクスの一部は重複していたり、カーディナリティが非常に高くなるという理由で無視されます。このリストに含まれるメトリクスは、ログに `Unable to handle metric` というデバッグ行を残すことなく、暗黙にスキップされます。
 
-メトリクスの一部は重複していたり、カーディナリティが非常に高くなるという理由で無視されます。このリストに含まれるメトリクスは、ログに `Unable to handle metric` というデバッグ行を残すことなく、暗黙にスキップされます。
+`labels_mapper`
+: `labels_mapper` 辞書が提供されている場合は、ゲージの送信時に、`labels_mapper` 内のメトリクスラベルに対応する値がタグ名として使用されます。
 
-### `labels_mapper`
+`exclude_labels`
+: `exclude_labels` は、除外するラベルの配列です。除外されるラベルは、メトリクスの送信時にタグとして追加されません。
 
-`labels_mapper` 辞書が提供されている場合は、ゲージの送信時に、`labels_mapper` 内のメトリクスラベルに対応する値がタグ名として使用されます。
-
-### `exclude_labels`
-
-`exclude_labels` は、除外するラベルの配列です。除外されるラベルは、メトリクスの送信時にタグとして追加されません。
-
-### `type_overrides`
-
-`type_overrides` は、Prometheus または OpenMetrics のメトリクス名をキーとし、メトリクスタイプ (文字列の名前) を値とする辞書です。これが、ペイロードにリストされているタイプの代わりに使用されます。タイプが指定されていないメトリクスにタイプを適用するために使用できます。
+`type_overrides`
+: `type_overrides` は、Prometheus または OpenMetrics のメトリクス名をキーとし、メトリクスタイプ (文字列の名前) を値とする辞書です。これが、ペイロードにリストされているタイプの代わりに使用されます。タイプが指定されていないメトリクスにタイプを適用するために使用できます。
 使用可能なタイプは `counter`、`gauge`、`summary`、`untyped`、`histogram` です。
-
 **注**: この値は基本クラスでは空ですが、最終的なチェックではカスタムメトリクスとしてカウントされないように、オーバーロード/ハードコードする必要があります。
 
 ## その他の参考資料

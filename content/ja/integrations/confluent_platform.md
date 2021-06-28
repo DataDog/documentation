@@ -50,7 +50,7 @@ supported_os:
 - Connect
 - Replicator
 - Schema Registry
-- SQL Server
+- ksqlDB サーバー
 - Streams
 - REST Proxy
 

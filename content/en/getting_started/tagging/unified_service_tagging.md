@@ -498,7 +498,7 @@ Ensure the `DdFetchLambdaTags` option is set to `true` on the CloudFormation sta
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /getting_started/tagging/#defining-tags
+[1]: /getting_started/tagging/
 [2]: /getting_started/agent
 [3]: /tracing/setup
 [4]: /getting_started/tagging/

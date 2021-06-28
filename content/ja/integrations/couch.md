@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    couchdb: assets/dashboards/overview.json
   logs:
     source: couchdb
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    couchdb_processes: assets/saved_views/couchdb_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store

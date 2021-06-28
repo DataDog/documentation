@@ -46,7 +46,7 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 {{% /tab %}}
 {{< /tabs >}}
 
-注: [`datadog.yaml` ファイルの完全なサンプルは、`datadog-agent` Github リポジトリにあります][1]。
+**注**: [`datadog.yaml` ファイルの完全なサンプルは、`datadog-agent` Github リポジトリにあります][1]。
 
 ## Agent の構成ディレクトリ
 
@@ -72,7 +72,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 
 ### Agent 6 のチェック構成ファイル
 
-各 Agent チェックのコンフィギュレーションファイルの例は、対応する `<CHECK_NAME>.d/` フォルダーの `conf.yaml.example` ファイルにあります。関連するチェックを有効にするには、このファイル名を `conf.yaml` に変更します。Agent は、フォルダー `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/` に含まれる有効な YAML ファイルを読み込むため、複雑なコンフィギュレーションは複数ファイルに分割することができます。たとえば、`http_check` のコンフィギュレーションは次のようになります。
+各 Agent チェックのコンフィギュレーションファイルの例は、対応する `<CHECK_NAME>.d/` フォルダーの `conf.yaml.example` ファイルにあります。関連するチェックを有効にするには、このファイル名を `conf.yaml` に変更します。**注**: Agent は、フォルダー `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/` に含まれる有効な YAML ファイルを読み込むため、複雑なコンフィギュレーションは複数ファイルに分割することができます。たとえば、`http_check` のコンフィギュレーションは次のようになります。
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
@@ -90,9 +90,9 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 └── conf.yaml.example
 ```
 
-**注**: ログ収集の場合、Datadog に重複ログが送信されないよう Agent は同じログソースを送信先とする複数の YAML ファイルを許可しません。1 つ以上の YAML ファイルが同じログソースを送信先としている場合、Agent はファイルをアルファベット順に処理し、一番上のファイルを使用します。
+ログ収集の場合、Datadog に重複ログが送信されないよう Agent は同じログソースを送信先とする複数の YAML ファイルを許可しません。1 つ以上の YAML ファイルが同じログソースを送信先としている場合、Agent はファイルをアルファベット順に処理し、一番上のファイルを使用します。
 
-下位互換性を維持するため、Agent では依然として `/etc/datadog-agent/conf.d/<名前_チェック>.yaml` 形式の構成ファイルを処理しますが、新しいレイアウトへの移行を強くおすすめします。
+下位互換性を維持するため、Agent では依然として `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml` 形式の構成ファイルを処理しますが、新しいレイアウトへの移行を強くおすすめします。
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

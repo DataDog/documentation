@@ -4883,6 +4883,11 @@ components:
             $ref: '#/components/schemas/Point'
           readOnly: true
           type: array
+        query_index:
+          description: The index of the series' query within the request.
+          format: int64
+          readOnly: true
+          type: integer
         scope:
           description: Metric scope, comma separated list of tags.
           example: host:foo,env:test
@@ -4893,6 +4898,13 @@ components:
           format: int64
           readOnly: true
           type: integer
+        tag_set:
+          description: Unique tags identifying this series.
+          items:
+            description: Unique tags identifying this series.
+            type: string
+          readOnly: true
+          type: array
         unit:
           description: 'Detailed information about the metric unit.
 
@@ -4960,6 +4972,7 @@ components:
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
+      nullable: true
       properties:
         family:
           description: Unit family, allows for conversion between units of the same
@@ -7279,7 +7292,14 @@ components:
 
                 If a metric query only has one unit object, the second array element
                 is null.'
-              example: '[{"family":"bytes","scale_factor":1.0,"name":"byte","short_name":"B","plural":"bytes","id":2},null]'
+              example:
+              - family: bytes
+                id: 2
+                name: byte
+                plural: bytes
+                scale_factor: 1.0
+                short_name: B
+              - null
               items:
                 $ref: '#/components/schemas/SLOHistoryMetricsSeriesMetadataUnit'
               nullable: true
@@ -9136,7 +9156,6 @@ components:
               type: string
             targetValue:
               description: The path target value to compare to.
-              type: object
           type: object
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
@@ -10468,7 +10487,11 @@ components:
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
-          $ref: '#/components/schemas/SyntheticsTickInterval'
+          description: The frequency at which to run the Synthetic test (in seconds).
+          format: int64
+          maximum: 604800
+          minimum: 30
+          type: integer
       type: object
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
@@ -10590,32 +10613,6 @@ components:
           description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
-    SyntheticsTickInterval:
-      description: The frequency at which to run the Synthetic test (in seconds).
-      enum:
-      - 30
-      - 60
-      - 300
-      - 900
-      - 1800
-      - 3600
-      - 21600
-      - 43200
-      - 86400
-      - 604800
-      format: int64
-      type: integer
-      x-enum-varnames:
-      - THIRTY_SECONDS
-      - MINUTE
-      - FIVE_MINUTES
-      - FIFTEEN_MINUTES
-      - THIRTY_MINUTES
-      - HOUR
-      - SIX_HOURS
-      - TWELVE_HOURS
-      - DAY
-      - WEEK
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -11126,6 +11123,87 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
+      type: object
+    TreeMapColorBy:
+      default: user
+      description: The attribute used to determine color in the widget.
+      enum:
+      - user
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+    TreeMapGroupBy:
+      description: The attribute used to group elements in the widget.
+      enum:
+      - user
+      - family
+      - process
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - FAMILY
+      - PROCESS
+    TreeMapSizeBy:
+      description: The attribute used to determine size in the widget.
+      enum:
+      - pct_cpu
+      - pct_mem
+      example: pct_cpu
+      type: string
+      x-enum-varnames:
+      - PCT_CPU
+      - PCT_MEM
+    TreeMapWidgetDefinition:
+      description: "The treemap visualization found on the Host Dashboards comes from\
+        \ the output of `ps auxww`. This is not continuously run on your hosts. Instead,\
+        \ it\u2019s run once on Agent start/restart. The treemap is only supported\
+        \ for process data on a single host dashboard \u2014 this may not be reused\
+        \ in other dashboards or for other metrics."
+      properties:
+        color_by:
+          $ref: '#/components/schemas/TreeMapColorBy'
+        group_by:
+          $ref: '#/components/schemas/TreeMapGroupBy'
+        requests:
+          description: List of top list widget requests.
+          example:
+          - q: system.load.1
+          items:
+            $ref: '#/components/schemas/TreeMapWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        size_by:
+          $ref: '#/components/schemas/TreeMapSizeBy'
+        title:
+          description: Title of your widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/TreeMapWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      - size_by
+      - color_by
+      - group_by
+      type: object
+    TreeMapWidgetDefinitionType:
+      default: treemap
+      description: Type of the treemap widget.
+      enum:
+      - treemap
+      example: treemap
+      type: string
+      x-enum-varnames:
+      - TREEMAP
+    TreeMapWidgetRequest:
+      description: An updated treemap widget.
+      properties:
+        q:
+          description: The widget metrics query.
+          type: string
       type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
@@ -13627,6 +13705,7 @@ components:
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
@@ -16676,33 +16755,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Delete a tag filtering entry
       tags:
       - AWS Integration
@@ -16739,33 +16791,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
@@ -16806,33 +16831,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for our customers.
-            enum:
-            - datadoghq.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Set an AWS tag filter
       tags:
       - AWS Integration
@@ -16856,7 +16854,7 @@ paths:
 
           For more information about your AWS account Role name,
 
-          see the [Datadog AWS integration configuration info](https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation).'
+          see the [Datadog AWS integration configuration info](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).'
         required: true
       responses:
         '200':
@@ -19287,7 +19285,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -19337,7 +19335,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48)
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -21260,10 +21258,10 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"\
-              {{ slo.data[0].id }}\",\n      \"start\": {{ now_ts }},\n      \"end\"\
-              : {{ hour_later_ts }},\n      \"category\": \"Other\",\n      \"timezone\"\
-              : \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n  \
-              \   \"type\": \"correction\"\n  }\n}"
+              {{ slo.data[0].id }}\",\n      \"start\": {{ timestamp(\"now\") }},\n\
+              \      \"end\": {{ timestamp(\"now + 1h\") }},\n      \"category\":\
+              \ \"Other\",\n      \"timezone\": \"UTC\",\n      \"description\": \"\
+              Test Correction\"\n     },\n     \"type\": \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
       x-undo:
@@ -21900,8 +21898,10 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 1
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
         type: unsafe
   /api/v1/synthetics/tests/api/{public_id}:
     get:
@@ -25100,11 +25100,12 @@ tags:
     \ permission."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
-    a metric or check that you care about,
+    a metric or check that you care about and
 
-    notifying your team when some defined threshold is exceeded.
+    notifies your team when a defined threshold has exceeded.
 
-    Refer to the Creating Monitors page for more information on creating monitors.'
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/

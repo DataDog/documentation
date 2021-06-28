@@ -16,4 +16,4 @@ disable_sidebar: true
 
 [1]: /ja/tracing/send_traces/
 [2]: /ja/tracing/visualization/#trace
-[3]: /ja/developers/libraries/#apm-tracing-client-libraries
+[3]: /ja/developers/community/libraries/#apm-tracing-client-libraries

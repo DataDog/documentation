@@ -16,4 +16,4 @@ Pour instrumenter une application écrite dans un langage qui ne prend pas encor
 
 [1]: /fr/tracing/send_traces/
 [2]: /fr/tracing/visualization/#trace
-[3]: /fr/developers/libraries/#apm-tracing-client-libraries
+[3]: /fr/developers/community/libraries/#apm-tracing-client-libraries

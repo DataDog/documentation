@@ -37,6 +37,11 @@ Classic:
       dogstatsd: true
       notes: A DogStatsD client for Clojure.
       authors: Unbounce
+  - CloudFormation:
+    - name: cdk-datadog-resources
+      link: https://github.com/NomadBlacky/cdk-datadog-resources
+      notes: An AWS CDK construct library that wraps the DataDog/datadog-cloudformation-resources.
+      author: Takumi Kadowaki
   - Crystal:
     - name: statsd.cr
       link: https://github.com/miketheman/statsd.cr

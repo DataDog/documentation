@@ -27,12 +27,13 @@ Datadog は、AWS CloudTrail からお使いの AWS Lambda 関数におけるコ
 cloudtrail:LookupEvents
 ```
 
-アクセス許可を既に追加していても AWS Lambda 関数のイベントが表示されない場合は、[サポートチーム][3]までお問い合わせの上、Deployment Tracking にオプトインしてください。
+アクセス許可を既に追加していても AWS Lambda 関数のイベントが表示されない場合は、AWS Lambda インテグレーションタイルを使用してデプロイ追跡を有効にします。
+
+{{< img src="serverless/lambda_integration_settings.png" alt="Lambda インテグレーション設定"  style="width:100%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/functions
 [2]: /ja/integrations/amazon_web_services/#setup

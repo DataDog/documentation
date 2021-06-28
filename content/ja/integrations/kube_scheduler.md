@@ -42,6 +42,8 @@ supported_os:
 
 このチェックは、Kubernetes Control Plane の一部である [Kubernetes Scheduler][1] を監視します。
 
+**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
+
 ## セットアップ
 
 ### インストール

@@ -7,7 +7,8 @@ assets:
   logs:
     source: vault
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     service_name_overview: assets/saved_views/service_name_overview.json
@@ -57,7 +58,7 @@ Vault チェックは [Datadog Agent][2] パッケージに含まれています
 
 1. [Vault コンフィギュレーションで Prometheus メトリクス][3]が有効になっていることを確認します。
 
-2. Vault チェックが正しく機能するには、Vault メトリクスへの未認証アクセスを有効にするか、Vault クライアントトークンを指定する必要があります。
+2. Vault チェックが正しく機能するには、Vault メトリクス (Vault 1.3.0+) への未認証アクセスを有効にするか、Vault クライアントトークンを指定する必要があります。
 
    **未認証アクセスを有効にするには**、Vault の [`unauthenticated_metrics_access`][4] コンフィギュレーションを `true` に設定します。これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
 
@@ -268,6 +269,9 @@ Vault がまだ初期化されていない場合は、`CRITICAL` を返します
 お役に立つドキュメント、リンクや記事:
 
 - [Datadog を使用した HashiCorp Vault の監視][8]
+- [HashiCorp Vault のメトリクスおよびログの監視][9]
+- [HashiCorp Vault 監視用ツール][10]
+- [Datadog を使用した HashiCorp Vault の監視方法][11]
 
 
 [1]: https://www.vaultproject.io
@@ -278,3 +282,6 @@ Vault がまだ初期化されていない場合は、`CRITICAL` を返します
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.datadoghq.com/ja/help/
 [8]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[9]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
+[10]: https://www.datadoghq.com/blog/vault-monitoring-tools
+[11]: https://www.datadoghq.com/blog/vault-monitoring-with-datadog

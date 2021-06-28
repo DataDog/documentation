@@ -13,7 +13,7 @@ further_reading:
   - link: /developers/dogstatsd/
     tag: Documentation
     text: DogStatsD について
-  - link: /developers/libraries/
+  - link: /developers/community/libraries/
     tag: Documentation
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
 ---
@@ -80,4 +80,4 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 [9]: /ja/developers/metrics/types/?tab=rate#metric-types
 [10]: /ja/developers/metrics/types/?tab=count#metric-types
 [11]: /ja/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /ja/developers/libraries/
+[12]: /ja/developers/community/libraries/
