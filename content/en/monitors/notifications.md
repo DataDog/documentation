@@ -171,7 +171,7 @@ Refer to the [list of tz database time zones][14], particularly the TZ database 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
 For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message. 
 
-<div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag of the alerted monitor, use a multi-alert monitor instead.</div>
+<div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.</div>
 
 **Notes**: Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
