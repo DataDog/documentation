@@ -14,4 +14,4 @@ package.json              @DataDog/corpweb @DataDog/documentation
 
 # Serverless
 
-/serverless/              @DataDog/serverless-product @DataDog/documentation
+/content/en/serverless/              @DataDog/serverless-product @DataDog/documentation
