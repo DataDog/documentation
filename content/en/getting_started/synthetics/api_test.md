@@ -42,7 +42,7 @@ The example below demonstrates the creation of an API test to ensure that your w
     - You can set environment tags such as `env:prod` and `app:shopist` and additional tags on your test. Tags allow you to stay organized and quickly find test you're interested in on the homepage.
     - Click **Test URL**.
 
-{{< img src="getting_started/synthetics/api-test-config.png" alt="API test configuration"  style="width:60%;">}}
+{{< img src="getting_started/synthetics/api-test-config-2.png" alt="API test configuration"  style="width:60%;">}}
 
 #### Define assertions
 
@@ -54,7 +54,7 @@ In this example, three default assertions populate after the URL is tested:
 
 To add a custom assertion, click anywhere in the response preview or click **New Assertion**.
 
-{{< img src="getting_started/synthetics/api-test-configuration.gif" alt="Browser test failure"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.gif" alt="Browser test failure"  style="width:90%;">}}
 
 #### Select locations 
 
@@ -120,7 +120,7 @@ When you create a multistep API test, you can chain a sequence of HTTP requests 
 
 When you're ready to create your test, click **Save Test**. 
 
-For more information, see [Multistep API Tests][7].
+For more information, see [Multistep API Tests][6].
 
 ## Test results
 
@@ -141,5 +141,4 @@ With Datadog's [APM integration with Synthetic Monitoring][5], access the root c
 [3]: /api/v1/synthetics/#create-or-clone-a-test
 [4]: /integrations/
 [5]: /synthetics/apm/
-[6]: /getting_started/synthetics/private_location
-[7]: /synthetics/multistep
+[6]: /synthetics/multistep
