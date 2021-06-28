@@ -128,7 +128,7 @@ In the example below, the test failed as the result of a server timeout.
 
 The resource, `https://api.shopist.io/checkout.json`, posted a status and the target source of this issue is a controller linked to checkout.
 
-With Datadog's [APM integration with Synthetic Monitoring][8],  access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab. 
+With Datadog's [APM integration with Synthetic Monitoring][8], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab. 
 
 To link browser test results with APM, add the allowlist the URLs you want to add to the APM integration headers. 
 
