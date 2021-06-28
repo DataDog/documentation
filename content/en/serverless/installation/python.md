@@ -369,11 +369,11 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-<div class="alert alert-warning">If you are not using any of the supported serverless application development tool, such as the serverless framework, we strongly recommend that you set up the Datadog instrumentation using the <a href="/?tab=datadogcli">Datadog CLI</a> instead.</div>
+<div class="alert alert-warning">If you are not using any of the recommended serverless development tools, such as the Serverless Framework, we strongly encourage you instrument your serverless applications with the <a href="/?tab=datadogcli">Datadog CLI</a>.</div>
 
 ### Install the Datadog Lambda library
 
-You can either install the Datadog Lambda library as a layer (recommended) **OR** Python package.
+The Datadog Lambda Library can be imported either as a layer (recommended) **OR** as a Python package.
 
 The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 
