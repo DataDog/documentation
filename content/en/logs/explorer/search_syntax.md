@@ -6,7 +6,7 @@ aliases:
     - /logs/search
     - /logs/search-syntax
     - /logs/explorer/search/
-    - /logs/search_syntax
+    - /logs/search_syntax/
 further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
