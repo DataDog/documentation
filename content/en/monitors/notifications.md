@@ -173,7 +173,7 @@ For example, if your monitor triggers for each `env`, then the variable `{{env.n
 
 <div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.</div>
 
-**Notes**: Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
 #### Multi-alert group by host
 
