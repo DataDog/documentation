@@ -68,10 +68,10 @@ code_language_ids:
     cpp: 'C++'
     php: PHP
     nodejs: NodeJS
-    python: Python
-    python-beta: Python [beta]
-    ruby: Ruby
-    ruby-beta: Ruby [beta]
+    python: Python [legacy]
+    python-beta: Python
+    ruby: Ruby [legacy]
+    ruby-beta: Ruby
     go: Go
     typescript: Typescript
     ".NET": ".NET"
