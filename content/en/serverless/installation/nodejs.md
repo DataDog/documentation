@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If you previously set up Datadog Serverless using the Datadog Forwarder or your Lambda functions are deployed to AWS GovCloud, see the [installation instructions here][2].
+If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
 
 ## Configuration
 
@@ -92,13 +92,18 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
+      apiKey: <DATADOG_API_KEY>
       nodeLayerVersion: "<LAYER_VERSION>"
       extensionLayerVersion: "<EXTENSION_VERSION>"
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the [desired version][4] of Datadog Lambda Library, and `<EXTENSION_VERSION>` with the [desired version][5] of the Datadog Lambda Extension.
+To fill in the placeholders:
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][6]. 
+- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][4]).
+- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][5]).
+- Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -108,6 +113,7 @@ More information and additional parameters can be found in the [macro documentat
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-js/releases
 [5]: https://gallery.ecr.aws/datadog/lambda-extension
+[6]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -151,7 +157,7 @@ class CdkStack extends cdk.Stack {
 
 To fill in the placeholders:
 
-- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
 - Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]).
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][4]).
@@ -251,7 +257,7 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
   - Set `DD_FLUSH_TO_LOG` to `true`.
-  - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2]. 
+  - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2]. 
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -347,7 +353,7 @@ Follow these steps to configure the function:
 1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][5]. 
+4. Set the environment variable `DD_API_KEY` to your Datadog API key from the [API Management page][5]. 
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
