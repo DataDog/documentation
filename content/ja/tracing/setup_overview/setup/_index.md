@@ -17,4 +17,4 @@ aliases:
 
 
 [1]: /ja/tracing/visualization/#trace
-[2]: /ja/developers/libraries/#apm-tracing-client-libraries
+[2]: /ja/developers/community/libraries/#apm-tracing-client-libraries

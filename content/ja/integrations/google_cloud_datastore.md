@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_datastore/'
 draft: false
 git_integration_title: google_cloud_datastore
 has_logo: true
+integration_id: google-cloud-datastore
 integration_title: Google Datastore
 is_public: true
 kind: インテグレーション

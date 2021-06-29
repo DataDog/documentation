@@ -7,6 +7,7 @@ assets:
 categories:
   - コンテナ
   - オーケストレーション
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:

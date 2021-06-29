@@ -9,20 +9,23 @@ aliases:
 ---
 ## Présentation
 
-Les checks de service vous permettent de déterminer le statut d'un service afin de le surveiller dans Datadog. Tous les checks de status doivent présenter l'un des codes de statut suivants :
+Grâce aux checks de service, vous pouvez définir le statut d'un service, afin de le surveiller dans Datadog. Les checks de service effectuent un suivi du statut de disponibilité d'un service donné. Après un certain nombre d'échecs successifs de connexion au service en question, l'Agent de surveillance vous envoie une alerte. Par exemple, si l'Agent surveillant un host Redis ne parvient pas à se connecter à Redis ni à recueillir des métriques après trois tentatives consécutives, vous en êtes informé.
 
-| Code de statut | Description |
-| ----------- | ----------- |
-| `0`         | OK          |
-| `1`         | Warning     |
-| `2`         | Critical    |
-| `3`         | Unknown     |
+Les checks de service au niveau du cluster vous permettent de surveiller efficacement les systèmes distribués ou redondants qui peuvent subir certaines défaillances. Ces alertes sont particulièrement utiles pour les architectures au sein desquelles des hosts individuels exécutent plusieurs services. En effet, elles affichent le niveau de dégradation du service en question, même si les hosts exécutant ce service demeurent disponibles (et transmettent un check de santé au niveau du host).
 
-{{< whatsnext desc="Il existe plusieurs façons d'envoyer un check de service à Datadog :">}}
-    {{< nextlink href="/developers/service_checks/agent_service_checks_submission" >}}Envoyer un check avec un check custom de l'Agent{{< /nextlink >}}
+Vous pouvez configurer la surveillance et l'envoi d'alertes lorsqu'un service critique non redondant n'est plus accessible, ou lorsqu'un cluster est sur le point d'échouer en raison d'une défaillance importante d'un nœud. Il est également possible de surveiller d'autres situations critiques, comme une chute du débit des requêtes ou une hausse de la latence des requêtes.
+
+Si une intégration ne possède pas de check de service natif, ou si vous souhaitez surveiller le statut de disponibilité d'un service interne, vous devrez peut-être configurer un check de service.
+
+Pour utiliser un check de service, commencez par configurer le check :
+
+{{< whatsnext >}}
+    {{< nextlink href="/developers/service_checks/agent_service_checks_submission" >}}Envoyer un check d'Agent custom{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission" >}}Envoyer un check de service avec DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/api/v1/service-checks" >}}Envoyer un check de service avec l'API Datadog{{< /nextlink >}}
+    {{< nextlink href="/api/v1/service-checks/" >}}Envoyer un check de service avec l'API Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
+
+Dès que le check de service commence à envoyer des données, vous pouvez consulter son résumé et configurer des dashboards, des monitors et des alertes :
 
 ## Visualiser votre check de service dans Datadog
 
@@ -32,7 +35,7 @@ Les checks de service peuvent être visualisés et utilisés dans 3 sections de
 - [Screenboards][2]
 - [Monitor de checks custom][3]
 
-### Sommaire des checks
+### Résumé de check
 
 Cliquez sur l'onglet _Monitors_, puis sur _Check Summary_ pour afficher le [Sommaire des checks][1].
 

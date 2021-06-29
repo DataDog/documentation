@@ -2,14 +2,17 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    gunicorn: assets/dashboards/gunicorn_dashboard.json
   logs:
     source: gunicorn
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    gunicorn_processes: assets/saved_views/gunicorn_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -20,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md'
 display_name: Gunicorn
+draft: false
 git_integration_title: gunicorn
 guid: 5347bfe1-2e9b-4c92-9410-48b8659ce10f
 integration_id: gunicorn
@@ -57,7 +61,7 @@ Gunicorn peut fournir directement d'autres métriques via DogStatsD, y compris c
 
 ### Installation
 
-Le check Gunicorn de l'Agent Datadog est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Gunicorn.
+Le check Gunicorn de l'Agent Datadog est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Gunicorn.
 
 Le check Gunicorn nécessite l'environnement Python de votre application Gunicorn pour obtenir le package [`setproctitle`][3]. Sans celui-ci, l'Agent Datadog signalera toujours qu'il ne parvient pas à trouver de processus principal `gunicorn` (et donc, qu'il ne peut pas non plus trouver de workers). Installez le package `setproctitle` dans l'environnement Python de votre application si vous souhaitez recueillir la métrique `gunicorn.workers`.
 
@@ -68,29 +72,30 @@ Consultez le [fichier d'exemple gunicorn.yaml][5] pour découvrir toutes les opt
 
 #### Collecte de métriques
 
-1. Ajoutez ce bloc de configuration à votre fichier `gunicorn.d/conf.yaml` pour commencer à recueillir vos [métriques Gunicorn](#metriques) :
+##### Associer Gunicorn à DogStatsD
+
+1. Depuis la version 19.1, Gunicorn [propose une option][6] pour envoyer ses métriques à un daemon qui implémente le protocole StatsD, tel que [DogStatsD][7]. Comme pour de nombreuses options de Gunicorn, vous pouvez la passer à `gunicorn` via l'interface de ligne de commande (`--statsd-host`) ou la définir dans le fichier de configuration de votre application (`statsd_host`). Pour vous assurer que vous recueillez **toutes les métriques Gunicorn**, configurez votre application de façon à envoyer les métriques à [DogStatsD][7] sur `"localhost:8125"`, puis redémarrez-la.
+
+2. Ajoutez ce bloc de configuration à votre fichier `gunicorn.d/conf.yaml` pour commencer à recueillir vos [métriques Gunicorn](#metriques) :
 
 ```yaml
 init_config:
 
 instances:
-  # tel que défini
-  # 1) dans le config.py de votre application (proc_name = <NOM_VOTRE_APPLICATION>), OU
-  # 2) via CLI (gunicorn --name <NOM_VOTRE_APPLICATION> your:app)
-  - proc_name: <NOM_VOTRE_APPLICATION>
+    ## @param proc_name - chaîne, obligatoire
+    ## Le nom du processus gunicorn. Pour le serveur gunicorn suivant :
+    ##
+    ## gunicorn --name <NOM_APP_WEB> <CONFIG_APP_WEB>.ini
+    ##
+    ## le nom du processus est `<NOM_APP_WEB>`
+  - proc_name: <NOM_DE_VOTRE_APP>
 ```
 
 2. [Redémarrez l'Agent][2] pour commencer à envoyer vos métriques Gunicorn à Datadog.
 
-#### Associer Gunicorn à DogStatsD
-
-Depuis la version 19.1, Gunicorn [propose une option][6] pour envoyer ses métriques à un daemon qui implémente le protocole StatsD, tel que [DogStatsD][7]. Comme pour de nombreuses options de Gunicorn, vous pouvez la passer à `gunicorn` via l'interface de ligne de commande (`--statsd-host`) ou la définir dans le fichier de configuration de votre application (`statsd_host`). Configurez votre application de façon à envoyer les métriques à DogStatsD sur `"localhost:8125"`, puis redémarrez-la.
-
-**Remarque** : si vous utilisez cette option, **n'ajoutez pas** le bloc de configuration pour la collecte de métriques à `gunicorn.d/conf.yaml`. Ainsi, si vous associez Gunicorn à DogStatsD, ignorez les instructions de la section [Collecte de métriques](#collecte-de-metriques) de cette page.
-
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 

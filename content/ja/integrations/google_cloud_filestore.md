@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_filestore/'
 draft: false
 git_integration_title: google_cloud_filestore
 has_logo: true
+integration_id: google-cloud-filestore
 integration_title: Google Cloud Filestore
 is_public: true
 kind: インテグレーション

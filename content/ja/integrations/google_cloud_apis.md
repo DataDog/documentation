@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_apis/'
 draft: false
 git_integration_title: google_cloud_apis
 has_logo: true
+integration_id: google-cloud-apis
 integration_title: Google Cloud APIs
 is_public: true
 kind: integration

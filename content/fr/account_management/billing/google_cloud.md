@@ -8,7 +8,7 @@ Datadog facture les hosts qui exécutent l'Agent Datadog et toutes les instances
 
 Les autres ressources Google Cloud (CloudSQL, Google App Engine, Pub/Sub, etc.) ne sont pas prises en compte dans votre facture mensuelle.
 
-### Exclusion de métriques
+## Exclusion des métriques Google Cloud
 
 Utilisez le [carré d'intégration Google Cloud][1] pour contrôler la collecte de métriques. Accédez à l'onglet **Configuration** et sélectionnez un projet ou ajoutez-en un autre. Chaque projet est contrôlé via l'option **Optionally Limit Metrics Collection to hosts with tag**. Limitez les métriques par [tag de host][2] :
 
@@ -26,6 +26,6 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [2]: /fr/getting_started/tagging/using_tags/#integrations
-[3]: /fr/infrastructure
-[4]: /fr/help
+[3]: /fr/infrastructure/
+[4]: /fr/help/
 [5]: mailto:success@datadoghq.com

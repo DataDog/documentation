@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_redis/'
 draft: false
 git_integration_title: google_cloud_redis
 has_logo: true
+integration_id: google-cloud-redis
 integration_title: Google Cloud Memorystore for Redis
 is_public: true
 kind: integration

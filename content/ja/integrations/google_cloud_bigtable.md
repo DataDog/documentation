@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_bigtable/'
 draft: false
 git_integration_title: google_cloud_bigtable
 has_logo: true
+integration_id: google-cloud-bigtable
 integration_title: Google Bigtable
 is_public: true
 kind: integration

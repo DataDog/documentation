@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_table_storage/'
 draft: false
 git_integration_title: azure_table_storage
 has_logo: true
+integration_id: azure-table-storage
 integration_title: Microsoft Azure Table Storage
 is_public: true
 kind: インテグレーション

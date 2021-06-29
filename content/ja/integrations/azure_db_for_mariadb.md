@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_mariadb/'
 draft: false
 git_integration_title: azure_db_for_mariadb
 has_logo: true
+integration_id: azure-dbformariadb
 integration_title: Microsoft Azure DB for MariaDB
 is_public: true
 kind: integration
@@ -31,7 +32,7 @@ Azure Database for MariaDB からメトリクスを取得すると、以下の�
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

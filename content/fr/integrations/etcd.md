@@ -1,13 +1,17 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
+    etcd-Screenboard: assets/dashboards/etcd_2_overview.json
   logs:
     source: etcd
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     etcd_overview: assets/saved_views/etcd_overview.json
+    etcd_processes: assets/saved_views/etcd_processes.json
   service_checks: assets/service_checks.json
 categories:
   - orchestration
@@ -20,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
 display_name: etcd
+draft: false
 git_integration_title: etcd
 guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
@@ -36,7 +41,7 @@ name: etcd
 process_signatures:
   - etcd
 public_title: Intégration Datadog/etcd
-short_description: 'Surveillez des métriques sur les écritures, les mises à jour, les suppressions, les latences entre nœuds, et plus encore.'
+short_description: 'Surveillez des métriques etcd sur les écritures, les mises à jour, les suppressions, les latences entre nœuds, et plus encore.'
 support: core
 supported_os:
   - linux
@@ -144,13 +149,11 @@ Le check etcd n'inclut aucun événement.
 
 ### Checks de service
 
-`etcd.can_connect` :
+**etcd.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir des métriques à partir du endpoint de votre API etcd.
 
-Renvoie « Critical » si l'Agent ne parvient pas à recueillir des métriques à partir du endpoint de votre API etcd.
-
-`etcd.healthy` :
-
-Renvoie « Critical » si le nœud d'un membre n'est pas sain. Renvoie « Unknown » si l'Agent ne parvient pas à atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
+**etcd.healthy** :<br>
+Renvoie `CRITICAL` si le nœud d'un membre n'est pas sain. Renvoie 'Unknown' si l'Agent ne parvient pas à atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
 
 ## Dépannage
 

@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_container_engine/'
 draft: false
 git_integration_title: google_container_engine
 has_logo: true
+integration_id: google-container-engine
 integration_title: Google Container Engine
 is_public: true
 kind: インテグレーション
