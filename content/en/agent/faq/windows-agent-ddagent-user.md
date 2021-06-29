@@ -17,7 +17,7 @@ The account gains the following rights during installation:
 * It has remote login disabled
 * It has network login disabled
 
-**Note**: The installer doesn't add the account it creates to the `Users` groups by default. On most systems this is fine.
+**Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
 
 **Note**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
 
