@@ -47,7 +47,7 @@ There are two ways of installing the testing framework:
 
 ### Adding the framework to your project
 
-1. Download and decompress `DatadogSDKTesting.zip` from the release page: [`https://github.com/DataDog/dd-sdk-swift-testing/releases`][2]. 
+1. Download and decompress `DatadogSDKTesting.zip` from the [release page][2]. 
 
 2. Copy and link your test targets with the resulting XCFramework.
 
@@ -378,3 +378,4 @@ You can also disable or enable specific auto-instrumentation in some of the test
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
+[2]: https://github.com/DataDog/dd-sdk-swift-testing/releases
