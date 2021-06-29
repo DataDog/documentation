@@ -6,7 +6,7 @@ kind: faq
 Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
 
 The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
-The is assigned to the following groups during installation:
+The account is assigned to the following groups during installation:
 
 * It becomes a member of the “Performance Monitor Users” group
   * Necessary to access WMI information
