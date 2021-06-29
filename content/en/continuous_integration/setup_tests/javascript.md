@@ -17,7 +17,7 @@ Supported test frameworks:
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
   * Only [`jest-circus`][1] is supported as a `testRunner`.
 * Mocha >=5.2.0
-  * Mocha >=9.0.0 has [**partial support**](#known-limitations).
+  * Mocha >=9.0.0 has [partial support](#known-limitations).
 
 Supported CI providers:
 * Appveyor
@@ -123,20 +123,20 @@ Use different test scripts for CI and local development:
 
 ## Known limitations
 
-### ES Modules
-[Mocha >=9.0.0][8] has gone ESM-first to load test files. That means that if ES modules are used (for example, by defining test files with the .mjs extension), **the instrumentation will be limited**: tests will still be detected, but there won't be visibility within your test. If you want to read more about ES modules, you can do it [here][9].
+### ES modules
+[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][9].
 
 ### Browser tests
-The Javascript Tracer does not support browsers. This means that if you're running browser tests with `mocha` or `jest`, there won't be visibility within the test itself.
+The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
 
 ## Best practices
 
-The following practices allow to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and CI Visibility.
 
 
 ### Parameterized tests
 
-Whenever possible, leverage the tools the testing frameworks provide for parameterized tests. For example, for `jest`:
+Whenever possible, leverage the tools that testing frameworks provide for parameterized tests. For example, for `jest`:
 
 Avoid this:
 {{< code-block lang="javascript" >}}
@@ -147,14 +147,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use instead the supported [`test.each`][10] instead:
+And use [`test.each`][10] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, [`mocha-each`][11] is supported:
+For `mocha`, use [`mocha-each`][11]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -166,7 +166,7 @@ forEach([
 });
 {{< /code-block >}}
 
-By using this approach, both the testing framework and CI Visibility will be able to tell your tests apart.
+When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
 
 ## Configuration settings
