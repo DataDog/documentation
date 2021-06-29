@@ -241,7 +241,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-The values.yaml file contains a `confd` section to define both static and Autodiscovery integration checks. You can find inline examples in the [sample values.yaml][1]. Each key becomes a file in the agent's conf.d directory.
+The `values.yaml` file contains a `confd` section to define both static and Autodiscovery integration checks. You can find inline examples in the sample [values.yaml][1]. Each key becomes a file in the Agent's `conf.d` directory.
+
 ```yaml
   confd:
     <INTEGRATION_NAME>.yaml: |-
@@ -254,7 +255,7 @@ The values.yaml file contains a `confd` section to define both static and Autodi
 ```
 See the [Autodiscovery Container Identifiers][1] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
-Note that the Helm chart has two `confd` sections: one for agent checks, and a second for cluster checks. If you're using the Cluster Agent and you're looking to configure Autodiscovery for a cluster check, follow along with the [cluster check configuration example][2] and make sure to include `cluster_check: true`. See the [Cluster Check documentation][3] for more context. 
+**Note**: The Helm chart has two `confd` sections: one for Agent checks, and a second for cluster checks. If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, follow the [cluster check configuration example][2] and make sure to include `cluster_check: true`. See the [Cluster Check documentation][3] for more context. 
 
 [1]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L244-L261 
 [2]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L426-L438
@@ -364,7 +365,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-The following configuration defines the integration template for `redis` containers with a custom password parameter:
+The following configuration defines the integration template for Redis containers with a custom password parameter:
 ```yaml
   confd
     redisdb.yaml: |-
@@ -376,8 +377,8 @@ The following configuration defines the integration template for `redis` contain
           port: 6379
           password: %%env_REDIS_PASSWORD%%
 ```
-As a result, the agent will contain a `redis.yaml` file with the above configuration in the `/confd` directory.
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
+As a result, the Agent now contains a `redis.yaml` file with the above configuration in the `/confd` directory.
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text. Hence, you must pass the `REDIS_PASSWORD` environment variable to the Agent. See the [Autodiscovery template variable documentation][1].
 
 [1]: /agent/faq/template_variables/
 {{% /tab %}}

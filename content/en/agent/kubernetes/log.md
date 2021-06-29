@@ -368,7 +368,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the agent container.
+You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the Agent container.
   ```yaml
   confd:
     <INTEGRATION_NAME>.yaml: |-
@@ -466,7 +466,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-The following configuration defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs:
+The following configuration defines the integration template for Redis containers with the `source` and `service` attributes for collecting logs:
   ```yaml
   confd:
     redis.yaml: |-
@@ -477,7 +477,7 @@ The following configuration defines the integration template for `redis` contain
         - service: redis
   ```
 
-Note that the above configuration would collect only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
+**Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
 
 {{% /tab %}}
 {{< /tabs >}}
