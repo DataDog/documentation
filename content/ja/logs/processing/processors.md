@@ -624,9 +624,6 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP 例"  style="width:60%;">}}
 
-**注**: 
-
-[1]: https://www.maxmind.com
 {{% /tab %}}
 {{% tab "API" %}}
 

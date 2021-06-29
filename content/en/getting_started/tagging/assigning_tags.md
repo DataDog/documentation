@@ -408,5 +408,5 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [6]: /agent/docker/?tab=standard#tagging
 [7]: /tracing/setup/
 [8]: /developers/dogstatsd/
-[9]: /developers/libraries/
+[9]: /developers/community/libraries/
 [10]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key

@@ -23,7 +23,7 @@ Agent がログを収集する方法には、[Docker ソケット][1]から収�
 * Docker がランタイムではない、**または**
 * 各ノードで 10 個を超えるコンテナが使用されている
 
-Docker API は、一度に 1 つのコンテナからログを取得するように最適化されています。同じポッドに多数のコンテナがある場合、Docker ソケットからログを収集すると、Kubernetes ログファイルロジックで収集するより、はるかに多くのリソースを消費する可能性があります。
+Docker API は、一度に 1 つのコンテナからログを取得するように最適化されています。同じノードに多数のコンテナがある場合、Docker ソケットからログを収集すると、Kubernetes ログファイルロジックで収集するより、はるかに多くのリソースを消費する可能性があります。
 
 ## ログの収集
 
@@ -204,9 +204,9 @@ agent:
 
 以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
 
-* [Kubernetesポッドアノテーション](?tab=kubernetes#configuration)
+* [Kubernetes ポッドアノテーション](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
-* [key-value ストア](?tab=keyvaluestore#configuration)
+* [Key-Value ストア](?tab=keyvaluestore#configuration)
 
 ### コンフィギュレーション
 

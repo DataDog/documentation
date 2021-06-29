@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firebase/'
 draft: false
 git_integration_title: google_cloud_firebase
 has_logo: true
+integration_id: google-cloud-firebase
 integration_title: Google Cloud Firebase
 is_public: true
 kind: インテグレーション

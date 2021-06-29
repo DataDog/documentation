@@ -46,7 +46,7 @@ def security_rules(content, content_dir):
         if data and message_file_name.exists():
             # delete file or skip if staged
             # any() will return True when at least one of the elements is Truthy
-            if data.get('isStaged', False) or data.get('isDeleted', False) or not data.get('isEnabled', True):
+            if 'restrictedToOrgs' in data or data.get('isStaged', False) or data.get('isDeleted', False) or not data.get('isEnabled', True):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
                     p.unlink()
@@ -144,7 +144,7 @@ def compliance_rules(content, content_dir):
             p = Path(f.name)
 
             # delete file or skip if staged
-            if json_data.get('isStaged', False) or json_data.get('isDeleted', False) or not json_data.get('enabled', True):
+            if 'restrictedToOrgs' in json_data or json_data.get('isStaged', False) or json_data.get('isDeleted', False) or not json_data.get('enabled', True):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
                     p.unlink()

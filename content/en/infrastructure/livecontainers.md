@@ -277,22 +277,6 @@ It is possible to include and/or exclude containers from real-time collection:
 Both arguments take an **image name** as value; regular expressions are also supported.
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
-```yaml
-  env:
-    - name: DD_LOGS_ENABLED
-      value: "true"
-    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-      value: "true"
-
-  volumeMounts:
-    - name: pointerdir
-      mountPath: /opt/datadog-agent/run
-
-volumes:
-  - hostPath:
-      path: /opt/datadog-agent/run
-    name: pointerdir
-```
 
 ```shell
 container_exclude: ["image:debian"]

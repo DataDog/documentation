@@ -65,7 +65,7 @@ v6 の DogStatsD は、[Etsy の StatsD][5] メトリクス集計デーモンの
 [1]: /ja/developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /ja/tracing/guide/terminology/
 [3]: /ja/agent/guide/network/#open-ports
-[4]: /ja/developers/write_agent_check/
+[4]: /ja/developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
 [6]: /ja/developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
@@ -199,7 +199,6 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 [9]: /ja/agent/basic_agent_usage/osx/
 [10]: /ja/agent/basic_agent_usage/windows/
 [11]: /ja/agent/basic_agent_usage/source/
-[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 

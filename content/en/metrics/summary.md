@@ -30,6 +30,20 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 {{< img src="metrics/summary/facets.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
 
+
+## Configuration of multiple metrics 
+There are two buttons that allow you to configure multiple metrics at a time: 
+
+{{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons"  style="width:75%;">}}
+
+* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
+
+{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles"  style="width:75%;">}}
+
+* **Configure Tags**: Configure tags on multiple distribution metrics (Metrics without Limits™ beta users are able to use this functionality on counts, gauges, and rates as well).
+
+{{< img src="metrics/summary/bulkconfig.gif" alt="Bulk Metric Tag Configuration"  style="width:75%;">}} 
+
 ## Metric details sidepanel
 
 Click on any metric name to display its details sidepanel for more information regarding the metric’s metadata and tags: 

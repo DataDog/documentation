@@ -21,6 +21,7 @@ kind: インテグレーション
 maintainer: '@platinummonkey'
 manifest_version: 1.0.0
 metric_prefix: storm.
+metric_to_check: storm.bolt.last_60.acked
 name: storm
 public_title: Datadog-Storm インテグレーション
 short_description: Apache Storm 1.x.x トポロジー実行統計

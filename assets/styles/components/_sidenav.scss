@@ -123,7 +123,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
 
     .nav-top-level {
       & > a span {
-        margin-left: 5px;
+        margin-left: 10px;
       }
       
     }
@@ -172,7 +172,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
           font-weight: 600;
           padding: 3px 0 0 2px;
           margin-right: 10px;
-          display:block;
+          display:flex;
           border:1px solid transparent;
           &:hover {
             background:transparent;

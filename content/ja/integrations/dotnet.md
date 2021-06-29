@@ -1,22 +1,22 @@
 ---
 categories:
   - 言語
-  - ログの収集
 ddtype: ライブラリ
 dependencies: []
-description: Datadog のクライアントライブラリを使用して .NET アプリケーションからカスタムメトリクスを送信
+description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
 doc_link: 'https://docs.datadoghq.com/integrations/dotnet/'
 draft: false
 further_reading: []
 git_integration_title: dotnet
 has_logo: true
+integration_id: dotnet
 integration_title: .NET
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: dotnet
 public_title: Datadog-.NET インテグレーション
-short_description: Datadog のクライアントライブラリを使用して .NET アプリケーションからカスタムメトリクスを送信
+short_description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
 version: '1.0'
 ---
 ## 概要

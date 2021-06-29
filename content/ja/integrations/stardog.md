@@ -21,6 +21,7 @@ kind: インテグレーション
 maintainer: support@stardog.com
 manifest_version: 1.0.0
 metric_prefix: stardog.
+metric_to_check: stardog.dbms.mem.mapped.max
 name: stardog
 public_title: Datadog-Stardog インテグレーション
 short_description: Datadog 用 Stardog データコレクター。

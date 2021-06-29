@@ -11,6 +11,9 @@ further_reading:
 ---
 ## Compatibility
 
+Supported Test Frameworks:
+* Pytest 3.0+
+
 Supported CI providers:
 * Appveyor
 * Azure Pipelines
@@ -31,7 +34,7 @@ Supported CI providers:
 Install the Python tracer by running:
 
 {{< code-block lang="bash" >}}
-pip install "ddtrace>=0.50.0rc2"
+pip install "ddtrace>=0.50.0rc4"
 {{< /code-block >}}
 
 For more information, see the [Python tracer installation documentation][2].

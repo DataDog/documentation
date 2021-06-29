@@ -225,7 +225,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/prometheus/
+[5]: /developers/custom_checks/prometheus/
 [6]: /integrations/guide/prometheus-metrics
 [7]: /agent/kubernetes/#installation
 [8]: /getting_started/tagging/

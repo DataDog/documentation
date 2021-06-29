@@ -11124,6 +11124,87 @@ components:
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
+    TreeMapColorBy:
+      default: user
+      description: The attribute used to determine color in the widget.
+      enum:
+      - user
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+    TreeMapGroupBy:
+      description: The attribute used to group elements in the widget.
+      enum:
+      - user
+      - family
+      - process
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - FAMILY
+      - PROCESS
+    TreeMapSizeBy:
+      description: The attribute used to determine size in the widget.
+      enum:
+      - pct_cpu
+      - pct_mem
+      example: pct_cpu
+      type: string
+      x-enum-varnames:
+      - PCT_CPU
+      - PCT_MEM
+    TreeMapWidgetDefinition:
+      description: "The treemap visualization found on the Host Dashboards comes from\
+        \ the output of `ps auxww`. This is not continuously run on your hosts. Instead,\
+        \ it\u2019s run once on Agent start/restart. The treemap is only supported\
+        \ for process data on a single host dashboard \u2014 this may not be reused\
+        \ in other dashboards or for other metrics."
+      properties:
+        color_by:
+          $ref: '#/components/schemas/TreeMapColorBy'
+        group_by:
+          $ref: '#/components/schemas/TreeMapGroupBy'
+        requests:
+          description: List of top list widget requests.
+          example:
+          - q: system.load.1
+          items:
+            $ref: '#/components/schemas/TreeMapWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        size_by:
+          $ref: '#/components/schemas/TreeMapSizeBy'
+        title:
+          description: Title of your widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/TreeMapWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      - size_by
+      - color_by
+      - group_by
+      type: object
+    TreeMapWidgetDefinitionType:
+      default: treemap
+      description: Type of the treemap widget.
+      enum:
+      - treemap
+      example: treemap
+      type: string
+      x-enum-varnames:
+      - TREEMAP
+    TreeMapWidgetRequest:
+      description: An updated treemap widget.
+      properties:
+        q:
+          description: The widget metrics query.
+          type: string
+      type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
       properties:
@@ -13624,6 +13705,7 @@ components:
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
@@ -16772,7 +16854,7 @@ paths:
 
           For more information about your AWS account Role name,
 
-          see the [Datadog AWS integration configuration info](https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation).'
+          see the [Datadog AWS integration configuration info](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).'
         required: true
       responses:
         '200':
@@ -19203,7 +19285,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24).
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -19253,7 +19335,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48)
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -25018,11 +25100,12 @@ tags:
     \ permission."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
-    a metric or check that you care about,
+    a metric or check that you care about and
 
-    notifying your team when some defined threshold is exceeded.
+    notifies your team when a defined threshold has exceeded.
 
-    Refer to the Creating Monitors page for more information on creating monitors.'
+
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/

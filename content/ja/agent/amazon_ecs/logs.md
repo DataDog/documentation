@@ -36,6 +36,11 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
               "sourceVolume": "pointdir",
               "readOnly": false
             },
+            {
+              "containerPath": "/var/lib/docker/containers",
+              "sourceVolume": "containers_root",
+              "readOnly": true
+            },
             (...)
           ],
           "environment": [
@@ -46,6 +51,10 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
             },
             {
               "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+              "value": "true"
+            },
+            {
+              "name": "DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE",
               "value": "true"
             },
             (...)
@@ -59,6 +68,12 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
             "sourcePath": "/opt/datadog-agent/run"
           },
           "name": "pointdir"
+        },
+        {
+          "host": {
+            "sourcePath": "/var/lib/docker/containers/"
+          },
+          "name": "containers_root"
         },
         (...)
       ],
@@ -82,6 +97,20 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
     {
       "containerDefinitions": [
         (...)
+          "mountPoints": [
+            (...)
+            {
+              "containerPath": "/opt/datadog-agent/run",
+              "sourceVolume": "pointdir",
+              "readOnly": false
+            },
+            {
+              "containerPath": "c:/programdata/docker/containers",
+              "sourceVolume": "containers_root",
+              "readOnly": true
+            },
+            (...)
+          ],
           "environment": [
             (...)
             {
@@ -92,10 +121,24 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
               "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
               "value": "true"
             },
+            {
+              "name": "DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE",
+              "value": "true"
+            },
             (...)
           ]
         }
       ],
+      "volumes": [
+        (...)
+        {
+          "host": {
+            "sourcePath": "c:/programdata/docker/containers"
+          },
+          "name": "containers_root"
+        },
+        (...)
+      ]
       "family": "datadog-agent-task"
     }
     ```
@@ -107,6 +150,8 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
 {{% /tab %}}
 {{< /tabs >}}
+
+**注:** `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` には、Datadog Agent v6.27.0/7.27.0 が必要です。これ以前のバージョンでは、このオプションは暗黙に無視されます。
 
 ### カスタムログ収集
 

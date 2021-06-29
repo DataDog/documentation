@@ -90,12 +90,12 @@ This environment variable must be configured (using the same setup) when [Config
 1. Download the following manifests:
 
     * [`agent-services.yaml`: The Cluster Agent Service manifest][5]
-    * [`secrets.yaml`: The secret holding the Datadog API key][6]
+    * [`secret-api-key.yaml`: The secret holding the Datadog API key][6]
     * [`secret-application-key.yaml`: The secret holding the Datadog Application Key][7]
     * [`cluster-agent-deployment.yaml`: Cluster Agent manifest][8]
     * [`install_info-configmap.yaml`: Install Info Configmap][9]
 
-2. In the `secrets.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][10] encoded in base64. To get the base64 version of your API key, you can run:
+2. In the `secret-api-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][10] encoded in base64. To get the base64 version of your API key, you can run:
 
     ```shell
     echo -n '<Your API key>' | base64
@@ -105,7 +105,7 @@ This environment variable must be configured (using the same setup) when [Config
 5. Deploy these resources for the Cluster Agent Deployment to use:
     ```shell
     kubectl apply -f agent-services.yaml
-    kubectl apply -f secrets.yaml
+    kubectl apply -f secret-api-key.yaml
     kubectl apply -f secret-application-key.yaml
     kubectl apply -f install_info-configmap.yaml
     ```
@@ -167,7 +167,7 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 [4]: /agent/cluster_agent/setup/?tab=daemonset#configure-the-datadog-agent
 [5]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
 [6]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/secret-api-key.yaml
-[7]: https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
+[7]: https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
 [8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
 [9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
 [10]: https://app.datadoghq.com/account/settings#api

@@ -21,6 +21,10 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md'
 display_name: VoltDB
 draft: false
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/monitor-voltdb-with-datadog/'
+    tag: ブログ
+    text: Datadog を使用した VoltDB の監視
 git_integration_title: voltdb
 guid: 15abd7c6-1845-405a-8627-f83be1e48b11
 integration_id: voltdb
@@ -165,6 +169,10 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://voltdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/

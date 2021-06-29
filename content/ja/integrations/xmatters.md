@@ -5,8 +5,10 @@ ddtype: crawler
 dependencies: []
 description: xMatters を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: 'https://docs.datadoghq.com/integrations/xmatters/'
+draft: false
 git_integration_title: xmatters
 has_logo: true
+integration_id: xmatters
 integration_title: xMatters
 is_public: true
 kind: インテグレーション
@@ -20,7 +22,7 @@ version: '1.0'
 
 ## 概要
 
-xMatters IT Alerting は、さまざまなチームとサイロにまたがるツールチェーンをユーザーとつなぎあわせます。xMatters が通信を自動化するため、システムの停止を事前に防止し、解決担当者を迅速に配置し、重大なインシデントを管理し、利害関係者に最新情報を提供することができます。
+xMatters は、技術的な問題がビジネス上の問題になることを防ぐデジタルサービス可用性プラットフォームです。大企業、アジャイル SRE、イノベーションに従事する DevOps チームが、そのインシデントに対する事前対応、自動化、そしてサービス管理に利用し、高度にフラグメント化された現代の技術環境において運用の可視化と制御を維持しています。Datadog 向け xMatters は、ユーザーをさまざまなチームとサイロにまたがるツールチェーンにつなげます。
 
 Datadog を xMatters に接続して、以下のことができます。
 
@@ -40,9 +42,9 @@ xMatters-Datadog インテグレーションをセットアップするには、
 - [xMatters 通信プランを構成][2]します。
 - [Datadog Webhook インテグレーション][3]を通して、各 xMatters Webhook を構成します。
 
-## 収集されたデータ
+## 収集データ
 
-### メトリック
+### メトリクス
 
 xMatters インテグレーションには、メトリクスは含まれません。
 
@@ -50,7 +52,7 @@ xMatters インテグレーションには、メトリクスは含まれませ�
 
 xMatters インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 xMatters インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -59,6 +61,6 @@ xMatters インテグレーションには、サービスのチェック機能�
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: https://support.xmatters.com/hc/en-us/articles/214369486
+[2]: https://help.xmatters.com/integrations/#cshid=DATADOG
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [4]: https://docs.datadoghq.com/ja/help/
