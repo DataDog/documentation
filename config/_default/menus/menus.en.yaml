@@ -2143,10 +2143,10 @@ main:
     parent: rum_browser
     identifier: rum_data_collected
     weight: 101
-  - name: Advanced Configuration
-    url: real_user_monitoring/browser/advanced_configuration/
+  - name: Modifying Data and Context
+    url: real_user_monitoring/browser/modifying_data_and_context/
     parent: rum_browser
-    identifier: rum_advanced
+    identifier: rum_modify
     weight: 102
   - name: Monitoring Page Performance
     url: real_user_monitoring/browser/monitoring_page_performance/
