@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_dataflow/'
 draft: false
 git_integration_title: google_cloud_dataflow
 has_logo: true
+integration_id: google-cloud-dataflow
 integration_title: Google Cloud Dataflow
 is_public: true
 kind: integration
@@ -31,7 +32,7 @@ Datadog Google Cloud インテグレーションを使用して、Google Cloud D
 
 #### インストール
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ### ログの収集
 

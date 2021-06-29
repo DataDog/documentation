@@ -94,12 +94,17 @@ LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<POR
 labels:
     com.datadoghq.ad.check_names: '["openmetrics"]'
     com.datadoghq.ad.init_configs: '[{}]'
-    com.datadoghq.ad.instances:  >
+    com.datadoghq.ad.instances: |
     [
-      "{\
-        "prometheus_url\":\"http://%%host%%:<PORT_PROMETHEUS>/<ENDPOINT_PROMETHEUS> \",\"namespace\":\"<ESPACENOMMAGE>\",
-        \"metrics\":[{\"<MÉTRIQUE_À_RÉCUPÉRER>\": \"<NOUVEAU_NOM_MÉTRIQUE>\"}]
-      }"
+      {
+        "prometheus_url": "http://%%host%%:<PORT_PROMETHEUS>/<ENDPOINT_PROMETHEUS>",
+        "namespace": "<ESPACE_DE_NOMMAGE>",
+        "metrics": [
+          {
+            "<MÉTRIQUE_À_RÉCUPÉRER>": "<NOUVEAU_NOM_MÉTRIQUE>"
+          }
+        ]
+      }
     ]
 ```
 
@@ -185,7 +190,7 @@ Les intégrations officielles utilisent des répertoires dédiés. Le check gén
 [2]: /fr/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /fr/developers/prometheus/
+[5]: /fr/developers/custom_checks/prometheus/
 [6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [7]: https://app.datadoghq.com/metric/summary
 [8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

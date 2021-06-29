@@ -41,7 +41,7 @@ Il est conseillé de configurer Datadog en tant qu'application Okta manuellement
 
 ## Déclarations d'attributs de groupe (facultatif)
 
-Ces déclarations sont uniquement requises si vous utilisez le [mapping AuthN][4].
+Ces déclarations sont uniquement requises si vous utilisez le [mappage AuthN][4].
 
 | Nom  |Format du nom (facultatif)   | Valeur  |
 |---|---|---|

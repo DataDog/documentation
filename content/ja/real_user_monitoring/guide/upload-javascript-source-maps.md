@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       noSources: false,
-      filename: '[name].[hash].js.map'
+      filename: '[name].[fullhash].js.map'
     }),
     // ...
   ],
@@ -110,7 +110,9 @@ datadog-ci sourcemaps upload /path/to/dist \
 
 このコマンドをサンプルの `dist` ディレクトリ (前のセクションを参照) に対して実行することにより、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` および `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` で JavaScript ファイルを配信することを期待します。ユーザーの 1 人のセッションでエラーが発生すると、RUM SDK は即座にそれを収集します。指定されたエラーがこれらの URL の 1 つからダウンロードされ、`version:v35.2395005` および `service:my-service` のタグが付けられたファイルで発生した場合は常に、関連するソースマップを使用してスタックトレースを難読化します (この場合、`javascript.464388.js.map` ファイル)。
 
-**注**: 現在、エラー追跡 UI でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.min.js` のソースマップのみです。他の拡張子 (たとえば、`.mjs` など) が受け入れられているソースマップは、スタックトレースを非縮小しません。
+**注**: エラー追跡 UI でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
+
+<div class="alert alert-info"> JavaScript ソースファイルは、環境 (たとえばステージングまたは本番) に基づき異なるサブドメインから利用できます。関連するソースマップをアップロードしたら、完全な URL の代わりに絶対的なプレフィックスパスを使用する (<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定) ことで複数のサブドメインに機能させることが可能です。</div>
 
 ## エラーを簡単にトラブルシューティング
 

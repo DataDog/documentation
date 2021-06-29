@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_app_engine/'
 draft: false
 git_integration_title: google_app_engine
 has_logo: true
+integration_id: google-app-engine
 integration_title: Google App Engine
 is_public: true
 kind: インテグレーション

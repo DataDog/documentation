@@ -15,7 +15,7 @@ further_reading:
 ---
 ## Présentation
 
-Les monitors de checks custom désignent tout check de service non transmis par l'une des [plus de 400 intégrations][1] incluses avec l'Agent. Les checks de service custom peuvent être envoyés à Datadog à l'aide d'un [check custom de l'Agent][2], de [DogStatsD][3] ou de l'[API][4].
+Les monitors de checks custom désignent tout check de service non transmis par l'une des [quelque {{< translate key="integration_count" >}} intégrations][1] incluses avec l'Agent. Les checks de service custom peuvent être envoyés à Datadog à l'aide d'un [check custom de l'Agent][2], de [DogStatsD][3] ou de l'[API][4].
 
 ## Création d'un monitor
 
@@ -82,7 +82,7 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/
-[2]: /fr/developers/write_agent_check/
+[2]: /fr/developers/custom_checks/write_agent_check/
 [3]: /fr/developers/dogstatsd/
 [4]: /fr/api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom

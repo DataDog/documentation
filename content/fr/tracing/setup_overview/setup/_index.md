@@ -4,6 +4,7 @@ kind: documentation
 type: multi-code-lang
 aliases:
   - /fr/tracing/languages
+  - /fr/tracing/setup_overview/setup/undefined
 ---
 Configurez votre application pour envoyer des [traces][1] en utilisant l'une des bibliothèques de tracing Datadog officielles suivantes :
 
@@ -16,4 +17,4 @@ Pour instrumenter une application écrite dans un langage qui n'est pas encore p
 
 
 [1]: /fr/tracing/visualization/#trace
-[2]: /fr/developers/libraries/#apm-tracing-client-libraries
+[2]: /fr/developers/community/libraries/#apm-tracing-client-libraries

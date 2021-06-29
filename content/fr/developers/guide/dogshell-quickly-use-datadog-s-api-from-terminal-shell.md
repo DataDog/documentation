@@ -52,7 +52,7 @@ apikey = <VOTRE_CLÉ_API>
 appkey = <VOTRE_CLÉ_APPLICATION>
 ```
 
-## Commandes Dogshell :
+## Commandes Dogshell
 
 Vous pouvez [consulter le code de Dogshell][4] à des fins de référence. Toutefois, une fois Dogshell installé et initialisé, il vous suffit d'ajouter l'option `-h` aux commandes suivantes pour en savoir plus sur les utilisations spécifiques de Dogshell :
 
@@ -68,7 +68,7 @@ Vous pouvez [consulter le code de Dogshell][4] à des fins de référence. Toute
 * `dog search`
 * `dog comment`
 
-### Exemple d'utilisation de Dogshell
+### Utilisation de Dogshell
 
 Vous pouvez envoyer des métriques vers votre compte Datadog en utilisant ceci :
 

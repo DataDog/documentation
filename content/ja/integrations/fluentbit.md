@@ -17,6 +17,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
     tag: ブログ
     text: Datadog と Fluent Bit を使用してログを一元管理する
+integration_id: fluentbit
 ---
 ## 概要
 
@@ -38,7 +39,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 
 | キー            | 説明                                                                                                              | デフォルト                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                         | US - `http-intake.logs.datadoghq.com`、EU - `http-intake.logs.datadoghq.eu` |
+| ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                         | {{< region-param key="http_endpoint" code="true" >}} |
 | TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。Datadog ではこれを `on` に設定するよう推奨しています。              | `off`                                                                       |
 | apikey         | _必須_ - [Datadog API キー][4]。                                                                                  |                                                                             |
 | 圧縮       | _推奨_ - ペイロードを GZIP 形式で圧縮します。Datadog はこれを `gzip` と設定することをサポートおよび推奨します。           |                                                                             |

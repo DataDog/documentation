@@ -12,6 +12,7 @@ categories:
   - コンテナ
   - ネットワーク
   - security
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:

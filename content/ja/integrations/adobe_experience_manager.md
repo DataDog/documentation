@@ -23,6 +23,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: ログ管理
+integration_id: adobe
 ---
 ## 概要
 

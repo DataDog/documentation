@@ -164,14 +164,16 @@ For example, to show the last triggered time of the monitor in the Tokyo time zo
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`. 
-Refer to the [list of tz database time zones][15], particularly the TZ database name column, to see the list of available time zone values.
+Refer to the [list of tz database time zones][14], particularly the TZ database name column, to see the list of available time zone values.
 
 ### Tag variables
 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
-For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
+For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message. 
 
-**Notes**: Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+<div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.</div>
+
+Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
 #### Multi-alert group by host
 
@@ -334,7 +336,7 @@ The `is_match` condition also supports matching multiple strings:
 To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
-{{^#is_match "role.name" "db"}}
+{{^is_match "role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -425,7 +427,7 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][14] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][15] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
 
@@ -561,5 +563,5 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [11]: /integrations/#cat-notification
 [12]: /events/
 [13]: /monitors/guide/template-variable-evaluation/
-[14]: /monitors/faq/what-are-recovery-thresholds/
-[15]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[14]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[15]: /monitors/faq/what-are-recovery-thresholds/

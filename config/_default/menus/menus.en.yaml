@@ -419,10 +419,14 @@ main:
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
     weight: 1101
+  - name: Incident Management
+    url: getting_started/incident_management/
+    parent: getting_started
+    weight: 12
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 12
+    weight: 13
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -780,6 +784,11 @@ main:
     identifier: events_top_level
     pre: nav_events
     weight: 60000
+  - name: Guides
+    url: events/guides/
+    identifier: events_guides
+    parent: events_top_level
+    weight: 1
   - name: Dashboards
     url: dashboards/
     pre: nav_dashboards
@@ -1046,25 +1055,63 @@ main:
     identifier: metrics_top_level
     pre: nav_metrics
     weight: 110000
-  - name: Advanced Filtering
-    url: metrics/advanced-filtering/
-    parent: metrics_top_level
-    identifier: metrics_advanced_filtering
-    weight: 907
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
     identifier: metrics_explorer
-    weight: 901
-  - name: Summary
-    url: metrics/summary/
-    parent: metrics_top_level
-    weight: 903
+    weight: 1
   - name: Distributions
     url: metrics/distributions/
     parent: metrics_explorer
     identifier: metrics_distributions
-    weight: 902
+    weight: 101
+  - name: Summary
+    url: metrics/summary/
+    parent: metrics_top_level
+    weight: 2
+  - name: Metrics Types
+    url: metrics/types/
+    parent: metrics_top_level
+    weight: 3
+  - name: Metrics Units
+    url: metrics/units/
+    parent: metrics_top_level
+    weight: 4
+  - name: Advanced Filtering
+    url: metrics/advanced-filtering/
+    parent: metrics_top_level
+    identifier: metrics_advanced_filtering
+    weight: 5
+  - name: Custom Metrics
+    url: metrics/custom_metrics/
+    parent: metrics_top_level
+    identifier: metrics_custom_metrics
+    weight: 6
+  - name: Metric Type Modifiers
+    url: metrics/type_modifiers/
+    parent: metrics_custom_metrics
+    identifier: metrics_modifiers
+    weight: 601
+  - name: 'Submission - Agent Check '
+    url: metrics/agent_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_agent
+    weight: 602
+  - name: Submission - DogStatsD
+    url: metrics/dogstatsd_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_dogstatsd
+    weight: 603
+  - name: Submission - Powershell
+    url: metrics/powershell_metrics_submission
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_powershell
+    weight: 604
+  - name: 'Submission - API '
+    url: api/v1/metrics/#submit-metrics
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_api
+    weight: 605
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1791,13 +1838,13 @@ main:
     identifier: log_pipelines
     weight: 201
   - name: Processors
-    url: logs/processing/processors/
-    parent: log_processing
-    weight: 202
-  - name: Parsing
-    url: logs/processing/parsing/
-    parent: log_processing
+    url: logs/log_configuration/processors/
+    parent: log_configuration
     weight: 203
+  - name: Attributes and Aliasing
+    url: logs/processing/attributes_naming_convention/
+    parent: log_processing
+    weight: 204
   - name: Attributes and Aliasing
     url: logs/processing/attributes_naming_convention/
     parent: log_processing
@@ -2331,100 +2378,45 @@ main:
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
     weight: 105
-  - name: Custom Agent Check
-    url: developers/write_agent_check/
+  - name: Custom Checks
+    url: developers/custom_checks/
     parent: dev_tools
+    identifier: custom_checks
     weight: 2
-  - name: Custom OpenMetrics Check
-    url: developers/prometheus/
-    parent: dev_tools
-    weight: 3
+  - name: Writing a Custom Agent Check
+    url: developers/custom_checks/write_agent_check/
+    parent: custom_checks
+    weight: 201
+  - name: Writing a Custom OpenMetrics Check
+    url: developers/custom_checks/prometheus/
+    parent: custom_checks
+    weight: 202
   - name: Integrations
     url: developers/integrations/
     parent: dev_tools
     identifier: dev_tools_integrations
-    weight: 4
+    weight: 3
   - name: Create a new Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
-    weight: 401
+    weight: 301
   - name: Integration assets reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 402
+    weight: 302
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 403
+    weight: 303
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 404
-  - name: Custom Metrics
-    url: metrics/custom_metrics/
-    parent: metrics_top_level
-    identifier: metrics_custom_metrics
-    weight: 999
-  - name: Metrics Types
-    url: metrics/types/
-    parent: metrics_top_level
-    identifier: dev_tools_metrics_metrics_type
-    weight: 905
-  - name: 'Submission - Agent Check '
-    url: metrics/agent_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_agent
-    weight: 502
-  - name: Submission - DogStatsD
-    url: metrics/dogstatsd_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_dogstatsd
-    weight: 503
-  - name: Submission - Powershell
-    url: metrics/powershell_metrics_submission
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_powershell
-    weight: 504
-  - name: 'Submission - API '
-    url: api/v1/metrics/#submit-metrics
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_api
-    weight: 505
-  - name: Metric Type Modifiers
-    url: metrics/type_modifiers/
-    parent: metrics_custom_metrics
-    identifier: metrics_modifiers
-    weight: 506
-  - name: Metrics Units
-    url: metrics/units/
-    parent: metrics_top_level
-    identifier: metrics_units
-    weight: 906
-  - name: Events
-    url: developers/events/
+    weight: 304
+  - name: Marketplace
+    url: developers/marketplace/
     parent: dev_tools
-    identifier: dev_tools_events
-    weight: 6
-  - name: Custom Agent Check
-    url: developers/events/agent/
-    parent: dev_tools_events
-    identifier: dev_tools_events_agent
-    weight: 601
-  - name: DogStatsD
-    url: developers/events/dogstatsd/
-    parent: dev_tools_events
-    identifier: dev_tools_events_dogstatsd
-    weight: 602
-  - name: Email
-    url: developers/events/email/
-    parent: dev_tools_events
-    identifier: dev_tools_events_mail
-    weight: 603
-  - name: API
-    url: api/v1/events/#post-an-event
-    parent: dev_tools_events
-    identifier: dev_tools_events_api
-    weight: 604
+    identifier: marketplace
+    weight: 4
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
@@ -2445,29 +2437,24 @@ main:
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
     weight: 703
-  - name: Libraries
-    url: developers/libraries/
+  - name: Community
+    url: developers/community/
     parent: dev_tools
+    identifier: dev_community
     weight: 8
+  - name: Libraries
+    url: developers/community/libraries/
+    parent: dev_community
+    weight: 801
   - name: Community Office Hours
-    url: developers/office_hours/
-    parent: dev_tools
-    weight: 9
+    url: developers/community/office_hours/
+    parent: dev_community
+    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
     weight: 10
-  - name: Marketplace
-    url: developers/marketplace/
-    parent: dev_tools
-    identifier: marketplace
-    weight: 11
-  - name: Amazon CloudFormation
-    url: developers/amazon_cloudformation/
-    parent: dev_tools
-    identifier: dev_tools_aws_cloudformation
-    weight: 12
   - name: API
     url: api/
     pre: nav_api

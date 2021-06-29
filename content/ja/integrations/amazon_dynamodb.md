@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_dynamodb/'
 draft: false
 git_integration_title: amazon_dynamodb
 has_logo: true
+integration_id: amazon-dynamodb
 integration_title: Amazon DynamoDB
 is_public: true
 kind: インテグレーション
@@ -51,13 +52,13 @@ DynamoDB のパフォーマンスメトリクスを監視する方法につい�
 
 ### ログの収集
 
-#### DynamoDB ログの有効化
+#### ログの有効化
 
 証跡を定義する場合は、ログの書き込み先になる S3 バケットを選択します。
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail ロギング" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="CloudTrail ロギング" popup="true" style="width:70%;">}}
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで DynamoDB ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。

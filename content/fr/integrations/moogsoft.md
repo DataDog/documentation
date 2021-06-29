@@ -29,7 +29,7 @@
 "maintainer": "support@moogsoft.com"
 "manifest_version": "1.0.0"
 "metric_prefix": "moogsoft."
-"metric_to_check": ""
+"metric_to_check": "datadog.marketplace.moogsoft"
 "name": "moogsoft"
 "pricing":
 - "billing_type": tag_count
@@ -89,5 +89,4 @@ Cette application est disponible sur le Marketplace et développée par un parte
 
 [1]: https://support.moogsoft.com
 [2]: https://app.datadoghq.com/marketplace/app/moogsoft/pricing
-
 
