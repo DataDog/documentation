@@ -45,6 +45,7 @@ Each tab in sections below shows a different way to apply integration templates 
 * [Kubernetes pod annotations](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
+* [Helm chart](?tab=helm#configuration)
 
 **Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8].
 To set up integrations that are not compatible with standard Autodiscovery, you can use an official Prometheus exporter in the pod, and then use the OpenMetrics check with Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and the OpenMetrics check with Datadog Autodiscovery can then access the data.
@@ -238,6 +239,28 @@ With the key-value store enabled as a template source, the Agent looks for templ
 [1]: /integrations/consul/
 [2]: /agent/guide/agent-commands/
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+The `values.yaml` file contains a `confd` section to define both static and Autodiscovery integration checks. You can find inline examples in the sample [values.yaml][1]. Each key becomes a file in the Agent's `conf.d` directory.
+
+```yaml
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      init_config:
+        - <INIT_CONFIG>
+      instances:
+        - <INSTANCES_CONFIG>
+```
+See the [Autodiscovery Container Identifiers][1] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
+
+**Note**: The Helm chart has two `confd` sections: one for Agent checks, and a second for cluster checks. If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, follow the [cluster check configuration example][2] and make sure to include `cluster_check: true`. See the [Cluster Check documentation][3] for more context. 
+
+[1]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L244-L261 
+[2]: https://github.com/helm/charts/blob/fbdaa84049d93d8e40bc8c26b0987f3883fa1cac/stable/datadog/values.yaml#L426-L438
+[3]: /agent/cluster_agent/clusterchecks
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Examples
@@ -337,6 +360,25 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
+
+[1]: /agent/faq/template_variables/
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+The following configuration defines the integration template for Redis containers with a custom password parameter:
+```yaml
+  confd
+    redisdb.yaml: |-
+      ad_identifiers:
+        - redis
+      init_config:
+      instances:
+        - host: %%host%%
+          port: 6379
+          password: %%env_REDIS_PASSWORD%%
+```
+As a result, the Agent now contains a `redis.yaml` file with the above configuration in the `/confd` directory.
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text. Hence, you must pass the `REDIS_PASSWORD` environment variable to the Agent. See the [Autodiscovery template variable documentation][1].
 
 [1]: /agent/faq/template_variables/
 {{% /tab %}}
