@@ -28,12 +28,18 @@ Install and enable the [Datadog Jenkins plugin][2] v3.0.0 or newer:
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the `Datadog Agent` mode.
-4. Configure the `Agent` host.
-5. Configure the `Traces Collection` port.
+4. Configure the `Datadog Agent` host.
+5. Configure the `Traces Collection` port. (By default `8126` in the Datadog Agent)
 6. Click on `Enable CI Vibisility` checkbox to activate it.
 7. Configure your CI Instance name.
 8. Check the connectivity with the Datadog Agent.
 9. Save your configuration.
+10. To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
+
+{{< code-block lang="text" >}}
+Re/Initialize Datadog-Plugin Tracer: hostname = <HOST>, traceCollectionPort = <TRACE_PORT>
+DATADOG TRACER CONFIGURATION {...}
+{{< /code-block >}}
 
 **Note**: Enabling CI Visibility using the Jenkins plugin is incompatible with running the Java APM tracer as a Java agent when launching Jenkins.
 
@@ -45,7 +51,7 @@ Enable log collection in the Agent:
 
 1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
 
-2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` (for Linux; [check here for other operating systems][4]) with the following contents. Make sure that `service` matches the `traceServiceName` provided earlier:
+2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` (for Linux; [check here for other operating systems][4]) with the following contents. Make sure that `service` matches the CI Instance name provided earlier:
 
 {{< code-block lang="yaml" >}}
 logs:
@@ -90,6 +96,7 @@ pipeline {
     }
 }
 {{< /code-block >}}
+
 ## Customization
 
 ### Setting custom tags for your pipelines
@@ -148,6 +155,61 @@ Once the integration is successfully configured, both [Pipelines][6] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+## Troubleshooting
+
+### Configure DEBUG log level for Datadog Plugin logs
+
+If you have any issue with the Datadog Plugin, you can set the logs for the plugin in a `DEBUG` log level. Using this level, you will be able to check the exception stacktrace if some issue happens.
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > System log**.
+2. Click on `Add new log recorder` button.
+3. Type the log recorder name. E.g: **Datadog Plugin Logs**.
+4. Add the following loggers to the list:
+- Logger: `org.datadog.jenkins.plugins.datadog.clients` -> Log Level `ALL`
+- Logger: `org.datadog.jenkins.plugins.datadog.traces` -> Log Level `ALL`
+- Logger: `org.datadog.jenkins.plugins.datadog.logs` -> Log Level `ALL`
+- Logger: `org.datadog.jenkins.plugins.datadog.model` -> Log Level `ALL`
+- Logger: `org.datadog.jenkins.plugins.datadog.listeners` -> Log Level `ALL`
+5. Save the configuration.
+
+You may also want to split the loggers into different log recorders.
+
+Once the log recorders are successfully configured, you can check the logs in the `DEBUG` mode by accessing to the desired log recorder via **Manage Jenkins > System log**.
+
+If you triggered some Jenkins pipelines, you can search for `Send pipeline traces` message in the **Datadog Plugin Logs**. This message indicates that the plugin is sending **CI Visibility** data to the **Datadog Agent**.
+
+{{< code-block lang="text" >}}
+Send pipeline traces.
+...
+Send pipeline traces.
+...
+{{< /code-block >}}
+
+### The Datadog Plugin section does not appear in the Jenkins configuration
+
+If the Datadog Plugin section does not appear in Jenkins configuration section, you need to make sure that the plugin is enabled. To do so:
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
+2. Search for `Datadog Plugin` in the **Installed** tab.
+3. Check that the `Enabled` checkbox is marked.
+4. If you enable the plugin here, restart your Jenkins instance using `/safeRestart` URL path.
+
+### The Plugin Tracer failed to initialized due to APM Java Tracer is used to instrument Jenkins.
+
+If this error message appears in the **Jenkins Log**, you need to make sure that you are not using the APM Java Tracer to instrument your Jenkins instance.
+
+{{< code-block lang="text" >}}
+Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
+{{< /code-block >}}
+
+1. Access to your Jenkins controller instance machine via console.
+2. Check the Java startup line for the Jenkins process.
+{{< code-block lang="shell" >}}
+$> ps -ef | grep jenkins
+{{< /code-block >}}
+3. Ensure you are not using the APM Java Tracer as `-javaagent`.
+
+**Note**: Enabling CI Visibility using the Jenkins plugin is incompatible with running the Java APM tracer as a Java agent when launching Jenkins.
 
 ## Further reading
 
