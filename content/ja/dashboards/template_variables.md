@@ -9,14 +9,17 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
     tag: ブログ
     text: 関連するテンプレート変数を使用してダッシュボードを調整
+  - link: 'https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/'
+    tag: ブログ
+    text: 動的テンプレート変数構文でダッシュボードのワークフローを高速化
   - link: /dashboards/
     tag: ドキュメント
     text: Datadog でダッシュボードを作成
   - link: /dashboards/sharing/
-    tag: ドキュメント
+    tag: Documentation
     text: Datadogの外部でグラフを共有
   - link: /dashboards/widgets/
-    tag: Documentation
+    tag: ドキュメント
     text: ダッシュボードのウィジェットについて
 ---
 テンプレート変数により、ダッシュボード内の 1 つ以上のウィジェットを動的にフィルタリングすることができます。
@@ -78,8 +81,10 @@ further_reading:
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="テンプレート変数を選択"  style="width:75%;">}}
 
+テンプレート変数の値を変更する場合、ダッシュボード URL はそのテンプレート変数の値を反映するよう、`&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>` というフォーマットで更新されます。たとえば、テンプレート変数が `$env` のダッシュボードで値が `prod` に変更された場合、URL のパラメーターは `&tpl_var_env=prod` となります。
+
 #### 関連するテンプレート変数
-テンプレート変数に値を選択する際、**Associated Values** と **Other Values** セクションが表示されます。関連する値は、ページに選択された他のテンプレート変数の値を考量して計算され、コンフィギュレーションせずに関連する値をシームレスに特定します。
+テンプレート変数の値を選択するときに、**Associated Values** および **Other Values** セクションが表示されます。Associated Values はページで選択されたその他のテンプレート変数の値を考慮して計算され、コンフィギュレーションなしで関連する値をシームレスに示します。
 
 {{< img src="dashboards/template_variables/associated_template_variables.png" alt="関連するテンプレート変数"  style="width:75%;">}}
 

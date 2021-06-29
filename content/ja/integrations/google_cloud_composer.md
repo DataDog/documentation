@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_composer/'
 draft: false
 git_integration_title: google_cloud_composer
 has_logo: true
+integration_id: google-cloud-composer
 integration_title: Google Cloud Composer
 is_public: true
 kind: integration

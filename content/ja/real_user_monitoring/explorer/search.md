@@ -60,11 +60,14 @@ further_reading:
 
 ## 例
 
-| 検索クエリ                                                 | 説明                                                                                                                                         |
-|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                      | `http.url_details.path` 属性内で、`/api/v1/test` を含むすべてのビューを検索します。                                                              |
-| `@http.url:\/api\/v1\/*`                                     | `http.url` 属性内で、`/api/v1/` で始まる値を含むすべてのビューを検索します。                                                            |
-| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | 応答時間 (`duration`) が 100 ～ 300ns かつ `http.url_details.path` 属性内で `/api/v1/` で始まる値を含むすべてのビューを検索します。 |
+`@http.url_details.path:"/api/v1/test"`
+: `http.url_details.path` 属性内で、`/api/v1/test` を含むすべてのビューを検索します。
+
+`@http.url:\/api\/v1\/*`
+: `http.url` 属性内で、`/api/v1/` で始まる値を含むすべてのビューを検索します。
+
+`@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*`
+: 応答時間 (`duration`) が 100 ～ 300ns かつ `http.url_details.path` 属性内で `/api/v1/` で始まる値を含むすべてのビューを検索します。
 
 ## その他の参考資料
 

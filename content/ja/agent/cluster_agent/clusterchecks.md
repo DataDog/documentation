@@ -310,7 +310,7 @@ Agent の `status` コマンドは、正しく実行されて報告を行って�
 [2]: /ja/agent/cluster_agent/
 [3]: /ja/agent/cluster_agent/setup/
 [4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[5]: /ja/developers/write_agent_check/
+[5]: /ja/developers/custom_checks/write_agent_check/
 [6]: /ja/integrations/mysql/
 [7]: /ja/agent/faq/template_variables/
 [8]: /ja/getting_started/tagging/unified_service_tagging

@@ -14,7 +14,7 @@ further_reading:
     tag: Documentation
     text: Recueillir vos traces
 ---
-## Pourquoi utiliser un proxy
+## Présentation
 
 Si votre configuration réseau restreint le trafic sortant, transférez tout le trafic de l'Agent vers un ou plusieurs hosts dotés de stratégies de connexion sortante plus souples.
 
@@ -24,9 +24,9 @@ Il existe plusieurs options pour envoyer du trafic vers Datadog via SSL/TLS pour
 2. Utilisation de HAProxy (si vous souhaitez appliquer le même proxy à **plus de 16 à 20 Agents**)
 3. Utilisation de l'Agent en tant que proxy (**jusqu'à 16 Agents** par proxy, **seulement sur la version 5 de l'Agent**)
 
-## Utilisation d'un proxy Web en tant que proxy
+## Proxy Web
 
-Les proxys Web traditionnels sont pris en charge de manière native par l'Agent. Si vous devez vous connecter à Internet via un proxy, modifiez le fichier de configuration de l'Agent.
+Les proxies Web traditionnels sont pris en charge de manière native par l'Agent. Si vous devez vous connecter à Internet via un proxy, modifiez le fichier de configuration de l'Agent.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -91,8 +91,13 @@ proxy:
 * Un hostname
   - Par ex., `webserver1`
 
+`NO_PROXY` doit correspondre exactement aux endpoints des requêtes HTTP(S) de l'Agent. Activez `no_proxy_nonexact_match` pour autoriser l'Agent à appliquer aux valeurs `NO_PROXY` les mêmes règles (ci-dessus) utilisées pour les intégrations.
 
-#### Variables d'environnement
+```yaml
+no_proxy_nonexact_match: true
+```
+
+#### Avec des variables d'environnement
 
 À partir de l'Agent v6.4, vous pouvez définir vos paramètres de proxy via des variables d'environnement :
 
@@ -133,11 +138,11 @@ N'oubliez pas de [redémarrer l'Agent][1] pour que les nouveaux paramètres soie
 {{% /tab %}}
 {{< /tabs >}}
 
-## Utiliser HAProxy en tant que proxy
+## HAProxy
 
 [HAProxy][1] est une solution gratuite, rapide et fiable pouvant être utilisée comme proxy TCP ou HTTP. Même si HAProxy est généralement utilisé en tant que répartiteur de charge pour distribuer les requêtes entrantes vers les serveurs de pools, vous pouvez également l'utiliser pour appliquer un proxy au trafic de l'Agent vers Datadog à partir des hosts qui ne présentent aucune connectivité externe.
 
-Il s'agit de la meilleure option si vous ne disposez pas d'un proxy web facilement disponible sur votre réseau et que vous souhaitez appliquer un proxy à un grand nombre d'Agents. Dans certains cas, une seule instance HAProxy suffit à gérer le trafic local de l'Agent sur votre réseau. Chaque proxy peut prendre en charge jusqu'à 1 000 Agents. (À noter qu'il s'agit d'une estimation modeste basée sur les performances d'instances m3.xl. Plusieurs variables liées au réseau peuvent influencer la charge sur les proxys. Comme toujours, effectuez le déploiement avec prudence. Consultez la [documentation relative à HAProxy][2] pour en savoir plus.)
+Il s'agit de la meilleure option si vous ne disposez pas d'un proxy web facilement disponible sur votre réseau et que vous souhaitez appliquer un proxy à un grand nombre d'Agents. Dans certains cas, une seule instance HAProxy suffit à gérer le trafic local de l'Agent sur votre réseau. Chaque proxy peut prendre en charge jusqu'à 1 000 Agents. (À noter qu'il s'agit d'une estimation modeste basée sur les performances d'instances m3.xl. Plusieurs variables liées au réseau peuvent influencer la charge sur les proxies. Comme toujours, effectuez le déploiement avec prudence. Consultez la [documentation relative à HAProxy][2] pour en savoir plus.)
 
 `Agent ---> haproxy ---> Datadog`
 
@@ -165,7 +170,6 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-
 # Ceci déclare un accès aux statistiques HAProxy sur le port 3833
 # Vous n'avez pas besoin d'identifiants pour afficher cette page et vous pouvez
 # désactiver l'accès une fois la configuration terminée.
@@ -514,7 +518,7 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 {{% /tab %}}
 {{< /tabs >}}
 
-## Utiliser NGINX en tant que proxy
+## NGINX
 
 [NGINX][3] est un serveur Web qui peut également être utilisé comme reverse proxy, répartiteur de charge, proxy de messagerie ou cache HTTP. Vous pouvez également utiliser NGINX comme proxy pour vos Agents Datadog :
 
@@ -641,7 +645,7 @@ logs_config:
 Pour envoyer logs via TCP, consultez la page relative au <a href="/agent/logs/proxy">proxy TCP pour les logs</a>.
 
 
-## Utiliser l'Agent comme proxy
+## Agent Datadog
 
 **Cette fonction est uniquement disponible avec l'Agent v5**
 

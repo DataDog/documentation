@@ -20,7 +20,7 @@ La fonction `fill()` comprend deux paramètres :
 
 * `LIMITE` [*facultatif*, *défaut*=**300**, *maximum*=**600**] : la limite d'interpolation (en secondes), c'est-à-dire la taille maximale d'un intervalle manquant que vous souhaitez interpoler.
 
-## Default Zero
+## Default zero
 
 | Fonction         | Description                             | Exemple                          |
 | ---------------- | --------------------------------------- | -------------------------------- |

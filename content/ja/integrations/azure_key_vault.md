@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_key_vault/'
 draft: false
 git_integration_title: azure_key_vault
 has_logo: true
+integration_id: azure-keyvault
 integration_title: Microsoft Azure Key Vault
 is_public: true
 kind: インテグレーション
@@ -30,7 +31,7 @@ Datadog Azure インテグレーションを使用して、Azure Key Vault か�
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 
