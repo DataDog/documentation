@@ -93,7 +93,7 @@ Transform:
     Parameters:
       stackName: !Ref "AWS::StackName"
       apiKey: <DATADOG_API_KEY>
-      nodeLayerVersion: "<LAYER_VERSION>"
+      pythonLayerVersion: "<LAYER_VERSION>"
       extensionLayerVersion: "<EXTENSION_VERSION>"
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
