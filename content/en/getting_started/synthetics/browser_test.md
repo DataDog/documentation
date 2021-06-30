@@ -19,7 +19,7 @@ further_reading:
 
 ## Create a browser test
 
-[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform key business transactions on your applications and that they are not badly impacted by the most recent code changes.
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform key business transactions on your applications and that they are not negatively impacted by the most recent code changes.
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
