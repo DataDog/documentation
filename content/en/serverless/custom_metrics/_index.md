@@ -8,8 +8,8 @@ kind: documentation
 There are a few different ways to submit custom metrics to Datadog from a Lambda function. 
 
 - **Creating custom metrics from logs or traces**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can [generate custom metrics from logs and traces](#creating-custom-metrics-from-logs-or-traces) without re-deploying or making any changes to your application code.
-- **Submitting custom metrics using the Datadog Lambda Extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda Extension](#with-the-datadog-lambda-extension). Check whether the Datadog Lambda Extension is supported for the runtime of your Lambda function [here][1]. The Datadog Lambda Extension does _NOT_ support metrics with timestamps that are from the past.  
-- **Submitting custom metrics using the Datadog Forwarder Lambda**: If you want to submit custom metrics from a runtime that is not yet supported by the Datadog Lambda Extension, you can use the [Datadog Forwarder Lambda](#with-the-datadog-forwarder). The Datadog Forwarder Lambda supports metrics with timestamps from the past 15 mins.
+- **Submitting custom metrics using the Datadog Lambda Extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda Extension](#with-the-datadog-lambda-extension). Check whether the Datadog Lambda Extension is supported for the runtime of your Lambda function [here][1].  
+- **Submitting custom metrics using the Datadog Forwarder Lambda**: If you want to submit custom metrics from a runtime that is not yet supported by the Datadog Lambda Extension, you can use the [Datadog Forwarder Lambda](#with-the-datadog-forwarder).
 - **(Deprecated) Submitting custom metrics from CloudWatch logs**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been [deprecated](#deprecated-cloudwatch-logs), and you should migrate to one of the solutions above.
 - **(Not recommended) Using a third-party library**: Most [third-party libraries](#third-party-libraries) do not submit metrics as distributions and can lead to under-counted results.
 
@@ -26,29 +26,27 @@ You can also generate metrics from 100% of ingested spans, regardless of whether
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Custom Metrics from AWS Lambda" >}}
 
-Datadog recommends using [Datadog Lambda Extension][1] to submit custom metrics from a supported Lambda runtime.
+Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metrics from supported Lambda runtimes.
 
 1. Follow the general [serverless installation instructions][6] to configure your Lambda function and install the Datadog Lambda Library and Extension.
-1. If you are not interested in collecting traces from the Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
-1. If you are not interested in collecting logs from the Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
+1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
+1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the [sample code](#custom-metrics-sample-code).
 
 If your Lambda function is associated with a VPC, ensure that your function can reach Datadog API endpoints either through the public internet, [PrivateLink][7] or a [proxy][8].
 
 ### With the Datadog Forwarder
 
-Datadog recommends using [Datadog Forwarder Lambda][9] to submit custom metrics from a Lambda runtime that is not yet supported by the Datadog Lambda Extension.
+Datadog recommends using the [Datadog Forwarder Lambda][9] to submit custom metrics from Lambda runtimes that are not yet supported by the Datadog Lambda Extension.
 
 1. Follow the general [serverless installation instructions][6] to configure your Lambda function, install the Datadog Lambda Library and the Datadog Forwarder Lambda function, and subscribe the Forwarder to your function's log group.
-1. If you are not interested in collecting traces from the Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false` on your own Lambda function.
-1. If you are not interested in collecting logs from the Lambda function, update the Forwarder's CloudFormation stack parameter `DdForwardLog` to `false`.
+1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false` on your own Lambda function.
+1. If you are not interested in collecting logs from your Lambda function, set the Forwarder's CloudFormation stack parameter `DdForwardLog` to `false`.
 1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the [sample code](#custom-metrics-sample-code).
 
-If the Datadog Lambda Library is not available for your runtime, you can print metrics to CloudWatch logs in the expected JSON format on your own. Select the "Other" tab from [sample code](#custom-metrics-sample-code) section.
+If the Datadog Lambda Library is not available for your runtime, you can print metrics to CloudWatch logs in the expected JSON format on your own. Select the "Other" tab from the [sample code](#custom-metrics-sample-code) section.
 
 ## Custom metrics sample code
-
-Refer to the following sample code for both synchronous and asynchronous custom metric submissions. 
 
 **Note:** The arguments to the custom metrics reporting methods have the following requirements:
 
