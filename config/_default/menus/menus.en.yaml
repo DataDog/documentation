@@ -1832,47 +1832,42 @@ main:
     parent: log_management
     identifier: log_configuration
     weight: 2
-  - name: Processing
-    url: logs/log_configuration/processing/
-    parent: log_configuration
-    identifier: log_processing
-    weight: 201
   - name: Pipelines
     url: logs/log_configuration/pipelines/
     parent: log_configuration
     identifier: log_pipelines
-    weight: 202
+    weight: 201
   - name: Processors
     url: logs/log_configuration/processors/
     parent: log_configuration
-    weight: 203
+    weight: 202
   - name: Attributes and Aliasing
-    url: logs/processing/attributes_naming_convention/
+    url: logs/log_collection/?tab=host#attributes-and-tags
     parent: log_processing
-    weight: 204
+    weight: 203
   - name: Attributes and Aliasing
     url: logs/log_configuration/attributes_naming_convention/
     parent: log_configuration
-    weight: 205
+    weight: 204
   - name: Generate Metrics
     url: logs/log_configuration/logs_to_metrics/
     parent: log_configuration
     identifier: log_to_metrics
-    weight: 206
+    weight: 205
   - name: Indexes
     url: logs/log_configuration/indexes
     parent: log_configuration
     identifier: log_indexes
-    weight: 207
+    weight: 206
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 208
+    weight: 207
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 209
+    weight: 208
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: log_management
