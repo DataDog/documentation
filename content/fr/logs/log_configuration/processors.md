@@ -10,7 +10,7 @@ further_reading:
     text: Découvrir les pipelines de Datadog
   - link: /logs/logging_without_limits/
     tag: Documentation
-    text: Logging without Limits
+    text: Logging without Limits*
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
@@ -750,6 +750,9 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /fr/logs/processing/parsing/#advanced-settings
 [2]: /fr/logs/processing/pipelines/

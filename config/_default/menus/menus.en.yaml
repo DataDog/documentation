@@ -794,101 +794,105 @@ main:
     pre: nav_dashboards
     identifier: dashboards
     weight: 70000
-  - name: Screenboards
-    url: dashboards/screenboards/
+  - name: Dashboard Layout
+    url: dashboards/dashboards/
     parent: dashboards
     weight: 1
-  - name: Timeboards
+  - name: Timeboard Layout
     url: dashboards/timeboards/
     parent: dashboards
     weight: 2
+  - name: Screenboard Layout
+    url: dashboards/screenboards/
+    parent: dashboards
+    weight: 3
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
-    weight: 3
+    weight: 4
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
-    weight: 4
+    weight: 5
   - name: Functions
     url: dashboards/functions/
     parent: dashboards
     identifier: dashboards_functions
-    weight: 5
+    weight: 6
   - name: Algorithms
     url: dashboards/functions/algorithms/
     parent: dashboards_functions
-    weight: 501
+    weight: 601
   - name: Arithmetic
     url: dashboards/functions/arithmetic/
     parent: dashboards_functions
-    weight: 502
+    weight: 602
   - name: Count
     url: dashboards/functions/count/
     parent: dashboards_functions
-    weight: 503
+    weight: 603
   - name: Exclusion
     url: dashboards/functions/exclusion/
     parent: dashboards_functions
-    weight: 503
+    weight: 603
   - name: Interpolation
     url: dashboards/functions/interpolation/
     parent: dashboards_functions
-    weight: 504
+    weight: 604
   - name: Rank
     url: dashboards/functions/rank/
     parent: dashboards_functions
-    weight: 505
+    weight: 605
   - name: Rate
     url: dashboards/functions/rate/
     parent: dashboards_functions
-    weight: 506
+    weight: 606
   - name: Regression
     url: dashboards/functions/regression/
     parent: dashboards_functions
-    weight: 507
+    weight: 607
   - name: Rollup
     url: dashboards/functions/rollup/
     parent: dashboards_functions
-    weight: 508
+    weight: 608
   - name: Smoothing
     url: dashboards/functions/smoothing/
     parent: dashboards_functions
-    weight: 509
+    weight: 609
   - name: Timeshift
     url: dashboards/functions/timeshift/
     parent: dashboards_functions
-    weight: 510
+    weight: 610
   - name: Beta
     url: dashboards/functions/beta/
     parent: dashboards_functions
-    weight: 511
+    weight: 611
   - name: Correlations
     url: dashboards/correlations/
     parent: dashboards
-    weight: 6
+    weight: 7
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 7
+    weight: 8
     identifier: dashboards_temp_variables
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 8
+    weight: 9
   - name: Graphing with JSON
     url: dashboards/graphing_json/
     parent: dashboards
     identifier: graphing_json
-    weight: 9
+    weight: 10
   - name: Widget JSON schema
     url: dashboards/graphing_json/widget_json/
     parent: graphing_json
-    weight: 901
+    weight: 1001
   - name: Request JSON schema
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
-    weight: 902
+    weight: 1002
   - name: Mobile Application
     url: mobile/
     identifier: mobile
@@ -2143,10 +2147,10 @@ main:
     parent: rum_browser
     identifier: rum_data_collected
     weight: 101
-  - name: Advanced Configuration
-    url: real_user_monitoring/browser/advanced_configuration/
+  - name: Modifying Data and Context
+    url: real_user_monitoring/browser/modifying_data_and_context/
     parent: rum_browser
-    identifier: rum_advanced
+    identifier: rum_modify
     weight: 102
   - name: Monitoring Page Performance
     url: real_user_monitoring/browser/monitoring_page_performance/

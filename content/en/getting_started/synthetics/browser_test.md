@@ -48,7 +48,7 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Your managed locations often include public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select **Private Locations** instead.
 
-For more information, see [Getting Started with Private Locations][10].
+For more information, see [Getting Started with Private Locations][3].
 
 #### Specify test frequency
 
@@ -64,7 +64,7 @@ Specify the number of failures per browser and device before the test is conside
 Retry 1 time after 300 ms in case of failure
 ```
 
-**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure this interval with the [Synthetics API][3].
+**Note**: By default, the wait time for a failed test to retry is 300ms. You can configure this interval with the [Synthetics API][4].
 
 To avoid being alerted on network blips that might happen on specific locations, set up an alerting condition such as:
 
@@ -74,7 +74,7 @@ An alert is triggered if your test fails for 0 minutes from any 3 of 13 location
 
 #### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][4] such as Slack, PagerDuty, and webhooks.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can tag other teams, specify which service and team members receive the alert notifications, and use [integrations][5] such as Slack, PagerDuty, and webhooks.
 
 Set a time for your alert notification to re-notify if the alert has not been resolved, and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
@@ -84,7 +84,7 @@ When you're ready to record your test, click **Save Details & Record Test**.
 
 ### Create recording
 
-Once your test configuration has saved, Datadog prompts you to download and install the [Datadog test recorder][5] extension. You can run browser tests on Google Chrome, Microsoft Edge, and Firefox. 
+Once your test configuration has saved, Datadog prompts you to download and install the [Datadog test recorder][6] extension. You can run browser tests on Google Chrome, Microsoft Edge, and Firefox. 
 
 To begin recording your test steps, click **Start Recording**. 
 
@@ -140,11 +140,9 @@ For wildcards, use `*`. For example, `https://*.datadoghq.com/*`.
 
 [1]: /synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /api/v1/synthetics/#create-or-clone-a-test
-[4]: /integrations/
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[6]: https://www.google.com/chrome/
+[3]: /getting_started/synthetics/private_location
+[4]: /api/v1/synthetics/#create-or-clone-a-test
+[5]: /integrations/
+[6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [7]: /synthetics/browser_tests/#actions
 [8]: /synthetics/apm/
-[9]: /synthetics/
-[10]: /getting_started/synthetics/private_location
