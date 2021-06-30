@@ -19,7 +19,7 @@ further_reading:
   text: "Discover all available Widgets for your Dashboard"
 ---
 
-Dashboards are the next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past. They also work well for debugging dashboards.
+Dashboards are on a next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past. They also work well for debugging.
 
 To switch from the [Timeboard layout][1] to the Dashboard layout, use `Pick Layout` in the cog menu and select `Grid`.
 

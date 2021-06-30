@@ -45,7 +45,7 @@ To create a dashboard, click on **+New Dashboard** on the [dashboard list page][
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard"  style="width:70%;">}}
 
 ### Dashboards
-[Dashboards][2] are the next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past. They also work well for debugging dashboards.
+[Dashboards][2] are on a next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
 
 ### Timeboards
 [Timeboards][3] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
@@ -54,12 +54,13 @@ To create a dashboard, click on **+New Dashboard** on the [dashboard list page][
 [Screenboards][4] are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
 
 ## Configuring dashboards
+
 ### Global time selector
 To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in a widget’s editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. You can select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or by [entering a custom time frame][5]. If a moving window is chosen, the widgets are updated to move along with the time window.
+The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][5]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
-Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019, through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
+Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
 
 ### TV mode
 
@@ -81,7 +82,7 @@ If notifications are activated for a dashboard, an event is created in the [even
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
-Change events for dashboards with notifications enabled can be seen in the event stream by searching:
+Change events for dashboards with notifications enabled are seen in the event stream by searching:
 
 ```text
 tags:audit,dash
@@ -101,7 +102,7 @@ Use this option to copy the entire dashboard to a new dashboard. You are prompte
 
 #### Copy, import, or export dashboard JSON
 
-From an individual dashboard, you can copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
+From an individual dashboard, copy, import, or export a dashboard's JSON using the settings cog (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
