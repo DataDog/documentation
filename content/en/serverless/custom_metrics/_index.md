@@ -193,7 +193,7 @@ When evaluating third-party metrics libraries for AWS Lambda, ensure they suppor
 
 ## [DEPRECATED] CloudWatch logs
 
-**This method of submitting custom metrics is no longer supported, and is disabled for all new customers. Migrate to one of the recommended solutions.**.
+**This method of submitting custom metrics is no longer supported, and is disabled for all new customers. Migrate to one of the recommended solutions.**
 
 **Note**: If you are migrating to one of the recommended solutions, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
 
