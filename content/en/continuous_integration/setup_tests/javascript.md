@@ -56,6 +56,7 @@ yarn add --dev jest-circus
 
 
     **Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
+
     {{< code-block lang="bash" >}}
 yarn add --dev jest-circus@25.5.4
 {{< /code-block >}}
