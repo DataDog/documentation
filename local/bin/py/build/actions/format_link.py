@@ -83,7 +83,9 @@ def check_references(all_references):
             duplicated_reference_index, duplicated_reference_val = duplicated_reference
             print('Duplicated reference: [{}]: {}'.format(
                 duplicated_reference_index, duplicated_reference_val))
-        raise AssertionError
+        # having a duplicate index => value doesn't actually break hugo or the page
+        # lets just print and skip halting the build
+        # raise AssertionError
 
     return all_references_deduped
 
