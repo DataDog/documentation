@@ -22,7 +22,7 @@ further_reading:
 
 ## Create a single API test
 
-[API tests][1] **proactively monitor** that your most important services are available at anytime and from anywhere. API tests come in four different flavors that allow you to launch requests on the **different network layers** of your systems.
+[API tests][1] **proactively monitor** that your most important services are available at anytime and from anywhere. API tests come in five different subtypes that allow you to launch requests on the **different network layers** of your systems.
 
 The example below demonstrates the creation of an [HTTP test][2], a subtype of [API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as expected **response time**, **HTTP status code**, and **header or body contents**.
 
