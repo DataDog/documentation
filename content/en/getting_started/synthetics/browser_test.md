@@ -69,7 +69,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][4] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
 
-You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
+You can set your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test"  style="width:90%;">}}
 
