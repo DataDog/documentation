@@ -35,7 +35,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 
 If your Lambda function is associated with a VPC, ensure that your function can reach Datadog API endpoints either through the public internet, [PrivateLink][7] or a [proxy][8].
 
-### With the Datadog Forwarder
+## With the Datadog Forwarder
 
 Datadog recommends using the [Datadog Forwarder Lambda][9] to submit custom metrics from Lambda runtimes that are not yet supported by the Datadog Lambda Extension.
 
