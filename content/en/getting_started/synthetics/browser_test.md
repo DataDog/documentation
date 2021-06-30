@@ -41,7 +41,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
-Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
+Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
 
 For more information on how to set up private locations, see [Getting Started with Private Locations][3].
 
@@ -59,7 +59,7 @@ You can specify the number of consecutive failures that should happen before con
 Retry test 2 times after 300 ms in case of failure
 ```
 
-You can also configure your test to only trigger a notification when your endpoint goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
+You can also configure your test to only trigger a notification when your application goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
