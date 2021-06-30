@@ -10,7 +10,7 @@ further_reading:
   text: "Discover Datadog Pipelines"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
-  text: "Logging without limit"
+  text: "Logging without Limits*"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
@@ -751,6 +751,9 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/processing/parsing/#advanced-settings
 [2]: /logs/processing/pipelines/
