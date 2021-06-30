@@ -97,7 +97,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 #### Message attribute
 
-By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][1], where it is indexed for [full text search][2].
+By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [Log Explorer][1], where it is indexed for [full text search][2].
 
 Specify alternate attributes to use as the source of a log's message by setting a [log message remapper processor][3].
 
