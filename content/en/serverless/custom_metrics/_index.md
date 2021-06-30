@@ -8,14 +8,14 @@ kind: documentation
 There are a few different ways to submit custom metrics to Datadog from a Lambda function. 
 
 - **Creating custom metrics from logs or traces**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can [generate custom metrics from logs and traces](#creating-custom-metrics-from-logs-or-traces) without re-deploying or making any changes to your application code.
-- **Submitting custom metrics using the Datadog Lambda Extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda Extension](#with-the-datadog-lambda-extension). Check whether the Datadog Lambda Extension is supported for the runtime of your Lambda function [here][1].  
+- **Submitting custom metrics using the Datadog Lambda Extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda Extension](#with-the-datadog-lambda-extension). [Check whether the Datadog Lambda Extension is supported][1] in your Lambda function runtime.  
 - **Submitting custom metrics using the Datadog Forwarder Lambda**: If you want to submit custom metrics from a runtime that is not yet supported by the Datadog Lambda Extension, you can use the [Datadog Forwarder Lambda](#with-the-datadog-forwarder).
 - **(Deprecated) Submitting custom metrics from CloudWatch logs**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been [deprecated](#deprecated-cloudwatch-logs), and you should migrate to one of the solutions above.
 - **(Not recommended) Using a third-party library**: Most [third-party libraries](#third-party-libraries) do not submit metrics as distributions and can lead to under-counted results.
 
 ### Understanding distribution metrics
 
-Custom metrics submitted from Lambda functions are aggregated as [distributions][2], because they are designed to instrument applications, independent of the underlying hosts. You can query the metrics using aggregations: `avg`, `sum`, `max`, `min`, `count`. You can also enable percentile aggregations (p50, p75, p90, p95, p99), and [manage tags][3] for aggregation on the metric summary page.
+Custom metrics submitted from Lambda functions are aggregated as [distributions][2], because they are designed to instrument applications, independent of the underlying hosts. You can query the metrics using aggregations: `avg`, `sum`, `max`, `min`, `count`. You can also enable percentile aggregations (p50, p75, p90, p95, p99), and [manage tags][3] for aggregation on the Metric Summary page.
 
 ## Creating custom metrics from logs or traces
 
@@ -33,7 +33,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the [sample code](#custom-metrics-sample-code).
 
-If your Lambda function is associated with a VPC, ensure that your function can reach Datadog API endpoints either through the public internet, [PrivateLink][7] or a [proxy][8].
+If your Lambda function is running in a VPC, ensure that your function can reach Datadog API endpoints either through the public internet, [PrivateLink][7] or a [proxy][8].
 
 ## With the Datadog Forwarder
 
