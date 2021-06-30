@@ -70,7 +70,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Improve application latency][9] and optimize compute resources with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
-{{< vimeo 441865141 >}}
+{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
 ### Live search
 
