@@ -51,7 +51,7 @@ Select the frequency that your test runs.
 
 #### Define alert conditions
 
-You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your endpoint.
+You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your application.
 
 You can specify the number of consecutive failures that should happen before considering a location failed:
 
