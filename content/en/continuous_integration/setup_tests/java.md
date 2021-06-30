@@ -37,7 +37,7 @@ Supported CI providers:
 
 ### Maven
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]: 
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]:
 
 {{< code-block lang="xml" >}}
 <profile>
@@ -56,8 +56,8 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
         <artifactId>dd-java-agent</artifactId>
         <version>$VERSION</version>
         <scope>provided</scope>
-    </dependency>  
-  </dependencies> 
+    </dependency>
+  </dependencies>
 </profile>
 {{< /code-block >}}
 
@@ -86,7 +86,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-surefire-plugin</artifactId>
   <configuration>
-    <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
+    <argLine>${dd.java.agent.arg} -Ddd.service=<USE_YOUR_REPOSITORY_ID> -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
   </configuration>
 </plugin>
 
@@ -94,7 +94,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
   <configuration>
-     <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
+     <argLine>${dd.java.agent.arg} -Ddd.service=<USE_YOUR_REPOSITORY_ID> -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
   </configuration>
   <executions>
       <execution>
@@ -119,7 +119,7 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 
 {{< code-block lang="groovy" >}}
 test {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true"]
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=<USE_YOUR_REPOSITORY_ID>", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true"]
 }
 {{< /code-block >}}
 
@@ -134,6 +134,13 @@ Run your tests as you normally do, for example:
 ## Configuration options
 
 The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
+
+`dd.service`
+: We can consider the Test Service as the top level to group our test runs.<br/>
+From a developer perspective, the most intuitive equivalence is the concept of the source code repository.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: `unnamed-java-app`</br>
+**Recommendation**: Use a repository identifier. E.g: You can use `backend-app` if your repository is `https://github.com/my-org/backend-app.git`.
 
 `dd.integration.junit.enabled`
 : When `true`, tests based on JUnit runners are reported.<br/>
@@ -157,11 +164,6 @@ All [Datadog tracer configuration][5] options can be used during the test phase.
 ### Recommended configuration
 
 To improve the Datadog Java Agent startup, follow these configuration settings:
-
-System property: `dd.service`
-: **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `unnamed-java-app`</br>
-**Set to**: The name of the Test Service that will appear in the CI Tests tab.
 
 System property: `dd.agent.host`
 : **Environment variable**: `DD_AGENT_HOST`<br/>
