@@ -76,7 +76,7 @@ You can specify the number of consecutive failures that should happen before con
 Retry test 2 times after 300 ms in case of failure
 ```
 
-You can also decide to only trigger a notification when your endpoint goes down for a certain amount of time and number of locations. In the below example, we set our alerting rule to send a notification if our test fails for three minutes on two different locations:
+You can also configure your test to only trigger a notification when your endpoint goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
