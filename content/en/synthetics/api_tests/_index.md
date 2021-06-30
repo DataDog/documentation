@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-API tests are useful to help you **proactively monitor that your most important services are available** at anytime and from anywhere. API tests come in four different flavors that allow you to launch requests on the **different network layers** of your systems:
+API tests are useful to help you **proactively monitor that your most important services are available** at anytime and from anywhere. API tests come in five different subtypes that allow you to launch requests on the **different network layers** of your systems:
 
 - [`HTTP` test][1]
 - [`SSL` test][2]
