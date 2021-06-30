@@ -57,7 +57,7 @@ The search query for **View related logs** is defined using the following parame
 * **Integration prefix**: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
 * **Tags**: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
 
-## Tips and Tricks
+## Tips and tricks
 
 - Click on a widget icon to add it to the dashboard without dragging (keyboard shortcuts `N` and `shift+N` also do this)
 - Double click the bottom left or bottom right resize handle on a widget to instantly fill any empty, adjacent space

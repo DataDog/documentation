@@ -39,7 +39,7 @@ For overlay search options, see [timeboards documentation][2].
 
 For graph menu options, see [timeboards documentation][3].
 
-## Tips and Tricks
+## Tips and tricks
 
 - Click on a widget icon to add it to the dashboard without dragging (keyboard shortcuts `N` and `shift+N` also do this)
 - Double click the bottom left or bottom right resize handle on a widget to instantly fill any empty, adjacent space

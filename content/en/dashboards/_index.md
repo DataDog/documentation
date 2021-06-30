@@ -53,7 +53,7 @@ To create a dashboard, click on **+New Dashboard** on the [dashboard list page][
 ### Screenboards
 [Screenboards][4] are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
 
-## Configuring Dashboards
+## Configuring dashboards
 ### Global time selector
 To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in a widget’s editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
