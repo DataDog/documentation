@@ -26,7 +26,7 @@ further_reading:
 
 The example below demonstrates the creation of an [HTTP test][2], a subtype of [API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as expected **response time**, **HTTP status code**, and **header or body contents**.
 
-1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Test][3]**.
+1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **[New API test][4]**.
 
@@ -96,7 +96,7 @@ When you're ready to run your test, click **Save Test**.
 
 When you create a [Multistep API test][7], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
 
-1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Test][3]**.
+1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **[Multistep API test][8]**.
 4. Name, tag and select locations for your [Multistep API test][8] like you would with a single [API test][1].
