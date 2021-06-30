@@ -109,7 +109,7 @@ In the example below, the test failed as the result of a server timeout.
 
 {{< img src="getting_started/synthetics/browser-test-failure.png" alt="Browser test failure"  style="width:100%;">}}
 
-Thanks to the **Errors & Warnings** tab, you can see that the server responded with a `504` when the browser tried loading the `https://api.shopist.io/checkout.json` resource, which caused the browser test to fail.
+In this case, the **Errors & Warnings** tab shows that the server responded with a `504` when the browser tried loading the `https://api.shopist.io/checkout.json` resource, which caused the browser test to fail.
 
 ## Further Reading
 
