@@ -103,7 +103,7 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 The Browser Test details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][6], select a failed test result and start by reviewing screenshots, including the ones leading up to the failed step. You can also review potential **[Errors & Warnings][7]**, **[Resources][8]** as well as **[Core Web Vitals][9]** to diagnose the issue. With Datadog's [APM integration with Synthetic Monitoring][10], you also have the ability to look into the traces that are generated in your backend by the test runs via the **Traces** tab.
+To troubleshoot a [failed test][6], select a failed test result and start by reviewing screenshots, including the ones leading up to the failed step. You can also review potential **[Errors & Warnings][7]**, **[Resources][8]** as well as **[Core Web Vitals][9]** to diagnose the issue. With Datadog's [APM integration with Synthetic Monitoring][10], you also have the ability to look into the traces that are generated in your backend by the test runs from the **Traces** tab.
 
 In the example below, the test failed as the result of a server timeout.
 
