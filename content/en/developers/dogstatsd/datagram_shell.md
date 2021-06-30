@@ -16,7 +16,7 @@ further_reading:
       text: 'DogStatsD source code'
 ---
 
-This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
+This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. The raw datagrams are encoded in UTF-8. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
@@ -47,13 +47,15 @@ Here are some example datagrams:
 {{% /tab %}}
 {{% tab "Events" %}}
 
-`_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
+`_e{<TITLE_UTF8_LENGTH>,<TEXT_UTF8_LENGTH>}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
 | Parameter                            | Required | Description                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `_e`                                 | Yes      | The datagram must begin with `_e`.                                                                                     |
 | `<TITLE>`                            | Yes      | The event title.                                                                                                       |
 | `<TEXT>`                             | Yes      | The event text. Insert line breaks with: `\\n`.                                                                        |
+| `<TITLE_UTF8_LENGTH>`                | Yes      | The length of the UTF-8-encoded <TITLE>                                                                                |
+| `<TEXT_UTF8_LENGTH>`                 | Yes      | The length of the UTF-8-encoded <TEXT>                                                                                 |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
 | `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
 | `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
