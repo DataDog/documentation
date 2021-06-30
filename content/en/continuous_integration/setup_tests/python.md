@@ -11,19 +11,11 @@ further_reading:
 ---
 ## Compatibility
 
-Supported Test Frameworks:
-* Pytest 3.0+
+Supported Python interpreters:
+* Python >= 2.7 and >= 3.5
 
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+Supported test frameworks:
+* pytest >= 3.0
 
 ## Prerequisites
 

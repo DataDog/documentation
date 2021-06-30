@@ -10,19 +10,6 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-## Compatibility
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
-
 ## Installing the Datadog CI CLI
 
 Install the `@datadog/datadog-ci` CLI:
@@ -62,7 +49,7 @@ datadog-ci junit upload --service my-service \
 : Runs the command without the final upload step. All other checks are performed.<br>
 **Default**: `false`
 
-The positional arguments 
+The positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI will look for all `.xml` files in it.
 
 

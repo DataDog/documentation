@@ -13,22 +13,11 @@ further_reading:
 ## Compatibility
 
 Supported test frameworks:
-* Jest >=24.8.0
+* Jest >= 24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
   * Only [`jest-circus`][1] is supported as a `testRunner`.
-* Mocha >=5.2.0
-  * Mocha >=9.0.0 has [partial support](#known-limitations).
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+* Mocha >= 5.2.0
+  * Mocha >= 9.0.0 has [partial support](#known-limitations).
 
 ## Prerequisites
 

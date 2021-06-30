@@ -13,37 +13,25 @@ further_reading:
 ## Compatibility
 
 Supported languages:
-* Swift 5.2+
-* Objective-C 2.0+
+* Swift >= 5.2
+* Objective-C >= 2.0
 
 Supported platforms:
-* iOS 12.0+
-* macOS 10.13+
-* tvOS 12.0+
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
-* Bitrise
+* iOS >= 12.0
+* macOS >= 10.13
+* tvOS >= 12.0
 
 ## Installing the Swift testing SDK using SPM
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
-2. Link your test targets with the library `DatadogSDKTesting` from the package. 
+2. Link your test targets with the library `DatadogSDKTesting` from the package.
 
 3. If you run UITests, also link the app running the tests with this library.
 
 ## Binary linking
 
-1. Download and decompress `DatadogSDKTesting.zip` from the release page. 
+1. Download and decompress `DatadogSDKTesting.zip` from the release page.
 
 2. Copy and link your test targets with the resulting XCFramework.
 
@@ -305,7 +293,7 @@ Additional Git configuration for physical device testing:
 | `GIT_CLONE_COMMIT_COMMITER_NAME` | `$(GIT_CLONE_COMMIT_COMMITER_NAME)` |
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL` | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)` |
 
-## Running tests 
+## Running tests
 
 After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs will be instrumented automatically.
 
@@ -329,7 +317,7 @@ In some *very rare cases*. such as testing your own crash handler, you may want 
 ## Additional optional configuration
 
 For the following configuration settings:
- - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO` 
+ - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
  - `String` list variables accept a list of elements separated by `,` or `;`
 
 ### Disabling auto-instrumentation

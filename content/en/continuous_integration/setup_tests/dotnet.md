@@ -13,25 +13,13 @@ further_reading:
 ## Compatibility
 
 Supported .NET versions:
-* .NET Core 2.1+
-* .NET Core 3.0+
-* .NET 5.0+
+* .NET Core >= 2.1 and >= 3.0
+* .NET >= 5.0
 
 Supported test frameworks:
-* xUnit 2.2+
-* NUnit 3.0+
-* MsTest V2 14+ (experimental)
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+* xUnit >= 2.2
+* NUnit >= 3.0
+* MsTest V2 >= 14
 
 ## Prerequisites
 
@@ -84,19 +72,19 @@ The following list shows the default values for key configuration settings:
 `--dd-service`
 : Service name for unified service tagging. <br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `(ProcessName)` 
+**Default**: `(ProcessName)`
 
-`--dd-version` 
+`--dd-version`
 : Version for unified service tagging. <br/>
 **Environment variable**: `DD_VERSION`<br/>
 **Default**: `(empty)`
 
-`--agent-url` 
+`--agent-url`
 : Datadog trace agent URL. <br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-Additionally, all [Datadog Tracer configuration][2] options can be used during test phase. 
+Additionally, all [Datadog Tracer configuration][2] options can be used during test phase.
 
 For example, to run a test suite with a custom agent URL and a custom service name:
 

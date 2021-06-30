@@ -12,22 +12,10 @@ further_reading:
 
 ## Compatibility
 
-Supported Test frameworks:
-* JUnit 4.10+
-* JUnit 5.3+
-* TestNG 6.4+
-* Frameworks that are based on JUnit, such as Spock Framework and Cucumber-Junit
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+Supported test frameworks:
+* JUnit >= 4.10+ and >= 5.3
+  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit
+* TestNG >= 6.4
 
 ## Prerequisites
 
@@ -37,7 +25,7 @@ Supported CI providers:
 
 ### Maven
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]: 
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]:
 
 {{< code-block lang="xml" >}}
 <profile>
@@ -56,8 +44,8 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
         <artifactId>dd-java-agent</artifactId>
         <version>$VERSION</version>
         <scope>provided</scope>
-    </dependency>  
-  </dependencies> 
+    </dependency>
+  </dependencies>
 </profile>
 {{< /code-block >}}
 

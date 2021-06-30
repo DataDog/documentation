@@ -12,16 +12,13 @@ further_reading:
 
 ## Compatibility
 
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+Supported Ruby interpreters:
+* Ruby >= 2.1
+* JRuby >= 9.2
+
+Supported test frameworks:
+* Cucumber >= 3.0
+* RSpec >= 3.0.0
 
 ## Prerequisites
 
