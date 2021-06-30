@@ -54,6 +54,12 @@ For more information, see the [JavaScript tracer installation docs][4].
 yarn add --dev jest-circus
 {{< /code-block >}}
 
+
+    **Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
+    {{< code-block lang="bash" >}}
+yarn add --dev jest-circus@25.5.4
+{{< /code-block >}}
+
 2. Configure a custom [testEnvironment][5] and [testRunner][6] in your `jest.config.js` or however you are configuring [jest][7]:
 
     {{< code-block lang="javascript" filename="jest.config.js" >}}
@@ -75,6 +81,8 @@ require('dd-trace').init({
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
 {{< /code-block >}}
+
+    **Important**: `jest-environment-node` and `jest-environment-jsdom` are installed together with `jest`, so they do not normally appear in your `package.json`. If you've extracted any of these libraries in your `package.json`, make sure the installed version is the same as the one of `jest`.
 
 **Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` (a value in milliseconds) when initializing the tracer:
 
