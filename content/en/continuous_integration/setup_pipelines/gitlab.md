@@ -10,6 +10,17 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+## Compatibility
+
+Supported GitLab versions:
+* GitLab >= 14.1
+
+We also support the following versions with additional configuration:
+* GitLab >= 13.7.0, by enabling the `datadog_ci_integration` feature flag
+
+GitLab versions prior to 13.7.0 are supported using the [webhooks integration](#integrating-through-webhooks).
+
+## Enabling the Datadog integration
 
 To enable traces for your GitLab CI pipelines a [native integration][1] is available and hidden under a [feature flag][2] since release `13.7.0`.
 

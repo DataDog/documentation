@@ -10,6 +10,11 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+## Compatibility
+
+Supported Jenkins versions:
+* Jenkins >= 2.164.1
+
 ## Prerequisite
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
