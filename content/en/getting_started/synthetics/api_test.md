@@ -26,17 +26,19 @@ further_reading:
 
 The example below demonstrates the creation of an [HTTP test][2], a subtype of [API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as expected **response time**, **HTTP status code**, and **header or body contents**.
 
+### Define request
+
 1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **[New API test][4]**.
+4. Select the `HTTP` request type.
+5. Define your request:
 
-### Define request
+    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
+    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
+    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find test you're interested in on the homepage.
 
-1. Select the `HTTP` request type.
-2. Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
-3. You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-4. You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find test you're interested in on the homepage.
-5. Click **Test URL** to trigger a sample test run.
+6. Click **Test URL** to trigger a sample test run.
 
 {{< img src="getting_started/synthetics/api-test-config-2.jpg" alt="API test configuration"  style="width:60%;">}}
 
