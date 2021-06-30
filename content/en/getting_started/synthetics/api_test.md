@@ -36,7 +36,7 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
     - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
-    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find test you're interested in on the homepage.
+    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
 6. Click **Test URL** to trigger a sample test run.
 
