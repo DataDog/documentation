@@ -11,6 +11,8 @@ further_reading:
   - link: serverless/custom_metrics/
     tag: Documentation
     text: サーバーレスアプリケーションからのカスタムメトリクスの送信
+aliases:
+  - /ja/serverless/datadog_lambda_library/ruby/
 ---
 ## 必須セットアップ
 
@@ -23,7 +25,7 @@ further_reading:
 
 ## コンフィギュレーション
 
-### Datadog Lambda ライブラリのインストール
+### Install
 
 Datadog Lambda ライブラリは、レイヤーまたは gem としてインストールできます。Datadog では、ほとんどの関数でライブラリをレイヤーとしてインストールすることを推奨しています。お使いの Lambda 関数がコンテナイメージとしてデプロイされている場合は、ライブラリを gem としてインストールする必要があります。
 
@@ -96,20 +98,20 @@ def handler(event:, context:)
 end
 ```
 
-### Datadog Forwarder をロググループにサブスクライブ
+### サブスクライブ
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
 
-### 統合サービスタグ付け
+### タグ
 
 これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][7]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
 
-## Datadog サーバーレスモニタリングの利用
+## 確認
 
-以上の方法で関数を構成すると、[Serverless Homepage][8] でメトリクス、ログ、トレースを確認できるようになるはずです。
+以上の方法で関数を構成すると、[Serverless Homepage][8] でメトリクス、ログ、トレースを確認できるようになります。
 
 ## カスタムビジネスロジックの監視
 

@@ -38,8 +38,8 @@ Ces fonctionnalités ne sont pas disponibles pour les clients qui ont signé le 
 * Les dimensions de regroupement sont limitées aux tags de host, à la source, au service et au statut pour les [métriques basées sur des logs][6].
 * Les notifications des log monitors ne peuvent pas inclure des exemples de logs.
 * Les log monitors ne peuvent pas être configurés avec une condition `group-by`.
-* Il n'est pas possible de [partager][7] des logs (ou des traces) à partir de l'Explorer via une intégration web.
-* Le service Security Monitoring ne peut pas être activé.
+* Il n'est pas possible de [partager][7] des logs, des signaux de sécurité ou des traces à partir de l'Explorer via une intégration web.
+* Les règles de sécurité ne peuvent pas envoyer de notifications.
 
 Pour toute question sur la conformité du service Log Management aux exigences applicables de la loi HIPAA, contactez votre chargé de compte.
 

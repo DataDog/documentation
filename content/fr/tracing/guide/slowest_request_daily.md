@@ -47,7 +47,7 @@ Avec l'APM Datadog, vous pouvez facilement examiner les performances de vos endp
 
     Le Flamegraph et des informations connexes apparaissent alors. C'est ici que vous pouvez consulter la durée de chaque étape dans la trace et vérifier la présence d'anomalies. Cela facilite l'identification des composants lents ou à l'origine d'un grande nombre d'erreurs. Vous pouvez agrandir, faire défiler et explorer le Flamegraph comme bon vous semble. Les métadonnées, les logs et les informations sur le host associés s'affichent sous le Flamegraph.
 
-    Le Flamegraph est idéal pour identifier précisément quelle partie de votre pile est à l'origine d'erreurs ou d'une latence élevée. Les erreurs sont surlignées en rouge, et la durée est représentée par la longueur horizontale de la span. Les spans les plus longues sont donc les plus lentes. Consultez le [guide sur la Vue Trace][6] pour en savoir plus sur l'utilisation du Flamegraph.
+    Le Flamegraph est idéal pour identifier précisément quelle partie de votre stack est à l'origine d'erreurs ou d'une latence élevée. Les erreurs sont surlignées en rouge, et la durée est représentée par la longueur horizontale de la span. Les spans les plus longues sont donc les plus lentes. Consultez le [guide sur la Vue Trace][6] pour en savoir plus sur l'utilisation du Flamegraph.
 
     Sous le Flamegraph, la liste de tous les tags (y compris des [tags custom][7]) s'affiche. De là, vous pouvez également voir les logs associés (si vous avez [connecté les logs à vos traces][8]) et les informations sur le host, comme l'utilisation de la mémoire et du processeur.
 

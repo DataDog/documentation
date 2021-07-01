@@ -14,6 +14,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_route53/'
 draft: false
 git_integration_title: amazon_route53
 has_logo: true
+integration_id: amazon-route-53
 integration_title: Amazon Route 53
 is_public: true
 kind: インテグレーション
@@ -67,7 +68,7 @@ Route 53 が受信する以下のようなクエリに関する情報をログ�
 Route 53 AWS コンソールに移動し、ログを構成するホストゾーンを選択します。ラジオボタンをクリックし、「Configure query logging」を選択します。
 {{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="Route 53 ログの有効化" popup="true" style="width:70%;">}}
 
-次に、Cloudwatch ロググループを選択するか、ログの送信先になる新しいロググループを作成します。ロググループ名には「route53」を入れてください。
+次に、CloudWatch ロググループを選択するか、ログの送信先になる新しいロググループを作成します。ロググループ名には「route53」を入れてください。
 
 #### Route53 Resolver クエリのログの有効化
 
@@ -78,7 +79,7 @@ Route 53 の設定ペインの *Resolver* で *Query Logging* を選択します
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから手動で Route53 ログを含む Cloudwatch ロググループにトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから手動で Route53 ログを含む CloudWatch ロググループにトリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Cloudwatch トリガー" popup="true" style="width:70%;">}}

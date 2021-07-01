@@ -19,6 +19,8 @@ further_reading:
 
 Cette page présente les fonctionnalités de base de l'Agent Datadog pour SUSE. Si vous n'avez pas encore installé l'Agent, vous trouverez des instructions dans la documentation relative à l'[intégration de l'Agent Datadog][1].
 
+Les paquets sont disponibles en versions pour architectures x86 64 bits et Arm v8. Pour toute autre architecture, utilisez l'installation depuis les sources.
+
 **Remarque** : les versions 11 SP4 et ultérieures de SUSE sont prises en charge.
 
 ## Commandes
@@ -28,7 +30,22 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Description                        | Commandes                                                |
+### SUSE 12 et ultérieur
+
+| Rôle                        | Commande                                                |
+|------------------------------------|--------------------------------------------------------|
+| Démarrer l'Agent en tant que service           | `sudo systemctl start datadog-agent`                   |
+| Arrêter l'Agent s'exécutant en tant que service    | `sudo systemctl stop datadog-agent`                    |
+| Redémarrer l'Agent s'exécutant en tant que service | `sudo systemctl restart datadog-agent`                 |
+| Statut du service de l'Agent            | `sudo systemctl status datadog-agent`                  |
+| Page de statut de l'Agent en cours d'exécution       | `sudo datadog-agent status`                            |
+| Envoyer un flare                         | `sudo datadog-agent flare`                             |
+| Afficher l'utilisation des commandes              | `sudo datadog-agent --help`                            |
+| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <NOM_CHECK>` |
+
+### SUSE 11
+
+| Rôle                        | Commande                                                |
 |------------------------------------|--------------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo service datadog-agent start`                     |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                      |
@@ -42,7 +59,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Description                        | Commandes                                           |
+| Rôle                        | Commande                                           |
 |------------------------------------|---------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo service datadog-agent start`                |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                 |
@@ -56,12 +73,12 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : si le wrapper du `service` n'est pas disponible sur votre système, utilisez :
+**Remarque** : si le wrapper de `service` n'est pas disponible sur votre système, utilisez :
 
-* Sur les systèmes basés sur `upstart` : `sudo initctl start/stop/restart/status datadog-agent`
+* Sur les systèmes basés sur `upstart` : `sudo start/stop/restart/status datadog-agent`
 * Sur les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart/status datadog-agent`
 
-[En savoir plus sur les commandes du cycle de vie du Service][2]
+[En savoir plus sur les commandes de cycle de vie du service][2]
 
 ## Configuration
 

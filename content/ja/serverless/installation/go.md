@@ -2,6 +2,9 @@
 title: Go アプリケーションのインスツルメンテーション
 kind: ドキュメント
 further_reading:
+  - link: serverless/datadog_lambda_library/go
+    tag: Documentation
+    text: Go 向け Datadog Lambda ライブラリ
   - link: serverless/serverless_tagging/
     tag: Documentation
     text: サーバーレスアプリケーションのタグ付け
@@ -11,7 +14,11 @@ further_reading:
   - link: serverless/custom_metrics/
     tag: Documentation
     text: サーバーレスアプリケーションからのカスタムメトリクスの送信
+aliases:
+  - /ja/serverless/datadog_lambda_library/go/
 ---
+{{< img src="serverless/go-lambda-tracing.png" alt="Datadog で Go Lambda 関数を監視"  style="width:100%;">}}
+
 ## 必須セットアップ
 
 未構成の場合:
@@ -23,27 +30,34 @@ further_reading:
 
 ## コンフィギュレーション
 
-### Datadog Lambda ライブラリのインストール
+### Install
 
-以下のコマンドを実行し、[Datadog Lambda ライブラリ][3]をローカルでインポートできます。
+次のコマンドを実行して、[Datadog Lambda ライブラリ][3]をローカルにインストールします。
 
 ```
 go get github.com/DataDog/datadog-lambda-go
 ```
 
-### 関数の構成
+### インスツルメントする
 
-1. 環境変数 `DD_FLUSH_TO_LOG` を `true` に設定します。
-2. Lambda 関数の [AWS X-Ray アクティブトレース][4]を有効にします。
-3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda ハンドラー関数をラップします。
+関数をインスツルメントするには、次の手順に従います。
+
+1. 環境変数 `DD_FLUSH_TO_LOG` と `DD_TRACE_ENABLED` を `true` に設定します。
+2. Lambda 関数ハンドラーを宣言するファイルに必要なパッケージをインポートします。
+
     ```go
     package main
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
       "github.com/DataDog/datadog-lambda-go"
+      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     )
+    ```
+3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda 関数ハンドラーをラップします。
 
+    ```go
     func main() {
       // Wrap your lambda handler like this
       lambda.Start(ddlambda.WrapHandler(myHandler, nil))
@@ -54,26 +68,41 @@ go get github.com/DataDog/datadog-lambda-go
       }))
       */
     }
-
+    ```
+4. 含まれているライブラリを使用して、追加のスパンを作成し、ログとトレースを接続し、トレースコンテキストを他のサービスに渡します。
+    ```go
     func myHandler(ctx context.Context, event MyEvent) (string, error) {
-      // ...
+      // Trace an HTTP request
+      req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+      client := http.Client{}
+      client = *httptrace.WrapClient(&client)
+      client.Do(req)
+
+      // Connect your Lambda logs and traces
+      currentSpan, _ := tracer.SpanFromContext(ctx)
+      log.Printf("my log message %v", currentSpan)
+
+      // Create a custom span
+      s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+      time.Sleep(100 * time.Millisecond)
+      s.Finish()
     }
     ```
 
-### Datadog Forwarder をロググループにサブスクライブ
+### サブスクライブ
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][4]。
 
-### 統合サービスタグ付け
+### タグ
 
-これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][6]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][5]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
 
-## Datadog サーバーレスモニタリングの利用
+## 確認
 
-以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
+以上の方法で関数を構成すると、[Serverless Homepage][6] でメトリクス、ログ、トレースを確認できるようになります。
 
 ## カスタムビジネスロジックの監視
 
@@ -118,7 +147,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-カスタムメトリクスの送信について、詳しくは[こちら][8]を参照してください。
+カスタムメトリクスの送信について、詳しくは[こちら][7]を参照してください。
 
 ## その他の参考資料
 
@@ -127,8 +156,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [1]: /ja/integrations/amazon_web_services/
 [2]: /ja/serverless/forwarder/
 [3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /ja/serverless/custom_metrics?tab=go
+[4]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[6]: https://app.datadoghq.com/functions
+[7]: /ja/serverless/custom_metrics?tab=go
