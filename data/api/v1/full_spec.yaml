@@ -6768,6 +6768,18 @@ components:
       required:
       - service_name
       type: object
+    Pagination:
+      description: Pagination object.
+      properties:
+        total_count:
+          description: Total count.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
     Point:
       description: Array of timeseries points.
       example:
@@ -6920,6 +6932,12 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
+    ResponseMetaAttributes:
+      description: Object describing meta attributes of response.
+      properties:
+        page:
+          $ref: '#/components/schemas/Pagination'
       type: object
     SLOBulkDelete:
       additionalProperties:
@@ -7078,6 +7096,8 @@ components:
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     SLOCorrectionResponse:
       description: The response object of an SLO correction
