@@ -59,56 +59,69 @@ module.exports = {
 
     {{< code-block lang="javascript" filename="testEnvironment.js" >}}
 require('dd-trace').init({
-  service: 'ui-tests' // The name of the Test Service that will appear in the CI Tests tab.
+  service: 'my-ui-app',  // Name of the service or library under test
+  flushInterval: 300000  // To guarantee test span delivery
 })
+
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
 {{< /code-block >}}
 
-**Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` (a value in milliseconds) when initializing the tracer:
+Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="javascript" >}}
-require('dd-trace').init({
-  flushInterval: 300000
-})
+{{< code-block lang="bash" >}}
+DD_ENV=ci npm test
 {{< /code-block >}}
 
 ### Mocha instrumentation
 
 Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your `package.json`:
 
-{{< code-block lang="javascript" >}}
-// package.json
+{{< code-block lang="javascript" filename="package.json" >}}
 'scripts': {
-  'test': 'mocha --require dd-trace/init'
+  'test': 'DD_SERVICE=my-ui-app mocha --require dd-trace/init'
 },
 {{< /code-block >}}
 
-## Disabling instrumentation in local development
+Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-If you want to disable the testing instrumentation for local development (where you might not be running the Datadog Agent), these are some options:
-
-### Jest
-
-When initializing the tracer, check whether you are in CI:
-
-{{< code-block lang="javascript" >}}
-require('dd-trace').init({
-  enabled: !!process.env.CI // the environment variable to use depends on the CI provider
-})
+{{< code-block lang="bash" >}}
+DD_ENV=ci npm test
 {{< /code-block >}}
 
-### Mocha
+## Additional configuration settings
 
-Use different test scripts for CI and local development:
+The following is a list of the most important configuration settings that can be used with the tracer. They can be either passed in on its `init()` function, or as environment variables:
 
-{{< code-block lang="javascript" >}}
-// package.json
-'scripts': {
-  'test': 'mocha',
-  'test:ci': 'mocha --require dd-trace/init'
-},
-{{< /code-block >}}
+`service`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: `unnamed-java-app`<br/>
+**Example**: `my-java-app`
+
+`env`
+: Name of the environment where tests are being run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Default**: `(empty)`<br/>
+**Examples**: `local`, `ci`
+
+`enabled`
+: Setting this to `false` completely disables the instrumentation.<br/>
+**Environment variable**: `DD_TRACE_ENABLED`<br/>
+**Default**: `true`
+
+`hostname`
+: The Datadog Agent hostname.<br/>
+**Environment variable**: `DD_TRACE_AGENT_HOSTNAME`<br/>
+**Default**: `localhost`
+
+`port`
+: The Datadog Agent trace collection port.<br/>
+**Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
+**Default**: `8126`
+
+All other [Datadog Tracer configuration][12] options can also be used.
+
 
 ## Known limitations
 
@@ -121,7 +134,6 @@ The JavaScript tracer does not support browsers, so if you run browser tests wit
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and CI Visibility.
-
 
 ### Parameterized tests
 
@@ -158,12 +170,6 @@ forEach([
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
 
-## Configuration settings
-
-| Environment variable           | Recommendation                                                         |
-|--------------------------------|------------------------------------------------------------------------|
-| `DD_SERVICE`                   | The name of the Test Service that appears in the Tests tab.     |
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -179,3 +185,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [9]: https://nodejs.org/api/packages.html#packages_determining_module_system
 [10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [11]: https://github.com/ryym/mocha-each
+[12]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration

@@ -25,7 +25,7 @@ Supported test frameworks:
 
 [Install the Datadog Agent to collect tests data][1].
 
-## Installing tracing
+## Installing the .NET tracer
 
 To install the `dd-trace` command globally on the machine, run:
 
@@ -33,23 +33,17 @@ To install the `dd-trace` command globally on the machine, run:
 dotnet tool install -g dd-trace
 {{< /code-block >}}
 
-Or, if you have a previous version of the tool, update it by running:
-
-{{< code-block lang="bash" >}}
-dotnet tool update -g dd-trace
-{{< /code-block >}}
-
 ## Instrumenting your tests
 
-To instrument your test suite, prefix your test command with `dd-trace`. For example:
+To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (i.e. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
 {{< code-block lang="bash" >}}
-dd-trace dotnet test
+dd-trace --dd-service my-dotnet-app --dd-env ci dotnet test
 {{< /code-block >}}
 
-All tests are instrumented automatically.
+All tests will be automatically instrumented.
 
-### Configuration settings
+### Additional configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
@@ -59,38 +53,28 @@ dd-trace --help
 
 The following list shows the default values for key configuration settings:
 
+`--dd-service`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: `(ProcessName)`<br/>
+**Example**: `my-dotnet-app`
+
+`--dd-env`
+: Name of the environment where tests are being run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Default**: `(empty)`<br/>
+**Examples**: `local`, `ci`
+
+`--agent-url`
+: Datadog Agent URL for traces.<br/>
+**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
+**Default**: `http://localhost:8126`
 
 `--set-ci`
 : Sets up the clr profiler environment variables for all the CI pipeline. <br/>
 **Default**: `false`
 
-`--dd-env`
-: Environment name for unified service tagging.<br/>
-**Environment variable**: `DD_ENV`<br/>
-**Default**: `(empty)`
-
-`--dd-service`
-: Service name for unified service tagging. <br/>
-**Environment variable**: `DD_SERVICE`<br/>
-**Default**: `(ProcessName)`
-
-`--dd-version`
-: Version for unified service tagging. <br/>
-**Environment variable**: `DD_VERSION`<br/>
-**Default**: `(empty)`
-
-`--agent-url`
-: Datadog trace agent URL. <br/>
-**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
-**Default**: `http://localhost:8126`
-
-Additionally, all [Datadog Tracer configuration][2] options can be used during test phase.
-
-For example, to run a test suite with a custom agent URL and a custom service name:
-
-{{< code-block lang="bash" >}}
-dd-trace --agent-url=http://agent:8126 --dd-service=my-app dotnet test
-{{< /code-block >}}
+All other [Datadog Tracer configuration][2] options can also be used.
 
 ### Passing parameters to the application
 
@@ -99,7 +83,7 @@ If the application expects command line arguments, use a `--` separator before t
 The following example shows how to instrument the command `dotnet test --framework netcoreapp3.1` with `ci` as environment:
 
 {{< code-block lang="bash" >}}
-dd-trace --dd-env=ci -- dotnet test --framework netcoreapp3.1
+dd-trace --dd-service my-dotnet-app --dd-env=ci -- dotnet test --framework netcoreapp3.1
 {{< /code-block >}}
 
 ### Instrumenting MsTest V2 framework
