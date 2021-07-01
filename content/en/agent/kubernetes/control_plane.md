@@ -29,6 +29,8 @@ This section aims to document specificities and to provide good base configurati
 With Datadog integrations for the [API Server][1], [ETCD][2], [Controller Manager][3], and [Scheduler][4], you can collect key metrics from all four components of the Kubernetes Control Plane.
 
 * [Kubernetes with Kubeadm](#Kubeadm)
+* [Kubernetes on EKS](#EKS)
+* [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
 
 ## Kubernetes with Kubeadm {#Kubeadm}
 
@@ -306,7 +308,28 @@ scheduler:
     bind-address: 0.0.0.0
 ```
 
+## Kubernetes on EKS {#EKS}
+
+On EKS, AWS exposes API Server metrics via [a single endpoint][5]. This allows the Datadog Agent to obtain API Server metrics using endpoint checks as described in the [Kubernetes API Server metrics check documentation][6]. To conigure the check, add the following annotations to the `default/kubernetes` service:
+
+```yaml
+annotations:
+  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
+  ad.datadoghq.com/endpoints.init_configs: '[{}]'
+  ad.datadoghq.com/endpoints.instances:
+    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
+```
+
+Other control plane components are not exposed in EKS and cannot be monitored.
+
+## Kubernetes on Managed Services (AKS, GKE) {#ManagedServices}
+
+On most Managed Services, the user cannot reliably access control plane components to monitor them. As a result, it is not possible to run the `kube_controller_manager`, `kube_scheduler`, `etcd`, and `kube_apiserver` checks on the Datadog Agent in these environments. 
+
+
 [1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
 [2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
 [3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
 [4]: https://docs.datadoghq.com/integrations/kube_scheduler/
+[5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
+[6]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
