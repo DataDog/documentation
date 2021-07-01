@@ -324,7 +324,7 @@ Other control plane components are not exposed in EKS and cannot be monitored.
 
 ## Kubernetes on Managed Services (AKS, GKE) {#ManagedServices}
 
-On most Managed Services, the user cannot reliably access control plane components to monitor them. As a result, it is not possible to run the `kube_controller_manager`, `kube_scheduler`, `etcd`, and `kube_apiserver` checks on the Datadog Agent in these environments. 
+On most Managed Services the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
 
 
 [1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
