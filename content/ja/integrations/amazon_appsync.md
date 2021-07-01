@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_appsync/'
 draft: false
 git_integration_title: amazon_appsync
 has_logo: true
+integration_id: amazon-appsync
 integration_title: AWS AppSync
 is_public: true
 kind: インテグレーション
@@ -44,13 +45,13 @@ Amazon AppSync から S3 バケットまたは CloudWatch のいずれかにロ�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_appsync` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon AppSync ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

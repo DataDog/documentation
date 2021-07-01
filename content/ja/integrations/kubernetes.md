@@ -23,6 +23,14 @@ categories:
   - log collection
 doc_link: /integrations/kubernetes/
 ddtype: check
+integration_id: kubernetes
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/'
+    tag: ブログ
+    text: Kubernetes の保留中のポッドとスケジュールの失敗をデバッグする方法
+  - link: 'https://www.datadoghq.com/blog/monitoring-kubernetes-era'
+    tag: ブログ
+    text: Kubernetes 時代のモニタリング
 ---
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード"  >}}
 
@@ -43,8 +51,7 @@ For Kubernetes の場合は、Agent をクラスターでコンテナとして�
 
 ## その他の参考資料
 
-Kubernetes サービスを統合する方法 (または統合すべき理由) に関する詳細は、Datadog の[ブログシリーズ][3]をご覧ください。
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/kubernetes/
 [2]: /ja/integrations/faq/kubernetes-host-installation/
-[3]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

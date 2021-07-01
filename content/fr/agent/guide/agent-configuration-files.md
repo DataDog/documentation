@@ -46,7 +46,7 @@ Le fichier de configuration de l'Agent v6 utilise le format **YAML** pour mieux
 {{% /tab %}}
 {{< /tabs >}}
 
-Remarque : [un exemple complet de fichier `datadog.yaml` est disponible dans le référentiel Github `datadog-agent`][1].
+**Remarque** : [un exemple complet de fichier `datadog.yaml` est disponible dans le référentiel Github `datadog-agent`][1].
 
 ## Répertoire de configuration de l'Agent
 
@@ -72,7 +72,7 @@ Les anciennes versions de l'Agent Datadog stockaient les fichiers de configurati
 
 ### Fichiers de configuration des checks pour l'Agent 6
 
-Pour chaque check de l'Agent, un exemple de configuration se trouve dans le fichier `conf.yaml.example` du dossier `<NOM_CHECK>.d/` correspondant. Renommez ce fichier `conf.yaml` pour activer le check associé. Notez que l'Agent charge tous les fichiers YAML valides qui se trouvent dans le répertoire `/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`. Cela permet de décomposer les configurations complexes en plusieurs fichiers. Voici un exemple de configuration de `http_check` :
+Pour chaque check de l'Agent, un exemple de configuration se trouve dans le fichier `conf.yaml.example` du dossier `<NOM_CHECK>.d/` correspondant. Renommez ce fichier `conf.yaml` pour activer le check associé. **Remarque** : l'Agent charge tous les fichiers YAML valides qui se trouvent dans le dossier `/etc/datadog-agent/conf.d/<NOM_CHECK>.d/`. Cela permet de décomposer les configurations complexes en plusieurs fichiers. Voici un exemple de configuration de `http_check` :
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
@@ -90,9 +90,9 @@ Les fichiers de modèle Autodiscovery sont stockés dans le répertoire de confi
 └── conf.yaml.example
 ```
 
-**Remarque** : pour la collecte de logs, l'Agent n'accepte pas plusieurs fichiers YAML pointant vers la même source de log afin d'empêcher l'envoi de logs en double à Datadog. Si plusieurs fichiers YAML pointent vers la même source de log, l'Agent récupère les fichiers dans l'ordre alphabétique et utilise le premier fichier.
+Pour la collecte de logs, l'Agent n'accepte pas plusieurs fichiers YAML pointant vers la même source de logs, afin d'empêcher l'envoi de logs en double à Datadog. Si plusieurs fichiers YAML pointent vers la même source de logs, l'Agent récupère les fichiers dans l'ordre alphabétique et utilise le premier fichier.
 
-Pour préserver la compatibilité avec les versions précédentes, l'Agent récupère toujours les fichiers de configuration au format `/etc/datadog-agent/conf.d/<NOM_CHECK>.yaml`. Toutefois, la migration vers le nouveau format est fortement conseillée.
+Pour préserver la compatibilité avec les versions précédentes, l'Agent récupère toujours les fichiers de configuration au format `/etc/dd-agent/conf.d/<NOM_CHECK>.yaml`. Toutefois, la migration vers le nouveau format est fortement conseillée.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

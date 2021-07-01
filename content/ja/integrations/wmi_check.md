@@ -4,7 +4,8 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    windows_server: assets/dashboards/windows_server_dashboard.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -60,7 +61,7 @@ System.Diagnostics の詳細については、[MSDN のドキュメント][3]を
 
 メトリクスが WMI に表示されない場合は、`winmgmt /resyncperf` を実行して、WMI に強制的にパフォーマンスライブラリを登録してみてください。
 
-## コンフィギュレーション
+### コンフィギュレーション
 
 1. WMI インテグレーションタイルの **Install Integration** ボタンをクリックします。
 2. Windows サーバーで Datadog Agent Manager を開きます。
@@ -97,6 +98,71 @@ instances:
 - Datadog に表示されるメトリクス名。
 - メトリクスタイプ
 
+次のサンプルコンフィギュレーションは、Windows 2012 サーバーにさらに多くのメトリクスを設定します。
+```yaml
+init_config:
+
+instances:
+  # プロセスとユーザーの数を取得します。
+  - class: Win32_OperatingSystem
+    metrics:
+      - [NumberOfProcesses, system.proc.count, gauge]
+      - [NumberOfUsers, system.users.count, gauge]
+
+# ページング情報
+  - class: Win32_PerfFormattedData_PerfOS_Memory
+    metrics:
+      - [PageFaultsPersec, system.mem.page.faults, gauge]
+      - [PageReadsPersec, system.mem.page.reads, gauge]
+      - [PagesInputPersec, system.mem.page.input, gauge]
+      - [AvailableMBytes, system.mem.avail, gauge]
+      - [CommitLimit, system.mem.limit, gauge]
+      # ディスク情報のキャッシュバイトメトリクス
+      - [CacheBytes, system.mem.fs_cache, gauge]
+
+# ページングファイル
+  - class: Win32_PerfFormattedData_PerfOS_PagingFile
+    metrics:
+      - [PercentUsage, system.mem.page.pct, gauge]
+    tag_by: Name
+  # プロセス数を取得します
+  - class: Win32_PerfFormattedData_PerfOS_System
+    metrics:
+      - [ProcessorQueueLength, system.proc.queue, gauge]
+
+  - class: Win32_PerfFormattedData_PerfOS_Processor
+    metrics:
+      - [PercentProcessorTime, system.cpu.pct, gauge]
+      - [PercentPrivilegedTime, system.cpu.priv.pct, gauge]
+      - [PercentDPCTime, system.cpu.dpc.pct, gauge]
+      - [PercentInterruptTime, system.cpu.interrupt.pct, gauge]
+      - [DPCsQueuedPersec, system.cpu.dpc.queue, gauge]
+    tag_by: Name
+
+# コンテキストスイッチ
+  - class: Win32_PerfFormattedData_PerfProc_Thread
+    metrics:
+      - [ContextSwitchesPersec, system.proc.context_switches, gauge]
+    filters:
+      - Name: _total/_total
+
+# ディスク情報
+  - class: Win32_PerfFormattedData_PerfDisk_LogicalDisk
+    metrics:
+      - [PercentFreeSpace, system.disk.free.pct, gauge]
+      - [PercentIdleTime, system.disk.idle, gauge]
+      - [AvgDisksecPerRead, system.disk.read_sec, gauge]
+      - [AvgDisksecPerWrite, system.disk.write_sec, gauge]
+      - [DiskWritesPersec, system.disk.writes, gauge]
+      - [DiskReadsPersec, system.disk.reads, gauge]
+      - [AvgDiskQueueLength, system.disk.queue, gauge]
+    tag_by: Name
+
+  - class: Win32_PerfFormattedData_Tcpip_TCPv4
+    metrics:
+      - [SegmentsRetransmittedPersec, system.net.tcp.retrans_seg, gauge]
+    tag_by: Name
+```
 #### 構成オプション
 
 _この機能は、バージョン 5.3 の Agent から使用できます。_
