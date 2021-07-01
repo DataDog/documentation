@@ -82,7 +82,7 @@ You can also leverage your API and browser test configuration **Advanced options
 ## Browser variable
 
 <div class="alert alert-warning">
-In some cases, the browser variable cannot be applied. This method is deprecated and it is now recommended to leverage the `user-agent` header instead.
+In some cases, the browser variable cannot be applied. The browser variable method is consequently deprecated and it is now recommended to leverage the `user-agent` header instead.
 </div>
 
 When a Datadog robot is rendering your application, the `window._DATADOG_SYNTHETICS_BROWSER` variable is set to `true`. To remove the robot actions from your analytics data, wrap your analytics tool code with the following test:
