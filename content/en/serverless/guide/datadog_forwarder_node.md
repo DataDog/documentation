@@ -78,15 +78,13 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
-      nodeLayerVersion: "<LAYER_VERSION>"
+      nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<FORWARDER_ARN>"
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
 To fill in the placeholders:
-
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
@@ -131,15 +129,10 @@ class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const datadog = new Datadog(this, "Datadog", {
-      nodeLayerVersion: <LAYER_VERSION>,
-      addLayers: <BOOLEAN>,
+      nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      flushMetricsToLogs: <BOOLEAN>,
-      site: "<SITE>",
-      apiKey: "{Datadog_API_Key}",
-      apiKMSKey: "{Encrypted_Datadog_API_Key}",
-      enableDDTracing: <BOOLEAN>,
-      injectLogContext: <BOOLEAN>
+      service: "<SERVICE>",  // Optional
+      env: "<ENV>",  // Optional
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
@@ -148,7 +141,6 @@ class CdkStack extends cdk.Stack {
 
 To fill in the placeholders:
 
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][3]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 

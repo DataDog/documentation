@@ -93,16 +93,14 @@ Transform:
     Parameters:
       stackName: !Ref "AWS::StackName"
       apiKey: <DATADOG_API_KEY>
-      pythonLayerVersion: "<LAYER_VERSION>"
-      extensionLayerVersion: "<EXTENSION_VERSION>"
+      pythonLayerVersion: {{< latest-lambda-layer-version layer="python" >}}
+      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
 To fill in the placeholders:
 - Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4]. 
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
@@ -135,8 +133,8 @@ Import the `datadog-cdk-construct` module in your AWS CDK app and add the follow
 from datadog_cdk_constructs import Datadog
 
 datadog = Datadog(self, "Datadog",
-    python_layer_version=<LAYER_VERSION>,
-    extension_layer_version=<EXTENSION_LAYER_VERSION>,
+    python_layer_version={{< latest-lambda-layer-version layer="python" >}},
+    extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
     api_key=<DATADOG_API_KEY>,
     service=<SERVICE>, # Optional
     env=<ENV>, # Optional
@@ -148,8 +146,6 @@ To fill in the placeholders:
 
 - Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 More information and additional parameters can be found on the [Datadog CDK NPM page][2].
 

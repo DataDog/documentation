@@ -38,13 +38,13 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 
 ```
 # For regular regions
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # For us-gov regions
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="ruby" >}}`. For example:
+The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}

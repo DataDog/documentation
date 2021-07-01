@@ -72,7 +72,7 @@ Transform:
   - AWS::Serverless-2016-10-31
   - Name: DatadogServerless
     Parameters:
-      pythonLayerVersion: "<LAYER_VERSION>"
+      pythonLayerVersion: "{{< latest-lambda-layer-version layer="python" >}}"
       stackName: !Ref "AWS::StackName"
       forwarderArn: "<FORWARDER_ARN>"
       service: "<SERVICE>" # Optional
@@ -80,8 +80,6 @@ Transform:
 ```
 
 To fill in the placeholders:
-
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
@@ -127,7 +125,7 @@ class CdkStack(core.Stack):
     mapping = core.CfnMapping(self, "Datadog",
       mapping={
         "Parameters": {
-          "pythonLayerVersion": "<LAYER_VERSION>",
+          "pythonLayerVersion": "{{< latest-lambda-layer-version layer="python" >}}",
           "forwarderArn": "<FORWARDER_ARN>",
           "stackName": self.stackName,
           "service": "<SERVICE>",  # Optional
@@ -137,8 +135,6 @@ class CdkStack(core.Stack):
 ```
 
 To fill in the placeholders:
-
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
