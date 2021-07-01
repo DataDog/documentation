@@ -100,9 +100,9 @@ Transform:
 ```
 
 To fill in the placeholders:
-- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][6]. 
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][4]).
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][5]).
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4]. 
+- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][5]).
+- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][6]).
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
@@ -111,9 +111,9 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: /serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-js/releases
-[5]: https://gallery.ecr.aws/datadog/lambda-extension
-[6]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://github.com/DataDog/datadog-lambda-js/releases
+[6]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 

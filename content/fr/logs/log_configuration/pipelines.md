@@ -10,7 +10,7 @@ further_reading:
     text: Consulter la liste complète des processeurs disponibles
   - link: /logs/logging_without_limits/
     tag: Documentation
-    text: Logging without Limits
+    text: Logging without Limits*
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
@@ -205,6 +205,9 @@ Il est également possible de copier un pipeline d'intégration à l'aide du bou
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /fr/logs/processing/processors/
 [2]: /fr/logs/explorer/facets/

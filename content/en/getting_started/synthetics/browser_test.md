@@ -43,7 +43,9 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
 
+
 For more information on how to set up private locations, see [Getting Started with Private Locations][3].
+
 
 #### Specify test frequency
 
@@ -59,7 +61,9 @@ You can specify the number of consecutive failures that should happen before con
 Retry test 2 times after 300 ms in case of failure
 ```
 
+
 You can also configure your test to only trigger a notification when your application goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
+
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
@@ -67,7 +71,9 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
+
 Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][4] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
+
 
 You can set your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
@@ -77,7 +83,9 @@ When you're ready to record your test, click **Save Details & Record Test**.
 
 ### Create recording
 
+
 Once your test configuration has saved, Datadog prompts you to download and install the [Datadog test recorder][5] Chrome extension. 
+
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 
@@ -125,3 +133,4 @@ In this case, the **Errors & Warnings** tab shows that the server responded with
 [8]: /synthetics/browser_tests/test_results#resources
 [9]: /synthetics/browser_tests/test_results#page-performance
 [10]: /synthetics/apm/
+
