@@ -150,7 +150,7 @@ To fill in the placeholders:
 
 - Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][3]).
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+- Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can use the macro.
 
