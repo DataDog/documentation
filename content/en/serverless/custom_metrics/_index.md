@@ -51,7 +51,7 @@ If the Datadog Lambda Library is not available for your runtime, you can print m
 **Note:** The arguments to the custom metrics reporting methods have the following requirements:
 
 - `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][10].
-- `<METRIC_VALUE>` MUST be a number (i.e. integer or float).
+- `<METRIC_VALUE>` MUST be a number (that is, integer or float).
 - `<TAG_LIST>` is optional and formatted, for example: `['owner:Datadog', 'env:demo', 'cooltag']`.
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
@@ -209,7 +209,7 @@ Where:
 
 - `MONITORING` signals to the Datadog integration that it should collect this log entry.
 - `<UNIX_EPOCH_TIMESTAMP>` is in seconds, not milliseconds.
-- `<METRIC_VALUE>` MUST be a number (i.e. integer or float).
+- `<METRIC_VALUE>` MUST be a number (that is, integer or float).
 - `<METRIC_TYPE>` is `count`, `gauge`, `histogram`, or `check`.
 - `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][10].
 - `<TAG_LIST>` is optional, comma separated, and must be preceded by `#`. The tag `function_name:<name_of_the_function>` is automatically applied to custom metrics.
