@@ -29,7 +29,7 @@ This section aims to document specificities and to provide good base configurati
 With Datadog integrations for the [API Server][1], [ETCD][2], [Controller Manager][3], and [Scheduler][4], you can collect key metrics from all four components of the Kubernetes Control Plane.
 
 * [Kubernetes with Kubeadm](#Kubeadm)
-* [Kubernetes on EKS](#EKS)
+* [Kubernetes on Amazon EKS](#EKS)
 * [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
 
 ## Kubernetes with Kubeadm {#Kubeadm}
@@ -308,7 +308,7 @@ scheduler:
     bind-address: 0.0.0.0
 ```
 
-## Kubernetes on EKS {#EKS}
+## Kubernetes on Amazon Elastic Kubernetes Service {#EKS}
 
 On EKS, AWS exposes API Server metrics via [a single endpoint][5]. This allows the Datadog Agent to obtain API Server metrics using endpoint checks as described in the [Kubernetes API Server metrics check documentation][6]. To conigure the check, add the following annotations to the `default/kubernetes` service:
 
@@ -322,7 +322,7 @@ annotations:
 
 Other control plane components are not exposed in EKS and cannot be monitored.
 
-## Kubernetes on Managed Services (AKS, GKE) {#ManagedServices}
+## Kubernetes on Managed Services (Azure Kubernetes Service, Google Kubernetes Engine) {#ManagedServices}
 
 On most Managed Services the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
 
