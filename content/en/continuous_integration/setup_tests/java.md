@@ -97,7 +97,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
 </plugin>
 {{< /code-block >}}
 
-Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally do, specifying the environment where tests are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci mvn clean verify -P ci-app
