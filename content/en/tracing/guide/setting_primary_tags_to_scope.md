@@ -76,7 +76,7 @@ Note:
 
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
-* There are some tags that the tracer always adds to spans: `resource`, `name`, and `service`. To avoid potentially confusing UI behavior never add these as host level tags. 
+* The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
 
 If you change a previously set primary tag, be aware of the following:
 
