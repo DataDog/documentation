@@ -76,11 +76,13 @@ Note:
 
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
+* The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
 
 If you change a previously set primary tag, be aware of the following:
 
 * Historical APM data aggregated by the previously set tag is no longer accessible.
 * Any APM monitors scoped to the previous tag display a status of _No Data_.
+
 
 ### Data by primary tag
 
