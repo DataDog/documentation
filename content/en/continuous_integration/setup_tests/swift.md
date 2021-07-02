@@ -21,7 +21,9 @@ Supported platforms:
 * macOS >= 10.13
 * tvOS >= 12.0
 
-## Installing the Swift testing SDK using SPM
+## Installing the Swift testing SDK
+
+### Via Swift Package Manager
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -29,7 +31,7 @@ Supported platforms:
 
 3. If you run UITests, also link the app running the tests with this library.
 
-## Binary linking
+### Via direct binary linking
 
 1. Download and decompress `DatadogSDKTesting.zip` from the release page.
 
@@ -47,20 +49,20 @@ To enable testing instrumentation, add the following environment variables to yo
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
-| Environment variable     | Value                       |
-|--------------------------|-----------------------------|
-| `DD_TEST_RUNNER`           | `true`                         |
-| `DATADOG_CLIENT_TOKEN`     | Your current Datadog client token  |
-| `DD_ENDPOINT`            | The server endpoint of your Datadog Account: `us` (default), `us3`, `eu`, `gov`             |
-| `SRCROOT`                  | `$(SRCROOT)`                  |
+| Environment variable   | Value                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| `DD_TEST_RUNNER`       | `true`                                                                          |
+| `DATADOG_CLIENT_TOKEN` | Your current Datadog client token                                               |
+| `DD_ENDPOINT`          | The server endpoint of your Datadog Account: `us` (default), `us3`, `eu`, `gov` |
+| `SRCROOT`              | `$(SRCROOT)`                                                                    |
 
 
 Optionally, set these environment variables also:
 
-| Environment variable     | Value                       |
-|--------------------------|-----------------------------|
-|`DD_ENV `                   | The environment you want to report              |
-|`DD_SERVICE`                | The name of the service you want to report      |
+| Environment variable | Value                                      |
+| -------------------- | ------------------------------------------ |
+| `DD_ENV `            | The environment you want to report         |
+| `DD_SERVICE`         | The name of the service you want to report |
 
 
 ### Configuring your CI service
@@ -69,229 +71,229 @@ Set the following environment variables for your CI service. Note that Git infor
 
 #### Jenkins
 
-| Environment variable     | Value                       |
-|--------------------------|-----------------------------|
-|`JENKINS_URL`            | `$(JENKINS_URL)`            |
-|`WORKSPACE`              | `$(WORKSPACE)`              |
-|`BUILD_TAG`               | `$(BUILD_TAG)`            |
-|`BUILD_NUMBER`           | `$(BUILD_NUMBER)`           |
-|`BUILD_URL`           | `$(BUILD_URL)`           |
-|`JOB_NAME` | `$(JOB_NAME)` |
+| Environment variable | Value             |
+| -------------------- | ----------------- |
+| `JENKINS_URL`        | `$(JENKINS_URL)`  |
+| `WORKSPACE`          | `$(WORKSPACE)`    |
+| `BUILD_TAG`          | `$(BUILD_TAG)`    |
+| `BUILD_NUMBER`       | `$(BUILD_NUMBER)` |
+| `BUILD_URL`          | `$(BUILD_URL)`    |
+| `JOB_NAME`           | `$(JOB_NAME)`     |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                       |
-|--------------------------|-----------------------------|
-| `GIT_COMMIT`             | `$(GIT_COMMIT)`             |
-| `GIT_URL`                | `$(GIT_URL)`                |
-| `GIT_BRANCH`             | `$(GIT_BRANCH)`             |
+| Environment variable | Value           |
+| -------------------- | --------------- |
+| `GIT_COMMIT`         | `$(GIT_COMMIT)` |
+| `GIT_URL`            | `$(GIT_URL)`    |
+| `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
 #### CircleCI
 
 | Environment variable       | Value                         |
-|--------------------------- |-------------------------------|
-|`CIRCLECI`                 | `$(CIRCLECI)`                 |
-|`CIRCLE_WORKING_DIRECTORY` | `$(CIRCLE_WORKING_DIRECTORY)` |
-|`CIRCLE_BUILD_NUM`         | `$(CIRCLE_BUILD_NUM)`         |
-|`CIRCLE_BUILD_URL`         | `$(CIRCLE_BUILD_URL)`         |
-|`CIRCLE_WORKFLOW_ID` | `$(CIRCLE_WORKFLOW_ID)` |
-|`CIRCLE_PROJECT_REPONAME` | `$(CIRCLE_PROJECT_REPONAME)` |
+| -------------------------- | ----------------------------- |
+| `CIRCLECI`                 | `$(CIRCLECI)`                 |
+| `CIRCLE_WORKING_DIRECTORY` | `$(CIRCLE_WORKING_DIRECTORY)` |
+| `CIRCLE_BUILD_NUM`         | `$(CIRCLE_BUILD_NUM)`         |
+| `CIRCLE_BUILD_URL`         | `$(CIRCLE_BUILD_URL)`         |
+| `CIRCLE_WORKFLOW_ID`       | `$(CIRCLE_WORKFLOW_ID)`       |
+| `CIRCLE_PROJECT_REPONAME`  | `$(CIRCLE_PROJECT_REPONAME)`  |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                         |
-|--------------------------- |-------------------------------|
-| `CIRCLE_SHA1`              | `$(CIRCLE_SHA1)`              |
-| `CIRCLE_REPOSITORY_URL`    | `$(CIRCLE_REPOSITORY_URL)`    |
-| `CIRCLE_BRANCH`            | `$(CIRCLE_BRANCH)`            |
-| `CIRCLE_TAG` | `$(CIRCLE_TAG)` |
+| Environment variable    | Value                      |
+| ----------------------- | -------------------------- |
+| `CIRCLE_SHA1`           | `$(CIRCLE_SHA1)`           |
+| `CIRCLE_REPOSITORY_URL` | `$(CIRCLE_REPOSITORY_URL)` |
+| `CIRCLE_BRANCH`         | `$(CIRCLE_BRANCH)`         |
+| `CIRCLE_TAG`            | `$(CIRCLE_TAG)`            |
 
 #### GitLab CI
 
-| Environment variable | Value             |
-| -------------------  | ----------------- |
-|`GITLAB_CI`          | `$(GITLAB_CI)`          |
-|`CI_PROJECT_DIR`     | `$(CI_PROJECT_DIR)`     |
-|`CI_JOB_STAGE`       | `$(CI_JOB_STAGE)`       |
-|`CI_JOB_NAME`        | `$(CI_JOB_NAME)`        |
-|`CI_JOB_URL`         | `$(CI_JOB_URL)`         |
-|`CI_PIPELINE_ID`     | `$(CI_PIPELINE_ID)`     |
-|`CI_PIPELINE_IID`    | `$(CI_PIPELINE_IID)`    |
-|`CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)`    |
-|`CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)`    |
+| Environment variable | Value                |
+| -------------------- | -------------------- |
+| `GITLAB_CI`          | `$(GITLAB_CI)`       |
+| `CI_PROJECT_DIR`     | `$(CI_PROJECT_DIR)`  |
+| `CI_JOB_STAGE`       | `$(CI_JOB_STAGE)`    |
+| `CI_JOB_NAME`        | `$(CI_JOB_NAME)`     |
+| `CI_JOB_URL`         | `$(CI_JOB_URL)`      |
+| `CI_PIPELINE_ID`     | `$(CI_PIPELINE_ID)`  |
+| `CI_PIPELINE_IID`    | `$(CI_PIPELINE_IID)` |
+| `CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)` |
+| `CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)` |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value             |
-| -------------------  | ----------------- |
-| `CI_COMMIT_SHA`      | `$(CI_COMMIT_SHA)`      |
-| `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)`  |
-| `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`   |
-| `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`      |
-| `CI_COMMIT_MESSAGE` | `$(CI_COMMIT_MESSAGE)` |
+| Environment variable | Value                  |
+| -------------------- | ---------------------- |
+| `CI_COMMIT_SHA`      | `$(CI_COMMIT_SHA)`     |
+| `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)` |
+| `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`  |
+| `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`     |
+| `CI_COMMIT_MESSAGE`  | `$(CI_COMMIT_MESSAGE)` |
 
 
 #### Travis
 
-| Environment variable         | Value                           |
-| ---------------------------- | ------------------------------- |
-|`TRAVIS`                     | `$(TRAVIS)`                     |
-|`TRAVIS_BUILD_DIR`           | `$(TRAVIS_BUILD_DIR)`           |
-|`TRAVIS_BUILD_ID`            | `$(TRAVIS_BUILD_ID)`            |
-|`TRAVIS_BUILD_NUMBER`        | `$(TRAVIS_BUILD_NUMBER)`        |
-|`TRAVIS_BUILD_WEB_URL`       | `$(TRAVIS_BUILD_WEB_URL)`       |
-|`TRAVIS_JOB_WEB_URL`       | `$(TRAVIS_JOB_WEB_URL)`       |
-| `TRAVIS_REPO_SLUG`           | `$(TRAVIS_REPO_SLUG)`           |
+| Environment variable       | Value                         |
+| -------------------------- | ----------------------------- |
+| `TRAVIS`                   | `$(TRAVIS)`                   |
+| `TRAVIS_BUILD_DIR`         | `$(TRAVIS_BUILD_DIR)`         |
+| `TRAVIS_BUILD_ID`          | `$(TRAVIS_BUILD_ID)`          |
+| `TRAVIS_BUILD_NUMBER`      | `$(TRAVIS_BUILD_NUMBER)`      |
+| `TRAVIS_BUILD_WEB_URL`     | `$(TRAVIS_BUILD_WEB_URL)`     |
+| `TRAVIS_JOB_WEB_URL`       | `$(TRAVIS_JOB_WEB_URL)`       |
+| `TRAVIS_REPO_SLUG`         | `$(TRAVIS_REPO_SLUG)`         |
 | `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                           |
+| Environment variable         | Value                           |
 | ---------------------------- | ------------------------------- |
 | `TRAVIS_PULL_REQUEST_BRANCH` | `$(TRAVIS_PULL_REQUEST_BRANCH)` |
 | `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
 | `TRAVIS_COMMIT`              | `$(TRAVIS_COMMIT)`              |
-| `TRAVIS_TAG`           | `$(TRAVIS_TAG)`           |
-| `TRAVIS_COMMIT_MESSAGE`           | `$(TRAVIS_COMMIT_MESSAGE)`           |
+| `TRAVIS_TAG`                 | `$(TRAVIS_TAG)`                 |
+| `TRAVIS_COMMIT_MESSAGE`      | `$(TRAVIS_COMMIT_MESSAGE)`      |
 
 
 #### GitHub Actions
 
-| Environment variable  | Value                  |
-| --------------------- | ---------------------- |
-|`GITHUB_WORKSPACE`  | `$(GITHUB_WORKSPACE)`  |
-|`GITHUB_REPOSITORY` | `$(GITHUB_REPOSITORY)` |
-|`GITHUB_RUN_ID`     | `$(GITHUB_RUN_ID)`     |
-|`GITHUB_RUN_NUMBER` | `$(GITHUB_RUN_NUMBER)` |
-|`GITHUB_WORKFLOW` | `$(GITHUB_WORKFLOW)` |
-| `GITHUB_SHA`        | `$(GITHUB_SHA)`        |
+| Environment variable | Value                  |
+| -------------------- | ---------------------- |
+| `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`  |
+| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
+| `GITHUB_RUN_ID`      | `$(GITHUB_RUN_ID)`     |
+| `GITHUB_RUN_NUMBER`  | `$(GITHUB_RUN_NUMBER)` |
+| `GITHUB_WORKFLOW`    | `$(GITHUB_WORKFLOW)`   |
+| `GITHUB_SHA`         | `$(GITHUB_SHA)`        |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                  |
-| ------------------- | ---------------------- |
-| `GITHUB_REF`        | `$(GITHUB_REF)`        |
-| `GITHUB_HEAD_REF` | `$(GITHUB_HEAD_REF)` |
-| `GITHUB_REPOSITORY` | `$(GITHUB_REPOSITORY)` |
+| Environment variable | Value                  |
+| -------------------- | ---------------------- |
+| `GITHUB_REF`         | `$(GITHUB_REF)`        |
+| `GITHUB_HEAD_REF`    | `$(GITHUB_HEAD_REF)`   |
+| `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
 
 
 #### Buildkite
 
 | Environment variable            | Value                              |
 | ------------------------------- | ---------------------------------- |
-| `BUILDKITE`           | `$(BUILDKITE)`  |
+| `BUILDKITE`                     | `$(BUILDKITE)`                     |
 | `BUILDKITE_BUILD_CHECKOUT_PATH` | `$(BUILDKITE_BUILD_CHECKOUT_PATH)` |
 | `BUILDKITE_BUILD_ID`            | `$(BUILDKITE_BUILD_ID)`            |
 | `BUILDKITE_BUILD_NUMBER`        | `$(BUILDKITE_BUILD_NUMBER)`        |
 | `BUILDKITE_BUILD_URL`           | `$(BUILDKITE_BUILD_URL)`           |
-| `BUILDKITE_PIPELINE_SLUG` | `$(BUILDKITE_PIPELINE_SLUG)` |
-| `BUILDKITE_JOB_ID` | `$(BUILDKITE_JOB_ID)` |
+| `BUILDKITE_PIPELINE_SLUG`       | `$(BUILDKITE_PIPELINE_SLUG)`       |
+| `BUILDKITE_JOB_ID`              | `$(BUILDKITE_JOB_ID)`              |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                              |
-| ------------------------------- | ---------------------------------- |
-| `BUILDKITE_COMMIT`              | `$(BUILDKITE_COMMIT)`              |
-| `BUILDKITE_REPO`                | `$(BUILDKITE_REPO)`                |
-| `BUILDKITE_BRANCH`              | `$(BUILDKITE_BRANCH)`              |
-| `BUILDKITE_TAG` | `$(BUILDKITE_TAG)` |
-| `BUILDKITE_MESSAGE` | `$(BUILDKITE_MESSAGE)` |
-| `BUILDKITE_BUILD_AUTHOR` | `$(BUILDKITE_BUILD_AUTHOR)` |
+| Environment variable           | Value                             |
+| ------------------------------ | --------------------------------- |
+| `BUILDKITE_COMMIT`             | `$(BUILDKITE_COMMIT)`             |
+| `BUILDKITE_REPO`               | `$(BUILDKITE_REPO)`               |
+| `BUILDKITE_BRANCH`             | `$(BUILDKITE_BRANCH)`             |
+| `BUILDKITE_TAG`                | `$(BUILDKITE_TAG)`                |
+| `BUILDKITE_MESSAGE`            | `$(BUILDKITE_MESSAGE)`            |
+| `BUILDKITE_BUILD_AUTHOR`       | `$(BUILDKITE_BUILD_AUTHOR)`       |
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
 #### Bitbucket pipelines
 
-| Environment variable     | Value                              |
-| -------------------------- | ---------------------------------- |
-| `BITBUCKET_CLONE_DIR`      | `$(BITBUCKET_CLONE_DIR)`          |
-| `BITBUCKET_BUILD_NUMBER`   | `$(BITBUCKET_BUILD_NUMBER)`        |
-| `BITBUCKET_PIPELINE_UUID`   | `$(BITBUCKET_PIPELINE_UUID)`        |
+| Environment variable       | Value                         |
+| -------------------------- | ----------------------------- |
+| `BITBUCKET_CLONE_DIR`      | `$(BITBUCKET_CLONE_DIR)`      |
+| `BITBUCKET_BUILD_NUMBER`   | `$(BITBUCKET_BUILD_NUMBER)`   |
+| `BITBUCKET_PIPELINE_UUID`  | `$(BITBUCKET_PIPELINE_UUID)`  |
 | `BITBUCKET_REPO_FULL_NAME` | `$(BITBUCKET_REPO_FULL_NAME)` |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                              |
-| -------------------------- | ---------------------------------- |
-| `BITBUCKET_COMMIT`         | `$(BITBUCKET_COMMIT)`              |
-| `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)`      |
-| `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`              |
-| `BITBUCKET_TAG` | `$(BITBUCKET_TAG)` |
+| Environment variable       | Value                         |
+| -------------------------- | ----------------------------- |
+| `BITBUCKET_COMMIT`         | `$(BITBUCKET_COMMIT)`         |
+| `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)` |
+| `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`         |
+| `BITBUCKET_TAG`            | `$(BITBUCKET_TAG)`            |
 
 #### AppVeyor
 
-| Environment variable     | Value                                     |
-| -------------------------------------- | ----------------------------------------- |
-| `APPVEYOR`                               | `$(APPVEYOR)`                               |
-| `APPVEYOR_BUILD_FOLDER`                  | `$(APPVEYOR_BUILD_FOLDER)`                  |
-| `APPVEYOR_BUILD_ID`                      | `$(APPVEYOR_BUILD_ID)`                      |
-| `APPVEYOR_BUILD_NUMBER`                  | `$(APPVEYOR_BUILD_NUMBER)`                  |
-| `APPVEYOR_REPO_TAG_NAME`                 | `$(APPVEYOR_REPO_TAG_NAME)`                 |
-| `APPVEYOR_REPO_NAME`                     | `$(APPVEYOR_REPO_NAME)`                     |
+| Environment variable     | Value                       |
+| ------------------------ | --------------------------- |
+| `APPVEYOR`               | `$(APPVEYOR)`               |
+| `APPVEYOR_BUILD_FOLDER`  | `$(APPVEYOR_BUILD_FOLDER)`  |
+| `APPVEYOR_BUILD_ID`      | `$(APPVEYOR_BUILD_ID)`      |
+| `APPVEYOR_BUILD_NUMBER`  | `$(APPVEYOR_BUILD_NUMBER)`  |
+| `APPVEYOR_REPO_TAG_NAME` | `$(APPVEYOR_REPO_TAG_NAME)` |
+| `APPVEYOR_REPO_NAME`     | `$(APPVEYOR_REPO_NAME)`     |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                                     |
-| -------------------------------------- | ----------------------------------------- |
+| Environment variable                     | Value                                       |
+| ---------------------------------------- | ------------------------------------------- |
 | `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
 | `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
 | `APPVEYOR_REPO_BRANCH`                   | `$(APPVEYOR_REPO_BRANCH)`                   |
-| `APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED`                   | `$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)`                   |
-| `APPVEYOR_REPO_COMMIT_AUTHOR`                   | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`                   |
-| `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`                   | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`                   |
+| `APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED`  | `$(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)`  |
+| `APPVEYOR_REPO_COMMIT_AUTHOR`            | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`            |
+| `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`      | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`      |
 
 #### Azure pipelines
 
-| Environment variable     | Value                                   |
-| ------------------------------------ | --------------------------------------- |
-| `TF_BUILD`                | `$(TF_BUILD)`                |
-| `BUILD_SOURCESDIRECTORY`             | `$(BUILD_SOURCESDIRECTORY)`             |
-| `BUILD_BUILDID`                      | `$(BUILD_BUILDID)`                      |
-| `BUILD_DEFINITIONNAME` | `$(BUILD_DEFINITIONNAME)` |
-| `SYSTEM_TEAMPROJECTID`                 | `$(SYSTEM_TEAMPROJECTID)`                 |
+| Environment variable             | Value                               |
+| -------------------------------- | ----------------------------------- |
+| `TF_BUILD`                       | `$(TF_BUILD)`                       |
+| `BUILD_SOURCESDIRECTORY`         | `$(BUILD_SOURCESDIRECTORY)`         |
+| `BUILD_BUILDID`                  | `$(BUILD_BUILDID)`                  |
+| `BUILD_DEFINITIONNAME`           | `$(BUILD_DEFINITIONNAME)`           |
+| `SYSTEM_TEAMPROJECTID`           | `$(SYSTEM_TEAMPROJECTID)`           |
 | `SYSTEM_TEAMFOUNDATIONSERVERURI` | `$(SYSTEM_TEAMFOUNDATIONSERVERURI)` |
-| `SYSTEM_JOBID |$(SYSTEM_JOBID)` |
-| `SYSTEM_TASKINSTANCEID` | `$(SYSTEM_TASKINSTANCEID)` |
+| `SYSTEM_JOBID`                   | `$(SYSTEM_JOBID)`                   |
+| `SYSTEM_TASKINSTANCEID`          | `$(SYSTEM_TASKINSTANCEID)`          |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                                   |
-| ------------------------------------ | --------------------------------------- |
-| `BUILD_SOURCEVERSION`                | `$(BUILD_SOURCEVERSION)`                |
-| `BUILD_REPOSITORY_URI`               | `$(BUILD_REPOSITORY_URI)`               |
-| `BUILD_SOURCEBRANCH`                 | `$(BUILD_SOURCEBRANCH)`                 |
-| `SYSTEM_PULLREQUEST_SOURCECOMMITID` | `$(SYSTEM_PULLREQUEST_SOURCECOMMITID)` |
-| `SYSTEM_PULLREQUEST_SOURCEBRANCH` | `$(SYSTEM_PULLREQUEST_SOURCEBRANCH)` |
+| Environment variable                     | Value                                       |
+| ---------------------------------------- | ------------------------------------------- |
+| `BUILD_SOURCEVERSION`                    | `$(BUILD_SOURCEVERSION)`                    |
+| `BUILD_REPOSITORY_URI`                   | `$(BUILD_REPOSITORY_URI)`                   |
+| `BUILD_SOURCEBRANCH`                     | `$(BUILD_SOURCEBRANCH)`                     |
+| `SYSTEM_PULLREQUEST_SOURCECOMMITID`      | `$(SYSTEM_PULLREQUEST_SOURCECOMMITID)`      |
+| `SYSTEM_PULLREQUEST_SOURCEBRANCH`        | `$(SYSTEM_PULLREQUEST_SOURCEBRANCH)`        |
 | `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI` | `$(SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI)` |
-| `BUILD_SOURCEVERSIONMESSAGE` | `$(BUILD_SOURCEVERSIONMESSAGE)` |
-| `BUILD_REQUESTEDFORID` | `$(BUILD_REQUESTEDFORID)` |
-| `BUILD_REQUESTEDFOREMAIL` | `$(BUILD_REQUESTEDFOREMAIL)` |
+| `BUILD_SOURCEVERSIONMESSAGE`             | `$(BUILD_SOURCEVERSIONMESSAGE)`             |
+| `BUILD_REQUESTEDFORID`                   | `$(BUILD_REQUESTEDFORID)`                   |
+| `BUILD_REQUESTEDFOREMAIL`                | `$(BUILD_REQUESTEDFOREMAIL)`                |
 
 #### Bitrise
 
-| Environment variable     | Value                                   |
-| ------------------------------------ | --------------------------------------- |
-| `BITRISE_SOURCE_DIR`               | `$(BITRISE_SOURCE_DIR)`               |
-| `BITRISE_APP_TITLE`             | `$(BITRISE_APP_TITLE)`             |
-| `BITRISE_BUILD_SLUG`             | `$(BITRISE_BUILD_SLUG)`             |
-| `BITRISE_BUILD_NUMBER`                 | `$(BITRISE_BUILD_NUMBER)`                 |
-| `BITRISE_BUILD_URL`                      | `$(BITRISE_BUILD_URL)`                      |
+| Environment variable   | Value                     |
+| ---------------------- | ------------------------- |
+| `BITRISE_SOURCE_DIR`   | `$(BITRISE_SOURCE_DIR)`   |
+| `BITRISE_APP_TITLE`    | `$(BITRISE_APP_TITLE)`    |
+| `BITRISE_BUILD_SLUG`   | `$(BITRISE_BUILD_SLUG)`   |
+| `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
+| `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
 
 Additional Git configuration for physical device testing:
 
-| Environment variable     | Value                                   |
-| ------------------------------------ | --------------------------------------- |
-| `GIT_REPOSITORY_URL`                          | `$(GIT_REPOSITORY_URL)`                          |
-| `BITRISE_GIT_COMMIT`                | `$(BITRISE_GIT_COMMIT)`                |
-| `BITRISE_GIT_BRANCH`                 | `$(BITRISE_GIT_BRANCH)`                 |
-| `BITRISE_GIT_TAG` | `$(BITRISE_GIT_TAG)` |
-| `GIT_CLONE_COMMIT_HASH` | `$(GIT_CLONE_COMMIT_HASH)` |
-| `BITRISE_GIT_MESSAGE` | `$(BITRISE_GIT_MESSAGE)` |
+| Environment variable               | Value                                 |
+| ---------------------------------- | ------------------------------------- |
+| `GIT_REPOSITORY_URL`               | `$(GIT_REPOSITORY_URL)`               |
+| `BITRISE_GIT_COMMIT`               | `$(BITRISE_GIT_COMMIT)`               |
+| `BITRISE_GIT_BRANCH`               | `$(BITRISE_GIT_BRANCH)`               |
+| `BITRISE_GIT_TAG`                  | `$(BITRISE_GIT_TAG)`                  |
+| `GIT_CLONE_COMMIT_HASH`            | `$(GIT_CLONE_COMMIT_HASH)`            |
+| `BITRISE_GIT_MESSAGE`              | `$(BITRISE_GIT_MESSAGE)`              |
 | `GIT_CLONE_COMMIT_MESSAGE_SUBJECT` | `$(GIT_CLONE_COMMIT_MESSAGE_SUBJECT)` |
-| `GIT_CLONE_COMMIT_MESSAGE_BODY` | `$(GIT_CLONE_COMMIT_MESSAGE_BODY)` |
-| `GIT_CLONE_COMMIT_AUTHOR_NAME` | `$(GIT_CLONE_COMMIT_AUTHOR_NAME)` |
-| `GIT_CLONE_COMMIT_AUTHOR_EMAIL` | `$(GIT_CLONE_COMMIT_AUTHOR_EMAIL)` |
-| `GIT_CLONE_COMMIT_COMMITER_NAME` | `$(GIT_CLONE_COMMIT_COMMITER_NAME)` |
-| `GIT_CLONE_COMMIT_COMMITER_EMAIL` | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)` |
+| `GIT_CLONE_COMMIT_MESSAGE_BODY`    | `$(GIT_CLONE_COMMIT_MESSAGE_BODY)`    |
+| `GIT_CLONE_COMMIT_AUTHOR_NAME`     | `$(GIT_CLONE_COMMIT_AUTHOR_NAME)`     |
+| `GIT_CLONE_COMMIT_AUTHOR_EMAIL`    | `$(GIT_CLONE_COMMIT_AUTHOR_EMAIL)`    |
+| `GIT_CLONE_COMMIT_COMMITER_NAME`   | `$(GIT_CLONE_COMMIT_COMMITER_NAME)`   |
+| `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 ## Running tests
 
