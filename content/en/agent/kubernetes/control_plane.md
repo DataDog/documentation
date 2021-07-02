@@ -26,7 +26,7 @@ further_reading:
 
 This section aims to document specificities and to provide good base configurations for monitoring the Kubernetes Control Plane. You can then customize these configurations to add any Datadog feature.
 
-With Datadog integrations for the [API Server][1], [ETCD][2], [Controller Manager][3], and [Scheduler][4], you can collect key metrics from all four components of the Kubernetes Control Plane.
+With Datadog integrations for the [API server][1], [Etcd][2], [Controller Manager][3], and [Scheduler][4], you can collect key metrics from all four components of the Kubernetes Control Plane.
 
 * [Kubernetes with Kubeadm](#Kubeadm)
 * [Kubernetes on Amazon EKS](#EKS)
@@ -36,13 +36,13 @@ With Datadog integrations for the [API Server][1], [ETCD][2], [Controller Manage
 
 The following configurations are tested on Kubernetes `v1.18+`.
 
-### API Server
+### API server
 
-The API Server integration is automatically configured. The Datadog Agent discovers it automatically.
+The API server integration is automatically configured. The Datadog Agent discovers it automatically.
 
-### ETCD
+### Etcd
 
-By providing read access to the ETCD certificates located on the host, the Datadog Agent check can communicate with ETCD and start collecting ETCD metrics.
+By providing read access to the Etcd certificates located on the host, the Datadog Agent check can communicate with Etcd and start collecting Etcd metrics.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -308,9 +308,9 @@ scheduler:
     bind-address: 0.0.0.0
 ```
 
-## Kubernetes on Amazon Elastic Kubernetes Service {#EKS}
+## Kubernetes on Amazon EKS {#EKS}
 
-On EKS, AWS exposes API Server metrics via [a single endpoint][5]. This allows the Datadog Agent to obtain API Server metrics using endpoint checks as described in the [Kubernetes API Server metrics check documentation][6]. To conigure the check, add the following annotations to the `default/kubernetes` service:
+On Elastic Kubernetes Service (EKS), AWS exposes API server metrics on a [single endpoint][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][6]. To configure the check, add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
@@ -322,9 +322,9 @@ annotations:
 
 Other control plane components are not exposed in EKS and cannot be monitored.
 
-## Kubernetes on Managed Services (Azure Kubernetes Service, Google Kubernetes Engine) {#ManagedServices}
+## Kubernetes on managed services (AKS, GKE) {#ManagedServices}
 
-On most Managed Services the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
+On other managed services, such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
 
 
 [1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
