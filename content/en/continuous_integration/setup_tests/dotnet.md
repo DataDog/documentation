@@ -38,7 +38,7 @@ dotnet tool install -g dd-trace
 To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (i.e. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
 {{< code-block lang="bash" >}}
-dd-trace --dd-service my-dotnet-app --dd-env ci dotnet test
+dd-trace --dd-service=my-dotnet-app --dd-env=ci dotnet test
 {{< /code-block >}}
 
 All tests will be automatically instrumented.
@@ -79,7 +79,7 @@ If the application expects command line arguments, use a `--` separator before t
 The following example shows how to instrument the command `dotnet test --framework netcoreapp3.1` with `ci` as environment:
 
 {{< code-block lang="bash" >}}
-dd-trace --dd-service my-dotnet-app --dd-env=ci -- dotnet test --framework netcoreapp3.1
+dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test --framework netcoreapp3.1
 {{< /code-block >}}
 
 ### Instrumenting MsTest V2 framework
