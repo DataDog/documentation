@@ -652,9 +652,9 @@ components:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         requests:
-          description: "Array of one request object to display in the widget.\n\n\
-            See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
-            \ to learn how to build the `REQUEST_SCHEMA`."
+          description: "Array of one request object to display in the widget.\n\nSee
+            the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
+            to learn how to build the `REQUEST_SCHEMA`."
           example:
           - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
           items:
@@ -847,9 +847,9 @@ components:
       readOnly: true
       type: object
     Dashboard:
-      description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,\
-        \ and displaying\nkey performance metrics, which enable you to monitor the\
-        \ health of your infrastructure."
+      description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,
+        and displaying\nkey performance metrics, which enable you to monitor the health
+        of your infrastructure."
       properties:
         author_handle:
           description: Identifier of the dashboard author.
@@ -1180,9 +1180,9 @@ components:
       readOnly: true
       type: object
     DistributionWidgetDefinition:
-      description: "The Distribution visualization is another way of showing metrics\n\
-        aggregated across one or several tags, such as hosts.\nUnlike the heat map,\
-        \ a distribution graph\u2019s x-axis is quantity rather than time."
+      description: "The Distribution visualization is another way of showing metrics\naggregated
+        across one or several tags, such as hosts.\nUnlike the heat map, a distribution
+        graph\u2019s x-axis is quantity rather than time."
       properties:
         legend_size:
           deprecated: true
@@ -1195,9 +1195,9 @@ components:
             $ref: '#/components/schemas/WidgetMarker'
           type: array
         requests:
-          description: "Array of one request object to display in the widget.\n\n\
-            See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
-            \ to learn how to build the `REQUEST_SCHEMA`."
+          description: "Array of one request object to display in the widget.\n\nSee
+            the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
+            to learn how to build the `REQUEST_SCHEMA`."
           example:
           - q: host:X tags:Y
           items:
@@ -3557,22 +3557,22 @@ components:
           $ref: '#/components/schemas/LogsAPIError'
       type: object
     LogsArithmeticProcessor:
-      description: "Use the Arithmetic Processor to add a new attribute (without spaces\
-        \ or special characters\nin the new attribute name) to a log with the result\
-        \ of the provided formula.\nThis enables you to remap different time attributes\
-        \ with different units into a single attribute,\nor to compute operations\
-        \ on attributes within the same log.\n\nThe formula can use parentheses and\
-        \ the basic arithmetic operators `-`, `+`, `*`, `/`.\n\nBy default, the calculation\
-        \ is skipped if an attribute is missing.\nSelect \u201CReplace missing attribute\
-        \ by 0\u201D to automatically populate\nmissing attribute values with 0 to\
-        \ ensure that the calculation is done.\nAn attribute is missing if it is not\
-        \ found in the log attributes,\nor if it cannot be converted to a number.\n\
-        \n*Notes*:\n\n- The operator `-` needs to be space split in the formula as\
-        \ it can also be contained in attribute names.\n- If the target attribute\
-        \ already exists, it is overwritten by the result of the formula.\n- Results\
-        \ are rounded up to the 9th decimal. For example, if the result of the formula\
-        \ is `0.1234567891`,\n  the actual value stored for the attribute is `0.123456789`.\n\
-        - If you need to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/processing/parsing/?tab=filter#matcher-and-filter)."
+      description: "Use the Arithmetic Processor to add a new attribute (without spaces
+        or special characters\nin the new attribute name) to a log with the result
+        of the provided formula.\nThis enables you to remap different time attributes
+        with different units into a single attribute,\nor to compute operations on
+        attributes within the same log.\n\nThe formula can use parentheses and the
+        basic arithmetic operators `-`, `+`, `*`, `/`.\n\nBy default, the calculation
+        is skipped if an attribute is missing.\nSelect \u201CReplace missing attribute
+        by 0\u201D to automatically populate\nmissing attribute values with 0 to ensure
+        that the calculation is done.\nAn attribute is missing if it is not found
+        in the log attributes,\nor if it cannot be converted to a number.\n\n*Notes*:\n\n-
+        The operator `-` needs to be space split in the formula as it can also be
+        contained in attribute names.\n- If the target attribute already exists, it
+        is overwritten by the result of the formula.\n- Results are rounded up to
+        the 9th decimal. For example, if the result of the formula is `0.1234567891`,\n
+        \ the actual value stored for the attribute is `0.123456789`.\n- If you need
+        to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/processing/parsing/?tab=filter#matcher-and-filter)."
       properties:
         expression:
           description: Arithmetic operation between one or more log attributes.
@@ -3725,17 +3725,17 @@ components:
           type: array
       type: object
     LogsCategoryProcessor:
-      description: "Use the Category Processor to add a new attribute (without spaces\
-        \ or special characters in the new attribute name)\nto a log matching a provided\
-        \ search query. Use categories to create groups for an analytical view.\n\
-        For example, URL groups, machine groups, environments, and response time buckets.\n\
-        \n**Notes**:\n\n- The syntax of the query is the one of Logs Explorer search\
-        \ bar.\n  The query can be done on any log attribute or tag, whether it is\
-        \ a facet or not.\n  Wildcards can also be used inside your query.\n- Once\
-        \ the log has matched one of the Processor queries, it stops.\n  Make sure\
-        \ they are properly ordered in case a log could match several queries.\n-\
-        \ The names of the categories must be unique.\n- Once defined in the Category\
-        \ Processor, you can map categories to log status using the Log Status Remapper."
+      description: "Use the Category Processor to add a new attribute (without spaces
+        or special characters in the new attribute name)\nto a log matching a provided
+        search query. Use categories to create groups for an analytical view.\nFor
+        example, URL groups, machine groups, environments, and response time buckets.\n\n**Notes**:\n\n-
+        The syntax of the query is the one of Logs Explorer search bar.\n  The query
+        can be done on any log attribute or tag, whether it is a facet or not.\n  Wildcards
+        can also be used inside your query.\n- Once the log has matched one of the
+        Processor queries, it stops.\n  Make sure they are properly ordered in case
+        a log could match several queries.\n- The names of the categories must be
+        unique.\n- Once defined in the Category Processor, you can map categories
+        to log status using the Log Status Remapper."
       properties:
         categories:
           description: 'Array of filters to match or not a log and their
@@ -3783,17 +3783,17 @@ components:
       x-enum-varnames:
       - CATEGORY_PROCESSOR
     LogsDateRemapper:
-      description: "As Datadog receives logs, it timestamps them using the value(s)\
-        \ from any of these default attributes.\n\n  - `timestamp`\n  - `date`\n \
-        \ - `_timestamp`\n  - `Timestamp`\n  - `eventTime`\n  - `published_date`\n\
-        \n  If your logs put their dates in an attribute not in this list,\n  use\
-        \ the log date Remapper Processor to define their date attribute as the official\
-        \ log timestamp.\n  The recognized date formats are ISO8601, UNIX (the milliseconds\
-        \ EPOCH format), and RFC3164.\n\n  **Note:** If your logs don\u2019t contain\
-        \ any of the default attributes\n  and you haven\u2019t defined your own date\
-        \ attribute, Datadog timestamps\n  the logs with the date it received them.\n\
-        \n  If multiple log date remapper processors can be applied to a given log,\n\
-        \  only the first one (according to the pipelines order) is taken into account."
+      description: "As Datadog receives logs, it timestamps them using the value(s)
+        from any of these default attributes.\n\n  - `timestamp`\n  - `date`\n  -
+        `_timestamp`\n  - `Timestamp`\n  - `eventTime`\n  - `published_date`\n\n  If
+        your logs put their dates in an attribute not in this list,\n  use the log
+        date Remapper Processor to define their date attribute as the official log
+        timestamp.\n  The recognized date formats are ISO8601, UNIX (the milliseconds
+        EPOCH format), and RFC3164.\n\n  **Note:** If your logs don\u2019t contain
+        any of the default attributes\n  and you haven\u2019t defined your own date
+        attribute, Datadog timestamps\n  the logs with the date it received them.\n\n
+        \ If multiple log date remapper processors can be applied to a given log,\n
+        \ only the first one (according to the pipelines order) is taken into account."
       properties:
         is_enabled:
           default: false
@@ -4533,21 +4533,20 @@ components:
       - TIME_ASCENDING
       - TIME_DESCENDING
     LogsStatusRemapper:
-      description: "Use this Processor if you want to assign some attributes as the\
-        \ official status.\n\nEach incoming status value is mapped as follows.\n\n\
-        \  - Integers from 0 to 7 map to the Syslog severity standards\n  - Strings\
-        \ beginning with `emerg` or f (case-insensitive) map to `emerg` (0)\n  - Strings\
-        \ beginning with `a` (case-insensitive) map to `alert` (1)\n  - Strings beginning\
-        \ with `c` (case-insensitive) map to `critical` (2)\n  - Strings beginning\
-        \ with `err` (case-insensitive) map to `error` (3)\n  - Strings beginning\
-        \ with `w` (case-insensitive) map to `warning` (4)\n  - Strings beginning\
-        \ with `n` (case-insensitive) map to `notice` (5)\n  - Strings beginning with\
-        \ `i` (case-insensitive) map to `info` (6)\n  - Strings beginning with `d`,\
-        \ `trace` or `verbose` (case-insensitive) map to `debug` (7)\n  - Strings\
-        \ beginning with `o` or matching `OK` or `Success` (case-insensitive) map\
-        \ to OK\n  - All others map to `info` (6)\n\n  **Note:** If multiple log status\
-        \ remapper processors can be applied to a given log,\n  only the first one\
-        \ (according to the pipelines order) is taken into account."
+      description: "Use this Processor if you want to assign some attributes as the
+        official status.\n\nEach incoming status value is mapped as follows.\n\n  -
+        Integers from 0 to 7 map to the Syslog severity standards\n  - Strings beginning
+        with `emerg` or f (case-insensitive) map to `emerg` (0)\n  - Strings beginning
+        with `a` (case-insensitive) map to `alert` (1)\n  - Strings beginning with
+        `c` (case-insensitive) map to `critical` (2)\n  - Strings beginning with `err`
+        (case-insensitive) map to `error` (3)\n  - Strings beginning with `w` (case-insensitive)
+        map to `warning` (4)\n  - Strings beginning with `n` (case-insensitive) map
+        to `notice` (5)\n  - Strings beginning with `i` (case-insensitive) map to
+        `info` (6)\n  - Strings beginning with `d`, `trace` or `verbose` (case-insensitive)
+        map to `debug` (7)\n  - Strings beginning with `o` or matching `OK` or `Success`
+        (case-insensitive) map to OK\n  - All others map to `info` (6)\n\n  **Note:**
+        If multiple log status remapper processors can be applied to a given log,\n
+        \ only the first one (according to the pipelines order) is taken into account."
       properties:
         is_enabled:
           default: false
@@ -4579,17 +4578,16 @@ components:
       x-enum-varnames:
       - STATUS_REMAPPER
     LogsStringBuilderProcessor:
-      description: "Use the string builder processor to add a new attribute (without\
-        \ spaces or special characters)\nto a log with the result of the provided\
-        \ template.\nThis enables aggregation of different attributes or raw strings\
-        \ into a single attribute.\n\nThe template is defined by both raw text and\
-        \ blocks with the syntax `%{attribute_path}`.\n\n**Notes**:\n\n- The processor\
-        \ only accepts attributes with values or an array of values in the blocks.\n\
-        - If an attribute cannot be used (object or array of object),\n  it is replaced\
-        \ by an empty string or the entire operation is skipped depending on your\
-        \ selection.\n- If the target attribute already exists, it is overwritten\
-        \ by the result of the template.\n- Results of the template cannot exceed\
-        \ 256 characters."
+      description: "Use the string builder processor to add a new attribute (without
+        spaces or special characters)\nto a log with the result of the provided template.\nThis
+        enables aggregation of different attributes or raw strings into a single attribute.\n\nThe
+        template is defined by both raw text and blocks with the syntax `%{attribute_path}`.\n\n**Notes**:\n\n-
+        The processor only accepts attributes with values or an array of values in
+        the blocks.\n- If an attribute cannot be used (object or array of object),\n
+        \ it is replaced by an empty string or the entire operation is skipped depending
+        on your selection.\n- If the target attribute already exists, it is overwritten
+        by the result of the template.\n- Results of the template cannot exceed 256
+        characters."
       properties:
         is_enabled:
           default: false
@@ -4630,12 +4628,12 @@ components:
       x-enum-varnames:
       - STRING_BUILDER_PROCESSOR
     LogsTraceRemapper:
-      description: "There are two ways to improve correlation between application\
-        \ traces and logs.\n\n  1. Follow the documentation on [how to inject a trace\
-        \ ID in the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces)\n\
-        \  and by default log integrations take care of all the rest of the setup.\n\
-        \n  2. Use the Trace remapper processor to define a log attribute as its associated\
-        \ trace ID."
+      description: "There are two ways to improve correlation between application
+        traces and logs.\n\n  1. Follow the documentation on [how to inject a trace
+        ID in the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces)\n
+        \ and by default log integrations take care of all the rest of the setup.\n\n
+        \ 2. Use the Trace remapper processor to define a log attribute as its associated
+        trace ID."
       properties:
         is_enabled:
           default: false
@@ -5314,17 +5312,17 @@ components:
           type: boolean
         renotify_interval:
           default: none
-          description: "The number of minutes after the last notification before a\
-            \ monitor re-notifies on the current status.\nIt only re-notifies if it\u2019\
-            s not resolved."
+          description: "The number of minutes after the last notification before a
+            monitor re-notifies on the current status.\nIt only re-notifies if it\u2019s
+            not resolved."
           format: int64
           nullable: true
           type: integer
         require_full_window:
-          description: "A Boolean indicating whether this monitor needs a full window\
-            \ of data before it\u2019s evaluated.\nWe highly recommend you set this\
-            \ to `false` for sparse metrics,\notherwise some evaluations are skipped.\
-            \ Default is false."
+          description: "A Boolean indicating whether this monitor needs a full window
+            of data before it\u2019s evaluated.\nWe highly recommend you set this
+            to `false` for sparse metrics,\notherwise some evaluations are skipped.
+            Default is false."
           type: boolean
         silenced:
           additionalProperties:
@@ -6768,6 +6766,18 @@ components:
       required:
       - service_name
       type: object
+    Pagination:
+      description: Pagination object.
+      properties:
+        total_count:
+          description: Total count.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
     Point:
       description: Array of timeseries points.
       example:
@@ -6920,6 +6930,12 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+      type: object
+    ResponseMetaAttributes:
+      description: Object describing meta attributes of response.
+      properties:
+        page:
+          $ref: '#/components/schemas/Pagination'
       type: object
     SLOBulkDelete:
       additionalProperties:
@@ -7078,6 +7094,8 @@ components:
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     SLOCorrectionResponse:
       description: The response object of an SLO correction
@@ -11158,11 +11176,11 @@ components:
       - PCT_CPU
       - PCT_MEM
     TreeMapWidgetDefinition:
-      description: "The treemap visualization found on the Host Dashboards comes from\
-        \ the output of `ps auxww`. This is not continuously run on your hosts. Instead,\
-        \ it\u2019s run once on Agent start/restart. The treemap is only supported\
-        \ for process data on a single host dashboard \u2014 this may not be reused\
-        \ in other dashboards or for other metrics."
+      description: "The treemap visualization found on the Host Dashboards comes from
+        the output of `ps auxww`. This is not continuously run on your hosts. Instead,
+        it\u2019s run once on Agent start/restart. The treemap is only supported for
+        process data on a single host dashboard \u2014 this may not be reused in other
+        dashboards or for other metrics."
       properties:
         color_by:
           $ref: '#/components/schemas/TreeMapColorBy'
@@ -11734,13 +11752,13 @@ components:
         hour.
       properties:
         cws_container_count:
-          description: "The total number of Cloud Workload Security container hours\
-            \ from the start of the given hour\u2019s month until the given hour."
+          description: "The total number of Cloud Workload Security container hours
+            from the start of the given hour\u2019s month until the given hour."
           format: int64
           type: integer
         cws_host_count:
-          description: "The total number of Cloud Workload Security host hours from\
-            \ the start of the given hour\u2019s month until the given hour."
+          description: "The total number of Cloud Workload Security host hours from
+            the start of the given hour\u2019s month until the given hour."
           format: int64
           type: integer
         hour:
@@ -13517,11 +13535,11 @@ components:
           type: string
       type: object
     Widget:
-      description: "Information about widget.\n\n**Note**: The `layout` property is\
-        \ required for widgets in dashboards with `free` `layout_type`.\n      For\
-        \ the **new dashboard layout**, the `layout` property depends on the `reflow_type`\
-        \ of the dashboard.\n      - If `reflow_type` is `fixed`, `layout` is required.\n\
-        \      - If `reflow_type` is `auto`, `layout` should not be set."
+      description: "Information about widget.\n\n**Note**: The `layout` property is
+        required for widgets in dashboards with `free` `layout_type`.\n      For the
+        **new dashboard layout**, the `layout` property depends on the `reflow_type`
+        of the dashboard.\n      - If `reflow_type` is `fixed`, `layout` is required.\n
+        \     - If `reflow_type` is `auto`, `layout` should not be set."
       properties:
         definition:
           $ref: '#/components/schemas/WidgetDefinition'
@@ -13960,9 +13978,9 @@ components:
         graphs.
       properties:
         display_type:
-          description: "Combination of:\n  - A severity error, warning, ok, or info\n\
-            \  - A line type: dashed, solid, or bold\nIn this case of a Distribution\
-            \ widget, this can be set to be `x_axis_percentile`.\n"
+          description: "Combination of:\n  - A severity error, warning, ok, or info\n
+            \ - A line type: dashed, solid, or bold\nIn this case of a Distribution
+            widget, this can be set to be `x_axis_percentile`.\n"
           example: error dashed
           type: string
         label:
@@ -15837,14 +15855,14 @@ paths:
         type: idempotent
   /api/v1/events:
     get:
-      description: "The event stream can be queried and filtered by time, priority,\
-        \ sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains\
-        \ markdown formatting of any kind,\nyou may see characters such as `%`,`\\\
-        `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
-        \ recent results. To return additional results,\nidentify the last timestamp\
-        \ of the last result and set that as the `end` query time to\npaginate the\
-        \ results. You can also use the page parameter to specify which set of `1000`\
-        \ results to return."
+      description: "The event stream can be queried and filtered by time, priority,
+        sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains
+        markdown formatting of any kind,\nyou may see characters such as `%`,`\\`,`n`
+        in your output.\n\n- This endpoint returns a maximum of `1000` most recent
+        results. To return additional results,\nidentify the last timestamp of the
+        last result and set that as the `end` query time to\npaginate the results.
+        You can also use the page parameter to specify which set of `1000` results
+        to return."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.
@@ -15977,9 +15995,9 @@ paths:
         type: safe
   /api/v1/events/{event_id}:
     get:
-      description: "This endpoint allows you to query for event details.\n\n**Note**:\
-        \ If the event you\u2019re querying contains markdown formatting of any kind,\n\
-        you may see characters such as `%`,`\\`,`n` in your output."
+      description: "This endpoint allows you to query for event details.\n\n**Note**:
+        If the event you\u2019re querying contains markdown formatting of any kind,\nyou
+        may see characters such as `%`,`\\`,`n` in your output."
       operationId: GetEvent
       parameters:
       - description: The ID of the event.
@@ -17135,14 +17153,13 @@ paths:
         type: unsafe
   /api/v1/integration/aws/logs/services_async:
     post:
-      description: "Test if permissions are present to add log-forwarding triggers\
-        \ for the\ngiven services and AWS account. Input is the same as for `EnableAWSLogServices`.\n\
-        Done async, so can be repeatedly polled in a non-blocking fashion until\n\
-        the async request completes.\n\n- Returns a status of `created` when it's\
-        \ checking if the permissions exists\n  in the AWS account.\n- Returns a status\
-        \ of `waiting` while checking.\n- Returns a status of `checked and ok` if\
-        \ the Lambda exists.\n- Returns a status of `error` if the Lambda does not\
-        \ exist."
+      description: "Test if permissions are present to add log-forwarding triggers
+        for the\ngiven services and AWS account. Input is the same as for `EnableAWSLogServices`.\nDone
+        async, so can be repeatedly polled in a non-blocking fashion until\nthe async
+        request completes.\n\n- Returns a status of `created` when it's checking if
+        the permissions exists\n  in the AWS account.\n- Returns a status of `waiting`
+        while checking.\n- Returns a status of `checked and ok` if the Lambda exists.\n-
+        Returns a status of `error` if the Lambda does not exist."
       operationId: CheckAWSLogsServicesAsync
       requestBody:
         content:
@@ -18557,10 +18574,10 @@ paths:
       x-undo:
         type: safe
     put:
-      description: "Update an index as identified by its name.\nReturns the Index\
-        \ object passed in the request body when the request is successful.\n\nUsing\
-        \ the `PUT` method updates your index\u2019s configuration by **replacing**\n\
-        your current configuration with the new one sent to your Datadog organization."
+      description: "Update an index as identified by its name.\nReturns the Index
+        object passed in the request body when the request is successful.\n\nUsing
+        the `PUT` method updates your index\u2019s configuration by **replacing**\nyour
+        current configuration with the new one sent to your Datadog organization."
       operationId: UpdateLogsIndex
       parameters:
       - description: Name of the log index.
@@ -18822,10 +18839,10 @@ paths:
       x-undo:
         type: safe
     put:
-      description: "Update a given pipeline configuration to change it\u2019s processors\
-        \ or their order.\n\n**Note**: Using this method updates your pipeline configuration\
-        \ by **replacing**\nyour current configuration with the new one sent to your\
-        \ Datadog organization."
+      description: "Update a given pipeline configuration to change it\u2019s processors
+        or their order.\n\n**Note**: Using this method updates your pipeline configuration
+        by **replacing**\nyour current configuration with the new one sent to your
+        Datadog organization."
       operationId: UpdateLogsPipeline
       parameters:
       - description: ID of the pipeline to delete.
@@ -20757,15 +20774,15 @@ paths:
         type: safe
   /api/v1/series:
     post:
-      description: "The metrics end-point allows you to post time-series data that\
-        \ can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is\
-        \ 3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed\
-        \ size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting\
-        \ metrics directly to the Datadog API without using DogStatsD, expect:\n\n\
-        - 64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric\
-        \ names\n- 50 bytes for the timeseries\n- The full payload is approximately\
-        \ 100 bytes. However, with the DogStatsD API,\ncompression is applied, which\
-        \ reduces the payload size."
+      description: "The metrics end-point allows you to post time-series data that
+        can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is
+        3.2 megabytes (3200000 bytes). Compressed payloads must have a decompressed
+        size of less than 62 megabytes (62914560 bytes).\n\nIf you\u2019re submitting
+        metrics directly to the Datadog API without using DogStatsD, expect:\n\n-
+        64 bits for the timestamp\n- 32 bits for the value\n- 20 bytes for the metric
+        names\n- 50 bytes for the timeseries\n- The full payload is approximately
+        100 bytes. However, with the DogStatsD API,\ncompression is applied, which
+        reduces the payload size."
       operationId: SubmitMetrics
       requestBody:
         content:
@@ -21085,11 +21102,11 @@ paths:
         slo:
           parameters:
           - name: body
-            value: "{\n  \"type\": \"metric\",\n  \"name\": \"{{ unique }}\",\n  \"\
-              thresholds\": [{\n    \"timeframe\": \"7d\",\n    \"target\": 95.0,\n\
-              \    \"warning\": 98.0\n  }],\n  \"query\": {\n    \"numerator\": \"\
-              sum:httpservice.hits{code:2xx}.as_count()\",\n    \"denominator\": \"\
-              sum:httpservice.hits{!code:3xx}.as_count()\"\n  }\n}"
+            value: "{\n  \"type\": \"metric\",\n  \"name\": \"{{ unique }}\",\n  \"thresholds\":
+              [{\n    \"timeframe\": \"7d\",\n    \"target\": 95.0,\n    \"warning\":
+              98.0\n  }],\n  \"query\": {\n    \"numerator\": \"sum:httpservice.hits{code:2xx}.as_count()\",\n
+              \   \"denominator\": \"sum:httpservice.hits{!code:3xx}.as_count()\"\n
+              \ }\n}"
           step: there is a valid "slo" in the system
       x-menu-order: 1
       x-undo:
@@ -21259,11 +21276,11 @@ paths:
         correction:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"\
-              {{ slo.data[0].id }}\",\n      \"start\": {{ timestamp(\"now\") }},\n\
-              \      \"end\": {{ timestamp(\"now + 1h\") }},\n      \"category\":\
-              \ \"Other\",\n      \"timezone\": \"UTC\",\n      \"description\": \"\
-              Test Correction\"\n     },\n     \"type\": \"correction\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"{{
+              slo.data[0].id }}\",\n      \"start\": {{ timestamp(\"now\") }},\n      \"end\":
+              {{ timestamp(\"now + 1h\") }},\n      \"category\": \"Other\",\n      \"timezone\":
+              \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n     \"type\":
+              \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
       x-undo:
@@ -21547,12 +21564,12 @@ paths:
         type: idempotent
   /api/v1/slo/{slo_id}/history:
     get:
-      description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\
-        \nThe detailed history data is structured according to the source data type.\n\
-        For example, metric data is included for event SLOs that use\nthe metric source,\
-        \ and monitor SLO types include the monitor transition history.\n\n**Note:**\
-        \ There are different response formats for event based and time based SLOs.\n\
-        Examples of both are shown."
+      description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
+        detailed history data is structured according to the source data type.\nFor
+        example, metric data is included for event SLOs that use\nthe metric source,
+        and monitor SLO types include the monitor transition history.\n\n**Note:**
+        There are different response formats for event based and time based SLOs.\nExamples
+        of both are shown."
       operationId: GetSLOHistory
       parameters:
       - description: The ID of the service level objective object.
@@ -24673,14 +24690,14 @@ paths:
         type: safe
   /v0.3/traces:
     put:
-      description: "Datadog\u2019s APM allows you to collect performance metrics by\
-        \ tracing your code\nto determine which parts of your application are slow\
-        \ or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP\
-        \ API.\nWe provide some [official libraries](https://docs.datadoghq.com/tracing/#instrument-your-application)\n\
-        that simplify sending metrics to the Datadog Agent, however you may want to\n\
-        interact directly with the API to instrument applications that cannot use\n\
-        the libraries or are written in languages that don\u2019t yet have an official\n\
-        Datadog Tracing library."
+      description: "Datadog\u2019s APM allows you to collect performance metrics by
+        tracing your code\nto determine which parts of your application are slow or
+        inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API.\nWe
+        provide some [official libraries](https://docs.datadoghq.com/tracing/#instrument-your-application)\nthat
+        simplify sending metrics to the Datadog Agent, however you may want to\ninteract
+        directly with the API to instrument applications that cannot use\nthe libraries
+        or are written in languages that don\u2019t yet have an official\nDatadog
+        Tracing library."
       operationId: SubmitTraces
       requestBody:
         content:
@@ -24693,12 +24710,12 @@ paths:
                   $ref: '#/components/schemas/Span'
                 type: array
               type: array
-        description: "Traces can be sent as an array of traces:\n\n    [ trace1, trace2,\
-          \ trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span,\
-          \ span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`,\
-          \ `resource`...\n\n[Learn more about the APM & Distributed Tracing terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\
-          \n**Note:** Each span within a trace should use the same `trace_id`.\nHowever,\
-          \ `trace_id` and `span_id` must have different values."
+        description: "Traces can be sent as an array of traces:\n\n    [ trace1, trace2,
+          trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span,
+          span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`,
+          `resource`...\n\n[Learn more about the APM & Distributed Tracing terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\n**Note:**
+          Each span within a trace should use the same `trace_id`.\nHowever, `trace_id`
+          and `span_id` must have different values."
         required: true
       responses:
         '200':
@@ -24997,14 +25014,13 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
   name: AWS Logs Integration
-- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests\
-    \ that write data require reporting access and require an `API key`.\nRequests\
-    \ that read data require full access and also require an `application key`.\n\n\
-    **Note:** All Datadog API clients are configured by default to consume Datadog\
-    \ US site APIs.\nIf you are on the Datadog EU site, set the environment variable\
-    \ `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly\
-    \ when creating your client.\n\n[Manage your account\u2019s API and application\
-    \ keys](https://app.datadoghq.com/account/settings#api)."
+- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests
+    that write data require reporting access and require an `API key`.\nRequests that
+    read data require full access and also require an `application key`.\n\n**Note:**
+    All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf
+    you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu`
+    or override this value directly when creating your client.\n\n[Manage your account\u2019s
+    API and application keys](https://app.datadoghq.com/account/settings#api)."
   name: Authentication
 - description: 'Configure your Datadog-Azure integration directly through the Datadog
     API.
@@ -25074,32 +25090,29 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
   name: Logs Indexes
-- description: "Pipelines and processors operate on incoming logs, parsing\nand transforming\
-    \ them into structured attributes for easier querying.\n\n- See the [pipelines\
-    \ configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list\
-    \ of the pipelines and processors currently configured in our UI.\n\n- Additional\
-    \ API-related information about processors can be found in the\n  [processors\
-    \ documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\
-    \n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\
-    \n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure\
-    \ to use an application key created by an admin.\n\n**Grok parsing rules may effect\
-    \ JSON output and require\nreturned data to be configured before using in a request.**\n\
-    For example, if you are using the data returned from a\nrequest for another request\
-    \ body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,\
-    \ you will\nneed to configure all escaped spaces as `%{space}` to use\nin the\
-    \ body data."
+- description: "Pipelines and processors operate on incoming logs, parsing\nand transforming
+    them into structured attributes for easier querying.\n\n- See the [pipelines configuration
+    page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
+    and processors currently configured in our UI.\n\n- Additional API-related information
+    about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\n-
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\n**Notes:**\n\nThese
+    endpoints are only available for admin users.\nMake sure to use an application
+    key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
+    data to be configured before using in a request.**\nFor example, if you are using
+    the data returned from a\nrequest for another request body, and have a parsing
+    rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure
+    all escaped spaces as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/processing/
   name: Logs Pipelines
-- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
-    \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
-    - Modify tag configurations for metrics\n- View tags and volumes for metrics\n\
-    \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
-    \ over which a metric is viewed increases,\naggregation between points occurs\
-    \ to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags`\
-    \ API methods can only be performed by\na user who has the `Manage Tags for Metrics`\
-    \ permission."
+- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
+    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
+    Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**:
+    A graph can only contain a set number of points\nand as the timeframe over which
+    a metric is viewed increases,\naggregation between points occurs to stay below
+    that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
+    only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
@@ -25178,11 +25191,11 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/visualization/services_map/
   name: Service Dependencies
-- description: "SLO Status Corrections allow you to prevent specific time periods\
-    \ from negatively impacting\nyour SLO\u2019s status and error budget. You can\
-    \ use Status Corrections for various purposes, such\nas removing planned maintenance\
-    \ windows, non-business hours, or other time periods that do\nnot correspond to\
-    \ genuine issues."
+- description: "SLO Status Corrections allow you to prevent specific time periods
+    from negatively impacting\nyour SLO\u2019s status and error budget. You can use
+    Status Corrections for various purposes, such\nas removing planned maintenance
+    windows, non-business hours, or other time periods that do\nnot correspond to
+    genuine issues."
   name: Service Level Objective Corrections
 - description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
 
@@ -25206,12 +25219,12 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: "Datadog Synthetics uses simulated user requests and browser rendering\
-    \ to help you ensure uptime,\nidentify regional issues, and track your application\
-    \ performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\n\
-    and [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You\
-    \ can use Datadog\u2019s API to\nmanage both test types programmatically.\n\n\
-    For more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+- description: "Datadog Synthetics uses simulated user requests and browser rendering
+    to help you ensure uptime,\nidentify regional issues, and track your application
+    performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand
+    [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can
+    use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
+    information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
 - description: 'The tag endpoint allows you to assign tags to hosts,
 
