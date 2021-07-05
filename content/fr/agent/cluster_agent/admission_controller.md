@@ -88,7 +88,7 @@ Tout d'abord, téléchargez le manifeste des [autorisations RBAC de l'Agent de c
 Ajoutez ce qui suit au bas du fichier `agent-services.yaml` :
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
----
+
 apiVersion: v1
 kind: Service
 metadata:

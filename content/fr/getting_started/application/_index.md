@@ -5,6 +5,9 @@ further_reading:
   - link: 'https://learn.datadoghq.com/course/view.php?id=2'
     tag: Centre d'apprentissage
     text: Présentation de Datadog
+  - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
+    tag: Blog
+    text: Présentation du menu de navigation rapide Datadog
 ---
 Cette page propose un aperçu général des fonctionnalités du [site Datadog][1].
 
@@ -111,7 +114,7 @@ La solution [Network Performance Monitoring][20] (NPM) de Datadog vous permet de
 La fonctionnalité [Real User Monitoring][21] (RUM) de Datadog vous permet de visualiser et d'analyser les activités en temps réel ainsi que l'expérience de chaque utilisateur afin de focaliser vos efforts de développement sur les fonctionnalités ayant le plus fort impact métier.
 Vous pouvez visualiser les durées de chargement, les erreurs frontend et les dépendances de page, puis corréler les métriques métier et d'application. Cette approche vous permet de bénéficier d'un unique dashboard comportant vos métriques d'application, d'infrastructure et métier, afin de résoudre facilement tous vos problèmes.
 
-## Informatique sans serveur
+## Sans serveur
 
 L'[informatique sans serveur][22] consiste à écrire du code orienté événement et à l'importer dans un fournisseur de cloud afin qu'il gère toutes les ressources de calcul sous-jacentes. Les fonctionnalités sans serveur Datadog regroupent en une unique vue les métriques, traces et logs de vos fonctions AWS Lambda qui exécutent des applications sans serveur. Vous pouvez ainsi optimiser vos performances en appliquant des filtres basés sur les fonctions caractérisées par des erreurs, une forte latence ou des démarrages à froid.
 

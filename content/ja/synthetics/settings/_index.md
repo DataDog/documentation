@@ -20,7 +20,7 @@ further_reading:
 * [グローバル変数](#global-variables)
 * [プライベートロケーション][2]
 * [デフォルトの設定](#default-settings)
-  * [デフォルトのロケーション](#default-locations)
+  * [デフォルトの場所](#default-locations)
   * [ブラウザテスト用の APM インテグレーション](#apm-integration-for-browser-tests)
 
 [管理者ユーザーと標準ユーザー][3]のみが Synthetic モニタリングの `Settings` ページにアクセスできます。
@@ -69,7 +69,7 @@ further_reading:
 
 ## デフォルトの設定
 
-### デフォルトのロケーション
+### デフォルトの場所
 
 ブラウザと API テストの詳細のデフォルトとなるロケーションを選択します。 Datadog 管理下のすべてのロケーションと、ご使用のアカウントでセットアップしたプライベートロケーションから選択できます。
 

@@ -42,7 +42,7 @@ v1.0.0 の時点で、Datadog Cluster Agent のカスタムメトリクスサー
 2. Datadog [API とアカウントのアプリケーションキー][6]を使って、Datadog Cluster Agent のデプロイで、`<DD_APP_KEY>` と `<DD_API_KEY>` を構成します。
 3. `DATADOG_HOST` を `https://{{< region-param key="dd_full_site" >}}` に設定します (デフォルトは `https://app.datadoghq.com`)。
 
-### External Metrics Provider を登録する
+### 外部メトリクスプロバイダーの登録
 
 Datadog Cluster Agent が起動して実行されたら
 
@@ -220,7 +220,7 @@ Datadog Cluster Agent は、自動的にそのネームスペース (`dcaautogen
 
 `DatadogMetric` を参照するよう HPA を後で移行することを選択すると、自動生成されたリソースは数時間後に Datadog Cluster Agent によりクリーンアップされます。
 
-### DatadogMetric に関する問題のトラブルシューティング
+### トラブルシューティング
 
 Datadog Cluster Agent は、すべての `DatadogMetric` リソースの `status` サブリソースを更新し、クエリ結果を Datadog に反映します。どこかに問題があった場合、これが状況を理解するための主な情報源となります。
 

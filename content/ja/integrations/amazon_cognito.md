@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_cognito/'
 draft: false
 git_integration_title: amazon_cognito
 has_logo: true
+integration_id: amazon-cognito
 integration_title: Amazon Cognito
 is_public: true
 kind: インテグレーション
@@ -54,7 +55,7 @@ Amazon Cognito から S3 バケットまたは CloudWatch のいずれかにロ�
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Cognito ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][6]
-    - [Cloudwatch ロググループに手動トリガーを追加][7]
+    - [CloudWatch ロググループに手動トリガーを追加][7]
 
 ## 収集データ
 

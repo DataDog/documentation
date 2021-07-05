@@ -23,6 +23,7 @@ kind: インテグレーション
 maintainer: jean@tripping.com
 manifest_version: 1.0.0
 metric_prefix: filebeat.
+metric_to_check: filebeat.registry.unprocessed_bytes
 name: filebeat
 public_title: Datadog-Filebeat インテグレーション
 short_description: 軽量ログシッパー

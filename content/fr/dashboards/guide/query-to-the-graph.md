@@ -150,9 +150,9 @@ Les opérations arithmétiques sont également appliquées après l'agrégation 
 
 {{< img src="dashboards/faq/metric_graph_8.png" alt="Graphique avec métriques_8"  style="width:75%;">}}
 
-#### as_count et as_rate
+#### Count et rate
 
-`As_count` et `as_rate` sont des agrégateurs temporels spécifiques aux rates et counters envoyés via StatsD/DogStatsD. Ils permettent d'afficher les métriques sous forme de taux par seconde ou de les visualiser sous forme de nombres bruts.
+`as_count` et `as_rate` sont des agrégateurs temporels spécifiques aux rates et counters envoyés via StatsD/DogStatsD. Ils permettent d'afficher les métriques sous forme de taux par seconde ou de les visualiser sous forme de nombres bruts.
 Syntaxe : au lieu d'ajouter un cumul, vous pouvez ajouter `.as_count()` ou `.as_rate()`.
 
 Consultez [cet article de notre blog][9] pour en savoir plus.

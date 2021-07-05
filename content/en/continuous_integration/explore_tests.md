@@ -42,7 +42,7 @@ Click into one of the test runs to see the test trace as a flame graph or a span
 
 Click the CI provider link to drill down to the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
 
-### Test Services view
+### Test services view
 
 A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Test Services][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 

@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
 draft: false
 git_integration_title: amazon_efs
 has_logo: true
+integration_id: amazon-efs
 integration_title: Amazon Elastic File System
 is_public: true
 kind: インテグレーション
@@ -26,7 +27,7 @@ version: '1.0'
 
 Amazon EFS は、AWS Lambda 関数または Amazon EC2 インスタンスと共に使用されるシンプルでスケーラブルなファイルストレージです。
 
-Datadog アプリのすべての EFS メトリクスに対し、このインテグレーションを有効にします。
+Datadog アプリのすべての EFS メトリクスを収集するには、このインテグレーションを有効にします。
 
 ## セットアップ
 
@@ -57,10 +58,10 @@ Amazon EFS から S3 バケットまたは CloudWatch のいずれかにログ�
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon EFS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon EFS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [CloudWatch ロググループに手動トリガーを追加][8]
 
 ### Amazon EFS for Lambda
 

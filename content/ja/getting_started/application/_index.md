@@ -5,6 +5,9 @@ further_reading:
   - link: 'https://learn.datadoghq.com/course/view.php?id=2'
     tag: ラーニングセンター
     text: Datadog 入門
+  - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
+    tag: ブログ
+    text: Datadog クイックナビメニューのご紹介
 ---
 このページでは、[Datadog サイト][1]の機能に関するハイレベルな概要を説明します。
 

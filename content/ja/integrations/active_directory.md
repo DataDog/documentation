@@ -7,7 +7,10 @@ assets:
   logs:
     source: ruby
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Active Directory] Anomalous number of sessions for connected LDAP clients for host: {{host.name}}': assets/monitors/ldap_client_sessions.json
+    '[Active Directory] Anomalous number of successful LDAP bindings for host: {{host.name}}': assets/monitors/ldap_binding_successful.json
+    '[Active Directory] Elevated LDAP binding duration for host {{host.name}}': assets/monitors/ldap_binding.json
   service_checks: assets/service_checks.json
 categories:
   - os & system
@@ -79,7 +82,7 @@ _Agent バージョン 6.0 以降で利用可能_
    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
    使用可能なすべての構成オプションについては、[サンプル active_directory.d/conf.yaml][4] を参照してください。
 
-3. このインテグレーションは、[Active Directory Module for Ruby][6] を対象としています。この Ruby モジュールを使用していない場合は、下の source の値を `active_directory` に変更し、`path` を環境に合わせて構成してください。
+3. このインテグレーションは、[Active Directory Module for Ruby][6] を対象としています。この Ruby モジュールを使用していない場合は、`source` の値を `active_directory` に変更し、`path` を環境に合わせて構成してください。
 
 4. [Agent を再起動します][5]。
 

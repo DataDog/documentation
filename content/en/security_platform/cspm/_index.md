@@ -45,7 +45,7 @@ View your cloud security posture at a high level with the [Posture Management][1
 
 {{< img src="security_platform/cspm/getting_started/frameworks.png" alt="Frameworks overview" style="width:100%;">}}
 
-## Get Started
+## Get started
 
 {{< whatsnext >}}
   {{< nextlink href="/security_platform/cspm/getting_started">}}Configure your cloud environment for CSPM scanning.{{< /nextlink >}}

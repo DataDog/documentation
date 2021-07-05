@@ -100,7 +100,7 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
 
 ### ログ
 
-PANOS インテグレーションは、Palo Alto Networks ファイアウォールからログを収集し、それを Datadog に転送します。
+PANOS インテグレーションは、Palo Alto Networks ファイアウォールインテグレーションからログを収集し、それを Datadog に転送します。
 
 ### メトリクス
 

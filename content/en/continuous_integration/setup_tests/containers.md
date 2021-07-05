@@ -22,7 +22,7 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `APPVEYOR_REPO_TAG_NAME`
 - `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`
 
-## [Azure Pipelines][2]
+## [Azure pipelines][2]
 
 - `TF_BUILD`
 - `BUILD_DEFINITIONNAME`

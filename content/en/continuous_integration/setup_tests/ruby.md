@@ -43,7 +43,8 @@ To install the Ruby tracer:
 
 See the [Ruby tracer installation docs][2] for more details.
 
-## Instrumenting your Cucumber tests
+## Instrumenting your tests
+### Cucumber
 
 The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
 
@@ -79,11 +80,9 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 | `service_name` | Specifies the service name used for `cucumber` instrumentation. | `'cucumber'` |
 | `operation_name` | Specifies an operation name used for `cucumber` instrumentation. Useful if you want to rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'cucumber.test'` |
 
-
 See also the [Ruby trace library documentation for Cucumber][3].
 
-
-## Instrumenting your RSpec tests
+### RSpec
 
 The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
 
@@ -109,7 +108,6 @@ Where `options` is an optional `Hash` that accepts the following parameters:
 | `operation_name` | Specifies an operation name used for `rspec` instrumentation. Useful if you want to rename automatic trace metrics in the form `trace.#{operation_name}.errors`. | `'rspec.example'` |
 
 See also the [Ruby trace library documentation for RSpec][4].
-
 
 ## Further reading
 

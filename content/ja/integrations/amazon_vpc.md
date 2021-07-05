@@ -36,14 +36,11 @@ Datadog で [Amazon Web Services インテグレーション][1]がセットア�
 
 `aws.vpc.flowlogs.*` 以外の AWS VPC メトリクスを収集するための追加の手順は必要ありません。`aws.vpc.flowlogs.*` で始まるメトリクスは、[Datadog VPC Flow Logs][2] インテグレーションによって生成されます。フローログメトリクスの収集を有効にする方法については、以下を参照してください。
 
-###         - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
+### ログの収集
 
 #### VPC フローログ記録の有効化
 
-VPC フローログは、S3 バケットまたは Cloudwatch ロググループに送信できます。リストで監視する VPC をクリックし、画面下部の Flow Logs タブにある `Create Flow logs` を選択します。
+VPC フローログは、S3 バケットまたは CloudWatch ロググループに送信できます。リストで監視する VPC をクリックし、画面下部の Flow Logs タブにある `Create Flow logs` を選択します。
 
 {{< img src="integrations/amazon_vpc/flow_logs.png" alt="フローログ" style="width:75%;" >}}
 

@@ -222,13 +222,16 @@ The available [environment variables][2] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.18 | v1.2.1 |
+| v1.17 | v1.1.5 |
+| v1.16 | v1.1.5 |
+| v1.15 | v1.1.5 |
 | v1.14 | v1.1.3 |
 | v1.13 | v1.1.1 |
 | v1.12 | v1.1.1 |
 | v1.11 | v0.4.2 |
 | v1.10 | v0.4.2 |
 | v1.9 | v0.3.6 |
-
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /tracing/setup/cpp/#environment-variables

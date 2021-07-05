@@ -22,13 +22,27 @@ Search your metrics by name or tag using the **Metric** or **Tag** search fields
 
 {{< img src="metrics/summary/tagexplorer2.gif" alt="Filter by Tag"  style="width:75%;">}}
 
-## Facet Panel
+## Facet panel
+
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
 * **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
 * **Metric Type** : Quickly identify distributions vs non-distributions (counts, gauges, rates)
 
 {{< img src="metrics/summary/facets.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
 
+
+## Configuration of multiple metrics 
+There are two buttons that allow you to configure multiple metrics at a time: 
+
+{{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons"  style="width:75%;">}}
+
+* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
+
+{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles"  style="width:75%;">}}
+
+* **Configure Tags**: Configure tags on multiple distribution metrics (Metrics without Limits™ beta users are able to use this functionality on counts, gauges, and rates as well).
+
+{{< img src="metrics/summary/bulkconfig.gif" alt="Bulk Metric Tag Configuration"  style="width:75%;">}} 
 
 ## Metric details sidepanel
 

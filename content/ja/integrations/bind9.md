@@ -21,6 +21,7 @@ kind: インテグレーション
 maintainer: ashuvyas45@gmail.com
 manifest_version: 1.0.0
 metric_prefix: bind9.
+metric_to_check: bind9.nsstat_AuthQryRej
 name: bind9
 public_title: Datadog-bind9 インテグレーション
 short_description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
@@ -63,7 +64,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
    init_config:
 
    instances:
-     - URL: "<BIND_9_STATS_URL>"
+     - url: "<BIND_9_STATS_URL>"
    ```
 
 2. [Agent を再起動します][9]

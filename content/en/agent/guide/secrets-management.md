@@ -254,6 +254,13 @@ DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 
+**Note**: The Datadog Cluster Agent uses a different command than the Datadog Agent:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+```
+
 Following the linked example, the password field is stored in the `/etc/secret-volume/password` file, and accessible through the `ENC[password]` token.
 
 **Note**: Datadog recommends using a dedicated folder instead of `/var/run/secrets`, as the script will be able to access all subfolders, including the sensitive `/var/run/secrets/kubernetes.io/serviceaccount/token` file.

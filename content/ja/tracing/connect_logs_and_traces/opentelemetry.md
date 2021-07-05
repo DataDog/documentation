@@ -12,6 +12,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
     tag: ブログ
     text: Datadog と OpenTelemetry のパートナーシップ
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
 OpenTelemetry 言語の SDK ログおよびトレースの Datadog 内での接続は、[Datadog SDK ログおよびトレース][1]の接続とほぼ同じですが、さらに以下の手順が必要です。
 
@@ -235,12 +238,17 @@ logger.info("Example log line with trace correlation info")
 手動でトレースとログに相関性を持たせるには、まず [openTelemetry-java-instrumentation ロガー MDC インスツルメンテーション][1]を有効にします。次に、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[Spring Boot および Logback][2]を使用しています。その他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。
 
 ```java
-String traceIdValue = Span.current().getSpanContext().getTraceIdAsHexString()
+String traceIdValue = Span.current().getSpanContext().getTraceId();
 String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
-String datadogTraceIdString = Long.toUnsignedString(datadogTraceId)
+String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{spanId} %n
+String spanIdValue = Span.current().getSpanContext().getSpanId();
+String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
+String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
+
+logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
@@ -262,12 +270,58 @@ PHP のトレースとログの相関では、[Datadog SDK PHP 例][1]を変更�
 
 {{< programming-lang lang="go" >}}
 
-Go のトレースとログの相関では、[Datadog SDK Go 例][1]を変更して上記で説明した追加ステップを含めます。
+トレースをログと手動で関連付けるには、使用しているログモジュールに、OpenTelemetry 形式の `trace_id` と `span_id` を Datadog 形式に変換する関数を適用します。次の例では、[logrus Library][1] を使用しています。
+
+```go
+package main
+
+import (
+    "context"
+    log "github.com/sirupsen/logrus"
+    "go.opentelemetry.io/otel"
+    "strconv"
+)
+
+func main() {
+    ctx := context.Background()
+    tracer := otel.Tracer("example/main")
+    ctx, span := tracer.Start(ctx, "example")
+    defer span.End()
+
+    log.SetFormatter(&log.JSONFormatter{})
+
+    standardFields := log.Fields{
+        "dd.trace_id": convertTraceID(span.SpanContext().TraceID().String()),
+        "dd.span_id":  convertTraceID(span.SpanContext().SpanID().String()),
+        "dd.service":  "serviceName",
+        "dd.env":      "serviceEnv",
+        "dd.version":  "serviceVersion",
+    }
+
+    log.WithFields(standardFields).WithContext(ctx).Info("hello world")
+}
+
+func convertTraceID(id string) string {
+    if len(id) < 16 {
+        return ""
+    }
+    if len(id) > 16 {
+        id = id[16:]
+    }
+    intValue, err := strconv.ParseUint(id, 16, 64)
+    if err != nil {
+        return ""
+    }
+    return strconv.FormatUint(intValue, 10)
+}
+
+
+```
 
 ご質問は、[Datadog サポートまでお問い合わせ][2]ください。
 
 
-[1]: /ja/tracing/connect_logs_and_traces/go/
+[1]: https://github.com/sirupsen/logrus
 [2]: /ja/help/
 {{< /programming-lang >}}
 

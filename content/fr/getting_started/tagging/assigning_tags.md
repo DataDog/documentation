@@ -217,7 +217,7 @@ services:
       - DD_API_KEY= "<CLÉ_API_DATADOG>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'datadog/agent:latest'
+    image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
@@ -407,5 +407,5 @@ Des précautions particulières doivent être prises pour l'assignation du tag `
 [6]: /fr/agent/docker/?tab=standard#tagging
 [7]: /fr/tracing/setup/
 [8]: /fr/developers/dogstatsd/
-[9]: /fr/developers/libraries/
+[9]: /fr/developers/community/libraries/
 [10]: /fr/developers/metrics/dogstatsd_metrics_submission/#host-tag-key

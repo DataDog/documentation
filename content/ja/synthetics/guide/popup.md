@@ -9,11 +9,16 @@ further_reading:
     tag: Documentation
     text: ブラウザテストの設定
 ---
-## JavaScript と基本認証モーダル
+## モーダル
+
+### JavaScript
 
 Synthetic ブラウザテストは自動的に [JavaScript モーダル][1]を処理します。 
  - `alert` モーダルは閉じています。
  - `prompt` と `confirm` モーダルは `Lorem Ipsum` で回答されます。
+
+### 基本認証
+
 基本認証ポップアップの場合、ブラウザテストコンフィギュレーションの[**高度なオプション > HTTP 認証**][2]で関連する資格情報を指定します。
 
 {{< img src="synthetics/guide/popup/http_auth_option.png" alt="基本認証ポップアップ">}}

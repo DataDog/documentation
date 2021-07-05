@@ -26,14 +26,23 @@ Tracing without Limits™ の使用状況を追跡または監視するには、
 
 Datadog アプリの [Retention Filters タブ][2]で、次の情報を確認できます。
 
-| 列                | Data |
-| ----------------------- | ---------- |
-| Filter Name                | スパンのインデックス化に使用される各フィルターの名前。デフォルトでは、唯一のフィルターは [Datadog Intelligent Retention](#datadog-intelligent-retention-filter) です。   |
-| Filter Query             | 各フィルターのタグベースのクエリ。      |
-| Retention Rate                | Datadog によってインデックス化される一致するスパンの数の割合 (0〜100%)。 |
-| Spans Indexed             | 選択した期間中にフィルターによってインデックス化されたスパンの数。   |
-| Last Updated            | 最後に保持フィルターを変更したユーザーとその日付。  |
-| Enabled トグル                 |  フィルターのオンとオフを切り替えることができます。  |
+Filter Name
+: スパンのインデックス化に使用される各フィルターの名前。デフォルトでは、唯一のフィルターは [Datadog Intelligent Retention](#datadog-intelligent-retention-filter) です。
+
+Filter Query
+: 各フィルターのタグベースのクエリ。
+
+Retention Rate
+: Datadog によってインデックス化される一致するスパンの数の割合 (0〜100%)。
+
+Spans Indexed
+: 選択した期間中にフィルターによってインデックス化されたスパンの数。
+
+Last Updated
+: 最後に保持フィルターを変更したユーザーとその日付。
+
+Enabled toggle
+: フィルターのオンとオフを切り替えることができます。
 
 保持フィルターごとの 'Spans Indexed' 列に加えて、保持フィルターによってインデックス化されたスパンを追跡するために使用できるメトリクス `datadog.estimated_usage.apm.indexed_spans` もあります。
 
@@ -52,7 +61,7 @@ Intelligent Retention は以下を保持します。
 
 詳細に調査したい特定のタグ、ファセット、またはトレースのグループがある場合、つまり Intelligent Retention が保持する以上のものを保持したい場合は、[独自の保持フィルターを作成](#create-your-own-retention-filter)します。たとえば、実稼働環境からの代表的なエラーの選択以上のものを保持したい場合があります。すべての実稼働エラーが保持され、15 日間検索と分析に使用できるようにするには、`env:prod` と `status:error` を対象とする 100% 保持フィルターを作成します。以下で説明するように、これは請求に影響を与える可能性があります。
 
-### 独自の Retention Filter を作成する
+### 独自の Retention Filter を作成
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
@@ -72,7 +81,7 @@ Intelligent Retention は以下を保持します。
 - SaaS ソリューションのミッションクリティカルな機能を使用中の最重要顧客。
 - オンラインのデリバリーサービスアプリケーションの特定バージョン。
 
-## Ingestion Controls
+## Ingestion controls
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
 
@@ -88,16 +97,30 @@ Ingestion Controls により、アプリケーションから Datadog へ送信�
 
 Datadog アプリの ['Ingestion Controls' タブ][6]で、次の情報を確認できます。
 
-| 列                | Data |
-| ----------------------- | ---------- |
-| Root Service                 | インスツルメントされた、Datadog にトレースを送信する各サービスの名前。   |
-| Data Ingested             | 選択した期間中に Datadog によって取り込まれたデータの量。      |
-| Ingestion Rate                 | サービスによって生成されたスパンのうち、Datadog が取り込んでいるスパンの割合 (0〜100%)。数値が 100% 未満の場合、Datadog により、一部のトレースが Datadog Agent から取り込まれていないことを意味し、このトレースはメトリクスおよび統計が算出された後 Datadog Agent により削除されます。      |
-| 取り込み詳細             | サービスにより生成された各トレースの送信先の詳細。詳しくは、[取り込み詳細](#ingestion-breakdown) を参照。    |
-| Tracers Configuration            | アプリ内の手順に従いトレーサーを構成し変更しない限り、`Default` と表示。詳しくは、[デフォルトの取り込み率の変更](#change-the-default-ingestion-rate) を参照。このサービスがデプロイされているすべてのホストが特定のボリュームのトレースを送信するよう構成されている場合は、`Fully Configured` と表示。このサービスがデプロイされているホストの一部のみが構成されている場合は、`Partially Configured` と表示。   |
-| Dropped Spans                |  Datadog Agent により削除された受信スパンの割合。この数値が 0% より高い場合、そのサービスの行をクリックして構成することができます。詳しくは、[デフォルトの取り込み率の変更](#change-the-default-ingestion-rate)を参照。     |
-| Traces Ingested per Second                |   サービスに対し、選択した期間中に Datadog に取り込まれたトレースの 1 秒あたりの平均数。   |
-| Spans Ingested            | 選択した期間中に Datadog によって取り込まれたスパンの数。        |
+
+Root Service
+: インスツルメントされた、Datadog にトレースを送信する各サービスの名前。
+
+Data Ingested
+: 選択した期間中に Datadog によって取り込まれたデータの量。
+
+Ingestion Rate
+: サービスによって生成されたスパンのうち、Datadog が取り込んでいるスパンの割合 (0〜100%)。数値が 100% 未満の場合、Datadog により、一部のトレースが Datadog Agent から取り込まれていないことを意味し、このトレースはメトリクスおよび統計が算出された後 Datadog Agent により削除されます。
+
+Ingestion Breakdown
+: サービスにより生成された各トレースの送信先の詳細。詳しくは、[取り込み詳細](#ingestion-breakdown) を参照。
+
+Tracers Configuration
+: アプリ内の手順に従いトレーサーを構成し変更しない限り、`Default` と表示。詳しくは、[デフォルトの取り込み率の変更](#change-the-default-ingestion-rate) を参照。このサービスがデプロイされているすべてのホストが特定のボリュームのトレースを送信するよう構成されている場合は、`Fully Configured` と表示。このサービスがデプロイされているホストの一部のみが構成されている場合は、`Partially Configured` と表示。
+
+Dropped Spans
+: Datadog Agent により削除された受信スパンの割合。この数値が 0% より高い場合、そのサービスの行をクリックして構成することができます。詳しくは、[デフォルトの取り込み率の変更](#change-the-default-ingestion-rate)を参照。
+
+Traces Ingested per Second
+: サービスに対し、選択した期間中に Datadog に取り込まれたトレースの 1 秒あたりの平均数。
+
+Spans Ingested
+: 選択した期間中に Datadog によって取り込まれたスパンの数。
 
 各保持フィルターの Data Ingestion 列に加えて、2 つのメトリクス `datadog.estimated_usage.apm.ingested_spans` と `datadog.estimated_usage.apm.ingested_bytes` もあります。これらのメトリクスは `service` と `env` でタグ付けされており、[トレース分析ダッシュボード][3]内でトップリストを利用して、最大の取り込み量が発生している場所を示します。詳細については、[使用量メトリクス][1]のドキュメントを参照してください。
 

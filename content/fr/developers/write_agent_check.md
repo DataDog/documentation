@@ -1,5 +1,5 @@
 ---
-title: Écrire un check custom d'Agent
+title: Check custom d'Agent
 kind: documentation
 aliases:
   - /fr/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
@@ -55,7 +55,7 @@ __version__ = "1.0.0"
 
 class HelloCheck(AgentCheck):
     def check(self, instance):
-        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
+        self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 {{< /code-block >}}
 
 Pour en savoir plus sur l'interface fournie par la classe de base, consultez la [documentation relative à l'API][5].
@@ -65,6 +65,8 @@ Pour en savoir plus sur l'interface fournie par la classe de base, consultez la 
 ### Intervalle de collecte
 
 Pour modifier l'intervalle de collecte de votre check, utilisez le paramètre `min_collection_interval` du fichier de configuration. Par défaut, sa valeur est définie sur `15`, ce qui signifie que la méthode `check` de votre classe est invoquée à la même intervalle que le reste des intégrations sur l'Agent.
+
+**Remarque** : le paramètre `min_collection_interval` est disponible pour les intégrations personnalisées et standard.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -114,11 +116,13 @@ sudo -u dd-agent -- dd-agent check <NOM_CHECK>
 {{% /tab %}}
 {{< /tabs >}}
 
+Après avoir vérifié que le check s'exécute, redémarrez l'Agent afin d'inclure le check et de commencer à transmettre des données à Datadog.
+
 ## Écrire un check qui exécute des programmes en ligne de commande
 
 Vous pouvez créer un check custom qui exécute un programme en ligne de commande et enregistrer son résultat sous la forme d'une métrique custom. Par exemple, un check peut exécuter la commande `vgs` afin de renvoyer des informations sur des groupes de volumes. Une fonction wrapper est fournie par souci de commodité afin d'éviter que le code réutilisable exécute un autre processus et recueille sa sortie et son code de sortie.
 
-Pour exécuter un sous-processus au sein d'un check, utilisez la [fonction `get_subprocess_output()`][6] du module `datadog_checks.utils.subprocess_output`. La commande et ses arguments sont transmis à `get_subprocess_output()` sous la forme d'une liste. La commande et chacun de ses arguments constituent des chaînes de caractères au sein de la liste. Par exemple, cette commande saisie dans l'invite de commande :
+Pour exécuter un sous-processus au sein d'un check, utilisez la [fonction `get_subprocess_output()`][6] du module `datadog_checks.base.utils.subprocess_output`. La commande et ses arguments sont transmis à `get_subprocess_output()` sous la forme d'une liste. La commande et chacun de ses arguments constituent des chaînes de caractères au sein de la liste. Par exemple, cette commande saisie dans l'invite de commande :
 
 ```text
 $ vgs -o vg_free
@@ -142,22 +146,22 @@ Voici un exemple de check qui renvoie les résultats d'un programme en ligne de 
 
 ```python
 # ...
-from datadog_checks.utils.subprocess_output import get_subprocess_output
+from datadog_checks.base.utils.subprocess_output import get_subprocess_output
 
 class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
-        file_count = len(files.split('\n')) - 1  #len() renvoie un entier par défaut
-        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
+        file_count = len(files.split('\n')) - 1  #len() returns an int by default
+        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 ```
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/integrations/new_check_howto
+[1]: /fr/developers/integrations/new_check_howto/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: /fr/help
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
+[4]: /fr/help/
+[5]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck
 [6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output

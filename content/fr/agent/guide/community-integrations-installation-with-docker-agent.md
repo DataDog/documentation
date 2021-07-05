@@ -23,7 +23,7 @@ Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 2. Exécutez la commande suivante pour installer les intégrations à l'aide de l'Agent :
 
     ```
-    datadog-agent integration install -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
+    datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
 3. Configurez votre intégration comme [n'importe quelle autre intégration du package][2].
@@ -38,8 +38,8 @@ Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 Le meilleur moyen d'utiliser une intégration provenant du référentiel integrations-extra avec l'Agent Docker est de générer une image de l'Agent avec cette intégration installée. Utilisez le Dockerfile suivant pour créer une version mise à jour de l'Agent comprenant l'intégration `<NOM_INTÉGRATION>` issue de integrations-extras.
 
 ```dockerfile
-FROM datadog/agent:latest
-RUN agent integration install -r -t <NOM_INTÉGRATION>==<VERSION_INTÉGRATION>
+FROM gcr.io/datadoghq/agent:latest
+RUN agent integration install -r -t datadog-<NOM_INTÉGRATION>==<VERSION_INTÉGRATION>
 ```
 
 La commande `agent integration install` exécutée au sein de Docker génère l'avertissement suivant : `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. Vous pouvez l'ignorer.

@@ -11,6 +11,7 @@ assets:
   logs: {}
   metrics_metadata: metadata.csv
   monitors:
+    Zoom API Limit Was Encountered: assets/monitors/zoom_api_rate_limit.json
     Zoom Room's Component is Offline or Not Working Properly: assets/monitors/zoom_room_component_has_problem.json
     Zoom Room's Health is in Warning or Critical State: assets/monitors/zoom_room_has_problem.json
   saved_views: {}
@@ -90,7 +91,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 5. RapDev Zoom ジオ概要
 
 ## サポート
-サポートまたは機能リクエストについては、以下の連絡先より RapDev.io にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: integrations@rapdev.io
 - セールス: sales@rapdev.io

@@ -37,37 +37,18 @@ supported_os:
 
 Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Reboot Required チェックをインストールしてください。[バージョン 6.8 以前の Agent][2] または [Docker Agent][3] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][1]に関する Agent のガイドを参照してください。
 
-1. [開発ツールキット][4]をインストールします。
-2. integrations-extras リポジトリを複製します。
+1. [Datadog Agent をダウンロードして起動][4]します。
+2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
-   git clone https://github.com/DataDog/integrations-extras.git.
+   datadog-agent integration install -t datadog-reboot_required==<INTEGRATION_VERSION>
    ```
 
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
-
-   ```shell
-   ddev config set extras ./integrations-extras
-   ```
-
-4. `reboot_required` パッケージをビルドします。
-
-   ```shell
-   ddev -e release build reboot_required
-   ```
-
-5. [Datadog Agent をダウンロードして起動][5]します。
-6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-
-   ```shell
-   datadog-agent integration install -w <PATH_OF_REBOOT_REQUIRED_ARTIFACT_>/<REBOOT_REQUIRED_ARTIFACT_NAME>.whl
-   ```
-
-7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
+3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. [Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `reboot_required.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル reboot_required.d/conf.yaml][8] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `reboot_required.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル reboot_required.d/conf.yaml][7] を参照してください。
 
 2. エージェントの dd-agent (Datadog Agent を実行するユーザー) が書き込み可能なディレクトリを、このチェックで使用するために作成します。デフォルトの `/var/run/dd-agent` が理想的です。以下のスニペットで十分です。
 
@@ -76,7 +57,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
    sudo chown dd-agent:dd-agent /var/run/dd-agent
    ```
 
-3. [Agent を再起動します][9]。
+3. [Agent を再起動します][8]。
 
 ### 検証
 
@@ -111,11 +92,11 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 [1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: https://github.com/DataDog/integrations-extras/blob/master/reboot_required/datadog_checks/reboot_required/data/conf.yaml.example
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: https://github.com/DataDog/integrations-extras/blob/master/reboot_required/datadog_checks/reboot_required/data/conf.yaml.example
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: https://app.datadoghq.com/monitors#/create
 [11]: http://docs.datadoghq.com/help

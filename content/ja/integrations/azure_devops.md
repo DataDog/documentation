@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'
 draft: false
 git_integration_title: azure_devops
 has_logo: true
+integration_id: azuredevops
 integration_title: Microsoft Azure DevOps
 is_public: true
 kind: インテグレーション
@@ -47,7 +48,7 @@ Datadog で、[Azure DevOps インテグレーションタイル][1]のインス
 4. トリガーする Visual Studio イベントを構成します。
 5. [Datadog API キー][2]を必須フィールドに入力します。
 6. Datadog 組織のサイトを追加: {{< region-param key="dd_site_name" code="true" >}}
-7. サービスフックサブスクリプションをテストし、ウィザードを終了します。
+7. サービスフックサブスクリプションをテストし、ウィザードを終了します。**注**: テストは、API キーまたは Datadog オーガニゼーションサイトは検証しません。
 8. Datadog に送信するイベントタイプごとにステップ 4〜7 を繰り返します。すべてのイベントタイプが受け入れられます。
 
 サービスフックを構成したら、Datadog に移動して、Azure DevOps のイベントとメトリクスを確認します。
@@ -128,6 +129,9 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 作業項目期間は、`Done` への移行と作業項目が作成されたときの時間差（時間単位）を取得することにより、_作業項目更新_イベントから生成されます。
 
 **注**: `Done` の作業項目が再度開かれた場合は、次回 `Done` に移行したときに別のデータポイントが生成されます。初期データポイントは変更されず、新しいデータポイントは、やはり作業項目が最初に作成された時点から測定されます。
+
+#### サービスフックサブスクリプションのテストで、成功メッセージが返されましたが、イベントが Datadog に到達しないのはなぜですか？
+サービスフックサブスクリプションテストは、Azure DevOps が Datadog へイベントを送信できるかどうかのみをチェックします。API キーまたは Datadog オーガニゼーションサイト (US または EU) は検証されません。API キーおよびサイトが正しいことをご確認ください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
 [2]: https://app.datadoghq.com/account/settings#api

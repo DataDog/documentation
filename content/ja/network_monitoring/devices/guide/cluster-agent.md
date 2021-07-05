@@ -1,5 +1,5 @@
 ---
-title: クラスター Agent のある NDM
+title: Cluster Agent のネットワークデバイスモニタリング
 kind: ガイド
 aliases:
   - /ja/network_performance_monitoring/devices/guide/cluster-agent/
@@ -181,7 +181,7 @@ clusterAgent:
           context_name: "%%extra_context_name%%"
 
           ## @param tags - key:value 要素のリスト - 任意
-          ## このインテグレーションにより送信されるすべてのメトリクス、イベント、サービスチェックに会った知されるタグのリスト。
+          ## このインテグレーションにより送信されるすべてのメトリクス、イベント、サービスチェックにアタッチされるタグのリスト。
           ##
           ## タグ付けに関する詳細: https://docs.datadoghq.com/tagging/
           #
@@ -189,6 +189,18 @@ clusterAgent:
             # デバイスが属するオートディスカバリーのサブネット。
             # Agent のオートディスカバリーによりサブネット名をパスするために使用。
             - "autodiscovery_subnet:%%extra_autodiscovery_subnet%%"
+
+          ## @param extra_tags - 文字列 - 任意
+          ## このインテグレーションによって送信されるすべてのメトリクス、イベント、およびサービスチェックにアタッチされるコンマ区切りのタグ。
+          ## 例:
+          ## extra_tags: "tag1:val1,tag2:val2"
+          #
+          extra_tags: "%%extra_tags%%"
+
+          ## @param oid_batch_size - 整数 - 任意 - デフォルト: 60
+          ## 各バッチによる OIDs 処理の数。増加するほどパフォーマンスが向上するが
+          ## リソースの使用量も増加。
+          # oid_batch_size: "%%extra_oid_batch_size%%"
 
 
   ## @param datadog-cluster.yaml - オブジェクト - 任意
@@ -210,7 +222,7 @@ clusterAgent:
         - network: 192.168.1.16/29
           version: 2
           port: 1161
-          community: f5
+          community: public
 {{< /code-block >}}
 
 

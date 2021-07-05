@@ -1,13 +1,20 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     OpenStack Controller Overview: assets/dashboards/openstack-controller.json
-  logs: {}
+    openstack: assets/dashboards/openstack_dashboard.json
+  logs:
+    source: openstack
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    openstack_processes: assets/saved_views/openstack_processes.json
   service_checks: assets/service_checks.json
 categories:
   - cloud
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -149,6 +156,26 @@ openstack role add datadog_monitoring \
    ```
 
 2. [Agent を再起動します][5]。
+
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にできます。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Openstack ログの収集を開始するには、次のコンフィギュレーションブロックを `openstack.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: openstack
+   ```
+
+    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack.d/conf.yaml][4] を参照してください。
+
 
 ### 検証
 

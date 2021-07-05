@@ -7,19 +7,19 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/go-logging/'
     tag: Blog
     text: 'Comment recueillir, standardiser et centraliser des logs Golang'
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: logs/explorer/analytics
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
@@ -77,6 +77,10 @@ func main() {
 }
 ```
 
+**Associer vos logs à vos traces**
+
+Si l'APM est activée pour cette application, vous pouvez améliorer la corrélation entre vos logs et vos traces d'application [en suivant les instructions de journalisation GO pour l'APM][3] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
+
 ## Configurer votre Agent Datadog
 
 Créez un fichier `go.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
@@ -94,7 +98,7 @@ logs:
 
 ## Concepts avancés
 
-Voici quelques conseils :
+Voici quelques conseils pour tirer pleinement profit de votre collecte de logs Go :
 
 * Attribuez toujours au logger un nom correspondant à la fonctionnalité ou au service que vous essayez de fournir.
 * Enregistrez beaucoup de données de DEBUG et loguez plus précisément les données INFO, WARNING et FATAL, car il s'agit des niveaux de logs que vous obtiendrez dans vos environnements de production.
@@ -106,4 +110,5 @@ Voici quelques conseils :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /fr/logs/processing/parsing
+[2]: /fr/logs/processing/parsing/
+[3]: /fr/tracing/connect_logs_and_traces/go/

@@ -14,6 +14,11 @@ name: snyk
 public_title: Datadog-Snyk インテグレーション
 short_description: Snyk による脆弱性プロファイルとレポート
 version: '1.0'
+integration_id: snyk
+further_reading:
+  - link: 'https://www.datadoghq.com/partner/snyk/'
+    tag: パートナーページ
+    text: Datadog による Snyk モニタリング
 ---
 ## 概要
 
@@ -64,6 +69,10 @@ datadog-ci dependencies upload deps.json --source snyk --service <SERVICE> --rel
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/tracing/profiler/
 [2]: https://snyk.io/product/vulnerability-database/
