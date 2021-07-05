@@ -35,7 +35,7 @@ Add a unique title to your monitor (required). For multi-alert monitors, some ta
 
 ### Message
 
-The message field allows standard [Markdown formatting][2] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts with [@notifications](#notification).
+The message field allows standard [Markdown formatting][2] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts with [@notifications](#notifications).
 
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
