@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_search/'
 draft: false
 git_integration_title: azure_search
 has_logo: true
+integration_id: azure-search
 integration_title: Microsoft Azure Cognitive Search
 is_public: true
 kind: integration
@@ -24,7 +25,7 @@ Azure Cognitive Search est une solution cloud de recherche en tant que service, 
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Cognitive Search.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

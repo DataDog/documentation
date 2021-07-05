@@ -78,6 +78,13 @@ Utilisez cette section pour envoyer des notifications à votre équipe par e-mai
 
 Si la `@notification` est supprimée de l'une de ces deux sections, elle est également supprimée de l'autre section.
 
+### Restreindre l'accès
+
+<div class="alert alert-warning">
+La fonctionnalité de restriction d'accès RBAC aux monitors est actuellement en version bêta. Pour en bénéficier, contactez <a href="https://docs.datadoghq.com/help/">l'assistance Datadog</a>.</div>
+
+Cette section vous permet de restreindre l'accès aux monitors de façon à ce qu'ils soient uniquement accessibles par tous les utilisateurs de votre organisation ayant votre rôle, les utilisateurs de certains rôles ou uniquement vous-même. Pour en savoir plus sur les rôles, consultez la documentation relative au [RBAC][9].
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,3 +97,4 @@ Si la `@notification` est supprimée de l'une de ces deux sections, elle est ég
 [6]: /fr/integrations/disk/
 [7]: /fr/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
 [8]: /fr/monitors/notifications/#conditional-variables
+[9]: /fr/account_management/rbac/
