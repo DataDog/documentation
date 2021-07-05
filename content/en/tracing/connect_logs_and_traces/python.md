@@ -74,8 +74,8 @@ import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
-    span = tracer.get_current_span()
-    trace_id, span_id = (span.trace_id, span.span.id)
+    span = tracer.current_span()
+    trace_id, span_id = (span.trace_id, span.span.id) if span else (None, None)
 
     # add ids to structlog event dictionary
     event_dict['dd.trace_id'] = str(trace_id or 0)
