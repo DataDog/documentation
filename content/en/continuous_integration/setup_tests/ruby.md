@@ -97,7 +97,7 @@ The following is a list of the most important configuration settings that can be
 `service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `"pytest"`<br/>
+**Default**: `$PROGRAM_NAME`<br/>
 **Example**: `my-ruby-app`
 
 `env`
