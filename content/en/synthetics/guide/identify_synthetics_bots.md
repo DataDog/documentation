@@ -58,6 +58,8 @@ For browser tests, the value of the `user-agent` header varies depending on the 
 
 ### `sec-datadog`
 
+A `sec-datadog` header is added to all requests performed by Synthetic tests. The value notably includes the id of the test from which the request originated.
+
 {{< tabs >}}
 {{% tab "Single and multistep API tests" %}}
 
