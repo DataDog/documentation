@@ -78,7 +78,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][5] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
+**Note**: The [Error Tracking][5] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace. Errors sent with any other source (such as `console`) will not be processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
