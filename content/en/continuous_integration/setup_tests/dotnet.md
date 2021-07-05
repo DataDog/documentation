@@ -70,10 +70,6 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-`--set-ci`
-: Sets up the clr profiler environment variables for all the CI pipeline. <br/>
-**Default**: `false`
-
 All other [Datadog Tracer configuration][2] options can also be used.
 
 ### Passing parameters to the application
