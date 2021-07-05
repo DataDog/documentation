@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -22,6 +24,7 @@ kind: インテグレーション
 maintainer: dev@goldstar.com
 manifest_version: 1.0.0
 metric_prefix: gnatsd.
+metric_to_check: gnatsd.connz.connections.in_bytes
 name: gnatsd
 public_title: Datadog-Gnatsd インテグレーション
 short_description: Datadog で gnatsd クラスターを監視。

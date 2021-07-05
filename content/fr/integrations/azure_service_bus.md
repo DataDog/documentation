@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_service_bus/'
 draft: false
 git_integration_title: azure_service_bus
 has_logo: true
+integration_id: azure-service-bus
 integration_title: Microsoft Azure Service Bus
 is_public: true
 kind: integration
@@ -27,7 +28,7 @@ Recueillez des métriques d'Azure Service Bus pour :
 - Visualiser les performances de votre Service Bus
 - Corréler les performances de vos Service Bus avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

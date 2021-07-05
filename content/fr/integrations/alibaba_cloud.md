@@ -12,6 +12,7 @@ further_reading:
     text: "Surveiller Alibaba\_Cloud avec Datadog"
 git_integration_title: alibaba_cloud
 has_logo: true
+integration_id: alibaba-cloud
 integration_title: "Alibaba\_Cloud"
 is_public: true
 kind: integration
@@ -21,6 +22,10 @@ public_title: "Intégration Datadog/Alibaba\_Cloud"
 short_description: "Intégrez vos services Alibaba\_Cloud à Datadog."
 version: '1.0'
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">L'intégration Alibaba Cloud ne prend pas en charge le site gouvernemental de Datadog.</div>
+{{< /site-region >}}
+
 ## Présentation
 
 Connectez Datadog à Alibaba Cloud pour recueillir les métriques en provenance des services suivants :
@@ -33,7 +38,7 @@ Connectez Datadog à Alibaba Cloud pour recueillir les métriques en provenance
 - Clusters Alibaba Cloud Container Service
 - Instances Alibaba Cloud Express Connect
 
-## Implémentation
+## Configuration
 
 ### Installation
 
