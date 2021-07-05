@@ -105,7 +105,7 @@ DD_ENV=ci mvn clean verify -P ci-app
 
 ### Gradle
 
-Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifiying the name of the service or library under test with the `-Ddd.service` property, and the environment where tests are being run (i.e. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) with the `-Ddd.env` property:
+Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifiying the name of the service or library under test with the `-Ddd.service` property:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
