@@ -39,13 +39,6 @@ To enable instrumentation of `pytest` tests, add the `--ddtrace` option when run
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 {{< /code-block >}}
 
-Instead of passing the `--ddtrace` option to `pytest`, you can also add the following configuration to any file used to configure `pytest` (such as `pytest.ini` or `setup.cfg`):
-
-{{< code-block lang="ini" filename="pytest.ini" >}}
-[pytest]
-ddtrace = 1
-{{< /code-block >}}
-
 ## Additional configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
