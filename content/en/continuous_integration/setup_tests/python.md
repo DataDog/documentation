@@ -46,7 +46,7 @@ The following is a list of the most important configuration settings that can be
 `ddtrace.config.service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `"pytest"`<br/>
+**Default**: `pytest`<br/>
 **Example**: `my-python-app`
 
 `ddtrace.config.env`
