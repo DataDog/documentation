@@ -123,6 +123,7 @@ In this case, the **Errors & Warnings** tab shows that the server responded with
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: /getting_started/synthetics/private_location
@@ -133,4 +134,3 @@ In this case, the **Errors & Warnings** tab shows that the server responded with
 [8]: /synthetics/browser_tests/test_results#resources
 [9]: /synthetics/browser_tests/test_results#page-performance
 [10]: /synthetics/apm/
-

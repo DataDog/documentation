@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_container_instances/'
 draft: false
 git_integration_title: azure_container_instances
 has_logo: true
+integration_id: azure-containerinstances
 integration_title: Microsoft Azure Container Instances
 is_public: true
 kind: integration
@@ -27,7 +28,7 @@ Azure Container Instances est un service qui permet aux développeurs de dépl
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Container Instances.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

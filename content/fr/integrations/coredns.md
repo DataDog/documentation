@@ -74,7 +74,6 @@ LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/met
 
 #### Collecte de logs
 
-
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
 
 Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker :
@@ -125,7 +124,6 @@ spec:
 - Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
 
 #### Collecte de logs
-
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
 
@@ -178,7 +176,6 @@ Définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquette
 - Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
 
 ##### Collecte de logs
-
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec ECS][2].
 

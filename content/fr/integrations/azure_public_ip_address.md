@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_public_ip_address/'
 draft: false
 git_integration_title: azure_public_ip_address
 has_logo: true
+integration_id: azure-publicipaddress
 integration_title: Adresse IP publique Microsoft Azure
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Lorsqu'elle est assignée à une ressource, une adresse IP publique Azure permet
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'adresse IP publique Azure.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

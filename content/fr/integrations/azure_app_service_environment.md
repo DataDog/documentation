@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_app_service_environment
 draft: false
 git_integration_title: azure_app_service_environment
 has_logo: true
+integration_id: azure-appserviceenvironment
 integration_title: Microsoft Azure App Service Environment
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure App Service Environment est une fonctionnalité d'Azure App Service qui fo
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure App Service Environment.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

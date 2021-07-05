@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_cognitive_services/'
 draft: false
 git_integration_title: azure_cognitive_services
 has_logo: true
+integration_id: azure-cognitiveservices
 integration_title: Microsoft Azure Cognitive Services
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Cognitive Services proposent des API, des kits de développement et des se
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Cognitive Services.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

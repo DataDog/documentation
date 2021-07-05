@@ -41,19 +41,19 @@ Datadog のお客様は、[インテグレーション][2]ページまたは [Da
 
 ### 開発プロセス
 
-1. [出品したい Marketplace 製品のタイプを選択します](#1-choose-an-integration-type)
-2. [双方向のインテグレーションを構築します](#2-build-a-bi-directional-integration)
-3. [Marketplace リポジトリを複製するか、Integrations Extras リポジトリをフォークします](#3-clone-either-the-marketplace-or-the-integrations-extras-repository)
-4. [Datadog Development Toolkit をインストールします](#4-install-and-run-the-datadog-development-toolkit)
-5. [タイルスキャフォールディングにメタデータとすぐに使用できるアセット (ダッシュボードやモニターなど) を入力します](#5-populate-the-tile-scaffolding)
-6. [プルリクエストを送信します](#6-submit-a-pull-request)
-7. [タイルのリリースを承認します](#7-approve-tile-for-release)
+1. [出品したい Marketplace 製品のタイプを選択します](#choose-an-integration-type)
+2. [双方向のインテグレーションを構築します](#build-a-bi-directional-integration)
+3. [Marketplace リポジトリを複製するか、Integrations Extras リポジトリをフォークします](#clone-either-the-marketplace-or-the-integrations-extras-repository)
+4. [Datadog Development Toolkit をインストールします](#install-and-run-the-datadog-development-toolkit)
+5. [タイルスキャフォールディングにメタデータとすぐに使用できるアセット (ダッシュボードやモニターなど) を入力します](#populate-the-tile-scaffolding)
+6. [プルリクエストを送信します](#submit-a-pull-request)
+7. [タイルのリリースを承認します](#approve-tile-for-release)
 
-### 1. インテグレーションタイプを選択します
+### インテグレーションタイプを選択します
 
 Datadog とインテグレーションする方法はいくつかあります。ユースケースとインテグレーションのタイプに応じて、提供するサービスに最も適したアプローチを選択してください。
 
-#### [1. Datadog Agent ベースインテグレーション][12]
+#### [Datadog Agent ベースインテグレーション][12]
 
 ##### [OpenMetrics チェック][13]
 
@@ -71,17 +71,17 @@ Datadog とインテグレーションする方法はいくつかあります。
     * イベント
     * タグ付け
 
-#### [2. Datadog REST API インテグレーション][16]
+#### [Datadog REST API インテグレーション][16]
 
 API インテグレーションは、バックエンドからデータを強化して送信したり、Datadog から直接データをプルしたりするのに適しています。API インテグレーションは、Datadog と別の SaaS プラットフォーム間のコネクタを構築する場合にもうまく機能します。
 
 **Note:** Datadog API エンドポイントにデータを送信するには Datadog API キーが必要ですが、Datadog からデータをクエリしたり、Datadog アプリ内でリソースを作成したりするにはアプリキーが必要です。
 
-#### 3. タイルのみの出品
+#### タイルのみの出品
 
 データ交換のないスタンドアロンの SaaS またはサービス製品を含む Marketplace 製品の場合、必要なのはタイルのみです。Development Toolkit は、タイルのみのスキャフォールディングを作成するためのコマンドオプション `ddev create -t tile "<Offering Name>"` を提供します。
 
-### 2. 双方向のインテグレーションを構築する
+### 双方向のインテグレーションを構築します
 
 Datadog から情報をプルすることも役立つ場合がありますが、Datadog Integrations ページまたは Marketplace に出品するには、インテグレーションが双方向である必要があります。つまり、データを Datadog にプッシュする必要もあります。
 
@@ -95,15 +95,15 @@ Datadog から情報をプルすることも役立つ場合がありますが、
 6. [インシデント][21]
 7. [セキュリティイベント][22]
 
-### 3. Marketplace リポジトリを複製するか、Integrations Extras リポジトリをフォークします
+### Marketplace リポジトリを複製するか、integrations-extras リポジトリをフォークします
 
-Datadog インテグレーションは、非公開の [Marketplace リポジトリ][9]またはオープンソースの [Integrations Extras リポジトリ][10]のいずれか用に開発できます。
+Datadog インテグレーションは、非公開の [Marketplace リポジトリ][9]またはオープンソースの [integrations-extras リポジトリ][10]のいずれか用に開発できます。
 
 インテグレーションを構築するプロセスは各リポジトリで同じですが、Marketplace 製品にはさらにいくつかのファイルとフィールド (価格設定など) が必要です。プルリクエストを複製して送信するときは、目的のリポジトリを指すことを忘れないでください。
 
 テクノロジーパートナーは、marketplace@datadog.com にメールを送信することにより、非公開の Marketplace リポジトリへのアクセスをリクエストできます。
 
-### 4. Datadog Development Toolkit をインストールして実行します
+### Datadog Development Toolkit をインストールして実行します
 
 Datadog Development Toolkit コマンド (`ddev`) を使用すると、タイルのすべてのアセットとメタデータのスケルトンをスピンアップすることで、インテグレーションを最初に開発するときにスキャフォールディングを作成できます。
 
@@ -129,14 +129,14 @@ python -m pip install --upgrade datadog-checks-dev\[cli\]
 
 次の場所を複製されたリポジトリに設定します。
 
-#### Marketplace:
+#### マーケットプレイス
 
 ```
 ddev config set marketplace /path/to/marketplace_directory
 ddev config set repo marketplace
 ```
 
-#### Integrations-Extras:
+#### `integrations-extras`
 
 ```
 ddev config set extras /path/to/integrations-extras_directory
@@ -161,11 +161,11 @@ ddev create -t tile "<Offering Name>"
 ddev create "<Offering Name>"
 ```
 
-### 5. タイルスキャフォールディングにデータを入力します
+### タイルスキャフォールディングにデータを入力します
 
 前のセクションの ddev コマンドは、タイルアセットを構成するフォルダーとファイルのスケルトンを生成します。
 
-#### README.md
+#### README
 
 * “Overview”、“Setup”、“Support” セクションを H2 見出し (マークダウンの ##) で含めます。
 * “Overview" の見出しは、製品がユーザーに提供する価値と、より包括的な可観測性のために Datadog と一緒に使用する方法を明確に説明する必要があります。ソフトウェアまたはダッシュボードの動作中の画像を追加することをお勧めします。このセクションは、タイルの “Overview” タブに表示されます。
@@ -177,13 +177,13 @@ ddev create "<Offering Name>"
 * `README.md` ファイルで使用されているすべての画像を `images` フォルダに保存します。
 * **注:** 画像ファイル名にはスペースを含めないようにしてください。
 
-#### Manifest.json
+#### マニフェスト
 
 * `display_name`、`public_title`、`author` などの要素を含む JSON オブジェクト。
 * `manifest.json` フィールドの詳細については、[インテグレーションアセットリファレンス][25]を参照してください。
 * 価格設定オブジェクトの詳細は、非公開の [Marketplace README][26] に記載されています。
 
-#### Metadata.csv
+#### メタデータ
 
 * メトリクス名、タイプ、間隔、単位など、インテグレーションに含まれるすぐに使用できるメトリクスのリストが含まれています。
 * `metadata.csv` フィールドの詳細については、[インテグレーションアセットリファレンス][25]を参照してください。
@@ -200,7 +200,7 @@ ddev create "<Offering Name>"
 * DesignOps チームが Datadog アプリ全体にライトモードとダークモードの両方で実装する SVG で構成されています。ロゴの SVG ファイルは `assets` ディレクトリに追加するか、`assets` 下の `logos` サブディレクトリに配置することができます。
 * **注:** テクノロジーパートナーは、提出するロゴのライセンスに責任を負います。
 
-#### Changelog.md
+#### 変更ログ
 
 * リリースノートとバージョン情報をキャプチャし、タイルの “Release Notes” タブに表示します。リリースノートを降順で追加します (最新バージョンが上部)。
 
@@ -212,7 +212,7 @@ ddev create "<Offering Name>"
 
 * すべての Marketplace 製品には、テクノロジーパートナー独自のエンドユーザー使用許諾契約 (EULA) が必要です。
 
-### 6. プルリクエストを送信します
+### プルリクエストを送信します
 
 インテグレーションアセットを含むプルリクエストを [Marketplace リポジトリ][9]または [Integrations Extras リポジトリ][10]に送信します。
 
@@ -220,7 +220,7 @@ ddev create "<Offering Name>"
 
 Marketplace リポジトリの Azure DevOps にアクセスする必要がある場合は、PR にコメントを残してください。エンジニアリングチームがアクセスを提供します。
 
-### 7. タイルのリリースを承認します
+### タイルのリリースを承認します
 
 プルリクエストタイルがエンジニアリングチームと製品チームによって承認されると、サンドボックスアカウントでタイルが有効になります。これにより、Datadog Marketplace でインテグレーションタイルを検証および表示し、公開前に変更を加えることができます。
 

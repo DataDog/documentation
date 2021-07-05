@@ -1,5 +1,5 @@
 ---
-title: APM & Distributed Tracing with Agent v5
+title: APM & Continuous Profiler with Agent v5
 kind: guide
 private: true
 aliases:

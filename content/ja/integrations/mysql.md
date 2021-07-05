@@ -87,6 +87,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 **注**: `@'localhost'` はローカル接続専用です。リモート接続には Agent のホスト名/IP を使用してください。詳細については、[MySQL のドキュメント][5]を参照してください。
 
+**注**: エラーメッセージ `(1045, u"Access denied for user 'datadog'@'127.0.0.1' (using password: YES)"))` が表示された場合は、[MySQL Localhost エラーのドキュメント][6]を参照してください。
+
 次のコマンドを使用して、ユーザーが問題なく作成されたことを検証します。`<一意のパスワード>` は上記で作成したパスワードに置き換えます。
 
 ```shell
@@ -273,19 +275,122 @@ _Agent バージョン 6.0 以降で利用可能_
 [3]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "Docker" %}}
+#### Docker
 
-#### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                                                  |
-| -------------------- | ---------------------------------------------------------------------- |
-| `<インテグレーション名>` | `mysql`                                                                |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%", "user": "datadog","pass": "<UNIQUEPASSWORD>"}` |
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["mysql"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
+```
+
+`<UNIQUEPASSWORD>` をラベルではなく環境変数として渡す方法については、[オートディスカバリーテンプレート変数に関するドキュメント][2]を参照してください。
+
+#### ログの収集
+
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][3]を参照してください。
+
+次に、[ログインテグレーション][4]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+このチェックを、Kubernetes で実行している Agent に構成します。
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  annotations:
+    ad.datadoghq.com/nginx.check_names: '["mysql"]'
+    ad.datadoghq.com/nginx.init_configs: '[{}]'
+    ad.datadoghq.com/nginx.instances: |
+      [
+        {
+          "server": "%%host%%", 
+          "user": "datadog",
+          "pass": "<UNIQUEPASSWORD>"
+        }
+      ]
+  labels:
+    name: mysql
+spec:
+  containers:
+    - name: mysql
+```
+
+`<UNIQUEPASSWORD>` をラベルではなく環境変数として渡す方法については、[オートディスカバリーテンプレート変数に関するドキュメント][3]を参照してください。
+
+#### ログの収集
+
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][4]を参照してください。
+
+次に、[ログインテグレーション][5]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][6]を使用してこれを構成することもできます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  annotations:
+    ad.datadoghq.com/mysql.logs: '[{"source": "mysql", "service": "mysql"}]'
+  labels:
+    name: mysql
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+このチェックを、ECS で実行している Agent に構成するには:
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "mysql",
+    "image": "mysql:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"mysql\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
+    }
+  }]
+}
+```
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として渡す方法については、[オートディスカバリーテンプレート変数に関するドキュメント][2]を参照してください。
 
@@ -293,21 +398,31 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][3]を参照してください。
 
-| パラメーター      | 値                                     |
-| -------------- | ----------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "mysql", "service": "mysql"}` |
+次に、[ログインテグレーション][4]を Docker ラベルとして設定します。
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+```yaml
+{
+  "containerDefinitions": [{
+    "name": "mysql",
+    "image": "mysql:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"mysql\",\"service\":\"mysql\"}]"
+    }
+  }]
+}
+```
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[3]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `mysql` を探します。
 
 ## 収集データ
 
@@ -465,18 +580,18 @@ MySQL チェックには、イベントは含まれません。
 ### サービスのチェック
 
 **mysql.replication.replica_running**:<br>
-`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][7]を参照してください。
+`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][8]を参照してください。
 
 **mysql.replication.slave_running**:<br>
-`mysql.replication.replica_running` に置き換えられ、非推奨となりました。`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][7]を参照してください。
+`mysql.replication.replica_running` に置き換えられ、非推奨となりました。`Replica_IO_Running` および `Replica_SQL_Running` の両方を実行していないレプリカに `CRITICAL` を、いずれかのみが実行していない場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。詳細については、[こちら][8]を参照してください。
 
 **mysql.can_connect**:<br>
 Agent が MySQL に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-- [SQL Server インテグレーションでの接続の問題][8]
-- [MySQL Localhost エラー - Localhost と 127.0.0.1][9]
+- [SQL Server インテグレーションでの接続の問題][9]
+- [MySQL Localhost エラー - Localhost と 127.0.0.1][6]
 - [SQL Server インテグレーションで名前付きインスタンスを使用できますか][10]
 - [Google CloudSQL で dd-agent MySQL チェックをセットアップできますか][11]
 - [カスタム MySQL クエリからメトリクスを収集する方法 ][12]
@@ -495,10 +610,10 @@ Datadog を使用した MySQL の監視については、[一連のブログ記�
 [3]: https://mariadb.com/kb/en/library/mariadb-vs-mysql-compatibility
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/SERVICE_CHECK_CLARIFICATION.md
-[8]: https://docs.datadoghq.com/ja/integrations/faq/connection-issues-with-the-sql-server-integration/
-[9]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[6]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/SERVICE_CHECK_CLARIFICATION.md
+[9]: https://docs.datadoghq.com/ja/integrations/faq/connection-issues-with-the-sql-server-integration/
 [10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
 [11]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
 [12]: https://docs.datadoghq.com/ja/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/

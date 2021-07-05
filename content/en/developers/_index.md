@@ -80,8 +80,8 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 ## Community
 
 {{< whatsnext desc="Collaborate with the Datadog developer community:" >}}
-    {{< nextlink href="/developers/community/libraries" >}}<u>Libraries</u>: A list of official and community-contributed libraries for the Datadog API, DogStatsD client, APM & Distributed Tracing, and externally-supported community integrations for a wide variety of platforms.{{< /nextlink >}}
-    {{< nextlink href="/developers/community/office_hours" >}}<u>Community Office Hours</u>: Regular Datadog office hours, which is your opportunity to chat directly with engineers about developing on Datadog.{{< /nextlink >}}
+    {{< nextlink href="/developers/libraries" >}}<u>Libraries</u>: A list of official and community-contributed libraries for the Datadog API, DogStatsD client, APM & Continuous Profiler, and externally-supported community integrations for a wide variety of platforms.{{< /nextlink >}}
+    {{< nextlink href="/developers/office_hours" >}}<u>Community Office Hours</u>: Regular Datadog office hours, which is your opportunity to chat directly with engineers about developing for Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/guide/" >}}<u>Guides</u>: Additional helpful articles about technical details, code examples, and reference documentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 

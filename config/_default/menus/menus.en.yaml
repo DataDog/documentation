@@ -1270,7 +1270,7 @@ main:
     url: monitors/guide/
     weight: 100
     parent: alerting
-  - name: APM & Distributed Tracing
+  - name: APM & Continuous Profiler
     url: tracing/
     pre: nav_tracing
     identifier: tracing

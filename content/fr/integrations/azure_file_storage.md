@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_file_storage/'
 draft: false
 git_integration_title: azure_file_storage
 has_logo: true
+integration_id: azure-filestorage
 integration_title: Stockage Fichier Microsoft Azure
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Stockage Fichier Azure offre des partages de fichiers managés dans le cloud, ac
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de Stockage Fichier Azure.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
