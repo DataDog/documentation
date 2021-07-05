@@ -56,7 +56,7 @@ For browser tests, the value of the `user-agent` header varies depending on the 
 {{% /tab %}}
 {{< /tabs >}}
 
-### sec-datadog
+### `sec-datadog`
 
 {{< tabs >}}
 {{% tab "Single and multistep API tests" %}}
