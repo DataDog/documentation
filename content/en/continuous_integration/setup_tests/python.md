@@ -15,7 +15,8 @@ Supported Python interpreters:
 * Python >= 2.7 and >= 3.5
 
 Supported test frameworks:
-* pytest >= 4.0.0
+* pytest >= 3.0.0
+  * pytest < 5 when using Python 2
 
 ## Prerequisites
 
