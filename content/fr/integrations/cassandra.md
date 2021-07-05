@@ -2,11 +2,18 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    cassandra-overview: assets/dashboards/cassandra_overview.json
+    cassandra-overview-screenboard: assets/dashboards/cassandra_overview_screenboard.json
+    cassandra-read: assets/dashboards/cassandra_read.json
+    cassandra-sstables: assets/dashboards/cassandra_sstable.json
+    cassandra-write: assets/dashboards/cassandra_write.json
   logs:
     source: cassandra
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    cassandra_processes: assets/saved_views/cassandra_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -17,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md'
 display_name: Cassandra
+draft: false
 git_integration_title: cassandra
 guid: 03ba454d-425c-4f61-9e9c-54682c3ebce5
 integration_id: cassandra
@@ -74,7 +82,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -119,7 +127,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
 
@@ -150,7 +158,7 @@ Le check Cassandra n'inclut aucun événement.
 ### Checks de service
 
 **cassandra.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Cassandra qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Cassandra qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -198,6 +206,10 @@ Le check Cassandra Nodetool est inclus avec le package de l'[Agent Datadog][2]�
 
 2. [Redémarrez l'Agent][13].
 
+#### Collecte de logs
+
+Les logs Cassandra Nodetool sont recueillis par l'intégration Cassandra. Consultez les [instructions à ce sujet][14].
+
 ### Validation
 
 [Lancez la sous-commande `status` de l'Agent][5] et cherchez `cassandra_nodetool` dans la section Checks.
@@ -214,8 +226,8 @@ Le check Cassandra_nodetool n'inclut aucun événement.
 
 ### Checks de service
 
-**cassandra.nodetool.node_up**:
-L'Agent envoie ce check de service pour chaque nœud du cluster surveillé. Renvoie CRITICAL si le nœud n'est pas disponible. Si ce n'est pas le cas, renvoie OK.
+**cassandra.nodetool.node_up**:<br>
+L'Agent envoie ce check de service pour chaque nœud du cluster surveillé. Renvoie `CRITICAL` si le nœud n'est pas disponible. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -241,3 +253,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [12]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[14]: https://github.com/DataDog/integrations-core/tree/master/cassandra#log-collection

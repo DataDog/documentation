@@ -23,6 +23,8 @@ Supported platforms:
 
 ## Installing the Swift testing SDK
 
+There are two ways of installing the testing framework:
+
 ### Via Swift Package Manager
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
@@ -35,10 +37,10 @@ Supported platforms:
 
 3. If you run UITests, also link the app running the tests with this library.
 
-### Via direct binary linking
+### Adding the framework to your project
 
-1. Download and decompress `DatadogSDKTesting.zip` from the release page.
-    <!--Alternatively, you can build the XCFramework from source code. Download the project at [dd-sdk-swift-testing][1] and run `make release`. The resulting framework `DatadogSDKTesting.xcframework` can be found at `./build/xcframework`.-->
+1. Download and decompress `DatadogSDKTesting.zip` from the [release page][2].
+
 2. Copy and link your test targets with the resulting XCFramework.
 
     ![](swift_images/swift_link.png)
@@ -389,5 +391,5 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
+[2]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 [3]:https://app.datadoghq.com/organization-settings/client-tokens
-

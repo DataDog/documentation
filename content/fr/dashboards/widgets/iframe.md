@@ -22,27 +22,15 @@ Saisissez l'URL de la page que vous souhaitez afficher à l'intérieur de l'ifra
 
 ## API
 
-Le [schéma JSON][1] utilisé pour le widget iframe est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
 
-```text
-IFRAME_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["iframe"]},
-        "url": {"type": "string"},
-    },
-    "required": ["type", "url"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][2] utilisé pour le widget iframe est le suivant :
 
-| Paramètre | Type   | Obligatoire | Description                                            |
-|-----------|--------|----------|--------------------------------------------------------|
-| `type`    | chaîne | oui      | Type de widget (utilisez `iframe` pour le widget iframe) |
-| `url`     | chaîne | oui      | URL de l'iframe                                      |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json/widget_json/
+[1]: /fr/api/v1/dashboards/
+[2]: /fr/dashboards/graphing_json/widget_json/

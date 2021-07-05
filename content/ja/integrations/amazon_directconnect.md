@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_directconnect/'
 draft: false
 git_integration_title: amazon_directconnect
 has_logo: true
+integration_id: amazon-direct-connect
 integration_title: Amazon Direct Connect
 is_public: true
 kind: インテグレーション
@@ -54,10 +55,10 @@ Amazon Direct Connect から S3 バケットまたは CloudWatch のいずれか
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [CloudWatch ロググループに手動トリガーを追加][8]
 
 ## 収集データ
 

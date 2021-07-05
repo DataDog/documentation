@@ -45,7 +45,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.1, for Windows versions 2012 and up.
+Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.1, for Windows versions 2012 R2 and up.
 
 #### macOS
 

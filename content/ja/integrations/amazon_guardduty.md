@@ -17,6 +17,7 @@ name: amazon_guardduty
 public_title: Datadog-AWS GuardDuty インテグレーション
 short_description: AWS GuardDuty ログを収集
 version: '1.0'
+integration_id: amazon-guardduty
 ---
 ## 概要
 
@@ -26,7 +27,7 @@ Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリュー�
 
 ### ログの収集
 
-#### GuardDuty ログの有効化
+#### ログの有効化
 
 1. **GuardDuty Finding** イベントタイプを使用して Cloudwatch で新しい規則を作成します。
 

@@ -2,6 +2,7 @@
 title: Widget Nuage de points
 kind: documentation
 description: Représenter deux métriques dans un certain contexte avec leur agrégation respective
+widget_type: scatterplot
 aliases:
   - /fr/graphing/widgets/scatter_plot/
 further_reading:
@@ -43,55 +44,15 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][1] utilisé pour le widget Nuage de points est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
 
-```text
-SCATTERPLOT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["scatterplot"]},
-        "requests": {
-            "type": "object",
-            "properties": {
-                "x": REQUEST_SCHEMA,
-                "y": REQUEST_SCHEMA
-            },
-            "required": ["x", "y"],
-            "additionalProperties": false
-        },
-        "xaxis": AXIS_SCHEMA,
-        "yaxis": AXIS_SCHEMA,
-        "color_by_groups": {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][2] utilisé pour le widget Nuage de points est le suivant :
 
-| Paramètre         | Type             | Obligatoire | Description                                                                                                                                        |
-|-------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`            | chaîne           | oui      | Type du widget (utilisez `scatterplot` pour le widget Nuage de points)                                                                                     |
-| `requests`        | objet           | oui      | Objet `requests` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][2] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
-| `yaxis`           | objet           | non       | Options de commande de l'axe des ordonnées. Consultez la [documentation relative au schéma JSON de l'axe des ordonnées][3] pour apprendre à élaborer le `AXIS_SCHEMA`.                           |
-| `xaxis`           | objet           | non       | Options de commande de l'axe des abscisses. Consultez la [documentation relative au schéma JSON de l'axe des abscisses][3] pour apprendre à élaborer le `AXIS_SCHEMA`.                           |
-| `color_by_groups` | tableau de chaînes | non       | Liste des groupes utilisés pour les couleurs.                                                                                                                    |
-| `title`           | chaîne           | non       | Titre de votre widget.                                                                                                                              |
-
-Propriétés supplémentaires autorisées dans l'objet `request` :
-
-```json
-{"aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}}
-```
-
-| Paramètre    | Type   | Obligatoire | Description                                                                                   |
-|--------------|--------|----------|-----------------------------------------------------------------------------------------------|
-| `aggregator` | chaîne | non       | Agrégateur utilisé pour la requête. Valeurs disponibles : `avg`, `last`, `max`, `min` ou `sum`. |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json/widget_json/
-[2]: /fr/dashboards/graphing_json/request_json/
-[3]: /fr/dashboards/graphing_json/widget_json/#y-axis-schema
+[1]: /fr/api/v1/dashboards/
+[2]: /fr/dashboards/graphing_json/widget_json/

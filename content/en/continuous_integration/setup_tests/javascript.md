@@ -43,6 +43,13 @@ For more information, see the [JavaScript tracer installation docs][4].
 yarn add --dev jest-circus
 {{< /code-block >}}
 
+
+    **Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
+
+    {{< code-block lang="bash" >}}
+yarn add --dev jest-circus@25.5.4
+{{< /code-block >}}
+
 2. Configure a custom [testEnvironment][5] and [testRunner][6] in your `jest.config.js` or however you are configuring [jest][7]:
 
     {{< code-block lang="javascript" filename="jest.config.js" >}}
@@ -66,6 +73,8 @@ require('dd-trace').init({
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
 {{< /code-block >}}
+
+    **Note**: `jest-environment-node` and `jest-environment-jsdom` are installed together with `jest`, so they do not normally appear in your `package.json`. If you've extracted any of these libraries in your `package.json`, make sure the installed version is the same as the one of `jest`.
 
 Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 

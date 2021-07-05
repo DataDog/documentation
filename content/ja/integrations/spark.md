@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    spark: assets/dashboards/spark_dashboard.json
   logs:
     source: spark
   metrics_metadata: metadata.csv
@@ -47,8 +48,6 @@ supported_os:
 - RDD: パーティション数、使用メモリ量、使用ディスク容量。
 - タスク: アクティブなタスク数、スキップされたタスク数、失敗したタスク数、合計タスク数。
 - ジョブの状態: アクティブなジョブ数、完了したジョブ数、スキップされたジョブ数、失敗したジョブ数。
-
-**注**: Spark Structured Streaming メトリクスはサポートされていません。
 
 ## セットアップ
 
@@ -172,18 +171,18 @@ Agent が Spark インスタンスの ResourceManager に接続できない場�
 
 ### AWS EMR 上の Spark
 
-AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][10] をインストールします。
+AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールします。
 
-Agent v5 の場合は、[各 EMR ノードに正しい値が指定][9]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
+Agent v5 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
 
-Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][11]された `/etc/datadog-agent/conf.d/spark.d/conf.yaml` 構成ファイルを作成します。
+Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/datadog-agent/conf.d/spark.d/conf.yaml` 構成ファイルを作成します。
 
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した Hadoop と Spark の監視][10]
+- [Datadog を使用した Hadoop と Spark の監視][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
@@ -191,8 +190,9 @@ Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][11]され�
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: 
+[6]: https://docs.datadoghq.com/ja/agent/docker/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[9]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[10]: https://www.datadoghq.com/blog/monitoring-spark
+[9]: https://docs.datadoghq.com/ja/agent/
+[10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[11]: https://www.datadoghq.com/blog/monitoring-spark
