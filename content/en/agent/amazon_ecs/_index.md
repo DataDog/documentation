@@ -66,7 +66,7 @@ Configure the task using either the [AWS CLI tools][12] or using the Amazon Web 
 
 1. For Linux containers, download [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux 1 AMI). For Windows, download [datadog-agent-ecs-win.json][3].
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][4] for your account.
-3. Optionally - Add the following to you ECS task definition to deploy on an ["ECS-Anywhere" cluster][5].
+3. Optionally - Add the following to your ECS task definition to deploy on an [ECS Anywhere cluster][5].
 
     ```json
     "requiresCompatibilities": ["EXTERNAL"]
@@ -110,7 +110,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 1. Log in to your AWS Console and navigate to the EC2 Container Service section.
 2. Click on the cluster you wish to add Datadog to.
 3. Click on **Task Definitions** on the left side and click the button **Create new Task Definition**.
-   Select "External" on the launch type step if you plan to deploy the agent task on an "ECS-Anywhere" cluster.
+   Select "External" on the launch type step if you plan to deploy the agent task on an ECS Anywhere cluster.
 4. Enter a **Task Definition Name**, such as `datadog-agent-task`.
 5. Click on the **Add volume** link.
 6. For **Name** enter `docker_sock`. For **Source Path**, enter `/var/run/docker.sock` on Linux or `\\.\pipe\docker_engine` on Windows. Click **Add**.
