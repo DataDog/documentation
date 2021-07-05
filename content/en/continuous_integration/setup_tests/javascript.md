@@ -97,7 +97,7 @@ The following is a list of the most important configuration settings that can be
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
 **Default**: (test framework name)<br/>
-**Example**: `my-java-app`
+**Example**: `my-ui`
 
 `env`
 : Name of the environment where tests are being run.<br/>
