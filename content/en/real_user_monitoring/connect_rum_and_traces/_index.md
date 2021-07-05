@@ -138,6 +138,8 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-sampled: 1`
 : Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.
 
+**Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server. The server must also accept [preflight requests][18] (OPTIONS requests).
+
 ## How are APM quotas affected?
 
 The `x-datadog-origin: rum` header specifies to the APM backend that the traces are generated from Real User Monitoring. The generated traces consequently do not impact Indexed Span counts.
@@ -164,3 +166,5 @@ These traces are retained [just like your classical APM traces][16].
 [14]: /tracing/setup_overview/setup/dotnet-core/
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [16]: /tracing/trace_retention_and_ingestion/
+[17]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
