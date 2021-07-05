@@ -128,9 +128,9 @@ A common use case is to use RRULES to define downtimes on specific days of the m
 
 **Note**: Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`).
 
+
 [1]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [2]: https://icalendar.org/rrule-tool.html
-
 {{% /tab %}}
 {{< /tabs >}}
 
