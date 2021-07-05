@@ -61,12 +61,16 @@ For browser tests, the value of the `user-agent` header varies depending on the 
 {{< tabs >}}
 {{% tab "Single and multistep API tests" %}}
 
-`sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
+```
+sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+```
 
 {{% /tab %}}
 {{% tab "Browser tests" %}}
 
-`Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
+```
+sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+```
 
 {{% /tab %}}
 {{< /tabs >}}
