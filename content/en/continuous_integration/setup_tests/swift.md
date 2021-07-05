@@ -33,7 +33,11 @@ Supported CI providers:
 * TravisCI
 * Bitrise
 
-## Installing the Swift testing SDK using SPM
+## Installing the Swift testing SDK 
+
+There are two ways of installing the testing framework:
+
+### Using Swift Package Manager
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -41,9 +45,9 @@ Supported CI providers:
 
 3. If you run UITests, also link the app running the tests with this library.
 
-## Binary linking
+### Adding the framework to your project
 
-1. Download and decompress `DatadogSDKTesting.zip` from the release page. 
+1. Download and decompress `DatadogSDKTesting.zip` from the [release page][2]. 
 
 2. Copy and link your test targets with the resulting XCFramework.
 
@@ -374,3 +378,4 @@ You can also disable or enable specific auto-instrumentation in some of the test
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
+[2]: https://github.com/DataDog/dd-sdk-swift-testing/releases
