@@ -165,11 +165,11 @@ If you have any issues with the Datadog Plugin, you can set the logs for the plu
 2. Click on `Add new log recorder` button.
 3. Type the log recorder name. E.g: **Datadog Plugin Logs**.
 4. Add the following loggers to the list:
-- Logger: `org.datadog.jenkins.plugins.datadog.clients` -> Log Level `ALL`
-- Logger: `org.datadog.jenkins.plugins.datadog.traces` -> Log Level `ALL`
-- Logger: `org.datadog.jenkins.plugins.datadog.logs` -> Log Level `ALL`
-- Logger: `org.datadog.jenkins.plugins.datadog.model` -> Log Level `ALL`
-- Logger: `org.datadog.jenkins.plugins.datadog.listeners` -> Log Level `ALL`
+    - Logger: `org.datadog.jenkins.plugins.datadog.clients` -> Log Level `ALL`
+    - Logger: `org.datadog.jenkins.plugins.datadog.traces` -> Log Level `ALL`
+    - Logger: `org.datadog.jenkins.plugins.datadog.logs` -> Log Level `ALL`
+    - Logger: `org.datadog.jenkins.plugins.datadog.model` -> Log Level `ALL`
+    - Logger: `org.datadog.jenkins.plugins.datadog.listeners` -> Log Level `ALL`
 5. Save the configuration.
 
 You may also want to split the loggers into different log recorders.
@@ -194,7 +194,7 @@ If the Datadog Plugin section does not appear in Jenkins configuration section, 
 3. Check that the `Enabled` checkbox is marked.
 4. If you enable the plugin here, restart your Jenkins instance using the `/safeRestart` URL path.
 
-### The Plugin Tracer failed to initialized due to APM Java Tracer is used to instrument Jenkins.
+### The Plugin Tracer failed to initialized due to APM Java Tracer is used to instrument Jenkins
 
 If this error message appears in the **Jenkins Log**, make sure that you are not using the APM Java Tracer to instrument your Jenkins instance.
 
