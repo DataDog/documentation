@@ -58,7 +58,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 
 2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
 
-    Note in particular that for the `apps` apiGroups, Live Containers need
+    Note in particular that for the `apps` and `batch` apiGroups, Live Containers need
     permissions to collect common kubernetes resources (`pods`, `services`,
     `nodes`, etc.), which should be already in the RBAC if you followed [Cluster
     Agent Setup documentation][2]. But if they are missing, ensure they are
@@ -91,9 +91,18 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
         - list
         - get
         - watch
+      - apiGroups:
+        - "batch"
+        resources:
+        - cronjobs
+        - jobs
+        verbs:
+        - list
+        - get
+        - watch
       ...
     ```
-    These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
+    These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect supported Kubernetes resources.
 
     If the `cluster-id` ConfigMap isn't created by the Cluster Agent, the Agent pod will not be able to collect resources. In such a case, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap, and then restart the Agent pod.
 
@@ -128,6 +137,8 @@ The following table presents the list of collected resources and the minimal Age
 | Pods | 7.27.0 | 1.11.0 | 2.10.0 |
 | ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
+| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| Cronjobs | 7.27.0 | 1.13.1 | 2.15.5 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -383,7 +394,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **Services**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
