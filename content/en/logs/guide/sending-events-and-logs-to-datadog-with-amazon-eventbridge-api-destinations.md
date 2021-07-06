@@ -1,5 +1,5 @@
 ---
-title: Sending events and logs to Datadog with Amazon EventBridge API Destinations
+title: Sending Events and Logs to Datadog with Amazon EventBridge API Destinations
 kind: guide
 further_reading:
 - link: "https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog"
@@ -16,7 +16,7 @@ Before you begin, you need a [Datadog account][1], with [an API key][2], and you
 ### Configuration
 
 1. Follow the steps in the [Amazon Create an API destination docs][4] to add Datadog as an API destination.
-    - Use API key Authorization, with `DD-API-KEY` as your key name and your Datadog API key as the value.
+    - Use API key Authorization, with `DD-API-KEY` as your key name and your [Datadog API key][2] as the value.
     - For your destination endpoint, input `https://http-intake.logs.datadoghq.com/v1/input` for logs or `https://api.datadoghq.com/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see the [logs section][5], and the [events section][6] of the [Categories of Data docs page][7].
 2. Once you've set up the destination, you can now follow the Amazon instructions to [create an EventBridge rule][8], where you set Datadog as your destination.
 3. Once you've set up the rule with Datadog as the destination, [upload the objects to an S3 bucket][9] in your account to trigger an event. To trigger a test event, use this AWS CloudShell cmd:
