@@ -14,6 +14,7 @@ categories:
   - security
   - containers
   - 構成 & デプロイ
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:

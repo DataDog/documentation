@@ -25,7 +25,7 @@ Les blocs de configuration doivent respecter quelques principes :
 - Par défaut, tous les paramètres facultatifs sont mis en commentaire.
 - Si un placeholder présente une valeur par défaut pour une intégration (comme l'endpoint de statut d'une intégration), celle-ci peut être utilisée à la place d'un placeholder générique.
 
-### Spécification @param
+### Spécification `@param`
 
 En pratique, la seule commande est `@param`, qui est utilisée pour décrire les blocs de configuration, principalement à des fins de documentation. `@param` doit être implémentée en respectant l'un des formats suivants :
 
@@ -62,7 +62,7 @@ Un paramètre facultatif doit être mis en commentaire par défaut. Au début de
 
 Vous pouvez ajouter un commentaire de bloc n'importe où dans le fichier de configuration. Les règles suivantes doivent être appliquées :
 
-- Les commentaires doivent commencer par `##`.
+- Les commentaires commencent par `##`
 - Les commentaires doivent être indentés comme les variables (le trait d'union ne compte pas).
 
 Pour en savoir plus sur la syntaxe YAML, consultez l'article [Wikipedia][2]. Et n'hésitez pas à faire bon usage du parser en ligne [Online YAML Parser][3] !

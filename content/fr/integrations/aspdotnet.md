@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    ASP.NET - Overview: assets/dashboards/overview.json
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -10,6 +11,7 @@ assets:
 categories:
   - web
   - languages
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -52,9 +54,14 @@ Le check ASP.NET est inclus avec le package de l'[Agent Datadog][1] : vous n'av
 
 2. [Redémarrez l'Agent][4].
 
+#### Collecte de logs
+ASP.NET utilise le système de journalisation d'IIS. Suivez les [instructions de configuration d'IIS][5] pour consulter les logs associés aux requêtes et erreurs ASP.NET.
+
+Les exceptions 500 non gérées et les événements associés à votre application ASP.NET peuvent être consultés via l'observateur d'événements Windows.
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `aspdotnet` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][6] et cherchez `aspdotnet` dans la section Checks.
 
 ## Données collectées
 
@@ -72,12 +79,13 @@ Le check ASP.NET n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/datadog_checks/aspdotnet/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[5]: https://docs.datadoghq.com/fr/integrations/iis/?tab=host#setup
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/aspdotnet/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help/

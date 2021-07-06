@@ -14,9 +14,9 @@ further_reading:
 {{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Datadog Agent の基礎を説明します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/application" >}}<u>Datadog アプリケーション</u>: ダッシュボード、インフラストラクチャーリスト、マップなど、Datadog UI の使用方法を学びます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/integrations" >}}<u>インテグレーション</u>: Datadog インテグレーションでのメトリクス、トレース、ログの収集方法を学びます。{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}<u>ログ</u>: ログ送信を体験し、ログ処理を使用してログを強化します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/dashboards" >}}<u>ダッシュボード</u>: 重要な作業上の質問に答えるのに役立つダッシュボードを作成、共有、および維持します。{{< /nextlink >}}{{< nextlink href="/getting_started/logs" >}}<u>ログ</u>: ログ送信を体験し、ログ処理を使用してログを強化します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>トレーシング</u>: Agent をセットアップして小さなアプリケーションをトレースし、トレーシングの方法を学びます。{{< /nextlink >}}
-{{< nextlink href="/getting_started/tagging" >}}<u>タグ付け</u>: メトリクス、ログ、トレースのタグ付けを開始します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/profiler" >}}<u>プロファイラー</u>: Continuous Profiler を使用して、コードのパフォーマンスの問題を見つけて修正する方法を学びます。{{< /nextlink >}}{{< nextlink href="/getting_started/tagging" >}}<u>タグ付け</u>: メトリクス、ログ、トレースのタグ付けを開始します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Datadog HTTP API を使用します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic モニタリング</u>: Synthetic テストを使用して、API エンドポイントと主要なビジネス処理を監視する方法を学びます。{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic モニタリング</u>: Synthetic テストを使用して、API エンドポイントと主要なビジネス処理をテストおよび監視する方法を学びます。{{< /nextlink >}}
 {{< /whatsnext >}}

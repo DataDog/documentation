@@ -16,7 +16,7 @@ further_reading:
 
 このガイドでは、以下のユースケースに関するダウンタイムの構成方法をご説明します。
 
-* [週末にかけてのダウンタイム](#downtime-over-the-week-end)
+* [週末のダウンタイム](#downtime-over-the-week-end)
 * [営業時間外のダウンタイム](#downtime-outside-of-business-hours)
 * [毎月 n 日の定期的なダウンタイム](#recurring-downtime-on-nth-weekday-of-the-month)
 
@@ -160,11 +160,12 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 RRULE (繰り返しルール) は [iCalendar RFC][4] のプロパティ名で、定期的なイベントを定義する際の標準形式です。
 
-[RFC][4] にリストされているすべての RRULE がサポートされています。[このツール][5]を使用して RRULE を生成し、API コールに貼り付けます。
+`RRULE` で期間を指定する属性はサポートされていません (例: `DTSTART`、`DTEND`、`DURATION`)。可能な属性については [RFC][4] を参照してください。[このツール][5]を使用して RRULE を生成し、API 呼び出しに貼り付けることができます。
 
 **例**: ERP アプリは毎月第 2 火曜日に更新され、午前 8 時から 10 時の間にパッチと修正が適用されます。このモニターのスコープは `app:erp` で指定されているため、ダウンタイムのスコープにもこの値を使用します。
 
-#### API 
+{{< tabs >}}
+{{% tab "API " %}}
 
 `type` パラメーターは `rrule` に指定する必要があります。
 `start`  および `end` パラメーターは繰り返しルール初日の予定開始時間および終了時間と一致するよう設定します。そのため、ルールで指定した最初の第 2 火曜日が 3 月 9 日 (火) であった場合、開始は 3 月 9 日の午前 8時、終了は 3 月 9 日の午前 10 時となります。
@@ -209,6 +210,16 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 }
 ```
 
+{{% /tab %}}
+{{% tab "UI" %}}
+
+[Manage Downtime ページ][1]を開いて新しいダウンタイムを追加し、`recurring` を選択します。
+
+{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule ダウンタイム"  style="width:80%;">}}
+
+[1]: https://app.datadoghq.com/monitors#downtime
+{{% /tab %}}
+{{< /tabs >}}
 
 ### その他の参考資料
 

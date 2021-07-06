@@ -67,7 +67,7 @@ Agent の構成ファイルおよびフォルダーは、
 * `./etc/datadog-agent/datadog.yaml`
 * `./datadog.yaml`
 
-構成ファイルのサンプルが `/opt/datadog-agent/etc/datadog-agent` にあります。
+コンフィギュレーションファイルのサンプルが `/etc/datadog-agent` にあります。
 
 基本的な構成では、通常、Datadog API キーが必要です。メトリクスを EU インスタンスに送信するために、`site` 構成オプションを使用できます。
 

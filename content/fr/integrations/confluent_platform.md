@@ -50,7 +50,7 @@ Cette intégration recueille des métriques JMX pour les composants suivants :
 - Connect
 - Replicator
 - Schema Registry
-- SQL Server
+- ksqlDB Server
 - Streams
 - REST Proxy
 

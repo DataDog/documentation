@@ -58,7 +58,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 `openstack_controller.d/conf.yaml` ファイルで使用される `datadog` ユーザーを作成します。このユーザーには、環境全体に対する管理読み取り専用アクセス許可が必要です。これにより、単一のノードから実行して、すべてのノードとサーバーに関する高レベルなシステム情報を読み取ることができます。
 
-#### Agent 構成
+#### Agent の構成
 
 1. OpenStack Controller のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `openstack_controller.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack_controller.d/conf.yaml][2] を参照してください。
 

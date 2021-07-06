@@ -24,6 +24,13 @@ further_reading:
 
 ランタイムメトリクスの収集は、`ddtrace-run` 環境で実行している場合 `DD_RUNTIME_METRICS_ENABLED=true` の環境パラメーターで有効にできます。
 
+`ddtrace-run` を使用していない場合は、コードでランタイムメトリクスの収集を有効にできます。
+
+```python
+from ddtrace.runtime import RuntimeMetrics
+RuntimeMetrics.enable()
+```
+
 ランタイムメトリクスは、Python サービスと相関して表示できます。Datadog の[サービス詳細画面][1]を参照してください。
 
 **注**: ランタイム UI では、`ddtrace` >= [`0.24.0`][2] がサポートされています。

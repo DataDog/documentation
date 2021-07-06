@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_rekognition/'
 draft: false
 git_integration_title: amazon_rekognition
 has_logo: true
+integration_id: amazon-rekognition
 integration_title: Amazon Rekognition
 is_public: true
 kind: インテグレーション
@@ -44,13 +45,13 @@ Amazon Rekognition から S3 バケットまたは CloudWatch のいずれかに
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_rekognition` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Rekognition ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 
