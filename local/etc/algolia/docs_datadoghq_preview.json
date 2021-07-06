@@ -60,7 +60,7 @@
                 "localisation": ["", "/fr", "/ja"]
             },
             "tags": ["docs"],
-            "page_rank": 15
+            "page_rank": 110
         },
         {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
