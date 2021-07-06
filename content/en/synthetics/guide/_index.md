@@ -12,6 +12,10 @@ private: true
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoiding cache issues in Synthetic tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="API Tests:" >}}
+    {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}Perform OR logic in API tests assertions{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Browser Tests:" >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
