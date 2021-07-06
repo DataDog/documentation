@@ -33,7 +33,7 @@ To install the Ruby tracer:
 
     {{< code-block lang="ruby" filename="Gemfile" >}}
     source 'https://rubygems.org'
-    gem 'ddtrace', ">=0.50.0"
+    gem 'ddtrace', ">=0.51.0"
     {{< /code-block >}}
 
 2. Install the gem by running `bundle install`
