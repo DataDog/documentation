@@ -136,7 +136,7 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 : Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6]. Available in version 0.38+.
 
 `DD_SERVICE`
-: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you [set the service name in code](#integrations). Available in version 0.38+.
+: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][7]). Available in version 0.38+.
 
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
@@ -164,7 +164,7 @@ Override the port that the default tracer submit traces to.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>
-Enable [connecting logs and trace injection][7].
+Enable [connecting logs and trace injection][8].
 
 ## Further Reading
 
@@ -176,4 +176,5 @@ Enable [connecting logs and trace injection][7].
 [4]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: /tracing/connect_logs_and_traces/python/
+[7]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
+[8]: /tracing/connect_logs_and_traces/python/
