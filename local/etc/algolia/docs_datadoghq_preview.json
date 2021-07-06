@@ -56,7 +56,9 @@
         {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/account_management/rbac/permissions",
             "selectors_key": "docs",
-            "localisation": ["", "/fr", "/ja"],
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
             "tags": ["docs"],
             "page_rank": 15
         },
