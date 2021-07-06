@@ -19,9 +19,11 @@ The Datadog app shows a **Live** indicator next to the time selector whenever yo
 
 {{< img src="tracing/live_search/LiveSearch.png" alt="Live Search Indicator" >}}
 
-All ingested traces are passed through custom [retention filters][3] that you can create to determine which spans to index, along with the default [intelligent retention filter][4] that retains a diverse set of traces.
+All ingested traces are passed through [custom retention filters][3] that you can create to determine which spans to index, along with the default [intelligent retention filter][4] that retains a diverse set of traces.
 
-Once indexed, traces are available for use in Search and Analytics, and they are retained for 15 days.
+Once indexed through a custom retention filter, traces are available for use in Search and Analytics, and they are retained for 15 days.
+
+When indexed through the intelligent retention filter, traces are available for use in Search (not Analytics, unless a custom filter has also retained them), and they are retained for 30 days.
 
 The Datadog app shows a 'Retained traces' indicator beside the time selector whenever you search [indexed spans][5]:
 
@@ -129,7 +131,7 @@ Retained Analytics is available from the same page as Live Analytics.  To switch
 
 {{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Historical Analytics" >}}
 
-All spans indexed by retention filters or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
+All spans indexed by _custom_ retention filters (not the intelligent retention filter) or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
 **Note:** As of October 20, 2020 Tracing without Limits replaced App Analytics as a more flexible way to ingest 100% of your traces and retain the ones important to your business.
 
