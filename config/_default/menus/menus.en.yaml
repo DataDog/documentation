@@ -413,12 +413,12 @@ main:
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1103
+    weight: 1101
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1101
+    weight: 1103
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
