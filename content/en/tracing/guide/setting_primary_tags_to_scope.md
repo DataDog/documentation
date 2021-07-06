@@ -41,7 +41,7 @@ You may also manually set `env` as a global tag for the tracer in code. See [ass
 #### Agent environment
 
 The `env` tag can be set in your Agent configuration.
-**We recommend never setting different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][6].**
+**Do not set different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][6].**
 
 Options:
 
