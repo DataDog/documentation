@@ -87,6 +87,12 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true"  width="100%" >}}
 
+## API tests
+
+### Variations in network timings
+
+If a sudden spike or an overall increase in API test [timing metrics][12] occurs, this usually indicates a bottleneck or delay in the request. Please see this [guide][13] to get a better understanding of each API test timing and their variations.
+
 ## API and browser tests
 
 ### Unauthorized errors
@@ -147,3 +153,5 @@ This might mean your private location is unable to reach the endpoint your API t
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [11]: /synthetics/private_locations#private-location-total-hardware-requirements
+[12]: /synthetics/metrics/#api-tests
+[13]: /synthetics/guide/api_test_timing_variations/
