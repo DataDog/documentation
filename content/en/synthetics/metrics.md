@@ -41,8 +41,11 @@ Metrics starting with:
 
 {{< get-metrics-from-git "synthetics" "synthetics.ssl" >}}
 
+For more information on API test timings and their variations, please see this [guide][6]. 
+
 [1]: /synthetics/browser_tests/
 [2]: /synthetics/api_tests/?tab=httptest
 [3]: /synthetics/api_tests/?tab=tcptest
 [4]: /synthetics/api_tests/?tab=dnstest
 [5]: /synthetics/api_tests/?tab=ssltest
+[6]: /synthetics/guide/api_test_timing_variations/
