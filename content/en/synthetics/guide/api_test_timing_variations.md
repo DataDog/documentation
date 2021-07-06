@@ -21,13 +21,13 @@ Synthetics API tests collect several [**timing metrics**][1] which can be used t
 The metrics collected by Synthetics measure the following timings : 
 
 
-1. Redirection time
+**1. Redirection time**
 
-The `synthetics.http.redirect.time` metric measures the total time spent in redirects. All other network timings (DNS resolution, TCP connection, etc.) correspond to the last request. For example, if an HTTP test (that has the **Follow Redirects** option turned on) first loads page A in 35 ms in total, which redirects to page B that loads in 40ms in total, which redirects to page C, the redirect timing equals 35+40=75 ms. The load of page C is then split among the various timings (DNS resolution, TCP connection, etc.).
+The `synthetics.http.redirect.time` metric measures the total time spent in redirects. All other network timings (DNS resolution, TCP connection, etc.) correspond to the last request. For example, if an HTTP test (that has the **Follow Redirects** option turned on) first loads page A in 35 ms in total, which redirects to page B that loads in 40ms in total, which redirects to page C, the redirect timing equals 35 + 40 = 75 ms. The load of page C is then split among the various timings (DNS resolution, TCP connection, etc.).
 
 The `synthetics.http.redirect.time` metric is only measured if redirects occur during the Synthetics HTTP test run. 
 
-2. DNS resolution time
+**2. DNS resolution time**
 
 The `*.dns.time` metrics and the `synthetics.dns.response.time` measure the time spent resolving the domain name. Synthetics API tests use common DNS servers for domain name resolution, such as the public Google and CloudFlare DNS as well as some internal AWS and Azure ones. These can be overridden when using [**private locations**][2] or [**DNS tests**][3]. 
 
@@ -36,13 +36,13 @@ These metrics are only measured when  the API tests URL field contains a domain 
 
 In case of any redirection, the DNS resolution time only corresponds to the last request.
 
-3. TCP connection time
+**3. TCP connection time**
 
 The `*.connect.time` metrics measure the total time spent establishing a TCP connection with the server. 
 
 In case of any redirection, the TCP connection time only corresponds to the last request.
 
-4. SSL handshake time
+**4. SSL handshake time**
 
 The `synthetics.http.ssl.time` and the `synthetics.ssl.hanshake.time` metrics measure the time spent in SSL handshake. 
 
@@ -51,13 +51,13 @@ These metrics are only collected if the request goes over HTTPS, and not HTTP.
 In case of any redirection, the SSL handshake timing only corresponds to  the last request.
 
 
-5. Time to First Byte
+**5. Time to First Byte**
 
 The `synthetics.http.firstbyte.time` metric measures the time between the moment the connection was established and the moment Datadog client received the first byte of the response. Any time spent sending data in the request is included in this timing. 
 
 In case of any redirection, the time to first byte only corresponds to the last request.
 
-6. Download time
+**6. Download time**
 
 The `synthetics.http.download.time` metric measures the time between the moment Datadog client receives the first byte of the response and the moment it finishes downloading the whole response. Generally, the bigger the response body, the higher this timing will be. 
 
@@ -65,9 +65,9 @@ In the case the response does not have a body, this timing is null.
 
 In case of any redirections, the download time only corresponds to the last request.
 
-7. Total response time
+**7. Total response time**
 
-The `*.response.time`  measures the total time between the moment Synthetics starts the request and the moment it finishes it. The response time is the sum of all network timings. For instance for an HTTP test with no redirections on an HTTPS endpoint, `synthetics.http.response.time=synthetics.http.dns.time+synthetics.http.connect.time+synthetics.http.ssl.time+synthetics.http.donwload.time`.
+The `*.response.time`  measures the total time between the moment Synthetics starts the request and the moment it finishes it. The response time is the sum of all network timings. For instance for an HTTP test with no redirections on an HTTPS endpoint, `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time+synthetics.http.ssl.time + synthetics.http.donwload.time`.
 
 ## Timing variations
  
