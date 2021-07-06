@@ -23,3 +23,7 @@ private: true
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="API Tests:" >}}
+    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API test timings and troubleshooting their variations{{< /nextlink >}}
+{{< /whatsnext >}}
