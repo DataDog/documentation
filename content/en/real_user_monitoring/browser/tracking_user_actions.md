@@ -76,7 +76,7 @@ The RUM library uses various strategies to get a name for click actions. If you 
 </div>
 ```
 
-Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that will be used to name the action. For example:
+Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
 
 ```html
 <script>
