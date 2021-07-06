@@ -29,11 +29,12 @@ There are two ways of installing the testing framework:
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
-    ![](swift_images/swift_package.png)
+    {{< img src="swift_images/swift_package.png" alt="Swift Package"  >}}
+
 
 2. Link your test targets with the library `DatadogSDKTesting` from the package.
 
-    ![](swift_images/swift_link.png)
+    {{< img src="swift_images/swift_link.png" alt="Swift Linking"  >}}
 
 3. If you run UITests, also link the app running the tests with this library.
 
@@ -43,8 +44,7 @@ There are two ways of installing the testing framework:
 
 2. Copy and link your test targets with the resulting XCFramework.
 
-    ![](swift_images/swift_link.png)
-
+    {{< img src="swift_images/swift_link.png" alt="Swift Linking"  >}}
 
 3. If you run UITests, also link the app running the tests with this library.
 
@@ -55,7 +55,7 @@ There are two ways of installing the testing framework:
 
 To enable testing instrumentation, add the following environment variables to your test target. You must also select your main target in the `Expand variables based on:`  combo or `Target for Variable Expansion` if using test plans:
 
-![](swift_images/swift_env.png)
+{{< img src="swift_images/swift_env.png" alt="Swift Environments"  >}}
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
