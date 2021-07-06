@@ -41,7 +41,7 @@ You may also manually set `env` as a global tag for the tracer in code. See [ass
 #### Agent environment
 
 The `env` tag can be set in your Agent configuration.
-**However, if `env` is already present in trace data then it will override any `env` set in the Agent.**
+**We recommend never setting different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][6].**
 
 Options:
 
@@ -97,3 +97,4 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings
+[6]: /tracing/guide/metrics_namespace/
