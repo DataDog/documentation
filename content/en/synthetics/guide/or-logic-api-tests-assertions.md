@@ -13,7 +13,7 @@ further_reading:
       text: "Get started with HTTP tests"
 ---
 
-In some cases, you might want to perform `OR` logic on your [API tests][1] assertions in order to define several different expected values for a same assertion type. For example, you would like your [HTTP test][2] `status code` assertion to succeed in case your server responds with a `200` **or** with a `302`.
+You can perform `OR` logic on your [API test][1] assertions to define several different expected values for the same assertion type. For example, you may want your [HTTP test][2] `status code` assertion to succeed in case your server responds with a `200` **or** with a `302`.
 
 To do this, you can use the [`matches regex` comparator][3] and define a regex like `(200|302)`. With such an assertion, your test result is successful if the status code returned by the server is 200 **or** 302.
 
