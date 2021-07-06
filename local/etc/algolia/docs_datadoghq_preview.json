@@ -54,6 +54,13 @@
             "page_rank": 10
         },
         {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/account_management/rbac/permissions",
+            "selectors_key": "docs",
+            "localisation": ["", "/fr", "/ja"],
+            "tags": ["docs"],
+            "page_rank": 15
+        },
+        {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
             "selectors_key": "getting_started",
             "variables": {
