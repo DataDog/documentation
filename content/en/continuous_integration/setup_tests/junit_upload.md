@@ -77,10 +77,12 @@ Additionally, the following environment variables are supported:
 **Default**: (none)<br/>
 **Examples**: `local`, `ci`
 
+<!-- TODO: uncomment this once we support any datacenter other than us1
 `DATADOG_SITE`
 : The Datadog site to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Possible values**: `datadoghq.com`, `datadoghq.eu` or `us3.datadoghq.com`
+-->
 
 ## Collecting repository and commit metadata
 

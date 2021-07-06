@@ -89,10 +89,12 @@ You should set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
+<!-- TODO: uncomment this once we support any datacenter other than us1
 `DD_SITE`
 : The Datadog site to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Possible values**: `datadoghq.com`, `us3.datadoghq.com`, `datadoghq.eu`
+-->
 
 ### Collecting Git and build metadata
 
