@@ -89,10 +89,10 @@ You should set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-`DD_ENDPOINT`
+`DD_SITE`
 : The Datadog site to upload results to.<br/>
-**Default**: `us`<br/>
-**Possible values**: `us`, `eu1`, `us3`
+**Default**: `datadoghq.com`<br/>
+**Possible values**: `datadoghq.com`, `us3.datadoghq.com`, `datadoghq.eu`
 
 ### Collecting Git and build metadata
 
