@@ -91,6 +91,8 @@ Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization
 <a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>
 ```
 
+**Note**: `data-dd-action-name` is favored when both attributes are present on an element.
+
 ## Custom actions
 
 Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they hit the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
