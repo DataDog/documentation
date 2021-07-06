@@ -44,10 +44,9 @@ DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
 
 This is the full list of options available when using the `datadog-ci junit upload` command:
 
-`--service`
+`--service` (Required)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: (none)<br/>
 **Example**: `my-api-service`
 
 `--tags`
