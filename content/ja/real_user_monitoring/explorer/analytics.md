@@ -6,8 +6,11 @@ aliases:
   - /ja/real_user_monitoring/rum_analytics
   - /ja/real_user_monitoring/analytics
 further_reading:
+  - link: 'https://www.datadoghq.com/blog/datadog-geomaps/'
+    tag: ブログ
+    text: ジオマップを使用して、場所ごとにアプリデータを視覚化する
   - link: /real_user_monitoring/explorer/search/
-    tag: ドキュメント
+    tag: Documentation
     text: Datadog でビューを検索する
 ---
 ## 概要
@@ -110,6 +113,18 @@ further_reading:
  次の RUM 分析テーブルは、**2 つの国**の**上位 5 の URL パス**です。つまり、**ユニークなセッション ID** の量と、90 パーセンタイルの**期間**に基づく、過去 1 日間の米国と日本の分析結果を示しています。
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_table_example.png" alt="RUM テーブルの例" style="width:90%;">}}
+
+[1]: /ja/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
+[2]: /ja/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
+{{% /tab %}}
+
+{{% tab "ジオマップ" %}}
+
+世界地図上で単一の[メジャー][1] (または[ファセット][2]の一意の値のカウント) を視覚化します。
+
+次の RUM 分析ジオマップは、過去 1 日間の **Largest Contentful Paint** の 75 パーセンタイルを示しています。
+
+{{< img src="real_user_monitoring/explorer/analytics/rum_geomap_example.png" alt="RUM ジオマップの例" style="width:90%;">}}
 
 [1]: /ja/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /ja/real_user_monitoring/rum_explorer/?tab=measures#facets-measures

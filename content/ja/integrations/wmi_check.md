@@ -163,7 +163,7 @@ instances:
       - [SegmentsRetransmittedPersec, system.net.tcp.retrans_seg, gauge]
     tag_by: Name
 ```
-#### 構成オプション
+#### コンフィギュレーションオプション
 
 _この機能は、バージョン 5.3 の Agent から使用できます。_
 

@@ -1,6 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/chef-datadog/blob/master/README.md"
+- "https://github.com/DataDog/chef-datadog/blob/main/README.md"
 kind: ドキュメント
 title: Chef
 ---
@@ -240,7 +240,7 @@ Agent v6 から v7 へアップグレードするには、下記のメソッド�
 default_attributes(
   'datadog' => {
     'agent_major_version' => 7,
-    'agent_version' => '7.15.0',
+    'agent_version' => '7.25.1',
     'agent_package_action' => 'install',
   }
 )
@@ -306,7 +306,7 @@ Agent インテグレーションのコンフィギュレーションファイ�
 
 ## リソース
 
-### datadog_monitor
+### レシピなしのインテグレーション
 
 レシピを使用せずに Agent インテグレーションを有効化するには `datadog_monitor`  リソースを使用します。
 
@@ -355,7 +355,7 @@ end
 
 その他の例については [Datadog インテグレーション Chef レシピ][7]を参照してください。
 
-### datadog_integration
+### インテグレーションバージョン
 
 Datadog インテグレーションの特定のバージョンをインストールするには、`datadog_integration` リソースを使用します。
 

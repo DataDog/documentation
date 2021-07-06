@@ -27,8 +27,8 @@ Datadog ログ管理は、アプリケーションからログを収集するた
 
 確認したら、これ以降のセクションに従って以下の方法を学びます。
 
-- [手動でログを送信する](#sending-logs-manually)
-- [Agent を使用してファイルからログを送信する](#send-logs-from-a-file)
+- [手動でログを送信](#sending-logs-manually)
+- [Agent を使用してファイルからログを送信](#send-logs-from-a-file)
 
 ## 手動でのログの送信
 
@@ -36,13 +36,33 @@ Datadog ログ管理は、アプリケーションからログを収集するた
 
 ログは全文メッセージにすることができます。
 
-セキュア TCP エンドポイントはポートが `{{< region-param key="tcp_endpoint_port_ssl" >}}` の telnet intake.logs.datadoghq.com (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
+安全な TCP エンドポイントは telnet intake.logs.datadoghq.com で、ポート `{{< region-param key="tcp_endpoint_port" code="true" >}}` (telnet を使用しない安全な接続の場合はポート `{{< region-param key="tcp_endpoint_port_ssl" >}}`) を使用します。
+
+{{< site-region region="us,us3" >}}
 
 ```
-telnet intake.logs.datadoghq.com 10516
+telnet intake.logs.datadoghq.com 10514
+
+<DATADOG_API_KEY> Plain text log sent through TCP
+```
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+```
+telnet intake.logs.datadoghq.com 1883
 
 <DATADOG_API_KEY> TCP 経由で送信されるプレーンテキストログ
 ```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+この機能はサポートされていません。
+
+{{< /site-region >}}
 
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 
@@ -50,10 +70,10 @@ telnet intake.logs.datadoghq.com 10516
 
 あるいは、Datadog によって自動的に解析される以下の JSON オブジェクトが生成されます。
 
-{{< site-region region="us" >}}
+{{< site-region region="us,us3" >}}
 
 ```text
-telnet intake.logs.datadoghq.com 10516
+telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_キー> {"message":"TCP 経由で直接送信される JSON 形式ログ", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
@@ -70,6 +90,12 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< /site-region >}}
 
+{{< site-region region="gov" >}}
+
+この機能はサポートされていません。
+
+{{< /site-region >}}
+
 これにより、[Log Explorer ページ][2]には以下の結果が生成されます。
 
 {{< img src="getting_started/logs/json_log.png" alt="JSON ログ" >}}
@@ -80,9 +106,10 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 Vagrant ホストに Datadog Agent をインストールするには、[Datadog API キー][5]で更新した [1 行のインストールコマンド][6]を使用します。
 
+
 {{< site-region region="us" >}}
 
-```text
+```shell
 DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
@@ -90,8 +117,24 @@ DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-age
 
 {{< site-region region="eu" >}}
 
-```text
+```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 {{< /site-region >}}

@@ -1,13 +1,20 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     OpenStack Controller Overview: assets/dashboards/openstack-controller.json
-  logs: {}
+    openstack: assets/dashboards/openstack_dashboard.json
+  logs:
+    source: openstack
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    openstack_processes: assets/saved_views/openstack_processes.json
   service_checks: assets/service_checks.json
 categories:
   - cloud
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -149,6 +156,26 @@ Vous devrez peut-être redémarrer vos services d'API Keystone, Neutron et Nova 
    ```
 
 2. [Redémarrez l'Agent][5].
+
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous pouvez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `openstack.d/conf.yaml` pour commencer à recueillir vos logs Openstack :
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: openstack
+   ```
+
+    Modifiez la valeur du paramètre `path` et configurez-le pour votre environnement. Consultez le [fichier d'exemple openstack.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+
 
 ### Validation
 

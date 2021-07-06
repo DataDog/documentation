@@ -10,7 +10,7 @@ further_reading:
     text: 使用可能なプロセッサーのリスト
   - link: /logs/logging_without_limits/
     tag: ドキュメント
-    text: 無制限のログ
+    text: Logging without Limits*
   - link: /logs/explorer/
     tag: ドキュメント
     text: ログの調査方法
@@ -205,6 +205,9 @@ Datadog で利用可能なインテグレーションパイプラインの一覧
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>
+*Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: /ja/logs/processing/processors/
 [2]: /ja/logs/explorer/facets/
