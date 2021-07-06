@@ -80,7 +80,7 @@ After the integration is successfully configured, both [Pipelines][8] and [Pipel
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.gitlab.com/ee/integration/
+[1]: https://docs.gitlab.com/ee/integration/datadog.html
 [2]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [3]: https://support.gitlab.com/
 [4]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
