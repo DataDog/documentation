@@ -58,11 +58,6 @@ The following is a list of the most important configuration settings that can be
 
 The following configuration settings can be passed in as parameters to `tracer.configure()`, or using environment variables:
 
-`enabled`
-: Setting this to `false` completely disables the instrumentation.<br/>
-**Environment variable**: `DD_TRACE_ENABLED`<br/>
-**Default**: `true`
-
 `hostname`
 : The Datadog Agent hostname.<br/>
 **Environment variable**: `DD_AGENT_HOST`<br/>
