@@ -198,6 +198,45 @@ Select the following parameters from the graphing editor: Environment (`env`), P
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
+## Configuring an Incident Analytics graph
+Incident Analytics provides you with the following measures:
+
+* Incident Count
+* Customer Impact Duration
+* Status Active Duration
+* Status Stable Duration
+* Time to Repair 
+* Time to Resolve 
+
+Incident Analytics is currently supported in the following widgets:
+
+* Timeseries
+* Top List 
+* Query Value 
+
+To configure your graph using Incident Analytics data, follow these steps:
+
+1. [Select your visualization](#select-your-visualization) (same as for Metrics)
+2. Select `Incidents` from the data source dropdown menu
+3. Select a Measure from the yellow dropdown menu
+4. Default Statistic: Count the number of Incidents
+5. Select an aggregation for the measure
+6. (Optional) Select a rollup for the measure
+7. (Optional) Use the search bar to filter the statistic down to a specific subset of Incidents
+8. (Optional) Select a facet in the pink dropdown menu to break the measure up by a group and select the limit of groups to display 
+9. [Title the graph](#create-a-title) (same as for Metrics)
+10. Save your widget
+
+**Example:** Weekly Outage Customer Impact Duration by Service
+
+1. Widget: Timeseries Line Graph
+2. Datasource: `Incidents`
+3. Measure: `Customer Impact Duration`
+4. Aggregation: `avg`
+5. Rollup: `1w`
+6. Filter: `severity:(“SEV-1” OR “SEV-2”)`
+7. Group: `Services`, limit to top 5
+
 ## Additional options
 
 ### Event overlays
