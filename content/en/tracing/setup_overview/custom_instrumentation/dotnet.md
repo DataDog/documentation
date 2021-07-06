@@ -75,7 +75,7 @@ public class ShoppingCartController : Controller
 
 ### Adding tags globally to all spans
 
-Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
+Use the `DD_TAGS` environment variable (at the Agent level) to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
 
 ```ini
 DD_TAGS=datacenter:njc,key2:value2
