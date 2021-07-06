@@ -34,7 +34,7 @@ There are two ways of installing the testing framework:
 
 2. Link your test targets with the library `DatadogSDKTesting` from the package.
 
-    {{< img src="swift_images/swift_link.png" alt="Swift Linking"  >}}
+    {{< img src="swift_images/swift_link2.png" alt="Swift Linking"  >}}
 
 3. If you run UITests, also link the app running the tests with this library.
 
