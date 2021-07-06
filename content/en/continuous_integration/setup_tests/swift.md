@@ -62,41 +62,43 @@ For UITests, environment variables need to be set only in the test target, becau
 You should set all these variables in your test target:
 
 `DD_TEST_RUNNER`
-: Enables or disables the instrumentation of tests. You should set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable<br/>
-**Default**: `(empty)`<br/>
+: Enables or disables the instrumentation of tests. You should set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (e.g. in the CI build).<br/>
+**Default**: `false`<br/>
 **Recommended**: `$(DD_TEST_RUNNER)`<br/>
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
-: Your current Datadog client token. If you dont have one, you can create one [here][3]<br/>
+: The [Datadog Client Token][3] to use to report test results.<br/>
 **Default**: `(empty)`<br/>
-**Examples**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
+**Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
 **Default**: `(Repository name)`<br/>
-**Example**: `my-marvelous-app`
+**Example**: `my-ios-app`
 
 `DD_ENV`
-: Name of the environment where tests are being run. You should set this value to $(DD_ENV) so you can use an environment variable for setting it<br/>
-**Default**: `(empty)`<br/>
+: Name of the environment where tests are being run. You should set this value to `$(DD_ENV)` so you can use an environment variable at runtime for setting it.<br/>
+**Default**: `none`<br/>
 **Recommended**: `$(DD_ENV)`<br/>
 **Examples**: `ci`, `local`
 
 `SRCROOT`
-: This is the path to the project SRCROOT environment variable. Best option is using `$(SRCROOT)` for the value, so it uses Xcode internal variable<br/>
+: This is the path to the project SRCROOT environment variable. The recommended approach is to use `$(SRCROOT)` for the value, as this is automatically set by Xcode.<br/>
 **Default**: `(empty)`<br/>
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
 `DD_ENDPOINT`
-: This is not needed if your company is using US endpoint<br/>
+: The Datadog site to upload results to.<br/>
 **Default**: `us`<br/>
-**Examples**: `eu1`
+**Possible values**: `us`, `eu1`, `us3`
 
-### Configuring your CI service
+### Collecting Git and build metadata
 
-You must also set environment variables for your CI service. Note that Git information is automatically collected if you use a simulator to perform your MacOS, iOS, or tvOS tests. However, If you do testing on physical devices, you must also set the additional Git-related environment variables. You can find a list of the CI services and the environment variables at the end of this document, in the section [CI Services](#CI-Services)
+Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (refer to the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+
+When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
 ### Running tests
 
@@ -118,7 +120,7 @@ For the following configuration settings:
 
 ### Disabling auto-instrumentation
 
-The framework automatically captures the most information possible, but for some situations or tests this can be counter-productive. You can disable some of the auto-instrumentation for all the tests by setting environment variables:
+The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables:
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
@@ -134,7 +136,7 @@ The framework automatically captures the most information possible, but for some
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, crashing tests won't be reported to the backend and won't appear as failures. If you need to disable crash handling for any of your tests, run it as a separate target, so you don't disable it for the rest of the tests.</div>
+<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash won't be reported at all, and won't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 
@@ -157,7 +159,7 @@ For Network auto-instrumentation, you can configure these additional settings:
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
-### CI Services
+## CI provider environment variables
 
 #### Jenkins
 
@@ -392,4 +394,4 @@ Additional Git configuration for physical device testing:
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 [2]: https://github.com/DataDog/dd-sdk-swift-testing/releases
-[3]:https://app.datadoghq.com/organization-settings/client-tokens
+[3]: https://app.datadoghq.com/organization-settings/client-tokens
