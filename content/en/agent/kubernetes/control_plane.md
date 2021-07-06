@@ -310,7 +310,7 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-On Elastic Kubernetes Service (EKS), AWS exposes API server metrics on a [single endpoint][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][6]. To configure the check, add the following annotations to the `default/kubernetes` service:
+On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][6]. To configure the check, add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
@@ -331,5 +331,5 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
 [3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
 [4]: https://docs.datadoghq.com/integrations/kube_scheduler/
-[5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
+[5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane.html#monitor-control-plane-metrics
 [6]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
