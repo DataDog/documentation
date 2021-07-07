@@ -51,7 +51,7 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 
 ### Gradle
 
-Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2].
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2] (without the preceding `v`): ![Maven Central][7]
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
