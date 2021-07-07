@@ -21,6 +21,7 @@ kind: integration
 maintainer: support@stardog.com
 manifest_version: 1.0.0
 metric_prefix: stardog.
+metric_to_check: stardog.dbms.mem.mapped.max
 name: stardog
 public_title: Intégration Datadog/Stardog
 short_description: Un collecteur de données Stardog pour Datadog.

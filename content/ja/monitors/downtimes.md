@@ -127,9 +127,9 @@ RRULE (つまり[繰り返しルール][1]) を使用して、ダウンタイム
 
 **注**: RRULE で期間を指定する属性はサポートされません（例: `DTSTART`、`DTEND`、`DURATION`）。
 
+
 [1]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [2]: https://icalendar.org/rrule-tool.html
-
 {{% /tab %}}
 {{< /tabs >}}
 
