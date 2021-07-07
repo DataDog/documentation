@@ -205,8 +205,8 @@ Incident Analytics provides you with the following measures:
 * Customer Impact Duration
 * Status Active Duration
 * Status Stable Duration
-* Time to Repair 
-* Time to Resolve 
+* Time to Repair (customer impact end time - created time)
+* Time to Resolve (resolved time - created time)
 
 Incident Analytics is supported in the following widgets:
 
