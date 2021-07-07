@@ -136,7 +136,7 @@ The following system properties set configuration options and have environment v
 `dd.env`
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
-**Default**: `(empty)`<br/>
+**Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
 `dd.trace.enabled`

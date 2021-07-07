@@ -74,13 +74,13 @@ The following list shows the default values for key configuration settings:
 `--dd-service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `(ProcessName)`<br/>
+**Default**: (repository name)<br/>
 **Example**: `my-dotnet-app`
 
 `--dd-env`
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
-**Default**: `(empty)`<br/>
+**Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
 `--agent-url`

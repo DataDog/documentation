@@ -53,7 +53,7 @@ The following is a list of the most important configuration settings that can be
 `ddtrace.config.env`
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
-**Default**: `(empty)`<br/>
+**Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
 The following configuration settings can be passed in as parameters to `tracer.configure()`, or using environment variables:
