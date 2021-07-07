@@ -14836,7 +14836,7 @@ paths:
       description: Get specified daily custom reports.
       operationId: GetSpecifiedDailyCustomReports
       parameters:
-      - description: The specified ID to search results for.
+      - description: Date of the report in the format `YYYY-MM-DD`.
         in: path
         name: report_id
         required: true
@@ -20073,7 +20073,7 @@ paths:
       description: Get specified monthly custom reports.
       operationId: GetSpecifiedMonthlyCustomReports
       parameters:
-      - description: The specified ID to search results for.
+      - description: Date of the report in the format `YYYY-MM-DD`.
         in: path
         name: report_id
         required: true
