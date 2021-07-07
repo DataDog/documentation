@@ -61,7 +61,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Default**: `20`
 
 `--dry-run`
-: Runs the command without the final upload step. All other checks are performed.<br/>
+: Runs the command without actually uploading the file to Datadog. All other checks are performed.<br/>
 **Default**: `false`
 
 Positional arguments
