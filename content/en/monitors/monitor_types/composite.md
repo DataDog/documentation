@@ -104,11 +104,11 @@ Datadog computes `A && B && C` in the way you would expect, but which monitor st
 | `Ok`      | False                |1 (Least severe)   |
 | `Skipped` | False                |1                  |
 
-The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of the composite monitor status. 
+The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of the composite monitor status.
 
-If `A && B` is alert-worthy, the result is the **least** severe status between A and B. 
+If `A && B` is alert-worthy, the result is the **least** severe status between A and B.
 
-If `A || B` is alert-worthy, the result is the **most** severe status between A and B. 
+If `A || B` is alert-worthy, the result is the **most** severe status between A and B.
 
 
 If `A` is `No Data`, `!A` is `No Data`
@@ -123,11 +123,17 @@ Consider a composite monitor that uses three individual monitors (`A`, `B`, `C`)
 | Monitor A   | Monitor B   | Monitor C   | Composite status | Alert triggered? |
 |-------------|-------------|-------------|------------------|------------------|
 | Unknown (T) | Warn (T)    | Unknown (T) | Warn (T)         | {{< X >}}        |
-| Skipped (F) | Ok (F)      | Unknown (T) | Ok (F)           |                  |
-| Alert (T)   | Warn (T)    | Unknown (T) | Alert (T)        | {{< X >}}        |
-| Skipped (F) | No Data (F) | Unknown (T) | Skipped (F)      |                  |
+| Alert (T)   | Warn (T)    | Unknown (T) | Warn (T)         | {{< X >}}        |
+| OK (F)      | No Data (T) | Alert (T)   | OK (F)           |                  |
 
-Two of the four scenarios trigger an alert, even though not all of the individual monitors have the most severe status (`Alert`).
+Now consider a composite monitor that uses two individual monitors (`A`, `B`) and a trigger condition `A || B`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
+
+| Monitor A   | Monitor B   | Composite status                               | Alert triggered? |
+|-------------|-------------|------------------------------------------------|------------------|
+| Alert (T)   | Warn (T)    | Alert (T)                                      | {{< X >}}        |
+| Warn (T)    | Ok (F)      | Warn (T)                                       | {{< X >}}        |
+| OK (F)      | No Data (T) | No Data (T) _(if Notify No Data is enabled)_   | {{< X >}}        |
+| OK (F)      | No Data (F) | OK (F)      _(if Notify No Data is disabled)_  |                  |
 
 ### Number of alerts
 
