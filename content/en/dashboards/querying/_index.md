@@ -224,7 +224,7 @@ To configure your graph using Incident Analytics data, follow these steps:
 6. (Optional) Select a rollup for the measure
 7. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents
 8. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display 
-9. [Title the graph](#create-a-title) (same as for Metrics)
+9. [Title the graph](#create-a-title) (same as for metrics)
 10. Save your widget
 
 **Example:** Weekly Outage Customer Impact Duration by Service
