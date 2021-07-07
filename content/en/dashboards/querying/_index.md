@@ -208,7 +208,7 @@ Incident Analytics provides you with the following measures:
 * Time to Repair 
 * Time to Resolve 
 
-Incident Analytics is currently supported in the following widgets:
+Incident Analytics is supported in the following widgets:
 
 * Timeseries
 * Top List 
