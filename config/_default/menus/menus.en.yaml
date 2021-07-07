@@ -582,16 +582,21 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_tag
     weight: 305
+  - name: Control plane monitoring
+    url: agent/kubernetes/control_plane/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_control_plane
+    weight: 306
   - name: Data collected
     url: agent/kubernetes/data_collected/
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
-    weight: 306
+    weight: 307
   - name: Operator configuration
     url: agent/kubernetes/operator_configuration
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
-    weight: 307
+    weight: 308
   - name: IoT
     url: agent/iot/
     parent: agent
