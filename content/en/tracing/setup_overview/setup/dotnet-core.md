@@ -310,7 +310,7 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
 
 {{% tab "Containers" %}}
 
-1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
