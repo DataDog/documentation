@@ -47,6 +47,7 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 {{< site-region region="gov,us3" >}}
 **Note**: `key:value` queries require that you [declare a facet][1] beforehand.
+<p></p>
 
 [1]: /logs/explorer/facets/
 
@@ -54,6 +55,7 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 {{< site-region region="us,eu" >}}
 **Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+<p></p>
 
 [1]: /logs/explorer/facets/
 
