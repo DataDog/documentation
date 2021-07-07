@@ -260,6 +260,7 @@ DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 DD_SECRET_BACKEND_COMMAND=/readsecret.sh
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
+The Datadog Cluster Agent also uses a different secret helper command. Instead of `agent secret`, as used in the Node Agent, the Cluster Agent uses `cluster-agent secret-helper`.
 
 Following the linked example, the password field is stored in the `/etc/secret-volume/password` file, and accessible through the `ENC[password]` token.
 
