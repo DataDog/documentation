@@ -75,7 +75,7 @@ For instance, if your attribute name is **url** and you want to filter on the **
 
 **Notes**:
 
-1. It is **not** required to define a facet to search on attributes and tags.
+1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the lowercase filter with your Grok parser while parsing to get case insensitive results during search.
 
 2. Searching for a facet value that contains special characters requires escaping or double quotes.
 For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
@@ -129,7 +129,7 @@ Wildcard searches work within facets with this syntax. This query returns all th
 {{< /site-region >}}
 
 {{< site-region region="us,eu" >}}
-Wildcard searches work within attributes and tags (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
 <p> </p>
 {{< /site-region >}}
 <p></p>
@@ -160,20 +160,9 @@ When searching for an attribute or tag value that contains special characters or
 
 ## Numerical values
 
-{{< site-region region="gov,us3" >}}
-Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
-<p> </p>
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-In order to search on a numerical attribute, first [add it as a facet][1]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
 For instance, retrieve all logs that have a response time over 100ms with:
 <p> </p>
-
-[1]: /logs/explorer/facets/
-
-{{< /site-region >}}
-<p></p>
 
 ```
 @http.response_time:>100
@@ -219,6 +208,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/parsing/?tab=matcher
+[2]: /logs/explorer/facets/
 [3]: /infrastructure/
 [4]: /integrations/#cat-log-collection
 [5]: /getting_started/tagging/#tags-best-practices

@@ -45,8 +45,17 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 [Indexed Logs][4] support both full-text search and `key:value` search queries.
 
+{{< site-region region="gov,us3" >}}
+
+**Note**: `key:value` queries require that you [declare a facet][5] beforehand.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+
 **Note**: `key:value` queries **do not** require that you [declare a facet][5] beforehand.
 
+{{< /site-region >}}
 ## Aggregate and measure
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
@@ -124,7 +133,13 @@ With the **Options** button, control the **number of lines** displayed in the ta
 
 {{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
+{{< site-region region="gov,us3" >}}
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that, although any attributes or tags can be added as a column, sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
+{{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1]
 
