@@ -35,7 +35,8 @@ dotnet tool install -g dd-trace
 
 ## Instrumenting tests
 
-### xUnit and NUnit
+{{< tabs >}}
+{{% tab "xUnit and NUnit" %}}
 
 To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
@@ -45,7 +46,8 @@ dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 All tests will be automatically instrumented.
 
-### MsTest V2
+{{% /tab %}}
+{{% tab "MsTest V2" %}}
 
 To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter.
 
@@ -79,6 +81,9 @@ $env:DD_TRACE_CALLTARGET_ENABLED="true"; \
   dd-trace --dd-service=my-dotnet-app --dd-env=ci -- \
   dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 {{< /tabs >}}

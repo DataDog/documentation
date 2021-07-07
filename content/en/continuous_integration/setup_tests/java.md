@@ -23,7 +23,8 @@ Supported test frameworks:
 
 ## Installing the Java tracer
 
-### Maven
+{{< tabs >}}
+{{% tab "Maven" %}}
 
 Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2] (without the preceding `v`): ![Maven Central][7]
 
@@ -49,7 +50,8 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 </profile>
 {{< /code-block >}}
 
-### Gradle
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
 Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2] (without the preceding `v`): ![Maven Central][7]
 
@@ -63,9 +65,13 @@ dependencies {
 }
 {{< /code-block >}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Instrumenting your tests
 
-### Maven
+{{< tabs >}}
+{{% tab "Maven" %}}
 
 Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent, specifiying the name of the service or library under test with the `-Ddd.service` property:
 
@@ -103,7 +109,8 @@ Run your tests as you normally do, specifying the environment where tests are be
 DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
-### Gradle
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
 Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifiying the name of the service or library under test with the `-Ddd.service` property:
 
@@ -122,6 +129,9 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
 **Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Additional configuration settings
 

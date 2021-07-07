@@ -35,7 +35,8 @@ For more information, see the [JavaScript tracer installation docs][4].
 
 ## Instrument your tests
 
-### Jest instrumentation
+{{< tabs >}}
+{{% tab "Jest" %}}
 
 1. Install the `jest-circus` test runner:
 
@@ -82,7 +83,8 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci npm test
 {{< /code-block >}}
 
-### Mocha instrumentation
+{{% /tab %}}
+{{% tab "Mocha" %}}
 
 Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your `package.json`:
 
@@ -97,6 +99,9 @@ Run your tests as you normally do, specifying the environment where test are bei
 {{< code-block lang="bash" >}}
 DD_ENV=ci npm test
 {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Additional configuration settings
 

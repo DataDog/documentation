@@ -42,7 +42,8 @@ See the [Ruby tracer installation docs][2] for more details.
 
 ## Instrumenting your tests
 
-### Cucumber
+{{< tabs >}}
+{{% tab "Cucumber" %}}
 
 The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
 
@@ -65,8 +66,8 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci bundle exec rake cucumber
 {{< /code-block >}}
 
-
-### RSpec
+{{% /tab %}}
+{{% tab "RSpec" %}}
 
 The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
 
@@ -89,6 +90,8 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci bundle exec rake spec
 {{< /code-block >}}
 
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Additional configuration settings
 
