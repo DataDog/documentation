@@ -52,7 +52,7 @@ After a metric is created, the following fields can be updated:
 
 To change the metric type or name, a new metric must be created.
 
-## Recommended usage metrics
+## Logs usage metrics
 
 {{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="Recommended Usage Metrics" style="width:80%;">}}
 
