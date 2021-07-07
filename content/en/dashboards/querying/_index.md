@@ -218,7 +218,7 @@ To configure your graph using Incident Analytics data, follow these steps:
 
 1. [Select your visualization](#select-your-visualization) (same as for metrics)
 2. Select `Incidents` from the data source dropdown menu
-3. Select a Measure from the yellow dropdown menu
+3. Select a measure from the yellow dropdown menu
      - **Default Statistic:** Count the number of Incidents
 5. Select an aggregation for the measure
 6. (Optional) Select a rollup for the measure
