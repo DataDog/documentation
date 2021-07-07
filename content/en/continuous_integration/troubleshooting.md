@@ -7,7 +7,7 @@ kind: documentation
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after it has finished.
 2. Check if you see any results in the [Pipeline Executions][1] section. In the [Pipelines][2] section, only pipelines that contain git information and that were executed in the default branch will be shown.
-3. If instrumenting Jenkins, make sure the Datadog Agent is running in the master host and available at its default location (`localhost:8126`).
+3. If instrumenting Jenkins, make sure the Datadog Agent is reachable by the Datadog Plugin.
 4. If you still don't see any results, [contact Support][3] and we'll help you troubleshoot.
 
 
@@ -17,6 +17,15 @@ kind: documentation
 2. If you are executing your tests in a container, make sure you are forwarding the required CI provider environment variables to them. Check out the [Running tests inside a container][6] section for more information.
 3. For all languages except Swift, make sure the Datadog Agent is running in the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname and/or port, make sure you run your tests with the appropriate hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_AGENT_PORT` environment variables.
 4. If you still don't see any results, [contact Support][3] and we'll help you troubleshoot.
+
+
+### I see my tests in the "Test Runs" tab, but not in the "Tests" tab
+
+This is most probably due to missing Git metadata (repository, commit and/or branch). To confirm this is the case, open a test execution on the [Test Runs][4] section, and check that there is no `git.repository_url`, `git.commit.sha` or `git.branch`. If these tags are not populated, nothing will show on the [Tests][5] section.
+
+1. Tracers will first try to fetch Git metadata using the local `.git` folder by executing `git` commands. This is the preferred approach, as it will populate all Git metadata fields, including commit message, author and committer information.
+2. If the `.git` folder is not present, or the `git` binary is not installed, tracers will fallback to use the environment variables set by the CI provider (as listed in the [Running tests inside a container][6] section) to collect Git information. This will populate, at least, repository, commit hash and branch information.
+3. If no CI provider environment variables are found, tests results will be sent with no Git metadata.
 
 
 [1]: https://app.datadoghq.com/ci/pipeline-executions
