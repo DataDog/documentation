@@ -28,7 +28,7 @@ There are three ways to monitor your applications: [API tests][1] to monitor the
 
 {{< img src="synthetics/synthetics_home.png" alt="Synthetic Monitoring home page" >}}
 
-Follow the sections below to learn how to set up your first Synthetic test with Datadog.
+To set up your first Synthetic test with Datadog, follow the sections below.
 
 ## Prerequisites
 
