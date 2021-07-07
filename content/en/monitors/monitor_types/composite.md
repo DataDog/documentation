@@ -149,7 +149,7 @@ Here's an example cycle for the composite monitor `A && B && C`:
 
 | Source | Monitor A | Monitor B | Monitor C | Composite status | Alert triggered? |
 |--------|-----------|-----------|-----------|------------------|------------------|
-| web04  | Unknown   | Warn      | Alert     | Alert            | {{< X >}}        |
+| web04  | Unknown   | Warn      | Alert     | Warn             | {{< X >}}        |
 | web05  | Ok        | Ok        | Alert     | Ok               |                  |
 
 ### Common reporting sources
