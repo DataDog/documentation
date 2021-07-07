@@ -25,7 +25,7 @@ Supported test frameworks:
 
 ### Maven
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2]:
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2] (without the preceding `v`): ![Maven Central][7]
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
@@ -171,3 +171,4 @@ For example, to enable `OkHttp3` client request integration, add `-Ddd.integrati
 [4]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 [5]: /tracing/setup_overview/setup/java/?tab=containers#configuration
 [6]: /tracing/setup_overview/compatibility_requirements/java
+[7]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
