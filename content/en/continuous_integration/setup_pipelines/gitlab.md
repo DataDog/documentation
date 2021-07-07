@@ -35,13 +35,16 @@ sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
 For installations from source:
 
 {{< code-block lang="shell" >}}
-sudo -u git -H bundle exec rails runner -e production "Feature.enable(:datadog_ci_integration)"
+sudo -u git -H bundle exec rails runner \
+  -e production \
+  "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
 For [Kubernetes deployments][5]:
 
 {{< code-block lang="shell" >}}
-kubectl exec -it <task-runner-pod-name> -- /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
+kubectl exec -it <task-runner-pod-name> -- \
+  /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
 ## Configuring the Datadog integration

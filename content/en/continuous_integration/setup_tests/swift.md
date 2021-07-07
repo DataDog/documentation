@@ -107,7 +107,11 @@ When running tests in a simulator, full Git metadata is collected using the loca
 After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs will be instrumented automatically. You can pass your environment variables when running your tests in the CI, e.g:
 
 {{< code-block lang="bash" >}}
-DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild -project "MyProject.xcodeproj" -scheme "MyScheme" -destination "platform=macOS,arch=x86_64" test
+DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
 {{< /code-block >}}
 
 ### UI tests

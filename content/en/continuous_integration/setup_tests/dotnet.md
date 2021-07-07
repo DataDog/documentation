@@ -54,7 +54,9 @@ You will also need to configure the tracer to use Call Target instrumentation by
 For example:
 
 {{< code-block lang="bash" >}}
-DD_TRACE_CALLTARGET_ENABLED=true dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+DD_TRACE_CALLTARGET_ENABLED=true dd-trace \
+  --dd-service=my-dotnet-app --dd-env=ci -- \
+  dotnet test
 {{< /code-block >}}
 
 All tests will be automatically instrumented.
