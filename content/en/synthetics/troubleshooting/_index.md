@@ -16,6 +16,12 @@ further_reading:
 
 If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
+## API tests
+
+### Variations in network timings
+
+If a sudden spike or an overall increase in API test [timing metrics][12] occurs, this usually indicates a bottleneck or delay in the request. See this [guide][13] to get a better understanding of each API test timing and their variations.
+
 ## Browser tests
 
 ### Recording
@@ -86,12 +92,6 @@ This means that the user locator defined for that step is either targeting sever
 To fix it, go edit your recording, open the advanced options of the step that is having the issue, go to the page the step is testing, and click on `Test`. This highlights the located element or prints an error message. You can then go ahead and fix your user locator to have it match a single element of the page:
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true"  width="100%" >}}
-
-## API tests
-
-### Variations in network timings
-
-If a sudden spike or an overall increase in API test [timing metrics][12] occurs, this usually indicates a bottleneck or delay in the request. See this [guide][13] to get a better understanding of each API test timing and their variations.
 
 ## API and browser tests
 
