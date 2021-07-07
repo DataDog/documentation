@@ -91,7 +91,7 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 ### Variations in network timings
 
-If a sudden spike or an overall increase in API test [timing metrics][12] occurs, this usually indicates a bottleneck or delay in the request. Please see this [guide][13] to get a better understanding of each API test timing and their variations.
+If a sudden spike or an overall increase in API test [timing metrics][12] occurs, this usually indicates a bottleneck or delay in the request. See this [guide][13] to get a better understanding of each API test timing and their variations.
 
 ## API and browser tests
 

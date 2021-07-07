@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "https://docs.datadoghq.com/synthetics/metrics/#api-tests"
   tag: "Documentation"
-  text: "Synthetics API test timing metrics"
+  text: "Synthetics API test metrics"
 ---
 
 
@@ -23,7 +23,7 @@ The metrics collected by Synthetics measure the following timings :
 
 **1. Redirection time**
 
-The `synthetics.http.redirect.time` metric measures the total time spent in redirects. All other network timings (DNS resolution, TCP connection, etc.) correspond to the last request. For example, if an HTTP test (that has the **Follow Redirects** option turned on) first loads page A in 35 ms in total, which redirects to page B that loads in 40ms in total, which redirects to page C, the redirect timing equals 35 + 40 = 75 ms. The load of page C is then split among the various timings (DNS resolution, TCP connection, etc.).
+The `synthetics.http.redirect.time` metric measures the total time spent in redirects. All other network timings (DNS resolution, TCP connection, etc.) correspond to the last request. For example, if an HTTP test (that has the **Follow Redirects** option turned on) first loads page A in `35 ms` in total, which redirects to page B that loads in `40 ms` in total, which redirects to page C, the redirect timing equals `35 ms + 40 ms = 75 ms`. The load of page C is then split among the various timings (DNS resolution, TCP connection, etc.).
 
 The `synthetics.http.redirect.time` metric is only measured if redirects occur during the Synthetics HTTP test run. 
 
@@ -67,7 +67,7 @@ In case of any redirections, the download time only corresponds to the last requ
 
 **7. Total response time**
 
-The `*.response.time`  measures the total time between the moment Synthetics starts the request and the moment it finishes it. The response time is the sum of all network timings. For instance for an HTTP test with no redirections on an HTTPS endpoint, `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time+synthetics.http.ssl.time + synthetics.http.donwload.time`.
+The `*.response.time`  measures the total time between the moment Synthetics starts the request and the moment it finishes it. The response time is the sum of all network timings. For instance for an HTTP test with no redirections on an HTTPS endpoint, `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time+synthetics.http.ssl.time + synthetics.http.download.time`.
 
 ## Timing variations
  
@@ -78,11 +78,9 @@ Variations in API tests network timing metrics can occur when there is a bottlen
 - If the impacted Synthetics test is running from multiple locations, whether the variation is localised to a single location, or if it is widespread
 - If the variation only occurs for a single URL, domain, subdomain, or if it is impacting all tests.
 
-In many cases, timing can be affected by increase in network latency due to network load
 
-Common causes by timing
 
-For each timing metric we measure, variations can usually be explained by several factors.
+For each timing metric we measure, variations can usually be explained by several factors:
 
 **Redirection time:** Given this timing is the sum of all redirects in a request, variations at any stage of the HTTP request, from the DNS resolution to the download can noticeably increase the redirection timing. For example any delay in DNS resolution would impact the redirection timing as redirections require API tests to resolve multiple domains.
 
@@ -90,7 +88,7 @@ For each timing metric we measure, variations can usually be explained by severa
 
 **TCP connection time:** Variations of the TCP handshake can be due to the load of the network and server, the size of the request and response messages, and the distance between the Synthetics managed/private location and the server.
 
-**SSL handshake time:** The SSL handshake time can vary depending on the load of the server, as SSL handshakes are usually CPU intensive, but also due to the load of the network and the distance between the Synthetics managed/private location and the server. Issues with CDN also often result in increased SSL handshake time,
+**SSL handshake time:** The SSL handshake time can vary depending on the load of the server, as SSL handshakes are usually CPU intensive, but also due to the load of the network and the distance between the Synthetics managed/private location and the server. Issues with CDN also often result in increased SSL handshake time.
 
 **Time To first Byte :** Variations of the Time to First Byte can be due to the network and server load, as well as the distance between the Synthetics managed/private locations and the server. For example a higher network load or the re-routing of traffic caused by an unavailable CDN can negatively impact the Time to First Byte timing.
 
