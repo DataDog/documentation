@@ -60,7 +60,7 @@ For example:
 
 {{< code-block lang="bash" >}}
 DD_TRACE_CALLTARGET_ENABLED=true dd-trace \
-  --dd-service=my-dotnet-app --dd-env=ci -- \
+  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- \
   dotnet test
 {{< /code-block >}}
 
@@ -68,17 +68,17 @@ DD_TRACE_CALLTARGET_ENABLED=true dd-trace \
 {{% tab "CMD" %}}
 
 {{< code-block lang="bash" >}}
-SET DD_TRACE_CALLTARGET_ENABLED=true && \
-  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- \
+SET DD_TRACE_CALLTARGET_ENABLED=true && ^
+  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- ^
   dotnet test
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PowerShell" %}}
 
-{{< code-block lang="bash" >}}
-$env:DD_TRACE_CALLTARGET_ENABLED="true"; \
-  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- \
+{{< code-block lang="powershell" >}}
+$env:DD_TRACE_CALLTARGET_ENABLED="true"; `
+  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- `
   dotnet test
 {{< /code-block >}}
 
