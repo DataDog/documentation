@@ -28,13 +28,13 @@ With **end-to-end testing in production and CI environments**, your development 
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: `HTTP`, `TCP`, `SSL`, `DNS`, and `ICMP`. 
+API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][8], [SSL test][9], [TCP test][10], [DNS test][11], and [ICMP test][12]. 
 
 {{< img src="synthetics/api_test.png" alt="API tests"  style="width:100%;">}}
 
 ## Record browser tests
 
-Use [Synthetic browser tests][3] to record end-to-end tests and monitor how your customers experience your webpages from around the world.
+Use [Synthetic browser tests][3] to monitor how your customers experience your webpages from around the world with end-to-end tests.
 
 {{< img src="synthetics/browser_test.gif" alt="Browser tests"  style="width:100%;">}}
 
@@ -58,7 +58,7 @@ Use the [out of the box integration between Synthetic tests and APM traces][6] t
 
 ## Ready to start?
 
-See [Getting Started with Synthetic Monitoring][7] for instructions on creating your first Synthetic test and monitoring your web applications. Then, start exploring API tests with [HTTP test][8], [SSL test][9], [TCP test][10], [DNS test][11], or [ICMP test][12].
+See [Getting Started with Synthetic Monitoring][7] for instructions on creating your first Synthetic test and monitoring your web applications. Then, explore [Getting Started with Private Locations][13] for instructions on creating your private location and running Synthetic tests with your private location.
 
 ## Further Reading
 
@@ -76,3 +76,4 @@ See [Getting Started with Synthetic Monitoring][7] for instructions on creating 
 [10]: /synthetics/api_tests/ssl_tests
 [11]: /synthetics/api_tests/dns_tests
 [12]: /synthetics/api_tests/icmp_tests
+[13]: /getting_started/synthetics/private_location
