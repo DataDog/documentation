@@ -59,7 +59,7 @@ Datadog.configure do |c|
 end
 {{< /code-block >}}
 
-Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci bundle exec rake cucumber
@@ -83,7 +83,7 @@ Datadog.configure do |c|
 end
 {{< /code-block >}}
 
-Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci bundle exec rake spec

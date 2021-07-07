@@ -32,7 +32,7 @@ To upload your JUnit XML test reports to Datadog, run the following command, spe
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
-You will need to specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (e.g. `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
+You will need to specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
@@ -50,7 +50,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `my-api-service`
 
 `--tags`
-: Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (e.g. `team:backend,priority:high`).
+: Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).
 **Environment variable**: `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `team:backend`<br/>

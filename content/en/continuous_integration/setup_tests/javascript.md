@@ -76,7 +76,7 @@ module.exports = require('jest-environment-node')
 
     **Note**: `jest-environment-node` and `jest-environment-jsdom` are installed together with `jest`, so they do not normally appear in your `package.json`. If you've extracted any of these libraries in your `package.json`, make sure the installed version is the same as the one of `jest`.
 
-Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci npm test
@@ -92,7 +92,7 @@ Add `--require dd-trace/init` to however you normally run your `mocha` tests, fo
 },
 {{< /code-block >}}
 
-Run your tests as you normally do, specifying the environment where test are being run (e.g. `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci npm test

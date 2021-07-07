@@ -62,7 +62,7 @@ For UITests, environment variables need to be set only in the test target, becau
 You should set all these variables in your test target:
 
 `DD_TEST_RUNNER`
-: Enables or disables the instrumentation of tests. You should set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (e.g. in the CI build).<br/>
+: Enables or disables the instrumentation of tests. You should set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
 **Default**: `false`<br/>
 **Recommended**: `$(DD_TEST_RUNNER)`<br/>
 **Example**: `true`
