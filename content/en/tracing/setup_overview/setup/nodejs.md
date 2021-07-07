@@ -234,6 +234,11 @@ Interval (in milliseconds) at which the tracer submits traces to the Agent.
 **Default**:  `false`<br>
 Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.
 
+: **Environment Variable**: `DD_SERVICE_MAPPING`<br>
+**Default**: `null`<br>
+**Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
+
 `experimental`
 : **Default**: `{}`<br>
 Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][4] to learn more about the available experimental features.
