@@ -237,7 +237,7 @@ Whether to enable capturing runtime metrics. Port `8125` (or configured with `do
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
 **Default**: `null`<br>
 **Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
-Provide service names for each plugin. Accepts comma separated with or without spaces.
+Provide service names for each plugin. Accepts comma separated values with or without spaces.
 
 `experimental`
 : **Default**: `{}`<br>
