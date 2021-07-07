@@ -53,11 +53,35 @@ You will also need to configure the tracer to use Call Target instrumentation by
 
 For example:
 
+{{< tabs >}}
+{{% tab "Bash" %}}
+
 {{< code-block lang="bash" >}}
 DD_TRACE_CALLTARGET_ENABLED=true dd-trace \
   --dd-service=my-dotnet-app --dd-env=ci -- \
   dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CMD" %}}
+
+{{< code-block lang="bash" >}}
+SET DD_TRACE_CALLTARGET_ENABLED=true && \
+  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- \
+  dotnet test
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "PowerShell" %}}
+
+{{< code-block lang="bash" >}}
+$env:DD_TRACE_CALLTARGET_ENABLED="true"; \
+  dd-trace --dd-service=my-dotnet-app --dd-env=ci -- \
+  dotnet test
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 All tests will be automatically instrumented.
 
