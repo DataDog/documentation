@@ -29,7 +29,7 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
-  <id>ci-app</id>
+  <id>dd-civisibility</id>
   <activation>
     <activeByDefault>false</activeByDefault>
   </activation>
@@ -100,7 +100,7 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
 Run your tests as you normally do, specifying the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci mvn clean verify -P ci-app
+DD_ENV=ci mvn clean verify -P dd-civisibility
 {{< /code-block >}}
 
 ### Gradle
@@ -109,16 +109,16 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
-    if(project.hasProperty("ci-app")) {
-        jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true", "-Ddd.integration.testng.enabled=true"]
-        }
+  if(project.hasProperty("dd-civisibility")) {
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true", "-Ddd.integration.testng.enabled=true"]
+  }
 }
 {{< /code-block >}}
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
-DD_ENV=ci ./gradlew cleanTest test -Pci-app --rerun-tasks
+DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
 **Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
