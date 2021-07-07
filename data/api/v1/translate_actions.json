@@ -1061,7 +1061,7 @@
   "SubmitTraces": {
     "description": "Datadog’s APM allows you to collect performance metrics by tracing your code\nto determine which parts of your application are slow or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API.\nWe provide some [official libraries](https://docs.datadoghq.com/tracing/#instrument-your-application)\nthat simplify sending metrics to the Datadog Agent, however you may want to\ninteract directly with the API to instrument applications that cannot use\nthe libraries or are written in languages that don’t yet have an official\nDatadog Tracing library.",
     "summary": "Send traces",
-    "request_description": "Traces can be sent as an array of traces:\n\n    [ trace1, trace2, trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span, span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`, `resource`...\n\n[Learn more about the APM & Continuous Profiler terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\n**Note:** Each span within a trace should use the same `trace_id`.\nHowever, `trace_id` and `span_id` must have different values.",
+    "request_description": "Traces can be sent as an array of traces:\n\n    [ trace1, trace2, trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span, span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`, `resource`...\n\n[Learn more about the APM & Distributed Tracing terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\n**Note:** Each span within a trace should use the same `trace_id`.\nHowever, `trace_id` and `span_id` must have different values.",
     "request_schema_description": "An array of traces."
   },
   "SubmitLog": {
