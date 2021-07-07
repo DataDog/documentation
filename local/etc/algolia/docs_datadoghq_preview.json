@@ -59,7 +59,7 @@
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
             },
-            "tags": ["docs"],
+            "tags": ["rbac_permissions"],
             "page_rank": 110
         },
         {
