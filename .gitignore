@@ -38,6 +38,7 @@ package-lock.json
 # Ignoring all integrations file
 content/en/integrations/*.md
 data/integrations/
+content/en/integrations/guide/amazon_cloudformation.md
 !data/integrations/docker_daemon.yaml
 !content/en/integrations/_index.md
 !content/en/integrations/cloudability.md
@@ -54,7 +55,6 @@ data/integrations/
 !content/en/integrations/kubernetes_audit_logs.md
 !content/en/integrations/apigee.md
 !content/en/integrations/snyk.md
-!content/en/integrations/guide/amazon_cloudformation.md
 
 # Ignore the marketplace images that get pulled
 static/images/marketplace
