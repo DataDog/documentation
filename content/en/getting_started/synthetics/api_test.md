@@ -11,6 +11,9 @@ further_reading:
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
       text: 'Learn about private locations'
+    - link: '/synthetics/ci'
+      tag: 'Documentation'
+      text: 'Learn how to run Synthetic tests in your CI/CD process'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -40,7 +43,7 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
 
 6. Click **Test URL** to trigger a sample test run.
 
-{{< img src="getting_started/synthetics/api-test-config-2.jpg" alt="API test configuration"  style="width:60%;">}}
+{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration"  style="width:100%;">}}
 
 ### Define assertions
 
@@ -48,11 +51,11 @@ Clicking **Test URL** automatically populates basic assertions about your endpoi
 
 In this example, three default assertions populate after triggering the sample test run:
 
-{{< img src="getting_started/synthetics/assertions-example.png" alt="Browser test failure"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions"  style="width:100%;">}}
 
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview or click **New Assertion**. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.gif" alt="Browser test failure"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/api-test-configuration.mp4" alt="Example API test configuration"  video="true"  >}}
 
 ### Select locations 
 
@@ -64,7 +67,9 @@ For more information on how to set up private locations, see [Getting Started wi
 
 ### Specify test frequency
 
-Select the frequency of your test runs.
+Select the frequency of your test runs. You can run tests on-demand and as part of your continuous integration pipelines. 
+
+For more information on CI/CD testing, see [Synthetic CI/CD Testing][6].
 
 ### Define alert conditions
 
@@ -84,7 +89,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][6] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][7] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
 
 You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
@@ -92,16 +97,16 @@ When you're ready to run your test, click **Save Test**.
 
 ## Create a multistep API test
 
-[Multistep API tests][7] run HTTP requests in sequence, allowing you to configure [HTTP tests][2] on complex backend systems. 
+[Multistep API tests][8] run HTTP requests in sequence, allowing you to configure [HTTP tests][2] on complex backend systems. 
 
 ### Configure the test
 
-When you create a [Multistep API test][7], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
+When you create a [Multistep API test][8], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
 
 1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
 2. In the top right corner, click the **New Test** button.
-3. Select **[Multistep API test][8]**.
-4. Name, tag and select locations for your [Multistep API test][8] like you would with a single [API test][1].
+3. Select **[Multistep API test][9]**.
+4. Name, tag and select locations for your [Multistep API test][9] like you would with a single [API test][1].
 5. In **Define steps**, click **Create Your First Step**. 
 
     - Add a name to your step.
@@ -122,9 +127,9 @@ The API test and Multistep API test detail pages display an overview of the test
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
-{{< img src="getting_started/synthetics/api-test-failure.png" alt="API test failure"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-2.png" alt="API test failure"  style="width:100%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][9], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
+With Datadog's [APM integration with Synthetic Monitoring][10], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
 ## Further Reading
 
@@ -135,7 +140,8 @@ With Datadog's [APM integration with Synthetic Monitoring][9], access the root c
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://app.datadoghq.com/synthetics/create
 [5]: /getting_started/synthetics/private_location
-[6]: /integrations/#cat-notification
-[7]: /synthetics/multistep
-[8]: https://app.datadoghq.com/synthetics/multi-step/create
-[9]: /synthetics/apm/
+[6]: /synthetics/ci
+[7]: /integrations/#cat-notification
+[8]: /synthetics/multistep
+[9]: https://app.datadoghq.com/synthetics/multi-step/create
+[10]: /synthetics/apm/
