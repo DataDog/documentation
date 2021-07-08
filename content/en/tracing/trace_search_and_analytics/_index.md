@@ -23,7 +23,7 @@ All ingested traces are passed through [custom retention filters][3] that you ca
 
 Once indexed through a custom retention filter, traces are available for use in Search and Analytics, and they are retained for 15 days.
 
-When indexed through the intelligent retention filter, traces are available for use in Search (not Analytics, unless a custom filter has also retained them), and they are retained for 30 days.
+When indexed through the intelligent retention filter, traces are available for use in Search (not Analytics), and they are retained for 30 days.
 
 The Datadog app shows a 'Retained traces' indicator beside the time selector whenever you search [indexed spans][5]:
 
@@ -131,9 +131,7 @@ Retained Analytics is available from the same page as Live Analytics.  To switch
 
 {{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Historical Analytics" >}}
 
-All spans indexed by _custom_ retention filters (not the intelligent retention filter) or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
-
-**Note:** As of October 20, 2020 Tracing without Limits replaced App Analytics as a more flexible way to ingest 100% of your traces and retain the ones important to your business.
+All spans indexed by _custom_ retention filters (not the intelligent retention filter) are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
 You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][8] page within the Datadog app to create or modify your own filters.
 
