@@ -11,6 +11,9 @@ further_reading:
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
       text: 'Learn about private locations'
+    - link: '/synthetics/ci'
+      tag: 'Documentation'
+      text: 'Learn how to run Synthetic tests in your CI/CD process'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -23,7 +26,7 @@ further_reading:
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test"  style="width:90%;" >}}
+{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test"  style="width:100%;" >}}
 
 ### Configure your test details
 
@@ -43,13 +46,13 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
 
-
 For more information on how to set up private locations, see [Getting Started with Private Locations][3].
-
 
 #### Specify test frequency
 
-Select the frequency that your test runs.
+Select the frequency that your test runs. You can run tests on-demand and as part of your continuous integration pipelines. 
+
+For more information on CI/CD testing, see [Synthetic CI/CD Testing][4].
 
 #### Define alert conditions
 
@@ -61,9 +64,7 @@ You can specify the number of consecutive failures that should happen before con
 Retry test 2 times after 300 ms in case of failure
 ```
 
-
 You can also configure your test to only trigger a notification when your application goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
-
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
@@ -71,21 +72,17 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][4] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
-
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][5] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
 
 You can set your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
-{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Configured browser test"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true"  >}}
 
 When you're ready to record your test, click **Save Details & Record Test**.
 
 ### Create recording
 
-
-Once your test configuration has saved, Datadog prompts you to download and install the [Datadog test recorder][5] Chrome extension. 
-
+Once your test configuration has saved, Datadog prompts you to download and install the [Datadog test recorder][6] Chrome extension. 
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 
@@ -103,7 +100,7 @@ The example below demonstrates how to map a user journey from adding an item to 
 
 It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.
 
-{{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:90%;">}}
+{{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:100%;">}}
 
 **Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you will receive an email notification when the test fails and recovers.
 
@@ -111,13 +108,9 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 The Browser Test details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][6], select a failed test result and start by reviewing screenshots, including the ones leading up to the failed step. You can also review potential **[Errors & Warnings][7]**, **[Resources][8]** as well as **[Core Web Vitals][9]** to diagnose the issue. With Datadog's [APM integration with Synthetic Monitoring][10], you also have the ability to look into the traces that are generated in your backend by the test runs from the **Traces** tab.
+To troubleshoot a [failed test][7], select a failed test result and start by reviewing screenshots, including the ones leading up to the failed step. You can also review potential **[Errors & Warnings][8]**, **[Resources][9]** as well as **[Core Web Vitals][10]** to diagnose the issue. 
 
-In the example below, the test failed as the result of a server timeout.
-
-{{< img src="getting_started/synthetics/browser-test-failure.png" alt="Browser test failure"  style="width:100%;">}}
-
-In this case, the **Errors & Warnings** tab shows that the server responded with a `504` when the browser tried loading the `https://api.shopist.io/checkout.json` resource, which caused the browser test to fail.
+With Datadog's [APM integration with Synthetic Monitoring][11], you also have the ability to look into the traces that are generated in your backend by the test runs from the **Traces** tab.
 
 ## Further Reading
 
@@ -127,10 +120,11 @@ In this case, the **Errors & Warnings** tab shows that the server responded with
 [1]: /synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: /getting_started/synthetics/private_location
-[4]: /integrations/#cat-notification
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[6]: /synthetics/browser_tests/test_results#test-failure
-[7]: /synthetics/browser_tests/test_results#errors
-[8]: /synthetics/browser_tests/test_results#resources
-[9]: /synthetics/browser_tests/test_results#page-performance
-[10]: /synthetics/apm/
+[4]: /synthetics/ci
+[5]: /integrations/#cat-notification
+[6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[7]: /synthetics/browser_tests/test_results#test-failure
+[8]: /synthetics/browser_tests/test_results#errors
+[9]: /synthetics/browser_tests/test_results#resources
+[10]: /synthetics/browser_tests/test_results#page-performance
+[11]: /synthetics/apm/

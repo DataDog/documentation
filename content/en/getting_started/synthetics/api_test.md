@@ -40,6 +40,7 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
     - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
     - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+    - You can create global variables and locally defined variables in your test options. If you need to use credentials or want to inject a dynamically defined timestamp in your API call, click **Create Local Variable**.
 
 6. Click **Test URL** to trigger a sample test run.
 
@@ -56,6 +57,8 @@ In this example, three default assertions populate after triggering the sample t
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview or click **New Assertion**. 
 
 {{< img src="getting_started/synthetics/api-test-configuration.mp4" alt="Example API test configuration"  video="true"  >}}
+
+**Note**: You can also leverage variables in your assertions.
 
 ### Select locations 
 
@@ -113,7 +116,7 @@ When you create a [Multistep API test][8], you can define a sequence of HTTP req
     - Specify the URL you want to query. 
     - Select **Advanced Options** to add custom request headers, authentication credentials, body content, or cookies.
     - Click **Test URL**. 
-    - Optionally, add new assertions, define execution parameters, and extract variables from the response content.
+    - Optionally, add new assertions, define execution parameters, and extract variables from the response content. When you extract a variable from the response content, remember to re-inject the variable in subsequent steps.
     - Click **Save Step**.
 
 6. Click **Add Another Step** to add another step. By default, you can create up to ten steps. 
