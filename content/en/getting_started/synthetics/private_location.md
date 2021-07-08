@@ -27,9 +27,9 @@ You can also use private locations to:
 - **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic CI/CD Testing][1].
 - **Compare the application performance** from inside and outside your internal network.
 
-Private locations are Docker containers that you can install anywhere inside your private network. Once you've created and installed your private location, you can assign [Synthetic tests][2] to your private location just like you would with a managed location. 
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][2] on Docker Hub.
 
-Your private locations test results display identically to your managed location test results. You can access the [private location worker][3] on Docker Hub.
+Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location. Your private locations test results display identically to your managed location test results. 
 
 {{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign Synthetic test to private location"  style="width:100%;">}}
 
@@ -78,8 +78,8 @@ You are now able to use your new private location just like a managed location t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/ci/
-[2]: /getting_started/synthetics/api_test/
-[3]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[2]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/list
 [6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
