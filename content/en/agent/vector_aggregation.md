@@ -20,7 +20,6 @@ to Vector which will aggregate data from multiple upstream Agents:
 
 This scenario differs from using a [proxy][2] since Vector is able to process data before sending
 it to Datadog and other destinations. Vector capabilities include, among others:
-others:
 
 * [Log parsing, structuring, and enrichment][3]
 * Cost reduction through [sampling][4]
@@ -39,6 +38,7 @@ values is to use the [Vector Remap Language][3].
 ### Agent configuration
 To send logs to Vector, update the Agent configuration file, `datadog.yaml`.
 Only the logs data type is currently supported. Update the following values in the `datadog.yaml` file:
+
 ```yaml
 logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
@@ -53,6 +53,7 @@ See the official [Vector documentation][11] for all available configuration para
 all transforms that can be applied to logs while they are processed by Vector.
 
 Here is a configuration example that adds a tag to every log using the Vector Remap Language:
+
 ```yaml
 sources:
   datadog_agents:
@@ -73,11 +74,8 @@ sinks:
     inputs:
        - add_tags
     default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
-    compression: gzip
     encoding:
       codec: json
-    healthcheck:
-      enabled: true
 ```
 
 ### Using Kubernetes
@@ -98,7 +96,7 @@ Vector provides an [official chart for aggregating data][13] that comes with a D
 logs source preconfigured. For more information about installing Vector using Helm,
 see to the [official Vector documentation][14].
 
-To ultimately sent logs to Datadog, a `datadog_logs` sink need to be added to the Vector
+To ultimately send logs to Datadog, a `datadog_logs` sink need to be added to the Vector
 configuration. Vector's chart supports adding additional sinks in the `values.yaml` file.
 
 A sample `datadog_logs` sink should ideally include a `remap` transform
@@ -109,7 +107,7 @@ transforms:
   add_tags:
     type: remap
     inputs:
-      - datadog_logs # It's the name of the preconfigured Datadog source
+      - datadog_logs # The name of the preconfigured Datadog source
     source: |
       .ddtags = .ddtags + ",sender:vector"
 
@@ -128,10 +126,10 @@ sinks:
 
 ## Manipulating Datadog logs with Vector
 
-Logs sent to Vector can benefit from the full capabilities of Vector, including [VRL][3] manipulation.
+Logs sent to Vector can benefit from the full capabilities of Vector, including [Vector Remap Language][3] for fast and safe log transformations.
 When received by Vector, logs sent by the Datadog Agent are structured using the expected schema. When
 submitting logs directly to the Datadog API, please refer to the [API documentation][15]
-for a complete schema descriptions.
+for a complete schema description.
 
 Logs collected by Vector from other sources can be [fully enriched][8]. VRL can be used to adjust those logs
 to fill relevant fields according to the expected schema. 
