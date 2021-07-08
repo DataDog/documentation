@@ -170,10 +170,10 @@ Datadog.initialize(
 
     let span = Global.sharedTracer.startSpan(operationName: "network request")
 
-    let headersWritter = HTTPHeadersWriter()
-    Global.sharedTracer.inject(spanContext: span.context, writer: headersWritter)
+    let headersWriter = HTTPHeadersWriter()
+    Global.sharedTracer.inject(spanContext: span.context, writer: headersWriter)
 
-    for (headerField, value) in headersWritter.tracePropagationHTTPHeaders {
+    for (headerField, value) in headersWriter.tracePropagationHTTPHeaders {
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
