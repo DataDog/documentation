@@ -152,12 +152,12 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 
 **Global tags**
 : A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance<br/>
-**Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`<br/>
 **Example**: `key1:value1,key2:${SOME_ENVVAR},${OTHER_ENVVAR}:value3`
 
 **Global job tags**
-: A comma-separated list of regexes to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.
-**Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`
+: A comma-separated list of regexes to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.<br/>
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
 **Example**: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3`
 
 ## Visualize pipeline data in Datadog
