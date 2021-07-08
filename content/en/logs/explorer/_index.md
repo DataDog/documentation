@@ -45,8 +45,21 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 [Indexed Logs][4] support both full-text search and `key:value` search queries.
 
-**Note**: `key:value` queries require that you [declare a facet][5] beforehand.
+{{< site-region region="gov,us3" >}}
+**Note**: `key:value` queries require that you [declare a facet][1] beforehand.
+<p></p>
 
+[1]: /logs/explorer/facets/
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+<p></p>
+
+[1]: /logs/explorer/facets/
+
+{{< /site-region >}}
 ## Aggregate and measure
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
@@ -118,13 +131,19 @@ Lists displaying individual logs and lists displaying aggregates of logs have sl
 For a list of individual logs, choose which information of interest to display as columns. **Manage the columns** of the table using either:
 
 - The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
-- The **facet panel** the the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
+- The **facet panel** on the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
 With the **Options** button, control the **number of lines** displayed in the table per log event.
 
 {{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
+{{< site-region region="gov,us3" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that, although any attributes or tags can be added as a column, sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
+{{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1]
 
