@@ -26,7 +26,7 @@ Supported test frameworks:
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][2] (without the preceding `v`): ![Maven Central][7]
+Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
@@ -34,11 +34,9 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
   <activation>
     <activeByDefault>false</activeByDefault>
   </activation>
-
   <properties>
     <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar</dd.java.agent.arg>
   </properties>
-
   <dependencies>
     <dependency>
         <groupId>com.datadoghq</groupId>
@@ -50,21 +48,26 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 </profile>
 {{< /code-block >}}
 
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][2] (without the preceding `v`): ![Maven Central][7]
+Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
     ddTracerAgent
 }
-
 dependencies {
     ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
 }
 {{< /code-block >}}
 
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -73,7 +76,9 @@ dependencies {
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] to use Datadog Java agent, specifiying the name of the service or library under test with the `-Ddd.service` property:
+Configure the [Maven Surefire Plugin][1] and/or the [Maven Failsafe Plugin][2] to use Datadog Java agent, specifiying the name of the service or library under test with the `-Ddd.service` property:
+
+* If using the [Maven Surefire Plugin][1]:
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
@@ -84,6 +89,8 @@ Configure the [Maven Surefire Plugin][3] and/or the [Maven Failsafe Plugin][4] t
   </configuration>
 </plugin>
 {{< /code-block >}}
+
+* If using the [Maven Failsafe Plugin][2]:
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
@@ -109,6 +116,9 @@ Run your tests as you normally do, specifying the environment where tests are be
 DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
+
+[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
+[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
@@ -164,9 +174,9 @@ The following system properties set configuration options and have environment v
 **Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
 **Default**: `8126`
 
-All other [Datadog Tracer configuration][5] options can also be used.
+All other [Datadog Tracer configuration][2] options can also be used.
 
-**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][6] table to create your custom setup for your integration tests.
+**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][3] table to create your custom setup for your integration tests.
 
 For example, to enable `OkHttp3` client request integration, add `-Ddd.integration.okhttp-3.enabled=true` to your setup.
 
@@ -176,9 +186,5 @@ For example, to enable `OkHttp3` client request integration, add `-Ddd.integrati
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/setup_tests/agent/
-[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[3]: https://maven.apache.org/surefire/maven-surefire-plugin/
-[4]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-[5]: /tracing/setup_overview/setup/java/?tab=containers#configuration
-[6]: /tracing/setup_overview/compatibility_requirements/java
-[7]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+[2]: /tracing/setup_overview/setup/java/?tab=containers#configuration
+[3]: /tracing/setup_overview/compatibility_requirements/java

@@ -50,7 +50,7 @@ yarn add --dev jest-circus
 yarn add --dev jest-circus@25.5.4
 {{< /code-block >}}
 
-2. Configure a custom [testEnvironment][5] and [testRunner][6] in your `jest.config.js` or however you are configuring [jest][7]:
+2. Configure a custom [testEnvironment][1] and [testRunner][2] in your `jest.config.js` or however you are configuring `jest`:
 
     {{< code-block lang="javascript" filename="jest.config.js" >}}
 module.exports = {
@@ -82,6 +82,9 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci npm test
 {{< /code-block >}}
 
+
+[1]: https://jestjs.io/docs/en/configuration#testenvironment-string
+[2]: https://jestjs.io/docs/en/configuration#testrunner-string
 {{% /tab %}}
 {{% tab "Mocha" %}}
 
