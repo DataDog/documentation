@@ -2164,7 +2164,7 @@ main:
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 303
+    weight: 304
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
