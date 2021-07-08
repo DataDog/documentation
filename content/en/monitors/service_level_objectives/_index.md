@@ -157,7 +157,7 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 ## SLO status corrections
 
-Status Corrections allow you to specify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta available for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
+Status corrections allow you to specify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
 
 ## Further Reading
 
