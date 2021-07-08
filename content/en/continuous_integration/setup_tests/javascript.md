@@ -44,8 +44,7 @@ For more information, see the [JavaScript tracer installation docs][4].
 yarn add --dev jest-circus
 {{< /code-block >}}
 
-
-    **Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
+**Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
 
     {{< code-block lang="bash" >}}
 yarn add --dev jest-circus@25.5.4
@@ -63,7 +62,7 @@ module.exports = {
 }
 {{< /code-block >}}
 
-    And in `testEnvironment.js`:
+And in `testEnvironment.js`:
 
     {{< code-block lang="javascript" filename="testEnvironment.js" >}}
 require('dd-trace').init({
@@ -75,7 +74,7 @@ require('dd-trace').init({
 module.exports = require('jest-environment-node')
 {{< /code-block >}}
 
-    **Note**: `jest-environment-node` and `jest-environment-jsdom` are installed together with `jest`, so they do not normally appear in your `package.json`. If you've extracted any of these libraries in your `package.json`, make sure the installed version is the same as the one of `jest`.
+<div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code> and <code>jest-environment-jsdom</code> are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed version is the same as the one of <code>jest</code>.</div>
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
@@ -134,13 +133,13 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
 **Default**: `8126`
 
-All other [Datadog Tracer configuration][12] options can also be used.
+All other [Datadog Tracer configuration][5] options can also be used.
 
 
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][9].
+[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][7].
 
 ### Browser tests
 The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
@@ -162,14 +161,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][10] instead:
+And use [`test.each`][8] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][11]:
+For `mocha`, use [`mocha-each`][9]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -192,11 +191,8 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [2]: /continuous_integration/setup_tests/agent/
 [3]: https://github.com/DataDog/dd-trace-js
 [4]: /tracing/setup_overview/setup/nodejs
-[5]: https://jestjs.io/docs/en/configuration#testenvironment-string
-[6]: https://jestjs.io/docs/en/configuration#testrunner-string
-[7]: https://jestjs.io/docs/en/configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[11]: https://github.com/ryym/mocha-each
-[12]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
+[5]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
+[6]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[7]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[8]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[9]: https://github.com/ryym/mocha-each
