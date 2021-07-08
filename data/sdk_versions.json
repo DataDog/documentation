@@ -1,18 +1,22 @@
 [
   {
     "client": "datadog-api-client-go",
-    "version": "v1.0.0-beta.22"
+    "version": "v1.1.0"
   },
   {
     "client": "datadog-api-client-java",
-    "version": "datadog-api-client-1.0.0-beta11"
+    "version": "datadog-api-client-1.0.0"
   },
   {
     "client": "datadog-api-client-python",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   {
     "client": "datadog-api-client-ruby",
-    "version": "v1.0.0"
+    "version": "v1.1.0"
+  },
+  {
+    "client": "datadog-api-client-typescript",
+    "version": "v1.0.0-beta.3"
   }
 ]

@@ -19,7 +19,7 @@ further_reading:
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
 
-The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full front end and backend data through one lens.
+The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full frontend and backend data through one lens.
 
 Use frontend data from RUM, and backend, infrastructure, and log information from trace ID injection to quickly pinpoint issues anywhere in your stack and fully understand what your users are experiencing.
 
@@ -138,13 +138,15 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-sampled: 1`
 : Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.
 
+**Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server. The server must also accept [preflight requests][17] (OPTIONS requests).
+
 ## How are APM quotas affected?
 
 The `x-datadog-origin: rum` header specifies to the APM backend that the traces are generated from Real User Monitoring. The generated traces consequently do not impact Indexed Span counts.
 
 ## How long are traces retained?
 
-These traces are retained [just like your classical APM traces][16].
+These traces are retained [just like your classical APM traces][18].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -163,4 +165,6 @@ These traces are retained [just like your classical APM traces][16].
 [13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [14]: /tracing/setup_overview/setup/dotnet-core/
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[16]: /tracing/trace_retention_and_ingestion/
+[16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+[18]: /tracing/trace_retention_and_ingestion/

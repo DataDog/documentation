@@ -53,6 +53,8 @@ Exemple : `99 % des requêtes doivent avoir été effectuées sans erreur sur 
 
 Tant que le SLO reste au-dessus du pourcentage cible, le statut du SLO s'affiche en vert. En cas de violation du pourcentage cible, le statut du SLO s'affiche en rouge. Vous pouvez également spécifier une valeur d'avertissement supérieure à la valeur cible afin de savoir lorsque le SLO est sur le point de ne plus être satisfait. En cas de violation du pourcentage d'avertissement (mais pas du pourcentage cible), le statut du SLO s'affiche en jaune.
 
+**Remarque :** jusqu'à trois décimales sont autorisées pour les objectifs des SLO basés sur des métriques. La précision affichée dans la vue détaillée d'un SLO correspond à `num_target_decimal_places + 1 = 4 décimales`. La précision exacte affichée dépend de la grandeur des valeurs de la requête du dénominateur. Plus la grandeur du dénominateur est élevée, plus la précision affichée est élevée (jusqu'à la limite de quatre décimales).
+
 ### Identifier cet indicateur
 
 Cette section vous permet d'ajouter des informations contextuelles sur l'intérêt de votre SLO. Vous pouvez notamment spécifier une description, les ressources connexes, ainsi que les tags à associer au SLO.

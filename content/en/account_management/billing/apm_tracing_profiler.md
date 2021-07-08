@@ -29,7 +29,7 @@ For more information, see the [Pricing page][7].
 
 **Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][8] or your [Customer Success][9] Manager to discuss volume discounts for your account.**
 
-### APM Hosts, indexed spans, and extra ingested Spans without profiler
+### APM Hosts, indexed spans, and extra ingested spans without profiler
 
 Using 5 hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans without Profiler.
 

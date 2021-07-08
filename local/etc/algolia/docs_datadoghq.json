@@ -54,6 +54,15 @@
             "page_rank": 10
         },
         {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/account_management/rbac/permissions",
+            "selectors_key": "docs",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["rbac_permissions"],
+            "page_rank": 110
+        },
+        {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
             "selectors_key": "getting_started",
             "variables": {
@@ -193,7 +202,7 @@
             },
             "lvl1": ".main h1",
             "lvl2": ".main h2",
-            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -210,7 +219,7 @@
             "lvl2": ".main h2",
             "lvl3": ".main h3",
             "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -227,7 +236,7 @@
             "lvl2": ".main h2",
             "lvl3": ".main h3",
             "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",

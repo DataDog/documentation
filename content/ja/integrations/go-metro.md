@@ -126,11 +126,11 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
   Process: 10021 ExecStart=/opt/.../start_agent.sh (code=exited, status=0/SUCCESS)
   Main PID: 10025 (supervisord)
     CGroup: /system.slice/datadog-agent.service
-            ├─10025 /opt/datadog-...python /opt/datadog-agent/bin/supervisord -c /etc/dd-agent/supervisor.conf
-            ├─10043 /opt/datadog-...python /opt/datadog-agent/agent/dogstatsd.py --use-local-forwarder
-            ├─10044 /opt/datadog-agent/bin/go-metro -cfg=/etc/dd-agent/conf.d/go-metro.yaml
-            ├─10046 /opt/datadog-.../python /opt/datadog-agent/agent/ddagent.py
-            └─10047 /opt/datadog-.../python /opt/datadog-agent/agent/agent.py foreground --use-local-forwarder
+            |_10025 /opt/datadog-...python /opt/datadog-agent/bin/supervisord -c /etc/dd-agent/supervisor.conf
+            |_10043 /opt/datadog-...python /opt/datadog-agent/agent/dogstatsd.py --use-local-forwarder
+            |_10044 /opt/datadog-agent/bin/go-metro -cfg=/etc/dd-agent/conf.d/go-metro.yaml
+            |_10046 /opt/datadog-.../python /opt/datadog-agent/agent/ddagent.py
+            |_10047 /opt/datadog-.../python /opt/datadog-agent/agent/agent.py foreground --use-local-forwarder
 ```
 
 TCP RTT チェックが開始している場合は、上のような go-metro 行が表示されます。

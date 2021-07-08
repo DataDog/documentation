@@ -14,6 +14,7 @@ further_reading:
     text: Datadog を使用した Google Stackdriver ログの収集。
 git_integration_title: google_stackdriver_logging
 has_logo: true
+integration_id: google-stackdriver-logging
 integration_title: Google Stackdriver Logging
 is_public: true
 kind: インテグレーション

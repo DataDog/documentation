@@ -66,7 +66,8 @@ SonarQube の Web API に関するドキュメントは、SonarQube Web UI の `
 デフォルトのメトリクスのコンフィギュレーションは、[sonarqube.d/metrics.yaml][3] ファイルにあります。Bean に関するドキュメントは、
 [SonarQube のウェブサイト][4]をご覧ください。
 
-SonarQube の JMX サーバーは、デフォルトで無効になっています。有効化して SonarQube 内で JMX を構成する方法について、
+SonarQube の JMX サーバーは、デフォルトで無効になっています。つまり、有効にしない限り `sonarqube.server.*` メトリクス
+は収集されません。有効化して SonarQube 内で JMX を構成する方法について、
 詳細は [SonarQube ドキュメント][5]をご参照ください。
 
 これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで

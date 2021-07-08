@@ -31,6 +31,10 @@
     "description": "Delete an application key",
     "summary": "Delete an application key"
   },
+  "GetApplicationKey": {
+    "description": "Get an application key for your org.",
+    "summary": "Get an application key"
+  },
   "UpdateApplicationKey": {
     "description": "Edit an application key",
     "summary": "Edit an application key",

@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_router/'
 draft: false
 git_integration_title: google_cloud_router
 has_logo: true
+integration_id: google-cloud-router
 integration_title: Google Cloud Router
 is_public: true
 kind: integration

@@ -5,6 +5,8 @@ disable_sidebar: true
 aliases:
   - /ja/graphing/metrics/
   - /ja/metrics/introduction/
+  - /ja/graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+  - /ja/dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
 ---
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し分析します。{{< /nextlink >}}
@@ -22,7 +24,7 @@ aliases:
 
 メトリクスは、システムの全体像を提供します。それを使用して、環境の状態を一目で評価できます。たとえば、ユーザーが Web サイトをロードする速度や、サーバーの平均メモリ消費量などです。問題を特定したら、[ログ][1]と[トレース][2]を使用して、トラブルシューティングします。
 
-システムの状態を追跡するメトリクスは、400 以上のサービスと Datadog のインテグレーションによって自動的に取得されます。ただし、ユーザーログインの数からユーザーカートのサイズ、チームのコードコミットの頻度まで、ビジネスに固有のメトリクス (カスタムメトリクスとも呼ばれます) を追跡することもできます。
+システムの状態を追跡するメトリクスは、{{< translate key="integration_count" >}} 以上のサービスと Datadog のインテグレーションによって自動的に取得されます。ただし、ユーザーログインの数からユーザーカートのサイズ、チームのコードコミットの頻度まで、ビジネスに固有のメトリクス (カスタムメトリクスとも呼ばれます) を追跡することもできます。
 
 さらに、メトリクスは、顧客からの需要を満たすために環境の規模を調整するのに役立ちます。リソースをどれだけ消費する必要があるかを正確に知ることは、お金を節約したり、パフォーマンスを向上させたりするのに役立ちます。
 

@@ -137,8 +137,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/ruby.md ;fi
-	@if [ content/en/developers/amazon_cloudformation.md ]; then \
-	rm -f content/en/developers/amazon_cloudformation.md ;fi
+	@if [ content/en/integrations/guide/amazon_cloudformation.md ]; then \
+	rm -f content/en/integrations/guide/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
 	@if [ content/en/logs/log_collection/ios.md ]; then \
@@ -207,8 +207,10 @@ clean-python-examples:
 clean-ruby-examples:
 	@git clean -xdf content/en/api/**/*.rb*
 
+clean-typescript-examples:
+	@git clean -xdf content/en/api/**/*.ts*
 
-clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples
+clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples clean-typescript-examples
 	@rm -rf examples
 
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -229,7 +231,11 @@ examples/datadog-api-client-ruby:
 	@git clone https://github.com/DataDog/datadog-api-client-ruby.git $@
 	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
 
-.PHONY: examples/go examples/java examples/python examples/ruby examples
+examples/datadog-api-client-typescript:
+	@git clone https://github.com/DataDog/datadog-api-client-typescript.git $@
+	@cd $@ && git switch $(BRANCH) || echo "branch $(BRANCH) was not found; using default branch"
+
+.PHONY: examples/go examples/java examples/python examples/ruby examples/typescript examples
 
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
@@ -254,5 +260,10 @@ examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
 
 	-cp -Rn examples/content ./
 
+examples/typescript: examples/datadog-api-client-typescript clean-typescript-examples
+	@cd examples/datadog-api-client-typescript; ./extract-code-blocks.sh $(EXAMPLES_DIR) || (echo "Error copying Typescript code examples, aborting build."; exit 1)
 
-examples: examples/go examples/java examples/python examples/ruby
+	-cp -Rn examples/content ./
+
+
+examples: examples/go examples/java examples/python examples/ruby examples/typescript

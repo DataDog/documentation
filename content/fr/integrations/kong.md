@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Kong Overview: assets/dashboards/kong_overview.json
+    kong: assets/dashboards/kong_dashboard.json
   logs:
     source: kong
   metrics_metadata: metadata.csv
@@ -12,6 +13,7 @@ assets:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
+    kong_processes: assets/saved_views/kong_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -78,11 +80,23 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
      - kong_status_url: http://localhost:8001/status/
    ```
 
+   Avec l'Agent 7+, il est également possible d'utiliser une implémentation plus moderne :
+
+   ```yaml
+   init_config:
+
+   instances:
+     ## @param openmetrics_endpoint - string - required
+     ## The URL exposing metrics in the OpenMetrics format.
+     #
+     - openmetrics_endpoint: http://localhost:8001/metrics
+   ```
+
 2. [Redémarrez l'Agent][3].
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 Les logs d'accès Kong sont générés par NGINX. L'emplacement par défaut est donc identique à celui des fichiers NGINX.
 
@@ -131,7 +145,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -162,6 +176,17 @@ Le check Kong n'inclut aucun événement.
 
 **kong.can_connect** :<br>
 Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Kong pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+
+Lorsque vous utilisez l'implémentation de l'Agent 7+ en définissant `openmetrics_endpoint` :
+
+**kong.openmetrics.health** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint OpenMetrics. Si ce n'est pas le cas, renvoie `OK`.
+
+**kong.datastore.reachable** :<br>
+Renvoie `CRITICAL` si Kong ne parvient pas à se connecter au datastore. Si ce n'est pas le cas, renvoie `OK`.
+
+**kong.upstream.target.health** :<br>
+Renvoie `CRITICAL` lorsque la cible n'est pas saine. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

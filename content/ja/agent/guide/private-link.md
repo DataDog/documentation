@@ -39,14 +39,14 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 
 | Datadog メトリクスのサービス名                                |
 | ---------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0d560852f6f1e27ac`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}
 
 | Forwarder | Datadog ログのサービス名 |
 | --------- | ------------------------- |
-| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
+| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
 | Lambda またはカスタムフォワーダー | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
 {{% /tab %}}
@@ -54,28 +54,28 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 
 | Datadog API のサービス名                                  |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` |
 
 {{% /tab %}}
 {{% tab "Processes" %}}
 
 | Datadog プロセスモニタリングサービス名                   |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-05316fe237f6d8ddd` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
 
 {{% /tab %}}
 {{% tab "Traces" %}}
 
 | Datadog トレースサービス名                                |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` |
 
 {{% /tab %}}
 {{% tab "Kubernetes リソース" %}}
 
 | Datadog Kubernetes Explorer サービス名                  |
 | --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-0b03d6756bf6c2ec3` |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -94,149 +94,32 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 10. ステータスが _Pending_ から _Available_ に変わるまでお待ちください。約 10 分要する場合があります。
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC のステータス" style="width:60%;" >}}
 
-_Available_ と表示されると、AWS PrivateLink の使用を開始できます。次に Datadog Agent、Lambda Forwarder、また Datadog へのデータ受け渡しを行うその他のクライアントに応じた新しいターゲットエンドポイントでAgent のコンフィギュレーションを更新します。
-
-## クライアントのコンフィギュレーション
-
-以下のタブで、新しい VPC エンドポイントを使ってメトリクスとログを Datadog に送信する方法、また Datadog の API で必要となる新しいホスト URL についての詳細をご確認いただけます。
-
-{{< tabs >}}
-{{% tab "Metrics" %}}
-
-_Agent 6.0 以上で使用可能_
-
-この新しい VPC エンドポイントを使ってメトリクスを Datadog に転送するには、`pvtlink.agent.datadoghq.com` を新しいメトリクスの宛先として構成を行います。
-
-1. [Agent の `datadog.yaml` コンフィギュレーションファイル][1]で `dd_url` パラメーターを更新します。
-
-    ```yaml
-    dd_url: https://pvtlink.agent.datadoghq.com
-    ```
-
-2. [Agent を再起動][2]し、AWS PrivateLink 経由で Datadog にメトリクスを送信します。
-
-**注**: コンテナ Agent をお使いの場合は、代わりに環境変数: `DD_DD_URL="https://pvtlink.agent.datadoghq.com"` を設定してください。Cluster Agent で Kubernetes 環境の監視を行っている場合は、この環境変数を Cluster Agent と Node Agent の_両方_で構成します。
-
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Logs" %}}
-
-_Agent 6.14 以上で使用可能_
-
-この新しい VPC エンドポイントを使ってログを Datadog に転送するには、`pvtlink.logs.datadoghq.com` を新しいログの宛先として構成を行います。
-
-**Datadog Agent を使用する場合**:
-
-1. [Agent の `datadog.yaml` コンフィギュレーションファイル][1]に以下を追加します。
+    _Available_ が表示されると、AWS PrivateLink を使用することができます。
+11. ログデータを収集する場合は、Agent が HTTPS 経由でログを送信するように構成されていることを確認してください。まだない場合は、[Agent `datadog.yaml` コンフィギュレーションファイル][3]に以下を追加します。
 
     ```yaml
     logs_config:
         use_http: true
-        logs_dd_url: pvtlink.logs.datadoghq.com:443
     ```
 
-    - `use_http` 変数を使用すると、Datadog Agent で HTTPS を介してログを送信することができます。このコンフィギュレーションは AWS PrivateLink 経由で Datadog にログを送信する場合に必要です。　詳細は [Agent のログ収集ドキュメント][2]を参照してください。
-    - `logs_dd_url` 変数は VPC エンドポイントにログを送るために使用されます。
+    コンテナ Agent をお使いの場合は、代わりに環境変数を設定してください。
 
-2. [Agent を再起動][3]し、AWS PrivateLink 経由で Datadog にログを送信します。
-
-**注**: コンテナ Agent をお使いの場合は、代わりに環境変数を設定してください。
-
-- `DD_LOGS_CONFIG_USE_HTTP=true`
-- `DD_LOGS_CONFIG_LOGS_DD_URL="pvtlink.logs.datadoghq.com:443"`
-
-**Lambda またはカスタムフォワーダーの使用**:
-
-[Datadog Lambda 関数][4] の環境変数に `DD_URL: api-pvtlink.logs.datadoghq.com` を追加し、AWS のサービスログを Datadog に転送する際にプライベートリンクが使えるようにします。
-
-デフォルトで、Forwarder の API キーは Secrets Manager に保存されます。Secrets Manager のエンドポイントを VPC に追加する必要があります。手順に従い、[AWS サービスを VPC に追加][5]してください。
-
-CloudFormation テンプレートで Forwarder をインストールする際は、'DdUsePrivateLink' を有効にして 1 つ以上のサブネット ID とセキュリティグループを設定してください。
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
-[4]: /ja/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
-[5]: https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint
-{{% /tab %}}
-{{% tab "API" %}}
-
-Datadog API にデータを送信する、またはこの新しいエンドポイントを経由してデータを使用する場合は、API コールのホスト署名を `api.datadoghq.com/api/` から `pvtlink.api.datadoghq.com/api/` に置き換えます。
-
-{{% /tab %}}
-{{% tab "Processes" %}}
-
-この新しい VPC エンドポイントを使ってプロセスメトリクスを Datadog に転送するには、`pvtlink.process.datadoghq.com` を新しいプロセスデータの宛先として構成を行います。
-
-1. [Agent の `datadog.yaml` コンフィギュレーションファイル][1]の `process_config:` セクションで `process_dd_url` を更新します。
-
-    ```yaml
-    process_dd_url: https://pvtlink.process.datadoghq.com
+    ```
+    DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-2. [Agent を再起動][2]し、AWS PrivateLink 経由で Datadog にプロセスメトリクスを送信します。
-
-**注**: コンテナ Agent をお使いの場合は、代わりに環境変数: `DD_PROCESS_AGENT_URL="https://pvtlink.process.datadoghq.com"` を設定してください。Cluster Agent で Kubernetes 環境の監視を行っている場合は、この環境変数を Cluster Agent と Node Agent の_両方_で構成します。
-
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Traces" %}}
-
-この新しい VPC エンドポイントを使ってメトリクスを Datadog に転送するには、`trace-pvtlink.agent.datadoghq.com` を新しいメトリクスの宛先として構成を行います。
-
-1. [Agent の `datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_dd_url` を更新します。
-
-    ```yaml
-    apm_dd_url: https://trace-pvtlink.agent.datadoghq.com
-    ```
-
-2. [Agent を再起動][2]し、AWS PrivateLink 経由で Datadog にトレースを送信します。
-
-**注**: コンテナ Agent をお使いの場合は、代わりに環境変数: `DD_APM_DD_URL="https://trace-pvtlink.agent.datadoghq.com"` を設定してください。Cluster Agent で Kubernetes 環境の監視を行っている場合は、この環境変数を Cluster Agent と Node Agent の_両方_で構成します。
-
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Kubernetes リソース" %}}
-
-新しい VPC エンドポイントを使用して Kubernetes のリソースを Datadog に転送するには、新しいオーケストレータのデータ宛先として `orchestrator-pvtlink.datadoghq.com` を構成します。
-
-1. [Agent の `datadog.yaml` コンフィギュレーションファイル][1]で `dd_url` パラメーターを更新します。
-
-    ```yaml
-    dd_url: orchestrator-pvtlink.datadoghq.com
-    ```
-
-   コンテナ Agent の場合は、代わりに以下の環境変数を設定します。
-
-   ```
-   DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_DD_URL="orchestrator-pvtlink.datadoghq.com"
-   ```
-
-   プロセス Agent にも同様にこの設定を行います。Kubernetes 環境の監視にクラスター Agent を使用している場合は、この環境変数をクラスター Agent および ノード Agent に構成します。
-
-2. [Agent を再起動][2]して、AWS PrivateLink 経由で Kubernetes リソースを Datadog に送信します。
-
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{< /tabs >}}
+    このコンフィギュレーションは AWS PrivateLink 経由で Datadog にログを送信する場合に必要です。　詳細は [Agent のログ収集ドキュメント][4]を参照してください。
+12. [Agent を再起動][5]し、AWS PrivateLink 経由で Datadog にデータを送信します。
 
 ## 高度な使用方法
 
 ### リージョン間ピアリング
 
-他のリージョンから `us-east-1` にある Datadog の PrivateLink オファリングにトラフィックをルーティングするには、リージョン間 [Amazon VPC ピアリング][3]を使用します。
+他のリージョンから `us-east-1` にある Datadog の PrivateLink オファリングにトラフィックをルーティングするには、リージョン間 [Amazon VPC ピアリング][6]を使用します。
 
 リージョン間 VPC ピアリングを使用すると、異なる AWS リージョン間で VPC 間の接続を確立できます。これにより、異なるリージョンの VPC リソースがプライベート IP アドレスを使用して互いに通信できるようになります。
 
-詳細については、[Amazon VPC ピアリングのドキュメント][3]を参照してください。
+詳細については、[Amazon VPC ピアリングのドキュメント][6]を参照してください。
 
 ## その他の参考資料
 
@@ -244,4 +127,7 @@ Datadog API にデータを送信する、またはこの新しいエンドポ�
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: /ja/help/
-[3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
+[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[4]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[5]: /ja/agent/guide/agent-commands/#restart-the-agent
+[6]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
+- link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
+  tag: "Blog"
+  text: "Best practices for shift-left testing"
 
 ---
 
@@ -435,7 +438,7 @@ In the global configuration file, you can configure the following options:
         "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
             "locations": ["aws:us-west-1"],
         "retry": { "count": 2, "interval": 300 },
-        "executionRule": "skipped",
+        "executionRule": "blocking",
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "variables": { "titleVariable": "new value" },
         "pollingTimeout": 180000
@@ -540,7 +543,7 @@ Variables to replace in the test. This object should contain, as keys, the name 
 
 `pollingTimeout`
 : **Type**: integer<br>
-Duration after which `datadog-ci` should stop polling for test results (in milliseconds). Test results finishing after this duration are considered failed test results at the CI level.
+The duration in milliseconds after which `datadog-ci` stops polling for test results. The default is 120,000 ms. At the CI level, test results completed after this duration are considered failed.
 
 **Note**: Tests' overrides take precedence over global overrides.
 

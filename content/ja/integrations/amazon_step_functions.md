@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_step_functions/'
 draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
+integration_id: amazon-step-functions
 integration_title: Amazon Step Functions
 is_public: true
 kind: インテグレーション
@@ -49,17 +50,17 @@ Step Functions ステートが Lambda 関数である場合、このインテグ
 
 #### ログの有効化
 
-ログを S3 バケットまたは Cloudwatch に送信するように Amazon Step Functions を構成します。
+ログを S3 バケットまたは CloudWatch に送信するように Amazon Step Functions を構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_step_functions` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む Cloudwatch ロググループにトリガーを追加します。
+2. lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む CloudWatch ロググループにトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [CloudWatch ロググループに手動トリガーを追加][8]
 
 ### トレースの収集
 

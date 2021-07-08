@@ -39,7 +39,7 @@ Requires:
 - OpenJDK 8u282 or greater
 
 
-[1]: /tracing/profiler/enabling
+[1]: /tracing/profiler/enabling/?code-lang=java
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -48,7 +48,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.44.0 or greater.
 
 
-[1]: /tracing/profiler/enabling
+[1]: /tracing/profiler/enabling/?code-lang=python
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -57,7 +57,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 Requires tracing library version 0.49.0 or greater.
 
 
-[1]: /tracing/profiler/getting_started
+[1]: /tracing/profiler/enabling/?code-lang=ruby
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

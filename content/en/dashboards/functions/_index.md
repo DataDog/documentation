@@ -23,7 +23,18 @@ aliases:
 
 ## Overview
 
-Functions can be applied to your queries by using the `Formula` box in the graphing editor. Most of the functions are applied as the last step (after [time][1] and [space aggregation][2]).
+Functions can be applied to your queries by clicking `+` icon in the graphing editor. Most of the functions are applied as the last step (after [time][1] and [space aggregation][2]).
+
+{{< img src="dashboards/functions/addingfunctions.png" alt="Add function"  style="width:75%;" >}}
+
+Here is an example of how to apply an Exclusion function to exclude certain values of your metric.
+
+{{< img src="dashboards/functions/exclusion_example.png" alt="Exclusion example with Toplist"  style="width:75%;" >}}
+
+Here is an example of how to apply a Timeshift function on your error logs to compare current data with data from one week before.
+
+{{< img src="dashboards/functions/timeshift_example.png" alt="Timeshift example with Logs"  style="width:75%;" >}}
+
 
 {{< whatsnext desc="Choose a type of function:" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement anomaly or outlier detection.{{< /nextlink >}}

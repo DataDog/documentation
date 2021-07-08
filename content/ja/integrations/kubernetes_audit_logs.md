@@ -28,6 +28,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/'
     tag: ブログ
     text: クラスターセキュリティを監視するための主要な Kubernetes 監査ログ
+integration_id: kubernetes-audit-logs
 ---
 ## 概要
 

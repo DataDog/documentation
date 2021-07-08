@@ -21,7 +21,7 @@ further_reading:
 ---
 特定のログ収集構成にログ処理ルールを適用することで、以下が可能です。
 
-* [ログの絞り込み](#filter-logs)
+* [ログをフィルター](#filter-logs)
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行の集約の実行](#multi-line-aggregation)
 * [ワイルドカードを使用したディレクトリの追跡](#tail-directories-by-using-wildcards)

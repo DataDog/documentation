@@ -14,6 +14,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'
 draft: false
 git_integration_title: amazon_billing
 has_logo: true
+integration_id: amazon-billing
 integration_title: AWS Billing
 is_public: true
 kind: インテグレーション
@@ -64,7 +65,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 2. lambda 関数がインストールされたら、AWS コンソールで、AWS Billing ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][9]
-    - [Cloudwatch ロググループに手動トリガーを追加][10]
+    - [CloudWatch ロググループに手動トリガーを追加][10]
 
 ## CloudWatch 使用状況の監視
 

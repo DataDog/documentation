@@ -1,0 +1,49 @@
+requests:
+  - name: OpenMetrics
+    description: Agent には、Prometheus エンドポイントをスクレイピングできる OpenMetrics と Prometheus チェックが含まれています。
+    link: /agent/docker/prometheus
+    image: int_openmetrics.png
+  - name: Windows パフォーマンスカウンター
+    description: パフォーマンスカウンターを公開する Windows サービスまたはアプリケーションは、PDH インテグレーションを使用して収集できます。
+    link: /integrations/pdh_check
+    image: int_wpc.png
+  - name: JMX Beans
+    description: JVM ベースのアプリケーションは、JMX インテグレーションで収集できる JMX メトリクスを公開します。たとえば、JMX インテグレーションは、Solr、Tomcat、Cassandra などの公式インテグレーションにすでに使用されています。
+    link: /integrations/java
+    image: int_jmx.png
+  - name: ログ
+    description: ほとんどのアプリケーションは、ある種のログを生成します。ログ管理製品を利用して、基本的な監視を実行できる場合があります。
+    link: /logs
+    image: int_logs.png
+  - name: APM
+    description: Datadog APM & Distributed Tracing 製品は、リクエスト、エラー、レイテンシーを監視するために、Web サービス、キュー、データベース用のすぐに使用可能なパフォーマンスダッシュボードを提供します。
+    link: /tracing
+    image: int_apm.png
+  - name: カスタムメトリクス
+    description: API や DogStatsD などの開発者ツールを使用して、ビジネス統計のカスタムメトリクスを送信できます。
+    link: /developers/metrics
+    image: int_custom_metrics.png
+  - name: カスタムインテグレーション
+    description: Datadog Agent インテグレーションは、メトリクスを照会する Python ファイルです。すべての Agent コードはオープンソースであるため、独自のカスタム Agent インテグレーションを作成することができます。integrations-extras GitHub リポジトリには、コミュニティで開発されたカスタム Agent インテグレーションが多数含まれています。
+    link: /developers/integrations/new_check_howto
+    image: int_custom_int.png
+  - name: SNMP / ネットワークトラフィック
+    description: ルーター、スイッチ、プリンターなどのネットワークデバイスは、SNMP (Simple Network Management Protocol) メトリクスを発行します。これは、ネットワークデバイス監視製品で収集できます。ホストに出入りするすべてのネットワークトラフィックを追跡できるネットワークパフォーマンスモニタリング製品もあります。
+    link: /network_monitoring
+    image: int_network.png
+  - name: エンドポイント
+    description: URL のアップタイムについては、HTTP チェックまたは Synthetics Monitoring を使用して、エンドポイントまたは URL が実行され、アクセス可能かどうかを検証します。どちらもパブリックエンドポイントとプライベートエンドポイントで機能します。
+    link: /synthetics
+    image: int_endpoint.png
+  - name: プロセス
+    description: CPU、メモリ、I/O など、任意のホストで実行中の特定のプロセスのリソース使用量メトリクスを収集するには、プロセスインテグレーションを使用します。実行中のすべてのプロセスでオープンエンドのデバッグを照会するには、Live Process Monitoring (SSH を使用せずに htop など) を使用します。
+    link: /infrastructure/process
+    image: int_processes.png
+  - name: ファイル/ディレクトリ
+    description: ファイルの経過時間、ディレクトリ内のファイル数、またはディレクトリのサイズの測定は、ディレクトリチェックを使用して実行できます。
+    link: /integrations/directory
+    image: int_files.png
+  - name: クラウドプロバイダー
+    description: すべての主要なクラウドプロバイダー (AWS、GCP、Azure、Alibaba) は、API を介してメトリクスを発行します。アカウントの Datadog インテグレーションタイルを使用して、Datadog サーバーを使用してメトリクスをクロールおよび保存するこれらのインテグレーションを構成します。
+    link: '/integrations/#cat-cloud'
+    image: int_cloud.png

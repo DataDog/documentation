@@ -96,12 +96,12 @@ configuration of the tracer.
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
 
-1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -233,6 +233,11 @@ Interval (in milliseconds) at which the tracer submits traces to the Agent.
 : **Environment variable**: `DD_RUNTIME_METRICS_ENABLED`<br>
 **Default**:  `false`<br>
 Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.
+
+: **Environment Variable**: `DD_SERVICE_MAPPING`<br>
+**Default**: `null`<br>
+**Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
 
 `experimental`
 : **Default**: `{}`<br>

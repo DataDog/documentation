@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true
+integration_id: google-cloudsql
 integration_title: Google CloudSQL
 is_public: true
 kind: インテグレーション

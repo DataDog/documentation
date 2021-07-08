@@ -45,10 +45,12 @@ Beta integrations are disabled by default but can be enabled individually:
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty                   | 7.0-9.x    | Fully Supported | `jetty`                                        |
+| Micronaut HTTP Server   | 2.x        | Fully Supported | `micronaut`                                    |
 | Mulesoft                | 4          | Fully Supported | `mule`                                         |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
 | Play                    | 2.3-2.8    | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
+| Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
 | Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |

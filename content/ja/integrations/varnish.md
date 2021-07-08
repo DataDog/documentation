@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    varnish: assets/dashboards/varnish_dashboard.json
   logs:
     source: varnish
   metrics_metadata: metadata.csv
@@ -12,6 +13,7 @@ assets:
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
+    varnish_processes: assets/saved_views/varnish_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web

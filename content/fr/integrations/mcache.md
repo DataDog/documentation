@@ -2,11 +2,17 @@
 aliases:
   - /fr/integrations/memcached
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    memcached: assets/dashboards/memcached_dashboard.json
+    memcached_screenboard: assets/dashboards/memcached_screenboard.json
   logs:
     source: memcached
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    memcached_processes: assets/saved_views/memcached_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -18,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mcache/README.md'
 display_name: Memcached
+draft: false
 git_integration_title: mcache
 guid: b1c4033c-bf96-4456-be63-e74ff171f991
 integration_id: memcached
@@ -54,10 +61,8 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 #### Collecte de métriques
 
-#{{< tabs >}}
+{{< tabs >}}
 {{% tab "Host" %}}
-#{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
 
 #### Host
 
@@ -81,7 +86,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 L'APM Datadog s'intègre à Memcache pour vous permettre de visualiser les traces sur l'ensemble de votre système distribué. La collecte de traces est activée par défaut dans les versions 6 et ultérieures de l'Agent Datadog. Pour commencer à recueillir des traces :
 
-1. [Activez la collecte de trace dans Datadog][4].
+1. [Activez la collecte de traces dans Datadog][4].
 2. [Instrumentez l'application qui envoie des requêtes à Memcache][5].
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -89,6 +94,58 @@ L'APM Datadog s'intègre à Memcache pour vous permettre de visualiser les trace
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/tracing/send_traces/
 [5]: https://docs.datadoghq.com/fr/tracing/setup/
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                 |
+| -------------------- | ------------------------------------- |
+| `<NOM_INTÉGRATION>` | `mcache`                              |
+| `<CONFIG_INIT>`      | vide ou `{}`                         |
+| `<CONFIG_INSTANCE>`  | `{"url": "%%host%%","port": "11211"}` |
+
+##### Collecte de traces
+
+L'APM dédié aux applications conteneurisées est pris en charge par les hosts exécutant les versions 6 et ultérieures de l'Agent, mais nécessite une configuration supplémentaire pour recueillir des traces.
+
+Variables d'environnement requises sur le conteneur de l'Agent :
+
+| Paramètre            | Valeur                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+Consultez les sections relatives au [tracing d'applications Kubernetes][2] et à la [configuration de DaemonSet Kubernetes][3] pour consulter la liste complète des variables d'environnement et configurations disponibles.
+
+Ensuite, [instrumentez votre conteneur d'application][4] et définissez `DD_AGENT_HOST` sur le nom du conteneur de votre Agent.
+
+#### Collecte de logs
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+1. Ajoutez ce bloc de configuration à votre fichier `mcache.d/conf.yaml` pour commencer à recueillir vos logs Memcached :
+
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/memcached.log
+       source: memcached
+       service: mcache
+   ```
+
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+
+2. [Redémarrer l'Agent][5] pour appliquer ces changements.
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=java
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[4]: https://docs.datadoghq.com/fr/tracing/setup/
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -110,9 +167,8 @@ Le check Mcache n'inclut aucun événement.
 
 ### Checks de service
 
-`memcache.can_connect` :
-
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Memcache pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+**memcache.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à memcache pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

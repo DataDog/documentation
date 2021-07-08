@@ -78,12 +78,6 @@ $ddpurple: #632ca6;
 
     .code-snippet-wrapper {
         margin-right: 0;
-        @media (min-width: 992px) {
-            margin-right: -180px;
-        }
-        @media (min-width: 1200px) {
-            margin-right: -216px;
-        }
     }
 
     .table-request .isReadOnly {

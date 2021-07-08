@@ -144,7 +144,7 @@ Les intégrations officielles utilisent des répertoires dédiés. Le check gén
 [2]: /fr/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /fr/developers/prometheus/
+[5]: /fr/developers/custom_checks/prometheus/
 [6]: /fr/integrations/guide/prometheus-metrics
 [7]: /fr/agent/kubernetes/#installation
 [8]: /fr/getting_started/tagging/

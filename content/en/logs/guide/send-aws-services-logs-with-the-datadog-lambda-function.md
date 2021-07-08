@@ -104,12 +104,10 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 {{< tabs >}}
 {{% tab "AWS console" %}}
 
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" popup="true" style="width:70%;">}}
 
-Select the corresponding CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger:
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" popup="true" style="width:70%;">}}
 
-Once done, go into your [Datadog Log section][1] to start exploring your logs.
+1. Select the corresponding CloudWatch Log Group, add the trigger, and optionally add a filter name.
+2. Once done, go into your [Datadog Log section][1] to start exploring your logs.
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}

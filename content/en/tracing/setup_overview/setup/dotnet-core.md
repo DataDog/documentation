@@ -304,13 +304,13 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
 
 ## Install and configure the Agent for APM
 
-[Install the Datadog Agent][5] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
+[Install the Datadog Agent][5] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
 
 {{< tabs >}}
 
 {{% tab "Containers" %}}
 
-1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 

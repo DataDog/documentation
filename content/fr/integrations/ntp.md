@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ntp/README.md'
 display_name: NTP
+draft: false
 git_integration_title: ntp
 guid: 9d105f8c-7fd3-48d7-a5d1-1cc386ec0367
 integration_id: ntp
@@ -39,7 +41,7 @@ L'intégration Network Time Protocol (NTP) est activée par défaut et signale l
 - Retards de métriques
 - Intervalles vides dans les graphiques de métriques
 
-Serveurs NTP atteints par défaut :
+Par défaut, le check détecte le fournisseur de cloud sur lequel l'Agent est exécuté, et utilise le serveur NTP privé de ce fournisseur, le cas échéant. Si aucun fournisseur de cloud n'est détecté, l'Agent utilise par défaut les serveurs NTP ci-dessous :
 
 - `0.datadog.pool.ntp.org`
 - `1.datadog.pool.ntp.org`
@@ -50,7 +52,7 @@ Serveurs NTP atteints par défaut :
 
 ### Installation
 
-Le check NTP est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check NTP est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
@@ -74,8 +76,7 @@ Le check NTP n'inclut aucun événement.
 
 ### Checks de service
 
-`ntp.in_sync` :
-
+**ntp.in_sync** :<br>
 Renvoie `CRITICAL` si le décalage avec NTP est supérieur au seuil indiqué dans `ntp.yaml`. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage

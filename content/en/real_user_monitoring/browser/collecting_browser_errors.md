@@ -32,7 +32,7 @@ Front-end errors are split into four different categories depending on their `er
 
 ## Error attributes
 
-For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Advanced Configuration][3].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][3].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -78,7 +78,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][5] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace.
+**Note**: The [Error Tracking][5] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace. Errors sent with any other source (such as `console`) will not be processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -162,7 +162,7 @@ try {
 
 ## Troubleshooting
 
-### Fixing "Script error."
+### Script error
 
 For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows an error with the minimal message "Script error."
 
@@ -189,7 +189,7 @@ Get visibility into cross-origin scripts by following these two steps:
 
 [1]: /real_user_monitoring/data_collected/error/#network-errors
 [2]: /real_user_monitoring/browser/data_collected/
-[3]: /real_user_monitoring/browser/advanced_configuration/
+[3]: /real_user_monitoring/browser/modifying_data_and_context/
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [5]: /real_user_monitoring/error_tracking
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

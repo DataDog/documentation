@@ -21,13 +21,13 @@ aliases:
 
 ## Overview
 
-To create a new log detection detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a new log detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
 
 ## Rule Type
 
 For Security Monitoring, select **Log Detection** to analyze ingested logs in real-time.
 
-## Choose a Detection Method
+## Choose a detection method
 
 ### Threshold
 
@@ -37,7 +37,15 @@ Define when events exceed a user-defined threshold. For example, if you create a
 
 Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `country` or `IP address`, a security signal will be generated whenever a new value is seen which has not been seen before.
 
-## Define a Search Query
+### Anomaly
+
+<div class="alert alert-warning">
+Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
+</div>
+
+When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
+
+## Define a search query
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -53,6 +61,7 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+
 
 #### Advanced options
 
@@ -103,9 +112,21 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
+
+{{% tab "Anomaly" %}}
+
+Construct a search query using the same logic as a log explorer search.
+
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
+
+Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
+
+**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+
+{{% /tab %}}
 {{< /tabs >}}
 
-## Set a Rule Case
+## Set a rule case
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -165,9 +186,29 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 [1]: /monitors/notifications/?tab=is_alert#integrations
 {{% /tab %}}
+
+{{% tab "Anomaly" %}}
+
+### Severity and notification
+
+Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
+
+In the “Notify” section, configure zero or more [notification targets][1].
+
+### Time windows
+
+Datadog automatically detects the seasonality of the data and will generate a security signal when the data is determined to be anomalous.
+
+Once a signal is generated, the signal will remain "open" if the data remains anomalous and the last updated timestamp will be updated for the anomalous duration.
+
+A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
+
+
+[1]: /monitors/notifications/?tab=is_alert#integrations
+{{% /tab %}}
 {{< /tabs >}}
 
-## Say What's Happening
+## Say what's happening
 
 The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
 

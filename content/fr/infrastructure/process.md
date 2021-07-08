@@ -14,6 +14,9 @@ further_reading:
   - link: /infrastructure/livecontainers
     tag: Graphiques
     text: Consulter en temps réel tous les conteneurs de votre environnement
+  - link: 'https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/'
+    tag: Blog
+    text: Corréler les performances des logiciels et la consommation de ressources avec les vues enregistrées
 ---
 ## Introduction
 
@@ -23,13 +26,13 @@ Les live processes de Datadog vous offrent une visibilité en temps réel sur le
 * Consulter en détail la consommation des ressources sur vos hosts et vos conteneurs, à l'échelle des processus
 * Interroger les processus en cours d'exécution sur un certain host, dans une zone spécifique ou avec une charge de travail précise
 * Surveiller les performances des logiciels internes et tiers pendant leur utilisation à l'aide de métriques système dotées d'une granularité de deux secondes
-* Ajouter du contexte à vos dashboards et notebooks
+* Ajouter des données de contexte à vos dashboards et notebooks
 
 {{< img src="infrastructure/process/live_processes_main.png" alt="Présentation des live processes"  >}}
 
 ## Installation
 
-Si vous utilisez l'Agent v5, [suivez ce processus d'installation][1]. Si vous utilisez les versions 6 ou 7, [consultez les instructions ci-dessous][2].
+Si vous utilisez l'Agent v5, [suivez ce processus d'installation][1]. Si vous utilisez les versions 6 ou 7, [consultez les intructions ci-dessous][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -129,6 +132,9 @@ Pour masquer des données sensibles sur une page Live Processes, l'Agent nettoie
 
 **Remarque** : la mise en correspondance est **sensible à la casse**.
 
+{{< tabs >}}
+{{% tab "Linux/Windows" %}}
+
 Pour définir votre propre liste à fusionner avec celle par défaut, utilisez le champ `custom_sensitive_words` à la section `process_config` du fichier `datadog.yaml`. Appliquez des wildcards (`*`) pour définir votre propre contexte de correspondance. Toutefois, un wildcard unique (`'*'`) ne peut pas être utilisé en tant que mot sensible.
 
 ```yaml
@@ -152,6 +158,53 @@ process_config:
     strip_proc_arguments: true
 ```
 
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Vous pouvez utiliser le chart Helm pour définir votre propre liste, qui sera fusionnée avec la liste par défaut. Ajoutez les variables d'environnement `DD_SCRUB_ARGS` et `DD_CUSTOM_SENSITIVE_WORDS` à votre fichier `datadog-values.yaml`, et mettez à jour votre chart Helm Datadog :
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+    agents:
+        containers:
+            processAgent:
+                env:
+                - name: DD_SCRUB_ARGS 
+                  value: "true"
+                - name: DD_CUSTOM_SENSITIVE_WORDS
+                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+```
+
+
+Appliquez des wildcards (`*`) pour définir votre propre contexte de correspondance. Toutefois, un wildcard unique (`'*'`) ne peut pas être utilisé en tant que mot sensible.
+
+Définissez `DD_SCRUB_ARGS` sur `false` pour désactiver entièrement le nettoyage des arguments de processus.
+
+Vous pouvez également nettoyer **tous** les arguments des processus en activant la variable `DD_STRIP_PROCESS_ARGS` dans votre fichier `datadog-values.yaml` :
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+    agents:
+        containers:
+            processAgent:
+                env:
+                - name: DD_STRIP_PROCESS_ARGS
+                  value: "true" 
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Requêtes
 
 ### Déterminer le contexte des processus 
@@ -168,12 +221,14 @@ Lorsque vous saisissez une chaîne de texte dans la barre de recherche, la fonct
 
 Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, utilisez l'un des opérateurs booléens suivants :
 
-|              |                                                                                                                                  |                                                                 |
-| :----------- | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
-| **Opérateur** | **Description**                                                                                                                  | **Exemple**                                                     |
-| `AND`        | **Intersection** : les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut).                           | java AND elasticsearch                                          |
-| `OR`         | **Union** : un des deux termes figure dans les événements sélectionnés.                                                                       | java OR python                                                  |
-| `NOT` / `!`  | **Exclusion** : le terme suivant n'est PAS dans l'événement. Vous pouvez utiliser le mot `NOT` ou le caractère `!` pour effectuer la même opération. | java NOT elasticsearch <br> **équivalent** : java !elasticsearch |
+`AND`
+: **Intersection** : les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, l'opérateur AND est défini par défaut)<br> **Exemple** : `java AND elasticsearch`
+
+`OR`
+: **Union** : un des deux termes figure dans les événements sélectionnés <br> **Exemple** : `java OR python`
+
+`NOT` / `!`
+: **Exclusion** : le terme suivant ne figure PAS dans l'événement. Vous pouvez utiliser le mot `NOT` ou le caractère `!` pour effectuer la même opération<br> **Exemple** : `java NOT elasticsearch` ou `java !elasticsearch`
 
 Utilisez des parenthèses pour regrouper les opérateurs. Par exemple, `(NOT (elasticsearch OR kafka) java) OR python` .
 
@@ -232,7 +287,7 @@ La requête en haut de la fenêtre vous permet de contrôler les différentes op
 
 ## Monitors de processus
 
-Tirez profit des [monitors de live processes][6] pour générer des alertes basées sur le nombre de n'importe quel groupe de processus sur l'ensemble des hosts ou des tags. Vous pouvez configurer les alertes des processus depuis la [page Monitors][7]. Pour en savoir plus, consultez la rubrique [Monitor de live processes][6].
+Utilisez le [monitor de live processes][6] pour générer des alertes en fonction du nombre de groupes de processus sur l'ensemble des hosts ou des tags. Vous pouvez configurer les alertes des processus depuis la [page Monitors][7]. Pour en savoir plus, consultez notre [documentation sur le monitor de live processes][6].
 
 {{< img src="infrastructure/process/process_monitor.png" alt="Monitor de processus"  style="width:80%;">}}
 
@@ -240,13 +295,15 @@ Tirez profit des [monitors de live processes][6] pour générer des alertes bas�
 
 Vous pouvez représenter graphiquement des métriques de processus dans des dashboards et des notebooks à l'aide du [widget Série temporelle][8]. Pour configurer les paramètres, procédez comme suit :
 1. Sélectionnez la source de données Live Processes.
-2. Créez un filtre basé sur des chaînes de texte dans la barre de recherche.
+2. Appliquez un filtre à l'aide de chaînes de texte dans la barre de recherche.
 3. Sélectionnez une métrique de processus à représenter.
 4. Appliquez un filtre à l'aide des tags du champ `From`.
 
 {{< img src="infrastructure/process/process_widget.png" alt="Widget Processus"  style="width:80%;">}}
 
-## Intégrations détectées automatiquement
+## Surveiller des logiciels tiers
+
+### Intégrations détectées automatiquement
 
 Datadog utilise la collecte de processus pour détecter automatiquement les technologies qui s'exécutent sur vos hosts. Cette opération permet d'identifier les intégrations Datadog qui peuvent vous aider à surveiller ces technologies. Les intégrations détectées automatiquement s'affichent dans la [recherche d'intégrations][1] :
 
@@ -258,6 +315,17 @@ Chaque intégration possède l'un des deux types de statuts suivants :
 - **✓ Partial Visibility** : cette intégration est activée sur certains hosts, mais les hosts pertinents ne l'exécutent pas tous.
 
 Les hosts qui exécutent l'intégration, mais sur lesquels l'intégration n'est pas activée, se trouvent dans l'onglet **Hosts** du carré de l'intégration.
+
+### Vues d'intégration
+
+{{< img src="infrastructure/process/integration_views.png" alt="Vues d'intégration" >}}
+
+Une fois qu'un logiciel tiers a été détecté, les live processes permettent d'analyser rapidement et facilement les performances de ce logiciel.
+1. Pour commencer, cliquez sur *Views* en haut à droite de la page afin d'ouvrir la liste des options prédéfinies, y compris Ngingx, Redis et Kafka.
+2. Sélectionnez une vue pour afficher uniquement les processus qui exécutent ce logiciel.
+3. Lorsque vous inspectez un processus lourd, passez à l'onglet *Integration Metrics* pour analyser l'état du logiciel sur le host sous-jacent. Si vous avez déjà activé l'intégration Datadog pertinente, vous pouvez visualiser toutes les métriques de performance collectées via l'intégration afin de déterminer si le problème est lié au host ou au logiciel. Par exemple, si vous constatez que les pics d'utilisation du CPU par le processus corespondent aux pics de latence des requêtes MySQL, cela peut indiquer qu'une opération intensive, comme l'analyse d'une table complète, retarde l'exécution d'autres requêtes MySQL reposant sur les mêmes ressources sous-jacentes.
+
+Vous pouvez personnaliser les vues d'intégration (par exemple, lors de l'agrégation d'une requête pour les processus Nginx par host) et d'autres requêtes personnalisées en cliquant sur le bouton *+Save* en haut de la page. Votre requête, les colonnes sélectionnées et les paramètres de visualisation seront alors enregistrés. Créez des vues enregistrées pour accéder rapidement aux processus qui vous intéressent sans configuration et pour partager les données de processus avec votre équipe.
 
 ## Processus de la plateforme Datadog
 
@@ -271,9 +339,9 @@ Les live processes vous aident à gagner en visibilité sur les déploiements de
 
 Dans les [traces de l'APM][10], vous pouvez cliquer sur la span d'un service pour afficher les processus qui s'exécutent sur son infrastructure sous-jacente. Les processus d'une span de service sont mis en corrélation avec les hosts ou pods sur lesquels le service s'exécute au moment de la requête. Vous pouvez analyser des métriques de processus, comme le processeur et la mémoire RSS, en consultant parallèlement les erreurs au niveau du code. Vous pourrez ainsi distinguer les problèmes spécifiques à l'application des problèmes d'infrastructure globaux. Lorsque vous cliquez sur un processus, vous êtes redirigé vers la [page Live Processes][1]. Les processus associés ne sont actuellement pas pris en charge pour les traces sans serveur et Browser. 
 
-### Network Performance Monitoring 
+### Network Performance Monitoring
 
-Lorsque vous étudiez une dépendance dans la [vue d'ensemble de la page Network][11], vous pouvez consulter les processus exécutés sur l'infrastructure sous-jacente des endpoints (p. ex, les services) qui communiquent entre eux. Utilisez les métadonnées des processus pour déterminer si une mauvaise connexion réseau (caractérisée par un nombre élevé de retransmissions TCP) ou une forte latence des appels réseau (caractérisée par une longue durée d'aller-retour TCP) peut être causée par de lourdes charges de travail utilisant les ressources de ces endpoints. Un tel dysfonctionnement peut nuire à l'intégrité et à l'efficacité des communications.
+Lorsque vous inspectez une dépendance dans la [vue d'ensemble du réseau][11], vous pouvez consulter les processus exécutés sur l'infrastructure sous-jacente des endpoints (par exemple, les services) qui communiquent entre eux. Utilisez les métadonnées des processus pour déterminer si une mauvaise connexion réseau (caractérisée par un nombre élevé de retransmissions TCP) ou une forte latence des appels réseau (caractérisée par une longue durée d'aller-retour TCP) peut être causée par de lourdes charges de travail utilisant les ressources de ces endpoints. Un tel dysfonctionnement peut nuire à l'intégrité et à l'efficacité des communications.
 
 ## Surveillance en temps réel
 

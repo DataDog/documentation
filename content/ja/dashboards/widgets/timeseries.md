@@ -81,6 +81,21 @@ further_reading:
 
 {{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="イベントを重ねて表示"  style="width:75%;" >}}
 
+##### 凡例のコンフィギュレーション
+
+グラフエディタの凡例セクションでオプションから 1 つ選択し、スクリーンボードに構成可能な凡例を追加します。
+
+{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="凡例のコンフィギュレーション"  style="width:100%;" >}}
+
+オプション
+
+* 自動 (デフォルト)
+* コンパクト
+* 拡張: 構成可能な値、平均、合計、最小、最大の列
+* なし
+
+注: タイムボードの場合、ダッシュボードが L または XL に設定されると凡例が自動的に表示されます。
+
 ##### Y 軸コントロール
 
 Y 軸コントロールは、UI または JSON エディターから使用できます。以下を実行できます。

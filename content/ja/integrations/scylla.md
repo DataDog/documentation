@@ -100,7 +100,8 @@ Kubernetes 環境でログを収集する Agent を構成する追加の情報�
 
 ### サービスのチェック
 
-`scylla.prometheus.health`: Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+**scylla.prometheus.health**: <br>
+Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ### イベント
 

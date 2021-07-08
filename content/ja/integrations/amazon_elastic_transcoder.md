@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/'
 draft: false
 git_integration_title: amazon_elastic_transcoder
 has_logo: true
+integration_id: amazon-elastic-transcoder
 integration_title: Amazon Elastic Transcoder
 is_public: true
 kind: インテグレーション
@@ -44,13 +45,13 @@ Amazon Elastic Transcoder から S3 バケットまたは CloudWatch のいず�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_elastic_transcoder` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Elastic Transcoder ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Elastic Transcoder ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-elbv2-policy
 cloud: AWS
 disable_edit: true
+integration_id: amazon-elbv2
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

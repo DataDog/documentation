@@ -82,7 +82,7 @@ A trace is used to track the time spent by an application processing a request a
 
 A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags](#span-tags). For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, which creates a parent-child relationship between the spans.
 
-For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Analytics][14].
+For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.store_name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Analytics][14].
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
 
@@ -127,7 +127,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 Indexed Spans represent spans indexed by a [retention filter](#retention-filters) stored in Datadog for 15 days that can be used to search, query, and monitor in [Trace Search and Analytics][14] by the [tags](#span-tags) included on the span.
 
 <div class="alert alert-info">
-After ingestion, by creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> you can control and visualize exactly how many spans are being indexed per service.
+Creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> after ingestion allows you to control and visualize exactly how many spans are being indexed per service.
 </div>
 
 ## Span tags

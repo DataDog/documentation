@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    postfix: assets/dashboards/postfix_dashboard.json
   logs:
     source: postfix
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    postfix_processes: assets/saved_views/postfix_processes.json
   service_checks: assets/service_checks.json
 categories:
   - Collaboration

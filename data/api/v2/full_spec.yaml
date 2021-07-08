@@ -102,6 +102,15 @@ components:
       required: true
       schema:
         type: string
+    ApplicationKeyIncludeParameter:
+      description: Resource path for related resources to include in the response.
+        Only `owned_by` is supported.
+      in: query
+      name: include
+      required: false
+      schema:
+        example: owned_by
+        type: string
     ApplicationKeysSortParameter:
       description: 'Application key attribute used to sort results. Sort order is
         ascending
@@ -4188,12 +4197,6 @@ components:
       required:
       - data
       type: object
-    SecurityFilterDeleteResponse:
-      description: Response object which only includes the metadata.
-      properties:
-        meta:
-          $ref: '#/components/schemas/SecurityFilterMeta'
-      type: object
     SecurityFilterExclusionFilter:
       description: Exclusion filter for the security filter.
       example:
@@ -4345,7 +4348,7 @@ components:
       description: List of rules.
       properties:
         data:
-          description: TODO.
+          description: Array containing the list of rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
           type: array
@@ -4411,6 +4414,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -4421,7 +4429,7 @@ components:
           type: string
         name:
           description: The name of the rule.
-          example: ''
+          example: My security monitoring rule.
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
@@ -4485,8 +4493,8 @@ components:
       - ONE_HOUR
       - TWO_HOURS
     SecurityMonitoringRuleKeepAlive:
-      description: "Once a signal is generated, the signal will remain \u201Copen\u201D\
-        \ if a case is matched at least once within\nthis keep alive window."
+      description: "Once a signal is generated, the signal will remain \u201Copen\u201D
+        if a case is matched at least once within\nthis keep alive window."
       enum:
       - 0
       - 60
@@ -4512,9 +4520,9 @@ components:
       - THREE_HOURS
       - SIX_HOURS
     SecurityMonitoringRuleMaxSignalDuration:
-      description: "A signal will \u201Cclose\u201D regardless of the query being\
-        \ matched once the time exceeds the maximum duration.\nThis time is calculated\
-        \ from the first seen timestamp."
+      description: "A signal will \u201Cclose\u201D regardless of the query being
+        matched once the time exceeds the maximum duration.\nThis time is calculated
+        from the first seen timestamp."
       enum:
       - 0
       - 60
@@ -4674,13 +4682,13 @@ components:
           type: string
         query:
           description: Query to run on logs.
-          example: a < 3
+          example: a > 3
           type: string
       required:
       - query
       type: object
     SecurityMonitoringRuleResponse:
-      description: Detection rule.
+      description: Rule.
       properties:
         cases:
           description: Cases for generating signals.
@@ -4701,6 +4709,10 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
         id:
           description: The ID of the rule.
           type: string
@@ -4732,6 +4744,10 @@ components:
             description: Tag.
             type: string
           type: array
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
         version:
           description: The version of the rule.
           format: int64
@@ -4765,6 +4781,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           type: boolean
@@ -4787,6 +4808,12 @@ components:
             description: Tag.
             type: string
           type: array
+        version:
+          description: The version of the rule being updated.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     SecurityMonitoringRuntimeAgentRule:
       description: The Agent rule.
@@ -5314,8 +5341,8 @@ paths:
         api_key:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
           step: there is a valid "api_key" in the system
       x-undo:
         operationId: DeleteAPIKey
@@ -5489,6 +5516,42 @@ paths:
       x-codegen-request-body-name: body
       x-undo:
         type: idempotent
+    get:
+      description: Get an application key for your org.
+      operationId: GetApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get an application key
+      tags:
+      - Key Management
+      x-undo:
+        type: safe
     patch:
       description: Edit an application key
       operationId: UpdateApplicationKey
@@ -5608,8 +5671,8 @@ paths:
         application_key:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
@@ -5965,9 +6028,9 @@ paths:
         incident:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"{{\
-              \ unique }}\",\n      \"customer_impacted\": false\n     },\n     \"\
-              type\": \"incidents\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"{{
+              unique }}\",\n      \"customer_impacted\": false\n     },\n     \"type\":
+              \"incidents\"\n  }\n}"
           step: there is a valid "incident" in the system
       x-undo:
         operationId: DeleteIncident
@@ -6528,10 +6591,10 @@ paths:
         logs_metric:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\"\
-              : {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\
-              \n      },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\
-              \n      }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\":
+              {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\n
+              \     },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\n
+              \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
           step: there is a valid "logs_metric" in the system
       x-menu-order: 2
       x-undo:
@@ -7241,10 +7304,10 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
-      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
-        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
-        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
-        \ your Customer Success Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types
+        is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
+        interested in Metrics without Limits&trade;, please contact your Customer
+        Success Manager.**"
   /api/v2/metrics/{metric_name}/all-tags:
     get:
       description: View indexed tag key-value pairs for a given metric name.
@@ -7323,10 +7386,10 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
-        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
-        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
-        \ your Customer Success Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types
+        is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
+        interested in Metrics without Limits&trade;, please contact your Customer
+        Success Manager.**"
     get:
       description: Returns the tag configuration for the given metric name.
       operationId: ListTagConfigurationByName
@@ -7363,10 +7426,10 @@ paths:
       x-menu-order: 2
       x-undo:
         type: safe
-      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
-        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
-        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
-        \ your Customer Success Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types
+        is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
+        interested in Metrics without Limits&trade;, please contact your Customer
+        Success Manager.**"
     patch:
       description: 'Update the tag configuration of a metric or percentile aggregations
         of a distribution metric. Can only be used with
@@ -7419,10 +7482,10 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
-        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
-        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
-        \ your Customer Success Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types
+        is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
+        interested in Metrics without Limits&trade;, please contact your Customer
+        Success Manager.**"
     post:
       description: 'Create and define a list of queryable tag keys for an existing
         count/gauge/rate/distribution metric. Optionally, include percentile aggregations
@@ -7480,10 +7543,10 @@ paths:
           - name: metric_name
             value: '"{{ unique_alnum }}"'
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\"\
-              , \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"\
-              distribution\"\n     },\n     \"type\": \"manage_tags\",\n     \"id\"\
-              : \"{{ unique_alnum }}\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"tags\":[\"app\",
+              \"datacenter\", \"{{ unique_alnum }}\"],\n      \"metric_type\":\"distribution\"\n
+              \    },\n     \"type\": \"manage_tags\",\n     \"id\": \"{{ unique_alnum
+              }}\"\n  }\n}"
           step: there is a valid "metric_tag_configuration" in the system
       x-menu-order: 1
       x-undo:
@@ -7492,10 +7555,10 @@ paths:
         - name: metric_name
           source: data.id
         type: unsafe
-      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types\
-        \ is only accessible for Metrics without Limits&trade; beta customers.\nIf\
-        \ you\u2019re interested in Metrics without Limits&trade;, please contact\
-        \ your Customer Success Manager.**"
+      x-unstable: "**Note: Use of this endpoint for count/gauge/rate metric types
+        is only accessible for Metrics without Limits&trade; beta customers.\nIf you\u2019re
+        interested in Metrics without Limits&trade;, please contact your Customer
+        Success Manager.**"
   /api/v2/metrics/{metric_name}/volumes:
     get:
       description: 'View distinct metrics volumes for the given metric name.
@@ -7750,8 +7813,8 @@ paths:
         role:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\"\n     },\n     \"type\": \"roles\"\n  }\n}"
           step: there is a valid "role" in the system
       x-menu-order: 2
       x-undo:
@@ -7990,8 +8053,8 @@ paths:
           - name: role_id
             source: role.data.id
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ permission.id }}\",\n    \"\
-              type\": \"{{ permission.type }}\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"id\": \"{{ permission.id }}\",\n    \"type\":
+              \"{{ permission.type }}\"\n  }\n}"
           step: the "permission" is granted to the "role"
       x-menu-order: 7
       x-undo:
@@ -8136,8 +8199,8 @@ paths:
           - name: role_id
             source: role.data.id
           - name: body
-            value: "{\n  \"data\": {\n    \"id\": \"{{ user.data.id }}\",\n    \"\
-              type\": \"{{ user.data.type }}\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"id\": \"{{ user.data.id }}\",\n    \"type\":
+              \"{{ user.data.type }}\"\n  }\n}"
           step: the "user" has the "role"
       x-menu-order: 10
       x-undo:
@@ -8228,12 +8291,12 @@ paths:
         security_filter:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"type\": \"security_filters\",\n    \"\
-              attributes\": {\n      \"name\": \"{{ unique }}\",\n      \"query\"\
-              : \"service:{{ unique_alnum }}\",\n      \"exclusion_filters\":[\n \
-              \       {\n          \"name\": \"Exclude logs from staging\",\n    \
-              \      \"query\": \"source:staging\"\n        }\n     ],\n      \"filtered_data_type\"\
-              :\"logs\",\n      \"is_enabled\": true\n     }\n  }\n}"
+            value: "{\n  \"data\": {\n    \"type\": \"security_filters\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique }}\",\n      \"query\": \"service:{{
+              unique_alnum }}\",\n      \"exclusion_filters\":[\n        {\n          \"name\":
+              \"Exclude logs from staging\",\n          \"query\": \"source:staging\"\n
+              \       }\n     ],\n      \"filtered_data_type\":\"logs\",\n      \"is_enabled\":
+              true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
       x-undo:
         operationId: DeleteSecurityFilter
@@ -8248,14 +8311,8 @@ paths:
       parameters:
       - $ref: '#/components/parameters/SecurityFilterID'
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SecurityFilterDeleteResponse'
-          description: OK
         '204':
-          description: No Content
+          description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
         '404':
@@ -8382,14 +8439,14 @@ paths:
         security_rule:
           parameters:
           - name: body
-            value: "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\"\
-              : \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\"\
-              : [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"\
-              filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\"\
-              : \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n\
-              \  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\"\
-              : 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"message\": \"Test\
-              \ rule\",\n  \"tags\": [],\n  \"isEnabled\": true\n}"
+            value: "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\":
+              \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
+              [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\":
+              [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
+              \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
+              {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
+              86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
+              true\n}"
           step: there is a valid "security_rule" in the system
       x-menu-order: 2
       x-undo:
@@ -8655,8 +8712,8 @@ paths:
         service:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
           step: there is a valid "service" in the system
       x-undo:
         operationId: DeleteIncidentService
@@ -8828,8 +8885,8 @@ paths:
         team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{\
-              \ unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
           step: there is a valid "team" in the system
       x-undo:
         operationId: DeleteIncidentTeam
@@ -8971,10 +9028,9 @@ paths:
         user_invitation:
           parameters:
           - name: body
-            value: "{\n  \"data\": [\n    {\n      \"relationships\": {\"user\": {\"\
-              data\": {\n        \"id\": \"{{ user.data.id }}\",\n        \"type\"\
-              : \"{{ user.data.type }}\"\n      }}},\n      \"type\": \"user_invitations\"\
-              \n    }\n  ]\n}"
+            value: "{\n  \"data\": [\n    {\n      \"relationships\": {\"user\": {\"data\":
+              {\n        \"id\": \"{{ user.data.id }}\",\n        \"type\": \"{{ user.data.type
+              }}\"\n      }}},\n      \"type\": \"user_invitations\"\n    }\n  ]\n}"
           source: data[0]
           step: the "user" has a "user_invitation"
       x-menu-order: 8
@@ -9127,9 +9183,9 @@ paths:
         user:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{\
-              \ unique }}@datadoghq.com\",\n      \"title\": \"user title\"\n    \
-              \ },\n     \"type\": \"users\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{
+              unique }}@datadoghq.com\",\n      \"title\": \"user title\"\n     },\n
+              \    \"type\": \"users\"\n  }\n}"
           step: there is a valid "user" in the system
       x-menu-order: 2
       x-undo:
@@ -9287,8 +9343,8 @@ paths:
         type: safe
   /api/v2/users/{user_id}/permissions:
     get:
-      description: "Get a user permission set. Returns a list of the user\u2019s permissions\n\
-        granted by the associated user's roles."
+      description: "Get a user permission set. Returns a list of the user\u2019s permissions\ngranted
+        by the associated user's roles."
       operationId: ListUserPermissions
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -9398,35 +9454,34 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
   name: Logs Metrics
-- description: "**Note: This endpoint is in public beta. If you have any feedback,\
-    \ contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read\
-    \ access on log data at all, you must grant the `logs_read_data` permission.\n\
-    From there you can limit what data a role grants read access to by associating\
-    \ a Restriction Query with that role.\n\nA Restriction Query is a logs query that\
-    \ restricts which logs the `logs_read_data` permission grants read access to.\n\
-    For users whose roles have Restriction Queries, any log query they make only returns\
-    \ those log events that also match\none of their Restriction Queries. This is\
-    \ true whether the user queries log events from any log-related feature, including\n\
-    the log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction\
-    \ Queries currently only support use of the following components of log events:\n\
-    \n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage\
-    \ restricted read access on log data for customers with large or complicated organizational\
-    \ structures\nis to add a team tag to log events to indicate which team(s) own(s)\
-    \ them, and then to scope Restriction Queries to the appropriate\nvalues of the\
-    \ team tag. Tags can be applied to log events in many ways, and a log event can\
-    \ have multiple tags with the same key (like team)\nand different values\u2014\
-    in this way the same log event can be visible to roles whose restriction queries\
-    \ are scoped to different team values.\n\nYou need an API and application key\
-    \ with Admin rights to interact with this endpoint."
+- description: "**Note: This endpoint is in public beta. If you have any feedback,
+    contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read
+    access on log data at all, you must grant the `logs_read_data` permission.\nFrom
+    there you can limit what data a role grants read access to by associating a Restriction
+    Query with that role.\n\nA Restriction Query is a logs query that restricts which
+    logs the `logs_read_data` permission grants read access to.\nFor users whose roles
+    have Restriction Queries, any log query they make only returns those log events
+    that also match\none of their Restriction Queries. This is true whether the user
+    queries log events from any log-related feature, including\nthe log explorer,
+    Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently
+    only support use of the following components of log events:\n\n- Reserved attributes\n-
+    The log message\n- Tags\n\nThe recommended way to manage restricted read access
+    on log data for customers with large or complicated organizational structures\nis
+    to add a team tag to log events to indicate which team(s) own(s) them, and then
+    to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags
+    can be applied to log events in many ways, and a log event can have multiple tags
+    with the same key (like team)\nand different values\u2014in this way the same
+    log event can be visible to roles whose restriction queries are scoped to different
+    team values.\n\nYou need an API and application key with Admin rights to interact
+    with this endpoint."
   name: Logs Restriction Queries
-- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
-    \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
-    - Modify tag configurations for metrics\n- View tags and volumes for metrics\n\
-    \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
-    \ over which a metric is viewed increases,\naggregation between points occurs\
-    \ to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags`\
-    \ API methods can only be performed by\na user who has the `Manage Tags for Metrics`\
-    \ permission."
+- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
+    be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
+    Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**:
+    A graph can only contain a set number of points\nand as the timeframe over which
+    a metric is viewed increases,\naggregation between points occurs to stay below
+    that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
+    only be performed by\na user who has the `Manage Tags for Metrics` permission."
   name: Metrics
 - description: The processes API allows you to query processes data for your organization.
   name: Processes

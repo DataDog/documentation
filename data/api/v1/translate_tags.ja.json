@@ -53,7 +53,7 @@
   },
   "logs": {
     "name": "ログ",
-    "description": "ログを検索し HTTP 経由で Datadog プラットフォームに送信します。HTTP リクエストあたりの制限は次のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ（非圧縮）: 5MB\n- 単一ログの最大サイズ: 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ: 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します。\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード:\n- 200: OK\n- 400: Bad request（ペイロードの形式の問題など）\n- 403: Permission issue（無効な API キーの使用など）\n- 413: Payload too large（バッチのサイズが非圧縮で 5MB 以上）\n- 5xx: Internal error, request should be retried after some time"
+    "description": "ログを検索して、HTTP で Datadog プラットフォームに送信します。"
   },
   "logs-indexes": {
     "name": "ログインデックス",
@@ -65,11 +65,15 @@
   },
   "metrics": {
     "name": "メトリクス",
-    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする\n\n**注**: グラフには設定された数のポイントのみを含めることができ、メトリクスが表示されるタイムフレームが長くなると、ポイント間の集計が発生してその設定された数を下回ります。\n\nDatadog には、ホストごとに 100 の時系列というソフト制限があり、時系列はメトリクス名とタグの一意の組み合わせとして定義されます。"
+    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする\n- メトリクスのタグコンフィギュレーションを変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示されるタイムフレームが長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` アクセス許可を持つユーザーのみが実行できます。"
   },
   "monitors": {
     "name": "モニター",
     "description": "[モニター](https://docs.datadoghq.com/monitors)を使用すると、気になるメトリクスまたはチェックを監視して、定義されたしきい値を超えたときにチームに通知することができます。\nモニターの作成方法については、モニターの作成ページを参照してください。"
+  },
+  "notebooks": {
+    "name": "ノートブック",
+    "description": "API 経由でノートブックにアクセスし、そこにあるすべてを簡単に整理、検索、\nおよびチームとオーガニゼーションに共有することができます。詳細は\n[ノートブックについてのドキュメント](https://docs.datadoghq.com/notebooks/)を参照してください。"
   },
   "organizations": {
     "name": "Organizations",
@@ -85,11 +89,15 @@
   },
   "service-checks": {
     "name": "サービスのチェック",
-    "description": "サービスチェックエンドポイントを使用すると、モニターで使用するためにチェックステータスを投稿できます。\nサービスチェックメッセージは 500 文字に制限されています。500 文字を超えるメッセージでチェックが投稿された場合、最初の 500 文字のみが表示されます。\n\n- [サービスチェックモニターの詳細をご覧ください。][1]\n- [プロセスチェックモニターの詳細をご覧ください。][2]\n- [ネットワークチェックモニターの詳細をご覧ください。][3]\n- [カスタムチェックモニターの詳細をご覧ください。][4]\n\n[1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert"
+    "description": "サービスチェックエンドポイントを使用すると、モニターで使用するためにチェックステータスを投稿できます。\nサービスチェックメッセージは 500 文字に制限されています。\n500 文字を超えるメッセージでチェックが投稿された場合、最初の 500 文字のみが表示されます。\n\n- [サービスチェックモニターの詳細をご覧ください。][1]\n- [プロセスチェックモニターの詳細をご覧ください。][2]\n- [ネットワークチェックモニターの詳細をご覧ください。][3]\n- [カスタムチェックモニターの詳細をご覧ください。][4]\n- [サービスチェックとステータスコードの詳細をご覧ください。][5]\n\n[1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
   },
   "service-dependencies": {
     "name": "サービスの依存関係",
     "description": "APM サービスマップ API。詳細については、[サービスマップのドキュメント](https://docs.datadoghq.com/tracing/visualization/services_map/)にアクセスしてください。"
+  },
+  "service-level-objective-corrections": {
+    "name": "Service Level Objective Corrections",
+    "description": "SLO ステータス補正を行うことで、特定の期間に発生しうる SLO のステータスとエラー予算への\n悪影響を回避することができます。ステータス補正は計画済みのメンテナンスウィンドウ、営業外の時間、\nまたはその他深刻な問題に相当しない期間の削除など、\nさまざまな目的で使用できます。"
   },
   "service-level-objectives": {
     "name": "サービスレベル目標",

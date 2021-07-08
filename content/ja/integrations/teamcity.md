@@ -6,6 +6,8 @@ assets:
   logs: {}
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    teamcity_processes: assets/saved_views/teamcity_processes.json
   service_checks: assets/service_checks.json
 categories:
   - configuration & deployment

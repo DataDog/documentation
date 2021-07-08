@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'
 draft: false
 git_integration_title: amazon_waf
 has_logo: true
+integration_id: amazon-waf
 integration_title: Amazon Web Application Firewall
 is_public: true
 kind: インテグレーション
@@ -42,9 +43,9 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 ### ログの収集
 
-#### Web Application Firewall 監査ログの有効化
+#### 監査ログ
 
-Web ACL で分析されたトラフィックに関する詳細な情報を取得するには、ログ記録を有効にします。
+Web Application Firewall 監査ログを有効にして、Web ACL で分析されたトラフィックに関する詳細情報を取得します。
 
 1. `aws-waf-logs-` で始まる名前で `Amazon Kinesis Data Firehose` を作成します。
 2. `Amazon Kinesis Data Firehose` の送信先として `Amazon S3` を選択し、プレフィックスとして `waf` を追加します。

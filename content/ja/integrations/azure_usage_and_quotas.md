@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_usage_and_quotas/'
 draft: false
 git_integration_title: azure_usage_and_quotas
 has_logo: true
+integration_id: azure-usage-and-quotas
 integration_title: Microsoft Azure Usage and Quotas
 is_public: true
 kind: インテグレーション

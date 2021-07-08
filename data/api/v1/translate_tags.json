@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "Monitors",
-    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about,\nnotifying your team when some defined threshold is exceeded.\nRefer to the Creating Monitors page for more information on creating monitors."
+    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/)."
   },
   "notebooks": {
     "name": "Notebooks",

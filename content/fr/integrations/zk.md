@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    zookeeper: assets/dashboards/zookeeper_dashboard.json
   logs:
     source: zookeeper
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    zookeeper_processes: assets/saved_views/zookeeper_processes.json
   service_checks: assets/service_checks.json
 categories:
   - orchestration
@@ -60,21 +63,9 @@ Le check ZooKeeper est inclus avec le paquet de l'[Agent Datadog][2] : vous n'a
 
 Depuis la version 3.5 de ZooKeeper, le paramètre `4lw.commands.whitelist` (voir la [documentation ZooKeeper][3]) permet d'ajouter des [commandes à 4 lettres][4] à la liste blanche. Par défaut, seule la commande `srvr` est autorisée. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
 
-{{< tabs >}}
-{{% tab "Host" %}}
-
-#### Host
-
-Pour configurer ce check lorsque l'Agent est exécuté sur un host :
-
-1. Modifiez le fichier `zk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) ZooKeeper.
-   Consultez le [fichier d'exemple zk.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
-
-2. [Redémarrez l'Agent][3].
-
 #### Activation de l'authentification SSL
 
-La version 3.5 de ZooKeeper prend en charge l'authentification SSL. Pour découvrir comment configurer l'authentification SSL avec ZooKeeper, consultez le [guide ZooKeeper à ce sujet][4] (en anglais).
+La version 3.5 de ZooKeeper prend en charge l'authentification SSL. Pour découvrir comment configurer l'authentification SSL avec ZooKeeper, consultez le [guide ZooKeeper à ce sujet][5] (en anglais).
 
 Après avoir configuré l'authentification SSL pour ZooKeeper, vous pouvez égalemet configuré l'Agent Datadog afin de le connecter à ZooKeeper via SSL. Si vous avez déjà configuré l'authentification à l'aide de fichiers JKS, suivez les étapes ci-dessous pour les convertir en fichiers PEM afin de procéder à la configuration TLS/SSL.
 
@@ -105,9 +96,21 @@ Pour convertir des fichiers JKS en fichiers PEM :
    openssl pkcs12 -in cert.p12 -out cert.pem
    ``` 
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
+#### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+
+1. Modifiez le fichier `zk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) ZooKeeper.
+   Consultez le [fichier d'exemple zk.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+2. [Redémarrez l'Agent][3].
+
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. ZooKeeper utilise le logger `log4j` par défaut. Pour activer la journalisation dans un fichier et personnaliser le format, modifiez le fichier `log4j.properties` :
 
@@ -157,7 +160,6 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://cwiki.apache.org/confluence/display/ZOOKEEPER/ZooKeeper+SSL+User+Guide
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
@@ -175,7 +177,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -190,7 +192,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `zk` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `zk` dans la section Checks.
 
 ## Données collectées
 
@@ -219,12 +221,13 @@ L'Agent envoie ce check de service si `expected_mode` est configuré dans `zk.ya
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/zk/images/zk_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
 [4]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help/
+[5]: https://cwiki.apache.org/confluence/display/ZOOKEEPER/ZooKeeper+SSL+User+Guide
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/help/

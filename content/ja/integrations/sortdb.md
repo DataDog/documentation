@@ -21,6 +21,7 @@ kind: インテグレーション
 maintainer: namrata.deshpande4@gmail.com
 manifest_version: 1.0.0
 metric_prefix: sortdb.
+metric_to_check: sortdb.stats.total_requests
 name: sortdb
 public_title: Datadog-Sortdb インテグレーション
 short_description: sortdb の監視を Datadog がサポート

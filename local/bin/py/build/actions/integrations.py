@@ -45,6 +45,9 @@ class Integrations:
         self.data_service_checks_dir = (
             join(self.data_dir, "service_checks") + sep
         )
+        self.data_npm_dir = (
+            join(self.data_dir, "npm") + sep
+        )
         self.content_integrations_dir = (
             join(self.content_dir, "integrations") + sep
         )
@@ -82,7 +85,7 @@ class Integrations:
             re.DOTALL,
         )
         self.regex_service_check = re.compile(
-            r"(#{3} Service Checks\n)([\s\S]*does not include any service checks at this time.)([\s\S]*)(#{2} Troubleshooting\n)",
+            r"(#{3} Service Checks\n)([\s\S]*for a list of service checks provided by this integration.)([\s\S]*)(#{2} Troubleshooting\n)",
             re.DOTALL,
         )
         self.regex_fm = re.compile(
@@ -100,6 +103,9 @@ class Integrations:
         makedirs(self.data_integrations_dir, exist_ok=True)
         makedirs(
             self.data_service_checks_dir, exist_ok=True
+        )
+        makedirs(
+            self.data_npm_dir, exist_ok=True
         )
         makedirs(
             self.content_integrations_dir, exist_ok=True
@@ -230,6 +236,9 @@ class Integrations:
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
+
+            elif file_name.endswith("defaults.go"):
+                self.process_npm_integrations(file_name)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -400,13 +409,49 @@ class Integrations:
         as the integration name it came from e.g /data/service_checks/docker.json
         :param file_name: path to a service_checks json file
         """
-        new_file_name = "{}.json".format(
-            basename(dirname(normpath(file_name)))
+
+        if file_name.endswith("/assets/service_checks.json"):
+            key_name = file_name.split(sep)[2]
+        else:
+            key_name = basename(
+                dirname(normpath(file_name))
+            )
+
+        new_file_name = "{}{}.json".format(
+            self.data_service_checks_dir, key_name
         )
+
         shutil.copy(
             file_name,
-            self.data_service_checks_dir + new_file_name,
+            new_file_name,
         )
+
+    def process_npm_integrations(self, file_name):
+        """
+        Save the defaults.go file from AWS as a json file
+        /data/npm/aws.json
+        """
+
+        dict_npm = {}
+        with open(file_name) as fh:
+
+            line_list = filter(None, fh.read().splitlines())
+
+            for line in line_list:
+                if line.endswith("service{"):
+                    integration = line.split('"')[1]
+                    dict_npm[integration] = {"name": integration}
+
+        new_file_name = "{}aws.json".format(self.data_npm_dir)
+
+        with open(
+                file=new_file_name,
+                mode="w",
+                encoding="utf-8",
+            ) as f:
+                json.dump(
+                    dict_npm, f, indent = 2, sort_keys = True
+                )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png

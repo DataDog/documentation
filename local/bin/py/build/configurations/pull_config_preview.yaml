@@ -1,4 +1,5 @@
 ---
+
 - org_name: jenkinsci
 
   repos:
@@ -27,6 +28,18 @@
           categories:
             - "configuration & deployment"
           doc_link: https://docs.datadoghq.com/integrations/jenkins/
+
+- org_name: aws
+
+  repos:
+  - repo_name: aws-sdk-go
+
+    contents:
+
+    - action: npm-integrations
+      branch: main
+      globs:
+      - aws/endpoints/defaults.go
 
 - org_name: DataDog
 
@@ -402,12 +415,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/developers/'
+        dest_path: '/integrations/guide/'
         file_name: 'amazon_cloudformation.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
           title: Datadog-Amazon CloudFormation
           kind: documentation
+          aliases:
+            - /developers/amazon_cloudformation/
 
   - repo_name: dd-sdk-android
     contents:

@@ -95,7 +95,7 @@ sudo datadog-agent status
 
 ```yaml
 # apm_config:
-#   APM Agent の実行の有無
+##   APM Agent の実行の有無
 #   enabled: true
 ```
 

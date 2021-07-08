@@ -24,9 +24,9 @@ Une fois le seuil défini et vos requêtes classées, le standard Apdex est déf
 
 {{< img src="tracing/faq/apdex_formula.png" alt="Formule Apdex" >}}
 
-Il est essentiel de choisir la limite adéquate, car les requêtes dont l'expérience utilisateur est jugée frustrante sont quatre fois plus lentes que les requêtes « normales ». Pour T = 3, l'utilisateur patiente pendant 3 secondes lors du chargement d'une page, mais ne souhaite probablement pas attendre jusqu'à 12 secondes.
+Il est essentiel de choisir le seuil adéquat, car les requêtes dont l'expérience utilisateur est jugée frustrante sont quatre fois plus lentes que les requêtes « normales ». Pour T = 3, l'utilisateur patiente pendant 3 secondes lors du chargement d'une page, mais ne souhaite probablement pas attendre jusqu'à 12 secondes.
 
-Pour cette raison, la limite Apdex vaut par défaut 0,5 seconde pour votre application Datadog. Vous pouvez toutefois modifier cette valeur directement depuis votre tableau de service.
+Pour cette raison, les seuils Apdex doivent être définis par des administrateurs, pour chaque service, avant d'être calculés.
 
 ## Configurer votre Apdex pour vos traces
 

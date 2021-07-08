@@ -25,7 +25,7 @@ Watchdog Insights を使用すると、ログを探索するときに受け取�
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
-## Watchdog Insights の操作
+## ナビゲーション
 
 Watchdog Insights バナーがログエクスプローラーの結果ページに表示され、現在のクエリに関連するインサイトが表示されます。
 
@@ -41,9 +41,7 @@ Watchdog Insights バナーがログエクスプローラーの結果ページ�
 
 各インサイトには、独自の組み込みインタラクションと詳細なトラブルシューティング資料を含むサイドパネルが付属しています。インサイトの相互作用とサイドパネルは、[Watchdog Insight のタイプ](#watchdog-insights-collections)によって異なります。
 
-
-## Watchdog Insights コレクション
-
+## 収集
 
 ### エラー外れ値
 
@@ -71,7 +69,6 @@ Watchdog Insights バナーがログエクスプローラーの結果ページ�
   * これらのログの[ログパターン][2]の包括的なリスト。
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="エラー外れ値サイドパネル" style="width:60%;" >}}
-
 
 ## その他の参考資料
 

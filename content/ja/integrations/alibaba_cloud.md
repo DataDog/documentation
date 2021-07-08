@@ -12,6 +12,7 @@ further_reading:
     text: Alibaba Cloud を Datadog で監視
 git_integration_title: alibaba_cloud
 has_logo: true
+integration_id: alibaba-cloud
 integration_title: Alibaba Cloud
 is_public: true
 kind: インテグレーション
@@ -21,6 +22,10 @@ public_title: Datadog-Alibaba Cloud インテグレーション
 short_description: Alibaba Cloud サービスを Datadog と統合
 version: '1.0'
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog Alibaba Cloud インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
+{{< /site-region >}}
+
 ## 概要
 
 Alibaba Cloud に接続して、以下からメトリクスを取得します。
@@ -39,7 +44,7 @@ Alibaba Cloud に接続して、以下からメトリクスを取得します。
 
 [Datadog-Alibaba Cloud インテグレーションコンフィギュレーションタイル][1]に移動し、_add account_ を押します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Datadog を Alibaba Cloud API と統合するには、以下のパラメーターを入力します。
 
@@ -104,7 +109,6 @@ Alibaba Cloud のイベントは、Alibaba Cloud サービスごとに収集さ�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

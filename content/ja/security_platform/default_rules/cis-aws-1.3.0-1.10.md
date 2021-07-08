@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/cis-aws-1.3.0-1.10
 cloud: AWS
 disable_edit: true
+integration_id: amazon-iam
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/pagerduty/'
 draft: false
 git_integration_title: pagerduty
 has_logo: true
+integration_id: pagerduty
 integration_title: PagerDuty
 is_public: true
 kind: インテグレーション
@@ -18,7 +19,13 @@ public_title: Datadog-PagerDuty インテグレーション
 short_description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
 version: '1.0'
 ---
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="pagerduty インシデントトレンド" popup="true">}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。</div>
+{{< /site-region >}}
+
+{{< site-region region="us" >}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="PagerDuty インシデントトレンド" popup="true">}}
+{{< /site-region >}}
 
 ## 概要
 
@@ -32,7 +39,9 @@ PagerDuty を Datadog に接続して、以下のことができます。
 
 Pagerduty の[こちらのドキュメント][1]を参照してください。
 
-Pagerduty を統合したら、Datadog のカスタム [Pagerduty インシデントトレンド][2]を確認できます。
+{{< site-region region="us" >}}
+PagerDuty を統合したら、Datadog のカスタム PagerDuty インシデントトレンドを確認できます。
+{{< /site-region >}}
 
 ## 収集データ
 
@@ -42,7 +51,7 @@ PagerDuty インテグレーションには、メトリクスは含まれませ�
 
 ### イベント
 
-トリガー/解決された PagerDuty イベントが[イベントストリーム][3]に表示されます。
+トリガー/解決された PagerDuty イベントが[イベントストリーム][2]に表示されます。
 
 ### サービスのチェック
 
@@ -74,5 +83,4 @@ PagerDuty インテグレーションには、サービスのチェック機能�
 Datadog では、PagerDuty に送信されるモニター通知の長さに上限を設けています。上限は **1024 文字**です。
 
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
-[2]: https://app.datadoghq.com/report/pagerduty
-[3]: https://docs.datadoghq.com/ja/events/
+[2]: https://docs.datadoghq.com/ja/events/

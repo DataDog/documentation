@@ -5,6 +5,8 @@ aliases:
   - /ja/graphing/dashboards/screenboards/
   - /ja/graphing/dashboards/screenboard/
   - /ja/dashboards/screenboard/
+  - /ja/screenboards/
+  - /ja/screenboard/
 further_reading:
   - link: /dashboards/template_variables/
     tag: ドキュメント
@@ -40,7 +42,7 @@ further_reading:
 
 UTC 時間とデフォルトのタイムゾーンを切り替えます。
 
-### Notifications
+### 通知
 
 スクリーンボードで通知が有効になると、[イベントストリーム][3]でイベントが作成されます。このイベントでは、テキストの変更、ウィジェットの変更、スクリーンボードの複製、スクリーンボードの削除に関する情報が、アクションを実行したユーザーの名前とともに表示されます。
 

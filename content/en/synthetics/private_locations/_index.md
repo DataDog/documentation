@@ -593,6 +593,10 @@ You can also **vertically scale** your private locations by increasing the load 
 
 Read more about [dimensioning private locations](#dimension-your-private-location).
 
+## Monitor your private locations
+
+Although it's important to initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to monitor your containers. The recommended way to do so is by installing the [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] provides you with metrics about the health of your containers (memory usage and limits, CPU, disk, etc.), which you can then use to graph and be alerted on low resources.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -612,3 +616,4 @@ Read more about [dimensioning private locations](#dimension-your-private-locatio
 [13]: /synthetics/multistep?tab=requestoptions
 [14]: /synthetics/browser_tests/?tab=requestoptions
 [15]: /synthetics/private_locations/configuration#advanced-configuration
+[16]: /agent/

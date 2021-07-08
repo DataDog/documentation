@@ -21,9 +21,14 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 
 **Note**: The following usage types are not supported in this tool:
 
+- Analyzed Logs (Security)
+- Incident Management
 - Indexed Log Events
 - Ingested Logs
 - Indexed Spans
+- Ingested Spans
+- Network Flows
+- Real User Monitoring
 
 **Note: Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.**
 

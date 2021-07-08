@@ -318,17 +318,11 @@ p {
 h1 {
     line-height: 42px;
     padding-bottom: 15.5px;
-    /*&~ p {
-    padding-top:10px;
-  }*/
 }
 
 h2 {
     padding-bottom: 3px;
     line-height: 36px;
-    /*  &~ p {
-    padding-top:100px;
-  }*/
 }
 h4 {
     text-transform: uppercase;
@@ -364,7 +358,6 @@ h5 {
     }
     z-index: 1;
     padding-left: 29px;
-    // padding-top: 29px;
     padding-bottom: 100px;
     h2 > a,
     h3 > a,
@@ -519,6 +512,8 @@ h5 {
 
 /* codetabs inside content */
 .code-tabs {
+    min-height: 200px;
+
     & > ul {
         list-style-type: none;
         padding: 0;

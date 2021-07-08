@@ -17,6 +17,7 @@ aliases:
     {{< nextlink href="/dashboards/widgets/event_stream" >}}イベントストリーム{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}イベントタイムライン{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/free_text" >}}フリーテキスト{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/geomap" >}}ジオマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/group" >}}グループ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}ヒートマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}ホストマップ{{< /nextlink >}}

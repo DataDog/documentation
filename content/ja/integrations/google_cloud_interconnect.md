@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_interconnect/'
 draft: false
 git_integration_title: google_cloud_interconnect
 has_logo: true
+integration_id: google-cloud-interconnect
 integration_title: Google Cloud Interconnect
 is_public: true
 kind: integration

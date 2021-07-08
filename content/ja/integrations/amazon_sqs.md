@@ -13,6 +13,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_sqs/'
 draft: false
 git_integration_title: amazon_sqs
 has_logo: true
+integration_id: amazon-sqs
 integration_title: Amazon SQS
 is_public: true
 kind: インテグレーション
@@ -54,7 +55,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 証跡の構成方法については、[AWS CloudTrail を使用した Amazon SQS API コールのログ記録][6]を参照してください。証跡を定義する場合は、ログの書き込み先となる S3 バケットを選択します。
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail ロギング" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="CloudTrail ロギング" popup="true" style="width:70%;">}}
 
 #### ログを Datadog に送信する方法
 

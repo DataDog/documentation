@@ -496,7 +496,7 @@ CloudFormation スタックで、[Datadog Forwarder][14] 用に `DdFetchLambdaTa
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/getting_started/tagging/#defining-tags
+[1]: /ja/getting_started/tagging/
 [2]: /ja/getting_started/agent
 [3]: /ja/tracing/setup
 [4]: /ja/getting_started/tagging/
