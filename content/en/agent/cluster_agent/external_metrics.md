@@ -28,65 +28,93 @@ The custom and external metric providers, as opposed to the metrics server, are 
 
 As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics. This documentation page explains how to set it up and how to autoscale your Kubernetes workload based off of your Datadog metrics.
 
-## Requirements
+### Requirements
 
 1. Running Kubernetes >v1.10 in order to be able to register the External Metrics Provider resource against the API server.
 2. Having the aggregation layer enabled. Refer to the [Kubernetes aggregation layer configuration documentation][3].
 
 ## Set up the Cluster Agent external metric server
 
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+To enable the External Metrics Server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration to set `clusterAgent.metricsProvider.enabled` to `true`, then redeploy your Datadog Helm chart:
+
+  ```yaml
+  clusterAgent:
+    enabled: true
+    # Enable the metricsProvider to be able to scale based on metrics in Datadog
+    metricsProvider:
+      # clusterAgent.metricsProvider.enabled
+      # Set this to true to enable Metrics Provider
+      enabled: true
+  ```
+
+This automatically updates the necessary RBAC configurations as well as sets up the corresponding `Service` and `APIService` for Kubernetes to utilize.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+
 ### Custom metrics server
 
-To enable the Custom Metrics Server, follow the instructions to [set up the Datadog Cluster Agent][4], but when editing the deployment manifest of the Datadog Cluster Agent in [Step 3 - Create the Cluster Agent and its service][5], follow those extra steps:
+To enable the Custom Metrics Server, first follow the instructions to [set up the Datadog Cluster Agent][1] within your cluster. Once you have verified a succesful base deployment, edit your `Deployment` manifest for the Datadog Cluster Agent with the following steps:
 
-1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the deployment of the Datadog Cluster Agent.
-2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the deployment of the Datadog Cluster Agent with the Datadog [API and application keys for your account][6].
-3. Set `DATADOG_HOST` to `https://{{< region-param key="dd_full_site" >}}` (defaults to `https://app.datadoghq.com`).
+1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` environment variable to `true`
+2. Ensure you have **both** your environment variables `DD_APP_KEY` and `DD_API_KEY` set
+3. Ensure you have your `DD_SITE` environment variable set to your Datadog site: {{< region-param key="dd_site" code="true" >}}. It defaults to the `US` site `datadoghq.com`.
 
-### Register the external metrics provider
+### Register the external metrics provider service
 
-Once the Datadog Cluster Agent is up and running:
+Once the Datadog Cluster Agent is up and running you will need to apply some additional RBAC policies and setup the `Service` to route the corresponding requests.
 
-1. Create the `datadog-custom-metrics-server` service, exposing the port `443` with the following `custom-metric-server.yaml` manifest:
+1. Create a `Service` named `datadog-custom-metrics-server`, exposing the port `443` with the following `custom-metric-server.yaml` manifest:
 
     ```yaml
-      kind: Service
-      apiVersion: v1
-      metadata:
-        name: datadog-custom-metrics-server
-      spec:
-        selector:
-          app: datadog-cluster-agent
-        ports:
-        - protocol: TCP
-          port: 443
-          targetPort: 443
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: datadog-custom-metrics-server
+    spec:
+      selector:
+        app: datadog-cluster-agent
+      ports:
+      - protocol: TCP
+        port: 443
+        targetPort: 443
     ```
+    **Note:** The Cluster Agent by default is expecting these requests over port `443`. However, if your Cluster Agent `Deployment` has set the environment variable `DD_EXTERNAL_METRICS_PROVIDER_PORT` to some other port value, change the `targetPort` of this `Service` accordingly.
 
-    Apply this change by running `kubectl apply -f custom-metric-server.yaml`
-
-2. Download the [`rbac-hpa.yaml` RBAC rules file][7].
-3. Register the Cluster Agent as an External Metrics Provider via the service, exposing the port `443` by applying the RBAC rules from above:
+    Apply this `Service` by running `kubectl apply -f custom-metric-server.yaml`
+2. Download the [`rbac-hpa.yaml` RBAC rules file][2].
+3. Register the Cluster Agent as an External Metrics Provider by applying this file:
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
 
+[1]: /agent/cluster_agent/setup/?tab=daemonset
+[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Run the HPA
 
-Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][8] manifest and specify `type: External` for your metrics in order to notify the Datadog Cluster Agent to pull the metrics from Datadog:
+Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][4] manifest and specify `type: External` for your metrics in order to notify the HPA to pull the metrics from the Datadog Cluster Agent's service:
 
 ```yaml
 spec:
   metrics:
     - type: External
       external:
-      metricName: "<METRIC_NAME>"
-      metricSelector:
-        matchLabels:
-          <TAG_KEY>: <TAG_VALUE>
+        metricName: "<METRIC_NAME>"
+        metricSelector:
+          matchLabels:
+            <TAG_KEY>: <TAG_VALUE>
 ```
 
-**Example**: An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:
+#### Example HPA
+An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:
 
 ```yaml
 apiVersion: autoscaling/v2beta1
@@ -116,13 +144,13 @@ Note in this manifest that:
 - The maximum number of replicas created is `3`, and the minimum is `1`.
 - The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This metric format corresponds to the Datadog one.
 
-Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see [in the Kubernetes horizontal pod autoscaling documentation][9], the largest of the proposed values is the one chosen.
+Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see [in the Kubernetes horizontal pod autoscaling documentation][5], the largest of the proposed values is the one chosen.
 
 **Note**: Running multiple Cluster Agents will raise API usage. The Datadog Cluster Agent completes 120 calls per hour for approximately 45 HPA objects in Kubernetes. Running more than 45 HPAs will increase the number of calls when fetching metrics from within the same org.
 
-## Autoscaling with custom queries using DatadogMetric CRD (Cluster Agent >= v1.7.0)
+## Autoscaling with custom queries using DatadogMetric CRD
 
-Autoscale on a Datadog query by using  the `DatadogMetric` CRD and the Datadog Cluster Agent >= 1.7.0.
+You can autoscale on a Datadog query by using  the `DatadogMetric` [Custom Resource Definition (CRD)][6] and Datadog Cluster Agent versions `1.7.0` or above. This is a more flexible approach and will allow you to scale with the exact Datadog query you would use in app.
 
 ### Custom query requirements
 
@@ -135,8 +163,29 @@ For autoscaling to work correctly, the query must follow these rules:
 **Note**: While the query is arbitrary, the start and end times are still set at `Now() - 5 minutes` and `Now()`
 
 ### Set up Datadog Cluster Agent to use DatadogMetric
+{{< tabs >}}
+{{% tab "Helm" %}}
 
-To activate usage of `DatadogMetric` CRD, follow these extra steps:
+To activate usage of the `DatdogMetric` CRD update your [datadog-values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`.  Then redeploy your Datadog Helm chart:
+
+  ```yaml
+  clusterAgent:
+    enabled: true
+    metricsProvider:
+      enabled: true
+      # clusterAgent.metricsProvider.useDatadogMetrics
+      # Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries
+      useDatadogMetrics: true
+  ```
+
+**Note:** This will automatically attempt to install the `DatadogMetric` CRD. If that CRD already exists prior to the initial Helm instalation it may conflict.
+
+This automatically updates the necessary RBAC files and will direct the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Daemonset" %}}
+To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
 1. Install the `DatadogMetric` CRD in your cluster.
 
@@ -151,6 +200,8 @@ To activate usage of `DatadogMetric` CRD, follow these extra steps:
     ```
 
 3. Set the `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` in the deployment of the Datadog Cluster Agent.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Set up an HPA to use a DatadogMetric object
 
@@ -169,7 +220,8 @@ spec:
   query: <your_custom_query>
 ```
 
-**Example**: A `DatadogMetric` object to autoscale an NGINX deployment based on the `nginx.net.request_per_s` Datadog metric:
+#### Example DatadogMetric Object
+A `DatadogMetric` object to autoscale an NGINX deployment based on the `nginx.net.request_per_s` Datadog metric:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -190,7 +242,8 @@ spec:
         metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
 ```
 
-**Example**: An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`:
+#### Example HPA with a DatadogMetric
+An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`:
 
 ```yaml
 apiVersion: autoscaling/v2beta1
@@ -223,7 +276,11 @@ If you choose to migrate an HPA later on to reference a `DatadogMetric`, the aut
 
 ### Troubleshooting
 
-The Datadog Cluster Agent will take care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing.
+The Datadog Cluster Agent will take care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing. You can run the following to get this information outputted for you:
+
+```shell
+kubectl describe datadogmetric <RESOURCE NAME>
+```
 
 **Example**: `status` part of a `DatadogMetric`:
 
@@ -265,9 +322,6 @@ The `currentValue` is the value gathered from Datadog, and thus the one that wil
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
 [2]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /agent/cluster_agent/setup/
-[5]: /agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
-[6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
-[8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
-[9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
+[4]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
+[5]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
+[6]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions
