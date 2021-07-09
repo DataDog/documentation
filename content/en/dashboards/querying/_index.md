@@ -47,7 +47,7 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
 
-If you want to explore your metrics further, start with the [Metrics Explorer][3] or a [notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
+Explore your metrics further with the [Metrics Explorer][3], a [Notebook][4], or see a list of metrics on the [Metrics Summary page][5].
 
 ### Filter
 
