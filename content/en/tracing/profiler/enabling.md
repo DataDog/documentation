@@ -70,7 +70,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 
 ## Enabling the allocation profiler
 
-In versions 0.84.0+ of the tracer, the allocation profiler is disabled by default. To enable it, see [Enabling the allocation profiler][8]
+In tracer v0.84.0+, the allocation profiler is disabled by default. To enable it, see [Enabling the allocation profiler][8].
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
