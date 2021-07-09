@@ -20,8 +20,8 @@ kind: documentation
 
 If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit and/or branch) is probably missing. To confirm this is the case, open a test execution in the [Test Runs][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing will show on the [Tests][5] section.
 
-1. Tracers will first try to fetch Git metadata using the local `.git` folder by executing `git` commands. This is the preferred approach, as it will populate all Git metadata fields, including commit message, author and committer information.
-2. If the `.git` folder is not present, or the `git` binary is not installed, tracers will fallback to use the environment variables set by the CI provider (as listed in the [Running tests inside a container][6] section) to collect Git information. This will populate, at least, repository, commit hash and branch information.
+1. Tracers will first try to fetch Git metadata using the local `.git` folder by executing `git` commands. This is the preferred approach, as it will populate all Git metadata fields, including commit message, author and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`.
+2. If the `.git` folder is not present, or the `git` binary is not installed, tracers will fallback to use the environment variables set by the CI provider to collect Git information. See the [Running tests inside a container][6] page for a list of environment variables that the tracer will attempt to read for each supported CI provider. This will populate, at least, repository, commit hash and branch information.
 3. If no CI provider environment variables are found, tests results will be sent with no Git metadata.
 
 ### Need further help?
