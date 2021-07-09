@@ -519,7 +519,7 @@ You can then start testing your first internal endpoint by launching a fast test
 
 {{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="80%">}}
 
-## Launch Synthetic tests from your private locations
+## Launch Synthetic tests from your private location
 
 If your private location reports correctly to Datadog you should also see an `OK` health status displayed on private locations list from the **Settings** page:
 
@@ -531,32 +531,71 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][11], etc.
 
+## Dimension your private location
 
-## Scale your private locations
+### Types of test runs
 
-You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
+Private locations can run [API][12], [Multistep API][13], and [Browser tests][14]. A same private location can run several types of tests. However, for dimensioning reasons, it can prove helpful to split test assignments based on test types and for instance have some private locations run only API and Multistep API tests and others run only Browser tests, which are more resource intensive than other test types. 
 
-You can also **vertically scale** your private locations using the [`concurrency` parameter][12] to adjust the number of available slots on your private locations. These slots are the number of tests your private location workers can run in parallel. Whenever updating the [`concurrency` parameter][12] of your private location, make sure to also update [the resources allocated to your workers](#hardware-requirements).
+### Maximum number of test runs
 
-### Hardware requirements
+Resource requirements depend on the maximum number of test runs your private location might have to execute in parallel. When defining that number, make sure to take into account spikes that might happen when performing on demand testing (for example, when running tests as part of your [CI/CD pipelines][1]).
 
-#### CPU and memory
+The maximum number of test runs allows you to define the [`concurrency` parameter][15] of your private location (it defaults to `10`). This parameter allows you to adjust the number of test runs your private location workers can run concurrently.
 
-* Base requirement: 150mCores/150MiB
+### Private location total hardware requirements
 
-* Additional requirement per slot:
+Once you know the [type of tests](#types-of-test-runs) you want your private location to execute and the [maximum number of test runs](#maximum-number-of-test-runs) that needs to be executed in parallel, you can define the **total** hardware requirements for your private location. 
 
-| Private location test type                          | Recommended concurrency range | CPU/Memory recommendation |
-| --------------------------------------------------- | ----------------------------- | ------------------------- |
-| Private location running both API and Browser tests | From 1 to 50                  | 150mCores/1GiB per slot   |
-| Private location running API tests only             | From 1 to 200                 | 20mCores/5MiB per slot    |
-| Private location running Browser tests only         | From 1 to 50                  | 150mCores/1GiB per slot   |
+* Base requirements: 
+  * CPU: 150mCores
+  * Memory: 150MiB
 
-**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][12] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
+* Additional requirements are based on the type of tests run by the private location:
 
-#### Disk
+| Test type                                     | CPU/Memory/Disk recommendation    |
+| --------------------------------------------- | --------------------------------- |
+| [API tests][12] and [Multistep API tests][13] | 20mCores/5MiB/1MiB per test run   |
+| [Browser tests][14]                           | 150mCores/1GiB/10MiB per test run |
 
-The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-only private locations).
+**Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, the recommendation for a safe usage is 
+~ 1.5Core CPU `(150mCores + (150mCores*10 test runs))`, ~ 10GiB memory `(150MiB + (1GiB*10 test runs))`, and ~ 100MiB disk `(10MiB*10 test runs)`.
+
+**Note:** Resources requirements may vary based on the application being tested (size and number of assets to be loaded, etc.).
+
+**Note:** When running both API or Multistep API tests and Browser tests on a single private location, the recommendation is to perform computation using Browser tests resource requirements.
+
+### Assign resources to your private location
+
+Once you know about the [**total** requirements for your private location](#private-location-total-hardware-requirements), you can decide how you want these resources to be distributed:
+
+* You can assign all resources to a single worker. In this case:
+  * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed in parallel on your private location`.
+  * Assign your [total private location resource requirements](#private-location-total-hardware-requirements) to your unique container.
+* You can distribute resources across several workers by running several containers for one private location with a single configuration file in order to spread the load. In this case:
+  * Set the [`concurrency` parameter][15] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
+  * Assign `total private location resource requirements / number of workers` resources to each private location container.
+
+
+**Example:** For a private location running only Browser tests, with a maximum number of concurrent test runs of `10`, your private location requires ~ 1.5 core CPU, ~ 10GiB memory, and ~ 100MiB disk. If you want to distribute these resources across two workers, the [`concurrency` parameter][15] should be set to `5`, and each worker should be allocated ~ 750mCores CPU, ~ 5GiB memory, and ~ 50MiB disk.
+
+#### Queueing mechanism
+
+When there are several workers associated with a private location, each worker requests a number of tests to run that depends on its [`concurrency` parameter][15] and on the number of additional test runs that can be assigned to it.   
+
+**Example:** Ten tests are scheduled to run simultaneously on a private location that has two workers running. If worker 1 is running two tests, it can request three additional tests to run. If worker 2 is not running any tests, it can request the five following tests. The remaining two tests can be requested by which ever worker has finished running its test first (which ever worker has available slots).
+
+## Scale your private location
+
+Because you can run several containers for one single private location with a single configuration file, you can **horizontally scale** your private locations by adding or removing workers to them. When doing so, make sure to set a `concurrency` parameter and allocate worker resources that are consistent with the types and the number of tests you want your private location to execute.
+
+You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
+
+Read more about [dimensioning private locations](#dimension-your-private-location).
+
+## Monitor your private locations
+
+Although it's important to initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to monitor your containers. The recommended way to do so is by installing the [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] provides you with metrics about the health of your containers (memory usage and limits, CPU, disk, etc.), which you can then use to graph and be alerted on low resources.
 
 ## Further Reading
 
@@ -573,4 +612,8 @@ The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-
 [9]: /synthetics/private_locations/configuration/
 [10]: https://docs.docker.com/engine/reference/builder/#healthcheck
 [11]: /synthetics/metrics
-[12]: /synthetics/private_locations/configuration#advanced-configuration
+[12]: /synthetics/api_tests/
+[13]: /synthetics/multistep?tab=requestoptions
+[14]: /synthetics/browser_tests/?tab=requestoptions
+[15]: /synthetics/private_locations/configuration#advanced-configuration
+[16]: /agent/

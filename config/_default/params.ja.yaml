@@ -4,8 +4,8 @@ meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: Incident Management が一般に使用できるようになりました。
-  mobile_message: Incident Management が広範に使用できるようになりました。
-  link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
+  desktop_message: 2021 State of Serverless レポート
+  mobile_message: 2021 State of Serverless レポート
+  link: 'https://www.datadoghq.com/state-of-serverless/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerServerlessReport'
 exclude: []
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。

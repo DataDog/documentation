@@ -53,6 +53,14 @@ L'intégration ProxySQL est incluse avec le package de l'[Agent Datadog][3] : v
 
 ### Configuration
 
+#### Activation de l'authentification SSL
+Pour exiger une validation SSL/TLS complète lors de la connexion à ProxySQL, activez l'option `tls_verify` dans `conf.yaml`. Spécifiez les certificats et mots de passe requis pour la connexion via SSL/TLS.
+
+```yaml
+    tls_verify: true
+    tls_ca_cert: ca_cert.pem
+```
+
 {{< tabs >}}
 {{% tab "Host" %}}
 

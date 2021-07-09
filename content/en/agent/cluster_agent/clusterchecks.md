@@ -311,7 +311,7 @@ The Agent `status` command should show the check instance running and reporting 
 [2]: /agent/cluster_agent/
 [3]: /agent/cluster_agent/setup/
 [4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[5]: /developers/write_agent_check/
+[5]: /developers/custom_checks/write_agent_check/
 [6]: /integrations/mysql/
 [7]: /agent/faq/template_variables/
 [8]: /getting_started/tagging/unified_service_tagging

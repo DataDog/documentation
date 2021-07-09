@@ -136,10 +136,12 @@ Prometheus Autodiscovery を使用して、Datadog Agent でネイティブ Prom
 
 ### 要件
 
-- Datadog Agent v7 または v6.26 以降（Pod チェックの場合）
+- Datadog Agent v7.27 以降または v6.27 以降 (Pod チェックの場合)
 - Datadog Cluster Agent v1.11 以降（サービスおよびエンドポイントチェックの場合）
 
 ### コンフィギュレーション
+
+#### 基本のコンフィギュレーション
 
 Helm `values.yaml` で、以下を追加します。
 
@@ -162,12 +164,57 @@ datadog:
 
 このコンフィギュレーションでは、[OpenMetrics インテグレーション][1]のデフォルトコンフィギュレーションを使用して、公開されたすべてのメトリクスを収集するチェックを生成します。
 
+#### 高度なコンフィギュレーション
+
+`values.yaml` の `additionalConfigs` コンフィギュレーションフィールドで、ネイティブの Prometheus アノテーション以外にも高度な Openmetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
+
+`additionalConfigs` は Openmetrics チェックコンフィギュレーションとオートディスカバリーのルールを含む構造のリストです。
+
+Openmetrics によりサポートされるすべての[コンフィギュレーションフィールド][14]は、コンフィギュレーションリストで受け渡されます。
+
+オートディスカバリーのコンフィギュレーションはコンテナ名または Kubernetes アノテーション、もしくはその両方に基づきます。`kubernetes_container_names` および `kubernetes_annotations` の両方が定義されている場合、AND のロジックが使用されます (両方のルールに一致する必要があります)。
+
+`kubernetes_container_names` は対象とするコンテナ名のリストで、`*` を使用したワイルドカードをサポートしています。
+
+`kubernetes_annotations` には、ディスカバリーのルールを定義する `include` と `exclude` の 2 つのラベルマップが含まれます。
+
+**注:** Datadog Agent コンフィギュレーションでの `kubernetes_annotations` のデフォルト値は次の通りです:
+
+```
+kubernetes_annotations:
+  include:
+    - prometheus.io/scrape: "true"
+  exclude:
+    - prometheus.io/scrape: "false"
+```
+
+**例:**
+
+この例では、`app=my-app` とラベルが付いたポッドで実行される `my-app` という名前のコンテナを対象とする高度なコンフィギュレーションを定義しています。`send_distribution_buckets` オプションを有効化し、5 秒のカスタムタイムアウトを定義することで、Openmetrics チェックのコンフィギュレーションも同様にカスタマイズすることができます。
+
+```
+datadog:
+...
+  prometheusScrape:
+    enabled: true
+    additionalConfigs:
+      -
+        configurations:
+        - timeout: 5
+          send_distribution_buckets: true
+        autodiscovery:
+          kubernetes_container_names:
+            - my-app
+          kubernetes_annotations:
+            include:
+              app: my-app
+```
 
 ## カスタムインテグレーションを公式インテグレーションに
 
 デフォルトでは、汎用の Prometheus チェックによって取得されるすべてのメトリクスが、カスタムメトリクスだと見なされます。既製ソフトウェアを監視されて、公式のインテグレーションにするべきだと思われた場合は、[ぜひご提供をお願いします][5]。
 
-公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][14] インテグレーションを参照します。
+公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][15] インテグレーションを参照します。
 
 ## その他の参考資料
 
@@ -177,7 +224,7 @@ datadog:
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/prometheus/
+[5]: /ja/developers/custom_checks/prometheus/
 [6]: /ja/integrations/guide/prometheus-metrics
 [7]: /ja/agent/kubernetes/#installation
 [8]: /ja/getting_started/tagging/
@@ -186,4 +233,5 @@ datadog:
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /ja/agent/faq/template_variables/
-[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[14]: https://github.com/DataDog/integrations-core/blob/7.27.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[15]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

@@ -31,7 +31,7 @@ Consult on this page:
 * [Out of the box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 
-## Service Monitor
+## Service monitor
 
 Datadog proposes a list of monitors depending on your service type:
 
@@ -63,11 +63,11 @@ Datadog provides out of the box graphs for any given Service:
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs"  style="width:90%;">}}
 
-### Export to Timeboard
+### Export to timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][5]:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][5]:
 
-{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard"  style="width:40%;">}}
+{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Save to dashboard" style="width:80%;">}}
 
 ### Latency distribution
 
@@ -113,5 +113,5 @@ Choose what to display in your resources list:
 [2]: /tracing/visualization/resource/
 [3]: /monitors/monitor_types/apm/
 [4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[5]: /dashboards/timeboard/
+[5]: /dashboards/
 [6]: /tracing/visualization/#resources

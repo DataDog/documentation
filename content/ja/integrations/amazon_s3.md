@@ -14,6 +14,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
 draft: false
 git_integration_title: amazon_s3
 has_logo: true
+integration_id: amazon-s3
 integration_title: Amazon S3
 is_public: true
 kind: インテグレーション
@@ -102,7 +103,7 @@ AWS S3 インテグレーションには、サービスのチェック機能は�
 
 ### CloudTrail 暗号化ログ
 
-ご使用の AWS S3 で AWS CloudTrail ログデータが KMS によって暗号化される場合は、`kms:Decrypt` ポリシーを使用して Datadog ロールが Cloudtrail ログデータを解読できるようにします。[KMS 暗号化/解読ポリシーの詳細については、こちらを参照してください][13]。
+ご使用の AWS S3 で AWS CloudTrail ログデータが KMS によって暗号化される場合は、`kms:Decrypt` ポリシーを使用して Datadog ロールが CloudTrail ログデータを解読できるようにします。[KMS 暗号化/解読ポリシーの詳細については、こちらを参照してください][13]。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services

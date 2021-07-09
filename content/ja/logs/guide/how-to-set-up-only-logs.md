@@ -1,11 +1,11 @@
 ---
-title: Datadog Agent をログ収集のみに使用
+title: Datadog Agent をログまたはトレースの収集のみに使用
 aliases:
   - /logs/faq/how-to-set-up-only-logs
 kind: documentation
 ---
 <div class="alert alert-danger">
-メトリクスなしのログ収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
+メトリクスなしのログまたはトレース（または両方）の収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログおよびトレースのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
 </div>
 
 ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信が無効になり、ホストが Datadog に表示されなくなります。以下のステップを実行してください。
@@ -37,7 +37,7 @@ kind: documentation
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \

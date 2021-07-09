@@ -142,6 +142,16 @@
           "type": "string"
         }
       },
+      "ApplicationKeyIncludeParameter": {
+        "description": "Resource path for related resources to include in the response. Only `owned_by` is supported.",
+        "in": "query",
+        "name": "include",
+        "required": false,
+        "schema": {
+          "example": "owned_by",
+          "type": "string"
+        }
+      },
       "ApplicationKeysSortParameter": {
         "description": "Application key attribute used to sort results. Sort order is ascending\nby default. In order to specify a descending sort, prefix the\nattribute with a minus sign.",
         "in": "query",
@@ -22498,23 +22508,6 @@
         ],
         "type": "object"
       },
-      "SecurityFilterDeleteResponse": {
-        "description": "Response object which only includes the metadata.",
-        "properties": {
-          "meta": {
-            "description": "Optional metadata associated to the response.",
-            "properties": {
-              "warning": {
-                "description": "A warning message.",
-                "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          }
-        },
-        "type": "object"
-      },
       "SecurityFilterExclusionFilter": {
         "description": "Exclusion filter for the security filter.",
         "example": {
@@ -23101,9 +23094,9 @@
         "description": "List of rules.",
         "properties": {
           "data": {
-            "description": "TODO.",
+            "description": "Array containing the list of rules.",
             "items": {
-              "description": "Detection rule.",
+              "description": "Rule.",
               "properties": {
                 "cases": {
                   "description": "Cases for generating signals.",
@@ -23184,6 +23177,10 @@
                     "type": "object"
                   },
                   "type": "array"
+                },
+                "hasExtendedTitle": {
+                  "description": "Whether the notifications include the triggering group-by values in their title.",
+                  "type": "boolean"
                 },
                 "id": {
                   "description": "The ID of the rule.",
@@ -23437,6 +23434,11 @@
                   },
                   "type": "array"
                 },
+                "updateAuthorId": {
+                  "description": "User ID of the user who updated the rule.",
+                  "format": "int64",
+                  "type": "integer"
+                },
                 "version": {
                   "description": "The version of the rule.",
                   "format": "int64",
@@ -23631,6 +23633,11 @@
             },
             "type": "array"
           },
+          "hasExtendedTitle": {
+            "description": "Whether the notifications include the triggering group-by values in their title.",
+            "example": true,
+            "type": "boolean"
+          },
           "isEnabled": {
             "description": "Whether the rule is enabled.",
             "example": true,
@@ -23643,7 +23650,7 @@
           },
           "name": {
             "description": "The name of the rule.",
-            "example": "",
+            "example": "My security monitoring rule.",
             "type": "string"
           },
           "options": {
@@ -23860,7 +23867,7 @@
                 },
                 "query": {
                   "description": "Query to run on logs.",
-                  "example": "a < 3",
+                  "example": "a > 3",
                   "type": "string"
                 }
               },
@@ -24369,7 +24376,7 @@
           },
           "query": {
             "description": "Query to run on logs.",
-            "example": "a < 3",
+            "example": "a > 3",
             "type": "string"
           }
         },
@@ -24379,7 +24386,7 @@
         "type": "object"
       },
       "SecurityMonitoringRuleResponse": {
-        "description": "Detection rule.",
+        "description": "Rule.",
         "properties": {
           "cases": {
             "description": "Cases for generating signals.",
@@ -24460,6 +24467,10 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "hasExtendedTitle": {
+            "description": "Whether the notifications include the triggering group-by values in their title.",
+            "type": "boolean"
           },
           "id": {
             "description": "The ID of the rule.",
@@ -24713,6 +24724,11 @@
             },
             "type": "array"
           },
+          "updateAuthorId": {
+            "description": "User ID of the user who updated the rule.",
+            "format": "int64",
+            "type": "integer"
+          },
           "version": {
             "description": "The version of the rule.",
             "format": "int64",
@@ -24810,6 +24826,11 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "hasExtendedTitle": {
+            "description": "Whether the notifications include the triggering group-by values in their title.",
+            "example": true,
+            "type": "boolean"
           },
           "isEnabled": {
             "description": "Whether the rule is enabled.",
@@ -25050,6 +25071,13 @@
               "type": "string"
             },
             "type": "array"
+          },
+          "version": {
+            "description": "The version of the rule being updated.",
+            "example": 1,
+            "format": "int32",
+            "maximum": 2147483647,
+            "type": "integer"
           }
         },
         "type": "object"
@@ -30568,6 +30596,550 @@
         "x-codegen-request-body-name": "body",
         "x-undo": {
           "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get an application key for your org.",
+        "operationId": "GetApplicationKey",
+        "parameters": [
+          {
+            "description": "The ID of the application key.",
+            "in": "path",
+            "name": "app_key_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Resource path for related resources to include in the response. Only `owned_by` is supported.",
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "schema": {
+              "example": "owned_by",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response for retrieving an application key.",
+                  "properties": {
+                    "data": {
+                      "description": "Datadog application key.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of a full application key.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation date of the application key.",
+                              "example": "2020-11-23T10:00:00.000Z",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "key": {
+                              "description": "The application key.",
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "last4": {
+                              "description": "The last four characters of the application key.",
+                              "example": "abcd",
+                              "maxLength": 4,
+                              "minLength": 4,
+                              "readOnly": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the application key.",
+                              "example": "Application Key for submitting metrics",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the application key.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Resources related to the application key.",
+                          "properties": {
+                            "created_by": {
+                              "description": "Relationship to user.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "data"
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "application_keys",
+                          "description": "Application Keys resource type.",
+                          "enum": [
+                            "application_keys"
+                          ],
+                          "example": "application_keys",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "APPLICATION_KEYS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "included": {
+                      "description": "Array of objects related to the application key.",
+                      "items": {
+                        "description": "An object related to an application key.",
+                        "oneOf": [
+                          {
+                            "description": "User object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of user object returned by the API.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the user.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "disabled": {
+                                    "description": "Whether the user is disabled.",
+                                    "type": "boolean"
+                                  },
+                                  "email": {
+                                    "description": "Email of the user.",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "Handle of the user.",
+                                    "type": "string"
+                                  },
+                                  "icon": {
+                                    "description": "URL of the user's icon.",
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time that the user was last modified.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the user.",
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "description": "Status of the user.",
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "description": "Title of the user.",
+                                    "type": "string"
+                                  },
+                                  "verified": {
+                                    "description": "Whether the user is verified.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the user.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the user object returned by the API.",
+                                "properties": {
+                                  "org": {
+                                    "description": "Relationship to an organization.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationship to organization object.",
+                                        "properties": {
+                                          "id": {
+                                            "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "default": "orgs",
+                                            "description": "Organizations resource type.",
+                                            "enum": [
+                                              "orgs"
+                                            ],
+                                            "example": "orgs",
+                                            "type": "string",
+                                            "x-enum-varnames": [
+                                              "ORGS"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type"
+                                        ],
+                                        "type": "object"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_orgs": {
+                                    "description": "Relationship to organizations.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to organization objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to organization object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "orgs",
+                                              "description": "Organizations resource type.",
+                                              "enum": [
+                                                "orgs"
+                                              ],
+                                              "example": "orgs",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ORGS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "other_users": {
+                                    "description": "Relationship to users.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to user objects.",
+                                        "example": [],
+                                        "items": {
+                                          "description": "Relationship to user object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "users",
+                                              "description": "Users resource type.",
+                                              "enum": [
+                                                "users"
+                                              ],
+                                              "example": "users",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "USERS"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "type"
+                                          ],
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "required": [
+                                      "data"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "roles": {
+                                    "description": "Relationship to roles.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "An array containing type and ID of a role.",
+                                        "items": {
+                                          "description": "Relationship to role object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the role.",
+                                              "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "roles",
+                                              "description": "Roles type.",
+                                              "enum": [
+                                                "roles"
+                                              ],
+                                              "example": "roles",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "ROLES"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "users",
+                                "description": "Users resource type.",
+                                "enum": [
+                                  "users"
+                                ],
+                                "example": "users",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "USERS"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "summary": "Get an application key",
+        "tags": [
+          "Key Management"
+        ],
+        "x-undo": {
+          "type": "safe"
         }
       },
       "patch": {
@@ -51244,7 +51816,7 @@
         }
       },
       "post": {
-        "description": "Create a security filter.",
+        "description": "Create a security filter.\n\nSee the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nfor more examples.",
         "operationId": "CreateSecurityFilter",
         "requestBody": {
           "content": {
@@ -51615,32 +52187,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Response object which only includes the metadata.",
-                  "properties": {
-                    "meta": {
-                      "description": "Optional metadata associated to the response.",
-                      "properties": {
-                        "warning": {
-                          "description": "A warning message.",
-                          "example": "All the security filters are disabled. As a result, no logs are being analyzed.",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
           "204": {
-            "description": "No Content"
+            "description": "OK"
           },
           "403": {
             "content": {
@@ -51727,7 +52275,7 @@
         }
       },
       "get": {
-        "description": "Get the details of a specific security filter.",
+        "description": "Get the details of a specific security filter.\n\nSee the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nfor more examples.",
         "operationId": "GetSecurityFilter",
         "parameters": [
           {
@@ -52343,9 +52891,9 @@
                   "description": "List of rules.",
                   "properties": {
                     "data": {
-                      "description": "TODO.",
+                      "description": "Array containing the list of rules.",
                       "items": {
-                        "description": "Detection rule.",
+                        "description": "Rule.",
                         "properties": {
                           "cases": {
                             "description": "Cases for generating signals.",
@@ -52426,6 +52974,10 @@
                               "type": "object"
                             },
                             "type": "array"
+                          },
+                          "hasExtendedTitle": {
+                            "description": "Whether the notifications include the triggering group-by values in their title.",
+                            "type": "boolean"
                           },
                           "id": {
                             "description": "The ID of the rule.",
@@ -52679,6 +53231,11 @@
                             },
                             "type": "array"
                           },
+                          "updateAuthorId": {
+                            "description": "User ID of the user who updated the rule.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
                           "version": {
                             "description": "The version of the rule.",
                             "format": "int64",
@@ -52835,6 +53392,11 @@
                     },
                     "type": "array"
                   },
+                  "hasExtendedTitle": {
+                    "description": "Whether the notifications include the triggering group-by values in their title.",
+                    "example": true,
+                    "type": "boolean"
+                  },
                   "isEnabled": {
                     "description": "Whether the rule is enabled.",
                     "example": true,
@@ -52847,7 +53409,7 @@
                   },
                   "name": {
                     "description": "The name of the rule.",
-                    "example": "",
+                    "example": "My security monitoring rule.",
                     "type": "string"
                   },
                   "options": {
@@ -53064,7 +53626,7 @@
                         },
                         "query": {
                           "description": "Query to run on logs.",
-                          "example": "a < 3",
+                          "example": "a > 3",
                           "type": "string"
                         }
                       },
@@ -53107,7 +53669,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule.",
+                  "description": "Rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -53188,6 +53750,10 @@
                         "type": "object"
                       },
                       "type": "array"
+                    },
+                    "hasExtendedTitle": {
+                      "description": "Whether the notifications include the triggering group-by values in their title.",
+                      "type": "boolean"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -53440,6 +54006,11 @@
                         "type": "string"
                       },
                       "type": "array"
+                    },
+                    "updateAuthorId": {
+                      "description": "User ID of the user who updated the rule.",
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "version": {
                       "description": "The version of the rule.",
@@ -53630,7 +54201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule.",
+                  "description": "Rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -53711,6 +54282,10 @@
                         "type": "object"
                       },
                       "type": "array"
+                    },
+                    "hasExtendedTitle": {
+                      "description": "Whether the notifications include the triggering group-by values in their title.",
+                      "type": "boolean"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -53964,6 +54539,11 @@
                       },
                       "type": "array"
                     },
+                    "updateAuthorId": {
+                      "description": "User ID of the user who updated the rule.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
                     "version": {
                       "description": "The version of the rule.",
                       "format": "int64",
@@ -54099,6 +54679,11 @@
                       "type": "object"
                     },
                     "type": "array"
+                  },
+                  "hasExtendedTitle": {
+                    "description": "Whether the notifications include the triggering group-by values in their title.",
+                    "example": true,
+                    "type": "boolean"
                   },
                   "isEnabled": {
                     "description": "Whether the rule is enabled.",
@@ -54339,6 +54924,13 @@
                       "type": "string"
                     },
                     "type": "array"
+                  },
+                  "version": {
+                    "description": "The version of the rule being updated.",
+                    "example": 1,
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "type": "integer"
                   }
                 },
                 "type": "object"
@@ -54352,7 +54944,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule.",
+                  "description": "Rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -54433,6 +55025,10 @@
                         "type": "object"
                       },
                       "type": "array"
+                    },
+                    "hasExtendedTitle": {
+                      "description": "Whether the notifications include the triggering group-by values in their title.",
+                      "type": "boolean"
                     },
                     "id": {
                       "description": "The ID of the rule.",
@@ -54685,6 +55281,11 @@
                         "type": "string"
                       },
                       "type": "array"
+                    },
+                    "updateAuthorId": {
+                      "description": "User ID of the user who updated the rule.",
+                      "format": "int64",
+                      "type": "integer"
                     },
                     "version": {
                       "description": "The version of the rule.",

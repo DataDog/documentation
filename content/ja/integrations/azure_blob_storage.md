@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_blob_storage/'
 draft: false
 git_integration_title: azure_blob_storage
 has_logo: true
+integration_id: azure-blob-storage
 integration_title: Microsoft Azure Blob Storage
 is_public: true
 kind: インテグレーション
@@ -41,7 +42,7 @@ Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレ
 
 Azure Blob Storage インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 Azure Blob Storage インテグレーションには、サービスのチェック機能は含まれません。
 

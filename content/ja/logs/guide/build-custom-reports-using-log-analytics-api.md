@@ -18,9 +18,9 @@ further_reading:
 
 このガイドでは、以下の例についてご説明します、
 
-* [件数の取得](#getting-counts)
-* [分析の取得](#getting-stats)
-* [パーセンタイルの取得](#getting-percentiles)
+* [カウントを取得する](#getting-counts)
+* [統計を取得する](#getting-stats)
+* [パーセンタイルを取得する](#getting-percentiles)
 * [複数のグループ化、ユニークカウント、メトリクス](#複数のグループ化、ユニークカウント、メトリクス) 
 * [ページ区切り](#pagination)
 

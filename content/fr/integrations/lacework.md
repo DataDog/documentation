@@ -71,7 +71,7 @@ L'intégration Lacework n'inclut aucune métrique.
 
 L'intégration Lacework n'inclut aucun check de service.
 
-### Logs
+### Collecte de logs
 
 Lacework peut être configuré pour envoyer des logs.
 

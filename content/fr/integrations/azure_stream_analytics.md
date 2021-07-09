@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_stream_analytics/'
 draft: false
 git_integration_title: azure_stream_analytics
 has_logo: true
+integration_id: azure-streamanalytics
 integration_title: Microsoft Azure Stream Analytics
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Stream Analytics est un moteur de traitement d'événements conçu pour an
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Stream Analytics.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/
+  - /serverless/troubleshooting/serverless_apm_metrics/
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"
@@ -11,6 +12,9 @@ further_reading:
 - link: "/tracing/trace_search_and_analytics/#live-search-for-15-minutes"
   tag: "Documentation"
   text: "Live Search"
+- link: "https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/"
+  tag: "Blog"
+  text: "Real-time distributed tracing for Go and Java Lambda Functions"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}

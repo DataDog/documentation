@@ -85,7 +85,6 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 By default, DogStatsD listens on UDP port **8125**, so you need to bind this port to your host port when running the Agent in a container. If your StatsD metrics come from outside of `localhost`you must set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` to allow metric collection. In order to run the Agent with the DogStatsd server up, execute the following command:
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -454,7 +453,6 @@ For more information, see the [DogStatsD module][1] documentation.
 | `Tags`                  | List of strings | Global tags applied to every metric, event, and service check.                                                                                                                                                      |
 | `Buffered`              | Boolean         | Used to pack multiple DogStatsD messages in one payload. When set to `true`, messages are buffered until the total size of the payload exceeds `MaxMessagesPerPayload` or 100ms after the payload started building. |
 | `MaxMessagesPerPayload` | Integer         | The maximum number of metrics, events, and/or service checks a single payload can contain. This option only takes effect when the client is buffered.                                                               |
-| `AsyncUDS`              | Boolean         | Used to switch between async and blocking mode for UDS. Blocking mode allows for error checking but does not guarantee that calls won't block the execution.                                                        |
 | `WriteTimeoutUDS`       | Integer         | The timeout after which a UDS packet is dropped.                                                                                                                                                                    |
 
 For more options, see [Datadog's GoDoc][1].
@@ -504,7 +502,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/developers/events/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -515,8 +513,8 @@ If you're interested in learning more about the datagram format used by DogStats
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /developers/metrics/custom_metrics/
-[6]: /developers/events/dogstatsd/
+[6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
-[8]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[8]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /developers/metrics/

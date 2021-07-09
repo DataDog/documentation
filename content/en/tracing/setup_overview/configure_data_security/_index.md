@@ -18,7 +18,7 @@ The Datadog Agent and some tracing libraries have  options available to address 
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
-## Filtering Baseline
+## Filtering baseline
 
 Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security. In particular:
 
@@ -35,7 +35,7 @@ Datadog enforces several filtering mechanisms on spans as a baseline, to provide
 
     has its number in the URL obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
 
-## Agent Trace Obfuscation
+## Agent trace obfuscation
 
 Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
@@ -259,7 +259,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{< /tabs >}}
 
-## Exclude Resources from being collected
+## Exclude resources from being collected
 
 If your services include simulated traffic such as health checks, you may want to exclude these traces from being collected so the metrics for your services match production traffic.
 
@@ -280,7 +280,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 
 If you require tailored instrumentation for a specific application, consider using the Agent-side tracing API to select individual spans to include in traces. See the [API documentation][7] for additional information.
 
-## Modifying Spans with the Datadog Tracer
+## Modifying spans with the Datadog tracer
 
 While this page deals with modifying data once it has reached the Datadog Agent, some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). View the Custom Instrumentation documentation for your language for more information.
 

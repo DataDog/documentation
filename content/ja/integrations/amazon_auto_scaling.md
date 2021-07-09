@@ -15,6 +15,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
+integration_id: amazon-auto-scaling
 integration_title: AWS Auto Scaling
 is_public: true
 kind: インテグレーション
@@ -66,10 +67,10 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 #### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][7]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールで、AWS Auto Scaling ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールで、AWS Auto Scaling ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動でトリガーを追加][8]
-    - [Cloudwatch ロググループに手動でトリガーを追加][9]
+    - [CloudWatch ロググループに手動トリガーを追加][9]
 
 ## 収集データ
 

@@ -67,7 +67,7 @@ That said, configuration files are searched in this order (with the first match 
 * `./etc/datadog-agent/datadog.yaml`
 * `./datadog.yaml`
 
-A sample configuration file can be found in `/opt/datadog-agent/etc/datadog-agent`.
+A sample configuration file can be found in `/etc/datadog-agent`.
 
 A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available.
 

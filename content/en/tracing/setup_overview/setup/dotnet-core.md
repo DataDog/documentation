@@ -58,7 +58,7 @@ Otherwise, to begin tracing your applications:
 
 ## Automatic instrumentation
 
-### Installing the Tracer
+### Installing the tracer
 
 <div class="alert alert-warning">
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
@@ -290,7 +290,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 {{< /tabs >}}
 
-## Custom Instrumentation
+## Custom instrumentation
 
 <div class="alert alert-warning">
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
@@ -304,13 +304,13 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
 
 ## Install and configure the Agent for APM
 
-[Install the Datadog Agent][5] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
+[Install the Datadog Agent][5] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
 
 {{< tabs >}}
 
 {{% tab "Containers" %}}
 
-1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -364,13 +364,11 @@ For other environments, please refer to the [Integrations][4] documentation for 
 
 {{< /tabs >}}
 
-## Configure the Tracer
+## Configure the tracer
+
+{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
 
 The .NET Tracer has configuration settings that can be set by any of these methods:
-
-* Environment variables.
-* In the .NET application code.
-* Using a `datadog.json` file.
 
 {{< tabs >}}
 

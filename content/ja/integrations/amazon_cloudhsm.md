@@ -14,6 +14,7 @@ kind: インテグレーション
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm インテグレーション
 short_description: Datadog オーガニゼーションの HSM 監査ログを収集
+integration_id: amazon-cloudhsm
 ---
 ## 概要
 
@@ -25,7 +26,7 @@ Datadog は、CloudHSM ログを Datadog のログ管理ソリューションに
 
 ### ログの収集
 
-#### CloudHSM ログの有効化
+#### ログを有効にする
 
 CloudHSM では監査ログがデフォルトで有効になっています。
 

@@ -1,6 +1,7 @@
 # Hugo
 public/
 data/service_checks/
+data/npm
 integrations_data
 
 # Ignore generated examples
@@ -9,11 +10,11 @@ content/en/api/**/*.go
 content/en/api/**/*.java
 content/en/api/**/*.pybeta
 content/en/api/**/*.rbbeta
+content/en/api/**/*.ts
 
 # Ignoring all automated content
 # Developers/integrations
 content/en/developers/integrations/*.md
-content/en/developers/amazon_cloudformation.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -37,6 +38,7 @@ package-lock.json
 # Ignoring all integrations file
 content/en/integrations/*.md
 data/integrations/
+content/en/integrations/guide/amazon_cloudformation.md
 !data/integrations/docker_daemon.yaml
 !content/en/integrations/_index.md
 !content/en/integrations/cloudability.md
@@ -168,4 +170,7 @@ Makefile.config
 data/permissions.json
 
 static/images/integrations_logos/2020w2.pdf
+
+# Generated resources from Hugo Pipes
+resources/_gen/
 

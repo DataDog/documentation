@@ -2,7 +2,9 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    hadoop: assets/dashboards/hadoop_dashboard.json
+    yarn: assets/dashboards/yarn_dashboard.json
   logs:
     source: yarn
   metrics_metadata: metadata.csv

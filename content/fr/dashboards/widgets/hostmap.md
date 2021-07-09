@@ -49,67 +49,16 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][2] utilisé pour le widget Hostmap est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][2] pour en savoir plus.
 
-```text
-HOSTMAP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["hostmap"]},
-        "requests":       {
-            "type": "object",
-            "properties": {
-                'fill': REQUEST_SCHEMA,
-                'size': REQUEST_SCHEMA
-            },
-            "anyOf": [
-                {"required": ["fill"]},
-                {"required": ["size"]}
-            ],
-            "additionalProperties": false
-        },
-        "node_type":       {"enum": ["host", "container"]},
-        "no_metric_hosts": {"type": "boolean"},
-        "no_group_hosts":  {"type": "boolean"},
-        "group":           {"type": "array", "items": {"type": "string"}},
-        "scope":           {"type": "array", "items": {"type": "string"}},
-        "style":           {
-            "type": "object",
-            "properties": {
-                "palette":      {"type": "string"},
-                "palette_flip": {"type": "boolean"},
-                "fill_min":     {"type": "string"},
-                "fill_max":     {"type": "string"}
-            },
-            "additionalProperties": false
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][3] utilisé pour le widget Hostmap est le suivant :
 
-| Paramètre            | Type             | Obligatoire | Description                                                                                                                      |
-|----------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | chaîne           | oui      | Type du widget (utilisez `hostmap` pour le widget Hostmap).                                                                           |
-| `requests.fill`      | chaîne           | oui/non   | Requête utilisée pour remplir la carte. Consultez la [documentation relative au schéma JSON des requêtes][3] pour découvrir comment concevoir le `REQUEST_SCHEMA`. |
-| `requests.size`      | chaîne           | oui/non   | Requête utilisée pour dimensionner la carte. Consultez la [documentation relative au schéma JSON des requêtes][3] pour découvrir comment concevoir le `REQUEST_SCHEMA`. |
-| `node_type`          | chaîne           | non       | Le type de nœud à utiliser dans la carte. Valeurs possibles : `host` ou `container`.                                                |
-| `no_metric_hosts`    | Booléen          | non       | Permet d'afficher ou non les hosts sans métriques.                                                                                       |
-| `no_group_hosts`     | Booléen          | non       | Permet d'afficher ou non les hosts qui n'appartiennent à aucun groupe.                                                                             |
-| `group`              | tableau de strings | non       | Liste des préfixes de tags à utiliser pour le regroupement.                                                                                                |
-| `scope`              | tableau de strings | non       | Liste des tags utilisés pour filtrer la carte.                                                                                             |
-| `style.palette`      | chaîne           | non       | Palette de couleurs à appliquer au widget.                                                                                            |
-| `style.palette_flip` | Booléen          | non       | Permet d'inverser ou non les tons de la palette.                                                                                               |
-| `style.fill_min`     | chaîne           | non       | Valeur minimale à utiliser pour colorer la carte.                                                                                               |
-| `style.fill_max`     | chaîne           | non       | Valeur maximale à utiliser pour colorer la carte.                                                                                               |
-
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/infrastructure/hostmap/
-[2]: /fr/dashboards/graphing_json/widget_json/
-[3]: /fr/dashboards/graphing_json/request_json/
+[2]: /fr/api/v1/dashboards/
+[3]: /fr/dashboards/graphing_json/widget_json/

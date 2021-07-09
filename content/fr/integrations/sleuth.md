@@ -46,11 +46,11 @@ Sleuth est un outil de suivi de déploiement qui vous permet de surveiller les d
 Pour ajouter l'intégration Datadag :
 
 1. Connectez-vous à votre [compte Sleuth][1].
-1. Cliquez sur **Integrations** dans la barre latérale.
-2. Cliquez sur l'onglet _Metric Trackers_, puis sur **enable** dans la carte Datadog.
-3. Entrez votre clé d'API et votre clé d'application Datadog dans les champs correspondants.
-4. Si vos serveurs Datadog se trouvent dans l'Union européenne, cochez la case _My Datadog servers are in the EU_. Ne la cochez pas si vous ne savez pas.
-5. Sélectionnez **Save**. 
+2. Cliquez sur **Integrations** dans la barre latérale.
+3. Cliquez sur l'onglet _Metric Trackers_, puis sur **enable** dans la carte Datadog.
+4. Entrez votre clé d'API et votre clé d'application Datadog dans les champs correspondants.
+5. Si vos serveurs Datadog se trouvent dans l'Union européenne, cochez la case _My Datadog servers are in the EU_. Ne la cochez pas si vous ne savez pas.
+6. Sélectionnez **Save**. 
 
 > Votre clé d'API et votre clé d'application Datadog se trouvent dans **Integrations** &gt; **API**. Sinon, vous pouvez cliquer sur le lien **generate** dans la boîte de dialogue de Sleuth (visible ci-dessous) pour accéder à l'espace des clés d'API/d'application dans votre console Datadog. 
 

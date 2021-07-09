@@ -5,47 +5,53 @@ further_reading:
     - link: 'https://learn.datadoghq.com/course/view.php?id=39'
       tag: 'Learning Center'
       text: 'Introduction to Synthetic Tests'
-    - link: '/synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Learn more about browser tests'
     - link: '/synthetics/api_tests'
       tag: 'Documentation'
       text: 'Learn more about API tests'
-    - link: '/synthetics/browser_tests/#subtests'
+    - link: '/synthetics/multistep'
       tag: 'Documentation'
-      text: 'Create a browser subtest'
-    - link: '/synthetics/settings/'
+      text: 'Learn more about Multistep API tests'
+    - link: '/synthetics/browser_tests'
       tag: 'Documentation'
-      text: 'Configure advanced Synthetic Monitoring settings'
+      text: 'Learn more about Browser tests'
+    - link: '/synthetics/private_locations'
+      tag: 'Documentation'
+      text: 'Learn more about Private locations'
       
 ---
 
 ## Overview
 
-Datadog Synthetic Monitoring offers two different ways to monitor your applications: API tests to monitor the uptime of your API endpoints and browser tests to check key user journeys. Your tests can be run either from managed locations or from private locations. Synthetic Monitoring helps you ensure uptime, identify regional issues, and make sure key web transactions can be performed on your application.
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `TCP`, `SSL`, `DNS`, and `ICMP`) in a controlled and stable way, alerting you in case of faulty behavior (such as regression, broken feature, high response time, or unexpected status code).
+
+There are three ways to monitor your applications: [API tests][1] to monitor the uptime of your API endpoints, [Multistep API tests][2] to link several HTTP requests, and [Browser tests][3] to test key user journeys. You can run all tests from managed locations or from [private locations][4] to monitor internal-facing applications. Synthetic tests can be triggered on a schedule or directly from your [CI/CD pipelines][5].
 
 {{< img src="synthetics/synthetics_home.png" alt="Synthetic Monitoring home page" >}}
 
-By unifying Synthetic Monitoring data with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetic Monitoring][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
-
-The following guides show you how to set up your first Synthetic tests with Datadog. Follow the sections below to learn how to create a browser or API test and configure a test with a private location to monitor internal-facing applications or any private URLs.
+To set up your first Synthetic test with Datadog, follow the sections below.
 
 ## Prerequisites
 
-If you haven't already, create a [Datadog account][2].
+If you haven't already, create a [Datadog account][6].
 
 ## Configure your first test
 
-- [Create a private location][3] (if needed)
-- [Create a browser test][4]
-- [Create an API test][5]
+- [Create an API test][7] to start monitoring your API endpoints' uptime.
+- [Create a multistep API test][8] to start monitoring key workflows at the API level.
+- [Create a browser test][9] to start testing critical business transactions on your applications.
+- [Create a private location][10] to monitor internal applications using all Synthetic test types.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/list
-[2]: https://www.datadoghq.com/
-[3]: /getting_started/synthetics/private_location/
-[4]: /getting_started/synthetics/browser_test/
-[5]: /getting_started/synthetics/api_test/
+[1]: /synthetics/api_tests/
+[2]: /synthetics/multistep
+[3]: /synthetics/browser_tests/
+[4]: /synthetics/private_locations
+[5]: /synthetics/ci/
+[6]: https://www.datadoghq.com/
+[7]: /getting_started/synthetics/api_test/
+[8]: /getting_started/synthetics/api_test/#create-a-multistep-api-test
+[9]: /getting_started/synthetics/browser_test/
+[10]: /getting_started/synthetics/private_location/

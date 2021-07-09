@@ -49,8 +49,10 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -64,8 +66,10 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
+           -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
 ```
 
@@ -73,13 +77,27 @@ docker run -d --name datadog-agent \
 
 ログ収集に関連するコマンド：
 
-| コマンド                                               | 説明                                                                                                                                                      |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-e DD_LOGS_ENABLED=true`                             | `true` に設定すると、ログ収集が有効になります。Agent は構成ファイルのログ命令を探します。                                                          |
-| `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | すべてのコンテナのログ収集を有効にするログコンフィギュレーションを追加します。                                                                                         |
-| `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | 再起動の際やネットワークで問題が生じた際でもコンテナログを紛失しないよう、このディレクトリ内の各コンテナのために収集された最後のログ行は、ホストに保存されます。     |
-| `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Datadog Agent が自身のログやメトリクスを収集したり送信するのを防ぎます。Datadog Agent ログやメトリクスを収集したい場合は、このパラメータを削除します。このパラメーター値は正規表現をサポートしています。 |
-| `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | ログは Docker ソケットの `stdout/stderr` コンテナから収集されます。                                                                                        |
+`-e DD_LOGS_ENABLED=true`                                     
+: `true` に設定すると、ログ収集が有効になります。これで、Agent はコンフィギュレーションファイルにあるログインストラクションを探します。
+
+`-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`                
+: すべてのコンテナに対してログ収集を有効化するログコンフィギュレーションを追加します。
+
+`-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            
+: ファイルからの Docker コンテナログ収集を有効化するログコンフィギュレーションを追加します。Datadog Agent 7.27.0/6.27.0 以降で利用可能です。詳しくは[詳細セクション](#docker-containers-log-collection-from-file)を参照してください。
+
+`-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
+: 再起動中またはネットワーク障害発生時のコンテナログの紛失を回避します。このディレクトリで各コンテナについて収集されたログの最終行がホスト上に保存されます。
+
+`-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`                
+: Datadog Agent がそれ自身のログとメトリクスを収集および送信することを回避します。Datadog Agent のログまたはメトリクスを収集する場合はこのパラメーターを削除してください。このパラメーター値は正規表現をサポートしています。
+
+`-v /var/run/docker.sock:/var/run/docker.sock:ro`             
+: Docker daemon に接続してコンテナを探し、Docker ソケットから `stdout/stderr` を収集します。
+
+`-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
+: ファイルからコンテナログを収集します。Datadog Agent 6.27.0/7.27.0 以降で利用可能です。
+
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
@@ -99,11 +117,12 @@ docker run -d --name datadog-agent \
     logs_config:
         container_collect_all: true
     ```
-
-3. [Agent を再起動][2]し、Datadog のすべてのコンテナログを確認します。
+3. **Windows 10 のみ**: Docker コンテナ作業のアクセス許可を得るには、Datadog Agent ユーザーが `docker-users` グループのメンバーである必要があります。管理者コマンドプロンプトから `net localgroup docker-users "ddagentuser" /ADD` を実行するか、[Docker ユーザーグループ][2]のコンフィギュレーション手順に従ってください。
+4. [Agent を再起動][3]して、Datadog ですべてのコンテナログを確認します。
 
 [1]: /ja/agent/basic_agent_usage/
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
+[3]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "カスタムログを使用するホスト Agent" %}}
 
@@ -138,6 +157,18 @@ docker run -d --name datadog-agent \
 - コンテナ `Stderr` からのログは `Error` の状態がデフォルトとなります。
 
 - Docker のデフォルトである json-file ログドライバーではなく _journald_ ログドライバーを使用する場合は、コンテナ環境の設定に関するドキュメント [journald インテグレーション][2]をご覧ください。フィルタリング対象のパラメーターについての詳細は、[journald フィルターユニット][2]のドキュメントを参照してください。
+
+## ファイルからの Docker コンテナログ収集
+
+Datadog Agent 7.27.0/6.27.0 以降では、Docker コンテナログをファイルから収集することができます。ファイルからの Docker コンテナログ収集は Docker ソケットを介した収集に代わる手段で、より良いパフォーマンスが得られるほか、Docker コンテナログを保存するディレクトリが以下の場所で Agent に公開されてからすぐに使用することができます: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows)
+
+**重要**:
+
+- Docker ソケットコンテナでのログ収集からファイルベースのログ収集に移行する場合、新しいコンテナのみがファイルから読み取られます。必要に応じて環境変数 `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` を `true` に設定し、ファイルからすべてのコンテナログを抽出するよう Agent に強制することができます。この場合、すでにログの一部が収集されたコンテナについてはログの重複が発生することがあります。
+
+- Agent をコンテナファイルでのログ収集から Docker ソケットを介した収集に戻す場合も、既存のコンテナについてのログが重複する可能性があります。
+
+
 
 ## ログインテグレーション
 

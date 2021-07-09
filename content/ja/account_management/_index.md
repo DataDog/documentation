@@ -6,6 +6,10 @@ aliases:
   - /ja/guides/billing
   - /ja/account_management/settings
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
+{{< /site-region >}}
+
 ## アカウント設定
 
 Datadog の [account settings][1] ページでは、組織の他のメンバーに自分がどう表示されるかを制御できます。組織の切り替えや退出、通知の設定の管理ができます。

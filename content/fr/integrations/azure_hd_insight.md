@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_hd_insight/'
 draft: false
 git_integration_title: azure_hd_insight
 has_logo: true
+integration_id: azure-hdinsight
 integration_title: Microsoft Azure HDInsight
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure HDInsight est un service cloud qui simplifie, accélère et rentabilise le
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure HDInsight.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

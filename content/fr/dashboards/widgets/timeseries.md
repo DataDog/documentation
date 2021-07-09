@@ -63,23 +63,38 @@ Pour les graphiques linéaires, vous pouvez attribuer des palettes à différent
 
 #### Alias de métrique
 
-Chaque requête ou formule peut avoir un alias. L'alias remplace le nom sur le graphique et la légende, ce qui est utile pour les longs noms de métrique. À la fin de la requête/formule, cliquez sur **as...**, puis saisissez votre alias de métrique :
+Chaque requête, formule ou [tag de filtrage][6] peut avoir un alias. L'alias remplace le nom sur le graphique et la légende, ce qui est utile pour les longs noms de métrique ou les longues listes de filtres. À la fin de la requête/formule, cliquez sur **as...**, puis saisissez votre alias de métrique :
 
 {{< img src="dashboards/querying/metric_alias.png" alt="Alias de métrique" style="width:75%;" >}}
 
-##### Superposer des événements
+##### Superposition d'événements
 
-Intégrez des événements de systèmes associés pour ajouter plus de contexte à votre graphique. Par exemple, vous pouvez ajouter des commits Github, des déploiements Jenkins ou des événements de création Docker. Développez la section **Event Overlays** et saisissez une requête pour afficher ces événements. Utilisez le même format de requête que pour [le flux d'événements][6], par exemple :
+Intégrez des événements de systèmes associés pour ajouter plus de contexte à votre graphique. Par exemple, vous pouvez ajouter des commits Github, des déploiements Jenkins ou des événements de création Docker. Développez la section **Event Overlays** et saisissez une requête pour afficher ces événements. Utilisez le même format de requête que pour [le flux d'événements][7], par exemple :
 
 | Requête                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Affiche tous les événements provenant de la source Jenkins.                  |
 | `tag:role:web`              | Affiche tous les événements avec le tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [template variable][7] sélectionnée. |
+| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [template variable][8] sélectionnée. |
 
 Une fois activés, les événements s'affichent en superposition sur vos graphiques avec des barres rouges :
 
 {{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Superposition d'événements"  style="width:75%;" >}}
+
+##### Configuration de légendes
+
+Ajoutez des légendes personnalisables à vos screenboards en accédant à la section Legend dans l'éditeur de graphique et en sélectionnant une option.
+
+{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="Configuration de légendes"  style="width:100%;" >}}
+
+Options :
+
+* Automatic (par défaut)
+* Compact
+* Expanded : colonnes configurables pour value, avg, sum, min, max
+* None
+
+Remarque : pour les timeboards, les légendes s'afficheront automatiquement lorsque le format du dashboard est défini sur L ou XL.
 
 ##### Commandes de l'axe des ordonnées
 
@@ -96,7 +111,7 @@ Changer l'échelle de l'axe des ordonnées en développant le bouton *Y-Axis Con
 
 Les options de configuration suivantes sont disponibles :
 
-| Option                | Obligatoire | Description                                                                                                                                                                                                       |
+| Option                | Obligatoire | Rôle                                                                                                                                                                                                       |
 |-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Min`/`Max`           | Non       | Spécifie la valeur minimale et/ou maximale à afficher sur l'axe des ordonnées. Indiquez un nombre ou `Auto` (la valeur par défaut).                                                                                                     |
 | `Scale`               | Non       | Spécifie le type d'échelle. Valeurs autorisées :<br>- *linear* : une échelle linéaire (échelle par défaut).<br>- *log* : une échelle logarithmique<br>- *pow* : une échelle basée sur une puissance de 2. La valeur par défaut est 2, mais celle-ci peut être modifiée dans l'éditeur JSON.<br>- *sqrt* : une échelle basée sur la racine carrée. |
@@ -106,81 +121,17 @@ Les options de configuration suivantes sont disponibles :
 
 ## Plein écran
 
-Outre les [options de plein écran standard][8], vous pouvez appliquer des fonctions rapides, effectuer des comparaisons par rapport à des périodes précédentes, régler l'échelle de l'axe des ordonnées, enregistrer des modifications ou enregistrer un nouveau graphique.
+Outre les [options de plein écran standard][9], vous pouvez appliquer des fonctions rapides, effectuer des comparaisons par rapport à des périodes précédentes, régler l'échelle de l'axe des ordonnées, enregistrer des modifications ou enregistrer un nouveau graphique.
 
-Consultez l'article [Explorer les données sous la forme d'un graphique en plein écran][9] (en anglais) pour en savoir plus.
+Consultez l'article [Explorer les données sous la forme d'un graphique en plein écran][10] (en anglais) pour en savoir plus.
 
 ## API
 
-Le [schéma JSON][10] utilisé pour le widget Série temporelle est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][11] pour en savoir plus.
 
-```text
-TIMESERIES_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["timeseries"]},
-        "requests": {
-            "type":    "array",
-            "items":   REQUEST_SCHEMA,
-            "minItems": 1
-        },
-        "yaxis":   AXIS_SCHEMA,
-        "events":  EVENTS_SCHEMA,
-        "markers": MARKERS_SCHEMA,
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][12] utilisé pour le widget Série temporelle est le suivant :
 
-| Paramètre     | Type             | Obligatoire | Description                                                                                                                                               |
-|---------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | chaîne           | oui      | Type de widget (utilisez `timeseries` pour le widget Série temporelle).                                                                                               |
-| `requests`    | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][11] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
-| `yaxis`       | objet           | non       | Options de commande de l'axe des ordonnées. Consultez la [documentation relative au schéma JSON de l'axe des ordonnées][12] pour apprendre à élaborer le `AXIS_SCHEMA`.                                 |
-| `events`      | objet           | non       | Options de commande de superposition d'événements. Consultez la [documentation relative au schéma JSON des événements][13] pour apprendre à élaborer le `EVENTS_SCHEMA`.                         |
-| `markers`     | objet           | non       | Options de commande de superposition de marqueurs. Consultez la [documentation relative au schéma JSON des marqueurs][14] pour apprendre à élaborer le `MARKERS_SCHEMA`.                     |
-| `title`       | chaîne           | non       | Titre de votre widget.                                                                                                                                     |
-| `show_legend` | booléen          | non       | Afficher la légende pour ce widget (screenboard uniquement)                                                                                                        |
-
-Propriétés supplémentaires autorisées dans chaque objet `request` :
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {
-      "palette": {"type": "string"},
-      "line_type": {"enum": ["dashed", "dotted", "solid"]},
-      "line_width": {"enum": ["normal", "thick", "thin"]}
-    },
-    "additionalProperties": false
-  },
-  "metadata": {
-    "type": "array",
-    "items": {
-      "type": "object",
-      "properties": {
-        "expression": {"type": "string"},
-        "alias_name": {"type": "string"}
-      },
-      "required": ["expression"],
-      "additionalProperties": false
-    }
-  },
-  "display_type": {"enum": ["area", "bars", "line"]}
-}
-```
-
-| Paramètre          | Type   | Obligatoire | Description                                                                              |
-|--------------------|--------|----------|------------------------------------------------------------------------------------------|
-| `style.palette`    | chaîne | non       | Palette de couleurs à appliquer au widget.                                                    |
-| `style.line_type`  | chaîne | non       | Type des lignes affichées. Valeurs disponibles : `dashed`, `dotted` ou `solid`.           |
-| `style.line_width` | chaîne | non       | Largeur des lignes affichées. Valeurs disponibles : `normal`, `thick` ou `thin`.             |
-| `metadata`         | objet | non       | Utilisé pour définir des alias d'expression.                                                       |
-| `display_type`     | chaîne | non       | Type d'affichage à utiliser pour la requête. Valeurs disponibles : `area`, `bars` ou `line`. |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
@@ -191,12 +142,10 @@ Propriétés supplémentaires autorisées dans chaque objet `request` :
 [3]: /fr/dashboards/querying/
 [4]: /fr/tracing/app_analytics/search/#search-bar
 [5]: /fr/logs/search_syntax/
-[6]: /fr/events/
-[7]: /fr/dashboards/template_variables/
-[8]: /fr/dashboards/widgets/#full-screen
-[9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /fr/dashboards/graphing_json/widget_json/
-[11]: /fr/dashboards/graphing_json/request_json/
-[12]: /fr/dashboards/graphing_json/widget_json/#y-axis-schema
-[13]: /fr/dashboards/graphing_json/widget_json/#events-schema
-[14]: /fr/dashboards/graphing_json/widget_json/#markers-schema
+[6]: /fr/dashboards/querying/#filter
+[7]: /fr/events/
+[8]: /fr/dashboards/template_variables/
+[9]: /fr/dashboards/widgets/#full-screen
+[10]: https://www.datadoghq.com/blog/full-screen-graphs
+[11]: /fr/api/v1/dashboards/
+[12]: /fr/dashboards/graphing_json/widget_json/

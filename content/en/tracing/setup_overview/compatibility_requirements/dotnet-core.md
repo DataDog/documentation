@@ -25,6 +25,13 @@ further_reading:
   - .NET Core 3.1
   - .NET Core 2.1
 
+- .NET Tracer supports the following processor architectures
+  - Windows x86 (`win-x86`)
+  - Windows x64 (`win-x64`)
+  - Linux x64 (`linux-x64`)
+  - Alpine Linux x64 (`linux-musl-x64`)
+  - Linux ARM64 (`linux-arm64`) Added in version 1.27.0, automatic instrumentation only supported on .NET 5.
+
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
 <div class="alert alert-warning">
@@ -55,7 +62,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
-## Out of Support .NET Core versions
+## Out of support .NET Core versions
 
 The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 

@@ -23,7 +23,7 @@ further_reading:
 ---
 **Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
 
-## Getting Started
+## Getting started
 
 If you already have a Datadog account you can find [step-by-step instructions][4] in our in-app guides for either host-based or container-based set ups.
 
@@ -92,7 +92,7 @@ g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentraci
 ./tracer_example
 ```
 
-### Dynamic Loading
+### Dynamic loading
 
 ```bash
 get_latest_release() {
@@ -173,12 +173,12 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 ## Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
 
-1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -216,8 +216,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Environment Variables
-
+### Environment variables
 
 `DD_AGENT_HOST` 
 : **Version**: v0.3.6 <br>

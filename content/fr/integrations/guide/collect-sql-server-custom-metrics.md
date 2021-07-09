@@ -51,7 +51,7 @@ custom_metrics:
   object_name: SQLServer:Plan Cache
 ```
 
-Pour recueillir toutes les instances d'un counter associé à plusieurs instances, utilisez la valeur spéciale `ALL` pour le paramètre `instance_name`, qui **requiert** une valeur pour le paramètre `tag_by`. Cet exemple récupère les métriques portant le tag `db:mydb1`, `db:mydb2` :
+Pour recueillir toutes les instances d'un counter associé à plusieurs instances, utilisez la valeur sensible à la casse `ALL` pour le paramètre `instance_name`, qui **requiert** une valeur pour le paramètre `tag_by`. Cet exemple récupère les métriques portant le tag `db:mydb1`, `db:mydb2` :
 
 ```yaml
 - name: sqlserver.db.commit_table_entries
@@ -194,7 +194,7 @@ Si vos métriques custom n'apparaissent pas dans Datadog, vérifiez le fichier d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/sqlserver
+[1]: /fr/integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
 [3]: /fr/developers/metrics/#metric-types
-[4]: /fr/developers/metrics/histograms
+[4]: /fr/developers/metrics/histograms/

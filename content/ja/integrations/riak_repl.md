@@ -21,7 +21,7 @@ kind: インテグレーション
 maintainer: britt.treece@gmail.com
 manifest_version: 1.0.0
 metric_prefix: riak_repl.
-metric_to_check: ''
+metric_to_check: riak_repl.server_bytes_sent
 name: riak_repl
 public_title: Datadog-Riak MDC Replication インテグレーション
 short_description: レプリケーションのパフォーマンス、容量、健全性を追跡

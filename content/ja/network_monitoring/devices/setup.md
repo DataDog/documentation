@@ -30,7 +30,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 
 個々のデバイスを監視するには
 
-- `snmp.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダー内) のサブネットと SNMP バージョンを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル snmp.d/conf.yaml][4] を参照してください。
+- `snmp.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダー内) の IP アドレスと追加デバイスのメタデータを (タグとして) 含めます。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル snmp.d/conf.yaml][4] を参照してください。
 
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
@@ -38,30 +38,39 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 - SNMPv2 の場合 デバイスの IP アドレスおよびデバイスの_コミュニティ文字列_を指定してインスタンスを構成します。
 
     ```yaml
+    init_config:
+      loader: core
     instances:
-      - ip_address: "<IP_ADDRESS>"
-        community_string: "<COMMUNITY_STRING>"
+    - ip_address: "1.2.3.4"
+      community_string: “sample-string”
+      tags:
+        - "key1:val1"
+        - "key2:val2"
     ```
 
 {{% /tab %}}
 {{% tab "SNMPv3" %}}
 
-- SNMPv3 の場合は、デバイスの IP アドレスおよび SNMPv3 資格情報 (デバイスに応じて) を指定してインスタンスを構成します。例: `user`、`auth_protocol`、`auth_key`、`priv_protocol`、`priv_key`:
+- SNMPv3 の場合は、デバイスの IP アドレスおよび SNMPv3 資格情報 (デバイスに応じて) を指定してインスタンスを構成します。例: `user`、`authProtocol`、`authKey`、`privProtocol`、`privKey`:
 
     ```yaml
+    init_config:
+      loader: core
     instances:
-      - ip_address: "<IP_ADDRESS>"
-        user: "<USER>"
-        ## Configure these as appropriate
-        # authProtocol: SHA
-        # authKey: "<AUTH_KEY>"
-        # privProtocol: AES
-        # privKey: "<PRIV_KEY>"
+    - ip_address: "1.2.3.4"
+      snmp_version: 3           # optional, if omitted we will autodetect which version of SNMP you are using
+      user: "user"
+      authProtocol: "fakeAuth"
+      authKey: "fakeKey"
+      privProtocol: "fakeProtocol"
+      privKey: "fakePrivKey"
+      tags:
+        - "key1:val1"
+        - "key2:val2"
     ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 - [Agent を再起動します][5]。
 
@@ -80,58 +89,82 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 
 ネットワークデバイスモニタリングでオートディスカバリーを使用するには
 
-1. Datadog Agent をインストールまたは v6.16 以上にアップグレードします。プラットフォーム固有の手順については、[Datadog Agent][7] のドキュメントを参照してください。
+1. Datadog Agent をインストールまたは v7.27 以上にアップグレードします。プラットフォーム固有の手順については、[Datadog Agent][7] のドキュメントを参照してください。
 
-2. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの [snmp.d/conf.yaml][4] ファイルを編集します。
+2. [`datadog.yaml`][8] Agent コンフィギュレーションファイルを編集し、Datadog がスキャンするすべてのサブネットを含めます。以下のサンプルコンフィギュレーションは、オートディスカバリーに必要なパラメーター、デフォルト値、そして例を示しています。
 
-#### 最小限の構成
+{{< tabs >}}
+{{% tab "SNMPv2" %}}
 
 ```yaml
-instances:
-  - network_address: "<NETWORK_ADDRESS>"
-    community_string: "<COMMUNITY_STRING>"
+listeners:
+  - name: snmp
+snmp_listener:
+  workers: 100 # デバイスの検出に同時に使用されるワーカー数
+  discovery_interval: 3600 # 各オートディスカバリー間のインターバル秒数
+  configs:
+    - network: 1.2.3.4/24 # CIDR 表記。/24 ブロック以下を推奨
+      version: 2
+      port: 161
+      community: ***
+      tags:
+      - "key1:val1"
+      - "key2:val2"
+      loader: core # SNMP corecheck の実装を使用
+    - network: 2.3.4.5/24
+      version: 2
+      port: 161
+      community: ***
+      tags:
+      - "key1:val1"
+      - "key2:val2"
+      loader: core
 ```
 
-#### 拡張構成
+{{% /tab %}}
 
-以下のサンプルコンフィグレーションは、オートディスカバリーに必要なパラメーター、デフォルト値、そして例を示しています。
+{{% tab "SNMPv3" %}}
 
-{{< code-block lang="yaml" filename="snmp.d/conf.yaml" disable_copy="true" >}}
+```yaml
+listeners:
+  - name: snmp
+snmp_listener:
+  workers: 100 # デバイスの検出に同時に使用されるワーカー数
+  discovery_interval: 3600 # 各オートディスカバリー間のインターバル秒数
+  configs:
+    - network: 1.2.3.4/24 # CIDR 表記。/24 ブロック以下を推奨
+      version: 3
+      user: "user"
+      authentication_protocol: "fakeAuth"
+      authentication_key: "fakeKey"
+      privacy_protocol: "fakeProtocol"
+      privacy_key: "fakePrivKey"
+      tags:
+        - "key1:val1"
+        - "key2:val2"
+      loader: core
+    - network: 2.3.4.5/24
+      version: 3
+      snmp_version: 3
+      user: "user"
+      authentication_protocol: "fakeAuth"
+      authentication_key: "fakeKey"
+      privacy_protocol: "fakeProtocol"
+      privacy_key: "fakePrivKey"
+      tags:
+        - "key1:val1"
+        - "key2:val2"
+      loader: core
+```
 
-init_config:
-instances:
-    ## @param network_address - string - optional
-  - network_address: "<NETWORK_ADDRESS>"
-    ## @param port - integer - optional - default: 161
-    port: 161
-    ## @param community_string - string - optional
-    community_string: public
-    ## @param snmp_version - integer - optional - default: 2
-    snmp_version: 2
-    ## @param timeout - integer - optional - default: 1
-    timeout: 1
-    ## @param retries - integer - optional - default: 5
-    retries: 5
-    ## @param discovery_interval - integer - optional - default: 3600
-    discovery_interval: 3600
-    ## @param discovery_allowed_failures
-    ## integer - optional - default: 3
-    discovery_allowed_failures: 3
-    ## @param enforce_mib_constraints
-    ## boolean - optional - default: true
-    enforce_mib_constraints: true
-    ## @param bulk_threshold - integer - optional - default: 5
-    bulk_threshold: 5
-    ## @param tags - list of key:value element - optional
-    tags:
-       - "<KEY_1>:<VALUE_1>"
-       - "<KEY_2>:<VALUE_2>"
+{{% /tab %}}
+{{< /tabs >}}
 
-{{< /code-block >}}
+**注**: Datadog Agent は検出された各 IP の SNMP チェックを自動で構成します。検出されたデバイスは、SNMP を使用してポールされた際に正常に応答する IP となります。
 
 ## 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `snmp` を探します。
+[Agent のステータスサブコマンドを実行][9]し、Checks セクションで `snmp` を探します。
 
 ## その他の参考資料
 
@@ -145,4 +178,5 @@ instances:
 [5]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
 [7]: /ja/agent
-[8]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[9]: /ja/agent/guide/agent-commands/#agent-status-and-information

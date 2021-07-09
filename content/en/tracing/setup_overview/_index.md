@@ -32,4 +32,4 @@ In containerized, serverless, or certain other environments, there may be APM-sp
 To instrument an application written in a language that does not yet have official library support, see the list of [community tracing libraries][2].
 
 [1]: /tracing/visualization/#trace
-[2]: /developers/libraries/#apm-tracing-client-libraries
+[2]: /developers/community/libraries/#apm-tracing-client-libraries

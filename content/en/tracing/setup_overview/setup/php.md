@@ -24,13 +24,13 @@ further_reading:
   tag: "Documentation"
   text: "Advanced Usage"
 ---
-## Compatibility Requirements
+## Compatibility requirements
 
 For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
-### Follow the in-app documentation (Recommended)
+### Follow the in-app documentation (recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
@@ -44,12 +44,12 @@ For details about open-source contributions to the PHP tracer, refer to the [con
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
 
-1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -121,7 +121,7 @@ Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoi
 
 If you can't find your distribution, you can [manually install][8] the PHP extension.
 
-## Automatic Instrumentation
+## Automatic instrumentation
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
@@ -184,9 +184,7 @@ Set in the command line to start the server.
 DD_TRACE_DEBUG=true php -S localhost:8888
 ```
 
-### Environment Variable Configuration
-
-
+### Environment variable configuration
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>

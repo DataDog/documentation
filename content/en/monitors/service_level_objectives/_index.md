@@ -45,7 +45,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 
 1. On the [SLO status page][1], select **New SLO +**.
 2. Define the source for your SLOs. SLO types are [Metric-based][3] and [Monitor-based][4].
-3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipluated in your SLAs.
+3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipulated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.

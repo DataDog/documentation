@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_search/'
 draft: false
 git_integration_title: azure_search
 has_logo: true
+integration_id: azure-search
 integration_title: Microsoft Azure Cognitive Search
 is_public: true
 kind: integration
@@ -28,7 +29,7 @@ Datadog Azure インテグレーションを使用して、Azure Cognitive  Sear
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

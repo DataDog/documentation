@@ -1,6 +1,8 @@
 ---
 aliases: []
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -22,6 +24,7 @@ kind: インテグレーション
 maintainer: '@xorima'
 manifest_version: 1.1.0
 metric_prefix: eventstore.
+metric_to_check: eventstore.proc.mem
 name: eventstore
 public_title: Datadog-Eventstore インテグレーション
 short_description: Eventstore のメトリクスを収集

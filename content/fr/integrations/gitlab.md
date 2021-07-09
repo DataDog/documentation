@@ -246,9 +246,9 @@ Modifiez le fichier `gitlab_runner.d/conf.yaml` dans le dossier `conf.d/` à la 
        source: gitlab-runner
    ```
 
-    Consultez le [fichier d'exemple gitlab_runner.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
+    Consultez le [fichier d'exemple gitlab_runner.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
-5. [Redémarrez l'Agent][8].
+5. [Redémarrez l'Agent][10].
 
 ### Événements
 
@@ -273,3 +273,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/datadog_checks/gitlab_runner/data/conf.yaml.example
 [9]: https://docs.gitlab.com/runner/configuration/advanced-configuration.html
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent

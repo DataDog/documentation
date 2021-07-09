@@ -47,7 +47,7 @@ Intégrez iLert à Datadog pour :
 
 ## Configuration
 
-### Dans iLert
+### iLert
 
 #### Créer une source d'alerte Datadog
 
@@ -63,7 +63,7 @@ Intégrez iLert à Datadog pour :
 
    ![Source d'alerte iLert][3]
 
-### Dans Datadog
+### Datadog
 
 #### Ajouter iLert Webhook en tant que canal d'alertes
 

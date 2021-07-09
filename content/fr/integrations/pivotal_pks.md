@@ -7,6 +7,7 @@ assets:
 categories:
   - containers
   - orchestration
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -33,7 +34,7 @@ supported_os:
 
 L'intégration surveille les clusters [Pivotal Container Service][1].
 
-## Implémentation
+## Configuration
 
 Étant donné que Datadog s'intègre déjà à Kubernetes, la plateforme est prête pour la surveillance de PKS.
 
@@ -43,7 +44,7 @@ La surveillance de PKS nécessite la configuration de l'intégration Datadog pou
 
 ### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La configuration est identique à celle de Kubernetes. 
 Pour lancer la collecte des logs depuis tous vos conteneurs, utilisez les [variables d'environnement][3] de votre Agent Datadog.

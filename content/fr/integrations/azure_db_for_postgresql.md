@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_postgresql/'
 draft: false
 git_integration_title: azure_db_for_postgresql
 has_logo: true
+integration_id: azure-db-for-postgresql
 integration_title: Microsoft Azure Database pour PostgreSQL
 is_public: true
 kind: integration
@@ -29,7 +30,7 @@ Recueillez des métriques d'Azure Database pour PostgreSQL pour :
 - Visualiser les performances de vos bases de données PostgreSQL
 - Corréler les performances de vos bases de données PostgreSQL avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

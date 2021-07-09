@@ -22,8 +22,8 @@ is_public: true
 kind: インテグレーション
 maintainer: tsein@brightcove.com
 manifest_version: 1.0.0
-metric_prefix: aws_pricing.
-metric_to_check: ''
+metric_prefix: aws.pricing.
+metric_to_check: aws.pricing.amazonecs
 name: aws_pricing
 public_title: Datadog-AWS Pricing インテグレーション
 short_description: サービスの AWS Pricing 情報をレートコードごとに収集

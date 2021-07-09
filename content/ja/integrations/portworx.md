@@ -21,6 +21,7 @@ kind: インテグレーション
 maintainer: paul@portworx.com
 manifest_version: 1.0.0
 metric_prefix: portworx.
+metric_to_check: portworx.cluster.cpu_percent
 name: portworx
 public_title: Datadog-Portworx インテグレーション
 short_description: Portworx インスタンスからランタイムメトリクスを収集

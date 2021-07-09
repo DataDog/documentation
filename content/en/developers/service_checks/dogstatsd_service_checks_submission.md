@@ -6,7 +6,7 @@ further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "/developers/libraries/"
+- link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
@@ -30,7 +30,7 @@ Service check function parameters:
 |------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
 | `<SERVICE_CHECK_NAME>` | String          | Yes      | -             | The name of the service check.                                                                             |
 | `<STATUS>`             | Int             | Yes      | -             | A constant describing the service status: `0` for OK, `1` for WARN, `2` for CRITICAL, and `3` for UNKNOWN. |
-| `<TAGS>`               | List of strings | No       | -             | A list of tags to associate with the service check.                                                        |
+| `<TAGS>`               | List of key:value pairs | No       | -             | A list of tags to associate with the service check.                                                        |
 | `<HOSTNAME>`           | String          | No       | Current host  | The hostname to associate with the service check.                                                          |
 | `<MESSAGE>`            | String          | No       | -             | Additional information or a description of why the status occurred.                                        |
 

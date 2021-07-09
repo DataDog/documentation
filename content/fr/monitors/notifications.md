@@ -269,7 +269,7 @@ La condition `is_match` prend également en charge plusieurs chaînes :
 Pour envoyer une autre notification lorsque le tag ne contient pas `db`, utilisez la négation de la condition tel que suit :
 
 ```text
-{{^#is_match "role.name" "db"}}
+{{^is_match "role.name" "db"}}
   Cela s'affiche si le tag du rôle ne contient pas `db`.
   @slack-example
 {{/is_match}}

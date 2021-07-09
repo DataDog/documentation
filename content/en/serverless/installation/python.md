@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If your Python Lambda functions are written in [Python 3.6 or less][2], you previously set up Datadog Serverless using the Datadog Forwarder or your Lambda functions are not deployed to the `us-east-1`, `eu-west-1` or `eu-south-1` regions, see the [installation instructions here][3].
+If your Python Lambda functions are written in [Python 3.6 or less][2] or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][3].
 
 ## Configuration
 
@@ -92,13 +92,18 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
+      apiKey: <DATADOG_API_KEY>
       nodeLayerVersion: "<LAYER_VERSION>"
       extensionLayerVersion: "<EXTENSION_VERSION>"
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the [desired version][4] of Datadog Lambda Library, and `<EXTENSION_VERSION>` with the [desired version][5] of the Datadog Lambda Extension.
+To fill in the placeholders:
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4]. 
+- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][5]).
+- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][6]).
+- Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -106,15 +111,16 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-python/releases
-[5]: https://gallery.ecr.aws/datadog/lambda-extension
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://github.com/DataDog/datadog-lambda-python/releases
+[6]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
 
 The [Datadog CDK Construct][1] automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
-### Install the Datadog CDK Construct Library
+### Install the Datadog CDK constructs library
 
 Run the following command in your CDK project:
 
@@ -125,7 +131,7 @@ pip install datadog-cdk-constructs
 
 ### Instrument the function
 
-Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations:
+Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configuration:
 
 ```python
 from datadog_cdk_constructs import Datadog
@@ -133,7 +139,7 @@ from datadog_cdk_constructs import Datadog
 datadog = Datadog(self, "Datadog",
     python_layer_version=<LAYER_VERSION>,
     extension_layer_version=<EXTENSION_LAYER_VERSION>,
-    dd_api_key=<DATADOG_API_KEY>,
+    api_key=<DATADOG_API_KEY>,
     service=<SERVICE>, # Optional
     env=<ENV>, # Optional
 )
@@ -291,9 +297,7 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
-
-Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
+Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines or from your local command-line interface. The CLI command automatically adds the Datadog Lambda library and extension to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
 
 ### Install
 
@@ -371,9 +375,11 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.</div>
 
-You can either install the Datadog Lambda library as a layer (recommended) or Python package.
+### Install the Datadog Lambda library
+
+The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
 
 The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 

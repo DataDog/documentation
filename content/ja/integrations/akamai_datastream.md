@@ -14,6 +14,7 @@ further_reading:
     text: Akamai を Datadog と統合して CDN のパフォーマンスを監視
 git_integration_title: akamai_datastream
 has_logo: true
+integration_id: ''
 integration_title: Akamai DataStream
 is_public: true
 kind: インテグレーション
@@ -58,7 +59,7 @@ Akamai DataStream 1.0 および 2.0 では、HTTP(s) エンドポイントを介
 
 1. **Name**: エンドポイントのわかりやすい説明を入力します。
 
-2. **Endpoint**: ログを送信および保存するための Datadog エンドポイントを入力します: `https://http-intake.logs.datadoghq.com/v1/input`.
+2. **Endpoint**: ログを送信および保存するための Datadog エンドポイントを入力します: `{{< region-param key="http_endpoint" code="true" >}}/v1/input`
 
 3. **Tags** (任意): Datadogでログのフィルタリングおよびグループ化に使用する、カンマ区切りのタグ一覧（例: `env:staging,team:web`）を入力します。
 

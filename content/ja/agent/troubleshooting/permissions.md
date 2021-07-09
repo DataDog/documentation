@@ -15,10 +15,10 @@ further_reading:
 ---
 Agent がホストでデータを収集するためには、特定のアクセス許可が必要です。このページでは最も一般的なアクセス許可に関する問題とその解決方法について説明します。
 
-* [Agent ロギングのアクセス許可に関する問題](#agent-logging-permission-issues)
-* [Agent ソケットのアクセス許可に関する問題](#agent-socket-permission-issues)
-* [プロセスメトリクスのアクセス許可に関する問題](#process-metrics-permission-issue)
-* [その他の参考資料](#further-reading)
+* [Agent ロギングのアクセス許可の問題](#agent-logging-permission-issues)
+* [Agent ソケットのアクセス許可の問題](#agent-socket-permission-issues)
+* [プロセスメトリクスのアクセス許可の問題](#process-metrics-permission-issue)
+* [参考文献](#further-reading)
 
 ## Agent ロギングのアクセス許可に関する問題
 

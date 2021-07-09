@@ -15,7 +15,7 @@ further_reading:
 Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
 
-## Agent Expression Syntax
+## Agent expression syntax
 Rules for Cloud Workload Security (CWS) are first evaluated in the Datadog Agent to decide what system activity to collect. This portion of a CWS rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
 
 ```
@@ -46,9 +46,6 @@ Triggers are events that correspond to types of activity seen by the system. The
 | `removexattr`        | File             | Remove extended attributes            | 7.27          |
 | `mount`              | File             | Mount a filesystem                    | 7.27          |
 | `unmount`            | File             | Unmount a filesystem                  | 7.27          |
-
-## Attributes
-Attributes can be used to specify exact data and behavior for a rule. Attributes are based on [CWS event attributes][1].
 
 ## Operators
 SECL operators are used to combine event attributes together into a full expression. The following operators are available:
@@ -97,4 +94,3 @@ The *file.rights* attribute can now be used in addition to *file.mode*. *file.mo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security_platform/cloud_workload_security/event_attributes

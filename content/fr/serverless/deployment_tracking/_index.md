@@ -27,12 +27,13 @@ Si vous ne l'avez pas déjà fait, configurez d'abord l'intégration [Amazon We
 cloudtrail:LookupEvents
 ```
 
-Si vous avez ajouté l'autorisation, mais que les événements de vos fonctions AWS Lambda ne s'affichent pas, contactez notre [équipe d'assistance][3].
+Si vous avez ajouté l'autorisation, mais que les événements de vos fonctions AWS Lambda ne s'affichent pas, activez le suivi des déploiements depuis le carré de l'intégration AWS Lambda.
+
+{{< img src="serverless/lambda_integration_settings.png" alt="Paramètres de l'intégration Lambda"  style="width:100%;">}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/functions
 [2]: /fr/integrations/amazon_web_services/#setup

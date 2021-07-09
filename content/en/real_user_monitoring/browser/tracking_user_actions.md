@@ -20,7 +20,7 @@ further_reading:
 ---
 
 
-Real User Monitoring (RUM) Browser SDK automatically detects user interactions performed during a user journey. 
+Real User Monitoring (RUM) Browser SDK automatically detects user interactions performed during a user journey.
 
 The automatic collection of user actions provides insights into user behavior, without having to manually instrument every single click in your application. It helps you achieve the following objectives:
 * Understand the performance of key interactions (for example, a click on the "Add to cart" button)
@@ -40,7 +40,7 @@ The Browser SDK automatically tracks clicks. A click action is created if **all*
 
 ## Action timing metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][3]. For information about configuring for sampling or global context see [Advanced Configuration][4].
+For information about the default attributes for all RUM event types, see [Data Collected][2]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][1].
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -75,6 +75,24 @@ The RUM library uses various strategies to get a name for click actions. If you 
   Enter a valid email address
 </div>
 ```
+
+Starting with [version 2.16.0][3], with the `actionNameAttribute` initialization parameter, you can specify your own attribute that is used to name the action. For example:
+
+```html
+<script>
+  DD_RUM.init({
+    ...
+    trackInteractions: true,
+    actionNameAttribute: 'data-custom-name',
+  ...
+  })
+</script>
+
+<a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>
+```
+
+**Note**: `data-dd-action-name` is favored when both attributes are present on an element.
+
 ## Custom actions
 
 Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM SDK collects a visitor's cart data when they hit the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
@@ -143,6 +161,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#scrub-sensitive-data-from-your-rum-data
-[3]: /real_user_monitoring/browser/data_collected/#default-attributes
-[4]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/browser/modifying_data_and_context/
+[2]: /real_user_monitoring/browser/data_collected/#default-attributes
+[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

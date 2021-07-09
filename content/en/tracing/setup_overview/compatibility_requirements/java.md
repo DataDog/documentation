@@ -25,7 +25,7 @@ Beta integrations are disabled by default but can be enabled individually:
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
-### Web Framework Compatibility
+### Web framework compatibility
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
@@ -45,10 +45,12 @@ Beta integrations are disabled by default but can be enabled individually:
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty                   | 7.0-9.x    | Fully Supported | `jetty`                                        |
+| Micronaut HTTP Server   | 2.x        | Fully Supported | `micronaut`                                    |
 | Mulesoft                | 4          | Fully Supported | `mule`                                         |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
 | Play                    | 2.3-2.8    | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
+| Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
 | Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
@@ -70,7 +72,7 @@ The following instrumentations are disabled by default and can be enabled with t
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
-### Networking Framework Compatibility
+### Networking framework compatibility
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
@@ -80,7 +82,6 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 - tags for the request (e.g. response code)
 - error and stacktrace capturing
 - distributed tracing
-
 
 | Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -110,7 +111,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
-### Data Store Compatibility
+### Data store compatibility
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
@@ -188,7 +189,7 @@ To improve visibility into applications using unsupported frameworks, consider:
 - [Submitting a pull request][5] with instrumentation for inclusion in a future release.
 - Contacting [Datadog support][2] and submitting a feature request.
 
-### Disabling Integrations
+### Disabling integrations
 
 Most integrations are enabled by default. The following setting can change the default to disabled.
 
@@ -204,8 +205,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 ### Known issues
 
-Running the Java tracer in Bitbucket is not supported. 
-
+Running the Java tracer in Bitbucket is not supported.
 
 ## Further Reading
 

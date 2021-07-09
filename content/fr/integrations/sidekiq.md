@@ -119,7 +119,6 @@ L'intégration Sidekiq permet également la collecte de métriques custom. Consu
 
 ### Collecte de logs
 
-
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans le fichier `datadog.yaml` avec :
 
     ```yaml

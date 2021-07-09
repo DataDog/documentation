@@ -26,7 +26,7 @@ integration_id: "pivotal-platform"
 
 ## Overview
 
-Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your [application on Pivotal Platform](#monitor-your-applications-on-pivotal-platform) and your [Pivotal Platform cluster](#monitor-your-pivotal-platform-cluster).
+Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on Pivotal Platform and your Pivotal Platform cluster.
 
 There are three main components for the Pivotal Platform integration with Datadog. First, use the buildpack to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure.
 

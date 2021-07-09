@@ -110,8 +110,6 @@ Lograge による書式設定が完了すると、以下のように重要な情
 
 このアプリケーションで APM が有効になっている場合、[APM Ruby ロギングの指示に従って][7]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
 
-次に、ファイルから Ruby ログを収集するよう [Datadog Agent を構成します](#Datadog Agent の構成)。
-
 ### アプリケーションで推奨されるログの例
 
 これで、適切な JSON を送信するログ構成になりました。できるだけこれを活用してください。
@@ -139,7 +137,7 @@ logger.info(my_hash);
 }
 ```
 
-### RocketPant の推奨ログ構成
+### RocketPants の推奨ログコンフィギュレーション
 
 `config/initializers/lograge_rocketpants.rb` ファイル (プロジェクトによって異なります) を次のように構成します。
 
@@ -193,7 +191,7 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: /ja/logs/processing/#reserved-attributes
+[2]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /ja/agent/logs/

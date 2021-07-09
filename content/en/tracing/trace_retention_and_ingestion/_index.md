@@ -13,7 +13,7 @@ With Tracing without Limits™, both the ingestion of traces to Datadog as well 
 
 To track or monitor your usage of Tracing without Limits™, see the [Usage Metrics][1] documentation.
 
-## Retention Filters
+## Retention filters
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -53,16 +53,18 @@ For more information, refer to the [Usage Metrics][1] documentation, or see the 
 
 Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [top level spans][4] are indexed for the traces kept by the intelligent retention filter.
 
-Intelligent Retention retains:
+For 30 days, intelligent retention retains:
 
  - A representative selection of errors, ensuring error diversity (for example, response code 400s, 500s).
  - High Latency in the different quartiles `p75`, `p90`, `p95`.
  - All Resources with any traffic will have associated Traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 
+**Note**: Because intelligent retention is not indiscriminate when choosing what spans to retain, spans that are retained only by the intelligent filter are _not_ included in trace analytics. Trace analytics is available only for spans retained by [custom retention filters](#create-your-own-retention-filter).
+
 If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter](#create-your-own-retention-filter). For example, you might want to keep more than a representative selection of errors from your production environment. To ensure _all_ production errors are retained and available for search and analytics for 15 days, create a 100 percent retention filter scoped to `env:prod` and `status:error`. As discussed below, this may have an impact on your bill.
 
-### Create your own Retention Filter
+### Create your own retention filter
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
@@ -82,7 +84,7 @@ For example, you can create filters to keep all traces for:
 - High-priority customers using a mission-critical feature of your SaaS solution.
 - Specific versions of an online delivery service application.
 
-## Ingestion Controls
+## Ingestion controls
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -125,7 +127,7 @@ Spans Ingested
 
 In addition to the Data Ingestion column for each retention filter, there are also two metrics `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service` and `env`, and top lists are available within the [Trace Analytics Dashboard][3] to show where the highest ingestion volumes are occurring. See the [Usage Metrics][1] documentation for more information.
 
-### Change the Default Ingestion Rate
+### Change the default ingestion rate
 
 {{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate3.gif" style="width:100%;" alt="Change the Data Ingestion Rate" >}}
 
@@ -149,7 +151,7 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 **Note:** This may impact your bill if your total ingestion exceeds the included GBs. For more information, see the [APM Billing][7] page.
 
-### Ingestion Breakdown
+### Ingestion breakdown
 
 The Ingestion Breakdown column breaks down the destination of all traces originating from the service. It can help you understand lower than expected ingestion rates and missing traces.
 

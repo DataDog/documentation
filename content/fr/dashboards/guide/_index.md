@@ -5,8 +5,9 @@ private: true
 aliases:
   - /fr/graphing/guide/
 ---
-{{< whatsnext desc="Guide général :" >}}
+{{< whatsnext desc="Guides généraux :" >}}
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Représentation des centiles dans Datadog{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}De la requête au graphique{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API obsolètes :" >}}

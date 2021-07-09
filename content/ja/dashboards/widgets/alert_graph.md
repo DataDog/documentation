@@ -19,6 +19,8 @@ further_reading:
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="アラートグラフ" >}}
 
+このウィジェットは、メトリクス、異常値、外れ値、予測値、APM、インテグレーションモニターでサポートされます。
+
 ## セットアップ
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph_setup.png" alt="アラートグラフのセットアップ"  style="width:80%;">}}

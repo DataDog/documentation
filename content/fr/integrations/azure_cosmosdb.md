@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'
 draft: false
 git_integration_title: azure_cosmosdb
 has_logo: true
+integration_id: azure-cosmosdb
 integration_title: "Microsoft\_Azure\_Cosmos\_DB"
 is_public: true
 kind: integration
@@ -24,7 +25,7 @@ Azure Cosmos DB est un service de base de données multi-modèle distribué da
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques de Cosmos DB.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

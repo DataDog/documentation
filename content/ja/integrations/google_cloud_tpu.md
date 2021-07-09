@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tpu/'
 draft: false
 git_integration_title: google_cloud_tpu
 has_logo: true
+integration_id: google-cloud-tpu
 integration_title: Google Cloud TPU
 is_public: true
 kind: integration

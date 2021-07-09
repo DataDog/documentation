@@ -44,7 +44,7 @@ Pour créer une métrique pour les logs non parsés, créez une [métrique custo
 
 {{< img src="logs/guide/unparsed-logs/logs-unparsed-metric.jpg" alt="Générer la métrique logs.unparsed"  style="width:90%;">}}
 
-Comme pour toute métrique basée sur des logs, vous pouvez ajouter des dimensions dans le champ `group by`. Dans l'exemple ci-dessus, les éléments sont regroupés par `service` et `team`. Pour définir le propriétaire d'un log, vous devez définir un regroupement en fonction des dimensions utilisées.
+Comme pour toute métrique basée sur des logs, vous pouvez ajouter des dimensions dans le champ `group by`. Dans l'exemple ci-dessus, les éléments sont regroupés par `service` et `team`. Définissez un regroupement en fonction des dimensions utilisées pour définir à qui appartient le log.
 ## Surveiller le volume des logs non parsés
 Pour vous assurer que le parsing des logs reste sous contrôle dans votre organisation, appliquez un quota au volume de logs non parsés. Cette approche suit la même logique que les [quotas quotidiens][7] pour les index.
 

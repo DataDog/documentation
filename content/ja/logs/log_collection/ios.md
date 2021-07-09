@@ -64,6 +64,7 @@ github "DataDog/dd-sdk-ios"
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
         .set(serviceName: "app-name")
@@ -77,16 +78,30 @@ Datadog.initialize(
 ```swift
 Datadog.initialize(
     appContext: .init(),
+    trackingConsent: trackingConsent,
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
         .set(serviceName: "app-name")
-        .set(logsEndpoint: .eu)
+        .set(endpoint: .eu1)
         .build()
 )
 ```
 
     {{% /tab %}}
     {{< /tabs >}}
+
+    GDPR 規制に準拠するために、SDK では初期化時に `trackingConsent` 値が必要です。
+    `trackingConsent` は、次のいずれかの値になります。
+
+    - `.pending` - SDK はデータの収集とバッチ処理を開始しますが、Datadog に送信しません。SDK は、新しい追跡同意値がバッチデータをどう処理するかを決定するのを待ちます。
+    - `.granted` - SDK はデータの収集を開始し、Datadog に送信します。
+    - `.notGranted` - SDK はデータを収集しません。ログ、トレース、RUM イベントは Datadog に送信されません。
+
+    SDK の初期化後に追跡同意値を変更するには、`Datadog.set(trackingConsent:)` API 呼び出しを使用します。
+    SDK は、新しい値に応じて動作を変更します。たとえば、現在の追跡同意が `.pending` の場合:
+
+    - `.granted` に変更すると、SDK は現在および将来のすべてのデータを Datadog に送信します。
+    - `.notGranted` に変更すると、SDK は現在のすべてのデータを消去し、将来のデータを収集しません。
 
      アプリケーションを書く際、開発ログを有効にできます。指定したレベル以上の優先度を持つ SDK 内のすべての内部メッセージがコンソールログに記録されます。
 

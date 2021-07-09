@@ -15,8 +15,11 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
-## トレースおよびスパン ID を自動的に挿入します
+## 自動挿入
 
 環境変数 `DD_LOGS_INJECTION=true` か、直接トレーサーを構成することで挿入を有効にします:
 
@@ -33,7 +36,7 @@ const tracer = require('dd-trace').init({
 
 **注**: 自動挿入が機能するのは JSON 形式のログのみです。
 
-## トレースおよびスパン ID を手動で挿入する
+## 手動挿入
 
 自動挿入に対応していないロギングライブラリを使っているが、JSON 形式を使っている場合は、コード内で直接手動挿入を実行することができます。
 

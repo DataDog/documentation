@@ -21,7 +21,7 @@ kind: インテグレーション
 maintainer: david.byron@avast.com
 manifest_version: 1.0.0
 metric_prefix: unbound.
-metric_to_check: ''
+metric_to_check: unbound.time.up
 name: unbound
 public_title: Datadog-Unbound インテグレーション
 short_description: unbound メトリクスを収集する Datadog インテグレーション

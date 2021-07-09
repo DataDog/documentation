@@ -31,6 +31,10 @@
     "description": "Delete an application key",
     "summary": "Delete an application key"
   },
+  "GetApplicationKey": {
+    "description": "Get an application key for your org.",
+    "summary": "Get an application key"
+  },
   "UpdateApplicationKey": {
     "description": "Edit an application key",
     "summary": "Edit an application key",
@@ -350,7 +354,7 @@
     "summary": "Get all security filters"
   },
   "CreateSecurityFilter": {
-    "description": "Create a security filter.",
+    "description": "Create a security filter.\n\nSee the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nfor more examples.",
     "summary": "Create a security filter",
     "request_description": "The definition of the new security filter.",
     "request_schema_description": "Request object that includes the security filter that you would like to create."
@@ -360,7 +364,7 @@
     "summary": "Delete a security filter"
   },
   "GetSecurityFilter": {
-    "description": "Get the details of a specific security filter.",
+    "description": "Get the details of a specific security filter.\n\nSee the [security filter guide](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nfor more examples.",
     "summary": "Get a security filter"
   },
   "UpdateSecurityFilter": {

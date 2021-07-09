@@ -24,6 +24,10 @@ If you experience issues setting up or configuring Datadog Synthetic Monitoring,
 
 After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up by clicking **Open in Popup** to record your journey.
 
+#### Some of my applications load in the iframe but some do not
+
+This means your applications and environments have different restrictions, which causes some of them to be visualized in an iframe while the others are not viewable.
+
 #### I'm seeing a "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner at the top of the iframe
 
 This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop up or change your URL to an `https` one to start recording on the page. 
@@ -108,6 +112,26 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][10]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
+## Private locations
+
+### My private location containers sometimes get killed `OOM`.
+
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My browser test results sometimes show `Page crashed` errors
+
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+
+### My tests are sometimes slower to execute 
+
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][11].
+
+### I'm seeing `TIMEOUT` errors on API tests executed from my private location
+
+This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
+
+{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -122,3 +146,4 @@ Synthetic tests by default do not [renotify][10]. This means that if you add you
 [8]: /synthetics/browser_tests/#use-global-variables
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[11]: /synthetics/private_locations#private-location-total-hardware-requirements

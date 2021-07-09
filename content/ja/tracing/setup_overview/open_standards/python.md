@@ -45,7 +45,7 @@ my_operation()
 
 ## OpenTelemetry
 
-OpenTelemetry のサポートは、`opentelemetry-ext-datadog` パッケージを使用してトレースを OpenTelemetry から Datadog にエクスポートすることで利用できます。
+OpenTelemetry のサポートは、`opentelemetry-exporter-datadog` パッケージを使用してトレースを OpenTelemetry から Datadog にエクスポートすることで利用できます。
 
 <div class="alert alert-warning">
 現在、この機能はベータ版です。期待どおりに機能しない場合は、<a href="https://docs.datadoghq.com/help/">サポートにお問い合わせください。</a>。
@@ -56,7 +56,7 @@ OpenTelemetry のサポートは、`opentelemetry-ext-datadog` パッケージ�
 インストールするには
 
 ```python
-pip install opentelemetry-ext-datadog
+pip install opentelemetry-exporter-datadog
 ```
 
 ### 使用方法
@@ -65,21 +65,39 @@ pip install opentelemetry-ext-datadog
 
 ```python
 from opentelemetry import trace
-from opentelemetry.ext.datadog import (
+from opentelemetry.exporter.datadog import (
     DatadogExportSpanProcessor,
     DatadogSpanExporter,
 )
+from opentelemetry.exporter.datadog.propagator import DatadogFormat
+from opentelemetry.propagate import get_global_textmap, set_global_textmap
+from opentelemetry.propagators.composite import CompositeHTTPPropagator
 from opentelemetry.sdk.trace import TracerProvider
 
 trace.set_tracer_provider(TracerProvider())
-tracer = trace.get_tracer(__name__)
 
-exporter = DatadogSpanExporter(
-    agent_url="http://localhost:8126", service="example"
+trace.get_tracer_provider().add_span_processor(
+    DatadogExportSpanProcessor(
+        DatadogSpanExporter(
+            agent_url="http://localhost:8126", service="example-server"
+        )
+    )
 )
 
-span_processor = DatadogExportSpanProcessor(exporter)
-trace.get_tracer_provider().add_span_processor(span_processor)
+# Datadog インスツルメント化サービスとの間で伝播するための Datadog 形式を追加します 
+global_textmap = get_global_textmap()
+if isinstance(global_textmap, CompositeHTTPPropagator) and not any(
+    isinstance(p, DatadogFormat) for p in global_textmap._propagators
+):
+    set_global_textmap(
+        CompositeHTTPPropagator(
+            global_textmap._propagators + [DatadogFormat()]
+        )
+    )
+else:
+    set_global_textmap(DatadogFormat())
+
+tracer = trace.get_tracer(__name__)
 
 
 with tracer.start_as_current_span("foo"):
@@ -88,7 +106,7 @@ with tracer.start_as_current_span("foo"):
             print("Hello world from OpenTelemetry Python!")
 ```
 
-### 構成オプション
+### コンフィギュレーションオプション
 
 Datadog Agent の URL とスパンタグの値は、環境と Agent の場所次第で必要または希望に応じて構成できます。
 
@@ -134,9 +152,8 @@ exporter = DatadogSpanExporter(
 
 ### OpenTelemetry リンク
 
-- OpenTelemetry Python Datadog Exporter の使用法については、[github][2]、[opentelemetry の例][3]、または [readthedocs][4] を参照してください。
+- OpenTelemetry Python Datadog Exporter の使用法の詳細については、[OpenTelemetry の例][2]または [Readthedocs][3] を参照してください。
 
 [1]: https://opentracing.io/guides/python/
-[2]: https://github.com/open-telemetry/opentelemetry-python/tree/main/ext/opentelemetry-ext-datadog
-[3]: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs/examples/datadog_exporter
-[4]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
+[2]: https://github.com/open-telemetry/opentelemetry-python/tree/main/docs/examples/datadog_exporter
+[3]: https://opentelemetry-python.readthedocs.io/en/latest/examples/datadog_exporter/README.html
