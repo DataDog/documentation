@@ -50,9 +50,9 @@ For more information on how to set up private locations, see [Getting Started wi
 
 #### Specify test frequency
 
-Select the frequency that your test runs. You can run tests on-demand and as part of your continuous integration pipelines. 
+Select the frequency of your test runs. Additionally, on-demand and continuous integration pipelines tests are available.
 
-For more information on CI/CD testing, see [Synthetic CI/CD Testing][4].
+For more information, see [Synthetic CI/CD Testing][4].
 
 #### Define alert conditions
 
@@ -82,7 +82,7 @@ When you're ready to record your test, click **Save Details & Record Test**.
 
 ### Create recording
 
-Once your test configuration has saved, Datadog prompts you to download and install the [Datadog test recorder][6] Chrome extension. 
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][6] Chrome extension. 
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 
@@ -108,9 +108,9 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 The Browser Test details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][7], select a failed test result and start by reviewing screenshots, including the ones leading up to the failed step. You can also review potential **[Errors & Warnings][8]**, **[Resources][9]** as well as **[Core Web Vitals][10]** to diagnose the issue. 
+To troubleshoot a [failed test][7], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][8]**, **[Resources][9]**, and **[Core Web Vitals][10]** to diagnose the issue. 
 
-With Datadog's [APM integration with Synthetic Monitoring][11], you also have the ability to look into the traces that are generated in your backend by the test runs from the **Traces** tab.
+Use Datadog's [APM integration with Synthetic Monitoring][11] to view traces generated from your backend by the test runs from the **Traces** tab.
 
 ## Further Reading
 
