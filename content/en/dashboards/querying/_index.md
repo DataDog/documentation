@@ -45,7 +45,7 @@ Select your visualization from the available [widgets][2].
 
 Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown"  style="width:75%;" >}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
 
 If you want to explore your metrics further, start with the [Metrics Explorer][3] or a [notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
 
