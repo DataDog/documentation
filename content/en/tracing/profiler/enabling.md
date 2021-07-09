@@ -68,6 +68,9 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
+## Enabling the allocation profiler
+
+In versions 0.84.0+ of the tracer, the allocation profiler is disabled by default. To enable it, see [Enabling the allocation profiler][8]
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
@@ -76,6 +79,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 [5]: https://app.datadoghq.com/profiling
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[8]: (/tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler)
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
