@@ -1,5 +1,5 @@
 ---
-title: Solution NDM avec l'Agent de cluster
+title: Network Device Monitoring avec l'Agent de cluster
 kind: guide
 aliases:
   - /fr/network_performance_monitoring/devices/guide/cluster-agent/
@@ -186,9 +186,22 @@ clusterAgent:
           ## Pour en savoir plus sur le tagging : https://docs.datadoghq.com/tagging/
           #
           tags:
-            # Le sous-réseau Autodiscovery auquel l'appareil fait partie.
+            # Le sous-réseau Autodiscovery auquel l'appareil appartient.
             # Utilisé par la fonction Autodiscovery de l'Agent pour transmettre le nom du sous-réseau.
             - "autodiscovery_subnet:%%extra_autodiscovery_subnet%%"
+
+            ## @param extra_tags - chaîne - facultatif
+            ## Liste de tags (séparés par des virgules) à appliquer à chaque métrique, événement ou check de service généré par cette intégration.
+            ## Exemple :
+            ## extra_tags: "tag1:val1,tag2:val2"
+            #
+            extra_tags: "%%extra_tags%%"
+
+            ## @param oid_batch_size - entier - facultatif - valeur par défaut : 60
+            ## Le nombre d'OID traités par chaque lot. Si vous augmentez ce nombre, les performances seront améliorées
+            ## mais les ressources utilisées augmenteront.
+            #
+            oid_batch_size: "%%extra_oid_batch_size%%"
 
 
   ## @param datadog-cluster.yaml - objet - facultatif
@@ -210,7 +223,7 @@ clusterAgent:
         - network: 192.168.1.16/29
           version: 2
           port: 1161
-          community: f5
+          community: public
 {{< /code-block >}}
 
 
