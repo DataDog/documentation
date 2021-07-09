@@ -43,7 +43,11 @@ Select your visualization from the available [widgets][2].
 
 ### Choose the metric to graph
 
-Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, start with the [Metrics Explorer][3] or a [notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
+Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown also provides additional information about the metric, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag's values`. 
+
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown"  style="width:75%;" >}}
+
+If you want to explore your metrics further, start with the [Metrics Explorer][3] or a [notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
 
 ### Filter
 
@@ -66,6 +70,10 @@ Aggregation method is next to the filter dropdown. This defaults to `avg by` but
 #### Aggregation groups
 
 Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
+
+Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data.
+
+{{< img src="dashboards/querying/metric_tags.png" alt="Metric Tags"  style="width:75%;" >}}
 
 #### Rollup to aggregate over time
 
