@@ -79,7 +79,7 @@ In tracer v0.84.0+, the allocation profiler is disabled by default. To enable it
 [5]: https://app.datadoghq.com/profiling
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[8]: (/tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler)
+[8]: /tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
