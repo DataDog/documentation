@@ -7,7 +7,7 @@ kind: documentation
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.
 2. Make sure the Datadog Agent host is properly configured and it's reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
-3. If you still don't see any results, [contact Support][3] and we'll help you troubleshoot.
+3. If you still don't see any results, [contact Support][3] for troubleshooting help.
 
 ### Your tests are instrumented, but Datadog isn't showing any data
 
