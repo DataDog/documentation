@@ -16,7 +16,7 @@ further_reading:
 </div>
 {{< /site-region >}}
 
-This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between a Datadog organization and an Azure subscription. Create a Datadog resource in Azure before proceeding with this guide.
+This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between a Datadog organization and an Azure subscription. [Create a Datadog resource][1] in Azure before proceeding with this guide.
 
 With the Datadog resource, you can manage the following within the associated Azure subscription:
 - Configure the collection of Azure metrics and platform logs
@@ -93,7 +93,7 @@ The portal retrieves all the available Datadog plans for your tenant, this inclu
 ## Datadog org configurations
 ### Metrics and logs
 
-Select "Metrics and logs" in the left sidebar to change the configuration rules for metrics and logs. See the Azure documentation to [Configure metrics and logs][1].
+Select "Metrics and logs" in the left sidebar to change the configuration rules for metrics and logs. See the Azure documentation to [Configure metrics and logs][2].
 
 ### Monitored resources
 
@@ -106,7 +106,7 @@ The "Logs to Datadog" column displays `Sending` if the resource is sending logs 
 | Reason                                    | Description                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Resource doesn't support sending logs     | Only resource types with monitoring log categories can be configured to send logs to Datadog.                           |
-| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][2]. |
+| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][3]. |
 | Error                                     | The resource is configured to send logs to Datadog, but is blocked by an error.                                         |
 | Logs not configured                       | Only Azure resources with appropriate resource tags are configured to send logs to Datadog.                             |
 | Region not supported                      | The Azure resource is in a region that doesn't support sending logs to Datadog.                                         |
@@ -153,7 +153,7 @@ For each app service, the following information is displayed:
 
 #### Install
 
-To install the Datadog extension, select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
+To install the [Datadog extension][4], select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
@@ -161,7 +161,7 @@ To install the Datadog extension, select the appropriate app, then click "Instal
 
 Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-**Note**: Ensure you are adding the extension to apps with supported runtimes. The Datadog resource does not limit or filter the list of apps.
+**Note**: Ensure you are adding the extension to apps with [supported runtimes][5]. The Datadog resource does not limit or filter the list of apps.
 
 #### Uninstall
 
@@ -191,5 +191,8 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.microsoft.com/en-us/azure/partner-solutions/datadog/create#configure-metrics-and-logs
-[2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+[1]: /integrations/azure/#create-datadog-resource
+[2]: /integrations/azure/#metrics-and-logs
+[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+[4]: /serverless/azure_app_services
+[5]: /serverless/azure_app_services/#requirements
