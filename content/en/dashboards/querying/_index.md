@@ -43,7 +43,7 @@ Select your visualization from the available [widgets][2].
 
 ### Choose the metric to graph
 
-Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown also provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag's values`. 
+Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown"  style="width:75%;" >}}
 
