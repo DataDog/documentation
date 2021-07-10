@@ -70,9 +70,9 @@ For more information on how to set up private locations, see [Getting Started wi
 
 ### Specify test frequency
 
-Select the frequency of your test runs. You can run tests on-demand and as part of your continuous integration pipelines. 
+Select the frequency of your test runs. Additionally, on-demand and continuous integration pipelines tests are available. 
 
-For more information on CI/CD testing, see [Synthetic CI/CD Testing][6].
+For more information, see [Synthetic CI/CD Testing][6].
 
 ### Define alert conditions
 
