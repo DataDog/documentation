@@ -100,7 +100,7 @@ The example below demonstrates how to map a user journey from adding an item to 
 
 It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.
 
-{{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps"  video="true"  >}}
 
 **Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you will receive an email notification when the test fails and recovers.
 
