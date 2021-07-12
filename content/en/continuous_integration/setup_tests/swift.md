@@ -62,16 +62,16 @@ There are two ways of installing the testing framework:
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target. You must also select your main target in the `Expand variables based on:`  combo or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target. You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
-You should set all these variables in your test target:
+Set all these variables in your test target:
 
 `DD_TEST_RUNNER`
-: Enables or disables the instrumentation of tests. You should set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
+: Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
 **Default**: `false`<br/>
 **Recommended**: `$(DD_TEST_RUNNER)`<br/>
 **Example**: `true`
@@ -83,17 +83,17 @@ You should set all these variables in your test target:
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
-**Default**: `(Repository name)`<br/>
+**Default**: The repository name<br/>
 **Example**: `my-ios-app`
 
 `DD_ENV`
-: Name of the environment where tests are being run. You should set this value to `$(DD_ENV)` so you can use an environment variable at runtime for setting it.<br/>
+: Name of the environment where tests are being run. Set this value to `$(DD_ENV)` so you can use an environment variable at runtime for setting it.<br/>
 **Default**: `none`<br/>
 **Recommended**: `$(DD_ENV)`<br/>
 **Examples**: `ci`, `local`
 
 `SRCROOT`
-: This is the path to the project SRCROOT environment variable. The recommended approach is to use `$(SRCROOT)` for the value, as this is automatically set by Xcode.<br/>
+: The path to the project SRCROOT environment variable. Use `$(SRCROOT)` for the value, because it is automatically set by Xcode.<br/>
 **Default**: `(empty)`<br/>
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
@@ -113,7 +113,7 @@ When running tests in a simulator, full Git metadata is collected using the loca
 
 ### Running tests
 
-After installation, you can run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs will be instrumented automatically. You can pass your environment variables when running your tests in the CI, e.g:
+After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \

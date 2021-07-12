@@ -151,7 +151,7 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 6. Save your configuration.
 
 **Global tags**
-: A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance<br/>
+: A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`<br/>
 **Example**: `key1:value1,key2:${SOME_ENVVAR},${OTHER_ENVVAR}:value3`
 

@@ -76,7 +76,7 @@ dependencies {
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Configure the [Maven Surefire Plugin][1] and/or the [Maven Failsafe Plugin][2] to use Datadog Java agent, specifiying the name of the service or library under test with the `-Ddd.service` property:
+Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
 
 * If using the [Maven Surefire Plugin][1]:
 

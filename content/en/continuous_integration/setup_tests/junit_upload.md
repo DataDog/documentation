@@ -14,7 +14,7 @@ JUnit test report files are XML files that contain test execution information, s
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
 
-Test results imported via JUnit XML reports will appear alongside tests reported via tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stacktraces. For this reason, only use this method if there is no native support for the language or testing framework being used.
+Test results imported via JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stacktraces. For this reason, only use this method if there is no native support for the language or testing framework being used.
 
 ## Installing the Datadog CI CLI
 
@@ -32,7 +32,7 @@ To upload your JUnit XML test reports to Datadog, run the following command, spe
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
-You will need to specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
+Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
 {{< code-block lang="bash" >}}
 DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
@@ -87,7 +87,7 @@ Additionally, the following environment variables are supported:
 
 ## Collecting repository and commit metadata
 
-The Datadog CI CLI will try to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][1] binary is required.
+The Datadog CI CLI tries to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][1] binary is required.
 
 ## Further reading
 

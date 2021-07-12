@@ -51,7 +51,7 @@ All tests will be automatically instrumented.
 
 To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter.
 
-You will also need to configure the tracer to use Call Target instrumentation by setting `DD_TRACE_CALLTARGET_ENABLED=true`, which is not the default value.
+Also, configure the tracer to use call target instrumentation by setting `DD_TRACE_CALLTARGET_ENABLED=true`, which is not the default value.
 
 For example:
 
@@ -94,7 +94,7 @@ The following list shows the default values for key configuration settings:
 `--dd-service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: (repository name)<br/>
+**Default**: The repository name<br/>
 **Example**: `my-dotnet-app`
 
 `--dd-env`
