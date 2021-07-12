@@ -16,7 +16,7 @@ Used in combination with RUM performance data, Session Replay can be an asset fo
 
 ## Collect Session Replay data
 
-### Initial Setup
+### Initial setup
 
 To use Session Replay, Datadog RUM Browser Monitoring must already be set up, following the steps detailed [here][1]: application creation, client token generation, and RUM SDK setup.
 
@@ -108,7 +108,7 @@ Several reasons might explain why assets are not available at the time of the re
 3. The resource is blocked by the browser due to CORS (typically, web-fonts). 
 The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
 The fix is thus to allow `app.datadoghq.com through` the `[Access-Control-Allow-Origin][5]` header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
-To learn more about Cross Origin Resource Sharing, we recommend the [MDN Web Docs article][6].
+To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
 
 ### CSS rules not properly applied / mouse hover not replayed 
 
@@ -133,15 +133,18 @@ Additionally, the `example.com` domain must be authorised by `assets.example.com
 
 The Session Replay Recorder, part of the RUM Browser SDK, takes a snapshot of the DOM + CSS. It then tails & records events happening on the web page (DOM modification, mouse move, clicks, input events, …) along with their timestamp.
 
-On replay, in the Datadog application, we rebuild the page and re-apply the recorded events at the right time.
+On the Datadog replay view, we rebuild the page and re-apply the recorded events at the right time.
 
-Our browser SDK is [open source][10], and we leverage internally the open source project [rrweb][9].
+The browser SDK is [open source][10], and leverages the open source project [rrweb][9].
 
 ### What is the performance impact?
 
-The team is working hard on ensuring minimal impact of the Session Replay recorder on the applications performance: we’ve reduced the network impact of Session Replay by compressing the data prior to sending it to Datadog, and we’ve reduced the load on the browser’s UI thread by delegating most of the CPU intensive work (like compression) to a background service worker.
+The team is is focused on ensuring minimal impact of the Session Replay recorder on the applications performance: 
 
-We expect network bandwidth impact to be less than 100Kb/min, and will be able to refine our estimates Beta and Early Adopters.
+- reduced network impact of Session Replay by compressing the data prior to sending it to Datadog
+- reduced load on the browser’s UI thread by delegating most of the CPU intensive work (like compression) to a background service worker.
+
+Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will be available after more data is received from Early Adopters.
 
 ### How long is my Session Replay available?
 
