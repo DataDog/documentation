@@ -60,17 +60,20 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 
 - Datadog strongly recommends that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
 
+## Enabling the allocation profiler
+
+In tracer v0.83.0+, the allocation profiler is disabled by default on Java 15 and lower. To enable it, see [Enabling the allocation profiler][8].
+
+## Environment variables
+
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
+| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable allocation profiler. It requires the profiler to be enabled already. |
 | `DD_SERVICE`                                     | String        | Your [service][3] name, for example, `web-backend`.     |
 | `DD_ENV`                                         | String        | Your [environment][7] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
-
-## Enabling the allocation profiler
-
-In tracer v0.84.0+, the allocation profiler is disabled by default. To enable it, see [Enabling the allocation profiler][8].
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
