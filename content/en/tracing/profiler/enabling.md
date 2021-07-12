@@ -69,7 +69,7 @@ In tracer v0.83.0+, the allocation profiler is disabled by default on Java 15 an
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
-| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable allocation profiler. It requires the profiler to be enabled already. |
+| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
 | `DD_SERVICE`                                     | String        | Your [service][3] name, for example, `web-backend`.     |
 | `DD_ENV`                                         | String        | Your [environment][7] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
