@@ -33,19 +33,40 @@ Datadog meters the count of IoT devices hourly. The billable count of IoT device
 
 For more information about IoT billing, see the [Datadog Pricing page][7].
 
-## Invoicing
+## Invoices
 
-If you pay by credit card, receipts are available to [Administrators][8] for previous months under [Billing History][9].
+There are two choices for payment method:
+- Credit card
+- Invoicing (ACH, wire, or check)
 
-If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][10].
+### Credit card
+
+If you pay by credit card, receipts are available to [Administrators][8] for previous months under [Billing History][9]. For copies of your invoice, email [Datadog billing][10].
+
+See [Credit Card Billing][11] for more details.
+
+### Invoicing
+
+If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. If you need an additional copy, email [Datadog billing][10]. Details on where to remit payment can be found on the invoice.
+
+To change your payment method, contact your [Customer Success][12] Manager.
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Plan][11] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Plan][13] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
 **Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@yourcompany.com`.
+
+## Contact
+
+| Question or concern                                                                                                                                                                               | Contact                      |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| Dispute and credit request<br>Usage<br>Payment method change<br>Payment concern<br>General account concerns<br>Update contacts<br>Statement of account<br>Update billing and shipping information | success@datadoghq.com        |
+| Invoice copies<br>Time sensitive charge requests<br>Billing breakdown<br>Portal invitation                                                                                                        | billing@datadoghq.com        |
+| Payment remittance                                                                                                                                                                                | remittances@datadoghq.com    |
+| Purchase order copies                                                                                                                                                                             | purchaseorders@datadoghq.com |
 
 ## Further Reading
 
@@ -76,7 +97,9 @@ You can set specific email addresses to receive invoices on the [Plan][11] page 
 [5]: https://docs.datadoghq.com/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: /account_management/users/default_roles/
+[8]: /account_management/rbac/#datadog-default-roles
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
-[11]: https://app.datadoghq.com/account/billing
+[11]: /account_management/billing/credit_card/
+[12]: mailto:success@datadoghq.com
+[13]: https://app.datadoghq.com/account/billing
