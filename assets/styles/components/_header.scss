@@ -1,8 +1,9 @@
 $ddpurple: #632ca6;
 
-.announcement_banner.open ~ header {
-    margin-top: 30px !important;
-    background: #fff;
+.announcement {
+    header {
+        margin-top: 30px !important;
+    }
 }
 
 body > header {

@@ -1,14 +1,24 @@
 $ddpurple:    #632CA6;
 
-body > header.scrolled ~ .container .sidenav .sticky {
-  top:66px;
+body {
+  .sidenav {
+    .sticky {
+      top: 98px;
+    }
+  }
 }
 
-.announcement_banner.open ~ header.scrolled ~ .container .sidenav .sticky,
-.announcement_banner.open ~ header.scrolled ~ .container .sidenav-api .sticky {
-  top:96px;
-}
+.api {
+  .sidenav-api {
+    .sticky {
+      top: 103px !important;
 
+      @include media-breakpoint-up(xl) {
+        top: 98px !important;
+      }
+    }
+  }
+}
 
 .side {
   &:before,
@@ -288,9 +298,6 @@ body > header.scrolled ~ .container .sidenav .sticky {
         padding: 0px;
       }
     }
-  }
-  .sticky {
-    top:65px;
   }
   ul li a {
     line-height: 24px;
