@@ -12,9 +12,11 @@ Built with [hugo][1], a static website generation tool.
 
 3. [Install hugo][12]
 
-4. Install yarn: `npm install -g yarn`
+4. [Install Go][13] (at minimum, `go version` 1.12)
 
-5. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
+5. Install yarn: `npm install -g yarn`
+
+6. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
 
 ### Run the server
 
@@ -97,3 +99,4 @@ Within 10 minutes of merging to master, it deploys automatically.
 [10]: https://spec.commonmark.org/0.29/
 [11]: https://docs.datadoghq.com/developers/integrations
 [12]: https://gohugo.io/getting-started/installing/
+[13]: https://golang.org/doc/install
