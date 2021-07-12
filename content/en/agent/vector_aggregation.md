@@ -48,6 +48,9 @@ logs_config:
   logs_no_ssl: true # If TLS/SSL is not enabled on the vector side
 ```
 
+Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
+the Vector `datadog_logs` source will be listening.
+
 ### Vector configuration
 To receive logs from Datadog Agent, configure Vector with a [datadog_logs source][10].
 To send logs to Datadog, Vector should be configured with at least one [datadog_logs sink][11].
@@ -61,7 +64,7 @@ Here is a configuration example that adds a tag to every log using the Vector Re
 sources:
   datadog_agents:
     type: datadog_logs
-    address: "[::]:8080"
+    address: "[::]:8080" # The <VECTOR_PORT> mentionned above should be set to the port value used here
 
 transforms:
   add_tags:
@@ -83,15 +86,9 @@ sinks:
 
 ### Using Kubernetes
 
-Using the official Datadog chart the following values need to be updated:
-
-```yaml
-agents:
-  useConfigMap: true
-  agents.customAgentConfig:
-    logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
-    logs_no_ssl: true # If TLS/SSL is not enabled on the vector side
-```
+Using the official Datadog chart the configuration settings [described above](#agent-configuration) can be added 
+to the `agents.customAgentConfig` value (Note that `agent.useConfigMap` shall also be set to `true`
+for `agents.customAgentConfig` to be taken into account).
 
 For additional details about the Datadog Helm chart, see [the Kubernetes documentation][13].
 
@@ -100,32 +97,9 @@ logs source preconfigured. For more information about installing Vector using He
 see to the [official Vector documentation][15].
 
 To ultimately send logs to Datadog, a `datadog_logs` sink need to be added to the Vector
-configuration. Vector's chart supports adding additional sinks in the `values.yaml` file.
-
-A sample `datadog_logs` sink should ideally include a `remap` transform
-that adds a Datadog tag to recognize logs forwarded by Vector:
-
-```yaml
-transforms:
-  add_tags:
-    type: remap
-    inputs:
-      - datadog_logs # The name of the preconfigured Datadog source
-    source: |
-      .ddtags = .ddtags + ",sender:vector"
-
-sinks:
-  to_datadog:
-    type: datadog_logs
-    inputs:
-       - add_tags
-    default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
-    compression: gzip
-    encoding:
-      codec: json
-    healthcheck:
-      enabled: true
-```
+configuration. Vector's chart can hold any valid Vector configuration in the `values.yaml` file using the
+`customConfig` field. In order to enable a `datadog_logs` the same kind of configuration that the one 
+described [above](#vector-configuration) can be directlyt included as-is in the Vector chart configuration.
 
 ## Manipulating Datadog logs with Vector
 
