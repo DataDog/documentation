@@ -69,7 +69,7 @@ By default, any input events on HTML input elements of type `password`, `email` 
 These events can be ignored on other elements as well, by either setting the data attribute `data-dd-privacy` to `input-ignored`, or adding a class of `dd-privacy-input-ignored`. For example, any inputs on the following form will be ignored:
 
 ``` html
-<form method="post" data-dd-privacy=”input-ignored”>
+<form method="post" **data-dd-privacy=”input-ignored”**>
     <input type="text" name="name" id="name" required>
     <input type="number" name="age" id="age" required>
     <input type="email" name="email" id="email" required>
