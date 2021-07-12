@@ -79,7 +79,7 @@ These events can be ignored on other elements as well, by either setting the dat
 
 Additionally, HTML elements can be fully obfuscated. These elements are replaced with a white block at recording time, as seen in this example of the navbar of a replay of a Datadog session: 
 
-{{< img src="real_user_monitoring/guide/replay-hidden.png" alt="Replay Hidden Example" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/replay-hidden.png" alt="Replay Hidden Example">}}
 
 Obfuscate elements by setting the data attribute `data-dd-privacy` to hidden, or by adding a class of `dd-privacy-hidden`. Elements marked as hidden will *not* have their content recorded and the PII will not be sent to Datadog. For example, the following div will be obfuscated and replaced in the replay by a white block of the same size:
 
