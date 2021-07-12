@@ -26,7 +26,7 @@ further_reading:
   text: "RUM Browser Data Collected"
 ---
 
-{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
+{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard"  >}}
 
 ## What is Real User Monitoring?
 
