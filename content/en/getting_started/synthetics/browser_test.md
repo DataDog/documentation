@@ -13,7 +13,7 @@ further_reading:
       text: 'Learn about private locations'
     - link: '/synthetics/ci'
       tag: 'Documentation'
-      text: 'Learn how to run Synthetic tests in your CI/CD process'
+      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -50,9 +50,10 @@ For more information on how to set up private locations, see [Getting Started wi
 
 #### Specify test frequency
 
-Select the frequency of your test runs. Additionally, on-demand and continuous integration pipelines tests are available.
+Select the frequency at which you want your test to execute. 
 
-For more information, see [Synthetic CI/CD Testing][4].
+In addition to running your Synthetic test on a schedule, you can trigger them directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][4].
+
 
 #### Define alert conditions
 

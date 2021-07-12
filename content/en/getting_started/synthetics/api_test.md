@@ -13,7 +13,7 @@ further_reading:
       text: 'Learn about private locations'
     - link: '/synthetics/ci'
       tag: 'Documentation'
-      text: 'Learn how to run Synthetic tests in your CI/CD process'
+      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -40,7 +40,7 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
     - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
     - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
-    - You can create global variables and locally defined variables in your test options. If you need to use credentials or want to inject a dynamically defined timestamp in your API call, click **Create Local Variable**.
+    - You can use secure [global variables][11] for any credentials in your API call. You can also create [local variables][12] to inject a dynamically defined timestamp in your request payload. After creating these variables, type `{{` and select a variable to inject the variable in your test options.
 
 6. Click **Test URL** to trigger a sample test run.
 
@@ -70,7 +70,9 @@ For more information on how to set up private locations, see [Getting Started wi
 
 ### Specify test frequency
 
-Select the frequency of your test runs. Additionally, on-demand and continuous integration pipelines tests are available. 
+Select the frequency at which you want your test to execute. 
+
+In addition to running your Synthetic test on a schedule, you can trigger them directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][8].
 
 For more information, see [Synthetic CI/CD Testing][8].
 
