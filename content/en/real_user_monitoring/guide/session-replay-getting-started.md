@@ -58,7 +58,6 @@ DD_RUM.init({
 if (user.isAuthenticated) {
 	DD_RUM.startSessionReplayRecording()
 }
-
 ```
 
 The Session Replay recording can be stopped by calling `stopSessionReplayRecording()`.
@@ -146,7 +145,7 @@ The team is is focused on ensuring minimal impact of the Session Replay recorder
 
 Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will be available after more data is received from Early Adopters.
 
-### How long is my Session Replay available?
+### How long is a Session Replay available?
 
 Session Replay follows the same 30 days retention policy as normal RUM sessions.
 
