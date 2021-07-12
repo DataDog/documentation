@@ -64,12 +64,15 @@ stop                      Stop wepack watch/hugo server.
 * Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
 * When you are ready to commit, create a new pull request to master from your branch.
 * Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
+* Use the [github draft][14] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 
 ### Outside Contributors
 
 * Fork the master branch.
-* When you are ready to finalize your changes, commit them, and then make a pull request back to `DataDog/master`.
 * Consult our [contributing guidelines][8].
+* When you are ready to finalize your changes, commit them, and then make a pull request back to `DataDog/master`.
+* A DataDog technical writer might change with a DOCS ticket number, such as "[DOCS-9000]" which just means we've added it to our internal Jira queue to triage and review. No action is necessary from you if we change the title of your PR.
+
 
 ### A note about markdown
 
@@ -100,3 +103,4 @@ Within 10 minutes of merging to master, it deploys automatically.
 [11]: https://docs.datadoghq.com/developers/integrations
 [12]: https://gohugo.io/getting-started/installing/
 [13]: https://golang.org/doc/install
+[14]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
