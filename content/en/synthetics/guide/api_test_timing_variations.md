@@ -115,7 +115,7 @@ Variations of the Time to first byte can occur because of the network and server
 ### Download time
 Variations in download time can occur because of changes in the response size. The downloaded body size is available on test results and the `synthetics.http.response.size` metric.
 
-For all above timings where variations can be due to network load, it can be useful to leverage [Network Performance monitoring][4] and [Synthetics ICMP tests][5] to identify potential bottlenecks.
+Wherever variations can occur because of network load, you can use [Network Performance Monitoring][4] and [Synthetics ICMP Tests][5] to identify potential bottlenecks.
 
 In cases where variations can occur because of server load, use the [Datadog Agent][8] and its [integrations][9] to identify potential delays. 
 
