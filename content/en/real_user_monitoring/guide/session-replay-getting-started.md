@@ -25,7 +25,7 @@ Session Replay is available through a dedicated build of the RUM Browser SDK. As
 #### npm
 The `@datadog/browser-rum package` is to be replaced with `[@datadog/browser-rum-recorder][2]` When `datadogRum.init()` is called, the Session Replay recording is started as well.
 
-```
+``` javascript
 import { datadogRum } from '@datadog/browser-rum-recorder'
 
 datadogRum.init({
@@ -51,7 +51,7 @@ The usual [RUM initialization parameters][4] are all supported.
 
 In addition, the Session Replay recorder accepts a `manualSessionReplayRecordingStart` option. If set to `true`, the Session Replay recording will not start automatically when calling `init()`. To then start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording (e.g, to only record authenticated user sessions):
 
-```
+``` javascript
 DD_RUM.init({
 	manualSessionReplayRecordingStart: true
 })
@@ -69,7 +69,7 @@ By default, any input events on HTML input elements of type `password`, `email` 
 
 These events can be ignored on other elements as well, by either setting the data attribute `data-dd-privacy` to `input-ignored`, or adding a class of `dd-privacy-input-ignored`. For example, any inputs on the following form will be ignored:
 
-```
+``` html
 <form method="post" data-dd-privacy=”input-ignored”>
     <input type="text" name="name" id="name" required>
     <input type="number" name="age" id="age" required>
@@ -84,7 +84,7 @@ Additionally, HTML elements can be fully obfuscated. These elements are replaced
 
 Obfuscate elements by setting the data attribute `data-dd-privacy` to hidden, or by adding a class of `dd-privacy-hidden`. Elements marked as hidden will *not* have their content recorded and the PII will not be sent to Datadog. For example, the following div will be obfuscated and replaced in the replay by a white block of the same size:
 
-```
+``` html
 <div id=”profile-info” data-dd-privacy=”hidden”>
     <p>Name: John Doe</p>
     <p>Birth date: June 6th, 1987</p>
@@ -120,7 +120,7 @@ If the stylesheets are hosted on a different domain than the web page, access to
 
 For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` via a link element, the `crossoriring` attribute should be set to `anonymous`, unless credentials are required:
 
-```
+``` html
 <link rel="stylesheet" crossorigin="anonymous"
       href="https://assets.example.com/style.css”>
 ```
