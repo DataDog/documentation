@@ -71,7 +71,7 @@ stop                      Stop wepack watch/hugo server.
 * Fork the master branch.
 * Consult our [contributing guidelines][8].
 * When you are ready to finalize your changes, commit them, and then make a pull request back to `DataDog/master`.
-* A DataDog technical writer might change with a DOCS ticket number, such as "[DOCS-9000]" which just means we've added it to our internal Jira queue to triage and review. No action is necessary from you if we change the title of your PR.
+* A DataDog technical writer might change your PR title with a DOCS ticket number, such as "[DOCS-9000]" which just means it has been added to the team's internal Jira queue to triage and review. No action is necessary from you if we change the title of your PR.
 
 
 ### A note about markdown
