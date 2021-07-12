@@ -39,7 +39,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To enable the External Metrics Server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration to set `clusterAgent.metricsProvider.enabled` to `true`, then redeploy your Datadog Helm chart:
+To enable the external metrics server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration.  After you set `clusterAgent.metricsProvider.enabled` to `true`, redeploy your Datadog Helm chart:
 
   ```yaml
   clusterAgent:
@@ -67,7 +67,7 @@ To enable the Custom Metrics Server, first follow the instructions to [set up th
 
 ### Register the external metrics provider service
 
-Once the Datadog Cluster Agent is up and running you will need to apply some additional RBAC policies and setup the `Service` to route the corresponding requests.
+Once the Datadog Cluster Agent is up and running, apply some additional RBAC policies and set up the `Service` to route the corresponding requests.
 
 1. Create a `Service` named `datadog-custom-metrics-server`, exposing the port `443` with the following `custom-metric-server.yaml` manifest:
 
@@ -88,7 +88,7 @@ Once the Datadog Cluster Agent is up and running you will need to apply some add
 
     Apply this `Service` by running `kubectl apply -f custom-metric-server.yaml`
 2. Download the [`rbac-hpa.yaml` RBAC rules file][2].
-3. Register the Cluster Agent as an External Metrics Provider by applying this file:
+3. Register the Cluster Agent as an external metrics provider by applying this file:
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
@@ -150,7 +150,7 @@ Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value 
 
 ## Autoscaling with custom queries using DatadogMetric CRD
 
-You can autoscale on a Datadog query by using  the `DatadogMetric` [Custom Resource Definition (CRD)][6] and Datadog Cluster Agent versions `1.7.0` or above. This is a more flexible approach and will allow you to scale with the exact Datadog query you would use in app.
+You can autoscale on a Datadog query by using  the `DatadogMetric` [Custom Resource Definition (CRD)][6] and Datadog Cluster Agent versions `1.7.0` or above. This is a more flexible approach and allows you to scale with the exact Datadog query you would use in-app.
 
 ### Custom query requirements
 
@@ -166,7 +166,7 @@ For autoscaling to work correctly, the query must follow these rules:
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To activate usage of the `DatdogMetric` CRD update your [datadog-values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`.  Then redeploy your Datadog Helm chart:
+To activate usage of the `DatdogMetric` CRD update your [datadog-values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`. Then redeploy your Datadog Helm chart:
 
   ```yaml
   clusterAgent:
@@ -178,9 +178,9 @@ To activate usage of the `DatdogMetric` CRD update your [datadog-values.yaml][1]
       useDatadogMetrics: true
   ```
 
-**Note:** This will automatically attempt to install the `DatadogMetric` CRD. If that CRD already exists prior to the initial Helm instalation it may conflict.
+**Note:** This will automatically attempts to install the `DatadogMetric` CRD. If that CRD already exists prior to the initial Helm installation, it may conflict.
 
-This automatically updates the necessary RBAC files and will direct the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+This automatically updates the necessary RBAC files and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -276,7 +276,7 @@ If you choose to migrate an HPA later on to reference a `DatadogMetric`, the aut
 
 ### Troubleshooting
 
-The Datadog Cluster Agent will take care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing. You can run the following to get this information outputted for you:
+The Datadog Cluster Agent takes care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing. You can run the following to get this information outputted for you:
 
 ```shell
 kubectl describe datadogmetric <RESOURCE NAME>
