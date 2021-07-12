@@ -14,7 +14,7 @@ further_reading:
 Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users.
 Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction & resolution, and can bring invaluable insights into your web application’s usage patterns and design pitfalls.
 
-## Collect Session Replay Data
+## Collect Session Replay data
 
 ### Initial Setup
 
@@ -63,7 +63,7 @@ if (user.isAuthenticated) {
 
 The Session Replay recording can be stopped by calling `stopSessionReplayRecording()`.
 
-### Sensitive & Personal Data Obfuscation
+### Sensitive & personal data obfuscation
 
 By default, any input events on HTML input elements of type `password`, `email` and `tel` are ignored.
 
@@ -93,11 +93,11 @@ Obfuscate elements by setting the data attribute `data-dd-privacy` to hidden, or
 
 ## Troubleshooting
 
-### Some HTML Elements Are Not Visible at Replay
+### Some HTML elements are not visible at replay
 
 Session Replay does not support the following HTML elements at the moment: `iframe`, `video`, `audio`, `canvas`, as well as Web Components.
 
-### Fonts or Images Do Not Render Properly
+### Fonts or images do not render properly
 
 A Session Replay is not video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts & images.
 
@@ -110,7 +110,7 @@ The replay being rendered on the `app.datadoghq.com` domain, the assets requests
 The fix is thus to allow `app.datadoghq.com through` the `[Access-Control-Allow-Origin][5]` header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
 To learn more about Cross Origin Resource Sharing, we recommend the [MDN Web Docs article][6].
 
-### CSS Rules Not Properly Applied / Mouse Hover Not Replayed 
+### CSS rules not properly applied / mouse hover not replayed 
 
 Contrary to fonts & images, the recorder will try to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it will fallback to recording the links to the CSS files.
 
@@ -127,9 +127,9 @@ For example, if your application is on the `example.com` domain and depends on a
 
 Additionally, the `example.com` domain must be authorised by `assets.example.com` to load it’s resource by properly setting the `[Access-Control-Allow-Origin][5]` header.
 
-## Frequently Asked Questions
+## Frequently asked questions
 
-### How Does It Work?
+### How does it work?
 
 The Session Replay Recorder, part of the RUM Browser SDK, takes a snapshot of the DOM + CSS. It then tails & records events happening on the web page (DOM modification, mouse move, clicks, input events, …) along with their timestamp.
 
@@ -137,13 +137,13 @@ On replay, in the Datadog application, we rebuild the page and re-apply the reco
 
 Our browser SDK is [open source][10], and we leverage internally the open source project [rrweb][9].
 
-### What is the Performance Impact?
+### What is the performance impact?
 
 The team is working hard on ensuring minimal impact of the Session Replay recorder on the applications performance: we’ve reduced the network impact of Session Replay by compressing the data prior to sending it to Datadog, and we’ve reduced the load on the browser’s UI thread by delegating most of the CPU intensive work (like compression) to a background service worker.
 
 We expect network bandwidth impact to be less than 100Kb/min, and will be able to refine our estimates Beta and Early Adopters.
 
-### How Long is my Session Replay Available?
+### How long is my Session Replay available?
 
 Session Replay follows the same 30 days retention policy as normal RUM sessions.
 
