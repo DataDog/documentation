@@ -49,7 +49,7 @@ Select your application type to start collecting RUM data:
 
 Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out of the box dashboards][1].
 
-{{< img src="real_user_monitoring/dashboards/rum_dashboard.png" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/dashboards/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
 ### RUM explorer and analytics
 
