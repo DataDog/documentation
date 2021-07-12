@@ -18,9 +18,9 @@ If you experience issues setting up or configuring Datadog Synthetic Monitoring,
 
 ## API tests
 
-### Variations in network timings
+### I'm seeing variations in network timings
 
-If a sudden spike or an overall increase in API test [timing metrics][12] occurs, this usually indicates a bottleneck or delay in the request. See this [guide][13] to get a better understanding of each API test timing and their variations.
+If you see a sudden spike or overall increase in your API test [timing metrics][12], this usually indicates a bottleneck or delay in the request. See this guide on [API Test Timings and Variations][13] to learn more.
 
 ## Browser tests
 
