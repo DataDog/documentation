@@ -56,9 +56,9 @@ In this example, three default assertions populate after triggering the sample t
 
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview or click **New Assertion**. 
 
-{{< img src="getting_started/synthetics/api-test-configuration.mp4" alt="Example API test configuration"  video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration"  video="true"  >}}
 
-**Note**: You can also leverage variables in your assertions.
+**Note**: You can also leverage [global][5] and [local][6] variables in your assertions.
 
 ### Select locations 
 
@@ -66,13 +66,13 @@ Select one or more **Managed Locations** or **Private Locations** to run your te
 
 Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
 
-For more information on how to set up private locations, see [Getting Started with Private Locations][5].
+For more information on how to set up private locations, see [Getting Started with Private Locations][7].
 
 ### Specify test frequency
 
 Select the frequency of your test runs. Additionally, on-demand and continuous integration pipelines tests are available. 
 
-For more information, see [Synthetic CI/CD Testing][6].
+For more information, see [Synthetic CI/CD Testing][8].
 
 ### Define alert conditions
 
@@ -92,7 +92,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][7] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][9] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
 
 You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
@@ -100,16 +100,16 @@ When you're ready to run your test, click **Save Test**.
 
 ## Create a multistep API test
 
-[Multistep API tests][8] run HTTP requests in sequence, allowing you to configure [HTTP tests][2] on complex backend systems. 
+[Multistep API tests][10] run HTTP requests in sequence, allowing you to configure [HTTP tests][2] on complex backend systems. 
 
 ### Configure the test
 
-When you create a [Multistep API test][8], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
+When you create a [Multistep API test][10], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
 
 1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
 2. In the top right corner, click the **New Test** button.
-3. Select **[Multistep API test][9]**.
-4. Name, tag and select locations for your [Multistep API test][9] like you would with a single [API test][1].
+3. Select **[Multistep API test][11]**.
+4. Name, tag and select locations for your [Multistep API test][11] like you would with a single [API test][1].
 5. In **Define steps**, click **Create Your First Step**. 
 
     - Add a name to your step.
@@ -130,9 +130,9 @@ The API test and Multistep API test detail pages display an overview of the test
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
-{{< img src="getting_started/synthetics/api-test-failure-2.png" alt="API test failure"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-3.png" alt="API test failure"  style="width:100%;">}}
 
-With Datadog's [APM integration with Synthetic Monitoring][10], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
+With Datadog's [APM integration with Synthetic Monitoring][12], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
 ## Further Reading
 
@@ -142,9 +142,11 @@ With Datadog's [APM integration with Synthetic Monitoring][10], access the root 
 [2]: /synthetics/api_tests/http_tests
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://app.datadoghq.com/synthetics/create
-[5]: /getting_started/synthetics/private_location
-[6]: /synthetics/ci
-[7]: /integrations/#cat-notification
-[8]: /synthetics/multistep
-[9]: https://app.datadoghq.com/synthetics/multi-step/create
-[10]: /synthetics/apm/
+[5]: /synthetics/settings/#global-variables
+[6]: /synthetics/api_tests/http_tests#variables
+[7]: /getting_started/synthetics/private_location
+[8]: /synthetics/ci
+[9]: /integrations/#cat-notification
+[10]: /synthetics/multistep
+[11]: https://app.datadoghq.com/synthetics/multi-step/create
+[12]: /synthetics/apm/
