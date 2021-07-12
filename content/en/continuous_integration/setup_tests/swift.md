@@ -39,10 +39,12 @@ There are two ways of installing the testing framework:
 
 3. If you run UITests, also link the app running the tests with this library.
 
+
+[1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
 {{% tab "Adding the framework directly" %}}
 
-1. Download and decompress `DatadogSDKTesting.zip` from the [release page][2].
+1. Download and decompress `DatadogSDKTesting.zip` from the [release page][1].
 
 2. Copy and link your test targets with the resulting XCFramework.
 
@@ -50,6 +52,8 @@ There are two ways of installing the testing framework:
 
 3. If you run UITests, also link the app running the tests with this library.
 
+
+[1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -73,7 +77,7 @@ You should set all these variables in your test target:
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
-: The [Datadog Client Token][3] to use to report test results.<br/>
+: The [Datadog Client Token][1] to use to report test results.<br/>
 **Default**: `(empty)`<br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
@@ -412,6 +416,4 @@ Additional Git configuration for physical device testing:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-swift-testing
-[2]: https://github.com/DataDog/dd-sdk-swift-testing/releases
-[3]: https://app.datadoghq.com/organization-settings/client-tokens
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
