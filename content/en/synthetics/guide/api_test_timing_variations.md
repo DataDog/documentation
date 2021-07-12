@@ -101,7 +101,7 @@ For example, any delay in DNS resolution impacts the redirection timing because 
 
 
 ### DNS resolution time
-An increased DNS resolution time could be due to additional latency from authoritative servers.
+An increase in DNS resolution time can occur with additional latency from authoritative servers.
 
 ### TCP connection time
 Variations of the TCP handshake can occur because of the network and server load, the size of the request and response messages, and the distance between the Synthetics managed or [private location][6] and the server.
