@@ -46,6 +46,7 @@ Only the logs data type is currently supported. Update the following values in t
 logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # If TLS/SSL is not enabled on the vector side
+  use_http: true # Vector `datadog_logs` source only supports HTTP
 ```
 
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
