@@ -68,7 +68,6 @@ As an illustration of this approach, the following example defines a function as
 
 ``` python
 import ddtrace
-from ddtrace.helpers import get_correlation_ids
 
 import structlog
 
