@@ -82,7 +82,9 @@ In this case, no `DD_AGENT_HOST` is required because it is `localhost` by defaul
 Then, run your tests by providing your [Datadog API key][3] in the `DD_API_KEY` environment variable:
 
 {{< code-block lang="bash" >}}
-DD_API_KEY=<MY_API_KEY> docker-compose up --build --abort-on-container-exit tests
+DD_API_KEY=<MY_API_KEY> docker-compose up \
+  --build --abort-on-container-exit \
+  tests
 {{< /code-block >}}
 
 **Note:** In this case, also pass along all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][4].
@@ -110,7 +112,7 @@ resources:
           DD_HOSTNAME: "none"
           DD_INSIDE_CI: "true"
 
-jobs:	
+jobs:
   - job: test
     services:
       dd_agent: dd_agent
