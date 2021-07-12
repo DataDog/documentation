@@ -50,15 +50,8 @@ For example, you can remove all resources tagged with `env:staging` using the **
 
 ## Set notification targets for rules
 
-From the [Rules][7] page, you can add notification targets. The complete list of notification options are:
-
-- [Slack][8]
-- [Jira][9]
-- [PagerDuty][10]
-- [ServiceNow][11]
-- [Microsoft Teams][12]
-- [Webhooks][13]
-- Email
+Set the severity of security posture signals. The dropdown allows you to select an appropriate severity level (INFO, LOW, MEDIUM, HIGH, CRITICAL).
+In the “Notify” section, configure zero or more [notification targets][7] for each rule case.
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 
@@ -72,13 +65,7 @@ From the [Rules][7] page, you can add notification targets. The complete list of
 [4]: https://www.pcisecuritystandards.org/document_library
 [5]: /security_platform/security_monitoring/
 [6]: /integrations/amazon_cloudtrail/
-[7]: https://app.datadoghq.com/security/configuration/rules/
-[8]: /integrations/slack/
-[9]: /integrations/jira/
-[10]: /integrations/pagerduty
-[11]: /integrations/servicenow/
-[12]: /integrations/microsoft_teams/
-[13]: /integrations/webhooks/
+[7]: https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#integrations
 [14]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
 [15]: https://www.hhs.gov/hipaa/index.html
 [16]: https://gdpr.eu/
