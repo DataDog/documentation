@@ -1669,41 +1669,51 @@ main:
     url: tracing/visualization/services_map/
     parent: tracing_vis
     weight: 1405
+  - name: Error Tracking
+    url: tracing/error_tracking/
+    identifier: tracing_error_tracking
+    parent: tracing
+    weight: 15
+  - name: Explorer
+    url: tracing/error_tracking/explorer
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_explorer
+    weight: 1501
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 15
+    weight: 16
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 16
+    weight: 17
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1601
+    weight: 1701
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1602
+    weight: 1702
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1603
+    weight: 1703
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1604
+    weight: 1704
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1605
+    weight: 1705
   - name: CI Visibility
     url: continuous_integration/
     pre: nav_ci
