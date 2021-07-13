@@ -18,6 +18,7 @@ Supported test frameworks:
   * Only [`jest-circus`][1] is supported as a `testRunner`.
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
+* Cucumber-js >= 7.0.0
 
 ## Prerequisites
 
@@ -93,6 +94,23 @@ Add `--require dd-trace/init` to however you normally run your `mocha` tests, fo
 {{< code-block lang="javascript" filename="package.json" >}}
 'scripts': {
   'test': 'DD_SERVICE=my-ui-app mocha --require dd-trace/init'
+},
+{{< /code-block >}}
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci npm test
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Cucumber" %}}
+
+Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
+
+{{< code-block lang="javascript" filename="package.json" >}}
+'scripts': {
+  'test': 'DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init'
 },
 {{< /code-block >}}
 
