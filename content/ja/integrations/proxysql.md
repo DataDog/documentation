@@ -148,25 +148,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "proxysql" >}}
 
 
-### サービスのチェック
-
-**proxysql.can_connect**:<br>
-Agent が ProxySQL に接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。このサービスチェックは `server` と `port` でタグ付けされます。
-
-**proxysql.backend.status**:<br>
-ProxySQL がバックエンドホストを SHUNNED または OFFLINE_HARD とみなす場合は `CRITICAL` を返します。バックエンドホストが `OFFLINE_SOFT` の場合は `WARNING` を返します。それ以外の場合は `OK` を返します。このサービスチェックは`hostgroup`、`srv_host`、`srv_port` でタグ付けされます。
-
 ### イベント
 
 ProxySQL チェックにはイベントは含まれません。
 
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
 
 
 [1]: https://proxysql.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help
+[5]: https://github.com/DataDog/integrations-core/blob/master/proxysql/assets/service_checks.json
+[6]: https://docs.datadoghq.com/ja/help

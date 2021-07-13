@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_bigtable/'
 draft: false
 git_integration_title: google_cloud_bigtable
 has_logo: true
+integration_id: google-cloud-bigtable
 integration_title: "Google\_Bigtable"
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Cloud Bigtable est le service de base de données NoSQL big data de Google. Ce
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Bigtable.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

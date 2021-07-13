@@ -82,12 +82,20 @@ kubeletArguments:
 - ポッド制限およびリクエスト数
 - ノード容量メトリクス
 
+## 収集データ
+
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.openshift.org/3.7/install_config/master_node_configuration.html#node-configuration-files
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://github.com/DataDog/integrations-core/blob/master/kubelet/assets/service_checks.json
+[6]: https://docs.datadoghq.com/ja/help/

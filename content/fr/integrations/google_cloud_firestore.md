@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firestore/'
 draft: false
 git_integration_title: google_cloud_firestore
 has_logo: true
+integration_id: google-cloud-firestore
 integration_title: "Google\_Cloud\_Firestore"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Google Cloud Firestore est une base de données flexible et évolutive pour le
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Firestore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
