@@ -96,7 +96,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
-Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space. 
+Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
 ### Set alert conditions
@@ -189,6 +189,13 @@ For a monitor that does not notify on missing data, if a group does not report d
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
 In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+
+#### New group delay
+
+Delay the evaluation by `N` seconds for new groups.
+The option is available with multi-alert mode.
+
+The time (in seconds) before starting the evaluation of monitor results, to allow newly created groups to boot and applications to fully start. This should be a non-negative integer. If the delay is set between `1` and `60` seconds and the evaluation frequency is 1 minute, the monitor will skip the first evaluations for newly created groups. If the delay is set between `61` and `120` seconds, the monitor will skip the 2 first evaluations, and so on.
 
 #### Evaluation delay
 

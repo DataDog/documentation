@@ -3,14 +3,21 @@ title: Monitor API Options
 kind: guide
 ---
 
-## Common options 
+## Common options
 
 - **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**. Examples:
 
   - To mute the alert completely: `{'*': None}`
   - To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
-- **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**
+- **`new_group_delay`** Time (in seconds) before starting the evaluation of monitor results, to allow newly created groups to boot and applications to fully start. Should be a non negative integer. Default: **60**. Examples :
+
+  - equal to **0**: no evaluation is ignored
+  - bewteen **1** and **60**: the first evaluation is ignored
+  - between **61** and **120**: the first two evaluations are ignored
+
+- **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**. Using `new_group_delay` instead of `new_host_delay` is recommanded.
+
 - **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 - **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
 - **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
@@ -63,7 +70,7 @@ Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
 - **`aggregation`** a dictionary of `type`, `metric` and `groupeBy`:
   - `type`  3 types are supported: `count`, `cardinality` and `avg`
-  - `metric`:  for `cardinality` name of the facet. For `avg` name of the metric. for `count`just put `count` as metric  
+  - `metric`:  for `cardinality` name of the facet. For `avg` name of the metric. for `count`just put `count` as metric
   - `groupeBy` name of the facet on which you want to group by.
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
