@@ -69,7 +69,7 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 {{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="RUM error tracking">}}
 
-## Further Reading
+## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
