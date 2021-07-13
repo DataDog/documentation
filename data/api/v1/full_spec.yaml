@@ -2658,7 +2658,7 @@ components:
           type: integer
         message:
           description: Error message.
-          example: ''
+          example: Your browser sent an invalid request.
           type: string
       required:
       - code
@@ -20789,7 +20789,8 @@ paths:
           application/json:
             examples:
               dynamic-points:
-                description: TODO.
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
                 summary: Dynamic Points
                 value:
                   series:
