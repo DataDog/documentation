@@ -20,7 +20,7 @@ Used in combination with RUM performance data, Session Replay can be an asset fo
 
 To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the following sections: application creation, client token generation, and RUM SDK setup.
 
-Session Replay is available through a dedicated build of the RUM Browser SDK. As such, enabling Session Replay only requires changing the npm package name or CDN URL, depending on your chosen installation method.
+Session Replay is available through a dedicated build of the RUM Browser SDK. To enabling Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
 The `@datadog/browser-rum package` is to be replaced with `[@datadog/browser-rum-recorder][2]` When `datadogRum.init()` is called, the Session Replay recording is started as well.
