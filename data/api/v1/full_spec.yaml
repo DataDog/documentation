@@ -10561,6 +10561,10 @@ components:
     SyntheticsTestRequest:
       description: Object describing the Synthetic test request.
       properties:
+        allow_insecure:
+          description: Allows loading insecure content for an HTTP request in a multistep
+            test step.
+          type: boolean
         basicAuth:
           $ref: '#/components/schemas/SyntheticsBasicAuth'
         body:
