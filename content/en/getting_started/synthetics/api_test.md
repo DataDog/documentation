@@ -74,7 +74,6 @@ Select the frequency at which you want your test to execute.
 
 In addition to running your Synthetic test on a schedule, you can trigger them directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][8].
 
-For more information, see [Synthetic CI/CD Testing][8].
 
 ### Define alert conditions
 
