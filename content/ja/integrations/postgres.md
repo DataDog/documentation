@@ -10,10 +10,13 @@ assets:
   logs:
     source: postgresql
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    percent_usage_connections: assets/monitors/percent_usage_connections.json
+    replication_delay: assets/monitors/replication_delay.json
   saved_views:
     operations: assets/saved_views/operations.json
     postgres_pattern: assets/saved_views/postgres_pattern.json
+    postgres_processes: assets/saved_views/postgres_processes.json
     sessions_by_host: assets/saved_views/sessions_by_host.json
     slow_operations: assets/saved_views/slow_operations.json
   service_checks: assets/service_checks.json
@@ -88,8 +91,6 @@ create user datadog with password '<パスワード>';
 grant SELECT ON pg_stat_database to datadog;
 ```
 
-**注**: その他のテーブルをクエリする必要があるカスタムメトリクスを生成する場合は、`datadog` ユーザーにそれらのテーブルに対する `CONNECT` アクセス許可を付与する必要があります。
-
 アクセス許可が正しいことを確認するには、次のコマンドを実行します。
 
 ```shell
@@ -114,6 +115,8 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 
 {{< tabs >}}
 {{% tab "Host" %}}
+
+**注**: その他の表へのクエリを必要とするカスタムメトリクスを生成する際は、`datadog` ユーザーにそれらの表への `SELECT` 権限を付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳しくは、[よくあるご質問セクション](#faq)をご確認ください。
 
 #### ホスト
 
@@ -231,19 +234,105 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 [5]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [6]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "Docker" %}}
 
-#### コンテナ化
+#### Docker
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                                                           |
-| -------------------- | ------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `postgres`                                                                      |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                   |
-| `<インスタンスコンフィギュレーション>`  | `{"host":"%%host%%", "port":5432,"username":"datadog","password":"<パスワード>"}` |
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["postgres"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%", "port":5432,"username":"datadog","password":"<PASSWORD>"}]'
+```
+
+##### ログの収集
+
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"postgresql","service":"postgresql"}]'
+```
+
+##### トレースの収集
+
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+
+Agent コンテナで必要な環境変数
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
+
+次に、[Postgres にリクエストを送信するアプリケーションのコンテナをインスツルメント][3]し、Agent のコンテナ名に `DD_AGENT_HOST` を設定します。
+
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+このチェックを、Kubernetes で実行している Agent に構成します。
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  annotations:
+    ad.datadoghq.com/postgresql.check_names: '["postgres"]'
+    ad.datadoghq.com/postgresql.init_configs: '[{}]'
+    ad.datadoghq.com/postgresql.instances: |
+      [
+        {
+          "host": "%%host%%",
+          "port":"5432",
+          "username":"datadog",
+          "password":"<PASSWORD>"
+        }
+      ]
+spec:
+  containers:
+    - name: postgres
+```
+
+##### ログの収集
+
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  annotations:
+    ad.datadoghq.com/postgres.logs: '[{"source":"postgresql","service":"<SERVICE_NAME>"}]'
+spec:
+  containers:
+    - name: postgres
+```
 
 ##### トレースの収集
 
@@ -257,25 +346,81 @@ Agent コンテナで必要な環境変数
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][2]および [Kubernetes Daemon のセットアップ][3]を参照してください。
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][6]および [Kubernetes DaemonSet のセットアップ][7]を参照してください。
 
-次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
+そして、[Postgres へのリクエストを作成するアプリケーションコンテナをインスツルメントします][4]。
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+[6]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[7]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+このチェックを、ECS で実行している Agent に構成するには:
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "postgres",
+    "image": "postgres:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"postgres\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"host\":\"%%host%%\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\"}]"
+    }
+  }]
+}
+```
 
 ##### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][5]を参照してください。
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
 
-| パラメーター      | 値                                               |
-| -------------- | --------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "postgresql", "service": "postgresql"}` |
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[4]: https://docs.datadoghq.com/ja/tracing/setup/
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+```json
+{
+  "containerDefinitions": [{
+    "name": "postgres",
+    "image": "postgres:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"postgresql\",\"service\":\"postgresql\"}]"
+    }
+  }]
+}
+```
+
+##### トレースの収集
+
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+
+Agent コンテナで必要な環境変数
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][2] を参照してください。
+
+次に、[Postgres にリクエストを送信するアプリケーションのコンテナをインスツルメント][3]し、[EC2 プライベート IP アドレス][4]に `DD_AGENT_HOST` を設定します。
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -297,8 +442,11 @@ PostgreSQL チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**postgres.can_connect**:<br>
-監視対象の PostgreSQL インスタンスに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
@@ -306,22 +454,24 @@ PostgreSQL チェックには、イベントは含まれません。
 
 ### よくあるご質問
 
-- [PostgreSQL カスタムメトリクスの収集の説明][5]
+- [PostgreSQL カスタムメトリクスの収集の説明][7]
 
 ### ブログ記事
 
-- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][6]
-- [PostgreSQL 監視のキーメトリクス][7]
-- [PostgreSQL 監視ツールでメトリクスを収集][8]
-- [Datadog で PostgreSQL データを収集および監視する方法][9]
+- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][8]
+- [PostgreSQL 監視のキーメトリクス][9]
+- [PostgreSQL 監視ツールでメトリクスを収集][10]
+- [Datadog で PostgreSQL データを収集および監視する方法][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
-[6]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
-[7]: https://www.datadoghq.com/blog/postgresql-monitoring
-[8]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
-[9]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+[5]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
+[6]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
+[8]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+[9]: https://www.datadoghq.com/blog/postgresql-monitoring
+[10]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+[11]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
