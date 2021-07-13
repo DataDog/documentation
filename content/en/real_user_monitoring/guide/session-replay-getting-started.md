@@ -115,7 +115,7 @@ Unlike fonts and images, the recorder tries to bundle the various CSS rules appl
 
 Note that for proper mouse hover support, the CSS rules must be accessible via the CSSStyleSheet interface.
 
-If the stylesheets are hosted on a different domain than the web page, access to the CSS rules is subject to cross origin security checks by the browser and the browser must be instructed to load the stylesheet leveraging CORS via the [crossorigin][8] attribute.
+If the stylesheets are hosted on a different domain than the web page, access to the CSS rules is subject to cross-origin security checks by the browser, and the browser must be instructed to load the stylesheet leveraging CORS using the [crossorigin][8] attribute.
 
 For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` via a link element, the `crossoriring` attribute should be set to `anonymous`, unless credentials are required:
 
