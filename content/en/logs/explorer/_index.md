@@ -78,7 +78,7 @@ With fields aggregation, all logs matching the query filter are aggregated into 
 
 **Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#table) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension. 
+Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#table) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Patterns
 
@@ -158,9 +158,9 @@ Results are sorted according to:
 
 ### Timeseries
 
-Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
+Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by up to three available [facets][2].
 
-The following Timeseries log analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique client IPs** over the last month.
+The following Timeseries log analytics shows the evolution of the **top 50 URL Paths** according to the 95th percentile of **duration** over the last 15 minutes.
 
 {{< img src="logs/explorer/timeseries.png" alt="timeserie example"  style="width:90%;">}}
 
@@ -176,7 +176,7 @@ For example, the following Toplist shows the **top 15 Customers** on a merchant 
 
 ### Nested tables
 
-Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or drill through logs corresponding to either dimension.
+Visualize the top values from up to three [facets][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or drill through logs corresponding to either dimension.
 
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.

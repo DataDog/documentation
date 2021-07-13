@@ -11,6 +11,7 @@ public_title: Intégration Datadog/Stunnel
 short_description: Recueillez les logs issus de votre proxy Stunnel et envoyez-les à Datadog.
 dependencies:
   - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md'
+integration_id: stunnel
 ---
 ## Présentation
 

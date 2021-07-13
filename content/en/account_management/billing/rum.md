@@ -5,7 +5,7 @@ kind: faq
 
 ## How is a session defined?
 
-A session is a user journey on your web application. A session usually includes multiple page views with their associated telemetry.
+A session is a user journey on your web or mobile application. A session usually includes multiple page views with their associated telemetry.
 
 ## When does a session expire?
 
@@ -13,7 +13,7 @@ A session expires after 15 minutes of inactivity, and its duration is limited to
 
 ## What data does Datadog Real User Monitoring (RUM) collect?
 
-Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
+Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, crash reports, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
 ## Do you handle single page applications?
 

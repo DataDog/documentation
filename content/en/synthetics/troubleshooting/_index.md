@@ -16,6 +16,12 @@ further_reading:
 
 If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
+## API tests
+
+### I'm seeing variations in network timings
+
+If you see a sudden spike or overall increase in your API test [timing metrics][12], this usually indicates a bottleneck or delay in the request. See this guide on [API Test Timings and Variations][13] to learn more.
+
 ## Browser tests
 
 ### Recording
@@ -147,3 +153,5 @@ This might mean your private location is unable to reach the endpoint your API t
 [9]: https://ip-ranges.datadoghq.com/synthetics.json
 [10]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [11]: /synthetics/private_locations#private-location-total-hardware-requirements
+[12]: /synthetics/metrics/#api-tests
+[13]: /synthetics/guide/api_test_timing_variations/
