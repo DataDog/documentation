@@ -390,7 +390,8 @@ h5 {
     & > a,
     & p a,
     & ol li a,
-    & ul li a {
+    & ul li a,
+    & .alert a {
         color: #4a4a4a;
         border-bottom: 1px solid $gray-600;
         &:hover {
