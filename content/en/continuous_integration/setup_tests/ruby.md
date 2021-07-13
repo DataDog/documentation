@@ -30,11 +30,10 @@ To install the Ruby tracer:
 
 1. Add the `ddtrace` gem to your `Gemfile`:
 
-
     {{< code-block lang="ruby" filename="Gemfile" >}}
-    source 'https://rubygems.org'
-    gem 'ddtrace', ">=0.51.0"
-    {{< /code-block >}}
+source 'https://rubygems.org'
+gem 'ddtrace', ">=0.51.0"
+{{< /code-block >}}
 
 2. Install the gem by running `bundle install`
 
@@ -49,7 +48,7 @@ The Cucumber integration traces executions of scenarios and steps when using the
 
 To activate your integration, add the following code to your application:
 
-{{< code-block lang="ruby" >}}
+```ruby
 require 'cucumber'
 require 'datadog/ci'
 
@@ -58,13 +57,13 @@ Datadog.configure do |c|
   c.service = 'my-ruby-app'  # Name of the service or library under test
   c.use :cucumber
 end
-{{< /code-block >}}
+```
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_ENV=ci bundle exec rake cucumber
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 {{% tab "RSpec" %}}
@@ -73,7 +72,7 @@ The RSpec integration traces all executions of example groups and examples when 
 
 To activate your integration, add this to the `spec_helper.rb` file:
 
-{{< code-block lang="ruby" filename="spec_helper.rb" >}}
+```ruby
 require 'rspec'
 require 'datadog/ci'
 
@@ -82,13 +81,13 @@ Datadog.configure do |c|
   c.service = 'my-ruby-app'  # Name of the service or library under test
   c.use :rspec
 end
-{{< /code-block >}}
+```
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_ENV=ci bundle exec rake spec
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
