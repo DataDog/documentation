@@ -87,7 +87,7 @@ Identify the following behaviors:
 
 - If the variation is observed as a general trend or a sudden spike
 - If the variation only occurs at a specific stage of the request. For example, on the DNS timings.
-- If the impacted Synthetics test is running from multiple locations, whether the variation is localised to a single location, or if it is widespread
+- If the impacted Synthetics test is running from multiple locations, whether the variation is localized to a single location or widespread
 - If the variation only occurs for a single URL, domain, or subdomain; or if it is impacting all tests
 
 
