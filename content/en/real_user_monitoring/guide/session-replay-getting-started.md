@@ -12,7 +12,7 @@ further_reading:
 ## What is Session Replay?
 
 Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users.
-Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction & resolution, and can bring invaluable insights into your web application’s usage patterns and design pitfalls.
+Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction, and resolution, and it can also bring invaluable insights into your web application’s usage patterns and design pitfalls.
 
 ## Collect Session Replay data
 
