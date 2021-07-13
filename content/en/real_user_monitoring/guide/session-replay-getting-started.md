@@ -111,7 +111,7 @@ To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article
 
 ### CSS rules not properly applied / mouse hover not replayed 
 
-Contrary to fonts & images, the recorder will try to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it will fallback to recording the links to the CSS files.
+Unlike fonts and images, the recorder tries to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it falls back to recording the links to the CSS files.
 
 Note that for proper mouse hover support, the CSS rules must be accessible via the CSSStyleSheet interface.
 
