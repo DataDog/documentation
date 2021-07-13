@@ -48,10 +48,6 @@ A finding is the primary primitive for a rule evaluation against a resource. Eve
 
 Signals are security alerts that Datadog generates and displays in the [Signals Explorer][4]. CSPM signals trigger when Datadog generates an `evaluation:fail` finding for a cloud or infrastructure configuration rule.
 
-A selection of rules that have a ‘high’ or ‘critical’ severity level are enabled to generate signals by default. For lower severity rules, select the toggle to begin generating signals.
-
-{{< img src="security_platform/cspm/findings/toggle.png" alt="Lower severity security rule toggle" style="width:80%;">}}
-
 In order to consume findings in logical groupings and mitigate the potential for alert fatigue, you have full flexibility to change how signals are triggered for each individual resource every time a resource fails a rule in a new cloud account or each time a resource is misconfigured in a service. Regardless of which grouping logic you choose for signal generation, opening a signal always displays the up-to-date list of findings that are failing for this rule.
 
 Clicking on an individual finding that has **failed** to see details about the misconfigured resource, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
