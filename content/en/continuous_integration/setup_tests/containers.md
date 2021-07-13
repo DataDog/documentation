@@ -3,11 +3,9 @@ title: Tests in Containers
 kind: documentation
 ---
 
-If you run your tests inside a container that you launch yourself within the build (for example, from a Docker Compose file), forward the following environment variables depending on your CI provider, so the Datadog tracer can autodetect the build information.
+If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider, so the Datadog tracer can autodetect the build information.
 
-Additionally, forward all environment variables used to configure the Datadog tracer (such as `DD_SERVICE` or `DD_AGENT_HOST`).
-
-Forwarding environment variables is not required if the CI provider itself launches the container, because in that case all environment variables are set and available to the tracer.
+Additionally, you need to pass in the environment variables required to configure the tracer as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV` and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
 
 {{< tabs >}}
 {{% tab "Appveyor" %}}
@@ -180,3 +178,7 @@ Forwarding environment variables is not required if the CI provider itself launc
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: https://docs.docker.com/engine/reference/run/
+[2]: https://docs.docker.com/compose/reference/
+[3]: /continuous_integration/setup_tests/
