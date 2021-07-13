@@ -1022,14 +1022,6 @@
     "description": "Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
     "summary": "Get all custom metrics by hourly average"
   },
-  "GetUsageTrace": {
-    "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",
-    "summary": "Get hourly usage for Trace Search"
-  },
-  "GetTracingWithoutLimits": {
-    "description": "Get hourly usage for tracing without limits.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.",
-    "summary": "Get hourly usage for tracing without limits"
-  },
   "ListUsers": {
     "description": "List all users for your organization.",
     "summary": "List all users"
