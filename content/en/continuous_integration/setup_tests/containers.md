@@ -3,12 +3,12 @@ title: Tests in Containers
 kind: documentation
 ---
 
-If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider, so the Datadog tracer can autodetect the build information.
+If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog tracer to autodetect the build information.
 
-Additionally, you need to pass in the environment variables required to configure the tracer as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV` and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
+Additionally, you need to pass in the environment variables required to configure the tracer as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
 
 {{< tabs >}}
-{{% tab "Appveyor" %}}
+{{% tab "AppVeyor" %}}
 
 - `APPVEYOR`
 - `APPVEYOR_BUILD_ID`
@@ -21,7 +21,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `APPVEYOR_REPO_TAG_NAME`
 - `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`
 
-[Full list of build environment variables provided by Appveyor][1]
+[Full list of build environment variables provided by AppVeyor][1]
 
 
 [1]: https://www.appveyor.com/docs/environment-variables/
@@ -66,7 +66,7 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
 {{% /tab %}}
-{{% tab "BuildKite" %}}
+{{% tab "Buildkite" %}}
 
 - `BUILDKITE`
 - `BUILDKITE_PIPELINE_SLUG`
@@ -80,7 +80,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILDKITE_BRANCH`
 - `BUILDKITE_TAG`
 
-[Full list of build environment variables provided by BuildKite][1]
+[Full list of build environment variables provided by Buildkite][1]
 
 
 [1]: https://buildkite.com/docs/pipelines/environment-variables
