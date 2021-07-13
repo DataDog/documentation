@@ -9291,7 +9291,7 @@ components:
           description: Name of the error.
           example: ''
           type: string
-        statusCode:
+        status:
           description: Status Code of the error.
           format: int64
           type: integer

@@ -28,14 +28,14 @@ The `synthetics.http.redirect.time` metric measures the total time spent in redi
 
 For example, an HTTP test with **Follow Redirects** selected loads Page A for a total of `35 ms`, which redirects to Page B, which loads for a total of `40 ms`, and redirects to Page C. The redirect timing is calculated as `35 ms + 40 ms = 75 ms` and the load time of Page C is split among all other timings including DNS resolution and TCP connection.
 
-For more information about follow redirects, see [HTTP Tests][7].
+For more information about follow redirects, see [HTTP Tests][2].
 
 
 The `synthetics.http.redirect.time` metric is only measured if redirects occur during the Synthetics HTTP test run. 
 
 ### DNS resolution time
 
-The `synthetics.dns.response.time` metric and `*.dns.time` metrics measure the time spent resolving the domain name. Synthetic API tests use common DNS servers for domain name resolution, such as Google, CloudFlare, AWS, and Azure. You can override these servers with [private locations][2] or [DNS tests][3]. 
+The `synthetics.dns.response.time` metric and `*.dns.time` metrics measure the time spent resolving the domain name. Synthetic API tests use common DNS servers for domain name resolution, such as Google, CloudFlare, AWS, and Azure. You can override these servers with [private locations][3] or [DNS tests][4]. 
 
 These metrics are only measured when the API test URL field contains a domain name. If you use an IP address, DNS resolution is skipped and no time series appear for these metrics.
 
@@ -104,18 +104,18 @@ For example, any delay in DNS resolution impacts the redirection timing because 
 An increase in DNS resolution time can occur with additional latency from authoritative servers.
 
 ### TCP connection time
-Variations of the TCP handshake can occur because of the network and server load, the size of the request and response messages, and the distance between the Synthetics managed or [private location][6] and the server.
+Variations of the TCP handshake can occur because of the network and server load, the size of the request and response messages, and the distance between the Synthetics managed or [private location][5] and the server.
 
 ### SSL handshake time
-Variations of the SSL handshake time can occur because of the server load (SSL handshakes are usually CPU intensive), the network load, and the distance between the Synthetics managed or [private location][6] and the server. Issues with CDN can increase SSL handshake time.
+Variations of the SSL handshake time can occur because of the server load (SSL handshakes are usually CPU intensive), the network load, and the distance between the Synthetics managed or [private location][5] and the server. Issues with CDN can increase SSL handshake time.
 
 ### Time To first byte
-Variations of the Time to first byte can occur because of the network and server load and the distance between the Synthetics managed or [private location][6] and the server. For example, a higher network load or the rerouting of traffic caused by an unavailable CDN can negatively impact Time to First Byte timing.
+Variations of the Time to first byte can occur because of the network and server load and the distance between the Synthetics managed or [private location][5] and the server. For example, a higher network load or the rerouting of traffic caused by an unavailable CDN can negatively impact Time to First Byte timing.
 
 ### Download time
 Variations in download time can occur because of changes in the response size. The downloaded body size is available on test results and the `synthetics.http.response.size` metric.
 
-Wherever variations can occur because of network load, you can use [Network Performance Monitoring][4] and [Synthetics ICMP Tests][5] to identify potential bottlenecks.
+Wherever variations can occur because of network load, you can use [Network Performance Monitoring][6] and [Synthetics ICMP Tests][7] to identify potential bottlenecks.
 
 In cases where variations can occur because of server load, use the [Datadog Agent][8] and its [integrations][9] to identify potential delays. 
 
@@ -125,11 +125,11 @@ In cases where variations can occur because of server load, use the [Datadog Age
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/metrics/#api-tests
-[2]: /synthetics/private_locations/configuration#dns-configuration
-[3]: /synthetics/api_tests/dns_tests#define-request
-[4]: /network_monitoring/performance/#overview
-[5]: /synthetics/api_tests/icmp_tests/#overview
-[6]: /synthetics/private_locations/?tab=docker#overview
-[7]: /synthetics/api_tests/http_tests?tab=requestoptions#define-request
+[2]: /synthetics/api_tests/http_tests?tab=requestoptions#define-request
+[3]: /synthetics/private_locations/configuration#dns-configuration
+[4]: /synthetics/api_tests/dns_tests#define-request
+[5]: /synthetics/private_locations/?tab=docker#overview
+[6]: /network_monitoring/performance/#overview
+[7]: /synthetics/api_tests/icmp_tests/#overview
 [8]: /getting_started/agent/#overview
 [9]: /integrations/

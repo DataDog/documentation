@@ -2202,7 +2202,7 @@
                   {
                     "description": "",
                     "name": "",
-                    "statusCode": "integer",
+                    "status": "integer",
                     "type": "string"
                   }
                 ],
