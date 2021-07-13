@@ -22,11 +22,11 @@ Datadog collects a lot of errors. It's critical to your system's health to monit
 
 ## How does it work?
 
-The Datadog tracers are collecting errors through existing integrations and manual instrumentation of the source code. The different error spans contained in a trace are processed by Error Tracking whenever they are located in the uppermost service span (also called service entry span) because this is the span better describing the outcome of a given request to the service.
+The Datadog tracers are collecting errors through existing integrations and manual instrumentation of the source code. The different error spans contained in a trace are processed by Error Tracking __whenever they are located in the uppermost service span__ (also called service entry span).
 
-{{< img src="tracking/error_tracking/flamegraph_with_errors.png" alt="Flamegraph with errors"  >}}
+{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flamegraph with errors"  >}}
 
-Those errors are then grouped into issues thanks to our fingerprinting algorithm which is based on the `Error Type`, the `Error Message` as well as on the different frames forming the stack trace.
+Error Tracking computes a fingerprint for each individual error it processes using the error type, the error message as well as the different frames forming the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue.
 
 ## Further Reading
 
