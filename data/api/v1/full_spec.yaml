@@ -2658,7 +2658,7 @@ components:
           type: integer
         message:
           description: Error message.
-          example: ''
+          example: Your browser sent an invalid request.
           type: string
       required:
       - code
