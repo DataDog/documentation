@@ -12,86 +12,98 @@ main_left:
   - identifier: integrations
     name: インテグレーション
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
-    url: "https://www.datadoghq.com/product/platform/integrations/"
+    url: "https://www.datadoghq.com/ja/product/platform/integrations/"
     weight: 2
     parent: product
   - identifier: dashboarding
     name: ダッシュボード
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
-    url: "https://www.datadoghq.com/product/platform/dashboards/"
+    url: "https://www.datadoghq.com/ja/product/platform/dashboards/"
     weight: 3
     parent: product
   - identifier: infrastructure
-    name: Infrastructure Monitoring
+    name: インフラストラクチャーのモニタリング
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg' alt='infra icon'>"
-    url: "https://www.datadoghq.com/product/infrastructure-monitoring/"
+    url: "https://www.datadoghq.com/ja/product/infrastructure-monitoring/"
     weight: 4
     parent: product
   - identifier: logs
-    name: Log Management
+    name: ログ管理
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
-    url: "https://www.datadoghq.com/product/log-management/"
+    url: "https://www.datadoghq.com/ja/product/log-management/"
     weight: 5
     parent: product
   - identifier: apm
     name: APM
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
-    url: "https://www.datadoghq.com/product/apm/"
+    url: "https://www.datadoghq.com/ja/product/apm/"
     weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
-    url: "https://www.datadoghq.com/product/code-profiling/"
+    url: "https://www.datadoghq.com/ja/product/code-profiling/"
     weight: 7
     parent: product
-  - identifier: security
-    name: Security Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: "https://www.datadoghq.com/product/security-monitoring/"
-    weight: 8
-    parent: product
-  - identifier: network
-    name: Network Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
-    url: "https://www.datadoghq.com/product/network-monitoring/"
-    weight: 9
-    parent: product
   - identifier: synthetics
-    name: Synthetic Monitoring
+    name: Synthetic モニタリング
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
-    url: "https://www.datadoghq.com/product/synthetic-monitoring/"
-    weight: 10
+    url: "https://www.datadoghq.com/ja/product/synthetic-monitoring/"
+    weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg' alt='rum icon'>"
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    url: "https://www.datadoghq.com/ja/product/real-user-monitoring/"
+    weight: 9
+    parent: product
+  - identifier: security-platform
+    name: Security Platform
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    url: "https://www.datadoghq.com/ja/product/security-platform/"
+    weight: 10
+    parent: product
+  - identifier: security-monitoring
+    name: セキュリティモニタリング
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    url: "https://www.datadoghq.com/ja/product/security-platform/security-monitoring/"
     weight: 11
     parent: product
-  - identifier: incident
-    name: Incident Management
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/incidents.svg' alt='incident icon'>"
-    url: "https://www.datadoghq.com/product/incident-management/"
+  - identifier: cloud-security-posture-management
+    name: CSPM
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    url: "https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/"
     weight: 12
     parent: product
-  - identifier: serverless
-    name: Serverless
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
+  - identifier: network
+    name: ネットワークモニタリング
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
+    url: "https://www.datadoghq.com/ja/product/network-monitoring/"
     weight: 13
     parent: product
-  - identifier: alerts
-    name: Alerts
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
-    url: "https://www.datadoghq.com/product/alerts/"
+  - identifier: incident
+    name: インシデント管理
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/incidents.svg' alt='incident icon'>"
+    url: "https://www.datadoghq.com/ja/product/incident-management/"
     weight: 14
+    parent: product
+  - identifier: serverless
+    name: サーバーレス
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
+    url: "https://www.datadoghq.com/ja/product/serverless-monitoring/"
+    weight: 15
+    parent: product
+  - identifier: alerts
+    name: アラート
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
+    url: "https://www.datadoghq.com/ja/product/platform/alerts/"
+    weight: 16
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 14
+    weight: 17
     parent: product
   - identifier: customers
     name: お客様
@@ -2382,57 +2394,51 @@ footer_product:
     url: "https://www.datadoghq.com/ja/product/"
     weight: 100
   - name: インテグレーション
-    url: "https://www.datadoghq.com/product/platform/integrations/"
+    url: "https://www.datadoghq.com/ja/product/platform/integrations/"
     weight: 105
   - name: ダッシュボード
-    url: "https://www.datadoghq.com/product/platform/dashboards/"
+    url: "https://www.datadoghq.com/ja/product/platform/dashboards/"
     weight: 110
   - name: ログ管理
-    url: "https://www.datadoghq.com/product/log-management/"
+    url: "https://www.datadoghq.com/ja/product/log-management/"
     weight: 115
   - name: APM
-    url: "https://www.datadoghq.com/product/apm/"
+    url: "https://www.datadoghq.com/ja/product/apm/"
     weight: 120
   - name: Continuous Profiler
-    url: "https://www.datadoghq.com/product/code-profiling/"
+    url: "https://www.datadoghq.com/ja/product/code-profiling/"
     weight: 121
+  - name: Security Platform
+    url: "https://www.datadoghq.com/ja/product/security-platform/"
+    weight: 122
   - name: セキュリティモニタリング
-    url: "https://www.datadoghq.com/product/security-monitoring/"
+    url: "https://www.datadoghq.com/ja/product/security-platform/security-monitoring/"
     weight: 123
-  - name: ネットワークモニタリング
-    url: "https://www.datadoghq.com/product/network-monitoring/"
-    weight: 125
-  - name: Synthetic の監視
-    url: "https://www.datadoghq.com/product/synthetic-monitoring/"
-    weight: 130
-  - name: リアルユーザーモニタリング
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
-    weight: 135
-  - name: インシデント管理
-    url: "https://www.datadoghq.com/product/incident-management/"
-    weight: 136
-  - name: サーバーレス
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
-    weight: 140
-  - name: アラート
-    url: "https://www.datadoghq.com/product/alerts/"
-    weight: 145
-  - name: API
-    url: "https://docs.datadoghq.com/api/"
-    weight: 150
 footer_product_two:
+  - name: CSPM
+    url: "https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/"
+    weight: 124
+  - name: ネットワークモニタリング
+    url: "https://www.datadoghq.com/ja/product/network-monitoring/"
+    weight: 125
+  - name: Synthetic モニタリング
+    url: "https://www.datadoghq.com/ja/product/synthetic-monitoring/"
+    weight: 126
   - name: リアルユーザーモニタリング
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
-    weight: 135
+    url: "https://www.datadoghq.com/ja/product/real-user-monitoring/"
+    weight: 127
+  - name: インシデント管理
+    url: "https://www.datadoghq.com/ja/product/incident-management/"
+    weight: 128  
   - name: サーバーレス
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
-    weight: 140
+    url: "https://www.datadoghq.com/ja/product/serverless-monitoring/"
+    weight: 129
   - name: アラート
-    url: "https://www.datadoghq.com/product/alerts/"
-    weight: 145
+    url: "https://www.datadoghq.com/ja/product/alerts/"
+    weight: 130
   - name: API
-    url: "https://docs.datadoghq.com/api/"
-    weight: 150
+    url: "https://docs.datadoghq.com/ja/api/"
+    weight: 131
 footer_product_three:
   - name: 料金
     url: "https://www.datadoghq.com/ja/pricing/"
