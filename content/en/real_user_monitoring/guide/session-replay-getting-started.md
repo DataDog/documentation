@@ -124,7 +124,7 @@ For example, if your application is on the `example.com` domain and depends on a
       href="https://assets.example.com/style.css”>
 ```
 
-Additionally, the `example.com` domain must be authorised by `assets.example.com` to load it’s resource by properly setting the `[Access-Control-Allow-Origin][5]` header.
+Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the `[Access-Control-Allow-Origin][5]` header.
 
 ## Frequently asked questions
 
