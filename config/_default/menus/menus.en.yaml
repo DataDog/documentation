@@ -5266,30 +5266,6 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
-  - name: Get hourly usage for tracing without limits
-    url: '#get-hourly-usage-for-tracing-without-limits'
-    identifier: get-hourly-usage-for-tracing-without-limits
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetTracingWithoutLimits
-      unstable: []
-      order: 25
-  - name: Get hourly usage for Trace Search
-    url: '#get-hourly-usage-for-trace-search'
-    identifier: get-hourly-usage-for-trace-search
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetUsageTrace
-      unstable: []
-      order: 6
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average
