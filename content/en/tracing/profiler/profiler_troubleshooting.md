@@ -48,7 +48,7 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr
 
 ## Enabling the allocation profiler
 
-The allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications.
+On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications.
 
 To enable the allocation profiler, start your application with the `-Ddd.profiling.allocation.enabled=true` JVM setting or the `DD_PROFILING_ALLOCATION_ENABLED=true` environment variable.
 
