@@ -130,7 +130,7 @@ The API test and Multistep API test detail pages display an overview of the test
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
-{{< img src="getting_started/synthetics/api-test-failure-3.png" alt="API test failure"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-4.png" alt="API test failure"  style="width:100%;">}}
 
 With Datadog's [APM integration with Synthetic Monitoring][12], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 

@@ -110,6 +110,10 @@ The Browser Test details page displays an overview of your test configuration, t
 
 To troubleshoot a [failed test][7], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][8]**, **[Resources][9]**, and **[Core Web Vitals][10]** to diagnose the issue. 
 
+In the example below, the test failed as the result of a server timeout.
+
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure"  video="true"  >}}
+
 Use Datadog's [APM integration with Synthetic Monitoring][11] to view traces generated from your backend by the test runs from the **Traces** tab.
 
 ## Further Reading
