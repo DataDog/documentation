@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If you previously set up Datadog Serverless using the Datadog Forwarder or your Lambda functions are deployed to AWS GovCloud, see the [installation instructions here][2].
+If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
 
 ## Configuration
 
@@ -92,13 +92,16 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
-      nodeLayerVersion: "<LAYER_VERSION>"
-      extensionLayerVersion: "<EXTENSION_VERSION>"
+      apiKey: <DATADOG_API_KEY>
+      nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}
+      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the [desired version][4] of Datadog Lambda Library, and `<EXTENSION_VERSION>` with the [desired version][5] of the Datadog Lambda Extension.
+To fill in the placeholders:
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4]. 
+- Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -106,8 +109,7 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: /serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-js/releases
-[5]: https://gallery.ecr.aws/datadog/lambda-extension
+[4]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -138,8 +140,8 @@ class CdkStack extends cdk.Stack {
     super(scope, id, props);
 
     const datadog = new Datadog(this, "Datadog", { 
-        nodeLayerVersion: <LAYER_VERSION>, 
-        extensionLayerVersion: <EXTENSION_VERSION>, 
+        nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}, 
+        extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}, 
         apiKey: <DATADOG_API_KEY>,
         service: <SERVICE> // Optional
         env: <ENV> // Optional 
@@ -151,10 +153,8 @@ class CdkStack extends cdk.Stack {
 
 To fill in the placeholders:
 
-- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]).
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][4]).
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
@@ -166,9 +166,7 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
-
-Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
+Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines or from your local command-line interface. The CLI command automatically adds the Datadog Lambda library and extension to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
 
 ### Install
 
@@ -184,34 +182,28 @@ yarn global add @datadog/datadog-ci
 
 ### Instrument
 
-To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the [desired version][2] of the Datadog Lambda Library and `<extension_version>` with the [desired version][3] of the Datadog Lambda Extension.
+To instrument the function, run the following command with your [AWS credentials][1].
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> -e <extension_version>
 ```
 
+To fill in the placeholders:
+- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+- Replace `<aws_region>` with the AWS region name. 
+- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
+- Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
 For example:
 
-{{< site-region region="us,us3,eu" >}}
-
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
-```
-{{< /site-region >}}
-
-More information and additional parameters can be found in the [CLI documentation][4].
+More information and additional parameters can be found in the [CLI documentation][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
-[4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -244,7 +236,7 @@ Add the Datadog Lambda Extension to your container image by adding the following
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 ### Configure the function
 
@@ -253,7 +245,7 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
   - Set `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
   - Set `DD_TRACE_ENABLED` to `true`.
   - Set `DD_FLUSH_TO_LOG` to `true`.
-  - Set `DD_API_KEY` with your Datadog API key on the [API Management page][2]. 
+  - Set `DD_API_KEY` with your Datadog API key from the [API Management page][2]. 
 3. Optionally add `service` and `env` tags with appropriate values to your function.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -261,9 +253,11 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.</div>
 
-The Datadog Lambda Library can be imported as a layer or JavaScript package.
+### Install the Datadog Lambda library
+
+The Datadog Lambda Library can be imported either as a layer _OR_ as a JavaScript package.
 
 The minor version of the `datadog-lambda-js` package always matches the layer version. E.g., datadog-lambda-js v0.5.0 matches the content of layer version 5.
 
@@ -285,19 +279,19 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 ```
 {{< /site-region >}}
 
-The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:
+The available `RUNTIME` options are `Node10-x` and `Node12-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
 {{< site-region region="us,us3,eu" >}} 
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 
 ```
-arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:25
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 {{< /site-region >}}
@@ -338,7 +332,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSI
 
 {{< /site-region >}}
 
-For `EXTENSION_VERSION`, see the [latest release][4].
+The latest `EXTENSION_VERSION` is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 ### Configure
 
@@ -347,7 +341,7 @@ Follow these steps to configure the function:
 1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][5]. 
+4. Set the environment variable `DD_API_KEY` to your Datadog API key from the [API Management page][5]. 
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

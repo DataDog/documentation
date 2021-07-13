@@ -20,6 +20,7 @@ further_reading:
     text: "Intégration Datadog/ECS\_Fargate"
 git_integration_title: amazon_ecs
 has_logo: true
+integration_id: amazon-ecs
 integration_title: Amazon ECS sur EC2
 is_public: true
 kind: integration
@@ -73,11 +74,11 @@ Pour réduire les données parasites, l'intégration Amazon ECS est automatique
 Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/Amazon ECS, contactez [l'assistance Datadog][6].
 
 ### Checks de service
+{{< get-service-checks-from-git "amazon_ecs" >}}
 
-**aws.ecs.agent_connected** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=automaticcloudformation#setup
@@ -86,3 +87,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/#get-comprehensive-visibility-with-datadog-dashboards
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
 [6]: https://docs.datadoghq.com/fr/help/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/service_checks.json

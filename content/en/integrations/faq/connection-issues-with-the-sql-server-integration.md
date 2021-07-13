@@ -16,6 +16,7 @@ But there is a common connection error that users run into while they're setting
 As you'll gather from SQL Server does not exist or access denied, this error indicates that the Agent was unable to connect to your SQL Server to complete its data collection. This could be caused by any of the following:
 
 * A typo in your sqlserver.yaml host, port, username, or password (it's all worth triple-checking)
+* Your password contains a semicolon (`;`) -  use curly brackets around the password to resolve (`password: "{<PASSWORD>}"`)
 * Your SQL Server's TCP/IP connection has not been enabled
 * Your SQL Server's IPv4 address is incorrect or does not match what you've provided in your sqlserver.yaml
 * Your SQL Server's TCP/IP port is incorrect or does not match what you've provided in your sqlserver.yaml

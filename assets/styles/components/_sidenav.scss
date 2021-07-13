@@ -1,14 +1,24 @@
 $ddpurple:    #632CA6;
 
-body > header.scrolled ~ .container .sidenav .sticky {
-  top:66px;
+body {
+  .sidenav {
+    .sticky {
+      top: 98px;
+    }
+  }
 }
 
-.announcement_banner.open ~ header.scrolled ~ .container .sidenav .sticky,
-.announcement_banner.open ~ header.scrolled ~ .container .sidenav-api .sticky {
-  top:96px;
-}
+.api {
+  .sidenav-api {
+    .sticky {
+      top: 103px !important;
 
+      @include media-breakpoint-up(xl) {
+        top: 98px !important;
+      }
+    }
+  }
+}
 
 .side {
   &:before,
@@ -123,7 +133,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
 
     .nav-top-level {
       & > a span {
-        margin-left: 5px;
+        margin-left: 10px;
       }
       
     }
@@ -172,7 +182,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
           font-weight: 600;
           padding: 3px 0 0 2px;
           margin-right: 10px;
-          display:block;
+          display:flex;
           border:1px solid transparent;
           &:hover {
             background:transparent;
@@ -288,9 +298,6 @@ body > header.scrolled ~ .container .sidenav .sticky {
         padding: 0px;
       }
     }
-  }
-  .sticky {
-    top:65px;
   }
   ul li a {
     line-height: 24px;

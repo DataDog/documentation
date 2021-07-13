@@ -65,7 +65,7 @@ Si vous utilisez la version 6.8 ou une version ultérieure de l'Agent, suivez l
 
 2. [Redémarrez l'Agent][7].
 
-#### Envoyer des alertes Zabbix dans le flux d'événements
+#### Collecte d'événements
 
 ##### Créer un type de support Datadog
 

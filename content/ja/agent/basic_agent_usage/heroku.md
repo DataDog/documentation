@@ -10,29 +10,39 @@ title: Datadog Heroku ビルドパック
 
 ## インストール
 
-このビルドパックをプロジェクトに追加し、かつ必要な環境変数を設定するには、以下を参照してください。
+このガイドでは、Heroku で実行中のアプリケーションがあることを前提としています。アプリケーションを Heroku にデプロイする方法については、Heroku のドキュメントを参照してください。
+
+1. [Datadog API 設定][3]で Datadog API キーをコピーし、次の環境変数へエクスポートします:
+
+ ```shell
+ export DD_API_KEY=<YOUR_API_KEY>
+ ```
+
+2. アプリケーション名を APPNAME 環境変数へエクスポートします:
+
+```shell
+export APPNAME=<YOUR_HEROKU_APP_NAME>
+```
+
+3. Datadog ビルドパックをプロジェクトに追加します:
 
 ```shell
 cd <HEROKU_PROJECT_ROOT_FOLDER>
 
-# これが新しい Heroku プロジェクトの場合
-heroku create
+# Heroku Labs Dyno Metadata を有効にして HEROKU_APP_NAME 環境変数を自動的に設定
+heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
-# 適切な言語固有のビルドパックを追加します。例:
-heroku buildpacks:add heroku/ruby
+# メトリクスが連続するよう、Datadog でホスト名を appname.dynotype.dynonumber に設定
+heroku config:add DD_DYNO_HOST=true
 
-# Heroku Labs Dyno メタデータを有効にします
-heroku labs:enable runtime-dyno-metadata -a $(heroku apps:info|grep ===|cut -d' ' -f2)
-
-# このビルドパックを追加して、Datadog API キーを設定します
+# このビルドパックを追加して Datadog API キーを設定
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-heroku config:add DD_API_KEY=<DATADOG_API_KEY>
+heroku config:add DD_API_KEY=$DD_API_KEY
 
-# Heroku にデプロイします
+# 強制的に再構築して Heroku をデプロイ
+git commit --allow-empty -m "Rebuild slug"
 git push heroku master
 ```
-
-`<DATADOG_API_KEY>` を、ご使用の [Datadog API キー][3]に置き換えます。
 
 完了すると、各 dyno の起動時に Datadog Agent が自動的に起動します。
 
@@ -76,10 +86,10 @@ heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-data
 このビルドパックをアップグレードしたり、これらのオプションのいずれか、たとえば `DD_AGENT_VERSION` を変更するには、次の手順が必要です。
 
 ```shell
-# Set new version of the Agent
-heroku config:set DD_AGENT_VERSION=<NEW_AGENT_VERSION> -a appname
+# Agent の新規バージョンを設定
+heroku config:set DD_AGENT_VERSION=<NEW_AGENT_VERSION> -a <YOUR_APP_NAME>
 
-# Rebuild your slug with the new Agent version:
+# Agent の新バージョンでスラグを再構築:
 git commit --allow-empty -m "Rebuild slug"
 git push heroku master
 ```
@@ -248,20 +258,28 @@ Datadog ビルドパックは、Heroku プラットフォームからログを�
 ```
 # GPG 依存関係をインストール
 RUN apt-get update \
- && apt-get install -y gpg apt-transport-https gpg-agent curl ca-certificates
+ && apt-get install -y gnupg apt-transport-https gpg-agent curl ca-certificates
 
-# Datadog レポジトリと署名キーを追加
-RUN sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+# Datadog リポジトリおよび署名キーを追加
+ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
+ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
+RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+RUN touch ${DATADOG_APT_KEYRING}
+RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
+RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_F14F620E.public
+RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_382E94DE.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_382E94DE.public
+
 
 # Datadog Agent をインストール
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
-# entrypoint をコピー
+# エンドポイントをコピー
 COPY entrypoint.sh /
 
-# DogStatsD と trace-agent ポートを公開
+# DogStatsD および trace-agent ポートを公開
 EXPOSE 8125/udp 8126/tcp
 
 # Datadog コンフィギュレーションをコピー
@@ -291,6 +309,116 @@ Docker イメージに関する詳細については、[Datadog Agent の Docker
 このプロジェクトの以前のバージョンは、[miketheman heroku-buildpack-datadog プロジェクト][27]から分岐したものです。その後、Datadog の Agent バージョン 6 向けに書き換えが行われました。変更内容と詳細は、[changelog][28] にあります。
 
 ## トラブルシューティング
+
+### Agent ステータスの取得
+
+ビルドパックをセットアップ済みで、期待するデータの一部を Datadog で取得していない場合、Datadog Agent にステータスコマンドを実行して原因を探ることができます。
+
+```shell
+# Heroku アプリケーション名を環境変数としてエクスポート
+export APPNAME=your-application-name
+
+heroku ps:exec -a $APPNAME
+
+# 認証情報を確立中... 完了
+#  ⬢ ruby-heroku-datadog で web.1 に接続中...
+# DD_API_KEY 環境変数が設定されていません。実行: heroku config:add DD_API_KEY=<your API key>
+# Datadog Agent が無効です。DISABLE_DATADOG_AGENT を未設定にするか、不足している環境変数を設定します。
+
+~ $
+```
+
+DD_API_KEY が設定されていないという警告は無視できます。[Heroku では SSH セッション自体のコンフィギュレーション変数は設定されません](https://devcenter.heroku.com/articles/exec#environment-variables)が、Datadog Agent プロセスによりアクセス可能です。
+
+SSH セッション内で Datadog ステータスコマンドを実行します。
+
+```shell
+~ $ agent-wrapper status
+
+Getting the status from the agent.
+
+===============
+Agent (v7.27.0)
+===============
+
+[...]
+
+```
+
+試行するデバッグに基づき、重点を置くべきセクションをハイライトします。
+
+#### Datadog でデータを取得していない
+
+`status` コマンドが正常に実行していることと、出力のこのセクションに、使用している API キーが有効であると表示されることを確認します。
+
+```
+  API Keys status
+  ===============
+    API key ending with 68306: API Key valid
+```
+
+#### インテグレーションのチェック
+
+有効にしたインテグレーションが正常に実行されていることを確認するには、`Collector` セクションに注目し、チェックが正常に実行されていることを確認します。
+
+```
+=========
+Collector
+=========
+
+  Running Checks
+  ==============
+
+[...]
+    postgres (5.4.0)
+    ----------------
+      Instance ID: postgres:e07ef94b907fe733 [OK]
+      Configuration Source: file:/app/.apt/etc/datadog-agent/conf.d/postgres.d/conf.yaml
+      Total Runs: 4,282
+      Metric Samples: Last Run: 15, Total: 64,230
+      Events: Last Run: 0, Total: 0
+      Service Checks: Last Run: 1, Total: 4,282
+      Average Execution Time : 43ms
+      Last Execution Date : 2021-05-13 08:15:46 UTC (1620893746000)
+      Last Successful Execution Date : 2021-05-13 08:15:46 UTC (1620893746000)
+      metadata:
+        version.major: 13
+        version.minor: 2
+        version.patch: 0
+        version.raw: 13.2 (Ubuntu 13.2-1.pgdg20.04+1)
+        version.scheme: semver
+```
+
+#### APM Agent の確認
+
+APM にアプリケーションをインスツルメントし、Datadog でトレースを取得していない場合は、APM Agent が正常に実行しトレースを収集していることを確認します。
+
+```
+[...]
+=========
+APM Agent
+=========
+  Status: Running
+  Pid: 63
+  Uptime: 64702 seconds
+  Mem alloc: 10,331,128 bytes
+  Hostname: ruby-heroku-datadog.web.1
+  Receiver: localhost:8126
+  Endpoints:
+    https://trace.agent.datadoghq.com
+
+  Receiver (previous minute)
+  ==========================
+    From ruby 2.6.6 (ruby-x86_64-linux), client 0.48.0
+      Traces received: 11 (14,181 bytes)
+      Spans received: 33
+
+    Default priority sampling rate: 100.0%
+    Priority sampling rate for 'service:ruby-heroku-datadog,env:': 100.0%
+    Priority sampling rate for 'service:ruby-heroku-datadog,env:development': 100.0%
+
+[...]
+```
 
 ### Datadog から報告される Agent 数が dynos 数を超えています
 

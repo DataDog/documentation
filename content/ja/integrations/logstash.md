@@ -2,6 +2,8 @@
 aliases:
   - /ja/logs/log_collection/logstash
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -116,7 +118,7 @@ output {
 - `use_ssl`: Datadog へのセキュリティ保護された TCP/SSL 接続を初期化するよう Agent に指示します (デフォルト値は `true`)。
 - `no_ssl_validation`: SSL ホスト名の検証を無効化します (デフォルト値は `false`)。
 
-以下のように設定することで、ログを **Datadog EU** に送信するためにも使用できます。
+**注**: `host` および `port` をリージョン {{< region-param key="http_endpoint" code="true" >}} {{< region-param key="http_port" code="true" >}} に設定します。
 
 ```conf
 output {

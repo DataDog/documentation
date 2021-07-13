@@ -56,7 +56,9 @@ Access Management アクセス許可を持つユーザーは、ユーザーの S
 
 2. **New Mapping** ボタンをクリックします。
 
-3. 既存の Datadog ロール（デフォルトまたはカスタム）と関連付ける SAML ID プロバイダーのキー/値ペアを指定します。たとえば、`member_of` 属性に `Development` の値を持つすべてのユーザーに `Devs` という Datadog のカスタムロールを割り当てたい場合は、以下のようにします。
+3. 既存の Datadog ロール（デフォルトまたはカスタム）と関連付ける SAML ID プロバイダーのキー/値ペアを指定します。これらのエントリでは大文字と小文字が区別されることに注意してください。
+
+たとえば、`member_of` 属性に `Development` の値を持つすべてのユーザーに `Devs` という Datadog のカスタムロールを割り当てたい場合は、以下のようにします。
 
     {{< img src="account_management/saml/create_mapping.png" alt="Datadog ロールへ SAML マッピングを作成"  >}}
 
@@ -121,7 +123,7 @@ IdP が基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を
 
 ## その他の機能
 
-[SAML Configurationダイアログ][4]で、以下の機能を有効にできます。
+次の機能は、[SAML コンフィギュレーションダイアログ][4]から有効にできます (SAML コンフィギュレーションダイアログを表示するには、管理者アクセス許可が必要です)。
 
 ### ジャストインタイム (JIT) プロビジョニング
 

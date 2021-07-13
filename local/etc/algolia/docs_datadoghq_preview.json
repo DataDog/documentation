@@ -54,6 +54,15 @@
             "page_rank": 10
         },
         {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/account_management/rbac/permissions",
+            "selectors_key": "docs",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["rbac_permissions"],
+            "page_rank": 110
+        },
+        {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
             "selectors_key": "getting_started",
             "variables": {
@@ -256,7 +265,7 @@
             ["gcp", "google cloud platform"],
             ["aws", "amazon web service"],
             ["RUM", "rum", "real user monitoring"],
-            ["Role Permissions", "permissions"]
+            ["Role Permissions", "permissions", "Datadog Role Permissions", "RBAC"]
         ]
     },
     "only_content_level": true,

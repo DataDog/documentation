@@ -503,7 +503,7 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
 
 {{< whatsnext desc="">}}
     {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
-    {{< nextlink href="/developers/events/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -514,8 +514,8 @@ DogStatsD が使用するデータグラム形式についてさらに理解を�
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /ja/developers/metrics/custom_metrics/
-[6]: /ja/developers/events/dogstatsd/
+[6]: /ja/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
-[8]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
+[8]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [9]: /ja/getting_started/tagging/unified_service_tagging
 [10]: /ja/developers/metrics/

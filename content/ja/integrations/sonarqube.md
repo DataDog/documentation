@@ -66,7 +66,8 @@ SonarQube の Web API に関するドキュメントは、SonarQube Web UI の `
 デフォルトのメトリクスのコンフィギュレーションは、[sonarqube.d/metrics.yaml][3] ファイルにあります。Bean に関するドキュメントは、
 [SonarQube のウェブサイト][4]をご覧ください。
 
-SonarQube の JMX サーバーは、デフォルトで無効になっています。有効化して SonarQube 内で JMX を構成する方法について、
+SonarQube の JMX サーバーは、デフォルトで無効になっています。つまり、有効にしない限り `sonarqube.server.*` メトリクス
+は収集されません。有効化して SonarQube 内で JMX を構成する方法について、
 詳細は [SonarQube ドキュメント][5]をご参照ください。
 
 これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで
@@ -284,25 +285,22 @@ Collector
 {{< get-metrics-from-git "sonarqube" >}}
 
 
-### サービスのチェック
-
-**sonarqube.can_connect**:<br>
-Agent が監視対象の SonarQube インスタンスの JMX エンドポイントに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**sonarqube.api_access**:<br>
-Agent が監視対象の SonarQube インスタンスの Web エンドポイントに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 SonarQube には、イベントは含まれません。
 
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
+
 ## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://www.sonarqube.org
@@ -312,4 +310,5 @@ SonarQube には、イベントは含まれません。
 [5]: https://docs.sonarqube.org/latest/instance-administration/monitoring/#header-4
 [6]: https://docs.datadoghq.com/ja/integrations/java/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

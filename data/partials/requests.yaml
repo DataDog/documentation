@@ -16,7 +16,7 @@ requests:
     link: "/logs"
     image: "int_logs.png"
   - name: "APM"
-    description: "The Datadog APM & Distributed Tracing product provides out-of-the-box performance dashboards for web services, queues, and databases to monitor requests, errors, and latency."
+    description: "The Datadog APM & Continuous Profiler product provides out-of-the-box performance dashboards for web services, queues, and databases to monitor requests, errors, and latency."
     link: "/tracing"
     image: "int_apm.png"
   - name: "Custom Metrics"

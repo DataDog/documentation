@@ -34,7 +34,7 @@ Le monitor outlier requiert une métrique avec un groupe (hosts, zones de dispon
 ### Définir vos conditions d'alerte
 
 * Déclencher une alerte différente pour chaque `<GROUPE>` anormal
-* sur un intervalle de `5 minutes`, `15 minutes`, `1 hour`, etc.
+* sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou encore lors d'une période `custom` (comprise entre 1 minute et 24 heures).
 * avec l'algorithme `MAD`, `DBSCAN`, `scaledMAD` ou `scaledDBSCAN`
 * tolérance : `0.33`, `1.0`, `3.0`, etc.
 * % : `10`, `20`, `30`, etc. (seulement pour les algorithmes `MAD`)

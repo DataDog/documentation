@@ -66,7 +66,7 @@ In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggrega
 [1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
-[4]: /developers/write_agent_check/
+[4]: /developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
 [6]: /developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
@@ -199,7 +199,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
-[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 

@@ -3,6 +3,12 @@ title: Cloud Security Posture Management
 kind: documentation
 ---
 
+{{< site-region region="us" >}}
+<div class="alert alert-warning">
+Cloud Security Posture Management is <a href="https://app.datadoghq.com/security/configuration">Generally Available</a>.
+</div>
+{{< /site-region >}}
+
 {{< site-region region="us3,gov,eu" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
@@ -17,11 +23,11 @@ Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and v
 
 Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against [configuration rules][1]. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against [Datadog's OOTB security posture rules][2].
 
-View your cloud security posture at a high level with the [Posture Management][1] page, and drill into the details of findings and analyze historical configurations with [Posture Findings][2].
+View your cloud security posture at a high level with the [Posture Management][1] page, and drill into the details of findings and analyze historical configurations with [Findings][2].
 
 ## Glossary
 
-- **Average security configuration score**: Percentage of your environment that satisfies all of your active [Datadog’s OOTB rules][3]. Formula: `(# of resources with 0 findings) / (total # of resources scanned)`.
+- **Security posture score**: Percentage of your environment that satisfies all of your active [Datadog’s OOTB rules][3]. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity rules have a weighting of "1" and critical severity rules have a weighting of "5". This means critical severity rules impact scores five times more than low severity rules to put greater emphasis on the rules that pose greater security risk. The score is also normalized to treat all all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk they are heavily skewed if one account has more containers, or another has fewer storage buckets.
 
 - **Requirement**:  A group of controls representing a single technical or operational topic, such as _Access Management_ or _Networking_. The regulatory framework PCI DSS, for example, has [12 requirements][4].
 
@@ -34,6 +40,8 @@ View your cloud security posture at a high level with the [Posture Management][1
 - **Rule**: A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
 
 {{< img src="security_platform/cspm/getting_started/rules.png" alt="Rules and frameworks" style="width:75%;">}}
+
+- **Findings**: A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a Pass or Fail status.
 
 - **Framework**: A collection of requirements that map to an industry benchmark or regulatory standard.
 

@@ -45,53 +45,65 @@ main_left:
     url: "https://www.datadoghq.com/product/code-profiling/"
     weight: 7
     parent: product
-  - identifier: security
-    name: Security Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: "https://www.datadoghq.com/product/security-monitoring/"
-    weight: 8
-    parent: product
-  - identifier: network
-    name: Network Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
-    url: "https://www.datadoghq.com/product/network-monitoring/"
-    weight: 9
-    parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
     url: "https://www.datadoghq.com/product/synthetic-monitoring/"
-    weight: 10
+    weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg' alt='rum icon'>"
     url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    weight: 9
+    parent: product
+  - identifier: security-platform
+    name: Security Platform
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    url: "https://www.datadoghq.com/product/security-platform/"
+    weight: 10
+    parent: product
+  - identifier: security-monitoring
+    name: Security Monitoring
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    url: "https://www.datadoghq.com/product/security-platform/security-monitoring/"
     weight: 11
+    parent: product
+  - identifier: cloud-security-posture-management
+    name: CSPM
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    url: "https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/"
+    weight: 12
+    parent: product
+  - identifier: network
+    name: Network Monitoring
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
+    url: "https://www.datadoghq.com/product/network-monitoring/"
+    weight: 13
     parent: product
   - identifier: incident
     name: Incident Management
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/incidents.svg' alt='incident icon'>"
     url: "https://www.datadoghq.com/product/incident-management/"
-    weight: 12
+    weight: 14
     parent: product
   - identifier: serverless
     name: Serverless
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
     url: "https://www.datadoghq.com/product/serverless-monitoring/"
-    weight: 13
+    weight: 15
     parent: product
   - identifier: alerts
     name: Alerts
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
     url: "https://www.datadoghq.com/product/alerts/"
-    weight: 14
+    weight: 16
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''icône api''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 14
+    weight: 17
     parent: product
   - identifier: customers
     name: Clients
@@ -3933,43 +3945,37 @@ footer_product:
   - name: Profileur en continu
     url: "https://www.datadoghq.com/product/code-profiling/"
     weight: 121
-  - name: Security Monitoring
-    url: "https://www.datadoghq.com/product/security-monitoring/"
-    weight: 123
-  - name: Surveillance réseau
-    url: "https://www.datadoghq.com/product/network-monitoring/"
-    weight: 125
   - name: Surveillance Synthetics
     url: "https://www.datadoghq.com/product/synthetic-monitoring/"
-    weight: 130
+    weight: 123
   - name: Real User Monitoring
     url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    weight: 125
+footer_product_two:
+  - name: Security Platform
+    url: "https://www.datadoghq.com/product/security-platform/"
+    weight: 130
+  - name: Security Monitoring
+    url: "https://www.datadoghq.com/product/security-monitoring/"
     weight: 135
+  - name: CSPM
+    url: "https://www.datadoghq.com/product/security-platform/cloud-security-posture-management"
+    weight: 140
+  - name: Surveillance réseau
+    url: "https://www.datadoghq.com/product/network-monitoring/"
+    weight: 145
   - name: Gestion des incidents
     url: "https://www.datadoghq.com/product/incident-management/"
-    weight: 136
+    weight: 150
   - name: Sans serveur
     url: "https://www.datadoghq.com/product/serverless-monitoring/"
-    weight: 140
+    weight: 155
   - name: Alertes
     url: "https://www.datadoghq.com/product/alerts/"
-    weight: 145
+    weight: 160
   - name: API
     url: api
-    weight: 150
-footer_product_two:
-  - name: Real User Monitoring
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
-    weight: 135
-  - name: Sans serveur
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
-    weight: 140
-  - name: Alertes
-    url: "https://www.datadoghq.com/product/alerts/"
-    weight: 145
-  - name: API
-    url: api
-    weight: 150
+    weight: 165
 footer_product_three:
   - name: Tarifs
     url: "https://www.datadoghq.com/pricing/"

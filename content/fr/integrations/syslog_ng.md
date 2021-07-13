@@ -18,6 +18,7 @@ dependencies:
 supported_os:
   - linux
   - windows
+integration_id: syslog_ng
 ---
 ## Présentation
 
@@ -98,7 +99,19 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
 
     Pour en savoir plus sur les paramètres et les fonctionnalités de TLS pour Syslog-ng, consultez la [documentation officielle][1] (en anglais).
 
-5. Redémarrez Syslog-ng.
+5. (Facultatif) Définissez la source de vos logs. Pour ce faire, utilisez le format suivant (si vous avez plusieurs sources, changez le nom du format dans chaque fichier) :
+
+    ```conf
+    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\"] $MSG\n"); };
+    ```
+
+    Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
+
+    ```conf
+    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\" ddtags=\"env:test,user:test_user,<KEY:VALUE>\"] $MSG\n"); };
+    ```
+
+6. Redémarrez Syslog-ng.
 
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html

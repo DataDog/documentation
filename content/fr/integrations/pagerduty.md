@@ -6,8 +6,10 @@ ddtype: crawler
 dependencies: []
 description: Générez des alertes PagerDuty à partir des métriques et des événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/pagerduty/'
+draft: false
 git_integration_title: pagerduty
 has_logo: true
+integration_id: pagerduty
 integration_title: PagerDuty
 is_public: true
 kind: integration
@@ -17,7 +19,13 @@ public_title: Intégration Datadog/PagerDuty
 short_description: Générez des alertes PagerDuty à partir des métriques et des événements Datadog.
 version: '1.0'
 ---
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="tendances des incidents PagerDuty" popup="true">}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.</div>
+{{< /site-region >}}
+
+{{< site-region region="us" >}}
+{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="Tendances des incidents" popup="true">}}
+{{< /site-region >}}
 
 ## Présentation
 
@@ -27,11 +35,13 @@ Associez PagerDuty à Datadog pour :
 - Visualiser les incidents et actions d'escalade en temps réel depuis votre flux
 - Être informé quotidiennement des personnes en service
 
-## Implémentation
+## Configuration
 
 Consultez [cette documentation][1] sur le site de PagerDuty.
 
-Une fois l'intégration de PagerDuty configurée, vous pouvez consulter les [tendances des incidents Pagerduty][2] personnalisées de Datadog.
+{{< site-region region="us" >}}
+Une fois l'intégration PagerDuty configurée, vous pouvez consulter les tendances des incidents Pagerduty personnalisées de Datadog.
+{{< /site-region >}}
 
 ## Données collectées
 
@@ -41,7 +51,7 @@ L'intégration PagerDuty n'inclut aucune métrique.
 
 ### Événements
 
-Vos événements PagerDuty résolus/déclenchés s'affichent dans votre [flux d'événements][3].
+Vos événements PagerDuty résolus/déclenchés s'affichent dans votre [flux d'événements][2].
 
 ### Checks de service
 
@@ -73,5 +83,4 @@ Ajoutez `@pagerduty-[nomDuService]` dans le message de votre monitor. Si vous co
 La longueur des notifications de votre monitor envoyées à PagerDuty est limitée par Datadog. Cette limite est de **1 024 caractères**.
 
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
-[2]: https://app.datadoghq.com/report/pagerduty
-[3]: https://docs.datadoghq.com/fr/events/
+[2]: https://docs.datadoghq.com/fr/events/

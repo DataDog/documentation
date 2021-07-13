@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-rds-public
 cloud: AWS
 disable_edit: true
+integration_id: amazon-rds
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

@@ -329,7 +329,7 @@
     "summary": "すべてのセキュリティフィルターを取得"
   },
   "CreateSecurityFilter": {
-    "description": "セキュリティフィルターを作成します。",
+    "description": "セキュリティフィルターを作成します。\n\nほかの例については、[セキュリティフィルターガイド](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nを参照してください。",
     "summary": "セキュリティフィルターを作成",
     "request_description": "新しいセキュリティフィルターの定義。",
     "request_schema_description": "作成したいセキュリティフィルターを含むオブジェクトをリクエストします。"
@@ -339,7 +339,7 @@
     "summary": "セキュリティフィルターを削除"
   },
   "GetSecurityFilter": {
-    "description": "特定のセキュリティフィルターの詳細を取得します。",
+    "description": "特定のセキュリティフィルターの詳細を取得します。\n\nほかの例については、[セキュリティフィルターガイド](https://docs.datadoghq.com/security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/)\nを参照してください。",
     "summary": "セキュリティフィルターを取得"
   },
   "UpdateSecurityFilter": {

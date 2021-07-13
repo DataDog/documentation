@@ -1,22 +1,22 @@
 ---
 categories:
   - languages
-  - log collection
 ddtype: library
 dependencies: []
-description: Envoyez des métriques custom à partir de vos applications .NET grâce aux bibliothèques client de Datadog.
+description: Envoyez des métriques runtime à partir de vos applications .NET grâce aux bibliothèques client de Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/dotnet/'
 draft: false
 further_reading: []
 git_integration_title: dotnet
 has_logo: true
+integration_id: dotnet
 integration_title: .NET
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: dotnet
 public_title: Intégration Datadog/.NET
-short_description: Envoyez des métriques custom à partir de vos applications .NET grâce aux bibliothèques client de Datadog.
+short_description: Envoyez des métriques runtime à partir de vos applications .NET grâce aux bibliothèques client de Datadog.
 version: '1.0'
 ---
 ## Présentation

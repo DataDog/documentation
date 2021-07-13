@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_api_gateway/'
 draft: false
 git_integration_title: amazon_api_gateway
 has_logo: true
+integration_id: amazon-api-gateway
 integration_title: Amazon API Gateway
 is_public: true
 kind: インテグレーション
@@ -44,6 +45,8 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
 
 3. [Datadog - AWS API Gateway インテグレーション][4]をインストールします。
 
+**注**: CloudWatch の詳細メトリクスを有効にしている場合、ステージ内のすべてのリソースまたはルートで有効にする必要があります。無効の場合、Datadog の集計値が不正確になります。
+
 ### ログの収集
 
 API Gateway ログを有効化します。
@@ -52,7 +55,7 @@ API Gateway ログを有効化します。
 2. 目的の API を選択し、Stages セクションに移動します。
 3. **Logs** タブで、**Enable CloudWatch Logs** と **Enable Access Logging** を有効にします。
 4. `INFO` レベルを選択して、すべてのリクエストが取得されるようにします。
-5. **Cloudwatch Group** の名前に `apigateway` が含まれていることを確認します。
+5. **CloudWatch Group** の名前が `api-gateway` で開始することを確認します。
 6. JSON 形式を選択し (CLF と CSV もサポートされています)、**Log format** ボックスに以下を追加します。
 
     ```text
@@ -70,10 +73,10 @@ API Gateway ログを有効化します。
     }
     ```
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから手動で API Gateway ログを含む Cloudwatch ロググループにトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから手動で API Gateway ログを含む CloudWatch ロググループにトリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Cloudwatch トリガー" popup="true" style="width:70%;">}}

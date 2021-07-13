@@ -78,23 +78,24 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
-      nodeLayerVersion: "<LAYER_VERSION>"
+      nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<FORWARDER_ARN>"
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the desired version of Datadog Lambda layer (see the [latest releases][4]), and `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
+To fill in the placeholders:
+- Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
+- Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][5] before you can use the macro.
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can use the macro.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-js/releases
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -128,23 +129,20 @@ class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const datadog = new Datadog(this, "Datadog", {
-      nodeLayerVersion: <LAYER_VERSION>,
-      pythonLayerVersion: <LAYER_VERSION>,
-      addLayers: <BOOLEAN>,
+      nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      flushMetricsToLogs: <BOOLEAN>,
-      site: "<SITE>",
-      apiKey: "{Datadog_API_Key}",
-      apiKMSKey: "{Encrypted_Datadog_API_Key}",
-      enableDDTracing: <BOOLEAN>,
-      injectLogContext: <BOOLEAN>
+      service: "<SERVICE>",  // Optional
+      env: "<ENV>",  // Optional
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
 }
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the desired version of Datadog Lambda layer (see the [latest releases][2]), and `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][3]).
+To fill in the placeholders:
+
+- Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][3]).
+- Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can use the macro.
 
@@ -152,7 +150,6 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
-[2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://docs.datadoghq.com/serverless/forwarder/
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
@@ -176,16 +173,22 @@ yarn global add @datadog/datadog-ci
 
 ### Instrument
 
-To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the desired version of the Datadog Lambda layer (see [latest releases][2]) and `<forwarder_arn>` with Forwarder ARN (see the [Forwarder documentation][3]).
+To instrument the function, run the following command with your [AWS credentials][1].
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder	<forwarder_arn>
 ```
 
+To fill in the placeholders:
+- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+- Replace `<aws_region>` with the AWS region name. 
+- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
+- Replace `<forwarder_arn>` with the Forwarder ARN (see the [Forwarder documentation][3]).
+
 For example:
 
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][4] before you can instrument it with the Datadog CLI.
@@ -193,7 +196,6 @@ If your Lambda function is configured to use code signing, you must add Datadog'
 More information and additional parameters can be found in the [CLI documentation][5].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://docs.datadoghq.com/serverless/forwarder/
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [5]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
@@ -260,10 +262,10 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:
+The available `RUNTIME` options are `Node10-x` and `Node12-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can add the Datadog Lambda library as a layer.

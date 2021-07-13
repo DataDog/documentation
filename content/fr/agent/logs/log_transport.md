@@ -55,6 +55,7 @@ Pour envoyer des logs avec des variables d'environnement, configurez ce qui suit
 * `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
+Par défaut, l'Agent Datadog utilise le port `443` pour envoyer ses logs à Datadog via HTTPS.
 
 [1]: /fr/agent/guide/agent-configuration-files/
 {{% /tab %}}

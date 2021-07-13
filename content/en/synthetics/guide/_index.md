@@ -12,6 +12,10 @@ private: true
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoiding cache issues in Synthetic tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="API Tests:" >}}
+    {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}Perform OR logic in API test assertions{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Browser Tests:" >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
@@ -22,4 +26,8 @@ private: true
     {{< nextlink href="synthetics/guide/browser-tests-switch-tabs/" >}}Can browser tests switch tabs?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="API Tests:" >}}
+    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API test timings and troubleshooting their variations{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -2,10 +2,18 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    SQLServer-Overview: assets/dashboards/SQLServer-Overview_dashboard.json
+    sqlserver: assets/dashboards/sqlserver_dashboard.json
   logs:
     source: sqlserver
-  monitors: {}
+  metrics_metadata: metadata.csv
+  monitors:
+    SQLServer ao not healthy: assets/recommended_monitors/sqlserver_ao_not_healthy.json
+    SQLServer db not in sync: assets/recommended_monitors/sqlserver_db_not_sync.json
+    SQLServer db not online: assets/recommended_monitors/sqlserver_db_not_online.json
+    SQLServer high failed auto param: assets/recommended_monitors/sqlserver_high_number_failed_auto_param.json
+    SQLServer high processes blocked: assets/recommended_monitors/sqlserver_high_processes_blocked.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -15,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md'
 display_name: SQL Server
+draft: false
 git_integration_title: sqlserver
 guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server
@@ -65,6 +74,12 @@ _Propriétés_ -> _Sécurité_ -> _Mode d'authentification SQL Server et Window
 
 2. Assurez-vous que votre instance SQL Server effectue son écoute sur un port fixe spécifique. Par défaut, les instances nommées et SQL Server Express sont configurés pour utiliser des ports dynamiques. Consultez la [documentation de Microsoft][3] pour en savoir plus.
 
+3. Cette étape est obligatoire pour les métriques AlwaysOn. Une autorisation supplémentaire doit être accordée pour rassembler des métriques AlwaysOn :
+
+    ```text
+        GRANT VIEW ANY DEFINITION to datadog;
+    ```
+
 ### Configuration
 
 {{< tabs >}}
@@ -107,7 +122,7 @@ Des étapes de configuration supplémentaires sont requises pour exécuter l'int
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -120,6 +135,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
     ```yaml
     logs:
       - type: file
+        encoding: utf-16-le
         path: "<LOG_FILE_PATH>"
         source: sqlserver
         service: "<SERVICE_NAME>"
@@ -157,7 +173,7 @@ Consultez la documentation relative aux [template variables Autodiscovery][2] po
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
 
@@ -190,7 +206,7 @@ Le check SQL Server n'inclut aucun événement.
 ### Checks de service
 
 **sqlserver.can_connect** :<br>
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à SQL Server pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à SQL Server pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

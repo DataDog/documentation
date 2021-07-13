@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_load_balancer/'
 draft: false
 git_integration_title: azure_load_balancer
 has_logo: true
+integration_id: azure-load-balancer
 integration_title: Microsoft Azure Load Balancer
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Load Balancer prend en charge les scénarios entrants et sortants, offre u
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Load Balancer.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

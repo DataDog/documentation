@@ -11,6 +11,8 @@ further_reading:
   - link: serverless/custom_metrics/
     tag: Documentation
     text: サーバーレスアプリケーションからのカスタムメトリクスの送信
+aliases:
+  - /ja/serverless/datadog_lambda_library/java/
 ---
 {{< img src="serverless/java-lambda-tracing.png" alt="Datadog で Java Lambda 関数を監視"  style="width:100%;">}}
 
@@ -26,21 +28,15 @@ further_reading:
 
 ## コンフィギュレーション
 
-### Datadog Lambda ライブラリのインストール
+### Install
 
-プロジェクトのコンフィギュレーションに基づいて、以下のコードブロックのいずれかを `pom.xml` または `build.gradle` に適宜追加し、Datadog Lambda ライブラリをローカルにインストールします。以下の `VERSION` を最新のリリースで置き換えてください (先行する `v` を削除します): ![Bintray][4]
+プロジェクトのコンフィギュレーションに基づいて、以下のコードブロックのいずれかを `pom.xml` または `build.gradle` に適宜追加し、Datadog Lambda ライブラリをローカルにインストールします。以下の `VERSION` を最新のリリースで置き換えてください (先行する `v` を削除します): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
 `pom.xml` に以下の依存関係を含めます。
 
 ```xml
-<repositories>
-  <repository>
-    <id>datadog-maven</id>
-    <url>https://dl.bintray.com/datadog/datadog-maven</url>
-  </repository>     
-</repositories>
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
@@ -54,9 +50,6 @@ further_reading:
 `build.gradle` に以下を含めます。
 
 ```groovy
-repositories {
-  maven { url "https://dl.bintray.com/datadog/datadog-maven" }
-}
 dependencies {
   implementation 'com.datadoghq:datadog-lambda-java:VERSION'
 }
@@ -64,7 +57,9 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-### 関数をインスツルメントする
+### インスツルメントする
+
+関数をインスツルメントするには、次の手順に従います。
 
 1. 関数に Datadog Lambda レイヤーをインストールします。`VERSION` については、最新[リリース][5]をご確認ください。
 
@@ -97,9 +92,9 @@ dependencies {
     }
     ```
 
-### Datadog Forwarder をロググループにサブスクライブ
+### サブスクライブ
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
@@ -115,13 +110,13 @@ Java Lambda 関数コールドスタートに Datadog モニターを作成す�
 - ソース: `runtime:java*` および `cold_start:true`
 - アラートグループ: 各 `function_arn` に対し個別のアラートをトリガーするマルチアラート
 
-### 統合サービスタグ付け
+### タグ
 
 オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][9]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
 
-## Datadog サーバーレスモニタリングの利用
+## 確認
 
-上記の手順で関数を構成すると、[サーバーレスホームページ][10]にメトリクス、ログ、トレースが表示されるようになります。
+以上の方法で関数を構成すると、[Serverless Homepage][10] でメトリクス、ログ、トレースを確認できるようになります。
 
 ### カスタムビジネスロジックの監視
 
@@ -164,7 +159,7 @@ Java Lambda 関数ログとトレースを自動接続する方法について�
 [1]: /ja/integrations/amazon_web_services/
 [2]: /ja/serverless/forwarder/
 [3]: /ja/serverless/enhanced_lambda_metrics
-[4]: https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java
+[4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
 [5]: https://github.com/DataDog/datadog-lambda-java/releases/
 [6]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: /ja/serverless/insights#cold-starts

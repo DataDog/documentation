@@ -53,7 +53,7 @@ Agent v7.19 以降を使用し、Datadog Helm Chart を[最新バージョン][4
 ### エージェント
 
 ```bash
-kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
+kubectl exec -it <AGENT_POD_NAME> -c agent -- agent flare <CASE_ID>
 ```
 
 ### プロセスエージェント
@@ -76,10 +76,25 @@ system-probe コンテナはフレアを送信できないため、代わりに�
 kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 ```
 
+## ECS Fargate
+
+ECS Fargate プラットフォーム v1.4.0 を使用する場合、[Amazon ECS Exec][5] を有効にすることで、実行中の Linux コンテナへのアクセスを許可するように ECS タスクとサービスを構成できます。構成が完了したら、次のコマンドを実行してフレアを送信します。
+
+```bash
+aws ecs execute-command --cluster <CLUSTER_NAME> \
+    --task <TASK_ID> \
+    --container datadog-agent \
+    --interactive \
+    --command "agent flare <CASE_ID>"
+```
+
+**注:** ECS Exec は、新しいタスクに対してのみ有効にできます。ECS Exec を使用するには、既存のタスクを再作成する必要があります。
+
 [1]: /ja/agent/basic_agent_usage/#gui
 [2]: /ja/agent/basic_agent_usage/windows/#agent-v6
 [3]: /ja/agent/faq/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
+[5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

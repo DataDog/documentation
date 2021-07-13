@@ -2,14 +2,17 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
+  dashboards:
+    Twemproxy - Overview: assets/dashboards/twemproxy_overview.json
+  logs:
+    source: twemproxy
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -61,10 +64,32 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 
    instances:
      - host: localhost
-       port: 22222
+       port: 2222
    ```
 
 2. [Agent を再起動][3]すると、Datadog へ Twemproxy メトリクスの送信が開始します。
+
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Apache のログ収集を開始するには、次のコンフィギュレーションブロックを `twemproxy.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: twemproxy
+       service: "<SERVICE_NAME>"
+   ```
+
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twemproxy.d/conf.yaml][2] を参照してください。
+
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
@@ -82,7 +107,16 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                          |
 | `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22222"}` |
 
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+
+| パラメーター      | 値                                            |
+| -------------- | ------------------------------------------------ |
+| `<LOG_CONFIG>` | `{"source": "twemproxy", "service": "<SERVICE_NAME>"}` |
+
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -102,9 +136,8 @@ Twemproxy チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`twemproxy.can_connect`:
-
-Agent が Twemproxy 統計エンドポイントに接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**twemproxy.can_connect**:<br>
+Agent が Twemproxy 統計エンドポイントに接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

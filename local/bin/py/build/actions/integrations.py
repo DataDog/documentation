@@ -409,12 +409,22 @@ class Integrations:
         as the integration name it came from e.g /data/service_checks/docker.json
         :param file_name: path to a service_checks json file
         """
-        new_file_name = "{}.json".format(
-            basename(dirname(normpath(file_name)))
+
+        if file_name.endswith("/assets/service_checks.json"):
+            file_list = file_name.split(sep)
+            key_name = file_list[len(file_list)-3]
+        else:
+            key_name = basename(
+                dirname(normpath(file_name))
+            )
+
+        new_file_name = "{}{}.json".format(
+            self.data_service_checks_dir, key_name
         )
+
         shutil.copy(
             file_name,
-            self.data_service_checks_dir + new_file_name,
+            new_file_name,
         )
 
     def process_npm_integrations(self, file_name):

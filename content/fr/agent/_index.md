@@ -39,6 +39,16 @@ Les paquets sont également disponibles en versions pour architectures x86 64 b
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
+<div class="alert alert-info"><p>
+Il est recommandé d'installer chaque nouvelle version mineur et chaque patch de l'Agent Datadog, ou de le mettre à jour au moins tous les mois.</p>
+<p>
+Pour bénéficier des nouvelles fonctionnalités et des derniers correctifs, il est nécessaire d'installer la dernière version majeure de l'Agent Datadog et les mises à niveau ultérieures. Nous publions régulièrement des nouvelles versions, ce qui fait qu'il peut être difficile de gérer les mises à jour à l'échelle de votre entreprise. Toutefois, cela ne signifie pas que vous devez attendre la sortie d'une nouvelle version majeure pour mettre à jour l'Agent. La fréquence de mise à jour adéquate pour votre organisation dépend de votre infrastructure et de vos pratiques en matière de gestion de configuration. Nous vous conseillons néanmoins de mettre à jour l'Agent tous les mois.</p>
+<p>
+Pour mettre à jour les composants principaux de l'Agent Datadog depuis et vers une versions mineure sur un host donné, exécutez la <a href="https://app.datadoghq.com/account/settings#agent">commande d'installation correspondant à votre plate-forme</a>.</p>
+<p>
+Les numéros des nouvelles versions de l'Agent Datadog respectent les règles  <a href="https://semver.org/">SemVer</a>.</p>
+</div>
+
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
   {{< nextlink href="/agent/basic_agent_usage">}}<u>Utilisation de base de l'Agent </u>: apprenez-en plus sur l'Agent Datadog, notamment sur son architecture, son interface de ligne de commande, sa charge système et ses outils de gestion de configuration.{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker </u>: installez et configurez l'Agent Datadog sur Docker. {{< /nextlink >}}

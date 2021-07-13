@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_iot/'
 draft: false
 git_integration_title: google_cloud_iot
 has_logo: true
+integration_id: google-cloud-iot
 integration_title: "Google\_Cloud\_IoT"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Cloud IoT est un service entièrement géré qui vous permet de connecter, de g�
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud IoT.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

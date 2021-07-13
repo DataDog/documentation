@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_vm_scale_set/'
 draft: false
 git_integration_title: azure_vm_scale_set
 has_logo: true
+integration_id: azure-vm-scale-set
 integration_title: Microsoft Azure VM Scale Set
 is_public: true
 kind: インテグレーション

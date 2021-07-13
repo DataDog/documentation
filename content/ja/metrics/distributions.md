@@ -47,6 +47,20 @@ further_reading:
 **注**: 許可リストベースのタグのカスタマイズでは、タグの除外はサポートされていません。`!` で始まるタグは追加できません。
 
 {{< img src="metrics/distributions/managetags.png" alt="ディストリビューションでタグを構成する"  style="width:80%;">}}
+
+## 監査イベント
+タグコンフィギュレーションまたはパーセンタイル集計の変更があった場合、[イベントストリーム][3]にイベントが作成されます。このイベントでは、変更内容が説明され、変更を行ったユーザーが表示されます。
+
+ディストリビューションメトリクスでタグコンフィギュレーションを作成、更新、または削除した場合は、次のイベント検索の例を確認できます。
+```text
+https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20tag%20configuration
+```
+
+パーセンタイル集計をディストリビューションメトリクスに追加または削除した場合、次のイベント検索の例を見ることができます。
+```text
+https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20percentile%20aggregations
+```
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -54,3 +68,4 @@ further_reading:
 
 [1]: /ja/developers/metrics/types/
 [2]: https://app.datadoghq.com/metric/distribution_metrics
+[3]: https://app.datadoghq.com/event/stream

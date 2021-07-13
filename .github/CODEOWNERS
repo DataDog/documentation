@@ -14,4 +14,5 @@ package.json              @DataDog/corpweb @DataDog/documentation
 
 # Serverless
 
-/serverless/              @DataDog/serverless-product @DataDog/documentation
+/content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
+/layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/serverless-product

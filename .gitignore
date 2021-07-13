@@ -15,7 +15,6 @@ content/en/api/**/*.ts
 # Ignoring all automated content
 # Developers/integrations
 content/en/developers/integrations/*.md
-content/en/developers/amazon_cloudformation.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -39,6 +38,7 @@ package-lock.json
 # Ignoring all integrations file
 content/en/integrations/*.md
 data/integrations/
+content/en/integrations/guide/amazon_cloudformation.md
 !data/integrations/docker_daemon.yaml
 !content/en/integrations/_index.md
 !content/en/integrations/cloudability.md

@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
 draft: false
 git_integration_title: google_cloud_pubsub
 has_logo: true
+integration_id: google-cloud-pubsub
 integration_title: Google Pub/Sub
 is_public: true
 kind: インテグレーション

@@ -131,7 +131,7 @@ La fonction Autodiscovery est activée par défaut sur Kubernetes.
 Pour vous en assurer, vérifiez que la variable d'environnement suivante est définie :
 
 ```shell
-KUBERNETES=true
+KUBERNETES=yes
 ```
 
 {{% /tab %}}

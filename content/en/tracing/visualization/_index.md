@@ -127,7 +127,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 Indexed Spans represent spans indexed by a [retention filter](#retention-filters) stored in Datadog for 15 days that can be used to search, query, and monitor in [Trace Search and Analytics][14] by the [tags](#span-tags) included on the span.
 
 <div class="alert alert-info">
-After ingestion, by creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> you can control and visualize exactly how many spans are being indexed per service.
+Creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> after ingestion allows you to control and visualize exactly how many spans are being indexed per service.
 </div>
 
 ## Span tags

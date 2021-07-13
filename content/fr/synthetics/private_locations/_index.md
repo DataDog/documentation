@@ -45,8 +45,8 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.com` pour les versions 0.1.6+, `api.datadoghq.com` pour les versions <0.1.5   | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.com` pour les versions >0.2.0                                             | Utilisé par l'emplacement privé pour renvoyer les artefacts de test Browser (captures d'écran, erreurs, ressources)                                                                         |
+| 443  | `intake.synthetics.datadoghq.com` pour les versions >=0.1.6, `api.datadoghq.com` pour les versions <=0.1.5   | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
+| 443  | `intake-v2.synthetics.datadoghq.com` pour les versions >=0.2.0 et <=1.4.0                                            | Utilisé par l'emplacement privé pour renvoyer les artefacts de test Browser (captures d'écran, erreurs, ressources).                                                                         |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -57,9 +57,29 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 | Port | Endpoint                                               | Description                                                                                   |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | `api.datadoghq.eu`                                | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.eu` pour les versions >0.2.0| Utilisé par l'emplacement privé pour renvoyer les artefacts de test Browser (captures d'écran, erreurs, ressources)                                                                            |
+| 443  | `intake-v2.synthetics.datadoghq.eu` pour les versions >=0.2.0 et <=1.5.0 | Utilisé par l'emplacement privé pour renvoyer les artefacts de test Browser (captures d'écran, erreurs, ressources).                                                                            |
 
 **Remarque** : ces domaines pointent vers un ensemble d'adresses IP statiques. Ces adresses sont disponibles sur https://ip-ranges.datadoghq.eu, plus spécifiquement sur https://ip-ranges.datadoghq.eu/api.json pour `api.datadoghq.eu` et sur https://ip-ranges.datadoghq.eu/synthetics-private-locations.json pour `intake-v2.synthetics.datadoghq.eu`.
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.us3.datadoghq.com` | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ddog-gov.com` | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -75,7 +95,11 @@ Accédez à _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ et cliqu
 
 **Remarque** : seuls les **administrateurs** peuvent créer des emplacements privés.
 
-Renseignez les détails liés à votre emplacement privé : spécifiez son **nom** et sa **description**, ajoutez les **tags** à appliquer, et choisissez l'une de vos **clés d'API** existantes. La sélection d'une clé d'API est nécessaire pour autoriser les communications entre votre emplacement privé et Datadog. Si vous ne possédez aucune clé d'API, vous pouvez cliquer sur **Generate API key** et en créer une sur la page dédiée.
+Renseignez les détails de votre emplacement privé :
+
+1. Indiquez le **nom** et la **description** de votre emplacement privé.
+2. Ajoutez les **tags** que vous souhaitez associer à votre emplacement privé.
+3. Choisissez l'une de vos **clés d'API** existantes. La sélection d'une clé d'API est nécessaire pour autoriser les communications entre votre emplacement privé et Datadog. Si vous ne possédez aucune clé d'API, vous pouvez cliquer sur **Generate API key** et en créer une sur la page dédiée.
 
 **Remarque :** seuls les champs `Name` et `API key` sont obligatoires.
 
@@ -87,7 +111,7 @@ Cliquez ensuite sur **Save Location and Generate Configuration File** pour crée
 
 Configurez votre emplacement privé en personnalisant le fichier de configuration généré. Les paramètres de configuration initiaux comme le [proxy](#configuration-du-proxy) et les [IP réservées bloquées](#bloquer-des-ip-reservees) sont ajoutés à l'**Étape 2** et sont automatiquement reportés dans le fichier de configuration de l'**Étape 3**. Selon la configuration de votre réseau interne, vous pouvez configurer votre emplacement privé avec des [options avancées](#configuration-avancee).
 
-#### Configuration du proxy
+#### Configuration d'un proxy
 
 Si le trafic entre votre emplacement privé et Datadog doit passer par un proxy, spécifiez l'URL du proxy en question au format `http://<VOTRE_UTILISATEUR>:<VOTRE_MDP>@<VOTRE_IP>:<VOTRE_PORT>` pour ajouter le paramètre `proxyDatadog` associé à votre fichier de configuration généré.
 
@@ -167,7 +191,7 @@ docker-compose -f docker-compose.yml up
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Déploiement Kubernetes" %}}
 
 1. Créez une ConfigMap Kubernetes avec le fichier JSON précédemment créé en exécutant la commande suivante :
 
@@ -175,7 +199,7 @@ docker-compose -f docker-compose.yml up
     kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. Profitez des déploiements pour décrire le statut souhaité associé à vos emplacements privés. Créez le fichier `private-location-worker-deployment.yaml` suivant :
+2. Tirez parti des déploiements pour décrire le statut souhaité associé à vos emplacements privés. Créez le fichier `private-location-worker-deployment.yaml` suivant :
 
     ```yaml
     apiVersion: apps/v1
@@ -215,6 +239,28 @@ docker-compose -f docker-compose.yml up
     ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+{{% /tab %}}
+
+{{% tab "Chart Helm" %}}
+
+1. Ajoutez l'[emplacement privé Datadog Synthetic][1] à vos référentiels Helm :
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com 
+    helm repo update
+    ```
+
+2. Installez le chart avec le nom de version `<NOM_VERSION>`. Utilisez le fichier JSON précédemment créé en exécutant la commande suivante :
+
+    ```shell
+    helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
+    ```
+
+    **Remarque :** si vous avez bloqué des IP réservées, assurez-vous d'ajouter les [capacités Linux][2] `NET_ADMIN` au conteneur de votre emplacement privé.
+
+[1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
+[2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
 
@@ -289,7 +335,11 @@ Créez une nouvelle définition de tâche Fargate correspondant à celle indiqu�
 }
 ```
 
-**Remarque :** l'option de pare-feu de l'emplacement privé n'est pas prise en charge sur AWS Fargate. Par conséquent, le paramètre `enableDefaultBlockedIpRanges` ne peut pas être défini sur `true`.
+**Remarques :** 
+
+Si vous souhaitez utiliser des variables d'environnement dans votre définition de tâche, notez que le déploiement d'un emplacement privé Fargate n'utilise pas les mêmes variables d'environnement que dans les autres sections de Datadog. Pour Fargate, les variables d'environnement suivantes doivent être utilisées : `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PRIVATE_KEY`.
+
+L'option de pare-feu de l'emplacement privé n'est pas prise en charge sur AWS Fargate. Par conséquent, le paramètre `enableDefaultBlockedIpRanges` ne peut pas être défini sur `true`.
 
 {{% /tab %}}
 
@@ -350,9 +400,9 @@ Créez une nouvelle définition de tâche Fargate correspondant à celle indiqu�
 
 #### Configurer des checks de santé
 
-Ajoutez un check de santé pour permettre à votre orchestrateur de vérifier que les workers fonctionnent correctement.
+Ajoutez un [check de santé][10] pour permettre à votre orchestrateur de vérifier que les workers fonctionnent correctement.
 
-Le fichier `/tmp/liveness.date` des conteneurs d'emplacement privé est mis à jour après chaque polling réussi auprès de Datadog (500 ms par défaut). Le conteneur est considéré comme non sain si aucun polling n'a été effectué depuis un certain temps. Exemple : aucune récupération au cours de la dernière minute.
+Le fichier `/tmp/liveness.date` des conteneurs d'emplacement privé est mis à jour après chaque polling réussi auprès de Datadog (par défaut, toutes les 2 s). Le conteneur est considéré comme non sain si aucun polling n'a été effectué depuis un certain temps. Exemple : aucune récupération au cours de la dernière minute.
 
 Utilisez la configuration ci-dessous pour créer des checks de santé sur vos conteneurs :
 
@@ -373,7 +423,24 @@ healthcheck:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Déploiement Kubernetes" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "Chart Helm" %}}
 
 ```yaml
 livenessProbe:
@@ -451,7 +518,7 @@ Vous pouvez ensuite commencer à tester votre premier endpoint interne en lança
 
 {{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Test rapide sur un emplacement privé" video="true" width="80%">}}
 
-## Lancer des tests Synthetic à partir de vos emplacements privés
+## Lancer des tests Synthetic à partir de votre emplacement privé
 
 Si votre emplacement privé communique normalement avec Datadog, le statut de santé `OK` devrait s'afficher dans la liste de vos emplacements privés sur la page **Settings** :
 
@@ -461,33 +528,73 @@ Vous pouvez ensuite vous rendre sur n'importe quel formulaire de création de te
 
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assigner un test Synthetic à un emplacement privé"  style="width:80%;">}}
 
-Vos emplacements privés peuvent être utilisés de la même manière que les autres emplacements gérés par Datadog : assignez des [tests Synthetic][2] à des emplacements privés, visualisez les résultats des tests, récupérez des [métriques Synthetic][10], etc.
+Vos emplacements privés peuvent être utilisés de la même manière que les autres emplacements gérés par Datadog : attribuez des [tests Synthetic][2] à des emplacements privés, visualisez les résultats des tests, récupérez des [métriques Synthetic][11], etc.
 
-## Redimensionner vos emplacements privés
+## Dimensionner votre emplacement privé
 
-Vous pouvez facilement procéder à un **scaling horizontal** de vos emplacements privés en y ajoutant ou en supprimant des workers. Il est possible d'exécuter plusieurs conteneurs pour un même emplacement privé avec un seul fichier de configuration. Chaque worker demande alors à exécuter `N` tests en fonction du nombre de tests autorisés. Lorsque le worker 1 traite des tests, le worker 2 demande les tests suivants, etc.
+### Types de tests
 
-Vous pouvez également utiliser la valeur du [paramètre `concurrency`][11] pour ajuster le nombre de tests que les workers de vos emplacements privés peuvent exécuter simultanément.
+Les emplacements privés peuvent exécuter des tests [API][12], des tests [API à plusieurs étapes][13] et des tests [Browser][14]. Un même emplacement privé peut exécuter plusieurs types de tests. Cependant, pour des raisons de dimensionnement, il peut s'avérer utile de regrouper les tests de même type : par exemple, vous pouvez utiliser quelques emplacements privés pour exécuter uniquement les tests API et API à plusieurs étapes, et les autres pour exécuter uniquement les tests Browser, qui nécessitent davantage de ressources que les autres types de test. 
 
-### Configuration matérielle requise
+### Nombre maximum de tests
 
-#### Processeur/mémoire
+Les exigences en matière de ressources dépendent du nombre maximum de tests que votre emplacement privé peut être amené à exécuter en parallèle. Lorsque vous définissez ce nombre, assurez-vous de tenir compte des pics qui peuvent se produire lors de l'exécution de tests à la demande (par exemple, lors de l'exécution de tests dans le cadre de vos [pipelines de CI/CD][1]).
 
-* Exigence de base : 150 mCores/150 MiB
+Le nombre maximum de tests vous permet de définir le [paramètre `concurrency`][15] de votre emplacement privé (sa valeur par défaut est `10`). Ce paramètre vous permet d'ajuster le nombre de tests que les workers de vos emplacements privés peuvent exécuter simultanément.
 
-* Exigences supplémentaires par slot :
+### Ressources matérielles totales requises pour un emplacement privé
 
-| Type de test de l'emplacement privé                          | Plage de simultanéité conseillée | Recommandations processus/mémoire |
-| --------------------------------------------------- | ----------------------------- | ------------------------- |
-| Emplacement privé exécutant des tests API et Browser | Entre 1 et 50                  | 150 mCores/1 GiB par slot   |
-| Emplacement privé exécutant uniquement des tests API             | Entre 1 et 200                 | 20 mCores/5 MiB par slot    |
-| Emplacement privé exécutant uniquement des tests Browser         | Entre 1 et 50                  | 150 mCores/1 GiB par slot   |
+Une fois que vous connaissez le [type de tests](#types-de-tests) qui seront exécutés sur votre emplacement privé et le [nombre maximum de tests](#nombre-maximum-de-tests) qui doivent pouvoir être exécutés en parallèle, vous pouvez définir les ressources matérielles **totales** pour votre emplacement privé. 
 
-**Exemple :** pour un emplacement privé exécutant à la fois des tests API et Browser, et dont la valeur [`concurrency`][11] est définie par défaut sur `10`, les exigences recommandées sont les suivantes : environ 1,5 core `(150 mCores + (150 mCores * 10 slots))` et 10 GiB de mémoire `(150 M + (1 G * 10 slots))`.
+* Exigences de base : 
+  * PROCESSEUR : 150 mCores
+  * Mémoire : 150 MiB
 
-#### Disk
+* Les exigences supplémentaires dépendent du type de tests exécutés par l'emplacement privé :
 
-Concernant l'espace disque, nous vous conseillons d'allouer environ 10 MiB/slot (1 MiB/slot pour les emplacements privés exécutant uniquement des tests API).
+| Type de test                                     | Recommandations processeur/mémoire/disque    |
+| --------------------------------------------- | --------------------------------- |
+| [Tests API][12] et [tests API à plusieurs étapes][13] | 20 mCores/5 MiB/1 MiB par test   |
+| [Tests Browser][14]                           | 150 mCores/1 GiB/10 MiB par test |
+
+**Exemple** : pour un emplacement privé exécutant uniquement des tests Browser, et dont le nombre maximum de tests simultanés est de `10`, nous recommandons les exigences suivantes pour éviter tout problème : 
+Environ 1,5 Core `(150 mCores + (150 mCores * 10 exécutions de test))` pour le processeur, environ 10 GiB `(150 MiB + (1 GiB * 10 exécutions de test))` pour la mémoire, et environ 100 MiB `(10 MiB * 10 exécutions de test)` pour le disque.
+
+**Remarque** : les exigences en matière de ressources peuvent varier selon l'application testée (nombre de ressources à charger, taille, etc.).
+
+**Remarque** : lorsqu'un seul emplacement privé exécute à la fois des tests API ou API à plusieurs étapes et des tests Browser, nous vous conseillons d'effectuer le calcul en utilisant les exigences de ressources des tests Browser.
+
+### Attribuer des ressources à votre emplacement privé
+
+Une fois que vous connaissez les [ressources **totales** requises pour votre emplacement privé](#ressources-materielles-totales-requises-pour-un-emplacement-prive), vous pouvez choisir la façon dont ces ressources sont distribuées :
+
+* Vous pouvez attribuer toutes les ressources à un seul worker. Dans ce cas :
+  * Définissez le [paramètre `concurrency`][15] sur `maximum number of test runs that can be executed in parallel on your private location`.
+  * Attribuez les [ressources matérielles totales requises pour votre emplacement privé](#ressources-materielles-totales-requises-pour-un-emplacement-prive) à votre unique conteneur.
+* Vous pouvez distribuer les ressources sur plusieurs workers en exécutant plusieurs conteneurs pour un emplacement privé avec un seul fichier de configuration afin de répartir la charge. Dans ce cas :
+  * Définissez le [paramètre `concurrency`][15] sur `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
+  * Attribuez les ressources `total private location resource requirements / number of workers` à chaque conteneur d'emplacement privé.
+
+
+**Exemple** : pour un emplacement privé exécutant uniquement des tests Browser, et dont le nombre maximum de tests simultanés est de `10`, votre emplacement privé nécessite la configuration suivante : environ 1,5 core pour le processeur, environ 10 GiB pour la mémoire et environ 100 MiB pour le disque. Si vous souhaitez distribuer ces ressources sur deux workers, le [paramètre `concurrency`][15] doit être défini sur `5`, et vous devez attribuer pour chaque worker environ 750 mCores pour le processeur, environ 5 GiB pour la mémoire et environ 50 MiB pour le disque.
+
+#### Mécanisme de mise en file d'attente
+
+Lorsque plusieurs workers sont associés à un emplacement privé, chaque worker demande un nombre de tests à exécuter qui dépend de son [paramètre `concurrency`][15] et du nombre de tests supplémentaires qui peuvent lui être attribués.   
+
+**Exemple** : dix tests sont programmés pour s'exécuter simultanément sur un emplacement privé sur lequel deux workers s'exécutent. Si le worker 1 exécute deux tests, il peut demander l'exécution de trois tests supplémentaires. Si le worker 2 n'exécute aucun test, il peut demander les cinq prochains tests. Les deux tests restants peuvent être demandés par le worker dont le test est terminé en premier (le worker qui a des slots disponibles).
+
+## Redimensionner votre emplacement privé
+
+Étant donné que vous pouvez exécuter plusieurs conteneurs pour un seul emplacement privé avec un seul fichier de configuration, vous pouvez procéder à un **scaling horizontal** de vos emplacements privés en y ajoutant ou en supprimant des workers. Lorsque vous effectuez cette opération, assurez-vous de définir un paramètre `concurrency` et d'attribuer des ressources de worker qui conviennent aux types et au nombre de tests que vous souhaitez que votre emplacement privé exécute.
+
+Vous pouvez également procéder à un **scaling vertical** de vos emplacements privés en augmentant la charge que les conteneurs de vos emplacements privés peuvent gérer. Là encore, vous devez utiliser le paramètre `concurrency` pour ajuster le nombre maximum de tests que vos workers sont autorisés à exécuter et mettre à jour les ressources attribuées à vos workers.
+
+En savoir plus sur le [dimensionnement d'emplacements privés](#dimensionner-votre-emplacement-prive).
+
+## Surveiller vos emplacements privés
+
+Il est important que la quantité de ressources allouées soit cohérente avec le nombre et le type de tests que vous souhaitez exécuter depuis votre emplacement privé. Toutefois, le meilleur moyen de savoir si vous devez redimensionner votre emplacement privé est de surveiller vos conteneurs. Pour ce faire, nous vous conseillons d'installer l'[Agent Datadog][16] avec votre emplacement privé. L'[Agent Datadog][16] vous enverra des métriques sur la santé de vos conteneurs (utilisation et limites de la mémoire, CPU, disque, etc.), que vous pourrez ensuite utiliser pour créer des graphiques et recevoir des alertes lorsque les ressources allouées deviennent insuffisantes.
 
 ## Pour aller plus loin
 
@@ -502,5 +609,10 @@ Concernant l'espace disque, nous vous conseillons d'allouer environ 10 MiB/slot
 [7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
 [8]: /fr/synthetics/private_locations/configuration/#reserved-ips-configuration
 [9]: /fr/synthetics/private_locations/configuration/
-[10]: /fr/synthetics/metrics
-[11]: /fr/synthetics/private_locations/configuration/#parallelization-configuration
+[10]: https://docs.docker.com/engine/reference/builder/#healthcheck
+[11]: /fr/synthetics/metrics
+[12]: /fr/synthetics/api_tests/
+[13]: /fr/synthetics/multistep?tab=requestoptions
+[14]: /fr/synthetics/browser_tests/?tab=requestoptions
+[15]: /fr/synthetics/private_locations/configuration#advanced-configuration
+[16]: /fr/agent/

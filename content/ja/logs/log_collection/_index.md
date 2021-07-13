@@ -38,11 +38,11 @@ further_reading:
 
 [Datadog Agent のインストール手順][1] に従って、メトリクスとトレースとともにログの転送を開始します。Agent では、[ログファイルの監視][2]や [UDP/TCP で送信されたログの待機][2]ができます。ユーザーは、[ログの絞り込み][3]、[機密データのスクラビング][3]、[複数行に渡るログ][4]の集約を行うように Agent を設定することができます。
 
+
 [1]: /ja/agent/logs/
 [2]: /ja/agent/logs/#custom-log-collection
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
-
 {{% /tab %}}
 
 {{% tab "アプリケーション" %}}
@@ -53,32 +53,32 @@ further_reading:
 
 **注**: JSON 形式のログは、複数行のアプリケーションログの処理に役立ちます。JSON 形式のログは Datadog によって自動的にパースされます。Datadog に送信するログ形式を制御できる場合は、カスタムパースルールが不要になるように、ログを JSON として形式化することをお勧めします。
 
-[1]: /ja/agent/logs/
 
+[1]: /ja/agent/logs/
 {{% /tab %}}
 
 {{% tab "コンテナ" %}}
 
-Datadog Agent では、ログドライバーを使用せずに[コンテナ stdout/stderr から直接ログを収集][13]できます。Agent の Docker チェックを有効にすると、コンテナとオーケストレーターのメタデータがログにタグとして自動的に追加されます。
-全てのコンテナから、または[コンテナのイメージ、ラベル、名前によってフィルタリングしたサブセットのみ][14]からログを収集することができます。また、オートディスカバリーを使用して、[コンテナラベルでログ収集を直接設定][15]することもできます。Kubernetes 環境では、[デーモンセットのインストール][16]も活用できます。
+Datadog Agent では、ログドライバーを使用せずに[コンテナ stdout/stderr から直接ログを収集][1]できます。Agent の Docker チェックを有効にすると、コンテナとオーケストレーターのメタデータがログにタグとして自動的に追加されます。
+全てのコンテナから、または[コンテナのイメージ、ラベル、名前によってフィルタリングしたサブセットのみ][2]からログを収集することができます。また、オートディスカバリーを使用して、[コンテナラベルでログ収集を直接設定][3]することもできます。Kubernetes 環境では、[デーモンセットのインストール][4]も活用できます。
 
 以下から環境を選択して、専用のログ収集手順を確認してください。
 
 {{< partial name="logs/logs-containers.html" >}}
 
-[13]: /ja/agent/docker/log/
-[14]: /ja/agent/guide/autodiscovery-management/
-[15]: /ja/agent/kubernetes/integrations/
-[16]: /ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
 
+[1]: /ja/agent/docker/log/
+[2]: /ja/agent/guide/autodiscovery-management/
+[3]: /ja/agent/kubernetes/integrations/
+[4]: /ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
 {{% /tab %}}
 
 {{% tab "サーバーレス" %}}
 
-Datadog で、AWS Lambda からログを収集できます。これを有効にするには、[サーバーレスモニタリングのドキュメント][17]を参照してください。
+Datadog で、AWS Lambda からログを収集できます。これを有効にするには、[サーバーレスモニタリングのドキュメント][1]を参照してください。
 
-[17]: /ja/serverless/forwarder
 
+[1]: /ja/serverless/forwarder
 {{% /tab %}}
 
 {{% tab "クラウド/インテグレーション" %}}
@@ -91,11 +91,11 @@ Datadog のインテグレーションとログ収集は連携しています。
 
 [利用可能なサポートされているインテグレーションのリスト][4]を参照してください。
 
+
 [1]: /ja/logs/processing/
 [2]: /ja/logs/processing/parsing/
 [3]: /ja/logs/explorer/facets/
 [4]: /ja/integrations/#cat-log-collection
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -105,49 +105,42 @@ Datadog のインテグレーションとログ収集は連携しています。
 
 Datadog では、SSL で暗号化された接続と暗号化されていない接続の両方にログのエンドポイントが提供されます。可能な場合は常に、暗号化されたエンドポイントを使用してください。Datadog Agent では、暗号化されたエンドポイントを使用して、ログが Datadog に送信されます。詳細は、[Datadog のセキュリティに関するドキュメント][6]で確認できます。
 
-{{< site-region region="us" >}}
+SSL で暗号化された接続において、Datadog へのログの送信に使用できるエンドポイントは以下のとおりです。
 
-Datadog US リージョンへのログの送信に使用できるエンドポイントは以下のとおりです。
 
-| SSL で暗号化された接続のエンドポイント | ポート    | 説明                                                                                                                                                                 |
-|-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent-intake.logs.datadoghq.com`       | `10516` | SSL で暗号化された TCP 接続を介して Agent が protobuf 形式のログを送信する際に使用されます。                                                                                     |
-| `agent-http-intake.logs.datadoghq.com`  | `443`   | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[HTTP 経由のログ送信方法ドキュメント][1]参照。                                                        |
-| `http-intake.logs.datadoghq.com`        | `443`   | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[HTTP 経由のログ送信方法ドキュメント][1]参照。                                       |
-| `intake.logs.datadoghq.com`             | `10516` | SSL で暗号化された TCP 接続を介してカスタムフォワーダーが生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                 |
-| `lambda-intake.logs.datadoghq.com`      | `10516` | SSL で暗号化された TCP 接続を介して Lambda 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                  |
-| `lambda-http-intake.logs.datadoghq.com` | `443`   | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                                                                            |
-| `functions-intake.logs.datadoghq.com`   | `10516` | SSL で暗号化された TCP 接続を介して Azure 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。**注**: 他のクラウドプロバイダーもこのエンドポイントを使用できます。 |
+`{{< region-param key="tcp_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="tcp_endpoint_port" code="true" >}}` <br>
+SSL で暗号化された TCP 接続を介して protobuf 形式のログを送信するために Agent が使用。
 
-| 暗号化されていない接続のエンドポイント | ポート    | 説明                                                                                              |
-|--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
-| `intake.logs.datadoghq.com`          | `10514` | 暗号化されていない TCP 接続を介してカスタムフォワーダーが生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。 |
+`{{< region-param key="agent_http_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="agent_http_port" code="true" >}}`<br>
+HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[HTTP 経由のログ送信方法ドキュメント][7]参照。
 
-[1]: /ja/agent/logs/#send-logs-over-https
+`{{< region-param key="http_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="http_port" code="true" >}}`<br>
+HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[HTTP 経由のログ送信方法ドキュメント][7]参照。
 
-{{< /site-region >}}
+`{{< region-param key="web_integrations_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
+SSL で暗号化された TCP 接続を介して生ログ、Syslog、または JSON 形式のログを送信するためにカスタムフォワーダーが使用。
 
-{{< site-region region="eu" >}}
+`{{< region-param key="lambda_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="lambda_port" code="true" >}}`<br>
+SSL で暗号化された TCP 接続を介して生ログ、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。
 
-Datadog EU リージョンへのログの送信に使用できるエンドポイントは以下のとおりです。
+`{{< region-param key="lambda_http_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="lambda_http_port" code="true" >}}`<br>
+HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。
 
-| SSL で暗号化された接続のエンドポイント | ポート  | 説明                                                                                                                                                                 |
-|-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent-intake.logs.datadoghq.eu`        | `443` | SSL で暗号化された TCP 接続を介して Agent が protobuf 形式のログを送信する際に使用されます。                                                                                     |
-| `agent-http-intake.logs.datadoghq.eu`   | `443` | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[Agent のログドキュメント][1]参照。                                                        |
-| `http-intake.logs.datadoghq.eu`         | `443` | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Agent のログドキュメント][1]参照。                                       |
-| `tcp-intake.logs.datadoghq.eu`          | `443` | SSL で暗号化された TCP 接続を介してカスタムフォワーダーが生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                 |
-| `lambda-intake.logs.datadoghq.eu`       | `443` | SSL で暗号化された TCP 接続を介して Lambda 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                  |
-| `lambda-http-intake.logs.datadoghq.eu`  | `443` | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                                                                            |
-| `functions-intake.logs.datadoghq.eu`    | `443` | SSL で暗号化された TCP 接続を介して Azure 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。**注**: 他のクラウドプロバイダーもこのエンドポイントを使用できます。 |
+`{{< region-param key="functions_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="functions_port" code="true" >}}`<br>
+SSL で暗号化された TCP 接続を介して生ログ、Syslog、または JSON 形式のログを送信するために Azure 関数が使用。**注**: 他のクラウドプロバイダーもこのエンドポイントを使用できます。
 
-| 暗号化されていない接続のエンドポイント | ポート   | 説明                                                                                                     |
-|--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
-| `tcp-intake.logs.datadoghq.eu`       | `1883` | 暗号化されていない TCP 接続を介してカスタムフォワーダーが生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。 |
+暗号化されていない接続において、Datadog へのログの送信に使用できるエンドポイントは以下のとおりです。
 
-[1]: /ja/agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
+`{{< region-param key="web_integrations_endpoint" code="true" >}}`
+: **ポート**: `{{< region-param key="web_integrations_unencrypted_port" code="true" >}}`<br>
+暗号化されていない TCP 接続を介して生ログ、Syslog、または JSON 形式のログを送信するためにカスタムフォワーダーが使用。
 
 ### カスタムログ転送
 
@@ -158,8 +151,8 @@ Datadog EU リージョンへのログの送信に使用できるエンドポイ
 
 HTTP 経由で Datadog プラットフォームにログを送信できます。開始するには、[Datadog ログ HTTP API ドキュメント][1]を参照してください。
 
-[1]: /ja/api/v1/logs/#send-logs
 
+[1]: /ja/api/v1/logs/#send-logs
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -195,8 +188,6 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="カスタム telnet" style="width:100%;">}}
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: https://app.datadoghq.com/logs/livetail
 
 {{< /site-region >}}
 
@@ -232,10 +223,15 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< img src="logs/custom_log_telnet_json_.png" alt="カスタム telnet" style="width:100%;">}}
 
+{{< /site-region >}}
+
+{{< site-region region="us3,gov" >}}
+TCP エンドポイントはこのリージョンでサポートされていません。
+{{< /site-region >}}
+
+
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
-
-{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,15 +246,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 ### 属性とタグ
 
-属性は、ログエクスプローラーでのフィルタリングと検索に使用される[ログファセット][7]を規定します。以下に示すように、ログとともに自動的に取り込まれる予約済みの属性がいくつかあります。また、APM などの Datadog の他の部分を使用する場合は、追加のコンフィギュレーションが必要な属性もあります。ログ収集を構成した後、以下の予約済み属性リストを確認してください。
-
-| 属性 | 説明                                                                                                                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | メトリクスで定義された送信元ホストの名前。Datadog で一致したホストから、対応するホストタグが自動的に取得され、ログに適用されます。Agent では、この値が自動的に設定されます。                          |
-| `source`  | これは、インテグレーション名 (ログの生成元) に対応します。インテグレーション名と一致する場合、対応するパーサーとファセットが自動的にインストールされます。たとえば、`nginx`、`postgresql` などです。 |
-| `status`  | ログのレベル/重大度に対応します。[パターン][8]の定義に使用され、Datadog ログ UI 専用のレイアウトがあります。                                                                                                     |
-| `service` | ログイベントを生成するアプリケーションまたはサービスの名前。Logs から APM への切り替えに使用されます。このため、両方の製品を使用する際には必ず同じ値を定義してください。                                                                |
-| `message` | デフォルトでは、`message` 属性の値はログエントリの本文として収集されます。Live Tail では、この値はハイライトされて表示され、全文検索用にインデックス化されます。                                    |
+属性は、ログエクスプローラーでのフィルタリングと検索に使用される[ログファセット][8]を規定します。予約済み属性および標準属性のリストと、ログ属性とエイリアス設定を使用した命名規則のサポート方法については、専用の[属性とエイリアス設定][9]ドキュメントをご参照ください。
 
 #### スタックトレースの属性
 
@@ -278,11 +266,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 **注**: インテグレーションパイプラインは、デフォルトのログライブラリパラメーターをこれらの属性に再マップし、スタックトレースをパースまたはトレースバックして、自動的に `error.message` と `error.kind` を抽出しようとします。
 
-詳細については、完全な[ソースコード属性のドキュメント][9]を参照してください。
-
-#### 統合サービスタグ付け
-
-トレースまたはメトリクスも収集している場合は、統合サービスタグ付けを構成することをお勧めします。このコンフィギュレーションは、`env`、`service`、`version` の 3 つの標準タグを使用して、Datadog テレメトリを結び付けます。詳細については、専用の[統合サービスタグ付け][10]ドキュメントを参照してください。
+詳しくは、[ソースコードと属性ドキュメント][10]をご覧ください。
 
 ## 次のステップ
 
@@ -302,8 +286,8 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 [4]: /ja/integrations/fluentd/#log-collection
 [5]: /ja/integrations/logstash/#log-collection
 [6]: /ja/security/logs/#information-security
-[7]: /ja/logs/explorer/facets/
-[8]: /ja/logs/explorer/patterns/
-[9]: /ja/logs/processing/attributes_naming_convention/#source-code
-[10]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /ja/agent/logs/#send-logs-over-https
+[8]: /ja/logs/explorer/facets/
+[9]: /ja/logs/processing/attributes_naming_convention
+[10]: /ja/logs/processing/attributes_naming_convention/#source-code
 [11]: /ja/logs/explore/

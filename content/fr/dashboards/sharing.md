@@ -35,6 +35,8 @@ Pour partager un dashboard entier en générant une URL publique :
 3. Sous **Time & Variable Settings**, vous pouvez configurer des options afin de définir l'intervalle, d'indiquer si les utilisateurs peuvent modifier ou non l'intervalle et de sélectionner les tags visibles pour les templates variables pouvant être sélectionnées.
 4. Copiez l'URL et cliquez sur **Done**.
 
+**Remarque** : les widgets reposant sur les traces de l'APM n'affichent pas de données sur les dashboard publics, tout comme le widget Flux de logs. Toutefois, vous pouvez visualiser les données des requêtes basées sur des logs.
+
 ### Partager un dashboard à partir d'adresses e-mail individuelles
 
 Pour autoriser une ou plusieurs adresses e-mail spécifiques à consulter la page d'un dashboard :
@@ -47,7 +49,11 @@ Pour autoriser une ou plusieurs adresses e-mail spécifiques à consulter la pag
 6. (Facultatif) Vous pouvez copier l'URL du dashboard à partager. Un e-mail contenant un lien vers le dashboard sera également envoyé aux adresses e-mails que vous avez renseignées.
 7. Cliquez sur **Done**.
 
-**Remarque** : les widgets reposant sur les traces de l'APM n'affichent pas de données sur les dashboard publics, tout comme le widget Flux de logs. Toutefois, vous pouvez visualiser les données des requêtes basées sur des logs.
+**Remarques** :
+- Les personnes ajoutées à la liste d'autorisation d'un dashboard reçoivent un lien par e-mail. Ce lien est valable une heure. Passé ce délai, elles doivent demander un nouveau lien sur la page principale du dashboard. Si leur adresse e-mail figure bien dans la liste d'autorisation, elles recevront par e-mail un nouveau lien.
+- Dès lors qu'une personne utilise le lien, son appareil est autorisé à consulter le dashboard pendant une durée maximale de 30 jours. Une fois ce délai expiré, les utilisateurs peuvent demander un nouveau lien sur la page d'accueil du dashboard. Si leur adresse e-mail figure bien dans la liste d'autorisation, elles recevront par e-mail un nouveau lien.
+- Lorsqu'un utilisateur est supprimé d'une liste d'autorisation, il perd l'accès au dashboard en question.
+- Les widgets reposant sur les traces de l'APM n'affichent pas de données sur les dashboard partagées, tout comme le widget Flux de logs. Toutefois, vous pouvez visualiser les données des requêtes basées sur des logs.
 
 ### Révoquer
 
@@ -98,7 +104,7 @@ Le mode TV est disponible sur les screenboards publics. Utilisez le raccourci cl
 
 Datadog propose une [API dédiée][7] qui vous permet d'interagir avec vos graphiques partagés (embeds) :
 
-| Endpoint                 | Description                                                             |
+| Endpoint                 | Rôle                                                             |
 |--------------------------|-------------------------------------------------------------------------|
 | [Récupérer tous les embeds][8]     | Récupère la liste des graphiques intégrables précédemment créés.                     |
 | [Créer un embed][9]       | Crée un nouveau graphique intégrable.                                         |

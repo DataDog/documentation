@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    gearman: assets/dashboards/gearman_dashboard.json
   logs:
     source: gearman
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    gearman_processes: assets/saved_views/gearman_processes.json
   service_checks: assets/service_checks.json
 categories:
   - processing

@@ -17,95 +17,101 @@ code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-  - link: 'https://github.com/DataDog/dd-trace-dotnet'
-    tag: GitHub
-    text: ソースコード
+  - link: /tracing/connect_logs_and_traces/dotnet/
+    tag: Documentation
+    text: .NET アプリケーションログとトレースの接続
+  - link: /tracing/runtime_metrics/dotnet/
+    tag: Documentation
+    text: ランタイムメトリクス
+  - link: /serverless/azure_app_services/
+    tag: Documentation
+    text: Microsoft Azure App Service 拡張機能
+  - link: /tracing/visualization/
+    tag: Documentation
+    text: サービス、リソース、トレースの詳細
   - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
     tag: ブログ
     text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
-  - link: tracing/visualization/
-    tag: Documentation
-    text: サービス、リソース、トレースを調査する
-  - link: tracing/
-    tag: 高度な使用方法
-    text: 高度な使用方法
   - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
     tag: GitHub
     text: カスタムインスツルメンテーションの例
+  - link: 'https://github.com/DataDog/dd-trace-dotnet'
+    tag: GitHub
+    text: ソースコード
 ---
 ## 互換性要件
 
 .NET トレーサーは、.NET Framework 4.5 以上の自動インスツルメンテーションをサポートします。サポート対象のライブラリについては、[互換性要件][1]ページをご覧ください。
 
-## はじめに
+## インストールと利用開始
 
-### アプリ内のドキュメントに従ってください (推奨)
+### 自動インスツルメンテーション
 
-Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+<div class="alert alert-warning"> 
+  <strong>注:</strong>  自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
+</div>
 
-- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
-- `service`、`env`、`version` タグを動的に設定します。
-- セットアップ中にトレースの 100% の取り込みとトレース ID のログへの挿入を有効にします。
+次の手順に従って .NET アプリケーションのトレーシングを開始します。
 
-それ以外の場合、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストール、構成します][3]。.NET トレーサーはプロセス中に実行し、アプリケーションをインスツルメントし、トレースをアプリケーションから Agent に送信します。
+#### IIS でホストされているアプリケーション
 
-**注**: .NET トレーサーは .NET ベースのすべての言語 (C#、F#、Visual Basic など) をサポートしています。
+IIS でホストされているアプリケーションのトレースを開始するには:
 
-## 自動でデータと収集
+1. [Windows Datadog Agent][2] をインストールして構成します。
 
-自動インスツルメンテーションは、ゼロコード変更と最小限のコンフィギュレーションでアプリケーションのパフォーマンスデータを収集します。.NET トレーサーはすべての[サポートライブラリ][1]のインスツルメンテーションをすぐに、そして自動的に行います。
+2. .NET トレーサー [MSI インストーラー][3]をダウンロードします。オペレーティングシステム (x64 または x86) に一致するアーキテクチャの MSI インストーラーを選択します。
 
-自動インスツルメンテーションは以下を取得します。
+3. 管理者権限で .NET トレーサー MSI インストーラーを実行します。
 
-- インスツルメンテーションされたコールの実行時間
-- Web リクエスト用 URL やステータスレスポンスコード、またはデータベースアクセス用 SQL クエリなどの関連するトレースデータ
-- 未処理の例外（該当する場合スタックトレースを含む）
-- システムを通過するトレース (例: ウェブリクエスト) の合計数
+4. 管理者として次のコマンドに従って、IIS を停止してから起動します。
 
-### インストール
+    <div class="alert alert-warning"> 
+      <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
+    </div>
 
-Windows で自動インスツルメンテーションを使用するには、 [Windows 用 MSI インストーラー][4]を管理者として使用し、ホストに .NET トレーサーをインストールします。OS のアーキテクチャ (x64 または x86) に合致するインストーラーを選択してください。
+    ```text
+    net stop /y was
+    net start w3svc
+    ```
+5. アプリケーションロードを作成します。
 
-.NET トレーサーをインストールしたら、アプリケーションを再起動して新しい環境変数の読み込みを行います。IIS を再起動する際は、以下のコマンドを管理者として実行します。
+6. [APM ライブトレース][4]にアクセスします。
 
-```cmd
-net stop /y was
-net start w3svc
-```
+#### IIS でホストされていないアプリケーション
 
-### 必要な環境変数
-
-アプリケーションを IIS 内で実行している場合は、以下の手順をスキップしてください。
-
-IIS で**実行していない** Windows アプリケーションの場合は、アプリケーションの起動前に以下の 2 つの環境変数を設定し、自動インスツルメンテーションを有効にします。
-
-**注:** .NET ランタイムはプロファイラーをこれらの環境変数の設定時に開始した_あらゆる_ .NET プロセスにロードしようとします。このため、インスツルメンテーションをトレースされる必要があるアプリケーションのみに制限してください。**ホストの_すべての_ .NET プロセスがプロファイラーをロードすることになるため、これらの環境変数をグローバルに設定しないでください。**
+IIS に存在しない Windows アプリケーションの自動インスツルメンテーションを有効にするには、アプリケーションを起動する前に 2 つの環境変数を設定する必要があります。
 
 | 名前                   | 値                                    |
 | ---------------------- | ---------------------------------------- |
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
-#### Windows Services
+<div class="alert alert-warning"> 
+  <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始されたあらゆる .NET プロセスにプロファイラーをロードしようとします。インスツルメンテーションは、トレースする必要のあるアプリケーションのみに制限する必要があります。これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上のすべての .NET プロセスがプロファイラーをロードします。
+</div>
 
-Windows Service を自動的にインスツルメントするには、そのサービスの環境変数を Windows Registry で設定します。`Environment` と呼ばれる複数文字列値を `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` キー に作成します。次に、キーのデータを表の値に設定します。
-```text
-COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-```
+##### Windows サービス
+Windows サービスを自動的にインスツルメントするには、`COR_ENABLE_PROFILING` および `COR_PROFILER` 環境変数を設定します。
 
-これは、レジストリエディター（下図参照）を使うか PowerShell スニペットを使い実行できます。
+1. Windows レジストリエディタで、`HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` に `Environment` という複数の文字列値を作成します。
+2. 値データを次のように設定します。
 
-{{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="レジストリエディター"  >}}
+   ```text
+   COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   ```
+     {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="レジストリエディター" >}}
 
-{{< code-block lang="powershell" filename="add-env-var.ps1" >}}
-[String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
-{{< /code-block >}}
+または、次の PowerShell スニペットを使用して環境変数を設定することもできます。
 
-#### コンソールアプリ
+   {{< code-block lang="powershell" filename="add-env-var.ps1" >}}
+   [String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+   Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+   {{< /code-block >}}
 
-アプリケーションの起動前にバッチファイルから環境変数を設定するには、
+##### コンソールアプリケーション
+
+コンソールアプリケーションを自動的にインスツルメントするには、アプリケーションを起動する前に、バッチファイルから `COR_ENABLE_PROFILING` および `COR_PROFILER` 環境変数を設定します。
 
 ```bat
 rem Set environment variables
@@ -115,25 +121,33 @@ SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 rem Start application
 example.exe
 ```
+### APM に Datadog Agent を構成する
 
-## 手動インスツルメンテーション
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、アプリ内の[クイックスタート手順][2]に従って、Datadog Agent 内でトレース収集を有効にします。
+{{< site-region region="us3,eu,gov" >}} 
 
-コードのインスツルメンテーションを手動で行うには、`Datadog.Trace` [NuGet パッケージ][5]をアプリケーションに追加します。コード内で、`Datadog.Trace.Tracer.Instance` プロパティを通じてグローバルトレーサーにアクセスし、スパンを新規作成します。
+確実に Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
-手動インスツルメンテーションとカスタムタグの詳細については、[手動インスツルメンテーションのドキュメント][6]を参照してください。
+{{< /site-region >}}
 
-手動インスツルメンテーションは、Windows の .NET Framework 4.5 以降、Windows と Linux の .NET Core 2.0 以降、および Windows と Linux の .NET5 でサポートされています。
+## カスタムインスツルメンテーション
 
-**注:** 手動と自動両方のインスツルメンテーションを使用する場合、MSI インストーラーと NuGet パッケージのバージョンの同期を保つ必要があります。
+<div class="alert alert-warning"> 
+  <strong>注:</strong>  自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
+</div>
+
+.NET アプリケーションでカスタムインスツルメンテーションを使用するには
+
+1. `Datadog.Trace` [NuGet パッケージ][5]をアプリケーションに追加します。
+2. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
+
+カスタムインスツルメンテーションとカスタムタグ付けの詳細については、[.NET カスタムインスツルメンテーション][6]を参照してください。
 
 ## コンフィギュレーション
 
-.NET トレーサーを構成する方法は複数あります:
+{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET トレーサーコンフィギュレーション設定の優先度"  >}}
 
-- 環境変数を設定する
-- .NET コードで
-- アプリケーションの `app.config`/`web.config` ファイルを編集する (.NET フレームワークのみ)
-- `datadog.json` ファイルを作成する
+.NET トレーサーには、次のいずれかの方法で設定できるコンフィギュレーション設定があります。
 
 {{< tabs >}}
 
@@ -154,16 +168,23 @@ rem Launch application
 example.exe
 ```
 
-**注:** Windows Service に対して環境変数を設定するには、Windows レジストリで複数文字列キー `HKLM\System\CurrentControlSet\Services\{サービス名}\Environment` を使います。
+<div class="alert alert-warning"> 
+<strong>注:</strong> Windows Service に対して環境変数を設定するには、上記のように Windows レジストリで複数文字列キー<code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> を使います。
+</div>
 
 {{% /tab %}}
 
 {{% tab "コード" %}}
 
-アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` を作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
+アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
+
+<div class="alert alert-warning"> 
+  <strong>注:</strong> 設定は、<code>トレーサー</code>を作成する<em>前</em>に <code>TracerSettings</code> で設定する必要があります。<code>トレーサー</code>の作成後に <code>TracerSettings</code> プロパティに加えられた変更は無視されます。
+</div>
 
 ```csharp
 using Datadog.Trace;
+using Datadog.Trace.Configuration;
 
 // デフォルトの構成ソースを読み取る (env vars、web.config、datadog.json)
 var settings = TracerSettings.FromDefaultSources();
@@ -180,8 +201,6 @@ var tracer = new Tracer(settings);
 // グローバルトレーサーを設定
 Tracer.Instance = tracer;
 ```
-
-**注:** 設定は `Tracer` を作成する_前_に `TracerSettings` に設定される必要があります。`Tracer` 作成後の `TracerSettings` プロパティの変更は無視されます。
 
 {{% /tab %}}
 
@@ -219,57 +238,139 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 {{< /tabs >}}
 
-### 構成変数
+## コンフィギュレーション設定
 
-次の表は、サポートされた構成変数の一覧です。環境変数またはコンフィギュレーションファイルの設定には最初の名前 (`DD_TRACE_AGENT_URL` など) を使用します。2 つ目の名前 (存在する場合、`AgentUri` など) は、コードの設定を変更するときに `TracerSettings` プロパティが使用する名前を示します。
+上記の方法を使用して、次の変数を使用してトレースコンフィギュレーションをカスタマイズします。環境変数またはコンフィギュレーションファイルを設定するときは、環境変数の名前 (たとえば、`DD_TRACE_AGENT_URL`) を使用します。コードの設定を変更するときには、TracerSettings プロパティの名前 (たとえば、`AgentUri`) を使用します。
 
-#### 統合サービスタグ付け
+### 統合サービスタグ付け
 
-| 設定名                                        | 説明                                                                                                                                                                                                       |
-|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_ENV`<br/><br/>`Environment`                     | 指定された場合、生成されたすべてのスパンに指定された値で `env` タグを追加します。`env` タグの詳細については、[Agent コンフィギュレーション][8]を参照してください。バージョン 1.17.0 以降で利用可能。                                                           |
-| `DD_SERVICE`<br/><br/>`ServiceName`            | 指定された場合、サービス名を設定します。指定されなかった場合は、.NET トレーサーがアプリケーション名から自動的にサービス名を決定しようとします (例: IIS アプリケーション名、プロセスエントリアセンブリ、またはプロセス名)。バージョン 1.17.0 以降で利用可能。  |
-| `DD_VERSION`<br/><br/>`ServiceVersion`            | 指定された場合、サービスのバージョンを設定します。バージョン 1.17.0 以降で利用可能。
-| `DD_TAGS`<br/><br/>`GlobalTags`       | 指定された場合、指定されたすべてのタグを生成されたすべてのスパンに追加します (例、`layer:api,team:intake`)。バージョン 1.17.0 以降で利用可能。                                                                                                                                              |
+[統合サービスタグ付け][7]を使用するには、サービスに対して次の設定を構成します。
 
-サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することを強くおすすめします。
-このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][7]のドキュメントをご参照ください。
 
-#### インスツルメンテーション
+`DD_ENV`
+: **TracerSettings プロパティ**: `Environment`<br>
+指定した場合、生成されたすべてのスパンに、指定された値の `env` タグを追加します。バージョン 1.17.0 で追加されました。
 
-| 設定名                                        | 説明                                                                                                                                                                                                       |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。デフォルト値は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` です。                                         |
-| `DD_AGENT_HOST`                                     | トレースが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルト値は `localhost` です。                                       |
-| `DD_TRACE_AGENT_PORT`                               | トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルト値は `8126` です。                                                     |
-| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | アプリケーションログへの相関識別子の自動挿入を有効または無効にします。                                                                                                                         |
-| `DD_TRACE_DEBUG`                                    | デバッグのロギングを有効または無効にします。有効な値は `true` または `false` (デフォルト) です。                                                                                                                                 |
-| `DD_TRACE_HEADER_TAGS`                              | 名前をタグ付けするヘッダーキー（大文字小文字の区別なし）のマップを受け入れ、一致するヘッダー値がルートスパンのタグとして自動的に提供されます。(例、`CASE-insensitive-Header:my-tag-name,User-ID:userId`)。バージョン 1.18.3 以降で使用可能。      |
+`DD_SERVICE`
+: **TracerSettings プロパティ**: `ServiceName`<br>
+指定した場合、サービス名を設定します。それ以外の場合、.NET トレーサーは、アプリケーション名 (例: IIS アプリケーション名、プロセスエントリアセンブリ、またはプロセス名) からサービス名を自動的に判別しようとします。バージョン 1.17.0 で追加されました。
 
-次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧です。
+`DD_VERSION`
+: **TracerSettings プロパティ**: `ServiceVersion`<br>
+指定した場合、サービスのバージョンを設定します。バージョン 1.17.0 で追加されました。
 
-| 設定名                                                   | 説明                                                                                                                                                                                                                                                                              |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                      | すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` (デフォルト) または `false` です。 |
-| `DD_TRACE_LOG_DIRECTORY`                                        | .NET Tracer ログのディレクトリを設定します。<br/><br/>デフォルト: `%ProgramData%\Datadog .NET Tracer\logs\`                                                                                                                                                                                     |
-| `DD_TRACE_LOG_PATH`                                             | 自動インスツルメンテーションログファイルにパスを設定し、他のすべての .NET Tracer ログファイルのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合は、無視されます。                                                                                                                    |
-| `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames`  | 無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][1]セクションでリストされているインテグレーション名です。                             |
-| `DD_TRACE_ADONET_EXCLUDED_TYPES`<br/><br/>`AdoNetExcludedTypes` | 自動インスツルメンテーションから除外される `AdoNet` タイプ (たとえば、`System.Data.SqlClient.SqlCommand`) のリストを設定します。 |
+### 追加のオプションコンフィギュレーション
 
-次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧で、インテグレーションごとに設定できます。環境変数またはコンフィギュレーションファイルの設定には最初の名前 (`DD_<INTEGRATION>_ENABLED` など) を使用します。2 つ目の名前 (`Enabled` など) は、コードの設定を変更するときに `IntegrationSettings` プロパティが使用する名前を示します。これらのプロパティには `TracerSettings.Integrations[]` インデクサを通じてアクセスします。インテグレーション名については、[インテグレーション][1]セクションを参照してください。
+自動インスツルメンテーションとカスタムインスツルメンテーションの両方で構成変数を利用できます。
 
-| 設定名                                                            | 説明                                                                                                           |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
+`DD_TRACE_AGENT_URL`
+: **TracerSettings プロパティ**: `AgentUri`<br>
+<br>トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。
+**デフォルト**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`
+
+`DD_AGENT_HOST`
+: トレースが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。<br>
+**デフォルト**: `localhost`
+
+`DD_TRACE_AGENT_PORT`
+: トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。<br>
+**デフォルト**: `8126`
+
+`DD_LOGS_INJECTION`
+: **TracerSettings プロパティ**: `LogsInjectionEnabled` <br>
+アプリケーションログへの相関識別子の自動挿入を有効または無効にします。
+
+`DD_TRACE_DEBUG`
+: **TracerSettings プロパティ**: `DebugEnabled` <br>
+<br>デバッグのロギングを有効または無効にします。有効な値は `true` または `false` です。
+**デフォルト**: `false`
+
+`DD_TRACE_HEADER_TAGS`
+: **TracerSettings プロパティ**:`HeaderTags` <br>
+名前をタグ付けするヘッダーキー (大文字小文字の区別なし) のマップを受け入れ、一致するヘッダー値がルートスパンのタグとして自動的に提供されます。特定のタグ名のないエントリも受け入れます。<br>
+**例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。
+
+`DD_TAGS`
+: **TracerSettings プロパティ**: `GlobalTags`<br>
+指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。バージョン 1.17.0 で追加されました。<br>
+**例**: `layer:api,team:intake`
+
+`DD_TRACE_LOGGING_RATE`
+: ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。
+
+`DD_TRACE_SERVICE_MAPPING`
+: コンフィギュレーションを使用してサービスの名前を変更します。名前を変更するサービス名キーと、代わりに使用する名前のマップを、`[from-key]:[to-name]` の形式で受け入れます。<br>
+**例**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
+`from-key` はインテグレーションタイプに固有で、アプリケーション名のプレフィックスを除外する必要があります。たとえば、`my-application-sql-server` の名前を `main-db` に変更するには、`sql-server:main-db` を使用します。バージョン 1.23.0 で追加されました。
+
+### 自動インスツルメンテーションオプションコンフィギュレーション
+
+構成変数は自動インスツルメンテーションの使用時に**のみ**利用できます。
+
+`DD_TRACE_ENABLED`
+: **TracerSettings プロパティ**: `TraceEnabled`<br>
+<br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false`。
+**デフォルト**: `true`
+
+`DD_TRACE_LOG_DIRECTORY`
+: .NET Tracer ログのディレクトリを設定します。<br>
+**デフォルト**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOG_PATH`
+: 自動インスツルメンテーション・ログファイルにパスを設定し、他の .NET Tracer ログファイルすべてのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合、無視されます。
+
+`DD_DISABLED_INTEGRATIONS`
+: **TracerSettings プロパティ**: `DisabledIntegrationNames` <br>
+無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][8]セクションでリストされているインテグレーション名です。
+
+`DD_HTTP_CLIENT_ERROR_STATUSES`
+: HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。<br>
+**デフォルト**: `400-499`
+
+`DD_HTTP_SERVER_ERROR_STATUSES`
+: HTTP サーバースパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
+**デフォルト**: `500-599`
+
+`DD_RUNTIME_METRICS_ENABLED`
+: .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。バージョン 1.23.0 で追加されました。<br>
+**デフォルト**: `false`
+
+`DD_TRACE_ADONET_EXCLUDED_TYPES`
+: **TracerSettings プロパティ**: `AdoNetExcludedTypes` <br>
+自動インスツルメンテーションから除外される `AdoNet` タイプ (たとえば、`System.Data.SqlClient.SqlCommand`) のリストを設定します。
+
+
+### インテグレーションコンフィギュレーションを無効にする
+
+次の表に、自動インスツルメンテーションを使用しており、インテグレーションごとの設定が可能な場合に**のみ**使用できる構成変数を示します。
+
+`DD_TRACE_<INTEGRATION_NAME>_ENABLED`
+: **TracerSettings プロパティ**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
+<br>特定のインテグレーションを有効または無効にします。有効な値は、`true` (デフォルト) または `false` です。インテグレーション名は、[インテグレーション][8]セクションにリストされています。
+**デフォルト**: `true`
+
+#### 試験機能
+
+構成変数は現在利用可能な機能ですが、今後のリリースで変更される場合があります。
+
+`DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
+: `true` に設定すると、Web スパンに対する改善されたリソース名を有効化します。利用可能なルートテンプレート情報を使用して ASP.NET のコアインテグレーションにスパンを追加し、追加のタグを有効化します。バージョン 1.26.0 で追加されました。<br>
+**デフォルト**: `false`
+
+`DD_TRACE_PARTIAL_FLUSH_ENABLED`
+: Datadog Agent への大規模トレースのフラッシュをインクリメント形式で有効化し、Agent に拒否される可能性を低減します。保持期間が長いトレースまたは多数のスパンを持つトレースがある場合にのみ使用してください。有効な値は `true` または `false`。バージョン 1.26.0 で追加され、Datadog Agent 7.26.0 以降とのみ互換性を有しています。<br>
+**デフォルト**: `false`
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/dotnet-framework
-[2]: https://app.datadoghq.com/apm/docs
-[3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows/?tab=gui
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows/?tab=gui
+[3]: https://github.com/datadog/dd-trace-dotnet/releases/latest
+[4]: https://app.datadoghq.com/apm/traces
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /ja/tracing/custom_instrumentation/dotnet/
 [7]: /ja/getting_started/tagging/unified_service_tagging/
+[8]: /ja/tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations

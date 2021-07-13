@@ -17,6 +17,7 @@ further_reading:
     {{< nextlink href="network_monitoring/devices/guide/tags-with-regex" >}}Tags NDM avec des expressions régulières{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/cluster-agent" >}}Solution NDM avec l'Agent de cluster{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/build-ndm-profile" >}}Créer un profil NDM{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/migrating-to-snmp-core-check" >}}Migration depuis les checks basés sur Python vers les checks SNMP Core (en Go){{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin

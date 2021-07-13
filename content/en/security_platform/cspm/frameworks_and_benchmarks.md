@@ -54,6 +54,9 @@ From the [Rules][10] page, you can add notification targets. The complete list o
 - [Webhooks][16]
 - Email
 
+Set the severity of security posture signals. The dropdown allows you to select an appropriate severity level (INFO, LOW, MEDIUM, HIGH, CRITICAL).
+In the “Notify” section, configure zero or more [notification targets][7] for each rule case.
+
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 
 ## Further reading

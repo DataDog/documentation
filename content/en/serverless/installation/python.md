@@ -31,7 +31,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 {{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
 
-If your Python Lambda functions are written in [Python 3.6 or less][2], you previously set up Datadog Serverless using the Datadog Forwarder or your Lambda functions are deployed to AWS GovCloud, see the [installation instructions here][3].
+If your Python Lambda functions are written in [Python 3.6 or less][2] or you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][3].
 
 ## Configuration
 
@@ -92,13 +92,16 @@ Transform:
   - Name: DatadogServerless
     Parameters:
       stackName: !Ref "AWS::StackName"
-      nodeLayerVersion: "<LAYER_VERSION>"
-      extensionLayerVersion: "<EXTENSION_VERSION>"
+      apiKey: <DATADOG_API_KEY>
+      pythonLayerVersion: {{< latest-lambda-layer-version layer="python" >}}
+      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
-Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with the [desired version][4] of Datadog Lambda Library, and `<EXTENSION_VERSION>` with the [desired version][5] of the Datadog Lambda Extension.
+To fill in the placeholders:
+- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4]. 
+- Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
 
@@ -106,8 +109,7 @@ More information and additional parameters can be found in the [macro documentat
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-python/releases
-[5]: https://gallery.ecr.aws/datadog/lambda-extension
+[4]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -125,15 +127,15 @@ pip install datadog-cdk-constructs
 
 ### Instrument the function
 
-Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configurations:
+Import the `datadog-cdk-construct` module in your AWS CDK app and add the following configuration:
 
 ```python
 from datadog_cdk_constructs import Datadog
 
 datadog = Datadog(self, "Datadog",
-    python_layer_version=<LAYER_VERSION>,
-    extension_layer_version=<EXTENSION_LAYER_VERSION>,
-    dd_api_key=<DATADOG_API_KEY>,
+    python_layer_version={{< latest-lambda-layer-version layer="python" >}},
+    extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
+    api_key=<DATADOG_API_KEY>,
     service=<SERVICE>, # Optional
     env=<ENV>, # Optional
 )
@@ -142,18 +144,13 @@ datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 
 To fill in the placeholders:
 
-- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
+- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]).
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][4]).
 
-More information and additional parameters can be found in the [Datadog CDK NPM page][1].
+More information and additional parameters can be found on the [Datadog CDK NPM page][2].
 
-
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs
-[2]: https://github.com/DataDog/datadog-lambda-python/releases
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://gallery.ecr.aws/datadog/lambda-extension
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://www.npmjs.com/package/datadog-cdk-constructs
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
@@ -196,9 +193,9 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
 - Replace `<RUNTIME>` with the appropriate Python runtime. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`.
-- Replace `<LIBRARY_VERSION>` with the [latest Datadog Lambda Library release][1]. 
-- Replace `<EXTENSION_VERSION>` with the [latest Datadog Lambda Extension release][2].
-- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][3]. 
+- Replace `<LIBRARY_VERSION>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`. 
+- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
 
 For example:
 
@@ -215,10 +212,7 @@ For example:
     ```
 {{< /site-region >}}
 
-
-[1]: https://github.com/DataDog/datadog-lambda-python/releases
-[2]: https://gallery.ecr.aws/datadog/lambda-extension
-[3]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Chalice" %}}
 
@@ -257,7 +251,7 @@ For example:
             "DD_FLUSH_TO_LOG": "true",
             "DD_API_KEY": "<DATADOG_API_KEY>",
           },
-          "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<VERSION_NUMBER>"],
+          "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>"],
         }
       }
     }
@@ -267,7 +261,7 @@ For example:
 
 - Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][2]. 
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
-- Replace `<EXTENSION_VERSION>` with the [latest Datadog Lambda Extension release][3].
+- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 3. Add `datadog_lambda` to your `requirements.txt`.
 4. Register `datadog_lambda_wrapper` as a [middleware][4] in your `app.py`:
@@ -291,9 +285,7 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
-
-Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines. The CLI command automatically adds the Datadog Lambda Library to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
+Use the Datadog CLI to set up instrumentation on your Lambda functions in your CI/CD pipelines or from your local command-line interface. The CLI command automatically adds the Datadog Lambda library and extension to your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog.
 
 ### Install
 
@@ -309,31 +301,28 @@ yarn global add @datadog/datadog-ci
 
 ### Instrument
 
-To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the [desired version][2] of the Datadog Lambda Library and `<extension_version>` with the [desired version][3] of the Datadog Lambda Extension.
+To instrument the function, run the following command with your [AWS credentials][1].
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> -e <extension_version>
 ```
 
+To fill in the placeholders:
+- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+- Replace `<aws_region>` with the AWS region name. 
+- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
+- Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
 For example:
 
-{{< site-region region="us,us3,eu" >}}
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 -e 8
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 -e 8
-```
-{{< /site-region >}}
 
-More information and additional parameters can be found in the [CLI documentation][4].
+More information and additional parameters can be found in the [CLI documentation][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://github.com/DataDog/datadog-lambda-python/releases
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
-[4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -355,7 +344,7 @@ Add the Datadog Lambda Extension to your container image by adding the following
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 ### Configure the function
 
@@ -371,9 +360,11 @@ Replace `<TAG>` with either a specific version number (for example, `7`) or with
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.</div>
 
-You can either install the Datadog Lambda library as a layer (recommended) or Python package.
+### Install the Datadog Lambda library
+
+The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
 
 The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 
@@ -392,16 +383,16 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 ```
 {{< /site-region >}}
 
-The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][2]. For example:
+The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
 
 {{< site-region region="us,us3,eu" >}} 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
-arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
 ```
 {{< /site-region >}}
 
@@ -430,7 +421,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSI
 ```
 {{< /site-region >}}
 
-For `EXTENSION_VERSION`, see the [latest release][7].
+The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
 
 ### Configure
 
@@ -444,12 +435,10 @@ Follow these steps to configure the function:
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/DataDog/datadog-lambda-python/releases
 [3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
 [4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [6]: https://pypi.org/project/datadog-lambda/
-[7]: https://gallery.ecr.aws/datadog/lambda-extension
 [8]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}

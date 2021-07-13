@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_queue_storage/'
 draft: false
 git_integration_title: azure_queue_storage
 has_logo: true
+integration_id: azure-queue-storage
 integration_title: Microsoft Azure Queue Storage
 is_public: true
 kind: インテグレーション

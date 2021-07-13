@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
 draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
+integration_id: amazon-workspaces
 integration_title: AWS Workspaces
 is_public: true
 kind: インテグレーション
@@ -52,7 +53,7 @@ Amazon WorkSpaces から S3 バケットまたは CloudWatch のいずれかに�
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon WorkSpaces ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

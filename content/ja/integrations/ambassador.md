@@ -58,6 +58,8 @@ valueFrom:
 
 詳細については、[Ambassador に関するドキュメント][3]を参照してください。
 
+Ambassador から Datadog APM へトレースデータを送信することも可能です。詳しくは、[Ambassador Datadog APM トレースドキュメント][4]をご参照ください。
+
 ## 収集データ
 
 ### メトリクス
@@ -74,10 +76,11 @@ Ambassador チェックには、サービスのチェック機能は含まれま
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://www.getambassador.io
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ambassador/images/upstream-req-time.png
 [3]: https://www.getambassador.io/docs/latest/topics/running/statistics/#exposing-statistics-via-statsd
-[4]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.getambassador.io/docs/latest/howtos/tracing-datadog/
+[5]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
+[6]: https://docs.datadoghq.com/ja/help/
