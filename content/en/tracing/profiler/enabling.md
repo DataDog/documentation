@@ -62,7 +62,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 
 ## Enabling the allocation profiler
 
-In tracer v0.83.0+, the allocation profiler is disabled by default on Java 15 and lower. To enable it, see [Enabling the allocation profiler][8].
+In dd-java-agent v0.83.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
 
 ## Environment variables
 
