@@ -5,11 +5,12 @@ kind: documentation
 
 If you run your tests inside a container that you launch yourself within the build (for example, from a Docker Compose file), forward the following environment variables depending on your CI provider, so the Datadog tracer can autodetect the build information.
 
-Additionally, forward all environment variables used to configure the Datadog tracer (such as `DD_SERVICE` or `DD_AGENT_HOST`). 
+Additionally, forward all environment variables used to configure the Datadog tracer (such as `DD_SERVICE` or `DD_AGENT_HOST`).
 
 Forwarding environment variables is not required if the CI provider itself launches the container, because in that case all environment variables are set and available to the tracer.
 
-## [Appveyor][1]
+{{< tabs >}}
+{{% tab "Appveyor" %}}
 
 - `APPVEYOR`
 - `APPVEYOR_BUILD_ID`
@@ -22,7 +23,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `APPVEYOR_REPO_TAG_NAME`
 - `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`
 
-## [Azure pipelines][2]
+[Full list of build environment variables provided by Appveyor][1]
+
+
+[1]: https://www.appveyor.com/docs/environment-variables/
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
 
 - `TF_BUILD`
 - `BUILD_DEFINITIONNAME`
@@ -41,7 +47,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `SYSTEM_PULLREQUEST_SOURCEBRANCH`
 - `SYSTEM_PULLREQUEST_SOURCECOMMITID`
 
-## [BitBucket][3]
+[Full list of build environment variables provided by Azure Pipelines][1]
+
+
+[1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
 
 - `BITBUCKET_PIPELINE_UUID`
 - `BITBUCKET_BUILD_NUMBER`
@@ -52,7 +63,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `BITBUCKET_BRANCH`
 - `BITBUCKET_TAG`
 
-## [BuildKite][4]
+[Full list of build environment variables provided by Bitbucket Pipelines][1]
+
+
+[1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
+{{% /tab %}}
+{{% tab "BuildKite" %}}
 
 - `BUILDKITE`
 - `BUILDKITE_PIPELINE_SLUG`
@@ -66,8 +82,13 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `BUILDKITE_BRANCH`
 - `BUILDKITE_TAG`
 
-## [CircleCI][5]
-`
+[Full list of build environment variables provided by BuildKite][1]
+
+
+[1]: https://buildkite.com/docs/pipelines/environment-variables
+{{% /tab %}}
+{{% tab "CircleCI" %}}
+
 - `CIRCLECI`
 - `CIRCLE_PROJECT_REPONAME`
 - `CIRCLE_BUILD_NUM`
@@ -79,7 +100,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `CIRCLE_BRANCH`
 - `CIRCLE_TAG`
 
-## [GitHub Actions][6]
+[Full list of build environment variables provided by CircleCI][1]
+
+
+[1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
 - `GITHUB_RUN_ID`
@@ -91,7 +117,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `GITHUB_HEAD_REF`
 - `GITHUB_REF`
 
-## [GitLab][7]
+[Full list of build environment variables provided by GitHub Actions][1]
+
+
+[1]: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 - `GITLAB_CI`
 - `CI_PIPELINE_ID`
@@ -105,7 +136,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `CI_COMMIT_BRANCH`
 - `CI_COMMIT_TAG`
 
-## [Jenkins][8]
+[Full list of build environment variables provided by GitLab CI][1]
+
+
+[1]: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+{{% /tab %}}
+{{% tab "Jenkins" %}}
 
 - `JENKINS_URL`
 - `BUILD_TAG`
@@ -118,7 +154,12 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `GIT_COMMIT`
 - `GIT_BRANCH`
 
-## [TravisCI][9]
+[Full list of build environment variables provided by Jenkins][1]
+
+
+[1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
+{{% /tab %}}
+{{% tab "Travis CI" %}}
 
 - `TRAVIS`
 - `TRAVIS_BUILD_ID`
@@ -133,13 +174,9 @@ Forwarding environment variables is not required if the CI provider itself launc
 - `TRAVIS_PULL_REQUEST_SLUG`
 - `TRAVIS_PULL_REQUEST_BRANCH`
 
+[Full list of build environment variables provided by Travis CI][1]
 
-[1]: https://www.appveyor.com/docs/environment-variables/
-[2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
-[3]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
-[4]: https://buildkite.com/docs/pipelines/environment-variables
-[5]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
-[6]: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
-[7]: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
-[8]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
-[9]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+
+[1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+{{% /tab %}}
+{{< /tabs >}}
