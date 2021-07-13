@@ -12,6 +12,11 @@ Le rôle Ansible pour Datadog permet d'installer et de configurer l'Agent et les
 
 - La version 2.6 ou une version ultérieure d'Ansible est requise.
 - Prend en charge la plupart des distributions Linux basées sur Debian et RHEL, ainsi que Windows.
+- Si vous utilisez Ansible 2.10+ sous Windows, vous devez impérativement installer la collection `ansible.windows` :
+
+  ```shell
+  ansible-galaxy collection install ansible.windows
+  ```
 
 ### Installation
 
@@ -33,29 +38,36 @@ Pour déployer l'Agent Datadog sur des hosts, ajoutez le rôle Datadog et votre 
 
 #### Variables de rôle
 
-| Variable                                   | Description                                                                                                                                                                                                                                                                                               |
+| Variable                                   | Rôle                                                                                                                                                                                                                                                                                               |
 |--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `datadog_api_key`                          | Votre clé d'API Datadog.                                                                                                                                                                                                                                                                                     |
 | `datadog_site`                             | Le site de Datadog vers lequel envoyer les données de l'Agent. Par défaut, cette variable est définie sur `datadoghq.com` ; définissez-la sur `datadoghq.eu` pour envoyer les données vers le site européen. Cette option n'est disponible qu'à partir de la version 6.6.0 de l'Agent.                                                                                                          |
+| `datadog_agent_flavor`                     | Remplacez le package Debian/Redhat par défaut pour les installations IOT sur RPI. Valeur par défaut : datadog-agent. Utilisez datadog-iot-agent pour RPI.                                                                                                                                                                 |  
 | `datadog_agent_version`                    | La version imposée de l'Agent à installer (facultatif, mais conseillé). Exemple : `7.16.0`. Il n'est pas nécessaire de définir `datadog_agent_major_version` si `datadog_agent_version` est utilisé. **Remarque** : les passages à une version antérieure ne sont pas pris en charge sur les plateformes Windows.                                                       |
 | `datadog_agent_major_version`              | La version majeure de l'Agent à installer. Les valeurs possibles sont 5, 6, ou 7 (par défaut). Si la variable `datadog_agent_version` est définie, celle-ci est appliquée en priorité. Sinon, la dernière version de la version majeure indiquée est installée. Il n'est pas nécessaire de définir `datadog_agent_major_version` si `datadog_agent_version` est utilisé. |
 | `datadog_checks`                           | Emplacement de la configuration YAML pour les checks de l'Agent : <br> - `/etc/datadog-agent/conf.d/<nom_check>.d/conf.yaml` pour les Agents v6 et v7, <br> - `/etc/dd-agent/conf.d` pour l'Agent v5.                                                                                                                            |
+| `datadog_disable_untracked_checks` | Définissez cette variable sur `true` pour supprimer tous les checks qui ne se trouvent pas dans `datadog_checks` et `datadog_additional_checks`. |
+| `datadog_additional_checks` | La liste des checks supplémentaires qui ne seront pas supprimés si `datadog_disable_untracked_checks` est défini sur `true`. |
+| `datadog_disable_default_checks` | Définissez cette variable sur `true` pour supprimer tous les checks par défaut. |
 | `datadog_config`                           | Paramètres du fichier de configuration principal de l'Agent : <br> - `/etc/datadog-agent/datadog.yaml` pour les Agents v6 et v7,<br> - `/etc/dd-agent/datadog.conf` pour l'Agent v5 (section `[Main]`).                                                                                                               |
 | `datadog_config_ex`                        | (Facultatif) Sections INI supplémentaires à ajouter dans `/etc/dd-agent/datadog.conf` (Agent v5 uniquement).                                                                                                                                                                                                                      |
-| `datadog_apt_repo`                         | Remplace le référentiel `apt` de Datadog par défaut.                                                                                                                                                                                                                                                            |
+| `datadog_apt_repo`                         | Remplace le référentiel `apt` par défaut de Datadog. Veillez à utiliser l'option `signed-by` si les métadonnées du référentiel sont signées à l'aide des clés de signature de Datadog : `deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://yourrepo`.                                                                 |
 | `datadog_apt_cache_valid_time`             | Remplace le délai d'expiration du cache apt par défaut (valeur par défaut : 1 heure).                                                                                                                                                                                                                                      |
-| `datadog_apt_key_url_new`                  | Remplace l'URL par défaut vers la clé `apt` de Datadog (ID de clé `382E94DE` ; la variable obsolète `datadog_apt_key_url` correspond à une clé expirée qui a été supprimée du rôle).                                                                                                                             |
+| `datadog_apt_key_url_new`                  | Remplace l'emplacement à partir duquel la clé `apt` Datadog est récupérée (la variable `datadog_apt_key_url` obsolète fait référence à une clé expirée qui a été supprimée de ce rôle). L'URL doit être un porte-clés GPG contenant les clés `382E94DE` et `F14F620E`.                            |
 | `datadog_yum_repo`                         | Remplace le référentiel `yum` par défaut de Datadog.                                                                                                                                                                                                                                                            |
+| `datadog_yum_repo_gpgcheck`                | Remplace la valeur `repo_gpgcheck` par défaut (valeur vide). Si vous ne précisez pas de valeur, cette variable de rôle est définie sur `yes` si la variable `datadog_yum_repo` n'est pas utilisée et si votre système est différent de RHEL/CentOS 8.1 (en raison d'[un bug](https://bugzilla.redhat.com/show_bug.cgi?id=1792506) lié à DNF) ou sur `no` dans les autres cas. Veuillez noter que la vérification de la signature de repodata est toujours désactivée pour la version 5 de l'Agent.                                                                         |
+| `datadog_yum_gpgcheck`                     | Remplace la valeur par défaut de `gpgcheck` (`yes`). Utilisez `no` pour désactiver la vérification de la signature GPG des packages.                                                                                                                                                                                                  |
 | `datadog_yum_gpgkey`                       | Remplace l'URL par défaut vers la clé `yum` de Datadog utilisée pour vérifier les packages des Agents v5 et v6 (jusqu'à la version 6.13) (ID de clé `4172A230`).                                                                                                                                                                               |
 | `datadog_yum_gpgkey_e09422b3`              | Remplace l'URL par défaut vers la clé `yum` de Datadog utilisée pour vérifier les packages de l'Agent v6.14+ (ID de clé `E09422B3`).                                                                                                                                                                                               |
 | `datadog_yum_gpgkey_e09422b3_sha256sum`    | Remplace le checksum par défaut de la clé `datadog_yum_gpgkey_e09422b3`.                                                                                                                                                                                                                                   |
 | `datadog_zypper_repo`                      | Remplace le référentiel `zypper` par défaut de Datadog.                                                                                                                                                                                                                                                         |
+| `datadog_zypper_repo_gpgcheck`             | Remplace la valeur `repo_gpgcheck` par défaut (valeur vide). Si vous ne précisez pas de valeur, cette variable de rôle est définie sur `yes` si la variable `datadog_zypper_repo` n'est pas utilisée ou sur `no`.dans les autres cas. Veuillez noter que la vérification de la signature de repodata est toujours désactivée pour la version 5 de l'Agent.                                                    |
+| `datadog_zypper_gpgcheck`                  | Remplace la valeur par défaut de `gpgcheck` (`yes`). Utilisez `no` pour désactiver la vérification de la signature GPG des packages.                                                                                                                                                                                                  |
 | `datadog_zypper_gpgkey`                    | Remplace l'URL par défaut vers la clé `zypper` de Datadog utilisée pour vérifier les packages des Agents v5 et v6 (jusqu'à la version 6.13) (ID de clé `4172A230`).                                                                                                                                                                            |
 | `datadog_zypper_gpgkey_sha256sum`          | Remplace le checksum par défaut de la clé `datadog_zypper_gpgkey`.                                                                                                                                                                                                                                         |
 | `datadog_zypper_gpgkey_e09422b3`           | Remplace l'URL par défaut vers la clé `zypper` de Datadog utilisée pour vérifier les packages de l'Agent v6.14+ (ID de clé `E09422B3`).                                                                                                                                                                                            |
 | `datadog_zypper_gpgkey_e09422b3_sha256sum` | Remplace le checksum par défaut de la clé `datadog_zypper_gpgkey_e09422b3`.                                                                                                                                                                                                                                |
 | `datadog_agent_allow_downgrade`            | Définir sur `yes` pour permettre les passages à une version antérieure de l'Agent sur les plateformes basées sur apt (à utiliser prudemment, voir `defaults/main.yml` pour en savoir plus). **Remarque** : sous CentOS, cette variable ne fonctionne qu'avec Ansible 2.4+.                                                                                                                             |
-| `use_apt_backup_keyserver`                 | Définir sur `true` pour utiliser le serveur de clés de secours au lieu du serveur par défaut.                                                                                                                                                                                                                                     |
 | `datadog_enabled`                          | Définir sur `false` pour empêcher le service `datadog-agent` de démarrer (valeur par défaut : `true`).                                                                                                                                                                                                                     |
 | `datadog_additional_groups`                | Liste ou chaîne contenant une liste de groupes supplémentaires séparés par des virgules pour `datadog_user` (Linux uniquement).                                                                                                                                                                                    |
 | `datadog_windows_ddagentuser_name`         | Le nom de l'utilisateur Windows à créer/utiliser, au format `<domaine>\<utilisateur>` (Windows uniquement).                                                                                                                                                                                                                   |
@@ -159,11 +171,13 @@ Voici la liste des variables disponibles pour les live processes :
 * `scrub_args` : active le nettoyage des arguments sensibles dans les lignes de commande d'un processus (valeur par défaut :`true`).
 * `custom_sensitive_words` : permet d'élargir la liste des mots sensibles par défaut utilisés pour le nettoyage des lignes de commande.
 
-#### System Probe
+#### System probe
 
-Le system probe [Surveillance des performances réseau][7] (NPM) est configuré sous la variable `system_probe_config`. Toutes les variables de niveau inférieur imbriquées sont enregistrées dans le fichier `system-probe.yaml`.
+Le system probe est configuré sous la variable `system_probe_config`. Toutes les variables de niveau inférieur imbriquées sont enregistrées dans le fichier `system-probe.yaml`, dans la section `system_probe_config`.
 
-**Remarque** : le system probe ne fonctionne que sous Linux avec l'Agent v6+.
+Le [Network Performance Monitoring][7] (NPM) est configuré sous la variable `network_config`. Toutes les variables de niveau inférieur imbriquées sont enregistrées dans le fichier `system-probe.yaml`, dans la section `network_config`.
+
+**Remarque** : le system probe fonctionne sous Linux avec l'Agent v6+. Le NPM est pris en charge sous Windows avec l'Agent v6.27+ ou v7.27+.
 
 #### Exemple de configuration
 
@@ -174,17 +188,20 @@ datadog_config:
     scrub_args: true
     custom_sensitive_words: ['consul_token','dd_api_key']
 system_probe_config:
-  enabled: true
   sysprobe_socket: /opt/datadog-agent/run/sysprobe.sock
+network_config:
+  enabled: true
 ```
 
-Une fois la modification terminée, suivez les étapes ci-dessous :
+**Remarque** : cette configuration fonctionne avec les versions 6.24.1+ et 7.24.1+ de l'Agent. Si vous utilisez une version plus ancienne, consultez la [documentation][8] afin de découvrir comment activer le system probe.
+
+Sous Linux, une fois la modification terminée, suivez les étapes ci-dessous si vous avez installé une version de l'Agent antérieure à la 6.18.0 ou 7.18.0 :
 
 1. Démarrez le system-probe : `sudo service datadog-agent-sysprobe start`. **Remarque** : si le wrapper de service n'est pas disponible sur votre système, exécutez plutôt la commande suivante : `sudo initctl start datadog-agent-sysprobe`.
-2. [Redémarrez l'Agent][8] : `sudo service datadog-agent restart`.
+2. [Redémarrez l'Agent][9] : `sudo service datadog-agent restart`.
 3. Configurez le system-probe afin qu'il se lance au démarrage : `sudo service enable datadog-agent-sysprobe`.
 
-Pour la configuration manuelle, reportez-vous à la documentation relative à la [Surveillance des performances réseau][9].
+Pour la configuration manuelle, reportez-vous à la documentation relative à la [solution NPM][8].
 
 #### Agent v5
 
@@ -198,12 +215,6 @@ datadog_config_ex:
     scrub_args: true
     custom_sensitive_words: "<PREMIER_MOT>,<DEUXIÈME_MOT>"
 ```
-
-### Tâches supplémentaires
-
-Les dossiers `pre_tasks` et `post_tasks` peuvent être utilisés pour exécuter des tâches définies par l'utilisateur. Les tâches `pre_tasks` sont exécutées avant les tâches du rôle Ansible pour Datadog, tandis que les tâches `post_tasks` sont exécutées après les tâches du rôle.
-
-Les tâches d'installation sur les plateformes prises en charge enregistrent la variable `datadog_agent_install`, qui peut être utilisée dans `post_tasks` pour vérifier le résultat de la tâche d'installation. La variable `datadog_agent_install.changed` est définie sur `true` si la tâche d'installation s'est bien déroulée avec succès, et sur `false` dans le cas contraire (par exemple, si la version demandée était déjà installée).
 
 ## Versions
 
@@ -254,11 +265,13 @@ Si vous avez déjà utilisé les variables de l'Agent v5, utilisez les **nouvell
 | `datadog_agent5_yum_repo`    | `datadog_yum_repo`    |
 | `datadog_agent5_zypper_repo` | `datadog_zypper_repo` |
 
+Depuis la version 4.9.0, la variable `use_apt_backup_keyserver` a été supprimée, puisque les clés APT sont désormais récupérées depuis le site https://keys.datadoghq.com.
+
 #### Windows
 
 Lorsque la variable `datadog_windows_download_url` n'est pas définie, le package MSI officiel pour Windows correspondant à `datadog_agent_major_version` est utilisé :
 
-| Version | URL par défaut du package MSI Windows                                                  |
+| # | URL par défaut du package MSI Windows                                                  |
 |---|----------------------------------------------------------------------------------|
 | 6 | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi |
 | 7 | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi |
@@ -279,6 +292,10 @@ Actions disponibles :
 
 - `install` : installe une version spécifique de l'intégration.
 - `remove` : supprime une intégration.
+
+##### Marketplace Datadog
+
+Les intégrations du [Marketplace Datadog](https://www.datadoghq.com/blog/datadog-marketplace/) peuvent être installées via la ressource `datadog_integration`. Veuillez noter qu'elles sont considérées comme des intégrations tierces. Pour cette raison, vous devez définir le paramètre `third_party: true`, tel que décrit dans l'exemple ci-dessous.
 
 ##### Syntaxe
 
@@ -329,7 +346,7 @@ Pour passer à une version antérieure de l'Agent :
 
 Vous trouverez ci-dessous quelques exemples de playbooks afin de vous aider à utiliser le rôle Ansible pour Datadog.
 
-L'exemple suivant envoie des données au site américain de Datadog (par défaut), active les logs et configure quelques checks.
+L'exemple suivant envoie des données au site américain de Datadog (par défaut), active les logs et NPM, et configure quelques checks.
 
 ```yml
 - hosts: servers
@@ -345,7 +362,7 @@ L'exemple suivant envoie des données au site américain de Datadog (par défaut
       log_level: INFO
       apm_config:
         enabled: true
-      logs_enabled: true  # disponible avec l'Agent v6 et v7
+      logs_enabled: true  # disponible pour les versions 6 et 7 de l'Agent
     datadog_checks:
       process:
         init_config:
@@ -363,7 +380,7 @@ L'exemple suivant envoie des données au site américain de Datadog (par défaut
           - host: localhost
             port: 22
             username: root
-            password: <VOTRE_MOTDEPASSE>
+            password: <VOTRE_MOT_DE_PASSE>
             sftp_check: True
             private_key_file:
             add_missing_keys: True
@@ -379,7 +396,7 @@ L'exemple suivant envoie des données au site américain de Datadog (par défaut
               - "source:nginx"
               - "<KEY>:<VALUE>"
 
-        #La collecte de logs est disponible dans l'Agent v6 et v7
+        # La collecte est disponible pour l'Agent v6 et v7
         logs:
           - type: file
             path: /var/log/access.log
@@ -391,14 +408,14 @@ L'exemple suivant envoie des données au site américain de Datadog (par défaut
             service: nginx
             source: nginx
             sourcecategory: http_web_access
-    # datadog_integration est disponible dans l'Agent 6.8+
+    # datadog_integration est disponible pour l'Agent 6.8+
     datadog_integration:
       datadog-elastic:
         action: install
         version: 1.11.0
       datadog-postgres:
         action: remove
-    system_probe_config:
+    network_config:
       enabled: true
 ```
 
@@ -432,7 +449,7 @@ Cet exemple envoie les données au site européen :
 
 ### Windows
 
-Sous Windows, l'option `become: yes` doit être supprimée car elle fera échouer le rôle. Vous trouverez ci-dessous deux méthodes pour faire fonctionner les exemples de playbooks sur les hosts Windows :
+Sous Windows, supprimez l'option `become: yes` pour empêcher l'échec du rôle. Vous trouverez ci-dessous deux méthodes pour faire fonctionner les exemples de playbooks sur les hosts Windows :
 
 #### Fichier d'inventaire
 
@@ -479,6 +496,8 @@ Si votre playbook **est uniquement exécuté des hosts Windows**, utilisez ce qu
 
 ### Debian Stretch
 
+**Remarque** : ces informations s'appliquent aux versions < 4.9.0 du rôle. Depuis la v4.9.0, le module `apt_key` n'est plus utilisé par le rôle.
+
 Sous Debian Stretch, le module `apt_key` utilisé par le rôle nécessite une dépendance système supplémentaire pour fonctionner correctement. Cette dépendance (`dirmngr`) n'est pas fournie par le module. Ajoutez la configuration suivante à vos playbooks pour utiliser le rôle présent :
 
 ```yml
@@ -490,12 +509,19 @@ Sous Debian Stretch, le module `apt_key` utilisé par le rôle nécessite une d�
       apt:
         name: dirmngr
         state: present
-
   roles:
     - { role: datadog.datadog, become: yes }
   vars:
     datadog_api_key: "<VOTRE_CLÉ_API_DD>"
 ```
+
+### CentOS 6/7 avec interpréteur Python 3
+
+Le module Python `yum`, qui est utilisé dans ce rôle pour installer l'Agent sur les hosts fonctionnant sous CentOS, est uniquement disponible avec Python 2. Lorsqu'un interpréteur Python 3 est détecté sur un host cible, le gestionnaire de package `dnf` et le module Python `dnf` sont utilisés à la place.
+
+Toutefois, `dnf` et le module Python `dnf` ne sont pas installés par défaut sur les hosts CentOS avant CentOS 8. Dans ce cas, il n'est pas possible d'installer l'Agent lorsqu'un interpréteur Python 3 est utilisé. Si cette situation est détectée, le rôle échouera dès le début pour indiquer qu'un interpréteur Python 2 est requis lorsque l'Agent est installé sur une version < 8 de CentOS/RHEL.
+
+Pour passer outre cette vérification (par exemple, si `dnf` et le package `python3-dnf` package sont disponibles sur votre host), définissez la variable `datadog_ignore_old_centos_python3_error` sur `true`.
 
 ### Windows
 
@@ -517,6 +543,6 @@ Pour en savoir plus, consultez la page [Bug critique lors de la désinstallation
 [5]: https://github.com/DataDog/integrations-core
 [6]: https://docs.datadoghq.com/fr/infrastructure/process/
 [7]: https://docs.datadoghq.com/fr/network_performance_monitoring/
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[9]: https://docs.datadoghq.com/fr/network_performance_monitoring/installation/?tab=agent#setup
+[8]: https://docs.datadoghq.com/fr/network_performance_monitoring/installation/?tab=agent#setup
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
 [10]: https://app.datadoghq.com/help/agent_fix

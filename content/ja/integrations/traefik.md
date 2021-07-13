@@ -23,6 +23,7 @@ kind: インテグレーション
 maintainer: '@renaudhager'
 manifest_version: 1.1.0
 metric_prefix: traefik.
+metric_to_check: traefik.total_status_code_count
 name: traefik
 public_title: Datadog-Traefik インテグレーション
 short_description: traefik のメトリクスを収集

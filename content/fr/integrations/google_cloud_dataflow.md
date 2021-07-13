@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_dataflow/'
 draft: false
 git_integration_title: google_cloud_dataflow
 has_logo: true
+integration_id: google-cloud-dataflow
 integration_title: "Google\_Cloud\_Dataflow"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Cloud Dataflow est un service entièrement géré permettant de transformer et 
 
 Utilisez l'intégration Datadog/Google Cloud pour recueillir des métriques de Google Cloud Dataflow.
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -45,7 +46,7 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Dataflow 
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
-4. Cliquez sur **Create** et patientez jusqu'à ce que le message de confirmation apparaisse.
+4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées
 
