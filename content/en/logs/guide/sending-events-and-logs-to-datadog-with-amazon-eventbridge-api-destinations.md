@@ -16,16 +16,16 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 ### Configuration
 
 1. Follow the steps in the [Amazon Create an API destination docs][5] to add Datadog as an API destination.
-    - Use API key Authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
-    - For your destination endpoint, input `https://http-intake.logs.datadoghq.com/v1/input` for logs or `https://api.datadoghq.com/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see the [logs section][6], and the [events section][7] of the [Categories of Data docs page][8].
+    - Use API key authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
+    - For your destination endpoint, use `https://http-intake.logs.datadoghq.com/v1/input` for logs or `https://api.datadoghq.com/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see the [logs section][6], and the [events section][7] of the [Categories of Data docs page][8].
 2. Once you've set up the destination, you can now follow the Amazon instructions to [create an EventBridge rule][9], where you set Datadog as your destination.
-3. Once you've set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration docs][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][10] in your account, use this AWS CloudShell cmd:
+3. Once you've set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration docs][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][10] in your account, use this AWS CloudShell command:
 
     ```bash
     echo "test" > testfile.txt
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
-4. Once events and logs are sending, after about five minutes, you start seeing the data in the Datadog [logs console][11] or [events stream][12], depending on which endpoint you are sending them.
+4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [logs console][11] or [events stream][12], depending on which endpoint you are sending them to.
 
 ## Further Reading
 
