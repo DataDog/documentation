@@ -29,7 +29,7 @@ No additional configuration is required to use these flow maps, and they are pow
 
 - RUM Applications are represented on the Request Flow Map if you have [connected RUM and Traces][4].
 
-{{< img src="tracing/live_search_and_analytics/RUMService.gif" alt="RUM service link from flow map"  style="width:100%;">}}
+{{< img src="tracing/live_search_and_analytics/request_flow_map/RUMService.gif" alt="RUM service link from flow map"  style="width:100%;">}}
 
 ## Further Reading
 
