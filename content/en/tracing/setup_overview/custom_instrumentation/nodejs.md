@@ -242,6 +242,16 @@ tracer.use('http', {
 })
 ```
 
+This configuration can be split between client and server if needed. For example,
+
+```javascript
+tracer.use('http', {
+  server: {
+    blocklist: ['/ping']
+  }
+})
+```
+
 Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][3] page.
 
 ## Further Reading
