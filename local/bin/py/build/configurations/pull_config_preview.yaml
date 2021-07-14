@@ -511,7 +511,7 @@
               text: "Explore your services, resources and traces"
 
     - action: pull-and-push-folder
-      branch: priyanshi/rum_docs_revamp
+      branch: master
       globs:
         - docs/rum_collection/*
       options:
