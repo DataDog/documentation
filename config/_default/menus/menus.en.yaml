@@ -1498,6 +1498,10 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
     weight: 404
+  - name: Request Flow Map
+    url: tracing/trace_search_and_analytics/request_flow_map
+    parent: trace_search_and_analytics
+    weight: 405
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
