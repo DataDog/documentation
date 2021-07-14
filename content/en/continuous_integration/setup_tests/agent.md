@@ -20,7 +20,7 @@ There are two ways to set up the Agent in a CI environment:
 
 ## Installing the Agent on each CI worker node
 
-If you are running tests on an on-premises CI provider, where test processes have network access to the underlying worker host, install the Datadog Agent on each worker node the [Agent installation instructions][2].
+If you are running tests on an on-premises CI provider, where test processes have network access to the underlying worker host, install the Datadog Agent on each worker node following the [Agent installation instructions][2].
 
 Once the Agent is installed and running, the tracer can send test results to `localhost:8126`.
 
