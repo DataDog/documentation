@@ -2230,6 +2230,21 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
+  - name: Data Collected
+    url: real_user_monitoring/ios/data_collected/
+    parent: rum_ios
+    identifier: rum_ios_data_collected
+    weight: 301
+  - name: Advanced Configuration
+    url: real_user_monitoring/ios/advanced_configuration/
+    parent: rum_ios
+    identifier: rum_ios_advanced
+    weight: 302
+  - name: Troubleshooting
+    url: real_user_monitoring/ios/troubleshooting/
+    parent: rum_ios
+    identifier: rum_troubleshooting_ios
+    weight: 304
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
