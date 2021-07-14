@@ -131,6 +131,22 @@ components:
           description: AWS external_id.
           type: string
       type: object
+    AWSAccountDeleteRequest:
+      description: List of AWS accounts to delete.
+      properties:
+        access_key_id:
+          description: Your AWS access key ID. Only required if your AWS account is
+            a GovCloud or China account.
+          type: string
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        role_name:
+          description: Your Datadog role delegation name.
+          example: DatadogAWSIntegrationRole
+          type: string
+      type: object
     AWSAccountListResponse:
       description: List of enabled AWS accounts.
       properties:
@@ -16473,7 +16489,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AWSAccount'
+              $ref: '#/components/schemas/AWSAccountDeleteRequest'
         description: AWS request object
         required: true
       responses:

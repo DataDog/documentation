@@ -105,7 +105,6 @@ main_left:
     url: 'https://docs.datadoghq.com/api'
     weight: 17
     parent: product
-
   - identifier: customers
     name: Customers
     url: 'https://www.datadoghq.com/customers/'
