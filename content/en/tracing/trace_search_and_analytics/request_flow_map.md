@@ -32,11 +32,11 @@ No additional configuration is required to use these flow maps, and they are pow
 
 {{< img src="tracing/live_search_and_analytics/request_flow_map/RUMService.gif" alt="RUM service link from flow map" style="width:100%;">}}
 
-Try the [request flow map in the app][5]. Start by scoping the query to something that will load quickly in the map, such as your favorite service.
+Try the [request flow map in the app][5]. To get started, scope a simple query such as a single service or endpoint.
 
 ### Examples
 
-Use the request flow map to investigate your application's behavior. Examples:
+Use the request flow map to investigate your application's behavior:
 
 - Search for a [resource][6] that corresponds to a particular HTTP request.
 
