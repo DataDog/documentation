@@ -22,11 +22,11 @@ No additional configuration is required to use these flow maps, and they are pow
 
 - Click **Export** to save a PNG image of the current request flow map. This is a great way to generate a live architecture diagram, or one scoped to a specific user flow.
 
-{{< img src="tracing/live_search_and_analytics/request_flow_map/Overview.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Flow map side panel for service information" >}}
+{{< img src="tracing/live_search_and_analytics/request_flow_map/ServicePanel.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Flow map side panel for service information" >}}
 
 - Click any service on the map to view overall health and performance information for that service (throughput, latency, error rates, monitor status), along with infrastructure and runtime metrics.
 
-- The map automatically selects an appropriate layout based on the number of services present, and you can click **Cluster** or **Flow** to switch between the two available layouts. 
+- The map automatically selects an appropriate layout based on the number of services present, and you can click **Cluster** or **Flow** to switch between the two available layouts.
 
 - RUM Applications are represented on the request flow map if you have [connected RUM and Traces][4].
 
