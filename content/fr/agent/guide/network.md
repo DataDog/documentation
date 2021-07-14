@@ -22,16 +22,22 @@ further_reading:
 - L'intégralité du trafic est envoyé via SSL
 - Destinations des données :
 
-  - Données de l'[APM][1] : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
-  - Données des [live containers][2] : `process.`{{< region-param key="dd_site" code="true" >}}
-  - Données des [Logs][3] : `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} pour le trafic TCP, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} en HTTP, et plus encore. Consultez la liste d'[endpoints de logs][4] pour en savoir plus.
-  - Données des [ressources de l'orchestrateur][5] : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
-  - La destination des données des [logs HIPPA][6] est identique à celles de l'ensemble des [logs][3]. Toutefois, les endpoints hérités suivants sont également pris en charge :
+  - Données de l'[APM][1] : `trace.agent.`{{< region-param key="dd_site" code="true" >}}.
+  - Données des [live containers][2] et des [live Processes][3] : `process.`{{< region-param key="dd_site" code="true" >}}.
+  - Données des [logs][4] : `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} pour le trafic TCP, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} en HTTP, et plus encore. Consultez la liste complète des [endpoints de logs][5] pour en savoir plus.
+  - Données des [ressources de l'orchestrateur][6] : `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
+  - Données de [Real User Monitoring (RUM)][7] : `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}.
+  - Données de [profiling][8] : `intake.profile.`{{< region-param key="dd_site" code="true" >}}.
+  - Données des [logs HIPAA][9] : identiques à celles de tous les [logs][4]. Toutefois, les anciens endpoints suivants sont également pris en charge :
     - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
     - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Emplacements privés Synthetic][7] : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} pour les versions 0.1.6+ et `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} pour les versions 0.2.0+.
+  - Les workers des [emplacements privés Synthetic][10] se basent sur les endpoints ci-dessous pour envoyer les résultats des tests :
+      - `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} pour l'envoi des résultats des tests API avec des workers version 0.1.6 ou ultérieur. Pour les workers 1.5.0 ou ultérieur, c'est le seul endpoint que vous devez configurer.
+      - `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} pour l'envoi des résultats des tests Browser avec des workers version 0.2.0 ou ultérieur.
+      - `api.`{{< region-param key="dd_site" code="true" >}} pour l'envoi des résultats de test API avec des workers dont la version est antérieure à 0.1.5.
+
   - Toutes les autres données de l'Agent :
       - **Agents < 5.2.0** : `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
@@ -42,6 +48,7 @@ further_reading:
 
 - **Agent >= 7.18.0/6.18.0** : `api.`{{< region-param key="dd_site" code="true" >}}
 - **Agent < 7.18.0/6.18.0** : `app.`{{< region-param key="dd_site" code="true" >}}
+
 
 Tous ces domaines sont des entrées **CNAME** qui pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur la page `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
@@ -70,28 +77,10 @@ Les informations sont structurées au format JSON selon le schéma suivant :
 }
 ```
 
-{{< site-region region="us" >}}
-
 Chaque section possède un endpoint dédié, par exemple :
 
-- [https://ip-ranges.datadoghq.com/logs.json][1] pour les adresses IP utilisées afin de recevoir les données des logs via TCP, pour le site américain de Datadog.
-- [https://ip-ranges.datadoghq.com/apm.json][2] pour les adresses IP utilisées afin de recevoir les données d'APM, pour le site américain de Datadog.
-
-[1]: https://ip-ranges.datadoghq.com/logs.json
-[2]: https://ip-ranges.datadoghq.com/apm.json
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-Chaque section possède un endpoint dédié, par exemple :
-
-- [https://ip-ranges.datadoghq.eu/logs.json][1] pour les adresses IP utilisées afin de recevoir les données des logs via TCP, pour le site européen de Datadog.
-- [https://ip-ranges.datadoghq.eu/apm.json][2] pour les adresses IP utilisées afin de recevoir les données d'APM, pour le site européen de Datadog.
-
-[1]: https://ip-ranges.datadoghq.eu/logs.json
-[2]: https://ip-ranges.datadoghq.eu/apm.json
-
-{{< /site-region >}}
+- `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json` pour les adresses IP utilisées pour recevoir les données des logs via TCP ;
+- `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json` pour les adresses IP utilisées pour recevoir les données d'APM.
 
 ### Remarque
 
@@ -160,7 +149,19 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
 
 ## Utilisation d'un proxy
 
-Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la section [Configuration de l'Agent pour un proxy][8].
+Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la [section dédiée][11].
+
+## Mise en tampon côté Agent des données sur l'indisponibilité du réseau
+
+Si votre réseau n'est plus disponible, l'Agent stocke les métriques en mémoire.
+L'utilisation maximale de la mémoire pour le stockage des métriques est définie par le paramètre `forwarder_retry_queue_payloads_max_size`. Lorsque cette limite est atteinte, les métriques sont ignorées.
+
+L'Agent 7.27.0 et les versions ultérieures peuvent stocker les métriques sur disque une fois la limite de mémoire atteinte.
+Pour activer cette fonctionnalité, définissez le paramètre `forwarder_storage_max_size_in_bytes` sur une valeur positive correspondant au volume d'espace de stockage maximal, en octets, que l'Agent peut utiliser pour stocker les métriques sur disque.
+
+Les métriques sont stockées dans le dossier défini par le paramètre `forwarder_storage_path`, qui prend par défaut la valeur `/opt/datadog-agent/run/transactions_to_retry` pour les systèmes Unix et `C:\ProgramData\Datadog\run\transactions_to_retry` sous Windows.
+
+Pour veiller à ne pas utiliser tout l'espace de stockage, l'Agent stocke les métriques sur disque uniquement si le total d'espace de stockage utilisé est inférieur à 95 %. La valeur de cette limite est définie par le paramètre `forwarder_storage_max_disk_ratio`.
 
 ## Pour aller plus loin
 
@@ -168,9 +169,12 @@ Pour obtenir des instructions détaillées sur la configuration d'un proxy, cons
 
 [1]: /fr/tracing/
 [2]: /fr/infrastructure/livecontainers/
-[3]: /fr/logs/
-[4]: /fr/logs/log_collection/?tab=http#datadog-logs-endpoints
-[5]: /fr/infrastructure/livecontainers/#kubernetes-resources-1
-[6]: /fr/security/logs/#hipaa-enabled-customers
-[7]: /fr/synthetics/private_locations/#datadog-private-locations-endpoints
-[8]: /fr/agent/proxy/
+[3]: /fr/infrastructure/process/
+[4]: /fr/logs/
+[5]: /fr/logs/log_collection/?tab=http#datadog-logs-endpoints
+[6]: /fr/infrastructure/livecontainers/#kubernetes-resources-1
+[7]: /fr/real_user_monitoring/
+[8]: /fr/tracing/profiler/
+[9]: /fr/security/logs/#hipaa-enabled-customers
+[10]: /fr/synthetics/private_locations
+[11]: /fr/agent/proxy/

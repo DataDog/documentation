@@ -5,8 +5,10 @@ ddtype: crawler
 dependencies: []
 description: Utilisez xMatters comme canal de notification pour les alertes et les événements Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/xmatters/'
+draft: false
 git_integration_title: xmatters
 has_logo: true
+integration_id: xmatters
 integration_title: xMatters
 is_public: true
 kind: integration
@@ -20,7 +22,7 @@ version: '1.0'
 
 ## Présentation
 
-xMatters est une plateforme d'alerte informatique qui vous permet de connecter les personnes adéquates à votre chaîne d'outils pour renforcer la communication entre vos équipes et vos silos. xMatters automatise la communication afin que vous puissiez prévenir les pannes, mobiliser les bonnes personnes, résoudre les incidents majeurs et tenir les parties prenantes informées de manière proactive.
+xMatters est une plate-forme de disponibilité de services numériques qui empêche les problèmes technologiques de devenir des problèmes commerciaux. Les grandes entreprises, les SRE agiles et les équipes DevOps innovantes s'appuient sur son service proactif de réponse aux incidents, d'automatisation et de gestion pour conserver une haute visibilité et un contrôle des opérations, malgré l'environnement technologique actuel marqué par d'importantes fragmentations. xMatters pour Datadog intègre les utilisateurs à vos chaînes d'outils pour l'ensemble de vos équipes et silos.
 
 Associez Datadog à xMatters pour :
 
@@ -30,7 +32,7 @@ Associez Datadog à xMatters pour :
 - Configurer les options de réponse permettant de déclencher d'autres intégrations xMatters et de piloter le workflow pour des tâches telles que la création de tickets, la mise à jour des consoles, l'envoi de notifications supplémentaires ainsi que le lancement de conversations instantanées et de conférences téléphoniques
 - Ajouter des rapports et des analyses supplémentaires à vos processus opérationnels
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -59,6 +61,6 @@ L'intégration xMatters n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: https://support.xmatters.com/hc/en-us/articles/214369486
+[2]: https://help.xmatters.com/integrations/#cshid=DATADOG
 [3]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [4]: https://docs.datadoghq.com/fr/help/

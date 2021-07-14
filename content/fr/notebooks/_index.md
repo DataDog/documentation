@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /fr/graphing/notebooks/
 further_reading:
+  - link: 'https://www.datadoghq.com/blog/collaborative-notebooks-datadog/'
+    tag: Blog
+    text: Créer des récits axés sur les données grâce aux notebooks collaboratifs
   - link: /dashboards/screenboard/
     tag: Documentation
     text: Créer un screenboard
@@ -13,15 +16,15 @@ further_reading:
 ---
 ## Présentation
 
-Les notebooks combinent des graphiques et du texte au sein d'un format linéaire basé sur des cellules. Ils sont conçus pour explorer vos données et partager des histoires en créant des analyses de fin de projet, des enquêtes, des runbooks, des documents, etc.
+Les notebooks combinent des graphiques et du texte au sein d'un format linéaire basé sur des cellules. Ils facilitent l'exploration de vos données et le partage de récits en créant des analyses de fin de projet, des enquêtes, des runbooks, des documents, etc.
 
-{{< img src="notebooks/demo_notebook.png" alt="notebook de démonstration" style="width:100%;">}}
+{{< img src="notebooks/demo_notebook.png" alt="notebook de démonstration"  style="width:90%;">}}
 
 ## Collaboration en direct
 
 Les notebooks prennent en charge la collaboration en temps réel. Les indicateurs de présence indiquent à tout moment qui consulte votre notebook ; les indicateurs apparaissent également à côté de toute cellule en cours de modification par un autre utilisateur.
 
-{{< img src="notebooks/live_editing.png" alt="collaboration en direct dans les notebooks"  style="width:100%;">}}
+{{< img src="notebooks/live_editing.png" alt="collaboration en direct dans les notebooks"  style="width:90%;">}}
 
 Les modifications apportées à un notebook s'affichent automatiquement, sans qu'une actualisation soit nécessaire.
 
@@ -31,11 +34,15 @@ Tous les membres de votre équipe peuvent ouvrir ou modifier un notebook. Cepend
 
 Pour ajouter un commentaire, sélectionnez du texte ou passez le curseur sur un graphique. Le bouton **Add a comment** apparaît alors à droite de la cellule.
 
-{{< img src="notebooks/add_comment.png" alt="ajouter un commentaire au texte"  style="width:100%;">}}
+{{< img src="notebooks/add_comment.png" alt="ajouter un commentaire au texte"  style="width:90%;">}}
 
 Pour modifier ou supprimer un commentaire que vous avez ajouté, cliquez sur le menu dans le coin supérieur droit du commentaire.
 
-{{< img src="notebooks/edit_comment.png" alt="modifier un commentaire dans le notebook"  style="width:100%;">}}
+{{< img src="notebooks/edit_comment.png" alt="modifier un commentaire dans un notebook"  style="width:90%;">}}
+
+Consultez ou rouvrez les commentaires résolus dans l'historique des commentaires. Celui-ci se trouve dans le menu en forme d'engrenage des notebooks. 
+
+{{< img src="notebooks/comment_history.png" alt="modifier un commentaire dans un notebook"  style="width:90%;">}}
 
 Des notifications par e-mail sont envoyées aux auteurs de notebook lorsque de nouveaux commentaires sont ajoutés, ainsi qu'aux personnes à l'origine d'un commentaire en cas de réponse. Vous pouvez gérer vos paramètres de notifications en accédant à `Notifications` depuis le menu des réglages du notebook.
 
@@ -46,6 +53,10 @@ La [liste des notebooks][1] vous permet de consulter et de rechercher les notebo
 
 * **My Notebooks** : les notebooks que vous avez créés.
 * **Other Notebooks** : les notebooks créés par d'autres membres de votre équipe.
+
+La liste des notebooks comporte également des modèles prédéfinis ainsi que des tutoriels. Modifiez directement ces modèles et cliquez sur **Clone** pour enregistrer vos modifications.
+
+{{< img src="notebooks/templates.png" alt="modèles sur la page de la liste des notebooks"  style="width:80%;">}}
 
 ## Nouveau notebook
 
@@ -83,13 +94,22 @@ Pour insérer des cellules, utilisez le bouton **+** qui figure à gauche de la 
 
 ### Intervalles de temps
 
-Par défaut, toutes les cellules de graphique respectent le même intervalle de temps global que celui défini dans l'en-tête du notebook. Cependant, certaines cellules peuvent se dissocier de l'intervalle global et être définies sur un autre intervalle indépendant. Cela permet de comparer des métriques sur plusieurs intervalles de temps distincts au sein d'un notebook, une fonctionnalité particulièrement utile pour les enquêtes à la suite d'incidents.
+Par défaut, toutes les cellules des graphiques sont associées à l'intervalle global défini dans l'en-tête du notebook.
 
-Pour définir un intervalle de temps spécifique, cliquez sur l'icône en forme d'horloge dans le coin supérieur droit d'une cellule de graphique. Décochez ensuite la case *Lock this cell to global time frame* et définissez l'intervalle de temps souhaité :
-
-{{< img src="notebooks/time_selector.png" alt="Sélecteur d'intervalle" style="width:60%;">}}
+Pour afficher un autre intervalle, sélectionnez une option dans le sélecteur d'intervalle, ou manipulez directement un graphique. L'URL du notebook se met à jour afin de correspondre au nouvel intervalle, sans pour autant l'enregistrer dans le notebook.
 
 **Remarque** : si vous cliquez sur une cellule et la faites glisser pour zoomer sur un graphique, cela ne dissocie pas la cellule de l'intervalle de temps global. À la place, cette opération modifie l'intervalle de temps global du notebook.
+
+{{< img src="notebooks/global_time.png" alt="Sélecteur d'intervalle de notebook"  style="width:90%;">}}
+
+
+Pour enregistrer l'intervalle sélectionné en tant que paramètre par défaut du notebook, cliquez sur **Update Default**. Le bouton de réinitialisation annule toutes les modifications apportées à l'intervalle.
+
+Chaque cellule peut être dissociée de l'intervalle global et posséder son propre intervalle.
+
+{{< img src="notebooks/cell_time.png" alt="Sélecteur d'intervalle de cellule"  style="width:90%;">}}
+
+Pour afficher un autre intervalle pour une seule cellule, sélectionnez la cellule de votre choix, puis utilisez l'interrupteur pour la dissocier de l'intervalle global. Modifiez ensuite l'intervalle à l'aide du sélecteur l'intervalle, ou en manipulant le graphique. Les modifications apportées en mode édition sont enregistrées lorsque vous cliquez sur **Done**. Pour les annuler, cliquez sur **Cancel**.
 
 ### Agrandir un notebook
 

@@ -27,7 +27,7 @@ Install the [Datadog Lambda Extension][2] as a Lambda Layer on your Lambda funct
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
 ```
 
-For `EXTENSION_VERSION`, see the [latest release][3].
+The latest `EXTENSION_VERSION` is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 ### Configure the function
 

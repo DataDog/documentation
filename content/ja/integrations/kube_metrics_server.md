@@ -96,22 +96,23 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 {{< get-metrics-from-git "kube_metrics_server" >}}
 
 
-### サービスのチェック
-
-**kube_metrics_server.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
-
 ### イベント
 
 kube_metrics_server には、イベントは含まれません。
 
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
 
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/assets/service_checks.json
+[6]: https://docs.datadoghq.com/ja/help/

@@ -62,7 +62,7 @@ dependencies {
 
 Follow these steps to instrument the function:
 
-1. Install the Datadog Lambda Layer on your function. For `VERSION`, see the latest [release][5]:
+1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>

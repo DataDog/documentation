@@ -241,7 +241,7 @@
     "description": "Delete a Datadog-AWS integration matching the specified `account_id` and `role_name parameters`.",
     "summary": "Delete an AWS integration",
     "request_description": "AWS request object",
-    "request_schema_description": "Returns the AWS account associated with this integration."
+    "request_schema_description": "List of AWS accounts to delete."
   },
   "ListAWSAccounts": {
     "description": "List all Datadog-AWS integrations available in your Datadog organization.",
@@ -1021,14 +1021,6 @@
   "GetUsageTopAvgMetrics": {
     "description": "Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average. Use the month parameter to get a month-to-date data resolution or use the day parameter to get a daily resolution. One of the two is required, and only one of the two is allowed.",
     "summary": "Get all custom metrics by hourly average"
-  },
-  "GetUsageTrace": {
-    "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",
-    "summary": "Get hourly usage for Trace Search"
-  },
-  "GetTracingWithoutLimits": {
-    "description": "Get hourly usage for tracing without limits.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.",
-    "summary": "Get hourly usage for tracing without limits"
   },
   "ListUsers": {
     "description": "List all users for your organization.",
