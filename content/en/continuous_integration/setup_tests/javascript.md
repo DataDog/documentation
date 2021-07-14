@@ -40,19 +40,19 @@ For more information, see the [JavaScript tracer installation docs][4].
 
 1. Install the `jest-circus` test runner:
 
-    {{< code-block lang="bash" >}}
+```bash
 yarn add --dev jest-circus
-{{< /code-block >}}
+```
 
 **Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
 
-    {{< code-block lang="bash" >}}
+```bash
 yarn add --dev jest-circus@25.5.4
-{{< /code-block >}}
+```
 
 2. Configure a custom [testEnvironment][1] and [testRunner][2] in your `jest.config.js` or however you are configuring `jest`:
 
-    {{< code-block lang="javascript" filename="jest.config.js" >}}
+```javascript
 module.exports = {
   // ...
   testRunner: 'jest-circus/runner',
@@ -60,27 +60,33 @@ module.exports = {
   testEnvironment: '<rootDir>/testEnvironment.js',
   // ...
 }
-{{< /code-block >}}
+```
 
 And in `testEnvironment.js`:
 
-    {{< code-block lang="javascript" filename="testEnvironment.js" >}}
+```javascript
 require('dd-trace').init({
-  service: 'my-ui-app',  // Name of the service or library under test
-  flushInterval: 300000  // To guarantee test span delivery
+  // Only activates test instrumentation on CI
+  enabled: process.env.DD_ENV === 'ci',
+
+  // Name of the service or library under test
+  service: 'my-ui-app',
+
+  // To guarantee test span delivery
+  flushInterval: 300000
 })
 
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
-{{< /code-block >}}
+```
 
 <div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code> and <code>jest-environment-jsdom</code> are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed version is the same as the one of <code>jest</code>.</div>
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_ENV=ci npm test
-{{< /code-block >}}
+```
 
 
 [1]: https://jestjs.io/docs/en/configuration#testenvironment-string
@@ -88,19 +94,31 @@ DD_ENV=ci npm test
 {{% /tab %}}
 {{% tab "Mocha" %}}
 
-Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your `package.json`:
+Create a file in your project (for example, `init-tracer.js`) with the following contents:
 
-{{< code-block lang="javascript" filename="package.json" >}}
+```javascript
+require('dd-trace').init({
+  // Only activates test instrumentation on CI
+  enabled: process.env.DD_ENV === 'ci',
+
+  // Name of the service or library under test
+  service: 'my-ui-app'
+})
+```
+
+Add `--require ./init-tracer` to however you normally run your `mocha` tests, for example in your `package.json`:
+
+```javascript
 'scripts': {
-  'test': 'DD_SERVICE=my-ui-app mocha --require dd-trace/init'
+  'test': 'mocha --require ./init-tracer'
 },
-{{< /code-block >}}
+```
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_ENV=ci npm test
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
