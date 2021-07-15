@@ -1795,7 +1795,7 @@ main:
     pre: nav_dbm
     identifier: dbm
     weight: 160000
-  - name: Setting Up DBM
+  - name: Setting Up
     url: database_monitoring/setup/
     parent: dbm
     identifier: dbm_setup
@@ -1810,6 +1810,11 @@ main:
     parent: dbm_setup
     identifier: dbm_sql
     weight: 102
+  - name: Database Explorer
+    url: database_monitoring/explorer/
+    parent: dbm
+    identifier: dbm_explorer
+    weight: 2
   - name: Log Management
     url: logs/
     pre: nav_logs
