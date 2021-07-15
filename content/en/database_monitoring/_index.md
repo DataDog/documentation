@@ -1,0 +1,38 @@
+---
+title: Database Monitoring
+kind: documentation
+description: Learn about Database Monitoring and get started
+further_reading:
+- link: "/tk/tk/"
+  tag: "Documentation"
+  text: "tktk"
+  
+---
+
+Hero image or video
+
+Introduction
+
+## Getting started
+
+To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology and type:
+
+### Self-hosted databases
+
+{{< partial name="dbm/dbm-getting-started" >}}
+<p></p>
+
+### Managed databases
+
+{{< partial name="dbm/dbm-getting-started-managed" >}} 
+<p></p>
+
+## TK feature/use case 1
+<p></p>
+
+## TK feature/use case 2
+<p></p>
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

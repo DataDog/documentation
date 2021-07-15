@@ -1790,11 +1790,31 @@ main:
     parent: ci
     identifier: ci_troubleshooting
     weight: 6
+  - name: Database Monitoring
+    url: database_monitoring/
+    pre: nav_dbm
+    identifier: dbm
+    weight: 160000
+  - name: Setting Up DBM
+    url: database_monitoring/setup/
+    parent: dbm
+    identifier: dbm_setup
+    weight: 1
+  - name: Setting Up Postgres
+    url: database_monitoring/setup/postgres/
+    parent: dbm_setup
+    identifier: dbm_postgres
+    weight: 101
+  - name: Setting Up MySQL
+    url: database_monitoring/setup/mysql/
+    parent: dbm_setup
+    identifier: dbm_sql
+    weight: 102
   - name: Log Management
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 160000
+    weight: 170000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1952,7 +1972,7 @@ main:
     url: security_platform/
     pre: nav_security_monitoring
     identifier: security_platform
-    weight: 160000
+    weight: 180000
   - name: Security Monitoring
     url: security_platform/security_monitoring/
     parent: security_platform
@@ -2056,7 +2076,7 @@ main:
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 180000
+    weight: 190000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -2333,7 +2353,7 @@ main:
     url: network_monitoring/
     pre: nav_network
     identifier: nm_parent
-    weight: 190000
+    weight: 200000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -2398,7 +2418,7 @@ main:
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 200000
+    weight: 210000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -2505,12 +2525,12 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 210000
+    weight: 220000
   - name: Account Management
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 220000
+    weight: 230000
   - name: User management
     url: account_management/users/
     parent: account_management
@@ -2583,7 +2603,7 @@ main:
     url: security/
     pre: nav_security
     identifier: security
-    weight: 230000
+    weight: 240000
   - name: Agent
     url: security/agent/
     parent: security
@@ -2608,7 +2628,7 @@ main:
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 240000
+    weight: 250000
 footer_product:
   - name: Features
     url: 'https://www.datadoghq.com/product/'
