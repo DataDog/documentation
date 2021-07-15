@@ -23,6 +23,10 @@ Datadog Synthetic モニタリングのセットアップや構成で問題が�
 
 [Datadog 拡張機能][2]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなり、「Your website does not support being loaded through an iframe (このウェブサイトは iframe 経由の読み込みをサポートしていません )」と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。**Open in Popup** をクリックしてウェブサイトをポップアップで開き、その際のジャーニーを記録してください。
 
+#### 一部のアプリケーションは iframe に読み込まれますが、読み込まれないものもあります
+
+これは、アプリケーションと環境によって制限が異なることを意味します。そのため、一部は iframe で視覚化されますが、表示されないものもあります。
+
 #### iframe の上部に「We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup (iframe 内でサポートされていない HTTP リクエストを検知したため、ポップアップで記録を行う必要があります)」と表示されます
 
 これは `http` ページで手順を記録しようとしている場合に主に発生します。iframe レコーダーでは `https` のみサポートされています。ページをポップアップとして開くか、URL を `https` に変更してページの記録を開始してください。
