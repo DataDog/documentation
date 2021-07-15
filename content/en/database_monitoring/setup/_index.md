@@ -9,6 +9,12 @@ further_reading:
   
 ---
 
+{{< site-region region="us3,gov" >}} 
+
+Database Monitoring is not supported in this region.
+
+{{< /site-region >}}
+
 Datadog Database Monitoring requires you to configure your database install the Datadog Agent. Select your database technology and type to get started below
 
 ## Self-hosted databases
@@ -16,7 +22,7 @@ Datadog Database Monitoring requires you to configure your database install the 
 {{< partial name="dbm/dbm-getting-started" >}}
 <p></p>
 
-## Managed databases
+## Managed databases on Amazon RDS and Aurora
 
 {{< partial name="dbm/dbm-getting-started-managed" >}}
 <p></p>

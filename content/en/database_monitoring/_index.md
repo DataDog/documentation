@@ -11,6 +11,12 @@ further_reading:
 
 Hero image or video
 
+{{< site-region region="us3,gov" >}} 
+
+Database Monitoring is not supported in this region.
+
+{{< /site-region >}}
+
 Introduction
 
 ## Getting started

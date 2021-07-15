@@ -1800,21 +1800,26 @@ main:
     parent: dbm
     identifier: dbm_setup
     weight: 1
-  - name: Setting Up Postgres
+  - name: Postgres
     url: database_monitoring/setup/postgres/
     parent: dbm_setup
     identifier: dbm_postgres
     weight: 101
-  - name: Setting Up MySQL
+  - name: MySQL
     url: database_monitoring/setup/mysql/
     parent: dbm_setup
     identifier: dbm_sql
     weight: 102
-  - name: Database Explorer
-    url: database_monitoring/explorer/
+  - name: Query Metrics
+    url: database_monitoring/query_metrics/
     parent: dbm
-    identifier: dbm_explorer
+    identifier: dbm_query_metrics
     weight: 2
+  - name: Query Samples
+    url: database_monitoring/query_samples/
+    parent: dbm
+    identifier: dbm_query_samples
+    weight: 3
   - name: Log Management
     url: logs/
     pre: nav_logs
