@@ -88,7 +88,7 @@ For a full list of available parameters for instances, including `namespace` and
 
 1. [Launch the Datadog Agent][10].
 
-2. Use [this Prometheus DaemonSet `prometheus.yaml`][11] to launch a Prometheus pod already with the Autodiscovery configuration in it:
+2. Use the [Prometheus DaemonSet `prometheus.yaml`][11] to launch a Prometheus pod with the Autodiscovery configuration in it:
 
     Autodiscovery configuration:
 
