@@ -105,7 +105,7 @@ DD_ENV=ci npm test
 {{% /tab %}}
 {{< /tabs >}}
 
-## Additional configuration settings
+## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer. They can be either passed in on its `init()` function, or as environment variables:
 
@@ -121,20 +121,10 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`enabled`
-: Setting this to `false` completely disables the instrumentation.<br/>
-**Environment variable**: `DD_TRACE_ENABLED`<br/>
-**Default**: `true`
-
-`hostname`
-: The Datadog Agent hostname.<br/>
-**Environment variable**: `DD_TRACE_AGENT_HOSTNAME`<br/>
-**Default**: `localhost`
-
-`port`
-: The Datadog Agent trace collection port.<br/>
-**Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
-**Default**: `8126`
+`url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
+**Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][5] options can also be used.
 

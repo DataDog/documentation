@@ -81,7 +81,7 @@ All tests will be automatically instrumented.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Additional configuration settings
+### Configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
@@ -104,7 +104,7 @@ The following list shows the default values for key configuration settings:
 **Examples**: `local`, `ci`
 
 `--agent-url`
-: Datadog Agent URL for traces.<br/>
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
