@@ -42,12 +42,13 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 1. If you haven't already, set up the [Microsoft Azure integration][8] first.
 
-2. The extension only supports:
+2. The extension can be installed on the following resource types:
 
     - Azure App Service Web Apps
-    - Function Apps hosted on Premium or Standard App Service Plans (beta for extension v1.3.4+).
+    - **Beta** Function Apps hosted on Premium or Standard App Service Plans
     
-    **Notes**:
+    **Beta Notes**:
+      - Function tracing is supported in extension v 1.3.4+
       - Function Apps on consumption plans are not supported.
       - There are no billing implications for tracing Function apps during the beta period.
 
