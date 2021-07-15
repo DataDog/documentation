@@ -2609,6 +2609,11 @@ main:
     pre: nav_help
     identifier: help_top_level
     weight: 240000
+  - name: Aggregating Agents
+    url: agent/vector_aggregation/
+    parent: agent
+    identifier: vector_aggregation
+    weight: 13
 footer_product:
   - name: Features
     url: 'https://www.datadoghq.com/product/'
