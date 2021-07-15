@@ -1810,6 +1810,11 @@ main:
     parent: dbm_setup
     identifier: dbm_sql
     weight: 102
+  - name: Troubleshooting
+    url: database_monitoring/setup/troubleshooting/
+    parent: dbm_setup
+    identifier: dbm_troubleshooting
+    weight: 103
   - name: Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm

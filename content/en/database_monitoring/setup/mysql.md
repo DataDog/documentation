@@ -83,8 +83,11 @@ Text inside tab.
 {{< /tabs >}}
 
 ## Troubleshooting
-<p></p>
+
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][1]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /database_monitoring/setup/troubleshooting/#mysql
