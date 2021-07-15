@@ -106,11 +106,11 @@ require('dd-trace').init({
 })
 ```
 
-Add `--require ./init-tracer` to however you normally run your `mocha` tests, for example in your `package.json`:
+Add `--require init-tracer` to however you normally run your `mocha` tests, for example in your `package.json`:
 
 ```javascript
 'scripts': {
-  'test': 'mocha --require ./init-tracer'
+  'test': 'mocha --require init-tracer'
 },
 ```
 
