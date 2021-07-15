@@ -962,6 +962,12 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardGlobalTime:
+      description: Object containing the live span selection for the dashboard.
+      properties:
+        live_span:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+      type: object
     DashboardGlobalTimeLiveSpan:
       description: Dashboard global time live_span selection
       enum:
@@ -2253,6 +2259,7 @@ components:
       - rum
       - security_signals
       - profiles
+      - audit
       example: logs
       type: string
       x-enum-varnames:
@@ -2262,6 +2269,7 @@ components:
       - RUM
       - SECURITY_SIGNALS
       - PROFILES
+      - AUDIT
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -6910,6 +6918,8 @@ components:
           $ref: '#/components/schemas/WidgetAggregator'
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -8494,7 +8504,7 @@ components:
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
         global_time:
-          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+          $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
             setting for the shared dashboard.
@@ -11029,6 +11039,8 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         display_type:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
@@ -11119,6 +11131,8 @@ components:
       description: Updated top list widget.
       properties:
         apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
