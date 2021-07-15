@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_composer/'
 draft: false
 git_integration_title: google_cloud_composer
 has_logo: true
+integration_id: google-cloud-composer
 integration_title: "Google\_Cloud\_Composer"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Google Cloud Composer est un service d'orchestration de workflows entièrement 
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Composer.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

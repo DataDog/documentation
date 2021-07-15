@@ -131,6 +131,22 @@ components:
           description: AWS external_id.
           type: string
       type: object
+    AWSAccountDeleteRequest:
+      description: List of AWS accounts to delete.
+      properties:
+        access_key_id:
+          description: Your AWS access key ID. Only required if your AWS account is
+            a GovCloud or China account.
+          type: string
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        role_name:
+          description: Your Datadog role delegation name.
+          example: DatadogAWSIntegrationRole
+          type: string
+      type: object
     AWSAccountListResponse:
       description: List of enabled AWS accounts.
       properties:
@@ -2658,7 +2674,7 @@ components:
           type: integer
         message:
           description: Error message.
-          example: ''
+          example: Your browser sent an invalid request.
           type: string
       required:
       - code
@@ -9291,7 +9307,7 @@ components:
           description: Name of the error.
           example: ''
           type: string
-        statusCode:
+        status:
           description: Status Code of the error.
           format: int64
           type: integer
@@ -10561,6 +10577,10 @@ components:
     SyntheticsTestRequest:
       description: Object describing the Synthetic test request.
       properties:
+        allow_insecure:
+          description: Allows loading insecure content for an HTTP request in a multistep
+            test step.
+          type: boolean
         basicAuth:
           $ref: '#/components/schemas/SyntheticsBasicAuth'
         body:
@@ -13299,52 +13319,6 @@ components:
           description: Number of hourly recorded custom metrics for a given organization.
           items:
             $ref: '#/components/schemas/UsageTopAvgMetricsHour'
-          type: array
-      type: object
-    UsageTraceHour:
-      description: The hours of trace usage.
-      properties:
-        hour:
-          description: The hour for the usage.
-          format: date-time
-          type: string
-        indexed_events_count:
-          description: Contains the number of Indexed Spans indexed.
-          format: int64
-          type: integer
-      type: object
-    UsageTraceResponse:
-      description: A response containing trace usage.
-      properties:
-        usage:
-          description: Array with the number of hourly traces indexed for a given
-            organization.
-          items:
-            $ref: '#/components/schemas/UsageTraceHour'
-          type: array
-      type: object
-    UsageTracingWithoutLimitsHour:
-      description: Tracing without limits usage for a given organization for a given
-        hour.
-      properties:
-        hour:
-          description: The hour for the usage.
-          format: date-time
-          type: string
-        ingested_events_bytes:
-          description: Contains the total number of bytes ingested during a given
-            hour.
-          format: int64
-          type: integer
-      type: object
-    UsageTracingWithoutLimitsResponse:
-      description: Response containing the tracing without limits usage for each hour
-        for a given organization.
-      properties:
-        usage:
-          description: Get hourly usage for tracing without limits.
-          items:
-            $ref: '#/components/schemas/UsageTracingWithoutLimitsHour'
           type: array
       type: object
     User:
@@ -16515,7 +16489,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AWSAccount'
+              $ref: '#/components/schemas/AWSAccountDeleteRequest'
         description: AWS request object
         required: true
       responses:
@@ -20789,7 +20763,8 @@ paths:
           application/json:
             examples:
               dynamic-points:
-                description: TODO.
+                description: "Post time-series data that can be graphed on Datadog\u2019s
+                  dashboards."
                 summary: Dynamic Points
                 value:
                   series:
@@ -24344,108 +24319,6 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
-      x-undo:
-        type: safe
-  /api/v1/usage/traces:
-    get:
-      deprecated: true
-      description: 'Get hourly usage for trace search.
-
-
-        **Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.'
-      operationId: GetUsageTrace
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour.'
-        in: query
-        name: start_hr
-        required: true
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending **before** this hour.'
-        in: query
-        name: end_hr
-        required: false
-        schema:
-          format: date-time
-          type: string
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/UsageTraceResponse'
-          description: OK
-        '400':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-      summary: Get hourly usage for Trace Search
-      tags:
-      - Usage Metering
-      x-menu-order: 6
-      x-undo:
-        type: safe
-  /api/v1/usage/tracing-without-limits:
-    get:
-      deprecated: true
-      description: 'Get hourly usage for tracing without limits.
-
-
-        **Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.'
-      operationId: GetTracingWithoutLimits
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
-          for usage beginning at this hour.'
-        in: query
-        name: start_hr
-        required: true
-        schema:
-          format: date-time
-          type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
-          for usage ending
-
-          **before** this hour.'
-        in: query
-        name: end_hr
-        required: false
-        schema:
-          format: date-time
-          type: string
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/UsageTracingWithoutLimitsResponse'
-          description: OK
-        '400':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-      summary: Get hourly usage for tracing without limits
-      tags:
-      - Usage Metering
-      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/user:
