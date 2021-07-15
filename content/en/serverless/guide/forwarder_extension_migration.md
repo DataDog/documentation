@@ -13,8 +13,8 @@ This guide explains why you may wish to migrate from the [Datadog Forwarder][2] 
 
 The Datadog Lambda Extension offers the following advantages over the Datadog Forwarder:
 
-- **Cost savings**: The Forwarder converts metrics and traces to logs, which are then sent to Datadog. The Datadog Lambda Extension sends traces, metrics, and logs directly to Datadog, which diminishes the expense of CloudWatch Logs.
-- **Lower latency**: The Datadog Lambda Extension runs as a background task in a sidecar (similar to the Agent sidecar in container-based environments). As a result, the extension does not impact the latency of customer code.
+- **Cost savings**: The Forwarder converts logs to metrics and traces, which are then sent to Datadog. The Datadog Lambda Extension sends traces, metrics, and logs directly to Datadog, which diminishes the expense of CloudWatch Logs.
+- **Easy to set up**: Triggers need to be set up on the Forwarder for every new Lambda function. The Datadog Lambda Extension can be easily added as a Lambda layer. 
 
 ### Trade-offs
 
