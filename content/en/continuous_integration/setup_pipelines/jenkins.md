@@ -10,6 +10,11 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+## Compatibility
+
+Supported Jenkins versions:
+* Jenkins >= 2.164.1
+
 ## Prerequisite
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
@@ -145,9 +150,15 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 5. Configure the `Global Job Tags`.
 6. Save your configuration.
 
-**Global tags** (`globalTags`): A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance: `global_tag:global_value,global_tag2:${SOME_ENVVAR},${OTHER_ENVVAR}:global_tagvalue`
+**Global tags**
+: A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance.<br/>
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`<br/>
+**Example**: `key1:value1,key2:${SOME_ENVVAR},${OTHER_ENVVAR}:value3`
 
-**Global job tags** (`globalJobTags`): A comma-separated list of regexes to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol: `(.*?)_job_(*?)_release:someValue`
+**Global job tags**
+: A comma-separated list of regexes to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.<br/>
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
+**Example**: `(.*?)_job_(.*?)_release, owner:$1, release_env:$2, optional:Tag3`
 
 ## Visualize pipeline data in Datadog
 

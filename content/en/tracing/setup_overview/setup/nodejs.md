@@ -28,17 +28,26 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The NodeJS Tracer officially supports versions `>=8`. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The latest version of the NodeJS Tracer officially supports versions `>=12`. Versions `8` and `10` are supported in maintenance mode on the `0.x` release line. For more information about our Node version support and the supported versions, see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
 To add the Datadog tracing library to your Node.js applications, follow these steps:
 
-1. Install the Datadog Tracing library using npm:
+1. Install the Datadog Tracing library using npm for Node.js 12+:
 
-```sh
-npm install dd-trace --save 
-```
+    ```sh
+    npm install dd-trace --save
+    ```
+    If you need to trace end-of-life Node.js versions 10 or 8, install version 0.x of `dd-trace` by running:
+    ```
+    npm install dd-trace@latest-node10
+    ```
+    or
+    ```
+    npm install dd-trace@latest-node8
+    ```
+    For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
@@ -121,8 +130,8 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     ```sh
     DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
     ```
-    
-{{< site-region region="us3,eu,gov" >}} 
+
+{{< site-region region="us3,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -211,7 +220,7 @@ The address of the Agent that the tracer submits to.
 **Default**: `8126`<br>
 The port of the Trace Agent that the tracer submits to.
 
-`dogstatsd.port` 
+`dogstatsd.port`
 : **Environment variable**: `DD_DOGSTATSD_PORT`<br>
 **Default**: `8125`<br>
 The port of the DogStatsD Agent that metrics are submitted to.
@@ -229,7 +238,7 @@ Percentage of spans to sample as a float between `0` and `1`.
 : **Default**: `2000`<br>
 Interval (in milliseconds) at which the tracer submits traces to the Agent.
 
-`runtimeMetrics` 
+`runtimeMetrics`
 : **Environment variable**: `DD_RUNTIME_METRICS_ENABLED`<br>
 **Default**:  `false`<br>
 Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.

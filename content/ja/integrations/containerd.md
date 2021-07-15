@@ -99,19 +99,21 @@ CPU、メモリ、ブロック I/O、ヒュージページテーブルのメト�
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][4] を参照してください。
 
-### サービスのチェック
-
-Containerd には、Containerd Socket への接続の健全性を通知する `containerd.health` サービスチェックが含まれています。
-
 ### イベント
 
 Containerd チェックは、イベントを収集できます。`filters` を使用して関連イベントを選択します。詳細については、[サンプル containerd.d/conf.yaml][1] を参照してください。
+
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
+
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
 [2]: https://docs.datadoghq.com/ja/help/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/containerd/metadata.csv
+[5]: https://github.com/DataDog/integrations-core/blob/master/containerd/assets/service_checks.json

@@ -18,6 +18,7 @@ supported_os:
   - linux
   - mac_os
   - windows
+integration_id: sinatra
 ---
 ## Présentation
 
@@ -67,7 +68,7 @@ Ce logger utilise le format Apache Access commun et génère des logs au format 
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` avec :
 
@@ -87,7 +88,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
       Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
-3. [Redémarrez l'Agent][8]
+3. [Redémarrez l'Agent][8].
 
 [1]: http://sinatrarb.com
 [2]: https://app.datadoghq.com/account/settings#agent

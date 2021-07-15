@@ -96,6 +96,7 @@ Les alertes sont automatiquement regroupées en fonction de l'option choisie dan
 Les alertes simples agrègent vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies. Ces alertes sont particulièrement utiles pour surveiller une métrique issue d'un seul host ou une métrique agrégée à partir de nombreux hosts.
 
 Les alertes multiples appliquent l'alerte à chaque source en fonction des paramètres de votre groupe. Vous recevez une alerte pour chaque groupe qui répond aux conditions définies. Par exemple, vous pouvez regrouper `system.disk.in_use` par `host` et `device` pour recevoir une alerte distincte pour chaque appareil de host qui manque d'espace disque.
+Notez que si votre métrique transmet uniquement des données en fonction de `host` sans `device`, elle ne sera pas détectée par un groupe de monitors configurés pour les tags `host` et `device`. Vous pouvez utiliser des [variables de tag][4] pour chaque groupe évalué dans l'alerte multiple, afin d'intégrer dynamiquement dans les notifications des informations de contexte utiles.
 
 ### Définir vos conditions d'alerte
 
@@ -143,7 +144,7 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 
 Utilisez les seuils pour définir la valeur numérique à partir de laquelle une alerte doit se déclencher. En fonction de la métrique choisie, l'éditeur affiche l'unité utilisée (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog peut envoyer des notifications d'alerte et des notifications d'avertissement. Les monitors sont rétablis automatiquement en fonction du seuil d'alerte ou d'avertissement, mais des conditions supplémentaires peuvent être spécifiées. Pour en savoir plus sur les seuils de rétablissement, consultez la section [Qu'est-ce qu'un seuil de rétablissement ?][4].
+Datadog peut envoyer des notifications d'alerte et des notifications d'avertissement. Les monitors sont rétablis automatiquement en fonction du seuil d'alerte ou d'avertissement, mais des conditions supplémentaires peuvent être spécifiées. Pour en savoir plus sur les seuils de rétablissement, consultez la section [Qu'est-ce qu'un seuil de rétablissement ?][5].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -198,7 +199,7 @@ La durée (en secondes) correspondant au délai avant l'évaluation. La valeur d
 
 ### Notifications
 
-Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][5].
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][6].
 
 ## Pour aller plus loin
 
@@ -207,5 +208,6 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /fr/getting_started/tagging/using_tags/?tab=assignment
 [3]: /fr/dashboards/querying/#advanced-graphing
-[4]: /fr/monitors/faq/what-are-recovery-thresholds/
-[5]: /fr/monitors/notifications/
+[4]: /fr/monitors/notifications/?tab=is_alert#tag-variables
+[5]: /fr/monitors/faq/what-are-recovery-thresholds/
+[6]: /fr/monitors/notifications/

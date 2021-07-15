@@ -123,21 +123,18 @@ HANA テナント、シングルテナント、システムデータベースの
 {{< get-metrics-from-git "sap_hana" >}}
 
 
-### サービスのチェック
-
-**sap_hana.can_connect**:<br>
-Agent が監視対象の SAP HANA システムに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**sap_hana.status**:<br>
-監視対象の SAP HANA データベースが起動している場合は、`OK` を返します。それ以外の場合は、`CRITICAL` を返します。
-
 ### イベント
 
 SAP HANA には、イベントは含まれません。
 
+### サービスのチェック
+
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 [1]: https://www.sap.com/products/hana.html
 [2]: https://docs.datadoghq.com/ja/agent/
@@ -146,4 +143,5 @@ SAP HANA には、イベントは含まれません。
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

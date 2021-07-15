@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_platform/'
 draft: false
 git_integration_title: google_cloud_platform
 has_logo: true
+integration_id: google-cloud-platform
 integration_title: Google Cloud Platform
 is_public: true
 kind: インテグレーション
@@ -120,7 +121,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 2. トピックに `export-logs-to-datadog` のような明示的な名前を付け、_保存_します。
 
-#### ログを Datadog へ転送する Pub/Sub を構成する
+#### ログを Datadog に転送する
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
@@ -151,7 +152,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Stackdriver から Pub/Sub へログをエクスポートする
+#### Stackdriver からログをエクスポートする
 
 1. [ログエクスプローラーページ][37]に移動し、エクスポートするログを絞り込みます。
 2. **Actions** メニューから **Create Sink** を選択します。

@@ -16,13 +16,19 @@ further_reading:
 
 If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact Datadog's support team][1].
 
+## API tests
+
+### I'm seeing variations in network timings
+
+If you see a sudden spike or overall increase in your API test [timing metrics][2], this usually indicates a bottleneck or delay in the request. See this guide on [API Test Timings and Variations][3] to learn more.
+
 ## Browser tests
 
 ### Recording
 
 #### My website is not loading in the iframe
 
-After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up by clicking **Open in Popup** to record your journey.
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop up by clicking **Open in Popup** to record your journey.
 
 #### Some of my applications load in the iframe but some do not
 
@@ -36,17 +42,17 @@ This most likely means you are trying to record steps on an `http` page. Only `h
 
 #### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop up
 
-After downloading the [Datadog extension][2], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop up:
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop up:
 
 {{< img src="synthetics/recording_iframe.mp4" alt="Issues recording Browser test steps" video="true"  width="100%" >}}
 
-If that happens, ensure the [Datadog extension][3] has the permissions to read and change data on the intended websites by specifying your website in the `On specific sites` section or by toggling `On all sites`:
+If that happens, ensure the [Datadog extension][5] has the permissions to read and change data on the intended websites by specifying your website in the `On specific sites` section or by toggling `On all sites`:
 
 {{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true"  width="100%" >}}
 
 #### I'm unable to record steps on my application
 
-Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][4].
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected. To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][6].
 
 #### I don't see the login page in the recorder. What is happening?
 
@@ -94,37 +100,37 @@ To fix it, go edit your recording, open the advanced options of the step that is
 If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetic test.
 
 * Is your endpoint using **header-based authentication**?
-  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][5] or [Browser test][6].
-  * **Token based authentication**: extract your token with a first [HTTP test][5], create a [global variable][7] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][8] requiring the authentication token.
-  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][5] or [Browser test][6].
+  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser test][8].
+  * **Token based authentication**: extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser test][10] requiring the authentication token.
+  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser test][8].
   
 * Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
 
-* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][9].
+* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][11].
 
 ### Forbidden errors
 
 If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header.  This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
 
-Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][9] are allowed as traffic sources by your firewalls.
+Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][11] are allowed as traffic sources by your firewalls.
 
 ### Missing notifications
 
-Synthetic tests by default do not [renotify][10]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
+Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
 ## Private locations
 
 ### My private location containers sometimes get killed `OOM`.
 
-Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][13].
 
 ### My browser test results sometimes show `Page crashed` errors
 
-This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][11].
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][13].
 
 ### My tests are sometimes slower to execute 
 
-This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][11].
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][13].
 
 ### I'm seeing `TIMEOUT` errors on API tests executed from my private location
 
@@ -137,13 +143,15 @@ This might mean your private location is unable to reach the endpoint your API t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[3]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: https://chromeenterprise.google/policies/#ExtensionSettings
-[5]: /synthetics/api_tests/?tab=httptest#make-a-request
-[6]: /synthetics/browser_tests/#test-details
-[7]: /synthetics/settings/?tab=createfromhttptest#global-variables
-[8]: /synthetics/browser_tests/#use-global-variables
-[9]: https://ip-ranges.datadoghq.com/synthetics.json
-[10]: /synthetics/api_tests/?tab=httptest#notify-your-team
-[11]: /synthetics/private_locations#private-location-total-hardware-requirements
+[2]: /synthetics/metrics/#api-tests
+[3]: /synthetics/guide/api_test_timing_variations/
+[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[5]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
+[6]: https://chromeenterprise.google/policies/#ExtensionSettings
+[7]: /synthetics/api_tests/?tab=httptest#make-a-request
+[8]: /synthetics/browser_tests/#test-details
+[9]: /synthetics/settings/?tab=createfromhttptest#global-variables
+[10]: /synthetics/browser_tests/#use-global-variables
+[11]: https://ip-ranges.datadoghq.com/synthetics.json
+[12]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[13]: /synthetics/private_locations#private-location-total-hardware-requirements

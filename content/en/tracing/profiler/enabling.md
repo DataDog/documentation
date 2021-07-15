@@ -60,14 +60,20 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 
 - Datadog strongly recommends that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
 
+## Enabling the allocation profiler
+
+In dd-java-agent v0.83.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
+
+## Environment variables
+
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
+| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
 | `DD_SERVICE`                                     | String        | Your [service][3] name, for example, `web-backend`.     |
 | `DD_ENV`                                         | String        | Your [environment][7] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
-
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
@@ -76,6 +82,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 [5]: https://app.datadoghq.com/profiling
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[8]: /tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 

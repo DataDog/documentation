@@ -49,7 +49,7 @@ iframe {
 
 body {
     padding-top: 129px;
-    //@include media-breakpoint-down(md)
+
     @media (max-width: 991px) {
         padding-top: 65px;
     }
@@ -337,14 +337,16 @@ h5 {
     margin-top: 14px;
 }
 
-.announcement_banner.open ~ .container .main {
-    h2,
-    h3,
-    h4,
-    h5 {
-        &:before {
-            margin-top: -110px;
-            height: 110px;
+.announcement {
+    .main {
+        h2,
+        h3,
+        h4,
+        h5 {
+            &:before {
+                margin-top: -110px;
+                height: 110px;
+            }
         }
     }
 }
@@ -388,7 +390,8 @@ h5 {
     & > a,
     & p a,
     & ol li a,
-    & ul li a {
+    & ul li a,
+    & div > a {
         color: #4a4a4a;
         border-bottom: 1px solid $gray-600;
         &:hover {

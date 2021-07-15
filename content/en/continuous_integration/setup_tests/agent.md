@@ -20,7 +20,7 @@ There are two ways to set up the Agent in a CI environment:
 
 ## Installing the Agent on each CI worker node
 
-If you are running tests on an on-premises CI provider, where test processes have network access to the underlying worker host, install the Datadog Agent on each worker node the [Agent installation instructions][2].
+If you are running tests on an on-premises CI provider, where test processes have network access to the underlying worker host, install the Datadog Agent on each worker node by following the [Agent installation instructions][2].
 
 Once the Agent is installed and running, the tracer can send test results to `localhost:8126`.
 
@@ -82,7 +82,9 @@ In this case, no `DD_AGENT_HOST` is required because it is `localhost` by defaul
 Then, run your tests by providing your [Datadog API key][3] in the `DD_API_KEY` environment variable:
 
 {{< code-block lang="bash" >}}
-DD_API_KEY=<MY_API_KEY> docker-compose up --build --abort-on-container-exit tests
+DD_API_KEY=<MY_API_KEY> docker-compose up \
+  --build --abort-on-container-exit \
+  tests
 {{< /code-block >}}
 
 **Note:** In this case, also pass along all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][4].
@@ -110,7 +112,7 @@ resources:
           DD_HOSTNAME: "none"
           DD_INSIDE_CI: "true"
 
-jobs:	
+jobs:
   - job: test
     services:
       dd_agent: dd_agent

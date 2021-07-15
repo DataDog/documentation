@@ -49,7 +49,7 @@ Datadog アプリ内の[クイックスタート手順][6]に従って、最高�
 
 それ以外の場合は、以下の指示に従って、Datadog トレーシングライブラリをコードに追加します。
 
-## 自動でデータと収集
+## 自動インスツルメンテーション
 
 Datadog には、一連のライブラリとフレームワークをインスツルメントするためにすぐに使用できるサポートを提供する一連の接続可能パッケージがあります。このパッケージのリストは、[互換性要件][1]ページにあります。このインテグレーションをトレースするには、アプリケーションにパッケージをインポートし、各[インテグレーション][1]と併せて掲載されているコンフィギュレーション手順に従ってください。
 
@@ -85,12 +85,12 @@ func main() {
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
 {{% tab "コンテナ" %}}
 
-1. メインの [`datadog.yaml` コンフィギュレーションファイル][1]で `apm_non_local_traffic: true` を設定します
+1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
 2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
 
@@ -99,28 +99,33 @@ func main() {
 
 3. アプリケーションをインスツルメント化した後、トレースクライアントはデフォルトでトレースを `localhost:8126` に送信します。これが正しいホストとポートでない場合は、以下の環境変数を設定して変更します。
 
-`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
+   `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT`
 
-カスタムホスト名およびポートは、コードで設定することもできます。
+   カスタムホスト名およびポートは、コードで設定することもできます。
 
-```go
-package main
+    ```go
+    package main
 
-import (
-    "net"
+    import (
+        "net"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    addr := net.JoinHostPort(
-        "custom-hostname",
-        "1234",
+        "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
     )
-    tracer.Start(tracer.WithAgentAddr(addr))
-    defer tracer.Stop()
-}
-```
+
+    func main() {
+        addr := net.JoinHostPort(
+            "custom-hostname",
+            "1234",
+        )
+        tracer.Start(tracer.WithAgentAddr(addr))
+        defer tracer.Stop()
+    }
+    ```
+{{< site-region region="us3,eu,gov" >}} 
+
+4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
+
+{{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}

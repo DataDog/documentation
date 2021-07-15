@@ -155,6 +155,10 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
 
+## SLO status corrections
+
+Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -170,3 +174,5 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
 [11]: /monitors/monitor_types/event/
+[12]: /api/latest/service-level-objective-corrections/
+[13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

@@ -13,6 +13,7 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API Tests:" >}}
+    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API Test Timings and Troubleshooting Variations{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}Perform OR logic in API test assertions{{< /nextlink >}}
 {{< /whatsnext >}}
 
