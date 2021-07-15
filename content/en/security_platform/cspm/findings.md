@@ -52,15 +52,15 @@ In order to consume findings in logical groupings and mitigate the potential for
 
 Clicking on an individual finding that has **failed** to see details about the misconfigured resource, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 
-{{< img src="security_platform/cspm/findings/signal.png" alt="An example of a Signal" style="width:80%;">}}
+{{< img src="security_platform/cspm/findings/signal.png" alt="An example of a signal" style="width:80%;">}}
 
-From the top of the side panel, you can configure a rule, or send a notification to your colleagues by email, Slack, Teams, Pagerduty, Servicenow, Jira, and webhooks.
+From the top of the side panel, you can configure a rule, or send a notification to your colleagues by email, Slack, Microsoft Teams, Pagerduty, Servicenow, Jira, and webhooks.
 
-The top portion of the finding side panel also displays key information about where the misconfiguration(s) are occurring: an individual resource, a service, or a cloud account. See all tags associated with this grouping so you can quickly find this area within your infrastructure for deeper inspection. It also highlights the relevant compliance controls associated with the rule, and when the signal was first triggered by a finding.
+The top portion of the **Findings** side panel also displays key information about where misconfigurations are occurring: an individual resource, a service, or a cloud account. See all tags associated with this grouping so you can quickly find this area within your infrastructure for deeper inspection. It also highlights the relevant compliance controls associated with the rule, and when the signal was first triggered by a finding.
 
 Below is example message for a rule, including a description of misconfiguration and instructions for how to remediate the issue.
 
-{{< img src="security_platform/cspm/findings/message.png" alt="Failed signals in the side panel" style="width:80%;">}}
+{{< img src="security_platform/cspm/findings/message.png" alt="Message tab of the signals panel" style="width:80%;">}}
 
 The Findings tab displays all `evaluation:fail` resources that are triggering this signal.
 
@@ -68,7 +68,7 @@ The Findings tab displays all `evaluation:fail` resources that are triggering th
 
 **Note**: If using a service or account grouping, the signal triggers the first time a finding meets the grouping criteria, and is not re-triggered each time a new resource in this same service or account fail this rule. However, newly discovered findings are always associated with the signal and displays in list form under this tab.
 
-Lastly, the Related Issues tab shows other rules that have triggered signals on the same logic grouping: the same resource, service, or cloud account.
+The **Related Issues** tab shows other rules that have triggered signals on the same logic grouping: the same resource, service, or cloud account.
 
 ## Search and filter
 
