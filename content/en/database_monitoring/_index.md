@@ -28,7 +28,7 @@ To get started with Datadog Database Monitoring, configure your database and ins
 {{< partial name="dbm/dbm-getting-started" >}}
 <p></p>
 
-### Managed databases on Amazon RDS and Aurora
+### Managed databases
 
 {{< partial name="dbm/dbm-getting-started-managed" >}} 
 <p></p>

@@ -8,6 +8,11 @@ further_reading:
   text: "tktk"
   
 ---
+{{< site-region region="us3,gov" >}} 
+
+Database Monitoring is not supported in this region.
+
+{{< /site-region >}}
 
 ## Postgres
 <p></p>

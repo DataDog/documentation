@@ -1,17 +1,32 @@
 {{ $dot := . }}
 <div class="dbm-databases">
   <div class="container cards-dd">
+    <h4>Amazon RDS</h4>
     <div class="card-deck">
-      <a class="card" href="/database_monitoring/setup/postgres?tab=managed">
+      <a class="card" href="/database_monitoring/setup/postgres?tab=amazonrds">
         <div class="card-body text-center py-2 px-1">
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/postgres.png" "class" "img-fluid" "alt" "browser" "width" "200") }}
         </div>
       </a>
-      <a class="card" href="/database_monitoring/setup/mysql?tab=managed">
+      <a class="card" href="/database_monitoring/setup/mysql?tab=amazonrds">
         <div class="card-body text-center py-2 px-1">
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/mysql.png" "class" "img-fluid" "alt" "android" "width" "200") }}
         </div>
       </a>
     </div>
+    <h4>Amazon Aurora</h4>
+    <div class="card-deck">
+      <a class="card" href="/database_monitoring/setup/postgres?tab=aurora">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/postgres.png" "class" "img-fluid" "alt" "browser" "width" "200") }}
+        </div>
+      </a>
+      <a class="card" href="/database_monitoring/setup/mysql?tab=aurora">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/mysql.png" "class" "img-fluid" "alt" "android" "width" "200") }}
+        </div>
+      </a>
+    </div>
+
   </div>
 </div>

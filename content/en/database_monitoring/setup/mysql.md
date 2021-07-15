@@ -2,7 +2,7 @@
 ---
 title: Setting Up Database Monitoring for MySQL
 kind: documentation
-description: Install and configure Database Monitoring for MySQL, self-hosted or managed.
+description: Install and configure Database Monitoring for MySQL, self-hosted or Amazon RDS.
 further_reading:
 - link: "/tk/tk/"
   tag: "Documentation"
@@ -30,7 +30,12 @@ intro sentence
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
@@ -45,7 +50,12 @@ Text inside tab.
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
@@ -60,7 +70,12 @@ Text inside tab.
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
@@ -75,7 +90,12 @@ Text inside tab.
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 

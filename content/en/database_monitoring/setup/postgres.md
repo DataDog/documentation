@@ -29,7 +29,12 @@ intro sentence
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
@@ -44,7 +49,12 @@ Text inside tab.
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
@@ -59,7 +69,12 @@ Text inside tab.
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
@@ -74,7 +89,12 @@ Text inside tab.
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Managed" %}}
+{{% tab "Amazon RDS" %}}
+
+Text inside tab.
+
+{{% /tab %}}
+{{% tab "Aurora" %}}
 
 Text inside tab.
 
