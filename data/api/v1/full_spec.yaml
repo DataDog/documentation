@@ -962,6 +962,12 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardGlobalTime:
+      description: Object containing the live span selection for the dashboard.
+      properties:
+        live_span:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+      type: object
     DashboardGlobalTimeLiveSpan:
       description: Dashboard global time live_span selection
       enum:
@@ -8494,7 +8500,7 @@ components:
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
         global_time:
-          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+          $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
             setting for the shared dashboard.
