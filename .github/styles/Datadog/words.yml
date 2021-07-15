@@ -14,6 +14,7 @@ swap:
   'Datadog app': Datadog
   'Datadog product': 'Datadog|Datadog service'
   'front end': 'frontend'
+  'Note that': '**Note**:'
   'please': ''
   'reenable': re-enable
   'run time': runtime
