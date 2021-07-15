@@ -81,7 +81,7 @@ All tests will be automatically instrumented.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration settings
+## Configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
