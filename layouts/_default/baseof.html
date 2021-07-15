@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  {{ partialCached "header/header.html" . .Section }}
+  {{ partialCached "header/header.html" . }}
 
   <div class="container h-100 pt-1">
     <div class="row h-100 position-relative js-content-container">
@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  {{ partialCached "footer/footer.html" . .Section }}
+  {{ partialCached "footer/footer.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
   <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
