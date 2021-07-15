@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/'
 draft: false
 git_integration_title: google_cloud_loadbalancing
 has_logo: true
+integration_id: google-cloud-loadbalancing
 integration_title: "Google\_Cloud\_Load\_Balancing"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Google Cloud Load Balancing vous permet de répartir vos ressources informatique
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Load Balancing.
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 

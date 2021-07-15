@@ -104,7 +104,7 @@ The System Core check does not include any events.
 
 #### Service checks
 
-The System Core check does not include any service checks.
+{{< get-service-checks-from-git "system_core" >}}
 
 ## System Swap
 

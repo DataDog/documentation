@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tpu/'
 draft: false
 git_integration_title: google_cloud_tpu
 has_logo: true
+integration_id: google-cloud-tpu
 integration_title: "Google\_Cloud\_TPU"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Avec Google Cloud TPU, tous les chercheurs, ingénieurs, développeurs en ML ain
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud TPU.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

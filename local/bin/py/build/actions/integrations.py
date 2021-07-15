@@ -411,7 +411,8 @@ class Integrations:
         """
 
         if file_name.endswith("/assets/service_checks.json"):
-            key_name = file_name.split(sep)[2]
+            file_list = file_name.split(sep)
+            key_name = file_list[len(file_list)-3]
         else:
             key_name = basename(
                 dirname(normpath(file_name))
