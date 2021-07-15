@@ -105,7 +105,6 @@ main_left:
     url: 'https://docs.datadoghq.com/api'
     weight: 17
     parent: product
-
   - identifier: customers
     name: Customers
     url: 'https://www.datadoghq.com/customers/'
@@ -1511,6 +1510,10 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
     weight: 404
+  - name: Request Flow Map
+    url: tracing/trace_search_and_analytics/request_flow_map
+    parent: trace_search_and_analytics
+    weight: 405
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
@@ -1859,47 +1862,42 @@ main:
     parent: log_management
     identifier: log_configuration
     weight: 2
-  - name: Processing
-    url: logs/log_configuration/processing/
-    parent: log_configuration
-    identifier: log_processing
-    weight: 201
   - name: Pipelines
     url: logs/log_configuration/pipelines/
     parent: log_configuration
     identifier: log_pipelines
-    weight: 202
+    weight: 201
   - name: Processors
     url: logs/log_configuration/processors/
     parent: log_configuration
-    weight: 203
+    weight: 202
   - name: Attributes and Aliasing
-    url: logs/processing/attributes_naming_convention/
+    url: logs/log_collection/?tab=host#attributes-and-tags
     parent: log_processing
-    weight: 204
+    weight: 203
   - name: Attributes and Aliasing
     url: logs/log_configuration/attributes_naming_convention/
     parent: log_configuration
-    weight: 205
+    weight: 204
   - name: Generate Metrics
     url: logs/log_configuration/logs_to_metrics/
     parent: log_configuration
     identifier: log_to_metrics
-    weight: 206
+    weight: 205
   - name: Indexes
     url: logs/log_configuration/indexes
     parent: log_configuration
     identifier: log_indexes
-    weight: 207
+    weight: 206
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 208
+    weight: 207
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 209
+    weight: 208
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: log_management
@@ -2230,6 +2228,21 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
+  - name: Data Collected
+    url: real_user_monitoring/ios/data_collected/
+    parent: rum_ios
+    identifier: rum_ios_data_collected
+    weight: 301
+  - name: Advanced Configuration
+    url: real_user_monitoring/ios/advanced_configuration/
+    parent: rum_ios
+    identifier: rum_ios_advanced
+    weight: 302
+  - name: Troubleshooting
+    url: real_user_monitoring/ios/troubleshooting/
+    parent: rum_ios
+    identifier: rum_troubleshooting_ios
+    weight: 304
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
@@ -2595,6 +2608,11 @@ main:
     pre: nav_help
     identifier: help_top_level
     weight: 240000
+  - name: Aggregating Agents
+    url: agent/vector_aggregation/
+    parent: agent
+    identifier: vector_aggregation
+    weight: 13
 footer_product:
   - name: Features
     url: 'https://www.datadoghq.com/product/'

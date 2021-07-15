@@ -131,6 +131,22 @@ components:
           description: AWS external_id.
           type: string
       type: object
+    AWSAccountDeleteRequest:
+      description: List of AWS accounts to delete.
+      properties:
+        access_key_id:
+          description: Your AWS access key ID. Only required if your AWS account is
+            a GovCloud or China account.
+          type: string
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        role_name:
+          description: Your Datadog role delegation name.
+          example: DatadogAWSIntegrationRole
+          type: string
+      type: object
     AWSAccountListResponse:
       description: List of enabled AWS accounts.
       properties:
@@ -945,6 +961,12 @@ components:
         deleted_dashboard_id:
           description: ID of the deleted dashboard.
           type: string
+      type: object
+    DashboardGlobalTime:
+      description: Object containing the live span selection for the dashboard.
+      properties:
+        live_span:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
       type: object
     DashboardGlobalTimeLiveSpan:
       description: Dashboard global time live_span selection
@@ -8478,7 +8500,7 @@ components:
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
         global_time:
-          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+          $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
             setting for the shared dashboard.
@@ -16473,7 +16495,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AWSAccount'
+              $ref: '#/components/schemas/AWSAccountDeleteRequest'
         description: AWS request object
         required: true
       responses:

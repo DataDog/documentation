@@ -22,13 +22,9 @@ title: Android ログの収集
 
 ## セットアップ
 
-1. `build.gradle` ファイルでライブラリを依存関係として宣言し、Gradle 依存関係を追加します。
+1. モジュールレベルの `build.gradle` ファイルでライブラリを依存関係として宣言し、Gradle 依存関係を追加します。
 
     ```conf
-    repositories {
-        maven { url "https://dl.bintray.com/datadog/datadog-maven" }
-    }
-
     dependencies {
         implementation "com.datadoghq:dd-sdk-android:x.x.x"
     }
@@ -42,8 +38,8 @@ title: Android ログの収集
     class SampleApplication : Application() {
         override fun onCreate() {
             super.onCreate()
-            val configuration = Configuration.Builder().build()
-            val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+            val configuration = Configuration.Builder(logsEnabled = true, ...).build()
+            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
             Datadog.initialize(this, credentials, configuration, trackingConsent)
         }
     }
@@ -54,10 +50,10 @@ title: Android ログの収集
    class SampleApplication : Application() {
        override fun onCreate() {
           super.onCreate()
-          val configuration = Configuration.Builder()
+          val configuration = Configuration.Builder(logsEnabled = true, ...)
              .useEUEndpoints()
              .build()
-          val credentials = Credentials(<CLIENT_TOKEN>,<ENV_NAME>,<APP_VARIANT_NAME>,<APPLICATION_ID>)
+          val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
           Datadog.initialize(this, credentials, configuration, trackingConsent)
        }
    }
@@ -78,16 +74,16 @@ title: Android ログの収集
    * `TrackingConsent.GRANTED` に更新した場合: SDK は現在のバッチデータと将来的なデータをすべてデータ収集エンドポイントに直接送信します。
    * `TrackingConsent.NOT_GRANTED`: SDK はすべてのバッチデータを消去し、以後のデータも収集しません。
 
-   初期化に必要な認証情報では、アプリケーションのバリアント名も必要となることにご注意ください。これは適切な Proguard `mapping.txt` ファイルを有効化し、ビルド時の自動アップロードを行うために重要です。この操作により、Datadog ダッシュボードがスタックトレースの難読化を解除できるようになります。
+**注**: 初期化に必要な認証情報では、アプリケーションのバリアント名も必要となり、値 `BuildConfig.FLAVOR` (バリアントがない場合は空白の文字列) の使用が求められることにご注意ください。これは適切な ProGuard `mapping.txt` ファイルを有効化し、ビルド時の自動アップロードを行うために重要です。この操作により、難読化を解除された RUM エラースタックトレースを表示できるようになります。詳しくは、[Android ソースマッピングファイルのアップロードガイド][8]をご参照ください。
 
    ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されていることを確認します。
 
    ```kotlin
-    if(Datadog.isInitialized()){
+    if (Datadog.isInitialized()) {
         // your code here
     }
    ```
-   アプリケーションを書く際、`setVerbosity` メソッドを呼び出すことで開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
+   アプリケーションを書く際、 `setVerbosity` メソッドを呼び出すことで開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```
@@ -119,7 +115,7 @@ title: Android ログの収集
     ```kotlin
     try {
         doSomething()
-    } catch (e : IOException) {
+    } catch (e: IOException) {
         logger.e("Error while doing something", e)
     }
     ```
@@ -129,31 +125,35 @@ title: Android ログの収集
 5. (任意) - ログメッセージと一緒にマップを提供し、発行されたログに属性を追加します。マップの各エントリーは属性として追加されます。
 
     ```kotlin
-    logger.i("onPageStarted", attributes = mapOf("http.url", url))
+    logger.i("onPageStarted", attributes = mapOf("http.url" to url))
     ```
 
    Java では次のようにします。
 
     ```java
-    Logger.d(
-            "onPageStarted",
-            null,
-            new HashMap<String, Object>() {{
-                put("http.url", url);
-            }}
-    );
+    Map<String, Object> attributes = new HashMap<>();
+    attributes.put("http.url", url);
+    Logger.d("onPageStarted", null, attributes);
     ```
+
+6. バッチ処理前にログイベントで属性を変更する必要がある場合は、SDK の初期化時に `EventMapper<LogEvent>` を実装することで上記の処理を行えます。
+   ```kotlin
+      val config = Configuration.Builder(logsEnabled = true, ...)
+                        // ...
+                        .setLogEventMapper(logEventMapper)
+                        .build()
+   ```
+   **注**: `EventMapper<LogEvent>` の実装から null や異なるインスタンスが返された場合、イベントは削除されます。
 
 ## 高度なロギング
 
 ### ライブラリの初期化
 
-ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`DatadogConfig.Builder` の以下のメソッドを使用できます。
+ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`Configuration.Builder` の以下のメソッドを使用できます。
 
 | メソッド                           | 説明                                                                                                                                                                                                                                                             |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `setServiceName(<サービス名>)` | Datadog に送信されるすべてのログに添付される `service` [標準属性][4] のデフォルト値として `<SERVICE_NAME>` を設定します（各ロガーで上書きすることが可能です）。                                                                                                                                                           |
-| `setLogsEnabled(true)`     | Datadog へのログ送信を有効にするには、`true` に設定します。                                                                                                                                                                                                                                  |
+| `constructor(logsEnabled = true)`     | Datadog へのログ送信を有効にするには、`true` に設定します。                                                                                                                                                                                                                                  |
 | `addPlugin(DatadogPlugin, Feature)`   | 特定の機能 (CRASH、LOG、TRACE、RUM) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。 |
 
 ### ロガーの初期化
@@ -169,11 +169,6 @@ title: Android ログの収集
 | `setBundleWithTraceEnabled(true)`| アプリケーションでアクティブなトレースとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog ダッシュボードを使い指定されたトレース中に送信されたすべてのログを表示できます。                                                        |
 | `setBundleWithRumEnabled(true)`| アプリケーションで現在の RUM コンテキストとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog RUM Explorer 使い指定されたビューがアクティブの間に送信されたすべてのログを表示できます。                                                        |
 | `setLoggerName(<ロガー名>)`   | Datadog に送信されるすべてのログに添付される `logger.name` 標準属性の値として `<ロガー名>` を設定します。                                                                                                                                                                  |
-| `setVerbosity(Log.INFO)`         | ロガーの詳細度を設定します。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージがAndroid の Logcat に記録されます。
-
-    ```swift
-    Datadog.verbosityLevel = .debug
-    ```                                                                                                       |
 | `setSampleRate(<サンプルレート>)`   | このロガーのサンプリングレートを設定します。ロガーインスタンスが生成するすべてのログは、指定されたサンプリングレートに従いランダムにサンプリングされます (デフォルト 1.0 = すべてのログ)。**注**: Logcat ログはサンプリングされません。            |
 | `build()`                        | すべてのオプションを設定して新しいロガーインスタンスをビルドします。                                                                                                                                                                                                                       |
 
@@ -185,7 +180,7 @@ title: Android ログの収集
 
 ##### タグを追加
 
- `addTag("<タグキー>"","タグの値")` 関数を使い、指定されたロガーから送信されるすべてのログにタグを追加します。
+`addTag("<TAG_KEY>", "<TAG_VALUE>")` 関数を使い、指定されたロガーから送信されるすべてのログにタグを追加します。
 
 ```kotlin
 // これにより、"build_type:debug" タグまたは "build_type:release" タグが適宜追加されます

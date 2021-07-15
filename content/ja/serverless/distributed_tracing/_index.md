@@ -4,6 +4,7 @@ kind: ドキュメント
 aliases:
   - /ja/tracing/serverless_functions
   - /ja/tracing/setup_overview/serverless_functions/
+  - /ja/serverless/troubleshooting/serverless_apm_metrics/
 further_reading:
   - link: /tracing/
     tag: Documentation
@@ -11,6 +12,9 @@ further_reading:
   - link: '/tracing/trace_search_and_analytics/#live-search-for-15-minutes'
     tag: Documentation
     text: Live Search
+  - link: 'https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/'
+    tag: ブログ
+    text: Go および Java Lambda 関数のリアルタイム分散型トレーシング
 ---
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="トレースサーバーレス関数"  style="width:100%;">}}
 
@@ -20,7 +24,7 @@ Datadog Python、Node.js、Ruby、Go、Java トレースライブラリは、AWS
 
 ## トレーシングライブラリを選択
 
-{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Datadog で AWS Lambda をトレースするためのアーキテクチャ図" >}}
+{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Datadog で AWS Lambda をトレースするためのアーキテクチャ図" >}}
 
 <div class="alert alert-info"> サーバーレスモニタリングは初めてですか？<a href="/serverless/installation/">こちら</a>のインストール手順に従って開始します。</div>
 
@@ -72,7 +76,7 @@ Go サポート用の Datadog Lambda ライブラリとトレースライブラ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [Go][11] ライブラリをトレース。
 
-[Datadog のトレースライブラリ][7]または [AWS X-Ray インテグレーションのインストール][3]を使用して、Datadog でサーバーレス関数をトレースできます。[Datadog のトレースライブラリ][7]を使用していて、イベント駆動型アーキテクチャで複数の Lambda 関数トレースを接続する必要がある場合は、[こちら][8]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、トレースを拡張することをお勧めします。
+Go サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][7]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、[こちら][8]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、Datadog APM で AWS X-Ray トレースを拡張することをお勧めします。
 
 *上記にリストされていないサーバーレスリソースのトレースをご希望の場合は、[こちら][9]から機能リクエストを開いてください。*
 
@@ -83,7 +87,7 @@ Java サポート用の Datadog Lambda ライブラリとトレースライブ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [Java][13] ライブラリをトレース。
 
-[Datadog のトレースライブラリ][7]または [AWS X-Ray インテグレーションのインストール][3]を使用して、Datadog でサーバーレス関数をトレースできます。[Datadog のトレースライブラリ][7]を使用していて、イベント駆動型アーキテクチャで複数の Lambda 関数トレースを接続する必要がある場合は、[こちら][8]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、トレースを拡張することをお勧めします。
+Java サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][7]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、[こちら][8]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、Datadog APM で AWS X-Ray トレースを拡張することをお勧めします。
 
 *Java Lambda 関数用の Datadog のトレースライブラリに関してフィードバックがございましたら、[Datadog Slack コミュニティ][15]の [#serverless][14] チャネルで行われているディスカッションをご確認ください。*
 

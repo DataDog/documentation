@@ -17,7 +17,7 @@ def pull_and_push_folder(content, content_dir):
     :param content_dir: The directory where content should be put
     """
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
-        with open(file_name, mode="r+") as f:
+        with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
             file_content = f.read()
             # Replacing the master README.md by _index.md to follow Hugo logic
             if file_name.endswith("README.md"):
