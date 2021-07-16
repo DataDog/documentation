@@ -82,16 +82,19 @@ Graphs are created with the Datadog query editor. Notebooks support:
 * [Heatmap][5]
 * [Distribution][6]
 * [Log stream][7]
+* [Query value][8]
 
 #### Text
 
-Text in a notebook is formatted with [Markdown][8], which enables the use of headings, subheadings, links, images, lists, and code blocks.
+Text in a notebook is formatted with [Markdown][9], which enables the use of headings, subheadings, links, images, lists, and code blocks.
 
 ### Manipulating cells
 
-When an existing notebook is opened, the cells are in a closed state. To open a cell for editing, mouse over it and use `CMD + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Only one cell may be open at a time.
+To open a cell for editing, mouse over it and use `CMD + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Use **Cancel** to discard your changes to the cell. Only one cell may be open at a time.
 
-To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover, or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
+To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data.
+
+{{< img src="notebooks/export-to-dash.png" alt="Export Notebook graph to Dashboard"  style="width:90%;">}}
 
 ### Time frames
 
@@ -114,7 +117,7 @@ To view a different time frame on a single cell, edit the cell and use the toggl
 
 ### Expand
 
-Expand the graph by clicking on the expand icon on the right side of the cell. More details about full screen mode is available on the [Widgets][9] page.
+Expand the graph by clicking on the expand icon on the right side of the cell. More details about full screen mode is available on the [Widgets][10] page.
 
 ### Layout options
 
@@ -128,12 +131,21 @@ The following layout options are available by clicking the grid icon on the righ
 
 **Note**: Changing any of these settings only affects the targeted cell.
 
-<!--- KEEP- WILL RE-IMPLEMENT
 ### Link to individual cells
 
 Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
 
-When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute: a cell's URL remains the same even if it is moved to a new position within the notebook.--->
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute: a cell's URL remains the same even if it is moved to a new position within the notebook.
+
+## Sharing Notebooks
+
+Notebooks can be exported to PDF, Markdown, or any document editor. Use the **Share** menu in the upper right of a notebook to see sharing options.
+
+{{< img src="notebooks/sharing.png" alt="Notebook sharing menu"  style="width:50%;">}}
+
+To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
+
+{{< img src="notebooks/export-gdocs.jpeg" alt="Example exported Notebook in Googl Docs"  style="width:80%;">}}
 
 ## Further Reading
 
@@ -146,5 +158,6 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 [5]: /dashboards/widgets/heat_map/
 [6]: /dashboards/widgets/distribution/
 [7]: /dashboards/widgets/log_stream/
-[8]: https://daringfireball.net/projects/markdown/
-[9]: /dashboards/widgets/#full-screen
+[8]: /dashboards/widgets/query_value/
+[9]: https://daringfireball.net/projects/markdown/
+[10]: /dashboards/widgets/#full-screen
