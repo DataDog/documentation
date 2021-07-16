@@ -59,7 +59,7 @@ Datadog.configure do |c|
   # Configures the tracer to ensure results delivery
   c.ci_mode.enabled = true
 
-  # Name of the service or library under test
+  # The name of the service or library under test
   c.service = 'my-ruby-app'
 
   # Enables the Cucumber instrumentation
@@ -91,7 +91,7 @@ Datadog.configure do |c|
   # Configures the tracer to ensure results delivery
   c.ci_mode.enabled = true
 
-  # Name of the service or library under test
+  # The name of the service or library under test
   c.service = 'my-ruby-app'
 
   # Enables the RSpec instrumentation
