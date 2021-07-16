@@ -5,10 +5,10 @@ description: 'Learn about attributes and how to support a naming convention'
 aliases:
   - /logs/processing/attributes_naming_convention/
 further_reading:
-    - link: 'logs/processing/pipelines'
+    - link: 'logs/log_configuration/pipelines'
       tag: 'Documentation'
       text: 'Discover Datadog Pipelines'
-    - link: 'logs/processing/processors'
+    - link: 'logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Consult the full list of available Processors'
     - link: 'logs/logging_without_limits'
@@ -284,13 +284,13 @@ See the [associated documentation][28] for additional information.
 [10]: /integrations/amazon_elb/
 [11]: /integrations/nginx/
 [12]: /integrations/haproxy/
-[13]: /logs/processing/processors/#url-parser
-[14]: /logs/processing/processors/#user-agent-parser
+[13]: /logs/log_configuration/processors/#url-parser
+[14]: /logs/log_configuration/processors/#user-agent-parser
 [15]: /integrations/cassandra/
 [16]: /integrations/mysql/
 [17]: /integrations/amazon_rds/
 [18]: /integrations/elastic/
-[19]: /logs/processing/processors/#remapper
+[19]: /logs/log_configuration/processors/#remapper
 [20]: /tracing/app_analytics/search/
 [21]: /integrations/rsyslog/
 [22]: /integrations/nxlog/

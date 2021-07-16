@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/go-logging/"
   tag: "Blog"
   text: "How to collect, standardize, and centralize Golang logs"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/explorer/"
@@ -111,5 +111,5 @@ Tips for getting further with Go log collection:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /logs/processing/parsing/
+[2]: /logs/log_configuration/parsing
 [3]: /tracing/connect_logs_and_traces/go/

@@ -147,7 +147,7 @@ Set the corresponding `source` parameter to the same channel name to benefit fro
 
 Finally, [restart the Agent][2].
 
-[1]: /logs/processing/pipelines/#integration-pipelines
+[1]: /logs/log_configuration/pipelines/#integration-pipelines
 [2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
