@@ -274,7 +274,7 @@ details {
     &.nav-tabs {
         .nav-item {
             z-index: 1;
-            
+
             &:before {
                 content: none;
             }
@@ -390,7 +390,8 @@ h5 {
     & > a,
     & p a,
     & ol li a,
-    & ul li a {
+    & ul li a,
+    & .alert a {
         color: #4a4a4a;
         border-bottom: 1px solid $gray-600;
         &:hover {
@@ -959,5 +960,5 @@ dl {
         width: 100%;
     }
 }
-  
-  
+
+

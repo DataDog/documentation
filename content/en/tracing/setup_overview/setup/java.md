@@ -162,7 +162,7 @@ If a `setenv` file does not exist, create it in the `./bin` directory of the Tom
 {{% /tab %}}
 {{% tab "JBoss" %}}
 
-Add the following line to the end of `standalone.sh`:
+Add the following line to the end of `standalone.conf`:
 
 ```text
 JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"

@@ -74,7 +74,7 @@ Opsgenie インテグレーションには、サービスのチェック機能�
 
 ### ナレッジベース
 
-#### Datadog と OpsGenie を組み合わせて使用する方法
+#### Datadog と OpsGenie
 
 ##### Datadog から OpsGenie アラートを作成/確認/閉じる
 

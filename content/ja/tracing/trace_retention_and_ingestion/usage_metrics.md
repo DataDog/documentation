@@ -7,7 +7,7 @@ APM と Indexed Span の使用量を監視しているときに、数値が予�
 
 このドキュメントでは、Indexed Span と Ingested Span の消費を監視するために使用可能なメトリクスとデフォルトのダッシュボードについて詳しく説明します。Datadog APM プランには、Indexed Span と Ingested Span が含まれています。詳細については、[価格設定ドキュメント][3]を参照するか、[価格設定シナリオの例][4]をご覧ください。
 
-### トレース分析使用量ダッシュボード
+## トレース分析使用量ダッシュボード
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview.png" style="width:100%;" alt="Tracing without Limits 使用量ダッシュボード" >}}
 
@@ -19,13 +19,13 @@ Datadog は、APM の使用量、および Indexed Span と Ingested Span のボ
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.indexed_spans`
 
-これらのメトリクスは `env` と `service` でタグ付けされており、特定の環境とサービスの取り込みまたはインデックス化の制御を微調整する必要があるかどうかを判断するのに役立ちます。デフォルトのダッシュボード内でこれらのメトリクスを使用するか、独自のダッシュボードとモニターを作成して、保持フィルターの構成ミスを検出するか、モニターのしきい値を設定します。
+このメトリクス `datadog.estimated_usage.apm.ingested_spans` および `datadog.estimated_usage.apm.indexed_spans` は `env` と `service` でタグ付けされており、特定の環境とサービスの取り込みまたはインデックス化の制御を微調整する必要があるかどうかを判断するのに役立ちます。デフォルトのダッシュボード内でこれらのメトリクスを使用するか、独自のダッシュボードとモニターを作成して、保持フィルターの構成ミスを検出するか、モニターのしきい値を設定します。
 
 デフォルトの[トレース分析ダッシュボード][5]には、最も多い Indexed Span と Ingested Span がどこから来ているかを一目で確認できるウィジェットのグループがいくつかあります。このダッシュボードには、前述のように、 `env`、`service`、および一意の `env` と `service` の組み合わせのトップリストが含まれています。
 
 **注:** 請求はバイトに基づいていますが、ダッシュボードではバイトとスパンの両方の内訳を確認できます。
 
-### Indexed Span
+## Indexed Span
 
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="スパンのインデックス化" >}}
 

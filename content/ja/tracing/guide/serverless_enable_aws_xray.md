@@ -31,7 +31,7 @@ AWS X-Ray インテグレーションを最大限活用するには:
 - Serverless Framework プラグインを使用または手動で、Lambda 関数および API Gateway 上で有効にします。
 - Lambda 関数でトレーシングライブラリをインストールします。
 
-#### 推奨: Serverless Framework プラグインを使用する
+#### [推奨] Datadog Serverless Framework プラグイン
 
 [Datadog Serverless Framework プラグイン][3]は、Lambda 関数と API Gateway インスタンスの X-Ray を自動的に有効化します。また、このプラグインは [Datadog Lambda レイヤー][4]を Node.js および Python 関数に自動的に追加します。
 
