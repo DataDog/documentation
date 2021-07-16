@@ -33,10 +33,10 @@ To get started with Datadog Database Monitoring, configure your database and ins
 {{< partial name="dbm/dbm-getting-started-managed" >}} 
 <p></p>
 
-## TK feature/use case 1
+## TK feature/use case A
 <p></p>
 
-## TK feature/use case 2
+## TK feature/use case B
 <p></p>
 
 ## Further Reading
