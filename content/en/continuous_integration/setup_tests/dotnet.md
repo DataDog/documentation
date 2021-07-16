@@ -27,7 +27,7 @@ Supported test frameworks:
 
 ## Installing the .NET tracer
 
-To install (or update if already installed) the `dd-trace` command globally on the machine, run:
+To install or update the `dd-trace` command globally on the machine, run:
 
 {{< code-block lang="bash" >}}
 dotnet tool update -g dd-trace
@@ -41,7 +41,7 @@ To instrument your test suite, prefix your test command with `dd-trace`, providi
 dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-All tests will be automatically instrumented.
+All tests are automatically instrumented.
 
 ### Additional configuration settings
 
