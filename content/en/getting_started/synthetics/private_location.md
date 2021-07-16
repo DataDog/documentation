@@ -38,7 +38,7 @@ Once you've created and installed your private location, you can assign [Synthet
 1. Install [Docker][4] on a machine. To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 16.04][2].
 2. In the Datadog application, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
 3. Click **Add Private Location**.
-4. Fill out your private location details (only `Name` and `API key` fields are mandatory). Depending on where you installed your private location (such as behind a proxy), you may need to configure additional parameters. For more information, see [Private Locations Configuration Options][8]. 
+4. Fill out your private location details (only `Name` and `API key` fields are mandatory). Depending on where you installed your private location (such as behind a proxy), you may need to configure additional parameters. For more information, see [Private Locations Configuration Options][6]. 
 5. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
 6. Copy and paste your private location configuration file to your working directory.
 
@@ -66,10 +66,10 @@ You are now able to use your new private location just like a managed location t
 
 ## Run synthetic tests with your private location
 
-1. Create an [API test][2], [multistep API test][9], or [browser test][10] on any internal endpoint or application you want to monitor.
+1. Create an [API test][2], [multistep API test][7], or [browser test][8] on any internal endpoint or application you want to monitor.
 2. Under **Private Locations**, select your new private location:
 
-    {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign Synthetic test to private location"  style="width:75%;">}}
+    {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign a Synthetic test to a private location"  style="width:100%;">}}
 
 3. Continue filling out your test!
 
@@ -82,8 +82,6 @@ You are now able to use your new private location just like a managed location t
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/list
-[6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[8]: /synthetics/private_locations/configuration/#configuration-options
-[9]: /getting_started/synthetics/api_test#create-a-multistep-api-test
-[10]: /getting_started/synthetics/browser_test
+[6]: /synthetics/private_locations/configuration/#configuration-options
+[7]: /getting_started/synthetics/api_test#create-a-multistep-api-test
+[8]: /getting_started/synthetics/browser_test
