@@ -15,25 +15,25 @@ To report test results to Datadog, the [Datadog Agent][1] is required.
 
 There are two ways to set up the Agent in a CI environment:
 
-* Installing it as a long running process on each worker node (recommended for on-premises installations).
-* Running an ephemeral instance of it as a service container on each build (recommended for SaaS CI providers).
+* Install the Agent as a long running process on each worker node (recommended for on-premises installations).
+* Run an ephemeral instance of the Agent as a service container on each build (recommended for SaaS CI providers).
 
 ## Installing the Agent on each CI worker node
 
 If you are running tests on an on-premises CI provider, install the Datadog Agent on each worker node by following the [Agent installation instructions][2].
 
-If the CI provider is using a container-based executor, you will need to set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `localhost`) to an endpoint that is accessible from within build containers, as `localhost` inside the build will reference the container itself and not the underlying worker node where the Datadog Agent is running.
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `localhost`) to an endpoint that is accessible from within build containers, as `localhost` inside the build will reference the container itself and not the underlying worker node where the Datadog Agent is running.
 
-If you are using a Kubernetes executor, we recommend you use the [Datadog Admission Controller][3] which will automatically set the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+If you are using a Kubernetes executor, Datadog recommends using the [Admission Controller][3], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
 
 ## Installing the Datadog Agent as a service container on each build
 
-If you are using a SaaS CI provider with no access to the underlying worker nodes, you can run the Datadog Agent in a container as a build service. You can also use this method with an on-premises CI provider that use a container-based executor if [installing the Datadog Agent on each worker node](#installing-the-agent-on-each-ci-worker-node) is not an option.
+If you are using a SaaS CI provider with no access to the underlying worker nodes, run the Datadog Agent in a container as a build service. This method is also available for an on-premises CI provider that uses a container-based executor if [installing the Datadog Agent on each worker node](#installing-the-agent-on-each-ci-worker-node) is not an option.
 
-To run the Datadog Agent as container acting as a simple results forwarder, use the Docker image `datadog/agent:latest` and the following environment variables:
+To run the Datadog Agent as a container acting as a simple results forwarder, use the Docker image `datadog/agent:latest` and the following environment variables:
 
 `DD_API_KEY` (Required)
-: [Datadog API key][4] used to upload the test results.
+: The [Datadog API key][4] used to upload the test results.
 
 `DD_INSIDE_CI=true`
 : Disables the monitoring of the Datadog Agent container, as the underlying host is not accessible.
@@ -135,7 +135,7 @@ Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_
 {{% /tab %}}
 {{% tab "CircleCI" %}}
 
-To run the Agent in CircleCI, launch the agent container before running tests by using the [datadog/agent CircleCI orb][1], and stop it after to ensure results are sent to Datadog.
+To run the Agent in CircleCI, launch the Agent container before running tests by using the [datadog/agent CircleCI orb][1], and stop it after to ensure results are sent to Datadog.
 
 For example:
 
@@ -214,12 +214,12 @@ In this case, `DD_AGENT_HOST` is not required because it is `localhost` by defau
 Then, run your tests by providing your [Datadog API key][4] in the `DD_API_KEY` environment variable:
 
 {{< code-block lang="bash" >}}
-DD_API_KEY=<MY_API_KEY> docker-compose up \
+DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
   --build --abort-on-container-exit \
   tests
 {{< /code-block >}}
 
-**Note:** In this case, also pass along all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][6].
+**Note:** In this case, add all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][6].
 
 ## Further reading
 
