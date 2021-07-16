@@ -205,6 +205,15 @@ If the Datadog Plugin section does not appear in Jenkins configuration section, 
 3. Check that the `Enabled` checkbox is marked.
 4. If you enable the plugin here, restart your Jenkins instance using the `/safeRestart` URL path.
 
+### The CI Visibility option does not appear in the Datadog Plugin section.
+
+If the CI Visibility option does not appear in the Datadog Plugin section, make sure that the correct version is installed and restart the Jenkins instance. To do so:
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
+2. Search for `Datadog Plugin` in the **Installed** tab.
+3. Check that the installed version is correct.
+4. Restart your Jenkins instance using the `/safeRestart` URL path.
+
 ### The Plugin Tracer failed to initialized due to APM Java Tracer is used to instrument Jenkins
 
 If this error message appears in the **Jenkins Log**, make sure that you are not using the APM Java Tracer to instrument your Jenkins instance.
