@@ -41,15 +41,15 @@ You can also activate the integration at the GitLab [instance][3] level, by goin
 {{% /tab %}}
 {{% tab "GitLab &lt; 14.1" %}}
 
-You need to enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
+Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
 
-* For Omnibus installations:
+**Omnibus installations**
 
 {{< code-block lang="shell" >}}
 sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-* For installations from source:
+**From source installations**
 
 {{< code-block lang="shell" >}}
 sudo -u git -H bundle exec rails runner \
@@ -57,7 +57,7 @@ sudo -u git -H bundle exec rails runner \
   "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-* For Kubernetes installations:
+**Kubernetes installations**
 
 {{< code-block lang="shell" >}}
 kubectl exec -it <task-runner-pod-name> -- \
@@ -105,7 +105,7 @@ You can test the integration with the **Test settings** button (only available w
 
 As an alternative to using the native Datadog integration, you can use [webhooks][3] to send pipeline data to Datadog.
 
-<div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the one that is actively under development</div>
+<div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.</div>
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 * **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][5].
@@ -116,7 +116,7 @@ To set custom `env` or `service` parameters, add more query parameters in the we
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, both [Pipelines][4] and [Pipeline Executions][5] pages will start populating with data after pipelines finish.
+After the integration is successfully configured, the [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
