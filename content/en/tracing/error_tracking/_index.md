@@ -1,5 +1,5 @@
 ---
-title: APM Error Tracking
+title: Error Tracking
 kind: documentation
 further_reading:
 - link: "/tracing/error_tracking/explorer"
@@ -22,11 +22,13 @@ Datadog collects a lot of errors. It's critical to your system's health to monit
 
 ## How does it work?
 
-The Datadog tracers are collecting errors through existing integrations and manual instrumentation of the source code. The different error spans contained in a trace are processed by Error Tracking __whenever they are located in the uppermost service span__ (also called service entry span).
+The Datadog tracers are collecting errors through existing integrations and manual instrumentation of the source code. The different error spans within a trace are processed by Error Tracking __whenever they are located in the uppermost service span__ (also called service entry span).
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flamegraph with errors"  >}}
 
-Error Tracking computes a fingerprint for each individual error it processes using the error type, the error message as well as the different frames forming the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue.
+Error Tracking computes a fingerprint for each individual error span it processes using the error type, the error message as well as the different frames forming the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue.
+
+<div class="alert alert-info">Error Tracking is available for all the different languages supported by APM and does not require using a different SDK.</div>
 
 ## Further Reading
 
