@@ -1,48 +1,58 @@
 ---
-title: APM Error Tracking Explorer
+title: Error Tracking Explorer
 kind: documentation
-beta: true
+beta: false
 ---
 
 {{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}
 
 ## Explore your issues
 
-The Error Tracking Explorer allows you to explore all your different issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
-
-Each item listed in the Explorer is an issue and contains high-level information about the error:
+The Error Tracking Explorer allows you to visualize the list of ongoing issues: an issue is a group of similar errors that share the same fingerprint and which might need to be fixed depending on its criticity. Each item listed in the explorer surfaces high-level information about the related issue:
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
 -   Important information about the issue’s lifetime:
     -   When it was first and last seen
-    -   Graph of occurrences over time
-    -   Number of occurrences in the selected time period
+    -   Number of error occurrences in the selected time period
+    -   Graph of error occurrences over time in the selected time period
 
 ### Time range
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range"  >}}
 
-The time range appears on the very top right of the Explorer as a timeline. This feature allows you to display issues having error occurrences within the selected time period. Quickly change the time range by selecting a preset range from the dropdown.
+The time range appears on the very top right of the Explorer as a timeline. It allows you to display issues having error occurrences within the selected time period. Quickly change the time range by selecting a preset range from the dropdown.
 
 ### Facets
 
 {{< img src="real_user_monitoring/error_tracking/facet.png" alt="Error Tracking Facets"  >}}
 
-Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
+Error Tracking automatically indexes a predefined list of attributes from the underlying error occurrences and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of corresponding issues. Facets allow you to pivot or filter your issues: the Explorer returns all issues having at least one error occurrence in the selected time period matching the set of facets.
 
 ## Inspect an issue
 
 Click on any issue to open the issue panel and see more information about it.
 
+### Get a high-level overview
+
 {{< img src="real_user_monitoring/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel"  >}}
 
-The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand its lifecycle: first and last occurrence dates, total count, as well as the count over time for the given issue.
+The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand the issue's lifecycle: first and last occurrence dates with the related code versions as well as the total count of error occurrences since inception. A graph of error occurrences is also available up to 14 days in the past to give you an overview of the trend of the given issue.
+
+### Browse individual error occurrences
 
 {{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
 
-The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you information while troubleshooting, for example:
+The lower part of the issue panel gives you the ability to navigate error samples that were grouped into the related issue:
 
--   The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
--   Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
--   Information about the user, such as their browser or their OS with the related versions that were used when the error occurred.
+-   All ingested error spans for the past [15 minutes of live search][1]
+-   Error spans from the past 15 days that were indexed by [custom retention filters][2]
+
+Each error sample gives the information you need to understand why it happened and how to resolve it, for example:
+
+-   The error stack trace so that you understand where it happens in the source code.
+-   All the error span tags such as the resource or the operation name as well as an easy access to the related trace or to logs that have been linked to it.
+-   Insights about the health of the underlying host or container when this particular error occurred.
+
+[1]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[2]: /tracing/trace_retention_and_ingestion/#retention-filters
