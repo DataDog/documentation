@@ -145,7 +145,7 @@ Notebooks can be exported to PDF, Markdown, or any document editor. Use the **Sh
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
 
-{{< img src="notebooks/export-gdocs.jpeg" alt="Example exported Notebook in Googl Docs"  style="width:80%;">}}
+{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Googl Docs"  style="width:80%;">}}
 
 ## Further Reading
 
