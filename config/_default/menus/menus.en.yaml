@@ -1801,15 +1801,45 @@ main:
     identifier: dbm_setup
     weight: 1
   - name: Postgres
-    url: database_monitoring/setup/postgres/
+    url: database_monitoring/setup/postgres/selfhosted
     parent: dbm_setup
-    identifier: dbm_postgres
+    identifier: dbm_setup_postgres
     weight: 101
-  - name: MySQL
-    url: database_monitoring/setup/mysql/
-    parent: dbm_setup
-    identifier: dbm_sql
+  - name: Self-hosted
+    url: database_monitoring/setup/postgres/selfhosted
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup/postgres/rds
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_rds
     weight: 102
+  - name: Aurora
+    url: database_monitoring/setup/postgres/aurora
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_aurora
+    weight: 103
+  - name: MySQL
+    url: database_monitoring/setup/mysql/selfhosted
+    parent: dbm_setup
+    identifier: dbm_setup_mysql
+    weight: 102
+  - name: Self-hosted
+    url: database_monitoring/setup/mysql/selfhosted
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup/mysql/rds
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_rds
+    weight: 102
+  - name: Aurora
+    url: database_monitoring/setup/mysql/aurora
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_aurora
+    weight: 103
   - name: Troubleshooting
     url: database_monitoring/setup/troubleshooting/
     parent: dbm_setup

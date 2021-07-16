@@ -2,6 +2,9 @@
 title: Setting Up Database Monitoring for Postgres
 kind: documentation
 description: Install and configure Database Monitoring for Postgres, self-hosted or managed.
+code_lang: aurora
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
 - link: "/tk/tk/"
   tag: "Documentation"
@@ -22,39 +25,18 @@ intro sentence
 <p></p>
 
 ## Configure Postgres settings
+<p></p>
 
-{{< tabs >}}
-{{% tab "Self-hosted" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Grant the Agent access
 
 {{< tabs >}}
-{{% tab "Self-hosted" %}}
+{{% tab "Postgres ≥ 10" %}}
 
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
+{{% tab "Postgres ≤ 9.6" %}}
 
 Text inside tab.
 
@@ -63,43 +45,11 @@ Text inside tab.
 
 ## Install the Agent
 
-{{< tabs >}}
-{{% tab "Self-hosted" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{< /tabs >}}
+<p></p>
 
 ## Configure the Agent
 
-{{< tabs >}}
-{{% tab "Self-hosted" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{< /tabs >}}
+<p></p>
 
 ## Troubleshooting
 

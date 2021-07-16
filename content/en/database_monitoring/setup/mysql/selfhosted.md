@@ -1,8 +1,10 @@
-
 ---
 title: Setting Up Database Monitoring for MySQL
 kind: documentation
 description: Install and configure Database Monitoring for MySQL, self-hosted or Amazon RDS.
+code_lang: selfhosted
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
 - link: "/tk/tk/"
   tag: "Documentation"
@@ -24,38 +26,17 @@ intro sentence
 
 ## Configure MySQL settings
 
-{{< tabs >}}
-{{% tab "Self-hosted" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{< /tabs >}}
+<p></p>
 
 ## Grant the Agent access
 
 {{< tabs >}}
-{{% tab "Self-hosted" %}}
+{{% tab "MySQL ≥ 8.0" %}}
 
 Text inside tab.
 
 {{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
+{{% tab "MySQL 5.6 & 5.7" %}}
 
 Text inside tab.
 
@@ -64,43 +45,11 @@ Text inside tab.
 
 ## Install the Agent
 
-{{< tabs >}}
-{{% tab "Self-hosted" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{< /tabs >}}
+<p></p>
 
 ## Configure the Agent
 
-{{< tabs >}}
-{{% tab "Self-hosted" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Amazon RDS" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{% tab "Aurora" %}}
-
-Text inside tab.
-
-{{% /tab %}}
-{{< /tabs >}}
+<p></p>
 
 ## Troubleshooting
 
