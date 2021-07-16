@@ -20,11 +20,13 @@ The access to this feature is restricted - if you don't have access, reach out t
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications or any private URLs** that aren’t accessible from the public internet. They can also be used to:
+Private locations allow you to **monitor internal-facing applications** or any private URLs that aren’t accessible from the public internet. 
 
-* **Create custom Synthetic locations** in areas that are mission-critical to your business.
-* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetic CI/CD testing][1].
-* **Compare application performance** from both inside & outside your internal network.
+You can also use private locations to:
+
+- **Create custom locations** in mission-critical areas of your business.
+- **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic CI/CD Testing][1].
+- **Compare the application performance** from inside and outside your internal network.
 
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.
 
@@ -36,7 +38,7 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ### Docker
 
-The private location worker is shipped as a Docker container. The official [Docker image][3] is available on Docker Hub. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Docker Hub. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
 ### Datadog private locations endpoints
 
@@ -86,15 +88,23 @@ To pull test configurations and push test results, the private location worker n
 
 {{< /site-region >}}
 
+### Permissions
+
+By default, only users with the preset Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Admin and Standard users can view private locations, search for private locations, and assign Synthetic tests to private locations. 
+
+For more information, see the [Private locations permissions][18] documentation.
+
 ## Set up your private location
 
 ### Create your private location
 
-Go in _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ and click **Add Private Location**:
+In **Synthetic Monitoring** > **Settings** > **Private Locations**, click **Add Private Location**.
 
 {{< img src="synthetics/private_locations/add_pl.png" alt="create a private locations"  style="width:100%;">}}
 
-**Note**: Only **Admin** users can create private locations.
+**Note**: By default, only Admin users can create private locations. 
+
+Enable read and write permissions with `synthetics_private_location_read` and `synthetics_private_location_write`. Creating and modifying custom roles is an opt-in Enterprise feature. To get this feature enabled on your account, contact [Datadog support][17].
 
 Fill out your private location details: 
 
@@ -617,3 +627,5 @@ Although it's important to initially add resources that are consistent with the 
 [14]: /synthetics/browser_tests/?tab=requestoptions
 [15]: /synthetics/private_locations/configuration#advanced-configuration
 [16]: /agent/
+[17]: /help/
+[18]: /synthetics/settings/#private-locations
