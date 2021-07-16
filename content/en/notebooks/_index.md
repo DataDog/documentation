@@ -35,15 +35,15 @@ Everyone on your team can open or edit any notebook, but a notebook can only be 
 
 To add a comment, select some text or hover over a graph. The **Add comment** button will appear to the right of the cell.
 
-{{< img src="notebooks/add_comment.png" alt="add a comment to text"  style="width:90%;">}}
+{{< img src="notebooks/add_comment.png" alt="add a comment to text" style="width:90%;">}}
 
 To edit or delete a comment you wrote, click the menu on the top-right of your comment.
 
-{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook"  style="width:90%;">}}
+{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook" style="width:90%;">}}
 
 View or re-open resolved comments in the Comment History, available in the Notebook cog menu.
 
-{{< img src="notebooks/comment_history.png" alt="edit comment in notebook"  style="width:90%;">}}
+{{< img src="notebooks/comment_history.png" alt="edit comment in notebook" style="width:90%;">}}
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
@@ -57,7 +57,7 @@ The [Notebook List][1] allows you to view and search previously created notebook
 
 The Notebook List also displays preset templates and tutorials. Edit these templates directly, and click **Clone** to save your changes.
 
-{{< img src="notebooks/templates.png" alt="templates on the notebook list page"  style="width:80%;">}}
+{{< img src="notebooks/templates.png" alt="templates on the notebook list page" style="width:80%;">}}
 
 ## New Notebook
 
