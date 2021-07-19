@@ -80,7 +80,7 @@ Fill in the integration configuration settings:
 : Enables the integration.
 
 **Datadog site**
-: Specifies which [Datadog site][1] to send data to. Only `datadoghq.com` is currently supported.<br/>
+: Specifies which [Datadog site][1] to send data to. Only `datadoghq.com` is supported.<br/>
 **Default**: `datadoghq.com`<br/>
 **Possible values**: `datadoghq.com`
 
