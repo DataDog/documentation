@@ -32,16 +32,14 @@ Carbon Black provides a Postman collection for the API that you use to create th
 
 #### Configuration
 
-- [Install Datadog's Lambda function][1]
-- [Create a bucket in your AWS Management Console][2] to forward events to. 
-- [Configure the S3 Bucket to allow the Carbon Black forwarder to write data][3]
-- [Create an access level in the Carbon Black Cloud console][4]
-- [Create an API key in the Carbon Black Cloud console][5]
-- [Configure the API in Postman][6]
-  - Update the current value of the following Postman enviroment variables `cb_url`, `cb_org_key`, `cb_custom_id`, `cb_custom_key` with the key created above 
-- [Create a Carbon Black event forwarder][7]
-  - Create two forwarders with different names for Carbon Black alerts(`"type": "alert"`) and endpoint events(`"type": "endpoint.event"`)
-- [Setup the Datadog Lambda to trigger on the S3 bucket][8]
+1. [Install the Datadog Forwarder][1].
+2. [Create a bucket in your AWS Management Console][2] to forward events to. 
+3. [Configure the S3 bucket to allow the Carbon Black forwarder to write data][3].
+4. [Create an access level in the Carbon Black Cloud console][4].
+5. [Create an API key in the Carbon Black Cloud console][5].
+6. [Configure the API in Postman][6] by updating the value of the following Postman environment variables with the key created above: `cb_url`, `cb_org_key`, `cb_custom_id`, and `cb_custom_key`.
+7. [Create two Carbon Black event forwarders][7] with different names for Carbon Black alerts (`"type": "alert"`) and endpoint events (`"type": "endpoint.event"`).
+8. [Setup the Datadog Forwarder to trigger on the S3 bucket][8].
 
 
 ## Troubleshooting
