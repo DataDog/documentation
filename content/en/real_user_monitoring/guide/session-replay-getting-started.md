@@ -23,7 +23,7 @@ To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the fo
 Session Replay is available through a dedicated build of the RUM Browser SDK. To enabling Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
-Replace the `@datadog/browser-rum package` with `[@datadog/browser-rum-recorder][2]` When `datadogRum.init()` is called, it also starts the Session Replay recording.
+Replace the `@datadog/browser-rum package` with [`@datadog/browser-rum-recorder`][2] When `datadogRum.init()` is called, it also starts the Session Replay recording.
 
 ``` javascript
 import { datadogRum } from '@datadog/browser-rum-recorder'
@@ -106,7 +106,7 @@ Several reasons might explain why assets are not available at the time of the re
 2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
 3. The resource is blocked by the browser due to CORS (typically, web-fonts). 
 The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
-The fix is thus to allow `app.datadoghq.com through` the `[Access-Control-Allow-Origin][5]` header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
+The fix is thus to allow `app.datadoghq.com through` the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
 To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
 
 ### CSS rules not properly applied / mouse hover not replayed 
@@ -124,7 +124,7 @@ For example, if your application is on the `example.com` domain and depends on a
       href="https://assets.example.com/style.css”>
 ```
 
-Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the `[Access-Control-Allow-Origin][5]` header.
+Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the [`Access-Control-Allow-Origin`][5] header.
 
 ## Frequently asked questions
 
