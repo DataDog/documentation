@@ -44,8 +44,9 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
+4. **Recommendation**: Specify the `service` and `version` so you can slice and dice your profiles across these dimensions. [Use environment variables](#environment-variables) to set the parameters.
 
+5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
 
 **Note**:
 
@@ -57,8 +58,6 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     # Bad:
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
-
-- Datadog strongly recommends that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
 
 ## Enabling the allocation profiler
 
