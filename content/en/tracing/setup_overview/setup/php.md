@@ -302,6 +302,11 @@ CSV of URI mappings to normalize resource naming for incoming requests (see [Map
 : **Default**: `null`<br>
 CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
+`DD_TRACE_RETAIN_THREAD_CAPABILITIES`
+: **Default**: `false`<br>
+Only effective under linux. Set to `true` to retain capabilities on datadog background threads upon change of the effective user id. This option will not affect most setups, but some modules - to date Datadog is only aware of [apache's mod-ruid2](https://github.com/mind04/mod-ruid2) - may invoke setuid() or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br>
+**Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. It is recommended to restrict the capabilities of the web server with the `setcap` utility.
+
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `1.0`<br>
 The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions < `0.36.0`, this parameter is `DD_SAMPLING_RATE`.
