@@ -46,21 +46,17 @@ supported_os:
 
 このインテグレーションを設定するには、アクティブな [StackPulse アカウント][2]と、そのアカウント所有者のロールが必要です。また、Datadog の適切な管理者権限も必要となります。
 
-### StackPulse で
+### StackPulse
 
 1. **Monitoring** 下の **Integrations** ページで、**Datadog** カードにアクセスして [**New**][2] をクリックします。
-
-    ![Datadog カード][3]
 
 2. インテグレーションに意味のある名前を入力し、**Add** をクリックします。
 
 3. 新規作成した Webhook エンドポイントを**コピー**します。
 
-### Datadog で
+### Datadog
 
-1. **Integrations** に移動して [**Webhooks**][4] カードを選択します。
-
-    ![Datadog Webhook カード][5]
+1. **Integrations** に移動して [**Webhooks**][3] カードを選択します。
 
 2. **New** をクリックして新しい Webhook インテグレーションを追加します。
 
@@ -107,15 +103,13 @@ supported_os:
     }
     ```
 
-5. StackPulse プレイブックをトリガーするモニターを選択し、**Alert Your Team** フィールドに新規作成した Webhook インテグレーションへの参照を追加します。詳しくは[モニターの管理についての DataDog ドキュメント][6]を参照してください。
+5. StackPulse プレイブックをトリガーするモニターを選択し、**Alert Your Team** フィールドに新規作成した Webhook インテグレーションへの参照を追加します。詳しくは[モニターの管理についての DataDog ドキュメント][4]を参照してください。
 
 6. **Integrations -> APIs** に移動して **API Keys** カードを選択します。**New API Key** 下で新しいキーに対して意味のある名前を入力し、**Create API Key** をクリックした後に新しいキーを**コピー**します。
 
 ### StackPulse での追加設定
 
-1. **Secrets** 下の **Integrations** ページで **Datadog API Keys** カードにアクセスし、[**Add**][7] をクリックします。
-
-    ![Datadog API Keys カード][8]
+1. **Secrets** 下の **Integrations** ページで **Datadog API Keys** カードにアクセスし、[**Add**][5] をクリックします。
 
 2. インテグレーションに意味のある名前を入力し、**Add** をクリックします。
 
@@ -127,7 +121,7 @@ StackPulse インテグレーションは、メトリクスを提供しません
 
 ### イベント
 
-StackPulse インテグレーションでは、[Datadog ポストイベント][9]ステップを使用して Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
+StackPulse インテグレーションでは、[Datadog ポストイベント][6]ステップを使用して Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
 
 ### サービスのチェック
 
@@ -135,15 +129,12 @@ StackPulse インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://stackpulse.com
 [2]: https://stackpulse.com/get-started/
-[3]: ./images/datadog_card.png
-[4]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[5]: ./images/datadog_app_webhook.png
-[6]: https://docs.datadoghq.com/ja/monitors/manage_monitor/
-[7]: https://app.stackpulse.io/integrations/datadog%20api%20keys?create=true
-[8]: ./images/datadog_api_card.png
-[9]: https://github.com/stackpulse/steps/tree/master/steps/datadog/post-event
-[10]: https://docs.datadoghq.com/ja/help/
+[3]: https://app.datadoghq.com/account/settings#integrations/webhooks
+[4]: https://docs.datadoghq.com/ja/monitors/manage_monitor/
+[5]: https://app.stackpulse.io/integrations/datadog%20api%20keys?create=true
+[6]: https://github.com/stackpulse/steps/tree/master/steps/datadog/post-event
+[7]: https://docs.datadoghq.com/ja/help/
