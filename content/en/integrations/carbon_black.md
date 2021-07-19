@@ -19,7 +19,7 @@ integration_id: "carbonblack"
 
 ## Overview
 
-Use the Datadog-Carbon Black integration in order to forward your Carbon Black EDR events and alerts as Datadog logs.
+Use the Datadog-Carbon Black integration to forward your Carbon Black EDR events and alerts as Datadog logs.
 
 
 ## Setup
