@@ -28,7 +28,7 @@ Use the Datadog-Carbon Black integration to forward your Carbon Black EDR events
 
 Datadog uses Carbon Black's event forwarder and Datadog's Lambda forwarder to collect Carbon Black events and alerts from your S3 bucket.
 
-Carbon Black provides a Postman collection for the API that you use to create the Carbon Black event forwarder.
+Carbon Black provides a [Postman collection][10] for the API that you use to create the Carbon Black event forwarder.
 
 #### Configuration
 
@@ -55,3 +55,4 @@ Need help? Contact [Datadog support][9].
 [7]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-forwarder
 [8]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
 [9]: /help/
+[10]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest
