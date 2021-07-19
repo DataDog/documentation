@@ -106,7 +106,7 @@ Several reasons might explain why assets are not available at the time of the re
 2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
 3. The resource is blocked by the browser due to CORS (typically, web-fonts). 
 The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
-The fix is thus to allow `app.datadoghq.com through` the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
+The fix is thus to allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
 To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
 
 ### CSS rules not properly applied / mouse hover not replayed 
