@@ -13,7 +13,7 @@ further_reading:
       text: 'Manage your permissions with the Permission API'
 ---
 
-Once your roles are created, assign or remove permission to this role directly by [updating the role in the Datadog application][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.
+After creating roles assign or remove permission to this role directly by [updating the role in Datadog][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.
 
 ## Overview
 

@@ -1,5 +1,5 @@
 ---
-title: Usage details
+title: Usage Details
 kind: documentation
 ---
 
@@ -20,15 +20,15 @@ Certain product tabs also contain additional tools:
 
 ## Month-to-date summary
 
-This section summarizes your month-to-date usage. In the "All" tab, you will see your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs and any other part of the platform you've used during the month. 
+This section summarizes your month-to-date usage. In the "All" tab, view your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs, and any other part of the platform you've used during the month. 
 
 {{< img src="account_management/billing/usage-details-v2-01.png" alt="Usage Summary - All tab" >}}
 
-In product specific tabs, you will see your month-to-date usage of the products in that product category.
+In product specific tabs, view your month-to-date usage of the products in that product category.
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
-The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts will also be able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view also breaks out on-demand usage above your commitments and allocations.
+The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view also breaks out on-demand usage above your commitments and allocations.
 
 {{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
 
@@ -66,7 +66,7 @@ This section contains hourly, daily, monthly, and annual usage:
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
 
-In product specific tabs, you will see your hourly, daily, monthly, and annual usage of the products in that product category. In the Infrastructure tab, you will also see a breakdown of the **Infra Hosts** graph by host type:
+In product specific tabs, view your hourly, daily, monthly, and annual usage of the products in that product category. In the Infrastructure tab, see a breakdown of the **Infra Hosts** graph by host type:
 
 * Agent Hosts
 * AWS Hosts
@@ -83,7 +83,7 @@ Most accounts have access to the feature Included Lines, which allows you to see
 
 ## Top custom metrics
 
-In the Custom Metrics tab, this table lists the following information about your Top 5000 custom metrics month-to-date usage and most recent day usage (i.e., usage on the date of the last update):
+In the Custom Metrics tab, the table lists the following information about your Top 5000 custom metrics month-to-date usage and most recent day usage (such as usage on the date of the last update):
 
 * Metric name
 * Average custom metrics per hour
@@ -92,13 +92,13 @@ In the Custom Metrics tab, this table lists the following information about your
 
 This data can be downloaded as a CSV file.
 
-For more details on your metrics, navigate to the [Metrics Summary][5] from the Usage page by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
+For more details on your metrics, navigate to the [Metrics Summary][3] from the Usage page by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
 {{< img src="account_management/billing/usage-metrics-04.png" alt="Meter icon on a row for a custom metric" >}}
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][6]. The following information is provided:
+In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][4]. The following information is provided:
 
 * Index name
 * Retention period in days
@@ -111,13 +111,13 @@ This data can be downloaded as a CSV file.
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][3].
+For technical questions, contact [Datadog support][5].
 
-For billing questions, contact your [Customer Success][4] Manager.
+For billing questions, contact your [Customer Success][6] Manager.
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /developers/metrics/custom_metrics/
-[3]: /help/
-[4]: mailto:success@datadoghq.com
-[5]: https://docs.datadoghq.com/metrics/summary/#overview
-[6]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
+[3]: https://docs.datadoghq.com/metrics/summary/#overview
+[4]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
+[5]: /help/
+[6]: mailto:success@datadoghq.com
