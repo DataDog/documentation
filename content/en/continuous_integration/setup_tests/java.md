@@ -143,7 +143,7 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{% /tab %}}
 {{< /tabs >}}
 
-## Additional configuration settings
+## Configuration settings
 
 The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
 
@@ -159,20 +159,10 @@ The following system properties set configuration options and have environment v
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`dd.trace.enabled`
-: Setting this to `false` completely disables the instrumentation.<br/>
-**Environment variable**: `DD_TRACE_ENABLED`<br/>
-**Default**: `true`
-
-`dd.agent.host`
-: The Datadog Agent hostname.<br/>
-**Environment variable**: `DD_AGENT_HOST`<br/>
-**Default**: `localhost`
-
-`dd.trace.agent.port`
-: The Datadog Agent trace collection port.<br/>
-**Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
-**Default**: `8126`
+`dd.trace.agent.url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
+**Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][2] options can also be used.
 

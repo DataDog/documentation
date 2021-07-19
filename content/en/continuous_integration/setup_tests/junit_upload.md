@@ -40,7 +40,7 @@ DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
   unit-tests/junit-reports e2e-tests/single-report.xml
 {{< /code-block >}}
 
-## Additional configuration settings
+## Configuration settings
 
 This is the full list of options available when using the `datadog-ci junit upload` command:
 
