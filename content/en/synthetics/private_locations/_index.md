@@ -90,7 +90,7 @@ To pull test configurations and push test results, the private location worker n
 
 ### Permissions
 
-By default, only users with the preset Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Admin and Standard users can view private locations, search for private locations, and assign Synthetic tests to private locations. 
+By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Admin and Standard users can view private locations, search for private locations, and assign Synthetic tests to private locations. 
 
 For more information, see the [Private locations permissions][18] documentation.
 

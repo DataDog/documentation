@@ -31,11 +31,11 @@ Enable access to the **Settings** page by creating a new role or modifying a def
 ## Global variables
 
 <div class="alert alert-warning">
-RBAC restrict access to global variables is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
 Variables are global and can be used by multiple [API tests][5] and [browser tests][6]. 
 
-To create a new global variable, go to the [Global Variables][7] tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
+To create a global variable, go to the [Global Variables][7] tab of the **Settings** page, and click **New Global Variable** in the upper right corner.
 
 Enable read and write permissions with `synthetics_global_variable_read` and `synthetics_global_variable_write`. Creating and modifying custom roles is an opt-in Enterprise feature. To get this feature enabled on your account, contact [Datadog support][8].
 
@@ -49,7 +49,7 @@ Choose the type of variable you want to create:
 3. Select **Tags** to associate with your variable (optional).
 4. Enter the **Value** you want to assign to your variable.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
-6. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC][1] documentation.
+6. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
 {{< img src="synthetics/settings/variable_value.png" alt="Global Variable Specify Value"  style="width:100%;">}}
 
