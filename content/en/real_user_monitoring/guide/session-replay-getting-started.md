@@ -113,7 +113,7 @@ To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article
 
 Unlike fonts and images, the recorder tries to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it falls back to recording the links to the CSS files.
 
-Note that for proper mouse hover support, the CSS rules must be accessible via the CSSStyleSheet interface.
+**Note**: For proper mouse hover support, the CSS rules must be accessible through the CSSStyleSheet interface.
 
 If the stylesheets are hosted on a different domain than the web page, access to the CSS rules is subject to cross-origin security checks by the browser, and the browser must be instructed to load the stylesheet leveraging CORS using the [crossorigin][8] attribute.
 
