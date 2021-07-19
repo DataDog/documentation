@@ -46,7 +46,7 @@ Carbon Black provides a Postman collection for the API that you use to create th
 
 Need help? Contact [Datadog support][9].
 
-[1]: https://docs.datadoghq.com/serverless/libraries_integrations/forwarder/
+[1]: /serverless/libraries_integrations/forwarder/
 [2]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
 [3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
 [4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level
