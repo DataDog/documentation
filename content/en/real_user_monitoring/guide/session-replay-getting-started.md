@@ -20,7 +20,7 @@ Used in combination with RUM performance data, Session Replay can be an asset fo
 
 To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the following sections: application creation, client token generation, and RUM SDK setup.
 
-Session Replay is available through a dedicated build of the RUM Browser SDK. To enabling Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
+Session Replay is available through a dedicated build of the RUM Browser SDK. To enable Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
 Replace the `@datadog/browser-rum package` with [`@datadog/browser-rum-recorder`][2] When `datadogRum.init()` is called, it also starts the Session Replay recording.
@@ -98,7 +98,7 @@ Session Replay does not support the following HTML elements at the moment: `ifra
 
 ### Fonts or images do not render properly
 
-A Session Replay is not video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts & images.
+A Session Replay is not a video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts & images.
 
 Several reasons might explain why assets are not available at the time of the replay.
 
