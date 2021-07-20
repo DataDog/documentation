@@ -264,9 +264,9 @@ Tag your signals with different tags, for example, `security:attack` or `techniq
 
 ### Template variables
 
-Security rules support template variables within the markdown box. Template variables allow you to inject dynamic context from triggering logs directly into the security signal and associated notifications.
+Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from triggered logs directly into a security signal and it's associated notifications.
 
-For example, if a rule detects when a user logs in from an IP address known to be malicious, the message can clearly state which user and IP address triggered a given signal.
+For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message will state which user and IP address triggered a given signal when using the specified template variable.
 
 ```text
 The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
@@ -278,7 +278,7 @@ Template variables also permit deep linking into Datadog or a partner portal for
 * [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
 ```
 
-Epoch template variables can be used to create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string.
+Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification.
 
 ```text
 {{eval "first_seen_epoch-15*60*1000"}}
