@@ -2,7 +2,7 @@
 title: 'サービスチェック送信: Agent チェック'
 kind: documentation
 further_reading:
-  - link: /developers/write_agent_check/
+  - link: /developers/custom_checks/write_agent_check/
     tag: ドキュメント
     text: Agent カスタムチェックの書き方
 ---
@@ -81,7 +81,7 @@ class MyClass(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/write_agent_check/
+[1]: /ja/developers/custom_checks/write_agent_check/
 [2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
 [4]: /ja/agent/guide/agent-commands/#agent-information

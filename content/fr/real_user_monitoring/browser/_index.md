@@ -22,13 +22,18 @@ Pour configurer la surveillance Browser RUM de Datadog :
 
 **Remarque** : votre application affiche le statut « Pending » (en attente) sur la liste des applications tant que Datadog n'a pas encore reçu de données.
 
+**Navigateurs pris en charge** : le SDK RUM prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles, y compris IE11. Consultez le tableau des [navigateurs pris en charge][8].
+
 ### Choisir la bonne méthode d'installation
 
-| Méthode d'installation        | Cas d'utilisation                                                                                                                                                                                                                                                                                                         |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npm (node package manager) | Cette méthode est recommandée pour les applications Web modernes. Le SDK RUM est inclus dans le package avec le reste de votre code JavaScript frontend. Les performances de chargement des pages ne sont pas affectées. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK.                            |
-| CDN asynchrone                  | Cette méthode est recommandée pour les applications Web devant satisfaire des objectifs de performance. Le SDK RUM est chargé à partir de notre CDN de façon asynchrone : ainsi, le téléchargement du SDK n'affecte pas les performances de chargement des pages. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK. |
-| CDN synchrone                   | Cette méthode est recommandée pour recueillir tous les événements RUM. Le SDK RUM est chargé à partir de notre CDN de façon synchrone : ainsi, le SDK est chargé en premier et recueille toutes les erreurs, ressources et actions utilisateur. Cette méthode peut avoir un impact sur les performances de chargement des pages.                                                     |
+npm (node package manager)
+: Cette méthode est recommandée pour les applications Web modernes. Le SDK RUM est inclus dans le package avec le reste de votre code JavaScript frontend. Les performances de chargement des pages ne sont pas affectées. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK. **Remarque :** si vous avez recours au SDK de logs, il est recommandé d'utiliser une version correspondante.
+
+CDN asynchrone
+: Cette méthode est recommandée pour les applications Web devant satisfaire des objectifs de performance. Le SDK RUM est chargé à partir de notre CDN de façon asynchrone : ainsi, le téléchargement du SDK n'affecte pas les performances de chargement des pages. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK.
+
+CDN synchrone
+: Cette méthode est recommandée pour recueillir tous les événements RUM. Le SDK RUM est chargé à partir de notre CDN de façon synchrone : ainsi, le SDK est chargé en premier et recueille toutes les erreurs, ressources et actions utilisateur. Cette méthode peut avoir un impact sur les performances de chargement des pages.
 
 ### npm
 
@@ -120,7 +125,6 @@ window.DD_RUM.init({
   applicationId: 'XXX',
   clientToken: 'XXX',
   site: 'datadoghq.com',
-  resourceSampleRate: 100,
   sampleRate: 100,
 })
 ```
@@ -131,28 +135,89 @@ window.DD_RUM.init({
 
 Les paramètres suivants sont disponibles :
 
-| Paramètre               | Type    | Obligatoire | Valeur par défaut         | Description                                                                                              |
-| ----------------------- | ------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
-| `applicationId`         | Chaîne  | Oui      |                 | L'ID d'application RUM.                                                                                  |
-| `clientToken`           | Chaîne  | Oui      |                 | Un [token client Datadog][5].                                                                             |
-| `site`                  | Chaîne  | Oui      | `datadoghq.com` | Le site Datadog associé à votre organisation. Site américain : `datadoghq.com`. Site européen : `datadoghq.eu`.                           |
-| `service`               | Chaîne  | Non       |                 | Le nom du service de votre application.                                                                   |
-| `env`                   | Chaîne  | Non       |                 | L'environnement de l'application, par exemple : prod, pre-prod, staging, etc.                                |
-| `version`               | Chaîne  | Non       |                 | La version de l'application, par exemple : 1.2.3, 6c44da20, 2020.02.13, etc.                                |
-| `trackInteractions`     | Booléen | Non       | `false`         | Active la [collecte automatique des actions des utilisateurs][6].                                                      |
-| `resourceSampleRate`    | Nombre  | Non       | `100`           | Le pourcentage de sessions à surveiller (avec collecte des ressources). Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session).               |
-| `sampleRate`            | Nombre  | Non       | `100`           | Le pourcentage de sessions à surveiller. Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session). Seules les sessions surveillées envoient des événements RUM. |
-| `silentMultipleInit`    | Booléen | Non       | `false`         | L'initialisation échoue sans envoyer d'alerte si la fonction RUM de Datadog est déjà initialisée sur la page.                       |
-| `proxyHost`             | Chaîne  | Non       |                 | Host de proxy facultatif (ex : www.proxy.com). Consultez le [guide de configuration d'un proxy][7] complet pour en savoir plus.       |
-| `allowedTracingOrigins` | Liste    | Non       |                 | La liste des origines de la requête utilisée pour injecter les en-têtes de tracing.                                                |
+`applicationId`
+: Obligatoire<br/>
+**Type** : chaîne<br/>
+L'ID de l'application RUM.
+
+`clientToken`
+: Obligatoire<br/>
+**Type** : chaîne<br/>
+Un [token client Datadog][5].
+
+`site`
+: Obligatoire<br/>
+**Type** : chaîne<br/>
+**Valeur par défaut** : `datadoghq.com`<br/>
+Le site Datadog de votre organisation. `datadoghq.com` pour les États-Unis, `datadoghq.eu` pour l'Europe.
+
+`service`
+: Facultatif<br/>
+**Type** : chaîne<br/>
+Le nom de service de votre application.
+
+`env`
+: Facultatif<br/>
+**Type** : chaîne<br/>
+L'environnement de l'application, par exemple : prod, pre-prod, staging, etc.
+
+`version`
+: Facultatif<br/>
+**Type** : chaîne<br/>
+La version de l'application, par exemple : 1.2.3, 6c44da20, 2020.02.13, etc.
+
+`trackInteractions`
+: Facultatif<br/>
+**Type** : booléen<br/>
+**Valeur par défaut** : `false` <br/>
+Active la [collecte automatique des actions utilisateur][6].
+
+`actionNameAttribute`
+: Facultatif<br/>
+**Type** : Chaîne<br/>
+Indiquez votre propre attribut à utiliser pour [nommer des actions][9].
+
+`sampleRate`
+: Facultatif<br/>
+**Type** : nombre<br/>
+**Valeur par défaut** : `100`<br/>
+Le pourcentage de sessions à surveiller : `100` pour toutes les sessions, `0` pour aucune session. Seules les sessions surveillées envoient des événements RUM.
+
+`silentMultipleInit`
+: Facultatif<br/>
+**Type** : booléen<br/>
+**Valeur par défaut** : `false`<br/>
+L'initialisation échoue sans envoyer d'alerte si la fonction RUM de Datadog est déjà initialisée sur la page.
+
+`proxyHost`
+: Facultatif<br/>
+**Type** : chaîne<br/>
+Host de proxy facultatif (exemple : www.proxy.com). Consultez le [guide de configuration d'un proxy][7] complet pour en savoir plus.
+
+`allowedTracingOrigins`
+: Facultatif<br/>
+**Type** : liste<br/>
+La liste des origines de la requête utilisée pour injecter les en-têtes de tracing.
 
 Options qui doivent avoir une configuration correspondante lors de l'utilisation simultanée du SDK `logs` :
 
-| Paramètre                      | Type    | Obligatoire | Valeur par défaut | Description                                                                                                                                                 |
-| ------------------------------ | ------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trackSessionAcrossSubdomains` | Booléen | Non       | `false` | Préserver la session pour tous les sous-domaines d'un même site.                                                                                                   |
-| `useSecureSessionCookie`       | Booléen | Non       | `false` | Utiliser un cookie de session sécurisé. Ce paramètre désactive les événements RUM envoyés via des connexions non sécurisées (connexions non HTTPS).                                                             |
-| `useCrossSiteSessionCookie`    | Booléen | Non       | `false` | Utiliser un cookie de session intersite sécurisé. Cela permet d'exécuter le SDK RUM lorsque le site est chargé à partir d'un autre site (iframe). Implique l'utilisation de `useSecureSessionCookie`. |
+`trackSessionAcrossSubdomains`
+: Facultatif<br/>
+**Type** : booléen<br/>
+**Valeur par défaut** : `false`<br/>
+Préserve la session pour tous les sous-domaines d'un même site.
+
+`useSecureSessionCookie`
+: Facultatif<br/>
+**Type** : booléen<br/>
+**Valeur par défaut** : `false`<br/>
+Utilise un cookie de session sécurisé. Ce paramètre désactive les événements RUM envoyés via des connexions non sécurisées (connexions non HTTPS).
+
+`useCrossSiteSessionCookie`
+: Facultatif<br/>
+**Type** : booléen<br/>
+**Valeur par défaut** : `false`<br/>
+Utilise un cookie de session intersite sécurisé. Cela permet l'exécution du SDK RUM lorsque le site est chargé à partir d'un autre site (iframe). Implique l'utilisation de `useSecureSessionCookie`.
 
 #### Exemple
 
@@ -163,7 +228,6 @@ init(configuration: {
     applicationId: string,
     clientToken: string,
     site?: string,
-    resourceSampleRate?: number
     sampleRate?: number,
     silentMultipleInit?: boolean,
     trackInteractions?: boolean,
@@ -182,5 +246,7 @@ init(configuration: {
 [3]: https://docs.datadoghq.com/fr/real_user_monitoring/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#client-tokens
-[6]: https://docs.datadoghq.com/fr/real_user_monitoring/data_collected/user_action/#automatic-collection-of-user-actions
+[6]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/tracking_user_actions
 [7]: https://docs.datadoghq.com/fr/real_user_monitoring/faq/proxy_rum_data/
+[8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
+[9]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/tracking_user_actions#declaring-a-name-for-click-actions
