@@ -10,11 +10,7 @@ kind: guide
   - To mute the alert completely: `{'*': None}`
   - To mute `role:db` for a short time: `{'role:db': 1412798116}`
 
-- **`new_group_delay`** Time (in seconds) before starting the evaluation of monitor results, to allow newly created groups to boot and applications to fully start. Should be a non negative integer. Default: **60**. Examples :
-
-  - equal to **0**: no evaluation is ignored
-  - bewteen **1** and **60**: the first evaluation is ignored
-  - between **61** and **120**: the first two evaluations are ignored
+- **`new_group_delay`** Time (in seconds) before starting the evaluation of monitor results, to allow newly created groups to boot and applications or containers to fully start. Should be a non negative integer. Default: **60**. Example : If you are using containerized architecture, setting an evaluation delay will prevent your monitor grouped by containers from triggering when a new container is created, which may cause some metrics to spike up in the first minutes.
 
 - **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. **Deprecated: Use `new_group_delay` instead**
 
