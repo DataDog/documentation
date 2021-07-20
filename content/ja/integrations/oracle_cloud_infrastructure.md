@@ -11,6 +11,7 @@ draft: false
 further_reading: []
 git_integration_title: oracle_cloud_infrastructure
 has_logo: true
+integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 is_public: true
 kind: インテグレーション
@@ -34,8 +35,6 @@ Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業�
 次のいずれかのプロセスに従って、Oracle Cloud Infrastructure から Datadog にログを送信します。
 
 {{< tabs >}}
-
-
 {{% tab "サービスコネクタハブ" %}}
 
 1. OCI ログを構成します。
@@ -69,7 +68,6 @@ OCI ログの詳細については、[Oracle のログドキュメント][1]を�
    - `func.yaml` を [Datadog OCI リポジトリ][4]のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、Datadog API キーとリージョンログの取り込みリンクに置き換える必要があります。
    - `requirements.txt` を [Datadog OCI リポジトリ][5]のコードに置き換えます。
 
-
 #### OCI サービスコネクタハブ
 
 1. OCI ポータルで、*Solutions and Platform -> Logging -> Service Connectors* に移動します。
@@ -91,8 +89,6 @@ OCI オブジェクトストレージの詳細については、[Oracle のサ�
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
 {{% /tab %}}
-
-
 {{% tab "オブジェクトストア" %}}
 
 1. OCI ログを構成します。
@@ -140,7 +136,6 @@ OCI オブジェクトストレージの詳細については、[Oracle のオ�
    - `func.py` を [Datadog OCI リポジトリ][4]のコードに置き換えます。
    - `func.yaml` を [Datadog OCI リポジトリ][5]のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、Datadog API キーとリージョンログの取り込みリンクに置き換える必要があります。
    - `requirements.txt` を [Datadog OCI リポジトリ][6]のコードに置き換えます。
-
 
 #### OCI イベント
 

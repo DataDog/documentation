@@ -32,7 +32,7 @@
 @import "pages/security_monitoring";
 
 // Components
-@import "components/announcement_banner";
+@import 'components/announcement-banner'; // imported from websites-modules
 @import "components/badge";
 @import "components/footer";
 @import "components/global-modals";

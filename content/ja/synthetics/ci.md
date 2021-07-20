@@ -6,14 +6,21 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
     tag: ブログ
     text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
+  - link: 'https://learn.datadoghq.com/course/view.php?id=37'
+    tag: ラーニングセンター
+    text: CI/CD パイプラインで Synthetic テストを実行する方法を学ぶ
   - link: /synthetics/browser_tests/
     tag: ドキュメント
     text: ブラウザテストの設定
   - link: /synthetics/api_tests/
-    tag: ドキュメント
+    tag: Documentation
     text: APIテストの設定
+  - link: 'https://www.datadoghq.com/blog/shift-left-testing-best-practices/'
+    tag: ブログ
+    text: シフトレフトテストのベストプラクティス
 ---
 事前定義された間隔でテストを実行するだけでなく、API エンドポイントを使用して Datadog Synthetic テストをオンデマンドで実行することもできます。Datadog Synthetic テストを継続的インテグレーション (CI) パイプラインで実行して、製品を破壊する恐れのあるブランチのデプロイをブロックできます。
+
 Synthetic CI/CD テストを使用して、**CD プロセスの一部としてテストを実行**し、デプロイが完了した直後に本番アプリケーションの状態を評価することもできます。これにより、ユーザーに影響を与える可能性のある潜在的な回帰を検出し、重要なテストが失敗したときに自動的にロールバックをトリガーできます。
 
 この関数により、本番システムの問題修正に時間を割く必要がなくなり、プロセスの早期でバグと回帰を検出できます。
@@ -385,52 +392,67 @@ yarn add --dev @datadog/datadog-ci
 
 3. グローバルコンフィギュレーションファイルで定義
 
-     また、JSON コンフィギュレーションファイルを作成して、さらに高度なオプションを指定できます。このグローバルコンフィギュレーションファイルへのパスは、[テストの起動時]にフラグ `--config` (#テストの実行)を使用して設定できます。グローバルコンフィギュレーションファイルの名前が `datadog-ci.json` に設定されている場合は、これがデフォルトになります。
+   グローバル JSON コンフィギュレーションファイルでは、追加の詳細オプションを指定できます。[テストを起動するとき](#running-tests)にフラグ `--config` を使用して、このファイルへのパスを指定します。グローバルコンフィギュレーションファイルの名前が `datadog-ci.json` に設定されている場合、デフォルトでその名前になります。
 
-    * **apiKey**: Datadog API にクエリーを送信する際に使用される API キー。
-    * **appKey**: Datadog API にクエリーを送信する際に使用されるアプリケーションキー。
-    * **datadogSite**: リクエストの送信先となる Datadog インスタンス。デフォルトは `datadoghq.com`。Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
-    * **files**: Synthetic テスト用コンフィギュレーションファイルを検出するグロブパターン。
-    * **global**: すべてのテストに適用される Synthetic テストのオーバーライド ([各フィールドの説明については下記を参照してください](#テストの構成))。
-    * **proxy**: Datadog への発信接続に使用されるプロキシー。`host` と `port` キーは必須の引数で、`protocol` キーの初期値は `http` です。サポートされる `protocol` キーの値は、`http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http`、`pac+https` です。プロキシーの構成に使用されるライブラリーは、[proxy-agent][3] ライブラリーです。
-    * **subdomain**: Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog へのアクセスに使用する URL が `myorg.datadoghq.com` の場合、`subdomain` の値は `myorg` にする必要があります。
+グローバルコンフィギュレーションファイルでは、次のオプションを構成できます。
 
-    **グローバルコンフィギュレーションファイルの例**
+`apiKey`
+: Datadog API にクエリーを送信する際に使用される API キー。
 
-    ```json
-    {
-        "apiKey": "<DATADOG_API_KEY>",
-        "appKey": "<DATADOG_APPLICATION_KEY>",
-        "datadogSite": "datadoghq.com",
-        "files": "{,!(node_modules)/**/}*.synthetics.json",
-        "global": {
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"fakeContent\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-                "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "executionRule": "skipped",
-            "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new value" },
-            "pollingTimeout": 180000
-        },
-        "proxy": {
-          "auth": {
-            "username": "login",
-            "password": "pwd"
-          },
-          "host": "127.0.0.1",
-          "port": 3128,
-          "protocol": "http"
-        },
-        "subdomain": "subdomainname"
-    }
-    ```
+`appKey`
+: Datadog API にクエリーを送信する際に使用されるアプリケーションキー。
+
+`datadogSite`
+: リクエストの送信先となる Datadog インスタンス。デフォルトは `datadoghq.com`。Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
+
+`files`
+: Synthetic テスト用コンフィギュレーションファイルを検出するグロブパターン。
+
+`global`
+: すべてのテストに適用される Synthetic テストのオーバーライド ([各フィールドの説明については下記を参照してください](#configure-tests))。
+
+`proxy`
+: Datadog への発信接続に使用されるプロキシ。`host` と `port` キーは必須の引数で、`protocol` キーの初期値は `http` です。サポートされる `protocol` キーの値は、`http`、`https`、`socks`、`socks4`、`socks4a`、`socks5`、`socks5h`、`pac+data`、`pac+file`、`pac+ftp`、`pac+http`、`pac+https` です。プロキシの構成に使用されるライブラリは、[proxy-agent][3] ライブラリです。
+
+`subdomain`
+: Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog へのアクセスに使用する URL が `myorg.datadoghq.com` の場合、`subdomain` の値は `myorg` にする必要があります。
+
+**グローバルコンフィギュレーションファイルの例**
+
+```json
+{
+    "apiKey": "<DATADOG_API_KEY>",
+    "appKey": "<DATADOG_APPLICATION_KEY>",
+    "datadogSite": "datadoghq.com",
+    "files": "{,!(node_modules)/**/}*.synthetics.json",
+    "global": {
+        "allowInsecureCertificates": true,
+        "basicAuth": { "username": "test", "password": "test" },
+        "body": "{\"fakeContent\":true}",
+        "bodyType": "application/json",
+        "cookies": "name1=value1;name2=value2;",
+        "deviceIds": ["laptop_large"],
+        "followRedirects": true,
+        "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
+            "locations": ["aws:us-west-1"],
+        "retry": { "count": 2, "interval": 300 },
+        "executionRule": "blocking",
+        "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
+        "variables": { "titleVariable": "new value" },
+        "pollingTimeout": 180000
+    },
+    "proxy": {
+      "auth": {
+        "username": "login",
+        "password": "pwd"
+      },
+      "host": "127.0.0.1",
+      "port": 3128,
+      "protocol": "http"
+    },
+    "subdomain": "subdomainname"
+}
+```
 
 ### テストの構成
 
@@ -457,27 +479,69 @@ yarn add --dev @datadog/datadog-ci
 
 ただし、CI デプロイメントの際に、下記のオーバーライドを使用して、テストパラメーターの一部 (またはすべて) をオーバーライドするように任意で定めることもできます。テストすべてをオーバーライドするように定義する場合は、下記と同じパラメーターを[グローバルコンフィギュレーションファイル](#クライアントのセットアップ)ごとに設定できます。
 
-* **allowInsecureCertificates**: (_boolean_) HTTP テストの認証チェックを無効化します。
-* **basicAuth**: (_オブジェクト_) HTTP またはブラウザテストで基本認証を行う際に提供する認証情報。
-     * **username**: (_文字列_) 基本認証で使用するユーザー名。
-     * **password**: (_文字列_) 基本認証で使用するパスワード。
-* **body**: (_文字列_) HTTP テストで送信するデータ。
-* **bodyType**: (_文字列_) HTTP テストで送信するデータのタイプ。
-* **cookies**: (_文字列_) HTTP またはブラウザテストのクッキーヘッダーとして提供された文字列を使用。
-* **deviceIds**: (_配列_) ブラウザテストを実行するデバイスのリスト。
-* **followRedirects**: (_boolean_) HTTP テストでリダイレクトに従うかどうかを示す。
-* **headers**: (_オブジェクト_) HTTP またはブラウザテストで置換するヘッダー。このオブジェクトには、置換するヘッダーの名前 (キー) と、ヘッダーの新しい値 (値) が含まれている必要がある。
-* **locations**: (_配列_) テストの実行元となる場所のリスト。
-* **retry**: (_オブジェクト_) テストの再試行ポリシー。
-     * **count**: (_整数_) テストが失敗した場合に再試行する回数。
-     * **interval**: (_整数_) 試行する間隔 (ミリ秒)。
-* **executionRule**: (_文字列_) テストの実行規則。テストが失敗した場合の CLI の挙動を定義する。
-     * **blocking**: テストが失敗した場合、CLI はエラーを返す。
-     * **non_blocking**: テストが失敗した場合、CLI は警告のプリントのみを実施する。
-     * **skipped**: テストを一切実行しない。
-* **startUrl**: (_文字列_) HTTP またはブラウザテストに提供する新しい開始 URL。
-* **variables**: (_オブジェクト_) テストで置換する変数。このオブジェクトには、置換する変数の名前 (キー) と、変数の新しい値 (値) が含まれている必要がある。
-* **pollingTimeout**: (_整数_) Synthetic テストが失敗したとみなす経過時間（ミリ秒）。
+
+`allowInsecureCertificates`
+: **タイプ**: ブール値<br>
+HTTP テストの認証チェックを無効化します。
+
+`basicAuth`
+: **タイプ**: オブジェクト<br>
+HTTP またはブラウザテストで基本認証を行う際に提供する認証情報。
+  - `username`: 文字列。基本認証で使用するユーザー名。
+  - `password`: 文字列。基本認証で使用するパスワード。
+
+`body`
+: **タイプ**: 文字列<br>
+HTTP テストで送信するデータ。
+
+`bodyType`
+: **タイプ**: 文字列<br>
+HTTP テストで送信するデータのタイプ。
+
+`cookies`
+: **タイプ**: 文字列<br>
+HTTP またはブラウザテストのクッキーヘッダーとして提供された文字列を使用。
+
+`deviceIds`
+: **タイプ**: 配列<br>
+ブラウザテストを実行するデバイスのリスト。
+
+`followRedirects`
+: **タイプ**: ブール値<br>
+HTTP テストでリダイレクトに従うかどうかを示す。
+
+`headers`
+: **タイプ**: オブジェクト<br>
+HTTP またはブラウザテストで置換するヘッダー。このオブジェクトには、置換するヘッダーの名前 (キー) と、ヘッダーの新しい値 (値) が含まれている必要がある。
+
+`locations`
+: **タイプ**: 配列<br>
+テストの実行元となる場所のリスト。
+
+`retry`
+: **タイプ**: オブジェクト<br>
+テストの再試行ポリシー。
+  - `count`: 整数。テストが失敗した場合に再試行する回数。
+  - `interval`: 整数。試行する間隔 (ミリ秒)。
+
+`executionRule`
+: **タイプ**: 文字列<br>
+テストの実行規則。テストが失敗した場合の CLI の挙動を定義する。
+  - `blocking`: テストが失敗した場合、CLI はエラーを返す。
+  - `non_blocking`: テストが失敗した場合、CLI は警告のプリントのみを実施する。
+  - `skipped`: テストを一切実行しない。
+
+`startUrl`
+: **タイプ**: 文字列<br>
+HTTP またはブラウザテストに提供する新しい開始 URL。
+
+`variables`
+: **タイプ**: オブジェクト<br>
+テストで置換する変数。このオブジェクトには、置換する変数の名前 (キー) と、変数の新しい値 (値) が含まれている必要がある。
+
+`pollingTimeout`
+: **タイプ**: 整数<br>
+`datadog-ci` がテスト結果のポーリングを停止するまでのミリ秒単位の期間。デフォルトは 120,000 ミリ秒です。CI レベルでは、この期間の後に完了したテスト結果は失敗したと見なされます。
 
 **Note**: グローバルオーバーライドに優先するテストのオーバーライド。
 
@@ -521,23 +585,55 @@ yarn add --dev @datadog/datadog-ci
 
 テストオブジェクトに `startUrl` を含めることで、テストを開始する URL を構成し、テストのオリジナルの開始 URL の一部と下記の環境変数を使用した独自の開始 URL を作成できます。
 
-| 環境変数 | 説明                  | 例                                                |
-|----------------------|------------------------------|--------------------------------------------------------|
-| `URL`                | テストのオリジナルの開始 URL | `https://www.example.org:81/path/to/something?abc=123` |
-| `DOMAIN`             | テストのドメイン名           | `example.org`                                          |
-| `HOST`               | テストのホスト                  | `www.example.org:81`                                   |
-| `HOSTNAME`           | テストのホストの名前              | `www.example.org`                                      |
-| `ORIGIN`             | テストの起点                | `https://www.example.org:81`                           |
-| `PARAMS`             | テストのクエリパラメーター      | `?abc=123`                                             |
-| `PATHNAME`           | テストの URl パス              | `/path/to/something`                                   |
-| `PORT`               | テストのホストのポート             | `81`                                                   |
-| `PROTOCOL`           | テストのプロトコル              | `https:`                                               |
-| `SUBDOMAIN`          | テストのサブドメイン            | `www`                                                  |
 
-たとえば、テストの開始 URL が `https://www.example.org:81/path/to/something?abc=123` なら、次のような記述になります。
+`URL`
+: テストのオリジナルの開始 URL <br>
+**例**: `https://www.example.org:81/path/to/something?abc=123#target`
 
-* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}`
-* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
+`DOMAIN`
+: テストのドメイン名<br>
+**例**: `example.org`
+
+`HASH`
+: テストのハッシュ<br>
+**例**: `#target`
+
+`HOST`
+: テストのホスト<br>
+**例**: `www.example.org:81`
+
+`HOSTNAME`
+: テストのホスト名<br>
+**例**: `www.example.org`
+
+`ORIGIN`
+: テストの起点<br>
+**例**: `https://www.example.org:81`
+
+`PARAMS`
+: テストのクエリパラメーター<br>
+**例**: `?abc=123`
+
+`PATHNAME`
+: テストの URl パス<br>
+**例**: `/path/to/something`
+
+`PORT`
+: テストのホストのポート<br>
+**例**: `81`
+
+`PROTOCOL`
+: テストのプロトコル<br>
+**例**: `https:`
+
+`SUBDOMAIN`
+: テストのサブドメイン<br>
+**例**: `www`
+
+たとえば、テストの開始 URL が `https://www.example.org:81/path/to/something?abc=123#target` なら、次のような記述になります。
+
+* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
+* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
 ### テストの実行

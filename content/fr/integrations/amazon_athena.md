@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_athena/'
 draft: false
 git_integration_title: amazon_athena
 has_logo: true
+integration_id: amazon-athena
 integration_title: "Amazon\_Athena"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Amazon Athena est un service de requête interactif qui simplifie l'analyse de 
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'Athena.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

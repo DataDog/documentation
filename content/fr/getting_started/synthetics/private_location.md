@@ -5,12 +5,15 @@ further_reading:
   - link: /getting_started/synthetics/api_test
     tag: Documentation
     text: Créer votre premier test API
+  - link: /getting_started/synthetics/browser_test
+    tag: Documentation
+    text: Créer votre premier test Browser
   - link: /synthetics/private_locations
     tag: Documentation
     text: En savoir plus sur les emplacements privés
 ---
 <div class="alert alert-warning">
-L'accès à cette fonctionnalité est limité. Si vous n'êtes pas autorisé à y accéder, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
+L'accès à cette fonctionnalité est restreint. Si vous n'êtes pas autorisé à y accéder, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
 </div>
 
 ## Présentation
@@ -25,7 +28,7 @@ Les emplacements privés sont des conteneurs Docker que vous pouvez installer pa
 
 Votre worker d'emplacement privé récupère vos configurations de test à partir des serveurs Datadog via HTTPS, exécute le test selon un programme ou à la demande et renvoie les résultats du test aux serveurs Datadog. Vous pouvez ensuite visualiser les résultats des tests effectués sur vos emplacements privés exactement de la même façon que pour les tests exécutés à partir d'emplacements gérés :
 
-{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assigner un test Synthetics à un emplacement privé"  style="width:100%;">}}
+{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assigner un test Synthetic à un emplacement privé"  style="width:100%;">}}
 
 Le worker d'emplacement privé est disponible sur Docker Hub :
 
@@ -73,11 +76,9 @@ Vous pouvez désormais utiliser votre nouvel emplacement privé comme n'importe 
 
 3. Procédez à la création de votre test.
 
-{{< whatsnext desc="Une fois votre emplacement privé créé, consultez les sections suivantes :">}}
-{{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Créer votre premier test API{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics/browser_test" tag="Documentation" >}}Créer votre premier test Browser{{< /nextlink >}}
-{{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}En savoir plus sur les emplacements privés{{< /nextlink >}}
-{{< /whatsnext >}}
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/getting_started/synthetics/api_test/
 [2]: https://app.vagrantup.com/ubuntu/boxes/xenial64

@@ -14,7 +14,7 @@ further_reading:
 - link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
 - link: "/logs/explorer/saved_views/"
@@ -57,24 +57,53 @@ The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `
 
 To search for logs that contain `user=JaneDoe` in the message attribute use the following search:
 
-`user\=JaneDoe`
+```
+user\=JaneDoe
+```
 
-### Facets search
+### Attributes search
 
-To search on a specific attribute, first [add it as a facet][2] and then add `@` to specify you are searching on a facet.
+{{< site-region region="gov,us3" >}}
+To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com*, enter:
+For instance, if your attribute name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter:
 
-`@url:www.datadoghq.com`
+```
+@url:www.datadoghq.com
+```
 
 
 **Notes**:
 
-1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the lowercase filter with your Grok parser while parsing to get case insensitive results during search.
 
 2. Searching for a facet value that contains special characters requires escaping or double quotes.
 For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
 To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
+
+[1]: /logs/explorer/facets/
+
+{{< /site-region >}}
+{{< site-region region="us,eu" >}}
+To search on a specific attribute, add `@` to specify you are searching on an attribute.
+
+For instance, if your attribute name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter:
+
+```
+@url:www.datadoghq.com
+```
+
+
+**Notes**:
+
+1. It is **not** required to define a facet to search on attributes and tags.
+
+2. Attributes searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+
+3. Searching for an attribute value that contains special characters requires escaping or double quotes.
+For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
+To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
+{{< /site-region >}}
 
 Examples:
 
@@ -94,29 +123,56 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
 
+{{< site-region region="gov,us3" >}}
 Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
+<p> </p>
+{{< /site-region >}}
 
-`service:*mongo`
+{{< site-region region="us,eu" >}}
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
+<p> </p>
+{{< /site-region >}}
+<p></p>
+
+```
+service:*mongo
+```
 
 Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query returns all the logs that contain the string `NETWORK`:
 
-`*NETWORK*`
+```
+*NETWORK*
+```
 
 However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
 ### Search wildcard
 
+{{< site-region region="gov,us3" >}}
 When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
+<p> </p>
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
+<p> </p>
+{{< /site-region >}}
 
 ## Numerical values
 
-Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
+In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+For instance, retrieve all logs that have a response time over 100ms with:
+<p> </p>
 
-`@http.response_time:>100`
+```
+@http.response_time:>100
+```
 
 You can search for numerical attribute within a specific range. For instance, retrieve all your 4xx errors with:
 
-`@http.status_code:[400 TO 499]`
+```
+@http.status_code:[400 TO 499]
+```
 
 ## Tags
 
@@ -138,6 +194,11 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
+{{< site-region region="us,eu" >}}
+**Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
+<p> </p>
+{{< /site-region >}}
+
 ## Saved searches
 
 [Saved Views][6] contain your search query, columns, time horizon, and facet.
@@ -146,7 +207,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/?tab=matcher
+[1]: /logs/log_configuration/parsing
 [2]: /logs/explorer/facets/
 [3]: /infrastructure/
 [4]: /integrations/#cat-log-collection

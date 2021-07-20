@@ -12,7 +12,7 @@ aliases:
     - /logs/explorer/analytics
     - /logs/explorer/transactions/
 further_reading:
-    - link: 'logs/processing'
+    - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: 'logs/explorer/live_tail'
@@ -45,8 +45,19 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 [Indexed Logs][4] support both full-text search and `key:value` search queries.
 
-**Note**: `key:value` queries require that you [declare a facet][5] beforehand.
+{{< site-region region="gov,us3" >}}
+**Note**: `key:value` queries require that you [declare a facet][1] beforehand.
 
+[1]: /logs/explorer/facets/
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+
+[1]: /logs/explorer/facets/
+
+{{< /site-region >}}
 ## Aggregate and measure
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, aggregate your logs.
@@ -65,7 +76,7 @@ With fields aggregation, all logs matching the query filter are aggregated into 
 
 **Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#table) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension. 
+Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#table) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Patterns
 
@@ -118,13 +129,19 @@ Lists displaying individual logs and lists displaying aggregates of logs have sl
 For a list of individual logs, choose which information of interest to display as columns. **Manage the columns** of the table using either:
 
 - The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
-- The **facet panel** the the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
+- The **facet panel** on the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
 With the **Options** button, control the **number of lines** displayed in the table per log event.
 
 {{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
+{{< site-region region="gov,us3" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
+{{< /site-region >}}
+
+{{< site-region region="us,eu" >}}
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that, although any attributes or tags can be added as a column, sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
+{{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][1]
 
@@ -139,9 +156,9 @@ Results are sorted according to:
 
 ### Timeseries
 
-Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
+Visualize the evolution of a single [measure][2] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by up to three available [facets][2].
 
-The following Timeseries log analytics shows the evolution of the **top 5 URL Paths** according to the number of **unique client IPs** over the last month.
+The following Timeseries log analytics shows the evolution of the **top 50 URL Paths** according to the 95th percentile of **duration** over the last 15 minutes.
 
 {{< img src="logs/explorer/timeseries.png" alt="timeserie example"  style="width:90%;">}}
 
@@ -157,7 +174,7 @@ For example, the following Toplist shows the **top 15 Customers** on a merchant 
 
 ### Nested tables
 
-Visualize the top values from a [facet][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or drill through logs corresponding to either dimension.
+Visualize the top values from up to three [facets][2] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this table. Update a search query or drill through logs corresponding to either dimension.
 
 - When there are multiple measures, the top or bottom list is determined according to the first measure.
 - The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
@@ -191,7 +208,7 @@ At any moment, and depending on your current aggregation, **export** your explor
 [4]: /logs/indexes
 [5]: /logs/explorer/facets/
 [6]: /logs/logs_to_metrics
-[7]: /logs/processing/processors/#grok-parser
+[7]: /logs/log_configuration/processors/#grok-parser
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification

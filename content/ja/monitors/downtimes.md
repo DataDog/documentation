@@ -37,7 +37,67 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 モニターのサイレント設定にスコープを追加する場合は、**Preview affected monitors** をクリックして該当するモニターを表示します。ダウンタイムのスケジューリング後に作成または編集されたモニターは、スコープに合致した場合に自動でダウンタイムに組み込まれます。
 
-**注**: 1 台のモニターから複数のアラートを送信している場合は、スコープに含まれるグループだけがサイレントに設定されます。たとえば、`host:X` がダウンタイムのスコープに含まれており、`host:X` と `host:Y` の両方に対してアラートがトリガーされる場合、Datadog は `host:Y` に対してのみモニター通知を生成します。`host:X` に対する通知は行われません。
+#### ダウンタイムスコープ
+
+ダウンタイムを単純なアラートモニターに制限する場合、単純なアラートモニターはすべてのレポートソースを集約して単一のアラートを送信するため、`Group scope` フィールドは無視できます。
+
+1 台のモニターから複数のアラートを送信している場合は、スコープに含まれるグループだけがサイレントに設定されます。たとえば、`host:X` がダウンタイムのスコープに含まれており、`host:X` と `host:Y` の両方に対してアラートがトリガーされる場合、Datadog は `host:Y` に対してのみモニター通知を生成します。`host:X` に対する通知は行われません。
+
+以下の例は、`Group scope` をマルチアラートモニターに適用する方法を示しています。
+
+{{< tabs >}}
+{{% tab "モニター名で指定" %}}
+
+**例 1: 特定のサービスの通知をミュートする**
+
+1. 1 つのグループ (この場合は `service:web-store`) のみでダウンタイムをスケジュールするには、そのグループを `Group scope` フィールドに入力します。
+2. **Preview affected monitors** は、選択したモニターがまだスコープ内にあることを示しているため、グループ `service:web-store` のアラートはスケジュールされたダウンタイム中にミュートされます。
+
+{{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+
+3. スケジュールされたダウンタイムが始まり、このモニターではグループ `service:web-store` のアラートのみがミュートされます。
+
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+
+4. 複数のグループ (たとえば、`service:synthesizer`、`service:consul` など) でダウンタイムをスケジュールするには、グループごとに追加のダウンタイムを作成できます。
+
+**例 2: `env` と `service` でグループ化されたモニターの特定の環境の通知をミュートする**
+
+1. グループの 1 つ (この場合は `env:dev`) でダウンタイムをスケジュールするには、そのグループを `Group scope` フィールドに入力します。
+2. **Preview affected monitors** は、選択したモニターがまだスコープ内にあることを示しているため、グループ `env:dev` のアラートはスケジュールされたダウンタイム中にミュートされます。
+
+{{< img src="monitors/downtimes/downtime_examplebyname2_downtime.jpg" alt="スコープ内の開発環境でのモニター名によるダウンタイム" style="width:80%;">}}
+
+3. スケジュールされたダウンタイムが始まり、グループ `env:dev` **および** `dev` 環境に関連するすべてのサービスのアラートがミュートされます。
+
+{{< img src="monitors/downtimes/downtime_examplebyname2_monitor.jpg" alt="グループステータスは、ダウンタイム中にミュートされた開発環境と関連サービスを示します" style="width:80%;">}}
+
+4. 1 つ以上の “group by” (例: `env:dev` AND `service:web-store`) でダウンタイムをスケジュールするには、ダウンタイムに追加スコープを追加します。
+{{% /tab %}}
+{{% tab "モニタータグで指定" %}}
+
+スケジュールされたダウンタイムが共通のモニタータグに基づいており、スコープ内のモニターが 1 つの “group by” スコープを持つマルチアラートモニターである場合、`Group scope` フィールドを使用して、スコープ内のモニターが共通に持つグループをサイレントにできます。 
+
+**例 1: それぞれが 1 つの “group by” スコープを持つ 2 つのマルチアラートモニターには、共通の `downtime:true` モニタータグがあります。**
+
+1. *モニター A* は、複数の `service` グループにわたって平均されたメトリクスを報告するホスト用のマルチアラートモニターです。
+2. *モニター B* は、`service:web-store` に対して同じメトリクスを報告するホスト用のマルチアラートモニターです。
+3. ダウンタイムは、`downtime:true` モニタータグを持つすべてのモニターに対してスケジュールされます。
+4. このダウンタイムは、グループ  `service:web-store` に制限されています。
+5. 影響を受けるモニターをプレビューすると、両方のモニターのスコープにグループ `service:web-store` が含まれていることがわかります。
+
+{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+
+6. *モニター A* は、ダウンタイムが開始されたことを示していますが、スコープ内のグループのみです: `service:web-store`
+
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+
+7. *モニター B* は、`service:web-store` のダウンタイムが開始されたことを示しています。すべてのモニターのグループ (`host` ごと) は `service:web-store` に属しているため、このモニターのダウンタイム中にすべてのホストがミュートされます。
+
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.jpg" alt="ダウンタイムの例"  style="width:80%;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### スケジュール
 
@@ -45,6 +105,8 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 {{% tab " 単発" %}}
 
 開始日時とタイムゾーンを指定して 1 回のみのダウンタイムを設定します。オプションで終了日時を設定することもできます。
+
+{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="アラートのダウンタイム"  style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "定期" %}}
@@ -55,6 +117,19 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 毎回の定期ダウンタイムが終了すると、そのダウンタイムをキャンセルし、同じ条件（開始時間と終了時間が異なる）の新しいダウンタイムを作成するというパターンが繰り返されます。**注**: このように新しく作成されたダウンタイムはすべて、元の作成者に関連付けられます。
 
+{{< img src="monitors/downtimes/downtime_recurring.jpg" alt="アラートのダウンタイム"  style="width:80%;">}}
+
+RRULE (つまり[繰り返しルール][1]) を使用して、ダウンタイムのスケジュールを定義します。定期的なルールを生成するためのツールとして、公式の [RRULE ジェネレーター][2]を使用してください。
+
+一般的な使用例は、RRULE を使用して月の特定の日のダウンタイムを定義することです。 たとえば、毎月第 3 月曜日に:
+
+{{< img src="monitors/downtimes/downtime_rrule.jpg" alt="アラートのダウンタイム"  style="width:80%;">}}
+
+**注**: RRULE で期間を指定する属性はサポートされません（例: `DTSTART`、`DTEND`、`DURATION`）。
+
+
+[1]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[2]: https://icalendar.org/rrule-tool.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -68,7 +143,8 @@ Datadog で[モニターのダウンタイム][1]のスケジューリングを�
 
 ## 管理
 
-Manage Downtime ページには、アクティブなダウンタイムとスケジューリングされたダウンタイムの一覧が表示されます。任意の行を選択して詳細の確認、編集、削除を行うことができます。ダウンタイムを検索する場合は _Filter downtimes_ テキストボックスを使用します。
+ダウンタイムの管理ページには、アクティブなダウンタイムとスケジュールされたダウンタイムのリストが表示されます。ダウンタイムを選択して、詳細を表示、編集、または削除します。_Filter downtimes_ テキストボックスを使用して、ダウンタイムを検索します。
+デフォルトでは、このテキストボックスは、ダウンタインの `monitor_name`、`scopes`、`monitor_tags`、`message`、`status` パラメーターを検索します。
 
 ### 履歴
 

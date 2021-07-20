@@ -5,10 +5,10 @@ further_reading:
 - link: "logs/log_collection/#custom-log-collection"
   tag: "Documentation"
   text: "Learn more about Log collection with the Agent"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---
@@ -61,6 +61,6 @@ Then add a status remapper that uses the newly created attribute:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/processors/#log-status-remapper
+[1]: /logs/log_configuration/processors/#log-status-remapper
 [2]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[3]: /logs/processing/processors/#category-processor
+[3]: /logs/log_configuration/processors/#category-processor

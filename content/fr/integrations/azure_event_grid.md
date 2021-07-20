@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_event_grid/'
 draft: false
 git_integration_title: azure_event_grid
 has_logo: true
+integration_id: azure-eventgrid
 integration_title: Microsoft Azure Event Grid
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Event Grid est un service intelligent entièrement géré pour le routage 
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Event Grid.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

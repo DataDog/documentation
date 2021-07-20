@@ -5,6 +5,7 @@ aliases:
   - /ja/security_monitoring/default_rules/aws-iam-trustedpolicies
 cloud: AWS
 disable_edit: true
+integration_id: amazon-iam
 kind: documentation
 rule_category:
   - クラウドコンフィギュレーション

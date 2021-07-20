@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_blob_storage/'
 draft: false
 git_integration_title: azure_blob_storage
 has_logo: true
+integration_id: azure-blob-storage
 integration_title: Stockage Blob Microsoft Azure
 is_public: true
 kind: integration

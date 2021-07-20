@@ -57,9 +57,25 @@ Le check `nginx-ingress-controller` est inclus avec le package de l'[Agent Datad
 
 ### Configuration
 
-Si votre Agent s'exécute sur un host, modifiez le fichier `nginx_ingress_controller.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos métriques NGINX Ingress Controller. Consultez le [fichier d'exemple nginx_ingress_controller.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles. Ensuite, [redémarrez l'Agent][3].
+{{< tabs >}}
+{{% tab "Host" %}}
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][4] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+#### Host
+
+Si votre Agent s'exécute sur un host, modifiez le fichier `nginx_ingress_controller.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos métriques NGINX Ingress Controller. Consultez le [fichier d'exemple nginx_ingress_controller.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles. Ensuite, [redémarrez l'Agent][2].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Collecte de métriques
 
@@ -97,9 +113,9 @@ Consultez le [fichier d'exemple nginx_ingress_controller.d/conf.yaml][2] pour d�
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][3].
 
 | Paramètre      | Valeur                                                              |
 | -------------- | ------------------------------------------------------------------ |
@@ -107,7 +123,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez `nginx_ingress_controller` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `nginx_ingress_controller` dans la section Checks.
 
 ## Données collectées
 
@@ -125,13 +141,11 @@ NGINX Ingress Controller n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
 
 [1]: https://kubernetes.github.io/ingress-nginx
 [2]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/help/

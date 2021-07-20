@@ -5,12 +5,12 @@ description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/processors/
 further_reading:
-- link: "/logs/processing/pipelines/"
+- link: "/logs/log_configuration/pipelines"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
-  text: "Logging without limit"
+  text: "Logging without Limits*"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
@@ -20,15 +20,17 @@ further_reading:
 
 {{< img src="logs/processing/processors/processing_overview.png" alt="Processors" >}}
 
-A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
+A processor executes within a [Pipeline][1] to complete a data-structuring action, such as [Remapping an attribute](#remapper), [Grok parsing](#grok-parser), etc., on a log.
 
-**Note**: Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][5] feature.
+**Notes**:
 
-As a best practice, it is recommended to use at most 20 Processors per Pipeline.
+- Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][2] feature.
+
+- As a best practice, it is recommended to use at most 20 processors per pipeline.
 
 ## Grok parser
 
-Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3]. As a best practice, it is recommended to use at most 10 parsing rules within a grok Processor.
+Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2]. As a best practice, it is recommended to use at most 10 parsing rules within a grok Processor.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -90,12 +92,11 @@ If your logs put their dates in an attribute not in this list, use the log date 
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-
 **Note**:
 
 * **Log events can be submitted up to 18h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
-* If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
+* If multiple log date remapper processors are applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -142,7 +143,7 @@ Into this log:
 
 Each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards][6]
+* Integers from 0 to 7 map to the [Syslog severity standards][3]
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
@@ -277,7 +278,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [Tagging documentation][7]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [attributes and tags documentation][4]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
 If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`)
 
@@ -416,10 +417,10 @@ Use categories to create groups for an analytical view (for example, URL groups,
 
 **Note**:
 
-* The syntax of the query is the one of [Logs Explorer][8] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one of [Logs Explorer][5] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
-* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][9].
+* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper](#log-status-remapper).
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -478,7 +479,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
-* If you need to scale a unit of measure, see [Scale Filter][10].
+* If you need to scale a unit of measure, use the scale filter.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -656,7 +657,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 
 ## Lookup processor
 
-Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][11] or the processors mapping table.
+Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][6] or the processors mapping table.
 For example, you can use the lookup processor to map an internal service ID into a human readable service name.
 Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
@@ -711,7 +712,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][12] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][7] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -752,15 +753,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/#advanced-settings
-[2]: /logs/processing/pipelines/
-[3]: /logs/processing/parsing/
-[4]: /logs/processing/processors/?tab=ui#grok-parser
-[5]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-[6]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[7]: /logs/guide/log-parsing-best-practice/
-[8]: /logs/search_syntax/
-[9]: /logs/processing/processors/?tab=ui#log-status-remapper
-[10]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[11]: /logs/guide/enrichment-tables/
-[12]: /tracing/connect_logs_and_traces/
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
+
+[1]: /logs/log_configuration/pipelines/
+[2]: /logs/log_configuration/parsing/
+[3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[4]: /logs/log_collection/?tab=host#attributes-and-tags
+[5]: /logs/search_syntax/
+[6]: /logs/guide/enrichment-tables/
+[7]: /tracing/connect_logs_and_traces/

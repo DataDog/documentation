@@ -45,53 +45,65 @@ main_left:
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
-  - identifier: security
-    name: Security Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
-    url: 'https://www.datadoghq.com/product/security-monitoring/'
-    weight: 8
-    parent: product
-  - identifier: network
-    name: Network Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
-    url: 'https://www.datadoghq.com/product/network-monitoring/'
-    weight: 9
-    parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 10
+    weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 9
+    parent: product
+  - identifier: security-platform
+    name: Security Platform
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
+    url: 'https://www.datadoghq.com/product/security-platform/'
+    weight: 10
+    parent: product
+  - identifier: security-monitoring
+    name: Security Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
+    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
     weight: 11
+    parent: product
+  - identifier: cloud-security-posture-management
+    name: CSPM
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
+    weight: 12
+    parent: product
+  - identifier: network
+    name: Network Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
+    url: 'https://www.datadoghq.com/product/network-monitoring'
+    weight: 13
     parent: product
   - identifier: incident
     name: Incident Management
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
-    url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 12
+    url: 'https://www.datadoghq.com/product/incident-management'
+    weight: 14
     parent: product
   - identifier: serverless
     name: Serverless
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
-    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 13
+    url: 'https://www.datadoghq.com/product/serverless-monitoring'
+    weight: 15
     parent: product
   - identifier: alerts
     name: Alerts
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
-    url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 14
+    url: 'https://www.datadoghq.com/product/alerts'
+    weight: 16
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 15
+    weight: 17
     parent: product
   - identifier: customers
     name: Customers
@@ -413,12 +425,12 @@ main:
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1103
+    weight: 1101
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1101
+    weight: 1103
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
@@ -582,16 +594,21 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_tag
     weight: 305
+  - name: Control plane monitoring
+    url: agent/kubernetes/control_plane/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_control_plane
+    weight: 306
   - name: Data collected
     url: agent/kubernetes/data_collected/
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
-    weight: 306
+    weight: 307
   - name: Operator configuration
     url: agent/kubernetes/operator_configuration
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
-    weight: 307
+    weight: 308
   - name: IoT
     url: agent/iot/
     parent: agent
@@ -794,101 +811,105 @@ main:
     pre: nav_dashboards
     identifier: dashboards
     weight: 70000
-  - name: Screenboards
-    url: dashboards/screenboards/
+  - name: Dashboard Layout
+    url: dashboards/dashboards/
     parent: dashboards
     weight: 1
-  - name: Timeboards
+  - name: Timeboard Layout
     url: dashboards/timeboards/
     parent: dashboards
     weight: 2
+  - name: Screenboard Layout
+    url: dashboards/screenboards/
+    parent: dashboards
+    weight: 3
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
-    weight: 3
+    weight: 4
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
-    weight: 4
+    weight: 5
   - name: Functions
     url: dashboards/functions/
     parent: dashboards
     identifier: dashboards_functions
-    weight: 5
+    weight: 6
   - name: Algorithms
     url: dashboards/functions/algorithms/
     parent: dashboards_functions
-    weight: 501
+    weight: 601
   - name: Arithmetic
     url: dashboards/functions/arithmetic/
     parent: dashboards_functions
-    weight: 502
+    weight: 602
   - name: Count
     url: dashboards/functions/count/
     parent: dashboards_functions
-    weight: 503
+    weight: 603
   - name: Exclusion
     url: dashboards/functions/exclusion/
     parent: dashboards_functions
-    weight: 503
+    weight: 603
   - name: Interpolation
     url: dashboards/functions/interpolation/
     parent: dashboards_functions
-    weight: 504
+    weight: 604
   - name: Rank
     url: dashboards/functions/rank/
     parent: dashboards_functions
-    weight: 505
+    weight: 605
   - name: Rate
     url: dashboards/functions/rate/
     parent: dashboards_functions
-    weight: 506
+    weight: 606
   - name: Regression
     url: dashboards/functions/regression/
     parent: dashboards_functions
-    weight: 507
+    weight: 607
   - name: Rollup
     url: dashboards/functions/rollup/
     parent: dashboards_functions
-    weight: 508
+    weight: 608
   - name: Smoothing
     url: dashboards/functions/smoothing/
     parent: dashboards_functions
-    weight: 509
+    weight: 609
   - name: Timeshift
     url: dashboards/functions/timeshift/
     parent: dashboards_functions
-    weight: 510
+    weight: 610
   - name: Beta
     url: dashboards/functions/beta/
     parent: dashboards_functions
-    weight: 511
+    weight: 611
   - name: Correlations
     url: dashboards/correlations/
     parent: dashboards
-    weight: 6
+    weight: 7
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 7
+    weight: 8
     identifier: dashboards_temp_variables
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 8
+    weight: 9
   - name: Graphing with JSON
     url: dashboards/graphing_json/
     parent: dashboards
     identifier: graphing_json
-    weight: 9
+    weight: 10
   - name: Widget JSON schema
     url: dashboards/graphing_json/widget_json/
     parent: graphing_json
-    weight: 901
+    weight: 1001
   - name: Request JSON schema
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
-    weight: 902
+    weight: 1002
   - name: Mobile Application
     url: mobile/
     identifier: mobile
@@ -1266,7 +1287,7 @@ main:
     url: monitors/guide/
     weight: 100
     parent: alerting
-  - name: APM & Distributed Tracing
+  - name: APM & Continuous Profiler
     url: tracing/
     pre: nav_tracing
     identifier: tracing
@@ -1489,6 +1510,10 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
     weight: 404
+  - name: Request Flow Map
+    url: tracing/trace_search_and_analytics/request_flow_map
+    parent: trace_search_and_analytics
+    weight: 405
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
@@ -1719,16 +1744,21 @@ main:
     parent: setup_tests
     identifier: ci_python
     weight: 106
+  - name: Ruby
+    url: continuous_integration/setup_tests/ruby/
+    parent: setup_tests
+    identifier: ci_ruby
+    weight: 107
   - name: Swift
     url: continuous_integration/setup_tests/swift/
     parent: setup_tests
     identifier: ci_swift
-    weight: 107
+    weight: 108
   - name: JUnit Report Uploads
     url: continuous_integration/setup_tests/junit_upload/
     parent: setup_tests
     identifier: ci_junit
-    weight: 108
+    weight: 109
   - name: Tracing Pipelines
     url: continuous_integration/setup_pipelines/
     parent: ci
@@ -1832,22 +1862,21 @@ main:
     parent: log_management
     identifier: log_configuration
     weight: 2
-  - name: Processing
-    url: logs/log_configuration/processing/
-    parent: log_configuration
-    identifier: log_processing
-    weight: 201
   - name: Pipelines
     url: logs/log_configuration/pipelines/
     parent: log_configuration
     identifier: log_pipelines
-    weight: 202
+    weight: 201
   - name: Processors
     url: logs/log_configuration/processors/
     parent: log_configuration
+    weight: 202
+  - name: Parsing
+    url: logs/log_configuration/parsing/
+    parent: log_configuration
     weight: 203
   - name: Attributes and Aliasing
-    url: logs/processing/attributes_naming_convention/
+    url: logs/log_collection/?tab=host#attributes-and-tags
     parent: log_processing
     weight: 204
   - name: Attributes and Aliasing
@@ -2203,6 +2232,21 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
+  - name: Data Collected
+    url: real_user_monitoring/ios/data_collected/
+    parent: rum_ios
+    identifier: rum_ios_data_collected
+    weight: 301
+  - name: Advanced Configuration
+    url: real_user_monitoring/ios/advanced_configuration/
+    parent: rum_ios
+    identifier: rum_ios_advanced
+    weight: 302
+  - name: Troubleshooting
+    url: real_user_monitoring/ios/troubleshooting/
+    parent: rum_ios
+    identifier: rum_troubleshooting_ios
+    weight: 304
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
@@ -2568,6 +2612,11 @@ main:
     pre: nav_help
     identifier: help_top_level
     weight: 240000
+  - name: Aggregating Agents
+    url: agent/vector_aggregation/
+    parent: agent
+    identifier: vector_aggregation
+    weight: 13
 footer_product:
   - name: Features
     url: 'https://www.datadoghq.com/product/'
@@ -2586,12 +2635,6 @@ footer_product:
     weight: 120
   - name: Continuous Profiler
     url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 121
-  - name: Security Monitoring
-    url: 'https://www.datadoghq.com/product/security-monitoring/'
-    weight: 123
-  - name: Network Monitoring
-    url: 'https://www.datadoghq.com/product/network-monitoring/'
     weight: 125
   - name: Synthetic Monitoring
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
@@ -2599,31 +2642,31 @@ footer_product:
   - name: Real User Monitoring
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
+footer_product_two:
+  - name: Security Platform
+    url: 'https://www.datadoghq.com/product/security-platform/'
+    weight: 140
+  - name: Security Monitoring
+    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring'
+    weight: 145
+  - name: CSPM
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
+    weight: 150
+  - name: Network Monitoring
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
+    weight: 155
   - name: Incident Management
     url: 'https://www.datadoghq.com/product/incident-management/'
-    weight: 136
+    weight: 160
   - name: Serverless
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 140
+    weight: 165
   - name: Alerts
     url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 145
+    weight: 170
   - name: API
     url: 'https://docs.datadoghq.com/api/'
-    weight: 150
-footer_product_two:
-  - name: Real User Monitoring
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 135
-  - name: Serverless
-    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 140
-  - name: Alerts
-    url: 'https://www.datadoghq.com/product/alerts/'
-    weight: 145
-  - name: API
-    url: 'https://docs.datadoghq.com/api/'
-    weight: 150
+    weight: 175
 footer_product_three:
   - name: Pricing
     url: 'https://www.datadoghq.com/pricing/'
@@ -3126,7 +3169,7 @@ api:
       operationids:
         - UpdateDashboard
       unstable: []
-      order: 4
+      order: 6
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: get-a-dashboard
@@ -3138,7 +3181,7 @@ api:
       operationids:
         - GetDashboard
       unstable: []
-      order: 5
+      order: 7
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: delete-a-dashboard
@@ -3247,6 +3290,18 @@ api:
         - CreateDashboard
       unstable: []
       order: 1
+  - name: Restore deleted dashboards
+    url: '#restore-deleted-dashboards'
+    identifier: restore-deleted-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RestoreDashboards
+      unstable: []
+      order: 5
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: get-all-dashboards
@@ -3259,6 +3314,18 @@ api:
         - ListDashboards
       unstable: []
       order: 2
+  - name: Delete dashboards
+    url: '#delete-dashboards'
+    identifier: delete-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboards
+      unstable: []
+      order: 4
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes
@@ -3656,6 +3723,7 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetApplicationKey
       unstable: []
@@ -5249,30 +5317,6 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
-  - name: Get hourly usage for tracing without limits
-    url: '#get-hourly-usage-for-tracing-without-limits'
-    identifier: get-hourly-usage-for-tracing-without-limits
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetTracingWithoutLimits
-      unstable: []
-      order: 25
-  - name: Get hourly usage for Trace Search
-    url: '#get-hourly-usage-for-trace-search'
-    identifier: get-hourly-usage-for-trace-search
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetUsageTrace
-      unstable: []
-      order: 6
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: get-all-custom-metrics-by-hourly-average

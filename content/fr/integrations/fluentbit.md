@@ -17,6 +17,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
     tag: Blog
     text: "Centraliser vos logs avec Datadog et Fluent\_Bit"
+integration_id: fluentbit
 ---
 ## Présentation
 
@@ -24,7 +25,7 @@ Configurez Fluent Bit pour recueillir, analyser et transmettre des données de 
 
 ## Configuration
 
-Les instructions ci-dessous concernent la configuration de Fluent Bit sur un host. Pour le configurer sur AWS ECS, consultez la [documentation dédiée à Fluent Bit et FireLense sur ECS][2].
+Les instructions ci-dessous concernent la configuration de Fluent Bit sur un host. Pour le configurer sur AWS ECS, consultez la [documentation dédiée à Fluent Bit et FireLense sur ECS][2].
 
 ### Collecte de logs
 
@@ -38,7 +39,7 @@ Avant de commencer, vous devez avoir un [compte Datadog][3] et une [clé d'API D
 
 | Clé            | Description                                                                                                              | Valeur par défaut                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| Host           | _Obligatoire_ - Le serveur Datadog vers lequel vous envoyez vos logs.                                                         | Site américain : `http-intake.logs.datadoghq.com` - Site européen : `http-intake.logs.datadoghq.eu` |
+| Host           | _Obligatoire_ - Le serveur Datadog vers lequel vous envoyez vos logs.                                                         | {{< region-param key="http_endpoint" code="true" >}} |
 | TLS            | _Obligatoire_ - Protocole de communication sécurisée de bout en bout. Datadog vous conseille de définir ce paramètre sur `on`.              | `off`                                                                       |
 | apikey         | _Obligatoire_ - Votre [clé d'API Datadog][4].                                                                                  |                                                                             |
 | compress       | _Conseillé_ - Compresse la charge utile au format GZIP. Datadog prend en charge et recommande le format `gzip`.           |                                                                             |

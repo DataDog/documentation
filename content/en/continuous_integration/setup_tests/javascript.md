@@ -13,22 +13,11 @@ further_reading:
 ## Compatibility
 
 Supported test frameworks:
-* Jest >=24.8.0
+* Jest >= 24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
   * Only [`jest-circus`][1] is supported as a `testRunner`.
-* Mocha >=5.2.0
-  * Mocha >=9.0.0 has [partial support](#known-limitations).
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+* Mocha >= 5.2.0
+  * Mocha >= 9.0.0 has [partial support](#known-limitations).
 
 ## Prerequisites
 
@@ -46,17 +35,24 @@ For more information, see the [JavaScript tracer installation docs][4].
 
 ## Instrument your tests
 
-### Jest instrumentation
+{{< tabs >}}
+{{% tab "Jest" %}}
 
 1. Install the `jest-circus` test runner:
 
-    {{< code-block lang="bash" >}}
+```bash
 yarn add --dev jest-circus
-{{< /code-block >}}
+```
 
-2. Configure a custom [testEnvironment][5] and [testRunner][6] in your `jest.config.js` or however you are configuring [jest][7]:
+**Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
 
-    {{< code-block lang="javascript" filename="jest.config.js" >}}
+```bash
+yarn add --dev jest-circus@25.5.4
+```
+
+2. Configure a custom [testEnvironment][1] and [testRunner][2] in your `jest.config.js` or however you are configuring `jest`:
+
+```javascript
 module.exports = {
   // ...
   testRunner: 'jest-circus/runner',
@@ -64,67 +60,97 @@ module.exports = {
   testEnvironment: '<rootDir>/testEnvironment.js',
   // ...
 }
-{{< /code-block >}}
+```
 
-    And in `testEnvironment.js`:
+And in `testEnvironment.js`:
 
-    {{< code-block lang="javascript" filename="testEnvironment.js" >}}
+```javascript
 require('dd-trace').init({
-  service: 'ui-tests' // The name of the Test Service that will appear in the CI Tests tab.
-})
-// jest-environment-jsdom is an option too
-module.exports = require('jest-environment-node')
-{{< /code-block >}}
+  // Only activates test instrumentation on CI
+  enabled: process.env.DD_ENV === 'ci',
 
-**Note**: The default configuration should work for most cases, but depending on the volume and speed of your tests, the tracer or the Agent might drop some of the spans. Alleviate this by increasing the `flushInterval` (a value in milliseconds) when initializing the tracer:
+  // Name of the service or library under test
+  service: 'my-ui-app',
 
-{{< code-block lang="javascript" >}}
-require('dd-trace').init({
+  // To guarantee test span delivery
   flushInterval: 300000
 })
-{{< /code-block >}}
 
-### Mocha instrumentation
+// jest-environment-jsdom is an option too
+module.exports = require('jest-environment-node')
+```
 
-Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your `package.json`:
+<div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code> and <code>jest-environment-jsdom</code> are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed version is the same as the one of <code>jest</code>.</div>
 
-{{< code-block lang="javascript" >}}
-// package.json
-'scripts': {
-  'test': 'mocha --require dd-trace/init'
-},
-{{< /code-block >}}
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-## Disabling instrumentation in local development
+```bash
+DD_ENV=ci npm test
+```
 
-If you want to disable the testing instrumentation for local development (where you might not be running the Datadog Agent), these are some options:
 
-### Jest
+[1]: https://jestjs.io/docs/en/configuration#testenvironment-string
+[2]: https://jestjs.io/docs/en/configuration#testrunner-string
+{{% /tab %}}
+{{% tab "Mocha" %}}
 
-When initializing the tracer, check whether you are in CI:
+Create a file in your project (for example, `init-tracer.js`) with the following contents:
 
-{{< code-block lang="javascript" >}}
+```javascript
 require('dd-trace').init({
-  enabled: !!process.env.CI // the environment variable to use depends on the CI provider
+  // Only activates test instrumentation on CI
+  enabled: process.env.DD_ENV === 'ci',
+
+  // Name of the service or library under test
+  service: 'my-ui-app'
 })
-{{< /code-block >}}
+```
 
-### Mocha
+Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
 
-Use different test scripts for CI and local development:
-
-{{< code-block lang="javascript" >}}
-// package.json
+```javascript
 'scripts': {
-  'test': 'mocha',
-  'test:ci': 'mocha --require dd-trace/init'
+  'test': 'mocha --require init-tracer'
 },
-{{< /code-block >}}
+```
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+```bash
+DD_ENV=ci npm test
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Configuration settings
+
+The following is a list of the most important configuration settings that can be used with the tracer. They can be either passed in on its `init()` function, or as environment variables:
+
+`service`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: (test framework name)<br/>
+**Example**: `my-ui`
+
+`env`
+: Name of the environment where tests are being run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Default**: `none`<br/>
+**Examples**: `local`, `ci`
+
+`url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
+**Default**: `http://localhost:8126`
+
+All other [Datadog Tracer configuration][5] options can also be used.
+
 
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][9].
+[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][7].
 
 ### Browser tests
 The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
@@ -132,7 +158,6 @@ The JavaScript tracer does not support browsers, so if you run browser tests wit
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and CI Visibility.
-
 
 ### Parameterized tests
 
@@ -147,14 +172,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][10] instead:
+And use [`test.each`][8] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][11]:
+For `mocha`, use [`mocha-each`][9]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -169,12 +194,6 @@ forEach([
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
 
-## Configuration settings
-
-| Environment variable           | Recommendation                                                         |
-|--------------------------------|------------------------------------------------------------------------|
-| `DD_SERVICE`                   | The name of the Test Service that appears in the Tests tab.     |
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -183,10 +202,8 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [2]: /continuous_integration/setup_tests/agent/
 [3]: https://github.com/DataDog/dd-trace-js
 [4]: /tracing/setup_overview/setup/nodejs
-[5]: https://jestjs.io/docs/en/configuration#testenvironment-string
-[6]: https://jestjs.io/docs/en/configuration#testrunner-string
-[7]: https://jestjs.io/docs/en/configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[11]: https://github.com/ryym/mocha-each
+[5]: /tracing/setup_overview/setup/nodejs/?tab=containers#configuration
+[6]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[7]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[8]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[9]: https://github.com/ryym/mocha-each

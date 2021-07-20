@@ -46,6 +46,21 @@ To use the comprehensive configuration ensure you have `dd-trace-java` version `
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
+## Enabling the allocation profiler
+
+On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications.
+
+To enable the allocation profiler, start your application with the `-Ddd.profiling.allocation.enabled=true` JVM setting or the `DD_PROFILING_ALLOCATION_ENABLED=true` environment variable.
+
+Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+
+```
+jdk.ObjectAllocationInNewTLAB#enabled=true
+jdk.ObjectAllocationOutsideTLAB#enabled=true
+```
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
 ## Removing sensitive information from profiles
 
 If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:
@@ -58,19 +73,18 @@ jdk.InitialSystemProperty#enabled=false
 
 ## Large allocation events overwhelming the profiler
 
-To turn off allocation profiling, disable the following events in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
+To turn off allocation profiling, disable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
 
 ```
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
-jdk.OldObjectSample#enabled=false
 ```
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ## Memory leak detection slowing down garbage collector
 
-To turn off memory leak detection, disable the following event in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
+To turn off memory leak detection, disable the following event in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
 
 ```
 jdk.OldObjectSample#enabled=false

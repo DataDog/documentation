@@ -3,6 +3,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md'
 display_name: Métriques du serveur d'API Kubernetes
+draft: false
 git_integration_title: kube_apiserver_metrics
 guid: 406b274b-c44d-4499-a329-efd053b3f538
 integration_id: kube-apiserver-metrics
@@ -39,7 +42,9 @@ Ce check surveille [Kube_apiserver_metrics][1].
 
 ### Installation
 
-Le check Kube_apiserver_metrics est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Kube_apiserver_metrics est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+
+**Remarque** : cette intégration ne dispose d'aucun carré dans l'application Datadog. Suivez les étapes ci-dessous pour la configurer.
 
 ### Configuration
 
@@ -48,11 +53,11 @@ Consultez la documentation relative aux [checks de cluster][3].
 Vous pouvez annoter le service de votre apiserver avec ce qui suit :
 
 ```yaml
-Annotations:
-  ad.datadoghq.com/endpoints.check_names: ["kube_apiserver_metrics"]
-  ad.datadoghq.com/endpoints.init_configs: [{}]
+annotations:
+  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
+  ad.datadoghq.com/endpoints.init_configs: '[{}]'
   ad.datadoghq.com/endpoints.instances:
-    [{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]
+    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
 L'Agent de cluster Datadog programme ensuite le ou les checks pour chaque endpoint sur le ou les Agents Datadog.

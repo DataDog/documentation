@@ -91,8 +91,8 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 {{< code-block lang="bash" filename="debian-runtime-security.sh" >}}
 
-echo "runtime_security_config.enabled: true" > /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" > /etc/datadog-agent/system-probe.yaml
+echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
+echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -108,8 +108,8 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 {{< code-block lang="bash" filename="fedora-centos-runtime-security.sh" >}}
 
-echo "runtime_security_config.enabled: true" > /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" > /etc/datadog-agent/system-probe.yaml
+echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
+echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 

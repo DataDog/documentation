@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_api_management/'
 draft: false
 git_integration_title: azure_api_management
 has_logo: true
+integration_id: azure-apimanagement
 integration_title: Gestion des API de Microsoft Azure
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Le service Gestion des API Azure est un service entièrement géré qui permet a
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques du service Gestion des API Azure.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

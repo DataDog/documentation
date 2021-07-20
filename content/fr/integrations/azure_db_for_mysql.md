@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_mysql/'
 draft: false
 git_integration_title: azure_db_for_mysql
 has_logo: true
+integration_id: azure-db-for-mysql
 integration_title: Microsoft Azure Database pour MySQL
 is_public: true
 kind: integration
@@ -29,7 +30,7 @@ Recueillez des métriques d'Azure Database pour MySQL pour :
 - Visualiser les performances de vos bases de données MySQL
 - Corréler les performances de vos bases de données MySQL avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

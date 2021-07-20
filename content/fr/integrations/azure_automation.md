@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_automation/'
 draft: false
 git_integration_title: azure_automation
 has_logo: true
+integration_id: azure-automation
 integration_title: "Microsoft\_Azure\_Automation"
 is_public: true
 kind: integration
@@ -24,7 +25,7 @@ Azure Automation offre un service d'automatisation et de configuration cloud per
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Automation.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -13,55 +13,37 @@ further_reading:
 ## Compatibility
 
 Supported .NET versions:
-* .NET Core 2.1+
-* .NET Core 3.0+
-* .NET 5.0+
+* .NET Core >= 2.1 and >= 3.0
+* .NET >= 5.0
 
 Supported test frameworks:
-* xUnit 2.2+
-* NUnit 3.0+
-* MsTest V2 14+ (experimental)
-
-Supported CI providers:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+* xUnit >= 2.2
+* NUnit >= 3.0
+* MsTest V2 >= 14
 
 ## Prerequisites
 
 [Install the Datadog Agent to collect tests data][1].
 
-## Installing tracing
+## Installing the .NET tracer
 
-To install the `dd-trace` command globally on the machine, run:
-
-{{< code-block lang="bash" >}}
-dotnet tool install -g dd-trace
-{{< /code-block >}}
-
-Or, if you have a previous version of the tool, update it by running:
+To install or update the `dd-trace` command globally on the machine, run:
 
 {{< code-block lang="bash" >}}
 dotnet tool update -g dd-trace
 {{< /code-block >}}
 
-## Instrumenting your tests
+## Instrumenting tests
 
-To instrument your test suite, prefix your test command with `dd-trace`. For example:
+To instrument your test suite, prefix your test command with `dd-trace`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
 
 {{< code-block lang="bash" >}}
-dd-trace dotnet test
+dd-trace --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-All tests are instrumented automatically.
+All tests are automatically instrumented.
 
-### Configuration settings
+## Configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
 
@@ -71,56 +53,24 @@ dd-trace --help
 
 The following list shows the default values for key configuration settings:
 
-
-`--set-ci`
-: Sets up the clr profiler environment variables for all the CI pipeline. <br/>
-**Default**: `false`
+`--dd-service`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: The repository name<br/>
+**Example**: `my-dotnet-app`
 
 `--dd-env`
-: Environment name for unified service tagging.<br/>
+: Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
-**Default**: `(empty)`
+**Default**: `none`<br/>
+**Examples**: `local`, `ci`
 
-`--dd-service`
-: Service name for unified service tagging. <br/>
-**Environment variable**: `DD_SERVICE`<br/>
-**Default**: `(ProcessName)` 
-
-`--dd-version` 
-: Version for unified service tagging. <br/>
-**Environment variable**: `DD_VERSION`<br/>
-**Default**: `(empty)`
-
-`--agent-url` 
-: Datadog trace agent URL. <br/>
+`--agent-url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-Additionally, all [Datadog Tracer configuration][2] options can be used during test phase. 
-
-For example, to run a test suite with a custom agent URL and a custom service name:
-
-{{< code-block lang="bash" >}}
-dd-trace --agent-url=http://agent:8126 --dd-service=my-app dotnet test
-{{< /code-block >}}
-
-### Passing parameters to the application
-
-If the application expects command line arguments, use a `--` separator before the target application to avoid parameter collision.
-
-The following example shows how to instrument the command `dotnet test --framework netcoreapp3.1` with `ci` as environment:
-
-{{< code-block lang="bash" >}}
-dd-trace --dd-env=ci -- dotnet test --framework netcoreapp3.1
-{{< /code-block >}}
-
-### Instrumenting MsTest V2 framework
-
-Support for MsTest V2 framework is disabled by default, as it relies on an experimental method of instrumentation (some third-party libraries' instrumentation might be missing). To enable it, set the following environment variable before running the `dd-trace dotnet test` command:
-
-{{< code-block lang="bash" >}}
-DD_TRACE_CALLTARGET_ENABLED=true
-{{< /code-block >}}
+All other [Datadog Tracer configuration][2] options can also be used.
 
 ## Further reading
 

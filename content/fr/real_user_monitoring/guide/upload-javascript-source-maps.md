@@ -1,5 +1,5 @@
 ---
-title: Importer des source maps Javascript
+title: Importer des source maps JavaScript
 kind: guide
 further_reading:
 - link: /real_user_monitoring/error_tracking
@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       noSources: false,
-      filename: '[name].[hash].js.map'
+      filename: '[name].[fullhash].js.map'
     }),
     // ...
   ],

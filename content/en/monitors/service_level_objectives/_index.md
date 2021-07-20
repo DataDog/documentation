@@ -45,7 +45,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 
 1. On the [SLO status page][1], select **New SLO +**.
 2. Define the source for your SLOs. SLO types are [Metric-based][3] and [Monitor-based][4].
-3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipluated in your SLAs.
+3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipulated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
@@ -155,6 +155,10 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
 
+## SLO status corrections
+
+Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -170,3 +174,5 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
 [11]: /monitors/monitor_types/event/
+[12]: /api/latest/service-level-objective-corrections/
+[13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

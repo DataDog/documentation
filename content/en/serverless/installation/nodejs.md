@@ -93,16 +93,14 @@ Transform:
     Parameters:
       stackName: !Ref "AWS::StackName"
       apiKey: <DATADOG_API_KEY>
-      nodeLayerVersion: "<LAYER_VERSION>"
-      extensionLayerVersion: "<EXTENSION_VERSION>"
+      nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}
+      extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
       service: "<SERVICE>" # Optional
       env: "<ENV>" # Optional
 ```
 
 To fill in the placeholders:
 - Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][4]. 
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][5]).
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][6]).
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
 
 More information and additional parameters can be found in the [macro documentation][1].
@@ -112,8 +110,6 @@ More information and additional parameters can be found in the [macro documentat
 [2]: /serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: https://github.com/DataDog/datadog-lambda-js/releases
-[6]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -144,8 +140,8 @@ class CdkStack extends cdk.Stack {
     super(scope, id, props);
 
     const datadog = new Datadog(this, "Datadog", { 
-        nodeLayerVersion: <LAYER_VERSION>, 
-        extensionLayerVersion: <EXTENSION_VERSION>, 
+        nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}, 
+        extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}, 
         apiKey: <DATADOG_API_KEY>,
         service: <SERVICE> // Optional
         env: <ENV> // Optional 
@@ -159,8 +155,6 @@ To fill in the placeholders:
 
 - Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
 - Replace `<SERVICE>` and `<ENV>` with appropriate values.
-- Replace `<LAYER_VERSION>` with the desired version of the Datadog Lambda layer (see the [latest releases][2]).
-- Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension (see the [latest releases][4]).
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
@@ -188,34 +182,28 @@ yarn global add @datadog/datadog-ci
 
 ### Instrument
 
-To instrument the function, run the following command with your [AWS credentials][1]. Replace `<functionname>` and `<another_functionname>` with your Lambda function names, `<aws_region>` with the AWS region name, `<layer_version>` with the [desired version][2] of the Datadog Lambda Library and `<extension_version>` with the [desired version][3] of the Datadog Lambda Extension.
+To instrument the function, run the following command with your [AWS credentials][1].
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> -e <extension_version>
 ```
 
+To fill in the placeholders:
+- Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
+- Replace `<aws_region>` with the AWS region name. 
+- Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
+- Replace `<extension_version>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
 For example:
 
-{{< site-region region="us,us3,eu" >}}
-
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-
-```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 -e 8
-```
-{{< /site-region >}}
-
-More information and additional parameters can be found in the [CLI documentation][4].
+More information and additional parameters can be found in the [CLI documentation][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://github.com/DataDog/datadog-lambda-js/releases
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
-[4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -248,7 +236,7 @@ Add the Datadog Lambda Extension to your container image by adding the following
 COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
 ```
 
-Replace `<TAG>` with either a specific version number (for example, `7`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 ### Configure the function
 
@@ -291,19 +279,19 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 ```
 {{< /site-region >}}
 
-The available `RUNTIME` options are `Node10-x` and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:
+The available `RUNTIME` options are `Node10-x` and `Node12-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
 {{< site-region region="us,us3,eu" >}} 
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 
 ```
-arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:25
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 {{< /site-region >}}
@@ -344,7 +332,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSI
 
 {{< /site-region >}}
 
-For `EXTENSION_VERSION`, see the [latest release][4].
+The latest `EXTENSION_VERSION` is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 ### Configure
 

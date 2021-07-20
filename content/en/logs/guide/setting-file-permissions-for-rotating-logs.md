@@ -7,10 +7,10 @@ further_reading:
 - link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---

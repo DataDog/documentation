@@ -44,7 +44,7 @@ nav_sections:
         link: monitors/
         icon: attention-circled.svg
         desc: Create & manage monitors & notifications
-      - title: APM & Distributed Tracing
+      - title: APM & Continuous Profiler
         link: tracing/
         icon: trace.svg
         desc: Gain insight on your application's performance
@@ -80,7 +80,7 @@ nav_sections:
         link: watchdog/
         icon: watchdog.svg
         desc: Automatically see trends in your applications & infrastructure metrics
-      - title: CI Visibility 
+      - title: CI Visibility
         link: continuous_integration/
         icon: ci.svg
         desc: Track the performance and reliability of your tests and pipelines
@@ -94,7 +94,7 @@ nav_sections:
       - title: Account Management
         link: account_management/
         icon: cog.svg
-        desc: Control your account settings
+        desc: Control your account settings and manage billing
       - title: Security
         link: security/
         icon: lock.svg

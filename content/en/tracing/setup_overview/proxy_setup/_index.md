@@ -293,6 +293,8 @@ The `http` block enables the OpenTracing module and loads the Datadog tracer:
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
 
+The `log_format with_trace_id` block is for correlating logs and traces. See the [example NGINX config][5] file for the complete format. The `$opentracing_context_x_datadog_trace_id` value captures the trace ID, and `$opentracing_context_x_datadog_parent_id` captures the span ID. 
+
 The `location` block within the server where tracing is desired should add the following:
 
 ```nginx

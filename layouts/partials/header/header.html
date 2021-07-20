@@ -4,7 +4,7 @@
 {{ $btnClass := "btn btn-gradient knockout-around js-cta-topRight" }}
 {{ $SignUpClass := .Site.Params.SignUpClass }}
 {{ if $announce }}
-    {{ partial "announcement_banner/announcement_banner.html" . }}
+  {{ partial "announcement_banner" . }} {{/* imported from websites-modules */}}
 {{ end }}
 
 <header>

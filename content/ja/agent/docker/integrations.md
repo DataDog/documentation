@@ -39,8 +39,8 @@ further_reading:
 以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
 
 * [Docker ラベル](?tab=docker#configuration)
-* [Agent 内にマウントされた構成ファイル](?tab=file#configuration)
-* [key-value ストア](?tab=keyvaluestore#configuration)
+* [Agent 内にマウントされたコンフィギュレーションファイル](?tab=file#configuration)
+* [Key-Value ストア](?tab=keyvaluestore#configuration)
 
 **注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。これらのインテグレーションでオートディスカバリーを有効にするには、ポッドで公式の Prometheus エクスポーターを使用し、次に Agent でオートディスカバリーを使用してポッドを見つけ、エンドポイントをクエリします。
 
@@ -225,8 +225,8 @@ instances:
 
 Redis で、統計エンドポイントにアクセスする際に追加の `password` が必要な場合、以下のようにします。
 
-1. ホストに `conf.d/` フォルダーと `conf.d/redis.d` フォルダーを作成します。
-2. ホストの `conf.d/redis.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
+1. ホストに `conf.d/` フォルダーと `conf.d/redisdb.d` フォルダーを作成します。
+2. ホストの `conf.d/redisdb.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
 3. ホストの `conf.d/` フォルダーをコンテナ化 Agent の `conf.d/` フォルダーにマウントします。
 
 ```yaml

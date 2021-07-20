@@ -15,7 +15,7 @@ exceptions:
   - Amazon Web Services
   - APCu
   - APIs
-  - APM & Distributed Tracing
+  - APM & Continuous Profiler
   - App Analytics
   - App Service
   - AppVeyor

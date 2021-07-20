@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_data_lake_store/'
 draft: false
 git_integration_title: azure_data_lake_store
 has_logo: true
+integration_id: azure-datalakestore
 integration_title: Microsoft Azure Data Lake Store
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Data Lake Store est une solution Data Lake sans limite qui améliore l'ana
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de Data Lake Store.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

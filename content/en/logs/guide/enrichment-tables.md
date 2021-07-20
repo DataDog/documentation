@@ -3,10 +3,10 @@ title: Add Custom Metadata to Logs with Enrichment Tables
 kind: guide
 beta: true
 further_reading:
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---
@@ -78,4 +78,4 @@ To modify an existing enrichment table with new data, select a table then click 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/processors/?tab=ui#lookup-processor
+[1]: /logs/log_configuration/processors/#lookup-processor

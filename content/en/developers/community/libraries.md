@@ -13,7 +13,7 @@ The following table lists Datadog-official and community contributed API and [Do
 
 {{< classic-libraries-table >}}
 
-## APM & Distributed Tracing client libraries
+## APM & Continuous Profiler client libraries
 
 The following table lists Datadog-official and community contributed [trace][2] client libraries.
 

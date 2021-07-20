@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: true
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md'
 display_name: Uptime
+draft: false
 git_integration_title: uptime
 guid: 5da2ddb8-ecf7-4971-a3ee-e42752efc1f5
 integration_id: uptime
@@ -38,11 +40,11 @@ Recueillez des événements et des métriques depuis votre application en temps 
 
 ![Graphique Uptime.com][1]
 
-## Implémentation
+## Configuration
 
 ### Configuration
 
-Pour activer l'intégration de Datadog dans votre compte Uptime, accédez à [Alerting>Push Notifications][2] puis choisissez Datadog comme type de fournisseur lors de l'ajout d'un nouveau profil de notifications push.
+Pour activer l'intégration de Datadog dans votre compte Uptime, accédez à [Notifications > Integrations][2] puis choisissez Datadog comme type de fournisseur lors de l'ajout d'un nouveau profil de notifications push.
 
 Description des champs affichés lors de la configuration de Datadog dans votre compte Uptime :
 shell
@@ -73,6 +75,6 @@ Le check Uptime n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptime/images/snapshot.png
-[2]: https://uptime.com/push-notifications/manage
+[2]: https://uptime.com/integrations/manage/
 [3]: https://github.com/DataDog/integrations-extras/blob/master/uptime/metadata.csv
 [4]: https://docs.datadoghq.com/fr/help/

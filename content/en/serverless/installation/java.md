@@ -62,7 +62,7 @@ dependencies {
 
 Follow these steps to instrument the function:
 
-1. Install the Datadog Lambda Layer on your function. For `VERSION`, see the latest [release][5]:
+1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
@@ -152,6 +152,8 @@ See the [custom metrics documentation][11] for more information on custom metric
 ### Connect logs and traces
 
 To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][12] for instructions.
+
+<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
 
 ## Further Reading
 
