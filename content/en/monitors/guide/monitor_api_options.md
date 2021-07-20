@@ -16,7 +16,7 @@ kind: guide
   - bewteen **1** and **60**: the first evaluation is ignored
   - between **61** and **120**: the first two evaluations are ignored
 
-- **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. Default: **300**. Using `new_group_delay` instead of `new_host_delay` is recommanded.
+- **`new_host_delay`** Time (in seconds) to allow a host to boot and applications to fully start before starting the evaluation of monitor results. Should be a non negative integer. **Deprecated: Use `new_group_delay` instead**
 
 - **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 - **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
