@@ -6,7 +6,7 @@ aliases:
     - /logs/explore/livetail
     - /logs/live_tail
 further_reading:
-    - link: 'logs/processing'
+    - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: 'logs/explorer/side_panel'
@@ -38,6 +38,6 @@ Contrary to queries on indexed logs happening in the [Log Explorer][3], queries 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/indexes#exclusion-filters
-[2]: /logs/processing
+[2]: /logs/log_configuration/pipelines
 [3]: /logs/explorer
 [4]: /logs/explorer/facets/

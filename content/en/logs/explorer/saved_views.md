@@ -6,7 +6,7 @@ further_reading:
     - link: 'logs/explorer/analytics'
       tag: 'Documentation'
       text: 'Perform Log Analytics'
-    - link: 'logs/processing'
+    - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
 ---

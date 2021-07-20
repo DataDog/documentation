@@ -155,6 +155,6 @@ Need help? Contact [Datadog support][5].
 
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
 [2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
-[3]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#naming-conventions
+[3]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
 [4]: https://docs.apigee.com/api-platform/reference/variables-reference
 [5]: /help/
