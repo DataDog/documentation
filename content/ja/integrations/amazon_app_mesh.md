@@ -16,6 +16,7 @@ further_reading:
     text: Envoy インテグレーション
 git_integration_title: amazon_app_mesh
 guid: 04669673-120b-48c9-a855-06d57d92c7cf
+integration_id: amazon-app-mesh
 integration_title: AWS App Mesh
 is_public: true
 kind: インテグレーション
@@ -94,13 +95,15 @@ supported_os:
 namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) をデプロイします。オプションでこれを使用し、以下のように appmesh-injector をデプロイします。
 
     ```shell
-      helm upgrade -i appmesh-inject eks/appmesh-inject \
+      helm upgrade -i appmesh-controller eks/appmesh-controller \
       --namespace appmesh-system \
+      --set sidecar.logLevel=debug \
       --set tracing.enabled=true \
       --set tracing.provider=datadog \
-      --set tracing.address=datadog.monitoring \
+      --set tracing.address=ref:status.hostIP \
       --set tracing.port=8126
     ```
+
 
 または、[EKS を使用した App Mesh][3]ドキュメントの説明に従って、オプションの `enable-datadog-tracing=true` や環境変数の `ENABLE_DATADOG_TRACING=true` を使用して appmesh インジェクターをデプロイすることもできます。
 
