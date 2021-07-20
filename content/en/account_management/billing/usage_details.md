@@ -99,7 +99,7 @@ The "All" view provides the following information about all your custom metrics:
 * Average custom metrics per hour
 * Max custom metrics per hour
 * Search for a metric within all your custom metrics
-* This data can be downloaded as a CSV file, with a maximum of 800,000 custom metrics. You can download over 800,000 custom metrics using our [API endpoint][7].
+* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][7].
 
 For more details on your metrics, navigate to the [Metrics Summary][5] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right-hand side.
 
