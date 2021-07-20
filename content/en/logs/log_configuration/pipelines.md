@@ -5,7 +5,7 @@ description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/pipelines/
 further_reading:
-- link: "/logs/processing/processors/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
 - link: "/logs/logging_without_limits/"

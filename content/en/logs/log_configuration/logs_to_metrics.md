@@ -6,7 +6,7 @@ aliases:
     - /logs/logs_to_metrics/
 description: 'Generate Metrics from Ingested Logs.'
 further_reading:
-    - link: 'logs/processing/processors'
+    - link: 'logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: 'logs/logging_without_limits'

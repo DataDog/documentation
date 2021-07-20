@@ -14,7 +14,7 @@ further_reading:
 - link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
 - link: "/logs/explorer/saved_views/"
@@ -207,7 +207,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/?tab=matcher
+[1]: /logs/log_configuration/parsing
 [2]: /logs/explorer/facets/
 [3]: /infrastructure/
 [4]: /integrations/#cat-log-collection

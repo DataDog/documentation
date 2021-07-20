@@ -109,12 +109,12 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 
 [1]: /security_monitoring/
 [2]: /logs/log_collection/?tab=http#application-log-collection
-[3]: /logs/processing/processors/?tab=ui#grok-parser
+[3]: /logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
-[5]: /logs/processing/attributes_naming_convention/
-[6]: /logs/processing/attributes_naming_convention/#user-related-attributes
-[7]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#events
-[8]: /logs/processing/attributes_naming_convention/#network
+[5]: /logs/log_configuration/attributes_naming_convention
+[6]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[7]: /logs/log_configuration/attributes_naming_convention/#events
+[8]: /logs/log_configuration/attributes_naming_convention/#network
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule

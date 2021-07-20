@@ -44,8 +44,9 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
+4. **Recommendation**: Specify the `service` and `version` so you can slice and dice your profiles across these dimensions. [Use environment variables](#environment-variables) to set the parameters.
 
+5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
 
 **Note**:
 
@@ -58,11 +59,9 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-- Datadog strongly recommends that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
-
 ## Enabling the allocation profiler
 
-In dd-java-agent v0.83.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
+In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
 
 ## Environment variables
 
