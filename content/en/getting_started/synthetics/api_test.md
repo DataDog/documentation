@@ -117,11 +117,15 @@ When you create a [Multistep API test][12], you can define a sequence of HTTP re
     - Specify the URL you want to query. 
     - Select **Advanced Options** to add custom request headers, authentication credentials, body content, or cookies.
     - Click **Test URL**. 
-    - Optionally, add new assertions, define execution parameters, and extract variables from the response content. When you extract a variable from the response content, remember to re-inject the variable in subsequent steps.
+    - Optionally, add new assertions, define execution parameters, and extract variables from the response content. 
+    - Enter a name for your variable and click on a parsed value in the **Response Body** to set the variable value. 
     - Click **Save Step**.
 
-6. Click **Add Another Step** to add another step. By default, you can create up to ten steps. 
-7. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
+6. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
+7. Optionally, Type `{{` in the **URL** and a list of extracted and global variables appear. 
+8. Select an extracted variable to inject in your test step. You can add your extracted variables in the **Step URL** or in the request header, cookies, and HTTP authentication fields in **Advanced Options** > **Request Options**.  
+
+9. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
 
 When you're ready to create your test, click **Save Test**. 
 
