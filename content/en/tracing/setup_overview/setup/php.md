@@ -451,20 +451,20 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
 
-### Valgrind trace
+### Obtaining a Valgrind trace
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
 
 Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests (not generally in production).
 
 For a CLI application, run:
-{{< code-block lang=shell>}}
+{{< code-block lang=shell >}}
 USE_ZEND_ALLOC=0 valgrind -- php path/to/script.php
 {{< /code-block >}}
 When running `php-fpm` run:
 {{< code-block lang="shell" >}}
- USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- php-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
- {{< /code-block >}}
+USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- php-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
+{{< /code-block >}}
 When using Apache, run:
 {{< code-block lang="shell" >}}
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
