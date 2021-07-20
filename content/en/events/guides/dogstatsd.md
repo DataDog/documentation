@@ -40,7 +40,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 ### Examples
 
-View errors and exceptions in Datadog with a DogStatsD event:
+Run the following code to view errors and exceptions in Datadog with a DogStatsD event. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -57,6 +57,9 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
+
+# Optional manual flush (only available in client versions >= 0.43.0)
+statsd.flush()
 ```
 {{< /programming-lang >}}
 
