@@ -304,8 +304,9 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **Default**: `false`<br>
-Only effective under linux. Set to `true` to retain capabilities on datadog background threads upon change of the effective user id. This option will not affect most setups, but some modules - to date Datadog is only aware of [apache's mod-ruid2](https://github.com/mind04/mod-ruid2) - may invoke setuid() or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br>
-**Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. It is recommended to restrict the capabilities of the web server with the `setcap` utility.
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2](https://github.com/mind04/mod-ruid2) - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
+
+**Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `1.0`<br>
