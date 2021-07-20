@@ -71,7 +71,7 @@ Alternatively, you can enable the following events in your `jfp` [override templ
 jdk.OldObjectSample#enabled=true
 ```
 
-There is no support for reference chains at this time. Please [open a support ticket][2] if it's something you are interested in.
+[Contact Support][2] if you have feedback or feature requests for the Java heap profiler.
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
