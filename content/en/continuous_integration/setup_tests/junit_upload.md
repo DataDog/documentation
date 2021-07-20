@@ -50,7 +50,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `my-api-service`
 
 `--tags`
-: Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).
+: Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
 **Environment variable**: `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `team:backend`<br/>
