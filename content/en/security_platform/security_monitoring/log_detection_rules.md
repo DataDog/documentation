@@ -264,9 +264,9 @@ Tag your signals with different tags, for example, `security:attack` or `techniq
 
 ### Template variables
 
-Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from triggered logs directly into a security signal and it's associated notifications.
+Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from triggered logs directly into a security signal and its associated notifications.
 
-For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message will state which user and IP address triggered a given signal when using the specified template variable.
+For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message states which user and IP address triggered a given signal when using the specified template variable.
 
 ```text
 The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
