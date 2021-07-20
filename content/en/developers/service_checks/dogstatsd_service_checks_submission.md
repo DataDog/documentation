@@ -36,7 +36,7 @@ Service check function parameters:
 
 ### Code examples
 
-Run the following code to submit a service check via DogStatsD to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
+Run the following code to submit a service check through DogStatsD to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
