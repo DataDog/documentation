@@ -71,8 +71,6 @@ Alternatively, you can enable the following events in your `jfp` [override templ
 jdk.OldObjectSample#enabled=true
 ```
 
-[Contact Support][2] if you have feedback or feature requests for the Java heap profiler.
-
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ## Removing sensitive information from profiles
