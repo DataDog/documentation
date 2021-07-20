@@ -195,7 +195,7 @@ In most cases this setting is not useful because you only want an alert to resol
 Delay the evaluation by `N` seconds for new groups.
 The option is available with multi-alert mode.
 
-The time (in seconds) before starting the evaluation of monitor results, to allow newly created groups to boot and applications to fully start. This should be a non-negative integer. If the delay is set between `1` and `60` seconds and the evaluation frequency is 1 minute, the monitor will skip the first evaluations for newly created groups. If the delay is set between `61` and `120` seconds, the monitor will skip the 2 first evaluations, and so on.
+The time (in seconds) before starting the evaluation of monitor results, to allow newly created groups to boot and applications to fully start. This should be a non-negative integer. If you are using containerized architecture, setting an evaluation delay will prevent your monitor grouped by containers from triggering when a new container is created, which may cause some metrics to spike up in the first minutes. The option is set to `60` seconds by default.
 
 #### Evaluation delay
 
