@@ -62,7 +62,6 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
-
 #### Advanced options
 
 Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
@@ -210,6 +209,8 @@ A signal will "close" regardless of whether or not the anomaly is still anomalou
 
 ## Say what's happening
 
+The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
+
 The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
 
 This JSON object is an example of event attributes which may be associated with a security signal:
@@ -257,13 +258,31 @@ You can use if-else logic to see if an attribute matches a value:
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-You can read more about template variables [here][1].
-
-The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the Security Signal.
-
 Tag your signals with different tags, for example, `security:attack` or `technique:T1110-brute-force`.
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
+
+### Template variables
+
+Security rules support template variables within the markdown box. Template variables allow you to inject dynamic context from triggering logs directly into the security signal and associated notifications.
+
+For example, if a rule detects when a user logs in from an IP address known to be malicious, the message can clearly state which user and IP address triggered a given signal.
+
+```text
+The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
+```
+
+Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation.
+
+```text
+* [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
+```
+
+Epoch template variables can be used to create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string.
+
+```text
+{{eval "first_seen_epoch-15*60*1000"}}
+```
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
