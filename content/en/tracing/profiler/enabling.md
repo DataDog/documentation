@@ -41,12 +41,18 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. The update to your service invocation should look like:
 
     ```diff
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java \
+        -javaagent:dd-java-agent.jar \
+        -Ddd.service=<YOUR_SERVICE> \
+        -Ddd.env=<YOUR_ENVIRONMENT> \
+        -Ddd.profiling.enabled=true \
+        -XX:FlightRecorderOptions=stackdepth=256 \
+        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. **Recommendation**: Specify the `service` and `version` so you can slice and dice your profiles across these dimensions. [Use environment variables](#environment-variables) to set the parameters.
+   **Recommendation**: Specify `dd.service` and `dd.version` so you can slice and dice your profiles across these dimensions. You can also [use environment variables](#environment-variables) to set the parameters.
 
-5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
+4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
 
 **Note**:
 
