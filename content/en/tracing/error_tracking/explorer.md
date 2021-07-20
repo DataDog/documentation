@@ -4,7 +4,7 @@ kind: documentation
 beta: false
 ---
 
-{{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}
+{{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Error Tracking Explorer"  >}}
 
 ## Explore your issues
 
@@ -19,13 +19,13 @@ The Error Tracking Explorer allows you to visualize the list of ongoing issues: 
 
 ### Time range
 
-{{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range"  >}}
+{{< img src="tracing/error_tracking/time_range.png" alt="Error Tracking Time Range"  >}}
 
 The time range appears on the very top right of the Explorer as a timeline. It allows you to display issues having error occurrences within the selected time period. Quickly change the time range by selecting a preset range from the dropdown.
 
 ### Facets
 
-{{< img src="real_user_monitoring/error_tracking/facet.png" alt="Error Tracking Facets"  >}}
+{{< img src="tracing/error_tracking/facet.png" alt="Error Tracking Facets"  >}}
 
 Error Tracking automatically indexes a predefined list of attributes from the underlying error occurrences and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of corresponding issues. Facets allow you to pivot or filter your issues: the Explorer returns all issues having at least one error occurrence in the selected time period matching the set of facets.
 
@@ -35,13 +35,13 @@ Click on any issue to open the issue panel and see more information about it.
 
 ### Get a high-level overview
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel"  >}}
+{{< img src="tracing/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel"  >}}
 
 The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand the issue's lifecycle: first and last occurrence dates with the related code versions as well as the total count of error occurrences since inception. A graph of error occurrences is also available up to 14 days in the past to give you an overview of the trend of the given issue.
 
 ### Browse individual error occurrences
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
+{{< img src="tracing/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
 
 The lower part of the issue panel gives you the ability to navigate error samples that were grouped into the related issue:
 
