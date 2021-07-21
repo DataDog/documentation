@@ -48,8 +48,12 @@ Text inside tab.
 <p></p>
 
 ## Configure the Agent
-<p></p>
 
+The Agent must connect to the AWS Aurora _instance endpoint_.  AWS Aurora also provides a _cluster endpoint_ which allows client applications to connect to a reader or writer instance without knowledge of the underlying database host. Although using the cluster endpoint is desirable for applications, the Agent must be aware of all instances.
+
+### Proxies, load balancers, and connection poolers
+
+The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should be "sticky" to a single host, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the value of metrics will be incorrect.
 
 ## Troubleshooting
 

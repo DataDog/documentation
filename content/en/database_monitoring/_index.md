@@ -21,7 +21,7 @@ Introduction
 
 ## Getting started
 
-To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology and type:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres** and **MySQL**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology and type:
 
 ### Self-hosted databases
 

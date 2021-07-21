@@ -4,7 +4,8 @@ kind: documentation
 description: Setting up Database Monitoring on a MySQL database
 ---
 
-text
+For setup instructions, select your database type:
+
 partial
 
 <br>

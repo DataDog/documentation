@@ -4,7 +4,8 @@ kind: documentation
 description: Setting up Database Monitoring on a Postgres database
 ---
 
-text
+For setup instructions, select your database type:
+
 partial
 
 <br>
