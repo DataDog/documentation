@@ -16,7 +16,7 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
-Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to standard [Datadog MySQL integration][1] data about query throughput and performance, connections, and the InnoDB storage engine,
+Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to basic [Datadog MySQL integration][1] data about query throughput and performance, connections, and the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
@@ -357,7 +357,7 @@ See the [Autodiscovery template variables documentation][3] to learn how to pass
 
 Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes log collection documentation][4].
 
-Then, set [Log Integrations][5] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][5].
+Then, set [Log Integrations][5] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][6].
 
 ```yaml
 apiVersion: v1
@@ -370,13 +370,14 @@ metadata:
     name: mysql
 ```
 
-[5]:/agent/docker/log/?tab=containerinstallation#log-integrations
+
 
 [1]: /agent/kubernetes/integrations/?tab=kubernetes
 [2]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
 [3]: /agent/faq/template_variables/
 [4]: /agent/kubernetes/log/?tab=containerinstallation#setup
-[5]: /agent/kubernetes/log/?tab=daemonset#configuration
+[5]: /agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: /agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
