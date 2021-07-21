@@ -18,7 +18,7 @@ Monitoring the errors collected by Datadog is critical to your system's health, 
 
 - __Grouping similar errors into issues__ to turn this noisy flow of errors into a small list of manageable issues.
 - __Following issues over time__ to know when they first started, if they are still ongoing, and how often they are occurring to help identify the most important ones.
-- __Getting all the context needed in one place__ to facilitate troubleshooting the issue.
+- __Getting all the context in one place__ to facilitate troubleshooting.
 
 ## How does it work?
 
