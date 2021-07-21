@@ -12,7 +12,6 @@ further_reading:
 
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="Error Tracking Page"  >}}
 
-## What is error tracking?
 
 Monitoring the errors collected by Datadog is critical to your system's health, but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. Error Tracking makes it easier to monitor errors by:
 
