@@ -11,7 +11,7 @@ beta: false
 The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on how critical it is. Each item listed in the explorer surfaces high-level information about the issue:
 
 -   The error type and the error message
--   The path to the file in which underlying errors are fired
+-   The path to the file in which underlying errors occurred
 -   Important information about the issue’s lifetime:
     -   When it was first and last seen
     -   Number of error occurrences in the selected time period
