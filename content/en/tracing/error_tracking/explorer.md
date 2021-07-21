@@ -27,7 +27,7 @@ The time range appears on the very top right of the Explorer as a timeline. It a
 
 {{< img src="tracing/error_tracking/facet.png" alt="Error Tracking Facets"  >}}
 
-Error Tracking automatically indexes a predefined list of attributes from the underlying error occurrences and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of corresponding issues. Facets allow you to pivot or filter your issues: the Explorer returns all issues having at least one error occurrence in the selected time period matching the set of facets.
+Error Tracking automatically indexes a predefined list of attributes from the underlying error occurrences and creates facets for them. The facet list displays the members of an attribute for the selected time period and provides basic analytics, such as the number of corresponding issues. Use facets to pivot or filter your issues. The Explorer returns all issues having at least one error occurrence in the selected time period matching the set of selected facets.
 
 ## Inspect an issue
 
