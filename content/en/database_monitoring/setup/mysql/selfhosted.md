@@ -18,7 +18,6 @@ further_reading:
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
-
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
 1. [Configure database parameters](#configure-mysql-settings)
@@ -171,7 +170,7 @@ Installing the Datadog Agent also installs the MySQL check which is required for
 
 To configure this check for an Agent running on a host:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][6] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection). See the [sample mysql.d/conf.yaml][7] for all available configuration options, including those for custom metrics.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][6] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][7] for all available configuration options, including those for custom metrics.
 
 ### Metric collection
 

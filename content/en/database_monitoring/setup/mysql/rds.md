@@ -16,7 +16,7 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
-Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to basic [Datadog MySQL integration][1] data about query throughput and performance, connections, and the InnoDB storage engine.
+Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
@@ -31,23 +31,27 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 * 5.6, 5.7, or 8.0+
 
+### Supported Agent versions
+
+* 7.30.0+
+
 ### Performance impact
 
 The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
 
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 ### Proxies, load balancers, and connection poolers
 
-The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should be "sticky" to a single host, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 ## Configure MySQL settings
 
-Configure the following in the [DB Parameter Group][3]:
+Configure the following in the [DB Parameter Group][2]:
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][4]. |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][3]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
@@ -58,7 +62,7 @@ Configure the following in the [DB Parameter Group][3]:
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
@@ -96,7 +100,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect execution plans:
+Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -111,7 +115,7 @@ END $$
 DELIMITER ;
 ```
 
-Additionally, create this procedure **in every schema** from which you want to collect execution plans. Replace `<YOUR_SCHEMA>` with your database schema:
+Additionally, create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
 
 ```sql
 CREATE PROCEDURE <YOUR_SCHEMA>.explain_statement(IN query TEXT)
@@ -127,7 +131,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Because with RDs, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.  
+Because with RDS, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.  
 
 ```SQL
 DELIMITER $$
@@ -158,7 +162,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
 
 ## Configure the Agent
 {{< tabs >}}
@@ -166,22 +170,22 @@ Installing the Datadog Agent also installs the MySQL check which is required for
 
 To configure this check for an Agent running on a host:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
 #### Metric collection
 
-- Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
+Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
-  ```yaml
-  init_config:
+```yaml
+init_config:
 
-  instances:
-    - dbm: true
-      server: 127.0.0.1
-      user: datadog
-      pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-      port: '<YOUR_MYSQL_PORT>' # e.g. 3306
-  ```
+instances:
+  - dbm: true
+    server: 127.0.0.1
+    user: datadog
+    pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    port: '<YOUR_MYSQL_PORT>' # e.g. 3306
+```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 
@@ -189,9 +193,7 @@ Note that the `datadog` user should be set up in the MySQL integration configura
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
-#### Log collection
-
-_Available for Agent versions >6.0_
+#### Log collection (optional)
 
 1. By default MySQL logs everything in `/var/log/syslog` which requires root access to read. To make the logs more accessible, follow these steps:
 
@@ -298,7 +300,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "%%host%%", "user":
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-#### Log collection
+#### Log collection (optional)
 
 
 Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Docker log collection documentation][3].
@@ -349,7 +351,7 @@ spec:
 
 See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-#### Log collection
+#### Log collection (optional)
 
 Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes log collection documentation][4].
 
@@ -399,9 +401,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-#### Log collection
-
-_Available for Agent versions >6.0_
+#### Log collection (optional)
 
 Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [ECS log collection documentation][3].
 
@@ -429,22 +429,21 @@ Then, set [Log Integrations][4] as Docker labels:
 
 ## Validating
 
-[Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9].
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/mysql/
-[2]: /agent/basic_agent_usage#agent-overhead
-[3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: https://app.datadoghq.com/databases
-[9]: /database_monitoring/setup/troubleshooting/#mysql
+[1]: /agent/basic_agent_usage#agent-overhead
+[2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
+[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
+[4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://app.datadoghq.com/databases
+[8]: /database_monitoring/setup/troubleshooting/#mysql
