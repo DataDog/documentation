@@ -43,7 +43,7 @@ The Agent must connect directly to the host being monitored. For self-hosted dat
 
 ## Configure MySQL settings
 
-To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`): 
+To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`):
 
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ The following instructions grant the Agent permission to login from any host usi
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
 
-Create the datadog user and grant basic permissions:
+Create the `datadog` user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
@@ -79,7 +79,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{% tab "MySQL 5.6 & 5.7" %}}
 
-Create the datadog user and grant basic permissions:
+Create the `datadog` user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -114,7 +114,7 @@ END $$
 DELIMITER ;
 ```
 
-Additionally, create this procedure **in every schema** from which you want to collect execution plans. Replace the `<YOUR_SCHEMA>` with your database schema:
+Additionally, create this procedure **in every schema** from which you want to collect execution plans. Replace `<YOUR_SCHEMA>` with your database schema:
 
 ```sql
 CREATE PROCEDURE <YOUR_SCHEMA>.explain_statement(IN query TEXT)
@@ -160,11 +160,9 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6]. 
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
 
 ## Configure the Agent
-
-### MySQL Agent configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -396,7 +394,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"mysql\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
+      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"%%host%%\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
     }
   }]
 }
@@ -432,7 +430,7 @@ Then, set [Log Integrations][4] as Docker labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validating
+## Validating
 
 [Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
 
