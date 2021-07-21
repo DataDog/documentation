@@ -2,10 +2,18 @@
 
 import glob
 import re
+import yaml
 
 from itertools import chain
 from os import makedirs
 from os.path import basename
+
+TEMPLATE = """\
+---
+{front_matter}
+---
+{content}
+"""
 
 
 def pull_and_push_folder(content, content_dir):
@@ -19,6 +27,20 @@ def pull_and_push_folder(content, content_dir):
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
             file_content = f.read()
+            # if front matter update existing
+            if "front_matters" in content["options"]:
+                boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+                split = boundary.split(file_content, 2)
+                new_yml = {}
+                txt = file_content
+                if len(split) == 3:
+                    _, fm, txt = split
+                    new_yml = yaml.load(fm, Loader=yaml.FullLoader)
+                elif len(split) == 1:
+                    txt = split[0]
+                new_yml.update(content["options"]["front_matters"])
+                front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
+                file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
             # Replacing the master README.md by _index.md to follow Hugo logic
             if file_name.endswith("README.md"):
                 file_name = "_index.md"
