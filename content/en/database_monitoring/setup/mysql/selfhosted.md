@@ -8,12 +8,23 @@ code_lang_weight: 10
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
+<<<<<<< HEAD
   text: "Basic MySQL Integration"
   
 ---
 
 {{< site-region region="us3,gov" >}} 
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
+=======
+  text: "tktk"
+
+---
+
+{{< site-region region="us3,gov" >}}
+
+Database Monitoring is not supported in this region.
+
+>>>>>>> MySQL selfhosted edits
 {{< /site-region >}}
 
 Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to basic [Datadog MySQL integration][1] data about query throughput and performance, connections, and the InnoDB storage engine.
@@ -39,23 +50,27 @@ Database Monitoring runs as an integration on top of the base Agent ([see benchm
 
 ### Proxies, load balancers, and connection poolers
 
-The Agent must connect directly to the host being monitored. For self-hosted databases, `localhost` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should be "sticky" to a single host, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should be "sticky" to a single host, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 ## Configure MySQL settings
 
+<<<<<<< HEAD
 To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example,`mysql.conf`): 
+=======
+To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][2] and configure the following [Performance Schema Options][3], either on the command line or in configuration files (for example,`mysql.conf`):
+>>>>>>> MySQL selfhosted edits
 
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Required. Enables the Performance Schema. |
-| `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
-| `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 
-**Note**: A recommended practice is to configure the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
+**Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
 
 ## Grant the Agent access
 
@@ -65,6 +80,8 @@ The following instructions grant the Agent permission to login from any host usi
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
+
+Create the datadog user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
@@ -76,6 +93,8 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 
 {{% /tab %}}
 {{% tab "MySQL 5.6 & 5.7" %}}
+
+Create the datadog user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -95,7 +114,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the following procedures to enable the Agent to collect execution plans. Create the `explain_statement` procedure in every schema from which you want to collect execution plans.   
+Create the the `explain_statement` procedure to enable the Agent to collect execution plans:
 
 ```sql
 DELIMITER $$
@@ -107,8 +126,13 @@ BEGIN
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
 END $$
--- repeat for every application schema 
-CREATE PROCEDURE {schema}.explain_statement(IN query TEXT)
+DELIMITER ;
+```
+
+Additionally, create this procedure **in every schema** from which you want to collect execution plans. Replace the `<YOUR_SCHEMA>` with your database schema:
+
+```sql
+CREATE PROCEDURE <YOUR_SCHEMA>.explain_statement(IN query TEXT)
     SQL SECURITY DEFINER
 BEGIN
     SET @explain := CONCAT('EXPLAIN FORMAT=json ', query);
@@ -117,11 +141,11 @@ BEGIN
     DEALLOCATE PREPARE stmt;
 END $$
 DELIMITER ;
-GRANT EXECUTE ON PROCEDURE {schema}.explain_statement TO datadog@'%';
+GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.  
+Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -151,13 +175,15 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
+<<<<<<< HEAD
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6]. 
+=======
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
+>>>>>>> MySQL selfhosted edits
 
 ## Configure the Agent
 
-If you haven't yet configured the MySQL integration for your database, [configure it now](#basic-mysql-agent-configuration). If the MySQL integration is already configured, [add the Database Monitoring configuration](#database-monitoring-agent-configuration).
-
-### Basic MySQL Agent configuration
+### MySQL Agent configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -174,18 +200,11 @@ Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [
   init_config:
 
   instances:
-    - server: 127.0.0.1
+    - dbm: true
+      server: 127.0.0.1
       user: datadog
-      pass: "<YOUR_CHOSEN_PASSWORD>" # from the CREATE USER step earlier
-      port: "<YOUR_MYSQL_PORT>" # e.g. 3306
-      options:
-        replication: false
-        galera_cluster: true
-        extra_status_metrics: true
-        extra_innodb_metrics: true
-        extra_performance_metrics: true
-        schema_size_metrics: false
-        disable_innodb_metrics: false
+      pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+      port: '<YOUR_MYSQL_PORT>' # e.g. 3306
   ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
@@ -298,7 +317,7 @@ Set [Autodiscovery Integration Templates][1] as Docker labels on your applicatio
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "%%host%%", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
 ```
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
@@ -339,7 +358,8 @@ metadata:
     ad.datadoghq.com/nginx.instances: |
       [
         {
-          "server": "%%host%%", 
+          "dbm": true,
+          "server": "%%host%%",
           "user": "datadog",
           "pass": "<UNIQUEPASSWORD>"
         }
@@ -430,18 +450,6 @@ Then, set [Log Integrations][4] as Docker labels:
 [4]: /docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
-
-### Database Monitoring Agent configuration
-
-Add the `deep_database_monitoring` and `statement_samples` settings to your Agent configuration:
-
-```yaml
-instances:
-  - server: "127.0.0.1"
-    deep_database_monitoring: true
-    statement_samples:
-      enabled: true
-```
 
 ### Validating
 
