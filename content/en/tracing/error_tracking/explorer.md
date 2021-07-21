@@ -46,7 +46,7 @@ The high-level details you need when troubleshooting an issue can be found in th
 The lower part of the issue panel gives you the ability to navigate error samples that were grouped into the related issue:
 
 -   All ingested error spans for the past [15 minutes of live search][1]
--   Error spans from the past 15 days that were indexed by [custom retention filters][2]
+-   Error spans from the past 15 days that are indexed by [custom retention filters][2]
 
 Each error sample gives the information you need to understand why it happened and how to resolve it, for example:
 
