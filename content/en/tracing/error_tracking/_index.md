@@ -20,7 +20,7 @@ Monitoring the errors collected by Datadog is critical to your system's health, 
 - __Following issues over time__ to know when they first started, if they are still ongoing, and how often they are occurring to help identify the most important ones.
 - __Getting all the context in one place__ to facilitate troubleshooting.
 
-## How does it work?
+## How Datadog error tracking works
 
 The Datadog tracers are collecting errors through existing integrations and manual instrumentation of the source code. The different error spans within a trace are processed by Error Tracking __whenever they are located in the uppermost service span__ (also called service entry span).
 
