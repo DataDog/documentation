@@ -27,7 +27,7 @@ Supported test frameworks:
 Install the Python tracer by running:
 
 {{< code-block lang="bash" >}}
-pip install "ddtrace>=0.50.0rc4"
+pip install -U ddtrace
 {{< /code-block >}}
 
 For more information, see the [Python tracer installation documentation][2].

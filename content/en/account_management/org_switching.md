@@ -1,9 +1,9 @@
 ---
-title: Switching between organizations
+title: Switching Between Organizations
 kind: documentation
 ---
 
-In cases where you belong to multiple Datadog organizations (orgs), the org switcher at the bottom left of the nav bar allows you to toggle between orgs.
+In cases where you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations.
 
 For security purposes, you must have a valid session for each org you switch to. In cases where you don’t have an active session, you are asked to authenticate with a username/password or SAML.
 
@@ -11,13 +11,13 @@ For security purposes, you must have a valid session for each org you switch to.
 
 1. **Mixed auth approaches**: In cases where you have both SAML and username/password authentication, you must log in with the type required by the org (username/password or SAML) as opposed to logging into one and getting access to all.
 
-2. **SAML Strict**: If your org is set for [SAML Strict][1], you must authenticate via SAML. You are required to re-authenticate each time you switch orgs. Since IdPs persist sessions, this is often a redirect.
+2. **SAML Strict**: If your org is set for [SAML Strict][1], you must authenticate with SAML. You are required to re-authenticate each time you switch organizations. Since IdPs persist sessions, this is often a redirect.
 
 ## Resetting passwords for multi-org users
 
-A password is shared across orgs for each multi-org user. If you reset your password, the reset affects all the orgs to which you belong.
+A password is shared across organizations for each multi-org user. If you reset your password, the reset affects all the organizations to which you belong.
 
-Note that you cannot use the same password twice.
+**Note**: You cannot use the same password twice.
 
 ## Troubleshooting
 
