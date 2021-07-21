@@ -27,15 +27,21 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 
-## Prerequisites
+## Before you begin
 
-* MySQL version 5.6, 5.7, or 8.0+
+### Supported MySQL versions
+
+* 5.6, 5.7, or 8.0+
 
 ### Performance impact
 
 The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
 
-Database Monitoring runs as an integration on top of the base agent ([see benchmarks][1]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+
+### Proxies, load balancers, and connection poolers
+
+The Agent must connect directly to the host being monitored. For self-hosted databases, `localhost` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should be "sticky" to a single host, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 ## Configure MySQL settings
 
@@ -91,7 +97,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the following procedures to enable the agent to collect execution plans. Create the `explain_statement` procedure in every schema from which you want to collect execution plans.   
+Create the following procedures to enable the Agent to collect execution plans. Create the `explain_statement` procedure in every schema from which you want to collect execution plans.   
 
 ```sql
 DELIMITER $$
@@ -153,7 +159,7 @@ Installing the Datadog Agent also installs the MySQL check which is required for
 
 If you haven't yet configured the MySQL integration for your database, [configure it now](#basic-mysql-agent-configuration). If the MySQL integration is already configured, [add the Database Monitoring configuration](#database-monitoring-agent-configuration).
 
-### Basic MySQL agent configuration
+### Basic MySQL Agent configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -299,7 +305,7 @@ LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","p
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-### Log collection
+#### Log collection
 
 
 Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Docker log collection documentation][3].
@@ -349,7 +355,7 @@ spec:
 
 See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-### Log collection
+#### Log collection
 
 Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes log collection documentation][4].
 
@@ -426,9 +432,9 @@ Then, set [Log Integrations][4] as Docker labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Database Monitoring agent configuration
+### Database Monitoring Agent configuration
 
-Add the `deep_database_monitoring` and `statement_samples` settings to your agent configuration:
+Add the `deep_database_monitoring` and `statement_samples` settings to your Agent configuration:
 
 ```yaml
 instances:
@@ -438,13 +444,9 @@ instances:
       enabled: true
 ```
 
-### Validation
+### Validating
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
-
-### Proxies, load balancers, and connection poolers
-
-The Agent must connect directly to the host being monitored. For self-hosted databases, `localhost` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should be "sticky" to a single host, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 ## Troubleshooting
 
