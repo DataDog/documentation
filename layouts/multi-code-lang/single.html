@@ -3,17 +3,15 @@
     {{ $codeLangs := slice }}
     {{ range sort .CurrentSection.Pages ".Params.code_lang_weight" }} 
         {{ with .Params.code_lang }}  
-        {{ $codeLangs = $codeLangs | append .  }}
+            {{ $codeLangs = $codeLangs | append .  }}
         {{ end }}
     {{ end }}
 
-    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
+    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs "sort" false) }}
 
     <h1 id="pagetitle">{{ .Title }}</h1>
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
 
-    <div>
-        {{ .Content }}
-    </div>
+    <div>{{ .Content }}</div>
 
 {{ end }}
