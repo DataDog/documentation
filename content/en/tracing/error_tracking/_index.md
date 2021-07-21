@@ -28,7 +28,7 @@ The Datadog tracers collect errors through integrations and manual instrumentati
 
 Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same _issue_.
 
-<div class="alert alert-info">Error Tracking is available for all the different languages supported by APM and does not require using a different SDK.</div>
+<div class="alert alert-info">Error Tracking is available for all the languages supported by APM and does not require using a different SDK.</div>
 
 ## Further Reading
 
