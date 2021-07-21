@@ -43,7 +43,7 @@ To collect query metrics, samples, and execution plans, enable the [MySQL Perfor
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the [Performance Schema][2]. |
+| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
@@ -160,11 +160,11 @@ If you haven't yet configured the MySQL integration for your database, [configur
 
 To configure this check for an Agent running on a host:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][6] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection). See the [sample mysql.d/conf.yaml][7] for all available configuration options.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
 #### Metric collection
 
-- Add this configuration block to your `mysql.d/conf.yaml` to collect your [MySQL metrics](#metrics):
+- Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
   ```yaml
   init_config:
@@ -186,13 +186,9 @@ Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 
-To collect `extra_performance_metrics`, your MySQL server must have `performance_schema` enabled - otherwise set `extra_performance_metrics` to `false`. For more information on `performance_schema`, [see the MySQL documentation][8].
-
 Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 
-See our [sample mysql.yaml][9] for all available configuration options, including those for custom metrics.
-
-[Restart the Agent][10] to start sending MySQL metrics to Datadog.
+[Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 #### Log collection
 
@@ -218,7 +214,7 @@ _Available for Agent versions >6.0_
 
    - Save the file and restart MySQL using following commands:
      `service mysql restart`
-   - Make sure the Agent has read access on the `/var/log/mysql` directory and all of the files within. Double-check your logrotate configuration to make sure those files are taken into account and that the permissions are correctly set there as well.
+   - Make sure the Agent has read access on the `/var/log/mysql` directory and all of the files within. Double-check your `logrotate` configuration to make sure those files are taken into account and that the permissions are correctly set there as well.
    - In `/etc/logrotate.d/mysql-server` there should be something similar to:
 
      ```text
@@ -280,18 +276,20 @@ _Available for Agent versions >6.0_
        #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
    ```
 
-    See our [sample mysql.yaml][9] for all available configuration options, including those for custom metrics.
+4. [Restart the Agent][3].
 
-4. [Restart the Agent][10].
 
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[3]: h/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure this check for an Agent running on a container:
+To configure this check for an Agent running on a Docker container:
 
 #### Metric collection
 
-Set [Autodiscovery Integration Templates][27] as Docker labels on your application container:
+Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
@@ -299,19 +297,24 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
 ```
 
-See the [Autodiscovery template variables documentation][28] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
 ### Log collection
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Docker log collection documentation][29].
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Docker log collection documentation][3].
 
-Then, set [Log Integrations][30] as Docker labels:
+Then, set [Log Integrations][4] as Docker labels:
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 ```
 
+
+[1]: /agent/docker/integrations/?tab=docker
+[2]: /agent/faq/template_variables/
+[3]: /agent/docker/log/?tab=containerinstallation#installation
+[4]: /agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -319,7 +322,7 @@ To configure this check for an Agent running on Kubernetes:
 
 #### Metric collection
 
-Set [Autodiscovery Integrations Templates][31] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][32].
+Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
 
 ```yaml
 apiVersion: v1
@@ -344,14 +347,13 @@ spec:
     - name: mysql
 ```
 
-See the [Autodiscovery template variables documentation][28] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
 ### Log collection
 
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes log collection documentation][4].
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes log collection documentation][33].
-
-Then, set [Log Integrations][34] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][35].
+Then, set [Log Integrations][5] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][5].
 
 ```yaml
 apiVersion: v1
@@ -364,6 +366,13 @@ metadata:
     name: mysql
 ```
 
+[5]:/agent/docker/log/?tab=containerinstallation#log-integrations
+
+[1]: /agent/kubernetes/integrations/?tab=kubernetes
+[2]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: /agent/faq/template_variables/
+[4]: /agent/kubernetes/log/?tab=containerinstallation#setup
+[5]: /agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -371,7 +380,7 @@ To configure this check for an Agent running on ECS:
 
 #### Metric collection
 
-Set [Autodiscovery Integrations Templates][36] as Docker labels on your application container:
+Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
 
 ```json
 {
@@ -387,15 +396,15 @@ Set [Autodiscovery Integrations Templates][36] as Docker labels on your applicat
 }
 ```
 
-See the [Autodiscovery template variables documentation][28] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
 #### Log collection
 
 _Available for Agent versions >6.0_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [ECS log collection documentation][37].
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [ECS log collection documentation][3].
 
-Then, set [Log Integrations][34] as Docker labels:
+Then, set [Log Integrations][4] as Docker labels:
 
 ```yaml
 {
@@ -408,6 +417,12 @@ Then, set [Log Integrations][34] as Docker labels:
   }]
 }
 ```
+
+
+[1]: /agent/docker/integrations/?tab=docker
+[2]: /agent/faq/template_variables/
+[3]: /agent/amazon_ecs/logs/?tab=linux
+[4]: /docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -425,7 +440,7 @@ instances:
 
 ### Validation
 
-[Run the Agent's status subcommand][14] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ### Proxies, load balancers, and connection poolers
 
@@ -433,7 +448,7 @@ The Agent must connect directly to the host being monitored. For self-hosted dat
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][7]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
 
 ## Further reading
 
@@ -444,5 +459,6 @@ If you have installed and configured the integrations and Agent as described and
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://app.datadoghq.com/databases
-[7]: /database_monitoring/setup/troubleshooting/#mysql
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://app.datadoghq.com/databases
+[8]: /database_monitoring/setup/troubleshooting/#mysql
