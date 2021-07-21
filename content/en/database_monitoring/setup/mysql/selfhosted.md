@@ -8,23 +8,12 @@ code_lang_weight: 10
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
-<<<<<<< HEAD
   text: "Basic MySQL Integration"
-  
----
-
-{{< site-region region="us3,gov" >}} 
-<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
-=======
-  text: "tktk"
 
 ---
 
 {{< site-region region="us3,gov" >}}
-
-Database Monitoring is not supported in this region.
-
->>>>>>> MySQL selfhosted edits
+<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
 Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to basic [Datadog MySQL integration][1] data about query throughput and performance, connections, and the InnoDB storage engine.
@@ -54,11 +43,7 @@ The Agent must connect directly to the host being monitored. For self-hosted dat
 
 ## Configure MySQL settings
 
-<<<<<<< HEAD
-To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example,`mysql.conf`): 
-=======
-To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][2] and configure the following [Performance Schema Options][3], either on the command line or in configuration files (for example,`mysql.conf`):
->>>>>>> MySQL selfhosted edits
+To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`): 
 
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -175,11 +160,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-<<<<<<< HEAD
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6]. 
-=======
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
->>>>>>> MySQL selfhosted edits
 
 ## Configure the Agent
 
