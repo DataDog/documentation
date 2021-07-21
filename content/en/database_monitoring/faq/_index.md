@@ -64,12 +64,12 @@ Query samples have no limits on the number of unique normalized queries tracked,
 
 ## What are "Other Queries?"
 
-“Other Queries” represent the metrics of all queries which do appear in the top 200 by their total execution time on the database. Because the performance of a particular query can change over time, the metrics for a particular query may be tracked as a distinct normalized query for some time frames and other times counted in the “Other Queries.”
+“Other Queries” represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in the “Other Queries.”
 
 
 ## Can the agent be configured to connect to proxies, load balancers, and connection poolers?
 
-The agent must connect directly to the host being monitored. If the database is self-hosted, then “localhost” or the socket is preferred. The agent should not connect to the database through a proxy, load balancer, or connection pooler such as pgbouncer. While this can be an anti-pattern for client applications, each agent must have knowledge of the underlying hostname and should be “sticky” to a single host, even in cases of failover. If the Datadog agent connects to different hosts while it is running, the value of metrics may be incorrect.
+The agent must connect directly to the host being monitored. If the database is self-hosted, then “localhost” or the socket is preferred. The agent should not connect to the database through a proxy, load balancer, or connection pooler such as pgbouncer. While this can be an anti-pattern for client applications, each agent must have knowledge of the underlying hostname and should be “sticky” to a single host, even in cases of failover. If the Datadog agent connects to different hosts while it is running, the value of metrics will be incorrect.
 
 ### AWS Aurora
 

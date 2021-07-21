@@ -37,8 +37,13 @@ When you are confident the agent configuration is correct, [check the agent logs
 You can also explicitly execute a check by running the `check` CLI command on the Datadog agent and inspecting the output for errors:
 
 ```bash
-datadog-agent check postgres
-datadog-agent check mysql
+# For self-hosted installations of the agent
+datadog-agent check postgres -t 2
+datadog-agent check mysql -t 2
+
+# For container-based installations of the agent
+agent check postgres -t 2
+agent check mysql -t 2
 ```
 
 ### Query Metrics are missing
