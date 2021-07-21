@@ -8,7 +8,7 @@ beta: false
 
 ## Explore your issues
 
-The Error Tracking Explorer allows you to visualize the list of ongoing issues: an issue is a group of similar errors that share the same fingerprint and which might need to be fixed depending on its criticity. Each item listed in the explorer surfaces high-level information about the related issue:
+The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on how critical it is. Each item listed in the explorer surfaces high-level information about the issue:
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
