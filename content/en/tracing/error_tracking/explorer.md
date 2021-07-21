@@ -50,9 +50,9 @@ The lower part of the issue panel gives you the ability to navigate error sample
 
 Each error sample gives the information you need to understand why it happened and how to resolve it, for example:
 
--   The error stack trace so that you understand where it happens in the source code.
--   All the error span tags such as the resource or the operation name as well as an easy access to the related trace or to logs that have been linked to it.
--   Insights about the health of the underlying host or container when this particular error occurred.
+- The error stack trace, which shows where the error happens in the source code.
+- All the error span tags, such as the resource or operation name, with direct access to the related trace or to logs that are linked to it.
+- Insights about the health of the underlying host or container when this particular error occurred.
 
 [1]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
 [2]: /tracing/trace_retention_and_ingestion/#retention-filters
