@@ -43,7 +43,7 @@ The high-level details you need when troubleshooting an issue can be found in th
 
 {{< img src="tracing/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
 
-The lower part of the issue panel gives you the ability to navigate error samples that were grouped into the related issue:
+In the lower part of the issue panel, navigate error samples that are grouped into the issue:
 
 -   All ingested error spans for the past [15 minutes of live search][1]
 -   Error spans from the past 15 days that are indexed by [custom retention filters][2]
