@@ -72,7 +72,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Start views for each new page, or route change (for single page applications), and define the associated view name. If not provided a name, the view name defaults to the page URL path.
+2. You **must** start views for each new page, or route change (for single page applications), and optionally define the associated view name (it defaults to the page URL path). No RUM data gets collected until the view is started.
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
