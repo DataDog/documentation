@@ -21,7 +21,7 @@ The Error Tracking Explorer allows you to visualize the list of ongoing issues: 
 
 {{< img src="tracing/error_tracking/time_range.png" alt="Error Tracking Time Range"  >}}
 
-The time range appears on the very top right of the Explorer as a timeline. It allows you to display issues having error occurrences within the selected time period. Quickly change the time range by selecting a preset range from the dropdown.
+Adjust the time range selector in the top right corner of the Explorer to show issues that have error occurrences within the selected time period. You can specify a specific range or select a preset range from the dropdown.
 
 ### Facets
 
