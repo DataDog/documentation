@@ -12,7 +12,7 @@ The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a 
 
 -   The error type and the error message
 -   The path to the file in which underlying errors occurred
--   Important information about the issue’s lifetime:
+-  Information about the issue’s lifetime:
     -   When it was first and last seen
     -   Number of error occurrences in the selected time period
     -   Graph of error occurrences over time in the selected time period
