@@ -31,9 +31,9 @@ There are various ways you can modify the [data collected][1] by RUM, to support
 
 ## Override default RUM view names
 
-The RUM SDK generates a [view event][14] for each new page visited by your users. A view name is computed from the current page URL, with variable alphanumeric ids being removed automatically (for example, "/dashboard/1234" becomes "/dashboard/?").
+The RUM SDK automatically generates a [view event][14] for each new page visited by your users, or when the page URL is changed (for single page applications). A view name is computed from the current page URL, with variable alphanumeric ids being removed automatically (for example, "/dashboard/1234" becomes "/dashboard/?").
 
-Starting with [version 2.17.0][15], you may override the default view name with the `trackViewsManually` option:
+Starting with [version 2.17.0][15], you may specify your own view names by tracking view events manually with the `trackViewsManually` option:
 
 1. Set up `trackViewsManually` to true when initializing RUM.
 {{< tabs >}}
@@ -72,7 +72,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Start views for each new page and define the associated view name. If not provided a name, the view name will default to the page URL path.
+2. Start views for each new page, or route change (for single page applications), and define the associated view name. If not provided a name, the view name defaults to the page URL path.
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
