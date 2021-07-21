@@ -37,7 +37,7 @@ Click on any issue to open the issue panel and see more information about it.
 
 {{< img src="tracing/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel"  >}}
 
-The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand the issue's lifecycle: first and last occurrence dates with the related code versions as well as the total count of error occurrences since inception. A graph of error occurrences is also available up to 14 days in the past to give you an overview of the trend of the given issue.
+The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can learn about the issue's lifecycle, such as its first and last occurrence dates, related code versions, and total error occurrences since inception. The graph of error occurrences shows up to 14 days in the past to give you an overview of the trend of the issue.
 
 ### Browse individual error occurrences
 
