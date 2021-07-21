@@ -14,7 +14,7 @@ further_reading:
 
 ## What is error tracking?
 
-Datadog collects a lot of errors. It's critical to your system's health to monitor these errors, but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. Error Tracking makes it easier to monitor these errors by:
+Monitoring the errors collected by Datadog is critical to your system's health, but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. Error Tracking makes it easier to monitor errors by:
 
 - __Grouping similar errors into issues__ to turn this noisy flow of errors into a small list of manageable issues.
 - __Following issues over time__ to know when they first started, if they are still ongoing, and how often they are occurring to help identify the most important ones.
