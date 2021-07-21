@@ -1,24 +1,22 @@
 ---
-title: Setting Up Database Monitoring for MySQL
+title: Setting Up Database Monitoring for self hosted MySQL
 kind: documentation
-description: Install and configure Database Monitoring for MySQL, self-hosted or Amazon RDS.
+description: Install and configure Database Monitoring for self-hosted MySQL.
 code_lang: selfhosted
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-- link: "/tk/tk/"
+- link: "/integrations/mysql/"
   tag: "Documentation"
-  text: "tktk"
+  text: "Basic MySQL Integration"
   
 ---
 
 {{< site-region region="us3,gov" >}} 
-
-Database Monitoring is not supported in this region.
-
+<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
-Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to standard Datadog MySQL integration data about query throughput and performance, connections, and the InnoDB storage engine,
+Database Monitoring collects telemetry data about query metrics, samples, and execution plans, in addition to standard [Datadog MySQL integration][1] data about query throughput and performance, connections, and the InnoDB storage engine,
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
@@ -37,7 +35,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
 
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
 
 ### Proxies, load balancers, and connection poolers
 
@@ -45,7 +43,7 @@ The Agent must connect directly to the host being monitored. For self-hosted dat
 
 ## Configure MySQL settings
 
-To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][2] and configure the following [Performance Schema Options][3], either on the command line or in configuration files (for example,`mysql.conf`): 
+To collect query metrics, samples, and execution plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example,`mysql.conf`): 
 
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -63,7 +61,7 @@ To collect query metrics, samples, and execution plans, enable the [MySQL Perfor
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
@@ -153,7 +151,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5]. 
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6]. 
 
 ## Configure the Agent
 
@@ -446,21 +444,22 @@ instances:
 
 ### Validating
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
-[2]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: https://app.datadoghq.com/databases
-[8]: /database_monitoring/setup/troubleshooting/#mysql
+[1]: /integrations/mysql/
+[2]: /agent/basic_agent_usage#agent-overhead
+[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
+[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: /agent/guide/agent-commands/#agent-status-and-information
+[8]: https://app.datadoghq.com/databases
+[9]: /database_monitoring/setup/troubleshooting/#mysql

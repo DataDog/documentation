@@ -10,10 +10,9 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}} 
-
-Database Monitoring is not supported in this region.
-
+<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
+
 
 Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres** and **MySQL**.
 

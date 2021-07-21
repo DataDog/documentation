@@ -1,7 +1,7 @@
 ---
-title: Setting Up Database Monitoring for MySQL
+title: Setting Up Database Monitoring for Aurora managed MySQL
 kind: documentation
-description: Install and configure Database Monitoring for MySQL, self-hosted or Amazon RDS.
+description: Install and configure Database Monitoring for MySQL managed on Aurora.
 code_lang: aurora
 type: multi-code-lang
 code_lang_weight: 30
@@ -13,9 +13,7 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}} 
-
-Database Monitoring is not supported in this region.
-
+<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
 
