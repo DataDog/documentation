@@ -64,7 +64,7 @@ Query samples have no limits on the number of unique normalized queries tracked,
 
 ## What are "Other Queries?"
 
-“Other Queries” represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in the “Other Queries.”
+“Other Queries” represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in “Other Queries.”
 
 
 ## Can the agent be configured to connect to proxies, load balancers, and connection poolers?
