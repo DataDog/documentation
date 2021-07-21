@@ -5,10 +5,10 @@
     {{ $count := 0 }}
     {{ $codeLangs := slice }}
 
-    {{ if eq .sort false }}
-        {{ $codeLangs = .codeLangs }}
-    {{ else }}
+    {{ if eq .sort "name" }}
         {{ $codeLangs = sort .codeLangs "value" "asc" }}
+    {{ else }}
+        {{ $codeLangs = .codeLangs }}
     {{ end }}
 
     {{ range $codeLangs }}

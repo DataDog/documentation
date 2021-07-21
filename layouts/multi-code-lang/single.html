@@ -7,7 +7,7 @@
         {{ end }}
     {{ end }}
 
-    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs "sort" false) }}
+    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}
 
     <h1 id="pagetitle">{{ .Title }}</h1>
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
