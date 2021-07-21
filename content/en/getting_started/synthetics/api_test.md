@@ -122,7 +122,7 @@ When you create a [Multistep API test][12], you can define a sequence of HTTP re
     - Click **Save Step**.
 
 6. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
-7. Optionally, Type `{{` in the **URL** and a list of extracted and global variables appear. 
+7. Optionally, type `{{` in the **URL** and a list of extracted and global variables appears. 
     - Select an extracted variable to inject in your test step. You can add your extracted variables in the **Step URL** or in the request header, cookies, and HTTP authentication fields in **Advanced Options** > **Request Options**.  
 
 8. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
