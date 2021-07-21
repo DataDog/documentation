@@ -10,8 +10,7 @@ further_reading:
   text: "Monitor Core Web Vitals with Synthetic Monitoring"
 ---
 
-
-Test results and performance data are accessed from the **Step Results** section when clicking on a specific test result. You can also use **Sample Results** as a way to quickly look into the latest failed test runs and compare them with recent successful ones.
+You can access test results and performance data in **Step Results**. Specific test results, recent failed test runs, and recent successful test runs are available. 
 
 ## Test failure
 
@@ -29,26 +28,44 @@ Common browser test errors include:
 : The specified option is missing from the dropdown menu.
 
 `Forbidden URL`
-: The test likely encountered a protocol that is not supported. Reach out to [Datadog support][6] for further details.
+: The test likely encountered a protocol that is not supported. Reach out to [Datadog support][1] for more details.
 
 `General test failure`
-: A general error message. [Contact support][6] for further details.
+: A general error message. Contact [Datadog support][1] for more details.
 
 ## Page performance
 
-Each step where a full URL is loaded contains page performance information.
+Every step where a URL is completely loaded contains page performance information.
 
 ### User experience
 
-[Google's Core Web Vitals][1] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to a good user experience.
+[Google's Core Web Vitals][2] are a set of three metrics designed to monitor a site's user experience. These metrics provide a view of load performance, interactivity, and visual stability. 
 
-Synthetic monitoring includes two available lab metrics: [Largest Contentful Paint][2] and [Cumulative Layout Shift][3].
+Every metric includes guidance about the range of values that translates to a good user experience.
 
-[First Input Delay][4] is available when using Real User Monitoring where real user or field data is available.
+Synthetic Monitoring includes two available lab metrics: [Largest Contentful Paint][3] and [Cumulative Layout Shift][4].
 
-Learn more about [Real User Monitoring and Core Web Vitals][5].
+When using Real User Monitoring and real user or field data is available, [First Input Delay][5] is also available.
+
+For more information, see [Real User Monitoring and Core Web Vitals][6].
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
+
+## Waterfall
+
+A test result consists of a test execution, screenshots, and durations. 
+
+The following test result characteristics are displayed:
+
+- Status
+- Starting URL
+- Number of steps
+- Duration
+- Location
+- Device
+- Browser
+- Time Ran
+- Run Type
 
 ## Errors
 
@@ -93,11 +110,11 @@ One browser step can make multiple requests to different URLs/endpoints, which r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://web.dev/vitals/
-[2]: https://web.dev/lcp/
-[3]: https://web.dev/cls/
-[4]: https://web.dev/fid/
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[6]: /help/
+[1]: /help/
+[2]: https://web.dev/vitals/
+[3]: https://web.dev/lcp/
+[4]: https://web.dev/cls/
+[5]: https://web.dev/fid/
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
 [7]: /tracing/visualization/trace/
 [8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
