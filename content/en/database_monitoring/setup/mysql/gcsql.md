@@ -28,37 +28,30 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-### Google Cloud SQL requirements
+Supported MySQL versions
+: 5.6, 5.7, or 8.0+
 
-Your Google Cloud SQL instance must have [at least 26GB of RAM][1], so that [`performance_schema`][2] can be enabled.
+Supported Agent versions
+: 7.30.0+
 
-### Supported MySQL versions
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
-* 5.6, 5.7, or 8.0+
+Proxies, load balancers, and connection poolers
+: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
-### Supported Agent versions
-
-* 7.30.0+
-
-### Performance impact
-
-The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
-
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][3]).
-
-### Proxies, load balancers, and connection poolers
-
-The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
-
+Data security considerations
+: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure MySQL settings
 
 
-Configure the following [Database Flags][4]:
+Configure the following [Database Flags][3]:
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][2]. |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
@@ -447,9 +440,9 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
-[2]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[3]: /agent/basic_agent_usage#agent-overhead
-[4]: https://cloud.google.com/sql/docs/mysql/flags
+[2]: /database_monitoring/setup/data_collected/#sensitive_information
+[3]: https://cloud.google.com/sql/docs/mysql/flags
+[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases

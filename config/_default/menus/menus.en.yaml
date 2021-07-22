@@ -1854,11 +1854,16 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_gcsql
     weight: 104
+  - name: Data Collected
+    url: database_monitoring/setup/data_collected
+    parent: dbm_setup
+    identifier: dbm_data_collected
+    weight: 103
   - name: Troubleshooting
     url: database_monitoring/setup/troubleshooting/
     parent: dbm_setup
     identifier: dbm_troubleshooting
-    weight: 103
+    weight: 104
   - name: Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm

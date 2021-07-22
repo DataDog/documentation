@@ -28,35 +28,33 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-### Supported MySQL versions
+Supported MySQL versions
+: 5.6, 5.7, or 8.0+
 
-* 5.6, 5.7, or 8.0+
+Supported Agent versions
+: 7.30.0+
 
-### Supported Agent versions
-
-* 7.30.0+
-
-### Performance impact
-
-The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
-
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
-### Proxies, load balancers, and connection poolers
+Proxies, load balancers, and connection poolers
+: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
-The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+Connect the Agent to the Aurora instance endpoint
+: The Agent must connect to the AWS Aurora _instance endpoint_.  AWS Aurora also provides a _cluster endpoint_ which allows client applications to connect to a reader or writer instance without knowledge of the underlying database host. Although using the cluster endpoint is desirable for applications, the Agent must be aware of all instances.
 
-### Connect the Agent to the Aurora instance endpoint
+Data security considerations
+: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-The Agent must connect to the AWS Aurora _instance endpoint_.  AWS Aurora also provides a _cluster endpoint_ which allows client applications to connect to a reader or writer instance without knowledge of the underlying database host. Although using the cluster endpoint is desirable for applications, the Agent must be aware of all instances.
 
 ## Configure MySQL settings
 
-Configure the following in the [DB Parameter Group][2]:
+Configure the following in the [DB Parameter Group][3]:
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the [Performance Schema][3]. |
+| `performance_schema` | `ON` | Required. Enables the [Performance Schema][4]. |
 | <code style="word-break:break-all;">`performance_schema_consumer_events_statements_current`</code> | `ON` | Required. Enables monitoring of currently running queries. |
 | <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history`</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history_long`</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
@@ -70,7 +68,7 @@ Configure the following in the [DB Parameter Group][2]:
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
@@ -170,7 +168,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
 
 ## Configure the Agent
 
@@ -438,11 +436,11 @@ Then, set [Log Integrations][4] as Docker labels:
 
 ## Validating
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
 
 ## Further reading
 
@@ -450,10 +448,11 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: /agent/basic_agent_usage#agent-overhead
-[2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
-[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: https://app.datadoghq.com/databases
-[8]: /database_monitoring/setup/troubleshooting/#mysql
+[2]: /database_monitoring/setup/data_collected/#sensitive_information
+[3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
+[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: /agent/guide/agent-commands/#agent-status-and-information
+[8]: https://app.datadoghq.com/databases
+[9]: /database_monitoring/setup/troubleshooting/#mysql

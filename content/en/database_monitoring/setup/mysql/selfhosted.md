@@ -27,27 +27,25 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-### Supported MySQL versions
+Supported MySQL versions
+: 5.6, 5.7, or 8.0+
 
-* 5.6, 5.7, or 8.0+
+Supported Agent versions
+: 7.30.0+
 
-### Supported Agent versions
-
-* 7.30.0+
-
-### Performance impact
-
-The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
-
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
-### Proxies, load balancers, and connection poolers
+Proxies, load balancers, and connection poolers
+: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
-The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+Data security considerations
+: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure MySQL settings
 
-To collect query metrics, samples, and explain plans, enable the [MySQL Performance Schema][2] and configure the following [Performance Schema Options][3], either on the command line or in configuration files (for example, `mysql.conf`):
+To collect query metrics, samples, and explain plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`):
 
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -66,7 +64,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
@@ -165,13 +163,13 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
 
 ## Configure the Agent
 
 To configure this check for an Agent running on a host:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][6] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][7] for all available configuration options, including those for custom metrics.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][7] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][8] for all available configuration options, including those for custom metrics.
 
 ### Metric collection
 
@@ -192,7 +190,7 @@ instances:
 
 Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 
-[Restart the Agent][8] to start sending MySQL metrics to Datadog.
+[Restart the Agent][9] to start sending MySQL metrics to Datadog.
 
 ### Log collection (optional)
 
@@ -280,28 +278,29 @@ In addition to telemetry collected from the database by the Agent, you can also 
        #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
    ```
 
-4. [Restart the Agent][8].
+4. [Restart the Agent][9].
 
 ## Validating
 
-[Run the Agent's status subcommand][9] and look for `mysql` under the Checks section. Or visit the [Databases][10] page to get started!
+[Run the Agent's status subcommand][10] and look for `mysql` under the Checks section. Or visit the [Databases][11] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][11].
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][12].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage#agent-overhead
-[2]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[8]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: https://app.datadoghq.com/databases
-[11]: /database_monitoring/setup/troubleshooting/#mysql
+[2]: /database_monitoring/setup/data_collected/#sensitive_information
+[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
+[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/guide/agent-commands/#agent-status-and-information
+[11]: https://app.datadoghq.com/databases
+[12]: /database_monitoring/setup/troubleshooting/#mysql
