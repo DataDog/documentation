@@ -64,8 +64,8 @@ The following test result characteristics are displayed:
 - Location
 - Device
 - Browser
-- Time Ran
-- Run Type
+- Time ran
+- Run type
 
 ## Errors
 
