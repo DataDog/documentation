@@ -214,6 +214,8 @@ Incident Management analytics is supported in the following widgets:
 * Top List 
 * Query Value 
 
+### Graph configuration
+
 To configure your graph using Incident Management analytics data, follow these steps:
 
 1. [Select your visualization](#select-your-visualization) (same as for metrics)
