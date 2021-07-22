@@ -55,7 +55,7 @@ If you're [using APM][8], [DogStatsD][9], or [log management][10], set the appro
 
 **Note**: To enable DogStatsD metrics collection from other containers, ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
 
-  - If you are using log management, refer to the dedicated [Log collection documentation][10].
+  - If you are using log management, see the dedicated [Log collection documentation][10].
 
 Double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog uses the private IP to route to the Agent from the containers.
 
@@ -156,7 +156,7 @@ Ideally, you want the Datadog Agent to load on one container on each EC2 instanc
 2. Create a new service by clicking the **Create** button under Services.
 3. For launch type, select EC2 then the task definition created previously.
 4. For service type, select `DAEMON`, and enter a Service name. Click **Next**.
-5. Since the Service runs once on each instance, you won't need a load balancer. Select None. Click **Next**.
+5. Since the service runs once on each instance, you don't need a load balancer. Select None. Click **Next**.
 6. Daemon services don't need Auto Scaling, so click **Next Step**, and then **Create Service**.
 
 ### Process collection
@@ -243,7 +243,7 @@ To collect processes information for all your containers and send it to Datadog:
 **This feature is available for Linux only**
 
  1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
-  - If you are installing for the first time, there is a `datadog-agent-ecs.json` file available, [datadog-agent-sysprobe-ecs.json][16] ([datadog-agent-sysprobe-ecs1.json][17] if you are using an original Amazon Linux AMI), for use with the [above instructions](#aws-cli). Note that initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
+  - If you are installing for the first time, there is a `datadog-agent-ecs.json` file available, [datadog-agent-sysprobe-ecs.json][16] ([datadog-agent-sysprobe-ecs1.json][17] if you are using an original Amazon Linux AMI), for use with the [above instructions](#aws-cli). **Note**: Initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
  2. If you already have a task definition, update your [datadog-agent-ecs.json][18] file ([datadog-agent-ecs1.json][19] if you are using an original Amazon Linux AMI) with the following configuration:
 
  ```json

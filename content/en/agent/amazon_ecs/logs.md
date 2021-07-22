@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Agent 6+ collects logs from containers. The recommended way to collect logs from ECS containers is to enable containerized logging within your `datadog-agent-ecs.json` or `datadog-agent-ecs1.json` file. However, if your application emits logs to files in any capacity (logs that are not written to `stdout`/`stderr`), you will need to [deploy the Datadog Agent on your host](#custom-log-collection) and use custom log collection to tail files.
+Datadog Agent 6+ collects logs from containers. The recommended way to collect logs from ECS containers is to enable containerized logging within your `datadog-agent-ecs.json` or `datadog-agent-ecs1.json` file. However, if your application emits logs to files in any capacity (logs that are not written to `stdout`/`stderr`), you need to [deploy the Datadog Agent on your host](#custom-log-collection) and use custom log collection to tail files.
 
 ## Installation
 
@@ -176,7 +176,7 @@ logs:
 
 With Agent v7.25.0+/6.25.0+, it is possible to enable file tailing by using a container label so the logs collected receive the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
 
-**Note**: The file paths are always relative to the Agent. So, this requires extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. Refer to the [AWS documentation][5] for additional details on volume management with ECS.
+**Note**: The file paths are always relative to the Agent. So, this requires extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. See the [AWS documentation][5] for additional details on volume management with ECS.
 
 ## Activate log integrations
 

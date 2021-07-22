@@ -65,7 +65,7 @@ To enable the admission controller for the Datadog operator, set the parameter `
 
 ### Manual setup
 
-To enable the admission controller without using Helm or the Datadog operator, you'll need to add a few things to your configuration:
+To enable the admission controller without using Helm or the Datadog operator, add the following to your configuration:
 
 First, download the [Cluster Agent RBAC permissions][2] manifest, and add the following under `rules`:
 
