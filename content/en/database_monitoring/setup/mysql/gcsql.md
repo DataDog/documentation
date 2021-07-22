@@ -174,7 +174,7 @@ Installing the Datadog Agent also installs the MySQL check which is required for
 {{< tabs >}}
 {{% tab "Host" %}}
 
-To configure this check for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from an Google Cloud SQL database:
+To configure this check for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
 Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
