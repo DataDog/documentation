@@ -20,8 +20,18 @@ further_reading:
 </div>
 
 ## Compatibility
+Datadog .NET application performance monitoring supports a robust set of features to provide critical information about .NET applications & services: 
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+
+- Monitor [runtime metrics][1] to help troubleshoot bugs and detect resource inefficiencies in your application.
+
+- Ability to correlate [traces & application logs][2].
+
+- The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][3].
+--- 
+
+
 
 - The .NET Tracer supports instrumentation on:
   - .NET 5

@@ -20,17 +20,20 @@ further_reading:
 </div>
 
 ## Compatibility
+Datadog .NET application performance monitoring supports a robust set of features to provide critical information about .NET applications & services: 
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-- The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using CLR v4.0). It also supports [.NET Core][1].
+- Monitor [runtime metrics][1] to help troubleshoot bugs and detect resource inefficiencies in your application.
 
-- The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][2].
+- Ability to correlate [traces & application logs][2].
+
+- The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][3].
 
 
 ## Integrations
 
-The [latest version of the .NET Tracer][3] can automatically instrument the following libraries:
+The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
 
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
@@ -55,13 +58,14 @@ The [latest version of the .NET Tracer][3] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][4] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/dotnet-core/
-[2]: https://github.com/DataDog/dd-trace-dotnet
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[4]: /help/
+[1]: /tracing/runtime_metrics/dotnet/
+[2]: /tracing/connect_logs_and_traces/dotnet/?tab=serilog
+[3]: https://github.com/DataDog/dd-trace-dotnet
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[5]: /help/
