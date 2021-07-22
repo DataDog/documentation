@@ -5,7 +5,7 @@ description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/processors/
 further_reading:
-- link: "/logs/processing/pipelines/"
+- link: "/logs/log_configuration/pipelines"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
 - link: "/logs/logging_without_limits/"

@@ -82,12 +82,20 @@ Ce check pourra toujours recueillir :
 - Les requêtes et limites de pod
 - Les métriques de capacité de nœud
 
+## Données collectées
+
+### Checks de service
+{{< get-service-checks-from-git "kubelet" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.openshift.org/3.7/install_config/master_node_configuration.html#node-configuration-files
-[5]: https://docs.datadoghq.com/fr/help/
+[5]: https://github.com/DataDog/integrations-core/blob/master/kubelet/assets/service_checks.json
+[6]: https://docs.datadoghq.com/fr/help/

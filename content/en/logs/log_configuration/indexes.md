@@ -9,10 +9,10 @@ further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
@@ -156,10 +156,10 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [10]: /logs/archives/
 [11]: /logs/search_syntax/
 [12]: /api/v1/logs-indexes/#update-an-index
-[13]: /logs/processing/processors/?tab=ui#user-agent-parser
-[14]: /logs/processing/processors/?tab=ui#geoip-parser
+[13]: /logs/log_configuration/processors/#user-agent-parser
+[14]: /logs/log_configuration/processors/#geoip-parser
 [15]: /tracing/connect_logs_and_traces/
-[16]: /logs/processing/processors/?tab=ui#trace-remapper
+[16]: /logs/log_configuration/processors/#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html

@@ -62,7 +62,7 @@ To monitor the volume of unparsed logs:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /logs/processing/
+[1]: /logs/log_configuration/pipelines
 [2]: /integrations/#cat-log-collection
 [3]: /logs/explorer/
 [4]: /logs/explorer/#patterns
