@@ -1859,11 +1859,16 @@ main:
     parent: dbm_setup
     identifier: dbm_data_collected
     weight: 103
+  - name: Advanced Configuration
+    url: database_monitoring/setup/advanced_configuration
+    parent: dbm_setup
+    identifier: dbm_advanced_configuration
+    weight: 104
   - name: Troubleshooting
     url: database_monitoring/setup/troubleshooting/
     parent: dbm_setup
     identifier: dbm_troubleshooting
-    weight: 104
+    weight: 105
   - name: Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm

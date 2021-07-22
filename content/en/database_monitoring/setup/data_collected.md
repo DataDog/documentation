@@ -8,6 +8,9 @@ further_reading:
   text: "tktk"
 
 ---
+{{< site-region region="us3,gov" >}} 
+<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
+{{< /site-region >}}
 
 ## Sensitive information
 
