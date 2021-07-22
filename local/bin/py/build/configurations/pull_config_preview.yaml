@@ -87,7 +87,7 @@
         dest_dir: '/developers/integrations/'
         path_to_remove: 'docs/dev/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/integrations-core/tree/master/docs/dev/" ]
+          dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
 
   - repo_name: integrations-extras
     contents:
