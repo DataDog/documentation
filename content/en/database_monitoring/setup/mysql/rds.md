@@ -165,10 +165,11 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
 
 ## Configure the Agent
+
 {{< tabs >}}
 {{% tab "Host" %}}
 
-To configure this check for an Agent running on a host:
+To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
 Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
