@@ -1834,7 +1834,7 @@ main:
     parent: dbm_setup
     identifier: dbm_setup_mysql
     weight: 102
-  - name: Self-hosted
+  - name: Self hosted
     url: database_monitoring/setup/mysql/selfhosted
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_selfhosted
