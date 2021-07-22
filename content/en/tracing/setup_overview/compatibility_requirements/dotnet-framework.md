@@ -15,6 +15,9 @@ further_reading:
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
+<div class="alert alert-warning"> 
+  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
+</div>
 
 ## Compatibility
 
@@ -24,37 +27,35 @@ further_reading:
 
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][2].
 
-<div class="alert alert-warning"> 
-  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
-
-</div>
-
 
 ## Integrations
 
-The .NET Tracer can instrument the following libraries automatically:
+The [latest version of the .NET Tracer][3] can automatically instrument the following libraries:
 
-| Framework or library            | NuGet package                  | Integration Name     |
-| ------------------------------- | ------------------------------ | -------------------- |
-| ASP.NET (including Web Forms)   | built-in                       | `AspNet`             |
-| ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+    | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+ | `AspNetWebApi2`      |
-| WCF (server)                    | built-in                       | `Wcf`                |
-| ADO.NET                         | built-in                       | `AdoNet`             |
-| HttpClient / HttpMessageHandler | built-in                       | `HttpMessageHandler` |
-| WebClient / WebRequest          | built-in                       | `WebRequest`         |
-| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+ | `StackExchangeRedis` |
-| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+   | `ServiceStackRedis`  |
-| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
-| PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+       | `RabbitMQ`           |
+| Framework or library            | NuGet package                                                                             | Integration Name     |
+| ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| ADO.NET                         | built-in                                                                                  | `AdoNet`             |
+| ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
+| ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
+| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
+| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0                                                     | `CosmosDb`           |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
+| HttpClient / HttpMessageHandler | built-in                                                                                  | `HttpMessageHandler` |
+| Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
+| MSMQ                            | built-in                                                                                  | `Msmq`               |
+| MySql                           | `MySql.Data` 6.7.0+                                                                       | `AdoNet`             |
+| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `AdoNet`             |
+| PostgreSQL                      | `Npgsql` 4.0+                                                                             | `AdoNet`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
+| SQL Server                      | `System.Data` 4.0.0+, `System.Data.SqlClient` 4.0.0 +, `Microsoft.Data.SqlClient` 1.0.0+  | `AdoNet`             |
+| WCF (server)                    | built-in                                                                                  | `Wcf`                |
+| WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-<div class="alert alert-info">
-<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code> and <code>NpgsqlCommand</code>.
-</div>
-
-Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][4] for help.
 
 ## Further reading
 
@@ -62,4 +63,5 @@ Don’t see your desired libraries? Datadog is continually adding additional sup
 
 [1]: /tracing/compatibility_requirements/dotnet-core/
 [2]: https://github.com/DataDog/dd-trace-dotnet
-[3]: /help/
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[4]: /help/

@@ -15,6 +15,9 @@ further_reading:
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
+<div class="alert alert-warning">
+  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
+</div>
 
 ## Compatibility
 
@@ -34,49 +37,50 @@ further_reading:
 
 - The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
 
-<div class="alert alert-warning">
-  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
-</div>
-
 ## Integrations
 
-The .NET Tracer can instrument the following libraries automatically:
+The [latest version of the .NET Tracer][2] can automatically instrument the following libraries:
 
-| Framework or library            | NuGet package                                                           | Integration Name     |
-|---------------------------------|-------------------------------------------------------------------------|----------------------|
-| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
-| ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
-| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
-| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
-| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
-| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
-| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
-| PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                | `RabbitMQ`           |
-| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                    | `ServiceRemoting`    |
+| Framework or library            | NuGet package                                                                             | Integration Name     |
+| ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                                     | `AdoNet`             |
+| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                   | `AspNetCore`         |
+| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0                                                     | `CosmosDb`           |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
+| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
+| Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
+| MSMQ                            | built-in                                                                                  | `Msmq`               |
+| MySql                           | `MySql.Data` 6.7.0+                                                                       | `AdoNet`             |
+| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `AdoNet`             |
+| PostgreSQL                      | `Npgsql` 4.0+                                                                             | `AdoNet`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
+| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                      | `ServiceRemoting`    |
+| SQL Server                      | `System.Data` 4.0.0+, `System.Data.SqlClient` 4.0.0 +, `Microsoft.Data.SqlClient` 1.0.0+  | `AdoNet`             |
+| WCF (server)                    | built-in                                                                                  | `Wcf`                |
+| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                | `WebRequest`         |
 
-<div class="alert alert-info">
-<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.
-</div>
-
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
 
 ## Out of support .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][4] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][4] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][5]        |
+| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][5] |
+| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][6]        |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /help/
-[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: https://github.com/dotnet/runtime/issues/23938
+[2]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[3]: /help/
+[4]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[5]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[6]: https://github.com/dotnet/runtime/issues/23938
