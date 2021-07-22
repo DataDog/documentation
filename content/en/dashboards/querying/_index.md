@@ -198,7 +198,7 @@ Select the following parameters from the graphing editor: Environment (`env`), P
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
-## Configuring an Incident Management analytics graph
+## Incident Management analytics
 Incident Management analytics provides you with the following measures:
 
 * Incident Count
