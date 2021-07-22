@@ -54,15 +54,20 @@ The Agent must connect directly to the host being monitored. For self-hosted dat
 ## Configure MySQL settings
 
 
-TKTK
+Configure the following [Database Flags][4]:
 
-**Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][2]. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
 
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
@@ -162,7 +167,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][4].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
 
 ## Configure the Agent
 
@@ -430,11 +435,11 @@ Then, set [Log Integrations][4] as Docker labels:
 
 ## Validating
 
-[Run the Agent's status subcommand][5] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][7]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
 
 ## Further reading
 
@@ -444,7 +449,8 @@ If you have installed and configured the integrations and Agent as described and
 [1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [2]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
 [3]: /agent/basic_agent_usage#agent-overhead
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: https://app.datadoghq.com/databases
-[7]: /database_monitoring/setup/troubleshooting/#mysql
+[4]: https://cloud.google.com/sql/docs/mysql/flags
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://app.datadoghq.com/databases
+[8]: /database_monitoring/setup/troubleshooting/#mysql
