@@ -91,10 +91,10 @@ This configuration is only supported through the UI.
 Grants a role the ability to create and modify [log processing pipelines][9]. This includes:
 
 - Setting the name of the pipeline
-- Setting [pipelines filters][10] for what logs should enter the processing pipeline
+- Setting pipelines filters for what logs should enter the processing pipeline
 - Reorder pipelines
 - Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
-- Managing [standard attributes][11] or [aliasing facets][12]
+- Managing [standard attributes][10] or [aliasing facets][11]
 
 **Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
 
@@ -141,9 +141,9 @@ curl -X POST \
 
 ### `logs_write_archives`
 
-Grants the ability to create, edit or delete [Log Archives][13]. This includes:
+Grants the ability to create, edit or delete [Log Archives][12]. This includes:
 
-- Setting [archives filters][10] for what logs should be routed to the archive
+- Setting archives filters for what logs should be routed to the archive
 - Setting the name of the archive
 - Reordering archives
 - Restricting the [Logs Read Archives](#logs-read-archives) permission to a subset of roles.
@@ -152,7 +152,7 @@ This permission is global and enables creating new archives, and editing and del
 
 ### `logs_read_archives`
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][14] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][13] from Archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -184,7 +184,7 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 
 ### `logs_write_historical_views`
 
-Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][14].
+Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][13].
 
 This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](#logs_read_archives) permission.
 
@@ -197,7 +197,7 @@ In the example above:
 * `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
 
 
-When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][13].
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][12].
 
 For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
 
@@ -209,11 +209,11 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 Grants the ability to view, create, or modify log configuration through the Datadog API:
 
-* View and configure [archives][15] through the API
-* View and configure [indexes][16] through the API
-* View and configure [pipelines][17] through the API
-* View and configure [restriction queries][18] through the API
-* View and configure [metrics generated from logs][19] through the API
+* View and configure [archives][14] through the API
+* View and configure [indexes][15] through the API
+* View and configure [pipelines][16] through the API
+* View and configure [restriction queries][17] through the API
+* View and configure [metrics generated from logs][18] through the API
 
 The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
@@ -226,7 +226,7 @@ Grant the following permissions to manage read access on subsets of log data:
 
 ### `logs_read_data`
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][18].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][17].
 
 Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
@@ -355,7 +355,7 @@ curl -X POST \
 
 ### `logs_live_tail`
 
-Grants a role the ability to use the [Live Tail][20] feature.
+Grants a role the ability to use the [Live Tail][19] feature.
 
 This permission is global, and grants access to the livetail regardless of [Log Read Index Data](#logs-read-index-data) permission.
 
@@ -374,15 +374,14 @@ This permission is global, and grants access to the livetail regardless of [Log 
 [6]: /logs/indexes#indexes-filters
 [7]: /logs/indexes#update-log-retention
 [8]: /logs/indexes#exclusion-filters
-[9]: /logs/processing/pipelines/
-[10]: /logs/processing/pipelines/#pipeline-filters
-[11]: /logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
-[12]: /logs/explorer/facets/#alias-facets
-[13]: /logs/archives
-[14]: /logs/archives/rehydrating
-[15]: /api/v2/logs-archives/
-[16]: /api/v1/logs-indexes/
-[17]: /api/v1/logs-pipelines/
-[18]: /api/v2/logs-restriction-queries/
-[19]: /api/v2/logs-metrics/
-[20]: /logs/explorer/live_tail/
+[9]: /logs/log_configuration/pipelines
+[10]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[11]: /logs/explorer/facets/#alias-facets
+[12]: /logs/archives
+[13]: /logs/archives/rehydrating
+[14]: /api/v2/logs-archives/
+[15]: /api/v1/logs-indexes/
+[16]: /api/v1/logs-pipelines/
+[17]: /api/v2/logs-restriction-queries/
+[18]: /api/v2/logs-metrics/
+[19]: /logs/explorer/live_tail/

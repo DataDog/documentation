@@ -20,7 +20,7 @@ Your profile is how others in your organization recognize you in Datadog. Set or
 
 To update your picture, create an account on [Gravatar][2] and associate it with your email address.
 
-If you log in to Datadog using Google authentication, your email address is provided by your Google account and is *not* editable within Datadog. To change your email address in Google, refer to the [Google documentation][3].
+If you log in to Datadog using Google authentication, your email address is provided by your Google account and is *not* editable within Datadog. To change your email address in Google, see the [Google documentation][3].
 
 ### Organizations
 
@@ -28,7 +28,7 @@ The *account settings* page also lists all of the organizations you are associat
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. Once invited, you'll receive an email with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. Once invited, an email is sent with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
@@ -52,9 +52,9 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
-To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog’s appearance to the theme you’ve set at the OS level:
+To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you’ve set at the OS level:
 
-{{< img src="account_management/dark-mode-toggle.png" alt="Dark mode"  style="width:60%;">}}
+{{< img src="account_management/dark-mode-toggle.png" alt="Dark mode" style="width:60%;">}}
 
 ## Connecting to GitHub
 
@@ -62,7 +62,7 @@ If you have installed the [GitHub integration][10] to create events in Datadog, 
 
 ## Deleting your account
 
-To delete your Datadog account completely, [contact our support team][11].
+To delete your Datadog account completely, contact [Datadog support][11].
 
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com

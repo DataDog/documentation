@@ -20,10 +20,10 @@ Used in combination with RUM performance data, Session Replay can be an asset fo
 
 To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the following sections: application creation, client token generation, and RUM SDK setup.
 
-Session Replay is available through a dedicated build of the RUM Browser SDK. To enabling Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
+Session Replay is available through a dedicated build of the RUM Browser SDK. To enable Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
-Replace the `@datadog/browser-rum package` with `[@datadog/browser-rum-recorder][2]` When `datadogRum.init()` is called, it also starts the Session Replay recording.
+Replace the `@datadog/browser-rum package` with [`@datadog/browser-rum-recorder`][2] When `datadogRum.init()` is called, it also starts the Session Replay recording.
 
 ``` javascript
 import { datadogRum } from '@datadog/browser-rum-recorder'
@@ -98,7 +98,7 @@ Session Replay does not support the following HTML elements at the moment: `ifra
 
 ### Fonts or images do not render properly
 
-A Session Replay is not video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts & images.
+A Session Replay is not a video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts & images.
 
 Several reasons might explain why assets are not available at the time of the replay.
 
@@ -106,14 +106,14 @@ Several reasons might explain why assets are not available at the time of the re
 2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
 3. The resource is blocked by the browser due to CORS (typically, web-fonts). 
 The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
-The fix is thus to allow `app.datadoghq.com through` the `[Access-Control-Allow-Origin][5]` header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
+The fix is thus to allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
 To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
 
 ### CSS rules not properly applied / mouse hover not replayed 
 
 Unlike fonts and images, the recorder tries to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it falls back to recording the links to the CSS files.
 
-Note that for proper mouse hover support, the CSS rules must be accessible via the CSSStyleSheet interface.
+**Note**: For proper mouse hover support, the CSS rules must be accessible through the CSSStyleSheet interface.
 
 If the stylesheets are hosted on a different domain than the web page, access to the CSS rules is subject to cross-origin security checks by the browser, and the browser must be instructed to load the stylesheet leveraging CORS using the [crossorigin][8] attribute.
 
@@ -124,7 +124,7 @@ For example, if your application is on the `example.com` domain and depends on a
       href="https://assets.example.com/style.css”>
 ```
 
-Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the `[Access-Control-Allow-Origin][5]` header.
+Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the [`Access-Control-Allow-Origin`][5] header.
 
 ## Frequently asked questions
 

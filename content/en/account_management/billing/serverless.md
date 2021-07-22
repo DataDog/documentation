@@ -1,5 +1,5 @@
 ---
-title: Serverless billing
+title: Serverless Billing
 kind: documentation
 ---
 

@@ -7,10 +7,10 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/live_tail/"
@@ -88,13 +88,13 @@ Select your Cloud provider below to see how to automatically collect your logs a
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-Datadog integrations and log collection are tied together. Use an integration default configuration file to enable dedicated [processing][1], [parsing][2], and [facets][3] in Datadog.
+Datadog integrations and log collection are tied together. Use an integration default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog.
 
 Consult the [list of available supported integrations][4].
 
 
-[1]: /logs/processing/
-[2]: /logs/processing/parsing/
+[1]: /logs/log_configuration/processors
+[2]: /logs/log_configuration/parsing
 [3]: /logs/explorer/facets/
 [4]: /integrations/#cat-log-collection
 {{% /tab %}}
@@ -289,6 +289,6 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [6]: /security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
 [8]: /logs/explorer/facets/
-[9]: /logs/processing/attributes_naming_convention
-[10]: /logs/processing/attributes_naming_convention/#source-code
+[9]: /logs/log_configuration/attributes_naming_convention
+[10]: /logs/log_configuration/attributes_naming_convention/#source-code
 [11]: /logs/explore/

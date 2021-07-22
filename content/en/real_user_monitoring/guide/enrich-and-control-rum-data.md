@@ -1,5 +1,5 @@
 ---
-title: Enrich and control RUM data with beforeSend
+title: Enrich and control browser RUM data with beforeSend
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The RUM SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. Intercepting the RUM events allows you to:
+The RUM browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. Intercepting the RUM events allows you to:
 * Enrich your RUM events with additional context attributes
 * Modify your RUM events to modify their content, or redact sensitive sequences (see [list of editable properties][1])
 * Discard selected RUM events

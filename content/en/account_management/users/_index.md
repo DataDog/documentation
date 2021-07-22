@@ -37,19 +37,19 @@ To add members to your organization:
 **Note**: Users with the Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
 5. Click **Send Invites**
 
-{{< img src="account_management/users/invite_user.png" alt="Add a user to your organization"  style="width:80%;">}}
+{{< img src="account_management/users/invite_user.png" alt="Add a user to your organization" style="width:80%;">}}
 
-The new user will receive an email with a link to log in. The user is marked with status `Invite Pending` until they log in. To cancel their invite before they log in, click the *Delete Invite* button on the right of the user line in list view, or on the user box in grid view. 
+The new user receives an email with a link to log in. The user is marked with status `Invite Pending` until they log in. To cancel their invite before they log in, click the *Delete Invite* button on the right of the user line in list view, or on the user box in grid view. 
 
-{{< img src="account_management/users/delete_invite_grid.png" alt="Delete invite on the grid view"  style="width:50%;">}}
+{{< img src="account_management/users/delete_invite_grid.png" alt="Delete invite on the grid view" style="width:50%;">}}
 
 To resend an invite in list view, click the user to open the user side panel, and click **Resend Invite**:
 
-{{< img src="account_management/users/resend_invite_list.png" alt="Resend invite on the list view"  style="width:80%;">}}
+{{< img src="account_management/users/resend_invite_list.png" alt="Resend invite on the list view" style="width:80%;">}}
 
 In grid view, hover over the user box and click **Resend Invite**:
 
-{{< img src="account_management/users/resend_invite_grid.png" alt="Resend invite on the grid view"  style="width:50%;">}}
+{{< img src="account_management/users/resend_invite_grid.png" alt="Resend invite on the grid view" style="width:50%;">}}
 
 ## Edit a user's roles
 
@@ -60,7 +60,7 @@ Only users with the Access Management permission, such as users with the Datadog
 3. Select the new [user roles][2] for this user.
 4. **Save** the new setting.
 
-{{< img src="account_management/users/user_role_update.png" alt="User role update"  style="width:80%;">}}
+{{< img src="account_management/users/user_role_update.png" alt="User role update" style="width:80%;">}}
 
 See the [Role Based Access Control][2] documentation to discover all roles available and how to create custom ones.
 
@@ -74,7 +74,7 @@ Only users with the Access Management permission, such as users with the Datadog
 4. **Save** the new setting.
 5. Confirm the action.
 
-{{< img src="account_management/users/disable_user.png" alt="Disable User"  style="width:80%;" >}}
+{{< img src="account_management/users/disable_user.png" alt="Disable User" style="width:80%;" >}}
 
 **Note**: Disabled users are filtered out from the list of users in the User Management Page by default.
 

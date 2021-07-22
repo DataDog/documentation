@@ -1871,33 +1871,37 @@ main:
     url: logs/log_configuration/processors/
     parent: log_configuration
     weight: 202
+  - name: Parsing
+    url: logs/log_configuration/parsing/
+    parent: log_configuration
+    weight: 203
   - name: Attributes and Aliasing
     url: logs/log_collection/?tab=host#attributes-and-tags
     parent: log_processing
-    weight: 203
+    weight: 204
   - name: Attributes and Aliasing
     url: logs/log_configuration/attributes_naming_convention/
     parent: log_configuration
-    weight: 204
+    weight: 205
   - name: Generate Metrics
     url: logs/log_configuration/logs_to_metrics/
     parent: log_configuration
     identifier: log_to_metrics
-    weight: 205
+    weight: 206
   - name: Indexes
     url: logs/log_configuration/indexes
     parent: log_configuration
     identifier: log_indexes
-    weight: 206
+    weight: 207
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 207
+    weight: 208
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 208
+    weight: 209
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: log_management
@@ -3165,7 +3169,7 @@ api:
       operationids:
         - UpdateDashboard
       unstable: []
-      order: 4
+      order: 6
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: get-a-dashboard
@@ -3177,7 +3181,7 @@ api:
       operationids:
         - GetDashboard
       unstable: []
-      order: 5
+      order: 7
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: delete-a-dashboard
@@ -3286,6 +3290,18 @@ api:
         - CreateDashboard
       unstable: []
       order: 1
+  - name: Restore deleted dashboards
+    url: '#restore-deleted-dashboards'
+    identifier: restore-deleted-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RestoreDashboards
+      unstable: []
+      order: 5
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: get-all-dashboards
@@ -3298,6 +3314,18 @@ api:
         - ListDashboards
       unstable: []
       order: 2
+  - name: Delete dashboards
+    url: '#delete-dashboards'
+    identifier: delete-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboards
+      unstable: []
+      order: 4
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes
