@@ -1,5 +1,5 @@
 ---
-title: Datadog in the Azure Portal
+title: Microsoft Azure Embedded Integration Management
 kind: guide
 further_reading:
   - link: "integration/azure"
@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"
     tag: Blog
     text: "Microsoft partnership embeds Datadog natively in the Azure portal"
+  - link: "/integration/guide/azure-marketplace"
+    tag: Documentation
+    text: "Microsoft Azure Embedded Integration Setup"
 ---
 
 {{< site-region region="us,eu,gov" >}}
@@ -28,6 +31,8 @@ With the Datadog resource, you can manage the following within the associated Az
 - Change the billing plan for your Datadog organization (Azure Marketplace only)
 - Enable or disable the Azure integration
 - Delete the Datadog resource
+
+This page describes the Azure Portal experience. If you prefer to use CLI, see the [Azure CLI for Datadog][2].
 
 ## Overview
 
@@ -93,7 +98,7 @@ The portal retrieves all the available Datadog plans for your tenant, this inclu
 ## Datadog org configurations
 ### Metrics and logs
 
-Select "Metrics and logs" in the left sidebar to change the configuration rules for metrics and logs. See the Azure documentation to [Configure metrics and logs][2].
+Select "Metrics and logs" in the left sidebar to change the configuration rules for metrics and logs. See the Azure documentation to [Configure metrics and logs][3].
 
 ### Monitored resources
 
@@ -106,7 +111,7 @@ The "Logs to Datadog" column displays `Sending` if the resource is sending logs 
 | Reason                                    | Description                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Resource doesn't support sending logs     | Only resource types with monitoring log categories can be configured to send logs to Datadog.                           |
-| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][3]. |
+| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][4]. |
 | Error                                     | The resource is configured to send logs to Datadog, but is blocked by an error.                                         |
 | Logs not configured                       | Only Azure resources with appropriate resource tags are configured to send logs to Datadog.                             |
 | Region not supported                      | The Azure resource is in a region that doesn't support sending logs to Datadog.                                         |
@@ -153,7 +158,7 @@ For each app service, the following information is displayed:
 
 #### Install
 
-To install the [Datadog extension][4], select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
+To install the [Datadog extension][5], select the appropriate app, then click "Install Extension". The portal asks for confirmation to install the extension. Select "OK" to begin installation. This restarts your app and adds the following settings:
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
@@ -161,7 +166,7 @@ To install the [Datadog extension][4], select the appropriate app, then click "I
 
 Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-**Note**: Ensure you are adding the extension to apps with [supported runtimes][5]. The Datadog resource does not limit or filter the list of apps.
+**Note**: Ensure you are adding the extension to apps with [supported runtimes][6]. The Datadog resource does not limit or filter the list of apps.
 
 #### Uninstall
 
@@ -172,7 +177,7 @@ To uninstall the Datadog extension, select the appropriate app, then click "Unin
 
 Select "Single sign-on" in the left sidebar to reconfigure single sign-on.
 
-To activate single sign-on through Azure Active Directory, select "Enable single sign-on". The portal retrieves the appropriate Datadog app from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog app name as shown below:
+To activate single sign-on through Azure Active Directory, select "Enable single sign-on". The portal retrieves the appropriate Datadog application from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below:
 
 {{< img src="integrations/guide/azure_portal/sso.png" alt="Azure US3 Single sign-on" responsive="true" style="width:100%;">}}
 
@@ -191,8 +196,9 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /integrations/azure/#create-datadog-resource
-[2]: /integrations/azure/#metrics-and-logs
-[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
-[4]: /serverless/azure_app_services
-[5]: /serverless/azure_app_services/#requirements
+[1]: /integrations/guide/azure-marketplace/?tab=create#create-datadog-resource
+[2]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
+[3]: /integrations/azure/#metrics-and-logs
+[4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
+[5]: /serverless/azure_app_services
+[6]: /serverless/azure_app_services/#requirements

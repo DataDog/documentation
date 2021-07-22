@@ -1,5 +1,5 @@
 ---
-title: Datadog in the Azure Marketplace
+title: Microsoft Azure Embedded Integration Setup
 kind: guide
 further_reading:
   - link: "integration/azure"
@@ -8,11 +8,29 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"
     tag: Blog
     text: "Microsoft partnership embeds Datadog natively in the Azure portal"
+  - link: "/integration/guide/azure-portal"
+    tag: Documentation
+    text: "Microsoft Azure Embedded Integration Management"
 ---
 
 <div class="alert alert-warning">
-  This functionality is available if you purchased Datadog through the Azure Marketplace.
+  This functionality is only available if you purchased Datadog through the Azure Marketplace.
 </div>
+
+Use this guide to set up the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between a Datadog organization and an Azure subscription.
+
+With the Datadog resource, you can manage the following within the associated Azure subscription:
+- Configure the collection of Azure metrics and platform logs
+- Verify the Azure resources sending metrics and logs
+- View API keys and set the key default for your Datadog resource Agent deployments
+- Deploy the Datadog VM Agent to your Azure VMs and view details about running Agents
+- Deploy the Datadog .NET extension to your Azure Web Apps and view details about installed extensions
+- Reconfigure single sign-on
+- Change the billing plan for your Datadog organization (Azure Marketplace only)
+- Enable or disable the Azure integration
+- Delete the Datadog resource
+
+This page describes the Azure Portal experience. If you prefer to use CLI, see the [Azure CLI for Datadog][1].
 
 ## Setup
 
@@ -50,7 +68,7 @@ Choose "Create a new Datadog organization" or "Link Azure subscription to an exi
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource1.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
 
-**Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][1] if applicable.
+**Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][2] if applicable.
 
 ### Configuration {#configuration-us3}
 
@@ -127,13 +145,13 @@ Optionally, limit metric collection for Azure VMs and App Service Plans using Az
 
 There are two types of logs that can be emitted from Azure to Datadog.
 
-**Subscription level logs** provide insight into the operations on your resources at the [control plane][2]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
+**Subscription level logs** provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
 
 To send subscription level logs to Datadog, select "Send subscription activity logs". If this option is left unchecked, none of the subscription level logs are sent to Datadog.
 
-**Azure resource logs** provide insight into operations taken on Azure resources at the [data plane][2]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
+**Azure resource logs** provide insight into operations taken on Azure resources at the [data plane][3]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
 
-To send Azure resource logs to Datadog, select "Send Azure resource logs for all defined resources". The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][3]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
+To send Azure resource logs to Datadog, select "Send Azure resource logs for all defined resources". The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][4]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
 
 You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
 
@@ -153,7 +171,7 @@ Once you have completed configuring metrics and logs, select **Next: Single sign
 
 (Optional) If you use Azure Active Directory as your identity provider, activate single sign-on from the Azure portal to Datadog.
 
-If you're linking the Datadog resource to an existing Datadog organization, you can't set up single sign-on at this step. Instead, set up single sign-on after creating the Datadog resource. For more information, see [Reconfigure single sign-on][4].
+If you're linking the Datadog resource to an existing Datadog organization, you can't set up single sign-on at this step. Instead, set up single sign-on after creating the Datadog resource. For more information, see [Reconfigure single sign-on][5].
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource4.png" alt="Azure US3 create a Datadog resource single sign-on" responsive="true" style="width:90%;">}}
 
@@ -161,7 +179,7 @@ To establish single sign-on through Azure Active directory, select the checkbox 
 
 The Azure portal retrieves the appropriate Datadog application(s) from Azure Active Directory. Datadog Enterprise app(s) created prior to starting the Datadog resource creation process are available here.
 
-Select the Datadog app you wish to use. If you haven't created one, refer to the documentation on [creating an Azure AD Enterprise Gallery app](#saml-sso-configuration).
+Select the Datadog application you wish to use. If you haven't created one, see [creating an Azure AD Enterprise Gallery app](#saml-sso-configuration).
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource5.png" alt="Azure US3 enable single sign-on" responsive="true" style="width:90%;">}}
 
@@ -244,7 +262,8 @@ Use the following steps to set up the enterprise application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.microsoft.com/en-us/azure/marketplace/azure-consumption-commitment-benefit
-[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
-[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
-[4]: https://docs.microsoft.com/en-us/azure/partner-solutions/datadog/manage#reconfigure-single-sign-on
+[1]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
+[2]: https://docs.microsoft.com/en-us/azure/marketplace/azure-consumption-commitment-benefit
+[3]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
+[4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
+[5]: https://docs.microsoft.com/en-us/azure/partner-solutions/datadog/manage#reconfigure-single-sign-on
