@@ -40,8 +40,8 @@ Datadog Logging without Limits* は、ログの取り込みとインデックス
 *Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: https://app.datadoghq.com/logs/pipelines
-[2]: /ja/logs/processing/pipelines/
-[3]: /ja/logs/processing/processors/
+[2]: /ja/logs/log_configuration/pipelines
+[3]: /ja/logs/log_configuration/processors
 [4]: /ja/logs/log_configuration/attributes_naming_convention/
 [5]: /ja/logs/log_configuration/logs_to_metrics/
 [6]: /ja/logs/log_configuration/indexes

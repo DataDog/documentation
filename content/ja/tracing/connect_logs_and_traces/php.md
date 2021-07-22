@@ -82,6 +82,6 @@ PHP ログとトレースを手動で接続する方法については、以下�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/log_collection/php/
-[2]: /ja/logs/processing/processors/#trace-remapper
+[2]: /ja/logs/log_configuration/processors/#trace-remapper
 [3]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
