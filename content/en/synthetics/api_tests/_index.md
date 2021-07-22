@@ -25,33 +25,26 @@ further_reading:
 
 ## Overview
 
-API tests are useful to help you **proactively monitor that your most important services are available** at anytime and from anywhere. API tests come in five different subtypes that allow you to launch requests on the **different network layers** of your systems:
+API tests help you **proactively monitor** your most important services so they are available anytime and from anywhere. 
 
-- [`HTTP` test][1]
-- [`SSL` test][2]
-- [`TCP` test][3]
-- [`DNS` test][4]
-- [`ICMP` test][5]
+Launch requests on the different network layers of your systems with these subtypes:
+
+{{< partial name="synthetics/network-layers.html" >}}
 
 {{< img src="synthetics/api_tests/api_test.mp4" alt="API Test subtypes" video="true"  width="100%" >}}
 
-If your service starts answering more slowly, or in an unexpected way (for example, unexpected response body, wrong A record, etc.), your test can [**alert your team**][6], [**block your CI pipeline**][7], or even [**roll back the faulty deployment**][7].
+If your service starts answering slower or in an unexpected way (such as an unexpected response body or wrong A record), your test can [alert your team][1], [block your CI pipeline][2], and [roll back the faulty deployment][2].
 
-API tests can run from Datadog [managed locations][8] and [private locations][9], allowing **full coverage of your systems**, both external and internal.
+API tests can run from Datadog [managed locations][3] and [private locations][4], allowing **internal and external coverage** of your systems.
 
-**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, you can also chain your requests using [Multistep API tests][10].
+**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, you can chain your requests with [multistep API tests][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests/http_tests
-[2]: /synthetics/api_tests/ssl_tests
-[3]: /synthetics/api_tests/tcp_tests
-[4]: /synthetics/api_tests/dns_tests
-[5]: /synthetics/api_tests/icmp_tests
-[6]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[7]: /synthetics/ci
-[8]: /api/v1/synthetics/#get-all-locations-public-and-private
-[9]: /synthetics/private_locations
-[10]: /synthetics/multistep/
+[1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[2]: /synthetics/ci
+[3]: /api/v1/synthetics/#get-all-locations-public-and-private
+[4]: /synthetics/private_locations
+[5]: /synthetics/multistep/
