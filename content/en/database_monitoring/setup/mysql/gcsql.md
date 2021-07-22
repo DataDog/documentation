@@ -1,10 +1,10 @@
 ---
-title: Setting Up Database Monitoring for Aurora managed MySQL
+title: Setting Up Database Monitoring for Google Cloud SQL managed MySQL
 kind: documentation
-description: Install and configure Database Monitoring for MySQL managed on Aurora.
-code_lang: aurora
+description: Install and configure Database Monitoring for MySQL managed on Google Cloud SQL.
+code_lang: gcsql
 type: multi-code-lang
-code_lang_weight: 30
+code_lang_weight: 40
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
@@ -28,6 +28,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
+### Google Cloud SQL requirements
+
+Your Google Cloud SQL instance must have [at least 26GB of RAM][1], so that [`performance_schema`][2] can be enabled.
+
 ### Supported MySQL versions
 
 * 5.6, 5.7, or 8.0+
@@ -40,29 +44,17 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
 
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][3]).
 
 ### Proxies, load balancers, and connection poolers
 
 The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
-### Connect the Agent to the Aurora instance endpoint
-
-The Agent must connect to the AWS Aurora _instance endpoint_.  AWS Aurora also provides a _cluster endpoint_ which allows client applications to connect to a reader or writer instance without knowledge of the underlying database host. Although using the cluster endpoint is desirable for applications, the Agent must be aware of all instances.
 
 ## Configure MySQL settings
 
-Configure the following in the [DB Parameter Group][2]:
 
-| Parameter | Value | Description |
-| --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the [Performance Schema][3]. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_current`</code> | `ON` | Required. Enables monitoring of currently running queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history`</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history_long`</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+TKTK
 
 **Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
 
@@ -170,14 +162,14 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][4].
 
 ## Configure the Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
+To configure this check for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from an Google Cloud SQL database:
 
 Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
@@ -438,22 +430,21 @@ Then, set [Log Integrations][4] as Docker labels:
 
 ## Validating
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][5] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][7]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/basic_agent_usage#agent-overhead
-[2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
-[3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: https://app.datadoghq.com/databases
-[8]: /database_monitoring/setup/troubleshooting/#mysql
+[1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[2]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
+[3]: /agent/basic_agent_usage#agent-overhead
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: https://app.datadoghq.com/databases
+[7]: /database_monitoring/setup/troubleshooting/#mysql

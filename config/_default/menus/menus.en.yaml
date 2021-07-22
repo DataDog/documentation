@@ -1824,6 +1824,11 @@ main:
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_aurora
     weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup/postgres/gcsql
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_gcsql
+    weight: 104
   - name: MySQL
     url: database_monitoring/setup/mysql/selfhosted
     parent: dbm_setup
@@ -1844,6 +1849,11 @@ main:
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_aurora
     weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup/mysql/gcsql
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_gcsql
+    weight: 104
   - name: Troubleshooting
     url: database_monitoring/setup/troubleshooting/
     parent: dbm_setup
