@@ -29,11 +29,15 @@ Lorsque vous attribuez des autorisations à un rôle, tous les utilisateurs asso
 
 ## Rôles Datadog par défaut
 
-| Rôle                       | Description                                                                                                                                                                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Rôle Admin Datadog**     | Les utilisateurs ont accès aux informations de facturation, sont autorisés à révoquer des clés API, sont en mesure de gérer les utilisateurs et peuvent configurer [des dashboards en lecture seule][2]. Ils peuvent également accorder le rôle d'administrateur à un utilisateur standard.                                          |
-| **Rôle Standard Datadog**  | Les utilisateurs sont autorisés à consulter et à modifier toutes les fonctionnalités de surveillance offertes par Datadog, notamment les [dashboards][2], les [monitors][3], les [événements][4] et les [notebooks][5]. Ils peuvent également inviter d'autres utilisateurs à rejoindre une organisation.                      |
-| **Rôle Read-Only Datadog** | Les utilisateurs n'ont aucun droit de modification dans Datadog. Ce rôle est particulièrement utile lorsque vous souhaitez partager des vues spécifiques en lecture seule avec un client ou lorsqu'un membre d'un service souhaite partager un [dashboard][2] avec une personne qui n'en fait pas partie. |
+Rôle Admin Datadog
+: Utilisateurs ayant accès aux informations de facturation, autorisés à révoquer des clés API et capables de gérer des utilisateurs et de configurer [des dashboards en lecture seule][2]. Ils peuvent également accorder le rôle d'administrateur à un utilisateur standard.
+ 
+
+Rôle Standard Datadog
+: Utilisateurs autorisés à consulter et à modifier toutes les fonctionnalités de surveillance offertes par Datadog, telles que les [dashboards][2], les [monitors][3], les [événements][4] et les [notebooks][5]. Ils peuvent également inviter d'autres utilisateurs à rejoindre une organisation.
+
+Rôle Read-Only Datadog
+: Utilisateurs n'ayant aucun droit de modification dans Datadog. Ce rôle est particulièrement utile lorsque vous souhaitez partager des vues spécifiques en lecture seule avec un client ou lorsqu'un membre d'un service souhaite partager un [dashboard][2] avec une personne qui n'en fait pas partie.
 
 ## Rôles personnalisés
 
@@ -133,6 +137,10 @@ Pour découvrir un exemple de suppression de rôle avec l'API, consultez la [doc
 {{% /tab %}}
 {{< /tabs >}}
 
+## Restreindre l'accès aux dashboards et monitors
+
+Une fois vos rôles RBAC configurés, vous pouvez restreindre l'accès aux dashboards et monitors eà certains rôles utilisateur. Pour en savoir plus, consultez la documentation relative aux [autorisations des dashboards][8] et aux [autorisations des monitors][9].
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -144,3 +152,5 @@ Pour découvrir un exemple de suppression de rôle avec l'API, consultez la [doc
 [5]: /fr/notebooks/
 [6]: /fr/api/v2/roles/
 [7]: /fr/account_management/rbac/permissions/
+[8]: /fr/dashboards/#restrict-access
+[9]: /fr/getting_started/application/monitors/#restrict-access

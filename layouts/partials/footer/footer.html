@@ -231,9 +231,9 @@
                                 {{ range $index, $v := .Site.Menus.footer_sub }}
                                     <li class="d-flex align-items-center">
                                         {{ if eq $.Site.Params.full_translation true }}
-                                            <a href="{{ "" | absLangURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                            <a href="{{ .URL }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ else }}
-                                            <a href="{{ "" | absURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                            <a href="{{ .URL }}">{{- $v.Name -}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
                                         {{ end }}
                                     </li>
                                 {{ end }}
@@ -243,12 +243,8 @@
                 </div>
             </div>
         </div>
-        
-        
     </div>
 </footer>
-
-
 
 <!--- global modals --->
 {{ partial "global-modals/global-modals.html" . }}

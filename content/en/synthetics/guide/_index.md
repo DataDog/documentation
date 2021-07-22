@@ -13,6 +13,7 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API Tests:" >}}
+    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API Test Timings and Troubleshooting Variations{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}Perform OR logic in API test assertions{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -26,8 +27,4 @@ private: true
     {{< nextlink href="synthetics/guide/browser-tests-switch-tabs/" >}}Can browser tests switch tabs?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="API Tests:" >}}
-    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API test timings and troubleshooting their variations{{< /nextlink >}}
 {{< /whatsnext >}}

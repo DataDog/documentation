@@ -22,9 +22,9 @@ _Temps de lecture : 4 minutes_
 
 {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true"  style="width:90%;">}}
 
-L'APM Datadog vous permet de créer des dashboards en fonction des priorités de votre entreprise et des métriques qui importent pour vous :
-Vous pouvez créer des widgets sur ces dashboards afin de suivre vos métriques d'infrastructure traditionnelles, vos métriques de log et vos métriques custom, telles que la charge mémoire du host, conjointement à vos métriques APM critiques mesurant le débit, la latence et le taux d'erreur afin de mettre toutes ces données en corrélation.
-Il est également possible de suivre la latence de l'expérience utilisateur pour les clients et les transactions critiques tout en surveillant les performances de votre serveur Web principal en prévision d'un événement majeur, tels que le 1er jour des soldes.
+L'APM Datadog vous permet de créer des dashboards en fonction des priorités de votre entreprise et des métriques qui vous importent :
+Vous pouvez créer des widgets sur ces dashboards afin de suivre vos métriques d'infrastructure traditionnelles, vos métriques de log et vos métriques custom, telles que la charge mémoire du host, conjointement à vos métriques APM critiques mesurant le débit, la latence et le taux d'erreur de façon à mettre toutes ces données en corrélation.
+Il est également possible de suivre la latence de l'expérience utilisateur pour les clients et les transactions critiques tout en surveillant les performances de votre serveur Web principal en prévision d'un événement majeur, tel que le 1er jour des soldes.
 
 Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques de trace à un dashboard, les corréler avec vos métriques d'infrastructure, puis exporter une requête Analytics. L'ajout de widgets à un dashboard peut se faire de trois façons différentes :
 

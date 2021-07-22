@@ -1510,6 +1510,10 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
     weight: 404
+  - name: Request Flow Map
+    url: tracing/trace_search_and_analytics/request_flow_map
+    parent: trace_search_and_analytics
+    weight: 405
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
@@ -1923,22 +1927,21 @@ main:
     parent: log_management
     identifier: log_configuration
     weight: 2
-  - name: Processing
-    url: logs/log_configuration/processing/
-    parent: log_configuration
-    identifier: log_processing
-    weight: 201
   - name: Pipelines
     url: logs/log_configuration/pipelines/
     parent: log_configuration
     identifier: log_pipelines
-    weight: 202
+    weight: 201
   - name: Processors
     url: logs/log_configuration/processors/
     parent: log_configuration
+    weight: 202
+  - name: Parsing
+    url: logs/log_configuration/parsing/
+    parent: log_configuration
     weight: 203
   - name: Attributes and Aliasing
-    url: logs/processing/attributes_naming_convention/
+    url: logs/log_collection/?tab=host#attributes-and-tags
     parent: log_processing
     weight: 204
   - name: Attributes and Aliasing
@@ -2673,7 +2676,12 @@ main:
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 250000
+    weight: 240000
+  - name: Aggregating Agents
+    url: agent/vector_aggregation/
+    parent: agent
+    identifier: vector_aggregation
+    weight: 13
 footer_product:
   - name: Features
     url: 'https://www.datadoghq.com/product/'
@@ -3226,7 +3234,7 @@ api:
       operationids:
         - UpdateDashboard
       unstable: []
-      order: 4
+      order: 6
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: get-a-dashboard
@@ -3238,7 +3246,7 @@ api:
       operationids:
         - GetDashboard
       unstable: []
-      order: 5
+      order: 7
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: delete-a-dashboard
@@ -3347,6 +3355,18 @@ api:
         - CreateDashboard
       unstable: []
       order: 1
+  - name: Restore deleted dashboards
+    url: '#restore-deleted-dashboards'
+    identifier: restore-deleted-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RestoreDashboards
+      unstable: []
+      order: 5
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: get-all-dashboards
@@ -3359,6 +3379,18 @@ api:
         - ListDashboards
       unstable: []
       order: 2
+  - name: Delete dashboards
+    url: '#delete-dashboards'
+    identifier: delete-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboards
+      unstable: []
+      order: 4
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes

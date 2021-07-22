@@ -22,13 +22,18 @@ further_reading:
 Les SLO (Service Level Objectives) constituent un outil essentiel pour optimiser le niveau de fiabilité d'un site. Les SLO fournissent un cadre permettant de définir des objectifs précis relatifs aux performances de l'application, aidant ainsi les équipes à proposer une expérience client homogène, à assurer les développements futurs sans compromettre la stabilité de la plateforme, et à améliorer la communication avec les utilisateurs internes et externes.
 
 ## Termes clés
-*Service Level Indicator (SLI)* : mesure quantitative des performances ou de la fiabilité d'un service (dans les SLO Datadog, un SLI est une métrique ou une agrégation d'un ou de plusieurs monitors)
 
-*Service Level Objective (SLO)* : pourcentage cible pour un SLI sur une période spécifique
+Service Level Indicator (SLI)
+: Mesure quantitative des performances ou de la fiabilité d'un service. Dans les SLO Datadog, un SLI est une métrique ou une agrégation d'un ou de plusieurs monitors.
 
-*Service Level Agreement (SLA)* :  accord explicite ou implicite entre un client et un prestataire de services stipulant les attentes du client en termes de fiabilité et les conséquences pour le prestataire de services en cas de manquement
+Service Level Objective (SLO)
+: Pourcentage cible pour un SLI sur une période spécifique.
 
-*Budget d'indisponibilité* : la part autorisée de manque de fiabilité dérivée du pourcentage cible d'un SLO (100 % - pourcentage cible), à investir dans le développement produit
+Service Level Agreement (SLA)
+: Accord explicite ou implicite entre un client et un prestataire de services stipulant les attentes du client en termes de fiabilité et les conséquences pour le prestataire de services en cas de manquement.
+
+Budget d'indisponibilité
+: La part autorisée de manque de fiabilité dérivée du pourcentage cible d'un SLO (100 % - pourcentage cible), à investir dans le développement produit.
 
 ## Configuration
 
@@ -41,7 +46,12 @@ Vous pouvez utiliser la [page de statut des Service Level Objectives][1] de Data
 3. Définissez jusqu'à trois cibles SLO. Chaque cible est composée d'un pourcentage cible et d'une fenêtre temporelle. Fenêtres disponibles : 7 jours, 30 jours et 90 jours. Nous vous recommandons d'opter pour des pourcentages cibles SLO plus stricts que ceux stipulés dans vos SLA.
 4. Enfin, donnez un titre à votre SLO, spécifiez une description plus détaillée ou ajoutez des liens dans la description, ajoutez des tags et enregistrez-le.
 
-Une fois que vous avez défini un SLO, vous pouvez le sélectionner dans la liste sur la [page de statut des Service Level Objectives][1] afin d'accéder au volet latéral détaillé. Le volet latéral affiche alors le pourcentage de statut global et le budget d'indisponibilité global restant pour chacune des cibles du SLO en question, ainsi que des barres de statut (SLO basés sur des monitors) ou des graphiques à barres (SLO basés sur des métriques) issus de l'historique du SLI. Si vous avez créé un SLO groupé basé sur des monitors à l'aide d'un [monitor à alertes multiples][5] ou un SLO groupé basé sur des métriques à l'aide de la [condition `sum by`][6], outre le pourcentage de statut global et le budget d'indisponibilité global restant, vous verrez aussi le pourcentage de statut et le budget d'indisponibilité restant pour chaque groupe individuel.
+**Remarque** : le nombre de décimales pouvant être définies pour vos SLO varie en fonction du type du SLO et de la fenêtre temporelle choisis. Consultez les liens ci-dessous pour obtenir plus d'informations pour chaque type de SLO.
+
+[SLO basés sur des monitors][5] : jusqu'à deux décimales pour les cibles de 7 et 30 jours, et jusqu'à trois décimales pour les cibles de 90 jours.
+[SLO basés sur des métriques][6] : jusqu'à trois décimales pour toutes les cibles.
+
+Une fois que vous avez défini un SLO, vous pouvez le sélectionner dans la liste sur la [page de statut des Service Level Objectives][1] afin d'accéder au volet latéral détaillé. Celui-ci affiche le pourcentage de statut global et le budget d'indisponibilité global restant pour chacune des cibles du SLO en question, ainsi que des barres de statut (SLO basés sur des monitors) ou des graphiques à barres (SLO basés sur des métriques) issus de l'historique du SLI. Si vous avez créé un SLO groupé basé sur des monitors à l'aide d'un [monitor à alertes multiples][7] ou un SLO groupé basé sur des métriques à l'aide de la [condition `sum by`][8], outre le pourcentage de statut global et le budget d'indisponibilité global restant, vous verrez aussi le pourcentage de statut et le budget d'indisponibilité restant pour chaque groupe individuel.
 
 **Exemple :** si vous créez un SLO basé sur des monitors pour suivre la latence par zone de disponibilité, vous verrez le pourcentage de statut et le budget d'indisponibilité restant pour le SLO global et pour chaque zone de disponibilité individuelle suivie par le SLO.
 
@@ -67,7 +77,7 @@ Pour modifier un SLO, passez le curseur dessus et utilisez les boutons qui appar
 
 ### Tags de SLO
 
-Lorsque vous créez ou modifiez un SLO, vous pouvez ajouter des tags afin de filtrer la [page de statut des SLO][1] ou de créer des [vues enregistrées de SLO][7].
+Lorsque vous créez ou modifiez un SLO, vous pouvez ajouter des tags afin de filtrer la [page de statut des SLO][1] ou de créer des [vues enregistrées de SLO][9].
 
 ### Vue par défaut des SLO
 
@@ -127,13 +137,13 @@ Trois types d'événements d'audit SLO apparaissent dans le flux d'événements�
 
 Pour obtenir une liste complète de tous les événements d'audit SLO, entrez la requête de recherche `tags:audit,slo` dans le flux d'événements. Pour afficher la liste des événements d'audit associés à un SLO spécifique, entrez `tags:audit,slo_id:<ID_SLO>` avec l'identifiant du SLO qui vous intéresse.
 
-Vous pouvez également interroger automatiquement le flux d'événements à l'aide de l'API des événements DATADOG][8].
+Vous pouvez également interroger par programmation le flux d'événements à l'aide de l'[API Events Datadog][10].
 
 **Remarque :** si vous ne voyez pas d'événements s'afficher dans l'interface, élargissez l'intervalle sélectionné sur le flux d'événements (par exemple, choisissez les 7 derniers jours).
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="Événements d'audit SLO"  >}}
 
-Pour gérer de façon proactive les configurations de vos SLO, configurez un [monitor d'événement][9] pour recevoir une alerte lorsqu'un événement correspondant à certains tags se produit.
+Pour gérer de façon proactive les configurations de vos SLO, configurez un [monitor d'événement][11] afin de recevoir une alerte lorsqu'un événement correspondant à certains tags se produit.
 
 Par exemple, si vous souhaitez être informé des modifications apportées à un SLO en particulier, configurez un monitor d'événements de façon à ce qu'il recherche le texte `[SLO Modified]` pour les tags `audit,slo_id:<ID_SLO>`.
 
@@ -151,8 +161,10 @@ Une fois votre SLO créé, ajoutez un widget Résumé des SLO pour visualiser le
 [2]: /fr/dashboards/widgets/slo/
 [3]: /fr/monitors/service_level_objectives/metric/
 [4]: /fr/monitors/service_level_objectives/monitor/
-[5]: /fr/monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[6]: /fr/monitors/service_level_objectives/metric/#define-queries
-[7]: /fr/monitors/service_level_objectives/#saved-views
-[8]: /fr/api/v1/events/#query-the-event-stream
-[9]: /fr/monitors/monitor_types/event/
+[5]: /fr/monitors/service_level_objectives/monitor/#set-your-slo-targets
+[6]: /fr/monitors/service_level_objectives/metric/#set-your-slo-targets
+[7]: /fr/monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[8]: /fr/monitors/service_level_objectives/metric/#define-queries
+[9]: /fr/monitors/service_level_objectives/#saved-views
+[10]: /fr/api/v1/events/#query-the-event-stream
+[11]: /fr/monitors/monitor_types/event/

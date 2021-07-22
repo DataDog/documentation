@@ -64,7 +64,7 @@ If you are not using the standard library `logging` module, you can use the foll
 from ddtrace import tracer
 
 span = tracer.current_span()
-correlation_ids = (span.trace_id, span.span.id) if span else (None, None)
+correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
 ```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 

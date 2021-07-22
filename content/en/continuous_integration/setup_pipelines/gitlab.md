@@ -16,25 +16,40 @@ Supported GitLab versions:
 * GitLab.com (SaaS)
 * GitLab >= 14.1 (self-hosted)
 
-Additional supported versions with additional configuration:
-* GitLab >= 13.7.0 (self-hosted), by enabling the `datadog_ci_integration` feature flag
-* GitLab <= 13.7.0 (self-hosted), using the [webhooks integration](#integrating-through-webhooks).
+Other supported versions with additional configuration:
+* GitLab >= 13.7.0 (self-hosted), by enabling the `datadog_ci_integration` feature flag.
 
-## Enabling the Datadog integration
-
-The [Datadog integration][1] is enabled by default in GitLab.com and GitLab self-hosted from version 14.1 onwards.
-
-For versions between 13.7.0 and 14.1, enable the `datadog_ci_integration` [feature flag][2] to activate the integration. Run the following commands, which use GitLab's [Rails Runner][4], depending on your installation type:
+## Configuring the Datadog integration
 
 {{< tabs >}}
-{{% tab "Omnibus" %}}
+{{% tab "GitLab.com" %}}
+
+Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
+
+[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
+[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
+{{% /tab %}}
+{{% tab "GitLab &gt;&equals; 14.1" %}}
+
+Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
+
+You can also activate the integration at the GitLab [instance][3] level, by going to **Admin > Settings > Integrations > Datadog**.
+
+[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
+[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
+[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
+{{% /tab %}}
+{{% tab "GitLab &lt; 14.1" %}}
+
+Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
+
+**Omnibus installations**
 
 {{< code-block lang="shell" >}}
 sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "From source" %}}
+**From source installations**
 
 {{< code-block lang="shell" >}}
 sudo -u git -H bundle exec rails runner \
@@ -42,20 +57,22 @@ sudo -u git -H bundle exec rails runner \
   "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+**Kubernetes installations**
 
 {{< code-block lang="shell" >}}
 kubectl exec -it <task-runner-pod-name> -- \
   /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
+Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
+
+<div class="alert alert-warning"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
+
+[1]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
+[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 {{% /tab %}}
 {{< /tabs >}}
-
-## Configuring the Datadog integration
-
-Configure the integration on a per project or group basis by going to **Settings > Integrations > Datadog** for each project or group you want to instrument. You can also activate the integration at the GitLab [instance level][9] by going to **Admin > Settings > Integrations > Datadog**, which applies the configuration to all existing and future projects.
 
 Fill in the integration configuration settings:
 
@@ -63,7 +80,7 @@ Fill in the integration configuration settings:
 : Enables the integration.
 
 **Datadog site**
-: Specifies which [Datadog site][10] to send data to. Only `datadoghq.com` is currently supported.<br/>
+: Specifies which [Datadog site][1] to send data to. Only `datadoghq.com` is supported.<br/>
 **Default**: `datadoghq.com`<br/>
 **Possible values**: `datadoghq.com`
 
@@ -72,7 +89,7 @@ Fill in the integration configuration settings:
 **Default**: (empty, no override)
 
 **API key**
-: Specifies which API key to use when sending data. You can generate one in the [APIs tab][5] of the Integrations section on Datadog.
+: Specifies which API key to use when sending data. You can generate one in the [APIs tab][2] of the Integrations section on Datadog.
 
 **Service** (optional)
 : Specifies which service name to attach to each span generated by the integration. Use this to differentiate between GitLab instances.<br/>
@@ -86,20 +103,20 @@ You can test the integration with the **Test settings** button (only available w
 
 ## Integrating through webhooks
 
-As an alternative to using the native Datadog integration, you can use [webhooks][6] to send pipeline data to Datadog.
+As an alternative to using the native Datadog integration, you can use [webhooks][3] to send pipeline data to Datadog.
 
-**Note**: The native Datadog integration is the recommended approach and the one that is actively under development. Use webhooks only if the native Datadog integration option is not available to you (for example, you have an older GitLab version and you're not able to upgrade).
+<div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.</div>
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v1/input/<API_KEY>` where `<API_KEY>` is one generated [here][5].
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][4].
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
-To set custom `env` or `service` parameters, use query parameters in the webhooks URL: `?env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
+To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, both [Pipelines][7] and [Pipeline Executions][8] pages will start populating with data after pipelines finish.
+After the integration is successfully configured, the [Pipelines][5] and [Pipeline Executions][4] pages populate with data after the pipelines finish.
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
@@ -108,13 +125,8 @@ After the integration is successfully configured, both [Pipelines][7] and [Pipel
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.gitlab.com/ee/integration/datadog.html
-[2]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[3]: https://support.gitlab.com/
-[4]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
-[7]: https://app.datadoghq.com/ci/pipelines
-[8]: https://app.datadoghq.com/ci/pipeline-executions
-[9]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html
-[10]: /getting_started/site/
+[1]: /getting_started/site/
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+[4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: https://app.datadoghq.com/ci/pipelines

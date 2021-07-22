@@ -98,26 +98,26 @@ Follow these steps to instrument the function:
 Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
-2. [Subscribe the Datadog Forwarder to your function's log groups][6].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 ### Monitor Java Lambda function cold starts
 
-Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][7].
+Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog highly recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][6].
 
 {{< img src="serverless/java-monitor-cold-starts.png" alt="Monitor Java Lambda Function Cold Starts"  style="width:100%;">}}
 
-To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][8] with the following criteria:
+To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][7] with the following criteria:
 - Metric Name: `aws.lambda.enhanced.invocations`
 - From: `runtime:java*` and `cold_start:true`
 - Alert Grouping: Multi Alert, trigger a separate alert for each `function_arn`
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][9].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][8].
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][10].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][9].
 
 ### Monitor custom business logic
 
@@ -147,11 +147,13 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-See the [custom metrics documentation][11] for more information on custom metric submission.
+See the [custom metrics documentation][10] for more information on custom metric submission.
 
 ### Connect logs and traces
 
-To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][12] for instructions.
+To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][11] for instructions.
+
+<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
 
 ## Further Reading
 
@@ -161,11 +163,10 @@ To automatically connect Java Lambda function logs and traces, see [Connecting J
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[5]: https://github.com/DataDog/datadog-lambda-java/releases/
-[6]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: /serverless/insights#cold-starts
-[8]: /monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[10]: https://app.datadoghq.com/functions
-[11]: /serverless/custom_metrics?tab=java
-[12]: /tracing/connect_logs_and_traces/java/
+[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: /serverless/insights#cold-starts
+[7]: /monitors/monitor_types/metric/?tab=threshold#overview
+[8]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[9]: https://app.datadoghq.com/functions
+[10]: /serverless/custom_metrics?tab=java
+[11]: /tracing/connect_logs_and_traces/java/

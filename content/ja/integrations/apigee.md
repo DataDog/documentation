@@ -29,12 +29,33 @@ Apigee プロキシログを収集して、エラー、応答時間、期間、�
 
 #### ログの収集
 
+Apigee ログは 2 通りの方法で収集できます:
+
+1. Apigee の [JavaScript ポリシー][1]を使用して Datadog にログを送信します。
+2. すでに syslog サーバーをお持ちの場合は、Apigee [MessageLogging ポリシー][2]タイプを使用して syslog アカウントにログを記録します。
+
+##### Syslog パラメーター
+
+API で MessageLogging ポリシータイプと syslog パラメーターを使用して、カスタムメッセージのログを syslog に出力します。お使いのリージョンの Datadog ログインテークエンドポイント ({{< region-param key="web_integrations_endpoint" code="true" >}})、ポート ({{< region-param key="web_integrations_port" code="true" >}})、プロトコルを含めてください。例:
+
+```json
+<MessageLogging name="LogToSyslog">
+    <DisplayName>datadog-logging</DisplayName>
+    <Syslog>
+        <Message><YOUR API KEY> test</Message>
+        <Host>intake.logs.datadoghq.com</Host>
+        <Port>10516</Port>
+        <Protocol>TCP</Protocol>
+    </Syslog>
+</MessageLogging>
+```
+
+##### JavaScript ポリシー
 
 Apigee の [JavaScript ポリシー][1]を使用して、Apigee プロキシログを Datadog に送信します。
 
-JavaScript は、必須のフロー変数を Datadog のログ属性としてキャプチャするように構成されています。属性は、[標準属性のリスト][2]に従って名前が付けられます。
+JavaScript は、必須のフロー変数を Datadog のログ属性としてキャプチャするように構成されています。属性は、[標準属性のリスト][3]に従って名前が付けられます。
 
-##### Apigee ログを Datadog に送信するように JavaScript ポリシーを設定する
 1. Datadog にログを送信する Apigee プロキシを選択します。
 2. 選択したプロキシの概要ページで、右上隅にある 'DEVELOP' タブをクリックします。
 
@@ -119,17 +140,18 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**注**: 公式の [Apigee フロー変数のドキュメント][3]から JavaScript にさらにフロー変数を追加します。
+**注**: 公式の [Apigee フロー変数のドキュメント][4]から JavaScript にさらにフロー変数を追加します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/#naming-conventions
-[3]: https://docs.apigee.com/api-platform/reference/variables-reference
-[4]: /ja/help/
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[3]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/#naming-conventions
+[4]: https://docs.apigee.com/api-platform/reference/variables-reference
+[5]: /ja/help/

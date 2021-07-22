@@ -30,7 +30,7 @@ further_reading:
 
 ## What is Real User Monitoring?
 
-Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the real-time activity and experience of individual users. It is designed to solve 4 types of use cases for web and mobile applications:
+Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. It is designed to solve 4 types of use cases for web and mobile applications:
 
 * **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code.
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.

@@ -194,6 +194,7 @@ Additional Git configuration for physical device testing:
 | -------------------- | --------------- |
 | `GIT_COMMIT`         | `$(GIT_COMMIT)` |
 | `GIT_URL`            | `$(GIT_URL)`    |
+| `GIT_URL_1`          | `$(GIT_URL_1)`  |
 | `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
 {{% /tab %}}
@@ -387,7 +388,7 @@ Additional Git configuration for physical device testing:
 | Environment variable   | Value                     |
 | ---------------------- | ------------------------- |
 | `BITRISE_SOURCE_DIR`   | `$(BITRISE_SOURCE_DIR)`   |
-| `BITRISE_APP_TITLE`    | `$(BITRISE_APP_TITLE)`    |
+| `BITRISE_TRIGGERED_WORKFLOW_ID`  | `$(BITRISE_TRIGGERED_WORKFLOW_ID)`  |
 | `BITRISE_BUILD_SLUG`   | `$(BITRISE_BUILD_SLUG)`   |
 | `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
 | `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
