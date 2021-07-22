@@ -442,7 +442,7 @@ Then, set [Log Integrations][4] as Docker labels:
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][6]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
 
 ## Further reading
 
@@ -454,4 +454,6 @@ If you have installed and configured the integrations and Agent as described and
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: /database_monitoring/setup/troubleshooting/#mysql
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://app.datadoghq.com/databases
+[8]: /database_monitoring/setup/troubleshooting/#mysql
