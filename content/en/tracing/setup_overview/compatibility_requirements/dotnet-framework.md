@@ -30,10 +30,33 @@ Datadog .NET application performance monitoring supports a robust set of feature
 
 - The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][3].
 
+### .NET runtimes
+The .NET Tracer supports instrumentation for [.NET Core][4] & NET Framework.
+
+| Supported .NET Framwork Versions | Vendor End of Life |
+| -------------------------------- | ------------------ | 
+| 4.5                              | 01/12/2016         |
+| 4.5.1                            | 01/12/2016         |
+| 4.5.2                            | 04/26/2022         |
+| 4.6                              | 04/26/2022         |
+| 4.6.1                            | 04/26/2022         |
+| 4.6.2                            |                    |
+| 4.7                              |                    |
+| 4.7.2                            |                    |
+| 4.8                              |                    |
+
+ Additional information on .NET Framework support policy can be found at [Microsoft .NET Framework Lifecyle Policy][5]. 
+
+### Supported Process Architecture
+
+| Processor architectures                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ |
+| Windows x86 (`win-x86`)                                                                                            |
+| Windows x64 (`win-x64`)                                                                                            |
 
 ## Integrations
 
-The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
+The [latest version of the .NET Tracer][6] can automatically instrument the following libraries:
 
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
@@ -58,7 +81,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][7] for help.
 
 ## Further reading
 
@@ -67,5 +90,7 @@ Don’t see your desired libraries? Datadog is continually adding additional sup
 [1]: /tracing/runtime_metrics/dotnet/
 [2]: /tracing/connect_logs_and_traces/dotnet/?tab=serilog
 [3]: https://github.com/DataDog/dd-trace-dotnet
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[5]: /help/
+[4]: /tracing/compatibility_requirements/dotnet-core/
+[5]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-framework
+[6]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[7]: /help/
