@@ -109,19 +109,26 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### Cloud service autodetection
 
-Filtering by specific AWS cloud services can help pinpoint latency, assess database performance, and visualize your network more completely. For instance, you can filter a search query by service, view the service in the Network Map, and trace communication on that node to see affected services.
+If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or GCP dependency to pinpoint latency, assess database performance, and visualize your network more completely. 
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
-- **To filter a query**: In a search bar, enter tags such as `service:s3`, `service:kinesis`, and `service:elb`. For some services, you can break down latency and retransmits further by using more out-of-the-box tags like `s3_bucket` and `rds_instance_type`.
-- **To visualize specific managed services**: In the [Network Map][2], click the dropdown next to *View* and type or select desired tags. In the map, click a node to view troubleshooting options.
-- **To view integration metrics for a service**: In the Network Page, click a row in the [dependency table](#table). In the opened side panel, use the *Integration Metrics* tab to analyze the performance of cloud services and distinguish between a client-side and cloud provider issue.
+For instance, you can
 
-NPM automatically detects S3, RDS, Kinesis, ELB, Elasticache, and other [AWS services][3]. To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+- visualize data flow from your internal Kubernetes cluster to `service:aws.s3` in the [Network Map][2]
+- pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
+- validate that their request are successful by analyzing S3 performance metrics, which are correlated with network perfromance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab. 
 
-### DNS resolution
+NPM automatically maps 
 
-Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **Domain is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
+- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`, Kinesis, ELB, Elasticache, and other [AWS services][3]. 
+- API calls to AppEngine, Google DNS, Gmail, and other [GCP services][5].
+
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+
+### Domain resolution
+
+Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. `domain` **is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
 {{< img src="network_performance_monitoring/network_page/domain_aggregation.png" alt="Domain aggregation" >}}
 
@@ -213,3 +220,4 @@ The top of the sidepanel displays common source and destination tags shared by t
 [2]: /network_monitoring/performance/network_map/
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /logs/explorer/saved_views/
+[5]: https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go#L9
