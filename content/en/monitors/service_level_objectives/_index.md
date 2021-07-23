@@ -54,7 +54,7 @@ Once you have an SLO set up, on the [Service Level Objectives status page][1] yo
 
 ### Setting SLO targets
 
-To leverage the benefits of error budgets and Error Budget Alerts, you must set SLO target values strictly below 100%.
+To leverage the benefits of error budgets and error budget alerts, you must set SLO target values strictly below 100%.
  
 Setting a 100% target means having an error budget of 0% since error budget is equal to 100%—SLO target. Without error budget representing acceptable risk, you face difficulty finding alignment between the conflicting priorities of maintaining customer-facing reliability and investing in feature development. In addition, SLOs with target values of 100% lead to division by zero errors in SLO alert evaluation. 
 
