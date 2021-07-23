@@ -117,11 +117,11 @@ For instance, you can
 
 - visualize data flow from your internal Kubernetes cluster to `service:aws.s3` in the [Network Map][2]
 - pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
-- validate that their request are successful by analyzing S3 performance metrics, which are correlated with network perfromance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab. 
+- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic perfromance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab. 
 
 NPM automatically maps 
 
-- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`, Kinesis, ELB, Elasticache, and other [AWS services][3]. 
+- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3]. 
 - API calls to AppEngine, Google DNS, Gmail, and other [GCP services][5].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
