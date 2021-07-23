@@ -195,7 +195,16 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
 {{< site-region region="us,eu" >}}
+
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
+
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`.
+
+* `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
+* `@Event.EventData.Data.Name:ObjectServer AND @Event.EventData.Data.value:Security` matches all logs with both keys `Name` and `value` having `ObjectServer` and `Security` as the corresponding values.
+ 
+{{< img src="logs/explorer/search/facetless_query_json_array.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
+
 <p> </p>
 {{< /site-region >}}
 
