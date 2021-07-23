@@ -135,17 +135,12 @@ from datadog_cdk_constructs import Datadog
 datadog = Datadog(self, "Datadog",
     python_layer_version={{< latest-lambda-layer-version layer="python" >}},
     extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
-    api_key=<DATADOG_API_KEY>,
-    service=<SERVICE>, # Optional
-    env=<ENV>, # Optional
+    api_key=<DATADOG_API_KEY>
 )
 datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 ```
 
-To fill in the placeholders:
-
-- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
 
 More information and additional parameters can be found on the [Datadog CDK NPM page][2].
 
