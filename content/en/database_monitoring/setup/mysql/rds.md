@@ -9,10 +9,10 @@ further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
   text: "Basic MySQL Integration"
-  
+
 ---
 
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
@@ -53,8 +53,6 @@ Configure the following in the [DB Parameter Group][3]:
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
-
-**Note**: For Amazon RDS MySQL, there is no way to configure the `events-statements_*` consumers in the DB Parameter Group, so you must allow the agent to enable the them dynamically at runtime, as part of granting the Agent access, next. See [Runtime Setup Consumers](#runtime-setup-consumers).
 
 ## Grant the Agent access
 
@@ -129,7 +127,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Because with RDS, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.  
+Because with RDS, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -160,7 +158,9 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
+To monitor RDS hosts, install the Agent somewhere in your infrastructure and configure it to connect to the RDS instance endpoint remotely.
+
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent to run checks, see the [Agent installation instructions][6].
 
 ## Configure the Agent
 
@@ -180,7 +180,7 @@ init_config:
 
 instances:
   - dbm: true
-    server: 127.0.0.1
+    server: '<AWS_INSTANCE_ENDPOINT>'
     user: datadog
     pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
     port: '<YOUR_MYSQL_PORT>' # e.g. 3306
@@ -188,95 +188,7 @@ instances:
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 
-Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
-
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
-
-#### Log collection (optional)
-
-1. By default MySQL logs everything in `/var/log/syslog` which requires root access to read. To make the logs more accessible, follow these steps:
-
-   - Edit `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` and remove or comment the lines.
-   - Edit `/etc/mysql/my.cnf` and add following lines to enable general, error, and slow query logs:
-
-     ```conf
-       [mysqld_safe]
-       log_error = /var/log/mysql/mysql_error.log
-
-       [mysqld]
-       general_log = on
-       general_log_file = /var/log/mysql/mysql.log
-       log_error = /var/log/mysql/mysql_error.log
-       slow_query_log = on
-       slow_query_log_file = /var/log/mysql/mysql_slow.log
-       long_query_time = 2
-     ```
-
-   - Save the file and restart MySQL using following commands:
-     `service mysql restart`
-   - Make sure the Agent has read access on the `/var/log/mysql` directory and all of the files within. Double-check your `logrotate` configuration to make sure those files are taken into account and that the permissions are correctly set there as well.
-   - In `/etc/logrotate.d/mysql-server` there should be something similar to:
-
-     ```text
-       /var/log/mysql.log /var/log/mysql/mysql.log /var/log/mysql/mysql_slow.log {
-               daily
-               rotate 7
-               missingok
-               create 644 mysql adm
-               Compress
-       }
-     ```
-
-2. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
-
-   ```yaml
-   logs_enabled: true
-   ```
-
-3. Add this configuration block to your `mysql.d/conf.yaml` file to start collecting your MySQL logs:
-
-   ```yaml
-   logs:
-     - type: file
-       path: "<ERROR_LOG_FILE_PATH>"
-       source: mysql
-       service: "<SERVICE_NAME>"
-
-     - type: file
-       path: "<SLOW_QUERY_LOG_FILE_PATH>"
-       source: mysql
-       service: "<SERVICE_NAME>"
-       log_processing_rules:
-         - type: multi_line
-           name: new_slow_query_log_entry
-           pattern: "# Time:"
-           # If mysqld was started with `--log-short-format`, use:
-           # pattern: "# Query_time:"
-           # If using mysql version <5.7, use the following rules instead:
-           # - type: multi_line
-           #   name: new_slow_query_log_entry
-           #   pattern: "# Time|# User@Host"
-           # - type: exclude_at_match
-           #   name: exclude_timestamp_only_line
-           #   pattern: "# Time:"
-
-     - type: file
-       path: "<GENERAL_LOG_FILE_PATH>"
-       source: mysql
-       service: "<SERVICE_NAME>"
-       # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
-       # log_processing_rules:
-       #   - type: multi_line
-       #     name: new_log_start_with_date
-       #     pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-       # If the logs start with a date with the format yymmdd but include a timestamp with each new second, rather than with each log, uncomment the following processing rule
-       # log_processing_rules:
-       #   - type: multi_line
-       #     name: new_logs_do_not_always_start_with_timestamp
-       #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
-   ```
-
-4. [Restart the Agent][3].
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -294,27 +206,13 @@ Set [Autodiscovery Integration Templates][1] as Docker labels on your applicatio
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "%%host%%", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "<AWS_INSTANCE_ENDPOINT>", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
 ```
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-#### Log collection (optional)
-
-
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Docker log collection documentation][3].
-
-Then, set [Log Integrations][4] as Docker labels:
-
-```yaml
-LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
-```
-
-
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/faq/template_variables/
-[3]: /agent/docker/log/?tab=containerinstallation#installation
-[4]: /agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -336,7 +234,7 @@ metadata:
       [
         {
           "dbm": true,
-          "server": "%%host%%",
+          "server": "<AWS_INSTANCE_ENDPOINT>",
           "user": "datadog",
           "pass": "<UNIQUEPASSWORD>"
         }
@@ -350,31 +248,10 @@ spec:
 
 See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-#### Log collection (optional)
-
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes log collection documentation][4].
-
-Then, set [Log Integrations][5] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][6].
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mysql
-  annotations:
-    ad.datadoghq.com/mysql.logs: '[{"source": "mysql", "service": "mysql"}]'
-  labels:
-    name: mysql
-```
-
-
 
 [1]: /agent/kubernetes/integrations/?tab=kubernetes
 [2]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
 [3]: /agent/faq/template_variables/
-[4]: /agent/kubernetes/log/?tab=containerinstallation#setup
-[5]: /agent/docker/log/?tab=containerinstallation#log-integrations
-[6]: /agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
@@ -392,7 +269,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"mysql\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"%%host%%\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
+      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"<AWS_INSTANCE_ENDPOINT>\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
     }
   }]
 }
@@ -400,29 +277,9 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
-#### Log collection (optional)
-
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [ECS log collection documentation][3].
-
-Then, set [Log Integrations][4] as Docker labels:
-
-```yaml
-{
-  "containerDefinitions": [{
-    "name": "mysql",
-    "image": "mysql:latest",
-    "dockerLabels": {
-      "com.datadoghq.ad.logs": "[{\"source\":\"mysql\",\"service\":\"mysql\"}]"
-    }
-  }]
-}
-```
-
 
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/faq/template_variables/
-[3]: /agent/amazon_ecs/logs/?tab=linux
-[4]: /docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
