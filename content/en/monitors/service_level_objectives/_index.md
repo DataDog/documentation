@@ -50,7 +50,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 
 Once you have an SLO set up, on the [Service Level Objectives status page][1] you can select an SLO from the list view to open its details side panel. The side panel will display the overall status percentage and remaining error budget for each of that SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you have created a grouped monitor-based SLO using one [multi alert monitor][7] or a grouped metric-based SLO using the [`sum by` clause][8], in addition to the overall status percentage and remaining error budget you will also be presented with the status percentage and remaining error budget for each individual group.
 
-**Example:** If you create a monitor-based SLO to track latency per availability-zone, you will see status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking.
+**Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
 ### Setting SLO targets
 
