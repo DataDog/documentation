@@ -61,6 +61,18 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
+## Enabling the heap profiler
+<div class="alert alert-info">The Java heap profiler feature is in beta.</div>
+To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
+
+Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+
+```
+jdk.OldObjectSample#enabled=true
+```
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
 ## Removing sensitive information from profiles
 
 If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:

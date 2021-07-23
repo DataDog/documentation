@@ -38,7 +38,7 @@ Browser SDK は自動的にクリックを追跡します。以下の **すべ�
 
 ## アクションタイミングメトリクス
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][3]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[高度なコンフィギュレーション][4]をご覧ください。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][1]をご覧ください。
 
 | メトリクス    | タイプ   | 説明              |
 |--------------|--------|--------------------------|
@@ -73,6 +73,24 @@ RUM ライブラリは、クリックアクションの命名にさまざまな�
   Enter a valid email address
 </div>
 ```
+
+[バージョン 2.16.0][3] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用される独自の属性を指定できます。例:
+
+```html
+<script>
+  DD_RUM.init({
+    ...
+    trackInteractions: true,
+    actionNameAttribute: 'data-custom-name',
+  ...
+  })
+</script>
+
+<a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>
+```
+
+**注**: 両方の属性が要素に存在する場合、`data-dd-action-name` が優先されます。
+
 ## カスタムアクション
 
 カスタムアクションは、`addAction` API を使用して手動で宣言および送信されるユーザーアクションです。ユーザージャー中に発生するイベントに関連する情報の送信に使用されます。以下の例では、訪問者がチェックアウトボタンをクリックしたすると、RUM SDK がユーザーのカートデータを収集します。ここでは、カート内のアイテム数、アイテムリスト、カート内のアイテム総額が収集されます。
@@ -141,6 +159,6 @@ window.DD_RUM &&
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#scrub-sensitive-data-from-your-rum-data
-[3]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
-[4]: /ja/real_user_monitoring/browser/advanced_configuration/
+[1]: /ja/real_user_monitoring/browser/modifying_data_and_context/
+[2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
+[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

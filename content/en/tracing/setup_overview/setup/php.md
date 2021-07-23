@@ -302,6 +302,12 @@ CSV of URI mappings to normalize resource naming for incoming requests (see [Map
 : **Default**: `null`<br>
 CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
 
+`DD_TRACE_RETAIN_THREAD_CAPABILITIES`
+: **Default**: `false`<br>
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2](https://github.com/mind04/mod-ruid2) - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
+
+**Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
+
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `1.0`<br>
 The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions < `0.36.0`, this parameter is `DD_SAMPLING_RATE`.
@@ -431,7 +437,7 @@ To remove the PHP tracer:
 
 ## Troubleshooting an application crash
 
-In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump and contact Datadog support.
+In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump or a Valgrind trace and contact Datadog support.
 
 ### Obtaining a core dump
 
@@ -450,6 +456,46 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `rlimit_core` in the PHP-FPM pool configuration section. You can set it to unlimited: `rlimit_core = unlimited`.
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
+
+### Obtaining a Valgrind trace
+
+To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
+
+Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests (not generally in production).
+
+For a CLI application, run:
+{{< code-block lang=shell >}}
+USE_ZEND_ALLOC=0 valgrind -- php path/to/script.php
+{{< /code-block >}}
+When running `php-fpm` run:
+{{< code-block lang="shell" >}}
+USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- php-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
+{{< /code-block >}}
+When using Apache, run:
+{{< code-block lang="shell" >}}
+(. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
+{{< /code-block >}}
+
+### Obtaining a strace
+
+Some issues are caused by external factors, so it can be valuable to have a `strace`. 
+
+Install `strace` with your package manager. When generating a `strace` to send to Datadog Support, ensure you use the `-f` option to follow child processes.
+
+For a CLI application, run:
+{{< code-block lang="shell" >}}
+strace -f php path/to/script.php
+{{< /code-block >}}
+
+For `php-fpm`, run:
+{{< code-block lang="shell" >}}
+strace -f php-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
+{{< /code-block >}}
+
+For Apache, run:
+{{< code-block lang="shell" >}}
+(. /etc/apache2/envvars; strace -f apache2 -X)
+{{< /code-block >}}
 
 ## Further Reading
 

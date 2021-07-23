@@ -146,7 +146,7 @@ logs:
 
 最後に、[Agent を再起動][2]します。
 
-[1]: /ja/logs/processing/pipelines/#integration-pipelines
+[1]: /ja/logs/log_configuration/pipelines/#integration-pipelines
 [2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}

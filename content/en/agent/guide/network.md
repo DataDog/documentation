@@ -106,7 +106,9 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 ## Open ports
 
+<div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+</div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
 

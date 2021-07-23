@@ -28,7 +28,7 @@ In product specific tabs, view your month-to-date usage of the products in that 
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
-The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view breaks out on-demand usage above your commitments and allocations.
+The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view breaks out on-demand usage above your commitments and allocations.
 
 {{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
 For API users, endpoints are available to access ["All"][8] usage and ["Billable"][9] usage.
@@ -67,14 +67,7 @@ This section contains hourly, daily, monthly, and annual usage:
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
 
-In product specific tabs, view your hourly, daily, monthly, and annual usage of the products in that product category. In the Infrastructure tab, see a breakdown of the **Infra Hosts** graph by host type:
-
-* Agent Hosts
-* AWS Hosts
-* Azure Hosts
-* GCP Hosts
-* vSphere Hosts
-* Azure App Services
+In product specific tabs, view your hourly, daily, monthly, and annual usage of the products in that product category. Some products also provide additional detailed breakdowns of usage. For example, in the Infrastructure tab, the breakdown by host type is available.
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
 
@@ -131,4 +124,7 @@ For billing questions, contact your [Customer Success][6] Manager.
 [4]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
 [5]: /help/
 [6]: mailto:success@datadoghq.com
+[7]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[8]: https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-across-your-multi-org-account
+[9]: https://docs.datadoghq.com/api/latest/usage-metering/#get-billable-usage-across-your-account
 
