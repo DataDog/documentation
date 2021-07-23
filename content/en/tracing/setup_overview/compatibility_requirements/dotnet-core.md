@@ -20,28 +20,23 @@ further_reading:
 </div>
 
 ## Compatibility
-Datadog .NET application performance monitoring supports a robust set of features to provide critical information about .NET applications & services: 
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-- Monitor [runtime metrics][1] to help troubleshoot bugs and detect resource inefficiencies in your application.
+- The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][1].
 
-- Ability to correlate [traces & application logs][2].
+### Supported .NET Core runtimes
+The .NET Tracer supports instrumentation on .NET Core 2.1 and above. It also supports [.NET Framework][2].
 
-- The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][3].
+| Version              | Vendor End of Life |
+| -------------------- | ------------------ |
+| .NET 5               |                    |
+| .NET Core 3.1 (LTS)  | 12/03/2022         |
+| .NET Core 3.0        | 03/03/2020         |
+| .NET Core 2.2        | 12/23/2019         |
+| .NET Core 2.1 (LTS)  | 08/21/2021         |
 
-### Supported .NET runtimes
-Datadog .NET Tracer supports instrumentation for .NET Core & [NET Framework][4]. 
-
-| Version                         | Vendor End of Life |
-| ------------------------------- | ------------------ |
-| .NET 5                          |                    |
-| .NET Core 3.1 (LTS)             | 12/03/2022         |
-| .NET Core 3.0                   | 03/03/2020         |
-| .NET Core 2.2                   | 12/23/2019         |
-| .NET Core 2.1 (LTS)             | 08/21/2021         |
-
- Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][5]. 
+ Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][3]. 
 
 ### Supported Process Architecture
 
@@ -56,7 +51,7 @@ Datadog .NET Tracer supports instrumentation for .NET Core & [NET Framework][4].
 
 ## Integrations
 
-The [latest version of the .NET Tracer][2] can automatically instrument the following libraries:
+The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
 
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
@@ -80,26 +75,25 @@ The [latest version of the .NET Tracer][2] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                | `WebRequest`         |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][3] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Out of support .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][6] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][7] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][8]        |
+| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
+| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[3]: /help/
-[4]: /tracing/compatibility_requirements/dotnet-framework/
-[5]: https://docs.microsoft.com/en-us/lifecycle/products/microsoft-net-and-net-core
-[6]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[7]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[8]: https://github.com/dotnet/runtime/issues/23938
+[2]: /tracing/compatibility_requirements/dotnet-framework/
+[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[5]: /help/
+[6]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[7]: https://github.com/dotnet/runtime/issues/23938

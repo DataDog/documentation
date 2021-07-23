@@ -42,9 +42,32 @@ further_reading:
     tag: "GitHub"
     text: "Source code"
 ---
+## Capabilities
+
+- Monitor [runtime metrics][1] to help troubleshoot bugs and detect resource inefficiencies in .NET applications & services.
+
+- Ability to correlate [traces & application logs][2].
+
+- End-to-end visibility with [Real User Monitoring][3] by linking requests from the web and mobile applications to their corresponding backend traces.
+
 ## Compatibility requirements
 
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+### Supported .NET Framework runtimes
+The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using CLR v4.0).
+
+| Version  |
+| -------- |
+| 4.8      |
+| 4.7.2    |
+| 4.7      |
+| 4.6.2    |
+| 4.6.1    |
+| 4.6      |
+| 4.5.2    |
+| 4.5.1    |
+| 4.5      |
+
+For a full list of supported libraries and processor architectures, visit the [Compatibility Requirements][4] page.
 
 ## Installation and getting started
 
@@ -60,9 +83,9 @@ Follow these instructions to begin tracing .NET applications:
 
 To start tracing an application hosted in IIS:
 
-1. Install and configure the [Windows Datadog Agent][2].
+1. Install and configure the [Windows Datadog Agent][5].
 
-2. Download the .NET Tracer [MSI installer][3]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+2. Download the .NET Tracer [MSI installer][6]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 3. Run the .NET Tracer MSI installer with administrator privileges.
 
@@ -78,7 +101,7 @@ To start tracing an application hosted in IIS:
     ```
 5. Create application load.
 
-6. Visit [APM Live Traces][4].
+6. Visit [APM Live Traces][7].
 
 #### Applications not hosted in IIS
 
@@ -126,7 +149,7 @@ example.exe
 ```
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][5] to enable trace collection within the Datadog Agent.
 {{< site-region region="us3,eu,gov" >}}
 
 Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} so that the Agent sends data to the right Datadog location.
@@ -141,10 +164,10 @@ Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" 
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][5] to your application.
+1. Add the `Datadog.Trace` [NuGet package][8] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation][6].
+For additional details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation][9].
 
 ## Configuration
 
@@ -247,7 +270,7 @@ Using the methods described above, customize your tracing configuration with the
 
 ### Unified Service Tagging
 
-To use [Unified Service Tagging][7], configure the following settings for your services.
+To use [Unified Service Tagging][10], configure the following settings for your services.
 
 
 `DD_ENV`
@@ -325,7 +348,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][11] section.
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors.<br>
@@ -350,7 +373,7 @@ The following table lists configuration variables that are available **only** wh
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][8] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][11] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -369,11 +392,15 @@ The configuration variables are for features that are available for use but may 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/dotnet-framework
-[2]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=gui
-[3]: https://github.com/datadog/dd-trace-dotnet/releases/latest
-[4]: https://app.datadoghq.com/apm/traces
-[5]: https://www.nuget.org/packages/Datadog.Trace
-[6]: /tracing/custom_instrumentation/dotnet/
-[7]: /getting_started/tagging/unified_service_tagging/
-[8]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+
+[1]: /tracing/runtime_metrics/dotnet/
+[2]: /tracing/connect_logs_and_traces/dotnet/?tab=serilog
+[3]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[4]: /tracing/compatibility_requirements/dotnet-framework
+[5]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=gui
+[6]: https://github.com/datadog/dd-trace-dotnet/releases/latest
+[7]: https://app.datadoghq.com/apm/traces
+[8]: https://www.nuget.org/packages/Datadog.Trace
+[9]: /tracing/custom_instrumentation/dotnet/
+[10]: /getting_started/tagging/unified_service_tagging/
+[11]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
