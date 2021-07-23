@@ -202,7 +202,7 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
  
-{{< img src="logs/explorer/search/facetless_query_json_array.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
+{{< img src="logs/explorer/search/facetless_query_json_array2.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
 <p> </p>
 {{< /site-region >}}
 
