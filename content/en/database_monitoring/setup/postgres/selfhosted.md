@@ -27,8 +27,8 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+Supported PostgreSQL versions
+: 9.2, 10, 11, 12, 13
 
 Supported Agent versions
 : 7.30.0+
@@ -45,22 +45,105 @@ Data security considerations
 
 ## Configure Postgres settings
 
-<p></p>
+Configure the following [parameters][3] in the `postgresql.conf` file and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][4].
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics via the the [pg_stat_statements][4] extension. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 
 ## Grant the Agent access
+
+The Datadog Agent requires read-only access to the database server in order to collect statistics and queries. 
+
+Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
+
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
+ 
+ ```bash
+ psql -h mydb.example.com -d postgres -U postgres
+ ```
+
+Run the following SQL commands:
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
-Text inside tab.
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
 
 {{% /tab %}}
 {{% tab "Postgres ≤ 9.6" %}}
 
-Text inside tab.
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT SELECT ON pg_stat_database TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+Create functions to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
+  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
+LANGUAGE sql
+SECURITY DEFINER;
+CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
+    $$ SELECT * FROM pg_stat_statements; $$
+LANGUAGE sql
+SECURITY DEFINER;
+```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Create the function to enable the Agent to collect explain plans. 
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.explain_statement (
+   l_query text,
+   out explain JSON
+)
+RETURNS SETOF JSON AS
+$$
+BEGIN
+   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+END;
+$$
+LANGUAGE 'plpgsql'
+RETURNS NULL ON NULL INPUT
+SECURITY DEFINER;
+```
+
+To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_activity limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_statements limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+When it prompts for a password, use the password you entered when you created the `datadog` user.
 
 ## Install the Agent
 
@@ -72,10 +155,17 @@ Text inside tab.
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][1]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][7]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/setup/troubleshooting/#postgres
+
+[1]: /agent/basic_agent_usage#agent-overhead
+[2]: /database_monitoring/setup/data_collected/#sensitive-information
+[3]: https://www.postgresql.org/docs/current/config-setting.html
+[4]: https://www.postgresql.org/docs/current/pgstatstatements.html
+[5]: /integrations/faq/postgres-custom-metric-collection-explained/
+[6]: https://www.postgresql.org/docs/current/app-psql.html
+[7]: /database_monitoring/setup/troubleshooting/#postgres

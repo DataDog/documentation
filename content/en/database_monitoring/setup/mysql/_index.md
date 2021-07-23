@@ -10,15 +10,13 @@ description: Setting up Database Monitoring on a MySQL database
 
 ### MySQL versions supported
 
-|  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL |
+|  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM |
 |--|------------|---------|------------|------------------|
-| MySQL 5.6 | Yes | Yes | Yes | Yes (see Note) |
-| MySQL 5.7 | Yes | Yes | Yes | Yes (see Note) |
-| MySQL 5.8 | Yes | Yes | Yes | Yes (see Note) |
+| MySQL 5.6 | Yes | Yes | Yes | Yes |
+| MySQL 5.7 | Yes | Yes | Yes | Yes |
+| MySQL 5.8 | Yes | Yes | Yes | Yes |
 
-**Note**: Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 26GB of RAM][1] because [`performance_schema`][2] cannot be enabled.
-
-For setup instructions, select your database type:
+For setup instructions, select your hosting type:
 
 partial
 

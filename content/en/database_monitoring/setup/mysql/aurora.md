@@ -192,7 +192,8 @@ instances:
     pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
     port: '<YOUR_MYSQL_PORT>' # e.g. 3306
 ```
-**Important**: Use the Aurora instance endpoint here, not the cluster endpoint.
+
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 

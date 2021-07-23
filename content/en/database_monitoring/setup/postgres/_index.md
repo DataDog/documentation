@@ -8,7 +8,7 @@ description: Setting up Database Monitoring on a Postgres database
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
 
-For setup instructions, select your database type:
+For setup instructions, select your hosting type:
 
 partial
 
