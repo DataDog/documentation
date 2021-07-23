@@ -24,8 +24,12 @@ further_reading:
   - link: 'https://docs.datadoghq.com/integrations/faq/how-to-run-jmx-commands-in-windows/'
     tag: よくあるご質問
     text: Windows で JMX コマンドを実行する
+  - link: 'https://docs.datadoghq.com/integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/'
+    tag: よくあるご質問
+    text: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する方法
 git_integration_title: java
 has_logo: true
+integration_id: java
 integration_title: JMX
 is_public: true
 kind: インテグレーション
@@ -285,9 +289,13 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
                       jvm.gc.major_collection_time
 ```
 
+### サービスのチェック
+{{< get-service-checks-from-git "java" >}}
+
+
 ## トラブルシューティング
 
-[JMX トラブルシューティングのコマンドと FAQ ][14]のリストを参照してください。
+[JMX トラブルシューティングのコマンドと FAQ ][15]のリストを参照してください。
 
 ## その他の参考資料
 
@@ -306,4 +314,5 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
 [11]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [12]: https://docs.datadoghq.com/ja/tracing/setup/java/
 [13]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
-[14]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-jmx-integrations/
+[14]: https://github.com/DataDog/dogweb/blob/prod/integration/java/service_checks.json
+[15]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-jmx-integrations/
