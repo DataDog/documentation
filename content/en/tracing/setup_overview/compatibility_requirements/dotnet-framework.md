@@ -30,20 +30,20 @@ Datadog .NET application performance monitoring supports a robust set of feature
 
 - The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][3].
 
-### .NET runtimes
+### Supported .NET runtimes
 The .NET Tracer supports instrumentation for [.NET Core][4] & NET Framework.
 
 | Supported .NET Framwork Versions | Vendor End of Life |
-| -------------------------------- | ------------------ | 
-| 4.5                              | 01/12/2016         |
-| 4.5.1                            | 01/12/2016         |
-| 4.5.2                            | 04/26/2022         |
-| 4.6                              | 04/26/2022         |
-| 4.6.1                            | 04/26/2022         |
-| 4.6.2                            |                    |
-| 4.7                              |                    |
-| 4.7.2                            |                    |
+| -------------------------------- | ------------------ |
 | 4.8                              |                    |
+| 4.7.2                            |                    |
+| 4.7                              |                    |
+| 4.6.2                            |                    |
+| 4.6.1                            | 04/26/2022         |
+| 4.6                              | 04/26/2022         |
+| 4.5.2                            | 04/26/2022         |
+| 4.5.1                            | 01/12/2016         | 
+| 4.5                              | 01/12/2016         |
 
  Additional information on .NET Framework support policy can be found at [Microsoft .NET Framework Lifecyle Policy][5]. 
 
