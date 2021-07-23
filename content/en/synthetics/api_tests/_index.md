@@ -35,9 +35,9 @@ Launch requests on the different network layers of your systems with these subty
 
 If your service starts answering slower or in an unexpected way (such as an unexpected response body or wrong A record), your test can [alert your team][1], [block your CI pipeline][2], and [roll back the faulty deployment][2].
 
-API tests can run from Datadog [managed locations][3] and [private locations][4], allowing **internal and external coverage** of your systems.
+API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems.
 
-**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, you can chain your requests with [multistep API tests][5].
+**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, chain your requests with [multistep API tests][5].
 
 ## Further Reading
 
