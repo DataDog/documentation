@@ -9,6 +9,9 @@ further_reading:
   text: 'Visualize your RUM data in the Explorer'
 ---
 
+<div class="alert alert-info"><p>Session Replay is in private beta. There are no billing implications for the Session Replays during this period. If you want to be added to the private beta, sign up by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>CI Visibility is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
+</div>
+
 ## What is Session Replay?
 
 Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users.
