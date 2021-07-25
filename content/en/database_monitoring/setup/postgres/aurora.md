@@ -57,26 +57,223 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 
 ## Grant the Agent access
 
+The Datadog Agent requires read-only access to the database server in order to collect statistics and queries. 
+
+Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database]6].
+
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
+ 
+ ```bash
+ psql -h mydb.example.com -d postgres -U postgres
+ ```
+
+Run the following SQL commands:
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
-Text inside tab.
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
 
 {{% /tab %}}
 {{% tab "Postgres ≤ 9.6" %}}
 
-Text inside tab.
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT SELECT ON pg_stat_database TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+Create functions to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
+  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
+LANGUAGE sql
+SECURITY DEFINER;
+CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
+    $$ SELECT * FROM pg_stat_statements; $$
+LANGUAGE sql
+SECURITY DEFINER;
+```
 
 {{% /tab %}}
 {{< /tabs >}}
 
+Create the function to enable the Agent to collect explain plans. 
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.explain_statement (
+   l_query text,
+   out explain JSON
+)
+RETURNS SETOF JSON AS
+$$
+BEGIN
+   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+END;
+$$
+LANGUAGE 'plpgsql'
+RETURNS NULL ON NULL INPUT
+SECURITY DEFINER;
+```
+
+### Verify
+
+To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_activity limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_statements limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+When it prompts for a password, use the password you entered when you created the `datadog` user.
+
 ## Install the Agent
 
-<p></p>
+Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][7].
 
 ## Configure the Agent
 
-<p></p>
+{{< tabs >}}
+{{% tab "Host" %}}
+
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][1] for more information.
+
+To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
+
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][2] for all available configuration options.
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: '<AWS_INSTANCE_ENDPOINT>'
+       port: 5432
+       username: datadog
+       password: "<PASSWORD>"
+       dbname: "<DB_NAME>"
+       statement_samples:
+         enabled: true
+   ```
+   <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+
+2. [Restart the Agent][3].
+
+
+[1]: /integrations/faq/postgres-custom-metric-collection-explained/
+[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+To configure this check for an Agent running on a container:
+
+Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["postgres"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>", "statement_samples": { "enabled": true } }]'
+```
+
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+
+See the [Autodiscovery template variables documentation][2] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
+
+
+[1]: /agent/docker/integrations/?tab=docker
+[2]: /agent/faq/template_variables/
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+To configure this check for an Agent running on Kubernetes:
+
+Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured with [a file, a configmap, or a key-value store][2].
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  annotations:
+    ad.datadoghq.com/postgresql.check_names: '["postgres"]'
+    ad.datadoghq.com/postgresql.init_configs: '[{}]'
+    ad.datadoghq.com/postgresql.instances: |
+      [
+        {
+          "dbm": true,
+          "host": "<AWS_INSTANCE_ENDPOINT>",
+          "port":"5432",
+          "username":"datadog",
+          "password":"<PASSWORD>",
+          "statement_samples":
+          {
+            "enabled":true
+          }
+        }
+      ]
+spec:
+  containers:
+    - name: postgres
+```
+
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+
+See the [Autodiscovery template variables documentation][3] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
+
+
+[1]: /agent/kubernetes/integrations/?tab=kubernetes
+[2]: agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: /agent/faq/template_variables/
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+To configure Database Monitoring metrics collection for an Agent running on ECS:
+
+Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+```json
+{
+  "containerDefinitions": [{
+    "name": "postgres",
+    "image": "postgres:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"postgres\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"host\":\"<AWS_INSTANCE_ENDPOINT>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\", \"statement_samples\": { \"enabled\": true } }]"
+    }
+  }]
+}
+```
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+
+See the [Autodiscovery template variables documentation][2] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
+
+
+[1]: /agent/docker/integrations/?tab=docker
+[2]: /agent/faq/template_variables/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Validate
+
+[Run the Agent's status subcommand][8] and look for `postgres` under the Checks section. Or visit the [Databases][9] page to get started!
 
 ## Troubleshooting
 
@@ -92,4 +289,7 @@ If you have installed and configured the integrations and Agent as described and
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /database_monitoring/setup/troubleshooting/#postgres
+[6]: https://www.postgresql.org/docs/current/app-psql.html
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: https://app.datadoghq.com/databases

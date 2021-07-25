@@ -280,7 +280,7 @@ In addition to telemetry collected from the database by the Agent, you can also 
 
 4. [Restart the Agent][9].
 
-## Validating
+## Validate
 
 [Run the Agent's status subcommand][10] and look for `mysql` under the Checks section. Or visit the [Databases][11] page to get started!
 

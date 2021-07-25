@@ -169,9 +169,7 @@ Installing the Datadog Agent also installs the MySQL check which is required for
 
 To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
-
-#### Metric collection
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL metrics. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
 Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
@@ -199,8 +197,6 @@ instances:
 
 To configure this check for an Agent running on a Docker container:
 
-#### Metric collection
-
 Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
 
 ```yaml
@@ -217,8 +213,6 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 {{% tab "Kubernetes" %}}
 
 To configure this check for an Agent running on Kubernetes:
-
-#### Metric collection
 
 Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
 
@@ -257,8 +251,6 @@ See the [Autodiscovery template variables documentation][3] to learn how to pass
 
 To configure this check for an Agent running on ECS:
 
-#### Metric collection
-
 Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
 
 ```json
@@ -283,7 +275,7 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 {{% /tab %}}
 {{< /tabs >}}
 
-## Validating
+## Validate
 
 [Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
 
