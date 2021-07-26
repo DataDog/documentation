@@ -1,5 +1,5 @@
 ---
-title: Synthetic Testing Tunnnel
+title: Synthetic Testing Tunnel
 kind: documentation
 description: Local and CI/CD testing with Datadog Synthetic testing tunnel.
 further_reading:
