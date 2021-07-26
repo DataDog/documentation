@@ -122,7 +122,7 @@ For instance, you can
 NPM automatically maps 
 
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3]. 
-- API calls to AppEngine, Google DNS, Gmail, and other [GCP services][5].
+- API calls to AppEngine, Google DNS, Gmail, and other GCP services.
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
 
@@ -220,4 +220,3 @@ The top of the sidepanel displays common source and destination tags shared by t
 [2]: /network_monitoring/performance/network_map/
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /logs/explorer/saved_views/
-[5]: https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go#L9
