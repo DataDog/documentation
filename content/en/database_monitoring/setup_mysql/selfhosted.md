@@ -300,4 +300,4 @@ If you have installed and configured the integrations and Agent as described and
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: /agent/guide/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-[12]: /database_monitoring/setup/troubleshooting/#mysql
+[12]: /database_monitoring/troubleshooting/#mysql

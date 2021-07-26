@@ -285,11 +285,11 @@ If you have installed and configured the integrations and Agent as described and
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage#agent-overhead
-[2]: /database_monitoring/setup/data_collected/#sensitive-information
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
-[9]: /database_monitoring/setup/troubleshooting/#mysql
+[9]: /database_monitoring/troubleshooting/#mysql

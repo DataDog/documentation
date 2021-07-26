@@ -236,7 +236,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: /agent/basic_agent_usage#agent-overhead
-[2]: /database_monitoring/setup/data_collected/#sensitive-information
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://www.postgresql.org/docs/current/pgstatstatements.html
 [5]: /integrations/faq/postgres-custom-metric-collection-explained/
@@ -249,4 +249,4 @@ If you have installed and configured the integrations and Agent as described and
 [12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
 [13]: /agent/guide/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
-[15]: /database_monitoring/setup/troubleshooting/#postgres
+[15]: /database_monitoring/troubleshooting/#postgres

@@ -280,4 +280,4 @@ If you have installed and configured the integrations and Agent as described and
 [8]: https://app.datadoghq.com/account/settings#agent
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
-[11]: /database_monitoring/setup/troubleshooting/#postgres
+[11]: /database_monitoring/troubleshooting/#postgres
