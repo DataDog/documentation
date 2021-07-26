@@ -15,18 +15,21 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/request-log-correlation/"
   tag: "Blog"
   text: "Correlate request logs with traces automatically"
+- link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+  tag: 'Guide'
+  text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Automatically Inject Trace and Span IDs
+## Automatic injection
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then `env`, `service`, and `version` will also be added automatically. Learn more about [unified service tagging][1].
 
 **Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
-## Manually Inject Trace and Span IDs
+## Manual injection
 
-### With Standard Library Logging
+### Standard library logging
 
 If you prefer to manually correlate your [traces][2] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
@@ -53,24 +56,32 @@ def hello():
 hello()
 ```
 
-### Without Standard Library Logging
+### No standard library logging
 
-If you are not using the standard library `logging` module, you can use the `ddtrace.helpers.get_correlation_ids()` to inject tracer information into your logs.
+If you are not using the standard library `logging` module, you can use the following code snippet to inject tracer information into your logs:
+
+```python
+from ddtrace import tracer
+
+span = tracer.current_span()
+correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
+```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
 import ddtrace
-from ddtrace.helpers import get_correlation_ids
+from ddtrace import tracer
 
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
-    trace_id, span_id = get_correlation_ids()
+    span = tracer.current_span()
+    trace_id, span_id = (span.trace_id, span.span_id) if span else (None, None)
 
     # add ids to structlog event dictionary
-    event_dict['dd.trace_id'] = trace_id or 0
-    event_dict['dd.span_id'] = span_id or 0
+    event_dict['dd.trace_id'] = str(trace_id or 0)
+    event_dict['dd.span_id'] = str(span_id or 0)
 
     # add the env, service, and version configured for the tracer
     event_dict['dd.env'] = ddtrace.config.env or ""
@@ -92,7 +103,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd": {"trace_id": 9982398928418628468, "span_id": 10130028953923355146, "env": "dev", "service": "hello", "version": "abc123"}}
+{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].

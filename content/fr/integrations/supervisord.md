@@ -9,6 +9,8 @@ assets:
     source: supervisord
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    supervisord_processes: assets/saved_views/supervisord_processes.json
   service_checks: assets/service_checks.json
 categories:
   - os & system
@@ -179,12 +181,10 @@ Le check Supervisor n'inclut aucun événement.
 
 ### Checks de service
 
-**supervisord.can_connect** :
+**supervisord.can_connect** :<br>
+Renvoie CRITICAL si l'Agent ne parvient pas à se connecter au serveur HTTP ou au socket UNIX que vous avez configuré. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter au serveur HTTP ou au socket UNIX que vous avez configuré. Si ce n'est pas le cas, renvoie OK.
-
-**supervisord.process.status** :
-
+**supervisord.process.status** :<br>
 L'Agent envoie ce check de service pour tous les processus enfants de supervisord (si aucune des options `proc_names` ou `proc_regex` n'est configurée) OU un ensemble de processus enfants (ceux qui sont configurés dans `proc_names` et/ou `proc_regex`), en appliquant le tag `supervisord_process:<nom_processus>` à chaque check de service.
 
 Ce tableau montre le `supervisord.process.status` renvoyé pour chaque statut de supervisord :

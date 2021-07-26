@@ -7,3 +7,12 @@
 /config/                  @DataDog/corpweb @DataDog/documentation
 /config/_default/menus/   @DataDog/documentation
 package.json              @DataDog/corpweb @DataDog/documentation
+
+# SDK versions
+.github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries
+/data/sdk_versions.json               @DataDog/integrations-tools-and-libraries
+
+# Serverless
+
+/content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
+/layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation

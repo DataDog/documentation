@@ -33,7 +33,7 @@ Here's a two-minute video walkthrough:
 
 ### Create
 
-1. After the feature is enabled, visit the [New Account Page][3].
+1. After the feature is enabled, see the [New Account Page][3].
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
 The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][4].
@@ -48,11 +48,11 @@ The custom sub-domain feature is not enabled by default. Contact [Datadog suppor
 
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
 
-For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is currently viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could visit `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][1], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
-Note: when using a custom subdomain, you will have to manually edit the links from the Datadog documentation with your subdomain name. For example a link redirecting to `https://**app**.datadoghq.com/account/settings` will become `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
 
-## Setting up SAML
+## Set up SAML
 
 SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually. 
 
@@ -66,38 +66,52 @@ To configure SAML for multi-organizations:
 
 The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`.
 
-The Multi-Org Usage tab shows the aggregate usage of the parent-organization and all its child-organizations. There are two sub-tabs on the Multi-Org Usage tab:
+The Multi-Org Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Multi-Org Usage page:
 
-* Month-to-date Usage
-* Long-Term Trends
+* Overall
+* Individual Organization
 
-### Month-to-date usage
+### Overall usage
 
-This view contains an Overall Usage section and an Individual Organization Usage section.
+This tab contains a Month-to-Date Total Usage section and an Overall Usage section.
 
-The Overall Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
+The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
 
-{{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
+{{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 
-The Individual Organization Usage section contains two views that breaks down your month-to-date usage of products by organization. The "All" view is a table that lists by product the unadjusted, raw usage of your parent-organization and all child-organizations. To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
+Most accounts by default can view "Billable" usage, which shows usage that contributes to your final bill. This view also breaks out on-demand usage above your commitments and allocations. The "All" view shows you all usage, including non-billable usage such as product trials.
 
-{{< img src="account_management/managing-multiorgs-02.png" alt="Month-to-Date Usage" >}}
+The Overall Usage section shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is “All” usage not “Billable” usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill. This information can be downloaded as a CSV file.
 
-To view only the usage that will count toward your bill, you can switch to the "Billable" view. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
+{{< img src="account_management/multi-org-v2-trends.png" alt="Overall Usage Long-term trends" >}}
 
-The month-to-date usage and last month’s usage can be downloaded as a CSV file.
+Both the Month-to-Date Total Usage section and the Overall Usage section can be filtered by clicking on product specific sub-tabs. In the "Log Management" sub-tab, you can view the Logs Usage by Index table, which displays your month-to-date and last month's indexed log usage by:
 
-### Long-term trends
+* Index name
+* Organization
+* Retention period in days
+* Indexed log count broken down between live and rehydrated logs
+* The index's contribution percentage to the overall indexed log usage
 
-This tab shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
+This data can be downloaded as a CSV file.
 
-This information can be downloaded as a CSV file.
+{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Multi-org Logs Usage by Index" >}}
+
+### Individual organization usage
+
+On the Individual Organization usage tab, you are able to view the usage of your child organizations in either absolute units or as a percent of total usage.
+
+{{< img src="account_management/multi-org-percent-billable-v2.png" alt="Individual Percent Usage" >}}
+
+The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
+
+To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name. 
 
 ## Usage attribution
 
 The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
-When enabled at the parent-organization level, usage attribution will show usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
+When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
 Functionalities include:
 

@@ -20,15 +20,28 @@ Agent v5 が既にインストールされている場合は、新しい Agent �
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
 
-| プラットフォーム     | コマンド                                                                                                                           |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| CentOS       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Debian       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Fedora       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Red Hat      | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| Ubuntu       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
-| SUSE         | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+
+
+Amazon Linux 
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+CentOS       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Debian       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Fedora       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Red Hat      
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+Ubuntu       
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+
+SUSE         
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、Datadog がそのままの状態での完全な下位互換性は保証できないためです。
 
@@ -75,9 +88,11 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
@@ -117,10 +132,14 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
+
+   **注**: [dnf にバグ][1]が発生しているため、CentOS 8.1 では `repo_gpgcheck=1` の代わりに `repo_gpgcheck=0` を使用してください。
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
     ```
@@ -153,38 +172,45 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 ### Debian
 
-1. APT の HTTPS サポートを有効にします。
+1. APT の HTTPS サポートを有効にし、`curl` と `gnupg` をインストールします。
     ```
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. システム上に Datadog API リポジトリをセットアップし、Datadog の APT キーをインポートします。
     ```shell
-    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-    注: Datadog の APT キーをインポートするために、`dirmngr` をインストールしなければならない場合があります。
+3. Debian 8 またはそれ以前で実行する場合は、鍵束を `/etc/apt/trusted.gpg.d` にコピーします。
 
-3. ローカルの APT キャッシュを更新し、Agent をインストールします。
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. ローカルの APT キャッシュを更新し、Agent をインストールします。
     ```
     sudo apt-get update
     sudo apt-get install datadog-agent
     ```
 
-4. 構成サンプルを所定の位置にコピーし、適切な API キーを指定します。
+5. 構成サンプルを所定の位置にコピーし、適切な API キーを指定します。
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. 以下の `import` コマンドを使用して、Agent の構成パスおよび形式を Agent v5 から Agent v6 に移行します。このコマンドは、既存の v5 の `datadog.conf` をパースし、構成オプションを新しい v6 の `datadog.yaml` 形式に変換します。また、現在有効になっているチェックの構成ファイルをコピーします。
+6. 以下の `import` コマンドを使用して、Agent の構成パスおよび形式を Agent v5 から Agent v6 に移行します。このコマンドは、既存の v5 の `datadog.conf` をパースし、構成オプションを新しい v6 の `datadog.yaml` 形式に変換します。また、現在有効になっているチェックの構成ファイルをコピーします。
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-6. Agent を起動します。
+7. Agent を起動します。
     ```
     sudo service datadog-agent start
     ```
@@ -198,9 +224,11 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
@@ -234,10 +262,14 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
+
+   **注**: [dnf にバグ][1]が発生しているため、RHEL 8.1 では `repo_gpgcheck=1` の代わりに `repo_gpgcheck=0` を使用してください。
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
     ```
@@ -270,38 +302,45 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 ### Ubuntu
 
-1. APT の HTTPS サポートを有効にします。
+1. APT の HTTPS サポートを有効にし、`curl` と `gnupg` をインストールします。
     ```
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. システム上に Datadog API リポジトリをセットアップし、Datadog の APT キーをインポートします。
     ```shell
-    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-    注: Datadog の APT キーをインポートするために、`dirmngr` をインストールしなければならない場合があります。
+3. Ubuntu 14 またはそれ以前で実行する場合は、鍵束を `/etc/apt/trusted.gpg.d` にコピーします。
 
-3. ローカルの APT キャッシュを更新し、Agent をインストールします。
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. ローカルの APT キャッシュを更新し、Agent をインストールします。
     ```
     sudo apt-get update
     sudo apt-get install datadog-agent
     ```
 
-4. 構成サンプルを所定の位置にコピーし、適切な API キーを指定します。
+5. 構成サンプルを所定の位置にコピーし、適切な API キーを指定します。
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. 以下の `import` コマンドを使用して、Agent の構成パスおよび形式を Agent v5 から Agent v6 に移行します。このコマンドは、既存の v5 の `datadog.conf` をパースし、構成オプションを新しい v6 の `datadog.yaml` 形式に変換します。また、現在有効になっているチェックの構成ファイルをコピーします。
+6. 以下の `import` コマンドを使用して、Agent の構成パスおよび形式を Agent v5 から Agent v6 に移行します。このコマンドは、既存の v5 の `datadog.conf` をパースし、構成オプションを新しい v6 の `datadog.yaml` 形式に変換します。また、現在有効になっているチェックの構成ファイルをコピーします。
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-6. Agent を起動します。
+7. Agent を起動します。
 
     * Ubuntu 16.04 以降:
     ```
@@ -323,18 +362,20 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
   baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
   type=rpm-md
   gpgcheck=1
-  repo_gpgcheck=0
-  gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-         https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-         https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  repo_gpgcheck=1
+  gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   ```
 
 2. ローカルの Zypper リポジトリを更新し、Agent をインストールします。
   ```
   sudo zypper refresh
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   sudo zypper install datadog-agent
   ```
 
@@ -353,6 +394,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
   sudo systemctl restart datadog-agent.service
   ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{% tab "Windows" %}}
 

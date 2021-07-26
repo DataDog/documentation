@@ -3,6 +3,7 @@ title: Monitors
 kind: documentation
 aliases:
     - /monitoring
+    - /monitors/faq/can-i-set-up-a-monitor-for-a-metric-that-hasn-t-been-reported-to-datadog-yet/
 ---
 
 ## Create
@@ -50,7 +51,7 @@ The notify setting sends an email with the monitor audit event to all people who
 
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: /api/v1/monitors/
-[3]: /developers/libraries/#managing-monitors
+[3]: /developers/community/libraries/#managing-monitors
 [4]: /monitors/monitor_types/host/
 [5]: /monitors/monitor_types/metric/
 [6]: /monitors/monitor_types/anomaly/

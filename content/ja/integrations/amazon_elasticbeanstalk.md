@@ -18,6 +18,7 @@ further_reading:
     text: AWS Elastic Beanstalk への Datadog のデプロイ
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
+integration_id: amazon-elastic-beanstalk
 integration_title: Amazon Elastic Beanstalk
 is_public: true
 kind: インテグレーション
@@ -73,6 +74,10 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
     echo -e "  apm_non_local_traffic: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
     ```
 2. トレーシングライブラリをセットアップして、トレースが [ブリッジネットワークの Gateway IP][9] に送られるようにします。アプリケーションコンテナ内からのデフォルトが `172.17.0.1` になります（これが Gateway IP かどうかわからない場合は、`docker inspect <container id>` を実行して確認します）。
+
+{{< site-region region="us3,eu,gov" >}} 
+3. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
+{{< /site-region >}} 
 
 すべての言語で、環境変数 `DD_AGENT_HOST` をゲートウェイ IP に設定します。または、以下の言語の場合、次を使用してプログラムでホスト名を設定します。
 
@@ -138,12 +143,15 @@ func main() {
 
 `Dockerrun.aws.json` ファイルは、単独で使用することも、他のソースコードと共にアーカイブに圧縮して使用することもできます。`Dockerrun.aws.json` と共にアーカイブされるソースコードは、コンテナインスタンスにデプロイされ、`/var/app/current/` ディレクトリでアクセスできます。構成の `volumes` セクションを使用して、インスタンスで実行されるコンテナのマウントポイントを提供します。また、埋め込みコンテナ定義の `mountPoints` セクションを使用して、コンテナからマウントポイントをマウントします。
 
-以下のコードサンプルは、Datadog Agent を宣言する `Dockerrun.aws.json` を示しています。`containerDefinitions` セクションを、ご使用の [Datadog API キー][1]、タグ (オプション)、および追加のコンテナ定義で更新してください。Datadog EU サイトを使用している場合は、`DD_SITE` を `datadoghq.eu` に設定します。必要に応じて、このファイルを上述の追加コンテンツと共に圧縮できます。このファイルの構文の詳細については、[Beanstalk のドキュメント][5]を参照してください。
+以下のコードサンプルは、Datadog Agent を宣言する `Dockerrun.aws.json` を示しています。`containerDefinitions` セクションを、ご使用の [Datadog API キー][1]、タグ (オプション)、および追加のコンテナ定義で更新してください。必要に応じて、このファイルを上述の追加コンテンツと共に圧縮できます。このファイルの構文の詳細については、[Beanstalk のドキュメント][2]を参照してください。
 
 **注**:
 
 - 多くのリソースを使用する場合は、メモリの上限を上げる必要があります。
 - すべてのホストが同じ Agent バージョンを実行するようにするには、`agent:7` を [Docker イメージ][3]の特定のマイナーバージョンに変更することをお勧めします。
+{{< site-region region="us3,eu,gov" >}}
+- `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
+{{< /site-region >}}
 
 ```json
 {
@@ -179,7 +187,7 @@ func main() {
                 },
                 {
                     "name": "DD_SITE",
-                    "value": "datadoghq.com"
+                    "value": "<YOUR_DD_SITE>"
                 },
                 {
                     "name": "DD_TAGS",
@@ -261,6 +269,11 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
 
 アプリケーションがコンテナ化されておらず、Datadog Agent が `99datadog.config` で構成されているとき、アプリケーションが[トレーシングライブラリセットアップ][9]でインスツルメントされている場合は、追加のコンフィギュレーションなしでトレーシングが有効になります。
 
+{{< site-region region="us3,eu,gov" >}} 
+環境変数 `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。<p></p>
+{{< /site-region >}}
+
+
 
 [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
@@ -273,6 +286,65 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
 [9]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
 {{< /tabs >}}
+
+#### 複数 Docker コンテナ
+
+1. アプリケーションと同じ `Dockerrun.aws.json` で、`datadog/agent` イメージを使用して Datadog Agent コンテナを追加します。以下を追加します。
+    - `portMappings` セクションで、`containerPort` 8126 と `hostPort` 8126 を追加します。
+    - `environment` セクションで、`DD_APM_ENABLED` と `DD_APM_NON_LOCAL_TRAFFIC` を `true` に設定します。
+2. [トレーシングライブラリのセットアップ][14]でインスツルメントされたアプリケーションコンテナで、以下を追加します。
+    - `environment` セクションで、`DD_AGENT_HOST` と呼ばれる環境変数を Datadog Agent コンテナの名前に追加します。
+    - `links` セクションで、Agent コンテナを環境変数として使用されるように設定します。
+
+以下の例を参照してください。
+
+```text
+ "containerDefinitions": [    {
+      "name": "dd-agent",
+      "image": "datadog/agent:latest",
+      "environment": [
+          {
+              "name": "DD_API_KEY",
+              "value": "<api key>"
+          },
+          {
+              "name": "DD_APM_ENABLED",
+              "value": "true"
+          },
+          {
+             "name": "DD_APM_NON_LOCAL_TRAFFIC",
+             "value": "true"
+          },
+         # any other environment variables needed 
+      ],
+      "portMappings": [
+        {
+          "hostPort": 8126,
+          "containerPort": 8126
+        }
+      ],
+      "memory": 256,
+      "mountPoints": [
+          # any mountpoints needed
+         }
+      ]
+    },
+    {
+      "name": "application-container",
+      "image": "<application image name>",
+      "environment": [
+        {
+          "name": "DD_AGENT_HOST",
+          "value": "dd-agent",
+          # any other environment variables needed
+        }
+      ],
+      "links": [
+        "dd-agent:dd-agent"
+      ],
+
+```
+
 
 ## 収集データ
 

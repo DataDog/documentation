@@ -14,6 +14,11 @@ name: snyk
 public_title: Intégration Datadog/Snyk
 short_description: Profil et signalement des vulnérabilités avec Snyk
 version: '1.0'
+integration_id: snyk
+further_reading:
+  - link: 'https://www.datadoghq.com/partner/snyk/'
+    tag: Page des partenaires
+    text: Surveillance Snyk avec Datadog
 ---
 ## Présentation
 
@@ -64,6 +69,10 @@ Une ou deux minutes après avoir déployé votre service, la colonne « Vulnera
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/tracing/profiler/
 [2]: https://snyk.io/product/vulnerability-database/

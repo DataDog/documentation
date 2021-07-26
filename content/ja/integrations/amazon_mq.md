@@ -16,6 +16,7 @@ further_reading:
     text: Datadog で Amazon MQ のメトリクスを監視
 git_integration_title: amazon_mq
 has_logo: true
+integration_id: amazon-mq
 integration_title: Amazon MQ
 is_public: true
 kind: インテグレーション
@@ -57,7 +58,7 @@ Amazon MQ から S3 バケットまたは CloudWatch のいずれかにログを
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon MQ ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
-    - [Cloudwatch ロググループに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][6]
 
 ## 収集データ
 

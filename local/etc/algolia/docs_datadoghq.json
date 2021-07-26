@@ -45,12 +45,22 @@
                     "real_user_monitoring",
                     "serverless",
                     "synthetics",
+                    "network_monitoring/devices",
                     "developers"
                 ],
                 "localisation": ["", "/fr", "/ja"]
             },
             "tags": ["guide"],
             "page_rank": 10
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/account_management/rbac/permissions",
+            "selectors_key": "docs",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["rbac_permissions"],
+            "page_rank": 110
         },
         {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
@@ -99,7 +109,7 @@
                     "notebooks",
                     "real_user_monitoring",
                     "security",
-                    "security_monitoring",
+                    "security_platform",
                     "synthetics",
                     "tracing",
                     "serverless",
@@ -136,9 +146,9 @@
     "selectors": {
         "api_latest": {
             "lvl0": {
-                "selector": "",
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
                 "global": true,
-                "default_value": "API Latest"
+                "default_value": "API"
             },
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",
@@ -192,7 +202,7 @@
             },
             "lvl1": ".main h1",
             "lvl2": ".main h2",
-            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -209,7 +219,7 @@
             "lvl2": ".main h2",
             "lvl3": ".main h3",
             "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -226,7 +236,7 @@
             "lvl2": ".main h2",
             "lvl3": ".main h3",
             "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, dl dt, dl dd, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
@@ -240,7 +250,8 @@
         "#en-apprendre-plus",
         "#further-reading",
         ".alert-info",
-        ".announcement_banner"
+        ".announcement_banner",
+        ".language-region-select-container"
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {
@@ -253,7 +264,8 @@
             ["microsoft azure", "azure"],
             ["gcp", "google cloud platform"],
             ["aws", "amazon web service"],
-            ["RUM", "rum", "real user monitoring"]
+            ["RUM", "rum", "real user monitoring"],
+            ["permissions", "Role Permissions"]
         ]
     },
     "only_content_level": true,

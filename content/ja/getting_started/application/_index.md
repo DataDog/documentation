@@ -5,6 +5,9 @@ further_reading:
   - link: 'https://learn.datadoghq.com/course/view.php?id=2'
     tag: ラーニングセンター
     text: Datadog 入門
+  - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
+    tag: ブログ
+    text: Datadog クイックナビメニューのご紹介
 ---
 このページでは、[Datadog サイト][1]の機能に関するハイレベルな概要を説明します。
 
@@ -25,7 +28,7 @@ further_reading:
 
 [Datadog ログ管理][5]を使用すると、アプリケーションとインフラストラクチャーによって生成されたすべてのログを送信して処理できます。インデックスを作成せずに、Live Tail を使用してリアルタイムにログを観察できます。アプリケーションとインフラストラクチャーからすべてのログを取り込み、フィルターを使用して動的にインデックス化するものを決定し、それらをアーカイブに保存できます。
 
-## APM と分散型トレーシング
+## APM & Continuous Profiler
 
 {{< img src="getting_started/apm.png" alt="APM ダッシュボード"  >}}
 

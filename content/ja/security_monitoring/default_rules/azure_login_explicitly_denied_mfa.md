@@ -12,8 +12,6 @@ technique: T1110-brute-force
 title: Azure ログインが MFA を明示的に拒否
 type: security_rules
 ---
-## 概要
-
 ## 目標
 
 複数のユーザーアカウントが MFA プロセスの完了に失敗したときに、ネットワーク IP アドレスを検出し特定します。

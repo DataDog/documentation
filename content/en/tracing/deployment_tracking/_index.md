@@ -101,7 +101,7 @@ This section lets you compare the performance (requests, latency, and errors) of
 
 {{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="Endpoint Comparison"  style="width:100%;">}}
 
-## Deployment Strategies
+## Deployment strategies
 
 Datadog's deployment tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies (or others) to detect bad code deployments, contain the impact of changes, and respond faster to incidents.
 
@@ -113,9 +113,9 @@ Using Datadog, you can monitor your rolling deploys and detect any resulting err
 
 {{< img src="tracing/deployment_tracking/rolling.png" alt="Rolling Deployment"  style="width:100%;">}}
 
-### Blue/green deploys
+### Blue and green deploys
 
-Blue/green (or other color combination) deployments reduce downtime by running two clusters of services that are both accepting traffic, or by keeping one on standby, ready to be activated if there are problems with the other.
+Blue and green (or other color combination) deployments reduce downtime by running two clusters of services that are both accepting traffic, or by keeping one on standby, ready to be activated if there are problems with the other.
 
 Setting and viewing the `version` tags for these services lets you compare requests and errors to detect if one of the clusters has an error rate higher than the other cluster, if a cluster is not meeting SLOs, or if a cluster that is not supposed to be receiving traffic is.
 
@@ -129,7 +129,7 @@ Using `version` tags within Datadog allows you to compare error rates, traces, a
 
 For example, you can see in the following image that a canary version was deployed, had a few errors, and was removed, with traces corresponding to that version available for investigation without any further impact.
 
-{{< img src="tracing/deployment_tracking/CanaryDeploy.png" alt="Canary Deployment"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="Canary Deployment"  style="width:100%;">}}
 
 ### Shadow deploys
 
@@ -158,7 +158,7 @@ The errors widget can be scoped to one of three options that involve the `versio
 
 All of these can be exported to dashboards and monitors.
 
-### Trace Search and Analytics
+### Trace search and analytics
 
 {{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.gif" alt="Version in App Analytics"  style="width:100%;">}}
 

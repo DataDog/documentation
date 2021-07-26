@@ -61,7 +61,7 @@ Detadog のセキュリティにバグを発見された場合は、[security@da
 
 ## 非特権ユーザーとして実行
 
-デフォルトでは、Agent は Linux では `dd-agent` ユーザーとして、[Windows][18] では `ddagentuser` アカウントとして実行されます。
+デフォルトでは、Agent は Linux では `dd-agent` ユーザーとして、[Windows][18] では `ddagentuser` アカウントとして実行されます。`system-probe` および `security-agent` サービスは例外で、Linux では `root` として、Windows では `LOCAL_SYSTEM` として実行する必要があります。
 
 ## 機密情報管理
 
@@ -76,11 +76,11 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 [1]: /ja/security/
 [2]: /ja/agent/
 [3]: /ja/api/
-[4]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
-[5]: https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8
-[6]: https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
-[7]: https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-[8]: https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+[4]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
+[5]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
+[6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+[7]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+[8]: https://keys.datadoghq.com/DATADOG_RPM_KEY.public
 [9]: /ja/agent/faq/network/
 [10]: /ja/agent/proxy/
 [11]: /ja/agent/troubleshooting/

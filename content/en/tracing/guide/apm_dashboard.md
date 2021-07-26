@@ -25,7 +25,7 @@ _4 minutes to complete_
 
 Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
 You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
-Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web-server ahead of any major events like Black Friday.
+Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web server ahead of any major events like Black Friday.
 
 This guides walks you through adding trace metrics to a dashboard, correlating them with infrastructure metrics and then how to export an Analytics query. This guide covers adding widgets to the dashboard in three ways:
 
@@ -65,7 +65,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 6. **Drag another timeseries to the placeholder tile**
 
-    In this example two different types of metrics are added to a graph, a `trace.*` and a `runtime.*` one. Combined, these metrics allow you to correlate information between requests and code runtime performances. Specificallly, the latency of a service is displayed next to the thread count, knowing that latency spikes might be assocaited with an increase in the thraed count:
+    In this example two different types of metrics are added to a graph, a `trace.*` and a `runtime.*` one. Combined, these metrics allow you to correlate information between requests and code runtime performances. Specifically, the latency of a service is displayed next to the thread count, knowing that latency spikes might be associated with an increase in the thread count:
 
     1. First, add `trace.rack.requests.errors` metric into the widget:
 
@@ -107,7 +107,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 10. **Click on `Add Template Variables`** in the control panel. **Click `Add Variable +`**, name the template variable and choose the tag that the variable will control.
 
-    In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of opeation.
+    In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of operation.
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="dashboard 8" video="true"  style="width:90%;">}}
 

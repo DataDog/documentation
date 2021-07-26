@@ -11,8 +11,6 @@ source: gcp
 title: GCP GCE ファイアーウォール規則の変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ファイアーウォール規則の作成、変更、削除を検出します。
 

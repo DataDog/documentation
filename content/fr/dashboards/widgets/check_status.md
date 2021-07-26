@@ -52,37 +52,15 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][1] utilisé pour le widget Statut de check est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][1] pour en savoir plus.
 
-```text
-CHECK_STATUS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["check_status"]},
-        "check": {"type": "string"},
-        "grouping": {"enum": ["check", "cluster"]},
-        "group": {"type": "string"},
-        "tags":  {"type": "array", "items": {"type": "string"}},
-        "group_by":  {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "check", "grouping"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][2] utilisé pour le widget Statut de check est le suivant :
 
-| Paramètre  | Type             | Obligatoire | Description                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------|
-| `type`     | chaîne           | oui      | Type de widget (utilisez `check_status` pour le widget Statut de check)                                           |
-| `check`    | chaîne           | oui      | Nom du check à utiliser dans le widget                                                                       |
-| `grouping` | chaîne           | oui      | Le type de regroupement à utiliser (un seul check ou un cluster de checks). Valeurs disponibles : `check` ou `cluster` |
-| `group`    | chaîne           | non       | Groupe transmettant un seul check                                                                               |
-| `tags`     | Tableau de chaînes | non       | Liste des tags utilisés pour filtrer les groupes transmettant un check de cluster                                             |
-| `group_by` | Tableau de chaînes | non       | Liste des préfixes de tags à utiliser pour le regroupement dans le cas d'un check de cluster                                              |
-| `title`    | chaîne           | non       | Titre du widget.                                                                                          |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json/widget_json/
+[1]: /fr/api/v1/dashboards/
+[2]: /fr/dashboards/graphing_json/widget_json/

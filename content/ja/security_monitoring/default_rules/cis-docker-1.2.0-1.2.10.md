@@ -13,8 +13,6 @@ source: docker
 title: /etc/docker/daemon.json 監査が構成されている
 type: security_rules
 ---
-## 概要
-
 ## 説明
 
 該当する場合は `/etc/docker/daemon.json` を監査します。

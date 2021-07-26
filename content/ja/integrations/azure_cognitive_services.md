@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_cognitive_services/'
 draft: false
 git_integration_title: azure_cognitive_services
 has_logo: true
+integration_id: azure-cognitiveservices
 integration_title: Microsoft Azure Cognitive Services
 is_public: true
 kind: インテグレーション
@@ -30,7 +31,7 @@ Datadog Azure インテグレーションを使用して、Azure Cognitive Servi
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

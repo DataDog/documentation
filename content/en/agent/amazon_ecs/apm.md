@@ -17,43 +17,56 @@ After following the [Amazon ECS agent installation instructions][1], enable trac
 1. Set the following parameters in the task definition for the `gcr.io/datadoghq/agent` container. Set the `portMappings` host / container port to `8126` with protocol `tcp`:
 
     {{< code-block lang="json" >}}
-    containerDefinitions": [
-    {
-      "name": "datadog-agent",
-      "image": "gcr.io/datadoghq/agent:latest",
-      "cpu": 10,
-      "memory": 256,
-      "essential": true,
-      "portMappings": [
-        {
-          "hostPort": 8126,
-          "protocol": "tcp",
-          "containerPort": 8126
-        }
-      ],
+containerDefinitions": [
+  {
+    "name": "datadog-agent",
+    "image": "gcr.io/datadoghq/agent:latest",
+    "cpu": 100,
+    "memory": 256,
+    "essential": true,
+    "portMappings": [
+      {
+        "hostPort": 8126,
+        "protocol": "tcp",
+        "containerPort": 8126
+      }
+    ],
+    ...
+  {{< /code-block >}}
+
+    {{< site-region region="us3,eu,gov" >}} 
+  To ensure the Agent sends data to the right Datadog location, set the following environment variable, where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}:
+
+  ```json
+  "environment": [
+       ...
+     {
+       "name": "DD_SITE",
+       "value": "<DATADOG_SITE>"
+     },
+     ...
+     ]
+   ...
+  ```
+  {{< /site-region >}}
+  For **Agent v7.17 or lower**, add the following environment variables:
+   ```json
+   "environment": [
+        ...
+      {
+        "name": "DD_APM_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "DD_APM_NON_LOCAL_TRAFFIC",
+        "value": "true"
+      },
       ...
-    {{< /code-block >}}
+      ]
+   ...
+   ```
 
-    For **Agent v7.17 or lower**, add the following environment variables:
-
-    {{< code-block lang="json" >}}
-    ...
-          "environment": [
-            ...
-          {
-            "name": "DD_APM_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_APM_NON_LOCAL_TRAFFIC",
-            "value": "true"
-          },
-          ...
-          ]
-    ...
-    {{< /code-block >}}
-
-    [See all environment variables available for Agent trace collection][1].
+   [See all environment variables available for Agent trace collection][1].
 
 2. Assign the private IP address for each underlying instance your containers are running in your application container to the `DD_AGENT_HOST` environment variable. This allows your application traces to be shipped to the Agent. 
 
@@ -113,8 +126,8 @@ tracer.configure(hostname=get_aws_ip())
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
 
-[1]: https://docs.datadoghq.com/tracing/setup/python/#change-agent-hostname
 
+[1]: https://docs.datadoghq.com/tracing/setup/python/#change-agent-hostname
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodeJS" >}}
@@ -131,8 +144,8 @@ const axios = require('axios');
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
-[1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
 
+[1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -186,8 +199,8 @@ Copy this script into the `entryPoint` field of your ECS task definition, updati
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
-[1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname
 
+[1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
@@ -235,8 +248,8 @@ env[DD_VERSION] = $DD_VERSION
 ```
 
 
-[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 
+[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

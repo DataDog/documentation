@@ -6,7 +6,7 @@
           "deleted_dashboards_from_list": [
             {
               "id": "q5j-nti-fv6",
-              "type": "string"
+              "type": "host_timeboard"
             }
           ]
         },
@@ -42,7 +42,7 @@
         "dashboards": [
           {
             "id": "q5j-nti-fv6",
-            "type": null
+            "type": "host_timeboard"
           }
         ]
       },
@@ -50,7 +50,7 @@
         "dashboards": [
           {
             "id": "q5j-nti-fv6",
-            "type": "string"
+            "type": "host_timeboard"
           }
         ]
       },
@@ -77,7 +77,7 @@
               "modified": "2019-09-19T10:00:00.000Z",
               "popularity": "integer",
               "title": "string",
-              "type": "string",
+              "type": "host_timeboard",
               "url": "string"
             }
           ],
@@ -115,7 +115,7 @@
           "added_dashboards_to_list": [
             {
               "id": "q5j-nti-fv6",
-              "type": "string"
+              "type": "host_timeboard"
             }
           ]
         },
@@ -151,7 +151,7 @@
         "dashboards": [
           {
             "id": "q5j-nti-fv6",
-            "type": null
+            "type": "host_timeboard"
           }
         ]
       },
@@ -159,7 +159,7 @@
         "dashboards": [
           {
             "id": "q5j-nti-fv6",
-            "type": "string"
+            "type": "host_timeboard"
           }
         ]
       },
@@ -173,7 +173,7 @@
           "dashboards": [
             {
               "id": "q5j-nti-fv6",
-              "type": "string"
+              "type": "host_timeboard"
             }
           ]
         },
@@ -209,7 +209,7 @@
         "dashboards": [
           {
             "id": "q5j-nti-fv6",
-            "type": null
+            "type": "host_timeboard"
           }
         ]
       },
@@ -217,7 +217,7 @@
         "dashboards": [
           {
             "id": "q5j-nti-fv6",
-            "type": "string"
+            "type": "host_timeboard"
           }
         ]
       },

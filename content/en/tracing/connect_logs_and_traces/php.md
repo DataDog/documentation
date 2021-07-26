@@ -15,14 +15,17 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
+    - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+      tag: 'Guide'
+      text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Automatically Inject Trace and Span IDs
+## Automatic injection
 
 Given the many different ways to implement logging in PHP<span class="x x-first x-last">,</span> with some completely circumventing PHP's built-in error-logging API, the Datadog PHP tracing library cannot reliably inject trace and span <span class="x x-first x-last">IDs</span> into logs automatically.
 See the section below to learn how to connect your PHP Logs and traces manually.
 
-## Manually Inject Trace and Span IDs
+## Manual injection
 
 <div class="alert alert-warning">
 Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
@@ -80,6 +83,6 @@ If your application uses json logs format instead of appending trace_id and span
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/php/
-[2]: /logs/processing/processors/#trace-remapper
+[2]: /logs/log_configuration/processors/#trace-remapper
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog

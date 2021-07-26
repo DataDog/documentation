@@ -1,171 +1,148 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md'
-kind: ドキュメント
-title: Android の RUM データを収集する
+  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md'
+further_reading:
+  - link: 'https://github.com/DataDog/dd-sdk-android'
+    tag: Github
+    text: dd-sdk-android ソースコード
+  - link: /real_user_monitoring
+    tag: ホームページ
+    text: Datadog RUM を探索する
+kind: documentation
+title: RUM Android モニタリング
 ---
-[Datadog の `dd-sdk-android` クライアント側 RUM ライブラリ][2]を使用すると、Android アプリケーションから Datadog へ[リアルユーザーモニタリングのデータ][1]を送信すると共に、次の機能を利用できます。
-
-* アプリのパフォーマンスおよびデモグラフィックに関する総合的なデータを把握。
-* 最も遅いリソースを特定。
-* OS およびデバイスタイプ別にエラーを分析。
+Datadog *Real User Monitoring (RUM)* を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
 ## セットアップ
 
-1. `build.gradle` ファイルでライブラリを依存関係として宣言し、Gradle 依存関係を追加します。
+1. SDK を依存関係として宣言します。
+2. UI でアプリケーションの詳細を指定します。
+3. アプリケーションのコンテキストでライブラリを初期化します。
+4. RUM モニター、インターセプターを初期化してデータ送信を開始します。
 
-    ```conf
-    repositories {
-        maven { url "https://dl.bintray.com/datadog/datadog-maven" }
-    }
+**最小 Android OS バージョン**: Android 用 Datadog SDK は Android OS v19 以降をサポートします。
 
+
+### SDK を依存関係として宣言
+
+`build.gradle` ファイルで [dd-sdk-android][1] と [Gradle プラグイン][13]を依存関係として宣言します。
+
+```
+plugins {
+    id("dd-sdk-android-gradle-plugin")
+}
+dependencies {
+    implementation "com.datadoghq:dd-sdk-android:x.x.x" 
+}
+buildscript {
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android:x.x.x"
-    }
-    ```
-
-2. アプリケーションコンテキストと [Datadog クライアントトークン][4]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。また、アプリケーション ID を提供する必要があります (see our [RUM の使用方法ページ][3]参照）。
-
-    {{< tabs >}}
-    {{% tab "US" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
-                        .trackInteractions()
-                        .useViewTrackingStrategy(strategy)
-                        .build()
-        Datadog.initialize(this, config)
+        classpath("com.datadoghq:dd-sdk-android-gradle-plugin:x.x.x")
     }
 }
 ```
 
-    {{% /tab %}}
-    {{% tab "EU" %}}
+### UI でアプリケーションの詳細を指定
 
+1. UX Monitoring > RUM Applications > New Application を選択
+2. [Datadog UI][2] でアプリケーションタイプとして `android` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+
+![image][12]
+
+データの安全性を確保するため、クライアントトークンを使用する必要があります。API キーがAndroid アプリケーション APK バイトコードのクライアント側で公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
+
+### アプリケーションのコンテキストでライブラリを初期化
+
+{{< tabs >}}
+{{% tab "US" %}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = DatadogConfig.Builder("<CLIENT_TOKEN>", "<ENVIRONMENT_NAME>", "<APPLICATION_ID>")
+        val configuration = Configuration.Builder(
+            rumEnabled = true,
+            crashReportsEnabled = true
+        )
                         .trackInteractions()
+                        .trackLongTasks(durationThreshold)
+                        .useViewTrackingStrategy(strategy)
+                        .build()
+          val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
+          Datadog.initialize(this, credentials, configuration, trackingConsent)
+
+       }
+   }
+```
+
+{{% /tab %}}
+{{% tab "EU" %}}
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        val configuration = Configuration.Builder(
+            rumEnabled = true,
+            crashReportsEnabled = true
+        )
+                        .trackInteractions()
+                        .trackLongTasks(durationThreshold)
                         .useViewTrackingStrategy(strategy)
                         .useEUEndpoints()
                         .build()
-        Datadog.initialize(this, config)
+        val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
+        Datadog.initialize(this, credentials, configuration, trackingConsent)
+
     }
 }
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-    {{% /tab %}}
-    {{< /tabs >}}
+すべてのビュー（アクティビティ、フラグメントなど）の自動追跡を有効化する [`ViewTrackingStrategy`][5] や、EU ユーザー用に GDPR 準拠を追加する [`trackingConsent`][6]、そしてライブラリを初期化するための[その他のコンフィギュレーションオプション][7]の詳細について、ご確認ください。
 
-ご使用のアプリケーションのアーキテクチャにより、`ViewTrackingStrategy` の実装から 1 つを選択します。
+**注**: 初期化に必要な認証情報では、アプリケーションのバリアント名も必要となり、値 `BuildConfig.FLAVOR` (バリアントがない場合は空白の文字列) の使用が求められることにご注意ください。これは適切な ProGuard `mapping.txt` ファイルを有効化し、ビルド時の自動アップロードを行うために重要です。この操作により、難読化を解除された RUM エラースタックトレースを表示できるようになります。詳しくは、[Android ソースマッピングファイルのアップロードガイド][8]をご参照ください。
 
-  - `ActivityViewTrackingStrategy`: アプリケーションの各アクティビティが個別のビューとみなされます。
-  - `FragmentViewTrackingStrategy`: アプリケーションの各フラグメントが個別のビューとみなされます。
-  - `NavigationViewTrackingStrategy`: Android Jetpack Navigation ライブラリを使用している場合は、この方法をお勧めします。ナビゲーション先を個別のビューとして自動的に追跡します。
-  - `MixedViewTrackingStrategy`: すべてのアクティビティまたはフラグメントが個別のビューとみなされます。この方法は、`ActivityViewTrackingStrategy` と `FragmentViewTrackingStrategy` の融合型です。
+### RUM モニターとインターセプターの初期化
 
-  **注**: `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+RUM Monitor を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
 
-  **注**: デフォルトで、ライブラリはいずれのビューも追跡しません。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
-
-3. RUM Monitor を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
-
-    ```kotlin
-    val monitor = RumMonitor.Builder().build()
+```kotlin
+    val monitor = RumMonitor.Builder()
+            .build()
     GlobalRum.registerIfAbsent(monitor)
-    ```
+```
 
-4. OkHttp リクエストをリソースとして追跡する場合は、次のようにして提供された[インターセプター][6]を追加できます。
 
-    ```kotlin
+OkHttp リクエストをリソースとして追跡するには、提供された[インターセプター][9]を追加します。
+
+```kotlin
     val okHttpClient =  OkHttpClient.Builder()
         .addInterceptor(DatadogInterceptor())
         .build()
-    ```
+```
 
-    これにより、OkHttpClient によって処理される各リクエストに関する RUM Resource データが作成され、関連するすべての情報 (URL、メソッド、ステータスコード、エラー) が自動的に入力されます。ビューがアクティブな時に開始したネットワークリクエストのみが追跡されます。アプリケーションがバックグラウンドの時にリクエストを追跡するには、以下で説明するように手動でビューを作成します。
+これにより、`OkHttpClient` によって処理された各リクエストが RUM でリソースとして記録され、関連するすべての情報 (URL、メソッド、ステータスコード、エラー) が自動的に入力されます。ビューがアクティブな時に開始したネットワークリクエストのみが追跡されます。アプリケーションがバックグラウンドの時にリクエストを追跡するには、[手動でビューを作成][10]します。
 
-    **注**: また、複数のインターセプターを使用する場合、これを最初に呼び出す必要があります。
+**注**: また、複数のインターセプターを使用する場合、`DatadogInterceptor` を最初に呼び出す必要があります。
 
-5. (任意) リソースでタイミング情報 (最初の 1 バイトまで、DNS 解決など) を取得するには、以下の方法で提供されている[イベント][6]リスナーを追加します。
+さらに、`OkHttpClient` に `EventListener` を追加して[リソースのタイミングを自動的に追跡][11]（サードパーティプロバイダー、ネットワークリクエスト）できます。
 
-    ```kotlin
-    val okHttpClient =  OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor())
-        .eventListenerFactory(DatadogEventListener.Factory())
-        .build()
-    ```
-
-6. (任意) RUM イベントを手動で追跡する場合は、`GlobalRum` クラスを使用します。
-
-  ビューを追跡するには、ビューがインタラクティブに確認できるようになったら (ライフサイクルイベントが `onResume` と同等) `RumMonitor#startView` を呼び出し、次に、ビューが確認できなくなったら (ライフサイクルイベントが `onPause` と同等)  `RumMonitor#stopView` を呼び出します。以下を参照してください。
-
-   ```kotlin
-      fun onResume(){
-        GlobalRum.get().startView(viewKey, viewName, viewAttributes)
-      }
-
-      fun onPause(){
-        GlobalRum.get().stopView(viewKey, viewAttributes)
-      }
-   ```
-
-  リソースを追跡するには、リソースが読み込まれ始めたら `RumMonitor#startResource` を呼び出し、完全に読み込まれたら `RumMonitor#stopResource` を、リソースの読み込み中にエラーが発生したら `RumMonitor#stopResourceWithError` を呼び出します。以下を参照してください。
-
-   ```kotlin
-      fun loadResource(){
-        GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
-        try {
-          // do load the resource
-          GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
-        } catch (e : Exception) {
-          GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
-        }
-      }
-   ```
-
-  ユーザーアクションを追跡するには、以下のように、`RumMonitor#addUserAction` を呼び出します。継続的なアクションの場合は `RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を呼び出します。
-
-   ```kotlin
-      fun onUserInteraction(){
-        GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
-      }
-   ```
-
-## ウィジェットの追跡
-
-通常の場合、ウィジェットは HomeScreen アプリケーションにより提供される `AppWidgetHostView` に表示されます。このコンポーネントに自動インスツルメンテーションは提供されません。ウィジェットから UI インタラクション情報を送信するには、Datadog の API を手動で呼び出します。サンプルアプリケーションで、例をご参照ください:
-[ウィジェットの追跡](https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget)
-
-## バッチコレクション
-
-すべての RUM イベントは、最初にローカルデバイスにバッチで格納されます。各バッチはインテークの仕様に従います。ネットワークが利用可能で、Datadog SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドにあるときにネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
-
-つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。
-
-ディスク上のデータは、古すぎる場合は SDK がディスク容量を使いすぎないようにするために自動的に破棄されます。
-
-## 拡張
-
-### Glide
-
-既存のコードベースが Glide を使用している場合、[専用ライブラリ](glide_integration.md) を使用してさらにその他の情報 (RUM リソースやエラーなど) を自動的に Datadog へ転送できます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/data_collected/
-[2]: https://github.com/DataDog/dd-sdk-android
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/installation/?tab=us
+[1]: https://github.com/DataDog/dd-sdk-android
+[2]: https://app.datadoghq.com/rum/application/create
+[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[6]: https://square.github.io/okhttp/interceptors/
-[7]: https://square.github.io/okhttp/events/
+[5]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[6]: /ja/real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[8]: /ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[9]: https://square.github.io/okhttp/interceptors/
+[10]: /ja/real_user_monitoring/android/advanced_configuration/#custom-views
+[11]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[12]: https://raw.githubusercontent.com/DataDog/dd-sdk-android/master/docs/images/create_rum_application.png
+[13]: https://github.com/DataDog/dd-sdk-android-gradle-plugin

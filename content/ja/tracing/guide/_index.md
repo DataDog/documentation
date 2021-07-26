@@ -19,6 +19,7 @@ aliases:
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}サービスのプライマリオペレーション {{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}リソースメトリクスに基づいてモニターを構築する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}トレースアプリケーションメトリクス{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/ddsketch_trace_metrics/" >}}APM の DDSketch ベースメトリクス{{< /nextlink >}}
     {{< nextlink href="/api/v1/tracing/" >}}トレース API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}トレーシングクライアントライブラリ{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}

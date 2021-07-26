@@ -8,18 +8,19 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - web
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/resin/README.md'
 display_name: Resin
-draft: true
+draft: false
 git_integration_title: resin
 guid: f7b4c3db-5e56-4ab7-bef7-9d4a347daaee
 integration_id: resin
 integration_title: Resin
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: brent@bmontague.com
 manifest_version: 1.0.0
 metric_prefix: resin.
@@ -63,30 +64,47 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `resin` を探します。
 
+### ログの収集
+
+Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6] を参照し、コンフィギュレーションファイルの場所を調べてください。
+
+```yaml
+logs_enabled: true
+```
+
+- ログの収集を開始するには、次のコンフィギュレーションブロックを `resin.d/conf.yaml` ファイルに対して有効化します。
+    ```yaml
+    logs:
+      - type: file
+        path: /var/opt/resin/log/*.log
+        source: resin
+    ```
+
 ## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "resin" >}}
 
 
-### サービスのチェック
-
-**resin.can_connect**:
-
-Agent が監視対象の Resin インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Resin には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "resin" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 [1]: https://caucho.com/
 [2]: https://github.com/DataDog/integrations-core/blob/master/resin/datadog_checks/resin/data/conf.yaml.example
 [3]: https://www.caucho.com/resin-4.0/admin/cluster-server.xtp#JVMparameters:settingtheJVMcommandline
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-extras/blob/master/resin/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/resin/metadata.csv
+[8]: https://github.com/DataDog/integrations-extras/blob/master/resin/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

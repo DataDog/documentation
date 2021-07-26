@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -21,6 +23,7 @@ kind: インテグレーション
 maintainer: help@neo4j.com
 manifest_version: 1.0.0
 metric_prefix: neo4j.
+metric_to_check: neo4j.arraystore.size
 name: neo4j
 public_title: Datadog-Neo4j インテグレーション
 short_description: Neo4j Enterprise とのインテグレーションによりサーバーパフォーマンスを監視。

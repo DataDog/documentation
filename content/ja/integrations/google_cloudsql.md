@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true
+integration_id: google-cloudsql
 integration_title: Google CloudSQL
 is_public: true
 kind: インテグレーション
@@ -50,9 +51,6 @@ Google Cloud SQL のログは Stackdriver 経由で収集され、HTTP プッシ
 1. [Stackdriver ページ][3]に移動し、Google Cloud SQL のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
-
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
 ## 収集データ

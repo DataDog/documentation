@@ -13,8 +13,6 @@ source: ファイル整合性モニタリング
 title: Systemd の修正
 type: security_rules
 ---
-## 概要
-
 ## 目標
 システムサービスへの変更を検出します。
 

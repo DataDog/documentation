@@ -45,6 +45,9 @@ class Integrations:
         self.data_service_checks_dir = (
             join(self.data_dir, "service_checks") + sep
         )
+        self.data_npm_dir = (
+            join(self.data_dir, "npm") + sep
+        )
         self.content_integrations_dir = (
             join(self.content_dir, "integrations") + sep
         )
@@ -82,7 +85,7 @@ class Integrations:
             re.DOTALL,
         )
         self.regex_service_check = re.compile(
-            r"(#{3} Service Checks\n)([\s\S]*does not include any service checks at this time.)([\s\S]*)(#{2} Troubleshooting\n)",
+            r"(#{3} Service Checks\n)([\s\S]*for a list of service checks provided by this integration.)([\s\S]*)(#{2} Troubleshooting\n)",
             re.DOTALL,
         )
         self.regex_fm = re.compile(
@@ -100,6 +103,9 @@ class Integrations:
         makedirs(self.data_integrations_dir, exist_ok=True)
         makedirs(
             self.data_service_checks_dir, exist_ok=True
+        )
+        makedirs(
+            self.data_npm_dir, exist_ok=True
         )
         makedirs(
             self.content_integrations_dir, exist_ok=True
@@ -230,6 +236,9 @@ class Integrations:
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
+
+            elif file_name.endswith("defaults.go"):
+                self.process_npm_integrations(file_name)
 
     def merge_integrations(self):
         """ Merges integrations that come under one """
@@ -400,13 +409,50 @@ class Integrations:
         as the integration name it came from e.g /data/service_checks/docker.json
         :param file_name: path to a service_checks json file
         """
-        new_file_name = "{}.json".format(
-            basename(dirname(normpath(file_name)))
+
+        if file_name.endswith("/assets/service_checks.json"):
+            file_list = file_name.split(sep)
+            key_name = file_list[len(file_list)-3]
+        else:
+            key_name = basename(
+                dirname(normpath(file_name))
+            )
+
+        new_file_name = "{}{}.json".format(
+            self.data_service_checks_dir, key_name
         )
+
         shutil.copy(
             file_name,
-            self.data_service_checks_dir + new_file_name,
+            new_file_name,
         )
+
+    def process_npm_integrations(self, file_name):
+        """
+        Save the defaults.go file from AWS as a json file
+        /data/npm/aws.json
+        """
+
+        dict_npm = {}
+        with open(file_name) as fh:
+
+            line_list = filter(None, fh.read().splitlines())
+
+            for line in line_list:
+                if line.endswith("service{"):
+                    integration = line.split('"')[1]
+                    dict_npm[integration] = {"name": integration}
+
+        new_file_name = "{}aws.json".format(self.data_npm_dir)
+
+        with open(
+                file=new_file_name,
+                mode="w",
+                encoding="utf-8",
+            ) as f:
+                json.dump(
+                    dict_npm, f, indent = 2, sort_keys = True
+                )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
@@ -425,16 +471,16 @@ class Integrations:
         copyfile(file_name, full_destination_path)
 
     @staticmethod
-    def replace_image_src(markdown_string):
+    def replace_image_src(markdown_string, integration_name):
         """
         Takes a markdown string and replaces any image markdown with our img shortcode, pointing to the static/images folder.
         This is needed when dealing with Marketplace Integrations to properly display images pulled from a private repo.
         """
         markdown_img_search_regex = r"!\[(.*?)\]\((.*?)\)"
-        img_shortcode = "{{< img src=\"\\2\" alt=\"\\1\" >}}"
-        integration_img_prefix = 'https://raw.githubusercontent.com/DataDog/marketplace/master/'
+        img_shortcode = "{{< img src=\"marketplace/" + integration_name + "/\\2\" alt=\"\\1\" >}}"
+        integration_img_prefix = 'https://raw.githubusercontent.com/DataDog/marketplace/master/{}/'.format(integration_name)
 
-        replaced_markdown_string = markdown_string.replace(integration_img_prefix, 'marketplace/')
+        replaced_markdown_string = markdown_string.replace(integration_img_prefix, '')
         regex_result = re.sub(markdown_img_search_regex, img_shortcode, replaced_markdown_string, 0, re.MULTILINE)
 
         if regex_result:
@@ -541,7 +587,10 @@ class Integrations:
         new_file_name = "{}.md".format(
             basename(dirname(file_name))
         )
-        exist_already = exists(
+        # is this the same as a committed hardcoded integration
+        exist_already = (self.content_integrations_dir + new_file_name in self.initial_integration_files)
+        # is this overwriting another generated integration
+        exist_collision = exists(
             self.content_integrations_dir + new_file_name
         )
 
@@ -558,7 +607,7 @@ class Integrations:
         else:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
-                markdown_with_replaced_images = self.replace_image_src(markdown_string)
+                markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 updated_markdown = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
@@ -617,24 +666,49 @@ class Integrations:
                 0,
             )
 
-        result = self.add_integration_frontmatter(
-            new_file_name, result, dependencies
-        )
+        # if __init__.py exists lets grab the integration id
+        integration_id = manifest_json.get("integration_id", "") or ""
+        initpy = "{0}{1}{2}".format(dirname(file_name), sep, "__init__.py")
+        if exists(initpy):
+            with open(initpy) as f:
+                # look for ID = "integration-name" and extract
+                matches = re.search("^ID\s*=\s*(?:\'|\")([A-Z-a-z-_0-9]+)(?:\'|\")$", f.read(), re.MULTILINE)
+                if matches:
+                    integration_id = matches.group(1)
 
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
-                with open(self.content_integrations_dir + new_file_name, "w", ) as out:
+                out_name = self.content_integrations_dir + new_file_name
+
+                # if the same integration exists in multiple locations try name md file differently
+                # integration_id.md -> name.md -> original_collision_name.md
+                if exist_collision:
+                    f_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name
+                    manifest_json["name"] = f_name
+                    f_name = f_name if f_name.endswith('.md') else f_name + ".md"
+                    out_name = self.content_integrations_dir + f_name
+                    print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
+                        new_file_name, f_name))
+                    result = self.add_integration_frontmatter(
+                        f_name, result, dependencies, integration_id, manifest_json
+                    )
+                else:
+                    result = self.add_integration_frontmatter(
+                        new_file_name, result, dependencies, integration_id
+                    )
+
+                with open(out_name, "w", ) as out:
                     out.write(result)
 
                 ## Reformating all links now that all processing is done
                 if tab_logic:
-                    final_text = format_link_file(self.content_integrations_dir + new_file_name,regex_skip_sections_start,regex_skip_sections_end)
-                    with open(self.content_integrations_dir + new_file_name, 'w') as final_file:
+                    final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
+                    with open(out_name, 'w') as final_file:
                         final_file.write(final_text)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[]
+        self, file_name, content, dependencies=[], integration_id="", manifest_json=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -645,36 +719,42 @@ class Integrations:
         fm = {}
         template = "---\n{front_matter}\n---\n\n{content}\n"
         if file_name not in self.initial_integration_files:
-            item = [
-                d
-                for d in self.datafile_json
-                if d.get("name", "").lower() == basename(file_name).replace(".md", "")
-            ]
-            if item and len(item) > 0:
-                item[0]["kind"] = "integration"
-                item[0]["integration_title"] = (
-                    item[0]
+            if manifest_json:
+                item = manifest_json
+            else:
+                matches = [
+                    d
+                    for d in self.datafile_json
+                    if d.get("name", "").lower() == basename(file_name).replace(".md", "")
+                ]
+                item = matches[0] if len(matches) > 0 else []
+            if item:
+                item["kind"] = "integration"
+                item["integration_title"] = (
+                    item
                     .get("public_title", "")
                     .replace("Datadog-", "")
                     .replace("Integration", "")
                     .strip()
                 )
-                item[0]["git_integration_title"] = (
-                    item[0].get("name", "").lower()
+                item["git_integration_title"] = (
+                    item.get("name", "").lower()
                 )
-                if item[0].get("type", None):
-                    item[0]["ddtype"] = item[0].get("type")
-                    del item[0]["type"]
-                item[0]["dependencies"] = dependencies
-                item[0]["draft"] = not item[0].get("is_public", False)
+                if item.get("type", None):
+                    item["ddtype"] = item.get("type")
+                    del item["type"]
+                item["dependencies"] = dependencies
+                item["draft"] = not item.get("is_public", False)
+                item["integration_id"] = item.get("integration_id", integration_id)
                 fm = yaml.safe_dump(
-                    item[0], width=150, default_style='"', default_flow_style=False, allow_unicode=True
+                    item, width=150, default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
                 # simple bool cleanups with replace
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = {"kind": "integration"}
+                fm = yaml.safe_dump({"kind": "integration"}, width=150, default_style='"', default_flow_style=False,
+                                    allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
         )

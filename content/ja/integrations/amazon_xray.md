@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_xray/'
 draft: false
 git_integration_title: amazon_xray
 has_logo: true
+integration_id: amazon-xray
 integration_title: AWS X-Ray
 is_public: true
 kind: インテグレーション
@@ -20,6 +21,10 @@ public_title: Datadog-AWS X-Ray インテグレーション
 short_description: AWS サービス間で交わされるリクエストをトレース
 version: '1.0'
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
+
+{{< /site-region >}}
 ## 概要
 
 AWS X-Ray を使用すると、開発者は AWS 製品を使用して構築された分散アプリケーションをトレースできます。このインテグレーションは、[サーバーレス][1]関数詳細ページで Lambda 関数のトレースを提供します。サーバーレス監視の詳細については、[こちらのドキュメント][2]を参照してください。
@@ -41,13 +46,13 @@ xray:GetTraceSummaries
 
 カスタマーマスターキーを使用してトレースを暗号化している場合は、X-Ray に使用されるカスタマーマスターキーがリソースとなっているポリシーに `kms:Decrypt` メソッドを追加してください。
 
-**注:** AWS X-Ray インテグレーションを有効にすると、請求に影響する可能性のある Analyzed Span の消費量が増加します。
+**注:** AWS X-Ray インテグレーションを有効にすると、請求に影響する可能性のある Indexed Spans の量が増加します。
 
 ### 関数の AWS X-Ray を有効化する
 
 AWS X-Ray インテグレーションを最大限に活用するには、これを Lambda 関数と API Gateways _で_ 有効化し、**さらに** Lambda 関数_に_トレーシングライブラリをインストールする必要があります。
 
-#### 推奨: Serverless Framework プラグインを使用する
+#### サーバーレスフレームワークプラグイン
 
 [Datadog Serverless Framework プラグイン][5]は、Lambda 関数と API Gateway インスタンスの X-Ray を自動的に有効化します。また、このプラグインは [Datadog Lambda レイヤー][6]を Node 関数と Python 関数に自動的に追加します。
 

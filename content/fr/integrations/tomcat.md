@@ -2,11 +2,21 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    tomcat: assets/dashboards/metrics.json
+    tomcat--overview: assets/dashboards/overview.json
   logs:
     source: tomcat
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Tomcat] % of busy threads is high for host: {{host.name}}': assets/monitors/thread_busy.json
+    '[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}': assets/monitors/thread_count_max.json
+    '[Tomcat] Anomalous average processing time for host {{host.name}}': assets/monitors/processing_time.json
+    '[Tomcat] Anomalous max processing time for host {{host.name}}': assets/monitors/max_proc_time.json
+    '[Tomcat] Anomalous request rate for host {{host.name}}': assets/monitors/req_count.json
+    '[Tomcat] Increase of the errors/second rate for host: {{host.name}}': assets/monitors/error_count.json
+  saved_views:
+    tomcat_processes: assets/saved_views/tomcat_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -17,6 +27,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md'
 display_name: Tomcat
+draft: false
 git_integration_title: tomcat
 guid: 60f37d34-3bb7-43c9-9b52-2659b8898997
 integration_id: tomcat
@@ -151,9 +162,8 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
 
 #### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
 
-1. Tomcat utilise le logger `log4j` par défaut. Pour activer l'écriture des logs dans un fichier et personnaliser le format du log, modifiez le fichier `log4j.properties` dans le répertoire `$CATALINA_BASE/lib` comme suit :
+1. Tomcat utilise le logger `log4j` pour envoyer les logs à Datadog. Avec les versions < 8.0 de Tomcat, `log4j` est configuré par défaut. À partir de la version 8.0, vous devez configurer Tomcat pour le faire utiliser `log4j` en suivant la [documentation sur Apache Tomcat][5]. À la première étape de ces instructions, modifiez le fichier `log4j.properties` dans le répertoire `$CATALINA_BASE/lib` comme suit :
 
    ```conf
      log4j.rootLogger = INFO, CATALINA
@@ -196,6 +206,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
      log4j.logger.org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager] =\
        INFO, HOST-MANAGER
    ```
+   Ensuite, suivez le reste des instructions spécifiées dans la [documentation Tomcat][5] pour configurer `log4j`.
 
 2. Par défaut, le pipeline d'intégration de Datadog prend en charge les expressions de conversion suivantes :
 
@@ -204,7 +215,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
      %d [%t] %-5p %c - %m%n
    ```
 
-    Dupliquez et modifiez le [pipeline d'intégration][5] si vous utilisez un autre format. Consultez la [documentation sur la journalisation][6] (en anglais) Tomcat pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
+    Dupliquez et modifiez le [pipeline d'intégration][6] si vous utilisez un autre format. Consultez la [documentation sur la journalisation][7] (en anglais) Tomcat pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
 
 3. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -235,8 +246,9 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/integrations/java/
-[5]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
-[6]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
+[5]: https://tomcat.apache.org/tomcat-8.0-doc/logging.html#Using_Log4j
+[6]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+[7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
@@ -265,7 +277,7 @@ Le check Tomcat n'inclut aucun événement.
 ### Checks de service
 
 **tomcat.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Tomcat qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Tomcat qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

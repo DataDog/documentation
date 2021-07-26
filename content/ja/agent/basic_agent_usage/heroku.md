@@ -10,43 +10,54 @@ title: Datadog Heroku ビルドパック
 
 ## インストール
 
-このビルドパックをプロジェクトに追加し、かつ必要な環境変数を設定するには、以下を参照してください。
+このガイドでは、Heroku で実行中のアプリケーションがあることを前提としています。アプリケーションを Heroku にデプロイする方法については、Heroku のドキュメントを参照してください。
+
+1. [Datadog API 設定][3]で Datadog API キーをコピーし、次の環境変数へエクスポートします:
+
+ ```shell
+ export DD_API_KEY=<YOUR_API_KEY>
+ ```
+
+2. アプリケーション名を APPNAME 環境変数へエクスポートします:
+
+```shell
+export APPNAME=<YOUR_HEROKU_APP_NAME>
+```
+
+3. Datadog ビルドパックをプロジェクトに追加します:
 
 ```shell
 cd <HEROKU_PROJECT_ROOT_FOLDER>
 
-# これが新しい Heroku プロジェクトの場合
-heroku create
+# Heroku Labs Dyno Metadata を有効にして HEROKU_APP_NAME 環境変数を自動的に設定
+heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
-# 適切な言語固有のビルドパックを追加します。例:
-heroku buildpacks:add heroku/ruby
+# メトリクスが連続するよう、Datadog でホスト名を appname.dynotype.dynonumber に設定
+heroku config:add DD_DYNO_HOST=true
 
-# Heroku Labs Dyno メタデータを有効にします
-heroku labs:enable runtime-dyno-metadata -a $(heroku apps:info|grep ===|cut -d' ' -f2)
-
-# このビルドパックを追加して、Datadog API キーを設定します
+# このビルドパックを追加して Datadog API キーを設定
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-heroku config:add DD_API_KEY=<DATADOG_API_KEY>
+heroku config:add DD_API_KEY=$DD_API_KEY
 
-# Heroku にデプロイします
+# 強制的に再構築して Heroku をデプロイ
+git commit --allow-empty -m "Rebuild slug"
 git push heroku master
 ```
-
-`<DATADOG_API_KEY>` を、ご使用の [Datadog API キー][3]に置き換えます。
 
 完了すると、各 dyno の起動時に Datadog Agent が自動的に起動します。
 
 Datadog Agent は、statsd/dogstatsd のメトリクスおよびイベント用に `8125` でリスニングポートを提供します。トレースは、ポート `8126` で収集されます。
 
-<div class="alert alert-warning">
-警告: リスト内の最後のビルドパックは、アプリケーションに対するプロセスのタイプを決定するために使用されます。また、apt パッケージをインストールするビルドパック (<a href="https://github.com/heroku/heroku-buildpack-apt">apt</a>、<a href="https://github.com/jontewks/puppeteer-heroku-buildpack">puppeteer 依存関係</a>など) または `/app` フォルダーを変更するビルドパック (<a href="https://github.com/lstoll/heroku-buildpack-monorepo">monorepo</a> など) は Datadog ビルドパックの*前*に追加される必要があります。たとえば、アプリケーションが `ruby`、`datadog`、`apt` ビルドパックを使用している場合、これは正しい `heroku buildpacks` 出力になります。
+### ビルドパックの順序
+[Heroku のドキュメント][4]に記載の通り、リスト内の最後のビルドパックはアプリケーションのプロセスタイプを決定するために使用されます。
+
+apt パッケージをインストールするビルドパック ([heroku-buildpack-apt][5]、[puppeteer-heroku-buildpack][6] など) または `/app` フォルダーを変更するビルドパック ( [heroku-buildpack-monorepo][7] など) は Datadog ビルドパックの**前**に追加される必要があります。たとえば、アプリケーションが `ruby`、`datadog`、`apt` ビルドパックを使用している場合、これは正しい `heroku buildpacks` 出力になります。
 
 ```text
 1. https://github.com/heroku/heroku-buildpack-apt.git
 2. https://github.com/DataDog/heroku-buildpack-datadog.git
 3. heroku/ruby
 ```
-</div>
 
 ## 特定のビルドパックバージョンおよび特定の Datadog Agent バージョンを固定する
 
@@ -56,13 +67,13 @@ Heroku では、常にビルドパックの最新コミットを使用するこ�
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git#<DATADOG_BUILDPACK_RELEASE>
 ```
 
-`<DATADOG_BUILDPACK_RELEASE>` を、現在の[ビルドパックリリース][4]に置き換えます。
+`<DATADOG_BUILDPACK_RELEASE>` を、現在の[ビルドパックリリース][8]に置き換えます。
 
 デフォルトで、ビルドパックはリリース時に Datadog Agent の最新バージョンを固定します。`DD_AGENT_VERSION` の環境変数を設定することで、Agent を以前のバージョンに固定することができます。
 
 ## アップグレードとスラグの再コンパイル
 
-このビルドパックをアップグレードするか、特定のビルドパックオプションを変更するには、アプリケーションのビルドキャッシュをクリアし、スラグを再コンパイルする必要があります。
+このビルドパックをアップグレードするか、特定のビルドパックオプションを変更するには、スラグを再コンパイルする必要があります。
 
 次のオプションでは、スラグの再コンパイルが必要です。
 
@@ -75,17 +86,11 @@ heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-data
 このビルドパックをアップグレードしたり、これらのオプションのいずれか、たとえば `DD_AGENT_VERSION` を変更するには、次の手順が必要です。
 
 ```shell
-# Heroku リポジトリプラグインをインストールします
-heroku plugins:install heroku-builds
+# Agent の新規バージョンを設定
+heroku config:set DD_AGENT_VERSION=<NEW_AGENT_VERSION> -a <YOUR_APP_NAME>
 
-# Agent の新しいバージョンを設定します
-heroku config:set DD_AGENT_VERSION=<NEW_AGENT_VERSION> -a appname
-
-# "appname" アプリケーションの Heroku のビルドキャッシュをクリアします
-heroku builds:cache:purge -a appname
-
-# 新しい Agent バージョンでスラグを再構築します:
-git commit --allow-empty -m "Purge cache"
+# Agent の新バージョンでスラグを再構築:
+git commit --allow-empty -m "Rebuild slug"
 git push heroku master
 ```
 
@@ -95,12 +100,12 @@ git push heroku master
 
 | 設定                    | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_API_KEY`               | *必須。*API キーは、[Datadog API インテグレーション][6]のページにあります。これは、アプリケーションキーではなく API キーであることに注意してください。                                                                                                                                                                                                                                                                                                                                                                                |
+| `DD_API_KEY`               | *必須。*API キーは、[Datadog API インテグレーション][9]のページにあります。これは、アプリケーションキーではなく *API* キーであることに注意してください。                                                                                                                                                                                                                                                                                                                                                                                |
 | `DD_HOSTNAME`              | オプション。**警告**: ホスト名を手動で設定すると、メトリクスの連続性エラーが発生する可能性があります。この変数は設定しないことをお勧めします。dyno のホストはエフェメラルであるため、タグ `dynoname` または `appname` に基づいて監視することをお勧めします。                                                                                                                                                                                                                                                       |
 | `DD_DYNO_HOST`             | オプション。dyno 名 (例: `web.1`、`run.1234` など) をホスト名として使用する場合は `true` に設定します。詳細は、以下の[ホスト名のセクション](#hostname)を参照してください。デフォルトは `false` です。                                                                                                                                                                                                                                                                                                                                          |
-| `DD_TAGS`                  | *オプション*。追加のタグをスペース区切りの文字列として設定します。 (**注**: ビルドパックバージョン `1.16` 以前ではカンマ区切り文字列になります。下位互換性により、サポート対象となります）。例、`heroku config:set DD_TAGS="simple-tag-0 tag-key-1:tag-value-1"`。ビルドパックは、タグ `dyno` を自動的に追加します。タグは dyno 名 (例: web.1) と `dynotype` (dyno タイプ。例: `run`、`web` など) を表します。詳細は、[「タグの概要」][5]を参照してください。                                                                                                                                                             |
+| `DD_TAGS`                  | *オプション。*追加のタグをスペース区切りの文字列として設定します。 (**注**: ビルドパックバージョン `1.16` 以前ではカンマ区切り文字列になります。下位互換性により、サポート対象となります)。例、`heroku config:set DD_TAGS="simple-tag-0 tag-key-1:tag-value-1"`。ビルドパックは、タグ `dyno` を自動的に追加します。タグは dyno 名 (例: web.1) と `dynotype` (dyno タイプ。例: `run`、`web` など) を表します。詳細は、[「タグの概要」][10]を参照してください。                                                                                                                                                             |
 | `DD_VERSION`                  | *オプション*: アプリケーションのバージョンを設定。トレースをバージョン別に管理できます。                                                                                                                                          |
-| `DD_HISTOGRAM_PERCENTILES` | オプション。オプションで、ヒストグラムメトリクスの追加のパーセンタイルを設定します。[パーセンタイルグラフを作成する方法][6]を参照してください。                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `DD_HISTOGRAM_PERCENTILES` | *オプション。*オプションで、ヒストグラムメトリクスの追加のパーセンタイルを設定します。[パーセンタイルグラフを作成する方法][11]を参照してください。                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `DISABLE_DATADOG_AGENT`    | オプション。設定した場合、Datadog Agent は実行されません。                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `DD_APM_ENABLED`           | オプション。トレースの収集はデフォルトで有効になっています。これを `false` に設定すると、トレースの収集が無効になります。このオプションを変更した場合は、スラグを再コンパイルする必要があります。                                                                                                                                                                                                                                                          |
 | `DD_PROCESS_AGENT`         | オプション。Datadog Process Agent は、デフォルトでは無効になっています。Process Agent を有効にするには、これを `true` に設定します。このオプションを変更した場合は、スラグを再コンパイルする必要があります。                                                                                                                                                                                                                                                 |
@@ -111,15 +116,15 @@ git push heroku master
 | `DD_PYTHON_VERSION`        | *オプション。*バージョン `6.14.0` 以降の Datadog Agent には、Python バージョン `2` および `3` が付属しています。ビルドパックは、いずれかのバージョンのみを維持します。この変数を `2` または `3` に設定して、Agent が維持する Python バージョンを選択してください。設定しない場合、ビルドパックは `2` を維持します。詳細については、[Python バージョンのセクション](#python-and-agent-versions)を確認してください。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイルのセクション](#upgrading-and-slug-recompilation)を確認してください。 |
 | `DD_HEROKU_CONF_FOLDER`    | *オプション。* デフォルトで、ビルドパックは含めたいコンフィギュレーションファイルのためにアプリケーションのルートでファイル `/datadog` を探します (例: [prerun.sh script](#prerun-script))。このロケーションは、これを希望のパスに設定することで上書きできます。 |
 
-その他のドキュメントについては、[Datadog Agent ドキュメント][7]を参照してください。
+その他のドキュメントについては、[Datadog Agent のドキュメント][12]を参照してください。
 
 ## ホスト名
 
 Heroku dyno はエフェメラルです。新しいコードのデプロイ、構成に対する変更、リソースの必要性/可用性の変化などが発生した場合はいつでも 、dyno を別のホストマシンに移動できます。Heroku はこれによって高い柔軟性と応答性を実現していますが、Datadog に報告されるホスト数が非常に多くなる可能性があります。Datadog の課金はホスト単位で行われ、ビルドパックのデフォルトでは実際のホスト数が報告されるため、コストが予想以上に高額になる可能性があります。
 
-使用状況によっては、ホスト名を設定してホストを集約し、報告される数を減らしたい場合があります。このような場合は、`DD_DYNO_HOST` を `true` に設定します。これにより、Agent は、アプリケーション名と dyno 名を組み合わせたもの (例: `appname.web.1`、`appname.run.1234`) をホスト名として報告するようになり、ホスト数が dyno の使用状況とほぼ一致します。この欠点の 1 つは、dyno が再利用されるたびにメトリクスの連続性エラーが発生することです。
+使用状況によっては、ホスト名を設定してホストを集約し、報告される数を減らしたい場合があります。このような場合は、`DD_DYNO_HOST` を `true` に設定します。これにより、Agent は、アプリケーション名と dyno 名を組み合わせたもの (`appname.web.1`、`appname.run.1234` など) をホスト名として報告するようになり、ホスト数が dyno の使用状況とほぼ一致します。この欠点の 1 つは、dyno が再利用されるたびにメトリクスの連続性エラーが発生することです。
 
-これを適切に機能させるには、`HEROKU_APP_NAME` を設定する必要がありますが、その最も簡単な方法は、[dyno メタデータの有効化][8]です。プライベート空間では、dyno メタデータはまだ使用できないことを考慮してください。この場合、`HEROKU_APP_NAME` を手動で設定する必要があります。
+これを適切に機能させるには、`HEROKU_APP_NAME` を設定する必要がありますが、その最も簡単な方法は、[dyno メタデータの有効化][13]です。**注**: プライベート空間では dyno メタデータはまだ使用できません。この場合、`HEROKU_APP_NAME` を手動で設定する必要があります。
 
 ## システムメトリクス 
 
@@ -127,9 +132,9 @@ Heroku dyno はエフェメラルです。新しいコードのデプロイ、�
 
 dyno のシステムメトリクスを収集するには、以下を行う必要があります。
 
-1. [Heroku Labs: log-runtime-metrics][9] を有効にします。
-2. [Datadog ログドレイン][10]を使用して、Heroku Logplex からメトリクスログを収集し、Datadog に転送します。
-3. 収集されたログに対して[ログベースのメトリクス][11]を生成します。
+1. [Heroku Labs: log-runtime-metrics][14] を有効にします。
+2. [Datadog ログドレイン][15]を使用して、Heroku Logplex からメトリクスログを収集し、Datadog に転送します。
+3. 収集されたログに対して[ログベースのメトリクス][16]を生成します。
 
 ## ファイルの場所
 
@@ -139,9 +144,9 @@ dyno のシステムメトリクスを収集するには、以下を行う必要
 
 ## インテグレーションの有効化
 
-[Datadog-<INTEGRATION_NAME> インテグレーション][12]を有効にするには、アプリケーション内に Datadog のコンフィギュレーションフォルダーにファイルを作成します。dyno 起動時、この YAML ファイルは該当する Datadog Agent コンフィギュレーションディレクトリにコピーされます。
+[Datadog-<INTEGRATION_NAME> インテグレーション][17]を有効にするには、アプリケーション内に Datadog のコンフィギュレーションフォルダーにファイルを作成します。dyno 起動時、この YAML ファイルは該当する Datadog Agent コンフィギュレーションディレクトリにコピーされます。
 
-たとえば、[Datadog-Redis インテグレーション][13]を有効にする場合、アプリケーションのルートにファイル `/datadog/conf.d/redisdb.yaml` (この[コンフィギュレーションオプション](#configuration) を変更した場合は `/$DD_HEROKU_CONF_FOLDER/conf.d/redisdb.yaml`) を追加します。
+たとえば、[Datadog-Redis インテグレーション][18]を有効にする場合、アプリケーションのルートにファイル `/datadog/conf.d/redisdb.yaml` (この[コンフィギュレーションオプション](#configuration) を変更した場合は `/$DD_HEROKU_CONF_FOLDER/conf.d/redisdb.yaml`) を追加します。
 
 ```yaml
 init_config:
@@ -159,15 +164,15 @@ instances:
     port: 6379
 ```
 
-**注**: 使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [redisdb.d/conf.yaml][14] を参照してください。
+**注**: 使用可能なすべての構成オプションの詳細については、サンプル [redisdb.d/conf.yaml][19] を参照してください。
 
-有効にするインテグレーションが[コミュニティインテグレーション][15]の一部である場合は、[事前実行スクリプト](#prerun-script)の一部としてパッケージもインストールする必要があります。
+有効にするインテグレーションが[コミュニティインテグレーション][20]の一部である場合は、[事前実行スクリプト](#prerun-script)の一部としてパッケージをインストールします。
 
 ```
 agent-wrapper integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-たとえば [Ping インテグレーション][16]をインストールするには、コンフィギュレーションファイル `datadog/conf.d/ping.yaml` を作成し、以下の行を事前実行スクリプトに追加します。
+たとえば [Ping インテグレーション][21]をインストールするには、コンフィギュレーションファイル `datadog/conf.d/ping.yaml` を作成し、以下の行を事前実行スクリプトに追加します。
 
 ```
 agent-wrapper integration install -t datadog-ping==1.0.0
@@ -226,7 +231,7 @@ heroku config:add DD_LOG_LEVEL=ERROR
 
 ## デバッグ作業
 
-[Agent のドキュメント][17]にリストされている情報/デバッグコマンドのいずれかを実行するには、`agent-wrapper` コマンドを使用します。
+[Agent のドキュメント][22]にリストされている情報/デバッグコマンドのいずれかを実行するには、`agent-wrapper` コマンドを使用します。
 
 たとえば、Datadog Agent と有効なインテグレーションのステータスを表示するには、以下を実行します。
 
@@ -242,31 +247,39 @@ Agent v7 には、Python バージョン `3` のみが付属しています。�
 
 ## Heroku ログの収集
 
-Datadog ビルドパックは、Heroku プラットフォームからログを収集しません。Heroku のログ収集を設定するには、[専用ガイド][9]をご覧ください。
+Datadog ビルドパックは、Heroku プラットフォームからログを収集しません。Heroku のログ収集を設定するには、[専用ガイド][15]をご覧ください。
 
 ## Docker イメージと共に Heroku を使用する
 
-このビルドパックは、[Heroku の Slug Compiler][18] を使用する Heroku のデプロイメントにのみ利用できます。Docker コンテナを使用して Heroku にアプリケーションをデプロイするには、 Datadog Agent を Docker イメージの一部として追加し、Agent をコンテナ内の異なるプロセスとして起動する必要があります。
+このビルドパックは、[Heroku の Slug Compiler][23] を使用する Heroku のデプロイメントにのみ利用できます。Docker コンテナを使用して Heroku にアプリケーションをデプロイするには、 Datadog Agent を Docker イメージの一部として追加し、Agent をコンテナ内の異なるプロセスとして起動します。
 
-たとえば、Debian ベースの OS を使用して Docker イメージをビルドする場合、以下の行を `Dockerfile` に追加する必要があります。
+たとえば、Debian ベースの OS を使用して Docker イメージをビルドする場合は、以下の行を `Dockerfile` に追加します。
 
 ```
 # GPG 依存関係をインストール
 RUN apt-get update \
- && apt-get install -y gpg apt-transport-https gpg-agent curl ca-certificates
+ && apt-get install -y gnupg apt-transport-https gpg-agent curl ca-certificates
 
-# Datadog レポジトリと署名キーを追加
-RUN sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+# Datadog リポジトリおよび署名キーを追加
+ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
+ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
+RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+RUN touch ${DATADOG_APT_KEYRING}
+RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
+RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_F14F620E.public
+RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_382E94DE.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_382E94DE.public
+
 
 # Datadog Agent をインストール
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
-# entrypoint をコピー
+# エンドポイントをコピー
 COPY entrypoint.sh /
 
-# DogStatsD と trace-agent ポートを公開
+# DogStatsD および trace-agent ポートを公開
 EXPOSE 8125/udp 8126/tcp
 
 # Datadog コンフィギュレーションをコピー
@@ -285,17 +298,127 @@ datadog-agent run &
 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml
 ```
 
-Docker イメージに関する詳細については、[Datadog Agent の Docker ファイル][19]を参照してください。
+Docker イメージに関する詳細については、[Datadog Agent の Docker ファイル][24]を参照してください。
 
 ## 寄稿
 
-[Heroku-buildpack-datadog リポジトリ][21]で問題またはプルリクエストを投稿する方法については、[ドキュメントの寄稿][20]を参照してください。
+[Heroku-buildpack-datadog リポジトリ][25]で問題またはプルリクエストを投稿する方法については、[ドキュメントの寄稿][26]を参照してください。
 
 ## 履歴
 
-このプロジェクトの以前のバージョンは、[miketheman heroku-buildpack-datadog プロジェクト][22]から分岐したものです。その後、Datadog の Agent バージョン 6 向けに書き換えが行われました。変更内容と詳細は、[changelog][23] にあります。
+このプロジェクトの以前のバージョンは、[miketheman heroku-buildpack-datadog プロジェクト][27]から分岐したものです。その後、Datadog の Agent バージョン 6 向けに書き換えが行われました。変更内容と詳細は、[changelog][28] にあります。
 
-## FAQ/トラブルシューティング
+## トラブルシューティング
+
+### Agent ステータスの取得
+
+ビルドパックをセットアップ済みで、期待するデータの一部を Datadog で取得していない場合、Datadog Agent にステータスコマンドを実行して原因を探ることができます。
+
+```shell
+# Heroku アプリケーション名を環境変数としてエクスポート
+export APPNAME=your-application-name
+
+heroku ps:exec -a $APPNAME
+
+# 認証情報を確立中... 完了
+#  ⬢ ruby-heroku-datadog で web.1 に接続中...
+# DD_API_KEY 環境変数が設定されていません。実行: heroku config:add DD_API_KEY=<your API key>
+# Datadog Agent が無効です。DISABLE_DATADOG_AGENT を未設定にするか、不足している環境変数を設定します。
+
+~ $
+```
+
+DD_API_KEY が設定されていないという警告は無視できます。[Heroku では SSH セッション自体のコンフィギュレーション変数は設定されません](https://devcenter.heroku.com/articles/exec#environment-variables)が、Datadog Agent プロセスによりアクセス可能です。
+
+SSH セッション内で Datadog ステータスコマンドを実行します。
+
+```shell
+~ $ agent-wrapper status
+
+Getting the status from the agent.
+
+===============
+Agent (v7.27.0)
+===============
+
+[...]
+
+```
+
+試行するデバッグに基づき、重点を置くべきセクションをハイライトします。
+
+#### Datadog でデータを取得していない
+
+`status` コマンドが正常に実行していることと、出力のこのセクションに、使用している API キーが有効であると表示されることを確認します。
+
+```
+  API Keys status
+  ===============
+    API key ending with 68306: API Key valid
+```
+
+#### インテグレーションのチェック
+
+有効にしたインテグレーションが正常に実行されていることを確認するには、`Collector` セクションに注目し、チェックが正常に実行されていることを確認します。
+
+```
+=========
+Collector
+=========
+
+  Running Checks
+  ==============
+
+[...]
+    postgres (5.4.0)
+    ----------------
+      Instance ID: postgres:e07ef94b907fe733 [OK]
+      Configuration Source: file:/app/.apt/etc/datadog-agent/conf.d/postgres.d/conf.yaml
+      Total Runs: 4,282
+      Metric Samples: Last Run: 15, Total: 64,230
+      Events: Last Run: 0, Total: 0
+      Service Checks: Last Run: 1, Total: 4,282
+      Average Execution Time : 43ms
+      Last Execution Date : 2021-05-13 08:15:46 UTC (1620893746000)
+      Last Successful Execution Date : 2021-05-13 08:15:46 UTC (1620893746000)
+      metadata:
+        version.major: 13
+        version.minor: 2
+        version.patch: 0
+        version.raw: 13.2 (Ubuntu 13.2-1.pgdg20.04+1)
+        version.scheme: semver
+```
+
+#### APM Agent の確認
+
+APM にアプリケーションをインスツルメントし、Datadog でトレースを取得していない場合は、APM Agent が正常に実行しトレースを収集していることを確認します。
+
+```
+[...]
+=========
+APM Agent
+=========
+  Status: Running
+  Pid: 63
+  Uptime: 64702 seconds
+  Mem alloc: 10,331,128 bytes
+  Hostname: ruby-heroku-datadog.web.1
+  Receiver: localhost:8126
+  Endpoints:
+    https://trace.agent.datadoghq.com
+
+  Receiver (previous minute)
+  ==========================
+    From ruby 2.6.6 (ruby-x86_64-linux), client 0.48.0
+      Traces received: 11 (14,181 bytes)
+      Spans received: 33
+
+    Default priority sampling rate: 100.0%
+    Priority sampling rate for 'service:ruby-heroku-datadog,env:': 100.0%
+    Priority sampling rate for 'service:ruby-heroku-datadog,env:development': 100.0%
+
+[...]
+```
 
 ### Datadog から報告される Agent 数が dynos 数を超えています
 
@@ -303,28 +426,33 @@ Docker イメージに関する詳細については、[Datadog Agent の Docker
 
 ### ビルドパックまたは Agent をアップグレードした後、Agent が起動時にエラーをレポートしている
 
-ビルドパックまたは Agent のアップグレード後は、ビルドキャッシュをクリアし、アプリケーションのスラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイルのセクション](#upgrading-and-slug-recompilation)を確認してください。
+ビルドパックまたは Agent のアップグレード後は、アプリケーションのスラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイルのセクション](#upgrading-and-slug-recompilation)を確認してください。
 
 [1]: https://devcenter.heroku.com/articles/buildpacks
 [2]: https://docs.datadoghq.com/ja/libraries
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/DataDog/heroku-buildpack-datadog/releases
-[5]: https://docs.datadoghq.com/ja/tagging/
-[6]: https://docs.datadoghq.com/ja/dashboards/guide/how-to-graph-percentiles-in-datadog/
-[7]: https://docs.datadoghq.com/ja/agent
-[8]: https://devcenter.heroku.com/articles/dyno-metadata
-[9]: https://devcenter.heroku.com/articles/log-runtime-metrics
-[10]: https://docs.datadoghq.com/ja/logs/guide/collect-heroku-logs
-[11]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
-[12]: https://docs.datadoghq.com/ja/integrations/
-[13]: https://docs.datadoghq.com/ja/integrations/redisdb/
-[14]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[15]: https://github.com/DataDog/integrations-extras/
-[16]: https://github.com/DataDog/integrations-extras/tree/master/ping
-[17]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[18]: https://devcenter.heroku.com/articles/slug-compiler
-[19]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
-[20]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
-[21]: https://github.com/DataDog/heroku-buildpack-datadog
-[22]: https://github.com/miketheman/heroku-buildpack-datadog
-[23]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[4]: https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app#viewing-buildpacks
+[5]: https://github.com/heroku/heroku-buildpack-apt
+[6]: https://github.com/jontewks/puppeteer-heroku-buildpack
+[7]: https://github.com/lstoll/heroku-buildpack-monorepo
+[8]: https://github.com/DataDog/heroku-buildpack-datadog/releases
+[9]: https://app.datadoghq.com/account/settings#api
+[10]: https://docs.datadoghq.com/ja/tagging/
+[11]: https://docs.datadoghq.com/ja/dashboards/guide/how-to-graph-percentiles-in-datadog/
+[12]: https://docs.datadoghq.com/ja/agent
+[13]: https://devcenter.heroku.com/articles/dyno-metadata
+[14]: https://devcenter.heroku.com/articles/log-runtime-metrics
+[15]: https://docs.datadoghq.com/ja/logs/guide/collect-heroku-logs
+[16]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
+[17]: https://docs.datadoghq.com/ja/integrations/
+[18]: https://docs.datadoghq.com/ja/integrations/redisdb/
+[19]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
+[20]: https://github.com/DataDog/integrations-extras/
+[21]: https://github.com/DataDog/integrations-extras/tree/master/ping
+[22]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[23]: https://devcenter.heroku.com/articles/slug-compiler
+[24]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
+[25]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
+[26]: https://github.com/DataDog/heroku-buildpack-datadog
+[27]: https://github.com/miketheman/heroku-buildpack-datadog
+[28]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md

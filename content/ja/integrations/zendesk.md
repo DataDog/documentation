@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/zendesk/'
 draft: false
 git_integration_title: zendesk
 has_logo: true
+integration_id: zendesk
 integration_title: Zendesk
 is_public: true
 kind: インテグレーション
@@ -52,7 +53,7 @@ Zendesk と統合して、以下のことができます。
 4. 上の手順 5 で受け取った Zendesk API トークンを入力します。
 5. Install Integration ボタンをクリックします。
 
-### Zendesk トリガーを使用してログを転送
+### トリガーを使用してログを転送
 
 Zendesk 管理者は、Datadog Log の [HTTP エンドポイント][3]および Zendesk トリガーを利用して、任意の JSON ペイロードを Datadog に送信できます。
 
@@ -111,7 +112,7 @@ Zendesk インテグレーションには、サービスのチェック機能は
 
 ### ナレッジベース
 
-#### Zendesk チケット
+#### チケットを作成
 
 新しい Zendesk チケットを作成してグループに割り当てることができます。まず、Datadog の [Zendesk インテグレーションタイル][2]でグループ名を追加し、次に Datadog モニターやアノテーションで `@zendesk-group-name` と入力します。たとえば、チケットを作成して _Support_ という Zendesk グループに割り当てるには、グループを追加して `@zendesk-support` と入力します。
 

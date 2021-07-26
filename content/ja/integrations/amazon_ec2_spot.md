@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/amazon_ec2_spot/'
 draft: false
 git_integration_title: amazon_ec2_spot
 has_logo: true
+integration_id: amazon-ec2-spot
 integration_title: Amazon EC2 スポット
 is_public: true
 kind: インテグレーション

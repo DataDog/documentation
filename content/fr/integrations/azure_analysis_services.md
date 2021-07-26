@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_analysis_services/'
 draft: false
 git_integration_title: azure_analysis_services
 has_logo: true
+integration_id: azure-analysisservices
 integration_title: Microsoft Azure Analysis Services
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Analysis Services est une plateforme entièrement gérée en tant que serv
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Analysis Services.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

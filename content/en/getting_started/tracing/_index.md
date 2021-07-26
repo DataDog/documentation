@@ -96,7 +96,7 @@ For the latest versions of Agent v6 and v7, APM is enabled by default. You can s
 
 ```yaml
 # apm_config:
-#   Whether or not the APM Agent should run
+##   Whether or not the APM Agent should run
 #   enabled: true
 ```
 

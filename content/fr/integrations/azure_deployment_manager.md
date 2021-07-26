@@ -13,6 +13,7 @@ further_reading:
     text: Versions Canary avec Azure Deployment Manager et Datadog
 git_integration_title: azure_deployment_manager
 has_logo: true
+integration_id: ''
 integration_title: Microsoft Azure Deployment Manager
 is_public: true
 kind: integration

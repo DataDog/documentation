@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /logs/languages/java
 further_reading:
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/explorer/"
@@ -326,7 +326,7 @@ Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another 
 
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
-[2]: http://logback.qos.ch/translator
+[2]: http://logback.qos.ch/translator/
 {{% /tab %}}
 
 {{% tab "Log4j 2" %}}
@@ -518,8 +518,8 @@ To generate this JSON:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /logs/processing/parsing/
+[2]: /logs/log_configuration/parsing
 [3]: /tracing/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[6]: /logs/processing/parsing/#key-value-or-logfmt
+[6]: /logs/log_configuration/parsing/#key-value-or-logfmt

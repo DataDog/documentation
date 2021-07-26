@@ -105,7 +105,7 @@ function doWork(parent) {
 }
 ```
 
-### Configuration Options
+### Configuration options
 
 The Datadog Agent URL and span tag values can be configured if necessary or desired based upon your environment and Agent location.
 
@@ -148,7 +148,7 @@ new DatadogExporter({
 
 Tags that are set directly on individual spans supersede conflicting tags defined at the application level.
 
-### OpenTelemetry Links
+### OpenTelemetry links
 
 - See [npm][2] or [github][3] for more OpenTelemetry NodeJS Datadog Exporter usage.
 

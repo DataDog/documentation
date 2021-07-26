@@ -5,7 +5,7 @@ guides:
     link_text: ガイドを表示
     link: getting_started/agent/
   - title: インテグレーションをセットアップ
-    desc: 400 以上のインテグレーションを利用して、メトリクス、トレース、ログを収集できます。
+    desc: 450 以上のインテグレーションを利用して、メトリクス、トレース、ログを収集できます。
     link_text: ガイドを表示
     link: getting_started/integrations/
   - title: アプリで使用を開始
@@ -31,7 +31,7 @@ nav_sections:
           - title: インフラストラクチャー
             link: infrastructure/
             icon: host-map.svg
-            desc: ホスト、コンテナ、プロセス、サーバーレス機能の追跡
+            desc: ホスト、コンテナ、プロセス、サーバーレス機能を追跡
           - title: メトリクス
             link: metrics/
             icon: metric.svg
@@ -40,7 +40,7 @@ nav_sections:
             link: monitors/
             icon: attention-circled.svg
             desc: モニターおよび通知の作成と管理
-          - title: APM と分散型トレーシング
+          - title: APM & Continuous Profiler
             link: tracing/
             icon: trace.svg
             desc: アプリケーションのパフォーマンスを詳しく理解
@@ -48,8 +48,8 @@ nav_sections:
             link: logs/
             icon: logs.svg
             desc: ログの収集、処理、確認、監視、アーカイブ
-          - title: セキュリティ & コンプライアンス
-            link: security_monitoring/
+          - title: セキュリティプラットフォーム
+            link: security_platform/
             icon: siem.svg
             desc: アプリケーションとインフラストラクチャー全体の脅威と構成ミスを検出する
           - title: Synthetic モニタリング
@@ -58,10 +58,10 @@ nav_sections:
             desc: アプリケーションの稼働時間確保、局所的な問題の特定、パフォーマンスの追跡
           - title: リアルユーザーモニタリング
             link: real_user_monitoring/
-            icon: rum.svg
+            icon: rum-2.svg
             desc: フロントエンドアプリケーションのパフォーマンスを視覚化して分析します
           - title: ネットワークモニタリング
-            link: network_performance_monitoring/
+            link: network_monitoring/
             icon: network.svg
             desc: タグ付きオブジェクトを使用してネットワークトラフィックを可視化する
           - title: サーバーレス
@@ -76,6 +76,10 @@ nav_sections:
             link: watchdog/
             icon: watchdog.svg
             desc: アプリケーションとインフラストラクチャーメトリクスの傾向を自動的に確認する
+          - title: CI の可視性
+            link: continuous_integration/
+            icon: ci.svg
+            desc: テストとパイプラインのパフォーマンスと信頼性を追跡
   - nav_section:
       - name: コンフィギュレーション
       - navtiles:
@@ -91,7 +95,7 @@ nav_sections:
             link: security/
             icon: lock.svg
             desc: Datadog のデータ保護方法について
-          - title: 開発ツール
+          - title: 開発者
             link: developers/
             icon: wrench.svg
             desc: Datadog プラットフォームの開発

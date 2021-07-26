@@ -11,8 +11,6 @@ source: gcp
 title: GCP Pub/Sub サブスクライバーの変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 GCP Pub/Sub サブスクリプションへの変更があったことを検出します。これにより監査ログが Datadog に送信されなくなる可能性があります。
 

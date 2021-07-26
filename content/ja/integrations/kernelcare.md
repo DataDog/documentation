@@ -8,20 +8,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - セキュリティ
+  - security
   - OS & システム
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md'
 display_name: KernelCare
-draft: true
+draft: false
 git_integration_title: kernelcare
 guid: 8b35942d-40cd-4c86-b584-af1837ea67ca
 integration_id: kernelcare
 integration_title: KernelCare
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: schvaliuk@cloudlinux.com
 manifest_version: 1.0.0
 metric_prefix: kernelcare.

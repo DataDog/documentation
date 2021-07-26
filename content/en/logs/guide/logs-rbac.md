@@ -1,9 +1,12 @@
 ---
-title: How to set up Logs RBAC
+title: How to set up RBAC for Logs
 aliases:
   - /logs/guide/restrict-access-to-log-events-with-restriction-queries
 kind: guide
 further_reading:
+- link: "/logs/guide/logs-rbac-permissions/"
+  tag: "Documentation"
+  text: "Learn more about RBAC permissions for Logs"
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Log Explorer"
@@ -13,9 +16,6 @@ further_reading:
 - link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Explore Live Tail"
-- link: "/logs/logs_to_metrics/"
-  tag: "Documentation"
-  text: "Learn how to generate metrics from ingested logs"
 ---
 
 ## Overview
@@ -398,7 +398,7 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 [10]: /account_management/api-app-keys/
 [11]: /api/v2/roles/#list-permissions
 [12]: /account_management/rbac/permissions?tab=ui#logs_read_data
-[13]: /logs/processing/pipelines/
+[13]: /logs/log_configuration/pipelines
 [14]: /account_management/rbac/permissions?tab=ui#logs_write_processors
 [15]: /logs/indexes/
 [16]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters

@@ -12,8 +12,6 @@ technique: T1110-brute-force
 title: Auth0 ユーザーへの総当たり攻撃
 type: security_rules
 ---
-## 概要
-
 ## **目的:**
 ユーザーへの総当たり攻撃を検出。
 

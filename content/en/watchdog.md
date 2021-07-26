@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM performances and infrastructure metrics that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in:
+Watchdog is an algorithmic feature for APM performances and infrastructure metrics that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
 
 * APM metrics:
   * Hits (request rate)
@@ -38,7 +38,7 @@ Watchdog is an algorithmic feature for APM performances and infrastructure metri
   * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
   * [Alerting][10]
 
-Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][11] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
+Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][11] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence. The minimum amount of data needed to see irregularities depends on the anomaly you are looking at and can range from four days to two weeks. 
 
 ## Root Cause Analysis for APM (beta)
 
@@ -52,7 +52,7 @@ Watchdog can group related data together, draw connections between groups, and p
 
 Watchdog considers the relationships between the following types of signals:
 
-* APM error rate latency and hit rate increases 
+* APM error rate, latency, and hit rate increases 
 * New deployments with APM service version changes
 * APM error traces
 * Introduction of new APM resources 

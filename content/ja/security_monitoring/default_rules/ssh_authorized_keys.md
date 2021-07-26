@@ -13,8 +13,6 @@ source: ファイル整合性モニタリング
 title: 修正された SSH 認証キーの変更
 type: security_rules
 ---
-## 概要
-
 ## 目標
 認証済みの SSH キーへの変更を検出します。
 

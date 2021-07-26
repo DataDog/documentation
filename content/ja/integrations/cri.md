@@ -110,7 +110,7 @@ CRI には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.example
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
 [4]: https://docs.datadoghq.com/ja/help/

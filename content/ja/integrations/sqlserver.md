@@ -2,7 +2,9 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    SQLServer-Overview: assets/dashboards/SQLServer-Overview_dashboard.json
+    sqlserver: assets/dashboards/sqlserver_dashboard.json
   logs:
     source: sqlserver
   metrics_metadata: metadata.csv
@@ -203,16 +205,11 @@ SQL Server チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**sqlserver.can_connect**:<br>
-Agent が SQL Server に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
-
-## 開発
-
-Agent ベースのインテグレーションのテストおよび開発方法については、[メインドキュメント][6]を参照してください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
@@ -227,8 +224,8 @@ Agent ベースのインテグレーションのテストおよび開発方法�
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://docs.datadoghq.com/ja/developers/integrations/
+[5]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/service_checks.json
+[6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
 [8]: https://www.datadoghq.com/blog/sql-server-monitoring
 [9]: https://www.datadoghq.com/blog/sql-server-monitoring-tools

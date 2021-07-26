@@ -17,32 +17,35 @@ Metrics starting with:
 * `synthetics.dns.*` come from your API [DNS tests][4]
 * `synthetics.ssl.*` come from your API [SSL tests][5]
 
-### Browser Tests
+### Browser tests
 
 {{< get-metrics-from-git "synthetics" "synthetics.browser" >}}
 
-### API Tests
+### API tests
 
 {{< get-metrics-from-git "synthetics" "synthetics.api" >}}
 
-#### HTTP Tests
+#### HTTP tests
 
 {{< get-metrics-from-git "synthetics" "synthetics.http" >}}
 
-#### TCP Tests
+#### TCP tests
 
 {{< get-metrics-from-git "synthetics" "synthetics.tcp" >}}
 
-#### DNS Tests
+#### DNS tests
 
 {{< get-metrics-from-git "synthetics" "synthetics.dns" >}}
 
-#### SSL Tests
+#### SSL tests
 
 {{< get-metrics-from-git "synthetics" "synthetics.ssl" >}}
+
+For more information on API test timings, read the guide to [API Test Timings and Variations][6]. 
 
 [1]: /synthetics/browser_tests/
 [2]: /synthetics/api_tests/?tab=httptest
 [3]: /synthetics/api_tests/?tab=tcptest
 [4]: /synthetics/api_tests/?tab=dnstest
 [5]: /synthetics/api_tests/?tab=ssltest
+[6]: /synthetics/guide/api_test_timing_variations/

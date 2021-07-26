@@ -1,7 +1,7 @@
 ---
 title: Facettes de log
 kind: documentation
-description: Facettes de log et volet Facette
+description: Facettes de log et volet des facettes
 aliases:
   - /fr/logs/facets
 further_reading:
@@ -28,11 +28,12 @@ Les facettes sont des tags et des attributs définis par les utilisateurs à par
 - [Définir des patterns de logs][2]
 - [Réaliser des analyses de logs][3]
 
-Grâce aux facettes, vous pouvez également manipuler vos logs dans vos [monitors de log][4], dans les widgets de logs des [dashboards][5] ainsi que dans les [notebooks][6].
+Grâce aux facettes, vous pouvez également manipuler vos logs dans vos [log monitors][4], dans les widgets de logs des [dashboards][5] ainsi que dans les [notebooks][6].
 
 **Remarque** : le [traitement des logs][7], la [recherche pour le live tailing][8], la transmission d'[archives][9], la réintégration ou la [création de métriques][10] à partir de logs ne nécessitent pas l'utilisation de facettes. De même, vous n'avez pas besoin de définir une facette pour transmettre des logs par l'intermédiaire des [pipelines][11] et des [index][12] via des filtres, ou pour exclure des logs d'un index ou les échantillonner avec [des filtres d'exclusion][13]. Pour ces cas d'utilisation, les fonctionnalités de remplissage automatique reposent sur des facettes existantes. Cependant, vous pouvez également saisir des valeurs correspondant aux logs entrants.
 
-### Facettes qualitatives : les dimensions
+### Facettes qualitatives
+#### Dimensions
 
 Les dimensions vous permettent d'accomplir les tâches suivantes :
 
@@ -40,11 +41,12 @@ Les dimensions vous permettent d'accomplir les tâches suivantes :
 - **Obtenir des informations relatives** pour certaines valeurs. Vous pouvez par exemple créer une facette sur `http.network.client.geoip.country.iso_code` pour visualiser les principaux pays concernés par chaque erreur 5XX dans vos logs d'accès Web [NGINX][15], en bénéficiant d'informations supplémentaires fournies par le [processeur GeoIP][16] Datadog.
 - **Compter des valeurs uniques**. Vous pouvez par exemple créer une facette sur `user.email` à partir de vos logs [Kong][17] afin de déterminer le nombre d'utilisateurs se connectant chaque jour à votre site Web.
 
-#### Types {#types-facettes-qualitatives}
+#### Types
 
 Les facettes qualitatives peuvent être des chaînes ou des nombres (entiers). Une dimension de type « string » fonctionnera peu importe votre utilisation. Cependant, les dimensions de type « integer » vous permettent de bénéficier d'une fonctionnalité supplémentaire, à savoir les filtres de plage. Par exemple, `http.status_code:[200 TO 299]` est une requête valide s'appliquant à une dimension de type « integer ». Consultez la [syntaxe de recherche][1] pour en savoir plus.
 
-### Facettes quantitatives : les mesures
+### Facettes quantitatives
+#### Mesures
 
 Les mesures vous permettent d'accomplir les tâches suivantes :
 
@@ -52,20 +54,27 @@ Les mesures vous permettent d'accomplir les tâches suivantes :
 - **Appliquer un filtre de plage** à vos logs. Vous pouvez par exemple créer une mesure sur le temps d'exécution des tâches [Ansible][19] et visualiser la liste des serveurs qui possèdent le plus d'exécutions dépassant la barre des 10 secondes.
 - **Trier des logs** par rapport à une valeur. Vous pouvez par exemple créer une mesure sur le montant des paiements réalisés via votre microservice [Python][20], puis effectuer une recherche dans l'ensemble de logs, en commençant par celui comportant le montant le plus élevé.
 
-#### Types{#types-facettes-quantitatives}
+#### Types
 
 Les mesures disposent d'un nombre entier (long) ou d'une double valeur. Ces deux types de valeurs proposent des fonctionnalités équivalentes.
 
 #### Unités
 
-Les mesures ont une unité (le temps est exprimé en `seconds` ou les tailles en `bytes`) afin de faciliter la gestion des ordres de grandeur au moment de la requête et de l'affichage. L'unité est une propriété de la mesure, et non du champ. Imaginons par exemple une mesure `duration` exprimée en nanosecondes. Vous disposez de logs du service `service:A`, pour lesquels `duration:1000` désigne une durée de 1 000 millisecondes, et d'autres logs du service `service:B`, pour lesquels `duration:500` désigne une durée de 500 microsecondes :
+Les mesures ont une unité de **temps** ou de **taille** afin de gérer les ordres de grandeur au moment de la requête et de l'affichage.
+
+| type        | unité(s)                                                                                                                                                                                                                                                                                                                    |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| OCTETS       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
+| DURÉE        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
+
+L'unité est une propriété de la mesure, et non du champ. Imaginons par exemple une mesure `duration` exprimée en nanosecondes. Vous disposez de logs du service `service:A`, pour lesquels `duration:1000` désigne une durée de 1 000 millisecondes, et d'autres logs du service `service:B`, pour lesquels `duration:500` désigne une durée de 500 microsecondes :
 
 1. Grâce au [processeur arithmétique][21], vous pouvez faire en sorte que les durées de tous vos logs entrants soient exprimées en nanosecondes. Pour ce faire, appliquez le multiplicateur `*1000000` aux logs de `service:A` et le multiplicateur `*1000` aux logs de `service:B`.
 2. Appliquez le filtre `duration:>20ms` (voir la [syntaxe de recherche][1] pour en savoir plus) pour interroger systématiquement les logs des deux services à la fois et pour afficher un résultat agrégé ayant pour valeur maximale `1 min`.
 
-## Volet de facette
+## Volet des facettes
 
-La barre de recherche fournit un grand nombre de fonctionnalités interactives vous permettant de plonger au cœur de vos données. Toutefois, dans la plupart des situations, il est plus simple d'utiliser le volet de facette pour parcourir vos données. Ouvrez une facette pour consulter une synthèse de son contenu en fonction de la portée de la requête actuellement appliquée.
+La barre de recherche fournit un grand nombre de fonctionnalités interactives vous permettant de plonger au cœur de vos données. Toutefois, dans la plupart des situations, il est plus simple d'utiliser le volet des facettes pour parcourir vos données. Ouvrez une facette pour consulter une synthèse de son contenu en fonction de la portée de la requête actuellement appliquée.
 
 L'interface des **facettes (qualitatives)** propose une top list des valeurs uniques et indique le nombre de logs correspondant à chacune de ces valeurs :
 
@@ -123,7 +132,7 @@ Lorsqu'une facette avec alias figure dans votre liste de facettes, nous vous con
 
 Si vous cherchez à diagnostiquer une erreur en étudiant l'ancien contenu (avant que votre organisation n'ait appliqué un alias à votre facette), il peut être pertinent de conserver la version _avec alias_ de la facette.
 
-## Gérer des facettes
+## Gérer les facettes
 
 ### Facettes par défaut
 
@@ -131,7 +140,7 @@ La plupart des facettes courantes fournies par défaut, telles que `Host`, `Serv
 
 Vous pouvez accéder par défaut aux facettes sur les [attributs réservés][23] ainsi que sur la plupart des [attributs standard][24].
 
-### Les facettes d'index
+### Facette d'index
 
 Les facettes d'index sont des facettes particulières qui sont uniquement accessibles lorsque votre organisation dispose de [plusieurs index][25] ou si vous possédez des [vues historiques][26] actives. Ces facettes vous permettent de filtrer votre requête sur un sous-ensemble d'index.
 
@@ -141,9 +150,9 @@ Les facettes d'index sont des facettes particulières qui sont uniquement access
 
 À titre de bonne pratique, essayez toujours d'utiliser une facette existante, plutôt que d'en créer une (voir la section [Alias de facettes](#alias-de-facettes)). En utilisant une seule facette pour des informations similaires, vous favorisez la collaboration entre les différentes équipes.
 
-**Remarque** : une fois votre facette créée, elle récupère **tous les nouveaux logs** transmis à **l'un** des index.
+**Remarque** : une fois votre facette créée, elle récupère **tous les nouveaux logs** transmis à **l'un** des index. Pour une utilisation optimale de la solution Log Management, Datadog recommande d'utiliser au maximum 1 000 facettes.
 
-#### Depuis le volet latéral des logs
+#### Volet latéral des logs
 
 La solution la plus simple pour créer une facette consiste à utiliser le volet latéral des logs. En effet, la plupart des informations sur la facette, telles que le nom du champ ou le type sous-jacent des données, sont automatiquement remplies. Il vous suffit simplement de vérifier la véracité de ces informations. Depuis la [vue Log Explorer][1], accédez au log de votre choix qui comporte le champ sur lequel vous souhaitez créer une facette. Ouvrez le volet latéral de ce log, cliquez sur le champ pertinent (dans les tags ou dans les attributs), puis créez votre facette :
 
@@ -152,7 +161,9 @@ La solution la plus simple pour créer une facette consiste à utiliser le volet
 
 {{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Créer une facette à partir d'un attribut" style="width:30%;">}}
 
-#### Depuis la liste des facettes
+**Remarque** : nous vous conseillons de ne pas utiliser plus de 1 000 facettes.
+
+#### Liste des facettes
 
 Si vous ne souhaitez ou ne pouvez pas rechercher un log spécifique, créez une facette directement depuis le volet des facettes, à l'aide du bouton _add facet_.
 
@@ -216,7 +227,7 @@ Ce type d'alias s'avère particulièrement utile pour gérer les logs transmis p
 [20]: /fr/integrations/python/
 [21]: /fr/logs/processing/processors/?tab=ui#arithmetic-processor
 [22]: /fr/logs/explorer/saved_views/
-[23]: /fr/logs/processing/#reserved-attributes
+[23]: /fr/logs/processing/attributes_naming_convention/#reserved-attributes
 [24]: /fr/logs/processing/attributes_naming_convention/
 [25]: /fr/logs/indexes/#indexes
 [26]: /fr/logs/archives/rehydrating/

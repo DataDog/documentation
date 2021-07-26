@@ -9,8 +9,6 @@ source: microsoft-365
 title: Microsoft 365 Teams アプリのインストール
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ユーザーが Microsoft 365 Teams にアプリをインストールしたことを検出します。
 

@@ -16,6 +16,8 @@ further_reading:
   text: "Learn how to generate metrics from ingested logs"
 ---
 
+{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
+
 ## Overview
 
 Cloud-based applications can generate logs at a rate of millions per minute. But because your logs are not all and equally valuable at any moment, Datadog [Logging without Limits™][1] provides flexibility by decoupling [log ingestion and indexing][2].

@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/slack/'
 draft: false
 git_integration_title: slack
 has_logo: true
+integration_id: ''
 integration_title: Slack
 is_public: true
 kind: インテグレーション
@@ -43,7 +44,7 @@ US リージョンの Datadog アプリをご使用の場合は、Slack ワー�
 
 **注**: [Slack App ディレクトリでの Slack インテグレーション][2]は、US リージョンの Datadog アプリケーションをご使用の場合のみ可能です。他のリージョンについては、[Slack Webhook][3] ドキュメントを参照してください。
 
-## Slack アプリの使用
+## 使用方法
 
 アプリがインストールされたら、Slack アプリをチャンネルに招待できます。
 
@@ -105,10 +106,47 @@ Slack アプリから送信されるようモニターを更新するには、�
 
 {{< img src="integrations/slack/incidents2.png" alt="Slack コンフィギュレーション" style="width:80%;">}}
 
+#### インシデントの更新チャンネル
+インシデントの更新チャンネルを使用すると、チームは Slack ワークスペースから、組織全体にすべてのインシデントのステータスを直接公開することができます。ワークスペースで、更新を投稿するチャンネルを選択すると、チャンネルでは以下の投稿を受信します。
+
+1. 新しく宣言されたインシデント。
+2. 重要度、ステータスの移行、インシデントコマンダーへの変更点。
+3. アプリ内の[インシデント][4]の概要ページへのリンク。
+4. 該当するインシデントの Slack チャンネルへの参加リンク。
+
+Slack アプリを[インストール][5]したら、Incident [Settings][6] ページに移動します。*Incident Updates Channel* セクションまでスクロールして、セットアップの手順を開始します。
+
+Slack アプリにログインしたら、インシデントの更新チャンネルとして動作するチャンネルを設定できます。
+
+**このチャンネルのセットアップ方法**:
+1. インシデント設定にアクセスします。
+2. *Incident Updates Channel* セクションに移動します。
+3. Slack ワークスペースと、インシデントの更新チャンネルとして使用する特定の Slack チャンネルを定義します。
+
+{{< img src="integrations/slack/incident_updates_channel.png" alt="インシデントの更新チャンネル" style="width:80%;">}}
+
+#### インシデントタスクの管理
+
+Slack アクションおよび `/datadog` Slack コマンドを使用することで、Slack から直接インシデントタスクを作成・管理できます。インシデントタスクのコマンドはインシデントチャンネルで使用する必要があります。
+
+**Slack アクション**: 
+Slack アクションを使用して、インシデントチャンネルで送信されたメッセージにマウスオーバーすることでタスクを作成できます。メッセージの右側に 3 点ドットが表示され、そこから「タスクをインシデントに追加」することができます。
+
+**利用可能なコマンド**:
+
+* `/datadog task` はインシデントのタスクを作成します。表示されるモーダル画面でタスクの説明の入力、チームメイトの割り当て、期限の設定を行うことができます。
+* `/datadog task list` はあるインシデントについて作成されたすべてのタスクのリストを表示します。このリストを利用してタスクを完了としてマークしたり、再開したりすることができます。
+
+作成されたすべてのタスクは  [Incidents UI][4] の「Incident Tasks」 下の「Remediation」タブに表示され、管理することができます。詳しくは[ドキュメント][7]を参照してください。
+
 
 [1]: https://app.datadoghq.com/account/settings#integrations/slack
 [2]: https://www.datadoghq.com/blog/datadog-slack-app/
 [3]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackwebhookeu
+[4]: https://app.datadoghq.com/incidents
+[5]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus#installation
+[6]: https://app.datadoghq.com/incidents/settings
+[7]: https://docs.datadoghq.com/ja/monitors/incident_management/#follow-up-and-learn-from-the-incident
 {{% /tab %}}
 
 {{% tab "Slack Webhook - EU" %}}
@@ -144,10 +182,9 @@ Slack インテグレーションは、Datadog アプリケーション内の[�
 [5]: https://www.datadoghq.com/blog/datadog-slack-app/
 [6]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}
-
 {{< /tabs >}}
 
-## モニターアラートからの Slack @ メンション
+## モニターアラートからの Slack `@-mentions`
 
 Slack インテグレーションをセットアップした後、通知メッセージに `@slack` を入力すると、通知の送信先として使用可能なチャンネルがリスト表示されます。
 

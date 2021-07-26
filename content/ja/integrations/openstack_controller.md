@@ -1,12 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: openstack
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
@@ -16,7 +20,7 @@ draft: false
 git_integration_title: openstack_controller
 guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller
-integration_title: Openstack_controller
+integration_title: Openstack コントローラー
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -24,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: openstack.
 metric_to_check: openstack.controller
 name: openstack_controller
-public_title: Datadog-Openstack_controller インテグレーション
+public_title: Openstack コントローラー
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
 support: コア
 supported_os:
@@ -54,7 +58,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 `openstack_controller.d/conf.yaml` ファイルで使用される `datadog` ユーザーを作成します。このユーザーには、環境全体に対する管理読み取り専用アクセス許可が必要です。これにより、単一のノードから実行して、すべてのノードとサーバーに関する高レベルなシステム情報を読み取ることができます。
 
-#### Agent 構成
+#### Agent の構成
 
 1. OpenStack Controller のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `openstack_controller.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openstack_controller.d/conf.yaml][2] を参照してください。
 
@@ -83,6 +87,26 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
    ```
 
 2. [Agent を再起動します][3]。
+
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にできます。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Openstack ログの収集を開始するには、次のコンフィギュレーションブロックを `openstack_controller.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: openstack
+   ```
+
+    `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openstack_controller.d/conf.yaml][2] を参照してください。
+
 
 ### 検証
 

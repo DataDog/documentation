@@ -22,6 +22,7 @@ supported_os:
     - windows
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md']
+integration_id: "system"
 ---
 
 ## Overview
@@ -103,7 +104,7 @@ The System Core check does not include any events.
 
 #### Service checks
 
-The System Core check does not include any service checks.
+{{< get-service-checks-from-git "system_core" >}}
 
 ## System Swap
 

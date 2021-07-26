@@ -111,14 +111,22 @@ Datadog の Amazon インテグレーションは、<a href="https://docs.aws.am
 
 ## セットアップ
 
-Amazon Web Services との Datadog インテグレーションをセットアップするには、AWS IAM を使用してロールの委任を設定する必要があります。ロールの委任について、詳しくは [AWS IAM ベストプラクティス ガイド][68]を参照してください。
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">AWS のロール委任は、Datadog for Government site でサポートされていません。<a href="?tab=accesskeysgovcloudorchinaonly#setup">アクセスキー</a>を使用する必要があります。</div>
+{{< /site-region >}}
 
-### ロールの委任
+以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、トレース、ログを収集します。
+
+- [ロールの委任 (自動)](?tab=roledelegation#automatic---cloudformation): CloudFormation テンプレートを使用して、必要な AWS ロールを自動的に設定します（推奨）。
+- [ロールの委任 (手動)](?tab=roledelegation#manual): 必要なロールを手動で作成し、必要な資格情報を該当フォームにコピーします。
+- [アクセスキー](?tab=accesskeysgovcloudorchinaonly#setup): GovCloud または中国のみで使用
+
+{{< tabs >}}
+{{% tab "Role delegation" %}}
 
 必要となる AWS ロールのセットアップ方法を選択してください。CloudFormation を推奨します。
 
-{{< tabs >}}
-{{% tab "自動 - CloudFormation" %}}
+### 自動 - CloudFormation
 
 1. [Datadog AWS インテグレーションタイル][1] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
 2. _Configuration_ タブで **Automatically Using CloudFormation** を選択します。既に AWS アカウントがアタッチされている場合は、まず **Add another account** をクリックしてください。
@@ -126,18 +134,14 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 5. CloudFormation ページでスタックを新規作成し、[Datadog API キー][2]を入力します。
 6. Update the [Datadog AWS インテグレーション タイル][1]を、CloudFormation のスタック作成に使用した [IAM ロール名とアカウント ID][3] で更新します。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html
-{{% /tab %}}
-{{% tab "手動" %}}
+### 手動
 
 #### AWS
 
-1. AWS [IAM コンソール][1]で新しいロールを作成します。
+1. AWS [IAM コンソール][4]で新しいロールを作成します。
 2. ロールタイプで、`Another AWS account` を選択します。
 3. アカウント ID で、`464622532012` (Datadog のアカウント ID) を入力します。これは、Datadog に AWS データへの読み取り専用アクセスを許可することを意味します。
-4. `Require external ID` を選択し、[AWS インテグレーション タイル][2]で作成された ID を入力します。**Require MFA** は無効のままにしておきます。_外部 ID の詳細については、[IAM ユーザーガイドのこのドキュメント][3]を参照してください_。
+4. `Require external ID` を選択し、[AWS インテグレーションタイル][5]で生成された ID を入力します。**Require MFA** は無効のままにしておきます。_外部 ID の詳細については、[IAM ユーザーガイドのこのドキュメント][5]を参照してください_。
 5. `Next: Permissions` をクリックします。
 6. 既にポリシーを作成してある場合は、このページで検索して選択し、ステップ 12 に進んでください。そうでない場合は、`Create Policy` をクリックします。新しいウィンドウが開きます。
 7. `JSON` タブを選択します。Datadog が提供する各 AWS インテグレーションを利用するには、テキストボックスの下にある[ポリシー スニペット](#datadog-aws-iam-policy)を使用します。これらのアクセス許可は、他のコンポーネントがインテグレーションに追加されると変更される場合があります。
@@ -148,11 +152,11 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 12. `Next: Review` をクリックします。
 13. ロールに `DatadogAWSIntegrationRole` などの名前を付け、適切な説明を入力します。`Create Role` をクリックします。
 
-**補足**: Terraform を使用する場合は、[Terraform との AWS インテグレーション][4]を利用して Datadog IAM ポリシーをセットアップします。
+**補足**: Terraform を使用する場合は、[Terraform との AWS インテグレーション][6]を利用して Datadog IAM ポリシーをセットアップします。
 
 #### Datadog
 
-1. [AWS インテグレーション タイル][2]を開きます。
+1. [AWS インテグレーション タイル][1]を開きます。
 2. **Role Delegation** タブを選択して **Manually** を選択します。
 3. AWS アカウント ID を**ダッシュなしで**入力します（例、`123456789012`）。アカウント ID は、[AWS インテグレーションのインストール](#installation)中に作成されるロールの ARN にあります。
 4. 作成されたロールの名前を入力します。**注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS 側で作成されるロール名と完全に一致する必要があります。
@@ -281,40 +285,53 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 | -------------------------- | -------------------------------------------------------------------------------------------- |
 | `cloudwatch:ListMetrics`   | 使用可能な CloudWatch メトリクスをリスト化します。                                                       |
 | `cloudwatch:GetMetricData` | 特定のメトリクスのデータ ポイントを取得します。                                                        |
-| `support:*`:               | サービスの制限に関するメトリクスを追加します。<br>[AWS の制限][5]のためにフル アクセスが必要です。 |
+| `support:*`:               | サービスの制限に関するメトリクスを追加します。<br>[AWS の制限][7]のためフル アクセスが必要です。 |
 | `tag:getResources`         | リソース タイプ別にカスタム タグを取得します。                                                            |
 | `tag:getTagKeys`           | AWS アカウント内のリージョン別にタグ キーを取得します。                                                |
 | `tag:getTagValues`         | AWS アカウント内のリージョン別にタグ値を取得します。                                              |
 
-Resource Group Tagging API の主な用途は、カスタム タグの収集に必要な API 呼び出しの数を減らすことです。詳細については、AWS Web サイトの[タグ ポリシー][6] ドキュメントを参照してください。
+Resource Group Tagging API の主な用途は、カスタムタグの収集に必要な API 呼び出しの数を減らすことです。詳細については、AWS Web サイトの[タグ ポリシー][8]ドキュメントを参照してください。
 
-[1]: https://console.aws.amazon.com/iam/home#/roles
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[4]: https://docs.datadoghq.com/ja/integrations/faq/aws-integration-with-terraform
-[5]: https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html#trustedadvisorsection
-[6]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
+[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html
+[4]: https://console.aws.amazon.com/iam/home#/roles
+[5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[6]: https://docs.datadoghq.com/ja/integrations/faq/aws-integration-with-terraform
+[7]: https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html#trustedadvisorsection
+[8]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "Access keys (GovCloud or China Only)" %}}
 
-### GovCloud と China
+#### AWS
 
-1. [AWS インテグレーションタイル][69] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
+1. AWS コンソールで、Datadog インテグレーションで使用される IAM ユーザーをセットアップします。
+2. Datadog インテグレーション IAM ユーザー用のアクセスキーとシークレットキーを生成します。
+
+詳細は、[AWS ドキュメント][1]をご参照ください。
+
+#### Datadog
+
+1. [AWS インテグレーションタイル][2]を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
 2. **Access Keys (GovCloud or China Only)** タブを選択します。
-3. AWS アクセス キーと AWS 秘密キーを入力します。**GovCloud と中国では、アクセス キーと秘密キーのみが許可されます。**
+3. `AWS アクセスキー` と `AWS シークレットキー` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
 4. ダイアログの左側で、メトリクスを収集するサービスを選択します。
 5. オプションで、すべてのホストやメトリクスにタグを追加します。
 6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
 7. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
 8. **Install Integration** をクリックします。
 
+[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+{{% /tab %}}
+{{< /tabs >}}
+
 ## ログの収集
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][70]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信するには、このアプローチを使用することをお勧めします。
-- [Forwarder Lambda 関数][71]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合は、このアプローチを使用することをお勧めします。
-
+- [Kinesis Firehose destination][68]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信するには、このアプローチを使用することをお勧めします。
+- [Forwarder Lambda 関数][69]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合は、このアプローチを使用することをお勧めします。
 
 ## 収集データ
 
@@ -385,9 +402,9 @@ AWS インテグレーションを使用している場合、Datadog は CloudWa
 
 そもそも、CloudWatch API で提供されるのは、データを取得するためのメトリクス別のクロールだけです。CloudWatch API にはレート制限があり、認証証明書、リージョン、サービスの組み合わせに基づいて変化します。アカウント レベルにより、AWS で使用できるメトリクスは異なります。たとえば、AWS 上で詳細なメトリクスに対して支払いを行うと、短時間で入手できるようになります。この詳細なメトリクスのサービスのレベルは粒度にも適用され、一部のメトリクスは 1 分ごと、それ以外は 5 分ごとに使用可能になります。
 
-Datadog には、状況に応じてアカウント内の特定のメトリクスに優先順位をつけ、すばやく取り込む機能があります。詳細は、[Datadog サポート][73]までご連絡ください。
+Datadog には、状況に応じてアカウント内の特定のメトリクスに優先順位をつけ、すばやく取り込む機能があります。詳細は、[Datadog サポート][71]までお問い合わせください。
 
-遅延をほぼゼロでメトリクスを取得するには、ホストに Datadog Agent をインストールします。詳細については、Datadog のブログ投稿[Agent は難しくない: Agent ベースの監視][74]を参照してください。
+遅延をほぼゼロでメトリクスを取得するには、ホストに Datadog Agent をインストールします。詳細については、Datadog のブログ投稿「[Don't fear the Agent: Agent-based monitoring（Agent は難しくない: Agent ベースの監視）][72]」を参照してください。
 
 ### メトリクスがない
 
@@ -469,10 +486,8 @@ AWS ホストに Agent をインストールし、Agent の構成でホスト名
 [65]: https://docs.datadoghq.com/ja/integrations/amazon_waf/
 [66]: https://docs.datadoghq.com/ja/integrations/amazon_workspaces/
 [67]: https://docs.datadoghq.com/ja/integrations/amazon_xray/
-[68]: http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
-[69]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[70]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[71]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[72]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
-[73]: https://docs.datadoghq.com/ja/help/
-[74]: http://www.datadoghq.com/blog/dont-fear-the-agent
+[68]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[69]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[70]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
+[71]: https://docs.datadoghq.com/ja/help/
+[72]: http://www.datadoghq.com/blog/dont-fear-the-agent

@@ -15,6 +15,7 @@ private: true
 
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Kinesis Firehose Destination{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Send AWS services logs with the Datadog Lambda function{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
@@ -36,13 +37,18 @@ private: true
 {{< whatsnext desc="Log Queries" >}}
     {{< nextlink href="logs/guide/collect-multiple-logs-with-pagination" >}}Collect multiple logs with the Log List API and pagination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/build-custom-reports-using-log-analytics-api/?tab=table" >}}Build custom reports using Log Analytics API{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/detect-unparsed-logs/" >}}Monitor and query for unparsed logs{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
 
 {{< whatsnext desc="Sensitive Data Management" >}}
-    {{< nextlink href="logs/guide/logs-rbac" >}}How to set up Logs RBAC{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-rbac" >}}How to set up RBAC for Logs{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-rbac-permissions" >}}Learn more about RBAC permissions for Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Cross product" >}}
+    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
+{{< /whatsnext >}}
 

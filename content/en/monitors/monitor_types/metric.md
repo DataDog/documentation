@@ -96,7 +96,8 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
-Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
+Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space. 
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
 ### Set alert conditions
 
@@ -144,7 +145,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][4].
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -185,6 +186,8 @@ For a monitor that does not notify on missing data, if a group does not report d
 
 `[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
 
+Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state. If data is still being submitted, the [renotify][6] feature can be utilized to let your team know when an issue is not resolved.
+
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
 In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
@@ -199,7 +202,7 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Further Reading
 
@@ -208,5 +211,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /getting_started/tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
-[4]: /monitors/faq/what-are-recovery-thresholds/
-[5]: /monitors/notifications/
+[4]: /monitors/notifications/?tab=is_alert#tag-variables
+[5]: /monitors/faq/what-are-recovery-thresholds/
+[6]: /monitors/notifications/#renotify
+[7]: /monitors/notifications/

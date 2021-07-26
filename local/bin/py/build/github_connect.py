@@ -78,49 +78,66 @@ class GitHub:
                 out.append(self.extract(item.get("tree")))
         return out
 
-    def list(self, org, repo, branch, globs=None):
+    def list(self, org, repo, branch, commit_sha=None, globs=None):
         globs = [] if globs is None else globs
         listing = []
-        # get the latest sha
-        url = "https://api.github.com/repos/{0}/{1}/git/refs/heads/{2}".format(
-            org, repo, branch
-        )
         headers = self.headers()
-        print(
-            "\x1b[32mINFO\x1b[0m: Getting latest sha from {}/{}..".format(
-                repo, branch
-            )
-        )
-        sha_response = requests.get(url, headers=headers)
-        if sha_response.status_code == requests.codes.ok:
-            sha = (
-                sha_response.json()
-                .get("object", {})
-                .get("sha", None)
-            )
-            if sha:
-                print(
-                    "\x1b[32mINFO\x1b[0m: Getting tree from {}/{} @ {}".format(
-                        repo, branch, sha
-                    )
-                )
-                tree_response = requests.get(
-                    "https://api.github.com/repos/{0}/{1}/git/trees/{2}?recursive=1".format(
-                        org, repo, sha
-                    ),
-                    headers=headers,
-                )
-                if tree_response.status_code == 200:
-                    listing = self.extract(
-                        tree_response.json()
-                    )
-        else:
-            msg = sha_response.json().get('message', '') or sha_response.text
+        if commit_sha:
             print(
-                "\x1b[33mWARNING\x1b[0m: Could not get latest sha from {}/{} response {}, {}..".format(
-                    repo, branch, sha_response.status_code, msg
+                "\x1b[32mINFO\x1b[0m: Using configured sha {} from {}/{}..".format(
+                    commit_sha, repo, branch
                 )
             )
+            tree_response = requests.get(
+                "https://api.github.com/repos/{0}/{1}/git/trees/{2}?recursive=1".format(
+                    org, repo, commit_sha
+                ),
+                headers=headers,
+            )
+            if tree_response.status_code == 200:
+                listing = self.extract(
+                    tree_response.json()
+                )
+        else:
+            print(
+                "\x1b[32mINFO\x1b[0m: Getting latest sha from {}/{}..".format(
+                    repo, branch
+                )
+            )
+            # get the latest sha
+            url = "https://api.github.com/repos/{0}/{1}/git/refs/heads/{2}".format(
+                org, repo, branch
+            )
+            sha_response = requests.get(url, headers=headers)
+            if sha_response.status_code == requests.codes.ok:
+                sha = (
+                    sha_response.json()
+                    .get("object", {})
+                    .get("sha", None)
+                )
+                if sha:
+                    print(
+                        "\x1b[32mINFO\x1b[0m: Getting tree from {}/{} @ {}".format(
+                            repo, branch, sha
+                        )
+                    )
+                    tree_response = requests.get(
+                        "https://api.github.com/repos/{0}/{1}/git/trees/{2}?recursive=1".format(
+                            org, repo, sha
+                        ),
+                        headers=headers,
+                    )
+                    if tree_response.status_code == 200:
+                        listing = self.extract(
+                            tree_response.json()
+                        )
+            else:
+                msg = sha_response.json().get('message', '') or sha_response.text
+                print(
+                    "\x1b[33mWARNING\x1b[0m: Could not get latest sha from {}/{} response {}, {}..".format(
+                        repo, branch, sha_response.status_code, msg
+                    )
+                )
 
         if globs:
             filtered_listing = []

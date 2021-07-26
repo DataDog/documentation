@@ -11,8 +11,6 @@ tactic: TA0006-credential-access
 title: 複数国からの Auth0 ユーザー認証
 type: security_rules
 ---
-## 概要
-
 ## **目的:**
 短期間に複数の国から同一ユーザーがアクセスしたログインを検出。
 

@@ -98,9 +98,8 @@ Si votre endpoint est sécurisé, une configuration supplémentaire est requise�
 
 ### Checks de service
 
-`kube_metrics_server.prometheus.health` :
-
-Renvoie `CRITICAL` si l'Agent ne peut pas accéder aux endpoints des métriques.
+**kube_metrics_server.prometheus.health** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques.
 
 ### Événements
 

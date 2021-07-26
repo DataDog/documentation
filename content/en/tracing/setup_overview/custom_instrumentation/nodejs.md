@@ -123,7 +123,7 @@ When using `tracer.trace()` or `tracer.wrap()` this is done automatically when a
 {{% /tab %}}
 {{< /tabs >}}
 
-## Creating Spans
+## Creating spans
 
 The `dd-trace` library creates [spans][2] automatically with `tracer.init()` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved using spans.
 
@@ -239,6 +239,16 @@ You may not want some requests of an application to be instrumented. A common ca
 // at the top of the entry point right after tracer.init()
 tracer.use('http', {
   blocklist: ['/health', '/ping']
+})
+```
+
+This configuration can be split between client and server if needed. For example,
+
+```javascript
+tracer.use('http', {
+  server: {
+    blocklist: ['/ping']
+  }
 })
 ```
 

@@ -11,8 +11,6 @@ source: gcp
 title: GCP ロギングシンクの変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 GCP Logging シンクへの変更があったことを検出します。これにより監査ログが Datadog に送信されなくなる可能性があります。
 

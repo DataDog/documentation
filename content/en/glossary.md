@@ -21,7 +21,7 @@ Checks are small Python programs run periodically by the Agent. A Check performs
 
 Note that the word "check" - when not capitalized - refers to the generic act of taking a measurement.
 
-## Client Library
+## Client library
 
 There are a number of libraries in a variety of languages that help you instrument your applications with Datadog directly. Datadog provides official libraries for C#, Golang, Java, PHP, Python, and Ruby. Libraries in other languages have been contributed by the community, and are supported on a best-effort basis.
 
@@ -61,11 +61,11 @@ See the [Tracing documentation][10] for more information.
 
 [1]: /agent/
 [2]: /api/
-[3]: /developers/libraries/
+[3]: /developers/community/libraries/
 [4]: /dashboards/screenboard/
 [5]: /dashboards/timeboard/
 [6]: https://www.datadoghq.com/blog/statsd
 [7]: /developers/dogstatsd/
 [8]: /developers/integrations/
-[9]: /developers/libraries/#apm-distributed-tracing-client-libraries
+[9]: /developers/community/libraries/#apm-distributed-tracing-client-libraries
 [10]: /tracing/

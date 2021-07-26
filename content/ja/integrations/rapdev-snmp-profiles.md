@@ -3,28 +3,60 @@
   "configuration":
     "spec": assets/configuration/spec.yaml
   "dashboards":
+    "RapDev APC PDU Dashboard": assets/dashboards/rapdev_apc_pdu_dashboard.json
     "RapDev APC UPS Dashboard": assets/dashboards/rapdev_apc_ups_dashboard.json
     "RapDev Arista Switch Dashboard": assets/dashboards/rapdev_arista_switch_dashboard.json
     "RapDev Barracuda CloudGen Firewall Dashboard": assets/dashboards/rapdev_barracuda_cloudgen_firewall_dashboard.json
+    "RapDev Bluecoat SG Dashboard": assets/dashboards/rapdev_bluecoat_sg_dashboard.json
+    "RapDev Checkpoint SVN Dashboard": assets/dashboards/rapdev_checkpoint_svn_dashboard.json
     "RapDev Cisco ASA Dashboard": assets/dashboards/rapdev_cisco_asa_dashboard.json
     "RapDev Cisco ASR Dashboard": assets/dashboards/rapdev_cisco_asr_dashboard.json
     "RapDev Cisco CUBE Dashboard": assets/dashboards/rapdev_cisco_cube_dashboard.json
     "RapDev Cisco Catalyst Dashboard": assets/dashboards/rapdev_cisco_catalyst_dashboard.json
+    "RapDev Cisco ISE Dashboard": assets/dashboards/rapdev_cisco_ise_dashboard.json
     "RapDev Cisco ISR Overview": assets/dashboards/rapdev_cisco_isr_dashboard.json
     "RapDev Cisco Meraki Dashboard": assets/dashboards/rapdev_cisco_meraki_dashboard.json
     "RapDev Cisco UCM Dashboard": assets/dashboards/rapdev_cisco_ucm_dashboard.json
     "RapDev Cisco UCS Dashboard": assets/dashboards/rapdev_cisco_ucs_dashboard.json
+    "RapDev Cisco WLC Dashboard": assets/dashboards/rapdev_cisco_wlc_dashboard.json
     "RapDev Citrix Netscaler Dashboard": assets/dashboards/rapdev_citrix_netscaler_dashboard.json
+    "RapDev Dell VRTX Dashboard": assets/dashboards/rapdev_dell_vrtx_dashboard.json
     "RapDev F5 BigIP Dashboard": assets/dashboards/rapdev_f5_bigip_dashboard.json
     "RapDev Fortinet Fortigate Dashboard": assets/dashboards/rapdev_fortinet_fortigate_dashboard.json
     "RapDev HP iLO Dashboard": assets/dashboards/rapdev_hpe_ilo_dashboard.json
+    "RapDev Juniper SSG Dashboard": assets/dashboards/rapdev_juniper_ssg_dashboard.json
     "RapDev Kemp LoadMaster Dashboard": assets/dashboards/rapdev_kemp_loadmaster_dashboard.json
     "RapDev Palo Alto NextGen Firewall Dashboard": assets/dashboards/rapdev_palo_alto_nextgen_firewall_dashboard.json
+    "RapDev Printer Dashboard": assets/dashboards/rapdev_printer_dashboard.json
     "RapDev SNMP Device Inventory": assets/dashboards/rapdev_snmp_device_inventory.json
+    "RapDev Servertech PDU Gen3 Dashboard": assets/dashboards/rapdev_servertech_pdu_gen3_dashboard.json
+    "RapDev Servertech PDU Gen4 Dashboard": assets/dashboards/rapdev_servertech_pdu_gen4_dashboard.json
     "RapDev Tripplite PDU Dashboard": assets/dashboards/rapdev_tripplite_pdu_dashboard.json
     "RapDev iDRAC Dashboard": assets/dashboards/rapdev_idrac_dashboard.json
-    "Rapdev APC PDU Dashboard": assets/dashboards/rapdev_apc_pdu_dashboard.json
-  "monitors": {}
+  "monitors":
+    "Barracuda CPU Monitor": assets/monitors/rapdev_barracuda-cpu.json
+    "Barracuda Memory Monitor": assets/monitors/rapdev_barracuda-memory.json
+    "Barracuda Service State Monitor": assets/monitors/rapdev_barracuda-servicestate.json
+    "CPU Utilization Monitor": assets/monitors/rapdev_cpu_utilization.json
+    "Fortigate Tunnel Monitor": assets/monitors/rapdev_fortigate_tunnel.json
+    "Interface Status Monitor": assets/monitors/rapdev_interface_operstatus.json
+    "Memory Utilization Monitor": assets/monitors/rapdev_memory_utilization.json
+    "Printer Issue Monitor": assets/monitors/rapdev_printer_issue.json
+    "iDRAC Bios Status Monitor": assets/monitors/rapdev_idrac-biosstatus.json
+    "iDRAC CMOS Monitor": assets/monitors/rapdev_idrac-cmos.json
+    "iDRAC Disk State Monitor": assets/monitors/rapdev_idrac-diskstate.json
+    "iDRAC Disk Status Monitor": assets/monitors/rapdev_idrac-diskstatus.json
+    "iDRAC Fan Status Monitor": assets/monitors/rapdev_idrac-fanstatus.json
+    "iDRAC LCD Status Monitor": assets/monitors/rapdev_idrac-lcdstatus.json
+    "iDRAC Memory Status Monitor": assets/monitors/rapdev_idrac-memorystatus.json
+    "iDRAC NIC Connection Status Monitor": assets/monitors/rapdev_idrac-nicconnectionstatus.json
+    "iDRAC Overall Power Status Monitor": assets/monitors/rapdev_idrac-overallpowerstatus.json
+    "iDRAC Overall Storage State Monitor": assets/monitors/rapdev_idrac-overallstoragestate.json
+    "iDRAC PSU Sensor State Monitor": assets/monitors/rapdev_idrac-psu-sensorstate.json
+    "iDRAC PSU State Settings Monitor": assets/monitors/rapdev_idrac-psu-statesettings.json
+    "iDRAC RAID Controller State Monitor": assets/monitors/rapdev_idrac-raidcontrollerstate.json
+    "iDRAC Temp Sensor Status": assets/monitors/rapdev_idrac-tempsensorstatus.json
+    "iDRAC Voltage Status Monitor": assets/monitors/rapdev_idrac-voltagestatus.json
   "saved_views": {}
   "service_checks": assets/service_checks.json
 "author":
@@ -97,87 +129,65 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 ### Dell iDRAC について収集されるメトリクスのサンプルリスト
 {{< img src="marketplace/rapdev-snmp-profiles/images/4.png" alt="スクリーンショット 4" >}}
 
-以下は現在サポートされているデバイスの一覧です。すべてのデバイスについての最新リストはウェブサイトを参照してください。
+以下は現在サポートされているデバイスの一覧です。すべてのデバイスについての最新リストは[ウェブサイト](https://www.rapdev.io/products/datadog-snmp-profiles)を参照してください。
 
 | メーカー | モデル                 | バージョン       |
 | ------------ | --------------------- | ------------- |
-| Dell         | iDRAC                 | 7             |
-| Dell         | iDRAC                 | 8             |
-| Dell         | iDRAC                 | 9             |
-| HP           | ProLiant Gen8         | iLO 4         |
-| HP           | ProLiant Gen9         | iLO 4         |
-| HP           | ProLiant Gen10        | iLO 5         |
 | APC          | Smart UPS             | すべて           |
 | APC          | SmartCard             | すべて           |
-| F5           | Big-IP                | 9.4.x - 15.x |
-| Cisco        | ASA                   | 5505          |
-| Cisco        | ASA                   | 5510          |
-| Cisco        | ASA                   | 5525          |
-| Cisco        | ASA                   | 5540          |
-| Cisco        | UCS                   | M2            |
-| Cisco        | UCS                   | M3            |
-| Cisco        | UCS                   | M4            |
-| Cisco        | Catalyst              | 2960          |
-| Cisco        | Catalyst              | 3650          |
-| Cisco        | Catalyst              | 4500          |
-| Cisco        | Catalyst              | 3750          |
+| Arista       | Switch                | 7xxx          |
+| Aruba        | Switch                | すべて           |
+| AudioCodes   | Mediant SBC           | すべて           |
+| Barracuda    | CloudGen Firewall     | 6、7、8         |
+| Brocade      | VDX                   | すべて           |
+| チェックポイント   | Gaia/Cloud Firewall   | 77+           |
+| Cisco        | ASA                   | 5xxx          |
+| Cisco        | ASR                   | すべて           |
+| Cisco        | Catalyst              | すべて           |
+| Cisco        | CUBE                  | IOS           |
 | Cisco        | Nexus                 | 2k            |
 | Cisco        | Nexus                 | 3k            |
 | Cisco        | Nexus                 | 4k            |
 | Cisco        | Nexus                 | 5k            |
 | Cisco        | Nexus                 | 6k            |
 | Cisco        | Nexus                 | 7k            |
-| Cisco        | Nexus                 | 9k            |
-| Cisco        | ISR                   | 44XX          |
-| Cisco        | ISR                   | 38XX          |
-| Cisco        | CUBE                  | IOS           |
-| Cisco        | 統合型コールマネージャー  | 8.x - 12.x   |
-| Cisco        | ASR                   | すべて           |
-| チェックポイント   | GAIA                  | 77 - 80.30   |
-| チェックポイント   | クラウドファイアウォール        | 77 - 80.30   |
-| Barracuda    | Next Gen ファイアウォール     | 6、7、8       |
-| Barracuda    | SPAM フィルター           | 6、7、8       |
-| Palo Alto    | Next Gen ファイアウォール     | 9.x           |
-| Nutanix      | クラスター               | すべて           |
-| Nutanix      | コンテナ統計       | すべて           |
-| Nutanix      | コントローラー           | すべて           |
-| Nutanix      | ディスク                 | すべて           |
-| Nutanix      | Hypervisor           | すべて           |
-| Nutanix      | ストレージプール         | すべて           |
-| Nutanix      | 仮想マシン統計 | すべて           |
-| FortiNet     | FortiGate             | すべて           |
-| Cisco        | Meraki                | MR シリーズ     |
-| Cisco        | Meraki                | Z シリーズ      |
-| Cisco        | Meraki                | MX シリーズ     |
-| Cisco        | Meraki                | MS シリーズ     |
-| Dell         | Powerconnect          | 2000          |
-| Dell         | Powerconnect          | 3000          |
-| Dell         | Powerconnect          | 5000          |
-| Dell         | Powerconnect          | 6000          |
-| Dell         | Powerconnect          | 7000          |
-| Dell         | Powerconnect          | 8000          |
-| Dell         | PowerEdge シャーシ     | M1000e        |
-| Dell         | PowerEdge シャーシ     | MX7000        |
-| HP           | C7000                 | すべて           |
+| Cisco        | ISE                   | すべて           |
+| Cisco        | ISR                   | 38XX、44xx    |
+| Cisco        | Nexus                 | すべて           |
+| Cisco        | UCM                   | すべて           |
+| Cisco        | UCS                   | M2、M3、M4    |
+| Cisco        | WLC                   | すべて           |
 | Citrix       | Netscaler             | すべて           |
+| Dell         | iDRAC                 | 7、8、9         |
+| Dell         | Powerconnect          | OS10          |
+| Dell         | Powerconnect          | 3000          |
+| F5           | Big-IP                | 9.4.x - 15.x |
+| FortiNet     | FortiGate             | すべて           |
+| HPE          | ProLiant Gen8〜10      | iLO4、iLO5     |
+| HPE          | Switch                |               |
+| Ironport     | Mail                  | C3、C6、X1070   |
+| Juniper      | SSG                   | すべて           |
 | Kemp         | Loadmaster            | すべて           |
-| Arista       | イーサネットスイッチ     | 7500          |
-| Arista       | イーサネットスイッチ     | 7400          |
-| Arista       | イーサネットスイッチ     | 7300          |
-| Arista       | イーサネットスイッチ     | 7200          |
-| Arista       | イーサネットスイッチ     | 7100          |
+| Meraki       | CloudController       | CC            |
+| Meraki       | Switch                | MR、MS、MX、Z |
+| Nasuni       | Filer                 | すべて           |
+| Palo Alto    | NextGen Firewall      | 9.x           |
+| ServerTech   | PDU                   | Gen3、Gen4    |
+| Sharp        | プリンタ               | すべて           |
+| Steelhead    | Riverbed              | CX、EX        |
+| VMware       | ESXi                  | 6.x           |
 
 ## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
  - メール: integrations@rapdev.io 
- - チャット: [RapDev.io/products](https://rapdev.io/products)
+ - チャット: [RapDev.io](https://rapdev.io/)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:integrations@rapdev.io)からメッセージをお送りいただければ、Datadog が導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:integrations@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、[こちらをクリック](https://app.datadoghq.com/marketplace/app/rapdev-snmp-profiles/pricing)してください。

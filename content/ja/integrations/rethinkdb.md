@@ -10,7 +10,8 @@ assets:
     source: rethinkdb
   metrics_metadata: metadata.csv
   monitors: {}
-  saved_views: {}
+  saved_views:
+    rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -92,7 +93,6 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 #### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -100,7 +100,7 @@ _Agent バージョン 6.0 以降で利用可能_
     logs_enabled: true
     ```
 
-2. RethinkDB のログを収集するには、次のコンフィギュレーションブロックを `rethinkdb.d/conf.yaml` ファイルに追加します。
+2. RethinkDB ログの収集を開始するには、次のコンフィギュレーションブロックを `rethinkdb.d/conf.yaml` ファイルで編集します。
 
     ```yaml
     logs:
@@ -111,11 +111,11 @@ _Agent バージョン 6.0 以降で利用可能_
     ```
 
 
-`path` パラメーターと `service` パラメーターの値を環境に合わせて変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、https://github.com/DataDog/integrations-core/blob/master/rethinkdb/datadog_checks/rethinkdb/data/conf.yaml.example を参照してください。
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[conf.yaml のサンプル][7]を参照してください。
 
-  3. [Agent を再起動します][8]。
+3. [Agent を再起動します][8]。
 
-  Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
+Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
 
 ### 検証
 

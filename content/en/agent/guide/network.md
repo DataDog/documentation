@@ -18,37 +18,61 @@ further_reading:
       text: 'Collect your traces'
 ---
 
-**Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent**:
+<div class="alert alert-warning">
+Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
+</div>
 
-- All traffic is sent over SSL
-- The destination for:
+## Overview
 
-  - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
-  - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
-  - [Logs][3] data includes `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP, and several others. Review the complete list of [logs endpoints][4] for more information.
-  - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
-  - [HIPAA logs][6] data is the same as for all [Logs][3], but also the following legacy endpoints are supported:
-    - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-    - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-    - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-    - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
-  - [Synthetic Private Locations][7] is `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} for version 0.1.6+ and `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} for versions 0.2.0+.
-  - All other Agent data:
-      - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
-      - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
+All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your site, use the `SITE` selector on the right.
 
-        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must whitelist `*.agent.`{{< region-param key="dd_site" code="true" >}} in your firewall(s).
+## Destinations
 
-Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):
+[APM][1]
+: `trace.agent.`{{< region-param key="dd_site" code="true" >}}
 
-- **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}
-- **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
+[Live Containers][2] & [Live Process][3]
+: `process.`{{< region-param key="dd_site" code="true" >}}
+
+[Logs][4] & [HIPAA logs][5]
+: TCP: `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
+HTTP: `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
+Other: See [logs endpoints][6]
+
+[HIPAA logs legacy][5]
+: `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
+`lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
+`gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
+`http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+
+[Orchestrator][7]
+: `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+
+[Real User Monitoring (RUM)][8]
+: `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+
+[Profiling][9]
+: `intake.profile.`{{< region-param key="dd_site" code="true" >}}
+
+[Synthetics private location][10]
+: Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
+API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
+
+All other Agent data
+: **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}<br>
+**Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
+Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):<br>
+**Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}<br>
+**Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
 
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
 
-```text
+{{< code-block lang="text" disable_copy="true" >}}
 {
     "version": 1,                       // <-- incremented every time this information is changed
     "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
@@ -61,7 +85,7 @@ The information is structured as JSON following this schema:
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying informaton from API)
+    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
     "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
     "logs": {...},                      // <-- same for the logs Agent data
     "process": {...},                   // <-- same for the process Agent data
@@ -69,49 +93,67 @@ The information is structured as JSON following this schema:
     "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
     "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
-```
+{{< /code-block >}}
 
 Each section has a dedicated endpoint, for example:
 
 - `https://ip-ranges.{{< region-param key="dd_site" >}}/logs.json` for the IPs used to receive logs data over TCP.
 - `https://ip-ranges.{{< region-param key="dd_site" >}}/apm.json` for the IPs used to receive APM data.
 
-### Note
+### Inclusion
 
-You should whitelist all of these IPs. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
+Add all of the `ip-ranges` to your inclusion list. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
 ## Open ports
 
-**All outbound traffic is sent over SSL via TCP / UDP.**
+<div class="alert alert-warning">
+All outbound traffic is sent over SSL through TCP / UDP.
+</div>
 
-Open the following ports in order to benefit from all the Agent functionalities:
+Open the following ports to benefit from all the **Agent** functionalities:
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-- **Outbound**:
+#### Outbound
 
-  - `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers)
-  - `123/udp`: NTP - [More details on the importance of NTP][1].
-  - `10516/tcp`: port for the [Log collection][2] over TCP for Datadog US region, `443/tcp` for the Datadog EU region.
-  - `10255/tcp`: port for the [Kubernetes http kubelet][3]
-  - `10250/tcp`: port for the [Kubernetes https kubelet][3]
+443/tcp
+: Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
-- **Inbound (used for Agent services communicating among themselves locally within the host only)**:
+123/udp
+: Port for NTP ([more details on the importance of NTP][1]).
 
-  - `5000/tcp`: port for the [go_expvar server][4]
-  - `5001/tcp`: port on which the IPC api listens
-  - `5002/tcp`: port for [the Agent browser GUI to be served][5]
-  - `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost:
+{{< region-param key="tcp_endpoint_port_ssl" >}}/tcp
+: Port for log collection over TCP.<br>
+See [logs endpoints][2] for other connection types.
 
-      - `127.0.0.1`
-      - `::1`
-      - `fe80::1`
+10255/tcp
+: Port for the [Kubernetes HTTP Kubelet][3]
 
-  - `8126/tcp`: port for the [APM Receiver][6]
+10250/tcp
+: Port for the [Kubernetes HTTPS Kubelet][3]
+
+#### Inbound
+
+Used for Agent services communicating with each other locally within the host only.
+
+5000/tcp
+: Port for the [go_expvar server][4]
+
+5001/tcp
+: Port the IPC API listens to
+
+5002/tcp
+: Port for the [Agent browser GUI][5]
+
+8125/udp
+: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
+
+8126/tcp
+: Port for the [APM receiver][6]
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /logs/
+[2]: /logs/log_collection/#datadog-logs-endpoints
 [3]: /agent/basic_agent_usage/kubernetes/
 [4]: /integrations/go_expvar/
 [5]: /agent/basic_agent_usage/#gui
@@ -119,22 +161,27 @@ Open the following ports in order to benefit from all the Agent functionalities:
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
-- **Outbound**:
+#### Outbound
 
-  - `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers)
-  - `123/udp`: NTP - [More details on the importance of NTP][1].
+443/tcp
+: Port for most Agent data (Metrics, APM, Live Processes/Containers)
 
-- **Inbound**:
+123/udp
+: Port for NTP ([more details on the importance of NTP][1]).
 
-  - `8125/udp`: DogStatsd. Unless `non_local_traffic` is set to true. This port is available on localhost:
+#### Inbound
 
-      - `127.0.0.1`
-      - `::1`
-      - `fe80::1`
+8125/udp
+: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
 
-  - `8126/tcp`: port for the [APM Receiver][2]
-  - `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
-  - `17124/tcp`: optional graphite adapter
+8126/tcp
+: Port for the [APM Receiver][2]
+
+17123/tcp
+: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
+
+17124/tcp
+: Optional graphite adapter
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /tracing/
@@ -143,7 +190,18 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][8].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][11].
+
+## Data buffering
+
+If the network becomes unavailable, the Agent stores the metrics in memory.
+The maximum memory usage for storing the metrics is defined by the `forwarder_retry_queue_payloads_max_size` configuration setting. When this limit is reached, the metrics are dropped.
+
+Agent v7.27.0+ stores the metrics on disk when the memory limit is reached. Enable this capability by setting `forwarder_storage_max_size_in_bytes` to a positive value indicating the maximum amount of storage space, in bytes, that the Agent can use to store the metrics on disk.
+
+The metrics are stored in the folder defined by the `forwarder_storage_path` setting, which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
+
+To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 95 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
 
 ## Further Reading
 
@@ -151,9 +209,12 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 
 [1]: /tracing/
 [2]: /infrastructure/livecontainers/
-[3]: /logs/
-[4]: /logs/log_collection/?tab=http#datadog-logs-endpoints
-[5]: /infrastructure/livecontainers/#kubernetes-resources-1
-[6]: /security/logs/#hipaa-enabled-customers
-[7]: /synthetics/private_locations/#datadog-private-locations-endpoints
-[8]: /agent/proxy/
+[3]: /infrastructure/process/
+[4]: /logs/
+[5]: /security/logs/#hipaa-enabled-customers
+[6]: /logs/log_collection/#datadog-logs-endpoints
+[7]: /infrastructure/livecontainers/#kubernetes-resources-1
+[8]: /real_user_monitoring/
+[9]: /tracing/profiler/
+[10]: /synthetics/private_locations
+[11]: /agent/proxy/

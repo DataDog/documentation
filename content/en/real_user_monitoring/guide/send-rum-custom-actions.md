@@ -49,5 +49,5 @@ As an example, the following screenshot shows the average cart value per country
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
-[2]: /real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[2]: /real_user_monitoring/browser/modifying_data_and_context/#replace-global-context
 [3]: /real_user_monitoring/explorer

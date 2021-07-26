@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/opsgenie/'
 draft: false
 git_integration_title: opsgenie
 has_logo: true
+integration_id: opsgenie
 integration_title: OpsGenie
 is_public: true
 kind: インテグレーション
@@ -73,7 +74,7 @@ Opsgenie インテグレーションには、サービスのチェック機能�
 
 ### ナレッジベース
 
-#### Datadog と OpsGenie を組み合わせて使用する方法
+#### Datadog と OpsGenie
 
 ##### Datadog から OpsGenie アラートを作成/確認/閉じる
 

@@ -3,10 +3,8 @@
 
 <div class="api-toolbar pt-2 mb-lg-1 d-lg-flex justify-content-between">
     <div id="breadcrumbs">
-        <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>&nbsp;>&nbsp;
-
-        {{ if .Page.Parent }}
-            <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
+        {{ with .Page.Parent }}
+            <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ .Title }}</a>
             &nbsp;>&nbsp;
         {{ end }}
 

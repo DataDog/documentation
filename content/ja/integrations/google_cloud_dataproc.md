@@ -10,6 +10,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_dataproc/'
 draft: false
 git_integration_title: google_cloud_dataproc
 has_logo: true
+integration_id: google-cloud-dataproc
 integration_title: Google Cloud Dataproc
 is_public: true
 kind: integration

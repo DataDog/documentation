@@ -36,12 +36,12 @@
 "creates_events": false
 "ddtype": "crawler"
 "dependencies": []
-"display_name": "RapDev SNMP Profiles"
+"display_name": "Profils SNMP par RapDev"
 "draft": false
 "git_integration_title": "rapdev-snmp-profiles"
 "guid": "d6a64068-821a-4e71-b724-b3a395389609"
 "integration_id": "rapdev-snmp-profiles"
-"integration_title": "RapDev SNMP Profiles"
+"integration_title": "Profils SNMP par RapDev"
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"
@@ -53,9 +53,9 @@
 - "billing_type": tag_count
   "metric": snmp.systemServices
   "tag": snmp_device
-  "unit_label": SNMP Device
+  "unit_label": Périphérique SNMP
   "unit_price": !!float "6.0"
-"public_title": "Profils SNMP RapDev"
+"public_title": "Profils SNMP par RapDev"
 "short_description": "Surveillez et visualisez vos périphériques SNMP avec les profils de périphérique Autodiscovery."
 "support": "partner"
 "supported_os":
@@ -72,7 +72,7 @@
 
 [{{< img src="marketplace/rapdev-snmp-profiles/images/video.png" alt="Présentation des profils de périphérique SNMP RapDev" >}}](https://www.youtube.com/watch?v=SVT9hqV7aD4&list=PLa2zzueYDhHrjODIXryBX_RakQIL6nmOh)
 
-Le package Profils SNMP RapDev prend en charge plus de 150 profils de périphérique de manière native et intègre des dashboards préconfigurés pour vous permettre de surveiller instantanément tous les périphériques pris en charge. Plusieurs centaines d'heures de travail ont été passées à paramétrer les profils afin de recueillir l'ensemble des métriques pertinentes avec les tags requis : numéros de série, versions du firmware, versions du matériel, et bien plus encore. Cette intégration peut être déployée en quelques minutes afin de commencer à surveiller, visualiser et recevoir des alertes sans attendre.
+Le package SNMP Profiles de RapDev prend en charge plus de 150 profils de périphérique de manière native et intègre des dashboards préconfigurés pour vous permettre de surveiller instantanément tous les périphériques pris en charge. Plusieurs centaines d'heures de travail ont été passées à paramétrer les profils afin de recueillir l'ensemble des métriques pertinentes avec les tags requis : numéros de série, versions du firmware, versions du matériel, et bien plus encore. Cette intégration peut être déployée en quelques minutes afin de commencer à surveiller, visualiser et recevoir des alertes sans attendre.
 
 Cette intégration vous donnera accès à des centaines de profils YAML et déploiera automatiquement plusieurs nouveaux dashboards sur votre instance. Elle utilisera ensuite la fonctionnalité Autodiscovery de Datadog pour détecter automatiquement tous les périphériques pris en charge, et commencera à interroger les OID grâce à l'intégration native de SNMP avec Datadog.
 Aucune gestion, modification ou mise à jour de vos profils SNMP est nécessaire depuis votre Agent Datadog ou vos fichiers YAML. L'intégration se charge de tout : il ne vous reste plus qu'à surveiller vos périphériques et à attendre de recevoir des alertes.

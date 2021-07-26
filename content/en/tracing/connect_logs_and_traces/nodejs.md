@@ -15,9 +15,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
       tag: 'Blog'
       text: 'Correlate request logs with traces automatically'
+    - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+      tag: 'Guide'
+      text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-## Automatically Inject Trace and Span IDs
+## Automatic injection
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
@@ -34,7 +37,7 @@ experience for adding `env`, `service`, and `version` (see [Unified Service Tagg
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
-## Manually Inject Trace and Span IDs
+## Manual injection
 
 If you are using a logging library not supported for automatic injection but are using JSON format, it's possible to do manual injection directly in your code.
 

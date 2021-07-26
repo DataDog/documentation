@@ -12,7 +12,7 @@ Lambda 関数でトレースまたはログデータを Datadog に送信して�
 
 ## Datadog Lambda ライブラリからカスタムメトリクスを送信
 
-{{< img src="integrations/amazon_lambda/lambda_custom_metrics.png" alt="AWS Lambda からカスタムメトリクスを収集するためのアーキテクチャ図" >}}
+{{< img src="serverless/serverless_custom_metrics.png" alt="AWS Lambda からのカスタムメトリクスの収集" >}}
 
 Datadog Lambda ライブラリをインストールして、カスタムメトリクスを収集して送信します。Datadog Lambda ライブラリから送信されたメトリクスは、自動的に[ディストリビューション][3]に集計されるため、`avg`、`sum`、`max`、`min`、`count` をグラフ化できます。また、[ディストリビューションメトリクス][3]ページで、50、75、95、99 パーセンタイル値のタグセットの集計を計算できます。
 
@@ -24,14 +24,26 @@ Datadog Lambda ライブラリは、Lambda で同期および非同期の両方�
 
 **同期**: デフォルトの動作。このメソッドは、定期的（10 秒ごと）および Lambda 呼び出しの終了時に HTTP 経由でカスタムメトリクスを Datadog に送信します。呼び出しの継続時間が 10 秒未満の場合、カスタムメトリクスは呼び出しの終了時に送信されます。
 
-**非同期（推奨）**: レイテンシーオーバーヘッドなしでカスタムメトリクスを送信し、**かつ**それらをほぼリアルタイムで Datadog に表示することができます。これを実現するために、Lambda ライブラリはカスタムメトリクスを特別にフォーマットされたログとして出力し、これを [Datadog Forwarder][4] が解析して Datadog に送信します。AWS Lambda でのロギングは 100% 非同期であるため、このメソッドにより、関数へのレイテンシーオーバーヘッドがゼロになります。
+**非同期 (推奨)**: レイテンシーオーバーヘッドなしでカスタムメトリクスを送信し、**かつ**それらをほぼリアルタイムで Datadog に表示することができます。これを実現するために、Lambda ライブラリは次のいずれかを行います。
+- カスタムメトリクスを [Datadog Lambda 拡張機能][4]に公開します。これにより、関数のレイテンシーに影響を与えることなく、カスタムメトリクスが Datadog に直接送信されます。
+- カスタムメトリクスを特別にフォーマットされたログとして出力し、これを [Datadog Forwarder][5] が解析して Datadog に送信します。AWS Lambda でのロギングは 100% 非同期であるため、このメソッドにより、関数へのレイテンシーオーバーヘッドがゼロになります。
 
 ### 非同期カスタムメトリクスの有効化
 
-1. Lambda 関数で環境変数 `DD_FLUSH_TO_LOG` を `True` に設定します。
-2. [Datadog Forwarder][4] をバージョン 1.4.0 以上に更新します。
+#### Datadog Lambda 拡張機能を使用する
 
-Datadog ログを使用していない場合でも、非同期のカスタムメトリクス送信を使用できます。[Datadog ログコレクション AWS Lambda 関数][4]で環境変数 `DD_FORWARD_LOG` を `False` に設定します。これにより、カスタムメトリクスのみが Datadog にインテリジェントに転送され、通常のログは転送されません。
+Datadog は、Node.js または Python Lambda ランタイムを使用している場合、Datadog Lambda 拡張機能を使用することをお勧めします。
+
+1. Lambda 関数で環境変数 `DD_FLUSH_TO_LOG` を `True` に設定します。
+2. [Datadog Lambda 拡張機能][4]を Lambda レイヤーまたはコンテナイメージとして関数に追加します。
+3. 環境変数 `DD_API_KEY` または `DD_KMS_API_KEY` を Lambda 関数に追加し、[API 管理ページ][12]で Datadog API キーに値を設定します。
+
+#### Datadog Forwarder を使用する
+
+1. Lambda 関数で環境変数 `DD_FLUSH_TO_LOG` を `True` に設定します。
+2. [Datadog Forwarder][5] をバージョン 1.4.0 以上に更新します。
+
+Datadog ログを使用していない場合でも、非同期のカスタムメトリクス送信を使用できます。[Datadog ログコレクション AWS Lambda 関数][5]で環境変数 `DD_FORWARD_LOG` を `False` に設定します。これにより、カスタムメトリクスのみが Datadog にインテリジェントに転送され、通常のログは転送されません。
 
 ### カスタムメトリクスのコード例
 
@@ -39,7 +51,7 @@ Datadog ログを使用していない場合でも、非同期のカスタムメ
 
 **注:** カスタムメトリクスを報告するメソッドの引数には次の要件があります。
 
-- `<METRIC_NAME>` は、[メトリクス命名ポリシー][5]に従ってメトリクスを一意に識別します。
+- `<メトリクス名>` は、[メトリクス命名ポリシー][6]に従ってメトリクスを一意に識別します。
 - `<METRIC_VALUE>` は、数値 (整数または浮動小数点数) でなければなりません。
 - `<TAG_LIST>` はオプションです。`['owner:Datadog', 'env:demo', 'cooltag']` のように書式設定されます。
 
@@ -162,7 +174,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 
 [非同期カスタムメトリクス](#synchronous-vs-asynchronous-custom-metrics)の発行は、任意の言語またはカスタムランタイムで可能です。[Datadog Forwarder][1] が識別し、Datadog に送信する Lambda 関数に特別な JSON 形式の文字列を出力することで機能します。これを使用するには:
 
-1. [非同期カスタムメトリクスを有効にします](#enabling-asynchronous-custom-metrics)
+1. [非同期カスタムメトリクスを有効にする](#enabling-asynchronous-custom-metrics)
 2. 次の形式でカスタムメトリクスをログする再利用可能な関数を作成します。
 
 ```json
@@ -193,7 +205,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 
 ### カスタムメトリクスのタグ付け
 
-[Datadog Lambda ライブラリ][6] を使用して送信する場合、カスタムメトリクスにタグを付ける必要があります。[ディストリビューションメトリクス][3]ページを使用して、カスタムメトリクスに適用される[タグのセットをカスタマイズ][7]します。
+[Datadog Lambda ライブラリ][7]を使用して送信する場合、カスタムメトリクスにタグを付ける必要があります。[ディストリビューションメトリクス][3]ページを使用して、カスタムメトリクスに適用される[タグのセットをカスタマイズ][8]します。
 
 カスタムメトリクスに Lambda リソースタグを追加するには、Datadog Forwarder CloudFormation Stack でパラメーター `DdFetchLambdaTags` を `true` に設定します。
 
@@ -203,25 +215,25 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 
 以前に Datadog Lambda ライブラリのいずれかを使用せずに Lambda からカスタムメトリクスを送信した場合、それらを Datadog に送信するときに、**新しいメトリクス名**でカスタムメトリクスのインスツルメントを開始する必要があります。ディストリビューションと非ディストリビューションメトリクスタイプの両方として、同じメトリクス名を同時に存在させることはできません。
 
-ディストリビューションメトリクスのパーセンタイル集計を有効にするには、[ディストリビューションメトリクス][7]のページを参照してください。
+ディストリビューションメトリクスのパーセンタイル集計を有効にするには、[ディストリビューションメトリクス][8]のページを参照してください。
 
 ## その他の送信方法
 
 ### VPC での実行
 
-Datadog Lambda ライブラリは、カスタムメトリクスを**同期**送信するために[パブリックインターネットへのアクセス][8]を必要とします。Lambda 関数が VPC に関連付けられている場合は、代わりにカスタムメトリクスを**非同期**送信するか、関数がパブリックインターネットに到達できることを確認してください。
+Datadog Lambda ライブラリは、カスタムメトリクスを**同期**送信するために[パブリックインターネットへのアクセス][9]を必要とします。Lambda 関数が VPC に関連付けられている場合は、代わりにカスタムメトリクスを**非同期**送信するか、関数がパブリックインターネットに到達できることを確認してください。
 
-### サードパーティライブラリの使用
+### サードパーティライブラリ
 
-カスタムメトリクスを Datadog に簡単に送信できるオープンソースライブラリは多数あります。ただし、多くは Lambda 用に最適化された[ディストリビューションメトリクス][3]を使用するように更新されていません。ディストリビューションメトリクスは、ホストまたはローカルで実行される[エージェント][9]に依存しないサーバー側の集計を可能にします。エージェントのないサーバーレス環境では、ディストリビューションメトリクスにより柔軟な集計とタグ付けが可能になります。
+カスタムメトリクスを Datadog に簡単に送信できるオープンソースライブラリは多数あります。ただし、多くは Lambda 用に最適化された[ディストリビューションメトリクス][3]を使用するように更新されていません。ディストリビューションメトリクスは、ホストまたはローカルで実行される[エージェント][10]に依存しないサーバー側の集計を可能にします。エージェントのないサーバーレス環境では、ディストリビューションメトリクスにより柔軟な集計とタグ付けが可能になります。
 
 AWS Lambda 用のサードパーティのメトリクスライブラリを評価する場合は、それがディストリビューションメトリクスをサポートしていることを確認してください。
 
-### [非推奨] CloudWatch ログの使用
+### [非推奨] CloudWatch ログ
 
-**このカスタムメトリクスの送信メソッドはもうサポートされておらず、すべての新しいお客様に対しては無効になっています。**Lambda からカスタムメトリクスを送信する場合は、[Datadog Lambda ライブラリ][6]を使うことが推奨されます。
+**このカスタムメトリクスの送信メソッドはもうサポートされておらず、すべての新しいお客様に対しては無効になっています。**Lambda からカスタムメトリクスを送信する場合は、[Datadog Lambda ライブラリ][7]を使うことが推奨されます。
 
-これには、[Datadog IAM ポリシー][10]で次の AWS アクセス許可が必要です。
+これには、[Datadog IAM ポリシー][11]で次の AWS アクセス許可が必要です。
 
 | AWS アクセス許可            | 説明                                                 |
 | ------------------------- | ----------------------------------------------------------- |
@@ -241,7 +253,7 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 - `<UNIX_EPOCH_TIMESTAMP>` は秒単位です。ミリ秒ではありません。
 - `<METRIC_VALUE>` は、数値 (整数または浮動小数点数) でなければなりません。
 - `<METRIC_TYPE>` は、`count`、`gauge`、`histogram`、または `check` です。
-- `<METRIC_NAME>` は、[メトリクス命名ポリシー][5]に従ってメトリクスを一意に識別します。
+- `<メトリクス名>` は、[メトリクス命名ポリシー][6]に従ってメトリクスを一意に識別します。
 - `<タグリスト>` はオプションです。先頭に `#` が付いたカンマ区切りリストです。カスタムメトリクスには、自動的にタグ `function_name:<関数の名前>` が適用されます。
 
 **注**: 各タイムスタンプに対する合計がカウントとして使用され、特定のタイムスタンプの最後の値がゲージとして使用されます。メトリクスをインクリメントするたびにログステートメントを出力することは、ログのパースにかかる時間が増大するため、お勧めしません。コードでメトリクスの値を継続的に更新し、関数が終了する前にメトリクスに 1 つのログステートメントを出力してください。
@@ -249,10 +261,11 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 [1]: /ja/logs/logs_to_metrics/
 [2]: /ja/tracing/generate_metrics/
 [3]: https://docs.datadoghq.com/ja/metrics/distributions/
-[4]: /ja/serverless/forwarder/
-[5]: /ja/developers/metrics/
-[6]: /ja/serverless/installation/
-[7]: /ja/metrics/distributions/#customize-tagging
-[8]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
-[9]: /ja/agent/
-[10]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[4]: /ja/serverless/libraries_integrations/extension
+[5]: /ja/serverless/forwarder/
+[6]: /ja/developers/metrics/
+[7]: /ja/serverless/installation/
+[8]: /ja/metrics/distributions/#customize-tagging
+[9]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
+[10]: /ja/agent/
+[11]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation

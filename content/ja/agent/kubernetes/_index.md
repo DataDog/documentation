@@ -115,7 +115,7 @@ datadog:
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+[4]: https://github.com/kubernetes/kube-state-metrics/tree/master/charts/kube-state-metrics
 [5]: /ja/agent/kubernetes/apm?tab=helm
 [6]: /ja/agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
@@ -145,21 +145,21 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 2. **Datadog API キーを含むシークレットを作成**: 下の`<DATADOG_API_KEY>` を[組織の API キー][2]に置き換えます。このシークレットはマニフェストで Datadog Agent をデプロイするために使用されます。
 
     ```shell
-    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal='api-key=<DATADOG_API_KEY>' --namespace="default"
     ```
 
     **注**: これにより、`default` ネームスペースでシークレットが作成されます。カスタムネームスペースを使用している場合、実行前にコマンドの `namespace` パラメーターを更新します。
 
-3. **Datadog Agent マニフェストを作成**。以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します
+3. **Datadog Agent マニフェストを作成**。以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します。
 
-    | メトリクス | ログ | APM | プロセス | NPM | Linux                  | Windows                 |
-    |---------|------|-----|---------|-----|------------------------|-------------------------|
-    | X       | X    | X   | X       |     | [マニフェストテンプレート][3] | [マニフェストテンプレート][4] |
-    | X       | X    | X   |         |     | [マニフェストテンプレート][5] | [マニフェストテンプレート][6] |
-    | X       | X    |     |         |     | [マニフェストテンプレート][7] | [マニフェストテンプレート][8] |
-    | X       |      | X   |         |     | [マニフェストテンプレート][9] | [マニフェストテンプレート][10] |
-    |         |      |     |         | X   | [マニフェストテンプレート][11] | テンプレートなし             |
-    | X       |      |     |         |     | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
+    |メトリクス                   |ログ                      | APM                       |プロセス                   | NPM                       | Linux                   | Windows                 |
+    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4]  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
+    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
+    |                           |                           |                           |                           | <i class="icon-tick"></i> | [マニフェストテンプレート][11] |テンプレートなし             |
+    | <i class="icon-tick"></i> |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
 
    トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][14]。それぞれの機能を個別に有効にする方法については、[ログ][15]、[APM][16]、[プロセス][17]、[ネットワークパフォーマンスモニタリング][18]に関するドキュメントページを参照してください。
 
@@ -303,7 +303,7 @@ agent:
 [5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: /ja/agent/guide/operator-advanced
-[8]: https://github.com/DataDog/datadog-operator/blob/master/docs/configuration.md
+[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -402,7 +402,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_HISTOGRAM_AGGREGATES`        | 計算するヒストグラムの集計 (スペース区切り)。デフォルトは "max median avg count" です。                                                          |
 | `DD_DOGSTATSD_SOCKET`            | リスニングする Unix ソケットのパス。`rw` でマウントされたボリューム内にある必要があります。                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `["env:golden", "group:retrievers"]` のように追加します。 |
+| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `"env:golden group:retrievers"` のように追加します。 |
 
 詳しくは、[Unix ドメインソケット上の DogStatsD][10] を参照してください。
 
@@ -425,16 +425,16 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 
 ログの収集、メトリクスの収集、オートディスカバリーからコンテナを除外します。Datadog はデフォルトで Kubernetes と OpenShift の `pause` コンテナを除外します。これらの許可リストとブロックリストはオートディスカバリーにのみ適用されます。トレースと DogStatsD は影響を受けません。これらの環境変数の値は、正規表現をサポートしています。
 
-| 環境変数    | 説明                                                                                                                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_CONTAINER_INCLUDE` | 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`  |
-| `DD_CONTAINER_EXCLUDE` | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"`、`image:.*` |
-| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスを含めたいコンテナの許可リスト。  |
-| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスを除外したいコンテナのブロックリスト。 |
-| `DD_CONTAINER_INCLUDE_LOGS` | ログを含めたいコンテナの許可リスト。  |
-| `DD_CONTAINER_EXCLUDE_LOGS` | ログを除外したいコンテナのブロックリスト。 |
-| `DD_AC_INCLUDE` | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`  |
-| `DD_AC_EXCLUDE` | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*` |
+| 環境変数                   | 説明                                                                                                                                                                                                                        |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_INCLUDE`         | 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`                                                                              |
+| `DD_CONTAINER_EXCLUDE`         | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"`、`image:.*`                                                                              |
+| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスを含めたいコンテナの許可リスト。                                                                                                                                                                         |
+| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスを除外したいコンテナのブロックリスト。                                                                                                                                                                         |
+| `DD_CONTAINER_INCLUDE_LOGS`    | ログを含めたいコンテナの許可リスト。                                                                                                                                                                            |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | ログを除外したいコンテナのブロックリスト。                                                                                                                                                                            |
+| `DD_AC_INCLUDE`                | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`                                                              |
+| `DD_AC_EXCLUDE`                | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*` |
 
 その他の例は[コンテナのディスカバリー管理][13] ページでご確認いただけます。
 

@@ -26,7 +26,7 @@ The following operators are supported:
 
 ### Example
 
-The `{{last_triggered_at_epoch}}` template variable returns the UTC time when a monitor last triggered in milliseconds epoch format. Evaluation operators can be used to subtract 15 minutes (15*60*1000 milliseconds) with the following:
+The `{{last_triggered_at_epoch}}` template variable returns the UTC time when a monitor last triggered in milliseconds epoch format. Evaluation operators can be used to subtract 15 minutes (15 * 60 * 1000 milliseconds) with the following:
 
 ```
 {{eval "last_triggered_at_epoch-15*60*1000"}}

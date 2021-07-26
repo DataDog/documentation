@@ -15,17 +15,17 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/flume/README.md'
 display_name: flume
-draft: true
+draft: false
 git_integration_title: flume
 guid: 39644ce3-222b-4b97-81b4-55dd8a1db3ea
 integration_id: flume
 integration_title: flume
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: kealan.maas@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: flume.
-metric_to_check: ''
+metric_to_check: flume.channel.capacity
 name: flume
 public_title: flume
 short_description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
@@ -60,7 +60,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. 以下の JVM 引数を [flume-env.sh][7] に追加して、Flume Agent を構成し JMX を有効にします。
 
 ```
-export JAVA_OPTS=”-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=5445 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false”
+export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=5445 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 
 ```
 

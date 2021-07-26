@@ -7,8 +7,8 @@ aliases:
 ---
 APIを介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。
 
-- [ダッシュボードリストのアイテムを取得](#get-items-of-a-dashboard-list)
-- [ダッシュボードリストへの項目の追加](#add-items-to-a-dashboard-list)
+- [ダッシュボードリストのアイテムを取得する](#get-items-of-a-dashboard-list)
+- [ダッシュボードリストにアイテムを追加する](#add-items-to-a-dashboard-list)
 - [ダッシュボードリストのアイテムを更新する](#update-items-of-a-dashboard-list)
 - [ダッシュボードリストからアイテムを削除する](#delete-items-from-a-dashboard-list)
 

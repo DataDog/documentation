@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_machine_learning_servic
 draft: false
 git_integration_title: azure_machine_learning_services
 has_logo: true
+integration_id: ''
 integration_title: Microsoft Azure Machine Learning
 is_public: true
 kind: インテグレーション

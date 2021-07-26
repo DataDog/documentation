@@ -58,18 +58,15 @@ supported_os:
 
 IIS チェックは Agent にパッケージ化されています。IIS メトリクスとログの収集を開始するには、[Agent をインストールします][2]。
 
-{{< tabs >}}    
-{{% tab "Host" %}}  
-
 #### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. IIS のサイトデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある [Agent の `conf.d` ディレクトリ][1]の `iis.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル iis.d/conf.yaml][3] を参照してください。
+1. IIS のサイトデータの収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある [Agent の `conf.d` ディレクトリ][3]の `iis.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル iis.d/conf.yaml][5] を参照してください。
 
-2. [Agent を再起動][4]すると、Datadog への IIS メトリクスの送信が開始されます。
+2. [Agent を再起動][6]すると、Datadog への IIS メトリクスの送信が開始されます。
 
 ##### ログの収集
 
@@ -89,45 +86,13 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
        source: iis
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル iis.d/conf.yaml][3] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル iis.d/conf.yaml][5] を参照してください。
 
-3. [Agent を再起動します][4]。
-
-[1]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows/#agent-check-directory-structure
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
-
-#### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
-
-##### メトリクスの収集
-
-| パラメーター            | 値                  |
-| -------------------- | ---------------------- |
-| `<インテグレーション名>` | `iis`                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`          |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%"}` |
-
-##### ログの収集
-
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
-
-| パラメーター      | 値                                            |
-| -------------- | ------------------------------------------------ |
-| `<LOG_CONFIG>` | `{"source": "iis", "service": "<サービス名>"}` |
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{% /tab %}}
-{{< /tabs >}}
+3. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `iis` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `iis` を探します。
 
 ## 収集データ
 
@@ -146,10 +111,14 @@ Agent は、`iis.yaml` で構成されたサイトごとにこのサービスチ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
-
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows/#agent-check-directory-structure
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/iis/metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

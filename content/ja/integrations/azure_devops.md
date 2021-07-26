@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'
 draft: false
 git_integration_title: azure_devops
 has_logo: true
+integration_id: azuredevops
 integration_title: Microsoft Azure DevOps
 is_public: true
 kind: インテグレーション
@@ -46,8 +47,8 @@ Datadog で、[Azure DevOps インテグレーションタイル][1]のインス
 3. Datadog サービスを選択します。
 4. トリガーする Visual Studio イベントを構成します。
 5. [Datadog API キー][2]を必須フィールドに入力します。
-6. Datadog 組織サイトが `US` か `EU` かを示します。
-7. サービスフックサブスクリプションをテストし、ウィザードを終了します。
+6. Datadog 組織のサイトを追加: {{< region-param key="dd_site_name" code="true" >}}
+7. サービスフックサブスクリプションをテストし、ウィザードを終了します。**注**: テストは、API キーまたは Datadog オーガニゼーションサイトは検証しません。
 8. Datadog に送信するイベントタイプごとにステップ 4〜7 を繰り返します。すべてのイベントタイプが受け入れられます。
 
 サービスフックを構成したら、Datadog に移動して、Azure DevOps のイベントとメトリクスを確認します。
@@ -58,22 +59,9 @@ Azure 側の他の参照先: [Create a service hook for Azure DevOps Services an
 
 [Azure ドキュメント][4]および Datadog のエンドポイントを使用して、プログラムでサービスフックサブスクリプションを作成します。
 
-{{< tabs >}}
-{{% tab "US site" %}}
-
 ```text
-https://app.datadoghq.com/intake/webhook/azuredevops?api_key=<DATADOG_API_キー>
+https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_key=<DATADOG_API_KEY>
 ```
-
-{{% /tab %}}
-{{% tab "EU site" %}}
-
-```text
-https://app.datadoghq.eu/intake/webhook/azuredevops?api_key=<DATADOG_API_キー>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Datadog モニターを Azure Pipelines のゲートとして使用する
 
@@ -106,7 +94,12 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 
 ### イベント
 
-Azure DevOps インテグレーションは、Azure DevOps からのすべてのイベントタイプを受け入れます。
+Azure DevOps インテグレーションは、以下の[サービスフックイベントタイプ][10]をサポートします。
+
+- ビルドとリリース
+- 作業項目
+- コード
+
 
 ### サービスのチェック
 
@@ -114,28 +107,31 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ### よくあるご質問
 
-**このインテグレーションに追加費用はかかりますか？**<br>
-このインテグレーションから生成されるメトリクスとイベントには、追加費用は発生しません。
+#### このインテグレーションに追加費用はかかりますか？
+このインテグレーションで生成されるメトリクスとイベントには、追加費用は発生しません。
 
-**このデータは Datadog 内でどのくらい保持されますか？**<br>
+#### データはどのくらいの期間 Datadog で保持されますか？
 このインテグレーションからのデータは、Datadog の他のタイプの時系列データと同様に 15 か月間保持されます。
 
-**イベントとメトリクスが Datadog に表示されるのにどれくらい時間がかかりますか？**<br>
-合計レイテンシーには多くの変数がありますが、ほとんどの場合、イベントとメトリクスは、インシデントが発生してから 30 秒以内に Datadog に表示されます。
+#### イベントとメトリクスは、どのくらいの時間で Datadog に表示されますか？
+合計レイテンシーには多くの変数がありますが、ほとんどの場合、イベントとメトリクスはインシデントが発生してから 30 秒以内に Datadog に表示されます。
 
-**Datadog の Azure DevOps イベントとメトリクスで何ができますか？**<br>
-イベントとメトリクスは、ダッシュボードの構築、モニターのセットアップ、トラブルシューティングなど、Datadog の他のイベントとメトリクスと同様に使用できます。
+#### Datadog の Azure DevOps イベントとメトリクスで何ができますか？
+イベントとメトリクスは、ダッシュボードの構築、モニターのセットアップ、トラブルシューティングなど、Datadog の他のイベントおよびメトリクスと同様に使用できます。
 
-**ビルド期間と作業項目期間のメトリクスはどのように生成されますか？**<br>
+#### ビルド期間と作業項目期間のメトリクスはどのように生成されますか？
 ビルド期間は、ビルドが開始されてから完了するまでの時間差（秒単位）を取得することにより、_ビルド完了_イベントから生成されます。
 
 作業項目期間は、`Done` への移行と作業項目が作成されたときの時間差（時間単位）を取得することにより、_作業項目更新_イベントから生成されます。
 
 **注**: `Done` の作業項目が再度開かれた場合は、次回 `Done` に移行したときに別のデータポイントが生成されます。初期データポイントは変更されず、新しいデータポイントは、やはり作業項目が最初に作成された時点から測定されます。
+
+#### サービスフックサブスクリプションのテストで、成功メッセージが返されましたが、イベントが Datadog に到達しないのはなぜですか？
+サービスフックサブスクリプションテストは、Azure DevOps が Datadog へイベントを送信できるかどうかのみをチェックします。API キーまたは Datadog オーガニゼーションサイト (US または EU) は検証されません。API キーおよびサイトが正しいことをご確認ください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
 [2]: https://app.datadoghq.com/account/settings#api
@@ -146,4 +142,5 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 [7]: /ja/monitors/monitor_types/composite/
 [8]: https://github.com/DataDog/azure-devops-monitor-gate-extension
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#available-event-types
+[11]: https://docs.datadoghq.com/ja/help/

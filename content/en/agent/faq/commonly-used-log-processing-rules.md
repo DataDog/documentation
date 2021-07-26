@@ -2,10 +2,10 @@
 title: Commonly Used Log Scrubbing Rules
 kind: faq
 further_reading:
-- link: "logs/processing"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "logs/live_tail"
@@ -82,6 +82,15 @@ Redact credit card numbers for Visa, Mastercard, American Express, Diner's Club,
   name: visa_mc_amex_diners_discover_jcb_credit_card
   replace_placeholder: "[CREDIT CARD REDACTED]"
   pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
+```
+
+The above rule may cause interference when connecting logs and traces as trace IDs can match the above format. If connecting logs and traces and you wish to use the above regular expression, consider the below example:
+
+```yaml
+- type: mask_sequences
+  name: visa_mc_amex_diners_discover_jcb_credit_card
+  replace_placeholder: "[CREDIT CARD REDACTED]"
+  pattern: \b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})\b
 ```
 
 ## Postal codes

@@ -12,6 +12,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/chef/'
 draft: false
 git_integration_title: chef
 has_logo: true
+integration_id: chef
 integration_title: Chef
 is_public: true
 kind: インテグレーション
@@ -84,9 +85,9 @@ knife role from file roles/base.rb
 
 **注:** 別のクックブックを使用してこれらの属性を定義している場合は、`default` より高いレベルの属性優先度を使用してください。
 
-### Report ハンドラー
+### レポートハンドラー
 
-Datadog は Chef Report ハンドラーを提供します。このハンドラーは、Chef 実行からのメトリクスとイベントを Datadog に報告します。Report ハンドラーをインストールすると、ハンドラーは Chef 実行のタイミングとリソースの変更に関するメトリクスを送信します。Chef 実行の成功率と失敗率を追跡するイベントも作成されます。
+Datadog は Chef レポートハンドラーを提供します。このハンドラーは、Chef 実行からのメトリクスとイベントを Datadog に報告します。Report ハンドラーをインストールすると、ハンドラーは Chef 実行のタイミングとリソースの変更に関するメトリクスを送信します。Chef 実行の成功率と失敗率を追跡するイベントも作成されます。
 
 これには、Chef 実行の出力を Datadog のイベントストリームに戻すという付加価値があります。したがって、エラーにすばやく注目し、チーム内で検討して解決することができます。
 

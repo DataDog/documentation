@@ -1,5 +1,5 @@
 ---
-title: Agent インテグレーション開発のための Python 環境
+title: Agent インテグレーション開発のための Python
 kind: documentation
 ---
 
@@ -36,7 +36,7 @@ Windows には 、通常 Python 環境がありません。[Python 公式ドキ�
 
 インテグレーションはそれぞれ独自の依存関係を持ちます。テストを実行したり、収集コードを実行したりしてみるには、それらの依存関係を Python に追加する必要があります。特定のインテグレーションしか使用しないライブラリやパッケージによって Python インストールが汚染されないようにするには、「仮想環境」を使用します。仮想環境は、Python インストールを隔離するための自己完結型のディレクトリツリーです。仮想環境がアクティブな場合は、インストールしたパッケージがすべてこのディレクトリに格納され、システム全体の Python インストールには影響しません。
 
-### Virtualenv と Virtualenvwrapper
+### Virtualenv と virtualenvwrapper
 
 Python 仮想環境の管理には、[Virtualenv][7] の使用をお勧めします。さらに、円滑な処理のために [virtualenvwrapper][8] の使用をお勧めします。Hitchhiker's Guide to Python には、この 2 つのツールのセットアップ方法が[包括的に説明][9]されています。
 
@@ -48,7 +48,7 @@ Miniconda を使用している場合は、仮想環境を管理するツール�
 [2]: https://brew.sh/#install
 [3]: https://docs.python-guide.org/en/latest/starting/install/osx/#doing-it-right
 [4]: https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
-[5]: https://conda.io/docs/user-guide/install/macos.html
+[5]: https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/macos.html
 [6]: https://docs.python.org/2.7/using/windows.html
 [7]: https://pypi.python.org/pypi/virtualenv
 [8]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html

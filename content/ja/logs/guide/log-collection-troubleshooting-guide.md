@@ -19,7 +19,7 @@ further_reading:
 ---
 `dd-agent` でログコレクターから[新しいログを Datadog に送信][1]する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このページに挙げられたトラブルシューティングをお役立てください。それでも問題が解決しない場合は、[ Datadog サポート][2]までお問い合わせください。
 
-## Agent の再起動が必要
+## Agent を再起動します。
 
 `datadog-agent` のコンフィギュレーションに加えられた変更は、[Agent を再起動][3]した後に反映されます。
 
@@ -47,7 +47,7 @@ logs_config:
 
 詳細については、[HTTPS ログ転送セクション][4]をご参照ください。
 
-## Agent のステータスをチェックします
+## Agent のステータスをチェック
 
 [Agent のステータスコマンド][5]をチェックすることが、問題の解決に役立つことがあります。
 
@@ -55,7 +55,7 @@ logs_config:
 
 Datadog Agent は、ログの収集 (ログの追跡またはリスニング) を開始して以降に書き込まれたログのみを収集します。ログ収集が適切にセットアップされているかどうかを確認する場合は、まず新しいログが書き込まれていることを確認してください。
 
-## ログファイルを追跡する際のアクセス許可の問題
+## ログファイル追跡のアクセス許可の問題
 
 `datadog-agent` はルートとして実行されません (一般的なベストプラクティスとしても、ルートとして実行することはお勧めしていません)。このため、(カスタムログまたはインテグレーションの) ログファイルを追跡するように `datadog-agent` を構成する場合は、追跡して収集するログファイルへの読み取りアクセス権を `datadog-agent` ユーザーが持つことを特に注意して確認する必要があります。
 
@@ -95,9 +95,9 @@ Agent がファイルへの読み取りアクセス許可を持つようにす�
 
 ## アクセス許可の問題と Journald
 
-journald からログを収集する場合は、[journald インテグレーション][7]で説明されているように、Datadog Agent ユーザーが systemd グループに追加されている必要があります。
+Journald からログを収集する場合は、[Journald インテグレーション][7]で説明されているように、Datadog Agent ユーザーが systemd グループに追加されている必要があります。
 
-ファイルアクセス許可が正しくなければ、journald は空のペイロードを送信します。そのため、この場合は、明示的なエラーメッセージを表示および送信することはできません。
+**注**: ファイルアクセス許可が正しくなければ、Journald は空のペイロードを送信します。そのため、この場合は、明示的なエラーメッセージを表示および送信することはできません。
 
 ## 構成上の問題
 
@@ -138,7 +138,7 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 [1]: /ja/logs/
 [2]: /ja/help/
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
-[4]: /ja/agent/logs/#send-logs-over-https
+[4]: /ja/agent/logs/log_transport?tab=https#enforce-a-specific-transport
 [5]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /ja/integrations/journald/

@@ -34,7 +34,7 @@ further_reading:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetic テストメッセージ" >}}
 
-## Slo ウィジェット構成
+## SLO ウィジェットコンフィギュレーション
 
 ### SLO を作成する
 

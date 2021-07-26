@@ -5,10 +5,10 @@ further_reading:
 - link: "/logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status/"
   tag: "FAQ"
   text: "Learn how to remap custom severity values to the official log status"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
@@ -46,7 +46,7 @@ All new logs processed by this Pipeline should now have the correct status.
 ## JSON logs
 
 **JSON logs are automatically parsed in Datadog.**
-The log `status` attribute is one of the [reserved attributes][3] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's status. Change the default remapping for those attributes at the top of your Pipeline as explained [in the edit reserved attributes documentation][4].
+The log `status` attribute is one of the [reserved attributes][3] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's status. Change the default remapping for these attributes at the top of your [Pipeline][4].
 So let's imagine that the actual status of the log is contained in the attribute `logger_severity`.
 
 {{< img src="logs/faq/new_log.png" alt="new log"  style="width:50%;">}}
@@ -65,7 +65,7 @@ There are specific status formats that must be adhered to for the remapping to w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/?tab=matcher
-[2]: /logs/processing/processors/#log-status-remapper
-[3]: /logs/processing/#reserved-attributes
-[4]: /logs/processing/#edit-reserved-attributes
+[1]: /logs/log_configuration/parsing
+[2]: /logs/log_configuration/processors/#log-status-remapper
+[3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[4]: /logs/log_configuration/pipelines/?tab=date#preprocessing

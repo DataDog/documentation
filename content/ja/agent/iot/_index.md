@@ -61,36 +61,45 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
 
 Debian ベースのオペレーティングシステムに IoT Agent を手動でインストールするには、以下のコマンドを実行します。
 
-1. HTTPS を使用してダウンロードするには、`apt` をアップデートして `apt-transport-https` をインストールします。
+1. `apt` を更新し、`apt-transport-https` をインストールして HTTPS 経由でダウンロードし、`curl` と `gnupg` をインストールして署名キーを取得します。
     ```bash
     sudo apt-get update
-    sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https curl gnupg
     ```
 
 2. システム上に Datadog deb リポジトリをセットアップし、Datadog の APT キーをインポートします。
     ```bash
-    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-3. `apt` を更新し、IoT Agent をインストールします。
+3. Ubuntu 14 以前または Debian 8 以前を実行している場合は、キーリングを `/etc/apt/trusted.gpg.d` にコピーします。
+
+   ```shell
+   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
+   ```
+
+4. `apt` を更新し、IoT Agent をインストールします。
     ```bash
     sudo apt-get update
     sudo apt-get install datadog-iot-agent
     ```
 
-4. 構成サンプルをコピーし、適切な API キーを指定します。
+5. 構成サンプルをコピーし、適切な API キーを指定します。
     ```bash
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
+6. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
     ```bash
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
-6. IoT Agent を起動します。
+7. IoT Agent を起動します。
     ```bash
     sudo systemctl restart datadog-agent.service
     ```
@@ -107,9 +116,13 @@ RPM ベースのオペレーティングシステムに IoT Agent を手動で�
     baseurl = https://yum.datadoghq.com/stable/7/<HOST_ARCHITECTURE>
     enabled=1
     gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
+
+   **注**: [dnf にバグ][1]が発生しているため、RHEL/CentOS 8.1 では `repo_gpgcheck=1` の代わりに `repo_gpgcheck=0` を使用してください。
 
     `baseurl` は、ホスト OS に依存します。
     - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
@@ -137,6 +150,7 @@ RPM ベースのオペレーティングシステムに IoT Agent を手動で�
     sudo systemctl restart datadog-agent.service
     ```
 
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{< /tabs >}}
 

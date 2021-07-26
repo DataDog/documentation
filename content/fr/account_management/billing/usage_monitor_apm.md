@@ -9,7 +9,7 @@ Consultez la page [Tarification de l'APM][2] pour comprendre comment l'APM et le
 
 ## Informations sur l'utilisation de l'APM
 
-Si vous êtes un administrateur de votre compte, vous pouvez consulter les informations relatives à l'utilisation de votre compte sur la page [Usage][3], qui est mise à jour toutes les 72 heures.
+Si vous êtes administrateur, vous pouvez consulter les informations relatives à l'utilisation de votre compte sur la page [Usage][3], qui est mise à jour toutes les 72 heures.
 
 | Métrique         | Description                                                                              |
 |----------------|------------------------------------------------------------------------------------------|

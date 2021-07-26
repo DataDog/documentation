@@ -2,14 +2,18 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    kafka: assets/dashboards/kafka_dashboard.json
   logs:
     source: kafka
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Kafka] High producer request rate': assets/recommended_monitors/kafka_high_producer_request_rate.json
+    '[Kafka] Offline partition': assets/recommended_monitors/kafka_offline_partition.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     kafka_patterns: assets/saved_views/kafka_patterns.json
+    kafka_processes: assets/saved_views/kafka_processes.json
     logger_overview: assets/saved_views/logger_overview.json
   service_checks: assets/service_checks.json
 categories:
@@ -22,6 +26,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kafka/README.md'
 display_name: Kafka
+draft: false
 git_integration_title: kafka
 guid: f201c0b7-4b31-4528-9955-ae756a4580b8
 integration_id: kafka
@@ -84,7 +89,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. Kafka utilise le logger `log4j` par défaut. Pour activer la journalisation dans un fichier et personnaliser le format, modifiez le fichier `log4j.properties` :
 
@@ -145,7 +150,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
@@ -189,7 +194,7 @@ Le check Kafka n'inclut aucun événement.
 ### Checks de service
 
 **kafka.can_connect**:<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Kafka qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Kafka qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -233,16 +238,22 @@ Le check Kafka consumer de l'Agent est inclus avec le package de l'[Agent Datad
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
+##### Collecte de métriques
+
 1. Modifiez le fichier `kafka_consumer.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][14]. Consultez le [fichier d'exemple kafka_consumer.d/conf.yaml][15] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][16].
 
+##### Collecte de logs
+
+Ce check ne recueille aucun log supplémentaire. Pour recueillir des logs à partir de vos brokers Kafka, consultez les [instructions de collecte de logs pour Kafka][17].
+
 <!-- xxz tab xxx -->
-<!-- xxx tab "Containerized" xxx -->
+<!-- xxx tab "Environnement conteneurisé" xxx -->
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][17].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][18].
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
@@ -295,4 +306,5 @@ Le check Kafka-consumer n'inclut aucun check de service.
 [14]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [15]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
 [16]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[17]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[17]: https://docs.datadoghq.com/fr/integrations/kafka/#log-collection
+[18]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

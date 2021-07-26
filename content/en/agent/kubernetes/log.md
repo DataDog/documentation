@@ -24,7 +24,7 @@ The Agent has two ways to collect logs: from the [Docker socket][1], and from th
 * Docker is not the runtime, **or**
 * More than 10 containers are used on each node
 
-The Docker API is optimized to get logs from one container at a time, when there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the Kubernetes log files logic.
+The Docker API is optimized to get logs from one container at a time; when there are many containers in the same node, collecting logs through the Docker socket might be consuming much more resources than going through the Kubernetes log files logic.
 
 ## Log collection
 
@@ -47,12 +47,12 @@ To enable log collection with your DaemonSet:
           value: "true"
         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
           value: "true"
-        - name: DD_CONTAINER_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE_LOGS
           value: "name:datadog-agent"
      # (...)
     ```
 
-    **Note**: Setting `DD_CONTAINER_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
+    **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
 
 2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
@@ -107,7 +107,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 When the agent is running with a non-root user, it cannot directly read the log files contained in `/var/lib/docker/containers`. In this case, it is necessary to mount the docker socket in the agent container so that it can fetch the container logs from the docker daemon.
 
-[1]: /agent/guide/autodiscovery-management/
+[1]: /agent/docker/?tab=standard#ignore-containers
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -181,7 +181,7 @@ agent:
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -208,6 +208,7 @@ Each tab in sections below shows a different way to apply integration templates 
 * [Kubernetes pod annotations](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
+* [Helm](?tab=helm#configuration)
 
 ### Configuration
 
@@ -365,6 +366,22 @@ With the key-value store enabled as a template source, the Agent looks for templ
 [1]: /integrations/consul/
 [2]: /agent/guide/agent-commands/
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the Agent container.
+  ```yaml
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      init_config:
+      instances:
+        (...)
+      logs:
+        <LOGS_CONFIG>
+  ```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Examples - Datadog Redis integration
@@ -445,6 +462,22 @@ etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+The following configuration defines the integration template for Redis containers with the `source` and `service` attributes for collecting logs:
+  ```yaml
+  confd:
+    redis.yaml: |-
+      ad_identifiers:
+        - redis
+      logs:
+        - source: redis
+        - service: redis
+  ```
+
+**Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
 
 {{% /tab %}}
 {{< /tabs >}}

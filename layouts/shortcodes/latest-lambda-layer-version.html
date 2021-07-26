@@ -1,0 +1,30 @@
+<!--
+    Output the latest version of a specific Lambda layer.
+    These version numbers are updated by the Serverless team.
+-->
+{{- if  not (.Get "layer") -}}{{ errorf "latest-lambda-layer-version shortcode error: Missing value for param 'layer': %s" .Position }}{{- end -}}
+
+<!-- Python Layer -->
+{{- if eq (.Get "layer") "python" -}}
+    42
+{{- end -}}
+
+<!-- Node Layer -->
+{{- if eq (.Get "layer") "node" -}}
+    59
+{{- end -}}
+
+<!-- Ruby Layer -->
+{{- if eq (.Get "layer") "ruby" -}}
+    12
+{{- end -}}
+
+<!-- Lambda Extension -->
+{{- if eq (.Get "layer") "extension" -}}
+    9
+{{- end -}}
+
+<!-- dd-trace-java Layer -->
+{{- if eq (.Get "layer") "dd-trace-java" -}}
+    3
+{{- end -}}

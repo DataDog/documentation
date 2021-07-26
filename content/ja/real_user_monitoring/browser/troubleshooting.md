@@ -9,7 +9,7 @@ further_reading:
     tag: Documentation
     text: コンテンツセキュリティポリシー
 ---
-このガイドは、Datadog Browser RUM で予期しない動作が発生した場合に問題を迅速に解決するのに役立つ場合があります。さらに支援が必要な場合は、[Datadog サポート][1]にお問い合わせください。各リリースには改善と修正が含まれているため、[RUM Browser SDK][2] は定期的に最新バージョンに更新してください。
+Datadog Browser RUM で予期しない動作が発生した場合に問題は、このガイドを使うと迅速に解決することができます。問題が解決しない場合は、[Datadog サポート][1]にお問い合わせください。各リリースには改善と修正が含まれているため、[RUM Browser SDK][2] は定期的に最新バージョンに更新してください。
 
 ## データがない
 
@@ -17,14 +17,15 @@ RUM データが表示されない場合、または一部のユーザーのデ�
 
 | 一般的な原因                                                                                               | 推奨される修正                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 広告ブロッカーが、Browser RUM SDK のダウンロードや Datadog へのデータ送信を妨害している。     | 一部の広告ブロッカーの制限は、パフォーマンスおよびマーケティング追跡ツールにまで及びます。[npm を使用して Browser RUM SDK をインストール][3]し、[収集したデータをプロキシ経由で転送][4]します。 |
+| 広告ブロッカーが、Browser RUM SDK のダウンロードや Datadog へのデータ送信を妨害している。     | 一部の広告ブロッカーの制限は、パフォーマンスおよびマーケティング追跡ツールにまで及びます。ドキュメント [npm を使用して Browser RUM SDK をインストールする][3]と[収集したデータをプロキシ経由で転送する][4]を参照してください。 |
 | ネットワークルールまたは VPN が、Browser RUM SDK のダウンロードや Datadog へのデータ送信を妨害している。 | SDK のダウンロードまたはデータの送信に必要なエンドポイントへのアクセスを許可します。エンドポイントのリストは、[コンテンツセキュリティポリシーのドキュメント][5]にあります。                                        |
+| Browser RUM SDK の前に初期化されたスクリプト、パッケージ、クライアントは、ログ、リソース、ユーザーアクションの欠落につながる可能性があります。たとえば、Browser RUM SDK の前に ApolloClient を初期化すると、`graphql` リクエストが RUM エクスプローラーに XHR リソースとして記録されない場合があります。 | Browser RUM SDK が初期化される場所を確認し、アプリケーションコードの実行の早い段階にこのステップを移動することを検討してください。                                             |   
 
 [コンテンツセキュリティポリシーのガイドライン][6]を読み、ウェブサイトが Browser RUM SDK CDN とインテークエンドポイントへのアクセスを許可していることを確認します。
 
-### Browser RUM SDK が初期化されていることを確認します
+### Browser RUM SDK の初期化
 
-ブラウザコンソールで `window.DD_RUM.getInternalContext()` コマンドを実行し、`application_id`、`session_id`、ビューオブジェクトが返されることを確認します。
+ブラウザコンソールで `window.DD_RUM.getInternalContext()` を実行して Browser RUM SDK が初期化されているかどうかを確認し、`application_id`、`session_id`、およびビューオブジェクトが返されることを確認します。
 
 {{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="内部コンテキストの取得コマンドの成功">}}
 
@@ -34,9 +35,9 @@ SDK がインストールされていない場合、または SDK が正常に�
 
 Browser RUM SDK のロードに関連するエラーに気付いた場合は、ブラウザー開発ツールのコンソールまたはネットワークタブを確認することもできます。
 
-### データが Datadog インテークに送信されていることを確認します
+### Datadog インテークへのデータ
 
-Browser RUM SDK は、データのバッチを Datadog インテークに定期的に送信します。ブラウザ開発ツールの Network セクションに、`/v1/input` (URL の起点部分は RUM のコンフィギュレーションによって異なる場合があります) を対象とするネットワークリクエストが表示されます。
+Browser RUM SDK は、データのバッチを Datadog インテークに定期的に送信します。データが送信中の場合は、ブラウザ開発ツールの Network セクションに、`/v1/input` (URL の起点部分は RUM のコンフィギュレーションによって異なる場合があります) を対象とするネットワークリクエストが表示されます。
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="Datadog インテークに対する RUM リクエスト">}}
 
@@ -57,7 +58,7 @@ Browser RUM SDK は、クッキーに依存してセッション情報を保存�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help
-[2]: https://github.com/DataDog/browser-sdk/blob/master/CHANGELOG.md
+[2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /ja/real_user_monitoring/browser/#npm
 [4]: /ja/real_user_monitoring/faq/proxy_rum_data/?tab=npm
 [5]: /ja/real_user_monitoring/faq/content_security_policy/

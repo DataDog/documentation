@@ -9,20 +9,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - 監視
-  - セキュリティ
+  - モニタリング
+  - security
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md'
 display_name: Cyral
-draft: true
+draft: false
 git_integration_title: cyral
 guid: 2a854a73-b0da-4954-b34e-fc1cd05ba8e8
 integration_id: cyral
 integration_title: Cyral
-is_public: false
-kind: インテグレーション
+is_public: true
+kind: integration
 maintainer: product@cyral.com
 manifest_version: 1.0.0
 metric_prefix: cyral.

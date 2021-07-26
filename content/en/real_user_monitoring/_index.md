@@ -26,19 +26,16 @@ further_reading:
   text: "RUM Browser Data Collected"
 ---
 
-{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
+{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard"  >}}
 
 ## What is Real User Monitoring?
 
-
-Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the real-time activity and experience of individual users. It is designed to solve 4 types of use cases for web and mobile applications:
+Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. It is designed to solve 4 types of use cases for web and mobile applications:
 
 * **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your front-end code.
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors).
-
-
 
 ## Getting started
 
@@ -52,15 +49,15 @@ Select your application type to start collecting RUM data:
 
 Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out of the box dashboards][1].
 
-{{< img src="real_user_monitoring/dashboards/rum_dashboard.png" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
-### RUM Explorer and Analytics
+### RUM explorer and analytics
 
 View user sessions in segments, such as checking when latency impacts your premium customers with [customizable analytics widgets][2]. Explore, save views, and create monitors on your customized searches.
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.gif" alt="RUM Analytics"  >}}
 
-### Seamless integration with Logs, APM and Profiler
+### Integration with logs, APM, and profiler
 
 View your [backend traces, logs, infrastructure metrics][1] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
@@ -70,10 +67,9 @@ View your [backend traces, logs, infrastructure metrics][1] down to the exact li
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][4].
 
-{{< img src="real_user_monitoring/error_tracking/rum_errors.gif" alt="RUM error tracking">}}
+{{< img src="real_user_monitoring/error_tracking/errors_rum.gif" alt="RUM error tracking">}}
 
-
-## Further Reading
+## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 

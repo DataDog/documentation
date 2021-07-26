@@ -13,8 +13,6 @@ source: ファイル整合性モニタリング
 title: Nsswitch コンフィギュレーションの変更
 type: security_rules
 ---
-## 概要
-
 ## 目標
 nsswitch.conf の修正を検出します。
 

@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: /tracing/setup/
     tag: Documentation
-    text: Découvrir comment configurer le tracing d'APM avec votre application
+    text: Configurer le tracing d'APM avec votre application
   - link: 'https://www.datadoghq.com/blog/service-map/'
     tag: Blog
     text: "Présentation de la Service\_Map dans Datadog"
@@ -21,7 +21,7 @@ La Service Map affiche l'ensemble des [services][1] qui composent votre applica
 
 ## Implémentation
 
-La Service Map permet de visualiser les données recueillies par l'APM Datadog. Aucune configuration n'est requise pour afficher les [services][1].
+La Service Map permet de visualiser les données recueillies par les fonctions APM et RUM de Datadog. Aucune configuration n'est requise pour afficher les [services][1].
 
 ## Comment l'utiliser
 
@@ -29,7 +29,7 @@ La Service Map a été conçue pour fournir un aperçu de vos services et de le
 
 ## Filtrage et modification de contextes
 
-La Service Map peut être filtrée en fonction du type de service (webserver, database, cache, etc.) ou d'une correspondance de chaîne approximative. Cette fonctionnalité est particulièrement utile dans un environnement de micro-services composé de centaines de milliers de nœuds.
+La Service Map peut être filtrée en fonction du type de service (webserver, database, cache, etc.) ou d'une correspondance de chaîne approximative. Cette fonctionnalité est particulièrement utile dans un environnement de micro-services composé de centaines de milliers de nœuds. En outre, les données d'un service peuvent être filtrées en fonction d'un intervalle spécifique, ce qui est idéal pour surveiller votre architecture à mesure qu'elle évolue.
 
 Les services sont également filtrés en fonction de leur `env` et d'un [deuxième tag primaire][2] (facultatif). Lorsque vous utilisez les menus déroulants pour sélectionner un contexte différent, une nouvelle carte illustrant les services correspondants à ce contexte est alors générée. Ces services ne peuvent pas appeler ni être appelés par des services dans d'autres environnements.
 
@@ -71,7 +71,7 @@ En outre, les monitors peuvent être tagués par service dans la section « Say
 
 Les nœuds représentent les services tels qu'ils sont instrumentés dans l'APM et correspondent à ceux qui apparaissent sur votre page [Services][3]. Les arêtes représentent les appels agrégés d'un service à l'autre. Ces interactions sont illustrées dans le graphique de performances pour chaque [trace][4] individuelle.
 
-Les nouveaux services ou les nouvelles connexions s'affichent peu de temps après leur instrumentation et deviennent obsolètes si aucune trace correspondante n'est détectée pendant deux semaines. Ce système prend en compte les services qui ne fonctionnent que rarement, mais qui jouent un rôle essentiel dans un système opérationnel.
+Les nouveaux services ou les nouvelles connexions s'affichent peu de temps après leur instrumentation et deviennent obsolètes si aucune trace correspondante n'est détectée pendant 30 jours. Ce système prend en compte les services qui ne fonctionnent que rarement, mais qui jouent un rôle essentiel dans un système opérationnel.
 
 {{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="nœuds Service Map" video="true" width="90%">}}
 

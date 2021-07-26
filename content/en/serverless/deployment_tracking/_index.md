@@ -2,12 +2,12 @@
 title: Deployment Tracking
 kind: documentation
 further_reading:
-- link: "/serverless/distributed_tracing"
-  tag: "Documentation"
-  text: "Distributed Tracing for Serverless"
-- link: "/serverless/serverless_tagging"
-  tag: "Documentation"
-  text: "Serverless Tagging"
+    - link: '/serverless/distributed_tracing'
+      tag: 'Documentation'
+      text: 'Distributed Tracing for Serverless'
+    - link: '/serverless/serverless_tagging'
+      tag: 'Documentation'
+      text: 'Serverless Tagging'
 ---
 
 {{< img src="serverless/deployment_tracking.jpeg" alt="Serverless Deployment Tracking"  style="width:100%;">}}
@@ -28,12 +28,13 @@ If you haven’t already, set up the [Amazon Web Services][2] integration first.
 cloudtrail:LookupEvents
 ```
 
-If you have already added the permission, but you still don't see events for any of your AWS Lambda functions, please reach out to our [support team][3] to opt into Deployment Tracking.
+If you have already added the permission, but you still don't see events for any of your AWS Lambda functions, enable Deployment Tracking using the AWS Lambda Integration Tile.
+
+{{< img src="serverless/lambda_integration_settings.png" alt="Lambda Integration Settings"  style="width:100%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services/#setup

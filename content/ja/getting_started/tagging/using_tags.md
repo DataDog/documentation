@@ -367,7 +367,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 [11]: /ja/logs/explorer/analytics/
 [12]: /ja/logs/explorer/patterns/
 [13]: /ja/logs/live_tail/
-[14]: /ja/logs/processing/pipelines/
+[14]: /ja/logs/log_configuration/pipelines
 [15]: /ja/api/
 [16]: /ja/api/v1/downtimes/#schedule-a-downtime
 [17]: /ja/api/v1/events/#query-the-event-stream

@@ -12,8 +12,6 @@ technique: T1552-unsecured-credentials
 title: EC2 インスタンスは、疑わしい AWS メタデータ DNS クエリを解決しました
 type: security_rules
 ---
-## 概要
-
 ### 目標
 リクエストされたドメインが AWS メタデータ IP (169.254.169.254) に解決されるタイミングを検出します。
 

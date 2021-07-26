@@ -10,8 +10,6 @@ source: route53
 title: EC2 インスタンスが疑わしいドメインをリクエスト
 type: security_rules
 ---
-## 概要
-
 ### 目標
 リクエストされたドメインに疑わしい TLD があるかを検知します。
 

@@ -10,8 +10,6 @@ source: azure
 title: 作成または変更された Azure SQL Server ファイアーウォールルール
 type: security_rules
 ---
-## 概要
-
 ## 目標
 
 Azure ネットワークセキュリティルールが作成、変更、または削除されたことを検出します。

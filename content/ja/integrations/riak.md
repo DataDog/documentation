@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    riak: assets/dashboards/riak_dashboard.json
   logs:
     source: riak
   metrics_metadata: metadata.csv

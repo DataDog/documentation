@@ -1,13 +1,19 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: nagios
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    nagios_processes: assets/saved_views/nagios_processes.json
   service_checks: assets/service_checks.json
 categories:
   - monitoring
   - notification
+  - log collection
 creates_events: true
 ddtype: check
 dependencies:
@@ -23,6 +29,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nagios.
+metric_to_check: nagios.host.rta
 name: nagios
 process_signatures:
   - nagios
@@ -97,6 +104,27 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 Avec la configuration par défaut, le check Nagios ne recueille aucune métrique. Cependant, si vous définissez `collect_host_performance_data` et/ou `collect_service_performance_data` sur `True`, le check surveille les données de performance Nagios et les transmet sous forme de métriques gauge à Datadog.
 
+### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `nagios.d/conf.yaml` pour commencer à recueillir vos logs Nagios :
+
+    ```yaml
+    logs:
+      - type: file
+        path: /opt/nagios/var/log/nagios.log
+        source: nagios
+    ```
+
+    Modifiez la valeur du paramètre `path` en fonction de votre environnement. Reportez-vous à la valeur `log_file` dans votre fichier de configuration Nagios. Consultez le [fichier d'exemple nagios.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][4].
+
 ### Événements
 
 Le check surveille le log d'événements Nagios en recherchant les lignes de log contenant ces chaînes. Il génère ainsi un événement pour chaque ligne :
@@ -117,14 +145,16 @@ Le check Nagios n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
-- [Comprendre vos alertes Nagios avec Datadog][4]
+- [Comprendre vos alertes Nagios avec Datadog][6]
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/fr/help/
-[4]: https://www.datadoghq.com/blog/nagios-monitoring
+[3]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://www.datadoghq.com/blog/nagios-monitoring

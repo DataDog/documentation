@@ -17,6 +17,7 @@ dependencies:
 public_title: Datadog-NXlog Integration
 supported_os:
     - windows
+integration_id: "nxlog"
 ---
 
 ## Overview

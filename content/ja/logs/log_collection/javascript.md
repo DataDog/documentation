@@ -2,7 +2,7 @@
 aliases:
   - /ja/logs/log_collection/web_browser
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/master/packages/logs/README.md'
+  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/logs/README.md'
 kind: documentation
 title: ブラウザログ収集
 ---
@@ -23,7 +23,7 @@ title: ブラウザログ収集
 
 **Datadog ブラウザログ SDK**: [NPM](#npm) を使用して SDK を構成するか、head タグで [CDN 非同期](#cdn-async) または [CDN 同期](#cdn-sync) コードスニペットを使用します。
 
-**対応ブラウザ**: ブラウザログ SDK は、IE10 および IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
+**対応ブラウザ**: ブラウザログ SDK は、IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
 
 ### 適切なインストール方法の選択
 
@@ -554,11 +554,14 @@ window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 
 ### 送信先の変更
 
-デフォルトでは、Datadog ブラウザログ SDK が作成したロガーは、ログを Datadog に送信します。
-Datadog ブラウザログ SDK が初期化されると、ログを `console` に送信したり、ログをまったく送信しない (`silent`) よう、API を使用してロガーを構成することもできます。
+デフォルトでは、Datadog ブラウザログ SDK が作成したロガーは、ログを Datadog に送信します。Datadog ブラウザログ SDK が初期化されると、ロガーを構成して以下のようにすることもできます。
+
+- `console` と Datadog にログを送信する (`http`)
+- `console` にのみログを送信する
+- ログをまったく送信しない (`silent`)
 
 ```
-setHandler (handler?: 'http' | 'console' | 'silent')
+setHandler (handler?: 'http' | 'console' | 'silent' | Array<handler>)
 ```
 
 ##### NPM
@@ -569,6 +572,7 @@ NPM の場合は以下を使用します。
 import { datadogLogs } from '@datadog/browser-logs'
 
 datadogLogs.logger.setHandler('<HANDLER>')
+datadogLogs.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 #### CDN 非同期
@@ -578,6 +582,7 @@ CDN 非同期の場合は以下を使用します。
 ```javascript
 DD_LOGS.onReady(function () {
   DD_LOGS.logger.setHandler('<HANDLER>')
+  DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 })
 ```
 
@@ -589,6 +594,7 @@ CDN 同期の場合は以下を使用します。
 
 ```javascript
 window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
+window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
@@ -596,5 +602,5 @@ window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 [1]: /ja/account_management/api-app-keys/#api-keys
 [2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/BROWSER_SUPPORT.md
-[5]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/src/logsEvent.types.ts
+[4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
+[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/src/logsEvent.types.ts

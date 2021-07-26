@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/azure_customer_insights/'
 draft: false
 git_integration_title: azure_customer_insights
 has_logo: true
+integration_id: azure-customerinsights
 integration_title: Microsoft Azure Customer Insights
 is_public: true
 kind: integration
@@ -26,7 +27,7 @@ Azure Customer Insights permet aux organisations de toute taille de consolider d
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques de Customer Insights.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

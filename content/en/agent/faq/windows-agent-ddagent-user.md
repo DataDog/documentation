@@ -6,18 +6,22 @@ kind: faq
 Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
 
 The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
-The account gains the following rights during installation:
+The account is assigned to the following groups during installation:
 
-* It can start and stop the APM and Process Agent
 * It becomes a member of the “Performance Monitor Users” group
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
 * It becomes a member of the “Event Log Readers” group
-* It has local login disabled
-* It has remote login disabled
-* It has network login disabled
 
-**Note**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+**Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
+
+Additionally the following security policies are applied to the account during installation:
+* Deny access to this computer from the network
+* Deny log on locally
+* Deny log on through Remote Desktop Services
+* Log on as a service
+
+**Important**: Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
 
 ## Installation
 
@@ -71,8 +75,6 @@ It must be separated from the `<USERNAME>` with a backslash `\`.
 ##### Primary and backup domain controllers
 
 When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it will be a domain user rather than a local one.
-
-If no user account is specified on the command line, the installer will create a *domain* account named `ddagentuser` in the controller's domain.
 
 If a user account is specified on the command line, but this user account is not found in the domain, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
 

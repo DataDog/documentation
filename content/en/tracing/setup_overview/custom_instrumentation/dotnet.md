@@ -75,7 +75,7 @@ public class ShoppingCartController : Controller
 
 ### Adding tags globally to all spans
 
-Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
+Use the `DD_TAGS` environment variable (at the Agent level) to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
 
 ```ini
 DD_TAGS=datacenter:njc,key2:value2
@@ -114,7 +114,7 @@ using (var parentScope =
     }
 }
 ```
-## Resource Filtering
+## Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
 

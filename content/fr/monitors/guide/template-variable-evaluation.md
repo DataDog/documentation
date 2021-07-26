@@ -25,7 +25,7 @@ Les opérateurs suivants sont pris en charge :
 
 ### Exemple
 
-La template variable `{{last_triggered_at_epoch}}` renvoie l'heure UTC à laquelle un monitor s'est déclenché pour la dernière fois au format epoch en millisecondes. Les opérateurs d'évaluation peuvent être utilisés pour enlever 15 minutes (15*60*1000 millisecondes) comme suit :
+La template variable `{{last_triggered_at_epoch}}` renvoie l'heure UTC à laquelle un monitor s'est déclenché pour la dernière fois au format epoch en millisecondes. Les opérateurs d'évaluation peuvent être utilisés pour enlever 15 minutes (15 * 60 * 1000 millisecondes) comme suit :
 
 ```
 {{eval "last_triggered_at_epoch-15*60*1000"}}
@@ -42,7 +42,7 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 La valeur d'une template variable numérique peut être utilisée en tant qu'entrée pour des fonctions d'évaluation afin de modifier le format de la template variable ou d'effectuer une opération mathématique sur la valeur. La syntaxe utilise le format suivant. **Remarque** : les expressions doivent être comprises entre des guillemets (`"`).
 
 ```text
-{{eval “function(NOM_TEMPLATE_VARIABLE)”}}
+{{eval "function(NOM_TEMPLATE_VARIABLE)"}}
 ```
 
 Les fonctions suivantes modifient le format d'une template variable numérique :
@@ -87,16 +87,15 @@ Les fonctions suivantes utilisent la valeur d'une template variable numérique e
 Si vous n'avez pas besoin des décimales de la template variable `{{value}}` pour votre utilisation spécifique, utilisez la fonction int pour évaluer `{{value}}` en tant que nombre entier et ainsi améliorer la lisibilité en supprimant les décimales :
 
 ```
-{{eval “int(value)”}}
+{{eval "int(value)"}}
 ```
 
 Si l'évaluation de `{{value}}` renvoie un nombre important d'octets ou de bits, utilisez la fonction `humanize_bytes` ou `humanize_bits` pour convertir le nombre en une unité de mémoire supérieure, telle que Go ou Mo, afin d'améliorer la lisibilité :
 
 ```
-{{eval “humanize_bytes(value)”}}
+{{eval "humanize_bytes(value)"}}
 
-{{eval “humanize_bits(value)”}}
+{{eval "humanize_bits(value)"}}
 ```
-
 
 [1]: /fr/logs/explorer/

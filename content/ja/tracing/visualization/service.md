@@ -62,21 +62,21 @@ Datadog は、特定のサービスに対してすぐに使用できるグラフ
 
 {{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="すぐに使えるサービスグラフ"  style="width:90%;">}}
 
-### Export to Timeboard
+### タイムボードにエクスポート
 
-グラフを既存の[タイムボード][5]にエクスポートするには、各グラフの右上隅にある矢印をクリックします。
+グラフを既存の[ダッシュボード][5]にエクスポートするには、各グラフの右上隅にある矢印をクリックします。
 
-{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="タイムボードに保存"  style="width:40%;">}}
+{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="ダッシュボードに保存" style="width:80%;">}}
 
 ### レイテンシー分布
 
-上記のグラフ以外に、サービスレイテンシー分布グラフがあります。
+サービス詳細画面にも、サービスレイテンシー分布グラフが表示されます。
 
-{{< img src="tracing/visualization/service/latency_distribution.png" alt="レイテンシー分布"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_latency_distribution.png" alt="レイテンシー分布"  style="width:100%;">}}
 
-このグラフの右上のセレクターを使用して、レイテンシー分布の特定のパーセンタイルを拡大します。
+右上のセレクターを使用して特定のパーセンタイルを拡大するか、サイドバーにカーソルを合わせてパーセンタイルマーカーを表示します。
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="レイテンシー分布セレクター"  style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布サイドバー"  style="width:50%;">}}
 
 ## リソース
 
@@ -112,5 +112,5 @@ Datadog は、特定のサービスに対してすぐに使用できるグラフ
 [2]: /ja/tracing/visualization/resource/
 [3]: /ja/monitors/monitor_types/apm/
 [4]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[5]: /ja/dashboards/timeboard/
+[5]: /ja/dashboards/
 [6]: /ja/tracing/visualization/#resources

@@ -368,7 +368,7 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 [11]: /logs/explorer/analytics/
 [12]: /logs/explorer/patterns/
 [13]: /logs/live_tail/
-[14]: /logs/processing/pipelines/
+[14]: /logs/log_configuration/pipelines
 [15]: /api/
 [16]: /api/v1/downtimes/#schedule-a-downtime
 [17]: /api/v1/events/#query-the-event-stream

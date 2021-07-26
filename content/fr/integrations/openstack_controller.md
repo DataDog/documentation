@@ -1,12 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: openstack
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -16,7 +20,7 @@ draft: false
 git_integration_title: openstack_controller
 guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller
-integration_title: Openstack_controller
+integration_title: Openstack Controller
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -24,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: openstack.
 metric_to_check: openstack.controller
 name: openstack_controller
-public_title: Intégration Datadog/Openstack_controller
+public_title: Openstack Controller
 short_description: 'Surveillez l''utilisation des ressources de vos hyperviseurs et machines virtuelles, ainsi que vos métriques Neutron.'
 support: core
 supported_os:
@@ -83,6 +87,26 @@ Créez un utilisateur `datadog` afin de l'utiliser dans votre fichier `openstack
    ```
 
 2. [Redémarrez l'Agent][3].
+
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous pouvez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `openstack_controller.d/conf.yaml` pour commencer à recueillir vos logs Openstack :
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: openstack
+   ```
+
+    Modifiez la valeur du paramètre `path` et configurez-le pour votre environnement. Consultez le [fichier d'exemple openstack_controller.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
 
 ### Validation
 

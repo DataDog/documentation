@@ -72,11 +72,11 @@ Airflow インテグレーションを適切に動作させるには、以下の
 
 ##### Airflow を DogStatsD に接続する
 
-Airflow の `statsd` 機能を使用して Airflow を (Datadog Agent に含まれる) DogStatsD に接続し、メトリクスを収集します。
+Airflow の `statsd` 機能を使用してメトリクスを収集することにより、Airflow を DogStatsD (Datadog Agent に含まれる) に接続します。使用されている Airflow バージョンによって報告されるメトリクス、および Airflow で使用可能な追加オプションの詳細については、[Airflow ドキュメント][3]を参照してください。
 
-**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes、airflow.operator_failures/successes、airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][3]。
+**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes、airflow.operator_failures/successes、airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][4]。
 
-1. [Airflow StatsD プラグイン][4]をインストールします。
+1. [Airflow StatsD プラグイン][5]をインストールします。
 
    ```shell
    pip install 'apache-airflow[statsd]'
@@ -92,7 +92,7 @@ Airflow の `statsd` 機能を使用して Airflow を (Datadog Agent に含ま�
    statsd_prefix = airflow
    ```
 
-3. 下記のコンフィギュレーションを追加して、[Datadog Agent のメインコンフィギュレーションファイル][5]である `datadog.yaml` を更新します。
+3. 下記のコンフィギュレーションを追加して、[Datadog Agent のメインコンフィギュレーションファイル][6]である `datadog.yaml` を更新します。
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -225,7 +225,7 @@ Airflow の `statsd` 機能を使用して Airflow を (Datadog Agent に含ま�
 
 ##### Datadog Agent と Airflow を再起動する
 
-1. [Agent を再起動します][6]。
+1. [Agent を再起動します][7]。
 2. Airflow を再起動し、Agent の DogStatsD エンドポイントへの Airflow メトリクスの送信を開始します。
 
 ##### インテグレーションサービスチェック
@@ -299,15 +299,16 @@ _Agent バージョン 6.0 以降で利用可能_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-3. [Agent を再起動します][7]。
+3. [Agent を再起動します][8]。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/airflow/datadog_checks/airflow/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://airflow.apache.org/docs/stable/metrics.html
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/help/
+[3]: https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/metrics.html
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[5]: https://airflow.apache.org/docs/stable/metrics.html
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -321,7 +322,7 @@ _Agent バージョン 6.0 以降で利用可能_
 |----------------------|-----------------------|
 | `<インテグレーション名>` | `airflow`             |
 | `<初期コンフィギュレーション>`      | 空白または `{}`         |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "%%host%%"}` |
+| `<インスタンスコンフィギュレーション>`  | `{"url": "http://%%host%%"}` |
 
 ##### ログの収集
 

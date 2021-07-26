@@ -66,7 +66,7 @@ In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggrega
 [1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
-[4]: /developers/write_agent_check/
+[4]: /developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
 [6]: /developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
@@ -199,7 +199,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
-[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
@@ -250,7 +249,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 
 ## Agent overhead
 
-An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM). The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
+An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
 
 {{< tabs >}}

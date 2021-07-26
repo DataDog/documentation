@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    solr: assets/dashboards/solr_dashboard.json
   logs:
     source: solr
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    solr_processes: assets/saved_views/solr_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -238,8 +241,7 @@ Solr チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**solr.can_connect**:<br>
-Agent が監視対象の SolR インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
@@ -289,3 +291,4 @@ attribute:
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/integrations/java/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/solr/assets/service_checks.json

@@ -196,7 +196,7 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
 #### Instrumentation automatique
 
 1. Installez le gem avec `gem install ddtrace`.
-2. Exigez les [bibliothèques ou frameworks pris en charge](#instrumenter-des-integrations) devant être instrumentés.
+2. Utilisez require pour exiger les [bibliothèques ou frameworks pris en charge](#instrumenter-des-integrations) à instrumenter.
 3. Ajoutez `require 'ddtrace/auto_instrument'` à votre application. _Remarque : effectuez cette opération _après_ avoir exigé les bibliothèques ou frameworks pris en charge.
 
     ```ruby

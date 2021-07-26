@@ -31,7 +31,19 @@ further_reading:
 
 - 統合サービスタグ付けには、[予約済みタグ][1]の新しいコンフィギュレーションに対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][3]をご覧ください。
 
-- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][4]および[タグの付け方][5]のドキュメントをお読みください。
+
+| 言語         | トレーサー最小バージョン |
+|--------------|------------|
+| .NET    |  1.17.0+       |
+| C++    |  1.1.4+       |
+| Go         |  1.24.0+       |
+| Java   |  0.50.0+      |
+| Node    |  0.20.3+       |
+| PHP  |  0.47.0 以降      |
+| Python  |  0.38.0+      |
+| Ruby  |  0.34.0+      |
+
+- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][1]および[タグの付け方][4]のドキュメントをお読みください。
 
 ## コンフィギュレーション
 
@@ -46,9 +58,9 @@ further_reading:
 
 コンテナ化環境で統合サービスタグ付けをセットアップするには
 
-1. [オートディスカバリー][6]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
+1. [オートディスカバリー][5]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
 
-2. [Docker][7] を使用している場合は、Agent がコンテナの [Docker ソケット][8]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
+2. [Docker][6] を使用している場合は、Agent がコンテナの [Docker ソケット][7]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
 
 4. 以下に詳述する完全なコンフィギュレーションまたは部分的なコンフィギュレーションのいずれかに基づいて環境を構成します。
 
@@ -265,13 +277,13 @@ com.datadoghq.tags.version
 
 サービスのバイナリまたは実行可能ファイルをどのように構築およびデプロイするかによって、環境変数を設定するためのオプションをいくつか利用できる場合があります。ホストごとに 1 つ以上のサービスを実行する可能性があるため、これらの環境変数のスコープを単一プロセスにすることをお勧めします。
 
-[トレース][9]、[ログ][10]、[StatsD メトリクス][11]のサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
+[トレース][8]、[ログ][9]、[StatsD メトリクス][10]のサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
 
 1. 実行可能ファイルのコマンドで環境変数をエクスポートします。
 
     `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
-2. または、[Chef][12]、[Ansible][13]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。これにより、サービスプロセスが開始されると、その変数にアクセスできるようになります。
+2. または、[Chef][11]、[Ansible][12]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。これにより、サービスプロセスが開始されると、その変数にアクセスできるようになります。
 
 {{< tabs >}}
 {{% tab "トレース" %}}
@@ -477,24 +489,23 @@ class CdkStack extends cdk.Stack {
 
 {{< /tabs >}}
 
-CloudFormation スタックで、[Datadog Forwarder][14] 用に `DdFetchLambdaTags` オプションが `true` に設定されていることを確認します。バージョン `3.19.0` 以降、このオプションはデフォルトで `true` になっています。
+CloudFormation スタックで、[Datadog Forwarder][13] 用に `DdFetchLambdaTags` オプションが `true` に設定されていることを確認します。バージョン `3.19.0` 以降、このオプションはデフォルトで `true` になっています。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/getting_started/tagging/#defining-tags
+[1]: /ja/getting_started/tagging/
 [2]: /ja/getting_started/agent
 [3]: /ja/tracing/setup
-[4]: /ja/getting_started/tagging/
-[5]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[6]: /ja/getting_started/agent/autodiscovery
-[7]: /ja/agent/docker/integrations/?tab=docker
-[8]: /ja/agent/docker/?tab=standard#optional-collection-agents
-[9]: /ja/getting_started/tracing/
-[10]: /ja/getting_started/logs/
-[11]: /ja/integrations/statsd/
-[12]: https://www.chef.io/
-[13]: https://www.ansible.com/
-[14]: /ja/serverless/forwarder/
+[4]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[5]: /ja/getting_started/agent/autodiscovery
+[6]: /ja/agent/docker/integrations/?tab=docker
+[7]: /ja/agent/docker/?tab=standard#optional-collection-agents
+[8]: /ja/getting_started/tracing/
+[9]: /ja/getting_started/logs/
+[10]: /ja/integrations/statsd/
+[11]: https://www.chef.io/
+[12]: https://www.ansible.com/
+[13]: /ja/serverless/forwarder/

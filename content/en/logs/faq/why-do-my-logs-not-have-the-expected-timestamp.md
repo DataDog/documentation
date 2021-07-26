@@ -2,10 +2,10 @@
 title: Why do my logs not have the expected timestamp?
 kind: faq
 further_reading:
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing/"
+- link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
@@ -48,7 +48,7 @@ However, this default timestamp does not always reflect the actual value that mi
 
     3.1 **Supported Date formats**.
         JSON logs are automatically parsed in Datadog.
-        The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for those attribute at the top of your Pipeline as explained [in the edit reserved attributes documentation][6].
+        The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for these attributes at the top of your [Pipeline][6].
         So let's imagine that the actual timestamp of the log is contained in the attribute mytimestamp.
         {{< img src="logs/faq/log_timestamp_6.png" alt="log with mytimestamp attribute"  style="width:75%;">}}
         To make sure this attribute value is taken to override the log date, we would simply need to add it in the list of Date attributes.
@@ -58,7 +58,7 @@ However, this default timestamp does not always reflect the actual value that mi
         If the format is different from one of the above (so if your logs still do not have the right timestamp), there is a solution.
 
     3.2 **Custom Date format**.
-        If the format is not supported by the remapper by default, parse this format and convert it to a supported format. To do this use a [parser Processor][10] that applies only on our attribute.
+        If the format is not supported by the remapper by default, parse this format and convert it to a supported format. To do this use a [parser Processor][4] that applies only on our attribute.
         If you do not have a Pipeline filtered on those logs yet, create a new one and add a Processor.
         **Note**: Set this Processor only to apply to the custom `mytimestamp` attribute under the **advanced** settings.
         {{< img src="logs/faq/log_timestamp_7.png" alt="Advanced settings date Processor"  style="width:75%;">}}
@@ -70,12 +70,11 @@ However, this default timestamp does not always reflect the actual value that mi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/preferences
-[2]: /logs/processing/parsing/#parsing-dates
-[3]: /logs/processing/parsing/?tab=matcher
-[4]: /logs/processing/processors/#log-date-remapper
-[5]: /logs/#reserved-attributes
-[6]: /logs/processing/#edit-reserved-attributes
+[2]: /logs/log_configuration/parsing/#parsing-dates
+[3]: /logs/log_configuration/parsing
+[4]: /logs/log_configuration/processors/#log-date-remapper
+[5]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[6]: /logs/log_configuration/pipelines/?tab=date#preprocessing
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time
 [9]: https://www.ietf.org/rfc/rfc3164.txt
-[10]: /logs/processing/

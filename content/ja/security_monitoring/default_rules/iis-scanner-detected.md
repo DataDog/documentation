@@ -13,8 +13,6 @@ technique: T1190-exploit-public-facing-application
 title: セキュリティスキャナからの IIS HTTP リクエスト
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ウェブアプリケーションがスキャンされていることを検出します。これは、システムへの攻撃を隠そうとしない攻撃者の IP アドレスを識別します。より高度なハッカーは目立たないユーザーエージェントを使用します。
 

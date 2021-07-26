@@ -8,7 +8,15 @@ assets:
   logs:
     source: tomcat
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    '[Tomcat] % of busy threads is high for host: {{host.name}}': assets/monitors/thread_busy.json
+    '[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}': assets/monitors/thread_count_max.json
+    '[Tomcat] Anomalous average processing time for host {{host.name}}': assets/monitors/processing_time.json
+    '[Tomcat] Anomalous max processing time for host {{host.name}}': assets/monitors/max_proc_time.json
+    '[Tomcat] Anomalous request rate for host {{host.name}}': assets/monitors/req_count.json
+    '[Tomcat] Increase of the errors/second rate for host: {{host.name}}': assets/monitors/error_count.json
+  saved_views:
+    tomcat_processes: assets/saved_views/tomcat_processes.json
   service_checks: assets/service_checks.json
 categories:
   - web

@@ -2,10 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    marathon-overview: assets/dashboards/marathon-overview_dashboard.json
   logs:
     source: marathon
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    marathon_processes: assets/saved_views/marathon_processes.json
   service_checks: assets/service_checks.json
 categories:
   - configuration & deployment
@@ -17,6 +21,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/marathon/README.md'
 display_name: Marathon
+draft: false
 git_integration_title: marathon
 guid: 6af353ff-ecca-420a-82c0-a0e84cf0a35e
 integration_id: marathon
@@ -48,17 +53,22 @@ Le check Marathon de l'Agent vous permet de :
 
 ### Installation
 
-Le check Marathon est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre master Marathon.
+Le check Marathon est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre master Marathon.
 
 ### Configuration
 
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `marathon.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple marathon.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `marathon.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple marathon.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -78,11 +88,11 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
 
    Les paramètres `username` et `password` peuvent avoir deux fonctions différentes : si vous avez configuré `acs_url`, l'Agent les utilise pour demander un token d'authentification à ACS, dont il se sert ensuite pour s'authentifier auprès de l'API Marathon. Dans le cas contraire, l'Agent utilise `username` et `password` pour s'authentifier directement auprès de l'API Marathon.
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][3].
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -135,11 +145,17 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: "<SERVICE_NAME>"
    ```
 
-4. [Redémarrez l'Agent][4].
+4. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/marathon/datadog_checks/marathon/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][5] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -151,17 +167,22 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][6].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                                 |
 | -------------- | ----------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "marathon", "service": "<NOM_SERVICE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `marathon` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][2] et cherchez `marathon` dans la section Checks.
 
 ## Données collectées
 
@@ -180,14 +201,9 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Marathon 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/marathon/datadog_checks/marathon/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/marathon/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/

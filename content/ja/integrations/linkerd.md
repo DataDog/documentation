@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
   logs: {}
@@ -128,12 +130,12 @@ curl <linkerd_prometheus_endpoint>
 
 ### サービスのチェック
 
-`linkerd.prometheus.health`:
-Agent が Prometheus エンドポイントへの接続に失敗した場合は、CRITICAL を返します。それ以外の場合は、UP を返します。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 
 [1]: https://linkerd.io
@@ -143,4 +145,5 @@ Agent が Prometheus エンドポイントへの接続に失敗した場合は�
 [5]: https://twitter.github.io/finagle/guide/Metrics.html
 [6]: https://gist.githubusercontent.com/arbll/2f63a5375a4d6d5acface6ca8a51e2ab/raw/bc35ed4f0f4bac7e2643a6009f45f9068f4c1d12/gistfile1.txt
 [7]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/linkerd/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

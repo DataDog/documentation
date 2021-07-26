@@ -1,6 +1,7 @@
 ---
 categories:
-  - Collaboration
+  - collaboration
+  - notification
 ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。

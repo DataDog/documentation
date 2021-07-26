@@ -169,6 +169,10 @@ Azure IoT Edge には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
+## その他の参考資料
+
+- [Datadog を使用した Azure IoT Edge の監視][10]
+
 [1]: https://azure.microsoft.com/en-us/services/iot-edge/
 [2]: https://docs.datadoghq.com/ja/agent/
 [3]: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-portal
@@ -178,3 +182,4 @@ Azure IoT Edge には、イベントは含まれません。
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/metadata.csv
 [9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/

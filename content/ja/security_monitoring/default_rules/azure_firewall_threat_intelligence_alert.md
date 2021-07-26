@@ -10,8 +10,6 @@ source: azure
 title: Azure Firewall の脅威インテリジェンスアラート
 type: security_rules
 ---
-## 概要
-
 ## 目標
 
 Azure のファイアーウォール用脅威インテリジェンスアラートを受信したことを検出します。

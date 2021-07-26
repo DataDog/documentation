@@ -95,61 +95,51 @@ This section uses examples to show how trigger conditions are computed, and the 
 
 Datadog computes `A && B && C` in the way you would expect, but which monitor statuses are considered alert-worthy? There are six different statuses a composite monitor considers:
 
-| Status    | Alert-worthy                             |
-|-----------|------------------------------------------|
-| `Ok`      | False                                    |
-| `Warn`    | True                                     |
-| `Alert`   | True                                     |
-| `Skipped` | False                                    |
-| `No Data` | False (true if `notify_no_data` is true) |
-| `Unknown` | True                                     |
+| Status    | Alert-worthy         |Severity           |
+|-----------|----------------------|-------------------|
+| `Alert`   | True                 |5 (Most severe)    |
+| `Warn`    | True                 |4                  |
+| `Unknown` | True                 |3                  |
+| `No Data` | True                 |2                  |
+| `Ok`      | False                |1 (Least severe)   |
+| `Skipped` | False                |1                  |
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status from among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
+The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of the composite monitor status.
 
-The not (`!`) operator causes a individual or composite monitor status to be `Ok`, `Alert`, or `No Data`. For example, if monitor `A` has any alert-worthy status, `!A` is `OK`. If monitor `A` has any alert-**un**worthy status, `!A` is `Alert`. If monitor `A` has a status of `No Data`, `!A` is also `No Data`.
+If `A && B` is alert-worthy, the result is the **least** severe status between A and B.
+
+If `A || B` is alert-worthy, the result is the **most** severe status between A and B.
+
+
+If `A` is `No Data`, `!A` is `No Data`
+
+If `A` is alert-worthy, `!A` is `OK`
+
+If `A` is no alert-worthy, `!A` is `Alert`
+
 
 Consider a composite monitor that uses three individual monitors (`A`, `B`, `C`) and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
 | Monitor A   | Monitor B   | Monitor C   | Composite status | Alert triggered? |
 |-------------|-------------|-------------|------------------|------------------|
 | Unknown (T) | Warn (T)    | Unknown (T) | Warn (T)         | {{< X >}}        |
-| Skipped (F) | Ok (F)      | Unknown (T) | Ok (F)           |                  |
-| Alert (T)   | Warn (T)    | Unknown (T) | Alert (T)        | {{< X >}}        |
-| Skipped (F) | No Data (F) | Unknown (T) | Skipped (F)      |                  |
+| Alert (T)   | Warn (T)    | Unknown (T) | Warn (T)         | {{< X >}}        |
+| OK (F)      | No Data (T) | Alert (T)   | OK (F)           |                  |
 
-Two of the four scenarios trigger an alert, even though not all of the individual monitors have the most severe status (`Alert`).
+Now consider a composite monitor that uses two individual monitors (`A`, `B`) and a trigger condition `A || B`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
-### Component monitor status
-
-Composite monitors are evaluated by using a sliding window of monitor results for each component monitor. Specifically, **they use the most severe status from the past five minutes for each component monitor**. For example, if you have a composite monitor defined as `A && B` with the following component results (timestamps are one minute apart), the composite monitor triggers at T1 even though `A` is technically in an `OK` state.
-
-| Monitor | T0    | T1    | T2    |
-|---------|-------|-------|-------|
-| A       | Alert | OK    | OK    |
-| B       | OK    | Alert | Alert |
-
-The justification for this behavior is that defining simultaneity is a surprisingly difficult problem for alerting systems. Monitors are evaluated according to different schedules and metric latencies can cause two events, which were likely simultaneous, to occur at different times when monitors are finally evaluated. Merely sampling the current state would likely lead to missed alerts in the composite monitor.
-
-As a consequence of this behavior, composite monitors may take several minutes to resolve after their component monitors have resolved.
+| Monitor A   | Monitor B   | Composite status                               | Alert triggered? |
+|-------------|-------------|------------------------------------------------|------------------|
+| Alert (T)   | Warn (T)    | Alert (T)                                      | {{< X >}}        |
+| Warn (T)    | Ok (F)      | Warn (T)                                       | {{< X >}}        |
+| OK (F)      | No Data (T) | No Data (T) _(if Notify No Data is enabled)_   | {{< X >}}        |
+| OK (F)      | No Data (F) | OK (F)      _(if Notify No Data is disabled)_  |                  |
 
 ### Number of alerts
 
 The number of alerts you receive depends on the individual monitor's alert type. If all individual monitors are simple alerts, the composite monitor also has a simple alert type. The composite monitor triggers a single notification when the queries for `A`, `B`, and `C` are all `true` at the same time.
 
 If even one individual monitor is multi-alert, then the composite monitor is also multi-alert. How _many_ alerts it may send at a time depends on whether the composite monitor uses one or uses many multi-alert monitors.
-
-#### One multi-alert monitor
-
-Consider a scenario where monitor `A` is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources (hosts `web01` through `web04`) you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has four cases to consider. For each case, monitor `A`'s status may vary across its sources, but the statuses of monitors `B` and `C`—which are simple alerts—are unchanging.
-
-The table below shows the status of each multi-alert case at one point in time for the composite monitor `A && B && C`:
-
-| Source | Monitor A | Monitor B | Monitor C | Composite status | Alert triggered? |
-|--------|-----------|-----------|-----------|------------------|------------------|
-| web01  | Alert     | Warn      | Alert     | Alert            | {{< X >}}        |
-| web02  | Ok        | Warn      | Alert     | Ok               |                  |
-| web03  | Warn      | Warn      | Alert     | Alert            | {{< X >}}        |
-| web04  | Skipped   | Warn      | Alert     | Skipped          |                  |
 
 #### Many multi-alert monitors
 
@@ -159,7 +149,7 @@ Here's an example cycle for the composite monitor `A && B && C`:
 
 | Source | Monitor A | Monitor B | Monitor C | Composite status | Alert triggered? |
 |--------|-----------|-----------|-----------|------------------|------------------|
-| web04  | Unknown   | Warn      | Alert     | Alert            | {{< X >}}        |
+| web04  | Unknown   | Warn      | Alert     | Warn             | {{< X >}}        |
 | web05  | Ok        | Ok        | Alert     | Ok               |                  |
 
 ### Common reporting sources

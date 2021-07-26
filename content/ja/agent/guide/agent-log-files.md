@@ -21,12 +21,13 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| プラットフォーム                             | コマンド                       |
-|--------------------------------------|-------------------------------|
-| Linux                                | `/var/log/datadog/`           |
-| macOS                                | `/var/log/datadog/`           |
-| Windows Server 2008/Vista 以降 | `C:\ProgramData\Datadog\logs` |
-| Windows Server 2003/XP 以前     | サポートされないプラットフォーム        |
+| プラットフォーム                              | コマンド                       |
+|---------------------------------------|-------------------------------|
+| Linux                                 | `/var/log/datadog/`           |
+| macOS、Agent v7.28+ および v6.28+        | `/opt/datadog-agent/log`      |
+| macOS、6.28.0/7.28.0 以前の Agent | `/var/log/datadog`            |
+| Windows Server 2008/Vista 以降  | `C:\ProgramData\Datadog\logs` |
+| Windows Server 2003/XP 以前      | サポートされないプラットフォーム        |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -34,16 +35,11 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 | プラットフォーム                             | コマンド                                                              |
 |--------------------------------------|----------------------------------------------------------------------|
 | Linux                                | `/var/log/datadog/`                                                  |
-| CentOS                               | `/var/log/datadog/`                                                  |
-| Debian                               | `/var/log/datadog/`                                                  |
-| Fedora                               | `/var/log/datadog/`                                                  |
 | macOS                                | `/var/log/datadog/`                                                  |
-| RedHat                               | `/var/log/datadog/`                                                  |
-| Source                               | `~/.datadog-agent/supervisord/logs/`                                 |
-| SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
-| Ubuntu                               | `/var/log/datadog/`                                                  |
 | Windows Server 2008/Vista 以降 | `C:\ProgramData\Datadog\logs\`                                       |
 | Windows Server 2003/XP 以前     | `C:\Documents and Settings\All Users\Application Data\Datadog\logs\` |
+| SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
+| ソースビルド                         | `~/.datadog-agent/supervisord/logs/`                                 |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -73,7 +69,7 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 
 | プラットフォーム                             | 場所とファイル名        |
 |--------------------------------------|-------------------------------|
-| Linux                                | `/tmp/dd_agent.log`           |
+| Linux                                | `$pwd/ddagent-install.log`    |
 | macOS                                | `/tmp/dd_agent.log`           |
 | Windows                              | `%TEMP%\MSI*.LOG`             |
 

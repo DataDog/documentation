@@ -72,10 +72,10 @@
         "json": {},
         "html": "<div class=\"hide-table\"><div class=\"row\">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row\">\n          <div class=\"col-12 column\"><p>No response body</p></div>\n        </div>\n      </div>\n    </div></div>"
       },
-      "default": {
+      "400": {
         "json": {
           "code": 0,
-          "message": ""
+          "message": "Your browser sent an invalid request."
         },
         "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">code&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>int32</p></div>\n              <div class=\"col-6 column\"><p>Error code.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">message&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Error message.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }

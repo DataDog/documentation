@@ -6,14 +6,14 @@ further_reading:
     - link: 'logs/explorer/analytics'
       tag: 'Documentation'
       text: 'Perform Log Analytics'
-    - link: 'logs/processing'
+    - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
 ---
 
 ## Overview
 
-Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** to enable analysis.
+Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** listed to enable analysis.
 
 Troubleshooting is highly contextual, and Saved Views enable you and your teammates to easily switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
 
@@ -21,9 +21,9 @@ Troubleshooting is highly contextual, and Saved Views enable you and your teamma
 
 Technically, a Saved View keeps track of:
 
-- A [search query][3]
-- A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
-- A [selected subset of facets][1] to be displayed in the facet list
+- A [search query][3] along with its time range. **Note**: Saved View is meant to track live time ranges (such as past hour, or past week) and fixed time ranges are converted as such on save. 
+- A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties).
+- A [selected subset of facets][1] to be displayed in the facet list.
 
 ## Default view
 

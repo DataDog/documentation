@@ -31,13 +31,14 @@ After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`T
 
 ### Define request
 
-{{< img src="synthetics/api_tests/dns_test_config.png" alt="Define DNS query"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query"  style="width:90%;" >}}
 
 1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
-2. Specify the `DNS Server` to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
-3. **Name** your DNS test.
-4. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
-5. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
+3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
+4. **Name** your DNS test.
+5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
+6. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
@@ -62,7 +63,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][10]_ |
 | at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][10]_ |
 
-You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
 
@@ -111,15 +112,22 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by defining their values from one of the below available builtins:
+You can create local variables by clicking on **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
 
-| Pattern                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
-| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
-| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
-| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
-| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
+`{{ numeric(n) }}`
+: Generates a numeric string with `n` digits.
+
+`{{ alphabetic(n) }}`
+: Generates an alphabetic string with `n` letters.
+
+`{{ alphanumeric(n) }}`
+: Generates an alphanumeric string with `n` characters.
+
+`{{ date(n, format) }}`
+: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+
+`{{ timestamp(n, unit) }}` 
+: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 ### Use variables
 
@@ -132,12 +140,19 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-| Error             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
-| DNS               | DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
-| `INVALID_REQUEST` | The configuration of the test is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. <br> - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. <br> - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
+`CONNRESET`
+: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
+
+`DNS`
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+
+`INVALID_REQUEST` 
+: The configuration of the test is invalid (for example, a typo in the URL).
+
+`TIMEOUT`
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen.
+  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
+  - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
 ## Further Reading
 

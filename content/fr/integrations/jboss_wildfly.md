@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    JBoss WildFly: assets/dashboards/jboss_wildfly.json
   logs:
     source: jboss_wildfly
   metrics_metadata: metadata.csv
@@ -27,7 +28,7 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: jboss.
-metric_to_check: ''
+metric_to_check: jboss.jdbc_connections.count
 name: jboss_wildfly
 public_title: Intégration Datadog/JBoss/WildFly
 short_description: Recueille diverses métriques JMX fournies par des applications JBoss et WildFly
@@ -75,7 +76,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -109,7 +110,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 

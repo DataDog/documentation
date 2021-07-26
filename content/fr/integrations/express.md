@@ -7,8 +7,10 @@ ddtype: library
 dependencies: []
 description: Surveillez les délais de réponse globaux et les taux de requête par code de réponse.
 doc_link: 'https://docs.datadoghq.com/integrations/express/'
+draft: false
 git_integration_title: express
 has_logo: true
+integration_id: express
 integration_title: ExpressJS
 is_public: true
 kind: integration
@@ -27,11 +29,13 @@ Ajoutez le [middleware connect-datadog][1] de Datadog à votre application pour�
 - Recevoir des alertes sur vos délais de réponse
 - Surveiller vos codes de réponse
 
-## Implémentation
+## Configuration
+
+L'intégration Express doit accéder au serveur DogStatsD de l'Agent Datadog pour transmettre les métriques recueillies à Datadog.
+
+[Après avoir installé l'Agent sur votre host][2], consultez la [documentation sur la configuration de DogStatsD][3] pour l'activer.
 
 ### Configuration
-
-**Remarque** : l'intégration Express nécessite l'Agent Datadog.
 
 1. Installez le middleware :
 
@@ -73,8 +77,10 @@ L'intégration Express n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://www.npmjs.com/package/connect-datadog
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/express/express_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/developers/dogstatsd/?tab=hostagent#setup
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/express/express_metadata.csv
+[5]: https://docs.datadoghq.com/fr/help/

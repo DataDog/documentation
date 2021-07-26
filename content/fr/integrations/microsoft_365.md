@@ -9,6 +9,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/microsoft_365/'
 draft: false
 git_integration_title: microsoft_365
 has_logo: true
+integration_id: ''
 integration_title: "Microsoft\_365"
 is_public: true
 kind: integration

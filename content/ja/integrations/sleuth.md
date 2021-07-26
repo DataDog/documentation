@@ -46,11 +46,11 @@ Sleuth は、DevOps スタック全体でソフトウェアのデプロイを追
 Datadog インテグレーションを追加するには
 
 1. [Sleuth アカウント][1]にログインします。
-1. サイドバーの **Integrations** をクリックします。
-2. _Metric Trackers_ タブをクリックし、Datadog カードで**有効化**します。
-3. Datadog API キーとアプリケーションキーを対応するフィールドに入力します。
-4. Datadog サーバーが EU にある場合は、_My Datadog servers are in the EU_ チェックボックスをオンにします。不明な場合は、オフのままにします。
-5. **Save** を押します。
+2. サイドバーの **Integrations** をクリックします。
+3. _Metric Trackers_ タブをクリックし、Datadog カードで**有効化**します。
+4. Datadog API キーとアプリケーションキーを対応するフィールドに入力します。
+5. Datadog サーバーが EU にある場合は、_My Datadog servers are in the EU_ チェックボックスをオンにします。不明な場合は、オフのままにします。
+6. **Save** を押します。
 
 > Datadog API キーとアプリケーションキーは、**Integrations** &gt; **API** にあります。または、Sleuth ダイアログボックスの **generate** リンクをクリックして (下図を参照)、Datadog コンソールの API/アプリケーションキー領域に移動できます。
 

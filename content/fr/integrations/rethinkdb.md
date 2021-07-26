@@ -4,11 +4,14 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
+  docs:
+    spec: assets/docs/spec.yaml
   logs:
     source: rethinkdb
   metrics_metadata: metadata.csv
   monitors: {}
-  saved_views: {}
+  saved_views:
+    rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -42,9 +45,9 @@ supported_os:
 ---
 ## Présentation
 
-[RethinkDB][1] est une base de données NoSQL orientée documents distribuée, qui exploite tout le potentiel des flux à modification en temps réel.
+[RethinkDB][1] est une base de données NoSQL orientée documents distribuée, qui exploite tout le potentiel des flux de modifications en temps réel.
 
-Ce check permet de surveiller un cluster RethinkDB avec l'Agent Datadog et de recueillir des métriques sur les performance, la disponibilité des données, la configuration d'un cluster, et plus encore.
+Ce check permet de surveiller un cluster RethinkDB avec l'Agent Datadog et de recueillir des métriques sur les performances, la disponibilité des données, la configuration du cluster, et plus encore.
 
 **Remarque** : cette intégration est compatible avec RethinkDB **version 2.3.6 et versions ultérieures**.
 
@@ -58,16 +61,21 @@ Le check RethinkDB est inclus avec le package de l'[Agent Datadog][3]. Vous n'av
 
 ### Configuration
 
-1. Si vous utilisez RethinkDB 2.4+, ajoutez un utilisateur `datadog-agent` et accordez-lui un accès en lecture seule à la base de données `rethinkdb`. Les commandes ReQL suivantes peuvent être utilisées. Consultez la page [Permissions and user accounts][4] de RethinkDB pour plus de détails.
+1. Si vous utilisez RethinkDB 2.4+, ajoutez un utilisateur `datadog-agent` et accordez-lui un accès en lecture seule à la base de données `rethinkdb`.
+Vous pouvez utiliser les commandes ReQL suivantes. Consultez la page relative [aux autorisations et aux comptes utilisateur][4] de la documentation RethinkDB (en anglais) pour
+plus de détails :
 
     ```python
     r.db('rethinkdb').table('users').insert({'id': 'datadog-agent', 'password': '<PASSWORD>'})
     r.db('rethinkdb').grant('datadog-agent', {'read': True})
     ```
 
-    **Remarque** : si vous utilisez RethinkDB 2.3.x, il n'est pas possible d'accorder un accès à la base de données `rethinkdb`. Ignorez cette étape et utilisez plutôt votre [compte administrateur][5] ci-dessous.
+    **Remarque** : si vous utilisez RethinkDB 2.3.x, il n'est pas possible d'accorder un accès à la base de données `rethinkdb`. Ignorez
+   cette étape et utilisez plutôt votre [compte administrateur][5] ci-dessous.
 
-2. Modifiez le fichier `rethinkdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6]. Consultez le [fichier d'exemple rethinkdb.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
+2. Modifiez le fichier `rethinkdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du
+[répertoire de configuration de votre Agent][6]. Consultez le [fichier d'exemple rethinkdb.d/conf.yaml][7] pour découvrir toutes les options
+de configuration disponibles.
 
     ```yaml
     init_config:
@@ -83,9 +91,8 @@ Le check RethinkDB est inclus avec le package de l'[Agent Datadog][3]. Vous n'av
 
 **Remarque** : cette intégration recueille des métriques de tous les serveurs au sein du cluster ; vous n'avez donc besoin que d'un seul Agent.
 
-##### Collecte de logs
+#### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -93,7 +100,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
     logs_enabled: true
     ```
 
-2. Ajoutez ce bloc de configuration à votre fichier `rethinkdb.d/conf.yaml` pour commencer à recueillir vos logs RethinkDB :
+2. Modifiez ce bloc de configuration dans votre fichier `rethinkdb.d/conf.yaml` pour commencer à recueillir vos logs RethinkDB :
 
     ```yaml
     logs:
@@ -103,7 +110,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
         service: "<SERVICE_NAME>"
     ```
 
-    Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple rethinkdb.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
+
+    Modifiez la valeur du paramètre `path` en fonction de votre environnement. Consultez le [fichier d'exemple conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
 
 3. [Redémarrez l'Agent][8].
 
@@ -115,26 +123,20 @@ Consultez la [documentation de Datadog][9] pour découvrir comment configurer l'
 
 ## Données collectées
 
+
+
 ### Métriques
 {{< get-metrics-from-git "rethinkdb" >}}
 
 
 ### Checks de service
 
-**rethinkdb.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au serveur RethinkDB configuré. Si ce n'est pas le cas, renvoie `OK`.
+- `rethinkdb.can_connect` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au serveur RethinkDB configuré. Si ce n'est pas le cas, renvoie `OK`.
+- `rethinkdb.table_status.status.ready_for_outdated_reads` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture obsolètes. Si ce n'est pas le cas, renvoie `WARNING`.
+- `rethinkdb.table_status.status.ready_for_reads` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture. Si ce n'est pas le cas, renvoie `WARNING`.
+- `rethinkdb.table_status.status.ready_for_writes` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes d'écriture. Si ce n'est pas le cas, renvoie `WARNING`.
+- `rethinkdb.table_status.status.all_replicas_ready` : renvoie `OK` si tous les réplicas sont prêts pour des opérations de lecture et d'écriture. Si ce n'est pas le cas, renvoie `WARNING` (par exemple, si des backfills sont en cours).
 
-**rethinkdb.table_status.status.ready_for_outdated_reads** :<br>
-Renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture obsolètes. Si ce n'est pas le cas, renvoie `WARNING`.
-
-**rethinkdb.table_status.status.ready_for_reads** :<br>
-Renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture. Si ce n'est pas le cas, renvoie `WARNING`.
-
-**rethinkdb.table_status.status.ready_for_writes** :<br>
-Renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes d'écriture. Si ce n'est pas le cas, renvoie `WARNING`.
-
-**rethinkdb.table_status.status.all_replicas_ready** :<br>
-Renvoie `OK` si tous les réplicas sont prêts pour des opérations de lecture et d'écriture. Si ce n'est pas le cas, renvoie `WARNING` (par exemple, si des backfills sont en cours).
 
 ### Événements
 
@@ -144,7 +146,7 @@ RethinkDB n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://rethinkdb.com/
+[1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/fr/agent/
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/

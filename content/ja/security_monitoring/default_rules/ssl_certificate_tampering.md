@@ -13,8 +13,6 @@ source: ファイル整合性モニタリング
 title: SSL 証明書の改ざん
 type: security_rules
 ---
-## 概要
-
 ## 目標
 SSL 証明書改ざんの可能性を検出します。
 

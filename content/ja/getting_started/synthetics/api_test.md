@@ -2,6 +2,9 @@
 title: API テストの概要
 kind: documentation
 further_reading:
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+    tag: ラーニングセンター
+    text: Synthetic テストの紹介
   - link: /synthetics/api_tests
     tag: ドキュメント
     text: API テストについて
@@ -9,8 +12,8 @@ further_reading:
     tag: ドキュメント
     text: API テスト用の Synthetic ボットを特定する方法を学ぶ
   - link: /synthetics/settings/
-    tag: ドキュメント
-    text: 高度な Synthetics モニタリング設定を構成する
+    tag: Documentation
+    text: 高度な Synthetic モニタリング設定を構成する
   - link: '/api/v1/synthetics/#create-a-test'
     tag: API ドキュメント
     text: Synthetic テストをプログラムで作成
@@ -23,7 +26,7 @@ further_reading:
 
 ### リクエストを構成する
 
-1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][3]** にカーソルを合わせ、**Synthetic Test** を選択します。
+1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][2]** にカーソルを合わせ、**Synthetic Test** を選択します。
 2. 右上の **New Test** ボタンをクリックします。
 3. **API test** を選択します。
 4. API テストのコンフィギュレーションを定義します。
@@ -58,9 +61,9 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 Retry x time before location is marked as failed
 ```
 
-**注**: デフォルトでは、失敗したテストを再試行するまでに 300ms の待機時間があります。この時間は、[API][5] を使用して構成することができます。
+**注**: デフォルトでは、失敗したテストを再試行するまでに 300ms の待機時間があります。この時間は、[API][3] を使用して構成することができます。
 
-アラート条件を設定した後、アラートのメッセージを作成し、アラート通知メールを受信するサービスとチームメンバーを指定して、**Save Test** をクリックします。また、アラート通知の受信に Slack、PagerDuty、webhooks などの[インテグレーション][6]を使用することもできます。
+アラート条件を設定した後、アラートのメッセージを作成し、アラート通知メールを受信するサービスとチームメンバーを指定して、**Save Test** をクリックします。また、アラート通知の受信に Slack、PagerDuty、webhooks などの[インテグレーション][4]を使用することもできます。
 
 ### テスト結果
 
@@ -70,19 +73,14 @@ API テスト詳細ページには、テストコンフィギュレーション�
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="API テストの失敗"  style="width:90%;">}}
 
-Datadog の [Synthetic モニタリングとの APM インテグレーション][7] を使用すると、失敗したテストランから生成されたトレースを見ることで、テストランが失敗した問題の根本原因を探ることができます。
+Datadog の [Synthetic モニタリングとの APM インテグレーション][5]を使用すると、失敗したテストランから生成されたトレースを見ることで、テストランが失敗した問題の根本原因を探ることができます。
 
-{{< whatsnext desc="最初の API テストを設定したら、以下をご参照ください。">}}
-    {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}API テストについてより詳しく学ぶ{{< /nextlink >}}
-    {{< nextlink href="/synthetics/identify_synthetics_bots" tag="Documentation" >}}API テスト用の Synthetic ボットを特定する方法を学ぶ{{< /nextlink >}}
-    {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}高度な Synthetic モニタリング設定を構成する{{< /nextlink >}}
-{{< nextlink href="/api/v1/synthetics/#create-a-test" tag="API Docs" >}}Synthetic テストをプログラムで作成する{{< /nextlink >}}
-{{< /whatsnext >}}
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/api_tests/
-[2]: /ja/api/v1/synthetics/#create-or-clone-test
-[3]: https://app.datadoghq.com/synthetics/list
-[4]: /ja/synthetics/api_tests/?tab=httptest#assertions
-[5]: /ja/api/v1/synthetics/#create-or-clone-a-test
-[6]: /ja/integrations/
-[7]: /ja/synthetics/apm/
+[2]: https://app.datadoghq.com/synthetics/list
+[3]: /ja/api/v1/synthetics/#create-or-clone-a-test
+[4]: /ja/integrations/
+[5]: /ja/synthetics/apm/

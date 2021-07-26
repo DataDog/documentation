@@ -7,7 +7,7 @@ further_reading:
 - link: "https://github.com/roidrage/lograge"
   tag: "Github"
   text: "Lograge Documentation"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
@@ -111,8 +111,6 @@ This section describe the minimum setup required in order to forward your Rails 
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
-Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
-
 ### Good logging practices in your application
 
 Now that your logging configuration is sending proper JSON, you should exploit it as much as you can.
@@ -194,7 +192,7 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: /logs/processing/#reserved-attributes
+[2]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /agent/logs/

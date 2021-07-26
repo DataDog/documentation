@@ -4,11 +4,14 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    gearman: assets/dashboards/gearman_dashboard.json
   logs:
     source: gearman
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    gearman_processes: assets/saved_views/gearman_processes.json
   service_checks: assets/service_checks.json
 categories:
   - processing
@@ -28,7 +31,7 @@ is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
-metric_prefix: gearmand.
+metric_prefix: gearman.
 metric_to_check: gearman.unique_tasks
 name: gearmand
 process_signatures:
@@ -135,9 +138,8 @@ Le check Gearmand n'inclut aucun événement.
 
 ### Checks de service
 
-`gearman.can_connect` :
-
-Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Gearman pour recueillir des métriques.
+**gearman.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Gearman pour recueillir des métriques.
 
 ## Dépannage
 

@@ -4,19 +4,21 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Flink Overview: assets/dashboards/overview.json
+  logs:
+    source: flink
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
   - processing
-  - data streams
-  - dataflow
   - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/flink/README.md'
 display_name: flink
+draft: false
 git_integration_title: flink
 guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink
@@ -44,7 +46,7 @@ Ce check surveille [Flink][1]. Datadog recueille des métriques Flink via le [HT
 
 ### Installation
 
-Le check Flink est inclus avec le paquet de l'[Agent Datadog][4].
+Le check Flink est inclus avec le package de l'[Agent Datadog][4].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
@@ -58,6 +60,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
     ```yaml
     metrics.reporter.dghttp.class: org.apache.flink.metrics.datadog.DatadogHttpReporter
     metrics.reporter.dghttp.apikey: <DATADOG_API_KEY>
+    metrics.reporter.dghttp.dataCenter: {{< region-param key="dd_datacenter" >}}
     ```
 
 2. Remappez les contextes système dans votre fichier `<RÉPERTOIRE_FLINK>/conf/flink-conf.yaml`.
@@ -81,7 +84,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
      **Remarque** : par défaut, toutes les variables des noms de métriques sont envoyées sous la forme de tags. Vous n'avez donc pas besoin d'ajouter de tags personnalisés pour `job_id`, `task_id`, etc.
 
-4. Redémarrez Flink pour commencer à envoyer vos métriques Flink à l'Agent.
+4. Redémarrez Flink pour commencer à envoyer vos métriques Flink à Datadog.
 
 #### Collecte de logs
 

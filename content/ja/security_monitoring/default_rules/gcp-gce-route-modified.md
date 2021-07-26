@@ -11,8 +11,6 @@ source: gcp
 title: GCP GCE ネットワークルートの作成または変更
 type: security_rules
 ---
-## 概要
-
 ### 目標
 ファイアーウォール規則の作成または変更を検出します。
 

@@ -14,30 +14,42 @@ further_reading:
 `REQUEST_SCHEMA` の一般的な書式は、1 つ以上の `request` の配列です。
 
 ```text
-"requests": [
-  {
-    "q": "function(aggregation method:metric{scope} [by {group}])"
-  }
-]
+
+   "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "per_hour(query)"
+                },
+                {
+                    "formula": "query1"
+                },
+                {
+                    "formula": "query1 / 100"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query",
+                    "query": "avg:system.load.5{*}"
+                },
+                {
+                    "data_source": "logs",
+                    "name": "query1",
+                    "search": {
+                        "query": "status:error"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                }
+            ]
 ```
-
-`requests` パラメーターが複数の `request` を持っている場合、ウィジェットはそれらをすべて表示します。
-
-```text
-"requests": [
-  {
-    "q": "<メトリクス_1>{<スコープ_1>}"
-  },
-  {
-    "apm_query": "<メトリクス_2>{<スコープ_2>}"
-  },
-  {
-    "log_query": "<メトリクス_3>{<スコープ_3>}"
-  }
-]
-```
-
-{{< img src="dashboards/graphing_json/multi-lines.png" alt="複数行"  >}}
 
 ## 関数
 
@@ -45,13 +57,13 @@ further_reading:
 
 関数の詳細については、[使用例のページ][1]を参照してください。
 
-#### 集計方法
+#### 集計の方法
 
 利用可能なデータポイントの数は、画面に表示できる最大数よりも多い場合がほとんどです。そのため、average、max、min、sum の 4 つのメソッドのうち 1 つを使用して、データを集計します。
 
 #### メトリクス
 
-メトリクスはグラフの焦点です。利用可能なメトリクスのリストは、[メトリクスサマリー][2]に掲載されています。任意のメトリクスをクリックすると、収集されるデータの型、単位、タグ、ホストなどの詳細が表示されます。
+メトリクス、ログ、トレースなどのデータソースはグラフの焦点です。利用可能なメトリクスのリストは、[メトリクスサマリー][2]に掲載されています。任意のメトリクスをクリックすると、収集されるデータの型、単位、タグ、ホストなどの詳細が表示されます。
 
 ## スコープ
 
@@ -80,11 +92,41 @@ further_reading:
 
 ```json
 {
-  "viz": "timeseries",
-  "requests": [
-    {"q": "system.load.5{intake} * 2"},
-    {"q": "system.load.5{intake}"}
-  ]
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "query1"
+                },
+                {
+                    "formula": "2 * query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.load.5{*}"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ],
+    "yaxis": {
+        "scale": "linear",
+        "min": "auto",
+        "max": "auto",
+        "include_zero": true,
+        "label": ""
+    },
+    "markers": []
 }
 ```
 
@@ -94,106 +136,203 @@ further_reading:
 {"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
 ```
 
-## 積み上げ系列
+## 例
 
-{{< img src="dashboards/graphing_json/slice-n-stack.png" alt="スライスアンドスタック"  >}}
+{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="JSON を使用したグラフ化"  style="width:75%;" >}}
 
-関連する時系列どうしの場合は、次の構文を使用して積み上げ面グラフとして描画できます。
+上記の例の JSON は、特定のデバイスとホストで受信され、アカウントごとにグループ化されたネットワークバイトの「平均」を示しています。
 
 ```text
 "requests": [
-  {
-    "q": "metric1{scope}, metric2{scope}, metric3{scope}"
-  }
-]
+        {
+            "formulas": [
+                {
+                    "formula": "query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.net.bytes_rcvd{device:eth0,host:dsg-demo-1} by {account}"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ]
 ```
 
-チャートごとに 1 つのクエリではなく、すべてのクエリを 1 つにまとめたり、クエリを連結することができます。
 
-## スライスアンドスタック
+{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="レートの例"  style="width:75%;" >}}
 
-ホスト間に共通するメトリクスの結果を積み上げて表示することができます。たとえば、複数のホストに適用されるタグを選択すると、その送受信トラフィックをきれいに積み上げて、合計と共にホストごとの明細を表示できます。ネットワークトラフィックの分布が大きく変動する箇所を見つける際に役立ちます。
+これは、パラメーターとして単一のメトリクスのみを受け取る `rate() 関数を使用した例です。
 
-それには、任意のメトリクスに対して以下のように指定します。
 
-```text
-"requests" [
-  {
-    "q": "system.net.bytes_rcvd{some_tag, device:eth0} by {host}"
-  }
-]
+```json
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "per_hour(query1)"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.load.5{*} by {host}"
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ]
 ```
 
-この場合は 1 つのクエリしか持てません。ただし、デバイスまたはホストとデバイスの組み合わせで分割することもできます。
-
-```text
-"requests" [
-  {
-    "q": "system.net.bytes_rcvd{some_tag} by {host,device}"
-  }
-]
-```
-
-すべてのタグ付きホストのトラフィックを取得するには、ホストとネットワークデバイスで分割します。
-
-#### 例
-
-以下に、パラメーターとして 1 つだけメトリクスを受け取る `rate()` 関数の例を示します。`top()` と `top_offset()` 以外の他の関数の構文も同じです。
+これは、トップリストを使用した同じ例です。
 
 ```json
 {
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "rate(sum:system.load.5{role:intake-backend2} by {host})",
-      "stacked": false
-    }
-  ]
+    "viz": "toplist",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "limit": {
+                        "count": 10,
+                        "order": "desc"
+                    },
+                    "formula": "query1"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "metrics",
+                    "name": "query1",
+                    "query": "avg:system.load.5{role:db} by {host}",
+                    "aggregator": "avg"
+                }
+            ],
+            "response_format": "scalar",
+            "conditional_formats": []
+        }
+    ]
 }
 ```
 
-以下に、`top()` 関数を使用する例を示します。
+`week_before()` タイムシフト関数を使用した例を次に示します。
+
+```json
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "week_before(query1)"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "logs",
+                    "name": "query1",
+                    "search": {
+                        "query": ""
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line"
+        }
+    ]
+```
+
+これは、`error` ログと `info` ログの比率をグラフ化してから、タイムシフト関数を適用する方法を示す別の例です。
+
+{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="比率の例"  style="width:75%;" >}}
 
 ```json
 {
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "top(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc')",
-      "stacked": false
-    }
-  ]
+    "viz": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "formula": "query1 / query2",
+                    "alias": "Ratio of Error to Info"
+                },
+                {
+                    "formula": "week_before(query1 / query2)"
+                }
+            ],
+            "queries": [
+                {
+                    "data_source": "logs",
+                    "name": "query1",
+                    "search": {
+                        "query": "status:error"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                },
+                {
+                    "data_source": "logs",
+                    "name": "query2",
+                    "search": {
+                        "query": "status:info"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "compute": {
+                        "aggregation": "count"
+                    },
+                    "group_by": []
+                }
+            ],
+            "response_format": "timeseries",
+            "type": "line",
+            "style": {
+                "palette": "dog_classic",
+                "type": "solid",
+                "width": "normal"
+            }
+        }
+    ],
+    "yaxis": {
+        "scale": "linear",
+        "min": "auto",
+        "max": "auto",
+        "include_zero": true,
+        "label": ""
+    },
+    "markers": []
 }
 ```
 
-これは、クエリウィンドウ内で `system.cpu.iowait` の最大値のトップ 5 系列をグラフ化して表示します。
-
-たとえば、最大値が 6 位から 10 位のホストを表示するには、代わりに `top_offset` を使用します。
-
-```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "top_offset(avg:system.cpu.iowait{*} by {host}, 5, 'max', 'desc', 5)",
-      "stacked": false
-    }
-  ]
-}
-```
-
-以下に、`week_before()` 関数を使用する例を示します。
-
-```json
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "sum:haproxy.count_per_status{status:available} - week_before(sum:haproxy.count_per_status{status:available})"
-    }
-  ]
-}
-```
 
 ## その他の参考資料
 

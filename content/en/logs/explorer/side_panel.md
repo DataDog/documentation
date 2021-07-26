@@ -5,7 +5,7 @@ description: 'Search through all of your logs and perform log analytics'
 aliases:
     - /logs/explorer/sidepanel
 further_reading:
-    - link: 'logs/processing'
+    - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: '/tracing/connect_logs_and_traces'
@@ -85,10 +85,10 @@ Use the **Share** button to share the log opened in side panel to other contexts
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/pipelines/
+[1]: /logs/log_configuration/pipelines
 [2]: /integrations/#cat-log-collection
 [3]: /agent/autodiscovery/integrations/?tab=kubernetes
-[4]: /logs/processing/attributes_naming_convention/
+[4]: /logs/log_configuration/attributes_naming_convention
 [5]: /dashboards/#preset-lists
 [6]: /network_monitoring/performance/network_page/
 [7]: /infrastructure/livecontainers/?tab=linuxwindows#introduction

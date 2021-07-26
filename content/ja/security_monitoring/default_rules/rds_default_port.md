@@ -9,20 +9,24 @@ rule_category:
 scope: rds
 security: コンプライアンス
 source: rds
-title: RDS デフォルトポート
+title: デフォルトのポートを持つ RDS インスタンス
 type: security_rules
 ---
-## 概要
-
-### 説明
+## 説明
 
 [Amazon RDS データベースインスタンス][1]がデフォルトのポートを使用していないことを確認します。MySQL/Aurora ポート 3306、SQL Server ポート 1433、 PostgreSQL ポート 5432 などのデフォルトポートが含まれます。
 
-### 根拠
+## 根拠
 
 カスタムポートの使用は、総当たり攻撃や辞書攻撃などに対する防衛になります。
 
-### 修復
+## 修復
+
+### コンソール
+
+[Amazon RDS DB インスタンスの変更][4]のドキュメントに従って、デフォルトを使用していないことを確認してください。その [DB インスタンス設定][5]を変更することで、ポートを変更できます。
+
+### CLI
 
 1. データベースインスタンスおよびスナップショット識別子とともに `create-db-snapshot` を実行して、[スナップショットを作成][2]します。
 
@@ -47,3 +51,5 @@ type: security_rules
 [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.html
 [2]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-snapshot.html
 [3]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/modify-db-instance.html#options
+[4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
+[5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.Settings

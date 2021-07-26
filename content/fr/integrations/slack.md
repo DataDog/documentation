@@ -11,6 +11,7 @@ doc_link: 'https://docs.datadoghq.com/integrations/slack/'
 draft: false
 git_integration_title: slack
 has_logo: true
+integration_id: ''
 integration_title: Slack
 is_public: true
 kind: integration
@@ -85,22 +86,67 @@ Déclarez un nouvel incident à partir de l'application Slack avec :
 /datadog incident 
 ```
 
+**Remarque** : tous les utilisateurs de votre organisation Slack peuvent déclarer un incident, même s'ils n'ont pas accès à Datadog.
+
 Lorsqu'un nouvel incident est créé, un canal Slack correspondant `#incident-(identifiant unique)` est créé, et un message est envoyé au canal pour vous indiquer le nouveau canal d'incident à utiliser. Le sujet du canal change en fonction de l'incident.
 
-Mettez à jour l'état d'un incident (p. ex. sa sévérité) avec :
+Mettez à jour l'état d'un incident (p. ex. sa gravité) avec :
 
 ```
-/datadog incident update 
+/datadog incident update
+```
+
+Répertoriez tous les incidents ouverts (actifs et stables) avec :
+
+```
+/datadog incident lists
 ```
 
 Utilisez le menu des actions sur un message (les trois points qui s'affichent lorsque vous passez le curseur sur un message envoyé dans le canal #incident tout à droite) pour ajouter le message à la chronologie des événements pour cet incident dans l'application.
 
 {{< img src="integrations/slack/incidents2.png" alt="Configuration de Slack" style="width:80%;">}}
 
+#### Canal de mise à jour des incidents
+Le canal de mise à jour des incidents permet à votre équipe de bénéficier d'une visibilité totale sur l'ensemble des incidents de l'organisation, le tout depuis votre espace de travail Slack. Sélectionnez le canal de votre espace de travail dans lequel vous souhaitez publier les mises à jour. Des messages seront envoyés pour les événements suivants :
+
+1. Les nouveaux signalements d'incident
+2. Les changements de gravité et de statut, accompagnés du nom de la personne responsable de l'incident
+3. Des liens vers la page de présentation de l'[incident][4] dans l'application
+4. Des liens pour rejoindre les canaux Slack réservés aux incidents
+
+Une fois l'app Slack [installée][5], accédez à la page Incident [Settings][6]. Défilez vers le bas jusqu'à atteindre la section *Incident Updates Channel*, puis effectuez la configuration du canal.
+
+Vous pouvez définir dans l'application Slack le canal qui fera office de canal de mise à jour des incidents.
+
+**Pour configurer ce canal, procédez comme suit :**
+1. Accédez à Incidents Settings.
+2. Repérez la section *Incident Updates Channel*.
+3. Définissez l'espace de travail Slack ainsi que le canal spécifique à utiliser comme canal de mise à jour des incidents.
+
+{{< img src="integrations/slack/incident_updates_channel.png" alt="Canal de mise à jour des incidents" style="width:80%;">}}
+
+#### Gérer des tâches d'incident
+
+Grâce aux actions Slack et aux commandes `/datadog`, vous pouvez créer et gérer des tâches d'incident directement depuis Slack. Les commandes de tâche d'incident doivent être utilisées dans un canal d'incident.
+
+**Actions Slack** : 
+Vous pouvez créer des tâches à l'aide des actions Slack. Pour ce faire, passez le curseur sur un message envoyé dans un canal d'incident. Cliquez ensuite sur l'icône représentant trois points située à droite du message, puis sur Add Task to Incident. 
+
+**Commandes disponibles** :
+
+* La commande `/datadog task` crée une tâche pour l'incident. La fenêtre modale qui s'affiche vous permet de décrire la tâche, de l'attribuer à des membres d'équipe et de définir une date d'échéance.
+* La commande `/datadog task list` affiche la liste des tâches créées pour l'incident. Cette liste vous permet de rouvrir des tâches ou d'indiquer qu'elles sont terminées.
+
+Vous pouvez également consulter et gérer toutes les tâches créées depuis l['interface Incidents][4], en accédant à l'onglet Remediation de la section Incident Tasks. Consultez la [documentation à ce sujet][7] pour en savoir plus.
+
 
 [1]: https://app.datadoghq.com/account/settings#integrations/slack
 [2]: https://www.datadoghq.com/blog/datadog-slack-app/
 [3]: https://docs.datadoghq.com/fr/integrations/slack/?tab=slackwebhookeu
+[4]: https://app.datadoghq.com/incidents
+[5]: https://docs.datadoghq.com/fr/integrations/slack/?tab=slackapplicationus#installation
+[6]: https://app.datadoghq.com/incidents/settings
+[7]: https://docs.datadoghq.com/fr/monitors/incident_management/#follow-up-and-learn-from-the-incident
 {{% /tab %}}
 
 {{% tab "Webhook Slack - Europe" %}}
@@ -113,7 +159,7 @@ Pour installer l'intégration Slack, accédez à son [carré d'intégration][1] 
 
 ### Configuration
 
-1. Dans votre compte Slack, accédez à la [page Applications][2] et recherchez Datadog.
+1. Dans votre compte Slack, accédez à la [page Applications][2] et recherchez Datadog (Legacy).
 2. Cliquez sur _Ajouter à Slack_ --> _Add Datadog Integration_, puis copiez l'**URL du webhook** Slack.
 3. Accédez au [carré d'intégration Datadog/Slack][1] dans l'onglet de configuration.
 4. Cliquez sur _Add Account_.

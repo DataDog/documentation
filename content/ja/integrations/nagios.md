@@ -7,6 +7,8 @@ assets:
     source: nagios
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    nagios_processes: assets/saved_views/nagios_processes.json
   service_checks: assets/service_checks.json
 categories:
   - monitoring
@@ -27,6 +29,7 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nagios.
+metric_to_check: nagios.host.rta
 name: nagios
 process_signatures:
   - nagios

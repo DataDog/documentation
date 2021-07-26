@@ -32,10 +32,16 @@ markup:
   highlight:
     guessSyntax: true
 
-# so we can access images as resources
-# assetDir: "static"
-
 module:
+  imports:
+   - path: github.com/DataDog/websites-modules
+     disabled: false
+     mounts:
+     - source: layouts/partials/announcement_banner.html
+       target: layouts/partials/announcement_banner.html
+     - source: assets/scss/components/_announcement-banner.scss
+       target: assets/styles/components/_announcement-banner.scss
+
   mounts:
     # default mounts
     - source: content/en
@@ -54,6 +60,8 @@ module:
     - source: data
       target: data
     - source: static
+      target: assets
+    - source: assets
       target: assets
     - source: i18n
       target: i18n

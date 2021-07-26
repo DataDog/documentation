@@ -1,5 +1,5 @@
 ---
-title: NDM with the Cluster Agent
+title: Network Device Monitoring with the Cluster Agent
 kind: guide
 aliases:
     - /network_performance_monitoring/devices/guide/cluster-agent/
@@ -190,6 +190,19 @@ clusterAgent:
             # The autodiscovery subnet the device is part of.
             # Used by Agent autodiscovery to pass subnet name.
             - "autodiscovery_subnet:%%extra_autodiscovery_subnet%%"
+          
+          ## @param extra_tags - string - optional
+          ## Comma separated tags to attach to every metric, event and service check emitted by this integration.
+          ## Example:
+          ##  extra_tags: "tag1:val1,tag2:val2"
+          #
+          extra_tags: "%%extra_tags%%"
+
+          ## @param oid_batch_size - integer - optional - default: 60
+          ## The number of OIDs handled by each batch. Increasing this number improves performance but
+          ## uses more resources.
+          #
+          oid_batch_size: "%%extra_oid_batch_size%%"
 
 
   ## @param datadog-cluster.yaml - object - optional
@@ -211,7 +224,7 @@ clusterAgent:
         - network: 192.168.1.16/29
           version: 2
           port: 1161
-          community: f5
+          community: public
 {{< /code-block >}}
 
 

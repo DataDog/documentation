@@ -75,7 +75,7 @@ Pour créer plusieurs instances dans un même check d'Agent et surveiller deux s
 init_config:
 
 instances:
-    - apache_stats_url: "http://localhost/server-status?auto"
+    - apache_status_url: "http://localhost/server-status?auto"
       service: local-apache
 
     - apache_status_url: "http://<ENDPOINT_APACHE_DISTANT>/server-status?auto"
@@ -125,7 +125,7 @@ Pour en savoir plus sur la manière dont Datadog traite vos données et sur d'au
 
 Maintenant que vos premières intégrations sont configurées, vous pouvez commencer à [explorer toutes les métriques][30] envoyées par votre application à Datadog et à utiliser ces métriques pour configurer des [dashboards][31] et des [alertes][32] afin de surveiller vos données.
 
-Découvrez également nos solutions [Log Management][33], [APM][34] et [Synthetic Monitoring][35].
+Découvrez également nos solutions [Log Management][33], [APM][34] et [surveillance Synthetic][35].
 
 ## Dépannage
 
@@ -135,20 +135,40 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 
 ## Termes clés
 
-| Terme                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **conf.yaml**          | Le fichier `conf.yaml` doit être créé dans le dossier `conf.d/<NOM_INTÉGRATION>` à la racine du [répertoire de configuration de votre Agent][38]. Utilisez ce fichier pour connecter des intégrations à votre système et pour configurer leurs paramètres.                                                                                                                                                                                                                                       |
-| **check custom**       | Si vous utilisez un système privé que vous souhaitez surveiller, ou si vous souhaitez étendre la liste des métriques déjà envoyées par une intégration, vous pouvez créer un [check custom][10] pour définir des métriques et les envoyer à Datadog. Toutefois, si vous souhaitez surveiller une application disponible librement, un service public ou un projet open source qui ne bénéficie d'aucune intégration dédiée, nous vous conseillons de [créer une nouvelle intégration][1] plutôt qu'un check custom. |
-| **datadog.yaml**       | Il s'agit du fichier de configuration principal où vous définissez comment l'Agent dans son ensemble interagit avec ses propres intégrations et avec votre système. Utilisez ce fichier pour mettre à jour les clés d'API, les proxys, les tags de host et d'autres paramètres généraux.                                                                                                                                                                                                                                       |
-| **événement**              | Les événements sont des messages informatifs sur votre système. Ils sont recueillis dans le [flux d'événements][39] pour vous permettre de créer des monitors en fonction de ces derniers.                                                                                                                                                                                                                                                                                                                           |
-| **instance**           | Chaque instance de ce que vous surveillez doit être définie et mappée dans le fichier `conf.yaml`. Par exemple, pour l'[intégration `http_check`][40], vous devez définir le nom associé à l'instance de l'endpoint HTTP dont vous surveillez l'uptime et le downtime. Vous pouvez surveiller **plusieurs instances** dans la même intégration en définissant toutes les instances dans le fichier `conf.yaml`.                                                               |
-| **nom_intégration.d** | Si votre configuration est complexe, vous pouvez la décomposer en plusieurs fichiers `YAML`, puis placer tous les fichiers dans le dossier `<NOM_INTÉGRATION>.d` pour définir la configuration. L'Agent charge tous les fichiers `YAML` valides dans le répertoire `<NOM_INTÉGRATION>.d`.                                                                                                                                                                                                       |
-| **journalisation**            | Si le système que vous surveillez génère des logs, vous pouvez personnaliser les logs que vous envoyez à Datadog et utiliser notre [solution Log Management][33] pour les gérer et les analyser.                                                                                                                                                                                                                                                                                         |
-| **metadata.csv**       | Ce fichier énumère et stocke les métriques recueillies par chaque intégration.                                                                                                                                                                                                                                                                                                                                                                                          |
-| **métriques**            | La liste des données recueillies à partir de votre système par chaque intégration. La liste des métriques de chaque intégration se trouve dans le fichier `metadata.csv` correspondant à cette intégration. Pour en savoir plus sur les métriques, consultez la [page sur les métriques dédiée aux développeurs][41]. Vous pouvez également configurer des [métriques custom][42] afin d'ajouter des métriques qui ne sont pas proposées par défaut avec l'intégration.                                                                                               |
-| **paramètres**         | Utilisez les paramètres dans le fichier `conf.yaml` pour contrôler les accès entre la source de données de votre intégration et l'Agent. Le fichier `conf.yaml.example` de chaque intégration énumère l'ensemble des paramètres obligatoires et facultatifs.                                                                                                                                                                                                                                |
-| **check de service**      | Les checks de service sont un type de monitor utilisé pour surveiller le statut de disponibilité du service. Pour en savoir plus, consultez le [guide sur les checks de service][43].                                                                                                                                                                                                                                                                                                                     |
-| **tagging**            | Les [tags][25] permettent de personnaliser les métriques pour les trier et les visualiser comme bon vous semble.                                                                                                                                                                                                                                                                                                                                      |
+`conf.yaml`
+: Le fichier `conf.yaml` doit être créé dans le dossier `conf.d/<NOM_INTÉGRATION>` à la racine du [répertoire de configuration de votre Agent][38]. Utilisez ce fichier pour connecter des intégrations à votre système et pour configurer leurs paramètres.
+
+Check custom
+: Si vous utilisez un système privé que vous souhaitez surveiller, ou si vous voulez envoyer des métriques supplémentaires à partir d'une intégration, vous pouvez créer un [check custom][10] pour définir des métriques et les envoyer à Datadog. Toutefois, si vous souhaitez surveiller une application disponible librement, un service public ou un projet open source qui ne bénéficie d'aucune intégration dédiée, nous vous conseillons de [créer une nouvelle intégration][1] plutôt qu'un check custom.
+
+`datadog.yaml`
+: Il s'agit du fichier de configuration principal où vous définissez comment l'Agent dans son ensemble interagit avec ses propres intégrations et avec votre système. Utilisez ce fichier pour mettre à jour les clés d'API, les proxys, les tags de host et d'autres paramètres généraux. 
+Événement
+: Les événements sont des messages qui vous informent sur votre système. Ils sont recueillis dans le [flux d'événements][39]. Vous pouvez créer des monitors basés sur les événements.
+
+Instance
+: Chaque instance de ce que vous surveillez doit être définie et mappée dans le fichier `conf.yaml`. Par exemple, pour l'[intégration `http_check`][40], vous devez définir le nom associé à l'instance de l'endpoint HTTP dont vous surveillez l'uptime et le downtime. Vous pouvez surveiller **plusieurs instances** dans une même intégration en définissant toutes les instances dans le fichier `conf.yaml`.
+
+`<NOM_INTÉGRATION>.d`
+: Si votre configuration est complexe, vous pouvez la décomposer en plusieurs fichiers `YAML`, puis placer tous les fichiers dans le dossier `<NOM_INTÉGRATION>.d` pour définir la configuration. L'Agent charge tous les fichiers `YAML` valides dans le dossier `<NOM_INTÉGRATION>.d`.
+
+Logs
+: Si le système que vous surveillez génère des logs, vous pouvez personnaliser les logs que vous envoyez à Datadog et utiliser notre [solution Log Management][33] pour les gérer et les analyser.
+
+`metadata.csv`
+: Ce fichier énumère et stocke les métriques recueillies par chaque intégration.
+
+Métriques
+: La liste des données recueillies à partir de votre système par chaque intégration. La liste des métriques de chaque intégration se trouve dans le fichier `metadata.csv` correspondant à cette intégration. Pour en savoir plus sur les métriques, consultez la [page sur les métriques dédiée aux développeurs][41]. Vous pouvez également configurer des [métriques custom][42] afin d'ajouter des métriques qui ne sont pas proposées par défaut avec l'intégration.
+
+Paramètres
+: Utilisez les paramètres dans le fichier `conf.yaml` pour contrôler les accès entre la source de données de votre intégration et l'Agent. Le fichier `conf.yaml.example` de chaque intégration énumère l'ensemble des paramètres obligatoires et facultatifs.
+
+Check de service
+: Les checks de service sont un type de monitor utilisé pour surveiller le statut de disponibilité du service. Pour en savoir plus, consultez le [guide sur les checks de service][43].
+
+Tags
+: Les [tags][25] permettent de personnaliser les métriques pour les trier et les visualiser comme bon vous semble.
 
 ## Pour aller plus loin
 
@@ -163,7 +183,7 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 [7]: /fr/api/
 [8]: /fr/integrations/node/
 [9]: /fr/integrations/python/
-[10]: /fr/developers/write_agent_check/
+[10]: /fr/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /fr/developers/integrations/new_check_howto/#developer-toolkit
@@ -177,7 +197,7 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 [21]: /fr/agent/guide/agent-commands/#restart-the-agent
 [22]: /fr/developers/integrations/new_check_howto/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /fr/developers/write_agent_check/#collection-interval
+[24]: /fr/developers/custom_checks/write_agent_check/#collection-interval
 [25]: /fr/getting_started/tagging/
 [26]: /fr/getting_started/agent/#setup
 [27]: /fr/agent/guide/agent-commands/#agent-status-and-information

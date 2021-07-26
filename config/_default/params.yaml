@@ -1,4 +1,5 @@
 environment: default
+integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
 imgix:
   header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
   header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"
@@ -9,25 +10,25 @@ imgix:
 code_languages:
   'py':
     extension: py
-    name: python
+    name: python-legacy
     syntax: python
     command: python
     example_file: example.py
   'pybeta':
     extension: py
-    name: python-beta
+    name: python
     syntax: python
     command: python3
     example_file: example.py
   'rb':
     extension: rb
-    name: ruby
+    name: ruby-legacy
     syntax: ruby
     command: rb
     example_file: example.rb
   'rbbeta':
     extension: rbbeta
-    name: ruby-beta
+    name: ruby
     syntax: ruby
     command: rb
     example_file: example.rb
@@ -55,17 +56,24 @@ code_languages:
     extension: php
     name: php
     syntax: php
+  'ts':
+    extension: ts
+    name: typescript
+    syntax: typescript
+    command: tsc
+    example_file: example.ts
 
 code_language_ids:
     java: Java
     cpp: 'C++'
     php: PHP
     nodejs: NodeJS
+    python-legacy: Python [legacy]
     python: Python
-    python-beta: Python [beta]
+    ruby-legacy: Ruby [legacy]
     ruby: Ruby
-    ruby-beta: Ruby [beta]
     go: Go
+    typescript: Typescript
     ".NET": ".NET"
     dotnet: ".NET"
     dotnet-core: ".NET Core"

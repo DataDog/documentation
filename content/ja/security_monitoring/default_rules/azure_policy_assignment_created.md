@@ -10,8 +10,6 @@ source: azure
 title: Azure ポリシーの割り当ての作成
 type: security_rules
 ---
-## 概要
-
 ## 目標
 
 Azure ポリシーの割り当てが作成されたことを検出します。

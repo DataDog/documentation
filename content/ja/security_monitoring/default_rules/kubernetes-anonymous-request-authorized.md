@@ -9,8 +9,6 @@ source: kubernetes
 title: 匿名リクエストの承認
 type: security_rules
 ---
-## 概要
-
 ### 目標
 認証されていないリクエストユーザーが Kubernetes で許可されていることを検出します。
 

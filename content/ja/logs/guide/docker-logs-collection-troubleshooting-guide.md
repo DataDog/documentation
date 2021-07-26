@@ -32,9 +32,11 @@ kind: documentation
 
 4. 上記のようなステータスが表示されるが、ログを受信できない場合は、[ログ Agent のステータスがエラーを表示しない場合](#if-the-logs-agent-status-shows-no-errors)のセクションを参照してください。
 
-## ログ Agent のステータスに "not running" と表示される
+## ログ Agent
 
-Agent のステータスコマンドを実行して、以下のメッセージが表示されることがあります。
+### ステータス: 停止中
+
+Agent のステータスコマンドを実行すると以下のメッセージが表示される場合:
 
 ```text
 ==========
@@ -48,7 +50,7 @@ Logs Agent
 
 コンテナ Agent のロギングを有効にするには、環境変数 `DD_LOGS_ENABLED=true` を設定します。
 
-## ログ Agent に処理済みや送信済みのログが表示されない
+### 処理済みまたは送信済みのログはありません
 
 ログ Agent のステータスにインテグレーションが表示されず、`LogsProcessed: 0 and LogsSent: 0` と表示されることがあります。
 
@@ -66,7 +68,7 @@ Logs Agent
 
 2. Agent が他のコンテナからログを収集するように構成するには、`DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 環境変数を `true` に設定してください。
 
-## ログ Agent に "Status: Pending" と表示される
+### ステータス: 保留中
 
 ログ Agent のステータスに "Status: Pending" と表示されることがあります。
 
@@ -85,11 +87,11 @@ Logs Agent
 
 この場合、ログ Agent は稼働していますが、コンテナログの収集を開始していません。それには以下の理由が考えられます。
 
-### Docker デーモンがホスト Agent の後に開始された
+#### ホスト Agent の後に Docker Daemon が開始
 
 Agent のバージョンが 7.17 よりも古い場合で、ホスト Agent が稼働してから Docker デーモンを開始した場合は、Agent を再起動して、コンテナの収集をトリガーし直してください。
 
-### コンテナ Agent を開始するときに、Docker ソケットをマウントしなかった
+#### Docker ソケットがマウントされていません
 
 コンテナ Agent が Docker コンテナからログを収集するには、Docker ソケットへのアクセスが許可されている必要があります。アクセスできない場合は、以下のログが `agent.log` に表示されます。
 
@@ -101,26 +103,14 @@ Agent のバージョンが 7.17 よりも古い場合で、ホスト Agent が�
 
 Docker ソケットへのアクセスを可能にするには、`-v /var/run/docker.sock:/var/run/docker.sock:ro` のオプションを使用して Agent コンテナを再起動します。
 
-### （ホスト Agent のみ）"dd-agent" ユーザーが Docker グループに含まれていない
+### ステータス: エラーなし
 
-ホスト Agent を使用している場合、Docker ソケットからの読み取りの許可を得るために、`dd-agent` ユーザーを Docker グループに追加する必要があります。追加しない場合、`agent.log` ファイルに以下のエラーログが表示されます。
-
-```text
-2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
-
-2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
-```
-
-ホスト Agent を Docker ユーザーグループに追加するには、`usermod -a -G docker dd-agent` のコマンドを実行します。
-
-## ログ Agent のステータスがエラーを表示しない場合
-
-ログ Agent のステータスが [Agent のステータスのチェック](#check-the-agent-status)で示した例のように表示されるが、ログを Datadog プラットフォームで受信できない場合は、次のいずれかの問題が考えられます。
+ログ Agent のステータスが [Agent のステータスのチェック](#check-the-agent-status)の例のように表示されるものの、ログが Datadog プラットフォームに到達しない場合は、次のいずれかの問題が考えられます。
 
 * Datadog へのログの送信に必要なポート (10516) がブロックされる。
 * Agent が予期するものとは異なるロギングドライバーが、コンテナに使用されている。
 
-### ポート 10516 のアウトバウンドトラフィックがブロックされる
+#### ポート 10516 のアウトバウンドトラフィックがブロックされる
 
 Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
 
@@ -137,7 +127,7 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 
 ポート 10514 または 10516 を開くことを選択できない場合は、`DD_LOGS_CONFIG_USE_HTTP` 環境変数を `true` に設定して、Datadog Agent が HTTPS 経由でログを送信するよう構成することができます。
 
-### コンテナに JSON ロギングドライバーが使用されていない
+#### コンテナに JSON ロギングドライバーが使用されていない
 
 Docker のデフォルトのロギングドライバーは json-file であり、コンテナ Agent はまずこのドライバーから読み取ろうとします。コンテナが別のロギングドライバーを使用するように設定されている場合、ログ Agent はコンテナを見つけることはできますが、ログを収集することができません。コンテナ Agent は、journald ロギングドライバーから読み取るように構成することもできます。
 
@@ -175,6 +165,19 @@ Docker デーモンは、ディスクに大きなログファイルがすでに�
 logs_config:
   docker_client_read_timeout: 60
 ```
+
+## ホスト Agent
+### Docker グループの Agent ユーザー
+
+ホスト Agent を使用している場合、Docker ソケットからの読み取り許可を得るにはユーザー `dd-agent` を Docker グループに追加する必要があります。`agent.log` ファイルに以下のエラーログが表示される場合、
+
+```text
+2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
+
+2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
+```
+
+ホスト Agent を Docker ユーザーグループに追加するには、`usermod -a -G docker dd-agent` のコマンドを実行します。
 
 [1]: /ja/help/
 [2]: /ja/integrations/journald/#setup

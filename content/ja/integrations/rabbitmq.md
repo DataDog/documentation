@@ -8,7 +8,9 @@ assets:
   logs:
     source: rabbitmq
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    disk_usage: assets/monitors/disk_usage.json
+    message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
     rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
@@ -96,17 +98,6 @@ rabbitmqctl set_user_tags datadog monitoring
 
 1. RabbitMQ メトリクスの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `rabbitmq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル rabbitmq.d/conf.yaml][2] を参照してください。
 
-   ```yaml
-   init_config:
-
-   instances:
-     ## @param rabbit_api_url - string - required
-     ## For every instance a 'rabbitmq_api_url' must be provided, pointing to the api
-     ## url of the RabbitMQ Managment Plugin (http://www.rabbitmq.com/management.html).
-     #
-     - rabbitmq_api_url: http://localhost:15672/api/
-   ```
-
    **注**: Agent は、デフォルトですべてのキュー、vhost、ノードをチェックしますが、リストまたは正規表現を指定してこれを制限できます。例については、[rabbitmq.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
@@ -128,7 +119,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-3. RabbitMQ のログの収集を開始するには、次の構成ブロックを `rabbitmq.d/conf.yaml` ファイルに追加します。
+3. RabbitMQ ログの収集を開始するには、`rabbitmq.d/conf.yaml` ファイルの `logs` セクションを編集します。
 
    ```yaml
    logs:
@@ -210,8 +201,6 @@ Agent が RabbitMQ に接続してメトリクスを収集できない場合は�
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
-
-### Datadog ブログ
 
 - [RabbitMQ 監視のキーメトリクス][8]
 - [RabbitMQ 監視ツールでメトリクスを収集][9]
