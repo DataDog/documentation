@@ -23,7 +23,7 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents.  You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
-**Note**: Manage and create incidents on the go with the [Datadog Mobile App][13], available on the [Apple App Store][14] and [Google Play Store][15].
+**Note**: Manage and create incidents with the [Datadog Mobile App][13], available on the [Apple App Store][14] and [Google Play Store][15].
 
 ### Creating an incident
 
