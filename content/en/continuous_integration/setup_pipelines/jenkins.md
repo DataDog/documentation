@@ -54,9 +54,9 @@ DATADOG TRACER CONFIGURATION {...}
 
 This is an optional step that enables the collection of job logs. It involves two steps: enabling the job collection port on the Datadog Agent, and enabling job collection on the Datadog Plugin.
 
-### Enable job log collection on the Agent
+### Datadog Agent
 
-First, the Datadog Agent needs to be configured to open a TCP port to collect logs:
+First, enable job log collection on the Datadog Agent by opening a TCP port to collect logs:
 
 1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
 
@@ -74,9 +74,9 @@ logs:
 
 With this setup, the Agent listens in port `10518` for logs.
 
-### Enable job log collection in the plugin
+### Datadog Plugin
 
-Second, enable job log collection on the plugin:
+Second, enable job log collection on the Datadog Plugin:
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
