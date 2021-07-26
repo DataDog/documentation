@@ -26,7 +26,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See the documentation [querying][1] to configure a metric query.
+    * Metric: See the [metrics documentation][1] to configure a metric query.
     * Indexed Spans: See [the trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See [the log search documentation][3] to configure a log event query.
 2. Choose the units and the formatting. Autoformat scales the Dashboard for you based on the units.
@@ -58,7 +58,7 @@ The dedicated [widget JSON schema definition][5] for the query value widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/querying/#overview
+[1]: /metrics/#anatomy-of-a-metric-query
 [2]: /tracing/app_analytics/search/#search-bar
 [3]: /logs/search_syntax/
 [4]: /api/v1/dashboards/
