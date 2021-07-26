@@ -38,7 +38,7 @@ further_reading:
 
 A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
 
-**Note**: View Dashboards on the go with the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13].
+**Note**: View Dashboards with the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13].
 
 ## New dashboard
 
