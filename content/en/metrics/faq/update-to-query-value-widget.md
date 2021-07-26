@@ -2,10 +2,6 @@
 title: Update to Distribution Metrics Workflow FAQ
 kind: faq
 is_beta: true
-further_reading:
-- link: "/metrics/faq/update-to-query-value-widget"
-  tag: "FAQ"
-  text: "Update to Top Lists and Query Value Widgets"
 ---
 
 ## What is changing?
