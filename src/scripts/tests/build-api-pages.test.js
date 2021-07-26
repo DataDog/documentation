@@ -1,5 +1,27 @@
 import * as bp from '../build-api-pages';
 
+describe('formatContentLinks', () => {
+
+  it('should replace relative links with ones to the docs api page', () => {
+    const expected = `you can get the id from [this endpoint that lists id](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports)`;
+    const actual = bp.formatContentLinks(`you can get the id from [this endpoint that lists id](#/Usage-Metering/get-the-list-of-available-monthly-custom-reports)`);
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return same input when nothing to change', () => {
+    const expected = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas facilisis, sem nec rhoncus aliquet, leo est porta est, id venenatis lacus erat sed nisi.`;
+    const actual = bp.formatContentLinks(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas facilisis, sem nec rhoncus aliquet, leo est porta est, id venenatis lacus erat sed nisi.`);
+    expect(actual).toEqual(expected);
+  })
+
+  it('should not replace regular links', () => {
+    const expected = `here is a link to google [google](https://www.google.com) yes!`;
+    const actual = bp.formatContentLinks(`here is a link to google [google](https://www.google.com) yes!`);
+    expect(actual).toEqual(expected);
+  })
+
+});
+
 describe(`updateMenu`, () => {
 
 

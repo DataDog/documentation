@@ -9,6 +9,23 @@ const safeJsonStringify = require('safe-json-stringify');
 
 const supportedLangs = ['en'];
 
+const formatContentLinks = (content) => {
+  let output = content;
+  try {
+    const regex = /#\/(.+)\/([^\s]+)/gm;
+    // const str = `you can get the id from [this endpoint that lists id](#/{tagName}/{operationId})`;
+    const matches = regex.exec(content);
+    if(matches && matches.length > 2) {
+      const tagName = matches[1];
+      const operationId = matches[2];
+      output = content.replace(matches[0], `https://docs.datadoghq.com/api/latest/${getTagSlug(tagName)}/#${operationId}`)
+    }
+  } catch(e) {
+      console.log(e);
+  }
+  return output;
+};
+
 /**
  * Update the menu yaml file with api
  * @param {object} apiYaml - object with data
@@ -712,7 +729,7 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
+  return `<div class="col-6 column">${marked(formatContentLinks(desc)) ? marked(formatContentLinks(desc)).trim() : ""}</div>`.trim();
 };
 
 
@@ -990,5 +1007,6 @@ module.exports = {
   getSchema,
   getTagSlug,
   outputExample,
-  getJsonWrapChars
+  getJsonWrapChars,
+  formatContentLinks
 };
