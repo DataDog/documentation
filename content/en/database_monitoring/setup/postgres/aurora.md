@@ -150,6 +150,8 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
+To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to the Aurora instance endpoint remotely.
+
 Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][7].
 
 ## Configure the Agent
@@ -169,10 +171,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        host: '<AWS_INSTANCE_ENDPOINT>'
        port: 5432
        username: datadog
-       password: "<PASSWORD>"
-       dbname: "<DB_NAME>"
-       statement_samples:
-         enabled: true
+       password: '<PASSWORD>'
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
    ```
    <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
@@ -191,7 +192,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>", "statement_samples": { "enabled": true } }]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>" }]'
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
@@ -222,11 +223,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port":"5432",
           "username":"datadog",
-          "password":"<PASSWORD>",
-          "statement_samples":
-          {
-            "enabled":true
-          }
+          "password":"<PASSWORD>"
         }
       ]
 spec:
@@ -256,7 +253,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"postgres\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"host\":\"<AWS_INSTANCE_ENDPOINT>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\", \"statement_samples\": { \"enabled\": true } }]"
+      "com.datadoghq.ad.instances": "[{\"host\":\"<AWS_INSTANCE_ENDPOINT>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\"}]"
     }
   }]
 }
