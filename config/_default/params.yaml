@@ -80,10 +80,6 @@ code_language_ids:
     dotnet-framework: ".NET Framework"
     curl: Curl
     nginx: Nginx
-    selfhosted: Self hosted
-    rds: Amazon RDS
-    aurora: Aurora
-    gcsql: Google Cloud SQL
     other: Other
 
 branch: ""
