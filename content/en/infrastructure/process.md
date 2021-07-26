@@ -17,6 +17,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
       tag: 'Blog'
       text: 'Correlate software performance and resource consumption with saved views'
+    - link: https://www.datadoghq.com/blog/process-level-data/
+      tag: 'Blog'
+      text: 'Troubleshoot faster with process-level app and network data'
 ---
 
 ## Introduction
