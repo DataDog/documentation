@@ -52,7 +52,9 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 ### Multi-factor authentication
 
-Browser tests can reproduce any actions a regular user can take inside their browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a browser, you can record it when setting up your browser test. Some MFA providers might however detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Datadog Synthetic Monitoring fully [supports Time-based One Time Passwords (TOTPs)][7], a Multi-Factor Authentication method consisting in generating one-time passwords based on combining a secret key and the time.
+
+Browser tests can also reproduce any actions a regular user can take inside their browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a browser, you can record it when setting up your browser test. Some MFA providers might however detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
 If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
@@ -91,3 +93,4 @@ Once you create the secure variables, you can then [import these global variable
 [4]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [5]: /synthetics/settings/?tab=specifyvalue#global-variables
 [6]: /synthetics/browser_tests/actions#a-global-variable
+[7]: https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/
