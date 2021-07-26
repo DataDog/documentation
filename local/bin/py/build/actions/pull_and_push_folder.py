@@ -27,23 +27,28 @@ def pull_and_push_folder(content, content_dir):
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
             file_content = f.read()
+            boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+            split = boundary.split(file_content, 2)
+            new_yml = {}
+            txt = file_content
+            if len(split) == 3:
+                _, fm, txt = split
+                new_yml = yaml.load(fm, Loader=yaml.FullLoader)
+            elif len(split) == 1:
+                txt = split[0]
             # if front matter update existing
             if "front_matters" in content["options"]:
-                boundary = re.compile(r'^-{3,}$', re.MULTILINE)
-                split = boundary.split(file_content, 2)
-                new_yml = {}
-                txt = file_content
-                if len(split) == 3:
-                    _, fm, txt = split
-                    new_yml = yaml.load(fm, Loader=yaml.FullLoader)
-                elif len(split) == 1:
-                    txt = split[0]
                 new_yml.update(content["options"]["front_matters"])
-                front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
-                file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
-            # Replacing the master README.md by _index.md to follow Hugo logic
-            if file_name.endswith("README.md"):
-                file_name = "_index.md"
+                # if the dependency ends with a `/` e.g folder then lets try replace with the actual filename
+                new_deps = []
+                for dep in new_yml.get("dependencies", []):
+                    if dep.endswith('/'):
+                        new_deps.append('{}{}'.format(
+                            dep,
+                            basename(file_name)
+                        ))
+                new_yml['dependencies'] = new_deps
+            front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
             # Replacing links that point to the Github folder by link that point to the doc.
             new_link = (
                 content["options"]["dest_dir"] + "\\2"
@@ -58,12 +63,16 @@ def pull_and_push_folder(content, content_dir):
                     ],
                 )
             )
-            file_content = re.sub(
+            txt = re.sub(
                 regex_github_link,
                 new_link,
-                file_content,
+                txt,
                 count=0,
             )
+            file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
+            # Replacing the master README.md by _index.md to follow Hugo logic
+            if file_name.endswith("README.md"):
+                file_name = "_index.md"
         # Writing the new content to the documentation file
         dirp = "{}{}".format(
             content_dir,
