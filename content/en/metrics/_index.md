@@ -62,7 +62,7 @@ The graphing experience is consistent whether you are using dashboards, notebook
 
 ### Anatomy of a metric query
 
-A metric query in Datadog looks like this:
+Regardless of the visualization, every metric query in Datadog looks like this:
 
 {{< img src="metrics/introduction/color-query2.png" alt="Example query with color-coded sections"  style="width:70%;">}}
 
@@ -88,9 +88,14 @@ _Grouping_ defines what constitutes a line on the graph. For example, if you hav
 
 _Aggregation_ defines how the metrics in each group are combined. There are four aggregations available: sum, min, max, and avg.
 
+#### Additional aggregations (optional) 
+Certain visualizations ([query value widget][22], [top lists][23]) have an additional layer of time aggregation to further reduce the values in the widget's timeframe down. A Query Value Widget simply reduces the values down to a single value over the widget's timeframe. And a Top List Widget returns a single value per group.
+
+
 #### Apply functions (optional)
 
 You can modify your graph values with mathematical [functions][17]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2), or between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
+
 
 ### Time and space aggregation
 
@@ -168,3 +173,5 @@ See the [full Metrics Summary documentation][21] for more details.
 [19]: https://app.datadoghq.com/metric/summary
 [20]: /account_management/billing/usage_details/
 [21]: /metrics/summary/
+[22]: /dashboards/widgets/query_value/
+[23]: /dashboards/widgets/top_list/
