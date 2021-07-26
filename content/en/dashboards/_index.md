@@ -38,6 +38,8 @@ further_reading:
 
 A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
 
+**Note**: View Dashboards on the go with the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13].
+
 ## New dashboard
 
 To create a dashboard, click on **+New Dashboard** on the [dashboard list page][1], or click **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
@@ -204,3 +206,6 @@ Click the settings modal for the whole dashboard, and select *Permissions*. Use 
 [8]: /account_management/users/default_roles/
 [9]: /help/
 [10]: /account_management/rbac/
+[11]: /mobile
+[12]: https://apps.apple.com/app/datadog/id1391380318
+[13]: https://play.google.com/store/apps/details?id=com.datadog.app
