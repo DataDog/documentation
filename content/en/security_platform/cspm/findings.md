@@ -66,11 +66,11 @@ Below is example message for a rule, including a description of misconfiguration
 
 {{< img src="security_platform/cspm/findings/message.png" alt="Message tab of the signals panel" style="width:80%;">}}
 
-The Findings tab displays all findings that are triggering this signal. This list always shows the current state of your infrastructure, meaning if you fixed three of ten misconfigured security groups since the signal first triggered, Datadog will display seven failed security groups rather than display findings that no longer are in violation.
+The Findings tab displays all findings that are triggering this signal. This list always shows the current state of your infrastructure, meaning if you fixed three of ten misconfigured security groups since the signal first triggered, Datadog displays seven failed security groups rather than displaying findings that no longer are in violation.
 
 {{< img src="security_platform/cspm/findings/findings-tab.png" alt="Failed signals in the side panel" style="width:80%;">}}
 
-**Note**: If using a grouping other than resource ID, the signal triggers the first time a finding meets the grouping criteria, and is not re-triggered each time a new resource in this same grouping (i.e. the same service or account) fail this rule.
+**Note**: If using a grouping other than resource ID, the signal triggers the first time a finding meets the grouping criteria, and is not re-triggered each time a new resource in this same grouping (that is, the same service or account) fails this rule.
 
 The **Related Issues** tab shows other rules that have triggered signals on the same logic grouping: the same resource, service, cloud account, or resource type (for example, security group).
 
