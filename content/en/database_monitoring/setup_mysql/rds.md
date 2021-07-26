@@ -1,10 +1,7 @@
 ---
-title: Setting Up Database Monitoring for Aurora managed MySQL
+title: Setting Up Database Monitoring for Amazon RDS managed MySQL
 kind: documentation
-description: Install and configure Database Monitoring for MySQL managed on Aurora.
-code_lang: aurora
-type: multi-code-lang
-code_lang_weight: 30
+description: Install and configure Database Monitoring for MySQL managed on Amazon RDS.
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
@@ -15,7 +12,6 @@ further_reading:
 {{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
-
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
@@ -39,11 +35,10 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
-
 
 ## Configure MySQL settings
 
@@ -51,15 +46,10 @@ Configure the following in the [DB Parameter Group][3]:
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the [Performance Schema][4]. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_current`</code> | `ON` | Required. Enables monitoring of currently running queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history`</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history_long`</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][4]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
-
-**Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
+| `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
+| `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
 
 ## Grant the Agent access
 
@@ -134,7 +124,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+Because with RDS, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -165,18 +155,18 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely.
+To monitor RDS hosts, install the Agent somewhere in your infrastructure and configure it to connect to the RDS instance endpoint remotely.
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent to run checks, see the [Agent installation instructions][6].
 
 ## Configure the Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
+To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL metrics. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
 Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
@@ -190,8 +180,6 @@ instances:
     pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
     port: '<YOUR_MYSQL_PORT>' # e.g. 3306
 ```
-
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 **Note**: Wrap your password in single quotes in case a special character is present.
 
@@ -214,10 +202,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "<AWS_INSTANCE_ENDPOINT>", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
-
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
-
 
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/faq/template_variables/
@@ -252,8 +237,6 @@ spec:
     - name: mysql
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
-
 See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
 
@@ -281,8 +264,6 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
-
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
 
@@ -297,16 +278,15 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/setup/data_collected/#sensitive-information
-[3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+[3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings#agent

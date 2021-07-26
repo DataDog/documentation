@@ -1,15 +1,11 @@
 ---
-title: Setting Up Database Monitoring for Amazon RDS managed Postgres
+title: Setting Up Database Monitoring for Google Cloud SQL managed Postgres
 kind: documentation
-description: Install and configure Database Monitoring for Postgres on Amazon RDS.
-code_lang: rds
-type: multi-code-lang
-code_lang_weight: 20
+description: Install and configure Database Monitoring for Postgres managed on Google Cloud SQL.
 further_reading:
-- link: "/tk/tk/"
+- link: "/integrations/postgres/"
   tag: "Documentation"
-  text: "tktk"
-  
+  text: "Basic Postgres Integration"
 ---
 
 {{< site-region region="us3,gov" >}} 
@@ -28,7 +24,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.2, 10, 11, 12, 13
+: 9.6, 10, 11, 12, 13
 
 Supported Agent versions
 : 7.30.0+
@@ -38,14 +34,14 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure Postgres settings
 
-Configure the following [parameters][3] in the [DB parameter group][4] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
+Configure the following [parameters][3] in [Database flags][4] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
 
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -159,14 +155,14 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][1] for more information.
 
-To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
+To configure Database Monitoring metrics collection for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][2] for all available configuration options.
    ```yaml
    init_config:
    instances:
      - dbm: true
-       host: '<AWS_INSTANCE_ENDPOINT>'
+       host: '<INSTANCE_ADDRESS>'
        port: 5432
        username: datadog
        password: "<PASSWORD>"
@@ -189,7 +185,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>", "statement_samples": { "enabled": true } }]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port":5432,"username":"datadog","password":"<PASSWORD>", "statement_samples": { "enabled": true } }]'
 ```
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
 
@@ -214,7 +210,7 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<AWS_INSTANCE_ENDPOINT>",
+          "host": "<INSTANCE_ADDRESS>",
           "port":"5432",
           "username":"datadog",
           "password":"<PASSWORD>",
@@ -248,7 +244,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"postgres\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"host\":\"<AWS_INSTANCE_ENDPOINT>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\", \"statement_samples\": { \"enabled\": true } }]"
+      "com.datadoghq.ad.instances": "[{\"host\":\"<INSTANCE_ADDRESS>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\", \"statement_samples\": { \"enabled\": true } }]"
     }
   }]
 }
@@ -273,11 +269,10 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/setup/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
-[4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+[4]: https://cloud.google.com/sql/docs/postgres/flags
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
 [6]: /integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html

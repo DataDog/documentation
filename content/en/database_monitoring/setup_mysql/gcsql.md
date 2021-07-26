@@ -1,10 +1,7 @@
 ---
-title: Setting Up Database Monitoring for Amazon RDS managed MySQL
+title: Setting Up Database Monitoring for Google Cloud SQL managed MySQL
 kind: documentation
-description: Install and configure Database Monitoring for MySQL managed on Amazon RDS.
-code_lang: rds
-type: multi-code-lang
-code_lang_weight: 20
+description: Install and configure Database Monitoring for MySQL managed on Google Cloud SQL.
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
@@ -15,6 +12,7 @@ further_reading:
 {{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
 {{< /site-region >}}
+
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
@@ -45,14 +43,15 @@ Data security considerations
 
 ## Configure MySQL settings
 
-Configure the following in the [DB Parameter Group][3]:
+
+Configure the following [Database Flags][3]:
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][4]. |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
-| `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
 
 ## Grant the Agent access
 
@@ -127,7 +126,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Because with RDS, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -158,18 +157,18 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-To monitor RDS hosts, install the Agent somewhere in your infrastructure and configure it to connect to the RDS instance endpoint remotely.
+To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely.
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent to run checks, see the [Agent installation instructions][6].
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
 
 ## Configure the Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
+To configure this check for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL metrics. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
 Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
@@ -178,7 +177,7 @@ init_config:
 
 instances:
   - dbm: true
-    server: '<AWS_INSTANCE_ENDPOINT>'
+    server: '<INSTANCE_ADDRESS>'
     user: datadog
     pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
     port: '<YOUR_MYSQL_PORT>' # e.g. 3306
@@ -202,7 +201,7 @@ Set [Autodiscovery Integration Templates][1] as Docker labels on your applicatio
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "<AWS_INSTANCE_ENDPOINT>", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "<INSTANCE_ADDRESS>", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
 ```
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
@@ -228,7 +227,7 @@ metadata:
       [
         {
           "dbm": true,
-          "server": "<AWS_INSTANCE_ENDPOINT>",
+          "server": "<INSTANCE_ADDRESS>",
           "user": "datadog",
           "pass": "<UNIQUEPASSWORD>"
         }
@@ -261,7 +260,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"mysql\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"<AWS_INSTANCE_ENDPOINT>\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
+      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"<INSTANCE_ADDRESS>\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
     }
   }]
 }
@@ -277,22 +276,22 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 
 ## Validate
 
-[Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9].
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+
+[1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [2]: /database_monitoring/setup/data_collected/#sensitive-information
-[3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
+[3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: https://app.datadoghq.com/databases
-[9]: /database_monitoring/setup/troubleshooting/#mysql
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://app.datadoghq.com/databases
+[8]: /database_monitoring/setup/troubleshooting/#mysql

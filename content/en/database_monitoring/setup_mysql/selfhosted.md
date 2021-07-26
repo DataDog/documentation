@@ -2,9 +2,6 @@
 title: Setting Up Database Monitoring for self hosted MySQL
 kind: documentation
 description: Install and configure Database Monitoring for self-hosted MySQL.
-code_lang: selfhosted
-type: multi-code-lang
-code_lang_weight: 10
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"

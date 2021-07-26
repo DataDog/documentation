@@ -1799,86 +1799,81 @@ main:
     pre: nav_dbm
     identifier: dbm
     weight: 160000
-  - name: Setting Up
-    url: database_monitoring/setup/
+  - name: Setting Up Postgres
+    url: database_monitoring/setup_postgres/
     parent: dbm
-    identifier: dbm_setup
-    weight: 1
-  - name: Postgres
-    url: database_monitoring/setup/postgres/selfhosted
-    parent: dbm_setup
     identifier: dbm_setup_postgres
-    weight: 101
+    weight: 1
   - name: Self-hosted
-    url: database_monitoring/setup/postgres/selfhosted
+    url: database_monitoring/setup_postgres/selfhosted
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_selfhosted
     weight: 101
   - name: RDS
-    url: database_monitoring/setup/postgres/rds
+    url: database_monitoring/setup_postgres/rds
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_rds
     weight: 102
   - name: Aurora
-    url: database_monitoring/setup/postgres/aurora
+    url: database_monitoring/setup_postgres/aurora
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_aurora
     weight: 103
   - name: Google Cloud SQL
-    url: database_monitoring/setup/postgres/gcsql
+    url: database_monitoring/setup_postgres/gcsql
     parent: dbm_setup_postgres
     identifier: dbm_setup_postgres_gcsql
     weight: 104
-  - name: MySQL
-    url: database_monitoring/setup/mysql/selfhosted
-    parent: dbm_setup
+  - name: Setting Up MySQL
+    url: database_monitoring/setup_mysql/
+    parent: dbm
     identifier: dbm_setup_mysql
-    weight: 102
-  - name: Self hosted
-    url: database_monitoring/setup/mysql/selfhosted
+    weight: 2
+  - name: Self-hosted
+    url: database_monitoring/setup_mysql/selfhosted
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_selfhosted
     weight: 101
   - name: RDS
-    url: database_monitoring/setup/mysql/rds
+    url: database_monitoring/setup_mysql/rds
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_rds
     weight: 102
   - name: Aurora
-    url: database_monitoring/setup/mysql/aurora
+    url: database_monitoring/setup_mysql/aurora
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_aurora
     weight: 103
   - name: Google Cloud SQL
-    url: database_monitoring/setup/mysql/gcsql
+    url: database_monitoring/setup_mysql/gcsql
     parent: dbm_setup_mysql
     identifier: dbm_setup_mysql_gcsql
     weight: 104
-  - name: Data Collected
-    url: database_monitoring/setup/data_collected
-    parent: dbm_setup
-    identifier: dbm_data_collected
-    weight: 103
   - name: Advanced Configuration
-    url: database_monitoring/setup/advanced_configuration
-    parent: dbm_setup
-    identifier: dbm_advanced_configuration
-    weight: 104
-  - name: Troubleshooting
-    url: database_monitoring/setup/troubleshooting/
-    parent: dbm_setup
-    identifier: dbm_troubleshooting
+    url: database_monitoring/setup_mysql/advanced_configuration
+    parent: dbm_setup_mysql
+    identifier: dbm_mysql_advanced_configuration
     weight: 105
+  - name: Data Collected
+    url: database_monitoring/data_collected
+    parent: dbm
+    identifier: dbm_data_collected
+    weight: 3
   - name: Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
-    weight: 2
+    weight: 4
   - name: Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples
-    weight: 3
+    weight: 5
+  - name: Troubleshooting
+    url: database_monitoring/troubleshooting/
+    parent: dbm
+    identifier: dbm_troubleshooting
+    weight: 6
   - name: Log Management
     url: logs/
     pre: nav_logs
