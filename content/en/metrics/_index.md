@@ -89,7 +89,7 @@ _Grouping_ defines what constitutes a line on the graph. For example, if you hav
 _Aggregation_ defines how the metrics in each group are combined. There are four aggregations available: sum, min, max, and avg.
 
 #### Additional aggregations (optional) 
-Certain visualizations ([query value widget][22], [top lists][23]) have an additional layer of time aggregation to further reduce the values in the widget's timeframe down. A Query Value Widget simply reduces the values down to a single value over the widget's timeframe. And a Top List Widget returns a single value per group.
+Certain visualizations ([query value widget][22], [top lists][23]) have an additional layer of time aggregation to further reduce the values in the widget's timeframe. A Query Value Widget reduces the values to a single value over the widget's timeframe. And a Top List Widget returns a single value per group.
 
 
 #### Apply functions (optional)
