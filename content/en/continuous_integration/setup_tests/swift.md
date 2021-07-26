@@ -101,6 +101,7 @@ Set all these variables in your test target:
 `DD_SITE`
 : The [Datadog site][2] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}<br/>
 **Possible values**: `datadoghq.com` or `datadoghq.eu`
 
 ### Collecting Git and build metadata
