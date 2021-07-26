@@ -78,16 +78,15 @@ Additionally, the following environment variables are supported:
 **Default**: (none)<br/>
 **Examples**: `local`, `ci`
 
-<!-- TODO: uncomment this once we support any datacenter other than us1
 `DATADOG_SITE`
-: The Datadog site to upload results to.<br/>
+: The [Datadog site][4] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Possible values**: `datadoghq.com`, `datadoghq.eu` or `us3.datadoghq.com`
--->
+**Possible values**: `datadoghq.com` or `datadoghq.eu`
+
 
 ## Collecting repository and commit metadata
 
-The Datadog CI CLI tries to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][4] binary is required.
+The Datadog CI CLI tries to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][5] binary is required.
 
 ## Further reading
 
@@ -96,4 +95,5 @@ The Datadog CI CLI tries to extract git repository and commit metadata from CI p
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://git-scm.com/downloads
+[4]: /getting_started/site/
+[5]: https://git-scm.com/downloads

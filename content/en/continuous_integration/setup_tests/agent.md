@@ -35,11 +35,17 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 `DD_API_KEY` (Required)
 : The [Datadog API key][4] used to upload the test results.
 
-`DD_INSIDE_CI=true`
+`DD_INSIDE_CI=true` (Required)
 : Disables the monitoring of the Datadog Agent container, as the underlying host is not accessible.
 
-`DD_HOSTNAME=none`
+`DD_HOSTNAME=none` (Required)
 : Disables the reporting of hostnames associated with tests, as the underlying host cannot be monitored.
+
+`DD_SITE` (Optional)
+: Specifies which [Datadog site][5] to send data to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Possible values**: `datadoghq.com`, `datadoghq.eu`
+
 
 ### CI provider configuration examples
 
@@ -172,7 +178,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 
 ### Using Docker Compose
 
-Regardless of which CI provider you use, if tests are run using [Docker Compose][5], the Datadog Agent can be run as one service:
+Regardless of which CI provider you use, if tests are run using [Docker Compose][6], the Datadog Agent can be run as one service:
 
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
 version: '3'
@@ -219,7 +225,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
   tests
 {{< /code-block >}}
 
-**Note:** In this case, add all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][6].
+**Note:** In this case, add all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][7].
 
 ## Further reading
 
@@ -229,5 +235,6 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: https://docs.docker.com/compose/
-[6]: /continuous_integration/setup_tests/containers/
+[5]: /getting_started/site/
+[6]: https://docs.docker.com/compose/
+[7]: /continuous_integration/setup_tests/containers/

@@ -80,9 +80,9 @@ Fill in the integration configuration settings:
 : Enables the integration.
 
 **Datadog site**
-: Specifies which [Datadog site][1] to send data to. Only `datadoghq.com` is supported.<br/>
+: Specifies which [Datadog site][1] to send data to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Possible values**: `datadoghq.com`
+**Possible values**: `datadoghq.com`, `datadoghq.eu`
 
 **API URL** (optional)
 : Allows overriding the API URL used for sending data directly, only used in advanced scenarios.<br/>
@@ -108,7 +108,7 @@ As an alternative to using the native Datadog integration, you can use [webhooks
 <div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.</div>
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][5].
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][4].
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
@@ -116,7 +116,7 @@ To set custom `env` or `service` parameters, add more query parameters in the we
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, the [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
+After the integration is successfully configured, the [Pipelines][5] and [Pipeline Executions][4] pages populate with data after the pipelines finish.
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
@@ -128,5 +128,5 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
-[4]: https://app.datadoghq.com/ci/pipelines
-[5]: https://app.datadoghq.com/ci/pipeline-executions
+[4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: https://app.datadoghq.com/ci/pipelines
