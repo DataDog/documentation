@@ -38,7 +38,7 @@ The .NET Tracer supports instrumentation on .NET Core 2.1 and above. It also sup
 
  Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][3]. 
 
-### Supported Process Architecture
+### Supported Processor Architectures
 
 | Processor architectures                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------ |
