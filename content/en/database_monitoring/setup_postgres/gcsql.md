@@ -78,7 +78,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
 {{% /tab %}}
-{{% tab "Postgres ≤ 9.6" %}}
+{{% tab "Postgres 9.6" %}}
 
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
@@ -105,6 +105,9 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
+
+
 Create the function to enable the Agent to collect explain plans. 
 
 ```SQL
@@ -127,6 +130,9 @@ SECURITY DEFINER;
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
+{{< tabs >}}
+{{% tab "Postgres ≥ 10" %}}
+
 ```shell
 psql -h localhost -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
@@ -141,10 +147,32 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database() limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_activity() limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_statements() limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
 ## Install the Agent
+
+To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely.
 
 Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
 
@@ -153,11 +181,9 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][1] for more information.
-
 To configure Database Monitoring metrics collection for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][2] for all available configuration options.
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
    ```yaml
    init_config:
    instances:
@@ -165,17 +191,15 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        host: '<INSTANCE_ADDRESS>'
        port: 5432
        username: datadog
-       password: "<PASSWORD>"
-       dbname: "<DB_NAME>"
-       statement_samples:
-         enabled: true
+       password: '<PASSWORD>'
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
    ```
-2. [Restart the Agent][3].
+2. [Restart the Agent][2].
 
 
-[1]: /integrations/faq/postgres-custom-metric-collection-explained/
-[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -185,7 +209,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port":5432,"username":"datadog","password":"<PASSWORD>", "statement_samples": { "enabled": true } }]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port":5432,"username":"datadog","password":"<PASSWORD>"}]'
 ```
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
 
@@ -213,11 +237,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port":"5432",
           "username":"datadog",
-          "password":"<PASSWORD>",
-          "statement_samples":
-          {
-            "enabled":true
-          }
+          "password":"<PASSWORD>"
         }
       ]
 spec:
@@ -244,7 +264,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"postgres\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"host\":\"<INSTANCE_ADDRESS>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\", \"statement_samples\": { \"enabled\": true } }]"
+      "com.datadoghq.ad.instances": "[{\"host\":\"<INSTANCE_ADDRESS>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\"}]"
     }
   }]
 }

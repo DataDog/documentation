@@ -78,7 +78,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
 {{% /tab %}}
-{{% tab "Postgres ≤ 9.6" %}}
+{{% tab "Postgres 9.6" %}}
 
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
@@ -105,6 +105,8 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][5] for more information.
+
 Create the function to enable the Agent to collect explain plans. 
 
 ```SQL
@@ -127,6 +129,9 @@ SECURITY DEFINER;
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
+{{< tabs >}}
+{{% tab "Postgres ≥ 10" %}}
+
 ```shell
 psql -h localhost -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
@@ -141,6 +146,26 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database() limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_activity() limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_statements() limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
@@ -149,8 +174,6 @@ When it prompts for a password, use the password you entered when you created th
 Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][7].
 
 ## Configure the Agent
-
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][5] for more information.
 
 ### Collecting metrics
 
@@ -164,10 +187,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        host: localhost
        port: 5432
        username: datadog
-       password: "<PASSWORD>"
-       dbname: "<DB_NAME>"
-       statement_samples:
-         enabled: true
+       password: '<PASSWORD>'
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
    ```
 2. [Restart the Agent][9].
 

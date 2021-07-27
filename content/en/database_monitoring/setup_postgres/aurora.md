@@ -210,7 +210,7 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>" }]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>"}]'
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
