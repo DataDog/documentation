@@ -67,7 +67,7 @@ The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using 
 | 4.5.1    |
 | 4.5      |
 
-For a full list of supported libraries and processor architectures, visit the [Compatibility Requirements][4] page.
+For a full list of supported libraries and processor architectures, see [Compatibility Requirements][4].
 
 ## Installation and getting started
 
