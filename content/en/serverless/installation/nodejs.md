@@ -142,19 +142,14 @@ class CdkStack extends cdk.Stack {
     const datadog = new Datadog(this, "Datadog", { 
         nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}, 
         extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}, 
-        apiKey: <DATADOG_API_KEY>,
-        service: <SERVICE> // Optional
-        env: <ENV> // Optional 
+        apiKey: <DATADOG_API_KEY>
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);    
   }
 }
 ```
 
-To fill in the placeholders:
-
-- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
@@ -162,7 +157,6 @@ More information and additional parameters can be found in the [Datadog CDK NPM 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://gallery.ecr.aws/datadog/lambda-extension
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -310,7 +304,7 @@ npm install --save datadog-lambda-js
 yarn add datadog-lambda-js
 ```
 
-See the [latest release][3].
+See the [latest release][2].
 
 
 ### Install the Datadog Lambda Extension
@@ -341,14 +335,12 @@ Follow these steps to configure the function:
 1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_API_KEY` to your Datadog API key from the [API Management page][5]. 
+4. Set the environment variable `DD_API_KEY` to your Datadog API key from the [API Management page][3]. 
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
-[3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: https://gallery.ecr.aws/datadog/lambda-extension
-[5]: https://app.datadoghq.com/account/settings#api
+[2]: https://www.npmjs.com/package/datadog-lambda-js
+[3]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 

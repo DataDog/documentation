@@ -133,7 +133,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
             myTags.put("order","online");
         
         // Submit a custom metric
-        dd.metric(
+        ddl.metric(
             "coffee_house.order_value", // Metric name
             12.45,                      // Metric value
             myTags);                    // Associated tags

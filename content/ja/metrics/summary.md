@@ -15,9 +15,33 @@ further_reading:
 ---
 ## 概要
 
-[Metrics Summary ページ][1]には、指定されたタイムフレーム (過去 1 時間、過去 1 日、または過去 1 週間) 内に Datadog に報告されたメトリクスがリストされます。**Metric** または **Tag** の検索フィールドを使用し、名前またはタグによってメトリクスを検索することができます。
+[メトリクスの概要ページ][1]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。
+
+**Metric** または **Tag** 検索フィールドを使用して、名前またはタグでメトリクスを検索します。
 
 {{< img src="metrics/summary/tagexplorer2.gif" alt="タグで絞り込み"  style="width:75%;">}}
+
+## ファセットパネル
+
+検索バーは、メトリクスのリストをフィルタリングするための最も包括的なアクションのセットを提供します。ただし、ファセットは次の方法でメトリクスをすばやくフィルタリングすることもできます。
+* **Configuration** :タグコンフィギュレーションまたは追加のパーセンタイル集計を使用して、メトリクスをすばやく識別します
+* **Metric Type** : ディストリビューションと非ディストリビューション (カウント、ゲージ、レート) をすばやく特定します
+
+{{< img src="metrics/summary/facets.jpg" alt="メトリクスファセットパネル"  style="width:75%;">}}
+
+
+## 複数のメトリクスのコンフィギュレーション
+一度に複数のメトリクスを構成できる 2 つのボタンがあります。
+
+{{< img src="metrics/summary/configurationbuttons.jpg" alt="一括コンフィギュレーションボタン"  style="width:75%;">}}
+
+* **Calculate Percentiles**: 複数のディストリビューションメトリクスにパーセンタイル集計を追加します。
+
+{{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル"  style="width:75%;">}}
+
+* **Configure Tags**: 複数のディストリビューションメトリクスにタグを構成します (Metrics without Limits™ ベータユーザーは、カウント、ゲージ、レートでもこの機能を使用できます)。
+
+{{< img src="metrics/summary/bulkconfig.gif" alt="一括メトリクスタグコンフィギュレーション"  style="width:75%;">}} 
 
 ## メトリクスの詳細サイドパネル
 

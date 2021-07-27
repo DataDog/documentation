@@ -135,17 +135,12 @@ from datadog_cdk_constructs import Datadog
 datadog = Datadog(self, "Datadog",
     python_layer_version={{< latest-lambda-layer-version layer="python" >}},
     extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
-    api_key=<DATADOG_API_KEY>,
-    service=<SERVICE>, # Optional
-    env=<ENV>, # Optional
+    api_key=<DATADOG_API_KEY>
 )
 datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 ```
 
-To fill in the placeholders:
-
-- Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1]. 
 
 More information and additional parameters can be found on the [Datadog CDK NPM page][2].
 
@@ -264,7 +259,7 @@ For example:
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 
 3. Add `datadog_lambda` to your `requirements.txt`.
-4. Register `datadog_lambda_wrapper` as a [middleware][4] in your `app.py`:
+4. Register `datadog_lambda_wrapper` as a [middleware][3] in your `app.py`:
     ```python
     from chalice import Chalice, ConvertToMiddleware
     from datadog_lambda.wrapper import datadog_lambda_wrapper
@@ -280,8 +275,7 @@ For example:
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
-[4]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
+[3]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -398,13 +392,13 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< late
 
 #### Using the package
 
-Install `datadog-lambda` and its dependencies locally to your function project folder. **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][3] for the Serverless Framework and [--use-container][4] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][5].
+Install `datadog-lambda` and its dependencies locally to your function project folder. **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
 
 ```
 pip install datadog-lambda -t ./
 ```
 
-See the [latest release][6]. 
+See the [latest release][5]. 
 
 ### Install the Datadog Lambda Extension
 
@@ -430,16 +424,16 @@ Follow these steps to configure the function:
 1. Set your function's handler to `datadog_lambda.handler.handler`.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
 3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][8]. 
+4. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][6]. 
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[6]: https://pypi.org/project/datadog-lambda/
-[8]: https://app.datadoghq.com/account/settings#api
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+[6]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
