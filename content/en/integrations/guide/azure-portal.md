@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure Embedded Integration Management
+title: Datadog in the Azure Portal
 kind: guide
 further_reading:
   - link: "integration/azure"
@@ -8,16 +8,11 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"
     tag: Blog
     text: "Microsoft partnership embeds Datadog natively in the Azure portal"
-  - link: "/integration/guide/azure-marketplace"
-    tag: Documentation
-    text: "Microsoft Azure Embedded Integration Setup"
 ---
 
-{{< site-region region="us,eu,gov" >}}
 <div class="alert alert-warning">
   This guide is for Datadog customers using US3 with Azure.
 </div>
-{{< /site-region >}}
 
 This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between a Datadog organization and an Azure subscription. [Create a Datadog resource][1] in Azure before proceeding with this guide.
 
@@ -196,7 +191,7 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /integrations/guide/azure-marketplace/?tab=create#create-datadog-resource
+[1]: /integrations/azure/#create-datadog-resource
 [2]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
 [3]: /integrations/azure/#metrics-and-logs
 [4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
