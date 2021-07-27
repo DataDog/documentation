@@ -955,12 +955,52 @@ components:
       - layout_type
       - widgets
       type: object
+    DashboardBulkActionData:
+      description: Dashboard bulk action request data.
+      example:
+        id: 123-abc-456
+        type: dashboard
+      properties:
+        id:
+          $ref: '#/components/schemas/DashboardID'
+        type:
+          $ref: '#/components/schemas/DashboardResourceType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardBulkActionDataList:
+      description: List of dashboard bulk action request data objects.
+      example:
+      - id: 123-abc-456
+        type: dashboard
+      items:
+        $ref: '#/components/schemas/DashboardBulkActionData'
+      type: array
+    DashboardBulkDeleteRequest:
+      description: Dashboard bulk delete request body.
+      example:
+        data:
+        - id: 123-abc-456
+          type: dashboard
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardBulkActionDataList'
+      required:
+      - data
+      type: object
     DashboardDeleteResponse:
       description: Response from the delete dashboard call.
       properties:
         deleted_dashboard_id:
           description: ID of the deleted dashboard.
           type: string
+      type: object
+    DashboardGlobalTime:
+      description: Object containing the live span selection for the dashboard.
+      properties:
+        live_span:
+          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
       type: object
     DashboardGlobalTimeLiveSpan:
       description: Dashboard global time live_span selection
@@ -984,6 +1024,10 @@ components:
       - PAST_ONE_WEEK
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
+    DashboardID:
+      description: Dashboard resource ID.
+      example: 123-abc-456
+      type: string
     DashboardInviteType:
       description: Type for shared dashboard invitation request body.
       enum:
@@ -1073,6 +1117,27 @@ components:
       x-enum-varnames:
       - AUTO
       - FIXED
+    DashboardResourceType:
+      default: dashboard
+      description: Dashboard resource type.
+      enum:
+      - dashboard
+      example: dashboard
+      type: string
+      x-enum-varnames:
+      - DASHBOARD
+    DashboardRestoreRequest:
+      description: Dashboard restore request body.
+      example:
+        data:
+        - id: 123-abc-456
+          type: dashboard
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardBulkActionDataList'
+      required:
+      - data
+      type: object
     DashboardShareType:
       description: Type of sharing access (either open to anyone who has the public
         URL or invite-only).
@@ -2253,6 +2318,7 @@ components:
       - rum
       - security_signals
       - profiles
+      - audit
       example: logs
       type: string
       x-enum-varnames:
@@ -2262,6 +2328,7 @@ components:
       - RUM
       - SECURITY_SIGNALS
       - PROFILES
+      - AUDIT
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3368,6 +3435,145 @@ components:
           description: The status of the intake payload.
           example: ok
           type: string
+      type: object
+    ListStreamColumn:
+      description: Widget column.
+      example:
+        field: timestamp
+        width: auto
+      properties:
+        field:
+          description: Widget column field.
+          example: content
+          type: string
+        width:
+          $ref: '#/components/schemas/ListStreamColumnWidth'
+      required:
+      - width
+      - field
+      type: object
+    ListStreamColumnWidth:
+      description: Widget column width.
+      enum:
+      - auto
+      - compact
+      - full
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - COMPACT
+      - FULL
+    ListStreamQuery:
+      description: Updated list stream widget.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/ListStreamSource'
+        indexes:
+          description: List of indexes.
+          items:
+            description: Index.
+            type: string
+          type: array
+        query_string:
+          description: Widget query.
+          example: '@service:app'
+          type: string
+      required:
+      - query_string
+      - data_source
+      type: object
+    ListStreamResponseFormat:
+      description: Widget response format.
+      enum:
+      - event_list
+      type: string
+      x-enum-varnames:
+      - EVENT_LIST
+    ListStreamSource:
+      default: issue_stream
+      description: Source from which to query items to display in the stream.
+      enum:
+      - issue_stream
+      - logs_stream
+      example: issue_stream
+      type: string
+      x-enum-varnames:
+      - ISSUE_STREAM
+      - LOGS_STREAM
+    ListStreamWidgetDefinition:
+      description: 'The list stream visualization displays a table of recent events
+        in your application that
+
+        match a search criteria using user-defined columns.
+
+        '
+      properties:
+        legend_size:
+          $ref: '#/components/schemas/WidgetLegendSize'
+        requests:
+          description: Request payload used to query items.
+          example:
+          - response_format: event_list
+          - columns:
+            - field: timestamp
+              width: auto
+          - query:
+              data_source: issue_stream
+              query_string: '@data_source:APM'
+          items:
+            $ref: '#/components/schemas/ListStreamWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        show_legend:
+          description: Whether or not to display the legend on this widget.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/ListStreamWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    ListStreamWidgetDefinitionType:
+      default: list_stream
+      description: Type of the list stream widget.
+      enum:
+      - list_stream
+      example: list_stream
+      type: string
+      x-enum-varnames:
+      - LIST_STREAM
+    ListStreamWidgetRequest:
+      description: Updated list stream widget.
+      properties:
+        columns:
+          description: Widget columns.
+          example:
+          - field: timestamp
+            width: auto
+          - field: content
+            width: full
+          items:
+            $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        query:
+          $ref: '#/components/schemas/ListStreamQuery'
+        response_format:
+          $ref: '#/components/schemas/ListStreamResponseFormat'
+      required:
+      - columns
+      - query
+      - response_format
       type: object
     Log:
       description: Object describing a log after being processed and stored by Datadog.
@@ -6809,6 +7015,7 @@ components:
           Current is defined as not more than 10 minutes in the future or more than
           1 hour in the past.'
         format: double
+        nullable: true
         type: number
       maxItems: 2
       minItems: 2
@@ -6909,6 +7116,8 @@ components:
         aggregator:
           $ref: '#/components/schemas/WidgetAggregator'
         apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
@@ -8494,7 +8703,7 @@ components:
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
         global_time:
-          $ref: '#/components/schemas/DashboardGlobalTimeLiveSpan'
+          $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
           description: Whether to allow viewers to select a different global time
             setting for the shared dashboard.
@@ -10860,6 +11069,12 @@ components:
           type: array
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         limit:
           description: For metric queries, the number of lines to show in the table.
             Only one request should have this property.
@@ -10878,6 +11093,14 @@ components:
         q:
           description: Query definition.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -11029,6 +11252,8 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         display_type:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
@@ -11119,6 +11344,8 @@ components:
       description: Updated top list widget.
       properties:
         apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
@@ -11507,6 +11734,24 @@ components:
           type: number
         container_usage:
           description: The container usage by tag(s).
+          format: double
+          type: number
+        cspm_container_percentage:
+          description: The percentage of Cloud Security Posture Management container
+            usage by tag(s)
+          format: double
+          type: number
+        cspm_container_usage:
+          description: The Cloud Security Posture Management container usage by tag(s)
+          format: double
+          type: number
+        cspm_host_percentage:
+          description: The percentage of Cloud Security Posture Management host usage
+            by tag(s)
+          format: double
+          type: number
+        cspm_host_usage:
+          description: The Cloud Security Posture Management host usage by tag(s)
           format: double
           type: number
         custom_timeseries_percentage:
@@ -13700,6 +13945,7 @@ components:
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
@@ -13758,6 +14004,13 @@ components:
         alias:
           description: Expression alias.
           type: string
+        cell_display_mode:
+          $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        conditional_formats:
+          description: List of conditional formats.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
         formula:
           description: String expression built from queries, formulas, and functions.
           example: func(a) + b
@@ -14845,6 +15098,53 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/dashboard:
+    delete:
+      description: Delete dashboards using the specified IDs. If there are any failures,
+        no dashboards will be deleted (partial success is not allowed).
+      operationId: DeleteDashboards
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - id: 123-abc-456
+                    type: dashboard
+                  - id: 789-def-101
+                    type: dashboard
+            schema:
+              $ref: '#/components/schemas/DashboardBulkDeleteRequest'
+        description: Delete dashboards request body.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+      summary: Delete dashboards
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
     get:
       description: 'Get all dashboards.
 
@@ -14881,6 +15181,53 @@ paths:
       x-menu-order: 2
       x-undo:
         type: safe
+    patch:
+      description: Restore dashboards using the specified IDs. If there are any failures,
+        no dashboards will be restored (partial success is not allowed).
+      operationId: RestoreDashboards
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - id: 123-abc-456
+                    type: dashboard
+                  - id: 789-def-101
+                    type: dashboard
+            schema:
+              $ref: '#/components/schemas/DashboardRestoreRequest'
+        description: Restore dashboards request body.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+      summary: Restore deleted dashboards
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
     post:
       description: 'Create a dashboard using the specified options. When defining
         queries in your widgets, take note of which queries should have the `as_count()`
@@ -15539,7 +15886,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: safe
     put:
@@ -15588,7 +15935,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/downtime:

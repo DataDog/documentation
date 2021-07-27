@@ -204,8 +204,8 @@ Select the following parameters from the graphing editor: Environment (`env`), P
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
-## Configuring an Incident Analytics graph
-Incident Analytics provides you with the following measures:
+## Incident Management analytics
+Incident Management analytics provides you with the following measures:
 
 * Incident Count
 * Customer Impact Duration
@@ -214,13 +214,15 @@ Incident Analytics provides you with the following measures:
 * Time to Repair (customer impact end time - created time)
 * Time to Resolve (resolved time - created time)
 
-Incident Analytics is supported in the following widgets:
+Incident Management analytics is supported in the following widgets:
 
 * Timeseries
 * Top List 
 * Query Value 
 
-To configure your graph using Incident Analytics data, follow these steps:
+### Graph configuration
+
+To configure your graph using Incident Management analytics data, follow these steps:
 
 1. [Select your visualization](#select-your-visualization) (same as for metrics)
 2. Select `Incidents` from the data source dropdown menu

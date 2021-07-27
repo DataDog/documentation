@@ -51,7 +51,7 @@ For single and multistep API tests, the `user-agent` header is `Datadog/Syntheti
 {{% /tab %}}
 {{% tab "Browser tests" %}}
 
-For browser tests, the value of the `user-agent` header varies depending on the browser and device executing the test. The `user-agent` value always ends with `Datadog/Synthetics` to allow you to identify Synthetic tests.
+For browser tests, the value of the `user-agent` header varies depending on the browser and device executing the test. The `user-agent` value always ends with `DatadogSynthetics` to allow you to identify Synthetic tests.
 
 {{% /tab %}}
 {{< /tabs >}}

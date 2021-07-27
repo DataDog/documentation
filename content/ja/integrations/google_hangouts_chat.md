@@ -16,6 +16,7 @@ further_reading:
     text: Google Hangouts Chat
 git_integration_title: google_hangouts_chat
 has_logo: true
+integration_id: google-hangouts-chat
 integration_title: Google Hangouts Chat
 is_public: true
 kind: インテグレーション

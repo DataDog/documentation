@@ -61,7 +61,7 @@ Pour surveiller le volume de logs non parsés, procédez comme suit :
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/logs/processing/
+[1]: /fr/logs/log_configuration/pipelines
 [2]: /fr/integrations/#cat-log-collection
 [3]: /fr/logs/explorer/
 [4]: /fr/logs/explorer/#patterns

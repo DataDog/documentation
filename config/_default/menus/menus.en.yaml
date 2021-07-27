@@ -1510,6 +1510,10 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
     weight: 404
+  - name: Request Flow Map
+    url: tracing/trace_search_and_analytics/request_flow_map
+    parent: trace_search_and_analytics
+    weight: 405
   - name: Trace Retention and Ingestion
     url: tracing/trace_retention_and_ingestion/
     parent: tracing
@@ -1665,41 +1669,51 @@ main:
     url: tracing/visualization/services_map/
     parent: tracing_vis
     weight: 1405
+  - name: Error Tracking
+    url: tracing/error_tracking/
+    identifier: tracing_error_tracking
+    parent: tracing
+    weight: 15
+  - name: Explorer
+    url: tracing/error_tracking/explorer
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_explorer
+    weight: 1501
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 15
+    weight: 16
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 16
+    weight: 17
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1601
+    weight: 1701
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1602
+    weight: 1702
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1603
+    weight: 1703
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1604
+    weight: 1704
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1605
+    weight: 1705
   - name: CI Visibility
     url: continuous_integration/
     pre: nav_ci
@@ -1858,22 +1872,21 @@ main:
     parent: log_management
     identifier: log_configuration
     weight: 2
-  - name: Processing
-    url: logs/log_configuration/processing/
-    parent: log_configuration
-    identifier: log_processing
-    weight: 201
   - name: Pipelines
     url: logs/log_configuration/pipelines/
     parent: log_configuration
     identifier: log_pipelines
-    weight: 202
+    weight: 201
   - name: Processors
     url: logs/log_configuration/processors/
     parent: log_configuration
+    weight: 202
+  - name: Parsing
+    url: logs/log_configuration/parsing/
+    parent: log_configuration
     weight: 203
   - name: Attributes and Aliasing
-    url: logs/processing/attributes_naming_convention/
+    url: logs/log_collection/?tab=host#attributes-and-tags
     parent: log_processing
     weight: 204
   - name: Attributes and Aliasing
@@ -2119,41 +2132,46 @@ main:
     parent: synthetics
     identifier: synthetics_ci
     weight: 5
+  - name: Testing Tunnel
+    url: /synthetics/testing_tunnel
+    parent: synthetics
+    identifier: synthetics_testing_tunnel
+    weight: 6
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 6
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 7
+    weight: 8
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Identify Synthetic Bots
     url: synthetics/guide/identify_synthetics_bots/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 12
+    weight: 13
   - name: Security
     url: security/synthetics/
     parent: synthetics
-    weight: 13
+    weight: 14
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum_2
@@ -2609,6 +2627,11 @@ main:
     pre: nav_help
     identifier: help_top_level
     weight: 240000
+  - name: Aggregating Agents
+    url: agent/vector_aggregation/
+    parent: agent
+    identifier: vector_aggregation
+    weight: 13
 footer_product:
   - name: Features
     url: 'https://www.datadoghq.com/product/'
@@ -2672,6 +2695,9 @@ footer_product_three:
   - name: Resources
     url: 'https://www.datadoghq.com/resources/'
     weight: 150
+  - name: Webinars
+    url: 'https://www.datadoghq.com/webinars/'
+    weight: 160
   - name: Security
     url: 'https://www.datadoghq.com/security/'
     weight: 180
@@ -3161,7 +3187,7 @@ api:
       operationids:
         - UpdateDashboard
       unstable: []
-      order: 4
+      order: 6
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: get-a-dashboard
@@ -3173,7 +3199,7 @@ api:
       operationids:
         - GetDashboard
       unstable: []
-      order: 5
+      order: 7
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: delete-a-dashboard
@@ -3282,6 +3308,18 @@ api:
         - CreateDashboard
       unstable: []
       order: 1
+  - name: Restore deleted dashboards
+    url: '#restore-deleted-dashboards'
+    identifier: restore-deleted-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - RestoreDashboards
+      unstable: []
+      order: 5
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: get-all-dashboards
@@ -3294,6 +3332,18 @@ api:
         - ListDashboards
       unstable: []
       order: 2
+  - name: Delete dashboards
+    url: '#delete-dashboards'
+    identifier: delete-dashboards
+    parent: dashboards
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteDashboards
+      unstable: []
+      order: 4
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes

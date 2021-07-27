@@ -17,7 +17,7 @@ further_reading:
 - link: "/real_user_monitoring/explorer/analytics/"
   tag: "Documentation"
   text: "Build analytics upon your events"
-- link: "/logs/processing/attributes_naming_convention/"
+- link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
   text: "Datadog Standard Attributes"
 ---
@@ -539,4 +539,4 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [11]: /real_user_monitoring/guide/enrich-and-control-rum-data
 [12]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[13]: /logs/processing/attributes_naming_convention/#user-related-attributes
+[13]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes

@@ -76,7 +76,7 @@ spec:
       enabled: false
     process:
       enabled: true
-      processCollection: false
+      processCollectionEnabled: false
     log:
       enabled: false
     systemProbe:
@@ -139,9 +139,8 @@ spec:
     config:
       kubelet:
         host:
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.nodeName
+          fieldRef:
+            fieldPath: spec.nodeName
         hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
         # tlsVerify: false # If Kubelet integration fails with provided configuration
   agent:
@@ -151,7 +150,7 @@ spec:
       enabled: false
     process:
       enabled: true
-      processCollection: false
+      processCollectionEnabled: false
     log:
       enabled: false
     systemProbe:
@@ -299,7 +298,7 @@ spec:
       enabled: false
     process:
       enabled: true
-      processCollection: false
+      processCollectionEnabled: false
     log:
       enabled: false
     systemProbe:
@@ -388,7 +387,7 @@ spec:
       enabled: false
     process:
       enabled: true
-      processCollection: false
+      processCollectionEnabled: false
     log:
       enabled: false
     systemProbe:

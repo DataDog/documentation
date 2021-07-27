@@ -96,7 +96,7 @@ Pour insérer des cellules, utilisez le bouton **+** qui figure à gauche de la 
 
 Par défaut, toutes les cellules des graphiques sont associées à l'intervalle global défini dans l'en-tête du notebook.
 
-Pour afficher un autre intervalle, sélectionnez une option dans le sélecteur d'intervalle, ou manipulez directement un graphique. L'URL du notebook se met à jour afin de correspondre au nouvel intervalle, sans pour autant l'enregistrer dans le notebook.
+Pour afficher un autre intervalle, sélectionnez une option dans le sélecteur d'intervalle, ou faites défiler directement un graphique. L'URL du notebook se met à jour afin de correspondre au nouvel intervalle, sans pour autant l'enregistrer dans le notebook.
 
 **Remarque** : si vous cliquez sur une cellule et la faites glisser pour zoomer sur un graphique, cela ne dissocie pas la cellule de l'intervalle de temps global. À la place, cette opération modifie l'intervalle de temps global du notebook.
 
@@ -109,7 +109,7 @@ Chaque cellule peut être dissociée de l'intervalle global et posséder son pro
 
 {{< img src="notebooks/cell_time.png" alt="Sélecteur d'intervalle de cellule"  style="width:90%;">}}
 
-Pour afficher un autre intervalle pour une seule cellule, sélectionnez la cellule de votre choix, puis utilisez l'interrupteur pour la dissocier de l'intervalle global. Modifiez ensuite l'intervalle à l'aide du sélecteur l'intervalle, ou en manipulant le graphique. Les modifications apportées en mode édition sont enregistrées lorsque vous cliquez sur **Done**. Pour les annuler, cliquez sur **Cancel**.
+Pour afficher un autre intervalle pour une seule cellule, sélectionnez la cellule de votre choix, puis utilisez l'interrupteur pour la dissocier de l'intervalle global. Modifiez ensuite l'intervalle à l'aide du sélecteur l'intervalle, ou en faisant défiler le graphique. Les modifications apportées en mode édition sont enregistrées lorsque vous cliquez sur **Done**. Pour les annuler, cliquez sur **Cancel**.
 
 ### Agrandir un notebook
 

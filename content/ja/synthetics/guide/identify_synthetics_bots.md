@@ -30,27 +30,48 @@ Datadog で管理されている各場所に対応する **Synthetic モニタ�
 https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
 ```
 
+**注:** リストされている IP は CIDR 表記を使用しており、使用する前に IPv4 アドレス範囲への変換が必要になる場合があります。
+
+**注:** 新しい管理ロケーション IP の場合を除いて、リストされている IP はめったに変更されません。それでもリストされた IP が変更されたときにアラートを受け取りたい場合は、`$.synthetics['prefixes_ipv4_by_location']['aws:ap-northeast-1'].length` のような JSONPath アサーションを使用して上記のエンドポイントで API テストを作成できます。
+
 ## デフォルトのヘッダー
 
-API およびブラウザテストで生成されたリクエストにアタッチされている **デフォルトのヘッダー** を使用して、Datadog ロボットを特定することもできます。
+Synthetic テストで生成されたリクエストにアタッチされている**デフォルトのヘッダー**を使用して、Datadog ロボットを特定することもできます。
+
+### `user-agent`
+
+Synthetic テストによって実行されるすべてのリクエストに `user-agent` ヘッダーが追加されます。
 
 {{< tabs >}}
-{{% tab "API Tests" %}}
+{{% tab "シングルおよびマルチステップ API テスト" %}}
 
-Datadog API テストロボットには以下のヘッダーが付加されています。
-
-`sec-datadog: Request sent by a Datadog Synthetic API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
-
-`user-agent: Datadog/Synthetics` も不可されます。
+シングルおよびマルチステップ API テストの場合、`user-agent` ヘッダーは `DatadogSynthetics` です。
 
 {{% /tab %}}
 {{% tab "Browser tests" %}}
 
-Datadog ブラウザテストロボットには以下のヘッダーが付加されています。
+ブラウザテストの場合、`user-agent` ヘッダーの値は、テストを実行するブラウザとデバイスによって異なります。Synthetic テストを識別できるように、`user-agent` 値は常に `DatadogSynthetics` で終わります。
 
-`Sec-Datadog: Request sent by a Datadog Synthetic Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
+{{% /tab %}}
+{{< /tabs >}}
 
-ブラウザのテストラン（ブラウザ、デバイス）のタイプにより異なる値を持つ `user-agent` ヘッダーも不可されます。
+### `sec-datadog`
+
+Synthetic テストによって実行されるすべてのリクエストに `sec-datadog` ヘッダーが追加されます。この値には、特に、リクエストの発信元であるテストの ID が含まれます。
+
+{{< tabs >}}
+{{% tab "シングルおよびマルチステップ API テスト" %}}
+
+```
+sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+```
+
+{{% /tab %}}
+{{% tab "Browser tests" %}}
+
+```
+sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -64,6 +85,10 @@ Datadog ブラウザテストロボットには以下のヘッダーが付加さ
 API およびブラウザテストのコンフィギュレーションの **高度なオプション** を利用して、特定の識別子をテストリクエストに追加することも可能です。たとえば、**custom headers**、**cookies**、**request bodies** を追加できます。
 
 ## ブラウザ変数
+
+<div class="alert alert-warning">
+ブラウザ変数は非推奨です。Datadog は、代わりに user-agent ヘッダーを使用することをお勧めします。
+</div>
 
 Datadog ロボットがアプリケーションのレンダリングを行う際、`window._DATADOG_SYNTHETICS_BROWSER` 変数が `true` に設定されます。分析データからロボットのアクションを削除する場合は、以下のテストで分析ツールのコードをラップしてください。
 

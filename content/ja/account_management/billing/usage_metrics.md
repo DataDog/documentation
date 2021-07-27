@@ -19,18 +19,21 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 
 推定使用量メトリクスは、通常、次の使用タイプで使用できます。
 
-| 使用タイプ           | メトリクス                                   |
-|----------------------|------------------------------------------|
-| インフラストラクチャーホスト | `datadog.estimated_usage.hosts`          |
-| コンテナ           | `datadog.estimated_usage.containers`     |
-| カスタムメトリクス       | `datadog.estimated_usage.metrics.custom` |
-| ログ取り込みバイト  | `datadog.estimated_usage.logs.ingested_bytes`          |
-| ログ取り込みイベント | `datadog.estimated_usage.logs.ingested_events`   |
-| APM ホスト            | `datadog.estimated_usage.apm_hosts`      |
-| APM インデックス化スパン   | `datadog.estimated_usage.apm.indexed_spans` |
-| APM 取り込みバイト   | `datadog.estimated_usage.apm.ingested_bytes` |
-| APM 取り込みスパン   | `datadog.estimated_usage.apm.ingested_spans` |
-| サーバーレス Lambda 関数 | `datadog.estimated_usage.serverless.aws_lambda_functions` |
+| 使用タイプ                    | メトリクス                                   |
+|-------------------------------|------------------------------------------|
+| インフラストラクチャーホスト          | `datadog.estimated_usage.hosts`          |
+| コンテナ                    | `datadog.estimated_usage.containers`     |
+| カスタムメトリクス                | `datadog.estimated_usage.metrics.custom` |
+| ログ取り込みバイト           | `datadog.estimated_usage.logs.ingested_bytes`          |
+| ログ取り込みイベント          | `datadog.estimated_usage.logs.ingested_events`   |
+| 分析ログ (セキュリティ)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   |
+| APM ホスト                     | `datadog.estimated_usage.apm_hosts`      |
+| APM インデックス化スパン             | `datadog.estimated_usage.apm.indexed_spans` |
+| APM 取り込みバイト            | `datadog.estimated_usage.apm.ingested_bytes` |
+| APM 取り込みスパン            | `datadog.estimated_usage.apm.ingested_spans` |
+| サーバーレス Lambda 関数   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
+| API テストの実行                 | `datadog.estimated_usage.synthetics.api_test_runs` |
+| ブラウザテストの実行             | `datadog.estimated_usage.synthetics.browser_test_runs`|
 
 ログベースの使用量メトリクスは、[メトリクスの生成][1]ページから手動で有効にする必要があります。
 

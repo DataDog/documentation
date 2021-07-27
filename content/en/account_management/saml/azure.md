@@ -57,11 +57,11 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
 3. You should see the messages **SAML is ready** and **Valid IdP metadata installed**:
 
-    {{< img src="account_management/saml/SAML_Configuration___Datadog11.png" alt="SAML_Configuration___Datadog11"  style="width:70%;">}}
+    {{< img src="account_management/saml/SAML_Configuration___Datadog11.png" alt="SAML_Configuration___Datadog11" style="width:70%;">}}
 
 4. Click **Enable** to start using Azure AD single sign-on with SAML:
 
-    {{< img src="account_management/saml/SAML_Configuration___Datadog12.png" alt="SAML_Configuration___Datadog12"  style="width:70%;">}}
+    {{< img src="account_management/saml/SAML_Configuration___Datadog12.png" alt="SAML_Configuration___Datadog12" style="width:70%;">}}
 
 ## Advanced URL
 
@@ -69,7 +69,7 @@ If you are using SSO with a Datadog button or link, a sign-on URL is required:
 
 1. Retrieve your Single Sign-on URL from the [Datadog SAML page][3]:
 
-    {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:70%;">}}
+    {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13" style="width:70%;">}}
 
 2. In Azure, navigate to the SSO Configuration section of your Azure Application, check **Show advanced URL settings**, and add your single sign-on URL.
 

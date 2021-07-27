@@ -142,19 +142,14 @@ class CdkStack extends cdk.Stack {
     const datadog = new Datadog(this, "Datadog", { 
         nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}}, 
         extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}, 
-        apiKey: <DATADOG_API_KEY>,
-        service: <SERVICE> // Optional
-        env: <ENV> // Optional 
+        apiKey: <DATADOG_API_KEY>
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);    
   }
 }
 ```
 
-To fill in the placeholders:
-
-- Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
-- Replace `<SERVICE>` and `<ENV>` with appropriate values.
+Replace `<DATADOG_API_KEY>` with your Datadog API key from the [API Management page][3]. 
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
