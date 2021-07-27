@@ -52,7 +52,7 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 ### Multi-factor authentication
 
-Datadog Synthetic Monitoring fully [supports Time-based One Time Passwords (TOTPs)][7], a Multi-Factor Authentication method consisting in generating one-time passwords based on combining a secret key and the time.
+Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][7], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
 
 Browser tests can reproduce any actions a regular user takes inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser. 
 
