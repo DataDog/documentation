@@ -26,7 +26,7 @@ further_reading:
 - The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][1].
 
 ### Supported .NET Core runtimes
-The .NET Tracer supports instrumentation on .NET Core 2.1 and above. It also supports [.NET Framework][2].
+The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
 
 | Version              | Microsoft End of Life |
 | -------------------- | --------------------- |
