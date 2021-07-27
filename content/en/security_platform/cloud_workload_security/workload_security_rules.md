@@ -146,6 +146,7 @@ Complete the remaining steps based on your environment:
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security_platform/cloud_workload_security/agent_expressions
 [2]: /security_platform/default_rules
 [3]: /agent/
