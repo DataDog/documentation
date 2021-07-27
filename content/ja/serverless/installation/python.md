@@ -132,17 +132,14 @@ from datadog_cdk_constructs import Datadog
 datadog = Datadog(self, "Datadog",
     python_layer_version=<LAYER_VERSION>,
     extension_layer_version=<EXTENSION_LAYER_VERSION>,
-    dd_api_key=<DATADOG_API_KEY>,
-    service=<SERVICE>, # オプション
-    env=<ENV>, # オプション
+    dd_api_key=<DATADOG_API_KEY>
 )
 datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
 ```
 
 関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
 
-- `<DATADOG_API_KEY>` を [API Management ページ][3]の Datadog API キーに置き換えます。 
-- `<SERVICE>` と `<ENV>` を適切な値に置き換えます。
+- `<DATADOG_API_KEY>` を [API Management ページ][3]の Datadog API キーに置き換えます。
 - `<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換えます（[最新リリース]を参照ください[2]）。
 - `<EXTENSION_VERSION>` を目的のバージョンの Datadog Lambda 拡張機能に置き換えます（[最新リリース]を参照ください[4]）。
 

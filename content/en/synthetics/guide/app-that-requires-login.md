@@ -2,16 +2,18 @@
 title: Running tests on an application that requires authentication
 kind: guide
 further_reading:
-    - link: 'synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Configure a Browser Test'
-    - link: '/synthetics/browser_tests/actions'
-      tag: 'Documentation'
-      text: 'Create Browser Test Steps'
-    - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
-      tag: 'Blog'
-      text: 'Best practices for creating end-to-end tests'
-
+  - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
+    tag: 'Blog'
+    text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
+  - link: 'synthetics/browser_tests'
+    tag: 'Documentation'
+    text: 'Browser Tests'
+  - link: '/synthetics/browser_tests/actions'
+    tag: 'Documentation'
+    text: 'Browser Test Steps'
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+    tag: 'Blog'
+    text: 'Best practices for creating end-to-end tests'
 ---
 
 You might need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:

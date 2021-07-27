@@ -46,7 +46,7 @@ A `user-agent` header is added to all requests performed by Synthetic tests.
 {{< tabs >}}
 {{% tab "Single and multistep API tests" %}}
 
-For single and multistep API tests, the `user-agent` header is `DatadogSynthetics`.
+For single and multistep API tests, the `user-agent` header is `Datadog/Synthetics`.
 
 {{% /tab %}}
 {{% tab "Browser tests" %}}

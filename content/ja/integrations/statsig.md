@@ -59,7 +59,7 @@ Statsig インテグレーションでは、Datadog からのデータは収集�
 
 ### メトリクス
 {{< get-metrics-from-git "statsig" >}}
-and the description of each.
+
 
 ### サービスのチェック
 
@@ -73,7 +73,7 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 
 ヘルプが必要な場合は、Statsig サポート（support@statsig.com）または[弊社までお問い合わせ][3]ください。
 
-[1]: https://console.statsig.com/integration
+[1]: https://console.statsig.com/integrations
 [2]: https://github.com/DataDog/integrations-extras/blob/master/statsig/metadata.csv
 [3]: https://www.statsig.com/contact
 

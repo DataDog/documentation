@@ -668,7 +668,7 @@ class Integrations:
             )
 
         # if __init__.py exists lets grab the integration id
-        integration_id = ""
+        integration_id = manifest_json.get("integration_id", "") or ""
         initpy = "{0}{1}{2}".format(dirname(file_name), sep, "__init__.py")
         if exists(initpy):
             with open(initpy) as f:
@@ -682,18 +682,22 @@ class Integrations:
             if manifest_json.get("is_public", False):
                 out_name = self.content_integrations_dir + new_file_name
 
-                # if the same integration exists in multiple locations try name md after manifest name entry
+                # if the same integration exists in multiple locations try name md file differently
+                # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:
-                    f_name = manifest_json.get("name", new_file_name)
+                    f_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name
+                    manifest_json["name"] = f_name
                     f_name = f_name if f_name.endswith('.md') else f_name + ".md"
                     out_name = self.content_integrations_dir + f_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, f_name))
-                    new_file_name = f_name
-
-                result = self.add_integration_frontmatter(
-                    new_file_name, result, dependencies, integration_id
-                )
+                    result = self.add_integration_frontmatter(
+                        f_name, result, dependencies, integration_id, manifest_json
+                    )
+                else:
+                    result = self.add_integration_frontmatter(
+                        new_file_name, result, dependencies, integration_id
+                    )
 
                 with open(out_name, "w", ) as out:
                     out.write(result)
@@ -705,7 +709,7 @@ class Integrations:
                         final_file.write(final_text)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id=""
+        self, file_name, content, dependencies=[], integration_id="", manifest_json=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -716,37 +720,42 @@ class Integrations:
         fm = {}
         template = "---\n{front_matter}\n---\n\n{content}\n"
         if file_name not in self.initial_integration_files:
-            item = [
-                d
-                for d in self.datafile_json
-                if d.get("name", "").lower() == basename(file_name).replace(".md", "")
-            ]
-            if item and len(item) > 0:
-                item[0]["kind"] = "integration"
-                item[0]["integration_title"] = (
-                    item[0]
+            if manifest_json:
+                item = manifest_json
+            else:
+                matches = [
+                    d
+                    for d in self.datafile_json
+                    if d.get("name", "").lower() == basename(file_name).replace(".md", "")
+                ]
+                item = matches[0] if len(matches) > 0 else []
+            if item:
+                item["kind"] = "integration"
+                item["integration_title"] = (
+                    item
                     .get("public_title", "")
                     .replace("Datadog-", "")
                     .replace("Integration", "")
                     .strip()
                 )
-                item[0]["git_integration_title"] = (
-                    item[0].get("name", "").lower()
+                item["git_integration_title"] = (
+                    item.get("name", "").lower()
                 )
-                if item[0].get("type", None):
-                    item[0]["ddtype"] = item[0].get("type")
-                    del item[0]["type"]
-                item[0]["dependencies"] = dependencies
-                item[0]["draft"] = not item[0].get("is_public", False)
-                item[0]["integration_id"] = item[0].get("integration_id", integration_id)
+                if item.get("type", None):
+                    item["ddtype"] = item.get("type")
+                    del item["type"]
+                item["dependencies"] = dependencies
+                item["draft"] = not item.get("is_public", False)
+                item["integration_id"] = item.get("integration_id", integration_id)
                 fm = yaml.safe_dump(
-                    item[0], width=150, default_style='"', default_flow_style=False, allow_unicode=True
+                    item, width=150, default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
                 # simple bool cleanups with replace
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = {"kind": "integration"}
+                fm = yaml.safe_dump({"kind": "integration"}, width=150, default_style='"', default_flow_style=False,
+                                    allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
         )
