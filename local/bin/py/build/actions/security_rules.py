@@ -35,10 +35,16 @@ def security_rules(content, content_dir):
         data = None
         if file_name.endswith(".json"):
             with open(file_name, mode="r+") as f:
-                data = json.loads(f.read())
+                try:
+                    data = json.loads(f.read())
+                except:
+                    logger.warn(f"Error parsing {file_name}")
         elif file_name.endswith(".yaml"):
             with open(file_name, mode="r+") as f:
-                data = yaml.load(f.read(), Loader=yaml.FullLoader)
+                try:
+                    data = yaml.load(f.read(), Loader=yaml.FullLoader)
+                except:
+                    logger.warn(f"Error parsing {file_name}")
 
         p = Path(f.name)
         message_file_name = p.with_suffix('.md')
@@ -140,7 +146,10 @@ def compliance_rules(content, content_dir):
         if not file_name.endswith(".json"):
             continue
         with open(file_name, mode="r+") as f:
-            json_data = json.loads(f.read())
+            try:
+                json_data = json.loads(f.read())
+            except:
+                logger.warn(f"Error parsing {file_name}")
             p = Path(f.name)
 
             # delete file or skip if staged
