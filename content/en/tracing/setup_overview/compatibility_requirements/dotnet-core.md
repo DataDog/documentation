@@ -62,7 +62,6 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MSMQ                            | built-in                                                                                  | `Msmq`               |
 | MySql                           | `MySql.Data` 6.7.0+                                                                       | `AdoNet`             |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `AdoNet`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `AdoNet`             |
