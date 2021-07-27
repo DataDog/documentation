@@ -11,6 +11,7 @@ further_reading:
 
 ---
 
+{{< site-region region="us,eu" >}}
 To report test results to Datadog, the [Datadog Agent][1] is required.
 
 There are two ways to set up the Agent in a CI environment:
@@ -46,11 +47,17 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 **Default**: (autodetected)<br/>
 **Required value**: `none`
 
-`DD_SITE` (Optional)
-: The [Datadog site][5] to upload results to.<br/>
+
+{{< site-region region="eu" >}}
+Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
+
+`DD_SITE` (Required)
+: The [Datadog site][1] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}<br/>
-**Possible values**: `datadoghq.com`, `datadoghq.eu`
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+[1]: /getting_started/site/
+{{< /site-region >}}
 
 ### CI provider configuration examples
 
@@ -275,7 +282,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 
 ### Using Docker Compose
 
-Regardless of which CI provider you use, if tests are run using [Docker Compose][6], the Datadog Agent can be run as one service:
+Regardless of which CI provider you use, if tests are run using [Docker Compose][5], the Datadog Agent can be run as one service:
 
 {{< site-region region="us" >}}
 {{< code-block lang="yaml" filename="docker-compose.yml" >}}
@@ -363,7 +370,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
   tests
 {{< /code-block >}}
 
-**Note:** In this case, add all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][7].
+**Note:** In this case, add all the required CI provider environment variables so build information can be attached to each test result, as described in [Tests in containers][6].
 
 ## Further reading
 
@@ -373,6 +380,9 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: /getting_started/site/
-[6]: https://docs.docker.com/compose/
-[7]: /continuous_integration/setup_tests/containers/
+[5]: https://docs.docker.com/compose/
+[6]: /continuous_integration/setup_tests/containers/
+{{< /site-region >}}
+{{< site-region region="us3,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}
