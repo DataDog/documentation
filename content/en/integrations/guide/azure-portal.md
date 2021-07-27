@@ -62,7 +62,7 @@ To stop sending logs and metrics from Azure to Datadog, select "Disable" on the 
 
 {{< img src="integrations/guide/azure_portal/disable.png" alt="Azure US3 Disable integration" responsive="true" style="width:100%;">}}
 
-**Note**: After disabling, you are still billed for other Datadog services that aren't related to monitoring metrics and logs.
+**Note**: Disabling the Datadog resource stops the submission of metrics and platform logs to Datadog for the associated subscription. Any resources in the subscription submitting data directly to Datadog through the Agent or extension are unaffected.
 
 ### Enable
 
