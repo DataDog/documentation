@@ -129,7 +129,7 @@ Learn more about [custom metrics][16].
 
 1. If you are missing metrics and metadata in the APM trace panel and service page:
 
-It is likely that you do have the Azure Integration configured to monitor your application. Proper configuration will improve your ability to correlate metrics, traces, and logs in the Datadog platform, and avoid broken or empty screens. To fix this:
+It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs in the Datadog platform, as well as to avoid broken or empty screens. To fix this:
 
 a. Ensure you have installed the [Azure integration][8] for the Azure subscription where your application is running.
 b. Ensure that any App Service Plan filtering rules you may have applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
