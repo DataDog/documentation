@@ -593,9 +593,8 @@
       options:
         file_name: 'agent_config.yaml'
         output_content: false
-
     - action: pull-and-push-file
-      branch: paulcacheux/generate-secl-json-documentation
+      branch: main
       globs:
       - 'docs/cloud-workload-security/doc.md'
       options:
@@ -605,4 +604,4 @@
           title: SECL Documentation
           kind: documentation
           description: "SECL Documentation of event types and fields."
-          dependencies: ["https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/doc.md", "https://github.com/DataDog/datadog-agent/blob/paulcacheux/generate-secl-json-documentation/docs/cloud-workload-security/doc.md"]
+          dependencies: ["https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/doc.md"]
