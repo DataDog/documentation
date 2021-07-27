@@ -8,7 +8,7 @@ aliases:
 
 {{< site-region region="us" >}}
 <div class="alert alert-warning">
-Cloud Workload Security are currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
+Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
 </div>
 {{< /site-region >}}
 
