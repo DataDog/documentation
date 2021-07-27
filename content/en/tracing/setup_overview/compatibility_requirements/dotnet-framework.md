@@ -28,17 +28,17 @@ further_reading:
 ### Supported .NET Framework runtimes
 The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using CLR v4.0). It also supports [.NET Core][2].
 
-| Version  | Vendor End of Life |
-| -------- | ------------------ |
-| 4.8      |                    |
-| 4.7.2    |                    |
-| 4.7      |                    |
-| 4.6.2    |                    |
-| 4.6.1    | 04/26/2022         |
-| 4.6      | 04/26/2022         |
-| 4.5.2    | 04/26/2022         |
-| 4.5.1    | 01/12/2016         | 
-| 4.5      | 01/12/2016         |
+| Version  | Microsoft End of Life |
+| -------- | --------------------- |
+| 4.8      |                       |
+| 4.7.2    |                       |
+| 4.7      |                       |
+| 4.6.2    |                       |
+| 4.6.1    | 04/26/2022            |
+| 4.6      | 04/26/2022            |
+| 4.5.2    | 04/26/2022            |
+| 4.5.1    | 01/12/2016            | 
+| 4.5      | 01/12/2016            |
 
  Additional information on .NET Framework support policy can be found at [Microsoft .NET Framework Lifecyle Policy][3]. 
 

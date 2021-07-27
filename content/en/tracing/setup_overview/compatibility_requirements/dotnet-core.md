@@ -28,25 +28,24 @@ further_reading:
 ### Supported .NET Core runtimes
 The .NET Tracer supports instrumentation on .NET Core 2.1 and above. It also supports [.NET Framework][2].
 
-| Version              | Vendor End of Life |
-| -------------------- | ------------------ |
-| .NET 5               |                    |
-| .NET Core 3.1 (LTS)  | 12/03/2022         |
-| .NET Core 3.0        | 03/03/2020         |
-| .NET Core 2.2        | 12/23/2019         |
-| .NET Core 2.1 (LTS)  | 08/21/2021         |
+| Version              | Microsoft End of Life |
+| -------------------- | --------------------- |
+| .NET 5               |                       |
+| .NET Core 3.1        | 12/03/2022            |
+| .NET Core 2.1        | 08/21/2021            |
 
  Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][3]. 
 
 ### Supported Processor Architectures
+The following list only applies to automatic instrumentation:
 
-| Processor architectures                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------ |
-| Windows x86 (`win-x86`)                                                                                            |
-| Windows x64 (`win-x64`)                                                                                            |
-| Linux x64 (`linux-x64`)                                                                                            |
-| Alpine Linux x64 (`linux-musl-x64`)                                                                                |
-| Linux ARM64 (`linux-arm64`)<br><br>Added in version 1.27.0, automatic instrumentation only supported on .NET 5.    |
+| Processor architectures                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------- |
+| Windows x86 (`win-x86`)                                                                                                       |
+| Windows x64 (`win-x64`)                                                                                                       |
+| Linux x64 (`linux-x64`)                                                                                                       |
+| Alpine Linux x64 (`linux-musl-x64`)                                                                                           |
+| Linux ARM64 (`linux-arm64`)<br><br>.NET 5 only, added in version 1.27.0 |
 
 
 ## Integrations
