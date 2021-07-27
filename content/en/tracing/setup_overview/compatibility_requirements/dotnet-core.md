@@ -71,7 +71,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                      | `ServiceRemoting`    |
-| SQL Server                      | `System.Data` 4.0.0+, `System.Data.SqlClient` 4.0.0 +, `Microsoft.Data.SqlClient` 1.0.0+  | `AdoNet`             |
+| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | `AdoNet`             |
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                | `WebRequest`         |
 
