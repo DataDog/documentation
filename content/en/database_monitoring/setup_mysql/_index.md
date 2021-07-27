@@ -5,7 +5,7 @@ description: Setting up Database Monitoring on a MySQL database
 ---
 
 {{< site-region region="us3,gov" >}} 
-<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
 ### MySQL versions supported
@@ -18,7 +18,7 @@ description: Setting up Database Monitoring on a MySQL database
 
 For setup instructions, select your hosting type:
 
-partial
+{{< partial name="dbm/dbm-setup-mysql" >}}
 
 <br>
 

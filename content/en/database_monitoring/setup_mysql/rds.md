@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported in this region.</div>
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.

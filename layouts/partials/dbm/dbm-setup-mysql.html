@@ -1,0 +1,32 @@
+{{ $dot := . }}
+<div class="dbm-setup-mysql">
+  <div class="container cards-dd">
+    <div class="card-deck">
+      <a class="card" href="/database_monitoring/setup_mysql/selfhosted">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/mysql.png" "class" "img-fluid" "alt" "Selfhosted" "width" "150") }}
+          <br/>Self hosted
+        </div>
+      </a>
+      <a class="card" href="/database_monitoring/setup_mysql/rds">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_rds.png" "class" "img-fluid" "alt" "RDS" "width" "150") }}
+        </div>
+      </a>
+    </div>
+    <br></br>
+    <div class="card-deck">
+      <a class="card" href="/database_monitoring/setup_mysql/aurora">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/aurora.png" "class" "img-fluid" "alt" "Aurora" "width" "150") }}
+        </div>
+      </a>
+      <a class="card" href="/database_monitoring/setup_mysql/gcsql">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/google_cloudsql.png" "class" "img-fluid" "alt" "Google Cloud SQL" "width" "150") }}
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
