@@ -2,6 +2,7 @@
 title: Setting up Postgres
 kind: documentation
 description: Setting up Database Monitoring on a Postgres database
+disable_sidebar: true
 ---
 
 {{< site-region region="us3,gov" >}} 
@@ -12,11 +13,11 @@ description: Setting up Database Monitoring on a Postgres database
 
 |  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL |
 |--|------------|---------|------------|------------------|
-| Postgres 9.6 | Yes | Yes | Yes | Yes |
-| Postgres 10 | Yes | Yes | Yes | Yes |
-| Postgres 11 | Yes | Yes | Yes | Yes |
-| Postgres 12 | Yes | Yes | Yes | Yes |
-| Postgres 13 | Yes | Yes | Yes | Yes |
+| Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 11 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 For setup instructions, select your hosting type: 
 

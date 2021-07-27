@@ -2,6 +2,7 @@
 title: Setting up MySQL
 kind: documentation
 description: Setting up Database Monitoring on a MySQL database
+disable_sidebar: true
 ---
 
 {{< site-region region="us3,gov" >}} 
@@ -12,9 +13,9 @@ description: Setting up Database Monitoring on a MySQL database
 
 |  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM |
 |--|------------|---------|------------|------------------|
-| MySQL 5.6 | Yes | Yes | Yes | Yes |
-| MySQL 5.7 | Yes | Yes | Yes | Yes |
-| MySQL 5.8 | Yes | Yes | Yes | Yes |
+| MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| MySQL 5.8 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 For setup instructions, select your hosting type:
 

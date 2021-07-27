@@ -3,20 +3,19 @@ title: Database Monitoring
 kind: documentation
 description: Learn about Database Monitoring and get started
 further_reading:
-- link: "/tk/tk/"
-  tag: "Documentation"
-  text: "tktk"
+- link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
+  tag: "Blog"
+  text: "Monitor and visualize database performance"
   
 ---
 
-Hero image or video
+{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" popup="true" style="width:100%;">}}
 
 {{< site-region region="us3,gov" >}} 
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-
-Introduction
+Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
 
 ## Getting started
 
