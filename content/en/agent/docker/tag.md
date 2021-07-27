@@ -50,7 +50,7 @@ The Agent can autodiscover and attach tags to all data emitted by containers. Th
 
 ### Unified service tagging
 
-As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
+As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the dedicated [unified service tagging][2] documentation.
 
 ## Extract labels as tags
 

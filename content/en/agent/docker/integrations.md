@@ -264,7 +264,7 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
-Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
+Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example: `redis` OR `redis:latest`.
 
 [1]: /agent/faq/template_variables/
 {{% /tab %}}

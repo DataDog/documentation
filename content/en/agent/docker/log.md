@@ -157,7 +157,7 @@ The commands related to log collection are:
 
 - Logs coming from container `Stderr` have a default status of `Error`.
 
-- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][2] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][2] documentation for more information on parameters for filtering.
+- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][2] documentation for details regarding the setup for containerized environments. See the [journald filter units][2] documentation for more information on parameters for filtering.
 
 ## Docker container log collection from file
 
@@ -212,7 +212,7 @@ Add the following label as a run command:
 
 Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
 
-**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][6] documentation.
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [unified service tagging][6] documentation.
 
 ### Examples
 
@@ -276,7 +276,7 @@ Logs collected from a file are tagged with the container metadata. Log collectio
 
 - The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to file may mount a volume such as `/logs/app` where the log file is written.
 
-- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicity enabled by using a label, for example:
+- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicitly enabled by using a label, for example:
 ```yaml
 labels:
     com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
@@ -311,7 +311,7 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environments, refer to the [Kubernetes short lived container documentation][11].
+For Kubernetes environments, see the [Kubernetes short lived container][11] documentation.
 
 ## Further Reading
 

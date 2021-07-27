@@ -31,7 +31,7 @@ This page covers Amazon ECS setup with the [Datadog Container Agent v6][1]. For 
 
 ## Setup
 
-To begin setup, run the [Datadog Agent][5] on every EC2 instance in your ECS cluster. If you don't have a working EC2 Container Service cluster configured, review the [Getting Started section in the ECS documentation][6] to set up and configure a cluster. Once configured, follow the setup instructions below.
+To begin setup, run the [Datadog Agent][5] on every EC2 instance in your ECS cluster. If you don't have a working EC2 Container Service cluster configured, review the [Getting Started section in the ECS][6] documentation to set up and configure a cluster. Once configured, follow the setup instructions below.
 
 1. [Create and add an ECS Task](#create-an-ecs-task)
 2. [Create or modify your IAM Policy](#create-or-modify-your-iam-policy)
@@ -55,7 +55,7 @@ If you're [using APM][8], [DogStatsD][9], or [log management][10], set the appro
 
 **Note**: To enable DogStatsD metrics collection from other containers, ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
 
-  - If you are using log management, see the dedicated [Log collection documentation][10].
+  - If you are using log management, see the [Log collection][10] documentation.
 
 Double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog uses the private IP to route to the Agent from the containers.
 
@@ -137,7 +137,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 
 ### Create or modify your IAM policy
 
-Add the following permissions to your [Datadog IAM policy][13] to collect Amazon ECS metrics. For more information on ECS policies, review the [documentation on the AWS website][14].
+Add the following permissions to your [Datadog IAM policy][13] to collect Amazon ECS metrics. For more information on ECS policies, review the documentation on the [AWS website][14].
 
 | AWS Permission                   | Description                                                   |
 | -------------------------------- | ------------------------------------------------------------- |

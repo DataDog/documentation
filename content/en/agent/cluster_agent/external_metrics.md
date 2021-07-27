@@ -264,15 +264,15 @@ spec:
       targetAverageValue: 9
 ```
 
-Once you've linked your HPA to a `DatadogMetric`, the Datadog Cluster Agent will start using your custom query to provide values to your HPA.
+Once you've linked your HPA to a `DatadogMetric`, the Datadog Cluster Agent uses your custom query to provide values to your HPA.
 
 ### Automatic migration of existing HPAs using external metrics
 
 When you set `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` but you still have HPAs that do **not** reference a `DatadogMetric`, normal syntax (without referencing a `DatadogMetric` through `datadogmetric@...`) is still supported.
 
-The Datadog Cluster Agent will take care of automatically creating `DatadogMetric` resources in its own namespace (their name starts with `dcaautogen-`) to accomodate this, it allows a smooth transition to `DatadogMetric`.
+The Datadog Cluster Agent automatically creates `DatadogMetric` resources in its own namespace (their name starts with `dcaautogen-`) to accommodate this, it allows a smooth transition to `DatadogMetric`.
 
-If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource will be cleaned up by the Datadog Cluster Agent after few hours.
+If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource is cleaned up by the Datadog Cluster Agent after few hours.
 
 ### Troubleshooting
 
@@ -308,12 +308,12 @@ status:
 
 The four conditions give you insights on the current state of your `DatadogMetric`:
 
-- `Active`: Datadog considers a `DatadogMetric` active if at least one HPA is referencing it. Inactive `DatadogMetrics` won't be updated to minimize API usage.
+- `Active`: Datadog considers a `DatadogMetric` active if at least one HPA is referencing it. Inactive `DatadogMetrics` are not updated to minimize API usage.
 - `Valid`: Datadog considers a `DatadogMetric` valid when the answer for the associated query is valid. An invalid status probably means that your custom query is not semantically correct. See the `Error` field for details.
 - `Updated`: This condition is **always** updated when the Datadog Cluster Agent touches a `DatadogMetric`.
-- `Error`: If processing this `DatadogMetric` triggers an error, this condition will be true and contains error details.
+- `Error`: If processing this `DatadogMetric` triggers an error, this condition is true and contains error details.
 
-The `currentValue` is the value gathered from Datadog, and thus the one that will be returned to HPAs.
+The `currentValue` is the value gathered from Datadog and returned to the HPAs.
 
 ## Further Reading
 

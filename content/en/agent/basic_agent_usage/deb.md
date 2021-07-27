@@ -98,7 +98,7 @@ Configuration files for [Integrations][1]:
 
 ## Troubleshooting
 
-See the [Agent Troubleshooting documentation][3].
+See the [Agent Troubleshooting][3] documentation.
 
 ## Working with the embedded Agent
 
