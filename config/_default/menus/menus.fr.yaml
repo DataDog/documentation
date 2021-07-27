@@ -3989,6 +3989,9 @@ footer_product_three:
   - name: Ressources
     url: "https://www.datadoghq.com/resources/"
     weight: 150
+  - name: Webinars
+    url: 'https://www.datadoghq.com/webinars/'
+    weight: 160
   - name: Sécurité
     url: "https://www.datadoghq.com/security/"
     weight: 180
