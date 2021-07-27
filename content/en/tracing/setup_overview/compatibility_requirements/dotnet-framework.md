@@ -42,7 +42,7 @@ The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using 
 
  Additional information on .NET Framework support policy can be found at [Microsoft .NET Framework Lifecyle Policy][3]. 
 
-### Supported Process Architecture
+### Supported Processor Architectures
 
 | Processor architectures                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------ |
