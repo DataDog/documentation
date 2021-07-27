@@ -147,6 +147,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/javascript.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
+	@if [ content/en/security_platform/cloud_workload_security/secl.md ]; then \
+	rm -f content/en/security_platform/cloud_workload_security/secl.md ;fi
 
 clean-node:  ## Remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
