@@ -56,7 +56,7 @@ The .NET Tracer supports instrumentation on .NET Core 2.1 and above.
 | .NET Core 2.2        |
 | .NET Core 2.1 (LTS)  |
 
-For a full list of supported libraries and processor architectures, visit the [Compatibility Requirements][4] page.
+For a full list of supported libraries and processor architectures, see [Compatibility Requirements][4].
 
 ## Installation and getting started
 
