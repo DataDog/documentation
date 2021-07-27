@@ -86,7 +86,7 @@ DD_RUM.onReady(function() {
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
-            if (event.type = 'resource' && event.resource.type === 'fetch') {
+            if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -102,7 +102,7 @@ window.DD_RUM &&
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
-            if (event.type = 'resource' && event.resource.type === 'fetch') {
+            if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
