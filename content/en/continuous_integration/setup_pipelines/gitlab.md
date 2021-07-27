@@ -105,17 +105,29 @@ You can test the integration with the **Test settings** button (only available w
 {{< site-region region="us,eu" >}}
 ## Integrating through webhooks
 
-As an alternative to using the native Datadog integration, you can use [webhooks][3] to send pipeline data to Datadog.
+As an alternative to using the native Datadog integration, you can use [webhooks][1] to send pipeline data to Datadog.
 
 <div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.</div>
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
-* **URL**: `https://webhooks-http-intake.logs.{{< region-param key="dd_site" >}}/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][2].
+{{< site-region region="us" >}}
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
+[1]: https://app.datadoghq.com/account/settings#api
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.eu/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **Secret Token**: leave blank
+* **Trigger**: Select `Job events` and `Pipeline events`.
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{< /site-region >}}
+
 To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
 
+[1]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 {{< /site-region >}}
 
 ## Visualize pipeline data in Datadog
