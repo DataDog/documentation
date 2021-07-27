@@ -596,7 +596,7 @@
     - action: pull-and-push-file
       branch: main
       globs:
-      - 'docs/cloud-workload-security/doc.md'
+      - 'docs/cloud-workload-security/secl.md'
       options:
         dest_path: '/security_platform/cloud_workload_security/'
         file_name: 'secl.md'
@@ -604,4 +604,4 @@
           title: SECL Documentation
           kind: documentation
           description: "SECL Documentation of event types and fields."
-          dependencies: ["https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/doc.md"]
+          dependencies: ["https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/secl.md"]
