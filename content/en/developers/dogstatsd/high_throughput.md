@@ -300,7 +300,7 @@ The Datadog Agent performs most optimally if the DogStatsD clients send packets 
 </div>
 
 <div class="alert alert-info">
-  <strong>Note for UDS</strong>: for the best performances, UDS packet should have a size of 8192 bytes.
+  <strong>Note for UDS</strong>: for the best performances, the UDS packet size should be 8192 bytes.
 </div>
 
 ### Limit the maximum memory usage of the Agent
