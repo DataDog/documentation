@@ -290,7 +290,7 @@ If you have installed and configured the integrations and Agent as described and
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage#agent-overhead
-[2]: /database_monitoring/setup/data_collected/#sensitive-information
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
@@ -300,4 +300,4 @@ If you have installed and configured the integrations and Agent as described and
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: /agent/guide/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-[12]: /database_monitoring/troubleshooting/#mysql
+[12]: /database_monitoring/troubleshooting/?tab=mysql

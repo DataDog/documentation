@@ -271,4 +271,4 @@ If you have installed and configured the integrations and Agent as described and
 [12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
 [13]: /agent/guide/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
-[15]: /database_monitoring/troubleshooting/#postgres
+[15]: /database_monitoring/troubleshooting/?tab=postgres

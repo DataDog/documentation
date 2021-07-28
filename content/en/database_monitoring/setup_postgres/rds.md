@@ -289,7 +289,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: /agent/basic_agent_usage#agent-overhead
-[2]: /database_monitoring/setup/data_collected/#sensitive-information
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
@@ -298,4 +298,4 @@ If you have installed and configured the integrations and Agent as described and
 [8]: https://app.datadoghq.com/account/settings#agent
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
-[11]: /database_monitoring/troubleshooting/#postgres
+[11]: /database_monitoring/troubleshooting/?tab=postgres

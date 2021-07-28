@@ -294,4 +294,4 @@ If you have installed and configured the integrations and Agent as described and
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
-[8]: /database_monitoring/troubleshooting/#mysql
+[8]: /database_monitoring/troubleshooting/?tab=mysql
