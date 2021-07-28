@@ -43,16 +43,16 @@ Choose your version of the Agent:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-The best way to use an integration from integrations-extra with the Docker Agent is to build the Agent with this integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` integration from integrations-extras.
+The recommended way to use a community integration with the Docker Agent is to build the Agent with the integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` from integrations-extras.
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-The `agent integration install` command run inside docker will issue the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
+The `agent integration install` command run inside Docker issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
 
-Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
+Use this new Agent image in combination with [Autodiscovery][1] to enable the `<INTEGRATION_NAME>`.
 
 [1]: /agent/autodiscovery/
 {{% /tab %}}
