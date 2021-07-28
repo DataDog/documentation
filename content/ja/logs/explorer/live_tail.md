@@ -6,7 +6,7 @@ aliases:
   - /ja/logs/explore/livetail
   - /ja/logs/live_tail
 further_reading:
-  - link: logs/processing
+  - link: /logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法
   - link: logs/explorer/side_panel
@@ -37,6 +37,6 @@ Live Tail では、インフラストラクチャー内のどこからでもリ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/indexes#exclusion-filters
-[2]: /ja/logs/processing
+[2]: /ja/logs/log_configuration/pipelines
 [3]: /ja/logs/explorer
 [4]: /ja/logs/explorer/facets/

@@ -7,7 +7,7 @@ further_reading:
   - link: 'https://github.com/roidrage/lograge'
     tag: Github
     text: Lograge ドキュメント
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -191,7 +191,7 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
+[2]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /ja/agent/logs/

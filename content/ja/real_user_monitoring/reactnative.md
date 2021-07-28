@@ -36,6 +36,8 @@ Yarn でインストールするには、以下を実行します。
 yarn add dd-sdk-reactnative
 ```
 
+**React Native バージョン**: SDK は、React Native バージョン 0.63.4 以降をサポートします。それ以前のバージョンに対する互換性は、標準では保証されていません。
+
 ### UI でアプリケーションの詳細を指定
 
 1. [Datadog アプリ][1]で、**UX Monitoring > RUM Applications > New Application** を選択します。
@@ -56,7 +58,7 @@ const config = new DdSdkReactNativeConfiguration(
     "<CLIENT_TOKEN>", 
     "<ENVIRONMENT_NAME>", 
     "<RUM_APPLICATION_ID>",
-    true, // ユーザーインタラクションを追跡 (例: ボタンのタップ)
+    true, // ユーザーインタラクションを追跡 (例: ボタンのタップ。'accessibilityLabel' 要素のプロパティを使用してタップアクションに名前を付けることが可能。その他の場合は要素タイプをレポート)
     true, // XHR リソースを追跡
     true // エラーを追跡
 )
@@ -64,15 +66,17 @@ const config = new DdSdkReactNativeConfiguration(
 config.site = "US"
 // オプション: ネイティブのクラッシュレポートを有効化または無効化
 config.nativeCrashReportEnabled = true
-// オプション: サンプル RUM セッション (ここでは、せしょんの 80% を Datadog に送信。デフォルト = 100%)
+// オプション: サンプル RUM セッション (ここでは、セッションの 80% を Datadog に送信。デフォルト = 100%)
 config.sampleRate = 80
 
-DdSdkReactNative.initialize(config)
+await DdSdkReactNative.initialize(config)
+
+// Once SDK が初期化されたら、RUM ダッシュボードのデータを確認するにはビュー追跡をセットアップする必要があります。
 ```
 
 ## ビューのナビゲーションを追跡
 
-**注**: 自動ビュー追跡は、[React Navigation](https://reactnavigation.org/) パッケージに依存します。アプリケーションで、別のパッケージを使用してナビゲーションに対応している場合は、以下に説明する手動インスツルメンテーションの方法を使用します。
+**注**: 自動ビュー追跡は、[React Navigation](https://reactnavigation.org/) パッケージに依存します (サポート対象のバージョンは `react-navigation/native@5.6.0` 以降)。アプリケーションで、別のパッケージを使用してナビゲーションに対応している場合は、以下に説明する手動インスツルメンテーションの方法を使用します。
 
 ナビゲーションの変更を RUM Views として追跡するには、`NavigationContainer` コンポーネントに `onready` コールバックを設定します。
 
@@ -131,7 +135,7 @@ DdSdkReactNative.setAttributes({
 ```js
 import { DdSdkReactNative, DdSdkReactNativeConfiguration, DdLogs, DdRum } from 'dd-sdk-reactnative';
 
-// SDK を初期化 
+// SDK を初期化
 const config = new DdSdkReactNativeConfiguration(
     "<CLIENT_TOKEN>",
     "<ENVIRONMENT_NAME>",
@@ -142,29 +146,48 @@ const config = new DdSdkReactNativeConfiguration(
 )
 DdSdkReactNative.initialize(config);
 
-// ログを送信 (use the debug、info、warn、error メソッドを使用)
+// ログを送信 (debug、info、warn、error メソッドを使用)
 DdLogs.debug("Lorem ipsum dolor sit amet…", 0, {});
 DdLogs.info("Lorem ipsum dolor sit amet…", 0, {});
 DdLogs.warn("Lorem ipsum dolor sit amet…", 0, {});
 DdLogs.error("Lorem ipsum dolor sit amet…", 0, {});
 
-// RUM Views を手動で追跡
-DdRum.startView('<view-key>', 'View Url', new Date().getTime(), {});
+// RUM Views  を手動で追跡
+DdRum.startView('<view-key>', 'View Url', Date.now(), {});
 //…
-DdRum.stopView('<view-key>', new Date().getTime(), { custom: 42});
+DdRum.stopView('<view-key>', Date.now(), { 'custom': 42 });
 
-// RUM Actions を手動で追跡
-DdRum.addAction('TAP', 'button name', new Date().getTime(), {});
+// RUM Actions  を手動で追跡
+DdRum.addAction('TAP', 'button name', Date.now(), {});
+// 継続アクションの場合
+DdRum.startAction('TAP', 'button name', Date.now(), {});
+// 上記アクションの停止
+DdRum.stopAction(Date.now(), {});
 
-// RUM Errors を手動で追跡
-DdRum.addError('<message>', 'source', '<stacktrace>', new Date().getTime(), {});
+// カスタムタイミングを追加
+DdRum.addTiming('<timing-name>');
 
+// RUM Errors  を手動で追跡
+DdRum.addError('<message>', 'source', '<stacktrace>', Date.now(), {});
 
 // RUM Resource を手動で追跡
-DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', new Date().getTime(), {} );
+DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', Date.now(), {} );
 //…
-DdRum.stopResource('<res-key>', 200, 'xhr', new Date().getTime(), {});
+DdRum.stopResource('<res-key>', 200, 'xhr', Date.now(), {});
+
+// スパンを手動で送信
+const spanId = await DdTrace.startSpan("foo", Date.now(), { 'custom': 42 });
+//...
+DdTrace.finishSpan(spanId, Date.now(), { 'custom': 21 });
 ```
+
+## リソースのタイミング
+
+リソースの追跡では、以下のタイミングを提供できます。
+
+* `First Byte` - スケジュール済みのリクエストと応答の最初のバイトの間の時間。ネイティブレベルのリクエスト準備、ネットワークレイテンシー、およびサーバーの応答準備時間が含まれます。
+* `Download` - 応答の受信にかかった時間。
+
 ## ライセンス
 
 [Apache License, v2.0](LICENSE)

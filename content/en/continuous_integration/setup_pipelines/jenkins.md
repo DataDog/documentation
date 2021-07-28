@@ -19,6 +19,8 @@ Supported Jenkins versions:
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
 
+If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][8], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
+
 ## Install the Datadog Jenkins plugin
 
 Install and enable the [Datadog Jenkins plugin][2] v3.0.0 or newer:
@@ -42,8 +44,8 @@ Install and enable the [Datadog Jenkins plugin][2] v3.0.0 or newer:
 10. To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
 
 {{< code-block lang="text" >}}
-Re/Initialize Datadog-Plugin Tracer: hostname = <HOST>, traceCollectionPort = <TRACE_PORT>
-DATADOG TRACER CONFIGURATION {...}
+Re/Initialize Datadog-Plugin Agent Http Client
+TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
 **Note**: Enabling CI Visibility using the Jenkins plugin is not compatible with running the Java APM tracer as a Java agent when launching Jenkins.
@@ -246,3 +248,4 @@ $> ps -ef | grep jenkins
 [5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [6]: https://app.datadoghq.com/ci/pipelines
 [7]: https://app.datadoghq.com/ci/pipeline-executions
+[8]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/

@@ -153,4 +153,4 @@ Once you have RBAC roles set up, you can restrict access to dashboards and monit
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
 [8]: /dashboards/#restrict-access
-[9]: /getting_started/application/monitors/#restrict-access
+[9]: /getting_started/monitors/#restrict-access
