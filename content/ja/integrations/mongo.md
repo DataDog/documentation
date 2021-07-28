@@ -12,6 +12,7 @@ assets:
   monitors:
     '[MongoDB] High incoming connections': assets/monitors/high_connections.json
   saved_views:
+    mongodb_processes: assets/saved_views/mongodb_processes.json
     operations_by_type_overview: assets/saved_views/operations_by_type_overview.json
     queries: assets/saved_views/queries.json
     queries_by_type_overview: assets/saved_views/queries_by_type_overview.json
@@ -59,7 +60,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 また、カスタム `find`/`count`/`aggregate` クエリを使用して、独自のメトリクスを作成することもできます。
 
-**注**: このインテグレーションには MongoDB v2.6 以上が必要です。
+**注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10 以降のクラスターでのみ使用できます。
 
 ## セットアップ
 
@@ -165,15 +166,15 @@ db.createUser({
 })
 ```
 
-次に、mongos プロキシから同じユーザーを作成します。これには、コンフィギュレーションサーバーにローカルユーザーを作成するという副作用もあり、直接接続が可能になります。
-
+次に、mongos プロキシから同じユーザーを作成します。このアクションにより、コンフィギュレーションサーバーにローカルユーザーが作成され、直接接続が可能になります。
 
 ##### Agent の構成
 1. 各シャードのメンバーごとに 1 つの Agent を構成します。
 2. コンフィギュレーションサーバーのメンバーごとに 1 つの Agent を構成します。
-3. mongos プロキシを介してクラスターに接続するように 1 つの追加 Agent を構成します。この mongos は、監視目的専用の新しい mongos でも、既存の mongos でもかまいません。
+3. mongos プロキシを介してクラスターに接続するように 1 つの追加 Agent を構成します。この mongos プロキシは、監視目的専用の新しい mongos プロキシでも、既存の mongos プロキシでもかまいません。
 
-注: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
+**注**: アービターノードの監視はサポートされていません (詳細については、[MongoDB ドキュメント][1]を参照してください)。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
+
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
 {{% /tab %}}
 {{< /tabs >}}
@@ -269,19 +270,104 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "Docker" %}}
 
-#### コンテナ化
+#### Docker
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                                                                                                                     |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `mongo`                                                                                                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                                             |
-| `<インスタンスコンフィギュレーション>`  | `{"hosts": ["%%host%%:%%port%%], "username": "datadog", "password : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}` |
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["mongo"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%""], "username": "datadog", "password" : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}]'
+```
+
+##### ログの収集
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"mongodb","service":"<SERVICE_NAME>"}]'
+```
+
+##### トレースの収集
+
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+
+Agent コンテナで必要な環境変数
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
+
+次に、[アプリケーションコンテナをインスツルメント][5]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
+
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+このチェックを、Kubernetes で実行している Agent に構成します。
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo
+  annotations:
+    ad.datadoghq.com/mongo.check_names: '["mongo"]'
+    ad.datadoghq.com/mongo.init_configs: '[{}]'
+    ad.datadoghq.com/mongo.instances: |
+      [
+        {
+          "hosts": ["%%host%%:%%port%%"], 
+          "username": "datadog", 
+          "password": "<UNIQUEPASSWORD>", 
+          "database": "<DATABASE>"
+        }
+      ]
+spec:
+  containers:
+    - name: mongo
+```
+
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo
+  annotations:
+    ad.datadoghq.com/mongo.logs: '[{"source":"mongodb","service":"<SERVICE_NAME>"}]'
+spec:
+  containers:
+    - name: mongo
+```
 
 ##### トレースの収集
 
@@ -289,32 +375,92 @@ _Agent バージョン 6.0 以降で利用可能_
 
 Agent コンテナで必要な環境変数
 
-| パラメーター                    | 値     |
-| ---------------------------- | --------- |
-| `<DD_API_KEY>`               | `api_key` |
-| `<DD_APM_ENABLED>`           | true      |
-| `<DD_APM_NON_LOCAL_TRAFFIC>` | true      |
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][2]および [Kubernetes Daemon のセットアップ][3]を参照してください。
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][6]および [Kubernetes DaemonSet のセットアップ][7]を参照してください。
 
-次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
+次に、[アプリケーションコンテナをインスツルメント][8]し、Agent コンテナ名に `DD_AGENT_HOST` を設定します。
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+このチェックを、ECS で実行している Agent に構成するには:
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "mongo",
+    "image": "mongo:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"mongo\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"hosts\": [\"%%host%%:%%port%%\"], \"username\": \"datadog\", \"password\": \"<UNIQUEPASSWORD>\", \"database\": \"<DATABASE>\"}]"
+    }
+  }]
+}
+```
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][5]を参照してください。
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
 
-| パラメーター      | 値                                       |
-| -------------- | ------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "mongodb", "service": "mongo"}` |
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[4]: https://docs.datadoghq.com/ja/tracing/setup/
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+```json
+{
+  "containerDefinitions": [{
+    "name": "mongo",
+    "image": "mongo:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"mongodb\",\"service\":\"<SERVICE_NAME>\"}]"
+    }
+  }]
+}
+```
+
+##### トレースの収集
+
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+
+Agent コンテナで必要な環境変数
+
+| パラメーター            | 値                                                                      |
+| -------------------- | -------------------------------------------------------------------------- |
+| `<DD_API_KEY>` | `api_key`                                                                  |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
+
+次に、[アプリケーションのコンテナをインスツルメント][5]し、[EC2 プライベート IP アドレス][6]に `DD_AGENT_HOST` を設定します。
+
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[4]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
+[6]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -354,9 +500,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 このチェックは、Mongo ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "mongo" >}}
 
-**mongodb.can_connect**:<br>
-Agent が MongoDB に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
