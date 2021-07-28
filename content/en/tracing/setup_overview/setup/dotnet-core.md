@@ -39,7 +39,13 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1 and above.
+The .NET Tracer supports instrumentation on:
+
+| Version              |
+| -------------------- |
+| .NET 5               |
+| .NET Core 3.1        |
+| .NET Core 2.1        |
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
