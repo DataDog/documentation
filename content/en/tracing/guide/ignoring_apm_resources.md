@@ -303,7 +303,7 @@ public class GreetingController {
 
 }
 ```
-{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 
@@ -313,3 +313,9 @@ public class GreetingController {
 [4]: /tracing/guide/add_span_md_and_graph_it/
 [5]: /tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [6]: https://golang.org/pkg/regexp/
+[7]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
+[8]: /agent/kubernetes/?tab=helm#installation
+[9]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[10]: /tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.filters.FilterRequestsOnUrl
+[12]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
