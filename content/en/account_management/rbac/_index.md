@@ -61,7 +61,7 @@ To create a custom role:
 3. Give a name to your role.
 4. Optional - Assigning a set of permissions to your Role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
 
-{{< img src="account_management/rbac/create_role.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/create_role.png" alt="Create a custom Role" style="width:90%;">}}
 
 Once a role is created you can [add this role to existing users][3].
 
@@ -91,9 +91,9 @@ To edit a custom role:
 3. Modify the set of permissions to your Role. See the [Datadog Role permissions][2] documentation for more information about available permissions.
 4. Save your changes.
 
-{{< img src="account_management/rbac/edit_role.png" alt="Edit a Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/edit_role.png" alt="Edit a Role" style="width:90%;">}}
 
-Once a role is modified, all users who have the role will have their permissions updated.
+Once a role is modified, permissions are updated for all users with the role.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -119,11 +119,11 @@ To delete a custom role:
 2. Select the delete button on the Role you would like to delete.
 3. Confirm your decision.
 
-{{< img src="account_management/rbac/delete_role.png" alt="Deleting a Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/delete_role.png" alt="Deleting a Role" style="width:90%;">}}
 
-{{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role"  style="width:90%;">}}
+{{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role" style="width:90%;">}}
 
-Once a role is deleted all users who have the role will have their permissions updated. Users without any roles will not be able to use Datadog effectively, but will still maintain limited access. You should always make sure users either have a Role or are disabled if they do not need access to your organization.
+Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access. You should always make sure users either have a Role or are disabled if they do not need access to your organization.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -153,4 +153,4 @@ Once you have RBAC roles set up, you can restrict access to dashboards and monit
 [6]: /api/v2/roles/
 [7]: /account_management/rbac/permissions/
 [8]: /dashboards/#restrict-access
-[9]: /getting_started/application/monitors/#restrict-access
+[9]: /getting_started/monitors/#restrict-access

@@ -192,6 +192,10 @@ To collect processes information for all your containers and send it to Datadog:
         {
           "name": "DD_API_KEY",
           "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        {
+          "name": "DD_PROCESS_AGENT_ENABLED",
+          "value": "true"
         }
       ]
     }

@@ -128,12 +128,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
         DDLambda ddl = new DDLambda(request, context);
 
-        Map<String,String> myTags = new HashMap<String, String>();
+        Map<String,Object> myTags = new HashMap<String, Object>();
             myTags.put("product", "latte");
             myTags.put("order","online");
         
         // Submit a custom metric
-        dd.metric(
+        ddl.metric(
             "coffee_house.order_value", // Metric name
             12.45,                      // Metric value
             myTags);                    // Associated tags
