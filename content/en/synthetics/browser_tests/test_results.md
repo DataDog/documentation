@@ -50,6 +50,22 @@ Learn more about [Real User Monitoring and Core Web Vitals][6].
 
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
+## Waterfall
+
+A test result consists of a test execution, screenshots, and durations. 
+
+The following test result characteristics are displayed:
+
+- Status
+- Starting URL
+- Number of steps
+- Duration
+- Location
+- Device
+- Browser
+- Time ran
+- Run type
+
 ## Errors
 
 The **Errors** panel shows the error, its type (`js`/`network`), and status (network status code).
