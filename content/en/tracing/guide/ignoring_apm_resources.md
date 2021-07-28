@@ -18,7 +18,7 @@ The Trace Agent component within the Datadog Agent has two methods to prevent ce
 
 If you have application specific requirements, please refer to the next section on Tracer Configuration.
 
-###Ignoring Based on Span Tags
+### Ignoring Based on Span Tags
 
 Available starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option allows traces with root spans matching certain span tags to be dropped. Setting up this option on the Trace Agent will apply to all services that send traces to this particular Datadog agent. Traces that are dropped due to these rules will not be captured in the trace metric.
 
@@ -303,6 +303,7 @@ public class GreetingController {
 
 }
 ```
+
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
