@@ -110,7 +110,7 @@ Endpoints that can be used to send logs to Datadog, for SSL-encrypted connection
 
 
 `{{< region-param key="tcp_endpoint" code="true" >}}`
-: **Port**: `{{< region-param key="tcp_endpoint_port" code="true" >}}` <br>
+: **Port**: `{{< region-param key="tcp_endpoint_port_ssl" code="true" >}}` <br>
 Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.
 
 `{{< region-param key="agent_http_endpoint" code="true" >}}`

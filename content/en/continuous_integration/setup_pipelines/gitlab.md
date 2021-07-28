@@ -10,6 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us,eu" >}}
 ## Compatibility
 
 Supported GitLab versions:
@@ -80,9 +81,10 @@ Fill in the integration configuration settings:
 : Enables the integration.
 
 **Datadog site**
-: Specifies which [Datadog site][1] to send data to. Only `datadoghq.com` is supported.<br/>
+: Specifies which [Datadog site][1] to send data to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Possible values**: `datadoghq.com`
+**Selected site**: {{< region-param key="dd_site" code="true" >}}<br/>
+**Possible values**: `datadoghq.com`, `datadoghq.eu`
 
 **API URL** (optional)
 : Allows overriding the API URL used for sending data directly, only used in advanced scenarios.<br/>
@@ -101,18 +103,33 @@ Fill in the integration configuration settings:
 
 You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up.
 
+{{< site-region region="us,eu" >}}
 ## Integrating through webhooks
 
-As an alternative to using the native Datadog integration, you can use [webhooks][3] to send pipeline data to Datadog.
+As an alternative to using the native Datadog integration, you can use [webhooks][1] to send pipeline data to Datadog.
 
 <div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.</div>
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][5].
+{{< site-region region="us" >}}
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
+[1]: https://app.datadoghq.com/account/settings#api
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+* **URL**: `https://webhooks-http-intake.logs.datadoghq.eu/v2/api/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **Secret Token**: leave blank
+* **Trigger**: Select `Job events` and `Pipeline events`.
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{< /site-region >}}
+
 To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
+
+[1]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+{{< /site-region >}}
 
 ## Visualize pipeline data in Datadog
 
@@ -130,3 +147,7 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+{{< /site-region >}}
+{{< site-region region="us3,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}
