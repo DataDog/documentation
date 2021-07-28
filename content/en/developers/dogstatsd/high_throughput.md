@@ -296,7 +296,7 @@ If the packets sent are too small, the Datadog Agent packs several together to p
 The Datadog Agent performs most optimally if the DogStatsD clients send packets the size of the `dogstatsd_buffer_size`. The packets must not be larger than the buffer size, otherwise, the Agent won't be able to load them completely in the buffer and some of metrics will be malformed. Use the corresponding configuration field in your DogStatsD clients.
 
 <div class="alert alert-info">
-  <strong>Note for UDP</strong>: since UDP packets usually go through the Ethernet and IP layer, avoid IP packets fragmentation by limiting the packet size to a value lower than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with a MTU of 1500 bytes, so in this situation the packet size of sent packets should be limited to 1472.
+  <strong>Note for UDP</strong>: Because UDP packets usually go through the Ethernet and IP layer, you can avoid IP packets fragmentation by limiting the packet size to a value lower than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with a MTU of 1500 bytes, so in this situation the packet size of sent packets should be limited to 1472.
 </div>
 
 <div class="alert alert-info">
