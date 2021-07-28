@@ -19,6 +19,7 @@ aliases:
 {{< whatsnext desc="Advanced Guides" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
+    {{< nextlink href="tracing/guide/ignoring_apm_resources" >}}Discard healthchecks and other unwanted spans{{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/ddsketch_trace_metrics/" >}}DDSketch based Metrics in APM{{< /nextlink >}}
