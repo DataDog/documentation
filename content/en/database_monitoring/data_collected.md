@@ -12,9 +12,20 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
+When you setup Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses. 
+
+To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
+
+{{< partial name="dbm/dbm-data-collected" >}}
+<p></p>
+
+The metrics used for Database Monitoring views are, primarily:
+- **MySQL**: `mysql.queries.*`
+- **Postrgres**: `postgres.queries.*`
+
 ## Sensitive information
 
-The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in Query Metrics, Query Samples, or Explain Plans.
+The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans.
 
 However, there are some common sources of data leaks:
 
