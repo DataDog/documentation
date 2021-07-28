@@ -33,7 +33,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ## Explore Datadog Database Monitoring
 
-## Dig into query performance metrics
+### Dig into query performance metrics
 
 The Query Metrics view shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and get alerted for anomalies.
 
@@ -43,7 +43,7 @@ The Query Metrics view shows historical query performance for normalized queries
 
 {{< img src="database_monitoring/dbm-query-metrics.png" alt="Database Monitoring" style="width:100%;">}}
 
-## Explore query samples
+### Explore query samples
 
 The Query Samples view helps you understand which queries were running at a given time. Compare each execution to the average performance of the query and related queries.
 
@@ -53,7 +53,7 @@ The Query Samples view helps you understand which queries were running at a give
 
 {{< img src="database_monitoring/dbm-query-sample.png" alt="Database Monitoring" style="width:100%;">}}
 
-## Understand before you run
+### Understand before you run
 
 Explain Plans help you understand how the database plans to execute your queries. 
 
@@ -63,7 +63,7 @@ Explain Plans help you understand how the database plans to execute your queries
 
 {{< img src="database_monitoring/dbm-explain-plan.png" alt="Database Monitoring" style="width:100%;">}}
 
-## Visualize everything on enriched dashboards 
+### Visualize everything on enriched dashboards 
 
 Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics.
 
