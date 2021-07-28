@@ -19,7 +19,7 @@ Supported Jenkins versions:
 
 Install the [Datadog Agent][1] on the Jenkins controller instance.
 
-If you are using a Kubernetes executor, Datadog recommends using the [Admission Controller][8], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][8], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
 ## Install the Datadog Jenkins plugin
 
