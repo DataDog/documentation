@@ -31,7 +31,7 @@ There are various ways you can modify the [data collected][1] by RUM, to support
 
 ## Override default RUM view names
 
-The RUM SDK automatically generates a [view event][14] for each new page visited by your users, or when the page URL is changed (for single page applications). A view name is computed from the current page URL, with variable alphanumeric ids being removed automatically (for example, "/dashboard/1234" becomes "/dashboard/?").
+The RUM SDK automatically generates a [view event][14] for each new page visited by your users, or when the page URL is changed (for single page applications). A view name is computed from the current page URL, where variable alphanumeric IDs are removed automatically—for example, "/dashboard/1234" becomes "/dashboard/?".
 
 Starting with [version 2.17.0][15], you may specify your own view names by tracking view events manually with the `trackViewsManually` option:
 
@@ -72,7 +72,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. You **must** start views for each new page, or route change (for single page applications), and optionally define the associated view name (it defaults to the page URL path). No RUM data gets collected until the view is started.
+2. You **must** start views for each new page or route change (for single page applications). You can optionally define the associated view name, which defaults to the page URL path. No RUM data is collected until the view is started.
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
@@ -95,7 +95,7 @@ window.DD_RUM && window.DD_RUM.startView('checkout')
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are using React, Angular, Vue or any other frontend framework, we recommend implementing the `startView` logic at the framework router level.
+**Note**: If you are using React, Angular, Vue or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
 ## Enrich and control RUM data
 
