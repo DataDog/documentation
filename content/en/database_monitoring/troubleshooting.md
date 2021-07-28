@@ -38,8 +38,8 @@ agent check mysql -t 2
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The `pg_stat_statements` extension is not installed or not loaded in the correct database | The extension must be installed via the `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). You must then run `CREATE EXTENSION pg_stat_statements` in all databases the Agent connects to. By default, the Agent connects to the `postgres` database. For additional details on configuring this variable in your setup, check the [setup instructions][1]. |
-| The `datadog` user does not have permission to collect query statistics | To grant the appropriate permissions to the database user, please see the [setup instructions][1] for your database version. |
+| The `pg_stat_statements` extension is not installed or not loaded in the correct database. | The extension must be installed through `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). You must then run `CREATE EXTENSION pg_stat_statements` in all databases the Agent connects to. By default, the Agent connects to the `postgres` database. For additional details on configuring this variable in your setup, see the [setup instructions][1]. |
+| The `datadog` user does not have permission to collect query statistics. | To grant the appropriate permissions to the `datadog` user, see the [setup instructions][1] for your database version. |
 
 To verify `pg_stat_statements` is installed and accessible to the `datadog` user, connect to the `postgres` database and attempt to query as the `datadog` user. There should be at least one row returned successfully. For example:
 
@@ -72,21 +72,22 @@ If you specified a `dbname` other than the default `postgres` in your Agent conf
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The query is not a "top query." | The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. In this case, it may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][1]. |
-| If the query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. The Postgres parameter `pg_stat_statements.track_utility` must be set to `true`. See the [Postgres documentation][2] for more information. |
-| If the query is executed in a function or stored procedure. | In order to track queries executed in functions or procedures, the configuration parameter `pg_stat_statements.track` should be set to `true`. See the [Postgres documentation][2] for more information. |
-| The `pg_stat_statements.max` configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Raising this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. Note that queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in pg_stat_statements. For more information about tuning this setting, see [Advanced configuration][3]. |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][1]. |
+| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `true`. See the [Postgres documentation][2] for more information. |
+| The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `true`. See the [Postgres documentation][2] for more information. |
+| The `pg_stat_statements.max` configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][3]. |
+
 
 
 [1]: /database_monitoring/data_collected/#which-queries-are-tracked
 [2]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[3]: TODO
+[3]: /database_monitoring/setup_postgres/advanced_configuration/TODO
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The query is not a "top query." | The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected timeframe. In this case, it may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][1]. |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | It may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][1]. |
 | The `events_statements_summary_by_digest` may be full. | The MySQL table `events_statements_summary_by_digest` in `performance_schema` has a maximum limit on the number of digests (normalized queries) it will store. Regular truncation of this table as a maintenance task will ensure all queries are tracked over time. See [Advanced configuration][2] for more information. |
 
 
@@ -120,13 +121,13 @@ Longer queries may not show their full SQL text due to database configuration. S
 
 The Postgres setting `track_activity_query_size` indicates the maximum size of the SQL statement Postgres will store and make visible to the Agent. By default, this value is 1024 bytes. Raising this value to 4096 will capture most queries for most workloads. However, a higher value may be appropriate if your queries are highly complex or use very long arrays.
 
-For example, a query with an array with many items such as:
+For example, the database will truncate a query with an array with many items such as:
 
 ```sql
 SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[11, 12, 13, … , 9999, 10000 ]) LIMIT 5
 ```
 
-will be truncated by the database.. The resulting normalized query will appear in the app as:
+The resulting normalized query will appear in the app as:
 
 ```sql
 SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
@@ -139,13 +140,16 @@ To avoid this, raise the `track_activity_query_size` setting to a value large en
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-The MySQL SQL text length visible to the Datadog Agent is determined by the [system variables][1] below. Most workloads will be able to capture most queries by raising this value to 4096, but you may need to set a higher value for particularly long and complex queries.
+The MySQL SQL text length visible to the Datadog Agent is determined by the following [system variables][1]:
 
 ```
 max_digest_length=4096
 performance_schema_max_digest_length=4096
 performance_schema=4096
 ```
+
+Most workloads are able to capture most queries by raising this value to 4096, but you may need to set a higher value for particularly long and complex queries.
+
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
 
@@ -155,17 +159,15 @@ performance_schema=4096
 
 ### Queries are missing explain plans
 
-There are several reasons the Agent may not be able to collect explain plans for a query execution:
-
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| Queries are truncated | See the guide on [truncated query samples](#query-samples-are-truncated). |
-| The query may not be able to be explained (such as BEGIN) | In these cases, the query cannot yield a valid Explain plan. |
-| The application client used to connect to the database is using the Postgres [extended query protocol][1] or prepared statements. | Some client applications using the Postgres extended query protocol [extended query protocol][1] do not support the collection of Explain Plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][2] and Python client [asyncpg][3] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters. We are working towards other methods of collecting Explain Plans for clients using this protocol. |
-| The query is relatively infrequent or executes very quickly. | If you are looking for the Explain Plan for a certain query, it may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. You can attempt to [raise the sampling rates][4] in order to capture the query. |
+| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
+| The query cannot be explained (such as BEGIN). | The query cannot yield a valid explain plan. |
+| The application client used to connect to the database is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][1] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][2] and Python client [asyncpg][3] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters.  |
+| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][4] to capture the query. |
 
 
 
@@ -173,15 +175,15 @@ There are several reasons the Agent may not be able to collect explain plans for
 [1]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
 [2]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [3]: https://github.com/MagicStack/asyncpg
-[4]: TODO
+[4]: /database_monitoring/setup_postgres/advanced_configuration/TODO
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| Queries are truncated | See the section on [truncated query samples](#query-samples-are-truncated). |
-| The query may not be able to be explained (such as BEGIN) | In these cases, the query cannot yield a valid explain plan. |
-| The query is relatively infrequent or executes very quickly. | If you are looking for the Explain Plan for a certain query, it may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. You can attempt to [raise the sampling rates][1] in order to capture the query. |
+| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
+| The query cannot be explained (such as BEGIN). | The query cannot yield a valid explain plan. |
+| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][1] to capture the query. |
 
 
 [1]: /database_monitoring/setup_mysql/advanced_configuration/
@@ -198,6 +200,8 @@ If you are still experiencing problems, contact [Datadog Support][4] for help.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /database_monitoring/#getting-started
 [2]: /agent/troubleshooting/
 [3]: /agent/guide/agent-log-files
