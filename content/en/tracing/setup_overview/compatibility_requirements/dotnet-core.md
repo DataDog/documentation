@@ -26,7 +26,7 @@ further_reading:
 - The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][1].
 
 ### Supported .NET Core runtimes
-The .NET Tracer supports instrumentation on .NET Core 2.1 and above. It also supports [.NET Framework][2].
+The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
 
 | Version              | Microsoft End of Life |
 | -------------------- | --------------------- |
@@ -37,7 +37,7 @@ The .NET Tracer supports instrumentation on .NET Core 2.1 and above. It also sup
  Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][3]. 
 
 ### Supported Processor Architectures
-The following list only applies to automatic instrumentation:
+The .NET Tracer supports automatic instrumentation on the following architectures:
 
 | Processor architectures                                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -62,7 +62,6 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MSMQ                            | built-in                                                                                  | `Msmq`               |
 | MySql                           | `MySql.Data` 6.7.0+                                                                       | `AdoNet`             |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `AdoNet`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `AdoNet`             |
