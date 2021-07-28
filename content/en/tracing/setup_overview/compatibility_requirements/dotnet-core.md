@@ -37,7 +37,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
  Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][3]. 
 
 ### Supported Processor Architectures
-The .NET Tracer supports automatic instrumentation on the following architectures.
+The .NET Tracer supports automatic instrumentation on the following architectures:
 
 | Processor architectures                                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------------------- |
