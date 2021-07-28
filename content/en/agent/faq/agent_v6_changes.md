@@ -42,7 +42,7 @@ To transition between Agent configuration paths and formats, use the Agent comma
 sudo -u dd-agent -- datadog-agent import
 ```
 
-This command parses an existing `datadog.conf` and converts supported parameters to the new format in `datadog.yaml`. The command also copies configuration files for checks that are currently enabled. For more details, see [Upgrade to Datadog Agent v6][2].
+This command parses an existing `datadog.conf` and converts supported parameters to the new format in `datadog.yaml`. The command also copies configuration files for checks that are enabled. For more details, see [Upgrade to Datadog Agent v6][2].
 
 #### Options
 
@@ -52,10 +52,10 @@ The following Agent configuration options were changed or removed in Agent v6. C
 
 | Previous Name               | Updated Name                 | Notes                                                                                             |
 |-----------------------------|------------------------------|---------------------------------------------------------------------------------------------------|
-| `proxy_host`                | `proxy`                      | Proxy settings are now expressed as a list of URIs. See the [proxy][3] documentation for details. |
+| `proxy_host`                | `proxy`                      | Proxy settings are expressed as a list of URIs. See the [proxy][3] documentation for details. |
 | `collect_instance_metadata` | `enable_metadata_collection` | Enables metadata collection.                                                                      |
 | `collector_log_file`        | `log_file`                   |                                                                                                   |
-| `syslog_host`               | `syslog_uri`                 | The Syslog configuration is now expressed as a URI.                                               |
+| `syslog_host`               | `syslog_uri`                 | The Syslog configuration is expressed as a URI.                                               |
 |                             | `syslog_pem`                 | Syslog configuration client certificate for TLS client validation.                                |
 |                             | `syslog_key`                 | Syslog configuration client private key for TLS client validation.                                |
 
@@ -165,7 +165,7 @@ The precedence order of Agent v6 proxy options is different from previous versio
 {{% /tab %}}
 {{% tab "Hostname" %}}
 
-There are differences in hostname resolution between Agent v5 and Agent v6. For details, see the [dedicated documentation][1].
+There are differences in hostname resolution between Agent v5 and Agent v6. For details, see the [How the Datadog Agent determines the hostname][1].
 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
 {{% /tab %}}
@@ -225,7 +225,7 @@ If the `service` wrapper command is not available on your system, use:
 * On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
-If you're unsure which init system your distribution uses by default, refer to the table below:
+If you're unsure which init system your distribution uses by default, see the table below:
 
 | distribution \ init system      | upstart                   | systemd                   | sysvinit                                  | Notes                         |
 |---------------------------------|---------------------------|---------------------------|-------------------------------------------|-------------------------------|
@@ -259,8 +259,8 @@ The major changes for Agent v6 on Windows are:
 * The Agent v5 Windows Agent Manager GUI was replaced with a browser-based, cross-platform manager. For details, see the [Datadog Agent Manager for Windows][1].
 * The main executable file is `agent.exe` (previously `ddagent.exe`).
 * Commands should be run with the command line `"%PROGRAMFILES%\datadog\datadog agent\embedded\agent.exe" <COMMAND>` from an **Administrator** command prompt.
-* The Windows service is now started as "Automatic-Delayed". It is started automatically on boot, but after all other services. This results in a small delay in reporting metrics after a reboot.
-* The Windows GUI and Windows system tray icon are now implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
+* The Windows service is started as "Automatic-Delayed". It is started automatically on boot, but after all other services. This results in a small delay in reporting metrics after a reboot.
+* The Windows GUI and Windows system tray icon are implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 
 [1]: /agent/guide/datadog-agent-manager-windows/
 {{% /tab %}}
@@ -271,7 +271,7 @@ The major changes for Agent v6 on MacOS are:
 * The _lifecycle commands_ (formerly `datadog-agent start`/`stop`/`restart`/`status`) are replaced by `launchctl` commands on the `com.datadoghq.agent` service, and should be run under the logged-in user. For these commands, you can also use the Datadog Agent systray app.
 * All the other commands can still be run with the `datadog-agent` binary located in the `PATH` (`/usr/local/bin/`) by default.
 * The `info` command has been renamed to `status`.
-* The configuration GUI is now a web-based application, which can be accessed by running the command `datadog-agent launch-gui` or using the systray app.
+* The configuration GUI is a web-based application, which can be accessed by running the command `datadog-agent launch-gui` or using the systray app.
 
 **Example changes**:
 
@@ -372,7 +372,7 @@ The [kubernetes_state][4] check works with Agent v5 or Agent v6.
 
 #### Tagging
 
-While Agent v5 automatically collected every pod label as tags, Agent v6 needs a whitelist. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`. See [Tag Assignment and Extraction][5] for details.
+While Agent v5 automatically collected every pod label as tags, Agent v6 needs an inclusion list. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`. See [Tag Assignment and Extraction][5] for details.
 
 The following options and tags are deprecated:
 
@@ -392,11 +392,11 @@ Agent v6 ships JMXFetch, with the following changes:
 
 #### Jmxterm
 
-Agent v6 does not ship the `jmxterm` JAR. To download and use `jmxterm`, refer to the [upstream project][1].
+Agent v6 does not ship the `jmxterm` JAR. To download and use `jmxterm`, see the [upstream project][1].
 
 #### Troubleshooting commands
 
-Troubleshooting command syntax has changed. These commands are available for v6.2.0+, for earlier versions, refer to the [JMX Agent troubleshooting][2]:
+Troubleshooting command syntax has changed. These commands are available for v6.2.0+, for earlier versions, see [JMX Agent troubleshooting][2]:
 
 | Command                                                | Description                                                                                                                                                     |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -419,7 +419,7 @@ _Only affects Windows Agents_
 
 For the Windows Agent v5, `system.mem.pagefile.*` metrics display inconsistent units (off by 10^6).
 
-This problem is fixed on the Windows Agent v6. However, the Agent v5 discrepancy remains for backwards compatibility.  Therefore, reported values (and associated monitors) are different when upgrading from Agent v5 to Agent v6.
+This problem is fixed on the Windows Agent v6. However, the Agent v5 discrepancy remains for backwards compatibility. Therefore, reported values (and associated monitors) are different when upgrading from Agent v5 to Agent v6.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -433,7 +433,7 @@ The [Autodiscovery][7] system was reworked for Agent v6. Also, container runtime
 
 When using Kubernetes, Autodiscovery sources information from the kubelet instead of Docker daemon. This allows Autodiscovery to work without access to the Docker socket. Also, the default behavior is to source Autodiscovery templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener with the Docker one if you need Autodiscovery on containers running out of pods.
 
-When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
+When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support is set to be removed in future versions.
 
 [1]: /agent/kubernetes/integrations/
 {{% /tab %}}
@@ -441,7 +441,7 @@ When specifying [Autodiscovery templates][1] in pod annotations, the annotation 
 
 [Autodiscovery templates][1] in Docker labels work with the same name prefix `com.datadoghq.ad.*`.
 
-The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support will be removed in future versions.
+The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support is set to be removed in future versions.
 
 [1]: /agent/docker/integrations/
 {{% /tab %}}
@@ -456,7 +456,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development documentation][9].
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development][9] documentation.
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
@@ -470,7 +470,7 @@ Even though Agent v6 fully supports Python checks, some of the official Agent v5
 {{% /tab %}}
 {{% tab "Check API" %}}
 
-The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.base.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
+The base class for Python checks (`AgentCheck`) is imported from `datadog_checks.base.checks`. There are several things that have been removed or changed in the class API. In addition, each check instance is its own instance of the class. So you cannot share state between them.
 
 The following methods in the `AgentCheck` class are not implemented:
 

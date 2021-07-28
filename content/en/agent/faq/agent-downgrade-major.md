@@ -101,13 +101,13 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
 5. Back-sync configurations and AutoDiscovery templates (optional)
 
-    If you have made any changes to your configurations or templates, you might want to sync these back for agent 5.
+    If you made any changes to your configurations or templates, you might want to sync these back for Agent v5.
 
-    **Note**: if you have made any changes to your configurations to support new agent6-only options, these will not work anymore with Agent version 5.
+    **Note**: If you made any changes to your configurations to support Agent v6 only options, these do not work with Agent v5.
 
 6. Back-sync custom checks (optional):
 
-    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note that you only need to copy back    checks you changed.
+    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. **Note**: You only need to copy back checks you changed.
 
     ```shell
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
@@ -150,13 +150,13 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
 3. Back-sync configurations and AutoDiscovery templates (optional)
 
-    If you have made any changes to your configurations or templates, you might want to sync these back for agent 5.
+    If you made any changes to your configurations or templates, you might want to sync these back for Agent v5.
 
-    **Note**: if you have made any changes to your configurations to support new agent6-only options, these will not work anymore with Agent version 5.
+    **Note**: If you made any changes to your configurations to support Agent v6 only options, these do not work with Agent v5.
 
 4. Back-sync custom checks (optional):
 
-    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note that you only need to copy back    checks you changed.
+    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. **Note**: You only need to copy back checks you changed.
 
     ```shell
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
@@ -181,7 +181,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Run the agent installer package for the latest 5.x version,  instructions can be found
+Run the agent installer package for the latest 5.x version, instructions can be found
 [in the Datadog agent integration page][1].
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows

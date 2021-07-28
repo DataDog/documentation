@@ -28,7 +28,7 @@ Pylint contains functions to help you [verify that your custom checks are compat
 
 #### Installation
 
-Start by installing via [pip][3] on Python 2:
+Start by installing with [pip][3] on Python 2:
 
 ```bash
 $ python2 -m pip install pylint
@@ -71,11 +71,11 @@ While `pylint` catches any issue that could prevent the Python 3 interpreter fro
 $ 2to3 foo.py
 ```
 
-Running 2to3 prints a diff against the original source file. For more details about 2to3, refer to the official [2to3 documentation][4].
+Running 2to3 prints a diff against the original source file. For more details about 2to3, see the official [2to3][4] documentation.
 
 ### Editors
 
-Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2–only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][5] or as a clickable box on the bottom in [Visual Studio Code][6].
+Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2 only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][5] or as a clickable box on the bottom in [Visual Studio Code][6].
 
 ## Python migration
 
@@ -123,13 +123,13 @@ The `dict.has_key()` method is deprecated in Python 2 and is removed in Python 3
 
 ### Standard library changes
 
-Python 3 features a reorganized standard library, where a number of modules and functions were renamed or moved. Importing moved modules through `six.moves` works on both Python versions.
+Python 3 features a reorganized standard library, where several modules and functions were renamed or moved. Importing moved modules through `six.moves` works on both Python versions.
 
 | Python 2            | Python 3             | Python 2 and 3                      |
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consult the [Six documentation][7] for the list of renamed modules. Note that the `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
+Consult the [Six][7] documentation for the list of renamed modules. **Note**: The `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
 
 ### Unicode
 
@@ -150,7 +150,7 @@ f = open('textfile.txt', encoding='utf-8')
 contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
 ```
 
-Consult Ned Batchelder’s [Pragmatic Unicode][8] for further details.
+Consult Ned Batchelder's [Pragmatic Unicode][8] for further details.
 
 ### Print
 
@@ -248,7 +248,7 @@ Or, for extra readability:
 
 ### Iterators
 
-Several functions in Python 2 that return lists now return iterators in Python 3. These include `map`, `filter`, and `zip`.
+Several functions in Python 2 that return lists return iterators in Python 3. These include `map`, `filter`, and `zip`.
 
 The simplest fix to retain Python 2 behavior is to wrap these functions with a call to `list`:
 

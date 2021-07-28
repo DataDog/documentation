@@ -10,9 +10,9 @@ further_reading:
   text: "Learn more about Proxy"
 ---
 
-The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a number of different endpoints to function properly and might not work with servers that have limited internet access.
+The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to several different endpoints to function properly and might not work with servers that have limited internet access.
 
-For servers with no direct internet access, the Agent can be configured to route through a proxy, refer to [Agent Proxy Configuration][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
+For servers with no direct internet access, the Agent can be configured to route through a proxy, see [Agent Proxy Configuration][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
 
 If the target system is blocked from accessing the package repository directly, download the package from the repository using another server, then transfer it over to the target system for a local install.
 

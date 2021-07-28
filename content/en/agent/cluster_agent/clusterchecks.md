@@ -39,7 +39,7 @@ Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery
 3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` environment variable.
 4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
 
-The following two configuration sources are supported. [They are described in the Autodiscovery documentation][1]:
+The following two configuration sources are supported. They are described in the [Autodiscovery][1] documentation:
 
 - You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
 - Kubernetes Service Annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.

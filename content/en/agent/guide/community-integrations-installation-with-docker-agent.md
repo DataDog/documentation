@@ -43,7 +43,7 @@ FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-The `agent integration install` command run inside docker will issue the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
+The `agent integration install` command run inside Docker issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
 
 Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
 

@@ -128,7 +128,7 @@ The commands related to log collection are:
 {{% tab "Host Agent with Custom Logging" %}}
 
 1. Install the [latest version of the Agent][1] on your host.
-2. Follow the [Custom Log Collection documentation][2] to tail files for logs.
+2. Follow the [Custom Log Collection][2] documentation to tail files for logs.
 
     To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][3] with the following content:
 
@@ -255,7 +255,7 @@ labels:
     com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
 ```
 
-See the [multi-line processing rule documentation][1] to get more pattern examples.
+See the [multi-line processing rule][1] documentation to get more pattern examples.
 
 
 [1]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation

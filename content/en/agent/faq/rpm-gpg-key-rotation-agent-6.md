@@ -11,7 +11,7 @@ Trying to install or upgrade the Agent package without trusting the key results 
 
 The fingerprint of the associated public key is: `A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`.
 
-If you're using the latest version for one of the following officially supported install methods, your hosts will automatically trust the key and no further action is needed.
+If you're using the latest version for one of the following officially supported install methods, your hosts trust the key automatically and no further action is needed.
 
 * [Agent installation page][2]
 * [Chef cookbook][3]

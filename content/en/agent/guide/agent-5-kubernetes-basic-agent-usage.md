@@ -19,7 +19,7 @@ Get metrics from Kubernetes in real time to:
 * Visualize and monitor Kubernetes states
 * Be notified about Kubernetes failovers and events.
 
-For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. We have created a [Docker image][2] with both the Docker and the Kubernetes integrations enabled.
+For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. A [Docker image][2] is available with both the Docker and the Kubernetes integrations enabled.
 
 You can also just [run the Datadog Agent on your host][3] and configure it to gather your Kubernetes metrics.
 
@@ -33,7 +33,7 @@ Thanks to Kubernetes, you can take advantage of DaemonSets to automatically depl
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][4] as a deployment on each Kubernetes node.*
 
-If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration][5].
+If your Kubernetes has RBAC enabled, see the documentation on how to configure RBAC permissions with your [Datadog-Kubernetes integration][5].
 
 * Create the following `dd-agent.yaml` manifest:
 
@@ -91,7 +91,7 @@ Replace `DATADOG_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] 
   kubectl create -f dd-agent.yaml
   ```
 
-**Note**:  This manifest enables Autodiscovery's auto-configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure Autodiscovery, see the [dedicated Autodiscovery documentation][9].
+**Note**: This manifest enables the Autodiscovery, auto-configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure Autodiscovery, see the [Autodiscovery][9] documentation.
 
 #### Host installation
 
@@ -201,14 +201,14 @@ Then deploy it by running:
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google's publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, refer [to the official project documentation][12].
+The manifest above uses Google's publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, see the [official project][12] documentation.
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL is configured and managed automatically.
 
 #### Host installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here][15], and information on installation on [this page][16].
+Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, download the [rpm package][15] and see the [installation instructions][16].
 Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml][14] for all available configuration options.
 
 ### Validation

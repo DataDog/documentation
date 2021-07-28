@@ -43,7 +43,7 @@ further_reading:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
 
-        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must whitelist `*.agent.`{{< region-param key="dd_site" code="true" >}} in your firewall(s).
+        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your allow list in your firewall(s).
 
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):
 
@@ -68,7 +68,7 @@ The information is structured as JSON following this schema:
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying informaton from API)
+    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
     "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
     "logs": {...},                      // <-- same for the logs Agent data
     "process": {...},                   // <-- same for the process Agent data
@@ -85,11 +85,11 @@ Each section has a dedicated endpoint, for example:
 
 ### Note
 
-You should whitelist all of these IPs. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
+You should add all of these IPs to your allow list. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
 ## Open ports
 
-**All outbound traffic is sent over SSL via TCP / UDP.**
+**All outbound traffic is sent over SSL through TCP / UDP.**
 
 Open the following ports in order to benefit from all the Agent functionalities:
 

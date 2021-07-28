@@ -44,7 +44,7 @@ logs:
   service: webapp
 ```
 
-This matches **ANY** `httpd` container image on your host. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. The Agent applies the above template to both containers since you have to provide short names for container images, e.g. `httpd`, NOT `library/httpd:latest`.
+This matches **ANY** `httpd` container image on your host. Suppose you have one container running `library/httpd:latest` and another running `<WHATEVER>/httpd:v2`. The Agent applies the above template to both containers since you have to provide short names for container images, for example: `httpd`, NOT `library/httpd:latest`.
 
 When using short image names as Autodiscovery container identifiers, **the Agent cannot distinguish between identically named images from different sources or with different tags**.
 
