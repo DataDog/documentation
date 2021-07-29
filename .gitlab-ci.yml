@@ -28,11 +28,11 @@ before_script:
   - mkdir -p logs
 
 cache: &cache
-  - key:
-      files:
+  key:
+    files:
       - yarn.lock
-      paths:
-      - node_modules/
+  paths:
+    - node_modules/
 
 # ================== templates ================== #
 .base_template: &base_template
