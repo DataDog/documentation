@@ -60,11 +60,14 @@ Vous pouvez effectuer une recherche d'attribut numérique dans un intervalle sp�
 
 ## Exemples
 
-| Requête de recherche                                                 | Description                                                                                                                                         |
-|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                      | Recherche toutes les vues contenant `/api/v1/test` dans l'attribut `http.url_details.path`.                                                              |
-| `@http.url:\/api\/v1\/*`                                     | Recherche toutes les vues dont la valeur de l'attribut `http.url` commence par `/api/v1/`.                                                            |
-| `@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*` | Recherche toutes les vues dont la `duration` est comprise entre 100 et 300 ns et dont la valeur de l'attribut `http.url_details.path` commence par `/api/v1/`. |
+`@http.url_details.path:"/api/v1/test"`
+: Recherche toutes les vues contenant `/api/v1/test` dans l'attribut `http.url_details.path`.
+
+`@http.url:\/api\/v1\/*`
+: Recherche toutes les vues dont la valeur de l'attribut `http.url` commence par `/api/v1/`.
+
+`@duration:[100 TO 300] @http.url_details.path:\/api\/v1\/*`
+: Recherche toutes les vues dont la `duration` est comprise entre 100 et 300 ns et dont la valeur de l'attribut `http.url_details.path` commence par `/api/v1/`.
 
 ## Pour aller plus loin
 

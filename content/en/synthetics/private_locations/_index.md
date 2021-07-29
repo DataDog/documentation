@@ -30,7 +30,7 @@ Private locations come as Docker containers that you can install wherever makes 
 
 Your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog’s servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
 
-{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign Synthetic test to private location"  style="width:100%;">}}
+{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign a Synthetic test to a private location"  style="width:100%;">}}
 
 ## Prerequisites
 
@@ -106,7 +106,7 @@ Fill out your private location details:
 
 Then click **Save Location and Generate Configuration File** to create your private location and generate the associated configuration file (visible in **Step 3**).
 
-{{< img src="synthetics/private_locations/pl_creation.png" alt="Add details to private location"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pl_creation.png" alt="Add details to private location"  style="width:100%;">}}
 
 ### Configure your private location
 
@@ -116,7 +116,7 @@ Configure your private location by customizing the generated configuration file.
 
 If the traffic between your private location and Datadog has to go through a proxy, specify your proxy URL with the following format: `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` to add the associated `proxyDatadog` parameter to your generated configuration file.
 
-{{< img src="synthetics/private_locations/pl_proxy.png" alt="Add a proxy to your private location configuration file"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pl_proxy.png" alt="Add a proxy to your private location configuration file"  style="width:100%;">}}
 
 [Advanced proxy configuration options][5] are available.
 
@@ -126,7 +126,7 @@ By default, Synthetic users can create Synthetic tests on endpoints using any IP
 
 If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
 
-{{< img src="synthetics/private_locations/pl_reserved_ips.png" alt="Configure reserved IPs"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pl_reserved_ips.png" alt="Configure reserved IPs"  style="width:100%;">}}
 
 [Advanced reserved IPs configuration options][8] are available.
 
@@ -142,7 +142,7 @@ docker run --rm datadog/synthetics-private-location-worker --help
 
 After adding the appropriate options to your private location configuration file, you can copy paste the file to your working directory.
 
-{{< img src="synthetics/private_locations/pl_view_file.png" alt="Configure reserved IPs"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pl_view_file.png" alt="Configure reserved IPs"  style="width:100%;">}}
 
 **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen. **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
@@ -513,21 +513,21 @@ livenessProbe:
 
 Once at least one private location container starts reporting to Datadog the private location status is set to green:
 
-{{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting"  style="width:100%;">}}
 
 You can then start testing your first internal endpoint by launching a fast test on one of your internal endpoints and see if you get the expected response:
 
-{{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="80%">}}
+{{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="100%">}}
 
 ## Launch Synthetic tests from your private location
 
 If your private location reports correctly to Datadog you should also see an `OK` health status displayed on private locations list from the **Settings** page:
 
-{{< img src="synthetics/private_locations/pl_health.png" alt="Private location health"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pl_health.png" alt="Private location health"  style="width:100%;">}}
 
 You can then go to any of your API or Browser test creation form, and tick your **Private locations** of interest to have them run your Synthetic test on schedule:
 
-{{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign Synthetic test to private location"  style="width:80%;">}}
+{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location"  style="width:100%;">}}
 
 Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][11], etc.
 

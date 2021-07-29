@@ -28,7 +28,7 @@ Cette page propose un aperçu général des fonctionnalités du [site Datadog][1
 
 La solution [Log Management][5] de Datadog vous permet d'envoyer et de traiter chaque log généré par vos applications et votre infrastructure. Vous pouvez visualiser vos logs en temps réel à l'aide de la fonction Live Tail, sans avoir à les indexer. Il est possible d'ingérer tous les logs provenant de vos applications et de votre infrastructure, d'utiliser des filtres pour déterminer de façon dynamique les logs à indexer, puis de les stocker dans une archive.
 
-## APM et tracing distribué
+## APM et profileur en continu
 
 {{< img src="getting_started/apm.png" alt="apm dashboard"  >}}
 

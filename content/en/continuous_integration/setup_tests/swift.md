@@ -10,6 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -98,12 +99,16 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-<!-- TODO: uncomment this once we support any datacenter other than us1
-`DD_SITE`
-: The Datadog site to upload results to.<br/>
+{{< site-region region="eu" >}}
+Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
+
+`DD_SITE` (Required)
+: The [Datadog site][1] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Possible values**: `datadoghq.com`, `us3.datadoghq.com`, `datadoghq.eu`
--->
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+[1]: /getting_started/site/
+{{< /site-region >}}
 
 ### Collecting Git and build metadata
 
@@ -194,6 +199,7 @@ Additional Git configuration for physical device testing:
 | -------------------- | --------------- |
 | `GIT_COMMIT`         | `$(GIT_COMMIT)` |
 | `GIT_URL`            | `$(GIT_URL)`    |
+| `GIT_URL_1`          | `$(GIT_URL_1)`  |
 | `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
 {{% /tab %}}
@@ -387,7 +393,7 @@ Additional Git configuration for physical device testing:
 | Environment variable   | Value                     |
 | ---------------------- | ------------------------- |
 | `BITRISE_SOURCE_DIR`   | `$(BITRISE_SOURCE_DIR)`   |
-| `BITRISE_APP_TITLE`    | `$(BITRISE_APP_TITLE)`    |
+| `BITRISE_TRIGGERED_WORKFLOW_ID`  | `$(BITRISE_TRIGGERED_WORKFLOW_ID)`  |
 | `BITRISE_BUILD_SLUG`   | `$(BITRISE_BUILD_SLUG)`   |
 | `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
 | `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
@@ -417,3 +423,7 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
+{{< /site-region >}}
+{{< site-region region="us3,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}

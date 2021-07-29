@@ -1,14 +1,14 @@
 ---
-title: Log management billing
+title: Log Management Billing
 kind: documentation
 ---
 
 ## Pricing
 
-At the end of the month, we compute the total number of log events that have been indexed:
+At the end of the month, Datadog computes the total number of log events that have been indexed:
 
 - If you are below commitment, your bill stays the same.
-- If you over-consume, we subtract the committed amount and **on demand usage** is charged with a 50% premium.
+- If you over-consume, the committed amount is subtracted and **on demand usage** is charged with a 50% premium.
 
 ### On demand
 

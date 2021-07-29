@@ -84,5 +84,5 @@ The admission controller looks for this information in the pod labels. If not fo
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/guide/setting_primary_tags_to_scope/
 [3]: /metrics/distributions/#customize-tagging
-[4]: /logs/processing/pipelines/
+[4]: /logs/log_configuration/pipelines
 [5]: /agent/cluster_agent/admission_controller/

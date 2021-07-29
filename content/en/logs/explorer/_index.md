@@ -12,7 +12,7 @@ aliases:
     - /logs/explorer/analytics
     - /logs/explorer/transactions/
 further_reading:
-    - link: 'logs/processing'
+    - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
     - link: 'logs/explorer/live_tail'
@@ -208,7 +208,7 @@ At any moment, and depending on your current aggregation, **export** your explor
 [4]: /logs/indexes
 [5]: /logs/explorer/facets/
 [6]: /logs/logs_to_metrics
-[7]: /logs/processing/processors/#grok-parser
+[7]: /logs/log_configuration/processors/#grok-parser
 [8]: /dashboards/
 [9]: /monitors/monitor_types/log/
 [10]: /integrations/#cat-notification

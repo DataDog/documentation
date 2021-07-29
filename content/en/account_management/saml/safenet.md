@@ -1,5 +1,5 @@
 ---
-title: Configuring SafeNet as a SAML IdP
+title: SafeNet SAML IdP
 kind: documentation
 further_reading:
 - link: "/account_management/saml/"
@@ -17,7 +17,7 @@ Follow the [main SAML configuration instructions][2].
 
 * The IdP metadata is available in the SafeNet Trusted Access console by clicking the **Download Metadata** button.
 * In Datadog, ensure the **Identity Provider (IdP) Initiated Login** box is checked.
-* Datadog’s [Service Provider metadata][3] is needed.
+* Datadog's [Service Provider metadata][3] is needed.
 
 ## SafeNet
 

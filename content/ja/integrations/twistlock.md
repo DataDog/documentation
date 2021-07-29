@@ -185,12 +185,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベントを送信します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "twistlock" >}}
 
-Prisma Cloud Compute Edition は、スキャンに失敗すると、サービスチェックを送信します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud

@@ -98,17 +98,17 @@ Agent バージョン 6.18.0/7.18.0 に付属のチェックバージョン 5.0.
 - VmPoweredOffEvent
 
 ### サービスのチェック
+{{< get-service-checks-from-git "vsphere" >}}
 
-**vcenter.can_connect**:<br>
-Agent が vCenter に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-- [VMWare インテグレーションを使用してプルされる VM の数を制限できますか][9]
+- [VMWare インテグレーションを使用してプルされる VM の数を制限できますか？][10]
+- [私の vSphere VM がインフラストラクチャーリストビューに複製されています][11]
 
 ## その他の参考資料
 
-Datadog を使用した vSphere 環境の監視については、Datadog の[ブログ記事][10]を参照してください。
+Datadog を使用した vSphere 環境の監視については、Datadog の[ブログ記事][12]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/vsphere/images/vsphere_graph.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -118,5 +118,7 @@ Datadog を使用した vSphere 環境の監視については、Datadog の[ブ
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.monitoring.doc/GUID-25800DE4-68E5-41CC-82D9-8811E27924BC.html
 [8]: https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv
-[9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
-[10]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers
+[9]: https://github.com/DataDog/integrations-core/blob/master/vsphere/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
+[11]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
+[12]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers

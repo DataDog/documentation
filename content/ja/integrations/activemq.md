@@ -167,9 +167,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ActiveMQ チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "activemq" >}}
 
-**activemq.can_connect**:<br>
-Agent が監視対象の ActiveMQ インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` が返されます。そうでない場合は `OK` が返されます。
 
 ## トラブルシューティング
 

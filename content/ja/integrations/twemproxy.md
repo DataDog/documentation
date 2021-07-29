@@ -135,13 +135,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Twemproxy チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "twemproxy" >}}
 
-**twemproxy.can_connect**:<br>
-Agent が Twemproxy 統計エンドポイントに接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

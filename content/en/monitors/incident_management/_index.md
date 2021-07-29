@@ -23,6 +23,8 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents.  You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
+**Note**: Manage and create incidents with the [Datadog Mobile App][13], available on the [Apple App Store][14] and [Google Play Store][15].
+
 ### Creating an incident
 
 #### From a graph
@@ -167,3 +169,6 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [10]: /integrations/webhooks/
 [11]: /integrations/webhooks/#sending-sms-through-twilio
 [12]: /getting_started/incident_management
+[13]: /mobile
+[14]: https://apps.apple.com/app/datadog/id1391380318
+[15]: https://play.google.com/store/apps/details?id=com.datadog.app

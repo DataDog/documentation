@@ -60,8 +60,7 @@ supported_os:
  `datadog-agent integration install -w
  path/to/php_opcache/dist/<ARTIFACT_NAME>.whl`.
 
-#### OPcache のセットアップ
-
+#### OPcache
 
 OPcache はデフォルトでメトリクスを公開しないため、このインテグレーションには、次の場所にあるメトリクスエクスポーターが含まれます。
 
@@ -99,17 +98,18 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 {{< get-metrics-from-git "php_opcache" >}}
 
 
-### サービスのチェック
-
-`php_opcache` には、サービスのチェック機能は含まれません。
-
 ### イベント
 
-`php_opcache` には、イベントは含まれません。
+PHP OPcache インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "php_opcache" >}}
+
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
 
 [1]: https://www.php.net/manual/en/book.opcache.php
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -120,4 +120,5 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/php_opcache/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://github.com/DataDog/integrations-extras/blob/master/php_opcache/assets/service_checks.json
+[11]: https://docs.datadoghq.com/ja/help/
