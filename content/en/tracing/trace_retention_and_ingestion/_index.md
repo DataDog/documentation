@@ -51,7 +51,7 @@ For more information, refer to the [Usage Metrics][1] documentation, or see the 
 
 ### Datadog intelligent retention filter
 
-Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [top level spans][4] are indexed for the traces kept by the intelligent retention filter.
+Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][4] are indexed for the traces kept by the intelligent retention filter.
 
 For 30 days, intelligent retention retains:
 
@@ -72,11 +72,11 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 
 1. Name your filter.
 2. Set the tags you would like to index spans that match **all** of.
-3. Select whether this filter will retain any span that matches the criteria, or only [top level spans][4].
+3. Select whether this filter will retain any span that matches the criteria, or only [service entry spans][4].
 4. Set a percentage of spans matching these tags to be indexed.
 5. Save your new filter.
 
-**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][4] of service and index them. Use this if you want to only index top level spans with matching tags. If "All Spans" is selected, the retention filter will retain the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and index them.  This may have an impact on your bill, and the visual indicator within the app while setting a retention filter will inform you how many matching spans have been detected over the time period.
+**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [service entry spans][4] of service and index them. Use this if you want to only index service entry spans with matching tags. If "All Spans" is selected, the retention filter will retain the selected proportion of all spans of the distributed trace, irrespective of their hierarchy, and index them.  This may have an impact on your bill, and the visual indicator within the app while setting a retention filter will inform you how many matching spans have been detected over the time period.
 
 For example, you can create filters to keep all traces for:
 
@@ -196,7 +196,7 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [1]: /tracing/trace_retention_and_ingestion/usage_metrics
 [2]: https://app.datadoghq.com/apm/traces/retention-filters
 [3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[4]: /tracing/visualization/#top-level-span
+[4]: /tracing/visualization/#service-entry-span
 [5]: /tracing/trace_search_and_analytics/#historical-search-mode
 [6]: https://app.datadoghq.com/apm/traces/ingestion-control
 [7]: /account_management/billing/apm_distributed_tracing/

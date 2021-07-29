@@ -103,7 +103,7 @@ App Analytics is available starting in version 0.17.0 of the PHP tracing client,
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-App Analytics is available starting in version 1.0.0 of the C++ tracing client, and can be enabled globally for all top level spans by setting the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`. Note that this setting can also be set in the code directly:
+App Analytics is available starting in version 1.0.0 of the C++ tracing client, and can be enabled globally for all service entry spans by setting the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`. Note that this setting can also be set in the code directly:
 
 ```csharp
 datadog::opentracing::TracerOptions tracer_options;
