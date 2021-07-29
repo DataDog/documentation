@@ -26,7 +26,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+: 5.6 or 5.7
 
 Supported Agent versions
 : 7.30.0+
@@ -36,7 +36,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -65,19 +65,6 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
-ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL 5.6 & 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
@@ -304,8 +291,8 @@ If you have installed and configured the integrations and Agent as described and
 [1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[4]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema.html
+[5]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases

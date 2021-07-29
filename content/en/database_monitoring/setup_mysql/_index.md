@@ -5,7 +5,7 @@ description: Setting up Database Monitoring on a MySQL database
 disable_sidebar: true
 ---
 
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -15,7 +15,7 @@ disable_sidebar: true
 |--|------------|---------|------------|------------------|
 | MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| MySQL 5.8 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| MySQL 8.0 | {{< X >}} | {{< X >}} | N/A | {{< X >}} |
 
 For setup instructions, select your hosting type:
 
