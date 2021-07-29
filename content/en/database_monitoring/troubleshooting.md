@@ -263,7 +263,7 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
-| The query cannot be explained (such as BEGIN). | The query cannot yield a valid explain plan. |
+| The query cannot be explained | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The application client used to connect to the database is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][1] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][2] and Python client [asyncpg][3] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters.  |
 | The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][4] to capture the query. |
 
@@ -280,13 +280,13 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
-| The query cannot be explained (such as BEGIN). | The query cannot yield a valid explain plan. |
+| The query cannot be explained | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][1] to capture the query. |
-
 
 [1]: /database_monitoring/setup_mysql/advanced_configuration/
 {{% /tab %}}
 {{< /tabs >}}
+
 
 ## Need more help?
 
