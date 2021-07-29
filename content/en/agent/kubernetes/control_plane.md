@@ -348,7 +348,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners. Where they are running can be observed with
+The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners. The nodes they are running on can be identified with:
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -364,7 +364,7 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 ```
 
- These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Note that mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
+ These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
 
 
 {{< tabs >}}
@@ -427,7 +427,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 ```
 
-The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners.
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 ### Controller Manager
@@ -443,7 +443,7 @@ oc annotate service kube-controller-manager -n openshift-kube-controller-manager
 
 ```
 
-The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners.
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 
@@ -460,7 +460,7 @@ oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endp
 
 ```
 
-The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners.
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 ## Kubernetes on OpenShift 3 {#OpenShift3}
@@ -486,7 +486,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners. Where they are running can be observed with
+The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners. The nodes they are running on can be identified with:
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -495,7 +495,7 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Note that mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
+Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -563,7 +563,7 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 
 ```
 
-The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners.
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 ### Controller Manager and Scheduler
@@ -587,7 +587,7 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 
 ```
 
-The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners.
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 ## Kubernetes on managed services (AKS, GKE) {#ManagedServices}
