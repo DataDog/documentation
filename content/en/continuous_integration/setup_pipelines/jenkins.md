@@ -23,7 +23,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 ## Install the Datadog Jenkins plugin
 
-Install and enable the [Datadog Jenkins plugin][2] v3.0.0 or newer:
+Install and enable the [Datadog Jenkins plugin][2] v3.1.0 or newer:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
 2. In the [Update Center][3] on the **Available** tab, search for `Datadog Plugin`.
@@ -47,8 +47,6 @@ Install and enable the [Datadog Jenkins plugin][2] v3.0.0 or newer:
 Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
-
-**Note**: Enabling CI Visibility using the Jenkins plugin is not compatible with running the Java APM tracer as a Java agent when launching Jenkins.
 
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins"  style="width:100%;">}}
 
@@ -222,20 +220,9 @@ If the CI Visibility option does not appear in the Datadog Plugin section, make 
 
 ### The Plugin Tracer failed to initialized due to APM Java Tracer is used to instrument Jenkins
 
-If this error message appears in the **Jenkins Log**, make sure that you are not using the APM Java Tracer to instrument your Jenkins instance.
+If this error message appears in the **Jenkins Log**, make sure that you are using the Jenkins plugin v3.1.0+
 
-{{< code-block lang="text" >}}
-Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
-{{< /code-block >}}
-
-1. Access your Jenkins controller instance machine using the console.
-2. Check the Java startup line for the Jenkins process.
-{{< code-block lang="shell" >}}
-$> ps -ef | grep jenkins
-{{< /code-block >}}
-3. Ensure you are not using the APM Java Tracer as `-javaagent`.
-
-**Note**: Enabling CI Visibility using the Jenkins plugin is not compatible with running the Java APM tracer as a Java agent when launching Jenkins.
+**Note**: Enabling CI Visibility using the Jenkins plugin is only compatible with Java APM tracer as a Java agent since version 3.1.0+
 
 ## Further reading
 
