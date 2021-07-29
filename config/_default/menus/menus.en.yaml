@@ -341,11 +341,6 @@ main:
     url: getting_started/application/
     parent: getting_started
     weight: 1
-  - name: Monitors
-    identifier: getting_started_monitors
-    url: getting_started/application/monitors
-    parent: getting_started_datadog
-    weight: 101
   - name: Datadog Site
     identifier: getting_started_datadog_site
     url: getting_started/site/
@@ -371,74 +366,79 @@ main:
     url: getting_started/dashboards/
     parent: getting_started
     weight: 5
+  - name: Monitors
+    identifier: getting_started_monitors
+    url: getting_started/monitors/
+    parent: getting_started
+    weight: 6
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: Profiler
     identifier: getting_started_profiler
     url: getting_started/profiler/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 901
+    weight: 1001
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 902
+    weight: 1002
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 903
+    weight: 1003
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1102
+    weight: 1202
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1101
+    weight: 1201
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1103
+    weight: 1203
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 12
+    weight: 13
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 13
+    weight: 14
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -1669,41 +1669,51 @@ main:
     url: tracing/visualization/services_map/
     parent: tracing_vis
     weight: 1405
+  - name: Error Tracking
+    url: tracing/error_tracking/
+    identifier: tracing_error_tracking
+    parent: tracing
+    weight: 15
+  - name: Explorer
+    url: tracing/error_tracking/explorer
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_explorer
+    weight: 1501
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 15
+    weight: 16
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 16
+    weight: 17
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1601
+    weight: 1701
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1602
+    weight: 1702
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1603
+    weight: 1703
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1604
+    weight: 1704
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1605
+    weight: 1705
   - name: CI Visibility
     url: continuous_integration/
     pre: nav_ci
@@ -2122,41 +2132,46 @@ main:
     parent: synthetics
     identifier: synthetics_ci
     weight: 5
+  - name: Testing Tunnel
+    url: /synthetics/testing_tunnel
+    parent: synthetics
+    identifier: synthetics_testing_tunnel
+    weight: 6
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 6
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 7
+    weight: 8
   - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
-    weight: 8
+    weight: 9
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 9
+    weight: 10
   - name: Identify Synthetic Bots
     url: synthetics/guide/identify_synthetics_bots/
     parent: synthetics
-    weight: 10
+    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 12
+    weight: 13
   - name: Security
     url: security/synthetics/
     parent: synthetics
-    weight: 13
+    weight: 14
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum_2
@@ -2680,6 +2695,9 @@ footer_product_three:
   - name: Resources
     url: 'https://www.datadoghq.com/resources/'
     weight: 150
+  - name: Webinars
+    url: 'https://www.datadoghq.com/webinars/'
+    weight: 160
   - name: Security
     url: 'https://www.datadoghq.com/security/'
     weight: 180

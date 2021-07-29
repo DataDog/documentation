@@ -312,6 +312,10 @@ options = {
 initialize(**options)
 ```
 
+<div class="alert alert-warning">
+  By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. For more information, refer to the <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">Python client documentation</a>.
+</div>
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -323,6 +327,10 @@ require 'datadog/statsd'
 # Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
+
+<div class="alert alert-warning">
+  By default, Ruby DogStatsD client instances cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>single_thread</code> to <code>true</code>. For more information, refer to the <a href="https://github.com/DataDog/dogstatsd-ruby">Ruby client documentation</a>.
+</div>
 
 {{< /programming-lang >}}
 
@@ -411,7 +419,9 @@ using (var dogStatsdService = new DogStatsdService())
 
 {{< /programming-lang-wrapper >}}
 
-**Note**: If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the `$DD_DOGSTATSD_SOCKET` environment variable if using a Unix Domain Socket, or with the `$DD_AGENT_HOST` environment variable if you are using the host port binding method.
+<div class="alert alert-info">
+  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
+</div>
 
 ### Client instantiation parameters
 
@@ -429,21 +439,26 @@ In addition to the required DogStatsD configuration (`url` and `port`), the foll
 | `statsd_constant_tags` | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
 | `statsd_namespace`     | String          | `null`      | Namespace to prefix all metrics, events, and service checks.                                                   |
 
-For more information, see the [DogStatsD module][1] documentation.
+For the full list of optional parameters available for `datadog.initialize()` as well as parameters only available when explicitly instantiating `datadog.dogstatsd.DogStatsd` instances, see the [Python client documentation][1].
 
 
 [1]: https://datadogpy.readthedocs.io/en/latest
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                    |
-| ------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
-| `host`        | String          | `localhost` | The host of your DogStatsD server.                                                                             |
-| `port`        | Integer         | `8125`      | The port of your DogStatsD server.                                                                             |
-| `socket_path` | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
-| `tags`        | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
-| `namespace`   | String          | `null`      | Namespace to prefix to all metrics, events, and service checks.                                                |
+| Parameter       | Type            | Default     | Description                                                                                                    |
+| --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
+| `host`          | String          | `localhost` | The host of your DogStatsD server.                                                                             |
+| `port`          | Integer         | `8125`      | The port of your DogStatsD server.                                                                             |
+| `socket_path`   | String          | `null`      | The path to the DogStatsD Unix domain socket (overrides `host` and `port`, only supported with the Agent v6+). |
+| `tags`          | List of strings | `null`      | Tags to apply to all metrics, events, and service checks.                                                      |
+| `namespace`     | String          | `null`      | Namespace to prefix to all metrics, events, and service checks.                                                |
+| `single_thread` | Boolean         | `false`     | Makes the client send the metrics on the main thread when enabled rather than in a companion thread.           |
 
+For the full list of optional parameters, see the [Ruby client documentation][1].
+
+
+[1]: https://github.com/DataDog/dogstatsd-ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 

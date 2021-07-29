@@ -108,12 +108,12 @@ Datadog では、[すべてのログ][18]を取り込み分析し、環境全体
 
 [1]: /ja/security_monitoring/
 [2]: /ja/logs/log_collection/?tab=http#application-log-collection
-[3]: /ja/logs/processing/processors/?tab=ui#grok-parser
+[3]: /ja/logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
-[5]: /ja/logs/processing/attributes_naming_convention/
-[6]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes
-[7]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/#events
-[8]: /ja/logs/processing/attributes_naming_convention/#network
+[5]: /ja/logs/log_configuration/attributes_naming_convention
+[6]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[7]: /ja/logs/log_configuration/attributes_naming_convention/#events
+[8]: /ja/logs/log_configuration/attributes_naming_convention/#network
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule

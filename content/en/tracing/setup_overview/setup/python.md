@@ -47,7 +47,7 @@ pip install ddtrace
 **Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
 
 ```python
-sudo -H pip3 install --upgrade pip
+pip install --upgrade pip
 ```
 
 Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.

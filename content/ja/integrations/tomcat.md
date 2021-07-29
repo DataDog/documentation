@@ -275,9 +275,8 @@ mydomain:attr0=val0,attr1=val1
 Tomcat チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "tomcat" >}}
 
-**tomcat.can_connect**:<br>
-Agent が監視対象の Tomcat インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。そうでない場合は、`OK` を返します。
 
 ## トラブルシューティング
 

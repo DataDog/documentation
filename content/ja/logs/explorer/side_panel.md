@@ -5,7 +5,7 @@ description: すべてのログを検索し、ログ分析を実行します
 aliases:
   - /ja/logs/explorer/sidepanel
 further_reading:
-  - link: logs/processing
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
   - link: /tracing/connect_logs_and_traces
@@ -84,10 +84,10 @@ Datadog は次の一般的なサイドパネルレイアウトに従い、個々
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/pipelines/
+[1]: /ja/logs/log_configuration/pipelines
 [2]: /ja/integrations/#cat-log-collection
 [3]: /ja/agent/autodiscovery/integrations/?tab=kubernetes
-[4]: /ja/logs/processing/attributes_naming_convention/
+[4]: /ja/logs/log_configuration/attributes_naming_convention
 [5]: /ja/dashboards/#preset-lists
 [6]: /ja/network_monitoring/performance/network_page/
 [7]: /ja/infrastructure/livecontainers/?tab=linuxwindows#introduction
