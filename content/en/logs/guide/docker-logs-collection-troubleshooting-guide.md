@@ -31,7 +31,7 @@ There are a number of common issues that can get in the way when sending new con
 
 3. If the Logs Agent Status doesn't look like the above, refer to the troubleshooting tips in the following sections.
 
-4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#status-no-errors)
+4. If you see a status like the above example and you still aren't receiving logs, see the [Status: no errors](#status-no-errors) section.
 
 ## Logs Agent
 
