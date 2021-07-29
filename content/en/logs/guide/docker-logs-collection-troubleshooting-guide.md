@@ -31,7 +31,7 @@ There are a number of common issues that can get in the way when sending new con
 
 3. If the Logs Agent Status doesn't look like the above, refer to the troubleshooting tips in the following sections.
 
-4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#if-the-logs-agent-status-shows-no-errors)
+4. If you see a status like the above example and you still aren't receiving logs, refer to the section [If the Logs Agent Status shows no errors](#status-no-errors)
 
 ## Logs Agent
 
@@ -83,7 +83,7 @@ When collecting Docker container logs from file, the Agent falls back on collect
 
 This status means that the Agent is unable to find a log file for a given container. To resolve this issue, check that the folder containing Docker container logs is correctly exposed to the Datadog Agent container. On Linux, it corresponds to  `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` on the command line starting the Agent container, whereas on Windows it corresponds to `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro`. Note that the directory relative to the underlying host may be different due to specific configuration of the Docker daemon—this is not an issue pending a correct Docker volume mapping. For example, use `-v /data/docker/containers:/var/lib/docker/containers:ro` if the Docker data directory has been relocated to `/data/docker` on the underlying host.
 
-If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver][#your-containers-are-not-using-the-json-logging-driver].
+If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
 Log collection from file is activated when the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` is set to `true`. However, some containers may still be tailed from the Docker socket despite this setting. Only containers started after the activation of the option will have their logs collected from file. This situation is typically found when the Datadog Agent is upgraded from a version that was not offering this feature. If desired, it is possible to force all containers (including older ones) to have their logs collected from file by setting the environment variable `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This may lead to some duplicated logs when the transition occurs.
 
