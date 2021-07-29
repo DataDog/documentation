@@ -26,7 +26,9 @@ To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the fo
 
 Session Replay is available through a dedicated build of the RUM Browser SDK. To enable Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
-#### npm
+{{< tabs >}}
+{{% tab "npm" %}}
+
 Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] When `datadogRum.init()` is called, it also starts the Session Replay recording.
 
 ``` javascript
@@ -46,9 +48,12 @@ datadogRum.init({
 
 DD_RUM.startSessionReplayRecording();
 ```
+{{% /tab %}}
+{{% tab "CDN" %}}
 
-#### CDN
 Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, it also starts the Session Replay recording.
+
+{{% /tab %}}
 
 *Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
 
