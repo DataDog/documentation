@@ -121,7 +121,6 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 3. [Agent を再起動します][4]。
 
-
 ### 検証
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `lighttpd` を探します。
@@ -137,9 +136,8 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 Lighttpd チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "lighttpd" >}}
 
-**lighttpd.can_connect**:<br>
-Agent が lighttpd に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

@@ -132,17 +132,14 @@ from datadog_cdk_constructs import Datadog
 datadog = Datadog(self, "Datadog",
     python_layer_version=<VERSION_COUCHE>,
     extension_layer_version=<VERSION_COUCHE_EXTENSION>,
-    dd_api_key=<CLÉ_API_DATADOG>,
-    service=<SERVICE>, # Facultatif
-    env=<ENV>, # Facultatif
+    dd_api_key=<CLÉ_API_DATADOG>
 )
 datadog.add_lambda_functions([<FONCTIONS_LAMBDA>])
 ```
 
 Pour remplir les paramètres fictifs, procédez comme suit :
 
-- Remplacez `<CLÉ_API_DATADOG>` par votre clé d'API Datadog, disponible sur la [page de gestion des API][3]. 
-- Remplacez `<SERVICE>` et `<ENV>` par les valeurs appropriées.
+- Remplacez `<CLÉ_API_DATADOG>` par votre clé d'API Datadog, disponible sur la [page de gestion des API][3].
 - Remplacez `<VERSION_COUCHE>` par la version de votre choix de la couche Lambda Datadog (consultez les [dernières versions][2]).
 - Remplacez `<VERSION_EXTENSION>` par la version de votre choix de l'extension Lambda Datadog (consultez les [dernières versions][4]).
 

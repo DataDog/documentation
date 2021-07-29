@@ -3436,6 +3436,145 @@ components:
           example: ok
           type: string
       type: object
+    ListStreamColumn:
+      description: Widget column.
+      example:
+        field: timestamp
+        width: auto
+      properties:
+        field:
+          description: Widget column field.
+          example: content
+          type: string
+        width:
+          $ref: '#/components/schemas/ListStreamColumnWidth'
+      required:
+      - width
+      - field
+      type: object
+    ListStreamColumnWidth:
+      description: Widget column width.
+      enum:
+      - auto
+      - compact
+      - full
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - COMPACT
+      - FULL
+    ListStreamQuery:
+      description: Updated list stream widget.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/ListStreamSource'
+        indexes:
+          description: List of indexes.
+          items:
+            description: Index.
+            type: string
+          type: array
+        query_string:
+          description: Widget query.
+          example: '@service:app'
+          type: string
+      required:
+      - query_string
+      - data_source
+      type: object
+    ListStreamResponseFormat:
+      description: Widget response format.
+      enum:
+      - event_list
+      type: string
+      x-enum-varnames:
+      - EVENT_LIST
+    ListStreamSource:
+      default: issue_stream
+      description: Source from which to query items to display in the stream.
+      enum:
+      - issue_stream
+      - logs_stream
+      example: issue_stream
+      type: string
+      x-enum-varnames:
+      - ISSUE_STREAM
+      - LOGS_STREAM
+    ListStreamWidgetDefinition:
+      description: 'The list stream visualization displays a table of recent events
+        in your application that
+
+        match a search criteria using user-defined columns.
+
+        '
+      properties:
+        legend_size:
+          $ref: '#/components/schemas/WidgetLegendSize'
+        requests:
+          description: Request payload used to query items.
+          example:
+          - response_format: event_list
+          - columns:
+            - field: timestamp
+              width: auto
+          - query:
+              data_source: issue_stream
+              query_string: '@data_source:APM'
+          items:
+            $ref: '#/components/schemas/ListStreamWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        show_legend:
+          description: Whether or not to display the legend on this widget.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/ListStreamWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    ListStreamWidgetDefinitionType:
+      default: list_stream
+      description: Type of the list stream widget.
+      enum:
+      - list_stream
+      example: list_stream
+      type: string
+      x-enum-varnames:
+      - LIST_STREAM
+    ListStreamWidgetRequest:
+      description: Updated list stream widget.
+      properties:
+        columns:
+          description: Widget columns.
+          example:
+          - field: timestamp
+            width: auto
+          - field: content
+            width: full
+          items:
+            $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        query:
+          $ref: '#/components/schemas/ListStreamQuery'
+        response_format:
+          $ref: '#/components/schemas/ListStreamResponseFormat'
+      required:
+      - columns
+      - query
+      - response_format
+      type: object
     Log:
       description: Object describing a log after being processed and stored by Datadog.
       properties:
@@ -13806,6 +13945,7 @@ components:
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.

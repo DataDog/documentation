@@ -52,7 +52,7 @@ For more information on how to set up private locations, see [Getting Started wi
 
 Select the frequency at which you want your test to execute. 
 
-In addition to running your Synthetic test on a schedule, you can trigger them directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][4].
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][4].
 
 
 #### Define alert conditions
@@ -73,7 +73,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][5] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams.
 
 You can set your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 

@@ -117,19 +117,16 @@ instances:
 TCP チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "tcp_check" >}}
 
-**tcp.can_connect**:<br>
-設定された `host` および `port` に Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-Datadog でこのサービスチェックのアラート条件を作成するには、[Create Monitor][4] ページで **Integration** ではなく **Network** をクリックしてください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://app.datadoghq.com/monitors#/create
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/help/

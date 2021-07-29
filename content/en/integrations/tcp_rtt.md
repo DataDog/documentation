@@ -10,8 +10,10 @@ categories:
     - network
 ddtype: check
 dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md']
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md']
 integration_id: "tcp-rtt"
+aliases:
+    - /integrations/tcprtt
 ---
 
 ## Overview

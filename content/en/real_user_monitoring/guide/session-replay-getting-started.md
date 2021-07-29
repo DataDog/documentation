@@ -9,6 +9,10 @@ further_reading:
   text: 'Visualize your RUM data in the Explorer'
 ---
 
+<div class="alert alert-info"><p>Session Replay is in private beta. There are no billing implications for the Session Replays during this period. If you want to be added to the private beta, sign up by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
+<p>Note: Session Replay is not a <a href="https://www.datadoghq.com/legal/hipaa-eligible-services/">HIPAA eligible service</a>. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
+</div>
+
 ## What is Session Replay?
 
 Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users.
@@ -23,10 +27,10 @@ To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the fo
 Session Replay is available through a dedicated build of the RUM Browser SDK. To enable Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
-Replace the `@datadog/browser-rum package` with [`@datadog/browser-rum-recorder`][2] When `datadogRum.init()` is called, it also starts the Session Replay recording.
+Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] When `datadogRum.init()` is called, it also starts the Session Replay recording.
 
 ``` javascript
-import { datadogRum } from '@datadog/browser-rum-recorder'
+import { datadogRum } from '@datadog/browser-rum'
 
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
@@ -36,12 +40,15 @@ datadogRum.init({
   //  env: 'production',
   //  version: '1.0.0',
   sampleRate: 100,
+  replaySampleRate: 100,
   trackInteractions: true,
 })
+
+DD_RUM.startSessionReplayRecording();
 ```
 
 #### CDN
-Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-recorder.js`. When `DD_RUM.init()` is called, it also starts the Session Replay recording.
+Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, it also starts the Session Replay recording.
 
 *Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
 
@@ -49,12 +56,9 @@ Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum
 
 The usual [RUM initialization parameters][4] are all supported. 
 
-In addition, the Session Replay recorder accepts a `manualSessionReplayRecordingStart` option. If set to `true`, the Session Replay recording will not start automatically when calling `init()`. To then start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording (e.g, to only record authenticated user sessions):
+The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example to only record authenticated user sessions:
 
 ``` javascript
-DD_RUM.init({
-	manualSessionReplayRecordingStart: true
-})
 if (user.isAuthenticated) {
 	DD_RUM.startSessionReplayRecording()
 }
@@ -150,7 +154,7 @@ Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will
 Session Replay follows the same 30 days retention policy as normal RUM sessions.
 
 [1]: /real_user_monitoring/browser/#setup
-[2]: https://www.npmjs.com/package/@datadog/browser-rum-recorder
+[2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [4]: /real_user_monitoring/browser/#initialization-parameters
 [5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin

@@ -1,5 +1,5 @@
 ---
-title: Agent v5 を使用した APM と分散型トレーシング
+title: APM & Continuous Profiler と Agent v5
 kind: ガイド
 private: true
 aliases:

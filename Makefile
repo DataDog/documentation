@@ -84,7 +84,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'stunnel.md' \
 		-a -not -name 'syslog_ng.md' \
 		-a -not -name 'system.md' \
-		-a -not -name 'tcprtt.md' \
+		-a -not -name 'tcp_rtt.md' \
 		-a -not -name 'uwsgi.md' \
 		-exec rm -rf {} \;
 	@find ./content/en/security_platform/default_rules -type f -maxdepth 1 \

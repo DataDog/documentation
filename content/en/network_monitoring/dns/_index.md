@@ -31,7 +31,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-If you are using the most recent version of the Agent, including on a host, DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
+If you are using the most recent version of the Agent, including on a host, DNS Monitoring metrics are collected automatically by the system probe with agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
 
 If you are using [Kubernetes on Helm][3], to enable DNS monitoring, you need to set `collectDNSStats:` to `true` in the [values.yaml][4].
 

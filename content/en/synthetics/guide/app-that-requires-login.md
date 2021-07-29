@@ -2,16 +2,18 @@
 title: Running tests on an application that requires authentication
 kind: guide
 further_reading:
-    - link: 'synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Configure a Browser Test'
-    - link: '/synthetics/browser_tests/actions'
-      tag: 'Documentation'
-      text: 'Create Browser Test Steps'
-    - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
-      tag: 'Blog'
-      text: 'Best practices for creating end-to-end tests'
-
+  - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
+    tag: 'Blog'
+    text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
+  - link: 'synthetics/browser_tests'
+    tag: 'Documentation'
+    text: 'Browser Tests'
+  - link: '/synthetics/browser_tests/actions'
+    tag: 'Documentation'
+    text: 'Browser Test Steps'
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+    tag: 'Blog'
+    text: 'Best practices for creating end-to-end tests'
 ---
 
 You might need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
@@ -50,7 +52,11 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 ### Multi-factor authentication
 
-Browser tests can reproduce any actions a regular user can take inside their browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a browser, you can record it when setting up your browser test. Some MFA providers might however detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][7], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
+
+Browser tests can reproduce any actions a regular user takes inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser. 
+
+Some MFA providers may detect Datadog's browser tests as bots and prevent them from logging in, for instance, by adding a reCAPTCHA. In this case, contact your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers).
 
 If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
@@ -89,3 +95,4 @@ Once you create the secure variables, you can then [import these global variable
 [4]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [5]: /synthetics/settings/?tab=specifyvalue#global-variables
 [6]: /synthetics/browser_tests/actions#a-global-variable
+[7]: https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/
