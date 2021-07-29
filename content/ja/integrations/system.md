@@ -103,7 +103,7 @@ System コアチェックには、イベントは含まれません。
 
 #### サービスチェック
 
-System コアチェックには、サービスのチェック機能は含まれません。
+{{< get-service-checks-from-git "system_core" >}}
 
 ## System スワップ
 

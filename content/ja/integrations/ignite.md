@@ -147,12 +147,12 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Ignite インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "ignite" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 
@@ -160,5 +160,4 @@ Ignite インテグレーションには、イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/agent/
 [3]: https://apacheignite.readme.io/docs/logging#section-log4j
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/ignite/assets/service_checks.json
-[6]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
+[5]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example

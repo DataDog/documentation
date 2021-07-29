@@ -240,8 +240,8 @@ Docker環境でログを収集する Agent を構成する追加の情報に関�
 Solr チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "solr" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
@@ -291,4 +291,3 @@ attribute:
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/integrations/java/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/solr/assets/service_checks.json

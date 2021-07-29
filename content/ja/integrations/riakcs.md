@@ -102,17 +102,16 @@ RiakCS チェックは [Datadog Agent][2] パッケージに含まれていま�
 RiackCS チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "riakcs" >}}
 
-**riakcs.can_connect**:
-Agent が RiakCS エンドポイントに接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
-Riak CS のパフォーマンスと可用性を監視する方法 (または理由) について理解するには、Datadog の[ブログ記事][10]を参照してください。
+Riak CS のパフォーマンスと可用性を監視する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][11]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riakcs/images/riakcs_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -122,5 +121,6 @@ Riak CS のパフォーマンスと可用性を監視する方法 (または理�
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/riakcs/metadata.csv
 [8]: https://github.com/basho/riak_cs/wiki/Riak-cs-and-stanchion-metrics
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability
+[9]: https://github.com/DataDog/integrations-core/blob/master/riakcs/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability

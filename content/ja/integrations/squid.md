@@ -139,13 +139,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Squid チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "squid" >}}
 
-**squid.can_connect**:<br>
-Agent が Squid に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: http://www.squid-cache.org/
