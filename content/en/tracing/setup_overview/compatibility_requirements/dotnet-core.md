@@ -19,6 +19,7 @@ further_reading:
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
 </div>
 
+
 ## Compatibility
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
