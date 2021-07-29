@@ -334,13 +334,13 @@ On OpenShift 4, all control plane components can be monitored using endpoint che
 1. Enable the Datadog [Cluster Agent][7]
 1. Enable [Cluster Checks][8]
 1. Enable [Endpoint Checks][9]
-1. Ensure that you are logged in with sufficient permissions to edit services.
+1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
 ### API server
 
 The API server runs behind the service `kubernetes` in the `default` namespace. Annotate this service with the `kube_apiserver_metrics` configuration:
 
-```
+```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.init_configs=[{}]'
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true"}]'
@@ -350,7 +350,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners. Where they are running can be observed with
 
-```
+```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ```
@@ -359,12 +359,12 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
 
-```
+```shell
 oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/namespace: openshift-monitoring/namespace: <datadog agent namespace>/'  | oc create -f -
 
 ```
 
- These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Note that mounts are also included to disable the autoconfiguration file packaged with the agent.)
+ These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Note that mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
 
 
 {{< tabs >}}
@@ -418,7 +418,7 @@ spec:
 
 Then, annotate the service running in front of Etcd:
 
-```
+```shell
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.init_configs=[{}]'
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "tls_ca_cert": "/etc/etcd-certs/etcd-client-ca.crt", "tls_cert": "/etc/etcd-certs/etcd-client.crt",
@@ -432,11 +432,10 @@ The Datadog Cluster Agent will schedule the checks as endpoint checks and dispat
 
 ### Controller Manager
 
-The Controller Manager runs behind the service, `kube-controller-manager` in the `openshift-kube-controller-manager` namespace. Annotate the service with the check configuration:
+The Controller Manager runs behind the service `kube-controller-manager` in the `openshift-kube-controller-manager` namespace. Annotate the service with the check configuration:
 
 
-```
-
+```shell
 oc annotate service kube-controller-manager -n openshift-kube-controller-manager 'ad.datadoghq.com/endpoints.check_names=["kube_controller_manager"]'
 oc annotate service kube-controller-manager -n openshift-kube-controller-manager 'ad.datadoghq.com/endpoints.init_configs=[{}]'
 oc annotate service kube-controller-manager -n openshift-kube-controller-manager 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "ssl_verify": "false", "bearer_token_auth": "true"}]'
@@ -453,7 +452,7 @@ The Datadog Cluster Agent will schedule the checks as endpoint checks and dispat
 The Scheduler runs behind the service `scheduler` in the `openshift-kube-scheduler` namespace. Annotate the service with the check configuration:
 
 
-```
+```shell
 oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endpoints.check_names=["kube_scheduler"]'
 oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endpoints.init_configs=[{}]'
 oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "ssl_verify": "false", "bearer_token_auth": "true"}]'
@@ -479,7 +478,7 @@ On OpenShift 3, all control plane components can be monitored using endpoint che
 
 The API server runs behind the service `kubernetes` in the `default` namespace. Annotate this service with the `kube_apiserver_metrics` configuration:
 
-```
+```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.init_configs=[{}]'
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true"}]'
@@ -489,14 +488,14 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent will schedule the checks as endpoint checks and dispatch them to Cluster Check Runners. Where they are running can be observed with
 
-```
+```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ```
 
 ### Etcd
 
-Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Note that mounts are also included to disable the autoconfiguration file packaged with the agent.)
+Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Note that mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -546,21 +545,21 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-Direct edits of a service are not persisted, so make a copy of the Etcd service:
+Direct edits of this service are not persisted, so make a copy of the Etcd service:
 
-```
+```shell
 oc get service etcd -n kube-system -o yaml | sed 's/name: etcd/name: etcd-copy/'  | oc create -f -
 
 ```
 
 Annotate the copied service with the check configuration:
 
-```
-oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
-oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.init_configs=[{}]'
-oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "tls_ca_cert": "/host/etc/etcd/ca/ca.crt", "tls_cert": "/host/etc/etcd/server.crt",
+```shell
+oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
+oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.init_configs=[{}]'
+oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.instances=[{"prometheus_url": "https://%%host%%:%%port%%/metrics", "tls_ca_cert": "/host/etc/etcd/ca/ca.crt", "tls_cert": "/host/etc/etcd/server.crt",
       "tls_private_key": "/host/etc/etcd/server.key"}]'
-oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=ip'
+oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=ip'
 
 ```
 
@@ -569,16 +568,16 @@ The Datadog Cluster Agent will schedule the checks as endpoint checks and dispat
 
 ### Controller Manager and Scheduler
 
-The Controller Manager and Scheduler run behind the same service, `kube-controllers` in the `kube-system` namespace. Direct edits of the service are not allowed (they get overwritten), so first copy the service:
+The Controller Manager and Scheduler run behind the same service, `kube-controllers` in the `kube-system` namespace. Direct edits of the service are not persisted, so make a copy of the service:
 
-```
+```shell
 oc get service kube-controllers -n kube-system -o yaml | sed 's/name: kube-controllers/name: kube-controllers-copy/'  | oc create -f -
 
 ```
 
 Annotate the copied service with the check configurations:
 
-```
+```shell
 oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpoints.check_names=["kube_controller_manager", "kube_scheduler"]'
 oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpoints.init_configs=[{}, {}]'
 oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpoints.instances=[{ "prometheus_url": "https://%%host%%:%%port%%/metrics",
