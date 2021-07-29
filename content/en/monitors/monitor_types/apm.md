@@ -5,6 +5,7 @@ description: "Compare an APM metric to a user defined threshold"
 aliases:
   - /monitors/monitor_types/app_analytics
   - /monitors/monitor_types/trace_search
+  - /tracing/guide/resource_monitor/
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
