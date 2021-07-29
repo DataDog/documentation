@@ -239,18 +239,18 @@ custom_queries:
 {{< get-metrics-from-git "snowflake" >}}
 
 
-### サービスのチェック
-
-**snowflake.can_connect**:<br>
-Agent が認証して Snowflake に接続できない場合は `CRITICAL`、それ以外の場合は `OK` を返します。
-
 ### イベント
 
 Snowflake には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "snowflake" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
 
 [1]: https://www.snowflake.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -264,4 +264,5 @@ Snowflake には、イベントは含まれません。
 [10]: https://raw.githubusercontent.com/DataDog/integrations-core/master/snowflake/images/custom_query.png
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/snowflake/metadata.csv
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://github.com/DataDog/integrations-core/blob/master/snowflake/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help/

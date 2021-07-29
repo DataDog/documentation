@@ -110,30 +110,10 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 HTTP チェックにはイベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "http_check" >}}
 
-Datadog でこれらのサービスチェックのアラート条件を作成するには、[Create Monitor][10] ページで 'Integration' ではなく 'Network' を選択します。
 
-**http.can_connect**:<br>
-次のいずれかが発生したら `DOWN` を返します。
-
-- `uri` へのリクエストがタイムアウトした
-- 応答コードが 4xx/5xx または `http_response_status_code` で指定されているパターンコードと一致しない
-- 応答本文が `content_match` のパターンを_含まない_
-- `reverse_content_match` が true で、応答本文が `content_match` のパターンを_含む_
-- `uri` に `https` が含まれ、`tls_verify` が true であり、SSL 接続を検証できない
-
-これら以外の場合は `UP` を返します。
-
-**http.ssl_cert**:<br>
-チェックは次の内容を返します。
-
-- `uri` の証明書が既に期限切れの場合は `DOWN`
-- `uri` の証明書が `days_critical` 日未満に期限切れになる場合は `CRITICAL`
-- `uri` の証明書が `days_warning` 日未満に期限切れになる場合は `WARNING`
-
-これら以外の場合は `UP` を返します。
-
-このチェックを無効にするには、`check_certificate_expiration` を false に設定します。
+`http.ssl_cert` を無効にするには、`check_certificate_expiration` を false に設定します。
 
 ## トラブルシューティング
 
@@ -148,5 +128,5 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
-[10]: https://app.datadoghq.com/monitors#/create
+[10]: https://github.com/DataDog/integrations-core/blob/master/http_check/assets/service_checks.json
 [11]: https://docs.datadoghq.com/ja/help/

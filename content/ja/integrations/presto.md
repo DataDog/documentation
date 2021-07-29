@@ -110,13 +110,13 @@ _Agent バージョン 6.0 以降で利用可能_
 Presto には、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "presto" >}}
 
-**presto.can_connect**:<br>
-Agent が監視対象の Presto インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
 
 [1]: https://docs.datadoghq.com/ja/integrations/presto/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -127,3 +127,4 @@ Agent が監視対象の Presto インスタンスに接続できず、メトリ
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/presto/metadata.csv
+[10]: https://github.com/DataDog/integrations-core/blob/master/presto/assets/service_checks.json
