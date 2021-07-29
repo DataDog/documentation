@@ -61,7 +61,7 @@ Below the overview of the signal are tabs with detailed information related to t
 
 Datadog Security Monitoring offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, IOCs), so you can quickly identify which potential threats to address.
 
-{{< img src="security_platform/security_monitoring/explorer/threat-intelligence.png" alt="Threat Intelligence in the Security Signals Explorer"  >}}
+{{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Threat Intelligence in the Security Signals Explorer"  >}}
 
 Datadog automatically operationalizes threat intelligence by analyzing all ingested logs that have relevant attributes. If there is an indicator of compromise in a log, such as an anonymized IP tied to a VPN, proxy, or Tor exit node, a `threat_intel` attribute is append to the log event to provide additional insights based on available intelligence.
 
