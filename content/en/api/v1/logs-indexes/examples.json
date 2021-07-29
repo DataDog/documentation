@@ -127,7 +127,7 @@
             {
               "filter": {
                 "query": "*",
-                "sample_rate": 1
+                "sample_rate": 1.0
               },
               "is_enabled": false,
               "name": "payment"
@@ -136,7 +136,6 @@
           "filter": {
             "query": "source:python"
           },
-          "is_rate_limited": false,
           "name": "main",
           "num_retention_days": 15
         },
