@@ -71,14 +71,16 @@ Transform:
   - AWS::Serverless-2016-10-31
   - Name: DatadogServerless
     Parameters:
-      pythonLayerVersion: "<LAYER_VERSION>"
+      pythonLayerVersion: "{{< latest-lambda-layer-version layer="python" >}}"
       stackName: !Ref "AWS::StackName"
       forwarderArn: "<FORWARDER_ARN>"
       service: "<SERVICE>" # オプション
       env: "<ENV>" # オプション
 ```
 
-`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+- `<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+- `<SERVICE>` と `<ENV>` をサービスと環境の値に置き換えます。
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
 
@@ -122,7 +124,7 @@ class CdkStack(core.Stack):
     mapping = core.CfnMapping(self, "Datadog",
       mapping={
         "Parameters": {
-          "pythonLayerVersion": "<LAYER_VERSION>",
+          "pythonLayerVersion": "{{< latest-lambda-layer-version layer="python" >}}",
           "forwarderArn": "<FORWARDER_ARN>",
           "stackName": self.stackName,
           "service": "<SERVICE>",  # オプション
@@ -131,7 +133,9 @@ class CdkStack(core.Stack):
       })
 ```
 
-`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+- `<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+- `<SERVICE>` と `<ENV>` をサービスと環境の値に置き換えます。
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
 
@@ -140,7 +144,6 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://github.com/DataDog/datadog-lambda-python/releases
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Zappa" %}}
@@ -161,13 +164,13 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
         }
     }
     ```
-1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。`VERSION` については、[最新リリース][1]をご確認ください。例:
+1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加します。
 
@@ -253,16 +256,22 @@ yarn global add @datadog/datadog-ci
 
 ### インスツルメントする
 
-関数をインスツルメントするには、[AWS 認証情報][1]を使用して次のコマンドを実行します。`<functionname>` と `<another_functionname>` を Lambda 関数名に置き換え、`<aws_region>` を AWS リージョン名に置き換え、`<layer_version>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][2]を参照)、`<forwarder_arn>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][3]を参照)。
+関数をインスツルメントするには、[AWS 資格情報][1]を使用して次のコマンドを実行します。
 
 ```sh
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder <forwarder_arn>
 ```
 
+関数をインスツルメントするには、AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+- `<functionname>` と `<another_functionname>` を Lambda 関数名に置き換えます。
+- `<aws_region>` を AWS リージョン名に置き換えます。
+- `<layer_version>` を目的のバージョンの Datadog Lambda ライブラリに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="python" >}}` です。
+- `<forwarder_arn>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][3]を参照)。
+
 例:
 
 ```sh
-datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="python" >}} --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加する必要があります。
@@ -330,10 +339,10 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。`VERSION` については、[最新リリース][2]を参照してください。例:
+使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。

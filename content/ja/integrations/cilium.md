@@ -158,17 +158,16 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Cilium には、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "cilium" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 [1]: https://cilium.io
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/cilium/assets/service_checks.json
-[6]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/help/

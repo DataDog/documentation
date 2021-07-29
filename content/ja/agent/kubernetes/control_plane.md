@@ -25,21 +25,23 @@ further_reading:
 
 このセクションの目的は、特異性を文書化し、Kubernetes Control Plane を監視するための適切な基本コンフィギュレーションを提供することです。次に、このコンフィギュレーションをカスタマイズして、Datadog 機能を追加できます。
 
-[API Server][1]、[ETCD][2]、[Controller Manager][3]、[Scheduler][4] の Datadog インテグレーションにより、Kubernetes Control Plane の 4 つのコンポーネントすべてから主要なメトリクスを収集できます。
+[API サーバー][1]、[Etcd][2]、[Controller Manager][3]、[Scheduler][4] の Datadog インテグレーションにより、Kubernetes Control Plane の 4 つのコンポーネントすべてから主要なメトリクスを収集できます。
 
 * [Kubernetes と Kubeadm](#Kubeadm)
+* [Amazon EKS で Kubernetes を使用](#EKS)
+* [マネージドサービス (AKS、GKE) で Kubernetes を使用](#ManagedServices)
 
 ## Kubernetes と Kubeadm {#Kubeadm}
 
 次のコンフィギュレーションは、Kubernetes `v1.18+` でテストされています。
 
-### API Server
+### API サーバー
 
-API Server インテグレーションは自動的に構成されます。Datadog Agent はこれを自動的に検出します。
+API サーバーインテグレーションは自動的に構成されます。Datadog Agent はこれを自動的に検出します。
 
-### ETCD
+### Etcd
 
-ホストにある ETCD 証明書への読み取りアクセスを提供することにより、Datadog Agent チェックは ETCD と通信し、ETCD メトリクスの収集を開始できます。
+ホストにある Etcd 証明書への読み取りアクセスを提供することにより、Datadog Agent チェックは Etcd と通信し、Etcd メトリクスの収集を開始できます。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -305,7 +307,28 @@ scheduler:
     bind-address: 0.0.0.0
 ```
 
+## Amazon EKS で Kubernetes を使用 {#EKS}
+
+Amazon Elastic Kubernetes Service (EKS) では、[API サーバーメトリクスが公開されています][5]。これにより、Datadog Agent は [Kubernetes API サーバーメトリクスチェックに関するドキュメント][6]に記載されているように、エンドポイントチェックを使用して API サーバーメトリクスを取得することができます。チェックを設定するには、以下のアノテーションをサービスに追加します。
+
+```yaml
+annotations:
+  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
+  ad.datadoghq.com/endpoints.init_configs: '[{}]'
+  ad.datadoghq.com/endpoints.instances:
+    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
+```
+
+その他の Control Plane コンポーネントは EKS で公開されていないため、監視することはできません。
+
+## マネージドサービス (AKS、GKE) で Kubernetes を使用 {#ManagedServices}
+
+Azure Kubernetes Service (AKS) や Google Kubernetes Engine (GKE) などのその他のマネージドサービスでは、ユーザーは Control Plane コンポーネントにアクセスできません。そのため、これらの環境では `kube_apiserver`、`kube_controller_manager`、`kube_scheduler`、`etcd` チェックを実行することができません。
+
+
 [1]: https://docs.datadoghq.com/ja/integrations/kube_apiserver_metrics/
 [2]: https://docs.datadoghq.com/ja/integrations/etcd/?tab=containerized
 [3]: https://docs.datadoghq.com/ja/integrations/kube_controller_manager/
 [4]: https://docs.datadoghq.com/ja/integrations/kube_scheduler/
+[5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane.html#monitor-control-plane-metrics
+[6]: https://docs.datadoghq.com/ja/integrations/kube_apiserver_metrics/
