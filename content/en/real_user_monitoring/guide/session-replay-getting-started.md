@@ -56,7 +56,7 @@ Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum
 
 The usual [RUM initialization parameters][4] are all supported. 
 
-The Session Replay does not start recording automatically when calling `init()`. To then start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording (e.g, to only record authenticated user sessions):
+The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example to only record authenticated user sessions:
 
 ``` javascript
 if (user.isAuthenticated) {
