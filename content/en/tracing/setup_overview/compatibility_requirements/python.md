@@ -90,7 +90,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Jinja2][53]      | >= 2.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Kombu][54]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][55]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
-| [pytest][56]      | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
+| [pytest][56]      | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest     |
 | [Requests][57]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
 | [urllib3][58]     | >= 1.22           | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 
