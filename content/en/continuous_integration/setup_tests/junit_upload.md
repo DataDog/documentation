@@ -82,7 +82,7 @@ The following environment variables are supported:
 {{< site-region region="eu" >}}
 Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
 
-`DD_SITE` (Required)
+`DATADOG_SITE` (Required)
 : The [Datadog site][1] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
