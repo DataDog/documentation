@@ -8,11 +8,11 @@ further_reading:
   text: "tktk"
 
 ---
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-When you setup Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses. 
+When you setup Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses.
 
 To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
 
@@ -21,13 +21,13 @@ To see a complete list of metrics collected, see the integration Data Collected 
 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
-- **Postrgres**: `postgres.queries.*`
+- **Postrgres**: `postgresql.queries.*`
 
 ## Sensitive information
 
 The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans.
 
-However, there are some common sources of data leaks:
+However, there are some common sources of data risks:
 
 ### Database schema
 
@@ -37,6 +37,9 @@ If table names, column names, indexes, database names, or any other schema conta
 
 If you are sending logs to Datadog from your database, please be aware that some logs can contain the full SQL query text including query bind parameters. We recommend reviewing and applying [log security rules][1] consistent with your organization's requirements.
 
+### Query Comments
+
+SQL query comments may be collected by the agent and sent to Datadog without passing through obfuscation. SQL query comments generally do not contain sensitive data, but comments extracted from the query SQL will not pass through obfuscation.
 
 ## Which queries are tracked
 

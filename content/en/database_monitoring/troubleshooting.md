@@ -4,7 +4,7 @@ kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -15,7 +15,120 @@ description: Troubleshoot Database Monitoring setup
 
 If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
 
-If you are receiving other data such as system metrics, but not Database Monitoring data (query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
+If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
+
+{{< tabs >}}
+{{% tab "Postgres" %}}
+
+To debug, start by running the [agent status command][1] to collect debugging information about data collected and sent to Datadog.
+
+Check the `Config Errors` section to ensure the config file is valid:
+
+```
+  Config Errors
+  ==============
+    postgres
+    -----
+      Configuration file contains no valid instances
+```
+
+If the configuration is valid, you should see an output that looks like this:
+
+```
+=========
+Collector
+=========
+
+  Running Checks
+  ==============
+
+    postgres (8.0.5)
+    ----------------
+      Instance ID: postgres:d3dceb9fd36fd57e [OK]
+      Configuration Source: file:/etc/datadog-agent/conf.d/postgres.d/conf.yaml
+      Total Runs: 16,538
+      Metric Samples: Last Run: 186, Total: 2,844,362
+      Events: Last Run: 0, Total: 0
+      Database Monitoring Query Metrics: Last Run: 2, Total: 24,274
+      Database Monitoring Query Samples: Last Run: 1, Total: 17,921
+      Service Checks: Last Run: 1, Total: 16,538
+      Average Execution Time : 1.765s
+      Last Execution Date : 2021-07-26 19:16:58 UTC (1627327018000)
+      Last Successful Execution Date : 2021-07-26 19:16:58 UTC (1627327018000)
+      metadata:
+        version.major: 10
+        version.minor: 17
+        version.patch: 0
+        version.raw: 10.17
+        version.scheme: semver
+```
+
+Ensure that these lines are in the output and have values greater than zero:
+
+```
+Database Monitoring Query Metrics: Last Run: 2, Total: 24,274
+Database Monitoring Query Samples: Last Run: 1, Total: 17,921
+```
+
+[1]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+{{% /tab %}}
+{{% tab "MySQL" %}}
+
+To debug, start by running the [agent status command][1] to collect debugging information about data collected and sent to Datadog.
+
+Check the `Config Errors` section to ensure the config file is valid:
+
+```
+  Config Errors
+  ==============
+    mysql
+    -----
+      Configuration file contains no valid instances
+```
+
+If the configuration is valid, you should see an output that looks like this:
+
+```
+=========
+Collector
+=========
+
+  Running Checks
+  ==============
+
+    mysql (5.0.4)
+    -------------
+      Instance ID: mysql:505a0dd620ccaa2a
+      Configuration Source: file:/etc/datadog-agent/conf.d/mysql.d/conf.yaml
+      Total Runs: 32,439
+      Metric Samples: Last Run: 175, Total: 5,833,916
+      Events: Last Run: 0, Total: 0
+      Database Monitoring Query Metrics: Last Run: 2, Total: 51,074
+      Database Monitoring Query Samples: Last Run: 1, Total: 74,451
+      Service Checks: Last Run: 3, Total: 95,993
+      Average Execution Time : 1.798s
+      Last Execution Date : 2021-07-29 19:28:21 UTC (1627586901000)
+      Last Successful Execution Date : 2021-07-29 19:28:21 UTC (1627586901000)
+      metadata:
+        flavor: MySQL
+        version.build: unspecified
+        version.major: 5
+        version.minor: 7
+        version.patch: 34
+        version.raw: 5.7.34+unspecified
+        version.scheme: semver
+```
+
+Ensure that these lines are in the output and have values greater than zero:
+
+```
+Database Monitoring Query Metrics: Last Run: 2, Total: 51,074
+Database Monitoring Query Samples: Last Run: 1, Total: 74,451
+```
+
+[1]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+{{% /tab %}}
+{{< /tabs >}}
 
 When you are confident the Agent configuration is correct, [check the Agent logs][3] for warnings or errors attempting to run the database integrations.
 
@@ -94,21 +207,6 @@ If you specified a `dbname` other than the default `postgres` in your Agent conf
 
 [1]: /database_monitoring/data_collected/#which-queries-are-tracked
 [2]: /database_monitoring/setup_mysql/advanced_configuration/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Query samples are missing
-
-{{< tabs >}}
-{{% tab "Postgres" %}}
-
-TODO
-
-{{% /tab %}}
-{{% tab "MySQL" %}}
-
-TODO
-
 {{% /tab %}}
 {{< /tabs >}}
 
