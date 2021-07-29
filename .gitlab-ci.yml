@@ -31,8 +31,8 @@ cache: &cache
   key:
     files:
       - yarn.lock
-  paths:
-    - node_modules/
+    paths:
+      - node_modules/
 
 # ================== templates ================== #
 .base_template: &base_template
