@@ -10,9 +10,9 @@ further_reading:
   text: "Monitor Core Web Vitals with Synthetic Monitoring"
 ---
 
-Test results appear after a Datadog Synthetic test execution. Browser test results correspond to the test execution at a point in time in one specific location, one specific browser, and one device type.
+Test results appear after a Datadog Synthetic test execution. Browser test results correspond to the test execution at a point in time in one specific location, one specific browser, and one specific device type.
 
-Look at the latest failed test runs and compare them to recent successful ones in the **Sample Results** section. Scroll down to the **Test Results** section and click on a test result to examine a specific result thoroughly.
+Look at the latest failed test runs and compare them to a recent successful one in the **Sample Results** section. Scroll down to the **Test Results** section and click on a test result to examine a specific result thoroughly.
 
 [Browser test results](#test-results) include components such as [screenshots](#screenshots), [page performance data](#page-performance), [errors](#errors), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-test-result).
 
@@ -21,7 +21,7 @@ Look at the latest failed test runs and compare them to recent successful ones i
 The following test result characteristics appear at the top of every browser test result:
 
 Status
-: The status of your alert (Alert or OK).
+: The status of your test result (Alert or OK).
 
 Starting URL
 : The URL of your browser test scenario.
