@@ -8,7 +8,7 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -20,6 +20,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
+1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
@@ -53,12 +54,12 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries. 
+The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
 Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
- 
+
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
  ```
@@ -107,7 +108,7 @@ SECURITY DEFINER;
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
 
-Create the function to enable the Agent to collect explain plans. 
+Create the function to enable the Agent to collect explain plans.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement (
@@ -196,7 +197,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 2. [Restart the Agent][2].
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -217,71 +218,80 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To configure this check for an Agent running on Kubernetes:
+If you have a Kubernetes cluster, you can use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured with [a file, a configmap, or a key-value store][2].
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. The Postgres configuration can be declared with static files mounted in the cluster agent container or using service annotations:
+
+##### Configure with mounted files
+
+To configure a cluster check with a mounted configuration file, mount the configuration file in the cluster agent container on the path: `/conf.d/postgres.yaml`:
+
+```yaml
+cluster_check: true  # Make sure to include this flag
+init_config:
+instances:
+  - dbm: true
+    host: '<AWS_INSTANCE_ENDPOINT>'
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+```
+
+##### Configure with Kubernetes service annotations
+
+Rather than mounting a file, you can also declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+
+
 ```yaml
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   name: postgres
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/postgresql.check_names: '["postgres"]'
-    ad.datadoghq.com/postgresql.init_configs: '[{}]'
-    ad.datadoghq.com/postgresql.instances: |
+    ad.datadoghq.com/postgres.check_names: '["postgres"]'
+    ad.datadoghq.com/postgres.init_configs: '[{}]'
+    ad.datadoghq.com/postgres.instances: |
       [
         {
           "dbm": true,
           "host": "<AWS_INSTANCE_ENDPOINT>",
-          "port":"5432",
-          "username":"datadog",
-          "password":"<PASSWORD>"
+          "port": 5432,
+          "username": "datadog",
+          "password": "<UNIQUEPASSWORD>"
         }
       ]
 spec:
-  containers:
-    - name: postgres
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+    name: postgres
 ```
-See the [Autodiscovery template variables documentation][3] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
 
+The Cluster Agent should automatically register this configuration and begin running the Postgres check.
 
-[1]: /agent/kubernetes/integrations/?tab=kubernetes
-[2]: agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: /agent/faq/template_variables/
-{{% /tab %}}
-{{% tab "ECS" %}}
+To avoid exposing the datadog user's password in plaintext, use the agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
 
-To configure Database Monitoring metrics collection for an Agent running on ECS:
-
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
-```json
-{
-  "containerDefinitions": [{
-    "name": "postgres",
-    "image": "postgres:latest",
-    "dockerLabels": {
-      "com.datadoghq.ad.check_names": "[\"postgres\"]",
-      "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"host\":\"<AWS_INSTANCE_ENDPOINT>\", \"port\":5432,\"username\":\"datadog\",\"password\":\"<PASSWORD>\"}]"
-    }
-  }]
-}
-```
-See the [Autodiscovery template variables documentation][2] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
-
-
-[1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/faq/template_variables/
+[1]: /agent/cluster_agent
+[2]: /agent/cluster_agent/clusterchecks/
+[3]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
-## Validate
+### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
 
+## Install the RDS Integration
+
+Optionally, to collect more comprehensive database metrics from AWS, we recommend installing the [RDS integration][11].
+
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][11]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][12]
 
 ## Further reading
 
@@ -298,4 +308,5 @@ If you have installed and configured the integrations and Agent as described and
 [8]: https://app.datadoghq.com/account/settings#agent
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
-[11]: /database_monitoring/troubleshooting/?tab=postgres
+[11]: /integrations/amazon_rds
+[12]: /database_monitoring/troubleshooting/?tab=postgres

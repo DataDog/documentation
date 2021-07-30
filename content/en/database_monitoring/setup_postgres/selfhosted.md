@@ -6,10 +6,10 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
-  
+
 ---
 
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -53,12 +53,12 @@ Configure the following [parameters][3] in the `postgresql.conf` file and then *
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries. 
+The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
 Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
- 
+
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
  ```
@@ -107,7 +107,7 @@ SECURITY DEFINER;
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][5] for more information.
 
-Create the function to enable the Agent to collect explain plans. 
+Create the function to enable the Agent to collect explain plans.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement (
@@ -244,7 +244,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
       Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][8] for all available configuration options.
 5. [Restart the Agent][9].
 
-## Validate
+### Validate
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
