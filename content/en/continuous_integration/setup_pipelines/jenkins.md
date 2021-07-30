@@ -218,7 +218,7 @@ If the CI Visibility option does not appear in the Datadog Plugin section, make 
 3. Check that the installed version is correct.
 4. Restart your Jenkins instance using the `/safeRestart` URL path.
 
-### The Plugin's Tracer failed to initialized due to APM Java Tracer is being used to instrument Jenkins.
+### The Plugin's Tracer fails to initialize due to APM Java Tracer is being used to instrument Jenkins.
 
 If this error message appears in the **Jenkins Log**, make sure that you are using the Jenkins plugin v3.1.0+
 
