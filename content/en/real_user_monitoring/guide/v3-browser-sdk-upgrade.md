@@ -1,5 +1,5 @@
 ---
-title: Upgrading the Browser SDK to v3
+title: Upgrade the Browser SDK
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
@@ -12,14 +12,15 @@ further_reading:
 
 ## Overview
 
-Version 3 of the RUM Browser SDK introduces [Session Replay][1]. With this new major version, several breaking changes were made to the Browser SDK.
+RUM Browser SDK v3 introduces [Session Replay][1]. With this major version update, several breaking changes were made to the Browser SDK.
 
-### Stopping the generation of a RUM error for failed network requests
+## Changes
+### RUM errors
 
 The Browser SDK no longer issues [RUM errors][2] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][3], which contain the status code attribute.
 
 
-If you want to continue seeing these failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][4], checking the `status_code` property and manually sending an error with the [addError API][5].
+To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][4], checking the `status_code` property, and manually sending an error with the [addError API][5].
 
 ```javascript
 beforeSend: (event) => {
@@ -29,18 +30,19 @@ beforeSend: (event) => {
 }
 ```
 
-### Removing the source attribute from the addError API
+### Source attribute
 
-The Browser SDK no longer lets you specify the source of an error collected with the [addError API][5]. All errors collected with this API now have their source attribute set to `custom`. The [addError API][5] accepts a context object as its second parameter, which should be used to pass extra context about the error.
+The Browser SDK no longer lets you specify the source of an error collected with the [addError API][5]. All errors collected with this API have their source attribute set to `custom`. The [addError API][5] accepts a context object as its second parameter, which should be used to pass extra context about the error.
 
-### Deprecated Typescript types
+## Deprecated
+### TypeScript types
 
 | Old types                    | New types                    |
 | ---------------------------- | ---------------------------- |
 | RumUserConfiguration         | RumInitConfiguration         |
 | RumRecorderUserConfiguration | RumRecorderInitConfiguration |
 
-### Deprecated initialization options
+### Initialization options
 
 | Old options        | New options |
 | ------------------ | ----------- |
@@ -48,7 +50,7 @@ The Browser SDK no longer lets you specify the source of an error collected with
 | datacenter         | site        |
 | resourceSampleRate | NONE        |
 
-### Deprecated API
+### API
 
 | Old API       | New API   |
 | ------------- | --------- |
