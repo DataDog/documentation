@@ -2,10 +2,10 @@
 title: Running tests on an application that requires authentication
 kind: guide
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
-    tag: 'Blog'
-    text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
-  - link: 'synthetics/browser_tests'
+  - link: '/synthetics/guide/browser-tests-totp'
+    tag: 'Documentation'
+    text: 'Time-based one time passwords (TOTPs) for multi-factor authentication (MFA)'
+  - link: '/synthetics/browser_tests'
     tag: 'Documentation'
     text: 'Browser Tests'
   - link: '/synthetics/browser_tests/actions'
@@ -56,7 +56,7 @@ Datadog Synthetic Monitoring fully [supports Time-based One Time Passwords (TOTP
 
 Browser tests can also reproduce any actions a regular user can take inside their browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a browser, you can record it when setting up your browser test. Some MFA providers might however detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
-If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application that does not leverage TOTP, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
 
 <div class="alert alert-info">We are constantly adding features to help you record test scenarios more easily. Help us work on the MFA systems that matter the most to you by <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">sending us feedback</a>.</div>
