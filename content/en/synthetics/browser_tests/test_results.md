@@ -20,15 +20,32 @@ Look at the latest failed test runs and compare them to recent successful ones i
 
 The following test result characteristics appear at the top of every browser test result:
 
-- Status
-- Starting URL
-- Number of steps
-- Duration
-- Location
-- Device
-- Browser
-- Time ran
-- Run type
+Status
+: The status of your alert (Alert or OK).
+
+Starting URL
+: The URL of your browser test scenario.
+
+Completed steps
+: The number of test steps completed in your result.
+
+Duration
+: The time it took your test to run.
+
+Location
+: The managed or private location your test was executed from.
+
+Device
+: The type of device your test was executed from.
+
+Browser
+: The type of browser your test was executed from.
+
+Time ran
+: The time your test ran.
+
+Run type
+: The type of your test run (CI, fast retry, manually triggered, or scheduled).
 
 ### Screenshots
 
@@ -60,22 +77,24 @@ The maximum number of errors that can be displayed is 8, for example 2 `network`
 
 ### Resources
 
-A resource corresponds to the combination of requests and assets. The **Resources** panel shows:
+A resource corresponds to the combination of requests and assets. 
+
+The **Resources** panel shows:
 
 Resource
-: The URL of the resource
+: The URL of the resource.
 
 Type
-: The type of resource (HTML, CSS, Image, Javascript, XHR, Other)
+: The type of resource (HTML, CSS, Image, Javascript, XHR, or Other).
 
 Duration
-: The time needed to perform the request
+: The time needed to perform the request.
 
 % Total Time 
-: The resource duration over the total interaction time
+: The resource duration over the total interaction time.
 
 Size
-: The size of the request response
+: The size of the request response.
 
 The maximum number of resources that can be displayed is 50. Resources are ordered by the time when they start and then are displayed in Datadog by the first 50.
 
