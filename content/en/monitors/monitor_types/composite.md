@@ -23,6 +23,8 @@ Composite monitors combine individual monitors into one monitor to define more s
 
 Choose existing monitors to create a composite monitor, for example: monitor `A` and monitor `B`. Then set a trigger condition using Boolean operators, such as `A && B`. The composite monitor triggers when the individual monitors simultaneously have values that cause the composite monitor's trigger condition to be true.
 
+{{< img src="monitors/monitor_types/composite/overview.jpg" alt="composite example"  style="width:80%;">}}
+
 For configuration purposes, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete the constituent monitors. A composite monitor does not own other monitors—it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
 **Notes**
@@ -155,7 +157,7 @@ If the example above included a multi-alert monitor `C` grouped by `service` wit
 **Monitor group by two or more dimensions**
 
 In the case of a multi-alert monitor split by two or more tags, a monitor group corresponds to the whole combination of tags. 
-For example, if monitor `1` is a multi-alert per `device,host`, and monitor `2` is a multi-alert per `host`, a composite monitor can combine monitor `1` and monitor `2`:
+For example, if monitor `1` is a multi-alert per `device,host`, and monitor `2` is a multi-alert per `host`, a composite monitor can combine monitor `1` and monitor `2`.
 
 {{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification"  style="width:80%;">}}
 
