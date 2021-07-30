@@ -101,13 +101,14 @@ apm_config:
 {{% tab "Docker compose" %}}
 
 
-In the Datadog Agent container’s list of environment variables, add DD_APM_IGNORE_RESOURCES with a pattern like the below. Docker Compose has its own [variable substitution][7] that should be considered when using special characters like `$`.
+In the Datadog Agent container’s list of environment variables, add DD_APM_IGNORE_RESOURCES with a pattern like the below. Docker Compose has its own [variable substitution][1] that should be considered when using special characters like `$`.
 
 
     environment:
       // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 
+[1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
 {{% /tab %}}
 {{% tab "Docker Run" %}}
 
@@ -172,7 +173,7 @@ In the dedicated trace-agent container, add the environment variable DD_APM_IGNO
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
-In the traceAgent section of the values.yaml, add DD_APM_IGNORE_RESOURCES in the env section, then [spin up helm as usual][8].
+In the traceAgent section of the values.yaml, add DD_APM_IGNORE_RESOURCES in the env section, then [spin up helm as usual][1].
 
 ```
     traceAgent:
@@ -188,7 +189,7 @@ Alternatively, if you prefer to modify in `helm install` command, you can also u
 ```
 helm install dd-agent -f values.yaml --set datadog.apiKeyExistingSecret="datadog-secret" --set datadog.apm.enabled=true --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES,agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" datadog/datadog
 ```
-
+[1]: /agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
 {{% tab "AWS ECS Task Definition" %}}
 
@@ -222,21 +223,22 @@ This is a great option if you have application specific requirements and are usi
 
 {{< programming-lang lang="ruby" >}}
 
-The Ruby tracer has a post processing pipeline that deletes traces that meet certain criteria. More information and examples can be found in [Post-Processing Traces][9].
+The Ruby tracer has a post processing pipeline that deletes traces that meet certain criteria. More information and examples can be found in [Post-Processing Traces][1].
 
-For example, if if the resource name is `Api::HealthchecksController#index`, then you can utilize the `trace.delete_if` method to delete traces that contain the maining resource name. This filter can also be used to match on other metadata available for the [span object][10].
+For example, if if the resource name is `Api::HealthchecksController#index`, then you can utilize the `trace.delete_if` method to delete traces that contain the maining resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
 ```
 Datadog::Pipeline.before_flush do |trace|
   trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
 end
 ```
-
+[1]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation-2
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-The Python tracer has a FilterRequestsOnUrl filter that can be configured to remove traces from certain endpoints. If you prefer, you can also write your own custom filter. More information can be found in the [Trace Filtering][11].
+The Python tracer has a FilterRequestsOnUrl filter that can be configured to remove traces from certain endpoints. If you prefer, you can also write your own custom filter. More information can be found in the [Trace Filtering][1].
 
 If the root span’s http.url span tag shows a value of  ‘http://<domain>/healthcheck', the following regex could be used to match against any endpoint ending in `healthcheck`:
 ```
@@ -249,12 +251,12 @@ tracer.configure(settings={
 })
 
 ```
-
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.filters.FilterRequestsOnUrl
 {{< /programming-lang >}}
 
 {{< programming-lang lang="node" >}}
 
-Configure a blocklist on the [Http][12] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace’s `http.url` span tag is `http://<domain>/healthcheck`,  you would write a rule matching the healthcheck url like the below.
+Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace’s `http.url` span tag is `http://<domain>/healthcheck`,  you would write a rule matching the healthcheck url like the below.
 
 Note that the tracer configuration for the integration must be before that instrumented module is imported.
 
@@ -268,6 +270,7 @@ tracer.use('http', {
 
 ```
 
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
