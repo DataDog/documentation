@@ -14,6 +14,9 @@ further_reading:
 - link: "/synthetics/identify_synthetics_bots/"
   tag: "Documentation"
   text: "Identify Synthetic Bots"
+- link: "/synthetics/guide/browser-tests-totp"
+  tag: "Documentation"
+  text: "Time-based one time passwords (TOTPs) for multi-factor authentication (MFA)"
 ---
 
 On the [Synthetic Monitoring settings page][1], you can adjust the following settings:
@@ -64,6 +67,24 @@ Note: Variable values are updated whenever the test they are extracted from runs
 [1]: /synthetics/api_tests/?tab=httptest
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
+{{% /tab %}}
+
+{{% tab "MFA Token" %}}  
+ 
+In the Global Variables tab of your Settings page, click Create Global Variable and enter a secret key or upload a QR code from your authentication provider:
+
+1. In *Choose variable type*, select *MFA Token*.
+2. In *Define Variable*, enter a *Variable Name*. Your variable name can only use uppercase letters, numbers, and underscores.
+3. Enter a *Description* for your variable (optional).
+4. Select *Tags* to associate with your variable (optional).
+5. Enter the *Secret Key* to your variable or upload a QR code image.
+6. Click **+ Generate** to create an OTP. You can copy the generated OTP with the Copy icon.
+7. In *Permissions settings*, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
+
+{{< img src="synthetics/settings/synthetic-mfa-setup.png" alt="Create a new MFA token" border="true" popup="true">}}
+
+[1]: /account_management/rbac/?tab=datadogapplication#custom-roles
+
 {{% /tab %}}
 
 {{< /tabs >}}
