@@ -3,37 +3,49 @@ title: Organization Settings
 kind: documentation
 ---
 
-[Administrators][1] can access the [organization account settings][2] by clicking Plan & Usage from the Account menu in the left side navigation or from the "Go to organization settings" button at the top of the Account Settings page.
+[Administrators][1] can access the [organization account settings][2] by clicking **Organization Settings** from the account menu in the bottom of the left side navigation or by selecting **Organization Settings** from the header dropdown at the top of the Personal Settings page.
+## Accounts
 
-## Plan settings
+### Users
 
-Upgrade or downgrade your account from the Plan tab on the Organization Account Settings page.
+### Service Accounts
 
-**Note**: Contact your account representative or [success@datadoghq.com][3] to add or remove paid features that are not part of standard plans.
+## Groups
 
-## Usage reports
+### Roles
 
-View hourly usage of your account across all billable parameters as well as the top 500 custom metrics submitted. If your organization is the parent-organization in a [multi-org account][4], you can also view the usage of child-organization accounts. Individual child-organization accounts are isolated. They are only able to view their own usage and custom metrics.
+### SAML Group Mappings
 
-**Note**: Allow up to 72 hours for this section to update.
+## Access
 
-Further detailed usage reports can also be created [on request][3] by your account representative.
+### API Keys
 
-## Billing history
+### Application Keys
 
-Your account billing history is available from the Billing History tab on the [Organization Account Settings page][2]. For specific billing questions, contact your account representative or [success@datadoghq.com][3].
+### Client Tokens
 
-## Change your organization name
+### Events API Emails
+
+## Security
+
+### Public Sharing
+
+### Authentication
+
+### Audit Logs
+
+### Audit Log Settings
+
+## General
+
+### Rename organization
 
 To rename your organization, enter the new name, then click save.
 **Note**: **Your organization name may not exceed 32 characters**.
 
 ## SAML settings
 
-For more information about configuring SAML, reference the [Single sign on with SAML documentation][5].
+For more information about configuring SAML, reference the [Single sign on with SAML documentation][2].
 
 [1]: /account_management/users/default_roles/
-[2]: https://app.datadoghq.com/account/billing
-[3]: mailto://success@datadoghq.com
-[4]: /account_management/multi_organization/
-[5]: /account_management/saml/
+[2]: /account_management/saml/
