@@ -226,7 +226,6 @@ If this error message appears in the **Jenkins Log**, make sure that you are usi
 Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection via plugin if the Datadog Java Tracer is being used as javaagent in the Jenkins startup command. This error will not affect your pipelines executions.
 {{< /code-block >}}
 
-**Note**: Enabling CI Visibility using the Jenkins plugin is only compatible with Java APM tracer as a Java agent since version 3.1.0+
 
 ## Further reading
 
