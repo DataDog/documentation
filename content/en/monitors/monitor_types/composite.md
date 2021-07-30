@@ -143,6 +143,7 @@ If even one individual monitor is multi-alert, then the composite monitor is als
 Composite monitors that use many multi-alert monitors only consider the individual monitors' *common reporting sources*. 
 
 **Multi alert Example**
+
 Consider a scenario where monitor `A` and `B` are multi-alert and grouped by host. 
 
 * Hosts from `host:web01` through `host:web05` are reporting for Monitor `A`.
@@ -151,6 +152,7 @@ Consider a scenario where monitor `A` and `B` are multi-alert and grouped by hos
 The composite monitor _only_ considers the common sources (`web04` and `web05`). Up to two alerts can be received in an evaluation cycle.
 
 **Common group value with different group names**
+
 Composite monitors only look at tag *values* (`web04`), not tag *keys* (`host`).
 If the example above included a multi-alert monitor `C` grouped by `service` with a single reporting source, `service:web04`, then the composite monitor would consider `web04` to be the single common reporting source between `A`, `B`, and `C`.
 
