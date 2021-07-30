@@ -39,6 +39,10 @@ deployment:
         gzip: true
         contentType: "text/html; charset=utf-8"
         cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+      - pattern: "^.+\\.(xml)$"
+        gzip: true
+        contentType: "text/xml; charset=utf-8"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
       - pattern: "^.+\\.(json)$"
         gzip: true
         contentType: "application/json; charset=utf-8"
