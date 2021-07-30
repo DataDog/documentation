@@ -80,6 +80,13 @@ proxy:
 
 ##### NO_PROXY accepted values
 
+By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). It is recommended to enable `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules (below) used for Agent integrations.
+
+```yaml
+no_proxy_nonexact_match: true
+```
+
+The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
 * A domain name matches that name and all subdomains.
   - e.g. `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
   - e.g. `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
@@ -92,11 +99,6 @@ proxy:
 * A hostname
   - e.g. `webserver1`
 
-`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests. Enable `no_proxy_nonexact_match` to allow the Agent to match `NO_PROXY` values with the same rules (above) used for integrations. 
-
-```yaml
-no_proxy_nonexact_match: true
-```
 
 #### Environment variables
 
