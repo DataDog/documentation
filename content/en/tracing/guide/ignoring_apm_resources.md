@@ -218,7 +218,7 @@ If the request is associated with a distributed trace, there may be sampling ina
 
 This is a great option if you have application specific requirements and are using the languages listed below:
 
-{{< programming-lang-wrapper langs="ruby, python, node, java" >}}
+{{< programming-lang-wrapper langs="ruby,python,node,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
