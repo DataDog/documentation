@@ -638,6 +638,8 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
+**Note:** If you have environment variables with names corresponding to one of the above reserved variables, your environment variables will be ignored and replaced by the corresponding component parsed from your test `startUrl`.
+
 ### Run tests
 
 You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
