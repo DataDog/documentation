@@ -9448,9 +9448,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
-          additionalProperties: false
           description: Value used by the operator.
-          type: object
+          nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
