@@ -12,9 +12,9 @@ further_reading:
 
 Test results appear after a Datadog Synthetic test execution. Browser test results correspond to the test execution at a point in time in one specific location, one specific browser, and one device type.
 
-Look at the latest failed test runs and compare them to recent successful ones in the **Sample Results** section. Scroll down to the **Test Results** section and click on a test result to examine the result thoroughly.
+Look at the latest failed test runs and compare them to recent successful ones in the **Sample Results** section. Scroll down to the **Test Results** section and click on a test result to examine a specific result thoroughly.
 
-[Browser test results](#test-results) include components such as [screenshots](#screenshots), [page performance dates](#page-performance), [errors](#errors), [resources](#resources), and [backend traces](#backend traces) to help troubleshoot your [test failure](#test-result-failure).
+[Browser test results](#test-results) include components such as [screenshots](#screenshots), [page performance data](#page-performance), [errors](#errors), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#test-result-failure).
 
 ## Test results
 
@@ -110,7 +110,7 @@ One browser step can make multiple requests to different URLs/endpoints, which r
 
 ### Step duration
 
-The step duration represents the amount of time the step takes to execute with our [locator algorithm][9]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanisms which allows browser tests to ensure an element is able to be interacted with. 
+The step duration represents the amount of time the step takes to execute with our [locator algorithm][9]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanism, which allows browser tests to ensure an element is able to be interacted with. 
 
 ## Failed test result
 
