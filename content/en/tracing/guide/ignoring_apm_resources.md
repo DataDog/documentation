@@ -219,7 +219,7 @@ If the request is associated with a distributed trace, there may be sampling ina
 
 This is a great option if you have application specific requirements and are using the languages listed below:
 
-{{< programming-lang-wrapper langs="ruby,python,node,java" >}}
+{{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
@@ -254,7 +254,7 @@ tracer.configure(settings={
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.filters.FilterRequestsOnUrl
 {{< /programming-lang >}}
 
-{{< programming-lang lang="node" >}}
+{{< programming-lang lang="nodeJS" >}}
 
 Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace’s `http.url` span tag is `http://<domain>/healthcheck`,  you would write a rule matching the healthcheck url like the below.
 
