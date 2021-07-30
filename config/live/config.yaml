@@ -40,5 +40,5 @@ deployment:
         contentType: "text/html; charset=utf-8"
         cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
       - pattern: "^.+\\.(xml|json)$"
-        gzip: true
+        gzip: false
         cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
