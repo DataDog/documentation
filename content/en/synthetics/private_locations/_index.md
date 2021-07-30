@@ -90,9 +90,9 @@ To pull test configurations and push test results, the private location worker n
 
 ### Permissions
 
-By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Users with the Datadog Admin and Datadog Standard roles can view private locations, search for private locations, and assign Synthetic tests to private locations. 
+By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Users with the [Datadog Admin][20] and [Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. You can get access to the **Private Locations** page by having your user upgraded to one of these two [default roles][19]. 
 
-If you have access to the [custom role feature][18], add users to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions for global variables. 
+If you have access to the [custom role feature][18], add users to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions for private locations. 
 
 ## Set up your private location
 
@@ -627,3 +627,5 @@ Although it's important to initially add resources that are consistent with the 
 [16]: /agent/
 [17]: /synthetics/settings/#private-locations
 [18]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[19]: /account_management/rbac/permissions
+[20]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles

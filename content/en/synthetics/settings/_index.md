@@ -26,7 +26,7 @@ On the [Synthetic Monitoring Settings page][1], you can adjust the following set
 
 ## Global variables
 
-Global variables can be used in [single][5] and [multistep API tests][link] as well as [browser tests][6] of your test suite. To create a global variable, go to the [Global Variables][7] tab of the **Settings** page, and click **New Global Variable** in the upper right corner.
+Global variables can be used in [single][5] and [multistep API tests][12] as well as [browser tests][6] of your test suite. To create a global variable, go to the [Global Variables][7] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
 
 Choose the type of variable you want to create:
 
@@ -72,16 +72,16 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][link]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][13]. 
 
-If you have access to the custom role feature (link to https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#custom-roles), have your user added to a custom role that includes permissions for global variables (`synthetics_global_variable_read` and `synthetics_global_variable_write` permissions). 
+If you have access to the [custom role feature][14], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
 
 #### Restrict access
 
 <div class="alert alert-warning">
 RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
-This features allows you to restrict access to individual global variable based on roles in your org. This results in an additional **Permissions settings** step in the global variable creation flow where you can choose which roles in addition to your user can read and write your global variable.
+You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
 ## Default settings
 
@@ -101,9 +101,9 @@ If the endpoint is being traced and allowed, your browser test results are autom
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can access the Synthetic Monitoring **Default Settings** page. You can get access to the **Default Settings** page by having your user upgraded to one of these two [default roles][link]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][13]. 
 
-If you have access to the custom role feature (link to https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication#custom-roles), have your user added to a custom role that includes permissions for default settings (`synthetics_default_settings_read` and `synthetics_default_settings_write` permissions). 
+If you have access to the [custom role feature][14], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
 
 ## Further Reading
 
@@ -120,3 +120,6 @@ If you have access to the custom role feature (link to https://docs.datadoghq.co
 [9]: /synthetics/api_tests/
 [10]: /synthetics/multistep/
 [11]: /synthetics/browser_tests
+[12]: /synthetics/multistep#variables
+[13]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[14]: /account_management/rbac/?tab=datadogapplication#custom-roles
