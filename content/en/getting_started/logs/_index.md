@@ -1,5 +1,5 @@
 ---
-title: Send logs to Datadog
+title: Getting Started with Logs
 kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
@@ -15,11 +15,15 @@ further_reading:
 
 ## Overview
 
-Datadog Log Management is used to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or other logging sources. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits. Log management is what powers Datadog [Security Monitoring][1], and can be used in conjunction with [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog.
+Datadog Log Management is used to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processesors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
-This page shows you how to get started with Log Management in Datadog. As a prerequisite to the following guide, a Datadog account is required. If you haven't already, create a [Datadog account][4].
+This page shows you how to get started with Log Management in Datadog. As a prerequisite to the following guide, a Datadog account is required. If you haven't already, create a [Datadog account][1].
 
 ## Configure a logging source
+
+Log management is what powers Datadog [Security Monitoring][2], and can be used in conjunction with [Tracing][3] and [Metrics][4] to correlate valuable data across Datadog. The lifecycle of a log within Datadog begins at ingestion from a logging source.
+
+{{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 
 ### Server
 
@@ -80,6 +84,38 @@ If you don't see your integration, you can type it in the *other integrations* b
 
 To begin collecting logs from a cloud service, follow the [in-app instructions][15].
 
+## Explore your logs
+
+Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
+
+For example, if you have logs flowing in from a service that you wish to drill down into, filter by `Service:your-service-name`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
+
+{{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
+
+Aggregate your logs by `Field` of `Source` and switch to the **Top List** visualization option to see your top logging services. Select a source, such as `error`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error so you quickly see which host and services require attention.
+
+{{< img src="/getting_started/logs/top-list-view.png" alt="A top list in the Log Explorer">}}
+
+## What's next?
+
+Once a logging source is configured and your logs are available in the Log Explorer, there are a few other areas of log management you can begin to explore.
+
+### Log configuration
+
+* Set [attributes and aliasing][18] to unify your logs environment.
+* Control how your logs are processed with [pipelines][19] and [processors][20].
+* As Logging without Limits* decouples log ingestion and indexing, you can [configure your logs][21] by choosing which to index, retain, or archive.
+
+### Log correlation
+
+* [Connect logs and traces][3] to exact logs associated with a specific `env`, `service,` or `version`.
+* If you're already using metrics in Datadog, you can [correlate logs and metrics][4] to gain context of an issue.
+
+### Guides
+
+* Dive further into [Logging without Limits*][22]
+* Manage sensitive log data with [RBAC settings][23]
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -87,18 +123,26 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: https://docs.datadoghq.com/security_platform/security_monitoring/
-[2]: https://docs.datadoghq.com/tracing/connect_logs_and_traces/
-[3]: https://docs.datadoghq.com/logs/guide/correlate-logs-with-metrics/
-[4]: https://www.datadoghq.com
-[5]: https://docs.datadoghq.com/getting_started/integrations/
-[6]: https://docs.datadoghq.com/agent/
+[1]: https://www.datadoghq.com
+[2]: /security_platform/security_monitoring/
+[3]: /tracing/connect_logs_and_traces/
+[4]: /logs/guide/correlate-logs-with-metrics/
+[5]: /getting_started/integrations/
+[6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
 [8]: https://app.datadoghq.com/logs/onboarding/server
-[9]: https://docs.datadoghq.com/agent/logs/?tab=tailfiles#custom-log-collection
-[10]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation
-[11]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset
+[9]: /agent/logs/?tab=tailfiles#custom-log-collection
+[10]: /agent/docker/log/?tab=containerinstallation
+[11]: /agent/kubernetes/log/?tab=daemonset
 [12]: https://app.datadoghq.com/logs/onboarding/container
 [13]: https://app.datadoghq.com/logs/onboarding/cloud
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
+[16]: /logs/explorer/
+[17]: /logs/explorer/#patterns
+[18]: /logs/log_configuration/attributes_naming_convention/
+[19]: /logs/log_configuration/pipelines/
+[20]: /logs/log_configuration/processors/
+[21]: /logs/log_configuration/
+[22]: /logs/guide/getting-started-lwl/
+[23]: /logs/guide/logs-rbac/
