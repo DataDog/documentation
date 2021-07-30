@@ -36,6 +36,10 @@ nav_sections:
         link: infrastructure/
         icon: host-map.svg
         desc: Track your hosts, containers, processes, and serverless functions
+      - title: Events
+        link: events/
+        icon: events.svg
+        desc: Track discrete occurrences in your system's behavior.
       - title: Metrics
         link: metrics/
         icon: metric.svg
