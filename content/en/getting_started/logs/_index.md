@@ -15,13 +15,13 @@ further_reading:
 
 ## Overview
 
-Datadog Log Management is used to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processesors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
+Datadog Log Management is used to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
 This page shows you how to get started with Log Management in Datadog. As a prerequisite to the following guide, a Datadog account is required. If you haven't already, create a [Datadog account][1].
 
 ## Configure a logging source
 
-Log management is what powers Datadog [Security Monitoring][2], and can be used in conjunction with [Tracing][3] and [Metrics][4] to correlate valuable data across Datadog. The lifecycle of a log within Datadog begins at ingestion from a logging source.
+With Log Management, you can analyze and explore data in the Log Explorer, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Security Monitoring][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
 
 {{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 
@@ -108,8 +108,8 @@ Once a logging source is configured and your logs are available in the Log Explo
 
 ### Log correlation
 
-* [Connect logs and traces][3] to exact logs associated with a specific `env`, `service,` or `version`.
-* If you're already using metrics in Datadog, you can [correlate logs and metrics][4] to gain context of an issue.
+* [Connect logs and traces][2] to exact logs associated with a specific `env`, `service,` or `version`.
+* If you're already using metrics in Datadog, you can [correlate logs and metrics][3] to gain context of an issue.
 
 ### Guides
 
@@ -124,9 +124,9 @@ Once a logging source is configured and your logs are available in the Log Explo
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /security_platform/security_monitoring/
-[3]: /tracing/connect_logs_and_traces/
-[4]: /logs/guide/correlate-logs-with-metrics/
+[2]: /tracing/connect_logs_and_traces/
+[3]: /logs/guide/correlate-logs-with-metrics/
+[4]: /security_platform/security_monitoring/
 [5]: /getting_started/integrations/
 [6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
