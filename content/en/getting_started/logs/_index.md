@@ -42,7 +42,7 @@ To begin collecting logs from a server:
 
 1. If you haven't already, install the [Datadog Agent][6] based on your platform.
 
-  **Note**: Log collection requires Datadog Agent v6+.
+    **Note**: Log collection requires Datadog Agent v6+.
 
 2. Collecting logs is disabled by default in the Datadog Agent. To enable log collection, set `logs_enabled` to `true` in your `datadog.yaml` file.
 
@@ -50,7 +50,7 @@ To begin collecting logs from a server:
 
 4. Follow the integration [activation steps][8] or the custom files log collection steps in the Datadog app.
 
-  **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see the [Custom log collection documentation][9].
+    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see the [Custom log collection documentation][9].
 
 ### Container
 
