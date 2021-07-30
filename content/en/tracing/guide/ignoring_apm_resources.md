@@ -204,6 +204,7 @@ If you use AWS ECS (such as on EC2), in your Datadog Agent container definition,
      ]
 ```
 
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Tracer configuration
