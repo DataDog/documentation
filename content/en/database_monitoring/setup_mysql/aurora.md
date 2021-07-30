@@ -22,6 +22,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
+1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
@@ -131,22 +132,6 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Verify
-
-Verify the user was created successfully using the following commands, replacing `<UNIQUEPASSWORD>` with the password you created above:
-
-```shell
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
-grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
-echo -e "\033[0;31mCannot connect to MySQL\033[0m"
-```
-```shell
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
-echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
-echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
-```
-
-
 ## Install the Agent
 
 To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely.
@@ -208,80 +193,82 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To configure this check for an Agent running on Kubernetes:
+If you have a Kubernetes cluster, you can use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. The MySQL configuration can be declared with static files mounted in the cluster agent container or using service annotations:
+
+##### Configure with mounted files
+
+To configure a cluster check with a mounted configuration file, mount the configuration file in the cluster agent container on the path: `/conf.d/mysql.yaml`:
+
+```yaml
+cluster_check: true  # Make sure to include this flag
+init_config:
+instances:
+  - dbm: true
+    server: '<AWS_INSTANCE_ENDPOINT>'
+    port: 3306
+    user: datadog
+    pass: '<UNIQUEPASSWORD>'
+```
+
+##### Configure with Kubernetes service annotations
+
+
+Rather than mounting a file, you can also declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+
 
 ```yaml
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   name: mysql
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/nginx.check_names: '["mysql"]'
-    ad.datadoghq.com/nginx.init_configs: '[{}]'
-    ad.datadoghq.com/nginx.instances: |
+    ad.datadoghq.com/mysql.check_names: '["mysql"]'
+    ad.datadoghq.com/mysql.init_configs: '[{}]'
+    ad.datadoghq.com/mysql.instances: |
       [
         {
           "dbm": true,
           "server": "<AWS_INSTANCE_ENDPOINT>",
+          "port": 3306,
           "user": "datadog",
           "pass": "<UNIQUEPASSWORD>"
         }
       ]
-  labels:
-    name: mysql
 spec:
-  containers:
-    - name: mysql
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+    name: mysql
 ```
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+The Cluster Agent should automatically register this configuration and begin running the MySQL check.
 
-See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+To avoid exposing the datadog user's password in plaintext, use the agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
 
-
-[1]: /agent/kubernetes/integrations/?tab=kubernetes
-[2]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: /agent/faq/template_variables/
-{{% /tab %}}
-{{% tab "ECS" %}}
-
-To configure this check for an Agent running on ECS:
-
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
-
-```json
-{
-  "containerDefinitions": [{
-    "name": "mysql",
-    "image": "mysql:latest",
-    "dockerLabels": {
-      "com.datadoghq.ad.check_names": "[\"mysql\"]",
-      "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"<AWS_INSTANCE_ENDPOINT>\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
-    }
-  }]
-}
-```
-
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
-
-See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
-
-
-[1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/faq/template_variables/
+[1]: /agent/cluster_agent
+[2]: /agent/cluster_agent/clusterchecks/
+[3]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
-## Validate
+### Validate
 
 [Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
 
+## Install the RDS Integration
+
+Optionally, to collect more comprehensive database metrics from AWS, we recommend installing the [RDS integration][9].
+
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][10]
 
 ## Further reading
 
@@ -296,4 +283,5 @@ If you have installed and configured the integrations and Agent as described and
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
-[9]: /database_monitoring/troubleshooting/?tab=mysql
+[9]: /integrations/amazon_rds
+[10]: /database_monitoring/troubleshooting/?tab=mysql

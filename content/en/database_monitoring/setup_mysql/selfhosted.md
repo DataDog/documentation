@@ -143,21 +143,6 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Verify
-
-Verify the user was created successfully using the following commands, replacing `<UNIQUEPASSWORD>` with the password you created above:
-
-```shell
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
-grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
-echo -e "\033[0;31mCannot connect to MySQL\033[0m"
-```
-```shell
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
-echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
-echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
-```
-
 ## Install the Agent
 
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
@@ -195,8 +180,8 @@ In addition to telemetry collected from the database by the Agent, you can also 
 
 1. By default MySQL logs everything in `/var/log/syslog` which requires root access to read. To make the logs more accessible, follow these steps:
 
-   - Edit `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` and remove or comment the lines.
-   - Edit `/etc/mysql/my.cnf` and add following lines to enable general, error, and slow query logs:
+   - Edit `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` and comment out all lines.
+   - Edit `/etc/mysql/my.cnf` to enable the desired logging settings. Fore example, to enable general, error, and slow query logs use the following config:
 
      ```conf
        [mysqld_safe]
@@ -208,11 +193,10 @@ In addition to telemetry collected from the database by the Agent, you can also 
        log_error = /var/log/mysql/mysql_error.log
        slow_query_log = on
        slow_query_log_file = /var/log/mysql/mysql_slow.log
-       long_query_time = 2
+       long_query_time = 3
      ```
 
-   - Save the file and restart MySQL using following commands:
-     `service mysql restart`
+   - Save the file and restart MySQL
    - Make sure the Agent has read access on the `/var/log/mysql` directory and all of the files within. Double-check your `logrotate` configuration to make sure those files are taken into account and that the permissions are correctly set there as well.
    - In `/etc/logrotate.d/mysql-server` there should be something similar to:
 

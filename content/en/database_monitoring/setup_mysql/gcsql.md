@@ -22,6 +22,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
+1. [Install the Cloud SQL Integration](#install-the-cloud-sql-integration)
 
 ## Before you begin
 
@@ -178,9 +179,9 @@ init_config:
 instances:
   - dbm: true
     server: '<INSTANCE_ADDRESS>'
+    port: 3306
     user: datadog
-    pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-    port: '<YOUR_MYSQL_PORT>' # e.g. 3306
+    pass: '<UNIQUEPASSWORD>' # from the CREATE USER step earlier
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
@@ -211,76 +212,80 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To configure this check for an Agent running on Kubernetes:
+If you have a Kubernetes cluster, you can use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. The MySQL configuration can be declared with static files mounted in the cluster agent container or using service annotations:
+
+##### Configure with mounted files
+
+To configure a cluster check with a mounted configuration file, mount the configuration file in the cluster agent container on the path: `/conf.d/mysql.yaml`:
+
+```yaml
+cluster_check: true  # Make sure to include this flag
+init_config:
+instances:
+  - dbm: true
+    server: '<INSTANCE_ADDRESS>'
+    port: 3306
+    user: datadog
+    pass: '<UNIQUEPASSWORD>'
+```
+
+##### Configure with Kubernetes service annotations
+
+Rather than mounting a file, you can also declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
 ```yaml
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   name: mysql
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/nginx.check_names: '["mysql"]'
-    ad.datadoghq.com/nginx.init_configs: '[{}]'
-    ad.datadoghq.com/nginx.instances: |
+    ad.datadoghq.com/mysql.check_names: '["mysql"]'
+    ad.datadoghq.com/mysql.init_configs: '[{}]'
+    ad.datadoghq.com/mysql.instances: |
       [
         {
           "dbm": true,
           "server": "<INSTANCE_ADDRESS>",
+          "port": 3306,
           "user": "datadog",
           "pass": "<UNIQUEPASSWORD>"
         }
       ]
-  labels:
-    name: mysql
 spec:
-  containers:
-    - name: mysql
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+    name: mysql
 ```
+The Cluster Agent should automatically register this configuration and begin running the MySQL check.
 
-See the [Autodiscovery template variables documentation][3] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+To avoid exposing the datadog user's password in plaintext, use the agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
 
-
-[1]: /agent/kubernetes/integrations/?tab=kubernetes
-[2]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: /agent/faq/template_variables/
+[1]: /agent/cluster_agent
+[2]: /agent/cluster_agent/clusterchecks/
+[3]: /agent/guide/secrets-management
 {{% /tab %}}
-{{% tab "ECS" %}}
 
-To configure this check for an Agent running on ECS:
-
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
-
-```json
-{
-  "containerDefinitions": [{
-    "name": "mysql",
-    "image": "mysql:latest",
-    "dockerLabels": {
-      "com.datadoghq.ad.check_names": "[\"mysql\"]",
-      "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"dbm\": \"true\", \"server\": \"<INSTANCE_ADDRESS>\", \"user\": \"datadog\",\"pass\": \"<UNIQUEPASSWORD>\"}]"
-    }
-  }]
-}
-```
-
-See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
-
-
-[1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/faq/template_variables/
-{{% /tab %}}
 {{< /tabs >}}
 
-## Validate
+### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
+## Install the Cloud SQL integration
+
+Optionally, to collect more comprehensive database metrics from GCP, we recommend installing the [Cloud SQL integration][8].
+
+
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
 
 ## Further reading
 
@@ -294,4 +299,5 @@ If you have installed and configured the integrations and Agent as described and
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
-[8]: /database_monitoring/troubleshooting/?tab=mysql
+[8]: /integrations/google_cloudsql
+[9]: /database_monitoring/troubleshooting/?tab=mysql
