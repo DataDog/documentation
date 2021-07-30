@@ -35,11 +35,20 @@ datadog-ci junit upload --service <service_name> <path> [<path> ...]
 
 Specify a valid [Datadog API key][3] in the `DATADOG_API_KEY` environment variable, and the environment where tests were run (for example, `local` when uploading results from a developer workstation, or `ci` when uploading them from a CI provider) in the `DD_ENV` environment variable. For example:
 
+{{< site-region region="us" >}}
 {{< code-block lang="bash" >}}
 DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
 {{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+{{< code-block lang="bash" >}}
+DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
+  --service my-api-service \
+  unit-tests/junit-reports e2e-tests/single-report.xml
+{{< /code-block >}}
+{{< /site-region >}}
 
 ## Configuration settings
 
