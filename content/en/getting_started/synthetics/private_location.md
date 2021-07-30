@@ -31,7 +31,7 @@ Private locations are Docker containers that you can install anywhere inside you
 
 Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location. Your private locations test results display identically to your managed location test results. 
 
-{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign a Synthetic test to private location" style="width:100%;">}}
+{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign a Synthetic test to private locations" style="width:100%;">}}
 
 ## Create your private location
 

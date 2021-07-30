@@ -87,7 +87,7 @@ This features allows you to restrict access to individual global variable based 
 
 ### Default locations
 
-Choose the default locations for your API and browser tests details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][12] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
 ### APM integration for browser tests
 
@@ -117,3 +117,6 @@ If you have access to the custom role feature (link to https://docs.datadoghq.co
 [6]: /synthetics/browser_tests/#use-global-variables
 [7]: https://app.datadoghq.com/synthetics/settings/variables
 [8]: /help/
+[9]: /synthetics/api_tests/
+[10]: /synthetics/multistep/
+[11]: /synthetics/browser_tests

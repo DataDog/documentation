@@ -90,9 +90,9 @@ To pull test configurations and push test results, the private location worker n
 
 ### Permissions
 
-By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Admin and Standard users can view private locations, search for private locations, and assign Synthetic tests to private locations. 
+By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. Users with the Datadog Admin and Datadog Standard roles can view private locations, search for private locations, and assign Synthetic tests to private locations. 
 
-For more information, see the [Private locations permissions][18] documentation.
+If you have access to the [custom role feature][18], add users to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions for global variables. 
 
 ## Set up your private location
 
@@ -102,9 +102,7 @@ In **Synthetic Monitoring** > **Settings** > **Private Locations**, click **Add 
 
 {{< img src="synthetics/private_locations/add_pl.png" alt="create a private locations"  style="width:100%;">}}
 
-**Note**: By default, only Admin users can create private locations. 
 
-Enable read and write permissions with `synthetics_private_location_read` and `synthetics_private_location_write`. Creating and modifying custom roles is an opt-in Enterprise feature. To get this feature enabled on your account, contact [Datadog support][17].
 
 Fill out your private location details: 
 
@@ -627,5 +625,5 @@ Although it's important to initially add resources that are consistent with the 
 [14]: /synthetics/browser_tests/?tab=requestoptions
 [15]: /synthetics/private_locations/configuration#advanced-configuration
 [16]: /agent/
-[17]: /help/
-[18]: /synthetics/settings/#private-locations
+[17]: /synthetics/settings/#private-locations
+[18]: /account_management/rbac/?tab=datadogapplication#custom-roles
