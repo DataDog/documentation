@@ -25,12 +25,14 @@ For new users, download and install the latest version of the [Datadog Agent][2]
 Choose your version of the Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6.x+" %}}
+{{% tab "Agent v7.21+ / v6.21+" %}}
+
+For Agent v7.21+ / v6.21+:
 
 1. Run the following command to install the Agent integration:
 
     ```
-    datadog-agent integration install --third-party datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
+    datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
 2. Configure your integration similar to core [integrations][1].
@@ -56,22 +58,10 @@ Use this new Agent image in combination with [Autodiscovery][1] to enable the `<
 
 [1]: /agent/autodiscovery/
 {{% /tab %}}
-{{% tab "Agent v6.8 to v6.x" %}}
 
-1. Run the following command to install the Agent integration:
+{{% tab "Agent earlier versions" %}}
 
-    ```
-    datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
-    ```
-
-2. Configure your integration similar to core [integrations][1].
-3. [Restart the Agent][2].
-
-
-[1]: /getting_started/integrations/
-[2]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Agent < v6.8" %}}
+For Agent < v7.21 / v6.21:
 
 1. Download the `<INTEGRATION_NAME>.py` file in the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/` folder from the [integrations-extra repository][1].
 2. Place the `<INTEGRATION_NAME>.py` file in the Agent's `checks.d` directory.
