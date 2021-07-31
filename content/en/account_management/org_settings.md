@@ -9,20 +9,20 @@ The Organization Settings allow you to manage users, groups, RBAC, keys and toke
 ### Accounts
 #### Users
 
-Refer to the [user management][3] documentation to add, edit, and disable users.
+Read the [user management][3] documentation to add, edit, and disable users.
 #### Service Accounts
 
 ### Groups
 
 #### Roles
 
-Refer to the [Role Based Access Controll][4] documentation to learn about default and custom roles in Datadog.
+Read the [Role Based Access Controll][4] documentation to learn about default and custom roles in Datadog.
 #### SAML Group Mappings
 
 When enabled, users logging in with SAML to your Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider, and the mappings you've created.
 
 Users who log in with SAML and do not have the values that map to a Datadog role will be stripped of all roles and are not allowed to log in.
-Refer to the [Mapping SAML attributes][5] documentation to learn more about how to create and set mappings.
+Read the [Mapping SAML attributes][5] documentation to learn more about how to create and set mappings.
 
 ##### SAML settings
 
@@ -31,11 +31,11 @@ For more information about configuring SAML, reference the [Single sign on with 
 
 #### API Keys
 
-This section allows you to view, copy, and revoke any API key in the list. Your API Keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog. Refer to the [API keys documentation][6] for more information on creating, editing, and revoking keys.
+This section allows you to view, copy, and revoke any API key in the list. Your API Keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog. Read the [API keys documentation][6] for more information on creating, editing, and revoking keys.
 
 #### Application Keys
 
-You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Refer to the [documentation on application keys][6] for more information on how to add or remove them.
+You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Read the [documentation on application keys][6] for more information on how to add or remove them.
 
 #### Client Tokens
 
