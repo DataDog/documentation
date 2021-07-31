@@ -27,7 +27,7 @@ For security reasons, API keys cannot be used to send data from a browser, as th
 
 To add a Datadog API key or client token:
 1. Navigate to Organization settings, then click the **API keys** or **Client Tokens** tab.
-3. Click the **New Key** or ** New Client Token** button, depending on which you're creating.
+3. Click the **New Key** or **New Client Token** button, depending on which you're creating.
 4. Enter a name for your key or token.
 4. Click **Create API key** or **Create Client Token**.
 
