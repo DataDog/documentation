@@ -78,7 +78,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ### API
 
-When using the API, a composite monitor's query is defined in terms of its constituent monitors using monitor IDs.
+When using the API, a composite monitor's query is defined in terms of its sub-monitors using monitor IDs.
 
 For example, two non-composite monitors have the following queries and IDs:
 
