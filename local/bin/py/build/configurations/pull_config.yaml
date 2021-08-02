@@ -597,11 +597,11 @@
       branch: main
       globs:
       - 'docs/cloud-workload-security/secl.md'
+      - 'docs/cloud-workload-security/backend.md'
       options:
         dest_path: '/security_platform/cloud_workload_security/'
-        file_name: 'secl.md'
         front_matters:
           title: SECL Documentation
           kind: documentation
           description: "SECL Documentation of event types and fields."
-          dependencies: ["https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/secl.md"]
+          dependencies: ["https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/secl.md", "https://github.com/DataDog/datadog-agent/blob/main/docs/cloud-workload-security/backend.md"]
