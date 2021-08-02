@@ -594,13 +594,13 @@
       options:
         file_name: 'agent_config.yaml'
         output_content: false
-    - action: pull-and-push-file
+    - action: pull-and-push-folder
       branch: paulcacheux/generate-secl-json-documentation
       globs:
-      - 'docs/cloud-workload-security/secl.md'
-      - 'docs/cloud-workload-security/backend.md'
+      - 'docs/cloud-workload-security/*.md'
       options:
-        dest_path: '/security_platform/cloud_workload_security/'
+        dest_dir: '/security_platform/cloud_workload_security/'
+        path_to_remove: 'docs/cloud-workload-security/'
         front_matters:
           title: SECL Documentation
           kind: documentation

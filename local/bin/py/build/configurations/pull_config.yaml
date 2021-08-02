@@ -586,7 +586,7 @@
 
   - repo_name: datadog-agent
     contents:
-    - action: pull-and-push-file
+    - action: pull-and-push-folder
       branch: main
       globs:
         - "pkg/config/config_template.yaml"
@@ -596,10 +596,10 @@
     - action: pull-and-push-file
       branch: main
       globs:
-      - 'docs/cloud-workload-security/secl.md'
-      - 'docs/cloud-workload-security/backend.md'
+      - 'docs/cloud-workload-security/*.md'
       options:
-        dest_path: '/security_platform/cloud_workload_security/'
+        dest_dir: '/security_platform/cloud_workload_security/'
+        path_to_remove: 'docs/cloud-workload-security/'
         front_matters:
           title: SECL Documentation
           kind: documentation
