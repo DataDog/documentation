@@ -261,13 +261,13 @@ return jQuery().jquery.startsWith('3.5.1')
 
 **Note**: The way Browser tests load external JavaScript is by adding it to the page, so it will only work if your website accepts it.
 
-#### Global Variable
+#### Global variable
 
-Pick any global variables that was defined through [Synthetic  Monitoring Settings][7].
+Pick any global variables that was defined through [Synthetic Monitoring Settings][7].
 
-#### Global Variable - MFA
+#### Global variable - MFA
 
-Pick any global variables that was defined through [Synthetic  Monitoring Settings][7].
+Pick any global variables that was defined through [Synthetic Monitoring Settings][7].
 This dedicated type of global variable is designed to support multi factor authentication (MFA) processes through the [generation of time-based one time passwords (TOTP)][14].
 
 #### Email
