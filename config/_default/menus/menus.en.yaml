@@ -3246,6 +3246,10 @@ footer_sub:
     url: 'https://www.datadoghq.com/legal/cookies/'
     weight: 130
 api:
+  - name: Scopes
+    url: /api/latest/scopes/
+    identifier: API Scopes
+    weight: -5
   - name: Overview
     url: /api/latest/
     identifier: API overview

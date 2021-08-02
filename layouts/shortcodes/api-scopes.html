@@ -1,0 +1,117 @@
+{{ $dot := . }}
+
+{{ $s := newScratch }}
+
+<div class="table-request schema-table row has-no-expands">
+  <div class="col-12">
+    <div class="row table-header">
+      <div class="col-4 column">
+        <p class="font-semibold">Path</p>
+      </div>
+      <div class="col-2 column">
+        <p class="font-semibold">Action</p>
+      </div>
+      <div class="col-4 column">
+        <p class="font-semibold">Scope</p>
+      </div>
+      <div class="col-1 column">
+        <p class="font-semibold">App Key</p>
+      </div>
+      <div class="col-1 column">
+        <p class="font-semibold">Api Key</p>
+      </div>
+    </div>
+
+    <div>
+
+      {{ range $versionIndex, $versionNum := (slice "v1" "v2") }}
+        {{ with (index $dot.Site.Data.api $versionNum).full_spec_deref }}
+          {{ $spec := . }}
+          {{ range $path_key, $path_object := $spec.paths }}
+            {{ range $action_type, $action := $path_object }}
+                <div class="row {{ with $action.security }}{{ else }}d-none{{end}}">
+                  <div class="col-12 first-column">
+                    <div class="row first-row">
+                      <div class="col-4 column">
+                        <p>{{ $path_key }}</p>
+                      </div>
+                      <div class="col-2 column">
+                        <p>{{ $action_type }}</p>
+                      </div>
+                      <div class="col-4 column">
+                        {{ range $security_object := $action.security }}
+                          {{ range $sec_key, $sec_val := $security_object }}
+                              {{ if eq $sec_key "AuthZ" }}
+                                  {{ delimit $sec_val "," }}
+                              {{ end }}
+                              {{ range $scope := $sec_val }}
+                                {{ $s.SetInMap "scopes" $scope (index $spec.components.securitySchemes.AuthZ.flows.implicit.scopes $scope) }}
+                              {{ end }}
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                      <div class="col-1 column">
+                        {{ range $security_object := $action.security }}
+                          {{ range $sec_key, $sec_val := $security_object }}
+                              {{ if eq $sec_key "appKeyAuth" }}
+                                <i class="icon-tick"></i>
+                              {{ end }}
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                      <div class="col-1 column">
+                        {{ range $security_object := $action.security }}
+                          {{ range $sec_key, $sec_val := $security_object }}
+                              {{ if eq $sec_key "apiKeyAuth" }}
+                                <i class="icon-tick"></i>
+                              {{ end }}
+                          {{ end }}
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+
+  </div>
+</div>
+
+<h2>Available Scopes</h2>
+
+<div class="table-request schema-table row has-no-expands">
+  <div class="col-12">
+    <div class="row table-header">
+      <div class="col-6 column">
+        <p class="font-semibold">Name</p>
+      </div>
+      <div class="col-6 column">
+        <p class="font-semibold">Description</p>
+      </div>
+    </div>
+
+    <div>
+
+      {{ range $scope, $scope_desc := ($s.Get "scopes") }}
+      <div class="row">
+        <div class="col-12 first-column">
+          <div class="row first-row">
+            <div class="col-6 column">
+              <p>{{ $scope }}</p>
+            </div>
+            <div class="col-6 column">
+              <p>{{ $scope_desc }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+
+    </div>
+
+  </div>
+</div>
+

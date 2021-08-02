@@ -1,12 +1,12 @@
 {{ define "api-main" }}
 
+    {{ $dot := . }}
+
     {{ with .Content}}
-        <div class="col-12 col-lg-9 pl-0">
+        <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} pl-0">
             {{ . }}
         </div>
     {{ end }}
-
-    {{ $dot := . }}
 
     {{ .Scratch.Set "apiVersion" "v1"}}
 
