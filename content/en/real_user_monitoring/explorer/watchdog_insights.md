@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-With Watchdog Insights, find your way faster to the root cause of problems with contextual insights you receive as you explore Real User Monitoring (RUM) events. Watchdog Insights complements your expertise and instincts, giving nudges toward where you could focus your troubleshooting attention. 
+Datadog Real User Monitoring (RUM) offers Watchdog Insights to help you navigate to the root cause of problems with contextual insights in the RUM Explorer. Watchdog Insights complement your expertise and instincts by recommending outliers and potential performance bottlenecks impacting a subset of users. 
 
 <div class="alert alert-warning">
 Watchdog Insights for RUM is in beta. Access to this feature is provisioned to customers using Real User Monitoring. If you have feedback, contact [Datadog support][5].
