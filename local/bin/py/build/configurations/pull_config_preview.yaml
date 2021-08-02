@@ -601,8 +601,3 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
-        front_matters:
-          title: SECL Documentation
-          kind: documentation
-          description: "SECL Documentation of event types and fields."
-          dependencies: ["https://github.com/DataDog/datadog-agent/blob/paulcacheux/generate-secl-json-documentation/docs/cloud-workload-security/secl.md", "https://github.com/DataDog/datadog-agent/blob/paulcacheux/generate-secl-json-documentation/docs/cloud-workload-security/backend.md"]
