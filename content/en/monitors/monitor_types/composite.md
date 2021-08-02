@@ -95,7 +95,7 @@ This section uses examples to show how trigger conditions are computed, and the 
 
 ### Computing trigger conditions
 
-There are 4 different statuses a composite monitor considers and 3 of them are considered as alert-worthy:
+There are 4 different statuses a composite monitor and 3 of them are considered as alert-worthy:
 
 | Status    | Alert-worthy         |Severity           |
 |-----------|----------------------|-------------------|
