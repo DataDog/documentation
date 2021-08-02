@@ -112,7 +112,7 @@ The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of 
 * If `A` is alert-worthy, `!A` is `OK`
 * If `A` is no alert-worthy, `!A` is `Alert`
 
-Consider a composite monitor that uses three individual monitors (`A`, `B`, `C`) and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
+Consider a composite monitor that uses two individual monitors `A` and `B`. The following table shows the resulting status of the composite monitor given the trigger condition (`&&` or `||`), and the different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
 | Monitor A   | Monitor B   | Condition   | Notify No Data   | Composite status | Alert triggered? |
 |-------------|-------------|-------------|------------------|------------------|------------------|
