@@ -4079,8 +4079,8 @@ components:
           description: 'Sample rate to apply to logs going through this exclusion
             filter,
 
-            a value of 1 will exclude all logs matching the query.'
-          example: 1
+            a value of 1.0 excludes all logs matching the query.'
+          example: 1.0
           format: double
           type: number
       required:
@@ -25381,6 +25381,12 @@ tags:
     a message
 
     containing more than 500 characters, only the first 500 characters are displayed.
+    Messages
+
+    are limited for checks with a Critical or Warning status, they are dropped for
+    checks with
+
+    an OK status.
 
 
     - [Read more about Service Check monitors.][1]
