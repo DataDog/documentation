@@ -118,17 +118,20 @@ Consider a composite monitor that uses three individual monitors (`A`, `B`, `C`)
 |-------------|-------------|-------------|------------------|------------------|------------------|
 | Alert (T)   | Warn (T)    | `A && B`    |                  | Warn (T)         | {{< X >}}        |
 | Alert (T)   | Warn (T)    | `A || B`    |                  | Alert (T)        | {{< X >}}        |
-| Warn (T)    | Ok (F)      | `A && B`    | False            | OK (F)           |                  |
-| Warn (T)    | Ok (F)      | `A || B`    | False            | Warn (T)         | {{< X >}}        |
+| Warn (T)    | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
+| Warn (T)    | Ok (F)      | `A || B`    |                  | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A || B`    | True             | Warn (T)         | {{< X >}}        |
-| No Data (T) | Warn (T)    | `A && B`    | False            | No Data (T)      |                  |
+| No Data (T) | Warn (T)    | `A && B`    | False            | Last known       |                  |
 | No Data (T) | Warn (T)    | `A || B`    | False            | Warn (T)         | {{< X >}}        |
-| OK (F)      | No Data (T) | `A && B`    | False            | OK (F)           |                  |
-| OK (F)      | No Data (T) | `A || B`    | False            | Ok (F)           |                  |
+| No Data (T) | OK (F)      | `A && B`    | False            | OK (F)           |                  |
+| No Data (T) | OK (F)      | `A || B`    | False            | Last known       |                  |
+| No Data (T) | OK (F)      | `A && B`    | True             | OK (F)           |                  |
+| No Data (T) | OK (F)      | `A || B`    | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A && B`    | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A || B`    | True             | No Data (T)      | {{< X >}}        |
 
+**Note**: When the composite has `notify_no_data` to false and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead. 
 
 ### Number of alerts
 
