@@ -18,7 +18,7 @@ So we’ve unified the evaluation steps used for the Top List Widget to match th
 
   | Widget                               | Old Evaluation Steps                                                                                                     | New Evaluation Steps             |
 |-------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| Query Value Widget                              | 1. Time Aggregation | No Change  |
+| Query Value                              | 1. Time Aggregation | No Change  |
 | Top List | Evaluation Steps Here | Now matches Query Value widget|
 
 The following functions will not be available for Query Value and Top List Widgets: 
