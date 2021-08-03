@@ -17,6 +17,7 @@ exceptions:
   - APIs
   - APM & Continuous Profiler
   - App Analytics
+  - App Service
   - AppVeyor
   - AuthN
   - Autodiscovery
@@ -219,6 +220,7 @@ exceptions:
   - URLs
   - User Datagram Protocol
   - Varnish
+  - Vector
   - Vertica
   - VMWare
   - vSphere

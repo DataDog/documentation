@@ -65,21 +65,18 @@ CRI-O は、ランタイムによって実行される操作のカウントと�
 
 
 ### サービスのチェック
+{{< get-service-checks-from-git "crio" >}}
 
-**crio.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
-
-### イベント
-
-CRI-O には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 
 [1]: http://cri-o.io
 [2]: https://github.com/DataDog/integrations-core/blob/master/crio/datadog_checks/crio/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/crio/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/crio/assets/service_checks.json
+[7]: https://docs.datadoghq.com/ja/help/

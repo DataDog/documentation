@@ -9448,9 +9448,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
-          additionalProperties: false
           description: Value used by the operator.
-          type: object
+          nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -25382,6 +25381,12 @@ tags:
     a message
 
     containing more than 500 characters, only the first 500 characters are displayed.
+    Messages
+
+    are limited for checks with a Critical or Warning status, they are dropped for
+    checks with
+
+    an OK status.
 
 
     - [Read more about Service Check monitors.][1]

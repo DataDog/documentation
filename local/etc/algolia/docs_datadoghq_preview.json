@@ -97,6 +97,7 @@
                 "section": [
                     "account_management",
                     "agent",
+                    "continuous_integration",
                     "dashboards",
                     "developers",
                     "events",

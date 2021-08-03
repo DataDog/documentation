@@ -140,8 +140,6 @@ class CdkStack extends cdk.Stack {
         nodeLayerVersion: <VERSION_COUCHE>, 
         extensionLayerVersion: <VERSION_EXTENSION>, 
         apiKey: <CLÉ_API_DATADOG>,
-        service: <SERVICE> // Facultatif
-        env: <ENV> // Facultatif 
     });
     datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);    
   }
@@ -150,8 +148,7 @@ class CdkStack extends cdk.Stack {
 
 Pour remplir les paramètres fictifs, procédez comme suit :
 
-- Remplacez `<DATADOG_API_KEY>` par votre clé d'API Datadog sur la [page de gestion des API][3]. 
-- Remplacez `<SERVICE>` et `<ENV>` par les valeurs appropriées.
+- Remplacez `<DATADOG_API_KEY>` par votre clé d'API Datadog sur la [page de gestion des API][3].
 - Remplacez `<VERSION_COUCHE>` par la version de votre choix de la couche Lambda Datadog (consultez les [dernières versions][2]).
 - Remplacez `<VERSION_EXTENSION>` par la version de votre choix de l'extension Lambda Datadog (consultez les [dernières versions][4]).
 

@@ -279,9 +279,8 @@ spec:
 Apache チェックにはイベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "apache" >}}
 
-**apache.can_connect**:<br>
-設定された `apache_status_url` に Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

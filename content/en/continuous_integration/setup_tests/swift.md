@@ -10,6 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -98,12 +99,16 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-<!-- TODO: uncomment this once we support any datacenter other than us1
-`DD_SITE`
-: The Datadog site to upload results to.<br/>
+{{< site-region region="eu" >}}
+Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
+
+`DD_SITE` (Required)
+: The [Datadog site][1] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Possible values**: `datadoghq.com`, `us3.datadoghq.com`, `datadoghq.eu`
--->
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+[1]: /getting_started/site/
+{{< /site-region >}}
 
 ### Collecting Git and build metadata
 
@@ -115,6 +120,7 @@ When running tests in a simulator, full Git metadata is collected using the loca
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
+{{< site-region region="us" >}}
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -project "MyProject.xcodeproj" \
@@ -122,6 +128,16 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -destination "platform=macOS,arch=x86_64" \
   test
 {{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+{{< code-block lang="bash" >}}
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
+{{< /code-block >}}
+{{< /site-region >}}
 
 ### UI tests
 
@@ -418,3 +434,7 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
+{{< /site-region >}}
+{{< site-region region="us3,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}
