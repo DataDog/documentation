@@ -193,13 +193,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ```
 2. [Restart the Agent][9].
 
-### Collecting traces (optional)
-
-Datadog APM integrates with Postgres to see the traces across your distributed system. Trace collection is enabled by default. To start collecting traces, [instrument your application that makes requests to Postgres][10].
-
 ### Collecting logs (optional)
 
-PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][11] on this topic for additional details.
+PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][10] on this topic for additional details.
 
 1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
    ```conf
@@ -214,7 +210,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
      ## For Windows
      #log_destination = 'eventlog'
    ```
-2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
+2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][11].
     This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration (in milliseconds):
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
@@ -246,11 +242,11 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 ### Validate
 
-[Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
+[Run the Agent's status subcommand][12] and look for `postgres` under the Checks section. Or visit the [Databases][13] page to get started!
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][14]
 
 ## Further reading
 
@@ -266,9 +262,8 @@ If you have installed and configured the integrations and Agent as described and
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /tracing/setup/
-[11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
-[12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[13]: /agent/guide/agent-commands/#agent-status-and-information
-[14]: https://app.datadoghq.com/databases
-[15]: /database_monitoring/troubleshooting/?tab=postgres
+[10]: https://www.postgresql.org/docs/11/runtime-config-logging.html
+[11]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
+[12]: /agent/guide/agent-commands/#agent-status-and-information
+[13]: https://app.datadoghq.com/databases
+[14]: /database_monitoring/troubleshooting/?tab=postgres
