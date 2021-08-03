@@ -157,18 +157,17 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 {{< get-metrics-from-git "voltdb" >}}
 
 
-### サービスのチェック
-
-**voltdb.can_connect**:<br>
-構成された VoltDB URL に Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 このチェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "voltdb" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
@@ -182,4 +181,5 @@ VoltDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/voltdb/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/voltdb/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

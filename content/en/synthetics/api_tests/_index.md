@@ -31,8 +31,6 @@ Launch requests on the different network layers of your systems with these subty
 
 {{< partial name="synthetics/network-layers.html" >}}
 
-{{< img src="synthetics/api_tests/api_test.mp4" alt="API Test subtypes" video="true"  width="100%" >}}
-
 If your service starts answering slower or in an unexpected way (such as an unexpected response body or wrong A record), your test can [alert your team][1], [block your CI pipeline][2], and [roll back the faulty deployment][2].
 
 API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems.

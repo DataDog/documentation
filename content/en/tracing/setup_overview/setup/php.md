@@ -61,7 +61,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
     See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -226,7 +226,7 @@ Maximum time the allowed for Agent connection setup (in milliseconds)
 : **Default**: `100`<br>
 The Agent connection timeout (in milliseconds)
 
-`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` 
+`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
 : **Default**: `3`<br>
 IPC-based configurable circuit breaker max consecutive failures
 
@@ -461,7 +461,11 @@ If no core dump was generated, check the following configurations and change the
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
 
-Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests (not generally in production).
+<div class="alert alert-danger">
+<strong>Note</strong>: An application that runs through Valgrind is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
+</div>
+
+Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests.
 
 For a CLI application, run:
 {{< code-block lang=shell >}}
@@ -478,7 +482,11 @@ When using Apache, run:
 
 ### Obtaining a strace
 
-Some issues are caused by external factors, so it can be valuable to have a `strace`. 
+Some issues are caused by external factors, so it can be valuable to have a `strace`.
+
+<div class="alert alert-danger">
+<strong>Note</strong>: An application that runs through <code>strace</code> is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
+</div>
 
 Install `strace` with your package manager. When generating a `strace` to send to Datadog Support, ensure you use the `-f` option to follow child processes.
 

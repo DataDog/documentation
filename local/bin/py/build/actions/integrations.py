@@ -594,11 +594,12 @@ class Integrations:
             self.content_integrations_dir + new_file_name
         )
 
-        regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
-        regex_skip_sections_start = r"(```|\{\{< code-block)"
+        regex_skip_sections_end = r"(```|\{\{< \/code-block |\{\{< \/site-region >\}\})"
+        regex_skip_sections_start = r"(```|\{\{< code-block |\{\{< site-region)"
 
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace interations
+        result = ''
         if not marketplace:
             try:
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)

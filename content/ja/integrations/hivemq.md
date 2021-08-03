@@ -148,13 +148,8 @@ JMXFetch
 
 
 ### サービスのチェック
+{{< get-service-checks-from-git "hivemq" >}}
 
-**hivemq.can_connect**:<br>
-Agent が監視対象の HiveMQ インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-### イベント
-
-HiveMQ には、イベントは含まれません。
 
 ## トラブルシューティング
 
