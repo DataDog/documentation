@@ -49,7 +49,7 @@
     contents:
 
     - action: integrations
-      branch: ruth/docs-2083
+      branch: prod
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
