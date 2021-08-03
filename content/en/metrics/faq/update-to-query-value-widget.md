@@ -42,7 +42,7 @@ Example queries with different behavior:
 
 ## Are there billing implications tied to this change? 
 
-No. This solely affects the values that are returned when you’re visualizing your metrics with a Top List or Query Value Widget. 
+No. This solely affects the values that are returned when you’re visualizing your metrics with a Top List or Query Value widget. 
 
 ## Can I opt out of this change?
 
