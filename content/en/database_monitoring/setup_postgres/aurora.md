@@ -56,9 +56,9 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database]6].
+Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
@@ -106,7 +106,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][7] for more information.
+**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
 
 Create the function to enable the Agent to collect explain plans.
 
@@ -311,8 +311,8 @@ If you have installed and configured the integrations and Agent as described and
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: https://www.postgresql.org/docs/current/app-psql.html
-[7]: /integrations/faq/postgres-custom-metric-collection-explained/
+[6]: /integrations/faq/postgres-custom-metric-collection-explained/
+[7]: https://www.postgresql.org/docs/current/app-psql.html
 [8]: https://app.datadoghq.com/account/settings#agent
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
