@@ -15,7 +15,7 @@ disable_sidebar: true
 |--|------------|---------|------------|------------------|
 | MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| MySQL 8.0 | {{< X >}} | {{< X >}} | N/A | {{< X >}} |
+| MySQL 8.0 | {{< X >}} | {{< X >}} |   | {{< X >}} |
 
 For setup instructions, select your hosting type:
 

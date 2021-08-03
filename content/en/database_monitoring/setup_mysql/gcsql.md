@@ -212,13 +212,13 @@ See the [Autodiscovery template variables documentation][2] to learn how to pass
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you have a Kubernetes cluster, you can use the [Datadog Cluster Agent][1] for Database Monitoring.
+If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. The MySQL configuration can be declared with static files mounted in the cluster agent container or using service annotations:
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
-##### Configure with mounted files
+### Configure with mounted files
 
-To configure a cluster check with a mounted configuration file, mount the configuration file in the cluster agent container on the path: `/conf.d/mysql.yaml`:
+To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path `/conf.d/mysql.yaml`:
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -231,9 +231,9 @@ instances:
     pass: '<UNIQUEPASSWORD>'
 ```
 
-##### Configure with Kubernetes service annotations
+### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can also declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
 ```yaml
 apiVersion: v1
@@ -263,9 +263,9 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-The Cluster Agent should automatically register this configuration and begin running the MySQL check.
+The Cluster Agent automatically registers this configuration and begin running the MySQL check.
 
-To avoid exposing the datadog user's password in plaintext, use the agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
@@ -280,7 +280,7 @@ To avoid exposing the datadog user's password in plaintext, use the agent's [sec
 
 ## Install the Cloud SQL integration
 
-Optionally, to collect more comprehensive database metrics from GCP, we recommend installing the [Cloud SQL integration][8].
+To collect more comprehensive database metrics from GCP, install the [Cloud SQL integration][8] (optional).
 
 
 ## Troubleshooting

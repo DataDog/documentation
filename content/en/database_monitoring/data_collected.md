@@ -39,7 +39,7 @@ If you are sending logs to Datadog from your database, please be aware that some
 
 ### Query Comments
 
-SQL query comments may be collected by the agent and sent to Datadog without passing through obfuscation. SQL query comments generally do not contain sensitive data, but comments extracted from the query SQL will not pass through obfuscation.
+SQL query comments may be collected by the Agent and sent to Datadog without passing through obfuscation. SQL query comments generally do not contain sensitive data, but comments extracted from the query SQL will not pass through obfuscation.
 
 ## Which queries are tracked
 

@@ -10,19 +10,21 @@ description: Advanced Configuration for Postgres Database Monitoring
 
 ## Handling many identical tables
 
-<!-- NOTE TO EDITORS: Please edit this section across all databases -->
+Partitioning your database across tables, such that table definitions are identical except for the name, can result in a large number or normalized queries:
 
-If your database is partitioned across tables in such a way that table definitions are identical except for the name, this can result in a large number or normalized queries, such as:
+```sql
+SELECT * FROM daily_aggregates_001
+SELECT * FROM daily_aggregates_002
+SELECT * FROM daily_aggregates_003
+```
 
-* `SELECT * FROM daily_aggregates_001`
-* `SELECT * FROM daily_aggregates_002`
-* `SELECT * FROM daily_aggregates_003`
+In these cases, track these queries as a single normalized query using the `quantize_sql_tables` option, so all metrics for those queries are rolled up into a single query:
 
-In these cases, it is often preferable to track these queries as a single normalized query using the `quantize_sql_tables` option, so all metrics for those queries will be rolled up into a single query:
+```sql
+SELECT * FROM daily_aggregates_?
+```
 
-* `SELECT * FROM daily_aggregates_?`
-
-Add this option to your database instance config in the datadog agent:
+Add the `quantize_sql_tables` option to your database instance configuration in the Datadog Agent:
 
 ```yaml
 init_config:
@@ -32,3 +34,4 @@ instances:
     ...
     quantize_sql_tables: true
 ```
+

@@ -20,9 +20,9 @@ If you are receiving other data such as system metrics, but not Database Monitor
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-To debug, start by running the [agent status command][1] to collect debugging information about data collected and sent to Datadog.
+To debug, start by running the [Agent status command][1] to collect debugging information about data collected and sent to Datadog.
 
-Check the `Config Errors` section to ensure the config file is valid:
+Check the `Config Errors` section to ensure the configuration file is valid:
 
 ```
   Config Errors
@@ -32,7 +32,7 @@ Check the `Config Errors` section to ensure the config file is valid:
       Configuration file contains no valid instances
 ```
 
-If the configuration is valid, you should see an output that looks like this:
+If the configuration is valid, the output looks like this:
 
 ```
 =========
@@ -74,9 +74,9 @@ Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-To debug, start by running the [agent status command][1] to collect debugging information about data collected and sent to Datadog.
+To debug, start by running the [Agent status command][1] to collect debugging information about data collected and sent to Datadog.
 
-Check the `Config Errors` section to ensure the config file is valid:
+Check the `Config Errors` section to ensure the configuration file is valid:
 
 ```
   Config Errors
@@ -86,7 +86,7 @@ Check the `Config Errors` section to ensure the config file is valid:
       Configuration file contains no valid instances
 ```
 
-If the configuration is valid, you should see an output that looks like this:
+If the configuration is valid, the output looks like this:
 
 ```
 =========
@@ -263,7 +263,7 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
-| The query cannot be explained | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
+| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The application client used to connect to the database is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][1] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][2] and Python client [asyncpg][3] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters.  |
 | The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][4] to capture the query. |
 
@@ -280,7 +280,7 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
-| The query cannot be explained | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
+| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][1] to capture the query. |
 
 [1]: /database_monitoring/setup_mysql/advanced_configuration/
