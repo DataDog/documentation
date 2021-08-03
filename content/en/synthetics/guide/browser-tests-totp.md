@@ -17,8 +17,6 @@ further_reading:
 ### Store your secret key or QR code in a global variable
 
 In the Global Variables tab of your Settings page, click Create Global Variable and enter a secret key or upload a QR code from your authentication provider:
-
-
 1. In *Choose variable type*, select *MFA Token*.
 2. In *Define variable*, enter a *Variable Name*. Your variable name can only use uppercase letters, numbers, and underscores.
 3. Enter a *Description* for your variable (optional).
@@ -30,9 +28,11 @@ In the Global Variables tab of your Settings page, click Create Global Variable 
 {{< img src="synthetics/guide/browser-tests-totp/synthetic-mfa-setup.png" alt="Create a new MFA token" border="true" popup="true">}}
 
 ### Test your workflows with TOTP
+
 When creating a browser or API test, inject the TOTP generated from the secret key stored in the global variable to verify your application’s authentication workflow.
 
 #### TOTP in a browser test recording
+
 When recording your test, click the Hand icon to generate a TOTP.
 In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
 After recording your test steps, click *Save & Launch Test*.
