@@ -332,8 +332,8 @@ On OpenShift 4, all control plane components can be monitored using endpoint che
 ### Prerequisites
 
 1. Enable the Datadog [Cluster Agent][7]
-1. Enable [Cluster Checks][8]
-1. Enable [Endpoint Checks][9]
+1. Enable [Cluster checks][8]
+1. Enable [Endpoint checks][9]
 1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
 ### API server
@@ -364,7 +364,9 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 ```
 
- These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
+These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
+
+**Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
 
 
 {{< tabs >}}
@@ -470,8 +472,8 @@ On OpenShift 3, all control plane components can be monitored using endpoint che
 ### Prerequisites
 
 1. Enable the Datadog [Cluster Agent][7]
-1. Enable [Cluster Checks][8]
-1. Enable [Endpoint Checks][9]
+1. Enable [Cluster checks][8]
+1. Enable [Endpoint checks][9]
 1. Ensure that you are logged in with sufficient permissions to create and edit services.
 
 ### API server
@@ -495,7 +497,9 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below. (Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.)
+Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
+
+**Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
