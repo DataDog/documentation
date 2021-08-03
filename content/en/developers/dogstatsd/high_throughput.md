@@ -499,6 +499,18 @@ The number of datagrams dropped because of an error while writing to Datadog.
 : **Metric type**: count<br>
 The number of metrics dropped because the internal receiving channel is full (only when using `WithChannelMode()`). Starting with version `3.6.0` of the Go client.
 
+`datadog.dogstatsd.client.aggregated_context`
+: **Metric type**: count<br>
+The number of contexts aggregated when client side aggregation is enabled. Starting with version `4.3.0`.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `4.3.0`.
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Metric type**: count<br>
+The number of metrics by type sent to the DogStatsD client by your application (before sampling). Starting with version `4.3.0`.
+
 To disable telemetry, use the `WithoutTelemetry` setting:
 
 ```go
@@ -545,6 +557,18 @@ The number of datagrams dropped by the DogStatsD client.
 `datadog.dogstatsd.client.packets_dropped_queue` 
 : **Metric type**: count<br>
 The number of datagrams dropped because the DogStatsD client queue was full.
+
+`datadog.dogstatsd.client.aggregated_context`
+: **Metric type**: count<br>
+The number of contexts aggregated when client side aggregation is enabled. Starting with version `v2.11.0`.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `v2.13.0`.
+
+`datadog.dogstatsd.client.metrics_by_type`
+: **Metric type**: count<br>
+The number of metrics by type sent to the DogStatsD client by your application (before sampling). Starting with version `v2.13.0`.
 
 To disable telemetry, use the `enableTelemetry(false)` builder option:
 
@@ -665,6 +689,10 @@ Number of datagrams dropped by the DogStatsD client.
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Metric type**: count<br>
 Number of datagrams dropped because the DogStatsD client queue was full.
+
+`datadog.dogstatsd.client.aggregated_context_by_type`
+: **Metric type**: count<br>
+Number of contexts aggregated by type when client side aggregation is enabled. Starting with version `7.0.0`.
 
 To disable telemetry, set `TelemetryFlushInterval` at `null`:
 
