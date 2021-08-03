@@ -40,9 +40,18 @@ Applying the `moving_rollup()` function to a query allows you to combine points 
 
 ## Rollup interval: enforced vs custom
 
-When graphing, Datadog imposes a limit of 350 points per graph. In order to respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric.
+When graphing, Datadog imposes a limit on the number of points per graph. In order to respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric. This default time interval will vary depending on how the data is being visualized. Refer to the following chart to reference these default time intervals:
 
-A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and the time interval to rollup. However, if a custom `.rollup()` function is applied and uses a smaller time interval than the Datadog limit, the Datadog limit is used instead while still using the specified rollup method. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup greater than 20 seconds in order to prevent returning more than 350 points.
+| Timeframe           | Rollup Interval, Line Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
+|---------------------|-----------------------------|----------------------------|----------------------|
+| The Past Hour       | 20s                         | 1m                         | 20s                  |
+| The Past 4 Hours    | 1m                          | 2m                         | 1m                   |
+| The Past Day        | 5m                          | 20m                        | 5m                   |
+| The Past 2 Days     | 10m                         | 30m                        | 10m                  |
+| The Past Week       | 1hr                         | 2hr                        | 1hr                  |
+| The Past Month      | 2hr                         | 12hr                       | 4hr                  |
+
+A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and the time interval to rollup. However, if a custom `.rollup()` function is applied and uses a smaller time interval than the Datadog limit, the Datadog limit is used instead while still using the specified rollup method. For example, if you're requesting `.rollup(20)` for a month-long window, data is returned at a rollup greater than 20 seconds in order to prevent returning more than allotted number of points.
 
 **Note**: Queries for `COUNT` and `RATE` type metrics have the `.as_count()` modifier appended automatically in the UI, which sets the rollup method used to `sum` and disables interpolation. This `.as_count()` is explicitly visible at the end of the query:
 
