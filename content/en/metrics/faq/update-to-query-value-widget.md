@@ -10,7 +10,7 @@ We have unified the way metric queries are evaluated for Top Lists and Query Val
 
 As a refresher, regardless of the type of widget, each metric query consists of the same two evaluation steps to start: 1. Time aggregation, 2. Space aggregation (refresher [here][1]). 
 
-* A Query Value Widget simply reduces the results of those two steps into a single value.
+* A Query Value widget reduces the results of those two steps into a single value.
 * A Top List Widget returns a single value per group.
 
 So we’ve unified the evaluation steps used for the Top List Widget to match the Query Value Widget’s (as shown in the table below):
