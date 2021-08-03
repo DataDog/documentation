@@ -103,24 +103,18 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 - `systemd.service.restart_count`: Systemd v235 が必要です。
 - `systemd.socket.connection_refused_count`: Systemd v239 が必要です。
 
-### サービスのチェック
-
-**systemd.can_connect**:<br>
-Systemd が到達可能な場合は `OK`、それ以外の場合は `CRITICAL` を返します。
-
-**systemd.system.state**:<br>
-Systemd のシステム状態が running の場合は、`OK` を返します。状態が degraded、maintenance、stopping の場合は、`CRITICAL` を返します。状態が initializing、starting、またはその他の場合は、`UNKNOWN` を返します。
-
-**systemd.unit.state**:<br>
-ユニットのアクティブ状態が active の場合は、`OK` を返します。状態が inactive、deactivating、failed の場合は、`CRITICAL` を返します。状態が activating またはその他の場合は、`UNKNOWN` を返します。
-
 ### イベント
 
 Systemd チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "systemd" >}}
+
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/

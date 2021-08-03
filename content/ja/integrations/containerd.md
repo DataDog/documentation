@@ -104,8 +104,8 @@ CPU、メモリ、ブロック I/O、ヒュージページテーブルのメト�
 Containerd チェックは、イベントを収集できます。`filters` を使用して関連イベントを選択します。詳細については、[サンプル containerd.d/conf.yaml][1] を参照してください。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "containerd" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 

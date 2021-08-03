@@ -28,7 +28,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 ## Create your VPC endpoint
 
-1. Connect to the AWS console and create a new VPC endpoint:
+1. Connect to the AWS console to region **us-east-1** and create a new VPC endpoint:
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 2. Select **Find service by name**.
 3. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:

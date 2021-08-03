@@ -109,9 +109,9 @@ require('dd-trace').init({
 
 Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
 
-```javascript
-'scripts': {
-  'test': 'mocha --require init-tracer'
+```json
+"scripts": {
+  "test": "mocha --require init-tracer"
 },
 ```
 
@@ -126,9 +126,9 @@ DD_ENV=ci npm test
 
 Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
 
-{{< code-block lang="javascript" filename="package.json" >}}
-'scripts': {
-  'test': 'DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init'
+{{< code-block lang="json" filename="package.json" >}}
+"scripts": {
+  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
 },
 {{< /code-block >}}
 

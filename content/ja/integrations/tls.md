@@ -81,6 +81,8 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                          |
 | `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%", "port":"443"}` |
 
+**注**: よく知られた信頼できる CA からのものではない内部証明書を使用している場合、特定のメトリクスが Datadog にレポートされない場合があります。インテグレーションテンプレートで `tls_verify: false` を使用して、このインスタンスのすべてのメトリクスをレポートします。
+
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
@@ -100,28 +102,16 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 TLS には、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "tls" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][4] を参照してください。
-
-**tls.can_connect**:<br>
-監視対象のエンドポイントに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**tls.version**:<br>
-許可されていないプロトコルバージョンで接続が行われた場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**tls.cert_validation**:<br>
-証明書の形式が正しくない場合、またはサーバーのホスト名と一致しない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**tls.cert_expiration**:<br>
-証明書の有効期限が切れているか、有効期限が `days_critical`/`seconds_critical` 未満の場合は `CRITICAL` を返し、有効期限が `days_warning`/`seconds_warning` 未満の場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://en.wikipedia.org/wiki/Transport_Layer_Security
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/tls/assets/service_checks.json
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/help/

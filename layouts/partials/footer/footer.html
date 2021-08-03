@@ -27,7 +27,7 @@
         </div>
         <div class="row mb-0 mb-lg-5">
             <div class="col-12 col-lg-3 footer-side">
-                <a href="#" class="mb-2 mb-lg-4 js-cta-footer {{ if .Params.bottom_footer_trigger }} {{ .Params.bottom_footer_trigger }} {{ else }} sign-up-trigger {{ end }} btn btn-white btn-outline btn-block" data-event-category="Signup" data-event-action="Step 1 Footer Initiated" data-event-label="{{ "{{url path}}" }}">
+                <a href="#" class="mb-2 mb-lg-4 js-cta-footer {{ if .Params.bottom_footer_trigger }} {{ .Params.bottom_footer_trigger }} {{ else }} sign-up-trigger {{ end }} btn btn-white btn-outline btn-block" data-event-category="Signup" data-event-action="Step 1 Footer Initiated" data-event-label="{{ "{{url path}}" }}" data-toggle="modal" data-target="#signupModal">
                     {{ if .Params.custom_footer_cta }}
                         {{ .Params.custom_footer_cta }}
                     {{ else }}

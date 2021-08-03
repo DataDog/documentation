@@ -63,17 +63,18 @@ supported_os:
 Disk チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "disk" >}}
 
-**disk.read_write**:<br>
-ファイルシステムが読み取り専用モードの場合、`CRITICAL` を返します。**注**: このサービスチェックは、[disk.d/conf.yaml][3] の `service_check_rw` で有効にする必要があります。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/disk/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/disk/assets/service_checks.json
+[7]: https://docs.datadoghq.com/ja/help/

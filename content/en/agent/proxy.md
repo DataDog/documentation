@@ -80,23 +80,24 @@ proxy:
 
 ##### NO_PROXY accepted values
 
-- A domain name matches that name and all subdomains, for example:
-  - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
-  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
-- A domain name with a leading "." matches subdomains only, for example:
-  - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
-- A CIDR range matches an IP address within the subnet, for example:
-  - `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
-- An exact IP address, for example:
-  - `169.254.169.254`
-- A hostname, for example:
-  - `webserver1`
-
-`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests. Enable `no_proxy_nonexact_match` to allow the Agent to match `NO_PROXY` values with the same rules (above) used for integrations. 
+By default, `no_proxy`/`NO_PROXY` must match endpoints exactly for Agent HTTP(S) requests (except requests performed by Agent integrations). It is recommended to enable `no_proxy_nonexact_match` to make the Agent match `NO_PROXY` values with the same rules (below) used for Agent integrations.
 
 ```yaml
 no_proxy_nonexact_match: true
 ```
+
+The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
+* A domain name matches that name and all subdomains, for example:
+  - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
+  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
+* A domain name with a leading "." matches subdomains only, for example:
+  - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
+* A CIDR range matches an IP address within the subnet, for example:
+  - `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
+* An exact IP address, for example:
+  - `169.254.169.254`
+* A hostname, for example:
+  - `webserver1`
 
 #### Environment variables
 

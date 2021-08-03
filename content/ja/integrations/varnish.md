@@ -176,9 +176,8 @@ _Agent バージョン 6.0 以降で利用可能_
 Varnish チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "varnish" >}}
 
-**varnish.backend_healthy**:<br>
-`varnishadm` を構成すると、Agent がこのサービスチェックを送信します。各 Varnish バックエンドのサービスチェックが `backend:<バックエンド名>` でタグ付けされて送信されます。
 
 ## トラブルシューティング
 
