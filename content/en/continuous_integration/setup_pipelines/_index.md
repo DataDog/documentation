@@ -1,5 +1,5 @@
 ---
-title: Setup Tracing on CI Pipelines
+title: Set up Tracing on CI Pipelines
 kind: documentation
 private: true
 disable_sidebar: true

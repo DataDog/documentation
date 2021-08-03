@@ -168,7 +168,7 @@ All other [Datadog Tracer configuration][5] options can also be used.
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][7].
+[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS][7] documentation.
 
 ### Browser tests
 The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
