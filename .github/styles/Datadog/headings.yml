@@ -17,6 +17,7 @@ exceptions:
   - APIs
   - APM & Continuous Profiler
   - App Analytics
+  - App Service
   - AppVeyor
   - AuthN
   - Autodiscovery
