@@ -17,8 +17,8 @@ With this update, the evaluation steps used for Top List widgets match the steps
 
 | Widget      | Old evaluation steps                                                                                                               | New evaluation steps             |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| Query Value | 1. Time aggregation 2. Space aggregation 3. Time aggregation (reduces values to a single number) 4. Apply arithmetic and functions | Same as old steps                |
-| Top List    | 1. Time aggregation 2. Space aggregation 3. Apply arithmetic and functions 4. Time aggregation (reduces values to a single number) | Same as Query Value widget steps |
+| Query Value | 1. Time aggregation<br/> 2. Space aggregation<br/> 3. Time aggregation (reduces values to a single number)<br/> 4. Apply arithmetic and functions | Same as old steps                |
+| Top List    | 1. Time aggregation<br/> 2. Space aggregation<br/> 3. Apply arithmetic and functions<br/> 4. Time aggregation (reduces values to a single number) | Same as Query Value widget steps |
 
 The following functions are not available for Query Value and Top List widgets: 
 * `forecast`
