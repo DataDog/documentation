@@ -46,7 +46,7 @@ The panel on the left side of the page lists several facets you can use to searc
 | `Duration`       | The overall duration of the batch.                          |
 | `ID`             | The id of the batch.                                        |
 
-* **Git** facets allow you to filter on Git related attributes of your batches:
+**Git** facets allow you to filter on Git-related attributes of your batches:
 
 | Facet       | Description                               |
 |-------------|-------------------------------------------|
