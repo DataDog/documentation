@@ -19,7 +19,7 @@ further_reading:
 Datadog Real User Monitoring (RUM) offers Watchdog Insights to help you navigate to the root cause of problems with contextual insights in the RUM Explorer. Watchdog Insights complement your expertise and instincts by recommending outliers and potential performance bottlenecks impacting a subset of users. 
 
 <div class="alert alert-warning">
-Watchdog Insights for RUM is in beta. Access to this feature is provisioned to customers using Real User Monitoring. If you have feedback, contact [Datadog support][5].
+Watchdog Insights for RUM is in beta. Access to this feature is provisioned to customers using Real User Monitoring. If you have feedback, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 In this example, Watchdog Insights identifies that the deployed application instance on `view.url_host:www.shopist.io` caused most of the errors in a given time range (for example, the past day).
