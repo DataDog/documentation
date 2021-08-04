@@ -44,7 +44,7 @@ The panel on the left side of the page lists several facets you can use to searc
 
 | Facet            | Description                                                 |
 |------------------|-------------------------------------------------------------|
-| `Summary Status` | The status of the batch: `Passed`, `Failed`, or `In Progress`. |
+| `Summary Status` | The status of the batch: `Passed`, `Failed`, `In Progress`. |
 | `Duration`       | The overall duration of the batch.                          |
 | `ID`             | The id of the batch.                                        |
 
