@@ -83,7 +83,7 @@ The following example illustrates what the relevant webhook payload could look l
 }
 {{< /code-block >}}
 
-Datadog generates the Security Signal, which details the offense as well as the suspicious user’s information, such as their IP address and user ID, and the webhook payload will send remediation instructions to a service to disable the user's credentials.
+Datadog generates the Security Signal, which details the offense as well as the suspicious user’s information, such as their IP address and user ID, and the webhook payload sends remediation instructions to a service to disable the user's credentials.
 
 ## Further Reading
 
