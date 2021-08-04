@@ -17,12 +17,14 @@ further_reading:
 
 ## Overview
 
-The CI Results Explorer gives you visibility into your CI jobs executing Synthetic tests. It allows you to:
+The CI Results Explorer gives you visibility into your CI jobs that are executing Synthetic tests. 
 
-* Drill down into each CI job execution to identify and troubleshoot failing test results
-* Compare test results executed against various devices and browsers to pinpoint cross browser and device issues
-* Keep track of the progress of your tests in CI pipelines
-* Identify flaky tests that might need to be fixed
+You can:
+
+* Drill down into each CI job execution to identify and troubleshoot failing test results.
+* Compare test results executed against various devices and browsers to pinpoint cross browser and device issues.
+* Keep track of the progress of your tests in CI pipelines.
+* Identify flaky tests to fix.
 
 {{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.jpeg" alt="CI Results Explorer"  style="width:100%;">}}
 
