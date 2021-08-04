@@ -6,9 +6,6 @@ further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started/"
   tag: "Documentation"
   text: "Get started with Datadog Cloud Workload Security"
-- link: "/security_platform/cloud_workload_security/getting_started/"
-  tag: "Documentation"
-  text: "Event attributes for Cloud Workload Security"
 ---
 
 ## Agent expression syntax
