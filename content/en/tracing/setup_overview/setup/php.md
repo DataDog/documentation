@@ -441,7 +441,41 @@ In the unusual event of an application crash caused by the PHP tracer, typically
 
 ### Install debug symbols
 
-In order for the core dumps to be readable, debug symbols for the PHP binaries have to be installed in the system that runs PHP.
+For the core dumps to be readable, debug symbols for the PHP binaries have to be installed in the system that runs PHP.
+
+To check if debug symbols are installed for PHP or PHP-FPM, the easiest approach is to use `gdb`.
+
+Install `gdb`:
+
+```
+apt|yum install -y gdb
+```
+
+Run `gdb` with the binary of interest. For example for PHP-FPM:
+
+```
+gdb php-fpm
+```
+
+`gdb` will output some logs.
+
+If the output contains a line similar to the text below, then debug symbols are already installed.
+
+```
+...
+Reading symbols from php-fpm...Reading symbols from /usr/lib/debug/path/to/some/file.debug...done.
+...
+```
+
+If the output contains a line similar to the text below, then debug symbols have to be installed:
+
+```
+...
+Reading symbols from php-fpm...(no debugging symbols found)...done.
+...
+```
+
+Instructions follow in the next sections.
 
 #### Centos
 
@@ -542,7 +576,7 @@ After:
 
 ```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
 
-Update and install the debug symbols. For example, for PHP 7.2:
+Update and install the debug symbols. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -556,7 +590,7 @@ Find the right package name for your PHP binaries, it can vary depending on the 
 apt list --installed | grep php
 ```
 
-Note that in some cases `php-fpm` can be a metapackage that refers to the real package, for example `php7.2-fpm` for PHP 7.2. In this case the package name is the latter.
+Note that in some cases `php-fpm` can be a metapackage that refers to the real package, for example `php7.2-fpm` in case of PHP-FPM 7.2. In this case the package name is the latter.
 
 Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
 
@@ -574,6 +608,7 @@ For example, for ubuntu 18.04 and newer, enable the `ddebs` repo:
 
 ```
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
+
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
