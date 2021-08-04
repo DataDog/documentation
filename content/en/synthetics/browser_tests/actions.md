@@ -263,11 +263,11 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### Global variable
 
-Pick any global variables that was defined through [Synthetic Monitoring Settings][7].
+Pick any global variables defined in [Synthetic Monitoring Settings][7].
 
 #### Global variable - MFA
 
-Pick any global variables that was defined through [Synthetic Monitoring Settings][7].
+Pick any MFA global variables defined in [Synthetic Monitoring Settings][7].
 This dedicated type of global variable is designed to support multi factor authentication (MFA) processes through the [generation of time-based one time passwords (TOTP)][14].
 
 #### Email
