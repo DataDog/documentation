@@ -21,13 +21,13 @@ The Events explorer displays all event types by default. You can filter your eve
 
 ### Event Side Panel
 
-{{< img src="events/explorer/side-panel.png" alt="Shows how clicking a row in the Events explorer opens the event side panel" >}}
+{{< img src="events/explorer/event-side-panel.png" alt="Shows how clicking a row in the Events explorer opens the event side panel" >}}
 
 Clicking a row in the Events explorer opens the event side panel. It shows all the information relative to an event. 
 
 ### Attributes Tab
 
-{{< img src="events/explorer/side-panel.png" alt="Shows opening an attributes tab" >}}
+{{< img src="events/explorer/event-attribute.png" alt="An example events attribute tab" >}}
 
 We collect context information by default in JSON format. You can enrich event attributes with processing pipelines.
 
@@ -83,7 +83,7 @@ After being collected, your Events attributes can be indexed as facets or measur
 
 A facet displays the distinct members of an attribute or a tag and provides basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
-{{< img src="events/explorer/facets.png" alt="Shows that the facets are on the left side of the screen next to the menu." >}}
+{{< img src="events/explorer/facets-location.png" alt="Shows that the facets are on the left side of the screen next to the menu." >}}
 
 ### Create a Facet
 
