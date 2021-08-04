@@ -162,10 +162,10 @@ init_config:
 
 instances:
   - dbm: true
-    server: 127.0.0.1
-    user: datadog
-    pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-    port: '<YOUR_MYSQL_PORT>' # e.g. 3306
+    host: 127.0.0.1
+    port: 3306
+    username: datadog
+    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.

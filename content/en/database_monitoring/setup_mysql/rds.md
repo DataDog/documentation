@@ -161,10 +161,10 @@ init_config:
 
 instances:
   - dbm: true
-    server: '<AWS_INSTANCE_ENDPOINT>'
-    user: datadog
-    pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-    port: '<YOUR_MYSQL_PORT>' # e.g. 3306
+    host: '<AWS_INSTANCE_ENDPOINT>'
+    port: 3306 # e.g. 3306
+    username: datadog
+    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
@@ -185,7 +185,7 @@ Set [Autodiscovery Integration Templates][1] as Docker labels on your applicatio
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "server": "<AWS_INSTANCE_ENDPOINT>", "user": "datadog","pass": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
@@ -208,10 +208,10 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    server: '<AWS_INSTANCE_ENDPOINT>'
+    host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
-    user: datadog
-    pass: '<UNIQUEPASSWORD>'
+    username: datadog
+    password: '<UNIQUEPASSWORD>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -234,10 +234,10 @@ metadata:
       [
         {
           "dbm": true,
-          "server": "<AWS_INSTANCE_ENDPOINT>",
+          "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 3306,
-          "user": "datadog",
-          "pass": "<UNIQUEPASSWORD>"
+          "username": "datadog",
+          "password": "<UNIQUEPASSWORD>"
         }
       ]
 spec:
