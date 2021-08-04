@@ -5,6 +5,7 @@ description: APM メトリクスをユーザー定義しきい値と比較する
 aliases:
   - /ja/monitors/monitor_types/app_analytics
   - /ja/monitors/monitor_types/trace_search
+  - /ja/tracing/guide/resource_monitor/
 further_reading:
   - link: /monitors/notifications/
     tag: Documentation
