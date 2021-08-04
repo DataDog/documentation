@@ -699,7 +699,7 @@ You can identify what caused a test to fail by looking at the execution logs and
 
 ### In Datadog application
 
-You can also see the results of your tests listed on the [CI Results explorer][6] as well as on your individual test details page:
+You can also see your CI test results listed in the [CI Results Explorer][6] and on test details pages:
 
 {{< img src="synthetics/ci/test_results.png" alt="Successful Test Result" style="width:100%;">}}
 
