@@ -38,7 +38,7 @@ When clicking on a batch, a side panel containing batch CI metadata as well as b
 
 The panel on the left side of the page lists several facets you can use to search through your batches:
 
-* **Batch** facets allow you to filter on attributes of your batches:
+**Batch** facets allow you to filter on attributes of your batches:
 
 | Facet            | Description                                                 |
 |------------------|-------------------------------------------------------------|
