@@ -712,4 +712,4 @@ You can also see the results of your tests listed on the [CI Results explorer][6
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /api/v1/synthetics/#get-test
 [5]: /synthetics/testing_tunnel/
-[6]: /synthetics/cicd_testing
+[6]: /synthetics/cicd_testing/ci_results_explorer
