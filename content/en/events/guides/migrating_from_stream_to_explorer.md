@@ -23,20 +23,20 @@ You can continue to access the Events Stream from the navigation menu alongside 
 
 ## 2. Migrate existing event monitors and dashboard widgets
 
-You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, you update the search query to match the new one. This can be done manually, or by using this script:
+You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, you update the search query to match the new one. You can do this by manually recreating your existing monitors and widgets or by using this script:
 
 1. Create a list of your existing event monitors and dashboards that need to be migrated.
-2. Create new event monitors with new query and facets based on your current monitor definitions.
+2. Create new event monitors with new queries and facets based on your current monitor definitions.
 3. Use this script to convert dashboard widgets and overlays with events queries to the new syntax:
     ```curl
     ADD SCRIPT HERE
     ```
 
 
-If you use the API, Terraform or other 3rd party solution to manage your monitors, you need to manually update your script using the syntax described above.
+If you use the API, Terraform, or other 3rd party solution to manage your monitors, manually update your code using the syntax described above.
 
-**Note:** If you have SLOs based on event monitors, be sure to update their definitions to point to the newones.
+**Note:** If you have SLOs based on event monitors, be sure to update their definitions to point to the new ones.
 
 ## 4. Sunset legacy events
 
-When your monitor and dashboards have been successfully migrated, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events being generated. The Events Stream will continue to be accessible to view your event history.
+When you have successfully migrated you monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Events Stream will continue to be accessible to view your event history.
