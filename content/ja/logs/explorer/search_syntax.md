@@ -14,7 +14,7 @@ further_reading:
   - link: '/logs/explorer/#patterns'
     tag: ドキュメント
     text: ログ内のパターン検出
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法
   - link: /logs/explorer/saved_views/
@@ -56,24 +56,53 @@ further_reading:
 
 メッセージ属性に `user=JaneDoe` を含むログを見つけるには、次の検索を使用します。
 
-`user\=JaneDoe`
+```
+user\=JaneDoe
+```
 
-### ファセット検索
+### 属性検索
 
-特殊な属性を検索するには、まず[それをファセットとして追加][2]し、`@` を追加してファセットを検索していることを明確にします。
+{{< site-region region="gov,us3" >}}
+特定の属性を検索するには、まず[それをファセットとして追加][1]し、次に `@` を追加してファセット検索を指定します。
 
-たとえば、ファセット名が **url** で、**url** の値 www.datadoghq.com で絞り込む場合は、次のように入力します。
+たとえば、属性名が **url** で、**url** の値 `www.datadoghq.com` で絞り込む場合は、次のように入力します。
 
-`@url:www.datadoghq.com`
+```
+@url:www.datadoghq.com
+```
 
 
 **注**:
 
-1. ファセット検索では大文字と小文字が区別されます。大文字と小文字を区別したくない場合はフリーテキスト検索を使用してください。または、Grok パーサーでのパース実行中に `lowercase` フィルターを適用すれば、文字の種類に関わらない検索結果を得ることができます。
+1. ファセット検索では大文字と小文字が区別されます。大文字と小文字を区別したくない場合はフリーテキスト検索を使用してください。または、Grok パーサーでのパース実行中に小文字フィルターを適用すれば、文字の種類に関わらない検索結果を得ることができます。
 
 2. 特殊文字を含むファセット値を検索するには、エスケープ処理または二重引用符が必要です。
 たとえば、値が `hello:world` のファセット `my_facet` は、`@my_facet:hello\:world` または `@my_facet:"hello:world"` を使用して検索します。
 単一の特殊文字またはスペースに一致させるには、`?` ワイルドカードを使用します。たとえば、値が `hello world` のファセット `my_facet` は、`@my_facet:hello?world` を使用して検索します。
+
+[1]: /ja/logs/explorer/facets/
+
+{{< /site-region >}}
+{{< site-region region="us,eu" >}}
+特定の属性で検索するには、`@` を付けて属性検索を指定します。
+
+たとえば、属性名が **url** で、**url** の値 `www.datadoghq.com` で絞り込む場合は、次のように入力します。
+
+```
+@url:www.datadoghq.com
+```
+
+
+**注**:
+
+1. 属性やタグを検索するためのファセットの定義は**不要です**。
+
+2. 属性検索では大文字と小文字が区別されます。大文字と小文字を区別したくない場合はフリーテキスト検索を使用してください。または、Grok パーサーでのパース実行中に `lowercase` フィルターを適用すれば、文字の種類に関わらない検索結果を得ることができます。
+
+3. 特殊文字を含む属性値を検索するには、エスケープ処理または二重引用符が必要です。
+たとえば、値が `hello:world` の属性 `my_attribute` は、`@my_attribute:hello\:world` または `@my_attribute:"hello:world"` を使用して検索します。
+単一の特殊文字またはスペースに一致させるには、`?` ワイルドカードを使用します。たとえば、値が `hello world` の属性 `my_attribute` は、`@my_attribute:hello?world` を使用して検索します。
+{{< /site-region >}}
 
 例:
 
@@ -93,29 +122,56 @@ further_reading:
 * `web*` は、`web` で始まるすべてのログメッセージに一致します。
 * `*web` は、`web` で終わるすべてのログメッセージに一致します。
 
+{{< site-region region="gov,us3" >}}
 ワイルドカード検索は、この構文を使用してファセット内で機能します。次のクエリは、文字列 `mongo` で終わるすべてのサービスを返します。
+<p> </p>
+{{< /site-region >}}
 
-`service:*mongo`
+{{< site-region region="us,eu" >}}
+ワイルドカード検索は、この構文を使用してタグと属性 (ファセットの有無を問わず) 内で機能します。次のクエリは、文字列 `mongo` で終わるすべてのサービスを返します:
+<p> </p>
+{{< /site-region >}}
+<p></p>
+
+```
+service:*mongo
+```
 
 ワイルドカード検索は、ファセットに含まれないログのプレーンテキスト内の検索にも使用できます。次のクエリは、文字列 `NETWORK` を含むすべてのログを返します。
 
-`*NETWORK*`
+```
+*NETWORK*
+```
 
 ただし、この検索条件は、ファセット内に文字列 `NETWORK` を含み、ログメッセージには含まれない場合はログを返しません。
 
 ### ワイルドカードを検索
 
-特殊文字を含むファセット値を検索する場合、またはエスケープまたは二重引用符を必要とする場合は、`?` ワイルドカードを使用して単一の特殊文字またはスペースに一致させます。たとえば、値が `hello world` のファセット `my_facet` を検索するには: `@my_facet:hello?world`
+{{< site-region region="gov,us3" >}}
+特殊文字を含むファセット値を検索する場合、またはエスケープまたは二重引用符を必要とする場合は、`?` ワイルドカードを使用して単一の特殊文字またはスペースに一致させます。たとえば、値が  のファセット `hello world` を検索するには `@my_facet:hello?world` を使用します。
+<p> </p>
+{{< /site-region >}}
 
-## 数値
+{{< site-region region="us,eu" >}}
+特殊文字を含む属性やタグ値を検索する場合、またはエスケープまたは二重引用符を必要とする場合は、`?` ワイルドカードを使用して単一の特殊文字またはスペースに一致させます。たとえば、値が `hello world` の属性 `my_attribute` を検索するには `@my_attribute:hello?world` を使用します。
+<p> </p>
+{{< /site-region >}}
 
-`<`、`>`、`<=`、または `>=` を使用して、数値属性の検索を実行します。たとえば、100ms を超える応答時間を持つすべてのログを取得するには、次のようにします。
+## Numerical values
 
-`@http.response_time:&gt;100`
+数値属性で検索するには、まず[ファセットとして追加][2]します。次に、数値演算子 (`<`、`>`、`<=`、または `>=`) を使用して、数値ファセットの検索を行うことができます。
+例えば、応答時間が 100ms 以上のログをすべて検索するには、次のようにします。
+<p> </p>
+
+```
+@http.response_time:>100
+```
 
 特定の範囲内にある数値属性を検索することができます。たとえば、4xx エラーをすべて取得するには、次のようにします。
 
-`@http.status_code:[400 TO 499]`
+```
+@http.status_code:[400 TO 499]
+```
 
 ## タグ
 
@@ -137,6 +193,18 @@ further_reading:
 
 {{< img src="logs/explorer/search/array_search.png" alt="配列とファセット"  style="width:80%;">}}
 
+{{< site-region region="us,eu" >}}
+
+**注**: 同等の構文を使用して、検索をファセットではない配列属性にも使用することができます。
+
+次の例では、Windows 用 CloudWatch ログの `@Event.EventData.Data` 下に JSON オブジェクトの配列が含まれています。
+
+* `@Event.EventData.Data.Name:ObjectServer` はキー`Name` と値 `ObjectServer` ですべてのログに一致します。
+
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="JSON オブジェクト配列上のファセットなしクエリ"  style="width:80%;">}}
+<p> </p>
+{{< /site-region >}}
+
 ## 検索の保存
 
 [保存ビュー][6]に、検索クエリ、列、対象期間、およびファセットが格納されます。
@@ -145,7 +213,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/parsing/?tab=matcher
+[1]: /ja/logs/log_configuration/parsing
 [2]: /ja/logs/explorer/facets/
 [3]: /ja/infrastructure/
 [4]: /ja/integrations/#cat-log-collection
