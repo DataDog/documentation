@@ -59,7 +59,7 @@ Programmatically send events to Datadog with a [Custom Agent Check][7], [DogStat
 [1]: http://app.datadoghq.com/event/explorer
 [2]: https://us3.datadoghq.com/event/explorer
 [3]: /events/explorer/
-[4]: /events/explorer/analytics/
+[4]: /events/explorer/#event-analytics
 [5]: /dashboards/widgets/alert_graph/
 [6]: /monitors/monitor_types/event/
 [7]: /events/guides/agent/
