@@ -4,6 +4,7 @@ import re
 import yaml
 
 from os.path import basename
+from process_agent_config import process_agent_config
 
 TEMPLATE = """\
 ---
@@ -30,6 +31,9 @@ def pull_and_push_file(content, content_dir):
             # remove h1 if exists
             file_content = re.sub(re.compile(r"^#{1}(?!#)(.*)", re.MULTILINE), "", file_content, count=1)
             file_content = TEMPLATE.format(front_matter=front_matter, content=file_content.strip())
+        elif "datadog-agent" in content["repo_name"]:
+            process_agent_config(file_content)
+
     with open(
         "{}{}{}".format(
             content_dir,
