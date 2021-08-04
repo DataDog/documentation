@@ -9,12 +9,14 @@ def process_agent_config(config_yaml):
   headings = []
   agent_config_dict = {}
 
-  for index, line in enumerate(lines):
-    if separator in line:
-      heading = lines[index + 1].replace('#', '').strip()
+  print(enumerate(lines))
 
-      if (heading != ''):
-        headings.append(heading)
+  # for index, line in enumerate(lines):
+  #   if separator in line:
+  #     heading = lines[index + 1].replace('#', '').strip()
+
+      # if (heading != ''):
+      #   headings.append(heading)
   
 # config: {
 #   "basic configuration": [
