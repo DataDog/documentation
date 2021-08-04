@@ -2132,6 +2132,10 @@ main:
     parent: synthetics
     identifier: synthetics_ci
     weight: 5
+  - name: CI Results Explorer
+    url: /synthetics/cicd_testing/ci_results_explorer
+    parent: synthetics
+    weight: 501
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics
