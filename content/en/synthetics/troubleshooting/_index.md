@@ -142,7 +142,7 @@ This might mean your private location is unable to reach the endpoint your API t
 
 ### I'm not seeing any CI metadata in my CI Results Explorer
 
-It might be because you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populated with CI metadata, you need to use the [NPM package][14].
+Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][14].
 
 ## Further Reading
 
