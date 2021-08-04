@@ -74,7 +74,7 @@ The panel on the left side of the page lists several facets you can use to searc
 
 ### Create your query
 
-The query syntax of the CI Results Explorer is the same as the one used to query tests on the **Tests** page. Learn more about how to create queries [here][2].
+To query the CI Results Explorer data, use the [same query syntax][2] as on the **Tests** page.
 
 ## Further Reading
 
