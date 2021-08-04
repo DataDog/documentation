@@ -105,29 +105,33 @@ When you're ready to run your test, click **Save Test**.
 
 ### Configure the test
 
-When you create a [Multistep API test][12], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
+When you create a [multistep API test][12], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
 
-1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
-2. In the top right corner, click the **New Test** button.
-3. Select **[Multistep API test][5]**.
-4. Name, tag and select locations for your [Multistep API test][5] like you would with a single [API test][1].
-5. In **Define steps**, click **Create Your First Step**. 
+1. In **New Test** > **[Multistep API test][5]**, add a name, select a tag, and select locations for your [Multistep API test][5].
+2. In **Define steps**, click **Create Your First Step**. 
 
     - Add a name to your step.
     - Specify the URL you want to query. 
     - Select **Advanced Options** to add custom request headers, authentication credentials, body content, or cookies.
     - Click **Test URL**. 
-    - Optionally, add new assertions, define execution parameters, and extract variables from the response content. 
-    - Enter a name for your variable and click on a parsed value in the **Response Body** to set the variable value. 
-    - Click **Save Step**.
+4. Optionally, add an assertion according to the **Response Body** or click inside the **Response Header**.
+5. Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
+6. Optionally, extract variables from the response content by clicking **Extract a variable from response content**. 
+    - Enter a name for your variable.
+    - Click in the **Response Header** to specify which header to extract the variable from. 
+    - In the **Response Body**, select a query language (JSON Path, XPath 1.0, or Regex) to parse the body content or select **Use Full Response Body**.
 
-6. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
-7. Optionally, type `{{` in the **URL** and a list of extracted and global variables appears. 
+7. Click **Save Variable**.
+
+When you're done with this test step, click **Save Step**.
+
+1. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
+2. Optionally, type `{{` in the **URL** and a list of extracted and global variables appears. 
     - Select an extracted variable to inject in your test step. You can add your extracted variables in the **Step URL** or in the request header, cookies, and HTTP authentication fields in **Advanced Options** > **Request Options**.  
 
-8. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
+3. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
 
-When you're ready to create your test, click **Save Test**. 
+When you're ready to run your test, click **Save Test**. 
 
 ## Test results
 
