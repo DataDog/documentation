@@ -24,7 +24,7 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 
 When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab"  style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:75%;" >}}
 
 ## Configuring a graph
 
@@ -47,19 +47,19 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
 
-Explore your metrics further with the [Metrics Explorer][3], a [Notebook][4], or see a list of metrics on the [Metrics Summary page][5].
+Explore your metrics further with the [Metrics Explorer][3], a [Notebook][4], or see a list of metrics on the [Metrics Summary][5] page.
 
 ### Filter
 
 Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter"  style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter" style="width:75%;" >}}
 
 You can also use [advanced filtering][6] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
 
-{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}} 
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters" style="width:75%;" >}} 
 
-To learn more about tags, refer to the [Tagging][7] documentation.
+To learn more about tags, see the [Tagging][7] documentation.
 
 ### Aggregate and rollup
 
@@ -83,7 +83,7 @@ To manually rollup the data, use the [rollup function][9]. Click the plus sign t
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 1 min buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="rollup example"  style="width:90%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="rollup example" style="width:90%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -140,13 +140,13 @@ Datadog also supports the ability to graph your metrics, logs, traces, and other
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualisations, they do not work on monitors. Use [boolean operators][11] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][11] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
-{{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
 
 #### Arithmetic between two metrics
 
@@ -160,7 +160,7 @@ Use the **Advanced...** option in the graph editor and select **Add Query**. Eac
 
 Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
 
-{{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
 
 Here is another example showing how you can graph the ratio between `error` logs and `info` logs.
 
@@ -168,7 +168,7 @@ Here is another example showing how you can graph the ratio between `error` logs
 status:error / status:info
 ```
 
-{{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
@@ -177,7 +177,7 @@ status:error / status:info
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
 
-{{< img src="dashboards/querying/custom_alias.png" alt="Custom alias"  style="width:75%;" >}}
+{{< img src="dashboards/querying/custom_alias.png" alt="Custom alias" style="width:75%;" >}}
 
 ### Create a title
 

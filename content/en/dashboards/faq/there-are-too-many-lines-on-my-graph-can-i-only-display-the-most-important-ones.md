@@ -19,6 +19,6 @@ The top function is a good fit to display only the few relevant lines on the gra
 
 {{< img src="dashboards/faq/too_many_metrics_2.png" alt="too_many_metrics_2"  >}}
 
-[Find more documentation about the top function, its parameters and its aliases][1]
+See the [top function][1] documentation for more details.
 
 [1]: /dashboards/functions/rank/

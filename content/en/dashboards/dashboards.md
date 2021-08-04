@@ -23,21 +23,21 @@ Dashboards are on a next-gen grid based layout which can include a variety of ob
 
 To switch from the [Timeboard layout][1] to the Dashboard layout, use `Pick Layout` in the cog menu and select `Grid`.
 
-{{< img src="dashboards/grid-layout.png" alt="Grid layout option for a dashboard"  style="width:70%;">}}
+{{< img src="dashboards/grid-layout.png" alt="Grid layout option for a dashboard" style="width:70%;">}}
 
 #### High-density mode
 
 High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default for on large screens for dashboards that use group widgets.
 
-{{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
+{{< img src="dashboards/high-density-mode.png" alt="The high-density mode display" style="width:90%;">}}
 
 ## Search
 
-For overlay search options, see [timeboards documentation][2].
+For overlay search options, see [timeboards][2] documentation.
 
 ## Graph menu
 
-For graph menu options, see [timeboards documentation][3].
+For graph menu options, see [timeboards][3] documentation.
 
 ## Tips and tricks
 

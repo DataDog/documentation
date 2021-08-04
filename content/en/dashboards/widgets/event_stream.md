@@ -23,7 +23,7 @@ Note: **this widget displays only the 100 most recent events**.
 
 ## Setup
 
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -37,20 +37,16 @@ Note: **this widget displays only the 100 most recent events**.
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
-[1]: /events/
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[4]: /events/#event-explorer
 
 {{< /site-region >}}
 
@@ -64,7 +60,7 @@ Note: **this widget displays only the 100 most recent events**.
 
 ## Setup
 
-{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/event_stream/event_stream_setup.png" alt="event stream setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -78,20 +74,16 @@ Note: **this widget displays only the 100 most recent events**.
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
-[1]: /events/
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[4]: /events/#event-explorer
 
 {{< /site-region >}}
 
@@ -117,14 +109,10 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
-[1]: /events/
-[2]: /api/v1/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[4]: /events/#event-explorer
 
 {{< /site-region >}}
 

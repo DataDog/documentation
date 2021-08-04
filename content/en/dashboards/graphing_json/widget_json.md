@@ -1,5 +1,5 @@
 ---
-title: Widget JSON schema
+title: Widget JSON Schema
 kind: documentation
 aliases:
   - /graphing/graphing_json/widget_json/
@@ -62,7 +62,7 @@ EVENTS_SCHEMA = {
 }
 ```
 
-See the [Event stream documentation][2] to learn more about the `<EVENT_QUERY>` syntax.
+See the [Event stream][2] documentation for details about the `<EVENT_QUERY>` syntax.
 
 ### Examples
 
@@ -116,7 +116,7 @@ MARKERS_SCHEMA = {
 
 The following markers:
 
-{{< img src="dashboards/graphing_json/markers.png" alt="Markers"  style="width:80%;">}}
+{{< img src="dashboards/graphing_json/markers.png" alt="Markers" style="width:80%;">}}
 
 Are applied with the following configuration:
 
@@ -184,7 +184,7 @@ CONDITIONAL_FORMATS_SCHEMA = {
 | `image_url`       | string | Displays an image as the background.                                                                                                                                                                                                                                    |
 ## Time schema
 
-The available timeframes depend on the widget you are using, but the general format for `time` is:
+The available time frames depend on the widget you are using, but the general format for `time` is:
 
 ```text
 TIME_SCHEMA = {

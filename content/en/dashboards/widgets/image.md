@@ -15,11 +15,11 @@ further_reading:
 
 The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF, hosted where it can be accessed by URL:
 
-{{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true"  width="80%" >}}
+{{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true" style="width:80%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="Image setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup.png" alt="Image setup" style="width:80%;">}}
 
 1. Enter your image URL.
 2. Choose an appearance:
@@ -29,7 +29,7 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][1] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the image widget is:
 

@@ -13,7 +13,7 @@ If you prefer to view the metric as a total count per time frame, you can append
 
 {{< img src="dashboards/faq/CountsBlogImage3.png" alt="CountsBlogImage3"  >}}
 
-To read more about counts and rates, check out [this blog post][1] on the topic.
+To read more about counts and rates, see [Visualize StatsD metrics with Counts Graphing][1].
 
 Note: these functions are only available for StatsD metrics.
 Due to more complex and varying metadata information Datadog Agent counters metrics cannot use the as_count/ as_rate functions at the moment.

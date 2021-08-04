@@ -22,7 +22,7 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 {{< img src="dashboards/widgets/note/using_link_note_widget.mp4" alt="Notes and links widget setup" video="true" style="width:80%;" >}}
 
-1. Enter the text you want to display. Note that Markdown is supported.
+1. Enter the text you want to display. **Note**: Markdown is supported.
 2. Choose the text size and the note background color.
 3. Select the pointer position.
 
@@ -33,7 +33,7 @@ This widget supports template variables. Use `$<VARIABLE_NAME>.value` syntax to 
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the note widget is:
 

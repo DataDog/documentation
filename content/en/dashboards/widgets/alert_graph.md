@@ -24,7 +24,7 @@ This widget is supported for metric, anomaly, outlier, forecast, APM, and integr
 
 ## Setup
 
-{{< img src="dashboards/widgets/alert_graph/alert_graph_setup.png" alt="Alert Graph Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/alert_graph/alert_graph_setup.png" alt="Alert Graph Setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -38,7 +38,7 @@ This widget is supported for metric, anomaly, outlier, forecast, APM, and integr
 
 #### Display preference
 
-{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences" style="width:80%;">}}
 
 ##### Global time
 
@@ -52,13 +52,13 @@ Use *Show legend on graph* to toggle the legend display on your widget. Optional
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][1] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the alert graph widget is:
 

@@ -20,7 +20,7 @@ The scatter plot visualization allows you to graph a chosen scope over two diffe
 
 ## Setup
 
-{{< img src="dashboards/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/scatterplot/scatterplot_setup.png" alt="Scatter Plot Setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -39,13 +39,13 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][1] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the scatter plot widget is:
 

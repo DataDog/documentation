@@ -19,7 +19,7 @@ The event timeline is a widget version of the timeline that appears at the top o
 
 ## Setup
 
-{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example"  style="width:80%;">}}
+{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example" style="width:80%;">}}
 
 ### Configuration
 
@@ -32,13 +32,13 @@ The event timeline is a widget version of the timeline that appears at the top o
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event timeline widget is:
 

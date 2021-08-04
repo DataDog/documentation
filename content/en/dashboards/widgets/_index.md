@@ -99,7 +99,7 @@ To download a widget in PNG format, click the export button in the upper right h
 
 ### CSV
 
-To download data from a timeseries, table, or toplist widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
+To download data from a timeseries, table, or top list widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
 
 [1]: /dashboards/widgets/timeseries/#full-screen
 [2]: /dashboards/

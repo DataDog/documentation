@@ -19,7 +19,7 @@ further_reading:
 
 The network widget supplements the [Network Performance Monitoring][1] feature by allowing you to create timeseries of network data, including volume and TCP retransmit counts of traffic between services, hosts, containers, and any other Datadog tag. Timeseries created with this widget can be placed in dashboards alongside visualizations of logs, traces, and processes data.
 
-{{< img src="dashboards/widgets/network/network_1.png" alt="Image"  width="80%" >}}
+{{< img src="dashboards/widgets/network/network_1.png" alt="Image" style="width:80%;" >}}
 
 **Note**: This widget only supports timeseries visualizations.
 
@@ -27,19 +27,19 @@ The network widget supplements the [Network Performance Monitoring][1] feature b
 
 1. Select "Network Traffic" from the dropdown menu. By default, this is set to "Metric".
 
-    {{< img src="dashboards/widgets/network/network_2.png" alt="Image"   width="80%" >}}
+    {{< img src="dashboards/widgets/network/network_2.png" alt="Image" style="width:80%;" >}}
 
 2. Select any source and destination entities you want to group by in the network page, such as service, host, container, and availability zone.
 
-    {{< img src="dashboards/widgets/network/network_3.png" alt="Image"  width="80%" >}}
+    {{< img src="dashboards/widgets/network/network_3.png" alt="Image" style="width:80%;" >}}
 
     You can also filter down to a specific service, host, etc., by adding tags to the source and destination search bars.
 
-    {{< img src="dashboards/widgets/network/network_4-2.png" alt="Image"  width="80%" >}}
+    {{< img src="dashboards/widgets/network/network_4-2.png" alt="Image" style="width:80%;" >}}
 
 3. Select the type of data you want to view: bytes sent, bytes received, or retransmits.
 
-    {{< img src="dashboards/widgets/network/network_5-2.png" alt="Image"  width="80%" >}}
+    {{< img src="dashboards/widgets/network/network_5-2.png" alt="Image" style="width:80%;" >}}
 
 4. Select your preferred visualization settings. You can choose to view the data in many colors and as lines, areas, or bars.
 
@@ -47,7 +47,7 @@ The network widget supplements the [Network Performance Monitoring][1] feature b
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the network widget is:
 

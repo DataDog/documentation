@@ -1,5 +1,5 @@
 ---
-title: Sharing
+title: Sharing Dashboards
 kind: documentation
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
@@ -47,13 +47,13 @@ To share an entire dashboard publicly, generate a URL:
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
 5. Under **Time & Variable Settings**, configure your desired options for the time frame and whether users can change it, as well which tags are visible for selectable template variables.
-6. (Optional) You can copy the URL to share; the specified email addresses will also receive an email with a link.
+6. (Optional) Copy the URL to share; the specified email addresses also receive an email with the link.
 7. Click **Done**.
 
 **Note**:
 - Individuals who are added to the allowlist for a dashboard receive a link in their email. If the link isn't clicked on within one hour, they can request a new link on the dashboard landing page. If their email address is on the allowlist, a new email is sent.
-- Once clicked, a device will be authorized to see the dashboard for up to 30 days. Once that time is expired, the user can request a new link on the dashboard landing page. If their email address is on the allowlist, a new email is sent.
-- If a user is removed from the allowlist, access will be removed.
+- Once clicked, a device is authorized to see the dashboard for up to 30 days. Once that time is expired, the user can request a new link on the dashboard landing page. If their email address is on the allowlist, a new email is sent.
+- If a user is removed from the allowlist, access is removed.
 - Widgets based on APM traces queries do not display data on shared dashboards. The Log Stream widget doesn't show data either, but other log-based queries do.
 
 ### Revoke
@@ -79,7 +79,7 @@ To share a graph from a [Timeboard][2] or [Screenboard][3]:
 6. Choose to include the legend or not.
 7. Get the embed code with the *Generate embed code* button.
 
-{{< img src="dashboards/sharing/share_graph.png" alt="Shared graph"  style="width:75%;">}}
+{{< img src="dashboards/sharing/share_graph.png" alt="Shared graph" style="width:75%;">}}
 
 ### Revoke
 
@@ -91,7 +91,7 @@ To revoke the keys used to share individual (embedded) graphs:
 
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security page][6].
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security][6] page.
 
 ### Dark mode
 

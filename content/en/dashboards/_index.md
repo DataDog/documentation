@@ -38,29 +38,29 @@ further_reading:
 
 A dashboard is Datadog's tool for visually tracking, analyzing, and displaying key performance metrics, which enable you to monitor the health of your infrastructure.
 
-**Note**: View Dashboards with the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13].
+**Note**: View Dashboards with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
 
 ## New dashboard
 
-To create a dashboard, click on **+New Dashboard** on the [dashboard list page][1], or click **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard, click on **+New Dashboard** on the [dashboard list[1] page], or click **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
 
-{{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard"  style="width:70%;">}}
+{{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-[Dashboards][2] are on a next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+[Dashboards][4] are on a next-gen grid based layout which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
 
 ### Timeboards
-[Timeboards][3] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+[Timeboards][5] have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 ### Screenboards
-[Screenboards][4] are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
+[Screenboards][6] are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
 
 ## Configuring dashboards
 
 ### Global time selector
-To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in a widget’s editor under **Set display preferences**, or add a widget (global time is the default time setting).
+To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][5]. If a moving window is chosen, the widgets are updated to move along with the time window.
+The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][7]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
 
@@ -72,7 +72,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Generate public URL
 
-Share a dashboard with external users by generating a public URL. For more details, see [sharing dashboards][6].
+Share a dashboard with external users by generating a public URL. For more details, see [sharing dashboards][8].
 
 #### Display UTC time
 
@@ -80,7 +80,7 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event stream][7]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [event stream][9]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
@@ -94,7 +94,7 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-For a dashboard, the creator or any [administrator][8] can activate read-only mode, which disables all non-admin edits to the dashboard.
+For a dashboard, the creator or any [administrator][10] can activate read-only mode, which disables all non-admin edits to the dashboard.
 
 In read-only mode, non-administrative users can clone the dashboard, rearrange tiles, snapshot a tile, and view a tile in full-screen. Any tile rearrangement by a non-administrative user does not persist.
 
@@ -112,7 +112,7 @@ From an individual dashboard, copy, import, or export a dashboard's JSON using t
 | Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
-{{< img src="dashboards/copy_dashboard.png" alt="Copy dashboard"  style="width:30%;">}}
+{{< img src="dashboards/copy_dashboard.png" alt="Copy dashboard" style="width:30%;">}}
 
 #### Delete dashboard
 
@@ -126,7 +126,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][1] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][9].
+Search, view, or create dashboards and lists on the [Dashboard List][11] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][12].
 
 {{< img src="dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
 
@@ -138,7 +138,7 @@ The list's title is automatically set with the user's first name. For example, i
 
 To add dashboards to a list, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
-{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list"  style="width:70%;">}}
+{{< img src="dashboards/dash_to_list.png" alt="Add Dashboard to list" style="width:70%;">}}
 
 ### Lists
 
@@ -157,8 +157,8 @@ Preset lists are default dashboard lists in Datadog:
 | All Custom               | Custom dashboards made by any team member in your organization's account. |
 | All Hosts                | Automatic dashboards created by Datadog when you add a host.              |
 | All Integrations         | Automatic dashboards created by Datadog when you install an integration.  |
-| Created By You           | Custom dashboards created by the currently logged in user.                |
-| Frequently Viewed By You | All dashboards frequently viewed by the currently logged in user.         |
+| Created By You           | Custom dashboards created by the current user.                            |
+| Frequently Viewed By You | All dashboards frequently viewed by the current user.                     |
 
 #### Shared, editable lists
 
@@ -170,7 +170,7 @@ All dashboards listed are sortable using the column headers *Star*, *Name*, *Mod
 
 | Column     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
-| Star       | All dashboards starred by the currently logged in user.                                  |
+| Star       | All dashboards starred by the current user.                                              |
 | Icon       | An icon indicating the type of dashboard (timeboard or screenboard).                     |
 | Name       | The name of the custom or preset dashboard.                                              |
 | Modified   | The last modified date of a custom dashboard.                                            |
@@ -188,24 +188,24 @@ An organization's most popular dashboard displays five popularity bars. All othe
 ### Restrict access
 
 <div class="alert alert-warning">
-RBAC restrict access to dashboards is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+RBAC restrict access to dashboards is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][10] documentation.
+Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][13] documentation.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/dashboard/lists
-[2]: /dashboards/dashboards
-[3]: /dashboards/timeboards
-[4]: /dashboards/screenboards
-[5]: /dashboards/guide/custom_time_frames/
-[6]: /dashboards/sharing/#dashboards
-[7]: /events/
-[8]: /account_management/users/default_roles/
-[9]: /help/
-[10]: /account_management/rbac/
-[11]: /mobile
-[12]: https://apps.apple.com/app/datadog/id1391380318
-[13]: https://play.google.com/store/apps/details?id=com.datadog.app
+[1]: /mobile
+[2]: https://apps.apple.com/app/datadog/id1391380318
+[3]: https://play.google.com/store/apps/details?id=com.datadog.app
+[4]: /dashboards/dashboards
+[5]: /dashboards/timeboards
+[6]: /dashboards/screenboards
+[7]: /dashboards/guide/custom_time_frames/
+[8]: /dashboards/sharing/#dashboards
+[9]: /events/
+[10]: /account_management/users/default_roles/
+[11]: https://app.datadoghq.com/dashboard/lists
+[12]: /help/
+[13]: /account_management/rbac/

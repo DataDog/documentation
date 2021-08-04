@@ -21,16 +21,16 @@ This is commonly used to state the overall purpose of the dashboard.
 
 ## Setup
 
-{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Free Text Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="Free Text Setup" style="width:80%;">}}
 
 ### Configuration
 
 1. Enter text to display.
-2. Choose your text formating.
+2. Choose your text formatting.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the free text widget is:
 

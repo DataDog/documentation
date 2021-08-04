@@ -23,18 +23,18 @@ This visualization displays only a single query; additional queries are disregar
 
 ## Setup
 
-{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Distribution graph editor view"  style="width:100%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="Distribution graph editor view" style="width:100%;">}}
 
 ### Configuration
 
-Configure your query as usual. The Distribution visualization supports metrics, live processes, APM request latency, log events, and RUM events. Note that this visualization type is useful only when data is aggregated across tag keys, e.g. for each `host`.
+Configure your query as usual. The Distribution visualization supports metrics, live processes, APM request latency, log events, and RUM events. **Note**: This visualization type is useful only when data is aggregated across tag keys, such as for each `host`.
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
 ### Options
 
 #### Display preference
 
-{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences" style="width:80%;">}}
 
 ##### Global time
 
@@ -44,23 +44,23 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 With APM request distributions, you can add percentiles markers on the x-axis.
 
-{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Marker control preferences"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="Marker control preferences" style="width:80%;">}}
 
 #### X-axis and Y-axis controls
 
-Axis controls are available via the UI and the JSON editor. They allow you to:
+Axis controls are available through the UI and the JSON editor. They allow you to:
 
 * Clip the x and y-axes to specific ranges.
 * Automatically change x-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove "outlier" bins.
 * Change the y-axis scale from linear to log.
 
-{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Distribution axis control preferences"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Distribution axis control preferences" style="width:80%;">}}
 
 #### Title
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
@@ -68,12 +68,12 @@ Optionally define its size and alignment.
 
 In addition to the [standard full screen options][2], you can use x-axis controls to zoom in to a specific percentile.
 
-{{< img src="dashboards/widgets/distribution/distribution_fullscreen.png" alt="Distribution full screen graph"  style="width:80%;">}}
+{{< img src="dashboards/widgets/distribution/distribution_fullscreen.png" alt="Distribution full screen graph" style="width:80%;">}}
 
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][3] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the distribution widget is:
 

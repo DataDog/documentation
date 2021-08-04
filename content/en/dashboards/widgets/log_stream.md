@@ -21,7 +21,7 @@ The Log Stream displays a log flow matching the defined query:
 
 ### Configuration
 
-{{< img src="dashboards/widgets/log_stream/log_stream_setup.gif" alt="Log stream setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/log_stream/log_stream_setup.gif" alt="Log stream setup" style="width:80%;">}}
 
 Enter a [log query][1] to filter the log stream.
 
@@ -39,13 +39,13 @@ On screenboards only, choose whether your widget has a custom timeframe or the s
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][3] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the log stream widget is:
 

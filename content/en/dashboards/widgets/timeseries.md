@@ -25,14 +25,14 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 ## Setup
 
-{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup"  style="width:80%;" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" style="width:80%;" >}}
 
 ### Configuration
 
 1. Choose the data to graph:
     * Metric: See the documentation [querying][3] to configure a metric query.
-    * Indexed Spans: See [the trace search documentation][4] to configure an Indexed Span query.
-    * Log Events: See [the log search documentation][5] to configure a log event query.
+    * Indexed Spans: See [the trace search][4] documentation to configure an Indexed Span query.
+    * Log Events: See [the log search][5] documentation to configure a log event query.
 
 2. Customize your graph with the available [options](#options).
 
@@ -66,7 +66,7 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of the query/formula click on **as...**, then enter your metric alias:
 
-{{< img src="dashboards/querying/metric_alias.png" alt="metric alias"  style="width:75%;" >}}
+{{< img src="dashboards/querying/metric_alias.png" alt="metric alias" style="width:75%;" >}}
 
 ##### Event overlay
 
@@ -78,15 +78,15 @@ Add events from related systems to add more context to your graph. For example, 
 | `tag:role:web`              | Shows all events with the tag `role:web`.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][8]. |
 
-Once enabled, events are overlayed on your graphs with red bars:
+Once enabled, events are overlaid on your graphs with red bars:
 
-{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay"  style="width:75%;" >}}
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay" style="width:75%;" >}}
 
 ##### Legend configuration
 
 Add configurable legends on your screenboards by navigating to the legend section in the graph editor and selecting an option.
 
-{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="Legend configuration"  style="width:100%;" >}}
+{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="Legend configuration" style="width:100%;" >}}
 
 Options:
 
@@ -95,18 +95,18 @@ Options:
 * Expanded: Configurable columns for value, avg, sum, min, max
 * None
 
-Note: For timeboards, legends will display automatically when dashboard is set to L or XL.
+Note: For timeboards, legends display automatically when dashboard is set to L or XL.
 
 ##### Y-axis controls
 
-Y-axis controls are available via the UI and the JSON editor. They allow you to:
+Y-axis controls are available through the UI and the JSON editor. They allow you to:
 
 * Add a second y-axis for visualizations that include more than one data set.
 * Clip the y-axis to specific ranges.
 * Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove "outliers" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
-If your visualization includes more than one data set, you can add a second y-axis by expanding the *Y-axis controls* button. Click on *+ Add right y-axis* and then specify which side each metric’s y-axis will correspond to under each metric’s configuration options. On the graph, you can isolate which part of the visualization corresponds with which y-axis by hovering over the y-axis of interest.
+If your visualization includes more than one data set, you can add a second y-axis by expanding the *Y-axis controls* button. Click on *+ Add right y-axis* and then specify which side each metric's y-axis corresponds to under each metric's configuration options. On the graph, you can isolate which part of the visualization corresponds with which y-axis by hovering over the y-axis of interest.
 
 Change the Y-axis scale by expanding the *Y-Axis Controls* button.
 
@@ -128,7 +128,7 @@ See [Explore your data in full-screen graph mode][10], to learn more.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][11] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][11] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][12] for the timeseries widget is:
 

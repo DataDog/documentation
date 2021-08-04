@@ -22,7 +22,7 @@ Check status shows the current status or number of results for any check perform
 
 ## Setup
 
-{{< img src="dashboards/widgets/check_status/check_status_setup.png" alt="Check status widget setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/check_status/check_status_setup.png" alt="Check status widget setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -35,7 +35,7 @@ Check status shows the current status or number of results for any check perform
   * The past 4 hours
   * The past day
 3. Choose your scope:
-    * **A single check**: Select this option if your Check Status widget is for a specific element only i.e. one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`, etc.
+    * **A single check**: Select this option if your Check Status widget is for a specific element only, for example: one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`, etc.
     * **A cluster of checks**: Select this option if your Check Status widget is for a scope of elements i.e all `host`s, all `service`s, etc.
 
 4. After selecting your scope, define your Check Status widget context with the **Reported by** field.
@@ -47,13 +47,13 @@ Check status shows the current status or number of results for any check perform
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API][1] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the check status widget is:
 
