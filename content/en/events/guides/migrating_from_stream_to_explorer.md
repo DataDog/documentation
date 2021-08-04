@@ -39,4 +39,4 @@ If you use the API, Terraform or other 3rd party solution to manage your monitor
 
 ## 4. Sunset legacy events
 
-When your monitor and dashboards have been successfully migrated, Datadog automatically stops writing events to the previous intake, so sunset. The Events Stream will continue to be accessible to view your event history.
+When your monitor and dashboards have been successfully migrated, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events being generated. The Events Stream will continue to be accessible to view your event history.
