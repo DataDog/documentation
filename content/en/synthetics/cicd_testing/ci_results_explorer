@@ -1,0 +1,41 @@
+---
+title: Private Locations Configuration
+kind: documentation
+description: Configure your Private Locations
+further_reading:
+- link: "/synthetics/ci/"
+  tag: "Documentation"
+  text: "Trigger Synthetic tests from your CI/CD pipeline"
+---
+
+## Overview
+
+The CI Results Explorer gives you visibility into your CI jobs executing Synthetic tests. It allows you to:
+
+* Drill down into each CI job execution to identify and troubleshoot failing test results
+* Compare test results executed against various devices and browsers to pinpoint cross browser and device issues
+* Keep track of the progress of your tests in CI pipelines
+* Identify flaky tests that might need to be fixed
+
+## Exploring batches
+
+The CI Results Explorer displays all batches of tests executed via the [Synthetic CI/CD testing integration][TO DO]. Each batch corresponds to a call to the Datadog API (via the NPM package or directly via the API endpoint) to trigger one or several test executions . 
+
+When clicking on a batch, a side panel with data about the CI metadata as well as test results shows up.
+
+
+## Search
+
+### Facets and tags
+
+
+
+### Create your query
+
+The query syntax of the CI Results Explorer is the same as the one used to query tests on the **Tests** page. Learn more about how to create on [this page][TO DO].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: TODO
