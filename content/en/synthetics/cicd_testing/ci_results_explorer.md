@@ -32,7 +32,7 @@ You can:
 
 The CI Results Explorer displays batches of tests that were run through the [Synthetic CI/CD testing integration][1]. Every batch corresponds to a call to the Datadog API (through the NPM package or directly through the API endpoint) to trigger one or several test executions. 
 
-When clicking on a batch, a side panel containing batch CI metadata as well as batch test results shows up, allowing you to look into all test executions that were performed as part of this batch and pinpoint any test failure. You can then click on any failing test result to be redirected to the detailed test result page and look into the root cause of the issue more thoroughly.
+Click on a batch to open a side panel containing batch CI metadata and batch test results. Explore the test executions performed as part of the batch and pinpoint test failures. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
 
 ## Search
 
