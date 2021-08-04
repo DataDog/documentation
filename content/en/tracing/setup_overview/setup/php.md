@@ -469,11 +469,70 @@ debuginfo-install -y php-fpm
 debuginfo-install --enablerepo=remi-php74 -y php-fpm
 ```
 
+#### Debian
+
+##### PHP installed from the Sury Debian DPA
+
+If PHP was installed from the [Sury Debian DPA][13], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+
+```
+apt update
+apt install -y php7.2-fpm-dbgsym
+```
+
+##### PHP installed from a different package
+
+The Debian project maintains a [wiki page][14] with instructions to install debugging symbols.
+
+Edit the file `/etc/apt/sources.list`:
+
+```
+# ... leave here all the pre-existing packages
+
+# add a `deb` deb http://deb.debian.org/debian-debug/ $RELEASE-debug main
+# For example for buster
+deb http://deb.debian.org/debian-debug/ buster-debug main
+```
+
+Update `apt`:
+
+```
+apt update
+```
+
+Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+In case debug symbols cannot be found yet, it is possible to use the utility tool `find-dbgsym-packages`. Install the binary:
+
+```
+apt install -y debian-goodies
+```
+
+Attempt finding debug symbols from either the full path to the binary or the process id of a running process:
+
+```
+find-dbgsym-packages /usr/sbin/php-fpm7.2
+```
+
+Install the resulting package name, if any has been found:
+
+```
+apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
+```
+
 #### Ubuntu
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][13] edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` adding the `main/debug` component to it.
+If PHP was installed from the [`ppa:ondrej/php`][15] edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` adding the `main/debug` component to it.
 
 Before:
 
@@ -502,14 +561,14 @@ Note that in some cases `php-fpm` can be a metapackage that refers to the real p
 Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
 
 ```
-apt install -y php7.2-fpm-dbg
+apt install -y php7.2-fpm-dbgsym
 
 # if the above does not work
 
-apt install -y php7.2-fpm-dbgsym
+apt install -y php7.2-fpm-dbg
 ```
 
-In case the above `-dbg` and `-dbgsym` packages cannot be found, you might have to enable the `ddebs` repositories. Detailed information about how to install debug symbols from the `ddebs` can be found in the [official documentation][14].
+In case the above `-dbg` and `-dbgsym` packages cannot be found, you might have to enable the `ddebs` repositories. Detailed information about how to install debug symbols from the `ddebs` can be found in the [official documentation][16].
 
 For example, for ubuntu 18.04 and newer, enable the `ddebs` repo:
 
@@ -518,7 +577,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][15] from the official documentation page linked above):
+Import the signing key (make sure the [signing key is correct][17] from the official documentation page linked above):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -529,11 +588,11 @@ apt update
 Try againg the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
 
 ```
-apt install -y php7.2-fpm-dbg
+apt install -y php7.2-fpm-dbgsym
 
 # if the above does not work
 
-apt install -y php7.2-fpm-dbgsym
+apt install -y php7.2-fpm-dbg
 ```
 
 In case debug symbols cannot be found yet, it is possible to use the utility tool `find-dbgsym-packages`. Install the binary:
@@ -545,13 +604,13 @@ apt install -y debian-goodies
 Attempt finding debug symbols from either the full path to the binary or the process id of a running process:
 
 ```
-find-dbgsym-packages [core_path|running_pid|binary_path]
+find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
 Install the resulting package name, if any has been found:
 
 ```
-apt install -y php7.2-fpm-returned-by-find-dbgsym-packages
+apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 ```
 
 ### Obtaining a core dump
@@ -636,6 +695,8 @@ For Apache, run:
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
 [11]: https://github.com/mind04/mod-ruid2
 [12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[13]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[14]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[15]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[13]: https://packages.sury.org/php/
+[14]: https://wiki.debian.org/HowToGetABacktrace
+[15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
