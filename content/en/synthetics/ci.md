@@ -691,17 +691,17 @@ To learn how to get started using the testing tunnel, see the [Synthetics testin
 
 You can see the outcome of test executions directly in your CI as your tests are being executed.
 
-{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:80%;">}}
+{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:100%;">}}
 
 You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
 
-{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:80%;">}}
+{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
 
 ### In Datadog application
 
-You can also see the results of your tests listed on your Datadog test details page:
+You can also see the results of your tests listed on the [CI Results explorer][6] as well as on your individual test details page:
 
-{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result" style="width:80%;">}}
+{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result" style="width:100%;">}}
 
 ## Further Reading
 
@@ -712,3 +712,4 @@ You can also see the results of your tests listed on your Datadog test details p
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /api/v1/synthetics/#get-test
 [5]: /synthetics/testing_tunnel/
+[6]: /synthetics/cicd_testing
