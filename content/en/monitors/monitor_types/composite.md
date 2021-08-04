@@ -95,7 +95,7 @@ This section uses examples to show how trigger conditions are computed, and the 
 
 ### Computing trigger conditions
 
-There are 4 different statuses a composite monitor and 3 of them are considered as alert-worthy:
+There are 4 different statuses a composite monitor and 3 of them are considered alert-worthy:
 
 | Status    | Alert-worthy         |Severity           |
 |-----------|----------------------|-------------------|
@@ -112,7 +112,7 @@ The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of 
 * If `A` is alert-worthy, `!A` is `OK`
 * If `A` is no alert-worthy, `!A` is `Alert`
 
-Consider a composite monitor that uses two individual monitors `A` and `B`. The following table shows the resulting status of the composite monitor given the trigger condition (`&&` or `||`), and the different statuses for its individual monitors (alert-worthiness is indicated with T or F):
+Consider a composite monitor that uses two individual monitors: `A` and `B`. The following table shows the resulting status of the composite monitor given the trigger condition (`&&` or `||`), and the different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
 | Monitor A   | Monitor B   | Condition   | Notify No Data   | Composite status | Alert triggered? |
 |-------------|-------------|-------------|------------------|------------------|------------------|
@@ -131,7 +131,7 @@ Consider a composite monitor that uses two individual monitors `A` and `B`. The 
 | No Data (T) | No Data (T) | `A && B`    | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A || B`    | True             | No Data (T)      | {{< X >}}        |
 
-**Note**: When the composite has `notify_no_data` to false and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead. 
+**Note**: When the composite has `notify_no_data` to false, and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead. 
 
 ### Number of alerts
 
