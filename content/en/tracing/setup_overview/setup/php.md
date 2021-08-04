@@ -439,6 +439,36 @@ To remove the PHP tracer:
 
 In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump or a Valgrind trace and contact Datadog support.
 
+### Install debug symbols
+
+In order for the core dumps to be readable, debug symbols for the PHP binaries have to be installed in the system that runs PHP.
+
+#### Centos
+
+Install package `yum-utils` that provides the program `debuginfo-install`:
+
+```
+yum install -y yum-utils
+```
+
+Find the right package name for your PHP binaries, it can vary depending on the PHP installation method:
+
+```
+yum list installed | grep php
+```
+
+Install debug symbols. For example for package `php-fpm`:
+
+```
+debuginfo-install -y php-fpm
+```
+
+**Note**: if the repository that provides the PHP binaries is not enabled by default, it can be enabled when running the `debuginfo-install` command. For example:
+
+```
+debuginfo-install --enablerepo=remi-php74 -y php-fpm
+```
+
 ### Obtaining a core dump
 
 Obtaining a core dump for PHP applications can be tricky, especially on PHP-FPM. Here are a few tips to help you obtain a core dump:
