@@ -23,7 +23,7 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 - Identify outages of cloud provider regions and third-party tools.
 - Troubleshoot faulty service discovery with DNS server metrics.
 
-Network performance monitoring requires [Datadog Agent v6.14+][1].
+Network performance monitoring requires [Datadog Agent v6.14+][1] as well as enabling the [Live Process](https://docs.datadoghq.com/infrastructure/process/) collection feature as described in this [installation](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows#installation) section.
 
 ## Supported platforms
 
@@ -87,7 +87,8 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+- The DNS monitoring feature of NPM does not need any additional work to enable it except for Kubernetes where the `collectDNSStats:` parameter needs to be set to `true` in the values.yaml file or Helm chart.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
