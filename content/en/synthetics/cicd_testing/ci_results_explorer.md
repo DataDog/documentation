@@ -53,7 +53,7 @@ The panel on the left side of the page lists several facets you can use to searc
 | `Branch`    | The branch associated with the batch.     |
 | `Commit SHA`| The commit SHA associated with the batch. |
 
-**CI** facets allow you to filter on CI related attributes of your batches:
+**CI** facets allow you to filter on CI-related attributes of your batches:
 
 | Facet          | Description                                 |
 |----------------|---------------------------------------------|
