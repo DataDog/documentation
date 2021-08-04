@@ -4079,8 +4079,8 @@ components:
           description: 'Sample rate to apply to logs going through this exclusion
             filter,
 
-            a value of 1 will exclude all logs matching the query.'
-          example: 1
+            a value of 1.0 excludes all logs matching the query.'
+          example: 1.0
           format: double
           type: number
       required:
