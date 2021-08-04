@@ -45,7 +45,7 @@ Data security considerations
 ## Configure MySQL settings
 
 
-Configure the following [Database Flags][3]:
+Configure the following [Database Flags][3] and then **restart the server** for the settings to take effect:
 
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -114,6 +114,7 @@ DELIMITER ;
 Additionally, create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
 
 ```sql
+DELIMITER $$
 CREATE PROCEDURE <YOUR_SCHEMA>.explain_statement(IN query TEXT)
     SQL SECURITY DEFINER
 BEGIN
