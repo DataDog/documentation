@@ -4079,8 +4079,8 @@ components:
           description: 'Sample rate to apply to logs going through this exclusion
             filter,
 
-            a value of 1 will exclude all logs matching the query.'
-          example: 1
+            a value of 1.0 excludes all logs matching the query.'
+          example: 1.0
           format: double
           type: number
       required:
@@ -23430,6 +23430,13 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageAttributionSort'
+      - description: Include child org usage in the response. Defaults to false.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
