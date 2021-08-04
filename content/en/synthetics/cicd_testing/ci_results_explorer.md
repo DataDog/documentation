@@ -69,7 +69,7 @@ The panel on the left side of the page lists several facets you can use to searc
 | `Execution Rule` | The execution rule associated with the test result of the batch: `Blocking`, `Non Blocking`, `Skipped`. |
 | `Fast Retries`   | The number of fast retries associated with the test result of the batch.                                |
 | `Location`       | The location associated with the test result of the batch.                                              |
-| `Test ID`        | The test id associated with the test result of the batch.                                               |
+| `Test ID`        | The test ID associated with the test result of the batch.                                               |
 | `Test Name`      | The test name associated with the test result of the batch.                                             |
 
 ### Create your query
