@@ -18,6 +18,7 @@ private: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser Tests:" >}}
+    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}Time-Based One Time Passwords (TOTPs) For Multi-Factor Authentication (MFA){{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}Why are browser tests self-maintaining?{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
