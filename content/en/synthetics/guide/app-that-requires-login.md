@@ -38,7 +38,7 @@ To record your steps without logging out of your application, use the recorder's
 
 {{< img src="synthetics/guide/app_that_requires_login/incognito.mp4" video="true" alt="Demo of recording a login in incognito">}}
 
-Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
+Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
 **Note:** Use [the subtest feature][2] to group your login steps into a single subtest that you can then reuse across any other browser tests that require a login.
 
@@ -46,7 +46,7 @@ Opening a pop up in incognito mode allows you to start your test's recording fro
 
 If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default **Navigate to URL** step.
 
-Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers) for testing purposes.
 
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
