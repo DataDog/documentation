@@ -15,7 +15,7 @@ JUnit test report files are XML files that contain test execution information, s
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
 
-Test results imported with JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stack traces. For this reason, only use this method if there is no native support for the language or testing framework being used.
+Test results imported from JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stack traces. For this reason, only use this method if there is no native support for the language or testing framework being used.
 
 ## Installing the Datadog CI CLI
 

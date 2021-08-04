@@ -30,7 +30,7 @@ Install the Python tracer by running:
 pip install -U ddtrace
 {{< /code-block >}}
 
-For more information, see the [Python tracer installation][2] documentation.
+For more information, see the [Python tracer installation documentation][2].
 
 ## Instrumenting your tests
 
