@@ -505,11 +505,11 @@ The number of contexts aggregated when client side aggregation is enabled. Start
 
 `datadog.dogstatsd.client.aggregated_context_by_type`
 : **Metric type**: count<br>
-The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `4.3.0`.
+The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `4.3.0`. The metric is enabled by default starting `5.0.0` but requires `WithDevMode` for the versions before or equal to `4.8.1`. The metric is tagged with either `metrics_type:gauge`, `metrics_type:count`, `metrics_type:set`, `metrics_type:timing`, `metrics_type:histogram` nor `metrics_type:distribution`.
 
 `datadog.dogstatsd.client.metrics_by_type`
 : **Metric type**: count<br>
-The number of metrics by type sent to the DogStatsD client by your application (before sampling). Starting with version `4.3.0`.
+The number of metrics by type sent to the DogStatsD client by your application (before sampling). Starting with version `4.3.0`. The metric is enabled by default starting `5.0.0` but requires `WithDevMode` for the versions before or equal to `4.8.1`. The metric is tagged with either `metrics_type:gauge`, `metrics_type:count`, `metrics_type:set`, `metrics_type:timing`, `metrics_type:histogram` nor `metrics_type:distribution`.
 
 To disable telemetry, use the `WithoutTelemetry` setting:
 
@@ -564,11 +564,11 @@ The number of contexts aggregated when client side aggregation is enabled. Start
 
 `datadog.dogstatsd.client.aggregated_context_by_type`
 : **Metric type**: count<br>
-The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `v2.13.0`.
+The number of contexts aggregated by type when client side aggregation is enabled. Starting with version `v2.13.0`. The metric is enabled by default starting `v3.0.0` but requires `enableDevMode(true)` for `v2.13.0`. The metric is tagged with either `metrics_type:gauge`, `metrics_type:count`, `metrics_type:set`, `metrics_type:histogram` nor `metrics_type:distribution`.
 
 `datadog.dogstatsd.client.metrics_by_type`
 : **Metric type**: count<br>
-The number of metrics by type sent to the DogStatsD client by your application (before sampling). Starting with version `v2.13.0`.
+The number of metrics by type sent to the DogStatsD client by your application (before sampling). Starting with version `v2.13.0`. The metric is enabled by default starting `v3.0.0` but requires `enableDevMode(true)` for `v2.13.0`. The metric is tagged with either `metrics_type:gauge`, `metrics_type:count`, `metrics_type:set`, `metrics_type:histogram` nor `metrics_type:distribution`.
 
 To disable telemetry, use the `enableTelemetry(false)` builder option:
 
