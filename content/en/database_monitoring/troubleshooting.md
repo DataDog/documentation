@@ -210,6 +210,12 @@ If you specified a `dbname` other than the default `postgres` in your Agent conf
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### Query bind parameters cannot be viewed
+
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, we will introduce settings to expose the un-obfuscated query bind parameters.
+
+
 ### Query samples are truncated
 
 Longer queries may not show their full SQL text due to database configuration. Some tuning is necessary to adjust for your workload.
