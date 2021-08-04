@@ -45,7 +45,7 @@ There are two ways of installing the testing framework:
 {{% /tab %}}
 {{% tab "Adding the framework directly" %}}
 
-1. Download and decompress `DatadogSDKTesting.zip` from the [release page][1].
+1. Download and decompress `DatadogSDKTesting.zip` from the [release][1] page.
 
 2. Copy and link your test targets with the resulting XCFramework.
 
@@ -100,7 +100,7 @@ Set all these variables in your test target:
 **Example**: `/Users/ci/source/MyApp`
 
 {{< site-region region="eu" >}}
-Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
+Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
 : The [Datadog site][1] to upload results to.<br/>
@@ -112,7 +112,7 @@ Additionally, configure the Datadog site to use the currently selected one ({{< 
 
 ### Collecting Git and build metadata
 
-Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (refer to the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
@@ -120,6 +120,7 @@ When running tests in a simulator, full Git metadata is collected using the loca
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
+{{< site-region region="us" >}}
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -project "MyProject.xcodeproj" \
@@ -127,6 +128,16 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -destination "platform=macOS,arch=x86_64" \
   test
 {{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+{{< code-block lang="bash" >}}
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
+{{< /code-block >}}
+{{< /site-region >}}
 
 ### UI tests
 
@@ -156,7 +167,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash won't be reported at all, and won't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 

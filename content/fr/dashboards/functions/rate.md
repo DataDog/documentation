@@ -14,7 +14,7 @@ aliases:
 
 | Fonction       | Description                                                | Exemple                        |
 |:---------------|:-----------------------------------------------------------|:-------------------------------|
-| `per_minute()` | Crée un graphique illustrant le taux de variation de la métrique par seconde. | `per_minute(<NOM_MÉTRIQUE>{*})` |
+| `per_minute()` | Crée un graphique illustrant le taux de variation de la métrique par minute. | `per_minute(<NOM_MÉTRIQUE>{*})` |
 
 ## Par heure
 

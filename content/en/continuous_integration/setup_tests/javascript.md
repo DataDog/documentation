@@ -109,9 +109,9 @@ require('dd-trace').init({
 
 Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
 
-```javascript
-'scripts': {
-  'test': 'mocha --require init-tracer'
+```json
+"scripts": {
+  "test": "mocha --require init-tracer"
 },
 ```
 
@@ -126,9 +126,9 @@ DD_ENV=ci npm test
 
 Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
 
-{{< code-block lang="javascript" filename="package.json" >}}
-'scripts': {
-  'test': 'DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init'
+{{< code-block lang="json" filename="package.json" >}}
+"scripts": {
+  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
 },
 {{< /code-block >}}
 
@@ -168,7 +168,7 @@ All other [Datadog Tracer configuration][5] options can also be used.
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][7].
+[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][7].
 
 ### Browser tests
 The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.
