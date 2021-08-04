@@ -15,7 +15,7 @@ JUnit test report files are XML files that contain test execution information, s
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
 
-Test results imported via JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stacktraces. For this reason, only use this method if there is no native support for the language or testing framework being used.
+Test results imported from JUnit XML reports appear alongside test data reported by tracers. However, there are some limitations when using this method, such as the lack of distributed traces on integration tests or structured stack traces. For this reason, only use this method if there is no native support for the language or testing framework being used.
 
 ## Installing the Datadog CI CLI
 
@@ -64,7 +64,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Environment variable**: `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `team:backend`<br/>
-**Note**: Tags specified using `--tags` and via the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
+**Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
 `--max-concurrency`
 : The number of concurrent uploads to the API.<br/>
@@ -75,7 +75,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Default**: `false`
 
 Positional arguments
-: The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI will look for all `.xml` files in it.
+: The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
 
 The following environment variables are supported:
 
@@ -89,7 +89,7 @@ The following environment variables are supported:
 **Examples**: `local`, `ci`
 
 {{< site-region region="eu" >}}
-Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
+Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
 : The [Datadog site][1] to upload results to.<br/>
