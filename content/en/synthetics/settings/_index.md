@@ -79,11 +79,13 @@ You can create a TOTP to use in your tests by creating a global variable where y
 4. Select **Tags** to associate with your variable (optional).
 5. Enter the **Secret Key** to your variable or upload a QR code image.
 6. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
-7. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
 {{< img src="synthetics/settings/synthetic-mfa-setup.png" alt="Create a new MFA token" border="true" popup="true">}}
 
+**Note**: A complete [guide for TOTP][2] is available.
+
 [1]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[2]: /guide/browser-tests-totp
 
 {{% /tab %}}
 
