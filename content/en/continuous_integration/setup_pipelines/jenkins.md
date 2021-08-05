@@ -176,12 +176,12 @@ You can configure the Jenkins Plugin to include/exclude some pipelines:
 6. Save your configuration.
 
 **Excluded jobs**
-: A comma-separated list of Jenkins jobs that should not be monitored. The exclusion applies to all metrics, traces, events and service checks.
+: A comma-separated list of Jenkins jobs that should not be monitored. The exclusion applies to all metrics, traces, events and service checks.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
 **Included jobs**
-: A comma-separated list of Jenkins job names that should be monitored. If the included jobs are empty, all jobs that are not excluded explicitly will be monitored. The inclusion applies to all metrics, traces, events and service checks.
+: A comma-separated list of Jenkins job names that should be monitored. If the included jobs are empty, all jobs that are not excluded explicitly will be monitored. The inclusion applies to all metrics, traces, events and service checks.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
