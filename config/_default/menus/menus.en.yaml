@@ -1057,7 +1057,7 @@ main:
     url: serverless/troubleshooting/serverless_tagging
     parent: serverless_troubleshooting
     weight: 702
-  - name: Connect Invoking Serverless Resources
+  - name: Visualizing Managed Resources
     url: serverless/troubleshooting/connect_invoking_resources
     parent: serverless_troubleshooting
     weight: 703
