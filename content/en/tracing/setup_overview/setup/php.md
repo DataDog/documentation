@@ -516,7 +516,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a [wiki page][14] with instructions to install debugging symbols.
+The Debian project maintains a wiki page with [instructions to install debug symbols][14].
 
 Edit the file `/etc/apt/sources.list`:
 
