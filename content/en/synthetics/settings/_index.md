@@ -73,7 +73,7 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 
 {{% tab "MFA Token" %}}  
  
-You can create a TOTP to use in your tests by creating a global variable where you enter a secret key or upload a QR code from your authentication provider.
+To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider.
 
 1. In **Choose variable type**, select **MFA Token**.
 2. In **Define Variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
