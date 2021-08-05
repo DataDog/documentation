@@ -63,14 +63,14 @@ Datadog Security Monitoring offers threat intelligence feeds curated by threat i
 
 {{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="Threat Intelligence in the Security Signals Explorer"  >}}
 
-Datadog automatically operationalizes threat intelligence by analyzing all ingested logs that have relevant attributes. If there is an indicator of compromise in a log, such as an anonymized IP tied to a VPN, proxy, or Tor exit node, a `threat_intel` attribute is append to the log event to provide additional insights based on available intelligence.
+Datadog automatically operationalizes threat intelligence by analyzing all ingested logs that have relevant attributes. If a log contains a compromise indication, such as an anonymized IP tied to a VPN, proxy, or Tor exit node, a `threat_intel` attribute is append to the log event to provide additional insights based on available intelligence.
 
-The query to see all threat intel matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
+The query to see all threat intelligence matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
 
 * `@threat_intel.results.category “anonymizer”, “scanner”`
 * `@threat_intel.results.intention “malicious”, “unknown”`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
-    **Note**: These are only provided by IPinfo.
+    **Note**: Proxy, Tor, and VPN subcategory attributes are provided only by threat intelligence partner IPinfo.
 
 ### Anomaly detection
 
