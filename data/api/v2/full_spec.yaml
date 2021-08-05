@@ -95,7 +95,7 @@ components:
       required: false
       schema:
         type: string
-    ApplicationKeyId:
+    ApplicationKeyID:
       description: The ID of the application key.
       in: path
       name: app_key_id
@@ -5494,7 +5494,7 @@ paths:
       description: Delete an application key
       operationId: DeleteApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       responses:
         '204':
           description: No Content
@@ -5520,7 +5520,7 @@ paths:
       description: Get an application key for your org.
       operationId: GetApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
       responses:
         '200':
@@ -5556,7 +5556,7 @@ paths:
       description: Edit an application key
       operationId: UpdateApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       requestBody:
         content:
           application/json:
@@ -5685,7 +5685,7 @@ paths:
       description: Delete an application key owned by current user
       operationId: DeleteCurrentUserApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       responses:
         '204':
           description: No Content
@@ -5710,7 +5710,7 @@ paths:
       description: Get an application key owned by current user
       operationId: GetCurrentUserApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       responses:
         '200':
           content:
@@ -5739,7 +5739,7 @@ paths:
       description: Edit an application key owned by current user
       operationId: UpdateCurrentUserApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       requestBody:
         content:
           application/json:

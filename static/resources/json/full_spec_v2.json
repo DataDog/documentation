@@ -133,7 +133,7 @@
           "type": "string"
         }
       },
-      "ApplicationKeyId": {
+      "ApplicationKeyID": {
         "description": "The ID of the application key.",
         "in": "path",
         "name": "app_key_id",
