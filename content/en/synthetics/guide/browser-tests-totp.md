@@ -27,7 +27,7 @@ The first step is to create a global variable where you enter a secret key or up
 <div class="alert alert-warning">
 RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>  
 
-{{< img src="synthetics/guide/browser-tests-totp/synthetic-mfa-setup.png" alt="Create a new MFA token" border="true" popup="true">}}
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
 ### Use TOTP in your Synthetic tests
 **Note**: As you stored the secret key or QR code in a global variable, it can be used in all Synthetic tests.  
