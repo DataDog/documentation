@@ -30,7 +30,7 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
 ### Use TOTP in your Synthetic tests
-**Note**: As you stored the secret key or QR code in a global variable, it can be used in all Synthetic tests.  
+**Note**: You can use the secret key or QR code stored in a global variable across Synthetic tests.  
 When creating a browser or API test, inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
 
 The example below shows how to use TOTP in your browser tests:
