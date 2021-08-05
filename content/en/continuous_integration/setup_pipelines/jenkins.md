@@ -1,5 +1,5 @@
 ---
-title: Setup Tracing on a Jenkins Pipeline
+title: Set up Tracing on a Jenkins Pipeline
 kind: documentation
 further_reading:
     - link: "/continuous_integration/explore_pipelines"
@@ -48,7 +48,7 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins"  style="width:100%;">}}
+{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 
 ## Enable job log collection
 
@@ -60,7 +60,7 @@ First, enable job log collection on the Datadog Agent by opening a TCP port to c
 
 1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
 
-2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` (for Linux; [check here for other operating systems][5]) with the following contents. Make sure that `service` matches the CI Instance name provided earlier:
+2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` on Linux with the contents below. Make sure that `service` matches the CI instance name provided earlier. For other operating systems, see [Agent configuration directory][5] guide.
 
 {{< code-block lang="yaml" >}}
 logs:
@@ -166,7 +166,7 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 
 ## Visualize pipeline data in Datadog
 
-Once the integration is successfully configured, both [Pipelines][7] and [Pipeline Executions][8] pages will start populating with data after pipelines finish.
+Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
@@ -174,7 +174,7 @@ Once the integration is successfully configured, both [Pipelines][7] and [Pipeli
 
 ### Enable DEBUG log level for the Datadog Plugin
 
-If you have any issues with the Datadog Plugin, you can set the logs for the plugin in `DEBUG` level. Using this level you will be able to see stacktrace details if an exception is thrown.
+If you have any issues with the Datadog Plugin, you can set the logs for the plugin in `DEBUG` level. Using this level you are able to see stacktrace details if an exception is thrown.
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > System log**.
 2. Click on `Add new log recorder` button.

@@ -3794,7 +3794,7 @@ components:
         is overwritten by the result of the formula.\n- Results are rounded up to
         the 9th decimal. For example, if the result of the formula is `0.1234567891`,\n
         \ the actual value stored for the attribute is `0.123456789`.\n- If you need
-        to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/processing/parsing/?tab=filter#matcher-and-filter)."
+        to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/log_configuration/parsing/?tab=filter#matcher-and-filter)."
       properties:
         expression:
           description: Arithmetic operation between one or more log attributes.
@@ -4079,8 +4079,8 @@ components:
           description: 'Sample rate to apply to logs going through this exclusion
             filter,
 
-            a value of 1 will exclude all logs matching the query.'
-          example: 1
+            a value of 1.0 excludes all logs matching the query.'
+          example: 1.0
           format: double
           type: number
       required:
@@ -4142,9 +4142,9 @@ components:
       - GEO_IP_PARSER
     LogsGrokParser:
       description: 'Create custom grok rules to parse the full message or [a specific
-        attribute of your raw event](https://docs.datadoghq.com/logs/processing/parsing/#advanced-settings).
+        attribute of your raw event](https://docs.datadoghq.com/logs/log_configuration/parsing/#advanced-settings).
 
-        For more information, see the [parsing section](https://docs.datadoghq.com/logs/processing/parsing).'
+        For more information, see the [parsing section](https://docs.datadoghq.com/logs/log_configuration/parsing).'
       properties:
         grok:
           $ref: '#/components/schemas/LogsGrokParserRules'
@@ -23430,6 +23430,13 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageAttributionSort'
+      - description: Include child org usage in the response. Defaults to false.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -25313,8 +25320,8 @@ tags:
     them into structured attributes for easier querying.\n\n- See the [pipelines configuration
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
     and processors currently configured in our UI.\n\n- Additional API-related information
-    about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\n-
-    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\n**Notes:**\n\nThese
+    about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
     endpoints are only available for admin users.\nMake sure to use an application
     key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
     data to be configured before using in a request.**\nFor example, if you are using
@@ -25323,7 +25330,7 @@ tags:
     all escaped spaces as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
-    url: https://docs.datadoghq.com/logs/processing/
+    url: https://docs.datadoghq.com/logs/log_configuration
   name: Logs Pipelines
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
     be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-

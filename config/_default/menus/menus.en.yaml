@@ -1057,10 +1057,14 @@ main:
     url: serverless/troubleshooting/serverless_tagging
     parent: serverless_troubleshooting
     weight: 702
+  - name: Visualizing Managed Resources
+    url: serverless/troubleshooting/connect_invoking_resources
+    parent: serverless_troubleshooting
+    weight: 703
   - name: Webpack Compatibility
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
-    weight: 703
+    weight: 704
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
@@ -2217,6 +2221,10 @@ main:
     parent: synthetics
     identifier: synthetics_ci
     weight: 5
+  - name: CI Results Explorer
+    url: /synthetics/cicd_testing/ci_results_explorer
+    parent: synthetics_ci
+    weight: 501
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics
@@ -2387,21 +2395,26 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_analytics
     weight: 602
+  - name: Watchdog Insights
+    url: real_user_monitoring/explorer/watchdog_insights/
+    parent: rum_explorer
+    identifier: rum_explorer_watchdog_insights
+    weight: 603
   - name: Long Task
     url: real_user_monitoring/data_collected/long_task
     parent: rum_data_collected
     identifier: rum_data_collected_long_task
-    weight: 603
+    weight: 604
   - name: Error
     url: real_user_monitoring/data_collected/error
     parent: rum_data_collected
     identifier: rum_data_collected_error
-    weight: 604
+    weight: 605
   - name: User Action
     url: real_user_monitoring/data_collected/user_action
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
-    weight: 605
+    weight: 606
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
