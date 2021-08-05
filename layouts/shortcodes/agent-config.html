@@ -1,18 +1,13 @@
 {{ $agent_config_data := $.Site.Data.agent_config }}
 {{ $group := (.Get ("group")) }}
 
-{{/* <div class="code-snippet-wrapper">
-{{ if $filename }}
-<div class="code-filename-wrapper">
-<p class="code-filename my-0">{{ $filename }}</p>
+{{ $config_data := index $agent_config_data $group }}
+
+<div class="code-snippet-wrapper">
+  <div class="code-snippet">
+    <div class="code-button-wrapper position-absolute">
+      <button class="btn text-primary js-copy-button">Copy</button>
+      </div>
+      {{ $config_data }}
+  </div>
 </div>
-{{ end }}
-<div class="code-snippet {{if eq $wrap "true"}}wrap{{end}}">
-{{ if ne $disable_copy "true" }}
-<div class="code-button-wrapper position-absolute">
-<button class="btn text-primary js-copy-button">Copy</button>
-</div>
-{{ end }}
-{{ highlight $code $lang "" }}
-</div>
-</div>*/}}
