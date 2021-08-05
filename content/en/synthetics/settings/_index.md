@@ -84,7 +84,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
-**Note**: For more information, see the [TOTP guide][2].
+**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][2].
 
 [1]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [2]: /synthetics/guide/browser-tests-totp
