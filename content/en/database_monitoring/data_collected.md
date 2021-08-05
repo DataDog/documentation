@@ -3,9 +3,6 @@ title: Database Monitoring Data Collected
 kind: documentation
 description: Information about the data that Database Monitoring collects.
 further_reading:
-- link: "/tk/tk/"
-  tag: "Documentation"
-  text: "tktk"
 
 ---
 {{< site-region region="us3,gov" >}}
