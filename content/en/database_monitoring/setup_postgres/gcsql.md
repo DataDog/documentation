@@ -232,7 +232,7 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    host: '<AWS_INSTANCE_ENDPOINT>'
+    host: '<INSTANCE_ADDRESS>'
     port: 5432
     username: datadog
     password: '<PASSWORD>'
