@@ -270,7 +270,7 @@ Pick any global variables defined in [Synthetic Monitoring Settings][7].
 Pick any MFA global variables defined in [Synthetic Monitoring Settings][7].
 This type of global variable stores time-based one time passwords (TOTPs) secret keys. Enabling you to test your MFA modules and your entire MFA-protected workflows.
 
-**Note:** You can find out more on how to have your browser test go through TOTP based MFA on [this dedicated guide][14].
+**Note:** You can find out more on how to have your browser test go through TOTP based MFA on this [dedicated guide][14].
 
 #### Email
 
