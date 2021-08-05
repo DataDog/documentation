@@ -80,7 +80,7 @@ You can create a TOTP to use in your tests by creating a global variable where y
 5. Enter the **Secret Key** to your variable or upload a QR code image.
 6. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
 
-{{< img src="synthetics/settings/synthetic-mfa-setup.png" alt="Create a new MFA token" border="true" popup="true">}}
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
 **Note**: A complete [guide for TOTP][2] is available.
 

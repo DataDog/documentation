@@ -39,7 +39,7 @@ The example below shows how to use TOTP in your browser tests:
 1. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
 1. After recording your test steps, click **Save & Launch Test**.
 
-{{< img src="synthetics/guide/browser-tests-totp/totp_login.mp4" video="true" alt="Demo of recording a TOTP validation">}}
+{{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="Recording a TOTP validation" video="true" >}}
 
 ## Further Reading
 
