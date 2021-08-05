@@ -68,7 +68,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 .toc-container {
     display: none;
     padding-top: 95px;
-    
+
     &.mobile-open {
         top: 60px;
         position: sticky;
@@ -281,6 +281,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                         padding: 10px 60px 10px 30px;
                         display: flex;
                         align-items: center;
+                        flex-wrap: wrap;
 
                         &.toc_open {
                             padding: 10px 60px 10px 30px;
@@ -290,6 +291,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 position: absolute;
                                 right: 35px;
                                 font-size: 12px;
+                            }
+
+                            code {
+                                margin-top: 5px;
+                                margin-bottom: 5px;
                             }
                         }
                     }
