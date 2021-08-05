@@ -33,7 +33,7 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 **Note**: You can use the secret key or QR code stored in a global variable across Synthetic tests.  
 When creating a browser or API test, inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
 
-The example below shows how to use TOTP in your browser tests:
+To use TOTP in your browser tests:
 1. Import your global variable.
 1. When recording your test, click the **Hand** icon to generate a TOTP. 
 1. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
