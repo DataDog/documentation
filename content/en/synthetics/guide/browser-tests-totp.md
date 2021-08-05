@@ -18,7 +18,7 @@ further_reading:
 
 Multi-factor authentication methods such as TFA and MFA help protect your applications against unauthorized access, however, these methods can make testing features more difficult.
 
-Datadog Synthetic MFA Global Variables allow you to test your application’s TOTP based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
+Datadog Synthetic MFA Global Variables allow you to test your application’s TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
 
 ## Store your secret key or QR code in a global variable
 
