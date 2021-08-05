@@ -13,3 +13,4 @@ tqdm==4.43.0
 Pygments==2.7.4
 datadog==0.35.0
 markdown2==2.3.8
+Jinja2==3.0.1
