@@ -27,15 +27,15 @@ The first step is to create a global variable where you enter a secret key or up
 
 {{< img src="synthetics/guide/browser-tests-totp/synthetic-mfa-setup.png" alt="Create a new MFA token" border="true" popup="true">}}
 
-### Test your workflows with TOTP
-
+### Use TOTP in your Synthetic tests
+**Note**: As you stored the secret key or QR code in a global variable, it can be used in all Synthetic tests.  
 When creating a browser or API test, inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
 
-#### TOTP in a browser test recording
-
+The example below shows how to use TOTP in your browser tests:
+1. Import your global variable.
 1. When recording your test, click the **Hand** icon to generate a TOTP. 
-2. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
-3. After recording your test steps, click **Save & Launch Test**.
+1. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
+1. After recording your test steps, click **Save & Launch Test**.
 
 {{< img src="synthetics/guide/browser-tests-totp/totp_login.mp4" video="true" alt="Demo of recording a TOTP validation">}}
 
