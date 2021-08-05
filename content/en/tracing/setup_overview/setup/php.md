@@ -457,9 +457,7 @@ Run `gdb` with the binary of interest. For example for PHP-FPM:
 gdb php-fpm
 ```
 
-`gdb` will output some logs.
-
-If the output contains a line similar to the text below, then debug symbols are already installed.
+If the `gdb` output contains a line similar to the text below, then debug symbols are already installed.
 
 ```
 ...
@@ -467,7 +465,7 @@ Reading symbols from php-fpm...Reading symbols from /usr/lib/debug/path/to/some/
 ...
 ```
 
-If the output contains a line similar to the text below, then debug symbols have to be installed:
+If the `gdb` output contains a line similar to the text below, then debug symbols have to be installed:
 
 ```
 ...
