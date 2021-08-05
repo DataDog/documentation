@@ -87,7 +87,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 **Note**: For more information, see the [TOTP guide][2].
 
 [1]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[2]: /guide/browser-tests-totp
+[2]: /synthetics/guide/browser-tests-totp
 
 {{% /tab %}}
 
