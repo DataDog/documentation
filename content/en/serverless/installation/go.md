@@ -22,16 +22,13 @@ aliases:
 
 ## Required setup
 
-If not already configured:
+If not already configured, install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
-
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
+If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
 
 ## Configuration
 
-### Install
+### Install the Datadog Lambda Library
 
 Install the [Datadog Lambda library][3] locally by running the following command:
 
@@ -39,12 +36,30 @@ Install the [Datadog Lambda library][3] locally by running the following command
 go get github.com/DataDog/datadog-lambda-go
 ```
 
+### Install the Datadog Lambda Extension
+
+Add the Datadog Lambda Extension layer for your Lambda function using the ARN in the following format:
+
+{{< site-region region="us,us3,eu" >}}
+```
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+```
+{{< /site-region >}}
+
+The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extension" >}}.
+
 ### Instrument
 
 Follow these steps to instrument the function:
 
+1. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][4]. 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
-2. Import the required packages in the file declaring your Lambda function handler.
+1. Import the required packages in the file declaring your Lambda function handler.
 
     ```go
     package main
@@ -56,7 +71,7 @@ Follow these steps to instrument the function:
       httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     )
     ```
-3. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
+1. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
 
     ```go
     func main() {
@@ -70,7 +85,7 @@ Follow these steps to instrument the function:
       */
     }
     ```
-4. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
+1. Use the included libraries to create additional spans, connect logs and traces, and pass trace context to other services.
     ```go
     func myHandler(ctx context.Context, event MyEvent) (string, error) {
       // Trace an HTTP request
@@ -89,13 +104,6 @@ Follow these steps to instrument the function:
       s.Finish()
     }
     ```
-
-### Subscribe
-
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
-
-1. [Install the Datadog Forwarder if you haven't][2].
-2. [Subscribe the Datadog Forwarder to your function's log groups][4].
 
 ### Tag
 
@@ -155,9 +163,9 @@ For more information on custom metric submission, see [here][7].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: /serverless/forwarder/
+[2]: /serverless/guide/datadog_forwarder_go
 [3]: https://github.com/DataDog/datadog-lambda-go
-[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: https://app.datadoghq.com/account/settings#api
 [5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
