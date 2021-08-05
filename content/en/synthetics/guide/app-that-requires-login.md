@@ -4,7 +4,7 @@ kind: guide
 further_reading:
   - link: '/synthetics/guide/browser-tests-totp'
     tag: 'Documentation'
-    text: 'TOTPs For Multi-Factor Authentication (MFA) in Browser test'
+    text: 'TOTPs For Multi-Factor Authentication (MFA) in Browser Test'
   - link: '/synthetics/browser_tests'
     tag: 'Documentation'
     text: 'Browser Tests'
