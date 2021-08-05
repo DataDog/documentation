@@ -45,7 +45,7 @@ Or find an outlier like a query that _usually_ runs quickly, but occasionally ru
 
 Use table visualizations to produce report-like summaries to share with others. For example, create a table of worst-performing queries (p75 Duration), and include the average plan cost values for each query: 
 
-{{< img src="database_monitoring/dbm-qs-p75-duration-table.png" alt="Table of p75 duration queries" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_qs_p75_duration_table.png" alt="Table of p75 duration queries" style="width:100%;">}}
 
 Use the **Export** button to share the data with your engineering team to start a discussion about where to focus improvement efforts.
 
