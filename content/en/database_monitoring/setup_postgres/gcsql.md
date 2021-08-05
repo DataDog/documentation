@@ -86,8 +86,9 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
+Create the following schema **in every database**: 
+
 ```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
 CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
