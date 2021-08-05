@@ -64,13 +64,18 @@ Connect to the chosen database as a superuser (or another user with sufficient p
  psql -h mydb.example.com -d postgres -U postgres
  ```
 
-Run the following SQL commands:
+Create the `datadog` user:
+
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+```
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
+Create the following schema **in every database**: 
+
 ```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
 CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
@@ -81,8 +86,9 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
+Create the following schema **in every database**: 
+
 ```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
 CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
