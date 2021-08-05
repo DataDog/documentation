@@ -29,7 +29,7 @@ The first step is to create a global variable where you enter a secret key or up
 
 ### Test your workflows with TOTP
 
-When creating a browser or API test, inject the TOTP generated from the secret key stored in the global variable to verify your application’s authentication workflow.
+When creating a browser or API test, inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
 
 #### TOTP in a browser test recording
 
