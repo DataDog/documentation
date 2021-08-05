@@ -35,20 +35,6 @@ Facets on the left:
 
 Click options to add columns to the table, so you can sort by them.
 
-## Explore other visualizations
-
-Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the **Visualize as** buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a datacenter, select **Timeseries**, group by `Statement` and graph the average duration:
-
-{{< img src="database_monitoring/dbm_qs_slowest_query_viz.png" alt="Finding slowest queries" style="width:100%;">}}
-
-Or find an outlier like a query that _usually_ runs quickly, but occasionally runs slow by graphing its p90 or p99 duration. 
-
-Use table visualizations to produce report-like summaries to share with others. For example, create a table of worst-performing queries (p75 Duration), and include the average plan cost values for each query: 
-
-{{< img src="database_monitoring/dbm_qs_p75_duration_table.png" alt="Table of p75 duration queries" style="width:100%;">}}
-
-Use the **Export** button to share the data with your engineering team to start a discussion about where to focus improvement efforts.
-
 ### Explain plan cost
 
 Explain plan cost is a unitless measure that the database uses to compare two plans with each other. It roughly corresponds to number of _things_ on the database---blocks or pages---but it is primarily useful for relative comparisons of two plans, not in absolute terms for a single plan. Explain plan cost calculation helps the database choose which plan it's going to use. 
@@ -84,6 +70,20 @@ The Explain Plan section shows Duration and Cost stats for the current sample _a
 The explain plan also shows measures for each node (step) in the the plan: startup cost, total cost, plan rows, and plan width. Hover over the column heading to see a description of each measure.
 
 {{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Explain plan samples statistics and step metrics" style="width:100%;">}}
+
+## Explore other visualizations
+
+Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the **Visualize as** buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a datacenter, select **Timeseries**, group by `Statement` and graph the average duration:
+
+{{< img src="database_monitoring/dbm_qs_slowest_query_viz.png" alt="Finding slowest queries" style="width:100%;">}}
+
+Or find an outlier like a query that _usually_ runs quickly, but occasionally runs slow by graphing its p90 or p99 duration. 
+
+Use table visualizations to produce report-like summaries to share with others. For example, create a table of worst-performing queries (p75 Duration), and include the average plan cost values for each query: 
+
+{{< img src="database_monitoring/dbm_qs_p75_duration_table.png" alt="Table of p75 duration queries" style="width:100%;">}}
+
+Use the **Export** button to share the data with your engineering team to start a discussion about where to focus improvement efforts.
 
 ## Database Monitoring dashboards
 
