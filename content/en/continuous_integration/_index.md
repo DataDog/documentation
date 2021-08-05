@@ -32,7 +32,7 @@ For build engineers, the Pipelines page provides:
 - An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches.
 - A window to quickly spotting and fixing immediate, urgent issues like broken pipelines to production.
 - How each pipeline has run, over time, and with what results and trends.
-- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it will make the biggest difference.
+- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it makes the biggest difference.
 
 CI pipeline data is available in [Dashboards][1] and [Notebooks][2], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 

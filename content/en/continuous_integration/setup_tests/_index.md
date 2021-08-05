@@ -1,5 +1,5 @@
 ---
-title: Setup Tracing on CI Tests
+title: Set up Tracing on CI Tests
 kind: documentation
 ---
 

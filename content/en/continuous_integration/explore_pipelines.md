@@ -21,7 +21,7 @@ You can filter the page by pipeline name to see the pipelines you're most concer
 
 Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame, and can display branches other than the default. 
 
-{{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline"  style="width:100%;">}}
+{{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline" style="width:100%;">}}
 
 Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate. 
 
@@ -33,7 +33,7 @@ Click one of the executions to open the pipeline execution view and see the flam
 
 Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to drill down to the Resource, Service, or Analytics page for the pipeline, stage, or job. You can also find complete tags information and links to related log events and network monitoring events.
 
-{{< img src="ci/ci-pipeline-execution.png" alt="Trace info for pipeline execution"  style="width:100%;">}}
+{{< img src="ci/ci-pipeline-execution.png" alt="Trace info for pipeline execution" style="width:100%;">}}
 
 ## Pipeline executions details and traces
 
@@ -43,7 +43,7 @@ Each pipeline execution is reported as a trace, which includes stage and job inf
 
 Alternatively, click the [Analytics][3] button to interactively slice and dice pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
 
-{{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution"  style="width:100%;">}}
+{{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
 ## Communicate about CI pipelines data
 
