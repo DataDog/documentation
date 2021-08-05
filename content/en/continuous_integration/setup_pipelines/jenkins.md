@@ -164,6 +164,27 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
 **Example**: `(.*?)_job_(.*?)_release, owner:$1, release_env:$2, optional:Tag3`
 
+### Including/Excluding pipelines
+
+You can configure the Jenkins Plugin to include/exclude some pipelines:
+
+1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
+2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
+3. Click on the `Advanced` button.
+4. Configure the `Excluded Jobs`.
+5. Configure the `Included Jobs`.
+6. Save your configuration.
+
+**Excluded jobs**
+: A comma-separated list of Jenkins jobs that should not be monitored. The exclusion applies to all metrics, traces, events and service checks.
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
+**Example**: `susans-job,johns-.*,prod_folder/prod_release`
+
+**Included jobs**
+: A comma-separated list of Jenkins job names that should be monitored. If the included jobs are empty, all jobs that are not excluded explicitly will be monitored. The inclusion applies to all metrics, traces, events and service checks.
+**Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
+**Example**: `susans-job,johns-.*,prod_folder/prod_release`
+
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
