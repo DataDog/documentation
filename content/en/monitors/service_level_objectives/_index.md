@@ -61,6 +61,7 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
 [Monitor-based SLOs][5]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
+
 [Metric-based SLOs][6]: Up to three decimal places are allowed for all targets.
 
 ## Edit an SLO

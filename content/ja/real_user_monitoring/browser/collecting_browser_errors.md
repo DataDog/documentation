@@ -30,7 +30,7 @@ further_reading:
 
 ## エラー属性
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[高度なコンフィギュレーション][3]をご覧ください。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][3]をご覧ください。
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -76,7 +76,7 @@ addError(
 );
 {{< /code-block >}}
 
-**注**: [エラー追跡][5]機能では、`custom` または `source` に設定されたソースに送信され、スタックトレースを含むエラーが処理します。
+**注**: [エラー追跡][5]機能では、`custom` または `source` に設定されたソースに送信され、スタックトレースを含むエラーが処理します。その他のソース（`console` など）で送信されたエラーは、エラー追跡で処理されません。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -160,7 +160,7 @@ try {
 
 ## トラブルシューティング
 
-### "Script error" を修正する
+### スクリプトエラー
 
 セキュリティ上の理由から、クロスオリジンスクリプトによりトリガーされるエラーの詳細はブラウザに表示されません。この場合、Error Details タブには "Script error." というエラーメッセージのみが表示されます。
 
@@ -187,7 +187,7 @@ try {
 
 [1]: /ja/real_user_monitoring/data_collected/error/#network-errors
 [2]: /ja/real_user_monitoring/browser/data_collected/
-[3]: /ja/real_user_monitoring/browser/advanced_configuration/
+[3]: /ja/real_user_monitoring/browser/modifying_data_and_context/
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [5]: /ja/real_user_monitoring/error_tracking
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

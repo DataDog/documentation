@@ -55,6 +55,10 @@
     "name": "Security Monitoring",
     "description": "Detection rules for generating signals and listing of generated\nsignals."
   },
+  "service-accounts": {
+    "name": "Service Accounts",
+    "description": "Create, edit, and disable service accounts."
+  },
   "users": {
     "name": "Users",
     "description": "Create, edit, and disable users."

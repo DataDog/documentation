@@ -1009,7 +1009,11 @@
                 ]
             },
             "layout": {
-                "is_column_break": true
+                "is_column_break": true,
+                "x": 0,
+                "y": 30,
+                "width": 12,
+                "height": 11
             }
         },
         {

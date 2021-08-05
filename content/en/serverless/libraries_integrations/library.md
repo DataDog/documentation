@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "/serverless/libraries_integrations/extension/"
   tag: "Documentation"
-  text: "Datadog Lambda Extension (Preview)"
+  text: "Datadog Lambda Extension"
 - link: "https://github.com/DataDog/datadog-lambda-python/blob/master/README.md"
   tag: "Github"
   text: "Datadog Lambda Library for Python"

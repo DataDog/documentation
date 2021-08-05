@@ -15,13 +15,19 @@ further_reading:
 ---
 Datadog Synthetic モニタリングのセットアップや構成で問題が発生した場合は、こちらの情報を参考にしてトラブルシューティングをお試しください。問題が解決されない場合は、[Datadog のサポートチームまでお問い合わせ][1]ください。
 
+## API テスト
+
+### ネットワーク時間にバリエーションが見られます
+
+API テストの[時間メトリクス][2]に急激な上昇や全体的な増加がある場合、リクエストにボトルネックまたは遅延があることを示しています。詳しくは、[API テストの時間とバリエーション][3]のガイドを参照してください。
+
 ## ブラウザテスト
 
 ### 記録
 
 #### ウェブサイトが iframe で読み込まれません
 
-[Datadog 拡張機能][2]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなり、「Your website does not support being loaded through an iframe (このウェブサイトは iframe 経由の読み込みをサポートしていません )」と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。**Open in Popup** をクリックしてウェブサイトをポップアップで開き、その際のジャーニーを記録してください。
+[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなり、`Your website does not support being loaded through an iframe.` (このウェブサイトは iframe 経由の読み込みをサポートしていません) と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。**Open in Popup** をクリックしてウェブサイトをポップアップで開き、その際のジャーニーを記録してください。
 
 #### 一部のアプリケーションは iframe に読み込まれますが、読み込まれないものもあります
 
@@ -35,17 +41,17 @@ Datadog Synthetic モニタリングのセットアップや構成で問題が�
 
 #### iframe でウェブサイトがロードされず、ウェブサイトをポップアップで開いてもステップを記録できない
 
-[Datadog 拡張機能][2]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなります。さらに、ウェブサイトを iframe およびポップアップで開いても、ステップを記録できなくなります。
+[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなります。さらに、ウェブサイトを iframe およびポップアップで開いても、ステップを記録できなくなります。
 
 {{< img src="synthetics/recording_iframe.mp4" alt="ブラウザテストのステップの記録に関する問題" video="true"  width="100%" >}}
 
-このような場合は、`On specific sites` セクションでウェブサイトを指定するか、`On all sites` にトグルボタンを変更して、意図したウェブサイトのデータの読み取りおよび変更の許可を [Datadog 拡張機能][3]に付与してください。
+このような場合は、`On specific sites` セクションでウェブサイトを指定するか、`On all sites` にトグルボタンを変更して、意図したウェブサイトのデータの読み取りおよび変更の許可を [Datadog 拡張機能][5]に付与してください。
 
 {{< img src="synthetics/extension.mp4" alt="拡張機能にすべてのサイトのデータ読み取りを許可" video="true"  width="100%" >}}
 
 #### アプリケーションで手順を記録することができません
 
-Chrome ブラウザに、拡張機能を使用して通常の手順で記録を行うことを抑制するポリシーが適用されている場合があります。詳細を確認するには `chrome://policy` を開き、[`ExtensionSettings`][4] のような拡張機能関連の設定がないかを確認してください。
+Chrome ブラウザに、拡張機能を使用して通常の手順で記録を行うことを抑制するポリシーが適用されている場合があります。詳細を確認するには `chrome://policy` を開き、[`ExtensionSettings`][6] のような拡張機能関連の設定がないかを確認してください。
 
 #### レコーダーにログインページが表示されません。なぜですか？
 
@@ -93,37 +99,37 @@ Chrome ブラウザに、拡張機能を使用して通常の手順で記録を�
 Synthetics テストの 1 つが 401 をスローしている場合は、エンドポイントで認証できないことを意味している可能性が高いです。そのエンドポイント (Datadog 外) での認証に使用するメソッドを使用し、Synthetic テストを構成するときにそれを複製する必要があります。
 
 * エンドポイントは**ヘッダーベース認証**を使用していますか？
-  * **基本の認証情報**: [HTTP][5] または[ブラウザテスト][6]の**高度なオプション**に、関連する認証情報を指定します。
-  * **トークンベース認証**: 最初の [HTTP テスト][5]でトークンを抽出し、その最初のテストの応答をパースして[グローバル変数][7]を作成し、その変数を認証トークンを必要とする 2 回目の [HTTP][5] または[ブラウザテスト][8]に再挿入します。
-  * **セッションベース認証**: [HTTP][5] または[ブラウザテスト][6]の**高度なオプション**に必要なヘッダーまたはクッキーを追加します。
+  * **基本の認証情報**: [HTTP][7] または[ブラウザテスト][8]の**高度なオプション**に、関連する認証情報を指定します。
+  * **トークンベース認証**: 最初の [HTTP テスト][7]でトークンを抽出し、その最初のテストの応答をパースして[グローバル変数][9]を作成し、その変数を認証トークンを必要とする 2 回目の [HTTP][7] または[ブラウザテスト][10]に再挿入します。
+  * **セッションベース認証**: [HTTP][7] または[ブラウザテスト][8]の**高度なオプション**に必要なヘッダーまたはクッキーを追加します。
 
 * このエンドポイントは**認証用のクエリパラメーター**を使用していますか (たとえば、URL パラメーターに特定の API キーを追加する必要がありますか)？
 
-* このエンドポイントは **IP ベース認証**を使用していますか？その場合は、[Synthetics テストの元となる IP][9] の一部またはすべてを許可する必要があります。
+* このエンドポイントは **IP ベース認証**を使用していますか？その場合は、[Synthetics テストの元となる IP][11] の一部またはすべてを許可する必要があります。
 
 ### Forbidden エラー
 
 Synthetic テストによって返された `403 Forbidden` エラーが確認された場合は、`Sec-Datadog` ヘッダーを含むリクエストを Web サーバーがブロックまたはフィルタリングした結果である可能性があります。このヘッダーは、Datadog が開始する各 Synthetic リクエストに追加され、トラフィックのソースを識別し、Datadog サポートが特定のテスト実行を識別するのを支援します。
 
-さらに、[Datadog Synthetics のモニタリング IP 範囲][9]がファイアウォールによってトラフィックソースとして許可されていることを確認する必要がある場合もあります。
+さらに、[Datadog Synthetics のモニタリング IP 範囲][11]がファイアウォールによってトラフィックソースとして許可されていることを確認する必要がある場合もあります。
 
 ### 通知の欠落
 
-デフォルト設定では、Synthetic テストは [再通知][10]しません。これは、トランジション（たとえば、テストがアラート状態になる、または直近のアラートから回復するなど）が生成された後に通知ハンドル（メールアドレスや Slack ハンドルなど）を追加しても、そのトランジションの通知は送信されないことを意味します。次のトランジションから通知が送信されます。
+デフォルト設定では、Synthetic テストは [再通知][12]しません。これは、トランジション（たとえば、テストがアラート状態になる、または直近のアラートから回復するなど）が生成された後に通知ハンドル（メールアドレスや Slack ハンドルなど）を追加しても、そのトランジションの通知は送信されないことを意味します。次のトランジションから通知が送信されます。
 
 ## プライベートロケーション
 
 ### 時々、プライベートロケーションのコンテナが、強制終了された `OOM` を取得します。
 
-強制終了された `Out Of Memory` を取得するプライベートロケーションのコンテナは、通常、プライベートロケーションワーカーのリソース消費の問題を明らかにします。プライベートロケーションのコンテナが、[十分なメモリリソース][11]でプロビジョニングされていることを確認してください。
+強制終了された `Out Of Memory` を取得するプライベートロケーションのコンテナは、通常、プライベートロケーションワーカーのリソース消費の問題を明らかにします。プライベートロケーションのコンテナが、[十分なメモリリソース][13]でプロビジョニングされていることを確認してください。
 
 ### ブラウザテストの結果で、`Page crashed` エラーが表示されることがあります
 
-これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分なメモリリソース][11]でプロビジョニングされていることを確認してください。
+これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分なメモリリソース][13]でプロビジョニングされていることを確認してください。
 
 ### テストの実行が通常より遅くなることがあります
 
-これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分な CPU リソース][11]でプロビジョニングされていることを確認してください。
+これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分な CPU リソース][13]でプロビジョニングされていることを確認してください。
 
 ### プライベートロケーションから実行される API テストに `TIMEOUT` エラーが表示されます
 
@@ -136,13 +142,15 @@ API テストの実行が設定されているエンドポイントに、プラ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/help/
-[2]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[3]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: https://chromeenterprise.google/policies/#ExtensionSettings
-[5]: /ja/synthetics/api_tests/?tab=httptest#make-a-request
-[6]: /ja/synthetics/browser_tests/#test-details
-[7]: /ja/synthetics/settings/?tab=createfromhttptest#global-variables
-[8]: /ja/synthetics/browser_tests/#use-global-variables
-[9]: https://ip-ranges.datadoghq.com/synthetics.json
-[10]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team
-[11]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
+[2]: /ja/synthetics/metrics/#api-tests
+[3]: /ja/synthetics/guide/api_test_timing_variations/
+[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[5]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
+[6]: https://chromeenterprise.google/policies/#ExtensionSettings
+[7]: /ja/synthetics/api_tests/?tab=httptest#make-a-request
+[8]: /ja/synthetics/browser_tests/#test-details
+[9]: /ja/synthetics/settings/?tab=createfromhttptest#global-variables
+[10]: /ja/synthetics/browser_tests/#use-global-variables
+[11]: https://ip-ranges.datadoghq.com/synthetics.json
+[12]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team
+[13]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
