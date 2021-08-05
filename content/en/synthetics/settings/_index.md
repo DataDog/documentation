@@ -71,7 +71,7 @@ Note: Variable values are updated whenever the test they are extracted from runs
 
 {{% tab "MFA Token" %}}  
  
-In the **Global Variables** tab of your **Settings** page, click **Create Global Variable** and enter a secret key or upload a QR code from your authentication provider:
+You can create a TOTP to use in your tests by creating a global variable where you enter a secret key or upload a QR code from your authentication provider.
 
 1. In **Choose variable type**, select **MFA Token**.
 2. In **Define Variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
