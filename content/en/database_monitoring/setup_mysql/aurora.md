@@ -21,7 +21,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Configure the Agent](#configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
@@ -134,8 +133,6 @@ To monitor Aurora hosts, install the Agent somewhere in your infrastructure and 
 
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
 
-## Configure the Agent
-
 {{< tabs >}}
 {{% tab "Host" %}}
 
@@ -151,9 +148,9 @@ init_config:
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
+    port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-    port: '<YOUR_MYSQL_PORT>' # e.g. 3306
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
@@ -169,17 +166,41 @@ instances:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure this check for an Agent running on a Docker container:
+To configure this check for an Agent running on a Docker container, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container. **Note**: the Agent must have read permission on the docker socket for label Autodiscovery to work.
 
-Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
+### Command line
+
+Get up and running quickly by executing the following command to run the agent from your command line. Be sure to replace the correct values:
+
+```bash
+export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export DD_AGENT_VERSION=7.30.0
+
+docker run -e "DD_API_KEY=${DD_API_KEY}" \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -l com.datadoghq.ad.check_names='["mysql"]' \
+  -l com.datadoghq.ad.init_configs='[{}]' \
+  -l com.datadoghq.ad.instances='[{
+    "dbm": true,
+    "host": "<AWS_INSTANCE_ENDPOINT>",
+    "port": 3306,
+    "username": "datadog",
+    "password": "<UNIQUEPASSWORD>"
+  }]' \
+  datadog/agent:${DD_AGENT_VERSION}
+```
+
+### Dockerfile
+
+Labels can also be specified in the Dockerfile, so you can build and deploy a custom agent without changing any infrastructure:
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
 
 See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
 
