@@ -1057,10 +1057,14 @@ main:
     url: serverless/troubleshooting/serverless_tagging
     parent: serverless_troubleshooting
     weight: 702
+  - name: Connect Invoking Serverless Resources
+    url: serverless/troubleshooting/connect_invoking_resources
+    parent: serverless_troubleshooting
+    weight: 703
   - name: Webpack Compatibility
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
-    weight: 703
+    weight: 704
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
