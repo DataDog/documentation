@@ -16,7 +16,7 @@ further_reading:
   text: "Identify Synthetic Bots"
 - link: "/synthetics/guide/browser-tests-totp"
   tag: "Documentation"
-  text: "Time-based one time passwords (TOTPs) for multi-factor authentication (MFA) in Browser tests"
+  text: "TOTPs For Multi-Factor Authentication (MFA) in Browser test"
 ---
 
 On the [Synthetic Monitoring Settings page][1], you can adjust the following settings:
