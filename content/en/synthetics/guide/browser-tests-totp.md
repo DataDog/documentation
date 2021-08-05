@@ -1,5 +1,5 @@
 ---
-title: Time-based one time passwords (TOTPs) for multi-factor authentication (MFA)
+title: Time-Based One Time Passwords (TOTPs) For Multi-Factor Authentication (MFA) in Browser tests
 kind: guide
 further_reading:
    - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
@@ -16,7 +16,7 @@ further_reading:
 
 ### Store your secret key or QR code in a global variable
 
-In the **Global Variables** tab of your **Settings** page, click **Create Global Variable** and enter a secret key or upload a QR code from your authentication provider:
+The first step is to create a global variable where you enter a secret key or upload a QR code from your authentication provider. In the **Global Variables** tab of your **Settings** page, click **Create Global Variable**.
 1. In **Choose variable type**, select **MFA Token**.
 2. In **Define variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 3. Enter a **Description** for your variable (optional).
