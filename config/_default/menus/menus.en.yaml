@@ -5862,6 +5862,18 @@ api:
         - SendInvitations
       unstable: []
       order: 8
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: create-a-service-account
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
   - name: Update a user
     url: '#update-a-user'
     identifier: update-a-user
@@ -6885,5 +6897,69 @@ api:
         - v2
       operationids:
         - ListSecurityFilters
+      unstable: []
+      order: 0
+  - name: Service Accounts
+    url: /api/latest/service-accounts/
+    identifier: service-accounts
+    generated: true
+  - name: Edit an application key for this service account
+    url: '#edit-an-application-key-for-this-service-account'
+    identifier: edit-an-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateServiceAccountApplicationKey
+      unstable: []
+      order: 2
+  - name: Get one application key for this service account
+    url: '#get-one-application-key-for-this-service-account'
+    identifier: get-one-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetServiceAccountApplicationKey
+      unstable: []
+      order: 1
+  - name: Delete an application key for this service account
+    url: '#delete-an-application-key-for-this-service-account'
+    identifier: delete-an-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteServiceAccountApplicationKey
+      unstable: []
+      order: 3
+  - name: Create an application key for this service account
+    url: '#create-an-application-key-for-this-service-account'
+    identifier: create-an-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccountApplicationKey
+      unstable: []
+      order: 0
+  - name: List application keys for this service account
+    url: '#list-application-keys-for-this-service-account'
+    identifier: list-application-keys-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListServiceAccountApplicationKeys
       unstable: []
       order: 0

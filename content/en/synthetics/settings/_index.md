@@ -14,6 +14,9 @@ further_reading:
 - link: "/synthetics/identify_synthetics_bots/"
   tag: "Documentation"
   text: "Identify Synthetic Bots"
+- link: "/synthetics/guide/browser-tests-totp"
+  tag: "Documentation"
+  text: "TOTPs For Multi-Factor Authentication (MFA) in Browser Test"
 ---
 
 On the [Synthetic Monitoring Settings page][1], you can adjust the following settings:
@@ -65,6 +68,26 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 [1]: /synthetics/api_tests/?tab=httptest
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
+{{% /tab %}}
+
+{{% tab "MFA Token" %}}  
+ 
+To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider.
+
+1. In **Choose variable type**, select **MFA Token**.
+2. In **Define Variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
+3. Enter a **Description** for your variable (optional).
+4. Select **Tags** to associate with your variable (optional).
+5. Enter the **Secret Key** to your variable or upload a QR code image.
+6. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
+
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
+
+**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][2].
+
+[1]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[2]: /synthetics/guide/browser-tests-totp
+
 {{% /tab %}}
 
 {{< /tabs >}}

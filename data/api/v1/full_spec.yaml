@@ -5500,13 +5500,29 @@ components:
           format: int64
           nullable: true
           type: integer
+        new_group_delay:
+          description: 'Time (in seconds) to skip evaluations for new groups.
+
+
+            For example, this option can be used to skip evaluations for new hosts
+            while they initialize.
+
+
+            Must be a non negative integer.'
+          format: int64
+          nullable: true
+          type: integer
         new_host_delay:
           default: 300
+          deprecated: true
           description: 'Time (in seconds) to allow a host to boot and applications
 
             to fully start before starting the evaluation of monitor results.
 
-            Should be a non negative integer.'
+            Should be a non negative integer.
+
+
+            Use new_group_delay instead.'
           format: int64
           nullable: true
           type: integer
