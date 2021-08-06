@@ -12,12 +12,6 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us" >}}
-<div class="alert alert-warning">
-Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
-</div>
-{{< /site-region >}}
-
 {{< site-region region="us3,gov,eu" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
@@ -44,33 +38,11 @@ A finding is the primary primitive for a rule evaluation against a resource. Eve
 
 {{< img src="security_platform/cspm/findings/posture-management-overview.png" alt="An overview of the Posture Management Findings page" style="width:100%;">}}
 
-### Signals
-
-Signals are security alerts that Datadog generates and displays in the [Signals Explorer][4]. CSPM signals trigger when Datadog generates an `evaluation:fail` finding for a cloud or infrastructure configuration rule.
-
-In order to consume findings in logical groupings and mitigate the potential for alert fatigue, you have full flexibility to change how signals are triggered for each individual resource every time a resource fails a rule in a new cloud account or each time a resource is misconfigured in a service. Regardless of which grouping logic you choose for signal generation, opening a signal always displays the up-to-date list of findings that are failing for this rule.
+## Explore your cloud misconfigurations with Findings
 
 Clicking on an individual finding that has **failed** to see details about the misconfigured resource, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 
-{{< img src="security_platform/cspm/findings/signal.png" alt="An example of a signal" style="width:80%;">}}
-
-From the top of the side panel, you can configure a rule, or send a notification to your colleagues by email, Slack, Microsoft Teams, Pagerduty, Servicenow, Jira, and webhooks.
-
-The top portion of the **Findings** side panel also displays key information about where misconfigurations are occurring: an individual resource, a service, or a cloud account. See all tags associated with this grouping so you can quickly find this area within your infrastructure for deeper inspection. It also highlights the relevant compliance controls associated with the rule, and when the signal was first triggered by a finding.
-
-Below is example message for a rule, including a description of misconfiguration and instructions for how to remediate the issue.
-
-{{< img src="security_platform/cspm/findings/message.png" alt="Message tab of the signals panel" style="width:80%;">}}
-
-The Findings tab displays all `evaluation:fail` resources that are triggering this signal.
-
-{{< img src="security_platform/cspm/findings/findings-tab.png" alt="Failed signals in the side panel" style="width:80%;">}}
-
-**Note**: If using a service or account grouping, the signal triggers the first time a finding meets the grouping criteria, and is not re-triggered each time a new resource in this same service or account fail this rule. However, newly discovered findings are always associated with the signal and displays in list form under this tab.
-
-The **Related Issues** tab shows other rules that have triggered signals on the same logic grouping: the same resource, service, or cloud account.
-
-## Search and filter
+{{< img src="security_platform/cspm/findings/signal-overview.png" alt="Failed signals in the side panel" style="width:65%;">}}
 
 Aggregate findings by rule using the query search bar. This view shows a checklist of all of the rules that Datadog scans. Filtering by `evaluation:fail` status narrows the list to all rules that have issues that need to be addressed. The side panel shows details of each resource that has been evaluated by the rule.
 
@@ -86,7 +58,7 @@ Findings can also be aggregated by resource to rank order resources that have fa
 
 The side panel lists rules that were evaluated against the resource, some of which you may choose to be addressed to improve your security configuration posture.
 
-{{< img src="security_platform/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:80%;">}}
+{{< img src="security_platform/cspm/findings/passed-rules.png" alt="Group and aggregate by resource in search" style="width:100%;">}}
 
 ## Further reading
 
@@ -95,4 +67,3 @@ The side panel lists rules that were evaluated against the resource, some of whi
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security_platform/security_monitoring/
 [3]: /security_platform/cloud_workload_security/
-[4]: /security_platform/explorer/

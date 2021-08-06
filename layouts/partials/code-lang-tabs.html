@@ -2,13 +2,20 @@
 {{ $context := .context }}
 
 <ul class="nav nav-tabs border-none code-lang-list-container">
-    {{ $count := 0}}
+    {{ $count := 0 }}
+    {{ $codeLangs := slice }}
 
-    {{ range sort .codeLangs "value" "asc" }}
+    {{ if eq .sort "name" }}
+        {{ $codeLangs = sort .codeLangs "value" "asc" }}
+    {{ else }}
+        {{ $codeLangs = .codeLangs }}
+    {{ end }}
+
+    {{ range $codeLangs }}
         <li class="nav-item" style="margin-bottom: 6px;">
             <a class="nav-link mr-1 js-code-example-link" data-code-lang-trigger="{{ . }}" href="#">{{ index $.context.Site.Params.code_language_ids . }}</a>
         </li>
-        {{ $count = add $count 1 }}
-    {{ end}}
 
+        {{ $count = add $count 1 }}
+    {{ end }}
 </ul>

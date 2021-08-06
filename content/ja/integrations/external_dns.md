@@ -83,13 +83,12 @@ metadata:
 外部 DNS チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "external_dns" >}}
 
-**external_dns.prometheus.health**:<br>
-チェックがメトリクスのエンドポイントにアクセスできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://github.com/kubernetes-incubator/external-dns
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -97,4 +96,5 @@ metadata:
 [4]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/external_dns/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-core/blob/master/external_dns/assets/service_checks.json
+[8]: https://docs.datadoghq.com/ja/help/

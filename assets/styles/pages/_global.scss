@@ -173,6 +173,10 @@ code {
     font-family: $font-family-monospace;
 }
 
+h2 code {
+    @include font-size($h3-font-size);
+}
+
 code + code.region-param {
     padding: 0 5px 0 0;
     border-top-left-radius: 0;
@@ -960,5 +964,3 @@ dl {
         width: 100%;
     }
 }
-
-

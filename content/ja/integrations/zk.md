@@ -212,16 +212,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ZooKeeper チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "zk" >}}
 
-**zookeeper.ruok**:<br>
-監視対象ノードに `ruok` を送信します。`imok` 応答には `OK`、別の応答には `WARN`、応答がない場合は `CRITICAL` を返します。
-
-**zookeeper.mode**:<br>
-`zk.yaml` で `expected_mode` が構成されている場合、Agent はこのサービスチェックを送信します。ZooKeeper の実際のモードが `expected_mode` と一致する場合は `OK` を返し、それ以外の場合は `CRITICAL` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/zk/images/zk_dashboard.png

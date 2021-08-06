@@ -72,7 +72,7 @@ For more information on how to set up private locations, see [Getting Started wi
 
 Select the frequency at which you want your test to execute. 
 
-In addition to running your Synthetic test on a schedule, you can trigger them directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][10].
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][10].
 
 
 ### Define alert conditions
@@ -93,7 +93,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][11] such as Slack, PagerDuty, and webhooks to route your alert to specific services and teams.
+Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][11] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams.
 
 You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
 
@@ -117,11 +117,15 @@ When you create a [Multistep API test][12], you can define a sequence of HTTP re
     - Specify the URL you want to query. 
     - Select **Advanced Options** to add custom request headers, authentication credentials, body content, or cookies.
     - Click **Test URL**. 
-    - Optionally, add new assertions, define execution parameters, and extract variables from the response content. When you extract a variable from the response content, remember to re-inject the variable in subsequent steps.
+    - Optionally, add new assertions, define execution parameters, and extract variables from the response content. 
+    - Enter a name for your variable and click on a parsed value in the **Response Body** to set the variable value. 
     - Click **Save Step**.
 
-6. Click **Add Another Step** to add another step. By default, you can create up to ten steps. 
-7. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
+6. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
+7. Optionally, type `{{` in the **URL** and a list of extracted and global variables appears. 
+    - Select an extracted variable to inject in your test step. You can add your extracted variables in the **Step URL** or in the request header, cookies, and HTTP authentication fields in **Advanced Options** > **Request Options**.  
+
+8. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
 
 When you're ready to create your test, click **Save Test**. 
 

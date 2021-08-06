@@ -2,11 +2,14 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    consul: assets/dashboards/consul_dashboard.json
   logs:
     source: consul
   metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    consul_processes: assets/saved_views/consul_processes.json
   service_checks: assets/service_checks.json
 categories:
   - containers
@@ -89,73 +92,45 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
 
    instances:
      ## @param url - string - required
-     ## Where your Consul HTTP Server Lives
-     ## Point the URL at the leader to get metrics about your Consul Cluster.
-     ## Remind to use https instead of http if your Consul setup is configured to do so.
+     ## Where your Consul HTTP server lives,
+     ## point the URL at the leader to get metrics about your Consul cluster.
+     ## Use HTTPS instead of HTTP if your Consul setup is configured to do so.
      #
      - url: http://localhost:8500
    ```
 
 2. [Agent を再起動します][3]。
 
-Consul Agent をリロードすると、DogStatsD への追加の Consul メトリクスの送信が開始されます。
+###### OpenMetrics
 
-##### ログの収集
+オプションで、`use_prometheus_endpoint` コンフィギュレーションオプションを有効にして、Consul Prometheus エンドポイントから追加のメトリクスセットを取得できます。
 
-_Agent バージョン 6.0 以降で利用可能_
+**注**: DogStatsD または Prometheus メソッドを使用し、同じインスタンスに両方を有効化しないようご注意ください。
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Consul を構成し、Prometheus のエンドポイントにメトリクスを公開します。[`prometheus_retention_time`][4] を、メインの Consul コンフィギュレーションファイルの最上位レベルの `telemetry` キーにネストするよう設定します。
 
-   ```yaml
-   logs_enabled: true
-   ```
+    ```conf
+    {
+      ...
+      "telemetry": {
+        "prometheus_retention_time": "360h"
+      },
+      ...
+    }
+    ```
 
-2. Consul のログの収集を開始するには、次の構成ブロックを `consul.yaml` ファイルに追加します。
-
-   ```yaml
-   logs:
-     - type: file
-       path: /var/log/consul_server.log
-       source: consul
-       service: myservice
-   ```
-
-   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル consul.d/conf.yaml][2] を参照してください。
+2. Prometheus エンドポイントの使用を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーで `consul.d/conf.yaml` ファイルを編集します。
+    ```yaml
+    instances:
+        - url: <EXAMPLE>
+          use_prometheus_endpoint: true
+    ```
 
 3. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+##### DogStatsD
 
-#### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
-
-##### メトリクスの収集
-
-| パラメーター            | 値                              |
-| -------------------- | ---------------------------------- |
-| `<インテグレーション名>` | `consul`                           |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                      |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "https://%%host%%:8500"}` |
-
-##### ログの収集
-
-_Agent バージョン 6.0 以降で利用可能_
-
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
-
-| パラメーター      | 値                                               |
-| -------------- | --------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "consul", "service": "<サービス名>"}` |
-
-#### DogStatsD
-
-任意で、Agent を使用してデータを Consul から取得するのではなく、Consul から [DogStatsD][3] 経由で Agent に送信するよう構成することも可能です。
+Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を介して同じ追加メトリクスのセットを Agent に送信するように Consul を構成できます。
 
 1. Consul のメインのコンフィギュレーションファイルで、最上位レベルの `telemetry` キーの下にネストした `dogstatsd_addr` を追加することで、DogStatsD メトリクスを送信するよう Consul を構成します。
 
@@ -169,7 +144,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
     }
     ```
 
-2. メトリクスが正しくタグ付けされるよう下記のコンフィギュレーションを追加し、[Datadog Agent のメインコンフィギュレーションファイル][4]である `datadog.yaml` を更新します。
+2. メトリクスが正しくタグ付けされるよう下記のコンフィギュレーションを追加し、[Datadog Agent のメインコンフィギュレーションファイル][6]である `datadog.yaml` を更新します。
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -200,43 +175,67 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
              peer_id: "$1"
    ```
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][3]。
 
-#### OpenMetrics
+##### ログの収集
 
-DogStatsD を使用する代わりに、`use_prometheus_endpoint` コンフィギュレーションオプションを有効にして、Prometheus エンドポイントから々メトリクスを取得できます。
+_Agent バージョン 6.0 以降で利用可能_
 
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
-**注**: DogStatsD メソッドまたは Prometheus メソッドのいずれかを使用し、同じインスタンスに両方を有効化しないようご注意ください。
+   ```yaml
+   logs_enabled: true
+   ```
 
-1. Consul を構成し、Prometheus のエンドポイントにメトリクスを公開します。[`prometheus_retention_time`][6] を、メインの Consul コンフィギュレーションファイルの最上位レベルの `telemetry` キーにネストするよう設定します。
+2. `consul.yaml` ファイルでこのコンフィギュレーションブロックを編集して、Consul ログを収集します。
 
-    ```conf
-    {
-      ...
-      "telemetry": {
-        "prometheus_retention_time": "360h"
-      },
-      ...
-    }
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/consul_server.log
+       source: consul
+       service: myservice
+   ```
 
-2. Prometheus エンドポイントの使用を開始するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `consul.d/conf.yaml` ファイルを編集します。
-    ```yaml
-    instances:
-        - url: <EXAMPLE>
-          use_prometheus_endpoint: true
-    ```
+   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル consul.d/conf.yaml][2] を参照してください。
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
+[5]: https://docs.datadoghq.com/ja/developers/dogstatsd/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
+#### コンテナ化
+
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+
+##### メトリクスの収集
+
+| パラメーター            | 値                              |
+| -------------------- | ---------------------------------- |
+| `<インテグレーション名>` | `consul`                           |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                      |
+| `<インスタンスコンフィギュレーション>`  | `{"url": "https://%%host%%:8500"}` |
+
+##### ログの収集
+
+_Agent バージョン 6.0 以降で利用可能_
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+
+| パラメーター      | 値                                               |
+| -------------- | --------------------------------------------------- |
+| `<LOG_CONFIG>` | `{"source": "consul", "service": "<サービス名>"}` |
+
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[3]: https://docs.datadoghq.com/ja/developers/dogstatsd/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -281,12 +280,8 @@ Consul Agent が DogStatsD に送信するメトリクスの詳細について�
 Datadog Agent は、Consul クラスターが新しいリーダーを選出すると、`prev_consul_leader`、`curr_consul_leader`、および `consul_datacenter` のタグを付けてイベントを送信します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "consul" >}}
 
-**consul.check**:<br>
-Datadog Agent は、Consul の健全性チェックごとにサービスチェックを送信します。それぞれ以下のタグが付きます。
-
-- `service:<name>`。Consul が `ServiceName` を報告する場合
-- `consul_service_id:<id>`。Consul が `ServiceID` を報告する場合
 
 ## トラブルシューティング
 

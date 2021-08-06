@@ -249,6 +249,55 @@ kubernetes_pod_annotations_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Namespace labels as tags
+
+Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics emitted by all pods in this namespace:
+
+{{< tabs >}}
+{{% tab "Containerized Agent" %}}
+
+To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
+```
+
+For example, you could set up:
+
+```shell
+DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
+```
+
+Use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
+
+```shell
+DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+```
+
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
+
+[1]: /account_management/billing/custom_metrics
+{{% /tab %}}
+{{% tab "Agent" %}}
+
+To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+kubernetes_namespace_labels_as_tags:
+  <NAMESPACE_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+
+```yaml
+kubernetes_namespace_labels_as_tags:
+  app: kube_app
+```
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

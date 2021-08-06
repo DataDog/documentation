@@ -368,12 +368,8 @@ Agent コンテナで必要な環境変数
 Redis チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "redisdb" >}}
 
-**redis.can_connect**:<br>
-Agent が Redis に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**redis.replication.master_link_status**:<br>
-この Redis インスタンスがマスターインスタンスに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

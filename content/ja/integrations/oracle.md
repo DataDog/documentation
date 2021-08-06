@@ -60,7 +60,7 @@ Oracle インテグレーションを使用するには、Oracle Instant Client 
 1. [Linux 用の Oracle Instant Client のインストール][1]に従ってください。
 
 2. 以下を確認してください。
-    - *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。これらは[ダウンロードページ][2]にあります。
+    - *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。Oracle の[ダウンロードページ][2]にあります。
 
       Instant Client ライブラリのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。たとえば、`ldconfig` を使用します。
 
@@ -82,23 +82,25 @@ Oracle インテグレーションを使用するには、Oracle Instant Client 
        unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip
        ```
 
-{{< /tabs >}}
+[1]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
+[2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+{{% /tab %}}
 {{% tab "Windows" %}}
 ###### Windows
 
-1. [Oracle Windows インストールガイド][3]に従って、Oracle Instant Client を構成します。
+1. [Oracle Windows インストールガイド][1]に従って、Oracle Instant Client を構成します。
 
 2. 以下を確認してください。
-    - [Microsoft Visual Studio 2017 再頒布可能パッケージ][4]または適切なバージョンが Oracle Instant Client にインストールされます。
+    - [Microsoft Visual Studio 2017 再頒布可能パッケージ][2]または適切なバージョンが Oracle Instant Client にインストールされます。
 
-    - この[ダウンロードページ][2]の *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。
+    - Oracle の[ダウンロードページ][3]の *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。
 
     - 両方のパッケージは、特定のマシン上のすべてのユーザーが使用できる単一のディレクトリ (たとえば、`C:\oracle`) に抽出されます。
 
-[1]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
-[2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
-[3]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
-[4]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
+
+[1]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
+[2]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
+[3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -106,11 +108,11 @@ Oracle インテグレーションを使用するには、Oracle Instant Client 
 
 *注*: この方法は Linux でのみ機能します。
 
-Java 8 以降は、JDBC ドライバーを使用するときに Agent が使用するライブラリの 1 つである JPype のシステムに必要です。
+Java 8 以降は、JDBC Driver を使用するときに Agent が使用するライブラリの 1 つである JPype のシステムに必要です。
 
 インストールしたら、次の手順を実行します。
 
-1. [JDBC Driver jar ファイルをダウンロード][2]します。
+1. [JDBC Driver JAR ファイルをダウンロード][2]します。
 2. ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェック構成ファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][3] を参照)。
 
 #### Datadog ユーザーの作成
@@ -181,29 +183,29 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
      #
      - server: localhost:1521
 
-       ## @param service_name - string - required
-       ## The Oracle Database service name. To view the services available on your server,
-       ## run the following query:
-       ## `SELECT value FROM v$parameter WHERE name='service_names'`
-       #
-       service_name: "<SERVICE_NAME>"
+      ## @param service_name - string - required
+      ## The Oracle Database service name. To view the services available on your server,
+      ## run the following query: `SELECT value FROM v$parameter WHERE name='service_names'`
+      #
+      service_name: <SERVICE_NAME>
 
-       ## @param user - string - required
-       ## The username for the user account.
-       #
-       user: datadog
+      ## @param username - string - required
+      ## The username for the Datadog user account.
+      #
+      username: <USERNAME>
 
-       ## @param password - string - required
-       ## The password for the user account.
-       #
-       password: "<PASSWORD>"
+      ## @param password - string - required
+      ## The password for the Datadog user account.
+      #
+      password: <PASSWORD>
    ```
 
 2. [Agent を再起動します][3]。
 
+
 #### カスタムクエリのみ
 
-インスタンスのデフォルトのメトリクスチェックをスキップし、既存のメトリクス収集ユーザーでのみカスタムクエリを実行するには、値が true のタグ `only_custom_queries` を挿入します。これにより、Oracle インテグレーションの構成済みインスタンスがシステム、プロセス、およびテーブルスペースメトリクスの実行をスキップし、[Datadog ユーザー作成](#datadog-user-creation)セクションで説明されているアクセス許可なしでカスタムクエリを実行できます。この構成エントリが省略された場合、指定したユーザーには、カスタムクエリを実行するためのテーブルアクセス許可が必要です。
+インスタンスのデフォルトのメトリクスチェックをスキップし、既存のメトリクス収集ユーザーでのみカスタムクエリを実行するには、値が `true` のタグ `only_custom_queries` を挿入します。これにより、Oracle インテグレーションの構成済みインスタンスがシステム、プロセス、およびテーブルスペースメトリクスの実行をスキップし、[Datadog ユーザー作成](#datadog-user-creation)セクションで説明されているアクセス許可なしでカスタムクエリを実行できます。この構成エントリが省略された場合、指定したユーザーには、カスタムクエリを実行するためのテーブルアクセス許可が必要です。
 
 ```yaml
 init_config:
@@ -252,7 +254,8 @@ instances:
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
 | `<インテグレーション名>` | `oracle`                                                                                                  |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                             |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%:1521", "service_name":"<サービス名>", "user":"datadog", "password":"<パスワード>"}` |
+| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%:1521", "service_name":"<SERVICE_NAME>", "username":"datadog", "password":"<PASSWORD>"}` |
+
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -379,9 +382,8 @@ where blocking_session is not NULL order by blocking_session;
 Oracle Database チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "oracle" >}}
 
-**oracle.can_connect**<br>
-データベースが使用可能で接続を受け入れているかを検証します。
 
 ## トラブルシューティング
 
@@ -431,7 +433,7 @@ Oracle Database チェックには、イベントは含まれません。
 - [Oracle][8] の詳細な Windows インストールドキュメントを参照してください。
 
 
-#### JDBC ドライバー (Linux のみ)
+#### JDBC Driver (Linux のみ)
 - `JVMNotFoundException` が発生した場合:
 
     ```text
@@ -444,6 +446,10 @@ Oracle Database チェックには、イベントは含まれません。
         JAVA_HOME=/path/to/java
         ```
     - 次に、Agent を再起動します。
+
+- このエラー `Unsupported major.minor version 52.0` が発生した場合は、古いバージョンの Java が実行されています。
+お使いの Java システムをアップデートするか、新しいバージョンをインストールし、上記の手順に従って `JAVA_HOME` 変数を
+新しいインストールに割り当てるかのにいずれかを行う必要があります。
 
 - Agent から次のコマンドを実行して、環境変数が正しく設定されていることを確認します。
 表示された出力が正しい値と一致することを確認してください。

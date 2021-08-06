@@ -43,7 +43,11 @@ Select your visualization from the available [widgets][2].
 
 ### Choose the metric to graph
 
-Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, start with the [Metrics Explorer][3] or a [notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
+Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
+
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
+
+Explore your metrics further with the [Metrics Explorer][3], a [Notebook][4], or see a list of metrics on the [Metrics Summary page][5].
 
 ### Filter
 
@@ -66,6 +70,8 @@ Aggregation method is next to the filter dropdown. This defaults to `avg by` but
 #### Aggregation groups
 
 Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
+
+Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data.
 
 #### Rollup to aggregate over time
 
@@ -198,8 +204,8 @@ Select the following parameters from the graphing editor: Environment (`env`), P
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
-## Configuring an Incident Analytics graph
-Incident Analytics provides you with the following measures:
+## Incident Management analytics
+Incident Management analytics provides you with the following measures:
 
 * Incident Count
 * Customer Impact Duration
@@ -208,13 +214,15 @@ Incident Analytics provides you with the following measures:
 * Time to Repair (customer impact end time - created time)
 * Time to Resolve (resolved time - created time)
 
-Incident Analytics is supported in the following widgets:
+Incident Management analytics is supported in the following widgets:
 
 * Timeseries
 * Top List 
 * Query Value 
 
-To configure your graph using Incident Analytics data, follow these steps:
+### Graph configuration
+
+To configure your graph using Incident Management analytics data, follow these steps:
 
 1. [Select your visualization](#select-your-visualization) (same as for metrics)
 2. Select `Incidents` from the data source dropdown menu

@@ -221,13 +221,16 @@ stats_config:
 
 | Envoy バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
+| v1.18 | v1.2.1 |
+| v1.17 | v1.1.5 |
+| v1.16 | v1.1.5 |
+| v1.15 | v1.1.5 |
 | v1.14 | v1.1.3 |
 | v1.13 | v1.1.1 |
 | v1.12 | v1.1.1 |
 | v1.11 | v0.4.2 |
 | v1.10 | v0.4.2 |
 | v1.9 | v0.3.6 |
-
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /ja/tracing/setup/cpp/#environment-variables
@@ -288,6 +291,8 @@ load_module modules/ngx_http_opentracing_module.so;
     # Datadog トレーシングの実装と既定のコンフィグファイルを読み込む。
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
+
+`log_format with_trace_id` ブロックは、ログとトレースの相関関係を構築するためのものです。完全なフォーマットについては、[NGINX config][5] のサンプルファイルを参照してください。値 `$opentracing_context_x_datadog_trace_id` はトレース ID をキャプチャし、`$opentracing_context_x_datadog_parent_id` はスパン ID をキャプチャします。
 
 トレーシングが必要なサーバー内の `location` ブロックに次の指示を追加します。
 

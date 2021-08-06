@@ -1,5 +1,5 @@
 ---
-title: NoPassword を SAML IdP として構成する方法
+title: NoPassword SAML IdP
 kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/
