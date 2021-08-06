@@ -39,9 +39,11 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ## Explore Datadog Database Monitoring
 
+Navigate to Database Monitoring by clicking **[APM > Databases][1]** in the UI. 
+
 ### Dig into query performance metrics
 
-The [Query Metrics view][1] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and get alerted for anomalies.
+The [Query Metrics view][2] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and get alerted for anomalies.
 
 - Identify slow queries and which queries are consuming the most time.
 - Show database-level metrics not captured by APM such as rows updated/returned.
@@ -51,7 +53,7 @@ The [Query Metrics view][1] shows historical query performance for normalized qu
 
 ### Explore query samples
 
-The [Query Samples view][2] helps you understand which queries are running at a given time. Compare each execution to the average performance of the query and related queries.
+The [Query Samples view][3] helps you understand which queries are running at a given time. Compare each execution to the average performance of the query and related queries.
 
 - Identify unusually slow but infrequent queries not captured by metrics.
 - Find outliers in a query’s execution time or execution cost.
@@ -61,7 +63,7 @@ The [Query Samples view][2] helps you understand which queries are running at a 
 
 ### Understand before you run
 
-[Explain Plans][3] help you understand how the database plans to execute your queries. 
+[Explain Plans][4] help you understand how the database plans to execute your queries. 
 
 - Step through each operation to identify bottlenecks. 
 - Improve query efficiency and save on costly sequential scans on large tables.
@@ -79,6 +81,7 @@ Quickly pinpoint problem areas by viewing database and system metrics together o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/query_metrics/
-[2]: /database_monitoring/query_samples/
-[3]: /database_monitoring/query_metrics/#explain-plans
+[1]: https://app.datadoghq.com/databases
+[2]: /database_monitoring/query_metrics/
+[3]: /database_monitoring/query_samples/
+[4]: /database_monitoring/query_metrics/#explain-plans

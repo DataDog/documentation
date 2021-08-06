@@ -28,7 +28,9 @@ further_reading:
 
 The Query Metrics view shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as data center availability zone, and get alerted for anomalies.
 
-The view shows 200 _top_ queries, that is the 200 queries with the most total time running in the selected time frame. See [Which queries are tracked][1] for more details. Metrics aggregation for one-off or very seldom-run fast queries isn't shown in the Query Metrics view, but you can find snapshots of them represented in [Query Samples][2], if they have run once in the last 15 days.
+Navigate to the Query Metrics view within Database Monitoring by clicking **[APM > Databases][1]** in the UI. 
+
+The view shows 200 _top_ queries, that is the 200 queries with the most total time running in the selected time frame. See [Which queries are tracked][2] for more details. Metrics aggregation for one-off or very seldom-run fast queries isn't shown in the Query Metrics view, but you can find snapshots of them represented in [Query Samples][3], if they have run once in the last 15 days.
 
 ## Filtering and grouping
 
@@ -80,7 +82,7 @@ When you click a query in the the Query Metrics list, the Query Details page for
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Tags list for a query" style="width:100%;">}}
 
-Stay in the context of this query and navigate to the [Query Samples page][2] with the **View Query Samples** button, or back to Query Metrics filtered by this query with the **Filter by This Query** button.
+Stay in the context of this query and navigate to the [Query Samples page][3] with the **View Query Samples** button, or back to Query Metrics filtered by this query with the **Filter by This Query** button.
 
 {{< img src="database_monitoring/dbm_qd_jump_buttons.png" alt="Quickly see query sample or metrics for this query" style="width:100%;">}}
 
@@ -102,9 +104,9 @@ Datadog collects explain plans continuously, so a given query can have multiple 
 
 {{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Explain plans information for a query" style="width:100%;">}}
 
-Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to jump over to Query Samples view for [the samples associated with it][3].
+Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to jump over to Query Samples view for [the samples associated with it][4].
 
-Not all queries have explain plans, for various reasons, including what type of query it is, or various configuration settings. See [Troubleshooting][4] for more details.
+Not all queries have explain plans, for various reasons, including what type of query it is, or various configuration settings. See [Troubleshooting][1] for more details.
 
 ### Hosts running this query
 
@@ -120,7 +122,7 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/data_collected/#which-queries-are-tracked
-[2]: /database_monitoring/query_samples/
-[3]: /database_monitoring/query_samples/#sample-details
-[4]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[1]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[2]: /database_monitoring/data_collected/#which-queries-are-tracked
+[3]: /database_monitoring/query_samples/
+[4]: /database_monitoring/query_samples/#sample-details

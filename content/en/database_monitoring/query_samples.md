@@ -21,6 +21,8 @@ further_reading:
 
 The Query Samples view helps you understand which queries were running at a given time. Compare each execution to the average performance of the query and related queries.
 
+Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][1]**, and selecting the **Query Samples** tab in the UI. 
+
 The Query Samples page shows a snapshot in time of running and recently finished queries. Because it's a snapshot in time, it doesn't necessarily show a representation of _all_ queries, but can indicate proportions.
 
 ## Search and filter
@@ -62,7 +64,7 @@ Click on a query in the table to open its Sample Details page. Use the Source, H
 
 For example, by opening the Network traffic page and grouping by service, you can see what service is running the query from that IP. 
 
-Graphs show the query's performance metrics---number of executions, duration, and rows per query---over the specified time frame _if it is a [top 200 query][1]_, with a line indicating the performance for the sample snapshot you're looking at. If metrics aren't available because it's not a top query, the graphs are blank. 
+Graphs show the query's performance metrics---number of executions, duration, and rows per query---over the specified time frame _if it is a [top 200 query][2]_, with a line indicating the performance for the sample snapshot you're looking at. If metrics aren't available because it's not a top query, the graphs are blank. 
 
 {{< img src="database_monitoring/dbm_sd_graphs.png" alt="Query performance metrics graphs with This Query indicator" style="width:100%;">}}
 
@@ -94,4 +96,5 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/data_collected/#which-queries-are-tracked
+[1]: https://app.datadoghq.com/databases
+[2]: /database_monitoring/data_collected/#which-queries-are-tracked
