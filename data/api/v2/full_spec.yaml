@@ -95,7 +95,7 @@ components:
       required: false
       schema:
         type: string
-    ApplicationKeyId:
+    ApplicationKeyID:
       description: The ID of the application key.
       in: path
       name: app_key_id
@@ -280,6 +280,14 @@ components:
       name: rule_id
       required: true
       schema:
+        type: string
+    ServiceAccountID:
+      description: The ID of the service account.
+      in: path
+      name: service_account_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000000
         type: string
     UserID:
       description: The ID of the user.
@@ -517,7 +525,7 @@ components:
     ApplicationKeyRelationships:
       description: Resources related to the application key.
       properties:
-        created_by:
+        owned_by:
           $ref: '#/components/schemas/RelationshipToUser'
       type: object
     ApplicationKeyResponse:
@@ -3378,6 +3386,17 @@ components:
           example: Application Key for submitting metrics
           type: string
       type: object
+    PartialApplicationKeyResponse:
+      description: Response for retrieving a partial application key.
+      properties:
+        data:
+          $ref: '#/components/schemas/PartialApplicationKey'
+        included:
+          description: Array of objects related to the application key.
+          items:
+            $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
+          type: array
+      type: object
     Permission:
       description: Permission object.
       properties:
@@ -4975,6 +4994,48 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    ServiceAccountCreateAttributes:
+      description: Attributes of the created user.
+      properties:
+        email:
+          description: The email of the user.
+          example: jane.doe@example.com
+          type: string
+        name:
+          description: The name of the user.
+          type: string
+        service_account:
+          description: Whether the user is a service account. Must be true.
+          example: true
+          type: boolean
+        title:
+          description: The title of the user.
+          type: string
+      required:
+      - email
+      - service_account
+      type: object
+    ServiceAccountCreateData:
+      description: Object to create a service account User.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceAccountCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/UserRelationships'
+        type:
+          $ref: '#/components/schemas/UsersType'
+      required:
+      - attributes
+      - type
+      type: object
+    ServiceAccountCreateRequest:
+      description: Create a service account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceAccountCreateData'
+      required:
+      - data
+      type: object
     User:
       description: User object returned by the API.
       properties:
@@ -5014,6 +5075,9 @@ components:
         name:
           description: Name of the user.
           type: string
+        service_account:
+          description: Whether the user is a service account.
+          type: boolean
         status:
           description: Status of the user.
           type: string
@@ -5494,7 +5558,7 @@ paths:
       description: Delete an application key
       operationId: DeleteApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       responses:
         '204':
           description: No Content
@@ -5520,7 +5584,7 @@ paths:
       description: Get an application key for your org.
       operationId: GetApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
       responses:
         '200':
@@ -5556,7 +5620,7 @@ paths:
       description: Edit an application key
       operationId: UpdateApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       requestBody:
         content:
           application/json:
@@ -5685,7 +5749,7 @@ paths:
       description: Delete an application key owned by current user
       operationId: DeleteCurrentUserApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       responses:
         '204':
           description: No Content
@@ -5710,7 +5774,7 @@ paths:
       description: Get an application key owned by current user
       operationId: GetCurrentUserApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       responses:
         '200':
           content:
@@ -5739,7 +5803,7 @@ paths:
       description: Edit an application key owned by current user
       operationId: UpdateCurrentUserApplicationKey
       parameters:
-      - $ref: '#/components/parameters/ApplicationKeyId'
+      - $ref: '#/components/parameters/ApplicationKeyID'
       requestBody:
         content:
           application/json:
@@ -8645,6 +8709,250 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/service_accounts:
+    post:
+      description: Create a service account for your organization.
+      operationId: CreateServiceAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a service account
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+      x-given:
+        service_account_user:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{
+              unique }}@datadoghq.com\",\n      \"title\": \"user title\",\n      \"service_account\":
+              true\n     },\n     \"type\": \"users\"\n  }\n}"
+          step: there is a valid "service_account_user" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DisableUser
+        parameters:
+        - name: user_id
+          source: data.id
+        type: unsafe
+  /api/v2/service_accounts/{service_account_id}/application_keys:
+    get:
+      description: List all application keys available for this service account.
+      operationId: ListServiceAccountApplicationKeys
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/ApplicationKeysSortParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
+      - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: List application keys for this service account
+      tags:
+      - Service Accounts
+      x-undo:
+        type: safe
+    post:
+      description: Create an application key for this service account.
+      operationId: CreateServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationKeyResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an application key for this service account
+      tags:
+      - Service Accounts
+      x-codegen-request-body-name: body
+      x-given:
+        service_account_application_key:
+          parameters:
+          - name: service_account_id
+            value: '"{{ service_account_user.data.id }}"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
+          step: there is a valid "service_account_application_key" for "service_account_user"
+      x-undo:
+        operationId: DeleteServiceAccountApplicationKey
+        parameters:
+        - name: app_key_id
+          source: data.id
+        - name: service_account_id
+          source: data.relationships.owned_by.data.id
+        type: unsafe
+  /api/v2/service_accounts/{service_account_id}/application_keys/{app_key_id}:
+    delete:
+      description: Delete an application key owned by this service account.
+      operationId: DeleteServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/ApplicationKeyID'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete an application key for this service account
+      tags:
+      - Service Accounts
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an application key owned by this service account.
+      operationId: GetServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/ApplicationKeyID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialApplicationKeyResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get one application key for this service account
+      tags:
+      - Service Accounts
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    patch:
+      description: Edit an application key owned by this service account.
+      operationId: UpdateServiceAccountApplicationKey
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountID'
+      - $ref: '#/components/parameters/ApplicationKeyID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationKeyUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialApplicationKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Edit an application key for this service account
+      tags:
+      - Service Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
   /api/v2/services:
     get:
       description: Get all incident services uploaded for the requesting user's organization.
@@ -9504,6 +9812,8 @@ tags:
 
     signals.'
   name: Security Monitoring
+- description: Create, edit, and disable service accounts.
+  name: Service Accounts
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users

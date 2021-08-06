@@ -28,9 +28,7 @@ before_script:
   - mkdir -p logs
 
 cache: &cache
-  key:
-    files:
-      - yarn.lock
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
   paths:
     - node_modules/
 
@@ -39,7 +37,6 @@ cache: &cache
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
-    - "size:2xlarge"
   except:
     - tags
   only:
@@ -169,7 +166,7 @@ missing_tms_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
     entrypoint: [ "" ]
-  tags: ["runner:main", "size:2xlarge"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -189,7 +186,7 @@ index_algolia_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: [ "runner:main","size:2xlarge" ]
+  tags: ["runner:main"]
   stage: post-deploy
   cache:
     <<: *cache
@@ -291,7 +288,7 @@ index_internal_doc:
   only:
     - master
   except: [ tags, schedules ]
-  tags: [ "runner:main", "size:2xlarge" ]
+  tags: ["runner:main"]
   script:
     - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
@@ -315,7 +312,7 @@ index_algolia:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main","size:2xlarge"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache:
     <<: *cache

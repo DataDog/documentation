@@ -114,16 +114,13 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれている
 SSH チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "ssh_check" >}}
 
-**ssh.can_connect**:<br>
-Agent が SSH セッションを開始できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**sftp.can_connect**:<br>
-Agent が SFTP セッションを開始できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

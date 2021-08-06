@@ -39,6 +39,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Molten][11]               | >= 0.7.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][12]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][13]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
+| [pytest][14]              | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 | [Sanic][15]               | >= 19.6.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
 | [Starlette][16]           | >= 0.13.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][17]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
@@ -76,23 +77,21 @@ The `ddtrace` library includes support for the following libraries:
 
 | Library           | Supported Version | Library Documentation                                                    |
 | ----------------- | ----------------- | ------------------------------------------------------------------------ |
-| [aiobotocore][42] | >= 0.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
-| [asyncio][43]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
-| [Botocore][44]    | >= 1.4.51         | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
-| [Boto2][45]       | >= 2.29.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][46]      | >= 3.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
-| [Consul][47]      | >= 0.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
-| [Futures][48]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][49]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
-| [Grpc][50]        | >= 1.8.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
-| [httplib][51]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
-| [httpx][52]       | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#httpx       |
-| [Jinja2][53]      | >= 2.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
-| [Kombu][54]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
-| [Mako][55]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
-| [pytest][56]              | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
-| [Requests][57]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [urllib3][58]     | >= 1.22           | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
+| [aiobotocore][41] | >= 0.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
+| [asyncio][42]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
+| [Botocore][43]    | >= 1.4.51         | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
+| [Boto2][44]       | >= 2.29.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
+| [Celery][45]      | >= 3.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Consul][46]      | >= 0.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
+| [Futures][47]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
+| [gevent][48]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [Grpc][49]        | >= 1.8.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
+| [httplib][50]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Jinja2][51]      | >= 2.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Kombu][52]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [Mako][53]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [Requests][54]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [urllib3][55]     | >= 1.22           | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 
 
 ## Further Reading
@@ -112,6 +111,7 @@ The `ddtrace` library includes support for the following libraries:
 [11]: https://moltenframework.com
 [12]: http://pylonsproject.org
 [13]: https://trypyramid.com
+[14]: https://docs.pytest.org/en/stable/
 [15]: https://sanic.readthedocs.io/en/latest/
 [16]: https://www.starlette.io/
 [17]: http://www.tornadoweb.org
@@ -149,10 +149,7 @@ The `ddtrace` library includes support for the following libraries:
 [49]: http://www.gevent.org
 [50]: https://grpc.io
 [51]: https://docs.python.org/2/library/httplib.html
-[52]: https://www.python-httpx.org/
-[53]: http://jinja.pocoo.org
-[54]: https://kombu.readthedocs.io/en/latest
-[55]: https://www.makotemplates.org
-[56]: https://docs.pytest.org/en/stable/
-[57]: https://requests.readthedocs.io/en/master/
-[58]: https://urllib3.readthedocs.io/en/stable/
+[52]: http://jinja.pocoo.org
+[53]: https://kombu.readthedocs.io/en/latest
+[54]: https://www.makotemplates.org
+[55]: https://requests.readthedocs.io/en/master/

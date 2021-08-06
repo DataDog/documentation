@@ -34,7 +34,7 @@ For more information, see the [Python tracer installation documentation][2].
 
 ## Instrumenting your tests
 
-To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifiying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="bash" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace

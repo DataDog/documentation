@@ -162,31 +162,26 @@ Docker 環境でログを収集する Agent を構成する追加の情報に関
 Yarn チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "yarn" >}}
 
-**yarn.can_connect**:<br>
-Agent が ResourceManager URI に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**yarn.application.status**:<br>
-[`conf.yaml`][4] ファイルで指定されたマッピングに応じて、アプリケーションのステータスごとに返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-- [Hadoop アーキテクチャの概要][6]
-- [Hadoop メトリクスの監視方法][7]
-- [Hadoop メトリクスの収集方法][8]
-- [Datadog を使用した Hadoop の監視方法][9]
+- [Hadoop アーキテクチャの概要][5]
+- [Hadoop メトリクスの監視方法][6]
+- [Hadoop メトリクスの収集方法][7]
+- [Datadog を使用した Hadoop の監視方法][8]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/yarn/images/yarn_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://www.datadoghq.com/blog/hadoop-architecture-overview
-[7]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
-[8]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
-[9]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/hadoop-architecture-overview
+[6]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+[7]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+[8]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog

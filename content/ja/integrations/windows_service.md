@@ -109,32 +109,18 @@ Windows Service チェックには、メトリクスは含まれません。
 Windows Service チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "windows_service" >}}
 
-**windows_service.state**:<br>
-Agent は、`services` で構成された各 Windows Service に対して、'service:<service_name>' のタグを付けてサービスチェックを送信します。各サービスチェックは、Windows のステータスに応じて以下のステータスを取ります。
-
-| Windows のステータス   | windows_service.state |
-| ---------------- | --------------------- |
-| Stopped          | CRITICAL              |
-| Start Pending    | WARNING               |
-| Stop Pending     | WARNING               |
-| Running          | OK                    |
-| Continue Pending | WARNING               |
-| Pause Pending    | WARNING               |
-| Paused           | WARNING               |
-| Unknown          | UNKNOWN               |
-
-権限の制限または不正確な名前により Agent がサービスにアクセスできない場合、サービスチェックは `UNKNOWN` を報告します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
-- [Windows Server 2012 の監視][9]
-- [Windows Server 2012 メトリクスの収集方法][10]
-- [Datadog を使用した Windows Server 2012 の監視][11]
+- [Windows Server 2012 の監視][10]
+- [Windows Server 2012 メトリクスの収集方法][11]
+- [Datadog を使用した Windows Server 2012 の監視][12]
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -143,7 +129,8 @@ Agent は、`services` で構成された各 Windows Service に対して、'ser
 [5]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [6]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
-[10]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
-[11]: https://www.datadoghq.com/blog/windows-server-monitoring
+[8]: https://github.com/DataDog/integrations-core/blob/master/windows_service/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
+[11]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
+[12]: https://www.datadoghq.com/blog/windows-server-monitoring
