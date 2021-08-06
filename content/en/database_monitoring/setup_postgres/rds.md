@@ -63,13 +63,18 @@ Connect to the chosen database as a superuser (or another user with sufficient p
  psql -h mydb.example.com -d postgres -U postgres
  ```
 
-Run the following SQL commands:
+Create the `datadog` user:
+
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+```
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
+Create the following schema **in every database**: 
+
 ```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
 CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
@@ -80,8 +85,9 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
+Create the following schema **in every database**: 
+
 ```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
 CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
@@ -150,15 +156,15 @@ psql -h localhost -U datadog postgres -A \
 
 ```shell
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database() limit 1;" \
+  -c "select * from pg_stat_database limit 1;" \
   && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
   || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity() limit 1;" \
+  -c "select * from pg_stat_activity limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
 psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements() limit 1;" \
+  -c "select * from pg_stat_statements limit 1;" \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
