@@ -46,12 +46,24 @@ Data security considerations
 
 Configure the following [Database Flags][3] and then **restart the server** for the settings to take effect:
 
+{{< tabs >}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+{{% /tab %}}
+
+{{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Grant the Agent access
 
