@@ -253,6 +253,28 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
+### Command line with Helm
+
+Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+
+```bash
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+
+helm install <RELEASE_NAME> \
+  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
+  --set 'clusterAgent.enabled=true' \
+  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+init_config:
+instances:
+  - dbm: true
+    host: <INSTANCE_ADDRESS>
+    port: 3306
+    username: datadog
+    password: <UNIQUEPASSWORD" \
+  datadog/datadog
+```
+
 ### Configure with mounted files
 
 To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/postgres.yaml`:
@@ -304,11 +326,12 @@ spec:
 
 The Cluster Agent automatically registers this configuration and begin running the Postgres check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
-[3]: /agent/guide/secrets-management
+[3]: https://helm.sh
+[4]: /agent/guide/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
