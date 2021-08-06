@@ -217,6 +217,26 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
+### Command Line with Helm
+Get up and running quickly by executing the following [helm][11] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
+```bash
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+
+helm install <RELEASE_NAME> \
+  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
+  --set 'clusterAgent.enabled=true' \
+  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+init_config:
+instances:
+  - dbm: true
+    host: <INSTANCE_ADDRESS>
+    port: 3306
+    username: datadog
+    password: <UNIQUEPASSWORD" \
+  datadog/datadog
+```
+
 ### Configure with mounted files
 
 To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path `/conf.d/mysql.yaml`:
@@ -304,3 +324,4 @@ If you have installed and configured the integrations and Agent as described and
 [8]: https://app.datadoghq.com/databases
 [9]: /integrations/amazon_rds
 [10]: /database_monitoring/troubleshooting/?tab=mysql
+[11]: https://helm.sh
