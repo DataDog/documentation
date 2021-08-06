@@ -19,7 +19,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Configure the Agent](#configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
@@ -172,9 +171,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to the Aurora instance endpoint remotely.
-
-Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
+To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 ## Configure the Agent
 
@@ -205,22 +202,52 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure this check for an Agent running on a container:
+To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
-```yaml
-LABEL "com.datadoghq.ad.check_names"='["postgres"]'
-LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port":5432,"username":"datadog","password":"<PASSWORD>"}]'
+**Note**: the Agent must have read permission on the docker socket for Autodiscovery of labels to work.
+
+### Command line
+
+Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+
+```bash
+export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export DD_AGENT_VERSION=7.30.0
+
+docker run -e "DD_API_KEY=${DD_API_KEY}" \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -l com.datadoghq.ad.check_names='["postgres"]' \
+  -l com.datadoghq.ad.init_configs='[{}]' \
+  -l com.datadoghq.ad.instances='[{
+    "dbm": true,
+    "host": "<AWS_INSTANCE_ENDPOINT>",
+    "port": 5432,
+    "username": "datadog",
+    "password": "<UNIQUEPASSWORD>"
+  }]' \
+  datadog/agent:${DD_AGENT_VERSION}
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+### Dockerfile
 
-See the [Autodiscovery template variables documentation][2] to learn how to pass `<PASSWORD>` as an environment variable instead of a label.
+Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+
+```Dockerfile
+FROM datadog/agent:7.30.0
+
+LABEL "com.datadoghq.ad.check_names"='["postgres"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+```
+
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/faq/template_variables/
+[2]: /agent/guide/secrets-management
+[3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
