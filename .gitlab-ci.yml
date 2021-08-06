@@ -28,7 +28,10 @@ before_script:
   - mkdir -p logs
 
 cache: &cache
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  key: 
+    files:
+      - yarn.lock
+    prefix: "$CI_PROJECT_DIR-$CI_COMMIT_REF_SLUG"
   paths:
     - node_modules/
 
