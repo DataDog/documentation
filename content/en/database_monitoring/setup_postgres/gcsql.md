@@ -94,7 +94,7 @@ GRANT SELECT ON pg_stat_database TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-Create functions to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
+Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
@@ -113,7 +113,7 @@ SECURITY DEFINER;
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
 
 
-Create the function to enable the Agent to collect explain plans.
+Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement (
