@@ -10,7 +10,14 @@ further_reading:
   text: "Learn more about Proxy"
 ---
 
-The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a number of different endpoints to function properly and might not work with servers that have limited internet access.
+The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a number of different endpoints to function properly and might not work with servers that have limited internet access. Specifially, these are:
+
+* For Debian/Ubuntu systems installation:
+  * https://keys.datadoghq.com - Storage of Datadog public signing keys.
+  * https://apt.datadoghq.com - Datadog APT package repository.
+* For RedHat and SUSE based systems installation:
+  * https://keys.datadoghq.com - Storage of Datadog public signing keys.
+  * https://yum.datadoghq.com - Datadog RPM package repository.
 
 For servers with no direct internet access, the Agent can be configured to route through a proxy, refer to [Agent Proxy Configuration][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
 
