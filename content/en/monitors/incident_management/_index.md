@@ -172,3 +172,4 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [13]: /mobile
 [14]: https://apps.apple.com/app/datadog/id1391380318
 [15]: https://play.google.com/store/apps/details?id=com.datadog.app
+[16]: https://app.datadoghq.com/incidents/settings#Property-Fields
