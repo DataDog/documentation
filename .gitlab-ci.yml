@@ -59,9 +59,6 @@ install_dependencies:
     - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
     - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
     - rm -rf ./sparse-docs # cleanup runner
-  only:
-    changes:
-      - yarn.lock
   except:
     # skip on automated translation prs
     - /^guacbot\/translation-[0-9]+$/i
