@@ -106,7 +106,7 @@ Datadog collects explain plans continuously, so a given query can have multiple 
 
 Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to jump over to Query Samples view for [the samples associated with it][4].
 
-Not all queries have explain plans, for various reasons, including what type of query it is, or various configuration settings. See [Troubleshooting][1] for more details.
+Not all queries have explain plans, for various reasons, including what type of query it is, or various configuration settings. See [Troubleshooting][5] for more details.
 
 ### Hosts running this query
 
@@ -122,7 +122,8 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[1]: https://app.datadoghq.com/databases
 [2]: /database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /database_monitoring/query_samples/
 [4]: /database_monitoring/query_samples/#sample-details
+[5]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
