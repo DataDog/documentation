@@ -20,13 +20,9 @@ def process_agent_config(config_yaml):
     else:
       if '#' in line and not '##' in line and not '@param' in line:
         formatted_string = line.replace('#', '')
-        formatted_string = formatted_string
         agent_config_dict[current_header] += formatted_string
 
   formatted_agent_config_json = json.dumps(agent_config_dict)
-  formatted_agent_config_yaml = yaml.dump(agent_config_dict, sort_keys=False)
-
-  print(formatted_agent_config_yaml)
 
   with open('data/agent_config.json', 'w+') as outfile:
       outfile.write(formatted_agent_config_json)

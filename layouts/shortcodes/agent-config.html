@@ -2,13 +2,14 @@
 {{ $group := (.Get ("group")) }}
 
 {{ $config_data := index $agent_config_data $group }}
+{{ $config_code := (replace $config_data "\n" "<br/>") }}
 
 <div class="code-snippet-wrapper">
   <div class="code-snippet">
     <div class="code-button-wrapper position-absolute">
       <button class="btn text-primary js-copy-button">Copy</button>
-      </div>
-      {{ $config_data }}
-      {{/* (replace $config_data "\n" "<br/>") | safeHTML */}}
+    </div>
+    {{/* highlight $config_code "yaml" "" */}}
+    {{ $config_code }}
   </div>
 </div>
