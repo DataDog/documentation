@@ -257,7 +257,8 @@ Follow the instructions to [enable the cluster checks][2] if not already enabled
 
 ### Command line with Helm
 
-Get up and running quickly by executing the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
+Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+
 ```bash
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
