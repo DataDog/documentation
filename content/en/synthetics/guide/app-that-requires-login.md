@@ -73,7 +73,7 @@ The second way to ensure that your Datadog Browser tests can login into your app
 
 These are set at every test execution and on every step of your browser test, consequently allowing you to start the recording of your steps directly post login. 
 
-{{< img src="synthetics/guide/app_that_requires_login/browser_test_conf.png" alt="Login to your app with browser test configuration options">}}
+{{< img src="synthetics/guide/app_that_requires_login/bt_adv_options.jpg" alt="Login to your app with browser test configuration options">}}
 
 ## Account security
 
