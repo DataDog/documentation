@@ -24,11 +24,11 @@ aliases:
 
 If not already configured, install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. After you have installed the [AWS integration][1], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
-If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions here][2].
+If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions][2].
 
 ## Configuration
 
-### Install the Datadog Lambda Library
+### Install the Datadog Lambda library
 
 Install the [Datadog Lambda library][3] locally by running the following command:
 
@@ -57,7 +57,7 @@ The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extensi
 
 Follow these steps to instrument the function:
 
-1. Set the environment variable `DD_API_KEY` to your Datadog API key on the [API Management page][4]. 
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4]. 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 

@@ -77,14 +77,14 @@ Follow these steps to instrument the function:
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][3].
 2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
+Although it's optional, Datadog highly recommends tagging your serverless applications with the `env`, `service`, and `version` tags for [unified service tagging][6].
 
 ## Explore
 
@@ -133,7 +133,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information on custom metric submission, see [here][8].
+Learn more about [custom metric submission][8].
 
 ## Further Reading
 
