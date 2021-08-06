@@ -3505,11 +3505,13 @@ components:
       enum:
       - issue_stream
       - logs_stream
+      - audit_stream
       example: issue_stream
       type: string
       x-enum-varnames:
       - ISSUE_STREAM
       - LOGS_STREAM
+      - AUDIT_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that

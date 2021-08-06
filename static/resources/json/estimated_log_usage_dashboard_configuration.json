@@ -249,9 +249,9 @@
                     }
                 ],
                 "yaxis": {
+                    "include_zero": true,
                     "scale": "linear",
                     "label": "",
-                    "include_zero": true,
                     "min": "auto",
                     "max": "auto"
                 },
@@ -289,7 +289,7 @@
             "definition": {
                 "title": "Ingestion: Ingested Bytes",
                 "type": "group",
-                "background_color": "blue",
+                "background_color": "vivid_green",
                 "show_title": true,
                 "layout_type": "ordered",
                 "widgets": [
@@ -403,9 +403,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -479,6 +479,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 5,
+                "width": 12,
+                "height": 11
             }
         },
         {
@@ -602,9 +608,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -678,6 +684,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 16,
+                "width": 12,
+                "height": 1
             }
         },
         {
@@ -741,9 +753,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -804,9 +816,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -941,6 +953,10 @@
                 ]
             },
             "layout": {
+                "x": 0,
+                "y": 17,
+                "width": 12,
+                "height": 13,
                 "is_column_break": true
             }
         },
@@ -1068,9 +1084,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -1125,9 +1141,9 @@
                                 }
                             ],
                             "yaxis": {
+                                "include_zero": true,
                                 "scale": "linear",
                                 "label": "",
-                                "include_zero": true,
                                 "min": "auto",
                                 "max": "auto"
                             },
@@ -1141,6 +1157,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 30,
+                "width": 12,
+                "height": 9
             }
         },
         {
@@ -1189,12 +1211,12 @@
                                 }
                             },
                             "xaxis": {
-                                "scale": "log",
-                                "include_zero": false
+                                "include_zero": false,
+                                "scale": "log"
                             },
                             "yaxis": {
-                                "scale": "log",
-                                "include_zero": false
+                                "include_zero": false,
+                                "scale": "log"
                             },
                             "color_by_groups": [
                                 "service"
@@ -1244,8 +1266,8 @@
                                 }
                             },
                             "xaxis": {
-                                "scale": "log",
-                                "include_zero": false
+                                "include_zero": false,
+                                "scale": "log"
                             },
                             "yaxis": {
                                 "min": "0",
@@ -1394,6 +1416,12 @@
                         }
                     }
                 ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 39,
+                "width": 12,
+                "height": 14
             }
         }
     ],
@@ -1410,7 +1438,9 @@
         }
     ],
     "layout_type": "ordered",
-    "is_read_only": true,
+    "is_read_only": false,
     "notify_list": [],
-    "reflow_type": "fixed"
+    "restricted_roles": [],
+    "reflow_type": "fixed",
+    "id": "qz4-675-xct"
 }
