@@ -50,6 +50,8 @@ install_dependencies:
     <<: *cache
   variables:
     GIT_STRATEGY: none
+  before_script:
+    - if [ -d "node_modules" ]; then exit 137; fi
   script:
     - git version
     - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
@@ -59,12 +61,12 @@ install_dependencies:
     - cp --remove-destination ./sparse-docs/yarn.lock ./yarn.lock
     - yarn install --link-duplicates --frozen-lockfile --cache-folder .yarn
     - rm -rf ./sparse-docs # cleanup runner
-  only:
-    changes:
-      - yarn.lock
   except:
     # skip on automated translation prs
     - /^guacbot\/translation-[0-9]+$/i
+  allow_failure:
+    exit_codes:
+      - 137
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
