@@ -54,6 +54,7 @@ install_dependencies:
   variables:
     GIT_STRATEGY: none
   before_script:
+    - echo "Check for node_modules and exit job if exists"
     - if [ -d "node_modules" ]; then exit 137; fi
   script:
     - git version
@@ -67,7 +68,8 @@ install_dependencies:
   except:
     # skip on automated translation prs
     - /^guacbot\/translation-[0-9]+$/i
-  allow_failure: true
+  allow_failure:
+    exit_codes: 137
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
