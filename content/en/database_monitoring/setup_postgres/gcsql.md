@@ -252,7 +252,7 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
 ### Command line with helm
-Get up and running quickly by executing the following [Helm][13] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
+Get up and running quickly by executing the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
 ```bash
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
@@ -321,11 +321,12 @@ spec:
 
 The Cluster Agent automatically registers this configuration and begin running the Postgres check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
-[3]: /agent/guide/secrets-management
+[3]: https://helm.sh
+[4]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -357,4 +358,3 @@ If you have installed and configured the integrations and Agent as described and
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/google_cloudsql
 [12]: /database_monitoring/troubleshooting/?tab=postgres
-[13]: https://helm.sh
