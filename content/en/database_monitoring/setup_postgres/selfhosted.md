@@ -20,7 +20,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Configure the Agent](#configure-the-agent)
 
 ## Before you begin
 

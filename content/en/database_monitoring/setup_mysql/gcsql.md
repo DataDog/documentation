@@ -46,12 +46,24 @@ Data security considerations
 
 Configure the following [Database Flags][3] and then **restart the server** for the settings to take effect:
 
+{{< tabs >}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+{{% /tab %}}
+
+{{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Grant the Agent access
 
@@ -243,6 +255,28 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
+### Command line with Helm
+
+Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+
+```bash
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+
+helm install <RELEASE_NAME> \
+  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
+  --set 'clusterAgent.enabled=true' \
+  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+init_config:
+instances:
+  - dbm: true
+    host: <INSTANCE_ADDRESS>
+    port: 3306
+    username: datadog
+    password: <UNIQUEPASSWORD" \
+  datadog/datadog
+```
+
 ### Configure with mounted files
 
 To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path `/conf.d/mysql.yaml`:
@@ -292,11 +326,12 @@ spec:
 ```
 The Cluster Agent automatically registers this configuration and begin running the MySQL check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
-[3]: /agent/guide/secrets-management
+[3]: https://helm.sh
+[4]: /agent/guide/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
