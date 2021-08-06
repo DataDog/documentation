@@ -211,8 +211,6 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
-
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
 
 
@@ -274,7 +272,6 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
 
 The Cluster Agent automatically registers this configuration and begin running the MySQL check.
 
