@@ -1,5 +1,5 @@
 ---
-title: Query Metrics
+title: Exploring Query Metrics
 kind: documentation
 description: Explore and dig into your database and query performance metrics
 further_reading:
@@ -28,83 +28,87 @@ further_reading:
 
 The Query Metrics view shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as data center availability zone, and get alerted for anomalies.
 
-Shows top 200 normalized queries, that is top 200 total time running. See data_collected/#which-queries-are-tracked (one-off or very seldom-run fast queries don't get metrics aggregation, but you can probably find a snapshot of it represented in Query Samples, if it has been run once in the last 15 days)
+The view shows 200 _top_ queries, that is the 200 queries with the most total time running in the selected time frame. See [Which queries are tracked][1] for more details. Metrics aggregation for one-off or very seldom-run fast queries isn't shown in the Query Metrics view, but you can find snapshots of them represented in [Query Samples][2], if they have run once in the last 15 days.
 
 ## Filtering and grouping
 
-Select source on at the top (postgres or mysql) and specify search (tags) and group by; or use facets
+Select your database source, Postgres or MySQL, from the **source** selector at the top, and specify search tags to filter the list of queries, and group by tags to organize the list. 
 
-For Group by: example: host or cluster tag - filter to queries that are running on that cluster of db hosts
+For example, it's often useful to group by host or cluster, to quickly see what infrastructure the queries are running on.
 
-{{< img src="database_monitoring/dbm_qm_group_by_cluster.png" alt="Filter with cluster facet" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_qm_group_by_cluster.png" alt="Group by cluster tag" style="width:100%;">}}
 
-Group by up to three things (eg. cluster, host, datacenter) to get grouped sets of filtered results. 
+You can group by up to three things (for example, cluster, host, and datacenter) to get grouped sets of filtered results. 
 
 {{< img src="database_monitoring/dbm_qm_group_by_three.png" alt="Grouping by three tags" style="width:100%;">}}
 
-Click **View all queries in this group** to move that group-by into the Search field in the filter bar, filtering the page content to that search result.
+Expand the group to see the list of queries, and click **View all queries in this group** to move that group-by criteria into the Search field in the filter bar, filtering the page content to that search result.
 
 ## Filtering by facets
 
-Facets on the left:
-- core: unified service tagging facets (service), datacenter, host, env
-- database facets: specific to db engine (postgres has db and user so you can filter queries by specific database and user)(mysql has schema)
-- infrastructure tags
+On the left side of the view are lists of facets for filtering the list of queries. The facets include:
 
-### Filtering the Query Metrics page to a single normalized query
+- **Core**: Services, datacenters, hosts, environments.
+- **Database**: Postgres has databases and users facets. MySQL has schema facets.
+- **Infrastructure** Traditional Datadog infrastructure tags collected by the Agent.
 
-Note key terminology `query_signature` is a hash of a normalized query - a query with the parameters normalized - provides an ID for the normalized query. Don't search on the `query` tag because tags are truncated at 200 chars and you might have different queries whose first 200 char are the same. 
+Select or clear facets to find the list of queries you're interested in.
 
-An easy way to filter to a specific query is to click the query from the list, which opens its Query Details page, where you click **Filter to This Query**. This filters the Query Metrics page with the `query_signature`.
+### Filtering the Query Metrics view to a single query
 
- ## Exploring the metrics
+If you want to filter the contents of the Query Metrics view to just one normalized query, filter on the `query_signature`, not `query`. Tag names are truncated at 200 characters, and because queries can be long, their `query` tags aren't necessarily unique. The `query_signature` is a hash of a normalized query and serves as a unique ID for the normalized query. 
 
-Varies by db (postgres or mysql)
+An easy way to filter to a specific query (without looking up its query signature value) is to click the query from the list, which opens its [Query Details page](#query-details-page), where you click **Filter to This Query**. This filters the Query Metrics page by the `query_signature` facet.
 
-both: requests, Average latency, Total time, Percent time
-postgres also has: rows updated (update or delete statements) or returned (select statements) per query; also block metrics (shared/cached blocks, local blocks, temporary blocks for sorts) link to postgres docs?
+## Exploring the metrics
 
-- link to integration metrics collected tables, `postgresql.queries.*` and `mysql.queries.*` metrics
+The Query Metrics list shows Requests, Average latency, Total time, and Percent time metrics, plus others that depend on your database product. Click the **Options** menu to control which metrics are displayed in the list. Hover over the column heading to see a description for each type of metric. Click the column heading to sort the list by that metric.
 
-Sorting by clicking column heading
+To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
+
+{{< partial name="dbm/dbm-data-collected" >}}
+<p></p>
+
+The metrics used for Database Monitoring views are, primarily:
+- **MySQL**: `mysql.queries.*`
+- **Postrgres**: `postgresql.queries.*`
+
 
 ## Query details page
 
-- Full text of query at top
-- All tags associated with the query - come from the hosts that the query is running on - pulls in tags from each host that it runs on - Use to see what server the query is running on (screencap dbm_qd_tags.png)
+When you click a query in the the Query Metrics list, the Query Details page for that query opens. The top of the page shows the full text of the normalized query, and a list of all tags associated with the query. The list of tags is the union of all tags from each host that the query runs on. Browse the list to see information such as what server the query is running on:
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Tags list for a query" style="width:100%;">}}
 
-- Jump to Query Samples page with the **View Query Samples** button - link to Explore QS page - 
-- Jump back to Query Metrics filtered by this query - **Filter by This Query** button
+Stay in the context of this query and navigate to the [Query Samples page][2] with the **View Query Samples** button, or back to Query Metrics filtered by this query with the **Filter by This Query** button.
 
 {{< img src="database_monitoring/dbm_qd_jump_buttons.png" alt="Quickly see query sample or metrics for this query" style="width:100%;">}}
 
-For example, when looking at a query details, to find the hosts it's running on, click **Filter by This Query** and then group by hosts -- the metrics table shows each host it's running on. Maybe you'll see that a particular host is responsible for a large percentage of a query's execution (screencap dbm_qm_by_host_usecase.png). 
+For example, when you're looking at a query's details and want to find the hosts it's running on, click **Filter by This Query** and then group by hosts. The metrics list shows each host the query is running on. Sort by **Percent time** to see if a particular host is responsible for a large percentage of a query's execution. 
 
 {{< img src="database_monitoring/dbm_qm_by_host_usecase.png" alt="A query's metrics grouped by host" style="width:100%;">}}
 
-Or if a particular host tends to return a lot more rows, perhaps your sharding is unbalanced across the hosts.
+Sort by **Rows/Query** to see if a particular host tends to return a lot more rows, indicating that sharding is unbalanced across the hosts.
 
-### Graphs
+### Metrics graphs
 
-this query vs. all queries except this query. Maybe this query's average latency is a lot higher than the avg of other queries, but also maybe it is requested a lot less often so you don't mind. How much of the database's time is it consuming when it does run, compared to all other queries?
+The graphs show metrics for this query compared to all queries except this query. Maybe this query's average latency is a lot higher than the average of other queries, but also it is requested a lot less often so you don't mind. You can see how much of the database's time it is consuming when it does run, compared to all other queries.
+
+Click the **Metrics** tab to see more graphs of metrics for this query.
 
 ### Explain plans
 
-Not all queries have explain plans (e.g. configuration settings, the data isn't being collected, or is a type of query that doesn't have an explain).
-
-Datadog collects explain plans continuously, so a given query can have multiple plans. Those plans are normalized and shown separately so that you can see if a query has plans that perform better or cost more than others. For example, the following shows two explain plans for a query, but the two plans perform rather similarly:
+Datadog collects explain plans continuously, so a given query can have multiple plans. Those plans are normalized and shown separately so that you can see if a query has plans that perform better or cost more than others. For example, the following shows two explain plans for a query, and the two plans perform rather similarly:
 
 {{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Explain plans information for a query" style="width:100%;">}}
 
-Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to jump over to Query Samples explorer for [the samples associated with it][1].
+Select a plan to see cost metrics or its JSON. Click **View All Samples for This Plan** to jump over to Query Samples view for [the samples associated with it][3].
 
-### Metrics graphs for all metrics
+Not all queries have explain plans, for various reasons, including what type of query it is, or various configuration settings. See [Troubleshooting][4] for more details.
 
 ### Hosts running this query
 
-Lists the hosts that run this query, with a context menu that lets you jump to other related information for the host, such as logs or the Network data, which can be very useful for troubleshooting where latency problems are coming from.
+The **Hosts Running This Query** tab lists the hosts that run this query, with a context menu that lets you jump to related information for the hosts, such as logs or the network data, which can be very useful for troubleshooting where latency problems are coming from.
 
 {{< img src="database_monitoring/dbm_qd_hosts_running_query_menu.png" alt="Host action menu for pivoting to more information" style="width:100%;">}}
 
@@ -116,4 +120,7 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/query_samples/#sample-details
+[1]: /database_monitoring/data_collected/#which-queries-are-tracked
+[2]: /database_monitoring/query_samples/
+[3]: /database_monitoring/query_samples/#sample-details
+[4]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans

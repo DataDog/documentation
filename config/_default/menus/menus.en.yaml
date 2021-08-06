@@ -1878,12 +1878,12 @@ main:
     parent: dbm
     identifier: dbm_data_collected
     weight: 3
-  - name: Query Metrics
+  - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
     weight: 4
-  - name: Query Samples
+  - name: Exploring Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples

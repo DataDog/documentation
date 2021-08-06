@@ -1,5 +1,5 @@
 ---
-title: Query Samples
+title: Exploring Query Samples
 kind: documentation
 description: Get information about queries currently running and find problematic outliers
 further_reading:
@@ -27,13 +27,14 @@ The Query Samples page shows a snapshot in time of running and recently finished
 
 The Query Samples page shows queries on all supported database products together (unlike on the Query Metrics page where you select which database you want to dive into). Filter on the `source` facet to see data for a particular database (Postgres or MySQL).
 
-Filter by facets
-Facets on the left:
- - core: unified service tagging facets (service), source, host, duration
- - Network: client address and client port - IP and port for clients (applications or proxies) connecting to the database
- - Database: database name, explain plan cost slider, index, row count (number of rows returned or affected)
+Enter tags into the Search field to filter the list of query samples, or use the facets listed on the left side. The facets include:
 
-Click options to add columns to the table, so you can sort by them.
+- **Core**: Services, database product sources (Postgres or MySQL), host, and duration.
+- **Network**: Client IP address and ports for applications or proxies that connect to the database.
+- **Database**: Database names, an explain plan cost slider, indexes, a row count slider for the number of rows returned or affected by queries, query statements, and users.
+- **Postgres and MySQL specific facets** 
+
+Click **Options** to add columns to the table. Click on column headers to sort by a particular metric.
 
 ### Explain plan cost
 
@@ -59,9 +60,9 @@ Click on a query in the table to open its Sample Details page. Use the Source, H
 
 {{< img src="database_monitoring/dbm_sd_actions.png" alt="Sample details action tiles" style="width:100%;">}}
 
-For example, by opening the Network traffic page and grouping by service, you can see what service is running the query from that IP. (screenshot - JI)
+For example, by opening the Network traffic page and grouping by service, you can see what service is running the query from that IP. 
 
-Graphs show the query's performance metrics---number of executions, duration, and rows per query---over the time frame _if it is a top 200 query_ [link], with a line indicating the performance for the sample snapshot you're looking at. If metrics aren't available because it's not a top query, the graphs are blank. 
+Graphs show the query's performance metrics---number of executions, duration, and rows per query---over the specified time frame _if it is a [top 200 query][1]_, with a line indicating the performance for the sample snapshot you're looking at. If metrics aren't available because it's not a top query, the graphs are blank. 
 
 {{< img src="database_monitoring/dbm_sd_graphs.png" alt="Query performance metrics graphs with This Query indicator" style="width:100%;">}}
 
@@ -77,7 +78,7 @@ Besides the default list view, you can view query samples data as timeseries, to
 
 {{< img src="database_monitoring/dbm_qs_slowest_query_viz.png" alt="Finding slowest queries" style="width:100%;">}}
 
-Or find an outlier like a query that _usually_ runs quickly, but occasionally runs slow by graphing its p90 or p99 duration. 
+Or find an outlier such as a query that _usually_ runs quickly, but occasionally runs slow by graphing its p90 or p99 duration. 
 
 Use table visualizations to produce report-like summaries to share with others. For example, create a table of worst-performing queries (p75 Duration), and include the average plan cost values for each query: 
 
@@ -92,3 +93,5 @@ For quick access to dashboards that showcase database-related infrastructure and
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /database_monitoring/data_collected/#which-queries-are-tracked
