@@ -14,7 +14,7 @@ further_reading:
   text: "Manage monitors"
 ---
 
-Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors.
+Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
 
 ## Schedule
 
