@@ -46,6 +46,19 @@ Data security considerations
 
 Configure the following in the [DB Parameter Group][3] and then **restart the server** for the settings to take effect:
 
+{{< tabs >}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `ON` | Required. Enables the [Performance Schema][4]. |
+| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_current`</code> | `ON` | Required. Enables monitoring of currently running queries. |
+| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history`</code> | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">`performance_schema_consumer_events_statements_history_long`</code> | `ON` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+{{% /tab %}}
+
+{{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][4]. |
@@ -55,6 +68,8 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+{{% /tab %}}
+{{< /tabs >}}
 
 **Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access, next. See [Runtime setup consumers](#runtime-setup-consumers).
 
@@ -62,7 +77,7 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 
 Create the `datadog` user and grant basic permissions:
@@ -129,7 +144,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ## Install the Agent
 
-To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][6].
+To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -279,15 +294,15 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ### Validate
 
-[Run the Agent's status subcommand][7] and look for `mysql` under the Checks section. Or visit the [Databases][8] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ## Install the RDS Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][9] (optional).
+To collect more comprehensive database metrics from AWS, install the [RDS integration][8] (optional).
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][10]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
 
 ## Further reading
 
@@ -297,10 +312,9 @@ If you have installed and configured the integrations and Agent as described and
 [1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
-[4]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema.html
-[5]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: https://app.datadoghq.com/databases
-[9]: /integrations/amazon_rds
-[10]: /database_monitoring/troubleshooting/?tab=mysql
+[4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
+[5]: https://app.datadoghq.com/account/settings#agent
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://app.datadoghq.com/databases
+[8]: /integrations/amazon_rds
+[9]: /database_monitoring/troubleshooting/?tab=mysql
