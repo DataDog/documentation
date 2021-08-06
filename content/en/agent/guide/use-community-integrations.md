@@ -63,14 +63,13 @@ Use this new Agent image in combination with [Autodiscovery][1] to enable the `<
 
 For Agent < v7.21 / v6.21:
 
-1. Download the `<INTEGRATION_NAME>.py` file in the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/` folder from the [integrations-extra repository][1].
-2. Place the `<INTEGRATION_NAME>.py` file in the Agent's `checks.d` directory.
-3. Download the `conf.yaml.example` file in the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/data/` folder from the [integrations-extra repository][1].
+1. Download the files in the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/` folder from the [integrations-extra repository][1].
+2. Place `<INTEGRATION_NAME>.py` and any other Python files in the Agent's `checks.d` directory.
+3. Create a new `<INTEGRATION_NAME>.d/` folder in your [Agent configuration directory][2].
+4. Place the `conf.yaml.example` file from the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/data/` folder in the created directory.
 4. Rename this file to `conf.yaml`.
-5. Create a new `<INTEGRATION_NAME>.d/` folder in your [Agent configuration directory][2].
-6. Place the `conf.yaml` file in the created directory.
-7. Configure your integration similar to core [integrations][3].
-8. [Restart the Agent][4].
+5. Configure your integration similar to core [integrations][3].
+6. [Restart the Agent][4].
 
 
 [1]: https://github.com/DataDog/integrations-extras
