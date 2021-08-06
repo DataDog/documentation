@@ -3,7 +3,8 @@ title: Using the Datadog Forwarder - Go
 kind: guide
 ---
 ## Overview
-If you are a new user of Datadog Serverless, Datadog recommends using the [out-of-the-box Lambda functionality][1]. However, if you got set up on Datadog Serverless using the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
+
+If you are a new user of Datadog Serverless, Datadog recommends using the [out-of-the-box Lambda functionality][1]. However, if you were set up on Datadog Serverless using the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 
 ## Required setup
 
