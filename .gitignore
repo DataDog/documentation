@@ -168,7 +168,10 @@ __pycache__/
 
 /DataDog-dogweb-*/
 Makefile.config
+
+# data
 data/permissions.json
+data/agent_config.json
 
 static/images/integrations_logos/2020w2.pdf
 
