@@ -21,7 +21,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Configure the Agent](#configure-the-agent)
 1. [Install the Cloud SQL Integration](#install-the-cloud-sql-integration)
 
 ## Before you begin
@@ -159,11 +158,8 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely.
+To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
-Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][5].
-
-## Configure the Agent
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -196,20 +192,50 @@ instances:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure this check for an Agent running on a Docker container:
+To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
-Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
+**Note**: the Agent must have read permission on the docker socket for Autodiscovery of labels to work.
 
-```yaml
-LABEL "com.datadoghq.ad.check_names"='["mysql"]'
-LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+### Command line
+
+Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+
+```bash
+export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export DD_AGENT_VERSION=7.30.0
+
+docker run -e "DD_API_KEY=${DD_API_KEY}" \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -l com.datadoghq.ad.check_names='["mysql"]' \
+  -l com.datadoghq.ad.init_configs='[{}]' \
+  -l com.datadoghq.ad.instances='[{
+    "dbm": true,
+    "host": "<INSTANCE_ADDRESS>",
+    "port": 3306,
+    "username": "datadog",
+    "password": "<UNIQUEPASSWORD>"
+  }]' \
+  datadog/agent:${DD_AGENT_VERSION}
 ```
 
-See the [Autodiscovery template variables documentation][2] to learn how to pass `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+### Dockerfile
+
+Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+
+```Dockerfile
+FROM datadog/agent:7.30.0
+
+LABEL "com.datadoghq.ad.check_names"='["mysql"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+```
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/faq/template_variables/
+[2]: /agent/guide/secrets-management
+[3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
