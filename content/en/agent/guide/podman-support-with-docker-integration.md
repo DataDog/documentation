@@ -10,12 +10,12 @@ Podman is an alternative to Docker as it provides a Docker-compatible CLI interf
 ## Requirements
 
 * Podman version >= 3.2.0
-* Podman configured to expose its communication socket.
+* Podman configured to expose its communication socket. [2]
 * Datadog Agent version >= 7.30.0
 
 ## Agent deployment as a podman container
 
-To deploy the agent as a podman container, the command to run is very similar to the one used for [docker][2].
+To deploy the agent as a podman container, the command to run is very similar to the one used for [docker][3].
 
 ```
 $ podman run -d --name dd-agent \
@@ -35,11 +35,12 @@ The 2 importants differences are:
 All the other dockers configuration options should be compatible too.
 
 
-## Know limitations
+## Known limitations
 
 * Container logs aggregation are not yet supported.
 * The activation of the Podman socket, can be option in some setup, It might need to enable.
 
 
 [1]: https://podman.io/
-[2]: agent/docker
+[2]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/building_running_and_managing_containers/assembly_using-the-container-tools-api_using-the-container-tools-cli
+[3]: agent/docker
