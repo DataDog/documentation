@@ -68,7 +68,7 @@ install_dependencies:
   except:
     # skip on automated translation prs
     - /^guacbot\/translation-[0-9]+$/i
-  # allow_failure:
+  allow_failure: true
   #   exit_codes: 137
 
 # ================== preview ================== #
