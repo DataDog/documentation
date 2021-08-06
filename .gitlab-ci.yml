@@ -67,9 +67,7 @@ install_dependencies:
   except:
     # skip on automated translation prs
     - /^guacbot\/translation-[0-9]+$/i
-  allow_failure:
-    exit_codes:
-      - 137
+  allow_failure: true
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
