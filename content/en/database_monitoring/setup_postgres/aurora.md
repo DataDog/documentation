@@ -255,7 +255,8 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
-### Command line with helm
+### Command line with Helm
+
 Get up and running quickly by executing the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
 ```bash
 helm repo add datadog https://helm.datadoghq.com
