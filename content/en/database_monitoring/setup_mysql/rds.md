@@ -224,8 +224,8 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
-### Command Line with Helm
-Get up and running quickly by executing the following [helm][11] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
+### Command line with helm
+Get up and running quickly by executing the following [Helm][11] command to install the [Datadog Cluster Agent][1] on your kubernetes cluster. Replace the values to match your account and environment:
 ```bash
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
