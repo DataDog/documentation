@@ -10,7 +10,7 @@ further_reading:
   text: "Learn more about Proxy"
 ---
 
-The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a number of different endpoints to function properly and might not work with servers that have limited internet access. Specifically, these are:
+The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a few different endpoints to function properly and might not work with servers that have limited internet access. Specifically, these are:
 
 * For Debian/Ubuntu systems installation:
   * https://keys.datadoghq.com - Storage of Datadog public signing keys.
