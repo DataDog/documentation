@@ -173,8 +173,6 @@ When it prompts for a password, use the password you entered when you created th
 
 To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
-## Configure the Agent
-
 {{< tabs >}}
 {{% tab "Host" %}}
 

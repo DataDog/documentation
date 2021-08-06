@@ -20,7 +20,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
-1. [Configure the Agent](#configure-the-agent)
 
 ## Before you begin
 
@@ -146,8 +145,6 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 ## Install the Agent
 
 Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
-
-## Configure the Agent
 
 To configure this check for an Agent running on a host:
 

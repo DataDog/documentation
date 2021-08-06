@@ -173,8 +173,6 @@ When it prompts for a password, use the password you entered when you created th
 
 To monitor Aurora hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
-## Configure the Agent
-
 {{< tabs >}}
 {{% tab "Host" %}}
 
