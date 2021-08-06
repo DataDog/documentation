@@ -25,10 +25,9 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 ## Error origins
 Front-end errors are split into four different categories depending on their `error.origin`:
 
-- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the network errors documentation][1].
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
-- **custom**: Errors sent with the [RUM `addError` API](#collect-errors-manually) that default to `custom`.
+- **custom**: Errors sent with the [RUM `addError` API](#collect-errors-manually).
 
 ## Error attributes
 
@@ -36,27 +35,10 @@ For information about the default attributes for all RUM event types, see [Data 
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | string | Where the error originates from (for example, `console` or `network`).     |
-| `error.type`    | string | The error type (or error code in some cases).                   |
+| `error.source`  | string | Where the error originates from (for example, `console`).         |
+| `error.type`    | string | The error type (or error code in some cases).                     |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
-
-### Network errors
-
-Network errors include information about failing HTTP requests. The following facets are collected:
-
-| Attribute                      | Type   | Description                                                                             |
-|--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `error.resource.status_code`             | number | The response status code.                                                               |
-| `error.resource.method`                | string | The HTTP method (for example `POST`, `GET`).           |
-| `error.resource.url`                     | string | The resource URL.                                                                       |
-| `error.resource.url_host`        | string | The host part of the URL.                                                          |
-| `error.resource.url_path`        | string | The path part of the URL.                                                          |
-| `error.resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
-| `error.resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
-| `error.resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
-| `error.resource.provider.domain`      | string | The resource provider domain.                                            |
-| `error.resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
 ### Source errors
 
@@ -73,8 +55,7 @@ Monitor handled exceptions, handled promise rejections and other errors not trac
 {{< code-block lang="javascript" >}}
 addError(
     error: unknown,
-    context?: Context,
-    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
+    context?: Context
 );
 {{< /code-block >}}
 
@@ -95,14 +76,14 @@ datadogRum.addError(error, {
 
 // Send a network error
 fetch('<SOME_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined, 'network');
+    datadogRum.addError(error);
 })
 
 // Send a handled exception error
 try {
     //Some code logic
 } catch (error) {
-    datadogRum.addError(error, undefined, 'source');
+    datadogRum.addError(error);
 }
 ```
 {{% /tab %}}
@@ -121,7 +102,7 @@ DD_RUM.onReady(function() {
 // Send a network error
 fetch('<SOME_URL>').catch(function(error) {
     DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'network');
+        DD_RUM.addError(error);
     });
 })
 
@@ -130,7 +111,7 @@ try {
     //Some code logic
 } catch (error) {
     DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'source');
+        DD_RUM.addError(error);
     })
 }
 ```
@@ -147,14 +128,14 @@ window.DD_RUM && DD_RUM.addError(error, {
 
 // Send a network error
 fetch('<SOME_URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'network');
+    window.DD_RUM && DD_RUM.addError(error);
 })
 
 // Send a handled exception error
 try {
     //Some code logic
 } catch (error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
+    window.DD_RUM && DD_RUM.addError(error);
 }
 ```
 {{% /tab %}}
@@ -187,7 +168,6 @@ Get visibility into cross-origin scripts by following these two steps:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/data_collected/error/#network-errors
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: /real_user_monitoring/browser/modifying_data_and_context/
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
