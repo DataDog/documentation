@@ -283,9 +283,9 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/mysql.check_names: '["mysql"]'
-    ad.datadoghq.com/mysql.init_configs: '[{}]'
-    ad.datadoghq.com/mysql.instances: |
+    ad.datadoghq.com/service.check_names: '["mysql"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
       [
         {
           "dbm": true,
