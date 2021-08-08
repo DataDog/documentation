@@ -23,7 +23,7 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 - Identify outages of cloud provider regions and third-party tools.
 - Troubleshoot faulty service discovery with DNS server metrics.
 
-Network performance monitoring requires [Datadog Agent v6.14+][1] as well as enabling the [Live Process](https://docs.datadoghq.com/infrastructure/process/) collection feature as described in this [installation](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows#installation) section.
+Network performance monitoring requires [Datadog Agent v6.14+][1] however if [DNS monitoring](https://docs.datadoghq.com/network_monitoring/dns/) is also needed please review this DNS monitoring [setup section](https://docs.datadoghq.com/network_monitoring/dns/#setup) because DNS monitoring metrics are collected automatically only with higher versions of the agent.
 
 ## Supported platforms
 
@@ -88,14 +88,13 @@ Network Performance Monitoring supports use of the following provisioning system
 ## Setup
 
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
-- The DNS monitoring feature of NPM does not need any additional work to enable it except for Kubernetes where the `collectDNSStats:` parameter needs to be set to `true` in the values.yaml file or Helm chart.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. If you are not using Agent v6.14+, enable [live process collection][1] first, otherwise skip this step.
+1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
 
 2. Copy the system-probe example configuration:
 
@@ -212,7 +211,7 @@ To enable Network Performance Monitoring with Kubernetes using Helm, add:
   networkMonitoring:
       enabled: true
   ```
-to your values.yaml. Helm chart version 2.4.39 or higher is required. See the [Datadog Helm Chart][1] for further information.
+to your values.yaml. **Helm chart version 2.4.39 or higher is required**. See the [Datadog Helm Chart][1] for further information.
 
 If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
 
