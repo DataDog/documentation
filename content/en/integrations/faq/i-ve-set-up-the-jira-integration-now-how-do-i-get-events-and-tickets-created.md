@@ -30,4 +30,5 @@ All 'Task' issues created in JIRA for the project designated by the key 'TEST2' 
 * Our integration scrapes JIRA about every five minutes, but issue types can vary in the amount of time they take to appear in Datadog. Generally, larger issue types like 'Stories' take longer to pull in than smaller ones like 'Tasks'.
 * You can pull in multiple issue types from one project, or one issue type from multiple projects.
 * The only tags available are those that you define for the Ticket Types on the integration tile.
+* Any integration configuration actions or errors are displayed in the Datadog event stream.
 

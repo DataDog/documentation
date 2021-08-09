@@ -39,7 +39,7 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 
 | Datadog メトリクスのサービス名                                |
 | ---------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-0d560852f6f1e27ac`  |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}

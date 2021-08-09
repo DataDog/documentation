@@ -17,6 +17,7 @@ exceptions:
   - APIs
   - APM & Continuous Profiler
   - App Analytics
+  - App Service
   - AppVeyor
   - AuthN
   - Autodiscovery
@@ -51,10 +52,12 @@ exceptions:
   - Datadog Forwarder
   - Datadog Lambda Extension
   - Datadog Operator
+  - Datadog Plugin
   - DatadogHook
   - Debian
   - Detection Rules
   - Docker
+  - Docker Compose
   - Docker Swarm
   - Dockerfile
   - DogStatsD
@@ -69,6 +72,7 @@ exceptions:
   - FreeSwitch
   - Further Reading
   - GeoIP
+  - Git
   - GitHub
   - GitHub Actions
   - GitLab
@@ -201,6 +205,7 @@ exceptions:
   - StackStorm
   - StatsD
   - Sumo Logic
+  - Swift
   - Syslog
   - sysOID
   - System Core
@@ -219,6 +224,7 @@ exceptions:
   - URLs
   - User Datagram Protocol
   - Varnish
+  - Vector
   - Vertica
   - VMWare
   - vSphere

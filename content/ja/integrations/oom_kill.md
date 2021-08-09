@@ -54,7 +54,8 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: CentOS/RHEL バージョン < 8 はサポートされていません。
+**注**: Kernel バージョン 4.11 以降では、機能を使用するために OOM Kill チェックが必要です。
+また、バージョン 8 以前の Windows、Container-Optimized OS、CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 
