@@ -305,9 +305,9 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/postgres.check_names: '["postgres"]'
-    ad.datadoghq.com/postgres.init_configs: '[{}]'
-    ad.datadoghq.com/postgres.instances: |
+    ad.datadoghq.com/service.check_names: '["postgres"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
       [
         {
           "dbm": true,
