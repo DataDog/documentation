@@ -39,13 +39,11 @@ Sensitive data scanner is a stream-based, pattern matching service that you can 
 - **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using the tag sensitive_data. These tags can then be used in searches, dashboards, and monitors. 
 - **Process matching values:** Optionally, you can specify whether you want to redact or hash the matching values. If you choose the redaction option, specify the placeholder text that you would like to replace the matching values with so that data is redacted or hashed before it gets stored in Datadog.
 - **Name the rule:** Provide an easy to understand name for the rule.
-
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
 
 ### Scanner library
 
 Select the rule that you want from the Scanner Library and click Add to start customizing the rule.
-
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
 
 Select the rule that you want from the Scanner Library and click Add to start customizing the rule.
@@ -53,13 +51,11 @@ Select the rule that you want from the Scanner Library and click Add to start cu
 ### Permissions
 
 By default, users with Datadog Admin Role have access to view and define the scanning rules. To allow other users access, grant the permission for Data Scanner under Access Management. See the Custom RBAC documentation for details on Roles and Permissions.[2]
-
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
 
 ### Using tags with Query based RBAC
 
 Easily control who can access log events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.[3]  
-
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
 
 **Note:** 
