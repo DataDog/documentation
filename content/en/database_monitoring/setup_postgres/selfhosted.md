@@ -71,7 +71,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
-Create the following schema **in every database**: 
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -84,7 +84,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
-Create the following schema **in every database**: 
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -178,13 +178,11 @@ When it prompts for a password, use the password you entered when you created th
 
 Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][7].
 
-## Configure the Agent
+1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][8] for all available configuration options.
 
-### Collecting metrics
+{{< tabs >}}
+{{% tab "Postgres ≥ 10" %}}
 
-To configure collecting Database Monitoring metrics for an Agent running on a host:
-
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][8] for all available configuration options.
    ```yaml
    init_config:
    instances:
@@ -196,6 +194,27 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
+
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: localhost
+       port: 5432
+       username: datadog
+       password: '<PASSWORD>'
+       pg_stat_statements_view: datadog.pg_stat_statements()
+       pg_stat_activity_view: datadog.pg_stat_activity()
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 2. [Restart the Agent][9].
 
 ### Collecting logs (optional)
@@ -216,7 +235,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
      #log_destination = 'eventlog'
    ```
 2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][11].
-    This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration (in milliseconds):
+    This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
                                        # and their durations, > 0 logs only
@@ -229,7 +248,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
    ```yaml
    logs_enabled: true
    ```
-4. Add and edit this configuration block to your `postgres.d/conf.yaml` file to start collecting your PostgreSQL logs:
+4. Add and edit this configuration block to your `conf.d/postgres.d/conf.yaml` file to start collecting your PostgreSQL logs:
    ```yaml
    logs:
      - type: file

@@ -72,7 +72,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
-Create the following schema **in every database**: 
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -85,7 +85,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
-Create the following schema **in every database**: 
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -185,6 +185,12 @@ To monitor Aurora hosts, install the Agent somewhere in your infrastructure and 
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+
+TODO: fix the nested tabs
+
+{{< tabs >}}
+{{% tab "Postgres ≥ 10" %}}
+
    ```yaml
    init_config:
    instances:
@@ -196,7 +202,29 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
-   <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: '<AWS_INSTANCE_ENDPOINT>'
+       port: 5432
+       username: datadog
+       password: '<PASSWORD>'
+       pg_stat_statements_view: datadog.pg_stat_statements()
+       pg_stat_activity_view: datadog.pg_stat_activity()
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+
 
 2. [Restart the Agent][2].
 

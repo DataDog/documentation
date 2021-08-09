@@ -12,12 +12,12 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
-  
+
 ---
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
-{{< site-region region="us3,gov" >}} 
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -25,7 +25,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres** and **MySQL**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology and type:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres** and **MySQL**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Self-hosted databases
 
@@ -34,16 +34,16 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ### Managed databases
 
-{{< partial name="dbm/dbm-getting-started-managed" >}} 
+{{< partial name="dbm/dbm-getting-started-managed" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring
 
-Navigate to Database Monitoring by clicking **[APM > Databases][1]** in the UI. 
+Navigate to Database Monitoring by clicking **[APM > Databases][1]** in the UI.
 
 ### Dig into query performance metrics
 
-The [Query Metrics view][2] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and get alerted for anomalies.
+The [Query Metrics view][2] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and set alerts for anomalies.
 
 - Identify slow queries and which queries are consuming the most time.
 - Show database-level metrics not captured by APM such as rows updated/returned.
@@ -63,15 +63,15 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 
 ### Understand before you run
 
-[Explain Plans][4] help you understand how the database plans to execute your queries. 
+[Explain Plans][4] help you understand how the database plans to execute your queries.
 
-- Step through each operation to identify bottlenecks. 
+- Step through each operation to identify bottlenecks.
 - Improve query efficiency and save on costly sequential scans on large tables.
 - See how a query’s plan changes over time.
 
 {{< img src="database_monitoring/dbm-explain-plan.png" alt="Database Monitoring" style="width:100%;">}}
 
-### Visualize everything on enriched dashboards 
+### Visualize everything on enriched dashboards
 
 Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the **Dashboards** link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
 
