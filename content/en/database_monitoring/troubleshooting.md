@@ -8,6 +8,7 @@ description: Troubleshoot Database Monitoring setup
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
+This page details common issues with setting up and using Database Monitoring, and how to resolve them. It is recommended to stay on the latest stable Agent version and adhering to the latest [setup documentation][1] as it can change with agent version releases.
 
 ## Diagnosing common problems
 
@@ -22,7 +23,7 @@ If you are receiving other data such as system metrics, but not Database Monitor
 
 To debug, start by running the [Agent status command][1] to collect debugging information about data collected and sent to Datadog.
 
-Check the `Config Errors` section to ensure the configuration file is valid:
+Check the `Config Errors` section to ensure the configuration file is valid. For instance, the following indicates a missing instance configuration or invalid file:
 
 ```
   Config Errors
@@ -76,7 +77,7 @@ Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 
 To debug, start by running the [Agent status command][1] to collect debugging information about data collected and sent to Datadog.
 
-Check the `Config Errors` section to ensure the configuration file is valid:
+Check the `Config Errors` section to ensure the configuration file is valid. For instance, the following indicates a missing instance configuration or invalid file:
 
 ```
   Config Errors
@@ -146,6 +147,8 @@ agent check mysql -t 2
 
 ### Query metrics are missing
 
+Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring).
+
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
@@ -180,15 +183,18 @@ If you specified a `dbname` other than the default `postgres` in your Agent conf
 
 ### Certain queries are missing
 
+If you have data from some queries, but are expecting to see a particular query or set of queries in Database Monitoring, follow this guide.
+
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][1]. |
+| For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][1]. The number of top queries tracked can be raised by contacting Datadog Support. |
 | The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `true`. See the [Postgres documentation][2] for more information. |
 | The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `true`. See the [Postgres documentation][2] for more information. |
-| The `pg_stat_statements.max` configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][3]. |
+| The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][3]. |
 
 
 
@@ -200,7 +206,7 @@ If you specified a `dbname` other than the default `postgres` in your Agent conf
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | It may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][1]. |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | It may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][1]. The number of top queries tracked can be raised by contacting Datadog Support. |
 | The `events_statements_summary_by_digest` may be full. | The MySQL table `events_statements_summary_by_digest` in `performance_schema` has a maximum limit on the number of digests (normalized queries) it will store. Regular truncation of this table as a maintenance task will ensure all queries are tracked over time. See [Advanced configuration][2] for more information. |
 
 
