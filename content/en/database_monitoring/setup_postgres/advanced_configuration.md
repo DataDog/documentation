@@ -8,9 +8,18 @@ description: Advanced Configuration for Postgres Database Monitoring
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-## Handling many identical tables
+## Handling many relations
 
-Partitioning your database across tables, such that table definitions are identical except for the name, can result in a large number or normalized queries:
+If your Postgres database has a large number of relations (in the thousands), we recommend adding the setting `collect_database_size_metrics: false` to your instance configuration for that database. When this setting is disabled, the Agent will not run the function `pg_database_size()` to collect database size statistics which has worse performance on instances with a large number of tables.
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_database_size_metrics: false
+```
+
+Additionally, if you partition your data across tables, such that table definitions are identical except for the name, this can result in a large number or normalized queries:
 
 ```sql
 SELECT * FROM daily_aggregates_001
@@ -27,8 +36,6 @@ SELECT * FROM daily_aggregates_?
 Add the `quantize_sql_tables` option to your database instance configuration in the Datadog Agent:
 
 ```yaml
-init_config:
-
 instances:
   - dbm: true
     ...
