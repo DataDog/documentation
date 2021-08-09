@@ -7721,7 +7721,8 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            uptime time series.
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
           items:
             description: Represents an array time series data.
             example:
