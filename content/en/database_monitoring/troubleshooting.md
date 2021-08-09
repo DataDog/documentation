@@ -278,6 +278,7 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
 | The application client used to connect to the database is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][1] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][2] and Python client [asyncpg][3] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters.  |
 | The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][4] to capture the query. |
+| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][5]. |
 
 
 
@@ -286,6 +287,7 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 [2]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [3]: https://github.com/MagicStack/asyncpg
 [4]: /database_monitoring/setup_postgres/advanced_configuration/TODO
+[5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
