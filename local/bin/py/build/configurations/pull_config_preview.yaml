@@ -579,3 +579,4 @@
       options:
         dest_path: '/agent/'
         file_name: 'agent_config.yaml'
+        output_content: false

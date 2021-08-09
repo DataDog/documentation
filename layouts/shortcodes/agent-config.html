@@ -1,15 +1,16 @@
-{{ $agent_config_data := $.Site.Data.agent_config }}
-{{ $group := (.Get ("group")) }}
+{{ if not (.Get "type") }}
+    {{ errorf "Agent Config shortcode error: Missing value for param 'type': %s" .Position }}
+{{ end }}
 
-{{ $config_data := index $agent_config_data $group }}
-{{ $config_code := (replace $config_data "\n" "<br/>") }}
+{{ $agent_config_data := $.Site.Data.agent_config }}
+{{ $type := (.Get ("type")) | lower }}
+{{ $config_data := index $agent_config_data $type }}
 
 <div class="code-snippet-wrapper">
   <div class="code-snippet">
     <div class="code-button-wrapper position-absolute">
       <button class="btn text-primary js-copy-button">Copy</button>
     </div>
-    {{/* highlight $config_code "yaml" "" */}}
-    {{ $config_code }}
+    {{ highlight $config_data "yaml" "" }}
   </div>
 </div>
