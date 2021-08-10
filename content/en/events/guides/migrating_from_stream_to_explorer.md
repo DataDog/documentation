@@ -20,7 +20,7 @@ Once you have the beta enabled, you have access to these new events features:
 
 You can continue to access the Events Stream from the navigation menu alongside the new features:
 
-{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the events stream in the Datadog app navigation." style="width:50%; >}}
+{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the events stream in the Datadog app navigation." style="width:50%;" >}}
 
 ## 2. Migrate existing event monitors and dashboard widgets
 
