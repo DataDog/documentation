@@ -50,18 +50,22 @@ Configure the following [Database Flags][3] and then **restart the server** for 
 {{% tab "MySQL 5.6" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][1]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][4]. |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][1]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -69,7 +73,7 @@ Configure the following [Database Flags][3] and then **restart the server** for 
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 8.0" %}}
@@ -170,7 +174,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][4].
 
 
 {{< tabs >}}
@@ -338,16 +342,16 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ### Validate
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][5] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
 
 ## Install the Cloud SQL integration
 
-To collect more comprehensive database metrics from GCP, install the [Cloud SQL integration][8] (optional).
+To collect more comprehensive database metrics from GCP, install the [Cloud SQL integration][7] (optional).
 
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][9]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
 
 ## Further reading
 
@@ -357,9 +361,8 @@ If you have installed and configured the integrations and Agent as described and
 [1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
-[4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: https://app.datadoghq.com/databases
-[8]: /integrations/google_cloudsql
-[9]: /database_monitoring/troubleshooting/?tab=mysql
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: https://app.datadoghq.com/databases
+[7]: /integrations/google_cloudsql
+[8]: /database_monitoring/troubleshooting/?tab=mysql

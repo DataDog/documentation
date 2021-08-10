@@ -48,19 +48,23 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 {{% tab "MySQL 5.6" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][4]. |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][4]. |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
