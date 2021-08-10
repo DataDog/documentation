@@ -5,10 +5,10 @@ kind: documentation
 
 ## Overview
 
-There are a few different ways to submit custom metrics to Datadog from a Lambda function. 
+There are a few different ways to submit custom metrics to Datadog from a Lambda function.
 
 - **Creating custom metrics from logs or traces**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can [generate custom metrics from logs and traces](#creating-custom-metrics-from-logs-or-traces) without re-deploying or making any changes to your application code.
-- **Submitting custom metrics using the Datadog Lambda Extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda Extension](#with-the-datadog-lambda-extension). [Check whether the Datadog Lambda Extension is supported][1] in your Lambda function runtime.  
+- **Submitting custom metrics using the Datadog Lambda Extension**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda Extension](#with-the-datadog-lambda-extension). [Check whether the Datadog Lambda Extension is supported][1] in your Lambda function runtime.
 - **Submitting custom metrics using the Datadog Forwarder Lambda**: If you want to submit custom metrics from a runtime that is not yet supported by the Datadog Lambda Extension, you can use the [Datadog Forwarder Lambda](#with-the-datadog-forwarder).
 - **(Deprecated) Submitting custom metrics from CloudWatch logs**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been [deprecated](#deprecated-cloudwatch-logs), and you should migrate to one of the solutions above.
 - **(Not recommended) Using a third-party library**: Most third-party libraries do not submit metrics as distributions and can lead to under-counted results.
@@ -19,7 +19,7 @@ Custom metrics submitted from Lambda functions are aggregated as [distributions]
 
 ## Creating custom metrics from logs or traces
 
-With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. Learn more about creating log-based metrics [here][4]. 
+With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. Learn more about creating log-based metrics [here][4].
 
 You can also generate metrics from 100% of ingested spans, regardless of whether they are indexed by a retention filter. Learn more about creating span-based metrics [here][5].
 ## With the Datadog Lambda Extension
@@ -98,10 +98,10 @@ import (
 )
 
 func main() {
-  // You only need to wrap your function handler (Not helper functions). 
-  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  // You only need to wrap your function handler (Not helper functions).
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
   /* OR with manual configuration options
-  lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+  lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
     BatchInterval: time.Second * 15
     APIKey: "my-api-key",
   }))
@@ -148,7 +148,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         Map<String,String> myTags = new HashMap<String, String>();
             myTags.put("product", "latte");
             myTags.put("order", "online");
-        
+
         dd.metric(
             "coffee_house.order_value", // Metric name
             12.45,                      // Metric value
