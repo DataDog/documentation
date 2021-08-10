@@ -19,9 +19,9 @@ After you have installed the [AWS integration][2] and the [Datadog Forwarder][3]
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Datadog CLI modifies existing Lambda functions' configuration to enable instrumentation *without requiring a new deployment*. It is the *quickest* way to get started with Datadog serverless monitoring.
+The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-You can also add the command to your CI/CD pipelines to enable instrumentation for *all* your serverless applications. Run the command *after* your normal serverless application deployment, so the changes made by the Datadog CLI command don't get overridden.
+You can also add the command to your CI/CD pipelines to enable instrumentation for all your serverless applications. Run the command *after* your normal serverless application deployment, so that changes made by the Datadog CLI command are not overridden.
 
 ### Install
 
