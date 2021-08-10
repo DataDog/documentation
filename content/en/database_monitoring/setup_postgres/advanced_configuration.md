@@ -2,6 +2,7 @@
 title: Advanced Configuration for Postgres Database Monitoring
 kind: documentation
 description: Advanced Configuration for Postgres Database Monitoring
+private: true
 
 ---
 {{< site-region region="us3,gov" >}}

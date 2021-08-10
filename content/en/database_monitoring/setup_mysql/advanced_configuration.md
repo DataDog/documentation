@@ -2,6 +2,7 @@
 title: Advanced Configuration for MySQL Database Monitoring
 kind: documentation
 description: Advanced Configuration for MySQL Database Monitoring
+private: true
 
 ---
 {{< site-region region="us3,gov" >}}
