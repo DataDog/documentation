@@ -48,15 +48,12 @@
 - 成功および失敗した Monitoring のイベントを生成
 ## セットアップ
 
-詳細は、[Postman のドキュメントページ][2]でご確認ください。
-
-
-
+詳細な手順は [Postman のドキュメントページ][2]を参照してください。Postman インテグレーションを利用するには、Postman の [Team, Business, Enterprise プラン][3]のご契約が必要です。
 
 ### コンフィギュレーション
 
-1. Datadog [API キー][3]を生成します。
-2. Postman アカウントにサインインし、[Datadog インテグレーション][4]へ移動します。
+1. Datadog [API キー][4]を生成します。
+2. Postman アカウントにサインインし、[Datadog インテグレーション][5]へ移動します。
 3. "Add Integration" を選択します。
 4. Datadog へ Monitor メトリクスやイベントを送信するには
    - 新しいインテグレーションに名前を付けます。
@@ -66,7 +63,7 @@
    - オプションとして、実行ごとに、イベント、メトリクス、またその両方を送信するかを選択できます。
 5. 最後に、"Add Integration" を選択し、インテグレーションの設定を完了します。
 
-![インテグレーションを構成][5]
+![インテグレーションを構成][6]
 
 ### 検証
 
@@ -88,13 +85,14 @@ Postman でモニターが実行されるたびにイベントが生成されま
 
 ## トラブルシューティング
 
-ご不明な点は、[Postman サポート][7]までお問い合わせください。
+ご不明な点は、[Postman サポート][8]までお問い合わせください。
 
 [1]: https://www.postman.com/
 [2]: https://learning.postman.com/docs/integrations/available-integrations/datadog/
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://go.postman.co/integrations/service/datadog
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
-[6]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
-[7]: https://www.postman.com/support/
+[3]: https://www.postman.com/pricing/
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: https://go.postman.co/integrations/service/datadog
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/postman/images/add-integration-datadog.jpeg
+[7]: https://github.com/DataDog/integrations-extras/blob/master/postman/metadata.csv
+[8]: https://www.postman.com/support/
 

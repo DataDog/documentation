@@ -122,7 +122,7 @@ DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifiying the name of the service or library under test with the `-Ddd.service` property:
+Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
