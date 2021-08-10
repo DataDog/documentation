@@ -9,10 +9,10 @@ further_reading:
   - link: '/logs/explorer/#visualize'
     tag: ドキュメント
     text: ログ分析の実行
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: ドキュメント
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: ドキュメント
     text: パースの詳細
   - link: 'https://www.datadoghq.com/blog/logging-without-limits/'
@@ -155,10 +155,10 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 [10]: /ja/logs/archives/
 [11]: /ja/logs/search_syntax/
 [12]: /ja/api/v1/logs-indexes/#update-an-index
-[13]: /ja/logs/processing/processors/?tab=ui#user-agent-parser
-[14]: /ja/logs/processing/processors/?tab=ui#geoip-parser
+[13]: /ja/logs/log_configuration/processors/#user-agent-parser
+[14]: /ja/logs/log_configuration/processors/#geoip-parser
 [15]: /ja/tracing/connect_logs_and_traces/
-[16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
+[16]: /ja/logs/log_configuration/processors/#trace-remapper
 [17]: /ja/help/
 [18]: /ja/logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
