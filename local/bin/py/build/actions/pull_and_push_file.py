@@ -34,7 +34,7 @@ def pull_and_push_file(content, content_dir):
         elif "datadog-agent" in content["repo_name"]:
             process_agent_config(file_content)
 
-    if content["options"]["output_content"] and content["options"]["output_content"] != False:
+    if "output_content" in content["options"] and content["options"]["output_content"] != False:
         with open(
             "{}{}{}".format(
                 content_dir,
