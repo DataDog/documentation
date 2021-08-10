@@ -59,7 +59,7 @@ To learn more about the host map, visit the [host map documentation][9].
 
 ## Events
 
-{{< img src="getting_started/event_stream.png" alt="Event stream"  >}}
+{{< img src="getting_started/events_explorer.png" alt="Event explorer"  >}}
 
 [The Events Explorer][10] allows you to track notable changes and alerts across your applications and infrastructure. You can [search events][11] with a full text search or with facets, or you can break them down by attribute. You can then use the events to generate metrics, dashboards, and monitors.
 
@@ -108,7 +108,7 @@ You can visualize load times, frontend errors, and page dependencies, and then c
 
 ## Security Monitoring
 
-{{< img src="getting_started/security.png" alt="security"  >}}
+{{< img src="getting_started/security.png" alt="security" >}}
 
 Datadog [Security Monitoring][20] automatically detects threats to your application or infrastructure. For example, a targeted attack, an IP communicating with your systems matching a threat intel list, or an insecure configuration. These threats are surfaced in Datadog as Security Signals and can be correlated and triaged in the Security Explorer.
 

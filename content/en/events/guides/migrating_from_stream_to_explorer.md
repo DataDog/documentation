@@ -10,16 +10,17 @@ kind: documentation
   The Events Explorer is in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="https://docs.datadoghq.com/events/stream/">Events Stream documentation</a>.</div>
 
 Once you have the beta enabled, you have access to these new events features:
-- Events Explorer
-- Event Analytics
+
+- [Events Explorer][1]
+- [Event Analytics][2]
 - Events to Metrics
 - Events Pipelines
-- Event as a new source in Dashboards widgets
-- Event monitors v2
+- [Event as a new source in Dashboards widgets][3]
+- Event monitors API v2
 
 You can continue to access the Events Stream from the navigation menu alongside the new features:
 
-{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the events stream in the Datadog app navigation." >}}
+{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the events stream in the Datadog app navigation." style="width:50%; >}}
 
 ## 2. Migrate existing event monitors and dashboard widgets
 
@@ -40,3 +41,6 @@ If you use the API, Terraform, or other 3rd party solution to manage your monito
 ## 4. Sunset legacy events
 
 When you have successfully migrated you monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Events Stream will continue to be accessible to view your event history.
+[1]: /events/explorer/
+[2]: /events/explorer/#event-analytics
+[3]: /dashboards/widgets/event_stream/

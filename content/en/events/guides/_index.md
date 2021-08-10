@@ -12,7 +12,7 @@ aliases:
     - /events/
 ---
 
-An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to progamatically send events:
+Datadog classifies an _event_ as any notable changes relevant for managing IT operations such as code deployments, service health, configuration changes, or monitoring alerts. Datadog Events gives you a consolidated interface to search, analyze, and filter events from any source in one place. Use these guides to progamattically send events:
 
 {{< whatsnext desc="Submit events to Datadog with:">}}
     {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
