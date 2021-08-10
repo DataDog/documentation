@@ -18,8 +18,16 @@ def process_agent_config(config_yaml):
           agent_config_dict.setdefault(heading, '')
           current_header = heading
       else:
-        if '#' in line and not '##' in line and not '@param' in line and line != '#':
-          formatted_string = line.replace('#', '') + '\n'
+        
+        # if '#' in line and not '##' in line and not '@param' in line and line != '#':
+          # formatted_string = line.replace('#', '') + '\n'
+
+        if '#' in line and line != '#':
+          if '##' in line and not line.startswith('###'):
+            formatted_string = line + '\n'
+          else:
+            formatted_string = line.replace('#', '') + '\n' + '\n'
+
           agent_config_dict[current_header] += formatted_string
 
     formatted_agent_config_json = json.dumps(agent_config_dict)
