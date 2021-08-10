@@ -20,7 +20,7 @@ further_reading:
 Datadog Log Management offers Watchdog Insights to help you navigate to the root cause of problems with contextual insights in the Log Explorer. Watchdog Insights complement your expertise and instincts by recommending outliers and potential performance bottlenecks impacting a subset of users.
 
 <div class="alert alert-warning">
-Watchdog Insights for the Log Explorer is in beta. Access to this feature is provisioned to customers using Log Management. If you have feedback, contact [Datadog support][3].
+Watchdog Insights for the Log Explorer is in beta. Access to this feature is provisioned to customers using Log Management. If you have feedback, contact <a href="https://docs.datadoghq.com/help">Datadog support</a>.
 </div>
 
 In this example, Watchog Insights identifies that the containerized Ruby application's `version:2.9.7` caused most of the errors observed in a given time range. 
