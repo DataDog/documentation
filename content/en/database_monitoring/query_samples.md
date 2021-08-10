@@ -78,7 +78,7 @@ The explain plan also shows measures for each node (step) in the the plan: start
 
 Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the **Visualize as** buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a datacenter, select **Timeseries**, group by `Statement` and graph the average duration:
 
-{{< img src="database_monitoring/dbm_qs_slowest_query_viz.png" alt="Finding slowest queries" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_qs_timeseries_viz.png" alt="Finding slowest queries" style="width:100%;">}}
 
 Or find an outlier such as a query that _usually_ runs quickly, but occasionally runs slowly by graphing its p90 or p99 duration.
 

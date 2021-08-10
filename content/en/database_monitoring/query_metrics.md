@@ -38,9 +38,9 @@ Select your database source, Postgres or MySQL, from the **source** selector at 
 
 For example, it's often useful to group by host or cluster, to quickly see what infrastructure the queries are running on.
 
-{{< img src="database_monitoring/dbm_qm_group_by_cluster.png" alt="Group by cluster tag" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_qm_group_by.png" alt="Group by env tag" style="width:100%;">}}
 
-You can group by up to three things (for example, cluster, host, and datacenter) to get grouped sets of filtered results.
+You can group by up to three things (for example, host, env, and datacenter) to get grouped sets of filtered results.
 
 {{< img src="database_monitoring/dbm_qm_group_by_three.png" alt="Grouping by three tags" style="width:100%;">}}
 
@@ -100,7 +100,7 @@ Click the **Metrics** tab to see more graphs of metrics for this query.
 
 ### Explain plans
 
-Datadog collects explain plans continuously, so a given query can have multiple plans. Those plans are normalized and shown separately so that you can see if a query has plans that perform better or have higher relative cost than others. For example, the following shows two explain plans for a query, and the two plans perform rather similarly:
+Datadog collects explain plans continuously, so a given query can have multiple plans. Those plans are normalized and shown separately so that you can see if a query has plans that perform better or have higher relative cost than others. For example, the following shows two explain plans for a query, and one has much lower average latency:
 
 {{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="Explain plans information for a query" style="width:100%;">}}
 
