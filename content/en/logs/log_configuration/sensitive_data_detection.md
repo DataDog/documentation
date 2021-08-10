@@ -1,8 +1,6 @@
 ---
 title: Sensitive Data Detection
 kind: documentation
-aliases:
-    - /sensitive_data_detection/
 beta: true
 further_reading:
 - link: "/security/logs/"
