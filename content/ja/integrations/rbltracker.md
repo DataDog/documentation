@@ -19,7 +19,7 @@ integration_title: RBLTracker
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
-manifest_version: 1.0.1
+manifest_version: 1.0.0
 metric_prefix: ''
 metric_to_check: ''
 name: rbltracker
