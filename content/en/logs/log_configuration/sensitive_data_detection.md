@@ -66,6 +66,3 @@ Easily control who can access log events containing sensitive data. Use tags add
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search_syntax/
-[2]: /account_management/rbac/?tab=datadogapplication
-[3]: /logs/guide/logs-rbac/?tab=ui
