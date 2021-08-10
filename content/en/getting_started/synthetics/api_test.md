@@ -114,12 +114,9 @@ When you create a [multistep API test][12], you can define a sequence of HTTP re
     - Specify the URL you want to query. If you don’t know what to start with, select `POST` and use `https://api.shopist.io/carts`, a test application.
     - Select **Advanced Options** to add custom request headers, authentication credentials, body content, or cookies.
     - Click **Test URL**. 
-   
-   Optionally, add an assertion based on information in the **Response Body** or click inside the **Response Header**.
-   
-   Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
-   
-   Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `CART_ID`. 
+    - Optionally, add an assertion based on information in the **Response Body** or click inside the **Response Header**.
+    - Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
+    - Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `CART_ID`. 
 
    To extract a variable from the response header:
 
@@ -132,12 +129,9 @@ When you create a [multistep API test][12], you can define a sequence of HTTP re
     - Add a name to your step such as `Get a product`.
     - For the URL, select `GET` and use `https://api.shopist.io/products.json`.
     - Configure any **Advanced Options** and click **Test URL**.
-  
-   Optionally, add an assertion based on information in the **Response Body** or click inside the **Response Header**.
-   
-   Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
-   
-   Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `PRODUCT_ID`. 
+    - Optionally, add an assertion based on information in the **Response Body** or click inside the **Response Header**.
+    - Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
+    - Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `PRODUCT_ID`. 
    
    To extract a variable from the response body:
 
@@ -163,8 +157,7 @@ When you create a [multistep API test][12], you can define a sequence of HTTP re
         ```
 
     - Click **Test URL**.
-
-   Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `CHECKOUT_URL`. 
+    - Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `CHECKOUT_URL`. 
    
    To extract a variable from the response body:   
 
