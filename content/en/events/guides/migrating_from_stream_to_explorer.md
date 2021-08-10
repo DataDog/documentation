@@ -24,15 +24,14 @@ You can continue to access the Events Stream from the navigation menu alongside 
 
 ## 2. Migrate existing event monitors and dashboard widgets
 
-You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, you update the search query to match the new one. You can do this by manually recreating your existing monitors and widgets or by using this script:
+You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, you update the search query to match the new one. You can do this by manually recreating your existing monitors using these guidelines:
 
-1. Create a list of your existing event monitors and dashboards that need to be migrated.
-2. Create new event monitors with new queries and facets based on your current monitor definitions.
-3. Use this script to convert dashboard widgets and overlays with events queries to the new syntax:
-    ```curl
-    ADD SCRIPT HERE
-    ```
-
+|                           Description                           |                                                   Legacy syntax                                                  |                                             New Syntax                                            |
+|:---------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|
+| No Slack events in the past 24 hours.                           | events('priority:all sources:slack').rollup('count').last('1d') < 1                                              | events("source:slack").rollup("count").last("1d") < 1                                             |
+| EC2 Instance marked for maintenance                             | events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1          | events("Upcoming AWS maintenance").rollup("count").last("1d") < 1                                 |
+| Zabbix or Prometheus has triggered an alert for a service today | events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0 | events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0 |
+| No events received in a datacenter for service ‘datadog-agent’  | Legacy Event Monitors do not support cardinality rollup.                                                         | events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1 |
 
 If you use the API, Terraform, or other 3rd party solution to manage your monitors, manually update your code using the syntax described above.
 
