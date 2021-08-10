@@ -193,7 +193,7 @@ In addition to telemetry collected from the database by the Agent, you can also 
 1. By default MySQL logs everything in `/var/log/syslog` which requires root access to read. To make the logs more accessible, follow these steps:
 
    1. Edit `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` and comment out all lines.
-   2. Edit `/etc/mysql/my.cnf` to enable the desired logging settings. For example, to enable general, error, and slow query logs use the following configuration:
+   2. Edit `/etc/mysql/my.cnf` to enable the desired logging settings. For example, to enable general, error, and slow query logs, use the following configuration:
 
      ```conf
        [mysqld_safe]
@@ -209,7 +209,7 @@ In addition to telemetry collected from the database by the Agent, you can also 
      ```
 
    3. Save the file and restart MySQL.
-   4. Make sure the Agent has read access on the `/var/log/mysql` directory and all of the files within. Double-check your `logrotate` configuration to make sure those files are taken into account and that the permissions are correctly set there as well.
+   4. Make sure the Agent has read access to the `/var/log/mysql` directory and all of the files within. Double-check your `logrotate` configuration to make sure these files are taken into account and that the permissions are correctly set.
       In `/etc/logrotate.d/mysql-server` there should be something similar to:
 
      ```text

@@ -28,11 +28,11 @@ However, there are some common sources of data risks:
 
 ### Database schema
 
-If table names, column names, indexes, database names, or any other schema contain sensitive information, these data are not obfuscated. It is very uncommon that database schema are considered sensitive, but please be advised that obfuscation is not applied to these data types.
+If table names, column names, indexes, database names, or any other schema contain sensitive information, these data are not obfuscated. It is very uncommon that database schema are considered sensitive, but be advised that obfuscation is not applied to these data types.
 
 ### Database logs
 
-If you are sending logs to Datadog from your database, please be aware that some logs can contain the full SQL query text including query bind parameters. We recommend reviewing and applying [log security rules][1] consistent with your organization's requirements.
+If you are sending logs to Datadog from your database, be aware that some logs can contain the full SQL query text including query bind parameters. Review and apply [log security rules][1] consistent with your organization's requirements.
 
 ### Query Comments
 

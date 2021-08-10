@@ -176,7 +176,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor RDS hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -208,7 +208,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
-**Note**: the Agent must have read permission on the docker socket for Autodiscovery of labels to work.
+**Note**: Ahe Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 

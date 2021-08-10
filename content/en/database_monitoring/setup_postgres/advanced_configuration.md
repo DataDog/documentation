@@ -10,7 +10,7 @@ description: Advanced Configuration for Postgres Database Monitoring
 
 ## Handling many relations
 
-If your Postgres database has a large number of relations (in the thousands), we recommend adding the setting `collect_database_size_metrics: false` to your instance configuration for that database. When this setting is disabled, the Agent will not run the function `pg_database_size()` to collect database size statistics which has worse performance on instances with a large number of tables.
+If your Postgres database has a large number of relations (in the thousands), Datadog recommends adding `collect_database_size_metrics: false` to your instance configuration for that database. When this setting is disabled, the Agent will not run the function `pg_database_size()` to collect database size statistics, which has worse performance on instances with a large number of tables.
 
 ```yaml
 instances:
@@ -41,4 +41,3 @@ instances:
     ...
     quantize_sql_tables: true
 ```
-

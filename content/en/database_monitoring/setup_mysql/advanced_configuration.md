@@ -13,7 +13,7 @@ description: Advanced Configuration for MySQL Database Monitoring
 
 Certain workloads require some maintenance on tables in `performance_schema`. Query statistics are aggregated in the `performance_schema.events_statements_summary_by_digest` table, which has a limit on the number of rows. This limit is specified by the [`performance_schema_digests_size` system variable][1]. If the table is full, new query digests are tracked in a catch-all row with null schema and null query digest, preventing the Agent from distinguishing between queries that make up that row.
 
-To prevent this loss of accurate per-query metrics, this table should be periodically truncated as a maintenance step so that all new queries can be collected:
+To prevent this loss of accurate per-query metrics, periodically truncate this table as a maintenance step so that all new queries can be collected:
 
 ```sql
 TRUNCATE performance_schema.events_statements_summary_by_digest;

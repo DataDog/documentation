@@ -286,7 +286,7 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 [1]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
 [2]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [3]: https://github.com/MagicStack/asyncpg
-[4]: /database_monitoring/setup_postgres/advanced_configuration/TODO
+[4]: /database_monitoring/setup_postgres/advanced_configuration
 [5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 {{% /tab %}}
 {{% tab "MySQL" %}}
@@ -309,9 +309,7 @@ If you are still experiencing problems, contact [Datadog Support][4] for help.
 
 
 
-## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /database_monitoring/#getting-started

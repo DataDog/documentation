@@ -177,7 +177,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configured to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -209,11 +209,11 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
 
 To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
-**Note**: the Agent must have read permission on the docker socket for Autodiscovery of labels to work.
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Get up and running quickly by executing the following command to run the Agent from your command line. Replace the values to match your account and environment:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

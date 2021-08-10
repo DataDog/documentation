@@ -170,7 +170,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 
 ## Install the Agent
 
-To monitor Cloud SQL hosts, the Agent should be installed somewhere in your infrastructure and configured to connect to each instance remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
 
 {{< tabs >}}
@@ -204,9 +204,9 @@ instances:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
 
-**Note**: the Agent must have read permission on the docker socket for Autodiscovery of labels to work.
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 

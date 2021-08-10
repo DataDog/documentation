@@ -138,7 +138,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Because with RDS, the performance schema consumers can't be enabled permanently in the configuration, you must create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+With RDS, performance schema consumers can't be enabled permanently in a configuration. Create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -153,7 +153,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ## Install the Agent
 
-To monitor RDS hosts, install the Agent somewhere in your infrastructure and configure it to connect to each instance endpoint remotely. The agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
+To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -188,7 +188,7 @@ instances:
 
 To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
-**Note**: the Agent must have read permission on the docker socket for Autodiscovery of labels to work.
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
