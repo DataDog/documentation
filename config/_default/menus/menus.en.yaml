@@ -2025,7 +2025,7 @@ main:
     identifier: cspm_findings_explorer
     weight: 204
   - name: Signals Explorer
-    url: /security_platform/cspm/signals-explorer/
+    url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 205 
