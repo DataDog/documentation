@@ -232,7 +232,7 @@ Par exemple :
           "environment_variables": {
             "DD_TRACE_ENABLED": "true",
             "DD_FLUSH_TO_LOG": "true",
-            "DD_API_KEY": "<DATADOG_API_KEY>",
+            "DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>",
           },
           "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>"],
         }
@@ -251,7 +251,7 @@ Par exemple :
           "environment_variables": {
             "DD_TRACE_ENABLED": "true",
             "DD_FLUSH_TO_LOG": "true",
-            "DD_API_KEY": "<DATADOG_API_KEY>",
+            "DD_API_KEY_SECRET_ARN": "<SECRET_ARN_DATADOG_API_KEY>",
           },
           "layers": ["arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<VERSION_NUMBER>"],
         }
@@ -261,7 +261,7 @@ Par exemple :
     {{< /site-region >}}
 2. Remplacez les paramètres fictifs suivants par les valeurs appropriées : 
 
-- Remplacez `<DATADOG_API_KEY>` par votre clé d'API Datadog, disponible sur la [page de gestion des API][2]. 
+- Remplacez `<DD_API_KEY_SECRET_ARN>` du secret de Secret Manager qui contient votre clé API de Datadog.
 - Remplacez `<AWS_REGION>` par la région AWS où vos fonctions Lambda sont déployées.
 - Remplacez `<EXTENSION_VERSION>` par la [dernière version de l'extension Lambda Datadog][3].
 
