@@ -9,7 +9,7 @@ further_reading:
   text: "Configure SAML for your Datadog account"
 ---
 
-## Setup and Configuration
+## Setup and configuration
 
 Follow the [Configure Auth0 as Identity Provider for Datadog][1] docs to configure Auth0 as a SAML identity provider.
 

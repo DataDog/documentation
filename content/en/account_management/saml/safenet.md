@@ -21,13 +21,13 @@ Follow the [main SAML configuration instructions][1], then see the [SafeNet Trus
 
 ### Using STA console
 
-Navigate to the Datadog login URL. Once redirected to the SafeNet Trusted Access sign-in page, enter your primary directory login information, approve the two-factor authentication. This will redirect you back to Datadog after authentication.
+Navigate to the Datadog login URL. Once redirected to the SafeNet Trusted Access sign-in page, enter your primary directory login information and approve the two-factor authentication. This redirects you back to Datadog after authentication.
 
 **Note**: For IdP initiated mode, enter the **Assertion Consumer Service URL** found in Datadog on the SafeNet Trusted Access console.
 
 ### Using STA user portal
 
-Navigate to the User Portal URL to log in to the STA User Portal dashboard. The dashboard shows you a list of applications to which you have access. Click on the Datadog application icon, which will redirect you to Datadog after authentication.
+Navigate to the User Portal URL to log in to the STA User Portal dashboard. The dashboard shows you a list of applications to which you have access. Click on the Datadog application icon, which redirects you to Datadog after authentication.
 
 ## Further Reading
 

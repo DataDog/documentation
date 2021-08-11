@@ -12,11 +12,11 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-The Datadog SAML integration for SSO provides an easy pathway for linking an organization to an external user management system so that credentials can be kept and managed in a central system. This doc is meant to be used as an add-on to [Single Sign On With SAML (main doc)][1] doc, which gives an overview of single sign-on from the Datadog perspective.
+The Datadog SAML integration for SSO provides an easy pathway for linking an organization to an external user management system so that credentials can be kept and managed in a central system. This doc is meant to be used as an add-on to the main [Single Sign On With SAML][1] documentation, which gives an overview of single sign-on from the Datadog perspective.
 
 To begin configuration of SAML for Active Directory Federation Service (AD FS), see Microsoft's [Configure a SAML 2.0 provider for portals with AD FS][2] docs.
 
-Once SAML is configured, users can login by using the link provided in the [SAML configuration page][3]. Keep in mind that users still need to be invited and activated before they're able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user record otherwise they may be denied as shown below.
+Once SAML is configured, users can login by using the link provided in the [SAML configuration page][3]. Keep in mind that users still need to be invited and activated before they're able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user records; otherwise they may be denied as shown below.
 
 {{< img src="account_management/saml/6TsPUla.png" alt="6TsPUla" style="width:60%;">}}
 
