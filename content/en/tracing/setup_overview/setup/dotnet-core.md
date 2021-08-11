@@ -83,7 +83,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 [1]: /tracing/serverless_functions/
 {{% /tab %}}
 
-{{% tab "Azure App Services Extension" %}}
+{{% tab "Azure App Service" %}}
 
 To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services Extension][1] documentation.
 
