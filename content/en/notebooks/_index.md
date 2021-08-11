@@ -145,7 +145,7 @@ Use the **Share** menu in the upper right of a notebook to see sharing options. 
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Googl Docs"  style="width:80%;">}}
+{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Google Docs" style="width:80%;">}}
 
 ### Import or Export Notebook JSON
 
