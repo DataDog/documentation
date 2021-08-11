@@ -10,7 +10,7 @@ further_reading:
   text: "Learn more about parsing"
 ---
 
-The goal of this guide is to explain how to monitor your log usage thanks to estimated usage metrics. This guide goes through the following steps:
+The goal of this guide is to explain how to monitor your log usage with estimated usage metrics. This guide goes through the following steps:
 
 * Alert on unexpected traffic spikes
 * Alert when you are getting close to a budget threshold on your indexed logs
@@ -20,7 +20,7 @@ The goal of this guide is to explain how to monitor your log usage thanks to est
 
 ### Logs usage metrics
 
-By default, [log usage metrics][1] are available to track the number of ingested logs, ingested bytes and indexed logs. Those metrics are free and kept for 15 months:
+By default, [log usage metrics][1] are available to track the number of ingested logs, ingested bytes, and indexed logs. These metrics are free and kept for 15 months:
 
 {{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
 
@@ -58,9 +58,11 @@ From log usage metrics, an estimated usage Dashboard can also be built to monito
 
 {{< img src="logs/guide/log_usage_dashboard.png" alt="Log estimated usage dashboard"  style="width:70%;">}}
 
-**Reminder**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
+**Note**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
-To import this dashboard, copy the [estimated usage dashboard JSON definition][5] and paste it as a new Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a new dashboard.
+To import this dashboard, copy the [estimated usage dashboard JSON definition][5] and paste it as a New Dashboard. Alternatively use the `Import Dashboard JSON` option in the settings cog menu in the upper right corner of a New Dashboard.
+
+**Note**: This JSON definition cannot be imported as a Timeboard or Screenboard.
 
 ## Monitor indexed logs with fixed threshold
 
