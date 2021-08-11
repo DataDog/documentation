@@ -19,7 +19,7 @@ further_reading:
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-- The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][1].
+- The .NET Tracer library for Datadog is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Core runtimes
 The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
@@ -30,7 +30,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | .NET Core 3.1        | 12/03/2022            |
 | .NET Core 2.1        | 08/21/2021            |
 
- Additional information on .NET Core support policy can be found at [Microsoft .NET Core Lifecyle Policy][3]. 
+ Additional information on .NET Core support policy can be found within [Microsoft's .NET Core Lifecycle Policy][3]. 
 
 ## Supported processor architectures
 The .NET Tracer supports automatic instrumentation on the following architectures:
