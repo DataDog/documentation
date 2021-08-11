@@ -12,6 +12,8 @@ further_reading:
 
 When you setup Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses.
 
+These are standard Datadog metrics that you can use in [dashboards][1], [monitors][2], [notebooks][3], and anywhere else you use metrics.
+
 To see a complete list of metrics collected, see the integration Data Collected documentation for your database product:
 
 {{< partial name="dbm/dbm-data-collected" >}}
@@ -33,7 +35,7 @@ If table names, column names, indexes, database names, or any other schema conta
 
 ### Database logs
 
-If you are sending logs to Datadog from your database, be aware that some logs can contain the full SQL query text including query bind parameters. Review and apply [log security rules][1] consistent with your organization's requirements.
+If you are sending logs to Datadog from your database, be aware that some logs can contain the full SQL query text including query bind parameters. Review and apply [log security rules][4] consistent with your organization's requirements.
 
 ### Query Comments
 
@@ -50,4 +52,7 @@ Query samples have no limits on the number of unique normalized queries tracked,
 _Other Queries_ represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in Other Queries.
 
 
-[1]: /security/logs/
+[1]: /dashboards/
+[2]: /monitors/
+[3]: /notebooks/
+[4]: /security/logs/
