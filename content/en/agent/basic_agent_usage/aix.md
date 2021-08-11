@@ -97,7 +97,7 @@ DogStatsD relies on the same configuration file defined for the Agent, where a D
 
 To enable DogStatsD, edit `/etc/datadog-agent/datadog.yaml` and set the relevant configuration options.
 
-{{< agent-config type="Log collection Configuration" >}}
+{{< agent-config type="Basic Configuration" >}}
 
 {{< code-block lang="yaml" filename="/etc/datadog-agent/datadog.yaml" >}}
 dogstatsd:                        # DogStatsD configuration options
