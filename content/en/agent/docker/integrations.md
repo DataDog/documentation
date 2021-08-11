@@ -20,10 +20,10 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-See the <a href="/getting_started/agent/autodiscovery">Autodiscovery Getting Started</a> documentation to discover the concepts behind this feature.
+See the <a href="/getting_started/agent/autodiscovery">Autodiscovery Getting Started documentation</a> to discover the concepts behind this feature.
 </div>
 
-This page covers how to configure Autodiscovery for integrations with Docker. If you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery][1] documentation.
+This page covers how to configure Autodiscovery for integrations with Docker. If you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
 
 The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 
@@ -243,7 +243,7 @@ instances:
     password: "%%env_REDIS_PASSWORD%%"
 ```
 
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable][3] documentation.
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
 [2]: /agent/guide/ad_identifiers/
@@ -262,7 +262,7 @@ etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable][1] documentation.
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example: `redis` OR `redis:latest`.
 

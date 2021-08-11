@@ -109,7 +109,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink. More information about this is available in the [Agent log collection][4] documentation.
+    This configuration is required when sending logs to Datadog with AWS PrivateLink. More information about this is available in the [Agent log collection documentation][4].
 12. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
 ## Advanced usage
@@ -120,7 +120,7 @@ To route traffic to Datadog's PrivateLink offering in `us-east-1` from other reg
 
 Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
 
-For more information, see the [Amazon VPC peering][6] documentation.
+For more information, see the [Amazon VPC peering documentation][6].
 
 ## Further Reading
 

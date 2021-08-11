@@ -19,7 +19,7 @@ The Datadog Agent can create and assign tags to all metrics, traces, and logs em
 
 ## Unified service tagging
 
-As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [Amazon ECS unified service tagging][1] documentation.
+As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [Amazon ECS unified service tagging documentation][1].
 
 ## Resource tag collection
 

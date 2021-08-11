@@ -31,7 +31,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 ### Requirements
 
 1. Running Kubernetes >v1.10 in order to be able to register the External Metrics Provider resource against the API server.
-2. Having the aggregation layer enabled. See the [Kubernetes aggregation layer configuration][3] documentation.
+2. Having the aggregation layer enabled. See the [Kubernetes aggregation layer configuration documentation][3].
 
 ## Set up the Cluster Agent external metric server
 
@@ -144,7 +144,7 @@ Note in this manifest that:
 - The maximum number of replicas created is `3`, and the minimum is `1`.
 - The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This metric format corresponds to the Datadog one.
 
-Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see in the [Kubernetes horizontal pod autoscaling][5] documentation, the largest of the proposed values is the one chosen.
+Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see in the [Kubernetes horizontal pod autoscaling documentation][5], the largest of the proposed values is the one chosen.
 
 **Note**: Running multiple Cluster Agents raises API usage. The Datadog Cluster Agent completes 120 calls per hour for approximately 45 HPA objects in Kubernetes. Running more than 45 HPAs increases the number of calls when fetching metrics from within the same org.
 

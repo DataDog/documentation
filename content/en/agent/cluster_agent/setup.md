@@ -101,7 +101,7 @@ This environment variable must be configured (using the same setup) when [Config
     echo -n '<Your API key>' | base64
     ```
 3. In the `secrets-application-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_APP_KEY_HERE` with [your Datadog Application key][11] encoded in base64.
-4. The `cluster-agent-deployment.yaml` manifest refers to the token created previously in the `Secret` `datadog-cluster-agent` by *default*. If you are storing this token in an *alternative* way, configure your `DD_CLUSTER_AGENT_AUTH_TOKEN` environment variable accordingly.
+4. By default, the `cluster-agent-deployment.yaml` manifest refers to the token created previously in the `Secret` `datadog-cluster-agent`. If you are storing this token in an alternative way, configure your `DD_CLUSTER_AGENT_AUTH_TOKEN` environment variable accordingly.
 5. Deploy these resources for the Cluster Agent Deployment to use:
     ```shell
     kubectl apply -f agent-services.yaml

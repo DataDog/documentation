@@ -71,7 +71,7 @@ While `pylint` catches any issue that could prevent the Python 3 interpreter fro
 $ 2to3 foo.py
 ```
 
-Running 2to3 prints a diff against the original source file. For more details about 2to3, see the official [2to3][4] documentation.
+Running 2to3 prints a diff against the original source file. For more details about 2to3, see the official [2to3 documentation][4] .
 
 ### Editors
 
@@ -129,7 +129,7 @@ Python 3 features a reorganized standard library, where several modules and func
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consult the [Six][7] documentation for the list of renamed modules. **Note**: The `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
+Consult the [Six documentation][7] for the list of renamed modules. **Note**: The `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
 
 ### Unicode
 

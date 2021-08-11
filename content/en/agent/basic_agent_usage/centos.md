@@ -112,7 +112,7 @@ Configuration files for [Integrations][1]:
 
 ## Troubleshooting
 
-See the [Agent Troubleshooting][2] documentation.
+See the [Agent Troubleshooting documentation][2].
 
 ## Working with the embedded Agent
 

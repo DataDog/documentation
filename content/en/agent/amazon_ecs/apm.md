@@ -141,7 +141,7 @@ const axios = require('axios');
 })();
 ```
 
-For more examples of setting the Agent hostname in other languages, see the [change Agent hostname][1] documentation.
+For more examples of setting the Agent hostname in other languages, see the [change Agent hostname documentation][1].
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
@@ -196,7 +196,7 @@ Copy this script into the `entryPoint` field of your ECS task definition, updati
 ]
 ```
 
-For more examples of setting the Agent hostname in other languages, see the [change Agent hostname][1] documentation.
+For more examples of setting the Agent hostname in other languages, see the [change Agent hostname documentation][1].
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname

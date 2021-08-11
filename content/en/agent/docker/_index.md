@@ -148,7 +148,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
-For more information about proxy settings, see the [Agent v6 Proxy][12] documentation.
+For more information about proxy settings, see the [Agent v6 Proxy documentation][12].
 
 ### Optional collection Agents
 
@@ -191,7 +191,7 @@ See the [Docker Tag Extraction][23] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management][24] documentation.
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][24].
 
 ### Ignore containers
 

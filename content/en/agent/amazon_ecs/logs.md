@@ -158,7 +158,7 @@ To collect all logs written by running applications in your ECS containers and s
 
 #### Configuration file
 
-If your container writes any logs to files, follow the [Custom Log Collection][1] documentation to tail files for logs.
+If your container writes any logs to files, follow the [Custom Log Collection documentation][1] to tail files for logs.
 
 To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][2] with the following content:
 
@@ -176,7 +176,7 @@ logs:
 
 With Agent v7.25.0+/6.25.0+, it is possible to enable file tailing by using a container label so the logs collected receive the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
 
-**Note**: The file paths are always relative to the Agent. So, this requires extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. See the [AWS Bind mounts][5] documentation for additional details on volume management with ECS.
+**Note**: The file paths are always relative to the Agent. So, this requires extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. See the [AWS Bind mounts documentation][5] for additional details on volume management with ECS.
 
 ## Activate log integrations
 

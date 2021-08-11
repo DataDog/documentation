@@ -123,7 +123,7 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent’s
 
 2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
 
-If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX][5] documentation.
+If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
 
 ### Process check
 

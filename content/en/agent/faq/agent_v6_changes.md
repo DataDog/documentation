@@ -165,7 +165,7 @@ The precedence order of Agent v6 proxy options is different from previous versio
 {{% /tab %}}
 {{% tab "Hostname" %}}
 
-There are differences in hostname resolution between Agent v5 and Agent v6. For details, see the [How the Datadog Agent determines the hostname][1].
+There are differences in hostname resolution between Agent v5 and Agent v6. For details, see [How the Datadog Agent determines the hostname][1].
 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
 {{% /tab %}}
@@ -372,7 +372,7 @@ The [kubernetes_state][4] check works with Agent v5 or Agent v6.
 
 #### Tagging
 
-While Agent v5 automatically collected every pod label as tags, Agent v6 needs an inclusion list. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`. See [Tag Assignment and Extraction][5] for details.
+While Agent v5 automatically collected every pod label as tags, Agent v6 needs an allowlist. This is done with the `kubernetes_pod_labels_as_tags` option in `datadog.yaml`. See [Tag Assignment and Extraction][5] for details.
 
 The following options and tags are deprecated:
 
@@ -456,7 +456,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development][9] documentation.
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development documentation][9].
 
 {{< tabs >}}
 {{% tab "Integrations" %}}

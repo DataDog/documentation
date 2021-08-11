@@ -33,7 +33,7 @@ Thanks to Kubernetes, you can take advantage of DaemonSets to automatically depl
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][4] as a deployment on each Kubernetes node.*
 
-If your Kubernetes has RBAC enabled, see the documentation on how to configure RBAC permissions with your [Datadog-Kubernetes integration][5].
+If your Kubernetes has RBAC enabled, see how to configure RBAC permissions with your [Datadog-Kubernetes integration][5].
 
 * Create the following `dd-agent.yaml` manifest:
 
@@ -91,7 +91,7 @@ Replace `DATADOG_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] 
   kubectl create -f dd-agent.yaml
   ```
 
-**Note**: This manifest enables the Autodiscovery, auto-configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure Autodiscovery, see the [Autodiscovery][9] documentation.
+**Note**: This manifest enables the Autodiscovery, auto-configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure Autodiscovery, see the [Autodiscovery documentation][9].
 
 #### Host installation
 
@@ -201,7 +201,7 @@ Then deploy it by running:
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google's publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, see the [official project][12] documentation.
+The manifest above uses Google's publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, see the [official project documentation][12].
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL is configured and managed automatically.

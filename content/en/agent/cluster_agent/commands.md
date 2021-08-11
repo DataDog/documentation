@@ -52,7 +52,7 @@ The following environment variables are supported:
 : Enables cluster level metadata mapping. Defaults to `true`.
 
 `DD_COLLECT_KUBERNETES_EVENTS`                
-: Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Event collection][2] documentation for more details.
+: Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Event collection documentation][2] for more details.
 
 `DD_LEADER_ELECTION`                          
 : Activates leader election. Set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Defaults to `false`.

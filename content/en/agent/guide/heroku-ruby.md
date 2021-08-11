@@ -149,7 +149,7 @@ The first thing that you need to do is to retrieve the database credentials from
 heroku pg:credentials:url DATABASE -a $APPNAME
 ```
 
-Integrations are enabled in a particular way when using the Datadog buildpack. You can learn how to enable any of the integrations in the [buildpack][13] documentation.
+Integrations are enabled in a particular way when using the Datadog buildpack. You can learn how to enable any of the integrations in the [buildpack documentation][13].
 
 Create a `datadog/conf.d` folder at the root of your application:
 
@@ -434,7 +434,7 @@ These logs are also automatically parsed by the Heroku log integration pipeline,
 @heroku.memory.total
 ```
 
-You can learn about what each of these values mean in official [Heroku][20] documentation.
+You can learn about what each of these values mean in the official [Heroku documentation][20].
 
 Follow the same steps explained on the previous section to generate metrics with 15 month retention for each of those measures.
 
@@ -612,7 +612,7 @@ If you navigate to [logs in Datadog][22], the newer Rails logs have their correl
 
 In this guide you have taken a sample Rails application, deployed it to Heroku, and instrumented it with Datadog to get metrics, dyno system metrics, logs, traces, and integrations set up.
 
-To continue instrumenting your application with other Datadog integrations, follow the same steps taken for the Postgres integration one, with the configuration files documented in the official [integrations][23] documentation.
+To continue instrumenting your application with other Datadog integrations, follow the same steps taken for the Postgres integration one, with the configuration files documented in the official [integrations documentation][23].
 
 ## Appendix: Getting the Datadog Agent status
 

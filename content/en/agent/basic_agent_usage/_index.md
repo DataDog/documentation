@@ -329,7 +329,7 @@ Note: If you want to manually update one specific Agent integration see the [Int
 
 ### Configuration files
 
-See the [Agent configuration files][9] documentation.
+See the [Agent configuration files documentation][9].
 
 ### Datadog site
 
@@ -341,7 +341,7 @@ site: {{< region-param key="dd_site" >}}
 
 ### Log location
 
-See the [Agent log files][11] documentation.
+See the [Agent log files documentation][11].
 
 ## Further Reading
 
