@@ -139,13 +139,17 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 ## Sharing Notebooks
 
-Notebooks can be exported to PDF, Markdown, or any document editor. Use the **Share** menu in the upper right of a notebook to see sharing options.
+Use the **Share** menu in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
 
-{{< img src="notebooks/sharing.png" alt="Notebook sharing menu"  style="width:50%;">}}
+{{< img src="notebooks/notebook-export.png" alt="Notebook sharing menu"  style="width:50%;">}}
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
 
 {{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Googl Docs"  style="width:80%;">}}
+
+### Import or Export Notebook JSON
+
+Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
 
 ## Further Reading
 
