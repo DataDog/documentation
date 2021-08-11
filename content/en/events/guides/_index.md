@@ -21,10 +21,10 @@ Datadog classifies an _event_ as a record of any notable change relevant to mana
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-Use this guide if you are migrating from the Events Stream to the Events Explorer:
+Use this guide if you are migrating from the Event Stream to the Events Explorer:
 
 {{< whatsnext >}}
-    {{< nextlink href="/events/guides/migrating_from_stream_to_explorer/" >}}Migrating from the Events Stream to the Events Explorer{{< /nextlink >}}
+    {{< nextlink href="/events/guides/migrating_from_stream_to_explorer/" >}}Migrating from the Event Stream to the Events Explorer{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

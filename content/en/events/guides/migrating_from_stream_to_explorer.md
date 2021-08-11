@@ -1,5 +1,5 @@
 ---
-title: Migrating from the Events Stream to the Events Explorer
+title: Migrating from the Event Stream to the Events Explorer
 kind: documentation
 ---
 
@@ -7,7 +7,7 @@ kind: documentation
 ## 1. Request beta access
 
 <div class="alert alert-warning">
-  The Events Explorer is in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="https://docs.datadoghq.com/events/stream/">Events Stream documentation</a>.</div>
+  The Events Explorer is in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="https://docs.datadoghq.com/events/stream/">Event Stream documentation</a>.</div>
 
 Once you have the beta enabled, you have access to these new events features:
 
@@ -18,9 +18,9 @@ Once you have the beta enabled, you have access to these new events features:
 - [Event as a new source in Dashboards widgets][3]
 - Event monitors API v2
 
-You can continue to access the Events Stream from the navigation menu alongside the new features:
+You can continue to access the Event Stream from the navigation menu alongside the new features:
 
-{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the events stream in the Datadog app navigation." style="width:50%;" >}}
+{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the event stream in the Datadog app navigation." style="width:50%;" >}}
 
 ## 2. Migrate existing event monitors and dashboard widgets
 
@@ -39,7 +39,7 @@ If you use the API, Terraform, or other third party solution to manage your moni
 
 ## 4. Sunset legacy events
 
-When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Events Stream continues to be accessible for viewing your event history.
+When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Event Stream continues to be accessible for viewing your event history.
 [1]: /events/explorer/
 [2]: /events/explorer/#event-analytics
 [3]: /dashboards/widgets/event_stream/
