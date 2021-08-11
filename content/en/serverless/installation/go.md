@@ -78,7 +78,7 @@ Follow these steps to instrument the function:
       // Wrap your lambda handler like this
       lambda.Start(ddlambda.WrapFunction(myHandler, nil))
       /* OR with manual configuration options
-      lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
         BatchInterval: time.Second * 15
         APIKey: "my-api-key",
       }))
