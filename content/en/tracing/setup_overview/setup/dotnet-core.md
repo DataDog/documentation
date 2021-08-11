@@ -299,18 +299,18 @@ For more details on custom instrumentation and custom tagging, see [.NET Custom 
 
 {{% tab "Containers" %}}
 
-1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting these environment variables:
+3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-    - `DD_AGENT_HOST`
-    - `DD_TRACE_AGENT_PORT`
-    
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+    See [configure the tracer](#configure-the-tracer) for more information on how to set these variables.
 {{< site-region region="us3,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
