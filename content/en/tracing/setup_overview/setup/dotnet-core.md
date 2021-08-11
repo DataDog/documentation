@@ -455,7 +455,7 @@ Using the methods described above, customize your tracing configuration with the
 
 #### Unified Service Tagging
 
-To use [Unified Service Tagging][5], configure the following settings for your services:
+To use [Unified Service Tagging][4], configure the following settings for your services:
 
 `DD_ENV`
 : **TracerSettings property**: `Environment`<br>
@@ -540,7 +540,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames`<br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][5] section.
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
@@ -561,7 +561,7 @@ Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) 
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled`<br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][6] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][5] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -585,6 +585,5 @@ The following configuration variables are for features that are available for us
 [1]: /tracing/setup_overview/compatibility_requirements/dotnet-core
 [2]: https://www.nuget.org/packages/Datadog.Trace
 [3]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[4]: /agent/basic_agent_usage/
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
