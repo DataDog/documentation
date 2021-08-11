@@ -22,7 +22,7 @@ swap:
   'screen board': screenboard
   'time board': timeboard
   'time series': timeseries
-  'top list': toplist
+  'toplist': top list
   'turnkey': turn-key
   'utilize': use
   'via': with|through

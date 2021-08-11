@@ -7,7 +7,8 @@ from itertools import chain
 import yaml
 import logging
 from pathlib import Path
-
+from jinja2 import Environment, Template, select_autoescape, Undefined
+from jinja2.loaders import DictLoader
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING)
@@ -20,6 +21,27 @@ TEMPLATE = """\
 {content}
 """
 
+
+class SilentUndefined(Undefined):
+    def _fail_with_undefined_error(self, *args, **kwargs):
+        return None
+
+nop = lambda *a, **k: None
+
+def load_templated_file(f):
+    # read without the import first line
+    f.seek(0)
+    content_without_import = ''.join(f.readlines()[1:])
+    env = Environment(
+        undefined=SilentUndefined,
+        loader=DictLoader(dict()),
+        autoescape=select_autoescape(),
+        variable_start_string="{@",
+        variable_end_string="@}"
+    )
+    template = env.from_string(content_without_import)
+    data = yaml.safe_load(template.render(fim={'watch_files': nop}))
+    return data
 
 def security_rules(content, content_dir):
     """
@@ -35,10 +57,20 @@ def security_rules(content, content_dir):
         data = None
         if file_name.endswith(".json"):
             with open(file_name, mode="r+") as f:
-                data = json.loads(f.read())
+                try:
+                    data = json.loads(f.read())
+                except:
+                    logger.warn(f"Error parsing {file_name}")
         elif file_name.endswith(".yaml"):
             with open(file_name, mode="r+") as f:
-                data = yaml.load(f.read(), Loader=yaml.FullLoader)
+                try:
+                    file_text_content = f.read()
+                    if 'jinja2' in file_text_content:
+                        data = load_templated_file(f)
+                    else:
+                        data = yaml.load(file_text_content, Loader=yaml.FullLoader)
+                except:
+                    logger.warn(f"Error parsing {file_name}")
 
         p = Path(f.name)
         message_file_name = p.with_suffix('.md')
@@ -88,6 +120,8 @@ def security_rules(content, content_dir):
 
                     tags = data.get('tags', [])
                     if tags:
+                        if data.get('source', ''):
+                            page_data["source"] = data.get('source', '')
                         for tag in tags:
                             if ':' in tag:
                                 key, value = tag.split(':')
@@ -140,7 +174,10 @@ def compliance_rules(content, content_dir):
         if not file_name.endswith(".json"):
             continue
         with open(file_name, mode="r+") as f:
-            json_data = json.loads(f.read())
+            try:
+                json_data = json.loads(f.read())
+            except:
+                logger.warn(f"Error parsing {file_name}")
             p = Path(f.name)
 
             # delete file or skip if staged

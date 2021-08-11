@@ -173,20 +173,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Kong チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "kong" >}}
 
-**kong.can_connect**:<br>
-Agent が Kong に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-`openmetrics_endpoint` を設定し、Agent 7+ の実装を使用する場合:
-
-**kong.openmetrics.health**:<br>
-OpenMetrics エンドポイントに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-**kong.datastore.reachable**:<br>
-Kong がデータストアに接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
-**kong.upstream.target.health**:<br>
-ターゲットが正常でない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

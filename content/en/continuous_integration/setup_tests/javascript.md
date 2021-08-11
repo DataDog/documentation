@@ -18,6 +18,7 @@ Supported test frameworks:
   * Only [`jest-circus`][1] is supported as a `testRunner`.
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
+* Cucumber-js >= 7.0.0
 
 ## Prerequisites
 
@@ -108,9 +109,9 @@ require('dd-trace').init({
 
 Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
 
-```javascript
-'scripts': {
-  'test': 'mocha --require init-tracer'
+```json
+"scripts": {
+  "test": "mocha --require init-tracer"
 },
 ```
 
@@ -119,6 +120,23 @@ Run your tests as you normally do, specifying the environment where test are bei
 ```bash
 DD_ENV=ci npm test
 ```
+
+{{% /tab %}}
+{{% tab "Cucumber" %}}
+
+Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
+
+{{< code-block lang="json" filename="package.json" >}}
+"scripts": {
+  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
+},
+{{< /code-block >}}
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci npm test
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -150,7 +168,7 @@ All other [Datadog Tracer configuration][5] options can also be used.
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][7].
+[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][7].
 
 ### Browser tests
 The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.

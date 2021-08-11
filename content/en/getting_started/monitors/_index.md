@@ -1,6 +1,8 @@
 ---
 title: Getting Started with Monitors
 kind: documentation
+aliases:
+  - /getting_started/application/monitors
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
   tag: "Blog"

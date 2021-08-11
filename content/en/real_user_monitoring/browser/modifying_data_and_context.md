@@ -29,6 +29,74 @@ There are various ways you can modify the [data collected][1] by RUM, to support
 - Reducing how much RUM data you're collecting, through sampling the data.
 - Providing more context than what the default attributes provide about where the data is coming from.
 
+## Override default RUM view names
+
+The RUM SDK automatically generates a [view event][14] for each new page visited by your users, or when the page URL is changed (for single page applications). A view name is computed from the current page URL, where variable alphanumeric IDs are removed automatically—for example, "/dashboard/1234" becomes "/dashboard/?".
+
+Starting with [version 2.17.0][15], you may specify your own view names by tracking view events manually with the `trackViewsManually` option:
+
+1. Set up `trackViewsManually` to true when initializing RUM.
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    trackViewsManually: true,
+    ...
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+    });
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+2. You **must** start views for each new page or route change (for single page applications). You can optionally define the associated view name, which defaults to the page URL path. No RUM data is collected until the view is started.
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.startView('checkout')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.startView('checkout')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.startView('checkout')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: If you are using React, Angular, Vue or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
+
 ## Enrich and control RUM data
 
 The RUM SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. Intercepting the RUM events allows you to:
@@ -71,7 +139,7 @@ datadogRum.init({
     ...,
     beforeSend: (event, context) => {
         // collect a RUM resource's response headers
-        if (event.type = 'resource' && event.resource.type === 'fetch') {
+        if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context = {...event.context, responseHeaders: context.response.headers}
         }
     },
@@ -86,7 +154,7 @@ DD_RUM.onReady(function() {
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
-            if (event.type = 'resource' && event.resource.type === 'fetch') {
+            if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -102,7 +170,7 @@ window.DD_RUM &&
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
-            if (event.type = 'resource' && event.resource.type === 'fetch') {
+            if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -540,3 +608,5 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 [11]: /real_user_monitoring/guide/enrich-and-control-rum-data
 [12]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [13]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[14]: /real_user_monitoring/browser/monitoring_page_performance/
+[15]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170

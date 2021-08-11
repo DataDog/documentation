@@ -77,7 +77,7 @@ NGINX チェックは、ローカルの NGINX ステータスエンドポイン�
 - [スタブステータスモジュール][2] - オープンソース NGINX 用
 - [HTTP ステータスモジュール][3] - NGINX Plus 専用
 
-#### オープンソース NGINX
+#### NGINX オープンソース
 
 オープンソース NGINX を使用している場合は、インスタンスにスタブステータスモジュールが含まれていないことがあります。**コンフィグレーション**を行う前に、`nginx` バイナリにモジュールが含まれているかを確認してください。
 
@@ -93,6 +93,9 @@ http_stub_status_module
 リリース 13 より前の NGINX Plus パッケージにはHTTP ステータスモジュールが含まれています。リリース 13 以降の NGINX Plus では、このステータスモジュールは非推奨になり、代わりに新しい Plus API を使用する必要があります。詳細については、[こちらのお知らせ][4]を参照してください。
 
 #### NGINX の準備
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (例: `/etc/nginx/conf.d/`) に `status.conf` ファイルを作成します。
 
@@ -127,7 +130,7 @@ server {
 
 NGINX Plus ユーザーは、`stub_status` を使用することもできますが、このモジュールで提供されるメトリクスは少ないため、`status` の使用をお勧めします。
 
-NGINX Plus リリース 15 以降では、`status` モジュールは非推奨です。代わりに [http_api_module][7] を使用してください。たとえば、メインの NGINX 構成ファイル (`/etc/nginx/conf.d/default.conf`) で `/api` エンドポイントを有効にするには、以下のようにします。
+NGINX Plus リリース 15 以降では、`status` モジュールは非推奨です。代わりに [http_api_module][1] を使用してください。たとえば、メインの NGINX 構成ファイル (`/etc/nginx/conf.d/default.conf`) で `/api` エンドポイントを有効にするには、以下のようにします。
 
 ```conf
 server {
@@ -153,6 +156,37 @@ NGINX をリロードして、status または API エンドポイントを有�
 ```shell
 sudo nginx -t && sudo nginx -s reload
 ```
+[1]: https://nginx.org/en/docs/http/ngx_http_api_module.html
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+次の ConfigMap は、NGINX コンテナのインテグレーションテンプレートを定義します。
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginxconfig
+  namespace: default
+data:
+  nginx.conf: |+
+    worker_processes  5;
+    events {
+      worker_connections  4096;
+    }
+    http {
+        server {
+            location /nginx_status {
+              stub_status on;
+              access_log  /dev/stdout;
+              allow all;
+            }
+        }
+    }
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### コンフィギュレーション
 
@@ -228,40 +262,154 @@ http {
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "Docker" %}}
 
-#### コンテナ化
+#### Docker
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                                      |
-| -------------------- | ---------------------------------------------------------- |
-| `<インテグレーション名>` | `nginx`                                                    |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
-| `<インスタンスコンフィギュレーション>`  | `{"nginx_status_url": "http://%%host%%:81/nginx_status/"}` |
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
-**注**: この `<INSTANCE_CONFIG>` は NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
+```yaml
+LABEL "com.datadoghq.ad.check_names"='["nginx"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:81/nginx_status/"}]'
+```
+
+**注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
+
+#### ログの収集
+
+
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### Kubernetes
+
+このチェックを、Kubernetes で実行している Agent に構成します。
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  annotations:
+    ad.datadoghq.com/nginx.check_names: '["nginx"]'
+    ad.datadoghq.com/nginx.init_configs: '[{}]'
+    ad.datadoghq.com/nginx.instances: |
+      [
+        {
+          "nginx_status_url":"http://%%host%%:81/nginx_status/"
+        }
+      ]
+  labels:
+    name: nginx
+spec:
+  containers:
+    - name: nginx
+  volumes:
+        - name: "config"
+          configMap:
+            name: "nginxconfig"
+```
+
+**注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
+
+#### ログの収集
+
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+
+次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  annotations:
+    ad.datadoghq.com/nginx.logs: '[{"source":"nginx","service":"nginx"}]'
+  labels:
+    name: nginx
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+{{% /tab %}}
+{{% tab "ECS" %}}
+
+#### ECS
+
+このチェックを、ECS で実行している Agent に構成するには:
+
+##### メトリクスの収集
+
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+
+```json
+{
+  "containerDefinitions": [{
+    "name": "nginx",
+    "image": "nginx:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.check_names": "[\"nginx\"]",
+      "com.datadoghq.ad.init_configs": "[{}]",
+      "com.datadoghq.ad.instances": "[{\"nginx_status_url\":\"http://%%host%%:81/nginx_status/\"}]"
+    }
+  }]
+}
+```
+
+**注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
 ##### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
 
-| パラメーター      | 値                                     |
-| -------------- | ----------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "nginx", "service": "nginx"}` |
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+```yaml
+{
+  "containerDefinitions": [{
+    "name": "nginx",
+    "image": "nginx:latest",
+    "dockerLabels": {
+      "com.datadoghq.ad.logs": "[{\"source\":\"nginx\",\"service\":\"nginx\"}]"
+    }
+  }]
+}
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `nginx` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `nginx` を探します。
 
 ## 収集データ
 
@@ -298,33 +446,31 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 NGINX チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "nginx" >}}
 
-**nginx.can_connect**:<br>
-Agent が NGINX に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
-- [あるはずのタイムスタンプがログに含まれないのはなぜですか？][7]
+- [あるはずのタイムスタンプがログに含まれないのはなぜですか？][6]
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [NGINX の監視方法][9]
-- [NGINX メトリクスの収集方法][10]
-- [Datadog を使用した NGINX の監視方法][11]
+- [NGINX の監視方法][8]
+- [NGINX メトリクスの収集方法][9]
+- [Datadog を使用した NGINX の監視方法][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/nginx/images/nginx_dashboard.png
 [2]: https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
 [3]: https://nginx.org/en/docs/http/ngx_http_status_module.html
 [4]: https://www.nginx.com/blog/nginx-plus-r13-released
-[5]: https://nginx.org/en/docs/http/ngx_http_api_module.html
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/how-to-monitor-nginx
-[10]: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
-[11]: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/how-to-monitor-nginx
+[9]: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
+[10]: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html

@@ -83,5 +83,5 @@ Admission Controller は、ポッドラベルでこの情報を探します。�
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [3]: /ja/metrics/distributions/#customize-tagging
-[4]: /ja/logs/processing/pipelines/
+[4]: /ja/logs/log_configuration/pipelines
 [5]: /ja/agent/cluster_agent/admission_controller/

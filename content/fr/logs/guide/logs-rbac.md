@@ -397,7 +397,7 @@ Attribuez l'autorisation [logs_write_historical_views][19] aux membres `ACME Adm
 [10]: /fr/account_management/api-app-keys/
 [11]: /fr/api/v2/roles/#list-permissions
 [12]: /fr/account_management/rbac/permissions?tab=ui#logs_read_data
-[13]: /fr/logs/processing/pipelines/
+[13]: /fr/logs/log_configuration/pipelines
 [14]: /fr/account_management/rbac/permissions?tab=ui#logs_write_processors
 [15]: /fr/logs/indexes/
 [16]: /fr/account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
