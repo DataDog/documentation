@@ -45,7 +45,7 @@ further_reading:
 ## Compatibility requirements
 
 ### Supported .NET Framework runtimes
-The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using CLR v4.0). 
+The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. 
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
@@ -53,8 +53,8 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ### Automatic instrumentation
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+<div class="alert alert-warning"> 
+  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
 </div>
 
 Follow these instructions to begin tracing .NET applications:

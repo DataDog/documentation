@@ -15,17 +15,11 @@ further_reading:
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
-<div class="alert alert-warning"> 
-  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
-</div>
-
-
-## Compatibility
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
 - The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][1].
 
-### Supported .NET Framework runtimes
+## Supported .NET Framework runtimes
 The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using CLR v4.0). It also supports [.NET Core][2].
 
 | Version  | Microsoft End of Life |
@@ -42,7 +36,7 @@ The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using 
 
  Additional information on .NET Framework support policy can be found at [Microsoft .NET Framework Lifecyle Policy][3]. 
 
-### Supported Processor Architectures
+## Supported processor architectures
 
 | Processor architectures                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------ |
