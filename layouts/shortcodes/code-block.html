@@ -1,4 +1,4 @@
-{{ $filename := (.Get ("filename")) }}
+{{ $filename := (.Get ("filename") | default "Code Example") }}
 {{ $lang := (.Get ("lang")) }}
 {{ $code := trim .Inner "\n"}}
 {{ $wrap := (.Get ("wrap"))}}
@@ -10,11 +10,13 @@
 
 {{/*  This html should not be formatted differently as it will cause issues when used inside of another shortcode (like tabs)  */}}
 <div class="code-snippet-wrapper">
-{{ if $filename }}
 <div class="code-filename-wrapper">
 <p class="code-filename my-0">{{ $filename }}</p>
+<div class="js-code-block-toggle">
+<div class="chevron chevron-down"></div>
+<div class="chevron chevron-up"></div>
 </div>
-{{ end }}
+</div>
 <div class="code-snippet {{if eq $wrap "true"}}wrap{{end}}">
 {{ if ne $disable_copy "true" }}
 <div class="code-button-wrapper position-absolute">
