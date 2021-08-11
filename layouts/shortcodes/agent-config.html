@@ -4,9 +4,19 @@
 
 {{ $agent_config_data := $.Site.Data.agent_config }}
 {{ $type := (.Get ("type")) | lower }}
+{{ $filename := .Get "filename" | default "Code Example" }}
 {{ $config_data := index $agent_config_data $type }}
 
 <div class="code-snippet-wrapper">
+  <div class="code-filename-wrapper d-flex justify-content-between">
+    <p class="code-filename my-0">
+      {{ $filename }}
+    </p>
+    <div class="js-code-block-toggle">
+      <div class="chevron chevron-down"></div>
+      <div class="chevron chevron-up d-none"></div>
+    </div>
+  </div>
   <div class="code-snippet">
     <div class="code-button-wrapper position-absolute">
       <button class="btn text-primary js-copy-button">Copy</button>
