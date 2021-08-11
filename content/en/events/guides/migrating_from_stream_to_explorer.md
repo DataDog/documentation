@@ -24,7 +24,7 @@ You can continue to access the Events Stream from the navigation menu alongside 
 
 ## 2. Migrate existing event monitors and dashboard widgets
 
-You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, you update the search query to match the new one. You can do this by manually recreating your existing monitors using these guidelines:
+You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, update the search query to match the new one. You can do this by manually recreating your existing monitors using these guidelines:
 
 |                           Description                           |                                                   Legacy syntax                                                  |                                             New Syntax                                            |
 |:---------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|
@@ -33,13 +33,13 @@ You can still edit your existing event monitors and widgets. However, new event 
 | Zabbix or Prometheus has triggered an alert for a service today | events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0 | events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0 |
 | No events received in a datacenter for service ‘datadog-agent’  | Legacy Event Monitors do not support cardinality rollup.                                                         | events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1 |
 
-If you use the API, Terraform, or other 3rd party solution to manage your monitors, manually update your code using the syntax described above.
+If you use the API, Terraform, or other third party solution to manage your monitors, manually update your code using the syntax described above.
 
 **Note:** If you have SLOs based on event monitors, be sure to update their definitions to point to the new ones.
 
 ## 4. Sunset legacy events
 
-When you have successfully migrated you monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Events Stream will continue to be accessible to view your event history.
+When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Events Stream continues to be accessible for viewing your event history.
 [1]: /events/explorer/
 [2]: /events/explorer/#event-analytics
 [3]: /dashboards/widgets/event_stream/

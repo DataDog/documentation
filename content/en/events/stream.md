@@ -11,12 +11,12 @@ further_reading:
 ---
 {{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">
-  The Events Stream is only available to users in US1 and EU1. Users in US3 and the Datadog for Government site should see the <a href="https://docs.datadoghq.com/events/explorer/">Event Explorer documentation</a>.
+  The Event Stream is only available to users in US1 and EU1. Users in US3 and the Datadog for Government site should see the <a href="https://docs.datadoghq.com/events/explorer/">Events Explorer documentation</a>.
 </div>
 {{< /site-region >}}
 {{< site-region region="us,eu" >}}
 <div class="alert alert-warning">
-  The Events Stream is being depricated in favor of the <a href="https://docs.datadoghq.com/events/explorer/">Event Explorer</a>.
+  The Event Stream is being deprecated in favor of the <a href="https://docs.datadoghq.com/events/explorer/">Events Explorer</a>.
 </div>
 {{< /site-region >}}
 
@@ -101,11 +101,11 @@ Combine prefixes to construct more complex searches. For example, to find all op
 sources:nagios,chef status:error cassandra
 ```
 
-**Note**: Do not use spaces after the colon or commas in these lists. Anything not attached to a prefix goes to full text search.
+**Note**: Do not use spaces after the colon or after a comma in these lists. Anything not attached to a prefix goes to full text search.
 
 ### Aggregation
 
-By default, related events are aggregated when displayed in the events stream. To show unaggregated events, un-check the **Aggregate related events** box at the top right of your event stream:
+By default, related events are aggregated when displayed in the event stream. To show unaggregated events, un-check the **Aggregate related events** box at the top right of your event stream:
 
 {{< img src="events/event_stream_aggregated.png" alt="Aggregated event stream"  style="width:50%;" >}}
 
