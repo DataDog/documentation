@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for self hosted Postgres
 kind: documentation
 description: Install and configure Database Monitoring for self-hosted Postgres.
-private: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"

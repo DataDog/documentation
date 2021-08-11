@@ -2,7 +2,6 @@
 title: Troubleshooting Database Monitoring
 kind: documentation
 description: Troubleshoot Database Monitoring setup
-private: true
 
 ---
 {{< site-region region="us3,gov" >}}

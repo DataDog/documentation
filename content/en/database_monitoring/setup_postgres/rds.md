@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Amazon RDS managed Postgres
 kind: documentation
 description: Install and configure Database Monitoring for Postgres on Amazon RDS.
-private: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"

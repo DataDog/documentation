@@ -1808,11 +1808,96 @@ main:
     parent: ci
     identifier: ci_troubleshooting
     weight: 6
+  - name: Database Monitoring
+    url: database_monitoring/
+    pre: nav_dbm
+    identifier: dbm
+    weight: 160000
+  - name: Setting Up Postgres
+    url: database_monitoring/setup_postgres/
+    parent: dbm
+    identifier: dbm_setup_postgres
+    weight: 1
+  - name: Self-hosted
+    url: database_monitoring/setup_postgres/selfhosted
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup_postgres/rds
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_rds
+    weight: 102
+  - name: Aurora
+    url: database_monitoring/setup_postgres/aurora
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_aurora
+    weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup_postgres/gcsql
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_gcsql
+    weight: 104
+  - name: Advanced Configuration
+    url: database_monitoring/setup_postgres/advanced_configuration
+    parent: dbm_setup_postgres
+    identifier: dbm_postgres_advanced_configuration
+    weight: 105
+  - name: Setting Up MySQL
+    url: database_monitoring/setup_mysql/
+    parent: dbm
+    identifier: dbm_setup_mysql
+    weight: 2
+  - name: Self-hosted
+    url: database_monitoring/setup_mysql/selfhosted
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup_mysql/rds
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_rds
+    weight: 102
+  - name: Aurora
+    url: database_monitoring/setup_mysql/aurora
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_aurora
+    weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup_mysql/gcsql
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_gcsql
+    weight: 104
+  - name: Advanced Configuration
+    url: database_monitoring/setup_mysql/advanced_configuration
+    parent: dbm_setup_mysql
+    identifier: dbm_mysql_advanced_configuration
+    weight: 105
+  - name: Data Collected
+    url: database_monitoring/data_collected
+    parent: dbm
+    identifier: dbm_data_collected
+    weight: 3
+  - name: Exploring Query Metrics
+    url: database_monitoring/query_metrics/
+    parent: dbm
+    identifier: dbm_query_metrics
+    weight: 4
+  - name: Exploring Query Samples
+    url: database_monitoring/query_samples/
+    parent: dbm
+    identifier: dbm_query_samples
+    weight: 5
+  - name: Troubleshooting
+    url: database_monitoring/troubleshooting/
+    parent: dbm
+    identifier: dbm_troubleshooting
+    weight: 6
   - name: Log Management
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 160000
+    weight: 170000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1969,7 +2054,7 @@ main:
     url: security_platform/
     pre: nav_security_monitoring
     identifier: security_platform
-    weight: 160000
+    weight: 180000
   - name: Security Monitoring
     url: security_platform/security_monitoring/
     parent: security_platform
@@ -2073,7 +2158,7 @@ main:
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 180000
+    weight: 190000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -2364,7 +2449,7 @@ main:
     url: network_monitoring/
     pre: nav_network
     identifier: nm_parent
-    weight: 190000
+    weight: 200000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -2429,7 +2514,7 @@ main:
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 200000
+    weight: 210000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -2536,12 +2621,12 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 210000
+    weight: 220000
   - name: Account Management
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 220000
+    weight: 230000
   - name: User management
     url: account_management/users/
     parent: account_management
@@ -2614,7 +2699,7 @@ main:
     url: security/
     pre: nav_security
     identifier: security
-    weight: 230000
+    weight: 240000
   - name: Agent
     url: security/agent/
     parent: security

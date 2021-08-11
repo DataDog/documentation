@@ -2,7 +2,6 @@
 title: Exploring Query Metrics
 kind: documentation
 description: Explore and dig into your database and query performance metrics
-private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
