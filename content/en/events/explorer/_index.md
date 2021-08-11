@@ -90,23 +90,23 @@ Target specific event properties using these prefixes:
 `@evt.name:foo`                
 : Show the event named `foo`.
 
-### Set Up Facets
+### Set up facets
 
-After being collected, your Events attributes can be indexed as facets or measures to be accessible for your context creation and analytics.
+After your events attributes are collected, Datadog indexes these attributes as facets or measures to be accessible for your content creation and analytics.
 
 A facet displays the distinct members of an attribute or a tag and provides basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
 {{< img src="events/explorer/facets-location.png" alt="Shows that the facets are on the left side of the screen next to the menu." >}}
 
-### Create a Facet
+### Create a facet
 
-To create a facet, user can use the “ADD Facet” button in facet left-side panel.
+To create a facet, use the “Add a facet” button in the left side panel.
 
-Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet panels as well as to group by in event monitors and graph widgets.
+Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet panels. You can also use it to group by in event monitors and graph widgets.
 
 ## Notifications
 
-Datadog supports `@notifications` in the message of events when posted by the API, for example:
+Datadog supports `@notifications` in the messages of events when posted by the API. For example:
 
 `@all`                                  
 : Sends a notification to all members of your organization.
@@ -125,7 +125,7 @@ Datadog supports `@notifications` in the message of events when posted by the AP
 
 ## Event Analytics
 
-Event Analytics extends the Events Explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
+Event Analytics extends the Events Explorer page with views, data aggregation, and split capabilities for troubleshooting and monitoring. You can control:
 
 - The query that filters the set of views to analyze.
 - The dimensions over which to split data.
@@ -133,15 +133,15 @@ Event Analytics extends the Events Explorer page with views data aggregation and
 
 From an analytics visualization, you can, additionally:
 - Create a widget in a dashboard out of that visualization.
-- Export the visualization into a notebook
+- Export the visualization into a notebook.
 
-### Build an Analytics Query
+### Build an analytics query
 
 Use the query to control what’s displayed in your Events Analytics.
 
 1. Choose an attribute or tag to graph, and then add it as a facet. Graphing a facet displays the unique count of the variable.
     {{< img src="events/explorer/split-graph.png" alt="Shows the list of facets that can be graphed." >}}
-2. Use a facet to split your graph
+2. Use a facet to split your graph.
     {{< img src="events/explorer/facet-to-graph.png" alt="Shows the list of facets that can be graphed." >}}
 3. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values. You can display the results as timeseries, table or toplist.
     {{< img src="events/explorer/time-interval.png" alt="Shows the list of possible time intervals, including the default, 5 seconds." >}}
