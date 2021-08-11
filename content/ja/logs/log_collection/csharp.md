@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/c-logging-guide/'
     tag: ブログ
     text: 'C# ログの収集、カスタマイズ、分析方法'
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/explorer/
@@ -409,7 +409,7 @@ using (var log = new LoggerConfiguration()
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /ja/logs/processing/attributes_naming_convention/#reserved-attributes
+[3]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -417,5 +417,5 @@ using (var log = new LoggerConfiguration()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/parsing/
+[1]: /ja/logs/log_configuration/parsing
 [2]: /ja/tracing/connect_logs_and_traces/dotnet/

@@ -28,9 +28,7 @@ before_script:
   - mkdir -p logs
 
 cache: &cache
-  key:
-    files:
-      - yarn.lock
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
   paths:
     - node_modules/
 
@@ -64,9 +62,6 @@ install_dependencies:
   only:
     changes:
       - yarn.lock
-  except:
-    # skip on automated translation prs
-    - /^guacbot\/translation-[0-9]+$/i
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site

@@ -16,51 +16,60 @@ further_reading:
       text: 'Examples of Custom Instrumentation'
 ---
 
-## Compatibility
 
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-- The .NET Tracer supports instrumentation on:
-  - .NET 5
-  - .NET Core 3.1
-  - .NET Core 2.1
+- The .NET Tracer library for Datadog is open source. For more information, see the [.NET Tracer repository][1].
 
-- .NET Tracer supports the following processor architectures
-  - Windows x86 (`win-x86`)
-  - Windows x64 (`win-x64`)
-  - Linux x64 (`linux-x64`)
-  - Alpine Linux x64 (`linux-musl-x64`)
-  - Linux ARM64 (`linux-arm64`) Added in version 1.27.0, automatic instrumentation only supported on .NET 5.
+## Supported .NET Core runtimes
+The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
 
-- The .NET Tracer library for Datadog is open-source. For more information see the [tracer Github repository][1].
+| Version              | Microsoft End of Life |
+| -------------------- | --------------------- |
+| .NET 5               |                       |
+| .NET Core 3.1        | 12/03/2022            |
+| .NET Core 2.1        | 08/21/2021            |
 
-<div class="alert alert-warning">
-  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
-</div>
+ Additional information on .NET Core support policy can be found within [Microsoft's .NET Core Lifecycle Policy][3]. 
+
+## Supported processor architectures
+The .NET Tracer supports automatic instrumentation on the following architectures:
+
+| Processor architectures                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------- |
+| Windows x86 (`win-x86`)                                                                                                       |
+| Windows x64 (`win-x64`)                                                                                                       |
+| Linux x64 (`linux-x64`)                                                                                                       |
+| Alpine Linux x64 (`linux-musl-x64`)                                                                                           |
+| Linux ARM64 (`linux-arm64`)<br><br>.NET 5 only, added in version 1.27.0 |
+
 
 ## Integrations
 
-The .NET Tracer can instrument the following libraries automatically:
+The [latest version of the .NET Tracer][4] can automatically instrument the following libraries:
 
-| Framework or library            | NuGet package                                                           | Integration Name     |
-|---------------------------------|-------------------------------------------------------------------------|----------------------|
-| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
-| ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
-| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
-| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
-| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
-| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
-| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
-| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
-| PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                | `RabbitMQ`           |
-| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                    | `ServiceRemoting`    |
+| Framework or library            | NuGet package                                                                             | Integration Name     |
+| ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                                     | `AdoNet`             |
+| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                   | `AspNetCore`         |
+| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0                                                     | `CosmosDb`           |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
+| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
+| Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
+| MySql                           | `MySql.Data` 6.7.0+                                                                       | `AdoNet`             |
+| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `AdoNet`             |
+| PostgreSQL                      | `Npgsql` 4.0+                                                                             | `AdoNet`             |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
+| Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                      | `ServiceRemoting`    |
+| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | `AdoNet`             |
+| WCF (server)                    | built-in                                                                                  | `Wcf`                |
+| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                | `WebRequest`         |
 
-<div class="alert alert-info">
-<strong>Note:</strong> The ADO.NET integration instruments calls made through the <code>DbCommand</code> abstract class or the <code>IDbCommand</code> interface, regardless of the underlying implementation. It also instruments direct calls to <code>SqlCommand</code>.
-</div>
-
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Out of support .NET Core versions
 
@@ -68,15 +77,17 @@ The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][4] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][5]        |
+| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
+| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet
-[2]: /help/
+[2]: /tracing/compatibility_requirements/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: https://github.com/dotnet/runtime/issues/23938
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
+[5]: /help/
+[6]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[7]: https://github.com/dotnet/runtime/issues/23938

@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Event monitors"
 aliases:
-    - /events/
+    - /developers/events/
 ---
 
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to progamatically send events:
