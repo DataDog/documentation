@@ -33,30 +33,30 @@ Datadog displays event attributes as JSON. You can click on an attribute to add 
 
 ### Options
 
-You can use the *Options* panel to customize your events explorer:
+You can use the *Options* panel to customize your Events Explorer:
 
 - Adjust the columns displayed.
 - Select list density depending on your needs.
-- Show absolute or relative timestamp - An absolute timestamp displays the difference between two periods of time. A relative timestamp expresses the absolute change as a percentage that the two periods of time represents.
+- Show absolute or relative timestamp. An absolute timestamp displays the time of the event in UTC (for example, `Aug 11 15:58.08.000`). A relative timestamp displays the time elapsed since the event and now (for example, `20 seconds ago`).
 - Show or hide tags in your results.
 - Show or hide the top timeline graph.
 
-## Time frame
+## Time range
 
-The time range appears directly under the search bar as a timeline. This feature allows you to display events in the explorer or analytics within a given period.
+A time range appears directly under the search bar as a timeline. This feature allows you to display events in the Explorer or Analytics within a given time period.
 
-Quickly change the time range by selecting a preset range from the dropdown (or entering a custom time frame)
+You can change the time range by selecting a preset range from the dropdown, or by entering a custom time range.
 
-All of the search parameters are contained within the URL. So, you can share your view by sharing the URL.
+Because all search parameters are contained within the URL, you can share your view by sharing the URL.
 
 ## Search syntax
 
-Events search uses [log search syntax][1], for example, `Source:github OR chef`. Events search includes:
+Events search uses the [logs search syntax][1]: for example, `source:(github OR chef)`. Like logs search, events search includes:
 
-- Use both `AND` and `OR` operators
-- Use wildcards
+- Use of both `AND` and `OR` operators
+- Use of wildcards
 - Escape characters
-- Search within attributes with “@” prefix
+- Search within attributes with the `@` prefix
 
 ### Full-text
 
