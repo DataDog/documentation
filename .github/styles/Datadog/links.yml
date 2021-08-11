@@ -6,3 +6,6 @@ scope: link
 level: error
 tokens:
   - here
+  - documentation
+  - this
+  - page

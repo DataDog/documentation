@@ -19,7 +19,7 @@
 "is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@launchdarkly"
-"manifest_version": "1.0.1"
+"manifest_version": "1.0.0"
 "metric_prefix": "launchdarkly_relay."
 "metric_to_check": "launchdarkly_relay.connections_env_platformCategory_userAgent"
 "name": "launchdarkly"

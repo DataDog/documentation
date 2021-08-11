@@ -8,10 +8,6 @@ further_reading:
   text: "Learn more about Datadog Cloud Runtime Security"
 ---
 
-<div class="alert alert-warning">
-Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
-</div>
-
 ## Overview
 
 There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:

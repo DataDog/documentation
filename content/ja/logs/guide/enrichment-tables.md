@@ -3,10 +3,10 @@ title: エンリッチメントテーブルを含むログにカスタムメタ�
 kind: ガイド
 beta: true
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法について
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
 ---
@@ -77,4 +77,4 @@ S3 からエンリッチメントテーブルを更新するために、Datadog 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/processors/?tab=ui#lookup-processor
+[1]: /ja/logs/log_configuration/processors/#lookup-processor
