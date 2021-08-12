@@ -163,13 +163,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Riak チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "riak" >}}
 
-**riak.can_connect**:<br>
-Agent が Riak 統計エンドポイントに接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png

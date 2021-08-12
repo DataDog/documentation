@@ -181,11 +181,9 @@ Logstash チェックは、Logstash バージョン 5.x、6.x および 7.x と�
 
 Logstash チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
+{{< get-service-checks-from-git "logstash" >}}
 
-`logstash.can_connect`:
-
-Agent が Logstash に接続してメトリクスを収集できない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
@@ -200,7 +198,8 @@ Agent が Logstash に接続してメトリクスを収集できない場合は�
 
 `conf.yaml` 内の `url` が正しいかどうかを確認してください。
 
-それでも解決できない場合は、[Datadog のサポートチーム][19]までお問合せください。
+解決できない場合は、[Datadog のサポートチーム][23]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -220,4 +219,5 @@ Agent が Logstash に接続してメトリクスを収集できない場合は�
 [16]: https://app.datadoghq.com/infrastructure
 [17]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [18]: https://github.com/DataDog/integrations-extras/blob/master/logstash/metadata.csv
-[19]: http://docs.datadoghq.com/help
+[19]: https://github.com/DataDog/integrations-extras/blob/master/logstash/assets/service_checks.json
+[20]: http://docs.datadoghq.com/help
