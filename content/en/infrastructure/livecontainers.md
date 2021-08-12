@@ -139,7 +139,7 @@ The following table presents the list of collected resources and the minimal Age
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
 | Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| DaemonSets | 7.27.0 | 1.14.0 | 2.20.0 |
+| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
