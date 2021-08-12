@@ -41,7 +41,7 @@ You can also identify Datadog robots by using some of the **default headers** at
 
 ### `user-agent`
 
-By default a `user-agent` header is added to all requests performed by Synthetic tests. Any custom `user-agent` added in the test will override the default one.
+By default, a `user-agent` header is added to all requests performed by Synthetic tests. Any custom `user-agent` added in the test overrides the default one.
 
 {{< tabs >}}
 {{% tab "Single and multistep API tests" %}}
