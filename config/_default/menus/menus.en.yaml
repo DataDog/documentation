@@ -801,21 +801,11 @@ main:
     identifier: events_top_level
     pre: nav_events
     weight: 60000
-  - name: Stream
-    url: events/stream/
-    identifier: event_stream
-    parent: events_top_level
-    weight: 1
-  - name: Explorer
-    url: events/explorer/
-    identifier: event_explorer
-    parent: events_top_level
-    weight: 2
   - name: Guides
     url: events/guides/
     identifier: events_guides
     parent: events_top_level
-    weight: 3
+    weight: 1
   - name: Dashboards
     url: dashboards/
     pre: nav_dashboards
