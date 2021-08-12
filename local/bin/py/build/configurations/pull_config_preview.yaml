@@ -177,7 +177,7 @@
         front_matters:
           title: SaltStack
           kind: documentation
-          dependencies: ["https://github.com/DataDog/datadog-formula/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
 
   - repo_name: dd-trace-rb
     contents:
