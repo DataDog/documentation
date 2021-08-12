@@ -34,7 +34,9 @@ Datadog で [Amazon Web Services インテグレーション][1]がセットア�
 
 ### メトリクスの収集
 
-`aws.vpc.flowlogs.*` 以外の AWS VPC メトリクスを収集するための追加の手順は必要ありません。`aws.vpc.flowlogs.*` で始まるメトリクスは、[Datadog VPC Flow Logs][2] インテグレーションによって生成されます。フローログメトリクスの収集を有効にする方法については、以下を参照してください。
+`aws.vpc.flowlogs.*` 以外の AWS VPC メトリクスを収集するための追加の手順は必要ありません。`aws.vpc.flowlogs.*` で始まるメトリクスは、[Datadog VPC Flow Logs][2] インテグレーションによって生成されます。フローログメトリクスの収集を有効にする方法については、[ログ収集](#log-collection)セクションを参照してください。
+
+`aws.vpc.subnet.*` メトリクスについては [Datadog サポート][3]にお問い合わせいただき、お使いのアカウントでの収集を有効化してください。
 
 ### ログの収集
 
@@ -50,9 +52,9 @@ VPC フローログは、S3 バケットまたは CloudWatch ロググループ�
 
 **注**: Lambda が自動的に `vpc` ソースをログに設定するようにするには、S3 ファイル名または CloudWatch ロググループ名のプレフィックスとして `vpc` を指定します。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][3] をまだセットアップしていない場合は、これをセットアップします
+1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 
 2. Lambda 関数がインストールされたら、AWS コンソールから Amazon VPC フローログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。次に、Lambda のトリガー一覧で S3 または CloudWatch をクリックします。
 
@@ -62,7 +64,7 @@ VPC フローログは、S3 バケットまたは CloudWatch ロググループ�
 
     {{< img src="integrations/amazon_vpc/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガー" style="width:75%;" >}}
 
-終了したら、[Datadog ログエクスプローラー][4]を使用してログを確認します。
+終了したら、[Datadog ログエクスプローラー][5]を使用してログを確認します。
 
 ## 収集データ
 
@@ -82,11 +84,11 @@ AWS VPC インテグレーションには、サービスのチェック機能は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
-[4]: https://docs.datadoghq.com/ja/logs/explorer/
-[5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/ja/logs/explorer/
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv

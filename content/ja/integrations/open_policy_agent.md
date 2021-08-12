@@ -152,27 +152,18 @@ open_policy_agent チェックを Kubernetes クラスターにインストー�
 {{< get-metrics-from-git "open_policy_agent" >}}
 
 
-### サービスのチェック
-
-**`open_policy_agent.prometheus.health`**:<br>
-Agent が Prometheus エンドポイントへの接続に失敗した場合は、CRITICAL を返します。それ以外の場合は、UP を返します。
-
-**`open_policy_agent.health`**:<br>
-Agent が OPA ヘルスエンドポイントへの接続に失敗した場合は、`CRITICAL` を返します。200 を受信した場合は `OK`、それ以外の場合は `WARNING` を返します。
-
-**`open_policy_agent.bundles_health`**:<br>
-Agent が OPA バンドルのヘルスエンドポイントへの接続に失敗した場合は `CRITICAL` を返します。200 を受信した場合は `OK`、それ以外の場合は `WARNING` を返します。
-
-**`open_policy_agent.plugins_health`**:<br>
-Agent が OPA プラグインのヘルスエンドポイントへの接続に失敗した場合は、`CRITICAL` を返します。200 を受信した場合は `OK`、それ以外の場合は `WARNING` を返します。
-
 ### イベント
 
 open_policy_agent には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "open_policy_agent" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
 
 [1]: https://www.openpolicyagent.org/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -186,4 +177,5 @@ open_policy_agent には、イベントは含まれません。
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/open_policy_agent/metadata.csv
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help/
