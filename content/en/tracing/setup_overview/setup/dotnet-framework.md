@@ -149,7 +149,7 @@ To use custom instrumentation in your .NET application:
 1. Add the `Datadog.Trace` [NuGet package][5] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][6].
+For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation][6] documentation.
 
 ## Configuration
 
