@@ -1,12 +1,22 @@
 import Cookies from 'js-cookie';
 import { loadPage } from './async-loading'; // eslint-disable-line import/no-cycle
 
-function addCodeTabEventListeners() {
-    const codeLinks = document.querySelectorAll('.js-code-example-link');
-    if (codeLinks.length) {
-        codeLinks.forEach((codeLink) => {
-            codeLink.addEventListener('click', codeLangTabClickHandler);
-        });
+function toggleCodeBlockVisibility(event) {
+    const codeSnippetWrapper = event.target.closest('.code-snippet-wrapper');
+    const codeSnippet = codeSnippetWrapper.querySelector('.code-snippet');
+    const chevronUp = codeSnippetWrapper.querySelector('.chevron-up');
+    const chevronDown = codeSnippetWrapper.querySelector('.chevron-down');
+
+    if (codeSnippet && chevronUp && chevronDown) {
+        if (!codeSnippet.classList.contains('d-none')) {
+            codeSnippet.classList.add('d-none');
+            chevronUp.classList.add('d-none');
+            chevronDown.classList.remove('d-none');
+        } else {
+            codeSnippet.classList.remove('d-none');
+            chevronUp.classList.remove('d-none');
+            chevronDown.classList.add('d-none');
+        }
     }
 }
 
@@ -15,25 +25,18 @@ function addCodeBlockVisibilityToggleEventListeners() {
 
     if (jsCodeBlockVisibilityToggleList.length) {
         jsCodeBlockVisibilityToggleList.forEach(toggleElement => {
-            toggleElement.addEventListener('click', (event) => {
-                const wrapper = event.target.closest('.code-snippet-wrapper');
-                const codeSnippet = wrapper.querySelector('.code-snippet');
-                const chevronUp = wrapper.querySelector('.chevron-up');
-                const chevronDown = wrapper.querySelector('.chevron-down');
-                
-                if (codeSnippet && chevronUp && chevronDown) {
-                    if (!codeSnippet.classList.contains('d-none')) {
-                        codeSnippet.classList.add('d-none');
-                        chevronUp.classList.add('d-none');
-                        chevronDown.classList.remove('d-none');
-                    } else {
-                        codeSnippet.classList.remove('d-none');
-                        chevronUp.classList.remove('d-none');
-                        chevronDown.classList.add('d-none');
-                    }
-                }
-            })
+            toggleElement.addEventListener('click', toggleCodeBlockVisibility);
         })
+    }
+}
+
+function addCodeTabEventListeners() {
+    const codeLinks = document.querySelectorAll('.js-code-example-link');
+    
+    if (codeLinks.length) {
+        codeLinks.forEach((codeLink) => {
+            codeLink.addEventListener('click', codeLangTabClickHandler);
+        });
     }
 }
 
