@@ -24,7 +24,7 @@ Datadog classifies an _event_ as any notable changes relevant for managing IT op
 <div class="alert alert-warning">
   The Events Explorer is in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="https://docs.datadoghq.com/events/stream/">Events Stream documentation</a>.</div>
 
-The [Datadog Events Explorer][2] gives you an instant view of what happened in your infrastructure and services to help you troubleshoot any issue happening right now - or in the past.”
+The [Datadog Events Explorer][2] gives you an instant view of what happened in your infrastructure and services to help you troubleshoot any issue happening right now - or in the past.
 
 It works out of the box, by gathering events automatically collected via the Agent or installed integrations, without any additional setup.
 
