@@ -279,38 +279,26 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 {{< /tabs >}}
 
-## Custom instrumentation
+### Configure the Datadog Agent for APM
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
-</div>
-
-To use custom instrumentation in your .NET application:
-1. Add the `Datadog.Trace` [NuGet package][2] to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][3].
-
-## Install and configure the Agent for APM
-
-[Install the Datadog Agent][4] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
 
 {{< tabs >}}
 
 {{% tab "Containers" %}}
 
-1. If the Agent is running on a different host or container, set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. While it is instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting these environment variables:
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
 
-    - `DD_AGENT_HOST`
-    - `DD_TRACE_AGENT_PORT`
-    
+    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+    See [configure the tracer](#configure-the-tracer) for more information on how to set these variables.
 {{< site-region region="us3,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
@@ -329,7 +317,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 [1]: /tracing/serverless_functions/
 {{% /tab %}}
 
-{{% tab "Azure App Services Extension" %}}
+{{% tab "Azure App Service" %}}
 
 To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services Extension][1] documentation.
 
@@ -352,6 +340,18 @@ For other environments, please refer to the [Integrations][4] documentation for 
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Custom instrumentation
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+</div>
+
+To use custom instrumentation in your .NET application:
+1. Add the `Datadog.Trace` [NuGet package][2] to your application.
+2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+
+For more details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][3].
 
 ## Configure the tracer
 
@@ -455,7 +455,7 @@ Using the methods described above, customize your tracing configuration with the
 
 #### Unified Service Tagging
 
-To use [Unified Service Tagging][5], configure the following settings for your services:
+To use [Unified Service Tagging][4], configure the following settings for your services:
 
 `DD_ENV`
 : **TracerSettings property**: `Environment`<br>
@@ -540,7 +540,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames`<br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][5] section.
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
@@ -561,7 +561,7 @@ Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) 
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled`<br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][6] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][5] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -585,6 +585,5 @@ The following configuration variables are for features that are available for us
 [1]: /tracing/setup_overview/compatibility_requirements/dotnet-core
 [2]: https://www.nuget.org/packages/Datadog.Trace
 [3]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[4]: /agent/basic_agent_usage/
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
