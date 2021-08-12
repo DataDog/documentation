@@ -19,7 +19,7 @@ Custom metrics submitted from Lambda functions are aggregated as [distributions]
 
 ## Creating custom metrics from logs or traces
 
-With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. Learn more about creating log-based metrics [here][4].
+With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. [Learn more about creating log-based metrics][4].
 
 You can also generate metrics from 100% of ingested spans, regardless of whether they are indexed by a retention filter. Learn more about creating span-based metrics [here][5].
 ## With the Datadog Lambda Extension
