@@ -11,7 +11,7 @@ This error usually indicates an issue with the trust policy associated with the 
 
 Check the following points for the AWS account mentioned in the error:
 
-1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role via CLoudformation, the default IAM role name is set to [DatadogIntegrationRole][4].
+1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using Cloudformation, the default IAM role name is set to [DatadogIntegrationRole][4].
     {{< img src="integrations/faq/aws-error-sts-assume-role-04.png" alt="AWS Create IAM Role - Review" >}}
 
 2. Ensure Datadog's account ID `464622532012` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
