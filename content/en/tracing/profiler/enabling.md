@@ -19,9 +19,9 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog'
 ---
 
-Profiler is shipped within the following tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling profiler.
+The profiler is shipped within the following tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
-Select your language below to learn how to enable profiler for your application:
+Select your language below to learn how to enable a profiler for your application:
 
 To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][2].
 
