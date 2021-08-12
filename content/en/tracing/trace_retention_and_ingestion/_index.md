@@ -49,6 +49,8 @@ In addition to the 'Spans Indexed' column per retention filter, there is also th
 
 For more information, refer to the [Usage Metrics][1] documentation, or see the [dashboard][3] available in your account.
 
+<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). The only way to change how much tracing data is ingested is through <a href="#ingestion-controls">ingestion controls</a>.</div>
+
 ### Datadog intelligent retention filter
 
 Intelligent retention is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][4] are indexed for the traces kept by the intelligent retention filter.

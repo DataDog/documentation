@@ -52,7 +52,7 @@ If you are currently using Docker, there are several container images available 
 [4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
 [5]: /agent/cluster_agent/
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
-[7]: /getting_started/synthetics/private_location.md
+[7]: /getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
 
 {{% /tab %}}

@@ -231,9 +231,8 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 FluentD チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "fluentd" >}}
 
-**fluentd.is_ok**:<br>
-Agent が FluentD に接続してメトリクスを収集できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

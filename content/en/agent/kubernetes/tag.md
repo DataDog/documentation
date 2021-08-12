@@ -23,49 +23,56 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 The Agent can autodiscover and attach tags to all data emitted by the entire pods or an individual container within this pod. The list of tags attached automatically depends on the agent [cardinality configuration][1].
 
-| Tag                           | Cardinality  | Source                                                                  | Requirement                                         |
-|-------------------------------|--------------|-------------------------------------------------------------------------|-----------------------------------------------------|
-| `container_id`                | High         | Pod status                                                              | N/A                                                 |
-| `display_container_name`      | High         | Pod status                                                              | N/A                                                 |
-| `pod_name`                    | Orchestrator | Pod metadata                                                            | N/A                                                 |
-| `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                           | OpenShift environment and pod annotation must exist |
-| `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                            | Pod must have an owner                              |
-| `kube_job`                    | Orchestrator | Pod ownerref                                                            | Pod must be attached to a job                       |
-| `kube_replica_set`            | Orchestrator | Pod ownerref                                                            | Pod must be attached to a replica set               |
-| `kube_service`                | Orchestrator | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
-| `kube_daemon_set`             | Low          | Pod ownerref                                                            | Pod must be attached to a DaemonSet                 |
-| `kube_container_name`         | Low          | Pod status                                                              | N/A                                                 |
-| `kube_namespace`              | Low          | Pod metadata                                                            | N/A                                                 |
-| `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                      | Pod label must exist                                |
-| `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                  | Pod label must exist                                |
-| `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                   | Pod label must exist                                |
-| `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                 | Pod label must exist                                |
-| `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                   | Pod label must exist                                |
-| `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                | Pod label must exist                                |
-| `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | [Unified service tagging][2] enabled                |
-| `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | [Unified service tagging][2] enabled                |
-| `service`                     | Low          | Pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | [Unified service tagging][2] enabled                |
-| `pod_phase`                   | Low          | Pod status                                                              | N/A                                                 |
-| `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                    | OpenShift environment and pod annotation must exist |
-| `kube_ownerref_kind`          | Low          | Pod ownerref                                                            | Pod must have an owner                              |
-| `kube_deployment`             | Low          | Pod ownerref                                                            | Pod must be attached to a deployment                |
-| `kube_replication_controller` | Low          | Pod ownerref                                                            | Pod must be attached to a replication controller    |
-| `kube_stateful_set`           | Low          | Pod ownerref                                                            | Pod must be attached to a statefulset               |
-| `persistentvolumeclaim`       | Low          | Pod spec                                                                | A PVC must be attached to the pod                   |
-| `kube_cronjob`                | Low          | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
-| `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
-| `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
-| `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
+<div style="overflow-x: auto;">
+
+  | Tag                           | Cardinality  | Source                                                                  | Requirement                                         |
+  |-------------------------------|--------------|-------------------------------------------------------------------------|-----------------------------------------------------|
+  | `container_id`                | High         | Pod status                                                              | N/A                                                 |
+  | `display_container_name`      | High         | Pod status                                                              | N/A                                                 |
+  | `pod_name`                    | Orchestrator | Pod metadata                                                            | N/A                                                 |
+  | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                           | OpenShift environment and pod annotation must exist |
+  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                            | Pod must have an owner                              |
+  | `kube_job`                    | Orchestrator | Pod ownerref                                                            | Pod must be attached to a job                       |
+  | `kube_replica_set`            | Orchestrator | Pod ownerref                                                            | Pod must be attached to a replica set               |
+  | `kube_service`                | Orchestrator | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
+  | `kube_daemon_set`             | Low          | Pod ownerref                                                            | Pod must be attached to a DaemonSet                 |
+  | `kube_container_name`         | Low          | Pod status                                                              | N/A                                                 |
+  | `kube_namespace`              | Low          | Pod metadata                                                            | N/A                                                 |
+  | `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                      | Pod label must exist                                |
+  | `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                  | Pod label must exist                                |
+  | `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                   | Pod label must exist                                |
+  | `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                 | Pod label must exist                                |
+  | `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                   | Pod label must exist                                |
+  | `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                | Pod label must exist                                |
+  | `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | [Unified service tagging][2] enabled                |
+  | `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | [Unified service tagging][2] enabled                |
+  | `service`                     | Low          | Pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | [Unified service tagging][2] enabled                |
+  | `pod_phase`                   | Low          | Pod status                                                              | N/A                                                 |
+  | `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                    | OpenShift environment and pod annotation must exist |
+  | `kube_ownerref_kind`          | Low          | Pod ownerref                                                            | Pod must have an owner                              |
+  | `kube_deployment`             | Low          | Pod ownerref                                                            | Pod must be attached to a deployment                |
+  | `kube_replication_controller` | Low          | Pod ownerref                                                            | Pod must be attached to a replication controller    |
+  | `kube_stateful_set`           | Low          | Pod ownerref                                                            | Pod must be attached to a statefulset               |
+  | `persistentvolumeclaim`       | Low          | Pod spec                                                                | A PVC must be attached to the pod                   |
+  | `kube_cronjob`                | Low          | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
+  | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
+  | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
+  | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
+
+</div>
 
 ### Host tag
 
 The Agent can attach Kubernetes environment information as "host tags".
 
-| Tag                 | Cardinality | Source                                                 | Requirement                                                    |
-|---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
-| `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
-| `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
+<div style="overflow-x: auto;">
 
+  | Tag                 | Cardinality | Source                                                 | Requirement                                                    |
+  |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
+  | `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
+  | `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
+
+</div>
 
 ## Tag Autodiscovery
 

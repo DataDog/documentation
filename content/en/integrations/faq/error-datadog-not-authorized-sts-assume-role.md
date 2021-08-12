@@ -7,11 +7,11 @@ further_reading:
   text: "AWS Datadog installation"
 ---
 
-This error usually indicates an issue with the trust policy associated with the `DatadogAWSIntegrationRole`. Most of the time, this issue is caused by the [role delegation process][1].
+This error usually indicates an issue with the trust policy associated with the Datadog integration role. Most of the time, this issue is caused by the [role delegation process][1].
 
 Check the following points for the AWS account mentioned in the error:
 
-1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail:
+1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][4].
     {{< img src="integrations/faq/aws-error-sts-assume-role-04.png" alt="AWS Create IAM Role - Review" >}}
 
 2. Ensure Datadog's account ID `464622532012` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
@@ -32,6 +32,7 @@ Still need help? Contact [Datadog support][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/#installation
+[1]: /integrations/amazon_web_services/?tab=roledelegation#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: /help/
+[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml

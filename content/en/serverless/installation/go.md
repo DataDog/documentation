@@ -57,7 +57,7 @@ The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extensi
 
 Follow these steps to instrument the function:
 
-1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4]. 
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
@@ -76,9 +76,9 @@ Follow these steps to instrument the function:
     ```go
     func main() {
       // Wrap your lambda handler like this
-      lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
       /* OR with manual configuration options
-      lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
         BatchInterval: time.Second * 15
         APIKey: "my-api-key",
       }))
@@ -127,7 +127,7 @@ import (
 
 func main() {
   // Wrap your handler function
-  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
 }
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
@@ -145,7 +145,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     time.Now(), // Timestamp, must be within last 20 mins
     "product:latte", "order:online" // Associated tags
   )
-  
+
   req, err := http.NewRequest("GET", "http://example.com/status")
 
   // Add the datadog distributed tracing headers
