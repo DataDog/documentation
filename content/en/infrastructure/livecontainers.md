@@ -138,7 +138,8 @@ The following table presents the list of collected resources and the minimal Age
 | ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
 | Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| Cronjobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| DaemonSets | 7.27.0 | 1.14.0 | 2.20.0 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -202,6 +203,7 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
         resources:
         - deployments
         - replicasets
+        - statefulsets
         verbs:
         - list
         - get
@@ -395,7 +397,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
