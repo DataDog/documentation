@@ -20,7 +20,7 @@ further_reading:
     text: "Runtime metrics"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
-    text: "Microsoft Azure App Services extension"
+    text: "Microsoft Azure App Service extension"
   - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
@@ -331,7 +331,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 
 {{% tab "Azure App Service" %}}
 
-To set up Datadog APM in Azure App Service, see the [Tracing Azure App Services Extension][1] documentation.
+To set up Datadog APM in Azure App Service, see the [Tracing Azure App Service Extension][1] documentation.
 
 
 [1]: /serverless/azure_app_services/

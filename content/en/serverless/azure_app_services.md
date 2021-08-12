@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure App Services Extension
+title: Microsoft Azure App Service Extension
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
