@@ -89,15 +89,13 @@ export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.
 {{< get-metrics-from-git "flume" >}}
 
 
-### サービスのチェック
-
-**flume.can_connect**:
-
-Agent が監視対象の Flume インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Flume には、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "flume" >}}
+
 
 ## トラブルシューティング
 
@@ -117,3 +115,4 @@ Flume には、イベントは含まれません。
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [13]: https://github.com/DataDog/integrations-extras/blob/master/flume/metadata.csv
+[14]: https://github.com/DataDog/integrations-extras/blob/master/flume/assets/service_checks.json
