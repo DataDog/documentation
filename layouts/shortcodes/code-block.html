@@ -1,4 +1,4 @@
-{{ $filename := (.Get ("filename") | default "Code Example") }}
+{{ $filename := (.Get ("filename")) | default "Code Example" }}
 {{ $lang := (.Get ("lang")) }}
 {{ $code := trim .Inner "\n"}}
 {{ $wrap := (.Get ("wrap"))}}
@@ -10,10 +10,10 @@
 
 {{/*  This html should not be formatted differently as it will cause issues when used inside of another shortcode (like tabs)  */}}
 <div class="code-snippet-wrapper">
-<div class="code-filename-wrapper">
+<div class="code-filename-wrapper d-flex justify-content-between">
 <p class="code-filename my-0">{{ $filename }}</p>
-<div class="js-code-block-toggle">
-<div class="chevron chevron-down"></div>
+<div class="js-code-block-visibility-toggle">
+<div class="chevron chevron-down d-none"></div>
 <div class="chevron chevron-up"></div>
 </div>
 </div>

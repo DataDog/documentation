@@ -10,6 +10,33 @@ function addCodeTabEventListeners() {
     }
 }
 
+function addCodeBlockVisibilityToggleEventListeners() {
+    const jsCodeBlockVisibilityToggleList = document.querySelectorAll('.js-code-block-visibility-toggle');
+
+    if (jsCodeBlockVisibilityToggleList.length) {
+        jsCodeBlockVisibilityToggleList.forEach(toggleElement => {
+            toggleElement.addEventListener('click', (event) => {
+                const wrapper = event.target.closest('.code-snippet-wrapper');
+                const codeSnippet = wrapper.querySelector('.code-snippet');
+                const chevronUp = wrapper.querySelector('.chevron-up');
+                const chevronDown = wrapper.querySelector('.chevron-down');
+                
+                if (codeSnippet && chevronUp && chevronDown) {
+                    if (!codeSnippet.classList.contains('d-none')) {
+                        codeSnippet.classList.add('d-none');
+                        chevronUp.classList.add('d-none');
+                        chevronDown.classList.remove('d-none');
+                    } else {
+                        codeSnippet.classList.remove('d-none');
+                        chevronUp.classList.remove('d-none');
+                        chevronDown.classList.add('d-none');
+                    }
+                }
+            })
+        })
+    }
+}
+
 function redirectCodeLang(codeLang = '') {
     let newCodeLang = codeLang;
 
@@ -73,6 +100,7 @@ function codeLangTabClickHandler(event) {
 }
 
 addCodeTabEventListeners();
+addCodeBlockVisibilityToggleEventListeners();
 
 function activateCodeLangNav(activeLang) {
     const codeLinks = document.querySelectorAll('.js-code-example-link');
@@ -181,4 +209,4 @@ function toggleMultiCodeLangNav(codeLang) {
 
 toggleMultiCodeLangNav(Cookies.get('code-lang') || '');
 
-export { redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav, toggleMultiCodeLangNav };
+export { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav };
