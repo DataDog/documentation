@@ -203,7 +203,7 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
         resources:
         - deployments
         - replicasets
-        - statefulsets
+        - daemonsets
         verbs:
         - list
         - get
