@@ -2594,6 +2594,9 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
+  - name: Troubleshooting
+    url: account_management/saml/troubleshooting/
+    weight: 408
   - name: Multi-org accounts
     url: account_management/multi_organization/
     parent: account_management
