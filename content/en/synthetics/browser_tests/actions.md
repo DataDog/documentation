@@ -263,7 +263,15 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### Global variable
 
-Pick any global variables that was defined through [Synthetic  Monitoring Settings][7].
+Pick any global variables defined in [Synthetic Monitoring Settings][7].
+
+#### Global variable - MFA
+
+Pick any MFA global variables defined in [Synthetic Monitoring Settings][7].
+
+This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows.
+
+For more information about TOTP-based MFA in a browser test, see this [TOTP guide][14].
 
 #### Email
 
@@ -374,3 +382,4 @@ Some variables only get computed at runtime (for example, a variable from HTTP r
 [11]: /synthetics/browser_tests/advanced_options/#subtests
 [12]: https://restfulapi.net/json-jsonpath/
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: /synthetics/guide/browser-tests-totp

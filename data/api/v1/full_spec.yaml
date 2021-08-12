@@ -1845,6 +1845,14 @@ components:
           format: int64
           readOnly: true
           type: integer
+        id_str:
+          description: 'Handling IDs as large 64-bit numbers can cause loss of accuracy
+            issues with some programming languages.
+
+            Instead, use the string representation of the Event ID to avoid losing
+            accuracy.'
+          readOnly: true
+          type: string
         payload:
           description: Payload of the event.
           example: '{}'
@@ -2339,6 +2347,7 @@ components:
       - last
       - area
       - l2norm
+      - percentile
       example: avg
       type: string
       x-enum-varnames:
@@ -2349,6 +2358,7 @@ components:
       - LAST
       - AREA
       - L2NORM
+      - PERCENTILE
     FormulaAndFunctionMetricDataSource:
       description: Data source for metrics queries.
       enum:
@@ -3495,11 +3505,13 @@ components:
       enum:
       - issue_stream
       - logs_stream
+      - audit_stream
       example: issue_stream
       type: string
       x-enum-varnames:
       - ISSUE_STREAM
       - LOGS_STREAM
+      - AUDIT_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -5500,13 +5512,29 @@ components:
           format: int64
           nullable: true
           type: integer
+        new_group_delay:
+          description: 'Time (in seconds) to skip evaluations for new groups.
+
+
+            For example, this option can be used to skip evaluations for new hosts
+            while they initialize.
+
+
+            Must be a non negative integer.'
+          format: int64
+          nullable: true
+          type: integer
         new_host_delay:
           default: 300
+          deprecated: true
           description: 'Time (in seconds) to allow a host to boot and applications
 
             to fully start before starting the evaluation of monitor results.
 
-            Should be a non negative integer.'
+            Should be a non negative integer.
+
+
+            Use new_group_delay instead.'
           format: int64
           nullable: true
           type: integer
@@ -7693,7 +7721,8 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            uptime time series.
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
           items:
             description: Represents an array time series data.
             example:
@@ -8091,7 +8120,7 @@ components:
       description: Updated scatter plot.
       properties:
         aggregator:
-          $ref: '#/components/schemas/WidgetAggregator'
+          $ref: '#/components/schemas/ScatterplotWidgetAggregator'
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
@@ -8172,6 +8201,21 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    ScatterplotWidgetAggregator:
+      description: Aggregator used for the request.
+      enum:
+      - avg
+      - last
+      - max
+      - min
+      - sum
+      type: string
+      x-enum-varnames:
+      - AVERAGE
+      - LAST
+      - MAXIMUM
+      - MINIMUM
+      - SUM
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -10012,6 +10056,9 @@ components:
       - firefox.laptop_large
       - firefox.tablet
       - firefox.mobile_small
+      - edge.laptop_large
+      - edge.tablet
+      - edge.mobile_small
       type: string
       x-enum-varnames:
       - LAPTOP_LARGE
@@ -10023,6 +10070,9 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+      - EDGE_LAPTOP_LARGE
+      - EDGE_TABLET
+      - EDGE_MOBILE_SMALL
     SyntheticsErrorCode:
       description: Error code that can be returned by a Synthetic test.
       enum:
@@ -13778,6 +13828,7 @@ components:
       - max
       - min
       - sum
+      - percentile
       type: string
       x-enum-varnames:
       - AVERAGE
@@ -13785,6 +13836,7 @@ components:
       - MAXIMUM
       - MINIMUM
       - SUM
+      - PERCENTILE
     WidgetAxis:
       description: Axis controls for the widget.
       properties:

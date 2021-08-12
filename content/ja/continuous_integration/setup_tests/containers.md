@@ -2,14 +2,12 @@
 title: コンテナでのテスト
 kind: documentation
 ---
+ビルド内で自分で起動したコンテナ内でテストを実行する場合 (たとえば、[`docker run`][1] または [`docker-compose`][2] を使用)、使用している CI プロバイダーに応じて以下の環境変数をコンテナに転送します。これにより、Datadog トレーサーによるビルド情報の自動検出が可能になります。
 
-ビルド内で自分で起動したコンテナ内でテストを実行する場合 (例えば、Docker Composeファイルからなど)、使用している CI プロバイダーに応じて以下の環境変数を転送し、Datadog トレーサーがビルド情報を自動検出できるようにします。
+さらに、[言語別のテストインスツルメンテーション手順][3]に記載されているとおり、トレーサーの構成に必要な環境変数で渡す必要があります (`DD_SERVICE`、`DD_ENV`、およびコンテナ内からアクセス可能な、有効な `DD_TRACE_AGENT_URL` など)。
 
-また、Datadog トレーサー (`DD_SERVICE` や `DD_AGENT_HOST` など) の構成に使用したすべての環境変数を転送します。
-
-CI プロバイダー自身がコンテナを起動する場合、環境変数の転送は不要です。この場合はすべての環境変数が設定され、トレーサーで利用できる状態になるためです。
-
-## [Appveyor][1]
+{{< tabs >}}
+{{% tab "AppVeyor" %}}
 
 - `APPVEYOR`
 - `APPVEYOR_BUILD_ID`
@@ -22,7 +20,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `APPVEYOR_REPO_TAG_NAME`
 - `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`
 
-## [Azure pipelines][2]
+[AppVeyor により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://www.appveyor.com/docs/environment-variables/
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
 
 - `TF_BUILD`
 - `BUILD_DEFINITIONNAME`
@@ -41,7 +44,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `SYSTEM_PULLREQUEST_SOURCEBRANCH`
 - `SYSTEM_PULLREQUEST_SOURCECOMMITID`
 
-## [BitBucket][3]
+[Azure Pipelines により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
 
 - `BITBUCKET_PIPELINE_UUID`
 - `BITBUCKET_BUILD_NUMBER`
@@ -52,7 +60,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `BITBUCKET_BRANCH`
 - `BITBUCKET_TAG`
 
-## [BuildKite][4]
+[Bitbucket Pipelines により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
+{{% /tab %}}
+{{% tab "Buildkite" %}}
 
 - `BUILDKITE`
 - `BUILDKITE_PIPELINE_SLUG`
@@ -66,8 +79,13 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `BUILDKITE_BRANCH`
 - `BUILDKITE_TAG`
 
-## [CircleCI][5]
-`
+[Buildkite により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://buildkite.com/docs/pipelines/environment-variables
+{{% /tab %}}
+{{% tab "CircleCI" %}}
+
 - `CIRCLECI`
 - `CIRCLE_PROJECT_REPONAME`
 - `CIRCLE_BUILD_NUM`
@@ -79,7 +97,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `CIRCLE_BRANCH`
 - `CIRCLE_TAG`
 
-## [GitHub Actions][6]
+[CircleCI により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
 - `GITHUB_RUN_ID`
@@ -91,7 +114,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `GITHUB_HEAD_REF`
 - `GITHUB_REF`
 
-## [GitLab][7]
+[GitHub Actions により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 - `GITLAB_CI`
 - `CI_PIPELINE_ID`
@@ -105,7 +133,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `CI_COMMIT_BRANCH`
 - `CI_COMMIT_TAG`
 
-## [Jenkins][8]
+[GitLab CI により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+{{% /tab %}}
+{{% tab "Jenkins" %}}
 
 - `JENKINS_URL`
 - `BUILD_TAG`
@@ -118,7 +151,12 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `GIT_COMMIT`
 - `GIT_BRANCH`
 
-## [TravisCI][9]
+[Jenkins により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
+{{% /tab %}}
+{{% tab "Travis CI" %}}
 
 - `TRAVIS`
 - `TRAVIS_BUILD_ID`
@@ -133,13 +171,13 @@ CI プロバイダー自身がコンテナを起動する場合、環境変数�
 - `TRAVIS_PULL_REQUEST_SLUG`
 - `TRAVIS_PULL_REQUEST_BRANCH`
 
+[Travis CI により提供されたビルド環境変数の完全リスト][1]
 
-[1]: https://www.appveyor.com/docs/environment-variables/
-[2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
-[3]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
-[4]: https://buildkite.com/docs/pipelines/environment-variables
-[5]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
-[6]: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
-[7]: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
-[8]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
-[9]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+
+[1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+{{% /tab %}}
+{{< /tabs >}}
+
+[1]: https://docs.docker.com/engine/reference/run/
+[2]: https://docs.docker.com/compose/reference/
+[3]: /ja/continuous_integration/setup_tests/

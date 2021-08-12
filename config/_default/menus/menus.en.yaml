@@ -1067,10 +1067,14 @@ main:
     url: serverless/troubleshooting/serverless_tagging
     parent: serverless_troubleshooting
     weight: 702
+  - name: Visualizing Managed Resources
+    url: serverless/troubleshooting/connect_invoking_resources
+    parent: serverless_troubleshooting
+    weight: 703
   - name: Webpack Compatibility
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
-    weight: 703
+    weight: 704
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
@@ -2030,6 +2034,11 @@ main:
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 204
+  - name: Signals Explorer
+    url: /security_platform/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 205 
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform
@@ -5783,6 +5792,18 @@ api:
         - SendInvitations
       unstable: []
       order: 8
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: create-a-service-account
+    parent: users
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
   - name: Update a user
     url: '#update-a-user'
     identifier: update-a-user
@@ -6806,5 +6827,69 @@ api:
         - v2
       operationids:
         - ListSecurityFilters
+      unstable: []
+      order: 0
+  - name: Service Accounts
+    url: /api/latest/service-accounts/
+    identifier: service-accounts
+    generated: true
+  - name: Edit an application key for this service account
+    url: '#edit-an-application-key-for-this-service-account'
+    identifier: edit-an-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateServiceAccountApplicationKey
+      unstable: []
+      order: 2
+  - name: Get one application key for this service account
+    url: '#get-one-application-key-for-this-service-account'
+    identifier: get-one-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetServiceAccountApplicationKey
+      unstable: []
+      order: 1
+  - name: Delete an application key for this service account
+    url: '#delete-an-application-key-for-this-service-account'
+    identifier: delete-an-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteServiceAccountApplicationKey
+      unstable: []
+      order: 3
+  - name: Create an application key for this service account
+    url: '#create-an-application-key-for-this-service-account'
+    identifier: create-an-application-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccountApplicationKey
+      unstable: []
+      order: 0
+  - name: List application keys for this service account
+    url: '#list-application-keys-for-this-service-account'
+    identifier: list-application-keys-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListServiceAccountApplicationKeys
       unstable: []
       order: 0

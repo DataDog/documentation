@@ -19,7 +19,7 @@ The Datadog Lambda Extension is responsible for:
 - Pushing real-time [enhanced Lambda metrics][1], [custom metrics][2], and [traces][3] from the Datadog Lambda Library to Datadog.
 - Forwarding logs from your Lambda function to Datadog.
 
-The Datadog extension submits custom metrics, enhanced metrics, traces and logs [asynchronously][4]. Submitting Lambda logs with the extension is supported in all Lambda runtimes. Submitting custom metrics, enhanced metrics and traces is supported in Node.js, Python, Go and Java Lambda runtimes.
+The Datadog extension submits custom metrics, enhanced metrics, traces, and logs [asynchronously][4]. Submitting Lambda logs with the extension is supported in all Lambda runtimes. Submitting custom metrics, enhanced metrics and traces is supported in Node.js, Python, and Go Lambda runtimes.
 
 ## Installation
 

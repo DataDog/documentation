@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/go-logging/'
     tag: ブログ
     text: Golang ログの収集、標準化、一元化方法
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/explorer/
@@ -110,5 +110,5 @@ Go でさらにログ収集を実行するためのヒント:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /ja/logs/processing/parsing/
+[2]: /ja/logs/log_configuration/parsing
 [3]: /ja/tracing/connect_logs_and_traces/go/

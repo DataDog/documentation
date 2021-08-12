@@ -24,6 +24,8 @@ The Java Tracing Library supports all JVMs on all platforms version 7 and higher
 
 All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported in the Java tracer and profiler. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
+When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][1] to start receiving profiling data from your app.
+
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
@@ -664,7 +666,7 @@ Java APM has minimal impact on the overhead of an application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/enabling/?tab=java
+[1]: /tracing/profiler/enabling/?code-lang=java
 [2]: /tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
