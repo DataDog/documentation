@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Datadog Log Management is used to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
+Use Datadog Log Management to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
-This page shows you how to get started with Log Management in Datadog. As a prerequisite to the following guide, a Datadog account is required. If you haven't already, create a [Datadog account][1].
+This page shows you how to get started with Log Management in Datadog. If you haven't already, create a [Datadog account][1].
 
 ## Configure a logging source
 
@@ -56,7 +56,7 @@ To begin collecting logs from a server:
 
 As of Datadog Agent v6, the Agent can collect logs from containers. Each containerization service has specific configuration instructions based where the Agent is deployed or run, or how logs are routed.
 
-For example, [Docker][10], has two different types of Agent installation available: on your host, where the Agent is external to the Docker environment, or deploying a containerized version of the Agent in your Docker environment.
+For example, [Docker][10] has two different types of Agent installation available: on your host, where the Agent is external to the Docker environment, or deploying a containerized version of the Agent in your Docker environment.
 
 [Kubernetes][11] requires that the Datadog Agent run in your Kubernetes cluster, and log collection can be configured using a DaemonSet spec, Helm chart, or with the Datadog Operator.
 
@@ -64,7 +64,7 @@ To begin collecting logs from a container service, follow the [in-app instructio
 
 ### Cloud
 
-You can forward logs from multiple cloud providers, such as AWS, Azure, and GCP, to Datadog. Each cloud provider has their own set of configuration instructions.
+You can forward logs from multiple cloud providers, such as AWS, Azure, and GCP, to Datadog. Each cloud provider has its own set of configuration instructions.
 
 For example, ​AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. You can subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.​
 
@@ -92,13 +92,13 @@ For example, if you have logs flowing in from a service that you wish to drill d
 
 {{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
 
-Aggregate your logs by `Field` of `Source` and switch to the **Top List** visualization option to see your top logging services. Select a source, such as `error`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error so you quickly see which host and services require attention.
+Aggregate your logs by `Field` of `Source` and switch to the **Top List** visualization option to see your top logging services. Select a source, such as `error`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
 
 {{< img src="/getting_started/logs/top-list-view.png" alt="A top list in the Log Explorer">}}
 
 ## What's next?
 
-Once a logging source is configured and your logs are available in the Log Explorer, there are a few other areas of log management you can begin to explore.
+Once a logging source is configured, and your logs are available in the Log Explorer, you can begin to explore a few other areas of log management.
 
 ### Log configuration
 
