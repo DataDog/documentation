@@ -120,17 +120,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### サービスのチェック
-
-`zabbix.can_connect`: Agent が Zabbix API に接続できない場合は `CRITICAL`、それ以外の場合は OK を返します。
-
 ### イベント
 
 Zabbix アラートは Datadog イベントストリームのイベントとして収集されます。
 
+### サービスのチェック
+{{< get-service-checks-from-git "zabbix" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
 
 [1]: https://www.zabbix.com/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -141,4 +142,5 @@ Zabbix アラートは Datadog イベントストリームのイベントとし�
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
+[11]: https://docs.datadoghq.com/ja/help/

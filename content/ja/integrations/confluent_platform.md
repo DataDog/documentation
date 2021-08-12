@@ -144,18 +144,18 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "confluent_platform" >}}
 
 
-### サービスのチェック
-
-**confluentplatform.can_connect**:<br>
-Agent が監視対象の Confluent Platform / Kafka コンポーネントに接続できず、メトリクスを収集できない場合は、`CRITICAL` が返されます。そうでない場合は `OK` が返されます。
-
 ### イベント
 
 Confluent Platform チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "confluent_platform" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/jmxfetch
@@ -165,4 +165,5 @@ Confluent Platform チェックには、イベントは含まれません。
 [6]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/metadata.csv
 [7]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

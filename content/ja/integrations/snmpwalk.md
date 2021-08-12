@@ -76,17 +76,13 @@ SNMP walk チェックには、メトリクスは含まれません。
 SNMP walk チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "snmpwalk" >}}
 
-**`snmpwalk.can_check`**
-
-チェックは次の内容を返します。
-
-- `snmpwalk` からメトリクスを収集できる場合は `OK`。
-- `snmpwalk` からメトリクスを収集するときにエラーを検出した場合は `CRITICAL`。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -97,4 +93,5 @@ SNMP walk チェックには、イベントは含まれません。
 [7]: https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/datadog_checks/snmpwalk/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[10]: http://docs.datadoghq.com/help
+[10]: https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/assets/service_checks.json
+[11]: http://docs.datadoghq.com/help

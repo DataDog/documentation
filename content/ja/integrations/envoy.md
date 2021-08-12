@@ -49,7 +49,7 @@ supported_os:
 
 Envoy チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-#### Istio 経由の場合
+#### Istio
 
 Envoy を [Istio][3] の一部として使用している場合は、Envoy の[管理エンドポイント][4]にアクセスするために、Istio の [proxyAdminPort][5] を設定する必要があります。
 
@@ -252,9 +252,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Envoy チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "envoy" >}}
 
-**envoy.can_connect**:<br>
-Agent が Envoy に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
