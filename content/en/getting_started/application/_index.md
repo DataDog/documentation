@@ -59,9 +59,9 @@ To learn more about the host map, visit the [host map documentation][9].
 
 ## Events
 
-{{< img src="getting_started/events_explorer.png" alt="Event explorer"  >}}
+{{< img src="getting_started/application/events_explorer.png" alt="Event explorer"  >}}
 
-[The Events Explorer][10] allows you to track notable changes and alerts across your applications and infrastructure. You can [search events][11] with a full text search or with facets, or you can break them down by attribute. You can then use the events to generate metrics, dashboards, and monitors.
+[The Events Explorer][10](beta) allows you to track notable changes and alerts across your applications and infrastructure. You can [search events][11] with a full text search or with facets, or you can break them down by attribute. You can then use the events to generate metrics, dashboards, and monitors.
 
 ## Dashboards
 
