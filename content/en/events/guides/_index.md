@@ -12,19 +12,13 @@ aliases:
     - /developers/events/
 ---
 
-Datadog classifies an _event_ as a record of any notable change relevant to managing IT operations such as code deployments, service health, configuration changes, or monitoring alerts. Datadog Events gives you a consolidated interface to search, analyze, and filter events from any source in one place. Use these guides to programatically send events:
+An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to progamatically send events:
 
 {{< whatsnext desc="Submit events to Datadog with:">}}
     {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
     {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/events/guides/email/" >}}Email{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
-{{< /whatsnext >}}
-
-Use this guide if you are migrating from the Event Stream to the Events Explorer:
-
-{{< whatsnext >}}
-    {{< nextlink href="/events/guides/migrating_from_stream_to_explorer/" >}}Migrating from the Event Stream to the Events Explorer{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
