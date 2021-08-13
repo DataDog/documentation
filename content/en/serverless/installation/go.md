@@ -26,7 +26,7 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions][2].
 
-If your Go Lambda functions are still using runtime [go1.x], consider either [migrating][3] to `provided.al2` or using the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
+If your Go Lambda functions are still using runtime `go1.x`, consider either [migrating][3] to `provided.al2` or using the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
 
 ## Configuration
 
@@ -60,7 +60,7 @@ The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extensi
 Follow these steps to instrument the function:
 
 1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][5].
-1. Set environment variable `DD_TRACE_ENABLED` to `true`.
+1. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
     ```go
@@ -109,7 +109,7 @@ Follow these steps to instrument the function:
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
+Optionally, tag your serverless applications with `env`, `service`, and `version`. For more information, see the [Unified Service Tagging documentation][6].
 
 ## Explore
 
@@ -158,7 +158,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information on custom metric submission, see [here][8].
+For more information, see the [Custom Metrics documentation][8].
 
 ## Further Reading
 
