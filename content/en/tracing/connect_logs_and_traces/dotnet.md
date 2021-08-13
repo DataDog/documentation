@@ -29,7 +29,7 @@ Configure the .NET Tracer with [Unified Service Tagging][1] for the best experie
 The .NET Tracer supports the following logging libraries:
 - [Serilog][2]
 - [log4net][3]
-- [NLog][4] (version 2.0+)
+- [NLog][4]
 
 ## Getting started
 
