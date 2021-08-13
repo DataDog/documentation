@@ -10189,11 +10189,13 @@ components:
       - raw
       - json_path
       - regex
+      - x_path
       type: string
       x-enum-varnames:
       - RAW
       - JSON_PATH
       - REGEX
+      - X_PATH
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
