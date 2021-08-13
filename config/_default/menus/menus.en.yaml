@@ -2028,7 +2028,7 @@ main:
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 205 
+    weight: 205
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform
