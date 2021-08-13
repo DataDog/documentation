@@ -29,7 +29,7 @@ Clicking a row in the Events Explorer opens a corresponding event side panel. Th
 
 {{< img src="events/explorer/event-attribute.png" alt="An example Event Attributes tab" >}}
 
-Datadog displays event attributes as JSON. You can click on an attribute to add or exclude it from the existing query, or add a column for this attribute. You can normalize or enrich event attributes with processing pipelines.
+Datadog displays event attributes as JSON. You can click on an attribute to add or exclude it from the existing query, or add a column for this attribute. You can normalize or enrich event attributes with processing pipelines. Also, you can click on an attribute to add or exclude it from the existing query - or add a column for this attribute.
 
 ### Options
 
@@ -137,7 +137,7 @@ Use the query to control what’s displayed in your Events Analytics.
 
 1. Choose an attribute or tag to graph, and then add it as a facet. Graphing a facet displays the unique count of the variable.
     {{< img src="events/explorer/split-graph.png" alt="Shows the list of facets that can be graphed." >}}
-2. Use a facet to split your graph.
+2. Use a facet to split your graph. You must add an attribute as a facet to be able to use it here.
     {{< img src="events/explorer/facet-to-graph.png" alt="Shows the list of facets that can be graphed." >}}
 3. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values. You can display the results as a timeseries, table, or toplist.
     {{< img src="events/explorer/time-interval.png" alt="Shows the list of possible time intervals, including the default, 5 seconds." >}}
