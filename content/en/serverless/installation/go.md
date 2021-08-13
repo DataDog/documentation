@@ -26,11 +26,13 @@ If not already configured, install the [AWS integration][1]. This allows Datadog
 
 If you previously set up Datadog Serverless using the Datadog Forwarder, see the [installation instructions][2].
 
+If your Go Lambda functions are still using runtime [go1.x], consider either [migrating][3] to `provided.al2` or using the [Datadog Forwarder][2] instead of the Datadog Lambda Extension.
+
 ## Configuration
 
 ### Install the Datadog Lambda library
 
-Install the [Datadog Lambda library][3] locally by running the following command:
+Install the [Datadog Lambda library][4] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -57,8 +59,8 @@ The latest `EXTENSION_VERSION` is {{< latest-lambda-layer-version layer="extensi
 
 Follow these steps to instrument the function:
 
-1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][4].
-1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
+1. Set the environment variable `DD_API_KEY` to your Datadog API key from [API Management][5].
+1. Set environment variable `DD_TRACE_ENABLED` to `true`.
 1. Import the required packages in the file declaring your Lambda function handler.
 
     ```go
@@ -107,11 +109,11 @@ Follow these steps to instrument the function:
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][5].
+Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
 
 ## Explore
 
-After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][6].
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][7].
 
 ## Monitor custom business logic
 
@@ -156,7 +158,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-For more information on custom metric submission, see [here][7].
+For more information on custom metric submission, see [here][8].
 
 ## Further Reading
 
@@ -164,8 +166,9 @@ For more information on custom metric submission, see [here][7].
 
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/guide/datadog_forwarder_go
-[3]: https://github.com/DataDog/datadog-lambda-go
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[6]: https://app.datadoghq.com/functions
-[7]: /serverless/custom_metrics?tab=go
+[3]: https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/
+[4]: https://github.com/DataDog/datadog-lambda-go
+[5]: https://app.datadoghq.com/account/settings#api
+[6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /serverless/custom_metrics?tab=go
