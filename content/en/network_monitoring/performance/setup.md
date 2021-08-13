@@ -23,7 +23,7 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 - Identify outages of cloud provider regions and third-party tools.
 - Troubleshoot faulty service discovery with DNS server metrics.
 
-Network performance monitoring requires [Datadog Agent v6.14+][1] however if [DNS monitoring](https://docs.datadoghq.com/network_monitoring/dns/) is also needed please review this DNS monitoring [setup section](https://docs.datadoghq.com/network_monitoring/dns/#setup) because DNS monitoring metrics are collected automatically only with higher versions of the agent.
+Network Performance Monitoring requires [Datadog Agent v6.14+][1]. Because metrics are automatically collected in higher versions of the Agent, see the [metrics setup section][14] to configure DNS Monitoring.
 
 ## Supported platforms
 
@@ -45,15 +45,15 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver, and support is available as of Datadog agent version 7.27.1, for Windows versions 2012 R2 and up.
+Data collection is done using a device driver, and support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 and up.
 
 #### macOS
 
-Datadog Network Performance Monitoring does not currently support macOS platforms.
+Datadog Network Performance Monitoring does not support macOS platforms.
 
 ### Containers
 
-NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities -- such as containers, tasks, pods, clusters, and deployments -- with out-of-the -box tags (such as `container_name`, `task_name`, `kube_service`).
+NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
 ### Network routing tools
 
@@ -175,7 +175,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 {{% tab "Agent (Windows)" %}}
 Data collection for Windows relies on a filter driver for collecting network data.
 
-To enable network performance monitoring for Windows hosts:
+To enable Network Performance Monitoring for Windows hosts:
 
 1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
 
@@ -197,7 +197,7 @@ To enable network performance monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
@@ -407,7 +407,6 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [3]: /network_monitoring/performance/network_page#dns-resolution
@@ -420,3 +419,5 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [10]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [11]: https://github.com/DataDog/chef-datadog
 [12]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[13]: https://docs.datadoghq.com/network_monitoring/dns/
+[14]: https://docs.datadoghq.com/network_monitoring/dns/#setup
