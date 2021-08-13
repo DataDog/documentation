@@ -208,7 +208,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
-**Note**: Ahe Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
@@ -287,7 +287,7 @@ init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
-    port: 3306
+    port: 5432
     username: datadog
     password: <UNIQUEPASSWORD" \
   datadog/datadog
