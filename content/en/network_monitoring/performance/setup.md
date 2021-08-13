@@ -211,7 +211,7 @@ To enable Network Performance Monitoring with Kubernetes using Helm, add:
   networkMonitoring:
       enabled: true
   ```
-to your values.yaml. **Helm chart version 2.4.39 or higher is required**. See the [Datadog Helm Chart][1] for further information.
+to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
 If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
 
