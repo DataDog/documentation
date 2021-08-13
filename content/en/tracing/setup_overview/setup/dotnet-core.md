@@ -559,7 +559,7 @@ Sets a list of integrations to disable. All other integrations remain enabled. I
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][8] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][5] section.<br>
 **Default**: `true`
 
 #### Experimental features
