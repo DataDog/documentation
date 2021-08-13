@@ -261,6 +261,12 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
     weight: -437
+  - identifier: usecase-log
+    name: 'Log Analysis & Correlation'
+    parent: 'solutions'
+    title: 'usecase'
+    url: 'solutions/log-analysis-and-correlation/'
+    weight: -436
 main_right:
   - identifier: about
     name: About
