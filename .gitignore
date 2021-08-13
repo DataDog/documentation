@@ -173,7 +173,7 @@ Makefile.config
 data/permissions.json
 data/agent_config.json
 
-agent_config_types_map.txt
+agent_config_types_list.txt
 
 static/images/integrations_logos/2020w2.pdf
 
