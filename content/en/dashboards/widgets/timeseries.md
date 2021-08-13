@@ -31,8 +31,8 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 1. Choose the data to graph:
     * Metric: See the documentation [querying][3] to configure a metric query.
-    * Indexed Spans: See [the trace search][4] documentation to configure an Indexed Span query.
-    * Log Events: See [the log search][5] documentation to configure a log event query.
+    * Indexed Spans: See the [Trace search documentation][4] to configure an Indexed Span query.
+    * Log Events: See the [Log search documentation][5] to configure a log event query.
 
 2. Customize your graph with the available [options](#options).
 
@@ -128,7 +128,7 @@ See [Explore your data in full-screen graph mode][10], to learn more.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][11] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][11] for additional reference.
 
 The dedicated [widget JSON schema definition][12] for the timeseries widget is:
 

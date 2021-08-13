@@ -42,7 +42,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 ## New dashboard
 
-To create a dashboard, click on **+New Dashboard** on the [dashboard list[1] page], or click **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -72,7 +72,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Generate public URL
 
-Share a dashboard with external users by generating a public URL. For more details, see [sharing dashboards][8].
+Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][8].
 
 #### Display UTC time
 
@@ -190,7 +190,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 <div class="alert alert-warning">
 RBAC restrict access to dashboards is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][13] documentation.
+Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC documentation][13].
 
 ## Further Reading
 

@@ -45,7 +45,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the log stream widget is:
 

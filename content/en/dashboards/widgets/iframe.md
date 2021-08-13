@@ -23,7 +23,7 @@ Enter the URL of the page you want to display inside the iframe. If you do not u
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the iframe widget is:
 

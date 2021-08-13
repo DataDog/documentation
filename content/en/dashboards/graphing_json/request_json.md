@@ -56,7 +56,7 @@ The general format for the `REQUEST_SCHEMA` is an array of one or more `requests
 
 You can apply functions to the result of each query.
 
-For more information about functions explained through a series of examples, see the [examples][1] page.
+For more information about functions explained through a series of examples, see the [Examples][1] page.
 
 #### Aggregation method
 

@@ -33,11 +33,11 @@ High-density mode displays group widgets in a dashboard side-by-side for increas
 
 ## Search
 
-For overlay search options, see [timeboards][2] documentation.
+For overlay search options, see the [Timeboards Layout documentation][2].
 
 ## Graph menu
 
-For graph menu options, see [timeboards][3] documentation.
+For graph menu options, see the [Timeboards Layout documentation][3].
 
 ## Tips and tricks
 

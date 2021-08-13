@@ -45,7 +45,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the scatter plot widget is:
 

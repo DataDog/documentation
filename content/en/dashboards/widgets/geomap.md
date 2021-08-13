@@ -29,8 +29,8 @@ The geomap widget graphs any metric that has a country tag or facet.
 ### Configuration
 
 1. Choose the data to graph:
-    * RUM: See the [RUM][1] documentation to configure a RUM query. 
-    * Log Events: See the [log search][2] documentation to configure a log event query.
+    * RUM: See the [RUM documentation][1] to configure a RUM query. 
+    * Log Events: See the [Log search documentation][2] to configure a log event query.
       * **Note**: The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][3] to do this, or manually include the [tags on ingest][4].
     * Metric: See the [querying][5] documentation to configure a metric query. 
       * **Note**: The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][6], or manually include the [tags on ingest][4].

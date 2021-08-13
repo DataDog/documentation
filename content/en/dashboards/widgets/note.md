@@ -33,7 +33,7 @@ This widget supports template variables. Use `$<VARIABLE_NAME>.value` syntax to 
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the note widget is:
 

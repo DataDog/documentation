@@ -29,7 +29,7 @@ You get different results per aggregation method when grouping by `host`, since 
 | `max:web.requests(*) by {host}` | 5       | 8       |
 | `avg:web.requests(*) by {host}` | 4       | 5       |
 
-In this same example if you group by `host` **and** `path`, this results in four series where the `sum`/`min`/`max`/`avg` are the same per series as that is the most granular level for this data.
+If you group by `host` **and** `path` in this example, this results in four series where the `sum`/`min`/`max`/`avg` are the same per series as that is the most granular level for this data.
 
 ## Further reading
 

@@ -5,7 +5,7 @@ aliases:
     - /graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
 ---
 
-Datadog graphs generally display local aggregates, rather than the original submitted values.
+Datadog graphs generally display local aggregates instead of the original submitted values.
 
 ## Why?
 

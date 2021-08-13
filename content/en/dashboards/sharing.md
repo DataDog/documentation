@@ -77,7 +77,7 @@ To share a graph from a [Timeboard][2] or [Screenboard][3]:
 4. Pick a timeframe for your graph.
 5. Pick a graph size.
 6. Choose to include the legend or not.
-7. Get the embed code with the *Generate embed code* button.
+7. Get the embed code with the **Generate embed code** button.
 
 {{< img src="dashboards/sharing/share_graph.png" alt="Shared graph" style="width:75%;">}}
 
@@ -91,7 +91,7 @@ To revoke the keys used to share individual (embedded) graphs:
 
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security][6] page.
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][5] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [Security][6] page.
 
 ### Dark mode
 

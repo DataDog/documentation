@@ -31,8 +31,8 @@ The top list visualization enables you to display a list of Tag values like `hos
 
 1. Choose the data to graph:
     * Metric: See the [querying][1] documentation to configure a metric query.
-    * Indexed Spans: See the [trace search][2] documentation to configure an Indexed Span query.
-    * Log Events: See the [log search][3] documentation to configure a log event query.
+    * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
+    * Log Events: See the [Log search documentation][3] to configure a log event query.
 
 2. Optional: configure conditional formatting depending on your entries' values.
 
@@ -52,7 +52,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][4] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
 
 The dedicated [widget JSON schema definition][5] for the top list widget is:
 

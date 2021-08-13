@@ -27,13 +27,13 @@ The table visualization is available on dashboards. It displays columns of aggre
 ### Configuration
 
 * Choose the data to graph (add additional columns as needed):
-  * Metric: See the [main graphing][1] documentation to configure a metric query.
-  * Log Events: See the [log search][2] documentation to configure a log event query.
-  * Indexed Spans: See the [indexed spans][3] documentation to configure a indexed span query.
-  * RUM Events: See the [RUM search syntax][4] documentation to configure a RUM query.
-  * Profiling Metrics: See the [search profiles][5] documentation to configure a profiling query.
-  * Security Signals: See the [security signals explorer][6] documentation to configure a security signals query.
-  * APM Statistics: See the [APM stats][7] documentation to configure an APM stats query.
+  * Metric: See the [Main graphing documentation][1] to configure a metric query.
+  * Log Events: See the [Log search documentation][2] to configure a log event query.
+  * Indexed Spans: See the [Indexed spans documentation][3] to configure a indexed span query.
+  * RUM Events: See the [RUM search syntax documentation][4] to configure a RUM query.
+  * Profiling Metrics: See the [Search profiles documentation][5] to configure a profiling query.
+  * Security Signals: See the [Security signals explorer documentation][6] to configure a security signals query.
+  * APM Statistics: See the [APM stats documentation][7] to configure an APM stats query.
 * You can rename column headers by setting metric aliases.
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
 * Choose a limit for the number results (defaults to 10).
@@ -46,7 +46,7 @@ The table visualization is available on dashboards. It displays columns of aggre
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][8] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
 
 The dedicated [widget JSON schema definition][9] for the table widget is:
 

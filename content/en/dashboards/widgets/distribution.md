@@ -48,7 +48,9 @@ With APM request distributions, you can add percentiles markers on the x-axis.
 
 #### X-axis and Y-axis controls
 
-Axis controls are available through the UI and the JSON editor. They allow you to:
+Axis controls are available through the UI and the JSON editor. 
+
+They allow you to:
 
 * Clip the x and y-axes to specific ranges.
 * Automatically change x-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove "outlier" bins.
@@ -73,7 +75,7 @@ In addition to the [standard full screen options][2], you can use x-axis control
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][3] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the distribution widget is:
 

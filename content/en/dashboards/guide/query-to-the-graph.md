@@ -156,7 +156,7 @@ Arithmetic is applied after time and space aggregation as well—([step 4: Apply
 `as_count` and `as_rate` are time aggregators specific to rates and counters submitted with StatsD or DogStatsD. They make it possible to view metrics as a rate per second, or to see them as raw counts.
 Syntax: instead of adding a rollup, you can use `.as_count()` or `.as_rate()`.
 
-More information is available in: [Visualize StatsD metrics with Counts Graphing][9].
+For more information, see [Visualize StatsD metrics with Counts Graphing][9].
 Documentation about [StatsD/DogStatsD][10].
 
 [1]: /dashboards/timeboard/

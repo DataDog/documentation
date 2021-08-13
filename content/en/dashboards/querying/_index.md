@@ -59,7 +59,7 @@ You can also use [advanced filtering][6] within the `from` dropdown to evaluate 
 
 {{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters" style="width:75%;" >}} 
 
-To learn more about tags, see the [Tagging][7] documentation.
+To learn more about tags, see the [Tagging documentation][7].
 
 ### Aggregate and rollup
 

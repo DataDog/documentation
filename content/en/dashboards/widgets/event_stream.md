@@ -43,7 +43,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
@@ -80,7 +80,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
@@ -109,7 +109,7 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
 The dedicated [widget JSON schema definition][3] for the event stream widget is:
 
