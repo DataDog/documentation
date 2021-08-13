@@ -1065,7 +1065,7 @@ main:
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
     weight: 704
-  - name: Azure App Services Extension
+  - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services

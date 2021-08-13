@@ -25,7 +25,7 @@ further_reading:
     text: "Runtime metrics"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
-    text: "Microsoft Azure App Services extension"
+    text: "Microsoft Azure App Service extension"
   - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
