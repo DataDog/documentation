@@ -289,7 +289,7 @@ init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
-    port: 3306
+    port: 5432
     username: datadog
     password: <UNIQUEPASSWORD" \
   datadog/datadog
