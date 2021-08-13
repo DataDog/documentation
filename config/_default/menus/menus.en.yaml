@@ -265,7 +265,7 @@ main_left:
     name: 'Log Analysis & Correlation'
     parent: 'solutions'
     title: 'usecase'
-    url: 'solutions/log-analysis-and-correlation/'
+    url: 'https://www.datadoghq.com/solutions/log-analysis-and-correlation/'
     weight: -436
 main_right:
   - identifier: about
