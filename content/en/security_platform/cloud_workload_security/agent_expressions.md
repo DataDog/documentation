@@ -23,22 +23,7 @@ open.file.path == "/etc/shadow" && file.path not in ["/usr/sbin/vipw"]
 ## Triggers
 Triggers are events that correspond to types of activity seen by the system. The currently supported set of triggers is:
 
-| SECL Event           | Type             |  Definition                           | Agent Version |
-|----------------------|------------------|---------------------------------------|---------------|
-| `exec`               | Process          | A process was executed or forked      | 7.27          |
-| `open`               | File             | A file was opened                     | 7.27          |
-| `chmod`              | File             | A file's permissions were changed     | 7.27          |
-| `chown`              | File             | A file's owner was changed            | 7.27          |
-| `mkdir`              | File             | A directory was created               | 7.27          |
-| `rmdir`              | File             | A directory was removed               | 7.27          |
-| `rename`             | File             | A file/directory was renamed          | 7.27          |
-| `unlink`             | File             | A file was deleted                    | 7.27          |
-| `utimes`             | File             | Change file access/modification times | 7.27          |
-| `link`               | File             | Create a new name/alias for a file    | 7.27          |
-| `setxattr`           | File             | Set exteneded attributes              | 7.27          |
-| `removexattr`        | File             | Remove extended attributes            | 7.27          |
-| `mount`              | File             | Mount a filesystem                    | 7.27          |
-| `unmount`            | File             | Unmount a filesystem                  | 7.27          |
+{{< include-markdown "/content/en/security_platform/cloud_workload_security/_secl_event_types.md" >}}
 
 ## Operators
 SECL operators are used to combine event attributes together into a full expression. The following operators are available:
