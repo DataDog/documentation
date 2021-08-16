@@ -10,7 +10,7 @@ aliases:
 Autodiscovery was previously called Service Discovery. It's still called Service Discovery throughout the Agent's code and in some configuration options.
 </div>
 
-Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
+Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Dockerized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
 The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.
 
@@ -20,7 +20,7 @@ The Agent enables, disables, and regenerates static check configurations from th
 
 In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
 
-The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, metrics are missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service, for example: a Redis instance at 10.0.0.61:6379. When an Agent check cannot connect to such a service, metrics are missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -34,7 +34,7 @@ Finally, Autodiscovery can load check templates from places other than disk. Oth
 
 ### Different execution
 
-When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers currently running on the same host as the Agent.
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent.
 
 As the Agent inspects each running container, it checks if the container matches any of the container identifiers from any loaded templates. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port. Then it enables the check using the static configuration.
 
@@ -110,7 +110,7 @@ instances:
 
 It looks like a minimal [Apache check configuration][21], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
-_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
+_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `<YOUR_USERNAME>/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, for example: `httpd`, NOT `library/httpd:latest`.
 
 If this is too limiting—if you need to apply different check configurations to different containers running the same image—use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
@@ -166,7 +166,7 @@ docker service create \
   gcr.io/datadoghq/docker-dd-agent:latest
 ```
 
-Note that the option to enable Autodiscovery is called `service_discovery_backend` in `datadog.conf`, but it's called just `SD_BACKEND` as an environment variable.
+**Note**: The option to enable Autodiscovery is called `service_discovery_backend` in `datadog.conf`, but it's called just `SD_BACKEND` as an environment variable.
 
 ---
 
@@ -197,7 +197,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into check configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `httpd` OR `library/httpd:latest`. The next example uses a long name.
+Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example: `httpd` OR `library/httpd:latest`. The next example uses a long name.
 
 #### Apache check with website availability monitoring
 
@@ -213,7 +213,7 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 ### Kubernetes Pod annotations
 
-As of version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+As of version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source with `SD_CONFIG_BACKEND` as you do with key-value stores.
 
 Autodiscovery expects annotations to look like this:
 
@@ -229,7 +229,7 @@ The format is similar to that for key-value stores. The differences are:
 * Annotations must begin with `service-discovery.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
 * For Annotations, Autodiscovery identifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
-If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
+If you define your Kubernetes Pods directly (`kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ with Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
 #### Apache check with website availability monitoring
 
@@ -256,7 +256,7 @@ spec:
 
 #### Apache and HTTP checks
 
-If define pods via Deployments, don't add template annotations to the Deployment metadata; the Agent won't look there. Add them like this:
+If you define pods with Deployments, don't add template annotations to the Deployment metadata; the Agent doesn't look there. Add them like this:
 
 ```yaml
 apiVersion: apps/v1beta1
@@ -283,7 +283,7 @@ spec:
 
 ### Docker label annotations
 
-Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source with `SD_CONFIG_BACKEND` as you do with key-value stores.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
@@ -332,12 +332,12 @@ The following template variables are handled by the Agent:
 
 - Container IP: `host`
   - `%%host%%`: auto-detect the network. Returns the `bridge` network IP if present; falls back to the last **sorted** network's IP.
-  - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks (e.g. `%%host_bridge%%`, `%%host_swarm%%`, ...); behaves like `%%host%%` if network name specified was not found.
+  - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks, for example `%%host_bridge%%`, `%%host_swarm%%`, etc; behaves like `%%host%%` if network name specified was not found.
 
 - Container port: `port`
   - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
-  - If your target port is constant, we recommend you directly specify it, without using the `port` variable
+  - If your target port is constant, Datadog recommends you directly specify it, without using the `port` variable.
 
 - Container PID: `pid` (Added in 5.15.x)
   - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER>`
@@ -353,7 +353,7 @@ Autodiscovery can only identify each container by label OR image/name-not both-a
 
 ### Template source precedence
 
-If you provide a template for the same check type via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
+If you provide a template for the same check type through multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
 
 * Kubernetes annotations
 * Key-value stores

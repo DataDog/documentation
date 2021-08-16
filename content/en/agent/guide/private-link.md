@@ -89,7 +89,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-8. Hit **Create endpoint** at the bottom of the screen. If successful, you will see this:
+8. Hit **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
 9. Click on the VPC endpoint ID to check its status.
 10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
@@ -109,14 +109,14 @@ The overall process consists of configuring an internal endpoint in your VPC tha
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog via AWS PrivateLink. More information about this is available in the [Agent log collection documentation][4].
+    This configuration is required when sending logs to Datadog with AWS PrivateLink. More information about this is available in the [Agent log collection documentation][4].
 12. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
 ## Advanced usage
 
 ### Inter-region peering
 
-To route traffic to Datadog’s PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6]. 
+To route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6]. 
 
 Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
 

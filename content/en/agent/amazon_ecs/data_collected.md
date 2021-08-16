@@ -17,7 +17,7 @@ further_reading:
 
 ### Metrics
 
-Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances. Metrics collected by the Agent when deployed in a Docker container are the same metrics collected by the Docker integration. Refer to the [Docker integration metrics][1] for a complete list of metrics.
+Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances. Metrics collected by the Agent when deployed in a Docker container are the same metrics collected by the Docker integration. See the [Docker integration metrics][1] for a complete list of metrics.
 
 **Note**: Docker metrics are tagged accordingly with the following tags: `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`. No further configuration is required.
 

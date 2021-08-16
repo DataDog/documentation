@@ -15,7 +15,7 @@ With version 7.27+ of the Datadog Agent, the Agent automatically detects the env
 
 **If you are using Agent < v7.26, you must specify your container runtime socket path:**
 
-**Note**: You may need to update your existing monitors, dashboards, and SLOs because metrics names will change—for example, from `docker.*` to `containerd.*`.
+**Note**: You may need to update your existing monitors, dashboards, and SLOs because metrics names change—for example, from `docker.*` to `containerd.*`.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
