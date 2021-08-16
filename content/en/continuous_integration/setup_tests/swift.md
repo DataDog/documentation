@@ -258,6 +258,8 @@ Additional Git configuration for physical device testing:
 | `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`  |
 | `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`     |
 | `CI_COMMIT_MESSAGE`  | `$(CI_COMMIT_MESSAGE)` |
+| `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
+| `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
 {{% /tab %}}
 {{% tab "Travis" %}}
@@ -383,6 +385,8 @@ Additional Git configuration for physical device testing:
 | `SYSTEM_TEAMFOUNDATIONSERVERURI` | `$(SYSTEM_TEAMFOUNDATIONSERVERURI)` |
 | `SYSTEM_JOBID`                   | `$(SYSTEM_JOBID)`                   |
 | `SYSTEM_TASKINSTANCEID`          | `$(SYSTEM_TASKINSTANCEID)`          |
+| `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
+| `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
 Additional Git configuration for physical device testing:
 
