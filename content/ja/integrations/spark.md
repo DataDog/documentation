@@ -149,23 +149,8 @@ Agent の [status サブコマンド][7]を実行し、Checks セクションで
 Spark チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "spark" >}}
 
-Agent は、Spark の実行方法に応じて、以下のサービスチェックのいずれかを送信します。
-
-**spark.standalone_master.can_connect**<br>
-Agent が Spark インスタンスの Standalone Master に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**spark.mesos_master.can_connect**<br>
-Agent が Spark インスタンスの Mesos Master に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**spark.application_master.can_connect**<br>
-Agent が Spark インスタンスの ApplicationMaster に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**spark.resource_manager.can_connect**<br>
-Agent が Spark インスタンスの ResourceManager に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**spark.driver.can_connect**<br>
-Agent が Spark インスタンスの ResourceManager に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
@@ -176,7 +161,6 @@ AWS EMR 上の Spark のメトリクスを受信するには、[ブートスト�
 Agent v5 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
 
 Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/datadog-agent/conf.d/spark.d/conf.yaml` 構成ファイルを作成します。
-
 
 ## その他の参考資料
 

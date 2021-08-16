@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure App Services Extension
+title: Microsoft Azure App Service Extension
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
@@ -20,15 +20,15 @@ further_reading:
 
 ## Overview
 
-Microsoft [Azure App Services][1] is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
+Microsoft [Azure App Service][1] is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
 
-Datadog provides monitoring capabilities for all Azure App Services resource types:
+Datadog provides monitoring capabilities for all Azure App Service resource types:
 
 - Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
 - Custom metrics can be submitted using the API.
 - [Resource logs][4] can be submitted using [Event Hub][5].
 
-The Datadog extension for Azure App Services provides additional monitoring capabilities for [Azure Web Apps][6]. This support includes:
+The Datadog extension for Azure App Service provides additional monitoring capabilities for [Azure Web Apps][6]. This support includes:
 
 - Full distributed APM tracing using automatic instrumentation.
 - Support for manual APM instrumentation to customize spans.
@@ -62,7 +62,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 1. Configure the Azure integration to monitor your web app and verify it is configured correctly by ensuring that you see an `azure.app_service.count` metric tagged with the name of your web application. **Note**: This step is critical for metric/trace correlation, functional trace panel views in the Datadog portal, and accurate billing.
 
-2. Open the [Azure Portal][10] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
+2. Open the [Azure Portal][10] and navigate to the dashboard for the Azure App Service instance you wish to instrument with Datadog.
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
@@ -84,7 +84,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 ### Application logging from Azure web apps
 
-Sending logs from your application in Azure App Services to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
+Sending logs from your application in Azure App Service to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 
 **Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings does not include the trace ID.
 
@@ -92,9 +92,9 @@ See documentation on [setting up agentless logging with Serilog][13] for detaile
 
 ## Custom metrics with DogStatsD
 
-The App Services extension includes an instance of [DogStatsD][7] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps with the extension.
+The Azure App Service extension includes an instance of [DogStatsD][7] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps with the extension.
 
-Writing custom metrics and checks in your web app is similar to the process for doing so with an application on a host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Services using the extension:
+Writing custom metrics and checks in your web app is similar to the process for doing so with an application on a host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
 1. Add the [DogStatsD NuGet package][14] to your Visual Studio project.
 2. Initialize DogStatdD and write custom metrics in your application.
@@ -114,7 +114,7 @@ DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.
 catch (Exception ex)
 {
 // An exception is thrown by the Configure call if the necessary environment variables are not present.
-// These environment variables are present in Azure App Services, but
+// These environment variables are present in Azure App Service, but
 // need to be set in order to test your custom metrics: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
 // Ignore or log the exception as it suits you
 Console.WriteLine(ex);

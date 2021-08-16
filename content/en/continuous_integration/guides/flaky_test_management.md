@@ -10,7 +10,7 @@ Flaky tests introduce risk and unpredictability into your CI system and into you
 
 Go to the Test Service page to see the _Flaky Tests_ table for a given test service and branch. You can see all of the tests that are flaky in the time frame you have selected.
 
-{{< img src="ci/flaky-test-management.png" alt="Flaky Tests table on the Test Service page"  style="width:100%;">}}
+{{< img src="ci/flaky-test-management.png" alt="Flaky Tests table on the Test Service page" style="width:100%;">}}
 
 The app helps you prioritize flaky tests by providing the following information about them:
 
@@ -24,7 +24,7 @@ Once you identify a flaky test you want to fix, click on the test to see links t
 
 ## Remediation
 
-If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It will be added again if it re-exhibits flaky behavior.
+If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
 
 ## Watch for new flaky tests
 

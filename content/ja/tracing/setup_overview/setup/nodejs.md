@@ -28,17 +28,26 @@ further_reading:
 ---
 ## 互換性要件
 
-NodeJS トレーサーはバージョン `8 以降`を公式にサポートします。8.x や 10.x など、偶数バージョンのみが公式なサポート対象です。9.x や 11.x などの奇数バージョンは動作しますが、公式なサポート対象ではありません。サポートするライブラリの一覧については、[互換性要件][1]ページをご覧ください。
+Nodejs トレーサーの最新バージョンは、バージョン `>=12` を公式にサポートしています。バージョン `8` および `10` は `0.x` リリースラインのメンテナンスモードでサポートされます。Node のバージョンサポートおよび対応するバージョンについて詳しくは、[互換性要件][1]ページを参照してください。 
 
 ## インストールと利用開始
 
 Datadog トレースライブラリを Node.js アプリケーションに追加するには、次の手順に従います。
 
-1. 以下の npm を使用して Datadog Tracing ライブラリをインストールします。
+1. Node.js 12 以降に対応する npm を使用して Datadog Tracing ライブラリをインストールします。
 
-```sh
-npm install dd-trace --save 
-```
+    ```sh
+    npm install dd-trace --save
+    ```
+   発売終了済みの Node.js バージョン 10 または 8 をトレースしたい場合は、以下を実行して `dd-trace` のバージョン 0.x をインストールしてください。
+    ```
+    npm install dd-trace@latest-node10
+    ```
+   または
+    ```
+    npm install dd-trace@latest-node8
+    ```
+   ディストリビューションタグおよび Node.js のランタイムばージョンサポートについて詳しくは、[互換性要件][1] ページを参照してください。
 
 2. コードまたはコマンドライン引数を使用して、トレーサーをインポートして初期化します。Node.js トレースライブラリは、他のモジュールの**前**にインポートして初期化する必要があります。
 
@@ -91,12 +100,12 @@ node --require dd-trace/init app.js
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
 {{% tab "コンテナ" %}}
 
-1. メインの [`datadog.yaml` コンフィギュレーションファイル][1]で `apm_non_local_traffic: true` を設定します
+1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
 2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
 
@@ -117,7 +126,7 @@ node --require dd-trace/init app.js
     DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
     ```
 
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -228,6 +237,11 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 : **環境変数**: `DD_RUNTIME_METRICS_ENABLED`<br>
 **デフォルト**:  `false`<br>
 ランタイムメトリクスのキャプチャを有効にするかどうか。ポート `8125` (または `dogstatsd.port` で構成) が UDP 用に Agent で開いている必要があります。
+
+: **環境変数**: `DD_SERVICE_MAPPING`<br>
+**デフォルト**: `null`<br>
+**例**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
+各プラグインのサービス名を提供します。カンマ区切りの `plugin:service-name` ペア (スペースありまたはなし) を許容します。
 
 `experimental`
 : **デフォルト**: `{}`<br>

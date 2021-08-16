@@ -156,9 +156,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 Cassandra チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "cassandra" >}}
 
-**cassandra.can_connect**:<br>
-Agent が監視対象の Cassandra インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` が返されます。そうでない場合は `OK` が返されます。
 
 ## トラブルシューティング
 
@@ -173,7 +172,7 @@ Agent が監視対象の Cassandra インスタンスに接続できず、メト
 
 
 
-## Agent チェック: Cassandra Nodetool
+## Cassandra Nodetool インテグレーション
 
 ![Cassandra デフォルトのダッシュボード][9]
 
@@ -225,9 +224,8 @@ Cassandra Nodetool ログは Cassandra インテグレーションにより収�
 Cassandra_nodetool チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "cassandra_nodetool" >}} 
 
-**cassandra.nodetool.node_up**:<br>
-Agent は、監視対象のクラスターのノードごとにこのサービスチェックを送信します。ノードがダウンしている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

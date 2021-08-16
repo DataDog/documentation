@@ -54,11 +54,13 @@ Windows Event Log チェックは [Datadog Agent][1] パッケージに含まれ
 
 2. [Agent を再起動][4]すると、Windows イベントが Datadog に送信されます。
 
+**注**: イベントとログは別々に構成されます。ログは、各インスタンス内で構成されません。ログコレクションの構成については、下記の[ログコレクション](#log-collection)をご参照ください。
+
 ### ログの収集
 
 まず、`datadog.yaml` で `logs_enabled: true` が設定されていることを確認します。
 
-特定の Windows イベントからログを収集するには、チャンネルを `conf.d/win32_event_log.d/conf.yaml` ファイルに手動で、または Datadog Agent Manager を使用して追加します。
+特定の Windows イベントからログを収集するには、チャンネルを `conf.d/win32_event_log.d/conf.yaml` ファイルに手動で追加するか、Datadog Agent Manager を使用します。
 
 チャンネルリストを表示するには、PowerShell で以下のコマンドを実行します。
 
@@ -200,7 +202,7 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 
 ## その他の参考資料
 
-### Documentation
+### ドキュメント
 
 - [イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する方法][8]
 
