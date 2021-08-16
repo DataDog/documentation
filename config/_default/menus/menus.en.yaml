@@ -262,9 +262,9 @@ main_left:
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
     weight: -437
   - identifier: usecase-log
-    name: 'Log Analysis & Correlation'
-    parent: 'solutions'
-    title: 'usecase'
+    name: Log Analysis & Correlation
+    parent: solutions
+    title: usecase
     url: 'https://www.datadoghq.com/solutions/log-analysis-and-correlation/'
     weight: -436
 main_right:
@@ -2034,7 +2034,7 @@ main:
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 205 
+    weight: 205
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform
