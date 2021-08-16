@@ -269,35 +269,43 @@ Most workloads are able to capture most queries by raising this value to 4096, b
 
 ### Queries are missing explain plans
 
+Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup.
+
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
-| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The application client used to connect to the database is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][1] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][2] and Python client [asyncpg][3] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters.  |
-| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][4] to capture the query. |
+| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.30.0 or greater. We recommend regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
+| The Agent is not able to execute a required function in the `datadog` schema of the database. | The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
+| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
+| The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][2] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][3] and Python client [asyncpg][4] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters. |
 | The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][5]. |
+| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
+| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][6] to capture the query. |
 
 
 
 
-[1]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
-[2]: https://pkg.go.dev/github.com/jmoiron/sqlx
-[3]: https://github.com/MagicStack/asyncpg
-[4]: /database_monitoring/setup_postgres/advanced_configuration
+[1]: /database_monitoring/setup_postgres/
+[2]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
+[3]: https://pkg.go.dev/github.com/jmoiron/sqlx
+[4]: https://github.com/MagicStack/asyncpg
 [5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[6]: /database_monitoring/setup_postgres/advanced_configuration
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated). |
+| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.30.0 or greater. We recommend regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
+| The Agent is not able to execute a required function in this schema of the database. | The Agent requires the function `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
+| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][1] to capture the query. |
+| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][2] to capture the query. |
 
-[1]: /database_monitoring/setup_mysql/advanced_configuration/
+[1]: /database_monitoring/setup_mysql/
+[2]: /database_monitoring/setup_mysql/advanced_configuration/
 {{% /tab %}}
 {{< /tabs >}}
 
