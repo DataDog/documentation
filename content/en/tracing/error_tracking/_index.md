@@ -23,7 +23,7 @@ Monitoring the errors collected by Datadog is critical to your system's health, 
 
 The Datadog tracers collect errors through integrations and manual instrumentation of the source code. Error spans within a trace are processed by Error Tracking __when they are located in the uppermost service span__, which is also called the _service entry span_.
 
-{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flamegraph with errors"  >}}
+{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors"  >}}
 
 Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same _issue_.
 

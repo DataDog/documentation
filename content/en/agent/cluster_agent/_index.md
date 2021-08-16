@@ -34,7 +34,7 @@ Using the Datadog Cluster Agent allows you to:
 * Isolate node-based Agents to their respective nodes, reducing RBAC rules to solely read metrics and metadata from the kubelet.
 * Provide cluster level metadata that can only be found in the API server to the Node Agents, in order for them to enrich the metadata of the locally collected metrics.
 * Enable the collection of cluster level data, such as the monitoring of services or SPOF and events.
-* Leverage horizontal pod autoscaling with custom Kubernetes metrics. Refer to [the dedicated guide][1] for more details about this feature.
+* Leverage horizontal pod autoscaling with custom Kubernetes metrics. See the [guide][1] for more details about this feature.
 
 If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and GCR:
 

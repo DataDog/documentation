@@ -1,5 +1,5 @@
 ---
-title: Send logs to Datadog
+title: Getting Started with Logs
 kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
@@ -15,240 +15,134 @@ further_reading:
 
 ## Overview
 
-Datadog Log Management is used to collect logs from your application. This page shows you how get your first logs into Datadog. Before moving forward:
+Use Datadog Log Management to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
-1. If you haven't already, create a [Datadog account][1] and [enable Datadog Log Management][2].
-2. Set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page:
+This page shows you how to get started with Log Management in Datadog. If you haven't already, create a [Datadog account][1].
 
-    ```text
-    vagrant init ubuntu/xenial64
-    vagrant up
-    vagrant ssh
-    ```
+## Configure a logging source
 
-Once this is done, follow the sections below to discover how to:
+With Log Management, you can analyze and explore data in the Log Explorer, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Security Monitoring][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
 
-- [Send Logs manually](#sending-logs-manually)
-- [Use the Agent to send logs from a file](#send-logs-from-a-file)
+{{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 
-## Sending logs manually
+### Server
 
-To send logs manually, use the `telnet` command with your [Datadog API key][5] within the Vagrant virtual machine.
-
-Logs can be a full-text message:
-
-The secure TCP endpoint is telnet intake.logs.datadoghq.com with port `{{< region-param key="tcp_endpoint_port" code="true" >}}` (or port `{{< region-param key="tcp_endpoint_port_ssl" >}}` for secure connections not using telnet).
-
-{{< site-region region="us,us3" >}}
-
-```
-telnet intake.logs.datadoghq.com 10514
-
-<DATADOG_API_KEY> Plain text log sent through TCP
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```
-telnet intake.logs.datadoghq.com 1883
-
-<DATADOG_API_KEY> Plain text log sent through TCP
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-This feature is not supported.
-
-{{< /site-region >}}
-
-This produces the following result in the [Log Explorer Page][2]:
-
-{{< img src="getting_started/logs/plain_text_log.png" alt="Custom telnet" >}}
-
-or a JSON object that is automatically parsed by Datadog:
-
-{{< site-region region="us,us3" >}}
-
-```text
-telnet intake.logs.datadoghq.com 10514
-
-<DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```text
-telnet tcp-intake.logs.datadoghq.eu 1883
-
-<DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-This feature is not supported.
-
-{{< /site-region >}}
-
-This produces the following result in the [Log Explorer Page][2]:
-
-{{< img src="getting_started/logs/json_log.png" alt="JSON logs" >}}
-
-## Send logs from a file
-
-### Install the Agent
-
-To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][5]:
-
-
-{{< site-region region="us" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-#### Validation
-
-Verify the Agent is running with the [status command][7] `sudo datadog-agent status`. You have not enabled log collection yet, so you should see:
-
-```text
-==========
-Logs Agent
-==========
-
-  Logs Agent is not running
-```
-
-**Note**: After a few minutes, you can verify that the Agent is connected to your account by checking the [Infrastructure List][8] in Datadog.
-
-### Enable log collection
-
-To enable log collection with the Agent, edit the `datadog.yaml` [configuration file][9] located at `/etc/datadog-agent/datadog.yaml` and set `logs_enabled:true`:
+There are several [integrations][5] available to forward logs from your server to Datadog. Integrations use a log configuration block in their `conf.yaml` file, which is available in the `conf.d/` folder at the root of your Agent’s configuration directory, to forward logs to Datadog from your server.
 
 ```yaml
-## @param logs_enabled - boolean - optional - default: false
-## Enable Datadog Agent log collection by setting logs_enabled to true.
-#
-logs_enabled: true
+logs:
+  - type: file
+    path: /path/to/your/integration/access.log
+    source: integration_name
+    service: integration_name
+    sourcecategory: http_web_access
 ```
 
-### Monitor a custom file
+To begin collecting logs from a server:
 
-#### Create the log file
+1. If you haven't already, install the [Datadog Agent][6] based on your platform.
 
-In order to collect logs from a custom file, first create the file and add one line of logs to it:
+    **Note**: Log collection requires Datadog Agent v6+.
 
-```shell
-$ touch log_file_to_monitor.log
+2. Collecting logs is disabled by default in the Datadog Agent. To enable log collection, set `logs_enabled` to `true` in your `datadog.yaml` file.
 
-$ echo "First line of log" >> log_file_to_monitor.log
-```
+3. Restart the [Datadog Agent][7].
 
-#### Configure the Agent
+4. Follow the integration [activation steps][8] or the custom files log collection steps in the Datadog app.
 
-To specify to the Agent to monitor this log file:
+    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see the [Custom log collection documentation][9].
 
-1. Create a new configuration folder in the [configuration directory of the Agent][10]:
+### Container
 
-    ```shell
-    sudo mkdir /etc/datadog-agent/conf.d/custom_log_collection.d/
-    ```
+As of Datadog Agent v6, the Agent can collect logs from containers. Each containerization service has specific configuration instructions based where the Agent is deployed or run, or how logs are routed.
 
-2. Create your configuration file within this new configuration folder:
+For example, [Docker][10] has two different types of Agent installation available: on your host, where the Agent is external to the Docker environment, or deploying a containerized version of the Agent in your Docker environment.
 
-    ```shell
-    sudo touch /etc/datadog-agent/conf.d/custom_log_collection.d/conf.yaml
-    ```
+[Kubernetes][11] requires that the Datadog Agent run in your Kubernetes cluster, and log collection can be configured using a DaemonSet spec, Helm chart, or with the Datadog Operator.
 
-3. Copy and paste the following content within this `conf.yaml` file:
+To begin collecting logs from a container service, follow the [in-app instructions][12].
 
-    ```yaml
-    logs:
-        - type: file
-          path: /home/ubuntu/log_file_to_monitor.log
-          source: custom
-          service: user
-    ```
+### Cloud
 
-4. Restart the Agent: `sudo service datadog-agent restart`
+You can forward logs from multiple cloud providers, such as AWS, Azure, and GCP, to Datadog. Each cloud provider has its own set of configuration instructions.
 
-##### Validation
+For example, ​AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. You can subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.​
 
-If the log configuration is correct, the [status command][7] `sudo datadog-agent status` outputs:
+To begin collecting logs from a cloud service, follow the [in-app instructions][13].
 
-```text
-==========
-Logs Agent
-==========
-    LogsProcessed: 0
-    LogsSent: 0
+### Client
 
-  custom_log_collection
-  ---------------------
-    Type: file
-    Path: /home/ubuntu/log_file_to_monitor.log
-    Status: OK
-    Inputs: /home/ubuntu/log_file_to_monitor.log
-```
+Datadog permits log collection from clients through SDKs or libraries. For example, use the `datadog-logs` SDK to send logs to Datadog from JavaScript clients.
 
-### Add new logs to the file
+To begin collecting logs from a cloud service, follow the [in-app instructions][14].
 
-Now that everything is configured correctly, add new entries to your log file to see them within Datadog:
+### Other
 
-```shell
-$ echo "New line of log in the log file" >> log_file_to_monitor.log
-```
+If you're using existing logging services or utilities such as rsyslog, flutend, or logstash, Datadog offers plugins and log forwarding options.
 
-This produces the following result in the [Log Explorer Page][2]:
+If you don't see your integration, you can type it in the *other integrations* box and get notifications for when the integration is available.
 
-{{< img src="getting_started/logs/file_log_example.png" alt="File log example" >}}
+To begin collecting logs from a cloud service, follow the [in-app instructions][15].
 
-**Note**: When using the Datadog Agent, log events larger than 256KB are split into multiple entries.
+## Explore your logs
+
+Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
+
+For example, if you have logs flowing in from a service that you wish to drill down into, filter by `Service:your-service-name`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
+
+{{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
+
+Aggregate your logs by `Field` of `Source` and switch to the **Top List** visualization option to see your top logging services. Select a source, such as `error`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
+
+{{< img src="/getting_started/logs/top-list-view.png" alt="A top list in the Log Explorer">}}
+
+## What's next?
+
+Once a logging source is configured, and your logs are available in the Log Explorer, you can begin to explore a few other areas of log management.
+
+### Log configuration
+
+* Set [attributes and aliasing][18] to unify your logs environment.
+* Control how your logs are processed with [pipelines][19] and [processors][20].
+* As Logging without Limits* decouples log ingestion and indexing, you can [configure your logs][21] by choosing which to index, retain, or archive.
+
+### Log correlation
+
+* [Connect logs and traces][2] to exact logs associated with a specific `env`, `service,` or `version`.
+* If you're already using metrics in Datadog, you can [correlate logs and metrics][3] to gain context of an issue.
+
+### Guides
+
+* Dive further into [Logging without Limits*][22]
+* Manage sensitive log data with [RBAC settings][23]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
+
 [1]: https://www.datadoghq.com
-[2]: https://app.datadoghq.com/logs
-[3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[4]: https://www.vagrantup.com/intro/getting-started
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: /agent/guide/agent-commands/#agent-information
-[8]: https://app.datadoghq.com/infrastructure
-[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[10]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /tracing/connect_logs_and_traces/
+[3]: /logs/guide/correlate-logs-with-metrics/
+[4]: /security_platform/security_monitoring/
+[5]: /getting_started/integrations/
+[6]: /agent/
+[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[8]: https://app.datadoghq.com/logs/onboarding/server
+[9]: /agent/logs/?tab=tailfiles#custom-log-collection
+[10]: /agent/docker/log/?tab=containerinstallation
+[11]: /agent/kubernetes/log/?tab=daemonset
+[12]: https://app.datadoghq.com/logs/onboarding/container
+[13]: https://app.datadoghq.com/logs/onboarding/cloud
+[14]: https://app.datadoghq.com/logs/onboarding/client
+[15]: https://app.datadoghq.com/logs/onboarding/other
+[16]: /logs/explorer/
+[17]: /logs/explorer/#patterns
+[18]: /logs/log_configuration/attributes_naming_convention/
+[19]: /logs/log_configuration/pipelines/
+[20]: /logs/log_configuration/processors/
+[21]: /logs/log_configuration/
+[22]: /logs/guide/getting-started-lwl/
+[23]: /logs/guide/logs-rbac/

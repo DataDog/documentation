@@ -460,7 +460,7 @@
     "summary": "Delete a custom variable"
   },
   "GetWebhooksIntegrationCustomVariable": {
-    "description": "Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.\n\nIf the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>`\nin the response payload.",
+    "description": "Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.\n\nIf the custom variable is secret, the value does not return in the\nresponse payload.",
     "summary": "Get a custom variable"
   },
   "UpdateWebhooksIntegrationCustomVariable": {

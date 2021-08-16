@@ -117,73 +117,16 @@ _Agent バージョン 6.0 以降で利用可能_
 Ceph チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "ceph" >}}
 
-**ceph.overall_status**:<br>
-Datadog Agent は、Ceph のホスト健全性チェックごとにサービスチェックを送信します。
-
-Ceph Luminous 以降では、このサービスチェックのほかに、Ceph チェックはいくつかの健全性チェックも収集します。収集するチェックは構成可能で、デフォルトでは以下のとおりです。
-
-**ceph.osd_down**:<br>
-OSD がすべて動作中の場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.osd_orphan**:<br>
-孤立 OSD がない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.osd_full**:<br>
-OSD がフルでない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.osd_nearfull**:<br>
-OSD がまったくフルでない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pool_full**:<br>
-プールがクオータに達していない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pool_near_full**:<br>
-クオータにまったく到達していない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pg_availability**:<br>
-データ可用性が十分な場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pg_degraded**:<br>
-データ冗長性が十分な場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pg_degraded_full**:<br>
-クラスターにデータ冗長性の余裕が十分にある場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pg_damaged**:<br>
-データスクラビング後に矛盾がない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pg_not_scrubbed**:<br>
-PG が最近スクラビングされた場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.pg_not_deep_scrubbed**:<br>
-PG が最近ディープスクラビングされた場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.cache_pool_near_full**:<br>
-キャッシュプールがまったくフルでない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.too_few_pgs**:<br>
-PG の数が最小しきい値を上回る場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.too_many_pgs**:<br>
-PG の数が最大しきい値を下回る場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.object_unfound**:<br>
-すべてのオブジェクトが見つかる場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.request_slow**:<br>
-リクエストが通常の時間で処理されている場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
-
-**ceph.request_stuck**:<br>
-リクエストが通常の時間で処理されている場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
-- [Ceph の監視: ノードステータスからクラスター全体のパフォーマンスまで][9]
+- [Ceph の監視: ノードステータスからクラスター全体のパフォーマンスまで][10]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -192,5 +135,6 @@ PG の数が最大しきい値を下回る場合は、`OK` を返します。そ
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/ceph/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/monitor-ceph-datadog
+[8]: https://github.com/DataDog/integrations-core/blob/master/ceph/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitor-ceph-datadog

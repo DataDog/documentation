@@ -129,9 +129,8 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 Cisco ACI チェックはテナントの障害をイベントとして送信します。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "cisco_aci" >}}
 
-**cisco_aci.can_connect**:<br>
-Agent が Cisco ACI API に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

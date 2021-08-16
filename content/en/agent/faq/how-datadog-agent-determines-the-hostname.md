@@ -28,7 +28,7 @@ From these names, a canonical name is chosen for the host. The Agent uses this n
 The canonical hostname is chosen according to the following rules. The first match is selected.
 
 1. **agent-hostname**: A hostname explicitly set in the [Agent configuration file][2] if it does not start with ip- or domu.
-2. **hostname** (`hostname -f` on Linux): If the DNS hostname is not an EC2 default (e.g. ip-192-0-0-1).
+2. **hostname** (`hostname -f` on Linux): If the DNS hostname is not an EC2 default, for example: `ip-192-0-0-1`.
 3. **instance-id**: If the Agent can reach the EC2 metadata endpoint from the host.
 4. **hostname**: Fall back on the DNS hostname even if it is an EC2 default.
 
@@ -110,7 +110,7 @@ _Only affects Agents running on GCE_
 
 By default, Agent v6 uses the instance's hostname provided by GCE. This matches the behavior of Agent v5.5.1+ if `gce_updated_hostname` is set to true in `datadog.conf`.
 
-If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog will change from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
+If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog changes from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
