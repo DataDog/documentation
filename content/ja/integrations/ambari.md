@@ -154,22 +154,18 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "ambari" >}}
 
 
-### サービスのチェック
-
-**ambari.can_connect**:<br>
-クラスターが到達可能な場合は、`OK` を返します。それ以外の場合は、`CRITICAL` を返します。
-
-**ambari.state**:<br>
-サービスがインストール済みか実行中の場合は `OK`、サービスが停止しようとしているかアンインストール中の場合は `WARNING`、
-サービスがアンインストール済みか停止した場合は `CRITICAL` を返します。
-
 ### イベント
 
 Ambari には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "ambari" >}}
+
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://ambari.apache.org

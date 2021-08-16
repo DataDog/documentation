@@ -24,6 +24,8 @@ The Java Tracing Library supports all JVMs on all platforms version 7 and higher
 
 All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported in the Java tracer and profiler. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
+When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][1] to start receiving profiling data from your app.
+
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
@@ -113,7 +115,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -162,7 +164,7 @@ If a `setenv` file does not exist, create it in the `./bin` directory of the Tom
 {{% /tab %}}
 {{% tab "JBoss" %}}
 
-Add the following line to the end of `standalone.sh`:
+Add the following line to the end of `standalone.conf`:
 
 ```text
 JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
@@ -664,7 +666,7 @@ Java APM has minimal impact on the overhead of an application:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/enabling/?tab=java
+[1]: /tracing/profiler/enabling/?code-lang=java
 [2]: /tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent

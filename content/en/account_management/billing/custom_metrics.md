@@ -22,7 +22,7 @@ Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A
 
 Assume that in your data, `endpoint:X` is supported by both hosts, but fails only on `host:B`. Also assume that requests to `endpoint:Y` are always successful and only appear on `host:B` as shown below:
 
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency"  style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" style="width:80%;">}}
 
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
@@ -57,7 +57,7 @@ Suppose you wanted to add the tag `city` which has three values: `NYC`, `Miami`,
 
 The count of custom metrics reporting from `temperature` scales with the most granular tag, `city`.
 
-Now suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). You’re now tagging temperature by the set of tags: `country`, `region`, `state`, and `city`. Adding the state tag doesn’t increase the level of granularity already present in your dataset provided by the city tag.
+Suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). This means you are tagging temperature by the tags: `country`, `region`, `state`, and `city`. Adding the state tag doesn't increase the level of granularity already present in your dataset provided by the city tag.
 
 To obtain the temperature in Florida, you can simply recombine the custom metrics of:
 
@@ -140,7 +140,7 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
 
-For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It’s listed as “Currently reporting # distinct metrics...” as shown below:
+For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It's listed as `Currently reporting # distinct metrics...` as shown below:
 
 {{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" >}}
 

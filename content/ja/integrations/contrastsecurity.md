@@ -38,7 +38,7 @@ Datadog-Contrast インテグレーションでは、Contrast のログを Datad
 
 ## セットアップ
 
-### Contrast Protect のログ収集の設定
+### ログの収集
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][1] を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -58,13 +58,13 @@ logs_enabled: true
         source: contrastsecurity
     ```
 
-ログに関する詳しい情報は、https://docs.contrastsecurity.com/installation-setupconfig.html#log を参照してください。
+ログの詳細については、[Contrast Security のドキュメント][2]を参照してください。
 
-- [Datadog Agent を再起動][2]します。
+- [Datadog Agent を再起動][3]します。
 
-詳細は、[ログ収集のドキュメント][3]を参照してください。
-
-詳細は、[ダッシュボード作成のための Datadog API ドキュメント][4] を参照してください。
+詳細については、次を参照してください:
+- [Datadog ログのドキュメント][4]
+- [ダッシュボードの作成に関する Datadog API ドキュメント][5]
 
 ## 収集データ
 
@@ -79,7 +79,10 @@ Contrast インテグレーションは、イベントを送信しません。
 ### サービスのチェック
 
 Contrast インテグレーションには、サービス チェック機能は含まれません。
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[3]: https://docs.datadoghq.com/ja/logs/log_collection/?tab=tailexistingfiles#getting-started-with-the-agent
-[4]: https://docs.datadoghq.com/ja/api/?lang=bash#create-a-dashboard
+
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[2]: https://docs.contrastsecurity.com/installation-setupconfig.html#log
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/ja/logs/log_collection/#getting-started-with-the-agent
+[5]: https://docs.datadoghq.com/ja/api/#create-a-dashboard

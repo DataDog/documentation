@@ -128,12 +128,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
         DDLambda ddl = new DDLambda(request, context);
 
-        Map<String,String> myTags = new HashMap<String, String>();
+        Map<String,Object> myTags = new HashMap<String, Object>();
             myTags.put("product", "latte");
             myTags.put("order","online");
         
         // Submit a custom metric
-        dd.metric(
+        ddl.metric(
             "coffee_house.order_value", // Metric name
             12.45,                      // Metric value
             myTags);                    // Associated tags
@@ -152,6 +152,8 @@ See the [custom metrics documentation][11] for more information on custom metric
 ### Connect logs and traces
 
 To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][12] for instructions.
+
+<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors like, "Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" Make sure to use java8.al2 or java11 as runtime as described above. </div>
 
 ## Further Reading
 

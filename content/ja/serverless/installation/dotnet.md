@@ -26,7 +26,7 @@ further_reading:
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
 ```
 
-`EXTENSION_VERSION` については、[最新リリース][3]を参照してください。
+最新の `EXTENSION_VERSION` は `{{< latest-lambda-layer-version layer="extension" >}}` です。
 
 ### 関数の構成
 

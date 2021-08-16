@@ -6,6 +6,6 @@ disclaimer: "This page is not yet available in English, we are working on its tr
 announcement_banner:
   desktop_message: "2021 State of Serverless Report"
   mobile_message: "2021 State of Serverless Report"
-  link: "https://www.datadoghq.com/state-of-serverless/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerServerlessReport"
+  external_link: "https://www.datadoghq.com/state-of-serverless/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerServerlessReport"
 exclude: []
 translate_status_banner: "This translation isn't up to date, for the latest english version click here"

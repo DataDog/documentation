@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure App Services Extension
+title: Microsoft Azure App Service Extension
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
@@ -20,9 +20,9 @@ further_reading:
 
 ## Overview
 
-Microsoft [Azure App Services][1] is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
+Microsoft [Azure App Service][1] is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
 
-Datadog provides monitoring capabilities for all Azure App Services resource types:
+Datadog provides monitoring capabilities for all Azure App Service resource types:
 
 - Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
 - Custom metrics can be submitted using the API.
@@ -71,7 +71,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 1. Configure the Azure integration to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
 
-2. Open the [Azure Portal][10] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
+2. Open the [Azure Portal][10] and navigate to the dashboard for the Azure App Service instance you wish to instrument with Datadog.
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
@@ -93,7 +93,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 ### Application logging from Azure App Service
 
-Sending logs from your application in Azure App Services to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
+Sending logs from your application in Azure App Service to Datadog requires the use of Serilog. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog. To enable trace ID injection with the extension, add the application setting `DD_LOGS_INJECTION:true`.
 
 **Note**: Since this occurs inside your application, any Azure Platform logs you submit with diagnostic settings does not include the trace ID.
 
@@ -123,7 +123,7 @@ DogStatsd.Configure(new StatsdConfig() { ConstantTags = new[] { "app:sample.mvc.
 catch (Exception ex)
 {
 // An exception is thrown by the Configure call if the necessary environment variables are not present.
-// These environment variables are present in Azure App Services, but
+// These environment variables are present in Azure App Service, but
 // need to be set in order to test your custom metrics: DD_API_KEY:{api_key}, DD_AGENT_HOST:localhost
 // Ignore or log the exception as it suits you
 Console.WriteLine(ex);
@@ -136,12 +136,20 @@ Learn more about [custom metrics][16].
 
 ## Troubleshooting
 
-To start troubleshooting your application, try these steps:
+1. If you are missing metrics and metadata in the APM trace panel and service page:
 
-1. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
-2. Do a full stop and start of your application.
-3. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
-4. Still need help? Contact [Datadog support][17].
+It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs in the Datadog platform, as well as to avoid broken or empty screens. To fix this:
+
+a. Ensure you have installed the [Azure integration][8] for the Azure subscription where your application is running.
+b. Ensure that any App Service Plan filtering rules you may have applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
+
+
+2. If APM traces are not appearing in Datadog, try these steps:
+
+a. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
+b. Do a full stop and start of your application.
+c. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
+d. Still need help? Contact [Datadog support][17].
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 

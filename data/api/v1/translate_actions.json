@@ -65,9 +65,21 @@
     "description": "Get specified daily custom reports.",
     "summary": "Get specified daily custom reports"
   },
+  "DeleteDashboards": {
+    "description": "Delete dashboards using the specified IDs. If there are any failures, no dashboards will be deleted (partial success is not allowed).",
+    "summary": "Delete dashboards",
+    "request_description": "Delete dashboards request body.",
+    "request_schema_description": "Dashboard bulk delete request body."
+  },
   "ListDashboards": {
     "description": "Get all dashboards.\n\n**Note**: This query will only return custom created or cloned dashboards.\nThis query will not return preset dashboards.",
     "summary": "Get all dashboards"
+  },
+  "RestoreDashboards": {
+    "description": "Restore dashboards using the specified IDs. If there are any failures, no dashboards will be restored (partial success is not allowed).",
+    "summary": "Restore deleted dashboards",
+    "request_description": "Restore dashboards request body.",
+    "request_schema_description": "Dashboard restore request body."
   },
   "CreateDashboard": {
     "description": "Create a dashboard using the specified options. When defining queries in your widgets, take note of which queries should have the `as_count()` or `as_rate()` modifiers appended.\nRefer to the following [documentation](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers) for more information on these modifiers.",
@@ -448,7 +460,7 @@
     "summary": "Delete a custom variable"
   },
   "GetWebhooksIntegrationCustomVariable": {
-    "description": "Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.\n\nIf the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>`\nin the response payload.",
+    "description": "Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.\n\nIf the custom variable is secret, the value does not return in the\nresponse payload.",
     "summary": "Get a custom variable"
   },
   "UpdateWebhooksIntegrationCustomVariable": {

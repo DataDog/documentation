@@ -53,8 +53,16 @@ require 'cucumber'
 require 'datadog/ci'
 
 Datadog.configure do |c|
+  # Only activates test instrumentation on CI
+  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+
+  # Configures the tracer to ensure results delivery
   c.ci_mode.enabled = true
-  c.service = 'my-ruby-app'  # Name of the service or library under test
+
+  # The name of the service or library under test
+  c.service = 'my-ruby-app'
+
+  # Enables the Cucumber instrumentation
   c.use :cucumber
 end
 ```
@@ -77,8 +85,16 @@ require 'rspec'
 require 'datadog/ci'
 
 Datadog.configure do |c|
+  # Only activates test instrumentation on CI
+  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+
+  # Configures the tracer to ensure results delivery
   c.ci_mode.enabled = true
-  c.service = 'my-ruby-app'  # Name of the service or library under test
+
+  # The name of the service or library under test
+  c.service = 'my-ruby-app'
+
+  # Enables the RSpec instrumentation
   c.use :rspec
 end
 ```
@@ -92,7 +108,7 @@ DD_ENV=ci bundle exec rake spec
 {{% /tab %}}
 {{< /tabs >}}
 
-## Additional configuration settings
+## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:
 
@@ -108,20 +124,11 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`tracer.enabled`
-: Setting this to `false` completely disables the instrumentation.<br/>
-**Environment variable**: `DD_TRACE_ENABLED`<br/>
-**Default**: `true`
+The following environment variable can be used to configure the location of the Datadog Agent:
 
-`tracer.hostname`
-: The Datadog Agent hostname.<br/>
-**Environment variable**: `DD_AGENT_HOST`<br/>
-**Default**: `localhost`
-
-`tracer.port`
-: The Datadog Agent trace collection port.<br/>
-**Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
-**Default**: `8126`
+`DD_TRACE_AGENT_URL`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][3] options can also be used.
 

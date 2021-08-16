@@ -33,13 +33,13 @@ export default {
     tcp_endpoint_port: {
         us: '10514',
         us3: '10514',
-        eu: '443',
+        eu: '1883',
         gov: 'not supported'
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
         us3: '10516',
-        eu: '1883',
+        eu: '443',
         gov: 'not supported'
     },
     web_integrations_endpoint: {

@@ -57,18 +57,22 @@ supported_os:
    init_config:
 
    instances:
-     ## @param name - string - required
-     ## Used to uniquely identify your metrics
-     ## as they are tagged with this name in Datadog.
-     #
-     - name: ssh
 
-       ## @param search_string - list of strings - required
-       ## If one of the elements in the list matches, it return the count of
-       ## all the processes that match the string exactly by default.
-       ## Change this behavior with the parameter `exact_match: false`.
-       #
-       search_string: ["ssh", "sshd"]
+    ## @param name - string - required
+    ## Used to uniquely identify your metrics as they are tagged with this name in Datadog.
+    #
+  - name: ssh
+
+    ## @param search_string - list of strings - optional
+    ## If one of the elements in the list matches, it returns the count of
+    ## all the processes that match the string exactly by default. Change this behavior with the
+    ## parameter `exact_match: false`.
+    ##
+    ## Note: One and only one of search_string, pid or pid_file must be specified per instance.
+    #
+    search_string:
+      - ssh
+      - sshd
    ```
 
    プロセスメトリクスによっては、Datadog コレクターを監視対象プロセスと同じユーザーとして実行するか、特権的なアクセスを取得する必要があります。前者のオプションが望ましくなく、Datadog Collector を `root` として実行することを避けるには、`try_sudo` オプションを使用して、プロセスチェックが `sudo` を使用してこのメトリクスを収集するようにします。現時点では、Unix プラットフォームの `open_file_descriptors` メトリクスだけがこの設定を利用しています。注: これが動作するには、適切な sudoers ルールを構成する必要があります。
@@ -108,36 +112,16 @@ supported_os:
 プロセスチェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "process" >}}
 
-**process.up**:<br>
-Agent は、`process.yaml` 内の各インスタンスに対してこのサービスチェックを送信し、それぞれに `process:<name>` のタグを付けます。
-
-`thresholds` が指定されていないインスタンスの場合、サービスチェックは、CRITICAL (実行中のプロセスがない) または OK (少なくとも 1 つのプロセスが実行中) のいずれかのステータスを持ちます。
-
-`thresholds` が指定されたインスタンスの場合を、次の例で説明します。
-
-```yaml
-instances:
-  - name: my_worker_process
-    search_string: ["/usr/local/bin/worker"]
-    thresholds:
-      critical: [1, 7]
-      warning: [3, 5]
-```
-
-Agent は、`process.up` のタグを付けた `process:my_worker_process` を以下のステータスで送信します。
-
-- ワーカープロセスの数が 1 個未満または 7 個より多い場合は `CRITICAL`
-- ワーカープロセスの数が 1、2、6、または 7 個の場合は `WARNING`
-- ワーカープロセスの数が 3、4、または 5 個の場合は `OK`
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
-プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][8]を参照してください。
+プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][9]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/monitoring/#process
 [2]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
@@ -145,5 +129,6 @@ Agent は、`process.up` のタグを付けた `process:my_worker_process` を�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
 [6]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://www.datadoghq.com/blog/process-check-monitoring
+[7]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/process-check-monitoring

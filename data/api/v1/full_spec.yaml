@@ -955,6 +955,40 @@ components:
       - layout_type
       - widgets
       type: object
+    DashboardBulkActionData:
+      description: Dashboard bulk action request data.
+      example:
+        id: 123-abc-456
+        type: dashboard
+      properties:
+        id:
+          $ref: '#/components/schemas/DashboardID'
+        type:
+          $ref: '#/components/schemas/DashboardResourceType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardBulkActionDataList:
+      description: List of dashboard bulk action request data objects.
+      example:
+      - id: 123-abc-456
+        type: dashboard
+      items:
+        $ref: '#/components/schemas/DashboardBulkActionData'
+      type: array
+    DashboardBulkDeleteRequest:
+      description: Dashboard bulk delete request body.
+      example:
+        data:
+        - id: 123-abc-456
+          type: dashboard
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardBulkActionDataList'
+      required:
+      - data
+      type: object
     DashboardDeleteResponse:
       description: Response from the delete dashboard call.
       properties:
@@ -990,6 +1024,10 @@ components:
       - PAST_ONE_WEEK
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
+    DashboardID:
+      description: Dashboard resource ID.
+      example: 123-abc-456
+      type: string
     DashboardInviteType:
       description: Type for shared dashboard invitation request body.
       enum:
@@ -1079,6 +1117,27 @@ components:
       x-enum-varnames:
       - AUTO
       - FIXED
+    DashboardResourceType:
+      default: dashboard
+      description: Dashboard resource type.
+      enum:
+      - dashboard
+      example: dashboard
+      type: string
+      x-enum-varnames:
+      - DASHBOARD
+    DashboardRestoreRequest:
+      description: Dashboard restore request body.
+      example:
+        data:
+        - id: 123-abc-456
+          type: dashboard
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardBulkActionDataList'
+      required:
+      - data
+      type: object
     DashboardShareType:
       description: Type of sharing access (either open to anyone who has the public
         URL or invite-only).
@@ -1786,6 +1845,14 @@ components:
           format: int64
           readOnly: true
           type: integer
+        id_str:
+          description: 'Handling IDs as large 64-bit numbers can cause loss of accuracy
+            issues with some programming languages.
+
+            Instead, use the string representation of the Event ID to avoid losing
+            accuracy.'
+          readOnly: true
+          type: string
         payload:
           description: Payload of the event.
           example: '{}'
@@ -2259,6 +2326,7 @@ components:
       - rum
       - security_signals
       - profiles
+      - audit
       example: logs
       type: string
       x-enum-varnames:
@@ -2268,6 +2336,7 @@ components:
       - RUM
       - SECURITY_SIGNALS
       - PROFILES
+      - AUDIT
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -2278,6 +2347,7 @@ components:
       - last
       - area
       - l2norm
+      - percentile
       example: avg
       type: string
       x-enum-varnames:
@@ -2288,6 +2358,7 @@ components:
       - LAST
       - AREA
       - L2NORM
+      - PERCENTILE
     FormulaAndFunctionMetricDataSource:
       description: Data source for metrics queries.
       enum:
@@ -3375,6 +3446,147 @@ components:
           example: ok
           type: string
       type: object
+    ListStreamColumn:
+      description: Widget column.
+      example:
+        field: timestamp
+        width: auto
+      properties:
+        field:
+          description: Widget column field.
+          example: content
+          type: string
+        width:
+          $ref: '#/components/schemas/ListStreamColumnWidth'
+      required:
+      - width
+      - field
+      type: object
+    ListStreamColumnWidth:
+      description: Widget column width.
+      enum:
+      - auto
+      - compact
+      - full
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - COMPACT
+      - FULL
+    ListStreamQuery:
+      description: Updated list stream widget.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/ListStreamSource'
+        indexes:
+          description: List of indexes.
+          items:
+            description: Index.
+            type: string
+          type: array
+        query_string:
+          description: Widget query.
+          example: '@service:app'
+          type: string
+      required:
+      - query_string
+      - data_source
+      type: object
+    ListStreamResponseFormat:
+      description: Widget response format.
+      enum:
+      - event_list
+      type: string
+      x-enum-varnames:
+      - EVENT_LIST
+    ListStreamSource:
+      default: issue_stream
+      description: Source from which to query items to display in the stream.
+      enum:
+      - issue_stream
+      - logs_stream
+      - audit_stream
+      example: issue_stream
+      type: string
+      x-enum-varnames:
+      - ISSUE_STREAM
+      - LOGS_STREAM
+      - AUDIT_STREAM
+    ListStreamWidgetDefinition:
+      description: 'The list stream visualization displays a table of recent events
+        in your application that
+
+        match a search criteria using user-defined columns.
+
+        '
+      properties:
+        legend_size:
+          $ref: '#/components/schemas/WidgetLegendSize'
+        requests:
+          description: Request payload used to query items.
+          example:
+          - response_format: event_list
+          - columns:
+            - field: timestamp
+              width: auto
+          - query:
+              data_source: issue_stream
+              query_string: '@data_source:APM'
+          items:
+            $ref: '#/components/schemas/ListStreamWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        show_legend:
+          description: Whether or not to display the legend on this widget.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/ListStreamWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    ListStreamWidgetDefinitionType:
+      default: list_stream
+      description: Type of the list stream widget.
+      enum:
+      - list_stream
+      example: list_stream
+      type: string
+      x-enum-varnames:
+      - LIST_STREAM
+    ListStreamWidgetRequest:
+      description: Updated list stream widget.
+      properties:
+        columns:
+          description: Widget columns.
+          example:
+          - field: timestamp
+            width: auto
+          - field: content
+            width: full
+          items:
+            $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        query:
+          $ref: '#/components/schemas/ListStreamQuery'
+        response_format:
+          $ref: '#/components/schemas/ListStreamResponseFormat'
+      required:
+      - columns
+      - query
+      - response_format
+      type: object
     Log:
       description: Object describing a log after being processed and stored by Datadog.
       properties:
@@ -3594,7 +3806,7 @@ components:
         is overwritten by the result of the formula.\n- Results are rounded up to
         the 9th decimal. For example, if the result of the formula is `0.1234567891`,\n
         \ the actual value stored for the attribute is `0.123456789`.\n- If you need
-        to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/processing/parsing/?tab=filter#matcher-and-filter)."
+        to scale a unit of measure,\n  see [Scale Filter](https://docs.datadoghq.com/logs/log_configuration/parsing/?tab=filter#matcher-and-filter)."
       properties:
         expression:
           description: Arithmetic operation between one or more log attributes.
@@ -3879,8 +4091,8 @@ components:
           description: 'Sample rate to apply to logs going through this exclusion
             filter,
 
-            a value of 1 will exclude all logs matching the query.'
-          example: 1
+            a value of 1.0 excludes all logs matching the query.'
+          example: 1.0
           format: double
           type: number
       required:
@@ -3942,9 +4154,9 @@ components:
       - GEO_IP_PARSER
     LogsGrokParser:
       description: 'Create custom grok rules to parse the full message or [a specific
-        attribute of your raw event](https://docs.datadoghq.com/logs/processing/parsing/#advanced-settings).
+        attribute of your raw event](https://docs.datadoghq.com/logs/log_configuration/parsing/#advanced-settings).
 
-        For more information, see the [parsing section](https://docs.datadoghq.com/logs/processing/parsing).'
+        For more information, see the [parsing section](https://docs.datadoghq.com/logs/log_configuration/parsing).'
       properties:
         grok:
           $ref: '#/components/schemas/LogsGrokParserRules'
@@ -5300,13 +5512,29 @@ components:
           format: int64
           nullable: true
           type: integer
+        new_group_delay:
+          description: 'Time (in seconds) to skip evaluations for new groups.
+
+
+            For example, this option can be used to skip evaluations for new hosts
+            while they initialize.
+
+
+            Must be a non negative integer.'
+          format: int64
+          nullable: true
+          type: integer
         new_host_delay:
           default: 300
+          deprecated: true
           description: 'Time (in seconds) to allow a host to boot and applications
 
             to fully start before starting the evaluation of monitor results.
 
-            Should be a non negative integer.'
+            Should be a non negative integer.
+
+
+            Use new_group_delay instead.'
           format: int64
           nullable: true
           type: integer
@@ -6815,6 +7043,7 @@ components:
           Current is defined as not more than 10 minutes in the future or more than
           1 hour in the past.'
         format: double
+        nullable: true
         type: number
       maxItems: 2
       minItems: 2
@@ -6915,6 +7144,8 @@ components:
         aggregator:
           $ref: '#/components/schemas/WidgetAggregator'
         apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
@@ -7490,7 +7721,8 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            uptime time series.
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
           items:
             description: Represents an array time series data.
             example:
@@ -7888,7 +8120,7 @@ components:
       description: Updated scatter plot.
       properties:
         aggregator:
-          $ref: '#/components/schemas/WidgetAggregator'
+          $ref: '#/components/schemas/ScatterplotWidgetAggregator'
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
@@ -7969,6 +8201,21 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    ScatterplotWidgetAggregator:
+      description: Aggregator used for the request.
+      enum:
+      - avg
+      - last
+      - max
+      - min
+      - sum
+      type: string
+      x-enum-varnames:
+      - AVERAGE
+      - LAST
+      - MAXIMUM
+      - MINIMUM
+      - SUM
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -9245,9 +9492,8 @@ components:
           description: The associated assertion property.
           type: string
         target:
-          additionalProperties: false
           description: Value used by the operator.
-          type: object
+          nullable: false
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -9810,6 +10056,9 @@ components:
       - firefox.laptop_large
       - firefox.tablet
       - firefox.mobile_small
+      - edge.laptop_large
+      - edge.tablet
+      - edge.mobile_small
       type: string
       x-enum-varnames:
       - LAPTOP_LARGE
@@ -9821,6 +10070,9 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+      - EDGE_LAPTOP_LARGE
+      - EDGE_TABLET
+      - EDGE_MOBILE_SMALL
     SyntheticsErrorCode:
       description: Error code that can be returned by a Synthetic test.
       enum:
@@ -9869,6 +10121,17 @@ components:
     SyntheticsGlobalVariable:
       description: Synthetics global variable.
       properties:
+        attributes:
+          description: Attributes of the global variable.
+          properties:
+            restricted_roles:
+              description: List of role identifiers that can be pulled from the Roles
+                API.
+              items:
+                description: UUID for a role.
+                type: string
+              type: array
+          type: object
         description:
           description: Description of the global variable.
           example: Example description
@@ -9937,11 +10200,13 @@ components:
       - raw
       - json_path
       - regex
+      - x_path
       type: string
       x-enum-varnames:
       - RAW
       - JSON_PATH
       - REGEX
+      - X_PATH
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
@@ -10866,6 +11131,12 @@ components:
           type: array
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries. **This feature is
+            currently in beta.**
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         limit:
           description: For metric queries, the number of lines to show in the table.
             Only one request should have this property.
@@ -10884,6 +11155,14 @@ components:
         q:
           description: Query definition.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -11035,6 +11314,8 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         display_type:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
@@ -11125,6 +11406,8 @@ components:
       description: Updated top list widget.
       properties:
         apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
@@ -11513,6 +11796,24 @@ components:
           type: number
         container_usage:
           description: The container usage by tag(s).
+          format: double
+          type: number
+        cspm_container_percentage:
+          description: The percentage of Cloud Security Posture Management container
+            usage by tag(s)
+          format: double
+          type: number
+        cspm_container_usage:
+          description: The Cloud Security Posture Management container usage by tag(s)
+          format: double
+          type: number
+        cspm_host_percentage:
+          description: The percentage of Cloud Security Posture Management host usage
+            by tag(s)
+          format: double
+          type: number
+        cspm_host_usage:
+          description: The Cloud Security Posture Management host usage by tag(s)
           format: double
           type: number
         custom_timeseries_percentage:
@@ -13387,14 +13688,11 @@ components:
       description: Datadog-Webhooks integration.
       properties:
         custom_headers:
-          additionalProperties:
-            description: Additional properties for custom headers.
-            type: string
           description: 'If `null`, uses no header.
 
             If given a JSON payload, these will be headers attached to your webhook.'
           nullable: true
-          type: object
+          type: string
         encode_as:
           $ref: '#/components/schemas/WebhooksIntegrationEncoding'
         name:
@@ -13406,7 +13704,15 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          $ref: '#/components/schemas/WebhooksIntegrationPayload'
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -13421,23 +13727,45 @@ components:
         is_secret:
           description: 'Make custom variable is secret or not.
 
-            If the custom variable is secret, it returns `null` for
-
-            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
           example: true
           type: boolean
         name:
-          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
           example: CUSTOM_VARIABLE_NAME
           type: string
         value:
           description: Value of the custom variable.
           example: CUSTOM_VARIABLE_VALUE
-          nullable: true
           type: string
       required:
       - name
       - value
+      - is_secret
+      type: object
+    WebhooksIntegrationCustomVariableResponse:
+      description: Custom variable for Webhook integration.
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
+          example: true
+          type: boolean
+        name:
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable. It won't be returned if the variable
+            is secret.
+          example: CUSTOM_VARIABLE_VALUE
+          type: string
+      required:
+      - name
       - is_secret
       type: object
     WebhooksIntegrationCustomVariableUpdateRequest:
@@ -13449,18 +13777,17 @@ components:
         is_secret:
           description: 'Make custom variable is secret or not.
 
-            If the custom variable is secret, it returns `null` for
-
-            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
           type: boolean
         name:
-          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
           example: CUSTOM_VARIABLE_NAME
           type: string
         value:
           description: Value of the custom variable.
           example: CUSTOM_VARIABLE_VALUE
-          nullable: true
           type: string
       type: object
     WebhooksIntegrationEncoding:
@@ -13473,16 +13800,6 @@ components:
       x-enum-varnames:
       - JSON
       - FORM
-    WebhooksIntegrationPayload:
-      description: 'If `null`, uses the default payload.
-
-        If given a JSON payload, the webhook returns the payload
-
-        specified by the given payload.
-
-        [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
-      nullable: true
-      type: object
     WebhooksIntegrationUpdateRequest:
       description: 'Update request of a Webhooks integration object.
 
@@ -13490,13 +13807,10 @@ components:
         *All properties are optional.*'
       properties:
         custom_headers:
-          additionalProperties:
-            description: Additional properties for custom headers.
-            type: string
           description: 'If `null`, uses no header.
 
             If given a JSON payload, these will be headers attached to your webhook.'
-          type: object
+          type: string
         encode_as:
           $ref: '#/components/schemas/WebhooksIntegrationEncoding'
         name:
@@ -13508,7 +13822,15 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          $ref: '#/components/schemas/WebhooksIntegrationPayload'
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -13540,6 +13862,7 @@ components:
       - max
       - min
       - sum
+      - percentile
       type: string
       x-enum-varnames:
       - AVERAGE
@@ -13547,6 +13870,7 @@ components:
       - MAXIMUM
       - MINIMUM
       - SUM
+      - PERCENTILE
     WidgetAxis:
       description: Axis controls for the widget.
       properties:
@@ -13706,6 +14030,7 @@ components:
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
@@ -13764,6 +14089,13 @@ components:
         alias:
           description: Expression alias.
           type: string
+        cell_display_mode:
+          $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        conditional_formats:
+          description: List of conditional formats.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
         formula:
           description: String expression built from queries, formulas, and functions.
           example: func(a) + b
@@ -14851,6 +15183,53 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/dashboard:
+    delete:
+      description: Delete dashboards using the specified IDs. If there are any failures,
+        no dashboards will be deleted (partial success is not allowed).
+      operationId: DeleteDashboards
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - id: 123-abc-456
+                    type: dashboard
+                  - id: 789-def-101
+                    type: dashboard
+            schema:
+              $ref: '#/components/schemas/DashboardBulkDeleteRequest'
+        description: Delete dashboards request body.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+      summary: Delete dashboards
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
     get:
       description: 'Get all dashboards.
 
@@ -14887,6 +15266,53 @@ paths:
       x-menu-order: 2
       x-undo:
         type: safe
+    patch:
+      description: Restore dashboards using the specified IDs. If there are any failures,
+        no dashboards will be restored (partial success is not allowed).
+      operationId: RestoreDashboards
+      requestBody:
+        content:
+          application/json:
+            examples:
+              json-request-body:
+                value:
+                  data:
+                  - id: 123-abc-456
+                    type: dashboard
+                  - id: 789-def-101
+                    type: dashboard
+            schema:
+              $ref: '#/components/schemas/DashboardRestoreRequest'
+        description: Restore dashboards request body.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Dashboards Not Found
+      summary: Restore deleted dashboards
+      tags:
+      - Dashboards
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
     post:
       description: 'Create a dashboard using the specified options. When defining
         queries in your widgets, take note of which queries should have the `as_count()`
@@ -15545,7 +15971,7 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: safe
     put:
@@ -15594,7 +16020,7 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/downtime:
@@ -18023,7 +18449,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18041,6 +18467,13 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-given:
+        webhook-custom-variable:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
+              \ \"is_secret\": false\n}"
+          step: there is a valid "webhook-custom-variable" in the system
       x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
@@ -18084,9 +18517,9 @@ paths:
       description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
 
-        If the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>`
+        If the custom variable is secret, the value does not return in the
 
-        in the response payload.'
+        response payload.'
       operationId: GetWebhooksIntegrationCustomVariable
       parameters:
       - description: The name of the custom variable.
@@ -18100,7 +18533,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18148,7 +18581,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18209,6 +18642,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-given:
+        webhook:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
+          step: there is a valid "webhook" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteWebhooksIntegration
@@ -23090,6 +23529,13 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageAttributionSort'
+      - description: Include child org usage in the response. Defaults to false.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -24973,8 +25419,8 @@ tags:
     them into structured attributes for easier querying.\n\n- See the [pipelines configuration
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
     and processors currently configured in our UI.\n\n- Additional API-related information
-    about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\n-
-    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\n**Notes:**\n\nThese
+    about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
     endpoints are only available for admin users.\nMake sure to use an application
     key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
     data to be configured before using in a request.**\nFor example, if you are using
@@ -24983,7 +25429,7 @@ tags:
     all escaped spaces as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
-    url: https://docs.datadoghq.com/logs/processing/
+    url: https://docs.datadoghq.com/logs/log_configuration
   name: Logs Pipelines
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
     be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n-
@@ -25041,6 +25487,12 @@ tags:
     a message
 
     containing more than 500 characters, only the first 500 characters are displayed.
+    Messages
+
+    are limited for checks with a Critical or Warning status, they are dropped for
+    checks with
+
+    an OK status.
 
 
     - [Read more about Service Check monitors.][1]

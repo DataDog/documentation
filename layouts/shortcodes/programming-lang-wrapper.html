@@ -1,11 +1,11 @@
 {{ $codeLangs := split (.Get "langs") "," }}
+{{ $sort := .Get "sort" }}
 
 {{ if  not (.Get "langs") }}
     {{ errorf "Programming lang wrapper shortcode error: Missing value for param 'langs': %s" .Position }}
 {{ end }}
 
 <div class="programming-lang-wrapper js-code-snippet-wrapper">
-
-    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
+    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs "sort" $sort) }}
     {{ .Inner }}
 </div>

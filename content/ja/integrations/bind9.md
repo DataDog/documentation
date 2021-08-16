@@ -85,16 +85,16 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 
 ### イベント
 
-現時点で、bind9_check チェックには、イベントは含まれません。
+bind9 チェックにはイベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "bind9" >}}
 
-`bind9_check.BIND_SERVICE_CHECK`: DNS の統計チャンネル URL がインスタンスに存在する場合は、`OK` を返します。
-`bind9_check.BIND_SERVICE_CHECK`: URL エラーが発生した場合は、`CRITICAL` を返します。
 
-## 開発
+## トラブルシューティング
 
-Agent ベースのインテグレーションのテストおよび開発方法の詳細については、[メインドキュメント][12]を参照してください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bind9/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -107,4 +107,5 @@ Agent ベースのインテグレーションのテストおよび開発方法�
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/bind9/metadata.csv
-[12]: https://docs.datadoghq.com/ja/developers/
+[12]: https://github.com/DataDog/integrations-extras/blob/master/bind9/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help

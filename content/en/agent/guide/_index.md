@@ -13,7 +13,7 @@ private: true
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
     {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
-    {{< nextlink href="agent/guide/community-integrations-installation-with-docker-agent" >}}Community integration installation{{< /nextlink >}}
+    {{< nextlink href="agent/guide/use-community-integrations" >}}Use Community Integrations{{< /nextlink >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-v6-python-3" >}}Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
@@ -29,7 +29,7 @@ private: true
     {{< nextlink href="/agent/guide/heroku-ruby" >}}Instrumenting a Ruby on Rails application on Heroku with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-{{< whatsnext desc="Agent 5 Guides:" >}}
+{{< whatsnext desc="Agent v5 Guides:" >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}

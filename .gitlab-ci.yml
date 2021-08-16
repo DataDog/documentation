@@ -25,11 +25,10 @@ before_script:
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
+  - mkdir -p logs
 
 cache: &cache
-  key:
-    files:
-      - yarn.lock
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
   paths:
     - node_modules/
 
@@ -38,7 +37,6 @@ cache: &cache
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
-    - "size:2xlarge"
   except:
     - tags
   only:
@@ -64,9 +62,6 @@ install_dependencies:
   only:
     changes:
       - yarn.lock
-  except:
-    # skip on automated translation prs
-    - /^guacbot\/translation-[0-9]+$/i
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
@@ -95,7 +90,7 @@ build_preview:
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
-    - in-isolation deploy_preview
+    - in-isolation deploy_preview > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
@@ -105,6 +100,7 @@ build_preview:
       - ./integrations_data
       - .github/
       - .vale.ini
+      - ./logs
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -167,7 +163,7 @@ missing_tms_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/vale:v4036929-ee9929a-2.9.1
     entrypoint: [ "" ]
-  tags: ["runner:main", "size:2xlarge"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache: {}
   environment: "preview"
@@ -187,7 +183,7 @@ index_algolia_preview:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: [ "runner:main","size:2xlarge" ]
+  tags: ["runner:main"]
   stage: post-deploy
   cache:
     <<: *cache
@@ -289,7 +285,7 @@ index_internal_doc:
   only:
     - master
   except: [ tags, schedules ]
-  tags: [ "runner:main", "size:2xlarge" ]
+  tags: ["runner:main"]
   script:
     - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
@@ -313,7 +309,7 @@ index_algolia:
   image:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main","size:2xlarge"]
+  tags: ["runner:main"]
   stage: post-deploy
   cache:
     <<: *cache

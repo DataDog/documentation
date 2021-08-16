@@ -18,6 +18,7 @@ Supported test frameworks:
   * Only [`jest-circus`][1] is supported as a `testRunner`.
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
+* Cucumber-js >= 7.0.0
 
 ## Prerequisites
 
@@ -40,19 +41,19 @@ For more information, see the [JavaScript tracer installation docs][4].
 
 1. Install the `jest-circus` test runner:
 
-    {{< code-block lang="bash" >}}
+```bash
 yarn add --dev jest-circus
-{{< /code-block >}}
+```
 
 **Important**: The installed version of `jest-circus` and `jest` must be the same. For example, if you're using `jest@25.5.4`, run:
 
-    {{< code-block lang="bash" >}}
+```bash
 yarn add --dev jest-circus@25.5.4
-{{< /code-block >}}
+```
 
 2. Configure a custom [testEnvironment][1] and [testRunner][2] in your `jest.config.js` or however you are configuring `jest`:
 
-    {{< code-block lang="javascript" filename="jest.config.js" >}}
+```javascript
 module.exports = {
   // ...
   testRunner: 'jest-circus/runner',
@@ -60,27 +61,33 @@ module.exports = {
   testEnvironment: '<rootDir>/testEnvironment.js',
   // ...
 }
-{{< /code-block >}}
+```
 
 And in `testEnvironment.js`:
 
-    {{< code-block lang="javascript" filename="testEnvironment.js" >}}
+```javascript
 require('dd-trace').init({
-  service: 'my-ui-app',  // Name of the service or library under test
-  flushInterval: 300000  // To guarantee test span delivery
+  // Only activates test instrumentation on CI
+  enabled: process.env.DD_ENV === 'ci',
+
+  // Name of the service or library under test
+  service: 'my-ui-app',
+
+  // To guarantee test span delivery
+  flushInterval: 300000
 })
 
 // jest-environment-jsdom is an option too
 module.exports = require('jest-environment-node')
-{{< /code-block >}}
+```
 
 <div class="alert alert-warning"><strong>Note</strong>: <code>jest-environment-node</code> and <code>jest-environment-jsdom</code> are installed together with <code>jest</code>, so they do not normally appear in your <code>package.json</code>. If you've extracted any of these libraries in your <code>package.json</code>, make sure the installed version is the same as the one of <code>jest</code>.</div>
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_ENV=ci npm test
-{{< /code-block >}}
+```
 
 
 [1]: https://jestjs.io/docs/en/configuration#testenvironment-string
@@ -88,11 +95,40 @@ DD_ENV=ci npm test
 {{% /tab %}}
 {{% tab "Mocha" %}}
 
-Add `--require dd-trace/init` to however you normally run your `mocha` tests, for example in your `package.json`:
+Create a file in your project (for example, `init-tracer.js`) with the following contents:
 
-{{< code-block lang="javascript" filename="package.json" >}}
-'scripts': {
-  'test': 'DD_SERVICE=my-ui-app mocha --require dd-trace/init'
+```javascript
+require('dd-trace').init({
+  // Only activates test instrumentation on CI
+  enabled: process.env.DD_ENV === 'ci',
+
+  // Name of the service or library under test
+  service: 'my-ui-app'
+})
+```
+
+Add `--require init-tracer` to the run command for your `mocha` tests, for example in your `package.json`:
+
+```json
+"scripts": {
+  "test": "mocha --require init-tracer"
+},
+```
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+```bash
+DD_ENV=ci npm test
+```
+
+{{% /tab %}}
+{{% tab "Cucumber" %}}
+
+Add `--require-module dd-trace/init` to however you normally run your `cucumber-js` tests, for example in your `package.json`:
+
+{{< code-block lang="json" filename="package.json" >}}
+"scripts": {
+  "test": "DD_SERVICE=my-ui-app cucumber-js --require-module=dd-trace/init"
 },
 {{< /code-block >}}
 
@@ -105,7 +141,7 @@ DD_ENV=ci npm test
 {{% /tab %}}
 {{< /tabs >}}
 
-## Additional configuration settings
+## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer. They can be either passed in on its `init()` function, or as environment variables:
 
@@ -121,20 +157,10 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`enabled`
-: Setting this to `false` completely disables the instrumentation.<br/>
-**Environment variable**: `DD_TRACE_ENABLED`<br/>
-**Default**: `true`
-
-`hostname`
-: The Datadog Agent hostname.<br/>
-**Environment variable**: `DD_TRACE_AGENT_HOSTNAME`<br/>
-**Default**: `localhost`
-
-`port`
-: The Datadog Agent trace collection port.<br/>
-**Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
-**Default**: `8126`
+`url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
+**Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][5] options can also be used.
 
@@ -142,7 +168,7 @@ All other [Datadog Tracer configuration][5] options can also be used.
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation will be limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see [the NodeJS documentation][7].
+[Mocha >=9.0.0][6] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][7].
 
 ### Browser tests
 The JavaScript tracer does not support browsers, so if you run browser tests with `mocha` or `jest`, there isn't visibility within the test itself.

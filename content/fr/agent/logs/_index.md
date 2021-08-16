@@ -146,7 +146,7 @@ Définissez le même nom de canal pour le paramètre `source` correspondant afin
 
 Pour terminer, [redémarrez l'Agent][2].
 
-[1]: /fr/logs/processing/pipelines/#integration-pipelines
+[1]: /fr/logs/log_configuration/pipelines/#integration-pipelines
 [2]: /fr/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}

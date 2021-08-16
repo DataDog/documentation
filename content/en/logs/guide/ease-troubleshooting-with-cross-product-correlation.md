@@ -58,7 +58,7 @@ The application tracer generates trace IDs by default. This can be changed by in
 
 ##### Setup opentracing
 
-Follow [NGINX tracing integration][13].
+Follow [NGINX tracing integration][5].
 
 ##### Inject trace ID in logs
 
@@ -78,7 +78,7 @@ http {
 
 1. Clone the NGINX pipeline.
 
-2. Customize the first [grok parser][14]:
+2. Customize the first [grok parser][6]:
    - In **Parsing rules**, replace the first parsing rule with:
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
@@ -88,7 +88,7 @@ http {
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. Add a [trace ID remapper][15] on `dd.trace_id` attribute.
+3. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
 
 ### Correlate database logs
 
@@ -104,7 +104,7 @@ For example, production slow queries are hard to reproduce and analyze without i
 
 ##### Enrich your database logs
 
-PostgreSQL default logs are not detailed. Follow [this integration guide][5] to enrich them.
+PostgreSQL default logs are not detailed. Follow [this integration guide][8] to enrich them.
 
 Slow query best practices also suggests logging execution plans of slow statements automatically, so you don't have to run `EXPLAIN` by hand. To run `EXPLAIN` automatically, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
@@ -115,11 +115,11 @@ auto_explain.log_min_duration = '500ms'
 
 Queries longer than 500ms log their execution plan.
 
-**Note**: `auto_explain.log_analyze = 'true'` provides even more information, but greatly impacts performance. For more information, see the [official documentation][6].
+**Note**: `auto_explain.log_analyze = 'true'` provides even more information, but greatly impacts performance. For more information, see the [official documentation][9].
 
 ##### Inject trace_id into your database logs
 
-Inject `trace_id` into most of your database logs with [SQL comments][7]. Here is an example with Flask and SQLAlchemy:
+Inject `trace_id` into most of your database logs with [SQL comments][10]. Here is an example with Flask and SQLAlchemy:
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
@@ -138,12 +138,12 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
 
 Clone and customize the PostgreSQL pipeline:
 
-1. Add a new [grok parser][8]:
+1. Add a new [grok parser][6]:
    ```text
    extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
    ```
 
-2. Add a [trace ID remapper][9] on `dd.trace_id` attribute.
+2. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
 
 Here is an example of a slow query execution plan from a slow trace:
 
@@ -155,7 +155,7 @@ Here is an example of a slow query execution plan from a slow trace:
 
 #### Why?
 
-[Browser logs][10] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
+[Browser logs][11] inside a RUM event give context and insight into an issue. As in the example below, browser logs indicate that the bad query root cause is an invalid user ID.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:80%;" >}}
 
@@ -163,7 +163,7 @@ Correlating your browser logs with RUM also eases [aggressive sampling strategy 
 
 #### How?
 
-Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][11]. [Matching configuration between RUM and logs SDK][12] is required.
+Browser logs and RUM events are automatically correlated as explained in the [RUM billing FAQ][12]. [Matching configuration between RUM and logs SDK][13] is required.
 
 ## Correlate user experience with server behavior
 
@@ -187,7 +187,7 @@ Use the RUM correlation to:
 
 #### How?
 
-Follow the [connect RUM and Traces][13] documentation. RUM view information is available in the [Trace view][14] and trace information is available in the [Session view][15].
+Follow the [connect RUM and Traces][14] documentation. RUM view information is available in the [Trace view][15] and trace information is available in the [Session view][16].
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:80%;" >}}
 
@@ -203,29 +203,28 @@ The APM integration with Synthetic Monitoring allows you to go from a test run t
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:80%;" >}}
 
-Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][16] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
+Having network-related specifics, thanks to your test, as well as backend, infrastructure, log information (thanks to your trace), and RUM events (for [browser tests][17] only) allows you to access a new level of detail about the way your application is behaving and how it is experienced by your users.
 
 #### How?
 
-For this feature, follow the [enable APM integration on Synthetic settings][17] documentation.
+For this feature, follow the [enable APM integration on Synthetic settings][18] documentation.
 
-[13]:/tracing/setup_overview/proxy_setup/?tab=nginx
-[14]:/logs/processing/processors/?tab=ui#grok-parser
-[15]:/logs/processing/processors/?tab=ui#trace-remapper
+
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
 [3]: /tracing/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /integrations/postgres/?tab=host#log-collection
-[6]: https://www.postgresql.org/docs/13/auto-explain.html
-[7]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
-[8]: /logs/processing/processors/?tab=ui#grok-parser
-[9]: /logs/processing/processors/?tab=ui#trace-remapper
-[10]: /logs/log_collection/javascript/
-[11]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
-[12]: /real_user_monitoring/browser/#initialization-parameters
-[13]: /real_user_monitoring/connect_rum_and_traces
-[14]: https://app.datadoghq.com/apm/traces
-[15]: https://app.datadoghq.com/rum/explorer
-[16]: /synthetics/browser_tests/
-[17]: /synthetics/apm
+[5]: /tracing/setup_overview/proxy_setup/?tab=nginx
+[6]: /logs/log_configuration/processors/#grok-parser
+[7]: /logs/log_configuration/processors/#trace-remapper
+[8]: /integrations/postgres/?tab=host#log-collection
+[9]: https://www.postgresql.org/docs/13/auto-explain.html
+[10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
+[11]: /logs/log_collection/javascript/
+[12]: /account_management/billing/rum/#can-i-view-logs-from-the-browser-collector-in-rum
+[13]: /real_user_monitoring/browser/#initialization-parameters
+[14]: /real_user_monitoring/connect_rum_and_traces
+[15]: https://app.datadoghq.com/apm/traces
+[16]: https://app.datadoghq.com/rum/explorer
+[17]: /synthetics/browser_tests/
+[18]: /synthetics/apm

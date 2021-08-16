@@ -10,6 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< site-region region="us,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -44,7 +45,7 @@ There are two ways of installing the testing framework:
 {{% /tab %}}
 {{% tab "Adding the framework directly" %}}
 
-1. Download and decompress `DatadogSDKTesting.zip` from the [release page][1].
+1. Download and decompress `DatadogSDKTesting.zip` from the [release][1] page.
 
 2. Copy and link your test targets with the resulting XCFramework.
 
@@ -98,16 +99,20 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-<!-- TODO: uncomment this once we support any datacenter other than us1
-`DD_SITE`
-: The Datadog site to upload results to.<br/>
+{{< site-region region="eu" >}}
+Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
+
+`DD_SITE` (Required)
+: The [Datadog site][1] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Possible values**: `datadoghq.com`, `us3.datadoghq.com`, `datadoghq.eu`
--->
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+[1]: /getting_started/site/
+{{< /site-region >}}
 
 ### Collecting Git and build metadata
 
-Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (refer to the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
@@ -115,6 +120,7 @@ When running tests in a simulator, full Git metadata is collected using the loca
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
+{{< site-region region="us" >}}
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -project "MyProject.xcodeproj" \
@@ -122,6 +128,16 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
   -destination "platform=macOS,arch=x86_64" \
   test
 {{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+{{< code-block lang="bash" >}}
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
+{{< /code-block >}}
+{{< /site-region >}}
 
 ### UI tests
 
@@ -151,7 +167,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash won't be reported at all, and won't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 
@@ -194,6 +210,7 @@ Additional Git configuration for physical device testing:
 | -------------------- | --------------- |
 | `GIT_COMMIT`         | `$(GIT_COMMIT)` |
 | `GIT_URL`            | `$(GIT_URL)`    |
+| `GIT_URL_1`          | `$(GIT_URL_1)`  |
 | `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
 {{% /tab %}}
@@ -241,6 +258,8 @@ Additional Git configuration for physical device testing:
 | `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`  |
 | `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`     |
 | `CI_COMMIT_MESSAGE`  | `$(CI_COMMIT_MESSAGE)` |
+| `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
+| `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
 {{% /tab %}}
 {{% tab "Travis" %}}
@@ -366,6 +385,8 @@ Additional Git configuration for physical device testing:
 | `SYSTEM_TEAMFOUNDATIONSERVERURI` | `$(SYSTEM_TEAMFOUNDATIONSERVERURI)` |
 | `SYSTEM_JOBID`                   | `$(SYSTEM_JOBID)`                   |
 | `SYSTEM_TASKINSTANCEID`          | `$(SYSTEM_TASKINSTANCEID)`          |
+| `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
+| `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
 Additional Git configuration for physical device testing:
 
@@ -387,7 +408,7 @@ Additional Git configuration for physical device testing:
 | Environment variable   | Value                     |
 | ---------------------- | ------------------------- |
 | `BITRISE_SOURCE_DIR`   | `$(BITRISE_SOURCE_DIR)`   |
-| `BITRISE_APP_TITLE`    | `$(BITRISE_APP_TITLE)`    |
+| `BITRISE_TRIGGERED_WORKFLOW_ID`  | `$(BITRISE_TRIGGERED_WORKFLOW_ID)`  |
 | `BITRISE_BUILD_SLUG`   | `$(BITRISE_BUILD_SLUG)`   |
 | `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
 | `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
@@ -417,3 +438,7 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
+{{< /site-region >}}
+{{< site-region region="us3,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}

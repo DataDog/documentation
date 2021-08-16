@@ -19,9 +19,11 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog'
 ---
 
-Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
+The profiler is shipped within the following tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
-To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][1].
+Select your language below to learn how to enable a profiler for your application:
+
+To get notified when a private beta is available for the **Node**, **PHP**, or **.NET** Profiler, [sign up here][2].
 
 {{< programming-lang-wrapper langs="java,python,go,ruby" >}}
 {{< programming-lang lang="java" >}}
@@ -38,18 +40,35 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
-3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. The update to your service invocation should look like:
+3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Your service invocation should look like:
 
     ```diff
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java \
+        -javaagent:dd-java-agent.jar \
+        -Ddd.service=<YOUR_SERVICE> \
+        -Ddd.env=<YOUR_ENVIRONMENT> \
+        -Ddd.version=<YOUR_VERSION> \
+        -Ddd.profiling.enabled=true \
+        -XX:FlightRecorderOptions=stackdepth=256 \
+        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][5].
+    **Recommendation**: Specify `dd.service`, `dd.env`, and `dd.version` so you can slice and dice your profiles across these dimensions.
 
+    You can also [use environment variables](#environment-variables) to set the parameters as such:
 
-**Note**:
+    ```diff
+    export DD_SERVICE=<YOUR_SERVICE>
+    export DD_ENV=<YOUR_ENV>
+    export DD_VERSION=<YOUR_VERSION>
+    export DD_PROFILING_ENABLED=true
+    java \
+        -javaagent:dd-java-agent.jar \
+        -XX:FlightRecorderOptions=stackdepth=256 \
+        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    ```
 
-- The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
+    **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][5]:
 
     ```shell
     # Good:
@@ -58,11 +77,11 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-- Datadog strongly recommends that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
+4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][6].
 
 ## Enabling the allocation profiler
 
-In dd-java-agent v0.83.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
+In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][7].
 
 ## Environment variables
 
@@ -71,7 +90,7 @@ In dd-java-agent v0.83.0+ and Java 15 and lower, the allocation profiler is opt-
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
 | `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
 | `DD_SERVICE`                                     | String        | Your [service][3] name, for example, `web-backend`.     |
-| `DD_ENV`                                         | String        | Your [environment][7] name, for example: `production`.|
+| `DD_ENV`                                         | String        | Your [environment][8] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
@@ -79,10 +98,10 @@ In dd-java-agent v0.83.0+ and Java 15 and lower, the allocation profiler is opt-
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
 [3]: https://app.datadoghq.com/account/settings#agent/overview
 [4]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[5]: https://app.datadoghq.com/profiling
-[6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[7]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[8]: /tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
+[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[6]: https://app.datadoghq.com/profiling
+[7]: /tracing/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
+[8]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -341,11 +360,12 @@ The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available 
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][2] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][3] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /getting_started/profiler/
+[1]: /tracing/setup_overview/
+[2]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
+[3]: /getting_started/profiler/

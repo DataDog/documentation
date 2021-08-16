@@ -29,7 +29,7 @@ integration_title: JFrog Platform
 is_public: true
 kind: インテグレーション
 maintainer: integrations@jfrog.com
-manifest_version: 2.0.0
+manifest_version: 1.0.0
 metric_prefix: jfrog.
 metric_to_check: jfrog.artifactory.app_disk_free_bytes
 name: jfrog_platform
@@ -44,7 +44,7 @@ supported_os:
 ## 概要
 以下では、JFrog Artifactory および JFrog Xray からメトリクスおよびログを収集するように Datadog を構成する方法について説明します。
 
-### JFrog Artifactory および Xray とは
+### JFrog Artifactory および Xray
 JFrog Enterprise with Xray の特徴は Artifactory Enterprise と Xray です。これらを組み合わせることで、DevOps チームは生産性を向上させて速度を上げ、自信を持って高品質のソフトウェアリリースを提供できます。
 
 Artifactory は、複数のビルドパッケージ、アーティファクト、メタデータをサポートしています。DevOps チームは Bower、Chef、CocoaPods、Conan、Conda、CRAN、Debian、Docker、Golang、Gradle、Git LFS、Helm、Ivy、Maven、npm、NuGet、Opkg、P2、PHP Composer、Puppet、PyPI、RPM、RubyGems、SBT、Vagrant & VCS、CI/CD プラットフォーム、および DevOps ツールなどのビルドパッケージを自由に選択できます。
@@ -65,7 +65,7 @@ JFrog の Datadog インテグレーションにより、Artifactory/Xray ログ
 
 ### JFrog Artifactory および Xray メトリクス API ダッシュボード
 
-JFrog Artifactory および Xray メトリクス API と Datadog のインテグレーションにより、Artifactory/Xray のオープンメトリクス API エンドポイントから Datadog へメトリクスを送信することができます。このインテグレーションを使用することでシステムのパフォーマンス、ストレージ使用率、JFrog Artifactory/Xray　の接続統計に関するインサイト、アーティファクトおよび Xray によりスキャンされたコンポーネントの数と種類などを得ることができます。このコンフィギュレーションを設定することで、これらのメトリクスが Datadog UI 内に事前設定済みのダッシュボードで利用できるようになり、Datadog 内の既存ダッシュボードの操作性が向上します。
+JFrog Artifactory/Xray メトリクス API と Datadog のインテグレーションにより、Artifactory/Xray の OpenMetrics API エンドポイントから Datadog へメトリクスを送信することができます。このインテグレーションを使用することでシステムのパフォーマンス、ストレージ使用率、JFrog Artifactory/Xray　の接続統計に関するインサイト、アーティファクトおよび Xray によりスキャンされたコンポーネントの数と種類などを得ることができます。このコンフィギュレーションを設定することで、これらのメトリクスが Datadog UI 内に事前設定済みのダッシュボードで利用できるようになり、Datadog 内の既存ダッシュボードの操作性が向上します。
 
 ![artifactory][4]
 

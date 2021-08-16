@@ -148,7 +148,7 @@ if (span != null && (span instanceof MutableSpan)) {
 
 ## Adding spans
 
-If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flamegraphs or to measure execution times for pieces of code.
+If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
 If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
 
@@ -223,7 +223,7 @@ class SomeClass {
 
 ### Extending tracers
 
-The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (e.g. based on a regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
+The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor called a `TraceInterceptor` to intercept Spans then adjust or discard them accordingly (for example, based on regular expressions). The following example implements two interceptors to achieve complex post-processing logic.
 
 ```java
 class FilteringInterceptor implements TraceInterceptor {

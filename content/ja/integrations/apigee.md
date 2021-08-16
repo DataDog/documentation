@@ -152,6 +152,6 @@ httpClient.send(myLoggingRequest);
 
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
 [2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
-[3]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/#naming-conventions
+[3]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
 [4]: https://docs.apigee.com/api-platform/reference/variables-reference
 [5]: /ja/help/

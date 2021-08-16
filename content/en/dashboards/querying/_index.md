@@ -24,7 +24,7 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 
 When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab"  style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:75%;" >}}
 
 ## Configuring a graph
 
@@ -43,19 +43,23 @@ Select your visualization from the available [widgets][2].
 
 ### Choose the metric to graph
 
-Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, start with the [Metrics Explorer][3] or a [notebook][4]. You can also see a list of metrics on the [Metrics Summary page][5].
+Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
+
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
+
+Explore your metrics further with the [Metrics Explorer][3], a [Notebook][4], or see a list of metrics on the [Metrics Summary][5] page.
 
 ### Filter
 
 Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter"  style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter" style="width:75%;" >}}
 
 You can also use [advanced filtering][6] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
 
-{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}} 
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters" style="width:75%;" >}} 
 
-To learn more about tags, refer to the [Tagging][7] documentation.
+To learn more about tags, see the [Tagging documentation][7].
 
 ### Aggregate and rollup
 
@@ -67,6 +71,8 @@ Aggregation method is next to the filter dropdown. This defaults to `avg by` but
 
 Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
 
+Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data.
+
 #### Rollup to aggregate over time
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
@@ -77,7 +83,7 @@ To manually rollup the data, use the [rollup function][9]. Click the plus sign t
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in 1 min buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="rollup example"  style="width:90%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="rollup example" style="width:90%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -134,13 +140,13 @@ Datadog also supports the ability to graph your metrics, logs, traces, and other
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
-**Note**: Queries using commas are only supported in visualisations, they do not work on monitors. Use [boolean operators][11] or arithmetic operations to combine multiple metrics in a monitor.
+**Note**: Queries using commas are only supported in visualizations, they do not work on monitors. Use [boolean operators][11] or arithmetic operations to combine multiple metrics in a monitor.
 
 #### Metric arithmetic using an integer
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
-{{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
 
 #### Arithmetic between two metrics
 
@@ -154,7 +160,7 @@ Use the **Advanced...** option in the graph editor and select **Add Query**. Eac
 
 Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
 
-{{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
 
 Here is another example showing how you can graph the ratio between `error` logs and `info` logs.
 
@@ -162,7 +168,7 @@ Here is another example showing how you can graph the ratio between `error` logs
 status:error / status:info
 ```
 
-{{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio"  style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
@@ -171,7 +177,7 @@ status:error / status:info
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
 
-{{< img src="dashboards/querying/custom_alias.png" alt="Custom alias"  style="width:75%;" >}}
+{{< img src="dashboards/querying/custom_alias.png" alt="Custom alias" style="width:75%;" >}}
 
 ### Create a title
 
@@ -198,8 +204,8 @@ Select the following parameters from the graphing editor: Environment (`env`), P
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
-## Configuring an Incident Analytics graph
-Incident Analytics provides you with the following measures:
+## Incident Management analytics
+Incident Management analytics provides you with the following measures:
 
 * Incident Count
 * Customer Impact Duration
@@ -208,13 +214,15 @@ Incident Analytics provides you with the following measures:
 * Time to Repair (customer impact end time - created time)
 * Time to Resolve (resolved time - created time)
 
-Incident Analytics is supported in the following widgets:
+Incident Management analytics is supported in the following widgets:
 
 * Timeseries
 * Top List 
 * Query Value 
 
-To configure your graph using Incident Analytics data, follow these steps:
+### Graph configuration
+
+To configure your graph using Incident Management analytics data, follow these steps:
 
 1. [Select your visualization](#select-your-visualization) (same as for metrics)
 2. Select `Incidents` from the data source dropdown menu

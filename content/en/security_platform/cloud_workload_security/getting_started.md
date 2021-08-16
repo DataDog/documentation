@@ -8,10 +8,6 @@ further_reading:
   text: "Learn more about Datadog Cloud Runtime Security"
 ---
 
-<div class="alert alert-warning">
-Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
-</div>
-
 ## Overview
 
 There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
@@ -22,8 +18,13 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 ## Requirements
 
 * Datadog Agent >= 7.27.0
-* Hosts/containers must be running Linux with kernel versions >= 4.15
-  * All major Linux distributions running on those kernels are supported.
+* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
+  * Ubuntu 16.04+
+  * Debian 9+
+  * Amazon Linux 2
+  * Fedora 26+
+  * SUSE 15+
+  * CentOS/RHEL 7.6+
   * Custom kernel builds are not supported.
 
 ## Installation
@@ -31,26 +32,26 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-Follow the Helm instructions on this page with the following changes in your values.yaml:
+1. If you have not already, install the [Datadog Agent][1] (version 7.27+).
 
-**Note**: By enabling runtime capabilities in the Runtime Security Agent, the Datadog `system-probe` will also be activated automatically. The `system-probe` is required to collect FIM events.
+2. Add the following to the `datadog` section of the `values.yaml` file:
 
-{{< code-block lang="yaml" filename="values.yaml" >}}
+    ```yaml
+    # values.yaml file
+    datadog:
 
-datadog:
-  ...
-  securityAgent:
-    runtime:
-      enabled: true
- ...
-agents:
-  image:
-    repository: datadog/agent
-    tag: 7-jmx
-    doNotCheckTag: true
+    # Add this to enable Cloud Workload Security
+      securityAgent:
+        runtime:
+          enabled: true
+    ```
 
-{{< /code-block >}}
+3. Restart the Agent.
+4. **Optional, if Security Monitoring is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
+
+[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
 {{% /tab %}}
 
 {{% tab "Docker" %}}

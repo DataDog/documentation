@@ -397,7 +397,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 [10]: /ja/account_management/api-app-keys/
 [11]: /ja/api/v2/roles/#list-permissions
 [12]: /ja/account_management/rbac/permissions?tab=ui#logs_read_data
-[13]: /ja/logs/processing/pipelines/
+[13]: /ja/logs/log_configuration/pipelines
 [14]: /ja/account_management/rbac/permissions?tab=ui#logs_write_processors
 [15]: /ja/logs/indexes/
 [16]: /ja/account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters

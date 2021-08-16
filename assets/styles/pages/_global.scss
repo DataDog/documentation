@@ -173,6 +173,10 @@ code {
     font-family: $font-family-monospace;
 }
 
+h2 code {
+    @include font-size($h3-font-size);
+}
+
 code + code.region-param {
     padding: 0 5px 0 0;
     border-top-left-radius: 0;
@@ -274,7 +278,7 @@ details {
     &.nav-tabs {
         .nav-item {
             z-index: 1;
-            
+
             &:before {
                 content: none;
             }
@@ -391,7 +395,7 @@ h5 {
     & p a,
     & ol li a,
     & ul li a,
-    & div > a {
+    & .alert a {
         color: #4a4a4a;
         border-bottom: 1px solid $gray-600;
         &:hover {
@@ -960,5 +964,3 @@ dl {
         width: 100%;
     }
 }
-  
-  

@@ -1,5 +1,5 @@
 ---
-title: Configuring NoPassword as a SAML IdP
+title: NoPassword SAML IdP
 kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/

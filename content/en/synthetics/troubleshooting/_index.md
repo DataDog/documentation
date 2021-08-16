@@ -138,6 +138,12 @@ This might mean your private location is unable to reach the endpoint your API t
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:100%;" >}}
 
+## CI/CD Testing
+
+### I'm not seeing any CI metadata in my CI Results Explorer
+
+Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][14].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -155,3 +161,4 @@ This might mean your private location is unable to reach the endpoint your API t
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
+[14]: /synthetics/ci/?tab=apitest#cli-usage

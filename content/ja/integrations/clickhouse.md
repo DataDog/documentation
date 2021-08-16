@@ -131,12 +131,12 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ClickHouse チェックにはイベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "clickhouse" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 
@@ -144,5 +144,4 @@ ClickHouse チェックにはイベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/assets/service_checks.json
-[6]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/help/
