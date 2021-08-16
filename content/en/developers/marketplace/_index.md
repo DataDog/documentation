@@ -10,6 +10,7 @@ further_reading:
   text: "Expand your monitoring reach with the Datadog Marketplace"
 ---
 
+## Join the Datadog Partner Network
 The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their integrations, software, and services to Datadog users. 
 
 Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration and create a tile listing that includes your offering. 
