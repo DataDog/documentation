@@ -149,7 +149,7 @@ To use custom instrumentation in your .NET application:
 1. Add the `Datadog.Trace` [NuGet package][5] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation][6] documentation.
+For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation documentation][6].
 
 ## Configuration
 
@@ -260,7 +260,7 @@ If specified, adds the `env` tag with the specified value to all generated spans
 
 `DD_SERVICE`
 : **TracerSettings property**: `ServiceName`<br>
-If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). Added in version 1.17.0.
+If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (IIS application name, process entry assembly, or process name). Added in version 1.17.0.
 
 `DD_VERSION`
 : **TracerSettings property**: `ServiceVersion`<br>
