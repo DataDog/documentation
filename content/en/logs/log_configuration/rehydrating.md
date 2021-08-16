@@ -48,7 +48,7 @@ By creating historical views with specific queries (for example, over one or mor
 #### Notify
 
 Events are triggered automatically when a rehydration starts and finishes.
-These events are available in your [Events stream][8].
+These events are available in your [Events stream][7].
 
 During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
 
@@ -87,7 +87,7 @@ One hour later, the historical view is definitively deleted; until that time, th
 
 ### Define a Datadog archive
 
-An external archive must be configured in order to rehydrate data from it. [Follow the guide][7] to archive your logs in the available destinations.
+An external archive must be configured in order to rehydrate data from it. [Follow the guide][8] to archive your logs in the available destinations.
 
 ### Permissions
 
@@ -166,5 +166,5 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [4]: /logs/explorer/search/
 [5]: /logs/archives/?tab=awss3#datadog-tags
 [6]: /integrations/#cat-notification
-[7]: /logs/archives/
-[8]: /events/
+[7]: /events/
+[8]: /logs/archives/

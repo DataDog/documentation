@@ -11,7 +11,7 @@ The `.rollup()` function is used to aggregate your metrics data inherently in ev
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
 
-**Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space (refer to the documentation on [rollup for distributions with percentiles][5] to learn more).
+**Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space (refer to the documentation on [rollup for distributions with percentiles][2] to learn more).
 
 The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `.rollup(<AGGREGATOR>,<INTERVAL>)` or `.rollup(<AGGREGATOR>)`.
 
@@ -57,11 +57,11 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
   {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count"  style="width:50%;">}}
 
-For more details about how to use `.as_count()` and `.as_rate()` see the [blog post][2] or learn more about the effects of those functions with the [documentation on in-application modifiers][3].
+For more details about how to use `.as_count()` and `.as_rate()` see the [blog post][3] or learn more about the effects of those functions with the [documentation on in-application modifiers][4].
 
 ## Rollups in monitors
 
-Rollups should usually be avoided in [monitor][4] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
+Rollups should usually be avoided in [monitor][5] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
 ## Other functions
 
@@ -79,7 +79,7 @@ Rollups should usually be avoided in [monitor][4] queries, because of the possib
 {{< /whatsnext >}}
 
 [1]: /dashboards/functions/#proceed-to-time-aggregation
-[2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[3]: /developers/metrics/type_modifiers/
-[4]: /monitors/monitor_types/metric/
-[5]: /metrics/faq/rollup-for-distributions-with-percentiles/
+[2]: /metrics/faq/rollup-for-distributions-with-percentiles/
+[3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
+[4]: /developers/metrics/type_modifiers/
+[5]: /monitors/monitor_types/metric/
