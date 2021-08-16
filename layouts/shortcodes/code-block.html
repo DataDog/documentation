@@ -1,21 +1,26 @@
-{{ $filename := (.Get ("filename")) | default "Code Example" }}
+{{ $filename := (.Get ("filename")) }}
 {{ $lang := (.Get ("lang")) }}
 {{ $code := trim .Inner "\n"}}
 {{ $wrap := (.Get ("wrap"))}}
+{{ $collapsible := .Get "collapsible" }}
 {{ $disable_copy := (.Get ("disable_copy"))}}
 
-{{ if  not (.Get "lang") }}
+{{ if not (.Get "lang") }}
     {{ errorf "Code Snippet error: Missing value for param 'lang': %s" .Position }}
 {{ end }}
 
 {{/*  This html should not be formatted differently as it will cause issues when used inside of another shortcode (like tabs)  */}}
 <div class="code-snippet-wrapper">
-<div class="code-filename-wrapper d-flex justify-content-between">
-<p class="code-filename my-0">{{ $filename }}</p>
+<div class="code-filename-wrapper d-flex {{ if $filename }}justify-content-between{{ else }}justify-content-end{{ end }} {{ if $collapsible }}collapsible{{ end }}">
+{{ with $filename }}
+<p class="code-filename my-0">{{ . }}</p>
+{{ end }}
+{{ if $collapsible }}
 <div class="js-code-block-visibility-toggle">
 <div class="chevron chevron-down d-none"></div>
 <div class="chevron chevron-up"></div>
 </div>
+{{ end }}
 </div>
 <div class="code-snippet {{if eq $wrap "true"}}wrap{{end}}">
 {{ if ne $disable_copy "true" }}

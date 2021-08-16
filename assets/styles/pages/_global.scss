@@ -257,6 +257,11 @@ details {
 }
 .code-filename-wrapper {
     background-color: $codesnippet-filename-bg;
+    min-height: 5px;
+
+    &.collapsible {
+        height: 39px;
+    }
 
     .code-filename {
         padding: 6px 10px;
