@@ -75,20 +75,13 @@ Vespa チェックを構成するには
 
 
 ### サービスのチェック
+{{< get-service-checks-from-git "vespa" >}}
 
-**vespa.metrics_health**:<br>
-Vespa [Node メトリクス API][10] からレスポンスがない場合、`CRITICAL`を返します。Vespa [Node メトリクス API][10] からレスポンスがあるものの処理中にエラーが発生した場合、`WARNING` を返します。それ以外の場合は `OK` を返します。
-
-**vespa.process_health**:<br>
-Vespa の各プロセスについて、プロセスがダウンしていると思われる (Vespa [Node メトリクス API][10] がプロセスに接続できない) 場合、`CRITICAL` を返します。プロセスのステータスが不明な (Vespa [Node メトリクス API][10] がプロセスに接続できるものの、レスポンスにエラーが含まれる) 場合、`WARNING` を返します。それ以外の場合は `OK` を返します。
-
-### イベント
-
-Vespa インテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 [1]: https://vespa.ai/
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -100,3 +93,4 @@ Vespa インテグレーションには、イベントは含まれません。
 [8]: https://github.com/DataDog/integrations-extras/blob/master/vespa/datadog_checks/vespa/data/conf.yaml.example
 [9]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
 [10]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api
+[11]: https://github.com/DataDog/integrations-extras/blob/master/vespa/assets/service_checks.json

@@ -15,17 +15,20 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
-## トレースおよびスパン ID を自動的に挿入します
+## 自動挿入
 
 `ddtrace-run` を使用する場合は、環境変数 `DD_LOGS_INJECTION=true` を使用して挿入を有効にします。
 トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成した場合、`env`、`service`、`version` も自動的に追加されます。[統合サービスタグ付け][1]の詳細をご覧ください。
 
 **注**: 自動挿入に対しては標準ライブラリ `logging` がサポートされています。また、標準ライブラリモジュールを拡張する `json_log_formatter` などのライブラリも自動挿入に対してサポートされています。`ddtrace-run` はアプリケーションの実行前に `logging.basicConfig` を呼び出します。ルートロガーにハンドラーが構成されている場合、アプリケーションはルートロガーとハンドラーを直接変更する必要があります。
 
-## トレースおよびスパン ID を手動で挿入する
+## 手動挿入
 
-### 標準ライブラリロギングあり
+### 標準ライブラリロギング
 
 手動で[トレース][2]とログに相関性を持たせたい場合は、ログフォーマッタを更新して `logging` モジュールにパッチを適用し、ログレコードの ``dd.trace_id`` と ``dd.span_id`` 属性を含めます。
 
@@ -54,24 +57,32 @@ hello()
 
 ### 標準ライブラリロギングなし
 
-標準ライブラリ `logging` モジュールを使っていない場合は、`ddtrace.helpers.get_correlation_ids()` を使ってトレーサー情報をログに挿入することができます。
-このアプローチの説明として、次の例では関数を `structlog` の*プロセッサー*として定義し、トレーサーフィールドをログ出力に追加しています:
+標準ライブラリの `logging` モジュールを使用していない場合は、以下のコードスニペットを使用してトレーサー情報をログに挿入することができます。
+
+```python
+from ddtrace import tracer
+
+span = tracer.current_span()
+correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
+```
+以下の例では、ログ出力にトレーサーフィールドを追加するために、`structlog` 内で *processor* として関数を定義しています。
 
 ``` python
 import ddtrace
-from ddtrace.helpers import get_correlation_ids
+from ddtrace import tracer
 
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # 現在のトレーサーコンテキストから相関 ID を取得
-    trace_id, span_id = get_correlation_ids()
+    span = tracer.current_span()
+    trace_id, span_id = (span.trace_id, span.span_id) if span else (None, None)
 
-    # ID を structlog イベントディクショナリーに追加
-    event_dict['dd.trace_id'] = trace_id or 0
-    event_dict['dd.span_id'] = span_id or 0
+    # structlog イベントの辞書に ID を追加
+    event_dict['dd.trace_id'] = str(trace_id or 0)
+    event_dict['dd.span_id'] = str(span_id or 0)
 
-    # トレーサー用に構成された環境、サービス、バージョンを追加
+    # トレーサー用に構成された env、service、version を追加
     event_dict['dd.env'] = ddtrace.config.env or ""
     event_dict['dd.service'] = ddtrace.config.service or ""
     event_dict['dd.version'] = ddtrace.config.version or ""
@@ -91,7 +102,7 @@ log = structlog.get_logger()
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd": {"trace_id": 9982398928418628468, "span_id": 10130028953923355146, "env": "dev", "service": "hello", "version": "abc123"}}
+{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
 **注**: [Datadog ログインテグレーション][3]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確実にする必要があります。詳しくは、[このトピックの FAQ][4] を参照してください。

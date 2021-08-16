@@ -23,7 +23,7 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents.  You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
-**Note**: Manage and create incidents with the [Datadog Mobile App][13], available on the [Apple App Store][14] and [Google Play Store][15].
+**Note**: Manage and create incidents with the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
 ### Creating an incident
 
@@ -59,13 +59,13 @@ In the [incidents UI][1], click the **New Incident** button to create an inciden
 
 #### From Slack
 
-Once you have the [Datadog integration enabled on Slack][3], from any Slack channel you can use the slash command `/datadog incident` to declare a new incident.
+Once you have the [Datadog integration enabled on Slack][6], from any Slack channel you can use the slash command `/datadog incident` to declare a new incident.
 
 In the creation modal, you add a descriptive title, select whether customers were impacted (yes, no, or unknown) and select a severity level (1-5, unknown).
 
 If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user will become the Incident Commander. The Incident Commander (IC) can be changed later in-app if necessary. If the person declaring an incident is not a member of a Datadog account, then the IC is assigned to a generic `Slack app user` and can be assigned to another IC in-app.
 
-Read more about using the Datadog Slack App [here][4].
+Read more about using the Datadog Slack App [here][7].
 
 {{< img src="monitors/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
 
@@ -73,9 +73,9 @@ If the user declaring the incident is a part of your Datadog account, then that 
 
 Once you declare an incident from Slack, it generates an incident channel.
 
-For more information about the Datadog Slack integration, check out [the docs][3].
+For more information about the Datadog Slack integration, check out [the docs][6].
 
-For non-EU customers who use Slack, [sign up for beta access][5] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
+For non-EU customers who use Slack, [sign up for beta access][8] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
 
 ### Describing the incident
 
@@ -133,42 +133,43 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 
 #### Assessment fields
 
-Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][6]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
+Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][9]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
 
 * **Root Cause**: This text field allows you to enter the description of the root cause, triggers, and contributing factors of the incident.
 * **Detection Method**: Specify how the incident was detected with these default options: customer, employee, monitor, other, or unknown.
-* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][7].
+* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][10].
     * If you are not using Datadog APM, you can upload service names as a CSV. Any values uploaded via CSV are only be available within Incident Management for incident assessment purposes.
     * Datadog deduplicates service names case-insensitively, so if you use "My Service" or "my service", only the manually added one is shown.
     * Datadog overrides APM service names in favor of the manually uploaded list.
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM
-* **Teams**: Populated from a CSV upload. Any values uploaded via CSV are only available within Incident Management for incident assessment purposes.
+* **Teams**: Defined under Incident Settings in the [Property Fields][11]. Upload a list of teams from a CSV file. Any values uploaded through CSV are only available within Incident Management for incident assessment purposes.
 
 ## Integrations
 
-In addition to integrating with [Slack][3], Incident Management also integrates with:
+In addition to integrating with [Slack][6], Incident Management also integrates with:
 
-- [PagerDuty][8] to send incident notifications to PagerDuty.
-- [Jira][9] to create a Jira ticket for an incident.
-- [Webhooks][10] to send incident notifications using webhooks (for example, [sending SMS to Twilio][11]).
+- [PagerDuty][12] to send incident notifications to PagerDuty.
+- [Jira][13] to create a Jira ticket for an incident.
+- [Webhooks][14] to send incident notifications using webhooks (for example, [sending SMS to Twilio][15]).
 
 ## Ready to try it out?
 
-Work through an example workflow in the [Getting Started with Incident Management][12] guide.
+Work through an example workflow in the [Getting Started with Incident Management][16] guide.
 
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
-[3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[4]: /integrations/slack/
-[5]: https://app.datadoghq.com/incidents/ddslackapp
-[6]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[7]: /tracing/#2-instrument-your-application
-[8]: /integrations/pagerduty/
-[9]: /integrations/jira/
-[10]: /integrations/webhooks/
-[11]: /integrations/webhooks/#sending-sms-through-twilio
-[12]: /getting_started/incident_management
-[13]: /mobile
-[14]: https://apps.apple.com/app/datadog/id1391380318
-[15]: https://play.google.com/store/apps/details?id=com.datadog.app
+[3]: /mobile
+[4]: https://apps.apple.com/app/datadog/id1391380318
+[5]: https://play.google.com/store/apps/details?id=com.datadog.app
+[6]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
+[7]: /integrations/slack/
+[8]: https://app.datadoghq.com/incidents/ddslackapp
+[9]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[10]: /tracing/#2-instrument-your-application
+[11]: https://app.datadoghq.com/incidents/settings#Property-Fields
+[12]: /integrations/pagerduty/
+[13]: /integrations/jira/
+[14]: /integrations/webhooks/
+[15]: /integrations/webhooks/#sending-sms-through-twilio
+[16]: /getting_started/incident_management

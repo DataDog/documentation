@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/"
   tag: "Blog"
   text: "Real-time distributed tracing for Go and Java Lambda Functions"
+- link: "https://www.datadoghq.com/blog/datadog-serverless-view/"
+  tag: "Blog"
+  text: "Monitor your serverless stack in the Serverless view"
 ---
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}

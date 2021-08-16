@@ -40,7 +40,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 | Datadog Metric Service Name                                |
 | ---------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-0d560852f6f1e27ac`  |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}
@@ -87,7 +87,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:60%;" >}}
 7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
-    **Note**: **If you want to forward logs to Datadog through this VPC endpoint, the security group must accept inbound and outbound traffic on port `443`**.
+    **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
 8. Hit **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}

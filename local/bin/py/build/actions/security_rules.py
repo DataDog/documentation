@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import glob
 import json
+import os
 import re
 from itertools import chain
 
 import yaml
 import logging
 from pathlib import Path
-
+from jinja2 import Environment, Template, select_autoescape, Undefined
+from jinja2.loaders import DictLoader
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING)
@@ -21,6 +23,43 @@ TEMPLATE = """\
 """
 
 
+class SilentUndefined(Undefined):
+    def _fail_with_undefined_error(self, *args, **kwargs):
+        return None
+
+nop = lambda *a, **k: None
+
+def load_templated_file(f):
+    # read without the import first line
+    f.seek(0)
+    content_without_import = ''.join(f.readlines()[1:])
+    env = Environment(
+        undefined=SilentUndefined,
+        loader=DictLoader(dict()),
+        autoescape=select_autoescape(),
+        variable_start_string="{@",
+        variable_end_string="@}"
+    )
+    template = env.from_string(content_without_import)
+    data = yaml.safe_load(template.render(fim={'watch_files': nop}))
+    return data
+
+def update_global_aliases(index_path, global_aliases):
+    content = ''
+    new_yml = {}
+    boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+    with open(index_path, 'r') as f:
+        content = f.read()
+    split = boundary.split(content, 2)
+    _, fm, content = split
+    new_yml = yaml.load(fm, Loader=yaml.FullLoader)
+    fm_aliases = list(set(new_yml.get("aliases", []) + global_aliases))
+    new_yml['aliases'] = fm_aliases
+    with open(index_path, mode='w', encoding='utf-8') as out_file:
+        output_content = TEMPLATE.format(front_matter=yaml.dump(new_yml, default_flow_style=False).strip(),
+                        content=content.strip())
+        out_file.write(output_content)
+
 def security_rules(content, content_dir):
     """
     Takes the content from a file from a github repo and
@@ -30,6 +69,7 @@ def security_rules(content, content_dir):
     :param content_dir: The directory where content should be put
     """
     logger.info("Starting security rules action...")
+    global_aliases = []
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
 
         data = None
@@ -42,7 +82,11 @@ def security_rules(content, content_dir):
         elif file_name.endswith(".yaml"):
             with open(file_name, mode="r+") as f:
                 try:
-                    data = yaml.load(f.read(), Loader=yaml.FullLoader)
+                    file_text_content = f.read()
+                    if 'jinja2' in file_text_content:
+                        data = load_templated_file(f)
+                    else:
+                        data = yaml.load(file_text_content, Loader=yaml.FullLoader)
                 except:
                     logger.warn(f"Error parsing {file_name}")
 
@@ -55,6 +99,8 @@ def security_rules(content, content_dir):
             if 'restrictedToOrgs' in data or data.get('isStaged', False) or data.get('isDeleted', False) or not data.get('isEnabled', True):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
+                    global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
+                    global_aliases.append(f"/security_platform/default_rules/{p.stem}")
                     p.unlink()
                 else:
                     logger.info(f"skipping file {p.name}")
@@ -94,6 +140,8 @@ def security_rules(content, content_dir):
 
                     tags = data.get('tags', [])
                     if tags:
+                        if data.get('source', ''):
+                            page_data["source"] = data.get('source', '')
                         for tag in tags:
                             if ':' in tag:
                                 key, value = tag.split(':')
@@ -131,6 +179,11 @@ def security_rules(content, content_dir):
                     with open(dest_file, mode='w', encoding='utf-8') as out_file:
                         out_file.write(output_content)
 
+    # add global aliases from deleted files to _index.md
+    if os.environ.get('CI_ENVIRONMENT_NAME', '') in ('live', 'preview'):
+        index_path = Path(f"{content_dir}{content['options']['dest_path']}_index.md")
+        update_global_aliases(index_path, global_aliases)
+
 
 def compliance_rules(content, content_dir):
     """
@@ -140,6 +193,7 @@ def compliance_rules(content, content_dir):
     :param content: object with a file_name, a file_path, and options to apply
     :param content_dir: The directory where content should be put
     """
+    global_aliases = []
     logger.info("Starting compliance rules action...")
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         # Only loop over rules JSON files (not eg. Markdown files containing the messages)
@@ -156,6 +210,8 @@ def compliance_rules(content, content_dir):
             if 'restrictedToOrgs' in json_data or json_data.get('isStaged', False) or json_data.get('isDeleted', False) or not json_data.get('enabled', True):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
+                    global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
+                    global_aliases.append(f"/security_platform/default_rules/{p.stem}")
                     p.unlink()
                 else:
                     logger.info(f"skipping file {p.name}")
@@ -202,3 +258,8 @@ def compliance_rules(content, content_dir):
                     logger.info(dest_file)
                     with open(dest_file, mode='w', encoding='utf-8') as out_file:
                         out_file.write(output_content)
+
+    # add global aliases from deleted files to _index.md
+    if os.environ.get('CI_ENVIRONMENT_NAME', '') in ('live', 'preview'):
+        index_path = Path(f"{content_dir}{content['options']['dest_path']}_index.md")
+        update_global_aliases(index_path, global_aliases)

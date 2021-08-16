@@ -61,7 +61,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
     See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -78,7 +78,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -226,7 +226,7 @@ Maximum time the allowed for Agent connection setup (in milliseconds)
 : **Default**: `100`<br>
 The Agent connection timeout (in milliseconds)
 
-`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` 
+`DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES`
 : **Default**: `3`<br>
 IPC-based configurable circuit breaker max consecutive failures
 
@@ -304,7 +304,7 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **Default**: `false`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2](https://github.com/mind04/mod-ruid2) - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][11] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
 
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
@@ -414,7 +414,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][12] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Upgrading
@@ -461,7 +461,11 @@ If no core dump was generated, check the following configurations and change the
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
 
-Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests (not generally in production).
+<div class="alert alert-danger">
+<strong>Note</strong>: An application that runs through Valgrind is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
+</div>
+
+Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests.
 
 For a CLI application, run:
 {{< code-block lang=shell >}}
@@ -478,7 +482,11 @@ When using Apache, run:
 
 ### Obtaining a strace
 
-Some issues are caused by external factors, so it can be valuable to have a `strace`. 
+Some issues are caused by external factors, so it can be valuable to have a `strace`.
+
+<div class="alert alert-danger">
+<strong>Note</strong>: An application that runs through <code>strace</code> is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
+</div>
 
 Install `strace` with your package manager. When generating a `strace` to send to Datadog Support, ensure you use the `-f` option to follow child processes.
 
@@ -511,4 +519,5 @@ For Apache, run:
 [8]: /tracing/faq/php-tracer-manual-installation
 [9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
-[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[11]: https://github.com/mind04/mod-ruid2
+[12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

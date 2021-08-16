@@ -66,22 +66,23 @@ Kubernetes Controller Manager チェックは [Datadog Agent][2] パッケージ
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### サービスのチェック
-
-**kube_controller_manager.prometheus.health**:<br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
-
 ### イベント
 
 Kubernetes Controller Manager チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "kube_controller_manager" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/assets/service_checks.json
+[7]: https://docs.datadoghq.com/ja/help/

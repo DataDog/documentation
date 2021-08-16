@@ -27,7 +27,7 @@ API [![Run in Postman][3]](https://app.getpostman.com/run-collection/b82586cb783
 
 デフォルトでは、Datadog API Docs には cURL で例が示されています。各エンドポイントの公式[クライアントライブラリ][6]言語から 1 つを選択すると、選択したライブラリのコード例を閲覧できます。各ライブラリをインストールするには、
 
-{{< programming-lang-wrapper langs="java,python,python-beta,ruby,ruby-beta,go,typescript" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" >}}
 
 {{< programming-lang lang="java" >}}
 #### インストール
@@ -106,7 +106,7 @@ application {
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="python" >}}
+{{< programming-lang lang="python-legacy" >}}
 #### インストール
 ```sh
 pip install datadog
@@ -117,7 +117,7 @@ import datadog
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="python-beta" >}}
+{{< programming-lang lang="python" >}}
 #### インストール
 ```console
 pip3 install datadog-api-client
@@ -128,7 +128,7 @@ import datadog_api_client
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="ruby" >}}
+{{< programming-lang lang="ruby-legacy" >}}
 #### インストール
 ```sh
 gem install dogapi
@@ -139,7 +139,7 @@ require 'dogapi'
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="ruby-beta" >}}
+{{< programming-lang lang="ruby" >}}
 #### インストール
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}

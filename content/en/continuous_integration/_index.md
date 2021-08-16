@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-info"><p>CI Visibility is in beta. There are no billing implications for tracing pipelines and tests during this period.</p>
 </div>
 {{< site-region region="us3,gov" >}}
-CI Visibility is available only on the US1 and EU1 Datadog sites</a> at this time.
+<div class="alert alert-info"><p>CI Visibility is available only on the US1 and EU1 Datadog sites at this time.</p></div>
 {{< /site-region >}}
 
 Datadog Continuous Integration (CI) Visibility brings together information about CI test and pipeline results _plus_ data about CI performance, trends, and reliability, all into one place. Not only does it provide developers with the ability to dig into the reasons for a test or pipeline failure, to monitor trends in test suite execution times, or to see the effect a given commit has on the pipeline, it also gives build engineers visibility into cross-organization CI health and trends in pipeline performance over time.
@@ -32,7 +32,7 @@ For build engineers, the Pipelines page provides:
 - An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches.
 - A window to quickly spotting and fixing immediate, urgent issues like broken pipelines to production.
 - How each pipeline has run, over time, and with what results and trends.
-- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it will make the biggest difference.
+- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it makes the biggest difference.
 
 CI pipeline data is available in [Dashboards][1] and [Notebooks][2], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 

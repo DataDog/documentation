@@ -87,7 +87,7 @@ spec:
 
 1. [Datadog Agent を起動します][10]。
 
-2. [この Prometheus DaemonSet `prometheus.yaml`][11] を使用して、設定済みのオートディスカバリーコンフィギュレーションで Prometheus ポッドを起動します。
+2. [この Prometheus DaemonSet `prometheus.yaml`][11] を使用して、オートディスカバリーコンフィギュレーションを設定済みの Prometheus ポッドを起動します。
 
     オートディスカバリーのコンフィギュレーション:
 

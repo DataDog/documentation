@@ -5,6 +5,7 @@ description: Comparer une métrique d'APM à un seuil défini par un utilisateur
 aliases:
   - /fr/monitors/monitor_types/app_analytics
   - /fr/monitors/monitor_types/trace_search
+  - /fr/tracing/guide/resource_monitor/
 further_reading:
   - link: /monitors/notifications/
     tag: Documentation
