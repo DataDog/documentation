@@ -97,7 +97,7 @@ Integrations can send the following data to Datadog:
 6. [Incidents][21]
 7. [Security Events][22]
 
-**Note:** A bi-directional integration is not required for Marketplace tile-only listings, such as standaline SaaS licenses and professional services offerings. 
+**Note:** A bi-directional integration is not required for Marketplace tile-only listings, such as standalone SaaS licenses and professional services offerings. 
 
 ### Clone the Marketplace repository or fork the integrations-extras repository
 
