@@ -39,9 +39,27 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 {{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
 
+**Note**: The query is applied _after_ the files matching the time period are downloaded from your archive. To reduce your cloud data transfer cost, reduce the selected date range.
+
 #### Rehydrate by query
 
 By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
+
+#### Notify
+
+Events are triggered automatically when a rehydration starts and finishes.
+These events are available in your [Events stream][8].
+
+During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
+
+| Variable                      | Description                                                                  |
+|-------------------------------|------------------------------------------------------------------------------|
+| `{{archive}}`                 | Name of the archives used for the rehydration.                           |
+| `{{from}}`                    | Start of the time range selected for the rehydration.                    |
+| `{{to}}`                      | End of the time range selected for the rehydration.                      |
+| `{{scan_size}}`               | Total size of the files processed during the rehydration.                |
+| `{{number_of_indexed_logs}}`  | Total number of rehydrated logs.                                         |
+| `{{explorer_url}}`            | Direct link to the rehydrated logs.                                      |
 
 ### View historical view content
 
@@ -149,3 +167,4 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [5]: /logs/archives/?tab=awss3#datadog-tags
 [6]: /integrations/#cat-notification
 [7]: /logs/archives/
+[8]: /events/
