@@ -39,7 +39,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 {{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
 
-**Note**: The query is applied **after** the files matching the time period are downloaded from your archive. To reduce your cloud data transfer cost, reduce the selected date range.
+**Note**: The query is applied _after_ the files matching the time period are downloaded from your archive. To reduce your cloud data transfer cost, reduce the selected date range.
 
 #### Rehydrate by query
 
@@ -50,16 +50,16 @@ By creating historical views with specific queries (for example, over one or mor
 Events are triggered automatically when a rehydration starts and finishes.
 These events are available in your [Events stream][8].
 
-During the creation of an historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
+During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
 
 | Variable                      | Description                                                                  |
 |-------------------------------|------------------------------------------------------------------------------|
-| `{{archive}}`                 | The name of the archives used for the rehydration.                           |
-| `{{from}}`                    | The start of the time range selected for the rehydration.                    |
-| `{{to}}`                      | The end of the time range selected for the rehydration.                      |
-| `{{scan_size}}`               | The total size of the files processed during the rehydration.                |
-| `{{number_of_indexed_logs}}`  | The total number of rehydrated logs.                                         |
-| `{{explorer_url}}`            | The direct link to the rehydrated logs.                                      |
+| `{{archive}}`                 | Name of the archives used for the rehydration.                           |
+| `{{from}}`                    | Start of the time range selected for the rehydration.                    |
+| `{{to}}`                      | End of the time range selected for the rehydration.                      |
+| `{{scan_size}}`               | Total size of the files processed during the rehydration.                |
+| `{{number_of_indexed_logs}}`  | Total number of rehydrated logs.                                         |
+| `{{explorer_url}}`            | Direct link to the rehydrated logs.                                      |
 
 ### View historical view content
 
