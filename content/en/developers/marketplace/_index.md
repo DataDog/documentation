@@ -29,7 +29,7 @@ All Technology Partners can request a dedicated sandbox Datadog account to aid i
 
 Converting an account to a developer sandbox may take up to one or two business days. Please contact [Datadog Support][6] with any questions.
 
-## Develop your integration
+## Develop your integration or create a Marketplace tile only listing
 
 ### Resources
 
