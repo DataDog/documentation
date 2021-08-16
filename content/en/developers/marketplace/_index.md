@@ -43,7 +43,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 ### Development process
 
 1. [Choose the type of Marketplace offering you would like to list](#choose-an-integration-type-or-tile-only-listing)
-2. [Build a bi-directional integration or tile only listing](#build-a-bi-directional-integration)
+2. [Build a bi-directional integration](#build-a-bi-directional-integration)
 3. [Clone the Marketplace repository or fork the Integrations Extras repository](#clone-either-the-marketplace-or-the-integrations-extras-repository)
 4. [Install the Datadog Development Toolkit](#install-and-run-the-datadog-development-toolkit)
 5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like  dashboards and monitors)](#populate-the-tile-scaffolding)
@@ -96,7 +96,7 @@ Integrations can send the following data to Datadog:
 6. [Incidents][21]
 7. [Security Events][22]
 
-**Note:** A bi-directional integration is not required for tile-only listings, such as standaline SaaS licenses and professional services offerings. 
+**Note:** A bi-directional integration is not required for Marketplace tile-only listings, such as standaline SaaS licenses and professional services offerings. 
 
 ### Clone the Marketplace repository or fork the integrations-extras repository
 
