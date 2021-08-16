@@ -16,7 +16,7 @@ Before joining the Datadog Marketplace, you first need to join the [Datadog Part
 
 Datadog customers can then access your tile through the Datadog app either through our [Integrations][2] page or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
 
-Follow these steps to develop and publish your Marketplace offering: 
+Follow these steps to develop and publish your Integrations page or Marketplace offering: 
 
 ## Apply for a sandbox account
 
@@ -50,9 +50,9 @@ In addition to this documentation, you can learn more about developing Datadog i
 6. [Submit a pull-request](#submit-a-pull-request)
 7. [Approve tile for release](#approve-tile-for-release)
 
-### Choose an integration type
+### Choose an integration type or tile only listing
 
-There are a few different ways to integrate with Datadog. Depending on the use case and type of integration, choose the approach that makes the most sense for your offering. 
+There are a few different ways to list on the Datadog Integrations or Marketplace pages. Depending on the use case, choose the approach that makes the most sense for your offering. 
 
 #### [Datadog Agent-based integration][12]
 
@@ -84,7 +84,7 @@ For Marketplace offerings that include a standalone SaaS or services offering, w
 
 ### Build a bi-directional integration
 
-While pulling information from Datadog may also be useful, to be listed on the Datadog Integrations page or the Marketplace, the integration must be bi-directional. That is, it must also push data into Datadog. 
+While pulling information from Datadog may also be useful, integrations must be bi-directional. That is, it must also push data into Datadog. 
 
 Integrations can send the following data to Datadog:
 
@@ -95,6 +95,8 @@ Integrations can send the following data to Datadog:
 5. [Traces][20]
 6. [Incidents][21]
 7. [Security Events][22]
+
+**Note:** A bi-directional integration is not required for tile-only listings, such as standaline SaaS licenses and professional services offerings. 
 
 ### Clone the Marketplace repository or fork the integrations-extras repository
 
@@ -227,7 +229,7 @@ When the pull-request tile has been approved by our Engineering and Product team
 
 ## Coordinate go-to-market opportunities
 
-Once an official bi-directional integration is live, Technology Partners have the option of meeting with Datadog’s Partner Marketing Team to coordinate a joint go-to-market strategy, including:
+Once a Marketplace tile is live, Technology Partners have the option of meeting with Datadog’s Partner Marketing Team to coordinate a joint go-to-market strategy, including:
 
 * A Datadog quote for partner press releases
 * A Blog Post in the [Datadog Monitor][29]
