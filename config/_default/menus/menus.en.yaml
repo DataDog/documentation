@@ -797,6 +797,11 @@ main:
     identifier: integrations_top_level
     pre: nav_integrations
     weight: 40000
+  - name: Guides
+    url: integrations/guide/
+    identifier: integration_guides
+    parent: integrations_top_level
+    weight: 1
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
