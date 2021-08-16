@@ -33,7 +33,7 @@ If you are using Docker, there are several container images available through Do
 [5]: https://hub.docker.com/r/datadog/dogstatsd
 [6]: /agent/cluster_agent/
 [7]: https://hub.docker.com/r/datadog/cluster-agent
-[8]: /getting_started/synthetics/private_location.md
+[8]: /getting_started/synthetics/private_location
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 {{% /tab %}}
 {{% tab "GCR" %}}
