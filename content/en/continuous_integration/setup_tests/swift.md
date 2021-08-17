@@ -119,37 +119,37 @@ When running tests in a simulator, full Git metadata is collected using the loca
 The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored 
+: URL of the repository where the code is stored.
 
 `DD_GIT_BRANCH`
-: Branch where this commit belongs
+: Branch where this commit belongs.
 
 `DD_GIT_TAG`
-: Tag of the commit, if it has one
+: Tag of the commit, if it has one.
 
 `DD_GIT_COMMIT_SHA`
-: Commit SHA
+: Commit SHA.
 
 `DD_GIT_COMMIT_MESSAGE`
-: Commit message
+: Commit message.
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Author name
+: Author name.
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Author email
+: Author email.
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
 : Author date. ISO 8601 format.
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Committer name
+: Committer name.
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Committer email
+: Committer email.
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-:Committer date. ISO 8601 format.
+: Committer date. ISO 8601 format.
 
 ### Running tests
 
