@@ -44,7 +44,7 @@ RUM view events collect extensive performance metrics for every single page view
 | [Cumulative Layout Shift][7]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts happening. | <0.1        |
 
 **Notes**:
-- First Input Delay and Largest Contentful Paint are not collected for pages opened in background (i.e. new tab or window without focus).
+- First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
 - Metrics collected from your real users page views can differ from those calculated for pages loaded in a fixed environment like [Synthetics Browser tests][8].
 
 ### All performance metrics
