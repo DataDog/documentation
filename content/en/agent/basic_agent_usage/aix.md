@@ -13,7 +13,7 @@ The Datadog Unix Agent is being developed for specific system architectures, and
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 
-**Note:** The Datadog Unix Agent currently supports the following versions of AIX:
+**Note:** The Datadog Unix Agent supports the following versions of AIX:
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
@@ -37,7 +37,7 @@ Alternatively, download links for the latest releases can be found on [this page
 The installer may be executed as follows (as root):
 
 {{< code-block lang="bash" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<VEERSION>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+installp -aXYgd ./datadog-unix-agent-<VERSION>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
 This installs the Agent in `/opt/datadog-agent`.
@@ -73,7 +73,7 @@ A basic configuration typically requires your Datadog API key. To submit your me
 
 You can also override `dd_url` manually, but that should not be required.
 
-Occassionally a proxy configuration must be specified depending on your network setup.
+Occasionally a proxy configuration must be specified depending on your network setup.
 
 **Configuration files for Integrations:**
 `/etc/datadog-agent/conf.d/`
@@ -87,7 +87,7 @@ Additional integrations available:
 * disk
 * network
 
-To enable the above integrations, copy and edit the sample configuration files provided. These are expected to be found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
+Enable the above integrations by copying and editing the sample configuration files provided. These are expected to be found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
 
 ## Running DogStatsD
 
@@ -109,7 +109,7 @@ dogstatsd:                        # DogStatsD configuration options
 
 **Note:** DogStatsD does not daemonize and runs in the foreground.
 
-There are also facilities to run the Agent via the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
+There are also facilities to run the Agent with the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
 ## Uninstall
 

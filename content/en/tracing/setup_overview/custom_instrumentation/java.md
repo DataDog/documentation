@@ -148,7 +148,7 @@ if (span != null && (span instanceof MutableSpan)) {
 
 ## Adding spans
 
-If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flamegraphs or to measure execution times for pieces of code.
+If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
 If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
 

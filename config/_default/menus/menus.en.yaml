@@ -261,6 +261,12 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
     weight: -437
+  - identifier: usecase-log
+    name: Log Analysis & Correlation
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/log-analysis-and-correlation/'
+    weight: -436
 main_right:
   - identifier: about
     name: About
@@ -791,6 +797,11 @@ main:
     identifier: integrations_top_level
     pre: nav_integrations
     weight: 40000
+  - name: Guides
+    url: integrations/guide/
+    identifier: integration_guides
+    parent: integrations_top_level
+    weight: 1
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -1065,7 +1076,7 @@ main:
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
     weight: 704
-  - name: Azure App Services Extension
+  - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
@@ -2024,6 +2035,11 @@ main:
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 204
+  - name: Signals Explorer
+    url: /security_platform/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 205
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform

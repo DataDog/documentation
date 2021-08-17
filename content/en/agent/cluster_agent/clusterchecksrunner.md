@@ -43,7 +43,7 @@ Deploy these resources into your cluster:
 kubectl apply -f datadog-agent-with-dca-clusterchecksrunner.yaml
 ```
 
-You'll see the following output, confirming that the configuration was applied successfully:
+If you see the following output, it confirms the configuration was applied successfully:
 
 ```
 datadogagent.datadoghq.com/datadog created

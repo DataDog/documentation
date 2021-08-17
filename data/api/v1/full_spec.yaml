@@ -2327,6 +2327,7 @@ components:
       - security_signals
       - profiles
       - audit
+      - events
       example: logs
       type: string
       x-enum-varnames:
@@ -2337,6 +2338,7 @@ components:
       - SECURITY_SIGNALS
       - PROFILES
       - AUDIT
+      - EVENTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -10121,6 +10123,17 @@ components:
     SyntheticsGlobalVariable:
       description: Synthetics global variable.
       properties:
+        attributes:
+          description: Attributes of the global variable.
+          properties:
+            restricted_roles:
+              description: List of role identifiers that can be pulled from the Roles
+                API.
+              items:
+                description: UUID for a role.
+                type: string
+              type: array
+          type: object
         description:
           description: Description of the global variable.
           example: Example description
@@ -10189,11 +10202,13 @@ components:
       - raw
       - json_path
       - regex
+      - x_path
       type: string
       x-enum-varnames:
       - RAW
       - JSON_PATH
       - REGEX
+      - X_PATH
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
@@ -13675,14 +13690,11 @@ components:
       description: Datadog-Webhooks integration.
       properties:
         custom_headers:
-          additionalProperties:
-            description: Additional properties for custom headers.
-            type: string
           description: 'If `null`, uses no header.
 
             If given a JSON payload, these will be headers attached to your webhook.'
           nullable: true
-          type: object
+          type: string
         encode_as:
           $ref: '#/components/schemas/WebhooksIntegrationEncoding'
         name:
@@ -13694,7 +13706,15 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          $ref: '#/components/schemas/WebhooksIntegrationPayload'
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -13709,23 +13729,45 @@ components:
         is_secret:
           description: 'Make custom variable is secret or not.
 
-            If the custom variable is secret, it returns `null` for
-
-            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
           example: true
           type: boolean
         name:
-          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
           example: CUSTOM_VARIABLE_NAME
           type: string
         value:
           description: Value of the custom variable.
           example: CUSTOM_VARIABLE_VALUE
-          nullable: true
           type: string
       required:
       - name
       - value
+      - is_secret
+      type: object
+    WebhooksIntegrationCustomVariableResponse:
+      description: Custom variable for Webhook integration.
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
+          example: true
+          type: boolean
+        name:
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable. It won't be returned if the variable
+            is secret.
+          example: CUSTOM_VARIABLE_VALUE
+          type: string
+      required:
+      - name
       - is_secret
       type: object
     WebhooksIntegrationCustomVariableUpdateRequest:
@@ -13737,18 +13779,17 @@ components:
         is_secret:
           description: 'Make custom variable is secret or not.
 
-            If the custom variable is secret, it returns `null` for
-
-            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
           type: boolean
         name:
-          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
           example: CUSTOM_VARIABLE_NAME
           type: string
         value:
           description: Value of the custom variable.
           example: CUSTOM_VARIABLE_VALUE
-          nullable: true
           type: string
       type: object
     WebhooksIntegrationEncoding:
@@ -13761,16 +13802,6 @@ components:
       x-enum-varnames:
       - JSON
       - FORM
-    WebhooksIntegrationPayload:
-      description: 'If `null`, uses the default payload.
-
-        If given a JSON payload, the webhook returns the payload
-
-        specified by the given payload.
-
-        [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
-      nullable: true
-      type: object
     WebhooksIntegrationUpdateRequest:
       description: 'Update request of a Webhooks integration object.
 
@@ -13778,13 +13809,10 @@ components:
         *All properties are optional.*'
       properties:
         custom_headers:
-          additionalProperties:
-            description: Additional properties for custom headers.
-            type: string
           description: 'If `null`, uses no header.
 
             If given a JSON payload, these will be headers attached to your webhook.'
-          type: object
+          type: string
         encode_as:
           $ref: '#/components/schemas/WebhooksIntegrationEncoding'
         name:
@@ -13796,7 +13824,15 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          $ref: '#/components/schemas/WebhooksIntegrationPayload'
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -18415,7 +18451,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18433,6 +18469,13 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-given:
+        webhook-custom-variable:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
+              \ \"is_secret\": false\n}"
+          step: there is a valid "webhook-custom-variable" in the system
       x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
@@ -18476,9 +18519,9 @@ paths:
       description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
 
-        If the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>`
+        If the custom variable is secret, the value does not return in the
 
-        in the response payload.'
+        response payload.'
       operationId: GetWebhooksIntegrationCustomVariable
       parameters:
       - description: The name of the custom variable.
@@ -18492,7 +18535,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18540,7 +18583,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18601,6 +18644,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-given:
+        webhook:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
+          step: there is a valid "webhook" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteWebhooksIntegration

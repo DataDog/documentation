@@ -36,7 +36,7 @@ When the Agent runs as a container, it tries by default to Autodiscover other co
 
 The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][33] in place to take into account the containerized environment.
 
-**Note**: The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
+**Note**: The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, see the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
 
 * [Using Key-Value Store][34]
 * [Using Kubernetes Annotations][35]

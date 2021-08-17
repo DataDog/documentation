@@ -207,6 +207,7 @@ agent:
 * [Kubernetes ポッドアノテーション](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
 * [Key-Value ストア](?tab=keyvaluestore#configuration)
+* [Helm](?tab=helm#configuration)
 
 ### コンフィギュレーション
 
@@ -364,6 +365,22 @@ key-value ストアがテンプレートソースとして有効になってい�
 [1]: /ja/integrations/consul/
 [2]: /ja/agent/guide/agent-commands/
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+`confd` 内で、インテグレーションごとにログコレクションをカスタマイズできます。この方法で、希望するコンフィギュレーションを Agent コンテナにマウントします。
+  ```yaml
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      init_config:
+      instances:
+        (...)
+      logs:
+        <LOGS_CONFIG>
+  ```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 例 - Datadog Redis インテグレーション
@@ -444,6 +461,22 @@ etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "
 3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をインテグレーション構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
 
 auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`redis` など) も長いイメージ名 (`redis:latest` など) も使用できます**。
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+次のコンフィギュレーションは、ログを収集するための `source` 属性と `service` 属性を使用して、Redis コンテナのインテグレーションテンプレートを定義しています。
+  ```yaml
+  confd:
+    redis.yaml: |-
+      ad_identifiers:
+        - redis
+      logs:
+        - source: redis
+        - service: redis
+  ```
+
+**注**: 上記のコンフィギュレーションは、このインテグレーションからのログのみを収集します。すでに Redis インテグレーションから他のデータを収集している場合は、`logs` セクションを既存のコンフィギュレーションに追加できます。
 
 {{% /tab %}}
 {{< /tabs >}}
