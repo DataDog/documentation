@@ -116,13 +116,13 @@ Git metadata and build information is automatically collected using CI provider 
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non supported CI providers and/or .git folder is not available from the running process, they are also useful to overwrite existing Git information. If these environment variables are set, they will take precedence from those coming from the CI or from the .git folder. The list of supported environment variables for git information includes the following:
+The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
 
 `DD_GIT_REPOSITORY_URL`
 : URL of the repository where the code is stored 
 
 `DD_GIT_BRANCH`
-: Branch where this commit belongs to
+: Branch where this commit belongs
 
 `DD_GIT_TAG`
 : Tag of the commit, if it has one
