@@ -25,14 +25,14 @@ To validate your metadata file:
 
 ## Roles errors
 
-When mappings are enabled, users logging in with SAML to a Datadog account will be stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider, and the mappings set within Mappings settings.
+When mappings are enabled, users logging in with SAML to a Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider, and the mappings set within Mappings settings.
 
-Users who log in with SAML and do not have the values that map to a Datadog role will be stripped of all roles and will not be allowed to log in.
+Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and will not be allowed to log in.
 
 If you have group mappings set and are not able to see your roles, you group mappings in the Datadog application may appear differently in your IdP. To verify:
 
 1. Retrieve your IdP's SAML assertion for your account. Use browser tooling, such as [extensions][6], to retrieve your SAML assertion.
-2. Navigate to the Team page in the bottom left corner of the Datadog app.
+2. Navigate to the Team page in the bottom left corner of Datadog.
 3. Select the **Mappings** tab.
 4. Compare the attributes provided by your IdP in your SAML assertion to the attributes set in the **Mappings** tab.
 5. Resolve any discrepencies in either the Datadog Mappings settings, or within your IdP settings.
@@ -52,7 +52,7 @@ If you are having trouble logging in because of a role-based error, contact your
 - If you encounter an issue in Azure, see [An app page shows an error message after the user signs in][4].
 - If you encounter an issue in LastPass, see the [Datadog App Integration][5].
 
-### Identity Provider certificates
+### Identity provider certificates
 
 If you are unable to login to your account, an IdP certificate may have expired and rotated, prompting a general SAML error. 
 
@@ -65,7 +65,7 @@ Some questions to ask yourself that can help narrow down whether you have a cert
 
 ## Support
 
-If you are still experiencing errors regarding your SAML assertions or are having trouble logging into the Datadog app, contact [Datadog support][9].
+If you are still experiencing errors regarding your SAML assertions or are having trouble logging into Datadog, contact [Datadog support][9].
 
 ## Further Reading
 
