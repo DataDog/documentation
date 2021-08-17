@@ -81,6 +81,3 @@ def process_agent_config(dd_agent_config_string):
 
     if getenv("LOCAL") != 'True':
       sys.exit(1)
-
-
-  

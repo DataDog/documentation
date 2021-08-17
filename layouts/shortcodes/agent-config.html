@@ -8,6 +8,7 @@
 {{ $collapsible := .Get "collapsible" }}
 {{ $disable_copy := .Get "disable_copy" }}
 {{ $config_data := index $agent_config_data $type }}
+{{ $config_data_string := trim $config_data "\n" }}
 
 <div class="code-snippet-wrapper">
   <div class="code-filename-wrapper d-flex {{ if $filename }}justify-content-between{{ else }}justify-content-end{{ end }} {{ if $collapsible }}collapsible{{ end }}">
@@ -27,6 +28,6 @@
         <button class="btn text-primary js-copy-button">Copy</button>
       </div>
     {{ end }}
-    {{ highlight $config_data "yaml" "" }}
+    {{ highlight $config_data_string "yaml" "" }}
   </div>
 </div>
