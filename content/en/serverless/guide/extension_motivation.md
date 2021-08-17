@@ -19,10 +19,10 @@ The Lambda extension only supports sending Lambda function telemetry for specifi
 
 | Runtime | Extension support | Forwarder support |
 | ------- | ----------------- | ----------------- |
-| Python  | Yes               | Yes               |
-| Node.js | Yes               | Yes               |
-| Go      | Yes               | Yes               |
-| Java    |                   | Yes               |
+| Python  | {{< X >}}         | {{< X >}}         |
+| Node.js | {{< X >}}         | {{< X >}}         |
+| Go      | {{< X >}}         | {{< X >}}         |
+| Java    |                   | {{< X >}}         |
 | .NET    |                   |                   |
 | Ruby    |                   |                   |
 | PHP     |                   |                   |
