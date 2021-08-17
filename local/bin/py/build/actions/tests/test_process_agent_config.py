@@ -8,9 +8,6 @@ class TestProcessAgentConfig(unittest.TestCase):
   def test_format_agent_config_string(self):
     test_string_one = ' #  \n'
     test_string_two = ' # test:true'
-
-    print(sys.path)
-    self.assertEqual('', '')
     
     result_one = process_agent_config.format_agent_config_string(test_string_one)
     result_two = process_agent_config.format_agent_config_string(test_string_two)

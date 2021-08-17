@@ -4,23 +4,29 @@
 
 {{ $agent_config_data := $.Site.Data.agent_config }}
 {{ $type := (.Get ("type")) | lower }}
-{{ $filename := .Get "filename" | default "Code Example" }}
+{{ $filename := .Get "filename" }}
+{{ $collapsible := .Get "collapsible" }}
+{{ $disable_copy := .Get "disable_copy" }}
 {{ $config_data := index $agent_config_data $type }}
 
 <div class="code-snippet-wrapper">
-  <div class="code-filename-wrapper d-flex justify-content-between">
-    <p class="code-filename my-0">
-      {{ $filename }}
-    </p>
-    <div class="js-code-block-toggle">
+  <div class="code-filename-wrapper d-flex {{ if $filename }}justify-content-between{{ else }}justify-content-end{{ end }} {{ if $collapsible }}collapsible{{ end }}">
+    {{ with $filename }}
+    <p class="code-filename my-0">{{ $filename }}</p>
+    {{ end }}
+    {{ if $collapsible }}
+    <div class="js-code-block-visibility-toggle">
       <div class="chevron chevron-down"></div>
       <div class="chevron chevron-up d-none"></div>
     </div>
+    {{ end }}
   </div>
   <div class="code-snippet">
+    {{ if ne $disable_copy "true" }}
     <div class="code-button-wrapper position-absolute">
       <button class="btn text-primary js-copy-button">Copy</button>
     </div>
+    {{ end }}
     {{ highlight $config_data "yaml" "" }}
   </div>
 </div>
