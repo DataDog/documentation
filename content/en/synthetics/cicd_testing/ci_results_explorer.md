@@ -26,7 +26,7 @@ You can:
 * Keep track of the progress of your tests in CI pipelines.
 * Identify flaky tests to fix.
 
-{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.jpg" alt="CI Results Explorer"  style="width:100%;">}}
+{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer"  style="width:100%;">}}
 
 ## Exploring batches
 
@@ -80,5 +80,5 @@ To query the CI Results Explorer data, use the [same query syntax][2] as on the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/ci/
+[1]: /synthetics/cicd_testing
 [2]: /synthetics/search/

@@ -12,16 +12,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/guide/"
+- link: "/synthetics/cicd_testing/ci_results_explorer"
   tag: "Documentation"
-  text: "Synthetic Monitoring guides"
+  text: CI Results Explorer
 ---
 
 ## Overview
 
-Search, access, and manage all of your tests on one page with the [Synthetic Tests page][1]. Quickly find the tests that matter to you using facets, get an overview of the state of your application with the global uptime and response time graph, and manage your tests through bulk functionalities.
+Search, access, and manage all of your tests on the [Synthetic Tests page][1] or the [CI Results Explorer][2]. 
 
-{{< img src="synthetics/search/search.png" alt="Synthetic Tests Search" >}}
+Quickly find the tests that matter to you using facets, get an overview of the state of your application with the global uptime and response time graph, and manage your tests through bulk functionalities.
+
+For more information about the CI Results Explorer, see the [CI Results Explorer documentation][3].
 
 ## Search
 
@@ -42,7 +44,7 @@ The **Synthetics Filters** panel on the left side of the page lists several defa
 
 ### Create your query
 
-Search through your Synthetic tests by clicking on the facets on the left panel or by writing your own custom query using the search bar. As you select and deselect facet values in the panel or in the search bar, the search bar will automatically update with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the facets checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
+Search through your Synthetic tests by clicking on the facets on the left panel or by writing your own custom query using the search bar. As you select and deselect facet values in the panel or in the search bar, the search bar will automatically update with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the facets checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no Search button to click.
 
 * **Search on free text**: Enter your text in the search bar to search on a test name.
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click the other value checkbox or add the other value with an `OR` Boolean operator and wrap values with quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
@@ -71,7 +73,7 @@ Hover over a test in the table to populate options such as `Pause`, `Run Test No
 
 ### Audit events
 
-The creation, addition, and deletion of Synthetic tests, global variables, and private locations create events in the [event stream][2]. Generated events explain the change and display the user who performed the change.
+The creation, addition, and deletion of Synthetic tests, global variables, and private locations create events in the [event stream][4]. Generated events explain the change and display the user who performed the change.
 
 Find all Synthetic Monitoring related changes by searching the event stream for `#audit synthetics`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:public_id:4m7-bqy-mxq`.
 
@@ -82,4 +84,6 @@ Find all Synthetic Monitoring related changes by searching the event stream for 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
-[2]: /events/
+[2]: https://app.datadoghq.com/synthetics/explorer/ci
+[3]: /synthetics/cicd_testing/ci_results_explorer
+[4]: /events/

@@ -221,7 +221,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/ci
+[3]: /synthetics/cicd_testing
 [4]: /account_management/rbac/
 [5]: /account_management/rbac#custom-roles
 [6]: /synthetics/api_tests/http_tests

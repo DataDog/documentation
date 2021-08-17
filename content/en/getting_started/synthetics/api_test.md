@@ -11,7 +11,7 @@ further_reading:
     - link: '/getting_started/synthetics/private_location'
       tag: 'Documentation'
       text: 'Learn about private locations'
-    - link: '/synthetics/ci'
+    - link: '/synthetics/cicd_testing/'
       tag: 'Documentation'
       text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'

@@ -185,7 +185,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [8]: /synthetics/api_tests/dns_tests
 [9]: /synthetics/api_tests/icmp_tests
 [10]: /synthetics/search/#search
-[11]: /synthetics/ci
+[11]: /synthetics/cicd_testing
 [12]: /api/v1/synthetics/#create-a-test
 [13]: /monitors/notifications/?tab=is_alert#notification
 [14]: https://www.markdownguide.org/basic-syntax/

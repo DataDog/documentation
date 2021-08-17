@@ -2148,13 +2148,13 @@ main:
     identifier: synthetics_private_location_configuration
     weight: 401
   - name: CI/CD Testing
-    url: /synthetics/ci/
+    url: /synthetics/cicd_testing
     parent: synthetics
-    identifier: synthetics_ci
+    identifier: synthetics_cicd_testing
     weight: 5
   - name: CI Results Explorer
     url: /synthetics/cicd_testing/ci_results_explorer
-    parent: synthetics_ci
+    parent: synthetics_cicd_testing
     weight: 501
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel

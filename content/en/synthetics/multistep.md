@@ -262,7 +262,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /synthetics/ci
+[3]: /synthetics/cicd_testing
 [4]: /api/v1/synthetics/#get-all-locations-public-and-private
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/

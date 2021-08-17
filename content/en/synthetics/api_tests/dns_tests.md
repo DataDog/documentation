@@ -174,7 +174,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [8]: /synthetics/api_tests/dns_test
 [9]: /synthetics/api_tests/icmp_tests
 [10]: /synthetics/search/#search
-[11]: /synthetics/ci
+[11]: /synthetics/cicd_testing
 [12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [13]: /api/v1/synthetics/#create-a-test
 [14]: /monitors/notifications/?tab=is_alert#notification
