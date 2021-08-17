@@ -1,5 +1,5 @@
 ---
-title: Upgrade the Browser SDK
+title: Upgrade the Browser SDK to V3
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
