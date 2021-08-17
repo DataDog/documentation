@@ -39,9 +39,10 @@ The Datadog Lambda Extension offers the following advantages over the Datadog Fo
 
 ### Trade-offs
 
-The extension adds overhead to your Lambda functions, compared to functions that have zero instrumentation. The added overhead affects your AWS bill and Lambda concurrency, and could cause worse cold starts. The majority of the added duration **does not** affect your function's performance. Based on Datadog's latest benchmarking results, the cost overhead is always lower (or about the same when reporting data from remoote regions) when using the Lambda extension versus the Forwarder.
+The extension [adds overhead to your Lambda functions][4], compared to functions that have zero instrumentation. The added overhead affects your AWS bill and Lambda concurrency, and could cause worse cold starts. The majority of the added duration **does not** affect your function's performance. Based on Datadog's latest benchmarking results, the cost overhead is always lower (or about the same when reporting data from remoote regions) when using the Lambda extension versus the Forwarder.
 
 
 [1]: /serverless/libraries_integrations/extension/
 [2]: /serverless
 [3]: /serverless/libraries_integrations/forwarder/
+[4]: /serverless/libraries_integrations/extension/#overhead
