@@ -29,7 +29,7 @@ For more information, see the [Pricing page][7].
 
 | Billing Parameter  | Normalized Queries                | Billing                                          |
 |--------------------|-----------------------------------|--------------------------------------------------|
-| Database host      | 200 normalized queries are included per month with every database host | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. |
+| Database host      | 200 normalized queries are included per month with every database host. | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. |
 | Normalized Queries | Billed when the configured threshold is in excess of normalized queries that are included with every database host. | A _normalized query_ represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time. |
 
 For more information, see the [Pricing page][7].
