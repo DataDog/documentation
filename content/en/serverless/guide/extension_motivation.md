@@ -33,7 +33,7 @@ The Lambda extension has full feature parity with the Forwarder for Python, Node
 
 The Datadog Lambda Extension offers the following advantages over the Datadog Forwarder:
 
-- **Simple to set up**: Triggers need to be set up on the Forwarder for every new Lambda function. The Datadog Lambda extension can be easily added as a Lambda layer. Unlike with the Forwarder, configuring the Lambda extension does not require permissions to install third-party AWS CloudFormation stacks. Additionally, since the Lambda extension sends telemetry directly to Datadog, you do not need to manage CloudWatch Log group subscriptions for your Lambda functions.
+- **Simple to set up**: The Forwarder requires that triggers need be set up for every new Lambda function. The Datadog Lambda extension can be easily added as a Lambda layer. Unlike with the Forwarder, configuring the Lambda extension does not require permissions to install third-party AWS CloudFormation stacks. Also, the Lambda extension sends telemetry directly to Datadog, so you do not need to manage CloudWatch Log group subscriptions for your Lambda functions.
 - **Less infrastructure to manage**: The simpler configuration of the Lambda extension saves time on infrastructure management. For non-Lambda AWS integrations, the Forwarder is still required.
 - **Skip CloudWatch Logs**: The Forwarder converts logs to metrics and traces, which are then sent to Datadog. The Datadog Lambda Extension sends traces, metrics, and logs directly to Datadog, enabling you to reduce the cost associated with CloudWatch Logs.
 
