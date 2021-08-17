@@ -2,15 +2,15 @@
 
 import sys
 import unittest
-from process_agent_config import format_agent_config_string
+from process_agent_config import format_agent_config_string, create_agent_config_dict
 
 class TestProcessAgentConfig(unittest.TestCase):
   def test_format_agent_config_string(self):
     test_string_one = ' #  \n'
     test_string_two = ' # test:true'
     
-    result_one = process_agent_config.format_agent_config_string(test_string_one)
-    result_two = process_agent_config.format_agent_config_string(test_string_two)
+    result_one = format_agent_config_string(test_string_one)
+    result_two = format_agent_config_string(test_string_two)
 
     self.assertEqual(result_one, '')
     self.assertEqual(result_two, '  test:true\n')
@@ -45,7 +45,7 @@ class TestProcessAgentConfig(unittest.TestCase):
     {{- if .Test }}
     """
 
-    result = process_agent_config.create_agent_config_dict(test_string)
+    result = create_agent_config_dict(test_string)
 
     self.assertIn(result, 'test configuration')
 

@@ -15,7 +15,7 @@ def format_agent_config_string(string):
   regex_string = r"[^a-zA-Z0-9#]*#[^a-zA-Z0-9#]*$"
 
   if re.match(regex_string, string):
-    return string.replace('#', '').replace('\n', '')
+    return string.replace('#', '').replace('\n', '').strip()
   elif '#' in string and '##' not in string:
     return string.replace('#', '') + '\n'
   else:
