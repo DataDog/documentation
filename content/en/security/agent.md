@@ -32,6 +32,8 @@ The official repositories and/or binary packages of the Agent are signed. Verify
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
+On Debian and Ubuntu the `datadog-agent` package has a soft-dependency on the `datadog-signing-keys` package, which will make the above keys trusted by APT. Keeping the package updated will ensure the latest signing keys are present on your system.
+
 ## Information security
 
 The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce TLS 1.2 when connecting to Datadog. Customers who require the use of "strong cryptography," for example, to meet PCI requirements, should use Agent v6 and set the `force_tls_12: true` setting in the Agent's configuration file.
