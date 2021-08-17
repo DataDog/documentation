@@ -32,7 +32,7 @@ The official repositories and/or binary packages of the Agent are signed. Verify
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
-On Debian and Ubuntu the `datadog-agent` package has a soft-dependency on the `datadog-signing-keys` package, which will make the above keys trusted by APT. Keeping the package updated will ensure the latest signing keys are present on your system.
+On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `datadog-signing-keys` package, which makes the above keys trusted by APT. Keeping the package updated ensures the latest signing keys are present on your system.
 
 ## Information security
 
