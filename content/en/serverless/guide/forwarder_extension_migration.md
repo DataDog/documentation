@@ -2,10 +2,12 @@
 title: Migrating from the Datadog Forwarder to the Datadog Lambda Extension
 kind: guide
 ---
+## Overview
+
+
+This guide explains how to migrate from the [Datadog Forwarder][2] to the Datadog Lambda Extension.
 
 The [Datadog Lambda Extension][1] is a lightweight version of the Datadog Agent built to run alongside your code with minimal performance overhead. 
-
-This guide explains how to migrate from the [Datadog Forwarder][2] to the Datadog Lambda Extension
 
 Datadog recommends that you set up the Extension **before** removing the Forwarder. This means that for the period during which both the Extension and Forwarder are active, all telemetry is sent twice. The alternative (removing the Forwarder before setting up the Extension) results in a period of zero visibility. Depending on your organization's particular needs, you may prefer one outcome over the other.
 
