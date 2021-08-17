@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Amazon RDS managed MySQL
 kind: documentation
 description: Install and configure Database Monitoring for MySQL managed on Amazon RDS.
-private: true
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"

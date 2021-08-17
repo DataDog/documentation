@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Google Cloud SQL managed MySQL
 kind: documentation
 description: Install and configure Database Monitoring for MySQL managed on Google Cloud SQL.
-private: true
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"

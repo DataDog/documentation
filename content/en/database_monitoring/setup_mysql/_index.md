@@ -2,7 +2,6 @@
 title: Setting up MySQL
 kind: documentation
 description: Setting up Database Monitoring on a MySQL database
-private: true
 disable_sidebar: true
 ---
 
