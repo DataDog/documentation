@@ -31,7 +31,7 @@ def pull_and_push_file(content, content_dir):
             # remove h1 if exists
             file_content = re.sub(re.compile(r"^#{1}(?!#)(.*)", re.MULTILINE), "", file_content, count=1)
             file_content = TEMPLATE.format(front_matter=front_matter, content=file_content.strip())
-        elif "datadog-agent" in content["repo_name"]:
+        elif "datadog-agent" in content["repo_name"] and "config_template.yaml" in "".join(content["globs"]):
             process_agent_config(file_content)
 
     if "output_content" in content["options"] and content["options"]["output_content"] != False:
