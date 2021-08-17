@@ -116,6 +116,41 @@ Git metadata and build information is automatically collected using CI provider 
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
+The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non supported CI providers and/or .git folder is not available from the running process, they are also useful to overwrite existing Git information. If these environment variables are set, they will take precedence from those coming from the CI or from the .git folder. The list of supported environment variables for git information includes the following:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored 
+
+`DD_GIT_BRANCH`
+: Branch where this commit belongs to
+
+`DD_GIT_TAG`
+: Tag of the commit, if it has one
+
+`DD_GIT_COMMIT_SHA`
+: Commit SHA
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Author name
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Author email
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Author date. ISO 8601 format.
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Committer name
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Committer email
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+:Committer date. ISO 8601 format.
+
 ### Running tests
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
