@@ -22,7 +22,11 @@ Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
+## Requirements
+
 The Datadog Profiler requires MRI Ruby 2.1+. **Wall time profiling is available for users on every platform (including macOS and Windows), but CPU time profiles are currently only available on Linux platforms**. 
+
+## Installation
 
 To begin profiling applications:
 

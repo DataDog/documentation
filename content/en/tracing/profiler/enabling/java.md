@@ -18,7 +18,13 @@ further_reading:
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
-The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][3] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
+## Requirements
+
+The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 (version 8u262+)][3] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. 
+
+## Installation
+
+To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your Agent to version [7.20.2][4]+ or [6.20.2][5]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
@@ -73,7 +79,9 @@ The Datadog Profiler requires [JDK Flight Recorder][2]. The Datadog Profiler lib
 
 In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is opt-in because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
 
-## Environment variables
+## Configuration
+
+You can configure the profiler using the following environment variables:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |

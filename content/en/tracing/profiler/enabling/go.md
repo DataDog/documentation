@@ -18,7 +18,11 @@ further_reading:
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
+## Requirements
+
 The Datadog Profiler requires Go 1.12+. 
+
+## Installation
 
 To begin profiling applications:
 
@@ -65,11 +69,11 @@ To begin profiling applications:
 
 4. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][5].
 
-**Note**:
+**Note**: By default only the CPU and Heap profile are enabled. Use [profiler.WithProfileTypes][6] to enable additional [profile types][7].
 
-- By default only the CPU and Heap profile are enabled. Use [profiler.WithProfileTypes][6] to enable additional [profile types][7].
+## Configuration
 
-- You can set profiler parameters in code with these functions:
+You can set profiler parameters in code with these functions:
 
 | Function | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -78,7 +82,7 @@ To begin profiling applications:
 |  WithVersion     | String        | The version of your application.                                                                             |
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
-- Alternatively you can set profiler configuration using environment variables:
+Alternatively you can set profiler configuration using environment variables:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
