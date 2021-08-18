@@ -176,9 +176,9 @@ When you create a correction window for a SLO, the time period you specify will 
 
 A public beta for corrections is available through the [SLO status corrections API][12], [Terraform][13], and the UI.
 
-#### Access SLO Status Corrections in the UI 
+#### Access SLO status corrections in the UI 
 
-To access SLO Status Corrections in the UI:
+To access SLO status corrections in the UI:
 
 1. Create a new SLO or edit an existing one
 2. Navigate to an SLO’s detailed side panel view
@@ -186,7 +186,7 @@ To access SLO Status Corrections in the UI:
 4. Select the Time Correction Window, Correction Type, and add Notes
 5. Click “Apply Correction”
 
-To view, edit, and delete existing Status Corrections, click on the “Corrections” tab at the top of an SLO’s detailed side panel view. 
+To view, edit, and delete existing status corrections, click on the “Corrections” tab at the top of an SLO’s detailed side panel view. 
 
 ## Further Reading
 
