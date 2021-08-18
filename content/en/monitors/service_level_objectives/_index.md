@@ -174,7 +174,7 @@ When you create a correction window for a SLO, the time period you specify is re
 Status corrections are in public beta. See the [SLO status corrections API][12], [Terraform][13], and the UI.
 </div>
 
-#### Access SLO status corrections in the UI 
+#### Access in the UI 
 
 To access SLO status corrections in the UI:
 
