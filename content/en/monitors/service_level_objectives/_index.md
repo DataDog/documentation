@@ -66,7 +66,7 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 ## Edit an SLO
 
-To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that will appear at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
+To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
 
 ## Searching and viewing SLOs
 
@@ -105,7 +105,7 @@ Saved views allow you to save and share customized searches in the SLO list view
 - A search query
 - A selected subset of facets
 
-After you query for a subset of SLOs on the list view, you can now add that query as a saved view.
+After you query for a subset of SLOs on the list view, you can add that query as a saved view.
 
 #### Add a saved view
 
@@ -164,13 +164,9 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 ## SLO status corrections
 
-Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
-
-## SLO status corrections
-
 Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. 
 
-When you create a correction window for a SLO, the time period you specify will be removed from the SLO’s calculation. 
+When you create a correction window for a SLO, the time period you specify is removed from the SLO’s calculation. 
 - For monitor-based SLOs, this means that any time that occurred during the correction window is no longer counted
 - For metric-based SLOs, this similarly means that all the good and bad events that occurred during the correction are not counted
 
