@@ -166,6 +166,28 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
 
+## SLO status corrections
+
+Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. 
+
+When you create a correction window for a SLO, the time period you specify will be removed from the SLO’s calculation. 
+- For monitor-based SLOs, this means that any time that occurred during the correction window is no longer counted
+- For metric-based SLOs, this similarly means that all the good and bad events that occurred during the correction are not counted
+
+A public beta for corrections is available through the [SLO status corrections API][12], [Terraform][13], and the UI.
+
+#### Access SLO Status Corrections in the UI 
+
+To access SLO Status Corrections in the UI:
+
+1. Create a new SLO or edit an existing one
+2. Navigate to an SLO’s detailed side panel view
+3. Under the gear icon, select “Correct Status” to access the Status Corrections creation modal
+4. Select the Time Correction Window, Correction Type, and add Notes
+5. Click “Apply Correction”
+
+To view, edit, and delete existing Status Corrections, click on the “Corrections” tab at the top of an SLO’s detailed side panel view. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
