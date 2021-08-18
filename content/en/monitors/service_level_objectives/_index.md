@@ -170,7 +170,9 @@ When you create a correction window for a SLO, the time period you specify is re
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-A public beta for corrections is available through the [SLO status corrections API][12], [Terraform][13], and the UI.
+<div class="alert alert-warning">
+Status corrections are in public beta. See the [SLO status corrections API][12], [Terraform][13], and the UI.
+</div>
 
 #### Access SLO status corrections in the UI 
 
