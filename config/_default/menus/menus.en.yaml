@@ -5449,22 +5449,6 @@ api:
     url: /api/latest/timeboards/
     identifier: timeboards
     generated: true
-  - name: Tracing
-    url: /api/latest/tracing/
-    identifier: tracing
-    generated: true
-  - name: Send traces
-    url: '#send-traces'
-    identifier: send-traces
-    parent: tracing
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - SubmitTraces
-      unstable: []
-      order: 1
   - name: Usage Metering
     url: /api/latest/usage-metering/
     identifier: usage-metering

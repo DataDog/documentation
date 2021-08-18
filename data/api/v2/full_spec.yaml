@@ -884,7 +884,7 @@ components:
               type: dropdown
               value: SEV-5
           type: object
-        initial_timeline_cells:
+        initial_cells:
           description: An array of initial timeline cells to be placed at the beginning
             of the incident timeline.
           items:
@@ -894,9 +894,7 @@ components:
           description: Notification handles that will be notified of the incident
             at creation.
           items:
-            description: A notification handle that will be notified at incident creation.
-            example: '@test.user@test.com'
-            type: string
+            $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
         title:
           description: The title of the incident, which summarizes what happened.
@@ -1006,6 +1004,18 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_INTEGRATIONS
+    IncidentNotificationHandle:
+      description: A notification handle that will be notified at incident creation.
+      properties:
+        display_name:
+          description: The name of the notified handle.
+          example: Jane Doe
+          type: string
+        handle:
+          description: The email address used for the notification.
+          example: '@test.user@test.com'
+          type: string
+      type: object
     IncidentPostmortemType:
       default: incident_postmortems
       description: Incident postmortem resource type.
@@ -1093,10 +1103,7 @@ components:
           description: Notification handles that will be notified of the incident
             during update.
           items:
-            description: A notification handle that will be notified during incident
-              update.
-            example: '@test.user@test.com'
-            type: string
+            $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.
@@ -1631,10 +1638,7 @@ components:
           description: Notification handles that will be notified of the incident
             during update.
           items:
-            description: A notification handle that will be notified during incident
-              update.
-            example: '@test.user@test.com'
-            type: string
+            $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
         resolved:
           description: Timestamp when the incident's state was set to resolved.
