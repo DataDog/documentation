@@ -82,7 +82,7 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
-To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on a SLO, click its table row to open its details side panel.
+To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
 ### SLO tags
 
@@ -166,7 +166,7 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations.
 
-When you create a correction window for a SLO, the time period you specify is removed from the SLO’s calculation. 
+When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation. 
 - For monitor-based SLOs, time in the correction window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
