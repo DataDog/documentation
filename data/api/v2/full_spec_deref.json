@@ -3975,7 +3975,7 @@
             },
             "type": "object"
           },
-          "initial_timeline_cells": {
+          "initial_cells": {
             "description": "An array of initial timeline cells to be placed at the beginning of the incident timeline.",
             "items": {
               "description": "The timeline cell's attributes for a create request.",
@@ -4029,8 +4029,19 @@
             "description": "Notification handles that will be notified of the incident at creation.",
             "items": {
               "description": "A notification handle that will be notified at incident creation.",
-              "example": "@test.user@test.com",
-              "type": "string"
+              "properties": {
+                "display_name": {
+                  "description": "The name of the notified handle.",
+                  "example": "Jane Doe",
+                  "type": "string"
+                },
+                "handle": {
+                  "description": "The email address used for the notification.",
+                  "example": "@test.user@test.com",
+                  "type": "string"
+                }
+              },
+              "type": "object"
             },
             "type": "array"
           },
@@ -4138,7 +4149,7 @@
                 },
                 "type": "object"
               },
-              "initial_timeline_cells": {
+              "initial_cells": {
                 "description": "An array of initial timeline cells to be placed at the beginning of the incident timeline.",
                 "items": {
                   "description": "The timeline cell's attributes for a create request.",
@@ -4192,8 +4203,19 @@
                 "description": "Notification handles that will be notified of the incident at creation.",
                 "items": {
                   "description": "A notification handle that will be notified at incident creation.",
-                  "example": "@test.user@test.com",
-                  "type": "string"
+                  "properties": {
+                    "display_name": {
+                      "description": "The name of the notified handle.",
+                      "example": "Jane Doe",
+                      "type": "string"
+                    },
+                    "handle": {
+                      "description": "The email address used for the notification.",
+                      "example": "@test.user@test.com",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
                 },
                 "type": "array"
               },
@@ -4413,7 +4435,7 @@
                     },
                     "type": "object"
                   },
-                  "initial_timeline_cells": {
+                  "initial_cells": {
                     "description": "An array of initial timeline cells to be placed at the beginning of the incident timeline.",
                     "items": {
                       "description": "The timeline cell's attributes for a create request.",
@@ -4467,8 +4489,19 @@
                     "description": "Notification handles that will be notified of the incident at creation.",
                     "items": {
                       "description": "A notification handle that will be notified at incident creation.",
-                      "example": "@test.user@test.com",
-                      "type": "string"
+                      "properties": {
+                        "display_name": {
+                          "description": "The name of the notified handle.",
+                          "example": "Jane Doe",
+                          "type": "string"
+                        },
+                        "handle": {
+                          "description": "The email address used for the notification.",
+                          "example": "@test.user@test.com",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
                     },
                     "type": "array"
                   },
@@ -4731,6 +4764,22 @@
           "INCIDENT_INTEGRATIONS"
         ]
       },
+      "IncidentNotificationHandle": {
+        "description": "A notification handle that will be notified at incident creation.",
+        "properties": {
+          "display_name": {
+            "description": "The name of the notified handle.",
+            "example": "Jane Doe",
+            "type": "string"
+          },
+          "handle": {
+            "description": "The email address used for the notification.",
+            "example": "@test.user@test.com",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "IncidentPostmortemType": {
         "default": "incident_postmortems",
         "description": "Incident postmortem resource type.",
@@ -4893,9 +4942,20 @@
                   "notification_handles": {
                     "description": "Notification handles that will be notified of the incident during update.",
                     "items": {
-                      "description": "A notification handle that will be notified during incident update.",
-                      "example": "@test.user@test.com",
-                      "type": "string"
+                      "description": "A notification handle that will be notified at incident creation.",
+                      "properties": {
+                        "display_name": {
+                          "description": "The name of the notified handle.",
+                          "example": "Jane Doe",
+                          "type": "string"
+                        },
+                        "handle": {
+                          "description": "The email address used for the notification.",
+                          "example": "@test.user@test.com",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
                     },
                     "type": "array"
                   },
@@ -5583,9 +5643,20 @@
           "notification_handles": {
             "description": "Notification handles that will be notified of the incident during update.",
             "items": {
-              "description": "A notification handle that will be notified during incident update.",
-              "example": "@test.user@test.com",
-              "type": "string"
+              "description": "A notification handle that will be notified at incident creation.",
+              "properties": {
+                "display_name": {
+                  "description": "The name of the notified handle.",
+                  "example": "Jane Doe",
+                  "type": "string"
+                },
+                "handle": {
+                  "description": "The email address used for the notification.",
+                  "example": "@test.user@test.com",
+                  "type": "string"
+                }
+              },
+              "type": "object"
             },
             "type": "array"
           },
@@ -5778,9 +5849,20 @@
               "notification_handles": {
                 "description": "Notification handles that will be notified of the incident during update.",
                 "items": {
-                  "description": "A notification handle that will be notified during incident update.",
-                  "example": "@test.user@test.com",
-                  "type": "string"
+                  "description": "A notification handle that will be notified at incident creation.",
+                  "properties": {
+                    "display_name": {
+                      "description": "The name of the notified handle.",
+                      "example": "Jane Doe",
+                      "type": "string"
+                    },
+                    "handle": {
+                      "description": "The email address used for the notification.",
+                      "example": "@test.user@test.com",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
                 },
                 "type": "array"
               },
@@ -10351,9 +10433,20 @@
           "notification_handles": {
             "description": "Notification handles that will be notified of the incident during update.",
             "items": {
-              "description": "A notification handle that will be notified during incident update.",
-              "example": "@test.user@test.com",
-              "type": "string"
+              "description": "A notification handle that will be notified at incident creation.",
+              "properties": {
+                "display_name": {
+                  "description": "The name of the notified handle.",
+                  "example": "Jane Doe",
+                  "type": "string"
+                },
+                "handle": {
+                  "description": "The email address used for the notification.",
+                  "example": "@test.user@test.com",
+                  "type": "string"
+                }
+              },
+              "type": "object"
             },
             "type": "array"
           },
@@ -10489,9 +10582,20 @@
               "notification_handles": {
                 "description": "Notification handles that will be notified of the incident during update.",
                 "items": {
-                  "description": "A notification handle that will be notified during incident update.",
-                  "example": "@test.user@test.com",
-                  "type": "string"
+                  "description": "A notification handle that will be notified at incident creation.",
+                  "properties": {
+                    "display_name": {
+                      "description": "The name of the notified handle.",
+                      "example": "Jane Doe",
+                      "type": "string"
+                    },
+                    "handle": {
+                      "description": "The email address used for the notification.",
+                      "example": "@test.user@test.com",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
                 },
                 "type": "array"
               },
@@ -11106,9 +11210,20 @@
                   "notification_handles": {
                     "description": "Notification handles that will be notified of the incident during update.",
                     "items": {
-                      "description": "A notification handle that will be notified during incident update.",
-                      "example": "@test.user@test.com",
-                      "type": "string"
+                      "description": "A notification handle that will be notified at incident creation.",
+                      "properties": {
+                        "display_name": {
+                          "description": "The name of the notified handle.",
+                          "example": "Jane Doe",
+                          "type": "string"
+                        },
+                        "handle": {
+                          "description": "The email address used for the notification.",
+                          "example": "@test.user@test.com",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
                     },
                     "type": "array"
                   },
@@ -11650,9 +11765,20 @@
                     "notification_handles": {
                       "description": "Notification handles that will be notified of the incident during update.",
                       "items": {
-                        "description": "A notification handle that will be notified during incident update.",
-                        "example": "@test.user@test.com",
-                        "type": "string"
+                        "description": "A notification handle that will be notified at incident creation.",
+                        "properties": {
+                          "display_name": {
+                            "description": "The name of the notified handle.",
+                            "example": "Jane Doe",
+                            "type": "string"
+                          },
+                          "handle": {
+                            "description": "The email address used for the notification.",
+                            "example": "@test.user@test.com",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
                       },
                       "type": "array"
                     },
@@ -36010,9 +36136,20 @@
                               "notification_handles": {
                                 "description": "Notification handles that will be notified of the incident during update.",
                                 "items": {
-                                  "description": "A notification handle that will be notified during incident update.",
-                                  "example": "@test.user@test.com",
-                                  "type": "string"
+                                  "description": "A notification handle that will be notified at incident creation.",
+                                  "properties": {
+                                    "display_name": {
+                                      "description": "The name of the notified handle.",
+                                      "example": "Jane Doe",
+                                      "type": "string"
+                                    },
+                                    "handle": {
+                                      "description": "The email address used for the notification.",
+                                      "example": "@test.user@test.com",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
                                 },
                                 "type": "array"
                               },
@@ -36814,7 +36951,7 @@
                             },
                             "type": "object"
                           },
-                          "initial_timeline_cells": {
+                          "initial_cells": {
                             "description": "An array of initial timeline cells to be placed at the beginning of the incident timeline.",
                             "items": {
                               "description": "The timeline cell's attributes for a create request.",
@@ -36868,8 +37005,19 @@
                             "description": "Notification handles that will be notified of the incident at creation.",
                             "items": {
                               "description": "A notification handle that will be notified at incident creation.",
-                              "example": "@test.user@test.com",
-                              "type": "string"
+                              "properties": {
+                                "display_name": {
+                                  "description": "The name of the notified handle.",
+                                  "example": "Jane Doe",
+                                  "type": "string"
+                                },
+                                "handle": {
+                                  "description": "The email address used for the notification.",
+                                  "example": "@test.user@test.com",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
                             },
                             "type": "array"
                           },
@@ -37104,9 +37252,20 @@
                             "notification_handles": {
                               "description": "Notification handles that will be notified of the incident during update.",
                               "items": {
-                                "description": "A notification handle that will be notified during incident update.",
-                                "example": "@test.user@test.com",
-                                "type": "string"
+                                "description": "A notification handle that will be notified at incident creation.",
+                                "properties": {
+                                  "display_name": {
+                                    "description": "The name of the notified handle.",
+                                    "example": "Jane Doe",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "The email address used for the notification.",
+                                    "example": "@test.user@test.com",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
                               },
                               "type": "array"
                             },
@@ -38101,9 +38260,20 @@
                             "notification_handles": {
                               "description": "Notification handles that will be notified of the incident during update.",
                               "items": {
-                                "description": "A notification handle that will be notified during incident update.",
-                                "example": "@test.user@test.com",
-                                "type": "string"
+                                "description": "A notification handle that will be notified at incident creation.",
+                                "properties": {
+                                  "display_name": {
+                                    "description": "The name of the notified handle.",
+                                    "example": "Jane Doe",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "The email address used for the notification.",
+                                    "example": "@test.user@test.com",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
                               },
                               "type": "array"
                             },
@@ -38909,9 +39079,20 @@
                           "notification_handles": {
                             "description": "Notification handles that will be notified of the incident during update.",
                             "items": {
-                              "description": "A notification handle that will be notified during incident update.",
-                              "example": "@test.user@test.com",
-                              "type": "string"
+                              "description": "A notification handle that will be notified at incident creation.",
+                              "properties": {
+                                "display_name": {
+                                  "description": "The name of the notified handle.",
+                                  "example": "Jane Doe",
+                                  "type": "string"
+                                },
+                                "handle": {
+                                  "description": "The email address used for the notification.",
+                                  "example": "@test.user@test.com",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
                             },
                             "type": "array"
                           },
@@ -39334,9 +39515,20 @@
                             "notification_handles": {
                               "description": "Notification handles that will be notified of the incident during update.",
                               "items": {
-                                "description": "A notification handle that will be notified during incident update.",
-                                "example": "@test.user@test.com",
-                                "type": "string"
+                                "description": "A notification handle that will be notified at incident creation.",
+                                "properties": {
+                                  "display_name": {
+                                    "description": "The name of the notified handle.",
+                                    "example": "Jane Doe",
+                                    "type": "string"
+                                  },
+                                  "handle": {
+                                    "description": "The email address used for the notification.",
+                                    "example": "@test.user@test.com",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
                               },
                               "type": "array"
                             },
