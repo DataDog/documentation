@@ -58,14 +58,8 @@ hello()
 
 ### No standard library logging
 
-If you are not using the standard library `logging` module, you can use the following code snippet to inject tracer information into your logs:
+If you are not using the standard library `logging` module, you can use the helper method ``ddtrace.tracer.get_log_correlation_context()`` to inject tracer information into your logs. Note that this helper method automatically adds ``env``, ``service``, and ``version`` based on the tracer's configured ``DD_ENV``, ``DD_SERVICE``, and ``DD_VERSION``, respectively.
 
-```python
-from ddtrace import tracer
-
-span = tracer.current_span()
-correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
-```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
@@ -76,18 +70,9 @@ import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
-    span = tracer.current_span()
-    trace_id, span_id = (span.trace_id, span.span_id) if span else (None, None)
-
-    # add ids to structlog event dictionary
-    event_dict['dd.trace_id'] = str(trace_id or 0)
-    event_dict['dd.span_id'] = str(span_id or 0)
-
-    # add the env, service, and version configured for the tracer
-    event_dict['dd.env'] = ddtrace.config.env or ""
-    event_dict['dd.service'] = ddtrace.config.service or ""
-    event_dict['dd.version'] = ddtrace.config.version or ""
-
+    log_correlation_context = tracer.get_log_correlation_context()
+    
+    event_dict["dd"] = log_correlation_context
     return event_dict
 
 structlog.configure(
@@ -103,7 +88,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
+{"event": "In tracer context", "dd": {"trace_id": "9982398928418628468", "span_id": "10130028953923355146", "env": "dev", "service": "hello", "version": "abc123"}}
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].
