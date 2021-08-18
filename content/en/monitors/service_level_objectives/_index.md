@@ -168,7 +168,7 @@ Status corrections allow you to specify time periods such as planned maintenance
 
 When you create a correction window for a SLO, the time period you specify is removed from the SLO’s calculation. 
 - For monitor-based SLOs, time in the correction window is not counted.
-- For metric-based SLOs, this similarly means that all the good and bad events that occurred during the correction are not counted
+- For metric-based SLOs, all good and bad events in the correction window are not counted.
 
 A public beta for corrections is available through the [SLO status corrections API][12], [Terraform][13], and the UI.
 
