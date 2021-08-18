@@ -164,7 +164,7 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 ## SLO status corrections
 
-Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. 
+Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations.
 
 When you create a correction window for a SLO, the time period you specify is removed from the SLO’s calculation. 
 - For monitor-based SLOs, this means that any time that occurred during the correction window is no longer counted
