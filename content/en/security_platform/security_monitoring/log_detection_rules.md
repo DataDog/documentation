@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
   tag: "Blog"
   text: "Detect unauthorized third parties in your AWS account"
+- link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
+  tag: "Blog"
+  text: "Detect security threats with anomaly detection rules"
 aliases:
     - /security_monitoring/detection_rules/security_monitoring/
     - /security_platform/detection_rules/security_monitoring/
