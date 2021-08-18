@@ -1640,10 +1640,30 @@ main:
     identifier: profiler
     weight: 13
   - name: Enabling the Profiler
-    url: tracing/profiler/enabling/
+    url: tracing/profiler/enabling/java
     parent: profiler
     identifier: profiler_enabling
     weight: 1301
+  - name: Enabling the Java Profiler
+    url: tracing/profiler/enabling/java
+    parent: profiler_enabling
+    identifier: profiler_enabling_java
+    weight: 101
+  - name: Enabling the Python Profiler
+    url: tracing/profiler/enabling/python
+    parent: profiler_enabling
+    identifier: profiler_enabling_python
+    weight: 102
+  - name: Enabling the Go Profiler
+    url: tracing/profiler/enabling/go
+    parent: profiler_enabling
+    identifier: profiler_enabling_go
+    weight: 103
+  - name: Enabling the Ruby Profiler
+    url: tracing/profiler/enabling/ruby
+    parent: profiler_enabling
+    identifier: profiler_enabling_ruby
+    weight: 104
   - name: Search Profiles
     url: tracing/profiler/search_profiles
     parent: profiler
