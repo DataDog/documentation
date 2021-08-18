@@ -34,18 +34,15 @@ def pull_and_push_file(content, content_dir):
         elif "datadog-agent" in content["repo_name"] and "config_template.yaml" in "".join(content["globs"]):
             process_agent_config(file_content)
 
-    if not "output_content" in content["options"] or "output_content" in content["options"] and content["options"]["output_content"] != False:
-        input_destination_path = content["options"]["dest_path"]
+    output_content = content["options"].get("output_content", True)
 
-        if input_destination_path.startswith('/'):
-            full_destination_path = input_destination_path[1:]
-        else:
-            full_destination_path = input_destination_path
+    if output_content:
+        destination_path = content["options"]["dest_path"].lstrip('/')
 
         with open(
             "{}{}{}".format(
                 content_dir,
-                full_destination_path,
+                destination_path,
                 basename(content["options"]["file_name"]),
             ),
             mode="w+",
