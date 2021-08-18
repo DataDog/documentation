@@ -13,12 +13,12 @@
 <div class="code-snippet-wrapper">
   <div class="code-filename-wrapper d-flex {{ if $filename }}justify-content-between{{ else }}justify-content-end{{ end }} {{ if $collapsible }}collapsible{{ end }}">
     {{ with $filename }}
-      <p class="code-filename my-0">{{ $filename }}</p>
+      <p class="code-filename my-0">{{ . }}</p>
     {{ end }}
     {{ if $collapsible }}
       <div class="js-code-block-visibility-toggle">
-        <div class="chevron chevron-down"></div>
-        <div class="chevron chevron-up d-none"></div>
+        <div class="chevron chevron-down d-none"></div>
+        <div class="chevron chevron-up"></div>
       </div>
     {{ end }}
   </div>
