@@ -2,6 +2,7 @@
 
 import json
 import re
+import sys
 from os import getenv
 from collections import defaultdict
 
@@ -35,7 +36,7 @@ def create_agent_config_dict(dd_agent_config_string):
     if config_type_header_delimiter in line:
       config_type = agent_config_array[index + 1].replace('#', '').strip().lower()
 
-      if config_type != '':
+      if config_type:
         agent_config_dict.setdefault(config_type, '')
         current_config_type = config_type
     else:
@@ -44,8 +45,7 @@ def create_agent_config_dict(dd_agent_config_string):
         continue
       else:
         formatted_string = format_agent_config_string(line)
-
-      agent_config_dict[current_config_type] += formatted_string
+        agent_config_dict[current_config_type] += formatted_string
   
   return agent_config_dict
 

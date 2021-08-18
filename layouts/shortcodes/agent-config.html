@@ -10,6 +10,10 @@
 {{ $config_data := index $agent_config_data $type }}
 {{ $config_data_string := trim $config_data "\n" }}
 
+{{ if eq $config_data nil }}
+  {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template" }}
+{{ end }}
+
 <div class="code-snippet-wrapper">
   <div class="code-filename-wrapper d-flex {{ if $filename }}justify-content-between{{ else }}justify-content-end{{ end }} {{ if $collapsible }}collapsible{{ end }}">
     {{ with $filename }}
