@@ -237,7 +237,7 @@ class Integrations:
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
 
-            elif file_name.endswith("defaults.go"):
+            elif file_name.endswith(".go"):
                 self.process_npm_integrations(file_name)
 
     def merge_integrations(self):
@@ -434,25 +434,45 @@ class Integrations:
         """
 
         dict_npm = {}
-        with open(file_name) as fh:
+        new_file_name = ""
 
-            line_list = filter(None, fh.read().splitlines())
+        if file_name.endswith("defaults.go"):
 
-            for line in line_list:
-                if line.endswith("service{"):
-                    integration = line.split('"')[1]
-                    dict_npm[integration] = {"name": integration}
+            with open(file_name) as fh:
 
-        new_file_name = "{}aws.json".format(self.data_npm_dir)
+                line_list = filter(None, fh.read().splitlines())
 
-        with open(
-                file=new_file_name,
-                mode="w",
-                encoding="utf-8",
-            ) as f:
-                json.dump(
-                    dict_npm, f, indent = 2, sort_keys = True
-                )
+                for line in line_list:
+                    if line.endswith("service{"):
+                        integration = line.split('"')[1]
+                        dict_npm[integration] = {"name": integration}
+
+            new_file_name = "{}aws.json".format(self.data_npm_dir)
+
+        elif file_name.endswith("gcp_services.go"):
+
+            with open(file_name) as fh:
+
+                line_list = filter(None, fh.read().splitlines())
+
+                for line in line_list:
+                    if line.endswith(","):
+                        integration = line.split('"')[3]
+                        dict_npm[integration] = {"name": integration}
+
+            new_file_name = "{}gcp.json".format(self.data_npm_dir)
+
+        if new_file_name != "":
+            print('HIT')
+            print(new_file_name)
+            with open(
+                    file=new_file_name,
+                    mode="w",
+                    encoding="utf-8",
+                ) as f:
+                    json.dump(
+                        dict_npm, f, indent = 2, sort_keys = True
+                    )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
