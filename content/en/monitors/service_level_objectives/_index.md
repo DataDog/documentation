@@ -184,7 +184,7 @@ To access SLO status corrections in the UI:
 4. Select the **Time Correction Window**, **Correction Type**, and add **Notes**.
 5. Click **Apply Correction**.
 
-To view, edit, and delete existing status corrections, click on the “Corrections” tab at the top of an SLO’s detailed side panel view. 
+To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
 
 ## Further Reading
 
