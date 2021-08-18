@@ -52,6 +52,7 @@
     - action: npm-integrations
       branch: prod
       globs:
+      # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
       - networks/model/domain/gcp_services.go
 
   - repo_name: dogweb

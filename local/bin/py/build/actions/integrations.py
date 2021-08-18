@@ -463,8 +463,6 @@ class Integrations:
             new_file_name = "{}gcp.json".format(self.data_npm_dir)
 
         if new_file_name != "":
-            print('HIT')
-            print(new_file_name)
             with open(
                     file=new_file_name,
                     mode="w",
