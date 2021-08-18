@@ -69,9 +69,7 @@ from ddtrace import tracer
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
-    # get correlation ids from current tracer context
-    log_correlation_context = tracer.get_log_correlation_context()
-    
+    # add current tracer logging context into log event dict 
     event_dict["dd"] = log_correlation_context
     return event_dict
 
