@@ -365,6 +365,24 @@ The [@datadog/datadog-ci][2] NPM package also comes with a tunnel functionality 
 
 To learn how to get started using the testing tunnel, see the [Synthetics testing tunnel documentation][5].
 
+## Visualize test results
+
+### In your CI
+
+You can see the outcome of test executions directly in your CI as your tests are being executed.
+
+{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:100%;">}}
+
+You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
+
+{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
+
+### In Datadog application
+
+You can also see your CI test results listed in the [CI Results Explorer][6] and on test details pages:
+
+{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
+
 ## API usage
 
 The trigger endpoint provides the list of triggered checks alongside their result identifiers. A polling endpoint is available to obtain the full results of the tests if they are available.
@@ -683,24 +701,6 @@ curl -G \
 {{% /tab %}}
 
 {{< /tabs >}}
-
-## Visualize test results
-
-### In your CI
-
-You can see the outcome of test executions directly in your CI as your tests are being executed.
-
-{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:100%;">}}
-
-You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
-
-{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
-
-### In Datadog application
-
-You can also see your CI test results listed in the [CI Results Explorer][6] and on test details pages:
-
-{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
 ## Further Reading
 
