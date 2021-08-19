@@ -441,9 +441,9 @@ In the unusual event of an application crash caused by the PHP tracer, typically
 
 ### Install debug symbols
 
-For the core dumps to be readable, debug symbols for the PHP binaries have to be installed in the system that runs PHP.
+For the core dumps to be readable, debug symbols for the PHP binaries have to be installed on the system that runs PHP.
 
-To check if debug symbols are installed for PHP or PHP-FPM, the easiest approach is to use `gdb`.
+To check if debug symbols are installed for PHP or PHP-FPM, use `gdb`.
 
 Install `gdb`:
 
@@ -465,7 +465,7 @@ Reading symbols from php-fpm...Reading symbols from /usr/lib/debug/path/to/some/
 ...
 ```
 
-If the `gdb` output contains a line similar to the text below, then debug symbols have to be installed:
+If the `gdb` output contains a line similar to the text below, then debug symbols need to be installed:
 
 ```
 ...
@@ -473,7 +473,6 @@ Reading symbols from php-fpm...(no debugging symbols found)...done.
 ...
 ```
 
-Instructions follow in the next sections.
 
 #### Centos
 
@@ -483,7 +482,7 @@ Install package `yum-utils` that provides the program `debuginfo-install`:
 yum install -y yum-utils
 ```
 
-Find the right package name for your PHP binaries, it can vary depending on the PHP installation method:
+Find the package name for your PHP binaries, it can vary depending on the PHP installation method:
 
 ```
 yum list installed | grep php
@@ -495,7 +494,7 @@ Install debug symbols. For example for package `php-fpm`:
 debuginfo-install -y php-fpm
 ```
 
-**Note**: if the repository that provides the PHP binaries is not enabled by default, it can be enabled when running the `debuginfo-install` command. For example:
+**Note**: If the repository that provides the PHP binaries is not enabled by default, it can be enabled when running the `debuginfo-install` command. For example:
 
 ```
 debuginfo-install --enablerepo=remi-php74 -y php-fpm
@@ -542,7 +541,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-In case debug symbols cannot be found yet, it is possible to use the utility tool `find-dbgsym-packages`. Install the binary:
+If debug symbols cannot be found, use the utility tool `find-dbgsym-packages`. Install the binary:
 
 ```
 apt install -y debian-goodies
@@ -554,7 +553,7 @@ Attempt finding debug symbols from either the full path to the binary or the pro
 find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
-Install the resulting package name, if any has been found:
+Install the resulting package name, if found:
 
 ```
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
@@ -564,7 +563,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][15] edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` adding the `main/debug` component to it.
+If PHP was installed from the [`ppa:ondrej/php`][15], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -582,13 +581,13 @@ apt install -y php7.2-fpm-dbgsym
 ```
 ##### PHP installed from a different package
 
-Find the right package name for your PHP binaries, it can vary depending on the PHP installation method:
+Find the package name for your PHP binaries, it can vary depending on the PHP installation method:
 
 ```
 apt list --installed | grep php
 ```
 
-Note that in some cases `php-fpm` can be a metapackage that refers to the real package, for example `php7.2-fpm` in case of PHP-FPM 7.2. In this case the package name is the latter.
+**Note**: In some cases `php-fpm` can be a metapackage that refers to the real package, for example `php7.2-fpm` in case of PHP-FPM 7.2. In this case the package name is the latter.
 
 Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
 
@@ -600,9 +599,9 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-In case the above `-dbg` and `-dbgsym` packages cannot be found, you might have to enable the `ddebs` repositories. Detailed information about how to install debug symbols from the `ddebs` can be found in the [official documentation][16].
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][16] from the `ddebs` can be found in the Ubuntu documentation.
 
-For example, for ubuntu 18.04 and newer, enable the `ddebs` repo:
+For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
 ```
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
@@ -610,7 +609,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][17] from the official documentation page linked above):
+Import the signing key (make sure the [signing key is correct][17]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -628,7 +627,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-In case debug symbols cannot be found yet, it is possible to use the utility tool `find-dbgsym-packages`. Install the binary:
+In case debug symbols cannot be found, use the utility tool `find-dbgsym-packages`. Install the binary:
 
 ```
 apt install -y debian-goodies
@@ -640,7 +639,7 @@ Attempt finding debug symbols from either the full path to the binary or the pro
 find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
-Install the resulting package name, if any has been found:
+Install the resulting package name, if found:
 
 ```
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
