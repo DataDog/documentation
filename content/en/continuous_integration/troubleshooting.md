@@ -22,7 +22,44 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 1. Tracers first try to fetch Git metadata using the local `.git` folder by executing `git` commands. This is the preferred approach, as it populates all Git metadata fields, including commit message, author and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`.
 2. If the `.git` folder is not present, or the `git` binary is not installed, tracers fallback to use the environment variables set by the CI provider to collect Git information. See the [Running tests inside a container][6] page for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
-3. If no CI provider environment variables are found, tests results are sent with no Git metadata.
+1. Tracers first try to use the environment variables set by the CI provider to collect Git information. See the [Running tests inside a container][6] page for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
+2. Tracers also try to fetch Git metadata using the local `.git` folder by executing `git` commands. This populates all Git metadata fields, including commit message, author and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information will only be fetched if no git information was readed from previous method or if the comit sha coincides.
+3. The user can also provide Git information by using custom environment variables. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored.
+
+`DD_GIT_BRANCH`
+: Branch where this commit belongs.
+
+`DD_GIT_TAG`
+: Tag of the commit, if it has one.
+
+`DD_GIT_COMMIT_SHA`
+: Commit SHA.
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Author name.
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Author email.
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Author date. ISO 8601 format.
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Committer name.
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Committer email.
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Committer date. ISO 8601 format.
+
+4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
 ### Need further help?
 

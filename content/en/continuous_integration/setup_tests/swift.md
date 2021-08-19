@@ -112,7 +112,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ### Collecting Git and build metadata
 
-Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Correct Git information is essential for the CI visibility product. Both pipeline visualization and testing instrumentation use git to identify and group their results. Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 

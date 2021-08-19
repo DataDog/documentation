@@ -104,6 +104,52 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 The Datadog CI CLI tries to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][4] binary is required.
 
+The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored.
+**Example**: `git@github.com:MyCompany/MyApp.git`
+
+`DD_GIT_BRANCH`
+: Branch where this commit belongs.
+**Example**: `develop`
+
+`DD_GIT_TAG`
+: Tag of the commit, if it has one.
+**Example**: `1.0.1`
+
+`DD_GIT_COMMIT_SHA`
+: Commit SHA.
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.
+**Example**: `Set release number`
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Author name.
+**Example**: `John Doe`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Author email.
+**Example**: `john@doe.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Author date. ISO 8601 format.
+**Example**: `2021-03-12T16:00:28Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Committer name.
+**Example**: `Jane Doe`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Committer email.
+**Example**: `jane@doe.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Committer date. ISO 8601 format.
+**Example**: `2021-03-12T16:00:28Z`
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
