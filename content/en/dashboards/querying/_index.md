@@ -170,7 +170,6 @@ status:error / status:info
 
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
-
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
 ### Create an alias
@@ -205,16 +204,8 @@ Select the following parameters from the graphing editor: Environment (`env`), P
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
 ## Incident Management analytics
-Incident Management analytics provides you with the following measures:
 
-* Incident Count
-* Customer Impact Duration
-* Status Active Duration
-* Status Stable Duration
-* Time to Repair (customer impact end time - created time)
-* Time to Resolve (resolved time - created time)
-
-Incident Management analytics is supported in the following widgets:
+The following widgets support Incident Management analytics:
 
 * Timeseries
 * Top List 
@@ -224,16 +215,16 @@ Incident Management analytics is supported in the following widgets:
 
 To configure your graph using Incident Management analytics data, follow these steps:
 
-1. [Select your visualization](#select-your-visualization) (same as for metrics)
-2. Select `Incidents` from the data source dropdown menu
-3. Select a measure from the yellow dropdown menu
-     - **Default Statistic:** Count the number of incidents
-5. Select an aggregation for the measure
-6. (Optional) Select a rollup for the measure
-7. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents
-8. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display 
-9. [Title the graph](#create-a-title) (same as for metrics)
-10. Save your widget
+1. [Select your visualization](#select-your-visualization) (same as for metrics).
+2. Select `Incidents` from the data source dropdown menu.
+3. Select a measure from the yellow dropdown menu.
+     - **Default Statistic:** Counts the number of incidents.
+5. Select an aggregation for the measure.
+6. (Optional) Select a rollup for the measure.
+7. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents.
+8. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display .
+9. [Title the graph](#create-a-title) (same as for metrics).
+10. Save your widget.
 
 **Example:** Weekly Outage Customer Impact Duration by Service
 
