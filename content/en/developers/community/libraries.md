@@ -76,7 +76,7 @@ A [set of tools][27] to backup/restore dashboards and monitors, and configure us
 
 ### Consul
 
-Publish Consul service counts into Datadog with [DogStatsD][1] with the [Consul library][28].
+Publish Consul service counts into Datadog from [DogStatsD][1] with the [Consul library][28].
 
 ### Dogscaler
 
@@ -92,7 +92,7 @@ This is for a [FreeSwitch ESL][31] application to export statistics to Datadog u
 
 ### Google Analytics
 
-You can get data into Datadog from Google Analytics with the Datadog API with the [Google Analytics library][33] from [Bithaus][34].
+You can get data into Datadog from Google Analytics using the Datadog API with the [Google Analytics library][33] from [Bithaus][34].
 
 ### Heroku
 
