@@ -22,13 +22,13 @@ further_reading:
 
 <br/>
 
-Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `TCP`, `SSL`, `DNS`, and `ICMP`) in a controlled and stable way, alerting you in case of faulty behavior (regression, broken feature, high response time, unexpected status code, etc.).
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `TCP`, `SSL`, `DNS`, and `ICMP`) in a controlled and stable way, alerting you in case of faulty behavior (regression, broken feature, high response time, unexpected status code, etc.). 
 
 With **end-to-end testing in production and CI environments**, your development teams can proactively ensure that no defective code makes it to production. **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [TCP test][5], [DNS test][6], and [ICMP test][7].
+API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [TCP test][5], [DNS test][6], and [ICMP test][7]. 
 
 {{< img src="synthetics/api_test.png" alt="API tests"  style="width:100%;">}}
 
@@ -52,7 +52,7 @@ Leverage your Synthetic tests as [canaries][10] or run them directly within your
 
 ## Connect data and traces
 
-Use the [out-of-the-box integration between Synthetic tests and APM traces][11] to find the root cause of failures across frontend, network, and backend requests.
+Use the [out of the box integration between Synthetic tests and APM traces][11] to find the root cause of failures across frontend, network, and backend requests.
 
 {{< img src="synthetics/synthetics_traces.gif" alt="Synthetic Monitoring" style="width:100%;">}}
 
