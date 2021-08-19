@@ -7599,6 +7599,7 @@ components:
       type: object
     SLOHistoryMetricsSeriesMetadataUnit:
       description: An Object of metric units.
+      nullable: true
       properties:
         family:
           description: The family of metric unit, for example `bytes` is the family
