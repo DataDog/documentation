@@ -686,6 +686,47 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][18] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+
+```
+==322== Conditional jump or move depends on uninitialised value(s)
+==322==    at 0x41EE82: zend_string_equal_val (zend_string.c:403)
+==322==    ...
+==322==    ...
+==322==
+==322== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==322==    at 0x73C8657: kill (syscall-template.S:81)
+==322==    by 0x1145D0F2: zif_posix_kill (posix.c:468)
+==322==    by 0x478BFE: ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER (zend_vm_execute.h:1269)
+==322==    by 0x478BFE: execute_ex (zend_vm_execute.h:53869)
+==322==    by 0x47D9B0: zend_execute (zend_vm_execute.h:57989)
+==322==    by 0x3F6782: zend_execute_scripts (zend.c:1679)
+==322==    by 0x394F0F: php_execute_script (main.c:2658)
+==322==    by 0x1FFE18: main (fpm_main.c:1939)
+==322==
+==322== Process terminating with default action of signal 11 (SIGSEGV)
+==322==    ...
+==322==    ...
+==322==
+==322== HEAP SUMMARY:
+==322==     in use at exit: 3,411,619 bytes in 22,428 blocks
+==322==   total heap usage: 65,090 allocs, 42,662 frees, 23,123,409 bytes allocated
+==322==
+==322== LEAK SUMMARY:
+==322==    definitely lost: 216 bytes in 3 blocks
+==322==    indirectly lost: 951 bytes in 32 blocks
+==322==      possibly lost: 2,001,304 bytes in 16,840 blocks
+==322==    still reachable: 1,409,148 bytes in 5,553 blocks
+==322==                       of which reachable via heuristic:
+==322==                         stdstring          : 384 bytes in 6 blocks
+==322==         suppressed: 0 bytes in 0 blocks
+==322== Rerun with --leak-check=full to see details of leaked memory
+==322==
+==322== Use --track-origins=yes to see where uninitialised values come from
+==322== For lists of detected and suppressed errors, rerun with: -s
+==322== ERROR SUMMARY: 18868 errors from 102 contexts (suppressed: 0 from 0)
+```
+
 ### Obtaining a strace
 
 Some issues are caused by external factors, so it can be valuable to have a `strace`.
@@ -732,3 +773,4 @@ For Apache, run:
 [15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
 [16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
