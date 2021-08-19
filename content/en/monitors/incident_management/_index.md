@@ -59,7 +59,7 @@ In the [incidents UI][1], click the **New Incident** button to create an inciden
 
 {{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="Incident Declaration Modal" style="width:80%;">}}
 
-The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions of the severities and statuses of used by your organization. The helper text and descriptions are customizable in the [Incident Settings][17].
+The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][17].
 
 {{< img src="monitors/incidents/incident_information_settings.jpeg" alt="Incident Information Settings" style="width:80%;">}}
 
