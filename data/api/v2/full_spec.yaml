@@ -4471,6 +4471,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
       required:
       - name
       - isEnabled
@@ -4767,6 +4769,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
         updateAuthorId:
           description: User ID of the user who updated the rule.
           format: int64
@@ -4790,6 +4794,28 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleTypeCreate:
+      description: The rule type.
+      enum:
+      - log_detection
+      - workload_security
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
+      - WORKLOAD_SECURITY
+    SecurityMonitoringRuleTypeRead:
+      description: The rule type.
+      enum:
+      - log_detection
+      - infrastructure_configuration
+      - workload_security
+      - cloud_configuration
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
+      - INFRASTRUCTURE_CONFIGURATION
+      - WORKLOAD_SECURITY
+      - CLOUD_CONFIGURATION
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
@@ -8514,7 +8540,7 @@ paths:
               \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
               {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
               86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
-              true\n}"
+              true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule" in the system
       x-menu-order: 2
       x-undo:

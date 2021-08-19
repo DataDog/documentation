@@ -7599,6 +7599,7 @@ components:
       type: object
     SLOHistoryMetricsSeriesMetadataUnit:
       description: An Object of metric units.
+      nullable: true
       properties:
         family:
           description: The family of metric unit, for example `bytes` is the family
@@ -19511,9 +19512,9 @@ paths:
 
         - `time_aggr`: avg, sum, max, min, change, or pct_change
 
-        - `time_window`: `last_#m` (with `#` between 1 and 2880 depending on the monitor
-        type) or `last_#h`(with `#` between 1 and 48 depending on the monitor type),
-        or `last_1d`
+        - `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the
+        monitor type) or `last_#h`(with `#` between 1 and 168 depending on the monitor
+        type) or `last_1d`, or `last_1w`
 
         - `space_aggr`: avg, sum, min, or max
 
