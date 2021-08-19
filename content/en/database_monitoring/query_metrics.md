@@ -116,7 +116,7 @@ The **Hosts Running This Query** tab lists the hosts that run this query, with a
 
 ## Database Monitoring dashboards
 
-For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at to top of the page. Use the out of the box dashboards, or clone and customize them to suit your needs.
+For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at to top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
 
 ## Further Reading
 
