@@ -197,7 +197,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 4. ローカルの APT キャッシュを更新し、Agent をインストールします。
     ```
     sudo apt-get update
-    sudo apt-get install datadog-agent
+    sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
 5. 構成サンプルを所定の位置にコピーし、適切な API キーを指定します。
@@ -327,7 +327,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 4. ローカルの APT キャッシュを更新し、Agent をインストールします。
     ```
     sudo apt-get update
-    sudo apt-get install datadog-agent
+    sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
 5. 構成サンプルを所定の位置にコピーし、適切な API キーを指定します。

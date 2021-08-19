@@ -341,7 +341,7 @@ Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cl
 [6]: /fr/api/v1/monitors/#edit-a-monitor
 [7]: /fr/api/v1/tags/#add-tags-to-a-host
 [8]: /fr/api/v1/tags/#update-host-tags
-[9]: /fr/api/v1/tracing/
+[9]: /fr/tracing/guide/send_traces_to_agent_by_api/
 [10]: /fr/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /fr/api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
