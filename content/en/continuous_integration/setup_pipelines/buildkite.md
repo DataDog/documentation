@@ -13,9 +13,9 @@ further_reading:
 {{< site-region region="us,eu" >}}
 ## Configuring the Datadog integration
 
-The Datadog intragration for Buildkite works by using [webhooks][1] to send pipeline data to Datadog.
+The Datadog integration for [Buildkite][2] works by using [webhooks][1] to send pipeline data to Datadog.
 
-Go to **Settings > Notificaton Services** in Buildkite and add a new webhook:
+Go to **Settings > Notification Services** in Buildkite and add a new webhook:
 
 {{< site-region region="us" >}}
 * **Webhook URL**: `https://webhooks-http-intake.logs.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
@@ -57,9 +57,10 @@ After the integration is successfully configured, the [Pipelines][1] and [Pipeli
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-{{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+[1]: https://buildkite.com/docs/apis/webhooks
+[2]: https://buildkite.com
 {{< /site-region >}}
 
-[1]: https://buildkite.com/docs/apis/webhooks
+{{< site-region region="us3,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}
