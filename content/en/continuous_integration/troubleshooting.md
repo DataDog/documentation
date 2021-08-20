@@ -25,37 +25,48 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 3. Git information can also be provided manually using environment variables, which override any information detected by any of the previous steps. The supported environment variables for providing Git information are the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
+**Example**: `develop`
 
 `DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+**Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
-: Full commit hash.
+: Full commit hash.<br/>
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
-: Commit message.
+: Commit message.<br/>
+**Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.
+: Commit author name.<br/>
+**Example**: `John Doe`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.
+: Commit author email.<br/>
+**Example**: `john@doe.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.
+: Commit author date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.
+: Commit committer name.<br/>
+**Example**: `Jane Doe`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.
+: Commit committer email.<br/>
+**Example**: `jane@doe.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.
+: Commit committer date in ISO 8601 format.<br/>
+**Example**: `2021-03-12T16:00:28Z`
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
