@@ -1,5 +1,5 @@
 ---
-title: Google を SAML IdP として構成する方法
+title: Google SAML IdP
 kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-configure-google-as-a-saml-idp/
@@ -36,7 +36,7 @@ further_reading:
 * urn:oid:2.5.4.4、基本情報、姓
 * urn:oid:2.5.4.42、基本情報、名
 
-{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping"  style="width:75%;">}}
+{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping" style="width:75%;">}}
 
 ## その他の参考資料
 

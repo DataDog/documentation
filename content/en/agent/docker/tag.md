@@ -19,7 +19,7 @@ The Datadog Agent can create and assign tags to all metrics, traces, and logs em
 
 If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
-### Out of the box tagging
+### Out-of-the-box tagging
 
 The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
 

@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Google Cloud SQL managed Postgres
 kind: documentation
 description: Install and configure Database Monitoring for Postgres managed on Google Cloud SQL.
-private: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"

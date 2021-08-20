@@ -172,7 +172,7 @@ datadog:
 : Number of namespaces. Tags:`phase`.
 
 `kubernetes_state.node.count`
-: Information about a cluster node. Tags:`node` `kernel_version` `os_image` `container_runtime_version` `kubelet_version` `kubeproxy_version` `provider_id` `pod_cidr`.
+: Number of nodes. Tags:`kernel_version` `os_image` `container_runtime_version` `kubelet_version`.
 
 `kubernetes_state.node.cpu_allocatable`
 : The allocatable CPU of a node that is available for scheduling. Tags:`node` `resource` `unit`.
@@ -346,7 +346,7 @@ datadog:
 : The number of updated replicas per StatefulSet. Tags:`kube_namespace` `kube_stateful_set` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.hpa.count`
-: Number of horizontal pod autoscalers. Tags: `kube_namespace`.
+: Number of horizontal pod autoscaler. Tags: `kube_namespace`.
 
 `kubernetes_state.hpa.min_replicas`
 : Lower limit for the number of pods that can be set by the autoscaler, default 1. Tags:`kube_namespace` `horizontalpodautoscaler`.
@@ -367,7 +367,7 @@ datadog:
 : The metric specifications used by this autoscaler when calculating the desired replica count. Tags:`kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`.
 
 `kubernetes_state.vpa.count`
-: Number of vertical pod autoscalers. Tags: `kube_namespace`.
+: Number of vertical pod autoscaler. Tags: `kube_namespace`.
 
 `kubernetes_state.vpa.lower_bound`
 : Minimum resources the container can use before the VerticalPodAutoscaler updater evicts it. Tags:`kube_namespace` `verticalpodautoscaler` `kube_container_name` `resource` `target_api_version` `target_kind` `target_name` `unit`.
@@ -403,10 +403,10 @@ datadog:
 : Number of jobs. Tags:`kube_namespace` `owner_name` `owner_kind`.
 
 `kubernetes_state.job.failed`
-: The number of pods which reached Phase Failed. Tags:`kube_job` `kube_namespace` (`env` `service` `version` from standard labels).
+: The number of pods which reached Phase Failed. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.job.succeeded`
-: The number of pods which reached Phase Succeeded. Tags:`kube_job` `kube_namespace` (`env` `service` `version` from standard labels).
+: The number of pods which reached Phase Succeeded. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.resourcequota.<resource>.limit`
 : Information about resource quota limits by resource. Tags:`kube_namespace` `resourcequota`.
@@ -462,7 +462,7 @@ The Kubernetes State Metrics Core check does not include any events.
 : Alert if the cronjob's next schedule is in the past. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.job.complete`
-: Whether the job is failed or not. Tags:`kube_job` `kube_namespace` (`env` `service` `version` from standard labels).
+: Whether the job is failed or not. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.node.ready`
 : Whether the node is ready. Tags:`node` `condition` `status`.
