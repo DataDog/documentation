@@ -22,7 +22,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 1. Tracers first try to use the environment variables set by the CI provider to collect Git information. See the [Running tests inside a container][6] page for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Tracers also try to fetch Git metadata using the local `.git` folder by executing `git` commands. This populates all Git metadata fields, including commit message, author and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information will be used to populate attributes not detected in the previous step.
-3. Git information can also be provided manually using environment variables, which override  any information detected by any of the previous steps. The supported environment variables for providing Git information are the following:
+3. Git information can also be provided manually using environment variables, which override any information detected by any of the previous steps. The supported environment variables for providing Git information are the following:
 
 `DD_GIT_REPOSITORY_URL`
 : URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.
