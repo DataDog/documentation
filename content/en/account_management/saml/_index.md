@@ -26,8 +26,6 @@ Here's a two-minute video walkthrough:
 
 If you are a [Datadog Administrator][3], there is a [Configure SAML][4] option in the drop down menu that is accessed by hovering over your username in the left-side navigation menu.
 
-{{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" style="width:50%;" >}}
-
 This brings you to the **SAML Single Sign On Configuration** page:
 
 1. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button.
