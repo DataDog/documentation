@@ -104,22 +104,23 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 The Datadog CI CLI tries to extract git repository and commit metadata from CI provider environment variables and from the local `.git` directory and attach it to test executions. In order to read this directory, the [`git`][4] binary is required.
 
-The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+If running tests in non-supported CI providers or with no `.git` folder, Git information can be set manually using environment variables. These environment variables take precedence over any autodetected information.
+The supported environment variables for providing Git information are the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored.
-**Example**: `git@github.com:MyCompany/MyApp.git`
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.
+**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Branch where this commit belongs.
+: Git branch being tested. Leave empty if providing tag information instead.
 **Example**: `develop`
 
 `DD_GIT_TAG`
-: Tag of the commit, if it has one.
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.
 **Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
-: Commit SHA.
+: Full commit hash.
 **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
@@ -127,27 +128,27 @@ The user can also provide Git information by using custom environment variables.
 **Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Author name.
+: Commit author name.
 **Example**: `John Doe`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Author email.
+: Commit author email.
 **Example**: `john@doe.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Author date. ISO 8601 format.
+: Commit author date in ISO 8601 format.
 **Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Committer name.
+:Commit committer name.
 **Example**: `Jane Doe`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Committer email.
+: Commit committer email.
 **Example**: `jane@doe.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Committer date. ISO 8601 format.
+: Commit committer date in ISO 8601 format.
 **Example**: `2021-03-12T16:00:28Z`
 
 ## Further reading

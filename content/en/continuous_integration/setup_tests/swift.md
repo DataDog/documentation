@@ -110,46 +110,47 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [1]: /getting_started/site/
 {{< /site-region >}}
 
-### Collecting Git and build metadata
+### Collecting Git metadata
 
-Correct Git information is essential for the CI visibility product. Both pipeline visualization and testing instrumentation use git to identify and group their results. Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Git information is required for the proper visualization of test results, and used to group them by repository, branch and commit. It is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+If running tests in non-supported CI providers or with no `.git` folder, Git information can be set manually using environment variables. These environment variables take precedence over any autodetected information.
+The supported environment variables for providing Git information are the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored.
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.
 
 `DD_GIT_BRANCH`
-: Branch where this commit belongs.
+: Git branch being tested. Leave empty if providing tag information instead.
 
 `DD_GIT_TAG`
-: Tag of the commit, if it has one.
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.
 
 `DD_GIT_COMMIT_SHA`
-: Commit SHA.
+: Full commit hash.
 
 `DD_GIT_COMMIT_MESSAGE`
 : Commit message.
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Author name.
+: Commit author name.
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Author email.
+: Commit author email.
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Author date. ISO 8601 format.
+: Commit author date in ISO 8601 format.
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Committer name.
+:Commit committer name.
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Committer email.
+: Commit committer email.
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Committer date. ISO 8601 format.
+: Commit committer date in ISO 8601 format.
 
 ### Running tests
 
