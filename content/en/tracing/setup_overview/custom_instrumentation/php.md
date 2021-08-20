@@ -642,7 +642,7 @@ dd_trace('CustomDriver', 'doWork', function (...$args) {
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/#span-tags
 [5]: /tracing/security
-[6]: /api/v1/tracing/#send-traces
+[6]: /tracing/guide/send_traces_to_agent_by_api/
 [7]: https://www.php.net/func_get_args
 [8]: https://github.com/DataDog/dd-trace-php/releases/latest
 [9]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize

@@ -25,6 +25,15 @@ There are two options available for pricing, depending on whether APM and Profil
 
 For more information, see the [Pricing page][7].
 
+## Database Monitoring
+
+| Billing Parameter  | Normalized Queries                | Billing                                          |
+|--------------------|-----------------------------------|--------------------------------------------------|
+| Database host      | 200 normalized queries are included per month with every database host. | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. |
+| Normalized Queries | Billed when the configured threshold is in excess of normalized queries that are included with every database host. | A _normalized query_ represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time. |
+
+For more information, see the [Pricing page][7].
+
 ## Deployment scenarios
 
 **Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][8] or your [Customer Success][9] Manager to discuss volume discounts for your account.**

@@ -12,7 +12,7 @@ It's possible to get percentiles in Datadog by submitting data as a histogram me
 
 Since this aggregation is taken care of on the collection side, this isn't available as a graphing function in the GUI.
 
-Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, max, count.
+Out of the histogram data, you get: 95th percentile, 50th percentile, avg, max, count.
 
 * A quick [introduction to DogStatsD][1]
 
@@ -20,7 +20,7 @@ Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, ma
 
 ### Additional percentiles
 
-Via the "histogram_percentiles" line of the configuration file of the Agent, get extra percentiles, e.g.:
+Through the "histogram_percentiles" line of the configuration file of the Agent, get extra percentiles, such as:
 
 * histogram_percentiles: 0.95, 0.75
 
@@ -32,8 +32,8 @@ Histograms are computed every 10 seconds on a host per host basis by the Datadog
 
 ### Advantages
 
-* Raw datapoints used to compute histogram metrics are not exposed nor relayed to our site.
-* StatsD handles the relevant aggregations and submits the calculated data package to our server directly.
+* Raw datapoints used to compute histogram metrics are not exposed nor relayed to the Datadog site.
+* StatsD handles the relevant aggregations and submits the calculated data package to the Datadog server directly.
 
 ### Disadvantages
 

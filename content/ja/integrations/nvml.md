@@ -22,7 +22,7 @@ integration_title: Nvidia NVML
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 1.0.1
+manifest_version: 1.0.0
 metric_prefix: nvml.
 metric_to_check: nvml.device_count
 name: nvml
@@ -86,17 +86,18 @@ Docker を使用している場合、NVML リポジトリに [Dockerfile の例]
 
 可能な場合、メトリクス名を NVIDIA の [Data Center GPU Manager (DCGM) エクスポーター][14]と一致させる試みがあります。
 
-### サービスのチェック
-
-NVML には、サービスのチェック機能は含まれません。
-
 ### イベント
 
 NVML には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "nvml" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
 
 [14]:https://github.com/NVIDIA/gpu-monitoring-tools/blob/master/exporters/prometheus-dcgm/dcgm-exporter/dcgm-exporter
 [1]: https://pypi.org/project/pynvml/
@@ -111,4 +112,5 @@ NVML には、イベントは含まれません。
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/nvml/metadata.csv
 [12]: https://docs.nvidia.com/deploy/nvml-api/group__nvmlDeviceQueries.html
-[13]: https://docs.datadoghq.com/ja/help
+[13]: https://github.com/DataDog/integrations-extras/blob/master/nvml/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help

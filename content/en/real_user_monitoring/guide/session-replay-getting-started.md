@@ -7,6 +7,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
+  tag: 'Blog'
+  text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
 <div class="alert alert-info"><p>Session Replay is in private beta. There are no billing implications for the Session Replays during this period. If you want to be added to the private beta, sign up by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
@@ -48,7 +51,7 @@ DD_RUM.startSessionReplayRecording();
 ```
 
 #### CDN
-Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, it also starts the Session Replay recording.
+Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
 *Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
 
@@ -138,7 +141,7 @@ The Session Replay Recorder, part of the RUM Browser SDK, takes a snapshot of th
 
 On the Datadog replay view, we rebuild the page and re-apply the recorded events at the right time.
 
-The browser SDK is [open source][10], and leverages the open source project [rrweb][9].
+The browser SDK is [open source][9], and leverages the open source project [rrweb][10].
 
 ### What is the performance impact?
 
@@ -161,5 +164,5 @@ Session Replay follows the same 30 days retention policy as normal RUM sessions.
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet
 [8]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
-[9]: https://www.rrweb.io/
-[10]: https://github.com/DataDog/browser-sdk
+[9]: https://github.com/DataDog/browser-sdk
+[10]: https://www.rrweb.io/

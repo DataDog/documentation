@@ -3,15 +3,12 @@ aliases:
   - /ja/tz1-6vg-1yz
   - /ja/security_monitoring/default_rules/tz1-6vg-1yz
   - /ja/security_monitoring/default_rules/pam_modification
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: PAM コンフィギュレーションファイルの変更
 type: security_rules

@@ -235,9 +235,9 @@ The Trace table shows you both the overall latency distribution of all traces in
 
 3) **Click into one of your traces**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flamegraph"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flame graph"  style="width:90%;">}}
 
-In this view you can see the **flamegraph** on top and the additional information windows beneath it. The Datadog flamegraph allows you to have an at a glance view of the duration and status of every logical unit (span) that impacts a request. The flamegraph is fully interactive and you can pan it (by dragging) or zoom in and out (by scrolling). Clicking on any span provides more information about that span in particular in the bottom part of the view.
+In this view you can see the **flame graph** on top and the additional information windows beneath it. The Datadog flame graph allows you to have an at a glance view of the duration and status of every logical unit (span) that impacts a request. The flame graph is fully interactive and you can pan it (by dragging) or zoom in and out (by scrolling). Clicking on any span provides more information about that span in particular in the bottom part of the view.
 
 The bottom part of the view includes additional information about the trace or any selected span. Here you can see all default tags as well as the ones you manually include. In addition to these, you can also switch to view associated Host and Log information.
 

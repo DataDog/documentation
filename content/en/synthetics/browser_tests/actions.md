@@ -263,19 +263,27 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### Global variable
 
-Pick any global variables that was defined through [Synthetic  Monitoring Settings][7].
+Pick any global variables defined in [Synthetic Monitoring Settings][7].
+
+#### Global variable - MFA
+
+Pick any MFA global variables defined in [Synthetic Monitoring Settings][7].
+
+This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows.
+
+For more information about TOTP-based MFA in a browser test, see this [TOTP guide][8].
 
 #### Email
 
-Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][9] or to [navigate to a link contained within the email][10] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
 ### Subtests
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest"  style="width:60%;">}}
 
-You can run browser tests within other browser tests in order to reuse existing workflows (up to two levels of nesting). Find out more about why you should use subtests and see some examples in [this dedicated guide][10].
+You can run browser tests within other browser tests in order to reuse existing workflows (up to two levels of nesting). Find out more about why you should use subtests and see some examples in [this dedicated guide][11].
 
-Variables from subtests can be overriden in parent tests if you ensure the variables created at the parent test level have the same names as the variables present in the subtest. By default, the subtest is executed in sequence with the previous steps of the parent test but this can be tweaked using [**Subtest Advanced options**][11].
+Variables from subtests can be overriden in parent tests if you ensure the variables created at the parent test level have the same names as the variables present in the subtest. By default, the subtest is executed in sequence with the previous steps of the parent test but this can be tweaked using [**Subtest Advanced options**][12].
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
@@ -307,8 +315,8 @@ Optionally, you can base your step success on assertions about the defined HTTP 
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][13] | _String_ <br> _[Regex][14]_ <br> _String_, _[Regex][14]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][14]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -327,8 +335,8 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][13].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][13] or a [JSONPath][12].
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][14].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][14] or a [JSONPath][13].
 
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Create a variable from HTTP request in Browser test" video="true"  width="80%" >}}
 
@@ -368,9 +376,10 @@ Some variables only get computed at runtime (for example, a variable from HTTP r
 [5]: /synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /synthetics/settings/
-[8]: /synthetics/browser_tests/actions#test-that-an-email-was-received
-[9]: /synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
-[10]: /synthetics/guide/reusing-browser-test-journeys
-[11]: /synthetics/browser_tests/advanced_options/#subtests
-[12]: https://restfulapi.net/json-jsonpath/
-[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[8]: /synthetics/guide/browser-tests-totp
+[9]: /synthetics/browser_tests/actions#test-that-an-email-was-received
+[10]: /synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
+[11]: /synthetics/guide/reusing-browser-test-journeys
+[12]: /synthetics/browser_tests/advanced_options/#subtests
+[13]: https://restfulapi.net/json-jsonpath/
+[14]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

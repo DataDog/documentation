@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Docker Agent is the containerized version of the host [Agent][1]. The official [Docker image][2] is available on Docker Hub, GCR and ECR-Public.
+The Datadog Docker Agent is the containerized version of the host [Agent][1]. The official [Docker image][2] is available on Docker Hub, GCR, and ECR-Public.
 
 Images are available for 64-bit x86 and Arm v8 architectures.
 

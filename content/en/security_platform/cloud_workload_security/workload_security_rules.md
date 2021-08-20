@@ -7,10 +7,6 @@ further_reading:
   text: "Get Started with Cloud Runtime Security"
 ---
 
-<div class="alert alert-warning">
-Cloud Workload Security is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
-</div>
-
 ## Overview
 
 With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. Before learning how to create custom rules below, it is recommended to learn the basics of Cloud Workload Security rules and the concept of Agent expressions. Refer to the [Agent expression docs][1] for more information.

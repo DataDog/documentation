@@ -5,11 +5,10 @@ import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
-import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav, toggleMultiCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
+import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
-
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
@@ -197,6 +196,7 @@ function loadPage(newUrl) {
             const {pageCodeLang} = document.documentElement.dataset;
 
             addCodeTabEventListeners();
+            addCodeBlockVisibilityToggleEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);

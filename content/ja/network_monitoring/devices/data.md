@@ -16,5 +16,4 @@ aliases:
 
 ## サービスチェック
 
-**snmp.can_check**:<br>
-Agent が SNMP メトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+{{< get-service-checks-from-git "snmp" >}}

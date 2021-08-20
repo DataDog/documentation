@@ -20,7 +20,7 @@ Custom checks are well suited to collect metrics from custom applications or uni
 
 Datadog Agent v6.4+ allows integrations to be released and updated independently from Datadog Agent updates. It also provides an easier way for you to share integrations—and makes it easier for the wider Datadog community to use your integrations.
 
-For more information about how to write an integration, see [Creating New Integrations][1]. Refer to the [integrations-extras GitHub repository][2] to see other contributed integrations.
+For more information about how to write an integration, see [Creating New Integrations][1]. See the [integrations-extras GitHub repository][2] to see other contributed integrations.
 
 ## Setup
 
@@ -59,7 +59,7 @@ class HelloCheck(AgentCheck):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'] + self.instance.get('tags', []))
 {{< /code-block >}}
 
-For more details about the interface provided by the base class, browse the [API documentation][5].
+See [datadog_checks.base.checks.base.AgentCheck][5] for more details about the base class.
 
 **Note**: When choosing a name for your custom check, you should prefix it with `custom_` in order to avoid conflict with the name of a preexisting Datadog Agent integrations. For instance, if you have a custom Postfix check, name your check files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
 
@@ -94,7 +94,7 @@ instances: [{}]
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If the `min_collection_interval` is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector will try to run the check every 30 seconds but the check might need to wait in line, depending on how many integrations are enabled on the same Agent. Also if the `check` method takes more than 30 seconds to finish, the Agent will notice the check is still running and will skip its execution until the next interval.
+**Note**: If the `min_collection_interval` is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector tries to run the check every 30 seconds but the check might need to wait in line, depending on how many integrations are enabled on the same Agent. Also if the `check` method takes more than 30 seconds to finish, the Agent skips execution until the next interval.
 
 ## Verifying your check
 

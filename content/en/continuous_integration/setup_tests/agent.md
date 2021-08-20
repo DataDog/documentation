@@ -23,7 +23,7 @@ There are two ways to set up the Agent in a CI environment:
 
 If you are running tests on an on-premises CI provider, install the Datadog Agent on each worker node by following the [Agent installation instructions][2].
 
-If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `localhost`) to an endpoint that is accessible from within build containers, as `localhost` inside the build will reference the container itself and not the underlying worker node where the Datadog Agent is running.
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `localhost`) to an endpoint that is accessible from within build containers, as `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
 
 If you are using a Kubernetes executor, Datadog recommends using the [Admission Controller][3], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
 
@@ -49,7 +49,7 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 
 
 {{< site-region region="eu" >}}
-Additionally, configure the Datadog site to use the currently selected one ({{< region-param key="dd_site_name" >}}):
+Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
 : The [Datadog site][1] to upload results to.<br/>
@@ -227,7 +227,7 @@ For example:
 version: 2.1
 
 orbs:
-  datadog-agent: datadog/agent@0.0.1
+  datadog-agent: datadog/agent@0
 
 jobs:
   test:
@@ -250,7 +250,7 @@ workflows:
 version: 2.1
 
 orbs:
-  datadog-agent: datadog/agent@0.0.1
+  datadog-agent: datadog/agent@0
 
 jobs:
   test:

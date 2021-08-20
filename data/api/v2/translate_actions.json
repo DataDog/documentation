@@ -407,6 +407,36 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
+  "CreateServiceAccount": {
+    "description": "Create a service account for your organization.",
+    "summary": "Create a service account",
+    "request_description": "",
+    "request_schema_description": "Create a service account."
+  },
+  "ListServiceAccountApplicationKeys": {
+    "description": "List all application keys available for this service account.",
+    "summary": "List application keys for this service account"
+  },
+  "CreateServiceAccountApplicationKey": {
+    "description": "Create an application key for this service account.",
+    "summary": "Create an application key for this service account",
+    "request_description": "",
+    "request_schema_description": "Request used to create an application key."
+  },
+  "DeleteServiceAccountApplicationKey": {
+    "description": "Delete an application key owned by this service account.",
+    "summary": "Delete an application key for this service account"
+  },
+  "GetServiceAccountApplicationKey": {
+    "description": "Get an application key owned by this service account.",
+    "summary": "Get one application key for this service account"
+  },
+  "UpdateServiceAccountApplicationKey": {
+    "description": "Edit an application key owned by this service account.",
+    "summary": "Edit an application key for this service account",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
   "ListIncidentServices": {
     "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
     "summary": "Get a list of all incident services"
