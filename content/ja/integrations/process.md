@@ -61,7 +61,7 @@ supported_os:
     ## @param name - string - required
     ## Used to uniquely identify your metrics as they are tagged with this name in Datadog.
     #
-  - name: ssh
+      - name: ssh
 
     ## @param search_string - list of strings - optional
     ## If one of the elements in the list matches, it returns the count of
