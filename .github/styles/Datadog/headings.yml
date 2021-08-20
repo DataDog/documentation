@@ -47,6 +47,7 @@ exceptions:
   - DaemonSet
   - Data Collected
   - Datadog
+  - DatadogMetric
   - Datadog Agent Manager
   - Datadog for Government
   - Datadog Forwarder
