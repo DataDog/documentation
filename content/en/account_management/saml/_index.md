@@ -32,8 +32,6 @@ This brings you to the **SAML Single Sign On Configuration** page:
 
 1. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button.
 
-    {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file"  >}}
-
     After choosing the file, click **Upload File**.
 
 2. Download Datadog's [Service Provider metadata][5] to configure your IdP to recognize Datadog as a Service Provider.
