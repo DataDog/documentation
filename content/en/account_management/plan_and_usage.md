@@ -15,14 +15,14 @@ Further detailed usage reports can also be created [on request][4] by your accou
 
 ## Plan settings
 
-Upgrade or downgrade your account from the Plan tab on the Plan & Usage section.
+Upgrade or downgrade your account from the **Plan** tab on the Plan & Usage section.
 
 **Note**: Contact your account representative or [success@datadoghq.com][4] to add or remove paid features that are not part of standard plans.
 
 
 ## Billing history
 
-Your account billing history is available from the Billing History tab in the [Plan & Usage section][2]. For specific billing questions, contact your account representative or [success@datadoghq.com][4].
+Your account billing history is available from the **Billing History** tab in the [Plan & Usage section][2]. For specific billing questions, contact your account representative or [success@datadoghq.com][4].
 
 
 [1]: /account_management/users/default_roles/

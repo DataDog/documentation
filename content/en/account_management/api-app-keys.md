@@ -17,7 +17,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ## Client tokens
 
-To manage your client tokens, go to Organization settings, then click the **Client Tokens** tab.
+To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
 
 Client tokens are unique to your organization. A client token is required by the [web browser log collector][3] to submit logs to Datadog, and is required by the [Real User Monitoring][4] to submit events and logs to Datadog.
 
@@ -31,7 +31,7 @@ To add a Datadog API key or client token:
 4. Enter a name for your key or token.
 4. Click **Create API key** or **Create Client Token**.
 
-**Note**:
+**Notes:**
 
 * Your org must have at least one API key and at most 50 API keys.
 * Key names must be unique across your organization.
@@ -44,11 +44,11 @@ To remove a Datadog API key or client token, navigate to the list of keys or tok
 
 To add a Datadog application key, navigate to **Organization Settings -> Application Keys**. If you have the [permission][5] to create application keys you can click **New Key**.
 
-**Note**: Application key names cannot be blank.
+**Note:** Application key names cannot be blank.
 
 ## Remove application keys
 
-To remove a Datadog application key, navigate to **Organization Settings -> Application Keys**. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and then click **Revoke** next to it.
+To remove a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
 
 ## Using multiple API keys
 

@@ -12,19 +12,19 @@ aliases:
 
 ## Personal settings
 
-The personal settings pages in Datadog allow you to control how you appear to others in your organization; switch or leave organizations; manage your notification preferences and more.
+The personal settings pages in Datadog allow you to control how you appear to others in your organization, switch or leave organizations, and manage your notification preferences.
 
 ### Profile
 
-Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address and title here.
+Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address, and title here.
 
 To update your picture, create an account on [Gravatar][1] and associate it with your email address.
 
-If you log in to Datadog using Google authentication, your email address is provided by your Google account and is *not* editable within Datadog. To change your email address in Google, see the [Google documentation][2].
+If you log in to Datadog using Google authentication, your email address is provided by your Google account and is **not** editable within Datadog. To change your email address in Google, see the [Google documentation][2].
 
 ### Preferences
 
-You can set your timezone, desktop notifications, and email subscriptions from the [*Preferences* tab][3] within the *Personal Settings* page. Under email subscriptions, you have access to the following reports:
+You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][3] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
 * Weekly Digest
@@ -32,10 +32,11 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 * Weekly Pagerduty Report
 * Weekly Nagios Report
 
-If you are unsure if an email digest or report is relevant to you, you can view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
+If you are unsure if an email digest or report is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
+
 ### Organizations
 
-The *Organizations* page in *Personal Settings* lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
+The **Organizations** page in **Personal Settings** lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
@@ -51,7 +52,7 @@ If you are an organization administrator, reference the additional documentation
 
 ### Security
 
-The *Application Keys* tab in *Personal Settings* allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
+The **Application Keys** tab in **Personal Settings** allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
 ## Appearance
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
