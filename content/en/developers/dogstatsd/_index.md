@@ -114,7 +114,7 @@ To start collecting your StatsD metrics, you need to bind the DogStatsD port to 
 
      This enables your applications to send metrics with DogStatsD on port `8125` on whichever node they happen to be running.
 
-     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation:[HostPort services do not work][3].
+     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation: [HostPort services do not work][3].
 
 2. Enable DogStatsD non local traffic to allow StatsD data collection, set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` in your `datadog-agent.yaml` manifest:
 
