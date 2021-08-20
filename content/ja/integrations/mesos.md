@@ -93,9 +93,8 @@ Datadog で、メトリクスエクスプローラーを使用して `mesos.clus
 Mesos-master チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "mesos_master" >}}
 
-**mesos_master.can_connect**:<br>
-Agent が Mesos Master API に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
@@ -108,7 +107,7 @@ Agent が Mesos Master API に接続してメトリクスを収集できない�
 
 
 
-## Mesos スレーブインテグレーション
+## Mesos Slave インテグレーション
 
 ![Mesos スレーブダッシュボード][8]
 
@@ -263,25 +262,9 @@ DC/OS を使用していない場合は、正常に実行中のアプリケー�
 
 Mesos スレーブチェックには、イベントは含まれません。
 
-### Service Check
+### サービスのチェック
+{{< get-service-checks-from-git "mesos_slave" >}}
 
-**mesos_slave.can_connect**:<br>
-Agent が Mesos スレーブメトリクスエンドポイントに接続できない場合は`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**<executor_task_name>.ok**:<br>
-mesos_slave チェックは、エグゼキュータータスクごとにサービスチェックを作成し、次のいずれかのステータスを与えます。
-
-|               |                                |
-| ------------- | ------------------------------ |
-| タスクステータス   | サービスチェックのステータスの結果 |
-| TASK_STARTING | AgentCheck.OK                  |
-| TASK_RUNNING  | AgentCheck.OK                  |
-| TASK_FINISHED | AgentCheck.OK                  |
-| TASK_FAILED   | AgentCheck.CRITICAL            |
-| TASK_KILLED   | AgentCheck.WARNING             |
-| TASK_LOST     | AgentCheck.CRITICAL            |
-| TASK_STAGING  | AgentCheck.OK                  |
-| TASK_ERROR    | AgentCheck.CRITICAL            |
 
 ## トラブルシューティング
 

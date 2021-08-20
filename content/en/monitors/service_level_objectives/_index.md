@@ -48,7 +48,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipulated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
-After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][7] or a grouped metric-based SLO using the [`sum by` clause][8], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
+After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
@@ -60,8 +60,9 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
-[Monitor-based SLOs][5]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
-[Metric-based SLOs][6]: Up to three decimal places are allowed for all targets.
+[Monitor-based SLOs][7]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
+
+[Metric-based SLOs][8]: Up to three decimal places are allowed for all targets.
 
 ## Edit an SLO
 
@@ -173,10 +174,10 @@ Status corrections allow you to identify specific time periods, such as planned 
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
-[6]: /monitors/service_level_objectives/metric/#set-your-slo-targets
-[7]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[8]: /monitors/service_level_objectives/metric/#define-queries
+[5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[6]: /monitors/service_level_objectives/metric/#define-queries
+[7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
+[8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
 [11]: /monitors/monitor_types/event/

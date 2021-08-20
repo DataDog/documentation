@@ -19,7 +19,7 @@ integration_title: Buddy
 is_public: true
 kind: インテグレーション
 maintainer: support@buddy.works
-manifest_version: 1.0.2
+manifest_version: 1.0.0
 name: buddy
 public_title: Datadog-Buddy インテグレーション
 short_description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。

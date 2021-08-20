@@ -37,32 +37,21 @@ further_reading:
 
 ## Compatibility requirements
 
-The .NET Tracer supports instrumentation on:
-  - .NET 5
-  - .NET Core 3.1
-  - .NET Core 2.1
+### Supported .NET Core runtimes
 
-For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, and .NET 5. 
+
+For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
-### Follow the in-app documentation (recommended)
-
-Follow the [Quickstart instructions][2] in the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
-- Enable other configuration settings.
-
-Otherwise, to begin tracing your applications:
-
-## Automatic instrumentation
-
-### Installing the tracer
+### Automatic instrumentation
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
 </div>
+
+#### Installing the tracer
 
 {{< tabs >}}
 
@@ -297,14 +286,14 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 </div>
 
 To use custom instrumentation in your .NET application:
-1. Add the `Datadog.Trace` [NuGet package][3] to your application.
+1. Add the `Datadog.Trace` [NuGet package][2] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][4].
+For more details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation documentation][3].
 
 ## Install and configure the Agent for APM
 
-[Install the Datadog Agent][5] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
+[Install the Datadog Agent][4] and configure it to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
 
 {{< tabs >}}
 
@@ -466,7 +455,7 @@ Using the methods described above, customize your tracing configuration with the
 
 #### Unified Service Tagging
 
-To use [Unified Service Tagging][6], configure the following settings for your services:
+To use [Unified Service Tagging][5], configure the following settings for your services:
 
 `DD_ENV`
 : **TracerSettings property**: `Environment`<br>
@@ -551,7 +540,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames`<br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][7] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][6] section.
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
@@ -572,7 +561,7 @@ Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) 
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled`<br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][7] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][6] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -592,10 +581,10 @@ The following configuration variables are for features that are available for us
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /tracing/setup_overview/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/docs
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /tracing/setup_overview/custom_instrumentation/dotnet/
-[5]: /agent/basic_agent_usage/
-[6]: /getting_started/tagging/unified_service_tagging/
-[7]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
+[2]: https://www.nuget.org/packages/Datadog.Trace
+[3]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[4]: /agent/basic_agent_usage/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations

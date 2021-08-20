@@ -73,17 +73,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "puma" >}}
 
 
-### サービスのチェック
-
-**puma.connection**: Agent が監視対象の Puma インスタンスに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
 ### イベント
 
 Puma には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "puma" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
 
 [1]: https://puma.io/
 [2]: https://github.com/puma/puma#controlstatus-server
@@ -97,4 +98,5 @@ Puma には、イベントは含まれません。
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-extras/blob/master/puma/metadata.csv
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://github.com/DataDog/integrations-extras/blob/master/puma/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help/

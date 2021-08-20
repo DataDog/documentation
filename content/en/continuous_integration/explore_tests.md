@@ -58,7 +58,7 @@ Click into a particular test run to see the flame graph or span list for a test,
 
 You can also interactively plot graphs and top lists using the [Analytics][6] tab.
 
-{{< img src="ci/ci-test-runs.png" alt="Test Runs analytics"  style="width:100%;">}}
+{{< img src="ci/ci-test-runs.png" alt="Test Runs analytics" style="width:100%;">}}
 
 ### How third-party services data is shown
 

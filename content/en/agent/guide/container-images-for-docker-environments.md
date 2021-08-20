@@ -25,6 +25,7 @@ If you are currently using Docker, there are several container images available 
 | [Datadog Cluster Agent][6]              | [Cluster Agent][7]                       | `docker pull datadog/cluster-agent`              |
 | [Synthetics Private Location Worker][8] | [Synthetics Private Location Worker][9]  | `docker pull synthetics-private-location-worker` |
 
+
 [1]: /agent/docker/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://hub.docker.com/r/datadog/docker-dd-agent
@@ -34,7 +35,6 @@ If you are currently using Docker, there are several container images available 
 [7]: https://hub.docker.com/r/datadog/cluster-agent
 [8]: /getting_started/synthetics/private_location.md
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
-
 {{% /tab %}}
 {{% tab "GCR" %}}
 
@@ -46,15 +46,15 @@ If you are currently using Docker, there are several container images available 
 | [Datadog Cluster Agent][5]               | [Cluster Agent][6]                       | `docker pull gcr.io/datadoghq/cluster-agent`                      |
 | [Synthetics Private Location Worker][7]  | [Synthetics Private Location Worker][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
 
+
 [1]: /agent/docker/
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 [3]: /developers/dogstatsd/
 [4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
 [5]: /agent/cluster_agent/
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
-[7]: /getting_started/synthetics/private_location.md
+[7]: /getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
-
 {{% /tab %}}
 {{< /tabs >}}
 
