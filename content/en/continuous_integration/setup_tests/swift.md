@@ -74,17 +74,17 @@ Set all these variables in your test target:
 `DD_TEST_RUNNER`
 : Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
 **Default**: `false`<br/>
-**Recommended**: `$(DD_TEST_RUNNER)`<br/>
+**Recommended**: `$(DD_TEST_RUNNER)`<br/><br/>
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
 : The [Datadog Client Token][1] to use to report test results.<br/>
-**Default**: `(empty)`<br/>
+**Default**: `(empty)`<br/><br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
-**Default**: The repository name<br/>
+**Default**: The repository name<br/><br/>
 **Example**: `my-ios-app`
 
 `DD_ENV`
@@ -96,7 +96,7 @@ Set all these variables in your test target:
 `SRCROOT`
 : The path to the project SRCROOT environment variable. Use `$(SRCROOT)` for the value, because it is automatically set by Xcode.<br/>
 **Default**: `(empty)`<br/>
-**Recommended**: `$(SRCROOT)`<br/>
+**Recommended**: `$(SRCROOT)`<br/><br/>
 **Example**: `/Users/ci/source/MyApp`
 
 {{< site-region region="eu" >}}
@@ -112,7 +112,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ### Collecting Git metadata
 
-Git information is required for the proper visualization of test results, and used to group them by repository, branch and commit. It is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Git information is required for the proper visualization of test results, and used to group them by repository, branch, and commit. It is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
@@ -144,7 +144,7 @@ The supported environment variables for providing Git information are the follow
 : Commit author date in ISO 8601 format.
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-:Commit committer name.
+: Commit committer name.
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
 : Commit committer email.

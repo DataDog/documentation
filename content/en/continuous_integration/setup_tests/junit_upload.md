@@ -56,13 +56,13 @@ This is the full list of options available when using the `datadog-ci junit uplo
 
 `--service` (Required)
 : Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/>
+**Environment variable**: `DD_SERVICE`<br/><br/>
 **Example**: `my-api-service`
 
 `--tags`
 : Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
 **Environment variable**: `DD_TAGS`<br/>
-**Default**: (none)<br/>
+**Default**: (none)<br/><br/>
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
@@ -108,47 +108,47 @@ If running tests in non-supported CI providers or with no `.git` folder, Git inf
 The supported environment variables for providing Git information are the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
 **Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
 **Example**: `develop`
 
 `DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
 **Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
-: Full commit hash.
+: Full commit hash.<br/>
 **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
-: Commit message.
+: Commit message.<br/>
 **Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.
+: Commit author name.<br/>
 **Example**: `John Doe`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.
+: Commit author email.<br/>
 **Example**: `john@doe.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.
+: Commit author date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-:Commit committer name.
+: Commit committer name.<br/>
 **Example**: `Jane Doe`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.
+: Commit committer email.<br/>
 **Example**: `jane@doe.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.
+: Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 ## Further reading

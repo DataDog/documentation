@@ -49,7 +49,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 : Commit author date in ISO 8601 format.
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-:Commit committer name.
+: Commit committer name.
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
 : Commit committer email.
