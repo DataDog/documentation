@@ -12,7 +12,7 @@ If you do not want endpoints such as healthchecks to be traced to exclude them f
 If you need assistance, contact [Datadog support][3] and we’ll be happy to help!
 
 
-## Trace Agent (Datadog Agent)
+## Trace Agent (Datadog Agent) configuration options
 
 The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from coming through. If traces are dropped due to these rules, the trace metrics will exclude these requests.
 
@@ -24,13 +24,13 @@ Available starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option 
 
 This option requires an exact string match and if your use case requires ignoring by regex, see [Ignoring Based on Resources](#ignoring-based-on-resources).
 
-_Environment Variables_
+#### Environment Variables
 
 `DD_APM_FILTER_TAGS_REQUIRE`  - This option requires that traces have root spans containing the specified span tags and values (exact match). If it does not contain this rule, the trace will be dropped.
 
 `DD_APM_FILTER_TAGS_REJECT` - This option will reject that traces have root spans containing the specified span tags and values (exact match). If it contains this rule, the trace will be dropped.
 
-_Datadog.yaml_
+#### Datadog.yaml
 
 ```
 apm_config:
@@ -52,11 +52,11 @@ apm_config:
 If you programmatically know you don't want a set of traces within Datadog, and no other option in this guide works, you can considering combining adding a [custom span tag][4] to control dropping the trace, or [reach out to support][3] to discuss your use case further so we can continue to expand this functionality.
 
 
-## Ignoring Based on Resources
+### Ignoring Based on Resources
 
 The ignore resources option allows resources to be excluded if the global root span of the trace matches a certain criteria. See [Exclude Resources from being collected][5]. Setting up this option on the Trace Agent will apply to all services that send traces to this particular Datadog agent. Traces that are dropped due to these rules will not be captured in the trace metric.
 
-This can be done with the ignore resources option (ignore_resources in the datadog.yaml, `DD_APM_IGNORE_RESOURCES` as an environment variable).
+This can be done with the ignore resources option (either `ignore_resources` in the datadog.yaml, or `DD_APM_IGNORE_RESOURCES` as an environment variable).
 
 ```
 ## @param ignore_resources - list of strings - optional
@@ -72,7 +72,7 @@ This can be done with the ignore resources option (ignore_resources in the datad
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
 
-### Examples
+#### Examples
 
 {{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flamegraph"  style="width:90%;">}}
 
@@ -90,27 +90,25 @@ Step 2: A few regex options are possible, but if you want to filter out traces f
 
 Depending on how you deploy, this syntax will look a little different.
 
-{{< tabs >}}
-{{% tab "Datadog.yaml" %}}
+
+#### Datadog.yaml
 
 ```
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
 ```
-{{% /tab %}}
-{{% tab "Docker compose" %}}
 
+#### Docker compose
 
-In the Datadog Agent container’s list of environment variables, add DD_APM_IGNORE_RESOURCES with a pattern like the below. Docker Compose has its own [variable substitution][1] that should be considered when using special characters like `$`.
+In the Datadog Agent container’s list of environment variables, add DD_APM_IGNORE_RESOURCES with a pattern like the below. Docker Compose has its own [variable substitution][7] that should be considered when using special characters like `$`.
 
 
     environment:
       // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 
-[1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
-{{% /tab %}}
-{{% tab "Docker Run" %}}
+
+#### Docker run
 
 In your docker run command to spin up the Datadog Agent, add DD_APM_IGNORE_RESOURCES:
 
@@ -126,8 +124,8 @@ docker run -d --name datadog-agent \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               datadog/agent:latest
 ```
-{{% /tab %}}
-{{% tab "Kubernetes - Daemonset" %}}
+
+#### Kubernetes - Daemonset
 
 In the dedicated trace-agent container, add the environment variable DD_APM_IGNORE_RESOURCES:
 
@@ -170,10 +168,10 @@ In the dedicated trace-agent container, add the environment variable DD_APM_IGNO
           value: "Api::HealthchecksController#index$"
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
 
-In the traceAgent section of the values.yaml, add DD_APM_IGNORE_RESOURCES in the env section, then [spin up helm as usual][1].
+#### Kubernetes Helm
+
+In the traceAgent section of the values.yaml, add DD_APM_IGNORE_RESOURCES in the env section, then [spin up helm as usual][8].
 
 ```
     traceAgent:
@@ -189,9 +187,8 @@ Alternatively, if you prefer to modify in `helm install` command, you can also u
 ```
 helm install dd-agent -f values.yaml --set datadog.apiKeyExistingSecret="datadog-secret" --set datadog.apm.enabled=true --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES,agents.containers.traceAgent.env[0].value="Api::HealthchecksController#index$" datadog/datadog
 ```
-[1]: /agent/kubernetes/?tab=helm#installation
-{{% /tab %}}
-{{% tab "AWS ECS Task Definition" %}}
+
+#### AWS ECS Task Definition
 
 If you use AWS ECS (such as on EC2), in your Datadog Agent container definition, add the environment variable `DD_APM_IGNORE_RESOURCES` with the values such that the JSON evaluates to something like this:
 
@@ -205,10 +202,7 @@ If you use AWS ECS (such as on EC2), in your Datadog Agent container definition,
      ]
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
-
-## Tracer configuration
+## Tracer configuration options
 
 The following tracers have an option to modify spans before they get sent over to the Datadog Agent.
 
@@ -318,3 +312,5 @@ public class GreetingController {
 [4]: /tracing/guide/add_span_md_and_graph_it/
 [5]: /tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [6]: https://golang.org/pkg/regexp/
+[7]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
+[8]: /agent/kubernetes/?tab=helm#installation
