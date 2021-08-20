@@ -2531,12 +2531,12 @@ main:
     weight: 220000
   - name: User management
     url: account_management/users/
-    parent: account_management
+    parent: organization_settings
     identifier: account_management_users
     weight: 1
   - name: RBAC
     url: account_management/rbac/
-    parent: account_management
+    parent: organization_settings
     identifier: account_management_rbac
     weight: 2
   - name: Permissions
@@ -2547,11 +2547,12 @@ main:
   - name: Organization settings
     url: account_management/org_settings/
     parent: account_management
+    identifier: organization_settings
     weight: 3
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
-    parent: account_management
+    parent: organization_settings
     weight: 4
   - name: Active Directory
     url: account_management/saml/activedirectory/
@@ -2581,22 +2582,26 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
-  - name: Multi-org accounts
-    url: account_management/multi_organization/
-    parent: account_management
-    weight: 5
   - name: Switching between orgs
     url: account_management/org_switching/
     parent: account_management
-    weight: 6
-  - name: Billing
-    url: account_management/billing/
-    parent: account_management
-    weight: 7
+    weight: 1
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
+    weight: 6
+  - name: Plan and Usage
+    url: account_management/plan_and_usage/
+    parent: account_management
+    weight: 7
+  - name: Billing
+    url: account_management/billing/
+    parent: account_management
     weight: 8
+  - name: Multi-org accounts
+    url: account_management/multi_organization/
+    parent: account_management
+    weight: 9
   - name: Security
     url: security/
     pre: nav_security
