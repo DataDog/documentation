@@ -10118,12 +10118,13 @@ components:
         value: value
       properties:
         secure:
-          description: Determines if the variable is secure.
+          description: Determines if the value of the variable is hidden.
           type: boolean
         value:
           description: 'Value of the global variable. When reading a global variable,
 
-            the value will not be present if the variable is secure.'
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
           example: example-value
           type: string
       type: object
@@ -10901,6 +10902,9 @@ components:
     SyntheticsTriggerCITestsResponse:
       description: Object containing information about the tests triggered.
       properties:
+        batch_id:
+          description: The public ID of the batch triggered.
+          type: string
         locations:
           description: List of Synthetics locations.
           items:
