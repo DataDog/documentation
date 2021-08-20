@@ -38,11 +38,11 @@ To add a Datadog API key or client token:
 
 ## Remove API keys or client tokens
 
-To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the trash can icon with **Revoke** next to the key or token you want to remove.
+To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **trash can** icon with **Revoke** next to the key or token you want to remove.
 
 ## Add application keys
 
-To add a Datadog application key, navigate to **Organization Settings -> Application Keys**. If you have the [permission][5] to create application keys you can click **New Key**.
+To add a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create application keys, click **New Key**.
 
 **Note:** Application key names cannot be blank.
 
