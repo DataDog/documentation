@@ -365,9 +365,9 @@ The [@datadog/datadog-ci][2] NPM package also comes with a tunnel functionality 
 
 To learn how to get started using the testing tunnel, see the [Synthetics testing tunnel documentation][5].
 
-## Visualize test results
+### Visualize test results
 
-### In your CI
+#### In your CI
 
 You can see the outcome of test executions directly in your CI as your tests are being executed.
 
@@ -377,7 +377,7 @@ You can identify what caused a test to fail by looking at the execution logs and
 
 {{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
 
-### In Datadog application
+#### In Datadog application
 
 You can also see your CI test results listed in the [CI Results Explorer][6] and on test details pages:
 
