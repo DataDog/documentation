@@ -90,7 +90,7 @@ logs:
 
 If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting with UDP.
 
-As of Agent version 7.31.0, the Agent keeps a TCP connection open indefinitely.
+In the Agent version 7.31.0+, the TCP connection stays open indefinitely even when idle.
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
