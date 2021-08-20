@@ -2545,7 +2545,7 @@ main:
     weight: 201
   - name: RBAC
     url: account_management/rbac/
-    parent: account_settings
+    parent: account_management
     identifier: account_management_rbac
     weight: 3
   - name: Permissions
@@ -2556,7 +2556,7 @@ main:
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
-    parent: account_settings
+    parent: account_management
     weight: 4
   - name: Active Directory
     url: account_management/saml/activedirectory/
