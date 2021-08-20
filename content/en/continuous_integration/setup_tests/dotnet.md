@@ -56,7 +56,7 @@ The following list shows the default values for key configuration settings:
 `--dd-service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: The repository name<br/><br/>
+**Default**: The repository name<br/>
 **Example**: `my-dotnet-app`
 
 `--dd-env`

@@ -74,17 +74,17 @@ Set all these variables in your test target:
 `DD_TEST_RUNNER`
 : Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
 **Default**: `false`<br/>
-**Recommended**: `$(DD_TEST_RUNNER)`<br/><br/>
+**Recommended**: `$(DD_TEST_RUNNER)`<br/>
 **Example**: `true`
 
 `DATADOG_CLIENT_TOKEN`
 : The [Datadog Client Token][1] to use to report test results.<br/>
-**Default**: `(empty)`<br/><br/>
+**Default**: `(empty)`<br/>
 **Example**: `pub0zxxxyyyxxxyyxxxzzxxyyxxxyyy`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
-**Default**: The repository name<br/><br/>
+**Default**: The repository name<br/>
 **Example**: `my-ios-app`
 
 `DD_ENV`
@@ -96,7 +96,7 @@ Set all these variables in your test target:
 `SRCROOT`
 : The path to the project SRCROOT environment variable. Use `$(SRCROOT)` for the value, because it is automatically set by Xcode.<br/>
 **Default**: `(empty)`<br/>
-**Recommended**: `$(SRCROOT)`<br/><br/>
+**Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
 {{< site-region region="eu" >}}

@@ -56,13 +56,13 @@ This is the full list of options available when using the `datadog-ci junit uplo
 
 `--service` (Required)
 : Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/><br/>
+**Environment variable**: `DD_SERVICE`<br/>
 **Example**: `my-api-service`
 
 `--tags`
 : Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
 **Environment variable**: `DD_TAGS`<br/>
-**Default**: (none)<br/><br/>
+**Default**: (none)<br/>
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 

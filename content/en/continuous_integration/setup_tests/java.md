@@ -150,7 +150,7 @@ The following system properties set configuration options and have environment v
 `dd.service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `unnamed-java-app`<br/><br/>
+**Default**: `unnamed-java-app`<br/>
 **Example**: `my-java-app`
 
 `dd.env`

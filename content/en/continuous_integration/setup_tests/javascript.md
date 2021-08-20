@@ -148,7 +148,7 @@ The following is a list of the most important configuration settings that can be
 `service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: (test framework name)<br/><br/>
+**Default**: (test framework name)<br/>
 **Example**: `my-ui`
 
 `env`
