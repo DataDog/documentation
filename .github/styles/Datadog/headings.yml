@@ -185,6 +185,7 @@ exceptions:
   - Ruby
   - RumMonitor
   - SafeNet
+  - SaltStack
   - Security Monitoring
   - Security Signal
   - Security Signals
