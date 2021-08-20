@@ -236,36 +236,38 @@ For Network auto-instrumentation, you can configure these additional settings:
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
-## Adding custom tags
+## Custom tags
 
-### Using environment variables
+### Environment variables
 
 You can use `DD_TAGS` environment variable. It must contain pairs of `key:tag` separated by spaces. For example:
 {{< code-block lang="bash" >}}
-DDTAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
+DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
 
-If one of the values starts with the `$` character, it will be replaced with the environment variable with the same name if it exists, example:
+If one of the values starts with the `$` character, it is replaced with an environment variable of the same name (if it exists), for example:
 {{< code-block lang="bash" >}}
-DDTAGS=home:$HOME
+DD_TAGS=home:$HOME
 {{< /code-block >}}
 
-It also supports replacing a environment variable at the beggining of the value if contains non env variables supported characters (`a-z`,  `A-Z` or `_`):
+Using the `$` character also supports replacing an environment variable at the beginning of a value if contains non-environment variable supported characters (`a-z`,  `A-Z` or `_`), for example:
 {{< code-block lang="bash" >}}
 FOO = BAR
 DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 {{< /code-block >}}
 
-### Using OpenTelemetry (only for Swift, Objective-C not supported)
+### OpenTelemetry
 
-Datadog swift testing framework uses [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-swift) as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and can use any OpenTelemetry api. For example, for adding a tag/attribute
+**Note**: Using OpenTelemetry is only supported for Swift.
+
+Datadog Swift testing framework uses [OpenTelemetry][2] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 let tracer = DDInstrumentationControl.openTelemetryTracer
 tracer?.activeSpan?.setAttribute(key: "OTelTag", value: "OTelValue")
 {{< /code-block >}}
 
-Test target needs to link explicitly with `opentelemetry-swift`
+The test target needs to link explicitly with `opentelemetry-swift`.
 
 ## CI provider environment variables
 
