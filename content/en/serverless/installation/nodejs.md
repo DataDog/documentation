@@ -63,7 +63,7 @@ For a quick start, configure Datadog and [AWS credentials][1] using the followin
 
 ```bash
 export DATADOG_API_KEY="<DD_API_KEY>"
-export DATADOG_SITE="<DD_SITE>" # eg datadoghq.com, datadoghq.eu, etc
+export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu, us3.datadoghq.com or ddog-gov.com
 export AWS_ACCESS_KEY_ID="<ACCESS KEY ID>"
 export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 ```
