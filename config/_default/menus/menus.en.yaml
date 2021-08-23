@@ -2663,25 +2663,30 @@ main:
     pre: nav_account
     identifier: account_management
     weight: 230000
+  - name: Switching between orgs
+    url: account_management/org_switching/
+    parent: account_management
+    weight: 1
+  - name: Organization settings
+    url: account_management/org_settings/
+    parent: account_management
+    identifier: organization_settings
+    weight: 2
   - name: User management
     url: account_management/users/
-    parent: account_management
+    parent: organization_settings
     identifier: account_management_users
-    weight: 1
+    weight: 201
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
     identifier: account_management_rbac
-    weight: 2
+    weight: 3
   - name: Permissions
     url: account_management/rbac/permissions
     parent: account_management_rbac
     identifier: account_management_rbac_permissions
-    weight: 201
-  - name: Organization settings
-    url: account_management/org_settings/
-    parent: account_management
-    weight: 3
+    weight: 301
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
@@ -2715,20 +2720,20 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
-  - name: Multi-org accounts
-    url: account_management/multi_organization/
+  - name: API and Application Keys
+    url: account_management/api-app-keys/
     parent: account_management
     weight: 5
-  - name: Switching between orgs
-    url: account_management/org_switching/
+  - name: Plan and Usage
+    url: account_management/plan_and_usage/
     parent: account_management
     weight: 6
   - name: Billing
     url: account_management/billing/
     parent: account_management
     weight: 7
-  - name: API and Application Keys
-    url: account_management/api-app-keys/
+  - name: Multi-org accounts
+    url: account_management/multi_organization/
     parent: account_management
     weight: 8
   - name: Security

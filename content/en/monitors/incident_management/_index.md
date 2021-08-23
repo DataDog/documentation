@@ -57,6 +57,12 @@ You can also add a monitor to an existing incident.
 
 In the [incidents UI][1], click the **New Incident** button to create an incident.
 
+{{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="Incident Declaration Modal" style="width:80%;">}}
+
+The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][17].
+
+{{< img src="monitors/incidents/incident_information_settings.jpeg" alt="Incident Information Settings" style="width:80%;">}}
+
 #### From Slack
 
 Once you have the [Datadog integration enabled on Slack][6], from any Slack channel you can use the slash command `/datadog incident` to declare a new incident.
@@ -173,3 +179,4 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [14]: /integrations/webhooks/
 [15]: /integrations/webhooks/#sending-sms-through-twilio
 [16]: /getting_started/incident_management
+[17]: https://app.datadoghq.com/incidents/settings#Information

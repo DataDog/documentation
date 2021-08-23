@@ -121,36 +121,47 @@ The supported environment variables for providing Git information are the follow
 
 `DD_GIT_REPOSITORY_URL`
 : URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.
+**Example**: `git@github.com:MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
 : Git branch being tested. Leave empty if providing tag information instead.
+**Example**: `develop`
 
 `DD_GIT_TAG`
 : Git tag being tested (if applicable). Leave empty if providing branch information instead.
+**Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
 : Full commit hash.
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
 : Commit message.
+**Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
 : Commit author name.
+**Example**: `John Doe`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
 : Commit author email.
+**Example**: `john@doe.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
 : Commit author date in ISO 8601 format.
+**Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
 : Commit committer name.
+**Example**: `Jane Doe`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
 : Commit committer email.
+**Example**: `jane@doe.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
 : Commit committer date in ISO 8601 format.
+**Example**: `2021-03-12T16:00:28Z`
 
 ### Running tests
 
