@@ -22,15 +22,16 @@ Here's a two-minute video walkthrough:
 
 {{< wistia 2qe33x8h3v >}}
 
+
 **Notes**:
 
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there several IdP's that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
+- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
 
-- Configuration of SAML requires [Datadog Administrator][9] access.
+- SAML configuration requires [Datadog Administrator][9] access.
 
-## Configure SAML
+## Configuring SAML
 
-1. Follow your IdP's documentation to begin configuration:
+1. To begin configuration, see your IdP's documentation:
 
     * [Active Directory][10]
     * [Auth0][11]
@@ -40,7 +41,7 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. If you're a [Datadog Administrator][9], there is a [Configure SAML][17] option in the drop down menu that is accessed by hovering over your username in the left-side navigation menu, which brings you to the **SAML Single Sign On Configuration** page.
+2. If you're a [Datadog Administrator][9], you can access the **SAML Single Sign On Configuration** page. Hover over your username in the left-side navigation menu and click **Configure SAML**.
 
     {{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" style="width:50%;" >}}
 
@@ -53,15 +54,17 @@ Here's a two-minute video walkthrough:
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
 
-6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][17]. The Single Sign-on URL is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed until SAML is enabled for your account.
+6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][17]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account.
 
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
-**Note**: If you want to configure SAML for a multi-org, see the [multi-org documentation][20].
+**Note**: If you want to configure SAML for a multi-org, see the [Managing Multiple-Organization Accounts documentation][20].
 
 ## Assertions and attributes
 
-When a login occurs, a SAML Assertion containing user authorization is sent by the identity provider to Datadog. Some important notes on assertions:
+When a login occurs, a SAML Assertion containing user authorization is sent from the identity provider to Datadog. 
+
+Some important notes on assertions:
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
@@ -98,15 +101,15 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 With Datadog, you can map attributes in your IdP's response to Datadog roles. Users with the Access Management permission can assign or remove Datadog roles based on a user's SAML-assigned attributes.
 
-It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Each IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][21]. Datadog highly recommends cross-referencing, either with [built-in browser tooling][22] such as Chrome Dev Tools or browser extensions, and [validating your SAML assertions][23] **before** creating mappings.
+It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][21]. Datadog recommends cross-referencing with [built-in browser tooling][22] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][23] **before** creating mappings.
 
 1. [Cross-reference][22] and [validate][23] your SAML assertion to understand your IdP's attributes.
 
 2. Go to Teams and click the **Mappings** tab.
 
-3. Click the **New Mapping** button.
+3. Click **New Mapping**.
 
-4. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). **Note**: These entries are case-sensitive.
+4. Specify the SAML identity provider `key-value` pair that you want to associate with an existing Datadog role (either default or custom). **Note**: These entries are case-sensitive.
 
    For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`:
 
@@ -117,16 +120,18 @@ It’s important to understand what is sent in an assertion before turning on ma
 When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it).
 
 <div class="alert alert-warning">
-  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously, and are prevented from logging into the org with SAML. Double-check your mapping definitions.
+  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions.
 </div>
 
-You can make changes to a mapping by clicking the pencil icon, or remove it by clicking the garbage icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
+You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
 
-Alternatively, you can create and change mappings of SAML attributes to Datadog roles by using the `authn_mappings` endpoint. See [Federated Authentication to Role Mapping API][24] for more information.
+Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][24].
 
 ## Additional features
 
-The following features can be enabled through the [SAML Configuration dialog][17] (You must have Admin permissions to see the SAML Configuration dialog).
+The following features can be enabled through the [SAML Configuration dialog][17]: 
+
+**Note:** You must have Admin permissions to see the SAML Configuration dialog.
 
 ### Just in time (JIT) provisioning
 
