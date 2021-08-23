@@ -49,7 +49,7 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
 
   {{% tab "Request Body" %}}
 
-  * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`) you want to add to your HTTP request.
+  * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
   * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
 
   {{% /tab %}}
@@ -106,12 +106,12 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], <br> [`xpath`][11] | _String_ <br> _[Regex][12]_ <br> _String_, _[Regex][12]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][12]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-**Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+**Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
@@ -130,7 +130,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][12].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][13].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -138,9 +138,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][14], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][15] and supports the following [conditional variables][16]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -181,7 +181,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][17] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -202,7 +202,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][17].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][18].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -223,10 +223,11 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [8]: /synthetics/api_tests/icmp_tests
 [9]: /synthetics/search/#search
 [10]: https://restfulapi.net/json-jsonpath/
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[12]: /api/v1/synthetics/#create-a-test
-[13]: /monitors/notifications/?tab=is_alert#notification
-[14]: https://www.markdownguide.org/basic-syntax/
-[15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /synthetics/settings/#global-variables
-[17]: /synthetics/api_tests/errors/#ssl-errors
+[11]: https://www.w3schools.com/xml/xpath_syntax.asp
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[13]: /api/v1/synthetics/#create-a-test
+[14]: /monitors/notifications/?tab=is_alert#notification
+[15]: https://www.markdownguide.org/basic-syntax/
+[16]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[17]: /synthetics/settings/#global-variables
+[18]: /synthetics/api_tests/errors/#ssl-errors
