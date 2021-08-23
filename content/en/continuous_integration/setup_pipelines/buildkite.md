@@ -33,9 +33,6 @@ Go to **Settings > Notification Services** in Buildkite and add a new webhook:
 [1]: https://app.datadoghq.eu/organization-settings/api-keys
 {{< /site-region >}}
 
-To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`.
-This tags are reserved by Data Dog and are used to tie telemetry together across the different products. See [Unified Service Tagging][3] for more information.
-
 ## Visualize pipeline data in Datadog
 
 {{< site-region region="us" >}}
