@@ -27,14 +27,7 @@ Check status shows the current status or number of results for any check perform
 ### Configuration
 
 1. Select a previously created service check.
-2. Choose a reporting timeframe:
-    * Global Time
-    * The past 10 minutes
-    * The past 30 minutes
-    * The past hour
-    * The past 4 hours
-    * The past day
-    **Note:**  The check status widget is for displaying the latest status. It does not display historical data. Use the Global Time option for toggling between the past 10 minutes, the past 30 minutes, etc.
+2. Choose a reporting time frame. This time frame always includes up to the present, so you can choose an option such as `The past 10 minutes` or `The past 1 day` and it reports a status that includes that time frame up to the present moment. If you choose `Global Time`, the person using the dashboard can select a range using the time frame selector in the upper right, but _they must choose one that includes the present moment_, that is any `past X` time frame. Otherwise the widget will be blank.
 3. Choose your scope:
     * **A single check**: Select this option if your Check Status widget is for a specific element only, for example: one `host:<HOSTNAME>`, one `service:<SERVICE_NAME>`, etc.
     * **A cluster of checks**: Select this option if your Check Status widget is for a scope of elements i.e all `host`s, all `service`s, etc.
