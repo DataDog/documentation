@@ -26,13 +26,13 @@ export default {
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
-        us3: 'agent-intake.logs.us3.datadoghq.com',
+        us3: 'not supported',
         eu: 'agent-intake.logs.datadoghq.eu',
         gov: 'not supported'
     },
     tcp_endpoint_port: {
         us: '10514',
-        us3: '10514',
+        us3: 'not supported',
         eu: '1883',
         gov: 'not supported'
     },
