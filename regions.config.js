@@ -74,13 +74,13 @@ export default {
     },
     http_endpoint: {
       us: 'http-intake.logs.datadoghq.com',
-      us3: 'http-intake.logs.us3.datadoghq.com',
+      us3: 'not supported',
       eu: 'http-intake.logs.datadoghq.eu',
       gov: 'http-intake.logs.ddog-gov.com'
     },
     http_port: {
       us: '443',
-      us3: '443',
+      us3: 'not supported',
       eu: '443',
       gov: '443'
     },
