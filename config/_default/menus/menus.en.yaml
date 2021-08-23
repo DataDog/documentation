@@ -1819,6 +1819,11 @@ main:
     parent: setup_pipelines
     identifier: ci_jenkins
     weight: 202
+  - name: CircleCI
+    url: continuous_integration/setup_pipelines/circleci/
+    parent: setup_pipelines
+    identifier: ci_circleci
+    weight: 204
   - name: Exploring Tests
     url: continuous_integration/explore_tests/
     parent: ci
