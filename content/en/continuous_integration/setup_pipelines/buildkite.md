@@ -22,7 +22,7 @@ Go to **Settings > Notification Services** in Buildkite and add a new webhook:
 * **Events**: Select `job.finished` and `build.finished`.
 * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -30,10 +30,11 @@ Go to **Settings > Notification Services** in Buildkite and add a new webhook:
 * **Events**: Select `job.finished` and `build.finished`.
 * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
 
-[1]: https://app.datadoghq.eu/account/settings#api
+[1]: https://app.datadoghq.eu/organization-settings/api-keys
 {{< /site-region >}}
 
 To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`.
+This tags are reserved by Data Dog and are used to tie telemetry together across the different products. See [Unified Service Tagging][3] for more information.
 
 ## Visualize pipeline data in Datadog
 
@@ -59,6 +60,7 @@ After the integration is successfully configured, the [Pipelines][1] and [Pipeli
 
 [1]: https://buildkite.com/docs/apis/webhooks
 [2]: https://buildkite.com
+[3]: /getting_started/tagging/unified_service_tagging
 {{< /site-region >}}
 
 {{< site-region region="us3,gov" >}}
