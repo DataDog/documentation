@@ -21,7 +21,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
   tag: "Blog"
   text: "Monitor AWS Lambda functions deployed using container images"
-- link: https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
+- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
   tag: "Blog"
   text: "Best practices for collecting and managing serverless logs"
 ---
