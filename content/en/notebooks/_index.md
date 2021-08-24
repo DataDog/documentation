@@ -164,4 +164,4 @@ Use **Export Notebook JSON** to download a JSON file containing the definition o
 [7]: /dashboards/widgets/log_stream/
 [8]: /dashboards/widgets/query_value/
 [9]: https://daringfireball.net/projects/markdown/
-[10]: 10
+[10]: /dashboards/querying/#graphing-editor
