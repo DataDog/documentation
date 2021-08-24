@@ -12,10 +12,10 @@ further_reading:
 
 The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their integrations, software, and services to Datadog users. 
 
-## Join the Datadog Partner Network
+## Join the Datadog partner network
 Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration or create a tile only listing that includes your SaaS or services offering. 
 
-Datadog customers can then access your tile through the Datadog app either through our [Integrations][2] page or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
+Datadog customers can then access your tile through the Datadog site either through the [Integrations][2] page or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
 
 Follow these steps to develop and publish your Integrations page or Marketplace offering: 
 
@@ -25,10 +25,10 @@ All Technology Partners can request a dedicated sandbox Datadog account to aid i
 
 1. Create a free Datadog [trial account][4] using the same email address as your Technology Partner application
 2. Log into the [Datadog Partner Portal][5]
-3. On your personal homepage, click on the “Learn More” button under “Sandbox Access”
-4. Select “Request Sandbox Upgrade”
+3. On your personal homepage, click on the "Learn More" button under "Sandbox Access"
+4. Select "Request Sandbox Upgrade"
 
-Converting an account to a developer sandbox may take up to one or two business days. Please contact [Datadog Support][6] with any questions.
+Converting an account to a developer sandbox may take up to one or two business days. Contact [Datadog Support][6] with any questions.
 
 ## Develop your integration or create a Marketplace tile only listing
 
@@ -36,10 +36,10 @@ Converting an account to a developer sandbox may take up to one or two business 
 
 In addition to this documentation, you can learn more about developing Datadog integrations by taking the following steps:
 
-* Attend our on-demand [“Introduction to Datadog Integrations”][7] course on the [Datadog Learning Center][8].
-* Review our example pull-request in the [Marketplace repository][9] with annotations and best practices (this link is only available to Technology Partners that have completed the Marketplace Listing Agreement in the Datadog Partner Portal).
-* Explore existing integrations built by other Technology Partners in our [Integrations Extras repository][10].
-* Join our Marketplace Engineering Office Hours through the [Datadog public Slack][11].
+* Attend the on-demand ["Introduction to Datadog Integrations"][7] course on the [Datadog Learning Center][8].
+* Review the example pull-request in the [Marketplace repository][9] with annotations and best practices (this link is only available to Technology Partners that have completed the Marketplace Listing Agreement in the Datadog Partner Portal).
+* Explore existing integrations built by other Technology Partners in the [Integrations Extras repository][10].
+* Join the Marketplace Engineering Office Hours through the [Datadog public Slack][11].
 
 ### Development process
 
@@ -47,7 +47,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 2. [Build a bi-directional integration](#build-a-bi-directional-integration)
 3. [Clone the Marketplace repository or fork the Integrations Extras repository](#clone-either-the-marketplace-or-the-integrations-extras-repository)
 4. [Install the Datadog Development Toolkit](#install-and-run-the-datadog-development-toolkit)
-5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like  dashboards and monitors)](#populate-the-tile-scaffolding)
+5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like dashboards and monitors)](#populate-the-tile-scaffolding)
 6. [Submit a pull-request](#submit-a-pull-request)
 7. [Approve tile for release](#approve-tile-for-release)
 
@@ -77,7 +77,7 @@ There are a few different ways to list on the Datadog Integrations or Marketplac
 
 An API integration fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
 
-**Note:** that a Datadog API Key is required to submit data to a Datadog API endpoint, while an App Key is required for querying data from Datadog, or for creating resources within the Datadog App.
+**Note**: A Datadog API key is required to submit data to a Datadog API endpoint, while an application key is required for querying data from Datadog, or for creating resources within the Datadog site.
 
 #### Tile only listing
 
@@ -101,7 +101,7 @@ Integrations can send the following data to Datadog:
 
 ### Clone the Marketplace repository or fork the integrations-extras repository
 
-Datadog integrations can be developed for either our private [Marketplace repository][9] or our open source [integrations-extras repository][10].
+Datadog integrations can be developed for either the private [Marketplace repository][9] or open source [integrations-extras repository][10].
 
 The process for building an integration is the same for each repository, with Marketplace offerings requiring a few more files and fields (like pricing). Remember to point to the intended repository when you clone and submit your pull request.
 
@@ -171,10 +171,10 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### README
 
-* Include “Overview,” “Setup,” and “Support” sections with H2 headings (## in Markdown).
-* The “Overview" heading should clearly describe the value your offering provides users, as well as how it can be used together with Datadog for more comprehensive observability. We recommend adding images of your software or dashboards in action. This section will be displayed in the “Overview” tab of your tile.
-* The “Setup” heading should provide straightforward configuration steps for users to install or use your offering. This section will be displayed in the “Configuration” tab of your tile.
-* The “Support” heading should identify a contact for support, and possibly an option to submit product feedback. This section will be displayed in the “Support” tab of your tile. 
+* Include "Overview," "Setup," and "Support" sections with H2 headings (## in Markdown).
+* The "Overview" heading should clearly describe the value your offering provides users, as well as how it can be used together with Datadog for more comprehensive observability. It is recommended to add images of your software or dashboards in action. This section is displayed in the "Overview" tab of your tile.
+* The "Setup" heading should provide straightforward configuration steps for users to install or use your offering. This section is displayed in the "Configuration" tab of your tile.
+* The "Support" heading should identify a contact for support, and possibly an option to submit product feedback. This section is displayed in the "Support" tab of your tile. 
 
 #### Images
 
@@ -184,53 +184,53 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### Manifest
 
 * JSON object including elements for `display_name`, `public_title`, `author`, and more.
-* More information about `manifest.json` fields can be found in our [Integrations Assets Reference][25]
+* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][25]
 * Details on the pricing object are described in the private [Marketplace README][26].
 
 #### Metadata
 
 * Contains a list of the out-of-the-box metrics included in an integration, such as the metric name, type, interval, and unit. 
-* More information about `metadata.csv` fields can be found in our [Integrations Assets Reference][25].
+* More information about `metadata.csv` fields can be found in the [Integrations Assets Reference][25].
 * **Note:** All Marketplace metrics count as custom metrics. 
 
 #### Dashboards and monitors
 
 * Contain the out-of-the-box dashboards and monitors (alerts) for your integration. 
 * You can create dashboards and monitors directly in your sandbox account and export them as JSON files. 
-* See our [Dashboarding Best Practices][27] document for details.
+* See [Dashboarding Best Practices][27] for details.
 
 #### Logos
 
-* Consists of at least one SVG, which our DesignOps team implements throughout the Datadog app for both light and dark modes. Logo SVG files can be added to the `assets` directory, or you can place them in a `logos` sub-directory under `assets`.
+* Consists of at least one SVG, which the Datadog DesignOps team implements throughout the Datadog site for both light and dark modes. Logo SVG files can be added to the `assets` directory, or you can place them in a `logos` sub-directory under `assets`.
 * **Note:** Technology Partners are responsible for the licensing of the logos they submit.  
 
 #### Changelog
 
-* Captures release notes and version information, and displays this in the “Release Notes” tab of your tile. Add release notes in descending order (latest version at the top).
+* Captures release notes and version information, and displays this in the "Release Notes" tab of your tile. Add release notes in descending order (latest version at the top).
 
-#### Codeowners
+#### Code owners
 
-* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See [Github's documentation][28] for help with syntax.
+* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See Github's documentation [About code owners][28] for help with syntax.
 
 #### Additional Marketplace files
 
-* The Technology Partner’s own End User License Agreement (EULA) is required for all Marketplace offerings.
+* The Technology Partner's own End User License Agreement (EULA) is required for all Marketplace offerings.
 
 ### Submit a pull request
 
 Submit a pull request containing your integration assets either to the [Marketplace repository][9], or to [Integrations Extras repository][10]. 
 
-Each repository runs automatic tests to verify that your pull request is in good shape. You can run these same tests locally with the command `ddev validate all`. Once the PR is passing all checks, our Engineering team will begin their review, where they will identify blockers to release, as well as make suggestions around best practices. 
+Each repository runs automatic tests to verify that your pull request is in good shape. You can run these same tests locally with the command `ddev validate all`. Once the PR is passing all checks, the Datadog Engineering team reviews to identify blockers to release, and make suggestions around best practices.
 
-If you need access to Azure DevOps for the Marketplace repository, please leave a comment in the PR and our engineering team will provide access. 
+If you need access to Azure DevOps for the Marketplace repository, leave a comment in the PR to request access. 
 
 ### Approve tile for release
 
-When the pull-request tile has been approved by our Engineering and Product teams, your tile will be enabled for your sandbox account. This will allow you to validate and view the integration tile in the Datadog Marketplace and make changes before it goes live.
+When the pull-request tile has been approved by the Datadog Engineering and Product teams, your tile will be enabled for your sandbox account. This allows you to validate and view the integration tile in the Datadog Marketplace and make changes before it goes live.
 
 ## Coordinate go-to-market opportunities
 
-Once a Marketplace tile is live, Technology Partners have the option of meeting with Datadog’s Partner Marketing Team to coordinate a joint go-to-market strategy, including:
+Once a Marketplace tile is live, Technology Partners have the option of meeting with Datadog's Partner Marketing Team to coordinate a joint go-to-market strategy, including:
 
 * A Datadog quote for partner press releases
 * A Blog Post in the [Datadog Monitor][29]
@@ -239,7 +239,7 @@ Once a Marketplace tile is live, Technology Partners have the option of meeting 
 
 ## Contact
 
-Please reach out to us at techpartners@datadoghq.com if you have any questions.
+Email techpartners@datadoghq.com if you have any questions.
 
 ## Further Reading
 
