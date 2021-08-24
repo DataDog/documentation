@@ -13,9 +13,9 @@ aliases:
 
 The `autosmooth()` function applies a moving average with an automatically selected span. It smooths a timeseries while preserving its trend. In this example, the function chooses the optimal span to smooth the timeseries:
 
-{{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="autosmooth illustration"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="autosmooth illustration" style="width:80%;">}}
 
-When used on a `group by` query (e.g. `avg by`), the same span is applied on all the timeseries. If used on several metrics in the same graph, different spans can be selected to optimally smooth each one of the metric timeseries.
+When used on a `group by` query, such as `avg by`, the same span is applied on all the timeseries. If used on several metrics in the same graph, different spans can be selected to optimally smooth each one of the metric timeseries.
 
 The algorithm is inspired by the [ASAP algorithm][1]-you can read more about it in this [blog post][2].
 
@@ -33,9 +33,9 @@ Note: The span value is the number of data points. So `ewma_3()` uses the last 3
 
 Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma3(10 + x%10 {*})` has the following shape:
+If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma3(10 + x%10 {*})` has the following shape:
 
-{{< img src="dashboards/functions/smoothing/ewma3.png" alt="EWMA3"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma3.png" alt="EWMA3" style="width:80%;">}}
 
 ### Ewma 5
 
@@ -47,9 +47,9 @@ Note: The span value is the number of data points. So `ewma_5()` uses the last 5
 
 Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma5(10 + x%10 {*})` has the following shape:
+If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma5(10 + x%10 {*})` has the following shape:
 
-{{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5" style="width:80%;">}}
 
 ### Ewma 10
 
@@ -61,9 +61,9 @@ Note: The span value is the number of data points. So `ewma_10()` uses the last 
 
 Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma10(10 + x%10 {*})` has the following shape:
+If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma10(10 + x%10 {*})` has the following shape:
 
-{{< img src="dashboards/functions/smoothing/ewma10.png" alt="EWMA10"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma10.png" alt="EWMA10" style="width:80%;">}}
 
 ### Ewma 20
 
@@ -75,9 +75,9 @@ Note: The span value is the number of data points. So `ewma_20()` uses the last 
 
 Example:
 
-If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma20(10 + x%10 {*})` has the following shape:
+If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma20(10 + x%10 {*})` has the following shape:
 
-{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20" style="width:80%;">}}
 
 ## Median
 

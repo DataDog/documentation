@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Aurora managed Postgres
 kind: documentation
 description: Install and configure Database Monitoring for Postgres on Amazon Aurora.
-private: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -296,7 +295,7 @@ init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
-    port: 3306
+    port: 5432
     username: datadog
     password: <UNIQUEPASSWORD" \
   datadog/datadog

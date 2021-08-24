@@ -37,19 +37,19 @@ Datadog Lambda ライブラリは、レイヤーまたは gem としてインス
 
 ```
 # 通常のリージョンの場合
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 
 # 米国政府リージョンの場合
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-使用できる `RUNTIME` オプションは、`Ruby2-5` と `Ruby2-7` です。`VERSION` については、[最新リリース][4]を参照してください。例:
+使用できる `RUNTIME` オプションは、`Ruby2-5` と `Ruby2-7` です。例:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加する必要があります。
 
 #### Gem の使用
 
@@ -103,15 +103,15 @@ end
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
 
 ### タグ
 
-これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][7]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][6]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
 
 ## 確認
 
-以上の方法で関数を構成すると、[Serverless Homepage][8] でメトリクス、ログ、トレースを確認できるようになります。
+以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになります。
 
 ## カスタムビジネスロジックの監視
 
@@ -158,7 +158,7 @@ def some_operation()
 end
 ```
 
-カスタムメトリクス送信の詳細については、[ここ][9]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][10]の Datadog APM ドキュメントを参照してください。
+カスタムメトリクス送信の詳細については、[ここ][8]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][9]の Datadog APM ドキュメントを参照してください。
 
 ## その他の参考資料
 
@@ -167,10 +167,9 @@ end
 [1]: /ja/integrations/amazon_web_services/
 [2]: /ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[4]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
-[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[6]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[8]: https://app.datadoghq.com/functions
-[9]: /ja/serverless/custom_metrics?tab=ruby
-[10]: /ja/tracing/custom_instrumentation/ruby/
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[7]: https://app.datadoghq.com/functions
+[8]: /ja/serverless/custom_metrics?tab=ruby
+[9]: /ja/tracing/custom_instrumentation/ruby/

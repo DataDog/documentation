@@ -116,6 +116,52 @@ Git metadata and build information is automatically collected using CI provider 
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
+The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+
+`DD_GIT_REPOSITORY_URL`
+: URL of the repository where the code is stored.
+**Example**: `git@github.com:MyCompany/MyApp.git`
+
+`DD_GIT_BRANCH`
+: Branch where this commit belongs.
+**Example**: `develop`
+
+`DD_GIT_TAG`
+: Tag of the commit, if it has one.
+**Example**: `1.0.1`
+
+`DD_GIT_COMMIT_SHA`
+: Commit SHA.
+**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
+
+`DD_GIT_COMMIT_MESSAGE`
+: Commit message.
+**Example**: `Set release number`
+
+`DD_GIT_COMMIT_AUTHOR_NAME`
+: Author name.
+**Example**: `John Doe`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL`
+: Author email.
+**Example**: `john@doe.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE`
+: Author date. ISO 8601 format.
+**Example**: `2021-03-12T16:00:28Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME`
+: Committer name.
+**Example**: `Jane Doe`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL`
+: Committer email.
+**Example**: `jane@doe.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE`
+: Committer date. ISO 8601 format.
+**Example**: `2021-03-12T16:00:28Z`
+
 ### Running tests
 
 After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application logs are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
@@ -190,6 +236,39 @@ For Network auto-instrumentation, you can configure these additional settings:
 
 You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
+## Custom tags
+
+### Environment variables
+
+You can use `DD_TAGS` environment variable. It must contain pairs of `key:tag` separated by spaces. For example:
+{{< code-block lang="bash" >}}
+DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
+{{< /code-block >}}
+
+If one of the values starts with the `$` character, it is replaced with an environment variable of the same name (if it exists), for example:
+{{< code-block lang="bash" >}}
+DD_TAGS=home:$HOME
+{{< /code-block >}}
+
+Using the `$` character also supports replacing an environment variable at the beginning of a value if contains non-environment variable supported characters (`a-z`,  `A-Z` or `_`), for example:
+{{< code-block lang="bash" >}}
+FOO = BAR
+DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
+{{< /code-block >}}
+
+### OpenTelemetry
+
+**Note**: Using OpenTelemetry is only supported for Swift.
+
+Datadog Swift testing framework uses [OpenTelemetry][2] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+
+{{< code-block lang="swift" >}}
+let tracer = DDInstrumentationControl.openTelemetryTracer
+tracer?.activeSpan?.setAttribute(key: "OTelTag", value: "OTelValue")
+{{< /code-block >}}
+
+The test target needs to link explicitly with `opentelemetry-swift`.
+
 ## CI provider environment variables
 
 {{< tabs >}}
@@ -258,6 +337,8 @@ Additional Git configuration for physical device testing:
 | `CI_COMMIT_BRANCH`   | `$(CI_COMMIT_BRANCH)`  |
 | `CI_COMMIT_TAG`      | `$(CI_COMMIT_TAG)`     |
 | `CI_COMMIT_MESSAGE`  | `$(CI_COMMIT_MESSAGE)` |
+| `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
+| `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
 {{% /tab %}}
 {{% tab "Travis" %}}
@@ -383,6 +464,8 @@ Additional Git configuration for physical device testing:
 | `SYSTEM_TEAMFOUNDATIONSERVERURI` | `$(SYSTEM_TEAMFOUNDATIONSERVERURI)` |
 | `SYSTEM_JOBID`                   | `$(SYSTEM_JOBID)`                   |
 | `SYSTEM_TASKINSTANCEID`          | `$(SYSTEM_TASKINSTANCEID)`          |
+| `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
+| `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
 Additional Git configuration for physical device testing:
 

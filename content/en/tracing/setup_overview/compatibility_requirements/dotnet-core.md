@@ -35,12 +35,12 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 ## Supported processor architectures
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------- |
-| Windows x86 (`win-x86`)                                                                                                       |
-| Windows x64 (`win-x64`)                                                                                                       |
-| Linux x64 (`linux-x64`)                                                                                                       |
-| Alpine Linux x64 (`linux-musl-x64`)                                                                                           |
+| Processor architectures                                                 |
+| ------------------------------------------------------------------------|
+| Windows x86 (`win-x86`)                                                 |
+| Windows x64 (`win-x64`)                                                 |
+| Linux x64 (`linux-x64`)                                                 |
+| Alpine Linux x64 (`linux-musl-x64`)                                     |
 | Linux ARM64 (`linux-arm64`)<br><br>.NET 5 only, added in version 1.27.0 |
 
 

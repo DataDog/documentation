@@ -5,7 +5,7 @@ kind: faq
 
 ### What happened?
 
-On Saturday May 30th, 2020, at 10:48 UTC, an SSL root certificate used to cross-sign some of the Datadog certificates expired, and caused some of your Agents to lose connectivity with Datadog endpoints. Because this root certificate is embedded in certain Agent versions, you will need to take action to restore connectivity.
+On Saturday May 30th, 2020, at 10:48 UTC, an SSL root certificate used to cross-sign some of the Datadog certificates expired, and caused some of your Agents to lose connectivity with Datadog endpoints. Because this root certificate is embedded in certain Agent versions, you need to take action to restore connectivity.
 
 ### What versions of the Agent are affected?
 
@@ -13,15 +13,15 @@ Agent versions spanning 3.6.x to 5.32.6 embed the expired certificate and are af
 
 Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
-### How can I find a list of hosts running affected Agent versions?
+### Find a list of hosts running affected Agent versions
 
 Use the [Agent Versions list][1] in the Datadog UI to see the hostname, the Agent version that it's running, and the status of that host.
 
-**Note**: The previously recommended Python script that queries your Datadog account for hosts running impacted Agent versions has been deprecated in favor of the list now available in the application.
+**Note**: The previously recommended Python script that queries your Datadog account for hosts running impacted Agent versions has been deprecated in favor of the list available in the application.
 
 ### Fixing by upgrading to Agent 5.32.7
 
-If you are currently running Agent 5.x on a 64-bit host, Datadog recommends upgrading to Agent 5.32.7+. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
+If you are running Agent v5.x on a 64-bit host, Datadog recommends upgrading to Agent 5.32.7+. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
@@ -51,7 +51,7 @@ rm "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-Note that for Agent versions `<= 5.11`, the location will be different.
+**Note**: For Agent versions `<= 5.11`, the location is different.
 For users on the 32-bit Agent `<= 5.11` on 64-bit Windows the steps are:
 
 ```shell
@@ -83,13 +83,13 @@ Once the file is removed, restart the Datadog Service from the Windows Service M
 
 You can upgrade to [Agent 7][4] or [Agent 6][5] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
 
-### Should I upgrade my Agent even if I deleted the certificate?
+### Upgrade the Agent after deleting the certificate
 
-Datadog recommends keeping up to date and updating to the latest version of the Agent. Deployments set to auto-update will do so with 5.32.7.
+Datadog recommends keeping up to date and updating to the latest version of the Agent. Deployments set to auto-update are enabled with v5.32.7.
 
-### Am I still encrypting traffic with SSL even if I delete the certificate?
+### Encrypting traffic with SSL
 
-Yes. The certificate is just a preset for the client to use and is not necessary to connect via SSL. Datadog Agent endpoints only accept SSL traffic.
+Encrypt the traffic with SSL even if you delete the certificate. The certificate is just a preset for the client to use and is not necessary to connect with SSL. Datadog Agent endpoints only accept SSL traffic.
 
 ### Windows Agent 5.x configured to use a proxy or the curl http client
 

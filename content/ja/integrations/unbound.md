@@ -71,18 +71,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 {{< get-metrics-from-git "unbound" >}}
 
 
-### サービスのチェック
-
-**unbound.can_get_stats**
-unbound-control が失敗した場合、または出力のパース中にエラーが発生した場合は CRITICAL を返します。それ以外の場合は OK を返します。
-
 ### イベント
 
 Unbound チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "unbound" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -94,4 +94,5 @@ Unbound チェックには、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-extras/blob/master/unbound/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/unbound/assets/service_checks.json
+[12]: https://docs.datadoghq.com/ja/help/

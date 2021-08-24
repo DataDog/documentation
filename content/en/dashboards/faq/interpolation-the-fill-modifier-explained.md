@@ -1,5 +1,5 @@
 ---
-title: Interpolation & the fill modifier explained
+title: Interpolation and the Fill Modifier
 kind: faq
 aliases:
     - /graphing/faq/interpolation-the-fill-modifier-explained
@@ -44,7 +44,6 @@ Interpolation is not needed when you graph one metric submitted from one source,
 
 Interpolation is not performed for multi-part queries, for example: `avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}`
 
-
 ## How to control interpolation?
 
 The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1].
@@ -60,15 +59,15 @@ The `.fill()` modifier controls interpolation parameters:
 
 ## FAQ
 
-**There's a gap in my metric, fill(zero) doesn't do anything, I still have a long straight line on my graph.**
+### There's a metric gap, fill(zero) doesn't do anything, there's still a long straight line on the graph
 Since graphs are just a series of data points joined by lines, a long period without any data translates into a long straight line and has no need for interpolation to fill values. Interpolation is about aligning series to make aggregation and multi-line graphs possible.
 
 In contrast, a monitor uses a rollup of a time frame to evaluate interpolated values and calculate averages.
 
-**I have disabled interpolation but I see my metrics dropping to 0 which is not expected.**
-These artificial dips are caused by front-end visualization enhancement. [See this article for more information][2].
+### Interpolation is disabled but metrics are dropping to 0 which is not expected
+These artificial dips are caused by front-end visualization enhancement. See the FAQ on [unexpected drops to zero][2] for more details.
 
-**How to choose the interpolation method?**
+### Choose the interpolation method
 The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
 
 Linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics or metrics reported from varying sources over time, it's often more interesting to disable interpolation. This makes sense if you send data points only when the value of the thing you measure changes.

@@ -457,7 +457,7 @@ eks_fargate にはイベントが含まれていません。
 [20]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
 [21]: https://aws.amazon.com/blogs/containers/fluent-bit-for-amazon-eks-on-aws-fargate-is-here/
 [22]: http://docs.datadoghq.com/agent/cluster_agent/event_collection
-[23]: https://docs.datadoghq.com/ja/help
+[23]: /ja/agent/cluster_agent/setup/
 [24]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#process-collection
 [25]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
 [26]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/

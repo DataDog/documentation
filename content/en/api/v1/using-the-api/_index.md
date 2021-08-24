@@ -75,7 +75,7 @@ You can also use the Datadog API to manage your account programmatically:
 [11]: /events/
 [12]: /api/v1/synthetics/
 [13]: /synthetics/
-[14]: /api/v1/tracing/
+[14]: /tracing/guide/send_traces_to_agent_by_api/
 [15]: /api/v1/dashboards/
 [16]: /api/v1/dashboard-lists/
 [17]: /api/v1/hosts/

@@ -59,6 +59,11 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Environment variable**: `DD_SERVICE`<br/>
 **Example**: `my-api-service`
 
+`--env`
+: Environment where tests were run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Example**: `ci`
+
 `--tags`
 : Key-value pairs in the form `key:value` to be attached to all tests (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
 **Environment variable**: `DD_TAGS`<br/>
@@ -83,10 +88,6 @@ The following environment variables are supported:
 : [Datadog API key][3] used to authenticate the requests.<br/>
 **Default**: (none)
 
-`DD_ENV`
-: The environment you want your test results to appear in.<br/>
-**Default**: (none)<br/>
-**Examples**: `local`, `ci`
 
 {{< site-region region="eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):

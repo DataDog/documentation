@@ -261,6 +261,12 @@ main_left:
     title: usecase
     url: 'https://www.datadoghq.com/solutions/on-premises-monitoring/'
     weight: -437
+  - identifier: usecase-log
+    name: Log Analysis & Correlation
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/log-analysis-and-correlation/'
+    weight: -436
 main_right:
   - identifier: about
     name: About
@@ -791,6 +797,11 @@ main:
     identifier: integrations_top_level
     pre: nav_integrations
     weight: 40000
+  - name: Guides
+    url: integrations/guide/
+    identifier: integration_guides
+    parent: integrations_top_level
+    weight: 1
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -1065,7 +1076,7 @@ main:
     url: serverless/troubleshooting/serverless_tracing_and_webpack
     parent: serverless_troubleshooting
     weight: 704
-  - name: Azure App Services Extension
+  - name: Azure App Service Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
@@ -1629,10 +1640,30 @@ main:
     identifier: profiler
     weight: 13
   - name: Enabling the Profiler
-    url: tracing/profiler/enabling/
+    url: tracing/profiler/enabling/java
     parent: profiler
     identifier: profiler_enabling
     weight: 1301
+  - name: Enabling the Java Profiler
+    url: tracing/profiler/enabling/java
+    parent: profiler_enabling
+    identifier: profiler_enabling_java
+    weight: 101
+  - name: Enabling the Python Profiler
+    url: tracing/profiler/enabling/python
+    parent: profiler_enabling
+    identifier: profiler_enabling_python
+    weight: 102
+  - name: Enabling the Go Profiler
+    url: tracing/profiler/enabling/go
+    parent: profiler_enabling
+    identifier: profiler_enabling_go
+    weight: 103
+  - name: Enabling the Ruby Profiler
+    url: tracing/profiler/enabling/ruby
+    parent: profiler_enabling
+    identifier: profiler_enabling_ruby
+    weight: 104
   - name: Search Profiles
     url: tracing/profiler/search_profiles
     parent: profiler
@@ -1808,11 +1839,96 @@ main:
     parent: ci
     identifier: ci_troubleshooting
     weight: 6
+  - name: Database Monitoring
+    url: database_monitoring/
+    pre: nav_dbm
+    identifier: dbm
+    weight: 160000
+  - name: Setting Up Postgres
+    url: database_monitoring/setup_postgres/
+    parent: dbm
+    identifier: dbm_setup_postgres
+    weight: 1
+  - name: Self-hosted
+    url: database_monitoring/setup_postgres/selfhosted
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup_postgres/rds
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_rds
+    weight: 102
+  - name: Aurora
+    url: database_monitoring/setup_postgres/aurora
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_aurora
+    weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup_postgres/gcsql
+    parent: dbm_setup_postgres
+    identifier: dbm_setup_postgres_gcsql
+    weight: 104
+  - name: Advanced Configuration
+    url: database_monitoring/setup_postgres/advanced_configuration
+    parent: dbm_setup_postgres
+    identifier: dbm_postgres_advanced_configuration
+    weight: 105
+  - name: Setting Up MySQL
+    url: database_monitoring/setup_mysql/
+    parent: dbm
+    identifier: dbm_setup_mysql
+    weight: 2
+  - name: Self-hosted
+    url: database_monitoring/setup_mysql/selfhosted
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup_mysql/rds
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_rds
+    weight: 102
+  - name: Aurora
+    url: database_monitoring/setup_mysql/aurora
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_aurora
+    weight: 103
+  - name: Google Cloud SQL
+    url: database_monitoring/setup_mysql/gcsql
+    parent: dbm_setup_mysql
+    identifier: dbm_setup_mysql_gcsql
+    weight: 104
+  - name: Advanced Configuration
+    url: database_monitoring/setup_mysql/advanced_configuration
+    parent: dbm_setup_mysql
+    identifier: dbm_mysql_advanced_configuration
+    weight: 105
+  - name: Data Collected
+    url: database_monitoring/data_collected
+    parent: dbm
+    identifier: dbm_data_collected
+    weight: 3
+  - name: Exploring Query Metrics
+    url: database_monitoring/query_metrics/
+    parent: dbm
+    identifier: dbm_query_metrics
+    weight: 4
+  - name: Exploring Query Samples
+    url: database_monitoring/query_samples/
+    parent: dbm
+    identifier: dbm_query_samples
+    weight: 5
+  - name: Troubleshooting
+    url: database_monitoring/troubleshooting/
+    parent: dbm
+    identifier: dbm_troubleshooting
+    weight: 6
   - name: Log Management
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 160000
+    weight: 170000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1969,7 +2085,7 @@ main:
     url: security_platform/
     pre: nav_security_monitoring
     identifier: security_platform
-    weight: 160000
+    weight: 180000
   - name: Security Monitoring
     url: security_platform/security_monitoring/
     parent: security_platform
@@ -2024,6 +2140,11 @@ main:
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 204
+  - name: Signals Explorer
+    url: /security_platform/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 205
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform
@@ -2073,7 +2194,7 @@ main:
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 180000
+    weight: 190000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -2364,7 +2485,7 @@ main:
     url: network_monitoring/
     pre: nav_network
     identifier: nm_parent
-    weight: 190000
+    weight: 200000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -2429,7 +2550,7 @@ main:
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 200000
+    weight: 210000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -2536,31 +2657,36 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 210000
+    weight: 220000
   - name: Account Management
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 220000
+    weight: 230000
+  - name: Switching between orgs
+    url: account_management/org_switching/
+    parent: account_management
+    weight: 1
+  - name: Organization settings
+    url: account_management/org_settings/
+    parent: account_management
+    identifier: organization_settings
+    weight: 2
   - name: User management
     url: account_management/users/
-    parent: account_management
+    parent: organization_settings
     identifier: account_management_users
-    weight: 1
+    weight: 201
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
     identifier: account_management_rbac
-    weight: 2
+    weight: 3
   - name: Permissions
     url: account_management/rbac/permissions
     parent: account_management_rbac
     identifier: account_management_rbac_permissions
-    weight: 201
-  - name: Organization settings
-    url: account_management/org_settings/
-    parent: account_management
-    weight: 3
+    weight: 301
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
@@ -2594,27 +2720,27 @@ main:
     url: account_management/saml/safenet/
     parent: account_management_saml
     weight: 407
-  - name: Multi-org accounts
-    url: account_management/multi_organization/
+  - name: API and Application Keys
+    url: account_management/api-app-keys/
     parent: account_management
     weight: 5
-  - name: Switching between orgs
-    url: account_management/org_switching/
+  - name: Plan and Usage
+    url: account_management/plan_and_usage/
     parent: account_management
     weight: 6
   - name: Billing
     url: account_management/billing/
     parent: account_management
     weight: 7
-  - name: API and Application Keys
-    url: account_management/api-app-keys/
+  - name: Multi-org accounts
+    url: account_management/multi_organization/
     parent: account_management
     weight: 8
   - name: Security
     url: security/
     pre: nav_security
     identifier: security
-    weight: 230000
+    weight: 240000
   - name: Agent
     url: security/agent/
     parent: security
@@ -5328,22 +5454,6 @@ api:
     url: /api/latest/timeboards/
     identifier: timeboards
     generated: true
-  - name: Tracing
-    url: /api/latest/tracing/
-    identifier: tracing
-    generated: true
-  - name: Send traces
-    url: '#send-traces'
-    identifier: send-traces
-    parent: tracing
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - SubmitTraces
-      unstable: []
-      order: 1
   - name: Usage Metering
     url: /api/latest/usage-metering/
     identifier: usage-metering
