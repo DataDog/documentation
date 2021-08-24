@@ -39,7 +39,7 @@ event(<タイトル>, <テキスト>, <タイムスタンプ>, <ホスト名>, <
 
 ### 例
 
-DogStatsD イベントによる Datadog 内でのエラーと例外を表示します。
+次のコードを実行して、Datadog の DogStatsD イベントのエラーおよび例外を表示します。必要がなくなったら、クライアントを `フラッシュする`/`閉じる` ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -56,6 +56,9 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
+
+# オプションの手動フラッシュ (クライアントバージョン 0.43.0 以降でのみ利用可能)
+statsd.flush()
 ```
 {{< /programming-lang >}}
 

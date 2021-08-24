@@ -98,18 +98,18 @@ Kubernetes 環境でログを収集する Agent を構成する追加の情報�
 {{< get-metrics-from-git "scylla" >}}
 
 
-### サービスのチェック
-
-**scylla.prometheus.health**: <br>
-Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
 ### イベント
 
 Scylla チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "scylla" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+
 
 [1]: https://scylladb.com
 [2]: https://docs.datadoghq.com/ja/agent/
@@ -119,4 +119,5 @@ Scylla チェックには、イベントは含まれません。
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/scylla/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/scylla/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

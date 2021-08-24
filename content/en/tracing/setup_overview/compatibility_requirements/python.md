@@ -77,22 +77,21 @@ The `ddtrace` library includes support for the following libraries:
 
 | Library           | Supported Version | Library Documentation                                                    |
 | ----------------- | ----------------- | ------------------------------------------------------------------------ |
-| [aiobotocore][41] | >= 0.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
-| [asyncio][42]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
-| [Botocore][43]    | >= 1.4.51         | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
-| [Boto2][44]       | >= 2.29.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][45]      | >= 3.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
-| [Consul][46]      | >= 0.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
-| [Futures][47]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][48]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
-| [Grpc][49]        | >= 1.8.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
-| [httplib][50]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
-| [Jinja2][51]      | >= 2.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
-| [Kombu][52]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
-| [Mako][53]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
-| [Requests][54]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [urllib3][55]     | >= 1.22           | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
-
+| [aiobotocore][42] | >= 0.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
+| [asyncio][43]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
+| [Botocore][44]    | >= 1.4.51         | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
+| [Boto2][45]       | >= 2.29.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
+| [Celery][46]      | >= 3.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Consul][47]      | >= 0.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
+| [Futures][48]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
+| [gevent][49]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [Grpc][50]        | >= 1.8.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
+| [httplib][51]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Jinja2][52]      | >= 2.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Kombu][53]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [Mako][54]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [Requests][55]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [urllib3][56]     | >= 1.22           | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 
 ## Further Reading
 
@@ -153,3 +152,4 @@ The `ddtrace` library includes support for the following libraries:
 [53]: https://kombu.readthedocs.io/en/latest
 [54]: https://www.makotemplates.org
 [55]: https://requests.readthedocs.io/en/master/
+[56]: https://urllib3.readthedocs.io/en/stable/

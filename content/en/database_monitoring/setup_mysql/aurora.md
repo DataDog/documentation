@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Aurora managed MySQL
 kind: documentation
 description: Install and configure Database Monitoring for MySQL managed on Aurora.
-private: true
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"

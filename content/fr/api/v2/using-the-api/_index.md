@@ -74,7 +74,7 @@ Vous pouvez également utiliser l'API Datadog pour gérer automatiquement votre 
 [11]: /fr/events/
 [12]: /fr/api/v1/synthetics/
 [13]: /fr/synthetics/
-[14]: /fr/api/v1/tracing/
+[14]: /fr/tracing/guide/send_traces_to_agent_by_api/
 [15]: /fr/api/v1/dashboards/
 [16]: /fr/api/v1/dashboard-lists/
 [17]: /fr/api/v1/hosts/
