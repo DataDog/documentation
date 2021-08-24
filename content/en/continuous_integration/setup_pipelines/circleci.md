@@ -27,7 +27,7 @@ For each project, go to **Project Settings > Webhooks** in CircleCI and add a ne
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
-* **Webhook URL**: `https://webhooks-http-intake.logs.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **Webhook URL**: `https://webhooks-http-intake.logs.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
 * **Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
 * **Events**: Select `Workflow Completed` and `Job Completed`.
 * **Certificate verifications**: Enable this check.
