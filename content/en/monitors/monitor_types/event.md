@@ -35,7 +35,7 @@ As you fill in the parameters below, the list of events above the search fields 
 * and priority `all`, `normal`, or `low`
 * from `<SOURCE>`
 * over `<TAGS>`
-* exclude `<TAGS>`
+* exclude `<TAGS>`. For example, if you want to exclude events with the tag/value pair `#namespace:kube-system` you would put in the GUI editor `namespace:kube-system`.
 
 Choose your alert grouping:
 
