@@ -39,11 +39,11 @@ To add a comment, select some text or hover over a graph. The **Add comment** bu
 
 To edit or delete a comment you wrote, click the menu on the top-right of your comment.
 
-{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook" style="width:90%;">}}
+{{< img src="notebooks/edit_comments.png" alt="edit comment in notebook" style="width:90%;">}}
 
 View or re-open resolved comments in the Comment History, available in the Notebook cog menu.
 
-{{< img src="notebooks/comment_history.png" alt="edit comment in notebook" style="width:90%;">}}
+{{< img src="notebooks/check_comment_history.png" alt="edit comment in notebook" style="width:90%;">}}
 
 Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
@@ -115,9 +115,9 @@ Individual cells can be unlinked from the global time and set to an independent 
 
 To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
-### Expand
+### Full screen
 
-Expand the graph by clicking on the expand icon on the right side of the cell. More details about full screen mode is available on the [Widgets][10] page.
+Click on the full screen icon on the right side of the cell to edit with the [graphing editor][10]. Under **Graph your data**, add details like event overlays, markers, and y-axis controls. View and edit the graph JSON directly in the **JSON** tab.
 
 ### Layout options
 
@@ -164,4 +164,4 @@ Use **Export Notebook JSON** to download a JSON file containing the definition o
 [7]: /dashboards/widgets/log_stream/
 [8]: /dashboards/widgets/query_value/
 [9]: https://daringfireball.net/projects/markdown/
-[10]: /dashboards/widgets/#full-screen
+[10]: /dashboards/querying/#graphing-editor
