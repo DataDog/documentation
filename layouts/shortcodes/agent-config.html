@@ -1,24 +1,22 @@
 {{ if not (.Get "type") }}
-    {{ errorf "Agent Config shortcode error: Missing value for param 'type': %s" .Position }}
+  {{ errorf "Agent Config shortcode error: Missing value for param 'type': %s" .Position }}
 {{ end }}
 
 {{ $agent_config_data := $.Site.Data.agent_config }}
 {{ $type := (.Get ("type")) | lower }}
-{{ $filename := .Get "filename" }}
+{{ $filename := .Get "filename" | default "Code example" }}
 {{ $collapsible := .Get "collapsible" }}
 {{ $disable_copy := .Get "disable_copy" }}
 {{ $config_data := index $agent_config_data $type }}
 {{ $config_data_string := trim $config_data "\n" }}
 
 {{ if eq $config_data nil }}
-  {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template" }}
+  {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template.  Check agent_config_types_list.txt for list of available configuration types." }}
 {{ end }}
 
 <div class="code-snippet-wrapper">
-  <div class="code-filename-wrapper d-flex {{ if $filename }}justify-content-between{{ else }}justify-content-end{{ end }} {{ if $collapsible }}collapsible{{ end }}">
-    {{ with $filename }}
-      <p class="code-filename my-0">{{ . }}</p>
-    {{ end }}
+  <div class="code-filename-wrapper d-flex justify-content-between {{ if $collapsible }}collapsible{{ end }}">
+    <p class="code-filename my-0">{{ $filename }}</p>
     {{ if $collapsible }}
       <div class="js-code-block-visibility-toggle">
         <div class="chevron chevron-down d-none"></div>
