@@ -5975,6 +5975,7 @@ components:
       - trace-analytics alert
       - slo alert
       - event-v2 alert
+      - audit alert
       example: metric alert
       type: string
       x-enum-varnames:
@@ -5990,6 +5991,7 @@ components:
       - TRACE_ANALYTICS_ALERT
       - SLO_ALERT
       - EVENT_V2_ALERT
+      - AUDIT_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -19503,6 +19505,8 @@ paths:
 
         - event-v2: `event-v2 alert`
 
+        - audit: `audit alert`
+
 
         #### Query Types
 
@@ -19726,7 +19730,32 @@ paths:
         - **`time_window`**: The time window of the SLO target you wish to alert on.
         Valid options: `7d`, `30d`, `90d`.
 
-        - **`operator`**: `>=` or `>`'
+        - **`operator`**: `>=` or `>`
+
+
+        **Audit Alert Query**
+
+
+        Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available on US1-FED and in closed beta on EU, US3, and US1.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -22501,14 +22530,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Timestamp from which to start querying results.
+      - description: Timestamp in milliseconds from which to start querying results.
         in: query
         name: from_ts
         required: false
         schema:
           format: int64
           type: integer
-      - description: Timestamp up to which to query results.
+      - description: Timestamp in milliseconds up to which to query results.
         in: query
         name: to_ts
         required: false
@@ -22785,14 +22814,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Timestamp from which to start querying results.
+      - description: Timestamp in milliseconds from which to start querying results.
         in: query
         name: from_ts
         required: false
         schema:
           format: int64
           type: integer
-      - description: Timestamp up to which to query results.
+      - description: Timestamp in milliseconds up to which to query results.
         in: query
         name: to_ts
         required: false
