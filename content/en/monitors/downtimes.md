@@ -60,7 +60,7 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="downtime example"  style="width:80%;">}}
 
-4. To schedule a downtime on more than one group (e.g. `service:synthesizer`, `service:consul`, etc.), you can create an additional downtime per group.
+4. To schedule a downtime on more than one group (such as `service:synthesizer` and `service:consul`), you can create an additional downtime per group.
 
 **Example 2: Mute notifications for a specific environment of a monitor grouped by `env` and `service`**
 
