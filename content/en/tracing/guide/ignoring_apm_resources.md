@@ -1,36 +1,41 @@
 ---
-title: Ignoring unwanted resources with APM
+title: Ignoring Unwanted Resources in APM
 kind: documentation
 ---
 
-A service can handle various requests, which can often include requests that you may not want traced or included in trace metrics. An example of this may be health checks in a web application.
+A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
 
-If you do not want endpoints such as healthchecks to be traced to exclude them from trace metrics, there are two ways to do this: Tracer Configuration and Trace Agent.
+There are two ways to specify that such an endpoint should be untraced and excluded from trace metrics: 
+
+- [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
+- [Tracer configuration](#tracer-configuration).
 
 **Note:** Following any of the options below to filter traces will remove these requests from [trace metrics][1]. From information on how to reduce ingestion without affecting the trace metrics, see [ingestion controls][2].
 
-If you need assistance, contact [Datadog support][3] and we’ll be happy to help!
+If you need assistance, contact [Datadog support][3] and we’ll be happy to help.
 
 
-## Trace Agent (Datadog Agent) configuration options
+## Trace Agent configuration options
 
 The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from coming through. If traces are dropped due to these rules, the trace metrics will exclude these requests.
 
-If you have application specific requirements, please refer to the next section on Tracer Configuration.
+If you have application-specific requirements, use the [Tracer configuration](#tracer-configuration) method instead.
 
-### Ignoring Based on Span Tags
+### Ignoring based on span tags
 
-Available starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option allows traces with root spans matching certain span tags to be dropped. Setting up this option on the Trace Agent will apply to all services that send traces to this particular Datadog agent. Traces that are dropped due to these rules will not be captured in the trace metric.
+Available starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-This option requires an exact string match and if your use case requires ignoring by regex, see [Ignoring Based on Resources](#ignoring-based-on-resources).
+The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
 
-#### Environment Variables
+#### Environment variables
 
-`DD_APM_FILTER_TAGS_REQUIRE`  - This option requires that traces have root spans containing the specified span tags and values (exact match). If it does not contain this rule, the trace will be dropped.
+`DD_APM_FILTER_TAGS_REQUIRE`
+: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped.
 
-`DD_APM_FILTER_TAGS_REJECT` - This option will reject that traces have root spans containing the specified span tags and values (exact match). If it contains this rule, the trace will be dropped.
+`DD_APM_FILTER_TAGS_REJECT`
+: Rejects traces that have root spans with and exact match for the specified span tags and values. If it matches this rule, the trace is dropped.
 
-#### Datadog.yaml
+#### `datadog.yaml`
 
 ```
 apm_config:
@@ -39,7 +44,7 @@ apm_config:
 		reject: ["outcome:success"]
 ```
 
-For example, to ignore healthchecks where the `http.url` conveys this endpoint:
+To ignore health checks where the `http.url` matches this endpoint:
 
 ```
 apm_config:
@@ -47,27 +52,27 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 ```
 
-**Note**: Following any of the options below to filter traces will remove these requests from [trace metrics][1]. From information on how to reduce ingestion without affecting the trace metrics, see [ingestion controls][2].
+**Note**: Filtering traces this way removes these requests from [trace metrics][1]. From information on how to reduce ingestion without affecting the trace metrics, see [ingestion controls][2].
 
-If you programmatically know you don't want a set of traces within Datadog, and no other option in this guide works, you can considering combining adding a [custom span tag][4] to control dropping the trace, or [reach out to support][3] to discuss your use case further so we can continue to expand this functionality.
+If you can programmatically identify a set of traces that you know you don't want sent Datadog, and no other option in this guide solves your requirement, you can considering adding a [custom span tag][4] so you can drop the traces. [Reach out to Support][3] to discuss your use case further so we can continue to expand this functionality.
 
 
-### Ignoring Based on Resources
+### Ignoring based on resources
 
-The ignore resources option allows resources to be excluded if the global root span of the trace matches a certain criteria. See [Exclude Resources from being collected][5]. Setting up this option on the Trace Agent will apply to all services that send traces to this particular Datadog agent. Traces that are dropped due to these rules will not be captured in the trace metric.
+The **ignore resources** option allows resources to be excluded if the global root span of the trace matches certain criteria. See [Exclude resources from being collected][5]. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of ignore resources are not included in trace metrics.
 
-This can be done with the ignore resources option (either `ignore_resources` in the datadog.yaml, or `DD_APM_IGNORE_RESOURCES` as an environment variable).
+You can specify resources to ignore either in the Agent configuration file, `datadog.yaml`, or with the `DD_APM_IGNORE_RESOURCES` environment variable.
 
-```
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
 ## @param ignore_resources - list of strings - optional
 ## A list of regular expressions can be provided to exclude certain traces based on their resource name.
 ## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
+ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 
-```
+{{< /code-block >}}
 
 **Notes**:
-- Filtering traces remove these requests from [trace metrics][1]. For information on how to reduce ingestion without affecting the trace metrics, see [ingestion controls][2].
+- Filtering traces removes these requests from [trace metrics][1]. For information on how to reduce ingestion without affecting the trace metrics, see [ingestion controls][2].
 - The regex syntax that the Trace Agent accepts is evaluated by Go’s [regexp][6].
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
