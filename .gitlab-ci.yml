@@ -34,7 +34,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:nsollecito-htmltest
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:nsollecito_htmltest
   tags:
     - "runner:main"
   except:
