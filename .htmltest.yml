@@ -17,6 +17,7 @@ IgnoreInternalEmptyHash: true
 
 # Ignore paths
 IgnoreDirs:
+  - api
   - fr
   - ja
 IgnoreURLs:
@@ -24,4 +25,6 @@ IgnoreURLs:
   - play.google.com
   - "[linkedin|twitter|instagram].com"
   - github.com
-  - "[us1|us3|app|gov|learn|www].datadoghq.com"
+  - "[us1|us3|app|gov|learn|www|yum|apt].datadoghq.com"
+  - "127.0.0.1"
+  
