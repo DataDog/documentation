@@ -27,6 +27,7 @@ private: true
     {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Container Images for Docker Environments{{< /nextlink >}}
     {{< nextlink href="/agent/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
     {{< nextlink href="/agent/guide/heroku-ruby" >}}Instrumenting a Ruby on Rails application on Heroku with Datadog{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent v5 Guides:" >}}
