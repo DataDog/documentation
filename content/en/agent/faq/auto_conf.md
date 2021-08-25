@@ -14,7 +14,7 @@ further_reading:
 
 When the Agent runs as a container, it tries by default to Autodiscover other containers around it based on default Autodiscovery configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
-## Auto-Configuration Files
+## Auto-Configuration files
 
 | Integration                    | Auto-configuration file |
 | ------                         | --------                |
@@ -43,14 +43,14 @@ When the Agent runs as a container, it tries by default to Autodiscover other co
 
 The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][43] in place to take into account the containerized environment.
 
-## Customizing Configuration
-The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery. Any configuration discovered via Kubernetes Annotations or Docker Labels for a given container will take precedence over the `auto_conf.yaml` file.
+## Customizing configuration
+The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, see the Integrations Templates documentation to learn how to configure your Agent Autodiscovery. Any configuration discovered through Kubernetes Annotations or Docker Labels for a given container takes precedence over the `auto_conf.yaml` file.
 
 * [Using Key-Value Store][44]
 * [Using Kubernetes Annotations][45]
 * [Using Docker Labels][46]
 
-## Disabling Auto Configuration
+## Disabling auto-configuration
 
 To disable the Agent from using the `auto_conf.yaml` configuration you can add the environment variable `DD_IGNORE_AUTOCONF` for the desired integration(s) to disable. The environment variable:
 ```
@@ -82,7 +82,7 @@ Would would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`ist
 [18]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/auto_conf.yaml
 [19]: /integrations/harbor/
 [20]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/auto_conf.yaml
-[21]: /integrattions/istio
+[21]: /integrations/istio
 [22]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
 [23]: /agent/kubernetes/
 [24]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/datadog_checks/kube_apiserver_metrics/data/auto_conf.yaml
