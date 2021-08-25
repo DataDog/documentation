@@ -147,7 +147,7 @@ Notify your team by specifying team members or send the message to a service [in
 The Manage Downtime page displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
 Use the facets panel and the search bar to filter the list on the `Creator`, the `Scope`, `Monitor Tags`, or `Active`, `Automuted`, `Recurring` parameters.
 
-{{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page"  style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page" style="width:100%;">}}
 
 ### History
 
