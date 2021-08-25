@@ -150,13 +150,11 @@ link_checks_preview:
   environment: "preview"
   script:
     - htmltest
-  after_script:
-    - if [ -e ${CI_PROJECT_DIR}/tmp/.htmltest/htmltest.log ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
     paths: 
-      - ./tmp/.htmltest/refcache.json
+      - ./tmp/.htmltest
   interruptible: true
 
 missing_tms_preview:
