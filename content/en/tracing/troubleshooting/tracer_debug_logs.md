@@ -151,6 +151,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 |----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
+| Azure App Services | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
