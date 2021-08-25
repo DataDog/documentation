@@ -81,7 +81,7 @@ end
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#Using-Info.plist-for-configuration)). You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
@@ -134,7 +134,7 @@ Git metadata and build information is automatically collected using CI provider 
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-The user can also provide Git information by using custom environment variables (or in the `Info.plist` file as [described below](#Using-Info.plist-for-configuration)). This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+The user can also provide Git information by using custom environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
 
 `DD_GIT_REPOSITORY_URL`
 : URL of the repository where the code is stored.<br/>
@@ -215,7 +215,7 @@ For the following configuration settings:
 
 ### Disabling auto-instrumentation
 
-The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables (or in the `Info.plist` file as [described below](#Using-Info.plist-for-configuration)):
+The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)):
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
@@ -258,7 +258,7 @@ You can also disable or enable specific auto-instrumentation in some of the test
 
 ### Environment variables
 
-You can use `DD_TAGS` environment variable  (or in the `Info.plist` file as [described below](#Using-Info.plist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
+You can use `DD_TAGS` environment variable  (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
