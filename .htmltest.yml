@@ -4,7 +4,7 @@ TestFilesConcurrently: true
 CheckGeneric: false
 CheckInternal: true
 CheckExternal: true
-CheckImages: false
+CheckImages: true
 CheckMailto: false
 CheckInternalHash: false
 CheckScripts: false
@@ -19,5 +19,4 @@ IgnoreURLs:
   - "play.google.com"
   - "LinkedIn.com"
   - "marketo"
-  - "google(*.).html"
-  - "[app|docs-staging].datadoghq.com"
+  - "[app].datadoghq.com"
