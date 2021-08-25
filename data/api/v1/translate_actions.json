@@ -954,6 +954,10 @@
     "description": "Get hourly usage for Cloud Workload Security.",
     "summary": "Get hourly usage for Cloud Workload Security"
   },
+  "GetUsageDBM": {
+    "description": "Get hourly usage for Database Monitoring",
+    "summary": "Get hourly usage for Database Monitoring"
+  },
   "GetUsageFargate": {
     "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
     "summary": "Get hourly usage for Fargate"
