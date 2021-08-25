@@ -1,13 +1,21 @@
 DirectoryPath: "public"
+
+# Speeds things up but may cause errors in some cases
 TestFilesConcurrently: true
+
+# General config
+CheckDoctype: false
 CheckGeneric: false
-CheckMailto: false
 CheckInternalHash: true
+CheckMailto: false
+CheckMeta: false
 CheckScripts: false
 StripQueryString: false
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreEmptyHref: true
 IgnoreInternalEmptyHash: true
+
+# Ignore paths
 IgnoreDirs:
   - "[ja|fr]"
 IgnoreURLs:
