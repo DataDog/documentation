@@ -45,10 +45,17 @@ There are two ways of installing the testing framework:
 {{% /tab %}}
 {{% tab "Using Cocoapods" %}}
 
-1. Add the DatadogSDKTesting dependency to the test targets of your Podfile:
+1. Add the `DatadogSDKTesting` dependency to the test targets of your `Podfile`:
 
 {{< code-block lang="ruby" >}}
-pod 'DatadogSDKTesting'
+target 'MyApp' do
+  # ...
+
+  target 'MyAppTests' do
+    inherit! :search_paths
+    pod 'DatadogSDKTesting'
+  end
+end
 {{< /code-block >}}
 
 2. If you run UITests, also add the dependency to the app running the tests.
@@ -249,7 +256,7 @@ You can also disable or enable specific auto-instrumentation in some of the test
 
 ## Alternative Configuration 
 
-Alternatively to setting environment variables, all the configuration can be provided by adding the settings to the `Info.plist` file of the Test bundles (not the App bundle). If the same setting is set both in a environment variable and in the `Info.plist` file, the environment variable takes precedence.
+Alternatively to setting environment variables, all configuration values can be provided by adding them to the `Info.plist` file of the Test bundle (not the App bundle). If the same setting is set both in an environment variable and in the `Info.plist` file, the environment variable takes precedence.
 
 ## Custom tags
 
