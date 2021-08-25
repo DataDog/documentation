@@ -11,13 +11,13 @@ Quick graphs is a way to graph your data from any page in Datadog. There are thr
 * The global search (`Cmd+K`) menu
 * The dashboards submenu
 
-{{< img src="dashboards/guide/quick_graph_editor.png" alt="quick graph editor"  style="width:80%;">}}
+{{< img src="dashboards/guide/quick_graph_editor.png" alt="quick graph editor" style="width:80%;">}}
 
 ## Configuring a graph
 
 To configure your graph on using Quick Graphs, follow this process:
 
-1. Query Data
+1. Query data
     * [Graphing Metrics](#graphing-metrics)
     * [Graphing Events](#graphing-events)
 2. [Select the visualization](#select-your-visualization)
@@ -40,15 +40,15 @@ This section provides a brief overview of querying event platform data sources s
 To query event data, follow this process:
 1. **Filter:** Narrow down, broaden, or shift your focus on the subset of data of current interest. The top field allows you to input a search query mixing key:value and full-text search. 
 
-{{< img src="dashboards/guide/quick_graph_event_filter.png" alt="event filtering"  style="width:80%;">}}
+{{< img src="dashboards/guide/quick_graph_event_filter.png" alt="event filtering" style="width:80%;">}}
 
 2. **Choose the measure or facet:** Measure lets you choose the aggregation function whereas facet displays the unique count. 
 
-{{< img src="dashboards/guide/quick_graph_event_measure.png" alt="choosing measure"  style="width:80%;">}}
+{{< img src="dashboards/guide/quick_graph_event_measure.png" alt="choosing measure" style="width:80%;">}}
 
 3. **Aggregate:** If you are graphing a measure, select the aggregation function for the measure you want to graph and use a facet to split your graph.
 
-{{< img src="dashboards/guide/quick_graph_event_group.png" alt="choosing aggregation"  style="width:80%;">}}
+{{< img src="dashboards/guide/quick_graph_event_group.png" alt="choosing aggregation" style="width:80%;">}}
 
 4. **Rollup:** Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
 
@@ -57,7 +57,7 @@ To query event data, follow this process:
 ### Select your visualization
 
 
-Quick Graphs currently support:
+Quick Graphs supports:
 * [Timeseries][13]
 * [Top List][14]
 * [Query value][15]
