@@ -25,7 +25,7 @@ Configuring the Trace Agent to ignore certain spans or resources applies to all 
 
 Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-If you can programmatically identify a set of traces that you know you don't want sent Datadog, and no other option in this guide solves your requirement, you can considering adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so we can continue to expand this functionality.
+If you can programmatically identify a set of traces that you know you don't want sent Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so we can continue to expand this functionality.
 
 The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
 
@@ -222,7 +222,7 @@ If you use AWS ECS (such as on EC2), in your Datadog Agent container definition,
 
 ## Tracer configuration options
 
-Some of the language-specific tracers have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using the languages listed below.
+Some of the language-specific tracers have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using a language listed below.
 
 <div class="alert alert-danger"><strong>Important</strong>: If the request is associated with a distributed trace, the resulting trace can have sampling inaccuracy if you drop portions of it due to these filtering rules.</div>
 
