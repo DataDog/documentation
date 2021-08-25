@@ -1,5 +1,6 @@
 ---
-title: Dogshell, Quickly Use Datadog's API from Terminal/Shell
+title: Dogshell
+description: "Use Datadog's API from Terminal or Shell"
 kind: guide
 aliases:
   - /developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
@@ -9,7 +10,7 @@ You can use the Datadog API straight from terminal/shell by using a wrapper call
 
 ## Setup:
 
-Dogshell comes with the officially supported [datadogpy Python library][1], often used to send data to Datadog via [DogStatsD][2]. [It can be installed following the  instructions][3].
+Dogshell comes with the officially supported [datadogpy Python library][1], often used to send data to Datadog with [DogStatsD][2]. See the [datadogpy GitHub repo][3] for installation instructions.
 
 Once you have that library installed, you have the `dog` command available to you in your terminal/shell, but it still needs to be "initialized": you need to provide it with an API and application key so that it can be used to send/receive data to and from your account. When you first try running a `dog` command, it recognizes that it needs to be initialized, and walks you through the 2-step process.
 
@@ -43,7 +44,7 @@ You can paste your application key. It finishes with:
 Wrote ~/.dogrc.
 ```
 
-Now you're all set to use your `dog` commands to quickly use the Datadog API from your terminal/shell. For further help and information on the `dog` commands, run `dog -h`.
+Next, use your `dog` commands to quickly use the Datadog API from your terminal/shell. For further help and information on the `dog` commands, run `dog -h`.
 
 In the event that you would rather just write the `.dogrc` file yourself (perhaps you'd like to push the file to many of your servers programmatically so that you can run `dog` commands from any of your servers), the content of this file should be as follows:
 

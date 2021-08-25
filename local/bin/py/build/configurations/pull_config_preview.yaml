@@ -580,3 +580,13 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: datadog-agent
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "pkg/config/config_template.yaml"
+      options:
+        file_name: 'agent_config.yaml'
+        output_content: false
