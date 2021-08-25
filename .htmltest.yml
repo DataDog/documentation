@@ -1,7 +1,7 @@
 DirectoryPath: "public"
 
 # Speeds things up but may cause errors in some cases
-TestFilesConcurrently: true
+TestFilesConcurrently: false
 
 # General config
 CheckDoctype: false
@@ -17,11 +17,11 @@ IgnoreInternalEmptyHash: true
 
 # Ignore paths
 IgnoreDirs:
-  - /fr
-  - /ja
+  - fr
+  - ja
 IgnoreURLs:
   - /api/[v1|v2]
   - play.google.com
-  - LinkedIn.com
+  - "[linkedin|twitter|instagram].com"
   - github.com
   - "[us1|us3|app|gov|learn|www].datadoghq.com"
