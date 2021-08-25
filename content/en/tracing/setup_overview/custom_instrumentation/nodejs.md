@@ -252,7 +252,7 @@ tracer.use('http', {
 })
 ```
 
-Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][3] page or in the [dedicated guide to ignoring resources][4].
+Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][3] page or in [Ignoring Unwanted Resources][4].
 
 ## Further Reading
 

@@ -262,7 +262,7 @@ DD_APM_REPLACE_TAGS=[
 
 ## Exclude resources from being collected
 
-For an in depth overview of the options to avoid tracing specific resources, see the [dedicated guide][5].
+For an in depth overview of the options to avoid tracing specific resources, see [Ignoring Unwanted Resources][5].
 
 If your services include simulated traffic such as health checks, you may want to exclude these traces from being collected so the metrics for your services match production traffic.
 
