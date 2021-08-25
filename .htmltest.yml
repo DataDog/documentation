@@ -13,9 +13,11 @@ IgnoreDirectoryMissingTrailingSlash: true
 IgnoreEmptyHref: true
 IgnoreExternalBrokenLinks: false
 IgnoreDirs:
-  - "[v1|v2]"
+  - "[ja|fr]"
 IgnoreURLs:
-  - "^.*\\/[v1|v2|ja|fr]\\/.*$"
-  - "^.*play.google.com/?"
-  - "^.*[LinkedIn|marketo](*.).html"
-  - "^[google](*.).html"
+  - "[v1|v2]"
+  - "play.google.com"
+  - "LinkedIn.com"
+  - "marketo"
+  - "google(*.).html"
+  - "[app|docs-staging].datadoghq.com"
