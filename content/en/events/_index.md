@@ -171,7 +171,7 @@ A **measure** is an attribute with a numerical value contained in your event. To
 Use saved views to automatically configure your events explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][5] to learn more.
 
 
-[5]: logs/explorer/saved_views/
+[5]: /logs/explorer/saved_views/
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 #### Context
@@ -191,7 +191,7 @@ A **measure** is an attribute with a numerical value contained in your event. To
 Use saved views to automatically configure your events explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][6] to learn more.
 
 
-[6]: logs/explorer/saved_views/
+[6]: /logs/explorer/saved_views/
 {{< /site-region >}}
 
 {{< site-region region="us" >}}

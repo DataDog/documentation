@@ -19,4 +19,4 @@ IgnoreURLs:
   - "play.google.com"
   - "LinkedIn.com"
   - "marketo"
-  - "[app].datadoghq.com"
+  - "[app|www].datadoghq.com"
