@@ -37,6 +37,8 @@ The filter tags option requires an exact string match. If your use case requires
 
 #### `datadog.yaml`
 
+For example:
+
 ```
 apm_config:
 	filter_tags:
