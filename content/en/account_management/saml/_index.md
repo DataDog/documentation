@@ -26,13 +26,9 @@ Here's a two-minute video walkthrough:
 
 If you are a [Datadog Administrator][3], there is a [Configure SAML][4] option in the drop down menu that is accessed by hovering over your username in the left-side navigation menu.
 
-{{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" style="width:50%;" >}}
-
 This brings you to the **SAML Single Sign On Configuration** page:
 
 1. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button.
-
-    {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file"  >}}
 
     After choosing the file, click **Upload File**.
 
@@ -54,20 +50,20 @@ Users with the Access Management permission can assign or remove Datadog roles b
 
 1. Go to Teams and click the Mappings tab.
 
-2. Click the **New Mapping** button. 
+2. Click the **New Mapping** button.
 
-3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). **Note**: These entries are case-sensitive. 
+3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). **Note**: These entries are case-sensitive.
 
-   For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
+   For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`:
 
     {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
 
-4. If you have not already done so, enable mappings by clicking **Enable Mappings**. 
+4. If you have not already done so, enable mappings by clicking **Enable Mappings**.
 
-When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it). 
+When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it).
 
 <div class="alert alert-warning">
-  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously, and are prevented from logging into the org with SAML. Double-check your mapping definitions. 
+  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously, and are prevented from logging into the org with SAML. Double-check your mapping definitions.
 </div>
 
 You can make changes to a mapping by clicking the pencil icon, or remove it by clicking the garbage icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
@@ -163,6 +159,6 @@ With SAML strict mode enabled, all users must log in with SAML. An existing user
 [10]: /account_management/saml/auth0/
 [11]: /account_management/saml/azure/
 [12]: /account_management/saml/google/
-[13]: /account_management/saml/nopassword/
+[13]: /account_management/saml/lastpass/
 [14]: /account_management/saml/okta/
 [15]: /account_management/saml/safenet/

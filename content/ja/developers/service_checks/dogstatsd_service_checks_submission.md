@@ -6,7 +6,7 @@ further_reading:
   - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: /developers/libraries/
+  - link: /developers/community/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
@@ -29,13 +29,13 @@ service_check(<SERVICE_CHECK_NAME>, <STATUS>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 |------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
 | `<SERVICE_CHECK_NAME>` | 文字列          | はい      | -             | サービスチェックの名前。                                                                             |
 | `<STATUS>`             | Int             | はい      | -             | サービスのステータスを説明する定数: OK には `0`、WARN には `1`、CRITICAL には `2`、UNKNOWN には `3`。 |
-| `<TAGS>`               | 文字列のリスト | いいえ       | -             | サービスチェックに関連付けられているタグのリスト                                                        |
+| `<TAGS>`               | key:value ペアのリスト | いいえ       | -             | サービスチェックに関連付けられているタグのリスト                                                        |
 | `<HOSTNAME>`           | 文字列          | いいえ       | 現在のホスト  | サービスチェックに関連付けられているホスト名                                                          |
 | `<MESSAGE>`            | 文字列          | いいえ       | -             | このステータスが発生した補足情報や説明                                        |
 
 ### コード例
 
-サービスチェックコードの例を表示するには言語を選んでください。
+次のコードを実行して、DogStatsD を通じて Datadog にサービスチェックを送信します。必要がなくなったら、クライアントを `フラッシュする`/`閉じる` ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 

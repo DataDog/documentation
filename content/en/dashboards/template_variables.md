@@ -40,7 +40,7 @@ A template variable is defined by:
 
 After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable is used in one out of two graphs:
 
-{{< img src="dashboards/template_variables/stats_tv.png" alt="statistic TV"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/stats_tv.png" alt="statistic TV" style="width:85%;">}}
 
 [Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
@@ -55,7 +55,7 @@ Additionally, you can define log, APM, and RUM template variables based on [log]
 
 #### Create
 
-{{< img src="dashboards/template_variables/default_view.png" alt="Default Saved View"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/default_view.png" alt="Default Saved View" style="width:85%;">}}
 
 To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view.
 To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables.
@@ -64,7 +64,7 @@ To save the current values of the template variables in a view, click on the dro
 
 To delete a view, click on the saved views dropdown and choose *Manage views...*. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
-{{< img src="dashboards/template_variables/manage_views.png" alt="Manage View Popup"  style="width:75%;">}}
+{{< img src="dashboards/template_variables/manage_views.png" alt="Manage View Popup" style="width:75%;">}}
 
 #### Modify
 
@@ -80,14 +80,14 @@ When creating or editing a widget, existing template variables display as option
 
 After the widget is saved, the value of the template variable is the one selected from the top of your dashboard:
 
-{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables"  style="width:75%;">}}
+{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" style="width:75%;">}}
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
 #### Associated template variables
 When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into consideration the other template variable values selected on the page, and seamlessly identifies the related values without any configuration.
 
-{{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables"  style="width:75%;">}}
+{{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables" style="width:75%;">}}
 
 #### Text
 
@@ -114,7 +114,7 @@ tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 
 For example, searching for `tags:region:$region.value` with a value of `us-east1` for the `region` template variable displays events tagged with `region:us-east1`. Additionally, the timing of the events are marked by pink bars in the graphs.
 
-{{< img src="dashboards/template_variables/search_dashboard.png" alt="Search dashboard"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/search_dashboard.png" alt="Search dashboard" style="width:85%;">}}
 
 Use commas to search using multiple template variables, for example: `tags:role:$role.value,env:$env.value`
 
@@ -130,7 +130,7 @@ tags:$<TEMPLATE_VARIABLE_NAME>
 
 For example, enter `tags:$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down:
 
-{{< img src="dashboards/template_variables/search_widget.png" alt="Search widget"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/search_widget.png" alt="Search widget" style="width:85%;">}}
 
 ## Further Reading
 

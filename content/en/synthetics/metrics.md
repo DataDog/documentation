@@ -37,7 +37,11 @@ Metrics starting with:
 
 {{< get-metrics-from-git "synthetics" "synthetics.tcp" >}}
 
-For more information on API test timings, read the guide to [API Test Timings and Variations][7]. 
+#### ICMP tests
+
+{{< get-metrics-from-git "synthetics" "synthetics.icmp" >}}
+
+For more information on API test timings, read the guide on [API Test Timings and Variations][7].
 
 ### Browser tests
 

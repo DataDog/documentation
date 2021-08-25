@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
     tag: ブログ
     text: Python ログの収集、カスタマイズ、一元化方法
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/explorer/

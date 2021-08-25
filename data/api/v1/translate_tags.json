@@ -123,10 +123,6 @@
     "name": "Timeboards",
     "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
   },
-  "tracing": {
-    "name": "Tracing",
-    "description": "Learn more about [tracing with Datadog](https://docs.datadoghq.com/tracing)\nand [the APM terminology](https://docs.datadoghq.com/tracing/visualization/services_list).\n\nThe tracing API is an Agent API rather than a service side API.\nSubmit your traces to the `http://localhost:8126/v0.3/traces` local endpoint\nso your Agent can forward them to Datadog."
-  },
   "usage-metering": {
     "name": "Usage Metering",
     "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for the past 15 months."

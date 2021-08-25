@@ -1,12 +1,12 @@
 ---
-title: Azure インテグレーションの課金
+title: Azure インテグレーションの請求
 kind: documentation
 ---
 ## 概要
 
 [Datadog で監視されているすべての Azure 仮想マシン][1]に対して課金が発生します。これらのマシンは、Datadog Agent がインストールされているかどうかにかかわらず、課金対象になります。Azure インテグレーションによって使用される Azure VM で Agent を実行している場合、二重に課金されることはありません。
 
-また、Datadog は Azure App Service Plan 内のノードも課金対象ホストとしてカウントします。Shared、Dynamic または Free ティアの App Service Plans にはノード数が関連付けられておらず、Datadog の請求に影響しないことに注意してください。
+また、Datadog は Azure App Service Plan 内のノードも課金対象ホストとしてカウントします。**注**: Shared、Dynamic または Free ティアの App Service Plans にはノード数が関連付けられておらず、Datadog の請求には影響しません。
 Azure インテグレーションは、毎月の請求に影響を与えることなく、他のすべての Azure リソース (Azure SQL DB、Azure Redis Cache、Azure Load Balancer など) のメトリクスを収集します。
 
 ## Azure VM の除外

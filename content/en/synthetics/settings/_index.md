@@ -29,7 +29,7 @@ On the [Synthetic Monitoring Settings page][1], you can adjust the following set
 
 ## Global variables
 
-Global variables can be used in [single][5] and [multistep API tests][12] as well as [browser tests][6] of your test suite. To create a global variable, go to the [Global Variables][7] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
+Global variables can be used in [single][3] and [multistep API tests][4] as well as [browser tests][5] of your test suite. To create a global variable, go to the [Global Variables][6] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
 
 Choose the type of variable you want to create:
 
@@ -44,7 +44,6 @@ Choose the type of variable you want to create:
 
 {{< img src="synthetics/settings/variable_value.png" alt="Global Variable Specify Value"  style="width:100%;">}}
 
-[1]: /account_management/rbac/permissions/
 {{% /tab %}}
 
 {{% tab "Create From HTTP Test" %}}
@@ -84,20 +83,19 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
-**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][2].
+**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][1].
 
-[1]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[2]: /synthetics/guide/browser-tests-totp
 
+[1]: /synthetics/guide/browser-tests-totp
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][13]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][8]. 
 
-If you have access to the [custom role feature][14], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
+If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
 
 #### Restrict access
 
@@ -110,7 +108,7 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ### Default locations
 
-Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][12] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][4] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
 ### APM integration for browser tests
 
@@ -124,9 +122,9 @@ If the endpoint is being traced and allowed, your browser test results are autom
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][13]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][8]. 
 
-If you have access to the [custom role feature][14], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
+If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
 
 ## Further Reading
 
@@ -134,15 +132,12 @@ If you have access to the [custom role feature][14], add your user to a custom r
 
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations/
-[3]: /account_management/users/default_roles/
-[4]: /account_management/rbac/permissions/
-[5]: /synthetics/api_tests/#use-global-variables
-[6]: /synthetics/browser_tests/#use-global-variables
-[7]: https://app.datadoghq.com/synthetics/settings/variables
-[8]: /help/
-[9]: /synthetics/api_tests/
+[3]: /synthetics/api_tests/#use-global-variables
+[4]: /synthetics/multistep#variables
+[5]: /synthetics/browser_tests/#use-global-variables
+[6]: https://app.datadoghq.com/synthetics/settings/variables
+[7]: /account_management/users/default_roles/
+[8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: /synthetics/multistep/
 [11]: /synthetics/browser_tests
-[12]: /synthetics/multistep#variables
-[13]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[14]: /account_management/rbac/?tab=datadogapplication#custom-roles

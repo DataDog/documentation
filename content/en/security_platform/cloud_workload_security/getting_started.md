@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
   text: "Learn more about Datadog Cloud Runtime Security"
+- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
+  tag: "Blog"
+  text: "How to detect security threats in your systems' Linux processes"
 ---
 
 ## Overview

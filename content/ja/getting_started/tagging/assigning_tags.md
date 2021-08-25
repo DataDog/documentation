@@ -340,7 +340,7 @@ SLO を作成する場合は、ステップ 3 *Add name and tags* でタグを�
 [6]: /ja/api/v1/monitors/#edit-a-monitor
 [7]: /ja/api/v1/tags/#add-tags-to-a-host
 [8]: /ja/api/v1/tags/#update-host-tags
-[9]: /ja/api/v1/tracing/
+[9]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [10]: /ja/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /ja/api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}

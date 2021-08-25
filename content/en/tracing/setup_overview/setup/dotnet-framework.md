@@ -25,7 +25,7 @@ further_reading:
     text: "Runtime metrics"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
-    text: "Microsoft Azure App Services extension"
+    text: "Microsoft Azure App Service extension"
   - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
@@ -47,14 +47,17 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+### Supported .NET Framework runtimes
+The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. 
+
+For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
 ### Automatic instrumentation
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
 </div>
 
 Follow these instructions to begin tracing .NET applications:
@@ -139,15 +142,14 @@ Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" 
 ## Custom instrumentation
 
 <div class="alert alert-warning">
-  <strong>Note:</strong>  If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
-
 1. Add the `Datadog.Trace` [NuGet package][5] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, see [.NET Custom Instrumentation][6].
+For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation documentation][6].
 
 ## Configuration
 
@@ -159,7 +161,7 @@ The .NET Tracer has configuration settings which you can set by any of these met
 
 {{% tab "Environment variables" %}}
 
-To configure the Tracer using environment variables, set the variables before launching the instrumented application.
+To configure the tracer using environment variables, set the variables before launching the instrumented application.
 
 For example:
 
@@ -229,14 +231,14 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
 
 {{% tab "JSON file" %}}
 
-To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key-value pair for each setting. For example:
+To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
 
 ```json
 {
-    "DD_TRACE_AGENT_URL": "http://localhost:8126",
-    "DD_ENV": "prod",
-    "DD_SERVICE": "MyService",
-    "DD_VERSION": "abc123",
+  "DD_TRACE_AGENT_URL": "http://localhost:8126",
+  "DD_ENV": "prod",
+  "DD_SERVICE": "MyService",
+  "DD_VERSION": "abc123",
 }
 ```
 
@@ -244,30 +246,29 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 {{< /tabs >}}
 
-## Configuration settings
+### Configuration settings
 
 Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `AgentUri`) when changing settings in code.
 
-### Unified Service Tagging
+#### Unified Service Tagging
 
-To use [Unified Service Tagging][7], configure the following settings for your services.
-
+To use [Unified Service Tagging][7], configure the following settings for your services:
 
 `DD_ENV`
 : **TracerSettings property**: `Environment`<br>
-If specified, adds the `env` tag with the specified value to all generated spans. Added in version 1.17.0
+If specified, adds the `env` tag with the specified value to all generated spans. Added in version 1.17.0.
 
 `DD_SERVICE`
 : **TracerSettings property**: `ServiceName`<br>
-If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). Added in version 1.17.0
+If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (IIS application name, process entry assembly, or process name). Added in version 1.17.0.
 
 `DD_VERSION`
 : **TracerSettings property**: `ServiceVersion`<br>
-If specified, sets the version of the service. Added in version 1.17.0
+If specified, sets the version of the service. Added in version 1.17.0.
 
-### Additional optional configuration
+#### Optional configuration
 
-The configuration variables are available for both automatic and custom instrumentation:
+The following configuration variables are available for both automatic and custom instrumentation:
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `AgentUri`<br>
@@ -299,8 +300,16 @@ Added in version 1.18.3. Response header support and entries without tag names a
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
-If specified, adds all of the specified tags to all generated spans. Added in version 1.17.0.<br>
-**Example**: `layer:api,team:intake`
+If specified, adds all of the specified tags to all generated spans. <br>
+**Example**: `layer:api,team:intake` <br>
+Added in version 1.17.0.
+
+`DD_TRACE_LOG_DIRECTORY`
+: Sets the directory for .NET Tracer logs. <br>
+**Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOG_PATH`
+: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
@@ -310,28 +319,17 @@ If specified, adds all of the specified tags to all generated spans. Added in ve
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
-### Automatic instrumentation optional configuration
+#### Automatic instrumentation optional configuration
 
-The configuration variables are available **only** when using automatic instrumentation:
+The following configuration variables are available **only** when using automatic instrumentation:
 
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` or `false`.<br>
 **Default**: `true`
 
-`DD_TRACE_LOG_DIRECTORY`
-: Sets the directory for .NET Tracer logs.<br>
-**Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
-
-`DD_TRACE_LOG_PATH`
-: Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
-
-`DD_DISABLED_INTEGRATIONS`
-: **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.
-
 `DD_HTTP_CLIENT_ERROR_STATUSES`
-: Sets status code ranges that will cause HTTP client spans to be marked as errors.<br>
+: Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
 **Default**: `400-499`
 
 `DD_HTTP_SERVER_ERROR_STATUSES`
@@ -339,17 +337,21 @@ Sets a list of integrations to disable. All other integrations remain enabled. I
 **Default**: `500-599`
 
 `DD_RUNTIME_METRICS_ENABLED`
-: Enables .NET runtime metrics. Valid values are `true` or `false`. Added in version 1.23.0.<br>
-**Default**: `false`
+: Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
+**Default**: `false`<br>
+Added in version 1.23.0.
 
 `DD_TRACE_ADONET_EXCLUDED_TYPES`
 : **TracerSettings property**: `AdoNetExcludedTypes` <br>
 Sets a list of `AdoNet` types (for example, `System.Data.SqlClient.SqlCommand`) that will be excluded from automatic instrumentation.
 
-
-### Disable integration configuration
+#### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
+
+`DD_DISABLED_INTEGRATIONS`
+: **TracerSettings property**: `DisabledIntegrationNames` <br>
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
@@ -358,7 +360,7 @@ Enables or disables a specific integration. Valid values are: `true` or `false`.
 
 #### Experimental features
 
-The configuration variables are for features that are available for use but may change in future releases.
+The following configuration variables are for features that are available for use but may change in future releases.
 
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0.<br>

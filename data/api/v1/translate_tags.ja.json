@@ -61,7 +61,7 @@
   },
   "logs-pipelines": {
     "name": "ログパイプライン",
-    "description": "パイプラインとプロセッサは受信ログを操作し、クエリを簡単にするためにそれを解析して構造化属性に変換します。\n\n- 現在 UI で構成されているパイプラインとプロセッサの一覧については、[パイプラインコンフィギュレーションページ](https://app.datadoghq.com/logs/pipelines)を参照してください。\n\n- プロセッサに関する追加の API 関連情報は、[プロセッサのドキュメント](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor)にあります。\n\n- パイプラインの詳細については、[パイプラインのドキュメント](https://docs.datadoghq.com/logs/processing)を参照してください。\n\n**注:**\n\nこれらのエンドポイントは管理者ユーザーのみが利用できます。\n管理者が作成したアプリケーションキーを使用してください。\n\n**Grok パース規則は JSON 出力に影響を与える場合があり、\nリクエスト内で使用する前に、返されたデータが構成済みである必要があります。**\nたとえば、別のリクエスト本文のリクエスト\nから返されたデータを使用していて、スペースに `\\s` のような\n正規表現パターンを使用するパース規則がある場合、\nすべてのエスケープしたスペースを `%{space}` と構成して\n本文データに使用する必要があります。"
+    "description": "パイプラインとプロセッサは受信ログを操作し、クエリを簡単にするためにそれを解析して構造化属性に変換します。\n\n- 現在 UI で構成されているパイプラインとプロセッサの一覧については、[パイプラインコンフィギュレーションページ](https://app.datadoghq.com/logs/pipelines)を参照してください。\n\n- プロセッサに関する追加の API 関連情報は、[プロセッサのドキュメント](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor)にあります。\n\n- パイプラインの詳細については、[パイプラインのドキュメント]((https://docs.datadoghq.com/logs/log_configuration/pipelines)を参照してください。\n\n**注:**\n\nこれらのエンドポイントは管理者ユーザーのみが利用できます。\n管理者が作成したアプリケーションキーを使用してください。\n\n**Grok パース規則は JSON 出力に影響を与える場合があり、\nリクエスト内で使用する前に、返されたデータが構成済みである必要があります。**\nたとえば、別のリクエスト本文のリクエスト\nから返されたデータを使用していて、スペースに `\\s` のような\n正規表現パターンを使用するパース規則がある場合、\nすべてのエスケープしたスペースを `%{space}` と構成して\n本文データに使用する必要があります。"
   },
   "metrics": {
     "name": "メトリクス",
@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "モニター",
-    "description": "[モニター](https://docs.datadoghq.com/monitors)を使用すると、気になるメトリクスまたはチェックを監視して、定義されたしきい値を超えたときにチームに通知することができます。\nモニターの作成方法については、モニターの作成ページを参照してください。"
+    "description": "[モニター](https://docs.datadoghq.com/monitors)を使用すると、気になるメトリクスまたはチェックを監視して、定義されたしきい値を超えたときにチームに通知することができます。\n詳しくは、[モニターの作成](https://docs.datadoghq.com/monitors/monitor_types/)ページを参照してください。"
   },
   "notebooks": {
     "name": "ノートブック",
@@ -89,7 +89,7 @@
   },
   "service-checks": {
     "name": "サービスのチェック",
-    "description": "サービスチェックエンドポイントを使用すると、モニターで使用するためにチェックステータスを投稿できます。\nサービスチェックメッセージは 500 文字に制限されています。\n500 文字を超えるメッセージでチェックが投稿された場合、最初の 500 文字のみが表示されます。\n\n- [サービスチェックモニターの詳細をご覧ください。][1]\n- [プロセスチェックモニターの詳細をご覧ください。][2]\n- [ネットワークチェックモニターの詳細をご覧ください。][3]\n- [カスタムチェックモニターの詳細をご覧ください。][4]\n- [サービスチェックとステータスコードの詳細をご覧ください。][5]\n\n[1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
+    "description": "サービスチェックエンドポイントを使用すると、モニターで使用するためにチェックステータスを投稿できます。\nサービスチェックメッセージは 500 文字に制限されています。\n500 文字を超えるメッセージでチェックが投稿された場合、最初の 500 文字のみが表示されます。\nメッセージは、Critical または Warning のステータスのチェックに制限されます。\n\n- [サービスチェックモニターの詳細をご覧ください。][1]\n- [プロセスチェックモニターの詳細をご覧ください。][2]\n- [ネットワークチェックモニターの詳細をご覧ください。][3]\n- [カスタムチェックモニターの詳細をご覧ください。][4]\n- [サービスチェックとステータスコードの詳細をご覧ください。][5]\n\n[1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
   },
   "service-dependencies": {
     "name": "サービスの依存関係",
@@ -122,10 +122,6 @@
   "timeboards": {
     "name": "タイムボード",
     "description": "このエンドポイントは旧バージョンです。代わりに、[新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/#dashboards)を使用してください。"
-  },
-  "tracing": {
-    "name": "トレーシング",
-    "description": "[Datadog を使用したトレース](https://docs.datadoghq.com/tracing)および [APM 用語](https://docs.datadoghq.com/tracing/visualization/services_list)の詳細をご覧ください。\n\nトレーシング API は、サービス側の API というよりはむしろ Agent の API です。\nトレースをローカルエンドポイント `http://localhost:8126/v0.3/traces` に送信して、それを Agent が Datadog に転送できるようにします。"
   },
   "usage-metering": {
     "name": "使用料のメータリング",

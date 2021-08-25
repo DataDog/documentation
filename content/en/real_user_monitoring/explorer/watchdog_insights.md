@@ -90,4 +90,3 @@ In the **full side panel** view, you can see a list of RUM events that contain t
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
 [3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 [4]: /real_user_monitoring/explorer/?tab=facets#event-side-panel
-[5]: https://docs.datadoghq.com/help

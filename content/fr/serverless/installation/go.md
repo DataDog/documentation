@@ -46,9 +46,9 @@ go get github.com/DataDog/datadog-lambda-go
 
     func main() {
       // Wrap your lambda handler like this
-      lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+      lambda.Start(ddlambda.WrapFunction(myHandler, nil))
       /* OR with manual configuration options
-      lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+      lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
         BatchInterval: time.Second * 15
         APIKey: "my-api-key",
       }))
@@ -89,7 +89,7 @@ import (
 
 func main() {
   // Inclure la fonction handler dans un wrapper
-  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
 }
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {

@@ -78,7 +78,7 @@ logs:
 
 {{% tab "TCP/UDP" %}}
 
-To gather logs from your `<APP_NAME>` application that forwards its logs with TCP over port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
+To gather logs from your `<APP_NAME>` application that forwards its logs to TCP port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
 ```yaml
 logs:
@@ -89,6 +89,8 @@ logs:
 ```
 
 If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting with UDP.
+
+In the Agent version 7.31.0+, the TCP connection stays open indefinitely even when idle.
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 

@@ -27,7 +27,7 @@ The Change graph shows you the change in a value over the time period chosen:
 
 ## Setup
 
-{{< img src="dashboards/widgets/change/change_setup.png" alt="Change graph Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/change/change_setup.png" alt="Change graph Setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -53,7 +53,7 @@ The Change graph shows you the change in a value over the time period chosen:
 
 #### Display preference
 
-{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/display_preferences.png" alt="Display preferences" style="width:80%;">}}
 
 ##### Global time
 
@@ -67,13 +67,13 @@ Use *Show legend on graph* to toggle the legend display on your widget. Optional
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the change widget is:
 
