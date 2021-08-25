@@ -31,6 +31,7 @@ cache: &cache
   key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
   paths:
     - node_modules/
+    - tmp/.htmltest/
 
 # ================== templates ================== #
 .base_template: &base_template

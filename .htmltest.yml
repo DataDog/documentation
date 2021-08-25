@@ -1,22 +1,17 @@
 DirectoryPath: "public"
-# FilePath: "index.html"
 TestFilesConcurrently: true
 CheckGeneric: false
-CheckInternal: true
-CheckExternal: true
-CheckImages: true
 CheckMailto: false
-CheckInternalHash: false
+CheckInternalHash: true
 CheckScripts: false
 StripQueryString: false
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreEmptyHref: true
-IgnoreExternalBrokenLinks: false
+IgnoreInternalEmptyHash: true
 IgnoreDirs:
   - "[ja|fr]"
 IgnoreURLs:
-  - "[v1|v2]"
-  - "play.google.com"
-  - "LinkedIn.com"
-  - "marketo"
-  - "[app|www].datadoghq.com"
+  - /api/[v1|v2]
+  - play.google.com
+  - LinkedIn.com
+  - "[us1|us3|app|gov|learn|www].datadoghq.com"
