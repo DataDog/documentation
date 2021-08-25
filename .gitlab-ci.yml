@@ -34,7 +34,7 @@ cache: &cache
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:nsollecito-htmltest
   tags:
     - "runner:main"
   except:
@@ -148,15 +148,15 @@ link_checks_preview:
     <<: *cache
     policy: pull
   environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-    DISALLOW_BOTS: "1"
   script:
-    - node ./node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - htmltest
   after_script:
-    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
+    - if [ -e ${CI_PROJECT_DIR}/tmp/.htmltest/htmltest.log ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  artifacts:
+    paths: 
+      - ./tmp/.htmltest/refcache.json
   interruptible: true
 
 missing_tms_preview:

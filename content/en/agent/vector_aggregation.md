@@ -130,4 +130,4 @@ to fill relevant fields according to the expected schema.
 [13]: /agent/kubernetes/?tab=helm
 [14]: https://github.com/timberio/vector/tree/master/distribution/helm/vector-aggregator
 [15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs

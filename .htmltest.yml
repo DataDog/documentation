@@ -1,0 +1,21 @@
+DirectoryPath: "public"
+# FilePath: "index.html"
+TestFilesConcurrently: true
+CheckGeneric: false
+CheckInternal: true
+CheckExternal: true
+CheckImages: false
+CheckMailto: false
+CheckInternalHash: false
+CheckScripts: false
+StripQueryString: false
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreEmptyHref: true
+IgnoreExternalBrokenLinks: false
+IgnoreDirs:
+  - "[v1|v2]"
+IgnoreURLs:
+  - "^.*\\/[v1|v2|ja|fr]\\/.*$"
+  - "^.*play.google.com/?"
+  - "^.*[LinkedIn|marketo](*.).html"
+  - "^[google](*.).html"
