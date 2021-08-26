@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 {{< site-region region="us,eu" >}}
 <div class="alert alert-warning">
-  The Event Stream is being deprecated in favor of the <a href="https://docs.datadoghq.com/events/explorer/">Events Explorer</a>.
+  The Event Stream is being deprecated in favor of the <a href="https://docs.datadoghq.com/events/explorer/">Events Explorer</a>, available as a private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> to request access.
 </div>
 {{< /site-region >}}
 
