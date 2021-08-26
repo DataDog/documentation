@@ -153,19 +153,19 @@ httpClient.send(myLoggingRequest);
 
 **Note**: Add more flow variables into JavaScript from the official [Apigee flow variable documentation][4].
 
+[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[3]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[4]: https://docs.apigee.com/api-platform/reference/variables-reference
 
 {{< /site-region >}}
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][5].
+Need help? Contact [Datadog support][1].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
-[3]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
-[4]: https://docs.apigee.com/api-platform/reference/variables-reference
-[5]: /help/
+[1]: /help/
