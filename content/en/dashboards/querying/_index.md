@@ -14,7 +14,7 @@ further_reading:
 
 Whether you are using metrics, logs, traces, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality. This page describes querying with the graphic editor. Advanced users can create and edit graphs with JSON. To learn more, see [Graphing with JSON][1].
 
-You can query using the graph editor on dashboards/notebooks, or you can use **Quick Graphs** available on any page. Open Quick Graphs by pressing `G` on any page. To learn more, see [Quick Graphs][2].
+You can query using the graph editor on the Dashboards or Notebooks pages, or you can use **Quick Graphs** available on any page. Open Quick Graphs by pressing `G` on any page. To learn more, see the [Quick Graphs Guide][2].
 
 ## Graphing editor
 

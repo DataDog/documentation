@@ -5,36 +5,28 @@ kind: documentation
 
 ## Overview
 
-Quick graphs is a way to graph your data from any page in Datadog. There are three ways to open the Quick graphs editor:
+You can use Quick Graphs to graph your data from anywhere in Datadog. 
 
-* Press `G` on any page
-* The global search (`Cmd+K`) menu
-* The dashboards submenu
+Open the Quick Graphs editor with any of the following:
+
+* Pressing `G` on any page.
+* The global search (`Cmd+K`) menu.
+* The dashboards submenu.
 
 {{< img src="dashboards/guide/quick_graph_editor.png" alt="quick graph editor" style="width:80%;">}}
 
-## Configuring a graph
 
-To configure your graph on using Quick Graphs, follow this process:
+## Graph your data
 
-1. Query data
-    * [Graphing Metrics](#graphing-metrics)
-    * [Graphing Events](#graphing-events)
-2. [Select the visualization](#select-your-visualization)
-3. [Title the graph](#create-a-title)
-4. [Save the graph](#export)
-
-### Query Data
-
-#### Graphing metrics
+### Graphing metrics
 
 To query metrics, follow this process outlined in [Dashboard Querying][1]:
-1. [Choose the metric to graph][1]
-2. [Filter][2]
-3. [Aggregate and rollup][3]
-4. [Apply additional functions][4]
+1. [Choose the metric to graph][1].
+2. [Filter][2].
+3. [Aggregate and rollup][3].
+4. [Apply additional functions][4].
 
-#### Graphing events
+### Graphing events
 This section provides a brief overview of querying event platform data sources such as [Logs][5], [APM][6], [RUM][7], [Security][8], [Events][9], [CI Pipelines][10], [CI Tests][11], and [Findings][12]. Choose the event data source using the dropdown which is defaulted to **Metrics**. 
 
 To query event data, follow this process:
@@ -52,10 +44,9 @@ To query event data, follow this process:
 
 4. **Rollup:** Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
 
-5. **[Apply additional functions][4]** (same as metrics)
+5. **[Apply additional functions][4]** (same as metrics).
 
-### Select your visualization
-
+## Select a visualization
 
 Quick Graphs supports:
 * [Timeseries][13]
@@ -63,11 +54,11 @@ Quick Graphs supports:
 * [Query value][15]
 * [Geomap][16]
 
-### Create a title
+## Give your graph title
 
 If you do not enter a title, one is automatically generated based on your selections. However, it is recommended that you create a title that describes the purpose of the graph.
 
-### Export & Share
+## Export & share
 
 Click **Export** to save your work to a Dashboard or Notebook. You can always come back to the editor to change the graph. If want to share a link directly to your graph without a Dashboard or Notebook, click **Copy to Clipboard**.
 
