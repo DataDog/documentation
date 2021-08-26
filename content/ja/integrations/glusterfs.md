@@ -130,31 +130,26 @@ GlusterFS チェックは [Datadog Agent][2] パッケージに含まれてい�
 {{< get-metrics-from-git "glusterfs" >}}
 
 
-### サービスのチェック
-
-**glusterfs.brick.health**:<br>
-サブボリュームが 'degraded' の場合は `CRITICAL` を返します。'up' の場合は `OK` を返します。
-
-**glusterfs.volume.health**:<br>
-ボリュームが 'degraded' の場合は `CRITICAL` を返します。'up' の場合は `OK` を返します。
-
-**glusterfs.cluster.health**:<br>
-クラスターが 'degraded' の場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
-
 ### イベント
 
 GlusterFS には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "glusterfs" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+
 
 [1]: https://www.redhat.com/en/technologies/storage/gluster
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example
 [4]: https://github.com/gluster/gstatus#install
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: 
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

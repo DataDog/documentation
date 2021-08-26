@@ -79,6 +79,13 @@ proxy:
 
 ##### NO_PROXY 許容値
 
+デフォルトで、`no_proxy`/`NO_PROXY` は Agent HTTP(S) リクエストのエンドポイントに一致する必要があります（Agent のインテグレーションにより実行されたリクエストを除く）。Agent で `NO_PROXY` の値がインテグレーションに使用した同じルール（下記）と一致するようにするため、`no_proxy_nonexact_match` を有効にすることをおすすめします。
+
+```yaml
+no_proxy_nonexact_match: true
+```
+
+Agent のインテグレーション（および `no_proxy_nonexact_match` が有効の場合は Agent 全体）に以下のルールが適用されます。
 * ドメイン名は同じ名称およびすべてのサブドメインに一致します。
   - 例: `datadoghq.com` は `app.agent.datadoghq.com`、`www.datadoghq.com`、`datadoghq.com` に一致しますが、 `www.notdatadoghq.com` は**例外**となります。 
   - 例: `datadoghq` は `frontend.datadoghq`、`backend.datadoghq` に一致しますが、`www.datadoghq.com` および `www.datadoghq.eu` は**例外**となります。 
@@ -91,11 +98,6 @@ proxy:
 * ホスト名
   - 例: `webserver1`
 
-`NO_PROXY` は、Agent HTTP(S) リクエストのエンドポイントに一致する必要があります。Agent で `NO_PROXY` の値がインテグレーションに使用した同じルール（上記）と一致するようにするには、`no_proxy_nonexact_match` を有効にします。
-
-```yaml
-no_proxy_nonexact_match: true
-```
 
 #### 環境変数
 

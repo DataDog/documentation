@@ -9,6 +9,7 @@ aliases:
     - /tracing/guide/agent_obfuscation
     - /tracing/guide/agent-obfuscation
     - /tracing/custom_instrumentation/agent_customization
+    - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
 ---
 ## Overview
 
@@ -261,11 +262,13 @@ DD_APM_REPLACE_TAGS=[
 
 ## Exclude resources from being collected
 
+For an in depth overview of the options to avoid tracing specific resources, see [Ignoring Unwanted Resources][5].
+
 If your services include simulated traffic such as health checks, you may want to exclude these traces from being collected so the metrics for your services match production traffic.
 
 The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . Then create a list of one or more regular expressions, specifying which resources the Agent will filter out based on their resource name.
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][6] for details.
 
 ```text
 ## @param ignore_resources - list of strings - optional
@@ -273,8 +276,6 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 ## All entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 ```
-
-**Note:** The NodeJS Tracer has an additional option for request filtering that is part of the Node Tracer API.  More details can be found [here][6]
 
 ## Submit Traces directly to the Agent API
 
@@ -293,9 +294,9 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[6]: /tracing/custom_instrumentation/nodejs/#request-filtering
-[7]: /api/v1/tracing/
+[5]: /tracing/guide/ignoring_apm_resources/
+[6]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[7]: /tracing/guide/send_traces_to_agent_by_api/
 [8]: /tracing/setup_overview/custom_instrumentation/java/#extending-tracers
 [9]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

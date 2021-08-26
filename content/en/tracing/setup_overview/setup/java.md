@@ -24,6 +24,8 @@ The Java Tracing Library supports all JVMs on all platforms version 7 and higher
 
 All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported in the Java tracer and profiler. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
+When you set up tracing, you're also setting up Continuous Profiler, and you need only [enable Profiler][1] to start receiving profiling data from your app.
+
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
@@ -113,7 +115,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -656,15 +658,14 @@ Java APM has minimal impact on the overhead of an application:
 - No collections maintained by Java APM grow unbounded in memory
 - Reporting traces does not block the application thread
 - Java APM loads additional classes for trace collection and library instrumentation
-- Java APM typically adds no more than a 3% increase in CPU usage
-- Java APM typically adds no more than a 3% increase in JVM heap usage
+- If you observe the Java APM frequently adding substantially more than a 3% increase in CPU or JVM heap usage, in a way that degrades your application's performance, contact [the Support team][20].
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiler/enabling/?tab=java
+[1]: /tracing/profiler/enabling/?code-lang=java
 [2]: /tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
@@ -683,3 +684,4 @@ Java APM has minimal impact on the overhead of an application:
 [17]: /tracing/compatibility_requirements/java#disabling-integrations
 [18]: /integrations/java/?tab=host#metric-collection
 [19]: https://github.com/openzipkin/b3-propagation
+[20]: /help/

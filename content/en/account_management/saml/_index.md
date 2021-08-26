@@ -26,7 +26,6 @@ Here's a two-minute video walkthrough:
 **Notes**:
 
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
-
 - SAML configuration requires [Datadog Administrator][9] access.
 
 ## Configuring SAML
@@ -50,6 +49,7 @@ Here's a two-minute video walkthrough:
     {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file"  >}}
 
 4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
+
 
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}

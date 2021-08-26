@@ -13,8 +13,8 @@ If your application does not have an existing [Datadog integration][1], and you 
 Before you can send events with email, you need a dedicated email address from Datadog:
 
 1. Log in to your [Datadog account][3].
-2. Go to the **Integrations** menu, choose **APIs**.
-3. Expand **Events API emails**.
+2. From the **Account** menu at the bottom left, select **Organization Settings**.
+3. Click the **Events API emails** tab.
 4. Choose the format for your messages from the **Format** dropdown (`Plain text` or `JSON`).
 5. Click the **Create API email** button.
 

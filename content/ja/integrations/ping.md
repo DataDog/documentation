@@ -77,19 +77,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "ping" >}}
 
 
-### サービスのチェック
-
-**`network.ping.can_connect`**:
-
-Agent がターゲットホストと通信できない場合は、`CRITICAL` を返します。ping が成功すると、`OK` を返します。
-
 ### イベント
 
 Ping チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "ping" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://en.wikipedia.org/wiki/Ping_(networking_utility%29
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -102,4 +101,5 @@ Ping チェックには、イベントは含まれません。
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-extras/blob/master/ping/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

@@ -3,15 +3,12 @@ aliases:
   - /ja/xt5-0xp-nsj
   - /ja/security_monitoring/default_rules/xt5-0xp-nsj
   - /ja/security_monitoring/default_rules/critical_binaries
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: 重要なシステムバイナリ
 type: security_rules

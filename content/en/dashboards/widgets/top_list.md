@@ -25,14 +25,14 @@ The top list visualization enables you to display a list of Tag values like `hos
 
 ## Setup
 
-{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="Top List"  style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/toplist_setup.png" alt="Top List" style="width:80%;">}}
 
 ### Configuration
 
 1. Choose the data to graph:
     * Metric: See the [querying][1] documentation to configure a metric query.
-    * Indexed Spans: See [the trace search documentation][2] to configure an Indexed Span query.
-    * Log Events: See [the log search documentation][3] to configure a log event query.
+    * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
+    * Log Events: See the [Log search documentation][3] to configure a log event query.
 
 2. Optional: configure conditional formatting depending on your entries' values.
 
@@ -46,13 +46,13 @@ On screenboards and notebooks, choose whether your widget has a custom timeframe
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
 
 The dedicated [widget JSON schema definition][5] for the top list widget is:
 

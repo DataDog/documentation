@@ -122,7 +122,7 @@ For instance, you can
 NPM automatically maps 
 
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3]. 
-- API calls to AppEngine, Google DNS, Gmail, and other GCP services.
+- API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
 
@@ -166,7 +166,7 @@ Organize and share views of traffic data. Saved Views make debugging faster and 
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to *Edit name*.
 - To share a view: hover over a view in the Saved Views list and click the link icon to *Copy permalink*.
 
-To learn more, see the [Saved Views][4] documentation.
+To learn more, see the [Saved Views][5] documentation.
 
 
 ## Table
@@ -219,4 +219,5 @@ The top of the sidepanel displays common source and destination tags shared by t
 [1]: /logs/search_syntax/
 [2]: /network_monitoring/performance/network_map/
 [3]: /network_monitoring/performance/guide/aws_supported_services/
-[4]: /logs/explorer/saved_views/
+[4]: /network_monitoring/performance/guide/gcp_supported_services/
+[5]: /logs/explorer/saved_views/

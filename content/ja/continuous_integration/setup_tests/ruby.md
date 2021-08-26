@@ -11,102 +11,125 @@ further_reading:
 ---
 ## 互換性
 
-サポートされている CI プロバイダー:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+サポートされている Ruby インタープリター:
+* Ruby >= 2.1
+* JRuby >= 9.2
+
+サポートされているテストフレームワーク:
+* Cucumber >= 3.0
+* RSpec >= 3.0.0
 
 ## 前提条件
 
 [Datadog Agent をインストールして、テストデータを収集します][1]。
 
-## トレースのインストール
+## Ruby トレーサーのインストール
 
 Ruby トレーサーをインストールするには
 
-1. `ddtrace` gem (バージョン 0.50.0 以降) を `Gemfile` に追加します。
+1. `ddtrace` gem を `Gemfile` に追加します。
 
-
-    {{< code-block lang="ruby" >}}
-    source 'https://rubygems.org'
-    gem 'ddtrace', ">=0.50.0"
-    {{< /code-block >}}
+    {{< code-block lang="ruby" filename="Gemfile" >}}
+ソース 'https://rubygems.org'
+gem 'ddtrace', ">=0.51.0"
+{{< /code-block >}}
 
 2. `bundle install` を実行して gem をインストールします
 
 詳細については、[Ruby トレーサーのインストールドキュメント][2]を参照してください。
 
 ## テストのインスツルメンテーション
-### Cucumber
+
+{{< tabs >}}
+{{% tab "Cucumber" %}}
 
 Cucumber インテグレーションでは、`cucumber` フレームワークを使用している場合のシナリオとステップの実行をトレースすることができます。
 
-インテグレーションを有効にするには
+インテグレーションをアクティブ化するには、次のコードをアプリケーションに追加します。
 
-{{< code-block lang="ruby" >}}
+```ruby
 require 'cucumber'
 require 'datadog/ci'
 
-# デフォルトの Cucumber インテグレーションを構成します
 Datadog.configure do |c|
+  # CI でのみテストインスツルメンテーションをアクティブ化します
+  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+
+  # 結果が確実に配信されるようにトレーサーを構成します
   c.ci_mode.enabled = true
-  c.use :cucumber, options
+
+  # テスト中のサービスまたはライブラリの名前
+  c.service = 'my-ruby-app'
+
+  # Cucumber のインスツルメンテーションを有効にします
+  c.use :cucumber
 end
+```
 
-# シナリオからアクティブスパンにタグをアタッチします
-Around do |scenario, block|
-  active_span = Datadog.configuration[:cucumber][:tracer].active_span
-  unless active_span.nil?
-    scenario.tags.filter { |tag| tag.include? ':' }.each do |tag|
-      active_span.set_tag(*tag.name.split(':', 2))
-    end
-  end
-  block.call
-end
-{{< /code-block >}}
+`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+```bash
+DD_ENV=ci bundle exec rake cucumber
+```
 
-| キー | 説明 | デフォルト |
-| --- | ----------- | ------- |
-| `enabled` | Cucumber テストをトレースするかどうかを指定します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
-| `service_name` | `cucumber` インスツルメンテーションに使用されるサービス名を指定します。 | `'cucumber'` |
-| `operation_name` | `cucumber` インスツルメンテーションに使用するオペレーション名を指定します。`trace.#{operation_name}.errors` の形式で、自動のトレースメトリクスの名前を変更したい場合に役立ちます。 | `'cucumber.test'` |
-
-[Cucumber の Ruby トレースライブラリのドキュメント][3]も参照してください。
-
-### RSpec
+{{% /tab %}}
+{{% tab "RSpec" %}}
 
 RSpec インテグレーションでは、`rspec` テストフレームワーク使用時に、グループ単位や個別での例の実行すべてをトレースできます。
 
 インテグレーションを有効にするには、これを `spec_helper.rb` ファイルに追加します。
 
-{{< code-block lang="ruby" >}}
+```ruby
 require 'rspec'
 require 'datadog/ci'
 
-# デフォルトの RSpec インテグレーションを構成します
 Datadog.configure do |c|
+  # CI でのみテストインスツルメンテーションをアクティブ化します
+  c.tracer.enabled = (ENV["DD_ENV"] == "ci")
+
+  # 結果が確実に配信されるようにトレーサーを構成します
   c.ci_mode.enabled = true
-  c.use :rspec, options
+
+  # テスト中のサービスまたはライブラリの名前
+  c.service = 'my-ruby-app'
+
+  # RSpec のインスツルメンテーションを有効にします
+  c.use :rspec
 end
-{{< /code-block >}}
+```
 
-ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
-| キー | 説明 | デフォルト |
-| --- | ----------- | ------- |
-| `enabled` | RSpec テストをトレースするかどうかを指定します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
-| `service_name` | `rspec` インスツルメンテーションに使用されるサービス名を指定します。 | `'rspec'` |
-| `operation_name` | `rspec` インスツルメンテーションに使用するオペレーション名を指定します。`trace.#{operation_name}.errors` の形式で、自動のトレースメトリクスの名前を変更したい場合に役立ちます。 | `'rspec.example'` |
+```bash
+DD_ENV=ci bundle exec rake spec
+```
 
-[RSpec の Ruby トレースライブラリのドキュメント][4]も参照してください。
+{{% /tab %}}
+{{< /tabs >}}
+
+## コンフィギュレーション設定
+
+以下は、`Datadog.configure` ブロックを使用するか、環境変数を使用するコードで、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
+
+`service`
+: テスト中のサービスまたはライブラリの名前。<br/>
+**環境変数**: `DD_SERVICE`<br/>
+**デフォルト**: `$PROGRAM_NAME`<br/>
+**例**: `my-ruby-app`
+
+`env`
+: テストが実行されている環境の名前。<br/>
+**環境変数**: `DD_ENV`<br/>
+**デフォルト**: `none`<br/>
+**例**: `local`、`ci`
+
+次の環境変数を使用して、Datadog Agent の場所を構成できます。
+
+`DD_TRACE_AGENT_URL`
+: `http://hostname:port` の形式のトレース収集用の Datadog Agent URL。<br/>
+**デフォルト**: `http://localhost:8126`
+
+他のすべての [Datadog トレーサーコンフィギュレーション][3]オプションも使用できます。
 
 ## その他の参考資料
 
@@ -114,5 +137,4 @@ end
 
 [1]: /ja/continuous_integration/setup_tests/agent/
 [2]: /ja/tracing/setup_overview/setup/ruby/#installation
-[3]: /ja/tracing/setup_overview/setup/ruby/#cucumber
-[4]: /ja/tracing/setup_overview/setup/ruby/#rspec
+[3]: /ja/tracing/setup_overview/setup/ruby/?tab=containers#configuration

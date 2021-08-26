@@ -21,12 +21,12 @@ Alert values are query values showing the current value of the metric in any mon
 {{< img src="dashboards/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
 
 ## Setup
-{{< img src="dashboards/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup" style="width:80%;">}}
 
 ### Configuration
 
 1. Choose a previously created monitor to graph.
-2. Select the formating to display:
+2. Select the formatting to display:
     * raw value
     * 0/1/2/3 decimals
 3. Select to display:
@@ -42,13 +42,13 @@ Alert values are query values showing the current value of the metric in any mon
 
 Display a custom title for your widget by activating the `Show a Title` check box:
 
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
 
 Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the alert value widget is:
 

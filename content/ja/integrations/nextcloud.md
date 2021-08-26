@@ -66,22 +66,18 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "nextcloud" >}}
 
 
-### サービスのチェック
-
-**`nextcloud.can_connect`**
-
-チェックは次の内容を返します。
-
--  Nextcloud が到達可能な場合は、`OK` を返します。
--  Nextcloud が到達不可能な場合は、`CRITICAL` を返します。
-
 ### イベント
 
 Nextcloud には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "nextcloud" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://nextcloud.com
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -94,4 +90,5 @@ Nextcloud には、イベントは含まれません。
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

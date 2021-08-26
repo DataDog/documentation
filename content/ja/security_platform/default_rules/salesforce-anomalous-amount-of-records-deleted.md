@@ -9,6 +9,7 @@ kind: documentation
 rule_category:
   - ログの検出
 scope: salesforce
+security: attack
 source: salesforce
 tactic: TA0040-impact
 technique: T1485-data-destruction

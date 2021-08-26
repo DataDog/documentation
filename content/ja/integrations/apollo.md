@@ -22,7 +22,7 @@ integration_title: Apollo
 is_public: true
 kind: インテグレーション
 maintainer: sachin@apollographql.com
-manifest_version: 1.2.0
+manifest_version: 1.0.0
 metric_prefix: apollo.
 metric_to_check:
   - apollo.operations.count

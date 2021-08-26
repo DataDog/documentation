@@ -54,18 +54,18 @@ Les utilisateurs disposant de l'autorisation de gestion des accès peuvent attri
 
 1. Accédez à Teams et cliquez sur l'onglet Mappings.
 
-2. Cliquez sur le bouton **New Mapping**. 
+2. Cliquez sur le bouton **New Mapping**.
 
-3. Indiquez la paire key-value du fournisseur d’identité SAML que vous souhaitez associer à un rôle Datadog existant (par défaut ou personnalisé). Par exemple, si vous souhaitez que tous les utilisateurs dont l’attribut `member_of` possède la valeur `Development` soient affectés à un rôle Datadog personnalisé `Devs` : 
+3. Indiquez la paire key-value du fournisseur d’identité SAML que vous souhaitez associer à un rôle Datadog existant (par défaut ou personnalisé). Par exemple, si vous souhaitez que tous les utilisateurs dont l’attribut `member_of` possède la valeur `Development` soient affectés à un rôle Datadog personnalisé `Devs` :
 
     {{< img src="account_management/saml/create_mapping.png" alt="Création d'un mappage SAML pour un rôle Datadog"  >}}
 
-4. Si vous ne l’avez pas déjà fait, activez les mappages en cliquant sur **Enable Mappings**. 
+4. Si vous ne l’avez pas déjà fait, activez les mappages en cliquant sur **Enable Mappings**.
 
-Lorsqu’un utilisateur disposant de l’attribut de fournisseur d’identité spécifié se connecte, il se voit automatiquement attribuer le rôle Datadog. De la même façon, si ce même attribut de fournisseur d’identité est supprimé d’un utilisateur, ce dernier perd ce rôle (sauf si un autre mappage l’ajoute). 
+Lorsqu’un utilisateur disposant de l’attribut de fournisseur d’identité spécifié se connecte, il se voit automatiquement attribuer le rôle Datadog. De la même façon, si ce même attribut de fournisseur d’identité est supprimé d’un utilisateur, ce dernier perd ce rôle (sauf si un autre mappage l’ajoute).
 
 <div class="alert alert-warning">
-  <strong>Important :</strong> si un utilisateur ne correspond à <i>aucun</i> mappage, il perd tous les rôles dont il disposait et ne peut plus se connecter à l'organisation avec SAML. Vérifiez bien les définitions de vos mappages. 
+  <strong>Important :</strong> si un utilisateur ne correspond à <i>aucun</i> mappage, il perd tous les rôles dont il disposait et ne peut plus se connecter à l'organisation avec SAML. Vérifiez bien les définitions de vos mappages.
 </div>
 
 Vous pouvez modifier un mappage en cliquant sur l'icône en forme de crayon, ou le supprimer en cliquant sur l'icône en forme de corbeille. Ces actions affectent uniquement le mappage, et non les attributs du fournisseur d'identité ni les rôles Datadog.
@@ -161,6 +161,6 @@ Lorsque le mode Strict de SAML est activé, tous les utilisateurs doivent se con
 [10]: /fr/account_management/saml/auth0/
 [11]: /fr/account_management/saml/azure/
 [12]: /fr/account_management/saml/google/
-[13]: /fr/account_management/saml/nopassword/
+[13]: /fr/account_management/saml/lastpass/
 [14]: /fr/account_management/saml/okta/
 [15]: /fr/account_management/saml/safenet/

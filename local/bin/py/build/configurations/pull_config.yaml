@@ -38,11 +38,22 @@
     - action: npm-integrations
       branch: main
       globs:
+      # https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go
       - aws/endpoints/defaults.go
 
 - org_name: DataDog
 
   repos:
+  - repo_name: dd-go
+
+    contents:
+
+    - action: npm-integrations
+      branch: prod
+      globs:
+      # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
+      - networks/model/domain/gcp_services.go
+
   - repo_name: dogweb
 
     contents:
@@ -167,7 +178,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - README.md
       options:
@@ -176,7 +187,7 @@
         front_matters:
           title: SaltStack
           kind: documentation
-          dependencies: ["https://github.com/DataDog/datadog-formula/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
 
   - repo_name: dd-trace-rb
     contents:
@@ -568,3 +579,13 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: datadog-agent
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "pkg/config/config_template.yaml"
+      options:
+        file_name: 'agent_config.yaml'
+        output_content: false

@@ -194,15 +194,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "powerdns_recursor" >}}
 
 
-
 ### イベント
 
 PowerDNS Recursor チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "powerdns_recursor" >}}
 
-**powerdns.recursor.can_connect**:<br>
-Agent が Recursor の統計 API に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
