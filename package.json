@@ -71,6 +71,7 @@
         "pa11y": "^5.3.0",
         "picturefill": "3.0.2",
         "popper.js": "1.16.1",
+        "rifraf": "^2.0.3",
         "safe-json-stringify": "^1.2.0",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",

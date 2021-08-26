@@ -53,20 +53,16 @@ Because all search parameters are contained within the URL, you can share your v
 
 ## Search syntax
 
-Events search uses the [logs search syntax][1]: for example, `source:(github OR chef)`. Like logs search, events search includes:
+Events search now uses the [logs search syntax][1].
 
-- Use of both `AND` and `OR` operators
+Like logs search, events search includes:
+- Use of `AND`, `OR` and `-` operators
 - Use of wildcards
 - Escape characters
+- Search tags and facet with `key:value`
 - Search within attributes with the `@` prefix
 
-### Full-text
-
-Full-text search works on all keywords provided in the search query after applying filters. Full-text search looks inside the event text, title, tags, users who commented on the event, hostnames, and devices tied to the event.
-
-### Filters
-
-Target specific event properties using these prefixes:
+Example queries:
 
 `source:(github OR chef)`           
 : Show events from GitHub OR Chef.
@@ -88,6 +84,8 @@ Target specific event properties using these prefixes:
 
 `@evt.name:foo`                
 : Show the events with attribute `evt.name` equals to `foo`.
+
+Refer to the [logs search syntax][1] page for more details.
 
 ### Facets
 
