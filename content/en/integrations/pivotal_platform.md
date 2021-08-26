@@ -173,12 +173,13 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### Notification in case of misconfigured proxy
 
-For Agent v6.12+, when using a [proxy configuration][13] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
+For Agent v6.12+, when using a [proxy configuration][1] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
 
+[1]: /agent/logs/proxy/
 
 {{< /site-region >}}
 
@@ -452,7 +453,6 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [11]: https://github.com/cf-platform-eng/meta-buildpack
 [12]: /tracing/setup/
-[13]: /agent/logs/proxy/
 [14]: /libraries/
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
