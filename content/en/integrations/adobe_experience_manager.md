@@ -38,6 +38,14 @@ Collect Adobe Experience Manager logs to track errors, request response time, an
 
 #### Log collection
 
+{{< site-region region="us3" >}}
+
+Log collection is not supported for this site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
 _Available for Agent version >6.0_
 
 1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
@@ -59,6 +67,9 @@ _Available for Agent version >6.0_
       Change the `path` and `service` parameter values and configure them for your environment.
 
 3. [Restart the Agent][3].
+
+
+{{< /site-region >}}
 
 ## Troubleshooting
 

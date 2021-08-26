@@ -30,6 +30,14 @@ Collect Apigee proxy logs to track errors, response time, duration, latency and 
 
 #### Log collection
 
+{{< site-region region="us3" >}}
+
+Log collection is not supported for this site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
 There are two methods available for collecting Apigee logs:
 
 1. Use Apigee's [JavaScript policy][1] to send logs to Datadog.
@@ -144,6 +152,9 @@ httpClient.send(myLoggingRequest);
 ```
 
 **Note**: Add more flow variables into JavaScript from the official [Apigee flow variable documentation][4].
+
+
+{{< /site-region >}}
 
 ## Troubleshooting
 

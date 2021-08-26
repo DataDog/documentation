@@ -126,6 +126,14 @@ The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for 
 
 #### Log collection
 
+{{< site-region region="us3" >}}
+
+Log collection is not supported for this site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
 ##### Enable
 
 To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
@@ -170,6 +178,9 @@ For Agent v6.12+, when using a [proxy configuration][13] with the Buildpack, a v
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
+
+
+{{< /site-region >}}
 
 ### Build
 
