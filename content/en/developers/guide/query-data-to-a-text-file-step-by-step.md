@@ -5,7 +5,7 @@ aliases:
   - /developers/faq/query-data-to-a-text-file-step-by-step
 ---
 
-This article explains how to set up an environment to make the most of the Datadog API. At the end, including how to pull or push events, metrics, and monitors from [Datadog's public API][1] to a local file.
+This article explains how to set up an environment to make the most of the Datadog API and includes how to pull or push events, metrics, and monitors from [Datadog's public API][1] to a local file.
 
 Prerequisite: Python and `pip` installed on your localhost. Windows users see [Installing Python 2 on Windows][2].
 
@@ -35,7 +35,7 @@ Once the above is complete:
 
 If successful, your data displays in the terminal and a file is created in your folder named `out.txt`.
 
-See additional examples, in the [Datadog API documentation][1].
+See additional examples in the [Datadog API documentation][1].
 
 [1]: /api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win

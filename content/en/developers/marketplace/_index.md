@@ -15,7 +15,7 @@ The Datadog Marketplace is a digital marketplace where Datadog Technology Partne
 ## Join the Datadog partner network
 Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration or create a tile only listing that includes your SaaS or services offering. 
 
-Datadog customers can then access your tile through the Datadog site either through the [Integrations][2] page or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
+Datadog customers can then access your tile through the Datadog site either through the [Integrations page][2] or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
 
 Follow these steps to develop and publish your Integrations page or Marketplace offering: 
 
@@ -101,7 +101,7 @@ Integrations can send the following data to Datadog:
 
 ### Clone the Marketplace repository or fork the integrations-extras repository
 
-Datadog integrations can be developed for either the private [Marketplace repository][9] or open source [integrations-extras repository][10].
+Datadog integrations can be developed for either the private [Marketplace repository][9] or open-source [integrations-extras repository][10].
 
 The process for building an integration is the same for each repository, with Marketplace offerings requiring a few more files and fields (like pricing). Remember to point to the intended repository when you clone and submit your pull request.
 
@@ -184,7 +184,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 #### Manifest
 
 * JSON object including elements for `display_name`, `public_title`, `author`, and more.
-* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][25]
+* More information about `manifest.json` fields can be found in the [Integrations Assets Reference][25].
 * Details on the pricing object are described in the private [Marketplace README][26].
 
 #### Metadata
@@ -210,7 +210,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Code owners
 
-* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See Github's documentation [About code owners][28] for help with syntax.
+* Lives in the shared `.github` directory and defines the individuals or teams that are responsible for code in the repository. See GitHub's documentation [About code owners][28] for help with syntax.
 
 #### Additional Marketplace files
 
@@ -220,13 +220,13 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 Submit a pull request containing your integration assets either to the [Marketplace repository][9], or to [Integrations Extras repository][10]. 
 
-Each repository runs automatic tests to verify that your pull request is in good shape. You can run these same tests locally with the command `ddev validate all`. Once the PR is passing all checks, the Datadog Engineering team reviews to identify blockers to release, and make suggestions around best practices.
+Each repository runs automatic tests to verify that your pull request is in good shape. You can run these same tests locally with the command `ddev validate all`. Once the PR is passing all checks, the Datadog Engineering team reviews to identify blockers to release and makes suggestions around best practices.
 
 If you need access to Azure DevOps for the Marketplace repository, leave a comment in the PR to request access. 
 
 ### Approve tile for release
 
-When the pull-request tile has been approved by the Datadog Engineering and Product teams, your tile will be enabled for your sandbox account. This allows you to validate and view the integration tile in the Datadog Marketplace and make changes before it goes live.
+When the Datadog Engineering and Product teams approve your pull-request, the tile is enabled for your sandbox account. This allows you to validate and view the integration tile in the Datadog Marketplace and make changes before it goes live.
 
 ## Coordinate go-to-market opportunities
 
