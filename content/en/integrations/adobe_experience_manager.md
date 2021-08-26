@@ -54,7 +54,7 @@ _Available for Agent version >6.0_
     logs_enabled: true
     ```
 
-2. Create `adobe.experience.manager.d/conf.yaml` in your [conf.d directory][2] and add the configuration below to start collecting your logs:
+2. Create `adobe.experience.manager.d/conf.yaml` in your [conf.d directory][1] and add the configuration below to start collecting your logs:
 
     ```yaml
     logs:
@@ -66,20 +66,20 @@ _Available for Agent version >6.0_
 
       Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Restart the Agent][3].
+3. [Restart the Agent][2].
 
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/guide/agent-commands/#restart-the-agent
 
 {{< /site-region >}}
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][4].
+Need help? Contact [Datadog support][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: /help/
+[2]: /help/
