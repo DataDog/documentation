@@ -176,7 +176,7 @@ Status corrections are in public beta through the [SLO status corrections API][1
 
 To access SLO status corrections in the UI:
 
-1. Create a new SLO or edit an existing one.
+1. Create a new SLO or click on an existing one.
 2. Navigate to an SLO’s detailed side panel view.
 3. Under the gear icon, select **Correct Status** to access the **Status Corrections** creation modal.
 4. Select the **Time Correction Window**, **Correction Type**, and add **Notes**.
