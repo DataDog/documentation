@@ -658,8 +658,6 @@ Java APM has minimal impact on the overhead of an application:
 - No collections maintained by Java APM grow unbounded in memory
 - Reporting traces does not block the application thread
 - Java APM loads additional classes for trace collection and library instrumentation
-- Java APM typically adds no more than a 3% increase in CPU usage
-- Java APM typically adds no more than a 3% increase in JVM heap usage
 
 
 ## Further Reading
