@@ -38,7 +38,7 @@ export default {
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
-        us3: '10516',
+        us3: 'not supported',
         eu: '443',
         gov: 'not supported'
     },
