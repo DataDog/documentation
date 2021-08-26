@@ -3,6 +3,10 @@ title: Quick Graphs
 kind: documentation
 ---
 
+<div class="alert alert-warning">
+    Quick Graph is currently in beta.
+</div>
+
 ## Overview
 
 You can use Quick Graphs to graph your data from anywhere in Datadog. 
