@@ -381,7 +381,7 @@ to configure the `service` tag only in the configuration of the process check.
 
 Depending on how you build and deploy your AWS Lambda-based serverless applications, you may have several options available for applying the `env`, `service` and `version` tags to metrics, traces and logs.
 
-*Note*: These tags are specified through AWS resource tags instead of environment variables. Specifically, the `DD_ENV`, `DD_SERVICE` and `DD_VERSION` environment variables are not supported.
+*Note*: These tags are specified through AWS resource tags instead of environment variables.
 
 {{< tabs >}}
 
