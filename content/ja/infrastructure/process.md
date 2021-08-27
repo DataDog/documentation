@@ -17,6 +17,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/'
     tag: ブログ
     text: 保存ビューでソフトウェアのパフォーマンスとリソース消費を相関付ける
+  - link: 'https://www.datadoghq.com/blog/process-level-data/'
+    tag: ブログ
+    text: プロセスレベルのアプリとネットワークデータを使用して、より迅速にトラブルシューティングを行います
 ---
 ## はじめに
 
