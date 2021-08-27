@@ -14,7 +14,6 @@ Rate limits can be increased from the defaults by [contacting the Datadog suppor
 Regarding the API rate limit policy:
 
 - Datadog **does not rate limit** on data point/metric submission (see [metrics section][2] for more info on how the metric submission rate is handled). Limits encounter is dependent on the quantity of [custom metrics][3] based on your agreement.
-- The list below is not comprehensive of all rate limits on Datadog API's - if you are experience rate limiting reach out to support for more information about the API's you're using.
 - The rate limit for metric **retrieval** is `100` per hour per organization.
 - The rate limit for event submission is `500,000` events per hour per organization.
 - The rate limit for event aggregation is `1000` per aggregate per day per organization. An aggregate is a group of similar events.
@@ -22,6 +21,9 @@ Regarding the API rate limit policy:
 - The rate limit for the [Log Query API][5] call is `300` per hour per organization. This can be extended on demand.
 - The rate limit for the [Graph a Snapshot API][6] call is `60` per hour per organization. This can be extended on demand.
 - The [Log Configuration API's][7] can be read `84` times per minute per organization for a total of `5040` calls per hour, and can be updated `2` times per minute per organization for a total of `120` calls per hour. This can be extended on demand.
+
+<div class="alert alert-warning">
+The list above is not comprehensive of all rate limits on Datadog API's - if you are experience rate limiting reach out to support for more information about the API's you're using.</div>
 
 | Rate Limit Headers      | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
