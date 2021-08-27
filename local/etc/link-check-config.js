@@ -8,7 +8,7 @@ module.exports = {
         slackChannel: '#guac-ops'
     },
     staging: {
-        serverUrl: 'https://docs-staging.datadoghq.com/',
+        serverUrl: 'https://docs-staging.datadoghq.com/bengl/remove-java-perf-guarantees/',
         slackChannel: '#guac-ops'
     },
     local: {
@@ -22,6 +22,8 @@ module.exports = {
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 5,
         excludedKeywords: [
+            '**/v1/**',
+            '**/v2/**',
             '**/ja/**',
             '**/fr/**',
             '*wtime=*',
@@ -42,7 +44,6 @@ module.exports = {
             '*.txt',
             '*.yaml'
         ],
-        csvUrl:
-            'https://origin-static-assets.s3.amazonaws.com/documentation/brokenlinks/'
+        csvUrl: 'https://origin-static-assets.s3.amazonaws.com/documentation/brokenlinks/'
     }
 };
