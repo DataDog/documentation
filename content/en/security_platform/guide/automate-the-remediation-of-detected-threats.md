@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-[Security Monitoring][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog’s [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL.
+[Security Monitoring][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog’s [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks will initiate any workflow you have defined.
 
 Choose a security scenario below to begin automating remediation.
 
