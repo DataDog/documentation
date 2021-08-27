@@ -41,19 +41,19 @@ To create a custom Agent check, start by installing the [Datadog Agent][1].
       def check(self, instance):
         self.gauge('hello.world', 1)
   ```
-6. [Restart the Agent][3]. Within a minute, you should see a new metric show up in your [Metric Summary page][4] called `hello.world`.
+6. [Restart the Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `hello.world`.
 
 **Note**: The names of the configuration and check files must match. If your check is called `checkvalue.py`, your configuration file *must* be named `checkvalue.yaml`.
 
 ### Results
 
-Within a minute, you should see a new metric show up in your [Metric Summary page][4] called `hello.world` that sends a value of `1`.
+Within a minute, you should see a new metric show up in the [Metric Summary][4] called `hello.world` that sends a value of `1`.
 
 **Note**: When choosing a name for your custom check, you should prefix it with `custom_` to avoid conflict with the name of a preexisting Datadog Agent integrations. For instance, if you have a custom Postfix check, name your check files `custom_postfix.py` and `custom_postfix.yaml` instead of `postfix.py` and `postfix.yaml`.
 
 ### Updating the collection interval
 
-To change the collection interval of your check, use `min_collection_interval` in your `checkvalue.yaml` file. The default value is `15`. For Agent 6,  the `min_collection_interval` must be added at an instance level and configured individually per instance. For example:
+To change the collection interval of your check, use `min_collection_interval` in your `checkvalue.yaml` file. The default value is `15`. For Agent v6, the `min_collection_interval` must be added at an instance level and configured individually per instance. For example:
 
 ```yaml
 init_config:
@@ -138,7 +138,7 @@ A common use case for writing a custom Agent check is that you might want to sen
     instances:
       - ipaddress: 1.2.3.4
   ```
-3. [Restart your Agent][3]. Within a minute, you should see a new metric show up in your [Metric Summary page][4] called `coreapp.update.value` that sends the metrics from your load balancer.
+3. [Restart your Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `coreapp.update.value` that sends the metrics from your load balancer.
 4. [Create a dashboard][6] for this metric.
 
 ## Agent versioning

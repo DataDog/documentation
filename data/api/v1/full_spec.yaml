@@ -5975,6 +5975,7 @@ components:
       - trace-analytics alert
       - slo alert
       - event-v2 alert
+      - audit alert
       example: metric alert
       type: string
       x-enum-varnames:
@@ -5990,6 +5991,7 @@ components:
       - TRACE_ANALYTICS_ALERT
       - SLO_ALERT
       - EVENT_V2_ALERT
+      - AUDIT_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -9541,6 +9543,11 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        configVariables:
+          description: Array of variables used for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
         setCookie:
@@ -10118,12 +10125,13 @@ components:
         value: value
       properties:
         secure:
-          description: Determines if the variable is secure.
+          description: Determines if the value of the variable is hidden.
           type: boolean
         value:
           description: 'Value of the global variable. When reading a global variable,
 
-            the value will not be present if the variable is secure.'
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
           example: example-value
           type: string
       type: object
@@ -10524,7 +10532,7 @@ components:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
         configVariables:
-          description: API tests only - array of variables used for the test.
+          description: Array of variables used for the test.
           items:
             $ref: '#/components/schemas/SyntheticsConfigVariable'
           type: array
@@ -10901,6 +10909,9 @@ components:
     SyntheticsTriggerCITestsResponse:
       description: Object containing information about the tests triggered.
       properties:
+        batch_id:
+          description: The public ID of the batch triggered.
+          type: string
         locations:
           description: List of Synthetics locations.
           items:
@@ -11625,6 +11636,10 @@ components:
       - profiled_host_percentage
       - profiled_container_usage
       - profiled_container_percentage
+      - dbm_host_usage
+      - dbm_host_percentage
+      - dbm_queries_usage
+      - dbm_queries_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -11656,6 +11671,10 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
+      - DBM_HOST_USAGE
+      - DBM_HOST_PERCENTAGE
+      - DBM_QUERIES_USAGE
+      - DBM_QUERIES_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -11743,6 +11762,23 @@ components:
           type: number
         cws_host_usage:
           description: The Cloud Workload Security host usage by tag(s)
+          format: double
+          type: number
+        dbm_host_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_host_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring normalized queries usage
+            by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring normalized queries usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
@@ -12095,6 +12131,35 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/UsageCustomReportsMeta'
+      type: object
+    UsageDBMHour:
+      description: Database Monitoring usage for a given organization for a given
+        hour.
+      properties:
+        dbm_host_count:
+          description: "The total number of Database Monitoring host hours from the
+            start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        dbm_queries_count:
+          description: "The total number of normalized Database Monitoring queries
+            from the start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageDBMResponse:
+      description: Response containing the Database Monitoring usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Database Monitoring
+          items:
+            $ref: '#/components/schemas/UsageDBMHour'
+          type: array
       type: object
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
@@ -12775,6 +12840,16 @@ components:
           description: The date for the usage.
           format: date-time
           type: string
+        dbm_host_top99p:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_count_avg:
+          description: Shows the average of all normalized Database Monitoring queries
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         fargate_tasks_count_avg:
           description: Shows the high-watermark of all Fargate tasks over all hours
             in the current date for all organizations.
@@ -12989,6 +13064,16 @@ components:
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        dbm_host_top99p_sum:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_agg_sum:
+          description: Shows the sum of all distinct Database Monitoring normalized
+            queries over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -13213,6 +13298,16 @@ components:
         cws_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        dbm_host_top99p_sum:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_agg_sum:
+          description: Shows the sum of all distinct Database Monitoring Normalized
+            Queries over all hours in the current month for all organizations.
           format: int64
           type: integer
         end_date:
@@ -19499,6 +19594,8 @@ paths:
 
         - event-v2: `event-v2 alert`
 
+        - audit: `audit alert`
+
 
         #### Query Types
 
@@ -19722,7 +19819,32 @@ paths:
         - **`time_window`**: The time window of the SLO target you wish to alert on.
         Valid options: `7d`, `30d`, `90d`.
 
-        - **`operator`**: `>=` or `>`'
+        - **`operator`**: `>=` or `>`
+
+
+        **Audit Alert Query**
+
+
+        Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available on US1-FED and in closed beta on EU, US3, and US1.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -22497,14 +22619,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Timestamp from which to start querying results.
+      - description: Timestamp in milliseconds from which to start querying results.
         in: query
         name: from_ts
         required: false
         schema:
           format: int64
           type: integer
-      - description: Timestamp up to which to query results.
+      - description: Timestamp in milliseconds up to which to query results.
         in: query
         name: to_ts
         required: false
@@ -22781,14 +22903,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Timestamp from which to start querying results.
+      - description: Timestamp in milliseconds from which to start querying results.
         in: query
         name: from_ts
         required: false
         schema:
           format: int64
           type: integer
-      - description: Timestamp up to which to query results.
+      - description: Timestamp in milliseconds up to which to query results.
         in: query
         name: to_ts
         required: false
@@ -23688,6 +23810,54 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 31
+      x-undo:
+        type: safe
+  /api/v1/usage/dbm:
+    get:
+      description: Get hourly usage for Database Monitoring
+      operationId: GetUsageDBM
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageDBMResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Database Monitoring
+      tags:
+      - Usage Metering
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/fargate:

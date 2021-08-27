@@ -1,5 +1,5 @@
 extends: existence
-message: "Avoid vague link text like '%s' (ignore this error if you have other descriptive words along with '%s')."
+message: "Avoid vague link text like '%s' unless paired with other descriptive text."
 link: 'https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#links'
 ignorecase: true
 scope: link
