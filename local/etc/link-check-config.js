@@ -8,7 +8,7 @@ module.exports = {
         slackChannel: '#guac-ops'
     },
     staging: {
-        serverUrl: 'https://docs-staging.datadoghq.com/bengl/remove-java-perf-guarantees/',
+        serverUrl: 'https://docs-staging.datadoghq.com/',
         slackChannel: '#guac-ops'
     },
     local: {
