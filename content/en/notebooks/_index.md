@@ -19,13 +19,13 @@ further_reading:
 
 Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
-{{< img src="notebooks/demo_notebook.png" alt="demo notebook"  style="width:90%;">}}
+{{< img src="notebooks/demo_notebook.png" alt="demo notebook" style="width:90%;">}}
 
 ## Live collaboration
 
 Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time; indicators also appear beside any cell that another user is currently editing.
 
-{{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks"  style="width:90%;">}}
+{{< img src="notebooks/live_editing.png" alt="live collaboration in notebooks" style="width:90%;">}}
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
@@ -73,7 +73,7 @@ Notebooks support visualizations and text cells.
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
 
-{{< img src="notebooks/data_sources.png" alt="live collaboration in notebooks"  style="width:50%;">}}
+{{< img src="notebooks/data_sources.png" alt="live collaboration in notebooks" style="width:50%;">}}
 
 Graphs are created with the Datadog query editor. Notebooks support:
 
@@ -96,25 +96,6 @@ To insert cells, use the **+** button that appears to the left of the cell. To s
 
 {{< img src="notebooks/export-to-dash.png" alt="Export Notebook graph to Dashboard"  style="width:90%;">}}
 
-### Time frames
-
-By default, all graph cells are linked to the global time frame set in the notebook header.
-
-To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The Notebook URL will update to reflect this new time frame without saving it to the Notebook.
-
-**Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
-
-{{< img src="notebooks/global_time.png" alt="Notebook Time Selector"  style="width:90%;">}}
-
-
-To save this time as the Notebook’s default, click **Update Default**. The reset button will discard your changes to time.
-
-Individual cells can be unlinked from the global time and set to an independent time frame.
-
-{{< img src="notebooks/cell_time.png" alt="Cell Time Selector"  style="width:90%;">}}
-
-To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
-
 ### Full screen
 
 Click on the full screen icon on the right side of the cell to edit with the [graphing editor][10]. Under **Graph your data**, add details like event overlays, markers, and y-axis controls. View and edit the graph JSON directly in the **JSON** tab.
@@ -127,7 +108,7 @@ The following layout options are available by clicking the grid icon on the righ
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
 * **Grouping**: Display one graph per tag value to see small multiples of your visualization.
 
-{{< img src="notebooks/layout_options.png" alt="layout options"  style="width:50%;">}}
+{{< img src="notebooks/layout_options.png" alt="layout options" style="width:50%;">}}
 
 **Note**: Changing any of these settings only affects the targeted cell.
 
@@ -137,11 +118,46 @@ Copy the URL for a specific cell by clicking the chain-link icon on the right si
 
 When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute: a cell's URL remains the same even if it is moved to a new position within the notebook.
 
+## Notebook Settings
+
+### Time frames
+
+By default, all graph cells are linked to the global time frame set in the notebook header.
+
+To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The notebook URL will update to reflect this new time frame without saving it to the notebook.
+
+**Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
+
+{{< img src="notebooks/global_time.png" alt="Notebook Time Selector" style="width:90%;">}}
+
+
+To save this time as the notebook’s default, click **Update Default**. The reset button will discard your changes to time.
+
+Individual cells can be unlinked from the global time and set to an independent time frame.
+
+{{< img src="notebooks/cell_time.png" alt="Cell Time Selector" style="width:90%;">}}
+
+To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
+
+### Graph snapshots
+
+Notebooks can be set to automatically snapshot graphs that might expire. Enable this by clicking **Turn on graph snapshots** in the cog menu of any notebook. Once snapshots are enabled, use the cog menu to view snapshots or turn off automatic snapshotting. Turning off automatic snapshotting will remove access to existing snapshots.
+
+{{< img src="notebooks/view-snapshots.png" alt="Cog menu option to view snapshots" style="width:50%;">}}
+
+ Notebooks with snapshotting enabled will automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots will update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) will remove the snapshot.
+
+ You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
+
+{{< img src="notebooks/snapshot-preview.png" alt="Preview graph snapshot" style="width:90%;">}}
+
+To share a version of your notebook with snapshots, click **View graph snapshots** in the notebook header and copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
+
 ## Sharing Notebooks
 
 Use the **Share** menu in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
 
-{{< img src="notebooks/notebook-export.png" alt="Notebook sharing menu"  style="width:50%;">}}
+{{< img src="notebooks/notebook-export.png" alt="Notebook sharing menu" style="width:50%;">}}
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting (example below).
 
