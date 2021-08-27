@@ -144,6 +144,7 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
+  timeout: 2h
   cache:
     <<: *cache
     policy: pull
@@ -292,6 +293,7 @@ index_internal_doc:
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
+  timeout: 2h
   cache:
     <<: *cache
     policy: pull
