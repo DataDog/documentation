@@ -347,7 +347,7 @@ Set a number of partial spans to flush on. Useful to reduce memory overhead when
 : **Environment Variable**: `DD_TRACE_SPLIT_BY_TAGS`<br>
 **Default**: `null`<br>
 **Example**: `aws.service`<br>
-Used to rename spans to be identified with the corresponding service tag
+Used to rename the service name associated with spans to be identified with the corresponding span tag
 
 `dd.trace.db.client.split-by-instance`
 : **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
