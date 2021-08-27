@@ -10,7 +10,7 @@ further_reading:
 To verify you have access to JMX, test using JConsole or equivalent if possible. If you're unable to connect using JConsole [this article][1] may help to get you sorted. Also, if the metrics listed in your YAML aren't 1:1 with those listed in JConsole you'll need to correct this.
 
 <div class="alert alert-warning">
-For all versions of <strong>Agent v5.32.8 or greater</strong>, the <code>jmxterm</code> JAR is not shipped with the agent. To download and use <code>jmxterm</code>, see the <a href="https://github.com/jiaqi/jmxterm">upstream project</a>. Change <code>/opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar</code> in the examples below to the `jmxterm` JAR path you downloaded from the upstream project.
+For all versions of <strong>Agent v5.32.8 or greater</strong>, the <code>jmxterm</code> JAR is not shipped with the agent. To download and use <code>jmxterm</code>, see the <a href="https://github.com/jiaqi/jmxterm">upstream project</a>. Change <code>/opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar</code> in the examples below to the <code>jmxterm</code> JAR path you downloaded from the upstream project.
 </div>
 
 If you're able to connect using JConsole, run the following:
@@ -153,7 +153,19 @@ $ docker exec -it <AGENT_CONTAINER_NAME> agent status
 ### The 350 metric limit
 
 Datadog accepts a maximum of 350 metrics.
-A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected, but if you need more than 350 metrics, contact [Datadog support][2].
+A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected; but if you need more than 350 metrics, it is possible to increase this limit by modifying the `max_returned_metrics` parameter in your JMX yaml config file. Here is an example:
+
+```yaml
+instances:
+  - host: localhost
+    port: 1234
+    max_returned_metrics: 2000
+```
+
+<div class="alert alert-warning">
+<strong>Important Note:</strong> Modifying the <code>max_returned_metrics</code> parameter can result in increases in custom metrics. <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrategauge#pagetitle">Please refer to this document for more information on custom metrics billing.</a>
+</div>
+
 
 ### Java path
 
