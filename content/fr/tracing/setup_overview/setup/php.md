@@ -424,7 +424,7 @@ Une fois l'installation terminée, redémarrez PHP (PHP-FPM ou le SAPI Apache).
 Pour supprimer le tracer PHP :
 
 1. Pour php-fpm, arrêtez le service php-fpm ou le serveur Web Apache.
-2. Dissociez les fichiers `98-ddtrace.ini` and `99-ddtrace-custom.ini` de votre dossier de configuration PHP.
+2. Supprimez les fichiers `98-ddtrace.ini` et `99-ddtrace-custom.ini` de votre dossier de configuration PHP.
 3. Pour php-fpm, redémarrez le service php-fpm ou le serveur Web Apache.
 
 **Remarque** : si vous utilisez une mise en cache secondaire dans OPcache en définissant le paramètre `opcache.file_cache`, supprimez le dossier de cache.
