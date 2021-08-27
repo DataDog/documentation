@@ -16,7 +16,7 @@ further_reading:
 
 このガイドでは、以下のユースケースに関するダウンタイムの構成方法をご説明します。
 
-* [週末のダウンタイム](#downtime-over-the-week-end)
+* [週末のダウンタイム](#downtime-over-the-weekend)
 * [営業時間外のダウンタイム](#downtime-outside-of-business-hours)
 * [毎月 n 日の定期的なダウンタイム](#recurring-downtime-on-nth-weekday-of-the-month)
 

@@ -1,12 +1,13 @@
 DirectoryPath: "public"
 
 # Speeds things up but may cause errors in some cases
-TestFilesConcurrently: false
+TestFilesConcurrently: true
 
 # General config
 CheckDoctype: false
 CheckGeneric: false
-CheckInternalHash: true
+CheckImages: false
+CheckInternalHash: false
 CheckMailto: false
 CheckMeta: false
 CheckScripts: false
