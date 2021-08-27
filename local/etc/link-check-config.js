@@ -16,6 +16,7 @@ module.exports = {
         slackChannel: '#guac-ops'
     },
     linkCheckOptions: {
+        cacheMaxAge: 21_600_000, // 6 hours
         filterLevel: 3,
         maxSockets: 100,
         excludeExternalLinks: false,
