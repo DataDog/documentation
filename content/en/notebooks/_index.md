@@ -116,9 +116,9 @@ The following layout options are available by clicking the grid icon on the righ
 
 Copy the URL for a specific cell by clicking the chain-link icon on the right side of the cell. Direct linking is available for both visualization and Markdown cells.
 
-When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute: a cell's URL remains the same even if it is moved to a new position within the notebook.
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
-## Notebook Settings
+## Notebook settings
 
 ### Time frames
 
@@ -131,7 +131,7 @@ To view a different time frame, select an option in the global time picker, or s
 {{< img src="notebooks/global_time.png" alt="Notebook Time Selector" style="width:90%;">}}
 
 
-To save this time as the notebook’s default, click **Update Default**. The reset button will discard your changes to time.
+To save this time as the notebook’s default, click **Update Default**. The reset button discards your changes to time.
 
 Individual cells can be unlinked from the global time and set to an independent time frame.
 
@@ -145,7 +145,7 @@ Notebooks can be set to automatically snapshot graphs that might expire. Enable 
 
 {{< img src="notebooks/view-snapshots.png" alt="Cog menu option to view snapshots" style="width:50%;">}}
 
- Notebooks with snapshotting enabled will automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots will update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) will remove the snapshot.
+ Notebooks with snapshotting enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
  You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
 
