@@ -20,13 +20,13 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for SUSE. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+Packages are available for 64-bit x86 architectures. For other architectures, use the source install.
 
 **Note**: SUSE 11 SP4 and above are supported.
 
 ## Commands
 
-In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
+In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -111,7 +111,7 @@ Configuration files for [Integrations][1]:
 
 ## Troubleshooting
 
-[Refer to the dedicated Agent Troubleshooting documentation][3].
+See the [Agent Troubleshooting documentation][3].
 
 ## Working with the embedded Agent
 

@@ -53,7 +53,7 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 datadogagent.datadoghq.com/datadog created
 ```
 
-You can check the state of the `DatadogAgent` ressource with:
+You can check the state of the `DatadogAgent` resource with:
 
 ```shell
 kubectl get -n $DD_NAMESPACE dd datadog

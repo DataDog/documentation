@@ -6,7 +6,7 @@ aliases:
     - /logs/parsing/
     - /logs/processing/parsing
 further_reading:
-- link: "/logs/processing/processors/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
@@ -61,6 +61,7 @@ After processing, the following structured log is generated:
 * Properties with null or empty values are not displayed.
 * A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][1].
 * The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
+* Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
 
 ### Matcher and filter
 
@@ -198,8 +199,8 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 `url`
 : Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].
 
-[1]: /logs/processing/processors/#user-agent-parser
-[2]: /logs/processing/processors/#url-parser
+[1]: /logs/log_configuration/processors/#user-agent-parser
+[2]: /logs/log_configuration/processors/#url-parser
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -636,4 +637,4 @@ Other examples:
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /logs/processing/processors/#log-date-remapper
+[3]: /logs/log_configuration/processors/#log-date-remapper

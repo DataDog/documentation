@@ -66,9 +66,12 @@ The following instrumentations are disabled by default and can be enabled with t
 
 | Instrumentation         | To Enable 									  |
 | ----------------------- |---------------------------------------------- |
+| JAX-WS		          | `-Ddd.integration.jax-ws.enabled=true`|
 | Mulesoft		          | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true`|
 | Grizzly                 | `-Ddd.integration.grizzly-client.enabled=true`|
 | Grizzly-HTTP            | `-Ddd.integration.grizzly-filterchain.enabled=true`|
+
+**Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
 Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 

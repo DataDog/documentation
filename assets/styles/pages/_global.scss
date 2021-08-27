@@ -173,6 +173,10 @@ code {
     font-family: $font-family-monospace;
 }
 
+h2 code {
+    @include font-size($h3-font-size);
+}
+
 code + code.region-param {
     padding: 0 5px 0 0;
     border-top-left-radius: 0;
@@ -206,6 +210,7 @@ details {
 .code-snippet-wrapper {
     padding-right: 0 !important;
     position: relative;
+    margin-bottom: 24px;
 
     .code-snippet {
         position: relative;
@@ -219,6 +224,11 @@ details {
         &.wrap {
             code {
                 white-space: normal !important;
+            }
+        }
+        &:hover {
+            .code-button-wrapper {
+                opacity: 1;
             }
         }
         .code-button-wrapper {
@@ -244,14 +254,16 @@ details {
             }
         }
     }
-
-    &:hover .code-button-wrapper {
-        opacity: 1;
-    }
 }
 .code-filename-wrapper {
+    background-color: $codesnippet-filename-bg;
+    min-height: 5px;
+
+    &.collapsible {
+        height: 39px;
+    }
+
     .code-filename {
-        background-color: $codesnippet-filename-bg;
         padding: 6px 10px;
         font-size: 14px;
         font-family: RobotoMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
@@ -266,6 +278,27 @@ details {
             border-radius: 0;
         }
     }
+
+    .js-code-block-visibility-toggle {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .chevron {
+        height: 12px;
+        width: 12px;
+    }
+
+    .chevron-up {
+        margin-right: 15px;
+        margin-top: 17px;
+    }
+
+    .chevron-down {
+        margin-right: 14px;
+        margin-top: 11px;
+    }
 }
 
 .code-lang-list-container {
@@ -274,7 +307,7 @@ details {
     &.nav-tabs {
         .nav-item {
             z-index: 1;
-            
+
             &:before {
                 content: none;
             }
@@ -391,7 +424,7 @@ h5 {
     & p a,
     & ol li a,
     & ul li a,
-    & div > a {
+    & .alert a {
         color: #4a4a4a;
         border-bottom: 1px solid $gray-600;
         &:hover {
@@ -960,5 +993,3 @@ dl {
         width: 100%;
     }
 }
-  
-  

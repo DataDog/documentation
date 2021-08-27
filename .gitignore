@@ -47,7 +47,7 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/kubernetes_state_core.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
-!content/en/integrations/tcprtt.md
+!content/en/integrations/tcp_rtt.md
 !content/en/integrations/adobe_experience_manager.md
 !content/en/integrations/pivotal_platform.md
 !content/en/integrations/alcide.md
@@ -168,7 +168,12 @@ __pycache__/
 
 /DataDog-dogweb-*/
 Makefile.config
+
+# data
 data/permissions.json
+data/agent_config.json
+
+agent_config_types_list.txt
 
 static/images/integrations_logos/2020w2.pdf
 

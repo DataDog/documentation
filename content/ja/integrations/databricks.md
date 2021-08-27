@@ -17,6 +17,10 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/databricks/README.md'
 display_name: Databricks
 draft: false
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/databricks-monitoring-datadog/'
+    tag: ブログ
+    text: Datadog を使用した Databricks の監視
 git_integration_title: databricks
 guid: 3e1c7918-f224-46c6-836f-1169857e2564
 integration_id: databricks
@@ -338,6 +342,10 @@ Databricks インテグレーションには、イベントは含まれません
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://databricks.com/

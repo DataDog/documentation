@@ -15,4 +15,7 @@ package.json              @DataDog/corpweb @DataDog/documentation
 # Serverless
 
 /content/en/serverless/                                 @DataDog/serverless-product @DataDog/documentation
-/layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/serverless-product
+/layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/documentation
+
+# Database Management
+/content/en/database_management/                        @DataDog/database-monitoring-app @DataDog/documentation

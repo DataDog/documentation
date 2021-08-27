@@ -638,7 +638,9 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
-### Running tests
+**Note:** If you have environment variables with names corresponding to one of the above reserved variables, your environment variables will be ignored and replaced by the corresponding component parsed from your test `startUrl`.
+
+### Run tests
 
 You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
@@ -677,23 +679,29 @@ npm run datadog-ci-synthetics
 {{% /tab %}}
 {{< /tabs >}}
 
+### Use the testing tunnel
+
+The [@datadog/datadog-ci][2] NPM package also comes with a tunnel functionality allowing you to swiftly trigger Synthetic tests on your internal applications. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog<span class="x x-first x-last">,</span> allowing all test requests sent <span class="x x-first x-last">through</span> the CLI to be <span class="x x-first x-last">automatically </span>routed through the `datadog-ci` client, consequently <span class="x x-first x-last">enabling</span> Datadog to run test on your internal applications.
+
+To learn how to get started using the testing tunnel, see the [Synthetics testing tunnel documentation][5].
+
 ## Visualize test results
 
 ### In your CI
 
 You can see the outcome of test executions directly in your CI as your tests are being executed.
 
-{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:80%;">}}
+{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:100%;">}}
 
 You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
 
-{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:80%;">}}
+{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:100%;">}}
 
 ### In Datadog application
 
-You can also see the results of your tests listed on your Datadog test details page:
+You can also see your CI test results listed in the [CI Results Explorer][6] and on test details pages:
 
-{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result" style="width:80%;">}}
+{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result" style="width:100%;">}}
 
 ## Further Reading
 
@@ -703,3 +711,5 @@ You can also see the results of your tests listed on your Datadog test details p
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /api/v1/synthetics/#get-test
+[5]: /synthetics/testing_tunnel/
+[6]: /synthetics/cicd_testing/ci_results_explorer

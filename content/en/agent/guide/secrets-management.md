@@ -19,11 +19,11 @@ Starting with version 6.12, the secrets management package is generally availabl
 
 Use the `ENC[]` notation to denote a secret as the value of any YAML field in your configuration.
 
-Secrets are supported in any configuration backend (e.g. file, etcd, consul) and environment variables.
+Secrets are supported in any configuration backend, such as file, etcd, consul, and environment variables.
 
 Secrets are also supported in `datadog.yaml`. The agent first loads the main configuration and reloads it after decrypting the secrets. This means that secrets cannot be used in the `secret_*` settings.
 
-Secrets are always strings, i.e. you cannot use them to set an integer or Boolean value.
+Secrets are always strings, you cannot use them to set an integer or Boolean value.
 
 Example:
 

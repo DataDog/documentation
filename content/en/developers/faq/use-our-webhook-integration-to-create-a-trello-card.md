@@ -7,7 +7,7 @@ You can easily use the [webhooks integration][1] to instantly create a Trello ca
 
 This flow uses the Trello REST POST card API endpoint to post an @notification to a relevant Trello list.
 
-## Overview of steps
+## Overview
 
 * Locate your Trello app key and token
 
@@ -17,13 +17,13 @@ This flow uses the Trello REST POST card API endpoint to post an @notification t
 
 ## Getting your Trello app key and token
 
-To get the Trello app key and token, [navigate to Trello's application key page][3]. If you are logged in, you will be able to see the app key immediately.
+Login to Trello to get your [Trello application key and token][3].
 
 **NOTE**: Trello mentions API key in the URL. For this article, API and app keys are one and the same.
 
 {{< img src="developers/faq/developer_api_key.png" alt="developer_api_key"  >}}
 
-To get the token, click the token link (green arrow) above, authorize a token with the Trello account you are currently logged into, and grab the token in the subsequent link:
+To get the token, click the token link (green arrow) above, authorize a token with the Trello account you are logged into, and grab the token in the subsequent link:
 {{< img src="developers/faq/trello_api_key.png" alt="trello_api_key"  >}}
 
 ## Designate the Trello list
@@ -36,7 +36,7 @@ From there, find the value of `idList`:
 
 ## Configure the Webhook
 
-See [the API documentation for Trello cards][4] and Datadog's [webhooks integration][1]
+See the [API documentation for Trello cards][4] and Datadog's [webhooks integration][1]
 
 In the configuration:
 

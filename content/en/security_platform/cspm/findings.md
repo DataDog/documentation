@@ -12,15 +12,9 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us" >}}
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is currently in <a href="https://app.datadoghq.com/security/configuration">public beta</a>.
-</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
+Cloud Security Posture Management is not available in US1-FED or US3.
 </div>
 {{< /site-region >}}
 
@@ -44,7 +38,7 @@ A finding is the primary primitive for a rule evaluation against a resource. Eve
 
 {{< img src="security_platform/cspm/findings/posture-management-overview.png" alt="An overview of the Posture Management Findings page" style="width:100%;">}}
 
-## Triage, correlate, and alert on misconfigurations with Signals
+## Explore your cloud misconfigurations with Findings
 
 Clicking on an individual finding that has **failed** to see details about the misconfigured resource, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 

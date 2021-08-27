@@ -42,7 +42,7 @@ The following measures are available:
 
 Click on a line to view a specific profile:
 
-{{< img src="tracing/profiling/profiling_flamegraph.gif" alt="A specic profile">}}
+{{< img src="tracing/profiling/profiling_flamegraph.gif" alt="A specific profile">}}
 
 The header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
 

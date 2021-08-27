@@ -27,20 +27,20 @@ Supported test frameworks:
 Install the Python tracer by running:
 
 {{< code-block lang="bash" >}}
-pip install "ddtrace>=0.50.0rc4"
+pip install -U ddtrace
 {{< /code-block >}}
 
 For more information, see the [Python tracer installation documentation][2].
 
 ## Instrumenting your tests
 
-To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifiying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="bash" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 {{< /code-block >}}
 
-## Additional configuration settings
+## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
 
@@ -56,17 +56,11 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-The following configuration settings can be passed in as parameters to `tracer.configure()`, or using environment variables:
+The following environment variable can be used to configure the location of the Datadog Agent:
 
-`hostname`
-: The Datadog Agent hostname.<br/>
-**Environment variable**: `DD_AGENT_HOST`<br/>
-**Default**: `localhost`
-
-`port`
-: The Datadog Agent trace collection port.<br/>
-**Environment variable**: `DD_TRACE_AGENT_PORT`<br/>
-**Default**: `8126`
+`DD_TRACE_AGENT_URL`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][3] options can also be used.
 

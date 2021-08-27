@@ -26,7 +26,7 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 {{< programming-lang lang="python" >}}
 
-To enable debug mode for the Datadog Python Tracer, set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
+To enable debug mode for the Datadog Python Tracer, set the environment variable `DD_TRACE_DEBUG=true` when using `ddtrace-run`.
 <p></p>
 
 {{< /programming-lang >}}
@@ -151,6 +151,7 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 |----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
+| Azure App Service | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 

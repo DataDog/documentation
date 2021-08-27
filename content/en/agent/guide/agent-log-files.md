@@ -15,7 +15,7 @@ further_reading:
   text: "Agent commands"
 ---
 
-The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one backup is kept (e.g. `agent.log.1`). If a previous backup exists, it is overwritten during the rollover.
+The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one backup (`agent.log.1`) is kept. If a previous backup exists, it is overwritten during the rollover.
 
 ## Agent log directory
 

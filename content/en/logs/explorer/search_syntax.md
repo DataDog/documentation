@@ -14,7 +14,7 @@ further_reading:
 - link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
-- link: "/logs/processing/"
+- link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
 - link: "/logs/explorer/saved_views/"
@@ -195,7 +195,14 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets"  style="width:80%;">}}
 
 {{< site-region region="us,eu" >}}
+
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
+
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`.
+
+* `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
+ 
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
 <p> </p>
 {{< /site-region >}}
 
@@ -207,7 +214,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing/?tab=matcher
+[1]: /logs/log_configuration/parsing
 [2]: /logs/explorer/facets/
 [3]: /infrastructure/
 [4]: /integrations/#cat-log-collection

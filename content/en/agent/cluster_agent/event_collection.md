@@ -1,5 +1,5 @@
 ---
-title: Event collection
+title: Event Collection
 kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"

@@ -33,7 +33,7 @@ A Datadog custom metric has the properties below. Refer to the [Metrics Introduc
 | Property         | Description                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | The [name of your metric](#naming-custom-metrics).                                                                                                                  |
-| `<METRIC_VALUE>` | The value of your metric. **Note**: Metric values must be 32-bit.                                                                                                                                 |
+| `<METRIC_VALUE>` | The value of your metric. **Note**: Metric values must be 32-bit. Values should not reflect dates or timestamps.                                                                                                                                |
 | `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than ten minutes in the future or more than one hour in the past. |
 | `<TAGS>`         | The set of tags associated with your metric.                                                                                                                 |
 | `<METRIC_TYPE>`  | The type of your metric. See the [metric type documentation][8].                                                                                             |
@@ -59,6 +59,9 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
+    {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
+    {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
 You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][12] to submit your custom metrics

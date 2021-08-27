@@ -1,4 +1,0 @@
----
-title: Tracing
-headless: true
----

@@ -25,7 +25,8 @@
                     "real_user_monitoring",
                     "developers",
                     "account_management",
-                    "synthetics"
+                    "synthetics",
+                    "database_monitoring"
                 ]
             },
             "tags": ["faq"],
@@ -46,7 +47,8 @@
                     "network_monitoring/devices",
                     "serverless",
                     "real_user_monitoring",
-                    "developers"
+                    "developers",
+                    "database_monitoring"
                 ],
                 "localisation": ["", "/fr", "/ja"]
             },
@@ -97,6 +99,7 @@
                 "section": [
                     "account_management",
                     "agent",
+                    "continuous_integration",
                     "dashboards",
                     "developers",
                     "events",
@@ -113,7 +116,8 @@
                     "synthetics",
                     "tracing",
                     "serverless",
-                    "watchdog"
+                    "watchdog",
+                    "database_monitoring"
                 ]
             },
             "tags": ["docs"],

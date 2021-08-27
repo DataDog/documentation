@@ -1,0 +1,33 @@
+{{ $dot := . }}
+<div class="logs-containers network-layers">
+    <div class="container cards-dd col-num-5">
+        <div class="card-deck">
+            <a class="card" href="/synthetics/api_tests/http_tests">
+                <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/http-test1.png" "class" "img-fluid" "alt" "HTTP" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/synthetics/api_tests/ssl_tests">
+                <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/ssl-test1.png" "class" "img-fluid" "alt" "SSL" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/synthetics/api_tests/tcp_tests">
+                <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/tcp-test1.png" "class" "img-fluid" "alt" "TCP" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/synthetics/api_tests/dns_tests">
+                <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/dns-test1.png" "class" "img-fluid" "alt" "DNS" "width" "400") }}
+                </div>
+            </a>
+            <a class="card" href="/synthetics/api_tests/icmp_tests">
+                <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test2.png" "class" "img-fluid" "alt" "ICMP" "width" "400") }}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<br>

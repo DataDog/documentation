@@ -8,6 +8,12 @@ further_reading:
   - link: /tracing/
     tag: Documentation
     text: APM と分散型トレーシング
+  - link: 'https://www.datadoghq.com/blog/modern-frontend-monitoring/'
+    tag: ブログ
+    text: シングルページアプリケーションの監視を開始する
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: ガイド
+    text: クロスプロダクト相関で容易にトラブルシューティング。
 ---
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM とトレース"  style="width:100%;">}}
 
@@ -42,7 +48,9 @@ datadogRum.init({
 })
 ```
 
-**注**: `allowedTracingOrigins` は Javascript 文字列と正規表現を受け入れます。
+**注**: `allowedTracingOrigins` は、`<scheme> "://" <hostname> [ ":" <port> ]` と定義された、ブラウザアプリケーションにより呼び出された呼び出し元と一致する Javascript 文字列および正規表現を受け入れます。
+
+<div class="alert alert-info">ブラウザ SDK の初期化後に生成されたリクエストには、エンドツーエンドのトレーシングを利用できます。初めの HTML 文書のエンドツーエンドトレースおよび始めのブラウザリクエストはサポートされません。</div>
 
 [1]: /ja/real_user_monitoring/browser/
 {{% /tab %}}
@@ -95,7 +103,7 @@ let session =  URLSession(
 {{% /tab %}}
 {{< /tabs >}}
 
-## サポートされているライブラリ
+## サポートされるライブラリ
 
 以下の Datadog トレーシングライブラリがサポートされています。
 
@@ -113,13 +121,23 @@ let session =  URLSession(
 ## RUM リソースはどのようにトレースにリンクされていますか？
 Datadog は、分散型トレーシングプロトコルを使用し、以下の HTTP ヘッダーを設定します。
 
-| ヘッダー                         | 説明                                                                                            |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `x-datadog-trace-id `            | Real User Monitoring SDK から生成されます。Datadog がトレースを RUM リソースにリンクできるようにします。   |
-| `x-datadog-parent-id`            | Real User Monitoring SDK から生成されます。Datadog がトレースから最初のスパンを生成できるようにします。 |
-| `x-datadog-origin: rum`          | Real User Monitoring から生成されたトレースが、APM インデックススパン数に影響を与えないようにするため。  |
-| `x-datadog-sampling-priority: 1` | Agent がトレースを維持するようにします。                                                           |  
-| `x-datadog-sampled: 1`           | Real User Monitoring SDK から生成されます。このリクエストがサンプリング用に選択されていることを示します。          |
+
+`x-datadog-trace-id`
+Real User Monitoring SDK から生成されます。Datadog がトレースを RUM リソースにリンクできるようにします。
+
+`x-datadog-parent-id`
+Real User Monitoring SDK から生成されます。Datadog がトレースから最初のスパンを生成できるようにします。
+
+`x-datadog-origin: rum`
+Real User Monitoring から生成されたトレースが、APM インデックススパン数に影響を与えないようにします。
+
+`x-datadog-sampling-priority: 1`
+: Agent がトレースを維持するようにします。
+
+`x-datadog-sampled: 1`
+Real User Monitoring SDK から生成されます。このリクエストがサンプリング用に選択されていることを示します。
+
+**注**: 上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、ご使用のサーバーで [Access-Control-Allow-Headers を構成][16]する必要があります。サーバーは、[プレフライトリクエスト][17]も許可する必要があります (OPTIONS リクエスト)。
 
 ## APM クオータへの影響
 
@@ -127,7 +145,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 
 ## トレースの保持期間
 
-これらのトレースは、[従来の APM トレースと同様に][16]保持されます。
+これらのトレースは、[従来の APM トレースと同様に][18]保持されます。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,4 +164,6 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [14]: /ja/tracing/setup_overview/setup/dotnet-core/
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[16]: /ja/tracing/trace_retention_and_ingestion/
+[16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+[18]: /ja/tracing/trace_retention_and_ingestion/
