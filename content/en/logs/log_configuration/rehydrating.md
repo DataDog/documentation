@@ -25,7 +25,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 2. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
-3. (Optional) **estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
+3. (Optional) **Estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
 
 4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
