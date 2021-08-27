@@ -36,7 +36,7 @@ With a JSON-formatted email, the following fields are controllable:
 * The sender's email address
 * All arguments from the [Datadog Events API][1]
 
-**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event won't show in your event stream.
+**Note**: If your JSON is not properly formatted, or the email is sent without a subject, the event doesn't show in your event stream.
 
 ### Datadog event {#datadog-event-1}
 
