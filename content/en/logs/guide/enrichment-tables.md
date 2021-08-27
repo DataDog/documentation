@@ -12,7 +12,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The Enrichment Tables feature is currently in private beta. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+The Enrichment Tables feature is currently in public beta. There are no billing implications for defining and querying enrichment tables during this period, and there will be ample notice if that changes. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview
