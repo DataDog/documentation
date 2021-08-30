@@ -153,19 +153,9 @@ $ docker exec -it <AGENT_CONTAINER_NAME> agent status
 ### The 350 metric limit
 
 Datadog accepts a maximum of 350 metrics.
-A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected; but if you need more than 350 metrics, it is possible to increase this limit by modifying the `max_returned_metrics` parameter in your JMX yaml config file. Here is an example:
+A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected; but if you need more than 350 metrics, it is possible to increase this limit by modifying a parameter in your JMX config file.
 
-```yaml
-instances:
-  - host: localhost
-    port: 1234
-    max_returned_metrics: 2000
-```
-
-<div class="alert alert-warning">
-<strong>Important Note:</strong> Modifying the <code>max_returned_metrics</code> parameter can result in increases in custom metrics. <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrategauge#pagetitle">Please refer to this document for more information on custom metrics billing.</a>
-</div>
-
+[Please contact Datadog support if you would like to do this.][2]
 
 ### Java path
 
