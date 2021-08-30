@@ -7,6 +7,8 @@ The [Datadog Consul Integration][1] can collect information about your HCP Consu
 HCP Consul is a version of Consul in which the control plane is managed by HashiCorp Cloud Platform. 
 
 ## Setup 
+
+To start collecting your Consul metrics:
 1. Ensure you have set up HCP Consul according to the [documentation][2].
 2. Install the Datadog agent on your [Consul client][3].
 3. Edit the [`consul.d/conf.yaml` file][4], in the `conf.d/` folder at the root of your [Agent's configuration directory][9] and set the `url` configuration option to your Consul client URL.
