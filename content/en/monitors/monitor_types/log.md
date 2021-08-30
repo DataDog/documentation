@@ -21,6 +21,8 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
+*Note:* There is a default limit of 1000 log monitors per account. Reach out to help@datadoghq.com to lift this limit for your account.
+
 ### Define the search query
 
 As you define the search query, the graph above the search fields updates.
