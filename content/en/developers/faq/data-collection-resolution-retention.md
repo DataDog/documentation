@@ -37,7 +37,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 |Synthetic Monitoring|API Test results                              |Datadog Synthetic Monitoring application                                                      |User-defined         |1 min                |Result seen in the UI by user: 15 months <br/> Result not seen in the UI by user: 2 months        |
 |Synthetic Monitoring|Browser Test metrics                          |Datadog Synthetic Monitoring application                                                      |User-defined         |5 min                |15 months                                                                                   |
 |Synthetic Monitoring|Browser Test results                          |Datadog Synthetic Monitoring application                                                      |User-defined         |5 min                |Result seen in the UI by user: 15 months <br/> Result not seen in the UI by user: 2 months        |
-|Synthetic Monitoring|Batches                          |Datadog Synthetic Monitoring application (via calls to [@datadog/datadog-ci synthetics][3] or trigger API endpoints)   |Depending on calls to [@datadog/datadog-ci synthetics][3] or trigger API endpoints         |n/a                |15 days        |
+|Synthetic Monitoring|Batches                                       |Datadog Synthetic Monitoring application (via calls to [@datadog/datadog-ci synthetics][3] or trigger API endpoints)   |Depending on calls to [@datadog/datadog-ci synthetics][3] or trigger API endpoints         |n/a                |15 days        |
 
 [1]: /tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
 [2]: /integrations/faq/cloud-metric-delay/#faster-metrics
