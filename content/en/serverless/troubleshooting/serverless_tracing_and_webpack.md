@@ -26,8 +26,8 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [we
     };
     ```
 
-1. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process.
-2. If you are using `serverless-webpack` and the Serverless Framework, exclude `datadog-lambda-js` and `dd-trace` from your `serverless.yml`.
+3. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process.
+4. If you are using `serverless-webpack` and the Serverless Framework, exclude `datadog-lambda-js` and `dd-trace` from your `serverless.yml`.
 
     **serverless.yml**
 
