@@ -40,21 +40,16 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. If you're a [Datadog Administrator][9], you can access the **SAML Single Sign On Configuration** page. Hover over your username in the left-side navigation menu and click **Configure SAML**.
-
-    {{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" style="width:50%;" >}}
+2. If you're a [Datadog Administrator][9], you can access the **SAML Single Sign On Configuration** page. Hover over your username at the bottom of the left-side navigation menu and click **Configure SAML**.
 
 3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
-    {{< img src="account_management/saml/saml_choose_file.png" alt="Saml choose file"  >}}
-
-4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
-
+4. Download Datadog's [Service Provider metadata][17] to configure your IdP to recognize Datadog as a Service Provider.
 
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
 
-6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][17]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account.
+6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account.
 
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
@@ -62,7 +57,7 @@ Here's a two-minute video walkthrough:
 
 ## Assertions and attributes
 
-When a login occurs, a SAML Assertion containing user authorization is sent from the identity provider to Datadog. 
+When a login occurs, a SAML Assertion containing user authorization is sent from the identity provider to Datadog.
 
 Some important notes on assertions:
 
@@ -71,7 +66,7 @@ Some important notes on assertions:
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Reference [Datadog's SP Metadata][18] for more information.
+* Reference [Datadog's SP Metadata][17] for more information.
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 
@@ -129,7 +124,7 @@ Alternatively, you can create and change mappings of SAML attributes to Datadog 
 
 ## Additional features
 
-The following features can be enabled through the [SAML Configuration dialog][17]: 
+The following features can be enabled through the [SAML Configuration dialog][18]:
 
 **Note:** You must have Admin permissions to see the SAML Configuration dialog.
 
@@ -175,8 +170,8 @@ With SAML strict mode enabled, all users must log in with SAML. An existing user
 [14]: /account_management/saml/nopassword/
 [15]: /account_management/saml/okta/
 [16]: /account_management/saml/safenet/
-[17]: https://app.datadoghq.com/saml/saml_setup
-[18]: https://app.datadoghq.com/account/saml/metadata.xml
+[17]: https://app.datadoghq.com/account/saml/metadata.xml
+[18]: https://app.datadoghq.com/saml/saml_setup
 [19]: https://app.datadoghq.com/account/team
 [20]: /account_management/multi_organization/#setting-up-saml
 [21]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
