@@ -18,7 +18,7 @@ further_reading:
 
 ## Getting started
 
-_Events_ are records of notable changes relevant for managing and troubleshooting IT operations such as code deployments, service health, configuration changes, or monitoring alerts.
+_Events_ are records of notable changes relevant for managing and troubleshooting IT operations, such as code deployments, service health, configuration changes, or monitoring alerts.
 
 [Datadog Events][1] gives you a consolidated interface to search, analyze, and filter events from any source in one place.
 
