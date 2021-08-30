@@ -38,7 +38,6 @@ Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears a
 
 **Note**: Admin rights are required to create, modify, or disable retention filters.
 
-
 [1]: /tracing/trace_retention_and_ingestion/#retention-filters
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
