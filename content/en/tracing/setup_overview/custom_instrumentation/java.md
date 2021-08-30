@@ -316,7 +316,7 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page or in [Ignoring Unwanted Resources][10].
 
 ## Further Reading
 
@@ -331,3 +331,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [8]: https://github.com/openzipkin/b3-propagation
 [9]: /tracing/security
+[10]: /tracing/guide/ignoring_apm_resources/

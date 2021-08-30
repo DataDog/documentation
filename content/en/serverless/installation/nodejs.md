@@ -77,7 +77,6 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 ```
 
 To fill in the placeholders:
-- Replace `<dd_api_key>` with your Datadog API key.
 - Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
 - Replace `<aws_region>` with the AWS region name.
 - Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.

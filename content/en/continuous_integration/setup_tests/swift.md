@@ -27,7 +27,7 @@ Supported platforms:
 There are two ways of installing the testing framework:
 
 {{< tabs >}}
-{{% tab "Using Swift Package Manager" %}}
+{{% tab "Swift Package Manager" %}}
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -43,7 +43,25 @@ There are two ways of installing the testing framework:
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
-{{% tab "Adding the framework directly" %}}
+{{% tab "Cocoapods" %}}
+
+1. Add the `DatadogSDKTesting` dependency to the test targets of your `Podfile`:
+
+{{< code-block lang="ruby" >}}
+target 'MyApp' do
+  # ...
+
+  target 'MyAppTests' do
+    inherit! :search_paths
+    pod 'DatadogSDKTesting'
+  end
+end
+{{< /code-block >}}
+
+2. If you run UITests, also add the dependency to the app running the tests.
+
+{{% /tab %}}
+{{% tab "Framework linking" %}}
 
 1. Download and decompress `DatadogSDKTesting.zip` from the [release][1] page.
 
@@ -63,7 +81,7 @@ There are two ways of installing the testing framework:
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target. You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
@@ -116,50 +134,50 @@ Git metadata and build information is automatically collected using CI provider 
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-The user can also provide Git information by using custom environment variables. This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+The user can also provide Git information by using custom environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored.
+: URL of the repository where the code is stored.<br/>
 **Example**: `git@github.com:MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Branch where this commit belongs.
+: Branch where this commit belongs.<br/>
 **Example**: `develop`
 
 `DD_GIT_TAG`
-: Tag of the commit, if it has one.
+: Tag of the commit, if it has one.<br/>
 **Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
-: Commit SHA.
+: Commit SHA.<br/>
 **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
-: Commit message.
+: Commit message.<br/>
 **Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Author name.
+: Author name.<br/>
 **Example**: `John Doe`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Author email.
+: Author email.<br/>
 **Example**: `john@doe.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Author date. ISO 8601 format.
+: Author date. ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Committer name.
+: Committer name.<br/>
 **Example**: `Jane Doe`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Committer email.
+: Committer email.<br/>
 **Example**: `jane@doe.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Committer date. ISO 8601 format.
+: Committer date. ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 ### Running tests
@@ -197,7 +215,7 @@ For the following configuration settings:
 
 ### Disabling auto-instrumentation
 
-The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables:
+The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)):
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
 : Disables all network instrumentation (Boolean)
@@ -240,7 +258,7 @@ You can also disable or enable specific auto-instrumentation in some of the test
 
 ### Environment variables
 
-You can use `DD_TAGS` environment variable. It must contain pairs of `key:tag` separated by spaces. For example:
+You can use `DD_TAGS` environment variable  (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
@@ -268,6 +286,11 @@ tracer?.activeSpan?.setAttribute(key: "OTelTag", value: "OTelValue")
 {{< /code-block >}}
 
 The test target needs to link explicitly with `opentelemetry-swift`.
+
+
+## Using Info.plist for configuration
+
+Alternatively to setting environment variables, all configuration values can be provided by adding them to the `Info.plist` file of the Test bundle (not the App bundle). If the same setting is set both in an environment variable and in the `Info.plist` file, the environment variable takes precedence.
 
 ## CI provider environment variables
 

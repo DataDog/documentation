@@ -6252,6 +6252,18 @@ api:
         - GetUsageFargate
       unstable: []
       order: 11
+  - name: Get hourly usage for Database Monitoring
+    url: '#get-hourly-usage-for-database-monitoring'
+    identifier: get-hourly-usage-for-database-monitoring
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageDBM
+      unstable: []
+      order: 32
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security

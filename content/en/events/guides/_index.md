@@ -12,7 +12,7 @@ aliases:
     - /developers/events/
 ---
 
-An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to progamatically send events:
+An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to programmatically send events:
 
 {{< whatsnext desc="Submit events to Datadog with:">}}
     {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}

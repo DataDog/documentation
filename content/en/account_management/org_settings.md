@@ -10,7 +10,7 @@ Organization Settings allow you to manage users, groups, RBAC, keys, and tokens.
 #### Users
 
 Read the [user management][2] documentation to add, edit, and disable users.
-#### Service Accounts
+
 
 ### Groups
 

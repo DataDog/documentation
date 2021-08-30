@@ -1,6 +1,6 @@
 {{ $dot := . }}
 <div class="apm-languages">
-  <div class="container cards-dd">
+  <div class="container cards-dd col-num-4">
     <div class="card-deck">
       <a class="card" href="java" >
         <div class="card-body text-center py-2 px-1">
@@ -22,25 +22,22 @@
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby.png" "class" "img-fluid" "alt" "Ruby" "width" "400") }}
         </div>
       </a>
-    </div>
-    </br>
-    <div class="card-deck">
-      <a class="card" href="nodejs" style="width: 25%" >
+      <a class="card" href="nodejs">
         <div class="card-body text-center py-2 px-1">
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/nodejs.png" "class" "img-fluid" "alt" "Node.js" "width" "400") }}
         </div>
       </a>
-      <a class="card" href="dotnet" style="width: 25%" >
+      <a class="card" href="dotnet">
         <div class="card-body text-center py-2 px-1">
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_text.png" "class" "img-fluid" "alt" ".Net" "width" "400") }}
         </div>
       </a>
-      <a class="card" href="php" style="width: 25%" >
+      <a class="card" href="php">
         <div class="card-body text-center py-2 px-1">
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/php.png" "class" "img-fluid" "alt" "PHP" "width" "400") }}
         </div>
       </a>
-      <a class="card" href="opentelemetry" style="width: 25%" >
+      <a class="card" href="opentelemetry">
         <div class="card-body text-center py-2 px-1">
           {{ partial "img.html" (dict "root" . "src" "integrations_logos/otel.png" "class" "img-fluid" "alt" "OpenTelemetry" "width" "400") }}
         </div>
