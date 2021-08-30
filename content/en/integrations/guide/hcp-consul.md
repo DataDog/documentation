@@ -1,4 +1,12 @@
-# Monitoring HCP Consul with Datadog
+---
+title: Monitoring HCP Consul with Datadog
+kind: guide
+further_reading:
+  - link: "integration/consul"
+    tag: "Documentation"
+    text: "Consul integration"
+---
+
 
 The [Datadog Consul Integration][1] can collect information about your HCP Consul environment through a Consul client.
 
