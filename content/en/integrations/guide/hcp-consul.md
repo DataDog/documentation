@@ -19,7 +19,7 @@ Using The Datadog Consul Integration with HCP Consul collects a subset of the Co
 - Network coordinates - inter- and intra-datacenter latencies
 - Cluster health [metrics][8]
 
-[1]: https://docs.datadoghq.com/integrations/consul/?tab=host
+[1]: /integrations/consul/?tab=host
 [2]: https://learn.hashicorp.com/tutorials/cloud/consul-introduction?in=consul/cloud-get-started
 [3]: https://learn.hashicorp.com/tutorials/cloud/consul-client-virtual-machines?in=consul/cloud-get-started
 [4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
