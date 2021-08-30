@@ -137,10 +137,10 @@ CPU Time
 : Shows the time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep is not captured in this profile, see Mutex and Block profile.
 
 Allocations
-: Shows the number of objects allocated by each function in heap memory [during the profiling period][1] (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_objects`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
+: Shows the number of objects allocated by each function in heap memory during the profiling period (default: 60s, see [delta profiles][1]), including allocations which were subsequently freed. Go calls this `alloc_objects`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
 
 Allocated Memory
-: Shows the amount of heap memory allocated by each function [during the profiling period][1] (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
+: Shows the amount of heap memory allocated by each function during the profiling period (default: 60s, see [delta profiles][1]), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
 
 Heap Live Objects
 : Shows the number of objects allocated by each function in heap memory that have not been garbage collected (yet). Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
@@ -149,10 +149,10 @@ Heap Live Size
 : Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Mutex
-: Shows the time functions have been waiting on mutexes [during the profiling period][1] (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile.
+: Shows the time functions have been waiting on mutexes during the profiling period (default: 60s, see [delta profiles][1]). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile.
 
 Block
-: Shows the time functions have been waiting on mutexes and channel operations [during the profiling period][1] (default: 60s). Sleep, GC, Network and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This will tell you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][2] research for more in-depth information.
+: Shows the time functions have been waiting on mutexes and channel operations during the profiling period (default: 60s, see [delta profiles][1]). Sleep, GC, Network and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This will tell you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][2] research for more in-depth information.
 
 Goroutines
 : Shows a snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and shows the number of goroutines they utilize. Applications that are extremely latency sensitive and utilize a large number of goroutines (> 10.000) should be aware that enabling this profile requires O(N) stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][3] research for more in-depth information.
