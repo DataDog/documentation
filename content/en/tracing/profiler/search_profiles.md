@@ -137,16 +137,16 @@ CPU Time
 : Shows the time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep is not captured in this profile, see Mutex and Block profile.
 
 Allocations
-: Shows the number of objects allocated in heap memory by each function [during the profiling period][1] (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.
+: Shows the number of objects allocated by each function in heap memory [during the profiling period][1] (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_objects`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
 
 Allocated Memory
-: Shows the amount of heap memory allocated by each function [during the profiling period][1] (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.
+: Shows the amount of heap memory allocated by each function [during the profiling period][1] (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
 
 Heap Live Objects
-: Shows the number of objects allocated in heap memory by each function, and which objects remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.
+: Shows the number of objects allocated by each function in heap memory that have not been garbage collected (yet). Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
-: Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.
+: Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Mutex
 : Shows the time functions have been waiting on mutexes [during the profiling period][1] (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile.
