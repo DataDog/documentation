@@ -309,8 +309,8 @@ Works for Linux. Set to `true` to retain capabilities on Datadog background thre
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
-: **Default**: `1.0`<br>
-The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions < `0.36.0`, this parameter is `DD_SAMPLING_RATE`.
+: **Default**: `null`<br>
+Sets the trace sampling rate between `0.0` (0%) and `1.0` (100%, recommended). A value of `1.0`, Tracing without Limits™, sends all of your traffic. [Configure the retention][19] within the Datadog app. For versions before `0.36.0`, the sampling rate parameter is `DD_SAMPLING_RATE`.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `null`<br>
@@ -774,3 +774,4 @@ For Apache, run:
 [16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[19]: /tracing/trace_retention_and_ingestion/
