@@ -28,7 +28,7 @@ The key to getting started with dashboards is knowing what kind of questions you
 
 Creating a good dashboard is about bringing the answers to these questions to the surface. Also, it is important not to cram all of those thoughts into the same dashboard. Creating separate dashboards to pinpoint different issues can help you quickly find your answers.
 
-This guide gets you started on a path to creating dashboards. These basic dashboards will help your team talk about things that really matter and get to the bottom of problems quickly.
+This guide gets you started on a path to creating dashboards. These basic dashboards enable team discussion and speed up issue resolution.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ If you haven't already, create a [Datadog account][1]. Install the Agent on a ho
 
 ## Plan
 
-Determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
+Determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
 
 A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good _executive dashboard_ can show that you are working on the most important things, how much a service is costing you, or whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to drill down into the answer.
 
@@ -92,7 +92,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
  - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO summary widget, and group it additional widgets that show details for SLI metrics.
  - **Distributions**: Show, for example, a histogram of number of different types of events in a containerized environment, the number of critical errors in each service, website flow (number of users getting to page 2, page 3, page 4), or latency percentile buckets.
 
-See the [Widgets documentation][5] for more information and examples of setting up these graphs.
+See [Widgets][5] for more information and examples of setting up these graphs.
 
 ## Organize, link, and drill down
 

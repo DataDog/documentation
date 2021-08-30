@@ -13,7 +13,7 @@ further_reading:
 
 {{< whatsnext desc="This section includes the following topics:">}}
 {{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Get Started with the Datadog Agent.{{< /nextlink >}}
-{{< nextlink href="/getting_started/application" >}}<u>Datadog Application</u>: Discover how to use Datadog UI: Dashboards, infrastructure list, maps, etc.{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}<u>Datadog Site</u>: Discover how to use Datadog UI: Dashboards, infrastructure list, maps, etc.{{< /nextlink >}}
 {{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
 {{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
 {{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
