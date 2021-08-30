@@ -155,7 +155,7 @@ $ docker exec -it <AGENT_CONTAINER_NAME> agent status
 Datadog accepts a maximum of 350 metrics.
 A best practice is to limit your metrics to less than 350 by creating filters to refine those metrics collected; but if you need more than 350 metrics, it is possible to increase this limit by modifying a parameter in your JMX config file.
 
-[Please contact Datadog support if you would like to do this.][2]
+[Please contact Datadog support if you would like to increase this limit.][2]
 
 ### Java path
 
