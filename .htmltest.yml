@@ -7,6 +7,7 @@ TestFilesConcurrently: true
 CheckDoctype: false
 CheckGeneric: false
 CheckImages: false
+CheckInternal: true
 CheckInternalHash: false
 CheckMailto: false
 CheckMeta: false
@@ -28,4 +29,5 @@ IgnoreURLs:
   - github.com
   - "[api|app|apt|gov|learn|us1|us3|www|yum].datadoghq.com"
   - "127.0.0.1"
-  
+  - "https://trello.com/app-key"
+  - "https://docs.perimeterx.com"
