@@ -310,7 +310,7 @@ Works for Linux. Set to `true` to retain capabilities on Datadog background thre
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `null`<br>
-Sets the trace sampling rate between `0.0` (0%) and `1.0` (100%, recommended). `1.0` or Tracing without Limits™, allows you to send all of your traffic and retention can be [configured within the Datadog app][19]. For versions < `0.36.0`, the sampling rate parameter is `DD_SAMPLING_RATE`.
+Sets the trace sampling rate between `0.0` (0%) and `1.0` (100%, recommended). A value of`1.0`, Tracing without Limits™, sends all of your traffic. [Configure the retention][19] within the Datadog app. For versions before `0.36.0`, the sampling rate parameter is `DD_SAMPLING_RATE`.
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `null`<br>
