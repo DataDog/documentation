@@ -57,11 +57,24 @@ Events are now available as a data source in [graph widgets][18]. You can build 
 The new [Monitor Notifications Overview][19] dashboard showcases these new features by analyzing monitor alert trends to help you improve your configuration and reduce alert fatigue.
 
 
-### Generate custom metrics from events
+### Generate custom metrics from events 
 
 [Generate metrics][16] with 15-month retention from any event search query to create and monitor historical events and alerts.
 
 {{< img src="events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+
+### Normalize and enrich events with processing pipelines
+
+A processor run data-structuring actions on events attributes at ingestion.
+Pipelines are composed of one or multiple processors executed sequentially.
+With event processing pipelines, you can:
+- normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][20] everywhere)
+- enrich events with external data saved in an [Enrichment Table][21] (beta). For example, map an internal service name with service directory to enrich events with service ownership, link to dashboard, documentation...
+We are working to support more processors types. For more details contact us.
+
+[Learn more about Processing Pipelines][22]
+
+
 
 [1]: http://app.datadoghq.com/event/explorer
 [2]: /agent/kubernetes/
@@ -82,3 +95,6 @@ The new [Monitor Notifications Overview][19] dashboard showcases these new featu
 [17]: /logs/explorer/search_syntax/
 [18]: /dashboards/widgets/alert_graph/
 [19]: /dash/integration/30532/monitor-notifications-overview
+[20]: /getting_started/tagging/unified_service_tagging/
+[21]: /logs/guide/enrichment-tables/
+[22]: /logs/log_configuration/processors/
