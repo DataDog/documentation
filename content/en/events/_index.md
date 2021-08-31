@@ -75,6 +75,10 @@ We are working to support more processors types. For more details, contact suppo
 
 [Learn more about Processing Pipelines][22]
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: http://app.datadoghq.com/event/explorer
 [2]: /agent/kubernetes/
