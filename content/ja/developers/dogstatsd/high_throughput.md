@@ -27,13 +27,15 @@ DogStatsD を使用して大量のメトリクスを 1 つの Agent に送信す
 
 ### Datadog 公式クライアントを使用する
 
-すべての主要なプログラミング言語に対して Datadog が提供する[公式 DogStatsD クライアント][3]の最新バージョンを使用することをお勧めします。
+DataDog は、すべての主要なプログラミング言語について、[公式 DogStatsD クライアント][3]の最新バージョンを使用することをお勧めします。
 
 ### クライアント側のバッファリングを有効にする
 
 StatsD や DogStatsD のクライアントが、デフォルトで 1 つのデータグラムごとに 1 つのメトリクスを送信する場合がありますが、これによりクライアントやオペレーティングシステム、そして Agent のオーバーヘッドは非常に高くなります。複数のメトリクスを 1 つのダイアグラムにバッファリングできるようにクライアントを作成し、このオプションを有効にすることで問題を著しく改善できます。
 
-バッファリングをサポートする、コミュニティサポートの DogStatsD クライアントを使用している場合、Agent 側のデータごとのバッファサイズ (デフォルトで 8KB、`dogstatsd_buffer_size` を使用して Agent で構成可能) およびネットワーク/OS の最大データグラムサイズを超えない最大データグラムサイズを構成するようにしてください。
+<div class="alert alert-info">
+バッファリングをサポートする、コミュニティサポートの DogStatsD クライアントを使用している場合、Agent 側のデータごとのバッファサイズ (デフォルトで 8KB、<code>dogstatsd_buffer_size</code> を使用して Agent で構成可能) およびネットワーク/OS の最大データグラムサイズを超えない最大データグラムサイズを構成するようにしてください。
+</div>
 
 [DogStatsD が公式にサポートするクライアント][3]の例をご紹介します。
 
@@ -65,15 +67,27 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-以下のコードブロックは、Datadog 公認の Python ライブラリである [datadogpy][1] を使用し、最大 `25` のメトリクスを 1 つのパケットで送信するようバッファリングされた DogStatsD クライアントインスタンスを作成します。
+以下の例では、Datadog の公式 Python ライブラリ [datadogpy][1] を使用して、最小限のパケット数でメトリクスを送信するバッファリングされた DogStatsD クライアントを使用しています。クライアントバージョン v0.43.0 以降では、バッファリングはデフォルトで有効になっており、自動フラッシュはパケットサイズ制限および 300ms (構成可能) ごとに実行されます。
 
 ```python
 from datadog import DogStatsd
 
-with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
-    batch.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
-    batch.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
+dsd = DogStatsd(host="127.0.0.1", port=8125)
+
+# クライアント v0.43.0 を使用している場合、バッファリングはデフォルトで有効になっており、300 ミリ秒ごとに自動フラッシュされます。
+dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
+dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
+dsd.flush()  # Optional manual flush
+
+# v0.43.0 より前のクライアントを使用している場合、バッファリングを使用するにはコンテキストマネージャーが必要です
+with dsd:
+    dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
+    dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
+
+<div class="alert alert-warning">
+  デフォルトでは、Python DogStatsD クライアントインスタンス (<code>statsd</code> グローバルインスタンスを含む) はプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>disable_buffering</code> を <code>True</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、<a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> のドキュメントを参照してください。
+</div>
 
 
 [1]: https://github.com/DataDog/datadogpy
@@ -94,8 +108,10 @@ statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
 statsd.flush(sync: true)
 ```
 
+<div class="alert alert-warning">
+  デフォルトでは、Ruby DogStatsD クライアントインスタンスはプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>single_thread</code> を <code>true</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、GitHub の <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby リポジトリ</a>を参照してください。
+</div>
 
-[1]: https://github.com/DataDog/dogstatsd-ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -265,7 +281,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 #### Kubernetes の sysctl に関するメモ
 
-Kubernetes を使用して Agent および/または DogStatsD をデプロイし、上記のように sysctl を構成する場合、その値の設定はコンテナごとに行う必要があります。ネームスペースを使用した `net.*` sysctl は、ポッドごとに設定できます。コンテナ内の sysctl へのアクセスを許可する方法や値の設定方法については、[Kubernetes 公式ドキュメント][6]を参照してください。
+Kubernetes を使用して Agent や DogStatsD をデプロイしていて、上記のように sysctl を構成する場合は、コンテナごとに値を設定します。`net.*` sysctl にネームスペースが設定されている場合は、ポッドごとに設定できます。[Kubernetes クラスターでの sysctl の使用][6]に関する Kubernetes のドキュメントを参照してください。
 
 ### 適切なパケットサイズを確保する
 
@@ -275,11 +291,15 @@ Kubernetes を使用して Agent および/または DogStatsD をデプロイ�
 
 送信されたパケットが小さすぎる場合、Datadog Agent は複数を一緒にパックして、後でパイプラインでバッチ処理します。公式 DogStatsD クライアントは、メトリクスをグループ化して、パケットあたりのメトリクスの数の比率を最適化できます。
 
-DogStatsD クライアントが `dogstatsd_buffer_size` のサイズのパケットを送信する場合、Datadog Agent が最も最適に動作します。パケットはバッファサイズより大きくしてはなりません。そうでない場合、Agent はパケットをバッファに完全にロードできず、一部のメトリクスが不正になります。DogStatsD クライアントの対応するコンフィギュレーションフィールドを使用します。
+DogStatsD クライアントが `dogstatsd_buffer_size` のサイズのパケットを送信する場合、Datadog Agent が最も最適に動作します。パケットはバッファサイズより大きくしてはなりません。そうでない場合、Agent はパケットをバッファに完全にロードできず、メトリクスが不正になります。DogStatsD クライアントの対応するコンフィギュレーションフィールドを使用します。
 
-UDP に関する注意: UDP パケットは通常 Ethernet および IP レイヤーを通過するため、パケットサイズをネットワーク上の単一の Ethernet フレームよりも小さい値に制限することにより、IP パケットの断片化を回避します。ほとんどの場合、IPv4 ネットワークは 1500 バイトの MTU で構成されているため、この状況では送信パケットのパケットサイズを 1472 に制限する必要があります。
+<div class="alert alert-info">
+  <strong>UDP に関する注意</strong>: UDP パケットは通常 Ethernet および IP レイヤーを通過するため、パケットサイズをネットワーク上の単一の Ethernet フレームよりも小さい値に制限することにより、IP パケットの断片化を回避できます。ほとんどの場合、IPv4 ネットワークは 1500 バイトの MTU で構成されているため、この状況では送信パケットのパケットサイズを 1472 に制限する必要があります。
+</div>
 
-UDS に関する注意: 最高のパフォーマンスを得るには、UDS パケットのサイズが 8192 バイトである必要があります。
+<div class="alert alert-info">
+  <strong>UDS に関する注意</strong>: 最高のパフォーマンスを得るには、UDS パケットサイズを 8192 バイトにする必要があります。
+</div>
 
 ### Agent の最大メモリ使用量を制限する
 
@@ -289,7 +309,9 @@ Agent は、DogStatsD クライアントから送信されたメトリクスの�
 
 最大メモリ使用量を制限するために注意すべきもう 1 つのことは、バッファリングを減らすことです。Agent 内の DogStatsD サーバーのメインバッファは、`dogstatsd_queue_size` フィールドで構成できます (Datadog Agent 6.1.0 以降)。そのデフォルト値の `1024` は、およその最大メモリ使用量である 768MB を引き起こします。
 
-**注**: このバッファを減らすと、パケットドロップの数が増える可能性があります。
+<div class="alert alert-warning">
+  <strong>注</strong>: バッファサイズを小さくすると、パケットドロップの数が増える可能性があります。
+</div>
 
 この例では、DogStatsD の最大メモリ使用量を約 384MB に減らします。
 
@@ -303,7 +325,9 @@ dogstatsd_queue_size: 512
 
 DogStatsD には、どのメトリクスが最も多く処理されたかを把握するのに役立つ統計モードが搭載されています。
 
-**注**: このモードを有効化すると、DogStatsD のパフォーマンスが低下する場合があります。
+<div class="alert alert-warning">
+  <strong>注</strong>: メトリクス統計モードを有効にすると、DogStatsD のパフォーマンスが低下する可能性があります。
+</div>
 
 この統計モードは以下のいずれかの方法で有効化できます。
 
@@ -311,7 +335,7 @@ DogStatsD には、どのメトリクスが最も多く処理されたかを把�
 - 環境変数 `DD_DOGSTATSD_STATS_ENABLE` を `true` に設定
 - `datadog-agent config set dogstatsd_stats true` コマンドを使用して、ランタイム時に有効化を行います。ランタイム時にこれを無効化するには、`datadog-agent config set dogstatsd_stats false` コマンドを使用してください。
 
-このモードを有効化したら、コマンド `datadog-agent dogstatsd-stats` を実行します。処理されたメトリクスのリストが最も受信数の多い順で返されます。
+このモードを有効化したら、コマンド `datadog-agent dogstatsd-stats` を実行します。処理されたメトリクスのリストが受信したメトリクスの降順で返されます。
 
 このモードでシステムを実行すると、DogStatsD サーバーがバースト検知メカニズムを実行します。バーストが検知されたら警告ログが送信されます。例:
 
