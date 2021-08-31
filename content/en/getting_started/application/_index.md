@@ -151,5 +151,5 @@ Datadog [Security Monitoring][23] automatically detects threats to your applicat
 [19]: /monitors/
 [20]: /network_monitoring/performance
 [21]: /real_user_monitoring/
-[22]: /infrastructure/serverless/
+[22]: /serverless/
 [23]: /security_monitoring/
