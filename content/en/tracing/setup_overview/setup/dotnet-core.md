@@ -33,6 +33,9 @@ further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
+  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+    tag: "Blog"
+    text: "Deploy ASP.NET Core applications to Azure App Service"
 ---
 
 ## Compatibility requirements
