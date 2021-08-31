@@ -69,7 +69,7 @@ A processor run data-structuring actions on events attributes at ingestion.
 Pipelines are composed of one or multiple processors executed sequentially.
 With event processing pipelines, you can:
 - normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][20] everywhere)
-- enrich events with external data saved in an [Enrichment Table][21] (beta). For example, map a service name with your service directory, to enrich events with team ownership, link to dashboard or documentation.
+- enrich events with external data saved in an [Enrichment Table][21] (beta). For example, map a service name with your service directory to enrich events with team ownership, link to dashboard or documentation.
 
 We are working to support more processors types. For more details, contact support.
 
