@@ -6,9 +6,10 @@ TestFilesConcurrently: true
 # General config
 CheckDoctype: false
 CheckGeneric: false
+CheckExternal: false
 CheckImages: false
 CheckInternal: true
-CheckInternalHash: false
+CheckInternalHash: true
 CheckMailto: false
 CheckMeta: false
 CheckScripts: false
