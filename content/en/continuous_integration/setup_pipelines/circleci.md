@@ -35,6 +35,8 @@ For each project, go to **Project Settings > Webhooks** in CircleCI and add a ne
 [1]: https://app.datadoghq.eu/account/settings#api
 {{< /site-region >}}
 
+Afterwards, click on **Add Webhook** to save the new webhook.
+
 ## Visualize pipeline data in Datadog
 
 {{< site-region region="us" >}}
