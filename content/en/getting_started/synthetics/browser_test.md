@@ -26,11 +26,11 @@ further_reading:
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test"  style="width:100%;" >}}
+{{< img src="getting_started/synthetics/browser-test.png" alt="Browser test" style="width:100%;" >}}
 
 ### Configure your test details
 
-1. In the Datadog application, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
+1. In the Datadog site, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **Browser Test**.
 4. Define your browser test:
@@ -101,9 +101,9 @@ The example below demonstrates how to map a user journey from adding an item to 
 
 It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.
 
-{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps"  video="true"  >}}
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true"  >}}
 
-**Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you will receive an email notification when the test fails and recovers.
+**Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
 
 ## Test results
 
@@ -113,7 +113,7 @@ To troubleshoot a [failed test][7], select a failed test result and review the s
 
 In the example below, the test failed as the result of a server timeout.
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure"  video="true"  >}}
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true"  >}}
 
 Use Datadog's [APM integration with Synthetic Monitoring][11] to view traces generated from your backend by the test runs from the **Traces** tab.
 
