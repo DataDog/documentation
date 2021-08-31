@@ -106,7 +106,7 @@ There are two ways to create links from a dashboard to any target URL:
 
 ## What's next 
 
-### Share your dashboards outside of the Datadog app
+### Share your dashboards outside of the Datadog site
 
 Click **Generate Public URL** in a dashboard's Settings (gear) menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account.
 
