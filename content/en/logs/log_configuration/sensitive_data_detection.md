@@ -37,7 +37,7 @@ Datadog's Scanner Library offers a wide variety of rules for commonly detected p
 - **Define rule:** Specify the regex pattern to be used for matching against log events. Use sample data to verify that your regex pattern is valid.
 - **Define scope:** Specify whether you want to scan the entire log event or just specific log attributes. You can also choose to skip specific attributes from the scan.
 - **Add tags:** Specify the tags you want to associate with log events where the values match the specified regex pattern. Datadog recommends using the tag `sensitive_data`. These tags can then be used in searches, dashboards, and monitors.
-- **Process matching values:** Optionally, you can specify whether you want to redact or hash the matching values. If you choose the redaction option, specify the placeholder text that you would like to replace the matching values with so that data is redacted or hashed before it gets stored in Datadog.
+- **Process matching values:** Optionally, specify whether you want to redact or hash the matching values. If you choose the redaction option, specify the placeholder text that you would like to replace the matching values with so that data is redacted or hashed before it gets stored in Datadog or sent to your archive.
 - **Name the rule:** Provide an easy to understand name for the rule.
 
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
@@ -58,11 +58,10 @@ By default, users with the Datadog Admin role have access to view and define the
 
 Control who can access log events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.
 
-{{< img src="dashboards/high-density-mode.png" alt="The high-density mode display"  style="width:90%;">}}
-
 **Note:**
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
+- Scrubbing and hashing of attributes in log events are irreversible changes. Verify your rules on test data before enabling on production data.
 
 ## Further Reading
 
