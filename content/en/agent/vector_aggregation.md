@@ -72,7 +72,9 @@ transforms:
     inputs:
       - datadog_agents
     source: |
-      .ddtags = .ddtags + ",sender:vector"
+      # The `!` shorthand is used here with the `string` function, it errors if .ddtags is not a "string".
+      # The .ddtags field is always expected to be a string.
+      .ddtags = string!(.ddtags) + ",sender:vector"
 
 sinks:
   to_datadog:
