@@ -72,8 +72,8 @@ transforms:
     inputs:
       - datadog_agents
     source: |
-      # We use the `!` shorthand with the `string` function to error if .ddtags is not a "string"
-      # as we always expect the .ddtags field to be of type "string"
+      # The `!` shorthand is used here with the `string` function, it errors if .ddtags is not a "string".
+      # The .ddtags field is always expected to be a string.
       .ddtags = string!(.ddtags) + ",sender:vector"
 
 sinks:
