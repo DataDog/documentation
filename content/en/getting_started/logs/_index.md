@@ -48,9 +48,9 @@ To begin collecting logs from a server:
 
 3. Restart the [Datadog Agent][7].
 
-4. Follow the integration [activation steps][8] or the custom files log collection steps in the Datadog app.
+4. Follow the integration [activation steps][8] or the custom files log collection steps on the Datadog site.
 
-    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see the [Custom log collection documentation][9].
+    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see [Custom log collection][9].
 
 ### Container
 
@@ -78,7 +78,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 ### Other
 
-If you're using existing logging services or utilities such as rsyslog, flutend, or logstash, Datadog offers plugins and log forwarding options.
+If you're using existing logging services or utilities such as rsyslog, Fluentd, or Logstash, Datadog offers plugins and log forwarding options.
 
 If you don't see your integration, you can type it in the *other integrations* box and get notifications for when the integration is available.
 
