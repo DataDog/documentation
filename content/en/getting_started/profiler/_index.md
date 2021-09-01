@@ -34,7 +34,7 @@ When working on performance problems, this information is important because many
 
 If you've used an APM tool, you might think of profiling like a "deeper" tracer that provides a very fine grained view of your code without needing any instrumentation.
 
-The Datadog Continuous Profiler can track various types of "work", including CPU usage, amount, types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more. The profile types available depend on the language being profiled.
+The Datadog Continuous Profiler can track various types of "work", including CPU usage, amount and types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more. The profile types available depend on the language being profiled.
 
 ## Setup
 
@@ -120,7 +120,7 @@ Zooming in to one area on the bottom of the flame graph, a tooltip shows that ro
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
 
-That means 278ms seconds were spent directly in `parse()`: 390ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
+That means 278 milliseconds were spent directly in `parse()`: 390ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
 
 It's worth calling out that the flame graph _does not_ represent the progression of time. Looking at this part of the profile, `Gson$1.write()` didn't run before `TypeAdapters$16.write()` but it may not have run after it either.
 
@@ -128,7 +128,7 @@ It's worth calling out that the flame graph _does not_ represent the progression
 
  They could have been running concurrently, or the program could have run several calls of one, then several calls of the other, and kept switching back and forth. The flame graph merges together all the times that a program was running the same series of functions so you can tell at a glance which parts of the code were using the most CPU without tons of tiny boxes showing each time a function was called.
 
-Zoom back out to see that about 87% of CPU usage was within the `replyJSON()` method. Below that, the graphs shows `replyJSON()` and the methods it calls eventually branch into four main code paths ("stack traces") that run functions pertaining to sorting and date parsing:
+Zoom back out to see that about 87% of CPU usage was within the `replyJSON()` method. Below that, the graph shows `replyJSON()` and the methods it calls eventually branch into four main code paths ("stack traces") that run functions pertaining to sorting and date parsing:
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="Flame graph with arrows pointing at stack traces below replyJSON()">}}
 
@@ -217,7 +217,7 @@ Percentage of the requests served within a certain time (ms)
 
 p99 went from 795ms to 218ms, and overall, this is four to six times faster than before.
 
-Locate the [profile](#read-the-profile) containing thw new load test and look at the CPU profile. The `replyJSON` parts of the flame graph are a much smaller percentage of the total CPU usage than the previous load test:
+Locate the [profile](#read-the-profile) containing the new load test and look at the CPU profile. The `replyJSON` parts of the flame graph are a much smaller percentage of the total CPU usage than the previous load test:
 
 {{< img src="tracing/profiling/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flame graph with the optimized replyJSON() stack traces">}}
 
@@ -245,7 +245,7 @@ This guide only skimmed the surface of profiling, but it should give you a sense
 
 
 [1]: https://docs.docker.com/compose/install/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/signup
 [4]: https://github.com/DataDog/dd-continuous-profiler-example
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
