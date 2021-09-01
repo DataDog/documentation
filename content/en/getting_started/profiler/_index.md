@@ -18,7 +18,7 @@ further_reading:
 
 Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler, it can be confusing.
 
-The guide explains profiling, provides a sample service with a performance problem, and uses the Datadog Continuous Profiler to understand and fix the problem.
+This guide explains profiling, provides a sample service with a performance problem, and uses the Datadog Continuous Profiler to understand and fix the problem.
 
 ## Overview
 
