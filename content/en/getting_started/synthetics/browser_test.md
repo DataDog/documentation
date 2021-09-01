@@ -109,7 +109,7 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 ## Look at test results
 
-The Browser Test details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
+The **Browser Test** details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
 To troubleshoot a [failed test][7], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][8]**, **[Resources][9]**, and **[Core Web Vitals][10]** to diagnose the issue. 
 
