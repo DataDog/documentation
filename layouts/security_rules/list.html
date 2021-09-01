@@ -21,8 +21,8 @@
 {{ .Content }}
 <form id="rules">
     <div class="controls" data-ref="controls">
-        <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
-        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter="cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+        <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset" data-proofer-ignore>{{ i18n "all" }}</a>
+        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter="cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}" data-proofer-ignore>{{ $e | upper }}</a>{{ end }}
     </div>
     <div class="form-group clearfix">
         <input type="input" data-ref="search" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
