@@ -33,18 +33,17 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
 
 ### Define request
 
-1. In the Datadog site, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
-2. In the top right corner, click the **New Test** button.
-3. Select **[New API test][4]**.
-4. Select the `HTTP` request type.
-5. Define your request:
+1. In the Datadog site, hover over **[UX Monitoring][3]** and select **[Synthetic Tests][3]**.
+2. Click **New Test** > **[New API test][4]**.
+3. Select the `HTTP` request type.
+4. Define your request:
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
     - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
     - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - You can use secure [global variables][5] for any credentials in your API call. You can also create [local variables][6] to inject a dynamically defined timestamp in your request payload. After creating these variables, type `{{` and select a variable to inject the variable in your test options.
 
-6. Click **Test URL** to trigger a sample test run.
+5. Click **Test URL** to trigger a sample test run.
 
 {{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration" style="width:100%;">}}
 
@@ -120,7 +119,12 @@ This example test contains three steps: getting a cart, getting a product, and a
 3. Specify the HTTP method and the URL you want to query, for example: `POST` and `https://api.shopist.io/carts`. 
 4. Click **Test URL**. This creates a cart item in the Shopist application's backend.
 5. Optionally, leave the default assertions or modify them.
-6. Optionally, define execution parameters. Select **Continue with test if this step fails** to ensure a whole endpoint collection is tested even if one of the step fails or to ensure your last cleanup step performs regardless of previous steps' success or failure. The retry test feature is helpful in situations where you know your API endpoint may take some time before responding. In this example, no specific execution parameter is needed.
+6. Optionally, define execution parameters. In this example, no specific execution parameter is needed. 
+
+    Select **Continue with test if this step fails** to ensure a whole endpoint collection is tested even if one of the step fails or to ensure your last cleanup step performs regardless of previous steps' success or failure. 
+    
+    The retry test feature is helpful in situations where you know your API endpoint may take some time before responding. 
+
 7. Optionally, extract variables from the response content. Click **Extract a variable from response content** and enter a variable name. 
 8. To extract the value of the cart ID located at the end of the `location` header:
     - Name your variable as `CART_ID`.
@@ -137,7 +141,7 @@ This example test contains three steps: getting a cart, getting a product, and a
 4. Click **Test URL**. This retrieves a list of products available in the Shopist application.
 5. Optionally, leave the default assertions or modify them.
 6. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
-7. Optionally, extract variables from the response content. Click **Extract a variable from response content** and entering a variable name.
+7. Optionally, extract variables from the response content. Click **Extract a variable from response content** and enter a variable name.
 8. To extract the value of the product ID located in the response body:
     - Name your variable as `PRODUCT_ID`.
     - Click the **Response Body** tab.
@@ -152,16 +156,16 @@ This example test contains three steps: getting a cart, getting a product, and a
 3. Specify the HTTP method and the URL you want to query, for example: `POST` and  `https://api.shopist.io/add_item.json`. 
 4. In the **Request Body** tab, choose the `application/json` body type and insert the following:
         
-        {{< code-block lang="javascript" filename="block.javascript" disable_copy="true" collapsible="true" >}}
-        {
-          "cart_item": {
-            "product_id": "{{ PRODUCT_ID }}",
-            "amount_paid": 500,
-            "quantity": 1
-          },
-          "cart_id": "{{ CART_ID }}"
-        } 
-        {{< /code-block >}}
+    {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
+    {
+      "cart_item": {
+        "product_id": "{{ PRODUCT_ID }}",
+        "amount_paid": 500,
+        "quantity": 1
+      },
+      "cart_id": "{{ CART_ID }}"
+    } 
+    {{< /code-block >}}
         
 5. Click **Test URL**. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
 6. Optionally, leave the default assertions or modify them.
@@ -170,6 +174,7 @@ This example test contains three steps: getting a cart, getting a product, and a
 9. When you're done creating this test step, click **Save Step**.
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
+
 You can then configure the rest of your test conditions including test frequency, alerting conditions, and alert message. When you're ready to run your test, click **Save Test**. 
 
 ## Look at test results
