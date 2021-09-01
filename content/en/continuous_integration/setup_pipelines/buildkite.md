@@ -26,7 +26,7 @@ Go to **Settings > Notification Services** in Buildkite and add a new webhook:
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
-* **Webhook URL**: `https://webhooks-http-intake.logs.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **Webhook URL**: `https://webhook-intake.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
 * **Events**: Select `job.finished` and `build.finished`.
 * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
 
