@@ -23,11 +23,13 @@ further_reading:
 
 ---
 
+## Overview
+
+API tests **proactively monitor** that your most important services are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes (HTTP, SSL, DNS, TCP, ICMP) that allow you to launch requests on the **different network layers** of your systems. Multistep API tests enable you to run HTTP tests in sequence to **monitor the uptime of key journeys at the API level**.
+
 ## Create a single API test
 
-[API tests][1] **proactively monitor** that your most important services are available at anytime and from anywhere. API tests come in five different subtypes that allow you to launch requests on the **different network layers** of your systems.
-
-The example below demonstrates the creation of an [HTTP test][2], a subtype of [API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as expected **response time**, **HTTP status code**, and **header or body contents**.
+The example below demonstrates the creation of an [HTTP test][2], a subtype of [single API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as expected response time, HTTP status code, and header or body contents.
 
 ### Define request
 
@@ -101,50 +103,49 @@ When you're ready to run your test, click **Save Test**.
 
 ## Create a multistep API test
 
-[Multistep API tests][12] run HTTP requests in sequence, allowing you to configure [HTTP tests][2] on complex backend systems. 
+[Multistep API tests][12] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][2], [multistep API tests][12] can **alert you** when your endpoints become too slow or fail to meet any conditions you defined. [Multistep API test][12] also come with the ability to create variables from individual step responses and re-inject their values in subsequent steps, allowing you to chain steps together in a way that mimics the behavior of your application.
 
-### Configure the test
+The example below demonstrates the creation of a [multistep API test][12] that monitor the addition of an item to a cart. If you don't know which API endpoints to create your [multistep API test][12] on, you can use the same endpoints as in the below example. 
 
-When you create a [multistep API test][12], you can define a sequence of HTTP requests and create variables from the response data to re-inject their values in subsequent steps. 
+To create a new [multistep API test][12], go to **New Test** and click on **[Multistep API test][5]**. Just like for your HTTP test, add a name (e.g., `Add product to cart`), select tags, and select locations for your [Multistep API test][12]. 
 
-1. In **New Test** > **[Multistep API test][5]**, add a name, select a tag, and select locations for your [Multistep API test][5].
-2. In **Define steps**, click **Create Your First Step**. 
+The test created below has three steps: getting a cart, getting a product, and adding the product to the cart.
 
-    - Add a name to your step such as `Get a cart`.
-    - Specify the URL you want to query. If you don’t know what to start with, select `POST` and use `https://api.shopist.io/carts`, a test application.
-    - Select **Advanced Options** to add custom request headers, authentication credentials, body content, or cookies.
-    - Click **Test URL**. 
-    - Optionally, add an assertion based on information in the **Response Body** or click inside the **Response Header**.
-    - Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
-    - Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `CART_ID`. 
+### Get a cart
 
-   To extract a variable from the response header:
+1. In **Define steps**, click **Create Your First Step**. 
+2. Add a name to your step, for example `Get a cart`.
+3. Specify the HTTP method and the URL you want to query. Here, you can select `POST` and use `https://api.shopist.io/carts`. Click **Test URL**. This creates a cart item in the backend of the same Shopist application previously used.
+4. Leave the default assertions or optionally modify them.
+5. Optionally, define execution parameters. The `Continue with test if this step fails` is useful if you want to ensure a whole endpoint collection gets tested even if one of the step fails, or if you want to ensure your last cleanup step is being performed regardless of previous steps' success or failure. The retry feature can come in handy in cases where you know your API endpoint might expectedly take some time before responding. In this example, no specific execution parameter is needed.
+6. Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering variables names and definitions. Here, the value that needs to be extracted is the cart id which is located at the very end of the value of the `location` header:
+    - Call your variable `CART_ID`.
+    - Click on the `location` header to select it.
+    - Add a regular expression in the **Parsing Regex** field such as `(?:[^\\/](?!(\\|/)))+$` to extract the id of the cart.
+7. Click **Save Variable**.
+8. When you're done creating this variable, click **Save Step**.
 
-    - Click inside the **Response Header** to specify which header you want to extract a value from or specify a header such as `location` in the **Header from which to extract value** field.
-    - Add a regular expression in the **Parsing Regex** field such as `(?:[^\\/](?!(\\|/)))+$` to extract the location of the cart.
-
-3. Click **Save Variable**.
-4. When you're done creating this variable, click **Save Step**.
-5. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
-    - Add a name to your step such as `Get a product`.
-    - For the URL, select `GET` and use `https://api.shopist.io/products.json`.
-    - Configure any **Advanced Options** and click **Test URL**.
-    - Optionally, add an assertion based on information in the **Response Body** or click inside the **Response Header**.
-    - Optionally, define the execution parameter by enabling the test to continue if the step fails or specifying the number of times to retry the test after a specific amount of milliseconds in case of failure.
-    - Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `PRODUCT_ID`. 
+### Get a product
    
-   To extract a variable from the response body:
+1. Click **Add Another Step** to add another step. By default, you can create up to ten steps.
+2. Add a name to your step, for example `Get a product`.
+3. Specify the HTTP method and the URL you want to query. Here, you can select `GET` and use `https://api.shopist.io/products.json`. Click **Test URL**. This gets you a list of products available on the Shopist application.
+4. Leave the default assertions or optionally modify them.
+5. Optionally, define execution parameters. No specific execution parameter is needed in this step either.
+6. Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering variables names and definitions. Here, the value that needs to be extracted is the product id which is located in the response body:
+    - Call your variable `PRODUCT_ID`.
+    - Click on the **Response Body** tab.
+    - Look for the `$oid` of any product and click it to generate a JSON Path such as `$[0].id['$oid']` for instance.
+7. Click **Save Variable**.
+8. When you're done creating this variable, click **Save Step**.
 
-    - Scroll through the **Response Body**, select a query language (JSON Path, XPath 1.0, or Regex) to parse the body content with, and add an expression in the **Parse** or **Path** field. 
-    - To automatically generate the JSON path for the variable, click on the response body content such as `$oid:`. 
-    - Optionally, you can select **Use Full Response Body**.
+### Add product to cart
 
-6. When you're done creating this variable, click **Save Step**.
-7. Click **Add Another Step** to add another step about adding a product into your cart.
-    - Add a name to your step such as `Add product to cart`.
-    - For the URL, select `POST` and use `https://api.shopist.io/add_item.json`.
-    - In the **Request Header** field of **Advanced Options** > **Request Options**, add `content-type` as the name and `application/json` as the value.
-    - In the **Request Body** field, insert the following:
+1. Click **Add Another Step** to add another step about adding a product into your cart.
+2. Add a name to your step, for example `Add product to cart`.
+3. Specify the HTTP method and the URL you want to query. Here, you can select `POST` and use `https://api.shopist.io/add_item.json`. 
+4. In the **Request Body** tab, choose `application/json` body type and insert the following request body:
+
         ```
         {
           "cart_item": {
@@ -155,24 +156,16 @@ When you create a [multistep API test][12], you can define a sequence of HTTP re
           "cart_id": "{{ CART_ID }}"
         } 
         ```
+        
+5. Click **Test URL**. This adds the product you extracted in step 2 to the cart you created in step 1 and returns a checkout URL.
+6. Leave the default assertions or optionally modify them.
+7. Optionally, define execution parameters. No specific execution parameter is needed in this step either.
+8. Optionally, extract variables from the response content. No specific variables needs to be extracted in this step.
+9. When you're done creating this variable, click **Save Step**.
 
-    - Click **Test URL**.
-    - Optionally, extract variables from the response content by clicking **Extract a variable from response content** and entering a variable name such as `CHECKOUT_URL`. 
-   
-   To extract a variable from the response body:   
+You can then configure the rest of your test conditions including test frequency, alerting conditions, and alert message. When you're ready to run your test, click **Save Test**. 
 
-    - Scroll through the **Response Body**, select **Parse With JSON Path**, and add an expression such as `$.url` in the **Parse JSON** field.  
-
-8. When you're done creating this variable, click **Save Step**.
-
-9. Optionally, type `{{` in the **URL** and a list of extracted and global variables appears. 
-    - Select an extracted variable to inject in your test step. You can add your extracted variables in the **Step URL** or in the request header, cookies, and HTTP authentication fields in **Advanced Options** > **Request Options**.  
-
-10. Configure the rest of your test conditions including test frequency, alerting conditions, and alert message.
-
-When you're ready to run your test, click **Save Test**. 
-
-## Test results
+## Look at test results
 
 The **API test** and **Multistep API test detail** pages display an overview of the test configuration, the global uptime associated with the tested endpoint by location, graphs about response time and network timings, and a list of test results and events.
 
