@@ -25,7 +25,7 @@ Find below the different parameters and data types available for the `service_ch
 
 ## Example
 
-Here is an example of a dummy Agent check sending only one service check periodically. Refer to the dedicated [Writing a Custom Agent Check][1] documentation to learn more.
+Here is an example of a dummy Agent check sending only one service check periodically. See [Writing a Custom Agent Check][1] to learn more.
 
 1. Create a new directory, `service_check_example.d/`, in the [`conf.d/` folder][2] of your Agent.
 
@@ -74,9 +74,9 @@ class MyClass(AgentCheck):
         (...)
     ```
 
-7. Finally, go to your [Datadog Service Check summary page][5] to see your Service Check reporting:
+7. Finally, see your [Datadog service check summary][5] to see your service check reporting:
 
-{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks"  style="width:80%;">}}
+{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks" style="width:80%;">}}
 
 ## Further reading
 

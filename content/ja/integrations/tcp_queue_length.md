@@ -53,7 +53,7 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: CentOS/RHEL バージョン < 8 はサポートされていません。
+**注**: バージョン 8 以前の Windows、Container-Optimized OS、および CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 

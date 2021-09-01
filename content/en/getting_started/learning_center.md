@@ -35,6 +35,7 @@ aliases:
 
 Datadog is an extensive, easy-to-use platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.
 
-For a list of available courses, check out the [catalog page][1].
+For a list of available courses, see [Courses][2].
 
 [1]: https://learn.datadoghq.com
+[2]: https://learn.datadoghq.com/course/index.php

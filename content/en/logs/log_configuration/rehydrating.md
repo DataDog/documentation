@@ -23,13 +23,13 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 1. **Choose the time period** for which you wish to rehydrate log events.
 
-2. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
+2. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
-3. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
+3. (Optional) **Estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
 
-4. (Optional) **estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
+4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
-5. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
+5. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 
 6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**.
 
@@ -39,9 +39,27 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 {{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
 
+**Note**: The query is applied _after_ the files matching the time period are downloaded from your archive. To reduce your cloud data transfer cost, reduce the selected date range.
+
 #### Rehydrate by query
 
 By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
+
+#### Notify
+
+Events are triggered automatically when a rehydration starts and finishes.
+These events are available in your [Events stream][7].
+
+During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
+
+| Variable                      | Description                                                                  |
+|-------------------------------|------------------------------------------------------------------------------|
+| `{{archive}}`                 | Name of the archives used for the rehydration.                           |
+| `{{from}}`                    | Start of the time range selected for the rehydration.                    |
+| `{{to}}`                      | End of the time range selected for the rehydration.                      |
+| `{{scan_size}}`               | Total size of the files processed during the rehydration.                |
+| `{{number_of_indexed_logs}}`  | Total number of rehydrated logs.                                         |
+| `{{explorer_url}}`            | Direct link to the rehydrated logs.                                      |
 
 ### View historical view content
 
@@ -69,7 +87,7 @@ One hour later, the historical view is definitively deleted; until that time, th
 
 ### Define a Datadog archive
 
-An external archive must be configured in order to rehydrate data from it. [Follow the guide][7] to archive your logs in the available destinations.
+An external archive must be configured in order to rehydrate data from it. [Follow the guide][8] to archive your logs in the available destinations.
 
 ### Permissions
 
@@ -148,4 +166,5 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [4]: /logs/explorer/search/
 [5]: /logs/archives/?tab=awss3#datadog-tags
 [6]: /integrations/#cat-notification
-[7]: /logs/archives/
+[7]: /events/
+[8]: /logs/archives/

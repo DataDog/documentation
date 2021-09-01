@@ -61,7 +61,7 @@
   },
   "logs-pipelines": {
     "name": "Logs Pipelines",
-    "description": "Pipelines and processors operate on incoming logs, parsing\nand transforming them into structured attributes for easier querying.\n\n- See the [pipelines configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines and processors currently configured in our UI.\n\n- Additional API-related information about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure to use an application key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned data to be configured before using in a request.**\nFor example, if you are using the data returned from a\nrequest for another request body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body data."
+    "description": "Pipelines and processors operate on incoming logs, parsing\nand transforming them into structured attributes for easier querying.\n\n- See the [pipelines configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines and processors currently configured in our UI.\n\n- Additional API-related information about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure to use an application key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned data to be configured before using in a request.**\nFor example, if you are using the data returned from a\nrequest for another request body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body data."
   },
   "metrics": {
     "name": "Metrics",
@@ -122,10 +122,6 @@
   "timeboards": {
     "name": "Timeboards",
     "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
-  },
-  "tracing": {
-    "name": "Tracing",
-    "description": "Learn more about [tracing with Datadog](https://docs.datadoghq.com/tracing)\nand [the APM terminology](https://docs.datadoghq.com/tracing/visualization/services_list).\n\nThe tracing API is an Agent API rather than a service side API.\nSubmit your traces to the `http://localhost:8126/v0.3/traces` local endpoint\nso your Agent can forward them to Datadog."
   },
   "usage-metering": {
     "name": "Usage Metering",

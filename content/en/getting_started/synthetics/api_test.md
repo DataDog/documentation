@@ -33,7 +33,7 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
 
 ### Define request
 
-1. In the Datadog application, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
+1. In the Datadog site, hover over **[UX Monitoring][3]** in the left hand menu and select **[Synthetic Tests][3]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **[New API test][4]**.
 4. Select the `HTTP` request type.
@@ -46,7 +46,7 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
 
 6. Click **Test URL** to trigger a sample test run.
 
-{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration" style="width:100%;">}}
 
 ### Define assertions
 
@@ -54,11 +54,11 @@ Clicking **Test URL** automatically populates basic assertions about your endpoi
 
 In this example, three default assertions populate after triggering the sample test run:
 
-{{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions" style="width:100%;">}}
 
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview or click **New Assertion**. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration"  video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true"  >}}
 
 **Note**: You can also leverage [global][7] and [local][8] variables in your assertions.
 
@@ -171,7 +171,7 @@ The **API test** and **Multistep API test detail** pages display an overview of 
 
 To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
-{{< img src="getting_started/synthetics/api-test-failure-4.png" alt="API test failure"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-4.png" alt="API test failure" style="width:100%;">}}
 
 With Datadog's [APM integration with Synthetic Monitoring][6], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 

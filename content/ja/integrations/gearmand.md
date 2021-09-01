@@ -137,9 +137,8 @@ Kubernetes 環境でログを収集する Agent を構成するためのその�
 Gearmand チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "gearmand" >}}
 
-**gearman.can_connect**:<br>
-Agent が Gearman に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

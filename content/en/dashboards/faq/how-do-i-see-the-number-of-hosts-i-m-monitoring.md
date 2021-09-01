@@ -5,7 +5,7 @@ aliases:
     - /graphing/faq/how-do-i-see-the-number-of-hosts-i-m-monitoring
 ---
 
-[This file][1] is an API post that creates a new Screenboard in Datadog with three widgets:
+This [screenboard script][1] is an API post that creates a new Screenboard in Datadog with three widgets:
 
 * Number of Datadog Agents reporting (timeseries, past week)
 * Number of EC2 hosts reporting (timeseries, past week)

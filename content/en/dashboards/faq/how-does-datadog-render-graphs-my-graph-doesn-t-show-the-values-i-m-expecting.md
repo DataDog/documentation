@@ -17,7 +17,7 @@ Metric: the metric you want to graph
 
 1. Scope: which data the system should take into account to render your graph. Useful if different hosts are reporting the same metric or/and if the metric is submitted with different tags
 
-2. Time-aggregation: this parameter is optional, for most of your graphs you won't need it. By default the system aggregates by average.
+2. Time-aggregation: this parameter is optional, for most graphs, you don't need it. By default the system aggregates by average.
 
 * [In-depth explanation about time-aggregation][2].
 * [How to set up your parameters with the rollup function][3]

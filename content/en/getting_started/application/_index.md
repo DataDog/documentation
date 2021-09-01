@@ -13,14 +13,14 @@ further_reading:
 
 This page gives a high level overview of the capabilities for the [Datadog site][1].
 
-**Note**: The navigation of the Datadog application switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
+**Note**: The navigation of the Datadog site switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
 
 ## Integrations
 
 {{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
 - Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][2].
-- Custom integrations are available [via the Datadog API][3].
+- Custom integrations are available through the [Datadog API][3].
 - The Agent is [open source][4].
 - Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.
 
@@ -46,7 +46,7 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 
 ## Host map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
+{{< img src="getting_started/hostmap-overview.png" alt="Host Map overview"  >}}
 
 The [host map][9] can be found under the Infrastructure menu. It offers the ability to:
 
@@ -55,7 +55,7 @@ The [host map][9] can be found under the Infrastructure menu. It offers the abil
 - Detect usage patterns
 - Optimize resources
 
-To learn more about the host map, visit the [host map documentation][9].
+See [Host Map][9] for more details.
 
 ## Events
 
@@ -75,7 +75,7 @@ For each incident, users can:
 - [@ notify team members][13], who receive an email
 - `@support-datadog` to ask for [assistance][14]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event"  style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" style="width:70%;">}}
 
 ## Dashboards
 

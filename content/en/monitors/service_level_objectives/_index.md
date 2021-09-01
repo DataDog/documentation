@@ -48,7 +48,7 @@ You can use Datadog’s [Service Level Objectives status page][1] to create new 
 3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipulated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
-After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][7] or a grouped metric-based SLO using the [`sum by` clause][8], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
+After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][5] or a grouped metric-based SLO using the [`sum by` clause][6], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
@@ -60,13 +60,13 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
-[Monitor-based SLOs][5]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
+[Monitor-based SLOs][7]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
 
-[Metric-based SLOs][6]: Up to three decimal places are allowed for all targets.
+[Metric-based SLOs][8]: Up to three decimal places are allowed for all targets.
 
 ## Edit an SLO
 
-To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that will appear at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
+To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
 
 ## Searching and viewing SLOs
 
@@ -82,7 +82,7 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
-To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on a SLO, click its table row to open its details side panel.
+To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
 
 ### SLO tags
 
@@ -105,7 +105,7 @@ Saved views allow you to save and share customized searches in the SLO list view
 - A search query
 - A selected subset of facets
 
-After you query for a subset of SLOs on the list view, you can now add that query as a saved view.
+After you query for a subset of SLOs on the list view, you can add that query as a saved view.
 
 #### Add a saved view
 
@@ -164,7 +164,25 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 
 ## SLO status corrections
 
-Status corrections allow you to identify specific time periods, such as planned maintenance, that an SLO should ignore from its calculation of status and error budget. Data during excluded time periods is not taken into account. A public beta for corrections is available through the [SLO status corrections API][12] and [Terraform][13].
+Status corrections allow you to specify time periods such as planned maintenance that an SLO excludes from its status and error budget calculations. 
+
+When you create a correction window for an SLO, the time period you specify is removed from the SLO’s calculation. 
+- For monitor-based SLOs, time in the correction window is not counted.
+- For metric-based SLOs, all good and bad events in the correction window are not counted.
+
+Status corrections are in public beta through the [SLO status corrections API][12], [Terraform][13], and the UI.
+
+#### Access in the UI 
+
+To access SLO status corrections in the UI:
+
+1. Create a new SLO or click on an existing one.
+2. Navigate to an SLO’s detailed side panel view.
+3. Under the gear icon, select **Correct Status** to access the **Status Corrections** creation modal.
+4. Select the **Time Correction Window**, **Correction Type**, and add **Notes**.
+5. Click **Apply Correction**.
+
+To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO’s detailed side panel view. 
 
 ## Further Reading
 
@@ -174,10 +192,10 @@ Status corrections allow you to identify specific time periods, such as planned 
 [2]: /dashboards/widgets/slo/
 [3]: /monitors/service_level_objectives/metric/
 [4]: /monitors/service_level_objectives/monitor/
-[5]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
-[6]: /monitors/service_level_objectives/metric/#set-your-slo-targets
-[7]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[8]: /monitors/service_level_objectives/metric/#define-queries
+[5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[6]: /monitors/service_level_objectives/metric/#define-queries
+[7]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
+[8]: /monitors/service_level_objectives/metric/#set-your-slo-targets
 [9]: /monitors/service_level_objectives/#saved-views
 [10]: /api/v1/events/#query-the-event-stream
 [11]: /monitors/monitor_types/event/

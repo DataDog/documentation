@@ -71,16 +71,17 @@ SortDB チェックは、すべての主要プラットフォームと互換性�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "sortdb" >}}
 
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][11] を参照してください。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "sortdb" >}}
 
-現在、SortDB チェックには、サービスのチェック機能は含まれません。
 
-### イベント
+## トラブルシューティング
 
 現在、SortDB チェックには、イベントは含まれません。
+
 
 [1]: https://github.com/jehiah/sortdb
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -93,3 +94,4 @@ SortDB チェックは、すべての主要プラットフォームと互換性�
 [9]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/metadata.csv
+[12]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/assets/service_checks.json
