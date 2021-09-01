@@ -112,14 +112,14 @@ As an alternative to using the native Datadog integration, you can use [webhooks
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 {{< site-region region="us" >}}
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 {{< site-region region="eu" >}}
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+* **URL**: `https://webhook-intake.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 

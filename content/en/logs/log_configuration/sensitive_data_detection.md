@@ -24,7 +24,7 @@ Often businesses are required to identify, remediate, and prevent the exposure o
 Sensitive data scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a new line of defense in preventing sensitive data from leaking outside your organization.
 
 Datadog's Scanner Library offers a wide variety of rules for commonly detected patterns such as email addresses, SSN, credit card numbers, API keys, authorization tokens, and others.
-{{< img src="logs/sensitive_data_scanner/sensitive-data-scanner.png" alt="Sensitive data scanner"  style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sensitive_data_scanner2.png" alt="Sensitive data scanner"  style="width:90%;">}}
 
 ### Setting up scanning groups
 

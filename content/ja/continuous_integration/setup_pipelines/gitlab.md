@@ -111,14 +111,14 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 リポジトリ (または GitLab インスタンス設定) の **Settings > Webhooks** に移動し、新しい Webhook を追加します。
 {{< site-region region="us" >}}
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` ここで、`<API_KEY>` は [Datadog API キー][1]です。
+* **URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` ここで、`<API_KEY>` は [Datadog API キー][1]です。
 * **Secret Token**: 空白のままにします
 * **Trigger**: `Job events` と `Pipeline events` を選択します。
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 {{< site-region region="eu" >}}
-* **URL**: `https://webhooks-http-intake.logs.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` ここで、`<API_KEY>` は [Datadog API キー][1]です。
+* **URL**: `https://webhook-intake.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` ここで、`<API_KEY>` は [Datadog API キー][1]です。
 * **Secret Token**: 空白のままにします
 * **Trigger**: `Job events` と `Pipeline events` を選択します。
 
