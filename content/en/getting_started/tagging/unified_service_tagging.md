@@ -22,7 +22,7 @@ With these three tags you can:
 
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
-- View service data based on environment or version in a unified fashion within the Datadog app
+- View service data based on environment or version in a unified fashion within the Datadog site
 
 {{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
 
@@ -136,7 +136,7 @@ To configure [Kubernetes State Metrics][2]:
 
 1. Set `join_standard_tags` to `true` in your [configuration file][3].
 
-2. Add the same standard labels to the collection of labels for the parent resource (e.g., Deployment).
+2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
   ```yaml
   apiVersion: apps/v1
@@ -284,7 +284,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
     `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
+2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it has access to those variables.
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -293,11 +293,11 @@ When configuring your traces for unified service tagging:
 
 1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
-2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans will not receive `version` as a tag.
+2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-    As long as version is present in spans, it will be added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, at the very least these will be used by the APM and [Dogstatsd clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer will also inject the values of these variables into your logs.
+    As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, at the very least these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 
-    **Note: There can only be one service per span.** Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag will show up on all trace metrics emitted from that host.
+    **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
 [1]: /tracing/setup/
 [2]: /developers/dogstatsd/
@@ -305,7 +305,7 @@ When configuring your traces for unified service tagging:
 
 {{% tab "Logs" %}}
 
-If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. The APM Tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
+If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
 **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
@@ -314,9 +314,9 @@ If you're using [connected logs and traces][1], enable automatic logs injection 
 
 {{% tab "Custom Metrics" %}}
 
-Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for `env`, the metrics will be tagged with both environments. There is no order in which one tag will override another of the same name.
+Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
 
-If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client will automatically add the corresponding tags to your custom metrics.
+If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
 
 **Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
 
@@ -366,9 +366,7 @@ instances:
       service: nginx-web-app
 ```
 
-**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics
-will be tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended
-to configure the `service` tag only in the configuration of the process check.
+**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /integrations/process
@@ -454,7 +452,7 @@ Transform:
 
 {{% tab "AWS CDK" %}}
 
-Tag your app, stack or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
+Tag your app, stack, or individual Lambda functions using the [Tags class][1]. If you have installed the [Datadog serverless macro][2], you can also specify a `service` and `env` tag as parameters:
 
 ```javascript
 import * as cdk from "@aws-cdk/core";

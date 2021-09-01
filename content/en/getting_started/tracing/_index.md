@@ -83,7 +83,7 @@ After a few minutes, verify the Agent is connected to your account by checking t
 
 ### Follow the in-app documentation (recommended)
 
-For the remaining steps, follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
+For the remaining steps, follow the [Quick start instructions][10] within the Datadog site for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (in this case, a host-based deployment).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -114,8 +114,7 @@ And in `trace-agent.log`:
 
 For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
 
-Additionally, if your tracer has logs injection enabled then the `env` will be consistent across traces and logs.
-Read more about how this works in [Unified Service Tagging][12].
+Additionally, if your tracer has logs injection enabled then the `env` is consistent across traces and logs. Read more about how this works in [Unified Service Tagging][12].
 
 Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`. To learn more about setting `env` for APM, see the [setting primary tags to scope guide][13].
 
