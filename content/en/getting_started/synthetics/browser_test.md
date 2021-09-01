@@ -20,9 +20,11 @@ further_reading:
       
 ---
 
-## Create a browser test
+## Overview
 
 [Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform key business transactions on your applications and that they are not negatively impacted by the most recent code changes.
+
+## Create a browser test
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
@@ -105,7 +107,7 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 **Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you will receive an email notification when the test fails and recovers.
 
-## Test results
+## Look at test results
 
 The Browser Test details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
