@@ -151,6 +151,7 @@ link_checks_preview:
   environment: "preview"
   script:
     - htmltest
+    - notify_slack cat ./tmp/.htmltest/htmltest.log
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
