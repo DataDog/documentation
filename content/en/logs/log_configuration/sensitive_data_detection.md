@@ -11,7 +11,7 @@ further_reading:
   text: "Log Explorer"
 ---
 
-<div class="alert alert-info">This page is about Sensitive Data Scanner, which is in currentl in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> if you want to learn more or participate in the beta program. </div>
+<div class="alert alert-info">This page is about Sensitive Data Scanner, which is currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> if you want to learn more or participate in the beta program. </div>
 
 ## Overview
 
