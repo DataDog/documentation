@@ -77,7 +77,6 @@ As you define the search query, the top graph updates.
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
-[2]: /logs/explorer
 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
@@ -86,7 +85,7 @@ As you define the search query, the top graph updates.
 
 As you define the search query, the top graph updates.
 
-1. Construct a search query using the same logic as a [log explorer search][3].
+1. Construct a search query using the same logic as a [log explorer search][2].
 2. Choose to monitor over an event count, facet, or measure:
     * **Monitor over an event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If a facet is selected, the monitor alerts over the unique value count of the facet.
@@ -95,7 +94,6 @@ As you define the search query, the top graph updates.
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
-[3]: /logs/explorer
 {{< /site-region >}}
 
 
