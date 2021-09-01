@@ -25,10 +25,9 @@ Additionally the following security policies are applied to the account during i
 
 ## Installation
 
-If no user account is specified on the command line, the installer will attempt to create a local user account named `ddagentuser` with a randomly generated password.
+If no user account is specified on the command line, the installer attempts to create a local user account named `ddagentuser` with a randomly generated password.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer will attempt to create it.
-If a password was specified, the installer will use that password, otherwise it will generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
 
 To specify the optional username and password on the command line pass the following properties to the `msiexec` command:
 
@@ -55,7 +54,7 @@ On domain joined machines, the Agent installer can use a user supplied account, 
 
 If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
@@ -74,13 +73,12 @@ It must be separated from the `<USERNAME>` with a backslash `\`.
 
 ##### Primary and backup domain controllers
 
-When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it will be a domain user rather than a local one.
+When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it is a domain user rather than a local one.
 
-If a user account is specified on the command line, but this user account is not found in the domain, the installer will attempt to create it. If a password was specified, the installer will use that password. Otherwise it will generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
 
-If the specified user account is from a parent domain, the installer will use that user account.
-If the user account doesn't exist, it will create the user account in the child domain (the domain that the controller is joined to).
-The installer will never create a user account in the parent domain.
+If the specified user account is from a parent domain, the installer uses that user account.
+If the user account doesn't exist, it creates the user account in the child domain (the domain that the controller is joined to). The installer never creates a user account in the parent domain.
 
 ##### Read-only domain controllers
 
@@ -94,7 +92,7 @@ If you use Chef and the official `datadog` cookbook to deploy the Agent on Windo
 
 For Agent version < `7.25.0` when you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
 
-Starting with Agent version `7.25.0` the installer will retain the username used to install the Agent and re-use it during upgrades.
+Starting with Agent version `7.25.0` the installer retains the username used to install the Agent and re-uses it during upgrades.
 It is still possible to override the saved value with `DDAGENTUSER_NAME`.
 
 ## Agent integrations
@@ -103,7 +101,7 @@ It is still possible to override the saved value with `DDAGENTUSER_NAME`.
 
 Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to `ddagentuser` is seamless. However, there is a class of problems that requires specific, configuration-specific modification upon installation of the Agent. These problems arise where the Windows Agent previously relied on administrator rights that the new Agent lacks by default.
 
-For example, if the directory check is monitoring a directory that has specific access rights, e.g. allowing only members of the Administrators group read access, then the existing Agent currently can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
+For example, if the directory check is monitoring a directory that has specific access rights, such as allowing only members of the Administrators group read access, then the existing Agent can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
 
 **Note**: For Windows Server OS, the Windows Service integration cannot check against the DHCP Server service due to the special ACL for the `DHCPServer` service. The check returns `UNKNOWN` in such case.
 
@@ -111,9 +109,9 @@ For example, if the directory check is monitoring a directory that has specific 
 
 ### JMX-based integrations
 
-The change to `ddagentuser` affects your JMX-based integrations if the Agent’s JMXFetch is configured to connect to the monitored JVMs through the Attach API, i.e. if:
+The change to `ddagentuser` affects your JMX-based integrations if the Agent’s JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
 
-1. You’re using a JMX-based integration, i.e. one of the following integrations:
+1. You’re using a JMX-based integration, such as:
    * [ActiveMQ][2]
    * [ActiveMQ_XML][3]
    * [Cassandra][4]
@@ -125,7 +123,7 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent’s
 
 2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
 
-If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, refer to the [JMX documentation][5].
+If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
 
 ### Process check
 
@@ -141,7 +139,7 @@ To restore the old behavior and run the Agent as `Local System` (not recommended
 For the Cassandra Nodetool integration to continue working, apply the following changes to your environment:
 
 * Grant access to the Nodetool installation directory to the `ddagentuser`.
-* Set the environment variables of the Nodetool installation directory (e.g. `CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
+* Set the environment variables of the Nodetool installation directory (`CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
 
 ## Security logs channel
 

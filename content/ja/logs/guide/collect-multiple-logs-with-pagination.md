@@ -2,10 +2,10 @@
 title: ページ区切りで複数のログを収集する
 kind: ガイド
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: ビデオ
     text: ログの処理方法について
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: ビデオ
     text: パースの詳細
   - link: /logs/live_tail/

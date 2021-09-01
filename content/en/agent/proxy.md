@@ -21,7 +21,7 @@ If your network configuration restricted outbound traffic, proxy all Agent traff
 
 A few options are available to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the Internet.
 
-1. Using a web proxy (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
+1. Using a web proxy, such as Squid or Microsoft Web Proxy, that is already deployed to your network
 2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
 3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
 
@@ -37,7 +37,7 @@ Set different proxy servers for `https` and `http` requests in your Agent `datad
 <div class="alert alert-warning">
 If log collection is enabled, make sure that a specific transport is <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">enforced</a>.
 The recommended setup is to use HTTPS. In that case, the <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics is used to proxy logs.
-If you are using TCP transport, refere to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
+If you are using TCP transport, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
 </div>
 
 Setting an HTTP proxy for all `https` requests:
@@ -87,18 +87,17 @@ no_proxy_nonexact_match: true
 ```
 
 The following rules apply to Agent integrations (and the whole Agent when `no_proxy_nonexact_match` is enabled):
-* A domain name matches that name and all subdomains.
-  - e.g. `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
-  - e.g. `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
-* A domain name with a leading "." matches subdomains only.
-  - e.g. `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
-* A CIDR range will match an IP address within the subnet.
-  - e.g. `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
-* An exact IP address
-  - e.g. `169.254.169.254`
-* A hostname
-  - e.g. `webserver1`
-
+* A domain name matches that name and all subdomains, for example:
+  - `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
+  - `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
+* A domain name with a leading "." matches subdomains only, for example:
+  - `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
+* A CIDR range matches an IP address within the subnet, for example:
+  - `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
+* An exact IP address, for example:
+  - `169.254.169.254`
+* A hostname, for example:
+  - `webserver1`
 
 #### Environment variables
 
@@ -108,7 +107,7 @@ Starting with Agent v6.4, you can set your proxy settings through environment va
 * `DD_PROXY_HTTP`: Sets a proxy server for `http` requests.
 * `DD_PROXY_NO_PROXY`: Sets a list of hosts that should bypass the proxy. The list is space-separated.
 
-Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_PROXY_HTTP=""``), the Agent uses those empty values instead of lower-precedence options.
+Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value, for example: ``DD_PROXY_HTTP=""``, the Agent uses the empty values instead of lower-precedence options.
 
 On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every requests from integrations, including orchestrators like Docker, ECS, and Kubernetes.
 
@@ -145,9 +144,9 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 [HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
-This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network-each proxy can accommodate upwards of 1000 Agents. (Be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][2] for additional information.)
+This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network-each proxy can accommodate upwards of 1000 Agents. **Note**: This figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. See the [HAProxy documentation][2] for additional information.
 
-`agent ---> haproxy ---> Datadog`
+`agent -> haproxy -> Datadog`
 
 ### Proxy forwarding with HAProxy
 
@@ -294,8 +293,8 @@ backend datadog-logs-http
 
 **Note**: Download the certificate with the following command:
         * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-        * `yum install ca-certificates` (CentOS, Redhat)
-The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
+        * `yum install ca-certificates` (CentOS, Red Hat)
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
 
 HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
 If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
@@ -428,9 +427,9 @@ backend datadog-logs-http
 **Note**: Download the certificate with the following command:
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat)
+* `yum install ca-certificates` (CentOS, Red Hat)
 
-The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
+The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
 
 HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
 If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
@@ -442,12 +441,12 @@ If you are using older version of HAProxy, you have to reload or restart HAProxy
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: http://haproxy.example.com:3834`
 
-To send traces, processes and logs through the proxy, setup the following in the `datadog.yaml` file:
+To send traces, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
@@ -477,7 +476,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
 This `dd_url` setting can be found in the `datadog.conf` file.
 
 `dd_url: http://haproxy.example.com:3834`
@@ -645,7 +644,7 @@ logs_config:
   logs_no_ssl: true
 ```
 
-When sending logs over TCP, refer to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
+When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
 
 
 ## Datadog Agent

@@ -19,7 +19,7 @@ integration_title: VNS3
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 1.0.2
+manifest_version: 1.0.0
 metric_prefix: vns3.
 metric_to_check: vns3.peering
 name: vns3

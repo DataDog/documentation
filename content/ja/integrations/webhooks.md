@@ -130,6 +130,9 @@ $INCIDENT_URL
 : インシデントの URL。<br />
 **例**: `https://app.datadoghq.com/incidents/1`
 
+$INCIDENT_MSG
+: インシデント通知のメッセージ。<br />
+
 $LAST_UPDATED
 : イベントが最後に更新された日付。
 

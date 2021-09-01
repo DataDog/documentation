@@ -72,9 +72,15 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
         GRANT VIEW SERVER STATE to datadog;
     ```
 
-2. SQL Server インスタンスが、特定の固定ポートをリッスンしていることを確認します。デフォルトでは、名前付きインスタンスおよび SQL Server Express は動的ポート用に構成されています。詳細は、[Microsoft のドキュメント][3] をご参照ください。
+   データベースごとにファイルサイズのメトリクスを収集するには、以下を実行して、作成したユーザー (`datadog`) にデータベースに[接続権限アクセス][3]があることを確認します。
 
-3. (AlwaysOn メトリクスに必須)  AlwaysOn メトリクスを収集するには、追加の権限が必要です。
+   ```text
+       GRANT CONNECT ANY DATABASE to datadog; 
+   ```
+
+2. SQL Server インスタンスが、特定の固定ポートをリッスンしていることを確認します。デフォルトでは、名前付きインスタンスおよび SQL Server Express は動的ポート用に構成されています。詳細は、[Microsoft のドキュメント][4] をご参照ください。
+
+3. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。
 
     ```text
         GRANT VIEW ANY DEFINITION to datadog;
@@ -189,7 +195,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションの `sqlserver` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションの `sqlserver` を探します。
 
 ## 収集データ
 
@@ -204,8 +210,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 SQL Server チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "sqlserver" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
@@ -222,9 +228,9 @@ SQL Server チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/service_checks.json
+[3]: https://docs.microsoft.com/en-us/sql/t-sql/statements/grant-server-permissions-transact-sql?view=sql-server-ver15
+[4]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/
 [7]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
 [8]: https://www.datadoghq.com/blog/sql-server-monitoring

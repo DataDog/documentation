@@ -3,15 +3,12 @@ aliases:
   - /ja/wnt-129-8hr
   - /ja/security_monitoring/default_rules/wnt-129-8hr
   - /ja/security_monitoring/default_rules/ssl_certificate_tampering
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: SSL 証明書の改ざん
 type: security_rules

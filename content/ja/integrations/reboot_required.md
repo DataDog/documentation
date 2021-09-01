@@ -73,21 +73,14 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 reboot_required チェックには、イベントは含まれません。
 
-## サービスのチェック
+### サービスのチェック
+{{< get-service-checks-from-git "reboot_required" >}}
 
-Datadog でこれらのサービスチェックのアラート条件を作成するには、[Create Monitor][10] ページで 'Integration' ではなく 'Custom Check' を選択します。
-
-**`system.reboot_required`**
-
-チェックは次の内容を返します。
-
-- 再起動が必要ない、あるいは `days_warning` や `days_critical` より小さい場合は、`OK`。
-- `days_warning` 日より長い間、再起動が要求されている場合は、`WARNING`。
-- `days_critical` 日より長い間、再起動が要求されている場合は、`CRITICAL`。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -98,5 +91,5 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 [7]: https://github.com/DataDog/integrations-extras/blob/master/reboot_required/datadog_checks/reboot_required/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[10]: https://app.datadoghq.com/monitors#/create
+[10]: https://github.com/DataDog/integrations-extras/blob/master/reboot_required/assets/service_checks.json
 [11]: http://docs.datadoghq.com/help

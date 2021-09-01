@@ -5,6 +5,8 @@ disable_sidebar: true
 private: true
 ---
 
+Integration Guides:
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="integrations/guide/requests" tag="documentation" >}}Request Datadog Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}

@@ -53,7 +53,7 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 ### Renotify
 
-Enable monitor renotification (optional) to remind your team that a problem is not solved. 
+Enable monitor renotification (optional) to remind your team that a problem is not solved.
 
   {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify"  style="width:70%;" >}}
 
@@ -74,7 +74,7 @@ Learn how to configure your monitors for those use cases in [the example section
 ### Priority
 
 Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
-To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5. 
+To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
 
 For example, you can set different priorities for `alert` and `warning` notifications:
 
@@ -156,20 +156,22 @@ Template variables that return numerical values support operations and functions
 
 #### Local time
 
-Use the `local_time` function to transform a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
-For example, to show the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
+Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to add the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
 
 ```
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}
 ```
 
-The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`. 
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
 Refer to the [list of tz database time zones][14], particularly the TZ database name column, to see the list of available time zone values.
 
 ### Tag variables
 
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
-For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message. 
+For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
+
+For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message will render a comma-separated string of all values, in the lexicographic order.
 
 <div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.</div>
 
@@ -177,7 +179,7 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 #### Multi-alert group by host
 
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. 
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
 To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
 Some specific host metadata are available as well:
 
@@ -210,7 +212,7 @@ For example, if your log monitor is grouped by the `facet`, the variable is:
 ```text
 {{ @facet.name }}
 ```
-**Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
+**Example**: To include the information in a multi alert log monitor group by `@machine_id`:
 
 ```text
 This alert was triggered on {{ @machine_id.name }}
@@ -223,7 +225,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Composite monitor variables
 
-Composite monitors can access the value associated with the sub-monitors at the time the alert triggers. 
+Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
 
 For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
 
@@ -414,7 +416,7 @@ On monitor renotification, users will get the following escalation message:
 This part is generic and sent both for the first trigger and the escalation message.
 
 This is the escalation message @dev-team@company.com
-``` 
+```
 
 {{% /tab %}}
 {{< /tabs >}}

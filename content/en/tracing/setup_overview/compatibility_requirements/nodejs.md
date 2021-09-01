@@ -96,6 +96,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [oracledb][36]         | `>=5`    | Fully supported |                                                  |
 | [pg][37]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
 | [redis][38]            | `>=0.12` | Fully supported |                                                  |
+| [sharedb][61]          | `>=1`    | Fully supported |                                                  |
 | [tedious][39]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
 ### Worker compatibility
@@ -207,3 +208,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [58]: https://nodejs.org/api/async_hooks.html
 [59]: https://www.meteor.com/
 [60]: https://github.com/DataDog/dd-trace-js/issues/1229
+[61]: https://share.github.io/sharedb/

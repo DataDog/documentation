@@ -939,9 +939,6 @@
                         }
                     }
                 ]
-            },
-            "layout": {
-                "is_column_break": true
             }
         },
         {

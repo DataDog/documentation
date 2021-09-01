@@ -12,7 +12,11 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-It's recommended that you set up Datadog as an Okta application manually, as opposed to using a 'pre-configured' configuration.
+## Setup
+
+Follow the [How to Configure SAML 2.0 for Datadog][1] docs to configure Okta as a SAML IdP.
+
+**Note**: It's recommended that you set up Datadog as an Okta application manually, as opposed to using a `pre-configured` configuration.
 
 ## General details
 

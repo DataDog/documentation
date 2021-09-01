@@ -84,6 +84,10 @@ nav_sections:
         link: continuous_integration/
         icon: ci.svg
         desc: Track the performance and reliability of your tests and pipelines
+      - title: Database Monitoring
+        link: database_monitoring/
+        icon: dbm.svg
+        desc: Gain deep visibility into database and query performance
   - nav_section:
     - name: 'Configuration'
     - navtiles:
