@@ -3,10 +3,10 @@ integration_title: RSS
 name: rss
 kind: integration
 doclevel: basic
-description: 'See RSS feeds in your Datadog event stream.'
+description: "See RSS feeds in your Datadog event stream."
 is_public: true
 public_title: Datadog-RSS Integration
-short_description: 'Capture any RSS feed inside your Datadog event stream'
+short_description: "Capture any RSS feed inside your Datadog event stream"
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:

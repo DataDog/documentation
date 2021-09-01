@@ -27,7 +27,7 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 
 ## VPC エンドポイントを作成する
 
-1. AWS コンソールを開き、新しい VPC エンドポイントを作成します。
+1. AWS コンソールでリージョン **us-east-1** に接続し、新しい VPC エンドポイントを作成します。
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="VPC エンドポイントを作成" style="width:60%;" >}}
 2. **Find service by name** を選択します。
 3. _Service Name_ テキストボックスに、AWS PrivateLink を構築したいサービスの名前を入力します。
@@ -86,7 +86,7 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="プライベート DNS を有効化" style="width:60%;" >}}
 7. 任意のセキュリティグループを選択し、この VPC エンドポイントにトラフィックを送信できる送信元の範囲を指定します。
 
-    **注**: **VPC エンドポイントを介して Datadog にログ転送を行う場合は、セキュリティグループがポート `443` のインバウンドおよびアウトバンドトラフィックを許容している必要があります**。
+    **注**: **セキュリティグループは、TCP ポート `443` のインバウンドトラフィックを許可する必要があります**。
 
 8. 画面下部の **Create endpoint** をクリックします。作成が完了すると以下のようなメッセージが表示されます。
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC エンドポイントの作成完了" style="width:60%;" >}}

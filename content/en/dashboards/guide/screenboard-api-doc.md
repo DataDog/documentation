@@ -1,5 +1,5 @@
 ---
-title: Screenboard API doc
+title: Screenboard API
 kind: guide
 aliases:
   - /graphing/faq/screenboard-api-doc
@@ -339,7 +339,7 @@ curl -X DELETE \
 
 ## Get a screenboard
 
-Fetch an existing screenboard's definition.
+Fetch an existing screenboard definition.
 
 ### Signature
 

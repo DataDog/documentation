@@ -9,7 +9,7 @@ further_reading:
   text: "Shared Graphs"
 ---
 
-Embeddable graphs created via the API accept template variables. Below is an example utilizing Python to query `avg:system.cpu.user{$var}`. In this example, `$var` is the template variable. **Note**: This method currently only supports graphs with timeseries visualization. 
+Embeddable graphs created with the API accept template variables. Below is an example utilizing Python to query `avg:system.cpu.user{$var}`. In this example, `$var` is the template variable. **Note**: This method only supports graphs with timeseries visualization. 
 
 ```python
 from datadog import initialize, api

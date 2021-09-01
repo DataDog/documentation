@@ -58,7 +58,10 @@ With the following placeholders:
 
 ## Wildcard match pattern
 
-The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_` characters for this pattern to work. Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
+The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_` characters for this pattern to work. Groups extracted can then be expanded with one of the following:
+
+- `$n` format: `$1`, `$2`, `$3`, etc.
+- `${n}` format: `${1}`, `${2}`, `${3}`, etc.
 
 For instance, if you have the metric `custom_metric.process.value_1.value_2` with the following mapping group configuration:
 
@@ -79,7 +82,10 @@ It would send the metric `custom_metric.process` to Datadog with the tags `tag_k
 
 ## Regex match pattern
 
-The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`. Groups extracted can then be expanded with the `$n` format e.g. `$1`, `$2`, `$3`... or the `${n}` format e.g. `${1}`, `${2}`, `${3}`, ...
+The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`. Groups extracted can then be expanded with one of the following:
+
+- `$n` format: `$1`, `$2`, `$3`, etc.
+- `${n}` format: `${1}`, `${2}`, `${3}`, etc.
 
 For instance, if you have the metric `custom_metric.process.value_1.value.with.dots._2` with the following mapping group configuration:
 

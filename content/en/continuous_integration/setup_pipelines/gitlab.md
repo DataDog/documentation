@@ -123,7 +123,7 @@ Go to **Settings > Webhooks** in your repository (or GitLab instance settings), 
 * **Secret Token**: leave blank
 * **Trigger**: Select `Job events` and `Pipeline events`.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.eu/account/settings#api
 {{< /site-region >}}
 
 To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`

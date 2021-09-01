@@ -30,7 +30,7 @@ further_reading:
 
 Datadog Incident Management is for tracking and communicating about an issue you've identified with your metrics, traces, or logs.
 
-This guide walks you through using the Datadog app for declaring an incident, updating the incident as investigation and remediation progresses, and generating a postmortem when the incident has been resolved. The example assumes the [Slack integration][1] is enabled.
+This guide walks you through using the Datadog site for declaring an incident, updating the incident as investigation and remediation progresses, and generating a postmortem when the incident has been resolved. The example assumes the [Slack integration][1] is enabled.
 
 ## Walking through an incident from issue detection to resolution
 
@@ -71,9 +71,9 @@ This guide describes using the [Datadog Clipboard][2] to declare an incident.
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Severity                 | Set to **Unknown** since it’s unclear whether customers are being impacted and how related services are being impacted. See the in-app description of what each severity level means and follow your team’s guidelines.                                                                                    |
 | Title                    | Follow any naming conventions your team wants to use for incident titles. Because this is not a real incident, include the word `TEST` to make it clear that this is a test incident. An example title: `[TEST] My incident test`                                                                      |
-| Signals                  | Signals are the reason you are declaring the incident. These can be graphs, logs, or other key visuals.  The graph and the monitor you selected is already included but you can add additional signals. For example, copy the URL for this guide and add it using **Ctrl**/**Cmd** + **V**.                      |
+| Signals                  | Signals are the reason you are declaring the incident. These can be graphs, logs, or other key visuals. The graph and the monitor you selected is already included but you can add additional signals. For example, copy the URL for this guide and add it using **Ctrl**/**Cmd** + **V**.                      |
 | Incident Commander       | Leave this assigned to you. In an actual incident this would be assigned to the leader of the incident investigation. You or others can update who the incident commander is as the incident investigation progresses.                                                                                 |
-| Additional Notifications | Leave blank because this is only a test, and you don’t want to alert anyone else or another service.  In an actual incident, you will add people and services that should be notified to help with the investigation and remediation. You can send these notifications to Slack and PagerDuty as well. |
+| Additional Notifications | Leave blank because this is only a test, and you don’t want to alert anyone else or another service. For an actual incident, add people and services that should be notified to help with the investigation and remediation. You can send these notifications to Slack and PagerDuty as well. |
 
 9. Click **Declare Incident** to create the incident.
 
@@ -93,7 +93,7 @@ This guide describes using the [Datadog Clipboard][2] to declare an incident.
 
     A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
 
-    In this example, you are the only one added to the new incident channel. When you add additional people or services in Additional Notifications for an actual incident, everyone will be automatically added to the incident channel.
+    In this example, you are the only one added to the new incident channel. When you add additional people or services in Additional Notifications for an actual incident, everyone is automatically added to the incident channel.
 
     If you don't have the Slack integration enabled, click **Link to Chat** to add the link to the chat service you are using to discuss the incident.
 
@@ -199,7 +199,7 @@ The _Timeline_ shows additions and changes to incident fields and information in
 
 #### Communications
 
-**Scenario:** The issue has been mitigated, and the team is monitoring the situation. The incident status is now stable.
+**Scenario:** The issue has been mitigated, and the team is monitoring the situation. The incident status is stable.
 
 In the _Communications_ section, you can send out a notification updating the status of the incident.
 
@@ -215,7 +215,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
     The default message has the incident's title in the subject and information about the current status of the incident in the body.
 
-    In an actual incident you would send updates to the people involved in the incident. For this example, you will send a notification to yourself only.
+    In an actual incident you would send updates to the people involved in the incident. For this example, send a notification to yourself only.
 
 6. Add yourself to _Add recipients_.
 
@@ -253,7 +253,7 @@ In the _Communications_ section, you can send out a notification updating the st
 
 9. Click **Generate**.
 
-    The postmortem will be generated as a Datadog Notebook, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future. Datadog Notebook supports live collaboration so you can edit it with your teammates in real-time.
+    The postmortem is generated as a Datadog Notebook, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future. Datadog Notebook supports live collaboration so you can edit it with your teammates in real-time.
 
     If there are follow-up tasks that you and your team need to complete to ensure the issue doesn't happen again, add those and track them in the Remediation's _Incident Tasks_ section.
 

@@ -96,7 +96,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
-Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space. 
+Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
 ### Set alert conditions
@@ -108,7 +108,13 @@ The alert conditions vary slightly based on the chosen detection method.
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
 * the threshold `on average`, `at least once`, `at all times`, or `in total`
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 730 hours (1 month).
+
+The evaluation frequency changes based on the evaluation time frame you select:
+
+* `timeframe < 24h`: evaluation performs every 1 minute.
+* `24h < timeframe < 48h`: evaluation performs every 10 minutes.
+* `timeframe > 48h`: evaluation performs every 30 minutes.
 
 **Definitions**:
 
@@ -192,6 +198,15 @@ For some metrics that report periodically, it may make sense for triggered alert
 
 In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
 
+#### New group delay
+
+Delay the evaluation start by `N` seconds for new groups.
+
+The time (in seconds) to wait before starting alerting, to allow newly created groups to boot and applications to fully start. This should be a non-negative integer.
+
+For example, if you are using containerized architecture, setting an evaluation delay prevents monitor groups scoped on containers from triggering due to high resource usage or high latency when a new container is created. The delay is applied to every new group (which has not been seen in the last 24 hours) and defaults to `60` seconds.
+
+The option is available with multi-alert mode.
 #### Evaluation delay
 
 Delay evaluation by `N` seconds.

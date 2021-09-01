@@ -227,7 +227,7 @@ For example:
 version: 2.1
 
 orbs:
-  datadog-agent: datadog/agent@0.0.1
+  datadog-agent: datadog/agent@0
 
 jobs:
   test:
@@ -250,7 +250,7 @@ workflows:
 version: 2.1
 
 orbs:
-  datadog-agent: datadog/agent@0.0.1
+  datadog-agent: datadog/agent@0
 
 jobs:
   test:

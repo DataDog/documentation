@@ -77,14 +77,14 @@ For different messages based on alert vs. warning thresholds, see the [Notificat
 
 Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the message box:
 
-{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications"  style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" style="width:70%;" >}}
 
 Removing the `@notification` from either section removes it from both sections.
 
 ### Restrict access
 
 <div class="alert alert-warning">
-RBAC restrict access to monitors is currently in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+RBAC restrict access to monitors is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
 Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
 

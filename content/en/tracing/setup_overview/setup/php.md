@@ -78,7 +78,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -439,6 +439,212 @@ To remove the PHP tracer:
 
 In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump or a Valgrind trace and contact Datadog support.
 
+### Install debug symbols
+
+For the core dumps to be readable, debug symbols for the PHP binaries have to be installed on the system that runs PHP.
+
+To check if debug symbols are installed for PHP or PHP-FPM, use `gdb`.
+
+Install `gdb`:
+
+```
+apt|yum install -y gdb
+```
+
+Run `gdb` with the binary of interest. For example for PHP-FPM:
+
+```
+gdb php-fpm
+```
+
+If the `gdb` output contains a line similar to the text below, then debug symbols are already installed.
+
+```
+...
+Reading symbols from php-fpm...Reading symbols from /usr/lib/debug/path/to/some/file.debug...done.
+...
+```
+
+If the `gdb` output contains a line similar to the text below, then debug symbols need to be installed:
+
+```
+...
+Reading symbols from php-fpm...(no debugging symbols found)...done.
+...
+```
+
+
+#### Centos
+
+Install package `yum-utils` that provides the program `debuginfo-install`:
+
+```
+yum install -y yum-utils
+```
+
+Find the package name for your PHP binaries, it can vary depending on the PHP installation method:
+
+```
+yum list installed | grep php
+```
+
+Install debug symbols. For example for package `php-fpm`:
+
+```
+debuginfo-install -y php-fpm
+```
+
+**Note**: If the repository that provides the PHP binaries is not enabled by default, it can be enabled when running the `debuginfo-install` command. For example:
+
+```
+debuginfo-install --enablerepo=remi-php74 -y php-fpm
+```
+
+#### Debian
+
+##### PHP installed from the Sury Debian DPA
+
+If PHP was installed from the [Sury Debian DPA][13], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+
+```
+apt update
+apt install -y php7.2-fpm-dbgsym
+```
+
+##### PHP installed from a different package
+
+The Debian project maintains a wiki page with [instructions to install debug symbols][14].
+
+Edit the file `/etc/apt/sources.list`:
+
+```
+# ... leave here all the pre-existing packages
+
+# add a `deb` deb http://deb.debian.org/debian-debug/ $RELEASE-debug main
+# For example for buster
+deb http://deb.debian.org/debian-debug/ buster-debug main
+```
+
+Update `apt`:
+
+```
+apt update
+```
+
+Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+If debug symbols cannot be found, use the utility tool `find-dbgsym-packages`. Install the binary:
+
+```
+apt install -y debian-goodies
+```
+
+Attempt finding debug symbols from either the full path to the binary or the process id of a running process:
+
+```
+find-dbgsym-packages /usr/sbin/php-fpm7.2
+```
+
+Install the resulting package name, if found:
+
+```
+apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
+```
+
+#### Ubuntu
+
+##### PHP installed from `ppa:ondrej/php`
+
+If PHP was installed from the [`ppa:ondrej/php`][15], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+
+Before:
+
+```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main```
+
+After:
+
+```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
+
+Update and install the debug symbols. For example, for PHP-FPM 7.2:
+
+```
+apt update
+apt install -y php7.2-fpm-dbgsym
+```
+##### PHP installed from a different package
+
+Find the package name for your PHP binaries, it can vary depending on the PHP installation method:
+
+```
+apt list --installed | grep php
+```
+
+**Note**: In some cases `php-fpm` can be a metapackage that refers to the real package, for example `php7.2-fpm` in case of PHP-FPM 7.2. In this case the package name is the latter.
+
+Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][16] from the `ddebs` can be found in the Ubuntu documentation.
+
+For example, for Ubuntu 18.04+, enable the `ddebs` repo:
+
+```
+echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
+
+echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
+```
+
+Import the signing key (make sure the [signing key is correct][17]):
+
+```
+apt install ubuntu-dbgsym-keyring
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNTU DOCUMENTATION>
+apt update
+```
+
+Try againg the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+In case debug symbols cannot be found, use the utility tool `find-dbgsym-packages`. Install the binary:
+
+```
+apt install -y debian-goodies
+```
+
+Attempt finding debug symbols from either the full path to the binary or the process id of a running process:
+
+```
+find-dbgsym-packages /usr/sbin/php-fpm7.2
+```
+
+Install the resulting package name, if found:
+
+```
+apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
+```
+
 ### Obtaining a core dump
 
 Obtaining a core dump for PHP applications can be tricky, especially on PHP-FPM. Here are a few tips to help you obtain a core dump:
@@ -479,6 +685,47 @@ When using Apache, run:
 {{< code-block lang="shell" >}}
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
+
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][18] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+
+```
+==322== Conditional jump or move depends on uninitialised value(s)
+==322==    at 0x41EE82: zend_string_equal_val (zend_string.c:403)
+==322==    ...
+==322==    ...
+==322==
+==322== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==322==    at 0x73C8657: kill (syscall-template.S:81)
+==322==    by 0x1145D0F2: zif_posix_kill (posix.c:468)
+==322==    by 0x478BFE: ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER (zend_vm_execute.h:1269)
+==322==    by 0x478BFE: execute_ex (zend_vm_execute.h:53869)
+==322==    by 0x47D9B0: zend_execute (zend_vm_execute.h:57989)
+==322==    by 0x3F6782: zend_execute_scripts (zend.c:1679)
+==322==    by 0x394F0F: php_execute_script (main.c:2658)
+==322==    by 0x1FFE18: main (fpm_main.c:1939)
+==322==
+==322== Process terminating with default action of signal 11 (SIGSEGV)
+==322==    ...
+==322==    ...
+==322==
+==322== HEAP SUMMARY:
+==322==     in use at exit: 3,411,619 bytes in 22,428 blocks
+==322==   total heap usage: 65,090 allocs, 42,662 frees, 23,123,409 bytes allocated
+==322==
+==322== LEAK SUMMARY:
+==322==    definitely lost: 216 bytes in 3 blocks
+==322==    indirectly lost: 951 bytes in 32 blocks
+==322==      possibly lost: 2,001,304 bytes in 16,840 blocks
+==322==    still reachable: 1,409,148 bytes in 5,553 blocks
+==322==                       of which reachable via heuristic:
+==322==                         stdstring          : 384 bytes in 6 blocks
+==322==         suppressed: 0 bytes in 0 blocks
+==322== Rerun with --leak-check=full to see details of leaked memory
+==322==
+==322== Use --track-origins=yes to see where uninitialised values come from
+==322== For lists of detected and suppressed errors, rerun with: -s
+==322== ERROR SUMMARY: 18868 errors from 102 contexts (suppressed: 0 from 0)
+```
 
 ### Obtaining a strace
 
@@ -521,3 +768,9 @@ For Apache, run:
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
 [11]: https://github.com/mind04/mod-ruid2
 [12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[13]: https://packages.sury.org/php/
+[14]: https://wiki.debian.org/HowToGetABacktrace
+[15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

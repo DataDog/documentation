@@ -52,12 +52,15 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 
 ## カスタムメトリクスの送信
 
-{{< whatsnext desc="メトリクスを Datadog に送信する方法はいくつかあります。">}}
+{{< whatsnext desc="メトリクスを Datadog に送信する方法は複数あります。">}}
     {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}カスタム Agent チェック{{< /nextlink >}}
     {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
+    {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/tracing/generate_metrics/" >}}APM スパンベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}ライブプロセスベースのメトリクスを生成する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [Datadog 公式/コミュニティ寄稿の API および DogStatsD クライアントライブラリ][12]のいずれかを使用して、カスタムメトリクスを送信することもできます。

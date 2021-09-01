@@ -10,7 +10,7 @@ This document details the available metrics and default dashboard for monitoring
 
 ## Trace analytics usage dashboard
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview.png" style="width:100%;" alt="Tracing without Limits Usage Dashboard" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview_2.png" style="width:100%;" alt="Tracing without Limits Usage Dashboard" >}}
 
 Datadog provides an out-of-the-box [Usage Dashboard][5] for monitoring your APM usage, as well as your ingested and indexed span volumes.
 
@@ -38,10 +38,9 @@ Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears a
 
 **Note**: Admin rights are required to create, modify, or disable retention filters.
 
-
 [1]: /tracing/trace_retention_and_ingestion/#retention-filters
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
 [4]: /account_management/billing/apm_distributed_tracing/
-[5]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[5]: https://app.datadoghq.com/dash/integration/30337/trace-analytics---usage
 [6]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter

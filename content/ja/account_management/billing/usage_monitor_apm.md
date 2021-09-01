@@ -19,9 +19,9 @@ APM および分散型トレーシングの請求の仕組みについては、[
 
 ## APM ホストにアラートを設定する
 
-コードデプロイによってトレースを送信するホストの数が増大した場合にアラートを取得するには、APM ホストカウントにモニターを設定します。インフラストラクチャーの任意のスコープ（`prod`、`availablity-zone` など）のホストボリュームが予期せず増大している場合、通知を受け取ります。
+コードデプロイによってトレースを送信するホストの数が増大した場合にアラートを取得するには、APM ホストカウントにモニターを設定します。インフラストラクチャーの任意のスコープ（`prod`、`availability-zone` など）のホストボリュームが予期せず増大している場合、通知を受け取ります。
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="分析ビュー" video="true"  style="width:90%;">}}
+{{< img src="tracing/faq/apm_host_monitor.mp4" alt="分析ビュー" video="true" style="width:90%;">}}
 
 1. Monitors -> New Monitor に移動します
 2. `datadog.apm.host_instance` で[新しいメトリクスモニター][4]を設定します
@@ -39,7 +39,7 @@ APM および分散型トレーシングの請求の仕組みについては、[
 5. 警告またはエラーとする Indexed Span のボリュームレートを定義します。
 6. わかりやすい通知を定義します。たとえば、「このサービスの Indexed Span のボリュームが大きすぎます。追加の除外フィルターを定義するか、フィルターレートを上げて制御下に戻してください。」とします。
 
-Retention Filter について詳しくは、[こちら][7]を参照してください。
+[保持フィルター][7]の詳細を参照してください。
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /ja/account_management/billing/apm_distributed_tracing/

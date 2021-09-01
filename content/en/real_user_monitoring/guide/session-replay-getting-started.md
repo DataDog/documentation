@@ -51,7 +51,7 @@ DD_RUM.startSessionReplayRecording();
 ```
 
 #### CDN
-Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, it also starts the Session Replay recording.
+Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
 *Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
 
@@ -124,7 +124,7 @@ Unlike fonts and images, the recorder tries to bundle the various CSS rules appl
 
 If the stylesheets are hosted on a different domain than the web page, access to the CSS rules is subject to cross-origin security checks by the browser, and the browser must be instructed to load the stylesheet leveraging CORS using the [crossorigin][8] attribute.
 
-For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` via a link element, the `crossoriring` attribute should be set to `anonymous`, unless credentials are required:
+For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` via a link element, the `crossorigin` attribute should be set to `anonymous`, unless credentials are required:
 
 ``` html
 <link rel="stylesheet" crossorigin="anonymous"

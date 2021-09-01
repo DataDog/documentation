@@ -5,10 +5,10 @@ description: 属性と命名規則の遵守について
 aliases:
   - /ja/logs/processing/attributes_naming_convention/
 further_reading:
-  - link: logs/processing/pipelines
+  - link: logs/log_configuration/pipelines
     tag: ドキュメント
     text: Datadog のパイプライン
-  - link: logs/processing/processors
+  - link: logs/log_configuration/processors
     tag: ドキュメント
     text: 使用可能なプロセッサーのリスト
   - link: logs/logging_without_limits
@@ -283,13 +283,13 @@ Datadog ではこの属性を[トレース検索][20]のデフォルトの[メ�
 [10]: /ja/integrations/amazon_elb/
 [11]: /ja/integrations/nginx/
 [12]: /ja/integrations/haproxy/
-[13]: /ja/logs/processing/processors/#url-parser
-[14]: /ja/logs/processing/processors/#user-agent-parser
+[13]: /ja/logs/log_configuration/processors/#url-parser
+[14]: /ja/logs/log_configuration/processors/#user-agent-parser
 [15]: /ja/integrations/cassandra/
 [16]: /ja/integrations/mysql/
 [17]: /ja/integrations/amazon_rds/
 [18]: /ja/integrations/elastic/
-[19]: /ja/logs/processing/processors/#remapper
+[19]: /ja/logs/log_configuration/processors/#remapper
 [20]: /ja/tracing/app_analytics/search/
 [21]: /ja/integrations/rsyslog/
 [22]: /ja/integrations/nxlog/

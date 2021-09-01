@@ -62,7 +62,7 @@ Set up the check alert:
 1. Trigger a separate alert for each `<GROUP>` reporting your check.
 
     Check grouping is specified either from a list of known groupings or by you. For integration monitors, the per-check grouping is explicitly known. For example, the Postgres integration is tagged with `db`, `host`, and `port`.
-    
+
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
     Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your database might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
@@ -82,6 +82,11 @@ Set up a cluster alert:
 
 2. Select the percentage for the alert threshold.
 
+Each check tagged with a distinct combination of tags is considered to be a distinct check in the cluster. Only the status of the last check of each combination of tags is taken into account in the cluster percentage calculation.
+
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
+
+For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
 {{% /tab %}}
 {{< /tabs >}}
 

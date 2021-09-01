@@ -15,11 +15,11 @@ This widget displays a map of a service to all of the services that call it, and
 
 The service map widget does not respond to time scoping and always shows services that made calls in the preceding two weeks. Metrics are calculated for each services in real time for the previous hour.
 
-{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="service map setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="service map setup" style="width:80%;">}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/service_map/service_map.png" alt="service map setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/service_map.png" alt="service map setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -34,7 +34,7 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
 
 The dedicated [widget JSON schema definition][5] for the service map widget is:
 

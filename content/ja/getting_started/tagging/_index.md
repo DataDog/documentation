@@ -1,24 +1,26 @@
 ---
 title: タグの概要
 kind: ドキュメント
-description: Datadog でのタグの使用方法
+description: 'Datadog でのタグの使用方法'
 aliases:
-  - /ja/getting_started/getting_started_with_tags
-  - /ja/guides/getting_started/tagging/
-  - /ja/developers/getting_started/tagging/
-  - /ja/tagging
-  - /ja/guides/tagging/
+    - /ja/getting_started/getting_started_with_tags
+    - /ja/guides/getting_started/tagging/
+    - /ja/developers/getting_started/tagging/
+    - /ja/tagging
+    - /ja/guides/tagging/
+    - /ja/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
 further_reading:
-  - link: /getting_started/tagging/assigning_tags/
-    tag: Documentation
-    text: タグの割り当て方法
-  - link: /getting_started/tagging/unified_service_tagging/
-    tag: Documentation
-    text: 統合サービスタグ付けを構成
-  - link: /getting_started/tagging/using_tags/
-    tag: Documentation
-    text: Datadog アプリでタグを使用する方法
+    - link: /getting_started/tagging/assigning_tags/
+      tag: Documentation
+      text: タグの割り当て方法
+    - link: /getting_started/tagging/unified_service_tagging/
+      tag: Documentation
+      text: 統合サービスタグ付けを構成
+    - link: /getting_started/tagging/using_tags/
+      tag: Documentation
+      text: Datadog アプリでタグを使用する方法
 ---
+
 ## はじめに
 
 タグは、Datadog テレメトリーにディメンションを追加する方法のひとつで、Datadog の可視化機能によって絞り込み、集計、比較できます。[タグを使用][1]すると、多数のホストの集計パフォーマンスを観察でき、必要に応じて、特定の要素に基づいて設定をさらに絞り込むこともできます。つまり、タグ付けは集計データポイントを観察する手段です。
@@ -57,8 +59,8 @@ further_reading:
 
     **注**: `tag:` のようにタグの末尾にコロンを使用することはできません。
 
-2. タグは**最大 200 文字**で、Unicode をサポートします。
-3. タグは小文字に変換されます。そのため、`CamelCase (キャメル ケース)` 形式のタグは推奨されません。認証 (クローラー) ベースのインテグレーションでは、タグのキャメル ケース部分はアンダースコアに変換されます。たとえば、`TestTag` は `test_tag` となります。
+2. タグの長さは**最大 200 文字**で、Unicode (日本語などの言語を含むほとんどの文字セットを含む) をサポートします。
+3. タグは小文字に変換されます。そのため、`CamelCase (キャメル ケース)` 形式のタグは推奨されません。認証 (クローラー) ベースのインテグレーションでは、タグのキャメル ケース部分はアンダースコアに変換されます。たとえば、`TestTag` は `test_tag` となります。**注**: `host` タグと `device` タグはこの変換から除外されます。
 4. タグは `value` または `<KEY>:<VALUE>` の形式にすることができます。機能を最大限に活用するために、タグを** `<KEY>:<VALUE>` 形式に構成することをお勧めします** 。よく使用されるタグ キーは、`env`、`instance`、`name` です。キーの後ろには常に、グローバルタグ定義の最初のコロンが付きます。例:
 
 
@@ -68,6 +70,7 @@ further_reading:
    | `env_staging:east` | `env_staging` | `east`         |
 
 5. タグは、EPOCH タイムスタンプ、ユーザー ID、リクエスト ID などのバインドされていないソースをベースにすることはできません。実行すると、組織の[メトリクス数が無限に増加][2]し、請求に問題が発生します。
+6. 制限 (ダウンケースなど) はメトリクスタグにのみ適用され、ログ属性やスパンタグには適用されません。
 
 ## タグの付け方
 
@@ -109,24 +112,24 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/using_tags/
-[2]: /ja/developers/metrics/
-[3]: /ja/getting_started/tagging/assigning_tags/
-[4]: /ja/getting_started/tagging/assigning_tags/#configuration-files
-[5]: /ja/getting_started/tagging/assigning_tags/#ui
-[6]: /ja/getting_started/tagging/assigning_tags/#api
-[7]: /ja/getting_started/tagging/assigning_tags/#dogstatsd
-[8]: /ja/getting_started/tagging/unified_service_tagging
-[9]: /ja/integrations/
-[10]: /ja/getting_started/tagging/using_tags/#events
-[11]: /ja/getting_started/tagging/using_tags/#dashboards
-[12]: /ja/getting_started/tagging/using_tags/#infrastructure
-[13]: /ja/getting_started/tagging/using_tags/#monitors
-[14]: /ja/getting_started/tagging/using_tags/#metrics
-[15]: /ja/getting_started/tagging/using_tags/#integrations
-[16]: /ja/getting_started/tagging/using_tags/#apm
-[17]: /ja/getting_started/tagging/using_tags/#notebooks
-[18]: /ja/getting_started/tagging/using_tags/#logs
-[19]: /ja/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
-[20]: /ja/getting_started/tagging/using_tags/#developers
-[21]: /ja/account_management/billing/usage_attribution/
+[1]: /getting_started/tagging/using_tags/
+[2]: /developers/metrics/
+[3]: /getting_started/tagging/assigning_tags/
+[4]: /getting_started/tagging/assigning_tags/#configuration-files
+[5]: /getting_started/tagging/assigning_tags/#ui
+[6]: /getting_started/tagging/assigning_tags/#api
+[7]: /getting_started/tagging/assigning_tags/#dogstatsd
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: /integrations/
+[10]: /getting_started/tagging/using_tags/#events
+[11]: /getting_started/tagging/using_tags/#dashboards
+[12]: /getting_started/tagging/using_tags/#infrastructure
+[13]: /getting_started/tagging/using_tags/#monitors
+[14]: /getting_started/tagging/using_tags/#metrics
+[15]: /getting_started/tagging/using_tags/#integrations
+[16]: /getting_started/tagging/using_tags/#apm
+[17]: /getting_started/tagging/using_tags/#notebooks
+[18]: /getting_started/tagging/using_tags/#logs
+[19]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
+[20]: /getting_started/tagging/using_tags/#developers
+[21]: /account_management/billing/usage_attribution/

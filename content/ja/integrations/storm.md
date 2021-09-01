@@ -76,17 +76,13 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 Storm チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "storm" >}}
 
-**`topology_check.{TOPOLOGY NAME}`**
-
-チェックは次の内容を返します。
-
-- `OK` - トポロジーがアクティブな場合。
-- `CRITICAL` - トポロジーがアクティブでない場合。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
@@ -98,4 +94,5 @@ Storm チェックには、イベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [10]: https://github.com/DataDog/integrations-extras/blob/master/storm/metadata.csv
-[11]: http://docs.datadoghq.com/help
+[11]: https://github.com/DataDog/integrations-extras/blob/master/storm/assets/service_checks.json
+[12]: http://docs.datadoghq.com/help

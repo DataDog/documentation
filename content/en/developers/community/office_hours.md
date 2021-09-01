@@ -9,7 +9,7 @@ Datadog runs twice monthly code reviews and office hours to assist community mem
 
 ### Where
 
-Office hours will be held in #integrations in the [Datadog Community Slack][1] ([get an invitation][2]), in conjunction with a [Zoom videoconference][3].
+Office hours are held in #integrations in the [Datadog Community Slack][1] ([get an invitation][2]), in conjunction with a [Zoom video conference][3].
 
 ### When
 
