@@ -59,9 +59,23 @@ To learn more about the host map, visit the [host map documentation][9].
 
 ## Events
 
-{{< img src="getting_started/application/events_explorer.png" alt="Event explorer"  >}}
+{{< img src="getting_started/event_stream.png" alt="Event stream"  >}}
 
-[The Events Explorer][10](beta) allows you to track notable changes and alerts across your applications and infrastructure. You can [search events][11] with a full text search or with facets, or you can break them down by attribute. You can then use the events to generate metrics, dashboards, and monitors.
+[The Event Stream][10] is based on the same conventions as a blog:
+
+- Any event in the stream can be commented on.
+- Can be used for distributed [teams][11] and maintaining the focus of an investigation.
+- You can [filter][12] by `user`, `source`, `tag`, `host`, `status`, `priority`, and `incident`.
+
+For each incident, users can:
+
+- Increase/decrease priority
+- Comment
+- See similar incidents
+- [@ notify team members][13], who receive an email
+- `@support-datadog` to ask for [assistance][14]
+
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" style="width:70%;">}}
 
 ## Dashboards
 
