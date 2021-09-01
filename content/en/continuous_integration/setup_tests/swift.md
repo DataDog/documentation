@@ -540,7 +540,3 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
-{{< /site-region >}}
-{{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}
