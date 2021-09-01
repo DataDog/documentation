@@ -1,6 +1,8 @@
 ---
 title: Real User Monitoring Monitor
 kind: documentation
+aliases:
+- /monitors/monitor_types/real_user_monitoring
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"

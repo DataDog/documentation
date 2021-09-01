@@ -2,19 +2,18 @@
 title: Check Summary
 kind: documentation
 description: "See the list of all your checks reporting to Datadog."
+aliases:
+- /monitors/check_summary/
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/manage_monitor/"
+- link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage your monitors"
-- link: "/monitors/downtimes/"
-  tag: "Documentation"
-  text: "Schedule a downtime for a monitor"
 ---
 
 ## Overview
@@ -36,7 +35,7 @@ To find a specific check, use the `filter checks` search box on the check summar
 
 To view your check status on a dashboard, utilize the [Check Status Widget][2].
 
-## Further Reading 
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

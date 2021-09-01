@@ -3,6 +3,7 @@ title: Anomaly Monitor
 kind: documentation
 aliases:
     - /guides/anomalies
+    - /monitors/monitor_types/anomaly
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
 - link: "/monitors/notifications/"
@@ -57,19 +58,19 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
 
 
-Deviations 
+Deviations
 : The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].
 
 Algorithm
 : The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
 
-Seasonality 
+Seasonality
 : The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
 
 Daylight savings
 : Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
 
-Rollup  
+Rollup
 : The [rollup interval][5].
 
 Thresholds
@@ -91,7 +92,7 @@ Weekly
 ##### Anomaly detection algorithms
 
 Basic
-: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends. 
+: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 Agile
 : Use when metrics are seasonal and expected to shift. The algorithm quickly adjusts to metric level shifts. A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.

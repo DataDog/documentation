@@ -2,6 +2,8 @@
 title: Event Monitor
 kind: documentation
 description: "Monitor events gathered by Datadog"
+aliases :
+    - /monitors/monitor_types/event
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"

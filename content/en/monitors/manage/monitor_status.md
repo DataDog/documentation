@@ -3,15 +3,15 @@ title: Monitor Status
 kind: documentation
 description: "Get an overview of your monitor status over time"
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/"
   tag: "Documentation"
-  text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+  text: "Create monitors"
+- link: "/monitors/notify/"
   tag: "Documentation"
-  text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+  text: "Monitor Notifications"
+- link: "/monitors/manage/"
   tag: "Documentation"
-  text: "Schedule a downtime for a monitor"
+  text: "Manage monitors"
 ---
 
 ## Overview
@@ -97,15 +97,37 @@ For further investigation into your metrics evolution, use a [dashboard][6] or [
 
 Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][8].
 
+### Audit events
+
+For all monitor types, monitor changes (monitor edits for instance) create an event in the [event stream][8]. This event explains the change and displays the user that made the change.
+
+If you made changes to a monitor, you can see examples with the following event search:
+
+```text
+https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20monitor%20modified
+```
+
+Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Notify your team**, choose **Notify** in the drop-down next to: *alert recipients when this alert is modified*.
+
+The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][9].
+
+## Export and import
+
+You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
+
+[Import a monitor][10] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/
-[2]: /monitors/downtimes/
+[1]: /monitors/create/
+[2]: /monitors/notify/downtimes/
 [3]: /api/v1/monitors/
 [4]: /dashboards/querying/
-[5]: /monitors/notifications/
+[5]: /monitors/notify/
 [6]: /dashboards/
 [7]: /notebooks/
 [8]: /events/
+[9]: https://app.datadoghq.com/event/stream
+[10]: https://app.datadoghq.com/monitors#create/import

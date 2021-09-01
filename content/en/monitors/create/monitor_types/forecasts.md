@@ -3,6 +3,7 @@ title: Forecasts Monitor
 kind: documentation
 aliases:
 - /guides/forecasts/
+- /monitors/monitor_types/forecasts
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -111,7 +112,7 @@ The `query` property in the request body should contain a query string in the fo
 ```
 
 * `aggregator`: Use `min` if the alert should trigger when the forecast goes below the threshold. Use `max` if the alert should trigger when the forecast goes above the threshold.
-* `query_window`: A timeframe, for example: `last_4h` or `last_7d`. The timeframe is recommended to be around five times the `alert_window`, but it must be at least as large as `alert_window`. This parameter controls the time range displayed in graphs included in notifications. 
+* `query_window`: A timeframe, for example: `last_4h` or `last_7d`. The timeframe is recommended to be around five times the `alert_window`, but it must be at least as large as `alert_window`. This parameter controls the time range displayed in graphs included in notifications.
 * `metric_query`: A standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`.
 * `algorithm`: `linear` or `seasonal`
 * `deviations`: A number greater than or equal to one. This parameter controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive.

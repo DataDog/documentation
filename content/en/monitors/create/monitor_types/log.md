@@ -1,6 +1,8 @@
 ---
 title: Logs Monitor
 kind: documentation
+aliases:
+- /monitors/monitor_types/log
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
