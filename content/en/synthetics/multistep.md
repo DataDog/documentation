@@ -81,7 +81,7 @@ Hit **Create Your First Request** to start designing your test's requests.
 
   {{% tab "Request Body" %}}
 
-  * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`) you want to add to your HTTP request.
+  * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
   * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
 
   {{% /tab %}}
@@ -118,12 +118,12 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], [`xpath`][18] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-**Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+**Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
 You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
 
@@ -177,7 +177,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][12].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -277,3 +277,4 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [16]: /synthetics/settings/#global-variables
 [17]: /synthetics/api_tests/errors/#ssl-errors
+[18]: https://www.w3schools.com/xml/xpath_syntax.asp

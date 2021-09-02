@@ -884,7 +884,7 @@ components:
               type: dropdown
               value: SEV-5
           type: object
-        initial_timeline_cells:
+        initial_cells:
           description: An array of initial timeline cells to be placed at the beginning
             of the incident timeline.
           items:
@@ -894,9 +894,7 @@ components:
           description: Notification handles that will be notified of the incident
             at creation.
           items:
-            description: A notification handle that will be notified at incident creation.
-            example: '@test.user@test.com'
-            type: string
+            $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
         title:
           description: The title of the incident, which summarizes what happened.
@@ -1006,6 +1004,18 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_INTEGRATIONS
+    IncidentNotificationHandle:
+      description: A notification handle that will be notified at incident creation.
+      properties:
+        display_name:
+          description: The name of the notified handle.
+          example: Jane Doe
+          type: string
+        handle:
+          description: The email address used for the notification.
+          example: '@test.user@test.com'
+          type: string
+      type: object
     IncidentPostmortemType:
       default: incident_postmortems
       description: Incident postmortem resource type.
@@ -1093,10 +1103,7 @@ components:
           description: Notification handles that will be notified of the incident
             during update.
           items:
-            description: A notification handle that will be notified during incident
-              update.
-            example: '@test.user@test.com'
-            type: string
+            $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.
@@ -1631,10 +1638,7 @@ components:
           description: Notification handles that will be notified of the incident
             during update.
           items:
-            description: A notification handle that will be notified during incident
-              update.
-            example: '@test.user@test.com'
-            type: string
+            $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
         resolved:
           description: Timestamp when the incident's state was set to resolved.
@@ -4467,6 +4471,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
       required:
       - name
       - isEnabled
@@ -4763,6 +4769,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
         updateAuthorId:
           description: User ID of the user who updated the rule.
           format: int64
@@ -4786,6 +4794,28 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleTypeCreate:
+      description: The rule type.
+      enum:
+      - log_detection
+      - workload_security
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
+      - WORKLOAD_SECURITY
+    SecurityMonitoringRuleTypeRead:
+      description: The rule type.
+      enum:
+      - log_detection
+      - infrastructure_configuration
+      - workload_security
+      - cloud_configuration
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
+      - INFRASTRUCTURE_CONFIGURATION
+      - WORKLOAD_SECURITY
+      - CLOUD_CONFIGURATION
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
@@ -8510,7 +8540,7 @@ paths:
               \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
               {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
               86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
-              true\n}"
+              true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule" in the system
       x-menu-order: 2
       x-undo:

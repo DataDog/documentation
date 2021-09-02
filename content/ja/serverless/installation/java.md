@@ -61,7 +61,7 @@ dependencies {
 
 関数をインスツルメントするには、次の手順に従います。
 
-1. 関数に Datadog Lambda レイヤーをインストールします。`VERSION` については、最新[リリース][5]をご確認ください。
+1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
@@ -127,12 +127,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
     public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
         DDLambda ddl = new DDLambda(request, context);
 
-        Map<String,String> myTags = new HashMap<String, String>();
+        Map<String,Object> myTags = new HashMap<String, Object>();
             myTags.put("product", "latte");
             myTags.put("order","online");
 
         // カスタムメトリクスを送信
-        dd.metric(
+        ddl.metric(
             "coffee_house.order_value", // メトリクス名
             12.45,                      // メトリクス値
             myTags);                    // 関連タグ
@@ -151,6 +151,8 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ### ログとトレースの接続
 
 Java Lambda 関数ログとトレースを自動接続する方法については、[Java ログとトレースの接続][12]を参照してください。
+
+<div class="alert alert-info">正しい Java ランタイムを使用しないと、"Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" (zip ファイルを開くときのエラーまたは JAR マニフェストがありません : /opt/java/lib/dd-java-agent.jar) などのエラーが発生する可能性があります。上記のとおり、ランタイムとして java8.al2 または java11 を使用してください。</div>
 
 ## その他の参考資料
 

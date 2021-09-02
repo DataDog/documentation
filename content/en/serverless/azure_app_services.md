@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler-what-is-considered-as-a-host-for-azure-app-services"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
+- link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+  tag: "Blog"
+  text: "Deploy ASP.NET Core applications to Azure App Service"
+
 ---
 
 ## Overview

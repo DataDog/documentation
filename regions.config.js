@@ -26,19 +26,19 @@ export default {
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',
-        us3: 'agent-intake.logs.us3.datadoghq.com',
+        us3: 'not supported',
         eu: 'agent-intake.logs.datadoghq.eu',
         gov: 'not supported'
     },
     tcp_endpoint_port: {
         us: '10514',
-        us3: '10514',
+        us3: 'not supported',
         eu: '1883',
         gov: 'not supported'
     },
     tcp_endpoint_port_ssl: {
         us: '10516',
-        us3: '10516',
+        us3: 'not supported',
         eu: '443',
         gov: 'not supported'
     },
@@ -74,13 +74,13 @@ export default {
     },
     http_endpoint: {
       us: 'http-intake.logs.datadoghq.com',
-      us3: 'http-intake.logs.us3.datadoghq.com',
+      us3: 'not supported',
       eu: 'http-intake.logs.datadoghq.eu',
       gov: 'http-intake.logs.ddog-gov.com'
     },
     http_port: {
       us: '443',
-      us3: '443',
+      us3: 'not supported',
       eu: '443',
       gov: '443'
     },

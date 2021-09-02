@@ -198,7 +198,7 @@ Find below the manual upgrade instructions for:
 4. Update your local APT cache and install the Agent:
     ```
     sudo apt-get update
-    sudo apt-get install datadog-agent
+    sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
 5. Copy the example configuration into place and plug in your API key:
@@ -328,7 +328,7 @@ Find below the manual upgrade instructions for:
 4. Update your local APT cache and install the Agent:
     ```
     sudo apt-get update
-    sudo apt-get install datadog-agent
+    sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
 5. Copy the example configuration into place and plug in your API key:

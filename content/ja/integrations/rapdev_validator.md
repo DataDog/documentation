@@ -45,7 +45,7 @@
 - windows
 "terms":
   "eula": assets/EULA.pdf
-  "legal_email": integrations@rapdev.io
+  "legal_email": ddsales@rapdev.io
 ---
 
 

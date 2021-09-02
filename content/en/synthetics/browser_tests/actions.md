@@ -303,7 +303,7 @@ To define your HTTP request:
      * Allow insecure certificates: Toggle to have your HTTP test continue the connection even if there is an error when validating the certificate.
      * Headers: Defined headers override the default browser headers.
      * Authentication: HTTP basic authentication with username and password
-     * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
+     * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
      * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 3. Click **Test URL** to test your request configuration. This results in a preview showing response data.
 
@@ -315,8 +315,8 @@ Optionally, you can base your step success on assertions about the defined HTTP 
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][13] | _String_ <br> _[Regex][14]_ <br> _String_, _[Regex][14]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][14]                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][13], [`xpath`][14] | _String_ <br> _[Regex][15]_ <br> _String_, _[Regex][15]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][15]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -335,8 +335,8 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][14].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][14] or a [JSONPath][13].
+    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][15].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][15], a [`JSONPath`][13], or a [`XPath`][14].
 
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Create a variable from HTTP request in Browser test" video="true"  width="80%" >}}
 
@@ -382,4 +382,5 @@ Some variables only get computed at runtime (for example, a variable from HTTP r
 [11]: /synthetics/guide/reusing-browser-test-journeys
 [12]: /synthetics/browser_tests/advanced_options/#subtests
 [13]: https://restfulapi.net/json-jsonpath/
-[14]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[14]: https://www.w3schools.com/xml/xpath_syntax.asp
+[15]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

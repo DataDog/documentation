@@ -2,6 +2,8 @@
 aliases:
   - /ja/agent/faq/how-to-monitor-snmp-devices/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Datacenter Overview: assets/dashboards/datacenter_overview.json
     Interface Performance: assets/dashboards/interface_performance.json

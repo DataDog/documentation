@@ -200,7 +200,7 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. DNS metric collection is not supported for Windows systems.
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline

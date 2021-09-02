@@ -3,15 +3,12 @@ aliases:
   - /ja/a78-b2n-xmd
   - /ja/security_monitoring/default_rules/a78-b2n-xmd
   - /ja/security_monitoring/default_rules/cron_at_job_injection
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: Cron AT ジョブの作成
 type: security_rules
