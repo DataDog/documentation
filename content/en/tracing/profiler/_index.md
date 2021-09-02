@@ -68,6 +68,10 @@ Application processes that have both [APM distributed tracing][4] and continuous
 
 {{< img src="tracing/profiling/code_hotspots_tab.gif" alt="Code Hotspots tab shows profiling information for a APM trace span">}}
 
+### Find changes in performance by comparing profiles
+
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. Profiler offers [comparison visualizations][6] to make sense of why profiles are different based on time frames or tags that you scope by. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +81,4 @@ Application processes that have both [APM distributed tracing][4] and continuous
 [3]: /tracing/profiling/search_profiles
 [4]: /tracing/
 [5]: /tracing/profiler/connect_traces_and_profiles/
+[6]: /tracing/profiler/compare_profiles/
