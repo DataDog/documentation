@@ -20,7 +20,7 @@ This guide describes how to configure downtimes for the following use cases:
 
 * [Downtime over the weekend](#downtime-over-the-week-end)
 * [Downtime outside of business hours](#downtime-outside-of-business-hours)
-* [Recurring downtime on nth weekday of the month](#recurring-downtime-on-nth-weekday-of-the-month)
+* [Recurring downtime on nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ This guide also assumes that you have a terminal with `CURL` and have reviewed t
 ### Downtime over the weekend
 
 If you monitor services used only during the week, such as your company's ERP or accounting software, you may want to receive alerts only during the week.
-With the following API call, you can mute alert during the weekend for all monitors over the `env:prod` tag. 
+With the following API call, you can mute alert during the weekend for all monitors over the `env:prod` tag.
 
 {{< tabs >}}
 {{% tab "API " %}}
@@ -169,7 +169,7 @@ Attributes specifying the duration in `RRULE` are not supported (for example, `D
 {{< tabs >}}
 {{% tab "API " %}}
 
-The `type` parameter must be set to `rrule`. 
+The `type` parameter must be set to `rrule`.
 The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, March 9th, the start date has to be March 9th 08:00 AM and end date March 9th at 10:00AM:
 
 **API call:**
