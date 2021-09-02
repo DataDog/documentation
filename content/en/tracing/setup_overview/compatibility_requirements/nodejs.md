@@ -78,7 +78,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [http][23]  | Fully supported     |       |
 | [https][24] | Fully supported     |       |
 | [http2][25] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
-| [net][26]   | Fully supported     |       |
+| [net][26]   | Fully supported     |  TCP library for Node.js   |
 
 ### Data store compatibility
 
