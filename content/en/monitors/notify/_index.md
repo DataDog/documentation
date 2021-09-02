@@ -50,7 +50,7 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 Enable monitor renotification (optional) to remind your team that a problem is not solved.
 
-  {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify"  style="width:70%;" >}}
+  {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify" style="width:70%;" >}}
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
 The escalation message can be added in the following ways:
@@ -139,7 +139,7 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][13] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
 3. Click **Run Test** to send notifications to the people and services listed in the monitor.
 
