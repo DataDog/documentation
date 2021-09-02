@@ -56,7 +56,7 @@ The **Authentication** tab shows password, Google, and SAML authentication setti
 
 #### Audit Logs
 
-The **Audeit Logs** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
+The **Audit Logs** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
 
 #### Audit Log Settings
 
