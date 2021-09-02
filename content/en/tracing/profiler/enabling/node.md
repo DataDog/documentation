@@ -1,5 +1,5 @@
 ---
-title: Enabling the Ruby Profiler
+title: Enabling the Node.js Profiler
 kind: Documentation
 code_lang: node
 type: multi-code-lang
@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Datadog Node Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+Datadog Node.js Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
@@ -56,7 +56,7 @@ To begin profiling applications:
     const tracer = require('dd-trace/init')
     ```
 
-4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][4].
+4. A minute or two after starting your Node.js application, your profiles will show up on the [Datadog APM > Profiler page][4].
 
 ## Not sure what to do next?
 
