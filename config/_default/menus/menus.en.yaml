@@ -1158,7 +1158,6 @@ main:
     pre: nav_alerting
     identifier: alerting
     weight: 130000
-
   - name: Create Monitors
     url: monitors/create/
     parent: alerting
@@ -1170,91 +1169,90 @@ main:
     identifier: monitor_configuration
     weight: 101
   - name: Monitor Types
-    url: monitors/create/monitor_types/
+    url: monitors/create/types/
     parent: monitors_create
     identifier: monitor_types
     weight: 102
   - name: Host
-    url: monitors/create/monitor_types/host/
+    url: monitors/create/types/host/
     parent: monitor_types
     identifier: monitor_types_host
     weight: 1021
   - name: Metric
-    url: monitors/create/monitor_types/metric/
+    url: monitors/create/types/metric/
     parent: monitor_types
     identifier: monitor_types_metrics
     weight: 1022
   - name: Anomaly
-    url: monitors/create/monitor_types/anomaly/
+    url: monitors/create/types/anomaly/
     parent: monitor_types
     identifier: monitor_types_anomaly
     weight: 1023
   - name: Outlier
-    url: monitors/create/monitor_types/outlier/
+    url: monitors/create/types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
     weight: 1024
   - name: Forecast
-    url: monitors/create/monitor_types/forecasts/
+    url: monitors/create/types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
     weight: 1025
   - name: Integration
-    url: monitors/create/monitor_types/integration/
+    url: monitors/create/types/integration/
     parent: monitor_types
     identifier: monitor_types_integration
     weight: 1026
   - name: Live Process
-    url: monitors/create/monitor_types/process/
+    url: monitors/create/types/process/
     parent: monitor_types
     identifier: monitor_types_process
     weight: 1027
   - name: Process Check
-    url: monitors/create/monitor_types/process_check/
+    url: monitors/create/types/process_check/
     parent: monitor_types
     identifier: monitor_types_process_check
     weight: 1028
   - name: Network
-    url: monitors/create/monitor_types/network/
+    url: monitors/create/types/network/
     parent: monitor_types
     identifier: monitor_types_network
     weight: 1029
   - name: Custom Check
-    url: monitors/create/monitor_types/custom_check/
+    url: monitors/create/types/custom_check/
     parent: monitor_types
     identifier: monitor_types_custom_check
     weight: 1030
   - name: Event
-    url: monitors/create/monitor_types/event/
+    url: monitors/create/types/event/
     parent: monitor_types
     identifier: monitor_types_event
     weight: 1031
   - name: Logs
-    url: monitors/create/monitor_types/log/
+    url: monitors/create/types/log/
     parent: monitor_types
     identifier: monitor_types_log
     weight: 1032
   - name: APM
-    url: monitors/create/monitor_types/apm/
+    url: monitors/create/types/apm/
     parent: monitor_types
     identifier: monitor_types_apm
     weight: 1033
   - name: Real User Monitoring
-    url: monitors/create/monitor_types/real_user_monitoring/
+    url: monitors/create/types/real_user_monitoring/
     parent: monitor_types
     identifier: monitor_types_rum
     weight: 1034
   - name: Watchdog
-    url: monitors/create/monitor_types/watchdog/
+    url: monitors/create/types/watchdog/
     parent: monitor_types
     identifier: monitor_types_watchdog
     weight: 1035
   - name: Composite
-    url: monitors/create/monitor_types/composite/
+    url: monitors/create/types/composite/
     parent: monitor_types
     identifier: monitor_types_composite
     weight: 1036
-
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -1270,7 +1268,6 @@ main:
     parent: monitors_notify
     identifier: monitors_notify_downtimes
     weight: 202
-
   - name: Manage Monitors
     url: monitors/manage/
     parent: alerting
@@ -1291,7 +1288,6 @@ main:
     parent: monitors_manage
     identifier: monitors_check_summary
     weight: 303
-
   - name: Service Level Objectives
     url: monitors/service_level_objectives/
     weight: 4
@@ -1327,13 +1323,10 @@ main:
     parent: incidents
     identifier: notification_rules
     weight: 502
-
   - name: Guides
     url: monitors/guide/
     weight: 100
     parent: alerting
-
-
   - name: APM & Continuous Profiler
     url: tracing/
     pre: nav_tracing
