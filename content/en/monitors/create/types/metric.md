@@ -20,11 +20,9 @@ further_reading:
 
 Metric monitors are useful for a continuous stream of data. Any metric sent to Datadog can be alerted upon if they cross a threshold over a given period of time.
 
-## Monitor creation
-
 To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Metric*.
 
-### Choose the detection method
+## Choose the detection method
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
@@ -77,7 +75,7 @@ For more detailed information, see the [Forecast Monitor][1] page.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Define the metric
+## Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
 {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
@@ -92,7 +90,7 @@ Any metric currently reporting to Datadog is available for monitors. Use the edi
 
 **Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][3].
 
-#### Alert grouping
+### Alert grouping
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your metric. If no group is specified, grouping defaults to `Simple Alert`. If groups are selected, grouping defaults to `Multi Alert`.
 
@@ -101,7 +99,7 @@ Simple alerts aggregate over all reporting sources. You receive one alert when t
 Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
-### Set alert conditions
+## Set alert conditions
 
 The alert conditions vary slightly based on the chosen detection method.
 
@@ -149,7 +147,7 @@ The evaluation frequency changes based on the evaluation time frame you select:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Thresholds
+### Thresholds
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
@@ -166,6 +164,8 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 **Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
+### Advanced alert conditions
+
 #### Data window
 
 `Require` or `Do not require` a full window of data for evaluation.
@@ -176,48 +176,11 @@ This setting allows you to change when the alerting engine considers a monitor a
 
 **Do not require** - A monitor is evaluated as soon as it is recognized. Consider using this value if your data points are very sparse. Otherwise, the monitor may not be evaluated because the window is never considered "full".
 
-#### No data
+#### Other options
 
-`Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
+For detailed instructions on the advanced alert options (No data, Autoresolve, etc), see the [Monitor Configuration][6] page.
 
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data.
-
-**Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
-
-Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
-
-##### Grouping
-
-For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
-
-#### Auto resolve
-
-`[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
-
-Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state. If data is still being submitted, the [renotify][6] feature can be utilized to let your team know when an issue is not resolved.
-
-For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
-
-In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
-
-#### New group delay
-
-Delay the evaluation start by `N` seconds for new groups.
-
-The time (in seconds) to wait before starting alerting, to allow newly created groups to boot and applications to fully start. This should be a non-negative integer.
-
-For example, if you are using containerized architecture, setting an evaluation delay prevents monitor groups scoped on containers from triggering due to high resource usage or high latency when a new container is created. The delay is applied to every new group (which has not been seen in the last 24 hours) and defaults to `60` seconds.
-
-The option is available with multi-alert mode.
-#### Evaluation delay
-
-Delay evaluation by `N` seconds.
-
-The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 900 seconds (15 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:40 to 6:45.
-
-**Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
-
-### Notifications
+## Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
@@ -230,5 +193,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/notifications/?tab=is_alert#tag-variables
 [5]: /monitors/faq/what-are-recovery-thresholds/
-[6]: /monitors/notifications/#renotify
+[6]: /monitors/create/monitor_configuration/?tab=thresholdalert#advanced-alert-conditions
 [7]: /monitors/notifications/

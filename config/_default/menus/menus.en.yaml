@@ -1163,7 +1163,7 @@ main:
     parent: alerting
     identifier: monitors_create
     weight: 1
-  - name: Monitor configuration
+  - name: Monitor Configuration
     url: monitors/create/monitor_configuration/
     parent: monitors_create
     identifier: monitor_configuration
