@@ -152,7 +152,7 @@ link_checks_preview:
   script:
     - htmltest
   after_script: 
-    - echo ${ls -lta}
+    - ls -lta
     - notify_slack "slack slack "
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
