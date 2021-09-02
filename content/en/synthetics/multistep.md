@@ -48,7 +48,7 @@ Select the **Locations** to run your Multistep API test from: Multistep API test
 
 To create an HTPP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
 **Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
 
