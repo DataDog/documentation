@@ -162,7 +162,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/
+[1]: /monitors/create/monitor_configuration
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/jira/
 [4]: /integrations/jira/#use-cases
