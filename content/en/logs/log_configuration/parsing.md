@@ -630,6 +630,9 @@ Other examples:
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 
+### ASCII Control Characters
+
+If your logs contain ASCII control characters, they will be serialised upon ingestion. These can be handled by explicitly escaping the serialised value within your grok parser.
 
 ## Further Reading
 
