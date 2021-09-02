@@ -23,19 +23,19 @@ Configure monitors, notify your teams and manage alerts at a glance on the Alert
 
 ## Create Monitors
 
-{{< img src="/monitors/configure.png" alt="Create a monitor" style="width:80%;">}}
+{{< img src="/monitors/create.png" alt="Create a monitor" style="width:90%;">}}
 
 [Configure Monitors][1]: Create monitors that look over metrics, events, logs, integration availability, network endpoints and more.
 
 ## Notify your teams
 
-{{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:80%;">}}
+{{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
 
 [Monitor Notifications][2]: Set up notifications when creating monitors in order to keep your team informed of issues. Route the notifications to the right people, leverage template variables to include details and attach snapshots when sending the alerts via email or Slack. Create [downtimes][3] to mute alerts during application maintenance.
 
 ## Manage Monitors
 
-{{< img src="/monitors/manage.png" alt="Manage all monitors alerts" style="width:80%;">}}
+{{< img src="/monitors/manage.png" alt="Manage all monitors alerts" style="width:90%;">}}
 
 [Manage Monitors][4]: Edit, clone, delete, mute, resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
 
