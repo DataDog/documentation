@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Getting Started
 kind: documentation
 disable_sidebar: true
 aliases:
