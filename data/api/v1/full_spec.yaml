@@ -1194,6 +1194,18 @@ components:
     DashboardTemplateVariable:
       description: Template variable.
       properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
         default:
           description: The default value for the template variable on dashboard load.
           example: my-host
