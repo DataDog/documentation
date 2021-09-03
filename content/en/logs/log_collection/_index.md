@@ -115,7 +115,7 @@ Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP conn
 
 `{{< region-param key="agent_http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="agent_http_port" code="true" >}}`<br>
-Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][7].
+Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][7].
 
 `{{< region-param key="http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
