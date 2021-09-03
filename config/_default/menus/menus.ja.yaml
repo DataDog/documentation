@@ -1093,7 +1093,7 @@ main:
     weight: 120000
   - name: アラート設定
     url: monitors/
-    pre: nav_alerting
+    pre: alert
     identifier: アラート設定
     weight: 130000
   - name: モニター

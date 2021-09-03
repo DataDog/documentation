@@ -1058,7 +1058,7 @@ main:
     weight: 120000
   - name: Alertes
     url: monitors/
-    pre: nav_alerting
+    pre: alert
     identifier: alerting
     weight: 130000
   - name: Monitors
