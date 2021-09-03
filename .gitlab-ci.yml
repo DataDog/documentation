@@ -151,7 +151,8 @@ link_checks_preview:
   environment: "preview"
   script:
     - htmltest
-  after_script: 
+    - notify_slack "slack slack" "#31b834"
+  after_script:
     - notify_slack "slack slack" "#31b834"
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
