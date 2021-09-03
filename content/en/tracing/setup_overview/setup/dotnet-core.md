@@ -490,6 +490,10 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs.
 
+`DD_MAX_TRACES_PER_SECOND`
+: **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
+The number of traces allowed to be submitted per second.
+
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans.
