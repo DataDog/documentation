@@ -9,7 +9,7 @@ CheckGeneric: false
 CheckExternal: false
 CheckImages: false
 IgnoreAltMissing: true
-CheckInternal: false
+CheckInternal: true
 CheckInternalHash: false
 CheckMailto: false
 CheckMeta: false

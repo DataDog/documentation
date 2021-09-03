@@ -149,11 +149,12 @@ link_checks_preview:
     <<: *cache
     policy: pull
   environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
   script:
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - htmltest
-    - notify_slack "slack slack" "#31b834"
-  after_script:
-    - notify_slack "slack slack" "#31b834"
+    - if [[ grep "not exist" tmp/.htmltest/htmltest.log ]]; then notify_slack "${cat ./tmp/.htmltest/htmltest.log}" "#31b834"; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
