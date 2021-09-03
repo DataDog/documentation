@@ -787,94 +787,6 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 11
-  - name: Agent Commands
-    url: agent/guide/agent-commands/?tab=agentv6v7
-    parent: agent_guides
-    weight: 20
-  - name: Agent Configuration Files
-    url: agent/guide/agent-configuration-files/?tab=agentv6v7
-    parent: agent_guides
-    weight: 21
-  - name: Agent Log Files
-    url: agent/guide/agent-log-files/?tab=agentv6v7
-    parent: agent_guides
-    weight: 22
-  - name: Agent Environment Variables
-    url: agent/guide/environment-variables/
-    parent: agent_guides
-    weight: 23
-  - name: Agent v6 Status Page
-    url: agent/guide/agent-status-page/
-    parent: agent_guides
-    weight: 24
-  - name: Integration Management
-    url: agent/guide/integration-management/
-    parent: agent_guides
-    weight: 25
-  - name: Network Traffic
-    url: agent/guide/network/?tab=agentv6v7
-    parent: agent_guides
-    weight: 26
-  - name: Secrets Management
-    url: agent/guide/secrets-management/?tab=linux
-    parent: agent_guides
-    weight: 27
-  - name: Use Community Integrations
-    url: agent/guide/use-community-integrations/?tab=agentv721v621
-    parent: agent_guides
-    weight: 28
-  - name: Datadog Agent Manager for Windows
-    url: agent/guide/datadog-agent-manager-windows/
-    parent: agent_guides
-    weight: 29
-  - name: Use Python 3 with Datadog Agent v6
-    url: agent/guide/agent-v6-python-3/?tab=hostagent
-    parent: agent_guides
-    weight: 30
-  - name: Python 3 Custom Check Migration
-    url: agent/guide/python-3/
-    parent: agent_guides
-    weight: 31
-  - name: Custom Metrics Server for the Cluster Agent
-    url: agent/guide/cluster-agent-custom-metrics-server/
-    parent: agent_guides
-    weight: 32
-  - name: Autodiscovery with JMX
-    url: agent/guide/autodiscovery-with-jmx/?tab=containeragent
-    parent: agent_guides
-    weight: 33
-  - name: Connect to Datadog over AWS PrivateLink
-    url: agent/guide/private-link/?tab=metrics
-    parent: agent_guides
-    weight: 34
-  - name: Build Datadog Agent Image
-    url: agent/guide/build-container-agent/?tab=amd
-    parent: agent_guides
-    weight: 35
-  - name: Container Discovery Management
-    url: agent/guide/autodiscovery-management/?tab=containerizedagent
-    parent: agent_guides
-    weight: 36
-  - name: Autodiscovery Container Identifiers
-    url: agent/guide/ad_identifiers/
-    parent: agent_guides
-    weight: 37
-  - name: Advanced Setup for Datadog Operator
-    url: agent/guide/operator-advanced
-    parent: agent_guides
-    weight: 38
-  - name: Container Images for Docker Environments
-    url: agent/guide/container-images-for-docker-environments/?tab=dockerhub
-    parent: agent_guides
-    weight: 39
-  - name: Docker Deprecation in Kubernetes
-    url: agent/guide/docker-deprecation/?tab=helm
-    parent: agent_guides
-    weight: 40
-  - name: Instrumenting a Ruby Application on Heroku
-    url: agent/guide/heroku-ruby/
-    parent: agent_guides
-    weight: 41
   - name: Security
     identifier: agent_security
     url: security/agent/
@@ -1184,7 +1096,7 @@ main:
     url: infrastructure/list/
     parent: infrastructure
     weight: 2
-  - name: Host Maps
+  - name: Host Map
     url: infrastructure/hostmap/
     parent: infrastructure
     weight: 3
@@ -1572,38 +1484,6 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
-  - name: Arithmetic and Sparse Metrics
-    url: monitors/guide/monitor-arithmetic-and-sparse-metrics/
-    weight: 101
-    parent: alerting_guide
-  - name: as_count() Monitor Evaluations
-    url: monitors/guide/as-count-in-monitor-evaluations/
-    weight: 102
-    parent: alerting_guide
-  - name: Service Check
-    url: developers/service_checks/
-    weight: 103
-    parent: alerting_guide
-  - name: Template Variable Evaluation
-    url: monitors/guide/template-variable-evaluation/
-    weight: 104
-    parent: alerting_guide
-  - name: Monitoring Ranges
-    url: monitors/guide/monitor-for-value-within-a-range/
-    weight: 105
-    parent: alerting_guide
-  - name: Suppress Alerts with Downtimes
-    url: monitors/guide/supress-alert-with-downtimes/?tab=api
-    weight: 106
-    parent: alerting_guide
-  - name: Alert on No Change in Value
-    url: monitors/guide/alert-on-no-change-in-value/
-    weight: 107
-    parent: alerting_guide
-  - name: SLO Checklist
-    url: monitors/guide/slo-checklist/
-    weight: 108
-    parent: alerting_guide
   - name: APM & Continuous Profiler
     url: tracing/
     pre: nav_tracing
@@ -2021,66 +1901,6 @@ main:
     identifier: tracing_guides
     parent: tracing
     weight: 16
-  - name: Alert on Anomalous P99 Latency of a Database Service
-    url: tracing/guide/alert_anomalies_p99_database/
-    parent: tracing_guides
-    weight: 20
-  - name: Compare a Service's Latency Week-Over-Week
-    url: tracing/guide/week_over_week_p50_comparison/
-    parent: tracing_guides
-    weight: 21
-  - name: Create a Dashboard to Track and Correlate APM Metrics
-    url: tracing/guide/apm_dashboard/
-    parent: tracing_guides
-    weight: 22
-  - name: Debug Slowest Trace on Slowest Endpoint
-    url: tracing/guide/slowest_request_daily/
-    parent: tracing_guides
-    weight: 23
-  - name: Add Span Tags and Monitor Application Performance
-    url: tracing/guide/add_span_md_and_graph_it/
-    parent: tracing_guides
-    weight: 24
-  - name: Instrument a Custom Method to Get Deep Visibility
-    url: tracing/guide/instrument_custom_method/
-    parent: tracing_guides
-    weight: 25
-  - name: Configure Apdex Score by Service
-    url: tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-    parent: tracing_guides
-    weight: 26
-  - name: Primary Operations in Services
-    url: tracing/guide/configuring-primary-operation/
-    parent: tracing_guides
-    weight: 27
-  - name: Tracing Application Metrics
-    url: tracing/guide/metrics_namespace/
-    parent: tracing_guides
-    weight: 28
-  - name: DDSketch-based Metrics in APM
-    url: tracing/guide/ddsketch_trace_metrics/
-    parent: tracing_guides
-    weight: 29
-  - name: Send Traces to the Agent by API
-    url: tracing/guide/send_traces_to_agent_by_api/
-    parent: tracing_guides
-    weight: 30
-  - name: Tracing Client Libraries
-    url: developers/community/libraries/#apm-distributed-tracing-client-libraries
-    parent: tracing_guides
-    weight: 31
-  - name: Set Primary Tags to Scope
-    url: tracing/guide/setting_primary_tags_to_scope/
-    parent: tracing_guides
-    weight: 32
-  - name: Enable AWS X-Ray Tracing
-    url: tracing/guide/serverless_enable_aws_xray/
-    parent: tracing_guides
-    weight: 33
-  - name: Setting Up APM with C++
-    url: tracing/guide/setting_up_apm_with_cpp/
-    parent: tracing_guides
-    weight: 34
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
@@ -2437,94 +2257,6 @@ main:
     parent: log_management
     identifier: log_guides
     weight: 6
-  - name: Access Log Data Programatically
-    url: logs/guide/access-your-log-data-programmatically/
-    parent: log_guides
-    weight: 100
-  - name: Logging without Limits™
-    url: logs/guide/getting-started-lwl/
-    parent: log_guides
-    weight: 101
-  - name: Correlate Logs with Metrics
-    url: logs/guide/correlate-logs-with-metrics/
-    parent: log_guides
-    weight: 102
-  - name: Monitor Your Log Usage
-    url: logs/guide/logs-monitors-on-volumes/
-    parent: log_guides
-    weight: 103
-  - name: Send AWS Services Logs with the Datadog Kinesis Firehose Destination
-    url: logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
-    parent: log_guides
-    weight: 104
-  - name: Sending Events and Logs with Amazon EventBridge API Destinations
-    url: logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/
-    parent: log_guides
-    weight: 105
-  - name: Send AWS Services Logs with the Datadog Lambda Function
-    url: logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole
-    parent: log_guides
-    weight: 106
-  - name: Collect Heroku Logs
-    url: logs/guide/collect-heroku-logs/
-    parent: log_guides
-    weight: 107
-  - name: Log Collection Troubleshooting
-    url: logs/guide/log-collection-troubleshooting-guide/
-    parent: log_guides
-    weight: 108
-  - name: Docker Log Collection Troubleshooting
-    url: logs/guide/docker-logs-collection-troubleshooting-guide/
-    parent: log_guides
-    weight: 109
-  - name: Lambda Function Log Collection Troubleshooting
-    url: logs/guide/lambda-logs-collection-troubleshooting-guide/
-    parent: log_guides
-    weight: 110
-  - name: Setting File Permissions for Rotating Logs
-    url: logs/guide/setting-file-permissions-for-rotating-logs/
-    parent: log_guides
-    weight: 111
-  - name: Use Datadog Agent for Log or Trace Collection Only
-    url: logs/guide/how-to-set-up-only-logs/?tab=host
-    parent: log_guides
-    weight: 112
-  - name: Log Parsing - Best Practices
-    url: logs/guide/log-parsing-best-practice/
-    parent: log_guides
-    weight: 113
-  - name: Add Custom Metadata to Logs with Enrichment Tables
-    url: logs/guide/enrichment-tables/?tab=manualupload
-    parent: log_guides
-    weight: 114
-  - name: Collect Multiple Logs with Pagination
-    url: logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
-    parent: log_guides
-    weight: 115
-  - name: Build Custom Reports Using Log Analytics API
-    url: logs/guide/build-custom-reports-using-log-analytics-api/?tab=table
-    parent: log_guides
-    weight: 116
-  - name: Monitor and Query for Unparsed Logs
-    url: logs/guide/detect-unparsed-logs/
-    parent: log_guides
-    weight: 117
-  - name: How to Set Up RBAC for Logs
-    url: logs/guide/logs-rbac/?tab=ui
-    parent: log_guides
-    weight: 118
-  - name: Logs RBAC Permissions
-    url: logs/guide/logs-rbac-permissions/?tab=ui
-    parent: log_guides
-    weight: 119
-  - name: Control Sensitive Logs Data
-    url: logs/guide/control-sensitive-logs-data/
-    parent: log_guides
-    weight: 120
-  - name: Ease Troubleshooting with Cross Product Correlation
-    url: logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    parent: log_guides
-    weight: 121
   - name: Security
     url: security/logs/
     parent: log_management
@@ -2745,74 +2477,6 @@ main:
     parent: synthetics
     identifier: synthetics_guides
     weight: 12
-  - name: Website Uptime Monitoring with SLO
-    url: synthetics/guide/uptime-percentage-widget/
-    parent: synthetics_guides
-    weight: 101
-  - name: Identify Synthetic Bots
-    url: synthetics/guide/identify_synthetics_bots/?tab=singleandmultisetpapitests
-    parent: synthetics_guides
-    weight: 102
-  - name: Monitor Your Synthetics Usage
-    url: synthetics/guide/monitor-usage/
-    parent: synthetics_guides
-    weight: 103
-  - name: Cross Product Correlation
-    url: logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    parent: synthetics_guides
-    weight: 104
-  - name: Avoiding Cache Issues in Synthetic Tests
-    url: synthetics/guide/synthetic-tests-caching/
-    parent: synthetics_guides
-    weight: 105
-  - name: API Test Timings and Variations
-    url: synthetics/guide/api_test_timing_variations
-    parent: synthetics_guides
-    weight: 106
-  - name: OR Logic in API Tests Assertions
-    url: synthetics/guide/or-logic-api-tests-assertions/
-    parent: synthetics_guides
-    weight: 107
-  - name: Why Browser Tests are Self-Maintaining
-    url: synthetics/guide/browser-test-self-maintenance/
-    parent: synthetics_guides
-    weight: 108
-  - name: Application that Requires Authentication
-    url: synthetics/guide/app-that-requires-login/
-    parent: synthetics_guides
-    weight: 109
-  - name: TOTPs for Multi-Factor Authentication (MFA) in Browser Test
-    url: synthetics/guide/browser-tests-totp/
-    parent: synthetics_guides
-    weight: 110
-  - name: Reusing Browser Tests Journeys
-    url: synthetics/guide/reusing-browser-test-journeys/
-    parent: synthetics_guides
-    weight: 111
-  - name: Email Validation with Browser Tests
-    url: synthetics/guide/email-validation/
-    parent: synthetics_guides
-    weight: 112
-  - name: Test File Upload and Download
-    url: synthetics/guide/testing-file-upload-and-download/
-    parent: synthetics_guides
-    weight: 113
-  - name: Handling Popups in Browser Tests
-    url: synthetics/guide/popup/
-    parent: synthetics_guides
-    weight: 114
-  - name: Browser Tests Switch Tabs
-    url: synthetics/guide/browser-tests-switch-tabs/
-    parent: synthetics_guides
-    weight: 115
-  - name: Record Steps with Custom User-Agent
-    url: synthetics/guide/recording-custom-user-agent/
-    parent: synthetics_guides
-    weight: 116
-  - name: Manually Adding Browser Test Chrome Extension
-    url: synthetics/guide/manually-adding-chrome-extension/
-    parent: synthetics_guides
-    weight: 117
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
@@ -2983,26 +2647,10 @@ main:
     identifier: rum_error_tracking_android
     weight: 803
   - name: Guides
-    url: real_user_monitoring/guide
+    url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
     weight: 9
-  - name: Send RUM Custom Actions
-    url: real_user_monitoring/guide/send-rum-custom-actions/
-    parent: rum_guides
-    weight: 10
-  - name: Upload Javascript Source Maps
-    url: real_user_monitoring/guide/upload-javascript-source-maps/
-    parent: rum_guides
-    weight: 11
-  - name: Enrich and Control Browser RUM Data with beforeSend
-    url: real_user_monitoring/guide/enrich-and-control-rum-data/
-    parent: rum_guides
-    weight: 12
-  - name: Upgrade Browser SDK to V3
-    url: real_user_monitoring/guide/browser-sdk-upgrade/
-    parent: rum_guides
-    weight: 13
   - name: Network Monitoring
     url: network_monitoring/
     pre: nav_network
@@ -3207,38 +2855,6 @@ main:
     parent: dev_tools
     identifier: dev_tools_guides
     weight: 10
-  - name: Best Practices for Naming Metrics and Tags
-    url: developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/
-    parent: dev_tools_guides
-    weight: 11
-  - name: Query the Infrastructure List with the API
-    url: developers/guide/query-the-infrastructure-list-via-the-api/
-    parent: dev_tools_guides
-    weight: 12
-  - name: Using Postman with Datadog APIs
-    url: getting_started/api/
-    parent: dev_tools_guides
-    weight: 13
-  - name: Calling on Datadog's API with the Webhooks Integration
-    url: developers/guide/calling-on-datadog-s-api-with-the-webhooks-integration/
-    parent: dev_tools_guides
-    weight: 14
-  - name: Dogshell
-    url: developers/guide/dogshell-quickly-use-datadog-s-api-from-terminal-shell/
-    parent: dev_tools_guides
-    weight: 15
-  - name: Dogwrap
-    url: developers/guide/dogwrap/
-    parent: dev_tools_guides
-    weight: 16
-  - name: Query Data to a Text File
-    url: developers/guide/query-data-to-a-text-file-step-by-step/
-    parent: dev_tools_guides
-    weight: 17
-  - name: Adding a Custom Python Package to the Agent
-    url: developers/guide/custom-python-package/?tab=linux
-    parent: dev_tools_guides
-    weight: 18
   - name: API
     url: api/
     pre: nav_api
