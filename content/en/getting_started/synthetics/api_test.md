@@ -25,23 +25,22 @@ further_reading:
 
 ## Overview
 
-API tests proactively monitor that your most important services are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes (HTTP, SSL, DNS, TCP, ICMP) that allow you to launch requests on the different network layers of your systems. Multistep API tests enable you to run HTTP tests in sequence to **monitor the uptime of key journeys at the API level**.
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes that allow you to launch requests on the **different network layers of your systems** (HTTP, SSL, DNS, TCP, ICMP). [Multistep API tests][12] enable you to run HTTP tests in sequence to **monitor the uptime of key journeys at the API level**.
 
 ## Create a single API test
 
-The example below demonstrates the creation of an [HTTP test][2], a subtype of [single API tests][1]. [HTTP tests][1] monitor your API endpoints and alert you when they become too slow or fail. These tests verify that your applications are responding to requests and meeting any conditions you define, such as expected response time, HTTP status code, and header or body contents.
+The example below demonstrates the creation of an [HTTP test][2], a subtype of [single API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers or body contents.
 
 ### Define request
 
-1. In the Datadog site, hover over **[UX Monitoring][3]** and select **[Synthetic Tests][3]**.
+1. In the Datadog site, hover over **UX Monitoring** and select **[Synthetic Tests][3]**.
 2. Click **New Test** > **[New API test][4]**.
 3. Select the `HTTP` request type.
 4. Define your request:
 
-    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
-    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies.
+    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
+    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies. **Note:** You can create secure [global variables][5] to store credentials and create [local variables][6] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options. In this example, no specific advanced option is needed.
     - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
-    - You can use secure [global variables][5] for any credentials in your API call. You can also create [local variables][6] to inject a dynamically defined timestamp in your request payload. After creating these variables, type `{{` and select a variable to inject the variable in your test options.
 
 5. Click **Test URL** to trigger a sample test run.
 
@@ -55,7 +54,7 @@ In this example, three default assertions populate after triggering the sample t
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions" style="width:100%;">}}
 
-Assertions are fully customizable. To add a custom assertion, click on elements of the response preview or click **New Assertion**. 
+Assertions are fully customizable. To add a custom assertion, click on elements of the response preview like the headers or click **New Assertion** to define a new assertion from scratch. 
 
 {{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true"  >}}
 
@@ -65,16 +64,15 @@ Assertions are fully customizable. To add a custom assertion, click on elements 
 
 Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
-Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
+Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **[Private Locations][9]** instead.
 
-For more information on how to set up private locations, see [Getting Started with Private Locations][9].
+The Shopist application is publicly available, you can consequently go ahead and pick any managed locations you want to execute your test from.
 
 ### Specify test frequency
 
-Select the frequency at which you want your test to execute. 
+Select the frequency at which you want your test to execute. You can leave the default frequency of 1 minute.
 
-In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][10].
-
+**Note:** In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][10]. 
 
 ### Define alert conditions
 
@@ -94,66 +92,60 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][11] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams.
-
-You can set time for your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
+Design your alert message and add any email address you want your test to alert you on. You can also use [notifications integrations][11] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams. Note that in order to be able to trigger a Synthetic alert to these, you first need to set up the corresponding integration.
 
 When you're ready to run your test, click **Save Test**. 
 
 ## Create a multistep API test
 
-[Multistep API tests][12] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][2], [multistep API tests][12] alert you when your endpoints become too slow or fail to meet any conditions you defined. 
+[Multistep API tests][12] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][2], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. With multistep API tests, you can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
 
-With [multistep API tests][12], you can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
+The example test below demonstrates the creation of a multistep API test, which monitors the addition of an item to a cart. It contains three steps: getting a cart, getting a product, and adding the product to the cart. If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
 
-The example below demonstrates the creation of a [multistep API test][12], which monitors the addition of an item to a cart. If you don't know which API endpoints to create your [multistep API test][12] on, use the example endpoints below. 
-
-To create a new [multistep API test][12], click **New Test** > **[Multistep API test][5]**. Similar to an HTTP test, add a name (such as `Add product to cart`), include tags, and select locations for your [Multistep API test][12]. 
-
-This example test contains three steps: getting a cart, getting a product, and adding the product to the cart.
+To create a new multistep API test, click **New Test** > **[Multistep API test][5]**. Similar to an HTTP test, add a name (such as `Add product to cart`), include tags, and select locations. 
 
 ### Get a cart
 
 1. In **Define steps**, click **Create Your First Step**. 
 2. Add a name to your step, for example: `Get a cart`.
-3. Specify the HTTP method and the URL you want to query, for example: `POST` and `https://api.shopist.io/carts`. 
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and `https://api.shopist.io/carts`. 
 4. Click **Test URL**. This creates a cart item in the Shopist application's backend.
-5. Optionally, leave the default assertions or modify them.
-6. Optionally, define execution parameters. In this example, no specific execution parameter is needed. 
+5. Leave the default assertions or modify them.
+6. Optionally, define execution parameters. 
 
-    Select **Continue with test if this step fails** to ensure a whole endpoint collection is tested even if one of the step fails or to ensure your last cleanup step performs regardless of previous steps' success or failure. 
+    Select **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed regardless of previous steps' success or failure. The **Retry** step feature can come in handy in situations where you know your API endpoint may take some time before responding. 
     
-    The retry test feature is helpful in situations where you know your API endpoint may take some time before responding. 
+    In this example, no specific execution parameter is needed. 
 
-7. Optionally, extract variables from the response content. Click **Extract a variable from response content** and enter a variable name. 
-8. To extract the value of the cart ID located at the end of the `location` header:
+7. To create a variable out of the value of the cart ID located at the end of the `location` header:
+    - Click **Extract a variable from response content**.
     - Name your variable as `CART_ID`.
     - In the **Response Header,** select `location`.
     - In the **Parsing Regex** field, add a regular expression such as `(?:[^\\/](?!(\\|/)))+$`.
-9. Click **Save Variable**.
-10. When you're done creating this test step, click **Save Step**.
+8. Click **Save Variable**.
+9. When you're done creating this test step, click **Save Step**.
 
 ### Get a product
    
-1. In **Define another step**, click** **Add Another Step**. By default, you can create up to ten steps.
+1. In **Define another step**, click **Add Another Step**. By default, you can create up to ten steps.
 2. Add a name to your step, for example: `Get a product`.
-3. Specify the HTTP method and the URL you want to query, for example: `GET` and `https://api.shopist.io/products.json`. 
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `GET` and `https://api.shopist.io/products.json`. 
 4. Click **Test URL**. This retrieves a list of products available in the Shopist application.
-5. Optionally, leave the default assertions or modify them.
+5. Leave the default assertions or modify them.
 6. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
-7. Optionally, extract variables from the response content. Click **Extract a variable from response content** and enter a variable name.
-8. To extract the value of the product ID located in the response body:
+7. To create a variable out of the product ID located in the response body:
+    - Click **Extract a variable from response content**
     - Name your variable as `PRODUCT_ID`.
     - Click the **Response Body** tab.
-    - Click on `$oid` of any product to generate a JSON Path such as `$[0].id['$oid']`.
-9. Click **Save Variable**.
-10. When you're done creating this test step, click **Save Step**.
+    - Click on the `$oid` key of any product to generate a JSON Path such as `$[0].id['$oid']`.
+8. Click **Save Variable**.
+9. When you're done creating this test step, click **Save Step**.
 
 ### Add product to cart
 
-1. Click **Add Another Step** to add the final step, adding a product into your cart.
+1. Click **Add Another Step** to add the final step, the addition of a product into your cart.
 2. Add a name to your step, for example: `Add product to cart`.
-3. Specify the HTTP method and the URL you want to query, for example: `POST` and  `https://api.shopist.io/add_item.json`. 
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and  `https://api.shopist.io/add_item.json`. 
 4. In the **Request Body** tab, choose the `application/json` body type and insert the following:
         
     {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
@@ -168,7 +160,7 @@ This example test contains three steps: getting a cart, getting a product, and a
     {{< /code-block >}}
         
 5. Click **Test URL**. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
-6. Optionally, leave the default assertions or modify them.
+6. In **Add assertions (optional)**, click **Response Body** and click the `url` key to have your test assert that the journey finished with a response containing the checkout URL.
 7. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
 8. Optionally, extract variables from the response content. In this example, no specific variables need to be extracted.
 9. When you're done creating this test step, click **Save Step**.
