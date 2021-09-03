@@ -8,12 +8,6 @@ further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Learn more about browser tests'
-    - link: '/getting_started/synthetics/private_location'
-      tag: 'Documentation'
-      text: 'Learn about private locations'
-    - link: '/synthetics/ci'
-      tag: 'Documentation'
-      text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
     - link: '/synthetics/identify_synthetics_bots'
       tag: 'Documentation'
       text: 'Learn how to identify Synthetic bots for API tests'
@@ -22,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform key business transactions on your applications and that they are not negatively impacted by the most recent code changes.
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by the most recent code changes.
 
 ## Create a browser test
 
@@ -32,12 +26,12 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 ### Configure your test details
 
-1. In the Datadog site, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
+1. In the Datadog application, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **Browser Test**.
 4. Define your browser test:
 
-    - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test web application.
+    - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, or cookies. 
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 
@@ -46,15 +40,15 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
-Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
+Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **[Private Locations][3]** instead.
 
-For more information on how to set up private locations, see [Getting Started with Private Locations][3].
+The Shopist application is publicly available, you can consequently go ahead and pick any managed locations you want to execute your test from.
 
 #### Specify test frequency
 
-Select the frequency at which you want your test to execute. 
+Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
 
-In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][4].
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][4].
 
 
 #### Define alert conditions
@@ -75,11 +69,11 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams.
-
-You can set your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
+Design your alert message and add any email address you want your test to alert you on.
 
 {{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true"  >}}
+
+You can also use [notifications integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams. Note that in order to be able to trigger a Synthetic alert to these, you first need to set up the corresponding integration.
 
 When you're ready to record your test, click **Save Details & Record Test**.
 
