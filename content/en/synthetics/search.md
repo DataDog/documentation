@@ -44,7 +44,7 @@ The **Synthetics Filters** panel on the left side of the page lists several defa
 
 ### Create your query
 
-Search through your Synthetic tests by clicking on the facets on the left panel or by writing your own custom query using the search bar. As you select and deselect facet values in the panel or in the search bar, the search bar will automatically update with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the facets checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no Search button to click.
+Search through your Synthetic tests by clicking on the facets on the left panel or by writing your own custom query using the search bar. As you select and deselect facet values in the panel or in the search bar, the search bar will automatically update with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the facets checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no **Search** button to click.
 
 * **Search on free text**: Enter your text in the search bar to search on a test name.
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click the other value checkbox or add the other value with an `OR` Boolean operator and wrap values with quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
