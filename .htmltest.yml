@@ -10,7 +10,7 @@ CheckExternal: false
 CheckImages: false
 IgnoreAltMissing: true
 CheckInternal: true
-CheckInternalHash: true
+CheckInternalHash: false
 CheckMailto: false
 CheckMeta: false
 CheckScripts: false
@@ -33,3 +33,6 @@ IgnoreURLs:
   - "127.0.0.1"
   - "https://trello.com/app-key"
   - "https://docs.perimeterx.com"
+
+# StripQueryExcludes:
+#   - 

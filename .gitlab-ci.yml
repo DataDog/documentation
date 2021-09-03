@@ -152,8 +152,7 @@ link_checks_preview:
   script:
     - htmltest
   after_script: 
-    - ls -lta
-    - notify_slack "slack slack "
+    - notify_slack "slack slack" "#31b834"
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
