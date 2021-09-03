@@ -7710,11 +7710,27 @@ components:
           type: array
       type: object
     SLOHistoryResponseError:
-      description: A service level objective response containing the requested history.
+      description: A list of errors while querying the history data for the service
+        level objective.
       properties:
         error:
           description: Human readable error.
           type: string
+      type: object
+    SLOHistoryResponseErrorWithType:
+      description: An object describing the error with error type and error message.
+      properties:
+        error_message:
+          description: A message with more details about the error.
+          example: ''
+          type: string
+        error_type:
+          description: Type of the error.
+          example: ''
+          type: string
+      required:
+      - error_type
+      - error_message
       type: object
     SLOHistorySLIData:
       description: 'An object that holds an SLI value and its associated data. It
@@ -7726,11 +7742,10 @@ components:
         error_budget_remaining:
           $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
         errors:
-          description: A list of errors while querying the history data for the service
-            level objective.
-          example: []
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
           items:
-            $ref: '#/components/schemas/SLOHistoryResponseError'
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
           type: array
         group:
           description: For groups in a grouped SLO, this is the group name.
