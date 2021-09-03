@@ -35,6 +35,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` |
 | Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`|
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` |
+| Profiled Containers           | `datadog.estimated_usage.profiling.containers` |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
