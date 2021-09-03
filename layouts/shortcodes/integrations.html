@@ -74,16 +74,16 @@
 <div class="d-block d-sm-none mt-40 mb-40 dropdown">
     <button id="dropdownMenuLink" class="integration-popper-button btn btn-lg btn-block btn-outline-primary" type="button">{{ i18n "all" }}</button>
     <div id="integration-popper" class="dropdown-menu" style="display:none;" data-ref="mobilecontrols">
-        <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time" data-proofer-ignore>{{ i18n "all" }}</a>
+        <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">{{ i18n "all" }}</a>
         {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-            <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}" data-proofer-ignore>{{ $e | upper }}</a>
+            <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
         {{ end }}
     </div>
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
-    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset" data-proofer-ignore>{{ i18n "all" }}</a>
-    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}" data-proofer-ignore>{{ $e | upper }}</a>{{ end }}
+    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
 </div>
 
 <div class="input-group mt-4">
