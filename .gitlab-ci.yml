@@ -156,7 +156,7 @@ link_checks_preview:
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
-    - if [[ grep -q "not exist" tmp/.htmltest/htmltest.log ]]; then notify_slack "${cat ./tmp/.htmltest/htmltest.log}" "#31b834"; fi
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${cat ./tmp/.htmltest/htmltest.log}" "#31b834"; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
