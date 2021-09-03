@@ -38,7 +38,7 @@ nav_sections:
             desc: Explorez vos métriques et créez des distributions
           - title: Alertes
             link: monitors/
-            icon: attention-circled.svg
+            icon: alert.svg
             desc: Créer et gérer des monitors et des notifications
           - title: APM et tracing distribué
             link: tracing/

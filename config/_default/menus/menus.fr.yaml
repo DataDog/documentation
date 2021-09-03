@@ -95,7 +95,7 @@ main_left:
     parent: product
   - identifier: alerts
     name: Alerts
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert-1.svg' alt='alert icon'>"
     url: "https://www.datadoghq.com/product/alerts/"
     weight: 16
     parent: product
