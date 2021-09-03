@@ -156,9 +156,8 @@ link_checks_preview:
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
-    - RESULT="💥 htmltest result; the following warnings were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
     - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
-    - rm tmp/.htmltest/htmltest.log
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
@@ -306,11 +305,17 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node ./node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - htmltest
   after_script:
-    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - master
+  artifacts:
+    paths:
+      - ./tmp/.htmltest
 
 index_algolia:
   image:
