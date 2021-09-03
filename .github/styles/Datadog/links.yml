@@ -8,4 +8,4 @@ tokens:
   - here
   - documentation
   - this
-  - page
+  - ^page$

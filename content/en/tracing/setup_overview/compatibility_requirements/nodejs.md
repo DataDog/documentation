@@ -96,52 +96,53 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [oracledb][36]         | `>=5`    | Fully supported |                                                  |
 | [pg][37]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
 | [redis][38]            | `>=0.12` | Fully supported |                                                  |
-| [tedious][39]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [sharedb][39]          | `>=1`    | Fully supported |                                                  |
+| [tedious][40]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
 ### Worker compatibility
 
 | Module                     | Versions | Support Type    | Notes                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][40] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][41]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][42]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [generic-pool][43]         | `>=2`    | Fully supported |                                                        |
-| [kafkajs][44]         | `>=1.4`    | Fully supported |                                                        |
-| [kafka-node][45]           |          | Coming Soon     |                                                        |
-| [rhea][46]                 | `>=1`    | Fully supported |                                                        |
+| [@google-cloud/pubsub][41] | `>=1.2`  | Fully supported |                                                        |
+| [amqp10][42]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][43]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [generic-pool][44]         | `>=2`    | Fully supported |                                                        |
+| [kafkajs][45]         | `>=1.4`    | Fully supported |                                                        |
+| [kafka-node][46]           |          | Coming Soon     |                                                        |
+| [rhea][47]                 | `>=1`    | Fully supported |                                                        |
 
 ### SDK compatibility
 
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][47]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [aws-sdk][48]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
 
 ### Promise library compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bluebird][48]   | `>=2`     | Fully supported |
-| [promise][49]    | `>=7`     | Fully supported |
-| [promise-js][50] | `>=0.0.3` | Fully supported |
-| [q][51]          | `>=1`     | Fully supported |
-| [when][52]       | `>=3`     | Fully supported |
+| [bluebird][49]   | `>=2`     | Fully supported |
+| [promise][50]    | `>=7`     | Fully supported |
+| [promise-js][51] | `>=0.0.3` | Fully supported |
+| [q][52]          | `>=1`     | Fully supported |
+| [when][53]       | `>=3`     | Fully supported |
 
 ### Logger compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bunyan][53]     | `>=1`     | Fully supported |
-| [paperplane][54] | `>=2.3.2` | Fully supported |
-| [pino][55]       | `>=2`     | Fully supported |
-| [winston][56]    | `>=1`     | Fully supported |
+| [bunyan][54]     | `>=1`     | Fully supported |
+| [paperplane][55] | `>=2.3.2` | Fully supported |
+| [pino][56]       | `>=2`     | Fully supported |
+| [winston][57]    | `>=1`     | Fully supported |
 
 ## Unsupported libraries
 
 ### Fibers
 
-[`fibers`][57] is incompatible with `async_hooks`, a Node.js [module][58] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][59] may result in instability (crashes) or incorrect tracing.
+[`fibers`][58] is incompatible with `async_hooks`, a Node.js [module][59] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][60] may result in instability (crashes) or incorrect tracing.
 
-For additional information or to discuss [leave a comment on this github issue][60] or [reach out to support][3] to discuss further.
+For additional information or to discuss [leave a comment on this github issue][61] or [reach out to support][3] to discuss further.
 
 ## Further Reading
 
@@ -185,25 +186,26 @@ For additional information or to discuss [leave a comment on this github issue][
 [36]: https://oracle.github.io/node-oracledb/
 [37]: https://node-postgres.com
 [38]: https://github.com/NodeRedis/node_redis
-[39]: http://tediousjs.github.io/tedious
-[40]: https://github.com/googleapis/nodejs-pubsub
-[41]: https://github.com/noodlefrenzy/node-amqp10
-[42]: https://github.com/squaremo/amqp.node
-[43]: https://github.com/coopernurse/node-pool
-[44]: https://github.com/tulios/kafkajs
-[45]: https://github.com/SOHU-Co/kafka-node
-[46]: https://github.com/amqp/rhea
-[47]: https://github.com/aws/aws-sdk-js
-[48]: https://github.com/petkaantonov/bluebird
-[49]: https://github.com/then/promise
-[50]: https://github.com/kevincennis/promise
-[51]: https://github.com/kriskowal/q
-[52]: https://github.com/cujojs/when
-[53]: https://github.com/trentm/node-bunyan
-[54]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[55]: http://getpino.io
-[56]: https://github.com/winstonjs/winston
-[57]: https://github.com/laverdet/node-fibers
-[58]: https://nodejs.org/api/async_hooks.html
-[59]: https://www.meteor.com/
-[60]: https://github.com/DataDog/dd-trace-js/issues/1229
+[39]: https://share.github.io/sharedb/
+[40]: http://tediousjs.github.io/tedious
+[41]: https://github.com/googleapis/nodejs-pubsub
+[42]: https://github.com/noodlefrenzy/node-amqp10
+[43]: https://github.com/squaremo/amqp.node
+[44]: https://github.com/coopernurse/node-pool
+[45]: https://github.com/tulios/kafkajs
+[46]: https://github.com/SOHU-Co/kafka-node
+[47]: https://github.com/amqp/rhea
+[48]: https://github.com/aws/aws-sdk-js
+[49]: https://github.com/petkaantonov/bluebird
+[50]: https://github.com/then/promise
+[51]: https://github.com/kevincennis/promise
+[52]: https://github.com/kriskowal/q
+[53]: https://github.com/cujojs/when
+[54]: https://github.com/trentm/node-bunyan
+[55]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[56]: http://getpino.io
+[57]: https://github.com/winstonjs/winston
+[58]: https://github.com/laverdet/node-fibers
+[59]: https://nodejs.org/api/async_hooks.html
+[60]: https://www.meteor.com/
+[61]: https://github.com/DataDog/dd-trace-js/issues/1229

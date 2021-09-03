@@ -168,7 +168,7 @@ A **measure** is an attribute with a numerical value contained in your event. To
 
 #### Saved views
 
-Use saved views to automatically configure your events explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][5] to learn more.
+Use saved views to automatically configure your events explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. See [Saved Views][5] to learn more.
 
 
 [5]: /logs/explorer/saved_views/
@@ -188,7 +188,7 @@ A **measure** is an attribute with a numerical value contained in your event. To
 
 #### Saved views
 
-Use saved views to automatically configure your events explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][6] to learn more.
+Use saved views to automatically configure your events explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. See [Saved Views][6] to learn more.
 
 
 [6]: /logs/explorer/saved_views/
@@ -356,14 +356,14 @@ To combine multiple terms into a complex query, use the following Boolean operat
 
 By default, related events are aggregated when displayed in the events stream. To show unaggregated events, un-check the **Aggregate related events** box at the top right of your event stream:
 
-{{< img src="events/event_stream_aggregated.png" alt="Aggregated event stream"  style="width:50%;" >}}
+{{< img src="events/event_stream_aggregated.png" alt="Aggregated event stream" style="width:50%;" >}}
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 ### Aggregation
 
 By default, related events are aggregated when displayed in the events stream. To show unaggregated events, un-check the **Aggregate related events** box at the top right of your event stream:
 
-{{< img src="events/event_stream_aggregated.png" alt="Aggregated event stream"  style="width:50%;" >}}
+{{< img src="events/event_stream_aggregated.png" alt="Aggregated event stream" style="width:50%;" >}}
 {{< /site-region >}}
 
 ### Notifications

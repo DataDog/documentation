@@ -45,7 +45,7 @@ En cliquant sur **Authorize** lors de la connexion, vous associez l'appareil mob
 
 ##### Connexion SAML initiée par un fournisseur d'identité
 
-Si vous recevez systématiquement une erreur lorsque vous essayez de vous connecter via SAML, il est possible que votre fournisseur d'identité impose une connexion initiée par un fournisseur d'identité. Pour découvrir comment activer ce type de connexion, consultez notre [page dédiée][16].
+Si vous recevez systématiquement une erreur lorsque vous essayez de vous connecter via SAML, il est possible que votre fournisseur d'identité impose une connexion initiée par un fournisseur d'identité. Pour découvrir comment activer ce type de connexion, consultez notre [page dédiée][19].
 
 
 ## Monitors
@@ -237,6 +237,6 @@ Si vous avez besoin d'aide pour résoudre d'éventuels problèmes, [contactez l'
 [14]: https://support.apple.com/en-us/HT209455
 [15]: https://chat.datadoghq.com/
 [16]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[16]: https://docs.datadoghq.com/fr/account_management/saml/mobile-idp-login/
 [17]: https://docs.datadoghq.com/fr/monitors/incident_management
 [18]: https://docs.datadoghq.com/fr/logs/explorer/saved_views/
+[19]: https://docs.datadoghq.com/fr/account_management/saml/mobile-idp-login/

@@ -69,6 +69,11 @@ Set up a cluster alert:
 
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
 
+Each check tagged with a distinct combination of tags is considered to be a distinct check in the cluster. Only the status of the last check of each combination of tags is taken into account in the cluster percentage calculation.
+
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
+
+For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -382,8 +382,6 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 }
 ```
 
-**Note**: Adding tags in archives is an opt-in feature - see in the [Datadog tags section](#datadog-tags) to enable it for an archive.
-
 ## Further Reading
 
 {{< whatsnext desc="Next, learn how to access your archived log content from Datadog:" >}}

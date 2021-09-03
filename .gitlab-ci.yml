@@ -387,8 +387,12 @@ manage_translations:on-schedule:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
-    - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
-    - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+    - |-
+      if [[ $(date +%u) -lt 6 ]]; then
+        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.38.tgz
+        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+      fi
+      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
 
