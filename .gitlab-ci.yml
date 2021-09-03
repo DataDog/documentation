@@ -154,6 +154,8 @@ link_checks_preview:
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - htmltest
+  after_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - if [[ grep "not exist" tmp/.htmltest/htmltest.log ]]; then notify_slack "${cat ./tmp/.htmltest/htmltest.log}" "#31b834"; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
