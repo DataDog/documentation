@@ -38,9 +38,9 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 #### Select locations
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **[Private Locations][3]** to run your test from.
 
-Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **[Private Locations][3]** instead.
+Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your private locations instead.
 
 The Shopist application is publicly available, you can consequently go ahead and pick any managed locations you want to execute your test from.
 
@@ -69,11 +69,11 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Design your alert message and add any email address you want your test to alert you on.
+Design your alert message and add any email address you want your test to send alerts to.
 
 {{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true"  >}}
 
-You can also use [notifications integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams. Note that in order to be able to trigger a Synthetic alert to these, you first need to set up the corresponding integration.
+You can also use [notifications integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks. Note that in order to be able to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][12].
 
 When you're ready to record your test, click **Save Details & Record Test**.
 
@@ -129,3 +129,4 @@ Use Datadog's [APM integration with Synthetic Monitoring][11] to view traces gen
 [9]: /synthetics/browser_tests/test_results#resources
 [10]: /synthetics/browser_tests/test_results#page-performance
 [11]: /synthetics/apm/
+[12]: https://app.datadoghq.com/account/settings
