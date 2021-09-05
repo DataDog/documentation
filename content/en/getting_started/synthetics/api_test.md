@@ -36,7 +36,9 @@ The example below demonstrates the creation of an [HTTP test][2], a subtype of [
 4. Define your request:
 
     - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. You can change your test name to something else if you want to.
-    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies. **Note:** You can create secure [global variables][5] to store credentials and create [local variables][6] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options. In this example, no specific advanced option is needed.
+    - You can select **Advanced Options** to use custom request headers, authentication credentials, body content, or cookies. **Note:** You can create secure [global variables][5] to store credentials and create [local variables][6] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
+    
+      In this example, no specific advanced option is needed.
     - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
 5. Click **Test URL** to trigger a sample test run.
@@ -59,9 +61,9 @@ Assertions are fully customizable. To add a custom assertion, click on elements 
 
 ### Select locations 
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **[Private Locations][9]** to run your test from.
 
-Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **[Private Locations][9]** instead.
+Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your private locations instead.
 
 The Shopist application is publicly available, you can consequently go ahead and pick any managed locations you want to execute your test from.
 
@@ -89,17 +91,22 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Notify your team
 
-Design your alert message and add any email address you want your test to alert you on. You can also use [notifications integrations][11] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams. Note that in order to be able to trigger a Synthetic alert to these, you first need to set up the corresponding integration.
+Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][11] such as Slack, PagerDuty, Microsoft Teams, and webhooks. Note that in order to be able to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][13].
 
 When you're ready to run your test, click **Save Test**. 
 
 ## Create a multistep API test
 
-[Multistep API tests][12] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][2], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. With multistep API tests, you can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
+[Multistep API tests][12] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][2], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. Multistep API tests also allow you to create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
 
-The example test below demonstrates the creation of a multistep API test, which monitors the addition of an item to a cart. It contains three steps: getting a cart, getting a product, and adding the product to the cart. If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
+The example test below demonstrates the creation of a multistep API test, which monitors the addition of an item to a cart. It contains three steps: 
+- Getting a cart, 
+- Getting a product, 
+- And adding the product to the cart. 
 
-To create a new multistep API test, click **New Test** > **[Multistep API test][5]**. Similar to an HTTP test, add a name (such as `Add product to cart`), include tags, and select locations. 
+If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
+
+To create a new multistep API test, click **New Test** > **[Multistep API test][5]**. Add a test name (such as `Add product to cart`), include tags, and select locations. 
 
 ### Get a cart
 
@@ -158,9 +165,8 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
         
 5. Click **Test URL**. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
 6. In **Add assertions (optional)**, click **Response Body** and click the `url` key to have your test assert that the journey finished with a response containing the checkout URL.
-7. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
-8. Optionally, extract variables from the response content. In this example, no specific variables need to be extracted.
-9. When you're done creating this test step, click **Save Step**.
+7. No execution parameters and variable extractions are needed in this last step.
+10. When you're done creating this test step, click **Save Step**.
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
@@ -192,3 +198,4 @@ With Datadog's [APM integration with Synthetic Monitoring][6], access the root c
 [10]: /synthetics/ci
 [11]: /integrations/#cat-notification
 [12]: /synthetics/multistep
+[13]: https://app.datadoghq.com/account/settings
