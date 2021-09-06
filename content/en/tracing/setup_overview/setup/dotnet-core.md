@@ -188,7 +188,7 @@ Name                       | Value
 
 The following environment variables are required to enable automatic instrumentation:
 
-  <div class="alert alert-info">
+  <div class="alert alert-warning">
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
   </div>
 
@@ -370,8 +370,6 @@ To configure the tracer using environment variables, set the variables before la
 
 #### Windows
 
-**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry, as described above.
-
 ```cmd
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
@@ -382,6 +380,10 @@ SET DD_VERSION=abc123
 rem Launch application
 example.exe
 ```
+
+<div class="alert alert-warning">
+**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry, as described above. IIS runs all apps under one Windows Service so it's best to use one of the other configuration options (Code, web.config, JSON file) for app specific settings like DD_SERVICE.
+</div>
 
 #### Linux
 
@@ -447,7 +449,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration settings
 
-<div class="alert alert-info">
+<div class="alert alert-warning">
   <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
 </div>
 
