@@ -382,7 +382,7 @@ manage_translations:on-schedule:
       if [[ $(date +%u) -lt 6 ]]; then
         nodenv shell 14.15.0
         [ -d ./node_modules ] && rm -rf ./node_modules
-        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.38.tgz
+        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.39.tgz
         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
       fi
       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
