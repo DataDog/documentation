@@ -372,9 +372,7 @@ evaluate_missing_metrics:
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -382,6 +380,8 @@ manage_translations:on-schedule:
   script:
     - |-
       if [[ $(date +%u) -lt 6 ]]; then
+        nodenv shell 14.15.0
+        [ -d ./node_modules ] && rm -rf ./node_modules
         yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.38.tgz
         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
       fi
