@@ -177,7 +177,8 @@ example.exe
 ```
 
 <div class="alert alert-warning">
-<strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above. IIS runs all apps under one Windows Service so it's best to use one of the other configuration options (Code, web.config, JSON file) for app specific settings like DD_SERVICE.
+<strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above.
+IIS runs all applications under one Windows Service so it's best to use one of the other configuration options (Code, web.config, JSON file) for application specific settings like DD_SERVICE.
 </div>
 
 {{% /tab %}}
