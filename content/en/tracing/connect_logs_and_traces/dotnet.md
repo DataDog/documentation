@@ -27,9 +27,9 @@ You can set up your logging library and .NET tracing configurations so that trac
 Configure the .NET Tracer with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
 
 The .NET Tracer supports the following logging libraries:
-- [Serilog][2]
+- [Serilog][2] (version 2.0+)
 - [log4net][3]
-- [NLog][4] (version 4.0+)
+- [NLog][4]
 
 ## Getting started
 
