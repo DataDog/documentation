@@ -33,6 +33,8 @@ Go to **Settings > Notification Services** in Buildkite and add a new webhook:
 [1]: https://app.datadoghq.eu/organization-settings/api-keys
 {{< /site-region >}}
 
+Afterwards click on the **Add Webhook Notification** button to save the new webhook.
+
 ## Visualize pipeline data in Datadog
 
 {{< site-region region="us" >}}
