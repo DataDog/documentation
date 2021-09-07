@@ -23,7 +23,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
 display_name: RabbitMQ
 draft: false
 git_integration_title: rabbitmq

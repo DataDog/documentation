@@ -6,10 +6,10 @@ further_reading:
   - link: /getting_started/synthetics/
     tag: Documentation
     text: Synthetic モニタリングの概要
-  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
-  - link: https://www.datadoghq.com/blog/test-maintenance-best-practices/
+  - link: 'https://www.datadoghq.com/blog/test-maintenance-best-practices/'
     tag: ブログ
     text: エンドツーエンドテスト維持のベストプラクティス
   - link: /synthetics/guide/

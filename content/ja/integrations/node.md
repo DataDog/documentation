@@ -7,13 +7,13 @@ categories:
 ddtype: ライブラリ
 dependencies: []
 description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
-doc_link: https://docs.datadoghq.com/integrations/nodejs/
+doc_link: 'https://docs.datadoghq.com/integrations/nodejs/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/node-logging-best-practices/
+  - link: 'https://www.datadoghq.com/blog/node-logging-best-practices/'
     tag: ブログ
     text: Node.js ログを収集、カスタマイズ、一元化する方法
-  - link: https://www.datadoghq.com/blog/node-monitoring-apm/
+  - link: 'https://www.datadoghq.com/blog/node-monitoring-apm/'
     tag: ブログ
     text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
 git_integration_title: node

@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md'
 display_name: Redis Sentinel
 draft: false
 git_integration_title: redis_sentinel

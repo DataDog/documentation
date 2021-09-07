@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md'
 display_name: Riak MDC Replication
 draft: false
 git_integration_title: riak_repl

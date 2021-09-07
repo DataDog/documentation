@@ -2,7 +2,7 @@
 title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
 kind: ガイド
 further_reading:
-  - link: https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog
+  - link: 'https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog'
     tag: ブログ
     text: API 宛先のユースケース例を示す AWS ブログ
 ---

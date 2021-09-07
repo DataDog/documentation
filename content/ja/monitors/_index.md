@@ -9,7 +9,7 @@ aliases:
   - /ja/guides/monitors/the-conditions
 description: 通知の作成と管理
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
+  - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
     tag: ブログ
     text: モニター入門 重要事項をアラート
   - link: /api/v1/monitors/

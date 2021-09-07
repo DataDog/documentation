@@ -19,7 +19,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md'
 display_name: Supervisord
 draft: false
 git_integration_title: supervisord

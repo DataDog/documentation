@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/process/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/process/README.md'
 display_name: プロセス
 draft: false
 git_integration_title: プロセス

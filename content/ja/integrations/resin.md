@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/resin/README.md'
 display_name: Resin
 draft: false
 git_integration_title: resin

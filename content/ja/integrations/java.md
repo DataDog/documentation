@@ -6,25 +6,25 @@ categories:
 ddtype: チェック
 dependencies: []
 description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集します。
-doc_link: https://docs.datadoghq.com/integrations/java/
+doc_link: 'https://docs.datadoghq.com/integrations/java/'
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect
+  - link: 'https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect'
     tag: よくあるご質問
     text: JMX インテグレーションに一致する Bean がありますが、データが収集できません。
-  - link: https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
+  - link: 'https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/'
     tag: よくあるご質問
     text: jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする
-  - link: https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/
+  - link: 'https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/'
     tag: よくあるご質問
     text: 'jmx.yaml error: Include Section'
-  - link: https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/
+  - link: 'https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/'
     tag: よくあるご質問
     text: 複合型の JMX 属性を収集する
-  - link: https://docs.datadoghq.com/integrations/faq/how-to-run-jmx-commands-in-windows/
+  - link: 'https://docs.datadoghq.com/integrations/faq/how-to-run-jmx-commands-in-windows/'
     tag: よくあるご質問
     text: Windows で JMX コマンドを実行する
-  - link: https://docs.datadoghq.com/integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/
+  - link: 'https://docs.datadoghq.com/integrations/faq/how-to-use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/'
     tag: よくあるご質問
     text: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する方法
 git_integration_title: java

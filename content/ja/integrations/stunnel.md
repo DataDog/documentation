@@ -10,7 +10,7 @@ name: Stunnel
 public_title: Datadog-Stunnel インテグレーション
 short_description: Stunnel プロキシからログを収集して Datadog に送信。
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md'
 integration_id: stunnel
 ---
 ## 概要

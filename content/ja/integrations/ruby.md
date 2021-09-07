@@ -5,16 +5,16 @@ categories:
 ddtype: ライブラリ
 dependencies: []
 description: Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。
-doc_link: https://docs.datadoghq.com/integrations/ruby/
+doc_link: 'https://docs.datadoghq.com/integrations/ruby/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitoring-rails-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/monitoring-rails-with-datadog/'
     tag: ブログ
     text: Datadog を使用した Rails アプリケーションの監視
-  - link: https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/'
     tag: ブログ
     text: Datadog を使用した Rails ログの収集および監視
-  - link: https://www.datadoghq.com/blog/managing-rails-application-logs/
+  - link: 'https://www.datadoghq.com/blog/managing-rails-application-logs/'
     tag: ブログ
     text: Rails アプリケーションログを収集、カスタマイズ、管理する方法
 git_integration_title: ruby

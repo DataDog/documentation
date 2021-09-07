@@ -5,7 +5,7 @@ description: ログコンフィギュレーションページからログを処�
 aliases:
   - /ja/logs/processing
 further_reading:
-  - link: https://www.datadoghq.com/blog/logging-without-limits/
+  - link: 'https://www.datadoghq.com/blog/logging-without-limits/'
     tag: ブログ
     text: Logging without Limits* の詳細
   - link: /logs/guide/

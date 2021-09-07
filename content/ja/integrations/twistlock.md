@@ -16,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_name: Twistlock
 draft: false
 git_integration_title: twistlock
