@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Host Maps visualize hosts together on one screen, with metrics made comprehensible via color and shape.    
+Host Maps visualize hosts together on one screen, with metrics made comprehensible through color and shape.    
 
 ## Usage
 
@@ -41,7 +41,7 @@ A simple example is grouping your hosts by AWS availability zone. If you add a s
 
 [Tags][1] may be applied automatically by [Datadog integrations][2] or manually applied. You can use these to filter your hosts.
 
-For example, if some of your hosts are running on AWS, the following AWS-specific tags are available to you right now:
+For example, if some of your hosts are running on AWS, the following AWS-specific tags are available to you:
 
 * `availability-zone`
 * `region`
@@ -64,7 +64,7 @@ When you've identified a host that you want to investigate, click it for details
 
 Click the name of an integration for a condensed dashboard of metrics for that integration. In the screenshot below, "system" has been clicked to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
-{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In"  style="width:75%;" >}}
+{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" style="width:75%;" >}}
 
 ### Shapes and colors
 
@@ -74,7 +74,7 @@ Host Maps can also communicate an additional, optional metric with the size of t
 
 In the screenshot below, the size of the hexagons is the 15 minute average load, normalized so that machines' workloads can be compared even if they have different numbers of cores.
 
-{{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" style="width:80%;">}}
 
 **Note**: The "% CPU utilized" metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS or vSphere.
 
@@ -84,7 +84,7 @@ By default, the Host Map only shows hosts that are reporting the selected metric
 
 If a host is not reporting the selected metric, it can still appear within the Host Map by selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
 
-{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="host No Agent"  style="width:50%;">}}
+{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="host No Agent" style="width:50%;">}}
 
 ### Data freshness and meaning
 
@@ -99,11 +99,11 @@ If you want to reduce your AWS spend, you might start by figuring out what the e
 
 Below is a subset of Datadog's infrastructure. As you can see, **c3.2xlarge** instances are heavily loaded.
 
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" style="width:80%;">}}
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, you can find that only some of the roles are loaded, while others are nearly idling. If you downgraded those 7 green nodes to a c3.xlarge, you would save almost $13K per year. ($0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year)
 
-{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups" style="width:80%;">}}
 
 ### Availability zone placement
 
@@ -111,7 +111,7 @@ Host maps enable you to see distributions of machines in each of your availabili
 
 In the example seen below, there is an uneven distribution of hosts with `role:daniels` across availability zones. (Daniels is the name of an internal application.)
 
-{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance"  style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance" style="width:80%;" >}}
 
 ### Problem investigation
 
@@ -120,9 +120,9 @@ For example, you can group by availability zone, region, instance type, image, o
 
 Below is a screenshot from a recent issue at Datadog. Some hosts have much less usable memory than others, despite being part of the same cluster. Grouping by machine image reveals that there were two different images in use, and one of them is overloaded.
 
-{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands"  style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" style="width:80%;" >}}
 
-{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" style="width:80%;">}}
 
 ## Further Reading
 

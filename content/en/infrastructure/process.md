@@ -36,7 +36,7 @@ Datadog’s Live Processes gives you real-time visibility into the process runni
 
 ## Installation
 
-If you are using Agent 5, [follow this specific installation process][1]. If you are using Agent 6 or 7, [see the intructions below][2].
+If you are using Agent 5, follow this [specific installation process][1]. If you are using Agent 6 or 7, [see the instructions below][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -99,7 +99,7 @@ In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the followi
       name: passwd
 ```
 
-Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] information pages for further documentation.
+See the standard [Daemonset installation][2] and the [Docker Agent][3] information pages for further documentation.
 
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
@@ -151,7 +151,7 @@ process_config:
 
 The next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
 
-{{< img src="infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing"  style="width:100%;">}}
+{{< img src="infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" style="width:100%;">}}
 
 Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
 
@@ -166,7 +166,7 @@ process_config:
 
 {{% tab "Helm" %}}
 
-You can use the Helm chart to define your own list, which will be merged with the default one. Add the environment variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS` to your `datadog-values.yaml` file, and upgrade your Datadog Helm chart:
+You can use the Helm chart to define your own list, which is merged with the default one. Add the environment variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS` to your `datadog-values.yaml` file, and upgrade your Datadog Helm chart:
 
 ```yaml
 datadog:
@@ -221,7 +221,7 @@ When you input a text string into the search bar, fuzzy string search is used to
 
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
-{{< img src="infrastructure/process/postgres.png" alt="Postgres"  style="width:80%;">}}
+{{< img src="infrastructure/process/postgres.png" alt="Postgres" style="width:80%;">}}
 
 To combine multiple string searches into a complex query, use any of the following Boolean operators:
 
@@ -240,10 +240,11 @@ Use parentheses to group operators together. For example, `(NOT (elasticsearch O
 
 You can also filter your processes using Datadog [tags][3], such as `host`, `pod`, `user`, and `service`. Input tag filters directly into the search bar, or select them in the facet panel on the left of the page.
 
-Datadog automatically generates a `command` tag, so that you can filter for
-* third-party software (e.g. `command:mongod`, `command:nginx`)
-* container management software (e.g. `command:docker`, `command:kubelet`)
-* common workloads (e.g. `command:ssh`, `command:CRON`)
+Datadog automatically generates a `command` tag, so that you can filter for:
+
+- Third-party software, for example: `command:mongod`, `command:nginx`
+- Container management software, for example:  `command:docker`, `command:kubelet`)
+- Common workloads, for example:  `command:ssh`, `command:CRON`)
 
 ### Aggregating processes
 
@@ -267,9 +268,9 @@ Processes in Kubernetes containers are tagged by:
 - `kube_deployment`
 - `Kube_cluster`
 
-If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` will also be picked up automatically.
-Having these tags available will let you tie together APM, logs, metrics, and process data.
-Note that this setup applies to containerized environments only.
+If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` are picked up automatically.
+Having these tags available lets you tie together APM, logs, metrics, and process data.
+**Note**: This setup applies to containerized environments only.
 
 ## Scatter plot
 
@@ -277,7 +278,7 @@ Use the scatter plot analytic to compare two metrics with one another in order t
 
 To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
 
-{{< img src="infrastructure/process/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
+{{< img src="infrastructure/process/scatterplot_selection.png" alt="scatter plot selection" style="width:60%;">}}
 
 By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
 
@@ -287,13 +288,13 @@ The query at the top of the scatter plot analytic allows you to control your sca
 - Selection of the aggregation method for both metrics.
 - Selection of the scale of both X and Y axis (_Linear_/_Log_).
 
-{{< img src="infrastructure/process/scatterplot.png" alt="container inspect"  style="width:80%;">}}
+{{< img src="infrastructure/process/scatterplot.png" alt="container inspect" style="width:80%;">}}
 
 ## Process monitors
 
-Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see our [Live Process Monitor documentation][6].
+Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see the [Live Process Monitor documentation][6].
 
-{{< img src="infrastructure/process/process_monitor.png" alt="Process Monitor"  style="width:80%;">}}
+{{< img src="infrastructure/process/process_monitor.png" alt="Process Monitor" style="width:80%;">}}
 
 ## Processes in dashboards and notebooks
 
@@ -303,7 +304,7 @@ You can graph process metrics in dashboards and notebooks using the [Timeseries 
 3. Select a process metric to graph
 4. Filter using tags in the `From` field
 
-{{< img src="infrastructure/process/process_widget.png" alt="Processes widget"  style="width:80%;">}}
+{{< img src="infrastructure/process/process_widget.png" alt="Processes widget" style="width:80%;">}}
 
 ## Monitoring third-party software
 
@@ -325,11 +326,11 @@ Hosts that are running the integration, but where the integration is not enabled
 {{< img src="infrastructure/process/integration_views.png" alt="Integration Views" >}}
 
 Once a third-party software has been detected, Live Processes makes it quick and easy to analyze the performance of that software.
-1. To start, click on *Views* at the top right of the page to open a list of pre-set options, including Ngingx, Redis, and Kafka.
+1. To start, click on *Views* at the top right of the page to open a list of pre-set options, including Nginx, Redis, and Kafka.
 2. Select a view to scope the page to only the processes running that software.
-3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you'll be able to view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources.
+3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you can view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources.
 
-You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. Doing so will save your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.
+You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. This saves your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.
 
 ## Processes across the platform
 
@@ -341,11 +342,11 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 ### APM
 
-In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the Live Processes page. Related processes are not currently supported for serverless and browser traces.
+In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
 ### Network Performance Monitoring
 
-When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints (e.g. services) communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
+When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints, such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
 ## Real-time monitoring
 
