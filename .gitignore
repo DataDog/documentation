@@ -4,6 +4,10 @@ data/service_checks/
 data/npm
 integrations_data
 
+# htmltest tmp files
+bin/htmltest
+tmp
+
 # Ignore generated examples
 /examples
 content/en/api/**/*.go
@@ -179,4 +183,3 @@ static/images/integrations_logos/2020w2.pdf
 
 # Generated resources from Hugo Pipes
 resources/_gen/
-

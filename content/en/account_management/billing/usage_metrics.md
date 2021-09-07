@@ -48,10 +48,9 @@ For accounts with multiple organizations, you can roll up estimated usage from c
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][2].
+For technical questions, contact [Datadog support][1].
 
-For billing questions, contact your [Customer Success][3] Manager.
+For billing questions, contact your [Customer Success][2] Manager.
 
-[1]: /logs/logs_to_metrics/#recommended-usage-metrics
-[2]: /help/
-[3]: mailto:success@datadoghq.com
+[1]: /help/
+[2]: mailto:success@datadoghq.com
