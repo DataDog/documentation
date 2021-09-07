@@ -386,6 +386,9 @@ manage_translations:on-schedule:
         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
       fi
       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+  artifacts:
+    paths:
+      - translate-debug.log
   only:
     - schedules
 
