@@ -632,7 +632,7 @@ Other examples:
 
 ### ASCII Control Characters
 
-If your logs contain ASCII control characters, they will be serialised upon ingestion. These can be handled by explicitly escaping the serialised value within your grok parser.
+If your logs contain ASCII control characters, they are serialized upon ingestion. These can be handled by explicitly escaping the serialized value within your grok parser.
 
 ## Further Reading
 
