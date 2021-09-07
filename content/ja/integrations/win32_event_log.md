@@ -16,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md
 display_name: Win32
 draft: false
 git_integration_title: win32_event_log

@@ -16,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
 display_name: Teamcity
 draft: false
 git_integration_title: teamcity
