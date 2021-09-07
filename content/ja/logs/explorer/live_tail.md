@@ -12,7 +12,7 @@ further_reading:
   - link: logs/explorer/side_panel
     tag: ドキュメント
     text: ログサイドパネル
-  - link: 'logs/explorer/#list-of-logs'
+  - link: logs/explorer/#list-of-logs
     tag: ドキュメント
     text: ログのリストビュー
 ---

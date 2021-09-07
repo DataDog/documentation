@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/puma/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
 display_name: Puma
 draft: false
 git_integration_title: puma

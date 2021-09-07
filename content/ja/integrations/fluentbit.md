@@ -8,13 +8,13 @@ categories:
   - ログの収集
 doc_link: /integrations/fluentbit/
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md'
 has_logo: true
 integration_title: Fluent Bit
 is_public: true
 public_title: Datadog-Fluent Bit インテグレーション
 further_reading:
-  - link: https://www.datadoghq.com/blog/fluentbit-integration-announcement/
+  - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
     tag: ブログ
     text: Datadog と Fluent Bit を使用してログを一元管理する
 integration_id: fluentbit

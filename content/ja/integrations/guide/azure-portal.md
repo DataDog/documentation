@@ -5,7 +5,7 @@ further_reading:
   - link: integration/azure
     tag: ドキュメント
     text: Azure インテグレーション
-  - link: https://www.datadoghq.com/blog/azure-datadog-partnership
+  - link: 'https://www.datadoghq.com/blog/azure-datadog-partnership'
     tag: ブログ
     text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
 ---

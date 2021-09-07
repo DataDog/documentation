@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elemental MediaPackage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_mediapackage/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediapackage/'
 draft: false
 git_integration_title: amazon_mediapackage
 has_logo: true

@@ -10,7 +10,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Route 53 メトリクスを追跡し、健全性チェックを監視。
-doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_route53/'
 draft: false
 git_integration_title: amazon_route53
 has_logo: true

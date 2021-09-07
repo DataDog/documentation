@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: BigPanda と Datadog アラートを相関付け、アクションにつながるインシデントを作成します。
-doc_link: https://docs.datadoghq.com/integrations/bigpanda/
+doc_link: 'https://docs.datadoghq.com/integrations/bigpanda/'
 draft: false
 git_integration_title: bigpanda
 has_logo: true

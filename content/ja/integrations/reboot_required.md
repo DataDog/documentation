@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
 display_name: Reboot required
 draft: false
 git_integration_title: reboot_required

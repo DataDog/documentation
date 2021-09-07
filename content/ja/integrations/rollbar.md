@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog イベントストリームに、例外、エラー、コードデプロイを送信。
-doc_link: 'https://docs.datadoghq.com/integrations/rollbar/'
+doc_link: https://docs.datadoghq.com/integrations/rollbar/
 draft: false
 git_integration_title: rollbar
 has_logo: true

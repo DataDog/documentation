@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud APIs のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_apis/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_apis/'
 draft: false
 git_integration_title: google_cloud_apis
 has_logo: true

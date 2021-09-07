@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
 display_name: Kubernetes Controller Manager
 draft: false
 git_integration_title: kube_controller_manager

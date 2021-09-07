@@ -1,65 +1,65 @@
 left:
   - name: product
-    link: https://www.datadoghq.com/ja/product/
+    link: 'https://www.datadoghq.com/ja/product/'
     title: 製品
     children:
       - name: product_features
-        link: https://www.datadoghq.com/ja/product/
+        link: 'https://www.datadoghq.com/ja/product/'
         title: 機能
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='機能アイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''機能アイコン''>'
       - name: product_integrations
-        link: https://www.datadoghq.com/product/platform/integrations/
+        link: 'https://www.datadoghq.com/product/platform/integrations/'
         title: インテグレーション
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='インテグレーションアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''インテグレーションアイコン''>'
       - name: product_dashboards
-        link: https://www.datadoghq.com/product/platform/dashboards/
+        link: 'https://www.datadoghq.com/product/platform/dashboards/'
         title: 'ダッシュボード  '
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='ダッシュボードアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''ダッシュボードアイコン''>'
       - name: product_logs
-        link: https://www.datadoghq.com/product/log-management/
+        link: 'https://www.datadoghq.com/product/log-management/'
         title: ログ管理
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='ログアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''ログアイコン''>'
       - name: product_apm
-        link: https://www.datadoghq.com/product/apm/
+        link: 'https://www.datadoghq.com/product/apm/'
         title: APM
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='APM アイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''APM アイコン''>'
       - name: product_profiler
-        link: https://www.datadoghq.com/product/code-profiling/
+        link: 'https://www.datadoghq.com/product/code-profiling/'
         title: 継続的なプロファイラー
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='プロファイラーアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''プロファイラーアイコン''>'
       - name: product_security
-        link: https://www.datadoghq.com/product/security-monitoring/
+        link: 'https://www.datadoghq.com/product/security-monitoring/'
         title: セキュリティモニタリング
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='セキュリティアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''セキュリティアイコン''>'
       - name: product_network
-        link: https://www.datadoghq.com/product/network-performance-monitoring/
+        link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
         title: ネットワークモニタリング
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='ネットワークアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''ネットワークアイコン''>'
       - name: product_synthetics
-        link: https://www.datadoghq.com/product/synthetic-monitoring/
+        link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
         title: Synthetic の監視
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics アイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics アイコン''>'
       - name: product_rum
-        link: https://www.datadoghq.com/product/real-user-monitoring/
+        link: 'https://www.datadoghq.com/product/real-user-monitoring/'
         title: リアルユーザーモニタリング
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/rum.svg' alt='RUM アイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''RUM アイコン''>'
       - name: product_serverless
-        link: https://www.datadoghq.com/product/serverless-monitoring/
+        link: 'https://www.datadoghq.com/product/serverless-monitoring/'
         title: サーバーレス
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='サーバーレスアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''サーバーレスアイコン''>'
       - name: product_alerts
-        link: https://www.datadoghq.com/product/platform/alerts/
+        link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: アラート
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='アラートアイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''アラートアイコン''>'
       - name: product_api
         link: api
         title: API
-        pre: <img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/api.svg' alt='API アイコン'>
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''API アイコン''>'
   - name: customers
-    link: https://www.datadoghq.com/ja/customers/
+    link: 'https://www.datadoghq.com/ja/customers/'
     title: お客様
   - name: pricing
-    link: https://www.datadoghq.com/ja/pricing/
+    link: 'https://www.datadoghq.com/ja/pricing/'
     title: 料金
   - name: solutions
     link: '#'
@@ -67,135 +67,135 @@ left:
     children:
       - name: solutions_financial
         category: 業種
-        link: https://www.datadoghq.com/ja/solutions/financial-services/
+        link: 'https://www.datadoghq.com/ja/solutions/financial-services/'
         title: 金融サービス
       - name: solutions_manufacturing
         category: 業種
-        link: https://www.datadoghq.com/ja/solutions/manufacturing-logistics/
+        link: 'https://www.datadoghq.com/ja/solutions/manufacturing-logistics/'
         title: 製造 / 物流
       - name: solutions_healthcare
         category: 業種
-        link: https://www.datadoghq.com/ja/solutions/healthcare/
+        link: 'https://www.datadoghq.com/ja/solutions/healthcare/'
         title: 医療 / ライフサイエンス
       - name: solutions_retail
         category: 業種
-        link: https://www.datadoghq.com/ja/solutions/retail-ecommerce/
+        link: 'https://www.datadoghq.com/ja/solutions/retail-ecommerce/'
         title: 小売業 / e コマース
       - name: solutions_publicsector
         category: 業種
-        link: https://www.datadoghq.com/solutions/public-sector
+        link: 'https://www.datadoghq.com/solutions/public-sector'
         title: 官業
       - name: solutions_media
         category: 業種
-        link: https://www.datadoghq.com/ja/solutions/media-entertainment/
+        link: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
         title: メディア / エンターテインメント
       - name: solutions_technology
         category: 業種
-        link: https://www.datadoghq.com/solutions/technology/
+        link: 'https://www.datadoghq.com/solutions/technology/'
         title: テクノロジー
       - name: Amazon Web Services
         category: テクノロジー
-        link: https://www.datadoghq.com/solutions/aws/
+        link: 'https://www.datadoghq.com/solutions/aws/'
         title: Amazon Web Services
       - name: Azure
         category: テクノロジー
-        link: https://www.datadoghq.com/solutions/azure/
+        link: 'https://www.datadoghq.com/solutions/azure/'
         title: Azure
       - name: Google Cloud Platform
         category: テクノロジー
-        link: https://www.datadoghq.com/solutions/gcp/
+        link: 'https://www.datadoghq.com/solutions/gcp/'
         title: Google Cloud Platform
       - name: Kubernetes
         category: テクノロジー
-        link: https://www.datadoghq.com/solutions/kubernetes/
+        link: 'https://www.datadoghq.com/solutions/kubernetes/'
         title: Kubernetes
       - name: solutions_gaming
         category: 業種
-        link: https://www.datadoghq.com/ja/solutions/gaming/
+        link: 'https://www.datadoghq.com/ja/solutions/gaming/'
         title: ゲーム業界
       - name: solutions_cloudmigration
         category: ユースケース
-        link: https://www.datadoghq.com/ja/solutions/cloud-migration/
+        link: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
         title: クラウド移行
       - name: solutions_monitoringconsolidation
         category: ユースケース
-        link: https://www.datadoghq.com/ja/solutions/monitoring-consolidation/
+        link: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
         title: 統合監視
       - name: solutions_devops
         category: ユースケース
-        link: https://www.datadoghq.com/ja/solutions/devops/
+        link: 'https://www.datadoghq.com/ja/solutions/devops/'
         title: DevOps
       - name: solutions_securityanalytics
         category: ユースケース
-        link: https://www.datadoghq.com/solutions/security-analytics/
+        link: 'https://www.datadoghq.com/solutions/security-analytics/'
         title: セキュリティ分析
       - name: solutions_hybridcloudmonitoring
         category: ユースケース
-        link: https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/
+        link: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
         title: ハイブリッドクラウドモニタリング
       - name: solutions_iotmonitoring
         category: ユースケース
-        link: https://www.datadoghq.com/solutions/iot-monitoring/
+        link: 'https://www.datadoghq.com/solutions/iot-monitoring/'
         title: IoT モニタリング
       - name: solutions_machinelearning
         category: ユースケース
-        link: https://www.datadoghq.com/solutions/machine-learning/
+        link: 'https://www.datadoghq.com/solutions/machine-learning/'
         title: 機械学習
       - name: solutions_businessanalytics
         category: ユースケース
-        link: https://www.datadoghq.com/solutions/business-analytics/
+        link: 'https://www.datadoghq.com/solutions/business-analytics/'
         title: リアルタイム BI
 right:
   - name: about
-    link: https://www.datadoghq.com/ja/about/
+    link: 'https://www.datadoghq.com/ja/about/'
     title: 会社情報
     children:
       - name: about_contact
-        link: https://www.datadoghq.com/ja/about/contact/
+        link: 'https://www.datadoghq.com/ja/about/contact/'
         title: お問い合わせ
       - name: about_partners
-        link: https://www.datadoghq.com/ja/partner-with-datadog/
+        link: 'https://www.datadoghq.com/ja/partner-with-datadog/'
         title: パートナー
       - name: about_press
-        link: https://www.datadoghq.com/ja/about/press/
+        link: 'https://www.datadoghq.com/ja/about/press/'
         title: プレス
       - name: about_team
-        link: https://www.datadoghq.com/ja/about/team/
+        link: 'https://www.datadoghq.com/ja/about/team/'
         title: 経営幹部
       - name: about_careers
-        link: https://www.datadoghq.com/ja/careers/
+        link: 'https://www.datadoghq.com/ja/careers/'
         title: 採用情報
       - name: about_analyst
-        link: https://www.datadoghq.com/ja/about/analyst/
+        link: 'https://www.datadoghq.com/ja/about/analyst/'
         title: アナリストレポート
       - name: about_investors
-        link: https://investors.datadoghq.com/ja/
+        link: 'https://investors.datadoghq.com/ja/'
         title: Investor Relations
       - name: about_awards
-        link: https://www.datadoghq.com/about/awards/
+        link: 'https://www.datadoghq.com/about/awards/'
         title: Awards
       - name: about_timeline
-        link: https://www.datadoghq.com/ja/about/timeline/
+        link: 'https://www.datadoghq.com/ja/about/timeline/'
         title: 沿革
   - name: blog
-    link: https://www.datadoghq.com/ja/blog/
+    link: 'https://www.datadoghq.com/ja/blog/'
     title: ブログ
     children:
       - name: blog_themonitor
-        link: https://www.datadoghq.com/ja/blog/
+        link: 'https://www.datadoghq.com/ja/blog/'
         title: モニター
       - name: blog_engineering
-        link: https://www.datadoghq.com/ja/blog/engineering/
+        link: 'https://www.datadoghq.com/ja/blog/engineering/'
         title: エンジニアリング
       - name: blog_pupculture
-        link: https://www.datadoghq.com/ja/blog/pup-culture/
+        link: 'https://www.datadoghq.com/ja/blog/pup-culture/'
         title: 企業文化
       - name: blog_community
-        link: https://www.datadoghq.com/ja/blog/community/
+        link: 'https://www.datadoghq.com/ja/blog/community/'
         title: コミュニティ
   - name: docs
     link: ''
     title: ドキュメント
   - name: login
-    link: https://app.datadoghq.com/
+    link: 'https://app.datadoghq.com/'
     title: ログイン
