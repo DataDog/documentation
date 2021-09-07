@@ -48,11 +48,18 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ## Installation and getting started
 
-### Install the tracer
-
 <div class="alert alert-warning">
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li></ul>
 </div>
+
+### Installation overview
+
+1. Install the tracer
+2. Enable the tracer for your service
+3. Configure the Datadog Agent for APM
+4. View your live data
+
+### Install the tracer
 
 The Datadog .NET Tracer can be installed machine-wide to allow services across an entire machine to be instrumented, or it can be installed on a per-application-basis to allow developers to manage the instrumentation via the application’s dependencies. To see machine-wide installation options, view the Windows or Linux tab. To see per-application installation options, see the NuGet tab.
 
@@ -65,8 +72,6 @@ To install the .NET Tracer:
 1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
-
-3. Continue to the section *Enable the tracer for your service*, below.
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -96,8 +101,6 @@ sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz
 
 3. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
 
-4. Continue to the section *Enable the tracer for your service*, below.
-
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -112,8 +115,6 @@ To install the .NET Tracer:
 
 1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
 
-2. Continue to the section *Enable the tracer for your service*, below.
-
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
 {{% /tab %}}
@@ -122,12 +123,22 @@ To install the .NET Tracer:
 
 ### Enable the tracer for your service
 
+To enable the .NET Tracer for your service, you must:
+
+1. Set the required environment variables for automatic instrumentation to attach to your application
+2. Restart the application
+
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
 #### Internet Information Services (IIS)
 
+##### Required environment variables
+
+The .NET Tracer MSI installer adds all of the required environment variables, so there are no environment variables to configure.
+
+##### Application restart
 To automatically instrument applications hosted in IIS, completely stop IIS and then start it by running the following commands as an administrator:
 
 <div class="alert alert-warning">
@@ -141,18 +152,22 @@ net start w3svc
 
 #### Services not in IIS
 
-The following environment variables are required to enable automatic instrumentation:
+##### Required environment variables
 
 ```
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
+##### Application restart
+
+For standalone applications and Windows services, manually restart the application as you normally would.
+
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-The following environment variables are required to enable automatic instrumentation:
+##### Required environment variables
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -162,11 +177,15 @@ DD_INTEGRATIONS=/opt/datadog/integrations.json
 DD_DOTNET_TRACER_HOME=/opt/datadog
 ```
 
+##### Application restart
+
+For standalone applications, manually restart the application as you normally would.
+
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
 
-The following environment variables are required to enable automatic instrumentation:
+##### Required environment variables
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -185,6 +204,10 @@ Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.
 Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
 Windows x64      | `<APP_DIRECTORY>/datadog/win-x64/Datadog.Trace.ClrProfiler.Native.dll`
 Windows x86      | `<APP_DIRECTORY>/datadog/win-x86/Datadog.Trace.ClrProfiler.Native.dll`
+
+##### Application restart
+
+For standalone applications, manually restart the application as you normally would.
 
 
 {{% /tab %}}
