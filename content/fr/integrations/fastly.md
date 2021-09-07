@@ -4,8 +4,8 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/fastly/'
+description: Surveillez des métriques liées au cache, les requêtes d'origine, les codes de réponse, et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/fastly/
 draft: false
 git_integration_title: fastly
 has_logo: true
@@ -16,7 +16,7 @@ kind: integration
 manifest_version: '1.0'
 name: fastly
 public_title: Intégration Datadog/Fastly
-short_description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'
+short_description: Surveillez des métriques liées au cache, les requêtes d'origine, les codes de réponse, et plus encore.
 version: '1.0'
 ---
 {{< img src="integrations/fastly/fastlygraph.png" alt="Graphique Fastly" popup="true">}}

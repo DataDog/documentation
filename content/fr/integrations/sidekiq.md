@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md
 display_name: Sidekiq
 draft: false
 git_integration_title: sidekiq
@@ -30,7 +30,7 @@ metric_prefix: sidekiq.
 metric_to_check: sidekiq.jobs.count
 name: sidekiq
 public_title: Intégration Datadog/Sidekiq
-short_description: 'Surveillez les métriques associées à vos tâches, files d''attente et batchs Sidekiq.'
+short_description: Surveillez les métriques associées à vos tâches, files d'attente et batchs Sidekiq.
 support: core
 supported_os:
   - linux

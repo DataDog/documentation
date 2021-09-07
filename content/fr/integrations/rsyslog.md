@@ -2,8 +2,8 @@
 title: Rsyslog
 name: rsyslog
 kind: integration
-description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
-short_description: 'Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
+description: Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
+short_description: Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 categories:
   - log collection
 doc_link: /integrations/rsyslog/
@@ -13,7 +13,7 @@ has_logo: true
 integration_title: rsyslog
 is_public: true
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 public_title: Intégration Datadog/Rsyslog
 supported_os:
   - linux

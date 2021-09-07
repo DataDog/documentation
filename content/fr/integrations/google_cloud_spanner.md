@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation des ressources de vos instances Spanner.
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_spanner/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_spanner/
 draft: false
 git_integration_title: google_cloud_spanner
 has_logo: true

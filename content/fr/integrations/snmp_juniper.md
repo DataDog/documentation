@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snmp_juniper/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snmp_juniper/README.md
 display_name: Juniper Networks
 draft: false
 git_integration_title: snmp_juniper

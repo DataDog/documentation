@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Router."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_router/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_router/
 draft: false
 git_integration_title: google_cloud_router
 has_logo: true
