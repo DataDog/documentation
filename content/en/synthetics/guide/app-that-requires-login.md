@@ -71,7 +71,9 @@ The second way to ensure that your Datadog Browser tests can login into your app
 - Cookies
 - Basic, Digest, or NTLM credentials
 
-These are set at every test execution and for every step of your browser test. Note that these settings are however only applied at execution time and not at recording time. You should consequently manually apply the configured headers, cookies, and/or credentials on the page that is being used for recording and only then record steps the test should perform post login. At execution time, the browser test automatically first goes through authentication thanks to the header/cookie/credentials you applied and then performs all the recorded steps.
+These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
+
+You can manually apply these configured headers, cookies, and credentials on the page you are recording from and then record steps your test performs post-login. By default, the browser test automatically passes through authentication with your specified headers, cookies, and/or credentials at execution time and then goes through all recorded steps.
 
 {{< img src="synthetics/guide/app_that_requires_login/bt_adv_options.jpg" alt="Login to your app with browser test configuration options">}}
 
