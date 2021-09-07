@@ -46,7 +46,7 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. 
 
-Utilize the [Azure App Service view][3] (beta) to:
+Use the [Azure App Service view][3] (beta) to:
 
 - Quickly identify apps with high latency or errors
 
@@ -54,7 +54,7 @@ Utilize the [Azure App Service view][3] (beta) to:
 
 - Get insights into the costs of your App Service Plans by visualizing the number of active instances and seeing which are running apps that are submitting traces or logs to Datadog
 
-- Map which apps are running on which App Service Plans to identify apps that may be impacting costs or performance
+- Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
 
 The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][4].
 

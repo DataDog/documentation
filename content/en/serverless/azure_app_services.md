@@ -25,7 +25,7 @@ Microsoft [Azure App Service][1] is a group of serverless resources that enable 
 Datadog provides monitoring capabilities for all Azure App Service resource types:
 
 - Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
-- Utilize the dedicated [Azure App Service View][4] (beta) to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
+- Use the [Azure App Service View][4] (beta) to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
 - Custom metrics can be submitted using the API.
 - [Resource logs][5] can be submitted using [Event Hub][6].
 
