@@ -377,7 +377,7 @@ Use the scatter plot analytic to compare two metrics with one another in order t
 
 You can switch between the “Scatter Plot” and “Timeseries” tabs in the collapsible **Summary Graphs** section in the Containers page:
 
-{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="scatter plot selection" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter plot selection" style="width:80%;">}}
 
 By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot displays the individual containers and hosts that contribute to the group.
 
@@ -387,7 +387,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 * Selection of the aggregation method for both metrics.
 * Selection of the scale of both X and Y axis (*Linear*/*Log*).
 
-{{< img src="infrastructure/livecontainers/scatterplot.png" alt="scatter plot" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot.png" alt="Scatter plot" style="width:80%;">}}
 
 #### Real-time monitoring
 

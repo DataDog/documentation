@@ -151,7 +151,7 @@ process_config:
 
 The next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
 
-{{< img src="infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" style="width:100%;">}}
+{{< img src="infrastructure/process/process_arg_scrubbing.png" alt="Process arguments scrubbing" style="width:100%;">}}
 
 Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
 
@@ -278,7 +278,7 @@ Use the scatter plot analytic to compare two metrics with one another in order t
 
 To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
 
-{{< img src="infrastructure/process/scatterplot_selection.png" alt="scatter plot selection" style="width:60%;">}}
+{{< img src="infrastructure/process/scatterplot_selection.png" alt="Scatter plot selection" style="width:60%;">}}
 
 By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
 
@@ -288,7 +288,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 - Selection of the aggregation method for both metrics.
 - Selection of the scale of both X and Y axis (_Linear_/_Log_).
 
-{{< img src="infrastructure/process/scatterplot.png" alt="container inspect" style="width:80%;">}}
+{{< img src="infrastructure/process/scatterplot.png" alt="Container inspect" style="width:80%;">}}
 
 ## Process monitors
 
@@ -346,7 +346,7 @@ In [APM Traces][10], you can click on a service’s span to see the processes ru
 
 ### Network Performance Monitoring
 
-When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints, such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
+When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
 ## Real-time monitoring
 

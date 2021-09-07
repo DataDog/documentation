@@ -19,7 +19,7 @@ Like [Host Maps][1], [Containers Maps][2] give you a big picture of the health o
 
 In one place, you can detect outliers, identify usage patterns, avoid resource problems, and make decisions about how to best manage your containers. It doesn't matter if you have 10, 100, or 10,000 containers. [Autodiscovery][3] automatically detects new containers and accounts for them.
 
-{{< img src="infrastructure/containermap/containermap.png" alt="container map part 1" style="width:80%;">}}
+{{< img src="infrastructure/containermap/containermap.png" alt="Container map part 1" style="width:80%;">}}
 
 ## Installation
 

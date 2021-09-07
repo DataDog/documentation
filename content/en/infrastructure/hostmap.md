@@ -84,7 +84,7 @@ By default, the Host Map only shows hosts that are reporting the selected metric
 
 If a host is not reporting the selected metric, it can still appear within the Host Map by selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
 
-{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="host No Agent" style="width:50%;">}}
+{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="Host No Agent" style="width:50%;">}}
 
 ### Data freshness and meaning
 
@@ -99,7 +99,7 @@ If you want to reduce your AWS spend, you might start by figuring out what the e
 
 Below is a subset of Datadog's infrastructure. As you can see, **c3.2xlarge** instances are heavily loaded.
 
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="Host map part 1" style="width:80%;">}}
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, you can find that only some of the roles are loaded, while others are nearly idling. If you downgraded those 7 green nodes to a c3.xlarge, you would save almost $13K per year. ($0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year)
 

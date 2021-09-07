@@ -37,7 +37,7 @@ You can generate a new process-based metric directly from queries in the Live Pr
 {{< img src="infrastructure/process/process2metrics_create.png" alt="Create a process-based metric" style="width:80%;">}}
 
 1. **Select tags to filter your query**: The query syntax is the same as for [Live Processes][2]. Only processes matching the scope of your filters are considered for aggregation. Text search filters are supported only on the Live Processes page.
-2. **Select the measure you would like to track**: Enter a measure, such as `Total CPU %` to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
+2. **Select the measure you would like to track**: Enter a measure such as `Total CPU %` to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
 3. **Add tags to `group by`**: Select tags to be added as dimensions to your metrics, so they can be filtered, aggregated, and compared. By default, metrics generated from processes do not have any tags unless explicitly added. Any tag available for Live Processes queries can be used in this field. Process-based metrics are considered [custom metrics][3]. Avoid grouping by unbounded or extremely high cardinality tags like `command` and `user` to avert impacting your billing.
 4. **Name your metric**: Fill in the name of your metric. Process-based metrics always have the prefix _proc._ and suffix _[measure_selection]_.
 5. **Add percentile aggregations**: Select the _Include percentile aggregations_ checkbox to generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
