@@ -28,6 +28,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | -------------------- | --------------------- |
 | .NET 5               |                       |
 | .NET Core 3.1        | 12/03/2022            |
+| .NET Core 2.1        | 08/21/2021            |
 
  Additional information on .NET Core support policy can be found within [Microsoft's .NET Core Lifecycle Policy][3]. 
 
