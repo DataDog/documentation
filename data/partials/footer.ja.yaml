@@ -2,104 +2,104 @@ footer_blurb_heading: お困りですか？
 footer_blurb_desc: 知識豊富なエンジニアがサポートします。
 col1:
   - name: product
-    link: 'https://www.datadoghq.com/ja/product/'
+    link: https://www.datadoghq.com/ja/product/
     title: 機能
   - name: integrations
-    link: 'https://www.datadoghq.com/product/platform/integrations/'
+    link: https://www.datadoghq.com/product/platform/integrations/
     title: インテグレーション
   - name: ダッシュボード
-    link: 'https://www.datadoghq.com/product/platform/dashboards/'
+    link: https://www.datadoghq.com/product/platform/dashboards/
     title: ダッシュボード
   - name: logs
-    link: 'https://www.datadoghq.com/product/log-management/'
+    link: https://www.datadoghq.com/product/log-management/
     title: ログ管理
   - name: apm
-    link: 'https://www.datadoghq.com/product/apm/'
+    link: https://www.datadoghq.com/product/apm/
     title: APM
   - name: プロファイラー
-    link: 'https://www.datadoghq.com/product/code-profiling/'
+    link: https://www.datadoghq.com/product/code-profiling/
     title: 継続的なプロファイラー
   - name: security-monitoring
-    link: 'https://www.datadoghq.com/product/security-monitoring/'
+    link: https://www.datadoghq.com/product/security-monitoring/
     title: セキュリティモニタリング
   - name: ネットワーク
-    link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
+    link: https://www.datadoghq.com/product/network-performance-monitoring/
     title: ネットワークモニタリング
   - name: synthetics
-    link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    link: https://www.datadoghq.com/product/synthetic-monitoring/
     title: Synthetic の監視
   - name: rum
-    link: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    link: https://www.datadoghq.com/product/real-user-monitoring/
     title: リアルユーザーモニタリング
   - name: サーバーレス
-    link: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    link: https://www.datadoghq.com/product/serverless-monitoring/
     title: サーバーレス
   - name: alerts
-    link: 'https://www.datadoghq.com/product/platform/alerts/'
+    link: https://www.datadoghq.com/product/platform/alerts/
     title: アラート
 col2:
   - name: pricing
-    link: 'https://www.datadoghq.com/ja/pricing/'
+    link: https://www.datadoghq.com/ja/pricing/
     title: 料金
   - name: documentation
-    link: 'https://docs.datadoghq.com/ja/'
+    link: https://docs.datadoghq.com/ja/
     title: Documentation
   - name: support
-    link: 'https://www.datadoghq.com/ja/support/'
+    link: https://www.datadoghq.com/ja/support/
     title: サポート
   - name: resources
-    link: 'https://www.datadoghq.com/ja/resources/'
+    link: https://www.datadoghq.com/ja/resources/
     title: リソース
   - name: security
-    link: 'https://www.datadoghq.com/ja/security/'
+    link: https://www.datadoghq.com/ja/security/
     title: セキュリティ
   - name: api
     link: api/
     title: API
 col3:
   - name: contact
-    link: 'https://www.datadoghq.com/ja/about/contact/'
+    link: https://www.datadoghq.com/ja/about/contact/
     title: お問い合わせ
   - name: partners
-    link: 'https://www.datadoghq.com/ja/partner-with-datadog/'
+    link: https://www.datadoghq.com/ja/partner-with-datadog/
     title: パートナー
   - name: press
-    link: 'https://www.datadoghq.com/ja/about/press/'
+    link: https://www.datadoghq.com/ja/about/press/
     title: プレス
   - name: ourteam
-    link: 'https://www.datadoghq.com/ja/about/team/'
+    link: https://www.datadoghq.com/ja/about/team/
     title: チーム
   - name: careers
-    link: 'https://www.datadoghq.com/ja/careers/'
+    link: https://www.datadoghq.com/ja/careers/
     title: 採用情報
   - name: legal
-    link: 'https://www.datadoghq.com/ja/legal/'
+    link: https://www.datadoghq.com/ja/legal/
     title: 各種規約
   - name: investors
-    link: 'https://investors.datadoghq.com/'
+    link: https://investors.datadoghq.com/
     title: Investor Relations
   - name: analyst
-    link: 'https://www.datadoghq.com/ja/about/analyst/'
+    link: https://www.datadoghq.com/ja/about/analyst/
     title: アナリストレポート
 col4:
   - name: blog
-    link: 'https://www.datadoghq.com/ja/blog/'
+    link: https://www.datadoghq.com/ja/blog/
     title: 英語ブログ
   - name: bloges
-    link: 'https://www.datadoghq.com/es/blog/'
+    link: https://www.datadoghq.com/es/blog/
     title: スペイン語
   - name: blogja
-    link: 'https://www.datadoghq.com/ja/blog/'
+    link: https://www.datadoghq.com/ja/blog/
     title: 日本語
   - name: instagram
-    link: 'https://www.instagram.com/datadoghq/'
+    link: https://www.instagram.com/datadoghq/
     title: Instagram
   - name: linkedin
-    link: 'https://www.LinkedIn.com/company/datadog/'
+    link: https://www.LinkedIn.com/company/datadog/
     title: LinkedIn
   - name: twitter
-    link: 'https://twitter.com/datadoghq'
+    link: https://twitter.com/datadoghq
     title: Twitter
   - name: youtube
-    link: 'https://www.youtube.com/user/DatadogHQ/'
+    link: https://www.youtube.com/user/DatadogHQ/
     title: YouTube

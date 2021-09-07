@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Optimisez CloudHealth\_: offrez-lui les métriques propres à chaque instance depuis Datadog."
-doc_link: https://docs.datadoghq.com/integrations/cloudhealth/
+doc_link: 'https://docs.datadoghq.com/integrations/cloudhealth/'
 draft: false
 git_integration_title: cloudhealth
 has_logo: true

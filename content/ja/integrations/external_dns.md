@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
 display_name: 外部 DNS
 draft: false
 git_integration_title: external_dns

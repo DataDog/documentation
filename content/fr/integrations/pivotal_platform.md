@@ -14,7 +14,7 @@ categories:
   - configuration & deployment
   - log collection
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md'
 aliases:
   - /fr/integrations/cloud_foundry/
 doc_link: /fr/integrations/pivotal_platform/

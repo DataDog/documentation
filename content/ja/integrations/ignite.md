@@ -17,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ignite/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_name: Ignite
 draft: false
 git_integration_title: ignite

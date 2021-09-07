@@ -2,104 +2,104 @@ footer_blurb_heading: "Besoin d'aide\_?"
 footer_blurb_desc: "Nos ingénieurs sont là pour vous aider\_!"
 col1:
   - name: product
-    link: https://www.datadoghq.com/product/
+    link: 'https://www.datadoghq.com/product/'
     title: Fonctionnalités
   - name: integrations
-    link: https://www.datadoghq.com/product/platform/integrations/
+    link: 'https://www.datadoghq.com/product/platform/integrations/'
     title: Intégrations
   - name: dashboards
-    link: https://www.datadoghq.com/product/platform/dashboards/
+    link: 'https://www.datadoghq.com/product/platform/dashboards/'
     title: Dashboards
   - name: logs
-    link: https://www.datadoghq.com/product/log-management/
+    link: 'https://www.datadoghq.com/product/log-management/'
     title: Log Management
   - name: apm
-    link: https://www.datadoghq.com/product/apm/
+    link: 'https://www.datadoghq.com/product/apm/'
     title: APM
   - name: profiler
-    link: https://www.datadoghq.com/product/code-profiling/
+    link: 'https://www.datadoghq.com/product/code-profiling/'
     title: Profileur en continu
   - name: security-monitoring
-    link: https://www.datadoghq.com/product/security-monitoring/
+    link: 'https://www.datadoghq.com/product/security-monitoring/'
     title: Security Monitoring
   - name: network
-    link: https://www.datadoghq.com/product/network-performance-monitoring/
+    link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
     title: Surveillance réseau
   - name: synthetics
-    link: https://www.datadoghq.com/product/synthetic-monitoring/
+    link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     title: Surveillance Synthetic
   - name: rum
-    link: https://www.datadoghq.com/product/real-user-monitoring/
+    link: 'https://www.datadoghq.com/product/real-user-monitoring/'
     title: Real User Monitoring
   - name: serverless
-    link: https://www.datadoghq.com/product/serverless-monitoring/
+    link: 'https://www.datadoghq.com/product/serverless-monitoring/'
     title: Informatique sans serveur
   - name: alerts
-    link: https://www.datadoghq.com/product/platform/alerts/
+    link: 'https://www.datadoghq.com/product/platform/alerts/'
     title: Alertes
 col2:
   - name: pricing
-    link: https://www.datadoghq.com/pricing/
+    link: 'https://www.datadoghq.com/pricing/'
     title: Tarifs
   - name: documentation
-    link: https://docs.datadoghq.com/
+    link: 'https://docs.datadoghq.com/'
     title: Documentation
   - name: support
-    link: https://www.datadoghq.com/support/
+    link: 'https://www.datadoghq.com/support/'
     title: Assistance
   - name: resources
-    link: https://www.datadoghq.com/resources/
+    link: 'https://www.datadoghq.com/resources/'
     title: Ressources
   - name: security
-    link: https://www.datadoghq.com/security/
+    link: 'https://www.datadoghq.com/security/'
     title: Sécurité
   - name: api
     link: api/
     title: API
 col3:
   - name: contact
-    link: https://www.datadoghq.com/about/contact/
+    link: 'https://www.datadoghq.com/about/contact/'
     title: Nous contacter
   - name: partners
-    link: https://www.datadoghq.com/partner-with-datadog/
+    link: 'https://www.datadoghq.com/partner-with-datadog/'
     title: Partenaires
   - name: press
-    link: https://www.datadoghq.com/about/press/
+    link: 'https://www.datadoghq.com/about/press/'
     title: Presse
   - name: ourteam
-    link: https://www.datadoghq.com/about/team/
+    link: 'https://www.datadoghq.com/about/team/'
     title: Notre équipe
   - name: careers
-    link: https://www.datadoghq.com/careers/
+    link: 'https://www.datadoghq.com/careers/'
     title: Offres d'emploi
   - name: legal
-    link: https://www.datadoghq.com/legal/
+    link: 'https://www.datadoghq.com/legal/'
     title: Mentions légales
   - name: investors
-    link: https://investors.datadoghq.com/
+    link: 'https://investors.datadoghq.com/'
     title: Relations avec les investisseurs
   - name: analyst
-    link: https://www.datadoghq.com/about/analyst/
+    link: 'https://www.datadoghq.com/about/analyst/'
     title: Rapports d'analystes
 col4:
   - name: blog
-    link: https://www.datadoghq.com/blog/
+    link: 'https://www.datadoghq.com/blog/'
     title: Blog
   - name: blogs
-    link: https://www.datadoghq.com/es/blog/
+    link: 'https://www.datadoghq.com/es/blog/'
     title: Español
   - name: blogja
-    link: https://www.datadoghq.com/ja/blog/
+    link: 'https://www.datadoghq.com/ja/blog/'
     title: 日本語
   - name: instagram
-    link: https://www.instagram.com/datadoghq/
+    link: 'https://www.instagram.com/datadoghq/'
     title: Instagram
   - name: linkedin
-    link: https://www.LinkedIn.com/company/datadog/
+    link: 'https://www.LinkedIn.com/company/datadog/'
     title: LinkedIn
   - name: twitter
-    link: https://twitter.com/datadoghq
+    link: 'https://twitter.com/datadoghq'
     title: Twitter
   - name: youtube
-    link: https://www.youtube.com/user/DatadogHQ/
+    link: 'https://www.youtube.com/user/DatadogHQ/'
     title: YouTube

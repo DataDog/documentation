@@ -6,8 +6,8 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: Surveillez les performances de lecture/écriture de Datastore, le nombre de requêtes, et plus encore.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_datastore/
+description: 'Surveillez les performances de lecture/écriture de Datastore, le nombre de requêtes, et plus encore.'
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_datastore/'
 draft: false
 git_integration_title: google_cloud_datastore
 has_logo: true
@@ -18,7 +18,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloud_datastore
 public_title: "Intégration Datadog/Google\_Datastore"
-short_description: Surveillez les performances de lecture/écriture de Datastore, le nombre de requêtes, et plus encore.
+short_description: 'Surveillez les performances de lecture/écriture de Datastore, le nombre de requêtes, et plus encore.'
 version: '1.0'
 ---
 ## Présentation

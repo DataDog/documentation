@@ -8,14 +8,14 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: Surveillez les statuts des conteneurs, mesurez l'utilisation des ressources, et plus encore.
-doc_link: https://docs.datadoghq.com/integrations/amazon_ecs/
+description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/amazon-ecs-metrics
+  - link: 'https://www.datadoghq.com/blog/amazon-ecs-metrics'
     tag: Blog
     text: Key ECS metrics to monitor
-  - link: https://docs.datadoghq.com/integrations/ecs_fargate
+  - link: 'https://docs.datadoghq.com/integrations/ecs_fargate'
     tag: Documentation
     text: "Intégration Datadog/ECS\_Fargate"
 git_integration_title: amazon_ecs
@@ -27,7 +27,7 @@ kind: integration
 manifest_version: '1.0'
 name: amazon_ecs
 public_title: "Intégration Datadog/Amazon\_ECS sur EC2"
-short_description: Surveillez les statuts des conteneurs, mesurez l'utilisation des ressources, et plus encore.
+short_description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
 version: '1.0'
 ---
 <div class="alert alert-warning">

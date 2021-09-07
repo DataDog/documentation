@@ -9,7 +9,7 @@ description: AWS GuardDuty ログを収集
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
 integration_title: AWS GuardDuty
 is_public: true
 kind: インテグレーション

@@ -3,10 +3,10 @@ title: Synthetic CI/CD テスト
 kind: ドキュメント
 description: CI/CD パイプラインでオンデマンドの Synthetics テストを実行します。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
+  - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
     tag: ブログ
     text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
-  - link: 'https://learn.datadoghq.com/course/view.php?id=37'
+  - link: https://learn.datadoghq.com/course/view.php?id=37
     tag: ラーニングセンター
     text: CI/CD パイプラインで Synthetic テストを実行する方法を学ぶ
   - link: /synthetics/browser_tests/
@@ -15,7 +15,7 @@ further_reading:
   - link: /synthetics/api_tests/
     tag: Documentation
     text: APIテストの設定
-  - link: 'https://www.datadoghq.com/blog/shift-left-testing-best-practices/'
+  - link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
     tag: ブログ
     text: シフトレフトテストのベストプラクティス
 ---
@@ -636,7 +636,9 @@ HTTP またはブラウザテストに提供する新しい開始 URL。
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
 * `{{URL}}`
 
-### テストの実行
+**注:** 上記の予約済み変数のいずれかに対応する名前の環境変数がある場合、環境変数は無視され、テスト `startUrl` からパースされた対応するコンポーネントに置き換えられます。
+
+### テストを実行する
 
 CLI にすべての `**/*.synthetics.json` Synthetic テスト (または[グローバルコンフィギュレーションファイル](#クライアントのセットアップ)で指定したパスに紐付いたすべてのテスト) を自動検知させるか、`-p,--public-id` フラグを使用して実行するテストを指定するか、定義できます。
 
@@ -675,23 +677,29 @@ npm run datadog-ci-synthetics
 {{% /tab %}}
 {{< /tabs >}}
 
+### テストトンネルを使用する
+
+[@datadog/datadog-ci][2] NPM パッケージには、内部アプリケーションで Synthetic テストを迅速にトリガーできるトンネル機能も付属しています。テストトンネルは、インフラストラクチャーと Datadog の間にエンドツーエンドの暗号化された HTTP プロキシを作成し<span class="x x-first x-last">、</span>CLI を<span class="x x-first x-last">介して</span>送信されたすべてのテストリクエストを `datadog-ci` クライアントを介して<span class="x x-first x-last">自動的に</span>ルーティングできるようにします。その結果、Datadog は内部アプリケーションでテストを実行<span class="x x-first x-last">できます</span>。
+
+テストトンネルの使用を開始する方法については、[Synthetics テストトンネルのドキュメント][5]を参照してください。
+
 ## テスト結果の表示
 
 ### CI の場合
 
 テストの実行中に、テストの実行結果を CI 内で直接確認することができます。
 
-{{< img src="synthetics/ci/successful_test_result.png" alt="成功したテスト結果"  style="width:80%;">}}
+{{< img src="synthetics/ci/successful_test_result.png" alt="成功したテスト結果"  style="width:100%;">}}
 
 実行ログを確認し、失敗したアサーションの原因を検索することで、テストが失敗した原因を特定できます。
 
-{{< img src="synthetics/ci/failed_test_result.png" alt="失敗したテスト結果" style="width:80%;">}}
+{{< img src="synthetics/ci/failed_test_result.png" alt="失敗したテスト結果" style="width:100%;">}}
 
 ### Datadog アプリケーションの場合
 
-Datadog のテスト詳細ページでも一覧表示されたテスト結果を確認することができます。
+[CI Results Explorer][6] およびテストの詳細ページにリストされている CI テスト結果も確認できます。
 
-{{< img src="synthetics/ci/test_results.png" alt="成功したテスト結果" style="width:80%;">}}
+{{< img src="synthetics/ci/test_results.png" alt="成功したテスト結果" style="width:100%;">}}
 
 ## その他の参考資料
 
@@ -701,3 +709,5 @@ Datadog のテスト詳細ページでも一覧表示されたテスト結果を
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /ja/api/v1/synthetics/#get-test
+[5]: /ja/synthetics/testing_tunnel/
+[6]: /ja/synthetics/cicd_testing/ci_results_explorer

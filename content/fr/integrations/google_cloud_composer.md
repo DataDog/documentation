@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Composer."
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_composer/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_composer/'
 draft: false
 git_integration_title: google_cloud_composer
 has_logo: true
