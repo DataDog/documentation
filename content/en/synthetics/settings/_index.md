@@ -63,8 +63,6 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 
 **Note:** Variable values are updated whenever the test they are extracted from runs.
 
-[4]:/account_management/rbac/permissions/
-
 [1]: /synthetics/api_tests/?tab=httptest
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
@@ -109,7 +107,7 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ### Default locations
 
-Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][4] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][12] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
 ### APM integration for browser tests
 
@@ -140,5 +138,6 @@ If you have access to the [custom role feature][9], add your user to a custom ro
 [7]: /account_management/users/default_roles/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[10]: /synthetics/multistep/
-[11]: /synthetics/browser_tests
+[10]: /synthetics/api_tests
+[11]: /synthetics/multistep/
+[12]: /synthetics/browser_tests
