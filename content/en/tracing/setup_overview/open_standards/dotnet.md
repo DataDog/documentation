@@ -38,7 +38,7 @@ Use OpenTracing to create a span.
 using (var scope =
        Tracer.Instance.StartActive("manual.sortorders"))
 {
-    scope.Span.ResourceName = "<RESOURCE NAME>"
+    scope.Span.ResourceName = "<RESOURCE NAME>";
     SortOrders();
 }
 ```
@@ -53,7 +53,7 @@ To trace code running in an asynchronous task, create a new scope within the bac
          using (var scope =
                 Tracer.Instance.StartActive("manual.sortorders.async"))
          {
-             scope.Span.ResourceName = "<RESOURCE NAME>"
+             scope.Span.ResourceName = "<RESOURCE NAME>";
              SortOrders();
          }
      });
