@@ -24,7 +24,7 @@ Consultez la section ci-dessous pour savoir comment associer vos logs PHP et vos
 ## Injecter manuellement des ID de trace et de span
 
 <div class="alert alert-warning">
-Veuillez noter que la fonction <code>\DDTrace\trace_id()</code> a été ajoutée avec la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+Veuillez noter que la fonction <code>\DDTrace\current_context()</code> a été ajoutée avec la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
 </div>
 
 Pour associer vos logs et vos traces, vos logs doivent contenir les attributs `dd.trace_id` et `dd.span_id`, qui contiennent respectivement votre ID de trace et votre ID de span.
@@ -35,10 +35,11 @@ Par exemple, ces deux attributs seront ajoutés à vos logs de la manière suiva
 
 ```php
   <?php
+  $context = \DDTrace\current_context();
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
-      \DDTrace\trace_id(),
-      \dd_trace_peek_span_id()
+      $context['trace_id'],
+      $context['span_id']
   );
   my_error_logger('Error message.' . $append);
 ?>
@@ -48,11 +49,12 @@ Si le logger implémente la [bibliothèque **monolog/monolog**][4], utilisez `Lo
 
 ```php
 <?php
+  $context = \DDTrace\current_context();
   $logger->pushProcessor(function ($record) {
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
-          \DDTrace\trace_id(),
-          \dd_trace_peek_span_id()
+          $context['trace_id'],
+          $context['span_id']
       );
       return $record;
   });
@@ -63,10 +65,11 @@ Si votre application utilise des logs au format json, au lieu d'ajouter les ID t
 
 ```php
 <?php
+  $context = \DDTrace\current_context();
   $logger->pushProcessor(function ($record) {
       $record['dd'] = [
-          'trace_id' => \DDTrace\trace_id(),
-          'span_id'  => \dd_trace_peek_span_id(),
+          'trace_id' => $context['trace_id'],
+          'span_id'  => $context['span_id'],
       ];
 
       return $record;

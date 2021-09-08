@@ -31,6 +31,7 @@ cache: &cache
   key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
   paths:
     - node_modules/
+    - tmp/.htmltest/
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -150,13 +151,18 @@ link_checks_preview:
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
-    DISALLOW_BOTS: "1"
   script:
-    - node ./node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - htmltest
   after_script:
-    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+  artifacts:
+    paths: 
+      - ./tmp/.htmltest
   interruptible: true
 
 missing_tms_preview:
@@ -299,11 +305,17 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node ./node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - htmltest
   after_script:
-    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - master
+  artifacts:
+    paths:
+      - ./tmp/.htmltest
 
 index_algolia:
   image:
@@ -372,16 +384,23 @@ evaluate_missing_metrics:
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
-    - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
-    - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+    - |-
+      if [[ $(date +%u) -lt 6 ]]; then
+        nodenv shell 14.15.0
+        [ -d ./node_modules ] && rm -rf ./node_modules
+        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.39.tgz
+        DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
+      fi
+      chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
+  artifacts:
+    paths:
+      - translate-debug.log
   only:
     - schedules
 

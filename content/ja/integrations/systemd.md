@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/systemd/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_name: Systemd
 draft: false
 git_integration_title: systemd

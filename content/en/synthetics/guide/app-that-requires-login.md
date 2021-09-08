@@ -18,7 +18,7 @@ further_reading:
 
 You might need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
 
-- [Include the login steps in your recording](#include-the-login-in-your-recording)
+- [Include the login steps in your recording](#include-the-login-steps-in-your-recording)
 - [Leverage browser test configuration options](#leverage-browser-test-configuration-options)
 
 You can also ensure your credentials are securely stored and obfuscated across the application [using secured global variables](#account-security).
@@ -54,7 +54,7 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][4], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
 
-Browser tests can reproduce any actions a regular user take inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser. 
+Browser tests can reproduce any actions a regular user take inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser.
 
 Some MFA providers may detect Datadog's browser tests as bots and prevent them from logging in, for instance, by adding a reCAPTCHA. In this case, contact your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers).
 
@@ -69,9 +69,9 @@ The second way to ensure that your Datadog Browser tests can login into your app
 
 - Specific headers
 - Cookies
-- Basic, Digest, Bearer or NTLM credentials
+- Basic, Digest, or NTLM credentials
 
-These are set at every test execution and on every step of your browser test, consequently allowing you to start the recording of your steps directly post login. 
+These are set at every test execution and on every step of your browser test, consequently allowing you to start the recording of your steps directly post login.
 
 {{< img src="synthetics/guide/app_that_requires_login/bt_adv_options.jpg" alt="Login to your app with browser test configuration options">}}
 
@@ -81,7 +81,7 @@ These are set at every test execution and on every step of your browser test, co
 
 Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog.
 
-Once you create the secure variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps. 
+Once you create the secure variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 

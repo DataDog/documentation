@@ -110,6 +110,12 @@ The alert conditions vary slightly based on the chosen detection method.
 * the threshold `on average`, `at least once`, `at all times`, or `in total`
 * during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 730 hours (1 month).
 
+The evaluation frequency changes based on the evaluation time frame you select:
+
+* `timeframe < 24h`: evaluation performs every 1 minute.
+* `24h < timeframe < 48h`: evaluation performs every 10 minutes.
+* `timeframe > 48h`: evaluation performs every 30 minutes.
+
 **Definitions**:
 
 | Option                  | Description                                                                                                                                                                                                                   |

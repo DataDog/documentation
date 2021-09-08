@@ -16,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_name: TokuMX
 draft: false
 git_integration_title: tokumx

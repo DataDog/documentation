@@ -72,7 +72,9 @@ transforms:
     inputs:
       - datadog_agents
     source: |
-      .ddtags = .ddtags + ",sender:vector"
+      # The `!` shorthand is used here with the `string` function, it errors if .ddtags is not a "string".
+      # The .ddtags field is always expected to be a string.
+      .ddtags = string!(.ddtags) + ",sender:vector"
 
 sinks:
   to_datadog:
@@ -130,4 +132,4 @@ to fill relevant fields according to the expected schema.
 [13]: /agent/kubernetes/?tab=helm
 [14]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs

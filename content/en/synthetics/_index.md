@@ -66,7 +66,7 @@ See [Getting Started with Synthetic Monitoring][12] for instructions on creating
 
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep
-[3]: /synthetics/api_test/http_tests
+[3]: /synthetics/api_tests/http_tests
 [4]: /synthetics/api_tests/tcp_tests
 [5]: /synthetics/api_tests/ssl_tests
 [6]: /synthetics/api_tests/dns_tests

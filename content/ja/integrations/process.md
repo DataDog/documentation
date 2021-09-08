@@ -53,26 +53,26 @@ supported_os:
 
 1. 標準的なデフォルトのチェックコンフィギュレーションはありませんが、以下に SSH/SSHD 処理を監視する `process.d/conf.yaml` の例を示します。使用可能なすべての構成オプションの詳細については、[サンプル process.d/conf.yaml][2] を参照してください。
 
-   ```yaml
-   init_config:
+  ```yaml
+  init_config:
 
-   instances:
+  instances:
 
-    ## @param name - string - required
-    ## Used to uniquely identify your metrics as they are tagged with this name in Datadog.
-    #
-      - name: ssh
+  ## @param name - string - required
+  ## Used to uniquely identify your metrics as they are tagged with this name in Datadog.
+  #
+        - name: ssh
 
-    ## @param search_string - list of strings - optional
-    ## If one of the elements in the list matches, it returns the count of
-    ## all the processes that match the string exactly by default. Change this behavior with the
-    ## parameter `exact_match: false`.
-    ##
-    ## Note: One and only one of search_string, pid or pid_file must be specified per instance.
-    #
-    search_string:
-      - ssh
-      - sshd
+  ## @param search_string - list of strings - optional
+  ## If one of the elements in the list matches, it returns the count of
+  ## all the processes that match the string exactly by default. Change this behavior with the
+  ## parameter `exact_match: false`.
+  ##
+  ## Note: One and only one of search_string, pid or pid_file must be specified per instance.
+  #
+          search_string:
+            - ssh
+            - sshd
    ```
 
    プロセスメトリクスによっては、Datadog コレクターを監視対象プロセスと同じユーザーとして実行するか、特権的なアクセスを取得する必要があります。前者のオプションが望ましくなく、Datadog Collector を `root` として実行することを避けるには、`try_sudo` オプションを使用して、プロセスチェックが `sudo` を使用してこのメトリクスを収集するようにします。現時点では、Unix プラットフォームの `open_file_descriptors` メトリクスだけがこの設定を利用しています。注: これが動作するには、適切な sudoers ルールを構成する必要があります。
