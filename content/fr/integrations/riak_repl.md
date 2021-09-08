@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_name: "Riak\_MDC\_Replication"
 draft: false
 git_integration_title: riak_repl
@@ -24,7 +24,7 @@ metric_prefix: riak_repl.
 metric_to_check: riak_repl.server_bytes_sent
 name: riak_repl
 public_title: "Intégration Datadog/Riak\_MDC\_Replication"
-short_description: 'Surveillez les performances, la capacité et la santé de vos réplications'
+short_description: Surveillez les performances, la capacité et la santé de vos réplications
 support: contrib
 supported_os:
   - linux

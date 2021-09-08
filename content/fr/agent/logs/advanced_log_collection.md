@@ -3,10 +3,10 @@ title: Collecte de logs avancée
 kind: documentation
 description: Utiliser l'Agent Datadog pour recueillir vos logs et les envoyer à Datadog
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Découvrir comment traiter vos logs
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/live_tail/
@@ -21,13 +21,15 @@ further_reading:
 ---
 Appliquez des règles de traitement de logs aux configurations de collecte de logs spécifiques pour :
 
-* [Filtrer les logs](#filter-logs)
-* [Nettoyer les données sensibles de vos logs](#scrub-sensitive-data-from-your-logs)
-* [Effectuer l'agrégation multiligne](#multi-line-aggregation)
-* [Suivre des répertoires à l'aide de wildcards](#tail-directories-by-using-wildcards)
-* [Encoder des logs au format UTF-16](#encode-utf-16-format-logs)
+* [Filtrer les logs](#filtrer-les-logs)
+* [Nettoyer les données sensibles de vos logs](#nettoyer-les-donnees-sensibles-de-vos-logs)
+* [Effectuer une agrégation multiligne](#effectuer-une-agregation-multiligne)
+* [Suivre des répertoires à l'aide de wildcards](#suivre-des-repertoires-a-l-aide-de-wildcards)
+* [Encoder des logs au format UTF-16](#encoder-des-logs-au-format-utf-16)
 
 **Remarque** : si vous configurez plusieurs règles de traitement, celles-ci sont appliquées de façon séquentielle et chaque règle est appliquée au résultat de la précédente.
+
+**Remarque** : les expressions des règles de traitement doivent respecter la [syntaxe des expressions régulières Golang][1].
 
 Pour appliquer une règle de traitement à tous les logs recueillis par un Agent Datadog, consultez la section [Règles globales de traitement](#regles-globales-de-traitement).
 
@@ -37,7 +39,7 @@ Pour envoyer uniquement un sous-ensemble spécifique de logs à Datadog, utilise
 
 ### Exclude at match
 
-| Paramètre          | Description                                                                                        |
+| Paramètre          | Rôle                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | Si l'expression spécifiée est incluse dans le message, le log est exclu et n'est pas envoyé à Datadog. |
 
@@ -78,7 +80,7 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
       }]
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -116,16 +118,16 @@ spec:
           image: cardpayment:latest
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Include at match
 
-| Paramètre          | Description                                                                       |
+| Paramètre          | Rôle                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
-| `include_at_match` | Seuls les logs avec un message qui contient l'expression spécifiée sont envoyés à Datadog. |
+| `include_at_match` | Seuls les logs avec un message qui contient l'expression spécifiée sont envoyés à Datadog. Si plusieurs règles `include_at_match` sont définies, toutes les expressions doivent être présentes dans le log pour que ce dernier soit inclus. |
 
 
 Par exemple, pour **inclure** les logs qui contiennent une adresse e-mail Datadog, utilisez les paramètres `log_processing_rules` suivants :
@@ -144,6 +146,36 @@ logs:
       name: inclure_utilisateurs_datadog
       ## L'expression régulière peut varier
       pattern: \w+@datadoghq.com
+```
+
+Si vous souhaitez rechercher une ou plusieurs expressions, vous devez les définir dans une seule expression :
+
+```yaml
+logs:
+  - type: file
+    path: /mon/fichier/test.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: abc|123
+```
+
+Si les expressions sont trop longues pour rentrer sur une seule ligne, vous pouvez les séparer en plusieurs lignes :
+
+```yaml
+logs:
+  - type: file
+    path: /mon/fichier/test.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      pattern: "abc\
+|123\
+|\\w+@datadoghq.com"
 ```
 
 {{% /tab %}}
@@ -165,7 +197,7 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
       }]
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -203,7 +235,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -253,7 +285,7 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
       }]
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -292,7 +324,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -392,7 +424,7 @@ spec:
           image: postgres:latest
 ```
 
-**Remarque** : échappez les caractères regex dans vos patterns lorsque vous effectuez une agrégation multiligne avec des annotations de pod. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+**Remarque** : échappez les caractères regex dans vos expressions lorsque vous effectuez une agrégation multiligne avec des annotations de pod. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -412,7 +444,7 @@ Exemples supplémentaires :
 
 ## Règles de traitement de log couramment utilisées
 
-Consultez la section [FAQ sur les règles de traitement des logs couramment utilisées][1] pour obtenir une liste d'exemples.
+Consultez la section [FAQ sur les règles de traitement des logs couramment utilisées][2] pour obtenir une liste d'exemples.
 
 ## Suivre des répertoires à l'aide de wildcards
 
@@ -446,7 +478,7 @@ L'exemple ci-dessus permet de surveiller `/var/log/myapp/log/myfile.log`, mais `
 
 ## Encoder des logs au format UTF-16
 
-Si des logs d'applications sont rédigés au format UTF-16, depuis l'Agent Datadog **v6.23/v7.23**, les utilisateurs peuvent les encoder afin qu'ils soient parsés comme prévu dans le [Log Explorer][2]. Utilisez le paramètre `encoding` dans la section de configuration des logs. Définissez-le sur `utf-16-le` pour le format little-endian UTF16 et sur `utf-16-be` pour le format big-endian UTF16. Toutes les autres valeurs seront ignorées et l'Agent lira le fichier en assumant un format UTF8.
+Si des logs d'applications sont rédigés au format UTF-16, depuis l'Agent Datadog **v6.23/v7.23**, les utilisateurs peuvent les encoder afin qu'ils soient parsés comme prévu dans le [Log Explorer][2]. Utilisez le paramètre `encoding` dans la section de configuration des logs. Définissez-le sur `utf-16-le` pour le format little-endian UTF16 et sur `utf-16-be` pour le format big-endian UTF16. Toutes les autres valeurs seront ignorées et l'Agent lira le fichier en assumant un format UTF8.
 
 Exemple de configuration :
 
@@ -464,7 +496,7 @@ logs:
 
 ## Règles globales de traitement
 
-Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][3] de l'Agent, ou à l'aide d'une variable d'environnement :
+Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][4] de l'Agent, ou à l'aide d'une variable d'environnement :
 
 {{< tabs >}}
 {{% tab "Fichiers de configuration" %}}
@@ -507,7 +539,7 @@ env:
 {{< /tabs >}}
 Ces règles globales de traitement s'appliquent à tous les logs recueillis par l'Agent Datadog.
 
-**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Exécutez la [sous-commande status][4] pour diagnostiquer les éventuels problèmes.
+**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Lancez la [sous-commande status][5] pour diagnostiquer les éventuels problèmes.
 
 ## Pour aller plus loin
 
@@ -516,8 +548,8 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-
-[1]: /fr/agent/faq/commonly-used-log-processing-rules
-[2]: https://docs.datadoghq.com/fr/logs/explorer/#overview
-[3]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[4]: /fr/agent/guide/agent-commands/#agent-information
+[1]: https://golang.org/pkg/regexp/syntax/
+[2]: /fr/agent/faq/commonly-used-log-processing-rules
+[3]: https://docs.datadoghq.com/fr/logs/explorer/#overview
+[4]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /fr/agent/guide/agent-commands/#agent-information

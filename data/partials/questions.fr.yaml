@@ -1,18 +1,18 @@
 questions:
   - name: assistance
-    link: 'https://help.datadoghq.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.datadoghq.com%2Fhc%2Fen-us&locale=1'
+    link: https://help.datadoghq.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.datadoghq.com%2Fhc%2Fen-us&locale=1
     image: support.png
     image_hover: support_p.png
     title: Assistance
     text: Installer et configurer Datadog et découvrir son fonctionnement
   - name: ventes
-    link: 'https://www.datadoghq.com/about/contact/'
+    link: https://www.datadoghq.com/about/contact/
     image: sales.png
     image_hover: sales_p.png
     title: Ventes
     text: Installer et configurer Datadog et découvrir son fonctionnement
   - name: faq
-    link: 'https://www.datadoghq.com/about/contact/'
+    link: https://www.datadoghq.com/about/contact/
     image: faq.png
     image_hover: faq_p.png
     title: FAQ

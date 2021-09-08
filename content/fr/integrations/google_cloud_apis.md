@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés des API Google\_Cloud."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_apis/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_apis/
 draft: false
 git_integration_title: api_google_cloud
 has_logo: true

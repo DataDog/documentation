@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Consultez et commentez des stories dans votre flux d'événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/pivotal/'
+doc_link: https://docs.datadoghq.com/integrations/pivotal/
 draft: false
 git_integration_title: pivotal
 has_logo: true
