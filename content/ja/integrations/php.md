@@ -5,13 +5,13 @@ categories:
 ddtype: ライブラリ
 dependencies: []
 description: PHP アプリケーションからメトリクス、トレース、ログを収集。
-doc_link: https://docs.datadoghq.com/integrations/php/
+doc_link: 'https://docs.datadoghq.com/integrations/php/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-php-performance/
+  - link: 'https://www.datadoghq.com/blog/monitor-php-performance/'
     tag: ブログ
     text: Datadog APM と分散型トレーシングを使用した PHP の監視。
-  - link: https://www.datadoghq.com/blog/php-logging-guide/
+  - link: 'https://www.datadoghq.com/blog/php-logging-guide/'
     tag: ブログ
     text: PHP ログを収集、カスタマイズ、分析する方法。
 git_integration_title: php

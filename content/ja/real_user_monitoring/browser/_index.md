@@ -2,7 +2,7 @@
 aliases:
   - /ja/real_user_monitoring/setup
 dependencies:
-  - https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md
+  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md'
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---

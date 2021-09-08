@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md'
 display_name: Sendmail
 draft: false
 git_integration_title: sendmail

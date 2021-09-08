@@ -21,7 +21,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md'
 display_name: SQL Server
 draft: false
 git_integration_title: sqlserver

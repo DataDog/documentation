@@ -3,7 +3,7 @@ title: Ruby ログとトレースの接続
 kind: ドキュメント
 description: Ruby ログとトレースを接続して Datadog で関連付けます。
 further_reading:
-  - link: https://www.datadoghq.com/blog/request-log-correlation/
+  - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
   - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/

@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
 display_name: RiakCS
 draft: false
 git_integration_title: riakcs

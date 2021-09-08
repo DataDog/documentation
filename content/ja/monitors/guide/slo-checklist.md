@@ -2,10 +2,10 @@
 title: SLO チェックリスト
 kind: ガイド
 further_reading:
-  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
+  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
     tag: ブログ
     text: Datadog で SLO のステータスとエラーバジェットを追跡する
-  - link: https://learn.datadoghq.com/course/view.php?id=34
+  - link: 'https://learn.datadoghq.com/course/view.php?id=34'
     tag: ラーニングセンター
     text: サービスレベル目標 (SLO) について
 ---

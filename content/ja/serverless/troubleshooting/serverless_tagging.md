@@ -2,7 +2,7 @@
 title: サーバーレスタグ付け
 kind: documentation
 further_reading:
-  - link: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+  - link: '/getting_started/tagging/unified_service_tagging/#aws-lambda-functions'
     tag: ドキュメント
     text: 統合サービスタグ付け
 aliases:

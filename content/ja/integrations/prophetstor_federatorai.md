@@ -7,8 +7,8 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 author:
-  homepage: https://www.prophetstor.com/
-  name: ProphetStor Data Services, Inc.
+  homepage: 'https://www.prophetstor.com/'
+  name: 'ProphetStor Data Services, Inc.'
 categories:
   - containers
   - orchestration

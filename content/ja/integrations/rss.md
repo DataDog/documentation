@@ -3,10 +3,10 @@ integration_title: RSS
 name: rss
 kind: インテグレーション
 doclevel: basic
-description: "RSS フィードを Datadog イベントストリームに表示"
+description: 'RSS フィードを Datadog イベントストリームに表示'
 is_public: true
 public_title: Datadog-RSS インテグレーション
-short_description: "Datadog イベントストリームで RSS フィードをキャプチャ"
+short_description: 'Datadog イベントストリームで RSS フィードをキャプチャ'
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:

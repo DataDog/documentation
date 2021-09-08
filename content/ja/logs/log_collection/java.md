@@ -13,7 +13,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/#visualize
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /tracing/connect_logs_and_traces/java/
@@ -22,7 +22,7 @@ further_reading:
   - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: よくあるご質問
     text: ログ収集のトラブルシューティングガイド
-  - link: https://www.datadoghq.com/blog/java-logging-guide/
+  - link: 'https://www.datadoghq.com/blog/java-logging-guide/'
     tag: ブログ
     text: Java ログの収集、カスタマイズ、標準化方法
 ---

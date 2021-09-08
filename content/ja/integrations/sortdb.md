@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md'
 display_name: Sortdb
 draft: false
 git_integration_title: sortdb
