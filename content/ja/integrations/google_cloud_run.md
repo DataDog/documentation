@@ -7,10 +7,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_run/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/
     tag: ブログ
     text: Datadog を使用した Google Cloud Run の監視
 git_integration_title: google_cloud_run

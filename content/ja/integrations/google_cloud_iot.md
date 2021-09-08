@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud IoT のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_iot/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_iot/
 draft: false
 git_integration_title: google_cloud_iot
 has_logo: true

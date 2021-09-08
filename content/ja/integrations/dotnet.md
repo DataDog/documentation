@@ -4,7 +4,7 @@ categories:
 ddtype: ライブラリ
 dependencies: []
 description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
-doc_link: 'https://docs.datadoghq.com/integrations/dotnet/'
+doc_link: https://docs.datadoghq.com/integrations/dotnet/
 draft: false
 further_reading: []
 git_integration_title: dotnet

@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md
 display_name: DNS
 draft: false
 git_integration_title: dns_check

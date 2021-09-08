@@ -5,8 +5,8 @@ categories:
   - azure
 ddtype: crawler
 dependencies: []
-description: Surveillez votre utilisation des ressources réseau, de calcul et de stockage Azure en la comparant aux limites prédéfinies pour votre abonnement.
-doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
+description: 'Surveillez votre utilisation des ressources réseau, de calcul et de stockage Azure en la comparant aux limites prédéfinies pour votre abonnement.'
+doc_link: 'https://docs.datadoghq.com/integrations/azure_usage_and_quotas/'
 draft: false
 git_integration_title: azure_usage_and_quotas
 has_logo: true
