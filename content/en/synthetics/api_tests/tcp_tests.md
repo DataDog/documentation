@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-TCP tests allow you to easily monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness. 
+TCP tests allow you to easily monitor if low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness. 
 
 TCP tests can run from [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
 
