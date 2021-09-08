@@ -7,7 +7,7 @@ The Real User Monitoring (RUM) SDK can be configured to send requests through a 
 
 ## SDK initialization
 
-When you set the `proxyHost` [initialization parameter][1], all RUM data is sent to the specified host (ex: www.proxy.com).
+When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified url (ex: www.proxy.com/foo).
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -19,7 +19,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
-    proxyHost: '<YOUR_PROXY_HOST>',
+    proxyUrl: '<YOUR_PROXY_URL>',
 });
 ```
 
@@ -36,7 +36,7 @@ datadogRum.init({
     DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyHost: '<YOUR_PROXY_HOST>',
+        proxyUrl: '<YOUR_PROXY_URL>',
     })
   })
 </script>
@@ -49,7 +49,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyHost: '<YOUR_PROXY_HOST>',
+        proxyUrl: '<YOUR_PROXY_URL>',
     });
 ```
 
@@ -58,13 +58,12 @@ window.DD_RUM &&
 
 ## Proxy setup
 
-When your proxy receives data from the RUM SDK, it must be forwarded to Datadog. The RUM SDK adds the `ddhost` query parameter to all requests to your proxy. This query parameter contains the host where all data must be forwarded to.
+When your proxy receives data from the RUM SDK, it must be forwarded to Datadog. The RUM SDK adds the `ddforward` query parameter to all requests to your proxy. This query parameter contains the url where all data must be forwarded to.
 
 To successfully proxy request to Datadog:
 
 1. Add a `X-Forwarded-For` header containing the request client IP address, for accurate geoIP.
-2. Replace the host in the incoming requests by the host contained in the `ddhost` query parameter.
-3. Remove the `ddhost` query parameter.
+2. Forward the request to the url set in the `ddforward` query parameter.
 
 **Note:** The request body must remain unchanged.
 
