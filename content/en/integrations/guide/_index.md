@@ -17,4 +17,5 @@ Integration Guides:
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag="Prometheus" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag="SQL Server" >}}Collect SQL Server Custom Metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
