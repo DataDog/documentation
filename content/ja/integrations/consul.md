@@ -21,7 +21,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/consul/README.md'
 display_name: Consul
 draft: false
 git_integration_title: consul

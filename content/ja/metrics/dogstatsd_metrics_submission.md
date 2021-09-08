@@ -50,7 +50,7 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 `RATE` メトリクスとして保存された `COUNT` メトリクスを Datadog に送信します。 `COUNT` タイプについては、[メトリクスのタイプ][2] に関するドキュメントを参照してください。
 
-次のコードを実行して、DogStatsD の `COUNT` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `COUNT` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -218,7 +218,7 @@ while (TRUE) {
 
 `GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。 `GAUGE` タイプについては、[メトリクスのタイプ][5] に関するドキュメントを参照してください。
 
-次のコードを実行して、DogStatsD の `GAUGE` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `GAUGE` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -377,7 +377,7 @@ while (TRUE) {
 
 `GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
-次のコードを実行して、DogStatsD の `SET` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `SET` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -519,7 +519,7 @@ while (TRUE) {
 `HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
 
 
-次のコードを実行して、DogStatsD の `HISTOGRAM` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `HISTOGRAM` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -686,7 +686,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 ##### コード例
 
-`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
@@ -787,7 +787,7 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 `DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
 
-次のコードを実行して、DogStatsD の `DISTRIBUTION` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `DISTRIBUTION` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 

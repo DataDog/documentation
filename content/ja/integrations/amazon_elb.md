@@ -12,7 +12,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Load Balancer のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_elb/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_elb/'
 draft: false
 git_integration_title: amazon_elb
 has_logo: true

@@ -6,10 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Trusted Advisor のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_trusted_advisor/'
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/
+  - link: 'https://docs.datadoghq.com/dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data/'
     tag: よくあるご質問
     text: AWS Trusted Advisor ダッシュボードにデータが表示されないのはなぜですか？
 git_integration_title: amazon_trusted_advisor

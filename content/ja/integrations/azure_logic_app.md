@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_logic_app/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_logic_app/'
 draft: false
 git_integration_title: azure_logic_app
 has_logo: true

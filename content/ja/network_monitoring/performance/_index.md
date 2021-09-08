@@ -7,13 +7,13 @@ aliases:
   - /ja/graphing/infrastructure/network_performance_monitor/
   - /ja/network_performance_monitoring/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
+  - link: https://www.datadoghq.com/blog/network-performance-monitoring
     tag: ブログ
     text: ネットワークパフォーマンスモニタリング
-  - link: 'https://www.datadoghq.com/blog/npm-windows-support/'
+  - link: https://www.datadoghq.com/blog/npm-windows-support/
     tag: ブログ
     text: ネットワークパフォーマンスモニタリングで Windows ホストを監視する
-  - link: 'https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/'
+  - link: https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/
     tag: ブログ
     text: クラウドサービスの自動検出でクラウドエンドポイントの健全性を監視する
   - link: /network_monitoring/devices

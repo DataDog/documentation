@@ -25,7 +25,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mongo/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_name: MongoDB
 draft: false
 git_integration_title: mongo

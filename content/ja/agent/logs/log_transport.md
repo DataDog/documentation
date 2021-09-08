@@ -3,19 +3,19 @@ title: Agent によるログの転送
 kind: ドキュメント
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
-  - link: 'agent/logs/advanced_log_collection/#filter-logs'
+  - link: agent/logs/advanced_log_collection/#filter-logs
     tag: ドキュメント
     text: Datadog に送信されるログの絞り込み
-  - link: 'agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs'
+  - link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
     tag: ドキュメント
     text: ログの機密データのスクラビング
-  - link: 'agent/logs/advanced_log_collection/#multi-line-aggregation'
+  - link: agent/logs/advanced_log_collection/#multi-line-aggregation
     tag: ドキュメント
     text: 複数行のログの集約
-  - link: 'agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards'
+  - link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
     tag: ドキュメント
     text: ワイルドカードを使用したディレクトリの追跡
-  - link: 'agent/logs/advanced_log_collection/#global-processing-rules'
+  - link: agent/logs/advanced_log_collection/#global-processing-rules
     tag: ドキュメント
     text: グローバルな処理ルール
 ---

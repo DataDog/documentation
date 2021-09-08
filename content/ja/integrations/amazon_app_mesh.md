@@ -11,7 +11,7 @@ description: AWS App Mesh はオープンソースのエッジおよびサービ
 display_name: AWS App Mesh
 draft: false
 further_reading:
-  - link: https://docs.datadoghq.com/integrations/envoy/
+  - link: 'https://docs.datadoghq.com/integrations/envoy/'
     tag: ドキュメント
     text: Envoy インテグレーション
 git_integration_title: amazon_app_mesh

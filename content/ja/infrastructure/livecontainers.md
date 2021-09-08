@@ -20,7 +20,7 @@ htop、ctop、kubectl などの基盤ツールを手本として、ライブコ�
 
 ライブコンテナビューは、[Docker][2]、[Kubernetes][3]、[ECS][4] などのコンテナ技術と連動し、動的コンポーネントのタグ付けも組み込まれて、コンテナの健全性、リソース消費、ログ、デプロイなどの詳細な全体像をリアルタイムに提供します。
 
-{{< img src="infrastructure/livecontainers/livecontainersoverview.png" alt="ライブコンテナでサマリーを確認"  >}}
+{{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="ライブコンテナでサマリーを確認" >}}
 
 ## コンフィギュレーション
 
@@ -28,17 +28,16 @@ htop、ctop、kubectl などの基盤ツールを手本として、ライブコ�
 
 Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes リソースを取得するように構成できます。この機能により、特定のネームスペースまたはアベイラビリティーゾーンのポッド、デプロイメント、その他の Kubernetes の概念の状態を監視したり、デプロイメント内で失敗したポッドのリソース仕様を確認したり、ノードアクティビティを関係するログに関連付けたりすることが可能になります。
 
-ライブコンテナの Kubernetes リソースには、以下を構成する前に [Agent バージョン >= 7.21.1][6] および [Cluster Agent バージョン >= 1.9.0][7] が必要です。
+ライブコンテナの Kubernetes リソースには、以下を構成する前に [Agent バージョン >= 7.27.0][6] および [Cluster Agent バージョン >= 1.11.0][7] が必要です。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
 公式の [Datadog Helm チャート][1]を使用している場合、
 
-- バージョン 2.4.5 以降のチャートを使用します。
+- バージョン 2.10.0 以降のチャートを使用します。
   **注**: Agent および Cluster Agent のバージョンが、Helm チャート [values.yaml][2] ファイルで必要最低限以上のバージョンでハードコードされるようにしてください。
-- [values.yaml][2] で `datadog.orchestratorExplorer.enabled` を `true` に設定します
-- 新しいリリースのデプロイ
+- 新しいリリースをデプロイします。
 
 一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告ログが表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、`datadog.clusterName` を [values.yaml][2] でクラスター名に設定する必要があります。
 
@@ -47,54 +46,174 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-1. [Cluster Agent][1] バージョン >= 1.9.0 は、DaemonSet を構成する前に必要となります。Cluster Agent が実行中で Agent と通信できることを確認してください。コンフィギュレーションの詳細は、[Cluster Agent のセットアップドキュメント][2]を参照してください。
+[Cluster Agent][1] バージョン >= 1.11.0 は、DaemonSet を構成する前に必要となります。Cluster Agent が実行中で Agent と通信できることを確認してください。コンフィギュレーションの詳細は、[Cluster Agent のセットアップドキュメント][2]を参照してください。
 
-    - 以下の環境変数を使用して、Cluster Agent コンテナを設定します。
+1. 以下の環境変数を使用して、Cluster Agent コンテナを設定します。
 
-        ```yaml
-          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-            value: "true"
-        ```
+    ```yaml
+      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+        value: "true"
+    ```
 
-    - 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
-特に `apps` apiGroups の場合は、ライブコンテナに
-一般的な Kubernetes リソース (`pods`、`services`、`nodes` など) を収集する権限が必要です。
-これは、[Cluster Agent のセットアップ用ドキュメント][2]に従っていれば、すでに RBAC にあります。
-ない場合は、追加されていることを確認してください
-（`deployments`、`replicasets` の後）。
-        ```yaml
-          ClusterRole:
-          - apiGroups:  # To create the datadog-cluster-id CM
-            - ""
-            resources:
-            - configmaps
-            verbs:
-            - create
-            - get
-            - update
-          ...
-          - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
-            - ""
-            resources:
-            - namespaces
-            verbs:
-            - get
-          ...
-          - apiGroups:  # To collect new resource types
-            - "apps"
-            resources:
-            - deployments
-            - replicasets
-            verbs:
-            - list
-            - get
-            - watch
-        ```
+2. 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
+
+   特に `apps` および `batch` apiGroups の場合は、ライブコンテナに　
+   一般的な Kubernetes リソース (``pods`、`services`、 
+   `nodes` など) を収集する権限が必要です。これは、[Cluster
+   Agent のセットアップ用ドキュメント][2]に従っていれば、すでに RBAC にあります。ない場合は、
+   追加されていることを確認してください (`deployments`、`replicasets` の後):
+
+    ```yaml
+      ClusterRole:
+      - apiGroups:  # To create the datadog-cluster-id ConfigMap
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - create
+        - get
+        - update
+      ...
+      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+        - ""
+        resources:
+        - namespaces
+        verbs:
+        - get
+      ...
+      - apiGroups:  # To collect new resource types
+        - "apps"
+        resources:
+        - deployments
+        - replicasets
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - "batch"
+        resources:
+        - cronjobs
+        - jobs
+        verbs:
+        - list
+        - get
+        - watch
+      ...
+    ```
+    これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、サポート対象の Kubernetes リソースを収集するために必要です。
+
+   Cluster Agent により `cluster-id` ConfigMap が作成されない場合、Agent ポッドはリソースを収集することができません。この場合は Cluster Agent のアクセス許可を更新し、ポッドを再起動して ConfigMap を作成した後、Agent ポッドを再起動します。
+
+3. Agent DaemonSet で実行される Process Agent は、有効かつ実行中（プロセス収集を実行する必要はありません）であり、かつ以下のオプションで構成されている必要があります。
+
+    ```yaml
+    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+      value: "true"
+    ```
+
+一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告ログが表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、Cluster Agent と Process Agent の両方の `env` セクションに以下のオプションを追加する必要があります。
+
+  ```yaml
+  - name: DD_CLUSTER_NAME
+    value: "<YOUR_CLUSTER_NAME>"
+  ```
+
+[1]: /ja/agent/cluster_agent/
+[2]: /ja/agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
+
+### リソース収集の互換性マトリックス
+
+次の表は、収集されたリソースと、それぞれに対する最低限の Agent、Cluster Agent、Helm チャートのバージョンをリストで示したものです。
+
+| Resource | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン | 最低限必要な Helm チャートのバージョン |
+|---|---|---|---|
+| クラスター | 7.27.0 | 1.12.0 | 2.10.0 |
+| デプロイ | 7.27.0 | 1.11.0 | 2.10.0 |
+| ノード | 7.27.0 | 1.11.0 | 2.10.0 |
+| ポッド | 7.27.0 | 1.11.0 | 2.10.0 |
+| ReplicaSet | 7.27.0 | 1.11.0 | 2.10.0 |
+| サービス | 7.27.0 | 1.11.0 | 2.10.0 |
+| ジョブ | 7.27.0 | 1.13.1 | 2.15.5 |
+| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
+
+### 以前の Agent および Cluster Agent バージョン向けの手順
+
+ライブコンテナの Kubernetes リソースビューでは、最低限必要なバージョンが更新される前は、[Agent バージョン >= 7.21.1][6]および[Cluster Agent バージョン >= 1.9.0][7]が必要でした。これらの古いバージョンでは DaemonSetのコンフィギュレーションが若干異なっていたため、完全な手順が必要な場合は以下をご参照ください。
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+公式の [Datadog Helm チャート][1]を使用している場合、
+
+- チャートのバージョンは 2.4.5 以上、2.10.0 以前を使用してください。チャートバージョン 2.10.0 以降をお使いの場合は、[最新のコンフィギュレーション手順][2]を参照してください。
+  **注**: Agent および Cluster Agent のバージョンが、Helm チャート [values.yaml][3] ファイルで必要最低限以上のバージョンでハードコードされるようにしてください。
+- [values.yaml][3] で `datadog.orchestratorExplorer.enabled` を `true` に設定します
+- 新しいリリースをデプロイします。
+
+一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告ログが表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、`datadog.clusterName` を [values.yaml][3] でクラスター名に設定する必要があります。
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: /ja/infrastructure/livecontainers/#configuration
+[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Cluster Agent が動作していて、Agent が通信可能である必要があります。コンフィギュレーションについては、[Cluster Agent のセットアップドキュメント][1]を参照してください。
+
+1. 以下の環境変数を使用して、Cluster Agent コンテナを設定します。
+
+    ```yaml
+      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+        value: "true"
+    ```
+
+2. 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
+
+   特に `apps` apiGroups の場合は、ライブコンテナに
+    一般的な Kubernetes リソース (`pods`、`services`、`nodes` など) を収集する権限が必要です。
+   これは、[Cluster Agent のセットアップ用ドキュメント][1]に従っていれば、すでに RBAC にあります。
+   ない場合は、追加されていることを確認してください
+   （`deployments`、`replicasets` の後）。
+
+    ```yaml
+      ClusterRole:
+      - apiGroups:  # To create the datadog-cluster-id ConfigMap
+        - ""
+        resources:
+        - configmaps
+        verbs:
+        - create
+        - get
+        - update
+      ...
+      - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+        - ""
+        resources:
+        - namespaces
+        verbs:
+        - get
+      ...
+      - apiGroups:  # To collect new resource types
+        - "apps"
+        resources:
+        - deployments
+        - replicasets
+        - daemonsets
+        verbs:
+        - list
+        - get
+        - watch
+    ```
+
     これらのアクセス許可は、Agent DaemonSet や Cluster Agent Deployment と同じネームスペースに `datadog-cluster-id` ConfigMap を作成したり、デプロイや ReplicaSets を収集するために必要です。
 
     Cluster Agent により `cluster-id` ConfigMap が作成されない場合、Agent ポッドは起動せず、`CreateContainerConfigError` ステータスに陥ります。この ConfigMap が存在しないために Agent ポッドが動かない場合は、Cluster Agent アクセス許可を更新しポッドを再起動して ConfigMap を作成すると、Agent ポッドは自動的に回復します。
 
-2. Agent DaemonSet で実行される Process Agent は、有効かつ実行中（プロセス収集を実行する必要はありません）であり、かつ以下のオプションで構成されている必要があります。
+3. Agent DaemonSet で実行される Process Agent は、有効かつ実行中（プロセス収集を実行する必要はありません）であり、かつ以下のオプションで構成されている必要があります。
 
     ```yaml
     - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
@@ -113,8 +232,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][5]の Kubernetes �
     value: "<YOUR_CLUSTER_NAME>"
   ```
 
-[1]: /ja/agent/cluster_agent/
-[2]: /ja/agent/cluster_agent/setup/
+[1]: /ja/agent/cluster_agent/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -172,22 +290,6 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 どちらの引数も値は**イメージ名**になります。正規表現もサポートされています。
 
 たとえば、名前が frontend で始まるコンテナ以外のすべての Debian イメージを除外するには、`datadog.yaml` ファイルに次の 2 つの構成行を追加します。
-```yaml
-  env:
-    - name: DD_LOGS_ENABLED
-      value: "true"
-    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-      value: "true"
-
-  volumeMounts:
-    - name: pointerdir
-      mountPath: /opt/datadog-agent/run
-
-volumes:
-  - hostPath:
-      path: /opt/datadog-agent/run
-    name: pointerdir
-```
 
 ```shell
 container_exclude: ["image:debian"]
@@ -223,9 +325,9 @@ Kubernetes Resources を有効にしている場合、`pod`、`deployment`、`Re
 
 ### フィルタリングとピボット
 
-下のスクリーンショットは、あるシステムがフィルタリングによって 9 つのノードからなる 1 つの Kubernetes クラスターに絞り込まれたところを示しています。コンテナの RSS および CPU 使用率をレポートする際に、コンテナに制限がプロビジョニングされている場合は、制限との比較が示されます。ここでは、このクラスターのコンテナがオーバープロビジョニングになっていることは明らかです。制限とビンパッキングを厳しくすれば、リソースの使用率を改善できます。
+下のスクリーンショットは、あるシステムがフィルタリングによって 25 のノードからなる 1 つの Kubernetes クラスターに絞り込まれたところを示しています。コンテナの RSS および CPU 使用率をレポートする際に、コンテナに制限がプロビジョニングされている場合は、制限との比較が示されます。ここでは、このクラスターのコンテナがオーバープロビジョニングになっていることは明らかです。制限とビンパッキングを厳しくすれば、リソースの使用率を改善できます。
 
-{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="オーバープロビジョニング"  style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/filter-by.png" alt="システムを 25 のノードから 1 つの Kubernetes クラスターに絞り込み"  style="width:80%;">}}
 
 コンテナ環境は動的であり、追跡が困難な場合があります。下のスクリーンショットは、`kube_service` と `host` によってピボットされたビューです。システムノイズを減らすために、`kube_namespace:default` に絞り込まれています。どのサービスがどこで実行されているか、キーメトリクスの飽和状態などがわかります。
 
@@ -273,9 +375,9 @@ Kubernetes コンテナは以下でタグ付けされます。
 
 散布図分析を使用すると、2 つのメトリクスを比較してコンテナのパフォーマンスをより的確に把握できます。
 
-[Containers ページ][1]で散布図分析にアクセスするには、Show Summary graph ボタンをクリックし、"Scatter Plot" タブを選択します。
+Containers ページの展開可能な **Summary Graphs** セクションで、「Scatter Plot」と「Timeseries」タブを切り替えることができます。
 
-{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter Plot を選択"  style="width:60%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt=""Scatter Plot を選択"  style="width:80%;">}}
 
 デフォルトでは、グラフは `short_image` タグキーでグループ化されます。ドットのサイズは、各グループ内のコンテナの数を表します。ドットをクリックすると、グループに参加しているすべてのコンテナとホストが表示されます。
 
@@ -293,7 +395,21 @@ Kubernetes コンテナは以下でタグ付けされます。
 
 ### Kubernetes リソースビュー
 
-ライブコンテナ向け Kubernetes Resources を有効にしている場合は、ページ左上の **View** ドロップダウンメニューで **Pods**、**Deployments**、**ReplicaSets**、**Services** ビューを切り替えます。これらの各ビューには、ステータス、名前、Kubernetes ラベルなどのフィールドでデータを整理できるデータテーブルと、ポッドと Kubernetes クラスターの全体像を示す詳細なクラスターマップが含まれています。
+ライブコンテナの Kubernetes リソースを有効にしている場合は、ページ左上の「Select a resource」ドロップダウンメニューで、**Clusters**、**Pods**、**Deployments**、**ReplicaSets**、**DaemonSets**、**Services**、**CronJobs**、**Jobs**、**Nodes** の表示を切り替えます。
+
+それぞれのビューには、ステータス、名前、Kubernetes ラベルなどのフィールドごとにデータをよりよく整理するために役立つデータテーブルと、ポッドと Kubernetes クラスターの全体像を把握するための詳細なクラスターマップが含まれています。
+
+{{< img src="infrastructure/livecontainers/kubernetes-resources-view.png" alt="フィールドごとに整理されたデータテーブル"  style="width:80%;">}}
+
+#### 機能およびファセットごとにグループ化
+
+タグや Kubernetes ラベルでポッドをグループ化することで集計ビューを表示し、情報をすばやく見つけることができます。グループ化を行うには、ページ右上の「Group by」バーを使用するか、下図のように特定のタグやラベルをクリックしてコンテキストメニューから「Group by」機能を選択します。
+
+{{< img src="infrastructure/livecontainers/group-by.gif" alt="チームごとにグループ化した例"  style="width:80%;">}}
+
+また、ページの左側にあるファセットを活用することで、リソースをすばやくグループ化したり、ポッドステータスが CrashLoopBackOff のポッドなど、最も気になるリソースをフィルタリングすることができます。
+
+{{< img src="infrastructure/livecontainers/crashloopbackoff.gif" alt="CrashLoopBackOff ポッドステータスのグループ化例"  style="width:80%;">}}
 
 #### クラスターマップ
 
@@ -301,9 +417,21 @@ Kubernetes クラスターマップは、ポッドと Kubernetes クラスター
 
 サークルまたはグループをクリックしてクラスターマップからリソースにドリルダウンし、詳細パネルを表示します。
 
+カスタマイズされたグループやフィルターを使って、すべてのリソースを 1 つの画面にまとめて表示し、どのメトリクスを使ってポッドに色を付けるかを選択することができます。
+
+{{< img src="infrastructure/livecontainers/cluster-map.gif" alt="カスタマイズしたグループとフィルターのクラスターマップ"  style="width:80%;">}}
+
 #### 情報パネル
 
-テーブルの行またはクラスターマップのオブジェクトをクリックすると、サイドパネルに特定のリソースに関する情報が表示されます。このパネルは、選択したコンテナまたはリソースに関する次のような情報のトラブルシューティングと検索に役立ちます。
+表内の任意の行、またはクラスターマップの任意のオブジェクトをクリックすると、特定のリソースに関する情報がサイドパネルに表示されます。
+
+{{< img src="infrastructure/livecontainers/information-panel.gif" alt="サイドパネルのリソースビュー"  style="width:80%;">}}
+
+このリソースの詳細なダッシュボードについては、このパネルの右上隅にある View Dashboard をクリックしてください。
+
+{{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="ライブコンテナの概要からポッドダッシュボードへのリンク"  style="width:80%;">}}
+
+このパネルはトラブルシューティングに加えて、選択したコンテナやリソースに関する次のような情報を検索するときに便利です。
 
 * [**Logs**][11]: コンテナまたはリソースからログを確認。関連ログを Logs Explorer で表示するには、ログをクリックします。
 * [**Metrics**][12]: コンテナまたはリソースのライブメトリクスを確認。グラフを全画面表示したり、スナップショットを共有したりできるほか、このタブからエクスポートすることが可能です。
@@ -334,7 +462,7 @@ Live Tail を使用すると、すべてのコンテナログがストリーミ�
 
 #### インデックス化されたログ
 
-対応するタイムフレームを選択することで、インデックス化して永続化するように選択したログを表示できます。インデックス化を使用すると、タグやファセットを使用してログをフィルタリングできます。たとえば、`Error` 状態のログを検索するには、検索ボックスに `status:error` と入力します。オートコンプリートによって目的のタグが見つけやすくなります。ログの重要な属性が既にタグに保存されているため、必要に応じて検索、フィルタリング、集計を行うことができます。
+対応するタイムフレームを選択することで、インデックス化して永続化するように選択したログを表示できます。インデックス化を使用すると、タグやファセットを使用してログをフィルタリングできます。たとえば、Error 状態のログを検索するには、検索ボックスに status:error と入力します。オートコンプリートによって目的のタグが見つけやすくなります。ログの重要な属性が既にタグに保存されているため、必要に応じて検索、フィルタリング、集計を行うことができます。
 
 {{< img src="infrastructure/livecontainers/errorlogs.png" alt="ログサイドパネルのプレビュー"  style="width:100%;">}}
 

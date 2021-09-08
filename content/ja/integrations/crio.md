@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/crio/README.md'
 display_name: CRI-O
 draft: false
 git_integration_title: crio

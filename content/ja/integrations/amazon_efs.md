@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elastic Filesystem のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_efs/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
 draft: false
 git_integration_title: amazon_efs
 has_logo: true
