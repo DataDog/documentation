@@ -7640,6 +7640,93 @@ components:
           nullable: true
           type: string
       type: object
+    SLOHistoryMonitor:
+      description: 'An object that holds an SLI value and its associated data. It
+        can represent an SLO''s overall SLI value.
+
+        This can also represent the SLI value for a specific monitor in multi-monitor
+        SLOs, or a group in grouped SLOs.'
+      properties:
+        error_budget_remaining:
+          $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          type: array
+        group:
+          description: For groups in a grouped SLO, this is the group name.
+          example: name
+          type: string
+        history:
+          description: For `monitor` based SLOs, this includes the aggregated history
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
+          items:
+            description: Represents an array time series data.
+            example:
+            - - 1579212382
+              - 0
+            items:
+              description: A time series data point which is a tuple of (timestamp,
+                value).
+              example:
+              - 1579212382
+              - 0
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        monitor_modified:
+          description: For `monitor` based SLOs, this is the last modified timestamp
+            in epoch seconds of the monitor.
+          example: 1615867200
+          format: int64
+          type: integer
+        monitor_type:
+          description: For `monitor` based SLOs, this describes the type of monitor.
+          example: string
+          type: string
+        name:
+          description: For groups in a grouped SLO, this is the group name. For monitors
+            in a multi-monitor SLO, this is the monitor name.
+          example: string
+          type: string
+        precision:
+          deprecated: true
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp. Use `span_precision` instead.
+          example: 2
+          format: double
+          type: number
+        preview:
+          description: 'For `monitor` based SLOs, when `true` this indicates that
+            a replay is in progress to give an accurate uptime
+
+            calculation.'
+          example: true
+          type: boolean
+        sli_value:
+          description: The current SLI value of the SLO over the history window.
+          example: 99.99
+          format: double
+          type: number
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp.
+          example: 2
+          format: double
+          type: number
+        uptime:
+          deprecated: true
+          description: Use `sli_value` instead.
+          example: 99.99
+          format: double
+          type: number
+      type: object
     SLOHistoryResponse:
       description: A service level objective history response.
       properties:
@@ -7670,7 +7757,7 @@ components:
                 This is not included in the responses for `metric` based SLOs.'
               example: []
               items:
-                $ref: '#/components/schemas/SLOHistorySLIData'
+                $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
             monitors:
               description: 'For multi-monitor SLOs, this represents SLI data for specific
@@ -7680,7 +7767,7 @@ components:
                 This is not included in the responses for `metric` based SLOs.'
               example: []
               items:
-                $ref: '#/components/schemas/SLOHistorySLIData'
+                $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
             overall:
               $ref: '#/components/schemas/SLOHistorySLIData'
@@ -20980,7 +21067,7 @@ paths:
 
         Once a new child organization is created, you can interact with it
 
-        by using the `org.public_id`, `pi_key.key`, and
+        by using the `org.public_id`, `api_key.key`, and
 
         `application_key.hash` provided in the response.'
       operationId: CreateChildOrg
