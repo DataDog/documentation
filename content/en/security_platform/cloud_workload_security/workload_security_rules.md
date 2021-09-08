@@ -5,9 +5,9 @@ further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
   tag: "Blog"
   text: "Get Started with Cloud Runtime Security"
-- link: "/security_platform/cloud_workload_security/secl"
+- link: "/security_platform/cloud_workload_security/agent_expressions"
   tag: "Documentation"
-  text: "SECL fields documentation"
+  text: "Agent Expressions"
 ---
 
 ## Overview
