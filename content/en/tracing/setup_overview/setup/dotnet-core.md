@@ -88,18 +88,20 @@ To install the .NET Tracer:
 ```bash
 # For Debian or Ubuntu, install the DEB package
 sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb
+/opt/datadog/createLogPath.sh # Creates the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
 
 # For CentOS or Fedora, install the RPM package
 sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm
+/opt/datadog/createLogPath.sh # Creates the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
 
 # For Alpine or other musl-based distributions, install the MUSL tar archive
 sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz
+sh /opt/datadog/createLogPath.sh # Creates the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
 
 # For other distributions, install the tar archive
 sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz
+/opt/datadog/createLogPath.sh # Creates the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
 ```
-
-3. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
