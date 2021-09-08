@@ -47,6 +47,12 @@ body {
     padding-right: 15px;
     padding-bottom: 50px;
 
+    i[class*='icon-'] {
+        display: inline-block;
+        width: 20px;
+        margin-top: 4px;
+    }
+
     .sticky {
         .col {
             padding-right: 0;

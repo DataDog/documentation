@@ -340,7 +340,7 @@ main:
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
-    pre: nav_start
+    pre: hex-ringed
     weight: 10000
   - name: Datadog
     identifier: getting_started_datadog
@@ -447,7 +447,7 @@ main:
     weight: 14
   - name: Agent
     url: agent/
-    pre: nav_agent
+    pre: agent-fill
     weight: 30000
     identifier: agent
   - name: Basic Agent Usage
@@ -795,7 +795,7 @@ main:
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
-    pre: nav_integrations
+    pre: integrations
     weight: 40000
   - name: Guides
     url: integrations/guide/
@@ -841,12 +841,12 @@ main:
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
-    pre: nav_watchdog
+    pre: watchdog
     weight: 50000
   - name: Events
     url: events/
     identifier: events_top_level
-    pre: nav_events
+    pre: events
     weight: 60000
   - name: Guides
     url: events/guides/
@@ -875,7 +875,7 @@ main:
     weight: 104
   - name: Dashboards
     url: dashboards/
-    pre: nav_dashboards
+    pre: dashboard
     identifier: dashboards
     weight: 70000
   - name: Dashboard Layout
@@ -1085,12 +1085,12 @@ main:
   - name: Mobile Application
     url: mobile/
     identifier: mobile
-    pre: nav_mobile
+    pre: mobile
     weight: 80000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
-    pre: nav_infrastructure
+    pre: host-map
     weight: 90000
   - name: Infrastructure List
     url: infrastructure/list/
@@ -1123,7 +1123,7 @@ main:
     weight: 7
   - name: Serverless
     url: serverless
-    pre: nav_serverless
+    pre: serverless
     identifier: serverless
     weight: 100000
   - name: Installation
@@ -1270,7 +1270,7 @@ main:
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
-    pre: nav_metrics
+    pre: metric
     weight: 110000
   - name: Explorer
     url: metrics/explorer/
@@ -1332,7 +1332,7 @@ main:
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
-    pre: nav_notebooks
+    pre: notebook
     weight: 120000
   - name: Alerting
     url: monitors/
@@ -1486,7 +1486,7 @@ main:
     identifier: alerting_guide
   - name: APM & Continuous Profiler
     url: tracing/
-    pre: nav_tracing
+    pre: apm
     identifier: tracing
     weight: 140000
   - name: Send traces to Datadog
@@ -1933,7 +1933,7 @@ main:
     weight: 1705
   - name: CI Visibility
     url: continuous_integration/
-    pre: nav_ci
+    pre: ci
     identifier: ci
     weight: 150000
   - name: Tracing Tests
@@ -2027,7 +2027,7 @@ main:
     weight: 6
   - name: Database Monitoring
     url: database_monitoring/
-    pre: nav_dbm
+    pre: dbm
     identifier: dbm
     weight: 160000
   - name: Setting Up Postgres
@@ -2112,7 +2112,7 @@ main:
     weight: 6
   - name: Log Management
     url: logs/
-    pre: nav_logs
+    pre: log
     identifier: log_management
     weight: 170000
   - name: Log Collection & Integrations
@@ -2264,7 +2264,7 @@ main:
     weight: 7
   - name: Security Platform
     url: security_platform/
-    pre: nav_security_monitoring
+    pre: security
     identifier: security_platform
     weight: 180000
   - name: Security Monitoring
@@ -2381,7 +2381,7 @@ main:
     weight: 11
   - name: Synthetic Monitoring
     url: synthetics/
-    pre: nav_synthetics
+    pre: synthetics
     identifier: synthetics
     weight: 190000
   - name: API Tests
@@ -2488,7 +2488,7 @@ main:
     weight: 14
   - name: Real User Monitoring
     url: real_user_monitoring/
-    pre: nav_rum_2
+    pre: rum
     identifier: rum
     weight: 155000
   - name: Browser Monitoring
@@ -2669,7 +2669,7 @@ main:
     weight: 13
   - name: Network Monitoring
     url: network_monitoring/
-    pre: nav_network
+    pre: network
     identifier: nm_parent
     weight: 200000
   - name: Network Performance Monitoring
@@ -2766,7 +2766,7 @@ main:
     weight: 403
   - name: Developers
     url: developers/
-    pre: nav_developers
+    pre: dev-code
     identifier: dev_tools
     weight: 210000
   - name: DogStatsD
@@ -2873,12 +2873,12 @@ main:
     weight: 10
   - name: API
     url: api/
-    pre: nav_api
+    pre: api
     identifier: api
     weight: 220000
   - name: Account Management
     url: account_management/
-    pre: nav_account
+    pre: cog
     identifier: account_management
     weight: 230000
   - name: Switching between orgs
@@ -2956,7 +2956,7 @@ main:
     weight: 8
   - name: Security
     url: security/
-    pre: nav_security
+    pre: security
     identifier: security
     weight: 240000
   - name: Agent
@@ -2981,7 +2981,7 @@ main:
     weight: 5
   - name: Help
     url: help/
-    pre: nav_help
+    pre: info-fill
     identifier: help_top_level
     weight: 240000
   - name: Aggregating Agents
