@@ -33,7 +33,7 @@ After searching, select one or more monitors to update using the checkboxes next
 | Delete    | Permanently delete the selected monitors.                                  |
 | Edit Tags | Edit the monitor tags for the selected monitors.                           |
 
-To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more details on a monitor, click its name to visit the status page.
+To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more details on a monitor, click its name to see the status page.
 
 **Note**: With the [Datadog Mobile App][4], you can view, mute, and unmute monitors on your mobile device.
 
