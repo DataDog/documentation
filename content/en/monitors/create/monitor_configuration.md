@@ -16,7 +16,7 @@ Once you’ve chosen a [monitor type][1], start configuring the monitor.
 
 ## Define the search query
 
-To learn how to construct the search query, refer to individual [monitor types][1] pages. As you define the search query, the preview graph above the search fields updates.
+To learn how to construct the search query, see the individual [monitor types][1] pages. As you define the search query, the preview graph above the search fields updates.
 
 {{< img src="/monitors/create/preview_graph_monitor.gif" alt="Preview Graph" style="width:90%;">}}
 
