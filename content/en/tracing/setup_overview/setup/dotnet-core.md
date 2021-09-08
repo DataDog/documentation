@@ -191,8 +191,8 @@ For standalone applications, manually restart the application as you normally wo
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH=<System-dependent path>
-DD_INTEGRATIONS=<APP_DIRECTORY>/integrations.json
-DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>
+DD_INTEGRATIONS=<APP_DIRECTORY>/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
 ```
 
 The value for the `CORECLR_PROFILER_PATH` environment variable will vary based on the system where the application is running. See the following table for the appropriate path:
