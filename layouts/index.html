@@ -107,8 +107,9 @@
                             {{ range $i, $navtile := $section.navtiles }}
                                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
                                         <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="{{ $navtile.link | absLangURL }}">
-                                                {{ partial "svg" (dict "context" $dot "src" $navtile.icon "color" "#632CA6" )}}
-                                                {{ $navtile.title }}<span class="font-regular text-center smaller">{{ $navtile.desc }}</span></a>
+                                                {{ partial "icon" (dict "context" $dot "name" $navtile.icon "color" "transparent" )}}
+                                                {{ $navtile.title }}
+                                                <span class="font-regular text-center smaller">{{ $navtile.desc }}</span>
                                         </a>
 
                                 </div>
