@@ -25,14 +25,14 @@ You can set up your logging library and .NET tracing configurations so that trac
 Configure the .NET Tracer with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
 
 The .NET Tracer supports the following logging libraries:
-- [Serilog][2] (version 2.0+)
+- [Serilog][2] (v2.0+)
 - [log4net][3]
 - [NLog][4]
-- [Microsoft.Extensions.Logging][5] Added in version 1.28.6 
+- [Microsoft.Extensions.Logging][5] (added in v1.28.6) 
 
 ## Getting started
 
-To automatically inject correlation identifiers into your log messages, do these steps:
+To automatically inject correlation identifiers into your log messages:
 
 1. Configure the .NET Tracer with the following tracer settings:
     - `DD_ENV`
@@ -114,9 +114,11 @@ For additional examples, see the automatic trace ID injection projects using [NL
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
-No additional setup is required if you're using _Microsoft.Extensions.Logging_. Trace and span IDs will be automatically injected into application logs using the properties `dd_trace_id` and `dd_span_id`, as long as there is an active trace when the log is written. If there is not an active trace, only `dd_env`, `dd_service`, and `dd_version` properties will be injected.
+If you are using `Microsoft.Extensions.Logging`, no additional setup is required. 
 
-Note that if you are using a logging framework that replaces the default `LoggerFactory` implementation, such as the [_Serilog.Extensions.Hosting_][1] package, you will need to follow the instructions for that framework (Serilog, in this case).
+If there is an active trace when the log is being written, trace and span IDs are automatically injected into the application logs with `dd_trace_id` and `dd_span_id` properties. If there is not an active trace, only `dd_env`, `dd_service`, and `dd_version` properties are injected.
+
+**Note:** If you are using a logging framework that replaces the default `LoggerFactory` implementation such as the [_Serilog.Extensions.Hosting_][1] package, follow the framework-specific instructions (in this example, see **Serilog**).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,15 +127,15 @@ Next, complete the setup for either automatic or manual injection.
 
 ## Automatic injection
 
-The final step to enable automatic correlation identifier injection is:
+The final step to enable automatic correlation identifier injection is to:
 
-3. In the .NET Tracer’s environment variables, enable  `DD_LOGS_INJECTION=true`. For alternative ways to configure the .NET Tracer, see [Configuring the .NET Tracer][6].
+3. Enable `DD_LOGS_INJECTION=true` in the .NET Tracer’s environment variables. To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
 
-After you have configured correlation identifier injection, configure log collection as described in [C# Log Collection][7].
+After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
 ## Manual injection
 
-If you prefer to manually correlate your traces with your logs, manually add correlation identifiers to your logs.
+If you prefer to manually correlate your traces with your logs, you can add correlation identifiers to your logs.
 
   | Required key   | Description                                  |
   | -------------- | -------------------------------------------- |
@@ -146,7 +148,7 @@ If you prefer to manually correlate your traces with your logs, manually add cor
 
 **Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see the [FAQ on this topic][8].
 
-To finish setting up manual log enrichment, after doing the two steps [above](#getting-started):
+After completing Step 1 and 2 [above](#getting-started), finish your manual log enrichment setup:
 
 3. Reference the [`Datadog.Trace` NuGet package][9] in your project.
 
@@ -251,9 +253,9 @@ Finally, configure log collection as described in [C# Log Collection][7].
 
 ## Configure log collection
 
-Ensure log collection is configured in the Datadog Agent, and that the [logs Agent configuration][10] for the specified files to tail, sets `source: csharp`, so that log pipelines can parse the log files . See [C# Log Collection][7] for details.
+Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][10] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7].
 
-<div class="alert alert-info"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Otherwise, use must use custom parsing rules.</div>
+<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
 ## Further Reading
 
