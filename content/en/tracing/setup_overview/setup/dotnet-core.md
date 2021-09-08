@@ -530,6 +530,8 @@ For additional details on custom instrumentation and custom tagging, see the [.N
 
 ## Configuring process environment variables
 
+For automatic instrumentation to attach to your service, you must set required the environment variables before starting the application. Refer back to the [Enable the tracer for your service][9] section to identify which environment variables must be set according to your .NET Tracer installation method, and follow the examples below to correctly set the environment variables based on the environment of the instrumented service.
+
 ### Windows
 
 #### Windows services
