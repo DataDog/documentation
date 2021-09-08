@@ -147,8 +147,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/javascript.md ;fi
 	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
 	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
-	@if [ content/en/security_platform/cloud_workload_security/secl.md ]; then \
-	rm -f content/en/security_platform/cloud_workload_security/secl.md ;fi
+	@if [ content/en/security_platform/cloud_workload_security/agent_expressions.md ]; then \
+	rm -f content/en/security_platform/cloud_workload_security/agent_expressions.md ;fi
 	@if [ content/en/security_platform/cloud_workload_security/backend.md ]; then \
 	rm -f content/en/security_platform/cloud_workload_security/backend.md ;fi
 
