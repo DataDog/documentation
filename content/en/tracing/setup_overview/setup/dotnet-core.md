@@ -54,10 +54,10 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ### Installation overview
 
-1. Install the tracer
-2. Enable the tracer for your service
-3. Configure the Datadog Agent for APM
-4. View your live data
+1. [Install the tracer][8]
+2. [Enable the tracer for your service][9]
+3. [Configure the Datadog Agent for APM][10]
+4. [View your live data][11]
 
 ### Install the tracer
 
@@ -654,3 +654,7 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
 [6]: https://app.datadoghq.com/apm/traces
 [7]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[8]: #install-the-tracer
+[9]: #enable-the-tracer-for-your-service
+[10]: #configure-the-datadog-agent-for-apm
+[11]: #view-your-live-data
