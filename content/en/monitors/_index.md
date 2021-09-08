@@ -31,7 +31,7 @@ Configure monitors, notify your teams and manage alerts at a glance on the Alert
 
 {{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
 
-[Monitor Notifications][2]: Set up notifications when creating monitors in order to keep your team informed of issues. Route the notifications to the right people, leverage template variables to include details and attach snapshots when sending the alerts via email or Slack. Create [downtimes][3] to mute alerts during application maintenance.
+[Monitor Notifications][2]: Set up notifications when creating monitors in order to keep your team informed of issues. Route the notifications to the right people, leverage template variables to include details and attach snapshots when sending the alerts by email or Slack. Create [downtimes][3] to mute alerts during application maintenance.
 
 ## Manage Monitors
 
