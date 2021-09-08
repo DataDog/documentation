@@ -457,10 +457,14 @@ main:
     url: getting_started/incident_management/
     parent: getting_started
     weight: 13
+  - name: Database Monitoring
+    url: getting_started/database_monitoring/
+    parent: getting_started
+    weight: 14
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 14
+    weight: 15
   - name: Agent
     url: agent/
     pre: agent-fill
