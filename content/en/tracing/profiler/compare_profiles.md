@@ -15,15 +15,15 @@ further_reading:
 
 Continuous Profiler can compare two profiles or profile aggregations with each other to help you identify code performance improvements, regressions, and structural changes. You can compare a profile with:
 
-- The same profile at a different time,
+- Profiles taken at a different time,
 - An average of the service's profiles over time, or
-- A profile with a different set of Datadog tags (for example, environment, version, or data center). 
+- Profiles with a different set of Datadog tags (for example, environment, version, or data center). 
 
-This helps you see if the service is taking more time, using more memory, making more allocations, throwing more exceptions, or involving more or less code and calls than it was in the past.
+This helps you see if the service is taking more or less time, using more or less memory, making more of fewer allocations, throwing more or fewer exceptions, or involving more or less code and calls than it was in the past.
 
 ## Comparison scenarios
 
-Comparisons work best when the application is experiencing a similar workload (total requests and resource usage) as it was in the past.
+Comparisons work best when the application is experiencing a similar workload (total requests) as it was in the past.
 
 Some common scenarios to use comparison are:
 
@@ -46,8 +46,8 @@ Select the metric you want to compare (the list varies based on code language). 
 {{< img src="tracing/profiling/compare_time_frames.mp4" alt="Opening the comparison view to compare a profile with a aggregation for a time frame." video="true">}}
 
 Take note of the legend colors, which show:
- - Deepening shades of red for methods that are slower in profile B.
- - Deepening shades of green for methods that are faster in profile B.
+ - Deepening shades of red for methods that take more time in profile B.
+ - Deepening shades of green for methods that take less time in profile B.
  - Blue for methods that are only in profile A.
  - Purple for methods that are only in profile B.
 
@@ -71,7 +71,7 @@ Switch between **Side-by-Side** and **Combined** to find the view that is most h
 
 Side-by-side comparison is helpful when you want to retain the context of both A and B profiles. In this mode, The flame graph on the left represents profile scoped to tags and time range scoped for A while the flame graph on the right represents profile scoped to tags and time range scoped for B. 
 
-The methods highlighted in blue on the left flame graph show methods that do not exist in the profile B. Similarly, methods highlighted in purple show methods that exist in profile B but not in profile A. 
+The methods highlighted in blue on the left flame graph show methods that were not seen running in profile B during the period that the profile was captured, or among the set of tags queried. Similarly, methods highlighted in purple show methods that were similarly not seen in profile A. 
 
 The Combined comparison mode is helpful when you want to look at code performance changes in a single view. It computes one flame graph that averages method timings in A and B and shows an averaged difference in method timings between the two queries. 
 
