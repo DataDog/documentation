@@ -42,7 +42,7 @@ Select one or more **Managed Locations** or **[Private Locations][3]** to run yo
 
 Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your private locations instead.
 
-The Shopist application is publicly available, you can consequently go ahead and pick any managed locations you want to execute your test from.
+The Shopist application is publicly available at `https://www.shopist.io/` and you can pick any managed locations to execute your test from.
 
 #### Specify test frequency
 
@@ -69,11 +69,11 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Design your alert message and add any email address you want your test to send alerts to.
+Design your alert message and add an email address you want your test to send alerts to.
 
 {{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true"  >}}
 
-You can also use [notifications integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks. Note that in order to be able to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][12].
+You can also use [notifications integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][12].
 
 When you're ready to record your test, click **Save Details & Record Test**.
 
