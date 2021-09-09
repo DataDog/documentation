@@ -28,4 +28,16 @@ Since the Datadog sites may support different Datadog functionalities depending 
 
 The Datadog for Government site (US1-FED) is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about the Datadog for Government site's security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [security page][1].
 
+## Browser support
+
+The Datadog site can be accessed with a recent version of any of the four major browsers:
+- [Chrome][2]
+- [Firefox][3]
+- [Safari][4]
+- [Edge][5]
+
 [1]: https://www.datadoghq.com/security/
+[2]: https://www.google.com/chrome
+[3]: https://www.mozilla.org/en-US/firefox/new
+[4]: https://support.apple.com/en-us/HT204416
+[5]: https://www.microsoft.com/en-us/edge
