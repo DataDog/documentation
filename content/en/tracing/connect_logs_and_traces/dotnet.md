@@ -152,10 +152,13 @@ If there is an active trace when the log is being written, trace and span IDs ar
 
 **Note:** If you are using a logging library that replaces the default `LoggerFactory` implementation such as the [_Serilog.Extensions.Hosting_][3] or [_Serilog.Extensions.Logging_][4] packages, follow the framework-specific instructions (in this example, see **Serilog**).
 
+For additional examples, see [the Microsoft.Extensions.Logging automatic trace id injection project][5] on GitHub.
+
 [1]: https://docs.datadoghq.com/tracing/setup_overview/setup/dotnet-core/
 [2]: https://docs.microsoft.com/aspnet/core/fundamentals/logging/#log-scopes-1
 [3]: https://github.com/serilog/serilog-extensions-hosting
 [4]: https://github.com/serilog/serilog-extensions-logging
+[5]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/MicrosoftExtensionsExample/Program.cs
 {{% /tab %}}
 {{< /tabs >}}
 
