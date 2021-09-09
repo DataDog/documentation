@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md
 display_name: ClickHouse
 draft: false
 git_integration_title: clickhouse

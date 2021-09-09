@@ -18,10 +18,10 @@ Utilisez l'[API Logs Search][1] pour programmer l'accès à vos données de log 
 
 Les scénarios suivants sont abordés dans ce guide :
 
-* [Recherche de base](#recherche-de-base)
-* [Tri par facette ou timestamp](#tri-par-facette-ou-timestamp)
-* [Restriction du nombre de résultats récupérés](#restriction-du-nombre-de-resultats-recuperes)
-* [Réglages de l'intervalle](#reglages-de-l-intervalle)
+* [Recherche de base](#basic-search)
+* [Tri par facette ou timestamp](#sort-by-facet-or-timestamp)
+* [Restriction du nombre de résultats récupérés](#limit-the-number-of-results-retrieved)
+* [Réglages de l'intervalle](#time-settings)
 * [Pagination](#pagination)
 
 ## Prérequis

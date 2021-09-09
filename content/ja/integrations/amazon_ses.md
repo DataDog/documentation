@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ses/
 draft: false
 git_integration_title: amazon_ses
 has_logo: true

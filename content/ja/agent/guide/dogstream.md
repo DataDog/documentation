@@ -134,7 +134,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 | alert_type      | string enum | イベントの重要度を示します。`error`、`warning`、`success`、`info` のいずれかでなければなりません。省略した場合のデフォルトは `info` です。`alert_type:value` で検索できます。                                                                  |
 | event_type      | string      | このイベントの種類を記述します。集計キーの 1 つとして使用されます。                                                                                                                                                         |
 | aggregation_key | string      | このイベントの影響を受けたものがある場合に、それを記述します。集計キーの 1 つとして使用されます。                                                                                                                                              |
-| ホスト            | string      | このイベントが発生したホストの名前。イベントは、[タグ付けページ][1]または[タグ付け API][2] を使用してこのホストに指定したタグに基づいて自動的にタグ付けされます。host 値は、集計キーの 1 つとして使用されます。 |
+| ホスト            | string      | このイベントが発生したホストの名前。イベントは、[タグ付け][1]ページまたは[タグ付け API][2] を使用してこのホストに指定したタグに基づいて自動的にタグ付けされます。host 値は、集計キーの 1 つとして使用されます。 |
 | **priority**    | string      | このイベントがストリーム内にデフォルトで表示/非表示されるかを決定します。`low` または `normal` のいずれかでなければなりません。                                                                                                                      |
 
 24 時間のタイムウィンドウ内で同じ集計キーを持つイベントがストリーム内で集計されます。
@@ -193,7 +193,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 このパーサーを使用して上のログ行をパースすると、Datadog に次のイベントが作成されます。
 
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Datadog のログイベント"  style="width:70%;">}}
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Datadog のログイベント" style="width:70%;">}}
 
 ## カスタムパース関数への追加パラメーターの送信
 
@@ -223,7 +223,7 @@ dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser:customvar1
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 
-**parser_args** には、(customvar1, customvar2) に対応するタプルパラメーターが含まれます。これらは、parser_args[0] および parser_args[1] としてコードで使用できます。
+**parser_args** には、(`<CUSTOM_VAR_1>`, `<CUSTOM_VAR_2>`) に対応するタプルパラメーターが含まれます。これらは、parser_args[0] および parser_args[1] としてコードで使用できます。
 
 **注**: パラメーター **parser_state** を使用する必要はありませんが、関数のシグニチャには入れる必要があります。また、パラメーターが 1 つしかない場合は、**parser_args[1]** を使用してそれを取得する必要があります。
 
@@ -237,9 +237,9 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## トラブルシューティング
 
-バグが発生した場合、ログパーサーからのトレースバックを確認できることがたいへん重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを collector.log ファイルで確認できます ([Agent ログの場所については、こちらを参照してください][6])。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。([エラーを生成する Agent コードサンプルはこちら][9])。
+バグが発生した場合、ログパーサーからのトレースバックを確認できることがたいへん重要です。それには、[Agent ログ][6]を "DEBUG" レベルに設定して Agent を実行します。Agent のログレベルを設定するには、`datadog.conf` で、[この行][7]のコメントを解除して編集した後、[Agent を再起動][8]します。適切に設定すると、カスタムログパーサーのエラーから生成されたトレースバックを `collector.log` ファイルで確認できます。通常、トレースバックには "checks.collector(datadog.py:278) | Error while parsing line" のような文字列が含まれます。(エラーを生成する [Agent コードサンプル][9]もご参照ください)。
 
-カスタムログパーサーに変更を加えた場合は必ず、[Agent を再起動][8]して、変更を有効にしてください。
+**注**: カスタムログパーサーに変更を加えた場合は必ず、[Agent を再起動][8]して、変更を有効にしてください。
 
 カスタムログパーサー関数では対応できないエラーが発生していると思われる場合は、いつでも[サポートにお問い合わせください][10]。ただし、お問い合わせいただく前に、Agent のログレベルを "DEBUG" に設定して Agent を数分間実行します。新しいログがファイルに追加されることを確認し、Agent から [flare コマンドを実行][11]してください。これにより、サポートチームが問題を効果的にトラブルシューティングするために必要な情報を得られるようになります。
 

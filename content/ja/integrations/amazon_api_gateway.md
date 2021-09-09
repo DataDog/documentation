@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: ゲートウェイエラー、キャッシュのヒット/ミス、リクエストレイテンシーを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_api_gateway/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_api_gateway/
 draft: false
 git_integration_title: amazon_api_gateway
 has_logo: true

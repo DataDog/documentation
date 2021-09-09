@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Data Factory.
-doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_data_factory/'
 draft: false
 git_integration_title: azure_data_factory
 has_logo: true

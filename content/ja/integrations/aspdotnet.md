@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md
 display_name: ASP.NET
 draft: false
 git_integration_title: aspdotnet

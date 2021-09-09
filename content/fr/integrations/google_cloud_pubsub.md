@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Pub/Sub."
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_pubsub/'
 draft: false
 git_integration_title: google_cloud_pubsub
 has_logo: true

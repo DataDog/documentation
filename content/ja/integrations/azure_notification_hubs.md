@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Notification Hubs のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_notification_hubs/'
+doc_link: https://docs.datadoghq.com/integrations/azure_notification_hubs/
 draft: false
 git_integration_title: azure_notification_hubs
 has_logo: true

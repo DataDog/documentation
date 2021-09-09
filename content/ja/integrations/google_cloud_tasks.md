@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud Tasks のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tasks/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_tasks/
 draft: false
 git_integration_title: google_cloud_tasks
 has_logo: true

@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Stockage Table Azure.
-doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_table_storage/'
 draft: false
 git_integration_title: azure_table_storage
 has_logo: true

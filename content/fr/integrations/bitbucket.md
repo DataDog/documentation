@@ -6,10 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Visualisez les commits et les pull requests qui affectent les performances de l'ensemble de vos services.
-doc_link: https://docs.datadoghq.com/integrations/bitbucket/
+doc_link: 'https://docs.datadoghq.com/integrations/bitbucket/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
+  - link: 'https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/'
     tag: Blog
     text: "Bitbucket et Datadog\_: découvrez l'impact des changements de code sur votre infrastructure"
 git_integration_title: bitbucket

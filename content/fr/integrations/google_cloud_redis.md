@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Memorystore pour Redis."
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_redis/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_redis/'
 draft: false
 git_integration_title: google_cloud_redis
 has_logo: true
