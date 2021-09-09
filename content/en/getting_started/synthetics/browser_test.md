@@ -26,7 +26,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 ### Configure your test details
 
-1. In the Datadog application, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
+1. In the Datadog site, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
 2. In the top right corner, click the **New Test** button.
 3. Select **Browser Test**.
 4. Define your browser test:
