@@ -8,6 +8,8 @@ description: Configure automatic notifications for incidents
 This feature is in open beta. Email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a> to ask questions or to provide feedback on this feature.
 </div>
 
+TODO: Content for the rest of settings
+
 # Overview
 
 Notification Rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use Notification Rules to ensure key stakeholders are always made aware of high priority incidents or to notify external systems whenever a new incident is declared or updated.

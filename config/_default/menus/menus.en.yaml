@@ -1454,16 +1454,26 @@ main:
     parent: alerting
     identifier: incidents
     weight: 8
+  - name: Incident Details
+    url: monitors/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 801
+  - name: Incident Settings
+    url: monitors/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 802
+  - name: Incident Management Analytics
+    url: monitors/incident_management/incident_management_analytics
+    parent: incidents
+    identifier: incidents_management_analytics
+    weight: 803
   - name: Datadog Clipboard
     url: monitors/incident_management/datadog_clipboard
     parent: incidents
     identifier: incidents_clipboard
-    weight: 801
-  - name: Notification Rules
-    url: monitors/incident_management/notification_rules
-    parent: incidents
-    identifier: notification_rules
-    weight: 802
+    weight: 804
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
