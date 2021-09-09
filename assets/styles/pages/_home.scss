@@ -193,6 +193,7 @@
             i[class*='icon-'] {
                 background: linear-gradient(45deg, #ae25b4, #632ca6);
                 background-clip: text;
+                -webkit-background-clip: text;
                 --webkit-text-fill-color: transparent;
             }
 
