@@ -70,7 +70,7 @@ Application processes that have both [APM distributed tracing][4] and continuous
 
 ### Find changes in performance by comparing profiles
 
-Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. Profiler offers [comparison visualizations][6] to make sense of why profiles are different based on time frames or tags that you scope by. 
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][6] to make sense of why profiles are different based on time frames or tags that you scope by. 
 
 ## Further Reading
 
