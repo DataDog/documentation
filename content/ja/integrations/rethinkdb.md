@@ -4,8 +4,6 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
-  docs:
-    spec: assets/docs/spec.yaml
   logs:
     source: rethinkdb
   metrics_metadata: metadata.csv
@@ -123,28 +121,22 @@ Kubernetes 環境でログを収集する Agent を構成する追加の情報�
 
 ## 収集データ
 
-
-
 ### メトリクス
 {{< get-metrics-from-git "rethinkdb" >}}
-
-
-### サービスのチェック
-
-- `rethinkdb.can_connect`: 構成された RethinkDB サーバーに Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで旧バージョンの読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.ready_for_writes`: テーブルのすべてのシャードで書き込みクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.all_replicas_ready`: すべてのレプリカで読み取りと書き込みの処理が可能であれば `OK` を、それ以外の場合（バックフィルが進行中であるなど）は `WARNING` を返します。
 
 
 ### イベント
 
 RethinkDB には、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "rethinkdb" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+
 
 [1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -157,4 +149,5 @@ RethinkDB には、イベントは含まれません。
 [9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/assets/service_checks.json
+[13]: https://docs.datadoghq.com/ja/help/

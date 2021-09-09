@@ -33,6 +33,9 @@ further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
+  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+    tag: "Blog"
+    text: "Deploy ASP.NET Core applications to Azure App Service"
 ---
 
 ## Compatibility requirements
@@ -486,6 +489,10 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs.
+
+`DD_MAX_TRACES_PER_SECOND`
+: **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
+The number of traces allowed to be submitted per second.
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>

@@ -394,7 +394,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
 
 3. Or defined in a global configuration file:
 
-     The global JSON configuration file can specify additional advanced options. Specify the path to this file using the flag `--config` [when launching your tests](#running-tests). If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
+     The global JSON configuration file can specify additional advanced options. Specify the path to this file using the flag `--config` [when launching your tests](#run-tests). If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
 
 In the global configuration file, you can configure the following options: 
 

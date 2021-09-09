@@ -95,7 +95,7 @@ main_left:
     parent: product
   - identifier: alerts
     name: Alerts
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert-1.svg'' alt=''alert icon''>'
     url: 'https://www.datadoghq.com/product/alerts'
     weight: 16
     parent: product
@@ -802,6 +802,42 @@ main:
     identifier: integration_guides
     parent: integrations_top_level
     weight: 1
+  - name: Request Datadog Integrations
+    url: integrations/guide/requests/
+    parent: integration_guides
+    weight: 10
+  - name: AWS CloudWatch Metric Streams with Kinesis Data Firehose
+    url: integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+    parent: integration_guides
+    weight: 11
+  - name: Amazon CloudFormation
+    url: integrations/guide/amazon_cloudformation/
+    parent: integration_guides
+    weight: 12
+  - name: Azure Portal
+    url: integrations/guide/azure-portal/
+    parent: integration_guides
+    weight: 13
+  - name: Mongo Custom Metrics
+    url: integrations/guide/mongo-custom-query-collection/
+    parent: integration_guides
+    weight: 14
+  - name: Prometheus Metrics
+    url: integrations/guide/prometheus-metrics/
+    parent: integration_guides
+    weight: 15
+  - name: Prometheus and OpenMetrics from a Host
+    url: integrations/guide/prometheus-host-collection/
+    parent: integration_guides
+    weight: 16
+  - name: SQL Server Custom Metrics
+    url: integrations/guide/collect-sql-server-custom-metrics/
+    parent: integration_guides
+    weight: 17
+  - name: Freshservice Tickets Using Webhooks
+    url: integrations/guide/freshservice-tickets-using-webhooks/
+    parent: integration_guides
+    weight: 18
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -817,6 +853,26 @@ main:
     identifier: events_guides
     parent: events_top_level
     weight: 1
+  - name: Custom Agent Check
+    url: events/guides/agent/
+    parent: events_guides
+    weight: 100
+  - name: DogStatsD
+    url: events/guides/dogstatsd/
+    parent: events_guides
+    weight: 101
+  - name: Email
+    url: events/guides/email/
+    parent: events_guides
+    weight: 102
+  - name: Email
+    url: events/guides/email/
+    parent: events_guides
+    weight: 103
+  - name: API
+    url: api/latest/events/#post-an-event
+    parent: events_guides
+    weight: 104
   - name: Dashboards
     url: dashboards/
     pre: nav_dashboards
@@ -837,7 +893,112 @@ main:
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
+    identifier: dashboards_widgets
     weight: 4
+  - name: Alert Graph
+    url: dashboards/widgets/alert_graph/
+    parent: dashboards_widgets
+    weight: 10
+  - name: Alert Value
+    url: dashboards/widgets/alert_value/
+    parent: dashboards_widgets
+    weight: 11
+  - name: Change
+    url: dashboards/widgets/change/
+    parent: dashboards_widgets
+    weight: 12
+  - name: Check Status
+    url: dashboards/widgets/check_status/
+    parent: dashboards_widgets
+    weight: 13
+  - name: Distribution
+    url: dashboards/widgets/distribution/
+    parent: dashboards_widgets
+    weight: 14
+  - name: Event Stream
+    url: dashboards/widgets/event_stream/
+    parent: dashboards_widgets
+    weight: 15
+  - name: Event Timeline
+    url: dashboards/widgets/event_timeline/
+    parent: dashboards_widgets
+    weight: 16
+  - name: Free Text
+    url: dashboards/widgets/free_text/
+    parent: dashboards_widgets
+    weight: 17
+  - name: Geomap
+    url: dashboards/widgets/geomap/
+    parent: dashboards_widgets
+    weight: 18
+  - name: Group
+    url: dashboards/widgets/group/
+    parent: dashboards_widgets
+    weight: 19
+  - name: Heat Map
+    url: dashboards/widgets/heat_map/
+    parent: dashboards_widgets
+    weight: 20
+  - name: Host Map
+    url: dashboards/widgets/hostmap/
+    parent: dashboards_widgets
+    weight: 21
+  - name: Iframe
+    url: dashboards/widgets/iframe/
+    parent: dashboards_widgets
+    weight: 22
+  - name: Image
+    url: dashboards/widgets/image/
+    parent: dashboards_widgets
+    weight: 23
+  - name: Log Stream
+    url: dashboards/widgets/log_stream/
+    parent: dashboards_widgets
+    weight: 24
+  - name: Monitor Summary
+    url: dashboards/widgets/monitor_summary/
+    parent: dashboards_widgets
+    weight: 25
+  - name: Network
+    url: dashboards/widgets/network/
+    parent: dashboards_widgets
+    weight: 26
+  - name: Notes and Links
+    url: dashboards/widgets/note/
+    parent: dashboards_widgets
+    weight: 27
+  - name: Query Value
+    url: dashboards/widgets/query_value/
+    parent: dashboards_widgets
+    weight: 28
+  - name: Scatter Plot
+    url: dashboards/widgets/scatter_plot/
+    parent: dashboards_widgets
+    weight: 29
+  - name: SLO Summary
+    url: dashboards/widgets/slo/
+    parent: dashboards_widgets
+    weight: 30
+  - name: Service Map
+    url: dashboards/widgets/service_map/
+    parent: dashboards_widgets
+    weight: 31
+  - name: Service Summary
+    url: dashboards/widgets/service_summary/
+    parent: dashboards_widgets
+    weight: 32
+  - name: Table
+    url: dashboards/widgets/table/
+    parent: dashboards_widgets
+    weight: 33
+  - name: Timeseries
+    url: dashboards/widgets/timeseries/
+    parent: dashboards_widgets
+    weight: 34
+  - name: Top List
+    url: dashboards/widgets/top_list/
+    parent: dashboards_widgets
+    weight: 35
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
@@ -952,10 +1113,14 @@ main:
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 101
+  - name: Generate Process Metrics
+    url: infrastructure/process/generate_process_metrics/
+    parent: infrastructure
+    weight: 6
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
-    weight: 6
+    weight: 7
   - name: Serverless
     url: serverless
     pre: nav_serverless
@@ -1086,6 +1251,22 @@ main:
     identifier: serverless_guides
     parent: serverless
     weight: 9
+  - name: Datadog Forwarder - Node
+    url: serverless/guide/datadog_forwarder_node/
+    parent: serverless_guides
+    weight: 10
+  - name: Datadog Forwarder - Python
+    url: serverless/guide/datadog_forwarder_python/
+    parent: serverless_guides
+    weight: 11
+  - name: Migrating to the Datadog Lambda Extension
+    url: serverless/guide/extension_motivation/
+    parent: serverless_guides
+    weight: 12
+  - name: Migrating from the Datadog Forwarder to the Datadog Lambda Extension
+    url: serverless/guide/forwarder_extension_migration/
+    parent: serverless_guides
+    weight: 13
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1144,7 +1325,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 604
   - name: 'Submission - API '
-    url: api/v1/metrics/#submit-metrics
+    url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 605
@@ -1155,7 +1336,7 @@ main:
     weight: 120000
   - name: Alerting
     url: monitors/
-    pre: nav_alerting
+    pre: alert
     identifier: alerting
     weight: 130000
   - name: Monitors
@@ -1302,6 +1483,7 @@ main:
     url: monitors/guide/
     weight: 100
     parent: alerting
+    identifier: alerting_guide
   - name: APM & Continuous Profiler
     url: tracing/
     pre: nav_tracing
@@ -1313,102 +1495,102 @@ main:
     parent: tracing
     weight: 1
   - name: Compatibility
-    url: tracing/setup_overview/compatibility_requirements/java
+    url: tracing/setup_overview/compatibility_requirements/java/
     identifier: tracing_compatibility_requirements
     parent: tracing_setup_overview
     weight: 101
   - name: Java
-    url: tracing/setup_overview/compatibility_requirements/java
+    url: tracing/setup_overview/compatibility_requirements/java/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_java
     weight: 101
   - name: Python
-    url: tracing/setup_overview/compatibility_requirements/python
+    url: tracing/setup_overview/compatibility_requirements/python/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_python
     weight: 102
   - name: Ruby
-    url: tracing/setup_overview/compatibility_requirements/ruby
+    url: tracing/setup_overview/compatibility_requirements/ruby/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_ruby
     weight: 103
   - name: Go
-    url: tracing/setup_overview/compatibility_requirements/go
+    url: tracing/setup_overview/compatibility_requirements/go/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_go
     weight: 104
   - name: NodeJS
-    url: tracing/setup_overview/compatibility_requirements/nodejs
+    url: tracing/setup_overview/compatibility_requirements/nodejs/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_nodejs
     weight: 105
   - name: PHP
-    url: tracing/setup_overview/compatibility_requirements/php
+    url: tracing/setup_overview/compatibility_requirements/php/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_php
     weight: 106
   - name: C++
-    url: tracing/setup_overview/compatibility_requirements/cpp
+    url: tracing/setup_overview/compatibility_requirements/cpp/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_cpp
     weight: 107
   - name: .NET Core
-    url: tracing/setup_overview/compatibility_requirements/dotnet-core
+    url: tracing/setup_overview/compatibility_requirements/dotnet-core/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_core
     weight: 108
   - name: .NET Framework
-    url: tracing/setup_overview/compatibility_requirements/dotnet-framework
+    url: tracing/setup_overview/compatibility_requirements/dotnet-framework/
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_framework
     weight: 109
   - name: Add the Datadog Tracing Library
-    url: tracing/setup_overview/setup/java
+    url: tracing/setup_overview/setup/java/
     parent: tracing_setup_overview
     identifier: tracing_setup_overview_setup
     weight: 102
   - name: Java
-    url: tracing/setup_overview/setup/java
+    url: tracing/setup_overview/setup/java/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_java
     weight: 101
   - name: Python
-    url: tracing/setup_overview/setup/python
+    url: tracing/setup_overview/setup/python/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_python
     weight: 102
   - name: Ruby
-    url: tracing/setup_overview/setup/ruby
+    url: tracing/setup_overview/setup/ruby/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_ruby
     weight: 103
   - name: Go
-    url: tracing/setup_overview/setup/go
+    url: tracing/setup_overview/setup/go/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_go
     weight: 104
   - name: NodeJS
-    url: tracing/setup_overview/setup/nodejs
+    url: tracing/setup_overview/setup/nodejs/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_nodejs
     weight: 105
   - name: PHP
-    url: tracing/setup_overview/setup/php
+    url: tracing/setup_overview/setup/php/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_php
     weight: 106
   - name: C++
-    url: tracing/setup_overview/setup/cpp
+    url: tracing/setup_overview/setup/cpp/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_cpp
     weight: 107
   - name: .NET Core
-    url: tracing/setup_overview/setup/dotnet-core
+    url: tracing/setup_overview/setup/dotnet-core/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_dotnet_core
     weight: 108
   - name: .NET Framework
-    url: tracing/setup_overview/setup/dotnet-framework
+    url: tracing/setup_overview/setup/dotnet-framework/
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
@@ -1418,42 +1600,42 @@ main:
     identifier: tracing_open_standards_open_standards
     weight: 103
   - name: Java
-    url: tracing/setup_overview/open_standards/java
+    url: tracing/setup_overview/open_standards/java/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_java
     weight: 101
   - name: Python
-    url: tracing/setup_overview/open_standards/python
+    url: tracing/setup_overview/open_standards/python/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_python
     weight: 102
   - name: Ruby
-    url: tracing/setup_overview/open_standards/ruby
+    url: tracing/setup_overview/open_standards/ruby/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_ruby
     weight: 108
   - name: Go
-    url: tracing/setup_overview/open_standards/go
+    url: tracing/setup_overview/open_standards/go/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_go
     weight: 104
   - name: NodeJS
-    url: tracing/setup_overview/open_standards/nodejs
+    url: tracing/setup_overview/open_standards/nodejs/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_nodejs
     weight: 105
   - name: PHP
-    url: tracing/setup_overview/open_standards/php
+    url: tracing/setup_overview/open_standards/php/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_php
     weight: 106
   - name: .NET
-    url: tracing/setup_overview/open_standards/dotnet
+    url: tracing/setup_overview/open_standards/dotnet/
     parent: tracing_open_standards_open_standards
     identifier: tracing_open_standards_open_standards_dotnet
     weight: 108
   - name: Trace Serverless Functions
-    url: serverless/distributed_tracing
+    url: serverless/distributed_tracing/
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
@@ -1463,52 +1645,52 @@ main:
     identifier: tracing_proxy_setup
     weight: 105
   - name: Custom Instrumentation
-    url: tracing/setup_overview/custom_instrumentation/java
+    url: tracing/setup_overview/custom_instrumentation/java/
     parent: tracing_setup_overview
     identifier: tracing_setup_overview_custom_instrumentation
     weight: 106
   - name: Java
-    url: tracing/setup_overview/custom_instrumentation/java
+    url: tracing/setup_overview/custom_instrumentation/java/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_java
     weight: 101
   - name: Python
-    url: tracing/setup_overview/custom_instrumentation/python
+    url: tracing/setup_overview/custom_instrumentation/python/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_python
     weight: 102
   - name: Ruby
-    url: tracing/setup_overview/custom_instrumentation/ruby
+    url: tracing/setup_overview/custom_instrumentation/ruby/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_ruby
     weight: 108
   - name: Go
-    url: tracing/setup_overview/custom_instrumentation/go
+    url: tracing/setup_overview/custom_instrumentation/go/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_go
     weight: 104
   - name: NodeJS
-    url: tracing/setup_overview/custom_instrumentation/nodejs
+    url: tracing/setup_overview/custom_instrumentation/nodejs/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_nodejs
     weight: 105
   - name: PHP
-    url: tracing/setup_overview/custom_instrumentation/php
+    url: tracing/setup_overview/custom_instrumentation/php/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_php
     weight: 106
   - name: C++
-    url: tracing/setup_overview/custom_instrumentation/cpp
+    url: tracing/setup_overview/custom_instrumentation/cpp/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_cpp
     weight: 106
   - name: .NET
-    url: tracing/setup_overview/custom_instrumentation/dotnet
+    url: tracing/setup_overview/custom_instrumentation/dotnet/
     parent: tracing_setup_overview_custom_instrumentation
     identifier: tracing_setup_overview_custom_instrumentation_dotnet
     weight: 108
   - name: Configure Data Security
-    url: tracing/setup_overview/configure_data_security
+    url: tracing/setup_overview/configure_data_security/
     parent: tracing_setup_overview
     identifier: tracing_configure_data_security
     weight: 107
@@ -1526,7 +1708,7 @@ main:
     parent: trace_search_and_analytics
     weight: 404
   - name: Request Flow Map
-    url: tracing/trace_search_and_analytics/request_flow_map
+    url: tracing/trace_search_and_analytics/request_flow_map/
     parent: trace_search_and_analytics
     weight: 405
   - name: Trace Retention and Ingestion
@@ -1535,7 +1717,7 @@ main:
     identifier: trace_retention_and_ingestion
     weight: 5
   - name: Usage Metrics
-    url: tracing/trace_retention_and_ingestion/usage_metrics
+    url: tracing/trace_retention_and_ingestion/usage_metrics/
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
@@ -1555,52 +1737,52 @@ main:
     identifier: tracing_connect_logs_and_traces
     weight: 9
   - name: Java
-    url: tracing/connect_logs_and_traces/java
+    url: tracing/connect_logs_and_traces/java/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
     weight: 901
   - name: Python
-    url: tracing/connect_logs_and_traces/python
+    url: tracing/connect_logs_and_traces/python/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
     weight: 902
   - name: Go
-    url: tracing/connect_logs_and_traces/go
+    url: tracing/connect_logs_and_traces/go/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
     weight: 903
   - name: Ruby
-    url: tracing/connect_logs_and_traces/ruby
+    url: tracing/connect_logs_and_traces/ruby/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
     weight: 904
   - name: PHP
-    url: tracing/connect_logs_and_traces/php
+    url: tracing/connect_logs_and_traces/php/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
     weight: 905
   - name: NodeJS
-    url: tracing/connect_logs_and_traces/nodejs
+    url: tracing/connect_logs_and_traces/nodejs/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
     weight: 906
   - name: .NET
-    url: tracing/connect_logs_and_traces/dotnet
+    url: tracing/connect_logs_and_traces/dotnet/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 907
   - name: OpenTelemetry
-    url: tracing/connect_logs_and_traces/opentelemetry
+    url: tracing/connect_logs_and_traces/opentelemetry/
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_opentelemetry
     weight: 908
   - name: Connect Synthetic Tests and Traces
-    url: synthetics/apm
+    url: synthetics/apm/
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
     weight: 10
   - name: Connect RUM and Traces
-    url: real_user_monitoring/connect_rum_and_traces
+    url: real_user_monitoring/connect_rum_and_traces/
     parent: tracing
     identifier: tracing_connect_rum_and_traces
     weight: 11
@@ -1610,27 +1792,27 @@ main:
     identifier: tracing_runtime_metrics
     weight: 12
   - name: Java
-    url: tracing/runtime_metrics/java
+    url: tracing/runtime_metrics/java/
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_java
     weight: 1201
   - name: Python
-    url: tracing/runtime_metrics/python
+    url: tracing/runtime_metrics/python/
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_python
     weight: 1202
   - name: Ruby
-    url: tracing/runtime_metrics/ruby
+    url: tracing/runtime_metrics/ruby/
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_ruby
     weight: 1203
   - name: NodeJS
-    url: tracing/runtime_metrics/nodejs
+    url: tracing/runtime_metrics/nodejs/
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
     weight: 1204
   - name: .NET
-    url: tracing/runtime_metrics/dotnet
+    url: tracing/runtime_metrics/dotnet/
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_dotnet
     weight: 1205
@@ -1640,42 +1822,42 @@ main:
     identifier: profiler
     weight: 13
   - name: Enabling the Profiler
-    url: tracing/profiler/enabling/java
+    url: tracing/profiler/enabling/java/
     parent: profiler
     identifier: profiler_enabling
     weight: 1301
   - name: Enabling the Java Profiler
-    url: tracing/profiler/enabling/java
+    url: tracing/profiler/enabling/java/
     parent: profiler_enabling
     identifier: profiler_enabling_java
     weight: 101
   - name: Enabling the Python Profiler
-    url: tracing/profiler/enabling/python
+    url: tracing/profiler/enabling/python/
     parent: profiler_enabling
     identifier: profiler_enabling_python
     weight: 102
   - name: Enabling the Go Profiler
-    url: tracing/profiler/enabling/go
+    url: tracing/profiler/enabling/go/
     parent: profiler_enabling
     identifier: profiler_enabling_go
     weight: 103
   - name: Enabling the Ruby Profiler
-    url: tracing/profiler/enabling/ruby
+    url: tracing/profiler/enabling/ruby/
     parent: profiler_enabling
     identifier: profiler_enabling_ruby
     weight: 104
   - name: Search Profiles
-    url: tracing/profiler/search_profiles
+    url: tracing/profiler/search_profiles/
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1302
   - name: Investigate Code Hotspots from Traces
-    url: tracing/profiler/connect_traces_and_profiles
+    url: tracing/profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
     weight: 1303
   - name: Profiler Troubleshooting
-    url: tracing/profiler/profiler_troubleshooting
+    url: tracing/profiler/profiler_troubleshooting/
     parent: profiler
     identifier: profiler_profiler_troubleshooting
     weight: 1304
@@ -1710,7 +1892,7 @@ main:
     parent: tracing
     weight: 15
   - name: Explorer
-    url: tracing/error_tracking/explorer
+    url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
     weight: 1501
@@ -1834,6 +2016,10 @@ main:
     parent: ci
     identifier: ci_guides
     weight: 5
+  - name: Flaky Test Management
+    url: continuous_integration/guides/flaky_test_management/
+    parent: ci_guides
+    weight: 10
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
@@ -1949,7 +2135,7 @@ main:
     url: logs/log_collection/ios/
     parent: log_collection
     weight: 103
-  - name: Csharp
+  - name: C#
     url: logs/log_collection/csharp/
     parent: log_collection
     weight: 104
@@ -1963,7 +2149,7 @@ main:
     parent: log_collection
     identifier: log_collection_java
     weight: 106
-  - name: Nodejs
+  - name: NodeJS
     url: logs/log_collection/nodejs/
     parent: log_collection
     weight: 107
@@ -2037,11 +2223,6 @@ main:
     parent: log_management
     identifier: logs_traces_connection
     weight: 3
-  - name: Correlate Logs with Metrics
-    url: logs/guide/correlate-logs-with-metrics/
-    parent: log_management
-    identifier: logs_metrics_correlation
-    weight: 4
   - name: Log Explorer
     url: logs/explorer/
     parent: log_management
@@ -2186,10 +2367,18 @@ main:
     identifier: signals_explorer
     weight: 6
   - name: Guides
-    url: security_platform/guide
+    url: security_platform/guide/
     parent: security_platform
     identifier: security_platform_guides
     weight: 7
+  - name: Monitor Authentication Logs for Security Threats
+    url: security_platform/guide/monitor-authentication-logs-for-security-threats/
+    parent: security_platform_guides
+    weight: 10
+  - name: Security Filters with the Security Monitoring API
+    url: security_platform/guide/how-to-setup-security-filters-using-security-monitoring-api/
+    parent: security_platform_guides
+    weight: 11
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
@@ -2283,10 +2472,6 @@ main:
     url: synthetics/metrics/
     parent: synthetics
     weight: 10
-  - name: Identify Synthetic Bots
-    url: synthetics/guide/identify_synthetics_bots/
-    parent: synthetics
-    weight: 11
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
@@ -2436,21 +2621,6 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
     weight: 603
-  - name: Long Task
-    url: real_user_monitoring/data_collected/long_task
-    parent: rum_data_collected
-    identifier: rum_data_collected_long_task
-    weight: 604
-  - name: Error
-    url: real_user_monitoring/data_collected/error
-    parent: rum_data_collected
-    identifier: rum_data_collected_error
-    weight: 605
-  - name: User Action
-    url: real_user_monitoring/data_collected/user_action
-    parent: rum_data_collected
-    identifier: rum_data_collected_user_action
-    weight: 606
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
@@ -2477,10 +2647,26 @@ main:
     identifier: rum_error_tracking_android
     weight: 803
   - name: Guides
-    url: real_user_monitoring/guide
+    url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
     weight: 9
+  - name: Send Custom Actions
+    url: real_user_monitoring/guide/send-rum-custom-actions/
+    parent: rum_guides
+    weight: 10
+  - name: Upload Javascript Source Maps
+    url: real_user_monitoring/guide/upload-javascript-source-maps/
+    parent: rum_guides
+    weight: 11
+  - name: Enrich and Control Browser Data with beforeSend
+    url: real_user_monitoring/guide/enrich-and-control-rum-data/
+    parent: rum_guides
+    weight: 12
+  - name: Upgrade the Browser SDK to V3
+    url: real_user_monitoring/guide/browser-sdk-upgrade/
+    parent: rum_guides
+    weight: 13
   - name: Network Monitoring
     url: network_monitoring/
     pre: nav_network
@@ -2511,6 +2697,22 @@ main:
     identifier: npm_guides
     parent: npm
     weight: 104
+  - name: Manage Cloud Traffic Costs with NPM
+    url: network_monitoring/performance/guide/manage_traffic_costs_with_npm/
+    parent: npm_guides
+    weight: 105
+  - name: Detecting a Network Outage
+    url: network_monitoring/performance/guide/detecting_a_network_outage/
+    parent: npm_guides
+    weight: 106
+  - name: NPM AWS Supported Services
+    url: network_monitoring/performance/guide/aws_supported_services/
+    parent: npm_guides
+    weight: 107
+  - name: NPM GCP Supported Services
+    url: network_monitoring/performance/guide/gcp_supported_services
+    parent: npm_guides
+    weight: 108
   - name: DNS Monitoring
     url: network_monitoring/dns/
     parent: nm_parent
@@ -2546,6 +2748,22 @@ main:
     parent: ndm
     identifier: ndm_guide
     weight: 305
+  - name: Tags with Regex
+    url: network_monitoring/devices/guide/tags-with-regex/
+    parent: ndm_guide
+    weight: 400
+  - name: Cluster Agent
+    url: network_monitoring/devices/guide/cluster-agent/
+    parent: ndm_guide
+    weight: 401
+  - name: Build a Profile
+    url: network_monitoring/devices/guide/build-ndm-profile/
+    parent: ndm_guide
+    weight: 402
+  - name: Migrating to the SNMP Core Check
+    url: network_monitoring/devices/guide/migrating-to-snmp-core-check/
+    parent: ndm_guide
+    weight: 403
   - name: Developers
     url: developers/
     pre: nav_developers
@@ -2709,7 +2927,7 @@ main:
     parent: account_management_saml
     weight: 404
   - name: NoPassword
-    url: account_management/saml/nopassword/
+    url: account_management/saml/lastpass/
     parent: account_management_saml
     weight: 405
   - name: Okta

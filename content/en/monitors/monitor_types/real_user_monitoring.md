@@ -21,7 +21,7 @@ Once [Real User Monitoring is enabled][1] for your organization, you can create 
 
 To create a [RUM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Real User Monitoring*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 RUM monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
 ### Define the search query
 

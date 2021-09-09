@@ -14,7 +14,7 @@ further_reading:
 ---
 ログイン後に配置されているジャーニーを監視する必要がある場合、Datadog のブラウザテストでアプリケーションのログイン手順を実行しログイン後のページ検証を実行するには 2 つの方法があります。
 
-- [記録にログイン手順を含める](#include-the-login-in-your-recording)
+- [記録にログイン手順を含める](#include-the-login-steps-in-your-recording)
 - [ブラウザのテストコンフィギュレーションオプションを活用する](#leverage-browser-test-configuration-options)
 
 [セキュリティ保護されたグローバル変数を使用](#account-security)することで、認証情報をアプリケーション全体で確実に難読化し安全に保存することもできます。

@@ -10,7 +10,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
 display_name: TCP Queue Length
 draft: false
 git_integration_title: tcp_queue_length

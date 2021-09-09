@@ -28,15 +28,15 @@ Estimated usage metrics are generally available for the following usage types:
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes`          |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events`   |
 | Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   |
-| APM Hosts                     | `datadog.estimated_usage.apm_hosts`      |
+| APM Hosts                     | `datadog.estimated_usage.apm_hosts` (does not include Azure App Services hosts)      |
 | APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` |
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` |
 | Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`|
-
-Log-based usage metrics must be manually enabled from the [Generate Metrics][1] page.
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` |
+| Profiled Containers           | `datadog.estimated_usage.profiling.containers` |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
@@ -48,10 +48,9 @@ For accounts with multiple organizations, you can roll up estimated usage from c
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][2].
+For technical questions, contact [Datadog support][1].
 
-For billing questions, contact your [Customer Success][3] Manager.
+For billing questions, contact your [Customer Success][2] Manager.
 
-[1]: /logs/logs_to_metrics/#recommended-usage-metrics
-[2]: /help/
-[3]: mailto:success@datadoghq.com
+[1]: /help/
+[2]: mailto:success@datadoghq.com

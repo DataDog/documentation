@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 新しいチケットと解決済みチケットを追跡。Datadog モニターからチケットを自動生成。
-doc_link: 'https://docs.datadoghq.com/integrations/zendesk/'
+doc_link: https://docs.datadoghq.com/integrations/zendesk/
 draft: false
 git_integration_title: zendesk
 has_logo: true

@@ -22,7 +22,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/varnish/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
 display_name: Varnish
 draft: false
 git_integration_title: varnish

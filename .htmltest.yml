@@ -1,0 +1,38 @@
+DirectoryPath: "public"
+
+# Speeds things up but may cause errors in some cases
+TestFilesConcurrently: true
+
+# General config
+CheckDoctype: false
+CheckGeneric: false
+CheckExternal: false
+CheckImages: false
+IgnoreAltMissing: true
+CheckInternal: true
+CheckInternalHash: false
+CheckMailto: false
+CheckMeta: false
+CheckScripts: false
+StripQueryString: false
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreEmptyHref: true
+IgnoreInternalEmptyHash: true
+
+# Ignore paths
+IgnoreDirs:
+  - api
+  - fr
+  - ja
+IgnoreURLs:
+  - /api/[v1|v2]
+  - play.google.com
+  - "[linkedin|twitter|instagram].com"
+  - github.com
+  - "[api|app|apt|gov|learn|us1|us3|www|yum].datadoghq.com"
+  - "127.0.0.1"
+  - "https://trello.com/app-key"
+  - "https://docs.perimeterx.com"
+
+# StripQueryExcludes:
+#   - 
