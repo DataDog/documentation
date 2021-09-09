@@ -80,11 +80,19 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ## Widgets
 
+### Monitor SLOs
+
+{{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+Monitor your [SLOs][13] from your home screen with Datadog widgets. You can choose which dashboard opens in the app when you tap on a SLO cell, allowing you to easily view SLO-related insights.
+
+**Note**: If you do not choose a dashboard to open in the app when you tap on a SLO cell, the widget will direct you to the last app view by default.
+
 ### Monitor saved views
 
 {{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitor saved views][13] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
+View your [monitor saved views][14] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
@@ -171,7 +179,7 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][14] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][15] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
 ## Search from home screen
 
@@ -193,7 +201,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][15].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][16].
 
 ## Handoff
 
@@ -206,7 +214,7 @@ For Handoff to work, each device must:
 - Have Wi-Fi enabled
 - Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][16].
+For more information on Handoff, refer to the [Apple Handoff Documentation][17].
 
 ## Account
 
@@ -214,7 +222,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][17]. You can also send a message in the [Datadog public Slack][18] [#mobile-app][19] channel.
+For help with troubleshooting, [contact Datadog support][18]. You can also send a message in the [Datadog public Slack][19] [#mobile-app][20] channel.
 
 ### Further Reading
 
@@ -232,10 +240,11 @@ For help with troubleshooting, [contact Datadog support][17]. You can also send 
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
 [12]: /monitors/incident_management
-[13]: /logs/explorer/saved_views/
-[14]: https://app.datadoghq.com/dashboard/lists/preset/5
-[15]: https://support.apple.com/en-us/HT209055
-[16]: https://support.apple.com/en-us/HT209455
-[17]: /help/
-[18]: https://chat.datadoghq.com/
-[19]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[13]: https://docs.datadoghq.com/dashboards/widgets/slo/#setup
+[14]: /logs/explorer/saved_views/
+[15]: https://app.datadoghq.com/dashboard/lists/preset/5
+[16]: https://support.apple.com/en-us/HT209055
+[17]: https://support.apple.com/en-us/HT209455
+[18]: /help/
+[19]: https://chat.datadoghq.com/
+[20]: https://datadoghq.slack.com/archives/C0114D5EHNG
