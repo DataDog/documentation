@@ -134,13 +134,13 @@ Once enabled, the following profile types are collected:
 
 
 CPU Time
-: Shows the time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep is not captured in this profile, see Mutex and Block profile.
+: Shows the time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep are not captured in this profile. See Mutex and Block profiles.
 
 Allocations
-: Shows the number of objects allocated by each function in heap memory during the profiling period (default: 60s, see [delta profiles][1]), including allocations which were subsequently freed. Go calls this `alloc_objects`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
+: Shows the number of objects allocated by each function in heap memory during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_objects`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Allocated Memory
-: Shows the amount of heap memory allocated by each function during the profiling period (default: 60s, see [delta profiles][1]), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load.
+: Shows the amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Heap Live Objects
 : Shows the number of objects allocated by each function in heap memory that have not been garbage collected (yet). Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
@@ -149,17 +149,20 @@ Heap Live Size
 : Shows the amount of heap memory allocated by each function that has not been garbage collected (yet). Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Mutex
-: Shows the time functions have been waiting on mutexes during the profiling period (default: 60s, see [delta profiles][1]). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile.
+: Shows the time functions have been waiting on mutexes during the profiling period (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Block
-: Shows the time functions have been waiting on mutexes and channel operations during the profiling period (default: 60s, see [delta profiles][1]). Sleep, GC, Network and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This will tell you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][2] research for more in-depth information.
+: Shows the time functions have been waiting on mutexes and channel operations during the profiling period (default: 60s). Sleep, GC, Network and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This will tell you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][1] research for more in-depth information. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Goroutines
-: Shows a snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and shows the number of goroutines they utilize. Applications that are extremely latency sensitive and utilize a large number of goroutines (> 10.000) should be aware that enabling this profile requires O(N) stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][3] research for more in-depth information.
+: Shows a snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and shows the number of goroutines they utilize. Applications that are extremely latency sensitive and utilize a large number of goroutines (> 10.000) should be aware that enabling this profile requires O(N) stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][2] research for more in-depth information.
 
-[1]: https://dtdg.co/go-delta-profiles
-[2]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
-[3]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
+
+#### Delta profiles
+<div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated memory, Mutex, and Block metrics are shown as measures <em>since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. The accumulated measures are collected and you can download them from the <strong>Download Profile Data</strong> icon by selecting the <code>block.pprof</code>, <code>heap.pprof</code>, and <code>mutex.pprof</code> options. <br/><br/>Storing the accumulated measures is an option Datadog might stop providing in future releases. <a href="/help/">Contact Support</a> to discuss your use case if you rely on it.</div>
+
+[1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
+[2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
