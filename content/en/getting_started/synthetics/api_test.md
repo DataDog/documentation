@@ -22,11 +22,11 @@ further_reading:
 
 ## Overview
 
-API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes that allow you to launch requests on the **different network layers of your systems** (HTTP, SSL, DNS, TCP, ICMP). [Multistep API tests][2] enable you to run HTTP tests in sequence to **monitor the uptime of key journeys at the API level**.
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes that allow you to launch requests on the **different network layers of your systems** (HTTP, SSL, DNS, TCP, and ICMP). [Multistep API tests][2] enable you to run HTTP tests in sequence to **monitor the uptime of key journeys at the API level**.
 
 ## Create a single API test
 
-The example below demonstrates the creation of an [HTTP test][3], a subtype of [single API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers or body contents.
+The example below demonstrates the creation of an [HTTP test][3], a subtype of [single API tests][1]. [HTTP tests][1] **monitor your API endpoints** and **alert you** when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers, or body contents.
 
 ### Define request
 
@@ -53,7 +53,7 @@ In this example, three default assertions populate after triggering the sample t
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions" style="width:100%;">}}
 
-Assertions are fully customizable. To add a custom assertion, click on elements of the response preview like the headers or click **New Assertion** to define a new assertion from scratch. 
+Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
 
 {{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true"  >}}
 
@@ -65,7 +65,7 @@ Select one or more **Managed Locations** or **[Private Locations][10]** to run y
 
 Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your private locations instead.
 
-The Shopist application is publicly available, you can consequently go ahead and pick any managed locations you want to execute your test from.
+The Shopist application is publicly available at `https://www.shopist.io/` and you can pick any managed locations to execute your test from.
 
 ### Specify test frequency
 
@@ -91,33 +91,36 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Notify your team
 
-Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][12] such as Slack, PagerDuty, Microsoft Teams, and webhooks. Note that in order to be able to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][13].
+Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][11] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][12].
 
 When you're ready to run your test, click **Save Test**. 
 
 ## Create a multistep API test
 
-[Multistep API tests][2] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. Multistep API tests also allow you to create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
+[Multistep API tests][3] enable you to **monitor key business transactions at the API level**. Similar to [HTTP tests][13], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. Multistep API tests also allow you to create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application.
 
-The example test below demonstrates the creation of a multistep API test, which monitors the addition of an item to a cart. It contains three steps: 
-- Getting a cart, 
-- Getting a product, 
-- And adding the product to the cart. 
+The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. 
+
+This test contains three steps: 
+
+- Getting a cart
+- Getting a product
+- Adding the product to the cart
 
 If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
 
-To create a new multistep API test, click **New Test** > **[Multistep API test][6]**. Add a test name (such as `Add product to cart`), include tags, and select locations. 
+To create a new multistep API test, click **New Test** > **[Multistep API test][5]**. Add a test name such as `Add product to cart`, include tags, and select locations. 
 
 ### Get a cart
 
 1. In **Define steps**, click **Create Your First Step**. 
 2. Add a name to your step, for example: `Get a cart`.
-3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and `https://api.shopist.io/carts`. 
+3. Specify the HTTP method and the URL you want to query. You can enter `POST` and `https://api.shopist.io/carts`. 
 4. Click **Test URL**. This creates a cart item in the Shopist application's backend.
 5. Leave the default assertions or modify them.
 6. Optionally, define execution parameters. 
 
-    Select **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed regardless of previous steps' success or failure. The **Retry** step feature can come in handy in situations where you know your API endpoint may take some time before responding. 
+    Selecting **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed, regardless of previous steps' success or failure. The **Retry** step feature is handy in situations where you know your API endpoint may take some time before responding. 
     
     In this example, no specific execution parameter is needed. 
 
@@ -190,8 +193,8 @@ With Datadog's [APM integration with Synthetic Monitoring][7], access the root c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/api_tests/
-[2]: /synthetics/multistep
-[3]: /synthetics/api_tests/http_tests
+[2]: /integrations/#cat-notification
+[3]: /synthetics/multistep
 [4]: https://app.datadoghq.com/synthetics/list
 [5]: https://app.datadoghq.com/synthetics/create
 [6]: https://app.datadoghq.com/synthetics/multi-step/create
@@ -200,5 +203,5 @@ With Datadog's [APM integration with Synthetic Monitoring][7], access the root c
 [9]: /synthetics/api_tests/http_tests#variables
 [10]: /getting_started/synthetics/private_location
 [11]: /synthetics/ci
-[12]: /integrations/#cat-notification
-[13]: https://app.datadoghq.com/account/settings
+[12]: https://app.datadoghq.com/account/settings
+[13]: /synthetics/api_tests/http_tests
