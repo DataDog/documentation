@@ -1856,11 +1856,16 @@ main:
     parent: profiler
     identifier: profiler_traces_profiles
     weight: 1303
+  - name: Compare Profiles
+    url: tracing/profiles/compare_profiles
+    parent: profiler
+    identifier: profiler_compare
+    weight: 1304
   - name: Profiler Troubleshooting
     url: tracing/profiler/profiler_troubleshooting/
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 1304
+    weight: 1305
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
