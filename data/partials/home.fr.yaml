@@ -42,7 +42,7 @@ nav_sections:
             desc: Créer et gérer des monitors et des notifications
           - title: APM et tracing distribué
             link: tracing/
-            icon: profiling-1
+            icon: apm
             desc: Étudier précisément les performances de votre application
           - title: Log Management
             link: logs/

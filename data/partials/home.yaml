@@ -46,7 +46,7 @@ nav_sections:
         desc: Create & manage monitors & notifications
       - title: APM & Continuous Profiler
         link: tracing/
-        icon: profiling-1
+        icon: apm
         desc: Gain insight on your application's performance
       - title: Log Management
         link: logs/
