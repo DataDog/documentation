@@ -155,7 +155,7 @@ If there is an active trace when the log is being written, trace and span IDs ar
 [1]: https://docs.datadoghq.com/tracing/setup_overview/setup/dotnet-core/
 [2]: https://docs.microsoft.com/aspnet/core/fundamentals/logging/#log-scopes-1
 [3]: https://github.com/serilog/serilog-extensions-hosting
-[3]: https://github.com/serilog/serilog-extensions-logging
+[4]: https://github.com/serilog/serilog-extensions-logging
 {{% /tab %}}
 {{< /tabs >}}
 
