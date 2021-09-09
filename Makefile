@@ -37,7 +37,7 @@ clean-all: stop  ## Clean everything.
 	make clean-examples
 
 clean-build:  ## Remove build artifacts.
-	@if [ -d public ]; then rm -r public; fi
+	@if [ -d public ]; then rm -rf public; fi
 	@if [ static/images/integrations_logos/2020w2.pdf ]; then \
 	rm -f static/images/integrations_logos/2020w2.pdf ;fi
 
