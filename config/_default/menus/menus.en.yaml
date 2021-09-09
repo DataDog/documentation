@@ -1857,7 +1857,7 @@ main:
     identifier: profiler_traces_profiles
     weight: 1303
   - name: Compare Profiles
-    url: tracing/profiles/compare_profiles
+    url: tracing/profiler/compare_profiles
     parent: profiler
     identifier: profiler_compare
     weight: 1304
