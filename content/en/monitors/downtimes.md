@@ -159,7 +159,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert"  style="width:80%;">}}
 
-**Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
+**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
 
 ### Expiration
 
@@ -169,7 +169,7 @@ If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when
 1. During downtime, notifications for this alert are suppressed.
 2. The monitor remains in an alert state (because the conditions are still met).
 3. The downtime ends.
-4. The alert conditions are met, so a notification is sent.
+4. The alert conditions are still met, so a notification is sent.
 
 **Example 2:** If a monitor is in an alert state *before* a downtime commences and recovers *during* that downtime:
 1. The state transitions from alert to `OK`.
