@@ -80,19 +80,19 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ## Widgets
 
-### Monitor SLOs
+### SLOs widget
 
 {{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-Monitor your [SLOs][13] from your home screen with Datadog widgets. You can choose which dashboard opens in the app when you tap on a SLO cell, allowing you to easily view SLO-related insights.
+View your [SLOs][13] from your home screen with Datadog widgets. You can choose which dashboard opens in the app when you tap on a cell, allowing you to easily view SLO-related insights.
 
 **Note**: If you do not choose a dashboard to open in the app when you tap on a SLO cell, the widget will simply open the app by default.
 
-### Monitor saved views
+### Monitors widget
 
 {{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitor saved views][14] from your home screen with Datadog widgets. Tap on any saved view cell to open the "Monitor Search" screen in the app, with your saved view already filled in.
+View your [monitors][14] from your home screen with Datadog widgets. Tap on any cell to open the "Monitor Search" screen in the app, with your monitors already filled in.
 
 **Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
 
