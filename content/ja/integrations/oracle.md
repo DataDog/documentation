@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/oracle/README.md'
 display_name: Oracle Database
 draft: false
 git_integration_title: oracle

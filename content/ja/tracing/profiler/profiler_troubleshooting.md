@@ -45,33 +45,6 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-## 割り当てプロファイラーの有効化
-
-Java 15 以下では、割り当てが多いアプリケーションでプロファイラーが圧倒される可能性があるため、割り当てプロファイラーはデフォルトでオフになっています。
-
-割り当てプロファイラーを有効にするには、`-Ddd.profiling.allocation.enabled=true` JVM 設定または `DD_PROFILING_ALLOCATION_ENABLED=true` 環境変数を使用してアプリケーションを起動します。
-
-または、`jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file)で次のイベントを有効にすることもできます。
-
-```
-jdk.ObjectAllocationInNewTLAB#enabled=true
-jdk.ObjectAllocationOutsideTLAB#enabled=true
-```
-
-[オーバーライドテンプレートの使用方法はこちら。](#creating-and-using-a-jfr-template-override-file)
-
-## ヒーププロファイラーの有効化
-<div class="alert alert-info">Java ヒーププロファイラー機能はベータ版です。</div>
-ヒーププロファイラーを有効にするには、`-Ddd.profiling.heap.enabled=true` JVM 設定または `DD_PROFILING_HEAP_ENABLED=true` 環境変数を使用してアプリケーションを起動します。
-
-または、`jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file)で次のイベントを有効にすることもできます。
-
-```
-jdk.OldObjectSample#enabled=true
-```
-
-[オーバーライドテンプレートの使用方法はこちら。](#creating-and-using-a-jfr-template-override-file)
-
 ## プロファイルからの機密情報の削除
 
 システムプロパティにユーザー名やパスワードなどの機密情報が含まれている場合は、`jdk.InitialSystemProperty` を無効にして `jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file) を作成し、システムプロパティイベントをオフにします。
@@ -84,18 +57,19 @@ jdk.InitialSystemProperty#enabled=false
 
 ## プロファイラを圧倒する大きな割り当て
 
-割り当てプロファイリングをオフにするには、`jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file)で次のイベントを無効にします。
+割り当てプロファイリングをオフにするには、`jfp` [オーバーライドテンプレートファイル](#large-allocation-events-overwhelming-the-profiler)で次のイベントを無効にします。
 
 ```
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
+jdk.OldObjectSample#enabled=false
 ```
 
 [オーバーライドテンプレートの使用方法はこちら。](#creating-and-using-a-jfr-template-override-file)
 
 ## ガベージコレクターの速度を低下させるメモリリーク検出
 
-メモリリーク検出をオフにするには、`jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file)で次のイベントを無効にします。
+メモリリーク検出をオフにするには、`jfp` [オーバーライドテンプレートファイル](#large-allocation-events-overwhelming-the-profiler)で次のイベントを無効にします。
 
 ```
 jdk.OldObjectSample#enabled=false

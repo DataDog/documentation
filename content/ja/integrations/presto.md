@@ -21,7 +21,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/presto/README.md'
 display_name: Presto
 draft: false
 git_integration_title: presto

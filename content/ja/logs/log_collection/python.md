@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/logs/languages/python
 further_reading:
-  - link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
     tag: ブログ
     text: Python ログの収集、カスタマイズ、一元化方法
   - link: /logs/log_configuration/processors

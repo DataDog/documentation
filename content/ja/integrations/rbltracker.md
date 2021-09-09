@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md'
 display_name: RBLTracker
 draft: false
 git_integration_title: rbltracker

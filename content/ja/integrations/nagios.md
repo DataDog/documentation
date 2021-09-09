@@ -17,7 +17,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
 display_name: Nagios
 draft: false
 git_integration_title: nagios

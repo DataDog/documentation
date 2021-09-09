@@ -14,7 +14,7 @@ categories:
   - 構成 & デプロイ
   - ログの収集
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md'
 aliases:
   - /ja/integrations/cloud_foundry/
 doc_link: /ja/integrations/pivotal_platform/

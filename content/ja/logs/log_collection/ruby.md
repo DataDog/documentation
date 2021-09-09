@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/logs/languages/ruby
 further_reading:
-  - link: https://github.com/roidrage/lograge
+  - link: 'https://github.com/roidrage/lograge'
     tag: Github
     text: Lograge ドキュメント
   - link: /logs/log_configuration/processors

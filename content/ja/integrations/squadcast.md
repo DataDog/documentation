@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
 display_name: Squadcast
 draft: false
 git_integration_title: Squadcast

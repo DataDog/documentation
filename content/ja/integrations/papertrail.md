@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
-doc_link: https://docs.datadoghq.com/integrations/papertrail/
+doc_link: 'https://docs.datadoghq.com/integrations/papertrail/'
 draft: false
 git_integration_title: papertrail
 has_logo: true

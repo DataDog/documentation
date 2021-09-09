@@ -21,7 +21,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
 display_name: PowerDNS Recursor
 draft: false
 git_integration_title: powerdns_recursor

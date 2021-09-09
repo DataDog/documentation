@@ -6,10 +6,10 @@ aliases:
   - /ja/synthetics/uptime_check
   - /ja/synthetics/api_test
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
-  - link: https://learn.datadoghq.com/course/view.php?id=39
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
     tag: ラーニングセンター
     text: Synthetic テストの紹介
   - link: /getting_started/synthetics/api_test
@@ -18,7 +18,7 @@ further_reading:
   - link: /synthetics/private_locations
     tag: Documentation
     text: 内部エンドポイントで API テストを実行する
-  - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog
+  - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog'
     tag: ブログ
     text: Datadog SSL、TLS、Multistep API テストを使用してワークフローを監視する
 ---

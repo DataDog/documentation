@@ -6,6 +6,6 @@ disclaimer: このページは日本語には対応しておりません。随�
 announcement_banner:
   desktop_message: 2021 State of Serverless レポート
   mobile_message: 2021 State of Serverless レポート
-  external_link: https://www.datadoghq.com/state-of-serverless/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerServerlessReport
+  external_link: 'https://www.datadoghq.com/state-of-serverless/?utm_source=Advertisement&utm_medium=Advertisement&utm_campaign=Organic-TopBannerServerlessReport'
 exclude: []
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。

@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
-doc_link: https://docs.datadoghq.com/integrations/opsgenie/
+doc_link: 'https://docs.datadoghq.com/integrations/opsgenie/'
 draft: false
 git_integration_title: opsgenie
 has_logo: true

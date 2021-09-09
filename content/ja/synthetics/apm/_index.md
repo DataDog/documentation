@@ -5,7 +5,7 @@ description: Synthetic モニタリングを使用した APM と分散型トレ�
 aliases:
   - /ja/synthetics/apm
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
   - link: /tracing/

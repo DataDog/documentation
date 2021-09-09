@@ -6,16 +6,16 @@ aliases:
   - /ja/synthetics/browser_check
   - /ja/synthetics/browser_test
 further_reading:
-  - link: https://www.datadoghq.com/blog/browser-tests/
+  - link: 'https://www.datadoghq.com/blog/browser-tests/'
     tag: ブログ
     text: ブラウザテストによるユーザーエクスペリエンスの監視
-  - link: https://learn.datadoghq.com/course/view.php?id=39
+  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
     tag: ラーニングセンター
     text: Synthetic テストの紹介
   - link: /getting_started/synthetics/browser_test
     tag: Documentation
     text: ブラウザテストの概要
-  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
   - link: /synthetics/guide/

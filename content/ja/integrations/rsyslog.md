@@ -13,7 +13,7 @@ has_logo: true
 integration_title: rsyslog
 is_public: true
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md'
 public_title: Datadog-Rsyslog インテグレーション
 supported_os:
   - linux

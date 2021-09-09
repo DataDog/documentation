@@ -12,9 +12,9 @@ aliases:
 
 `autosmooth()` 関数は、自動的に選択されたスパンで移動平均を適用し、トレンドを維持しつつ時系列を滑らかにします。この例では、関数が最適なスパンを選択して時系列を滑らかにしています。
 
-{{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="イラストレーションを自動スムーズ" style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="イラストレーションを自動スムーズ"  style="width:80%;">}}
 
-`avg by` などの `group by` クエリで使用すると、すべての時系列で同じスパンが適用されます。同じグラフ内の複数のメトリクスで使用された場合、メトリクスの時系列それぞれが最適に滑らかになるように、異なるスパンを選択できます。
+`group by` クエリ (例: `avg by`) で使用すると、すべての時系列で同じスパンが適用されます。同じグラフ内の複数のメトリクスで使用された場合、メトリクスの時系列それぞれが最適に滑らかになるように、異なるスパンを選択できます。
 
 アルゴリズムは、[ASAP アルゴリズム][1]の派生型です。詳細については、この[ブログ記事][2]を参照してください。
 
@@ -34,7 +34,7 @@ aliases:
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma3(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/smoothing/ewma3.png" alt="EWMA3" style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma3.png" alt="EWMA3"  style="width:80%;">}}
 
 ### EWMA 5
 
@@ -48,7 +48,7 @@ aliases:
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma5(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5" style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma5.png" alt="EWMA5"  style="width:80%;">}}
 
 ### EWMA 10
 
@@ -62,7 +62,7 @@ aliases:
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma10(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/smoothing/ewma10.png" alt="EWMA10" style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma10.png" alt="EWMA10"  style="width:80%;">}}
 
 ### EWMA 20
 
