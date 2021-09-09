@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Firestore."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firestore/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_firestore/
 draft: false
 git_integration_title: google_cloud_firestore
 has_logo: true

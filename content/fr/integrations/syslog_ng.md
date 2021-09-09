@@ -2,8 +2,8 @@
 title: Syslog-ng
 name: syslog_ng
 kind: integration
-description: 'Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
-short_description: 'Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.'
+description: Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.
+short_description: Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 categories:
   - log collection
 doc_link: /integrations/syslog_ng/
@@ -14,7 +14,7 @@ integration_title: syslog_ng
 is_public: true
 public_title: Intégration Datadog/Syslog-ng
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
 supported_os:
   - linux
   - windows

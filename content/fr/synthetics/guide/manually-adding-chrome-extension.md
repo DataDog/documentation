@@ -2,7 +2,7 @@
 title: Ajouter manuellement l'extension Chrome de test Browser aux boutiques d'applications internes
 kind: guide
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/browser-tests/'
+  - link: https://www.datadoghq.com/blog/browser-tests/
     tag: Blog
     text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
   - link: synthetics/browser_tests

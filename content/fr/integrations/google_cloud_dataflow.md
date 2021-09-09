@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Dataflow."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_dataflow/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
 draft: false
 git_integration_title: google_cloud_dataflow
 has_logo: true

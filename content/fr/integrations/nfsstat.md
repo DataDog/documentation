@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md
 display_name: Nfsstat
 draft: false
 git_integration_title: nfsstat
