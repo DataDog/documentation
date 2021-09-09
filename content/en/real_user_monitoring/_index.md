@@ -45,9 +45,9 @@ Select your application type to start collecting RUM data:
 </br>
 ## Explore Datadog RUM
 
-### Out of the box dashboards
+### Out-of-the-box dashboards
 
-Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out of the box dashboards][1].
+Analyze information about your user journeys, performance, network requests, and errors collected automatically with [out-of-the-box dashboards][1].
 
 {{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
@@ -69,7 +69,7 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.gif" alt="RUM error tracking">}}
 
-## Further Reading 
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

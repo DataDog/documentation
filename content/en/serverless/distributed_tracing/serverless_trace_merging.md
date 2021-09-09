@@ -21,8 +21,8 @@ Note that this may result in higher usage bills. X-Ray spans will continue to be
 
 You can find setup instructions for each of the above use cases below:
 
-- [Trace merging in a serverless-first environment](#trace-merging-in-a-serverless-first-environment)
-- [Trace merging across AWS Lambda and hosts](#trace-merging-across-aws-lambda-and-hosts)
+- [Trace merging in a serverless-first environment](#trace-merging-in-an-AWS-serverless-environment)
+- [Trace merging across AWS Lambda and hosts](#tracing-across-aws-lambda-and-hosts)
 
 ### Trace merging in an AWS serverless environment
 
@@ -37,7 +37,7 @@ Both the AWS X-Ray SDK and Datadog APM client libraries (`dd-trace`) add medatad
 
 ### Tracing across AWS Lambda and hosts
 
-If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services. 
+If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
 If `dd-trace` is installed on your hosts with the Datadog Agent, and your serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
 
@@ -47,7 +47,7 @@ If `dd-trace` is installed on your hosts with the Datadog Agent, and your server
 
 Then, for X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the same `env` tag.
 
-**Note**: Distributed Tracing is supported for any runtime for your host or container-based applications. Your hosts and Lambda functions do not need to be in the same runtime. 
+**Note**: Distributed Tracing is supported for any runtime for your host or container-based applications. Your hosts and Lambda functions do not need to be in the same runtime.
 
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace of a request from a host to a Lambda function" >}}
 

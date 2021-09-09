@@ -50,7 +50,7 @@ For example, to **filter OUT** logs that contain a Datadog email address, use th
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -137,7 +137,7 @@ For example, to **filter IN** logs that contain a Datadog email address, use the
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -152,7 +152,7 @@ logs_config:
 If you want to match one or more patterns you must define them in a single expression:
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -166,7 +166,7 @@ logs_config:
 If the patterns are too long to fit legibly on a single line you can break them into multiple lines:
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /my/test/file.log
     service: cardpayment
@@ -253,7 +253,7 @@ For example, redact credit card numbers:
 {{% tab "Configuration file" %}}
 
 ```yaml
-logs_config:
+logs:
  - type: file
    path: /my/test/file.log
    service: cardpayment
@@ -359,7 +359,7 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 To send the example logs above with a configuration file, use the following `log_processing_rules`:
 
 ```yaml
-logs_config:
+logs:
  - type: file
    path: /var/log/pg_log.log
    service: database
@@ -463,7 +463,7 @@ If your log files are labeled by date or all stored in the same directory, confi
 Configuration example:
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /var/log/myapp/*.log
     exclude_paths:
@@ -484,7 +484,7 @@ If applications logs are written in UTF-16 format, starting with Datadog Agent *
 Configuration example:
 
 ```yaml
-logs_config:
+logs:
   - type: file
     path: /test/log/hello-world.log
     tags: key:value

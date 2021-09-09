@@ -115,7 +115,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
 For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
@@ -347,7 +347,7 @@ Set a number of partial spans to flush on. Useful to reduce memory overhead when
 : **Environment Variable**: `DD_TRACE_SPLIT_BY_TAGS`<br>
 **Default**: `null`<br>
 **Example**: `aws.service`<br>
-Used to rename spans to be identified with the corresponding service tag
+Used to rename the service name associated with spans to be identified with the corresponding span tag
 
 `dd.trace.db.client.split-by-instance`
 : **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
@@ -658,8 +658,7 @@ Java APM has minimal impact on the overhead of an application:
 - No collections maintained by Java APM grow unbounded in memory
 - Reporting traces does not block the application thread
 - Java APM loads additional classes for trace collection and library instrumentation
-- Java APM typically adds no more than a 3% increase in CPU usage
-- Java APM typically adds no more than a 3% increase in JVM heap usage
+- If you observe the Java APM frequently adding substantially more than a 3% increase in CPU or JVM heap usage, in a way that degrades your application's performance, contact [the Support team][20].
 
 
 ## Further Reading
@@ -685,3 +684,4 @@ Java APM has minimal impact on the overhead of an application:
 [17]: /tracing/compatibility_requirements/java#disabling-integrations
 [18]: /integrations/java/?tab=host#metric-collection
 [19]: https://github.com/openzipkin/b3-propagation
+[20]: /help/

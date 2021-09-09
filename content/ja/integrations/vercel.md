@@ -13,11 +13,11 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
 display_name: Vercel
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/
     tag: ブログ
     text: Datadog で Vercel のサーバーレス関数を監視する
 git_integration_title: vercel
@@ -26,7 +26,7 @@ integration_id: vercel
 integration_title: Vercel
 is_public: true
 kind: integration
-maintainer: 'https://docs.datadoghq.com/help/'
+maintainer: https://docs.datadoghq.com/help/
 manifest_version: 1.0.0
 metric_prefix: vercel.
 metric_to_check: ''

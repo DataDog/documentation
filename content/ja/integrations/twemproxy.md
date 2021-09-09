@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
 display_name: Twemproxy
 draft: false
 git_integration_title: twemproxy

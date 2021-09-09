@@ -19,7 +19,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
 display_name: Supervisord
 draft: false
 git_integration_title: supervisord
@@ -180,25 +180,8 @@ instances:
 Supervisor チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "supervisord" >}}
 
-**supervisord.can_connect**:<br>
-構成した HTTP サーバーまたは UNIX ソケットに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-
-**supervisord.process.status**:<br>
-Agent は、supervisord のすべての子プロセス (`proc_names` と `proc_regex` がどちらも設定されていない場合) または一部の子プロセス (`proc_names`、`proc_regex`、またはその両方で設定されているプロセス) について、このサービスチェックを送信します。各サービスチェックは `supervisord_process:<process_name>` でタグ付けされます。
-
-以下のテーブルに、supervisord のステータスに対応する `supervisord.process.status` を示します。
-
-| supervisord ステータス | supervisord.process.status |
-| ------------------ | -------------------------- |
-| STOPPED            | CRITICAL                   |
-| STARTING           | UNKNOWN                    |
-| RUNNING            | OK                         |
-| BACKOFF            | CRITICAL                   |
-| STOPPING           | CRITICAL                   |
-| EXITED             | CRITICAL                   |
-| FATAL              | CRITICAL                   |
-| UNKNOWN            | UNKNOWN                    |
 
 ## トラブルシューティング
 

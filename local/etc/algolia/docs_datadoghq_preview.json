@@ -25,7 +25,8 @@
                     "real_user_monitoring",
                     "developers",
                     "account_management",
-                    "synthetics"
+                    "synthetics",
+                    "database_monitoring"
                 ]
             },
             "tags": ["faq"],
@@ -46,7 +47,8 @@
                     "network_monitoring/devices",
                     "serverless",
                     "real_user_monitoring",
-                    "developers"
+                    "developers",
+                    "database_monitoring"
                 ],
                 "localisation": ["", "/fr", "/ja"]
             },
@@ -114,7 +116,8 @@
                     "synthetics",
                     "tracing",
                     "serverless",
-                    "watchdog"
+                    "watchdog",
+                    "database_monitoring"
                 ]
             },
             "tags": ["docs"],
@@ -256,7 +259,7 @@
     ],
     "conversation_id": ["620036890"],
     "custom_settings": {
-        "separatorsToIndex": "_@.",
+        "separatorsToIndex": "_@.#",
         "attributeForDistinct": "url_without_anchor",
         "attributesForFaceting": ["language", "tags"],
         "optionalWords": ["the", "without"],

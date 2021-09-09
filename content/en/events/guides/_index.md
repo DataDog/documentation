@@ -12,7 +12,11 @@ aliases:
     - /developers/events/
 ---
 
+<<<<<<< HEAD
 ## Send your custom events to Datadog
+=======
+An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to programmatically send events:
+>>>>>>> master
 
 {{< whatsnext desc="Submit events to Datadog with:">}}
     {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}

@@ -76,4 +76,3 @@ In the **full side panel** view, you can see:
 
 [1]: /logs/explorer/facets/
 [2]: /logs/explorer/#patterns
-[3]: /help

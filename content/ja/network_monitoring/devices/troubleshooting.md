@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/network_performance_monitoring/devices/troubleshooting/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
     tag: ブログ
     text: Datadog での SNMP モニタリング
 ---

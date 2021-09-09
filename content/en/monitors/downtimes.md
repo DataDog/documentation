@@ -60,7 +60,7 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="downtime example"  style="width:80%;">}}
 
-4. To schedule a downtime on more than one group (e.g. `service:synthesizer`, `service:consul`, etc.), you can create an additional downtime per group. 
+4. To schedule a downtime on more than one group (such as `service:synthesizer` and `service:consul`), you can create an additional downtime per group.
 
 **Example 2: Mute notifications for a specific environment of a monitor grouped by `env` and `service`**
 
@@ -84,7 +84,7 @@ If a scheduled downtime is based on a common monitor tag and the monitors in sco
 1. *Monitor A* is a multi-alert monitor for hosts reporting a metric averaged across multiple `service` groups.
 2. *Monitor B* is a multi-alert monitor for hosts reporting the same metric for `service:web-store`.
 3. Downtime is scheduled for any monitor that has the `downtime:true` monitor tag.
-4. This downtime is constrained to the group `service:web-store`. 
+4. This downtime is constrained to the group `service:web-store`.
 5. Preview affected monitors shows both monitors have the group `service:web-store` in scope.
 
 {{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="downtime example"  style="width:80%;">}}
@@ -144,8 +144,10 @@ Notify your team by specifying team members or send the message to a service [in
 
 ## Manage
 
-The Manage Downtime page displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Use the _Filter downtimes_ text box to search your downtimes.
-By default this text box searches on the `monitor_name`, `scopes`, `monitor_tags`, `message`, and `status` parameter of the downtines.
+The Manage Downtime page displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
+Use the facets panel and the search bar to filter the list on the `Creator`, the `Scope`, `Monitor Tags`, or `Active`, `Automuted`, `Recurring` parameters.
+
+{{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page" style="width:100%;">}}
 
 ### History
 
@@ -157,17 +159,18 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert"  style="width:80%;">}}
 
-**Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
+**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when downtime expires, the monitor is forced to recover and quickly triggers again if alert conditions are met. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and also to monitors that already have an alert-worthy state when downtime begins. 
+### Expiration
+
+If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.
 2. The monitor remains in an alert state (because the conditions are still met).
 3. The downtime ends.
-4. The monitor is forced to recover.
-5. The alert conditions are met, so a notification is sent.
- 
+4. The alert conditions are still met, so a notification is sent.
+
 **Example 2:** If a monitor is in an alert state *before* a downtime commences and recovers *during* that downtime:
 1. The state transitions from alert to `OK`.
 2. The recovery notification is sent during the downtime, but only for the first recovery during that downtime.

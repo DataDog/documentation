@@ -15,7 +15,7 @@ For a query grouped by one or more [tag keys][1], count the number of tag values
 
 Example: `count_nonzero(system.cpu.user{*} by {host})` returns a timeseries representing the number of hosts with non-zero system load at each point.
 
-{{< img src="dashboards/functions/count/count_nonzero.png" alt="count non zero"  style="width:80%;">}}
+{{< img src="dashboards/functions/count/count_nonzero.png" alt="count non zero" style="width:80%;">}}
 
 Note: `count_nonzero_finite()` can be used as an alias for `count_nonzero()`.
 
@@ -29,7 +29,7 @@ For a query grouped by one or more [tag keys][1], count the number of tag values
 
 Example: `count_not_null(system.cpu.user{*} by {host})` returns a timeseries representing the number of hosts with non-null system load at each point.
 
-{{< img src="dashboards/functions/count/count_not_null.png" alt="count not null"  style="width:80%;">}}
+{{< img src="dashboards/functions/count/count_not_null.png" alt="count not null" style="width:80%;">}}
 
 ## Other functions
 

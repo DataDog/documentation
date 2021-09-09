@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/tenable/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/tenable/README.md
 display_name: Tenable
 draft: false
 git_integration_title: tenable

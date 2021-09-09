@@ -61,6 +61,7 @@ After processing, the following structured log is generated:
 * Properties with null or empty values are not displayed.
 * A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][1].
 * The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
+* Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
 
 ### Matcher and filter
 
@@ -629,6 +630,9 @@ Other examples:
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 
+### ASCII control characters
+
+If your logs contain ASCII control characters, they are serialized upon ingestion. These can be handled by explicitly escaping the serialized value within your grok parser.
 
 ## Further Reading
 

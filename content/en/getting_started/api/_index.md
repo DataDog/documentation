@@ -26,7 +26,7 @@ You have:
 
 ### Import the Datadog collection into Postman
 
-Start by [logging into Postman][7]. Datadog reccomends [downloading the Postman application][8].
+Start by [logging into Postman][4]. Datadog recommends [downloading the Postman application][5].
 
 </br>
 <div class="postman-run-button"
@@ -51,7 +51,7 @@ After the Postman collection is imported, a full list of available Datadog API c
 
 #### Authentication
 
-The collection includes a [Postman environment][4] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication.
+The collection includes a [Postman environment][6] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication.
 
 Follow these steps to set up your environment:
 
@@ -59,13 +59,13 @@ Follow these steps to set up your environment:
 
 2. Select **Datadog Authentication**
 
-3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [Application key][2] as the initial value and current value for the `application_key` variable.
+3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [application key][2] as the initial value and current value for the `application_key` variable.
 
 {{< site-region region="eu" >}}
 
 #### Switch to the EU API endpoint
  
-If you are accessing the Datadog app that is in the EU region, instead of the default endpoint URL, you need to switch the Postman collection to access from the EU endpoint URL `https://api.datadoghq.eu`.
+If you are accessing the Datadog site in the EU region, instead of the default endpoint URL, you need to switch the Postman collection to access from the EU endpoint URL `https://api.datadoghq.eu`.
 
 Follow these steps to update to the EU instance:
 
@@ -73,7 +73,7 @@ Follow these steps to update to the EU instance:
 
 {{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
 
-2. On the **Variables** tab, deselct the `site` variable with the value `datadoghq.com` and select the `site` with the variable `datadoghq.eu`.
+2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the variable `datadoghq.eu`.
 
 {{< img src="getting_started/postman/variables.png" alt="Update the site variable">}}
 
@@ -83,13 +83,13 @@ Follow these steps to update to the EU instance:
 
 ## Working with the collection
 
-After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][5]. Expand the subfolders to see the HTTP methods and API call names.
+After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][7]. Expand the subfolders to see the HTTP methods and API call names.
 
 ### Builder
 
 When you click on an API call in the collection, it loads in the `Builder` pane on the right. On this pane you can send the API call and see the returned status, response time, and API response code.
 
-{{< img src="getting_started/postman/apiGetCalls.png" alt="postman_api_response"  style="width:70%;">}}
+{{< img src="getting_started/postman/apiGetCalls.png" alt="postman_api_response" style="width:70%;">}}
 
 ### Description
 
@@ -99,9 +99,9 @@ When you click on the Endpoint name a description of the endpoint and all requir
 
 ### Params
 
-The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][6].
+The **Params** tab shows all parameters and values that are on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][8].
 
-{{< img src="getting_started/postman/parameters.png" alt="postman_param"  style="width:70%;">}}
+{{< img src="getting_started/postman/parameters.png" alt="postman_param" style="width:70%;">}}
 
 This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.
 
@@ -113,8 +113,8 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://identity.getpostman.com/signup
-[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[5]: /api/v1/organizations/
-[6]: /api/
-[7]: https://identity.getpostman.com/login
-[8]: https://www.postman.com/downloads/
+[4]: https://identity.getpostman.com/login
+[5]: https://www.postman.com/downloads/
+[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[7]: /api/v1/organizations/
+[8]: /api/

@@ -1194,6 +1194,18 @@ components:
     DashboardTemplateVariable:
       description: Template variable.
       properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
         default:
           description: The default value for the template variable on dashboard load.
           example: my-host
@@ -2327,6 +2339,7 @@ components:
       - security_signals
       - profiles
       - audit
+      - events
       example: logs
       type: string
       x-enum-varnames:
@@ -2337,6 +2350,7 @@ components:
       - SECURITY_SIGNALS
       - PROFILES
       - AUDIT
+      - EVENTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -5973,6 +5987,7 @@ components:
       - trace-analytics alert
       - slo alert
       - event-v2 alert
+      - audit alert
       example: metric alert
       type: string
       x-enum-varnames:
@@ -5988,6 +6003,7 @@ components:
       - TRACE_ANALYTICS_ALERT
       - SLO_ALERT
       - EVENT_V2_ALERT
+      - AUDIT_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7597,6 +7613,7 @@ components:
       type: object
     SLOHistoryMetricsSeriesMetadataUnit:
       description: An Object of metric units.
+      nullable: true
       properties:
         family:
           description: The family of metric unit, for example `bytes` is the family
@@ -7622,6 +7639,93 @@ components:
             `B`.
           nullable: true
           type: string
+      type: object
+    SLOHistoryMonitor:
+      description: 'An object that holds an SLI value and its associated data. It
+        can represent an SLO''s overall SLI value.
+
+        This can also represent the SLI value for a specific monitor in multi-monitor
+        SLOs, or a group in grouped SLOs.'
+      properties:
+        error_budget_remaining:
+          $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          type: array
+        group:
+          description: For groups in a grouped SLO, this is the group name.
+          example: name
+          type: string
+        history:
+          description: For `monitor` based SLOs, this includes the aggregated history
+            as arrays that include time series and uptime data where `0=monitor` is
+            in `OK` state and `1=monitor` is in `alert` state.
+          items:
+            description: Represents an array time series data.
+            example:
+            - - 1579212382
+              - 0
+            items:
+              description: A time series data point which is a tuple of (timestamp,
+                value).
+              example:
+              - 1579212382
+              - 0
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        monitor_modified:
+          description: For `monitor` based SLOs, this is the last modified timestamp
+            in epoch seconds of the monitor.
+          example: 1615867200
+          format: int64
+          type: integer
+        monitor_type:
+          description: For `monitor` based SLOs, this describes the type of monitor.
+          example: string
+          type: string
+        name:
+          description: For groups in a grouped SLO, this is the group name. For monitors
+            in a multi-monitor SLO, this is the monitor name.
+          example: string
+          type: string
+        precision:
+          deprecated: true
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp. Use `span_precision` instead.
+          example: 2
+          format: double
+          type: number
+        preview:
+          description: 'For `monitor` based SLOs, when `true` this indicates that
+            a replay is in progress to give an accurate uptime
+
+            calculation.'
+          example: true
+          type: boolean
+        sli_value:
+          description: The current SLI value of the SLO over the history window.
+          example: 99.99
+          format: double
+          type: number
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from `&&` to timestamp.
+          example: 2
+          format: double
+          type: number
+        uptime:
+          deprecated: true
+          description: Use `sli_value` instead.
+          example: 99.99
+          format: double
+          type: number
       type: object
     SLOHistoryResponse:
       description: A service level objective history response.
@@ -7653,7 +7757,7 @@ components:
                 This is not included in the responses for `metric` based SLOs.'
               example: []
               items:
-                $ref: '#/components/schemas/SLOHistorySLIData'
+                $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
             monitors:
               description: 'For multi-monitor SLOs, this represents SLI data for specific
@@ -7663,7 +7767,7 @@ components:
                 This is not included in the responses for `metric` based SLOs.'
               example: []
               items:
-                $ref: '#/components/schemas/SLOHistorySLIData'
+                $ref: '#/components/schemas/SLOHistoryMonitor'
               type: array
             overall:
               $ref: '#/components/schemas/SLOHistorySLIData'
@@ -7693,11 +7797,27 @@ components:
           type: array
       type: object
     SLOHistoryResponseError:
-      description: A service level objective response containing the requested history.
+      description: A list of errors while querying the history data for the service
+        level objective.
       properties:
         error:
           description: Human readable error.
           type: string
+      type: object
+    SLOHistoryResponseErrorWithType:
+      description: An object describing the error with error type and error message.
+      properties:
+        error_message:
+          description: A message with more details about the error.
+          example: ''
+          type: string
+        error_type:
+          description: Type of the error.
+          example: ''
+          type: string
+      required:
+      - error_type
+      - error_message
       type: object
     SLOHistorySLIData:
       description: 'An object that holds an SLI value and its associated data. It
@@ -7709,11 +7829,10 @@ components:
         error_budget_remaining:
           $ref: '#/components/schemas/SLOErrorBudgetRemainingData'
         errors:
-          description: A list of errors while querying the history data for the service
-            level objective.
-          example: []
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
           items:
-            $ref: '#/components/schemas/SLOHistoryResponseError'
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
           type: array
         group:
           description: For groups in a grouped SLO, this is the group name.
@@ -9105,105 +9224,6 @@ components:
       - account
       - url
       type: object
-    Span:
-      description: 'A logical unit of work in the system for a given time period.
-
-        Each span consists of a `span.name`, start time, duration, and span tags.'
-      properties:
-        duration:
-          description: The duration of the request in nanoseconds.
-          example: 12345
-          format: int64
-          type: integer
-        error:
-          description: 'Set this value to 1 to indicate if an error occurred.
-
-
-            If an error occurs, you should pass additional information,
-
-            such as the error message, type and stack information in the meta property.'
-          format: int32
-          maximum: 1
-          minimum: 0
-          type: integer
-        meta:
-          additionalProperties:
-            description: Additional properties for key-value metadata.
-            type: string
-          description: A set of key-value metadata. Keys and values must be strings.
-          type: object
-        metrics:
-          additionalProperties:
-            description: Additional properties for key-value metrics.
-            format: double
-            type: number
-          description: A set of key-value metadata. Keys must be strings and values
-            must be 64-bit floating point numbers.
-          type: object
-        name:
-          description: The span name. The span name must not be longer than 100 characters.
-          example: span_name
-          maxLength: 100
-          type: string
-        parent_id:
-          description: The span integer ID of the parent span.
-          format: int64
-          type: integer
-        resource:
-          description: The resource you are tracing. The resource name must not be
-            longer than 5000 characters.
-          example: /home
-          maxLength: 5000
-          type: string
-        service:
-          description: The service you are tracing. The service name must not be longer
-            than 100 characters.
-          example: service_name
-          maxLength: 100
-          type: string
-        span_id:
-          description: The span integer (64-bit unsigned) ID.
-          example: 987654321
-          format: int64
-          type: integer
-        start:
-          description: The start time of the request in nanoseconds from the UNIX
-            epoch.
-          example: 0
-          format: int64
-          type: integer
-        trace_id:
-          description: The unique integer (64-bit unsigned) ID of the trace containing
-            this span.
-          example: 123456789
-          format: int64
-          type: integer
-        type:
-          $ref: '#/components/schemas/SpanType'
-      required:
-      - trace_id
-      - span_id
-      - name
-      - resource
-      - service
-      - start
-      - duration
-      type: object
-    SpanType:
-      default: custom
-      description: The type of request.
-      enum:
-      - web
-      - db
-      - cache
-      - custom
-      example: web
-      type: string
-      x-enum-varnames:
-      - WEB
-      - DB
-      - CACHE
-      - CUSTOM
     SyntheticsAPIStep:
       description: The steps used in a Synthetics multistep API test.
       properties:
@@ -9636,6 +9656,11 @@ components:
           example: []
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        configVariables:
+          description: Array of variables used for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
           type: array
         request:
           $ref: '#/components/schemas/SyntheticsTestRequest'
@@ -10121,6 +10146,17 @@ components:
     SyntheticsGlobalVariable:
       description: Synthetics global variable.
       properties:
+        attributes:
+          description: Attributes of the global variable.
+          properties:
+            restricted_roles:
+              description: List of role identifiers that can be pulled from the Roles
+                API.
+              items:
+                description: UUID for a role.
+                type: string
+              type: array
+          type: object
         description:
           description: Description of the global variable.
           example: Example description
@@ -10189,11 +10225,13 @@ components:
       - raw
       - json_path
       - regex
+      - x_path
       type: string
       x-enum-varnames:
       - RAW
       - JSON_PATH
       - REGEX
+      - X_PATH
     SyntheticsGlobalVariableValue:
       description: Value of the global variable.
       example:
@@ -10201,12 +10239,13 @@ components:
         value: value
       properties:
         secure:
-          description: Determines if the variable is secure.
+          description: Determines if the value of the variable is hidden.
           type: boolean
         value:
           description: 'Value of the global variable. When reading a global variable,
 
-            the value will not be present if the variable is secure.'
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
           example: example-value
           type: string
       type: object
@@ -10607,7 +10646,7 @@ components:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
         configVariables:
-          description: API tests only - array of variables used for the test.
+          description: Array of variables used for the test.
           items:
             $ref: '#/components/schemas/SyntheticsConfigVariable'
           type: array
@@ -10855,6 +10894,9 @@ components:
           maximum: 65535
           minimum: 1
           type: integer
+        follow_redirects:
+          description: Specifies whether or not the request follows redirects.
+          type: boolean
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -10984,6 +11026,9 @@ components:
     SyntheticsTriggerCITestsResponse:
       description: Object containing information about the tests triggered.
       properties:
+        batch_id:
+          description: The public ID of the batch triggered.
+          type: string
         locations:
           description: List of Synthetics locations.
           items:
@@ -11708,6 +11753,10 @@ components:
       - profiled_host_percentage
       - profiled_container_usage
       - profiled_container_percentage
+      - dbm_host_usage
+      - dbm_host_percentage
+      - dbm_queries_usage
+      - dbm_queries_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -11739,6 +11788,10 @@ components:
       - PROFILED_HOST_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
+      - DBM_HOST_USAGE
+      - DBM_HOST_PERCENTAGE
+      - DBM_QUERIES_USAGE
+      - DBM_QUERIES_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -11826,6 +11879,23 @@ components:
           type: number
         cws_host_usage:
           description: The Cloud Workload Security host usage by tag(s)
+          format: double
+          type: number
+        dbm_host_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_host_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring normalized queries usage
+            by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring normalized queries usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
@@ -12178,6 +12248,35 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/UsageCustomReportsMeta'
+      type: object
+    UsageDBMHour:
+      description: Database Monitoring usage for a given organization for a given
+        hour.
+      properties:
+        dbm_host_count:
+          description: "The total number of Database Monitoring host hours from the
+            start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        dbm_queries_count:
+          description: "The total number of normalized Database Monitoring queries
+            from the start of the given hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageDBMResponse:
+      description: Response containing the Database Monitoring usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Database Monitoring
+          items:
+            $ref: '#/components/schemas/UsageDBMHour'
+          type: array
       type: object
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
@@ -12858,6 +12957,16 @@ components:
           description: The date for the usage.
           format: date-time
           type: string
+        dbm_host_top99p:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_count_avg:
+          description: Shows the average of all normalized Database Monitoring queries
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         fargate_tasks_count_avg:
           description: Shows the high-watermark of all Fargate tasks over all hours
             in the current date for all organizations.
@@ -13072,6 +13181,16 @@ components:
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        dbm_host_top99p_sum:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_agg_sum:
+          description: Shows the sum of all distinct Database Monitoring normalized
+            queries over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -13296,6 +13415,16 @@ components:
         cws_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        dbm_host_top99p_sum:
+          description: Shows the 99th percentile of all Database Monitoring hosts
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        dbm_queries_agg_sum:
+          description: Shows the sum of all distinct Database Monitoring Normalized
+            Queries over all hours in the current month for all organizations.
           format: int64
           type: integer
         end_date:
@@ -13675,14 +13804,11 @@ components:
       description: Datadog-Webhooks integration.
       properties:
         custom_headers:
-          additionalProperties:
-            description: Additional properties for custom headers.
-            type: string
           description: 'If `null`, uses no header.
 
             If given a JSON payload, these will be headers attached to your webhook.'
           nullable: true
-          type: object
+          type: string
         encode_as:
           $ref: '#/components/schemas/WebhooksIntegrationEncoding'
         name:
@@ -13694,7 +13820,15 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          $ref: '#/components/schemas/WebhooksIntegrationPayload'
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -13709,23 +13843,45 @@ components:
         is_secret:
           description: 'Make custom variable is secret or not.
 
-            If the custom variable is secret, it returns `null` for
-
-            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
           example: true
           type: boolean
         name:
-          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
           example: CUSTOM_VARIABLE_NAME
           type: string
         value:
           description: Value of the custom variable.
           example: CUSTOM_VARIABLE_VALUE
-          nullable: true
           type: string
       required:
       - name
       - value
+      - is_secret
+      type: object
+    WebhooksIntegrationCustomVariableResponse:
+      description: Custom variable for Webhook integration.
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
+          example: true
+          type: boolean
+        name:
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable. It won't be returned if the variable
+            is secret.
+          example: CUSTOM_VARIABLE_VALUE
+          type: string
+      required:
+      - name
       - is_secret
       type: object
     WebhooksIntegrationCustomVariableUpdateRequest:
@@ -13737,18 +13893,17 @@ components:
         is_secret:
           description: 'Make custom variable is secret or not.
 
-            If the custom variable is secret, it returns `null` for
-
-            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+            If the custom variable is secret, the value is not returned in the response
+            payload.'
           type: boolean
         name:
-          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          description: The name of the variable. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+            It must only contains upper-case characters, integers or underscores.
           example: CUSTOM_VARIABLE_NAME
           type: string
         value:
           description: Value of the custom variable.
           example: CUSTOM_VARIABLE_VALUE
-          nullable: true
           type: string
       type: object
     WebhooksIntegrationEncoding:
@@ -13761,16 +13916,6 @@ components:
       x-enum-varnames:
       - JSON
       - FORM
-    WebhooksIntegrationPayload:
-      description: 'If `null`, uses the default payload.
-
-        If given a JSON payload, the webhook returns the payload
-
-        specified by the given payload.
-
-        [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
-      nullable: true
-      type: object
     WebhooksIntegrationUpdateRequest:
       description: 'Update request of a Webhooks integration object.
 
@@ -13778,13 +13923,10 @@ components:
         *All properties are optional.*'
       properties:
         custom_headers:
-          additionalProperties:
-            description: Additional properties for custom headers.
-            type: string
           description: 'If `null`, uses no header.
 
             If given a JSON payload, these will be headers attached to your webhook.'
-          type: object
+          type: string
         encode_as:
           $ref: '#/components/schemas/WebhooksIntegrationEncoding'
         name:
@@ -13796,7 +13938,15 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          $ref: '#/components/schemas/WebhooksIntegrationPayload'
+          description: 'If `null`, uses the default payload.
+
+            If given a JSON payload, the webhook returns the payload
+
+            specified by the given payload.
+
+            [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: string
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -18415,7 +18565,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18433,6 +18583,13 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-given:
+        webhook-custom-variable:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
+              \ \"is_secret\": false\n}"
+          step: there is a valid "webhook-custom-variable" in the system
       x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
@@ -18476,9 +18633,9 @@ paths:
       description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
 
-        If the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>`
+        If the custom variable is secret, the value does not return in the
 
-        in the response payload.'
+        response payload.'
       operationId: GetWebhooksIntegrationCustomVariable
       parameters:
       - description: The name of the custom variable.
@@ -18492,7 +18649,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18540,7 +18697,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariableResponse'
           description: OK
         '400':
           content:
@@ -18601,6 +18758,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-given:
+        webhook:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
+          step: there is a valid "webhook" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteWebhooksIntegration
@@ -19548,6 +19711,8 @@ paths:
 
         - event-v2: `event-v2 alert`
 
+        - audit: `audit alert`
+
 
         #### Query Types
 
@@ -19561,9 +19726,9 @@ paths:
 
         - `time_aggr`: avg, sum, max, min, change, or pct_change
 
-        - `time_window`: `last_#m` (with `#` between 1 and 2880 depending on the monitor
-        type) or `last_#h`(with `#` between 1 and 48 depending on the monitor type),
-        or `last_1d`
+        - `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the
+        monitor type) or `last_#h`(with `#` between 1 and 168 depending on the monitor
+        type) or `last_1d`, or `last_1w`
 
         - `space_aggr`: avg, sum, min, or max
 
@@ -19771,7 +19936,32 @@ paths:
         - **`time_window`**: The time window of the SLO target you wish to alert on.
         Valid options: `7d`, `30d`, `90d`.
 
-        - **`operator`**: `>=` or `>`'
+        - **`operator`**: `>=` or `>`
+
+
+        **Audit Alert Query**
+
+
+        Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - **`query`** The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - **`rollup_method`** The stats roll-up method - supports `count`, `avg` and
+        `cardinality`.
+
+        - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - **`time_window`** #m (between 1 and 2880), #h (between 1 and 48).
+
+        - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - **`#`** an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Only available on US1-FED and in closed beta on EU, US3, and US1.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -20880,7 +21070,7 @@ paths:
 
         Once a new child organization is created, you can interact with it
 
-        by using the `org.public_id`, `pi_key.key`, and
+        by using the `org.public_id`, `api_key.key`, and
 
         `application_key.hash` provided in the response.'
       operationId: CreateChildOrg
@@ -22546,14 +22736,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Timestamp from which to start querying results.
+      - description: Timestamp in milliseconds from which to start querying results.
         in: query
         name: from_ts
         required: false
         schema:
           format: int64
           type: integer
-      - description: Timestamp up to which to query results.
+      - description: Timestamp in milliseconds up to which to query results.
         in: query
         name: to_ts
         required: false
@@ -22830,14 +23020,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Timestamp from which to start querying results.
+      - description: Timestamp in milliseconds from which to start querying results.
         in: query
         name: from_ts
         required: false
         schema:
           format: int64
           type: integer
-      - description: Timestamp up to which to query results.
+      - description: Timestamp in milliseconds up to which to query results.
         in: query
         name: to_ts
         required: false
@@ -23737,6 +23927,54 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 31
+      x-undo:
+        type: safe
+  /api/v1/usage/dbm:
+    get:
+      description: Get hourly usage for Database Monitoring
+      operationId: GetUsageDBM
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageDBMResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Database Monitoring
+      tags:
+      - Usage Metering
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -24966,65 +25204,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-  /v0.3/traces:
-    put:
-      description: "Datadog\u2019s APM allows you to collect performance metrics by
-        tracing your code\nto determine which parts of your application are slow or
-        inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP API.\nWe
-        provide some [official libraries](https://docs.datadoghq.com/tracing/#instrument-your-application)\nthat
-        simplify sending metrics to the Datadog Agent, however you may want to\ninteract
-        directly with the API to instrument applications that cannot use\nthe libraries
-        or are written in languages that don\u2019t yet have an official\nDatadog
-        Tracing library."
-      operationId: SubmitTraces
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: An array of traces.
-              items:
-                description: An array of spans.
-                items:
-                  $ref: '#/components/schemas/Span'
-                type: array
-              type: array
-        description: "Traces can be sent as an array of traces:\n\n    [ trace1, trace2,
-          trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span,
-          span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`,
-          `resource`...\n\n[Learn more about the APM & Distributed Tracing terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\n**Note:**
-          Each span within a trace should use the same `trace_id`.\nHowever, `trace_id`
-          and `span_id` must have different values."
-        required: true
-      responses:
-        '200':
-          description: OK
-      security: []
-      servers:
-      - url: http://{site}
-        variables:
-          site:
-            default: localhost:8126
-            description: Local Agent endpoint.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: localhost:8126
-            description: Full site DNS name.
-          protocol:
-            default: http
-            description: The protocol for accessing the API.
-      - url: https://{site}
-        variables:
-          site:
-            default: localhost:8126
-            description: Local Agent endpoint.
-      summary: Send traces
-      tags:
-      - Tracing
-      x-codegen-request-body-name: body
-      x-menu-order: 1
-      x-undo:
-        type: idempotent
   /v1/input:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -25539,17 +25718,6 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/timeboard-api-doc/
   name: Timeboards
   x-deprecated: true
-- description: 'Learn more about [tracing with Datadog](https://docs.datadoghq.com/tracing)
-
-    and [the APM terminology](https://docs.datadoghq.com/tracing/visualization/services_list).
-
-
-    The tracing API is an Agent API rather than a service side API.
-
-    Submit your traces to the `http://localhost:8126/v0.3/traces` local endpoint
-
-    so your Agent can forward them to Datadog.'
-  name: Tracing
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

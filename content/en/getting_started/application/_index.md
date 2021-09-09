@@ -13,14 +13,14 @@ further_reading:
 
 This page gives a high level overview of the capabilities for the [Datadog site][1].
 
-**Note**: The navigation of the Datadog application switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
+**Note**: The navigation of the Datadog site switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
 
 ## Integrations
 
 {{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
 - Datadog has over {{< translate key="integration_count" >}} integrations [officially listed][2].
-- Custom integrations are available [via the Datadog API][3].
+- Custom integrations are available through the [Datadog API][3].
 - The Agent is [open source][4].
 - Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.
 
@@ -46,7 +46,7 @@ This page gives a high level overview of the capabilities for the [Datadog site]
 
 ## Host map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
+{{< img src="getting_started/hostmap-overview.png" alt="Host Map overview"  >}}
 
 The [host map][9] can be found under the Infrastructure menu. It offers the ability to:
 
@@ -55,7 +55,7 @@ The [host map][9] can be found under the Infrastructure menu. It offers the abil
 - Detect usage patterns
 - Optimize resources
 
-To learn more about the host map, visit the [host map documentation][9].
+See [Host Map][9] for more details.
 
 ## Events
 
@@ -140,6 +140,7 @@ Datadog [Security Monitoring][20] automatically detects threats to your applicat
 [8]: /getting_started/tagging/
 [9]: /infrastructure/hostmap/
 [10]: /events/
+<<<<<<< HEAD
 [11]: /events-updates/events/explorer/#event-search
 [12]: /dashboards/
 [13]: /dashboards/screenboard/
@@ -150,3 +151,18 @@ Datadog [Security Monitoring][20] automatically detects threats to your applicat
 [18]: /real_user_monitoring/
 [19]: /infrastructure/serverless/
 [20]: /security_monitoring/
+=======
+[11]: /account_management/users/
+[12]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
+[13]: /events/#@-notifications
+[14]: /help/
+[15]: /dashboards/
+[16]: /dashboards/screenboard/
+[17]: /dashboards/functions/
+[18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
+[19]: /monitors/
+[20]: /network_monitoring/performance
+[21]: /real_user_monitoring/
+[22]: /serverless/
+[23]: /security_monitoring/
+>>>>>>> master

@@ -156,8 +156,8 @@ Template variables that return numerical values support operations and functions
 
 #### Local time
 
-Use the `local_time` function to transform a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
-For example, to show the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
+Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to add the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
 
 ```
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}

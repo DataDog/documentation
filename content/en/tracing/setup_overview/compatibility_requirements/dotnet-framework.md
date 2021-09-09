@@ -15,12 +15,14 @@ further_reading:
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
+
+
 - The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-- The .NET Tracer library for Datadog is open-source. For more information, see the [tracer Github repository][1].
+- The .NET Tracer library for Datadog is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Framework runtimes
-The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using CLR v4.0). It also supports [.NET Core][2].
+The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][2].
 
 | Version  | Microsoft End of Life |
 | -------- | --------------------- |
@@ -37,11 +39,12 @@ The .NET Tracer supports instrumentation on .NET Framework 4.5 and above (using 
  Additional information on .NET Framework support policy can be found within [Microsoft's .NET Framework Lifecycle Policy][3]. 
 
 ## Supported processor architectures
+The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------ |
-| Windows x86 (`win-x86`)                                                                                            |
-| Windows x64 (`win-x64`)                                                                                            |
+| Processor architectures                                                 |
+| ------------------------------------------------------------------------|
+| Windows x86 (`win-x86`)                                                 |
+| Windows x64 (`win-x64`)                                                 |
 
 ## Integrations
 

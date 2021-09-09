@@ -61,9 +61,21 @@
     "description": "指定された日刊カスタムレポートを取得します。",
     "summary": "指定された日刊カスタムレポートを取得"
   },
+  "DeleteDashboards": {
+    "description": "指定された ID を使用するダッシュボードを削除します。エラーがあった場合、ダッシュボードは削除されません (部分的に成功した場合も完了とはみなされません)。",
+    "summary": "ダッシュボードの削除",
+    "request_description": "ダッシュボードのリクエスト本文を削除します。",
+    "request_schema_description": "ダッシュボードの一括削除リクエスト本文。"
+  },
   "ListDashboards": {
     "description": "すべてのダッシュボードを取得します。\n\n**注**: このクエリはカスタマイズして作成された、または複製されたダッシュボードのみを返します。\nこのクエリではプリセットされたダッシュボードは取得できません。",
     "summary": "すべてのダッシュボードを取得する"
+  },
+  "RestoreDashboards": {
+    "description": "指定された ID を使用するダッシュボードを復元します。エラーがあった場合、ダッシュボードは復元されません (部分的に成功した場合も完了とはみなされません)。",
+    "summary": "削除されたダッシュボードの復元",
+    "request_description": "ダッシュボードのリクエスト本文を復元します。",
+    "request_schema_description": "ダッシュボードの復元リクエスト本文。"
   },
   "CreateDashboard": {
     "description": "指定されたオプションを使用してダッシュボードを作成します。ウィジェットでクエリを定義するときは、どのクエリに `as_count()` または `as_rate()` 修飾子を追加する必要があるかに注意してください。\nこれらの修飾子の詳細については、次の[ドキュメント](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers)を参照してください。",
@@ -176,7 +188,7 @@
     "request_schema_description": "ダウンタイム設定を使用すると、アラートからいくつかのスコープをグローバルに除外することで、\nモニター通知をより詳細に制御できます。\nダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、\n指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
   },
   "ListEvents": {
-    "description": "イベントストリームにクエリを発行して、時間、優先度、ソース、タグなどで絞り込むことができます。\n\n**注**:\n- クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に `%`、`\\`、`n` などの文字が表示される場合があります。\n\n- このエンドポイントは最新の結果を最大 `1000` 件返します。さらに多くの結果を返すには、最新の結果の最新のタイムスタンプを特定し、それを `end` クエリに設定して結果をページ区切りします。",
+    "description": "イベントストリームにクエリを発行して、時間、優先度、ソース、タグなどで絞り込むことができます。\n\n**注**:\n- クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に `%`、`\\`、`n` などの文字が表示される場合があります。\n\n- このエンドポイントは最新の結果を最大 `1000` 件返します。さらに多くの結果を返すには、最新の結果の最新のタイムスタンプを特定し、それを `end` クエリに設定して結果をページ区切りします。また、ページパラメーターを使って、どのセットの `1000` の結果を返すかを指定することもできます。",
     "summary": "イベントストリームのクエリ"
   },
   "CreateEvent": {
@@ -237,7 +249,7 @@
     "description": "指定の `account_id` と `role_name parameters` に一致する Datadog-AWS インテグレーションを削除します。",
     "summary": "AWS インテグレーションの削除",
     "request_description": "AWS リクエストオブジェクト",
-    "request_schema_description": "このインテグレーションに関連付けられている AWS アカウントを返します。"
+    "request_schema_description": "削除する AWS アカウントのリスト。"
   },
   "ListAWSAccounts": {
     "description": "Datadog Organization で使用できるすべての Datadog-AWS インテグレーションをリストします。",
@@ -278,7 +290,7 @@
   "CreateNewAWSExternalID": {
     "description": "特定の AWS アカウント ID/ロール名ペアに対して新しい AWS 外部 ID を作成します。",
     "summary": "新しい外部 ID を生成する",
-    "request_description": "Datadog ロールの委任名です。\nAWS アカウントのロール名の詳細については、\n[Datadog AWS インテグレーションのコンフィギュレーション情報](https://github.com/DataDog/documentation/blob/master/integrations/amazon_web_services/#installation)を参照してください。",
+    "request_description": "Datadog ロールの委任名です。\nAWS アカウントのロール名の詳細については、\n[Datadog AWS インテグレーションのコンフィギュレーション情報](https://docs.datadoghq.com/integrations/amazon_web_services/#setup)を参照してください。",
     "request_schema_description": "このインテグレーションに関連付けられている AWS アカウントを返します。"
   },
   "DeleteAWSLambdaARN": {
@@ -562,7 +574,7 @@
     "summary": "全モニターの詳細を取得"
   },
   "CreateMonitor": {
-    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニターの種類\n\n選択可能なモニターの種類:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測値: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `metric alert`\n- ネットワーク: `service check`\n- 外れ値: `query alert`\n- プロセス: `service check`\n- RUM: `rum alert`\n- SLO: `slo alert`\n- Watchdog: `event alert`\n- event-v2: `event-v2 alert`\n\n#### クエリの種類\n\n**メトリクスアラートのクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、pct_change\n- `time_window`: `last_#m` (`#` = モニターの種類に応じて 1〜2880) または`last_#h`(`#` = モニターの種類に応じて 1〜48)、`last_1d`\n- `space_aggr`: avg、sum、min、max\n- `tags`: 1つ以上のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文内の 'key'。グループ内のタグごとに異なるアラートを定義します（マルチアラート）\n- `operator`: <、<=、>、>=、==、!=\n- `#`: しきい値の設定に使用される整数または小数\n\n`_change_` または `_pct_change_` 時間集計関数を使用する場合は、代わりに `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` を次のように使用します。\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [詳細はこちら](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (モニターの種類に応じて 1〜2880), last\\_#h (モニターの種類に応じて 1〜48), last_#d (1 または 2)\n- `timeshift` #m_ago (5、10、15、30), #h_ago (1、2、4)、1d_ago\n\n次のクエリを使用して、外れ値モニターを作成できます:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェックのクエリ**\n\n例: `\"check\".over(tags).last(count).count_by_status()`\n\n- **`check`** チェックの名前。例. `datadog.agent.up`\n- **`tags`** 引用符で囲まれた 1 つ以上のタグ (カンマ区切り)、または \"*\"。例: `.over(\"env:prod\", \"role:db\")`\n- **`count`** 最大しきい値 (`options` で定義) 以上である必要があります。上限値は 100 です。\n例: ステータス 1 を critical、3 を OK、2 を warn と通知する場合は、`count` を 3 にする必要があります。\n\n**イベントアラートのクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**, イベントクエリの文字列。\n- **`string_query`** イベントのタイトルとテキストと照合するフリーテキストクエリ。\n- **`sources`** イベントのソース (カンマ区切り)。\n- **`status`** イベントのステータス (カンマ区切り)。有効なオプション: error、warn、info。\n- **`priority`** イベントの優先度 (カンマ区切り)。有効なオプション: low、normal、all。\n- **`host`** イベントを報告しているホスト (カンマ区切り)。\n- **`tags`** イベントタグ (カンマ区切り)。\n- **`excluded_tags`** 除外されたイベントタグ (カンマ区切り)。\n- **`rollup`** 統計のロールアップ方法。現在 `count` のみサポートされています。\n- **`last`** カウントをロールアップするタイムフレーム。例: 45分、4時間。サポート対象のタイムフレーム: m、h、d。この値は 48 時間以内である必要があります。\n\n**注** US1 および EU でのみ利用できます。\n\n**イベント V2 アラートのクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`**  統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (5、10、15、30)、#h (1、2 または 4、24)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**注** US1-FED および US3 で利用できます。また、EU と US1 ではクローズドベータ版のみ利用できます。\n\n**プロセスアラートのクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** プロセスの問い合わせに使用するフリーテキスト検索文字列。\n一致するプロセスは、[ライブプロセス](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- **`tags`** 1 つ以上のタグ (カンマ区切り)\n- **`timeframe`** カウントをロールアップするタイムフレーム。例: 10分、4時間。サポート対象のタイムフレーム: s、m、h、d\n- **`operator`** <、<=、>、>=、==、!=\n- **`#`** しきい値の設定に使用される整数または小数\n\n**ログアラートのクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`index_name`** マルチインデックスのオーガニゼーションの場合に、リクエストが実行されるログインデックス。\n- **`rollup_method`** 統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**複合条件のクエリ**\n\n例: `12345 && 67890`。ここで、`12345` と `67890` は非複合条件モニターの ID です。\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: アラートの名前。\n* **`message`** [*required*, *default* = **dynamic, based on query**]: このモニターの通知に含めるメッセージ。\nイベントと同じ「@username」表記を使用して、特定のユーザーに電子メール通知を送信できます。\n* **`tags`** [*optional*, *default* = **empty list**]: モニターに関連付けられるタグのリスト。\nAPI からすべてのモニター詳細を取得する際は、`monitor_tags` 引数を使用して、これらのタグで結果を絞り込みます。 \nAPI からのみ使用でき、Datadog UI での表示や編集はできません。\n\n**SLO アラートクエリ**\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- **`slo_id`**: アラートを構成する SLO の SLO ID（英数字）。\n- **`time_window`**: アラートの対象とする SLO ターゲットのタイムウィンドウ。有効なオプション: `7d`、`30d`、`90d`。\n- **`operator`**: `>=` or `>`",
+    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニターの種類\n\n選択可能なモニターの種類:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測値: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `metric alert`\n- ネットワーク: `service check`\n- 外れ値: `query alert`\n- プロセス: `service check`\n- RUM: `rum alert`\n- SLO: `slo alert`\n- Watchdog: `event alert`\n- event-v2: `event-v2 alert`\n\n#### クエリの種類\n\n**メトリクスアラートのクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、pct_change\n- `time_window`: `last_#m` (`#` = モニターの種類に応じて 1〜2880) または`last_#h`(`#` = モニターの種類に応じて 1〜48)、`last_1d`\n- `space_aggr`: avg、sum、min、max\n- `tags`: 1つ以上のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文内の 'key'。グループ内のタグごとに異なるアラートを定義します（マルチアラート）\n- `operator`: <、<=、>、>=、==、!=\n- `#`: しきい値の設定に使用される整数または小数\n\n`_change_` または `_pct_change_` 時間集計関数を使用する場合は、代わりに `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` を次のように使用します。\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [詳細はこちら](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)\n- `time_window` last\\_#m (モニターの種類に応じて 1〜2880), last\\_#h (モニターの種類に応じて 1〜48), last_#d (1 または 2)\n- `timeshift` #m_ago (5、10、15、30), #h_ago (1、2、4)、1d_ago\n\n次のクエリを使用して、外れ値モニターを作成できます:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェックのクエリ**\n\n例: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- **`check`** チェックの名前。例. `datadog.agent.up`\n- **`tags`** 引用符で囲まれた 1 つ以上のタグ (カンマ区切り)、または \"*\"。例: `.over(\"env:prod\", \"role:db\")`。**`over`** は空白にはできません。\n- **`count`** 最大しきい値 (`options` で定義) 以上である必要があります。上限値は 100 です。\n例: ステータス 1 を critical、3 を OK、2 を warn と通知する場合は、`count` を最低 3 にする必要があります。\n- チェックモニターに対して **`group`** を指定する必要があります。いくつかのサービスチェックでは、チェック別のグルーピングが既に明示されています。\n例えば、Postgres インテグレーションモニターは `db`、`host`、`port` で、ネットワークモニターは `host`、`instance`、`url` でタグ付けされます。詳しくは[サービスチェック](https://docs.datadoghq.com/api/latest/service-checks/)のドキュメントを参照してください。\n\n**イベントアラートのクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**, イベントクエリの文字列。\n- **`string_query`** イベントのタイトルとテキストと照合するフリーテキストクエリ。\n- **`sources`** イベントのソース (カンマ区切り)。\n- **`status`** イベントのステータス (カンマ区切り)。有効なオプション: error、warn、info。\n- **`priority`** イベントの優先度 (カンマ区切り)。有効なオプション: low、normal、all。\n- **`host`** イベントを報告しているホスト (カンマ区切り)。\n- **`tags`** イベントタグ (カンマ区切り)。\n- **`excluded_tags`** 除外されたイベントタグ (カンマ区切り)。\n- **`rollup`** 統計のロールアップ方法。現在 `count` のみサポートされています。\n- **`last`** カウントをロールアップするタイムフレーム。例: 45分、4時間。サポート対象のタイムフレーム: m、h、d。この値は 48 時間以内である必要があります。\n\n**注** US1 および EU でのみ利用できます。\n\n**イベント V2 アラートのクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`**  統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (1 ～2880)、#h (1～48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**注** US1-FED および US3 で利用できます。また、EU と US1 ではクローズドベータ版のみ利用できます。\n\n**プロセスアラートのクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** プロセスの問い合わせに使用するフリーテキスト検索文字列。\n一致するプロセスは、[ライブプロセス](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- **`tags`** 1 つ以上のタグ (カンマ区切り)\n- **`timeframe`** カウントをロールアップするタイムフレーム。例: 10分、4時間。サポート対象のタイムフレーム: s、m、h、d\n- **`operator`** <、<=、>、>=、==、!=\n- **`#`** しきい値の設定に使用される整数または小数\n\n**ログアラートのクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`index_name`** マルチインデックスのオーガニゼーションの場合に、リクエストが実行されるログインデックス。\n- **`rollup_method`** 統計のロールアップ方法。`count`、`avg`、`cardinality` に対応します。\n- **`measure`** `avg` および cardinality `rollup_method` で、使用する測定またはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、`!=`。\n- **`#`** しきい値の設定に使用される整数または小数。\n\n**複合条件のクエリ**\n\n例: `12345 && 67890`。ここで、`12345` と `67890` は非複合条件モニターの ID です。\n\n* **`name`** [*required*, *default* = **dynamic, based on query**]: アラートの名前。\n* **`message`** [*required*, *default* = **dynamic, based on query**]: このモニターの通知に含めるメッセージ。\nイベントと同じ「@username」表記を使用して、特定のユーザーに電子メール通知を送信できます。\n* **`tags`** [*optional*, *default* = **empty list**]: モニターに関連付けられるタグのリスト。\nAPI からすべてのモニター詳細を取得する際は、`monitor_tags` 引数を使用して、これらのタグで結果を絞り込みます。 \nAPI からのみ使用でき、Datadog UI での表示や編集はできません。\n\n**SLO アラートクエリ**\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- **`slo_id`**: アラートを構成する SLO の SLO ID（英数字）。\n- **`time_window`**: アラートの対象とする SLO ターゲットのタイムウィンドウ。有効なオプション: `7d`、`30d`、`90d`。\n- **`operator`**: `>=` or `>`",
     "summary": "モニターの作成",
     "request_description": "モニターのリクエスト本文を作成します。",
     "request_schema_description": "モニターを記述するオブジェクト。"
@@ -619,6 +631,30 @@
     "description": "指定された月刊カスタムレポートを取得します。",
     "summary": "特定の月刊カスタムレポートを取得します"
   },
+  "ListNotebooks": {
+    "description": "すべてのノートブックを取得します。これは、ノートブックの `name` または著者の `handle` で\n特定の `query` を持つノートブックを検索するのにも使えます。",
+    "summary": "すべてのノートブックを取得"
+  },
+  "CreateNotebook": {
+    "description": "指定のオプションを使用してノートブックを作成します。",
+    "summary": "ノートブックの作成",
+    "request_description": "作成したいノートブックの JSON 説明です。",
+    "request_schema_description": "ノートブック作成リクエストの説明です。"
+  },
+  "DeleteNotebook": {
+    "description": "指定の ID を使用してノートブックを削除します。",
+    "summary": "ノートブックの削除"
+  },
+  "GetNotebook": {
+    "description": "指定のノートブック ID を使用してノートブックを取得します。",
+    "summary": "ノートブックの取得"
+  },
+  "UpdateNotebook": {
+    "description": "指定の ID を使用してノートブックを更新します。",
+    "summary": "ノートブックの更新",
+    "request_description": "ノートブックのリクエスト本文を更新します。",
+    "request_schema_description": "ノートブック更新リクエストの説明です。"
+  },
   "ListOrgs": {
     "description": "管理している組織を一覧表示します。",
     "summary": "管理している組織を一覧表示する"
@@ -650,7 +686,7 @@
     "summary": "メトリクスの検索"
   },
   "SubmitMetrics": {
-    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000) です。非圧縮ペイロードの場合、サイズ上限は 62 メガバイト (62914560) です。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 32 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000 バイト) です。非圧縮ペイロードの場合、サイズは 62 メガバイト (62914560 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 32 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
     "summary": "メトリクスを送信する",
     "request_schema_description": "メトリクスのペイロード。"
   },
@@ -834,6 +870,10 @@
     "request_description": "特定の Synthetic テストに設定されるステータス。",
     "request_schema_description": "既存の Synthetic テストを開始または一時停止するオブジェクト。"
   },
+  "ListGlobalVariables": {
+    "description": "すべての Synthetic グローバル変数のリストを削除します。",
+    "summary": "すべてのグローバル変数を取得する"
+  },
   "CreateGlobalVariable": {
     "description": "Synthetic グローバル変数を作成します。",
     "summary": "グローバル変数を作成する",
@@ -886,6 +926,10 @@
     "description": "使用属性を取得します。",
     "summary": "使用属性を取得する"
   },
+  "GetUsageAuditLogs": {
+    "description": "監査ログの 1 時間あたり使用量を取得します。",
+    "summary": "監査ログの 1 時間あたり使用量の取得"
+  },
   "GetUsageLambda": {
     "description": "Lambda の 1 時間あたり使用量を取得します。",
     "summary": "Lambda の 1 時間あたり使用量の取得"
@@ -894,9 +938,13 @@
     "description": "アカウント全体の請求対象使用量を取得します。",
     "summary": "アカウント全体の請求対象使用量を取得します"
   },
-  "GetUsageComplianceMonitoring": {
-    "description": "コンプライアンスモニタリングの 1 時間あたり使用量を取得します。",
-    "summary": "コンプライアンスモニタリングの 1 時間あたり使用量を取得"
+  "GetUsageCloudSecurityPostureManagement": {
+    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間あたり使用量を取得します。",
+    "summary": "CSPM の 1 時間あたり使用量の取得"
+  },
+  "GetUsageCWS": {
+    "description": "クラウドワークロードセキュリティの 1 時間あたり使用量を取得します。",
+    "summary": "クラウドワークロードセキュリティの 1 時間あたり使用量の取得"
   },
   "GetUsageFargate": {
     "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間あたり使用量を取得します。",
@@ -925,6 +973,10 @@
   "GetUsageLogs": {
     "description": "ログの 1 時間あたり使用量を取得します。",
     "summary": "ログの 1 時間あたり使用量の取得"
+  },
+  "GetUsageLogsByRetention": {
+    "description": "インデックスされたログの保持期間別の 1 時間あたり使用量を取得します。",
+    "summary": "保持によるログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByIndex": {
     "description": "インデックスごとにログの 1 時間あたり使用量を取得します。",
@@ -971,16 +1023,8 @@
     "summary": "カスタムメトリクスの 1 時間あたり使用量の取得"
   },
   "GetUsageTopAvgMetrics": {
-    "description": "時間平均に基づく上位[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)を取得します。 当月のデータを取得する場合は month パラメータを使用し、日ごとのデータを取得する場合は day パラメータを使用します。2 つのうち 1 つは必須ですが、許可されるのは 1 つのみです。",
-    "summary": "時間平均に基づく上位カスタムメトリクスを取得する"
-  },
-  "GetUsageTrace": {
-    "description": "トレース検索の 1 時間あたりの使用量を取得します。\n\n**注** このエンドポイントの名前は `/api/v1/usage/indexed-spans` に変更されました。",
-    "summary": "トレース検索の 1 時間あたり使用量の取得"
-  },
-  "GetTracingWithoutLimits": {
-    "description": "Tracing without Limits の 1 時間あたりの使用量を取得します。\n\n**注** このエンドポイントの名前は `/api/v1/usage/ingested-spans` に変更されました。",
-    "summary": "Tracing without Limits の 1 時間あたり使用量の取得"
+    "description": "時間平均に基づくすべての[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)を取得します。 当月のデータを取得する場合は month パラメータを使用し、日ごとのデータを取得する場合は day パラメータを使用します。2 つのうち 1 つは必須ですが、許可されるのは 1 つのみです。",
+    "summary": "時間平均に基づくすべてのカスタムメトリクスを取得"
   },
   "ListUsers": {
     "description": "オーガニゼーションのすべてのユーザーのリストを作成します。",
@@ -1010,10 +1054,6 @@
     "description": "API キー (APP キーとは異なります)が有効かどうかを確認します。有効でない場合は 403 を返します。",
     "summary": "API キーを検証する"
   },
-  "ResolveMonitor": {
-    "description": "モニターを解決します。",
-    "summary": "モニターを解決する",
-    "request_description": "特定の monitor_id を解決するグループの配列。例:\n`{\"monitor_id\": \"group_to_resolve\"}`\n\n1 つのモニターで複数のグループがサポートされます。例:\n`resolve: [{\"monitor_id\": \"group_1\"}, {\"monitor_id\": \"group_2\"}]\n\n擬似グループ `ALL_GROUPS` を使用して、トリガーされたすべてのグループを解決することもできます。\n`resolve: [{\"monitor_id\": \"ALL_GROUPS\"}]`"},
   "SubmitTraces": {
     "description": "Datadog の APM を使用すると、コードをトレースしてパフォーマンスメトリクスを収集し、\nアプリケーションのどの部分で遅延または非効率が発生しているかを特定することができます。\n\nトレーシングデータは、HTTP API から Datadog Agent に送信されます。\nDatadog は、Datadog Agent へのメトリクスの送信を簡略化するために、いくつかの[公式ライブラリ](https://docs.datadoghq.com/tracing/#instrument-your-application)\nを提供しています。ただし、それらのライブラリを使用できないアプリケーションや、\n公式の Datadog トレーシングライブラリが\nまだ提供されていない言語で書かれたアプリケーションを計測するために、\nAPI を直接使用することもできます。",
     "summary": "トレースの送信",

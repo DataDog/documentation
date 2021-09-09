@@ -19,7 +19,7 @@ The Agent can create and assign tags to all metrics, traces, and logs emitted by
 
 If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
-## Out of the box tags
+## Out-of-the-box tags
 
 The Agent can autodiscover and attach tags to all data emitted by the entire pods or an individual container within this pod. The list of tags attached automatically depends on the agent [cardinality configuration][1].
 

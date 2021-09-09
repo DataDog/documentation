@@ -18,9 +18,38 @@ Datadog Agent は、タグを作成し、ラベルまたは環境変数に基づ
 
 ホスト上で Agent をバイナリとして実行している場合は、[Agent](?tab=agent) タブの手順を使用してタグ抽出を構成します。Agent をコンテナとして実行している場合は、[コンテナ化された Agent](?tab=containerizedagent) タブの手順でタグ抽出を構成します。
 
+### すぐに使えるタグ付け
+
+Agent は、タグを自動検出し、コンテナにより送信されたすべてのデータにアタッチします。アタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][1]に基づきます。
+
+| タグ                 | カーディナリティ  | 要件                          |
+|---------------------|--------------|--------------------------------------|
+| `container_name`    | 大         | N/A                                  |
+| `container_id`      | 大         | N/A                                  |
+| `rancher_container` | 大         | Rancher 環境                  |
+| `mesos_task`        | オーケストレーター | Mesos 環境                    |
+| `docker_image`      | 小          | N/A                                  |
+| `image_name`        | 小          | N/A                                  |
+| `short_image`       | 小          | N/A                                  |
+| `image_tag`         | 小          | N/A                                  |
+| `swarm_service`     | 小          | Swarm 環境                    |
+| `swarm_namespace`   | 小          | Swarm 環境                    |
+| `rancher_stack`     | 小          | Rancher 環境                  |
+| `rancher_service`   | 小          | Rancher 環境                  |
+| `env`               | 小          | [統合サービスタグ付け][2]有効 |
+| `version`           | 小          | [統合サービスタグ付け][2]有効 |
+| `service`           | 小          | [統合サービスタグ付け][2]有効 |
+| `marathon_app`      | 小          | Marathon 環境                 |
+| `chronos_job`       | 小          | Mesos 環境                    |
+| `chronos_job_owner` | 小          | Mesos 環境                    |
+| `nomad_task`        | 小          | Nomad 環境                    |
+| `nomad_job`         | 小          | Nomad 環境                    |
+| `nomad_group`       | 小          | Nomad 環境                    |
+
+
 ### 統合サービスタグ付け
 
-Datadog では、コンテナ化環境のベストプラクティスとして、タグを付ける際に統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][1]ドキュメントをご参照ください。
+Datadog では、コンテナ化環境のベストプラクティスとして、タグを付ける際に統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][2]ドキュメントをご参照ください。
 
 ## ラベルをタグとして抽出
 
@@ -67,7 +96,7 @@ docker_labels_as_tags:
 
 ## 環境変数をタグとして抽出
 
-Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][2] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][3] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
 | 環境変数               | 説明                                    |
 |------------------------------------|------------------------------------------------|
@@ -119,6 +148,7 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
+[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -126,5 +156,6 @@ docker_env_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
-[2]: /ja/agent/docker/?tab=standard#tagging
+[1]: /ja/agent/docker/tag/#extract-environment-variables-as-tags
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: /ja/agent/docker/?tab=standard#tagging

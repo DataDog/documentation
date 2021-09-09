@@ -7,10 +7,10 @@ aliases:
   - /ja/logs/languages
   - /ja/integrations/windows_event_log/
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法について
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: パースの詳細
   - link: /logs/live_tail/
@@ -87,13 +87,13 @@ Datadog で、AWS Lambda からログを収集できます。これを有効に�
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-Datadog のインテグレーションとログ収集は連携しています。インテグレーションのデフォルト構成ファイルを使用すると、Datadog で専用の[処理][1]、[パース][2]、および[ファセット][3]を有効にできます。
+Datadog のインテグレーションとログ収集は連携しています。インテグレーションのデフォルト構成ファイルを使用すると、Datadog で専用の[プロセッサー][1]、[パース][2]、および[ファセット][3]を有効にできます。
 
 [利用可能なサポートされているインテグレーションのリスト][4]を参照してください。
 
 
-[1]: /ja/logs/processing/
-[2]: /ja/logs/processing/parsing/
+[1]: /ja/logs/log_configuration/processors
+[2]: /ja/logs/log_configuration/parsing
 [3]: /ja/logs/explorer/facets/
 [4]: /ja/integrations/#cat-log-collection
 {{% /tab %}}
@@ -109,7 +109,7 @@ SSL で暗号化された接続において、Datadog へのログの送信に�
 
 
 `{{< region-param key="tcp_endpoint" code="true" >}}`
-: **ポート**: `{{< region-param key="tcp_endpoint_port" code="true" >}}` <br>
+: **ポート**: `{{< region-param key="tcp_endpoint_port_ssl" code="true" >}}` <br>
 SSL で暗号化された TCP 接続を介して protobuf 形式のログを送信するために Agent が使用。
 
 `{{< region-param key="agent_http_endpoint" code="true" >}}`
@@ -237,7 +237,7 @@ TCP エンドポイントはこのリージョンでサポートされていま�
 
 **注**:
 
-* 最適な利用のために、Datadog ではログイベントのサイズが 25KB を超えないようにすることをお勧めしています。Datadog Agent を使用する場合、ログイベントは 256KB を超え、いくつかのエントリに分割されます。Datadog TCP または HTTP API を直接使用する場合、許容可能なログイベントは最大 1MB までとなります。
+* 最適な利用のために、Datadog ではログイベントのサイズが 25KB を超えないようにすることをお勧めしています。Datadog Agent を使用する場合、 256KB を超えるログイベントは、いくつかのエントリに分割されます。Datadog TCP または HTTP API を直接使用する場合、許容可能なログイベントは最大 1MB までとなります。
 * 1 つのログイベントが持つことができるタグは 100 個以下です。1 日あたり最大 1,000 万個の一意のタグに対して、各タグは 256 文字を超えてはなりません。
 * JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 10 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
 * ログイベントは過去 18 時間、未来の 2 時間まで送信が可能です。
@@ -288,6 +288,6 @@ TCP エンドポイントはこのリージョンでサポートされていま�
 [6]: /ja/security/logs/#information-security
 [7]: /ja/agent/logs/#send-logs-over-https
 [8]: /ja/logs/explorer/facets/
-[9]: /ja/logs/processing/attributes_naming_convention
-[10]: /ja/logs/processing/attributes_naming_convention/#source-code
+[9]: /ja/logs/log_configuration/attributes_naming_convention
+[10]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
 [11]: /ja/logs/explore/

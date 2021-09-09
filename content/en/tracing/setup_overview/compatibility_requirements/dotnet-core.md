@@ -35,12 +35,12 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 ## Supported processor architectures
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------- |
-| Windows x86 (`win-x86`)                                                                                                       |
-| Windows x64 (`win-x64`)                                                                                                       |
-| Linux x64 (`linux-x64`)                                                                                                       |
-| Alpine Linux x64 (`linux-musl-x64`)                                                                                           |
+| Processor architectures                                                 |
+| ------------------------------------------------------------------------|
+| Windows x86 (`win-x86`)                                                 |
+| Windows x64 (`win-x64`)                                                 |
+| Linux x64 (`linux-x64`)                                                 |
+| Alpine Linux x64 (`linux-musl-x64`)                                     |
 | Linux ARM64 (`linux-arm64`)<br><br>.NET 5 only, added in version 1.27.0 |
 
 
@@ -73,7 +73,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ## Out of support .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 3.1 or .NET 5. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|

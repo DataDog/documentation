@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Aurora managed Postgres
 kind: documentation
 description: Install and configure Database Monitoring for Postgres on Amazon Aurora.
-private: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -291,12 +290,12 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
-    port: 3306
+    port: 5432
     username: datadog
     password: <UNIQUEPASSWORD" \
   datadog/datadog

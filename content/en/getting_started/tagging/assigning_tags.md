@@ -55,7 +55,7 @@ If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#
 
 The Agent configuration file (`datadog.yaml`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, see [Agent configuration files][2].
 
 #### YAML format
 
@@ -106,7 +106,7 @@ hostname: mymachine.mydomain
 
 The Agent configuration file (`datadog.conf`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, see [Agent configuration files][2].
 
 #### YAML format
 
@@ -257,24 +257,24 @@ For instance, a node can't be both an object (with sub-nodes) and a string:
   "key.subkey": "value_2"
 }
 ```
-The span metadata above is invalid since the value of `key` cannot refer to a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
+The span metadata above is invalid since the value of `key` cannot reference a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
 
 ### UI
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made with the UI may take up to 30 minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" style="width:80%;">}}
 
 [1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI via the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made via the UI may take up to 30 minutes to apply.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. **Note**: Changes to metric tags made with the UI may take up to 30 minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" style="width:80%;">}}
 
 [1]: /infrastructure/
 {{% /tab %}}
@@ -282,21 +282,21 @@ Assign host tags in the UI via the [Infrastructure List page][1]. Click on any h
 
 From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes.
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
 When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" style="width:80%;">}}
 
 [1]: /monitors/manage_monitor/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to ten tags to a metric. This creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
+Create percentile aggregations within [Distribution Metrics][1] by applying an allow list of up to ten tags to a metric. This creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
 
-**Apply up to ten tags. Exclusionary tags will not be accepted**:
+**Apply up to ten tags. Exclusionary tags are not accepted**:
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" style="width:80%;">}}
 
 [1]: /metrics/distributions/
 [2]: /developers/metrics/custom_metrics/
@@ -305,7 +305,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 
 The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
 [1]: /integrations/amazon_web_services/
 {{% /tab %}}
@@ -313,7 +313,7 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 When creating an SLO, assign tags under step 3 *Add name and tags*:
 
-{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags"  style="width:80%;">}}
+{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -342,7 +342,7 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 [6]: /api/v1/monitors/#edit-a-monitor
 [7]: /api/v1/tags/#add-tags-to-a-host
 [8]: /api/v1/tags/#update-host-tags
-[9]: /api/v1/tracing/
+[9]: /tracing/guide/send_traces_to_agent_by_api/
 [10]: /api/v1/service-level-objectives/#create-a-slo-object
 [11]: /api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}

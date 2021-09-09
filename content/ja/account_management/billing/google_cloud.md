@@ -1,5 +1,5 @@
 ---
-title: Google Cloud インテグレーションの課金
+title: Google Cloud インテグレーションの請求
 kind: documentation
 ---
 ## 概要

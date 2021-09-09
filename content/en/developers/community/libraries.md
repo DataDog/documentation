@@ -68,15 +68,15 @@ Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptib
 
 ### Auth0
 
-[This extension][26] takes your Auth0 logs and ships them to Datadog.
+The [Auth0 extension][26] takes your Auth0 logs and ships them to Datadog.
 
 ### CLI management
 
-A [set of tools][27] to backup/restore dashboards and monitors, and configure users via a command line interface.
+A [set of tools][27] to backup/restore dashboards and monitors, and configure users through a command line interface.
 
 ### Consul
 
-Publish consul service counts into Datadog via [DogStatsD][1] with [this library][28].
+Publish Consul service counts into Datadog from [DogStatsD][1] with the [Consul library][28].
 
 ### Dogscaler
 
@@ -92,11 +92,11 @@ This is for a [FreeSwitch ESL][31] application to export statistics to Datadog u
 
 ### Google Analytics
 
-You can get data into Datadog from Google Analytics via the Datadog API with [this library][33] from [Bithaus][34].
+You can get data into Datadog from Google Analytics using the Datadog API with the [Google Analytics library][33] from [Bithaus][34].
 
 ### Heroku
 
-Heroku emits dyno metrics via logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [the documentation][35].
+Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][35].
 
 * [Heroku Datadog Log Drain][36] written in Nodejs by [Oz][37].
 * [Heroku Datadog Log Drain][38] written in Go by [Apiary][39].
@@ -125,7 +125,7 @@ A Moogsoft [listener][45] that ingests Datadog notifications.
 ### NGINX LUA
 
 * Emit [custom metrics][46] directly from NGINX configurations using the [nginx_lua_datadog][47] module in your LUA scripts.
-* [lua-resty-dogstatsd][48] is an extension developed by [mediba inc][49] (now forked by [Dailymotion][50]). It enables emitting metrics, events, and service checks through the [DogStatsD][1] protocol. `lua-resty-dogstatsd` is released as GPLv3 and relies on the Nginx cosocket API.
+* [lua-resty-dogstatsd][48] is an extension developed by [mediba inc][49] (forked by [Dailymotion][50]). It enables emitting metrics, events, and service checks through the [DogStatsD][1] protocol. `lua-resty-dogstatsd` is released as GPLv3 and relies on the Nginx cosocket API.
 
 ### OpenVPN
 
@@ -140,10 +140,10 @@ Send health metrics from Phusion's Passenger server using the [passenger-datadog
 
 This [library][55] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][56].
 
-### Saltstack
+### SaltStack
 
-* [Datadog Saltstack Formula][57]
-* [Datadog Saltstack][58] written by [Luca Cipriani][59].
+* [Datadog SaltStack Formula][57]
+* [Datadog SaltStack][58] written by [Luca Cipriani][59].
 
 ### Sensu
 
