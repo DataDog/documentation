@@ -86,7 +86,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 Monitor your [SLOs][13] from your home screen with Datadog widgets. You can choose which dashboard opens in the app when you tap on a SLO cell, allowing you to easily view SLO-related insights.
 
-**Note**: If you do not choose a dashboard to open in the app when you tap on a SLO cell, the widget will direct you to the last app view by default.
+**Note**: If you do not choose a dashboard to open in the app when you tap on a SLO cell, the widget will simply open the app by default.
 
 ### Monitor saved views
 
