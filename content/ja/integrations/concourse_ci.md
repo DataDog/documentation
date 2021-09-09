@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md'
 display_name: Concourse CI
 draft: false
 git_integration_title: concourse_ci

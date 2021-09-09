@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Redshift のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_redshift/'
 draft: false
 git_integration_title: amazon_redshift
 has_logo: true

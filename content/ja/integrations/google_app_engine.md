@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。
-doc_link: https://docs.datadoghq.com/integrations/google_app_engine/
+doc_link: 'https://docs.datadoghq.com/integrations/google_app_engine/'
 draft: false
 git_integration_title: google_app_engine
 has_logo: true

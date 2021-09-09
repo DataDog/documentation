@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Internet of Things のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_iot/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_iot/'
 draft: false
 git_integration_title: amazon_iot
 has_logo: true

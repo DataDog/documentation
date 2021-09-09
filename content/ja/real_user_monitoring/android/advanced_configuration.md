@@ -1,8 +1,8 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
+  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md'
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
+  - link: 'https://github.com/DataDog/dd-sdk-android'
     tag: Github
     text: dd-sdk-android ソースコード
   - link: /real_user_monitoring

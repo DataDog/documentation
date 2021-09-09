@@ -5,10 +5,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog を使用して Azure Deployment Manager でのカナリアデプロイを監視
-doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_deployment_manager/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
+  - link: 'https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/'
     tag: ブログ
     text: Azure Deployment Manager と Datadog を使用したカナリアリリース
 git_integration_title: azure_deployment_manager

@@ -14,7 +14,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md'
 display_name: Cisco ACI
 draft: false
 git_integration_title: cisco_aci

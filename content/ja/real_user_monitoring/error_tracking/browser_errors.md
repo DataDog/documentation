@@ -5,13 +5,13 @@ further_reading:
   - link: /real_user_monitoring/error_tracking/explorer
     tag: ドキュメント
     text: Error Tracking Explorer
-  - link: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+  - link: 'https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps'
     tag: ドキュメント
     text: Datadog CLI の公式リポジトリ
   - link: /real_user_monitoring/guide/upload-javascript-source-maps
     tag: ガイド
     text: JavaScript ソースマップのアップロード
-  - link: https://app.datadoghq.com/error-tracking
+  - link: 'https://app.datadoghq.com/error-tracking'
     tag: UI
     text: エラー追跡
 ---

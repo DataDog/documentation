@@ -5,7 +5,7 @@ description: Synthetic 受信リクエストの特定
 aliases:
   - /ja/synthetics/identify_synthetics_bots
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
   - link: /synthetics/
@@ -40,17 +40,17 @@ Synthetic テストで生成されたリクエストにアタッチされてい�
 
 ### `user-agent`
 
-デフォルトでは`user-agent` ヘッダーが Synthetic テストによって実行されるすべてのリクエストに追加されます。テストで追加されたカスタムの `user-agent` は、デフォルトのものを上書きします。
+Synthetic テストによって実行されるすべてのリクエストに `user-agent` ヘッダーが追加されます。
 
 {{< tabs >}}
 {{% tab "シングルおよびマルチステップ API テスト" %}}
 
-シングルおよびマルチステップ API テストの場合、デフォルトの `user-agent` ヘッダーは `Datadog/Synthetics` です。
+シングルおよびマルチステップ API テストの場合、`user-agent` ヘッダーは `DatadogSynthetics` です。
 
 {{% /tab %}}
 {{% tab "Browser tests" %}}
 
-ブラウザテストの場合、デフォルトの `user-agent` ヘッダーの値は、テストを実行するブラウザとデバイスによって異なります。Synthetic テストを識別できるように、デフォルトの `user-agent` 値は常に `DatadogSynthetics` で終わります。
+ブラウザテストの場合、`user-agent` ヘッダーの値は、テストを実行するブラウザとデバイスによって異なります。Synthetic テストを識別できるように、`user-agent` 値は常に `DatadogSynthetics` で終わります。
 
 {{% /tab %}}
 {{< /tabs >}}

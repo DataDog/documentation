@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS VPC ログを収集
-doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpc/'
 draft: false
 git_integration_title: amazon_vpc
 has_logo: false

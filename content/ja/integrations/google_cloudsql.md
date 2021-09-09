@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloudsql/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true

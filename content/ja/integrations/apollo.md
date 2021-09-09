@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md'
 display_name: Apollo Engine
 draft: false
 git_integration_title: apollo

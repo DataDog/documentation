@@ -8,10 +8,10 @@ further_reading:
   - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: 'https://www.datadoghq.com/blog/service-map/'
+  - link: https://www.datadoghq.com/blog/service-map/
     tag: ブログ
     text: Datadog のサービスマップの紹介
-  - link: 'https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/'
+  - link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
     tag: ブログ
     text: サービスマップ（Datadog + Airbnb）を使用してコンテキストを作成
 ---
