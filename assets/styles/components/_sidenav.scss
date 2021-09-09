@@ -52,6 +52,11 @@ body {
         width: 20px;
         margin-top: 4px;
     }
+    // Exception for main sidenav since APM's title wraps to a second line
+    &:not(.navbar-sidenav .sidenav) .icon-apm {
+        align-self: flex-start;
+        margin-top: 8px;
+    }
 
     .sticky {
         .col {
