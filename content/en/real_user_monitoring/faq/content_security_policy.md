@@ -13,22 +13,29 @@ If you are using [Content Security Policy (CSP)][1] on your websites, add the fo
 
 Depending on the `site` option used to initialize [Real User Monitoring][2] or [browser logs collection][3], add the appropriate `connect-src` entry:
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```txt
 connect-src https://*.logs.datadoghq.com https://*.browser-intake-datadoghq.com
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+
+
+{{< site-region region="eu" >}}
 
 ```txt
 connect-src https://*.logs.datadoghq.eu https://*.browser-intake-datadoghq.eu
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
+
+
+{{< site-region region="us3,gov" >}}
+
+This feature is unavailable for this site.
+
+{{< /site-region >}}
 
 ## CDN bundle URL
 
