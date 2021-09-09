@@ -82,7 +82,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 ### Monitor SLOs
 
-{{< img src="mobile/widgets.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 Monitor your [SLOs][13] from your home screen with Datadog widgets. You can choose which dashboard opens in the app when you tap on a SLO cell, allowing you to easily view SLO-related insights.
 
