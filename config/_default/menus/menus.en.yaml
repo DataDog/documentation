@@ -2956,7 +2956,7 @@ main:
     weight: 8
   - name: Security
     url: security/
-    pre: security
+    pre: security-lock
     identifier: security
     weight: 240000
   - name: Agent
