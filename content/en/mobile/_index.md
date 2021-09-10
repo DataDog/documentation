@@ -95,7 +95,7 @@ Timeframe options are:
 - Week to date
 - Month to date
 
-You can also choose which dashboard opens in the app when you tap on an SLO widget, allowing you to quickly dig deeper into your metrics.
+You can also choose which dashboard from your organization opens in the app when you tap on an SLO widget, allowing you to quickly dig deeper into your metrics.
 
 **Note**: If you do not choose a dashboard to open in the app when you tap on an SLO widget, the widget will simply open the app by default.
 
