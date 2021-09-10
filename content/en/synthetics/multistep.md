@@ -25,7 +25,7 @@ You can:
 
 * Execute HTTP requests on API endpoints requiring authentication (for example, through a token)
 * Monitor key business transactions at the API level
-* Simulate end-to-end mobile applications journeys
+* Simulate end-to-end mobile application journeys
 
 {{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
 
@@ -37,7 +37,7 @@ Multistep API tests can run from Datadog [managed locations][4] and [private loc
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of these two [default roles][7].
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those [default roles][7].
 
 If you have access to the [custom role feature][8], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -46,11 +46,11 @@ If you have access to the [custom role feature][8], add your user to a custom ro
 ### Name and tag your test
 
 1. Name your Multistep API test.
-2. Add `env` tags and other tags to your Multistep API test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+2. Add `env` and other tags to your Multistep API test. Then, use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 
 ### Select locations
 
-Select the **Locations** to run your Multistep API test from. Multistep API tests can run from both [managed][4] and [private locations][5] depending on whether you are willing to run the test from outside or inside your network.
+Select the run **Locations** for your Multistep API test. Multistep API tests can run from both [managed][4] and [private locations][5] depending on your preference for running the test from outside or inside your network.
 
 ### Define requests
 
@@ -102,7 +102,7 @@ Hit **Create Your First Request** to start designing your test's requests.
   
   {{% tab "Privacy" %}}
 
-  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as this can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
+  * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
   
 
 [1]: /security/synthetics
@@ -177,7 +177,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -229,7 +229,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field.
 

@@ -26,7 +26,7 @@ ICMP tests can run from [managed][1] and [private locations][2] depending on whe
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of these two [default roles][4].
+By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those [default roles][4].
 
 If you have access to the [custom role feature][5], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -89,7 +89,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval with the [API][12].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 

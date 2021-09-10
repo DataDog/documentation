@@ -21,13 +21,13 @@ further_reading:
 ---
 ## Overview
 
-HTTP tests allow you to send HTTP requests to your applications' API endpoints to verify that they are responding to requests and that they meet any conditions you define, such as overall response time, status code, and header or body content.
+HTTP tests allow you to send HTTP requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, status code, and header or body content.
 
-HTTP tests can be run from [managed][1] and [private locations][2] depending on whether you want to monitor your endpoints from outside or inside your network. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+HTTP tests can run from [managed][1] and [private locations][2] from outside or inside your network depending on your preference. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of these two [default roles][4].
+By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those [default roles][4].
 
 If you have access to the [custom role feature][5], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -136,7 +136,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][14].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][14].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -187,7 +187,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][18] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][18] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 

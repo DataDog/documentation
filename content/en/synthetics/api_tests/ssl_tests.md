@@ -19,13 +19,13 @@ further_reading:
 
 ## Overview
 
-SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and your users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
+SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
 SSL tests can run from [managed][1] and [private locations][2] depending on whether you want to monitor certificates of public or internal hosts.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic SSL tests. To get create, edit, and delete access to Synthetic SSL tests, upgrade your user to one of these two [default roles][3].
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic SSL tests. To get create, edit, and delete access to Synthetic SSL tests, upgrade your user to one of those [default roles][3].
 
 If you have access to the [custom role feature][4], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -93,7 +93,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 

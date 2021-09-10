@@ -24,11 +24,11 @@ further_reading:
 
 DNS tests allow you to proactively monitor the resolvability and lookup times of your DNS records using any nameserver. If resolution is unexpectedly slow or if a DNS server answers with unexpected A, AAAA, CNAME, TXT, or MX entries, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-DNS tests can run from [managed][1] and [private locations][2], allowing you to run tests on public domains as well as internal services that might be using internal DNS.
+DNS tests can run from [managed][1] and [private locations][2], allowing you to run tests on public domains as well as internal services using internal DNS.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of these two [default roles][3].
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those [default roles][3].
 
 If you have access to the [custom role feature][4], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -87,7 +87,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][13].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][13].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 

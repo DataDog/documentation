@@ -19,14 +19,14 @@ further_reading:
 
 ## Overview
 
-TCP tests allow you to easily monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. 
+TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. 
 
-With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
+With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 TCP tests can run from [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of these two [default roles][3].
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those [default roles][3].
 
 If you have access to the [custom role feature][4], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -82,7 +82,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 

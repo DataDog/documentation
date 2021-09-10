@@ -31,7 +31,7 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][1] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of these two [default roles][1].
+By default, only users with the [Datadog Admin and Datadog Standard roles][1] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those [default roles][1].
 
 If you have access to the [custom role feature][2], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
@@ -108,7 +108,7 @@ A notification is sent according to the set of alerting conditions. To configure
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][12]. To record your test, download the [Datadog Record Test extension for Google Chrome][13].
+Tests can only be recorded from [Google Chrome][12]. To record your test, download the [Datadog Record Test extension for Google Chrome][13].
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
