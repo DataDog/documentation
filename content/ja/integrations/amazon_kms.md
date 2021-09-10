@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon KMS のキー有効期限を追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_kms/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_kms/'
 draft: false
 git_integration_title: amazon_kms
 has_logo: true

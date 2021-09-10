@@ -2,7 +2,7 @@
 title: 収集された RUM iOS データ
 kind: documentation
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-ios
+  - link: 'https://github.com/DataDog/dd-sdk-ios'
     tag: Github
     text: dd-sdk-ios ソースコード
   - link: /real_user_monitoring

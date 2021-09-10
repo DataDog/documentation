@@ -2,7 +2,7 @@
 title: Synthetic モニタリングの概要
 kind: documentation
 further_reading:
-  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  - link: https://learn.datadoghq.com/course/view.php?id=39
     tag: ラーニングセンター
     text: Synthetic テストの紹介
   - link: /synthetics/api_tests

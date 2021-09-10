@@ -20,7 +20,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_name: MarkLogic
 draft: false
 git_integration_title: marklogic

@@ -5,28 +5,28 @@ further_reading:
   - link: /tracing/visualization/
     tag: APM の UI を利用する
     text: サービス、リソース、トレースを調査する
-  - link: 'https://www.envoyproxy.io/'
+  - link: https://www.envoyproxy.io/
     tag: Documentation
     text: Envoy Web サイト
-  - link: 'https://www.envoyproxy.io/docs/envoy/latest/'
+  - link: https://www.envoyproxy.io/docs/envoy/latest/
     tag: Documentation
     text: Envoy ドキュメント
-  - link: 'https://www.nginx.com/'
+  - link: https://www.nginx.com/
     tag: Documentation
     text: NGINX ウェブサイト
-  - link: 'https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/'
+  - link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/
     tag: Documentation
     text: NGINX Ingress Controller OpenTracing
-  - link: 'https://github.com/opentracing-contrib/nginx-opentracing'
+  - link: https://github.com/opentracing-contrib/nginx-opentracing
     tag: ソースコード
     text: OpenTracing 対応 NGINX プラグイン
-  - link: 'https://istio.io/'
+  - link: https://istio.io/
     tag: Documentation
     text: Istio ウェブサイト
-  - link: 'https://istio.io/docs/'
+  - link: https://istio.io/docs/
     tag: Documentation
     text: Istio ドキュメント
-  - link: 'https://github.com/DataDog/dd-opentracing-cpp'
+  - link: https://github.com/DataDog/dd-opentracing-cpp
     tag: ソースコード
     text: Datadog OpenTracing C++ クライアント
 aliases:

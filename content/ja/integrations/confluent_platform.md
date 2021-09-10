@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md'
 display_name: Confluent Platform
 draft: false
 git_integration_title: confluent_platform

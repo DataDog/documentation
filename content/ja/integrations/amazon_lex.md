@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Lex のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_lex/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_lex/'
 draft: false
 git_integration_title: amazon_lex
 has_logo: true

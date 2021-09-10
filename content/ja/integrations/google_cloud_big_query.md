@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: クエリ数、実行回数、アップロードバイト数、行数などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_big_query/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_big_query/'
 draft: false
 git_integration_title: google_cloud_big_query
 has_logo: true

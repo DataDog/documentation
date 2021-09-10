@@ -6,10 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Akamai DataStream を Datadog と統合
-doc_link: https://docs.datadoghq.com/integrations/akamai_datastream/
+doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/akamai-cdn-performance/
+  - link: 'https://www.datadoghq.com/blog/akamai-cdn-performance/'
     tag: ブログ
     text: Akamai を Datadog と統合して CDN のパフォーマンスを監視
 git_integration_title: akamai_datastream

@@ -9,12 +9,15 @@ further_reading:
   - link: /tracing/
     tag: Documentation
     text: Datadog APM の確認
-  - link: '/tracing/trace_search_and_analytics/#live-search-for-15-minutes'
+  - link: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
     tag: Documentation
     text: Live Search
-  - link: 'https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/'
+  - link: https://www.datadoghq.com/blog/aws-lambda-tracing-go-java-functions/
     tag: ブログ
     text: Go および Java Lambda 関数のリアルタイム分散型トレーシング
+  - link: https://www.datadoghq.com/blog/datadog-serverless-view/
+    tag: ブログ
+    text: サーバーレスビューでサーバーレススタックを監視する
 ---
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="トレースサーバーレス関数"  style="width:100%;">}}
 
@@ -76,7 +79,7 @@ Go サポート用の Datadog Lambda ライブラリとトレースライブラ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [Go][11] ライブラリをトレース。
 
-Go サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][7]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、[こちら][8]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、Datadog APM で AWS X-Ray トレースを拡張することをお勧めします。
+Go サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][7]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、代わりに、[Datadog APM と AWS X-Ray トレース][3]の使用を検討することをお勧めします。
 
 *上記にリストされていないサーバーレスリソースのトレースをご希望の場合は、[こちら][9]から機能リクエストを開いてください。*
 
@@ -87,7 +90,7 @@ Java サポート用の Datadog Lambda ライブラリとトレースライブ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [Java][13] ライブラリをトレース。
 
-Java サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][7]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、[こちら][8]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、Datadog APM で AWS X-Ray トレースを拡張することをお勧めします。
+Java サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][7]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、代わりに、[Datadog APM と AWS X-Ray トレース][3]の使用を検討することをお勧めします。
 
 *Java Lambda 関数用の Datadog のトレースライブラリに関してフィードバックがございましたら、[Datadog Slack コミュニティ][15]の [#serverless][14] チャネルで行われているディスカッションをご確認ください。*
 

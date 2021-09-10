@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/harbor/README.md'
 display_name: Harbor
 draft: false
 git_integration_title: harbor

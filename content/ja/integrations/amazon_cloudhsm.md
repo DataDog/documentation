@@ -7,7 +7,7 @@ ddtype: crawler
 description: Datadog オーガニゼーションの HSM 監査ログを収集
 has_logo: true
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md'
 integration_title: AWS Cloudhsm
 is_public: true
 kind: インテグレーション

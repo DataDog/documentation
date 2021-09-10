@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Neptune のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_neptune/'
 draft: false
 git_integration_title: amazon_neptune
 has_logo: true

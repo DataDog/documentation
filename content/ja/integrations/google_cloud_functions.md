@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 関数実行時間の最小、最大、平均を追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_functions/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_functions/'
 draft: false
 git_integration_title: google_cloud_functions
 has_logo: true

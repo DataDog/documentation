@@ -6,16 +6,16 @@ aliases:
   - /ja/network_performance_monitoring/network_table
   - /ja/network_performance_monitoring/dns_monitoring
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-dns-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
     tag: ブログ
     text: Datadog での DNS モニタリング
-  - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
     tag: ブログ
     text: Datadog での CoreDNS モニタリング
   - link: /network_monitoring/performance/network_page
     tag: Documentation
     text: 各ソースと宛先間のネットワークデータを探索。
-  - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
+  - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
     tag: ブログ
     text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
 ---

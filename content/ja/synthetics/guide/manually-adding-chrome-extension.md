@@ -2,7 +2,7 @@
 title: ブラウザテスト Chrome 拡張機能を内部アプリケーションストアに手動で追加する
 kind: ガイド
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/browser-tests/'
+  - link: https://www.datadoghq.com/blog/browser-tests/
     tag: ブログ
     text: Datadog ブラウザテストによるユーザーエクスペリエンスの監視
   - link: synthetics/browser_tests

@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Blob Storage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_blob_storage/'
 draft: false
 git_integration_title: azure_blob_storage
 has_logo: true
