@@ -7609,7 +7609,6 @@ components:
       - count
       - sum
       - values
-      - metadata
       type: object
     SLOHistoryMetricsSeriesMetadataUnit:
       description: An Object of metric units.
