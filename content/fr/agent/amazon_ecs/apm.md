@@ -19,7 +19,7 @@ Après avoir suivi les [instructions d'installation de l'agent Amazon ECS][1], a
     containerDefinitions": [
     {
       "name": "datadog-agent",
-      "image": "datadog/agent:latest",
+      "image": "gcr.io/datadoghq/agent:latest",
       "cpu": 10,
       "memory": 256,
       "essential": true,

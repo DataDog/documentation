@@ -131,7 +131,7 @@ services:
       - DD_API_KEY= "<CLÉ_API_DATADOG>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'datadog/agent:latest'
+    image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
