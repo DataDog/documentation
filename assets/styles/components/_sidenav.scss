@@ -207,6 +207,9 @@ body {
                         &:lang(ja) {
                             margin-top: 0px;
                         }
+                        @include media-breakpoint-up(xxl) {
+                            image-rendering: -webkit-optimize-contrast;
+                        }
                     }
 
                     &:lang(ja) {

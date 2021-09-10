@@ -38,7 +38,7 @@ nav_sections:
             desc: メトリクスを調べてディストリビューションを作成する
           - title: アラート設定
             link: monitors/
-            icon: attention-circled.svg
+            icon: alert.svg
             desc: モニターおよび通知の作成と管理
           - title: APM & Continuous Profiler
             link: tracing/

@@ -123,6 +123,7 @@ For additional examples, see the automatic trace ID injection projects using [NL
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
+
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
 To automatically inject correlation identifiers into your log messages:
@@ -159,6 +160,7 @@ For additional examples, see [the Microsoft.Extensions.Logging automatic trace i
 [3]: https://github.com/serilog/serilog-extensions-hosting
 [4]: https://github.com/serilog/serilog-extensions-logging
 [5]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/MicrosoftExtensionsExample/Program.cs
+
 {{% /tab %}}
 {{< /tabs >}}
 

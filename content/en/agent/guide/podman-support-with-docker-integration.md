@@ -42,4 +42,4 @@ The two importants differences are:
 
 [1]: https://podman.io/
 [2]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/building_running_and_managing_containers/assembly_using-the-container-tools-api_using-the-container-tools-cli
-[3]: agent/docker
+[3]: /agent/docker

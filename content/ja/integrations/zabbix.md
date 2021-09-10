@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_name: Zabbix
 draft: false
 git_integration_title: zabbix

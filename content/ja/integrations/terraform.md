@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/terraform/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
 display_name: terraform
 draft: false
 git_integration_title: terraform
@@ -48,7 +48,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
 1. [Terraform のインストール][2]
 2. Terraform のコンフィギュレーションファイルを含むディレクトリを作成します。例: `terraform_config/`
 3. `terraform_config/` ディレクトリに、以下の内容の `main.tf` ファイルを作成します。
-    ```hcl
+    ```
     terraform {
       required_providers {
         datadog = {
@@ -67,7 +67,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
 4. `terraform init` を実行します。これにより、Terraform での利用のためにディレクトリが初期化され、Datadog プロバイダーがプルされます。
 5. `terraform_config/` ディレクトリ内に任意の `.tf` ファイルを作成し、Datadog リソースの作成を開始します。例:
 
-    ```hcl
+    ```
     # monitor.tf
     resource "datadog_monitor" "process_alert_example" {
       name    = "Process Alert Monitor"
