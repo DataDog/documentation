@@ -5,10 +5,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Utilisez Datadog pour surveiller les déploiements Canary dans Azure Deployment Manager.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_deployment_manager/'
+doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/'
+  - link: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
     tag: Blog
     text: Versions Canary avec Azure Deployment Manager et Datadog
 git_integration_title: azure_deployment_manager
