@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud Load Balancing のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/
 draft: false
 git_integration_title: google_cloud_loadbalancing
 has_logo: true

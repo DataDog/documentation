@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Load Balancer のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_load_balancer/'
+doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
 draft: false
 git_integration_title: azure_load_balancer
 has_logo: true

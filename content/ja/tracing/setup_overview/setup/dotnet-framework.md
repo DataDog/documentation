@@ -29,26 +29,35 @@ further_reading:
   - link: /tracing/visualization/
     tag: Documentation
     text: サービス、リソース、トレースの詳細
-  - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
+  - link: https://www.datadoghq.com/blog/net-monitoring-apm/
     tag: ブログ
     text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
-  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+  - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
+    tag: ブログ
+    text: コンテナ化された ASP.NET コアアプリケーションを監視する
+  - link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
+    tag: ブログ
+    text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
+  - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/samples
     tag: GitHub
     text: カスタムインスツルメンテーションの例
-  - link: 'https://github.com/DataDog/dd-trace-dotnet'
+  - link: https://github.com/DataDog/dd-trace-dotnet
     tag: GitHub
     text: ソースコード
 ---
 ## 互換性要件
 
-.NET トレーサーは、.NET Framework 4.5 以上の自動インスツルメンテーションをサポートします。サポート対象のライブラリについては、[互換性要件][1]ページをご覧ください。
+### サポートされている .NET フレームワークのランタイム
+.NET トレーサーは、.NET Framework 4.5 以上のインスツルメンテーションをサポートします。
+
+サポート対象のライブラリとプロセッサーアーキテクチャの一覧については、[互換性要件][1]をご覧ください。
 
 ## インストールと利用開始
 
 ### 自動インスツルメンテーション
 
-<div class="alert alert-warning"> 
-  <strong>注:</strong>  自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
+<div class="alert alert-warning">
+  <strong>注:</strong><br><ul><li>Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです (たとえば APM)。可視性を最大限に向上するため、アプリケーション環境内で 1 つの APM ソリューションのみを実行してください。</li><li> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。</li></ul>
 </div>
 
 次の手順に従って .NET アプリケーションのトレーシングを開始します。
@@ -65,7 +74,7 @@ IIS でホストされているアプリケーションのトレースを開始�
 
 4. 管理者として次のコマンドに従って、IIS を停止してから起動します。
 
-    <div class="alert alert-warning"> 
+    <div class="alert alert-warning">
       <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
     </div>
 
@@ -123,7 +132,7 @@ example.exe
 ```
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、アプリ内の[クイックスタート手順][2]に従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `datadog.yaml` ファイルの `apm_config` (`enabled: true`) で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、アプリ内の[クイックスタート手順][2]に従って、Datadog Agent 内でトレース収集を有効にします。
 {{< site-region region="us3,eu,gov" >}} 
 
 確実に Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
@@ -132,16 +141,15 @@ example.exe
 
 ## カスタムインスツルメンテーション
 
-<div class="alert alert-warning"> 
-  <strong>注:</strong>  自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
+<div class="alert alert-warning">
+  <strong>注:</strong> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
 </div>
 
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
-
 1. `Datadog.Trace` [NuGet パッケージ][5]をアプリケーションに追加します。
 2. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
 
-カスタムインスツルメンテーションとカスタムタグ付けの詳細については、[.NET カスタムインスツルメンテーション][6]を参照してください。
+カスタムインスツルメンテーションとカスタムタグ付けのその他の詳細については、[.NET カスタムインスツルメンテーションドキュメント][6]を参照してください。
 
 ## コンフィギュレーション
 
@@ -178,7 +186,7 @@ example.exe
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
 
-<div class="alert alert-warning"> 
+<div class="alert alert-warning">
   <strong>注:</strong> 設定は、<code>トレーサー</code>を作成する<em>前</em>に <code>TracerSettings</code> で設定する必要があります。<code>トレーサー</code>の作成後に <code>TracerSettings</code> プロパティに加えられた変更は無視されます。
 </div>
 
@@ -223,14 +231,14 @@ Tracer.Instance = tracer;
 
 {{% tab "JSON ファイル" %}}
 
-JSON ファイルを使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションのディレクトリに `datadog.json` を作成します。ルート JSON オブジェクトは各設定のキー/値を持つハッシュである必要があります。例:
+JSON ファイルを使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションのディレクトリに `datadog.json` を作成します。ルート JSON オブジェクトは各設定のキー値を持つオブジェクトである必要があります。例:
 
 ```json
 {
-    "DD_TRACE_AGENT_URL": "http://localhost:8126",
-    "DD_ENV": "prod",
-    "DD_SERVICE": "MyService",
-    "DD_VERSION": "abc123",
+  "DD_TRACE_AGENT_URL": "http://localhost:8126",
+  "DD_ENV": "prod",
+  "DD_SERVICE": "MyService",
+  "DD_VERSION": "abc123",
 }
 ```
 
@@ -238,14 +246,13 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 {{< /tabs >}}
 
-## コンフィギュレーション設定
+### コンフィギュレーション設定
 
 上記の方法を使用して、次の変数を使用してトレースコンフィギュレーションをカスタマイズします。環境変数またはコンフィギュレーションファイルを設定するときは、環境変数の名前 (たとえば、`DD_TRACE_AGENT_URL`) を使用します。コードの設定を変更するときには、TracerSettings プロパティの名前 (たとえば、`AgentUri`) を使用します。
 
-### 統合サービスタグ付け
+#### 統合サービスタグ付け
 
 [統合サービスタグ付け][7]を使用するには、サービスに対して次の設定を構成します。
-
 
 `DD_ENV`
 : **TracerSettings プロパティ**: `Environment`<br>
@@ -253,15 +260,15 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_SERVICE`
 : **TracerSettings プロパティ**: `ServiceName`<br>
-指定した場合、サービス名を設定します。それ以外の場合、.NET トレーサーは、アプリケーション名 (例: IIS アプリケーション名、プロセスエントリアセンブリ、またはプロセス名) からサービス名を自動的に判別しようとします。バージョン 1.17.0 で追加されました。
+指定した場合、サービス名を設定します。それ以外の場合、.NET トレーサーは、アプリケーション名 (IIS アプリケーション名、プロセスエントリアセンブリ、またはプロセス名) からサービス名を自動的に判別しようとします。バージョン 1.17.0 で追加されました。
 
 `DD_VERSION`
 : **TracerSettings プロパティ**: `ServiceVersion`<br>
 指定した場合、サービスのバージョンを設定します。バージョン 1.17.0 で追加されました。
 
-### 追加のオプションコンフィギュレーション
+#### 任意のコンフィギュレーション
 
-自動インスツルメンテーションとカスタムインスツルメンテーションの両方で構成変数を利用できます。
+自動インスツルメンテーションとカスタムインスツルメンテーションの両方で、次の構成変数を利用できます。
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings プロパティ**: `AgentUri`<br>
@@ -293,8 +300,16 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
-指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。バージョン 1.17.0 で追加されました。<br>
-**例**: `layer:api,team:intake`
+指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
+**例**: `layer:api,team:intake` <br>
+バージョン 1.17.0 で追加されました。
+
+`DD_TRACE_LOG_DIRECTORY`
+: .NET Tracer ログのディレクトリを設定します。<br>
+**デフォルト**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOG_PATH`
+: 自動インスツルメンテーション・ログファイルにパスを設定し、他の .NET Tracer ログファイルすべてのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合、無視されます。
 
 `DD_TRACE_LOGGING_RATE`
 : ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。
@@ -304,28 +319,17 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **例**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 `from-key` はインテグレーションタイプに固有で、アプリケーション名のプレフィックスを除外する必要があります。たとえば、`my-application-sql-server` の名前を `main-db` に変更するには、`sql-server:main-db` を使用します。バージョン 1.23.0 で追加されました。
 
-### 自動インスツルメンテーションオプションコンフィギュレーション
+#### 自動インスツルメンテーションオプションコンフィギュレーション
 
-構成変数は自動インスツルメンテーションの使用時に**のみ**利用できます。
+以下の構成変数は、自動インスツルメンテーションの使用時に**のみ**利用できます。
 
 `DD_TRACE_ENABLED`
 : **TracerSettings プロパティ**: `TraceEnabled`<br>
 <br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false`。
 **デフォルト**: `true`
 
-`DD_TRACE_LOG_DIRECTORY`
-: .NET Tracer ログのディレクトリを設定します。<br>
-**デフォルト**: `%ProgramData%\Datadog .NET Tracer\logs\`
-
-`DD_TRACE_LOG_PATH`
-: 自動インスツルメンテーション・ログファイルにパスを設定し、他の .NET Tracer ログファイルすべてのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合、無視されます。
-
-`DD_DISABLED_INTEGRATIONS`
-: **TracerSettings プロパティ**: `DisabledIntegrationNames` <br>
-無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][8]セクションでリストされているインテグレーション名です。
-
 `DD_HTTP_CLIENT_ERROR_STATUSES`
-: HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。<br>
+: HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
 **デフォルト**: `400-499`
 
 `DD_HTTP_SERVER_ERROR_STATUSES`
@@ -333,17 +337,21 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **デフォルト**: `500-599`
 
 `DD_RUNTIME_METRICS_ENABLED`
-: .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。バージョン 1.23.0 で追加されました。<br>
-**デフォルト**: `false`
+: .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false`。<br>
+**デフォルト**: `false`<br>
+バージョン 1.23.0 で追加されました。
 
 `DD_TRACE_ADONET_EXCLUDED_TYPES`
 : **TracerSettings プロパティ**: `AdoNetExcludedTypes` <br>
 自動インスツルメンテーションから除外される `AdoNet` タイプ (たとえば、`System.Data.SqlClient.SqlCommand`) のリストを設定します。
 
-
-### インテグレーションコンフィギュレーションを無効にする
+#### 自動インスツルメンテーションインテグレーションコンフィギュレーション
 
 次の表に、自動インスツルメンテーションを使用しており、インテグレーションごとの設定が可能な場合に**のみ**使用できる構成変数を示します。
+
+`DD_DISABLED_INTEGRATIONS`
+: **TracerSettings プロパティ**: `DisabledIntegrationNames` <br>
+無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][8]セクションでリストされているインテグレーション名です。
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings プロパティ**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
@@ -352,7 +360,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 #### 試験機能
 
-構成変数は現在利用可能な機能ですが、今後のリリースで変更される場合があります。
+以下の構成変数は現在利用可能な機能ですが、今後のリリースで変更される場合があります。
 
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : `true` に設定すると、Web スパンに対する改善されたリソース名を有効化します。利用可能なルートテンプレート情報を使用して ASP.NET のコアインテグレーションにスパンを追加し、追加のタグを有効化します。バージョン 1.26.0 で追加されました。<br>

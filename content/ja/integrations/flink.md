@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/flink/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
 display_name: flink
 draft: false
 git_integration_title: flink

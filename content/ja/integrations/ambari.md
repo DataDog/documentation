@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/ambari/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_name: Ambari
 draft: false
 git_integration_title: ambari

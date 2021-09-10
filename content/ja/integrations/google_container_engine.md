@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: GCE コンテナのリソースの使用状況を監視。
-doc_link: 'https://docs.datadoghq.com/integrations/google_container_engine/'
+doc_link: https://docs.datadoghq.com/integrations/google_container_engine/
 draft: false
 git_integration_title: google_container_engine
 has_logo: true

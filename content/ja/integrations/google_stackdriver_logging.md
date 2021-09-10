@@ -6,10 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Stackdriver に収集されたログのサイズを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/google_stackdriver_logging/'
+doc_link: https://docs.datadoghq.com/integrations/google_stackdriver_logging/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/'
+  - link: https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/
     tag: ブログ
     text: Datadog を使用した Google Stackdriver ログの収集。
 git_integration_title: google_stackdriver_logging
