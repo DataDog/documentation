@@ -28632,6 +28632,28 @@
       }
     },
     "securitySchemes": {
+      "AuthZ": {
+        "description": "This API uses OAuth 2 with the implicit grant flow.",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "/oauth2/v1/authorize",
+            "scopes": {
+              "dashboards_public_share": "The ability to share dashboards externally.",
+              "dashboards_read": "The ability to view dashboards.",
+              "dashboards_write": "The ability to create and change dashboards.",
+              "events_read": "The ability to read events data.",
+              "metrics_read": "The ability to view custom metrics.",
+              "security_monitoring_rules_read": "The ability to read Detection rules.",
+              "security_monitoring_rules_write": "The ability to create and edit Detection rules.",
+              "security_monitoring_signals_read": "The ability to view Security signals.",
+              "user_access_invite": "Allows users to invite other users to your organization.",
+              "user_access_manage": "Grants the permission to disable users, manage user roles and SAML-to-role mappings."
+            },
+            "tokenUrl": "/oauth2/v1/token"
+          }
+        },
+        "type": "oauth2"
+      },
       "apiKeyAuth": {
         "description": "Your Datadog API Key.",
         "in": "header",
@@ -35464,6 +35486,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "dashboards_read"
+            ]
+          }
+        ],
         "summary": "Get items of a Dashboard List",
         "tags": [
           "Dashboard Lists"
@@ -47246,6 +47279,17 @@
             "description": "Too Many Requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "metrics_read"
+            ]
+          }
+        ],
         "summary": "List tag configurations",
         "tags": [
           "Metrics"
@@ -47431,6 +47475,15 @@
             "description": "Too Many Requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List tags by metric name",
         "tags": [
           "Metrics"
@@ -48632,6 +48685,15 @@
             "description": "Too Many Requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List distinct metric volumes by metric name",
         "tags": [
           "Metrics"
@@ -48775,6 +48837,15 @@
             "description": "Authentication error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List permissions",
         "tags": [
           "Roles"
@@ -49017,6 +49088,15 @@
             "description": "Authentication Error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get all processes",
         "tags": [
           "Processes"
@@ -49250,6 +49330,15 @@
             "description": "Authentication error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List roles",
         "tags": [
           "Roles"
@@ -49558,6 +49647,17 @@
             "description": "Authentication error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Create role",
         "tags": [
           "Roles"
@@ -49657,6 +49757,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Delete role",
         "tags": [
           "Roles"
@@ -49837,6 +49948,15 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get a role",
         "tags": [
           "Roles"
@@ -50127,6 +50247,17 @@
             "description": "Unprocessable Entity"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Update a role",
         "tags": [
           "Roles"
@@ -50342,6 +50473,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Revoke permission",
         "tags": [
           "Roles"
@@ -50495,6 +50637,15 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List permissions for a role",
         "tags": [
           "Roles"
@@ -50708,6 +50859,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Grant permission to a role",
         "tags": [
           "Roles"
@@ -51366,6 +51528,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Remove a user from a role",
         "tags": [
           "Roles"
@@ -51982,6 +52155,15 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get all users of a role",
         "tags": [
           "Roles"
@@ -52622,6 +52804,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Add a user to a role",
         "tags": [
           "Roles"
@@ -52690,6 +52883,17 @@
             "description": "Not Authorized"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_read"
+            ]
+          }
+        ],
         "summary": "Get the latest Cloud Workload Security policy",
         "tags": [
           "Cloud Workload Security"
@@ -54380,6 +54584,17 @@
             "description": "Bad Request"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_read"
+            ]
+          }
+        ],
         "summary": "List rules",
         "tags": [
           "Security Monitoring"
@@ -55182,6 +55397,17 @@
             "description": "Not Authorized"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_write"
+            ]
+          }
+        ],
         "summary": "Create a detection rule",
         "tags": [
           "Security Monitoring"
@@ -55281,6 +55507,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_write"
+            ]
+          }
+        ],
         "summary": "Delete an existing rule",
         "tags": [
           "Security Monitoring"
@@ -55705,6 +55942,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_read"
+            ]
+          }
+        ],
         "summary": "Get a rule's details",
         "tags": [
           "Security Monitoring"
@@ -56539,6 +56787,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_write"
+            ]
+          }
+        ],
         "summary": "Update an existing rule",
         "tags": [
           "Security Monitoring"
@@ -56794,6 +57053,17 @@
             "description": "Not Authorized"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_read"
+            ]
+          }
+        ],
         "summary": "Get a quick list of security signals",
         "tags": [
           "Security Monitoring"
@@ -57041,6 +57311,17 @@
             "description": "Not Authorized"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_signals_read"
+            ]
+          }
+        ],
         "summary": "Get a list of security signals",
         "tags": [
           "Security Monitoring"
@@ -65440,6 +65721,17 @@
             "description": "Authentication error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_invite"
+            ]
+          }
+        ],
         "summary": "Send invitation emails",
         "tags": [
           "Users"
@@ -65590,6 +65882,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_invite"
+            ]
+          }
+        ],
         "summary": "Get a user invitation",
         "tags": [
           "Users"
@@ -66229,6 +66532,15 @@
             "description": "Authentication error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "List all users",
         "tags": [
           "Users"
@@ -66863,6 +67175,17 @@
             "description": "Authentication error"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_invite"
+            ]
+          }
+        ],
         "summary": "Create a user",
         "tags": [
           "Users"
@@ -66963,6 +67286,17 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Disable a user",
         "tags": [
           "Users"
@@ -67510,6 +67844,15 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get user details",
         "tags": [
           "Users"
@@ -68169,6 +68512,17 @@
             "description": "Unprocessable Entity"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "user_access_manage"
+            ]
+          }
+        ],
         "summary": "Update a user",
         "tags": [
           "Users"
@@ -68718,6 +69072,15 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get a user organization",
         "tags": [
           "Users"
@@ -68874,6 +69237,15 @@
             "description": "Not found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
         "summary": "Get a user permissions",
         "tags": [
           "Users"
