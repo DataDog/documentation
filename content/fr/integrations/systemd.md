@@ -65,7 +65,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup/:ro \
               -v /run/systemd/:/host/run/systemd/:ro \
               -e DD_API_KEY=<VOTRE_CLÉ_API> \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 ### Configuration
