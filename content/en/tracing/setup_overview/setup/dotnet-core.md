@@ -301,7 +301,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
     `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-    See [configure the tracer](#configure-the-tracer) for more information on how to set these variables.
+    See [Configuration](#configuration) for more information on how to set these variables.
 {{< site-region region="us3,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
