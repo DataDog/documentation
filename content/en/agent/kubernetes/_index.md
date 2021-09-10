@@ -165,7 +165,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [Manifest template][11] | no template             |
     | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
 
-     To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18], and [Security][19]: documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18], and [Security][19] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
