@@ -8,10 +8,10 @@ aliases:
   - /ja/logs/explorer/search/
   - /ja/logs/search_syntax/
 further_reading:
-  - link: /logs/explorer/#visualize
+  - link: '/logs/explorer/#visualize'
     tag: ドキュメント
     text: ログ分析の実行
-  - link: /logs/explorer/#patterns
+  - link: '/logs/explorer/#patterns'
     tag: ドキュメント
     text: ログ内のパターン検出
   - link: /logs/log_configuration/processors

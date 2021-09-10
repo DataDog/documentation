@@ -26,7 +26,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/nginx/README.md'
 display_name: Nginx
 draft: false
 git_integration_title: nginx

@@ -3,7 +3,7 @@ title: リクエストフローマップ
 kind: documentation
 description: トレース検索と分析
 further_reading:
-  - link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
+  - link: 'https://www.datadoghq.com/blog/apm-request-flow-map-datadog'
     tag: ブログ
     text: リクエストフローマップについて
 ---

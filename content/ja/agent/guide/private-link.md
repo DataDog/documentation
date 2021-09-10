@@ -5,7 +5,7 @@ further_reading:
   - link: agent/logs
     tag: ドキュメント
     text: Agent によるログ収集を有効にします。
-  - link: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
+  - link: '/integrations/amazon_web_services/#set-up-the-datadog-lambda-function'
     tag: ドキュメント
     text: AWS サービスからログを収集する
 ---
@@ -25,17 +25,7 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 
 {{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="VPC ダイアグラムスキーマ" >}}
 
-## セットアップ
-
-### Datadog Agent
-
-[datadog.yaml][2] で `dd_url` パラメーターを更新します。
-
-```yaml
-dd_url: https://agent.datadoghq.com
-```
-
-### AWS VPC エンドポイント
+## VPC エンドポイントを作成する
 
 1. AWS コンソールでリージョン **us-east-1** に接続し、新しい VPC エンドポイントを作成します。
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="VPC エンドポイントを作成" style="width:60%;" >}}
@@ -81,7 +71,7 @@ dd_url: https://agent.datadoghq.com
 | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` |
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes リソース" %}}
 
 | Datadog Kubernetes Explorer サービス名                  |
 | --------------------------------------------------------- |
@@ -90,7 +80,7 @@ dd_url: https://agent.datadoghq.com
 {{% /tab %}}
 {{< /tabs >}}
 
-4. _verify_ ボタンをクリックします。_Service name found_ と表示されない場合は、[Datadog のサポートチーム][3]にお問い合わせください。
+4. _verify_ ボタンをクリックします。_Service name found_ と表示されない場合は、[Datadog のサポートチーム][2]にお問い合わせください。
 5. Datadog の VPC サービスエンドポイントと紐付ける VPC およびサブネットを選択します。
 6. **Enable DNS name** (_Enable for this endpoint_) にチェックが入っていることを確認してください。
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="プライベート DNS を有効化" style="width:60%;" >}}
@@ -98,14 +88,14 @@ dd_url: https://agent.datadoghq.com
 
     **注**: **セキュリティグループは、TCP ポート `443` のインバウンドトラフィックを許可する必要があります**。
 
-8. 画面下部の **Create endpoint** をクリックします。作成が完了すると以下が表示されます。
+8. 画面下部の **Create endpoint** をクリックします。作成が完了すると以下のようなメッセージが表示されます。
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC エンドポイントの作成完了" style="width:60%;" >}}
 9. VPC エンドポイントの ID をクリックしてステータスを確認します。
 10. ステータスが _Pending_ から _Available_ に変わるまでお待ちください。約 10 分要する場合があります。
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC のステータス" style="width:60%;" >}}
 
     _Available_ が表示されると、AWS PrivateLink を使用することができます。
-11. ログデータを収集する場合は、Agent が HTTPS 経由でログを送信するように構成されていることを確認してください。まだない場合は、[Agent `datadog.yaml` コンフィギュレーションファイル][2]に以下を追加します。
+11. ログデータを収集する場合は、Agent が HTTPS 経由でログを送信するように構成されていることを確認してください。まだない場合は、[Agent `datadog.yaml` コンフィギュレーションファイル][3]に以下を追加します。
 
     ```yaml
     logs_config:
@@ -118,7 +108,7 @@ dd_url: https://agent.datadoghq.com
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    このコンフィギュレーションは AWS PrivateLink で Datadog にログを送信する際に必要です。詳細は [Agent のログ収集][4]を参照してください。
+    このコンフィギュレーションは AWS PrivateLink 経由で Datadog にログを送信する場合に必要です。　詳細は [Agent のログ収集ドキュメント][4]を参照してください。
 12. [Agent を再起動][5]し、AWS PrivateLink 経由で Datadog にデータを送信します。
 
 ## 高度な使用方法
@@ -129,15 +119,15 @@ dd_url: https://agent.datadoghq.com
 
 リージョン間 VPC ピアリングを使用すると、異なる AWS リージョン間で VPC 間の接続を確立できます。これにより、異なるリージョンの VPC リソースがプライベート IP アドレスを使用して互いに通信できるようになります。
 
-詳細については、[Amazon VPC ピアリング][6]を参照してください。
+詳細については、[Amazon VPC ピアリングのドキュメント][6]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /ja/help/
+[2]: /ja/help/
+[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [5]: /ja/agent/guide/agent-commands/#restart-the-agent
 [6]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

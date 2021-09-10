@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog イベントストリームでストーリーを参照してコメントを入力。
-doc_link: https://docs.datadoghq.com/integrations/pivotal/
+doc_link: 'https://docs.datadoghq.com/integrations/pivotal/'
 draft: false
 git_integration_title: pivotal
 has_logo: true

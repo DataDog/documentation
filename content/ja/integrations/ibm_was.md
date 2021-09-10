@@ -17,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md'
 display_name: IBM WAS
 draft: false
 git_integration_title: ibm_was

@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md'
 display_name: Rundeck
 draft: false
 git_integration_title: rundeck

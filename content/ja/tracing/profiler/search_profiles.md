@@ -10,7 +10,7 @@ further_reading:
   - link: getting_started/profiler
     tag: Documentation
     text: プロファイラーの概要
-  - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
     tags: ブログ
     text: Datadog に常時接続型の本番環境プロファイリングが登場
 ---

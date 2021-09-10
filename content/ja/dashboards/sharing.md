@@ -1,12 +1,12 @@
 ---
-title: ダッシュボードの共有
+title: 共有
 kind: documentation
 aliases:
   - /ja/graphing/faq/is-there-a-way-to-share-graphs
   - /ja/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
   - /ja/graphing/dashboards/shared_graph/
 further_reading:
-  - link: https://www.datadoghq.com/blog/dashboard-sharing/
+  - link: 'https://www.datadoghq.com/blog/dashboard-sharing/'
     tag: ブログ
     text: ダッシュボードを組織外の人と安全に共有する
   - link: /dashboards/
@@ -76,9 +76,9 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 4. グラフのタイムフレームを選択します。
 5. グラフサイズを選択します。
 6. 凡例を入れるかどうかを選択します。
-7. **Generate embed code** ボタンを使用して、埋め込みコードを取得します。
+7. Generate embed code ボタンを使用して、埋め込みコードを取得します。
 
-{{< img src="dashboards/sharing/share_graph.png" alt="グラフの共有" style="width:75%;">}}
+{{< img src="dashboards/sharing/share_graph.png" alt="グラフの共有"  style="width:75%;">}}
 
 ### 無効化
 
@@ -90,7 +90,7 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 
 ### 制限の適用
 
-ダッシュボードへのアクセスを IP アドレスごとに制限できます。[Datadog サポート][5]にメールを送信し、IP アドレスにリスト機能が含まれるよう依頼すると、管理者はこの機能を使用して、共有ダッシュボードにアクセスできる IP アドレスのリストを提供できます。これが有効にした後に、組織の[セキュリティ][6]ページに対する制限を管理します。
+ダッシュボードへのアクセスを IP アドレスごとに制限できます。[Datadog サポート][5]にメールを送信し、IP アドレスにリスト機能が含まれるよう依頼すると、管理者はこの機能を使用して、共有ダッシュボードにアクセスできる IP アドレスのリストを提供できます。これが有効にした後に、組織の[セキュリティページ][6]に対する制限を管理します。
 
 ### ダークモード
 

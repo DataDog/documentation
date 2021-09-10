@@ -13,10 +13,10 @@ further_reading:
   - link: tracing/profiler/search_profiles
     tag: Documentation
     text: 使用可能なプロファイルタイプの詳細
-  - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
     tags: ブログ
     text: Datadog に常時接続型の本番環境プロファイリングが登場。
-  - link: https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/
+  - link: 'https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/'
     tags: ブログ
     text: 継続的な脆弱性分析のための Datadog GitHub アクション。
 ---

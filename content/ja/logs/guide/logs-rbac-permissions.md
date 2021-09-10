@@ -90,10 +90,10 @@ further_reading:
 [ログ処理パイプライン][9]を作成および変更する能力をロールに付与します。それには以下が含まれます。
 
 - パイプラインの名前を設定する
-- 処理パイプラインに入る必要があるログにパイプラインフィルターを設定する
+- 処理パイプラインに入る必要があるログに[パイプラインフィルター][10]を設定する
 - パイプラインを並べ替える
 - 別のロールに、そのパイプラインを対象とした[ログ書き込みプロセッサ](#logs-write-processors)アクセス許可を付与します
-- [標準属性][10]または[ファセットのエイリアス設定][11]を管理する
+- [標準属性][11]または[ファセットのエイリアス設定][12]を管理する
 
 **注**: このアクセス許可は、バックグラウンドで[ログ書き込みプロセッサ](#logs-write-processors) (すべてのパイプライン上のすべてのプロセッサに対して) アクセス許可も付与します。
 
@@ -140,9 +140,9 @@ curl -X POST \
 
 ### `logs_write_archives`
 
-[ログアーカイブ][12]を作成、編集、または削除する能力を付与します。それには以下が含まれます。
+[ログアーカイブ][13]を作成、編集、または削除する能力を付与します。それには以下が含まれます。
 
-- アーカイブにルーティングするログのアーカイブフィルターを設定する
+- アーカイブにルーティングするログの[アーカイブフィルター][10]を設定する
 - アーカイブの名前を設定する
 - アーカイブを並べ替える
 - [ログ読み取りアーカイブ](#logs-read-archives)アクセス許可をロールのサブセットに制限します。
@@ -151,7 +151,7 @@ curl -X POST \
 
 ### `logs_read_archives`
 
-アーカイブコンフィギュレーションの詳細にアクセスする能力を付与します。 [ログ書き込み履歴ビュー](#logs-write-historical-view)と組み合わせて、このアクセス許可はアーカイブから[リハイドレート][13]をトリガーする能力も付与します。
+アーカイブコンフィギュレーションの詳細にアクセスする能力を付与します。 [ログ書き込み履歴ビュー](#logs-write-historical-view)と組み合わせて、このアクセス許可はアーカイブから[リハイドレート][14]をトリガーする能力も付与します。
 
 このアクセス許可の対象はアーカイブのサブセットとなります。アクセス制限のないアーカイブは、`logs_read_archives` アクセス許可をもつロールに属するユーザー全員が閲覧できます。アクセスが制限されているアーカイブは、`logs_read_archives` が許可されているロールを除き、登録済みのロールのいずれかに属するユーザーのみしかアクセスできません。
 
@@ -183,7 +183,7 @@ curl -X POST \
 
 ### `logs_write_historical_views`
 
-[Log Rehydration*][13] をトリガーすることを意味する、履歴ビューを書き込む能力を付与します。
+[Log Rehydration*][14] をトリガーすることを意味する、履歴ビューを書き込む能力を付与します。
 
 このアクセス許可はグローバルです。 これにより、ユーザーは、[ログ読み取りアーカイブ](#logs_read_archives)アクセス許可を持つアーカイブのリハイドレートをトリガーできます。
 
@@ -196,7 +196,7 @@ curl -X POST \
 * `PROD` ロールメンバーは、アーカイブの読み取りアクセス許可を持っていないため、`Audit Archive` からリハイドレートすることは**できません**。
 
 
-`Audit Archive` からリハイドレートされたすべてのログに `team:audit` タグを割り当てるときは、`team:audit` ログの読み取りに制限されている `Audit` ロールメンバーがリハイドレートされたコンテンツにのみアクセスできることを確認してください。タグの追加とリハイドレートの方法の詳細については、[ログアーカイブ設定セクション][12]を参照してください。
+`Audit Archive` からリハイドレートされたすべてのログに `team:audit` タグを割り当てるときは、`team:audit` ログの読み取りに制限されている `Audit` ロールメンバーがリハイドレートされたコンテンツにのみアクセスできることを確認してください。タグの追加とリハイドレートの方法の詳細については、[ログアーカイブ設定セクション][13]を参照してください。
 
 `Prod Archive` からリハイドレートされた `service:ci-cd` ログの場合、次の点に注意してください。
 
@@ -208,11 +208,11 @@ curl -X POST \
 
 Datadog API でログコンフィギュレーションを表示、作成または変更する能力を付与します。
 
-* API を介して[アーカイブ][14]を表示および構成する
-* API を介して[インデックス][15]を表示および構成する
-* API を介して[パイプライン][16]を表示および構成する
-* API を介して[制限クエリ][17]を表示および構成する
-* API を介して[ログから生成されたメトリクス][18]を表示および構成する
+* API を介して[アーカイブ][15]を表示および構成する
+* API を介して[インデックス][16]を表示および構成する
+* API を介して[パイプライン][17]を表示および構成する
+* API を介して[制限クエリ][18]を表示および構成する
+* API を介して[ログから生成されたメトリクス][19]を表示および構成する
 
 ログパブリックコンフィギュレーション API アクセス許可は、API を介してアクションを操作するアクセス許可のみを付与します。たとえば、[ログ書き込み除外フィルターアクセス許可](#logs-write-exclusion-filters)を持たないユーザーは、ログパブリックコンフィギュレーション API アクセス許可が付与されていても、API を介してサンプリングレートを更新できません。
 
@@ -225,7 +225,7 @@ Datadog API でログコンフィギュレーションを表示、作成また�
 
 ### `logs_read_data`
 
-ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][17]など)。
+ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][18]など)。
 
 ロールは付加的です。ユーザーが複数のロールに属している場合、ユーザーがアクセスできるデータは、各ロールからのすべてのアクセス許可の結合になります。
 
@@ -354,7 +354,7 @@ curl -X POST \
 
 ### `logs_live_tail`
 
-ロールに [Live Tail][19] 機能を使用する能力を付与します。
+ロールに [Live Tail][20] 機能を使用する能力を付与します。
 
 このアクセス許可はグローバルで、[ログ読み取りインデックスデータ](#logs-read-index-data)アクセス許可に関係なく、livetail へのアクセスを許可します。
 
@@ -373,14 +373,15 @@ curl -X POST \
 [6]: /ja/logs/indexes#indexes-filters
 [7]: /ja/logs/indexes#update-log-retention
 [8]: /ja/logs/indexes#exclusion-filters
-[9]: /ja/logs/log_configuration/pipelines
-[10]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[11]: /ja/logs/explorer/facets/#alias-facets
-[12]: /ja/logs/archives
-[13]: /ja/logs/archives/rehydrating
-[14]: /ja/api/v2/logs-archives/
-[15]: /ja/api/v1/logs-indexes/
-[16]: /ja/api/v1/logs-pipelines/
-[17]: /ja/api/v2/logs-restriction-queries/
-[18]: /ja/api/v2/logs-metrics/
-[19]: /ja/logs/explorer/live_tail/
+[9]: /ja/logs/processing/pipelines/
+[10]: /ja/logs/processing/pipelines/#pipeline-filters
+[11]: /ja/logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
+[12]: /ja/logs/explorer/facets/#alias-facets
+[13]: /ja/logs/archives
+[14]: /ja/logs/archives/rehydrating
+[15]: /ja/api/v2/logs-archives/
+[16]: /ja/api/v1/logs-indexes/
+[17]: /ja/api/v1/logs-pipelines/
+[18]: /ja/api/v2/logs-restriction-queries/
+[19]: /ja/api/v2/logs-metrics/
+[20]: /ja/logs/explorer/live_tail/

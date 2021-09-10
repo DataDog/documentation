@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/split/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/split/README.md
 display_name: Split
 draft: false
 git_integration_title: split

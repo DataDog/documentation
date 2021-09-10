@@ -55,7 +55,7 @@ further_reading:
 
 各クエリの結果に関数を適用できます。
 
-関数の詳細については、[使用例][1]のページを参照してください。
+関数の詳細については、[使用例のページ][1]を参照してください。
 
 #### 集計の方法
 
@@ -130,7 +130,7 @@ further_reading:
 }
 ```
 
-系列の加減乗除も可能です。**注**: Datadog は整合性を強制しないため、リンゴをオレンジで*割ることもできます*。
+系列の加減乗除も可能です。Datadog は、この時点では整合性を強制しません。したがって、リンゴをオレンジで割ることもできます。
 
 ```json
 {"viz": "timeseries", "requests": [{"q": "metric{apples} / metric{oranges}"}]}
@@ -138,7 +138,7 @@ further_reading:
 
 ## 例
 
-{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="JSON を使用したグラフ化" style="width:75%;" >}}
+{{< img src="dashboards/graphing_json/graph_example_for_json.png" alt="JSON を使用したグラフ化"  style="width:75%;" >}}
 
 上記の例の JSON は、特定のデバイスとホストで受信され、アカウントごとにグループ化されたネットワークバイトの「平均」を示しています。
 
@@ -169,7 +169,7 @@ further_reading:
 ```
 
 
-{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="レートの例" style="width:75%;" >}}
+{{< img src="dashboards/graphing_json/rate_example_for_json.png" alt="レートの例"  style="width:75%;" >}}
 
 これは、パラメーターとして単一のメトリクスのみを受け取る `rate() 関数を使用した例です。
 
@@ -201,7 +201,7 @@ further_reading:
     ]
 ```
 
-これは、トップリストと同じ例です。
+これは、トップリストを使用した同じ例です。
 
 ```json
 {
@@ -267,7 +267,7 @@ further_reading:
 
 これは、`error` ログと `info` ログの比率をグラフ化してから、タイムシフト関数を適用する方法を示す別の例です。
 
-{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="比率の例" style="width:75%;" >}}
+{{< img src="dashboards/graphing_json/advanced_graph_example_for_json.png" alt="比率の例"  style="width:75%;" >}}
 
 ```json
 {

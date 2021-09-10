@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md'
 display_name: Palo Alto Networks Firewall
 draft: false
 git_integration_title: pan_firewall

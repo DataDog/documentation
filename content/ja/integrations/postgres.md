@@ -27,7 +27,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/postgres/README.md'
 display_name: Postgres
 draft: false
 git_integration_title: postgres
@@ -56,8 +56,6 @@ supported_os:
   - windows
 ---
 ![PostgreSQL Graph][1]
-
-<div class="alert alert-info">このページでは、Postgres エージェントのインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
 ## 概要
 
@@ -443,12 +441,12 @@ Agent コンテナで必要な環境変数
 PostgreSQL チェックには、イベントは含まれません。
 
 ### サービスのチェック
-{{< get-service-checks-from-git "postgres" >}}
 
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
@@ -456,23 +454,24 @@ PostgreSQL チェックには、イベントは含まれません。
 
 ### よくあるご質問
 
-- [PostgreSQL カスタムメトリクスの収集の説明][6]
+- [PostgreSQL カスタムメトリクスの収集の説明][7]
 
 ### ブログ記事
 
-- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][7]
-- [PostgreSQL モニタリングのキーメトリクス][8]
-- [PostgreSQL モニタリングツールでメトリクスを収集][9]
-- [Datadog で PostgreSQL データを収集および監視する方法][10]
+- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][8]
+- [PostgreSQL 監視のキーメトリクス][9]
+- [PostgreSQL 監視ツールでメトリクスを収集][10]
+- [Datadog で PostgreSQL データを収集および監視する方法][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/help
-[6]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
-[7]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
-[8]: https://www.datadoghq.com/blog/postgresql-monitoring
-[9]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
-[10]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+[5]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
+[6]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
+[8]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+[9]: https://www.datadoghq.com/blog/postgresql-monitoring
+[10]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+[11]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog

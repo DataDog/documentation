@@ -23,7 +23,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
 display_name: RabbitMQ
 draft: false
 git_integration_title: rabbitmq
@@ -39,7 +39,6 @@ metric_to_check: rabbitmq.queue.messages
 name: rabbitmq
 process_signatures:
   - rabbitmq
-  - rabbitmq-server
 public_title: Datadog-RabbitMQ インテグレーション
 short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
 support: コア

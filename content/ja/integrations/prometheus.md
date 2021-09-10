@@ -10,7 +10,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md'
 display_name: Prometheus
 draft: false
 git_integration_title: prometheus
