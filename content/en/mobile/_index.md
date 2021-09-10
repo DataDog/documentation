@@ -84,7 +84,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 {{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][13] from your home screen with Datadog widgets. You can choose the SLO from your organization for display, along with a timeframe.
+View your [SLOs][13] from your home screen with Datadog widgets. You can choose the SLOs from your organization for display, along with a timeframe.
 
 Timeframe options are:
 - 7 days
