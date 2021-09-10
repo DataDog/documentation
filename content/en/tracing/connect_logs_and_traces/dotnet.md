@@ -193,6 +193,8 @@ After completing Step 1 and 2 [above](#getting-started), finish your manual log 
 
 2. Use the `CorrelationIdentifier` API to retrieve correlation identifiers and add them to the log context while a span is active.
 
+Lastly, see [C# Log Collection][7] to configure your log collection.
+
 Examples:
 
 {{< tabs >}}
@@ -288,7 +290,6 @@ using(_logger.BeginScope(new Dictionary<string, object>
 {{% /tab %}}
 {{< /tabs >}}
 
-Finally, configure log collection as described in [C# Log Collection][7].
 
 ## Configure log collection
 
