@@ -84,7 +84,18 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 {{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][13] from your home screen with Datadog widgets. You can choose which dashboard opens in the app when you tap on a cell, allowing you to easily view SLO-related insights.
+View your [SLOs][13] from your home screen with Datadog widgets. You can choose the SLO from your organization for display, along with a timeframe.
+
+Timeframe options are:
+- 7 days
+- 30 days
+- 90 days
+- Previous week
+- Previous month
+- Week to date
+- Month to date
+
+You can also choose which dashboard opens in the app when you tap on an SLO widget, allowing you to quickly dig deeper into your metrics.
 
 **Note**: If you do not choose a dashboard to open in the app when you tap on a SLO cell, the widget will simply open the app by default.
 
@@ -118,6 +129,7 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 
 {{% /tab %}}
 {{< /tabs >}}
+
 #### Edit a widget
 
 {{< tabs >}}
@@ -141,6 +153,7 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 
 {{% /tab %}}
 {{< /tabs >}}
+
 #### Multiple organizations
 
 You can display Saved Views from multiple organizations within the same widget. 
@@ -159,6 +172,7 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 - Tap "Save". The widget is now configured with saved views from a different organization.
 {{% /tab %}}
 {{< /tabs >}}
+
 #### Delete a widget
 
 {{< tabs >}}
