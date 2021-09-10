@@ -32,7 +32,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
     tag: Blog
     text: Surveillance .NET avec l'APM et le tracing distribué de Datadog
-  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
     tag: GitHub
     text: Exemples d'instrumentation personnalisée
   - link: 'https://github.com/DataDog/dd-trace-dotnet'
