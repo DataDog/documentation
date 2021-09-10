@@ -151,6 +151,7 @@ link_checks_preview:
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
+    GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - htmltest
@@ -304,6 +305,7 @@ test_live_link_checks:
   environment: "live"
   variables:
     URL: ${LIVE_DOMAIN}
+    GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - htmltest
