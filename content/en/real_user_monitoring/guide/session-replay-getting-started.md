@@ -13,7 +13,6 @@ further_reading:
 ---
 
 <div class="alert alert-info"><p>Session Replay is in private beta. There are no billing implications for the Session Replays during this period. If you want to be added to the private beta, sign up by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
-<p>Note: Session Replay is not a <a href="https://www.datadoghq.com/legal/hipaa-eligible-services/">HIPAA eligible service</a>. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
 </div>
 
 ## What is Session Replay?
