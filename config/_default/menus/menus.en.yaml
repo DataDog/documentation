@@ -5,106 +5,121 @@ main_left:
     weight: -500
   - identifier: features
     name: Features
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''features icon''>'
+    pre: '<i class="icon-features align-middle"></i>'
     url: 'https://www.datadoghq.com/product/'
     weight: 1
     parent: product
   - identifier: integrations
     name: Integrations
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''integrations icon''>'
+    pre: '<i class="icon-integrations align-middle"></i>'
     url: 'https://www.datadoghq.com/product/platform/integrations/'
     weight: 2
     parent: product
   - identifier: dashboarding
     name: Dashboards
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''dashboard icon''>'
+    pre: '<i class="icon-dashboard align-middle"></i>'
     url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 3
     parent: product
   - identifier: infrastructure
     name: Infrastructure Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg'' alt=''infra icon''>'
+    pre: '<i class="icon-host-map align-middle"></i>'
     url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
     weight: 4
     parent: product
   - identifier: logs
     name: Log Management
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''log icon''>'
-    url: 'https://www.datadoghq.com/product/log-management/'
+    pre: '<i class="icon-log align-middle"></i>'
     weight: 5
     parent: product
   - identifier: apm
     name: APM
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''apm icon''>'
-    url: 'https://www.datadoghq.com/product/apm/'
+    pre: '<i class="icon-apm align-middle"></i>'
     weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''profiler icon''>'
+    pre: '<i class="icon-profiling-1 align-middle"></i>'
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
+    pre: '<i class="icon-synthetics align-middle"></i>'
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    pre: '<i class="icon-rum align-middle"></i>'
     weight: 9
-    parent: product
-  - identifier: security-platform
-    name: Security Platform
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
-    url: 'https://www.datadoghq.com/product/security-platform/'
-    weight: 10
-    parent: product
-  - identifier: security-monitoring
-    name: Security Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
-    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
-    weight: 11
-    parent: product
-  - identifier: cloud-security-posture-management
-    name: CSPM
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
-    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
-    weight: 12
     parent: product
   - identifier: network
     name: Network Monitoring
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
+    pre: '<i class="icon-network align-middle"></i>'
     url: 'https://www.datadoghq.com/product/network-monitoring'
+    weight: 10
+    parent: product
+  - identifier: security-platform
+    name: Security Platform
+    pre: '<i class="icon-security align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/'
+    weight: 11
+    parent: product
+  - identifier: security-monitoring
+    name: Security Monitoring
+    pre: '<i class="icon-security align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
+    weight: 12
+    parent: product
+  - identifier: cloud-security-posture-management
+    name: CSPM
+    pre: '<i class="icon-cspm align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
     weight: 13
     parent: product
+  - identifier: cloud-workload-security
+    name: Cloud Workload Security
+    pre: '<i class="icon-cws align-middle"></i>'
+    url: 'product/security-platform/cloud-workload-security/'
+    weight: 14
+    parent: 'product'
+  - identifier: error-tracking
+    name: Error Tracking
+    pre: '<i class="icon-error-tracking align-middle"></i>'
+    url: 'product/security-platform/error-tracking/'
+    weight: 15
+    parent: 'product'
   - identifier: incident
     name: Incident Management
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
-    url: 'https://www.datadoghq.com/product/incident-management'
-    weight: 14
-    parent: product
+    pre: '<i class="icon-incidents align-middle"></i>'
+    url: 'product/incident-management'
+    weight: 16
+    parent: 'product'
+  - identifier: database
+    name: Database Monitoring
+    pre: '<i class="icon-dbm align-middle"></i>'
+    url: 'product/database-monitoring'
+    weight: 17
+    parent: 'product'
   - identifier: serverless
     name: Serverless
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
-    url: 'https://www.datadoghq.com/product/serverless-monitoring'
-    weight: 15
-    parent: product
+    pre: '<i class="icon-serverless align-middle"></i>'
+    url: 'product/serverless-monitoring/'
+    weight: 18
+    parent: 'product'
   - identifier: alerts
     name: Alerts
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert-1.svg'' alt=''alert icon''>'
-    url: 'https://www.datadoghq.com/product/alerts'
-    weight: 16
-    parent: product
+    pre: '<i class="icon-alert align-middle"></i>'
+    url: 'product/alerts/'
+    weight: 19
+    parent: 'product'
   - identifier: api
     name: API
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
+    pre: '<i class="icon-api align-middle"></i>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 17
-    parent: product
+    weight: 20
+    parent: 'product'
   - identifier: customers
     name: Customers
     url: 'https://www.datadoghq.com/customers/'
