@@ -84,7 +84,7 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 
 {{< img src="mobile/slo_widget.png" alt="widget page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][13] from your home screen with Datadog widgets. You can choose the SLOs from your organization for display, along with a timeframe.
+View your [SLOs][13] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a mobile widget, along with a timeframe.
 
 Timeframe options are:
 - 7 days
@@ -95,9 +95,9 @@ Timeframe options are:
 - Week to date
 - Month to date
 
-You can also choose which dashboard opens in the app when you tap on an SLO widget, allowing you to quickly dig deeper into your metrics.
+You can also choose which dashboard opens in the app when you tap on an SLO mobile widget, allowing you to quickly dig deeper into your metrics.
 
-**Note**: If you do not choose a dashboard to open in the app when you tap on a SLO cell, the widget will simply open the app by default.
+**Note**: If you do not choose a dashboard to open in the app when you tap on an SLO mobile widget, the mobile widget will simply open the app by default.
 
 ### Monitors widget
 
