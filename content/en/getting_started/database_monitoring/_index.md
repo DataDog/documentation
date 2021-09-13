@@ -30,21 +30,51 @@ To run the example application, you need a machine with [GNU Make][1] and [Docke
 
 Follow these instructions to install the example application on MacOS or Linux.
 
-1. Download the [archive][4] containing the example application.
+{{< tabs >}}
+
+{{% tab "Postgres" %}}
+
+1. Download the [archive][1] containing the example application.
 
 2. Extract the archive to a location on disk. `tar -xvf database-management.tgz`
 
-3. Change directory to the `database` folder in the extracted archive: `cd database-management`
+3. Change to the `database-management` directory in the extracted archive: `cd database-management`
 
 4. Set the environment variable `DD_API_KEY` to your Datadog API key using `export DD_API_KEY=<API_KEY>`.
 
 5. Run `make postgres`.
 
-The command will continue to run, executing queries, until you manually stop it with Ctrl-C.
+The command will continue to run until you stop it by pressing Ctrl + C.
+
+
+[1]: /resources/examples/database-management.tgz
+{{% /tab %}}
+
+{{% tab "MySQL" %}}
+
+1. Download the [archive][1] containing the example application.
+
+2. Extract the archive to a location on disk. `tar -xvf database-management.tgz`
+
+3. Change to the `database-management` directory in the extracted archive: `cd database-management`
+
+4. Set the environment variable `DD_API_KEY` to your Datadog API key using `export DD_API_KEY=<API_KEY>`.
+
+5. Run `make mysql`.
+
+The command will continue to run until you stop it by pressing Ctrl + C.
+
+
+[1]: /resources/examples/database-management.tgz
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Data collected
 
 Database Monitoring adds query metrics to the database state information collected from database integrations, enabling observability into database performance over time.
+
+Note from Ursula: I am considering removing this section entirely, because it doesn't fit in with the main goal of this doc of teaching basic use of DBM.
 
 ## Identify a slow query
 
@@ -58,11 +88,31 @@ The query that uses the most database time will appear on the first line.
 
 ## Troubleshoot a slow query
 
-Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][5]**, and selecting the **Query Samples** tab in the UI.
+Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][4]**, and selecting the **Query Samples** tab in the UI.
 
-Sort the Normalized Query table tby **Duration**.
+Sort the Normalized Query table by **Duration**.
+
+{{< img src="database_monitoring/dbm_qs_sort_duration.png" alt="Normalized query samples sorted by duration" style="width:100%;">}}
+
+Find a query in the table with data in the Explain Plan column, and click on it to open the Sample Details page. This Explain Plan at the bottom of Sample Details shows that this query requires an Index Scan.
+
+{{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Query explain plan showing Index Scan" style="width:100%;">}}
 
 ## Create a dashboard to view historical database metrics
+
+Note from Ursula: I am on the fence about including this part. My current thinking is that 2 use cases is sufficient for the Getting Started Guide, and information on which DBM metrics can be added to dashboards should go in the main DBM docs.
+
+If I did flesh out this section, these would be the steps:
+1. create new dashboard
+2. click Add Widgets
+3. select Change
+4. set Metric to `postgresql.queries.count`. break it down by `Host`
+5. Screenshot
+6. set title to "Query Volume Changes By Host"
+7. click Save
+8. Screenshot
+
+alternately, show them the default dashboard that Datadog creates automatically?
 
 ## Further Reading
 
@@ -71,5 +121,4 @@ Sort the Normalized Query table tby **Duration**.
 [1]: https://www.gnu.org/software/make/
 [2]: https://www.docker.com/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /resources/examples/database-management.tgz
-[5]: https://app.datadoghq.com/databases
+[4]: https://app.datadoghq.com/databases
