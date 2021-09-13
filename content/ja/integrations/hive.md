@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hive/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/hive/README.md
 display_name: Hive
 draft: false
 git_integration_title: hive

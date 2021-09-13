@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
 display_name: Go-Expvar
 draft: false
 git_integration_title: go_expvar

@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Connectez-vous à Travis\_CI pour visualiser des métriques sur les durées et les statuts des builds, les tâches, etc."
-doc_link: https://docs.datadoghq.com/integrations/travis_ci/
+doc_link: 'https://docs.datadoghq.com/integrations/travis_ci/'
 draft: false
 git_integration_title: travis_ci
 has_logo: true

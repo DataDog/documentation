@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: キャッシュ関連メトリクス、オリジンリクエスト、応答コードなどを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/fastly/'
+doc_link: https://docs.datadoghq.com/integrations/fastly/
 draft: false
 git_integration_title: fastly
 has_logo: true

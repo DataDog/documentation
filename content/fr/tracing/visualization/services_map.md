@@ -8,10 +8,10 @@ further_reading:
   - link: /tracing/setup/
     tag: Documentation
     text: Configurer le tracing d'APM avec votre application
-  - link: https://www.datadoghq.com/blog/service-map/
+  - link: 'https://www.datadoghq.com/blog/service-map/'
     tag: Blog
     text: "Présentation de la Service\_Map dans Datadog"
-  - link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
+  - link: 'https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/'
     tag: Blog
     text: "Création d'un contexte avec la Service\_Map (Datadog + Airbnb)"
 ---

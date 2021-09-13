@@ -20,7 +20,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/couch/README.md'
 description: Apache CouchDB は、MapReduce 方式で JavaScript を使用してクエリおよびインデックスを作成できるドキュメント指向のデータベースです。
 display_name: CouchDB
 draft: false
