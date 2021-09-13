@@ -317,7 +317,7 @@ Need help? Contact [Datadog support][20].
 [2]: https://docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs/
 [3]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
 [4]: https://docs.datadoghq.com/integrations/ecs_fargate/
-[5]: https://hub.docker.com/r/datadog/agent
+[5]: https://gallery.ecr.aws/datadog/agent
 [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
 [7]: https://docs.datadoghq.com/agent/autodiscovery/
 [8]: /agent/amazon_ecs/apm/
