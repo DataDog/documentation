@@ -1081,11 +1081,26 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 8
+  - name: Glossary
+    url: serverless/glossary
+    parent: serverless
+    identifier: serverless_glossary
+    weight: 9
+  - name: AWS Lambda Glossary
+    url: serverless/glossary/aws_lambda
+    parent: serverless_glossary
+    identifier: serverless_glossary_aws
+    weight: 901
+  - name: Azure Functions Glossary
+    url: serverless/glossary/azure_functions
+    parent: serverless_glossary
+    identifier: serverless_glossary_azure
+    weight: 902
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 9
+    weight: 10
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
