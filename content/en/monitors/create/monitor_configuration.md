@@ -82,7 +82,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
-A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. Set up the check alert to :
+A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. Set up the check alert to:
 
 1. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
