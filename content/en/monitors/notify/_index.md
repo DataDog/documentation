@@ -118,7 +118,7 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 
 See the [list of integrations][11] that can be used to notify your team.
 
-**Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not be parsed and no alert is created.
+**Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
 ### Modifications
 
