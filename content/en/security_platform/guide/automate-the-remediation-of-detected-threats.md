@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-[Security Monitoring][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog’s [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks will initiate any workflow you have defined.
+[Security Monitoring][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog’s [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks initiate any workflow you have defined.
 
 Choose a security scenario below to begin automating remediation.
 
@@ -20,7 +20,7 @@ In a cloud environment, it’s important to delete a misconfigured resource as s
 
 {{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
 
-Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, user role, etc.) within your AWS environment, Datadog Log Management will ingest the related log, which triggers a security group–based Detection Rule. This process will automatically send the webhook’s JSON payload to the designated AWS API Gateway URL, which in turn activates a AWS Lambda function that automatically deletes the offending resource.
+Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group–based Detection Rule. This process automatically sends the webhook’s JSON payload to the designated AWS API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
 
 ## Ban a suspicious IP address
 
@@ -32,7 +32,7 @@ First, set up a [new term–based Detection Rule][5].
 
 {{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/new-term-rule.png" alt="A new term-based detection rule" >}}
 
-Then, set up a [webhook][2] that will send a payload to your cloud’s identity and access management (IAM) service to ban the unknown IP when this rule is triggered.
+Then, set up a [webhook][2] that sends a payload to your cloud’s identity and access management (IAM) service to ban the unknown IP when this rule is triggered.
 
 {{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="A new webhook that bans an unknown IP address" >}}
 
@@ -56,7 +56,7 @@ The following example illustrates what the relevant webhook payload could look l
 
 ## Application abuse and fraud
 
-With Datadog Security Monitoring, uncover patterns of [abuse or fraud][6] across your application. For example, set up a [Detection Rule][7] that is triggered when a user repeatedly attempts to purchase something in your application with invalid credit card details. Then, set up a webhook that sends a payload with remediation instructions to a service that will disable the user's credentials.
+With Datadog Security Monitoring, you can uncover patterns of [abuse or fraud][6] across your application. For example, set up a [Detection Rule][7] that is triggered when a user repeatedly attempts to purchase something in your application with invalid credit card details. Then, set up a webhook that sends a payload with remediation instructions to a service that will disable the user's credentials.
 
 The following example illustrates what the relevant webhook payload could look like when a security signal is produced by Datadog:
 
