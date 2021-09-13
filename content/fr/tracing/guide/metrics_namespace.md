@@ -187,8 +187,8 @@ Les paramètres sont définis comme suit :
 [2]: /fr/tracing/setup/
 [3]: /fr/tracing/visualization/#trace-metrics
 [4]: /fr/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /fr/developers/metrics/types/?tab=count#metric-types
-[6]: /fr/developers/metrics/types/?tab=gauge#metric-types
+[5]: /fr/metrics/types/?tab=count#metric-types
+[6]: /fr/metrics/types/?tab=gauge#metric-types
 [7]: /fr/tracing/visualization/services_list/#services-types
 [8]: /fr/tracing/visualization/#services
 [9]: /fr/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

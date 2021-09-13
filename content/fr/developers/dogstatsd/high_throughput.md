@@ -662,6 +662,6 @@ Consultez le référentiel [DataDog/dogstatsd-csharp-client][1] pour en savoir p
 [1]: /fr/agent/
 [2]: /fr/developers/dogstatsd/unix_socket/
 [3]: /fr/developers/dogstatsd/#code
-[4]: /fr/developers/metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /fr/metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /fr/developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

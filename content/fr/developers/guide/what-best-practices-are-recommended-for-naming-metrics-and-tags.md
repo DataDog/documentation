@@ -2,7 +2,7 @@
 title: "Quelles sont les bonnes pratiques à adopter pour nommer les métriques et les tags\_?"
 kind: faq
 further_reading:
-  - link: /developers/metrics/
+  - link: /metrics/
     tag: Documentation
     text: En savoir plus sur les métriques Datadog
   - link: /getting_started/tagging/

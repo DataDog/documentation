@@ -320,7 +320,7 @@ If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the
 
 **Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
 
-[1]: /developers/metrics/
+[1]: /metrics/
 {{% /tab %}}
 
 {{% tab "System Metrics" %}}

@@ -74,5 +74,5 @@ Once created, you can use process distribution aggregate and percentile metrics 
 
 [1]: https://app.datadoghq.com/process?view=metrics
 [2]: https://app.datadoghq.com/process
-[3]: /developers/metrics/custom_metrics/
+[3]: /metrics/custom_metrics/
 [4]: /dashboards/correlations/

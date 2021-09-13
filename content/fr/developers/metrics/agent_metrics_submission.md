@@ -223,14 +223,14 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
 
 6. Vérifiez que vos métriques sont transmises à Datadog sur votre [page Metric Summary][6] :
 
-{{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Métriques dans le Metric Summary" style="width:80%;">}}
+{{< img src="metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Métriques dans le Metric Summary" style="width:80%;">}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/custom_checks/write_agent_check/
-[2]: /fr/developers/metrics/types/
+[2]: /fr/metrics/types/
 [3]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /fr/agent/guide/agent-commands/#restart-the-agent
 [5]: /fr/agent/guide/agent-commands/#agent-information

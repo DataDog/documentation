@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /developers/faq/powershell-api-examples
   - /developers/faq/submitting-metrics-via-powershell
-  - /developers/metrics/powershell_metrics_submission/
+  - /metrics/powershell_metrics_submission/
 ---
 
 Datadog can collect metrics via the Agent as well as via the API independently of which language you decide to use. This page gives examples of both using PowerShell.
@@ -150,7 +150,7 @@ $http_request.responseText
 [See the ncracker/dd_metric GitHub repository for more code examples][6].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [4]: /api/v1/hosts/
 [5]: /api/v1/metrics/

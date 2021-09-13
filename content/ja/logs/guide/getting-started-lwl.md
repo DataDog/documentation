@@ -130,7 +130,7 @@ Logging Without Limits™ の詳細やログエクスポローラー、Live Tail
 [4]: https://app.datadoghq.com/logs/patterns
 [5]: /ja/logs/live_tail/
 [6]: /ja/logs/archives/
-[7]: /ja/developers/metrics/
+[7]: /ja/metrics/
 [8]: /ja/logs/logs_to_metrics/
 [9]: /ja/monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

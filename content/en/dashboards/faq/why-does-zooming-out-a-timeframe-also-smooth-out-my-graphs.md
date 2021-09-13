@@ -2,7 +2,7 @@
 title: Why does zooming out a timeframe also smooth out my graphs?
 kind: faq
 further_reading:
-- link: "/developers/metrics/types/"
+- link: "/metrics/types/"
   tag: "Documentation"
   text: "Discover Datadog metrics types"
 - link: "/dashboards/functions/rollup/"
@@ -28,4 +28,4 @@ You can manually append the `.rollup()` function to your query to adjust the met
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/type_modifiers/
+[1]: /metrics/type_modifiers/
