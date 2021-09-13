@@ -1,5 +1,5 @@
 ---
-title: Help
+title: Datadog Help
 kind: documentation
 customclass: help
 ---
