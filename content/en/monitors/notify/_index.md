@@ -53,6 +53,7 @@ Enable monitor renotification (optional) to remind your team that a problem is n
   {{< img src="monitors/notifications/renotify_enabled.jpg" alt="Enable renotify" style="width:70%;" >}}
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in the `alert` or `no data` state for the specified time.
+
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
