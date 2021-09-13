@@ -6,8 +6,8 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez le nombre de requêtes, les temps d''exécution, les octets et les rangs téléchargés, et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_big_query/'
+description: Surveillez le nombre de requêtes, les temps d'exécution, les octets et les rangs téléchargés, et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_big_query/
 draft: false
 git_integration_title: google_cloud_big_query
 has_logo: true
@@ -18,7 +18,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloud_big_query
 public_title: "Intégration Datadog/Google\_BigQuery"
-short_description: 'Surveillez le nombre de requêtes, les temps d''exécution, les octets et les rangs téléchargés, et plus encore.'
+short_description: Surveillez le nombre de requêtes, les temps d'exécution, les octets et les rangs téléchargés, et plus encore.
 version: '1.0'
 ---
 ## Présentation

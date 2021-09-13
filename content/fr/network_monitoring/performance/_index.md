@@ -7,12 +7,15 @@ aliases:
   - /fr/graphing/infrastructure/network_performance_monitor/
   - /fr/network_performance_monitoring/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
+  - link: https://www.datadoghq.com/blog/network-performance-monitoring
     tag: Blog
     text: Network Performance Monitoring
-  - link: 'https://www.datadoghq.com/blog/npm-windows-support/'
+  - link: https://www.datadoghq.com/blog/npm-windows-support/
     tag: Blog
     text: Surveiller des hosts Windows avec la solution Network Performance Monitoring
+  - link: https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/
+    tag: Blog
+    text: Surveiller la santé d'endpoints cloud avec la détection automatique des services cloud"
   - link: /network_monitoring/devices
     tag: Documentation
     text: Network Device Monitoring

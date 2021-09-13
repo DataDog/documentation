@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Google Cloud Machine Learning.
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_ml/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_ml/
 draft: false
 git_integration_title: google_cloud_ml
 has_logo: true

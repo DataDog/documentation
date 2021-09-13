@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 description: "Recueillez et représentez graphiquement des métriques de Microsoft Active\_Directory."
 display_name: Active Directory
 draft: false
