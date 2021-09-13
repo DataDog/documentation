@@ -89,12 +89,14 @@ See the full [Kinesis CloudFormation template][1].
 ​
 If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
 
-## Searching for AWS Kinesis logs in Datadog
+## Search for AWS Kinesis logs in Datadog
 
-Once you have set up an Amazon Kinesis delivery stream, logs subscribed to your delivery stream are now available for analysis within Datadog. To populate all logs by ARN:
+Once you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
 
-1. Navigate to [Logs Explorer][5] in Datadog to see all of your subscribed logs.
-2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replacing `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press enter.
+To populate all logs by ARN:
+
+1. Navigate to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
+2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
 
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
