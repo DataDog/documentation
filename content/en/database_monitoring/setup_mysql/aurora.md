@@ -206,7 +206,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -214,7 +214,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.30.0
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
