@@ -145,9 +145,7 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -155,7 +153,7 @@ link_checks_preview:
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone git checkout $CI_COMMIT_REF_NAME && cd ..
+    - cd sparse-docs && git sparse-checkout init --cone && git checkout $CI_COMMIT_REF_NAME && cd ..
     - cp --remove-destination ./sparse-docs/.htmltest.yml ./.htmltest.yml
     - rm -rf ./sparse-docs
     - htmltest
@@ -303,9 +301,7 @@ index_internal_doc:
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "live"
   variables:
     URL: ${LIVE_DOMAIN}
@@ -313,7 +309,7 @@ test_live_link_checks:
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone git checkout $CI_COMMIT_REF_NAME && cd ..
+    - cd sparse-docs && git sparse-checkout init --cone && git checkout $CI_COMMIT_REF_NAME && cd ..
     - cp --remove-destination ./sparse-docs/.htmltest.yml ./.htmltest.yml
     - rm -rf ./sparse-docs
     - htmltest
