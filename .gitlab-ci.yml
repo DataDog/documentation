@@ -101,6 +101,7 @@ build_preview:
       - ./integrations_data
       - .github/
       - .vale.ini
+      - .htmltest.yml
       - ./logs
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
@@ -152,10 +153,6 @@ link_checks_preview:
     GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-    - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone && git checkout $CI_COMMIT_REF_NAME && cd ..
-    - cp --remove-destination ./sparse-docs/.htmltest.yml ./.htmltest.yml
-    - rm -rf ./sparse-docs
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
@@ -279,6 +276,7 @@ build_live:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
       - content/en
+      - .htmltest.yml
     expire_in: 1 week
   only:
     - master
@@ -308,10 +306,6 @@ test_live_link_checks:
     GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-    - git clone --branch $CI_COMMIT_REF_NAME --depth 1 --filter=blob:none --no-checkout $REPO_URL sparse-docs
-    - cd sparse-docs && git sparse-checkout init --cone && git checkout $CI_COMMIT_REF_NAME && cd ..
-    - cp --remove-destination ./sparse-docs/.htmltest.yml ./.htmltest.yml
-    - rm -rf ./sparse-docs
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
