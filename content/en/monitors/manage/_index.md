@@ -27,7 +27,7 @@ After searching, select one or more monitors to update using the checkboxes next
 
 | Option    | Description                                                                |
 |-----------|----------------------------------------------------------------------------|
-| Mute      | Mute the selected monitors for `1h`, `4h`, `12h`, `1d`, `1w`, or `Forever` |
+| Mute      | Mute the selected monitors for `1h`, `4h`, `12h`, `1d`, `1w`, or `Forever`. |
 | Unmute    | If the selected monitors are muted, unmute them.                           |
 | Resolve   | [Resolve][3] the alert for the selected monitors.                          |
 | Delete    | Permanently delete the selected monitors.                                  |
