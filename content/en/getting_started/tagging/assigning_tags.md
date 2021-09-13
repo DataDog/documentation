@@ -97,7 +97,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -139,7 +139,7 @@ hostname: mymachine.mydomain
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
 [3]: /getting_started/tagging/#defining-tags
-[4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -299,7 +299,7 @@ Create percentile aggregations within [Distribution Metrics][1] by applying an a
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" style="width:80%;">}}
 
 [1]: /metrics/distributions/
-[2]: /developers/metrics/custom_metrics/
+[2]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
@@ -409,4 +409,4 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [7]: /tracing/setup/
 [8]: /developers/dogstatsd/
 [9]: /developers/community/libraries/
-[10]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[10]: /metrics/dogstatsd_metrics_submission/#host-tag-key

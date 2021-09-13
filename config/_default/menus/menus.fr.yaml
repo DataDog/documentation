@@ -2099,27 +2099,27 @@ main:
     identifier: marketplace
     weight: 2
   - name: Métriques custom
-    url: developers/metrics/
+    url: metrics/
     parent: dev_tools
     identifier: dev_tools_metrics
     weight: 3
   - name: Types de métriques
-    url: developers/metrics/types/
+    url: metrics/types/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
     weight: 301
   - name: Envoi - Check de l'Agent
-    url: developers/metrics/agent_metrics_submission/
+    url: metrics/agent_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_agent
     weight: 302
   - name: Envoi - DogStatsD
-    url: developers/metrics/dogstatsd_metrics_submission/
+    url: metrics/dogstatsd_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_dogstatsd
     weight: 303
   - name: Envoi - Powershell
-    url: developers/metrics/powershell_metrics_submission
+    url: metrics/powershell_metrics_submission
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_powershell
     weight: 304
@@ -2129,12 +2129,12 @@ main:
     identifier: dev_tools_metrics_api
     weight: 305
   - name: Modificateurs de type de métriques
-    url: developers/metrics/type_modifiers/
+    url: metrics/type_modifiers/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_modifiers
     weight: 306
   - name: Unités des métriques
-    url: developers/metrics/units/
+    url: metrics/units/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_units
     weight: 307

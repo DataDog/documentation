@@ -429,7 +429,7 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: /ja/integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[5]: /ja/metrics/dogstatsd_metrics_submission/
 [6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [7]: https://github.com/cloudfoundry/multi-buildpack
 [8]: https://github.com/cloudfoundry/multi-buildpack#usage

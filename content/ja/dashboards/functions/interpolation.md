@@ -100,4 +100,4 @@ default_zero(avg:custom_metric{*})
 
 [1]: /ja/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [2]: /ja/monitors/guide/as-count-in-monitor-evaluations/
-[3]: /ja/developers/metrics/
+[3]: /ja/metrics/

@@ -130,7 +130,7 @@ Pour en savoir plus sur la fonctionnalité Logging without Limits™ et exploite
 [4]: https://app.datadoghq.com/logs/patterns
 [5]: /fr/logs/live_tail/
 [6]: /fr/logs/archives/
-[7]: /fr/developers/metrics/
+[7]: /fr/metrics/
 [8]: /fr/logs/logs_to_metrics/
 [9]: /fr/monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

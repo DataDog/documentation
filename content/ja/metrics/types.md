@@ -2,15 +2,15 @@
 title: メトリクスタイプ
 kind: documentation
 aliases:
-  - /ja/developers/metrics/counts/
-  - /ja/developers/metrics/distributions/
-  - /ja/developers/metrics/gauges/
-  - /ja/developers/metrics/histograms/
-  - /ja/developers/metrics/rates/
-  - /ja/developers/metrics/sets/
-  - /ja/developers/metrics_type/
-  - /ja/developers/metrics/metrics_type/
-  - /ja/developers/metrics/types/
+  - /ja/metrics/counts/
+  - /ja/metrics/distributions/
+  - /ja/metrics/gauges/
+  - /ja/metrics/histograms/
+  - /ja/metrics/rates/
+  - /ja/metrics/sets/
+  - /ja/metrics_type/
+  - /ja/metrics/metrics_type/
+  - /ja/metrics/types/
 further_reading:
   - link: developers/dogstatsd
     tag: ドキュメント
@@ -245,10 +245,10 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 **注**: DogStatsD を介して COUNT メトリクスタイプを送信する場合、メトリクスは異なる Agent 間の関連する比較を確保するためにアプリ内に RATE として表示されます。その結果、StatsD カウントは Datadog 内に 10 進数値で表示される場合があります（1 秒あたりの単位を報告するために時間間隔で正規化されるため）。
 
 
-[1]: /ja/developers/metrics/agent_metrics_submission/?tab=count#count
-[2]: /ja/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[1]: /ja/metrics/agent_metrics_submission/?tab=count#count
+[2]: /ja/metrics/agent_metrics_submission/?tab=count#monotonic-count
 [3]: /ja/api/v1/metrics/#submit-metrics
-[4]: /ja/developers/metrics/dogstatsd_metrics_submission/#count
+[4]: /ja/metrics/dogstatsd_metrics_submission/#count
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -262,7 +262,7 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 **注**: DogStatsD を介して RATE メトリクスタイプを送信する場合、メトリクスは異なる Agent 間の関連する比較を確保するためにアプリ内に GAUGE として表示されます。
 
 
-[1]: /ja/developers/metrics/agent_metrics_submission/?tab=rate
+[1]: /ja/metrics/agent_metrics_submission/?tab=rate
 [2]: /ja/api/v1/metrics/#submit-metrics
 {{% /tab %}}
 {{% tab "GAUGE" %}}
@@ -276,9 +276,9 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 | [DogStatsD][3]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 
 
-[1]: /ja/developers/metrics/agent_metrics_submission/?tab=gauge
+[1]: /ja/metrics/agent_metrics_submission/?tab=gauge
 [2]: /ja/api/v1/metrics/#submit-metrics
-[3]: /ja/developers/metrics/dogstatsd_metrics_submission/#gauge
+[3]: /ja/metrics/dogstatsd_metrics_submission/#gauge
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
@@ -292,8 +292,8 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 **注**: TIMER メトリクスを Datadog Agent に送信する場合、これは DogStatsD 内で HISTOGRAM メトリクスタイプを送信することと同等です（標準 StatsD のタイマーと混同しないでください）。タイマーは期間データのみを表します。たとえば、コードのセクションの実行にかかる時間や、ページを完全にレンダリングするのにかかる時間などです。
 
 
-[1]: /ja/developers/metrics/agent_metrics_submission/?tab=histogram
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/#histogram
+[1]: /ja/metrics/agent_metrics_submission/?tab=histogram
+[2]: /ja/metrics/dogstatsd_metrics_submission/#histogram
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
@@ -304,7 +304,7 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 | [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE、COUNT         |
 
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/#distribution
+[1]: /ja/metrics/dogstatsd_metrics_submission/#distribution
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -333,21 +333,21 @@ GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/metrics/type_modifiers/
+[1]: /ja/metrics/type_modifiers/
 [2]: /ja/dashboards/functions/
 [3]: /ja/metrics/summary/
 [4]: https://statsd.readthedocs.io/en/v3.2.1/types.html#sets
-[5]: /ja/developers/metrics/agent_metrics_submission/
-[6]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[5]: /ja/metrics/agent_metrics_submission/
+[6]: /ja/metrics/dogstatsd_metrics_submission/
 [7]: /ja/api/v1/metrics/#submit-metrics
 [8]: /ja/developers/dogstatsd/#how-it-works
-[9]: /ja/developers/metrics/agent_metrics_submission/?tab=count#count
-[10]: /ja/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
-[11]: /ja/developers/metrics/agent_metrics_submission/?tab=gauge
-[12]: /ja/developers/metrics/agent_metrics_submission/?tab=histogram
-[13]: /ja/developers/metrics/agent_metrics_submission/?tab=rate
-[14]: /ja/developers/metrics/dogstatsd_metrics_submission/#gauge
-[15]: /ja/developers/metrics/dogstatsd_metrics_submission/#distribution
-[16]: /ja/developers/metrics/dogstatsd_metrics_submission/#count
-[17]: /ja/developers/metrics/dogstatsd_metrics_submission/#set
-[18]: /ja/developers/metrics/dogstatsd_metrics_submission/#histogram
+[9]: /ja/metrics/agent_metrics_submission/?tab=count#count
+[10]: /ja/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[11]: /ja/metrics/agent_metrics_submission/?tab=gauge
+[12]: /ja/metrics/agent_metrics_submission/?tab=histogram
+[13]: /ja/metrics/agent_metrics_submission/?tab=rate
+[14]: /ja/metrics/dogstatsd_metrics_submission/#gauge
+[15]: /ja/metrics/dogstatsd_metrics_submission/#distribution
+[16]: /ja/metrics/dogstatsd_metrics_submission/#count
+[17]: /ja/metrics/dogstatsd_metrics_submission/#set
+[18]: /ja/metrics/dogstatsd_metrics_submission/#histogram

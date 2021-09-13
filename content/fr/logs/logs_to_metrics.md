@@ -86,7 +86,7 @@ Un tag `status` supplémentaire est disponible pour la métrique `datadog.estima
 [6]: /fr/logs/search_syntax/
 [7]: /fr/logs/explorer/facets/#quantitative-facets-measures
 [8]: /fr/getting_started/tagging/
-[9]: /fr/developers/metrics/custom_metrics/
+[9]: /fr/metrics/custom_metrics/
 [10]: /fr/security/logs/#hipaa-enabled-customers
 [11]: /fr/account_management/billing/custom_metrics/?tab=countrategauge
-[12]: /fr/developers/metrics/#naming-metrics
+[12]: /fr/metrics/#naming-metrics

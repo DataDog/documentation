@@ -31,7 +31,7 @@ In product specific tabs, view your month-to-date usage of the products in that 
 The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts are able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view breaks out on-demand usage above your commitments and allocations.
 
 {{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
-For API users, endpoints are available to access ["All"][8] usage and ["Billable"][9] usage.
+For API users, endpoints are available to access ["All"][2] usage and ["Billable"][3] usage.
 
 Month-to-date usage of each product is calculated as follows:
 
@@ -42,7 +42,7 @@ Month-to-date usage of each product is calculated as follows:
 | APM Hosts                | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.                                    |
 | Profiled Hosts           | Shows the 99th percentile of all distinct profiled hosts over all hours in the current month.                               |
 | Profiled Containers      | Shows the average of all distinct profiled containers over all hours in the current month.                                  |
-| Custom Metrics           | Shows the average number of distinct [custom metrics][2] over all hours in the current month.                               |
+| Custom Metrics           | Shows the average number of distinct [custom metrics][4] over all hours in the current month.                               |
 | Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month.                           |
 | Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                                                |
 | Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                                                |
@@ -92,16 +92,16 @@ The "All" view provides the following information about all your custom metrics:
 * Average custom metrics per hour
 * Max custom metrics per hour
 * Search for a metric within all your custom metrics
-* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][7].
+* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][5].
 
 
-For more details on your metrics, navigate to the [Metrics Summary][3] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
+For more details on your metrics, navigate to the [Metrics Summary][6] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Overview of Top Custom Metrics table" >}}
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][4]. The following information is provided:
+In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][7]. The following information is provided:
 
 * Index name
 * Retention period in days
@@ -114,17 +114,17 @@ This data can be downloaded as a CSV file.
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][5].
+For technical questions, contact [Datadog support][8].
 
-For billing questions, contact your [Customer Success][6] Manager.
+For billing questions, contact your [Customer Success][9] Manager.
+
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /developers/metrics/custom_metrics/
-[3]: https://docs.datadoghq.com/metrics/summary/#overview
-[4]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
-[5]: /help/
-[6]: mailto:success@datadoghq.com
-[7]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[8]: https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-across-your-multi-org-account
-[9]: https://docs.datadoghq.com/api/latest/usage-metering/#get-billable-usage-across-your-account
-
+[2]: https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-across-your-multi-org-account
+[3]: https://docs.datadoghq.com/api/latest/usage-metering/#get-billable-usage-across-your-account
+[4]: /metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[6]: https://docs.datadoghq.com/metrics/summary/#overview
+[7]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
+[8]: /help/
+[9]: mailto:success@datadoghq.com
