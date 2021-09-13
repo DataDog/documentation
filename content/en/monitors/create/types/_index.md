@@ -9,9 +9,9 @@ description: "List the monitor types"
 {{< nextlink href="/monitors/create/types/metric" >}}Metric: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/anomaly" >}}Anomaly: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/outlier" >}}Outlier: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
-{{< nextlink href="/monitors/create/types/forecast" >}}Forecast: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/forecasts" >}}Forecast: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/integration" >}}Integration: Monitor metric values or health status from a specific integration.{{< /nextlink >}}
-{{< nextlink href="/monitors/create/types/live_process" >}}Live Process: Check if one or more processes are running on a host.{{< /nextlink >}}
+{{< nextlink href="/monitors/create/types/process" >}}Live Process: Check if one or more processes are running on a host.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/process_check" >}}Process Check: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/network" >}}Network: Check the status of TCP/HTTP endpoints.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/custom_check" >}}Custom Check: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
