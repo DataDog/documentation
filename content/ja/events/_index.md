@@ -167,10 +167,10 @@ further_reading:
 
 #### 保存済みビュー
 
-保存済みビューを使用すると、事前に選択したファセット、メジャー、検索、タイムレンジ、および可視化方法の組み合わせで、自動的にイベントエクスプローラーを構成できます。詳細は、[保存済みビュー][5]を参照してください。
+保存済みビューを使用すると、事前に選択したファセット、メジャー、検索、タイムレンジ、および可視化方法の組み合わせで、自動的にイベントエクスプローラーを構成できます。詳細については、[保存済みビューに関するドキュメント][5]を参照してください。
 
 
-[5]: /ja/logs/explorer/saved_views/
+[5]: logs/explorer/saved_views/
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 #### コンテキスト
@@ -187,10 +187,10 @@ further_reading:
 
 #### 保存済みビュー
 
-保存済みビューを使用すると、事前に選択したファセット、メジャー、検索、タイムレンジ、および可視化方法の組み合わせで、自動的にイベントエクスプローラーを構成できます。詳細は、[保存済みビュー][6]を参照してください。
+保存済みビューを使用すると、事前に選択したファセット、メジャー、検索、タイムレンジ、および可視化方法の組み合わせで、自動的にイベントエクスプローラーを構成できます。詳細については、[保存済みビューに関するドキュメント][6]を参照してください。
 
 
-[6]: /ja/logs/explorer/saved_views/
+[6]: logs/explorer/saved_views/
 {{< /site-region >}}
 
 {{< site-region region="us" >}}
@@ -355,14 +355,14 @@ sources:nagios,chef status:error cassandra
 
 デフォルトでは、関連するイベントはイベントストリームに表示される際に集計されます。集計されていないイベントを表示するには、イベントストリームの右上にある **Aggregate related events** のチェックを外します。
 
-{{< img src="events/event_stream_aggregated.png" alt="集計されたイベントストリーム" style="width:50%;" >}}
+{{< img src="events/event_stream_aggregated.png" alt="集計されたイベントストリーム"  style="width:50%;" >}}
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 ### 集計
 
 デフォルトでは、関連するイベントはイベントストリームに表示される際に集計されます。集計されていないイベントを表示するには、イベントストリームの右上にある **Aggregate related events** のチェックを外します。
 
-{{< img src="events/event_stream_aggregated.png" alt="集計されたイベントストリーム" style="width:50%;" >}}
+{{< img src="events/event_stream_aggregated.png" alt="集計されたイベントストリーム"  style="width:50%;" >}}
 {{< /site-region >}}
 
 ### 通知

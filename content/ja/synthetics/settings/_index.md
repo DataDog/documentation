@@ -2,7 +2,7 @@
 title: Synthetic モニタリングの設定
 kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: 英語ブログ
     text: Datadog Synthetic モニタリングの紹介
   - link: /synthetics/api_tests/
@@ -28,7 +28,7 @@ further_reading:
 
 ## グローバル変数
 
-グローバル変数は、[シングル][3]および[マルチステップ API テスト][4]、そしてテストスイートの[ブラウザテスト][5]で使用できます。グローバル変数を作成するには、**Settings** ページの [Global Variables][6] タブで、右上にある **New Global Variable** をクリックします。
+グローバル変数は、[シングル][5]および[マルチステップ API テスト][12]、そしてテストスイートの[ブラウザテスト][6]で使用できます。グローバル変数を作成するには、**Settings** ページの [Global Variables][7] タブで、右上にある **New Global Variable** をクリックします。
 
 作成する変数のタイプを選択します。
 
@@ -43,6 +43,7 @@ further_reading:
 
 {{< img src="synthetics/settings/variable_value.png" alt="グローバル変数による値の指定"  style="width:100%;">}}
 
+[1]: /ja/account_management/rbac/permissions/
 {{% /tab %}}
 
 {{% tab "Create From HTTP Test" %}}
@@ -56,7 +57,7 @@ further_reading:
 5. 変数の難読化を有効にすると、テスト結果に値が表示されません（オプション）。
 6. 変数をレスポンスのヘッダーから抽出するか、本文から抽出するか決定します。
     * **Response Header** から値を抽出：レスポンスのヘッダー全体を変数に使用するか、レスポンスのヘッダーを[正規表現][2]によりパースします。
-    * **Response Body** から値を抽出：リクエストのレスポンス本文全体を使用するか、レスポンス本文を [regex][2]、[`jsonpath`][3]、[`xpath`][4] によりパースします。
+    * **Response Body** から値を抽出：リクエストのレスポンス本文全体を使用するか、レスポンス本文を [JSON パス][3]または[正規表現][2]によりパースします。
 
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="http の変数"  style="width:100%;">}}
 
@@ -67,7 +68,6 @@ further_reading:
 [1]: /ja/synthetics/api_tests/?tab=httptest
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
-[4]: https://www.w3schools.com/xml/xpath_syntax.asp
 {{% /tab %}}
 
 {{% tab "MFA Token" %}}  
@@ -83,19 +83,20 @@ TOTP を生成しテストで使用するには、シークレットキーを入
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="MFA トークンの作成" style="width:100%;" >}}
 
-**注**: ブラウザテストの TOTP を使用した MFA について、詳細は [TOTP ガイド][1]をご参照ください。
+**注**: ブラウザテストの TOTP を使用した MFA について、詳細は [TOTP ガイド][2]をご参照ください。
 
+[1]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
+[2]: /ja/synthetics/guide/browser-tests-totp
 
-[1]: /ja/synthetics/guide/browser-tests-totp
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][7]を持つユーザーのみが Synthetic Monitoring **Global Variables** ページにアクセスできます。ユーザーをこの 2 つの[デフォルトのロール][8]のいずれかにアップグレードすると、**Global Variables** ページにアクセスできます。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][3]を持つユーザーのみが Synthetic Monitoring **Global Variables** ページにアクセスできます。ユーザーをこの 2 つの[デフォルトの役割][13]のいずれかにアップグレードすると、**Global Variables** ページにアクセスできます。
 
-[カスタムロール機能][9]にアクセスできる場合は、グローバル変数に `synthetics_global_variable_read` および `synthetics_global_variable_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][14]にアクセスできる場合は、グローバル変数に `synthetics_global_variable_read` および `synthetics_global_variable_write` 権限を含むカスタムロールにユーザーを追加します。
 
 #### アクセス制限
 
@@ -108,7 +109,7 @@ RBAC のグローバル変数へのアクセス制限は、ベータ版です。
 
 ### デフォルトの場所
 
-[API テスト][10]、[マルチステップ API テスト][11]、または[ブラウザテスト][4]の詳細のデフォルトとなるロケーションを選択します。Datadog 管理下のすべてのロケーションと、ご使用のアカウントでセットアップしたプライベートロケーションから選択できます。
+[API テスト][10]、[マルチステップ API テスト][11]、または[ブラウザテスト][12]の詳細のデフォルトとなるロケーションを選択します。Datadog 管理下のすべてのロケーションと、ご使用のアカウントでセットアップしたプライベートロケーションから選択できます。
 
 ### ブラウザテスト用の APM インテグレーション
 
@@ -122,9 +123,9 @@ APM インテグレーションのヘッダーを URL に追加することを�
 
 ### アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][7]を持つユーザーのみが Synthetic Monitoring **Default Settings** ページにアクセスできます。**Default Settings** ページにアクセスするには、ユーザーをこの 2 つの[デフォルトのロール][8]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][3]を持つユーザーのみが Synthetic Monitoring **Default Settings** ページにアクセスできます。**Default Settings** ページにアクセスするには、ユーザーをこの 2 つの[デフォルトの役割][13]のいずれかにアップグレードします。
 
-[カスタムロール機能][9]にアクセスできる場合は、デフォルト設定に `synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][14]にアクセスできる場合は、デフォルト設定に `synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ## その他の参考資料
 
@@ -132,12 +133,15 @@ APM インテグレーションのヘッダーを URL に追加することを�
 
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /ja/synthetics/private_locations/
-[3]: /ja/synthetics/api_tests/#use-global-variables
-[4]: /ja/synthetics/multistep#variables
-[5]: /ja/synthetics/browser_tests/#use-global-variables
-[6]: https://app.datadoghq.com/synthetics/settings/variables
-[7]: /ja/account_management/users/default_roles/
-[8]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[9]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
+[3]: /ja/account_management/users/default_roles/
+[4]: /ja/account_management/rbac/permissions/
+[5]: /ja/synthetics/api_tests/#use-global-variables
+[6]: /ja/synthetics/browser_tests/#use-global-variables
+[7]: https://app.datadoghq.com/synthetics/settings/variables
+[8]: /ja/help/
+[9]: /ja/synthetics/api_tests/
 [10]: /ja/synthetics/multistep/
 [11]: /ja/synthetics/browser_tests
+[12]: /ja/synthetics/multistep#variables
+[13]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[14]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles

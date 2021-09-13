@@ -23,7 +23,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md'
 display_name: nginx-ingress-controller
 draft: false
 git_integration_title: nginx_ingress_controller

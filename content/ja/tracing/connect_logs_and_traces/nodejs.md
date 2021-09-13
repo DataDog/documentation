@@ -12,7 +12,7 @@ further_reading:
   - link: tracing/visualization/
     tag: ドキュメント
     text: サービス、リソース、トレースの詳細
-  - link: https://www.datadoghq.com/blog/request-log-correlation/
+  - link: 'https://www.datadoghq.com/blog/request-log-correlation/'
     tag: ブログ
     text: 自動的にリクエストログとトレースに相関性を持たせる
   - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/

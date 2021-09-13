@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md'
 display_name: open_policy_agent
 draft: false
 git_integration_title: open_policy_agent

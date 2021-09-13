@@ -16,7 +16,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md'
 display_name: IBM Db2
 draft: false
 git_integration_title: ibm_db2
