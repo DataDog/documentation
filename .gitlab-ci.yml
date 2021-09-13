@@ -101,6 +101,7 @@ build_preview:
       - ./integrations_data
       - .github/
       - .vale.ini
+      - .htmltest.yml
       - ./logs
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
@@ -145,9 +146,7 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -162,7 +161,7 @@ link_checks_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
-    paths: 
+    paths:
       - ./tmp/.htmltest
   interruptible: true
 
@@ -277,6 +276,7 @@ build_live:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
       - content/en
+      - .htmltest.yml
     expire_in: 1 week
   only:
     - master
@@ -299,9 +299,7 @@ index_internal_doc:
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
-  cache:
-    <<: *cache
-    policy: pull
+  cache: {}
   environment: "live"
   variables:
     URL: ${LIVE_DOMAIN}
