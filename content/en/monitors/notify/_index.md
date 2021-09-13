@@ -138,7 +138,7 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][13] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][13] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
