@@ -65,7 +65,7 @@ If you use the `{{#is_renotify}}` block, keep in mind that the original notifica
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
 
-Learn how to configure your monitors for those use cases in [the example section](#examples).
+Learn how to configure your monitors for those use cases in the [example section](#examples).
 
 ### Priority
 
