@@ -96,7 +96,7 @@ A check alert tracks consecutive statuses submitted per check grouping and compa
 
     {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Check thresholds Recovery" style="width:90%;">}}
 
-See the [process check][1], [integration check][2] and [custom check][3] monitors documentation for more information on how to configure check alerts.
+See the documentation for [process check][1], [integration check][2], and [custom check][3] monitors for more information on configuring check alerts.
 
 
 
