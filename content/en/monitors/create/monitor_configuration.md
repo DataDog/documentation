@@ -80,7 +80,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
 [2]: /monitors/faq/what-are-recovery-thresholds/
 {{% /tab %}}
-{{% tab "Check Alert" %}}
+{{% tab "Check alert" %}}
 
 A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. Set up the check alert to :
 
