@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Direct Connect のキーメトリクスを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_directconnect/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_directconnect/
 draft: false
 git_integration_title: amazon_directconnect
 has_logo: true

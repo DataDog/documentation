@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation du réseau et de l'entrepôt de données attribuable à vos services Firebase.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_firebase/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firebase/'
 draft: false
 git_integration_title: google_cloud_firebase
 has_logo: true

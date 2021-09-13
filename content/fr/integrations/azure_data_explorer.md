@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Data Explorer.
-doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_data_explorer/'
 draft: false
 git_integration_title: azure_data_explorer
 has_logo: true

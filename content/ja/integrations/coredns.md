@@ -20,7 +20,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/coredns/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_name: CoreDNS
 draft: false
 git_integration_title: coredns

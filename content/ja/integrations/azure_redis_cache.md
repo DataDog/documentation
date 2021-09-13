@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: キャッシュのヒット数、ミス数、エビクション数、接続クライアント数などを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_redis_cache/'
+doc_link: https://docs.datadoghq.com/integrations/azure_redis_cache/
 draft: false
 git_integration_title: azure_redis_cache
 has_logo: true

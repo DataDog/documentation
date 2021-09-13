@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md
 display_name: pulsar
 draft: false
 git_integration_title: pulsar

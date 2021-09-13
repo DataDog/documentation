@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_name: cortex
 draft: false
 git_integration_title: cortex

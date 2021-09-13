@@ -8,19 +8,18 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: Surveillez l'utilisation de vos index, le nombre de requêtes réussies, et plus encore.
-doc_link: https://docs.datadoghq.com/integrations/awscloudsearch/
+description: 'Surveillez l''utilisation de vos index, le nombre de requêtes réussies, et plus encore.'
+doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
 draft: false
 git_integration_title: amazon_cloudsearch
 has_logo: true
-integration_id: amazon-cloudsearch
 integration_title: Amazon CloudSearch
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_cloudsearch
 public_title: "Intégration Datadog/Amazon\_CloudSearch"
-short_description: Surveillez l'utilisation de vos index, le nombre de requêtes réussies, et plus encore.
+short_description: 'Surveillez l''utilisation de vos index, le nombre de requêtes réussies, et plus encore.'
 version: '1.0'
 ---
 ## Présentation
@@ -44,17 +43,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon CloudSearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
+Configurez Amazon CloudSearch de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_cloudsearch` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon CloudSearch dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon CloudSearch dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
 
 ## Données collectées
 

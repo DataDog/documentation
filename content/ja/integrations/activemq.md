@@ -22,7 +22,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/activemq/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_name: ActiveMQ
 draft: false
 git_integration_title: activemq

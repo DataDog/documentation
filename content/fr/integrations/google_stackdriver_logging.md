@@ -6,10 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez la taille des logs ingérés dans Google\_Stackdriver."
-doc_link: https://docs.datadoghq.com/integrations/google_stackdriver_logging/
+doc_link: 'https://docs.datadoghq.com/integrations/google_stackdriver_logging/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/collect-stackdriver-logs-with-datadog/'
     tag: Blog
     text: "Recueillir des logs Google\_Stackdriver avec Datadog"
 git_integration_title: google_stackdriver_logging

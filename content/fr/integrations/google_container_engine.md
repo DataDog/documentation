@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez l'utilisation des ressources de vos conteneurs GCE.
-doc_link: https://docs.datadoghq.com/integrations/google_container_engine/
+doc_link: 'https://docs.datadoghq.com/integrations/google_container_engine/'
 draft: false
 git_integration_title: google_container_engine
 has_logo: true
