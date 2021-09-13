@@ -8,7 +8,7 @@ further_reading:
   - link: /account_management/rbac/
     tag: ドキュメント
     text: ロールの作成、更新、削除
-  - link: '/api/v2/roles/#list-permissions'
+  - link: /api/v2/roles/#list-permissions
     tag: ドキュメント
     text: Permission API を使用してアクセス許可を管理する
 ---

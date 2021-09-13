@@ -6,7 +6,7 @@ categories:
   - ログの収集
 dependencies: []
 description: カスタムログとサービスログを Oracle Cloud Infrastructure から Datadog に送信します。
-doc_link: 'https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/'
+doc_link: https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/
 draft: false
 further_reading: []
 git_integration_title: oracle_cloud_infrastructure
