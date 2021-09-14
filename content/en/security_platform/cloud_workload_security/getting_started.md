@@ -81,7 +81,8 @@ DOCKER_CONTENT_TRUST=1 \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_SYSTEM_PROBE_ENABLED=true \
   -e HOST_ROOT=/host/root \
-  -e DD_API_KEY=<API KEY> gcr.io/datadoghq/agent:7-jmx
+  -e DD_API_KEY=<API KEY>
+  gcr.io/datadoghq/agent:7
 
 {{< /code-block >}}
 
