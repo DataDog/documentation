@@ -16,19 +16,19 @@ Datadog exposes AWS PrivateLink endpoints in <b>us-east-1</b>.
 <div class="alert alert-warning">Datadog PrivateLink does not support the Datadog for Government site.</div>
 {{< /site-region >}}
 
-This guide walks you through how to set up the [Datadog Lambda Extension](1) inside a VPC using [AWS PrivateLink](2).
+This guide walks you through how to set up the [Datadog Lambda Extension][1] inside a VPC using [AWS PrivateLink][2].
 
 ## Overview
 
-The Datadog Lambda Extension is a companion process that augments your Lambda functions to collect data such as logs, traces and metrics and forwards them to Datadog. For functions running inside a Virtual Private Cloud (VPC) network access may be restricted by Subnet routing rules and Network ACLs, preventing access to Datadog's API. This article covers adding Datadog's AWS PrivateLink endpoints to your VPC, and related setup of the Datadog Lambda Extension.
+The Datadog Lambda Extension is a companion process that augments your Lambda functions to collect data such as logs, traces, and metrics and forwards them to Datadog. For functions running inside a Virtual Private Cloud (VPC) network access may be restricted by subnet routing rules or network ACLs, preventing access to Datadog's API. This article covers adding Datadog's AWS PrivateLink endpoints to your VPC, in addition to related setup of the Datadog Lambda Extension.
 
-## Connect VPC to Datadog PrivateLink Endpoints
+## Connect VPC to Datadog PrivateLink endpoints
 
-Add Datadog's Private Link endpoints to your VPC, as described in [this guide](3). The Extension requires the Metric, Log, API and Trace endpoints. For regions outside us-east-1, you may want to set up [inter-region peering](4).
+Add Datadog's Private Link endpoints to your VPC, as described in the [PrivateLink guide][3]. The Extension requires the metric, log, API, and trace endpoints. For regions outside `us-east-1`, you may want to set up [inter-region peering][4].
 
-## Extension Configuration
+## Extension configuration
 
-By default, the Extension uses different API endpoints to the Datadog Agent. Override the endpoints by setting the following environment variables on the lambda.
+By default, the Extension uses different API endpoints than the Datadog Agent. Override the endpoints by setting the following environment variables on the Lambda function.
 
 ```
 DD_URL="https://agent.datadoghq.com"
@@ -36,7 +36,7 @@ DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_LOGS_DD_URL="agent-http-intake.logs.datadoghq.com"
 ```
 
-Alterntaively, the Extension can also be configured by adding a [datadog.yaml](5) file in the same folder as the lambda handler code.
+Alternatively, you can configure the Extension by adding a [`datadog.yaml`][5] file in the same folder as the Lambda handler code.
 
 ```
 dd_url: https://agent.datadoghq.com
