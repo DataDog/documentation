@@ -11,13 +11,14 @@ further_reading:
   text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, please let us know by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
+<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for your Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
 </div>
 
 ## What is Session Replay?
 
-Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users.
-Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction, and resolution, and it can also bring invaluable insights into your web application’s usage patterns and design pitfalls.
+Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users.
+
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and identifies insights in your web application’s usage patterns and design pitfalls.
 
 ## Collect Session Replay data
 
