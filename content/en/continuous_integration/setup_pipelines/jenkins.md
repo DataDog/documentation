@@ -58,13 +58,13 @@ import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 def j = Jenkins.getInstance()
 def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-// Select the `Datadog Agent` mode
+// Select the Datadog Agent mode
 d.setReportWith('DSD')
 
 // Configure the Agent host.
 d.setTargetHost('<agent host>')
 
-// Configure the `Traces Collection` port (default `8126`)
+// Configure the Traces Collection port (default 8126)
 d.setTargetTraceCollectionPort(<agent trace collection port>)
 
 // Enable CI Visibility
@@ -137,13 +137,13 @@ import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 def j = Jenkins.getInstance()
 def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-// Select the `Datadog Agent` mode
+// Select the Datadog Agent mode
 d.setReportWith('DSD')
 
 // Configure the Agent host, if not previously configured.
 d.setTargetHost('<agent host>')
 
-// Configure the `Log Collection` port, as configured in the previous step.
+// Configure the Log Collection port, as configured in the previous step.
 d.setTargetLogCollectionPort(<agent log collection port>)
 
 // Enable log collection
