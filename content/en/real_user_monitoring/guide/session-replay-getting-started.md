@@ -76,9 +76,9 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 To be released < href="https://github.com/DataDog/browser-sdk/pull/1049">at version 3.5.0 on September 15, 2021<a/>, the new privacy-by-default functionality will change how the SDK manages privacy.
 </div>
 
-In short, this means that the SDK protects end-user privacy and sensitive organization information from being recorded by default, automatically masking form fields like password inputs and text areas.
+In short, this means that the SDK protects end-user privacy and sensitive organisation information from being recorded by default, automatically masking form fields like password inputs and text areas.
 
-You may configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explict overrides. There are three main points to understand:
+You may configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explicit overrides. There are three main points to understand:
 
 1. There are four privacy levels supported: `allow`, `mask-user-input`, `mask`, and `hidden`
 2. The root HTML element inherits the privacy level from the JS configuration `defaultPrivacyLevel` property which defaults to `mask-user-input` (for example `{defaultPrivacyLevel: 'allow'}`)
@@ -94,9 +94,9 @@ Now let's unpack how each of the four privacy levels behave:
 -   `allow`: generally unmasks everything, excluding HTML input elements of type `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
 -   `mask-user-input`: unmasks general HTML content while blocking most form fields like inputs, textareas, checkbox values etc.
 -   `mask`: masks all HTML text, form values, images, and links.
--   `hidden`: blocks session replay nearly entirely- supressing the recording of all JS events, records only the dimenion of the element, and all child elements will be untracked- and cannot override this `hidden` privacy level.
+-   `hidden`: blocks session replay nearly entirely- suppressing the recording of all JS events, records only the dimension of the element, and all child elements will be untracked- and cannot override this `hidden` privacy level.
 
-For large enterprise organizations working with sensitive information, when tagging your web application, the safest strategy is to start by tagging `mask` at the top of your HTML document and allowing each team to consider which pages, features, and components they need unmasked (`allow`) to accomplish their work.
+For large enterprise organisations working with sensitive information, when tagging your web application, the safest strategy is to start by tagging `mask` at the top of your HTML document and allowing each team to consider which pages, features, and components they need unmasked (`allow`) to accomplish their work.
 
 #### Examples
 
