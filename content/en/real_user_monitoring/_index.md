@@ -39,10 +39,10 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 ## What is Session Replay?
 
-<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. <p>At the moment, Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
-</div>
-
 Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users. Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction, and resolution, and it can also bring invaluable insights into your web application’s usage patterns and design pitfalls. See here for a [guide to getting started with Session Replay][6].
+
+<div class="alert alert-info"><p>Session Replay is currently in beta, there are no billing implications for the Session Replays during this period. At the moment, Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.
+</div>
 
 ## Getting started
 
