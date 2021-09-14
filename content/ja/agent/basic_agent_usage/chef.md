@@ -164,7 +164,7 @@ default['datadog']['extra_config']['logs_config'] = { 'use_port_443' => true }
 
 2. `install-lifecycle` レシピにレシピをインクルードします。
   ```ruby
-  include_recipe 'datadog::dd-agent'
+  include_recipe '::dd-agent'
   ```
 
 ### インテグレーション
@@ -335,7 +335,7 @@ end
 | `instances`                | インテグレーションコンフィギュレーションファイルの `instances` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                            |
 | `init_config`              | インテグレーションコンフィギュレーションファイルの `init_config` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                      |
 | `logs`                     | インテグレーションコンフィギュレーションファイルの `logs` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                             |
-| `use_integration_template` | `instances`、`init_config`、`logs` の値を記述するデフォルトテンプレートを使用するには、それぞれのキーの YAML で `true` (推奨) に設定します。下位互換性ではデフォルトで `false` に設定されていますが、今後のクックブックの主要バージョンではデフォルトで `true` に設定される予定です。 |
+| `use_integration_template` | `instances`、`init_config`、`logs` の値を記述するデフォルトテンプレートを使用するには、それぞれのキーの YAML で `true` (推奨) に設定します。下位互換性ではデフォルトで `false` に設定されていますが、今後のクックブックの主要バージョンではデフォルトで `true` に設定される可能性があります。 |
 
 #### 例
 
@@ -344,7 +344,7 @@ end
 **注**: Agent のインストールは実行リストでこのレシピより上に定義されている必要があります。
 
 ```ruby
-include_recipe 'datadog::dd-agent'
+include_recipe '::dd-agent'
 
 datadog_monitor 'elastic' do
   instances  [{'url' => 'http://localhost:9200'}]
@@ -387,7 +387,7 @@ end
 **注**: Agent のインストールは実行リストでこのレシピより上に定義されている必要があります。
 
 ```ruby
-include_recipe 'datadog::dd-agent'
+include_recipe '::dd-agent'
 
 datadog_integration 'datadog-elastic' do
   version '1.11.0'

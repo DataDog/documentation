@@ -9,11 +9,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez vos déploiements en temps réel et mesurez leur durée.
-doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_codedeploy/'
 draft: false
 git_integration_title: amazon_codedeploy
 has_logo: true
-integration_id: amazon-codedeploy
 integration_title: Amazon CodeDeploy
 is_public: true
 kind: integration
@@ -55,17 +54,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon CodeDeploy de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
+Configurez Amazon CodeDeploy de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_codedeploy` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon CodeDeploy dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon CodeDeploy dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][6]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][7]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][7]
 
 ## Données collectées
 

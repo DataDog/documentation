@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Connectez-vous à votre compte Microsoft\_365 pour intégrer les logs d'audit d'une organisation à la journalisation de Datadog."
-doc_link: 'https://docs.datadoghq.com/integrations/microsoft_365/'
+doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
 draft: false
 git_integration_title: microsoft_365
 has_logo: true

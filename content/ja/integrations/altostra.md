@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_name: Altostra
 draft: false
 git_integration_title: altostra

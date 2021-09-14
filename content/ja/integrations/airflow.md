@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/airflow/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/airflow/README.md
 display_name: Airflow
 draft: false
 git_integration_title: airflow

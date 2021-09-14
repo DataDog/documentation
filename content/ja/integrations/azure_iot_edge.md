@@ -20,7 +20,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
 display_name: Azure IoT Edge
 draft: false
 git_integration_title: azure_iot_edge

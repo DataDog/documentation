@@ -7,11 +7,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Tracer les requêtes qui passent d'un service AWS à un autre
-doc_link: https://docs.datadoghq.com/integrations/amazon_xray/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_xray/'
 draft: false
 git_integration_title: amazon_xray
 has_logo: true
-integration_id: amazon-xray
 integration_title: AWS X-Ray
 is_public: true
 kind: integration
@@ -21,15 +20,11 @@ public_title: "Intégration Datadog/AWS\_X-Ray"
 short_description: Tracer les requêtes qui passent d'un service AWS à un autre
 version: '1.0'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">L'intégration Datadog/AWS Lambda X-Ray est uniquement prise en charge sur les comptes AWS commerciaux. Sans compte commercial, l'intégration Datadog/AWS Lambda X-Ray ne peut pas être utilisée sur le site gouvernemental de Datadog.</div>
-
-{{< /site-region >}}
 ## Présentation
 
 AWS X-Ray permet aux développeurs de tracer des applications distribuées qui ont été créées grâce à des produits AWS. Cette intégration fournit des traces pour les fonctions Lambda dans la page de détails des fonctions [sans serveur][1]. Pour en savoir plus sur les fonctions sans serveur, consultez la [documentation dédiée][2].
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -46,13 +41,13 @@ Ensuite, [activez l'intégration X-Ray dans Datadog][4].
 
 Si vous utilisez une clé principale client pour chiffrer les traces, ajoutez la méthode `kms:Decrypt` à la stratégie au sein de laquelle la ressource correspond à la clé principale client utilisée pour X-Ray.
 
-**Remarque** : l'activation de l'intégration AWS X-Ray augmente le nombre de spans indexées. Cela peut avoir une incidence sur votre facturation.
+**Remarque** : l'activation de l'intégration AWS X-Ray augmente le nombre de spans analysées utilisées. Cela peut avoir une incidence sur votre facturation.
 
 ### Activer AWS X-Ray pour vos fonctions
 
 Pour tirer le meilleur parti de l'intégration AWS X-Ray, vous devez l'activer _pour_ vos fonctions Lambda et vos instances d'API Gateway, **mais aussi** installer les bibliothèques de tracing _dans_ vos fonctions Lambda.
 
-#### Plug-in Serverless Framework
+#### Utilisation du plug-in Serverless Framework (conseillé)
 
 Le [plug-in Serverless Framework de Datadog][5] active automatiquement X-Ray pour vos fonctions Lambda et vos instances d'API Gateway. Le plug-in se charge également d'ajouter la [couche Lambda Datadog][6] à toutes vos fonctions Node et Python.
 
@@ -68,26 +63,6 @@ Enfin, [installez et importez la bibliothèque client X-Ray dans votre fonction 
 **Remarque :** la couche Lambda Datadog et les bibliothèques client intègrent le X-Ray SDK en tant que dépendance. Vous n'avez donc pas besoin de l'installer dans vos projets.
 
 Enfin, [installez et importez la bibliothèque client X-Ray dans votre fonction Lambda](#installer-les-bibliotheques-client-x-ray).
-
-### Enrichir des segments X-Ray avec les bibliothèques Lambda de Datadog (facultatif) {#enrichir-des-segments-x-ray-avec-les-bibliotheques-lambda-de-datadog}
-
-**Remarque** : cette fonctionnalité est uniquement prise en charge pour les fonctions AWS Lambda écrites en Node.js ou Python.
-
-Les bibliothèques Lambda de Datadog permettent d'ajouter des métadonnées supplémentaires aux segments X-Ray, ces métadonnées étant ensuite mises à disposition dans les traces de l'APM et dans la [vue Serverless][9]. Pour instrumenter vos fonctions Lambda avec les bibliothèques Lambda de Datadog, consultez les [instructions détaillées pour chaque runtime et outil de déploiement][10] ou suivez les instructions d'installations personnalisées ci-dessous :
-
-#### Fonctions Lambda Python
-
-- Importez la bibliothèque Lambda de Datadog en tant que couche ou package. Référez-vous aux [instructions détaillées][11].
-- Définissez le gestionnaire de votre fonction sur `datadog_lambda.handler.handler`.
-- Définissez la variable d'environnement `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, comme `myfunc.handler`.
-- (Facultatif) Si vous n'utilisez pas la [fusion de traces][12], définissez la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
-
-#### Fonctions Lambda Node
-
-- Importez la bibliothèque Lambda de Datadog en tant que couche ou package. Référez-vous aux [instructions détaillées][13].
-- Définissez le gestionnaire de votre fonction sur `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` si vous utilisez la couche, ou sur `node_modules/datadog-lambda-js/dist/handler.handler` si vous utilisez le package.
-- Définissez la variable d'environnement `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, comme `myfunc.handler`.
-- (Facultatif) Si vous n'utilisez pas la [fusion de traces][12], définissez la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
 
 ### Installer les bibliothèques client X-Ray
 
@@ -115,12 +90,11 @@ var AWSXRay = require('aws-xray-sdk-core');
 var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 ```
 
-Pour instrumenter tous les appels HTTP et HTTPS en aval :
+Pour instrumenter tous les appels HTTP en aval :
 
 ```js
 var AWSXRay = require('aws-xray-sdk');
 AWSXRay.captureHTTPsGlobal(require('http'));
-AWSXRay.captureHTTPsGlobal(require('https'));
 var http = require('http');
 ```
 
@@ -139,23 +113,6 @@ var AWSXRay = require('aws-xray-sdk');
 var mysql = AWSXRay.captureMySQL(require('mysql'));
 //...
 var connection = mysql.createConnection(config);
-```
-
-Pour capturer les sous-segments dans la promesse native chaînée :
-
-```js
-AWSXRay.capturePromise();
-```
-
-Pour capturer toutes les requêtes Axios sortantes :
-
-```js
-const AWSXRay = require('aws-xray-sdk');
-
-AWSXRay.captureHTTPsGlobal(require('http'));
-AWSXRay.capturePromise();
-
-const AxiosWithXray = require('axios');
 ```
 
 Pour en savoir plus sur la configuration, la création de sous-segments et l'enregistrement d'annotations, consultez la [documentation X-Ray pour Node.js][1].
@@ -217,8 +174,3 @@ L'intégration AWS X-Ray récupère les données de trace d'AWS et ne recueille
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
 [7]: https://www.datadoghq.com/blog/serverless-framework-plugin
 [8]: https://console.aws.amazon.com/apigateway/
-[9]: https://docs.datadoghq.com/fr/serverless/troubleshooting/connect_invoking_resources
-[10]: https://docs.datadoghq.com/fr/serverless/installation
-[11]: https://docs.datadoghq.com/fr/serverless/installation/python/?tab=custom
-[12]: https://docs.datadoghq.com/fr/serverless/distributed_tracing/serverless_trace_merging
-[13]: https://docs.datadoghq.com/fr/serverless/installation/nodejs/?tab=custom

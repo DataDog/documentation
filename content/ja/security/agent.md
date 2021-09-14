@@ -31,6 +31,8 @@ Agent の公式リポジトリおよび/またはバイナリパッケージは�
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
+Debian および Ubuntu では、`datadog-agent` パッケージに `datadog-signing-keys` パッケージのソフト依存性があるため、上記のキーが APT により信頼されます。パッケージを最新に更新しておくと、最新の署名キーをシステムに保つことができます。
+
 ## 情報セキュリティ
 
 Datadog Agent は、デフォルトで、TLS で暗号化された TCP 接続を介して Datadog にデータを送信します。バージョン 6 では、Datadog への接続時に TLS 1.2 を強制するように Agent を設定できます。たとえば、PCI の要件を満たすために、"強力な暗号化" を使用する必要がある場合は、Agent v6 を使用し、Agent の構成ファイルで `force_tls_12: true` を設定してください。

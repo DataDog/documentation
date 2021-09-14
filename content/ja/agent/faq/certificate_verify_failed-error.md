@@ -12,7 +12,7 @@ kind: faq
 
 Agent バージョン 6.x と 7.x は問題なく、更新する必要はありません。
 
-### 影響を受ける Agent バージョンを実行しているホストのリストを見つけるには？
+### 影響を受ける Agent バージョンを実行しているホストのリストを見つける
 
 Datadog UI の [Agent バージョンリスト][1]を使用して、ホスト名、そのホストが実行している Agent のバージョン、およびそのホストのステータスを確認してください。
 
@@ -20,7 +20,7 @@ Datadog UI の [Agent バージョンリスト][1]を使用して、ホスト名
 
 ### Agent 5.32.7 へのアップグレードによる修正
 
-現在 64 ビットホストで Agent 5.x を実行している場合、Datadog は Agent 5.32.7 以降へのアップグレードを推奨しています。これにより、最小限の変更で、Agent がさまざまな異なるシナリオで機能し続けることが保証されます。
+64 ビットホストで Agent v5.x を実行している場合、Datadog は Agent 5.32.7 以降へのアップグレードを推奨しています。これにより、最小限の変更で、Agent がさまざまな異なるシナリオで機能し続けることが保証されます。
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
@@ -50,7 +50,8 @@ rm "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-Agent バージョン `<= 5.11` の場合は、場所が異なります。64 ビット Windows 上の 32 ビット Agent `<= 5.11` のユーザーの場合、手順は次のとおりです。
+**注**: Agent バージョン `<= 5.11` の場合は、場所が異なります。
+64 ビット Windows 上の 32 ビット Agent `<= 5.11` のユーザーの場合、手順は次のとおりです。
 
 ```shell
 rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
@@ -81,13 +82,13 @@ restart-service -Force datadogagent
 
 [Agent 7][4] または [Agent 6][5] にアップグレードすることでこの問題を解決できますが、*Agent 6 および 7 の下位互換性のない変更については、Agent CHANGELOG を参照してください。*
 
-### 証明書を削除した場合でも、Agent をアップグレードする必要がありますか？
+### 証明書を削除した後に Agent を更新する
 
-Datadog は、Agent を最新の状態に保ち、最新バージョンに更新することをお勧めします。自動更新に設定されているデプロイの場合、5.32.7 で更新されます。
+Datadog は、Agent を最新の状態に保ち、最新バージョンに更新することをお勧めします。自動更新に設定されているデプロイの場合、v5.32.7 で有効化されます。
 
-### 証明書を削除しても、トラフィックは SSL で暗号化されますか？
+### SSL でトラフィックを暗号化する
 
-はい。証明書は、クライアントが使用するためのプリセットであり、SSL 経由で接続する必要はありません。Datadog Agent エンドポイントは SSL トラフィックのみを受け入れます。
+証明書を削除しても、SSL でトラフィックを暗号化することができます。証明書はクライアントが使用するためのプリセットであり、SSL 経由で接続する必要はありません。Datadog Agent エンドポイントは SSL トラフィックのみを受け入れます。
 
 ### プロキシまたは curl http クライアントを使用するように構成された Windows Agent 5.x
 

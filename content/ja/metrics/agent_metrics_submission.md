@@ -2,7 +2,7 @@
 title: "メトリクスの送信: \bカスタム Agent チェック"
 kind: documentation
 aliases:
-  - /ja/metrics/agent_metrics_submission/
+  - /ja/developers/metrics/agent_metrics_submission/
 further_reading:
   - link: /developers/custom_checks/write_agent_check/
     tag: ドキュメント
@@ -225,14 +225,14 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 6. [メトリクスの概要ページ][6]でメトリクスが Datadog に報告を行っているかを確認します。
 
-{{< img src="metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="メトリクスの概要に記されたメトリクス"  style="width:80%;">}}
+{{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="メトリクスの概要に記されたメトリクス"  style="width:80%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/custom_checks/write_agent_check/
-[2]: /ja/metrics/types/
+[2]: /ja/developers/metrics/types/
 [3]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /ja/agent/guide/agent-commands/#restart-the-agent
 [5]: /ja/agent/guide/agent-commands/#agent-information

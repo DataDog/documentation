@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/retool/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
 display_name: Retool
 draft: false
 git_integration_title: retool

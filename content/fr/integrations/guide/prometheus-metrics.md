@@ -4,7 +4,7 @@ kind: guide
 aliases:
   - /fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/sql-server-metrics/#creer-une-procedure-stockee-pour-generer-et-recueillir-des-metriques'
+  - link: https://www.datadoghq.com/blog/sql-server-metrics/#creer-une-procedure-stockee-pour-generer-et-recueillir-des-metriques
     tag: Blog
     text: Créer une procédure stockée pour générer et recueillir des métriques
   - link: /integrations/mysql/
@@ -58,9 +58,9 @@ Si le paramètre `send_distribution_buckets` est défini sur `true`, les métriq
 Si le paramètre `send_distribution_counts_as_monotonic` est défini sur `true`, chaque métrique qui se termine par `_count` est envoyée en tant que `monotonic_count`. [En savoir plus sur les counters monotones][4].
 
 [1]: /fr/agent/kubernetes/prometheus/
-[2]: /fr/metrics/types/
+[2]: /fr/developers/metrics/types/
 [3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /fr/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[4]: /fr/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
 [5]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [6]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

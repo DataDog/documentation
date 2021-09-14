@@ -3,10 +3,10 @@ title: CI Results Explorer
 kind: documentation
 description: Synthetic テストを実行する CI ジョブにドリルダウンします。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
+  - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
     tag: ブログ
     text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
-  - link: 'https://learn.datadoghq.com/course/view.php?id=37'
+  - link: https://learn.datadoghq.com/course/view.php?id=37
     tag: ラーニングセンター
     text: CI/CD パイプラインで Synthetic テストを実行する方法を学ぶ
   - link: /synthetics/search/

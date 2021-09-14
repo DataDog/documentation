@@ -4,7 +4,7 @@ kind: ガイド
 aliases:
   - /ja/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics'
+  - link: https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics
     tag: ブログ
     text: メトリクスを生成、収集するストアドプロシージャを作成する
   - link: /integrations/mysql/
@@ -196,5 +196,5 @@ GO
 
 [1]: /ja/integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
-[3]: /ja/metrics/#metric-types
-[4]: /ja/metrics/histograms/
+[3]: /ja/developers/metrics/#metric-types
+[4]: /ja/developers/metrics/histograms/

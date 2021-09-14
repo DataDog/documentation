@@ -17,7 +17,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_name: Nagios
 draft: false
 git_integration_title: nagios
@@ -34,7 +34,7 @@ name: nagios
 process_signatures:
   - nagios
 public_title: Intégration Datadog/Nagios
-short_description: 'Envoyez des bagotements de service, des alertes de host et plus encore à votre flux d''événement Datadog.'
+short_description: Envoyez des bagotements de service, des alertes de host et plus encore à votre flux d'événement Datadog.
 support: core
 supported_os:
   - linux
@@ -73,7 +73,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
