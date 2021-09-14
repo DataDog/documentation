@@ -86,7 +86,7 @@ Indexed Span のボリュームと Ingested Span のボリュームの両方に�
 アカウントの 1 時間ごとの料金または請求については、[セールス][6]または[カスタマーサクセス][7]マネージャーにお問い合わせください。
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /ja/metrics/custom_metrics/
+[2]: /ja/developers/metrics/custom_metrics/
 [3]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /ja/tracing/trace_retention_and_ingestion/
 [5]: /ja/help/

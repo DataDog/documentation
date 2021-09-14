@@ -319,7 +319,7 @@ com.datadoghq.tags.version
 
 **注**: .NET および PHP 用の Datadog DogStatsD クライアントは、まだこの機能をサポートしていません。
 
-[1]: /ja/metrics/
+[1]: /ja/developers/metrics/
 {{% /tab %}}
 
 {{% tab "システムメトリクス" %}}

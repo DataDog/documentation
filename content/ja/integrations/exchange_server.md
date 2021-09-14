@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md'
 display_name: Exchange Server
 draft: false
 git_integration_title: exchange_server

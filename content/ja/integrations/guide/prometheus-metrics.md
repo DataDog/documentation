@@ -58,9 +58,9 @@ Datadog のメトリクスタイプの詳細については、[Datadog メトリ
 パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][4]。
 
 [1]: /ja/agent/kubernetes/prometheus/
-[2]: /ja/metrics/types/
+[2]: /ja/developers/metrics/types/
 [3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /ja/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[4]: /ja/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
 [5]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [6]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

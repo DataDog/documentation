@@ -3,7 +3,7 @@ aliases:
   - /ja/serverless/troubleshooting/installing_the_forwarder/
   - /ja/serverless/forwarder/
 dependencies:
-  - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
+  - 'https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md'
 kind: documentation
 title: Datadog Forwarder
 ---
@@ -105,11 +105,8 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 2. Datadog API キーを AWS Secrets Manager に保存し、環境変数 `DD_API_KEY_SECRET_ARN` に Lambda 関数のシークレット ARN を設定し、Lambda 実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加します。
 3. S3 バケットからログを転送する必要がある場合は、`s3:GetObject` アクセス許可を Lambda 実行ロールに追加します。
 4. Forwarder で環境変数 `DD_ENHANCED_METRICS` を `false` に設定します。これにより、Forwarder は拡張メトリクス自体を生成しなくなりますが、他の Lambda からカスタムメトリクスを転送します。
-5. 一部の AWS アカウントは、CloudWatch のロググループが Forwarder を呼び出すことを可能にするリソースベースのポリシーをトリガーが自動的に作成しないよう構成されています。
-   Forwarder が CloudWatch のログイベントから呼び出されるために必要なアクセス許可については、[CloudWatchLogPermissions](https://github.com/DataDog/datadog-serverless-functions/blob/029bd46e5c6d4e8b1ae647ed3b4d1917ac3cd793/aws/logs_monitoring/template.yaml#L680) を参照してください。
-
-6. [トリガー](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#send-aws-service-logs-to-datadog)を構成します。
-7. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:DeleteObject` アクセス許可を Lambda 実行ロールに提供します。このバケットは、Lambda タグキャッシュの保存に使用されます。
+5. [トリガー](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#send-aws-service-logs-to-datadog)を構成します。
+6. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:DeleteObject` アクセス許可を Lambda 実行ロールに提供します。このバケットは、Lambda タグキャッシュの保存に使用されます。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->

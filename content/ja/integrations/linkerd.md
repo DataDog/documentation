@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md'
 display_name: Linkerd
 draft: false
 git_integration_title: linkerd
@@ -56,16 +56,13 @@ Linkerd チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `linkerd.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル linkerd.d/conf.yaml][7] を参照してください。
-   **注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][3]を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `linkerd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル linkerd.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[3]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -75,39 +72,33 @@ Linkerd チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ##### Linkerd v1
 
-| パラメーター            | 値                                                                       |
-| -------------------- | --------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `linkerd`                                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                               |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:9990/admin/metrics/prometheus"}` |
-
-**注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][2]を参照してください。
+| パラメーター            | 値                                                                 |
+| -------------------- | --------------------------------------------------------------------- |
+| `<インテグレーション名>` | `linkerd`                                                             |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                         |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "http://%%host%%:9990/admin/metrics/prometheus"}` |
 
 ##### Linkerd v2
 
-| パラメーター            | 値                                                                       |
-| -------------------- | --------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `linkerd`                                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                               |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:4191/metrics"}`                  |
-
-**注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][2]を参照してください。
-
+| パラメーター            | 値                                                                 |
+| -------------------- | --------------------------------------------------------------------- |
+| `<インテグレーション名>` | `linkerd`                                                             |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                         |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "http://%%host%%:4191/metrics"}`                  |
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "linkerd", "service": "<SERVICE_NAME>"}` |
 
-データプレーンログの詳細度を増加するには、[Linkerd 公式ドキュメント][4]を参照してください。
+データプレーンログの詳細度を増加するには、[Linkerd 公式ドキュメント][3]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[4]: https://linkerd.io/2/tasks/modifying-proxy-log-level/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[3]: https://linkerd.io/2/tasks/modifying-proxy-log-level/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -138,12 +129,12 @@ curl <linkerd_prometheus_endpoint>
 [デフォルトコンフィギュレーション][7]内の例に従ってください。
 
 ### サービスのチェック
-{{< get-service-checks-from-git "linkerd" >}}
 
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 
@@ -154,4 +145,5 @@ curl <linkerd_prometheus_endpoint>
 [5]: https://twitter.github.io/finagle/guide/Metrics.html
 [6]: https://gist.githubusercontent.com/arbll/2f63a5375a4d6d5acface6ca8a51e2ab/raw/bc35ed4f0f4bac7e2643a6009f45f9068f4c1d12/gistfile1.txt
 [7]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/linkerd/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

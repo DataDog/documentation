@@ -17,7 +17,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
 display_name: Nagios
 draft: false
 git_integration_title: nagios
@@ -73,7 +73,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 {{% /tab %}}
 {{% tab "Containerized" %}}

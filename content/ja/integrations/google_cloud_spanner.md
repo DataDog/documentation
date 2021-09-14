@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Spanner インスタンスのリソースの使用状況を追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_spanner/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_spanner/'
 draft: false
 git_integration_title: google_cloud_spanner
 has_logo: true

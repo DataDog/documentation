@@ -6,7 +6,7 @@ aliases:
   - /ja/developers/faq/characteristics-of-datadog-histograms/
   - /ja/graphing/metrics/distributions/
 further_reading:
-  - link: /developers/metrics/dogstatsd_metrics_submission/
+  - link: /metrics/dogstatsd_metrics_submission/
     tag: ドキュメント
     text: DogStatsD でのディストリビューションの使用
 ---
@@ -66,6 +66,6 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/developers/metrics/types/
+[1]: /ja/metrics/types/
 [2]: https://app.datadoghq.com/metric/distribution_metrics
 [3]: https://app.datadoghq.com/event/stream

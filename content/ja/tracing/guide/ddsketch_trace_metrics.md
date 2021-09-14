@@ -4,13 +4,13 @@ kind: ガイド
 aliases:
   - /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-  - link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+  - link: 'https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/'
     tag: ブログ
     text: DDSketch を使用した正確なパーセンタイルの計算
-  - link: https://docs.datadoghq.com/metrics/distributions/
+  - link: 'https://docs.datadoghq.com/metrics/distributions/'
     tag: Documentation
     text: ディストリビューションの詳細
-  - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
+  - link: 'https://docs.datadoghq.com/tracing/guide/metrics_namespace/'
     tag: Documentation
     text: トレースメトリクスの詳細
 ---
@@ -70,6 +70,6 @@ max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/metrics/distributions/
-[2]: /ja/developers/metrics/types/?tab=distribution#metric-types
+[2]: /ja/metrics/types/?tab=distribution#metric-types
 [3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

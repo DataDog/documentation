@@ -52,7 +52,7 @@ https://api.datadoghq.com/metric/estimate?metric_name=dist.dd.dogweb.latency&gro
 
 
 [1]: /ja/account_management/api-app-keys/
-[2]: /ja/metrics/types/?tab=distribution#metric-types
-[3]: /ja/metrics/types/?tab=distribution#calculation-of-percentile-aggregations
-[4]: /ja/metrics/types/?tab=count#metric-types
-[5]: /ja/metrics/types/?tab=gauge#metric-types
+[2]: /ja/developers/metrics/types/?tab=distribution#metric-types
+[3]: /ja/developers/metrics/types/?tab=distribution#calculation-of-percentile-aggregations
+[4]: /ja/developers/metrics/types/?tab=count#metric-types
+[5]: /ja/developers/metrics/types/?tab=gauge#metric-types

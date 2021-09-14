@@ -20,7 +20,7 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 author:
-  homepage: https://www.ioconnectservices.com/
+  homepage: 'https://www.ioconnectservices.com/'
   name: IO Connect Services
 categories:
   - マーケットプレイス
