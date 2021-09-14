@@ -14,15 +14,21 @@ further_reading:
 ---
 ## Overview
 
-With historical query performance metrics, explain plans, and host-level metrics all in one place, Datadog Database Monitoring enables developers and database administrators to easily understand the health and performance of their databases, and quickly troubleshoot any issues that arise.
+Datadog Database Monitoring allows you to easily understand the health and performance of your databases, and quickly determine the root cause of any problems.
 
-This guide demonstrates how to set up Datadog Database Monitoring on a sample system. You will learn how to identify and troubleshoot a slow query, and how to view historical database metrics in a dashboard.
+In one place, you can view:
+
+* host-level metrics
+* explain plans
+* historical query performance metrics
+
+In this guide, you will learn how to set up Datadog Database Monitoring on a sample Postgres or MySQL database. You will identify and troubleshoot a slow query, and view historical database metrics in a dashboard.
 
 ## Setup
 
 ### Prerequisites
 
-Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To verify, check your Infrastructure List in Datadog.
+Before getting started, you need a Datadog account.
 
 To run the example application, you need a machine with [GNU Make][1] and [Docker][2]. Have your Datadog [API key][3] available.
 
@@ -120,5 +126,5 @@ alternately, show them the default dashboard that Datadog creates automatically?
 
 [1]: https://www.gnu.org/software/make/
 [2]: https://www.docker.com/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/account/settings#api
 [4]: https://app.datadoghq.com/databases
