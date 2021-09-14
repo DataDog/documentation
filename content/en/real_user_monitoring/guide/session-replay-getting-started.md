@@ -4,12 +4,12 @@ kind: guide
 description: Guide for enabling Session Replay and how to set privacy options
 beta: true
 further_reading:
-- link: '/real_user_monitoring/explorer'
-  tag: 'Documentation'
-  text: 'Visualize your RUM data in the Explorer'
-- link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
-  tag: 'Blog'
-  text: 'Use Datadog Session Replay to view real-time user journeys'
+    - link: '/real_user_monitoring/explorer'
+      tag: 'Documentation'
+      text: 'Visualize your RUM data in the Explorer'
+    - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
+      tag: 'Blog'
+      text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
 <div class="alert alert-info"><p>Session Replay is in private beta. There are no billing implications for the Session Replays during this period. If you want to be added to the private beta, sign up by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
@@ -29,40 +29,42 @@ To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the fo
 Session Replay is available through a dedicated build of the RUM Browser SDK. To enable Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
+
 Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] To start the recording, call `DD_RUM.startSessionReplayRecording()`.
 
-``` javascript
-import { datadogRum } from '@datadog/browser-rum'
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: '<DATADOG_APPLICATION_ID>',
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
-  //  service: 'my-web-application',
-  //  env: 'production',
-  //  version: '1.0.0',
-  sampleRate: 100,
-  replaySampleRate: 100,
-  trackInteractions: true,
-})
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    site: '<DATADOG_SITE>',
+    //  service: 'my-web-application',
+    //  env: 'production',
+    //  version: '1.0.0',
+    sampleRate: 100,
+    replaySampleRate: 100,
+    trackInteractions: true
+});
 
 DD_RUM.startSessionReplayRecording();
 ```
 
 #### CDN
+
 Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
-*Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
+_Supported browsers_: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
 
 #### Configuration
 
-The usual [RUM initialization parameters][4] are all supported. 
+The usual [RUM initialization parameters][4] are all supported.
 
 The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example to only record authenticated user sessions:
 
-``` javascript
+```javascript
 if (user.isAuthenticated) {
-	DD_RUM.startSessionReplayRecording()
+    DD_RUM.startSessionReplayRecording();
 }
 ```
 
@@ -70,31 +72,52 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 
 ### Sensitive & personal data obfuscation
 
-By default, any input events on HTML input elements of type `password`, `email` and `tel` are ignored.
+To be released at version 3.5.0 on September 15, 2021, the new privacy-by-default functionality will change how the SDK manages privacy. In short, this means that the SDK protects end-user privacy and sensitive organization information from being recorded by default, automatically masking form fields like password inputs and text areas.
 
-These events can be ignored on other elements as well, by either setting the data attribute `data-dd-privacy` to `input-ignored`, or adding a class of `dd-privacy-input-ignored`. For example, any inputs on the following form will be ignored:
+This functionality is highly configurable to suit your application's needs. You may configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explict overrides. There are three main points to understand:
 
-``` html
-<form method="post" data-dd-privacy=”input-ignored”>
-    <input type="text" name="name" id="name" required>
-    <input type="number" name="age" id="age" required>
-    <input type="email" name="email" id="email" required>
-    <input type="submit" value="submit">
+1. There are four privacy levels supported: `allow`, `mask-user-input`, `mask`, and `hidden` (details further below).
+2. The root HTML element inherits the privacy level from the JS configuration `defaultPrivacyLevel` property which defaults to `mask-user-input` (eg. `{defaultPrivacyLevel: 'allow'}`)
+3. Each HTML element inherits the privacy level of its parent (except `hidden` which is final)
+
+Understanding the inheritance rules above, you can tag the privacy level of an HTML element one of two ways:
+
+1. using an HTML attribute (such as `data-dd-privacy="allow"` or `data-dd-privacy="mask"`); or
+2. using an HTML class name (such as `class="dd-privacy-allow"` or `class="dd-privacy-mask-user-input"`).
+
+Now let's unpack how each of the four privacy levels behave:
+
+-   `allow`: generally unmasks everything, excluding HTML input elements of type `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
+-   `mask-user-input`: unmasks general HTML content while blocking most form fields like inputs, textareas, checkbox values etc.
+-   `mask`: masks all HTML text, form values, images, and links.
+-   `hidden`: blocks session replay nearly entirely- supressing the recording of all JS events, records only the dimenion of the element, and all child elements will be untracked- and cannot override this `hidden` privacy level.
+
+For large enterprise organizations working with sensitive information, when tagging your web application, the safest strategy is to start by tagging `mask` at the top of your HTML document and allowing each team to consider which pages, features, and components they need unmasked (`allow`) to accomplish their work.
+
+#### Examples
+
+As an example, any inputs values within the following form will be replaced with asterisks ("\*\*\*"):
+
+```html
+<form method="post" data-dd-privacy="mask-user-input">
+    <input type="text" name="name" id="name" required />
+    <input type="number" name="age" id="age" required />
+    <input type="email" name="email" id="email" required />
+    <input type="submit" value="submit" />
 </form>
 ```
 
-Additionally, HTML elements can be fully obfuscated. These elements are replaced with a white block at recording time, as seen in this example of the navbar of a replay of a Datadog session: 
+Alternatively, HTML elements can be fully obfuscated with `hidden`:
 
-{{< img src="real_user_monitoring/guide/replay-hidden.png" alt="Replay Hidden Example">}}
-
-Obfuscate elements by setting the data attribute `data-dd-privacy` to hidden, or by adding a class of `dd-privacy-hidden`. Elements marked as hidden will *not* have their content recorded and the PII will not be sent to Datadog. For example, the following div will be obfuscated and replaced in the replay by a white block of the same size:
-
-``` html
-<div id=”profile-info” data-dd-privacy=”hidden”>
+```html
+<div id="profile-info" data-dd-privacy="hidden">
     <p>Name: John Doe</p>
     <p>Birth date: June 6th, 1987</p>
 </div>
 ```
+
+These elements are replaced with a grey block at recording time, as seen in this example of the navbar of a replay of a Datadog session:
+{{< img src="real_user_monitoring/guide/replay-hidden.png" alt="Replay Hidden Example">}}
 
 ## Troubleshooting
 
@@ -110,12 +133,12 @@ Several reasons might explain why assets are not available at the time of the re
 
 1. The resource does not exist anymore. For example, it was part of a previous deployment.
 2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
-3. The resource is blocked by the browser due to CORS (typically, web-fonts). 
-The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
-The fix is thus to allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
-To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
+3. The resource is blocked by the browser due to CORS (typically, web-fonts).
+   The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
+   The fix is thus to allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
+   To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
 
-### CSS rules not properly applied / mouse hover not replayed 
+### CSS rules not properly applied / mouse hover not replayed
 
 Unlike fonts and images, the recorder tries to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it falls back to recording the links to the CSS files.
 
@@ -125,7 +148,7 @@ If the stylesheets are hosted on a different domain than the web page, access to
 
 For example, if your application is on the `example.com` domain and depends on a CSS file on `assets.example.com` via a link element, the `crossorigin` attribute should be set to `anonymous`, unless credentials are required:
 
-``` html
+```html
 <link rel="stylesheet" crossorigin="anonymous"
       href="https://assets.example.com/style.css”>
 ```
@@ -144,10 +167,10 @@ The browser SDK is [open source][9], and leverages the open source project [rrwe
 
 ### What is the performance impact?
 
-The team is is focused on ensuring minimal impact of the Session Replay recorder on the applications performance: 
+The team is is focused on ensuring minimal impact of the Session Replay recorder on the applications performance:
 
-- reduced network impact of Session Replay by compressing the data prior to sending it to Datadog
-- reduced load on the browser’s UI thread by delegating most of the CPU intensive work (like compression) to a background service worker.
+-   reduced network impact of Session Replay by compressing the data prior to sending it to Datadog
+-   reduced load on the browser’s UI thread by delegating most of the CPU intensive work (like compression) to a background service worker.
 
 Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will be available after more data is received from Early Adopters.
 
