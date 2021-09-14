@@ -86,21 +86,21 @@ You may configure the default privacy mode within your Javascript configuration 
 
 Understanding the inheritance rules above, you may tag the privacy level of an HTML element one of two ways:
 
-1. using an HTML attribute (such as `data-dd-privacy="allow"` or `data-dd-privacy="mask"`); or
-2. using an HTML class name (such as `class="dd-privacy-allow"` or `class="dd-privacy-mask-user-input"`).
+1. using an HTML attribute (`data-dd-privacy="allow" | "mask" | "hidden" | "mask-user-input"`); or
+2. using an HTML class name (`class="dd-privacy-allow" | "dd-privacy-mask-user-input" | "dd-privacy-mask" | "dd-privacy-hidden"`).
 
 Now let's unpack how each of the four privacy levels behave:
 
--   `allow`: generally unmasks everything, excluding HTML input elements of type `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
--   `mask-user-input`: unmasks general HTML content while blocking most form fields like inputs, textareas, checkbox values etc.
--   `mask`: masks all HTML text, form values, images, and links.
--   `hidden`: blocks session replay nearly entirely- suppressing the recording of all JS events, records only the dimension of the element, and all child elements will be untracked- and cannot override this `hidden` privacy level.
+-   `allow`: Unmasks everything, excluding HTML input elements of type `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
+-   `mask-user-input`: Unmasks HTML content while blocking most form fields like inputs, textareas, checkbox values etc.
+-   `mask`: Masks all HTML text, form values, images, and links.
+-   `hidden`: Blocks session replay in this section- suppressing the recording of all JS events, records only the dimension of the element, and all child elements will be untracked- Note `hidden` cannot be overridden by a child element.
 
-For large enterprise organisations working with sensitive information, when tagging your web application, the safest strategy is to start by tagging `mask` at the top of your HTML document and allowing each team to consider which pages, features, and components they need unmasked (`allow`) to accomplish their work.
+When tagging your web application, the safest strategy is to start by tagging `mask` at the top of your HTML document and allowing each team to consider which pages, features, and components they need unmasked (`allow`) to accomplish their work.
 
-#### Examples
+#### Example
 
-As an example, any inputs values within the following form are be replaced with asterisks "\*\*\*\* \*\* \*\*\*".
+Any input values within the following form are be replaced with asterisks "\*\*\*\* \*\* \*\*\*".
 
 ```html
 <form method="post" data-dd-privacy="mask-user-input">
