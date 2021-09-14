@@ -69,13 +69,19 @@ a || b && !c
 (a || b) && (c || d)
 ```
 
-#### No data
+#### Advanced alert conditions
+
+##### No data
 
 `Do not notify` or `Notify` when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings, but in order for a composite to alert on No Data, both the individual monitors and the composite monitor must be set to `Notify` when data is missing.
 
+##### Other options
+
+For detailed instructions on the advanced alert options (auto resolve, etc.), see the [Monitor configuration][2] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ### API
 
@@ -175,4 +181,5 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
-[2]: /monitors/notifications/
+[2]: /monitors/create/configuration/#advanced-alert-conditions
+[3]: /monitors/notifications/
