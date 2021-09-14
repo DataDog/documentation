@@ -34,7 +34,7 @@
                 "name": "Example Notebook",
                 "status": "published",
                 "time": {
-                  "live_span": "string"
+                  "live_span": "5m"
                 }
               },
               "id": 123456,
@@ -102,7 +102,7 @@
               "name": "Example Notebook",
               "status": "published",
               "time": {
-                "live_span": "string"
+                "live_span": "5m"
               }
             },
             "id": 123456,
@@ -160,7 +160,7 @@
             "name": "Example Notebook",
             "status": "published",
             "time": {
-              "live_span": "string"
+              "live_span": "5m"
             }
           },
           "type": "notebooks"
@@ -231,7 +231,7 @@
               "name": "Example Notebook",
               "status": "published",
               "time": {
-                "live_span": "string"
+                "live_span": "5m"
               }
             },
             "id": 123456,
@@ -300,7 +300,7 @@
               "name": "Example Notebook",
               "status": "published",
               "time": {
-                "live_span": "string"
+                "live_span": "5m"
               }
             },
             "id": 123456,
@@ -369,7 +369,7 @@
             "name": "Example Notebook",
             "status": "published",
             "time": {
-              "live_span": "string"
+              "live_span": "5m"
             }
           },
           "type": "notebooks"
