@@ -78,7 +78,7 @@ To be released <a href="https://github.com/DataDog/browser-sdk/pull/1049">on Tue
 
 By default, the SDK protects end-user privacy and sensitive organizational information from being recorded by automatically masking form fields such as password inputs and text areas.
 
-You can configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explicit overrides.
+You can configure the default privacy mode within your JavaScript configuration and tag specific parts of your HTML documents with explicit overrides.
 
 - Four privacy levels are supported: `allow`, `mask-user-input`, `mask`, and `hidden`.
 - The root HTML element inherits the privacy level from the JavaScript configuration `defaultPrivacyLevel` property which defaults to `mask-user-input`, such as `{defaultPrivacyLevel: 'mask-user-input'}`.
@@ -89,18 +89,18 @@ With the inheritance rules above, you can tag the privacy level of an HTML eleme
 1. An HTML attribute such as `data-dd-privacy="allow" | "mask" | "hidden" | "mask-user-input"`; or
 2. An HTML class name such as `class="dd-privacy-allow" | "dd-privacy-mask-user-input" | "dd-privacy-mask" | "dd-privacy-hidden"`.
 
-Every privacy level behaves as:
+#### Privacy levels
 
 -   `allow`: Unmasks everything, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
--   `mask-user-input`: Unmasks HTML content, blocking most form fields such as inputs, text areas, and checkbox values.
+-   `mask-user-input`: Unmasks HTML content, but blocks most form fields such as inputs, text areas, and checkbox values. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 -   `mask`: Masks all HTML text, form values, images, and links.
--   `hidden`: Blocks Session Replay, suppressing the recording of all JavaScript events and recording only the dimension of the element. All child elements are untracked. By default, `hidden` cannot be overridden by a child element.
+-   `hidden`: Blocks Session Replay. Blocking Session Replay suppresses the recording of all JavaScript events and records only the dimensions of the element. All child elements are untracked. By default, `hidden` cannot be overridden by a child element.
 
-When tagging your web application, start by tagging `mask` at the top of your HTML document and ask your team to consider which pages, features, and components need to be unmasked (`allow`).
+When tagging your web application, start by tagging `mask` at the top of your HTML document. Then, ask your team to consider which pages, features, or components need to be unmasked (tagged with `allow`).
 
 #### Example
 
-Input values in the following form are replaced with asterisks, for example: `\*\*\*\* \*\* \*\*\*`.
+Input values in the following form are replaced with three asterisks (`***`).
 
 ```html
 <form method="post" data-dd-privacy="mask-user-input">
