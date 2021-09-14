@@ -60,7 +60,7 @@ nav_sections:
         link: synthetics/
         icon: synthetics
         desc: Ensure application uptime, identify regional issues, & track performance
-      - title: Real User Monitoring
+      - title: RUM & Session Replay
         link: real_user_monitoring/
         icon: rum
         desc: Visualize and analyze the performance of your front end applications
