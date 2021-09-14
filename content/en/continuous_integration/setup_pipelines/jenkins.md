@@ -114,7 +114,7 @@ With this setup, the Agent listens in port `10518` for logs.
 Second, enable job log collection on the Datadog Plugin:
 
 {{< tabs >}}
-{{% tag "Using UI" %}}
+{{% tab "Using UI" %}}
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the `Datadog Agent` mode.
