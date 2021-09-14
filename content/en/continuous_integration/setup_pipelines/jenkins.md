@@ -32,6 +32,9 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 
 ## Enabling CI Visibility on the plugin
 
+{{< tabs >}}
+{{% tab "Using UI" %}}
+
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the `Datadog Agent` mode.
@@ -41,14 +44,46 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 7. (Optional) Configure your CI Instance name.
 8. Check the connectivity with the Datadog Agent.
 9. Save your configuration.
-10. To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
+
+{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{% /tab %}}
+{{% tab "Using Groovy" %}}
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Run the configuration script:
+{{< code-block lang="groovy" >}}
+import jenkins.model.*
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+def j = Jenkins.getInstance()
+def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+// Select the `Datadog Agent` mode
+d.setReportWith('DSD')
+
+// Configure the Agent host.
+d.setTargetHost('<agent host>')
+
+// Configure the `Traces Collection` port (default `8126`)
+d.setTargetTraceCollectionPort(<agent trace collection port>)
+
+// Enable CI Visibility
+d.setEnableCiVisibility(true)
+
+// (Optional) Configure your CI Instance name
+d.setCiInstanceName("jenkins")
+
+// Save config
+d.save()
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
 
 {{< code-block lang="text" >}}
 Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
-
-{{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 
 ## Enable job log collection
 
@@ -78,6 +113,8 @@ With this setup, the Agent listens in port `10518` for logs.
 
 Second, enable job log collection on the Datadog Plugin:
 
+{{< tabs >}}
+{{% tag "Using UI" %}}
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the `Datadog Agent` mode.
@@ -86,6 +123,33 @@ Second, enable job log collection on the Datadog Plugin:
 6. Click on `Enable Log Collection` checkbox to activate it.
 7. Check the connectivity with the Datadog Agent.
 8. Save your configuration.
+{{% /tab %}}
+{{% tab "Using Groovy" %}}
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Run the configuration script:
+{{< code-block lang="groovy" >}}
+import jenkins.model.*
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+def j = Jenkins.getInstance()
+def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+// Select the `Datadog Agent` mode
+d.setReportWith('DSD')
+
+// Configure the Agent host, if not previously configured.
+d.setTargetHost('<agent host>')
+
+// Configure the `Log Collection` port, as configured in the previous step.
+d.setTargetLogCollectionPort(<agent log collection port>)
+
+// Enable log collection
+d.setCollectBuildLogs(true)
+
+// Save config
+d.save()
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Set the default branch name
 
