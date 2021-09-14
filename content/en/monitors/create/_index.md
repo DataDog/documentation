@@ -52,7 +52,7 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/monitor_configuration
+[1]: /monitors/create/configuration
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: /api/v1/monitors/
 [4]: /developers/community/libraries/#managing-monitors

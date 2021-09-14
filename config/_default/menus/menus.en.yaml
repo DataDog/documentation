@@ -1164,7 +1164,7 @@ main:
     identifier: monitors_create
     weight: 1
   - name: Monitor Configuration
-    url: monitors/create/monitor_configuration/
+    url: monitors/create/configuration/
     parent: monitors_create
     identifier: monitor_configuration
     weight: 101
