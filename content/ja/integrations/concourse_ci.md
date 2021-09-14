@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md'
 display_name: Concourse CI
 draft: false
 git_integration_title: concourse_ci
@@ -79,7 +79,7 @@ Metric Emitter (Datadog):
 
 [1]: https://concourse-ci.org/concepts.html
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[3]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
 [4]: https://concourse-ci.org/metrics.html#configuring-metrics
 [5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

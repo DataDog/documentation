@@ -21,7 +21,7 @@ aliases:
 
 下記に示すように、データの `endpoint:X` は両ホストでサポートされていますが、`host:B` でのみ失敗するとします。また、`endpoint:Y` へのリクエストは常に成功し、`host:B` でのみ表示されます。
 
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="リクエストのレイテンシー" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="リクエストのレイテンシー"  style="width:80%;">}}
 
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
@@ -56,7 +56,7 @@ aliases:
 
 `temperature` から報告されるカスタムメトリクス数は、最小粒度のタグ `city` に対応します。
 
-temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしていることになります。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
+次に、temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしています。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
 
 Florida の気温を入手するには、単に次のようにカスタムメトリクスの組み合わせを変更します。
 
@@ -68,9 +68,9 @@ Florida の気温を入手するには、単に次のようにカスタムメト
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-[1]: /ja/developers/metrics/types/?tab=count#metric-types
-[2]: /ja/developers/metrics/types/?tab=rate#metric-types
-[3]: /ja/developers/metrics/types/?tab=gauge#metric-types
+[1]: /ja/metrics/types/?tab=count#metric-types
+[2]: /ja/metrics/types/?tab=rate#metric-types
+[3]: /ja/metrics/types/?tab=gauge#metric-types
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -91,8 +91,8 @@ Florida の気温を入手するには、単に次のようにカスタムメト
 - Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][3]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、パーセンタイル順位が 95 の `95percentile` だけが Datadog に送信されます。
 
 
-[1]: /ja/developers/metrics/types/?tab=histogram#metric-types
-[2]: /ja/developers/metrics/types/?tab=histogram#definition
+[1]: /ja/metrics/types/?tab=histogram#metric-types
+[2]: /ja/metrics/types/?tab=histogram#definition
 [3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
@@ -130,7 +130,7 @@ DISTRIBUTION メトリクスを集計する[タグの組み合わせ][2]をカ�
 
 [DISTRIBUTION メトリクス][1]のカスタムメトリクス数は、メトリクス名とタグ値の一意の組み合わせ数に 5 を掛けた数になります。タグをカスタマイズした結果として、`request.Latency` から報告される**カスタムメトリクス総数は 5×*3 = 15** になります。
 
-[1]: /ja/developers/metrics/types/?tab=distribution#definition
+[1]: /ja/metrics/types/?tab=distribution#definition
 [2]: /ja/metrics/distributions/#customize-tagging
 {{% /tab %}}
 {{< /tabs >}}
@@ -139,7 +139,7 @@ DISTRIBUTION メトリクスを集計する[タグの組み合わせ][2]をカ�
 
 管理ユーザー ([Datadog 管理者の役割を持つユーザー][4]) は、[使用量の詳細ページ][5]で、アカウントの 1 時間当たりのカスタムメトリクスの月平均数と上位 5000 個のカスタムメトリクスを参照できます。詳細については、[使用量の詳細][6]に関するドキュメントをご参照ください。
 
-特定のメトリクス名のカスタムメトリクス数をリアルタイムで追跡するには、[Metrics Summary ページ][7]でメトリクス名をクリックします。以下に示すように `Currently reporting # distinct metrics...` として一覧表示されます。
+特定のメトリクス名のカスタムメトリクス数をリアルタイムで追跡するには、[Metrics Summary ページ][7]でメトリクス名をクリックします。以下に示すように「Currently reporting # distinct metrics...」として一覧表示されます。
 
 {{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="メトリクスの追跡" video="true" >}}
 
@@ -174,8 +174,8 @@ Datadog では、料金プランごとに一定数のカスタムメトリクス
 請求に関するご質問は、[カスタマーサクセス][9]マネージャーにお問い合わせください。
 
 [1]: /ja/integrations/
-[2]: /ja/developers/metrics/custom_metrics/
-[3]: /ja/developers/metrics/types/#metric-types
+[2]: /ja/metrics/custom_metrics/
+[3]: /ja/metrics/types/#metric-types
 [4]: /ja/account_management/users/default_roles/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /ja/account_management/billing/usage_details/

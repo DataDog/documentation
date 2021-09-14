@@ -67,7 +67,7 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 ### Auth0
 
-[この拡張機能][26]は、Auth0 ログを取得して Datadog に送信します。
+[Auth0 拡張機能][26]は、Auth0 ログを取得して Datadog に送信します。
 
 ### CLI 管理
 
@@ -75,7 +75,7 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 ### Consul
 
-[このライブラリ][28]を使用して、[DogStatsD][1] から Datadog に consul サービス数を公開できます。
+[Consul ライブラリ][28]を使用して、[DogStatsD][1] から Datadog に Consul サービス数を公開できます。
 
 ### Dogscaler
 
@@ -91,11 +91,11 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 ### Google Analytics
 
-[Bithaus][34] の[このライブラリ][33]を使用すると、Google Analytics から Datadog API 経由で Datadog にデータを取り込むことができます。
+[Bithaus][34] の [Google Analytics ライブラリ][33]を使用すると、Google Analytics から Datadog API を使って Datadog にデータを取り込むことができます。
 
 ### Heroku
 
-Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[こちらのページ][35]を参照してください。
+Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][35]を参照してください。
 
 * [Oz][37] による Nodejs 版 [Heroku Datadog ログドレイン][36]
 * [Apiary][39] による Go 版 [Heroku Datadog ログドレイン][38]
@@ -124,7 +124,7 @@ Datadog 通知を取り込む Moogsoft [リスナー][45]。
 ### NGINX LUA
 
 * LUA スクリプトの [nginx_lua_datadog][47] モジュールを使用して、NGINX 構成から[カスタムメトリクス][46]を直接送信します。
-* [lua-resty-dogstatsd][48] は、[mediba inc][49] によって開発された拡張機能です (現在は [Dailymotion][50] によってフォークされています)。[DogStatsD][1] プロトコルを介して、メトリクス、イベント、サービスチェックを発行できます。`lua-resty-dogstatsd` は GPLv3 としてリリースされ、Nginx コソケット API に依存しています。
+* [lua-resty-dogstatsd][48] は、[mediba inc][49] によって開発された拡張機能です ([Dailymotion][50] によってフォークされています)。[DogStatsD][1] プロトコルを介して、メトリクス、イベント、サービスチェックを発行できます。`lua-resty-dogstatsd` は GPLv3 としてリリースされ、Nginx コソケット API に依存しています。
 
 ### OpenVPN
 
@@ -139,10 +139,10 @@ Datadog 通知を取り込む Moogsoft [リスナー][45]。
 
 この[ライブラリ][55]を使用すると、pid ファイルを指定して StatsD からプロセス情報を生成できます。これは [GitterHQ][56] によって作成されました。
 
-### Saltstack
+### SaltStack
 
-* [Datadog Saltstack Formula][57]
-* [Luca Cipriani][59] が作成した [Datadog Saltstack][58]。
+* [Datadog SaltStack Formula][57]
+* [Luca Cipriani][59] が作成した [Datadog SaltStack][58]。
 
 ### Sensu
 
@@ -168,7 +168,7 @@ Winston Datadog [転送][62]。
 
 Datadog ライブラリを作成し、このページに追加する場合は、[opensource@datadoghq.com][65] にメールを送信してください。
 
-[1]: /ja/metrics/dogstatsd_metrics_submission/
+[1]: /ja/developers/metrics/dogstatsd_metrics_submission/
 [2]: /ja/tracing/
 [3]: /ja/serverless/
 [4]: /ja/api/
@@ -213,7 +213,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [43]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [44]: https://github.com/brigade/logstash-output-dogstatsd
 [45]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
-[46]: /ja/metrics/custom_metrics/
+[46]: /ja/developers/metrics/custom_metrics/
 [47]: https://github.com/simplifi/ngx_lua_datadog
 [48]: https://github.com/dailymotion/lua-resty-dogstatsd
 [49]: http://www.mediba.jp

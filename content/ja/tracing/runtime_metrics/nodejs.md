@@ -43,7 +43,7 @@ Datadog では、APM サービス詳細画面にこれらのメトリクスを�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /ja/metrics/dogstatsd_metrics_submission/#setup
+[2]: /ja/developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: /ja/agent/docker/#dogstatsd-custom-metrics
 [4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [5]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task

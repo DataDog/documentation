@@ -36,7 +36,7 @@ docker run -d --name datadog-agent \
   -e DD_API_KEY=<YOUR_DATADOG_API_KEY> \
   -e MESOS_MASTER=true \
   -e MARATHON_URL=http://leader.mesos:8080 \
-  gcr.io/datadoghq/agent:latest
+  datadog/agent:latest
 ```
 
 上のコマンドの Datadog API キーと Mesos Master の API URL は、適切な値に置き換えてください。
@@ -172,7 +172,7 @@ DC/OS を使用していない場合は、Marathon Web UI を使用するか、�
       }
     ],
     "docker": {
-      "image": "gcr.io/datadoghq/agent:latest",
+      "image": "datadog/agent:latest",
       "network": "BRIDGE",
       "portMappings": [
         {

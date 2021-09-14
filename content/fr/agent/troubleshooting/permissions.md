@@ -15,10 +15,10 @@ further_reading:
 ---
 L'Agent a besoin d'un ensemble d'autorisations spécifique pour recueillir vos données sur votre host. Vous trouverez ci-dessous les problèmes courants liés aux autorisations ainsi que des solutions :
 
-* [Problèmes d'autorisation liés à la journalisation de l'Agent](#problemes-d-autorisation-lies-a-la-journalisation-de-l-Agent)
-* [Problèmes d'autorisation liés aux sockets de l'Agent](#problemes-d-autorisation-lies-aux-sockets-de-l-Agent)
-* [Problème d'autorisation lié aux métriques de processus](#probleme-d-autorisation-lie-aux-metriques-de-processus)
-* [Pour aller plus loin](#pour-aller-plus-loin)
+* [Problèmes d'autorisation liés à la journalisation de l'Agent](#agent-logging-permission-issues)
+* [Problèmes d'autorisation liés aux sockets de l'Agent](#agent-socket-permission-issues)
+* [Problème d'autorisation lié aux métriques de processus](#process-metrics-permission-issue)
+* [Pour aller plus loin](#further-reading)
 
 ## Problèmes d'autorisation liés à la journalisation de l'Agent
 

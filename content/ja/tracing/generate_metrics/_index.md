@@ -79,7 +79,7 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 
 [1]: /ja/tracing/trace_retention_and_ingestion
 [2]: /ja/account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/ja/metrics/#overview
+[3]: https://docs.datadoghq.com/ja/developers/metrics/#overview
 [4]: /ja/monitors/monitor_types/anomaly/#overview
 [5]: /ja/tracing/trace_search_and_analytics/
 [6]: /ja/tracing/trace_search_and_analytics/query_syntax/#analytics-query
@@ -87,4 +87,4 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /ja/tracing/trace_search_and_analytics/query_syntax/
-[11]: /ja/metrics/#naming-metrics
+[11]: /ja/developers/metrics/#naming-metrics

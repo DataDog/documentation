@@ -75,7 +75,7 @@ Agent v5 から Agent v6 へのすべての変更内容については、[Datado
 [2]: /ja/agent/guide/agent-commands/
 [3]: /ja/developers/dogstatsd/unix_socket/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /ja/metrics/types/?tab=distribution#metric-types
+[5]: /ja/developers/metrics/types/?tab=distribution#metric-types
 [6]: /ja/infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /ja/logs/

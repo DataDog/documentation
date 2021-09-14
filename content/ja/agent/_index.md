@@ -15,7 +15,7 @@ further_reading:
   - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
     tag: Documentation
     text: クラウドインスタンスに Agent をインストールするのはなぜですか？
-  - link: 'https://www.datadoghq.com/blog/dont-fear-the-agent/'
+  - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
     tag: ブログ
     text: Agent は難しくない
 aliases:

@@ -6,7 +6,7 @@ description: iOS アプリケーションから RUM データを収集します�
 aliases:
   - /ja/real_user_monitoring/ios/getting_started
 further_reading:
-  - link: 'https://github.com/DataDog/dd-sdk-ios'
+  - link: https://github.com/DataDog/dd-sdk-ios
     tag: Github
     text: dd-sdk-ios ソースコード
   - link: /real_user_monitoring

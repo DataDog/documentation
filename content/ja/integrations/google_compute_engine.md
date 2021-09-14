@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較
-doc_link: 'https://docs.datadoghq.com/integrations/google_compute_engine/'
+doc_link: https://docs.datadoghq.com/integrations/google_compute_engine/
 draft: false
 git_integration_title: google_compute_engine
 has_logo: true

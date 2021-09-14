@@ -18,7 +18,7 @@ Lambda 関数から送信されたカスタムメトリクスは、基底のホ�
 
 ## ログまたはトレースからカスタムメトリクスを作成
 
-ログベースのメトリクスを使用すると、クエリに一致するログの数を記録したり、リクエストの継続時間など、ログに含まれる数値を要約したりできます。ログベースのメトリクスは、インジェストストリーム全体からログデータを要約するコスト効率の高い方法です。ログベースのメトリクスの生成について、詳しくは[こちら][4]をご参照ください。 
+ログベースのメトリクスを使用すると、クエリに一致するログの数を記録したり、リクエストの継続時間など、ログに含まれる数値を要約したりできます。ログベースのメトリクスは、インジェストストリーム全体からログデータを要約するコスト効率の高い方法です。[ログベースのメトリクスの生成の詳細をご参照ください][4]。
 
 保持フィルターによりインデックス化されたかどうかにかわらず、取り込んだスパンのすべてからメトリクスを生成することも可能です。スパンベースのメトリクスの生成について、詳しくは[こちら][5]を参照してください。
 ## Datadog Lambda 拡張機能を使用する
@@ -98,9 +98,9 @@ import (
 
 func main() {
   // ラップする必要があるのは関数ハンドラーだけです（ヘルパー関数ではありません）。
-  lambda.Start(ddlambda.WrapHandler(myHandler, nil))
+  lambda.Start(ddlambda.WrapFunction(myHandler, nil))
   /* または、手動構成オプションを使用します
-  lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
+  lambda.Start(ddlambda.WrapFunction(myHandler, &ddlambda.Config{
     BatchInterval: time.Second * 15
     APIKey: "my-api-key",
   }))
@@ -224,4 +224,4 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 [7]: /ja/agent/guide/private-link/
 [8]: /ja/agent/proxy/
 [9]: /ja/serverless/forwarder/
-[10]: /ja/metrics/
+[10]: /ja/developers/metrics/

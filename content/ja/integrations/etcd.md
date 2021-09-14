@@ -22,7 +22,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
 display_name: etcd
 draft: false
 git_integration_title: etcd

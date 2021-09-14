@@ -2,8 +2,7 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards:
-    spark: assets/dashboards/spark_dashboard.json
+  dashboards: {}
   logs:
     source: spark
   metrics_metadata: metadata.csv
@@ -16,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/spark/README.md'
 display_name: Spark
 draft: false
 git_integration_title: spark
@@ -31,7 +30,7 @@ metric_prefix: spark.
 metric_to_check: spark.job.count
 name: spark
 public_title: Intégration Datadog/Spark
-short_description: Surveillez les taux d'échec des tâches, les shuffled bytes, et bien plus encore.
+short_description: 'Surveillez les taux d''échec des tâches, les shuffled bytes, et bien plus encore.'
 support: core
 supported_os:
   - linux
@@ -48,6 +47,8 @@ Ce check permet de surveiller [Spark][2] avec l'Agent Datadog. Recueillez des m�
 - Les RDD : nombre de partitions, mémoire utilisée, espace disque utilisé.
 - Les tâches : nombre de tâches actives, ignorées, ayant échoué, totales.
 - Les statuts des jobs : nombre de jobs actifs, terminés, ignorés, ayant échoué.
+
+**Remarque** : Les métriques Spark Structured Streaming ne sont pas prises en charge.
 
 ## Configuration
 
@@ -149,24 +150,40 @@ Consultez la [documentation de Datadog][6] pour découvrir comment configurer l'
 Le check Spark n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "spark" >}}
 
+L'Agent envoie l'un des checks de service suivants, selon la façon dont vous exécutez Spark :
+
+**spark.standalone_master.can_connect**<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au master standalone de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`.
+
+**spark.mesos_master.can_connect**<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au master Mesos de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`.
+
+**spark.application_master.can_connect**<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'ApplicationMaster de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`.
+
+**spark.resource_manager.can_connect**<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au ResourceManager de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`.
+
+**spark.driver.can_connect**<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au ResourceManager de l'instance Spark. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 ### Spark sur AWS EMR
 
-Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [utilisez les actions Bootstrap][8] pour installer l'[Agent Datadog][9] :
+Pour recueillir des métriques Spark lorsque Spark est configuré sur AWS EMR, [utilisez les actions Bootstrap][8] pour installer l'[Agent Datadog][10] :
 
-Pour l'Agent v5, créez le fichier de configuration `/etc/dd-agent/conf.d/spark.yaml` avec les [valeurs appropriées pour chaque nœud EMR][10].
+Pour l'Agent v5, créez le fichier de configuration `/etc/dd-agent/conf.d/spark.yaml` avec les [valeurs appropriées pour chaque nœud EMR][9].
 
-Pour l'Agent v6 ou v7, créez le fichier de configuration `/etc/datadog-agent/conf.d/spark.d/conf.yaml` avec les [valeurs appropriées pour chaque nœud EMR][10].
+Pour l'Agent v6 ou v7, créez le fichier de configuration `/etc/datadog-agent/conf.d/spark.d/conf.yaml` avec les [valeurs appropriées pour chaque nœud EMR][11].
+
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller Hadoop et Spark avec Datadog][11]
+- [Surveiller Hadoop et Spark avec Datadog][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
@@ -174,9 +191,8 @@ Documentation, liens et articles supplémentaires utiles :
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/docker/log/
+[6]: 
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[9]: https://docs.datadoghq.com/fr/agent/
-[10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[11]: https://www.datadoghq.com/blog/monitoring-spark
+[9]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[10]: https://www.datadoghq.com/blog/monitoring-spark

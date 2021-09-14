@@ -9,13 +9,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。
-doc_link: https://docs.datadoghq.com/integrations/amazon_ecs/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/amazon-ecs-metrics
+  - link: 'https://www.datadoghq.com/blog/amazon-ecs-metrics'
     tag: ブログ
     text: キー ECS メトリクスの監視
-  - link: https://docs.datadoghq.com/integrations/ecs_fargate
+  - link: 'https://docs.datadoghq.com/integrations/ecs_fargate'
     tag: Documentation
     text: ECS Fargate インテグレーション
 git_integration_title: amazon_ecs

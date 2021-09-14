@@ -86,7 +86,7 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 [6]: /ja/logs/search_syntax/
 [7]: /ja/logs/explorer/facets/#quantitative-facets-measures
 [8]: /ja/getting_started/tagging/
-[9]: /ja/metrics/custom_metrics/
+[9]: /ja/developers/metrics/custom_metrics/
 [10]: /ja/security/logs/#hipaa-enabled-customers
 [11]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
-[12]: /ja/metrics/#naming-metrics
+[12]: /ja/developers/metrics/#naming-metrics

@@ -6,12 +6,12 @@ aliases:
   - /ja/developers/faq/reduce-submission-rate
   - /ja/developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /ja/developers/faq/dog-statsd-sample-rate-parameter-explained
-  - /ja/metrics/dogstatsd_metrics_submission/
+  - /ja/developers/metrics/dogstatsd_metrics_submission/
 further_reading:
   - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: /metrics/types/
+  - link: /developers/metrics/types/
     tag: ドキュメント
     text: Datadog メトリクスタイプ
 ---
@@ -50,7 +50,7 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 `RATE` メトリクスとして保存された `COUNT` メトリクスを Datadog に送信します。 `COUNT` タイプについては、[メトリクスのタイプ][2] に関するドキュメントを参照してください。
 
-次のコードを実行して、DogStatsD の `COUNT` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `COUNT` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -203,11 +203,11 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
 値は `COUNT` として送信されるため、Datadog に `RATE` として保存されます。Datadog で未加工のカウントを取得するには、[累積合計][3] や [積分][4] などの関数を系列に適用します。
 
-{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
 ### GAUGE
 
@@ -218,7 +218,7 @@ while (TRUE) {
 
 `GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。 `GAUGE` タイプについては、[メトリクスのタイプ][5] に関するドキュメントを参照してください。
 
-次のコードを実行して、DogStatsD の `GAUGE` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `GAUGE` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -366,7 +366,7 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
@@ -377,7 +377,7 @@ while (TRUE) {
 
 `GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
-次のコードを実行して、DogStatsD の `SET` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `SET` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -502,7 +502,7 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
@@ -519,7 +519,7 @@ while (TRUE) {
 `HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
 
 
-次のコードを実行して、DogStatsD の `HISTOGRAM` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `HISTOGRAM` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
@@ -671,7 +671,7 @@ while (TRUE) {
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### タイマー
 
@@ -686,7 +686,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 ##### コード例
 
-`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
+`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
@@ -776,7 +776,7 @@ DogStatsD はタイマーメトリクスデータを受け取ると、レンダ�
 
 DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使用するメトリクスのタイプが `TIMER` であろうと `HISTOGRAM` であろうと、Datadog に送信されるのは同じデータです。上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
-{{< img src="metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
@@ -787,7 +787,7 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 `DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
 
-次のコードを実行して、DogStatsD の `DISTRIBUTION` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「閉じる」ことを忘れないでください。
+次のコードを実行して、DogStatsD の `DISTRIBUTION` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -1056,11 +1056,11 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd/
-[2]: /ja/metrics/types/?tab=count#definition
+[2]: /ja/developers/metrics/types/?tab=count#definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
-[5]: /ja/metrics/types/?tab=gauge#definition
-[6]: /ja/metrics/types/?tab=histogram#definition
+[5]: /ja/developers/metrics/types/?tab=gauge#definition
+[6]: /ja/developers/metrics/types/?tab=histogram#definition
 [7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [8]: /ja/metrics/distributions/
-[9]: /ja/metrics/types/?tab=distribution#definition
+[9]: /ja/developers/metrics/types/?tab=distribution#definition

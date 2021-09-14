@@ -58,7 +58,7 @@ custom_queries:
 **注**: 定義されているメトリクスタイプは `gauge` です。詳細については、[メトリクスタイプのドキュメント][2] を参照してください。
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /ja/metrics/types/
+[2]: /ja/developers/metrics/types/
 {{% /tab %}}
 {{% tab "Find" %}}
 
@@ -89,7 +89,7 @@ custom_queries:
 **注**: 定義されているメトリクスタイプは `gauge` です。詳細については、[メトリクスタイプのドキュメント][2] を参照してください。
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /ja/metrics/types/
+[2]: /ja/developers/metrics/types/
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 

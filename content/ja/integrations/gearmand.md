@@ -20,7 +20,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
 display_name: Gearman
 draft: false
 git_integration_title: gearmand

@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/cilium/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/cilium/README.md'
 display_name: Cilium
 draft: false
 git_integration_title: cilium

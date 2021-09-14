@@ -26,7 +26,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/apache/README.md'
 description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 display_name: Apache
 draft: false

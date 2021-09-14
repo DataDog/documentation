@@ -14,39 +14,36 @@ further_reading:
 ---
 ## 必須セットアップ
 
-まだ構成が済んでいない場合は、[AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。[AWS インテグレーション][1]をインストールしたら、手順に従いアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+未構成の場合:
+
+- [AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
+- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。
+
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
 ## コンフィギュレーション
 
-### Datadog Lambda 拡張機能のインストール
+### Install
 
-次の形式の ARN を使用して、[Datadog Lambda 拡張機能][2]を Lambda 関数に Lambda レイヤーとしてインストールします。
+1. Lambda 関数の [AWS X-Ray アクティブトレース][3]を有効にします。
+2. [.NET 向け AWS X-Ray SDK][4] をインストールします。
 
-```
-arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
-```
+### サブスクライブ
 
-最新の `EXTENSION_VERSION` は `{{< latest-lambda-layer-version layer="extension" >}}` です。
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。
 
-### 関数の構成
-
-1. Lambda 関数の [AWS X-Ray アクティブトレース][4]を有効にします。
-2. [.NET 向け AWS X-Ray SDK][5] をインストールします。
-3. 環境変数 `DD_API_KEY` を追加し、[API 管理ページ][6]で Datadog API キーに値を設定します。
-
-## Datadog サーバーレスモニタリングの利用
-
-以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
+1. [まだの場合は、Datadog Forwarder をインストールします][2]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
 
 ### タグ
 
-これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][8]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][6]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
 
 ### AWS サーバーレスリソースからログを収集
 
-AWS Lambda 関数以外のマネージドリソースで生成されたサーバーレスログは、サーバーレスアプリケーションの問題の根本的な原因を特定するのに役立ちます。お使いの環境の以下のマネージドリソースからログを転送することをお勧めします。
+AWS Lambda 関数以外のマネージドリソースで生成されたサーバーレスログは、サーバーレスアプリケーションの問題の根本的な原因を特定するのに役立ちます。Datadog では、お使いの環境の以下のマネージドリソースからログを転送することをお勧めします。
 - API: API Gateway、AppSync、ALB
-- クエリとストリーム: SQS、SNS、Kinesis
+- キューとストリーム: SQS、SNS、Kinesis
 - データストア: DynamoDB、S3、RDS など
 
 Lambda 以外の AWS リソースからログを収集するには、[Datadog Forwarder][9] をインストールして構成し、マネージドリソースの各 CloudWatch ロググループにサブスクライブさせます。
@@ -64,19 +61,15 @@ myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
-カスタムメトリクスの送信について、詳しくは[こちら][10]を参照してください。
+カスタムメトリクスの送信について、詳細は、[サーバーレスカスタムメトリクスに関するドキュメント][6]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/amazon_web_services/
-[2]: /ja/serverless/libraries_integrations/extension/
-[3]: https://gallery.ecr.aws/datadog/lambda-extension
-[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[6]: https://app.datadoghq.com/account/settings#api
-[7]: https://app.datadoghq.com/functions
-[8]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[9]: /ja/serverless/libraries_integrations/forwarder
-[10]: /ja/serverless/custom_metrics?tab=otherruntimes
+[2]: /ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
+[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: /ja/serverless/custom_metrics?tab=otherruntimes

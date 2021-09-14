@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure ExpressRoute のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_express_route/'
 draft: false
 git_integration_title: azure_express_route
 has_logo: true

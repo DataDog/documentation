@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md'
 display_name: Buddy
 draft: false
 git_integration_title: buddy

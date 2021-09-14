@@ -213,8 +213,8 @@ aliases:
 [2]: /ja/tracing/setup/
 [3]: /ja/tracing/visualization/#trace-metrics
 [4]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /ja/metrics/types/?tab=count#metric-types
-[6]: /ja/metrics/types/?tab=gauge#metric-types
+[5]: /ja/developers/metrics/types/?tab=count#metric-types
+[6]: /ja/developers/metrics/types/?tab=gauge#metric-types
 [7]: /ja/tracing/visualization/services_list/#services-types
 [8]: /ja/tracing/visualization/#services
 [9]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
