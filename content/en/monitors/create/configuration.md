@@ -40,7 +40,7 @@ The alert conditions vary based on the [monitor type][1]. Configure monitors to 
 * the threshold `on average`, `at least once`, `at all times`, or `in total`
 * during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
 
-### Aggregation method
+<h3>Aggregation method</h3>
 
 The query returns a series of points, but a single value is needed to compare to the threshold. The monitor must reduce the data in the evaluation window to a single value.
 
@@ -53,11 +53,11 @@ The query returns a series of points, but a single value is needed to compare to
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 
-### Evaluation window
+<h3>Evaluation window</h3>
 
 Monitors are evaluated at a certain frequency (every minute most of the time) looking back at the last `5 minutes`, `15 minutes`, `1 hour`, etc.
 
-### Thresholds
+<h3>Thresholds</h3>
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
