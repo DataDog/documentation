@@ -5,121 +5,121 @@ main_left:
     weight: -500
   - identifier: features
     name: Features
-    pre: '<i class="icon-features align-middle"></i>'
+    pre: <i class="icon-features align-middle"></i>
     url: 'https://www.datadoghq.com/product/'
     weight: 1
     parent: product
   - identifier: integrations
     name: Integrations
-    pre: '<i class="icon-integrations align-middle"></i>'
+    pre: <i class="icon-integrations align-middle"></i>
     url: 'https://www.datadoghq.com/product/platform/integrations/'
     weight: 2
     parent: product
   - identifier: dashboarding
     name: Dashboards
-    pre: '<i class="icon-dashboard align-middle"></i>'
+    pre: <i class="icon-dashboard align-middle"></i>
     url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 3
     parent: product
   - identifier: infrastructure
     name: Infrastructure Monitoring
-    pre: '<i class="icon-host-map align-middle"></i>'
+    pre: <i class="icon-host-map align-middle"></i>
     url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
     weight: 4
     parent: product
   - identifier: logs
     name: Log Management
-    pre: '<i class="icon-log align-middle"></i>'
+    pre: <i class="icon-log align-middle"></i>
     weight: 5
     parent: product
   - identifier: apm
     name: APM
-    pre: '<i class="icon-apm align-middle"></i>'
+    pre: <i class="icon-apm align-middle"></i>
     weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
-    pre: '<i class="icon-profiling-1 align-middle"></i>'
+    pre: <i class="icon-profiling-1 align-middle"></i>
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
-    pre: '<i class="icon-synthetics align-middle"></i>'
+    pre: <i class="icon-synthetics align-middle"></i>
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: '<i class="icon-rum align-middle"></i>'
+    pre: <i class="icon-rum align-middle"></i>
     weight: 9
     parent: product
   - identifier: network
     name: Network Monitoring
-    pre: '<i class="icon-network align-middle"></i>'
+    pre: <i class="icon-network align-middle"></i>
     url: 'https://www.datadoghq.com/product/network-monitoring'
     weight: 10
     parent: product
   - identifier: security-platform
     name: Security Platform
-    pre: '<i class="icon-security align-middle"></i>'
+    pre: <i class="icon-security align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 11
     parent: product
   - identifier: security-monitoring
     name: Security Monitoring
-    pre: '<i class="icon-security align-middle"></i>'
+    pre: <i class="icon-security align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
     weight: 12
     parent: product
   - identifier: cloud-security-posture-management
     name: CSPM
-    pre: '<i class="icon-cspm align-middle"></i>'
+    pre: <i class="icon-cspm align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
     weight: 13
     parent: product
   - identifier: cloud-workload-security
     name: Cloud Workload Security
-    pre: '<i class="icon-cws align-middle"></i>'
-    url: 'product/security-platform/cloud-workload-security/'
+    pre: <i class="icon-cws align-middle"></i>
+    url: product/security-platform/cloud-workload-security/
     weight: 14
-    parent: 'product'
+    parent: product
   - identifier: error-tracking
     name: Error Tracking
-    pre: '<i class="icon-error-tracking align-middle"></i>'
-    url: 'product/security-platform/error-tracking/'
+    pre: <i class="icon-error-tracking align-middle"></i>
+    url: product/security-platform/error-tracking/
     weight: 15
-    parent: 'product'
+    parent: product
   - identifier: incident
     name: Incident Management
-    pre: '<i class="icon-incidents align-middle"></i>'
-    url: 'product/incident-management'
+    pre: <i class="icon-incidents align-middle"></i>
+    url: product/incident-management
     weight: 16
-    parent: 'product'
+    parent: product
   - identifier: database
     name: Database Monitoring
-    pre: '<i class="icon-dbm align-middle"></i>'
-    url: 'product/database-monitoring'
+    pre: <i class="icon-dbm align-middle"></i>
+    url: product/database-monitoring
     weight: 17
-    parent: 'product'
+    parent: product
   - identifier: serverless
     name: Serverless
-    pre: '<i class="icon-serverless align-middle"></i>'
-    url: 'product/serverless-monitoring/'
+    pre: <i class="icon-serverless align-middle"></i>
+    url: product/serverless-monitoring/
     weight: 18
-    parent: 'product'
+    parent: product
   - identifier: alerts
     name: Alerts
-    pre: '<i class="icon-alert align-middle"></i>'
-    url: 'product/alerts/'
+    pre: <i class="icon-alert align-middle"></i>
+    url: product/alerts/
     weight: 19
-    parent: 'product'
+    parent: product
   - identifier: api
     name: API
-    pre: '<i class="icon-api align-middle"></i>'
+    pre: <i class="icon-api align-middle"></i>
     url: 'https://docs.datadoghq.com/api'
     weight: 20
-    parent: 'product'
+    parent: product
   - identifier: customers
     name: Customers
     url: 'https://www.datadoghq.com/customers/'

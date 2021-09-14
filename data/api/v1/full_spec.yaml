@@ -1032,6 +1032,7 @@ components:
       description: Type for shared dashboard invitation request body.
       enum:
       - public_dashboard_invitation
+      example: public_dashboard_invitation
       type: string
       x-enum-varnames:
       - PUBLIC_DASHBOARD_INVITATION
@@ -1040,6 +1041,7 @@ components:
       enum:
       - ordered
       - free
+      example: ordered
       type: string
       x-enum-varnames:
       - ORDERED
@@ -2213,6 +2215,84 @@ components:
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
+    FormulaAndFunctionApmDependencyStatName:
+      description: APM statistic.
+      enum:
+      - avg_duration
+      - avg_root_duration
+      - avg_spans_per_trace
+      - error_rate
+      - pct_exec_time
+      - pct_of_traces
+      - total_traces_count
+      example: avg_duration
+      type: string
+      x-enum-varnames:
+      - AVG_DURATION
+      - AVG_ROOT_DURATION
+      - AVG_SPANS_PER_TRACE
+      - ERROR_RATE
+      - PCT_EXEC_TIME
+      - PCT_OF_TRACES
+      - TOTAL_TRACES_COUNT
+    FormulaAndFunctionApmDependencyStatsDataSource:
+      description: Data source for APM dependency stats queries.
+      enum:
+      - apm_dependency_stats
+      example: apm_dependency_stats
+      type: string
+      x-enum-varnames:
+      - APM_DEPENDENCY_STATS
+    FormulaAndFunctionApmDependencyStatsQueryDefinition:
+      description: A formula and functions APM dependency stats query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsDataSource'
+        env:
+          description: APM environment.
+          example: staging
+          type: string
+        is_upstream:
+          description: Determines whether stats for upstream or downstream dependencies
+            should be queried.
+          example: false
+          type: boolean
+        name:
+          description: Name of query to use in formulas.
+          example: query_errors
+          type: string
+        operation_name:
+          description: Name of operation on service.
+          example: cassandra.query
+          type: string
+        primary_tag_name:
+          description: The name of the second primary tag used within APM; required
+            when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog.
+          example: datacenter
+          type: string
+        primary_tag_value:
+          description: Filter APM data by the second primary tag. `primary_tag_name`
+            must also be specified.
+          example: staging
+          type: string
+        resource_name:
+          description: APM resource.
+          example: DELETE FROM foo WHERE baz = ?
+          type: string
+        service:
+          description: APM service.
+          example: cassandra
+          type: string
+        stat:
+          $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatName'
+      required:
+      - data_source
+      - env
+      - stat
+      - operation_name
+      - resource_name
+      - service
+      type: object
     FormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -2409,6 +2489,7 @@ components:
       enum:
       - process
       - container
+      example: process
       type: string
       x-enum-varnames:
       - PROCESS
@@ -2457,12 +2538,14 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries or Scalar response. **This feature is currently in beta.**
       enum:
       - timeseries
       - scalar
+      example: timeseries
       type: string
       x-enum-varnames:
       - TIMESERIES
@@ -3482,6 +3565,7 @@ components:
       - auto
       - compact
       - full
+      example: compact
       type: string
       x-enum-varnames:
       - AUTO
@@ -3510,6 +3594,7 @@ components:
       description: Widget response format.
       enum:
       - event_list
+      example: event_list
       type: string
       x-enum-varnames:
       - EVENT_LIST
@@ -5076,7 +5161,7 @@ components:
           example:
           - metric: system.load.1
             points:
-            - - 1475317847
+            - - 1475317847.0
               - 0.7
           items:
             $ref: '#/components/schemas/Series'
@@ -7047,7 +7132,7 @@ components:
     Point:
       description: Array of timeseries points.
       example:
-      - 1575317847
+      - 1575317847.0
       - 0.5
       items:
         description: 'Each point is of the form `[POSIX_timestamp, numeric_value]`.
@@ -7080,7 +7165,7 @@ components:
           type: integer
         metric:
           description: Your chosen metric.
-          example: ''
+          example: system.load.1
           type: string
         search_by:
           description: Your chosen search term.
@@ -7284,18 +7369,18 @@ components:
           type: array
       type: object
     SLOCorrection:
-      description: The response object of a list of SLO corrections
+      description: The response object of a list of SLO corrections.
       properties:
         attributes:
           $ref: '#/components/schemas/SLOCorrectionResponseAttributes'
         id:
-          description: The ID of the SLO correction
+          description: The ID of the SLO correction.
           type: string
         type:
           $ref: '#/components/schemas/SLOCorrectionType'
       type: object
     SLOCorrectionCategory:
-      description: Category the SLO correction belongs to
+      description: Category the SLO correction belongs to.
       enum:
       - Scheduled Maintenance
       - Outside Business Hours
@@ -7309,21 +7394,23 @@ components:
       - DEPLOYMENT
       - OTHER
     SLOCorrectionCreateData:
-      description: The data object associated with the SLO correction to be created
+      description: The data object associated with the SLO correction to be created.
       properties:
         attributes:
           $ref: '#/components/schemas/SLOCorrectionCreateRequestAttributes'
         type:
           $ref: '#/components/schemas/SLOCorrectionType'
+      required:
+      - type
       type: object
     SLOCorrectionCreateRequest:
-      description: An object that defines a correction to be applied to an SLO
+      description: An object that defines a correction to be applied to an SLO.
       properties:
         data:
           $ref: '#/components/schemas/SLOCorrectionCreateData'
       type: object
     SLOCorrectionCreateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be created
+      description: The attribute object associated with the SLO correction to be created.
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
@@ -7331,22 +7418,22 @@ components:
           description: Description of the correction being made.
           type: string
         end:
-          description: Ending time of the correction in epoch seconds
+          description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         slo_id:
-          description: ID of the SLO that this correction will be applied to
+          description: ID of the SLO that this correction will be applied to.
           example: sloId
           type: string
         start:
-          description: Starting time of the correction in epoch seconds
+          description: Starting time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         timezone:
           description: The timezone to display in the UI for the correction times
-            (defaults to "UTC")
+            (defaults to "UTC").
           example: UTC
           type: string
       required:
@@ -7356,10 +7443,10 @@ components:
       - category
       type: object
     SLOCorrectionListResponse:
-      description: A list of  SLO correction objects
+      description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects
+          description: The list of of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -7367,13 +7454,13 @@ components:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     SLOCorrectionResponse:
-      description: The response object of an SLO correction
+      description: The response object of an SLO correction.
       properties:
         data:
           $ref: '#/components/schemas/SLOCorrection'
       type: object
     SLOCorrectionResponseAttributes:
-      description: The attribute object associated with the SLO correction
+      description: The attribute object associated with the SLO correction.
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
@@ -7383,19 +7470,19 @@ components:
           description: Description of the correction being made.
           type: string
         end:
-          description: Ending time of the correction in epoch seconds
+          description: Ending time of the correction in epoch seconds.
           format: int64
           type: integer
         slo_id:
-          description: ID of the SLO that this correction will be applied to
+          description: ID of the SLO that this correction will be applied to.
           type: string
         start:
-          description: Starting time of the correction in epoch seconds
+          description: Starting time of the correction in epoch seconds.
           format: int64
           type: integer
         timezone:
           description: The timezone to display in the UI for the correction times
-            (defaults to "UTC")
+            (defaults to "UTC").
           type: string
       type: object
     SLOCorrectionType:
@@ -7408,7 +7495,7 @@ components:
       x-enum-varnames:
       - CORRECTION
     SLOCorrectionUpdateData:
-      description: The data object associated with the SLO correction to be updated
+      description: The data object associated with the SLO correction to be updated.
       properties:
         attributes:
           $ref: '#/components/schemas/SLOCorrectionUpdateRequestAttributes'
@@ -7416,13 +7503,13 @@ components:
           $ref: '#/components/schemas/SLOCorrectionType'
       type: object
     SLOCorrectionUpdateRequest:
-      description: An object that defines a correction to be applied to an SLO
+      description: An object that defines a correction to be applied to an SLO.
       properties:
         data:
           $ref: '#/components/schemas/SLOCorrectionUpdateData'
       type: object
     SLOCorrectionUpdateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be updated
+      description: The attribute object associated with the SLO correction to be updated.
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
@@ -7430,18 +7517,18 @@ components:
           description: Description of the correction being made.
           type: string
         end:
-          description: Ending time of the correction in epoch seconds
+          description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         start:
-          description: Starting time of the correction in epoch seconds
+          description: Starting time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         timezone:
           description: The timezone to display in the UI for the correction times
-            (defaults to "UTC")
+            (defaults to "UTC").
           example: UTC
           type: string
       type: object
@@ -7481,6 +7568,7 @@ components:
       - 30d
       - 90d
       - all
+      example: 30d
       type: string
       x-enum-varnames:
       - SEVEN_DAYS
@@ -8154,6 +8242,7 @@ components:
       - 30d
       - 90d
       - custom
+      example: 30d
       type: string
       x-enum-varnames:
       - SEVEN_DAYS
@@ -8382,9 +8471,6 @@ components:
             timestamp and a scalar value (cannot be a string). Timestamps should be
             in POSIX time in seconds, and cannot be more than ten minutes in the future
             or more than one hour in the past.
-          example:
-          - - 1575317847
-            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
@@ -9233,7 +9319,6 @@ components:
         assertions:
           default: []
           description: Array of assertions used for the test.
-          example: []
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -9442,6 +9527,7 @@ components:
       description: Assertion operator to apply.
       enum:
       - validatesJSONPath
+      example: validatesJSONPath
       type: string
       x-enum-varnames:
       - VALIDATES_JSON_PATH
@@ -9487,6 +9573,7 @@ components:
       - validates
       - isInMoreThan
       - isInLessThan
+      example: contains
       type: string
       x-enum-varnames:
       - CONTAINS
@@ -9536,6 +9623,7 @@ components:
       - packetLossPercentage
       - packetsReceived
       - networkHop
+      example: statusCode
       type: string
       x-enum-varnames:
       - BODY
@@ -9572,14 +9660,15 @@ components:
       properties:
         description:
           description: Description of the error.
-          example: ''
+          example: Example error message
           type: string
         name:
           description: Name of the error.
-          example: ''
+          example: Failed test
           type: string
         status:
           description: Status Code of the error.
+          example: 500
           format: int64
           type: integer
         type:
@@ -9594,6 +9683,7 @@ components:
       enum:
       - network
       - js
+      example: network
       type: string
       x-enum-varnames:
       - NETWORK
@@ -9831,6 +9921,7 @@ components:
       - global
       - javascript
       - text
+      example: text
       type: string
       x-enum-varnames:
       - ELEMENT
@@ -9983,6 +10074,7 @@ components:
       enum:
       - global
       - text
+      example: text
       type: string
       x-enum-varnames:
       - GLOBAL
@@ -10083,6 +10175,7 @@ components:
       - edge.laptop_large
       - edge.tablet
       - edge.mobile_small
+      example: laptop_large
       type: string
       x-enum-varnames:
       - LAPTOP_LARGE
@@ -10213,6 +10306,7 @@ components:
       enum:
       - http_body
       - http_header
+      example: http_body
       type: string
       x-enum-varnames:
       - HTTP_BODY
@@ -10225,6 +10319,7 @@ components:
       - json_path
       - regex
       - x_path
+      example: raw
       type: string
       x-enum-varnames:
       - RAW
@@ -10289,6 +10384,7 @@ components:
       type: object
     SyntheticsParsingOptions:
       description: Parsing options for variables to extract.
+      example: {}
       properties:
         field:
           description: When type is `http_header`, name of the header to use to extract
@@ -10607,6 +10703,7 @@ components:
       - typeText
       - uploadFiles
       - wait
+      example: assertElementContent
       type: string
       x-enum-varnames:
       - ASSERT_CURRENT_URL
@@ -11070,6 +11167,7 @@ components:
       description: User locator used.
       enum:
       - user_locator
+      example: user_locator
       type: string
       x-enum-varnames:
       - USER_LOCATOR
@@ -14036,6 +14134,7 @@ components:
       - '>='
       - <
       - <=
+      example: '>'
       type: string
       x-enum-varnames:
       - GREATER_THAN
@@ -14233,6 +14332,7 @@ components:
       enum:
       - check
       - cluster
+      example: check
       type: string
       x-enum-varnames:
       - CHECK
@@ -14319,6 +14419,7 @@ components:
       description: Layout type of the group.
       enum:
       - ordered
+      example: ordered
       type: string
       x-enum-varnames:
       - ORDERED
@@ -14366,6 +14467,7 @@ components:
       - 6mo
       - 1y
       - alert
+      example: 5m
       type: string
       x-enum-varnames:
       - PAST_ONE_MINUTE
@@ -14527,6 +14629,7 @@ components:
       - black_on_light_yellow
       - black_on_light_green
       - black_on_light_red
+      example: blue
       type: string
       x-enum-varnames:
       - BLUE
@@ -14684,6 +14787,7 @@ components:
       enum:
       - timeseries
       - toplist
+      example: timeseries
       type: string
       x-enum-varnames:
       - TIMESERIES
@@ -19798,7 +19902,7 @@ paths:
           example: service:my-app
           type: string
       - description: If this argument is set to true, then the returned data includes
-          all current downtimes for each monitor.
+          all current active downtimes for each monitor.
         in: query
         name: with_downtimes
         required: false
@@ -22034,7 +22138,7 @@ paths:
         type: safe
   /api/v1/slo/correction:
     get:
-      description: Get all Service Level Objective corrections
+      description: Get all Service Level Objective corrections.
       operationId: ListSLOCorrection
       responses:
         '200':
@@ -22059,7 +22163,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
-      description: Create an SLO Correction
+      description: Create an SLO Correction.
       operationId: CreateSLOCorrection
       requestBody:
         content:
@@ -22119,10 +22223,10 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/correction/{slo_correction_id}:
     delete:
-      description: Permanently delete the specified SLO correction object
+      description: Permanently delete the specified SLO correction object.
       operationId: DeleteSLOCorrection
       parameters:
-      - description: The ID of the SLO correction object
+      - description: The ID of the SLO correction object.
         in: path
         name: slo_correction_id
         required: true
@@ -22153,10 +22257,10 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
-      description: Get an SLO correction
+      description: Get an SLO correction.
       operationId: GetSLOCorrection
       parameters:
-      - description: The ID of the SLO correction object
+      - description: The ID of the SLO correction object.
         in: path
         name: slo_correction_id
         required: true
@@ -22191,10 +22295,10 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      description: Update the specified SLO correction object object
+      description: Update the specified SLO correction object object.
       operationId: UpdateSLOCorrection
       parameters:
-      - description: The ID of the SLO correction object
+      - description: The ID of the SLO correction object.
         in: path
         name: slo_correction_id
         required: true
