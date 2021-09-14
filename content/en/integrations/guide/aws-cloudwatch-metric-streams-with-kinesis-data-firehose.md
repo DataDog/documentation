@@ -136,6 +136,8 @@ Once you see the Metric Stream resource has been successfully created, wait five
 In order to disable metric streaming, you must delete the AWS metric stream resources directly on the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html" target="_blank">AWS Console</a>. In order to prevent loss of data, the following resources will need to be deleted for streaming to be correctly disabled:
 1. The Kinesis Data Firehose delivery stream that delivered metrics to Datadog
 2. The CloudWatch Metric Stream linked to your delivery stream
+3. IAM roles associated with the stream and all other resources that were created while setting up the stream 
+4. If Cloudformation was used the stack can be deleted
 
 
 ## Troubleshooting
