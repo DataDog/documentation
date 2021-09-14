@@ -161,10 +161,10 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 [1]: /ja/dashboards/timeboard/
 [2]: /ja/dashboards/screenboard/
 [3]: /ja/agent/
-[4]: /ja/metrics/custom_metrics/
+[4]: /ja/developers/metrics/custom_metrics/
 [5]: /ja/dashboards/faq/how-is-data-aggregated-in-graphs/
 [6]: /ja/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /ja/dashboards/functions/rollup/
 [8]: /ja/dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[10]: /ja/metrics/dogstatsd_metrics_submission/
+[10]: /ja/developers/metrics/dogstatsd_metrics_submission/

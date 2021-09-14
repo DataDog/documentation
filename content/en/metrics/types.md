@@ -10,7 +10,7 @@ aliases:
     - /metrics/sets/
     - /metrics_type/
     - /metrics/metrics_type/
-    - /metrics/types/
+    - /developers/metrics/types/
 further_reading:
     - link: 'developers/dogstatsd'
       tag: 'Documentation'

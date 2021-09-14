@@ -99,7 +99,7 @@ _例: リクエストの 99% は、30 日間で 250 ms 未満で完了する必�
 
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/monitors#create/metric
-[3]: /ja/metrics
+[3]: /ja/developers/metrics
 [4]: /ja/integrations
 [5]: /ja/tracing/generate_metrics/
 [6]: /ja/logs/logs_to_metrics/
