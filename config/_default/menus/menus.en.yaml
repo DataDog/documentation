@@ -1279,7 +1279,7 @@ main:
     identifier: monitors_manage_search
     weight: 301
   - name: Monitor Status
-    url: monitors/manage/monitor_status/
+    url: monitors/manage/status/
     parent: monitors_manage
     identifier: monitors_manage_status
     weight: 302
