@@ -95,15 +95,19 @@ Use the seasonal algorithm for metrics with repeating patterns. There are three 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (no data, evaluation delay, etc.), see the [Monitor configuration][6] page. For the metric-specific option full data window, see the [Metric monitor][7] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
 
 ## API
 
-To create forecast monitors programmatically, see the [Datadog API reference][7]. Datadog **strongly recommends** [exporting a monitor's JSON][8] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+To create forecast monitors programmatically, see the [Datadog API reference][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-Forecast monitors are managed using the [same API][9] as other monitors, but the contents of the `query` property deserves further explanation.
+Forecast monitors are managed using the [same API][11] as other monitors, but the contents of the `query` property deserves further explanation.
 
 The `query` property in the request body should contain a query string in the following format:
 
@@ -137,7 +141,9 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 [3]: /monitors/faq/what-are-recovery-thresholds/
 [4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
-[6]: /monitors/notifications/
-[7]: /api/v1/monitors/#create-a-monitor
-[8]: /monitors/monitor_status/#settings
-[9]: /api/v1/monitors/
+[6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/create/types/metric/#data-window
+[8]: /monitors/notifications/
+[9]: /api/v1/monitors/#create-a-monitor
+[10]: /monitors/monitor_status/#settings
+[11]: /api/v1/monitors/
