@@ -7,7 +7,7 @@ The Real User Monitoring (RUM) SDK can be configured to send requests through a 
 
 ## SDK initialization
 
-When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL using POST method (for example, www.proxy.com/foo).
+When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL using POST method (for example, https://www.proxy.com/foo).
 
 {{< tabs >}}
 {{% tab "NPM" %}}
