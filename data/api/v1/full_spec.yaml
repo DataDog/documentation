@@ -7369,18 +7369,18 @@ components:
           type: array
       type: object
     SLOCorrection:
-      description: The response object of a list of SLO corrections
+      description: The response object of a list of SLO corrections.
       properties:
         attributes:
           $ref: '#/components/schemas/SLOCorrectionResponseAttributes'
         id:
-          description: The ID of the SLO correction
+          description: The ID of the SLO correction.
           type: string
         type:
           $ref: '#/components/schemas/SLOCorrectionType'
       type: object
     SLOCorrectionCategory:
-      description: Category the SLO correction belongs to
+      description: Category the SLO correction belongs to.
       enum:
       - Scheduled Maintenance
       - Outside Business Hours
@@ -7394,21 +7394,23 @@ components:
       - DEPLOYMENT
       - OTHER
     SLOCorrectionCreateData:
-      description: The data object associated with the SLO correction to be created
+      description: The data object associated with the SLO correction to be created.
       properties:
         attributes:
           $ref: '#/components/schemas/SLOCorrectionCreateRequestAttributes'
         type:
           $ref: '#/components/schemas/SLOCorrectionType'
+      required:
+      - type
       type: object
     SLOCorrectionCreateRequest:
-      description: An object that defines a correction to be applied to an SLO
+      description: An object that defines a correction to be applied to an SLO.
       properties:
         data:
           $ref: '#/components/schemas/SLOCorrectionCreateData'
       type: object
     SLOCorrectionCreateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be created
+      description: The attribute object associated with the SLO correction to be created.
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
@@ -7416,22 +7418,22 @@ components:
           description: Description of the correction being made.
           type: string
         end:
-          description: Ending time of the correction in epoch seconds
+          description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         slo_id:
-          description: ID of the SLO that this correction will be applied to
+          description: ID of the SLO that this correction will be applied to.
           example: sloId
           type: string
         start:
-          description: Starting time of the correction in epoch seconds
+          description: Starting time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         timezone:
           description: The timezone to display in the UI for the correction times
-            (defaults to "UTC")
+            (defaults to "UTC").
           example: UTC
           type: string
       required:
@@ -7441,10 +7443,10 @@ components:
       - category
       type: object
     SLOCorrectionListResponse:
-      description: A list of  SLO correction objects
+      description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects
+          description: The list of of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -7452,13 +7454,13 @@ components:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
     SLOCorrectionResponse:
-      description: The response object of an SLO correction
+      description: The response object of an SLO correction.
       properties:
         data:
           $ref: '#/components/schemas/SLOCorrection'
       type: object
     SLOCorrectionResponseAttributes:
-      description: The attribute object associated with the SLO correction
+      description: The attribute object associated with the SLO correction.
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
@@ -7468,19 +7470,19 @@ components:
           description: Description of the correction being made.
           type: string
         end:
-          description: Ending time of the correction in epoch seconds
+          description: Ending time of the correction in epoch seconds.
           format: int64
           type: integer
         slo_id:
-          description: ID of the SLO that this correction will be applied to
+          description: ID of the SLO that this correction will be applied to.
           type: string
         start:
-          description: Starting time of the correction in epoch seconds
+          description: Starting time of the correction in epoch seconds.
           format: int64
           type: integer
         timezone:
           description: The timezone to display in the UI for the correction times
-            (defaults to "UTC")
+            (defaults to "UTC").
           type: string
       type: object
     SLOCorrectionType:
@@ -7493,7 +7495,7 @@ components:
       x-enum-varnames:
       - CORRECTION
     SLOCorrectionUpdateData:
-      description: The data object associated with the SLO correction to be updated
+      description: The data object associated with the SLO correction to be updated.
       properties:
         attributes:
           $ref: '#/components/schemas/SLOCorrectionUpdateRequestAttributes'
@@ -7501,13 +7503,13 @@ components:
           $ref: '#/components/schemas/SLOCorrectionType'
       type: object
     SLOCorrectionUpdateRequest:
-      description: An object that defines a correction to be applied to an SLO
+      description: An object that defines a correction to be applied to an SLO.
       properties:
         data:
           $ref: '#/components/schemas/SLOCorrectionUpdateData'
       type: object
     SLOCorrectionUpdateRequestAttributes:
-      description: The attribute object associated with the SLO correction to be updated
+      description: The attribute object associated with the SLO correction to be updated.
       properties:
         category:
           $ref: '#/components/schemas/SLOCorrectionCategory'
@@ -7515,18 +7517,18 @@ components:
           description: Description of the correction being made.
           type: string
         end:
-          description: Ending time of the correction in epoch seconds
+          description: Ending time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         start:
-          description: Starting time of the correction in epoch seconds
+          description: Starting time of the correction in epoch seconds.
           example: 1600000000
           format: int64
           type: integer
         timezone:
           description: The timezone to display in the UI for the correction times
-            (defaults to "UTC")
+            (defaults to "UTC").
           example: UTC
           type: string
       type: object
@@ -22136,7 +22138,7 @@ paths:
         type: safe
   /api/v1/slo/correction:
     get:
-      description: Get all Service Level Objective corrections
+      description: Get all Service Level Objective corrections.
       operationId: ListSLOCorrection
       responses:
         '200':
@@ -22161,7 +22163,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
-      description: Create an SLO Correction
+      description: Create an SLO Correction.
       operationId: CreateSLOCorrection
       requestBody:
         content:
@@ -22221,10 +22223,10 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/correction/{slo_correction_id}:
     delete:
-      description: Permanently delete the specified SLO correction object
+      description: Permanently delete the specified SLO correction object.
       operationId: DeleteSLOCorrection
       parameters:
-      - description: The ID of the SLO correction object
+      - description: The ID of the SLO correction object.
         in: path
         name: slo_correction_id
         required: true
@@ -22255,10 +22257,10 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
-      description: Get an SLO correction
+      description: Get an SLO correction.
       operationId: GetSLOCorrection
       parameters:
-      - description: The ID of the SLO correction object
+      - description: The ID of the SLO correction object.
         in: path
         name: slo_correction_id
         required: true
@@ -22293,10 +22295,10 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      description: Update the specified SLO correction object object
+      description: Update the specified SLO correction object object.
       operationId: UpdateSLOCorrection
       parameters:
-      - description: The ID of the SLO correction object
+      - description: The ID of the SLO correction object.
         in: path
         name: slo_correction_id
         required: true
