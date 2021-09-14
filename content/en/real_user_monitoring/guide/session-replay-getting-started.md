@@ -1,5 +1,5 @@
 ---
-title: Getting started with Session Replay
+title: Getting Started with Session Replay
 kind: guide
 description: Guide for enabling Session Replay and how to set privacy options
 further_reading:
