@@ -178,7 +178,7 @@ This setting allows you to change when the alerting engine considers a monitor a
 
 #### Other options
 
-For detailed instructions on the advanced alert options (no data, autoresolve, etc.), see the [Monitor Configuration][6] page.
+For detailed instructions on the advanced alert options (no data, autoresolve, etc.), see the [Monitor configuration][6] page.
 
 ## Notifications
 

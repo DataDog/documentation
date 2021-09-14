@@ -94,13 +94,17 @@ In the following image, a group of hosts is flushing their buffers together, whi
 
 {{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing"  style="width:80%;">}}
 
+### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (autoresolve, new group delay, etc.), see the [Monitor configuration][3] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
 
 ## API
 
-To create outlier monitors programmatically, see the [Datadog API reference][4]. Datadog recommends [exporting a monitor's JSON][5] to build the query for the API.
+To create outlier monitors programmatically, see the [Datadog API reference][5]. Datadog recommends [exporting a monitor's JSON][6] to build the query for the API.
 
 ## Troubleshooting
 
@@ -114,6 +118,7 @@ The outlier algorithms are set up to identify groups that are behaving different
 
 [1]: https://app.datadoghq.com/monitors#create/outlier
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: /monitors/notifications/
-[4]: /api/v1/monitors/#create-a-monitor
-[5]: /monitors/monitor_status/#settings
+[3]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/notifications/
+[5]: /api/v1/monitors/#create-a-monitor
+[6]: /monitors/monitor_status/#settings
