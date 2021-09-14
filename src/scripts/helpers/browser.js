@@ -36,16 +36,3 @@ export const getQueryParameterByName = (name, currentURL) => {
 
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-
-export const removePreviewBranchFromPath = () => {
-  const { origin, pathname } = window.location;
-  let path = pathname;
-
-  if (origin.includes('//docs-staging')) {
-    const test = path.slice(1, -1)  // removing leading+trailing '/'.
-    const arrayTest = test.split('/').splice(0, 2);
-    path = arrayTest.join('/');
-  }
-
-  return path;
-}

@@ -145,6 +145,7 @@ function getPathElement() {
     let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
+    // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
     if (path.includes('/guide')) {
         const docsActiveSection = path.substr(0, path.indexOf('/guide'));
         const dataPathString = `${docsActiveSection}/guide`;
@@ -152,27 +153,6 @@ function getPathElement() {
         sideNavPathElement = document.querySelector(`.side [data-path*="${dataPathString}"]`);
         mobileNavPathElement = document.querySelector(`header [data-path*="${dataPathString}"]`); 
     }
-
-    // TODO: fix exceptions for specific nav links that have the same url but both open the same place
-    // if (path.includes('agent/guide')) {
-    //     aPath = document.querySelector('.side [data-path*="agent/guide"]');
-    //     maPath = document.querySelector('header [data-path*="agent/guide"]');
-    // } 
-
-    // if (path.includes('tracing/guide')) {
-    //     aPath = document.querySelector('.side [data-path*="tracing/guide"]');
-    //     maPath = document.querySelector('header [data-path*="tracing/guide"]');
-    // }
-
-    // if (path.includes('monitors/guide')) {
-    //     aPath = document.querySelector('.side [data-path*="monitors/guide"]');
-    //     maPath = document.querySelector('header [data-path*="monitors/guide"]');
-    // }
-
-    // if (path.includes('logs/guide')) {
-    //     aPath = document.querySelector('.side [data-path*="logs/guide"]');
-    //     maPath = document.querySelector('header [data-path*="logs/guide"]');
-    // }
 
     if (path.includes('account_management/billing')) {
         sideNavPathElement = document.querySelector(
@@ -182,20 +162,6 @@ function getPathElement() {
             'header [data-path*="account_management/billing"]'
         );
     }
-
-    // if (path.includes('developers/guide')) {
-    //     aPath = document.querySelector('.side [data-path*="developers/guide"]');
-    //     maPath = document.querySelector(
-    //         'header [data-path*="developers/guide"]'
-    //     );
-    // }
-
-    // if (path.includes('synthetics/guide')) {
-    //     aPath = document.querySelector('.side [data-path*="synthetics/guide"]');
-    //     maPath = document.querySelector(
-    //         'header [data-path*="synthetics/guide"]'
-    //     );
-    // }
 
     // if url is domain + /integrations/**
     if (
