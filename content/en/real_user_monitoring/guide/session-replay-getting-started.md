@@ -76,27 +76,27 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 To be released <a href="https://github.com/DataDog/browser-sdk/pull/1049">on Tuesday September 21st, 2021</a>, the new "privacy-by-default" functionality will change how the SDK manages privacy.
 </div>
 
-In short, this means that the SDK protects end-user privacy and sensitive organisation information from being recorded by default, automatically masking form fields like password inputs and text areas.
+By default, the SDK protects end-user privacy and sensitive organizational information from being recorded by automatically masking form fields such as password inputs and text areas.
 
-You may configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explicit overrides. There are three main points to understand:
+You can configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explicit overrides.
 
-1. There are four privacy levels supported: `allow`, `mask-user-input`, `mask`, and `hidden`
-2. The root HTML element inherits the privacy level from the JS configuration `defaultPrivacyLevel` property which defaults to `mask-user-input` (for example `{defaultPrivacyLevel: 'allow'}`)
-3. Each HTML element inherits the privacy level of its parent (except `hidden` which is final)
+- Four privacy levels are supported: `allow`, `mask-user-input`, `mask`, and `hidden`.
+- The root HTML element inherits the privacy level from the JavaScript configuration `defaultPrivacyLevel` property which defaults to `mask-user-input`, such as `{defaultPrivacyLevel: 'mask-user-input'}`.
+- Every HTML element inherits the privacy level of its parent except for `hidden`, which is final.
 
-Understanding the inheritance rules above, you may tag the privacy level of an HTML element one of two ways:
+With the inheritance rules above, you can tag the privacy level of an HTML element using one of two methods:
 
-1. using an HTML attribute (`data-dd-privacy="allow" | "mask" | "hidden" | "mask-user-input"`); or
-2. using an HTML class name (`class="dd-privacy-allow" | "dd-privacy-mask-user-input" | "dd-privacy-mask" | "dd-privacy-hidden"`).
+1. An HTML attribute such as `data-dd-privacy="allow" | "mask" | "hidden" | "mask-user-input"`; or
+2. An HTML class name such as `class="dd-privacy-allow" | "dd-privacy-mask-user-input" | "dd-privacy-mask" | "dd-privacy-hidden"`.
 
-Now let's unpack how each of the four privacy levels behave:
+Every privacy level behaves as:
 
--   `allow`: Unmasks everything, excluding HTML input elements of type `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
--   `mask-user-input`: Unmasks HTML content while blocking most form fields like inputs, textareas, checkbox values etc.
+-   `allow`: Unmasks everything, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
+-   `mask-user-input`: Unmasks HTML content, blocking most form fields such as inputs, text areas, and checkbox values.
 -   `mask`: Masks all HTML text, form values, images, and links.
--   `hidden`: Blocks session replay in this section- suppressing the recording of all JS events, records only the dimension of the element, and all child elements will be untracked- Note `hidden` cannot be overridden by a child element.
+-   `hidden`: Blocks Session Replay, suppressing the recording of all JavaScript events and recording only the dimension of the element. All child elements are untracked. By default, `hidden` cannot be overridden by a child element.
 
-When tagging your web application, the safest strategy is to start by tagging `mask` at the top of your HTML document and allowing each team to consider which pages, features, and components they need unmasked (`allow`) to accomplish their work.
+When tagging your web application, start by tagging `mask` at the top of your HTML document and ask your team to consider which pages, features, and components need to be unmasked (`allow`).
 
 #### Example
 
@@ -111,7 +111,7 @@ Any input values within the following form are be replaced with asterisks "\*\*\
 </form>
 ```
 
-Alternatively, HTML elements can be fully obfuscated with `hidden`:
+Alternatively, HTML elements are completely skipped from the recording with `hidden`:
 
 ```html
 <div id="profile-info" data-dd-privacy="hidden">
@@ -120,7 +120,8 @@ Alternatively, HTML elements can be fully obfuscated with `hidden`:
 </div>
 ```
 
-These elements are replaced with a gray block at recording time, as seen in this example of the navbar of a replay of a Datadog session:
+These elements are replaced with a gray block at recording time. In this example replay session, the navigation in Datadog is obfuscated:
+
 {{< img src="real_user_monitoring/guide/replay-hidden.png" alt="Replay Hidden Example">}}
 
 ## Troubleshooting
@@ -137,12 +138,12 @@ Several reasons might explain why assets are not available at the time of the re
 
 1. The resource does not exist anymore. For example, it was part of a previous deployment.
 2. The resource is inaccessible. For example, authentication might be required, or the resource might only be accessible from an internal network.
-3. The resource is blocked by the browser due to CORS (typically, web-fonts).
-   The replay being rendered on the `app.datadoghq.com` domain, the assets requests are subject to cross origin security checks by your browser. If the given asset is not authorised for the domain, your browser blocks the request.
-   The fix is thus to allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends upon, ensuring these resources are accessible for the replay.
-   To learn more about Cross Origin Resource Sharing, see the [MDN Web Docs article][6].
+3. The resource is blocked by the browser due to CORS (typically web-fonts).
+   - The replay rendered on the `app.datadoghq.com` domain and the asset requests are subject to cross-origin security checks by your browser. If the given asset is not authorized for the domain, your browser blocks the request.
+   - Allow `app.datadoghq.com` through the [`Access-Control-Allow-Origin`][5] header for any font or image assets your website depends on to ensure these resources are accessible for the replay.
+   - For more information, see [Cross Origin Resource Sharing][6].
 
-### CSS rules not properly applied / mouse hover not replayed
+### CSS rules not properly applied/mouse hover not replayed
 
 Unlike fonts and images, the recorder tries to bundle the various CSS rules applied as part of the recording data, leveraging the [CSSStyleSheet][7] interface. If this is not possible, it falls back to recording the links to the CSS files.
 
@@ -171,10 +172,10 @@ The browser SDK is [open source][9], and leverages the open source project [rrwe
 
 ### What is the performance impact?
 
-The team is is focused on ensuring minimal impact of the Session Replay recorder on the applications performance:
+To ensure minimal impact of the Session Replay recorder on the application's performance, Datadog:
 
--   reduced network impact of Session Replay by compressing the data prior to sending it to Datadog
--   reduced load on the browser’s UI thread by delegating most of the CPU intensive work (like compression) to a background service worker.
+-   Reduces network impact of Session Replay by compressing the data prior to sending it to Datadog.
+-   Reduces load on the browser’s UI thread by delegating most of the CPU intensive work (such as compression) to a background service worker.
 
 Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will be available after more data is received from Early Adopters.
 
