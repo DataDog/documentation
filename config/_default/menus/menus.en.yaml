@@ -1274,7 +1274,7 @@ main:
     identifier: monitors_manage
     weight: 3
   - name: Search Monitors
-    url: monitors/manage/search_monitors/
+    url: monitors/manage/search/
     parent: monitors_manage
     identifier: monitors_manage_search
     weight: 301
