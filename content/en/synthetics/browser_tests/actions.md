@@ -335,8 +335,8 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][15].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][15], a [`JSONPath`][13], or a [`XPath`][14].
+    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][15].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][15], a [`JSONPath`][13], or a [`XPath`][14].
 
 {{< img src="synthetics/browser_tests/browser_test_vft2.mp4" alt="Create a variable from an HTTP request in a Browser test" video="true"  width="80%" >}}
 
