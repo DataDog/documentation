@@ -19821,7 +19821,7 @@ paths:
           example: service:my-app
           type: string
       - description: If this argument is set to true, then the returned data includes
-          all current downtimes for each monitor.
+          all current active downtimes for each monitor.
         in: query
         name: with_downtimes
         required: false
