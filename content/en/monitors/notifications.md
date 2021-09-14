@@ -222,6 +222,9 @@ If your facet has periods, use brackets around the facet, for example:
 ```text
 {{ [@network.client.ip].name }}
 ```
+#### Check monitor variables
+
+For check monitor variables (custom check and integration check), the variable `{{check_message}}` is available and renders the message specified in the custom check or the integration check.
 
 #### Composite monitor variables
 
