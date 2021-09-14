@@ -96,7 +96,7 @@ In the following image, a group of hosts is flushing their buffers together, whi
 
 ### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (autoresolve, new group delay, etc.), see the [Monitor configuration][3] page.
+For detailed instructions on the advanced alert options (auto resolve, new group delay, etc.), see the [Monitor configuration][3] page.
 
 ### Notifications
 

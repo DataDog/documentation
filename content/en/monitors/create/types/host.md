@@ -69,7 +69,7 @@ If `datadog.agent.up` stops reporting an `OK` status for more than the minutes s
 
 ### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (autoresolve, new group delay, etc.), see the [Monitor Configuration][2] page.
+For detailed instructions on the advanced alert options (auto resolve, new group delay, etc.), see the [Monitor Configuration][2] page.
 
 ### Notifications
 

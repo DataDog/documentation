@@ -127,7 +127,7 @@ This example shows how each algorithm handles a new metric. `Robust` and `agile`
 
 ### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (autoresolve, evaluation delay, etc.), see the [Monitor configuration][8] page. For the metric-specific option full data window, see the [Metric monitor][9] page.
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][8] page. For the metric-specific option full data window, see the [Metric monitor][9] page.
 
 ### Notifications
 
