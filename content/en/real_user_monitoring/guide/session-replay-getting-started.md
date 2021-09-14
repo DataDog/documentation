@@ -30,7 +30,7 @@ Session Replay is available through a dedicated build of the RUM Browser SDK. To
 
 #### npm
 
-Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] To start the recording, call `DatadogRum.startSessionReplayRecording()`.
+Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2]. To start the recording, call `DatadogRum.startSessionReplayRecording()`.
 
 ``` javascript
 import { datadogRum } from '@datadog/browser-rum'
