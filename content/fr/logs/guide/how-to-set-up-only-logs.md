@@ -91,7 +91,7 @@ spec:
     spec:
       serviceAccountName: datadog-agent
       containers:
-      - image: gcr.io/datadoghq/agent:latest
+      - image: gcr.io/datadog/agent:latest
         imagePullPolicy: Always
         name: datadog-agent
         ports:

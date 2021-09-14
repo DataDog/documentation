@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure SQL Elastic Pool.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/'
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/
 draft: false
 git_integration_title: azure_sql_elastic_pool
 has_logo: true

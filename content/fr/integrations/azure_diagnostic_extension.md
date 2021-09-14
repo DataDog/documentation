@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de l'extension Diagnostics Azure.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_diagnostic_extension/'
+doc_link: https://docs.datadoghq.com/integrations/azure_diagnostic_extension/
 draft: false
 git_integration_title: azure_diagnostic_extension
 has_logo: true

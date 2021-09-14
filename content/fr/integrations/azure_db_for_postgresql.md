@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Database pour PostgreSQL.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_postgresql/'
+doc_link: https://docs.datadoghq.com/integrations/azure_db_for_postgresql/
 draft: false
 git_integration_title: azure_db_for_postgresql
 has_logo: true

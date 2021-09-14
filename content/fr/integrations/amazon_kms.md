@@ -9,10 +9,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez l'expiration de vos clés Amazon\_KMS."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_kms/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_kms/
 draft: false
 git_integration_title: amazon_kms
 has_logo: true
+integration_id: amazon-kms
 integration_title: "Amazon\_Key\_Management\_Service"
 is_public: true
 kind: integration
@@ -44,17 +45,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon KMS de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon KMS de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_kms` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon KMS dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon KMS dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
 
 ## Données collectées
 

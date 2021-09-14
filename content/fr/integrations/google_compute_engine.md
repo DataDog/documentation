@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez les instances hautement sollicitées et comparez les métriques d'utilisation de compte aux limites de quota.
-doc_link: 'https://docs.datadoghq.com/integrations/google_compute_engine/'
+doc_link: https://docs.datadoghq.com/integrations/google_compute_engine/
 draft: false
 git_integration_title: google_compute_engine
 has_logo: true

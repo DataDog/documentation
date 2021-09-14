@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_name: Métriques du serveur d'API Kubernetes
 draft: false
 git_integration_title: kube_apiserver_metrics

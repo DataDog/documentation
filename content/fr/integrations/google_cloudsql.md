@@ -6,8 +6,8 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez des métriques de base de données relatives aux performances, à la santé et à la réplication.'
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
+description: Surveillez des métriques de base de données relatives aux performances, à la santé et à la réplication.
+doc_link: https://docs.datadoghq.com/integrations/google_cloudsql/
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true
@@ -18,7 +18,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloudsql
 public_title: "Intégration Datadog/Google\_Cloud\_SQL"
-short_description: 'Surveillez des métriques de base de données relatives aux performances, à la santé et à la réplication.'
+short_description: Surveillez des métriques de base de données relatives aux performances, à la santé et à la réplication.
 version: '1.0'
 ---
 ## Présentation
