@@ -95,9 +95,9 @@ Timeframe options are:
 - Week to date
 - Month to date
 
-You can also choose which dashboard from your organization opens in the app when you tap on an SLO widget, allowing you to quickly dig deeper into your metrics.
+You can also specify a dashboard that opens by default when you tap on an SLOs widget, allowing you to quickly dig deeper into your metrics.
 
-**Note**: If you do not choose a dashboard to open in the app when you tap on an SLO widget, the widget will simply open the app by default.
+**Note**: If you do not specify a dashboard that opens by default, tapping an SLOs widget opens the Datadog app.
 
 ### Monitors widget
 
