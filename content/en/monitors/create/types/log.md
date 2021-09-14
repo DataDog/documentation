@@ -67,9 +67,13 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 * This monitor triggers if there are no logs for the service `backend`:
   {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service"  style="width:60%;" >}}
 
+#### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (evaluation delay, new group delay, etc.), see the [Monitor configuration][5] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
 
 #### Log samples and breaching values toplist
 
@@ -100,4 +104,5 @@ Include a sample of 10 logs in the alert notification:
 [2]: https://app.datadoghq.com/monitors#create/log
 [3]: /logs/explorer/search/
 [4]: /logs/explorer/facets/
-[5]: /monitors/notifications/
+[5]: /monitors/create/configuration/#advanced-alert-conditions
+[6]: /monitors/notifications/
