@@ -142,11 +142,15 @@ function getPathElement() {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
+    console.log(`path = ${path}`)
+
     let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     if (path.includes('/guide')) {
         const dataPathString = path.substr(0, path.indexOf('guide'));
+
+        console.log(`path includes /guide.  data path string = ${dataPathString}`);
 
         sideNavPathElement = document.querySelector(`.side [data-path*="${dataPathString}"]`);
         mobileNavPathElement = document.querySelector(`header [data-path*="${dataPathString}"]`); 
@@ -219,11 +223,13 @@ function getPathElement() {
     }
     
     if (sideNavPathElement) {
+        console.log(sideNavPathElement)
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
     }
 
     if (mobileNavPathElement) {
+        console.log(mobileNavPathElement);
         mobileNavPathElement.classList.add('active');
         hasParentLi(mobileNavPathElement);
     }
