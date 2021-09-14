@@ -72,15 +72,19 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 
 ### Sensitive & personal data obfuscation
 
-To be released at version 3.5.0 on September 15, 2021, the new privacy-by-default functionality will change how the SDK manages privacy. In short, this means that the SDK protects end-user privacy and sensitive organization information from being recorded by default, automatically masking form fields like password inputs and text areas.
+<div class="alert alert-info">
+To be released < href="https://github.com/DataDog/browser-sdk/pull/1049">at version 3.5.0 on September 15, 2021<a/>, the new privacy-by-default functionality will change how the SDK manages privacy.
+</div>
 
-This functionality is highly configurable to suit your application's needs. You may configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explict overrides. There are three main points to understand:
+In short, this means that the SDK protects end-user privacy and sensitive organization information from being recorded by default, automatically masking form fields like password inputs and text areas.
 
-1. There are four privacy levels supported: `allow`, `mask-user-input`, `mask`, and `hidden` (details further below).
-2. The root HTML element inherits the privacy level from the JS configuration `defaultPrivacyLevel` property which defaults to `mask-user-input` (eg. `{defaultPrivacyLevel: 'allow'}`)
+You may configure the default privacy mode within your Javascript configuration and tag specific parts of your HTML documents with explict overrides. There are three main points to understand:
+
+1. There are four privacy levels supported: `allow`, `mask-user-input`, `mask`, and `hidden`
+2. The root HTML element inherits the privacy level from the JS configuration `defaultPrivacyLevel` property which defaults to `mask-user-input` (for example `{defaultPrivacyLevel: 'allow'}`)
 3. Each HTML element inherits the privacy level of its parent (except `hidden` which is final)
 
-Understanding the inheritance rules above, you can tag the privacy level of an HTML element one of two ways:
+Understanding the inheritance rules above, you may tag the privacy level of an HTML element one of two ways:
 
 1. using an HTML attribute (such as `data-dd-privacy="allow"` or `data-dd-privacy="mask"`); or
 2. using an HTML class name (such as `class="dd-privacy-allow"` or `class="dd-privacy-mask-user-input"`).
@@ -96,7 +100,7 @@ For large enterprise organizations working with sensitive information, when tagg
 
 #### Examples
 
-As an example, any inputs values within the following form will be replaced with asterisks ("\*\*\*"):
+As an example, any inputs values within the following form are be replaced with asterisks "\*\*\*\* \*\* \*\*\*".
 
 ```html
 <form method="post" data-dd-privacy="mask-user-input">
@@ -116,7 +120,7 @@ Alternatively, HTML elements can be fully obfuscated with `hidden`:
 </div>
 ```
 
-These elements are replaced with a grey block at recording time, as seen in this example of the navbar of a replay of a Datadog session:
+These elements are replaced with a gray block at recording time, as seen in this example of the navbar of a replay of a Datadog session:
 {{< img src="real_user_monitoring/guide/replay-hidden.png" alt="Replay Hidden Example">}}
 
 ## Troubleshooting
