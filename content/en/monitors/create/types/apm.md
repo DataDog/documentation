@@ -61,9 +61,15 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
 * the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
+#### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (no data, evaluation delay, etc.), see the [Monitor configuration][4] page. For the metric-specific option full data window, see the [Metric monitor][5] page.
+
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/visualization/service/
 [3]: /tracing/visualization/resource/
+[4]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/create/types/metric/#data-window
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
@@ -84,10 +90,15 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
+#### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (evaluation delay, etc.), see the [Monitor configuration][5] page.
+
 [1]: /tracing/trace_search_and_analytics/query_syntax/#search-bar
 [2]: /tracing/trace_search_and_analytics/query_syntax/#facet-search
 [3]: /tracing/trace_search_and_analytics/query_syntax/#numerical-values
 [4]: /tracing/visualization/#indexed-span
+[5]: /monitors/create/configuration/#advanced-alert-conditions
 {{% /tab %}}
 {{< /tabs >}}
 
