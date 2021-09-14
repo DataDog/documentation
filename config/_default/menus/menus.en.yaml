@@ -52,7 +52,7 @@ main_left:
     weight: 8
     parent: product
   - identifier: rum
-    name: Real User Monitoring
+    name: RUM & Session Replay
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg'' alt=''rum icon''>'
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 9
@@ -2491,7 +2491,7 @@ main:
     url: security/synthetics/
     parent: synthetics
     weight: 14
-  - name: Real User Monitoring
+  - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: nav_rum_2
     identifier: rum
@@ -3016,7 +3016,7 @@ footer_product:
   - name: Synthetic Monitoring
     url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 130
-  - name: Real User Monitoring
+  - name: RUM & Session Replay
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
 footer_product_two:
