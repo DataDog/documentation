@@ -142,15 +142,12 @@ function getPathElement() {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    console.log(`path = ${path}`)
-
     let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     if (path.includes('/guide')) {
-        const dataPathString = path.substr(0, path.indexOf('guide'));
-
-        console.log(`path includes /guide.  data path string = ${dataPathString}`);
+        const docsActiveSection = path.substr(0, path.indexOf('/guide'));
+        const dataPathString = `${docsActiveSection}/guide`;
 
         sideNavPathElement = document.querySelector(`.side [data-path*="${dataPathString}"]`);
         mobileNavPathElement = document.querySelector(`header [data-path*="${dataPathString}"]`); 
@@ -200,12 +197,6 @@ function getPathElement() {
     //     );
     // }
 
-    // if (path.includes('serverless/guide/')) {
-    //     console.log('path includes serverless/guide.');
-    //     aPath = document.querySelector('.side [data-path*="serverless/guide"]');
-    //     maPath = document.querySelector('header [data-path*="serverless/guide"]');
-    // }
-
     // if url is domain + /integrations/**
     if (
         `${replaceURL(domain)}/${replacePath(path)}`.includes(
@@ -223,13 +214,11 @@ function getPathElement() {
     }
     
     if (sideNavPathElement) {
-        console.log(sideNavPathElement)
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
     }
 
     if (mobileNavPathElement) {
-        console.log(mobileNavPathElement);
         mobileNavPathElement.classList.add('active');
         hasParentLi(mobileNavPathElement);
     }
