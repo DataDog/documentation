@@ -48,6 +48,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
 {{% tab "Using Groovy" %}}
+
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
 {{< code-block lang="groovy" >}}
@@ -115,6 +116,7 @@ Second, enable job log collection on the Datadog Plugin:
 
 {{< tabs >}}
 {{% tab "Using UI" %}}
+
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the `Datadog Agent` mode.
@@ -125,6 +127,7 @@ Second, enable job log collection on the Datadog Plugin:
 8. Save your configuration.
 {{% /tab %}}
 {{% tab "Using Groovy" %}}
+
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
 {{< code-block lang="groovy" >}}
