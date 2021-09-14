@@ -26,7 +26,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See the documentation [querying][1] to configure a metric query.
+    * Metric: See the [Querying documentation][1] to configure a metric query.
     * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See the [Log search documentation][3] to configure a log event query.
 2. Choose the units and the formatting. Autoformat scales the Dashboard for you based on the units.

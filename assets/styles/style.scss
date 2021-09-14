@@ -24,12 +24,12 @@
 
 // page specific styles that aren't partials go here
 // partial css lives with partial
-@import 'pages/api';
-@import 'pages/search';
-@import 'pages/404';
-@import 'pages/home';
-@import 'pages/help';
-@import 'pages/security_monitoring';
+
+@import "pages/api";
+@import "pages/search";
+@import "pages/404";
+@import "pages/home";
+@import "pages/security_monitoring";
 
 // Components
 @import 'components/iconfont'; // imported from websites-modules

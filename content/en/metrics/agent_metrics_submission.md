@@ -224,9 +224,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
         (...)
     ```
 
-6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6]:
-
-{{< img src="metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary"  style="width:80%;">}}
+6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6].
 
 ## Further Reading
 
