@@ -3,18 +3,18 @@
     "json_curl": {
       "alert_id": "",
       "type": "alert_graph",
-      "viz_type": null
+      "viz_type": "timeseries"
     },
     "json": {
       "alert_id": "",
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
       "title_size": "string",
       "type": "alert_graph",
-      "viz_type": "string"
+      "viz_type": "timeseries"
     },
     "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">alert_id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>ID of the alert to use in the widget.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> time</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Time setting for the widget.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">live_span</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The available timeframes depend on the widget you are using. \nAllowed enum values: <code>1m,5m,10m,15m,30m,1h,4h,1d,2d,1w,1mo,3mo,6mo,1y,alert</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">title</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The title of the widget.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">title_align</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>How to align the text on the widget. \nAllowed enum values: <code>center,left,right</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">title_size</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Size of the title.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Type of the alert graph widget. \nAllowed enum values: <code>alert_graph</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">viz_type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Whether to display the Alert Graph as a timeseries or a top list. \nAllowed enum values: <code>timeseries,toplist</code></p></div>\n            </div>\n            \n          </div>\n        </div></div>"
   },
@@ -128,7 +128,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -335,7 +335,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -430,7 +430,7 @@
         }
       ],
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -442,17 +442,17 @@
   "check_status": {
     "json_curl": {
       "check": "",
-      "grouping": null,
+      "grouping": "check",
       "type": "check_status"
     },
     "json": {
       "check": "",
       "group": "string",
       "group_by": [],
-      "grouping": "string",
+      "grouping": "check",
       "tags": [],
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -559,7 +559,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -762,7 +762,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -860,7 +860,7 @@
       ],
       "show_legend": false,
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -892,7 +892,7 @@
       "query": "",
       "tags_execution": "string",
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -910,7 +910,7 @@
       "query": "",
       "tags_execution": "string",
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -941,8 +941,8 @@
             {
               "conditional_formats": [
                 {
-                  "comparator": null,
-                  "palette": null,
+                  "comparator": ">",
+                  "palette": "blue",
                   "value": 0
                 }
               ],
@@ -1043,13 +1043,13 @@
               "cell_display_mode": "number",
               "conditional_formats": [
                 {
-                  "comparator": "string",
+                  "comparator": ">",
                   "custom_bg_color": "string",
                   "custom_fg_color": "string",
                   "hide_value": false,
                   "image_url": "string",
                   "metric": "string",
-                  "palette": "string",
+                  "palette": "blue",
                   "timeframe": "string",
                   "value": 0
                 }
@@ -1092,7 +1092,7 @@
           },
           "q": "string",
           "queries": [],
-          "response_format": "string",
+          "response_format": "timeseries",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -1158,7 +1158,7 @@
         "palette_flip": false
       },
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -1172,7 +1172,7 @@
   },
   "group": {
     "json_curl": {
-      "layout_type": null,
+      "layout_type": "ordered",
       "type": "group",
       "widgets": [
         {
@@ -1189,7 +1189,7 @@
     "json": {
       "background_color": "string",
       "banner_img": "string",
-      "layout_type": "string",
+      "layout_type": "ordered",
       "show_title": false,
       "title": "string",
       "title_align": "string",
@@ -1290,7 +1290,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -1474,7 +1474,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -1572,7 +1572,7 @@
       ],
       "show_legend": false,
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -1681,7 +1681,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -1840,7 +1840,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -2047,7 +2047,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -2259,7 +2259,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -2419,7 +2419,7 @@
         "order": "desc"
       },
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -2519,8 +2519,8 @@
           },
           "conditional_formats": [
             {
-              "comparator": null,
-              "palette": null,
+              "comparator": ">",
+              "palette": "blue",
               "value": 0
             }
           ],
@@ -2550,8 +2550,8 @@
             {
               "conditional_formats": [
                 {
-                  "comparator": null,
-                  "palette": null,
+                  "comparator": ">",
+                  "palette": "blue",
                   "value": 0
                 }
               ],
@@ -2603,7 +2603,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -2750,13 +2750,13 @@
           },
           "conditional_formats": [
             {
-              "comparator": "string",
+              "comparator": ">",
               "custom_bg_color": "string",
               "custom_fg_color": "string",
               "hide_value": false,
               "image_url": "string",
               "metric": "string",
-              "palette": "string",
+              "palette": "blue",
               "timeframe": "string",
               "value": 0
             }
@@ -2796,13 +2796,13 @@
               "cell_display_mode": "number",
               "conditional_formats": [
                 {
-                  "comparator": "string",
+                  "comparator": ">",
                   "custom_bg_color": "string",
                   "custom_fg_color": "string",
                   "hide_value": false,
                   "image_url": "string",
                   "metric": "string",
-                  "palette": "string",
+                  "palette": "blue",
                   "timeframe": "string",
                   "value": 0
                 }
@@ -2875,7 +2875,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -2909,7 +2909,7 @@
           },
           "q": "string",
           "queries": [],
-          "response_format": "string",
+          "response_format": "timeseries",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -2972,7 +2972,7 @@
       ],
       "text_align": "string",
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -3074,7 +3074,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -3233,7 +3233,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -3437,7 +3437,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -3650,7 +3650,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -3744,7 +3744,7 @@
         }
       },
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -3834,7 +3834,7 @@
       "size_format": "string",
       "span_name": "",
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -3883,8 +3883,8 @@
           },
           "conditional_formats": [
             {
-              "comparator": null,
-              "palette": null,
+              "comparator": ">",
+              "palette": "blue",
               "value": 0
             }
           ],
@@ -3914,8 +3914,8 @@
             {
               "conditional_formats": [
                 {
-                  "comparator": null,
-                  "palette": null,
+                  "comparator": ">",
+                  "palette": "blue",
                   "value": 0
                 }
               ],
@@ -3967,7 +3967,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -4103,13 +4103,13 @@
           ],
           "conditional_formats": [
             {
-              "comparator": "string",
+              "comparator": ">",
               "custom_bg_color": "string",
               "custom_fg_color": "string",
               "hide_value": false,
               "image_url": "string",
               "metric": "string",
-              "palette": "string",
+              "palette": "blue",
               "timeframe": "string",
               "value": 0
             }
@@ -4149,13 +4149,13 @@
               "cell_display_mode": "number",
               "conditional_formats": [
                 {
-                  "comparator": "string",
+                  "comparator": ">",
                   "custom_bg_color": "string",
                   "custom_fg_color": "string",
                   "hide_value": false,
                   "image_url": "string",
                   "metric": "string",
-                  "palette": "string",
+                  "palette": "blue",
                   "timeframe": "string",
                   "value": 0
                 }
@@ -4230,7 +4230,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -4264,7 +4264,7 @@
           },
           "q": "string",
           "queries": [],
-          "response_format": "string",
+          "response_format": "timeseries",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -4326,7 +4326,7 @@
         }
       ],
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -4419,8 +4419,8 @@
             {
               "conditional_formats": [
                 {
-                  "comparator": null,
-                  "palette": null,
+                  "comparator": ">",
+                  "palette": "blue",
                   "value": 0
                 }
               ],
@@ -4477,7 +4477,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -4671,13 +4671,13 @@
               "cell_display_mode": "number",
               "conditional_formats": [
                 {
-                  "comparator": "string",
+                  "comparator": ">",
                   "custom_bg_color": "string",
                   "custom_fg_color": "string",
                   "hide_value": false,
                   "image_url": "string",
                   "metric": "string",
-                  "palette": "string",
+                  "palette": "blue",
                   "timeframe": "string",
                   "value": 0
                 }
@@ -4757,7 +4757,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -4791,7 +4791,7 @@
           },
           "q": "string",
           "queries": [],
-          "response_format": "string",
+          "response_format": "timeseries",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -4866,7 +4866,7 @@
       },
       "show_legend": false,
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -4932,7 +4932,7 @@
           },
           "conditional_formats": [
             {
-              "comparator": ">=",
+              "comparator": ">",
               "palette": "blue",
               "value": 0
             }
@@ -4963,8 +4963,8 @@
             {
               "conditional_formats": [
                 {
-                  "comparator": null,
-                  "palette": null,
+                  "comparator": ">",
+                  "palette": "blue",
                   "value": 0
                 }
               ],
@@ -5016,7 +5016,7 @@
             }
           },
           "process_query": {
-            "metric": ""
+            "metric": "system.load.1"
           },
           "profile_metrics_query": {
             "compute": {
@@ -5159,7 +5159,7 @@
           },
           "conditional_formats": [
             {
-              "comparator": ">=",
+              "comparator": ">",
               "custom_bg_color": "string",
               "custom_fg_color": "string",
               "hide_value": false,
@@ -5205,13 +5205,13 @@
               "cell_display_mode": "number",
               "conditional_formats": [
                 {
-                  "comparator": "string",
+                  "comparator": ">",
                   "custom_bg_color": "string",
                   "custom_fg_color": "string",
                   "hide_value": false,
                   "image_url": "string",
                   "metric": "string",
-                  "palette": "string",
+                  "palette": "blue",
                   "timeframe": "string",
                   "value": 0
                 }
@@ -5284,7 +5284,7 @@
           "process_query": {
             "filter_by": [],
             "limit": "integer",
-            "metric": "",
+            "metric": "system.load.1",
             "search_by": "string"
           },
           "profile_metrics_query": {
@@ -5318,7 +5318,7 @@
           },
           "q": "system.load.1",
           "queries": [],
-          "response_format": "string",
+          "response_format": "timeseries",
           "rum_query": {
             "compute": {
               "aggregation": "avg",
@@ -5385,7 +5385,7 @@
         }
       ],
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
@@ -5425,7 +5425,7 @@
           "columns": [
             {
               "field": "content",
-              "width": "full"
+              "width": "compact"
             }
           ],
           "query": {
@@ -5444,7 +5444,7 @@
           "columns": [
             {
               "field": "content",
-              "width": "full"
+              "width": "compact"
             }
           ],
           "query": {
@@ -5457,7 +5457,7 @@
       ],
       "show_legend": false,
       "time": {
-        "live_span": "string"
+        "live_span": "5m"
       },
       "title": "string",
       "title_align": "string",
