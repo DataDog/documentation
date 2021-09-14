@@ -2215,6 +2215,84 @@ components:
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
+    FormulaAndFunctionApmDependencyStatName:
+      description: APM statistic.
+      enum:
+      - avg_duration
+      - avg_root_duration
+      - avg_spans_per_trace
+      - error_rate
+      - pct_exec_time
+      - pct_of_traces
+      - total_traces_count
+      example: avg_duration
+      type: string
+      x-enum-varnames:
+      - AVG_DURATION
+      - AVG_ROOT_DURATION
+      - AVG_SPANS_PER_TRACE
+      - ERROR_RATE
+      - PCT_EXEC_TIME
+      - PCT_OF_TRACES
+      - TOTAL_TRACES_COUNT
+    FormulaAndFunctionApmDependencyStatsDataSource:
+      description: Data source for APM dependency stats queries.
+      enum:
+      - apm_dependency_stats
+      example: apm_dependency_stats
+      type: string
+      x-enum-varnames:
+      - APM_DEPENDENCY_STATS
+    FormulaAndFunctionApmDependencyStatsQueryDefinition:
+      description: A formula and functions APM dependency stats query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsDataSource'
+        env:
+          description: APM environment.
+          example: staging
+          type: string
+        is_upstream:
+          description: Determines whether stats for upstream or downstream dependencies
+            should be queried.
+          example: false
+          type: boolean
+        name:
+          description: Name of query to use in formulas.
+          example: query_errors
+          type: string
+        operation_name:
+          description: Name of operation on service.
+          example: cassandra.query
+          type: string
+        primary_tag_name:
+          description: The name of the second primary tag used within APM; required
+            when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog.
+          example: datacenter
+          type: string
+        primary_tag_value:
+          description: Filter APM data by the second primary tag. `primary_tag_name`
+            must also be specified.
+          example: staging
+          type: string
+        resource_name:
+          description: APM resource.
+          example: DELETE FROM foo WHERE baz = ?
+          type: string
+        service:
+          description: APM service.
+          example: cassandra
+          type: string
+        stat:
+          $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatName'
+      required:
+      - data_source
+      - env
+      - stat
+      - operation_name
+      - resource_name
+      - service
+      type: object
     FormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -2460,6 +2538,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries or Scalar response. **This feature is currently in beta.**
