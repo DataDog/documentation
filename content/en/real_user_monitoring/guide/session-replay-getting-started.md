@@ -29,12 +29,13 @@ To use Session Replay, set up [Datadog RUM Browser Monitoring][1]. Set up the fo
 Session Replay is available through a dedicated build of the RUM Browser SDK. To enable Session Replay, change the npm package name or CDN URL, depending on your chosen installation method:
 
 #### npm
-Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] To start the recording, call `DD_RUM.startSessionReplayRecording()`.
+
+Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] To start the recording, call `DatadogRum.startSessionReplayRecording()`.
 
 ``` javascript
 import { datadogRum } from '@datadog/browser-rum'
 
-datadogRum.init({
+DatadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   site: '<DATADOG_SITE>',
@@ -46,10 +47,11 @@ datadogRum.init({
   trackInteractions: true,
 })
 
-DD_RUM.startSessionReplayRecording();
+DatadogRum.startSessionReplayRecording();
 ```
 
 #### CDN
+
 Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
 *Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
@@ -58,7 +60,7 @@ Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum
 
 The usual [RUM initialization parameters][4] are all supported. 
 
-The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example to only record authenticated user sessions:
+The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
 
 ``` javascript
 if (user.isAuthenticated) {
