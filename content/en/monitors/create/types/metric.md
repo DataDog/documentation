@@ -193,5 +193,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/notifications/?tab=is_alert#tag-variables
 [5]: /monitors/faq/what-are-recovery-thresholds/
-[6]: /monitors/create/configuration/?tab=thresholdalert#advanced-alert-conditions
+[6]: /monitors/create/configuration/#advanced-alert-conditions
 [7]: /monitors/notifications/
