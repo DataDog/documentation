@@ -105,9 +105,13 @@ As you define the search query, the top graph updates.
 
 **Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event is initiated. In this case, Datadog back-dates the event to the time of occurrence, which could place an incoming event outside the current monitor evaluation window. Widening your evaluation window can help account for the time difference.  If you need help adjusting your monitor settings appropriately, reach out to [Datadog Support][3].
 
+#### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][4] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 #### Event template variables
 
@@ -138,4 +142,5 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 [1]: https://app.datadoghq.com/monitors#create/event
 [2]: /logs/explorer
 [3]: /help/
-[4]: /monitors/notifications/
+[4]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/notifications/
