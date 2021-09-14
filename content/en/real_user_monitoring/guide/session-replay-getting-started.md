@@ -73,7 +73,7 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 ### Sensitive & personal data obfuscation
 
 <div class="alert alert-info">
-To be released <a href="https://github.com/DataDog/browser-sdk/pull/1049">at version 3.5.0 on September 15, 2021<a/>, the new "privacy-by-default" functionality will change how the SDK manages privacy.
+To be released <a href="https://github.com/DataDog/browser-sdk/pull/1049">on Tuesday September 21st, 2021<a/>, the new "privacy-by-default" functionality will change how the SDK manages privacy.
 </div>
 
 In short, this means that the SDK protects end-user privacy and sensitive organisation information from being recorded by default, automatically masking form fields like password inputs and text areas.
