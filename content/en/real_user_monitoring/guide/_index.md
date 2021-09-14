@@ -1,5 +1,5 @@
 ---
-title: Real User Monitoring Guides
+title: Real User Monitoring & Session Replay Guides
 kind: guide
 private: true
 ---
