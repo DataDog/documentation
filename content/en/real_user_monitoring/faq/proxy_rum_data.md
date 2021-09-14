@@ -7,7 +7,7 @@ The Real User Monitoring (RUM) SDK can be configured to send requests through a 
 
 ## SDK initialization
 
-When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL (for example, www.proxy.com/foo).
+When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL using POST method (for example, www.proxy.com/foo).
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -58,12 +58,12 @@ window.DD_RUM &&
 
 ## Proxy setup
 
-When your proxy receives data from the RUM SDK, it must be forwarded to Datadog. The RUM SDK adds the `ddforward` query parameter to all requests to your proxy. This query parameter contains the URL where all data must be forwarded to.
+When your proxy receives data from the RUM SDK, it must be forwarded to Datadog. The RUM SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL where all data must be forwarded to.
 
 To successfully proxy request to Datadog:
 
 1. Add a `X-Forwarded-For` header containing the request client IP address, for accurate geoIP.
-2. Forward the request to the URL set in the `ddforward` query parameter.
+2. Forward the request to the URL set in the `ddforward` query parameter using POST method.
 
 **Note:** The request body must remain unchanged.
 
