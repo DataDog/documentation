@@ -100,7 +100,7 @@ When tagging your web application, start by tagging `mask` at the top of your HT
 
 #### Example
 
-Any input values within the following form are be replaced with asterisks "\*\*\*\* \*\* \*\*\*".
+Input values in the following form are replaced with asterisks, for example: `\*\*\*\* \*\* \*\*\*`.
 
 ```html
 <form method="post" data-dd-privacy="mask-user-input">
