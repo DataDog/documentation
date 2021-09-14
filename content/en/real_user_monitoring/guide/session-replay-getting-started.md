@@ -11,7 +11,7 @@ further_reading:
   text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, please let us know by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
+<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
 </div>
 
 ## What is Session Replay?

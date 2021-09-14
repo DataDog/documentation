@@ -39,9 +39,9 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 ## What is Session Replay?
 
-Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users. Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction, and resolution, and it can also bring invaluable insights into your web application’s usage patterns and design pitfalls. See here for a [guide to getting started with Session Replay][6].
+Datadog's _Session Replay_ allows you to capture and visually replay the web browsing experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and identifies insights in your web application’s usage patterns and design pitfalls. For more information, see [Getting Started with Session Replay][6].
 
-<div class="alert alert-info"><p>Session Replay is currently in beta, there are no billing implications for the Session Replays during this period. At the moment, Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.
+<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for your Session Replays during this period. Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.
 </div>
 
 ## Getting started
@@ -66,7 +66,7 @@ View user sessions in segments, such as checking when latency impacts your premi
 
 ### Integration with logs, APM, and profiler
 
-View your [backend traces, logs, infrastructure metrics][5] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
+View your [backend traces, logs, and infrastructure metrics][5] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM">}}
 
