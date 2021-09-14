@@ -125,17 +125,21 @@ This example shows how each algorithm handles a new metric. `Robust` and `agile`
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric"  style="width:90%;">}}
 
+### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (autoresolve, evaluation delay, etc.), see the [Monitor configuration][8] page. For the metric-specific option full data window, see the [Metric monitor][9] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
 
 ## API
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
+**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
-Anomaly monitors are managed using the [same API][12] as other monitors. These fields are unique for anomaly monitors:
+Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 
 ### `query`
 
@@ -210,8 +214,8 @@ A standard configuration of thresholds and threshold window looks like:
 
 ## Troubleshooting
 
-* [Anomaly Monitor FAQ][13]
-* [Contact Datadog support][14]
+* [Anomaly Monitor FAQ][15]
+* [Contact Datadog support][16]
 
 ## Further Reading
 
@@ -224,10 +228,12 @@ A standard configuration of thresholds and threshold window looks like:
 [5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /monitors/notifications/
-[9]: /api/v1/monitors/#create-a-monitor
-[10]: /monitors/monitor_status/#settings
-[11]: mailto:billing@datadoghq.com
-[12]: /api/v1/monitors/
-[13]: /monitors/faq/anomaly-monitor/
-[14]: /help/
+[8]: /monitors/create/configuration/#advanced-alert-conditions
+[9]: /monitors/create/types/metric/#data-window
+[10]: /monitors/notifications/
+[11]: /api/v1/monitors/#create-a-monitor
+[12]: /monitors/monitor_status/#settings
+[13]: mailto:billing@datadoghq.com
+[14]: /api/v1/monitors/
+[15]: /monitors/faq/anomaly-monitor/
+[16]: /help/
