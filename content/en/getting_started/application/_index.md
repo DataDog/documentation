@@ -140,18 +140,6 @@ Datadog [Security Monitoring][20] automatically detects threats to your applicat
 [8]: /getting_started/tagging/
 [9]: /infrastructure/hostmap/
 [10]: /events/
-<<<<<<< HEAD
-[11]: /events-updates/events/explorer/#event-search
-[12]: /dashboards/
-[13]: /dashboards/screenboard/
-[14]: /dashboards/functions/
-[15]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
-[16]: /monitors/
-[17]: /network_monitoring/performance
-[18]: /real_user_monitoring/
-[19]: /infrastructure/serverless/
-[20]: /security_monitoring/
-=======
 [11]: /account_management/users/
 [12]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
 [13]: /events/#@-notifications
@@ -162,7 +150,3 @@ Datadog [Security Monitoring][20] automatically detects threats to your applicat
 [18]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [19]: /monitors/
 [20]: /network_monitoring/performance
-[21]: /real_user_monitoring/
-[22]: /serverless/
-[23]: /security_monitoring/
->>>>>>> master

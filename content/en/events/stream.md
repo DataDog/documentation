@@ -11,12 +11,12 @@ further_reading:
 ---
 {{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">
-  The Event Stream is only available to users in US1 and EU1. Users in US3 and the Datadog for Government site should see the <a href="https://docs.datadoghq.com/events/explorer/">Events Explorer documentation</a>.
+  The Event Stream is only available to users in US1 and EU1. Users in US3 and the Datadog for Government site should see the <a href="/events/explorer/">Events Explorer documentation</a>.
 </div>
 {{< /site-region >}}
 {{< site-region region="us,eu" >}}
 <div class="alert alert-warning">
-  The Event Stream is being deprecated in favor of the <a href="https://docs.datadoghq.com/events/explorer/">Events Explorer</a>, available as a private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> to request access.
+  The Event Stream is being deprecated in favor of the <a href="/events/explorer/">Events Explorer</a>, available as a private beta. Contact <a href="/help/">Datadog support</a> to request access.
 </div>
 {{< /site-region >}}
 

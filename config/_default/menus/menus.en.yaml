@@ -862,27 +862,27 @@ main:
     url: events/guides/
     identifier: events_guides
     parent: events_top_level
-    weight: 1
+    weight: 3
   - name: Custom Agent Check
     url: events/guides/agent/
     parent: events_guides
-    weight: 100
+    weight: 300
   - name: DogStatsD
     url: events/guides/dogstatsd/
     parent: events_guides
-    weight: 101
+    weight: 301
   - name: Email
     url: events/guides/email/
     parent: events_guides
-    weight: 102
+    weight: 302
   - name: Email
     url: events/guides/email/
     parent: events_guides
-    weight: 103
+    weight: 303
   - name: API
     url: api/latest/events/#post-an-event
     parent: events_guides
-    weight: 104
+    weight: 304
   - name: Dashboards
     url: dashboards/
     pre: nav_dashboards

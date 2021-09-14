@@ -2,9 +2,9 @@
 title: Events Guides
 kind: documentation
 further_reading:
-- link: "/events/"
+- link: "/events/explorer/"
   tag: "Documentation"
-  text: "Datadog events stream"
+  text: "Datadog events explorer"
 - link: "/monitors/monitor_types/event/"
   tag: "Documentation"
   text: "Event monitors"
@@ -12,11 +12,9 @@ aliases:
     - /developers/events/
 ---
 
-<<<<<<< HEAD
 ## Send your custom events to Datadog
-=======
+
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). Use these guides to programmatically send events:
->>>>>>> master
 
 {{< whatsnext desc="Submit events to Datadog with:">}}
     {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
