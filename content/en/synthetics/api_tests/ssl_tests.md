@@ -34,8 +34,6 @@ After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`T
 2. Add **Advanced Options** (optional) to your test:
     * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
     * **Server Name**: Allows you to specify on which server you want to initiate the TLS handshake. This allows a server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
-    
-    When making a TLS connection, we request a certificate from the web server. Once the server sends the certificate, the client examines it and compares the name it was trying to connect to with the name(s) included in the certificate.
     * **Client certificate**: Authenticates through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
   ```
