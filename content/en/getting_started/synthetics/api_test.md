@@ -22,9 +22,7 @@ further_reading:
 
 ## Overview
 
-API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere.  
-[Single API tests][1] come in five different subtypes that allow you to launch requests on the **different network layers of your systems** (HTTP, SSL, DNS, TCP, and ICMP).  
-[Multistep API tests][2] enable you to run HTTP tests in sequence to **monitor the uptime of key journeys at the API level**.
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in five different subtypes that allow you to launch requests on the different network layers of your systems (HTTP, SSL, DNS, TCP, and ICMP). [Multistep API tests][2] enable you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
 
 ## Create a single API test
 
