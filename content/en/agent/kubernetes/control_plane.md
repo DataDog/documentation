@@ -605,10 +605,10 @@ Rancher v2.5 relies on [PushProx][10] to expose control plane metric endpoints, 
 
 ### Prerequisites
 
-1. Install the [rancher-monitoring chart][11]
-1. The `pushprox` daemonsets are deployed via `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
+1. Install the [rancher-monitoring chart][11].
+2. The `pushprox` daemonsets are deployed with `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
 
-### API Server
+### API server
 
 To configure the `kube_apiserver_metrics` check, add the following annotations to the `default/kubernetes` service:
 
@@ -621,7 +621,7 @@ annotations:
 
 ### ETCD, Controller Manager and Scheduler
 
-By adding headless Kubernetes services to define check configurations, the Datadog Agent will be able to target the `pushprox` pods and collect metrics.
+By adding headless Kubernetes services to define check configurations, the Datadog Agent is able to target the `pushprox` pods and collect metrics.
 
 Apply `rancher-control-plane-services.yaml`:
 
