@@ -47,11 +47,35 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
+{{% tab "Using configuration-as-code"}}
+If your Jenkins instance uses the [Jenkins `configuration-as-code` plugin][1], follow the next instructions:
+
+1. Create or modify the configuration yaml adding the entry for `datadogGlobalConfiguration`
+```yaml
+unclassified:
+  datadogGlobalConfiguration:
+    # Select the `Datadog Agent` mode.
+    reportWith: "DSD"
+    # Configure the `Agent` host
+    targetHost: "agent-host"
+    # Configure the `Traces Collection` port (default `8126`).
+    targetTraceCollectionPort: 8126
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: "jenkins"
+```
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Apply or reload the configuration.
+4. Check the configuration using the `View Configuration` button.
+
+[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
+{{% /tab %}}
 {{% tab "Using Groovy" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
-{{< code-block lang="groovy" >}}
+```groovy
 import jenkins.model.*
 import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 
@@ -65,7 +89,7 @@ d.setReportWith('DSD')
 d.setTargetHost('<agent host>')
 
 // Configure the Traces Collection port (default 8126)
-d.setTargetTraceCollectionPort(<agent trace collection port>)
+d.setTargetTraceCollectionPort(8126)
 
 // Enable CI Visibility
 d.setEnableCiVisibility(true)
@@ -75,7 +99,7 @@ d.setCiInstanceName("jenkins")
 
 // Save config
 d.save()
-{{< /code-block >}}
+```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -126,11 +150,33 @@ Second, enable job log collection on the Datadog Plugin:
 7. Check the connectivity with the Datadog Agent.
 8. Save your configuration.
 {{% /tab %}}
+{{% tab "Using configuration-as-code"}}
+If your Jenkins instance uses the [Jenkins `configuration-as-code` plugin][1], follow the next instructions:
+
+1. Modify the configuration yaml for the entry `datadogGlobalConfiguration`
+```yaml
+unclassified:
+  datadogGlobalConfiguration:
+    # Select the `Datadog Agent` mode.
+    reportWith: "DSD"
+    # Configure the `Agent` host
+    targetHost: "agent-host"
+    # Configure the `Log Collection` port, as configured in the previous step.
+    targetLogCollectionPort: 10518
+    # Enable Log collection
+    collectBuildLogs: true
+```
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Click on `Reload existing configuration`.
+4. Check the configuration using the `View Configuration` button.
+
+[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
+{{% /tab %}}
 {{% tab "Using Groovy" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
-{{< code-block lang="groovy" >}}
+```groovy
 import jenkins.model.*
 import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 
@@ -144,13 +190,14 @@ d.setReportWith('DSD')
 d.setTargetHost('<agent host>')
 
 // Configure the Log Collection port, as configured in the previous step.
-d.setTargetLogCollectionPort(<agent log collection port>)
+d.setTargetLogCollectionPort(10518)
 
 // Enable log collection
 d.setCollectBuildLogs(true)
 
 // Save config
 d.save()
+```
 {{% /tab %}}
 {{< /tabs >}}
 
