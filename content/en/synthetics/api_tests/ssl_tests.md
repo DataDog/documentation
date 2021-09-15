@@ -31,7 +31,7 @@ If you have access to the [custom role feature][4], add your user to a custom ro
 
 ## Configuration
 
-Now that you have chosen to create a [`SSL` test][5], define your test's request.
+After choosing to create a [`SSL` test][5], define your test's request.
 
 ### Define request
 
@@ -39,8 +39,9 @@ Now that you have chosen to create a [`SSL` test][5], define your test's request
 
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Add **Advanced Options** (optional) to your test:
-    * **Accept self-signed certificates**: Bypass any server error related to a self-signed certificate.
-    * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+    * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
+    * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
+    * **Client certificate**: Authenticates through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
   ```
   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts

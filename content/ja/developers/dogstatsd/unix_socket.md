@@ -3,7 +3,7 @@ title: Unix ドメインソケット上の DogStatsD
 kind: documentation
 description: Unix ドメインソケット上の DogStatsD の使用ガイド
 aliases:
-  - /ja/developers/metrics/unix_socket/
+  - /ja/metrics/unix_socket/
 further_reading:
   - link: developers/dogstatsd
     tag: Documentation
@@ -228,8 +228,8 @@ socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[2]: /ja/developers/metrics/custom_metrics/
+[1]: /ja/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

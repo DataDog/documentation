@@ -20,9 +20,11 @@ further_reading:
       
 ---
 
-## Create a browser test
+## Overview
 
-[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform key business transactions on your applications and that they are not negatively impacted by the most recent code changes.
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by the most recent code changes.
+
+## Create a browser test
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
@@ -35,24 +37,24 @@ The example below demonstrates the creation of a browser test that maps a user's
 3. Select **Browser Test**.
 4. Define your browser test:
 
-    - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test web application.
+    - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, or cookies. 
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 
 
 #### Select locations
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **[Private Locations][3]** to run your test from.
 
-Managed locations allow you to test public-facing applications. To test internal applications or simulate user behavior in discrete geographic regions, select one of your **Private Locations** instead.
+Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, select one of your private locations instead.
 
-For more information on how to set up private locations, see [Getting Started with Private Locations][3].
+The Shopist application is publicly available at `https://www.shopist.io/` and you can pick any managed locations to execute your test from.
 
 #### Specify test frequency
 
-Select the frequency at which you want your test to execute. 
+Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
 
-In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your CI/CD pipelines. For more information, see [Synthetic CI/CD Testing][4].
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][4].
 
 
 #### Define alert conditions
@@ -73,17 +75,17 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 #### Notify your team
 
-Add an alert name to the **Monitor Name** field and write a message for the alert. You can use [integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks to route your alert to specific services and teams.
-
-You can set your alert notification to re-notify if the alert has not been resolved and define the priority of the alert, ranging from **P5 (Info)** to **P1 (Critical)**.
+Design your alert message and add an email address you want your test to send alerts to.
 
 {{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true"  >}}
+
+You can also use [notifications integrations][5] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][6].
 
 When you're ready to record your test, click **Save Details & Record Test**.
 
 ### Create recording
 
-Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][6] Chrome extension. 
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][7] Chrome extension. 
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 
@@ -105,17 +107,17 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 **Note**: The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
 
-## Test results
+## Look at test results
 
-The Browser Test details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
+The **Browser Test** details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][7], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][8]**, **[Resources][9]**, and **[Core Web Vitals][10]** to diagnose the issue. 
+To troubleshoot a [failed test][8], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][9]**, **[Resources][10]**, and **[Core Web Vitals][11]** to diagnose the issue. 
 
 In the example below, the test failed as the result of a server timeout.
 
 {{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true"  >}}
 
-Use Datadog's [APM integration with Synthetic Monitoring][11] to view traces generated from your backend by the test runs from the **Traces** tab.
+Use Datadog's [APM integration with Synthetic Monitoring][12] to view traces generated from your backend by the test runs from the **Traces** tab.
 
 ## Further Reading
 
@@ -127,9 +129,10 @@ Use Datadog's [APM integration with Synthetic Monitoring][11] to view traces gen
 [3]: /getting_started/synthetics/private_location
 [4]: /synthetics/cicd_testing
 [5]: /integrations/#cat-notification
-[6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[7]: /synthetics/browser_tests/test_results#test-failure
-[8]: /synthetics/browser_tests/test_results#errors
-[9]: /synthetics/browser_tests/test_results#resources
-[10]: /synthetics/browser_tests/test_results#page-performance
-[11]: /synthetics/apm/
+[6]: https://app.datadoghq.com/account/settings
+[7]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[8]: /synthetics/browser_tests/test_results#test-failure
+[9]: /synthetics/browser_tests/test_results#errors
+[10]: /synthetics/browser_tests/test_results#resources
+[11]: /synthetics/browser_tests/test_results#page-performance
+[12]: /synthetics/apm/

@@ -10,7 +10,7 @@ aliases:
 ---
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し分析します。{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信可能なメトリクスの種類。{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信可能なメトリクスの種類。{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスのスコープを絞り込みます。{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>メトリクスの概要</u> - Datadog にレポートされるすべてのメトリクスをリストします。{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>ディストリビューションメトリクス</u> - データセット全体のグローバルパーセンタイルを計算します。{{< /nextlink >}}
@@ -154,12 +154,12 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 [7]: /ja/integrations/
 [8]: /ja/integrations/amazon_ec2/
 [9]: /ja/logs/logs_to_metrics/
-[10]: /ja/developers/metrics/
+[10]: /ja/metrics/
 [11]: /ja/agent/
-[12]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[12]: /ja/metrics/dogstatsd_metrics_submission/
 [13]: /ja/api/
 [14]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/
-[15]: /ja/developers/metrics/types/
+[15]: /ja/metrics/types/
 [16]: /ja/getting_started/tagging/using_tags/
 [17]: /ja/dashboards/functions/
 [18]: /ja/metrics/distributions/

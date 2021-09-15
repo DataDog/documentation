@@ -26,7 +26,7 @@ You can:
 * Keep track of the progress of your tests in CI pipelines.
 * Identify flaky tests to fix.
 
-{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer"  style="width:100%;">}}
+{{< img src="synthetics/ci/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
 ## Exploring batches
 

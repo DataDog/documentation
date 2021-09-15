@@ -250,7 +250,7 @@ Où :
 [2]: /fr/tracing/generate_metrics/
 [3]: https://docs.datadoghq.com/fr/metrics/distributions/
 [4]: /fr/serverless/forwarder/
-[5]: /fr/developers/metrics/
+[5]: /fr/metrics/
 [6]: /fr/serverless/installation/
 [7]: /fr/metrics/distributions/#customize-tagging
 [8]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function

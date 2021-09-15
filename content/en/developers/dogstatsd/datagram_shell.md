@@ -41,8 +41,8 @@ Here are some example datagrams:
 - `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
 
 
-[1]: /developers/metrics/#naming-metrics
-[2]: /developers/metrics/types/
+[1]: /metrics/#naming-metrics
+[2]: /metrics/types/
 [3]: /getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}

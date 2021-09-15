@@ -19,7 +19,7 @@ further_reading:
 
 テーブルはダッシュボードで可視化することが可能です。タグキーでグループ化された集計データを列で表示します。たとえば、`system.cpu.system` と `system.cpu.user` が `service` でグループ化されます。
 
-{{< img src="dashboards/widgets/table/table_widget_1.png" alt="テーブルウィジェット"  style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_widget_1.png" alt="テーブルウィジェット" style="width:80%;">}}
 
 ## セットアップ
 
@@ -41,11 +41,11 @@ further_reading:
   * 各列のセルの値に応じて、条件付き書式 (**バー/数字** と **色** の両方) を構成します。
   * 検索バーを表示するかどうかを構成します。デフォルトは **Auto** で、ウィジェットの大きさに応じて検索バーを表示します。つまり、画面が小さい場合はウィジェット上のデータの表示を優先し、検索バーは非表示になります（全画面モードになると表示されます）。
 
-{{< img src="dashboards/widgets/table/table_setup_1.png" alt="テーブルの設定"  style="width:80%;">}}
+{{< img src="dashboards/widgets/table/table_setup_1.png" alt="テーブルの設定" style="width:80%;">}}
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用されます。詳しくは、[ダッシュボード API][8] ドキュメントを参照してください。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][8] ドキュメントをご参照ください。
 
 テーブルウィジェットの[ウィジェット JSON スキーマ定義][9]は次のとおりです。
 

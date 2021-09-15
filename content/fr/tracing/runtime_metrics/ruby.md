@@ -62,7 +62,7 @@ Datadog fournit non seulement ces métriques sur votre page Service de l'APM, ma
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
+[2]: /fr/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
 [4]: /fr/agent/docker/#dogstatsd-custom-metrics
 [5]: /fr/developers/dogstatsd/?tab=kubernetes#agent
