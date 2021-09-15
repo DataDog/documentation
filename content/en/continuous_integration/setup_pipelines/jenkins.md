@@ -101,6 +101,28 @@ d.setCiInstanceName("jenkins")
 d.save()
 ```
 {{% /tab %}}
+{{% tab "Using Environment Variables" %}}
+
+1. Set the following environment variables in your Jenkins instance machine:
+```bash
+# Select the Datadog Agent mode
+DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
+
+# Configure the Agent host
+DATADOG_JENKINS_PLUGIN_TARGET_HOST=agent-host
+
+# Configure the Traces Collection port (default 8126)
+DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
+
+# Enable CI Visibility
+DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+
+# (Optional) Configure your CI Instance name
+DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+```
+2. Restart your Jenkins instance.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
@@ -198,6 +220,25 @@ d.setCollectBuildLogs(true)
 // Save config
 d.save()
 ```
+{{% /tab %}}
+{{% tab "Using Environment Variables" %}}
+
+1. Set the following environment variables in your Jenkins instance machine:
+```bash
+# Select the Datadog Agent mode
+DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
+
+# Configure the Agent host
+DATADOG_JENKINS_PLUGIN_TARGET_HOST=agent-host
+
+# Configure the Log Collection port, as configured in the previous step.
+DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
+
+# Enable log collection
+DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+```
+2. Restart your Jenkins instance.
+
 {{% /tab %}}
 {{< /tabs >}}
 
