@@ -48,7 +48,7 @@ further_reading:
 ## Compatibility requirements
 
 ### Supported .NET Framework runtimes
-The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. 
+The .NET Tracer supports instrumentation on .NET Framework 4.5 and above.
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
@@ -132,7 +132,12 @@ example.exe
 ```
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `receiver_port:8126`.
+
+{{< agent-config type="trace collection configuration" filename="config_template.yaml" collapsible="true">}}
+
+For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
+
 {{< site-region region="us3,eu,gov" >}}
 
 Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} so that the Agent sends data to the right Datadog location.
