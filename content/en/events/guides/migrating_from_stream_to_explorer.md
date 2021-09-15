@@ -4,12 +4,12 @@ kind: documentation
 ---
 
 
-## 1. Request beta access
+## Request beta access
 
 <div class="alert alert-warning">
-  The Events Explorer is in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="https://docs.datadoghq.com/events/stream/">Event Stream documentation</a>.</div>
+  The Events Explorer is in private beta. To request access, contact <a href="/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="/events/stream/">Event Stream documentation</a>.</div>
 
-Once you have the beta enabled, you have access to these new events features:
+With the beta enabled, you have access to these events features:
 
 - [Events Explorer][1]
 - [Event Analytics][2]
@@ -20,11 +20,11 @@ Once you have the beta enabled, you have access to these new events features:
 
 You can continue to access the Event Stream from the navigation menu alongside the new features:
 
-{{< img src="events/guides/navigation.png" alt="This image shows the events explorer side by side with the event stream in the Datadog app navigation." style="width:50%;" >}}
+{{< img src="events/guides/navigation.png" alt="The events explorer alongside the event stream in the Datadog app navigation." style="width:50%;" >}}
 
-## 2. Migrate existing event monitors and dashboard widgets
+## Migrate existing event monitors and dashboard widgets
 
-You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, update the search query to match the new one. You can do this by manually recreating your existing monitors using these guidelines:
+You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, update the search query to match the new one. You can do this by manually recreating your existing monitors following these examples:
 
 |                           Description                           |                                                    Legacy syntax                                                   |                                              New Syntax                                             |
 |:---------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------:|
@@ -37,7 +37,7 @@ If you use the API, Terraform, or other third party solution to manage your moni
 
 **Note:** If you have SLOs based on event monitors, be sure to update their definitions to point to the new ones.
 
-## 4. Sunset legacy events
+## Sunset legacy events
 
 When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Event Stream continues to be accessible for viewing your event history.
 
