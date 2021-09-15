@@ -59,9 +59,60 @@ datadog:
 ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+From the Datadog-Operator v0.7.0
+
+To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` need to be set to `true` in the DatadogAgent resource.
+
+DatadogAgent Kubernetes Resource:
+
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  features:
+    kubeStateMetricsCore:
+      enabled: true
+  # ...
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Migration from kubernetes_state to kubernetes_state_core
+
+### Tags removal
+
+With `kubernetes_state`, several tags were flagged as deprecated and replaced by new tags. To provide a migration path check both tags was send with the metrics.
+
+With `kubernetes_state_core` only the none deprecated tags are send.
+
+Before migrating to `kubernetes_state_core`, verify that only official tags are used in monitors and dashboards.
+
+Here is the mapping between deprecated and official tags
+
+| deprecated tag        | official tag                |
+|-----------------------|-----------------------------|
+| cluster_name          | kube_cluster_name           |
+| container             | kube_container_name         |
+| cronjob               | kube_cronjob                |
+| daemonset             | kube_daemon_set             |
+| deployment            | kube_deployment             |
+| image                 | image_name                  |
+| job                   | kube_job                    |
+| job_name              | kube_job                    |
+| namespace             | kube_namespace              |
+| phase                 | pod_phase                   |
+| pod                   | pod_name                    |
+| replicaset            | kube_replica_set            |
+| replicationcontroller | kube_replication_controller |
+| statefulset           | kube_stateful_set           |
 
 ### Backward incompatibility changes
 
