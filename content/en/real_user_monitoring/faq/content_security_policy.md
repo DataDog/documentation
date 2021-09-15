@@ -31,9 +31,20 @@ connect-src https://*.logs.datadoghq.eu https://*.browser-intake-datadoghq.eu
 {{< /site-region >}}
 
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3" >}}
 
-This feature is unavailable for this site.
+```txt
+connect-src https://*.browser-intake-us3-datadoghq.com
+```
+
+{{< /site-region >}}
+
+
+{{< site-region region="gov" >}}
+
+```txt
+connect-src https://*.browser-intake-ddog-gov.com
+```
 
 {{< /site-region >}}
 
