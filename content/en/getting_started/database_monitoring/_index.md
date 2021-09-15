@@ -34,6 +34,8 @@ To run the example application, you need a machine with [GNU Make][1] and [Docke
 
 ### Install the example application
 
+The example application starts up the Datadog Agent and a Postgres or MySQL database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
+
 Follow these instructions to install the example application on MacOS or Linux.
 
 {{< tabs >}}
@@ -52,7 +54,6 @@ Follow these instructions to install the example application on MacOS or Linux.
 
 The command will continue to run until you stop it by pressing Ctrl + C.
 
-
 [1]: /resources/examples/database-management.tgz
 {{% /tab %}}
 
@@ -70,29 +71,28 @@ The command will continue to run until you stop it by pressing Ctrl + C.
 
 The command will continue to run until you stop it by pressing Ctrl + C.
 
-
 [1]: /resources/examples/database-management.tgz
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Data collected
-
-Database Monitoring adds query metrics to the database state information collected from database integrations, enabling observability into database performance over time.
-
-Note from Ursula: I am considering removing this section entirely, because it doesn't fit in with the main goal of this doc of teaching basic use of DBM.
-
 ## Identify a slow query
 
-Navigate to Database Monitoring by clicking APM > Databases in the UI. By default, you will start on the Query Metrics tab.
+Which query uses the most database time? To find out, use the Query Metrics view.
 
-Sort the Normalized Query table by **Percent time** to see at a glance which queries are the slowest.
+1. Navigate to Database Monitoring by clicking APM > Databases in the UI. By default, you will start on the Query Metrics tab.
+
+2. Ensure that the **source** drop-down shows the database type you ran in the Setup step.
+
+3. Sort the Normalized Query table by **Percent time** to see at a glance which queries are the slowest.
 
 The query that uses the most database time will appear on the first line.
 
 {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
 ## Troubleshoot a slow query
+
+After identifying a slow query, you want to understand why it runs slowly. A query's Explain Plan describes the steps that the database takes to resolve the query. You can view an Explain Plan by clicking on a sample in the Query Samples view.
 
 Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][4]**, and selecting the **Query Samples** tab in the UI.
 
