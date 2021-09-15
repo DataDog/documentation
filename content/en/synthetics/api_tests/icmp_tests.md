@@ -31,7 +31,7 @@ If you have access to the [custom role feature][5], add your user to a custom ro
 
 ## Configuration
 
-Now that you have chosen to create an [`ICMP` test][6], define your test's request.
+After choosing to create an [`ICMP` test][6], define your test's request.
 
 ### Define request
 

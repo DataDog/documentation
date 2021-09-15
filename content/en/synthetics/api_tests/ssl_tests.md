@@ -31,7 +31,7 @@ If you have access to the [custom role feature][4], add your user to a custom ro
 
 ## Configuration
 
-Now that you have chosen to create a [`SSL` test][5], define your test's request.
+After choosing to create a [`SSL` test][5], define your test's request.
 
 ### Define request
 
