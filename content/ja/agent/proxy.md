@@ -20,7 +20,7 @@ further_reading:
 
 インターネットに直接接続していないホストから、SSL/TLS 経由で Datadog にトラフィックを送信するための方法はいくつかあります。
 
-1. 既にネットワークにデプロイされている Web プロキシ (Squid、Microsoft Web Proxy など) を使用する
+1. Squid、Microsoft Web Proxy など、既にネットワークにデプロイされている Web プロキシを使用する
 2. HAProxy を使用する (**16～20 以上の Agent** に対して同じプロキシを使用する場合)
 3. Agent をプロキシとして使用する (プロキシあたり**最大 16 Agent**、**Agent v5 のみ**)
 
@@ -36,7 +36,7 @@ Agent `datadog.yaml` コンフィギュレーションファイルで、`https` 
 <div class="alert alert-warning">
 ログ収集が有効になっている場合は、特定のトランスポートが<a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">強制</a>されていることを確認してください。
 推奨セットアップは HTTPS を使用することです。その場合、メトリクスのプロキシに使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> がログのプロキシに使用されます。
-TCP トランスポートを使用している場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>ページを参照してください。
+TCP トランスポートを使用している場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。
 </div>
 
 すべての `https` リクエストに対して HTTP プロキシを設定する例
@@ -86,18 +86,17 @@ no_proxy_nonexact_match: true
 ```
 
 Agent のインテグレーション（および `no_proxy_nonexact_match` が有効の場合は Agent 全体）に以下のルールが適用されます。
-* ドメイン名は同じ名称およびすべてのサブドメインに一致します。
-  - 例: `datadoghq.com` は `app.agent.datadoghq.com`、`www.datadoghq.com`、`datadoghq.com` に一致しますが、 `www.notdatadoghq.com` は**例外**となります。 
-  - 例: `datadoghq` は `frontend.datadoghq`、`backend.datadoghq` に一致しますが、`www.datadoghq.com` および `www.datadoghq.eu` は**例外**となります。 
-* 先頭に "." がつくドメイン名はサブドメインのみに一致します。
-  - 例: `.datadoghq.com` は `app.agent.datadoghq.com`、 `www.datadoghq.com` に一致しますが、`datadoghq.com` は **例外**となります。
-* CIDR 範囲は サブネット内の IP アドレスに一致します。
-  - 例: `192.168.1.0/24` は、`192.168.1.1` から `192.168.1.254` までの IP 範囲に一致します。
-* 正確な IP アドレス
-  - 例: `169.254.169.254`
-* ホスト名
-  - 例: `webserver1`
-
+* ドメイン名は同じ名称およびすべてのサブドメインに一致します。例:
+  - `datadoghq.com` は `app.agent.datadoghq.com`、`www.datadoghq.com`、`datadoghq.com` に一致しますが、 `www.notdatadoghq.com` は**例外**となります。 
+  - `datadoghq` は `frontend.datadoghq`、`backend.datadoghq` に一致しますが、`www.datadoghq.com` および `www.datadoghq.eu` は**例外**となります。 
+* 先頭に "." がつくドメイン名はサブドメインのみに一致します。例:
+  - `.datadoghq.com` は `app.agent.datadoghq.com`、 `www.datadoghq.com` に一致しますが、`datadoghq.com` は **例外**となります。
+* CIDR 範囲は サブネット内の IP アドレスに一致します。例:
+  - `192.168.1.0/24` は、`192.168.1.1` から `192.168.1.254` までの IP 範囲に一致します。
+* 正確な IP アドレス。例:
+  - `169.254.169.254`
+* ホスト名。例:
+  - `webserver1`
 
 #### 環境変数
 
@@ -107,7 +106,7 @@ Agent v6.4 より、以下の環境変数を使用してプロキシ設定を行
 * `DD_PROXY_HTTP`: `http` リクエスト用のプロキシサーバーを設定します。
 * `DD_PROXY_NO_PROXY`: プロキシをバイパスするホストのリストを設定します。リストはスペース区切りです。
 
-環境変数は、`datadog.yaml` ファイルの値より優先されます。値が空の環境変数がある場合 (``DD_PROXY_HTTP=""`` など)、Agent は、優先度が低いオプションではなく空の値を使用します。
+環境変数は、`datadog.yaml` ファイルの値より優先されます。 ``DD_PROXY_HTTP=""`` など、値が空の環境変数がある場合、Agent は優先度が低いオプションではなく空の値を使用します。
 
 Unix ホストでは、`HTTPS_PROXY`、`HTTP_PROXY`、`NO_PROXY` などの標準環境変数を使用して、システム全体のプロキシが指定されることがあります。標準環境変数がある場合は、それらが使用されます。これらの変数は、Docker、ECS、Kubernetes などのオーケストレーションツールを含むインテグレーションからのすべてのリクエストに影響するため、注意が必要です。
 
@@ -144,9 +143,9 @@ proxy_password: my_password
 
 [HAProxy][1] は、TCP アプリケーションと HTTP アプリケーションのプロキシを提供する、無料で高速、そして信頼性の高いソリューションです。通常、HAProxy はロードバランサーとして着信リクエストをプールサーバーに分散するために使われますが、Agent トラフィックを外部接続がないホストから Datadog にプロキシするために使うこともできます。
 
-これが最高のオプションになるのは、ネットワークにすぐに使えるウェブプロキシがなく、大量の Agent をプロキシしたい場合です。各プロキシは 1000 以上の Agent に対応できるため、場合によっては、1 つの HAProxy インスタンスだけでネットワーク内のローカル Agent トラフィックを十分処理できます。(この数値は、m3.xl インスタンスのパフォーマンスに基づく控えめな見積もりである点にご注意ください。膨大なネットワーク関連の変数がプロキシの負荷に影響を与える場合があります。いつも通り、注意深く見守りながらデプロイしてください。詳しくは、[HAProxy のドキュメント][2]を参照してください。)
+これが最高のオプションになるのは、ネットワークにすぐに使えるウェブプロキシがなく、大量の Agent をプロキシしたい場合です。各プロキシは 1000 以上の Agent に対応できるため、場合によっては、1 つの HAProxy インスタンスだけでネットワーク内のローカル Agent トラフィックを十分処理できます。**注**: この数値は、m3.xl インスタンスのパフォーマンスに基づく控えめな見積もりである点にご注意ください。膨大なネットワーク関連の変数がプロキシの負荷に影響を与える場合があります。いつも通り、注意深く見守りながらデプロイしてください。詳しくは、[HAProxy のドキュメント][2]を参照してください。
 
-`agent ---> haproxy ---> Datadog`
+`agent -> haproxy -> Datadog`
 
 ### HAProxy によるプロキシ転送
 
@@ -293,8 +292,8 @@ backend datadog-logs-http
 
 **注**: 次のコマンドで証明書をダウンロードしてください:
         * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-        * `yum install ca-certificates` (CentOS、Redhat)
-CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
+        * `yum install ca-certificates` (CentOS、Red Hat)
+CentOS、Red Hat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
 
 HAProxy 1.8 以降のバージョンでは、DNS サービスディスカバリーを利用してサーバーの変更点を検出し、それらを現行のコンフィギュレーションに自動で適用することができます。
 古いバージョンの HAProxy をお使いの場合は、HAProxy の再読み込みまたは再起動が必要です。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
@@ -427,9 +426,9 @@ backend datadog-logs-http
 **注**: 次のコマンドで証明書をダウンロードしてください:
 
 * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-* `yum install ca-certificates` (CentOS、Redhat)
+* `yum install ca-certificates` (CentOS、Red Hat)
 
-CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
+CentOS、Red Hat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にある場合があります。
 
 HAProxy 1.8 以降のバージョンでは、DNS サービスディスカバリーを利用してサーバーの変更点を検出し、それらを現行のコンフィギュレーションに自動で適用することができます。
 古いバージョンの HAProxy をお使いの場合は、HAProxy の再読み込みまたは再起動が必要です。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (通常は `service haproxy reload` などで実行)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
@@ -441,7 +440,7 @@ HAProxy 1.8 以降のバージョンでは、DNS サービスディスカバリ�
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-`dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
+`haproxy.example.com` などの `dd_url` を HAProxy のアドレスに設定して、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
 
 `dd_url: http://haproxy.example.com:3834`
 
@@ -475,7 +474,7 @@ skip_ssl_validation: true
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-`dd_url` を HAProxy のアドレスに設定して (例: `haproxy.example.com`)、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.conf` ファイルにあります。
+`haproxy.example.com` などの `dd_url` を HAProxy のアドレスに設定して、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.conf` ファイルにあります。
 
 `dd_url: http://haproxy.example.com:3834`
 
@@ -642,7 +641,7 @@ logs_config:
   logs_no_ssl: true
 ```
 
-TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>ページを参照してください。
+TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。
 
 
 ## Datadog Agent

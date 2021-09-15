@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
 display_name: Snowflake
 draft: false
 git_integration_title: snowflake

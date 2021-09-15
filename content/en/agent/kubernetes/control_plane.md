@@ -33,6 +33,7 @@ With Datadog integrations for the [API server][1], [Etcd][2], [Controller Manage
 * [Kubernetes on OpenShift 4](#OpenShift4)
 * [Kubernetes on OpenShift 3](#OpenShift3)
 * [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
+* [Kubernetes on Rancher Kubernetes Engine (v2.5+)](#RKE)
 
 ## Kubernetes with Kubeadm {#Kubeadm}
 
@@ -597,6 +598,177 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 ## Kubernetes on managed services (AKS, GKE) {#ManagedServices}
 
 On other managed services, such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
+
+## Kubernetes on Rancher Kubernetes Engine (v2.5+) {#RKE}
+
+Rancher v2.5 relies on [PushProx][10] to expose control plane metric endpoints, this allows the Datadog Agent to run control plane checks and collect metrics.
+
+### Prerequisites
+
+1. Install the [rancher-monitoring chart][11].
+2. The `pushprox` daemonsets are deployed with `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
+
+### API server
+
+To configure the `kube_apiserver_metrics` check, add the following annotations to the `default/kubernetes` service:
+
+```yaml
+annotations:
+  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
+  ad.datadoghq.com/endpoints.init_configs: '[{}]'
+  ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
+```
+
+### Add Kubernetes services to configure auto-discovery checks
+
+By adding headless Kubernetes services to define check configurations, the Datadog Agent is able to target the `pushprox` pods and collect metrics.
+
+Apply `rancher-control-plane-services.yaml`:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: pushprox-kube-scheduler-datadog
+  namespace: cattle-monitoring-system
+  labels:
+    component: kube-scheduler
+    k8s-app: pushprox-kube-scheduler-client
+  annotations:
+    ad.datadoghq.com/endpoints.check_names: '["kube_scheduler"]'
+    ad.datadoghq.com/endpoints.init_configs: '[{}]'
+    ad.datadoghq.com/endpoints.instances: |
+      [
+        {
+          "prometheus_url": "http://%%host%%:10251/metrics"
+        }
+      ]
+spec:
+  clusterIP: None
+  selector:
+    k8s-app: pushprox-kube-scheduler-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pushprox-kube-controller-manager-datadog
+  namespace: cattle-monitoring-system
+  labels:
+    component: kube-controller-manager
+    k8s-app: pushprox-kube-controller-manager-client
+  annotations:
+    ad.datadoghq.com/endpoints.check_names: '["kube_controller_manager"]'
+    ad.datadoghq.com/endpoints.init_configs: '[{}]'
+    ad.datadoghq.com/endpoints.instances: |
+      [
+        {
+          "prometheus_url": "http://%%host%%:10252/metrics"
+        }
+      ]
+spec:
+  clusterIP: None
+  selector:
+    k8s-app: pushprox-kube-controller-manager-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pushprox-kube-etcd-datadog
+  namespace: cattle-monitoring-system
+  labels:
+    component: kube-etcd
+    k8s-app: pushprox-kube-etcd-client
+  annotations:
+    ad.datadoghq.com/endpoints.check_names: '["etcd"]'
+    ad.datadoghq.com/endpoints.init_configs: '[{}]'
+    ad.datadoghq.com/endpoints.instances: |
+      [
+        {
+          "prometheus_url": "https://%%host%%:2379/metrics",
+          "tls_ca_cert": "/host/opt/rke/etc/kubernetes/ssl/kube-ca.pem",
+          "tls_cert": "/host/opt/rke/etc/kubernetes/ssl/kube-etcd-<node-ip>.pem",
+          "tls_private_key": "/host/opt/rke/etc/kubernetes/ssl/kube-etcd-<node-ip>.pem"
+        }
+      ]
+spec:
+  clusterIP: None
+  selector:
+    k8s-app: pushprox-kube-etcd-client
+```
+
+Deploy the Datadog Agent with manifests based on the following configurations:
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/controlplane
+    operator: Exists
+  - effect: NoExecute
+    key: node-role.kubernetes.io/etcd
+    operator: Exists
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  agent:
+    config:
+      kubelet:
+        tlsVerify: false
+      volumes:
+        - hostPath:
+            path: /opt/rke/etc/kubernetes/ssl
+          name: etcd-certs
+      volumeMounts:
+        - name: etcd-certs
+          mountPath: /host/opt/rke/etc/kubernetes/ssl
+          readOnly: true
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/controlplane
+          operator: Exists
+        - effect: NoExecute
+          key: node-role.kubernetes.io/etcd
+          operator: Exists
+  clusterAgent:
+    config:
+      clusterChecksEnabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
 [1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/

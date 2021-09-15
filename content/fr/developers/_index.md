@@ -36,7 +36,7 @@ Les développeurs disposent de plusieurs options pour l'envoi des données non p
 ### Types
 
 {{< whatsnext desc="Familiarisez-vous avec les différents types de données que vous pouvez envoyer à Datadog :" >}}
-    {{< nextlink href="/developers/metrics" >}}<u>Métriques custom</u> : plongez au cœur des métriques custom de Datadog et découvrez les différents types de métriques, ce qu'ils représentent, comment les envoyer et leur rôle au sein de l'écosystème Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics" >}}<u>Métriques custom</u> : plongez au cœur des métriques custom de Datadog et découvrez les différents types de métriques, ce qu'ils représentent, comment les envoyer et leur rôle au sein de l'écosystème Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/events" >}}<u>Événements</u> : découvrez comment envoyer des événements à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Checks de service</u> : apprenez à envoyer des checks de service à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -22,19 +22,19 @@ nav_sections:
     - navtiles:
       - title: Agent
         link: agent/
-        icon: agent.svg
+        icon: agent-fill
         desc: Install & configure the Datadog Agent to collect and send data
       - title: Integrations
         link: integrations/
-        icon: integration.svg
+        icon: integrations
         desc: Gather data from your systems, apps, & services
       - title: Dashboards
         link: dashboards/
-        icon: dashboard.svg
+        icon: dashboard
         desc: Visualize your data to gain insight
       - title: Infrastructure
         link: infrastructure/
-        icon: host-map.svg
+        icon: host-map
         desc: Track your hosts, containers, processes, and serverless functions
       - title: Events
         link: events/
@@ -42,74 +42,74 @@ nav_sections:
         desc: Track notable changes and alerts across applications and infrastructure
       - title: Metrics
         link: metrics/
-        icon: metric.svg
+        icon: metric
         desc: Explore your metrics and create distributions
       - title: Alerting
         link: monitors/
-        icon: alert.svg
+        icon: alert
         desc: Create & manage monitors & notifications
       - title: APM & Continuous Profiler
         link: tracing/
-        icon: trace.svg
+        icon: apm
         desc: Gain insight on your application's performance
       - title: Log Management
         link: logs/
-        icon: logs.svg
+        icon: log
         desc: Collect, process, explore, monitor, & archive your logs
       - title: Security Platform
         link: security_platform/
-        icon: siem.svg
+        icon: security
         desc: Detect threats and misconfigurations across applications and infrastructure
       - title: Synthetic Monitoring
         link: synthetics/
-        icon: synthetics.svg
+        icon: synthetics
         desc: Ensure application uptime, identify regional issues, & track performance
-      - title: Real User Monitoring
+      - title: RUM & Session Replay
         link: real_user_monitoring/
-        icon: rum-2.svg
+        icon: rum
         desc: Visualize and analyze the performance of your front end applications
       - title: Network Monitoring
         link: network_monitoring/
-        icon: network.svg
+        icon: network
         desc: Gain visibility into your network traffic using tagged objects
       - title: Serverless
         link: serverless/
-        icon: serverless.svg
+        icon: serverless
         desc: End-to-end visibility into your serverless development lifecycle
       - title: Mobile application
         link: mobile/
-        icon: mobile.svg
+        icon: mobile
         desc: View Datadog alerts and dashboards on your mobile device
       - title: Watchdog
         link: watchdog/
-        icon: watchdog.svg
+        icon: watchdog
         desc: Automatically see trends in your applications & infrastructure metrics
       - title: CI Visibility
         link: continuous_integration/
-        icon: ci.svg
+        icon: ci
         desc: Track the performance and reliability of your tests and pipelines
       - title: Database Monitoring
         link: database_monitoring/
-        icon: dbm.svg
+        icon: dbm
         desc: Gain deep visibility into database and query performance
   - nav_section:
     - name: 'Configuration'
     - navtiles:
       - title: API
         link: api/
-        icon: code.svg
+        icon: api
         desc: Use the Datadog API
       - title: Account Management
         link: account_management/
-        icon: cog.svg
+        icon: cog
         desc: Control your account settings and manage billing
       - title: Security
         link: security/
-        icon: lock.svg
+        icon: security-lock
         desc: Learn how Datadog protects your data
       - title: Developers
         link: developers/
-        icon: wrench.svg
+        icon: wrench
         desc: Develop for the Datadog platform
 
 popular_searches:

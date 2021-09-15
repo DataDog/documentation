@@ -69,9 +69,9 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-[1]: /developers/metrics/types/?tab=count#metric-types
-[2]: /developers/metrics/types/?tab=rate#metric-types
-[3]: /developers/metrics/types/?tab=gauge#metric-types
+[1]: /metrics/types/?tab=count#metric-types
+[2]: /metrics/types/?tab=rate#metric-types
+[3]: /metrics/types/?tab=gauge#metric-types
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -92,8 +92,8 @@ By default, the Agent generates five custom metrics for each of the original fou
 - Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][3]. By default, only the `95percentile`, 95th percentile, is sent out to Datadog.
 
 
-[1]: /developers/metrics/types/?tab=histogram#metric-types
-[2]: /developers/metrics/types/?tab=histogram#definition
+[1]: /metrics/types/?tab=histogram#metric-types
+[2]: /metrics/types/?tab=histogram#definition
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
@@ -131,7 +131,7 @@ You can customize [which tag combination][2] aggregations are created for any DI
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 custom metrics**
 
-[1]: /developers/metrics/types/?tab=distribution#definition
+[1]: /metrics/types/?tab=distribution#definition
 [2]: /metrics/distributions/#customize-tagging
 {{% /tab %}}
 {{< /tabs >}}
@@ -175,8 +175,8 @@ For technical questions, contact [Datadog support][24].
 For billing questions, contact your [Customer Success][9] Manager.
 
 [1]: /integrations/
-[2]: /developers/metrics/custom_metrics/
-[3]: /developers/metrics/types/#metric-types
+[2]: /metrics/custom_metrics/
+[3]: /metrics/types/#metric-types
 [4]: /account_management/users/default_roles/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /account_management/billing/usage_details/

@@ -18,82 +18,82 @@ nav_sections:
       - navtiles:
           - title: Agent
             link: agent/
-            icon: agent.svg
+            icon: agent-fill
             desc: Installer et configurer l'Agent Datadog pour recueillir et envoyer des données
           - title: Intégrations
             link: integrations/
-            icon: integration.svg
+            icon: integrations
             desc: 'Rassembler des données depuis vos systèmes, apps et services'
           - title: Dashboards
             link: dashboards/
-            icon: dashboard.svg
+            icon: dashboard
             desc: Visualiser vos données pour mieux les comprendre
           - title: Infrastructure
             link: infrastructure/
-            icon: host-map.svg
+            icon: host-map
             desc: 'Suivez vos hosts, conteneurs, processus et fonctions sans serveur'
           - title: Métriques
             link: metrics/
-            icon: metric.svg
+            icon: metric
             desc: Explorez vos métriques et créez des distributions
           - title: Alertes
             link: monitors/
-            icon: alert.svg
+            icon: alert
             desc: Créer et gérer des monitors et des notifications
           - title: APM et tracing distribué
             link: tracing/
-            icon: trace.svg
+            icon: apm
             desc: Étudier précisément les performances de votre application
           - title: Log Management
             link: logs/
-            icon: logs.svg
+            icon: log
             desc: 'Recueillir, traiter, explorer, surveiller et archiver vos logs'
           - title: Security Monitoring
             link: security_monitoring/
-            icon: siem.svg
+            icon: security
             desc: Détecter les menaces en temps réel et analyser les alertes de sécurité
           - title: Surveillance synthétique
             link: synthetics/
-            icon: synthetics.svg
+            icon: synthetics
             desc: 'Garantir la disponibilité de l''application, identifier les problèmes locaux et surveiller les performances'
           - title: Real User Monitoring
             link: real_user_monitoring/
-            icon: rum-2.svg
+            icon: rum
             desc: Visualisez et analysez les performances de vos applications frontend
           - title: Surveillance réseau
             link: network_performance_monitoring/
-            icon: network.svg
+            icon: network
             desc: Visualisez en détail votre trafic réseau grâce aux objets tagués
           - title: Informatique sans serveur
             link: serverless/
-            icon: serverless.svg
+            icon: serverless
             desc: Une visibilité de bout en bout sur votre cycle de développement sans serveur
           - title: Application mobile
             link: mobile/
-            icon: mobile.svg
+            icon: mobile
             desc: Consultez les alertes et les dashboards Datadog sur votre appareil mobile
           - title: Watchdog
             link: watchdog/
-            icon: watchdog.svg
+            icon: watchdog
             desc: Identifiez automatiquement les tendances de vos métriques d'application et d'infrastructure
   - nav_section:
       - name: Configuration
       - navtiles:
           - title: API
             link: api/
-            icon: code.svg
+            icon: api
             desc: Utiliser l'API Datadog
           - title: Gestion de compte
             link: account_management/
-            icon: cog.svg
+            icon: cog
             desc: Gérer les réglages de votre compte
           - title: Sécurité
             link: 'https://www.datadoghq.com/security/'
-            icon: lock.svg
+            icon: security-lock
             desc: Découvrir comment Datadog protège vos données
           - title: Outils de développement
             link: developers/
-            icon: wrench.svg
+            icon: wrench
             desc: Développer des outils pour la plateforme Datadog
 popular_searches:
   - title: Documentation sur l'API

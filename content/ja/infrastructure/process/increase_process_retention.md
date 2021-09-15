@@ -73,5 +73,5 @@ further_reading:
 
 [1]: https://app.datadoghq.com/process?view=metrics
 [2]: https://app.datadoghq.com/process
-[3]: /ja/developers/metrics/custom_metrics/
+[3]: /ja/metrics/custom_metrics/
 [4]: /ja/dashboards/correlations/
