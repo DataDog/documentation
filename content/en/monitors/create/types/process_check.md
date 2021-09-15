@@ -2,6 +2,8 @@
 title: Process Check Monitor
 kind: documentation
 description: "Check if a process is running on a host"
+aliases:
+- /monitors/monitor_types/process_check
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -69,7 +71,9 @@ For example, a cluster check monitor grouped by environment can alert if more th
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][3] documentation for information on [No data][4], [Auto resolve][5], and [Evaluation delay][6] options.
+#### Advanced alert conditions
+
+See the [Monitor configuration][3] documentation for information on [No data][4], [Auto resolve][5], and [New group delay][6] options.
 
 ### Notifications
 
@@ -81,8 +85,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: /integrations/process/
 [2]: https://app.datadoghq.com/monitors#create/process
-[3]: /monitors/monitor_types/metric/
-[4]: /monitors/monitor_types/metric/#no-data
-[5]: /monitors/monitor_types/metric/#auto-resolve
-[6]: /monitors/monitor_types/metric/#evaluation-delay
+[3]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/create/configuration/#no-data
+[5]: /monitors/create/configuration/#auto-resolve
+[6]: /monitors/create/configuration/#new-group-delay
 [7]: /monitors/notifications/

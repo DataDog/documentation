@@ -2,6 +2,8 @@
 title: Custom Check Monitor
 kind: documentation
 description: "Monitor status of arbitrary custom checks."
+aliases :
+    - /monitors/monitor_types/custom_check
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -77,7 +79,9 @@ For example, a cluster check monitor grouped by environment can alert if more th
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][6] documentation for information on [No data][7], [Auto resolve][8], and [Evaluation delay][9] options.
+#### Advanced alert conditions
+
+See the [Monitor configuration][6] documentation for information on [No data][7], [Auto resolve][8], and [New group delay][9] options.
 
 ### Notifications
 
@@ -92,8 +96,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [3]: /developers/dogstatsd/
 [4]: /api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom
-[6]: /monitors/monitor_types/metric/
-[7]: /monitors/monitor_types/metric/#no-data
-[8]: /monitors/monitor_types/metric/#auto-resolve
-[9]: /monitors/monitor_types/metric/#evaluation-delay
+[6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/create/configuration/#no-data
+[8]: /monitors/create/configuration/#auto-resolve
+[9]: /monitors/create/configuration/#new-group-delay
 [10]: /monitors/notifications/

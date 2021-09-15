@@ -2,6 +2,8 @@
 title: Event Monitor
 kind: documentation
 description: "Monitor events gathered by Datadog"
+aliases :
+    - /monitors/monitor_types/event
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -75,7 +77,6 @@ As you define the search query, the top graph updates.
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
-[2]: /logs/explorer
 
 {{< /site-region >}}
 {{< site-region region="us3" >}}
@@ -84,7 +85,7 @@ As you define the search query, the top graph updates.
 
 As you define the search query, the top graph updates.
 
-1. Construct a search query using the same logic as a [log explorer search][3].
+1. Construct a search query using the same logic as a [log explorer search][2].
 2. Choose to monitor over an event count, facet, or measure:
     * **Monitor over an event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If a facet is selected, the monitor alerts over the unique value count of the facet.
@@ -93,7 +94,6 @@ As you define the search query, the top graph updates.
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
-[3]: /logs/explorer
 {{< /site-region >}}
 
 
@@ -105,9 +105,13 @@ As you define the search query, the top graph updates.
 
 **Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event is initiated. In this case, Datadog back-dates the event to the time of occurrence, which could place an incoming event outside the current monitor evaluation window. Widening your evaluation window can help account for the time difference.  If you need help adjusting your monitor settings appropriately, reach out to [Datadog Support][3].
 
+#### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][4] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 #### Event template variables
 
@@ -138,4 +142,5 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 [1]: https://app.datadoghq.com/monitors#create/event
 [2]: /logs/explorer
 [3]: /help/
-[4]: /monitors/notifications/
+[4]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/notifications/

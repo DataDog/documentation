@@ -2,6 +2,8 @@
 title: Integration Monitor
 kind: documentation
 description: "Monitor metric values or health status from a specific integration"
+aliases:
+- /monitors/monitor_types/integration
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -90,11 +92,13 @@ For example, a cluster check monitor grouped by environment can alert if more th
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][3] documentation for information on [No data][5], [Auto resolve][6], and [Evaluation delay][7] options.
+#### Advanced alert conditions
+
+See the [Monitor configuration][5] documentation for information on [No data][6], [Auto resolve][7], and [New group delay][8] options.
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][9] page.
 
 ## Further Reading
 
@@ -104,7 +108,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: https://app.datadoghq.com/monitors#create/integration
 [3]: /monitors/monitor_types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
-[5]: /monitors/monitor_types/metric/#no-data
-[6]: /monitors/monitor_types/metric/#auto-resolve
-[7]: /monitors/monitor_types/metric/#evaluation-delay
-[8]: /monitors/notifications/
+[5]: /monitors/create/configuration/#advanced-alert-conditions
+[6]: /monitors/create/configuration/#no-data
+[7]: /monitors/create/configuration/#auto-resolve
+[8]: /monitors/create/configuration/#new-group-delay
+[9]: /monitors/notifications/

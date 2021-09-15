@@ -2,6 +2,8 @@
 title: Network Monitor
 kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
+aliases:
+- /monitors/monitor_types/network
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -73,7 +75,9 @@ Set up a cluster alert:
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [metric monitor][4] documentation for information on [No data][5], [Auto resolve][6], and [Evaluation delay][7] options.
+#### Advanced alert conditions
+
+See the [Monitor configuration][4] documentation for information on [No data][5], [Auto resolve][6], and [New group delay][7] options.
 
 #### Notifications
 
@@ -90,9 +94,9 @@ Create a network metric monitor by following the instructions in the [metric mon
 [1]: /integrations/http_check/
 [2]: /integrations/tcp_check/
 [3]: https://app.datadoghq.com/monitors#create/network
-[4]: /monitors/monitor_types/metric/
-[5]: /monitors/monitor_types/metric/#no-data
-[6]: /monitors/monitor_types/metric/#auto-resolve
-[7]: /monitors/monitor_types/metric/#evaluation-delay
+[4]: /monitors/create/configuration/#advanced-alert-conditions
+[5]: /monitors/create/configuration/#no-data
+[6]: /monitors/create/configuration/#auto-resolve
+[7]: /monitors/create/configuration/#new-group-delay
 [8]: /monitors/notifications/
 [9]: https://app.datadoghq.com/monitors/manage

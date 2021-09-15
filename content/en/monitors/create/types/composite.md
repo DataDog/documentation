@@ -3,6 +3,7 @@ title: Composite Monitor
 kind: documentation
 aliases:
     - /guides/composite_monitors
+    - /monitors/monitor_types/composite
 description: "Alert on an expression combining multiple monitors"
 further_reading:
 - link: "/monitors/notifications/"
@@ -68,13 +69,19 @@ a || b && !c
 (a || b) && (c || d)
 ```
 
-#### No data
+#### Advanced alert conditions
+
+##### No data
 
 `Do not notify` or `Notify` when the composite monitor is in a no-data state. Whatever you choose here doesn't affect the individual monitors' `Notify no data` settings, but in order for a composite to alert on No Data, both the individual monitors and the composite monitor must be set to `Notify` when data is missing.
 
+##### Other options
+
+For detailed instructions on the advanced alert options (auto resolve, etc.), see the [Monitor configuration][2] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ### API
 
@@ -131,11 +138,11 @@ Consider a composite monitor that uses two individual monitors: `A` and `B`. The
 | No Data (T) | No Data (T) | `A && B`    | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A || B`    | True             | No Data (T)      | {{< X >}}        |
 
-**Note**: When the composite has `notify_no_data` to false, and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead. 
+**Note**: When the composite has `notify_no_data` to false, and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead.
 
 ### Number of alerts
 
-The number of alerts you receive depends on the individual monitor's alert type. 
+The number of alerts you receive depends on the individual monitor's alert type.
 If all individual monitors are simple alerts, the composite monitor also has a simple alert type. The composite monitor triggers a single notification when the queries for `A` and `B` are all `true` at the same time.
 
 If even one individual monitor is multi-alert, then the composite monitor is also multi-alert. How _many_ alerts it may send at a time depends on whether the composite monitor uses one or uses many multi-alert monitors.
@@ -143,11 +150,11 @@ If even one individual monitor is multi-alert, then the composite monitor is als
 
 ### Common reporting sources
 
-Composite monitors that use many multi-alert monitors only consider the individual monitors' *common reporting sources*. 
+Composite monitors that use many multi-alert monitors only consider the individual monitors' *common reporting sources*.
 
 **Multi alert Example**
 
-Consider a scenario where monitor `A` and `B` are multi-alert and grouped by host. 
+Consider a scenario where monitor `A` and `B` are multi-alert and grouped by host.
 
 * Hosts from `host:web01` through `host:web05` are reporting for Monitor `A`.
 * Hosts from `host:web04` through `host:web09` are reporting for monitor `B`.
@@ -161,7 +168,7 @@ If the example above included a multi-alert monitor `C` grouped by `service` wit
 
 **Monitor group by two or more dimensions**
 
-In the case of a multi-alert monitor split by two or more tags, a monitor group corresponds to the whole combination of tags. 
+In the case of a multi-alert monitor split by two or more tags, a monitor group corresponds to the whole combination of tags.
 For example, if monitor `1` is a multi-alert per `device,host`, and monitor `2` is a multi-alert per `host`, a composite monitor can combine monitor `1` and monitor `2`.
 
 {{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification"  style="width:80%;">}}
@@ -174,4 +181,5 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
-[2]: /monitors/notifications/
+[2]: /monitors/create/configuration/#advanced-alert-conditions
+[3]: /monitors/notifications/

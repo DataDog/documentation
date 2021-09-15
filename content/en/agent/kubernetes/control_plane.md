@@ -313,7 +313,7 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][6]. To configure the check, add the following annotations to the `default/kubernetes` service:
+On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][1]. To configure the check, add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
@@ -332,9 +332,9 @@ On OpenShift 4, all control plane components can be monitored using endpoint che
 
 ### Prerequisites
 
-1. Enable the Datadog [Cluster Agent][7]
-1. Enable [Cluster checks][8]
-1. Enable [Endpoint checks][9]
+1. Enable the Datadog [Cluster Agent][6]
+1. Enable [Cluster checks][7]
+1. Enable [Endpoint checks][8]
 1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
 ### API server
@@ -472,9 +472,9 @@ On OpenShift 3, all control plane components can be monitored using endpoint che
 
 ### Prerequisites
 
-1. Enable the Datadog [Cluster Agent][7]
-1. Enable [Cluster checks][8]
-1. Enable [Endpoint checks][9]
+1. Enable the Datadog [Cluster Agent][6]
+1. Enable [Cluster checks][7]
+1. Enable [Endpoint checks][8]
 1. Ensure that you are logged in with sufficient permissions to create and edit services.
 
 ### API server

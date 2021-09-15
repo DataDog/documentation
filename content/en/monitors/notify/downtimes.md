@@ -1,15 +1,17 @@
 ---
 title: Downtimes
 kind: documentation
-description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods."
+description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods"
+aliases:
+    - /monitors/downtimes/
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/"
   tag: "Documentation"
-  text: "Create a monitor"
-- link: "/monitors/notifications/"
+  text: "Create monitors"
+- link: "/monitors/notify/"
   tag: "Documentation"
-  text: "Configure monitor notifications"
-- link: "/monitors/manage_monitor/"
+  text: "Monitor notifications"
+- link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
 ---
@@ -163,7 +165,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 ### Expiration
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
+If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.

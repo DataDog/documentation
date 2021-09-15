@@ -2,6 +2,8 @@
 title: Host Monitor
 kind: documentation
 description: "Check if one or more hosts are reporting to Datadog"
+aliases:
+    - /monitors/monitor_types/host
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -65,13 +67,18 @@ If `datadog.agent.up` stops reporting an `OK` status for more than the minutes s
 {{% /tab %}}
 {{< /tabs >}}
 
+### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (auto resolve, new group delay, etc.), see the [Monitor Configuration][2] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/host
-[2]: /monitors/notifications/
+[2]: /monitors/create/configuration/#advanced-alert-conditions
+[3]: /monitors/notifications/

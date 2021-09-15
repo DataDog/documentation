@@ -1287,146 +1287,171 @@ main:
     pre: alert
     identifier: alerting
     weight: 130000
-  - name: Monitors
-    url: monitors/monitor_types/
+  - name: Create Monitors
+    url: monitors/create/
     parent: alerting
-    identifier: monitor_types
+    identifier: monitors_create
     weight: 1
+  - name: Monitor Configuration
+    url: monitors/create/configuration/
+    parent: monitors_create
+    identifier: monitor_configuration
+    weight: 101
+  - name: Monitor Types
+    url: monitors/create/types/
+    parent: monitors_create
+    identifier: monitor_types
+    weight: 102
   - name: Host
-    url: monitors/monitor_types/host/
+    url: monitors/create/types/host/
     parent: monitor_types
     identifier: monitor_types_host
-    weight: 101
+    weight: 1021
   - name: Metric
-    url: monitors/monitor_types/metric/
+    url: monitors/create/types/metric/
     parent: monitor_types
     identifier: monitor_types_metrics
-    weight: 102
+    weight: 1022
   - name: Anomaly
-    url: monitors/monitor_types/anomaly/
+    url: monitors/create/types/anomaly/
     parent: monitor_types
     identifier: monitor_types_anomaly
-    weight: 103
+    weight: 1023
   - name: Outlier
-    url: monitors/monitor_types/outlier/
+    url: monitors/create/types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
-    weight: 104
+    weight: 1024
   - name: Forecast
-    url: monitors/monitor_types/forecasts/
+    url: monitors/create/types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
-    weight: 105
+    weight: 1025
   - name: Integration
-    url: monitors/monitor_types/integration/
+    url: monitors/create/types/integration/
     parent: monitor_types
     identifier: monitor_types_integration
-    weight: 106
+    weight: 1026
   - name: Live Process
-    url: monitors/monitor_types/process/
+    url: monitors/create/types/process/
     parent: monitor_types
     identifier: monitor_types_process
-    weight: 107
+    weight: 1027
   - name: Process Check
-    url: monitors/monitor_types/process_check/
+    url: monitors/create/types/process_check/
     parent: monitor_types
     identifier: monitor_types_process_check
-    weight: 108
+    weight: 1028
   - name: Network
-    url: monitors/monitor_types/network/
+    url: monitors/create/types/network/
     parent: monitor_types
     identifier: monitor_types_network
-    weight: 109
+    weight: 1029
   - name: Custom Check
-    url: monitors/monitor_types/custom_check/
+    url: monitors/create/types/custom_check/
     parent: monitor_types
     identifier: monitor_types_custom_check
-    weight: 110
+    weight: 1030
   - name: Event
-    url: monitors/monitor_types/event/
+    url: monitors/create/types/event/
     parent: monitor_types
     identifier: monitor_types_event
-    weight: 111
+    weight: 1031
   - name: Logs
-    url: monitors/monitor_types/log/
+    url: monitors/create/types/log/
     parent: monitor_types
     identifier: monitor_types_log
-    weight: 112
+    weight: 1032
   - name: APM
-    url: monitors/monitor_types/apm/
+    url: monitors/create/types/apm/
     parent: monitor_types
     identifier: monitor_types_apm
-    weight: 113
+    weight: 1033
   - name: Real User Monitoring
-    url: monitors/monitor_types/real_user_monitoring/
+    url: monitors/create/types/real_user_monitoring/
     parent: monitor_types
     identifier: monitor_types_rum
-    weight: 114
+    weight: 1034
   - name: Watchdog
-    url: monitors/monitor_types/watchdog/
+    url: monitors/create/types/watchdog/
     parent: monitor_types
     identifier: monitor_types_watchdog
-    weight: 115
+    weight: 1035
   - name: Composite
-    url: monitors/monitor_types/composite/
+    url: monitors/create/types/composite/
     parent: monitor_types
     identifier: monitor_types_composite
-    weight: 116
-  - name: Manage Monitors
-    url: monitors/manage_monitor/
-    weight: 2
-    parent: alerting
-  - name: Monitor Status
-    url: monitors/monitor_status/
-    weight: 3
-    parent: alerting
-  - name: Check Summary
-    url: monitors/check_summary/
-    weight: 4
-    parent: alerting
+    weight: 1036
   - name: Notifications
-    url: monitors/notifications/
-    weight: 5
+    url: monitors/notify/
     parent: alerting
+    identifier: monitors_notify
+    weight: 2
+  - name: Variables
+    url: monitors/notify/variables/
+    parent: monitors_notify
+    identifier: monitors_notify_variables
+    weight: 201
   - name: Downtimes
-    url: monitors/downtimes/
-    weight: 6
+    url: monitors/notify/downtimes/
+    parent: monitors_notify
+    identifier: monitors_notify_downtimes
+    weight: 202
+  - name: Manage Monitors
+    url: monitors/manage/
     parent: alerting
+    identifier: monitors_manage
+    weight: 3
+  - name: Search Monitors
+    url: monitors/manage/search/
+    parent: monitors_manage
+    identifier: monitors_manage_search
+    weight: 301
+  - name: Monitor Status
+    url: monitors/manage/status/
+    parent: monitors_manage
+    identifier: monitors_manage_status
+    weight: 302
+  - name: Check Summary
+    url: monitors/manage/check_summary/
+    parent: monitors_manage
+    identifier: monitors_check_summary
+    weight: 303
   - name: Service Level Objectives
     url: monitors/service_level_objectives/
-    weight: 7
+    weight: 4
     parent: alerting
     identifier: slos
-  - name: Incident Management
-    url: monitors/incident_management
-    parent: alerting
-    identifier: incidents
-    weight: 8
-  - name: Datadog Clipboard
-    url: monitors/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 801
-  - name: Notification Rules
-    url: monitors/incident_management/notification_rules
-    parent: incidents
-    identifier: notification_rules
-    weight: 802
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
     identifier: slos_monitor
-    weight: 701
+    weight: 401
   - name: Metric-based SLOs
     url: monitors/service_level_objectives/metric/
     parent: slos
     identifier: slos_metric
-    weight: 702
+    weight: 402
   - name: Error Budget Alerts
     url: monitors/service_level_objectives/error_budget/
     parent: slos
     identifier: error_budget
-    weight: 703
+    weight: 403
+  - name: Incident Management
+    url: monitors/incident_management
+    parent: alerting
+    identifier: incidents
+    weight: 5
+  - name: Datadog Clipboard
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 501
+  - name: Notification Rules
+    url: monitors/incident_management/notification_rules
+    parent: incidents
+    identifier: notification_rules
+    weight: 502
   - name: Guides
     url: monitors/guide/
     weight: 100

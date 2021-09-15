@@ -3,6 +3,7 @@ title: Anomaly Monitor
 kind: documentation
 aliases:
     - /guides/anomalies
+    - /monitors/monitor_types/anomaly
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
 - link: "/monitors/notifications/"
@@ -57,19 +58,19 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
 
 
-Deviations 
+Deviations
 : The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].
 
 Algorithm
 : The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
 
-Seasonality 
+Seasonality
 : The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
 
 Daylight savings
 : Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
 
-Rollup  
+Rollup
 : The [rollup interval][5].
 
 Thresholds
@@ -91,7 +92,7 @@ Weekly
 ##### Anomaly detection algorithms
 
 Basic
-: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends. 
+: Use when metrics have no repeating seasonal pattern.  Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 Agile
 : Use when metrics are seasonal and expected to shift. The algorithm quickly adjusts to metric level shifts. A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.
@@ -124,17 +125,21 @@ This example shows how each algorithm handles a new metric. `Robust` and `agile`
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric"  style="width:90%;">}}
 
+### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][8] page. For the metric-specific option full data window, see the [Metric monitor][9] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][8] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
 
 ## API
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
+**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
-Anomaly monitors are managed using the [same API][12] as other monitors. These fields are unique for anomaly monitors:
+Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 
 ### `query`
 
@@ -209,8 +214,8 @@ A standard configuration of thresholds and threshold window looks like:
 
 ## Troubleshooting
 
-* [Anomaly Monitor FAQ][13]
-* [Contact Datadog support][14]
+* [Anomaly Monitor FAQ][15]
+* [Contact Datadog support][16]
 
 ## Further Reading
 
@@ -223,10 +228,12 @@ A standard configuration of thresholds and threshold window looks like:
 [5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /monitors/notifications/
-[9]: /api/v1/monitors/#create-a-monitor
-[10]: /monitors/monitor_status/#settings
-[11]: mailto:billing@datadoghq.com
-[12]: /api/v1/monitors/
-[13]: /monitors/faq/anomaly-monitor/
-[14]: /help/
+[8]: /monitors/create/configuration/#advanced-alert-conditions
+[9]: /monitors/create/types/metric/#data-window
+[10]: /monitors/notifications/
+[11]: /api/v1/monitors/#create-a-monitor
+[12]: /monitors/monitor_status/#settings
+[13]: mailto:billing@datadoghq.com
+[14]: /api/v1/monitors/
+[15]: /monitors/faq/anomaly-monitor/
+[16]: /help/

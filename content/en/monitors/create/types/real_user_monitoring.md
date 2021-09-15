@@ -1,6 +1,8 @@
 ---
 title: Real User Monitoring Monitor
 kind: documentation
+aliases:
+- /monitors/monitor_types/real_user_monitoring
 further_reading:
 - link: "/monitors/notifications/"
   tag: "Documentation"
@@ -56,9 +58,13 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 * This monitor triggers if there are no logs for the application `Shop.ist`:
   {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Below monitor for given application"  style="width:70%;" >}}
 
+#### Advanced alert conditions
+
+For detailed instructions on the advanced alert options (evaluation delay, etc.), see the [Monitor configuration][6] page.
+
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Further Reading
 
@@ -69,4 +75,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [3]: /real_user_monitoring/explorer/search/
 [4]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [5]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[6]: /monitors/notifications/
+[6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/notifications/
