@@ -59,7 +59,7 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
     * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [`regex`][2].
     * Extract the value from **Response Body**: parse the response body of the request with a [`regex`][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp_2.png" alt="Variable from http" style="width:100%;">}}
+{{< img src="synthetics/settings/variable_fromhttp_3.png" alt="Variable from HTTP Test" style="width:80%;">}}
 
 **Note:** Variable values are updated whenever the test they are extracted from runs.
 
