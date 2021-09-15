@@ -1,8 +1,8 @@
 ---
-title: Custom spans
+title: Adding custom spans to Pipeline Traces
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/setup_pipelines/customspans/"
+    - link: "/continuous_integration/setup_pipelines/custom_spans/"
       tag: "Documentation"
       text: "Troubleshooting CI"
 ---
@@ -20,7 +20,7 @@ Custom spans work with the following CI providers:
 
 ## Installing the Datadog CI CLI
 
-Install the [`datadog-ci`][1] CLI globally using `npm`:
+Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 
 {{< code-block lang="bash" >}}
 npm install -g @datadog/datadog-ci
@@ -31,7 +31,7 @@ npm install -g @datadog/datadog-ci
 To trace a command, run the following:
 
 {{< code-block lang="bash" >}}
-datadog-ci trace --name <name> <command>
+datadog-ci trace [--name <name>] <command>
 {{< /code-block >}}
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
@@ -39,14 +39,14 @@ Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variab
 {{< site-region region="us" >}}
 {{< code-block lang="bash" >}}
 DATADOG_API_KEY=<api_key> datadog-ci trace \
-  --service "Greet" \
+  --name "Greet" \
   echo "Hello World"
 {{< /code-block >}}
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 {{< code-block lang="bash" >}}
 DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci trace \
-  --service "Greet" \
+  --name "Greet" \
   echo "Hello World"
 {{< /code-block >}}
 {{< /site-region >}}

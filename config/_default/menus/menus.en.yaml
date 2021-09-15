@@ -2012,9 +2012,9 @@ main:
     identifier: ci_circleci
     weight: 204
   - name: Custom spans
-    url: continuous_integration/setup_pipelines/customspans/
+    url: continuous_integration/setup_pipelines/custom_spans/
     parent: setup_pipelines
-    identifier: ci_customspans
+    identifier: ci_custom_spans
     weight: 210
   - name: Exploring Tests
     url: continuous_integration/explore_tests/

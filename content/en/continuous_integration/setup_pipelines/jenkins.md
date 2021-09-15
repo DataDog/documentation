@@ -5,7 +5,7 @@ further_reading:
     - link: "/continuous_integration/explore_pipelines"
       tag: "Documentation"
       text: "Explore Pipeline Execution Results and Performance"
-    - link: "/continuous_integration/setup_pipelines/customspans/"
+    - link: "/continuous_integration/setup_pipelines/custom_spans/"
       tag: "Documentation"
       text: "Extending Pipeline Visibility with Custom Spans"
     - link: "/continuous_integration/troubleshooting/"
