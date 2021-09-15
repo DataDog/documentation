@@ -169,7 +169,7 @@ A Winston Datadog [transport][62].
 
 If you've written a Datadog library and would like to add it to this page, send an email to [opensource@datadoghq.com][65].
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/
+[1]: /metrics/dogstatsd_metrics_submission/
 [2]: /tracing/
 [3]: /serverless/
 [4]: /api/
@@ -214,7 +214,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [43]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [44]: https://github.com/brigade/logstash-output-dogstatsd
 [45]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
-[46]: /developers/metrics/custom_metrics/
+[46]: /metrics/custom_metrics/
 [47]: https://github.com/simplifi/ngx_lua_datadog
 [48]: https://github.com/dailymotion/lua-resty-dogstatsd
 [49]: http://www.mediba.jp

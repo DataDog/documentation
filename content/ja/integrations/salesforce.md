@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: セールスフォース・ドットコム
-doc_link: 'https://docs.datadoghq.com/integrations/salesforce/'
+doc_link: https://docs.datadoghq.com/integrations/salesforce/
 draft: false
 git_integration_title: salesforce
 has_logo: true

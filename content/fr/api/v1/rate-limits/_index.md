@@ -29,7 +29,7 @@ Quelques précisions concernant la politique de limitation de débit des API :
 
 [1]: /fr/help/
 [2]: /fr/api/v1/metrics/
-[3]: /fr/developers/metrics/custom_metrics/
+[3]: /fr/metrics/custom_metrics/
 [4]: /fr/api/v1/metrics/#query-timeseries-points
 [5]: /fr/api/v1/logs/#get-a-list-of-logs
 [6]: /fr/api/v1/snapshots/

@@ -53,7 +53,7 @@ Datadog では、APM サービス詳細画面にこれらのメトリクスを�
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
-[3]: /ja/developers/metrics/dogstatsd_metrics_submission/#setup
+[3]: /ja/metrics/dogstatsd_metrics_submission/#setup
 [4]: /ja/agent/docker/#dogstatsd-custom-metrics
 [5]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [6]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task

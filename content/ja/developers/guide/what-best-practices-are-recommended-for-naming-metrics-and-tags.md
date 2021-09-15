@@ -2,7 +2,7 @@
 title: メトリクスやタグの命名で推奨されるベストプラクティス
 kind: faq
 further_reading:
-  - link: /developers/metrics/
+  - link: /metrics/
     tag: Documentation
     text: Datadog メトリクスの詳細
   - link: /getting_started/tagging/

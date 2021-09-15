@@ -5,10 +5,10 @@ aliases:
   - /ja/guides/metrics/
   - /ja/metrictypes/
   - /ja/units/
-  - /ja/developers/metrics/datagram_shell
-  - /ja/developers/metrics/custom_metrics/
+  - /ja/metrics/datagram_shell
+  - /ja/metrics/custom_metrics/
   - /ja/getting_started/custom_metrics
-  - /ja/developers/metrics/
+  - /ja/metrics/
 further_reading:
   - link: /developers/dogstatsd/
     tag: ドキュメント
@@ -53,9 +53,9 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 ## カスタムメトリクスの送信
 
 {{< whatsnext desc="メトリクスを Datadog に送信する方法は複数あります。">}}
-    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}カスタム Agent チェック{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/metrics/agent_metrics_submission" >}}カスタム Agent チェック{{< /nextlink >}}
+    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
@@ -75,13 +75,13 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 
 [1]: /ja/integrations/
 [2]: /ja/account_management/billing/custom_metrics/#standard-integrations
-[3]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[4]: /ja/developers/metrics/agent_metrics_submission/
+[3]: /ja/metrics/dogstatsd_metrics_submission/
+[4]: /ja/metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /ja/account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /ja/metrics
-[8]: /ja/developers/metrics/types/
-[9]: /ja/developers/metrics/types/?tab=rate#metric-types
-[10]: /ja/developers/metrics/types/?tab=count#metric-types
+[8]: /ja/metrics/types/
+[9]: /ja/metrics/types/?tab=rate#metric-types
+[10]: /ja/metrics/types/?tab=count#metric-types
 [11]: /ja/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
 [12]: /ja/developers/community/libraries/

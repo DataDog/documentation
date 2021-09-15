@@ -114,7 +114,7 @@ When an anomaly is detected, an alert will be sent to all who are tagged. This a
 
 In this guide, you learned how to use Logging without Limits™ to:
 
-1. [Identify your most logging service status](#1-identify-your-most-logging-service-status)
+1. [Identify your most logging service status](#1-identify-your-most-logged-service-status)
 2. [Identify high volume logging patterns](#2-identify-high-volume-logging-patterns)
 3. [Create a log pattern exclusion filter](#3-create-a-log-pattern-exclusion-filter)
 4. [Generate metrics to track excluded logs](#4-generate-metrics-to-track-excluded-logs)
@@ -133,7 +133,7 @@ To learn more about Logging Without Limits™ and how to better utilize features
 [4]: https://app.datadoghq.com/logs/patterns
 [5]: /logs/live_tail/
 [6]: /logs/archives/
-[7]: /developers/metrics/
+[7]: /metrics/
 [8]: /logs/logs_to_metrics/
 [9]: /monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

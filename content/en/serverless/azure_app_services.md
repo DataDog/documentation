@@ -170,5 +170,5 @@ d. Still need help? Contact [Datadog support][18].
 [14]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
 [15]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [16]: /developers/dogstatsd/?tab=net#code
-[17]: /developers/metrics/
+[17]: /metrics/
 [18]: /help

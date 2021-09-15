@@ -11,7 +11,7 @@ further_reading:
     - link: 'tracing/setup/dotnet-framework'
       tag: 'Documentation'
       text: 'Instrument Your Application'
-    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
@@ -53,6 +53,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
 | ADO.NET                         | built-in                                                                                  | `AdoNet`             |
+| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |

@@ -119,7 +119,7 @@ Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Lo
 
 `{{< region-param key="http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
-Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][7].
+Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][12].
 
 `{{< region-param key="web_integrations_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
@@ -238,7 +238,7 @@ A TCP endpoint is not supported for this region.
 
 **Notes**:
 
-* For optimal use, Datadog recommends a log event should not exceed 25K bytes in size. When using the Datadog Agent, log events greater than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted.
+* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256KB.
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted up to 18h in the past and 2h in the future.
@@ -292,3 +292,4 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [9]: /logs/log_configuration/attributes_naming_convention
 [10]: /logs/log_configuration/attributes_naming_convention/#source-code
 [11]: /logs/explore/
+[12]: /api/v1/logs/#send-logs

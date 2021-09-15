@@ -62,12 +62,12 @@ Agent フォワーダーは、メトリクスを HTTPS 経由で Datadog に送�
 
 v6 の DogStatsD は、[Etsy の StatsD][5] メトリクス集計デーモンの Go 言語実装です。UDP または Unix ソケット経由で任意のメトリクスを受信してロールアップするために使用され、構成要素の一部としてカスタムコードを組み込んでもレイテンシーが発生しません。DogStatsD についての詳細は[こちら][6]でご確認いただけます。
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/#metrics
+[1]: /ja/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /ja/tracing/guide/terminology/
 [3]: /ja/agent/guide/network/#open-ports
 [4]: /ja/developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[6]: /ja/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -104,7 +104,7 @@ minfds = 100 # ハードウェア制限
 ```
 
 [1]: /ja/integrations/
-[2]: /ja/developers/metrics/custom_metrics/
+[2]: /ja/metrics/custom_metrics/
 [3]: /ja/agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /ja/agent/proxy/?tab=agentv5
 [5]: /ja/agent/faq/network/

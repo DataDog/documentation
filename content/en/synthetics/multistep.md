@@ -149,7 +149,7 @@ To parse your variable:
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][11].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][11], [JSONPath][10], or [XPath][18].
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created, this variable can be used in the following steps of your Multistep API test.
 

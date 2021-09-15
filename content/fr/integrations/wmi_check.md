@@ -171,7 +171,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][14].
 [7]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx
 [8]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
 [9]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
-[10]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[10]: https://docs.datadoghq.com/fr/metrics/custom_metrics/
 [11]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 [12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [13]: https://github.com/DataDog/integrations-core/blob/master/wmi_check/metadata.csv

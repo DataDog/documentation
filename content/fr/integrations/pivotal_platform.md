@@ -429,7 +429,7 @@ Les métriques disponibles peuvent varier en fonction de la version de PCF et du
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: /fr/integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[5]: /fr/metrics/dogstatsd_metrics_submission/
 [6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [7]: https://github.com/cloudfoundry/multi-buildpack
 [8]: https://github.com/cloudfoundry/multi-buildpack#usage

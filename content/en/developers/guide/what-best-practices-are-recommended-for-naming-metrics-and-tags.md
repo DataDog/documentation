@@ -2,7 +2,7 @@
 title: What best practices are recommended for naming metrics and tags?
 kind: faq
 further_reading:
-- link: "/developers/metrics/"
+- link: "/metrics/"
   tag: "Documentation"
   text: "Learn more about Datadog metrics"
 - link: "/getting_started/tagging/"

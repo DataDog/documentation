@@ -155,5 +155,5 @@ Pour commencer à résoudre les éventuels problèmes concernant votre applicati
 [13]: /fr/logs/log_collection/csharp/?tab=serilog#agentless-logging
 [14]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [15]: /fr/developers/dogstatsd/?tab=net#code
-[16]: /fr/developers/metrics/
+[16]: /fr/metrics/
 [17]: /fr/help

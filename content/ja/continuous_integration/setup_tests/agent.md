@@ -29,7 +29,7 @@ Kubernetes エグゼキューターを使用している場合、Datadog は [Ad
 
 基底のワーカーノードにアクセスできない SaaS CI プロバイダーを使用している場合は、コンテナ内の Datadog Agent をビルドサービスとして実行します。このメソッドは、[各ワーカーノードへの Datadog Agent のインストール](#installing-the-agent-on-each-ci-worker-node)というオプションがない場合に、コンテナベースのエグゼキューターを使用するオンプレミス CI プロバイダーでも使用できます。
 
-単純な結果フォワーダーとして機能するコンテナとして Datadog Agent を実行するには、Docker イメージ `datadog/agent:latest` と次の環境変数を使用します。
+単純な結果フォワーダーとして機能するコンテナとして Datadog Agent を実行するには、Docker イメージ `gcr.io/datadoghq/agent:latest` と次の環境変数を使用します。
 
 `DD_API_KEY` (必須)
 : テスト結果のアップロードに使用される [Datadog API キー][4]。<br/>
@@ -74,7 +74,7 @@ variables:
 resources:
   containers:
     - container: dd_agent
-      image: datadog/agent:latest
+      image: gcr.io/datadoghq/agent:latest
       ports:
         - 8126:8126
       env:
@@ -98,7 +98,7 @@ variables:
 resources:
   containers:
     - container: dd_agent
-      image: datadog/agent:latest
+      image: gcr.io/datadoghq/agent:latest
       ports:
         - 8126:8126
       env:
@@ -138,7 +138,7 @@ variables:
 
 test:
   services:
-    - name: datadog/agent:latest
+    - name: gcr.io/datadoghq/agent:latest
   script:
     - make test
 {{< /code-block >}}
@@ -154,7 +154,7 @@ variables:
 
 test:
   services:
-    - name: datadog/agent:latest
+    - name: gcr.io/datadoghq/agent:latest
   script:
     - make test
 {{< /code-block >}}
@@ -177,7 +177,7 @@ jobs:
   test:
     services:
       datadog-agent:
-        image: datadog/agent:latest
+        image: gcr.io/datadoghq/agent:latest
         ports:
           - 8126:8126
         env:
@@ -194,7 +194,7 @@ jobs:
   test:
     services:
       datadog-agent:
-        image: datadog/agent:latest
+        image: gcr.io/datadoghq/agent:latest
         ports:
           - 8126:8126
         env:
@@ -287,7 +287,7 @@ workflows:
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -306,7 +306,7 @@ services:
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -329,7 +329,7 @@ services:
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -345,7 +345,7 @@ services:
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
