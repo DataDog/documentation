@@ -111,7 +111,7 @@ further_reading:
 
 ここでは、Logging without Limits™ を以下に適用する方法について説明しました：
 
-1. [最多ログのサービスステータスを特定](#1-identify-your-most-logging-service-status)
+1. [最多ログのサービスステータスを特定](#1-identify-your-most-logged-service-status)
 2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
 3. [除外フィルターログパターンを作成](#3-create-a-log-pattern-exclusion-filter)
 4. [メトリクスを生成し除外されたログを追跡](#4-generate-metrics-to-track-excluded-logs)
