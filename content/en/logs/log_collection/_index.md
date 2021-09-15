@@ -119,7 +119,7 @@ Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Lo
 
 `{{< region-param key="http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
-Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][7].
+Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][12].
 
 `{{< region-param key="web_integrations_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
@@ -292,3 +292,4 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [9]: /logs/log_configuration/attributes_naming_convention
 [10]: /logs/log_configuration/attributes_naming_convention/#source-code
 [11]: /logs/explore/
+[12]: /api/v1/logs/#send-logs
