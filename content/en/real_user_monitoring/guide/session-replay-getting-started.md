@@ -91,10 +91,10 @@ With the inheritance rules above, you can tag the privacy level of an HTML eleme
 
 #### Privacy levels
 
--   `allow`: Unmasks everything, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
--   `mask-user-input`: Unmasks HTML content, but blocks most form fields such as inputs, text areas, and checkbox values. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
--   `mask`: Masks all HTML text, form values, images, and links.
--   `hidden`: Blocks Session Replay. Blocking Session Replay suppresses the recording of all JavaScript events and records only the dimensions of the element. All child elements are untracked. By default, `hidden` cannot be overridden by a child element.
+-   `allow`: Records everything unmasked, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes.
+-   `mask-user-input`: Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
+-   `mask`: Masks all HTML text, user input, images, and links.
+-   `hidden`: Skips recording the element completely. By default, `hidden` cannot be overridden in a child node.
 
 When tagging your web application, start by tagging `mask` at the top of your HTML document. Then, ask your team to consider which pages, features, or components need to be unmasked (tagged with `allow`).
 
