@@ -87,7 +87,7 @@ See [Logs Search Syntax][1] for more details.
 
 ### Facets
 
-Datadog indexes event attributes as facets or measures that are accessible from the Event Explorer facet side-panel, analytics and monitors.
+Datadog indexes event attributes as facets or measures that are accessible from the Event Explorer facet side-panel, analytics, and monitors.
 
 A facet displays the distinct members of an attribute or a tag and provides basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 

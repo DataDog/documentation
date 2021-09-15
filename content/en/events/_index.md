@@ -76,15 +76,15 @@ We are working to support more processors types. For more details, [contact Supp
 
 
 [1]: http://app.datadoghq.com/event/explorer
-[2]: /agent/kubernetes/
-[3]: /agent/docker/
-[4]: /integrations/jenkins/
-[5]: /agent/basic_agent_usage/chef/
-[6]: /agent/basic_agent_usage/puppet/
-[7]: /agent/amazon_ecs/
-[8]: /integrations/amazon_auto_scaling
+[2]: /agent/kubernetes/#event-collection
+[3]: /agent/docker/#events
+[4]: /integrations/jenkins/#events
+[5]: /integrations/chef/#report-handler
+[6]: /integrations/puppet/#events
+[7]: /integrations/amazon_ecs/#events
+[8]: /integrations/amazon_auto_scaling/#events
 [9]: /integrations/sentry/
-[10]: /integrations/nagios/
+[10]: /integrations/nagios/#events
 [11]: /api/latest/events/#post-an-event
 [12]: /events/guides/agent/
 [13]: /events/guides/dogstatsd/
