@@ -19,16 +19,15 @@ further_reading:
 
 ## Overview
 
-TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. 
+TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 TCP tests can run from [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those [default roles][3].
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][3].
 
-If you have access to the [custom role feature][4], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][4], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Configuration
 

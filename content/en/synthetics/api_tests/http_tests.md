@@ -21,15 +21,15 @@ further_reading:
 ---
 ## Overview
 
-HTTP tests allow you to send HTTP requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, status code, and header or body content.
+HTTP tests allow you to send HTTP requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content.
 
-HTTP tests can run from [managed][1] and [private locations][2] from outside or inside your network depending on your preference. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those [default roles][4].
+By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][4].
 
-If you have access to the [custom role feature][5], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][5], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Configuration
 

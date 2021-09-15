@@ -28,9 +28,9 @@ DNS tests can run from [managed][1] and [private locations][2], allowing you to 
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those [default roles][3].
+By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][3].
 
-If you have access to the [custom role feature][4], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][4], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Configuration
 

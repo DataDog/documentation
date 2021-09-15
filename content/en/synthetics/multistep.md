@@ -37,20 +37,20 @@ Multistep API tests can run from Datadog [managed locations][4] and [private loc
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those [default roles][7].
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][7].
 
-If you have access to the [custom role feature][8], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][8], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Configuration
 
 ### Name and tag your test
 
 1. Name your Multistep API test.
-2. Add `env` and other tags to your Multistep API test. Then, use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+2. Add `env` and other tags to your Multistep API test. You can use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 
 ### Select locations
 
-Select the run **Locations** for your Multistep API test. Multistep API tests can run from both [managed][4] and [private locations][5] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** for your Multistep API test. Multistep API tests can run from both [managed][4] and [private locations][5] depending on your preference for running the test from outside or inside your network.
 
 ### Define requests
 

@@ -26,9 +26,9 @@ ICMP tests can run from [managed][1] and [private locations][2] depending on whe
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those [default roles][4].
+By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][4].
 
-If you have access to the [custom role feature][5], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][5], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Configuration
 

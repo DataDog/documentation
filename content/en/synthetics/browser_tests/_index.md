@@ -31,9 +31,9 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][1] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those [default roles][1].
+By default, only users with the [Datadog Admin and Datadog Standard roles][1] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][1].
 
-If you have access to the [custom role feature][2], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][2], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Test configuration
 
