@@ -19,7 +19,7 @@ further_reading:
     - link: 'tracing/visualization/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
-    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
       tag: 'GitHub'
       text: '.NET code samples'
 ---

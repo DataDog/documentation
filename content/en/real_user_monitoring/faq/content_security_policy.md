@@ -9,95 +9,48 @@ further_reading:
 
 If you are using [Content Security Policy (CSP)][1] on your websites, add the following URLs to your existing directives depending on how you setup your Real User Monitoring or browser log collection:
 
+## Intake URLs
 
-## CDN async setup
+Depending on the `site` option used to initialize [Real User Monitoring][2] or [browser logs collection][3], add the appropriate `connect-src` entry:
 
-If you have the CDN async setup for [Real User Monitoring][2] or [browser log collection][3]:
-
-1. Add the `connect-src` depending of your Datadog Site:
-
-    {{< tabs >}}
-    {{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```txt
-connect-src https://*.logs.datadoghq.com
+connect-src https://*.logs.datadoghq.com https://*.browser-intake-datadoghq.com
 ```
 
-    {{% /tab %}}
-    {{% tab "EU" %}}
+{{< /site-region >}}
+
+
+{{< site-region region="eu" >}}
 
 ```txt
-connect-src https://*.logs.datadoghq.eu
+connect-src https://*.logs.datadoghq.eu https://*.browser-intake-datadoghq.eu
 ```
 
-    {{% /tab %}}
-    {{< /tabs >}}
+{{< /site-region >}}
 
-2. Then add the `script-src` directive:
 
-    ```txt
-    script-src https://www.datadoghq-browser-agent.com
-    ```
+{{< site-region region="us3,gov" >}}
 
-## CDN sync setup
+This feature is unavailable for this site.
 
-If you have the CDN sync setup for [Real User Monitoring][4] or [browser log collection][5]:
+{{< /site-region >}}
 
-1. Add the `connect-src` depending of your Datadog Site:
+## CDN bundle URL
 
-    {{< tabs >}}
-    {{% tab "US" %}}
+If you are using the CDN async or CDN sync setup for [Real User Monitoring][4] or [browser log collection][5], you should also add the following `script-src` entry:
 
 ```txt
-connect-src https://*.logs.datadoghq.com
+script-src https://www.datadoghq-browser-agent.com
 ```
-
-    {{% /tab %}}
-    {{% tab "EU" %}}
-
-```txt
-connect-src https://*.logs.datadoghq.eu
-```
-
-    {{% /tab %}}
-    {{< /tabs >}}
-
-2. Then add the `script-src` directive:
-
-    ```txt
-    script-src https://www.datadoghq-browser-agent.com
-    ```
-
-## NPM setup
-
-If you have the NPM setup for [Real User Monitoring][6] or [browser log collection][7], add only the `connect-src` directive:
-
-{{< tabs >}}
-{{% tab "US" %}}
-
-```txt
-connect-src https://*.logs.datadoghq.com
-```
-
-{{% /tab %}}
-{{% tab "EU" %}}
-
-```txt
-connect-src https://*.logs.datadoghq.eu
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-[2]: /real_user_monitoring/browser/#cdn-async
-[3]: /logs/log_collection/javascript/#cdn-async
-[4]: /real_user_monitoring/browser/#cdn-sync
-[5]: /logs/log_collection/javascript/#cdn-sync
-[6]: /real_user_monitoring/browser/#npm
-[7]: /logs/log_collection/javascript/#npm-setup
+[2]: /real_user_monitoring/browser/#initialization-parameters
+[3]: /logs/log_collection/javascript/#initialization-parameters
+[4]: /real_user_monitoring/browser/#setup
+[5]: /logs/log_collection/javascript/#setup

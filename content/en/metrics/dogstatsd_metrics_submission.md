@@ -6,12 +6,12 @@ aliases:
   - /developers/faq/reduce-submission-rate
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /developers/faq/dog-statsd-sample-rate-parameter-explained
-  - /developers/metrics/dogstatsd_metrics_submission/
+  - /metrics/dogstatsd_metrics_submission/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "/developers/metrics/types/"
+- link: "/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -204,11 +204,11 @@ while (TRUE) {
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
 Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To get raw counts within Datadog, apply a function to your series such as the [Cumulative Sum][3] or [Integral][4] function:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
 ### GAUGE
 
@@ -367,7 +367,7 @@ while (TRUE) {
 
 After running the code above, your metric data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
@@ -503,7 +503,7 @@ while (TRUE) {
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
@@ -672,7 +672,7 @@ The above instrumentation produces the following metrics:
 
 After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### TIMER
 
@@ -777,7 +777,7 @@ As DogStatsD receives the timer metric data, it calculates the statistical distr
 
 DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or `HISTOGRAM` metric type, you are sending the same data to Datadog. After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
+{{< img src="metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
@@ -1057,11 +1057,11 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd/
-[2]: /developers/metrics/types/?tab=count#definition
+[2]: /metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
-[5]: /developers/metrics/types/?tab=gauge#definition
-[6]: /developers/metrics/types/?tab=histogram#definition
+[5]: /metrics/types/?tab=gauge#definition
+[6]: /metrics/types/?tab=histogram#definition
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
-[9]: /developers/metrics/types/?tab=distribution#definition
+[9]: /metrics/types/?tab=distribution#definition

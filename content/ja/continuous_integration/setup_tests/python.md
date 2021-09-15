@@ -11,60 +11,58 @@ further_reading:
 ---
 ## 互換性
 
-サポートされているテストフレームワーク:
-* Pytest 3.0+
+サポートされている Python インタープリター:
+* Python >= 2.7 および >= 3.5
 
-サポートされている CI プロバイダー:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+サポートされているテストフレームワーク:
+* pytest >= 3.0.0
+  * Python 2 を使用する場合は pytest < 5
 
 ## 前提条件
 
 [Datadog Agent をインストールして、テストデータを収集します][1]。
 
-## トレースのインストール
+## Python トレーサーのインストール
 
 次のコマンドを実行して、Python トレーサーをインストールします。
 
 {{< code-block lang="bash" >}}
-pip install "ddtrace>=0.50.0rc4"
+pip install -U ddtrace
 {{< /code-block >}}
 
 詳細については、[Python トレーサーのインストールドキュメント][2]を参照してください。
 
-## pytest テストのインスツルメント
+## テストのインスツルメンテーション
 
-`pytest` テストのインスツルメンテーションを有効にするには、`pytest` の実行時に `--ddtrace` オプションを追加します。
+`pytest` テストのインスツルメンテーションを有効にするには、`pytest` の実行時に `--ddtrace` オプションを追加し、`DD_SERVICE` 環境変数でテスト対象のサービスまたはライブラリの名前を、`DD_ENV` 環境変数でテストが実行されている環境を指定します (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`)。
 
 {{< code-block lang="bash" >}}
-pytest --ddtrace
+DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 {{< /code-block >}}
 
-`pytest` の構成に使用されるファイル (`pytest.ini` や `setup.cfg` など) に次のコンフィギュレーションを追加することもできます。
+## コンフィギュレーション設定
 
-{{< code-block lang="ini" >}}
-[pytest]
-ddtrace = 1
-{{< /code-block >}}
+以下は、コードか、または環境変数を使用した、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
 
-## コンフィギュレーションパラメーター
+`ddtrace.config.service`
+: テスト中のサービスまたはライブラリの名前。<br/>
+**環境変数**: `DD_SERVICE`<br/>
+**デフォルト**: `pytest`<br/>
+**例**: `my-python-app`
 
-`ddtrace.config.pytest["service"]`
-: pytest トレースに対してデフォルトで報告されるサービス名。<br/>
-**環境変数**: `DD_PYTEST_SERVICE`<br/>
-**デフォルト**: `"pytest"`
+`ddtrace.config.env`
+: テストが実行されている環境の名前。<br/>
+**環境変数**: `DD_ENV`<br/>
+**デフォルト**: `none`<br/>
+**例**: `local`、`ci`
 
-`ddtrace.config.pytest["operation_name"]`
-: pytest トレースに対してデフォルトで報告される操作名。<br/>
-**環境変数**: `DD_PYTEST_OPERATION_NAME`<br/>
-**デフォルト**: `"pytest.test"`
+次の環境変数を使用して、Datadog Agent の場所を構成できます。
+
+`DD_TRACE_AGENT_URL`
+: `http://hostname:port` の形式のトレース収集用の Datadog Agent URL。<br/>
+**デフォルト**: `http://localhost:8126`
+
+他のすべての [Datadog トレーサーコンフィギュレーション][3]オプションも使用できます。
 
 ## その他の参考資料
 
@@ -72,3 +70,4 @@ ddtrace = 1
 
 [1]: /ja/continuous_integration/setup_tests/agent/
 [2]: /ja/tracing/setup_overview/setup/python/
+[3]: /ja/tracing/setup_overview/setup/python/?tab=containers#configuration

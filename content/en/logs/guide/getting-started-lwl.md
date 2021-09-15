@@ -133,7 +133,7 @@ To learn more about Logging Without Limits™ and how to better utilize features
 [4]: https://app.datadoghq.com/logs/patterns
 [5]: /logs/live_tail/
 [6]: /logs/archives/
-[7]: /developers/metrics/
+[7]: /metrics/
 [8]: /logs/logs_to_metrics/
 [9]: /monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

@@ -32,7 +32,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
     tag: ブログ
     text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
-  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
     tag: GitHub
     text: カスタムインスツルメンテーションの例
   - link: 'https://github.com/DataDog/dd-trace-dotnet'

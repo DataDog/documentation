@@ -126,7 +126,7 @@ Windows Service チェックには、イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/windows_service/datadog_checks/windows_service/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
 [6]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/windows_service/assets/service_checks.json

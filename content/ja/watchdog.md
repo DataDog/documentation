@@ -14,7 +14,7 @@ further_reading:
   - link: /tracing/
     tag: Documentation
     text: トレースの収集
-  - link: 'https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/'
+  - link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
     tag: ブログ
     text: Watchdog RCA による自動化された根本原因分析
 ---

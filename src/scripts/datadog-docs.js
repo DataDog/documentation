@@ -195,6 +195,8 @@ function getPathElement() {
     if (
         `${replaceURL(domain)}/${replacePath(path)}`.includes(
             `${replaceURL(domain)}/integrations`
+        ) && !`${replaceURL(domain)}/${replacePath(path)}`.includes(
+            `${replaceURL(domain)}/integrations/guide`
         )
     ) {
         aPath = document.querySelector(

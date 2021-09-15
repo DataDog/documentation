@@ -85,7 +85,7 @@ The commands related to log collection are:
 : Adds a log configuration that enables log collection for all containers.
 
 `-e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true`            
-: Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Check the [dedicated section](#docker-containers-log-collection-from-file) for additional details.
+: Adds a log configuration that enables Docker container log collection from file. Available in the Datadog Agent 7.27.0/6.27.0+. Check the [dedicated section](#docker-container-log-collection-from-file) for additional details.
 
 `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
 : To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.

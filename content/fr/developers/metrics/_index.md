@@ -6,8 +6,8 @@ aliases:
   - /fr/guides/metrics/
   - /fr/metrictypes/
   - /fr/units/
-  - /fr/developers/metrics/datagram_shell
-  - /fr/developers/metrics/custom_metrics/
+  - /fr/metrics/datagram_shell
+  - /fr/metrics/custom_metrics/
   - /fr/getting_started/custom_metrics
 further_reading:
   - link: /developers/dogstatsd/
@@ -53,9 +53,9 @@ La convention de nommage suivante s'applique aux métriques custom :
 ## Envoi de métriques custom
 
 {{< whatsnext desc="Il existe plusieurs façons d'envoyer des métriques à Datadog :">}}
-    {{< nextlink href="/developers/metrics/agent_metrics_submission" >}}Check custom d'Agent{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
+    {{< nextlink href="/metrics/agent_metrics_submission" >}}Check custom d'Agent{{< /nextlink >}}
+    {{< nextlink href="/metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}API HTTP de Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -71,13 +71,13 @@ Vous pouvez également utiliser l'une des [bibliothèques client de Datadog et s
 
 [1]: /fr/integrations/
 [2]: /fr/account_management/billing/custom_metrics/#standard-integrations
-[3]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[4]: /fr/developers/metrics/agent_metrics_submission/
+[3]: /fr/metrics/dogstatsd_metrics_submission/
+[4]: /fr/metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /fr/account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /fr/graphing/metrics/introduction/
-[8]: /fr/developers/metrics/types/
-[9]: /fr/developers/metrics/types/?tab=rate#metric-types
-[10]: /fr/developers/metrics/types/?tab=count#metric-types
+[8]: /fr/metrics/types/
+[9]: /fr/metrics/types/?tab=rate#metric-types
+[10]: /fr/metrics/types/?tab=count#metric-types
 [11]: /fr/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
 [12]: /fr/developers/community/libraries/

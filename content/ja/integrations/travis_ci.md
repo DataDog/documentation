@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
-doc_link: 'https://docs.datadoghq.com/integrations/travis_ci/'
+doc_link: https://docs.datadoghq.com/integrations/travis_ci/
 draft: false
 git_integration_title: travis_ci
 has_logo: true

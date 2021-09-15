@@ -22,7 +22,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/vault/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_name: Vault
 draft: false
 git_integration_title: vault
