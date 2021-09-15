@@ -17,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/postfix/README.md'
 display_name: Postfix
 draft: false
 git_integration_title: postfix
@@ -81,9 +81,8 @@ Vous pouvez également configurer l'agent de façon à le faire utiliser une com
      postfix_user: postfix
 
    instances:
-     ## @param directory - string - optional - default: /var/spool/postfix
-     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more 
-     ## information see https://docs.datadoghq.com/integrations/postfix/#using-sudo.
+     ## @param directory - string - required
+     ## Path to the postfix directory.
      #
      - directory: /var/spool/postfix
 

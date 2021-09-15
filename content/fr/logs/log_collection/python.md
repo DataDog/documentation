@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /fr/logs/languages/python
 further_reading:
-  - link: https://www.datadoghq.com/blog/python-logging-best-practices/
+  - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
     tag: Blog
-    text: Comment recueillir, personnaliser et centraliser des logs Python
-  - link: /logs/log_configuration/processors
+    text: 'Comment recueillir, personnaliser et centraliser des logs Python'
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/explorer/

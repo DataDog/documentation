@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/disk/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/disk/README.md
 display_name: Disk
 draft: false
 git_integration_title: disk
@@ -25,6 +25,8 @@ maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: system.
 metric_to_check: system.disk.free
+monitors:
+  disk-space-forecast: assets/monitors/disk_monitor.json
 name: disk
 public_title: Datadog-Disk インテグレーション
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。

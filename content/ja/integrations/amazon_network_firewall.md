@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Network Firewall を監視します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_network_firewall/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_network_firewall/'
 draft: false
 git_integration_title: amazon_network_firewall
 has_logo: true

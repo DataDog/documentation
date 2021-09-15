@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud Router のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_router/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_router/
 draft: false
 git_integration_title: google_cloud_router
 has_logo: true

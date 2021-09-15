@@ -5,7 +5,7 @@ further_reading:
   - link: /monitors/incident_management/datadog_clipboard
     tag: ドキュメント
     text: Datadog クリップボード
-  - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
+  - link: https://www.youtube.com/watch?v=QIambwILy_M
     tag: ビデオ
     text: Datadog Incident Management について
   - link: /monitors/incident_management
@@ -17,7 +17,7 @@ further_reading:
   - link: /monitors/incident_management/notification_rules
     tag: ドキュメント
     text: 通知ルール
-  - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
+  - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
     tag: ドキュメント
     text: インシデントと Slack のインテグレーション
 ---
@@ -29,7 +29,7 @@ further_reading:
 
 Datadog Incident Management は、メトリクス、トレース、またはログで発見した問題の追跡とコミュニケーションに役立ちます。
 
-このガイドでは、Datadog アプリを使用してインシデントを宣言する、調査と修復の進行に合わせてインシデントを更新する、およびインシデントが解決したときに事後分析を生成する方法について説明します。この例では、[Slack インテグレーション][1]が有効になっていることを前提としています。
+このガイドでは、Datadog サイトを使用してインシデントを宣言する、調査と修復の進行に合わせてインシデントを更新する、およびインシデントが解決したときに事後分析を生成する方法について説明します。この例では、[Slack インテグレーション][1]が有効になっていることを前提としています。
 
 ## インシデント管理のプロセス: 問題の検知から解決まで
 
@@ -72,7 +72,7 @@ Datadog Incident Management は、メトリクス、トレース、またはロ�
 | タイトル                    | インシデントのタイトルは、チームで使用している命名規則に従って設定します。これは実際のインシデントではないため、テストインシデントであることが明確になるよう `TEST` という言葉を含めます。タイトルの例: `[TEST] My incident test`                                                                      |
 | シグナル                  | シグナルとは、インシデントを宣言する理由のことです。グラフやログ、その他のキービジュアルなどがこれに該当します。選択したグラフとモニターはすでに含まれていますが、その他のシグナルを追加することができます。例えば、このガイドの URL をコピーして、**Ctrl**/**Cmd** + **V** で追加します。                      |
 | インシデントコマンダー       | 今回のテストではあなたに割り当てられたままにしてください。実際のインシデントが発生した場合はインシデント調査のリーダーに割り当てられます。インシデントの進行状況に合わせてインシデントコマンダーを更新することができます。                                                                                 |
-| その他の通知 | 今回のテストでは、他のメンバーや他のサービスに警告を出さないよう空白にしておきます。 実際のインシデントでは、調査や修復のために通知すべき人やサービスを追加します。これらの通知は Slack や PagerDuty にも送信できます。 |
+| その他の通知 | 今回のテストでは、他のメンバーや他のサービスに警告を出さないよう空白にしておきます。実際のインシデントでは、調査や修復のために通知すべき人やサービスを追加します。これらの通知は Slack や PagerDuty にも送信できます。 |
 
 9. **Declare Incident** をクリックしてインシデントを作成します。
 
@@ -198,7 +198,7 @@ _Timeline_ には、インシデントのフィールドや情報の追加・変
 
 #### コミュニケーション
 
-**シナリオ:** 問題が軽減され、チームは状況を監視しています。インシデントのステータスは安定しました。
+**シナリオ:** 問題が軽減され、チームは状況を監視しています。インシデントのステータスは安定しています。
 
 _Communications_ セクションで、インシデントのステータスを更新する通知を送信することができます。
 

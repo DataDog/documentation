@@ -18,56 +18,41 @@ Datadog Lambda 拡張機能は以下を担当します。
 - Datadog Lambda ライブラリから Datadog へのリアルタイムの[強化された Lambda メトリクス][1]、[カスタムメトリクス][2]、および[トレース][3]のプッシュ。
 - ログの Lambda 関数から Datadog への転送。
 
-Datadog 拡張機能は、カスタムメトリクス、拡張メトリクス、トレース、およびログを[非同期的に][4]送信します。拡張機能を使用した Lambda ログの送信は、すべての Lambda ランタイムでサポートされています。カスタム メトリクス、強化されたメトリクス、およびトレースの送信は、Node.js および Python Lambda ランタイムでサポートされています。
+Datadog 拡張機能は、カスタムメトリクス、拡張メトリクス、トレース、およびログを[非同期的に][4]送信します。拡張機能を使用した Lambda ログの送信は、すべての Lambda ランタイムでサポートされています。カスタム メトリクス、強化されたメトリクス、およびトレースの送信は、Node.js、Python、および Go Lambda ランタイムでサポートされています。
 
-## Datadog Lambda 拡張機能
+## インストール
 
-AWS サーバーレスアプリケーションをインスツルメントするには、[サーバーレスインストール手順][5]を参照してください。
-
-### Lambda レイヤーとして
-
-Datadog Lambda 拡張機能は、独自の Lambda レイヤー ([Datadog Lambda ライブラリ][6]とは別) として配布されます。 
-
-1. Datadog Lambda ライブラリをインストールして、[Python][7] または [Node.js][8] アプリケーションをインスツルメントします。
-
-2. Datadog 拡張機能用 Lambda レイヤーを次の ARN で AWS Lambda 関数に追加します。
-
-    ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
-    ```
-
-    ARN のプレイスホルダーの値を次のように置き換えます。
-    - Replace `<AWS_REGION>` を Lambda 関数と同じ AWS リージョンに置き換えます。例、 `us-east-1`
-    - `<EXTENSION_VERSION>` を使用したい Datadog Lambda 拡張機能のバージョンに置き換えます。最新バージョンは `{{< latest-lambda-layer-version layer="extension" >}} です。
-
-    **注**: このレイヤーは Datadog Lambda ライブラリとは別のものです。Datadog Lambda ライブラリを Lambda レイヤーとしてインストールした場合、
-    関数には 2 つの Lambda レイヤーがアタッチされることになります。
-
-3. 環境変数 `DD_API_KEY` を追加し、[API 管理ページ][10]で Datadog API キーに値を設定します。
-
-4. カスタムメトリクスを送信するには、[サンプルコード][11]を参照します。
-
-### コンテナイメージとして
-
-関数をコンテナイメージとしてデプロイする場合は、関数に Lambda レイヤーを追加することはできません。代わりに、Datadog Lambda ライブラリとDatadog Lambda 拡張機能を、関数イメージに直接インストールする必要があります。
-
-1. [Node.js][8] または [Python][7] のインストール手順に従い、Datadog Lambda ライブラリをインストールします。コンテナイメージとしてデプロイされる機能に特化したインストレーション手順を使用してください。
-
-2. Dockerfile に以下を追加して、Datadog Lambda 拡張機能をコンテナイメージに追加します。
-
-```
-COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
-```
-
-`<TAG>` を特定のバージョン番号 (たとえば `{{< latest-lambda-layer-version layer="python" >}}`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][9]で確認できます。
-
-3. 環境変数 `DD_API_KEY` を追加し、[API 管理ページ][10]で Datadog API キーに値を設定します。
-
-4. カスタムメトリクスを送信するには、[サンプルコード][11]を参照します。
+Datadog Lambda 拡張機能をインストールしてお使いの AWS サーバーレスアプリケーションをインスツルメントする方法については、[サーバーレスインストール手順][5]を参照してください。
 
 ## ログの収集
 
 拡張機能を使用した AWS Lambda ログの Datadog への送信を無効にするには、Lambda 関数で環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定します。
+
+## トレースの収集
+
+拡張機能を使用した AWS Lambda トレースの Datadog への送信を無効にするには、Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します。
+
+## タグ付け
+
+Datadog では、拡張機能を使用する際、Lambda 関数に以下の環境変数を追加してタグを適用することを推奨しています。
+
+- `DD_ENV`: Datadog に `env` タグを設定します。このタグを使って、ステージング環境、開発環境、本番環境を分けることができます。
+- `DD_SERVICE`: Datadog に `service` タグを設定します。関連するLambda 関数を 1 つのサービスにまとめる際に使用します。
+- `DD_VERSION`: Datadog の `version` タグを設定します。[デプロイ追跡][6]を有効にするために使用します。
+- `DD_TAGS`: Datadog のカスタムタグを設定します。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります (例: `layer:api,team:intake`)
+
+Datadog の AWS インテグレーションを有効にしている場合、AWS Lambda 関数に適用された AWS リソースタグは Datadog でも自動的に適用されます。
+
+## オーバーヘッド
+
+Datadog Lambda 拡張機能を初期化する際には、Lambda 関数のコールドスタート (init の実行時間が増加) に多少のオーバーヘッドが発生します。Datadog は Lambda 拡張機能のパフォーマンスを継続的に最適化しているため、常に最新のリリースを使用することをお勧めします。
+
+また、Lambda 関数で報告された実行時間が増加する場合もありますが、これは Datadog Lambda 拡張機能が Datadog API にデータをフラッシュバックする必要があるためです。拡張機能がデータをフラッシュするのにかかった時間は実行時間の一部として報告されますが、この報告は AWS が関数のレスポンスをクライアントに*返した後*に行われます。つまり、実行時間が延びたからといって Lambda 関数が遅くなる訳ではありません。その他の技術的な詳細は、こちらの [AWS についてのブログ記事][7]をご覧ください。
+
+デフォルトでは、拡張機能は各呼び出しの最後にデータを Datadog に送り返します。これにより、トラフィックの少ないアプリケーション、cron ジョブ、および手動テストからの散発的な呼び出しに対するデータ到着の遅延を回避できます。拡張機能が安定した頻繁な呼び出しパターン (1 分に 1 回以上) を検出すると、複数の呼び出しからデータをバッチ処理し、期限が来た呼び出しの最初に定期的にフラッシュを行います。これは、*関数が頻繁に呼び出されるようになるほど、呼び出しごとの平均実行時間のオーバーヘッドが低くなる*ことを意味します。
+
+Datadog サイトから離れた地域にデプロイされた Lambda 関数の場合、例えば eu-west-1 にデプロイされた Lambda 関数が US1 の Datadog サイトにデータを報告すると、ネットワークレイテンシーの影響で実行時間のオーバーヘッドが高くなることがあります。Lambda 関数で環境変数 `DD_SERVERLESS_FLUSH_STRATEGY` と値 `periodically,30000` を設定して、デフォルトの 10 秒ごとではなく 30 秒ごとにデータをフラッシュするようにすると、通常は呼び出しごとの実行時間の*平均*オーバーヘッドが大幅に低くなります。
+
 
 ## その他の参考資料
 
@@ -78,9 +63,5 @@ COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/
 [3]: /ja/serverless/distributed_tracing
 [4]: /ja/serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [5]: /ja/serverless/installation
-[6]: /ja/serverless/datadog_lambda_library
-[7]: /ja/serverless/installation/python
-[8]: /ja/serverless/installation/nodejs
-[9]: https://gallery.ecr.aws/datadog/lambda-extension
-[10]: https://app.datadoghq.com/account/settings#api
-[11]: /ja/serverless/custom_metrics#custom-metrics-sample-code
+[6]: /ja/tracing/deployment_tracking/
+[7]: https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/

@@ -18,86 +18,90 @@ nav_sections:
       - navtiles:
           - title: エージェント
             link: agent/
-            icon: agent-fill
+            icon: agent.svg
             desc: Datadog のエージェントをインストールして構成し、データを収集、送信
           - title: インテグレーション
             link: integrations/
-            icon: integrations
+            icon: integration.svg
             desc: システム、アプリケーション、サービスからデータを収集
           - title: 'ダッシュボード  '
             link: dashboards/
-            icon: dashboard
+            icon: dashboard.svg
             desc: データを可視化して詳細な情報を把握
           - title: インフラストラクチャー
             link: infrastructure/
-            icon: host-map
+            icon: host-map.svg
             desc: ホスト、コンテナ、プロセス、サーバーレス機能を追跡
           - title: メトリクス
             link: metrics/
-            icon: metric
+            icon: metric.svg
             desc: メトリクスを調べてディストリビューションを作成する
           - title: アラート設定
             link: monitors/
-            icon: alert
+            icon: alert.svg
             desc: モニターおよび通知の作成と管理
           - title: APM & Continuous Profiler
             link: tracing/
-            icon: apm
+            icon: trace.svg
             desc: アプリケーションのパフォーマンスを詳しく理解
           - title: ログ管理
             link: logs/
-            icon: log
+            icon: logs.svg
             desc: ログの収集、処理、確認、監視、アーカイブ
           - title: セキュリティプラットフォーム
             link: security_platform/
-            icon: security
+            icon: siem.svg
             desc: アプリケーションとインフラストラクチャー全体の脅威と構成ミスを検出する
           - title: Synthetic モニタリング
             link: synthetics/
-            icon: synthetics
+            icon: synthetics.svg
             desc: アプリケーションの稼働時間確保、局所的な問題の特定、パフォーマンスの追跡
           - title: リアルユーザーモニタリング
             link: real_user_monitoring/
-            icon: rum
+            icon: rum-2.svg
             desc: フロントエンドアプリケーションのパフォーマンスを視覚化して分析します
           - title: ネットワークモニタリング
             link: network_monitoring/
-            icon: network
+            icon: network.svg
             desc: タグ付きオブジェクトを使用してネットワークトラフィックを可視化する
           - title: サーバーレス
             link: serverless/
-            icon: serverless
+            icon: serverless.svg
             desc: サーバレス開発ライフサイクルに対するエンドツーエンドの可視性
           - title: モバイルアプリケーション
             link: mobile/
-            icon: mobile
+            icon: mobile.svg
             desc: Datadog アラートとダッシュボード をモバイル端末で表示
           - title: Watchdog
             link: watchdog/
-            icon: watchdog
+            icon: watchdog.svg
             desc: アプリケーションとインフラストラクチャーメトリクスの傾向を自動的に確認する
           - title: CI の可視性
             link: continuous_integration/
-            icon: ci
+            icon: ci.svg
             desc: テストとパイプラインのパフォーマンスと信頼性を追跡
+          - title: データベース モニタリング
+            link: database_monitoring/
+            icon: dbm.svg
+            desc: データベースおよびクエリのパフォーマンスを深く可視化
   - nav_section:
       - name: コンフィギュレーション
       - navtiles:
           - title: API
             link: api/
-            icon: api
+            icon: code.svg
             desc: Datadog API の使用
           - title: アカウントの管理
             link: account_management/
-            icon: cog
-            desc: アカウント設定の管理
+            icon: cog.svg
+            desc: アカウント設定の制御および請求管理
           - title: セキュリティ
             link: security/
-            icon: security-lock
+            icon: lock.svg
             desc: Datadog のデータ保護方法について
           - title: 開発者
             link: developers/
-            icon: wrench
+            icon: wrench.svg
             desc: Datadog プラットフォームの開発
 popular_searches:
   - title: API ドキュメント

@@ -11,7 +11,7 @@ categories:
   - orchestration
 doc_link: /integrations/kubernetes_state_core/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_state_core.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_state_core.md
 has_logo: true
 integration_title: Kubernetes State Metrics Core
 is_public: true
@@ -171,7 +171,7 @@ datadog:
 : ネームスペースの数。タグ: `phase`。
 
 `kubernetes_state.node.count`
-: クラスターノードに関する情報。タグ: `node` `kernel_version` `os_image` `container_runtime_version` `kubelet_version` `kubeproxy_version` `provider_id` `pod_cidr`。
+: ノードの数。タグ: `kernel_version` `os_image` `container_runtime_version` `kubelet_version`。
 
 `kubernetes_state.node.cpu_allocatable`
 : スケジューリングに使用できるノードの割り当て可能な CPU。タグ: `node` `resource` `unit`。
@@ -402,10 +402,10 @@ datadog:
 : ジョブの数。タグ: `kube_namespace` `owner_name` `owner_kind`。
 
 `kubernetes_state.job.failed`
-: フェーズ失敗に達したポッドの数。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: フェーズ失敗に達したポッドの数。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.succeeded`
-: フェーズ成功に達したポッドの数。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: フェーズ成功に達したポッドの数。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.resourcequota.<resource>.limit`
 : リソースごとのリソース割り当て制限に関する情報。タグ: `kube_namespace` `resourcequota`。
@@ -461,7 +461,7 @@ Kubernetes State Metrics Core チェックには、イベントは含まれま�
 : cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.complete`
-: ジョブが失敗したかどうか。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: ジョブが失敗したかどうか。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.node.ready`
 : ノードの準備ができているかどうか。タグ: `node` `condition` `status`。

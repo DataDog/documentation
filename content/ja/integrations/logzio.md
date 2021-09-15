@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md
 display_name: Logz.io
 draft: false
 git_integration_title: logzio

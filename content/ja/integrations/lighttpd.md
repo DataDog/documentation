@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
 display_name: Lighttpd
 draft: false
 git_integration_title: lighttpd
