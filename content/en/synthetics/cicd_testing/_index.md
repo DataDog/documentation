@@ -2,6 +2,8 @@
 title: Synthetic CI/CD Testing
 kind: documentation
 description: Run Synthetic tests on-demand in your CI/CD pipelines.
+aliases: 
+  - /synthetics/ci
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
