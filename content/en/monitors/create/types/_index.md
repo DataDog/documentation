@@ -1,11 +1,12 @@
 ---
 title: Monitors Types
 kind: documentation
+disable_toc: true
 description: "List the monitor types"
 ---
 
-{{< whatsnext desc="Choose the monitor type depending on what you want to alert on :">}}
-{{< nextlink href="/monitors/create/types/host" >}}Host: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
+{{< whatsnext desc="Choose the monitor type depending on what you want to alert on:">}}
+{{< nextlink href="/monitors/create/types/host" >}}<u>Host</u>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/metric" >}}Metric: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/anomaly" >}}Anomaly: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/outlier" >}}Outlier: Alert on members of a group behaving differently than the others.{{< /nextlink >}}

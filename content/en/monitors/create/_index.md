@@ -17,14 +17,14 @@ further_reading:
 
 To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu and click [**New Monitor**][2] in the sub-menu. To create a monitor programmatically, see the [Datadog API][3] or [community maintained libraries][4].
 
-## Monitor Types
+## Monitor types
 
-Select a [monitor type][5] in the list.
+Select a [monitor type][5] from the list.
 
 {{< img src="/monitors/create/choose_monitor_type.gif" alt="Choose monitor type" style="width:90%;">}}
 
-{{< whatsnext desc="Choose the monitor type depending on what you want to alert on :">}}
-{{< nextlink href="/monitors/create/types/host" >}}Host: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
+{{< whatsnext desc="Choose the monitor type depending on what you want to alert on:">}}
+{{< nextlink href="/monitors/create/types/host" >}}<u>Host</u>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/metric" >}}Metric: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/anomaly" >}}Anomaly: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/outlier" >}}Outlier: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
