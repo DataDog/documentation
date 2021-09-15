@@ -18,9 +18,9 @@ Supported languages:
 * Objective-C >= 2.0
 
 Supported platforms:
-* iOS >= 12.0
+* iOS >= 11.0
 * macOS >= 10.13
-* tvOS >= 12.0
+* tvOS >= 11.0
 
 ## Installing the Swift testing SDK
 
