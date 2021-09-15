@@ -126,7 +126,7 @@ For a monitor that does not notify on missing data, if a group does not report d
 
 `[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
 
-Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state. If data is still being submitted, the [renotify][6] feature can be utilized to let your team know when an issue is not resolved.
+Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state. If data is still being submitted, the [renotify][3] feature can be utilized to let your team know when an issue is not resolved.
 
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
@@ -153,3 +153,4 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 
 [1]: /monitors/create/types
 [2]: monitors/notify/variables/?tab=is_alert#tag-variables
+[3]: /monitors/notify/#renotify
