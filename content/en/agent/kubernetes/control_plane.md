@@ -619,7 +619,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### ETCD, Controller Manager and Scheduler
+### Add Kubernetes services to configure auto-discovery checks
 
 By adding headless Kubernetes services to define check configurations, the Datadog Agent is able to target the `pushprox` pods and collect metrics.
 
