@@ -6,7 +6,7 @@ categories:
 ddtype: library
 dependencies: []
 description: Surveillez les délais de réponse globaux et les taux de requête par code de réponse.
-doc_link: https://docs.datadoghq.com/integrations/express/
+doc_link: 'https://docs.datadoghq.com/integrations/express/'
 draft: false
 git_integration_title: express
 has_logo: true

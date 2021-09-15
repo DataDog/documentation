@@ -6,11 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez les métriques clés d'Amazon\_Inspector."
-doc_link: https://docs.datadoghq.com/integrations/amazon_inspector/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_inspector/'
 draft: false
 git_integration_title: amazon_inspector
 has_logo: true
-integration_id: amazon-inspector
 integration_title: "Amazon\_Inspector"
 is_public: true
 kind: Lighthouse
@@ -26,7 +25,7 @@ Amazon Inspector est un service d'évaluation automatisé de la sécurité qui p
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d’Inspector.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -41,17 +40,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon Inspector de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
+Configurez Amazon Inspector de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_inspector` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Inspector dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Inspector dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
 
 ## Données collectées
 

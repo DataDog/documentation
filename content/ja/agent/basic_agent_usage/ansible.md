@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - 'https://github.com/DataDog/ansible-datadog/blob/master/README.md'
+  - https://github.com/DataDog/ansible-datadog/blob/master/README.md
 kind: ドキュメント
 title: Ansible
 ---

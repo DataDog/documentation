@@ -8,19 +8,18 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: Surveillez la taille de la file d'attente, la taille moyenne des messages, le nombre de messages, et plus encore.
-doc_link: https://docs.datadoghq.com/integrations/amazon_sqs/
+description: 'Surveillez la taille de la file d''attente, la taille moyenne des messages, le nombre de messages, et plus encore.'
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_sqs/'
 draft: false
 git_integration_title: amazon_sqs
 has_logo: true
-integration_id: amazon-sqs
 integration_title: Amazon SQS
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_sqs
 public_title: "Intégration Datadog/Amazon\_SQS"
-short_description: Surveillez la taille de la file d'attente, la taille moyenne des messages, le nombre de messages, et plus encore.
+short_description: 'Surveillez la taille de la file d''attente, la taille moyenne des messages, le nombre de messages, et plus encore.'
 version: '1.0'
 ---
 {{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="Dashboard SQS" popup="true">}}
@@ -55,7 +54,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Consultez la page [Journalisation des appels d'API Amazon SQS à l'aide d'AWS CloudTrail][6] pour configurer votre journal de suivi. Lorsque vous définissez un journal de suivi, sélectionnez un compartiment S3 dans lequel écrire les logs :
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation CloudTrail" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation Cloudtrail" popup="true" style="width:70%;">}}
 
 #### Envoyer des logs à Datadog
 

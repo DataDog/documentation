@@ -5,8 +5,8 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: Surveillez les temps d'exécution de fonctions min, max et moyenne.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_functions/
+description: 'Surveillez les temps d''exécution de fonctions min, max et moyenne.'
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_functions/'
 draft: false
 git_integration_title: google_cloud_functions
 has_logo: true
@@ -17,7 +17,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloud_functions
 public_title: "Intégration Datadog/Google\_Cloud\_Functions"
-short_description: Surveillez les temps d'exécution de fonctions min, max et moyenne.
+short_description: 'Surveillez les temps d''exécution de fonctions min, max et moyenne.'
 version: '1.0'
 ---
 ## Présentation

@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Athena のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_athena/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_athena/
 draft: false
 git_integration_title: amazon_athena
 has_logo: true

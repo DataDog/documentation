@@ -2,10 +2,10 @@
 title: ログ分析 API を使用したカスタムレポートの構築
 kind: ガイド
 further_reading:
-  - link: '/logs/explorer/analytics/?tab=timeseries#overview'
+  - link: /logs/explorer/analytics/?tab=timeseries#overview
     tag: Documentation
     text: ログ分析に関する詳細
-  - link: '/api/v2/logs/#aggregate-events'
+  - link: /api/v2/logs/#aggregate-events
     tag: Documentation
     text: ログ分析 API の構文
   - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api

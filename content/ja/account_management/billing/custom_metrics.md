@@ -21,7 +21,7 @@ aliases:
 
 下記に示すように、データの `endpoint:X` は両ホストでサポートされていますが、`host:B` でのみ失敗するとします。また、`endpoint:Y` へのリクエストは常に成功し、`host:B` でのみ表示されます。
 
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="リクエストのレイテンシー"  style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="リクエストのレイテンシー" style="width:80%;">}}
 
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
@@ -56,7 +56,7 @@ aliases:
 
 `temperature` から報告されるカスタムメトリクス数は、最小粒度のタグ `city` に対応します。
 
-次に、temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしています。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
+temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしていることになります。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
 
 Florida の気温を入手するには、単に次のようにカスタムメトリクスの組み合わせを変更します。
 
@@ -139,7 +139,7 @@ DISTRIBUTION メトリクスを集計する[タグの組み合わせ][2]をカ�
 
 管理ユーザー ([Datadog 管理者の役割を持つユーザー][4]) は、[使用量の詳細ページ][5]で、アカウントの 1 時間当たりのカスタムメトリクスの月平均数と上位 5000 個のカスタムメトリクスを参照できます。詳細については、[使用量の詳細][6]に関するドキュメントをご参照ください。
 
-特定のメトリクス名のカスタムメトリクス数をリアルタイムで追跡するには、[Metrics Summary ページ][7]でメトリクス名をクリックします。以下に示すように「Currently reporting # distinct metrics...」として一覧表示されます。
+特定のメトリクス名のカスタムメトリクス数をリアルタイムで追跡するには、[Metrics Summary ページ][7]でメトリクス名をクリックします。以下に示すように `Currently reporting # distinct metrics...` として一覧表示されます。
 
 {{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="メトリクスの追跡" video="true" >}}
 

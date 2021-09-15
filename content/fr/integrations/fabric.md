@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Consultez et recherchez des tâches Fabric depuis votre flux d'événements Datadog.
-doc_link: https://docs.datadoghq.com/integrations/fabric/
+doc_link: 'https://docs.datadoghq.com/integrations/fabric/'
 draft: false
 git_integration_title: fabric
 has_logo: true

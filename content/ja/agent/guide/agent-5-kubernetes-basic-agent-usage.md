@@ -18,7 +18,7 @@ Kubernetes からメトリクスをリアルタイムに取得すると、以下
 * Kubernetes の状態を視覚化および監視できます。
 * Kubernetes のフェイルオーバーとイベントの通知を受けることができます。
 
-Kubernetes の場合は、[DaemonSet で Agent を実行][1]することをお勧めします。Docker と Kubernetes 両方のインテグレーションを有効にして、[Docker イメージ][2]を作成しました。
+Kubernetes の場合は、[DaemonSet で Agent を実行][1]することをお勧めします。Docker と Kubernetes 両方のインテグレーションを有効にして、[Docker イメージ][2]を利用可能です。
 
 [ホストで Datadog Agent を実行][3]して構成するだけで、Kubernetes メトリクスを収集できます。
 
@@ -32,7 +32,7 @@ Kubernetes では、DaemonSet を利用して、すべてのノード (または
 
 DaemonSet がご使用の Kubernetes クラスターのオプションになっていない場合は、各 Kubernetes ノードにデプロイとして [Datadog Agent をインストール][4]します。
 
-Kubernetes で RBAC が有効になっている場合は、[Datadog-Kubernetes インテグレーションで RBAC アクセス許可を設定する方法に関するドキュメント][5]を参照してください。
+Kubernetes で RBAC が有効になっている場合は、[Datadog-Kubernetes インテグレーションで RBAC アクセス許可を設定する方法][5]を参照してください。
 
 * 次の `dd-agent.yaml` マニフェストを作成します。
 
@@ -207,7 +207,7 @@ Kubernetes State Metrics サービスを別の URL またはポートで実行�
 
 #### ホストのインストール
 
-`dd-check-kubernetes_state` パッケージを手動または任意の構成マネージャーを使用してインストールします (CentOS/AWS 上)。[こちらで rpm パッケージを検索][15]できます。インストールの詳細については、[こちらのページ][16]を参照してください。
+`dd-check-kubernetes_state` パッケージを手動または任意の構成マネージャーを使用してインストールします (CentOS/AWS 上)。[rpm パッケージ][15]をダウンロードし、[インストール手順][16]を参照してください。
 次に、`kubernetes_state.yaml` ファイルを編集して、サーバーとポートを指定し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[kubernetes_state.yaml のサンプル][14] を参照してください。
 
 ### 検証
