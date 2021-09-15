@@ -51,7 +51,7 @@ main_left:
     parent: product
   - identifier: rum
     name: RUM & Session Replay
-    pre: '<i class="icon-rum align-middle"></i>'
+    pre: <i class="icon-rum align-middle"></i>
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 9
     parent: product
