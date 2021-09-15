@@ -78,19 +78,25 @@ Find a query in the table with data in the Explain Plan column, and click on it 
 
 ## Create a dashboard to view historical database metrics
 
-Note from Ursula: I am on the fence about including this part. My current thinking is that 2 use cases is sufficient for the Getting Started Guide, and information on which DBM metrics can be added to dashboards should go in the main DBM docs.
+To understand the health and performance of your databases at a glance, add Datadog Database Monitoring metrics to a dashboard.
 
-If I did flesh out this section, these would be the steps:
-1. create new dashboard
-2. click Add Widgets
-3. select Change
+For example, you can see the absolute change in query volume in the past hour by adding a widget.
+
+1. Select Dashboards > New Dashboard in the UI.
+
+2. Click Add Widgets
+
+3. In the widget carousel, select the Change widget.
+
 4. set Metric to `postgresql.queries.count`. break it down by `Host`
-5. Screenshot
-6. set title to "Query Volume Changes By Host"
-7. click Save
-8. Screenshot
 
-alternately, show them the default dashboard that Datadog creates automatically?
+5. Screenshot
+
+6. set title to "Query Volume Changes By Host"
+
+7. click Save
+
+8. Screenshot
 
 ## Further Reading
 
