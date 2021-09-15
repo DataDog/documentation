@@ -31,7 +31,7 @@ npm install -g @datadog/datadog-ci
 To trace a command, run the following:
 
 {{< code-block lang="bash" >}}
-datadog-ci trace [--name <name>] <command>
+datadog-ci trace [--name <name>] -- <command>
 {{< /code-block >}}
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
@@ -40,6 +40,7 @@ Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variab
 {{< code-block lang="bash" >}}
 DATADOG_API_KEY=<api_key> datadog-ci trace \
   --name "Greet" \
+  -- \
   echo "Hello World"
 {{< /code-block >}}
 {{< /site-region >}}
@@ -47,6 +48,7 @@ DATADOG_API_KEY=<api_key> datadog-ci trace \
 {{< code-block lang="bash" >}}
 DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci trace \
   --name "Greet" \
+  -- \
   echo "Hello World"
 {{< /code-block >}}
 {{< /site-region >}}
