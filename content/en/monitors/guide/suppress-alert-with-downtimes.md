@@ -1,6 +1,8 @@
 ---
-title: Suppress alerts with Downtimes
+title: Suppress Alerts with Downtimes
 kind: guide
+aliases:
+- /monitors/guide/supress-alert-with-downtimes
 further_reading:
 - link: "api/v1/downtimes/"
   tag: "Documentation"
