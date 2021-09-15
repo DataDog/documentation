@@ -26,20 +26,37 @@ You can continue to access the Event Stream from the navigation menu alongside t
 
 You can still edit your existing event monitors and widgets. However, new event monitors and widgets use the new event monitor query syntax. You also may want to migrate existing event stream, event timeline, or event overlay monitors and widgets. To migrate, update the search query to match the new one. You can do this by manually recreating your existing monitors following these examples:
 
-|                           Description                           |                                                    Legacy syntax                                                   |                                              New Syntax                                             |
-|:---------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------:|
-| No Slack events in the past 24 hours.                           | `events('priority:all sources:slack').rollup('count').last('1d') < 1`                                              | `events("source:slack").rollup("count").last("1d") < 1`                                             |
-| EC2 Instance marked for maintenance                             | `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`          | `events("Upcoming AWS maintenance").rollup("count").last("1d") < 1`                                 |
-| Zabbix or Prometheus has triggered an alert for a service today | `events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0` | `events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0` |
-| No events received in a datacenter for service ‘datadog-agent’  | Legacy Event Monitors do not support cardinality rollup.                                                           | `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1` |
+No Slack events in the past 24 hours
+: Legacy syntax </br>
+`events('priority:all sources:slack').rollup('count').last('1d') < 1`
+: New syntax </br>
+`events("source:slack").rollup("count").last("1d") < 1`
+
+EC2 Instance marked for maintenance
+: Legacy syntax </br>
+`events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
+: New syntax </br>
+`events("Upcoming AWS maintenance").rollup("count").last("1d") < 1`
+
+Zabbix or Prometheus has triggered an alert for a service today
+: Legacy syntax </br>
+`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
+: New syntax </br>
+`events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0`
+
+No events received in a datacenter for service `datadog-agent`
+: Legacy syntax </br>
+Legacy Event Monitors do not support cardinality rollup.
+: New syntax </br>
+`events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
 If you use the API, Terraform, or other third party solution to manage your monitors, manually update your code using the syntax described above.
 
-**Note:** If you have SLOs based on event monitors, be sure to update their definitions to point to the new ones.
+**Note:** If you have SLOs based on event monitors, update their definitions to point to the new monitors.
 
 ## Sunset legacy events
 
-When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset using the legacy events in favor of the new events. The Event Stream continues to be accessible for viewing your event history.
+When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset your legacy events in favor of the new events. The Event Stream continues to be accessible for viewing your event history.
 
 [1]: /events/explorer/
 [2]: /events/explorer/#event-analytics

@@ -123,7 +123,7 @@ Event Analytics extends the Events Explorer page with views, data aggregation, a
 
 - The query that filters the set of views to analyze.
 - The dimensions over which to group data.
-- The visualization method for aggregates and splits.
+- The visualization method for aggregates and groups.
 
 You can export analytics visualizations to create widgets in a dashboard or notebook.
 

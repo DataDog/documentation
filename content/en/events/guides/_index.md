@@ -23,8 +23,6 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-)
-
 {{< whatsnext desc="Use this guide if you are migrating from the Event Stream to the Events Explorer:">}}
     {{< nextlink href="/events/guides/migrating_from_stream_to_explorer/" >}}Migrating from the Event Stream to the Events Explorer{{< /nextlink >}}
 {{< /whatsnext >}}
