@@ -34,15 +34,11 @@ To run the example application, you need a machine with [GNU Make][1] and [Docke
 
 ### Install the example application
 
-The example application starts up the Datadog Agent and a Postgres or MySQL database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
+The example application starts up the Datadog Agent and a Postgres database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
 
 Follow these instructions to install the example application on MacOS or Linux.
 
-{{< tabs >}}
-
-{{% tab "Postgres" %}}
-
-1. Download the [archive][1] containing the example application.
+1. Download the [archive][4] containing the example application.
 
 2. Extract the archive to a location on disk. `tar -xvf database-management.tgz`
 
@@ -54,37 +50,13 @@ Follow these instructions to install the example application on MacOS or Linux.
 
 The command will continue to run until you stop it by pressing Ctrl + C.
 
-[1]: /resources/examples/database-management.tgz
-{{% /tab %}}
-
-{{% tab "MySQL" %}}
-
-1. Download the [archive][1] containing the example application.
-
-2. Extract the archive to a location on disk. `tar -xvf database-management.tgz`
-
-3. Change to the `database-management` directory in the extracted archive: `cd database-management`
-
-4. Set the environment variable `DD_API_KEY` to your Datadog API key using `export DD_API_KEY=<API_KEY>`.
-
-5. Run `make mysql`.
-
-The command will continue to run until you stop it by pressing Ctrl + C.
-
-[1]: /resources/examples/database-management.tgz
-{{% /tab %}}
-
-{{< /tabs >}}
-
 ## Identify a slow query
 
 Which query uses the most database time? To find out, use the Query Metrics view.
 
 1. Navigate to Database Monitoring by clicking APM > Databases in the UI. By default, you will start on the Query Metrics tab.
 
-2. Ensure that the **source** drop-down shows the database type you ran in the Setup step.
-
-3. Sort the Normalized Query table by **Percent time** to see at a glance which queries are the slowest.
+2. Sort the Normalized Query table by **Percent time** to see at a glance which queries are the slowest.
 
 The query that uses the most database time will appear on the first line.
 
@@ -92,9 +64,9 @@ The query that uses the most database time will appear on the first line.
 
 ## Troubleshoot a slow query
 
-After identifying a slow query, you want to understand why it runs slowly. A query's Explain Plan describes the steps that the database takes to resolve the query. You can view an Explain Plan by clicking on a sample in the Query Samples view.
+After identifying a slow query, you may want to understand why it runs slowly. A query's Explain Plan describes the steps that the database takes to resolve the query. You can view an Explain Plan by clicking on a sample in the Query Samples view.
 
-Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][4]**, and selecting the **Query Samples** tab in the UI.
+Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][5]**, and selecting the **Query Samples** tab in the UI.
 
 Sort the Normalized Query table by **Duration**.
 
@@ -127,4 +99,5 @@ alternately, show them the default dashboard that Datadog creates automatically?
 [1]: https://www.gnu.org/software/make/
 [2]: https://www.docker.com/
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://app.datadoghq.com/databases
+[4]: /resources/examples/database-management.tgz
+[5]: https://app.datadoghq.com/databases
