@@ -1,8 +1,7 @@
 ---
-title: Getting started with Session Replay
+title: Getting Started with Session Replay
 kind: guide
 description: Guide for enabling Session Replay and how to set privacy options
-beta: true
 further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
@@ -12,13 +11,14 @@ further_reading:
       text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-<div class="alert alert-info"><p>Session Replay is in private beta. There are no billing implications for the Session Replays during this period. If you want to be added to the private beta, sign up by emailing <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a> at this time.</p>
+<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
 </div>
 
 ## What is Session Replay?
 
-Session Replay expands your UX monitoring by allowing you to capture and visually replay the web browsing experience of your users.
-Used in combination with RUM performance data, Session Replay can be an asset for error identification, reproduction, and resolution, and it can also bring invaluable insights into your web application’s usage patterns and design pitfalls.
+Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users.
+
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls.
 
 ## Collect Session Replay data
 
@@ -30,7 +30,7 @@ Session Replay is available through a dedicated build of the RUM Browser SDK. To
 
 #### npm
 
-Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2] To start the recording, call `DD_RUM.startSessionReplayRecording()`.
+Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2]. To start the recording, call `DatadogRum.startSessionReplayRecording()`.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -47,7 +47,7 @@ datadogRum.init({
     trackInteractions: true
 });
 
-DD_RUM.startSessionReplayRecording();
+DatadogRum.startSessionReplayRecording();
 ```
 
 #### CDN
@@ -60,7 +60,7 @@ Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum
 
 The usual [RUM initialization parameters][4] are all supported.
 
-The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example to only record authenticated user sessions:
+The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
 
 ```javascript
 if (user.isAuthenticated) {
