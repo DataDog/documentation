@@ -2293,6 +2293,91 @@ components:
       - resource_name
       - service
       type: object
+    FormulaAndFunctionApmResourceStatName:
+      description: APM resource stat name.
+      enum:
+      - errors
+      - error_rate
+      - hits
+      - latency_avg
+      - latency_max
+      - latency_p50
+      - latency_p75
+      - latency_p90
+      - latency_p95
+      - latency_p99
+      example: hits
+      type: string
+      x-enum-varnames:
+      - ERRORS
+      - ERROR_RATE
+      - HITS
+      - LATENCY_AVG
+      - LATENCY_MAX
+      - LATENCY_P50
+      - LATENCY_P75
+      - LATENCY_P90
+      - LATENCY_P95
+      - LATENCY_P99
+    FormulaAndFunctionApmResourceStatsDataSource:
+      description: Data source for APM resource stats queries.
+      enum:
+      - apm_resource_stats
+      example: apm_resource_stats
+      type: string
+      x-enum-varnames:
+      - APM_RESOURCE_STATS
+    FormulaAndFunctionApmResourceStatsQueryDefinition:
+      description: APM resource stats query using formulas and functions.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsDataSource'
+        env:
+          description: APM environment.
+          example: staging
+          type: string
+        group_by:
+          description: Array of fields to group results by.
+          items:
+            description: Field to group results by.
+            example: resource_name
+            type: string
+          type: array
+        name:
+          description: Name of this query to use in formulas.
+          example: query_errors
+          type: string
+        operation_name:
+          description: Name of operation on service.
+          example: cassandra.query
+          type: string
+        primary_tag_name:
+          description: Name of the second primary tag used within APM. Required when
+            `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+          example: datacenter
+          type: string
+        primary_tag_value:
+          description: Value of the second primary tag by which to filter APM data.
+            `primary_tag_name` must also be specified.
+          example: us-east-az
+          type: string
+        resource_name:
+          description: APM resource name.
+          example: Admin::ProductsController#create
+          type: string
+        service:
+          description: APM service name.
+          example: web-store
+          type: string
+        stat:
+          $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatName'
+      required:
+      - data_source
+      - env
+      - name
+      - service
+      - stat
+      type: object
     FormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -2539,6 +2624,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries or Scalar response. **This feature is currently in beta.**
