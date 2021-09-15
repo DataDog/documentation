@@ -338,7 +338,7 @@ To parse your variable:
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][15].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][15], a [`JSONPath`][13], or a [`XPath`][14].
 
-{{< img src="synthetics/browser_tests/browser_test_vft2.mp4" alt="Create a variable from an HTTP request in a Browser test" video="true"  width="80%" >}}
+{{< img src="synthetics/browser_tests/browser_test_vft2.mp4" alt="Create a variable from an HTTP request in a Browser test" video="true" width="80%" >}}
 
 Once created this variable can be used in the following steps of your browser test.
 
