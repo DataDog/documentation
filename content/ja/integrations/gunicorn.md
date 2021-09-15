@@ -21,7 +21,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md'
 display_name: Gunicorn
 draft: false
 git_integration_title: gunicorn

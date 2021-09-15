@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
 display_name: fluentd
 draft: false
 git_integration_title: fluentd

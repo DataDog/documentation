@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: VPN トンネルのステータス、スループット、セッション数などを監視。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_vpn/
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_vpn/'
 draft: false
 git_integration_title: google_cloud_vpn
 has_logo: true

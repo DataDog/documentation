@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの DingTalk Group に送信
-doc_link: https://docs.datadoghq.com/integrations/dingtalk/
+doc_link: 'https://docs.datadoghq.com/integrations/dingtalk/'
 draft: false
 git_integration_title: dingtalk
 has_logo: true

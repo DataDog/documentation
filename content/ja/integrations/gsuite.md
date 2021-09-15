@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Workspace の監査およびセキュリティログを Datadog へインポートします。
-doc_link: https://docs.datadoghq.com/integrations/gsuite/
+doc_link: 'https://docs.datadoghq.com/integrations/gsuite/'
 draft: false
 git_integration_title: gsuite
 has_logo: true
