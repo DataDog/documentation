@@ -80,5 +80,5 @@ aliases:
 [1]: /ja/dashboards/functions/#proceed-to-time-aggregation
 [2]: /ja/metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[4]: /ja/developers/metrics/type_modifiers/
+[4]: /ja/metrics/type_modifiers/
 [5]: /ja/monitors/monitor_types/metric/
