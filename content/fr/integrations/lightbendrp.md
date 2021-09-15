@@ -4,7 +4,7 @@ categories:
 ddtype: agent
 dependencies: []
 description: Surveillez les événements relatifs aux acteurs et au répartiteur pour les applications basées sur Akka
-doc_link: 'https://docs.datadoghq.com/integrations/lightbendrp/'
+doc_link: https://docs.datadoghq.com/integrations/lightbendrp/
 draft: false
 git_integration_title: lightbendrp
 has_logo: true

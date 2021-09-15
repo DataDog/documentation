@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Load\_Balancing."
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/
 draft: false
 git_integration_title: google_cloud_loadbalancing
 has_logo: true

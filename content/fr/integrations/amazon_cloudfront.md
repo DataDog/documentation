@@ -9,18 +9,19 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez les taux d''erreur, le nombre de requêtes et les volumes de téléchargement et de chargement.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_cloudfront/'
+description: Surveillez les taux d'erreur, le nombre de requêtes et les volumes de téléchargement et de chargement.
+doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/
 draft: false
 git_integration_title: amazon_cloudfront
 has_logo: true
+integration_id: amazon-cloudfront
 integration_title: Amazon CloudFront
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_cloudfront
 public_title: "Intégration Datadog/Amazon\_CloudFront"
-short_description: 'Surveillez les taux d''erreur, le nombre de requêtes et les volumes de téléchargement et de chargement.'
+short_description: Surveillez les taux d'erreur, le nombre de requêtes et les volumes de téléchargement et de chargement.
 version: '1.0'
 ---
 ## Présentation
@@ -46,31 +47,33 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 {{< tabs >}}
 {{% tab "Logs standard" %}}
 
-#### Activer la journalisation Cloudfront
+#### Activer le logging
 
-Lorsque vous activez la journalisation pour une distribution, indiquez le compartiment Amazon S3 dans lequel vous souhaitez que CloudFront stocke vos logs. Si vous utilisez Amazon S3 comme source, nous vous recommandons de ne pas utiliser le même compartiment pour vos fichiers de log. L'utilisation d'un compartiment distinct simplifie la maintenance.
+Lorsque vous activez la journalisation CloudFront pour une distribution, indiquez le compartiment Amazon S3 dans lequel vous souhaitez que CloudFront stocke vos logs. Si vous utilisez Amazon S3 comme source, Datadog vous déconseille d'utiliser le même compartiment pour vos fichiers de log. L'utilisation d'un compartiment distinct simplifie la maintenance.
 
 {{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Journalisation Cloudfront 1" popup="true" style="width:70%;">}}
 
 {{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Journalisation Cloudfront 2" popup="true" style="width:70%;">}}
 
-**Remarque importante** : vous pouvez stocker des fichiers de log de plusieurs distributions dans un même compartiment. Lorsque vous activez la journalisation, vous pouvez indiquer `cloudfront` en tant que préfixe pour les noms de fichiers pour [déterminer à quelle distribution sont associés vos fichiers][4].
+**Remarque importante** : vous pouvez stocker des fichiers de log de plusieurs distributions dans un même compartiment. Lorsque vous activez la journalisation, vous pouvez indiquer `cloudfront` en tant que préfixe dans les noms de fichiers pour [déterminer à quelle distribution sont associés vos fichiers][1].
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction AWS Lambda de collecte de logs avec Datadog][5].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][2].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs CloudFront en cliquant sur S3 dans la liste des déclencheurs pour votre Lambda dans la console AWS :
    {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
    Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs CloudFront et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
    {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
 
-Accédez ensuite à la [section Log de Datadog][1] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][3] pour commencer à explorer vos logs !
 
-[1]: https://app.datadoghq.com/logs
+[1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
+[2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[3]: https://app.datadoghq.com/logs
 {{% /tab %}}
 {{% tab "Logs en temps réel" %}}
 
-#### Activer la journalisation Cloudfront
+#### Activer le logging
 
 ##### Créer une configuration spécifique
 
@@ -95,7 +98,6 @@ Vous pouvez également configurer un consommateur, tel qu'Amazon Kinesis Data Fi
 [3]: https://docs.datadoghq.com/fr/serverless/forwarder/
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Données collectées
 

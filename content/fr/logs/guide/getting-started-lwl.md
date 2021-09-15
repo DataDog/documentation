@@ -5,7 +5,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: "En savoir plus sur la vue Log\_Explorer"
-  - link: '/logs/explorer/#patterns'
+  - link: /logs/explorer/#patterns
     tag: Documentation
     text: Se familiariser avec la vue Log Pattern
   - link: /logs/live_tail/
@@ -15,6 +15,8 @@ further_reading:
     tag: Documentation
     text: Découvrir comment générer des métriques à partir de logs ingérés
 ---
+{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
+
 ## Présentation
 
 Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, vos logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits™][1] de Datadog vous offre une flexibilité accrue en séparant [le processus d'ingestion des logs du processus d'indexation][2].
@@ -111,12 +113,12 @@ Lorsqu'une anomalie est détectée, toutes les personnes concernées reçoivent 
 
 Vous savez désormais comment utiliser la fonctionnalité Logging without Limits™ pour :
 
-1. [Identifier le statut de service générant le plus de logs](#1-identify-your-most-logging-service-status)
-2. [Identifier les patterns de logs les plus volumineux](#2-identify-high-volume-logging-patterns)
-3. [Créer un filtre d'exclusion de pattern de log](#3-create-a-log-pattern-exclusion-filter)
-4. [Générer des métriques pour effectuer un suivi des logs exclus](#4-generate-metrics-to-track-excluded-logs)
-  * [Ajouter une nouvelle métrique basée sur des logs](#add-a-new-log-based-metric)
-  * [Créer un monitor de détection d'anomalies](#create-an-anomaly-detection-monitor)
+1. [Identifier le statut de service générant le plus de logs](#1-identifier-le-statut-de-service-generant-le-plus-de-logs)
+2. [Identifier les patterns de journalisation volumineuse](#2-identifier-les-patterns-de-journalisation-volumineuse)
+3. [Créer un filtre d'exclusion de pattern de log](#3-creer-un-filtre-d-exclusion-de-pattern-de-log)
+4. [Générer des métriques pour effectuer un suivi des logs exclus](#4-generer-des-metriques-pour-effectuer-un-suivi-des-logs-exclus)
+  * [Ajouter une nouvelle métrique basée sur des logs](#ajouter-une-nouvelle-metrique-basee-sur-des-logs)
+  * [Créer un monitor de détection d'anomalies](#creer-un-monitor-de-detection-d-anomalies)
 
 Pour en savoir plus sur la fonctionnalité Logging without Limits™ et exploiter pleinement des fonctions comme la vue Log Explorer, Live Tail et les patterns de logs, consultez les liens ci-dessous.
 
