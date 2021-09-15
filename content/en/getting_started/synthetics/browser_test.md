@@ -26,13 +26,13 @@ The example below demonstrates the creation of a browser test that maps a user's
 
 ### Configure your test details
 
-1. In the Datadog site, hover over **[UX Monitoring][2]** in the left hand menu and select **[Synthetic Tests][2]**.
-2. In the top right corner, click the **New Test** button.
-3. Select **Browser Test**.
-4. Define your browser test:
+1. In the Datadog site, hover over **UX Monitoring** in the left hand menu and select **[Synthetic Tests][2]**.
+2. In the top right corner, click **New Test** > **[Browser Test][13]**.
+3. Define your browser test:
 
     - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     - Select **Advanced Options** to use custom request headers, authentication credentials, or cookies. 
+      In this example, no specific advanced option is needed.
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
     - Choose the browsers and devices you want to test with. 
 
@@ -48,7 +48,7 @@ The Shopist application is publicly available at `https://www.shopist.io/` so yo
 
 Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
 
-In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][4].
+**Note:** In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][4].
 
 
 #### Define alert conditions
@@ -130,3 +130,4 @@ Use Datadog's [APM integration with Synthetic Monitoring][12] to view traces gen
 [10]: /synthetics/browser_tests/test_results#resources
 [11]: /synthetics/browser_tests/test_results#page-performance
 [12]: /synthetics/apm/
+[13]: https://app.datadoghq.com/synthetics/browser/create
