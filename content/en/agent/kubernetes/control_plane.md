@@ -332,9 +332,9 @@ On OpenShift 4, all control plane components can be monitored using endpoint che
 
 ### Prerequisites
 
-1. Enable the Datadog [Cluster Agent][6]
-1. Enable [Cluster checks][7]
-1. Enable [Endpoint checks][8]
+1. Enable the Datadog [Cluster Agent][1]
+1. Enable [Cluster checks][6]
+1. Enable [Endpoint checks][7]
 1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
 ### API server
@@ -472,9 +472,9 @@ On OpenShift 3, all control plane components can be monitored using endpoint che
 
 ### Prerequisites
 
-1. Enable the Datadog [Cluster Agent][6]
-1. Enable [Cluster checks][7]
-1. Enable [Endpoint checks][8]
+1. Enable the Datadog [Cluster Agent][1]
+1. Enable [Cluster checks][6]
+1. Enable [Endpoint checks][7]
 1. Ensure that you are logged in with sufficient permissions to create and edit services.
 
 ### API server
@@ -601,11 +601,11 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 
 ## Kubernetes on Rancher Kubernetes Engine (v2.5+) {#RKE}
 
-Rancher v2.5 relies on [PushProx][10] to expose control plane metric endpoints, this allows the Datadog Agent to run control plane checks and collect metrics.
+Rancher v2.5 relies on [PushProx][8] to expose control plane metric endpoints, this allows the Datadog Agent to run control plane checks and collect metrics.
 
 ### Prerequisites
 
-1. Install the [rancher-monitoring chart][11].
+1. Install the [rancher-monitoring chart][9].
 2. The `pushprox` daemonsets are deployed with `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
 
 ### API server
@@ -778,7 +778,5 @@ spec:
 [5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane.html#monitor-control-plane-metrics
 [6]: https://docs.datadoghq.com/agent/cluster_agent/setup
 [7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
-[8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[9]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
-[10]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/how-monitoring-works/#4-2-pushprox
-[11]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/
+[8]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/how-monitoring-works/#4-2-pushprox
+[9]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/
