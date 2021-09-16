@@ -63,7 +63,7 @@ datadog:
 
 From the Datadog-Operator v0.7.0
 
-To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` need to be set to `true` in the DatadogAgent resource.
+To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` must be set to `true` in the DatadogAgent resource.
 
 DatadogAgent Kubernetes Resource:
 
@@ -89,13 +89,13 @@ spec:
 
 ### Tags removal
 
-With `kubernetes_state`, several tags were flagged as deprecated and replaced by new tags. To provide a migration path check both tags was send with the metrics.
+With `kubernetes_state`, several tags have been flagged as deprecated and replaced by new tags. To determine your migration path, check which tags are sent with your metrics.
 
-With `kubernetes_state_core` only the none deprecated tags are send.
+With `kubernetes_state_core`, only the non-deprecated tags are sent.
 
 Before migrating to `kubernetes_state_core`, verify that only official tags are used in monitors and dashboards.
 
-Here is the mapping between deprecated and official tags
+Here is the mapping between deprecated tags and the official tags that have replaced them:
 
 | deprecated tag        | official tag                |
 |-----------------------|-----------------------------|
