@@ -5,13 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Google Hangouts ルームへ送信
-doc_link: https://docs.datadoghq.com/integrations/google_hangouts_chat/
+doc_link: 'https://docs.datadoghq.com/integrations/google_hangouts_chat/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/google-hangouts-chat-integration/
+  - link: 'https://www.datadoghq.com/blog/google-hangouts-chat-integration/'
     tag: ブログ
     text: Datadog と Google Hangouts Chat の統合
-  - link: https://developers.google.com/hangouts/chat/
+  - link: 'https://developers.google.com/hangouts/chat/'
     tag: 外部ドキュメント
     text: Google Hangouts Chat
 git_integration_title: google_hangouts_chat
