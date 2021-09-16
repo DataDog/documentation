@@ -47,7 +47,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or newer:
 
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
-{{% tab "Using configuration-as-code"}}
+{{% tab "Using configuration-as-code" %}}
 If your Jenkins instance uses the [Jenkins `configuration-as-code` plugin][1], follow the next instructions:
 
 1. Create or modify the configuration yaml adding the entry for `datadogGlobalConfiguration`
@@ -172,7 +172,7 @@ Second, enable job log collection on the Datadog Plugin:
 7. Check the connectivity with the Datadog Agent.
 8. Save your configuration.
 {{% /tab %}}
-{{% tab "Using configuration-as-code"}}
+{{% tab "Using configuration-as-code" %}}
 If your Jenkins instance uses the [Jenkins `configuration-as-code` plugin][1], follow the next instructions:
 
 1. Modify the configuration yaml for the entry `datadogGlobalConfiguration`
