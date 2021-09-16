@@ -110,6 +110,8 @@ For example, you can see the absolute change in query volume in the past hour by
 
 7. Click the **Save** button. The dashboard shows your new widget.
 
+{{< img src="database_monitoring/dashboard_change_widget.png" alt="Change widget showing query count" style="width:100%;">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
