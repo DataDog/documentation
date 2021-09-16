@@ -106,11 +106,9 @@ For example, you can see the absolute change in query volume in the past hour by
 
 5. Select `host` in the **Break it down by** dropdown so the widget aggregates queries by host.
 
-TODO: Screenshot
+{{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configure change widget for postgres queries metric" style="width:100%;">}}
 
 7. Click the **Save** button. The dashboard shows your new widget.
-
-TODO: Screenshot
 
 ## Further Reading
 
