@@ -84,7 +84,7 @@ Sort the Normalized Query table by **Duration**.
 
 {{< img src="database_monitoring/dbm_qs_sort_duration.png" alt="Normalized query samples sorted by duration" style="width:100%;">}}
 
-Find a query in the table with data in the Explain Plan column, and click on it to open the Sample Details page. This Explain Plan at the bottom of Sample Details shows that this query requires an Index Scan.
+Find a query in the table with data in the **Explain Plan** column, and click on it to open the Sample Details page. This Explain Plan at the bottom of Sample Details shows that the query requires an _Index Scan_.
 
 {{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Query explain plan showing Index Scan" style="width:100%;">}}
 
