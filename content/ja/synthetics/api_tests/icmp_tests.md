@@ -6,7 +6,7 @@ aliases:
   - /ja/synthetics/icmp_test
   - /ja/synthetics/icmp_check
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
   - link: /getting_started/synthetics/api_test

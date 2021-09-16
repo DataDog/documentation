@@ -10,10 +10,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elastic Beanstalk のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
+  - link: 'https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk'
     tag: ブログ
     text: AWS Elastic Beanstalk への Datadog のデプロイ
 git_integration_title: amazon_elasticbeanstalk
@@ -301,7 +301,7 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
 ```text
  "containerDefinitions": [    {
       "name": "dd-agent",
-      "image": "datadog/agent:latest",
+      "image": "public.ecr.aws/datadog/agent:latest",
       "environment": [
           {
               "name": "DD_API_KEY",

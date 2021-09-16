@@ -11,37 +11,24 @@ L'Agent v7 est disponible. <a href="/agent/versions/upgrade_to_agent_v7">Passez
 
 ## Upgrade vers l'Agent 6
 
-Si l'Agent v5 est déjà installé, un script est disponible pour installer ou passer à l'Agent v6. Ce script configure les référentiels du package et installe le package de l'Agent automatiquement. Lors de l'upgrade, l'outil d'importation recherche également un fichier `datadog.conf` existant issu d'une version antérieure et convertit les configurations de l'Agent et des checks au nouveau format v6. Sélectionnez votre plateforme ci-dessous pour connaître la marche à suivre détaillée. Vous pouvez [télécharger le package DMG et l'installer manuellement](#upgrade-manuel), ou utiliser le [script d'installation en une étape](#upgrade-en-une-etape).
+Si l'Agent v5 est déjà installé, un script est disponible pour installer ou passer à l'Agent v6. Ce script configure les référentiels des paquets et installe le paquet de l'Agent automatiquement. Lors de l'upgrade, l'outil d'importation recherche également un fichier `datadog.conf` existant issu d'une version antérieure et convertit les configurations de l'Agent et des checks au nouveau format v6. Sélectionnez votre plateforme ci-dessous pour connaître la marche à suivre détaillée. Vous pouvez [télécharger le paquet DMG et l'installer manuellement](#upgrade-manuel), ou utiliser le [script d'installation en une étape](#upgrade-en-une-etape).
 
-## Upgrade en une étape
+## Upgrade en une seule étape
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
-
-
-Amazon Linux 
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-CentOS       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Debian       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Fedora       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Red Hat      
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-Ubuntu       
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
-
-SUSE         
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+| Plateforme     | Commande                                                                                                                           |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| Amazon Linux | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| CentOS       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Debian       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Fedora       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Red Hat      | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Ubuntu       | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| SUSE         | `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
 
 **Remarque** : le processus d'importation n'importe pas automatiquement les checks **custom** de l'Agent. Ce comportement est délibéré : nous ne pouvons par garantir la compatibilité totale et immédiate de ces checks.
 
@@ -51,7 +38,7 @@ SUSE
 L'installation en une étape n'est pas disponible pour Windows. Référez-vous à la section [Upgrade manuel](#upgrade-manuel).
 
 {{% /tab %}}
-{{% tab "macOS" %}}
+{{% tab "MacOS" %}}
 
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
@@ -71,11 +58,11 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 
-* [Amazon Linux](#amazon-linux)
+* [Amazon Linux](#amazon-linux)
 * [CentOS](#centos)
 * [Debian](#debian)
 * [Fedora](#fedora)
-* [Red Hat](#red-hat)
+* [Red Hat](#red-hat)
 * [SUSE](#suse)
 * [Ubuntu](#ubuntu)
 
@@ -88,7 +75,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -132,14 +118,11 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
-
-   **Remarque** : en raison d'un [bug dans dnf][1], utilisez `repo_gpgcheck=0` au lieu de `repo_gpgcheck=1` pour CentOS 8.1.
 
 2. Mettez à jour votre référentiel Yum local et installez l'Agent :
     ```
@@ -172,45 +155,38 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 
 ### Debian
 
-1. Activez la prise en charge du HTTPS pour APT, installez `curl` et `gnupg` :
+1. Activez la prise en charge du HTTPS pour APT :
     ```
     sudo apt-get update
-    sudo apt-get install apt-transport-https curl gnupg
+    sudo apt-get install apt-transport-https
     ```
 
 2. Configurez le référentiel de l'API Datadog sur votre système et importez les clés APT de Datadog :
     ```shell
-    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
-3. Si vous utilisez Debian 8 ou une version antérieure, copiez le keyring vers `/etc/apt/trusted.gpg.d` :
+    Remarque : vous devrez peut-être installer `dirmngr` pour importer les clés APT de Datadog.
 
-   ```shell
-   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
-   ```
-
-4. Mettez à jour votre cache APT local et installez l'Agent :
+3. Mettez à jour votre cache APT local et installez l'Agent :
     ```
     sudo apt-get update
     sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
-5. Copiez l'exemple de configuration à l'emplacement adéquat et spécifiez votre clé d'API :
+4. Copiez l'exemple de configuration à l'emplacement adéquat et spécifiez votre clé d'API :
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-6. Procédez à la conversion des formats et des chemins de configuration de votre Agent au format v6 avec la commande `import`. La commande analyse le fichier `datadog.conf` v5 existant et convertit les options de configuration vers le nouveau format `datadog.yaml` v6. Celle-ci copie également les fichiers de configuration des checks actuellement activés :
+5. Procédez à la conversion des formats et des chemins de configuration de votre Agent au format v6 avec la commande `import`. La commande analyse le fichier `datadog.conf` v5 existant et convertit les options de configuration vers le nouveau format `datadog.yaml` v6. Celle-ci copie également les fichiers de configuration des checks actuellement activés :
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-7. Démarrez l'Agent :
+6. Démarrez l'Agent :
     ```
     sudo service datadog-agent start
     ```
@@ -224,7 +200,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -262,14 +237,11 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     baseurl=https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
-
-   **Remarque** : en raison d'un [bug dans dnf][1], utilisez `repo_gpgcheck=0` au lieu de `repo_gpgcheck=1` pour RHEL 8.1.
 
 2. Mettez à jour votre référentiel Yum local et installez l'Agent :
     ```
@@ -302,45 +274,38 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 
 ### Ubuntu
 
-1. Activez la prise en charge du HTTPS pour APT, installez `curl` et `gnupg` :
+1. Activez la prise en charge du HTTPS pour APT :
     ```
     sudo apt-get update
-    sudo apt-get install apt-transport-https curl gnupg
+    sudo apt-get install apt-transport-https
     ```
 
 2. Configurez le référentiel de l'API Datadog sur votre système et importez les clés APT de Datadog :
     ```shell
-    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
-3. Si vous utilisez Ubuntu 14 ou une version antérieure, copiez le keyring vers `/etc/apt/trusted.gpg.d` :
+    Remarque : vous devrez peut-être installer `dirmngr` pour importer les clés APT de Datadog.
 
-   ```shell
-   sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
-   ```
-
-4. Mettez à jour votre cache APT local et installez l'Agent :
+3. Mettez à jour votre cache APT local et installez l'Agent :
     ```
     sudo apt-get update
     sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
-5. Copiez l'exemple de configuration à l'emplacement adéquat et spécifiez votre clé d'API :
+4. Copiez l'exemple de configuration à l'emplacement adéquat et spécifiez votre clé d'API :
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-6. Procédez à la conversion des formats et des chemins de configuration de votre Agent au format v6 avec la commande `import`. La commande analyse le fichier `datadog.conf` v5 existant et convertit les options de configuration vers le nouveau format `datadog.yaml` v6. Celle-ci copie également les fichiers de configuration des checks actuellement activés :
+5. Procédez à la conversion des formats et des chemins de configuration de votre Agent au format v6 avec la commande `import`. La commande analyse le fichier `datadog.conf` v5 existant et convertit les options de configuration vers le nouveau format `datadog.yaml` v6. Celle-ci copie également les fichiers de configuration des checks actuellement activés :
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-7. Démarrez l'Agent :
+6. Démarrez l'Agent :
 
     * Ubuntu 16.04 ou versions ultérieures :
     ```
@@ -362,7 +327,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
   baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
   type=rpm-md
   gpgcheck=1
-  repo_gpgcheck=1
+  repo_gpgcheck=0
   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -394,7 +359,6 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
   sudo systemctl restart datadog-agent.service
   ```
 
-[1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 {{% /tab %}}
 {{% tab "Windows" %}}
 
@@ -413,7 +377,7 @@ Où :
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
 {{% /tab %}}
-{{% tab "macOS" %}}
+{{% tab "MacOS" %}}
 
 1. Téléchargez le paquet DMG de la version la plus récente de l'Agent. Choisissez la version macOS la plus récente sur la [page Releases][9] du référentiel.
 2. Installez le paquet DMG.

@@ -15,7 +15,7 @@ further_reading:
   - link: tracing/visualization/
     tag: Documentation
     text: サービス、リソース、トレースの詳細
-  - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
+  - link: 'https://www.datadoghq.com/blog/dotnet-runtime-metrics/'
     tag: ブログ
     text: Datadog を使用した .NET ランタイムメトリクスの監視
 ---

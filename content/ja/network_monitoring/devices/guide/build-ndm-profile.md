@@ -4,10 +4,10 @@ kind: ガイド
 aliases:
   - /ja/network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:
-  - link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
+  - link: 'https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/'
     tag: Documentation
     text: プロファイル形式のリファレンス
-  - link: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
+  - link: 'https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/'
     tag: Documentation
     text: シミュレーションデータ形式のリファレンス
 ---

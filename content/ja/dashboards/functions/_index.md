@@ -24,15 +24,15 @@ aliases:
 
 グラフエディターの `+` アイコンをクリックして関数をクエリに適用することができます。ほとんどの関数は最終段階 ([時間][1]および[空間集計][2]後) で適用されます。
 
-{{< img src="dashboards/functions/addingfunctions.png" alt="関数の追加"  style="width:75%;" >}}
+{{< img src="dashboards/functions/addingfunctions.png" alt="関数の追加" style="width:75%;" >}}
 
 これは、除外関数を適用してメトリクスの特定の値を除外する方法の例です。
 
-{{< img src="dashboards/functions/exclusion_example.png" alt="上位リストを使用した除外例"  style="width:75%;" >}}
+{{< img src="dashboards/functions/exclusion_example.png" alt="上位リストを使用した除外例" style="width:75%;" >}}
 
 エラーログにタイムシフト関数を適用して、現在のデータを 1 週間前のデータと比較する方法の例を次に示します。
 
-{{< img src="dashboards/functions/timeshift_example.png" alt="ログを使用したタイムシフトの例"  style="width:75%;" >}}
+{{< img src="dashboards/functions/timeshift_example.png" alt="ログを使用したタイムシフトの例" style="width:75%;" >}}
 
 
 {{< whatsnext desc="関数の種類を選択します。" >}}

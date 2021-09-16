@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS Storage Gateway のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_storage_gateway/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_storage_gateway/'
 draft: false
 git_integration_title: amazon_storage_gateway
 has_logo: true

@@ -3,7 +3,7 @@ aliases:
   - /ja/serverless/troubleshooting/installing_the_forwarder/
   - /ja/serverless/forwarder/
 dependencies:
-  - 'https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md'
+  - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
 kind: documentation
 title: Datadog Forwarder
 ---
@@ -105,8 +105,11 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 2. Datadog API キーを AWS Secrets Manager に保存し、環境変数 `DD_API_KEY_SECRET_ARN` に Lambda 関数のシークレット ARN を設定し、Lambda 実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加します。
 3. S3 バケットからログを転送する必要がある場合は、`s3:GetObject` アクセス許可を Lambda 実行ロールに追加します。
 4. Forwarder で環境変数 `DD_ENHANCED_METRICS` を `false` に設定します。これにより、Forwarder は拡張メトリクス自体を生成しなくなりますが、他の Lambda からカスタムメトリクスを転送します。
-5. [トリガー](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#send-aws-service-logs-to-datadog)を構成します。
-6. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:DeleteObject` アクセス許可を Lambda 実行ロールに提供します。このバケットは、Lambda タグキャッシュの保存に使用されます。
+5. 一部の AWS アカウントは、CloudWatch のロググループが Forwarder を呼び出すことを可能にするリソースベースのポリシーをトリガーが自動的に作成しないよう構成されています。
+   Forwarder が CloudWatch のログイベントから呼び出されるために必要なアクセス許可については、[CloudWatchLogPermissions](https://github.com/DataDog/datadog-serverless-functions/blob/029bd46e5c6d4e8b1ae647ed3b4d1917ac3cd793/aws/logs_monitoring/template.yaml#L680) を参照してください。
+
+6. [トリガー](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#send-aws-service-logs-to-datadog)を構成します。
+7. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:DeleteObject` アクセス許可を Lambda 実行ロールに提供します。このバケットは、Lambda タグキャッシュの保存に使用されます。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
@@ -127,8 +130,8 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 4. 新しい Forwarder が期待どおりに機能していること、つまりエラーなしで定期的に呼び出されることを確認します。
 5. 移行されたトリガー (ソース) からのログが Datadog ログエクスプローラーに表示されていることと、正しく表示されていることを確認します。
 6. すべてのトリガーを新しい Forwarder に移行します。
-   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-set-up-triggers)に管理させる場合は、AWS インテグレーションタイルの "Collect Logs" タブで Forwarder Lambda ARN を更新します。
-   - トリガーを[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-set-up-triggers)で管理していた場合は、手動で (またはスクリプトを使用して) トリガーを移行する必要があります。
+   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)に管理させる場合は、AWS インテグレーションタイルの "Collect Logs" タブで Forwarder Lambda ARN を更新します。
+   - トリガーを[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers)で管理していた場合は、手動で (またはスクリプトを使用して) トリガーを移行する必要があります。
 7. 古い Forwarder Lambda 関数の呼び出しカウントがゼロになっていることを確認します。
 8. 安心したら、古い Forwarder Lambda 関数を削除します。
 9. 古い Forwarder Lambda 関数が複数の AWS アカウントとリージョンにインストールされている場合は、アカウントとリージョンのすべての組み合わせで上記の手順を繰り返します。
@@ -336,7 +339,7 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 
 ログのフィルタリングに使用できる正規表現の例：
 
-- Lambda プラットフォームログを含める/除外する: `"(START|REPORT|END)\s`
+- Lambda プラットフォームログを含める/除外する: `"(START|REPORT|END)\s` 
 - CloudTrail エラーメッセージのみ含める: `errorMessage`
 - HTTP 4XX または 5XX のエラーコードを含むログのみを含める: `\b[4|5][0-9][0-9]\b`
 - `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\\"awsRegion\\":\\"us-east-1\\"`

@@ -9,7 +9,7 @@ further_reading:
     tag: ドキュメント
     text: イベントモニター
 aliases:
-  - /ja/events/
+  - /ja/developers/events/
 ---
 イベントは、エンジニア (開発、運用、セキュリティ) にとって注目に値するアクティビティの記録です。次のガイドを使用して、イベントをプログラムで送信します。
 

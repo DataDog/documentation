@@ -2,10 +2,10 @@
 title: Liste de contrôle pour les SLO
 kind: guide
 further_reading:
-  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
+  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
     tag: Blog
     text: Surveiller le statut et le budget d'indisponibilité de vos SLO avec Datadog
-  - link: https://learn.datadoghq.com/course/view.php?id=34
+  - link: 'https://learn.datadoghq.com/course/view.php?id=34'
     tag: Centre d'apprentissage
     text: Présentation des Service Level Objectives (SLO)
 ---
@@ -24,7 +24,7 @@ Cliquez <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">ici</a> 
     * Avec quels éléments de votre infrastructure interagissent-ils durant leur parcours ?
     * Qu'attendent-ils de vos systèmes, et que cherchent-ils à accomplir ?
 
-## Sélectionner le SLI pertinent
+## Sélectionner les SLI pertinents
 
 ### ÉTAPE 1
 

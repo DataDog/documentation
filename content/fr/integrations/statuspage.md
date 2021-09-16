@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Intégration Datadog/StatusPage.io.
-doc_link: https://docs.datadoghq.com/integrations/statuspage/
+doc_link: 'https://docs.datadoghq.com/integrations/statuspage/'
 draft: false
 git_integration_title: statuspage
 has_logo: true

@@ -1,12 +1,12 @@
 ---
-title: C# ログ収集
+title: 'C# ログ収集'
 kind: documentation
 aliases:
   - /ja/logs/languages/csharp
 further_reading:
-  - link: https://www.datadoghq.com/blog/c-logging-guide/
+  - link: 'https://www.datadoghq.com/blog/c-logging-guide/'
     tag: ブログ
-    text: C# ログの収集、カスタマイズ、分析方法
+    text: 'C# ログの収集、カスタマイズ、分析方法'
   - link: /logs/log_configuration/processors
     tag: Documentation
     text: ログの処理方法
@@ -16,7 +16,7 @@ further_reading:
   - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: /logs/explorer/#visualize
+  - link: '/logs/explorer/#visualize'
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide/

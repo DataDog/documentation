@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Google Cloud TPU のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tpu/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_tpu/
 draft: false
 git_integration_title: google_cloud_tpu
 has_logo: true

@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
-doc_link: https://docs.datadoghq.com/integrations/ansible/
+doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
 draft: false
 git_integration_title: ansible
 has_logo: true

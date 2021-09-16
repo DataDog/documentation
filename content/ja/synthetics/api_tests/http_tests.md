@@ -6,10 +6,10 @@ aliases:
   - /ja/synthetics/http_test
   - /ja/synthetics/http_check
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
     tag: ブログ
     text: Datadog Synthetic モニタリングの紹介
-  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
+  - link: https://learn.datadoghq.com/course/view.php?id=39
     tag: ラーニングセンター
     text: Synthetic テストの紹介
   - link: /getting_started/synthetics/api_test
@@ -49,7 +49,7 @@ HTTP テストは、ネットワークの外部または内部のどちらから
 
   {{% tab "リクエスト本文" %}}
 
-  * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、または `None`) を選択します。
+  * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlendcoded`、または `None`) を選択します。
   * **Request body**: HTTP リクエスト本文のコンテンツを追加します。**注**: リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
   {{% /tab %}}
@@ -106,12 +106,12 @@ HTTP テストは次の頻度で実行できます。
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][11]                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][10]、[`xpath`][11] | _文字列_ <br> _[Regex][12]_ <br> _文字列_、_[Regex][12]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _文字列_ <br> _[Regex][12]_                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
-**注**: HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文の圧縮を解除することが可能です。
+**注**: HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文を解凍することが可能です。
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
@@ -130,7 +130,7 @@ HTTP テストは次の頻度で実行できます。
 
 #### 高速再試行
 
-テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][12] を介して構成できます。
+テスト結果が失敗した場合、テストによって再試行をトリガーすることができます。デフォルトでは、再試行は最初に失敗したテスト結果の 300 ミリ秒後に実行されます。この間隔は [API][13] を介して構成できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
@@ -138,9 +138,9 @@ HTTP テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターと同様][13]、メッセージに`@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターと同様][14]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][14]のほか、以下の[条件付き変数][15]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][15]のほか、以下の[条件付き変数][16]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -181,7 +181,7 @@ HTTP テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][16]と[ローカルで定義された変数](#create-local-variables)を使用できます。 
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings` で定義されたグローバル変数][17]と[ローカルで定義された変数](#create-local-variables)を使用できます。
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
@@ -189,8 +189,6 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 ## テストの失敗
 
 テストが 1 つまたは複数のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストできずにテストが実際に失敗することがあります。これらの理由には次のものがあります。
-
-
 
 `CONNRESET`
 : 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
@@ -202,7 +200,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][17]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][18]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
@@ -223,10 +221,11 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 [8]: /ja/synthetics/api_tests/icmp_tests
 [9]: /ja/synthetics/search/#search
 [10]: https://restfulapi.net/json-jsonpath/
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[12]: /ja/api/v1/synthetics/#create-a-test
-[13]: /ja/monitors/notifications/?tab=is_alert#notification
-[14]: https://www.markdownguide.org/basic-syntax/
-[15]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /ja/synthetics/settings/#global-variables
-[17]: /ja/synthetics/api_tests/errors/#ssl-errors
+[11]: https://www.w3schools.com/xml/xpath_syntax.asp
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[13]: /ja/api/v1/synthetics/#create-a-test
+[14]: /ja/monitors/notifications/?tab=is_alert#notification
+[15]: https://www.markdownguide.org/basic-syntax/
+[16]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[17]: /ja/synthetics/settings/#global-variables
+[18]: /ja/synthetics/api_tests/errors/#ssl-errors
