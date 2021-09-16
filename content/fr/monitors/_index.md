@@ -9,7 +9,7 @@ aliases:
   - /fr/guides/monitors/the-conditions
 description: Créer et gérer vos notifications
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
+  - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
     tag: Blog
     text: "Monitoring 101\_: définir des alertes pertinentes"
   - link: /api/v1/monitors/

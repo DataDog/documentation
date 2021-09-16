@@ -10,7 +10,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/containerd/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
 display_name: Containerd
 draft: false
 git_integration_title: containerd

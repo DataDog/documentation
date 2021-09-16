@@ -5,7 +5,7 @@ categories:
 ddtype: '"crawler"'
 dependencies: []
 description: Azure Table Storage のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_table_storage/'
+doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
 draft: false
 git_integration_title: azure_table_storage
 has_logo: true

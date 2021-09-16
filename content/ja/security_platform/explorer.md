@@ -5,7 +5,7 @@ description: すべてのセキュリティシグナルを検索し、セキュ�
 aliases:
   - /ja/security_monitoring/explorer/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/announcing-security-monitoring/'
+  - link: https://www.datadoghq.com/blog/announcing-security-monitoring/
     tag: ブログ
     text: セキュリティモニタリングの詳細
   - link: /security_monitoring/detection_rules/
@@ -55,6 +55,21 @@ FIRST SEEN と LAST SEEN の日時は更新され、過去にないデータが�
 - `Samples` には、シグナルがトリガーされた理由に関するコンテキストを提供するログサンプルのリストが含まれています。完全なログを表示するには、サンプルのいずれかをクリックしてください。
 
 - `Related Issues` には、シグナルのトリアージを支援するために同じグループ化値を含む他のシグナルのリストが含まれています。
+
+### 脅威インテリジェンス
+
+Datadog セキュリティモニタリングでは、脅威インテリジェンスパートナーがキュレーションした脅威情報フィードを提供しています。これらのフィードは、既知の不審なアクティビティ (例: IOC など) に関するデータを含むよう常に更新されているため、どの潜在的な脅威に対処すべきかを迅速に特定することができます。
+
+{{< img src="security_platform/security_monitoring/explorer/threat_intelligence.png" alt="セキュリティシグナルエクスプローラー内の脅威インテリジェンス"  >}}
+
+Datadog は、関連する属性を持つすべての取り込みログを分析することで、脅威インテリジェンスを自動的に運用します。ログに危険な兆候 (VPN、プロキシ、または Tor の出口ノードに匿名化された IP が関連付けられているなど) が含まれている場合、`threat_intel` 属性がログイベントに追加され、利用可能なインテリジェンスに基づいて追加のインサイトを提供します。
+
+セキュリティシグナルエクスプローラーで一致するすべての脅威インテリジェンスを見るためのクエリは `@threat_intel.indicators_matched:*` です。脅威インテリジェンスを照会するためのその他の属性は次の通りです。
+
+* `@threat_intel.results.category “anonymizer”, “scanner”`
+* `@threat_intel.results.intention “malicious”, “unknown”`
+* `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
+    **注**: プロキシ、Tor、VPN のサブカテゴリの属性は、脅威インテリジェンスパートナーの IPinfo のみが提供しています。
 
 ### 異常検知
 
