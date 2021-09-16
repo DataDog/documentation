@@ -429,7 +429,7 @@ Pour les versions >= 6.12 de l'Agent :
 [2]: /fr/developers/integrations/python
 [3]: https://github.com/DataDog/integrations-extras
 [4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[5]: https://docs.datadoghq.com/fr/developers/metrics/agent_metrics_submission/
+[5]: https://docs.datadoghq.com/fr/metrics/agent_metrics_submission/
 [6]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
 [7]: https://docs.pytest.org/en/latest
 [8]: https://tox.readthedocs.io/en/latest

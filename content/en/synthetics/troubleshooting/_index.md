@@ -161,4 +161,4 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
-[14]: /synthetics/ci/?tab=apitest#cli-usage
+[14]: /synthetics/cicd_testing/?tab=apitest#cli-usage

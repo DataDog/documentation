@@ -42,7 +42,7 @@ DogStatsD は、UDP 経由で[カスタムメトリクス][5]、[イベント][6
 
 UDP を使用するため、アプリケーションはメトリクスを DogStatsD に送信した後、応答を待たずに自身の作業を再開できます。DogStatsD を利用できなくなった場合でも、アプリケーションは中断しません。
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
+{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
 DogStatsD は、データを受け取ると共に、_フラッシュ間隔_と呼ばれる時間間隔（デフォルトで 10 秒）でメトリクスごとに複数のデータポイントを 1 つのデータポイントに集計します。
 
@@ -174,7 +174,7 @@ env:
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /ja/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /ja/getting_started/tagging/assigning_tags/#environment-variables
-[6]: /ja/developers/metrics/custom_metrics/
+[6]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -210,7 +210,7 @@ env:
 
      これにより、アプリケーションを実行しているポッドは、`$DD_AGENT_HOST` のポート `8125` から DogStatsD メトリクスを送信できるようになります。
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[1]: /ja/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -500,7 +500,7 @@ using (var dogStatsdService = new DogStatsdService())
 DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能なデータ型、イベント、サービスチェック、タグなど、Datadog に固有の高度な機能が含まれています。
 
 {{< whatsnext desc="">}}
-    {{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -508,12 +508,12 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
 DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][10]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
 
 [1]: https://github.com/etsy/statsd
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /ja/developers/metrics/custom_metrics/
+[5]: /ja/metrics/custom_metrics/
 [6]: /ja/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /ja/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [9]: /ja/getting_started/tagging/unified_service_tagging
-[10]: /ja/developers/metrics/
+[10]: /ja/metrics/

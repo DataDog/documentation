@@ -2,9 +2,9 @@
 title: Metric Type Modifiers
 kind: documentation
 aliases:
- - /developers/metrics/metric_type_modifiers
+ - /metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
- - /developers/metrics/type_modifiers/
+ - /metrics/type_modifiers/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
@@ -79,7 +79,7 @@ Depending on the metric type you applied them to, the behavior differs:
 
 While it is not normally required, it is possible to change a metric's type in the [metric summary page][4]:
 
-{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="Metric Type"  style="width:70%;">}}
+{{< img src="metrics/type_modifiers/metric_type.png" alt="Metric Type"  style="width:70%;">}}
 
 Example use case:
 
@@ -97,7 +97,7 @@ If you are not willing to lose the historical data submitted as a `GAUGE`, creat
 
 **Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
 
-[1]: /developers/metrics/types/
+[1]: /metrics/types/
 [2]: /metrics/introduction/#time-aggregation
 [3]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [4]: https://app.datadoghq.com/metric/summary

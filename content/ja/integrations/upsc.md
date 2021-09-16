@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
 display_name: UPSC
 draft: false
 git_integration_title: upsc

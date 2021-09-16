@@ -70,6 +70,6 @@ max:trace.sample_span{datacenter:production, service:bar, resource:ghijk5678}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/metrics/distributions/
-[2]: /ja/developers/metrics/types/?tab=distribution#metric-types
+[2]: /ja/metrics/types/?tab=distribution#metric-types
 [3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

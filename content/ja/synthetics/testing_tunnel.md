@@ -3,13 +3,13 @@ title: Synthetic テストトンネル
 kind: documentation
 description: Datadog Synthetic テストトンネルを使用したローカルおよび CI/CD テスト。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
+  - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
     tag: ブログ
     text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
-  - link: 'https://learn.datadoghq.com/course/view.php?id=37'
+  - link: https://learn.datadoghq.com/course/view.php?id=37
     tag: ラーニングセンター
     text: CI/CD パイプラインで Synthetic テストを実行する方法を学ぶ
-  - link: 'https://www.datadoghq.com/blog/internal-application-testing-with-datadog/'
+  - link: https://www.datadoghq.com/blog/internal-application-testing-with-datadog/
     tag: ブログ
     text: Datadog のテストトンネルとプライベートロケーションを使用して内部アプリケーションをテストします
   - link: /synthetics/browser_tests/

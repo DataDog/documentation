@@ -2,7 +2,7 @@
 title: "Metric Submission: Custom Agent Check"
 kind: documentation
 aliases:
-  - /developers/metrics/agent_metrics_submission/
+  - /metrics/agent_metrics_submission/
 further_reading:
 - link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
@@ -224,16 +224,14 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
         (...)
     ```
 
-6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6]:
-
-{{< img src="developers/metrics/agent_metrics_submission/metrics_metrics_summary.png" alt="Metrics in metric summary"  style="width:80%;">}}
+6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/custom_checks/write_agent_check/
-[2]: /developers/metrics/types/
+[2]: /metrics/types/
 [3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-information

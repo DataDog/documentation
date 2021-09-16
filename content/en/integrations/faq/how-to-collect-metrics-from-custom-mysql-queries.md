@@ -65,4 +65,4 @@ Adding the following custom query to your MySQL `conf.yaml` collects the metric 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [2]: /api/
-[3]: /developers/metrics/dogstatsd_metrics_submission/
+[3]: /metrics/dogstatsd_metrics_submission/
