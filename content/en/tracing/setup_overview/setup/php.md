@@ -252,7 +252,7 @@ Enable tracing of PHP scripts from the CLI
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
-Enable [debug mode](#custom-url-to-resource-mapping) for the tracer
+Enable debug mode. When `true`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
