@@ -54,7 +54,7 @@ If you haven't already, create a [Datadog account][6].
 [2]: /synthetics/multistep
 [3]: /synthetics/browser_tests/
 [4]: /synthetics/private_locations
-[5]: /synthetics/ci/
+[5]: /synthetics/cicd_testing/
 [6]: https://www.datadoghq.com/
 [7]: /getting_started/synthetics/api_test/
 [8]: /getting_started/synthetics/api_test/#create-a-multistep-api-test

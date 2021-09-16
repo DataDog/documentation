@@ -23,9 +23,7 @@ On the [Synthetic Monitoring Settings page][1], you can adjust the following set
 
 * [Global Variables](#global-variables)
 * [Private Locations][2]
-* [Default settings](#default-settings)
-  * [Default Locations](#default-locations)
-  * [APM integration for Browser Tests](#apm-integration-for-browser-tests)
+* [Default Settings](#default-settings)
 
 ## Global variables
 
@@ -63,8 +61,6 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 
 **Note:** Variable values are updated whenever the test they are extracted from runs.
 
-[4]:/account_management/rbac/permissions/
-
 [1]: /synthetics/api_tests/?tab=httptest
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
@@ -86,7 +82,6 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 **Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][1].
 
-
 [1]: /synthetics/guide/browser-tests-totp
 {{% /tab %}}
 
@@ -104,6 +99,8 @@ If you have access to the [custom role feature][9], add your user to a custom ro
 RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
+
+{{< img src="synthetics/settings/restrict-access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
