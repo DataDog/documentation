@@ -89,9 +89,7 @@ Note: Datadog Operator v0.7.0 or greater is required.
 
 In the original `kubernetes_state` check, several tags have been flagged as deprecated and replaced by new tags. To determine your migration path, check which tags are submitted with your metrics.
 
-With `kubernetes_state_core`, only the non-deprecated tags are sent.
-
-Before migrating to `kubernetes_state_core`, verify that only official tags are used in monitors and dashboards.
+In the `kubernetes_state_core` check, only the non-deprecated tags are submitted. Before migrating from `kubernetes_state` to `kubernetes_state_core`, verify that only official tags are used in monitors and dashboards.
 
 Here is the mapping between deprecated tags and the official tags that have replaced them:
 
