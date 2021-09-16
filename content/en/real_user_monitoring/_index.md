@@ -5,7 +5,6 @@ description: "Visualize and analyze the performance of your front end applicatio
 disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
-  - /session_replay
 further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
