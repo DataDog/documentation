@@ -1,7 +1,7 @@
 # Ignore all js directories, delete each as eslint errors are fixed
-src/scripts/datadog-docs.js
-src/scripts/helpers/moveToAnchor.js
-src/scripts/components/global-modals.js
-src/scripts/components/header.js
-src/scripts/components/platforms.js
-src/scripts/components/sidenav.js
+assets/scripts/datadog-docs.js
+assets/scripts/helpers/moveToAnchor.js
+assets/scripts/components/global-modals.js
+assets/scripts/components/header.js
+assets/scripts/components/platforms.js
+assets/scripts/components/sidenav.js

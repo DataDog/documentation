@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import config from '../../regions.config';
+import config from './regions.config';
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {

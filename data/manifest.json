@@ -1,10 +1,4 @@
 {
   "@babel/polyfill.js": "static/@babel/polyfill.js",
-  "api-redirect.js": "static/api-redirect.js",
-  "dd-browser-logs-rum.js": "static/dd-browser-logs-rum.js",
-  "lang-redirects.js": "static/lang-redirects.js",
-  "main-dd-js.js": "static/main-dd-js.js",
-  "region-redirects.js": "static/region-redirects.js",
-  "search.js": "static/search.js",
   "vendor.js": "static/vendor.js"
 }
