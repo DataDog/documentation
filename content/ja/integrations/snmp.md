@@ -2,6 +2,8 @@
 aliases:
   - /ja/agent/faq/how-to-monitor-snmp-devices/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Datacenter Overview: assets/dashboards/datacenter_overview.json
     Interface Performance: assets/dashboards/interface_performance.json
@@ -17,7 +19,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snmp/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
 display_name: SNMP
 draft: false
 git_integration_title: snmp

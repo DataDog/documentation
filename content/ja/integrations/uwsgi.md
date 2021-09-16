@@ -9,7 +9,7 @@ categories:
   - web
 doc_link: /integrations/uwsgi/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
 has_logo: true
 integration_title: uWSGI
 is_public: true

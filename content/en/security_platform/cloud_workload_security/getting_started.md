@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
   text: "Learn more about Datadog Cloud Runtime Security"
+- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
+  tag: "Blog"
+  text: "How to detect security threats in your systems' Linux processes"
 ---
 
 ## Overview
@@ -78,7 +81,7 @@ DOCKER_CONTENT_TRUST=1 \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_SYSTEM_PROBE_ENABLED=true \
   -e HOST_ROOT=/host/root \
-  -e DD_API_KEY=<API KEY> datadog/agent:7-jmx
+  -e DD_API_KEY=<API KEY> gcr.io/datadoghq/agent:7-jmx
 
 {{< /code-block >}}
 

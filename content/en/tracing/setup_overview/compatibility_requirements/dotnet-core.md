@@ -11,7 +11,7 @@ further_reading:
     - link: 'tracing/setup/dotnet-core'
       tag: 'Documentation'
       text: 'Instrument Your Application'
-    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
@@ -51,6 +51,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
 | ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                                     | `AdoNet`             |
+| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                   | `AspNetCore`         |
 | AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0                                                     | `CosmosDb`           |
@@ -73,7 +74,7 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 ## Out of support .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 3.1 or .NET 5. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|

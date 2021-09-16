@@ -7,7 +7,7 @@ further_reading:
   - link: /network_monitoring/devices/profiles
     tag: Documentation
     text: ネットワークデバイスモニタリングのプロファイルの使用
-  - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
+  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
     tag: ブログ
     text: Datadog での SNMP モニタリング
 ---

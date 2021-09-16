@@ -1,5 +1,5 @@
 ---
-title: Adding a custom Python package to the Agent
+title: Adding a Custom Python Package to the Agent
 kind: documentation
 aliases:
 - /agent/custom_python_package
@@ -21,7 +21,7 @@ further_reading:
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-Python packages can be installed via the embedded `pip`:
+Python packages can be installed with the embedded `pip`:
 
 ```shell
 sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
@@ -32,7 +32,7 @@ sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-Python packages can be installed via the embedded `pip`:
+Python packages can be installed with the embedded `pip`:
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>

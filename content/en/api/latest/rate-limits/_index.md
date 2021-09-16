@@ -20,7 +20,10 @@ Regarding the API rate limit policy:
 - The rate limit for the [Query a Timeseries API][4] call is `1600` per hour per organization. This can be extended on demand.
 - The rate limit for the [Log Query API][5] call is `300` per hour per organization. This can be extended on demand.
 - The rate limit for the [Graph a Snapshot API][6] call is `60` per hour per organization. This can be extended on demand.
-- The rate limit for the [Log Configuration API][7] is `6000` per minute per organization. This can be extended on demand.
+- The [Log Configuration APIs][7] can be read `84` times per minute per organization for a total of `5040` calls per hour, and can be updated `2` times per minute per organization for a total of `120` calls per hour. This can be extended on demand.
+
+<div class="alert alert-warning">
+The list above is not comprehensive of all rate limits on Datadog API's. If you are experiencing rate limiting, reach out to <a href="https://www.datadoghq.com/support/">support</a> for more information about the API's you're using and their limits.</div>
 
 | Rate Limit Headers      | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
@@ -31,7 +34,7 @@ Regarding the API rate limit policy:
 
 [1]: /help/
 [2]: /api/v1/metrics/
-[3]: /developers/metrics/custom_metrics/
+[3]: /metrics/custom_metrics/
 [4]: /api/v1/metrics/#query-timeseries-points
 [5]: /api/v1/logs/#get-a-list-of-logs
 [6]: /api/v1/snapshots/

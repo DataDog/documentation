@@ -38,7 +38,36 @@ Datadog enforces several filtering mechanisms on spans as a baseline, to provide
 
 ## Agent trace obfuscation
 
-Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
+Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate information attached to your traces.
+
+List of all environment variables available for Agent trace obfuscation:
+
+`DD_APM_CONFIG_OBFUSCATION_ELASTICSEARCH_ENABLED`
+: Whether or not to enable obfuscation in Elasticsearch.
+
+`DD_APM_CONFIG_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES`
+: Whether or not to store obfuscated values from Elasticsearch.
+
+`DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`
+: A string containing values to remove from HTTP paths for obfuscation.
+
+`DD_APM_CONFIG_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`
+: A string containing one or more query strings to remove for obfuscation.
+
+`DD_APM_CONFIG_OBFUSCATION_MEMCACHED_ENABLED`
+: Whether or not to enable obfuscation of `memcached`.
+
+`DD_APM_CONFIG_OBFUSCATION_MONGODB_ENABLED`
+: Whether or not to enable obfuscation of `mongodb`. 
+
+`DD_APM_CONFIG_OBFUSCATION_MONGODB_KEEP_VALUES`
+: Whether or not to store obfuscated values from `mongodb`.
+
+`DD_APM_CONFIG_OBFUSCATION_REDIS_ENABLED`
+: Whether or not to enable obfuscation for `redis`.
+
+`DD_APM_CONFIG_OBFUSCATION_REMOVE_STACK_TRACES`
+: Whether or not to remove stack traces for obfuscation.
 
 This option works with the following services:
 
@@ -50,7 +79,6 @@ This option works with the following services:
 * `remove_stack_traces`
 
 **Note:** You can use automatic scrubbing for multiple types of services at the same time.  Configure each in the `obfuscation` section of your `datadog.yaml` file.
-
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
@@ -262,11 +290,13 @@ DD_APM_REPLACE_TAGS=[
 
 ## Exclude resources from being collected
 
+For an in depth overview of the options to avoid tracing specific resources, see [Ignoring Unwanted Resources][5].
+
 If your services include simulated traffic such as health checks, you may want to exclude these traces from being collected so the metrics for your services match production traffic.
 
 The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . Then create a list of one or more regular expressions, specifying which resources the Agent will filter out based on their resource name.
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][6] for details.
 
 ```text
 ## @param ignore_resources - list of strings - optional
@@ -274,8 +304,6 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 ## All entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 ```
-
-**Note:** The NodeJS Tracer has an additional option for request filtering that is part of the Node Tracer API.  More details can be found [here][6]
 
 ## Submit Traces directly to the Agent API
 
@@ -294,8 +322,8 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
 [4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[6]: /tracing/custom_instrumentation/nodejs/#request-filtering
+[5]: /tracing/guide/ignoring_apm_resources/
+[6]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [7]: /tracing/guide/send_traces_to_agent_by_api/
 [8]: /tracing/setup_overview/custom_instrumentation/java/#extending-tracers
 [9]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces

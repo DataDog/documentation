@@ -10,7 +10,7 @@ Organization Settings allow you to manage users, groups, RBAC, keys, and tokens.
 #### Users
 
 Read the [user management][2] documentation to add, edit, and disable users.
-#### Service Accounts
+
 
 ### Groups
 
@@ -56,7 +56,7 @@ The **Authentication** tab shows password, Google, and SAML authentication setti
 
 #### Audit Logs
 
-The **Audeit Logs** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
+The **Audit Logs** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
 
 #### Audit Log Settings
 

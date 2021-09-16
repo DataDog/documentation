@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Sonarqube Overview: assets/dashboards/overview.json
   logs:
     source: sonarqube
   metrics_metadata: metadata.csv
@@ -18,11 +19,11 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_name: SonarQube
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-sonarqube-integration/'
+  - link: https://www.datadoghq.com/blog/datadog-sonarqube-integration/
     tag: ブログ
     text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube
@@ -290,12 +291,12 @@ Collector
 SonarQube には、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "sonarqube" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
@@ -310,5 +311,4 @@ SonarQube には、イベントは含まれません。
 [5]: https://docs.sonarqube.org/latest/instance-administration/monitoring/#header-4
 [6]: https://docs.datadoghq.com/ja/integrations/java/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/ja/help/

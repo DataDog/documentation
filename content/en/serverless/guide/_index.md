@@ -11,4 +11,5 @@ kind: guide
 {{< whatsnext desc="Using the Datadog Lambda Extension:" >}}
     {{< nextlink href="/serverless/guide/extension_motivation" >}}Deciding to migrate to the Datadog Lambda Extension{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/forwarder_extension_migration" >}}Migrating from the Datadog Forwarder to the Datadog Lambda Extension{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/extension_private_link" >}}Datadog Lambda Extension AWS PrivateLink Setup{{< /nextlink >}}
 {{< /whatsnext >}}

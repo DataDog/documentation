@@ -126,6 +126,14 @@ The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for 
 
 #### Log collection
 
+{{< site-region region="us3" >}}
+
+Log collection is not supported for this site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
 ##### Enable
 
 To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
@@ -165,11 +173,15 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### Notification in case of misconfigured proxy
 
-For Agent v6.12+, when using a [proxy configuration][13] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
+For Agent v6.12+, when using a [proxy configuration][1] with the Buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event stream. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
+
+[1]: /agent/logs/proxy/
+
+{{< /site-region >}}
 
 ### Build
 
@@ -433,7 +445,7 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: /integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /developers/metrics/dogstatsd_metrics_submission/
+[5]: /metrics/dogstatsd_metrics_submission/
 [6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [7]: https://github.com/cloudfoundry/multi-buildpack
 [8]: https://github.com/cloudfoundry/multi-buildpack#usage
@@ -441,7 +453,6 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [11]: https://github.com/cf-platform-eng/meta-buildpack
 [12]: /tracing/setup/
-[13]: /agent/logs/proxy/
 [14]: /libraries/
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install

@@ -235,7 +235,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -250,7 +250,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.30.0
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
@@ -290,7 +290,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true

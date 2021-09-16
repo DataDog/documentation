@@ -46,6 +46,7 @@ logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # If TLS/SSL is not enabled on the Vector side
   use_http: true # Vector `datadog_logs` source only supports HTTP
+  use_v2_api: false # Vector `datadog_logs` source only supports v1
 ```
 
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
@@ -63,7 +64,7 @@ Here is a configuration example that adds a tag to every log using the Vector Re
 ```yaml
 sources:
   datadog_agents:
-    type: datadog_logs
+    type: datadog_agent
     address: "[::]:8080" # The <VECTOR_PORT> mentioned above should be set to the port value used here
 
 transforms:
@@ -72,7 +73,9 @@ transforms:
     inputs:
       - datadog_agents
     source: |
-      .ddtags = .ddtags + ",sender:vector"
+      # The `!` shorthand is used here with the `string` function, it errors if .ddtags is not a "string".
+      # The .ddtags field is always expected to be a string.
+      .ddtags = string!(.ddtags) + ",sender:vector"
 
 sinks:
   to_datadog:
@@ -124,10 +127,10 @@ to fill relevant fields according to the expected schema.
 [7]: https://vector.dev/docs/reference/configuration/transforms/route/
 [8]: /getting_started/tagging
 [9]: https://vector.dev/docs/reference/vrl/
-[10]: https://vector.dev/docs/reference/configuration/sources/datadog_logs/
+[10]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
 [11]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
 [12]: https://vector.dev/docs/reference/configuration/
 [13]: /agent/kubernetes/?tab=helm
-[14]: https://github.com/timberio/vector/tree/master/distribution/helm/vector-aggregator
+[14]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs

@@ -221,7 +221,7 @@ Input your bucket name. **Optional**: Input a prefix directory for all the conte
 
 By default:
 
-* All Datadog Admin users can create, edit and reorder (see [Configure Multiple Archives](#configure-multiple-archives) archives
+* All Datadog Admin users can create, edit and reorder (see [Configure Multiple Archives](#multiple-archives) archives
 * All Datadog Admin and Standard users can rehydrate from archives
 * All users, including Datadog Read Only users, can access rehydrated logs
 
@@ -381,8 +381,6 @@ Within the zipped JSON file, each event’s content is formatted as follows:
     "tags": [ "env:prod", "team:acme" ]
 }
 ```
-
-**Note**: Adding tags in archives is an opt-in feature - see in the [Datadog tags section](#datadog-tags) to enable it for an archive.
 
 ## Further Reading
 

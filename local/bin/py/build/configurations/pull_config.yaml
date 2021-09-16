@@ -85,6 +85,8 @@
       options:
         dest_dir: '/developers/integrations/'
         path_to_remove: 'docs/dev/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
 
   - repo_name: integrations-extras
     contents:
@@ -529,6 +531,8 @@
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
@@ -579,3 +583,13 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: datadog-agent
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "pkg/config/config_template.yaml"
+      options:
+        file_name: 'agent_config.yaml'
+        output_content: false

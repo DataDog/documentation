@@ -14,7 +14,7 @@ further_reading:
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
-An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole — you can see pieces individually and also how individual pieces are impacting the whole.
+An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole.
 
 **Note**: It's best to start collecting metrics on your projects as early in the development process as possible, but you can start at any stage.
 
@@ -48,7 +48,7 @@ To activate a given integration:
 2. Update the required parameters inside the newly created configuration file with the values corresponding to your environment.
 3. [Restart the Datadog Agent][21].
 
-**Note**: All configuration files follow the format documented in the [parameters documentation][22].
+**Note**: All configuration files follow the format documented under [@param specification][22].
 
 For example, this is the minimum `conf.yaml` configuration file needed to collect metrics and logs from the [apache integration][23]:
 
@@ -85,7 +85,7 @@ instances:
 
 #### Collection interval
 
-The default collection interval for all Datadog standard integrations is 15 seconds. To change the collection interval, use the parameter `min_collection_interval`. For more details, see the [developer documentation][24].
+The default collection interval for all Datadog standard integrations is 15 seconds. To change the collection interval, use the parameter `min_collection_interval`. For more details, see [Updating the collection interval][24].
 
 ### Tagging
 
@@ -95,7 +95,7 @@ If you define tags in the `datadog.yaml` file, the tags are applied to all of yo
 
 For example, setting `service` in your config file is the recommended [Agent setup][26] for monitoring separate, independent systems.
 
-To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more about unified service tagging, refer to the dedicated [unified service tagging][12] documentation.
+To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][12].
 
 ### Validation
 
@@ -120,19 +120,19 @@ Hosts that are running the integration, but where the integration is not enabled
 
 ## Security practices
 
-For information on how Datadog handles your data, and other security considerations, see our [Security documentation][29].
+For information on how Datadog handles your data, and other security considerations, see the [Security documentation][29].
 
 ## What's next?
 
-Now that you have your first integrations set up, you can start [exploring all of the metrics][30] being sent to Datadog by your application, and use these metrics to begin setting up [dashboards][31] and [alerts][32] to monitor your data.
+After your first integration is set up, [explore all of the metrics][30] being sent to Datadog by your application, and use these metrics to begin setting up [dashboards][31] and [alerts][32] to monitor your data.
 
-Also check out our [Logs management][33], [APM][34], and [Synthetic Monitoring][35] solutions.
+Also check out Datadog [Logs management][33], [APM][34], and [Synthetic Monitoring][35] solutions.
 
 ## Troubleshooting
 
 The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][36] steps.
 
-If you continue to have problems, reach out to [our awesome Support team][37].
+If you continue to have problems, contact [Datadog support][37].
 
 ## Key terms
 
@@ -140,10 +140,11 @@ If you continue to have problems, reach out to [our awesome Support team][37].
 : You create the `conf.yaml` in the `conf.d/<INTEGRATION_NAME>.d` folder at the root of your [Agent's configuration directory][38]. Use this file to connect integrations to your system, as well as configure their settings.
 
 custom check
-: If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][10] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][1] instead of a custom check.
+: If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][10] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project and the integration doesn't exist, consider [building a new integration][1] instead of a custom check.
 
 `datadog.yaml`
-: This is the main configuration file where you're defining how the Agent as a whole interacts with its own integrations and with your system. Use this file to update API keys, Proxys, host tags, and other global settings. 
+: This is the main configuration file where you're defining how the Agent as a whole interacts with its own integrations and with your system. Use this file to update API keys, proxies, host tags, and other global settings.
+
 event
 : Events are informational messages about your system that are consumed by [the events stream][39] so that you can build monitors on them.
 
@@ -154,7 +155,7 @@ instance
 : If you have a complex configuration, you can break it down into multiple `YAML` files, and then store them all in the `<INTEGRATION_NAME>.d` folder to define the configuration. The Agent loads any valid `YAML` file in the `<INTEGRATION_NAME>.d` folder.
 
 logging
-: If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][33] to manage and analyze them. 
+: If the system you are monitoring has logs, customize the logs you are sending to Datadog by using the [Log Management solution][33].
 
 `metadata.csv`
 : The file that lists and stores the metrics collected by each integration.
@@ -196,9 +197,9 @@ tagging
 [19]: https://app.datadoghq.com/account/settings#agent/docker
 [20]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
-[22]: /developers/integrations/new_check_howto/#param-specification
+[22]: /developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /developers/custom_checks/write_agent_check/#collection-interval
+[24]: /developers/custom_checks/write_agent_check/#updating-the-collection-interval
 [25]: /getting_started/tagging/
 [26]: /getting_started/agent/#setup
 [27]: /agent/guide/agent-commands/#agent-status-and-information
@@ -215,6 +216,6 @@ tagging
 [38]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [39]: https://app.datadoghq.com/event/stream
 [40]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[41]: /developers/metrics/
-[42]: /developers/metrics/custom_metrics/
+[41]: /metrics/
+[42]: /metrics/custom_metrics/
 [43]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/

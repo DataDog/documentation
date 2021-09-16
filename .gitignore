@@ -4,6 +4,10 @@ data/service_checks/
 data/npm
 integrations_data
 
+# htmltest tmp files
+bin/htmltest
+tmp
+
 # Ignore generated examples
 /examples
 content/en/api/**/*.go
@@ -168,10 +172,14 @@ __pycache__/
 
 /DataDog-dogweb-*/
 Makefile.config
+
+# data
 data/permissions.json
+data/agent_config.json
+
+agent_config_types_list.txt
 
 static/images/integrations_logos/2020w2.pdf
 
 # Generated resources from Hugo Pipes
 resources/_gen/
-

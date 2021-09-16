@@ -194,8 +194,8 @@ With the following definitions:
 [2]: /tracing/setup/
 [3]: /tracing/visualization/#trace-metrics
 [4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /developers/metrics/types/?tab=count#metric-types
-[6]: /developers/metrics/types/?tab=gauge#metric-types
+[5]: /metrics/types/?tab=count#metric-types
+[6]: /metrics/types/?tab=gauge#metric-types
 [7]: /tracing/visualization/services_list/#services-types
 [8]: /tracing/visualization/#services
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

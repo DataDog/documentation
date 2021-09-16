@@ -18,17 +18,18 @@ Usage ページには、製品カテゴリー別にグループ化された使�
 
 ## 当月サマリー
 
-このセクションには、月内の使用量の概要が表示されます。"All" タブでは、インフラストラクチャーホスト、コンテナ、カスタムメトリクス、APM ホスト、ログなど、当月内に使用したプラットフォームの各項目の使用量を確認できます。
+このセクションには、月内の使用量の概要が表示されます。"All" タブでは、インフラストラクチャーホスト、コンテナ、カスタムメトリクス、APM ホスト、ログなど、当月内に使用したプラットフォームの各項目の使用量を表示します。
 
 {{< img src="account_management/billing/usage-details-v2-01.png" alt="使用量サマリー - All タブ" >}}
 
-製品固有のタブでは、その製品カテゴリーの製品の当月内使用量を確認できます。
+製品固有のタブでは、その製品カテゴリーの製品の当月内使用量を表示します。
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="使用量サマリー - ネットワーク" >}}
 
-上記の月内の使用量は "All" (すべて) の使用量であり、製品の試用などの請求対象外の使用量が含まれます。ほとんどのアカウントは、"Billable" (請求対象) の使用量を表示することもできます。これは、最終的な請求に寄与する使用量のみを表示します。"Billable" ビューは、コミットメントと割り当てを超えるオンデマンドの使用量も示します。
+上記の月内の使用量は "All" (すべて) の使用量であり、製品の試用などの請求対象外の使用量が含まれます。ほとんどのアカウントは、"Billable" (請求対象) の使用量を表示することができます。これは、最終的な請求に寄与する使用量のみを表示します。"Billable" ビューは、コミットメントと割り当てを超えるオンデマンドの使用量を示します。
 
-{{< img src="account_management/billing/usage-details-v2-07.png" alt="使用量サマリー - Billable" >}}
+{{< img src="account_management/billing/usage-details-v2-07.png" alt="使用量の詳細 - 請求対象" >}}
+API ユーザーの場合、エンドポイントを使用して ["All"][8] (すべて) の使用量と ["Billable"][9] (請求対象) の使用量にアクセスできます。
 
 各製品の月内の使用量は、次のように計算されます。
 
@@ -64,14 +65,7 @@ Usage ページには、製品カテゴリー別にグループ化された使�
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="1 時間あたりの使用量 - すべて" >}}
 
-製品固有のタブには、その製品カテゴリーの製品の時、日、月、年ごとの使用量が表示されます。Infrastructure タブでは、ホストタイプ別の **Infra Hosts** グラフの詳細を確認できます。
-
-* Agent ホスト
-* AWS ホスト
-* Azure ホスト
-* GCP ホスト
-* vSphere Hosts
-* Azure App Service
+製品固有のタブで、その製品カテゴリの製品の 1 時間ごと、1 日ごと、1 か月ごと、および 1 年ごとの使用量を表示します。一部の製品では、使用量の詳しい内訳も表示されます。たとえば、Infrastructure タブには、ホストタイプごとの内訳が用意されています。
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="1 時間あたりの使用量 - インフラホスト" >}}
 
@@ -81,22 +75,31 @@ Usage ページには、製品カテゴリー別にグループ化された使�
 
 ## 上位カスタムメトリクス
 
-Custom Metrics タブにあるこの表には、上位 500 のカスタムメトリクスの当月内使用量と、最新の日次使用量（最終更新日の使用量）に関する以下の情報が表示されます。
+Custom Metrics タブの Top Custom Metrics テーブルには、当月内使用量と最新の日次使用量 (最終更新日の使用量) の 2 つのビューが表示されます。
 
+"Top 5000" ビューには、上位 5000 のカスタムメトリクスに関する次の情報が表示されます。
 * メトリクス名
 * 1 時間ごと平均カスタムメトリクス数
 * 1 時間ごと最大カスタムメトリクス数
 * カスタムメトリクスの使用数全体に対する各メトリクスの貢献率
+* 上位 5000 のカスタムメトリクス内のメトリクスを検索します
+* このデータは CSV ファイルとしてダウンロードできます。
 
-このデータは CSV ファイルとしてダウンロードできます。
+"All" ビューには、すべてのカスタムメトリクスに関する次の情報が表示されます。
+* メトリクス名
+* 1 時間ごと平均カスタムメトリクス数
+* 1 時間ごと最大カスタムメトリクス数
+* すべてのカスタムメトリクス内のメトリクスを検索します
+* このデータは、最大 300,000 のカスタムメトリクスを CSV ファイルとしてダウンロードできます。[API エンドポイント][7]を使用すれば、300,000 を超えるカスタムメトリクスをダウンロードできます。
 
-メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、Usage ページから [Metrics Summary][5] に移動します。
 
-{{< img src="account_management/billing/usage-metrics-04.png" alt="カスタムメトリクスの行のメーターアイコン" >}}
+メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、[Metrics Summary][3] に移動します。
+
+{{< img src="account_management/billing/usage-metrics-05.png" alt="上位カスタムメトリクスの概要テーブル" >}}
 
 ## インデックス別ログ使用量
 
-Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][6]の内訳も示しています。以下の情報が提供されます。
+Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][4]の内訳も示しています。以下の情報が提供されます。
 
 * インデックス名
 * 保持期間（日数）
@@ -109,13 +112,16 @@ Log Management タブにあるこの表には、インデックス名および�
 
 ## トラブルシューティング
 
-技術的な質問については、[Datadog のサポートチーム][3]にお問い合わせください。
+技術的な質問については、[Datadog のサポートチーム][5]にお問い合わせください。
 
-課金に関するご質問は、[カスタマーサクセス][4]マネージャーにお問い合わせください。
+課金に関するご質問は、[カスタマーサクセス][6]マネージャーにお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /ja/developers/metrics/custom_metrics/
-[3]: /ja/help/
-[4]: mailto:success@datadoghq.com
-[5]: https://docs.datadoghq.com/ja/metrics/summary/#overview
-[6]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
+[3]: https://docs.datadoghq.com/ja/metrics/summary/#overview
+[4]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
+[5]: /ja/help/
+[6]: mailto:success@datadoghq.com
+[7]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[8]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-usage-across-your-multi-org-account
+[9]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-billable-usage-across-your-account

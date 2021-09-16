@@ -16,7 +16,7 @@ further_reading:
       text: 'DogStatsD source code'
 ---
 
-Datadog DogStatsD implements the StatsD protocol [with some differences][1]. DogStatsD enables you to send metrics and monitor your application code without blocking it. Data is transmitted from your application via UDP to the local [DogStatsD server][2] (embedded in the Datadog Agent), which aggregates and then sends it to Datadog's API endpoint. [Read more about the DogStatsD setup][2].
+Datadog DogStatsD implements the StatsD protocol [with some differences][1]. DogStatsD enables you to send metrics and monitor your application code without blocking it. Data is transmitted from your application through UDP to the local [DogStatsD server][2] (embedded in the Datadog Agent), which aggregates and then sends it to Datadog's API endpoint. Read more about the [DogStatsD setup][2].
 
 This article describes why and how the aggregation is performed over your data.
 
@@ -28,7 +28,7 @@ Consider a [COUNT metric][3] that is incremented 1,000 times (+1 each time) over
 
 ## How is aggregation performed with the DogStatsD server?
 
-[DogStatsD][2] uses a _flush interval_ of 10 seconds. Every 10 seconds, [DogStatsD][2] checks all data received since the last flush (i.e., in the last 10 seconds). All values that correspond to the same metric name and the same tags are aggregated together into a single value.
+[DogStatsD][2] uses a _flush interval_ of 10 seconds. Every 10 seconds, [DogStatsD][2] checks all data received since the last flush. All values that correspond to the same metric name and the same tags are aggregated together into a single value.
 
 **Note**: With the StatsD protocol, the StatsD client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD][2] server (embedded in the Datadog Agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
 
@@ -36,22 +36,22 @@ Consider a [COUNT metric][3] that is incremented 1,000 times (+1 each time) over
 
 Among all values received during the same flush interval, the aggregated value send depends on the [metric type][4]:
 
-| Metric Type       | Aggregation performed over one flush interval                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [GAUGE][5]        | The latest datapoint received is sent.                                                                                                                           |
-| [COUNT][3]        | The sum of all received datapoints is sent.                                                                                                                      |
-| [HISTOGRAM][6]    | The min, max, sum, avg, 95 percentiles, count, and median of all datapoints received is sent. See the [HISTOGRAM metric documentation page][6] for more details. |
-| SET               | The number of different datapoints is sent.                                                                                                                      |
-| [DISTRIBUTION][7] | Aggregated as global distributions.                                                                                                                              |
+| Metric Type       | Aggregation performed over one flush interval                                                 |
+|-------------------|-----------------------------------------------------------------------------------------------|
+| [GAUGE][5]        | The latest datapoint received is sent.                                                        |
+| [COUNT][3]        | The sum of all received datapoints is sent.                                                   |
+| [HISTOGRAM][6]    | The min, max, sum, avg, 95 percentiles, count, and median of all datapoints received is sent. |
+| SET               | The number of different datapoints is sent.                                                   |
+| [DISTRIBUTION][7] | Aggregated as global distributions.                                                           |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd/
-[2]: /developers/metrics/dogstatsd_metrics_submission/
-[3]: /developers/metrics/types/?tab=count#metric-types
-[4]: /developers/metrics/types/
-[5]: /developers/metrics/types/?tab=gauge#metric-types
-[6]: /developers/metrics/types/?tab=histogram#metric-types
-[7]: /developers/metrics/types/?tab=distribution#metric-types
+[2]: /metrics/dogstatsd_metrics_submission/
+[3]: /metrics/types/?tab=count#metric-types
+[4]: /metrics/types/
+[5]: /metrics/types/?tab=gauge#metric-types
+[6]: /metrics/types/?tab=histogram#metric-types
+[7]: /metrics/types/?tab=distribution#metric-types

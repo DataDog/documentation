@@ -42,7 +42,7 @@ DogStatsD accepte les [métriques custom][5], les [événements][6] et les [chec
 
 Grâce au protocole UDP, votre application peut envoyer des métriques à DogStatsD et reprendre sa tâche sans attendre de réponse. Si jamais DogStatsD devient indisponible, votre application continue à fonctionner sans interruption.
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd">}}
+{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd">}}
 
 Lorsque DogStatsD reçoit des données, il agrège de nombreux points de données pour chaque métrique en un point de données unique sur une période désignée par le terme _intervalle de transmission_ (par défaut, dix secondes).
 
@@ -175,7 +175,7 @@ Pour définir la [cardinalité des tags][5] pour les métriques recueillies avec
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /fr/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /fr/getting_started/tagging/assigning_tags/#environment-variables
-[6]: /fr/developers/metrics/custom_metrics/
+[6]: /fr/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -211,7 +211,7 @@ Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
 
      Grâce à ce manifeste, un pod exécutant votre application peut transmettre des métriques DogStatsD via le port `8125` sur `$DD_AGENT_HOST`.
 
-[1]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[1]: /fr/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -487,7 +487,7 @@ Pour en savoir plus, consultez la documentation relative à la [classe NonBlocki
 DogStatsD et StatsD sont assez semblables. Toutefois, DogStatsD comprend des fonctionnalités avancées propres à Datadog, notamment en ce qui concerne les types de données, les événements, les checks de service et les tags disponibles :
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Envoyer des métriques à Datadog avec DogStatsD{{< /nextlink >}}
+{{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}Envoyer des métriques à Datadog avec DogStatsD{{< /nextlink >}}
 {{< nextlink href="/events/guides/dogstatsd/" >}}Envoyer des événements à Datadog avec DogStatsD{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Envoyer des checks de service à Datadog avec DogStatsD{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -495,12 +495,12 @@ DogStatsD et StatsD sont assez semblables. Toutefois, DogStatsD comprend des fon
 Si vous souhaitez approfondir vos connaissances sur le format des datagrammes utilisé par DogStatsD, ou concevoir votre propre bibliothèque Datadog, consultez la section [Datagramme et interface système][10], qui décrit également comment envoyer des métriques et des événements directement depuis la ligne de commande.
 
 [1]: https://github.com/etsy/statsd
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[2]: /fr/metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /fr/developers/metrics/custom_metrics/
+[5]: /fr/metrics/custom_metrics/
 [6]: /fr/events/guides/dogstatsd/
 [7]: /fr/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /fr/developers/community/libraries/#api-and-dogstatsd-client-libraries
 [9]: /fr/getting_started/tagging/unified_service_tagging
-[10]: /fr/developers/metrics/
+[10]: /fr/metrics/

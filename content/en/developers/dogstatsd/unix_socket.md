@@ -3,7 +3,7 @@ title: DogStatsD over Unix Domain Socket
 kind: documentation
 description: 'Usage documentation for DogStatsD over Unix Domain Sockets'
 aliases:
-    - /developers/metrics/unix_socket/
+    - /metrics/unix_socket/
 further_reading:
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
@@ -108,7 +108,7 @@ To enable the Agent DogStatsD UDS:
 
 ### Test with netcat
 
-To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
+To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, use `netcat`. Most implementations of `netcat`, such as `netcat-openbsd` on Debian or `nmap-ncat` on RHEL, support Unix Socket traffic with the `-U` flag:
 
 ```shell
 echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
@@ -165,7 +165,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 2. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`.
 
-When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. Enable this in Docker with `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][2].
+When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. Enable this in Docker with the `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the AWS documentation on [PID mode][2].
 
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
@@ -204,7 +204,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 
 ### Client libraries
 
-The following official DogStatsD client libraries natively support UDS traffic. Refer to the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
+The following official DogStatsD client libraries natively support UDS traffic. See the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
 
 | Language | Library                              |
 | -------- | ------------------------------------ |
@@ -223,14 +223,14 @@ If an application or a client library does not support UDS traffic, run `socat` 
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-For guidelines on creating additional implementation options, refer to the [datadog-agent github wiki][9].
+For guidelines on creating additional implementation options, see the [datadog-agent GitHub wiki][9].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/
-[2]: /developers/metrics/custom_metrics/
+[1]: /metrics/dogstatsd_metrics_submission/
+[2]: /metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

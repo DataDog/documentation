@@ -2,7 +2,7 @@
 title: What best practices are recommended for naming metrics and tags?
 kind: faq
 further_reading:
-- link: "/developers/metrics/"
+- link: "/metrics/"
   tag: "Documentation"
   text: "Learn more about Datadog metrics"
 - link: "/getting_started/tagging/"
@@ -22,18 +22,18 @@ Datadog recommends certain best practices for naming metrics, tags, and services
 * Unicode is not supported.
 * It is recommended to avoid spaces.
 
-Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). This is described as pseudo-hierarchical because a hierarchy is not actually enforced, but the structure is used to infer certain relationships (e.g. "I see hostA and hostB are reporting `http.nginx.*`, those must be web frontends").
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format, for example: `http.nginx.response_time`. This is described as pseudo-hierarchical because a hierarchy is not actually enforced, but the structure is used to infer certain relationships, for example: _"I see hostA and hostB are reporting `http.nginx.*`, those must be web frontends"_).
 
 **Note**: Metric names are case sensitive in Datadog.
 
 ## Rules and best practices for naming tags
 
-As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see [Unified service tagging][1].
 
 * Tags must start with a letter.
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
-* Any trailing underscore will get removed, whether if it originated from a converted character or if it was in the original tag value.
-* Contiguous underscores will be reduced to a single underscore.
+* A trailing underscore is removed, whether if it originated from a converted character or if it was in the original tag value.
+* Contiguous underscores are reduced to a single underscore.
 * Tags can be up to 200 characters long and support Unicode.
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
