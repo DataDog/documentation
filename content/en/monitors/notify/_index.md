@@ -26,11 +26,11 @@ Use this section to set the notifications sent to your team.
 
 ### Title
 
-Add a unique title to your monitor (required). For multi-alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables](#tag-variables).
+Add a unique title to your monitor (required). For multi-alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][2].
 
 ### Message
 
-The message field allows standard [Markdown formatting][2] and [variables](#variables). Use [conditional variables](#conditional-variables) to modulate the notification text sent to different contacts with [@notifications](#notifications).
+The message field allows standard [Markdown formatting][3] and [variables][4]. Use [conditional variables][5] to modulate the notification text sent to different contacts with [@notifications](#notifications).
 
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
@@ -65,7 +65,7 @@ If you use the `{{#is_renotify}}` block, keep in mind that the original notifica
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
 
-Learn how to configure your monitors for those use cases in the [example section](#examples).
+Learn how to configure your monitors for those use cases in the [example section][6].
 
 ### Priority
 
@@ -111,18 +111,18 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 
 | Integration    | Prefix       | Examples       |
 |----------------|--------------|----------------|
-| [Jira][3]      | `@jira`      | [Examples][4]  |
-| [PagerDuty][5] | `@pagerduty` | [Examples][6]  |
-| [Slack][7]     | `@slack`     | [Examples][8]  |
-| [Webhooks][9]  | `@webhook`   | [Examples][10] |
+| [Jira][7]      | `@jira`      | [Examples][8]  |
+| [PagerDuty][9] | `@pagerduty` | [Examples][10]  |
+| [Slack][11]     | `@slack`     | [Examples][12]  |
+| [Webhooks][13]  | `@webhook`   | [Examples][14] |
 
-See the [list of integrations][11] that can be used to notify your team.
+See the [list of integrations][15] that can be used to notify your team.
 
 **Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
 ### Modifications
 
-An [event][12] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
+An [event][16] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
 
 ### Edit restrictions
 
@@ -132,13 +132,13 @@ If changes are restricted, only the monitor's creator or an administrator can ch
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][17]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][13] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][18] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -164,15 +164,20 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/create/configuration
-[2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /integrations/jira/
-[4]: /integrations/jira/#use-cases
-[5]: /integrations/pagerduty/
-[6]: /integrations/pagerduty/#troubleshooting
-[7]: /integrations/slack/
-[8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[9]: /integrations/webhooks/
-[10]: /integrations/webhooks/#usage
-[11]: /integrations/#cat-notification
-[12]: /events/
-[13]: /monitors/faq/what-are-recovery-thresholds/
+[2]: /monitors/notify/variables/#tag-variables
+[3]: http://daringfireball.net/projects/markdown/syntax
+[4]: /monitors/notify/variables/
+[5]: /monitors/notify/variables/#conditional-variables
+[6]: /monitors/notify/variables/?tab=is_renotify#examples
+[7]: /integrations/jira/
+[8]: /integrations/jira/#use-cases
+[9]: /integrations/pagerduty/
+[10]: /integrations/pagerduty/#troubleshooting
+[11]: /integrations/slack/
+[12]: /integrations/slack/#mentions-in-slack-from-monitor-alert
+[13]: /integrations/webhooks/
+[14]: /integrations/webhooks/#usage
+[15]: /integrations/#cat-notification
+[16]: /events/
+[17]: /monitors/create/types/
+[18]: /monitors/faq/what-are-recovery-thresholds/
