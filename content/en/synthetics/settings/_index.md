@@ -127,6 +127,17 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][7] ca
 
 If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
 
+### Tag enforcement
+
+<div class="alert alert-warning">
+Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
+This allows you to enforce selected tags to create a Synthetics test. So you will be able to break down cost and usage by services, applications or teams for example. 
+You can activate tag enforcement in Synthetic Monitoring > Settings > Default Settings:
+<!-- Can you please embed this image here https://a.cl.ly/RBuLAdPY -->
+
+Tag enforcement comes with the [Usage Attribution][12] feature.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -142,3 +153,4 @@ If you have access to the [custom role feature][9], add your user to a custom ro
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: /synthetics/multistep/
 [11]: /synthetics/browser_tests
+[12]: /account_management/billing/usage_attribution
