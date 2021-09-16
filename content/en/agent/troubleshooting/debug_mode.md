@@ -15,7 +15,9 @@ further_reading:
 
 ## Agent
 
-The Agent by default logs in INFO level. You can set the log level to DEBUG to get more information from your logs. We don’t recommend enabling debug mode for an extended period of time, because it increases the number of logs indexed by Datadog. Use it sparingly, for debugging purposes only. Set the log level back to INFO when done.
+The Agent, by default, logs in `INFO` level. You can set the log level to `DEBUG` to get more information from your logs.
+
+**Note**: Debug mode is meant for debugging purposes only. Datadog recommends only enabling `DEBUG` for a certain window of time as it increases the number of indexed logs. Set the log level back to `INFO` when done.
 
 To enable the Agent full debug mode:
 
