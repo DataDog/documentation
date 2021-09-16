@@ -18,11 +18,11 @@ Datadog Database Monitoring allows you to easily understand the health and perfo
 
 In one place, you can view:
 
-* host-level metrics
-* explain plans
-* historical query performance metrics
+* Host-level metrics
+* Explain plans
+* Historical query performance metrics
 
-In this guide, you will learn how to set up Datadog Database Monitoring on a sample Postgres or MySQL database. You will identify and troubleshoot a slow query, and view historical database metrics in a dashboard.
+In this guide, you will learn how to set up Datadog Database Monitoring on an example PostgreSQL database. You will identify an expensive query, troubleshoot a slow query, and quickly view changes in query volume.
 
 ## Setup
 
@@ -34,37 +34,49 @@ To run the example application, you need a machine with [GNU Make][1] and [Docke
 
 ### Install the example application
 
-The example application starts up the Datadog Agent and a Postgres database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
+The example application starts up the Datadog Agent and a PostgreSQL database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
 
 Follow these instructions to install the example application on MacOS or Linux.
 
 1. Download the [archive][4] containing the example application.
 
-2. Extract the archive to a location on disk. `tar -xvf database-management.tgz`
+2. Extract the archive to a location on disk:
+```
+tar -xvf database-management.tgz
+```
 
-3. Change to the `database-management` directory in the extracted archive: `cd database-management`
+3. Change to the `database-management` directory in the extracted archive:
+```
+cd database-management
+```
 
-4. Set the environment variable `DD_API_KEY` to your Datadog API key using `export DD_API_KEY=<API_KEY>`.
+4. Set the environment variable `DD_API_KEY` to your Datadog API key:
+```
+export DD_API_KEY=<API_KEY>
+```
 
-5. Run `make postgres`.
+5. Start the application:
+```
+make postgres
+```
 
 The command will continue to run until you stop it by pressing Ctrl + C.
 
-## Identify a slow query
+## Identify an expensive query
 
-Which query uses the most database time? To find out, use the Query Metrics view.
+Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. Navigate to Database Monitoring by clicking APM > Databases in the UI. By default, you will start on the Query Metrics tab.
+1. Navigate to Database Monitoring by clicking APM > Databases in the UI. You will see the Query Metrics view.
 
-2. Sort the Normalized Query table by **Percent time** to see at a glance which queries are the slowest.
+2. Sort the Normalized Query table by **Percent time** to see the query that the database spends the most time executing.
 
-The query that uses the most database time will appear on the first line.
+The query that consumes the most database time will appear on the first line.
 
 {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
 ## Troubleshoot a slow query
 
-After identifying a slow query, you may want to understand why it runs slowly. A query's Explain Plan describes the steps that the database takes to resolve the query. You can view an Explain Plan by clicking on a sample in the Query Samples view.
+In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
 
 Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][5]**, and selecting the **Query Samples** tab in the UI.
 
@@ -76,7 +88,7 @@ Find a query in the table with data in the Explain Plan column, and click on it 
 
 {{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Query explain plan showing Index Scan" style="width:100%;">}}
 
-## Create a dashboard to view historical database metrics
+## View changes in query volume at a glance
 
 To understand the health and performance of your databases at a glance, add Datadog Database Monitoring metrics to a dashboard.
 
