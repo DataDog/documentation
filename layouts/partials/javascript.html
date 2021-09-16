@@ -31,9 +31,9 @@
   {{ end }}
 
   <script>{{ $ddLibs.Content | safeJS }}</script>
-  <script type="text/javascript" src="{{ $ddBrowserLogsRum.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $langRedirects.RelPermalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirects.Data.Integrity }}"{{ end }}></script>
-  <script type="text/javascript" src="{{ $regionRedirects.RelPermalink }}" {{ if ne $isLocalServer true }}integrity="{{ $regionRedirects.Data.Integrity }}"{{ end }}></script>
+  <script type="text/javascript" src="{{ $ddBrowserLogsRum.Permalink }}"></script>
+  <script type="text/javascript" src="{{ $langRedirects.Permalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirects.Data.Integrity }}"{{ end }}></script>
+  <script type="text/javascript" src="{{ $regionRedirects.Permalink }}" {{ if ne $isLocalServer true }}integrity="{{ $regionRedirects.Data.Integrity }}"{{ end }}></script>
 
 {{ else }}
   {{ $jsMainFile := "scripts/main.js" }}
@@ -48,7 +48,7 @@
 
   <!-- The docsearch.js lib requires this for some reason -->
   <script>global = globalThis;</script>
-  
-  <script src="{{ $jQuery.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{ if ne $isLocalServer true  }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
+
+  <script src="{{ $jQuery.Permalink }}"></script>
+  <script type="text/javascript" src="{{ $compiledJS.Permalink }}" defer {{ if ne $isLocalServer true  }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
 {{ end }}
