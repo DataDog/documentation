@@ -26,7 +26,7 @@ API tests **proactively monitor** that your **most important services** are avai
 
 ## Create a single API test
 
-The example below demonstrates the creation of an [HTTP test][3], a subtype of [single API tests][1]. HTTP tests **monitor your API endpoints** and **alert you** when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers, or body contents.
+The example below demonstrates the creation of an [HTTP test][3], a subtype of [single API tests][1]. HTTP tests monitor your API endpoints and alert you when they become too slow or fail to meet any conditions you define, such as expected HTTP status code, headers, or body contents.
 
 ### Define request
 
