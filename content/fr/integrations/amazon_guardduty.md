@@ -9,7 +9,7 @@ description: Rassemblez vos logs AWS GuardDuty.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
 integration_title: "AWS\_GuardDuty"
 is_public: true
 kind: integration
@@ -17,6 +17,7 @@ name: amazon_guardduty
 public_title: "Intégration Datadog/AWS\_GuardDuty"
 short_description: Rassemblez vos logs AWS GuardDuty.
 version: '1.0'
+integration_id: amazon-guardduty
 ---
 ## Présentation
 
@@ -26,7 +27,7 @@ Datadog s'intègre à AWS GuardDuty via une fonction Lambda qui transmet les r�
 
 ### Collecte de logs
 
-#### Activer la journalisation GuardDuty
+#### Activer le logging
 
 1. Créez une nouvelle règle dans Cloudwatch avec le type d'événement **GuardDuty Finding** :
 

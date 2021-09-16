@@ -6,8 +6,8 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez le statut du tunnel VPN, le débit, le nombre de sessions, et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_vpn/'
+description: Surveillez le statut du tunnel VPN, le débit, le nombre de sessions, et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/google_cloud_vpn/
 draft: false
 git_integration_title: google_cloud_vpn
 has_logo: true
@@ -18,7 +18,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloud_vpn
 public_title: "Intégration Datadog/Google\_VPN"
-short_description: 'Surveillez le statut du tunnel VPN, le débit, le nombre de sessions, et plus encore.'
+short_description: Surveillez le statut du tunnel VPN, le débit, le nombre de sessions, et plus encore.
 version: '1.0'
 ---
 ## Présentation

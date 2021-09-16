@@ -2,10 +2,10 @@
 title: Collecte d'événements
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: Blog
     text: Présentation de l'Agent de cluster Datadog
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes avec n'importe quelle métrique Datadog
   - link: /agent/cluster_agent/clusterchecks/
