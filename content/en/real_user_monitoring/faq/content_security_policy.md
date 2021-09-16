@@ -50,7 +50,7 @@ connect-src https://*.browser-intake-ddog-gov.com
 
 ## Session Replay worker
 
-If you are using Session Replay, make sure to allow `blob` workers by adding the following `worker-src` entry:
+If you are using Session Replay, make sure to allow Workers with `blob:` URI schemes by adding the following `worker-src` entry:
 
 ```txt
 worker-src: blob:;
