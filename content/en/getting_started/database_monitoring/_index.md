@@ -66,7 +66,7 @@ The command will continue to run until you stop it by pressing Ctrl + C.
 
 Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. Navigate to Database Monitoring by clicking APM > Databases in the UI. You will see the Query Metrics view.
+1. Navigate to Database Monitoring by clicking **APM > Databases** in the UI. You will see the Query Metrics view.
 
 2. Sort the Normalized Query table by **Percent time** to see the query that the database spends the most time executing.
 
@@ -88,27 +88,29 @@ Find a query in the table with data in the Explain Plan column, and click on it 
 
 {{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Query explain plan showing Index Scan" style="width:100%;">}}
 
-## View changes in query volume at a glance
+## View changes in query volume
 
 To understand the health and performance of your databases at a glance, add Datadog Database Monitoring metrics to a dashboard.
 
-For example, you can see the absolute change in query volume in the past hour by adding a widget.
+For example, you can see the absolute change in query volume in the past hour by adding a **Change** widget to track a query count metric.
 
-1. Select Dashboards > New Dashboard in the UI.
+1. Select **Dashboards > New Dashboard** in the UI.
 
-2. Click Add Widgets
+2. Enter a name for your dashboard. Click the **New Dashboard** button to go to your new dashboard.
 
-3. In the widget carousel, select the Change widget.
+2. To add content to your dashboard, click **Add Widgets**.
 
-4. set Metric to `postgresql.queries.count`. break it down by `Host`
+3. In the widget carousel, select the **Change** widget.
 
-5. Screenshot
+4. Select `postgresql.queries.count` in the **Metric** dropdown. This metric counts the number of queries sent to a PostgreSQL database.
 
-6. set title to "Query Volume Changes By Host"
+5. Select `host` in the **Break it down by** dropdown so the widget aggregates queries by host.
 
-7. click Save
+TODO: Screenshot
 
-8. Screenshot
+7. Click the **Save** button. The dashboard shows your new widget.
+
+TODO: Screenshot
 
 ## Further Reading
 
