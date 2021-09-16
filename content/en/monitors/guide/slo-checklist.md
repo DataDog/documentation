@@ -1,5 +1,5 @@
 ---
-title: SLO checklist
+title: SLO Checklist
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'

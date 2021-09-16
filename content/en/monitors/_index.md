@@ -7,7 +7,7 @@ aliases:
     - /guides/monitoring/
     - /guides/alerting/
     - /guides/monitors/the-conditions
-description: Create & manage your notifications
+description: "Create monitors, notify your teams when it matters, and manage your monitors using the alerting platform"
 further_reading:
     - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
       tag: "Blog"
@@ -19,15 +19,29 @@ further_reading:
 
 Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
 
-## Overview
+Configure monitors, notify your teams, and manage alerts at a glance on the Alerting platform.
 
-{{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="/monitors/monitor_types" >}}<u>Monitors</u>: Create, edit, or audit your monitors for metrics, integrations, tracing, logs, and more.{{< /nextlink >}}
-    {{< nextlink href="/monitors/manage_monitor" >}}<u>Manage Monitors</u>: See all your monitors in one place. Search, delete, mute, resolve, or edit service tags for selected monitors in bulk.{{< /nextlink >}}
-    {{< nextlink href="/monitors/monitor_status" >}}<u>Monitor Status</u>: See the status of a specific monitor over time.{{< /nextlink >}}
-    {{< nextlink href="/monitors/check_summary" >}}<u>Check Summary</u>: See the status of all your integration checks in one place.{{< /nextlink >}}
-    {{< nextlink href="/monitors/notifications" >}}<u>Notifications</u>: Once a monitor is created, you are notified when its conditions are met. You can also notify team members by email, 3rd party services (like Pagerduty), or other custom endpoints with Webhooks.{{< /nextlink >}}
-    {{< nextlink href="/monitors/downtimes" >}}<u>Downtimes</u>: Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors.{{< /nextlink >}}
+## Create monitors
+
+{{< img src="/monitors/create.png" alt="Create a monitor" style="width:90%;">}}
+
+[Configure Monitors][1]: Create monitors that look over metrics, events, logs, integration availability, network endpoints, and more.
+
+## Notify your teams
+
+{{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
+
+[Monitor Notifications][2]: Set up notifications when creating monitors to keep your team informed of issues. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][3] to mute alerts during application maintenance.
+
+## Manage monitors
+
+{{< img src="/monitors/manage.png" alt="Manage all monitors alerts" style="width:90%;">}}
+
+[Manage Monitors][4]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
+
+## Other sections
+
+{{< whatsnext desc=" ">}}
     {{< nextlink href="/monitors/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
     {{< nextlink href="/monitors/incident_management" >}}<u>Incident Management</u>: Declare and manage incidents.{{< /nextlink >}}
     {{< nextlink href="/monitors/guide" >}}<u>Guides</u>: Additional helpful articles about monitors and alerting.{{< /nextlink >}}
@@ -36,3 +50,8 @@ Monitoring all of your infrastructure in one place wouldn't be complete without 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/create
+[2]: /monitors/notify
+[3]: /monitors/notify/downtimes
+[4]: /monitors/manage
