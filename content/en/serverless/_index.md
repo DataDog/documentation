@@ -44,11 +44,23 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 ### Azure App Service
 
-The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Service Extension documentation][3].
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. 
+
+Use the [Azure App Service view][3] (beta) to:
+
+- Quickly identify apps with high latency or errors
+
+- Track the utilization of your Web Apps, Function Apps, and App Service Plans
+
+- Get insights into the costs of your App Service Plans by visualizing the number of active instances and seeing which are running apps that are submitting traces or logs to Datadog
+
+- Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
+
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see the [Azure App Service Extension documentation][4].
 
 ### Google Cloud Functions
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][4].
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][5].
 
 ## Further Reading
 
@@ -56,5 +68,6 @@ Google Cloud Functions is a lightweight, event-based, asynchronous compute solut
 
 [1]: http://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services/
-[3]: /infrastructure/serverless/azure_app_services/#overview
-[4]: /integrations/google_cloud_platform/
+[3]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
+[4]: /infrastructure/serverless/azure_app_services/#overview
+[5]: /integrations/google_cloud_platform/

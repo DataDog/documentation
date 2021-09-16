@@ -5,7 +5,7 @@ aliases:
   - /ja/guides/process
   - /ja/graphing/infrastructure/process/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/live-process-monitoring/'
+  - link: https://www.datadoghq.com/blog/live-process-monitoring/
     tag: ブログ
     text: Datadog でのプロセスのモニタリング
   - link: /infrastructure/process/generate_process_metrics/
@@ -14,10 +14,10 @@ further_reading:
   - link: /infrastructure/livecontainers
     tag: グラフ
     text: 環境内のすべてのコンテナのリアルタイム表示
-  - link: 'https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/'
+  - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
     tag: ブログ
     text: 保存ビューでソフトウェアのパフォーマンスとリソース消費を相関付ける
-  - link: 'https://www.datadoghq.com/blog/process-level-data/'
+  - link: https://www.datadoghq.com/blog/process-level-data/
     tag: ブログ
     text: プロセスレベルのアプリとネットワークデータを使用して、より迅速にトラブルシューティングを行います
 ---

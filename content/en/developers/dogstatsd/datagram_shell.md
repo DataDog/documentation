@@ -41,8 +41,8 @@ Here are some example datagrams:
 - `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
 
 
-[1]: /developers/metrics/#naming-metrics
-[2]: /developers/metrics/types/
+[1]: /metrics/#naming-metrics
+[2]: /metrics/types/
 [3]: /getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}
@@ -54,8 +54,8 @@ Here are some example datagrams:
 | `_e`                                 | Yes      | The datagram must begin with `_e`.                                                                                     |
 | `<TITLE>`                            | Yes      | The event title.                                                                                                       |
 | `<TEXT>`                             | Yes      | The event text. Insert line breaks with: `\\n`.                                                                        |
-| `<TITLE_UTF8_LENGTH>`                | Yes      | The length of the UTF-8-encoded `<TITLE>`                                                                              |
-| `<TEXT_UTF8_LENGTH>`                 | Yes      | The length of the UTF-8-encoded `<TEXT>`                                                                               |
+| `<TITLE_UTF8_LENGTH>`                | Yes      | The length (in bytes) of the UTF-8-encoded `<TITLE>`                                                                              |
+| `<TEXT_UTF8_LENGTH>`                 | Yes      | The length (in bytes) of the UTF-8-encoded `<TEXT>`                                                                               |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
 | `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
 | `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |

@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md
 display_name: Rookout
 draft: false
 git_integration_title: rookout

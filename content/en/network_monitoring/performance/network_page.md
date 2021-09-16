@@ -124,7 +124,7 @@ NPM automatically maps
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3]. 
 - API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by  the [`domain` tag](#dns-resolution).
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
 
 ### Domain resolution
 

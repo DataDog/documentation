@@ -24,7 +24,7 @@ further_reading:
   - link: /tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
-  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+  - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
     tag: GitHub
     text: Exemples d'instrumentation personnalisée
   - link: /tracing/connect_logs_and_traces/dotnet/

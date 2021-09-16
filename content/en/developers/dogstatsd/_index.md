@@ -43,7 +43,7 @@ DogStatsD accepts [custom metrics][5], [events][6], and [service checks][7] over
 
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application doesn't experience an interruption.
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
+{{< img src="metrics/dogstatsd_metrics_submission/dogstatsd.png" alt="dogstatsd"   >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called _the flush interval_ (ten seconds, by default).
 
@@ -174,7 +174,7 @@ To set [tag cardinality][5] for the metrics collected using origin detection, se
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /getting_started/tagging/assigning_tags/#environment-variables
-[6]: /developers/metrics/custom_metrics/
+[6]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -211,7 +211,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
      With this, any pod running your application is able to send DogStatsD metrics through port `8125` on `$DD_AGENT_HOST`.
 
-[1]: /developers/metrics/dogstatsd_metrics_submission/
+[1]: /metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -516,7 +516,7 @@ For more information, see the [NonBlockingStatsDClient Class][1] documentation.
 DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced features which are specific to Datadog, including available data types, events, service checks, and tags:
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -524,11 +524,11 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
-[5]: /developers/metrics/custom_metrics/
+[5]: /metrics/custom_metrics/
 [6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
-[9]: /developers/metrics/
+[9]: /metrics/

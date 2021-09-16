@@ -1,5 +1,5 @@
 ---
-title: SLO checklist
+title: SLO Checklist
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
@@ -100,7 +100,7 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/monitors#create/metric
-[3]: /developers/metrics
+[3]: /metrics
 [4]: /integrations
 [5]: /tracing/generate_metrics/
 [6]: /logs/logs_to_metrics/

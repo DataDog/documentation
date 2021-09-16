@@ -150,7 +150,7 @@ spec:
      - name: "<NOM_APPLICATION>"
        image: "<IMAGE_APPLICATION>"
      ## Exécution de l'Agent en tant que sidecar
-     - image: datadog/agent
+     - image: public.ecr.aws/datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
@@ -206,7 +206,7 @@ spec:
      - name: "<NOM_APPLICATION>"
        image: "<IMAGE_APPLICATION>"
      ## Exécution de l'Agent en tant que sidecar
-     - image: datadog/agent
+     - image: public.ecr.aws/datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
@@ -259,7 +259,7 @@ spec:
      - name: "<NOM_APPLICATION>"
        image: "<IMAGE_APPLICATION>"
      ## Exécution de l'Agent en tant que sidecar
-     - image: datadog/agent
+     - image: public.ecr.aws/datadog/agent
        name: datadog-agent
        ## Activation du port 8125 pour la collecte de métriques DogStatsD
        ports:
@@ -338,7 +338,7 @@ spec:
      - name: "<NOM_APPLICATION>"
        image: "<IMAGE_APPLICATION>"
      ## Exécution de l'Agent en tant que sidecar
-     - image: datadog/agent
+     - image: public.ecr.aws/datadog/agent
        name: datadog-agent
        ## Activation du port 8126 pour la collecte de traces
        ports:

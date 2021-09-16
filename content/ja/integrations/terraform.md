@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/terraform/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
 display_name: terraform
 draft: false
 git_integration_title: terraform

@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_name: PHP OPcache
 draft: false
 git_integration_title: php_opcache

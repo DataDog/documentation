@@ -59,9 +59,9 @@ If the parameter `send_distribution_buckets` is `true`, the histogram is convert
 If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][4].
 
 [1]: /agent/kubernetes/prometheus/
-[2]: /developers/metrics/types/
+[2]: /metrics/types/
 [3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[4]: /metrics/agent_metrics_submission/?tab=count#monotonic-count
 [5]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [6]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/

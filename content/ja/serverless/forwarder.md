@@ -124,8 +124,8 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 4. 新しい Forwarder が期待どおりに機能していること、つまりエラーなしで定期的に呼び出されることを確認します。
 5. 移行されたトリガー (ソース) からのログが Datadog ログエクスプローラーに表示されていることと、正しく表示されていることを確認します。
 6. すべてのトリガーを新しい Forwarder に移行します。
-   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)に管理させる場合は、AWS インテグレーションタイルの "Collect Logs" タブで Forwarder Lambda ARN を更新します。
-   - トリガーを[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers)で管理していた場合は、手動で (またはスクリプトを使用して) トリガーを移行する必要があります。
+   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-set-up-triggers)に管理させる場合は、AWS インテグレーションタイルの "Collect Logs" タブで Forwarder Lambda ARN を更新します。
+   - トリガーを[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-set-up-triggers)で管理していた場合は、手動で (またはスクリプトを使用して) トリガーを移行する必要があります。
 7. 古い Forwarder Lambda 関数の呼び出しカウントがゼロになっていることを確認します。
 8. 安心したら、古い Forwarder Lambda 関数を削除します。
 9. 古い Forwarder Lambda 関数が複数の AWS アカウントとリージョンにインストールされている場合は、アカウントとリージョンのすべての組み合わせで上記の手順を繰り返します。
@@ -294,12 +294,12 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 - `ExcludeAtMatch` - 指定された正規表現に一致するログを送信しません。
   ログが ExcludeAtMatch と IncludeAtMatch の両方に一致する場合、そのログは除外されます。
 - `IncludeAtMatch` - 指定された正規表現に一致し、ExcludeAtMatch により除外されていないログのみを送信します。
-   
+
 
 フィルタリング規則は、完全な JSON 形式のログに適用されます。これには、Forwarder によって自動的に追加されたメタデータも含まれます。ただし、[ログパイプライン  ](https://docs.datadoghq.com/logs/processing/pipelines/) による変換はログが Datadog に送信された後に行われるため、Forwarder でログをフィルタリングする際には使用できません。`.*` など、非効率な正規表現を使用すると、Forwarder の遅延につながりますのでご注意ください。
 
 ログのフィルタリングに使用できる正規表現の例：
-- Lambda プラットフォームログを含める/除外する: `"(START|REPORT|END)\s` 
+- Lambda プラットフォームログを含める/除外する: `"(START|REPORT|END)\s`
 - CloudTrail エラーメッセージのみ含める: `errorMessage`
 - HTTP 4XX または 5XX のエラーコードを含むログのみを含める: `\b[4|5][0-9][0-9]\b`
 - `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\\"awsRegion\\":\\"us-east-1\\"`

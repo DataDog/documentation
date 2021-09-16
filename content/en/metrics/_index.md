@@ -12,7 +12,7 @@ aliases:
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
-    {{< nextlink href="/developers/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
@@ -156,12 +156,12 @@ See the [full Metrics Summary documentation][21] for more details.
 [7]: /integrations/
 [8]: /integrations/amazon_ec2/
 [9]: /logs/logs_to_metrics/
-[10]: /developers/metrics/
+[10]: /metrics/custom_metrics/
 [11]: /agent/
-[12]: /developers/metrics/dogstatsd_metrics_submission/
+[12]: /metrics/dogstatsd_metrics_submission/
 [13]: /api/
 [14]: https://docs.datadoghq.com/agent/basic_agent_usage/
-[15]: /developers/metrics/types/
+[15]: /metrics/types/
 [16]: /getting_started/tagging/using_tags/
 [17]: /dashboards/functions/
 [18]: /metrics/distributions/

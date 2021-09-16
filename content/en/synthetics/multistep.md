@@ -19,11 +19,13 @@ further_reading:
 
 ## Overview
 
-Multistep API tests allow you to **chain [HTTP tests][1]** to proactively monitor that sophisticated journeys on your key services are available at anytime and from anywhere:
+Multistep API tests allow you to chain [HTTP tests][1] to proactively monitor that sophisticated journeys on your key services are available at anytime and from anywhere.
+
+You can:
 
 * Execute HTTP requests on API endpoints requiring authentication (for example, through a token)
 * Monitor key business transactions at the API level
-* Simulate end-to-end mobile applications journeys, etc.
+* Simulate end-to-end mobile applications journeys
 
 {{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
 
@@ -33,16 +35,22 @@ Multistep API tests can run from Datadog [managed locations][4] and [private loc
 
 **Note**: Multistep API tests allow you to link several HTTP requests in a single test. If you want to perform single requests to your services, you can leverage [API tests][6].
 
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of these two [default roles][7].
+
+If you have access to the [custom role feature][8], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+
 ## Configuration
 
 ### Name and tag your test
 
-1. **Name** your Multistep API test.
-2. Add `env` **Tags** as well as any other tag to your Multistep API test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
+1. Name your Multistep API test.
+2. Add `env` tags and other tags to your Multistep API test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
 
 ### Select locations
 
-Select the **Locations** to run your Multistep API test from: Multistep API tests can run from both [managed][4] and [private locations][5] depending on whether you are willing to run the test from outside or inside your network.
+Select the **Locations** to run your Multistep API test from. Multistep API tests can run from both [managed][4] and [private locations][5] depending on whether you are willing to run the test from outside or inside your network.
 
 ### Define steps
 
@@ -94,7 +102,7 @@ To create an HTTP request step, click **Create Your First Step**.
   
   {{% tab "Privacy" %}}
 
-  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Used mindfully as it can make failure troubleshooting more difficult. Read more about security recommendations [here][1].
+  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as this can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
   
 
 [1]: /security/synthetics
@@ -110,8 +118,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], [`xpath`][18] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -138,10 +146,10 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [regex][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][10], [JSONPath][8], or [XPath][9].
+    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][11].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][11], [JSONPath][10], or [XPath][18].
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 
@@ -169,8 +177,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][11].
-
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -178,9 +185,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -222,7 +229,8 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+
 To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in Multistep API tests" video="true" width="90%" >}}
@@ -231,18 +239,17 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include a misconfigured test URL or a wrong configuration in your DNS entries.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][17].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -255,17 +262,19 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /synthetics/ci
+[3]: /synthetics/cicd_testing
 [4]: /api/v1/synthetics/#get-all-locations-public-and-private
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/
-[7]: /synthetics/search/#search
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/v1/synthetics/#create-a-test
-[12]: /monitors/notifications/?tab=is_alert#notification
-[13]: http://daringfireball.net/projects/markdown/syntax
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
+[7]: /account_management/rbac/
+[8]: /account_management/rbac#custom-roles
+[9]: /synthetics/search/#search
+[10]: https://restfulapi.net/json-jsonpath/
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[12]: /api/v1/synthetics/#create-a-test
+[13]: /monitors/notifications/?tab=is_alert#notification
+[14]: http://daringfireball.net/projects/markdown/syntax
+[15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[16]: /synthetics/settings/#global-variables
+[17]: /synthetics/api_tests/errors/#ssl-errors
+[18]: https://www.w3schools.com/xml/xpath_syntax.asp

@@ -21,13 +21,19 @@ further_reading:
 ---
 ## Overview
 
-HTTP tests allow you to **send HTTP requests to your applications' API endpoints** in order to verify that they are responding to requests, as well as that they meet any conditions you define-such as overall response time, status code, and header or body content.
+HTTP tests allow you to send HTTP requests to your applications' API endpoints to verify that they are responding to requests and that they meet any conditions you define, such as overall response time, status code, and header or body content.
 
-HTTP tests can be run from [**managed**][1] and [**private locations**][2] depending on whether you want to monitor your endpoints from outside or inside your network. HTTP tests can run **on a schedule**, **on-demand**, or directly **within your [CI/CD pipelines][3]**.
+HTTP tests can run from [managed][1] and [private locations][2] depending on whether you want to monitor your endpoints from outside or inside your network. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of these two [default roles][4].
+
+If you have access to the [custom role feature][5], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
+After choosing to create an [`HTTP` test][6], define your test's request.
 
 ### Define request
 
@@ -75,7 +81,7 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
   
   {{% tab "Privacy" %}}
 
-  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. Read more about security recommendations [here][1].
+  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
   
 
 [1]: /security/synthetics
@@ -84,7 +90,7 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
   {{< /tabs >}}
 
 3. **Name** your HTTP test.
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
 6. Select the **Locations** to run your HTTP test from: HTTP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor your endpoints from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -106,8 +112,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], [`xpath`][11] | _String_ <br> _[Regex][12]_ <br> _String_, _[Regex][12]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][12]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -130,7 +136,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][13].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][11].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -138,9 +144,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][14], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][15] and supports the following [conditional variables][16]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -181,7 +187,8 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][17] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -194,13 +201,13 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][18].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -213,19 +220,17 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/ci
-[4]: /synthetics/api_tests/http_tests
-[5]: /synthetics/api_tests/ssl_tests
-[6]: /synthetics/api_tests/tcp_tests
-[7]: /synthetics/api_tests/dns_tests
-[8]: /synthetics/api_tests/icmp_tests
-[9]: /synthetics/search/#search
-[10]: https://restfulapi.net/json-jsonpath/
-[11]: https://www.w3schools.com/xml/xpath_syntax.asp
-[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[13]: /api/v1/synthetics/#create-a-test
-[14]: /monitors/notifications/?tab=is_alert#notification
-[15]: https://www.markdownguide.org/basic-syntax/
-[16]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[17]: /synthetics/settings/#global-variables
-[18]: /synthetics/api_tests/errors/#ssl-errors
+[3]: /synthetics/cicd_testing
+[4]: /account_management/rbac/
+[5]: /account_management/rbac#custom-roles
+[6]: /synthetics/api_tests/http_tests
+[7]: /synthetics/search/#search
+[8]: https://restfulapi.net/json-jsonpath/
+[9]: https://www.w3schools.com/xml/xpath_syntax.asp
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[11]: /api/v1/synthetics/#create-a-test
+[12]: /monitors/notifications/?tab=is_alert#notification
+[13]: https://www.markdownguide.org/basic-syntax/
+[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[15]: /synthetics/settings/#global-variables
+[16]: /synthetics/api_tests/errors/#ssl-errors

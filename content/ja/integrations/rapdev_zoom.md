@@ -17,7 +17,7 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 author:
-  homepage: 'https://www.rapdev.io'
+  homepage: https://www.rapdev.io
   name: RapDev.io
 categories:
   - マーケットプレイス

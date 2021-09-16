@@ -224,4 +224,4 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 [7]: /ja/agent/guide/private-link/
 [8]: /ja/agent/proxy/
 [9]: /ja/serverless/forwarder/
-[10]: /ja/developers/metrics/
+[10]: /ja/metrics/

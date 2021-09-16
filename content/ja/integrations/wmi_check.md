@@ -237,6 +237,6 @@ WMI チェックには、サービスのチェック機能は含まれません�
 [8]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
 [9]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
 [12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [13]: https://docs.datadoghq.com/ja/help/

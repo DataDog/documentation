@@ -106,7 +106,7 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 8. Pour Linux uniquement, ajoutez un autre volume avec le nom `cgroup` et le chemin source `/sys/fs/cgroup/` (ou `/cgroup/` si vous utilisez une AMI Amazon Linux 1 d'origine).
 9. Cliquez sur le gros bouton **Add container**.
 10. Pour **Container name**, saisissez `datadog-agent`.
-11. Pour le champ **Image**, saisissez `gcr.io/datadoghq/agent:latest`.
+11. Pour le champ **Image**, saisissez `public.ecr.aws/datadog/agent:latest`.
 12. Pour **Maximum memory**, indiquez `256`. **Remarque** : en cas d'utilisation intense des ressources, il se peut que vous ayez besoin de rehausser la limite de mémoire.
 13. Faites défiler jusqu'à atteindre la section **Advanced container configuration**, puis saisissez `10` pour **CPU units**.
 **Remarque** : pour Windows, pour **CPU units**, saisissez au moins `512`, afin d'éviter l'erreur `Timeout while starting the service`.
@@ -301,7 +301,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [2]: https://docs.datadoghq.com/fr/integrations/faq/agent-5-amazon-ecs/
 [3]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
 [4]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/
-[5]: https://hub.docker.com/r/datadog/agent
+[5]: https://gallery.ecr.aws/datadog/agent
 [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
 [7]: https://docs.datadoghq.com/fr/agent/autodiscovery/
 [8]: /fr/agent/amazon_ecs/apm/

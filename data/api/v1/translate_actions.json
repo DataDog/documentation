@@ -664,7 +664,7 @@
     "summary": "List your managed organizations"
   },
   "CreateChildOrg": {
-    "description": "Create a child organization.\n\nThis endpoint requires the\n[multi-organization account](https://docs.datadoghq.com/account_management/multi_organization/)\nfeature and must be enabled by\n[contacting support](https://docs.datadoghq.com/help/).\n\nOnce a new child organization is created, you can interact with it\nby using the `org.public_id`, `pi_key.key`, and\n`application_key.hash` provided in the response.",
+    "description": "Create a child organization.\n\nThis endpoint requires the\n[multi-organization account](https://docs.datadoghq.com/account_management/multi_organization/)\nfeature and must be enabled by\n[contacting support](https://docs.datadoghq.com/help/).\n\nOnce a new child organization is created, you can interact with it\nby using the `org.public_id`, `api_key.key`, and\n`application_key.hash` provided in the response.",
     "summary": "Create a child organization",
     "request_description": "Organization object that needs to be created",
     "request_schema_description": "Object describing an organization to create."
@@ -727,28 +727,28 @@
     "summary": "Check if SLOs can be safely deleted"
   },
   "ListSLOCorrection": {
-    "description": "Get all Service Level Objective corrections",
+    "description": "Get all Service Level Objective corrections.",
     "summary": "Get all SLO corrections"
   },
   "CreateSLOCorrection": {
-    "description": "Create an SLO Correction",
+    "description": "Create an SLO Correction.",
     "summary": "Create an SLO correction",
     "request_description": "Create an SLO Correction",
-    "request_schema_description": "An object that defines a correction to be applied to an SLO"
+    "request_schema_description": "An object that defines a correction to be applied to an SLO."
   },
   "DeleteSLOCorrection": {
-    "description": "Permanently delete the specified SLO correction object",
+    "description": "Permanently delete the specified SLO correction object.",
     "summary": "Delete an SLO correction"
   },
   "GetSLOCorrection": {
-    "description": "Get an SLO correction",
+    "description": "Get an SLO correction.",
     "summary": "Get an SLO correction for an SLO"
   },
   "UpdateSLOCorrection": {
-    "description": "Update the specified SLO correction object object",
+    "description": "Update the specified SLO correction object object.",
     "summary": "Update an SLO correction",
     "request_description": "The edited SLO correction object.",
-    "request_schema_description": "An object that defines a correction to be applied to an SLO"
+    "request_schema_description": "An object that defines a correction to be applied to an SLO."
   },
   "DeleteSLO": {
     "description": "Permanently delete the specified service level objective object.\n\nIf an SLO is used in a dashboard, the `DELETE /v1/slo/` endpoint returns\na 409 conflict error because the SLO is referenced in a dashboard.",

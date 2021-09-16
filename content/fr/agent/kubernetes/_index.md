@@ -76,7 +76,7 @@ Activez ensuite les fonctionnalités Datadog que vous souhaitez utiliser, comme 
 **Remarques** :
 
 - Pour obtenir la liste complète des paramètres disponibles pour le chart Datadog et leurs valeurs par défaut, consultez le [README du référentiel Helm Datadog][7].
-- Si Google Container Registry ([gcr.io/datadoghq][8]) n'est pas accessible dans votre région de déploiement, utilisez le registre Docker Hub avec les images [datadog/agent][9] et [datadog/agent-de-cluster][10] et la configuration suivante dans le fichier `values.yaml` :
+- Si Google Container Registry ([gcr.io/datadoghq][8]) n'est pas accessible dans votre région de déploiement, utilisez le registre Docker Hub avec les images [datadog/agent][9] et [datadog/cluster-agent][10] et la configuration suivante dans le fichier `values.yaml` :
 
     ```yaml
     agents:
