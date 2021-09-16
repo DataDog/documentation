@@ -32,16 +32,8 @@
 
   <script>{{ $ddLibs.Content | safeJS }}</script>
   <script type="text/javascript" src="{{ $ddBrowserLogsRum.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $langRedirects.RelPermalink }}" {{ if $isLocalServer }}integrity="{{ $langRedirects.Data.Integrity }}"{{ end }}></script>
-  <script type="text/javascript" src="{{ $regionRedirects.RelPermalink }}" {{ if $isLocalServer }}integrity="{{ $regionRedirects.Data.Integrity }}"{{ end }}></script>
-
-  <!-- {{ if $isLocalServer }}
-    <script type="text/javascript" src="{{ $langRedirects.RelPermalink }}"></script>
-    <script type="text/javascript" src="{{ $regionRedirects.RelPermalink }}"></script>
-  {{ else }}
-    <script type="text/javascript" src="{{ $langRedirects.RelPermalink }}" integrity="{{ $langRedirects.Data.Integrity }}"></script>
-    <script type="text/javascript" src="{{ $regionRedirects.RelPermalink }}" integrity="{{ $regionRedirects.Data.Integrity }}"></script>
-  {{ end }} -->
+  <script type="text/javascript" src="{{ $langRedirects.RelPermalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirects.Data.Integrity }}"{{ end }}></script>
+  <script type="text/javascript" src="{{ $regionRedirects.RelPermalink }}" {{ if ne $isLocalServer true }}integrity="{{ $regionRedirects.Data.Integrity }}"{{ end }}></script>
 
 {{ else }}
   {{ $jsMainFile := "scripts/main.js" }}
@@ -56,12 +48,7 @@
 
   <!-- The docsearch.js lib requires this for some reason -->
   <script>global = globalThis;</script>
+  
   <script src="{{ $jQuery.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{ if $isLocalServer }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
-
-  <!-- {{ if $isLocalServer }}
-    <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer></script>
-  {{ else }}
-    <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" integrity="{{ $compiledJS.Data.Integrity }}" defer></script>
-  {{ end }} -->
+  <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{ if ne $isLocalServer true  }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
 {{ end }}
