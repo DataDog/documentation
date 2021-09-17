@@ -40,8 +40,12 @@ Choose the type of variable you want to create:
 4. Enter the **Value** you want to assign to your variable.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
 
+Once created, global variables can be used in single and multistep API tests as well as browser tests. For more information, see [Use variables][1].
+
 {{< img src="synthetics/settings/variable_value.png" alt="Global Variable Specify Value"  style="width:100%;">}}
 
+
+[1]: /synthetics/multistep#use-variables
 {{% /tab %}}
 
 {{% tab "Create From HTTP Test" %}}
@@ -57,14 +61,18 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
     * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [regex][2].
     * Extract the value from **Response Body**: parse the response body of the request with a [regex][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Variable from http"  style="width:100%;">}}
+Once created, global variables can be used in single and multistep API tests as well as browser tests. For more information, see [Use variables][5].
 
 **Note:** Variable values are updated whenever the test they are extracted from runs.
 
-[1]: /synthetics/api_tests/?tab=httptest
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Variable from http"  style="width:100%;">}}
+
+
+[1]: /synthetics/api_tests/http_tests/
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
 [4]: https://www.w3schools.com/xml/xpath_syntax.asp
+[5]: /synthetics/multistep#use-variables
 {{% /tab %}}
 
 {{% tab "MFA Token" %}}  
@@ -78,11 +86,15 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 5. Enter the **Secret Key** to your variable or upload a QR code image.
 6. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
 
+Once created, global variables can be used in single and multistep API tests as well as browser tests. For more information, see [Use variables][1].
+
+**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][2].
+
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
-**Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][1].
 
-[1]: /synthetics/guide/browser-tests-totp
+[1]: /synthetics/multistep#use-variables
+[2]: /synthetics/guide/browser-tests-totp
 {{% /tab %}}
 
 {{< /tabs >}}
