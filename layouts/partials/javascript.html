@@ -1,7 +1,7 @@
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
 {{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 
-{{ $isLocalServer := .Site.IsServer }}
+{{ $isLocalServer := site.IsServer }}
 {{ $jsInput := "scripts/main.js" }}
 {{ $devOptions := dict "defines" $defines "sourceMap" "inline" }}
 {{ $productionOptions := dict "defines" $defines "sourceMap" "inline" "minify" true }}
