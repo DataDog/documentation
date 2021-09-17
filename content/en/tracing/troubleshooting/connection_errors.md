@@ -14,7 +14,7 @@ If you see these messages, it means your traces are not being submitted to the D
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 
 {{< programming-lang lang="java" >}}
-#### Java Diagnostic CLI
+#### Java diagnostic CLI
 
 Starting with 0.82.0+ of the Java tracer, you can use a diagnostic command where the Java tracer is installed to detect potential connection issues. From where `dd-java-agent.jar` is installed (inside the application container), run:
 
@@ -30,13 +30,13 @@ Example output:
 ```
 
 
-#### Tracer Startup Logs
+#### Tracer startup logs
 
 ```text
 [dd.trace 2021-08-17 17:59:29:234 +0000] [dd-trace-processor] WARN datadog.trace.agent.common.writer.ddagent.DDAgentApi - Error while sending 9 (size=5KB) traces to the DD agent. Total: 9, Received: 9, Sent: 0, Failed: 9. java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8126 (Will not log errors for 5 minutes)
 ```
 
-#### Tracer Debug Logs
+#### Tracer debug logs
 
 ```text
 [dd.trace 2021-08-17 18:04:50:282 +0000] [dd-trace-processor] DEBUG datadog.communication.ddagent.DDAgentFeaturesDiscovery - Error querying info at http://localhost:8126/
@@ -48,13 +48,13 @@ java.net.ConnectException: Failed to connect to localhost/127.0.0.1:8126
 
 {{< programming-lang lang="python" >}}
 
-#### Tracer Startup Logs
+#### Tracer startup logs
 
 ```text
 2021-08-17 19:10:06,169 WARNING [ddtrace.tracer] [tracer.py:655] [dd.service= dd.env= dd.version= dd.trace_id=0 dd.span_id=0] - - DATADOG TRACER DIAGNOSTIC - Agent not reachable at http://localhost:8126. Exception raised: [Errno 99] Cannot assign requested address
 ```
 
-#### Tracer Debug Logs
+#### Tracer debug logs
 
 ```text
 2021-08-17 14:04:12,982 ERROR [ddtrace.internal.writer] [writer.py:466] [dd.service= dd.env= dd.version= dd.trace_id=0 dd.span_id=0] - failed to send traces to Datadog Agent at http://localhost:8126
@@ -67,13 +67,13 @@ Traceback (most recent call last):
 
 {{< programming-lang lang="ruby" >}}
 
-#### Tracer Startup Logs
+#### Tracer startup logs
 
 ```text
 W, [2021-08-17T18:37:51.542245 #24]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126)
 ```
 
-#### Tracer Debug Logs
+#### Tracer debug logs
 
 ```text
 D, [2021-08-17T18:51:28.962389 #24] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-0.48.0/lib/ddtrace/transport/http/client.rb:33:in `rescue in send_request') Internal error during HTTP transport request. Cause: Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126) Location: /usr/local/lib/ruby/2.5.0/net/http.rb:939:in `rescue in block in connect'
@@ -83,13 +83,13 @@ D, [2021-08-17T18:51:28.962389 #24] DEBUG -- ddtrace: [ddtrace] (/usr/local/bund
 
 {{< programming-lang lang="go" >}}
 
-#### Tracer Startup Logs
+#### Tracer startup logs
 
 ```text
 2021/08/17 17:46:22 Datadog Tracer v1.32.0 WARN: DIAGNOSTICS Unable to reach agent intake: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused
 ```
 
-#### Tracer Debug Logs
+#### Tracer debug logs
 
 ```text
 2021/08/17 17:47:42 Datadog Tracer v1.32.0 ERROR: lost 1 traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused (occurred: 17 Aug 21 17:46 UTC)
@@ -99,14 +99,14 @@ D, [2021-08-17T18:51:28.962389 #24] DEBUG -- ddtrace: [ddtrace] (/usr/local/bund
 
 {{< programming-lang lang="nodejs" >}}
 
-#### Tracer Startup Logs
+#### Tracer startup logs
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 ```
 
-#### Tracer Debug Logs
+#### Tracer debug logs
 
 ```text
 Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
@@ -117,9 +117,9 @@ Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8
 
 {{< programming-lang lang=".NET" >}}
 
-#### Managed Logs
+#### Managed logs
 
-Even if debug mode isn’t enabled, the managed logs will contain errors from connection refused issues:
+Even if debug mode isn’t enabled, the managed logs contain errors from connection refused issues:
 
 ```
 { MachineName: ".", Process: "[114 sample-web-app]", AppDomain: "[1 sample-web-app]", TracerVersion: "1.28.2.0" }
@@ -135,7 +135,7 @@ System.Net.Http.HttpRequestException: Connection refused
 
 {{< programming-lang lang="php" >}}
 
-#### Tracer Startup Logs
+#### Tracer startup logs
 
 ```
 Failed to connect to localhost port 8126: Connection refused
@@ -237,7 +237,7 @@ APM Agent
 ```
 
 If the configuration is correct, but you’re still seeing connection errors, [contact Datadog Support][4] with:
-- Information about the environment in which you’re currently deploying the application and Datadog Agent. 
+- Information about the environment in which you’re deploying the application and Datadog Agent. 
 - If you’re using proxies, information about how they’ve been configured.
 - Any configuration files used to set up the application and the Datadog Agent.
 - Startup logs or tracer debug logs outlining the connection error.
