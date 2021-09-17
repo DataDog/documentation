@@ -122,15 +122,9 @@ To access the dashboards:
 
 1. Click **APM > Databases** in the UI to go to Database Monitoring.
 
-2. Select the **Dashboards** tab.
+2. Select the **Dashboards** tab and choose the dashboard you want to see.
 
-3. Choose one of the database options:
-   - _MySQL_
-   - _AWS RDS (MySQL)_
-   - _PostgreSQL_
-   - _AWS RDS (PostgreSQL)_
-
-The dashboard you selected opens. You may clone or modify the dashboard to suit your needs.
+You can clone and modify out-of-the-box dashboards to suit your needs.
 
 ## Further Reading
 
