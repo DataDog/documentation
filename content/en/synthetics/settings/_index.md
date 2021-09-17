@@ -67,7 +67,6 @@ Once created, global variables can be used in single and multistep API tests as 
 
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="Variable from http"  style="width:100%;">}}
 
-
 [1]: /synthetics/api_tests/http_tests/
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
