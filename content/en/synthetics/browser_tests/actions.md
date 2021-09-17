@@ -40,7 +40,7 @@ Choose from:
 
 [Datadog browser test recorder extension][3] automatically records options being selected from `select` dropdown menu:
 
-{{< img src="synthetics/browser_tests/select_options.png" alt="Select options step"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/select_options.png" alt="Select options step" style="width:60%;">}}
 
 ### Upload file
 
@@ -49,7 +49,7 @@ You can record the uploading of files as a step. To record an **Upload** step yo
 * Either open your desktop from the browser,
 * Or drag and drop your file in the recording iframe.
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:60%;">}}
 
 This is limited to 10 files with a limit of 5MB each.
 
@@ -59,7 +59,7 @@ The following steps can be manually added to a browser test by configuring them 
 
 ### Assertion
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion" style="width:60%;">}}
 
 Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an **Assertion** to confirm it ended up in an expected state.
 
@@ -135,7 +135,7 @@ Perform verifications on files downloaded in previous steps. You can check that 
 
 ### Navigation
 
-{{< img src="synthetics/browser_tests/navigation_step.png" alt="Browser Test Navigation Step"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/navigation_step.png" alt="Browser Test Navigation Step" style="width:60%;">}}
 
 #### Refresh a page
 
@@ -173,7 +173,7 @@ You can simulate users entering keystrokes using **Press Key** steps. The keys b
 
 To press keys that are not being automatically recorded, specify which values need to be pressed in the value box of the **Press Key** special step:
 
-{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Browser Test Press Key"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Browser Test Press Key" style="width:60%;">}}
 
 The below modifiers can also be applied to the inputted value:
 
@@ -186,7 +186,7 @@ The below modifiers can also be applied to the inputted value:
 
 Browser tests automatically scroll to the element they need to interact with. Consequently, in most cases, you do not need to manually add a scroll step. The scroll step should only be added when needed to trigger an additional network request, such as in an infinite scroll.
 
-{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Browser Test Scroll Step"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Browser Test Scroll Step" style="width:60%;">}}
 
 You need to specify the number of pixels your browser test should scroll vertically or horizontally.
 
@@ -200,7 +200,7 @@ By default, Datadog waits for a page to be fully loaded before performing a step
 
 ### Variable
 
-{{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;">}}
 
 To create a variable, first give it a name then define its value using one of the below methods. To learn how to use variables inside of your steps, see [Using variables](#using-variables).
 
@@ -279,7 +279,7 @@ Generate a random Synthetic email address that can be used in your test steps to
 
 ### Subtests
 
-{{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest"  style="width:60%;">}}
+{{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;">}}
 
 You can run browser tests within other browser tests in order to reuse existing workflows (up to two levels of nesting). Find out more about why you should use subtests and see some examples in [this dedicated guide][11].
 
@@ -291,13 +291,15 @@ Variables from subtests can be overriden in parent tests if you ensure the varia
 
 You can run HTTP requests as part of your browser tests.
 
-{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step"  style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step" style="width:70%;" >}}
 
-#### Setup
+#### Set up
+
+{{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request" style="width:80%;" >}}
 
 To define your HTTP request:
 
-1. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
+1. Choose the **Method** and **URL** to query. Available methods include `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
 2. Optionally specify **Advanced Options**:
      * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
      * Allow insecure certificates: Toggle to have your HTTP test continue the connection even if there is an error when validating the certificate.
@@ -307,9 +309,9 @@ To define your HTTP request:
      * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 3. Click **Test URL** to test your request configuration. This results in a preview showing response data.
 
-{{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request"  style="width:60%;" >}}
-
 #### Add assertions
+
+{{< img src="synthetics/browser_tests/assertions.png" alt="Assertions" style="width:80%;" >}}
 
 Optionally, you can base your step success on assertions about the defined HTTP request:
 
@@ -320,15 +322,17 @@ Optionally, you can base your step success on assertions about the defined HTTP 
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-If you click on **Test URL**, then the basic assertions are automatically filled:
+If you click **Test URL**, the basic assertions are automatically filled:
 
-- `Response time` _lessThan_ 2000 ms
+- `Response time` _is less than_ 2000 ms
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 
 #### Extract a variable from the response
 
 You can also optionally extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
+
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;">}}
 
 To parse your variable:
 
@@ -340,7 +344,7 @@ To parse your variable:
 
 {{< img src="synthetics/browser_tests/browser_test_vft2.mp4" alt="Create a variable from an HTTP request in a Browser test" video="true" width="80%" >}}
 
-Once created this variable can be used in the following steps of your browser test.
+Once created, this variable can be used in the following steps of your browser test.
 
 ## Using variables
 

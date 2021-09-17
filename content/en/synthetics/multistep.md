@@ -62,7 +62,7 @@ Hit **Create Your First Request** to start designing your test's requests.
 
 #### Define the request
 
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 1. **Name** your step.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
@@ -103,7 +103,6 @@ Hit **Create Your First Request** to start designing your test's requests.
   {{% tab "Privacy" %}}
 
   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as this can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
-  
 
 [1]: /security/synthetics
   {{% /tab %}}
@@ -118,8 +117,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], [`xpath`][18] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], [`xpath`][11] | _String_ <br> _[Regex][12]_ <br> _String_, _[Regex][12]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][12]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -127,7 +126,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
 ##### Failure behavior
 
@@ -147,9 +146,9 @@ To parse your variable:
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][18].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][11].
 
-{{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created, this variable can be used in the following steps of your Multistep API test.
 
@@ -177,7 +176,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][13].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -185,9 +184,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][14], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][15] and supports the following [conditional variables][16]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -229,7 +228,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][17] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -249,7 +248,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][17].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][18].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -270,11 +269,11 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [8]: /account_management/rbac#custom-roles
 [9]: /synthetics/search/#search
 [10]: https://restfulapi.net/json-jsonpath/
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[12]: /api/v1/synthetics/#create-a-test
-[13]: /monitors/notifications/?tab=is_alert#notification
-[14]: http://daringfireball.net/projects/markdown/syntax
-[15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /synthetics/settings/#global-variables
-[17]: /synthetics/api_tests/errors/#ssl-errors
-[18]: https://www.w3schools.com/xml/xpath_syntax.asp
+[11]: https://www.w3schools.com/xml/xpath_syntax.asp
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[13]: /api/v1/synthetics/#create-a-test
+[14]: /monitors/notifications/?tab=is_alert#notification
+[15]: http://daringfireball.net/projects/markdown/syntax
+[16]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[17]: /synthetics/settings/#global-variables
+[18]: /synthetics/api_tests/errors/#ssl-errors
