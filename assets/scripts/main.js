@@ -1,7 +1,9 @@
 import 'bootstrap';
 import './api-redirect';
 import './datadog-docs';
+import './components/dd-browser-logs-rum';
 import './region-redirects';
+import './lang-redirects';
 import './components/copy-code';
 import './components/global-modals';
 import './components/header';

@@ -51,6 +51,6 @@
   {{ partial "footer-scripts.html" . }}
   {{ partial "footer-js-dd-docs-methods" . }}
   {{ partial "preview_banner/preview_banner" . }}
-  {{ partial "javascript.html" }}
+  {{ partialCached "javascript.html" . }}
 </body>
 </html>

@@ -1,20 +1,29 @@
-<!-- Common variables -->
-{{ $isHead := .is_head }}
-{{ $isLocalServer := .Site.IsServer }}
+{{ $compiledJS := "" }}
 {{ $options := "" }}
+{{ $isLocalServer := .Site.IsServer }}
+{{ $jsMainFile := "scripts/main.js" }}
+{{ $jQuery := resources.Get "scripts/jquery.min.js" }}
 
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
-{{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default "") "process.env.NODE_ENV" "development" "process.env.RESET_APP_DATA_TIMER" `10` }}
+{{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 
-<!-- Set options dict based on environment -->
-{{ if .Site.IsServer }}
+{{ if $isLocalServer }}
   {{ $options = dict "defines" $defines "sourceMap" "inline" }}
+  {{ $compiledJS = resources.Get $jsMainFile | js.Build $options }}
 {{ else }}
   {{ $options = dict "defines" $defines "sourceMap" "inline" "minify" true }}
+  {{ $compiledJS = resources.Get $jsMainFile | js.Build $options | resources.Fingerprint "sha512" }}
 {{ end }}
 
+<!-- The docsearch.js lib requires this for some reason -->
+<script>global = globalThis;</script>
+
+<script src="{{ $jQuery.RelPermalink }}"></script>
+<script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{- if ne $isLocalServer true -}}integrity="{{ $compiledJS.Data.Integrity }}"{{- end -}}></script>
+
+{{/*
 <!-- Handle JS that loads only in the <head> -->
-{{ if $isHead }}
+{{ if ne $isHead true }}
   {{ $langRedirectsFile := "scripts/lang-redirects.js" }}
   {{ $langRedirectsOutput := "" }}
 
@@ -23,7 +32,7 @@
   {{ $ddLibs := slice $ddRum $ddLogs | resources.Concat "js/dd-libs.js" }}
   {{ $ddBrowserLogsRum := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
 
-  {{ if .Site.IsServer }}
+  {{ if $isLocalServer }}
     {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options }}
   {{ else }}
     {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options | resources.Fingerprint "sha512" }}
@@ -31,21 +40,7 @@
 
   <script>{{ $ddLibs.Content | safeJS }}</script>
   <script type="text/javascript" src="{{ $ddBrowserLogsRum.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $langRedirectsOutput.RelPermalink }}" {{ if ne .Site.IsServer true }}integrity="{{ $langRedirectsOutput.Data.Integrity }}"{{ end }}></script>
+  <script type="text/javascript" src="{{ $langRedirectsOutput.RelPermalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirectsOutput.Data.Integrity }}"{{ end }}></script>
 {{ else }}
-  {{ $jsMainFile := "scripts/main.js" }}
-  {{ $compiledJS := "" }}
-  {{ $jQuery := resources.Get "scripts/jquery.min.js" }}
-
-  {{ if .Site.IsServer }}
-    {{ $compiledJS = resources.Get $jsMainFile | js.Build $options }}
-  {{ else }}
-    {{ $compiledJS = resources.Get $jsMainFile | js.Build $options | resources.Fingerprint "sha512" }}
-  {{ end }}
-
-  <!-- The docsearch.js lib requires this for some reason -->
-  <script>global = globalThis;</script>
-
-  <script src="{{ $jQuery.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{ if ne .Site.IsServer true  }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
-{{ end }}
+<!-- handle main js -->
+*/}}
