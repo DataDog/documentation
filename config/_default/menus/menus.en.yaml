@@ -1921,21 +1921,26 @@ main:
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
     weight: 1702
+  - name: Connection Errors
+    url: tracing/troubleshooting/connection_errors
+    identifier: tracing_troubleshooting_connection_errors
+    parent: tracing_troubleshooting
+    weight: 1703
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1703
+    weight: 1704
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1704
+    weight: 1705
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1705
+    weight: 1706
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
