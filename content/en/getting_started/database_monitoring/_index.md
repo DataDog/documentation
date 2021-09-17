@@ -28,9 +28,9 @@ Work through this guide to set up Datadog Database Monitoring on an example Post
 
 ### Prerequisites
 
-Before getting started, you need a [Datadog account][6].
+Before getting started, you need a [Datadog account][1].
 
-To run the example application, you need a machine with [GNU Make][1] and [Docker][2]. Have your Datadog [API key][3] available.
+To run the example application, you need a machine with [GNU Make][2] and [Docker][3]. Have your Datadog [API key][4] available.
 
 ### Install the example application
 
@@ -38,7 +38,7 @@ The example application starts up the Datadog Agent and a PostgreSQL database in
 
 Follow these instructions to install the example application on MacOS or Linux.
 
-1. Download the [archive][4] containing the example application.
+1. Download the [archive][5] containing the example application.
 
 2. Extract the archive to a location on disk:
 ```
@@ -78,7 +78,7 @@ The query that consumes the most database time appears on the first line.
 
 In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
 
-Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][5]**, and selecting the **Query Samples** tab in the UI.
+Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][6]**, and selecting the **Query Samples** tab in the UI.
 
 Sort the Normalized Query table by **Duration**.
 
@@ -88,9 +88,11 @@ Find a query in the table with data in the **Explain Plan** column, and click on
 
 {{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Query explain plan showing Index Scan" style="width:100%;">}}
 
-## View changes in query volume
+## Visualize database health and performance
 
 To understand the health and performance of your databases at a glance, add Datadog Database Monitoring metrics to a dashboard.
+
+### View changes in query volume
 
 For example, you can see the absolute change in query volume in the past hour by adding a **Change** widget to track a query count metric.
 
@@ -112,13 +114,31 @@ For example, you can see the absolute change in query volume in the past hour by
 
 {{< img src="database_monitoring/dashboard_change_widget.png" alt="Change widget showing query count" style="width:100%;">}}
 
+### View default dashboards
+
+Observe current database activity, resource utilization, and more on out-of-the-box dashboards provided by Datadog Database Monitoring.
+
+To access the dashboards:
+
+1. Click **APM > Databases** in the UI to go to Database Monitoring.
+
+2. Select the **Dashboards** tab.
+
+3. Choose one of the database options:
+   - _MySQL_
+   - _AWS RDS (MySQL)_
+   - _PostgreSQL_
+   - _AWS RDS (PostgreSQL)_
+
+The dashboard you selected opens. You may clone or modify the dashboard to suit your needs.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.gnu.org/software/make/
-[2]: https://www.docker.com/
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: /resources/examples/database-management.tgz
-[5]: https://app.datadoghq.com/databases
-[6]: https://www.datadoghq.com/free-datadog-trial/
+[1]: https://www.datadoghq.com/free-datadog-trial/
+[2]: https://www.gnu.org/software/make/
+[3]: https://www.docker.com/
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: /resources/examples/database-management.tgz
+[6]: https://app.datadoghq.com/databases
