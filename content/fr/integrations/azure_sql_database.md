@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure SQL Database.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_database/'
+doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/
 draft: false
 git_integration_title: azure_sql_database
 has_logo: true

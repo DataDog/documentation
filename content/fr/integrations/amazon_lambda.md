@@ -8,17 +8,17 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Mesurez les temps d''exécution, les erreurs et les nombres d''appels de vos fonctions Lambda, ainsi que d''autres paramètres.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_lambda/'
+description: Mesurez les temps d'exécution, les erreurs et les nombres d'appels de vos fonctions Lambda, ainsi que d'autres paramètres.
+doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/'
+  - link: https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/
     tag: Blog
     text: Comment surveiller des fonctions Lambda
-  - link: 'https://www.datadoghq.com/blog/datadog-lambda-layer/'
+  - link: https://www.datadoghq.com/blog/datadog-lambda-layer/
     tag: Blog
     text: "Couche Lambda Datadog\_: surveiller des métriques custom sans serveur"
-  - link: 'https://www.datadoghq.com/blog/datadog-lambda-extension/'
+  - link: https://www.datadoghq.com/blog/datadog-lambda-extension/
     tag: Blog
     text: Présentation de l'extension Lambda Datadog
 git_integration_title: amazon_lambda
@@ -30,7 +30,7 @@ kind: integration
 manifest_version: '1.0'
 name: amazon_lambda
 public_title: "Intégration Datadog/Amazon\_Lambda"
-short_description: 'Mesurez les temps d''exécution, les erreurs et les nombres d''appels de vos fonctions Lambda, ainsi que d''autres paramètres.'
+short_description: Mesurez les temps d'exécution, les erreurs et les nombres d'appels de vos fonctions Lambda, ainsi que d'autres paramètres.
 version: '1.0'
 ---
 <div class="alert alert-warning">Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="docs.datadoghq.com/serverless/">documentation mise à jour sur la solution sans serveur de Datadog</a>.</div>
