@@ -10,6 +10,8 @@ aliases:
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom Time Frames{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/custom_links" >}}Custom Links{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
