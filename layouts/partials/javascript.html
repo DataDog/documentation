@@ -4,10 +4,10 @@
 {{ $options := "" }}
 
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
-{{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
+{{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default "") "process.env.NODE_ENV" "development" "process.env.RESET_APP_DATA_TIMER" `10` }}
 
 <!-- Set options dict based on environment -->
-{{ if $isLocalServer }}
+{{ if .Site.IsServer }}
   {{ $options = dict "defines" $defines "sourceMap" "inline" }}
 {{ else }}
   {{ $options = dict "defines" $defines "sourceMap" "inline" "minify" true }}
@@ -16,30 +16,28 @@
 <!-- Handle JS that loads only in the <head> -->
 {{ if $isHead }}
   {{ $langRedirectsFile := "scripts/lang-redirects.js" }}
-  {{ $regionRedirectsFile := "scripts/region-redirects.js" }}
   {{ $langRedirectsOutput := "" }}
-  {{ $regionRedirectsOutput := "" }}
 
   {{ $ddRum := resources.Get "node_modules/datadog-rum.js" }}
   {{ $ddLogs := resources.Get "node_modules/datadog-logs.js" }}
   {{ $ddLibs := slice $ddRum $ddLogs | resources.Concat "js/dd-libs.js" }}
   {{ $ddBrowserLogsRum := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
 
-  {{ if $isLocalServer }}
+  {{ if .Site.IsServer }}
     {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options }}
   {{ else }}
     {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options | resources.Fingerprint "sha512" }}
   {{ end }}
 
   <script>{{ $ddLibs.Content | safeJS }}</script>
-  <script type="text/javascript" src="{{ $ddBrowserLogsRum.Permalink }}"></script>
-  <script type="text/javascript" src="{{ $langRedirectsOutput.Permalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirectsOutput.Data.Integrity }}"{{ end }}></script>
+  <script type="text/javascript" src="{{ $ddBrowserLogsRum.RelPermalink }}"></script>
+  <script type="text/javascript" src="{{ $langRedirectsOutput.RelPermalink }}" {{ if ne .Site.IsServer true }}integrity="{{ $langRedirectsOutput.Data.Integrity }}"{{ end }}></script>
 {{ else }}
   {{ $jsMainFile := "scripts/main.js" }}
   {{ $compiledJS := "" }}
   {{ $jQuery := resources.Get "scripts/jquery.min.js" }}
 
-  {{ if $isLocalServer }}
+  {{ if .Site.IsServer }}
     {{ $compiledJS = resources.Get $jsMainFile | js.Build $options }}
   {{ else }}
     {{ $compiledJS = resources.Get $jsMainFile | js.Build $options | resources.Fingerprint "sha512" }}
@@ -48,6 +46,6 @@
   <!-- The docsearch.js lib requires this for some reason -->
   <script>global = globalThis;</script>
 
-  <script src="{{ $jQuery.Permalink }}"></script>
-  <script type="text/javascript" src="{{ $compiledJS.Permalink }}" defer {{ if ne $isLocalServer true  }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
+  <script src="{{ $jQuery.RelPermalink }}"></script>
+  <script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{ if ne .Site.IsServer true  }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
 {{ end }}
