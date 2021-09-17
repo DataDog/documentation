@@ -1,7 +1,11 @@
 /* eslint import/no-unresolved: 0 */
+import { datadogRum } from '@datadog/browser-rum';
+import { datadogLogs } from '@datadog/browser-logs';
 import configDocs from '../config/config-docs';
+
 const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
+
 function getConfig() {
     if (env === 'live') {
         return configDocs['live'];
@@ -11,10 +15,12 @@ function getConfig() {
         return configDocs['development'];
     }
 }
+
 const Config = getConfig();
-if (window.DD_RUM) {
+
+if (datadogRum) {
     if (env === 'preview' || env === 'live') {
-        window.DD_RUM.init({
+        datadogRum.init({
             applicationId: Config.ddApplicationId,
             clientToken: Config.ddClientToken,
             env,
@@ -23,27 +29,31 @@ if (window.DD_RUM) {
             trackInteractions: true,
             allowedTracingOrigins: [window.location.origin]
         });
+
         if (branch) {
-            window.DD_RUM.addRumGlobalContext('branch', branch);
+            datadogRum.addRumGlobalContext('branch', branch);
         }
     }
 }
-if (window.DD_LOGS) {
+if (datadogLogs) {
     // init browser logs
-    window.DD_LOGS.init({
+    datadogLogs.init({
         clientToken: Config.ddClientToken,
         forwardErrorsToLogs: true,
         env,
         service: 'docs',
         version: `${CI_COMMIT_SHORT_SHA}`
     });
+
     // global context
-    window.DD_LOGS.addLoggerGlobalContext('host', window.location.host);
-    window.DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
-    window.DD_LOGS.addLoggerGlobalContext('lang', lang);
+    datadogLogs.addLoggerGlobalContext('host', window.location.host);
+    datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
+    datadogLogs.addLoggerGlobalContext('lang', lang);
+
     if (branch) {
-        window.DD_LOGS.addLoggerGlobalContext('branch', branch);
+        datadogLogs.addLoggerGlobalContext('branch', branch);
     }
+
     // Locally log to console
-    window.DD_LOGS.logger.setHandler(Config.loggingHandler);
+    datadogLogs.logger.setHandler(Config.loggingHandler);
 }
