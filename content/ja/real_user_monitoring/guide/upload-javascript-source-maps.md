@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       noSources: false,
-      filename: '[name].[fullhash].js.map'
+      filename: '[file].map'
     }),
     // ...
   ],

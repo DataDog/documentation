@@ -142,77 +142,51 @@ function getPathElement() {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let aPath = document.querySelector(`.side [data-path="${path}"]`);
-    let maPath = document.querySelector(`header [data-path="${path}"]`);
+    let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
+    let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
-    // TODO: fix exceptions for specific nav links that have the same url but both open the same place
-     if (path.includes('agent/guide')) {
-        aPath = document.querySelector('.side [data-path*="agent/guide"]');
-        maPath = document.querySelector('header [data-path*="agent/guide"]');
-    } 
+    // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
+    if (path.includes('/guide')) {
+        const docsActiveSection = path.substr(0, path.indexOf('/guide'));
+        const dataPathString = `${docsActiveSection}/guide`;
 
-    if (path.includes('tracing/guide')) {
-        aPath = document.querySelector('.side [data-path*="tracing/guide"]');
-        maPath = document.querySelector('header [data-path*="tracing/guide"]');
-    }
-
-    if (path.includes('monitors/guide')) {
-        aPath = document.querySelector('.side [data-path*="monitors/guide"]');
-        maPath = document.querySelector('header [data-path*="monitors/guide"]');
-    }
-
-    if (path.includes('logs/guide')) {
-        aPath = document.querySelector('.side [data-path*="logs/guide"]');
-        maPath = document.querySelector('header [data-path*="logs/guide"]');
+        sideNavPathElement = document.querySelector(`.side [data-path*="${dataPathString}"]`);
+        mobileNavPathElement = document.querySelector(`header [data-path*="${dataPathString}"]`); 
     }
 
     if (path.includes('account_management/billing')) {
-        aPath = document.querySelector(
+        sideNavPathElement = document.querySelector(
             '.side [data-path*="account_management/billing"]'
         );
-        maPath = document.querySelector(
+        mobileNavPathElement = document.querySelector(
             'header [data-path*="account_management/billing"]'
         );
     }
-
-
-    if (path.includes('developers/guide')) {
-        aPath = document.querySelector('.side [data-path*="developers/guide"]');
-        maPath = document.querySelector(
-            'header [data-path*="developers/guide"]'
-        );
-    }
-
-    if (path.includes('synthetics/guide')) {
-        aPath = document.querySelector('.side [data-path*="synthetics/guide"]');
-        maPath = document.querySelector(
-            'header [data-path*="synthetics/guide"]'
-        );
-    }
-
 
     // if url is domain + /integrations/**
     if (
         `${replaceURL(domain)}/${replacePath(path)}`.includes(
             `${replaceURL(domain)}/integrations`
+        ) && !`${replaceURL(domain)}/${replacePath(path)}`.includes(
+            `${replaceURL(domain)}/integrations/guide`
         )
     ) {
-        aPath = document.querySelector(
+        sideNavPathElement = document.querySelector(
             '.side .nav-top-level > [data-path*="integrations"]'
         );
-        maPath = document.querySelector(
+        mobileNavPathElement = document.querySelector(
             'header .nav-top-level > [data-path*="integrations"]'
         );
     }
     
-    if (aPath) {
-        aPath.classList.add('active');
-        hasParentLi(aPath);
+    if (sideNavPathElement) {
+        sideNavPathElement.classList.add('active');
+        hasParentLi(sideNavPathElement);
     }
 
-    if (maPath) {
-        maPath.classList.add('active');
-        hasParentLi(maPath);
+    if (mobileNavPathElement) {
+        mobileNavPathElement.classList.add('active');
+        hasParentLi(mobileNavPathElement);
     }
 }
 

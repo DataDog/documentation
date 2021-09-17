@@ -148,7 +148,7 @@ $http_request.responseText
 [Consultez le référentiel GitHub ncracker/dd_metric pour découvrir d'autres exemples de code][6].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[2]: /fr/metrics/dogstatsd_metrics_submission/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [4]: /fr/api/v1/hosts/
 [5]: /fr/api/v1/metrics/

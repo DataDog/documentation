@@ -21,7 +21,7 @@ further_reading:
 
 TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-TCP tests can run from [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
+TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
 
 ## Permissions
 
@@ -31,7 +31,7 @@ If you have access to the [custom role feature][4], add your user to any custom 
 
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][5], [`SSL`][6], [`TCP`][7], [`DNS`][8], or [`ICMP` test][9]), define your test's request.
+After choosing to create a [`TCP` test][5], define your test's request.
 
 ### Define request
 
@@ -40,8 +40,8 @@ After choosing the type of test you want to create ([`HTTP`][5], [`SSL`][6], [`T
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
 3. **Name** your TCP test.
-4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][10].
-5. Select the **Locations** to run your TCP test from: TCP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to launch the connection from outside or inside your network.
+4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
+5. Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
@@ -53,7 +53,8 @@ TCP tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][11].
+* [**Within your CI/CD pipelines**][7].
+
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
@@ -81,7 +82,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][12].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][8].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -89,9 +90,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][9], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][10] and supports the following [conditional variables][11]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -132,7 +133,8 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][12] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -141,13 +143,11 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-
-
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
@@ -165,15 +165,11 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [2]: /synthetics/private_locations
 [3]: /account_management/rbac/
 [4]: /account_management/rbac#custom-roles
-[5]: /synthetics/api_tests/http_tests
-[6]: /synthetics/api_tests/ssl_tests
-[7]: /synthetics/api_tests/tcp_tests
-[8]: /synthetics/api_tests/dns_tests
-[9]: /synthetics/api_tests/icmp_tests
-[10]: /synthetics/search/#search
-[11]: /synthetics/ci
-[12]: /api/v1/synthetics/#create-a-test
-[13]: /monitors/notifications/?tab=is_alert#notification
-[14]: https://www.markdownguide.org/basic-syntax/
-[15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /synthetics/settings/#global-variables
+[5]: /synthetics/api_tests/tcp_tests
+[6]: /synthetics/search/#search
+[7]: /synthetics/cicd_testing
+[8]: /api/v1/synthetics/#create-a-test
+[9]: /monitors/notifications/?tab=is_alert#notification
+[10]: https://www.markdownguide.org/basic-syntax/
+[11]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[12]: /synthetics/settings/#global-variables

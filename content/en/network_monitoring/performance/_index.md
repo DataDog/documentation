@@ -9,7 +9,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
   tag: "Blog"
-  link: "Monitor cloud architecture and app dependencies with Datadog NPM"
+  text: "Monitor cloud architecture and app dependencies with Datadog NPM"
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
@@ -18,10 +18,10 @@ further_reading:
   text: "Monitor Windows hosts with Network Performance Monitoring"
 - link: "https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/"
   tag: "Blog"
-  text: Monitor cloud endpoint health with cloud service autodetection"
-- link: "/network_monitoring/devices"
-  tag: "Documentation"
-  text: "Network Device Monitoring"
+  text: "Monitor cloud endpoint health with cloud service autodetection"
+- link: "https://www.datadoghq.com/blog/npm-best-practices/"
+  tag: "Blog"
+  text: "Best practices for getting started with Datadog NPM"
 ---
 
 ## Overview

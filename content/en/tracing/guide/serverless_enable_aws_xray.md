@@ -167,7 +167,7 @@ See:
 
 {{< /programming-lang-wrapper >}}
 
-[1]: integrations/amazon_web_services/#setup
+[1]: /integrations/amazon_web_services/#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
 [3]: https://github.com/DataDog/serverless-plugin-datadog
 [4]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer

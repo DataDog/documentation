@@ -10,7 +10,7 @@ further_reading:
   - link: /getting_started/tagging/assigning_tags/
     tag: Documentation
     text: タグの割り当て方法
-  - link: 'https://www.datadoghq.com/blog/tagging-best-practices/'
+  - link: https://www.datadoghq.com/blog/tagging-best-practices/
     tag: ブログ
     text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
 ---
@@ -30,9 +30,9 @@ further_reading:
 {{< tabs >}}
 {{% tab "Assignment" %}}
 
-タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。これにより、この特定のタグ (この例では `service:coffee-house`) が割り当てられたすべてのソースについて、選択されたメトリクスが表示されます。
+タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。こうすることで、選択したメトリクスに、この特定のタグ (この例では `service:coffee-house`) が割り当てられたすべてのソースが表示されます。
 
-{{< img src="tagging/using_tags/dashboardtags_1.png" alt="ダッシュボードの from テキストボックスに入力されたタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboardtags_1.png" alt="ダッシュボードの from テキストボックスに入力されたタグ" style="width:80%;">}}
 
 高度なタグ値のフィルタリングはブールフィルターでも使用できます。次のブール構文がサポートされます。
 
@@ -44,24 +44,24 @@ further_reading:
 
 `AND`、`OR` を使用して、特定のタグ全体のメトリクスを確認します。
 
-{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="AND/OR を使用したブールフィルター"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="AND/OR を使用したブールフィルター" style="width:80%;">}}
 
 `IN`、`NOT IN` を使用して、メトリクスを特定のタグにフィルタリングします。
 
-{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="IN/NOT IN によるブールフィルター"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="IN/NOT IN によるブールフィルター" style="width:80%;">}}
 
 タグを使用して集計されたグループを作成するには、**avg by** テキストボックスにタグのキー部分を入力します。たとえば、`service:coffee-house` のようにキー `service` でタグ付けされたメトリクスを表示する時系列グラフでは、**avg by** テキストボックスに `service` を入力すると、`service` のタグ値ごとに 1 つの行が表示されます。各行は、この `service` タグ値を共有するすべてのソースの平均のメトリクス値を表します。
 
-{{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ" style="width:80%;">}}
 
 タグを使用して、ダッシュボードでイベントを重ねることもできます。これは、[イベントストリーム][2]と同じように機能します。
 `tags:` に続けてタグを入力します。一致するイベントは、縦棒としてグラフに重なります。以下の例は、`tags:service:coffee-house` を使用します。
 
-{{< img src="tagging/using_tags/dashboardeventtags.png" alt="ダッシュボードでのイベントオーバーレイ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboardeventtags.png" alt="ダッシュボードでのイベントオーバーレイ" style="width:80%;">}}
 
 ダッシュボードのグラフの **from** タグの切り替え時間を短縮するには、[テンプレート変数][3]を使用します。以下の例では、`service` を使用して `service` タグキーを表します。テンプレート変数を使用するには、グラフ クエリの **from** テキストボックスに `$service` テンプレート変数を追加します。
 
-{{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="ダッシュボードテンプレート変数"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="ダッシュボードテンプレート変数" style="width:80%;">}}
 
 [1]: /ja/dashboards/
 [2]: /ja/events/
@@ -71,15 +71,15 @@ further_reading:
 
 以下は、時系列チャートエディターを使用したタグの例です。最初のスクリーンショットでは、タグは適用されていません。すべてのホストでの平均 CPU 使用率が表示されます。
 
-{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1"  style="width:75%;">}}
+{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" style="width:75%;">}}
 
 次に、タグ (`region:eastus`) を **from** テキストボックスに含めるようにエディターを更新します。これにより、Datadog は米国東部リージョンでの CPU 使用率を参照できます。この例では `region` タグを使用しますが、`application`、`service`、`environment` など、Datadog プラットフォームに送信された任意のタグを使用できます。
 
-{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2"  style="width:75%;">}}
+{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" style="width:75%;">}}
 
 最後に、2 番目の空フィールド (**avg by** テキストボックス) を使用して、各 `host` の個別の時系列線を表示します。米国東部リージョンで実行されている個別のホストのサーバー CPU が表示されます。
 
-{{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3"  style="width:75%;">}}
+{{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" style="width:75%;">}}
 
 必要に応じて、タグを追加して範囲をさらに絞り込みます。たとえば、`region:eastus` や `env:production` のホストなどです。タグは Datadog 全体で使用でき、すべてのコア要素 (メトリクス、トレース、ログ) に適用されます。
 
@@ -95,32 +95,32 @@ further_reading:
 
 このセクションでは、タグを使用してホストを絞り込みまたはグループ化します。
 
-{{< img src="tagging/using_tags/hostmaptags.png" alt="ホストマップタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/hostmaptags.png" alt="ホストマップタグ" style="width:80%;">}}
 
 または、コンテナを絞り込みまたはグループ化することもできます。
 
-{{< img src="tagging/using_tags/containermaptags.png" alt="コンテナマップタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/containermaptags.png" alt="コンテナマップタグ" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Infrastructure List" %}}
 
 以下は、インフラストラクチャーリストページのテキストボックスによる絞り込みまたはグループ化です。
 
-{{< img src="tagging/using_tags/infrastructuretags.png" alt="インフラストラクチャーリストにあるタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/infrastructuretags.png" alt="インフラストラクチャーリストにあるタグ" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
 以下は、ライブコンテナページのテキストボックスによる絞り込みまたはグループ化です。
 
-{{< img src="tagging/using_tags/livecontainertags.png" alt="ライブコンテナタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/livecontainertags.png" alt="ライブコンテナタグ" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processes" %}}
 
 以下は、ライブプロセスページのテキストボックスによる絞り込みまたはグループ化です。
 
-{{< img src="tagging/using_tags/liveprocessestags.png" alt="ライブプロセスタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/liveprocessestags.png" alt="ライブプロセスタグ" style="width:80%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -131,7 +131,7 @@ further_reading:
 
 [割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。**注**: モニター タグは、メトリクス タグとは別のもので、独立しています。
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理タグ" style="width:80%;">}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/
 {{% /tab %}}
@@ -146,7 +146,7 @@ further_reading:
 
 * モニターを各タグ値で複数警告モニターに変換する **avg by** テキストボックス。
 
-{{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ" style="width:80%;">}}
 
 [1]: /ja/monitors/monitor_types/
 {{% /tab %}}
@@ -154,7 +154,7 @@ further_reading:
 
 モニター タグ別に[ダウンタイム][1]を絞り込むには、検索バーに `service:coffee-house` などのタグ名を入力します。
 
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理タグ" style="width:80%;">}}
 
 [1]: /ja/monitors/downtimes/
 {{% /tab %}}
@@ -164,7 +164,7 @@ further_reading:
 
 [Metrics Explorer][8] でタグを使用して、複数のタグでメトリクスを絞り込むか、タグ キー別に複数のグラフを表示します。以下の例は、`service:coffee-house` のメトリクスのグラフを作成し、`host` ごとに 1 つのグラフを表示します。
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="モニターの管理タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/metricsexplorertags.png" alt="モニターの管理タグ" style="width:80%;">}}
 
 ## インテグレーション
 
@@ -221,7 +221,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照してください。
+[ラベルの作成と管理][2]については、Google Cloud のドキュメントを参照してください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
@@ -235,7 +235,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 [トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="トレース検索タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/tracesearchtags.png" alt="トレース検索タグ" style="width:80%;">}}
 
 [1]: /ja/tracing/app_analytics/search/
 [2]: /ja/tracing/app_analytics/search/#search-bar
@@ -244,7 +244,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 [タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域にジャンプできます。以下の例では、タグ `service:coffee-house` で絞り込んで、[分析][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
 
-{{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ" style="width:80%;">}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/
 [2]: /ja/tracing/app_analytics/search/
@@ -259,11 +259,11 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 [ノートブック][9]グラフを作成するときに、**from** テキストボックスでタグを使用してメトリクスを制限します。さらに、**avg by** テキストボックスでタグを使用してメトリクスをグループ化します。以下の例では、メトリクスは `service:coffee-house` に制限され、`host` でグループ化されます。
 
-{{< img src="tagging/using_tags/notebooktags.png" alt="ノートブックタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/notebooktags.png" alt="ノートブックタグ" style="width:80%;">}}
 
 タグを除外するには、`</>` を使用してテキストを編集して、`!<KEY>:<VALUE>` の形式でタグを追加します。以下の例では、`!service:coffeehouse` を使用して `service:coffeehouse` を除外します。
 
-{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="ノートブック除外タグ" video="true"  width="80%">}}
+{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="ノートブック除外タグ" video="true" width="80%">}}
 
 ## ログ
 
@@ -272,29 +272,29 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 {{< tabs >}}
 {{% tab "Search" %}}
 
-{{< img src="tagging/using_tags/logsearchtags.png" alt="ログ検索タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/logsearchtags.png" alt="ログ検索タグ" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="ログ分析タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/loganalyticstags.png" alt="ログ分析タグ" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Patterns" %}}
 
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns タグ" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Live Tail" %}}
 
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail タグ" video="true"  width="80%">}}
+{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail タグ" video="true" width="80%">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 さらに、タグを使用してログ [パイプライン][14]を絞り込みます。以下の例では、パイプラインはタグ `service:coffee-house` でログを絞り込みます。
 
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="パイプラインタグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/logpipelinetags.png" alt="パイプラインタグ" style="width:80%;">}}
 
 
 ## サービスレベル目標
@@ -304,7 +304,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 [割り当てられたタグ][1]によって SLO を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `<KEY>:<VALUE>` で、`journey:add_item` などです。特定のタグを持つ SLO を検索から除外するには、`-` を使用して、`-journey:add_item` とします。**注**: SLO タグは、SLO の基底のメトリクスやモニターで使用されるメトリクスタグやモニタータグとは別のもので、独立しています。
 
-{{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO タグ" style="width:80%;">}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
@@ -316,7 +316,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 * これらのタグのみにメトリクス範囲を制限する **from** テキストボックス。
 * SLO 全体と各タグ値のステータス割合および残りのエラーバジェットを表示する、グループ化されたメトリクスベースの SLO を作成するための **sum by** テキストボックス。
 
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ" style="width:80%;">}}
 
 [1]: /ja/monitors/service_level_objectives/metric/
 {{% /tab %}}
@@ -324,7 +324,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 単一の[グループ化されたモニター][2]を使用して[モニターベースの SLO][1] を作成する場合、**選択されたグループで計算** トグルを使用して、基底のモニターから最大 20 個のタグ値を選択し、SLO 全体および各タグ値のステータス割合および残りのエラーバジェットを表示します。
 
-{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="モニターベースの SLO タグ"  style="width:80%;">}}
+{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="モニターベースの SLO タグ" style="width:80%;">}}
 
 [1]: /ja/monitors/service_level_objectives/monitor/
 [2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors

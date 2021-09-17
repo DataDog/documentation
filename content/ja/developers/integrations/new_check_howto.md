@@ -441,7 +441,7 @@ Agent バージョン >= 6.12 の場合
 [2]: /ja/developers/integrations/python
 [3]: https://github.com/DataDog/integrations-extras
 [4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[5]: https://docs.datadoghq.com/ja/developers/metrics/agent_metrics_submission/
+[5]: https://docs.datadoghq.com/ja/metrics/agent_metrics_submission/
 [6]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
 [7]: https://docs.pytest.org/en/latest
 [8]: https://tox.readthedocs.io/en/latest

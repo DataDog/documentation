@@ -30,7 +30,7 @@ API レート制限ポリシーについて
 
 [1]: /ja/help/
 [2]: /ja/api/v1/metrics/
-[3]: /ja/developers/metrics/custom_metrics/
+[3]: /ja/metrics/custom_metrics/
 [4]: /ja/api/v1/metrics/#query-timeseries-points
 [5]: /ja/api/v1/logs/#get-a-list-of-logs
 [6]: /ja/api/v1/snapshots/

@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_name: Traefik
 draft: false
 git_integration_title: traefik
@@ -21,7 +21,7 @@ integration_title: Traefik
 is_public: true
 kind: インテグレーション
 maintainer: '@renaudhager'
-manifest_version: 1.1.0
+manifest_version: 1.0.0
 metric_prefix: traefik.
 metric_to_check: traefik.total_status_code_count
 name: traefik
@@ -139,12 +139,13 @@ Traefik がログをファイルに記録するように構成する場合は、
 Traefik チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "traefik" >}}
 
-Traefik をクエリすると、ステータスコードとして `200` が返されます。
 
-## 開発
+## トラブルシューティング
 
-Agent ベースのインテグレーションのテストおよび開発方法の詳細については、[メインドキュメント][13]を参照してください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+
 
 [1]: https://traefik.io
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
@@ -158,4 +159,5 @@ Agent ベースのインテグレーションのテストおよび開発方法�
 [10]: https://docs.traefik.io/configuration/logs/#traefik-logs
 [11]: https://docs.traefik.io/configuration/logs/#clf-common-log-format
 [12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[13]: https://docs.datadoghq.com/ja/developers/
+[13]: https://github.com/DataDog/integrations-extras/blob/master/traefik/assets/service_checks.json
+[14]: https://docs.datadoghq.com/ja/help

@@ -38,7 +38,7 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ### Docker
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Docker Hub. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
 ### Datadog private locations endpoints
 
@@ -609,9 +609,9 @@ Although it's important to initially add resources that are consistent with the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/ci
+[1]: /synthetics/cicd_testing
 [2]: /synthetics/
-[3]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
 [5]: /synthetics/private_locations/configuration/#proxy-configuration
 [6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml

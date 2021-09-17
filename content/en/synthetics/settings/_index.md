@@ -89,9 +89,9 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][8]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][8]. 
 
-If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
+If you have access to the [custom role feature][9], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
 
 #### Restrict access
 
@@ -116,13 +116,13 @@ Define which endpoints should be sent the APM headers by adding a URL into this 
 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
-If the endpoint is being traced and allowed, your browser test results are automatically tied to its corresponding trace.
+If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][8]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][8]. 
 
-If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
+If you have access to the [custom role feature][9], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
 
 ## Further Reading
 

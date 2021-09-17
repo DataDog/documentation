@@ -103,7 +103,6 @@ Hit **Create Your First Request** to start designing your test's requests.
   {{% tab "Privacy" %}}
 
   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
-  
 
 [1]: /security/synthetics
   {{% /tab %}}
@@ -146,10 +145,10 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [regex][11].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][11], [JSONPath][10], or [XPath][18].
+    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][11].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][11], [JSONPath][10], or [XPath][18].
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created, this variable can be used in the following steps of your Multistep API test.
 
@@ -243,7 +242,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include a misconfigured test URL or a wrong configuration in your DNS entries.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
@@ -262,7 +261,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[3]: /synthetics/ci
+[3]: /synthetics/cicd_testing
 [4]: /api/v1/synthetics/#get-all-locations-public-and-private
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/

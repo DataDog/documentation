@@ -30,7 +30,7 @@ Datadog.configure do |c|
 end
 ```
 
-**Note:** For `lograge` users who have also defined `lograge.custom_options` in an `initializers/lograge.rb` configuration file, because Rails loads initializers in alphabetical order, automatic trace correlation may not take effect, since `initializers/datadog.rb` would be overwritten by the `initializers/lograge.rb` initializer. To support automatic trace correlation with _existing_ `lograge.custom_options`, use the [Manual (Lograge)](#manual-lograge) configuration below.
+**Note:** For `lograge` users who have also defined `lograge.custom_options` in an `initializers/lograge.rb` configuration file, because Rails loads initializers in alphabetical order, automatic trace correlation may not take effect, since `initializers/datadog.rb` would be overwritten by the `initializers/lograge.rb` initializer. To support automatic trace correlation with _existing_ `lograge.custom_options`, use the [Manual Lograge](#lograge) configuration below.
 
 #### Manual injection
 ##### Lograge

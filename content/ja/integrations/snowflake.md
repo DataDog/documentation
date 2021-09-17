@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
 display_name: Snowflake
 draft: false
 git_integration_title: snowflake
@@ -142,6 +142,11 @@ datadog-agent integration install datadog-snowflake==2.0.1
         ## so to minimize unnecessary queries the `min_collection_interval` defaults to 1 hour.
         #
         min_collection_interval: 3600
+
+        # @param disable_generic_tags - boolean - optional - default: false
+        # Generic tags such as `cluster` will be replaced by <integration_name>_cluster to avoid
+        # getting mixed with other integraton tags.
+        # disable_generic_tags: true
     ```
 
     <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 

@@ -43,7 +43,7 @@ Datadog fournit non seulement ces métriques sur votre page Service de l'APM, ma
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
+[2]: /fr/metrics/dogstatsd_metrics_submission/#setup
 [3]: /fr/agent/docker/#dogstatsd-custom-metrics
 [4]: /fr/developers/dogstatsd/?tab=kubernetes#agent
 [5]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task

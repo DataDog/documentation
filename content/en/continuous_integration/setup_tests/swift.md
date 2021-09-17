@@ -18,9 +18,9 @@ Supported languages:
 * Objective-C >= 2.0
 
 Supported platforms:
-* iOS >= 12.0
+* iOS >= 11.0
 * macOS >= 10.13
-* tvOS >= 12.0
+* tvOS >= 11.0
 
 ## Installing the Swift testing SDK
 
@@ -130,7 +130,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ### Collecting Git and build metadata
 
-Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#ci-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
@@ -540,7 +540,3 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
-{{< /site-region >}}
-{{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
-{{< /site-region >}}

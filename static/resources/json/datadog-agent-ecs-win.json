@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "datadog-agent",
-      "image": "datadog/agent:latest",
+      "image": "public.ecr.aws/datadog/agent:latest",
       "cpu": 512,
       "memory": 512,
       "essential": true,

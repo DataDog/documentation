@@ -46,6 +46,7 @@ logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # If TLS/SSL is not enabled on the Vector side
   use_http: true # Vector `datadog_logs` source only supports HTTP
+  use_v2_api: false # Vector `datadog_logs` source only supports v1
 ```
 
 Where `VECTOR_HOST` is the hostname of the system running Vector and `VECTOR_PORT` is the TCP port on which
@@ -132,4 +133,4 @@ to fill relevant fields according to the expected schema.
 [13]: /agent/kubernetes/?tab=helm
 [14]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [15]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[16]: api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs

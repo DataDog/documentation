@@ -21,33 +21,17 @@ The Log Stream displays a log flow matching the defined query:
 
 ### Configuration
 
-{{< img src="dashboards/widgets/log_stream/log_stream_setup.gif" alt="Log stream setup" style="width:80%;">}}
+1. Enter a [search query][1] to filter the log stream.
+2. Update the columns to display the values of your [facets][2] and [measures][2].
+3. Give your graph a title or leave the box blank for the suggested title.
 
-Enter a [log query][1] to filter the log stream.
-
-### Options
-
-#### Columns
-
-Display values of your [facets][2] and [measures][2] with columns.
-
-#### Global time
-
-On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+{{< img src="dashboards/widgets/log_stream/log_stream_setup.png" alt="Log stream setup" style="width:90%;">}}
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
+This widget can be used with the **Dashboards API**. See [Dashboards API][3] for more details.
 
-The dedicated [widget JSON schema definition][4] for the log stream widget is:
+The [widget JSON schema definition][4] for the log stream widget is:
 
 {{< dashboards-widgets-api >}}
 
