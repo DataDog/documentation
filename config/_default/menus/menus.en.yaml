@@ -2414,6 +2414,10 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 105
+  - name: UDP
+    url: synthetics/api_tests/udp_tests
+    parent: api_tests
+    weight: 106
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
