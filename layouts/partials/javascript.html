@@ -15,26 +15,25 @@
 
 <!-- Handle JS that loads only in the <head> -->
 {{ if $isHead }}
-  {{ $langRedirects := "" }}
-  {{ $regionRedirects := "" }}
+  {{ $langRedirectsFile := "scripts/lang-redirects.js" }}
+  {{ $regionRedirectsFile := "scripts/region-redirects.js" }}
+  {{ $langRedirectsOutput := "" }}
+  {{ $regionRedirectsOutput := "" }}
+
   {{ $ddRum := resources.Get "node_modules/datadog-rum.js" }}
   {{ $ddLogs := resources.Get "node_modules/datadog-logs.js" }}
   {{ $ddLibs := slice $ddRum $ddLogs | resources.Concat "js/dd-libs.js" }}
   {{ $ddBrowserLogsRum := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
 
   {{ if $isLocalServer }}
-    {{ $langRedirects = resources.Get "scripts/lang-redirects.js" | js.Build $options }}
-    {{ $regionRedirects = resources.Get "scripts/region-redirects.js" | js.Build $options }}
+    {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options }}
   {{ else }}
-    {{ $langRedirects = resources.Get "scripts/lang-redirects.js" | js.Build $options | resources.Fingerprint "sha512" }}
-    {{ $regionRedirects = resources.Get "scripts/region-redirects.js" | js.Build $options | resources.Fingerprint "sha512" }}
+    {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options | resources.Fingerprint "sha512" }}
   {{ end }}
 
   <script>{{ $ddLibs.Content | safeJS }}</script>
   <script type="text/javascript" src="{{ $ddBrowserLogsRum.Permalink }}"></script>
-  <script type="text/javascript" src="{{ $langRedirects.Permalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirects.Data.Integrity }}"{{ end }}></script>
-  <script type="text/javascript" src="{{ $regionRedirects.Permalink }}" {{ if ne $isLocalServer true }}integrity="{{ $regionRedirects.Data.Integrity }}"{{ end }}></script>
-
+  <script type="text/javascript" src="{{ $langRedirectsOutput.Permalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirectsOutput.Data.Integrity }}"{{ end }}></script>
 {{ else }}
   {{ $jsMainFile := "scripts/main.js" }}
   {{ $compiledJS := "" }}
