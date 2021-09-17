@@ -109,7 +109,7 @@ nav_sections:
         desc: Learn how Datadog protects your data
       - title: Developers
         link: developers/
-        icon: wrench
+        icon: dev-code
         desc: Develop for the Datadog platform
 
 popular_searches:
