@@ -1,18 +1,19 @@
 {{ $compiledJS := "" }}
 {{ $options := "" }}
 {{ $isLocalServer := .Site.IsServer }}
-{{ $jsMainFile := "scripts/main.js" }}
+{{ $jsInput := "scripts/main.js" }}
+{{ $jsOutput := "scripts/main.js" }}
 {{ $jQuery := resources.Get "scripts/jquery.min.js" }}
 
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
 {{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 
 {{ if $isLocalServer }}
-  {{ $options = dict "defines" $defines "sourceMap" "inline" }}
-  {{ $compiledJS = resources.Get $jsMainFile | js.Build $options }}
+  {{ $options = dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
+  {{ $compiledJS = resources.Get $jsInput | js.Build $options }}
 {{ else }}
-  {{ $options = dict "defines" $defines "sourceMap" "inline" "minify" true }}
-  {{ $compiledJS = resources.Get $jsMainFile | js.Build $options | resources.Fingerprint "sha512" }}
+  {{ $options = dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" "minify" true }}
+  {{ $compiledJS = resources.Get $jsInput | js.Build $options | resources.Fingerprint "sha512" }}
 {{ end }}
 
 <!-- The docsearch.js lib requires this for some reason -->
