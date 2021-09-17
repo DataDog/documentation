@@ -1,26 +1,25 @@
-{{ $compiledJS := "" }}
-{{ $options := "" }}
-{{ $isLocalServer := .Site.IsServer }}
-{{ $jsInput := "scripts/main.js" }}
-{{ $jsOutput := "scripts/main.js" }}
-{{ $jQuery := resources.Get "scripts/jquery.min.js" }}
-
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
 {{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 
-{{ if $isLocalServer }}
-  {{ $options = dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" }}
-  {{ $compiledJS = resources.Get $jsInput | js.Build $options }}
-{{ else }}
-  {{ $options = dict "defines" $defines "targetPath" $jsOutput "sourceMap" "inline" "minify" true }}
-  {{ $compiledJS = resources.Get $jsInput | js.Build $options | resources.Fingerprint "sha512" }}
-{{ end }}
+{{ $isLocalServer := .Site.IsServer }}
+{{ $jsInput := "scripts/main.js" }}
+{{ $devOptions := dict "defines" $defines "sourceMap" "inline" }}
+{{ $productionOptions := dict "defines" $defines "sourceMap" "inline" "minify" true }}
+{{ $options := cond $isLocalServer $devOptions $productionOptions }}
+{{ $compiledJS := resources.Get $jsInput | js.Build $options }}
+{{ $jQuery := resources.Get "scripts/jquery.min.js" }}
+
+<script src="{{ $jQuery.RelPermalink }}"></script>
 
 <!-- The docsearch.js lib requires this for some reason -->
 <script>global = globalThis;</script>
 
-<script src="{{ $jQuery.RelPermalink }}"></script>
-<script type="text/javascript" src="{{ $compiledJS.RelPermalink }}" defer {{- if ne $isLocalServer true -}}integrity="{{ $compiledJS.Data.Integrity }}"{{- end -}}></script>
+{{ if $isLocalServer }}
+  <script src="{{ $compiledJS.RelPermalink }}" defer></script>
+{{ else }}
+  {{ $productionJS := $compiledJS | resources.Fingerprint "sha512" }}
+  <script src="{{ $productionJS.RelPermalink }}" integrity="{{ $productionJS.Data.Integrity }}" defer></script>
+{{ end }}
 
 {{/*
 <!-- Handle JS that loads only in the <head> -->
