@@ -29,6 +29,11 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 `Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
+| Group&nbsp;by                       | Simple-&nbsp;Alert&nbsp;mode | Multi-&nbsp;Alert&nbsp;mode |
+|-------------------------------------|------------------------|-----------------------|
+| _(everything)_                      | One single group triggering one notification | N/A |
+| 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
+
 ## Set alert conditions
 
 The alert conditions vary based on the [monitor type][1]. Configure monitors to trigger if the query value crosses a threshold, or if a certain number of consecutive checks failed.
