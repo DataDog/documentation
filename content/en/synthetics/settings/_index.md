@@ -132,7 +132,7 @@ If you have access to the [custom role feature][9], add your user to a custom ro
 <div class="alert alert-warning">
 Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
-This allows you to enforce selected tags to create a Synthetics test. So you will be able to break down cost and usage by services, applications or teams for example. 
+This feature allows you to enforce selected tags to create a Synthetics test so you are able to break down cost and usage by services, applications, or teams. 
 You can activate tag enforcement in Synthetic Monitoring > Settings > Default Settings:
 <!-- Can you please embed this image here https://a.cl.ly/RBuLAdPY -->
 
