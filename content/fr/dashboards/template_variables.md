@@ -6,6 +6,12 @@ aliases:
   - /fr/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
   - /fr/graphing/dashboards/template_variables/
 further_reading:
+  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
+    tag: Blog
+    text: Utiliser les template variables associées pour affiner vos dashboards
+  - link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
+    tag: Blog
+    text: Accélérer les workflows de dashboard avec une syntaxe de template variable dynamique
   - link: /dashboards/
     tag: Documentation
     text: Créer des dashboards dans Datadog
@@ -57,7 +63,7 @@ Pour enregistrer les valeurs actuelles des template variables dans une nouvelle 
 
 Pour supprimer une vue, cliquez sur le menu déroulant des vues enregistrées et sélectionnez *Manage views...*. Une fenêtre contenant chacune de vos vues enregistrées avec une icône en forme de corbeille s'affiche alors. Cliquez sur la corbeille appropriée pour supprimer la vue correspondante.
 
-{{< img src="dashboards/template_variables/manage_views.png" alt="Fenêtre Manage Views" style="width:75%;">}}
+{{< img src="dashboards/template_variables/manage_views.png" alt=""Fenêtre Manage Views" style="width:75%;">}}
 
 #### Modification
 
@@ -74,6 +80,13 @@ Lorsque vous créez ou modifiez un widget, les template variables existantes s'a
 Une fois le widget enregistré, la valeur de la template variable est sélectionnée en haut de votre dashboard :
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Sélection d'une template variable" style="width:75%;">}}
+
+Lorsque vous modifiez la valeur d'une template variable, l'URL du dashboard se met à jour pour refléter la nouvelle valeur selon le format suivant : `&tpl_var_<NOM_TEMPLATE_VARIABLE>=<VALEUR_TEMPLATE_VARIABLE>`. Par exemple, si la template variable `$env` d'un dashboard est modifiée et définie sur `prod`, le paramètre d'URL correspondra à `&tpl_var_env=prod`.
+
+#### Template variables associées
+Lorsque vous sélectionnez la valeur d'une template variable, les sections **Associated Values** et **Other Values** s'affichent. Les valeurs associées sont calculées en tenant compte des autres valeurs de template variable sélectionnées sur la page, ce qui permet d'identifier instantanément les valeurs liées sans aucune configuration.
+
+{{< img src="dashboards/template_variables/associated_template_variables.png" alt="Template variables associées" style="width:75%;">}}
 
 #### Texte
 

@@ -5,7 +5,7 @@ kind: integration
 description: Effectuez le suivi de tous les événements ce qui se produisent dans vos clusters Kubernetes
 short_description: Surveillez vos clusters Kubernetes
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md'
 categories:
   - log collection
   - containers
@@ -25,7 +25,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: Log Management
-  - link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
+  - link: 'https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/'
     tag: Blog
     text: Logs d'audit Kubernetes clés pour la surveillance de la sécurité du cluster
 integration_id: kubernetes-audit-logs

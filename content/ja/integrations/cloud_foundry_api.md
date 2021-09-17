@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_name: Cloud Foundry API
 draft: false
 git_integration_title: cloud_foundry_api

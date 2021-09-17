@@ -10,7 +10,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
 display_name: botprise
 draft: false
 git_integration_title: botprise

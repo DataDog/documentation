@@ -11,11 +11,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez le statut et le nombre d'instances dans vos groupes Auto\_Scaling."
-doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
-integration_id: amazon-auto-scaling
 integration_title: AWS Auto Scaling
 is_public: true
 kind: integration
@@ -60,17 +59,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez AWS Auto Scaling de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
+Configurez AWS Auto Scaling de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_auto_scaling` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][7].
-2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs AWS Auto Scaling dans la console AWS :
+2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs AWS Auto Scaling dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][8]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][9]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][9]
 
 ## Données collectées
 

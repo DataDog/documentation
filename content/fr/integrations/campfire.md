@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Envoyez les alertes et les graphiques Datadog de votre choix sur le canal Campfire de votre équipe.
-doc_link: https://docs.datadoghq.com/integrations/campfire/
+doc_link: 'https://docs.datadoghq.com/integrations/campfire/'
 draft: false
 git_integration_title: campfire
 has_logo: true

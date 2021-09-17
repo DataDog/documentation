@@ -1,3 +1,0 @@
----
-title: Comptes de service
----

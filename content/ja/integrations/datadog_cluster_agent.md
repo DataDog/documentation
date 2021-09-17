@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
 display_name: Datadog Cluster Agent
 draft: false
 git_integration_title: datadog_cluster_agent

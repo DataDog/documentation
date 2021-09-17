@@ -11,7 +11,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Auto Scaling グループ内のインスタンスのステータスとカウントを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true

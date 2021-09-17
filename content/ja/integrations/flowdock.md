@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームのフローに送信。
-doc_link: 'https://docs.datadoghq.com/integrations/flowdock/'
+doc_link: https://docs.datadoghq.com/integrations/flowdock/
 draft: false
 git_integration_title: flowdock
 has_logo: true

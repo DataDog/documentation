@@ -6,10 +6,10 @@ disable_sidebar: true
 aliases:
   - /fr/network_performance_monitoring/devices/guide/
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
     tag: Blog
     text: Surveiller des périphériques SNMP avec Datadog
-  - link: https://www.datadoghq.com/blog/monitor-meraki/
+  - link: 'https://www.datadoghq.com/blog/monitor-meraki/'
     tag: Blog
     text: Surveiller Cisco Meraki avec Datadog
 ---
