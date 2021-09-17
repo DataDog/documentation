@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_name: OpenMetrics
 draft: false
 git_integration_title: openmetrics
@@ -37,7 +37,7 @@ supported_os:
 
 任意の OpenMetrics エンドポイントからカスタムメトリクスを抽出します。
 
-<div class="alert alert-warning">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/metrics/custom_metrics">custom metrics</a>.</div>
+<div class="alert alert-warning">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.</div>
 
 ## セットアップ
 
@@ -55,15 +55,17 @@ OpenMetrics チェックは、[Datadog Agent のバージョン 6.6.0 以降][2]
 
 | パラメーター        | 説明                                                                                                                                                                                                                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `prometheus_url` | Prometheus がアプリケーションメトリクスを公開する URL（一意でなければなりません）。                                                                                                                                                                                       |
+| `openmetrics_endpoint` | Prometheus がアプリケーションメトリクスを公開する URL（一意でなければなりません）。                                                                                                                         |
 | `namespace`      | すべてのメトリクスの先頭に追加するネームスペース。                                                                                                                                                                                                                                 |
 | `metrics`        | カスタムメトリクスとして取得するメトリクスのリスト。各メトリクスを `metric_name` または `metric_name: renamed` としてリストに追加して、名前を変更します。一致するすべてのメトリクスを取得するには、ワイルドカードとして `*`（`metric*`）を使用します。**注**: ワイルドカードは、多くのカスタムメトリクスを送信する可能性があります。 |
 
-その他の構成については、[Prometheus および OpenMetrics メトリクスの収集][5]を参照してください。
+**注**: これは新しいデフォルトの OpenMetrics チェックの例です。以前にこのインテグレーションを実装したことがある場合は、[レガシーの例][5]を参照してください。
+
+その他のコンフィギュレーションについては、[Prometheus および OpenMetrics メトリクスの収集][6]を参照してください。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `openmetrics` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `openmetrics` を探します。
 
 ## 収集データ
 
@@ -81,19 +83,20 @@ OpenMetrics チェックには、サービスのチェック機能は含まれ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
-- [OpenMetrics チェックの構成][8]
-- [カスタム OpenMetrics チェックの書き方][9]
+- [OpenMetrics チェックの構成][9]
+- [カスタム OpenMetrics チェックの書き方][10]
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/?tab=docker#configuration
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://docs.datadoghq.com/ja/agent/openmetrics/
-[9]: https://docs.datadoghq.com/ja/developers/openmetrics/
+[5]: https://github.com/DataDog/integrations-core/blob/7.30.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/ja/agent/openmetrics/
+[10]: https://docs.datadoghq.com/ja/developers/openmetrics/

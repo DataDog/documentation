@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon FSx のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_fsx/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_fsx/'
 draft: false
 git_integration_title: amazon_fsx
 has_logo: true

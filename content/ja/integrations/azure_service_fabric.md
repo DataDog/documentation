@@ -5,7 +5,7 @@ categories:
 ddtype: check
 dependencies: []
 description: Azure Service Fabric からメトリクスを追跡する
-doc_link: https://docs.datadoghq.com/integrations/azure_service_fabric/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_service_fabric/'
 draft: false
 git_integration_title: azure_service_fabric
 has_logo: true

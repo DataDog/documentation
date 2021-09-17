@@ -2,10 +2,10 @@
 title: イベント収集
 kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
+  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
     tag: ブログ
     text: Datadog Cluster Agent のご紹介
-  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
+  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: ブログ
     text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
   - link: /agent/cluster_agent/clusterchecks/
