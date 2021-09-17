@@ -26,15 +26,9 @@ DNS tests allow you to proactively monitor the resolvability and lookup times of
 
 DNS tests can run from [managed][1] and [private locations][2], allowing you to run tests on public domains as well as internal services that might be using internal DNS.
 
-## Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][3].
-
-If you have access to the [custom role feature][4], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
-
 ## Configuration
 
-After choosing to create a [`DNS` test][5], define your test's request.
+After choosing to create a [`DNS` test][3], define your test's request.
 
 ### Define request
 
@@ -44,7 +38,7 @@ After choosing to create a [`DNS` test][5], define your test's request.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. **Name** your DNS test.
-5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
+5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 6. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -57,7 +51,7 @@ DNS tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][7].
+* [**Within your CI/CD pipelines**][5].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -68,8 +62,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | Type                | Record type                                                     | Operator                                           | Value type                 |
 |---------------------|-----------------------------------------------------------------|----------------------------------------------------|----------------------------|
 | response time       |                                                                 | `is less than`                                     | _Integer (ms)_             |
-| every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][8]_ |
-| at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][8]_ |
+| every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][6]_ |
+| at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][6]_ |
 
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
@@ -88,7 +82,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][9].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][7].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -96,9 +90,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][9] and supports the following [conditional variables][10]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -138,7 +132,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -162,20 +156,26 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][12].
+
+If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /account_management/rbac/
-[4]: /account_management/rbac#custom-roles
-[5]: /synthetics/api_tests/dns_test
-[6]: /synthetics/search/#search
-[7]: /synthetics/cicd_testing
-[8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[9]: /api/v1/synthetics/#create-a-test
-[10]: /monitors/notifications/?tab=is_alert#notification
-[11]: https://www.markdownguide.org/basic-syntax/
-[12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[13]: /synthetics/settings/#global-variables
+[3]: /synthetics/api_tests/dns_test
+[4]: /synthetics/search/#search
+[5]: /synthetics/cicd_testing
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: /api/v1/synthetics/#create-a-test
+[8]: /monitors/notifications/?tab=is_alert#notification
+[9]: https://www.markdownguide.org/basic-syntax/
+[10]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[11]: /synthetics/settings/#global-variables
+[12]: /account_management/rbac/
+[13]: /account_management/rbac#custom-roles

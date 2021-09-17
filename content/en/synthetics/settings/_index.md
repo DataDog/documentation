@@ -87,12 +87,6 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< /tabs >}}
 
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][8]. 
-
-If you have access to the [custom role feature][9], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
-
 #### Restrict access
 
 <div class="alert alert-warning">
@@ -101,6 +95,12 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
 {{< img src="synthetics/settings/restrict-access2.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+
+### Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][8]. 
+
+If you have access to the [custom role feature][9], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
 
 ## Default settings
 

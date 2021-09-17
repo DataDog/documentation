@@ -23,15 +23,9 @@ TCP tests allow you to monitor whether or not low-level TCP connections can be e
 
 TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
 
-## Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][3] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][3].
-
-If you have access to the [custom role feature][4], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
-
 ## Configuration
 
-After choosing to create a [`TCP` test][5], define your test's request.
+After choosing to create a [`TCP` test][3], define your test's request.
 
 ### Define request
 
@@ -40,7 +34,7 @@ After choosing to create a [`TCP` test][5], define your test's request.
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
 3. **Name** your TCP test.
-4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
+4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 5. Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
@@ -53,7 +47,7 @@ TCP tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][7].
+* [**Within your CI/CD pipelines**][5].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -82,7 +76,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][8].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][6].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -90,9 +84,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][9], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][10] and supports the following [conditional variables][11]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -133,7 +127,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][12] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -157,19 +151,25 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][11].
+
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /account_management/rbac/
-[4]: /account_management/rbac#custom-roles
-[5]: /synthetics/api_tests/tcp_tests
-[6]: /synthetics/search/#search
-[7]: /synthetics/cicd_testing
-[8]: /api/v1/synthetics/#create-a-test
-[9]: /monitors/notifications/?tab=is_alert#notification
-[10]: https://www.markdownguide.org/basic-syntax/
-[11]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[12]: /synthetics/settings/#global-variables
+[3]: /synthetics/api_tests/tcp_tests
+[4]: /synthetics/search/#search
+[5]: /synthetics/cicd_testing
+[6]: /api/v1/synthetics/#create-a-test
+[7]: /monitors/notifications/?tab=is_alert#notification
+[8]: https://www.markdownguide.org/basic-syntax/
+[9]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /synthetics/settings/#global-variables
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles

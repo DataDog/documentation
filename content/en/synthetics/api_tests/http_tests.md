@@ -25,15 +25,9 @@ HTTP tests allow you to send HTTP requests to your applications' API endpoints t
 
 HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
-## Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][4].
-
-If you have access to the [custom role feature][5], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
-
 ## Configuration
 
-After choosing to create an [`HTTP` test][6], define your test's request.
+After choosing to create an [`HTTP` test][4], define your test's request.
 
 ### Define request
 
@@ -91,7 +85,7 @@ After choosing to create an [`HTTP` test][6], define your test's request.
 
 3. **Name** your HTTP test.
 
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 
 5. Select the **Locations** to run your HTTP test from. HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network.
 
@@ -114,8 +108,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][6], [`xpath`][7] | _String_ <br> _[Regex][8]_ <br> _String_, _[Regex][8]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][8]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -138,7 +132,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][11].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][9].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -146,9 +140,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -189,7 +183,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -209,12 +203,18 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][14].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. 
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][15] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][15].
+
+If you have access to the [custom role feature][16], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Further Reading
 
@@ -223,16 +223,16 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_testing
-[4]: /account_management/rbac/
-[5]: /account_management/rbac#custom-roles
-[6]: /synthetics/api_tests/http_tests
-[7]: /synthetics/search/#search
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/v1/synthetics/#create-a-test
-[12]: /monitors/notifications/?tab=is_alert#notification
-[13]: https://www.markdownguide.org/basic-syntax/
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
+[4]: /synthetics/api_tests/http_tests
+[5]: /synthetics/search/#search
+[6]: https://restfulapi.net/json-jsonpath/
+[7]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[9]: /api/v1/synthetics/#create-a-test
+[10]: /monitors/notifications/?tab=is_alert#notification
+[11]: https://www.markdownguide.org/basic-syntax/
+[12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[13]: /synthetics/settings/#global-variables
+[14]: /synthetics/api_tests/errors/#ssl-errors
+[15]: /account_management/rbac/
+[16]: /account_management/rbac#custom-roles
