@@ -22,13 +22,13 @@ In one place, you can view:
 * Explain plans
 * Historical query performance metrics
 
-In this guide, you will learn how to set up Datadog Database Monitoring on an example PostgreSQL database. You will identify an expensive query, troubleshoot a slow query, and quickly view changes in query volume.
+Work through this guide to set up Datadog Database Monitoring on an example PostgreSQL database. Next, identify an expensive query, troubleshoot a slow query, and create a dashboard to view changes in query volume.
 
 ## Setup
 
 ### Prerequisites
 
-Before getting started, you need a Datadog account.
+Before getting started, you need a [Datadog account][6].
 
 To run the example application, you need a machine with [GNU Make][1] and [Docker][2]. Have your Datadog [API key][3] available.
 
@@ -60,17 +60,17 @@ export DD_API_KEY=<API_KEY>
 make postgres
 ```
 
-The command will continue to run until you stop it by pressing Ctrl + C.
+The command continues to run until you stop it by pressing Ctrl + C.
 
 ## Identify an expensive query
 
 Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. Navigate to Database Monitoring by clicking **APM > Databases** in the UI. You will see the Query Metrics view.
+1. Navigate to Database Monitoring by clicking **APM > Databases** in the UI. It opens to the Query Metrics view.
 
 2. Sort the Normalized Query table by **Percent time** to see the query that the database spends the most time executing.
 
-The query that consumes the most database time will appear on the first line.
+The query that consumes the most database time appears on the first line.
 
 {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
@@ -121,3 +121,4 @@ For example, you can see the absolute change in query volume in the past hour by
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: /resources/examples/database-management.tgz
 [5]: https://app.datadoghq.com/databases
+[6]: https://www.datadoghq.com/free-datadog-trial/
