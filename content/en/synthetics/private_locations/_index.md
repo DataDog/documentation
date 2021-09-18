@@ -609,7 +609,7 @@ Although it's important to initially add resources that are consistent with the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/ci
+[1]: /synthetics/cicd_testing
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/

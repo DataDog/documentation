@@ -828,15 +828,42 @@ main:
     identifier: events_top_level
     pre: events
     weight: 60000
+  - name: Stream
+    url: events/stream/
+    identifier: event_stream
+    parent: events_top_level
+    weight: 1
+  - name: Explorer
+    url: events/explorer/
+    identifier: event_explorer
+    parent: events_top_level
+    weight: 2
   - name: Guides
     url: events/guides/
     identifier: events_guides
     parent: events_top_level
+    weight: 3
+  - name: Custom Agent Check
+    url: events/guides/agent/
+    parent: events_guides
+    weight: 300
+  - name: DogStatsD
+    url: events/guides/dogstatsd/
+    parent: events_guides
+    weight: 301
+  - name: Email
+    url: events/guides/email/
+    parent: events_guides
+    weight: 302
+  - name: Email
+    url: events/guides/email/
+    parent: events_guides
+    weight: 303
     weight: 1
   - name: API
     url: api/latest/events/#post-an-event
     parent: events_guides
-    weight: 104
+    weight: 304
   - name: Dashboards
     url: dashboards/
     pre: dashboard
@@ -1979,6 +2006,16 @@ main:
     parent: setup_pipelines
     identifier: ci_jenkins
     weight: 202
+  - name: Buildkite
+    url: continuous_integration/setup_pipelines/buildkite/
+    parent: setup_pipelines
+    identifier: ci_buildkite
+    weight: 203
+  - name: CircleCI
+    url: continuous_integration/setup_pipelines/circleci/
+    parent: setup_pipelines
+    identifier: ci_circleci
+    weight: 204
   - name: Exploring Tests
     url: continuous_integration/explore_tests/
     parent: ci
@@ -2408,13 +2445,13 @@ main:
     identifier: synthetics_private_location_configuration
     weight: 401
   - name: CI/CD Testing
-    url: /synthetics/ci/
+    url: /synthetics/cicd_testing
     parent: synthetics
-    identifier: synthetics_ci
+    identifier: synthetics_cicd_testing
     weight: 5
   - name: CI Results Explorer
     url: /synthetics/cicd_testing/ci_results_explorer
-    parent: synthetics_ci
+    parent: synthetics_cicd_testing
     weight: 501
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
