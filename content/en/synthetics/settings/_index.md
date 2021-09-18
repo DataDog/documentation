@@ -23,9 +23,7 @@ On the [Synthetic Monitoring Settings page][1], you can adjust the following set
 
 * [Global Variables](#global-variables)
 * [Private Locations][2]
-* [Default settings](#default-settings)
-  * [Default Locations](#default-locations)
-  * [APM integration for Browser Tests](#apm-integration-for-browser-tests)
+* [Default Settings](#default-settings)
 
 ## Global variables
 
@@ -92,12 +90,6 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< /tabs >}}
 
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][8]. 
-
-If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
-
 #### Restrict access
 
 <div class="alert alert-warning">
@@ -105,11 +97,19 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
+### Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][8]. 
+
+If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
+
 ## Default settings
 
 ### Default locations
 
-Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][4] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][4] details. 
+
+Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
 ### APM integration for browser tests
 
@@ -121,22 +121,25 @@ Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.co
 
 If the endpoint is being traced and allowed, your browser test results are automatically tied to its corresponding trace.
 
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][8]. 
-
-If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
-
 ### Tag enforcement
 
 <div class="alert alert-warning">
 Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
-This feature allows you to enforce selected tags to create a Synthetics test so you are able to break down cost and usage by services, applications, or teams. 
-You can activate tag enforcement in Synthetic Monitoring > Settings > Default Settings:
-<!-- Can you please embed this image here https://a.cl.ly/RBuLAdPY -->
 
-Tag enforcement comes with the [Usage Attribution][12] feature.
+Allows you to enforce selected tags on Synthetics tests. You can break down cost and usage by services, applications, or teams.
+
+{{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
+
+To enable tag enforcement, click **Enforce tags for usage attributions on all tests**.
+
+For more information, see [Usage Attribution][12].
+
+### Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][8]. 
+
+If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
 
 ## Further Reading
 
