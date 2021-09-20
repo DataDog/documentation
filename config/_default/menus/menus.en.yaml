@@ -1073,6 +1073,11 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 1002
+  - name: Guides
+    url: dashboards/guides/
+    parent: dashboards
+    identifier: guides
+    weight: 11
   - name: Mobile Application
     url: mobile/
     identifier: mobile
