@@ -52,11 +52,11 @@ If you have access to the [custom role feature][8], add your user to a custom ro
 
 Select the **Locations** to run your Multistep API test from. Multistep API tests can run from both [managed][4] and [private locations][5] depending on whether you are willing to run the test from outside or inside your network.
 
-### Define requests
+### Define steps
 
-Hit **Create Your First Request** to start designing your test's requests.
+To create an HTTP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
 
 **Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
 
@@ -110,7 +110,7 @@ Hit **Create Your First Request** to start designing your test's requests.
 
   {{< /tabs >}}
 
-Click on **Test URL** to try out the request configuration. You should see a response preview show up.
+Click **Test URL** to try out the request configuration. A response preview appears.
 
 #### Add assertions
 
@@ -129,7 +129,7 @@ You can create up to 20 assertions per step by clicking on **New Assertion** or 
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
-##### Failure behavior
+#### Add execution parameters
 
 The `Continue with test if this step fails` setting allows Multistep API tests to move on with subsequent steps even in case of step failure. This is particularly useful to ensure your tests are able to clean up after themselves. For instance, a test might first create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fails, you still want the resource to be deleted at the end of the test to avoid generating false positives. This can be done using the `Continue with test if this step fails` on every intermediary step.
 
@@ -151,7 +151,7 @@ To parse your variable:
 
 {{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
-Once created, this variable can be used in the following steps of your Multistep API test.
+Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 
 ### Specify test frequency
 
