@@ -73,15 +73,24 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+
 ### Define the search query
 
-* Construct a search query using the same logic as a [trace search][1].
-* Choose to monitor over a trace count, [facet][2], or [measure][3]:
+1. Construct a search query using the same logic as a [trace search][1].
+2. Choose to monitor over a trace count, [facet][2], or [measure][3]:
     * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
     * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+3. Group traces by multiple dimensions (optional):
+    All traces matching the query are aggregated into groups based on the value of up to four facets.
+4. Configure the alerting grouping strategy (optional):
+    * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions.</br>
+    If the query has a `group by` and you select simple-Alert mode, you get **one** alert when one or multiple groups values breach the threshold. This strategy may be selected to reduce notification noise.
+    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@resource.name` to receive a separate alert for each resource when spans error rate is high.
+
+{{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query"  style="width:80%;" >}}
 
 **Note:** Analytics monitors can only be created based on [Indexed Spans][4].
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
 ### Select alert conditions
 
