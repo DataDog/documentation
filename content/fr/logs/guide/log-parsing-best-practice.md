@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /fr/logs/faq/log-parsing-best-practice
 further_reading:
-  - link: /logs/log_configuration/processors
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
@@ -63,6 +63,6 @@ Cet article décrit comment procéder au parsing d'un log à partir du log du Co
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/log_configuration/parsing
-[2]: /fr/logs/log_configuration/parsing/#matcher-and-filter
-[3]: /fr/logs/log_configuration/parsing/#key-value-or-logfmt
+[1]: /fr/logs/processing/parsing/
+[2]: /fr/logs/processing/parsing/?tab=matcher#matcher-and-filter
+[3]: /fr/logs/processing/parsing/#key-value

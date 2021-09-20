@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_EventBridge."
-doc_link: https://docs.datadoghq.com/integrations/amazon_event_bridge/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_event_bridge/'
 draft: false
 git_integration_title: amazon_event_bridge
 has_logo: true
@@ -32,6 +32,8 @@ Grâce à l'intégration de Datadog à Amazon EventBridge, vous pouvez :
 
 ## Implémentation
 
+**Remarque** : AWS EventBridge est uniquement disponible aux États-Unis.
+
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Installation
@@ -43,7 +45,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Configuration
 
-L'autorisation `events:CreateEventBus` est requise pour envoyer des notifications d'alerte à vos bus d'événements. Si cette autorisation n'est pas configurée, consultez la [documentation relative aux autorisations IAM Datadog][2] pour activer les autorisations avant toute autre étape de configuration.
+L'autorisation `events:CreateEventBus`￼ est requise pour envoyer des notifications d'alerte à vos bus d'événements. Si cette autorisation n'est pas configurée, consultez la [documentation relative aux autorisations IAM Datadog][2] pour activer les autorisations avant toute autre étape de configuration.
 
 1. Accédez au carré d'[intégration Datadog/Amazon EventBridge][3] pour consulter la liste des comptes AWS intégrés dans Datadog et à partir desquels vous pouvez créer des bus d'événements.
 2. Dans le compte AWS de votre choix, créez un bus d'événements. Pour ce faire, saisissez un nom et sélectionnez la région de votre choix.
@@ -56,7 +58,7 @@ L'autorisation `events:CreateEventBus` est requise pour envoyer des notification
 8. Pour déconnecter un bus d'événements dans Datadog, passez le curseur sur le bus d'événements de votre choix et cliquez sur l'icône en forme de corbeille.
    **Remarque** : cette opération déconnecte le bus d'événements d'AWS, mais n'entraîne pas sa suppression.
 
-### Actions automatisées
+### Actions automatisées dans AWS via EventBridge
 
 Configurez de nouveaux canaux de notification sortante pour les monitors et les snapshots de Datadog avec l'intégration AWS EventBridge. Avec les actions automatisées, vous pouvez configurer vos ressources AWS de façon à :
 

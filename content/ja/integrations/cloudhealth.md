@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: CloudHealth が Datadog からインスタンスごとのメトリクスを取得できるように支援。
-doc_link: 'https://docs.datadoghq.com/integrations/cloudhealth/'
+doc_link: https://docs.datadoghq.com/integrations/cloudhealth/
 draft: false
 git_integration_title: cloudhealth
 has_logo: true

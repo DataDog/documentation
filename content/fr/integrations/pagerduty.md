@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Générez des alertes PagerDuty à partir des métriques et des événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/pagerduty/'
+doc_link: https://docs.datadoghq.com/integrations/pagerduty/
 draft: false
 git_integration_title: pagerduty
 has_logo: true

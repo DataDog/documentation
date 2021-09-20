@@ -11,15 +11,9 @@ further_reading:
     tag: ドキュメント
     text: フレームワークおよび業界のベンチマークの詳細
 ---
-{{< site-region region="us" >}}
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">
-クラウドセキュリティポスチャ管理 は、現在<a href="https://app.datadoghq.com/security/configuration">公開ベータ版</a>です。
-</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
-クラウドセキュリティポスチャ管理は、現在 US1-FED、US3、EU では利用できません。
+US1-FED または US3 では、クラウドセキュリティポスチャ管理は利用できません。
 </div>
 {{< /site-region >}}
 
@@ -33,6 +27,8 @@ further_reading:
 - 誤って構成されたリソースを修復するため、業界のリソースに基づいた説明やガイドラインにアクセス
 - “タイムセレクター”を使い、過去のセキュリティコンフィギュレーション態勢を調査 
 
+診断結果の確認と対応に加えて、失敗した診断結果の通知を設定し、[Security Monitoring][2] と [Cloud Workload Security][3] によって生成されたリアルタイムの脅威と同じ管理画面で構成ミスを関連付けてトリアージするようにシグナルを構成できます。これにより、今日のクラウド侵害の多くの根本原因は、構成ミスのあるサービスの悪用であるため、ユーザーは調査を加速できます。
+
 {{< img src="security_platform/cspm/findings/findings-time-window.png" alt="ドロップダウンを使い、診断結果のタイムウィンドウを設定します" style="width:65%;">}}
 
 ## 診断結果
@@ -40,6 +36,8 @@ further_reading:
 診断結果はリソースに対するルール評価の主要な構成要素です。リソースがルールに対して評価されるたびに、**Pass** または **Fail** のステータスが付いた診断結果が生成されます。リソースの評価は15分〜4時間の間で行われます（タイプにより異なる）。Datadog は新しいスキャンが終了するとすぐに新しい診断結果を生成し、過去15か月の完全な履歴を保存するため、調査や監査の際に利用できます。
 
 {{< img src="security_platform/cspm/findings/posture-management-overview.png" alt="ポスチャ管理の診断結果ページの概要" style="width:100%;">}}
+
+## 診断結果を使用してクラウドの構成ミスを調査する
 
 **failed** と印された診断結果をクリックすると、誤って構成されたリソース、ルールの説明、フレームワークまたは業界ベンチマークマッピング、推奨される修復手順が確認できます。
 
@@ -66,3 +64,5 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
+[2]: /ja/security_platform/security_monitoring/
+[3]: /ja/security_platform/cloud_workload_security/
