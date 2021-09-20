@@ -41,7 +41,7 @@ As you define the search query, the graph above the search fields updates.
     If the query has a `group by` and you select simple-Alert mode, you get **one** alert when one or multiple groups values breach the threshold. This strategy may be selected to reduce notification noise.
     * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@browser.name` to receive a separate alert for each browser when the number of errors is high.
 
-{{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="Define the search query"  style="width:80%;" >}}
+{{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
 ### Set alert conditions
 
