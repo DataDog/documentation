@@ -124,6 +124,43 @@ DD_ENV=ci npm test
 {{< /code-block >}}
 
 {{% /tab %}}
+
+{{% tab "Cypress" %}}
+
+1. Set [`pluginsFile`][1] to `"dd-trace/cypress/plugin"`, for example through [`cypress.json`][2]:
+{{< code-block lang="json" filename="cypress.json" >}}
+{
+  "pluginsFile": "dd-trace/cypress/plugin"
+}
+{{< /code-block >}}
+
+If you've already defined a `pluginsFile`, you can still initialise the instrumentation with:
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code goes here
+  require('dd-trace/cypress/plugin')(on, config)
+}
+{{< /code-block >}}
+
+2. Add the following line to the [`supportFile`][3]:
+{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+// your previous code goes here
+require('dd-trace/cypress/support')
+{{< /code-block >}}
+
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci npm test
+{{< /code-block >}}
+
+
+
+[1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[2]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Configuration settings
