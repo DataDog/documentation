@@ -855,15 +855,10 @@ main:
     url: events/guides/email/
     parent: events_guides
     weight: 302
-  - name: Email
-    url: events/guides/email/
-    parent: events_guides
-    weight: 303
-    weight: 1
   - name: API
     url: api/latest/events/#post-an-event
     parent: events_guides
-    weight: 304
+    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
