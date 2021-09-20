@@ -4,7 +4,7 @@ categories:
 ddtype: library
 dependencies: []
 description: Envoyez des métriques runtime à partir de vos applications .NET grâce aux bibliothèques client de Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/dotnet/'
+doc_link: https://docs.datadoghq.com/integrations/dotnet/
 draft: false
 further_reading: []
 git_integration_title: dotnet

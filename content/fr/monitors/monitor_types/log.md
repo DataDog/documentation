@@ -20,6 +20,8 @@ Une fois la fonctionnalité [Log Management][1] activée pour votre organisation
 
 Pour créer un [log monitor][2] dans Datadog, utilisez la navigation principale : *Monitors --> New Monitor --> Logs*.
 
+<div class="alert alert-info"><strong>Remarque</strong> : par défaut, chaque compte est limité à 1 000 log monitors. <a href="/help/">Contactez l'assistance</a> afin d'augmenter cette limite pour votre compte.</div>
+
 ### Définir la requête de recherche
 
 À mesure que vous définissez votre requête de recherche, le graphique au-dessus des champs de recherche se met à jour.
@@ -29,19 +31,29 @@ Pour créer un [log monitor][2] dans Datadog, utilisez la navigation principale�
     * **Monitor over a log count** : utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** une facette ou une mesure. Datadog évalue le nombre de logs sur une période sélectionnée, puis le compare aux conditions de seuil.
     * **Monitor over a facet** : si vous sélectionnez une [facette][4], le monitor envoie une alerte en fonction du `Unique value count` (nombre de valeurs uniques) de la facette.
     * **Monitor over a measure** : si vous sélectionnez une [mesure][4], le monitor envoie une alerte en fonction de la valeur numérique de la facette de log (comme le ferait un monitor de métrique). Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
-3. Définissez les groupes d'alertes (facultatif). **Remarque** : que vous définissiez ou non des groupes d'alertes, vous recevez **une seule** alerte lorsque la valeur agrégée remplit les conditions définies. Même si vous triez la requête par host, une seule notification est envoyée si plusieurs hosts remplissent les conditions définies définies. Ce système permet de réduire le nombre de notifications reçues.
+3. Regroupez les logs en fonction de plusieurs dimensions (facultatif) :
 
+   Tous les logs correspondant à la requête sont agrégés sous forme de groupes en fonction de la valeur d'un maximum de quatre facettes de log. Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la deuxième dans la fourchette des valeurs les plus élevées de la première dimension, et ainsi de suite jusqu'à la dernière dimension. La limite de dimensions dépend du nombre total de dimensions :
+   * **1 facette** : 1 000 valeurs les plus élevées
+   * **2 facettes** : 30 valeurs les plus élevées par facette (900 groupes maximum)
+   * **3 facettes** : 10 valeurs les plus élevées par facette (1 000 groupes maximum)
+   * **4 facettes** : 5 valeurs les plus élevées par facette (625 groupes maximum)
+4. Configurez la stratégie de regroupement pour les alertes (facultatif) :
+    * **Simple-Alert** : les alertes simples agrègent vos données pour toutes les sources de transmission. Vous recevez une alerte lorsque la valeur agrégée répond aux conditions définies. Ces alertes sont particulièrement utiles pour surveiller une métrique issue d'un seul host ou une métrique agrégée à partir de nombreux hosts. Vous pouvez sélectionner cette stratégie pour réduire le nombre de notifications inutiles.
+    * **Multi-Alert** : les alertes multiples appliquent l'alerte à chaque source en fonction des paramètres de votre groupe. Un événement d'alerte est créé pour chaque groupe qui répond aux conditions définies. Par exemple, vous pouvez regrouper `system.disk.in_use` par `device` pour recevoir une alerte distincte pour chaque appareil qui manque d'espace disque.
 
 ### Définir vos conditions d'alerte
 
-* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieur ou égale à, inférieure ou égale à)
-* au seuil durant les `5 minutes`, `15 minutes` ou encore `1 hour` précédentes.
-* Seuil d'alerte `<NOMBRE>`
-* Seuil d'avertissement `<NOMBRE>`
+* Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure ou égale à)
+* au seuil sur un intervalle de `5 minutes`, `15 minutes` ou `1 hour` ou sur un intervalle `custom` (entre `1 minute` et `2 days`).
+* au seuil d'alerte `<NOMBRE>`
+* au seuil d'avertissement `<NOMBRE>`
 
 #### Absence de données et alertes Below
 
-Définissez la condition `below 1` pour recevoir une notification lorsque les groupes d'un service ont tous arrêté d'envoyer des logs. Vous serez ainsi alerté lorsqu'aucun log ne correspond à la requête du monitor sur un intervalle de temps donné pour tous les groupes d'agrégation.
+`NO DATA` est un état affiché lorsqu'aucun log ne correspond à la requête du monitor pendant l'intervalle de temps.
+
+Définissez la condition `below 1` pour recevoir une notification lorsque les groupes correspondant à une requête spécifique ont tous arrêté d'envoyer des logs. Vous serez ainsi alerté lorsqu'aucun log ne correspond à la requête du monitor sur un intervalle de temps donné pour tous les groupes d'agrégation.
 
 Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en utilisant une condition `below`, l'alerte se déclenche **uniquement** s'il existe des logs pour un groupe donné et que le nombre est inférieur au seuil, ou s'il n'y a aucun log pour **tous** les groupes.  
 
@@ -56,20 +68,20 @@ Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en util
 
 Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][5].
 
-#### Exemples de log
+#### Exemples de logs et top list des valeurs dépassant le seuil
 
-Par défaut, lorsqu'un log monitor se déclenche, le message de notification envoyé comprend des exemples de log ou les valeurs principales.
+Lorsqu'un log monitor se déclenche, des exemples ou valeurs peuvent être ajoutés au message de notification.
 
-| Élément surveillé     | Informations ajoutées au message de notification                                                                            |
+| Élément surveillé     | Peut être ajouté au message de notification                                                                     |
 |------------------|----------------------------------------------------------------------------------------------------------|
 | Nombre de logs        | Alertes groupées : les 10 principales valeurs dépassant le seuil et les nombres de logs correspondants.<br>Alertes non groupées : jusqu'à 10 exemples de logs. |
-| Facette ou mesure | Les valeurs les plus élevées pour la facette ou la mesure.                                                                      |
+| Facette ou mesure | Alertes groupées : les 10 valeurs les plus élevées pour la facette ou la mesure.<br>Alertes non groupées : les 10 valeurs les plus élevées pour la facette ou la mesure.           |
 
 Ces informations peuvent être envoyées via Slack, Jira, Webhook, Microsoft Teams, PagerDuty ou e-mail. **Remarque** : les notifications de rétablissement n'affichent aucun exemple de log.
 
 Pour désactiver les exemples de logs, décochez la case correspondante en bas de la section **Say what's happening**. Le texte affiché à côté de la case reflète les groupes définis pour votre monitor (comme indiqué ci-dessus).
 
-#### Exemples
+#### Scénarios
 
 Inclure un tableau des 10 principales valeurs dépassant le seuil :
 {{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="10 principales valeurs dépassant le seuil" style="width:60%;" >}}
