@@ -776,9 +776,6 @@ spec:
 [3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
 [4]: https://docs.datadoghq.com/integrations/kube_scheduler/
 [5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane.html#monitor-control-plane-metrics
-[6]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
-[7]: https://docs.datadoghq.com/agent/cluster_agent/setup
-[8]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
-[9]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[10]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/how-monitoring-works/#4-2-pushprox
-[11]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/
+[6]: https://docs.datadoghq.com/agent/cluster_agent/setup
+[7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
+[8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/

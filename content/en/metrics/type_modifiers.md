@@ -2,9 +2,9 @@
 title: Metric Type Modifiers
 kind: documentation
 aliases:
- - /metrics/metric_type_modifiers
+ - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
- - /metrics/type_modifiers/
+ - /developers/metrics/type_modifiers/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"

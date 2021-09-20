@@ -88,7 +88,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
-For example, if you have logs flowing in from a service that you wish to drill down into, filter by `Service:your-service-name`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
+For example, if you have logs flowing in from a service that you wish to drill down into, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
 
 {{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
 

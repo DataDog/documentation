@@ -93,7 +93,7 @@ nav_sections:
             desc: Découvrir comment Datadog protège vos données
           - title: Outils de développement
             link: developers/
-            icon: wrench
+            icon: dev-code
             desc: Développer des outils pour la plateforme Datadog
 popular_searches:
   - title: Documentation sur l'API

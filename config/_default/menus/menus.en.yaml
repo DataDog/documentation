@@ -30,11 +30,13 @@ main_left:
   - identifier: logs
     name: Log Management
     pre: <i class="icon-log align-middle"></i>
+    url: 'https://www.datadoghq.com/product/log-management/'
     weight: 5
     parent: product
   - identifier: apm
     name: APM
     pre: <i class="icon-apm align-middle"></i>
+    url: 'https://www.datadoghq.com/product/apm/'
     weight: 6
     parent: product
   - identifier: profiler
@@ -82,37 +84,37 @@ main_left:
   - identifier: cloud-workload-security
     name: Cloud Workload Security
     pre: <i class="icon-cws align-middle"></i>
-    url: product/security-platform/cloud-workload-security/
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
     weight: 14
     parent: product
   - identifier: error-tracking
     name: Error Tracking
     pre: <i class="icon-error-tracking align-middle"></i>
-    url: product/security-platform/error-tracking/
+    url: 'https://www.datadoghq.com/product/security-platform/error-tracking/'
     weight: 15
     parent: product
   - identifier: incident
     name: Incident Management
     pre: <i class="icon-incidents align-middle"></i>
-    url: product/incident-management
+    url: 'https://www.datadoghq.com/product/incident-management'
     weight: 16
     parent: product
   - identifier: database
     name: Database Monitoring
     pre: <i class="icon-dbm align-middle"></i>
-    url: product/database-monitoring
+    url: 'https://www.datadoghq.com/product/database-monitoring'
     weight: 17
     parent: product
   - identifier: serverless
     name: Serverless
     pre: <i class="icon-serverless align-middle"></i>
-    url: product/serverless-monitoring/
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 18
     parent: product
   - identifier: alerts
     name: Alerts
     pre: <i class="icon-alert align-middle"></i>
-    url: product/alerts/
+    url: 'https://www.datadoghq.com/product/alerts/'
     weight: 19
     parent: product
   - identifier: api
@@ -457,10 +459,14 @@ main:
     url: getting_started/incident_management/
     parent: getting_started
     weight: 13
+  - name: Database Monitoring
+    url: getting_started/database_monitoring/
+    parent: getting_started
+    weight: 14
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 14
+    weight: 15
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -828,15 +834,37 @@ main:
     identifier: events_top_level
     pre: events
     weight: 60000
+  - name: Stream
+    url: events/stream/
+    identifier: event_stream
+    parent: events_top_level
+    weight: 1
+  - name: Explorer
+    url: events/explorer/
+    identifier: event_explorer
+    parent: events_top_level
+    weight: 2
   - name: Guides
     url: events/guides/
     identifier: events_guides
     parent: events_top_level
-    weight: 1
+    weight: 3
+  - name: Custom Agent Check
+    url: events/guides/agent/
+    parent: events_guides
+    weight: 300
+  - name: DogStatsD
+    url: events/guides/dogstatsd/
+    parent: events_guides
+    weight: 301
+  - name: Email
+    url: events/guides/email/
+    parent: events_guides
+    weight: 302
   - name: API
     url: api/latest/events/#post-an-event
     parent: events_guides
-    weight: 104
+    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
@@ -1077,10 +1105,6 @@ main:
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 101
-  - name: Generate Process Metrics
-    url: infrastructure/process/generate_process_metrics/
-    parent: infrastructure
-    weight: 6
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure

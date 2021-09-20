@@ -14,7 +14,7 @@ further_reading:
 
 ---
 
-## Overview 
+## Overview
 
 The Datadog Agent can be used along with [Vector][1]. In this scenario Agents send data
 to Vector, which aggregates data from multiple upstream Agents:
@@ -45,7 +45,7 @@ Only the logs data type is supported. Update the following values in the `datado
 logs_config:
   logs_dd_url: "<VECTOR_HOST>:<VECTOR_PORT>"
   logs_no_ssl: true # If TLS/SSL is not enabled on the Vector side
-  use_http: true # Vector `datadog_logs` source only supports HTTP
+  use_http: true # Vector `datadog_logs` source only supports events over HTTP(S) and not raw TCP
   use_v2_api: false # Vector `datadog_logs` source only supports v1
 ```
 
@@ -89,7 +89,7 @@ sinks:
 
 ### Using Kubernetes
 
-Using the official Datadog chart the [Agent configuration settings](#agent-configuration) described above can be added 
+Using the official Datadog chart the [Agent configuration settings](#agent-configuration) described above can be added
 to the `agents.customAgentConfig` value. **Note**: `agent.useConfigMap` must be set to `true`
 for `agents.customAgentConfig` to be taken into account.
 
@@ -101,7 +101,7 @@ see to the [official Vector documentation][15].
 
 To send logs to Datadog, a `datadog_logs` sink need to be added to the Vector
 configuration. Vector's chart can hold any valid Vector configuration in the `values.yaml` file using the
-`customConfig` field. To enable `datadog_logs` the same kind of configuration as 
+`customConfig` field. To enable `datadog_logs` the same kind of configuration as
 described under [Vector configuration](#vector-configuration) can be directly included as-is in the Vector chart configuration.
 
 ## Manipulating Datadog logs with Vector
@@ -112,7 +112,7 @@ submitting logs directly to the Datadog API, see the [API documentation][16]
 for a complete schema description.
 
 Logs collected by Vector from other sources can be [fully enriched][8]. VRL can be used to adjust those logs
-to fill relevant fields according to the expected schema. 
+to fill relevant fields according to the expected schema.
 
 ## Further Reading
 
