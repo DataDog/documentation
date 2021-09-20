@@ -25,7 +25,8 @@ if (datadogRum) {
             clientToken: Config.ddClientToken,
             env,
             service: 'docs',
-            version: `${CI_COMMIT_SHORT_SHA}`,
+            // version: `${CI_COMMIT_SHORT_SHA}`,
+            version: 'test',
             trackInteractions: true,
             allowedTracingOrigins: [window.location.origin]
         });
@@ -42,7 +43,8 @@ if (datadogLogs) {
         forwardErrorsToLogs: true,
         env,
         service: 'docs',
-        version: `${CI_COMMIT_SHORT_SHA}`
+        version: 'test'
+        // version: `${CI_COMMIT_SHORT_SHA}`
     });
 
     // global context

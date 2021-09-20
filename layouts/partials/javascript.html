@@ -1,5 +1,7 @@
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
-{{ $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
+{{/* $defines := dict "CI_COMMIT_SHORT_SHA" (getenv "CI_COMMIT_SHORT_SHA" | default `""`) "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` */}}
+
+{{ $defines := dict "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 
 {{ $isLocalServer := site.IsServer }}
 {{ $jsInput := "scripts/main.js" }}
@@ -20,27 +22,3 @@
   {{ $productionJS := $compiledJS | resources.Fingerprint "sha512" }}
   <script src="{{ $productionJS.RelPermalink }}" integrity="{{ $productionJS.Data.Integrity }}" defer></script>
 {{ end }}
-
-{{/*
-<!-- Handle JS that loads only in the <head> -->
-{{ if ne $isHead true }}
-  {{ $langRedirectsFile := "scripts/lang-redirects.js" }}
-  {{ $langRedirectsOutput := "" }}
-
-  {{ $ddRum := resources.Get "node_modules/datadog-rum.js" }}
-  {{ $ddLogs := resources.Get "node_modules/datadog-logs.js" }}
-  {{ $ddLibs := slice $ddRum $ddLogs | resources.Concat "js/dd-libs.js" }}
-  {{ $ddBrowserLogsRum := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
-
-  {{ if $isLocalServer }}
-    {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options }}
-  {{ else }}
-    {{ $langRedirectsOutput = resources.Get $langRedirectsFile | js.Build $options | resources.Fingerprint "sha512" }}
-  {{ end }}
-
-  <script>{{ $ddLibs.Content | safeJS }}</script>
-  <script type="text/javascript" src="{{ $ddBrowserLogsRum.RelPermalink }}"></script>
-  <script type="text/javascript" src="{{ $langRedirectsOutput.RelPermalink }}" {{ if ne $isLocalServer true }}integrity="{{ $langRedirectsOutput.Data.Integrity }}"{{ end }}></script>
-{{ else }}
-<!-- handle main js -->
-*/}}
