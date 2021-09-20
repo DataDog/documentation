@@ -9,6 +9,8 @@ further_reading:
 ---
 ## Overview
 
+UDP tests allow you to easily monitor that low-level UDP connections can be established on the ports of given hosts, ensuring availability of any services living on UDP ports. Thanks to built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness. UDP tests can run from managed and private locations depending on whether you want to monitor your UDP connections from outside or inside your network.
+
 ## Configuration
 
 After choosing to create an [`UDP` Test][1], define your test's request.
