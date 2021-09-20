@@ -110,17 +110,17 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 #### Create a widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
-
-{{< tabs >}}
-{{% tab "SLOs" %}}
+{{% tab "SLOs - iOS" %}}
 
 - Lorem ipsum
 
 {{% /tab %}}
+{{% tab "SLOs - Android" %}}
 
-{{< tabs >}}
-{{% tab "Monitors" %}}
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "Monitors - iOS" %}}
 
 - Long press on the home screen.
 - Tap the “+” button on the top left corner of the screen.
@@ -129,11 +129,7 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 - Place the widget in your desired, onscreen location.
 
 {{% /tab %}}
-{{< /tabs >}}
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
+{{% tab "Monitors - Android" %}}
 
 - Open the Android Widget Picker.
 - Either long press your home screen, or long press the Datadog app icon.
@@ -146,7 +142,17 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 #### Edit a widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{% tab "SLOs - iOS" %}}
+
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "SLOs - Android" %}}
+
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "Monitors - iOS" %}}
 
 - Long press on the widget to configure.
 - Tap on "Edit Widget".
@@ -155,7 +161,7 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 - Tap out of the widget to validate your selection and exit the configuration screen.
 
 {{% /tab %}}
-{{% tab "Android" %}}
+{{% tab "Monitors - Android" %}}
 
 - Tap on the widget title to configure.
 - Tap on "Saved views".
@@ -169,15 +175,27 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 
 #### Multiple organizations
 
-You can display Saved Views from multiple organizations within the same widget. 
-
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{% tab "SLOs - iOS" %}}
+
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "SLOs - Android" %}}
+
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "Monitors - iOS" %}}
+
+You can display Saved Views from multiple organizations within the same widget. 
 
 All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 {{% /tab %}}
-{{% tab "Android" %}}
+{{% tab "Monitors - Android" %}}
+
+You can display Saved Views from multiple organizations within the same widget. 
 
 - From the configuration screen, tap on "Organization".
 - Select a new organization (you might need to sign in).
@@ -189,13 +207,23 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 #### Delete a widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{% tab "SLOs - iOS" %}}
+
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "SLOs - Android" %}}
+
+- Lorem ipsum
+
+{{% /tab %}}
+{{% tab "Monitors - iOS" %}}
 
 Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
 
 
 {{% /tab %}}
-{{% tab "Android" %}}
+{{% tab "Monitors - Android" %}}
 
 Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
 
