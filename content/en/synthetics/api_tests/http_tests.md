@@ -158,7 +158,7 @@ Notifications example:
 
 {{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
-Click **Save** to start your test.
+Click **Save** to save and start your test.
 
 ## Variables
 
