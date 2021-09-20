@@ -291,11 +291,9 @@ Variables from subtests can be overriden in parent tests if you ensure the varia
 
 You can run HTTP requests as part of your browser tests.
 
-{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/recorder_http_requests2.png" alt="HTTP Request step" style="width:70%;" >}}
 
 #### Set up
-
-{{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request" style="width:80%;" >}}
 
 To define your HTTP request:
 
@@ -309,9 +307,9 @@ To define your HTTP request:
      * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 3. Click **Test URL** to test your request configuration. This results in a preview showing response data.
 
-#### Add assertions
+{{< img src="synthetics/browser_tests/http_request2.png" alt="Make HTTP Request" style="width:80%;" >}}
 
-{{< img src="synthetics/browser_tests/assertions.png" alt="Assertions" style="width:80%;" >}}
+#### Add assertions
 
 Optionally, you can base your step success on assertions about the defined HTTP request:
 
@@ -328,11 +326,11 @@ If you click **Test URL**, the basic assertions are automatically filled:
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 
+{{< img src="synthetics/browser_tests/assertions.png" alt="Assertions" style="width:80%;" >}}
+
 #### Extract a variable from the response
 
 You can also optionally extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
-
-{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;">}}
 
 To parse your variable:
 
@@ -342,7 +340,7 @@ To parse your variable:
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][15].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][15], a [`JSONPath`][13], or a [`XPath`][14].
 
-{{< img src="synthetics/browser_tests/browser_test_vft2.mp4" alt="Create a variable from an HTTP request in a Browser test" video="true" width="80%" >}}
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;">}}
 
 Once created, this variable can be used in the following steps of your browser test.
 

@@ -56,13 +56,11 @@ Select the **Locations** to run your Multistep API test from. Multistep API test
 
 Hit **Create Your First Request** to start designing your test's requests.
 
-{{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
-**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
+**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase the limit.
 
 #### Define the request
-
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 1. **Name** your step.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
@@ -109,7 +107,9 @@ Hit **Create Your First Request** to start designing your test's requests.
 
   {{< /tabs >}}
 
-Click on **Test URL** to try out the request configuration. You should see a response preview show up.
+Click on **Test URL** to try out the request configuration. A response preview appears.
+
+{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
