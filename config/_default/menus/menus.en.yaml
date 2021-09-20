@@ -30,11 +30,13 @@ main_left:
   - identifier: logs
     name: Log Management
     pre: <i class="icon-log align-middle"></i>
+    url: 'https://www.datadoghq.com/product/log-management/'
     weight: 5
     parent: product
   - identifier: apm
     name: APM
     pre: <i class="icon-apm align-middle"></i>
+    url: 'https://www.datadoghq.com/product/apm/'
     weight: 6
     parent: product
   - identifier: profiler
