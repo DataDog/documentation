@@ -27,7 +27,7 @@ On the [Synthetic Monitoring Settings page][1], you can adjust the following set
 
 ## Global variables
 
-Global variables are variables that are accessible from all your Synthetic tests. They can be used in [single][3] and [multistep API tests][4] as well as [browser tests][5] of your test suite. To create a global variable, go to the [Global Variables][6] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
+Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][3] and [multistep API tests][4] as well as [browser tests][5] of your test suite. To create a global variable, go to the [Global Variables][6] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
 
 Choose the type of variable you want to create:
 
