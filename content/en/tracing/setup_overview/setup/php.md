@@ -421,9 +421,9 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Sort-running CLI scripts
 
-A short-running script runs typically for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
+A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
 
-By default, tracing is disabled for PHP scripts that run from the command line. Opt-in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
 
 ```
 $ export DD_TRACE_CLI_ENABLED=true
@@ -433,7 +433,7 @@ $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
 
-Assume the following `script.php` that runs a Curl request
+For example, assume the following `script.php` runs a Curl request:
 
 ```
 <?php
@@ -447,21 +447,21 @@ sleep(1);
 
 ```
 
-Run the script
+Run the script:
 
 ```
 $ php script.php
 ```
 
-One trace is generated and sent to the Datadog backend when the script terminates.
+Once run, the trace is generated and sent to the Datadog backend when the script terminates.
 
 {{< img src="tracing/setup/php/short-running-cli.jpg" alt="Trace for a short running PHP CLI script" >}}
 
 ### Long-running CLI scripts
 
-A long-running script runs for hours or days. Typically, such scripts execute repetitively a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
+A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
 
-By default, tracing is disabled for PHP scripts that run from the command line. Opt-in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
 
 ```
 $ export DD_TRACE_CLI_ENABLED=true
@@ -477,7 +477,7 @@ $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
 
-Assume the following `long_running.php`
+For example, assume the following `long_running.php` script:
 
 ```
 <?php
@@ -569,13 +569,13 @@ while (true) {
 }
 ```
 
-Run the script
+Run the script:
 
 ```
 $ php long_running.php
 ```
 
-One trace is generated and sent to the Datadog backend every time a new message is processed.
+Once run, one trace is generated and sent to the Datadog backend every time a new message is processed.
 
 {{< img src="tracing/setup/php/long-running-cli.jpg" alt="Trace for a long running PHP CLI script" >}}
 
