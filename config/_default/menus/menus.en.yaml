@@ -100,7 +100,7 @@ main_left:
   - identifier: database
     name: Database Monitoring
     pre: <i class="icon-dbm align-middle"></i>
-    url: product/database-monitoring
+    url: product/database_monitoring
     weight: 17
     parent: product
   - identifier: serverless
