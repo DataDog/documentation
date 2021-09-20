@@ -87,7 +87,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< /tabs >}}
 
-Once created, global variables can be used in all Synthetic tests by typing `{{` in the field of interest and selecting your global variable. For more information, see individual test documentation pages ([HTTP test][7], [Multistep API test][8], [Browser test configuration][9] and [steps][10]).
+Once created, global variables can be used in all Synthetic tests by typing `{{` in the field of interest and selecting your global variable. For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
 
 ### Permissions
 
