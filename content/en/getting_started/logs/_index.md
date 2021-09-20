@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use Datadog Log Management to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
+Use Datadog Log Management, also called logs, to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
 This page shows you how to get started with Log Management in Datadog. If you haven't already, create a [Datadog account][1].
 
