@@ -46,7 +46,7 @@ datadogRum.init({
   trackInteractions: true,
 })
 
-DD_RUM.startSessionReplayRecording();
+datadogRum.startSessionReplayRecording();
 ```
 
 #### CDN
