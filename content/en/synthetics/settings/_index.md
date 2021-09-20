@@ -130,8 +130,7 @@ Allows you to enforce selected tags on Synthetics tests. You can break down cost
 
 {{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
 
-To enable tag enforcement, click **Enforce tags for usage attributions on all tests**.
-
+To enable tag enforcement, click **Enforce tags for usage attributions on all tests**.  
 For more information, see [Usage Attribution][12].
 
 ### Permissions
