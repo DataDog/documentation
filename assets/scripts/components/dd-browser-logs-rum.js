@@ -25,8 +25,7 @@ if (datadogRum) {
             clientToken: Config.ddClientToken,
             env,
             service: 'docs',
-            // version: `${CI_COMMIT_SHORT_SHA}`,
-            version: 'test',
+            version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
             allowedTracingOrigins: [window.location.origin]
         });
@@ -38,24 +37,27 @@ if (datadogRum) {
 }
 if (datadogLogs) {
     // init browser logs
-    datadogLogs.init({
-        clientToken: Config.ddClientToken,
-        forwardErrorsToLogs: true,
-        env,
-        service: 'docs',
-        version: 'test'
-        // version: `${CI_COMMIT_SHORT_SHA}`
-    });
+    console.log(`browser logs init, ci commit short sha = ${CI_COMMIT_SHORT_SHA}`);
 
-    // global context
-    datadogLogs.addLoggerGlobalContext('host', window.location.host);
-    datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
-    datadogLogs.addLoggerGlobalContext('lang', lang);
-
-    if (branch) {
-        datadogLogs.addLoggerGlobalContext('branch', branch);
+    if (env === 'preview' || env === 'live') {
+        datadogLogs.init({
+            clientToken: Config.ddClientToken,
+            forwardErrorsToLogs: true,
+            env,
+            service: 'docs',
+            version: CI_COMMIT_SHORT_SHA
+        });
+    
+        // global context
+        datadogLogs.addLoggerGlobalContext('host', window.location.host);
+        datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
+        datadogLogs.addLoggerGlobalContext('lang', lang);
+    
+        if (branch) {
+            datadogLogs.addLoggerGlobalContext('branch', branch);
+        }
+    
+        // Locally log to console
+        datadogLogs.logger.setHandler(Config.loggingHandler);
     }
-
-    // Locally log to console
-    datadogLogs.logger.setHandler(Config.loggingHandler);
 }
