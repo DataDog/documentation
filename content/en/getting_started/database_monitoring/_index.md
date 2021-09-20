@@ -38,24 +38,22 @@ The example application starts up the Datadog Agent and a PostgreSQL database in
 
 Follow these instructions to install the example application on MacOS or Linux.
 
-1. Download the [archive][5] containing the example application.
-
-2. Extract the archive to a location on disk:
+1. Clone the [repository][5] containing the example application:
 ```
-tar -xvf database-management.tgz
+git clone https://github.com/DataDog/dd-database-monitoring-example
 ```
 
-3. Change to the `database-management` directory in the extracted archive:
+2. Change to the `dd-database-monitoring-example` directory:
 ```
-cd database-management
+cd dd-database-monitoring-example
 ```
 
-4. Set the environment variable `DD_API_KEY` to your Datadog API key:
+3. Set the environment variable `DD_API_KEY` to your Datadog API key:
 ```
 export DD_API_KEY=<API_KEY>
 ```
 
-5. Start the application:
+4. Start the application:
 ```
 make postgres
 ```
@@ -134,5 +132,5 @@ You can clone and modify out-of-the-box dashboards to suit your needs.
 [2]: https://www.gnu.org/software/make/
 [3]: https://www.docker.com/
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: /resources/examples/database-management.tgz
+[5]: https://github.com/DataDog/dd-database-monitoring-example
 [6]: https://app.datadoghq.com/databases
