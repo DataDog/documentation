@@ -124,7 +124,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 **Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview.
 
 {{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 

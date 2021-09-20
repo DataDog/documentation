@@ -342,7 +342,7 @@ To parse your variable:
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;">}}
 
-Once created, this variable can be used in the following steps of your browser test.
+Once created, this variable can be used in the [following steps](#using-variables) of your browser test.
 
 ## Using variables
 
