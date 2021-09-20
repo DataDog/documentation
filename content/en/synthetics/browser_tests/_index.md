@@ -51,6 +51,7 @@ Define the configuration of your browser test.
   * **Cookies**: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
   * **Proxy URL**: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
   
+**Note:** These request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to be active to record following steps, you can manually apply these options on the page you are recording from and then create subsequent steps for your test.
 
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
   {{% /tab %}}

@@ -91,9 +91,9 @@ Once created, global variables can be used in all Synthetic tests by typing `{{`
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][11]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][12], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
 
 #### Restrict access
 
@@ -108,7 +108,9 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ### Default locations
 
-Choose the default locations for your [API test][3], [multistep API test ][4], or [browser test][5] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+Choose the default locations for your [API test][3], [multistep API test ][4], or [browser test][5] details. 
+
+Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
 ### APM integration for browser tests
 
@@ -119,6 +121,20 @@ Define which endpoints should be sent the APM headers by adding a URL into this 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
 If the endpoint is being traced and allowed, your browser test results are automatically tied to its corresponding trace.
+
+### Tag enforcement
+
+<div class="alert alert-warning">
+Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
+
+Allows you to enforce selected tags on Synthetics tests. You can break down cost and usage by services, applications, or teams.
+
+To enable tag enforcement, click **Enforce tags for usage attributions on all tests**.  
+
+{{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
+
+For more information, see [Usage Attribution][13].
 
 ### Permissions
 
@@ -142,3 +158,4 @@ If you have access to the [custom role feature][12], add your user to a custom r
 [10]: /synthetics/browser_tests/actions#using-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[13]: /account_management/billing/usage_attribution

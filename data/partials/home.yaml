@@ -36,6 +36,10 @@ nav_sections:
         link: infrastructure/
         icon: host-map
         desc: Track your hosts, containers, processes, and serverless functions
+      - title: Events
+        link: events/
+        icon: events
+        desc: Track notable changes and alerts across applications and infrastructure
       - title: Metrics
         link: metrics/
         icon: metric
@@ -105,7 +109,7 @@ nav_sections:
         desc: Learn how Datadog protects your data
       - title: Developers
         link: developers/
-        icon: wrench
+        icon: dev-code
         desc: Develop for the Datadog platform
 
 popular_searches:

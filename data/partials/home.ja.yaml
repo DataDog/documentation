@@ -97,7 +97,7 @@ nav_sections:
             desc: Datadog のデータ保護方法について
           - title: 開発者
             link: developers/
-            icon: wrench
+            icon: dev-code
             desc: Datadog プラットフォームの開発
 popular_searches:
   - title: API ドキュメント

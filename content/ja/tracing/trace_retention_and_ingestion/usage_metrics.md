@@ -9,7 +9,7 @@ APM と Indexed Span の使用量を監視しているときに、数値が予�
 
 ## トレース分析使用量ダッシュボード
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview.png" style="width:100%;" alt="Tracing without Limits 使用量ダッシュボード" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/AnalyticsDashboardOverview_2.png" style="width:100%;" alt="Tracing without Limits 使用量ダッシュボード" >}}
 
 Datadog は、APM の使用量、および Indexed Span と Ingested Span のボリュームを監視するための、すぐに使用できる[使用量ダッシュボード][5]を提供します。
 
@@ -37,10 +37,9 @@ Datadog は、APM の使用量、および Indexed Span と Ingested Span のボ
 
 **注**: 保持フィルターを作成、変更、または無効にするには、管理者権限が必要です。
 
-
 [1]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
 [2]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
 [4]: /ja/account_management/billing/apm_distributed_tracing/
-[5]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[5]: https://app.datadoghq.com/dash/integration/30337/trace-analytics---usage
 [6]: /ja/tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
