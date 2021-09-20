@@ -3,7 +3,7 @@ title: Metrics Units
 kind: documentation
 aliases:
 - /metrics/metrics_units
-- /metrics/units/
+- /developers/metrics/units/
 further_reading:
 - link: "/dashboards/"
   tag: "Documentation"

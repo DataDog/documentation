@@ -8,7 +8,7 @@ aliases:
   - /metrics/datagram_shell
   - /metrics/custom_metrics/
   - /getting_started/custom_metrics
-  - /metrics/
+  - /developers/metrics/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
