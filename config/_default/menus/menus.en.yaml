@@ -828,15 +828,37 @@ main:
     identifier: events_top_level
     pre: events
     weight: 60000
+  - name: Stream
+    url: events/stream/
+    identifier: event_stream
+    parent: events_top_level
+    weight: 1
+  - name: Explorer
+    url: events/explorer/
+    identifier: event_explorer
+    parent: events_top_level
+    weight: 2
   - name: Guides
     url: events/guides/
     identifier: events_guides
     parent: events_top_level
-    weight: 1
+    weight: 3
+  - name: Custom Agent Check
+    url: events/guides/agent/
+    parent: events_guides
+    weight: 300
+  - name: DogStatsD
+    url: events/guides/dogstatsd/
+    parent: events_guides
+    weight: 301
+  - name: Email
+    url: events/guides/email/
+    parent: events_guides
+    weight: 302
   - name: API
     url: api/latest/events/#post-an-event
     parent: events_guides
-    weight: 104
+    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
@@ -1077,10 +1099,6 @@ main:
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 101
-  - name: Generate Process Metrics
-    url: infrastructure/process/generate_process_metrics/
-    parent: infrastructure
-    weight: 6
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure

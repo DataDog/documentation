@@ -106,7 +106,7 @@ The alert conditions vary slightly based on the chosen detection method.
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
+* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
 * the threshold `on average`, `at least once`, `at all times`, or `in total`
 * during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 730 hours (1 month).
 
