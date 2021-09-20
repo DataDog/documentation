@@ -108,7 +108,7 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ### Default locations
 
-Choose the default locations for your [API test][3], [multistep API test ][4], or [browser test][5] details. 
+Choose the default locations for your [API test][3], [multistep API test][4], or [browser test][5] details. 
 
 Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
