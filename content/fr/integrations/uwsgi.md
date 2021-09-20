@@ -2,14 +2,14 @@
 title: uWSGI
 name: uwsgi
 kind: integration
-description: Recueillez les logs uWSGI pour suivre les requêtes par seconde, les octets traités, le statut des requêtes et plus encore.
-short_description: Recueillez des logs pour suivre les requêtes par seconde, les octets traités, le statut des requêtes et plus encore.
+description: 'Recueillez les logs uWSGI pour suivre les requêtes par seconde, les octets traités, le statut des requêtes et plus encore.'
+short_description: 'Recueillez des logs pour suivre les requêtes par seconde, les octets traités, le statut des requêtes et plus encore.'
 categories:
   - log collection
   - web
 doc_link: /integrations/uwsgi/
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md'
 has_logo: true
 integration_title: uWSGI
 is_public: true

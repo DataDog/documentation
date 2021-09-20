@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: インデックスの使用率、正常に完了したリクエストの数などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/awscloudsearch/
+doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
 draft: false
 git_integration_title: amazon_cloudsearch
 has_logo: true

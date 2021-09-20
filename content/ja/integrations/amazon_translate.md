@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Translate のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_translate/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_translate/'
 draft: false
 git_integration_title: amazon_translate
 has_logo: true

@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon NAT Gateway のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_nat_gateway/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_nat_gateway/'
 draft: false
 git_integration_title: amazon_nat_gateway
 has_logo: true

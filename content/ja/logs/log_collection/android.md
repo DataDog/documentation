@@ -1,9 +1,9 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md
+  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md'
 description: Android アプリケーションからログを収集する。
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
+  - link: 'https://github.com/DataDog/dd-sdk-android'
     tag: Github
     text: dd-sdk-android ソースコード
   - link: logs/explorer

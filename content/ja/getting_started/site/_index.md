@@ -14,7 +14,7 @@ Datadog では、世界中でさまざまなサイトを提供しています。
 
 ## 使用している Datadog サイトを知る方法
 
-上記の表で、Datadog アプリケーションの URL とサイト URL を対照させると、ご使用中のサイトがわかります。
+上記の表で、Datadog ウェブサイトの URL とサイト URL を対照させると、ご使用中のサイトがわかります。
 
 {{< img src="getting_started/site/site.png" alt="ブラウザに表示されたサイト URL"  >}}
 

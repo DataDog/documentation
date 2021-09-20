@@ -17,9 +17,9 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
 display_name: N2WS Backup & Recovery
-doc_link: 'https://docs.datadoghq.com/integrations/n2ws/'
+doc_link: https://docs.datadoghq.com/integrations/n2ws/
 draft: false
 git_integration_title: n2ws
 guid: 315aa71c-cc41-4f8c-b0f3-37882c1fa766

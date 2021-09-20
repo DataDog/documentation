@@ -13,7 +13,7 @@ Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発�
 
 このページでは、AIX 用 Datadog UNIX Agent のインストールと構成について説明します。
 
-**注**: Datadog Unix Agent は、以下のバージョンの AIX をサポートしています。
+**注**: Datadog Unix Agent は、現在、以下のバージョンの AIX をサポートしています。
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
@@ -37,7 +37,7 @@ Datadog の [Agent ダウンロードページ][1]に、ワンステップの ks
 インストーラは次のように実行できます (ルートとして実行)。
 
 {{< code-block lang="bash" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<VERSION>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+installp -aXYgd ./datadog-unix-agent-<バージョン>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
 これで、Agent が `/opt/datadog-agent` にインストールされます。
@@ -87,7 +87,7 @@ Agent の構成ファイルおよびフォルダーは、
 * disk
 * ネットワーク
 
-提供されている構成ファイルサンプルをコピーして編集し、上記のインテグレーションを有効にします。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML 構成ファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、その構成を設定します。
+上記のインテグレーションを有効にするには、提供されている構成ファイルサンプルをコピーして編集します。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML 構成ファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、その構成を設定します。
 
 ## DogStatsD の実行
 
@@ -107,7 +107,7 @@ dogstatsd:                        # DogStatsD 構成オプション
 
 **注**: DogStatsD はデーモン化されずに、フォアグラウンドで実行されます。
 
-既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
+既存の Python スーパーバイザーから Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
 
 ## アンインストール
 
