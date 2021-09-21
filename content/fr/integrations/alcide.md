@@ -3,9 +3,9 @@ categories:
   - log collection
   - Sécurité
 description: Ingérer et traiter vos logs Alcide
-doc_link: https://docs.datadoghq.com/integrations/alcide/
+doc_link: 'https://docs.datadoghq.com/integrations/alcide/'
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md'
 has_logo: true
 integration_title: Alcide
 is_public: true

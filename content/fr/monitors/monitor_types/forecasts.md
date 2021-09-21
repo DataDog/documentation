@@ -26,7 +26,7 @@ Pour créer un [monitor de prévisions][1] dans Datadog, utilisez la navigation 
 
 Toutes les métriques actuellement transmises à Datadog peuvent être surveillées. Pour obtenir des informations supplémentaires, consultez la page [Monitor de métrique][2].
 
-Une fois la métrique définie, le monitor de prévisions génère deux graphiques d'aperçu dans l'éditeur :
+Une fois la métrique définie, le monitor forecast génère deux graphiques d'aperçu dans l'éditeur :
 {{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Graphiques de l'éditeur" style="width:95%;">}}
 
 * Le graphique **Historical View** vous permet d'explorer les données de métriques antérieures sur différentes périodes.
@@ -35,7 +35,7 @@ Une fois la métrique définie, le monitor de prévisions génère deux graphiqu
 ### Définir vos conditions d'alerte
 
 * Déclencher une alerte lorsque la limite de confiance des prévisions passe `above` ou `below`
-* du seuil sur un intervalle de `24 hours`, `1 week`, `1 month`, etc. ou sur un intervalle `custom` (entre 12 heures et 3 mois).
+* du seuil au cours de la période à venir qui suit : `24 hours`, `1 week`, `1 month`, etc.
 * Seuil d'alerte : >= `<NOMBRE>`
 * [Seuil de rétablissement][3] d'alerte : < `<NOMBRE>`
 
@@ -47,7 +47,7 @@ Datadog analyse automatiquement la métrique choisie et définit plusieurs param
 
 | Option                     | Description                                                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Algorithme](#algorithmes)   | Algorithme de prévision (`linear` ou `seasonal`)                                                                         |
+| [Algorithme](#algorithms)   | Algorithme de prévision (`linear` ou `seasonal`)                                                                         |
 | Modèle                      | Modèle de prévision (`default`, `simple` ou `reactive`) pour l'algorithme linear                                        |
 | Caractère saisonnier                | Caractère saisonnier d'une prévision (`hourly`, `daily` ou `weekly`) pour l'algorithme saisonnier                         |
 | [Changement d'heure][4] | Disponible pour les monitors de prévisions `seasonal` avec le caractère saisonnier `daily` ou `weekly`.                            |

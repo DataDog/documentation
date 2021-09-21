@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_vm_scale_set/'
+doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
 draft: false
 git_integration_title: azure_vm_scale_set
 has_logo: true

@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Data Lake Store のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_data_lake_store/'
+doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
 draft: false
 git_integration_title: azure_data_lake_store
 has_logo: true

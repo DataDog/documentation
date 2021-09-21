@@ -2,10 +2,10 @@
 title: Créer des rapports personnalisés à l'aide de l'API Log Analytics
 kind: guide
 further_reading:
-  - link: /logs/explorer/analytics/?tab=serietemporelle#presentation
+  - link: '/logs/explorer/analytics/?tab=serietemporelle#presentation'
     tag: Documentation
     text: En savoir plus sur Log Analytics
-  - link: /api/v2/logs/#agreger-des-evenements
+  - link: '/api/v2/logs/#agreger-des-evenements'
     tag: Documentation
     text: Syntaxe de l'API Log Analytics
   - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
@@ -18,9 +18,9 @@ Utilisez l'[API Log Analytics][1] pour créer rapidement des rapports et des das
 
 Les exemples suivants sont abordés dans ce guide :
 
-* [Obtenir des nombres](#obtenir-des-nombres)
-* [Obtenir des statistiques](#obtenir-des-statistiques)
-* [Obtenir des centiles](#obtenir-des-centiles)
+* [Obtenir des nombres](#getting-counts)
+* [Obtenir des statistiques](#getting-stats)
+* [Obtenir des centiles](#getting-percentiles)
 * [Regroupements multiples, nombres uniques et métriques](#regroupements-multiples-nombres-uniques-et-metriques) 
 * [Pagination](#pagination)
 

@@ -3,9 +3,9 @@ categories:
   - ログの収集
   - セキュリティ
 description: Alcide のログを収集・処理
-doc_link: 'https://docs.datadoghq.com/integrations/alcide/'
+doc_link: https://docs.datadoghq.com/integrations/alcide/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 has_logo: true
 integration_title: Alcide
 is_public: true

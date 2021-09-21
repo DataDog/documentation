@@ -10,7 +10,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: リクエストレイテンシー、種類別リクエスト数、バケットサイズなどを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_s3/
 draft: false
 git_integration_title: amazon_s3
 has_logo: true

@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Application Gateway のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_application_gateway/'
+doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
 draft: false
 git_integration_title: azure_application_gateway
 has_logo: true
