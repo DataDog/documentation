@@ -5,106 +5,121 @@ main_left:
     weight: -500
   - identifier: features
     name: Fonctionnalités
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='icône fonctionnalités'>"
-    url: "https://www.datadoghq.com/product/"
+    pre: '<i class="icon-features align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/'
     weight: 1
     parent: product
   - identifier: integrations
     name: Intégrations
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='icône intégrations'>"
-    url: "https://www.datadoghq.com/product/platform/integrations/"
+    pre: '<i class="icon-integrations align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
     weight: 2
     parent: product
   - identifier: dashboarding
     name: Dashboards
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='icône dashboard'>"
-    url: "https://www.datadoghq.com/product/platform/dashboards/"
+    pre: '<i class="icon-dashboard align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
     weight: 3
     parent: product
   - identifier: infrastructure
     name: Infrastructure Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg' alt='infra icon'>"
-    url: "https://www.datadoghq.com/product/infrastructure-monitoring/"
+    pre: '<i class="icon-host-map align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/infrastructure-monitoring/'
     weight: 4
     parent: product
   - identifier: logs
     name: Log Management
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
-    url: "https://www.datadoghq.com/product/log-management/"
+    pre: '<i class="icon-log align-middle"></i>'
     weight: 5
     parent: product
   - identifier: apm
     name: APM
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
-    url: "https://www.datadoghq.com/product/apm/"
+    pre: '<i class="icon-apm align-middle"></i>'
     weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
-    url: "https://www.datadoghq.com/product/code-profiling/"
+    pre: '<i class="icon-profiling-1 align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 7
     parent: product
   - identifier: synthetics
     name: Synthetic Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
-    url: "https://www.datadoghq.com/product/synthetic-monitoring/"
+    pre: '<i class="icon-synthetics align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg' alt='rum icon'>"
-    url: "https://www.datadoghq.com/product/real-user-monitoring/"
+    pre: '<i class="icon-rum align-middle"></i>'
     weight: 9
-    parent: product
-  - identifier: security-platform
-    name: Security Platform
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: "https://www.datadoghq.com/product/security-platform/"
-    weight: 10
-    parent: product
-  - identifier: security-monitoring
-    name: Security Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: "https://www.datadoghq.com/product/security-platform/security-monitoring/"
-    weight: 11
-    parent: product
-  - identifier: cloud-security-posture-management
-    name: CSPM
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: "https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/"
-    weight: 12
     parent: product
   - identifier: network
     name: Network Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
-    url: "https://www.datadoghq.com/product/network-monitoring/"
+    pre: '<i class="icon-network align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/network-monitoring'
+    weight: 10
+    parent: product
+  - identifier: security-platform
+    name: Security Platform
+    pre: '<i class="icon-security align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/'
+    weight: 11
+    parent: product
+  - identifier: security-monitoring
+    name: Security Monitoring
+    pre: '<i class="icon-security align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
+    weight: 12
+    parent: product
+  - identifier: cloud-security-posture-management
+    name: CSPM
+    pre: '<i class="icon-cspm align-middle"></i>'
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-security-posture-management/'
     weight: 13
     parent: product
-  - identifier: incident
-    name: Incident Management
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/incidents.svg' alt='incident icon'>"
-    url: "https://www.datadoghq.com/product/incident-management/"
+  - identifier: cloud-workload-security
+    name: 'Cloud Workload Security'
+    pre: '<i class="icon-cws align-middle"></i>'
+    url: 'product/security-platform/cloud-workload-security/'
     weight: 14
-    parent: product
-  - identifier: serverless
-    name: Serverless
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
-    url: "https://www.datadoghq.com/product/serverless-monitoring/"
+    parent: 'product'
+  - identifier: error-tracking
+    name: 'Error Tracking'
+    pre: '<i class="icon-error-tracking align-middle"></i>'
+    url: 'product/security-platform/error-tracking/'
     weight: 15
-    parent: product
-  - identifier: alerts
-    name: Alerts
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert-1.svg' alt='alert icon'>"
-    url: "https://www.datadoghq.com/product/alerts/"
+    parent: 'product'
+  - identifier: incident
+    name: 'Incident Management'
+    pre: '<i class="icon-incidents align-middle"></i>'
+    url: 'product/incident-management'
     weight: 16
-    parent: product
-  - identifier: api
-    name: API
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''icône api''>'
-    url: 'https://docs.datadoghq.com/api'
+    parent: 'product'
+  - identifier: database
+    name: 'Database Monitoring'
+    pre: '<i class="icon-dbm align-middle"></i>'
+    url: 'product/database-monitoring'
     weight: 17
-    parent: product
+    parent: 'product'
+  - identifier: serverless
+    name: 'Serverless'
+    pre: '<i class="icon-serverless align-middle"></i>'
+    url: 'product/serverless-monitoring/'
+    weight: 18
+    parent: 'product'
+  - identifier: alerts
+    name: 'Alerts'
+    pre: '<i class="icon-alert align-middle"></i>'
+    url: 'product/alerts/'
+    weight: 19
+    parent: 'product'
+  - identifier: api
+    name: 'API'
+    pre: '<i class="icon-api align-middle"></i>'
+    url: 'https://docs.datadoghq.com/api'
+    weight: 20
+    parent: 'product'
   - identifier: customers
     name: Clients
     url: "https://www.datadoghq.com/customers/"
@@ -322,7 +337,7 @@ main:
   - name: Débuter
     identifier: getting_started
     url: getting_started/
-    pre: nav_start
+    pre: hex-ringed
     weight: 10000
   - name: Datadog
     identifier: getting_started_datadog
@@ -415,7 +430,7 @@ main:
     weight: 10
   - name: Agent
     url: agent/
-    pre: nav_agent
+    pre: agent-fill
     weight: 30000
     identifier: agent
   - name: Utilisation de base de l'Agent
@@ -753,21 +768,21 @@ main:
   - name: Intégrations
     url: integrations/
     identifier: integrations_top_level
-    pre: nav_integrations
+    pre: integrations
     weight: 40000
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
-    pre: nav_watchdog
+    pre: watchdog
     weight: 50000
   - name: Événements
     url: events/
     identifier: events_top_level
-    pre: nav_events
+    pre: events
     weight: 60000
   - name: Dashboards
     url: dashboards/
-    pre: nav_dashboards
+    pre: dashboard
     identifier: dashboards
     weight: 70000
   - name: Screenboards
@@ -868,12 +883,12 @@ main:
   - name: Application mobile
     url: mobile/
     identifier: mobile
-    pre: nav_mobile
+    pre: mobile
     weight: 80000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
-    pre: nav_infrastructure
+    pre: host-map
     weight: 90000
   - name: Liste des infrastructures
     url: infrastructure/list/
@@ -902,7 +917,7 @@ main:
     weight: 6
   - name: Sans serveur
     url: serverless
-    pre: nav_serverless
+    pre: serverless
     identifier: serverless
     weight: 100000
   - name: Installation
@@ -1036,7 +1051,7 @@ main:
   - name: Métriques
     url: metrics/
     identifier: metrics_top_level
-    pre: nav_metrics
+    pre: metric
     weight: 110000
   - name: Explorer
     url: metrics/explorer/
@@ -1054,7 +1069,7 @@ main:
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
-    pre: nav_notebooks
+    pre: notebook
     weight: 120000
   - name: Alertes
     url: monitors/
@@ -1202,7 +1217,7 @@ main:
     parent: alerting
   - name: APM et tracing distribué
     url: tracing/
-    pre: nav_tracing
+    pre: apm
     identifier: tracing
     weight: 140000
   - name: Envoyer des traces à Datadog
@@ -1600,7 +1615,7 @@ main:
     weight: 1505
   - name: Log Management
     url: logs/
-    pre: nav_logs
+    pre: log
     identifier: log_management
     weight: 150000
   - name: Collecte de logs et intégrations
@@ -1760,7 +1775,7 @@ main:
     weight: 11
   - name: Sécurité et conformité
     url: security_monitoring/
-    pre: nav_security_monitoring
+    pre: security
     identifier: security_compliance_monitoring
     weight: 160000
   - name: Security Monitoring
@@ -1800,7 +1815,7 @@ main:
     weight: 3
   - name: Surveillance Synthetic
     url: synthetics/
-    pre: nav_synthetics
+    pre: synthetics
     identifier: synthetics
     weight: 170000
   - name: Tests API
@@ -1890,7 +1905,7 @@ main:
     weight: 11
   - name: Real User Monitoring
     url: real_user_monitoring/
-    pre: nav_rum_2
+    pre: rum
     identifier: rum
     weight: 150000
   - name: Surveillance Browser
@@ -2005,7 +2020,7 @@ main:
     weight: 8
   - name: Surveillance réseau
     url: network_performance_monitoring/
-    pre: nav_network
+    pre: network
     identifier: npm
     weight: 190000
   - name: Installation
@@ -2065,7 +2080,7 @@ main:
     weight: 605
   - name: Outils de développement
     url: developers/
-    pre: nav_developers
+    pre: dev-code
     identifier: dev_tools
     weight: 200000
   - name: DogStatsD
@@ -2232,12 +2247,12 @@ main:
     weight: 12
   - name: API
     url: api/
-    pre: nav_api
+    pre: api
     identifier: api
     weight: 210000
   - name: Gestion de compte
     url: account_management/
-    pre: nav_account
+    pre: cog
     identifier: account_management
     weight: 220000
   - name: Gestion des utilisateurs
@@ -2310,7 +2325,7 @@ main:
     weight: 8
   - name: Sécurité
     url: security/
-    pre: nav_security
+    pre: security-lock
     identifier: security
     weight: 230000
   - name: Agent
@@ -2331,7 +2346,7 @@ main:
     weight: 4
   - name: Aide
     url: help/
-    pre: nav_help
+    pre: info-fill
     identifier: help_top_level
     weight: 240000
 api_v1:

@@ -57,7 +57,7 @@
               "description": "string",
               "id": "string",
               "is_read_only": false,
-              "layout_type": "string",
+              "layout_type": "ordered",
               "modified_at": "2019-09-19T10:00:00.000Z",
               "title": "string",
               "url": "string"
@@ -137,7 +137,7 @@
           "description": "string",
           "id": "123-abc-456",
           "is_read_only": false,
-          "layout_type": "string",
+          "layout_type": "ordered",
           "modified_at": "2019-09-19T10:00:00.000Z",
           "notify_list": [],
           "reflow_type": "string",
@@ -202,7 +202,7 @@
     },
     "request": {
       "json_curl": {
-        "layout_type": null,
+        "layout_type": "ordered",
         "template_variables": [
           {
             "name": "host1"
@@ -224,7 +224,7 @@
       "json": {
         "description": "string",
         "is_read_only": false,
-        "layout_type": "string",
+        "layout_type": "ordered",
         "notify_list": [],
         "reflow_type": "string",
         "restricted_roles": [],
@@ -707,7 +707,7 @@
           "description": "string",
           "id": "123-abc-456",
           "is_read_only": false,
-          "layout_type": "string",
+          "layout_type": "ordered",
           "modified_at": "2019-09-19T10:00:00.000Z",
           "notify_list": [],
           "reflow_type": "string",
@@ -785,7 +785,7 @@
           "description": "string",
           "id": "123-abc-456",
           "is_read_only": false,
-          "layout_type": "string",
+          "layout_type": "ordered",
           "modified_at": "2019-09-19T10:00:00.000Z",
           "notify_list": [],
           "reflow_type": "string",
@@ -858,7 +858,7 @@
     },
     "request": {
       "json_curl": {
-        "layout_type": null,
+        "layout_type": "ordered",
         "template_variables": [
           {
             "name": "host1"
@@ -880,7 +880,7 @@
       "json": {
         "description": "string",
         "is_read_only": false,
-        "layout_type": "string",
+        "layout_type": "ordered",
         "notify_list": [],
         "reflow_type": "string",
         "restricted_roles": [],

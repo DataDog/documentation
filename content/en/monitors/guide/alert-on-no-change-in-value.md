@@ -1,5 +1,5 @@
 ---
-title: Configure a metric monitor to alert on NO change in value
+title: Alert on No Change in value
 kind: guide
 aliases:
   - monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value

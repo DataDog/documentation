@@ -2,8 +2,8 @@
 title: メトリクスのユニット
 kind: documentation
 aliases:
-  - /ja/metrics/metrics_units
-  - /ja/metrics/units/
+  - /ja/developers/metrics/metrics_units
+  - /ja/developers/metrics/units/
 further_reading:
   - link: /dashboards/
     tag: ドキュメント
@@ -13,13 +13,13 @@ further_reading:
 
 メトリクス単位は、時系列グラフ、クエリ値ウィジェット、トップリストなどの場所に自動的に表示されます。
 
-{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位"  style="width:100%;">}}
+{{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位"  style="width:100%;">}}
 
 時系列グラフ上にカーソルを合わせると、関連する単位が表示されます。元データは、わかりやすい表示単位に自動的に変換されます (1 秒未満は ms、毎秒 100 万バイトは MiB/s など)。
 
 単位は、タイムボードグラフの下部にも表示されます。歯車アイコンのドロップダウンから **Metrics Info** を選択することで、メトリクスの説明を表示できます。
 
-{{< img src="metrics/units/annotated_ops.png" alt="アノテーション付き Ops"  style="width:100%;">}}
+{{< img src="developers/metrics/units/annotated_ops.png" alt="アノテーション付き Ops"  style="width:100%;">}}
 
 メトリクス単位を変更するには、[Metric Summary][1] ページに移動し、**Metadata** セクションで **Edit** をクリックし、ドロップダウンメニューから `bit` や `byte` などの単位を選択します。
 
