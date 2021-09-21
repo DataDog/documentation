@@ -87,4 +87,4 @@ Ensure that you have not exceeded your [daily quota][5] for log retention.
 [2]: https://manage.windowsazure.com
 [3]: /help/
 [4]: /integrations/azure/?tab=azurecliv20#optional-parameters
-[5]: logs/indexes/#set-daily-quota
+[5]: /logs/indexes/#set-daily-quota
