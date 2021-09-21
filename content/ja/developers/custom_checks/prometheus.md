@@ -17,16 +17,15 @@ aliases:
 ---
 ## 概要
 
-ここでは、[Kube DNS][1] からタイミングメトリクスとステータスイベントを収集する簡単なチェックを例に挙げて、`OpenMetricsBaseCheck` インターフェイスの高度な使用方法について説明します。基本的な OpenMetrics チェックの構成については、[Agent に関するドキュメント][2]を参照してください。
+ここでは、[Kube DNS][1] からタイミングメトリクスとステータスイベントを収集する簡単なチェックを例に挙げて、`OpenMetricsBaseCheck` インターフェイスの高度な使用方法について説明します。基本的な OpenMetrics チェックの構成について、詳しくは [Kubernetes Prometheus および OpenMetrics メトリクスの収集][2]を参照してください。
 
 ## 高度な使用方法: OpenMetrics チェックインターフェイス
 
-汎用のチェックより高度なチェック (たとえば、メトリクスの前処理) が必要な場合は、カスタム `OpenMetricsBaseCheck` を作成してください。これは汎用チェックの[基本クラス][3]です。Prometheus から公開されるメトリクス、イベント、サービスチェックを収集するための構造とヘルパーを提供します。このクラスに基づいてチェックを構成するには、少なくとも以下が必要です。
+汎用のチェックより高度なチェック (メトリクスの前処理など) が必要な場合は、カスタム `OpenMetricsBaseCheck` を作成してください。これは汎用チェックの[基本クラス][3]です。Prometheus で公開されるメトリクス、イベント、サービスチェックを収集するための構造とヘルパーを提供します。このクラスに基づいてチェックを構成するには、少なくとも以下が必要です。
 
 - `namespace` と `metrics` マッピングを使用したデフォルトインスタンスの作成。
-- `check()` メソッドの実装
-および/または
-- チェックで処理する OpenMetric メトリクスの名前を付けたメソッドの作成 (例: `self.prometheus_metric_name`)
+- `check()` メソッドの実装および/または
+- 処理される OpenMetric メトリクスの名前を付けたメソッドの作成 (例: `self.prometheus_metric_name`)
 
 ## カスタム Prometheus チェックの書き方
 
@@ -91,8 +90,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 デフォルトのインスタンスは、チェックに使用される基本コンフィギュレーションです。`namespace`、`metrics`、`prometheus_url` をオーバーライドする必要があります。
 
-
-`OpenMetricsBaseCheck` のコンフィギュレーションオプションの一部でもデフォルト値をオーバーライドするため、[Prometheus と Datadog のメトリクスタイプ][6]の間ではメトリクス動作の関連性が増加します。
+**注**: `OpenMetricsBaseCheck` のコンフィギュレーションオプションの一部でデフォルト値がオーバーライドされるため、[Prometheus と Datadog のメトリクスタイプ][6]の間ではメトリクス動作の関連性が増加します。
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck

@@ -264,25 +264,17 @@ return jQuery().jquery.startsWith('3.5.1')
 
 [Synthetic Monitoring Settings][7] で定義されたグローバル変数を選択します。
 
-#### グローバル変数 - MFA
-
-[Synthetic Monitoring Settings][7] で定義された MFA グローバル変数を選択します。
-
-このタイプのグローバル変数にはタイムベースのワンタイムパスワード (TOTP) のシークレットキーが格納されており、MFA モジュールや MFA で保護されたワークフローのテストが可能になります。
-
-ブラウザテストにおける TOTP ベースの MFA については、こちらの [TOTP ガイド][8]をご覧ください。
-
 #### Email
 
-テストステップで使用できるランダムな Synthetic メールアドレスを生成して、[メールが正しく送信されたかどうかをアサート][9]したり、[メールに含まれるリンクに移動][10] (たとえば、確認用のリンクをクリック) したりします。テスト実行間の競合を回避するために、テスト実行ごとに一意のメールボックスが生成されます。
+テストステップで使用できるランダムな Synthetic メールアドレスを生成して、[メールが正しく送信されたかどうかをアサート][8]したり、[メールに含まれるリンクに移動][9] (たとえば、確認用のリンクをクリック) したりします。テスト実行間の競合を回避するために、テスト実行ごとに一意のメールボックスが生成されます。
 
 ### サブテスト
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="ブラウザテストサブテスト"  style="width:60%;">}}
 
-既存のワークフローを再利用するために、他のブラウザテスト内でブラウザテストを実行できます（最大 2 レベルのネスト）。サブテストを使用する理由と例については、[専用ガイド][11]をご参照ください。
+既存のワークフローを再利用するために、他のブラウザテスト内でブラウザテストを実行できます（最大 2 レベルのネスト）。サブテストを使用する理由と例については、[専用ガイド][10]をご参照ください。
 
-親テストのレベルで作成された変数が、サブテストで表示される変数と同じ名前である場合、サブテストの変数を親テストで上書きできます。デフォルトで、サブテストは親テストの前の手順に続いて実行されますが、[**Subtest Advanced オプション**][12]を使用すると、これを変更できます。
+親テストのレベルで作成された変数が、サブテストで表示される変数と同じ名前である場合、サブテストの変数を親テストで上書きできます。デフォルトで、サブテストは親テストの前の手順に続いて実行されますが、[**Subtest Advanced オプション**][11]を使用すると、これを変更できます。
 
 **注**: サブテストを個別に実行しても意味がない場合は、一時停止できます。メインテストの一部として引き続き呼び出されますが、個別に実行されることはありません。
 
@@ -302,7 +294,7 @@ HTTP リクエストを定義するには、
      * Allow insecure certificates: トグルボタンで、証明書の検証中にエラーが発生しても、HTTP の接続テストを続行するよう設定できます。
      * Headers: 定義されたヘッダーは、デフォルトのブラウザヘッダをオーバーライドします。
      * <mrk mid="41" mtype="seg"/><mrk mid="42" mtype="seg"/>
-     * Body: リクエストの本文と本文のタイプ（`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlendcoded` または `None`）。**注**: リクエスト本文の最大サイズは 50 キロバイトに制限されています。
+     * Body: リクエストの本文と本文のタイプ（`text/plain`、`application/json`、`text/xml`、`text/html` または `None`）。**注**: リクエスト本文の最大サイズは 50 キロバイトに制限されています。
      * Cookies: 定義したクッキーをデフォルトのブラウザクッキーに追加します。複数のクッキーを設定するには、次の書式を使用します `<クッキー名1>=<クッキーの値1>; <クッキー名2>=<クッキーの値2>`。
 3. **Test URL** をクリックし、リクエストのコンフィギュレーションをテストします。これにより、反応データのプレビューが表示されます。
 
@@ -314,8 +306,8 @@ HTTP リクエストを定義するには、
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][13]、[`xpath`][14] | _String_ <br> _[Regex][15]_ <br> _String_, _[Regex][15]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][15]_                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][13]                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
@@ -334,8 +326,8 @@ HTTP リクエストを定義するには、
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
 2. 変数を応答ヘッダーから抽出するか、本文から抽出するか決定します。
 
-    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][15]によりパースします。
-    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][15]、[`JSONPath`][13] または [`XPath`][14] によりパースします。
+    * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[正規表現][13]によりパースします。
+    * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用し、[正規表現][13]または [JSONPath][12] によりパースします。
 
 {{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="ブラウザテストで HTTP リクエストから変数を作成する" video="true"  width="80%" >}}
 
@@ -375,11 +367,9 @@ HTTP リクエストを定義するには、
 [5]: /ja/synthetics/browser_tests/actions#use-variables-in-javascript-steps
 [6]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 [7]: /ja/synthetics/settings/
-[8]: /ja/synthetics/guide/browser-tests-totp
-[9]: /ja/synthetics/browser_tests/actions#test-that-an-email-was-received
-[10]: /ja/synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
-[11]: /ja/synthetics/guide/reusing-browser-test-journeys
-[12]: /ja/synthetics/browser_tests/advanced_options/#subtests
-[13]: https://restfulapi.net/json-jsonpath/
-[14]: https://www.w3schools.com/xml/xpath_syntax.asp
-[15]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[8]: /ja/synthetics/browser_tests/actions#test-that-an-email-was-received
+[9]: /ja/synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
+[10]: /ja/synthetics/guide/reusing-browser-test-journeys
+[11]: /ja/synthetics/browser_tests/advanced_options/#subtests
+[12]: https://restfulapi.net/json-jsonpath/
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elastic Map Reduce のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_emr/'
 draft: false
 git_integration_title: amazon_emr
 has_logo: true

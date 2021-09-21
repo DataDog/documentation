@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Data Lake Analytics のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_data_lake_analytics/'
 draft: false
 git_integration_title: azure_data_lake_analytics
 has_logo: true
