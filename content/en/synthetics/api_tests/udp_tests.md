@@ -163,7 +163,7 @@ If you have access to the [custom role feature][12], add your user to any custom
 [3]: /synthetics/api_tests/udp_tests/
 [4]: /synthetics/search/#search
 [5]: /synthetics/cicd_testing/
-[6]: api/latest/synthetics/#create-an-api-test
+[6]: api/latest/synthetics/##edit-an-api-test
 [7]: /monitors/notify/#notify-your-team
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/variables/?tab=is_alert#conditional-variables
