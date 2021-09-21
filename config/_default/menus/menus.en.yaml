@@ -1074,7 +1074,7 @@ main:
     parent: graphing_json
     weight: 1002
   - name: Guides
-    url: dashboards/guides/
+    url: dashboards/guide/
     parent: dashboards
     identifier: guides
     weight: 11
