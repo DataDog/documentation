@@ -42,9 +42,9 @@ Watchdog looks for irregularities in metrics, like a sudden spike in the hit rat
 
 ## Root Cause Analysis for APM (beta)
 
-<div class="alert alert-warning">
+{{< alert >}}
 Watchdog Root Cause Analysis (RCA) is currently in beta. <a href="https://docs.google.com/forms/d/1gKdjVslrxMv_St7sIH7c47FJuf_hKvKAt_G9SXnE4Nw/edit?ts=5fbd5390&gxids=7628">Use this form</a> to request access.
-</div>
+{{< /alert >}}
 
 Watchdog RCA enables APM customers to identify causal relationships between different symptoms across your applications and infrastructures. This information helps you to speed up your root cause analysis and reduce your mean time to recovery (MTTR). 
 

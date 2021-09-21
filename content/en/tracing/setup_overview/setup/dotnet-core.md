@@ -50,9 +50,9 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ### Automatic instrumentation
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
-</div>
+{{< /alert >}}
 
 #### Installing the tracer
 
