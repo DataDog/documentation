@@ -2292,6 +2292,7 @@ components:
       - operation_name
       - resource_name
       - service
+      - name
       type: object
     FormulaAndFunctionApmResourceStatName:
       description: APM resource stat name.
@@ -2668,6 +2669,116 @@ components:
       type: string
       x-enum-varnames:
       - FREE_TEXT
+    FunnelQuery:
+      description: Updated funnel widget.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FunnelSource'
+        query_string:
+          description: The widget query.
+          example: '@browser.name:Chrome'
+          type: string
+        steps:
+          $ref: '#/components/schemas/FunnelSteps'
+      required:
+      - query_string
+      - data_source
+      - steps
+      type: object
+    FunnelRequestType:
+      description: Widget request type.
+      enum:
+      - funnel
+      example: funnel
+      type: string
+      x-enum-varnames:
+      - FUNNEL
+    FunnelSource:
+      default: rum
+      description: Source from which to query items to display in the funnel.
+      enum:
+      - rum
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+    FunnelSteps:
+      description: List of funnel steps.
+      items:
+        description: The funnel step.
+        properties:
+          facet:
+            description: The facet of the step.
+            example: '@view.name'
+            type: string
+          value:
+            description: The value of the step.
+            example: /apm/home
+            type: string
+        required:
+        - facet
+        - value
+        type: object
+      type: array
+    FunnelWidgetDefinition:
+      description: 'The funnel visualization displays a funnel of user sessions that
+        maps a sequence of view navigation and user interaction in your application.
+
+        '
+      properties:
+        requests:
+          description: Request payload used to query items.
+          example:
+          - request_type: funnel
+          - query:
+              data_source: rum
+              query_string: '@browser.name:Chrome'
+              steps:
+              - facet: '@view.name'
+                value: /logs
+              - facet: '@view.name'
+                value: /apm/home
+          items:
+            $ref: '#/components/schemas/FunnelWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: The title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: The size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    FunnelWidgetDefinitionType:
+      default: funnel
+      description: Type of funnel widget.
+      enum:
+      - funnel
+      example: funnel
+      type: string
+      x-enum-varnames:
+      - FUNNEL
+    FunnelWidgetRequest:
+      description: Updated funnel widget.
+      properties:
+        query:
+          $ref: '#/components/schemas/FunnelQuery'
+        request_type:
+          $ref: '#/components/schemas/FunnelRequestType'
+      required:
+      - query
+      - request_type
+      type: object
     GCPAccount:
       description: Your Google Cloud Platform Account.
       properties:
@@ -14331,6 +14442,7 @@ components:
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
+      - $ref: '#/components/schemas/FunnelWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
