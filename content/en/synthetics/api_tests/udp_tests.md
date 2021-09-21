@@ -143,9 +143,6 @@ These reasons include the following:
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
-
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
@@ -153,9 +150,9 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][12].
+By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][11].
 
-If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Further Reading
 
@@ -171,6 +168,5 @@ If you have access to the [custom role feature][13], add your user to any custom
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [10]: /synthetics/settings/#global-variables
-[11]: /synthetics/api_tests/errors/#ssl-errors
-[12]: /account_management/rbac/
-[13]: /account_management/rbac#custom-roles
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles
