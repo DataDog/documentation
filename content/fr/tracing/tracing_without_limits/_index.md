@@ -8,7 +8,7 @@ description: "Documentation bêta pour Live Analytics, les règles d'ingestion e
 
 ## Présentation de la fonctionnalité Tracing without Limits
 
-<div class="alert alert-warning">
+{{< alert >}}
 Si vous utilisez la version bêta de Live Analytics, des règles d'ingestion et des filtres de rétention personnalisés, suivez ces instructions au lieu du <a href="https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/?tab=java#echantillonnage-de-traces">guide d'échantillonnage de traces</a>.
 </div>
 
@@ -114,7 +114,7 @@ Avec Tracing without Limits™, l'ingestion de traces dans Datadog et l'indexati
 
 <div class="alert alert-warning">
 Ces fonctionnalités sont actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> pour être ajouté à la version bêta.
-</div>
+{{< /alert >}}
 
 ### Contrôles de l'ingestion
 

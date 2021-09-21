@@ -57,9 +57,9 @@ The exporter assumes you have a pipeline that uses the `datadog` exporter, and i
   - A required `timeout` setting of `10s` (10 seconds). A batch representing 10 seconds of traces is a constraint of Datadog's API Intake for Trace Related Statistics.
   <div class="alert alert-info"><strong>Important!</strong> Without this <code>timeout</code> setting, trace related metrics including <code>.hits</code>, <code>.errors</code>, and <code>.duration</code> for different services and service resources will be inaccurate over periods of time.</div>
 
-<div class="alert alert-warning">
+{{< alert >}}
 The Datadog exporter for the OpenTelemetry Collector is currently in beta. It may consume high CPU and memory resources. Configuring particularly the pipeline and batch processor may take some iteration before it responds with accurate metrics given your production environment. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
-</div>
+{{< /alert >}}
 
 Here is an example trace pipeline configured with an `otlp` receiver, `batch` processor, and `datadog` exporter:
 

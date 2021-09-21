@@ -182,9 +182,9 @@ Datadog とのインテグレーションには 2 つのポイントがあり、
 - **Datadog Agent BOSH リリース** - Datadog Agent をデプロイのすべてのノードにインストールし、システム、ネットワーク、ディスクのメトリクスを追跡します。その他の Agent チェックを任意に有効にします。
 - **Datadog Firehose Nozzle** - 1 つ以上の Datadog Firehose Nozzle ジョブをデプロイします。これらのジョブはデプロイの Loggregator Firehose を活用し、すべての非コンテナメトリクスを Datadog に送信します。
 
-<div class="alert alert-warning">
+{{< alert >}}
 これらのインテグレーションは Pivotal Platform デプロイ管理者向けです。エンドユーザー向けではありません。
-</div>
+{{< /alert >}}
 
 ### 前提条件
 

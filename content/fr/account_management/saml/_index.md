@@ -9,7 +9,7 @@ further_reading:
     text: Configurer des équipes et organisations avec plusieurs comptes
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+{{< alert >}}Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
 {{< /site-region >}}
 
 **Cette documentation suppose que vous disposez déjà d’un fournisseur d’identité SAML opérationnel.**
@@ -66,7 +66,7 @@ Lorsqu’un utilisateur disposant de l’attribut de fournisseur d’identité s
 
 <div class="alert alert-warning">
   <strong>Important :</strong> si un utilisateur ne correspond à <i>aucun</i> mappage, il perd tous les rôles dont il disposait et ne peut plus se connecter à l'organisation avec SAML. Vérifiez bien les définitions de vos mappages.
-</div>
+{{< /alert >}}
 
 Vous pouvez modifier un mappage en cliquant sur l'icône en forme de crayon, ou le supprimer en cliquant sur l'icône en forme de corbeille. Ces actions affectent uniquement le mappage, et non les attributs du fournisseur d'identité ni les rôles Datadog.
 

@@ -45,9 +45,9 @@ instances:
 
 ### Configuration
 
-<div class="alert alert-warning">
+{{< alert >}}
 Vos fichiers de configuration et de check doivent porter le même nom. Si votre check s'appelle <code>moncheck.py</code>, votre fichier de configuration <em>doit</em> s'appeler <code>moncheck.yaml</code>.
-</div>
+{{< /alert >}}
 
 La configuration d'un check Prometheus est pratiquement la même que celle d'un [check de l'Agent][4] classique. La principale différence est l'inclusion de la variable `prometheus_url` dans votre fichier `check.yaml`. Le code suivant doit être ajouté dans `conf.d/kube_dns.yaml` :
 

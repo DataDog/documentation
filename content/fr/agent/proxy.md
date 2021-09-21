@@ -33,7 +33,7 @@ Les proxies Web traditionnels sont pris en charge de manière native par l'Agent
 
 Définissez différents serveurs de proxy pour les requêtes `https` et `http` dans le fichier de configuration `datadog.yaml` de votre Agent. L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Si la collecte de logs est activée, assurez-vous qu'un transport spécifique est <a href="/agent/logs/log_transport?tab=https#imposer-un-transport-specifique">imposé</a>.
 Il est conseillé d'utiliser le transport HTTPS. Dans ce cas, le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour transmettre via proxy des métriques est également utilisé pour transmettre via proxy des logs.
 Si vous utilisez le transport TCP, consultez la page relative au <a href="/agent/logs/proxy">proxy TCP pour les logs</a>.
@@ -120,7 +120,7 @@ L'Agent utilise les valeurs suivantes par ordre de priorité :
 
 <div class="alert alert-warning">
 Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
-</div>
+{{< /alert >}}
 
 Modifiez le fichier `datadog.conf` en ajoutant les informations de votre proxy :
 

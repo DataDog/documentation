@@ -42,9 +42,9 @@ supported_os:
 ---
 **注**: Docker Daemon チェックのメンテナンスは継続されていますが、**Agent v5** でのみ動作します。
 
-<div class="alert alert-warning">
+{{< alert >}}
 <b>Agent v6 で Docker インテグレーションを使用するには、下の <a href="#agent-v6">Agent v6 セクション</a>を参照してください。</b>
-</div>
+{{< /alert >}}
 
 ![Docker のデフォルトのダッシュボード][1]
 

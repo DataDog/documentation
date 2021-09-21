@@ -8,7 +8,7 @@ further_reading:
 ---
 ## 概要
 
-<div class="alert alert-warning">Datadog AWS Lambda 拡張機能は公開プレビューです。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+{{< alert >}}Datadog AWS Lambda 拡張機能は公開プレビューです。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。{{< /alert >}}
 
 AWS Lambda 拡張機能は、Lambda 関数を拡張できるコンパニオンプロセスです。Lambda の実行環境内で、Lambda 関数コードとともに動作します。Datadog 拡張機能は、最低限のパフォーマンスオーバーヘッドでコードと一緒に実行するよう構築された、Datadog Agent の軽量バージョンです。
 

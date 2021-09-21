@@ -80,8 +80,8 @@ Si la `@notification` est supprimée de l'une de ces deux sections, elle est ég
 
 ### Restreindre l'accès
 
-<div class="alert alert-warning">
-La fonctionnalité de restriction d'accès RBAC aux monitors est actuellement en version bêta. Pour en bénéficier, contactez <a href="https://docs.datadoghq.com/help/">l'assistance Datadog</a>.</div>
+{{< alert >}}
+La fonctionnalité de restriction d'accès RBAC aux monitors est actuellement en version bêta. Pour en bénéficier, contactez <a href="https://docs.datadoghq.com/help/">l'assistance Datadog</a>.{{< /alert >}}
 
 Cette section vous permet de restreindre l'accès aux monitors de façon à ce qu'ils soient uniquement accessibles par tous les utilisateurs de votre organisation ayant votre rôle, les utilisateurs de certains rôles ou uniquement vous-même. Pour en savoir plus sur les rôles, consultez la documentation relative au [RBAC][9].
 

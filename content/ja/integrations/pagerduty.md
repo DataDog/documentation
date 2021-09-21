@@ -20,7 +20,7 @@ short_description: Datadog のメトリクスとイベントから PagerDuty ア
 version: '1.0'
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。</div>
+{{< alert >}}Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。{{< /alert >}}
 {{< /site-region >}}
 
 {{< site-region region="us" >}}

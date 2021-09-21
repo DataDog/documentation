@@ -33,7 +33,7 @@ Agent は従来の Web プロキシをネイティブにサポートします。
 
 Agent `datadog.yaml` コンフィギュレーションファイルで、`https` リクエスト用と `http` リクエスト用にそれぞれプロキシサーバーを設定します。Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたいずれのリクエストでも、プロキシサーバーで SSL を有効化することができます。`datadog.yaml` ファイルのコンフィギュレーション例は以下の通りです。
 
-<div class="alert alert-warning">
+{{< alert >}}
 ログ収集が有効になっている場合は、特定のトランスポートが<a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">強制</a>されていることを確認してください。
 推奨セットアップは HTTPS を使用することです。その場合、メトリクスのプロキシに使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> がログのプロキシに使用されます。
 TCP トランスポートを使用している場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。
@@ -121,7 +121,7 @@ Agent は、これらの値を以下の優先順で使用します。
 
 <div class="alert alert-warning">
 メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
-</div>
+{{< /alert >}}
 
 `datadog.conf` ファイルを編集してプロキシ情報を設定します。
 

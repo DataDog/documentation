@@ -41,9 +41,9 @@ Rôle Read-Only Datadog
 
 ## Rôles personnalisés
 
-<div class="alert alert-warning">
+{{< alert >}}
 La création et la modification de rôles personnalisés sont des fonctionnalités réservées aux utilisateurs Enterprise et nécessitant une activation. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
-</div>
+{{< /alert >}}
 
 Gérez vos rôles personnalisés sur l'application Datadog, avec l'[API Role Datadog][6] ou directement via SAML. Poursuivez votre lecture pour découvrir comment créer, mettre à jour et supprimer un rôle. Consultez la section [Autorisations des rôles Datadog][7] pour en savoir plus sur les autorisations disponibles. Seuls les utilisateurs disposant de l'autorisation Access Management peuvent créer ou modifier des rôles dans Datadog.
 

@@ -47,7 +47,7 @@ Le traceur .NET prend en charge l'instrumentation automatique sur .NET Framework
 
 ### Instrumentation automatique
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, il est essentiel que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
 </div>
 
@@ -180,7 +180,7 @@ Pour configurer le traceur dans le code de l'application, créez une instance `T
 
 <div class="alert alert-warning"> 
   <strong>Remarque :</strong> les paramètres doivent être définis sur <code>TracerSettings</code> <em>avant</em> la création de <code>Tracer</code>. Toute modification apportée aux propriétés <code>TracerSettings</code> après la création de <code>Tracer</code> sera ignorée.
-</div>
+{{< /alert >}}
 
 ```csharp
 using Datadog.Trace;

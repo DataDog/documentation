@@ -85,7 +85,7 @@ with dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
   デフォルトでは、Python DogStatsD クライアントインスタンス (<code>statsd</code> グローバルインスタンスを含む) はプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>disable_buffering</code> を <code>True</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、<a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> のドキュメントを参照してください。
 </div>
 
@@ -327,7 +327,7 @@ DogStatsD には、どのメトリクスが最も多く処理されたかを把�
 
 <div class="alert alert-warning">
   <strong>注</strong>: メトリクス統計モードを有効にすると、DogStatsD のパフォーマンスが低下する可能性があります。
-</div>
+{{< /alert >}}
 
 この統計モードは以下のいずれかの方法で有効化できます。
 

@@ -45,7 +45,7 @@ Pour obtenir la liste complète des bibliothèques prises en charge, consultez l
 
 ## Instrumentation automatique
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, il est essentiel que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
 </div>
 
@@ -398,7 +398,7 @@ Pour configurer le traceur à l'aide d'un fichier JSON, créez `datadog.json` da
 
 <div class="alert alert-info"> 
   <strong>Remarque :</strong> sous Linux, les noms des variables d'environnement sont sensibles à la casse.
-</div>
+{{< /alert >}}
 
 À l'aide des instructions ci-dessus, personnalisez votre configuration de tracing avec les variables des tableaux suivants. Utilisez le premier nom (par exemple, DD_TRACE_AGENT_URL`) pour définir des variables d'environnement ou des fichiers de configuration. Le deuxième nom (par exemple, `AgentUri`) correspond au nom de la propriété `TracerSettings` à utiliser lors du changement des paramètres dans le code.
 

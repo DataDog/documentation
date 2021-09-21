@@ -27,9 +27,9 @@ See the section below to learn how to connect your PHP Logs and traces manually.
 
 ## Manual injection
 
-<div class="alert alert-warning">
+{{< alert >}}
 Note that the function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
-</div>
+{{< /alert >}}
 
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
 

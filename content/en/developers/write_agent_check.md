@@ -30,7 +30,7 @@ First, ensure the [Agent][3] is properly installed. If you run into any issues d
 
 ## Custom Agent check
 
-<div class="alert alert-warning">
+{{< alert >}}
   The names of the configuration and check files must match. If your check is called <code>mycheck.py</code>, your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
@@ -137,7 +137,7 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 <div class="alert alert-warning">
     Since the Python interpreter that runs the checks is embedded in the multi-threaded Go runtime, using the <code>subprocess</code> or <code>multithreading</code> modules from the Python standard library <em>is not supported</em> in Agent version 6 and later.
-</div>
+{{< /alert >}}
 
 When the command line program is run, the check captures the same output as if it were run on the command line in the terminal. It is important to do string processing on the output and call `int()` or `float()` on the result, so that it returns a numerical type.
 

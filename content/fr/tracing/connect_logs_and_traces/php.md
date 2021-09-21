@@ -23,9 +23,9 @@ Consultez la section ci-dessous pour savoir comment associer vos logs PHP et vos
 
 ## Injecter manuellement des ID de trace et de span
 
-<div class="alert alert-warning">
+{{< alert >}}
 Veuillez noter que la fonction <code>\DDTrace\current_context()</code> a été ajoutée avec la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
-</div>
+{{< /alert >}}
 
 Pour associer vos logs et vos traces, vos logs doivent contenir les attributs `dd.trace_id` et `dd.span_id`, qui contiennent respectivement votre ID de trace et votre ID de span.
 

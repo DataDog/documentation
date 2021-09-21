@@ -135,7 +135,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour la
 
 **Remarque** : Datadog rejette un log si sa date officielle est antérieure de plus de 18 heures.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a> et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC 3164</a>.
 </div>
 
@@ -178,7 +178,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'
 
 <div class="alert alert-info">
 Consultez la <a href="/integrations/#cat-log-collection">liste des intégrations prises en charge disponibles</a>.
-</div>
+{{< /alert >}}
 
 Les pipelines de traitement d'intégration sont disponibles pour certaines sources lorsqu'elles sont configurées pour recueillir les logs. Un pipeline d'intégration est automatiquement installé pour les logs d'intégration, afin de prendre en charge leur parsing et d'ajouter la facette correspondante dans Log Explorer.
 

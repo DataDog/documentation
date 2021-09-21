@@ -21,9 +21,9 @@ further_reading:
 
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 This feature is in public beta.
-</div>
+{{< /alert >}}
 
 The Synthetic testing tunnel creates short lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
 

@@ -39,7 +39,7 @@ Une fois terminé, l'Agent Datadog se lance automatiquement à chaque démarrage
 
 L'Agent Datadog fournit un port d'écoute sur le port `8125` pour les métriques et événements StatsD/DogStatsD. Les traces sont recueillies sur le port `8126`.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Avertissement : le dernier buildpack dans la liste sera utilisé pour déterminer le type de processus pour l'application. En outre, les buildpacks qui installent des paquets apt (p. ex. [apt][3] ou [les dépendances puppeteer][4]) et les buildpacks qui modifient le dossier `/app` (p. ex. [monorepo][5]) doivent être ajoutés *avant* le buildpack Datadog. Par exemple, si votre application utilise les buildpacks `ruby`, `datadog` et `apt`, une sortie valide pour `heroku buildpacks` serait :
 
 ```text
@@ -47,7 +47,7 @@ Avertissement : le dernier buildpack dans la liste sera utilisé pour détermin
 2. https://github.com/DataDog/heroku-buildpack-datadog.git
 3. heroku/ruby
 ```
-</div>
+{{< /alert >}}
 
 ## Mises à jour et recompilation du slug
 

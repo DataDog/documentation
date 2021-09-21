@@ -16,9 +16,9 @@ further_reading:
 kind: documentation
 title: "Collecte de données RUM pour React\_Native"
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est en version bêta ouverte. Contactez l'<a href="https://docs.datadoghq.com/help/">assistance</a> si vous avez des questions ou des retours concernant cette fonctionnalité.
-</div>
+{{< /alert >}}
 
 Le *Real User Monitoring (RUM)* de Datadog vous permet de visualiser et d'analyser en temps réel les performances et les parcours des utilisateurs de votre application.
 

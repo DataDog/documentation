@@ -42,7 +42,7 @@ L'extension Datadog pour Azure App Service fournit des capacités de surveillanc
 
 2. L'extension prend uniquement en charge les applications Web Azure App Service. **Les applications de fonction ne sont pas prises en charge**.
 
-<div class="alert alert-warning">Pour recevoir une alerte lorsqu'une bêta privée sera disponible pour les applications de fonction ou d'autres runtimes, <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">inscrivez-vous ici</a>.</div>
+{{< alert >}}Pour recevoir une alerte lorsqu'une bêta privée sera disponible pour les applications de fonction ou d'autres runtimes, <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">inscrivez-vous ici</a>.</div>
 
 3. L'extension .NET APM Datadog prend en charge les runtimes .NET suivants (architectures x64 et x86) lorsqu'elle est exécutée dans des instances Windows (AAS ne prend pas encore en charge les extensions sous Linux). Pour en savoir plus sur les bibliothèques à instrumentation automatique, consultez la [documentation relative au traceur][9].
 
@@ -74,7 +74,7 @@ L'extension Datadog pour Azure App Service fournit des capacités de surveillanc
     - Définissez `DD_LOGS_INJECTION:true` afin de corréler vos données avec les logs d'application de votre app Web.
     - Consultez la liste complète des [variables de configuration facultatives][12].
 6. Cliquez sur **Enregistrer** (votre application va alors redémarrer).
-7. <div class="alert alert-warning">[REQUIS] Arrêtez votre application en cliquant sur <u>Arrêter</u>.</div>
+7. <div class="alert alert-warning">[REQUIS] Arrêtez votre application en cliquant sur <u>Arrêter</u>.{{< /alert >}}
 8. Accédez à la page des extensions Azure et sélectionnez l'extension Datadog APM.
     {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Extension Datadog" >}}
 9. Acceptez les conditions, cliquez sur **OK** et attendez que l'installation se termine. **Remarque** : lors de cette étape, l'application Web doit être arrêtée.

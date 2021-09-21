@@ -8,9 +8,9 @@ further_reading:
     tag: Documentation
     text: Roles API を使用してロールとアクセス許可を管理する
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能を有効にするには、営業担当者またはカスタマーサクセスマネージャーにお問い合わせください。
-</div>
+{{< /alert >}}
 
 ## ロール
 

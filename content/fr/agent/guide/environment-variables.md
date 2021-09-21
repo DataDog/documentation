@@ -15,9 +15,9 @@ further_reading:
     tag: Documentation
     text: Variables d'environnement de proxy
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Si vous utilisez l'Agent v5, référez-vous au <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">référentiel GitHub de l'Agent Docker</a>.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

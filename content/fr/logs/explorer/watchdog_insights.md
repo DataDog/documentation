@@ -17,9 +17,9 @@ further_reading:
 
 Grâce à Watchdog Insights, remontez plus rapidement jusqu'à l'origine de votre problème à l'aide d'informations contextuelles reçues à mesure que vous explorez les logs. Watchdog Insights vient appuyer votre instinct et votre expertise pour vous offrir le coup de pouce dont vous avez besoin pour identifier les éléments qui nécessitent réellement votre attention et ainsi procéder au dépannage.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Watchdog Insights pour Log Explorer est une fonctionnalité en version bêta, déployée auprès des clients par le biais de Log Management. Si vous souhaitez nous faire part de vos remarques, contactez <a href="https://docs.datadoghq.com/help">l'assistance Datadog</a>.
-</div>
+{{< /alert >}}
 
 Dans l'exemple suivant, Watchdog Insights indique que la `version:2.9.7` d'une application Ruby conteneurisée est la cause de la plupart des erreurs observées dans un intervalle spécifique.
 

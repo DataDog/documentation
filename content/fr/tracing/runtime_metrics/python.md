@@ -16,9 +16,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est actuellement en version bêta privée. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> afin de demander son activation pour votre compte.
-</div>
+{{< /alert >}}
 
 ## Configuration automatique
 

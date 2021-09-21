@@ -348,11 +348,11 @@ Utilisez ces noms lorsque vous définissez un paramètre pour une intégration s
 
 #### Mapper les noms de ressources à un URI normalisé
 
-<div class="alert alert-warning">
+{{< alert >}}
 <strong>Paramètre obsolète :</strong> À partir de la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a>, l'ancien paramètre <code>DD_TRACE_RESOURCE_URI_MAPPING</code> est obsolète. Il continuera à fonctionner pendant un certain temps, mais nous vous conseillons vivement d'utiliser les nouveaux paramètres spécifiés dans ce paragraphe pour éviter tout problème une fois l'ancien paramètre supprimé.
 
 Notez que la configuration de l'un des paramètres suivants : <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> ou <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> activera la nouvelle approche de normalisation des ressources, et toutes les valeurs spécifiées dans <code>DD_TRACE_RESOURCE_URI_MAPPING</code> seront ignorées.
-</div>
+{{< /alert >}}
 
 Pour les intégrations de serveur et client HTTP, l'URL est utilisée afin de créer le nom de ressource de la trace, en suivant le format `<MÉTHODE_REQUÊTE_HTTP> <URL_NORMALISÉE>`. La chaîne de requête est supprimée de l'URL. Cela vous permet de gagner en visibilité sur les frameworks personnalisés qui ne sont pas instrumentés automatiquement en normalisant les URL et en regroupant les endpoints génériques sous une unique ressource.
 

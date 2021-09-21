@@ -36,9 +36,9 @@ supported_os:
   - mac_os
   - windows
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 <b>重要</b>: このインテグレーションは、OpenStack バージョン 13 以降 (コンテナ化 OpenStack) にのみ適用されます。OpenStack v12 以前 (非コンテナ化 OpenStack) からメトリクスを収集する場合は、<a href="https://docs.datadoghq.com/integrations/openstack/">OpenStack インテグレーション</a>をご利用ください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

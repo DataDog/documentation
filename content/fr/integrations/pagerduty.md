@@ -20,7 +20,7 @@ short_description: Générez des alertes PagerDuty à partir des métriques et d
 version: '1.0'
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.</div>
+{{< alert >}}L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.{{< /alert >}}
 {{< /site-region >}}
 
 {{< site-region region="us" >}}

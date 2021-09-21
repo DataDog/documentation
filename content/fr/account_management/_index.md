@@ -7,7 +7,7 @@ aliases:
   - /fr/account_management/settings
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+{{< alert >}}Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.{{< /alert >}}
 {{< /site-region >}}
 
 ## Paramètres du compte

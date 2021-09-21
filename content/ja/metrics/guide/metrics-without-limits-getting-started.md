@@ -3,7 +3,7 @@ title: Metrics without Limits™ 入門
 kind: ガイド
 is_beta: true
 ---
-<div class="alert alert-warning">この機能は非公開ベータ版です。</div>
+{{< alert >}}この機能は非公開ベータ版です。{{< /alert >}}
 
 ## 概要
 

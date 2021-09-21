@@ -14,9 +14,9 @@ further_reading:
 ---
 ## セットアップ
 
-<div class="alert alert-warning">
+{{< alert >}}
 IdP 始動の SAML を使用した Datadog モバイルアプリへのログインは、オプトイン機能です。アカウントでこの機能を有効にするには、SAML コンフィギュレーションを変更する前に <a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。
-</div>
+{{< /alert >}}
 
 アイデンティティプロバイダー (IdP) 始動の SAML を使用して Datadog モバイルアプリを使用するには、Datadog に追加の Relay State をパススルーして、ログイン時にモバイルアプリのランディングページをトリガーする必要があります。有効にすると、SAML からその特定のアプリへのすべてのサインインは、続行する前にインタースティシャルページにアクセスするようになります。
 

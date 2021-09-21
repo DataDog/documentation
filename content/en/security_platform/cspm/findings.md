@@ -13,9 +13,9 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 Cloud Security Posture Management is not available in US1-FED or US3.
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## Overview

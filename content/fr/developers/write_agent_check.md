@@ -29,7 +29,7 @@ Commencez par vérifier que l'[Agent][3] est bien installé. Si vous avez le moi
 
 ## Check custom d'Agent
 
-<div class="alert alert-warning">
+{{< alert >}}
   Vos fichiers de configuration et de check doivent avoir le même nom. Si votre check s'appelle <code>mycheck.py</code>, votre fichier de configuration <em>doit</em> s'appeler <code>mycheck.yaml</code>.
 </div>
 
@@ -136,7 +136,7 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 <div class="alert alert-warning">
     Étant donné que l'interpréteur Python qui exécute les checks est intégré à l'environnement d'exécution Go multithread, les modules <code>subprocess</code> ou <code>multithreading</code> de la bibliothèque Python standard <em>ne sont pas pris en charge</em> dans la version 6 et les versions ultérieures de l'Agent.
-</div>
+{{< /alert >}}
 
 Lorsque le programme en ligne de commande s'exécute, le check enregistre la même sortie que s'il était exécuté sur la ligne de commande dans le terminal. Il est important d'effectuer un traitement des chaînes de caractères pour la sortie et d'utiliser `int()` ou `float()` sur le résultat, afin d'obtenir une valeur numérique.
 

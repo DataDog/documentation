@@ -8,9 +8,9 @@ aliases:
 
 ## Overview
 
-<div class="alert alert-warning">
+{{< alert >}}
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
+{{< /alert >}}
 
 Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 

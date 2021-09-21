@@ -12,9 +12,9 @@ further_reading:
       tag: "Documentation"
       text: 'Use Analytics queries and monitors based on retained traces.'
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 This feature is currently in public beta.  While this feature is in beta it is not recommended to use metrics generated from spans for monitors or production operations use cases.
-</div>
+{{< /alert >}}
 
 ## Generate span-based metrics
 

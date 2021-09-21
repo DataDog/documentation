@@ -49,9 +49,9 @@ Ajoutez la liste de flux à surveiller :
 
 Vous pouvez configurer plusieurs comptes (ou hosts), mais chaque flux doit être associé à un compte.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Seuls les flux présentant le type « Aggregated metrics » sont pris en charge.
-</div>
+{{< /alert >}}
 
 #### Collecte de logs
 

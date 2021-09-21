@@ -19,7 +19,7 @@ further_reading:
     text: Gérer les utilisateurs à l'aide de l'API Utilisateurs
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+{{< alert >}}Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.{{< /alert >}}
 {{< /site-region >}}
 
 La section **User Management** de Datadog vous permet de gérer vos utilisateurs et les rôles qui leur sont associés. Basculez entre la vue sous forme de liste et la vue sous forme de tableau en cliquant sur **List View** ou **Grid View** à droite :

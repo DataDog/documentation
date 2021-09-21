@@ -24,7 +24,7 @@ Datadog では、世界中でさまざまなサイトを提供しています。
 
 ## Datadog for Government site
 
-<div class="alert alert-warning">Datadog for Government Site は早期アクセス版です。早期アクセスをご希望の場合は、 fedramp@datadoghq.com までお問い合わせください。</div>
+{{< alert >}}Datadog for Government Site は早期アクセス版です。早期アクセスをご希望の場合は、 fedramp@datadoghq.com までお問い合わせください。{{< /alert >}}
 
 Datadog for Government Site (US1-FED) は、アメリカ政府機関およびパートナーがそのアプリケーションやインフラストラクチャーを監視するためのサイトです。Datadog for Government site のセキュリティおよびコンプライアンスコントロール、フレームワークに関する詳細や、FedRAMP への対応については、[セキュリティページ][1]をご参照ください。
 

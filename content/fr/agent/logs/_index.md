@@ -43,9 +43,9 @@ Une fois la collecte de logs activée, l'Agent est prêt à envoyer ses logs à 
 
 Pour recueillir les logs d'une intégration donnée, supprimez la mise en commentaire de la section logs du fichier `conf.yaml` de cette intégration et configurez-la pour votre environnement. Si vous exécutez l'Agent au sein d'un environnement Kubernetes ou Docker, consultez la section [Collecte de logs avec Kubernetes][6] ou [Collecte de logs avec Docker][7].
 
-<div class="alert alert-warning">
+{{< alert >}}
 Consultez la <a href="/integrations/#collecte-de-log-cat">liste des intégrations prises en charge</a> qui intègrent une configuration de log par défaut.
-</div>
+{{< /alert >}}
 
 ## Collecte de logs personnalisée
 

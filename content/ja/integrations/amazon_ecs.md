@@ -30,9 +30,9 @@ public_title: Datadog-Amazon ECS on EC2 インテグレーション
 short_description: コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。
 version: '1.0'
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 コンテナ化された Datadog Agent を ECS クラスターにデプロイする方法については、専用の <a href="https://docs.datadoghq.com/agent/amazon_ecs/"><b>Amazon ECS Agent ドキュメント</b></a>を参照してください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

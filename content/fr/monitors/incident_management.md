@@ -17,9 +17,9 @@ Dans Datadog, les situations suivantes justifient la déclaration d'un incident�
 * Un problème a ou peut avoir un impact sur les clients ou les services.
 * Vous ne savez pas avec certitude si un événement constitue un incident. Avertissez les personnes compétentes et renforcez la sévérité de la situation de manière adéquate.
 
-<div class="alert alert-warning">
+{{< alert >}}
 La <a href="https://app.datadoghq.com/incidents">gestion des incidents</a> est actuellement disponible en version bêta pour tous les clients. Pour en savoir plus, contactez sales@datadoghq.com.
-</div>
+{{< /alert >}}
 
 ## Utilisation
 

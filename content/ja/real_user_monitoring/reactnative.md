@@ -16,9 +16,9 @@ further_reading:
 kind: documentation
 title: React Native RUM の収集
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能はオープンベータ版です。この機能に関するご質問やフィードバックは、<a href="https://docs.datadoghq.com/help/">サポート</a> までお寄せください。
-</div>
+{{< /alert >}}
 
 Datadog *Real User Monitoring (RUM)* を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 

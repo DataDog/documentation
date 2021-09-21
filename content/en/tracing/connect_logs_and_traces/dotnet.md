@@ -297,7 +297,7 @@ using(_logger.BeginScope(new Dictionary<string, object>
 
 Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][10] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7].
 
-<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
+{{< alert >}}<strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.{{< /alert >}}
 
 ## Further Reading
 

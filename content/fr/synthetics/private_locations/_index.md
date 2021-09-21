@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: Configurer un test API
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 L'accès à cette fonctionnalité est restreint. Si vous n'êtes pas autorisé à y accéder, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

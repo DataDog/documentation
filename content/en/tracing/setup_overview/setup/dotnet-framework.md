@@ -56,7 +56,7 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ### Automatic instrumentation
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
 </div>
 
@@ -188,7 +188,7 @@ To configure the Tracer in application code, create a `TracerSettings` instance 
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
-</div>
+{{< /alert >}}
 
 ```csharp
 using Datadog.Trace;

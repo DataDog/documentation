@@ -13,9 +13,9 @@ further_reading:
     text: フレームワークおよび業界のベンチマークについて
 ---
 {{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 クラウドセキュリティポスチャ管理は、現在 US1-FED、US3、EU では利用できません。
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## 概要

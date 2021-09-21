@@ -17,7 +17,7 @@ further_reading:
     tag: Documentation
     text: トレースの収集
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 トラフィックは、常に Agent から Datadog の方向に開始されます。Datadog から Agent の方向にセッションが開始されることはありません。
 </div>
 
@@ -107,7 +107,7 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 
 <div class="alert alert-warning">
 すべての送信トラフィックは、TCP / UDP を介して SSL で送信されます。
-</div>
+{{< /alert >}}
 
 **Agent** のすべての機能を利用するには、以下のポートを開きます。
 

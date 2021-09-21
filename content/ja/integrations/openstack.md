@@ -42,9 +42,9 @@ supported_os:
   - mac_os
   - windows
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 <b>重要</b>: このインテグレーションは、OpenStack バージョン 12 以前（非コンテナ化 OpenStack）にのみ適用されます。OpenStack v13 以降（コンテナ化OpenStack）からのメトリクスを収集する場合は、<a href="https://docs.datadoghq.com/integrations/openstack_controller/">OpenStack コントローラーインテグレーション</a>をご利用ください。
-</div>
+{{< /alert >}}
 
 ![OpenStack のデフォルトのダッシュボード][1]
 

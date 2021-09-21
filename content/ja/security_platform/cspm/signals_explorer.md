@@ -10,9 +10,9 @@ further_reading:
     text: サポートされているフレームワークおよび業界のベンチマークの詳細
 ---
 {{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 このサイトでは、クラウドセキュリティポスチャ管理は利用できません。
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## 概要

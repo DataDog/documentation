@@ -3,9 +3,9 @@ title: コンプライアンスのモニタリング
 kind: ドキュメント
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 Compliance Monitoring は、現在非公開ベータ版でご利用いただけます。この<a href="https://docs.google.com/forms/d/e/1FAIpQLScTA913tNGptcAeNNdWlvgECjekYoDVJwR-OkMtZYnJnq-FWw/viewform">フォーム</a>を使用してアクセスをリクエストしてください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

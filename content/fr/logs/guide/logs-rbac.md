@@ -23,9 +23,9 @@ Les logs peuvent contenir des **informations sensibles** qui peuvent être [nett
 
 Ce guide fournit une méthodologie pour le développement de rôles Datadog personnalisés qui permettent aux utilisateurs d'accéder aux logs et aux fonctionnalités associées de manière conforme.
 
-<div class="alert alert-warning">
+{{< alert >}}
 La création et la modification de rôles personnalisés sont des fonctionnalités que vous devez activer. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
-</div>
+{{< /alert >}}
 
 ### Plusieurs équipes
 

@@ -42,9 +42,9 @@ supported_os:
   - mac_os
   - windows
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 <b>Remarque importante</b> : cette intégration s'applique uniquement à OpenStack version 12 et versions antérieures (OpenStack non conteneurisé). Si vous souhaitez recueillir des métriques depuis OpenStack v13 ou une version ultérieure (OpenStack conteneurisé), utilisez l'<a href="https://docs.datadoghq.com/integrations/openstack_controller/">intégration OpenStack Controller.</a>
-</div>
+{{< /alert >}}
 
 ![Dashboard par défaut OpenStack][1]
 

@@ -62,7 +62,7 @@ Depuis la version 6.1, l'Agent Datadog prend en charge la surveillance des clus
 | Surveillance des Live Containers      | ❌                                       | ❌                                           | ✅                                             |
 | Surveillance des Live Processes        | ❌                                       | ❌                                           | ✅                                             |
 
-<div class="alert alert-warning">
+{{< alert >}}
 <bold>OpenShift 4.0+</bold> : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec <code>hostNetwork: true</code> dans le fichier de configuration <code>datadog.yaml</code> pour récupérer les tags et alias. L'accès aux serveurs de métadonnées à partir du réseau des POD est autrement impossible.
 </div>
 
@@ -108,7 +108,7 @@ N'oubliez pas d'ajouter le <a href="https://docs.datadoghq.com/agent/kubernetes/
 
 <div class="alert alert-warning">
 <b>OpenShift 4.0+</b> : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec <code>allowHostNetwork: true</code> dans le fichier de configuration <code>datadog.yaml</code> pour récupérer les tags et alias. L'accès aux serveurs de métadonnées à partir du réseau des POD est autrement impossible.
-</div>
+{{< /alert >}}
 
 **Remarque** : le socket Docker appartient au groupe root. Vous devez donc élever les privilèges de l'Agent pour pouvoir récupérer les métriques Docker. Pour exécuter le processus de l'Agent en tant qu'utilisateur root, vous pouvez configurer votre SCC de la façon suivante :
 

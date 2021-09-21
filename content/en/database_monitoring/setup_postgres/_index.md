@@ -6,7 +6,7 @@ disable_sidebar: true
 ---
 
 {{< site-region region="us3,gov" >}} 
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< alert >}}Database Monitoring is not supported for this site.{{< /alert >}}
 {{< /site-region >}}
 
 ### Postgres versions supported

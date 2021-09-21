@@ -4,9 +4,9 @@ kind: documentation
 beta: true
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
-</div>
+{{< /alert >}}
 
 A **session** is a user journey on your web application. It expires after either 15 minutes of inactivity, or 4 hours of continuous activity.
 

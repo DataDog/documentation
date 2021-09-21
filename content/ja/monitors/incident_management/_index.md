@@ -4,7 +4,7 @@ kind: documentation
 description: インシデントの作成と管理
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
+{{< alert >}}Datadog for Government site では、インシデント管理をご利用いただけません。{{< /alert >}}
 {{< /site-region >}}
 
 {{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから"  style="width:80%;">}}

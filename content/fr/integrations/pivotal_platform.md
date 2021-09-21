@@ -182,9 +182,9 @@ Il existe deux points d'intégration avec Datadog. Chacun a son propre objectif�
 - **Version Bosh de l'Agent Datadog** : installez l'Agent Datadog sur chaque nœud de votre déploiement pour surveiller les métriques système, réseau et disque. Vous pouvez également activer n'importe quel autre check de l'Agent qui vous intéresse.
 - **Firehose Nozzle de Datadog** : déployez une ou plusieurs tâches Firehose Nozzle de Datadog. Les tâches puisent dans le Loggregator Firehose de votre déploiement et envoient toutes les métriques hors conteneur à Datadog.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Ces intégrations sont destinées aux administrateurs du déploiement Pivotal Platform, et non aux utilisateurs finaux.
-</div>
+{{< /alert >}}
 
 ### Prérequis
 

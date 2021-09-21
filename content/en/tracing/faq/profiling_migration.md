@@ -3,9 +3,9 @@ title: Migrate your Profiling Setup for GA
 kind: faq
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 <b>Agentless profiling is no longer be supported as of August 15th, 2020.</b>
-</div>
+{{< /alert >}}
 
 Benefits of switching to agent mode:
 

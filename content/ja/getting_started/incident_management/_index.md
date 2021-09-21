@@ -22,7 +22,7 @@ further_reading:
     text: インシデントと Slack のインテグレーション
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
+{{< alert >}}Datadog for Government site では、インシデント管理をご利用いただけません。{{< /alert >}}
 {{< /site-region >}}
 
 ## 概要

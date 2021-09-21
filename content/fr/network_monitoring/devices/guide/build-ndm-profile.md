@@ -15,9 +15,9 @@ La solution Network Device Monitoring (NDM) Datadog utilise des profils pour rec
 
 Les profils NDM reposent sur des concepts SNMP. Pour mieux comprendre le fonctionnement de base de SNMP, consultez la [terminologie][1] employée.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Ce guide s'adresse à des utilisateurs chevronnés. La plupart des périphériques peuvent être configurés à l'aide des <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">profils Datadog</a>.
-</div>
+{{< /alert >}}
 
 ## Recherche
 

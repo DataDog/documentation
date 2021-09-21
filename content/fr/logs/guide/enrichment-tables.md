@@ -10,9 +10,9 @@ further_reading:
     tag: Documentation
     text: En savoir plus sur le parsing
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 La fonctionnalité Tables d'enrichissement est actuellement en bêta privée. Pour en savoir plus, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

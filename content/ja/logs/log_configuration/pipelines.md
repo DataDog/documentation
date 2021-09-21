@@ -83,7 +83,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 **注**: ログエントリの正式な日付が 18 時間以上前だった場合、Datadog はそのエントリを拒否します。
 
-<div class="alert alert-warning">
+{{< alert >}}
 認識される日付の形式は、<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒エポック形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。
 </div>
 
@@ -167,7 +167,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 <div class="alert alert-info">
 サポートされているインテグレーションのリストは、<a href="/integrations/#cat-log-collection">こちら</a>でご確認ください。
-</div>
+{{< /alert >}}
 
 ログを収集するようセットアップされている一部のソースには、インテグレーション処理パイプラインを使用できます。これらのパイプラインは**読み取り専用**であり、各ソースに適した方法でログをパースします。インテグレーションログにインテグレーションパイプラインが自動的にインストールされ、ログをパースして対応するファセットをログエクスプローラーに追加します。
 

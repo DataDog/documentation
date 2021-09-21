@@ -80,8 +80,8 @@ Steps to free up disk space:
 
 ### アクセス制限
 
-<div class="alert alert-warning">
-RBAC のモニターへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+{{< alert >}}
+RBAC のモニターへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。{{< /alert >}}
 
 このセクションを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
 

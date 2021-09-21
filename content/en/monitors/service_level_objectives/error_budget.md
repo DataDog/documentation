@@ -4,9 +4,9 @@ kind: documentation
 description: "Use Monitors to alert off of Service Level Objectives"
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
+{{< /alert >}}
 
 ## Overview
 

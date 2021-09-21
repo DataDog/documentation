@@ -17,9 +17,9 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
-</div>
+{{< /alert >}}
 
 ## Automatic configuration
 

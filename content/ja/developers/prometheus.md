@@ -45,9 +45,9 @@ instances:
 
 ### コンフィギュレーション
 
-<div class="alert alert-warning">
+{{< alert >}}
 構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
-</div>
+{{< /alert >}}
 
 Prometheus チェックのコンフィギュレーションは、標準の [Agent チェック][4]とほぼ同じです。主な違いは、`check.yaml` ファイルに変数 `prometheus_url` を入れることです。`conf.d/kube_dns.yaml` は以下のようになります。
 

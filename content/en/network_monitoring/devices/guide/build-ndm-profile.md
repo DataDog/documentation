@@ -16,9 +16,9 @@ Datadog Network Device Monitoring uses profiles for collecting metrics from netw
 
 NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
 
-<div class="alert alert-warning">
+{{< alert >}}
 This guide is for advanced users. Most devices can be configured using the <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
-</div>
+{{< /alert >}}
 
 ## Research
 

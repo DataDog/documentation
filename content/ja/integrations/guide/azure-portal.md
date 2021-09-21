@@ -9,9 +9,9 @@ further_reading:
     tag: ブログ
     text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
 ---
-<div class="alert alert-warning">
+{{< alert >}}
   このガイドは、Azure で US3 を使用している Datadog のお客様を対象としています。
-</div>
+{{< /alert >}}
 
 このガイドは、Datadog リソースを使用して Azure ポータルで Azure と Datadog のインテグレーションを管理するためのものです。Azure の Datadog リソースは、Datadog オーガニゼーションと Azure サブスクリプションの間の接続を表します。このガイドに進む前に、Azure で [Datadog リソースを作成][1]してください。
 

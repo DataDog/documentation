@@ -26,9 +26,9 @@ PHP ログとトレースを手動で接続する方法については、以下�
 
 ## 手動挿入
 
-<div class="alert alert-warning">
+{{< alert >}}
 注: 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
-</div>
+{{< /alert >}}
 
 ログとトレースを一緒に接続するには、ログに、それぞれトレース ID とスパン ID を含む `dd.trace_id` 属性と `dd.span_id` 属性が含まれている必要があります。
 

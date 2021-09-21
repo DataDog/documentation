@@ -89,7 +89,7 @@ agents:
 | ライブコンテナモニタリング      | サポート対象外                            | サポート対象外         | サポート                                             |
 | ライブプロセスモニタリング        | サポート対象外                            | サポート対象外         | サポート                                             |
 
-<div class="alert alert-warning">
+{{< alert >}}
 <bold>OpenShift 4.0+</bold>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストタグとエイリアスを取得するために、<code>datadog.yaml</code>コンフィギュレーションファイルに <code>hostNetwork: true</code> を定義して Agent をデプロイする必要があります。定義しないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
 </div>
 
@@ -139,7 +139,7 @@ SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t
 
 <div class="alert alert-warning">
 <b>OpenShift 4.0+</b>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストのタグとエイリアスを取得するために、<code>datadog.yaml</code>コンフィギュレーションファイルに <code>allowHostNetwork: true</code> を定義して Agent をデプロイする必要があります。定義しないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
-</div>
+{{< /alert >}}
 
 **注**: Docker ソケットはルートグループが所有します。したがって、Docker メトリクスを取得するために、管理者特権を Agent に付与することが必要な場合があります。Agent プロセスをルートユーザーとして実行するには、SCC を次のように構成してください。
 

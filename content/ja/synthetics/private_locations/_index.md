@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: APIテストの設定
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能へのアクセスは制限されています。アクセス権をお持ちではない場合、<a href="https://docs.datadoghq.com/help/">Datadog サポートチーム</a>にお問い合わせください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
+{{< alert >}}Incident Management is not available on the Datadog for Government site.{{< /alert >}}
 {{< /site-region >}}
 
 {{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}

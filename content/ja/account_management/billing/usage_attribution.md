@@ -7,9 +7,9 @@ aliases:
 ---
 ## 概要
 
-<div class="alert alert-warning">
+{{< alert >}}
 Usage Attribution は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中で、この機能をご希望の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
-</div>
+{{< /alert >}}
 
 管理者は Datadog の Plan & Usage セクションから Usage Attribution タブにアクセスできます。Usage Attribution ページでは、以下の情報と機能が確認できます。
 

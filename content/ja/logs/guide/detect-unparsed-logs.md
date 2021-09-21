@@ -10,9 +10,9 @@ further_reading:
     text: ログのパース - ベストプラクティス
 beta: true
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 パースされていないログのフラグ機能は、現在プライベートベータ版です。詳細は、<a href="https://docs.datadoghq.com/help/">Datadog のサポートチーム</a>までお問い合わせください。
-</div>
+{{< /alert >}}
 
 ## 概要
 パースされたログは、クエリ、監視、集計、機密データスキャナーなど自動エンリッチメントなど、Datadog ログ管理を最大限に活用するのに必要なものです。

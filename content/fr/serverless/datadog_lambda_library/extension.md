@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Présentation
 
-<div class="alert alert-warning"> L'extension AWS Lambda Datadog est disponible sous forme de préversion publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
+{{< alert >}} L'extension AWS Lambda Datadog est disponible sous forme de préversion publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.{{< /alert >}}
 
 Les extensions AWS Lambda sont des processus complémentaires qui permettent d'enrichir vos fonctions Lambda. Elles s'exécutent dans l'environnement d'exécution Lambda, avec le code de votre fonction Lambda. L'extension Datadog est une version plus légère de l'Agent Datadog, conçue pour s'exécuter en même temps que votre code avec un impact minimal sur les performances.
 

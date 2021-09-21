@@ -4,9 +4,9 @@ kind: documentation
 description: Configure automatic notifications for incidents
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 This feature is in open beta. Email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
+{{< /alert >}}
 
 # Overview
 

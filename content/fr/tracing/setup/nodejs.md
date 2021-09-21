@@ -43,9 +43,9 @@ Pour en savoir plus sur les contributions, consultez le [guide de développement
 
 ### Prise en main
 
-<div class="alert alert-warning">
+{{< alert >}}
 Cette bibliothèque <strong>DOIT</strong> être importée et initialisée avant tous les autres modules instrumentés. Lors de l'utilisation d'un transcompilateur, vous <strong>DEVEZ</strong> importer et initialiser la bibliothèque de tracing dans un fichier externe, puis importer ce fichier en entier pendant la compilation de votre application. Cela empêche l'accès aux variables avant leur définition et garantit que la bibliothèque de tracing est importée et initialisée avant l'importation des autres modules instrumentés.
-</div>
+{{< /alert >}}
 
 Pour commencer le tracing d'applications Node.js, commencez par [installer et configurer l'Agent Datadog][6], puis consultez la documentation supplémentaire relative au [tracing d'applications Docker][7] ou au [tracing d'applications Kubernetes][8].
 

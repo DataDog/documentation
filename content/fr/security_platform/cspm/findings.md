@@ -12,7 +12,7 @@ further_reading:
     text: En savoir plus sur les frameworks et les benchmarks de l'industrie
 ---
 {{< site-region region="us" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 La solution Cloud Security Posture Management est actuellement en <a href="https://app.datadoghq.com/security/configuration">version bêta publique</a>.
 </div>
 {{< /site-region >}}
@@ -20,7 +20,7 @@ La solution Cloud Security Posture Management est actuellement en <a href="https
 {{< site-region region="us3,gov,eu" >}}
 <div class="alert alert-warning">
 La solution Cloud Security Posture Management n'est pas actuellement disponible dans les régions US1-FED, US3 et EU.
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## Présentation

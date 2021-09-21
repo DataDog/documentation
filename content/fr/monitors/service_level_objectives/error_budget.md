@@ -3,9 +3,9 @@ title: Alertes de budgets d'indisponibilité
 kind: documentation
 description: Utiliser les monitors pour envoyer des alertes en fonction des Service Level Objectives
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est en version bêta ouverte. Envoyez un e-mail à <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> si vous avez des questions ou des retours.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

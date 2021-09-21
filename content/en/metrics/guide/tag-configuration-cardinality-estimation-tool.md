@@ -4,7 +4,7 @@ kind: guide
 is_beta: true
 ---
 
-<div class="alert alert-warning">This functionality is in private beta and the endpoint is likely to change.</div>
+{{< alert >}}This functionality is in private beta and the endpoint is likely to change.{{< /alert >}}
 
 ## Overview
 

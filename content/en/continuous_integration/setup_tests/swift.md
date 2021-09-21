@@ -231,7 +231,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+{{< alert >}}<strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.{{< /alert >}}
 
 ### Network auto-instrumentation
 

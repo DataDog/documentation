@@ -95,8 +95,8 @@ If you have access to the [custom role feature][9], add your user to a custom ro
 
 #### Restrict access
 
-<div class="alert alert-warning">
-RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+{{< alert >}}
+RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.{{< /alert >}}
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 

@@ -83,8 +83,8 @@ Removing the `@notification` from either section removes it from both sections.
 
 ### Restrict access
 
-<div class="alert alert-warning">
-RBAC restrict access to monitors is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+{{< alert >}}
+RBAC restrict access to monitors is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.{{< /alert >}}
 
 Use this section to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC][9] documentation.
 

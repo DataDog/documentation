@@ -14,7 +14,7 @@ Datadog expose les endpoints AWS PrivateLink sur <b>us-east-1</b>.
 </div>
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog via PrivateLink ne prend pas en charge le site gouvernemental de Datadog.</div>
+{{< alert >}}Datadog via PrivateLink ne prend pas en charge le site gouvernemental de Datadog.{{< /alert >}}
 {{< /site-region >}}
 
 Ce guide vous explique comment configurer [AWS PrivateLink][1] afin de l'utiliser avec Datadog.

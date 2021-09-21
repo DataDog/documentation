@@ -237,7 +237,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+{{< alert >}}The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.{{< /alert >}}
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 

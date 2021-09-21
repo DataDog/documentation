@@ -7,7 +7,7 @@ aliases:
     - /account_management/settings
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+{{< alert >}}The Datadog for Government site only supports SAML login.{{< /alert >}}
 {{< /site-region >}}
 
 ## Personal settings

@@ -84,7 +84,7 @@ Specify alternate attributes to use as the source of a log's date by setting a [
 
 **Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
-<div class="alert alert-warning">
+{{< alert >}}
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
@@ -168,7 +168,7 @@ An example of a log transformed by a pipeline:
 
 <div class="alert alert-info">
 See the <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
-</div>
+{{< /alert >}}
 
 Integration processing pipelines are available for certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. For integration logs, an integration pipeline is automatically installed that takes care of parsing your logs and adds the corresponding facet in your Logs Explorer.
 

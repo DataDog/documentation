@@ -33,7 +33,7 @@ public_title: "Intégration Datadog/Amazon\_Lambda"
 short_description: 'Mesurez les temps d''exécution, les erreurs et les nombres d''appels de vos fonctions Lambda, ainsi que d''autres paramètres.'
 version: '1.0'
 ---
-<div class="alert alert-warning">Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="docs.datadoghq.com/serverless/">documentation mise à jour sur la solution sans serveur de Datadog</a>.</div>
+{{< alert >}}Cette documentation aborde uniquement l'ingestion de métriques AWS Lambda depuis Amazon CloudWatch. Consultez la <a href="docs.datadoghq.com/serverless/">documentation mise à jour sur la solution sans serveur de Datadog</a>.{{< /alert >}}
 
 ## Présentation
 

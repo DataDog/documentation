@@ -16,9 +16,9 @@ further_reading:
     tag: ドキュメント
     text: サービス、リソース、トレースの詳細
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能はクローズドベータ版です。ご使用のアカウントでこの機能を有効にするには、<a href="https://docs.datadoghq.com/help/">サポートチームまでお問い合わせください。</a>
-</div>
+{{< /alert >}}
 
 ## 自動コンフィギュレーション
 

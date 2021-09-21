@@ -41,9 +41,9 @@ Watchdog は、適合率の急激な上昇などといったメトリクスの�
 
 ## APM の根本原因分析 (ベータ版)
 
-<div class="alert alert-warning">
+{{< alert >}}
 Watchdog Root Cause Analysis (RCA) は現在ベータ版です。<a href="https://docs.google.com/forms/d/1gKdjVslrxMv_St7sIH7c47FJuf_hKvKAt_G9SXnE4Nw/edit?ts=5fbd5390&gxids=7628">このフォーム</a>を使用してアクセスをリクエストしてください。
-</div>
+{{< /alert >}}
 
 Watchdog RCA を使用すると、APM のお客様は、アプリケーションとインフラストラクチャー全体のさまざまな症状間の因果関係を特定できます。この情報は、根本原因分析をスピードアップし、平均修復時間 (MTTR) を短縮するのに役立ちます。
 

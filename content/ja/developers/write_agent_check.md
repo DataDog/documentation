@@ -29,7 +29,7 @@ Datadog Agent v6.4+ を使用すると、Datadog Agent のバージョンアッ�
 
 ## カスタム Agent チェック
 
-<div class="alert alert-warning">
+{{< alert >}}
   構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
 </div>
 
@@ -136,7 +136,7 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 <div class="alert alert-warning">
     チェックを実行する Python インタープリターは、マルチスレッド Go ランタイムに埋め込まれるため、Python 標準ライブラリにある <code>subprocess</code> または <code>multithreading</code> モジュールの使用は、Agent バージョン 6 以降では<em>サポートされていません</em>。
-</div>
+{{< /alert >}}
 
 コマンドラインプログラムが実行されると、チェックは、ターミナルのコマンドラインで実行された場合と同じ出力を取得します。出力に対して文字列処理を行い、その結果に対して `int()` または `float()` を呼び出して、数値型が返されるようにすることは重要です。
 

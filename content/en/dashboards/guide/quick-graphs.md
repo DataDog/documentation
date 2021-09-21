@@ -3,9 +3,9 @@ title: Quick Graphs
 kind: documentation
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
     Quick Graph is currently in beta.
-</div>
+{{< /alert >}}
 
 ## Overview
 

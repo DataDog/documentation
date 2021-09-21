@@ -30,7 +30,7 @@ public_title: Datadog-Amazon Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
 version: '1.0'
 ---
-<div class="alert alert-warning">このページは、Amazon CloudWatch からの AWS Lambda メトリクスの取り込みに特化された文書となっています。最新の Datadog サーバーレスドキュメントは、<a href="docs.datadoghq.com/serverless/">こちら</a>をご覧ください。</div>
+{{< alert >}}このページは、Amazon CloudWatch からの AWS Lambda メトリクスの取り込みに特化された文書となっています。最新の Datadog サーバーレスドキュメントは、<a href="docs.datadoghq.com/serverless/">こちら</a>をご覧ください。{{< /alert >}}
 
 ## 概要
 

@@ -6,9 +6,9 @@ dependencies:
 kind: documentation
 title: Datadog-Amazon CloudFormation
 ---
-<div class="alert alert-warning">
+{{< alert >}}
   Datadog-Amazon CloudFormation リソースは、us-east-1 リージョンのCloudFormation パブリックレジストリでのみ利用可能です。その他のリージョンでリソースを非公開で登録するには、提供されているパッケージを使用してください。
-</div>
+{{< /alert >}}
 
 
 

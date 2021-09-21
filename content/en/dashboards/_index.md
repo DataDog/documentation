@@ -187,8 +187,8 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 ### Restrict access
 
-<div class="alert alert-warning">
-RBAC restrict access to dashboards is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
+{{< alert >}}
+RBAC restrict access to dashboards is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.{{< /alert >}}
 
 Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. For more information about roles, see the [RBAC documentation][13].
 

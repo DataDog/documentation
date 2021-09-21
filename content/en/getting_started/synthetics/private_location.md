@@ -13,9 +13,9 @@ further_reading:
       text: 'Learn more about Private Locations'
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 The access to this feature is restricted - if you don't have access, reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a>.
-</div>
+{{< /alert >}}
 
 ## Overview
 

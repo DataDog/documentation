@@ -287,7 +287,7 @@ Par exemple :
 {{% /tab %}}
 {{% tab "Interface de ligne de commande Datadog" %}}
 
-<div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
+{{< alert >}}Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.{{< /alert >}}
 
 Utilisez l'interface de ligne de commande Datadog pour configurer l'instrumentation sur vos fonctions Lambda dans vos pipelines CI/CD. La commande de l'interface de ligne de commande ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda. Elle configure vos fonctions de façon à envoyer des métriques, traces et logs à Datadog.
 

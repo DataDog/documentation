@@ -297,9 +297,9 @@ Consultez [opentracing.io][5] pour en savoir plus sur l'utilisation d'OpenTracin
 
 La prise en charge d'OpenTelemetry est disponible via le package `opentelemetry-exporter-datadog`` pour exporter les traces d'OpenTelemetry vers Datadog.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> si elle ne fonctionne pas correctement.
-</div>
+{{< /alert >}}
 
 ### Installation
 

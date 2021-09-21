@@ -10,7 +10,7 @@ There are two ways to specify that such an endpoint should be untraced and exclu
 - [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
 - [Tracer configuration](#tracer-configuration-options).
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+{{< alert >}}<strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
 
 If you need assistance, contact [Datadog support][1].
 
@@ -315,7 +315,7 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_retention_and_ingestion/#ingestion-controls">ingestion controls</a>.{{< /alert >}}
 
 [1]: /help/
 [2]: /tracing/guide/add_span_md_and_graph_it/

@@ -30,9 +30,9 @@ public_title: "Intégration Datadog/Amazon\_ECS sur EC2"
 short_description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
 version: '1.0'
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Vous voulez déployer l'Agent Datadog conteneurisé sur votre cluster ECS ? Consultez la <a href="https://docs.datadoghq.com/agent/amazon_ecs/"><b>documentation de l'Agent pour Amazon ECS</b></a>.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

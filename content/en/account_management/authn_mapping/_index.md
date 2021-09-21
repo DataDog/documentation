@@ -543,9 +543,9 @@ curl -X GET \
 
 ### Enable or disable all mappings
 
-<div class="alert alert-warning">
+{{< alert >}}
 When mappings are enabled, all users logging in with SAML are stripped of their roles and reassigned roles based on the values in their SAML assertion. It's important to confirm you are receiving the expected SAML assertions in your login before enabling the mapping enforcement.
-</div>
+{{< /alert >}}
 
 Enables/disables the enforcement of all AuthN Mappings.
 

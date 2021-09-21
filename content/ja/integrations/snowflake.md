@@ -56,7 +56,7 @@ Snowflake チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 **注**: 現在、Python 2 を使用している Datadog Agent 6 の MacOS では Snowflake チェックをご利用いただけません。
 
-<div class="alert alert-warning"><code>v7.23.0</code> でインテグレーションを構成している場合は、バージョンを <code>2.0.1</code> にアップグレードして最新機能をご利用ください。
+{{< alert >}}<code>v7.23.0</code> でインテグレーションを構成している場合は、バージョンを <code>2.0.1</code> にアップグレードして最新機能をご利用ください。
 下記の<a href=https://docs.datadoghq.com/agent/guide/integration-management/#install>コマンド</a>を使用してインテグレーションをアップグレードできます。<br>
 
 ```text
@@ -151,7 +151,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
 
     <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
-    <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
+    <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.{{< /alert >}}
 
 3. [Agent を再起動します][5]。
 

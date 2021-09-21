@@ -49,9 +49,9 @@ Datadog の [Akamai インテグレーションタイル][1]を使用して、�
 
 複数のアカウント (またはホスト) を設定できますが、各ストリームを必ず 1 つのアカウントにリンクしてください。
 
-<div class="alert alert-warning">
+{{< alert >}}
 「Aggregated metrics」タイプのストリームだけがサポートされています。
-</div>
+{{< /alert >}}
 
 #### ログの収集
 

@@ -14,9 +14,9 @@ further_reading:
     tag: Documentation
     text: Configurer un test API
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est en version bêta publique pour les tests API. La fonctionnalité équivalente pour les tests Browser est en version bêta privée. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance Datadog</a> pour la tester.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

@@ -10,9 +10,9 @@ further_reading:
     text: "Microsoft partnership embeds Datadog natively in the Azure portal"
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
   This guide is for Datadog customers using US3 with Azure.
-</div>
+{{< /alert >}}
 
 This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between a Datadog organization and an Azure subscription. [Create a Datadog resource][1] in Azure before proceeding with this guide.
 

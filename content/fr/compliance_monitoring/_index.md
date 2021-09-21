@@ -3,9 +3,9 @@ title: Surveillance de la conformité
 kind: documentation
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 La surveillance de la conformité est actuellement disponible en version bêta privée. Utilisez ce <a href="https://docs.google.com/forms/d/e/1FAIpQLScTA913tNGptcAeNNdWlvgECjekYoDVJwR-OkMtZYnJnq-FWw/viewform">formulaire</a> pour demander à y accéder.
-</div>
+{{< /alert >}}
 
 ## Présentation
 

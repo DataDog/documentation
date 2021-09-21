@@ -86,9 +86,9 @@ API およびブラウザテストのコンフィギュレーションの **高�
 
 ## ブラウザ変数
 
-<div class="alert alert-warning">
+{{< alert >}}
 ブラウザ変数は非推奨です。Datadog は、代わりに user-agent ヘッダーを使用することをお勧めします。
-</div>
+{{< /alert >}}
 
 Datadog ロボットがアプリケーションのレンダリングを行う際、`window._DATADOG_SYNTHETICS_BROWSER` 変数が `true` に設定されます。分析データからロボットのアクションを削除する場合は、以下のテストで分析ツールのコードをラップしてください。
 

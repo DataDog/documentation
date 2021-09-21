@@ -17,9 +17,9 @@ further_reading:
 
 Watchdog Insights を使用すると、ログを探索するときに受け取るコンテキストインサイトの問題の根本原因にすばやく到達できます。 Watchdog Insights は、専門知識やひらめきを補完し、トラブルシューティングの注意をどこに集中できるかを判断します。
 
-<div class="alert alert-warning">
+{{< alert >}}
 ログエクスプローラーの Watchdog Insights はベータ機能であり、ログ管理を使用してお客様に展開されます。フィードバックがある場合は、<a href="https://docs.datadoghq.com/help">Datadog サポート</a>にお問い合わせください。
-</div>
+{{< /alert >}}
 
 次の例では、Watchog Insights は、コンテナ化された Ruby アプリケーションの `version:2.9.7` が、特定の時間範囲で観察されるエラーのほとんどを引き起こすことを強調しています。
 

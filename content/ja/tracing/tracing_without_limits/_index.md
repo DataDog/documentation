@@ -8,7 +8,7 @@ description: "Live Analytics、取り込みルール、保持フィルターの�
 
 ## Tracing Without Limits 概要
 
-<div class="alert alert-warning">
+{{< alert >}}
 Live Analytics、取り込みルール、カスタム保持フィルターのベータ版を使用している場合は、<a href="https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/?tab=java#trace-sampling">トレースサンプリングガイド</a>の代わりにこちらの手順を使用してください。
 </div>
 
@@ -114,7 +114,7 @@ Tracing without Limits™ を使用すると、Datadog へのトレースの取�
 
 <div class="alert alert-warning">
 これらの機能は現在ベータ版です。ベータ版への追加については、<a href="https://docs.datadoghq.com/help/">サポートにご連絡ください</a>。
-</div>
+{{< /alert >}}
 
 ### Ingestion Controls
 

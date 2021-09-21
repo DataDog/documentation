@@ -43,9 +43,9 @@ Agent v6.19+/v7.19+ 以降、使用されるデフォルトのトランスポー
 
 特定のインテグレーションのログを収集するには、そのインテグレーションの `conf.yaml` ファイルのログセクションのコメントを外して、環境に合わせて構成します。Agent を Kubernetes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][6]または [Docker ログ収集][7]のドキュメントを参照してください。
 
-<div class="alert alert-warning">
+{{< alert >}}
 そのまま使用できるログ構成が含まれている<a href="/integrations/#cat-log-collection">サポートされているインテグレーションのリスト</a>を参照してください。
-</div>
+{{< /alert >}}
 
 ## カスタムログ収集
 

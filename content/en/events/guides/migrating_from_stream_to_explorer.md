@@ -6,8 +6,8 @@ kind: documentation
 
 ## Request beta access
 
-<div class="alert alert-warning">
-  The Events Explorer is in private beta. To request access, contact <a href="/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="/events/stream/">Event Stream documentation</a>.</div>
+{{< alert >}}
+  The Events Explorer is in private beta. To request access, contact <a href="/help/">Datadog Support</a>. If you are looking for legacy events information, see the <a href="/events/stream/">Event Stream documentation</a>.{{< /alert >}}
 
 With the beta enabled, you have access to these events features:
 

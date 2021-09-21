@@ -15,9 +15,9 @@ further_reading:
     tag: ドキュメント
     text: プロキシ環境変数
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Agent v5 の場合は、<a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub リポジトリ</a>を参照してください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

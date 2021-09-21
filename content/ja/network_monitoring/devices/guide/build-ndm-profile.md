@@ -15,9 +15,9 @@ Datadog ネットワークデバイスモニタリングは、プロファイル
 
 NDM プロファイルは SNMP コンセプトを使用します。SNMP の基本情報については、[用語][1]を参照してください。
 
-<div class="alert alert-warning">
+{{< alert >}}
 このガイドは上級ユーザー向けです。ほとんどのデバイスは <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog プロファイル</a>を使用して構成することができます。
-</div>
+{{< /alert >}}
 
 ## 調査
 

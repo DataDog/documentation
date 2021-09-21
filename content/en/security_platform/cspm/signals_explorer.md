@@ -11,9 +11,9 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 Cloud Security Posture Management is not available for this site.
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## Overview

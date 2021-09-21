@@ -238,7 +238,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-<div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+{{< alert >}} このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。{{< /alert >}}
 
 Datadog CLI を使用して、CI/CD パイプラインの Lambda 関数にインスツルメンテーションを設定します。CLI コマンドは、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、メトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 

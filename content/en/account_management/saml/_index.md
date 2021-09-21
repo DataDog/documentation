@@ -9,7 +9,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+{{< alert >}}The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -116,7 +116,7 @@ When a user logs in who has the specified identity provider attribute, they are 
 
 <div class="alert alert-warning">
   <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions.
-</div>
+{{< /alert >}}
 
 You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
 

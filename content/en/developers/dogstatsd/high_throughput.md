@@ -86,7 +86,7 @@ with dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
   By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. See the documentation on <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> for more details.
 </div>
 
@@ -329,7 +329,7 @@ DogStatsD has a stats mode in which you can see which metrics are the most proce
 
 <div class="alert alert-warning">
   <strong>Note</strong>: Enabling metrics stats mode can decrease DogStatsD performance.
-</div>
+{{< /alert >}}
 
 To enable the stats mode, you can either:
 

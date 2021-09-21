@@ -262,9 +262,9 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-<div class="alert alert-warning">
+{{< alert >}}
 Datadog Ruby Profiler は公開ベータ版です。Datadog では、本番環境にデプロイする前に重要でない環境でプロファイラを評価することを推奨しています。
-</div>
+{{< /alert >}}
 
 Datadog Profiler には MRI Ruby 2.1+ が必要です。**ウォールタイムプロファイリングは、すべてのプラットフォーム（macOS および Windows を含む）のユーザーに利用可能ですが、CPU タイムプロファイルは、現在 Linux ぷらっとふぉ0無でのみご利用いただけます**。アプリケーションのプロファイリングを開始するには:
 

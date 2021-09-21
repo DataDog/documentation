@@ -5,7 +5,7 @@ description: Troubleshoot Database Monitoring setup
 
 ---
 {{< site-region region="us3,gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< alert >}}Database Monitoring is not supported for this site.{{< /alert >}}
 {{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring, and how to resolve them. It is recommended to stay on the latest stable Agent version and adhering to the latest [setup documentation][1] as it can change with agent version releases.

@@ -56,7 +56,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 **Remarque** : actuellement, le check Snowflake n'est pas disponible pour macOS dans l'Agent Datadog 6 avec Python 2.
 
-<div class="alert alert-warning">Pour les utilisateurs qui configurent l'intégration avec l'Agent <code>v7.23.0</code>, passez à la version <code>2.0.1</code> de l'intégration pour tirer profit des dernières nouveautés.
+{{< alert >}}Pour les utilisateurs qui configurent l'intégration avec l'Agent <code>v7.23.0</code>, passez à la version <code>2.0.1</code> de l'intégration pour tirer profit des dernières nouveautés.
 Pour mettre à niveau l'intégration, utilisez <a href=https://docs.datadoghq.com/agent/guide/integration-management/#install>cette commande</a> :<br>
 
 ```text
@@ -146,7 +146,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
 
     <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
-    <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
+    <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.{{< /alert >}}
 
 3. [Redémarrez l'Agent][5].
 

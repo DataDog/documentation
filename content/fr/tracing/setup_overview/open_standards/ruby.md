@@ -39,9 +39,9 @@ Cependant, des instrumentations supplémentaires fournies par Datadog peuvent ê
 
 La prise en charge d'OpenTelemetry est disponible via le gem `opentelemetry-exporters-datadog` pour exporter les traces d'OpenTelemetry vers Datadog.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> si elle ne fonctionne pas correctement.
-</div>
+{{< /alert >}}
 
 ### Installation
 

@@ -9,7 +9,7 @@ further_reading:
     tag: Documentation
     text: Environnement Azure App Service
 ---
-<div class="alert alert-warning"> Ce service est en version bêta publique. Si vous souhaitez nous faire part de vos remarques, <a href="/help">contactez l'assistance Datadog</a>. Lors de la période bêta, l'utilisation de cette extension ne fait l'objet d'aucune facturation.</div>
+{{< alert >}} Ce service est en version bêta publique. Si vous souhaitez nous faire part de vos remarques, <a href="/help">contactez l'assistance Datadog</a>. Lors de la période bêta, l'utilisation de cette extension ne fait l'objet d'aucune facturation.{{< /alert >}}
 
 ## Présentation
 

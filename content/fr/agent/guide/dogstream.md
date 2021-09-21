@@ -60,9 +60,9 @@ Si votre parser de log personnalisé ne fonctionne pas, vérifiez tout d'abord l
 
 * Si tout fonctionne comme prévu, vous devriez voir `dogstream: parsing {nom du fichier} with {nom de la fonction} (requested {texte option de configuration})`.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent surveille uniquement la fin de chaque fichier de log et ne remarquera donc pas les modifications effectuées ailleurs dans le fichier.
-</div>
+{{< /alert >}}
 
 ### Rédaction de fonctions de parsing
 

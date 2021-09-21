@@ -12,7 +12,7 @@ further_reading:
     text: フレームワークおよび業界のベンチマークの詳細
 ---
 {{< site-region region="us" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 クラウドセキュリティポスチャ管理 は、現在<a href="https://app.datadoghq.com/security/configuration">公開ベータ版</a>です。
 </div>
 {{< /site-region >}}
@@ -20,7 +20,7 @@ further_reading:
 {{< site-region region="us3,gov,eu" >}}
 <div class="alert alert-warning">
 クラウドセキュリティポスチャ管理は、現在 US1-FED、US3、EU では利用できません。
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## 概要

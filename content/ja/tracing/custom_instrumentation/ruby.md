@@ -347,9 +347,9 @@ OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
 
 OpenTelemetry のサポートは、`opentelemetry-exporters-datadog` gem を使用してトレースを OpenTelemetry から Datadog にエクスポートすることで利用できます。
 
-<div class="alert alert-warning">
+{{< alert >}}
 現在、この機能はベータ版です。期待どおりに機能しない場合は、<a href="https://docs.datadoghq.com/help/">サポートにお問い合わせください。</a>。
-</div>
+{{< /alert >}}
 
 ### インストール
 

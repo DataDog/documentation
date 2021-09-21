@@ -4,9 +4,9 @@ dependencies:
 kind: ドキュメント
 title: Datadog サーバーレス CLI
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能は公開ベータ版です。質問や問題がございましたら、リポジトリに<a href="https://github.com/DataDog/datadog-ci/issues">問題</a>を登録してお知らせください。
-</div>
+{{< /alert >}}
 
 CLI を使用して、AWS Lambda 関数を Datadog でインスツルメントできます。現在、Python および Node.js ランタイムのみがサポートされています。
 

@@ -24,9 +24,9 @@ Datadog propose trois rôles utilisateur par défaut :
 | **Rôle Standard Datadog**  | Les utilisateurs sont autorisés à consulter et à modifier toutes les fonctionnalités de surveillance offertes par Datadog, telles que les [dashboards][1], les [monitors][2], les [événements][3], et les [notebooks][4]. Ils peuvent également inviter d'autres utilisateurs à rejoindre une organisation.                      |
 | **Rôle Read-Only Datadog** | Les utilisateurs n'ont aucun droit de modification dans Datadog. Ce rôle est particulièrement utile lorsque vous souhaitez partager des vues spécifiques en lecture seule avec un client ou lorsqu'un membre d'un service souhaite partager un [dashboard][1] avec une personne qui n'en fait pas partie. |
 
-<div class="alert alert-warning">
+{{< alert >}}
 La liste des autorisations et des rôles évolue régulièrement. À chaque fois qu'une autorisation est ajoutée, cette page est mise à jour avec son nom et sa définition.
-</div>
+{{< /alert >}}
 
 ## Description des autorisations disponibles
 

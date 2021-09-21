@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< alert >}}Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -358,7 +358,7 @@ spec:
     targetPort: 5432
     name: postgres
 ```
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.{{< /alert >}}
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 

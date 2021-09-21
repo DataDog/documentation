@@ -36,9 +36,9 @@ supported_os:
   - mac_os
   - windows
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 <b>Remarque importante</b> : cette intégration s'applique uniquement à OpenStack version 13 et versions ultérieures (OpenStack conteneurisé). Si vous souhaitez recueillir des métriques depuis OpenStack v12 ou une version antérieure (OpenStack non conteneurisé), utilisez l'<a href="https://docs.datadoghq.com/integrations/openstack/">intégration OpenStack.</a>
-</div>
+{{< /alert >}}
 
 ## Présentation
 

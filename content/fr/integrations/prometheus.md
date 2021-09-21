@@ -38,9 +38,9 @@ Connectez-vous à Prometheus pour :
 
 **Remarque :** nous vous conseillons d'utiliser le [check OpenMetrics][1] du fait de son efficacité accrue et de sa prise en charge complète du format texte Prometheus. N'utilisez le check Prometheus que lorsque l'endpoint de métriques ne prend pas en charge un format texte.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Toutes les métriques récupérées par cette intégration sont considérées comme étant des <a href="https://docs.datadoghq.com/metrics/custom_metrics">métriques custom</a>.
-</div>
+{{< /alert >}}
 
 **Consultez la section [Collecte de métriques Prometheus[2] pour découvrir comment configurer un check Prometheus.**
 

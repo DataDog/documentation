@@ -7,7 +7,7 @@ aliases:
   - /ja/account_management/settings
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
+{{< alert >}}Datadog for Government site では、SAML ログインのみをサポートします。{{< /alert >}}
 {{< /site-region >}}
 
 ## アカウント設定

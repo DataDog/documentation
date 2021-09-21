@@ -3,9 +3,9 @@ title: 通知ルール
 kind: documentation
 description: インシデントの自動通知を構成
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能はオープンベータ版です。この機能へのアクセスリクエストやフィードバックは、<a href="mailto:support@datadoghq.com">support@datadoghq.com</a> までメールでお寄せください。
-</div>
+{{< /alert >}}
 
 # 概要
 

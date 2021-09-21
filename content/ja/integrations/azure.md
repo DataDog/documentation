@@ -40,9 +40,9 @@ Microsoft Azure に接続すると、以下のことができます。
 -   Azure VM に Azure 固有の情報 (場所など) をタグ付けできます。
 -   他のサービスのメトリクスを取得できます。Application Gateway、App Service (Web および Mobile)、Batch サービス、イベントハブ、IOT Hub、Logic App、Redis Cache、サーバーファーム (App Service プラン)、SQL データベース、SQL 可変プール、仮想マシンスケールセットなどが含まれます。
 
-<div class="alert alert-warning">
+{{< alert >}}
 Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。<a href="https://docs.datadoghq.com/integrations/faq/azure-status-metric">このメトリクスに関する詳細は、こちらでご確認いただけます</a>。
-</div>
+{{< /alert >}}
 
 | インテグレーション                     | 説明                                                                                               |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|

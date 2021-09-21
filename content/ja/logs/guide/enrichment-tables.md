@@ -10,9 +10,9 @@ further_reading:
     tag: Documentation
     text: パースの詳細
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 エンリッチメントテーブル機能は現在非公開ベータ版です。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

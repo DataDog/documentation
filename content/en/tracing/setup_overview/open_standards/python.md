@@ -47,9 +47,9 @@ The tracer can now be used like in any other OpenTracing application. See [opent
 
 OpenTelemetry support is available by using the `opentelemetry-exporter-datadog` package to export traces from OpenTelemetry to Datadog.
 
-<div class="alert alert-warning">
+{{< alert >}}
 This feature is currently in beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
-</div>
+{{< /alert >}}
 
 ### Installation
 

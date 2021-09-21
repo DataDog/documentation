@@ -7,9 +7,9 @@ aliases:
 ---
 ## Présentation
 
-<div class="alert alert-warning">
+{{< alert >}}
 L'attribution de l'utilisation est une fonctionnalité avancée incluse dans la formule Enterprise. Pour toutes les autres formules, contactez votre chargé de compte ou envoyez un e-mail à <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> pour demander l'activation de cette fonctionnalité.
-</div>
+{{< /alert >}}
 
 Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de la section Plan & Usage de Datadog. Depuis la page Usage Attribution, vous pouvez effectuer ce qui suit :
 

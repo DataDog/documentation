@@ -10,9 +10,9 @@ further_reading:
     tag: Documentation
     text: Dépannage de l'Agent
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Pour les systèmes basés sur Linux où la commande <code>service</code> wrapper n'est pas disponible, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consultez la liste des alternatives</a>.
-</div>
+{{< /alert >}}
 
 ## Démarrer, arrêter et redémarrer l'Agent
 

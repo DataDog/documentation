@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< alert >}}Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
 
@@ -303,7 +303,7 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
+<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.{{< /alert >}}
 
 The Cluster Agent automatically registers this configuration and begin running the MySQL check.
 

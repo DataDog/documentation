@@ -61,9 +61,9 @@ APM の [Live Search][1] を使用すると、過去 15 分間に収集された
 
 ## Live Analytics
 
-<div class="alert alert-warning">
+{{< alert >}}
 これらの機能は現在非公開ベータ版です。<a href="https://forms.gle/1FParyX49eNFPDsg9">フォームに記入</a>して、ベータ版への追加をリクエストしてください。
-</div>
+{{< /alert >}}
 
 Live Analytics を使用すると、過去 15 分間に取り込まれたトレースの 100% で分析を実行できます。任意のスパンで任意のタグを検索します。さらに Datadog には、Datadog に送信されるトレースの数を制御する手段と、最も重要なトレースを保持するためのタグベースの保持フィルターも用意されています。
 

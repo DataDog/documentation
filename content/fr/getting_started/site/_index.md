@@ -24,7 +24,7 @@ Les sites Datadog peuvent prendre en charge différentes fonctionnalités selon 
 
 ## Site gouvernemental de Datadog
 
-<div class="alert alert-warning">Le site gouvernemental de Datadog disponible en accès anticipé. Pour demander un accès, envoyez un e-mail à l'adresse fedramp@datadoghq.com</div>
+{{< alert >}}Le site gouvernemental de Datadog disponible en accès anticipé. Pour demander un accès, envoyez un e-mail à l'adresse fedramp@datadoghq.com{{< /alert >}}
 
 Le site gouvernemental de Datadog (US1-FED) est destiné aux agences et partenaires gouvernementaux américains qui surveillent leurs applications et leur infrastructure. Pour en savoir plus sur les frameworks ainsi que sur les contrôles de sécurité et de conformité de ce site, et pour découvrir comment le site soutient le programme FedRAMP, consultez la [page relative à la sécurité][1].
 

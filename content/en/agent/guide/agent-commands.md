@@ -11,9 +11,9 @@ further_reading:
   text: "Agent Troubleshooting"
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>.
-</div>
+{{< /alert >}}
 
 ## Start, stop, and restart the Agent
 

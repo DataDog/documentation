@@ -184,8 +184,8 @@ Preset lists (プリセットリスト) は、Datadog でデフォルトのダ�
 
 ### アクセス制限
 
-<div class="alert alert-warning">
-RBAC のダッシュボードへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+{{< alert >}}
+RBAC のダッシュボードへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。{{< /alert >}}
 
 ダッシュボード全体の設定モーダルをクリックし、*Permissions* を選択します。ポップアップを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
 

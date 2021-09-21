@@ -4,9 +4,9 @@ dependencies:
 kind: documentation
 title: CLI Serverless Datadog
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 Cette fonctionnalité est en version bêta ouverte. Si vous avez des questions ou des problèmes, faites-le-nous savoir en créant un <a href="https://github.com/DataDog/datadog-ci/issues">ticket</a> dans notre référentiel.
-</div>
+{{< /alert >}}
 
 Vous pouvez utiliser l'interface de ligne de commande pour instrumenter vos fonctions AWS Lambda avec Datadog. Seuls les runtimes Python Node.js sont actuellement pris en charge.
 

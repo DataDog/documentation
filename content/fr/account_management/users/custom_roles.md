@@ -15,9 +15,9 @@ further_reading:
     tag: Documentation
     text: Configurer des équipes et organisations avec plusieurs comptes
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 La création et la modification de rôles personnalisés sont réservées aux utilisateurs Enterprise en version bêta. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
-</div>
+{{< /alert >}}
 
 ## Créer un rôle personnalisé
 

@@ -4,7 +4,7 @@ kind: documentation
 description: Créer et gérer des incidents
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible pour le site gouvernemental de Datadog.</div>
+{{< alert >}}La fonctionnalité de gestion des incidents n'est pas disponible pour le site gouvernemental de Datadog.{{< /alert >}}
 {{< /site-region >}}
 
 Tout événement susceptible d'entraîner une interruption des services de votre organisation peut être considéré comme un incident, et il est souvent nécessaire d'avoir un système bien défini pour traiter ce genre d'événements. La fonctionnalité de gestion des incidents de Datadog fournit un système grâce auquel votre organisation peut identifier et réduire les incidents de manière efficace.

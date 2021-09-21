@@ -2,9 +2,9 @@
 title: クラウドワークロードセキュリティ
 kind: documentation
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 クラウドワークロードセキュリティは、現在<a href="https://app.datadoghq.com/security/configuration">公開ベータ版</a>です。
-</div>
+{{< /alert >}}
 
 ## 概要
 

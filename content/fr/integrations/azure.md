@@ -40,9 +40,9 @@ Associez Microsoft Azure pour :
 -   Appliquer un tag à vos machines virtuelles Azure comportant des informations spécifiques à Azure (p. ex, la localisation)
 -   Recueillir des métriques d'autres services : Application Gateway, App Service (Web et mobile), Batch Service, Event Hubs, IoT Hub, Logic App, Redis Cache, Server Farm (plan App Service), SQL Database, SQL Elastic Pool, Virtual Machine Scale Set, et bien d'autres encore.
 
-<div class="alert alert-warning">
+{{< alert >}}
 L'intégration Azure de Datadog est conçue pour recueillir <a href="https://docs.microsoft.com/fr-fr/azure/azure-monitor/platform/metrics-supported">TOUTES les métriques en provenance d'Azure Monitor</a>. Datadog s'efforce de mettre régulièrement à jour sa documentation afin d'inclure chaque sous-intégration. Toutefois, les métriques et les services proposés par les différents services cloud étant en permanente évolution, il est possible que la liste ne soit pas actuelle.<br>Les métriques <code>azure.*.status</code> et <code>azure.*.count</code> sont générées par Datadog à partir d'Azure Resource Health. <a href="https://docs.datadoghq.com/integrations/faq/azure-status-metric">En savoir plus sur ces métriques</a>.
-</div>
+{{< /alert >}}
 
 | Intégration                     | Description                                                                                               |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|

@@ -8,7 +8,7 @@ further_reading:
     text: Postgres インテグレーションの基本
 ---
 {{< site-region region="us3,gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+{{< alert >}}データベースモニタリングはこのサイトでサポートされていません。{{< /alert >}}
 {{< /site-region >}}
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。

@@ -27,9 +27,9 @@ short_description: Datadog のアラートとグラフをチームの Google Han
 version: '1.0'
 ---
 {{< site-region region="us3,eu,gov" >}}
-<div class="alert alert-warning">
+{{< alert >}}
   このインテグレーションは、米国のサイトを使用している Datadog のお客様にのみサポートされています。
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 ## 概要

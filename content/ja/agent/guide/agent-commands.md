@@ -10,9 +10,9 @@ further_reading:
     tag: Documentation
     text: Agent のトラブルシューティング
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 <code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">代替リストを参照してください</a>。
-</div>
+{{< /alert >}}
 
 ## Agent の起動/停止/再起動
 

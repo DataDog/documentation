@@ -126,7 +126,7 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 To automatically instrument applications hosted in IIS, completely stop IIS and then start it by running the following commands as an administrator:
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> You must use a stop and start command. A reset or restart command will not always work.
 </div>
 
@@ -454,7 +454,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 <div class="alert alert-warning">
   <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
-</div>
+{{< /alert >}}
 
 Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `AgentUri`) when changing settings in code.
 

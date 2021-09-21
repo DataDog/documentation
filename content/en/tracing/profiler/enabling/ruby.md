@@ -16,9 +16,9 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 Datadog Ruby Profiler is currently in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
+{{< /alert >}}
 
 The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 

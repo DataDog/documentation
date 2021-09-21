@@ -25,9 +25,9 @@ version: '1.0'
 
 Associez votre solution Google Cloud Platform pour visualiser tous vos hosts Google Compute Engine (GCE) dans Datadog. Vos hosts apparaissent dans l'aperçu de l'infrastructure de Datadog. Vous pouvez les trier grâce aux tags de host GCE et aux étiquettes GCE qui leur sont automatiquement attribués par Datadog.
 
-<div class="alert alert-warning">
+{{< alert >}}
 L'intégration GCP de Datadog est conçue pour recueillir <a href="https://cloud.google.com/monitoring/api/metrics_gcp">TOUTES les métriques en provenance de StackDriver</a>. Datadog s'efforce de mettre régulièrement à jour sa documentation afin d'inclure chaque sous-intégration. Toutefois, les métriques et les services proposés par les différents services cloud étant en permanente évolution, il est possible que la liste ne soit pas actuelle.
-</div>
+{{< /alert >}}
 
 | Intégration                       | Description                                                             |
 | --------------------------------- | ----------------------------------------------------------------------- |

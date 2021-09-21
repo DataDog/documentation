@@ -22,7 +22,7 @@ short_description: AWS サービス間で交わされるリクエストをトレ
 version: '1.0'
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
+{{< alert >}}Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。{{< /alert >}}
 
 {{< /site-region >}}
 ## 概要

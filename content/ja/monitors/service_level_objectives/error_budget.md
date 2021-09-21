@@ -3,9 +3,9 @@ title: エラーバジェットモニター
 kind: ドキュメント
 description: モニターを使用してサービスレベル目標 (SLO) を定義する
 ---
-<div class="alert alert-warning">
+{{< alert >}}
 この機能はオープンベータ版です。この機能へのアクセスリクエストやフィードバックは、<a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> までメールでお寄せください。
-</div>
+{{< /alert >}}
 
 ## 概要
 

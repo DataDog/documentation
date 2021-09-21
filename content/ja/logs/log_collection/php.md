@@ -443,9 +443,9 @@ monolog:
 
 ### Laravel
 
-<div class="alert alert-warning">
+{{< alert >}}
 注: 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
-</div>
+{{< /alert >}}
 
 ```php
 <?php

@@ -14,7 +14,7 @@ Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開�
 </div>
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PrivateLink は、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
+{{< alert >}}Datadog PrivateLink は、政府関係のサイトに対する Datadog の使用をサポートしていません。{{< /alert >}}
 {{< /site-region >}}
 
 このガイドでは Datadog で [AWS PrivateLink][1] を構成および使用する方法についてご説明します。

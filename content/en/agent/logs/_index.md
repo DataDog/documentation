@@ -44,9 +44,9 @@ After activating log collection, the Agent is ready to forward logs to Datadog. 
 
 To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][6] or [Docker Log Collection][7] documentation.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
-</div>
+{{< /alert >}}
 
 ## Custom log collection
 

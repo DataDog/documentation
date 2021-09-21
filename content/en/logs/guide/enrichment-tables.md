@@ -11,9 +11,9 @@ further_reading:
   text: "Learn more about parsing"
 ---
 
-<div class="alert alert-warning">
+{{< alert >}}
 The Enrichment Tables feature is currently in public beta. There are no billing implications for defining and querying enrichment tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-</div>
+{{< /alert >}}
 
 ## Overview
 

@@ -77,7 +77,7 @@ Datadog は、アーカイブからコンテンツをリハイドレートする
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+{{< alert >}}AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。{{< /alert >}}
 {{< /site-region >}}
 
 ログイベントをアーカイブからリハイドレートするために、Datadog は [AWS インテグレーション][1]で構成する AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順に従って作成してください][2]。このロールに対してアーカイブからのログイベントのリハイドレートを許可するには、以下のアクセス許可ステートメントを IAM ポリシーに追加する必要があります。バケット名を編集し、必要であればログアーカイブへのパスを指定してください。

@@ -397,7 +397,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Attention :</strong> les expressions régulières pour les logs multiligne doivent commencer au <em>début</em> d'un log. Elles ne peuvent pas être recherchées en milieu de ligne. <em>Une expression sans aucune correspondance peut entraîner la perte de la ligne de log.</em></div>
+{{< alert >}}<strong>Attention :</strong> les expressions régulières pour les logs multiligne doivent commencer au <em>début</em> d'un log. Elles ne peuvent pas être recherchées en milieu de ligne. <em>Une expression sans aucune correspondance peut entraîner la perte de la ligne de log.</em>{{< /alert >}}
 
 Exemples supplémentaires :
 

@@ -24,9 +24,9 @@ Logs might contain **sensitive information** that could either get [scrubbed][1]
 
 This guide provides a methodology in developing customized Datadog roles that allows users to access logs and log features in a compliant manner.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Creating and modifying custom roles is an opt-in feature. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
-</div>
+{{< /alert >}}
 
 ### Multiple teams
 
