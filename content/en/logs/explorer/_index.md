@@ -76,7 +76,7 @@ With fields aggregation, all logs matching the query filter are aggregated into 
 
 **Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#table) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#nested-tables) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
 ### Patterns
 
@@ -164,7 +164,7 @@ The following Timeseries log analytics shows the evolution of the **top 50 URL P
 
 Choose additional display options for timeseries: the **roll-up interval**, whether you **display** results as **bars** (recommended for counts and unique counts), **lines** (recommended for statistical aggregations) or **areas**, and the **colorset**.
 
-### Toplists
+### Toplist
 
 Visualize the top values from a [facet][2] according to the chosen [measure][2].
 

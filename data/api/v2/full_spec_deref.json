@@ -23751,6 +23751,7 @@
                           "high",
                           "critical"
                         ],
+                        "example": "critical",
                         "type": "string",
                         "x-enum-varnames": [
                           "INFO",
@@ -24140,6 +24141,7 @@
               "high",
               "critical"
             ],
+            "example": "critical",
             "type": "string",
             "x-enum-varnames": [
               "INFO",
@@ -24180,6 +24182,7 @@
               "high",
               "critical"
             ],
+            "example": "critical",
             "type": "string",
             "x-enum-varnames": [
               "INFO",
@@ -24229,6 +24232,7 @@
                     "high",
                     "critical"
                   ],
+                  "example": "critical",
                   "type": "string",
                   "x-enum-varnames": [
                     "INFO",
@@ -25069,6 +25073,7 @@
                     "high",
                     "critical"
                   ],
+                  "example": "critical",
                   "type": "string",
                   "x-enum-varnames": [
                     "INFO",
@@ -25412,6 +25417,7 @@
           "high",
           "critical"
         ],
+        "example": "critical",
         "type": "string",
         "x-enum-varnames": [
           "INFO",
@@ -25482,6 +25488,7 @@
                     "high",
                     "critical"
                   ],
+                  "example": "critical",
                   "type": "string",
                   "x-enum-varnames": [
                     "INFO",
@@ -54193,6 +54200,7 @@
                                     "high",
                                     "critical"
                                   ],
+                                  "example": "critical",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "INFO",
@@ -54644,6 +54652,7 @@
                             "high",
                             "critical"
                           ],
+                          "example": "critical",
                           "type": "string",
                           "x-enum-varnames": [
                             "INFO",
@@ -55008,6 +55017,7 @@
                               "high",
                               "critical"
                             ],
+                            "example": "critical",
                             "type": "string",
                             "x-enum-varnames": [
                               "INFO",
@@ -55578,6 +55588,7 @@
                               "high",
                               "critical"
                             ],
+                            "example": "critical",
                             "type": "string",
                             "x-enum-varnames": [
                               "INFO",
@@ -56012,6 +56023,7 @@
                             "high",
                             "critical"
                           ],
+                          "example": "critical",
                           "type": "string",
                           "x-enum-varnames": [
                             "INFO",
@@ -56348,6 +56360,7 @@
                               "high",
                               "critical"
                             ],
+                            "example": "critical",
                             "type": "string",
                             "x-enum-varnames": [
                               "INFO",

@@ -221,7 +221,7 @@ Input your bucket name. **Optional**: Input a prefix directory for all the conte
 
 By default:
 
-* All Datadog Admin users can create, edit and reorder (see [Configure Multiple Archives](#configure-multiple-archives) archives
+* All Datadog Admin users can create, edit and reorder (see [Configure Multiple Archives](#multiple-archives) archives
 * All Datadog Admin and Standard users can rehydrate from archives
 * All users, including Datadog Read Only users, can access rehydrated logs
 

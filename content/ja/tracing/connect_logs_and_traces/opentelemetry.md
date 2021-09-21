@@ -6,10 +6,10 @@ further_reading:
   - link: /tracing/setup_overview/open_standards/
     tag: Documentation
     text: OpenTelemetry トレースを Datadog へ送信
-  - link: 'https://opentelemetry.io/docs/collector/'
+  - link: https://opentelemetry.io/docs/collector/
     tag: OpenTelemetry
     text: Collectorドキュメント
-  - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
+  - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
     tag: ブログ
     text: Datadog と OpenTelemetry のパートナーシップ
   - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/

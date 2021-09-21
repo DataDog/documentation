@@ -117,7 +117,7 @@ Log Management タブにあるこの表には、インデックス名および�
 課金に関するご質問は、[カスタマーサクセス][6]マネージャーにお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /ja/metrics/custom_metrics/
+[2]: /ja/developers/metrics/custom_metrics/
 [3]: https://docs.datadoghq.com/ja/metrics/summary/#overview
 [4]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
 [5]: /ja/help/

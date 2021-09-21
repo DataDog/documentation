@@ -24,6 +24,8 @@ Metrics, events, and service checks collected by cluster checks are submitted wi
 
 This feature is supported on Kubernetes for versions 6.9.0+ of the Agent, and versions 1.2.0+ of the Cluster Agent.
 
+This strategy can be used if your infrastructure is configured for high availability (HA).
+
 ## Set up cluster checks
 
 ### Cluster Agent

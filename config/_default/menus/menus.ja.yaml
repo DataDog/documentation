@@ -5,106 +5,124 @@ main_left:
     weight: -500
   - identifier: features
     name: 機能
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='features icon'>"
+    pre: '<i class="icon-features align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/"
     weight: 1
     parent: product
   - identifier: integrations
     name: インテグレーション
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
+    pre: '<i class="icon-integrations align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/platform/integrations/"
     weight: 2
     parent: product
   - identifier: dashboarding
     name: ダッシュボード
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
+    pre: '<i class="icon-dashboard align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/platform/dashboards/"
     weight: 3
     parent: product
   - identifier: infrastructure
     name: インフラストラクチャーのモニタリング
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/host-map-2.svg' alt='infra icon'>"
+    pre: '<i class="icon-host-map align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/infrastructure-monitoring/"
     weight: 4
     parent: product
   - identifier: logs
     name: ログ管理
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
+    pre: '<i class="icon-log align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/log-management/"
     weight: 5
     parent: product
   - identifier: apm
     name: APM
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
+    pre: '<i class="icon-apm align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/apm/"
     weight: 6
     parent: product
   - identifier: profiler
     name: Continuous Profiler
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
+    pre: '<i class="icon-profiling-1 align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/code-profiling/"
     weight: 7
     parent: product
   - identifier: synthetics
     name: Synthetic モニタリング
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
+    pre: '<i class="icon-synthetics align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/synthetic-monitoring/"
     weight: 8
     parent: product
   - identifier: rum
     name: Real User Monitoring
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum-2.svg' alt='rum icon'>"
+    pre: '<i class="icon-rum align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/real-user-monitoring/"
     weight: 9
     parent: product
+  - identifier: network
+    name: ネットワークモニタリング
+    pre: '<i class="icon-network align-middle"></i>'
+    url: "https://www.datadoghq.com/ja/product/network-monitoring/"
+    weight: 10
+    parent: product
   - identifier: security-platform
     name: Security Platform
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    pre: '<i class="icon-security align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/security-platform/"
-    weight: 10
+    weight: 11
     parent: product
   - identifier: security-monitoring
     name: セキュリティモニタリング
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    pre: '<i class="icon-security align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/security-platform/security-monitoring/"
-    weight: 11
+    weight: 12
     parent: product
   - identifier: cloud-security-posture-management
     name: CSPM
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+    pre: '<i class="icon-security align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/"
-    weight: 12
-    parent: product
-  - identifier: network
-    name: ネットワークモニタリング
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
-    url: "https://www.datadoghq.com/ja/product/network-monitoring/"
     weight: 13
     parent: product
+  - identifier: cloud-workload-security
+    name: Cloud Workload Security
+    pre: '<i class="icon-cws align-middle"></i>'
+    url: 'product/security-platform/cloud-workload-security/'
+    weight: 14
+    parent: 'product'
+  - identifier: error-tracking
+    name: Error Tracking
+    pre: '<i class="icon-error-tracking align-middle"></i>'
+    url: 'product/security-platform/error-tracking/'
+    weight: 15
+    parent: 'product'
   - identifier: incident
     name: インシデント管理
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/incidents.svg' alt='incident icon'>"
-    url: "https://www.datadoghq.com/ja/product/incident-management/"
-    weight: 14
-    parent: product
+    pre: '<i class="icon-incidents align-middle"></i>'
+    url: 'product/incident-management'
+    weight: 16
+    parent: 'product'
+  - identifier: database
+    name: Database Monitoring
+    pre: '<i class="icon-dbm align-middle"></i>'
+    url: 'product/database-monitoring'
+    weight: 17
+    parent: 'product'
   - identifier: serverless
     name: サーバーレス
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
-    url: "https://www.datadoghq.com/ja/product/serverless-monitoring/"
-    weight: 15
-    parent: product
+    pre: '<i class="icon-serverless align-middle"></i>'
+    url: 'product/serverless-monitoring/'
+    weight: 18
+    parent: 'product'
   - identifier: alerts
     name: アラート
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert-1.svg' alt='alert icon'>"
-    url: "https://www.datadoghq.com/ja/product/platform/alerts/"
-    weight: 16
-    parent: product
+    pre: '<i class="icon-alert align-middle"></i>'
+    url: 'product/alerts/'
+    weight: 19
+    parent: 'product'
   - identifier: api
     name: API
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/datadoghq-api-icon-2.svg'' alt=''api icon''>'
+    pre: '<i class="icon-api align-middle"></i>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 17
-    parent: product
+    weight: 20
+    parent: 'product'
   - identifier: customers
     name: お客様
     url: "https://www.datadoghq.com/ja/customers/"
@@ -334,7 +352,7 @@ main:
   - name: はじめに
     identifier: getting_started
     url: getting_started/
-    pre: nav_start
+    pre: hex-ringed
     weight: 10000
   - name: Datadog
     identifier: getting_started_datadog
@@ -432,7 +450,7 @@ main:
     weight: 11
   - name: エージェント
     url: agent/
-    pre: nav_agent
+    pre: agent-fill
     weight: 30000
     identifier: agent
   - name: 基本的な Agent の利用方法
@@ -775,21 +793,21 @@ main:
   - name: インテグレーション
     url: integrations/
     identifier: integrations_top_level
-    pre: nav_integrations
+    pre: integrations
     weight: 40000
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
-    pre: nav_watchdog
+    pre: watchdog
     weight: 50000
   - name: イベント
     url: events/
     identifier: events_top_level
-    pre: nav_events
+    pre: events
     weight: 60000
   - name: ダッシュボード
     url: dashboards/
-    pre: nav_dashboards
+    pre: dashboard
     identifier: ダッシュボード
     weight: 70000
   - name: スクリーンボード
@@ -890,12 +908,12 @@ main:
   - name: モバイルアプリケーション
     url: mobile/
     identifier: モバイル
-    pre: nav_mobile
+    pre: mobile
     weight: 80000
   - name: インフラストラクチャー
     url: infrastructure/
     identifier: インフラストラクチャー
-    pre: nav_infrastructure
+    pre: host-map
     weight: 90000
   - name: インフラストラクチャーリスト
     url: infrastructure/list/
@@ -924,7 +942,7 @@ main:
     weight: 6
   - name: サーバーレス
     url: サーバーレス
-    pre: nav_serverless
+    pre: serverless
     identifier: サーバーレス
     weight: 100000
   - name: インストール
@@ -1066,7 +1084,7 @@ main:
   - name: メトリクス
     url: metrics/
     identifier: metrics_top_level
-    pre: nav_metrics
+    pre: metric
     weight: 110000
   - name: 高度なフィルタリング
     url: metrics/advanced-filtering/
@@ -1089,7 +1107,7 @@ main:
   - name: ノートブック
     url: notebooks/
     identifier: ノートブック
-    pre: nav_notebooks
+    pre: notebook
     weight: 120000
   - name: アラート設定
     url: monitors/
@@ -1237,7 +1255,7 @@ main:
     parent: アラート設定
   - name: APM と分散型トレーシング
     url: tracing/
-    pre: nav_tracing
+    pre: apm
     identifier: トレーシング
     weight: 140000
   - name: Datadog へトレースを送信
@@ -1645,7 +1663,7 @@ main:
     weight: 1505
   - name: ログ管理
     url: logs/
-    pre: nav_logs
+    pre: log
     identifier: log_management
     weight: 150000
   - name: ログの収集とインテグレーション
@@ -1797,7 +1815,7 @@ main:
     weight: 11
   - name: セキュリティ & コンプライアンス
     url: security_monitoring/
-    pre: nav_security_monitoring
+    pre: security
     identifier: security_compliance_monitoring
     weight: 160000
   - name: はじめに
@@ -1832,7 +1850,7 @@ main:
     weight: 5
   - name: Synthetic モニタリング
     url: synthetics/
-    pre: nav_synthetics
+    pre: synthetics
     identifier: synthetics
     weight: 170000
   - name: API テスト
@@ -1930,7 +1948,7 @@ main:
     weight: 12
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
-    pre: nav_rum_2
+    pre: rum
     identifier: rum
     weight: 150000
   - name: ブラウザのモニタリング
@@ -2055,7 +2073,7 @@ main:
     weight: 8
   - name: ネットワークモニタリング
     url: network_monitoring/
-    pre: nav_network
+    pre: network
     identifier: nm_parent
     weight: 190000
   - name: ネットワークパフォーマンスモニタリング
@@ -2120,7 +2138,7 @@ main:
     weight: 305
   - name: 開発ツール
     url: developers/
-    pre: nav_developers
+    pre: dev-code
     identifier: dev_tools
     weight: 200000
   - name: DogStatsD
@@ -2287,12 +2305,12 @@ main:
     weight: 12
   - name: API
     url: api/
-    pre: nav_api
+    pre: api
     identifier: api
     weight: 210000
   - name: アカウントの管理
     url: account_management/
-    pre: nav_account
+    pre: cog
     identifier: account_management
     weight: 220000
   - name: ユーザー管理
@@ -2365,7 +2383,7 @@ main:
     weight: 8
   - name: セキュリティ
     url: security/
-    pre: nav_security
+    pre: security
     identifier: security
     weight: 230000
   - name: エージェント
@@ -2386,7 +2404,7 @@ main:
     weight: 4
   - name: ヘルプ
     url: help/
-    pre: nav_help
+    pre: info-fill
     identifier: help_top_level
     weight: 240000
 footer_product:

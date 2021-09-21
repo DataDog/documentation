@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
+    - link: 'https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/'
+      tags: 'Blog'
+      text: 'Compare and optimize your code with Datadog Profile Comparison.'
 ---
 
 The Continuous Profiler can compare two profiles or profile aggregations with each other to help you identify code performance improvements, regressions, and structural changes. You can compare a profile with:

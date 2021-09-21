@@ -17,16 +17,21 @@ further_reading:
   text: "Run ICMP pings on internal endpoints"
 ---
 
-
 ## Overview
 
 ICMP tests allow you to easily monitor the availability of your hosts and diagnose network communication issues. By asserting on the values received from one or more ICMP pings to your endpoint, Datadog can help detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration. The tests can also track the number of network hops (TTL) required to connect to your host and view traceroute results to discover details on each network hop along the path.
 
 ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand, or from within your [CI/CD pipelines][3].
 
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][4] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of these two [default roles][4].
+
+If you have access to the [custom role feature][5], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
+After choosing to create an [`ICMP` test][6], define your test's request.
 
 ### Define request
 
@@ -36,7 +41,7 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
 2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
 6. Select the **Locations** to run your ICMP test from. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
@@ -83,7 +88,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][10].
+Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][8].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -91,9 +96,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define what messages to send to your teams and how to send them.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][9], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][10] and supports the following [conditional variables][11]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -134,7 +139,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
+You can use the [global variables defined in the `Settings`][12] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -144,7 +149,7 @@ To display your list of variables, type `{{` in your desired field:
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without being able to test the assertions against the endpoint. These reasons include:
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 ## Further Reading
 
@@ -152,14 +157,13 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /api/v1/synthetics/#create-a-test
-[4]: /synthetics/api_tests/http_tests
-[5]: /synthetics/api_tests/ssl_tests
-[6]: /synthetics/api_tests/tcp_tests
-[7]: /synthetics/api_tests/dns_tests
-[8]: /synthetics/api_tests/icmp_tests
-[9]: /synthetics/ci
-[10]: /monitors/notifications/?tab=is_alert#notification
-[11]: https://www.markdownguide.org/basic-syntax/
-[12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[13]: /synthetics/settings/#global-variables
+[3]: /synthetics/cicd_testing
+[4]: /account_management/rbac/
+[5]: /account_management/rbac#custom-roles
+[6]: /synthetics/api_tests/icmp_tests
+[7]: /synthetics/search/#search
+[8]: /api/v1/synthetics/#create-a-test
+[9]: /monitors/notifications/?tab=is_alert#notification
+[10]: https://www.markdownguide.org/basic-syntax/
+[11]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[12]: /synthetics/settings/#global-variables

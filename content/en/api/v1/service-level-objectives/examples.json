@@ -208,7 +208,7 @@
             {
               "id": "",
               "message": "",
-              "timeframe": "string"
+              "timeframe": "30d"
             }
           ]
         },
@@ -695,7 +695,7 @@
               "<any-key>": {
                 "target": 99.9,
                 "target_display": "99.9",
-                "timeframe": "string",
+                "timeframe": "30d",
                 "warning": 90,
                 "warning_display": "90.0"
               }
