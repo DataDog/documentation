@@ -51,7 +51,9 @@ For a full list of supported libraries and processor architectures, see [Compati
 ### Automatic instrumentation
 
 {{< alert >}}
-  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
+<strong>Notes:</strong><br>
+- Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.<br>
+- If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
 {{< /alert >}}
 
 #### Installing the tracer
@@ -128,7 +130,7 @@ To automatically instrument applications hosted in IIS, completely stop IIS and 
 
 {{< alert >}}
   <strong>Note:</strong> You must use a stop and start command. A reset or restart command will not always work.
-</div>
+{{< /alert >}}
 
 ```cmd
 net stop /y was
@@ -178,9 +180,9 @@ Name                       | Value
 `CORECLR_ENABLE_PROFILING` | `1`
 `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be instrumented. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
-</div>
+{{< /alert >}}
 
 {{% /tab %}}
 
@@ -188,9 +190,9 @@ Name                       | Value
 
 The following environment variables are required to enable automatic instrumentation:
 
-  <div class="alert alert-warning">
+  {{< alert >}}
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
-  </div>
+  {{< /alert >}}
 
   Name                       | Value
   ---------------------------|------
@@ -257,9 +259,9 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 
 #### `systemctl` (all services)
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> The .NET runtime tries to load a profiler into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be traced. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the profiler.</strong>
-</div>
+{{< /alert >}}
 
 When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
 
@@ -346,9 +348,9 @@ For other environments, please refer to the [Integrations][4] documentation for 
 
 ## Custom instrumentation
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
-</div>
+{{< /alert >}}
 
 To use custom instrumentation in your .NET application:
 1. Add the `Datadog.Trace` [NuGet package][2] to your application.
@@ -381,12 +383,12 @@ rem Launch application
 example.exe
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
 <strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above. 
 <br />
 <br />
 Because IIS runs all applications under one Windows Service, Datadog recommends you use another configuration option (Code, web.config, or JSON file) for application-specific settings such as <code>DD_SERVICE</code>.
-</div>
+{{< /alert >}}
 
 #### Linux
 
@@ -407,9 +409,9 @@ dotnet example.dll
 
 To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
-</div>
+{{< /alert >}}
 
 ```csharp
 using Datadog.Trace;
@@ -452,7 +454,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration settings
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
 {{< /alert >}}
 
