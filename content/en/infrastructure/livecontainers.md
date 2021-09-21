@@ -140,6 +140,7 @@ The following table presents the list of collected resources and the minimal Age
 | Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
+| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
@@ -202,6 +203,7 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
         - deployments
         - replicasets
         - daemonsets
+        - statefulsets
         verbs:
         - list
         - get
