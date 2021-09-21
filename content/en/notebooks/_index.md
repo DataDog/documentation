@@ -13,6 +13,9 @@ further_reading:
 - link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Create a Timeboard"
+- link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
+  tag: 'Blog'
+  text: 'Best practices for writing incident postmortems'
 ---
 
 ## Overview
