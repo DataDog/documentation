@@ -9,10 +9,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Envoyez des messages Amazon\_SNS à Datadog ou des alertes Datadog à SNS."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
 draft: false
 git_integration_title: amazon_sns
 has_logo: true
+integration_id: amazon-sns
 integration_title: Amazon SNS
 is_public: true
 kind: integration
@@ -52,9 +53,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte d'événements
 
-#### Recevoir des messages d'Amazon SNS dans le flux d'événements
+#### Recevoir les messages de SNS
 
-1. Dans la section Topics de la console de gestion SNS, sélectionnez la rubrique souhaitée et cliquez sur Create subscription.
+Pour recevoir les messages de SNS dans le flux d'événements Datadog :
+
+1. Dans la section Topics de la console de gestion SNS, sélectionnez la rubrique souhaitée et cliquez sur **Create subscription**.
 2. Sélectionnez https et saisissez l'URL Webhook suivante :
 
     ```text
@@ -65,9 +68,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     https://app.datadoghq.eu/intake/webhook/sns?api_key=<API KEY>
     ```
 
-3. N'activez pas « raw message delivery ».
+3. N'activez pas l'option « raw message delivery ».
 
-#### Envoyer des notifications SNS depuis Datadog
+#### Envoyer des notifications SNS
+
+Pour envoyer des notifications SNS depuis Datadog :
 
 1. Configurez le compte AWS associé à un service SNS sur le carré d'intégration AWS.
 2. [Installez l'intégration SNS][5].
@@ -107,11 +112,7 @@ L'intégration AWS SNS n'inclut aucun check de service.
 
 ## Dépannage
 
-### AWS GovCloud et AWS Chine
-
-Nous ne prenons actuellement pas en charge les notifications SNS envoyés depuis Datadog vers des rubriques dans GovCloud ou Chine.
-
-### Autres problèmes
+Datadog ne prend pas en charge les notifications SNS envoyées depuis Datadog vers des rubriques dans les régions GovCloud ou Chine.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 

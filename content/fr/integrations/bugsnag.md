@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez de manière centralisée l'évolution des taux d'erreur au sein de l'ensemble de vos applications
-doc_link: 'https://docs.datadoghq.com/integrations/bugsnag/'
+doc_link: https://docs.datadoghq.com/integrations/bugsnag/
 draft: false
 git_integration_title: bugsnag
 has_logo: true
