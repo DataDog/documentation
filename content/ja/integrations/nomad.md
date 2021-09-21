@@ -15,7 +15,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md'
 display_name: Nomad
 draft: false
 git_integration_title: nomad

@@ -10,7 +10,7 @@ further_reading:
   - link: /logs/guide/
     tag: ガイド
     text: Datadog を使用したロギングに関する追加ガイド
-  - link: https://learn.datadoghq.com
+  - link: 'https://learn.datadoghq.com'
     tag: ラーニング センター
     text: Datadog でのログ収集
 ---

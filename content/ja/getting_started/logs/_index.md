@@ -2,7 +2,7 @@
 title: ログの使用を開始する
 kind: documentation
 further_reading:
-  - link: https://learn.datadoghq.com/enrol/index.php?id=15
+  - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
     tag: ラーニングセンター
     text: Datadog でのログ収集
   - link: /logs/log_collection/
@@ -47,9 +47,9 @@ logs:
 
 3. [Datadog Agent を再起動][7]します。
 
-4. Datadog サイトのインテグレーション[起動手順][8]またはカスタムファイルのログ収集手順に従ってください。
+4. Datadog アプリのインテグレーション[起動手順][8]またはカスタムファイルのログ収集手順に従ってください。
 
-    **注**: カスタムファイルからログを収集していて、テールファイル、TCP/UDP、journald、Windows Events の例が必要な場合は、[カスタムログ収集][9]を参照してください。
+    **注**: カスタムファイルからログを収集していて、テールファイル、TCP/UDP、journald、Windows Events の例が必要な場合は、[カスタムログ収集のドキュメント][9]を参照してください。
 
 ### コンテナ
 
@@ -77,7 +77,7 @@ Datadog では、SDK やライブラリを使ってクライアントからロ�
 
 ### その他
 
-rsyslog、FluentD、Logstash などの既存のログサービスやユーティリティを使用している場合は、Datadog のプラグインやログ転送オプションをご利用いただけます。
+rsyslog、flutend、logstash などの既存のログサービスやユーティリティを使用している場合は、Datadog のプラグインやログ転送オプションをご利用いただけます。
 
 インテグレーションが表示されない場合は、*other integrations* ボックスに入力すると、そのインテグレーションが利用可能になったときに通知を受け取ることができます。
 

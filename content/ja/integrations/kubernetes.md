@@ -14,7 +14,7 @@ aliases:
 public_title: Datadog-Kubernetes インテグレーション
 short_description: Pod スケジュールイベントをキャプチャし、Kublets のステータスのトレースなどを実行します。
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md'
 categories:
   - cloud
   - configuration & deployment
@@ -25,10 +25,10 @@ doc_link: /integrations/kubernetes/
 ddtype: check
 integration_id: kubernetes
 further_reading:
-  - link: https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/
+  - link: 'https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/'
     tag: ブログ
     text: Kubernetes の保留中のポッドとスケジュールの失敗をデバッグする方法
-  - link: https://www.datadoghq.com/blog/monitoring-kubernetes-era
+  - link: 'https://www.datadoghq.com/blog/monitoring-kubernetes-era'
     tag: ブログ
     text: Kubernetes 時代のモニタリング
 ---
