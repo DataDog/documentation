@@ -163,7 +163,7 @@ Override the port that the default tracer submit traces to.
 
 `DD_TRACE_AGENT_URL`
 : The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
-  Example for http url: `localhost:8126`
+  Example for http url: `DD_TRACE_AGENT_URL=localhost:8126`
   Example for UDS: `DD_TRACE_AGENT_URL=unix:///var/run/datadog/dsd.socket`
 
 `DD_LOGS_INJECTION`
