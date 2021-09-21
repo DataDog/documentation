@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: "/getting_started/synthetics/api_test/"
+  tag: "Documentation"
+  text: "Get started with API tests"
 ---
 ## Overview
 
