@@ -2878,7 +2878,7 @@ main:
     url: account_management/saml/google/
     parent: account_management_saml
     weight: 404
-  - name: NoPassword
+  - name: LastPass
     url: account_management/saml/lastpass/
     parent: account_management_saml
     weight: 405
