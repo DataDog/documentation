@@ -52,11 +52,9 @@ To create an HTTP request step, click **Create Your First Step**.
 
 {{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
 
-**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
+**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase the limit.
 
 #### Define the request
-
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 1. **Name** your step.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
@@ -103,7 +101,9 @@ To create an HTTP request step, click **Create Your First Step**.
 
   {{< /tabs >}}
 
-Click **Test URL** to try out the request configuration. A response preview appears.
+Click on **Test URL** to try out the request configuration. A response preview appears.
+
+{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
@@ -118,9 +118,9 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 **Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
 #### Add execution parameters
 
@@ -139,10 +139,10 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][10], [JSONPath][8], or [XPath][9].
+    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][11].
 
-{{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 
@@ -152,7 +152,7 @@ Multistep API tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your Multistep API test.
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
 * [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your teams.
