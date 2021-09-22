@@ -58,7 +58,7 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 {{< alert >}}
   <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li><li> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.</li></ul>
-</div>
+{{< /alert >}}
 
 Follow these instructions to begin tracing .NET applications:
 
@@ -74,9 +74,9 @@ To start tracing an application hosted in IIS:
 
 4. Stop, then start IIS using the following commands as an administrator:
 
-    <div class="alert alert-warning">
+    {{< alert >}}
       <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
-    </div>
+    {{< /alert >}}
 
     ```text
     net stop /y was
@@ -95,9 +95,9 @@ To enable automatic instrumentation on Windows applications not in IIS, you must
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> The .NET runtime tries to load a profiler into any .NET process started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. Don't set these environment variables globally because this causes all .NET processes on the host to load the profiler.
-</div>
+{{< /alert >}}
 
 ##### Windows services
 To automatically instrument a Windows service, set the `COR_ENABLE_PROFILING` and `COR_PROFILER` environment variables:
@@ -141,9 +141,9 @@ Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" 
 
 ## Custom instrumentation
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, it is important to keep the package versions (for example, MSI and NuGet) in sync.
-</div>
+{{< /alert >}}
 
 To use custom instrumentation in your .NET application:
 1. Add the `Datadog.Trace` [NuGet package][5] to your application.
@@ -176,9 +176,9 @@ rem Launch application
 example.exe
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
 <strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above.
-</div>
+{{< /alert >}}
 
 {{% /tab %}}
 
@@ -186,7 +186,7 @@ example.exe
 
 To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
 {{< /alert >}}
 
