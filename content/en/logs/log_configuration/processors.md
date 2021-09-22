@@ -92,7 +92,9 @@ If your logs put their dates in an attribute not in this list, use the log date 
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-If your logs don't have a timestamp that conforms to the above listed formats, use the grok processor to first extract the epoch time from the timestamp to a new attribute followed by date remapper that uses the newly defined attribute. [Following examples][8] demonstrate how a custom date time format can be parsed in Datadog.
+If your logs don't have a timestamp that conforms to the formats listed above, use the grok processor to extract the epoch time from the timestamp to a new attribute. The date remapper uses the newly defined attribute. 
+
+To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][8].
 
 **Note**:
 
