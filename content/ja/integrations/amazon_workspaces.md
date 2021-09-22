@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/
 draft: false
 git_integration_title: amazon_workspaces
 has_logo: true

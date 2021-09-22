@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure Cognitive\_Search."
-doc_link: https://docs.datadoghq.com/integrations/azure_search/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_search/'
 draft: false
 git_integration_title: azure_search
 has_logo: true

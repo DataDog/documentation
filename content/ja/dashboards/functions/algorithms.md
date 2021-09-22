@@ -8,7 +8,7 @@ aliases:
 
 | 関数      | 説明                                                                                | 例                                                    |
 | :----         | :-------                                                                                   | :---------                                                 |
-| `anomalies()` | 過去から予測される系列の挙動を示す灰色の帯をメトリクスに重ねて表示します。 | `anomalies(METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
+| `anomalies()` | 過去から予測される系列の挙動を示す灰色の帯をメトリクスに重ねて表示します。 | `anomalies(<METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
 
 `anomalies()` 関数は 2 つのパラメーターを持ちます。
 
@@ -35,7 +35,7 @@ aliases:
 * `TOLERANCE`: 外れ値アルゴリズムの許容範囲
 * `PERCENTAGE`: 系列を外れ値とするために必要な外れポイントの割合 (MAD および scaledMAD アルゴリズムのみ)
 
-{{< img src="dashboards/functions/algorithms/outlier.mp4" alt="外れ値の検出" video="true"  width="70%" >}}
+{{< img src="dashboards/functions/algorithms/outlier.mp4" alt="外れ値の検出" video="true" width="70%" >}}
 
 詳細については、[外れ値モニター][2]のページを参照してください。
 
@@ -50,9 +50,9 @@ aliases:
 * `ALGORITHM`: 使用する予測アルゴリズム。`linear` または `seasonal` を選択します。これらのアルゴリズムの詳細については、[予測値アルゴリズム][3]のセクションを参照してください。
 * `DEVIATIONS`: 予測値の範囲の幅。この値を 1 ～ 2 にすると、大半の「正常」ポイントを正確に予測できます。
 
-予測値は独自に視覚化されるため、多数のグラフ作成オプションは非表示になります。**予測値**が正常に追加されると、エディターは以下のように表示されます。
+予測値は独自に視覚化されるため、複数のグラフ作成オプションは非表示になります。**予測値**が正常に追加されると、エディターは以下のように表示されます。
 
-{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="クエリエディター"  style="width:80%;">}}
+{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="クエリエディター" style="width:80%;">}}
 
 ## その他の関数
 
