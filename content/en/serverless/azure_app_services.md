@@ -139,7 +139,7 @@ Datadog provides automatic scripts with which you can update or install the Azur
 - The [Azure CLI][18] or [Azure Cloud Shell][19].
 - Azure App Service [user-scope credentials][20]. If you do not already have credentials, go to your [Azure portal][21] and access the App Service instance (Web App or Function App). Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
 
-### Installing the extension for the first time
+### Installing the extension for the first time {#powershell-first-time}
 
 The install script adds the latest version of the extension to an Azure Web App or Azure Function App. This occurs on a per-instance basis, rather than at a resource group level.
 
@@ -158,13 +158,14 @@ The install script adds the latest version of the extension to an Azure Web App 
 
 **Note**: The following arguments are required for the above command:
 
-- `USERNAME`
-- `PASSWORD`
-- `SUBSCRIPTION_ID`
-- `RESOURCE_GROUP_NAME`
-- `SITE_NAME`: The name of your app.
-- `DATADOG_API_KEY`: Your [Datadog API key][12].
-- `DATADOG_SITE`: Your [Datadog site][22]. Your site is: {{< region-param key="dd_site" code="true" >}}
+- `<USERNAME>`: Your Azure user scope username.
+- `<PASSWORD>`: Your Azure user scope password.
+- `<SUBSCRIPTION_ID>`: Your Azure [subscription ID][22].
+- `<RESOURCE_GROUP_NAME>`: Your Azure resource group name.
+- `<SITE_NAME>`: The name of your app.
+- `<DATADOG_API_KEY>`: Your [Datadog API key][12].
+
+Also, set `DATADOG_SITE` to your [Datadog site][23]. `DATADOG_SITE` defaults to `datadoghq.com`. Your site is: {{< region-param key="dd_site" code="true" >}}.
 
 ### Updating the extension for a resource group {#powershell-resource-group}
 
@@ -185,6 +186,28 @@ The update script applies to an entire resource group. This script updates every
 
 ### Installing a specific version of the extension
 
+The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
+
+#### Update a single instance
+
+To install a specific version on a single instance, follow the [instructions for installing the extension for the first time](#powershell-first-time) and add the `-ExtensionVersion` parameter to the installation command.
+
+```
+.\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -ExtensionVersion <EXTENSION_VERSION>
+```
+
+Replace `<EXTENSION_VERSION>` with the version of the extension you wish to install. For instance, `1.4.0`.
+
+#### Updating an entire resource group
+
+To install a specific version for a resource group, follow the [instructions for updating the extension for a resource group](#powershell-resource-group) and add the `-ExtensionVersion` parameter to the installation command.
+
+```
+.\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD> -ExtensionVersion <EXTENSION_VERSION>
+```
+
+Replace `<EXTENSION_VERSION>` with the version of the extension you wish to install. For instance, `1.4.0`.
+
 ## Troubleshooting
 
 1. If you are missing metrics and metadata in the APM trace panel and service page:
@@ -200,7 +223,7 @@ b. Ensure that any App Service Plan filtering rules you may have applied include
 a. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
 b. Do a full stop and start of your application.
 c. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
-d. Still need help? Contact [Datadog support][23].
+d. Still need help? Contact [Datadog support][24].
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
@@ -230,5 +253,6 @@ d. Still need help? Contact [Datadog support][23].
 [19]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
 [20]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
 [21]: https://portal.azure.com/
-[22]: /getting_started/site/
-[23]: /help
+[22]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
+[23]: /getting_started/site/
+[24]: /help
