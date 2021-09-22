@@ -74,7 +74,7 @@ AWS Lambda is the FaaS platform provided by Amazon Web Services. See the [AWS La
 {{% /tab %}}
 {{% tab "Azure Functions" %}}
 
-Azure Functions is the FaaS platform provided by Microsoft Azure. See the [Microsoft Azure Functions documentation][1] for more details.
+Azure Functions is the FaaS platform provided by Microsoft Azure. See the [Microsoft Azure Functions documentation][11] for more details.
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -87,15 +87,15 @@ Azure Functions is the FaaS platform provided by Microsoft Azure. See the [Micro
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Azure App Service view][2]      | Datadog's offering for monitoring Azure App Services resources.                            |
+| [Azure App Service view][12]      | Datadog's offering for monitoring Azure App Services resources.                            |
 
 
-[1]: https://docs.microsoft.com/en-us/azure/azure-functions/
-[2]: https://app.datadoghq.com/functions
+[11]: https://docs.microsoft.com/en-us/azure/azure-functions/
+[12]: https://app.datadoghq.com/functions
 {{% /tab %}}
 {{% tab "Google Cloud Functions" %}}
 
-Cloud Functions is Google's serverless execution environment. See the [Google Cloud Functions documentation][11] for more details.
+Cloud Functions is Google's serverless execution environment. See the [Google Cloud Functions documentation][13] for more details.
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -103,5 +103,6 @@ Cloud Functions is Google's serverless execution environment. See the [Google Cl
 | Azure App Service          | A hostiing service for building web applications, services, and APIs.                               |
 | Azure Resource Manager (ARM) template          | A JSON document that defines the infrastructure and configuration for your project.                         |
 
+[13]: https://cloud.google.com/functions/docs
 {{% /tab %}}
 {{< /tabs >}}
