@@ -136,8 +136,8 @@ Datadog provides automatic scripts with which you can update or install the Azur
 
 ### Prerequisites
 
-- The [Azure CLI][19] or [Azure Cloud Shell][20].
-- Azure App Service [user-scope credentials][21]. If you do not already have credentials, go to your [Azure portal][22] and access the App Service instance (Web App or Function App). Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
+- The [Azure CLI][18] or [Azure Cloud Shell][19].
+- Azure App Service [user-scope credentials][20]. If you do not already have credentials, go to your [Azure portal][21] and access the App Service instance (Web App or Function App). Navigate to **Deployment** > **Deployment Center** to create or retrieve your user-scope credentials.
 
 ### Installing the extension for the first time
 
@@ -145,13 +145,16 @@ The install script adds the latest version of the extension to an Azure Web App 
 
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
-    {{< code-block lang="bash" >}}
+
+    ```
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
-    {{</ code-block >}}
+    ```
+
 3. Run the following command, passing in required arguments and any others as needed.
-    {{< code-block lang="bash" >}}
+
+    ```
     .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION>
-    {{</ code-block >}}
+    ```
 
 **Note**: The following arguments are required for the above command:
 
@@ -160,8 +163,8 @@ The install script adds the latest version of the extension to an Azure Web App 
 - `SUBSCRIPTION_ID`
 - `RESOURCE_GROUP_NAME`
 - `SITE_NAME`: The name of your app.
-- `DATADOG_API_KEY`: Your [Datadog API key][24].
-- `DATADOG_SITE`: Your [Datadog site][23]. Your site is: {{< region-param key="dd_site" code="true" >}}
+- `DATADOG_API_KEY`: Your [Datadog API key][12].
+- `DATADOG_SITE`: Your [Datadog site][22]. Your site is: {{< region-param key="dd_site" code="true" >}}
 
 ### Updating the extension for a resource group {#powershell-resource-group}
 
@@ -170,15 +173,15 @@ The update script applies to an entire resource group. This script updates every
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
 
-    {{< code-block lang="bash" >}}
+    ```
     $baseUri="https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension"; Invoke-WebRequest -Uri "$baseUri/update-all-site-extensions.ps1" -OutFile "update-all-site-extensions.ps1"; Invoke-WebRequest -Uri "$baseUri/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
-    {{</ code-block >}}
+    ```
 
 3. Run the following command. All arguments are required.
 
-    {{< code-block lang="bash" >}}
+    ```
     .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
-    {{</ code-block >}}
+    ```
 
 ### Installing a specific version of the extension
 
@@ -197,7 +200,7 @@ b. Ensure that any App Service Plan filtering rules you may have applied include
 a. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
 b. Do a full stop and start of your application.
 c. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
-d. Still need help? Contact [Datadog support][18].
+d. Still need help? Contact [Datadog support][23].
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
@@ -223,10 +226,9 @@ d. Still need help? Contact [Datadog support][18].
 [15]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [16]: /developers/dogstatsd/?tab=net#code
 [17]: /metrics/
-[18]: /help
-[19]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[20]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[21]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
-[22]: https://portal.azure.com/
-[23]: /getting_started/site/
-[24]: https://app.datadoghq.com/account/settings#api
+[18]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+[19]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
+[20]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
+[21]: https://portal.azure.com/
+[22]: /getting_started/site/
+[23]: /help
