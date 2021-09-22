@@ -9,7 +9,7 @@ further_reading:
     text: 複数のアカウントを持つチームとオーガニゼーションの構成
 ---
 {{< site-region region="gov" >}}
-{{< alert >}}Datadog for Government site では、SAML ログインのみがサポートされます。</div>
+{{< alert >}}Datadog for Government site では、SAML ログインのみがサポートされます。{{< /alert >}}
 {{< /site-region >}}
 
 **このドキュメントは、SAML ID プロバイダー (IdP) が既に稼働中であることを前提としています。**
@@ -66,7 +66,7 @@ Access Management アクセス許可を持つユーザーは、ユーザーの S
 
 指定された ID プロバイダー属性を持つユーザーがログインすると、自動的に Datadog ロールが割り当てられます。同様に、ユーザーの ID プロバイダー属性が削除されると、ロールへのアクセスも失います（別のマッピングが追加された場合を除く）。
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>重要:</strong> いずれのマッピングにも一致<i>しない</i>ユーザーは、それまで割り当てられていたロールを失い、SAML でオーガニゼーションにログインできなくなります。マッピング定義をよく確認してください。
 {{< /alert >}}
 

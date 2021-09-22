@@ -61,7 +61,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 {{< alert >}}
   <strong>注:</strong> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
-</div>
+{{< /alert >}}
 
 {{< tabs >}}
 
@@ -133,9 +133,9 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 IIS でホストされるアプリケーションを自動でインスツルメントするには、管理者として次のコマンドを実行して IIS を完全に停止してから起動します。
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>注:</strong> 停止および開始コマンドを使用する必要があります。リセットまたはリスタートコマンドは動作しないことがあります。
-</div>
+{{< /alert >}}
 
 ```cmd
 net stop /y was
@@ -185,9 +185,9 @@ dotnet.exe example.dll
 `CORECLR_ENABLE_PROFILING` | `1`
 `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された .NET プロセスにプロファイラーをロードしようとします。インスツルメンテーションは、インスツルメントする必要のあるアプリケーションのみに制限する必要があります。これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上のすべての .NET プロセスがプロファイラーをロードします。
-</div>
+{{< /alert >}}
 
 {{% /tab %}}
 
@@ -195,9 +195,9 @@ dotnet.exe example.dll
 
 自動インスツルメンテーションを有効にするには、次の環境変数が必要です。
 
-  <div class="alert alert-info">
+  {{< alert type="info" >}}
       <strong>注:</strong> .NET トレーサーがデフォルトの <code>/opt/datadog</code> パス以外のパスにインストールされている場合は、パスが一致するよう変更してください。
-  </div>
+  {{< /alert >}}
 
   名前                       | 値
   ---------------------------|------
@@ -264,9 +264,9 @@ Linux Docker コンテナに必要な環境変数を設定するには
 
 #### `systemctl` (all services)
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された<em>あらゆる</em> .NET プロセスにプロファイラーをロードしようとします。インスツルメンテーションは、トレースする必要のあるアプリケーションのみに制限する必要があります。<strong>これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上の<em>すべての</em> .NET プロセスがプロファイラーをロードします。</strong>
-</div>
+{{< /alert >}}
 
 `systemctl` を使用して .NET アプリケーションをサービスとして実行する場合、`systemctl` によって実行されるすべてのサービスに対してロードされる環境変数を設定することもできます。
 
@@ -291,9 +291,9 @@ Linux Docker コンテナに必要な環境変数を設定するには
 
 ## カスタムインスツルメンテーション
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>注:</strong> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
-</div>
+{{< /alert >}}
 
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
 1. `Datadog.Trace` [NuGet パッケージ][3]をアプリケーションに追加します。
@@ -409,9 +409,9 @@ dotnet example.dll
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` を作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>注:</strong> 設定は、<code>トレーサー</code>を作成する<em>前</em>に <code>TracerSettings</code> で設定する必要があります。<code>トレーサー</code>の作成後に <code>TracerSettings</code> プロパティに加えられた変更は無視されます。
-</div>
+{{< /alert >}}
 
 ```csharp
 using Datadog.Trace;
@@ -457,7 +457,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 ### コンフィギュレーション設定
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
   <strong>注:</strong> Linux では、環境変数の名前では大文字と小文字が区別されます。
 {{< /alert >}}
 

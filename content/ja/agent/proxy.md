@@ -37,7 +37,7 @@ Agent `datadog.yaml` コンフィギュレーションファイルで、`https` 
 ログ収集が有効になっている場合は、特定のトランスポートが<a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">強制</a>されていることを確認してください。
 推奨セットアップは HTTPS を使用することです。その場合、メトリクスのプロキシに使用される <code>&ltHOST&gt;:&ltPORT&gt;</code> がログのプロキシに使用されます。
 TCP トランスポートを使用している場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。
-</div>
+{{< /alert >}}
 
 すべての `https` リクエストに対して HTTP プロキシを設定する例
 
@@ -119,7 +119,7 @@ Agent は、これらの値を以下の優先順で使用します。
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-<div class="alert alert-warning">
+{{< alert >}}
 メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
 {{< /alert >}}
 

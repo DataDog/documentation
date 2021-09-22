@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="us3,gov" >}}
-{{< alert >}}Database Monitoring is not supported for this site.</div>
+{{< alert >}}Database Monitoring is not supported for this site.{{< /alert >}}
 {{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -201,7 +201,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+{{< alert >}}<strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.{{< /alert >}}
 
 
 2. [Restart the Agent][2].
@@ -257,7 +257,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
+{{< alert >}}<strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.{{< /alert >}}
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
@@ -358,7 +358,7 @@ spec:
     targetPort: 5432
     name: postgres
 ```
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.{{< /alert >}}
+{{< alert >}}<strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.{{< /alert >}}
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 

@@ -33,9 +33,9 @@ DataDog は、すべての主要なプログラミング言語について、[�
 
 StatsD や DogStatsD のクライアントが、デフォルトで 1 つのデータグラムごとに 1 つのメトリクスを送信する場合がありますが、これによりクライアントやオペレーティングシステム、そして Agent のオーバーヘッドは非常に高くなります。複数のメトリクスを 1 つのダイアグラムにバッファリングできるようにクライアントを作成し、このオプションを有効にすることで問題を著しく改善できます。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 バッファリングをサポートする、コミュニティサポートの DogStatsD クライアントを使用している場合、Agent 側のデータごとのバッファサイズ (デフォルトで 8KB、<code>dogstatsd_buffer_size</code> を使用して Agent で構成可能) およびネットワーク/OS の最大データグラムサイズを超えない最大データグラムサイズを構成するようにしてください。
-</div>
+{{< /alert >}}
 
 [DogStatsD が公式にサポートするクライアント][3]の例をご紹介します。
 
@@ -87,7 +87,7 @@ with dsd:
 
 {{< alert >}}
   デフォルトでは、Python DogStatsD クライアントインスタンス (<code>statsd</code> グローバルインスタンスを含む) はプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>disable_buffering</code> を <code>True</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、<a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> のドキュメントを参照してください。
-</div>
+{{< /alert >}}
 
 
 [1]: https://github.com/DataDog/datadogpy
@@ -108,9 +108,9 @@ statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
 statsd.flush(sync: true)
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
   デフォルトでは、Ruby DogStatsD クライアントインスタンスはプロセス間で共有できませんが、スレッドセーフです。このため、親プロセスと各子プロセスは、クライアントの独自のインスタンスを作成するか、<code>single_thread</code> を <code>true</code> に設定してバッファリングを明示的に無効にする必要があります。詳細については、GitHub の <a href="https://github.com/DataDog/dogstatsd-ruby">dogstatsd-ruby リポジトリ</a>を参照してください。
-</div>
+{{< /alert >}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
@@ -293,13 +293,13 @@ Kubernetes を使用して Agent や DogStatsD をデプロイしていて、上
 
 DogStatsD クライアントが `dogstatsd_buffer_size` のサイズのパケットを送信する場合、Datadog Agent が最も最適に動作します。パケットはバッファサイズより大きくしてはなりません。そうでない場合、Agent はパケットをバッファに完全にロードできず、メトリクスが不正になります。DogStatsD クライアントの対応するコンフィギュレーションフィールドを使用します。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
   <strong>UDP に関する注意</strong>: UDP パケットは通常 Ethernet および IP レイヤーを通過するため、パケットサイズをネットワーク上の単一の Ethernet フレームよりも小さい値に制限することにより、IP パケットの断片化を回避できます。ほとんどの場合、IPv4 ネットワークは 1500 バイトの MTU で構成されているため、この状況では送信パケットのパケットサイズを 1472 に制限する必要があります。
-</div>
+{{< /alert >}}
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
   <strong>UDS に関する注意</strong>: 最高のパフォーマンスを得るには、UDS パケットサイズを 8192 バイトにする必要があります。
-</div>
+{{< /alert >}}
 
 ### Agent の最大メモリ使用量を制限する
 
@@ -309,9 +309,9 @@ Agent は、DogStatsD クライアントから送信されたメトリクスの�
 
 最大メモリ使用量を制限するために注意すべきもう 1 つのことは、バッファリングを減らすことです。Agent 内の DogStatsD サーバーのメインバッファは、`dogstatsd_queue_size` フィールドで構成できます (Datadog Agent 6.1.0 以降)。そのデフォルト値の `1024` は、およその最大メモリ使用量である 768MB を引き起こします。
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>注</strong>: バッファサイズを小さくすると、パケットドロップの数が増える可能性があります。
-</div>
+{{< /alert >}}
 
 この例では、DogStatsD の最大メモリ使用量を約 384MB に減らします。
 
@@ -325,7 +325,7 @@ dogstatsd_queue_size: 512
 
 DogStatsD には、どのメトリクスが最も多く処理されたかを把握するのに役立つ統計モードが搭載されています。
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>注</strong>: メトリクス統計モードを有効にすると、DogStatsD のパフォーマンスが低下する可能性があります。
 {{< /alert >}}
 

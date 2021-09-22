@@ -31,7 +31,7 @@ Datadog Agent v6.4+ を使用すると、Datadog Agent のバージョンアッ�
 
 {{< alert >}}
   構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
-</div>
+{{< /alert >}}
 
 この例のカスタムチェックは、メトリクス `hello.world` の値 `1` を送信します。構成ファイルに実際の情報は含まれませんが、少なくとも 1 つのマッピングからなる `instances` という名前のシーケンスを含む必要があります。このマッピングは空でもかまいません。`conf.d/hello.yaml` は以下のようになります。
 
@@ -134,7 +134,7 @@ $ vgs -o vg_free
 out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
     チェックを実行する Python インタープリターは、マルチスレッド Go ランタイムに埋め込まれるため、Python 標準ライブラリにある <code>subprocess</code> または <code>multithreading</code> モジュールの使用は、Agent バージョン 6 以降では<em>サポートされていません</em>。
 {{< /alert >}}
 

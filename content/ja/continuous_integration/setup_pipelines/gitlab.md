@@ -66,7 +66,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 次に、インスツルメントするプロジェクトごとに **Settings > Integrations > Datadog** に移動して、[プロジェクト][3]でインテグレーションを構成します。
 
-{{< alert >}}<strong>注</strong>: GitLab の初期バージョンの<a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">バグ</a>により、GitLab の UI でオプションが使用可能であっても、<strong>GitLab バージョン 14.1 未満</strong>では<strong>グループまたはインスタンス</strong>レベルで Datadog インテグレーションを有効にできません。</div>
+{{< alert >}}<strong>注</strong>: GitLab の初期バージョンの<a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">バグ</a>により、GitLab の UI でオプションが使用可能であっても、<strong>GitLab バージョン 14.1 未満</strong>では<strong>グループまたはインスタンス</strong>レベルで Datadog インテグレーションを有効にできません。{{< /alert >}}
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
@@ -107,7 +107,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 ネイティブの Datadog インテグレーションを使用する代わりに、[Webhook][1] を使用してパイプラインデータを Datadog に送信できます。
 
-<div class="alert alert-info"><strong>注</strong>: ネイティブの Datadog インテグレーションは、推奨されるアプローチであり、積極的に開発中のオプションです。{{< /alert >}}
+{{< alert type="info" >}}<strong>注</strong>: ネイティブの Datadog インテグレーションは、推奨されるアプローチであり、積極的に開発中のオプションです。{{< /alert >}}
 
 リポジトリ (または GitLab インスタンス設定) の **Settings > Webhooks** に移動し、新しい Webhook を追加します。
 {{< site-region region="us" >}}

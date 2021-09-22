@@ -47,7 +47,7 @@ Pour obtenir la liste complète des bibliothèques prises en charge, consultez l
 
 {{< alert >}} 
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, il est essentiel que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
-</div>
+{{< /alert >}}
 
 ### Installation
 
@@ -136,9 +136,9 @@ Nom                       | Valeur
 `CORECLR_ENABLE_PROFILING` | `1`
 `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
-<div class="alert alert-warning"> 
+{{< alert >}}
   <strong>Remarque :</strong> lorsque ces variables d'environnement sont définies, le runtime .NET tente de charger un profileur dans n'importe quel processus .NET démarré. Assurez-vous de limiter l'instrumentation aux applications devant être tracées. Ne définissez pas ces variables d'environnement globalement, au risque d'activer le chargement du profileur par tous les processus .NET sur le host.
-</div>
+{{< /alert >}}
 
 ##### Services Windows
 
@@ -190,9 +190,9 @@ dotnet.exe example.dll
 
 4. Les variables d'environnement suivantes sont requises pour activer l'instrumentation automatique sous Linux :
 
-    <div class="alert alert-info"> 
+    {{< alert type="info" >}} 
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
-    </div>
+    {{< /alert >}}
 
     Nom                       | Valeur
     ---------------------------|------
@@ -259,9 +259,9 @@ Lorsque vous utilisez la commande `systemctl` pour exécuter des applications .N
 
 #### SystemCTL (tous les services)
 
-<div class="alert alert-warning"> 
+{{< alert >}}
   <strong>Remarque :</strong> lorsque ces variables d'environnement sont définies, le runtime .NET tente de charger un profileur dans <em>tous</em> les processus .NET démarrés. Assurez-vous de limiter l'instrumentation aux applications devant être tracées. <strong>Ne définissez pas ces variables d'environnement globalement, au risque d'activer le chargement du profileur par <em>tous</em> les processus .NET sur le host.</strong>
-</div>
+{{< /alert >}}
 
 Lorsque vous utilisez la commande `systemctl` pour exécuter des applications .NET en tant que service, vous pouvez également faire en sorte que les variables d'environnement soient chargées pour tous les services exécutés par `systemctl`.
 
@@ -290,9 +290,9 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
 
 ## Instrumentation personnalisée
 
-<div class="alert alert-warning"> 
+{{< alert >}}
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, il est essentiel que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
-</div>
+{{< /alert >}}
 
 Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 1. Ajoutez le [package NuGet][2] `Datadog.Trace` à votre application.
@@ -348,9 +348,9 @@ dotnet example.dll
 
 Pour configurer le traceur dans le code de l'application, créez un `TracerSettings` à partir des sources de configuration par défaut. Définissez les propriétés de cette instance `TracerSettings` avant de la transmettre à un constructeur `Tracer`. Par exemple :
 
-<div class="alert alert-warning"> 
+{{< alert >}}
   <strong>Remarque :</strong> les paramètres doivent être définis sur <code>TracerSettings</code> <em>avant</em> la création de <code>Tracer</code>. Toute modification apportée aux propriétés <code>TracerSettings</code> après la création de <code>Tracer</code> sera ignorée.
-</div>
+{{< /alert >}}
 
 ```csharp
 using Datadog.Trace;
@@ -396,7 +396,7 @@ Pour configurer le traceur à l'aide d'un fichier JSON, créez `datadog.json` da
 
 ### Paramètres de configuration
 
-<div class="alert alert-info"> 
+{{< alert type="info" >}}
   <strong>Remarque :</strong> sous Linux, les noms des variables d'environnement sont sensibles à la casse.
 {{< /alert >}}
 

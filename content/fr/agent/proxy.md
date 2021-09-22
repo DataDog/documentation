@@ -37,7 +37,7 @@ Définissez différents serveurs de proxy pour les requêtes `https` et `http` d
 Si la collecte de logs est activée, assurez-vous qu'un transport spécifique est <a href="/agent/logs/log_transport?tab=https#imposer-un-transport-specifique">imposé</a>.
 Il est conseillé d'utiliser le transport HTTPS. Dans ce cas, le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour transmettre via proxy des métriques est également utilisé pour transmettre via proxy des logs.
 Si vous utilisez le transport TCP, consultez la page relative au <a href="/agent/logs/proxy">proxy TCP pour les logs</a>.
-</div>
+{{< /alert >}}
 
 Définir un proxy HTTP pour toutes les requêtes `https` :
 
@@ -118,7 +118,7 @@ L'Agent utilise les valeurs suivantes par ordre de priorité :
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-<div class="alert alert-warning">
+{{< alert >}}
 Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
 {{< /alert >}}
 

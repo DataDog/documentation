@@ -1,1 +1,1 @@
-<div class="alert alert-warning">{{ .Inner }}</div>
+<div class="alert {{ with .Get `type` }}alert-{{ . }}{{ else }}alert-warning{{ end }}">{{ .Inner }}</div>

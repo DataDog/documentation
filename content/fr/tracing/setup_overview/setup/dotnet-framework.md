@@ -49,7 +49,7 @@ Le traceur .NET prend en charge l'instrumentation automatique sur .NET Framework
 
 {{< alert >}} 
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, il est essentiel que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
-</div>
+{{< /alert >}}
 
 Suivez les instructions suivantes pour commencer à tracer des applications .NET :
 
@@ -65,9 +65,9 @@ Pour commencer à tracer une application hébergée dans IIS :
 
 4. Arrêtez puis redémarrez IIS à l'aide des commandes suivantes en tant qu'administrateur : 
 
-    <div class="alert alert-warning"> 
+    {{< alert >}} 
       <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
-    </div>
+    {{< /alert >}}
 
     ```text
     net stop /y was
@@ -86,9 +86,9 @@ Pour activer l'instrumentation automatique sur des applications Windows qui ne s
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>Remarque :</strong> lorsque ces variables d'environnement sont définies, le runtime .NET tente de charger un profileur dans n'importe quel processus .NET démarré. Assurez-vous de limiter l'instrumentation aux applications devant être tracées. Ne définissez pas ces variables d'environnement globalement, au risque d'activer le chargement du profileur par tous les processus .NET sur le host.
-</div>
+{{< /alert >}}
 
 ##### Services Windows
 Pour instrumenter automatiquement un service Windows, définissez les variables d'environnement `COR_ENABLE_PROFILING` et `COR_PROFILER` :
@@ -132,9 +132,9 @@ Veillez à définir `DD_SITE` dans l'Agent Datadog sur {{< region-param key="dd_
 
 ## Instrumentation personnalisée
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, il est essentiel que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
-</div>
+{{< /alert >}}
 
 Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
@@ -168,9 +168,9 @@ rem Lancer l'application
 example.exe
 ```
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
 <strong>Remarque :</strong> pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes <code>HKLM\System\CurrentControlSet\Services\{nom du service}\Environment</code> dans le registre Windows, tel que précédemment décrit.
-</div>
+{{< /alert >}}
 
 {{% /tab %}}
 
@@ -178,7 +178,7 @@ example.exe
 
 Pour configurer le traceur dans le code de l'application, créez une instance `TracerSettings` à partir des sources de configuration par défaut. Définissez les propriétés de cette instance `TracerSettings` avant de la transmettre à un constructeur `Tracer`. Par exemple :
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>Remarque :</strong> les paramètres doivent être définis sur <code>TracerSettings</code> <em>avant</em> la création de <code>Tracer</code>. Toute modification apportée aux propriétés <code>TracerSettings</code> après la création de <code>Tracer</code> sera ignorée.
 {{< /alert >}}
 

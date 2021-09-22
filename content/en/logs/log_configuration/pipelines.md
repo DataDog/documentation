@@ -86,7 +86,7 @@ Specify alternate attributes to use as the source of a log's date by setting a [
 
 {{< alert >}}
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
-</div>
+{{< /alert >}}
 
 
 [1]: /logs/log_configuration/processors/#log-date-remapper
@@ -166,7 +166,7 @@ An example of a log transformed by a pipeline:
 
 ### Integration pipelines
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 See the <a href="/integrations/#cat-log-collection">list of supported integrations</a>.
 {{< /alert >}}
 

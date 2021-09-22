@@ -67,7 +67,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-{{< alert >}}<strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
+{{< alert >}}<strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI{{< /alert >}}
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
@@ -108,7 +108,7 @@ You can test the integration with the **Test settings** button (only available w
 
 As an alternative to using the native Datadog integration, you can use [webhooks][1] to send pipeline data to Datadog.
 
-<div class="alert alert-info"><strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.{{< /alert >}}
+{{< alert type="info" >}}<strong>Note</strong>: The native Datadog integration is the recommended approach and the option that is actively under development.{{< /alert >}}
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 {{< site-region region="us" >}}

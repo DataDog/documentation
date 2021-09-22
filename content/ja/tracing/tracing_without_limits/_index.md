@@ -10,7 +10,7 @@ description: "Live Analytics、取り込みルール、保持フィルターの�
 
 {{< alert >}}
 Live Analytics、取り込みルール、カスタム保持フィルターのベータ版を使用している場合は、<a href="https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/?tab=java#trace-sampling">トレースサンプリングガイド</a>の代わりにこちらの手順を使用してください。
-</div>
+{{< /alert >}}
 
 [トレース検索と分析][1]を使用すると、任意のスパンの任意のタグを使用して、取り込まれたかインデックス化されたすべてのスパンを検索できます。Live (過去 15 分間、ローリング) モードまたは Historical (すべてのインデックス化されたスパン) モードのどちらを使用しているかに応じて、クエリの実行に使用されるデータは変化します。
 
@@ -74,9 +74,9 @@ Historical Search モードでは、検索されるデータは、インデッ�
 
 ### Live Analytics モード
 
-<div class="alert alert-warning">
+{{< alert >}}
 これらの機能は現在非公開ベータ版です。<a href="https://forms.gle/1FParyX49eNFPDsg9">フォームに記入</a>して、ベータ版への追加をリクエストしてください。
-</div>
+{{< /alert >}}
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
 
@@ -112,7 +112,7 @@ Historical Analytics モードには、Live Analytics モードと同じ方法�
 
 Tracing without Limits™ を使用すると、Datadog へのトレースの取り込みとそのトレースの 15 日間のインデックス化の両方を完全にカスタマイズできます。
 
-<div class="alert alert-warning">
+{{< alert >}}
 これらの機能は現在ベータ版です。ベータ版への追加については、<a href="https://docs.datadoghq.com/help/">サポートにご連絡ください</a>。
 {{< /alert >}}
 

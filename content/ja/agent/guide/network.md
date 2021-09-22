@@ -19,7 +19,7 @@ further_reading:
 ---
 {{< alert >}}
 トラフィックは、常に Agent から Datadog の方向に開始されます。Datadog から Agent の方向にセッションが開始されることはありません。
-</div>
+{{< /alert >}}
 
 ## 概要
 
@@ -105,7 +105,7 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 
 ## ポートのオープン
 
-<div class="alert alert-warning">
+{{< alert >}}
 すべての送信トラフィックは、TCP / UDP を介して SSL で送信されます。
 {{< /alert >}}
 

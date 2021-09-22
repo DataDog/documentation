@@ -31,7 +31,7 @@ Commencez par vérifier que l'[Agent][3] est bien installé. Si vous avez le moi
 
 {{< alert >}}
   Vos fichiers de configuration et de check doivent avoir le même nom. Si votre check s'appelle <code>mycheck.py</code>, votre fichier de configuration <em>doit</em> s'appeler <code>mycheck.yaml</code>.
-</div>
+{{< /alert >}}
 
 Dans cet exemple, le check custom renvoie la valeur `1` pour la métrique `hello.world`. Le fichier de configuration n'inclut aucune information précise, mais il doit comprendre une séquence `instances` comprenant au moins un mappage, qui peut être vide. Voici ce qui est indiqué dans le fichier `conf.d/hello.yaml` :
 
@@ -134,7 +134,7 @@ doit être transmise à `get_subprocess_output()` comme suit :
 out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
     Étant donné que l'interpréteur Python qui exécute les checks est intégré à l'environnement d'exécution Go multithread, les modules <code>subprocess</code> ou <code>multithreading</code> de la bibliothèque Python standard <em>ne sont pas pris en charge</em> dans la version 6 et les versions ultérieures de l'Agent.
 {{< /alert >}}
 

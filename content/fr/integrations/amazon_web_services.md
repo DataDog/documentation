@@ -38,7 +38,7 @@ Associez Amazon Web Services (AWS) pour :
 
 {{< alert >}}
 L'intégration Amazon de Datadog est conçue pour recueillir <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html">TOUTES les métriques en provenance de CloudWatch</a>. Datadog s'efforce de mettre régulièrement à jour sa documentation afin d'inclure chaque sous-intégration. Toutefois, les métriques et les services proposés par les différents services cloud étant en permanente évolution, il est possible que la liste ne soit pas actuelle.
-</div>
+{{< /alert >}}
 
 | Intégration                             | Description                                                                            |
 | --------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -116,7 +116,7 @@ L'intégration Amazon de Datadog est conçue pour recueillir <a href="https://do
 ## Configuration
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de <a href="?tab=clésdaccèsgovcloudouchineuniquement#configuration">clés d'accès</a>.{{< /alert >}}
+{{< alert >}}La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de <a href="?tab=clésdaccèsgovcloudouchineuniquement#configuration">clés d'accès</a>.{{< /alert >}}
 {{< /site-region >}}
 
 Choisissez l'une des méthodes suivantes pour intégrer vos comptes AWS dans Datadog afin de collecter des métriques, des traces et des logs :

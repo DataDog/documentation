@@ -43,7 +43,7 @@ supported_os:
 このチェックは、Datadog Agent を通じて [Snowflake][1] を監視します。Snowflake は SaaS 分析データウェアハウスであり、完全にクラウドインフラストラクチャー上で実行されます。
 このインテグレーションにより、クレジットの使用状況、請求、ストレージ、クエリメトリクスなどが監視されます。
 
-<div class="alert alert-info"><bold>注: メトリクスは Snowflake へのクエリを介して収集されます。Datadog インテグレーションによるクエリは、Snowflake によって課金されます。</bold></div>
+{{< alert type="info" >}}<bold>注: メトリクスは Snowflake へのクエリを介して収集されます。Datadog インテグレーションによるクエリは、Snowflake によって課金されます。</bold>{{< /alert >}}
 
 ## セットアップ
 
@@ -62,10 +62,10 @@ Snowflake チェックは [Datadog Agent][2] パッケージに含まれてい�
 ```text
 datadog-agent integration install datadog-snowflake==2.0.1
 ```
-</div>
+{{< /alert >}}
 
 ### コンフィギュレーション
-<div class="alert alert-warning">Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。</div>
+{{< alert >}}Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。{{< /alert >}}
 
 1. Snowflake を監視するための Datadog 固有のロールとユーザーを作成します。Snowflake で、以下を実行して、ACCOUNT_USAGE スキーマにアクセスできるカスタムロールを作成します。
 
@@ -149,7 +149,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
+    {{< alert type="info" >}}By default, the <code>min_collection_interval</code> is 1 hour. 
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.{{< /alert >}}
 

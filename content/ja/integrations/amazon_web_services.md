@@ -37,7 +37,7 @@ Amazon Web Services (AWS) を接続すると、次のことができるように
 
 {{< alert >}}
 Datadog の Amazon インテグレーションは、<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html">CloudWatch からすべてのメトリクス</a> を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
-</div>
+{{< /alert >}}
 
 | インテグレーション                             | 説明                                                                            |
 | --------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -112,7 +112,7 @@ Datadog の Amazon インテグレーションは、<a href="https://docs.aws.am
 ## セットアップ
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS のロール委任は、Datadog for Government site でサポートされていません。<a href="?tab=accesskeysgovcloudorchinaonly#setup">アクセスキー</a>を使用する必要があります。{{< /alert >}}
+{{< alert >}}AWS のロール委任は、Datadog for Government site でサポートされていません。<a href="?tab=accesskeysgovcloudorchinaonly#setup">アクセスキー</a>を使用する必要があります。{{< /alert >}}
 {{< /site-region >}}
 
 以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、トレース、ログを収集します。

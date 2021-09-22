@@ -38,7 +38,7 @@ Set different proxy servers for `https` and `http` requests in your Agent `datad
 If log collection is enabled, make sure that a specific transport is <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">enforced</a>.
 The recommended setup is to use HTTPS. In that case, the <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics is used to proxy logs.
 If you are using TCP transport, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
-</div>
+{{< /alert >}}
 
 Setting an HTTP proxy for all `https` requests:
 
@@ -120,7 +120,7 @@ The Agent uses the following values in order of precedence:
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-<div class="alert alert-warning">
+{{< alert >}}
 The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
 {{< /alert >}}
 

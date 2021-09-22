@@ -20,7 +20,7 @@ further_reading:
 
 {{< alert >}}
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
-</div>
+{{< /alert >}}
 
 ## Overview
 
@@ -106,7 +106,7 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 ## Open ports
 
-<div class="alert alert-warning">
+{{< alert >}}
 All outbound traffic is sent over SSL through TCP / UDP.
 {{< /alert >}}
 

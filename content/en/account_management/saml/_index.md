@@ -9,7 +9,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 {{< site-region region="gov" >}}
-{{< alert >}}The Datadog for Government site only supports SAML login.</div>
+{{< alert >}}The Datadog for Government site only supports SAML login.{{< /alert >}}
 {{< /site-region >}}
 
 ## Overview
@@ -114,7 +114,7 @@ It’s important to understand what is sent in an assertion before turning on ma
 
 When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it).
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions.
 {{< /alert >}}
 

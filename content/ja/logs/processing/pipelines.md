@@ -135,7 +135,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 {{< alert >}}
 認識される日付の形式は、<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒エポック形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。
-</div>
+{{< /alert >}}
 
 #### メッセージ属性
 
@@ -174,7 +174,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 ### インテグレーションパイプライン
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 サポートされているインテグレーションのリストは、<a href="/integrations/#cat-log-collection">こちら</a>でご確認ください。
 {{< /alert >}}
 

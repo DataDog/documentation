@@ -358,7 +358,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 <strong>Deprecation notice:</strong> As of version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a> the legacy setting <code>DD_TRACE_RESOURCE_URI_MAPPING</code> is deprecated. It still works for the foreseeable future but it is strongly encouraged that you use the new settings outlined in this paragraph to avoid issues when legacy support is removed.
 
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
-</div>
+{{< /alert >}}
 
 For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
@@ -667,9 +667,9 @@ If no core dump was generated, check the following configurations and change the
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 <strong>Note</strong>: An application that runs through Valgrind is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
-</div>
+{{< /alert >}}
 
 Install Valgrind with your package manager. Run the application with Valgrind enough to generate a few requests.
 
@@ -731,7 +731,7 @@ The resulting Valgrind trace is printed by default to the standard error, follow
 
 Some issues are caused by external factors, so it can be valuable to have a `strace`.
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 <strong>Note</strong>: An application that runs through <code>strace</code> is orders of magnitude slower than when running natively. This method is recommended for non-production environments.
 {{< /alert >}}
 

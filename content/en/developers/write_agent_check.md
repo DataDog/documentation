@@ -32,7 +32,7 @@ First, ensure the [Agent][3] is properly installed. If you run into any issues d
 
 {{< alert >}}
   The names of the configuration and check files must match. If your check is called <code>mycheck.py</code>, your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
-</div>
+{{< /alert >}}
 
 In this example, the custom check sends a value of `1` for the metric `hello.world`. The configuration file includes no real information but it is necessary to include a sequence called `instances` containing at least one mapping, that can be empty. This goes in `conf.d/hello.yaml`:
 
@@ -135,7 +135,7 @@ must be passed to `get_subprocess_output()` like this:
 out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
 ```
 
-<div class="alert alert-warning">
+{{< alert >}}
     Since the Python interpreter that runs the checks is embedded in the multi-threaded Go runtime, using the <code>subprocess</code> or <code>multithreading</code> modules from the Python standard library <em>is not supported</em> in Agent version 6 and later.
 {{< /alert >}}
 

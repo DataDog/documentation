@@ -49,7 +49,7 @@ further_reading:
 
 {{< alert >}} 
   <strong>注:</strong>  自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
-</div>
+{{< /alert >}}
 
 次の手順に従って .NET アプリケーションのトレーシングを開始します。
 
@@ -65,9 +65,9 @@ IIS でホストされているアプリケーションのトレースを開始�
 
 4. 管理者として次のコマンドに従って、IIS を停止してから起動します。
 
-    <div class="alert alert-warning"> 
+    {{< alert >}} 
       <strong>Note:</strong> You must use a stop and start command. This is not the same as a reset or restart command.
-    </div>
+    {{< /alert >}}
 
     ```text
     net stop /y was
@@ -86,9 +86,9 @@ IIS に存在しない Windows アプリケーションの自動インスツル�
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始されたあらゆる .NET プロセスにプロファイラーをロードしようとします。インスツルメンテーションは、トレースする必要のあるアプリケーションのみに制限する必要があります。これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上のすべての .NET プロセスがプロファイラーをロードします。
-</div>
+{{< /alert >}}
 
 ##### Windows サービス
 Windows サービスを自動的にインスツルメントするには、`COR_ENABLE_PROFILING` および `COR_PROFILER` 環境変数を設定します。
@@ -132,9 +132,9 @@ example.exe
 
 ## カスタムインスツルメンテーション
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>注:</strong>  自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持することが重要です。
-</div>
+{{< /alert >}}
 
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
 
@@ -168,9 +168,9 @@ rem Launch application
 example.exe
 ```
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
 <strong>注:</strong> Windows Service に対して環境変数を設定するには、上記のように Windows レジストリで複数文字列キー<code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> を使います。
-</div>
+{{< /alert >}}
 
 {{% /tab %}}
 
@@ -178,7 +178,7 @@ example.exe
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
 
-<div class="alert alert-warning"> 
+{{< alert >}} 
   <strong>注:</strong> 設定は、<code>トレーサー</code>を作成する<em>前</em>に <code>TracerSettings</code> で設定する必要があります。<code>トレーサー</code>の作成後に <code>TracerSettings</code> プロパティに加えられた変更は無視されます。
 {{< /alert >}}
 

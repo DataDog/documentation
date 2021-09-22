@@ -9,7 +9,7 @@ further_reading:
     text: Configurer des équipes et organisations avec plusieurs comptes
 ---
 {{< site-region region="gov" >}}
-{{< alert >}}Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+{{< alert >}}Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.{{< /alert >}}
 {{< /site-region >}}
 
 **Cette documentation suppose que vous disposez déjà d’un fournisseur d’identité SAML opérationnel.**
@@ -64,7 +64,7 @@ Les utilisateurs disposant de l'autorisation de gestion des accès peuvent attri
 
 Lorsqu’un utilisateur disposant de l’attribut de fournisseur d’identité spécifié se connecte, il se voit automatiquement attribuer le rôle Datadog. De la même façon, si ce même attribut de fournisseur d’identité est supprimé d’un utilisateur, ce dernier perd ce rôle (sauf si un autre mappage l’ajoute).
 
-<div class="alert alert-warning">
+{{< alert >}}
   <strong>Important :</strong> si un utilisateur ne correspond à <i>aucun</i> mappage, il perd tous les rôles dont il disposait et ne peut plus se connecter à l'organisation avec SAML. Vérifiez bien les définitions de vos mappages.
 {{< /alert >}}
 

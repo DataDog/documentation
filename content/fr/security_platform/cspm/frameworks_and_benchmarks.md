@@ -12,11 +12,11 @@ further_reading:
 {{< site-region region="us" >}}
 {{< alert >}}
 La solution Cloud Security Posture Management est actuellement en <a href="https://app.datadoghq.com/security/configuration">version bêta publique</a>.
-</div>
+{{< /alert >}}
 {{< /site-region >}}
 
 {{< site-region region="us3,gov,eu" >}}
-<div class="alert alert-warning">
+{{< alert >}}
 La solution Cloud Security Posture Management n'est pas actuellement disponible dans les régions US1-FED, US3 et EU.
 {{< /alert >}}
 {{< /site-region >}}

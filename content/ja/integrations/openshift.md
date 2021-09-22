@@ -91,7 +91,7 @@ agents:
 
 {{< alert >}}
 <bold>OpenShift 4.0+</bold>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストタグとエイリアスを取得するために、<code>datadog.yaml</code>コンフィギュレーションファイルに <code>hostNetwork: true</code> を定義して Agent をデプロイする必要があります。定義しないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
-</div>
+{{< /alert >}}
 
 [1]: https://docs.openshift.com/enterprise/3.0/admin_guide/manage_scc.html
 {{% /tab %}}
@@ -133,11 +133,11 @@ SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t
 - `volumes: hostPath`: メトリクス収集に必要な、Docker ソケット、およびホストの `proc` と `cgroup` フォルダーへのアクセスを許可します。
 - `SELinux type: spc_t`: メトリクス収集に必要な Docker ソケット、およびすべてのプロセスの `proc` と `cgroup` フォルダーへのアクセスを許可します。このタイプについて詳しくは、[Red Hat による記事][7]を参照してください。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 新しく作成した <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">datadog-agent SCC</a> に、<a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">datadog-agent サービスアカウント</a>を追加することを忘れないでください。それには、<code>system:serviceaccount:<datadog-agent namespace>:<datadog-agent service account name></code> を <code>users</code> セクションに追加する必要があります。
-</div>
+{{< /alert >}}
 
-<div class="alert alert-warning">
+{{< alert >}}
 <b>OpenShift 4.0+</b>: OpenShift インストーラーを、サポート対象のクラウドプロバイダーで使用した場合は、ホストのタグとエイリアスを取得するために、<code>datadog.yaml</code>コンフィギュレーションファイルに <code>allowHostNetwork: true</code> を定義して Agent をデプロイする必要があります。定義しないと、ポッドのネットワークからメタデータサーバーへのアクセスが制限されます。
 {{< /alert >}}
 

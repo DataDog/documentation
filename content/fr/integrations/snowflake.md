@@ -43,7 +43,7 @@ supported_os:
 Ce check permet de surveiller [Snowflake][1] via l'Agent Datadog. Snowflake est un entrepôt de données analytique fourni en tant que SaaS et s'exécute entièrement sur une infrastructure cloud. 
 Cette intégration permet de surveiller l'utilisation des crédits, la facturation, le stockage, l'historique des requêtes et bien plus encore.
 
-<div class="alert alert-info"><bold>REMARQUE : les métriques sont collectées par le biais de requêtes envoyées à Snowflake. Les requêtes transmises par l'intégration Datadog sont facturables par Snowflake.</bold></div>
+{{< alert type="info" >}}<bold>REMARQUE : les métriques sont collectées par le biais de requêtes envoyées à Snowflake. Les requêtes transmises par l'intégration Datadog sont facturables par Snowflake.</bold>{{< /alert >}}
 
 ## Configuration
 
@@ -62,10 +62,10 @@ Pour mettre à niveau l'intégration, utilisez <a href=https://docs.datadoghq.co
 ```text
 datadog-agent integration install datadog-snowflake==2.0.1
 ```
-</div>
+{{< /alert >}}
 
 ### Configuration
-<div class="alert alert-warning">Snowflake recommande d'accorder des autorisations à un rôle alternatif tel que `SYSADMIN`. En savoir plus sur le contrôle <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users"> du rôle ACCOUNTADMIN</a> (en anglais).</div>
+{{< alert >}}Snowflake recommande d'accorder des autorisations à un rôle alternatif tel que `SYSADMIN`. En savoir plus sur le contrôle <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users"> du rôle ACCOUNTADMIN</a> (en anglais).{{< /alert >}}
 
 1. Créez un rôle et un utilisateur spécifiques Datadog pour surveiller Snowflake. Dans Snowflake, exécutez les commandes suivantes pour créer un rôle personnalisé ayant accès au schéma ACCOUNT_USAGE.
 
@@ -144,7 +144,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
         min_collection_interval: 3600
     ```
 
-    <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
+    {{< alert type="info" >}}By default, the <code>min_collection_interval</code> is 1 hour. 
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.{{< /alert >}}
 

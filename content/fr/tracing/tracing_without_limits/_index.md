@@ -10,7 +10,7 @@ description: "Documentation bêta pour Live Analytics, les règles d'ingestion e
 
 {{< alert >}}
 Si vous utilisez la version bêta de Live Analytics, des règles d'ingestion et des filtres de rétention personnalisés, suivez ces instructions au lieu du <a href="https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/?tab=java#echantillonnage-de-traces">guide d'échantillonnage de traces</a>.
-</div>
+{{< /alert >}}
 
 La fonctionnalité [Analyse et recherche de traces][1] vous permet de rechercher parmi toutes les spans ingérées ou indexées à l'aide de n'importe quel tag sur n'importe quelle span. Les données utilisées pour vos requêtes dépendent du mode sélectionné : Live (15 dernières minutes) ou Historical (toutes les spans indexées).
 
@@ -74,9 +74,9 @@ Vous pouvez personnaliser les spans qui sont indexées et leurs taux de rétenti
 
 ### Mode Live Analytics
 
-<div class="alert alert-warning">
+{{< alert >}}
 Ces fonctionnalités sont actuellement en version bêta privée. <a href="https://forms.gle/1FParyX49eNFPDsg9">Remplissez le formulaire</a> pour demander à être ajouté à la bêta.
-</div>
+{{< /alert >}}
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Chemin du tracing" >}}
 
@@ -112,7 +112,7 @@ Vous pouvez personnaliser les spans qui sont indexées et leurs taux de rétenti
 
 Avec Tracing without Limits™, l'ingestion de traces dans Datadog et l'indexation de ces traces pendant 15 jours sont totalement personnalisables.
 
-<div class="alert alert-warning">
+{{< alert >}}
 Ces fonctionnalités sont actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> pour être ajouté à la version bêta.
 {{< /alert >}}
 

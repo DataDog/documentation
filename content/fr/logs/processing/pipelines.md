@@ -135,7 +135,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour la
 
 {{< alert >}}
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a> et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC 3164</a>.
-</div>
+{{< /alert >}}
 
 #### Attribut message
 
@@ -174,7 +174,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'
 
 ### Pipelines d'intégration
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Consultez la <a href="/integrations/#cat-log-collection">liste des intégrations prises en charge disponibles</a>.
 {{< /alert >}}
 
