@@ -8,6 +8,7 @@
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public",
         "start": "run-p start:**",
+        "start:build-js": "make build-js",
         "start:hugo": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache",
         "prebuild": "rimraf public",
         "build": "run-s build:hugo",

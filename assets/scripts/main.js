@@ -1,3 +1,4 @@
+import 'bootstrap';
 import './api-redirect';
 import './datadog-docs';
 import './components/dd-browser-logs-rum';
