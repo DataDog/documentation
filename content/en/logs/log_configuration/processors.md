@@ -92,6 +92,8 @@ If your logs put their dates in an attribute not in this list, use the log date 
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
+If your logs don't have a timestamp that conforms to the above listed formats, use the grok processor to first extract the epoch time from the timestamp to a new attribute followed by date remapper that uses the newly defined attribute. [Following examples][8] demonstrate how a custom date time format can be parsed in Datadog.
+
 **Note**:
 
 * **Log events can be submitted up to 18h in the past and 2h in the future**.
@@ -763,3 +765,4 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [5]: /logs/search_syntax/
 [6]: /logs/guide/enrichment-tables/
 [7]: /tracing/connect_logs_and_traces/
+[8]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
