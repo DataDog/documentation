@@ -169,10 +169,13 @@ The update script applies to an entire resource group. This script updates every
 
 1. Open the Azure CLI or Azure Cloud Shell.
 2. Download the installation script using the following command:
+
     {{< code-block lang="bash" >}}
     $baseUri="https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension"; Invoke-WebRequest -Uri "$baseUri/update-all-site-extensions.ps1" -OutFile "update-all-site-extensions.ps1"; Invoke-WebRequest -Uri "$baseUri/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
     {{</ code-block >}}
+
 3. Run the following command. All arguments are required.
+
     {{< code-block lang="bash" >}}
     .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
     {{</ code-block >}}
