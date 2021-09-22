@@ -166,7 +166,7 @@ If you have access to the [custom role feature][12], add your user to any custom
 [3]: /synthetics/api_tests/tcp_tests
 [4]: /synthetics/search/#search
 [5]: /synthetics/cicd_testing
-[6]: /api/v1/synthetics/#create-a-test
+[6]: /api/latest/synthetics/#edit-an-api-test
 [7]: /monitors/notifications/?tab=is_alert#notification
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

@@ -183,7 +183,7 @@ If you have access to the [custom role feature][14], add your user to any custom
 [4]: /synthetics/search/#search
 [5]: /synthetics/cicd_testing
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /api/v1/synthetics/#create-a-test
+[7]: /api/latest/synthetics/#edit-an-api-test
 [8]: /monitors/notifications/?tab=is_alert#notification
 [9]: https://www.markdownguide.org/basic-syntax/
 [10]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

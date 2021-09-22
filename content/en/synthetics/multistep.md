@@ -269,7 +269,7 @@ If you have access to the [custom role feature][18], add your user to any custom
 [8]: https://restfulapi.net/json-jsonpath/
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/v1/synthetics/#create-a-test
+[11]: /api/latest/synthetics/#edit-an-api-test
 [12]: /monitors/notifications/?tab=is_alert#notification
 [13]: http://daringfireball.net/projects/markdown/syntax
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
