@@ -102,7 +102,7 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict-access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict-access2.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
@@ -120,7 +120,7 @@ Define which endpoints should be sent the APM headers by adding a URL into this 
 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
-If the endpoint is being traced and allowed, your browser test results are automatically tied to its corresponding trace.
+If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
 ### Tag enforcement
 
@@ -138,9 +138,9 @@ For more information, see [Usage Attribution][13].
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][11]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][12], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
 
 ## Further Reading
 
