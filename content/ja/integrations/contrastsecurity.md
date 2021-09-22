@@ -10,7 +10,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md'
 display_name: contrastsecurity
 draft: false
 git_integration_title: contrastsecurity

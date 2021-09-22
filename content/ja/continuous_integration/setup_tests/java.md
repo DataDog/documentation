@@ -12,21 +12,9 @@ further_reading:
 ## 互換性
 
 サポートされているテストフレームワーク:
-* JUnit 4.10+
-* JUnit 5.3+
-* TestNG 6.4+
-* Spock Framework および Cucumber-Junit など、JUnit ベースのフレームワーク
-
-サポートされている CI プロバイダー:
-* Appveyor
-* Azure Pipelines
-* BitBucket
-* BuildKite
-* CircleCI
-* GitHub Actions
-* GitLab
-* Jenkins
-* TravisCI
+* JUnit >= 4.10 および >= 5.3
+  * Spock Framework や Cucumber-Junit などの JUnit に基づくテストフレームワークも含まれます
+* TestNG >= 6.4
 
 ## 前提条件
 
@@ -34,66 +22,81 @@ further_reading:
 
 ## Java トレーサーのインストール
 
-### Maven
+{{< tabs >}}
+{{% tab "Maven" %}}
 
-ルートの `pom.xml` に新しい Maven プロファイルを追加し、Datadog Java トレーサーの依存関係と `javaagent` arg のプロパティを構成します。その際に、`$VERSION` を [Maven リポジトリ][2]からアクセス可能なトレーサーの最新のバージョンで置き換えます:
+ルートの `pom.xml` に新しい Maven プロファイルを追加し、Datadog Java トレーサーの依存関係と `javaagent` arg のプロパティを構成します。その際に、`$VERSION` を [Maven リポジトリ][1]からアクセス可能なトレーサーの最新のバージョンで置き換えます (先行する `v` なし): ![Maven Central][2]
 
-{{< code-block lang="xml" >}}
+{{< code-block lang="xml" filename="pom.xml" >}}
 <profile>
-  <id>ci-app</id>
+  <id>dd-civisibility</id>
   <activation>
     <activeByDefault>false</activeByDefault>
   </activation>
-
   <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar</dd.java.agent.arg>
+    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true</dd.java.agent.arg>
   </properties>
-
   <dependencies>
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-java-agent</artifactId>
         <version>$VERSION</version>
         <scope>provided</scope>
-    </dependency>  
-  </dependencies> 
+    </dependency>
+  </dependencies>
 </profile>
 {{< /code-block >}}
 
-### Gradle
 
-`ddTracerAgent` エントリを `configurations` タスクブロックに追加し、Datadog Java トレーサーの依存関係を追加します。その際に、`$VERSION` を [Maven リポジトリ][2]で利用可能なトレーサーの最新のバージョンで置き換えます。
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
-{{< code-block lang="groovy" >}}
+`ddTracerAgent` エントリを `configurations` タスクブロックに追加し、Datadog Java トレーサーの依存関係を追加します。その際に、`$VERSION` を [Maven リポジトリ][2]で利用可能なトレーサーの最新のバージョンで置き換えます (先行する `v` なし): ![Maven Central][2]
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
 configurations {
     ddTracerAgent
 }
-
 dependencies {
     ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
 }
 {{< /code-block >}}
 
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+{{% /tab %}}
+{{< /tabs >}}
+
 ## テストのインスツルメンテーション
 
-### Maven
+{{< tabs >}}
+{{% tab "Maven" %}}
 
-[Maven Surefire プラグイン][3]および/または [Maven Failsafe プラグイン][4]を、Datadog Java Agent を使用するよう構成します (テストフレームワークとして JUnit ではなく、TestNG を使用している場合は `-Ddd.integration.testng.enabled=true` を使用してください):
+[Maven Surefire プラグイン][1]または [Maven Failsafe プラグイン][2] (または両方を使用する場合は両方) を構成して、Datadog Java Agent を使用し、テスト対象のサービスまたはライブラリの名前を `-Ddd.service` プロパティで指定します。
 
-{{< code-block lang="xml" >}}
+* [Maven Surefire プラグイン][1]を使用している場合:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-surefire-plugin</artifactId>
   <configuration>
-    <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
+    <argLine>${dd.java.agent.arg}</argLine>
   </configuration>
 </plugin>
+{{< /code-block >}}
 
+* [Maven Failsafe プラグイン][2]を使用している場合:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
   <configuration>
-     <argLine>${dd.java.agent.arg} -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true</argLine>
+     <argLine>${dd.java.agent.arg}</argLine>
   </configuration>
   <executions>
       <execution>
@@ -106,93 +109,63 @@ dependencies {
 </plugin>
 {{< /code-block >}}
 
-`ci-app` プロファイルを使用してテストを実行します。例:
+`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
 {{< code-block lang="bash" >}}
-mvn clean verify -P ci-app
+DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
-### Gradle
 
-`configurations.ddTracerAgent` プロパティに基づき、Datadog Java トレーサーをターゲットとする `-javaagent` 引数を `jvmArgs` 属性に追加して、`test` Gradle タスクを構成します (テストフレームワークとして JUnit ではなく、TestNG を使用している場合は `-Ddd.integration.testng.enabled=true` を使用してください)。
+[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
+[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
-{{< code-block lang="groovy" >}}
+`configurations.ddTracerAgent` プロパティに基づいて Datadog Java トレーサーをターゲットとする `-javaagent` 引数を `jvmArgs` 属性に追加し、`-Ddd.service` プロパティでテスト対象のサービスまたはライブラリの名前を指定して、`test` Gradle タスクを構成します。
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
 test {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true"]
+  if(project.hasProperty("dd-civisibility")) {
+    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.prioritization.type=ENSURE_TRACE", "-Ddd.jmxfetch.enabled=false", "-Ddd.integrations.enabled=false", "-Ddd.integration.junit.enabled=true", "-Ddd.integration.testng.enabled=true"]
+  }
 }
 {{< /code-block >}}
 
-通常と同じ方法でテストを実行します。例:
+`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
 {{< code-block lang="bash" >}}
-./gradlew cleanTest test --rerun-tasks
+DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
-**重要:** Gradle でのビルドはプログラムを通じてカスタマイズできるため、これらのステップを特定のビルドコンフィギュレーションに適応させなければならない場合があります。
+**注:** Gradle でのビルドはプログラムを通じてカスタマイズできるため、これらのステップを特定のビルドコンフィギュレーションに適応させなければならない場合があります。
 
-## コンフィギュレーションオプション
+{{% /tab %}}
+{{< /tabs >}}
+
+## コンフィギュレーション設定
 
 次のシステムプロパティはコンフィギュレーションのオプションを設定するもので、環境変数と同等の値を持ちます。両方に同じキータイプが設定されている場合は、システムプロパティコンフィギュレーションが優先されます。 システムプロパティは、JVM フラグとして設定できます。
 
-`dd.integration.junit.enabled`
-: `true` の場合、JUnit  ランナーに基づくテストを報告します。<br/>
-**環境変数**: `DD_INTEGRATION_JUNIT_ENABLED`<br/>
-**デフォルト**: `false`
+`dd.service`
+: テスト中のサービスまたはライブラリの名前。<br/>
+**環境変数**: `DD_SERVICE`<br/>
+**デフォルト**: `unnamed-java-app`<br/>
+**例**: `my-java-app`
 
-`dd.integration.testng.enabled`
-: `true` の場合、TestNG に基づくテストを報告します。<br/>
-**環境変数**: `DD_INTEGRATION_TESTNG_ENABLED`<br/>
-**デフォルト**: `false`
+`dd.env`
+: テストが実行されている環境の名前。<br/>
+**環境変数**: `DD_ENV`<br/>
+**デフォルト**: `none`<br/>
+**例**: `local`、`ci`
 
-また、トレーサーの優先タイプを `EnsureTrace` に設定してテストスパンからの逸脱を回避します。
+`dd.trace.agent.url`
+: `http://hostname:port` の形式のトレース収集用の Datadog Agent URL。<br/>
+**環境変数**: `DD_TRACE_AGENT_URL`<br/>
+**デフォルト**: `http://localhost:8126`
 
-`dd.prioritization.type`
-: トレーサーによるテストスパンの逸脱を避けるため、`ENSURE_TRACE` に設定します。<br/>
-**環境変数**: `DD_PRIORITIZATION_TYPE`<br/>
-**デフォルト**: `FAST_LANE`
+他のすべての [Datadog トレーサーコンフィギュレーション][2]オプションも使用できます。
 
-[Datadog トレーサーのコンフィギュレーション][5]オプションはテストフェーズで利用可能です。
-
-### 推奨されるコンフィギュレーション
-
-Datadog Java Agent の起動を改善するには、次のコンフィギュレーション設定に従ってください:
-
-システムプロパティ: `dd.service`
-: **環境変数**: `DD_SERVICE`<br/>
-**デフォルト**: `unnamed-java-app`</br>
-**設定値**: CI Tests タブに表示されるテストサービス名。
-
-システムプロパティ: `dd.agent.host`
-: **環境変数**: `DD_AGENT_HOST`<br/>
-**デフォルト**: `localhost`</br>
-**設定値**: Datadog Agent のホスト。
-
-システムプロパティ: `dd.trace.agent.port`
-: **環境変数**: `DD_TRACE_AGENT_PORT`<br/>
-**デフォルト**: `8126`</br>
-**設定値**: Datadog Agent のポート。
-
-システムプロパティ: `dd.integrations.enabled`
-: **環境変数**: `DD_INTEGRATIONS_ENABLED`<br/>
-**デフォルト**: `true`</br>
-**推奨値**: `false`
-
-システムプロパティ: `dd.integration.junit.enabled` or `dd.integration.testng.enabled`
-: **環境変数**: `DD_INTEGRATION_JUNIT_ENABLED` or `DD_INTEGRATION_TESTNG_ENABLED`<br/>
-**デフォルト**: `false`</br>
-**推奨値**: `true`
-
-システムプロパティ: `dd.prioritization.type`
-: **環境変数**: `DD_PRIORITIZATION_TYPE`<br/>
-**デフォルト**: `FAST_LANE`</br>
-**推奨値**: `ENSURE_TRACE`
-
-システムプロパティ: `dd.jmxfetch.enabled`
-: **環境変数**: `DD_JMXFETCH_ENABLED`<br/>
-**デフォルト**: `true`</br>
-**推奨値**: `false`
-
-**重要:** インテグレーションテストを行う際に、より多くのインテグレーションを有効化したい場合があるかもしれません。特殊なインテグレーションを有効化するには、[Datadog Tracer Compatibility][6] テーブルを使用してインテグレーションテスト用のカスタム設定を作成してください。
+**重要:** インテグレーションテストを行う際に、より多くのインテグレーションを有効化したい場合があるかもしれません。特殊なインテグレーションを有効化するには、[Datadog Tracer Compatibility][3] テーブルを使用してインテグレーションテスト用のカスタム設定を作成してください。
 
 たとえば、`OkHttp3` クライアントリクエストのインテグレーションを有効化する場合は、設定に `-Ddd.integration.okhttp-3.enabled=true` を追加します。
 
@@ -202,8 +175,5 @@ Datadog Java Agent の起動を改善するには、次のコンフィギュレ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/continuous_integration/setup_tests/agent/
-[2]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[3]: https://maven.apache.org/surefire/maven-surefire-plugin/
-[4]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-[5]: /ja/tracing/setup_overview/setup/java/?tab=containers#configuration
-[6]: /ja/tracing/setup_overview/compatibility_requirements/java
+[2]: /ja/tracing/setup_overview/setup/java/?tab=containers#configuration
+[3]: /ja/tracing/setup_overview/compatibility_requirements/java

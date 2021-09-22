@@ -2,7 +2,7 @@
 title: サーバーレスインサイト
 kind: documentation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/serverless-insights/'
+  - link: https://www.datadoghq.com/blog/serverless-insights/
     tag: ブログ
     text: サーバーレスインサイトについてもっと読む
 aliases:
