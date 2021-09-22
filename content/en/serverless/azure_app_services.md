@@ -132,7 +132,7 @@ Learn more about [custom metrics][17].
 
 ## Extension management with Powershell
 
-Datadog provides automatic scripts with which you can update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group), discover and update extensions that are already installed, and to designate the installation of specific versions of the site extension. You can also add the extension programmaticlaly in CI/CD pipelines.
+Datadog provides automatic scripts with which you can update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and to [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
 
 ### Prerequisites
 
@@ -184,7 +184,7 @@ The update script applies to an entire resource group. This script updates every
     .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
     ```
 
-### Installing a specific version of the extension
+### Installing a specific version of the extension {#powershell-specific-version}
 
 The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
 
