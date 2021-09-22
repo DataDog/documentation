@@ -160,7 +160,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][12].
 
-If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 

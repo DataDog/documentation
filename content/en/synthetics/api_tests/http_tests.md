@@ -214,7 +214,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][15] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][15].
 
-If you have access to the [custom role feature][16], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you have access to the [custom role feature][16], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
