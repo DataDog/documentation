@@ -8,9 +8,14 @@
 {{ $productionOptions := dict "defines" $defines "sourceMap" "inline" "minify" true }}
 {{ $options := cond $isLocalServer $devOptions $productionOptions }}
 {{ $compiledJS := resources.Get $jsInput | js.Build $options }}
-{{ $jQuery := resources.Get "scripts/jquery.min.js" }}
+{{ $jQuery := resources.Get "scripts/dependencies/jquery.min.js" }}
+{{ $bootstrap := resources.Get "scripts/dependencies/bootstrap.min.js" }}
+{{ $dependencies := slice $jQuery $bootstrap | resources.Concat "scripts/dependencies.js" }}
 
-<script src="{{ $jQuery.RelPermalink }}"></script>
+<!-- <script src="{{ $jQuery.RelPermalink }}"></script>
+<script src="{{ $bootstrap.RelPermalink }}"></script> -->
+
+<script src="{{ $dependencies.RelPermalink }}"></script>
 
 <!-- The docsearch.js lib requires this -->
 <script>global = globalThis;</script>
@@ -21,3 +26,8 @@
   {{ $productionJS := $compiledJS | resources.Fingerprint "sha512" }}
   <script src="{{ $productionJS.RelPermalink }}" integrity="{{ $productionJS.Data.Integrity }}" defer></script>
 {{ end }}
+
+{{/* if eq .File.BaseFileName "search" }}
+    {{ $searchJS := resources.Get "scripts/components/search.js" }}
+    <script src="{{ $searchJS.RelPermalink }}"></script>
+{{ end */}}

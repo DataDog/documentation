@@ -1,8 +1,5 @@
 $(document).ready(function () {
-
     $('#signupModal').on('show.bs.modal', function (e) {
-        //$('body').css('overflow', 'hidden');
-        //$('.modal').css('overflow', 'scroll');
         var regURL = 'https://app.datadoghq.com/signup_corp';
         var mobileURL = 'https://app.datadoghq.com/signup_corp?mobile=true';
         var lang_param = '';

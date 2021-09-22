@@ -1,7 +1,3 @@
-{{ if eq .File.BaseFileName "search" }}
-    <script src="{{ (index $.Site.Data.manifest "search.js") | relURL}}"></script>
-{{ end }}
-
 {{ if .Params.footer_scripts }}
     {{ range $k, $v := .Params.footer_scripts }}
 

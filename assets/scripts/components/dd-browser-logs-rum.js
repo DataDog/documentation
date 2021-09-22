@@ -5,6 +5,7 @@ import configDocs from '../config/config-docs';
 
 const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
+const ciCommitShortSha = CI_COMMIT_SHORT_SHA;
 
 function getConfig() {
     if (env === 'live') {
@@ -25,7 +26,7 @@ if (datadogRum) {
             clientToken: Config.ddClientToken,
             env,
             service: 'docs',
-            version: CI_COMMIT_SHORT_SHA,
+            version: ciCommitShortSha,
             trackInteractions: true,
             allowedTracingOrigins: [window.location.origin]
         });
@@ -35,17 +36,15 @@ if (datadogRum) {
         }
     }
 }
-if (datadogLogs) {
-    // init browser logs
-    console.log(`browser logs init, ci commit short sha = ${CI_COMMIT_SHORT_SHA}`);
 
+if (datadogLogs) {
     if (env === 'preview' || env === 'live') {
         datadogLogs.init({
             clientToken: Config.ddClientToken,
             forwardErrorsToLogs: true,
             env,
             service: 'docs',
-            version: CI_COMMIT_SHORT_SHA
+            version: ciCommitShortSha
         });
     
         // global context
