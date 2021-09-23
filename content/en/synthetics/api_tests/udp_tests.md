@@ -28,7 +28,9 @@ After choosing to create an `UDP` Test, define your test's request.
 4. **Name** your UDP test.
 5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
 
-(New UDP request screenshot and move all screenshots for Define request down here).
+(move all screenshots for Define request down here).
+
+{{< img src="synthetics/api_tests/udp_test_config.png" alt="Define UDP request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen. (Let's make this sentence uniform across all test type pages).
 
@@ -44,7 +46,7 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per UDP test.
 
-[Assertion Screenshot]
+{{< img src="synthetics/api_tests/udp_assertions.png" alt="Define assertions for your UDP test" style="width:90%;" >}}
 
 ### Select locations
 
