@@ -19,8 +19,6 @@ function getConfig() {
 
 const Config = getConfig();
 
-console.log(`env = ${env}`);
-
 if (datadogRum) {
     if (env === 'preview' || env === 'live') {
         datadogRum.init({
@@ -41,7 +39,6 @@ if (datadogRum) {
 
 if (datadogLogs) {
     if (env === 'preview' || env === 'live') {
-        console.log('DD logs init.');
         datadogLogs.init({
             clientToken: Config.ddClientToken,
             forwardErrorsToLogs: true,
