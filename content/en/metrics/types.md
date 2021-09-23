@@ -2,14 +2,14 @@
 title: Metrics Types
 kind: documentation
 aliases:
-    - /metrics/counts/
-    - /metrics/distributions/
-    - /metrics/gauges/
-    - /metrics/histograms/
-    - /metrics/rates/
-    - /metrics/sets/
-    - /metrics_type/
-    - /metrics/metrics_type/
+    - /developers/metrics/counts/
+    - /developers/metrics/distributions/
+    - /developers/metrics/gauges/
+    - /developers/metrics/histograms/
+    - /developers/metrics/rates/
+    - /developers/metrics/sets/
+    - /developers/metrics_type/
+    - /developers/metrics/metrics_type/
     - /developers/metrics/types/
 further_reading:
     - link: 'developers/dogstatsd'

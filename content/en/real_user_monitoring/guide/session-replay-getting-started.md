@@ -11,7 +11,7 @@ further_reading:
       text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
+<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>. If you're using a different region, sign up with <a href="https://www.datadoghq.com/session-replay-beta-request-form/">this form</a>.</p>
 </div>
 
 ## What is Session Replay?
@@ -30,7 +30,7 @@ Session Replay is available through a dedicated build of the RUM Browser SDK. To
 
 #### npm
 
-Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2]. To start the recording, call `DatadogRum.startSessionReplayRecording()`.
+Replace the `@datadog/browser-rum package` with a version >3.0.2 of [`@datadog/browser-rum`][2]. To start the recording, call `datadogRum.startSessionReplayRecording()`.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -47,7 +47,7 @@ datadogRum.init({
     trackInteractions: true
 });
 
-DatadogRum.startSessionReplayRecording();
+datadogRum.startSessionReplayRecording();
 ```
 
 #### CDN

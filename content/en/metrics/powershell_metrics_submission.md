@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /developers/faq/powershell-api-examples
   - /developers/faq/submitting-metrics-via-powershell
-  - /metrics/powershell_metrics_submission/
+  - /developers/metrics/powershell_metrics_submission/
 ---
 
 Datadog can collect metrics via the Agent as well as via the API independently of which language you decide to use. This page gives examples of both using PowerShell.

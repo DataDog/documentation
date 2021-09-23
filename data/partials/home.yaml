@@ -46,7 +46,7 @@ nav_sections:
         desc: Explore your metrics and create distributions
       - title: Alerting
         link: monitors/
-        icon: alert
+        icon: monitor
         desc: Create & manage monitors & notifications
       - title: APM & Continuous Profiler
         link: tracing/

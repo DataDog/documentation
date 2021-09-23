@@ -30,11 +30,13 @@ main_left:
   - identifier: logs
     name: Log Management
     pre: <i class="icon-log align-middle"></i>
+    url: 'https://www.datadoghq.com/product/log-management/'
     weight: 5
     parent: product
   - identifier: apm
     name: APM
     pre: <i class="icon-apm align-middle"></i>
+    url: 'https://www.datadoghq.com/product/apm/'
     weight: 6
     parent: product
   - identifier: profiler
@@ -82,37 +84,37 @@ main_left:
   - identifier: cloud-workload-security
     name: Cloud Workload Security
     pre: <i class="icon-cws align-middle"></i>
-    url: product/security-platform/cloud-workload-security/
+    url: 'https://www.datadoghq.com/product/security-platform/cloud-workload-security/'
     weight: 14
     parent: product
   - identifier: error-tracking
     name: Error Tracking
     pre: <i class="icon-error-tracking align-middle"></i>
-    url: product/security-platform/error-tracking/
+    url: 'https://www.datadoghq.com/product/security-platform/error-tracking/'
     weight: 15
     parent: product
   - identifier: incident
     name: Incident Management
     pre: <i class="icon-incidents align-middle"></i>
-    url: product/incident-management
+    url: 'https://www.datadoghq.com/product/incident-management'
     weight: 16
     parent: product
   - identifier: database
     name: Database Monitoring
     pre: <i class="icon-dbm align-middle"></i>
-    url: product/database-monitoring
+    url: 'https://www.datadoghq.com/product/database-monitoring'
     weight: 17
     parent: product
   - identifier: serverless
     name: Serverless
     pre: <i class="icon-serverless align-middle"></i>
-    url: product/serverless-monitoring/
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 18
     parent: product
   - identifier: alerts
     name: Alerts
-    pre: <i class="icon-alert align-middle"></i>
-    url: product/alerts/
+    pre: <i class="icon-monitor align-middle"></i>
+    url: 'https://www.datadoghq.com/product/alerts/'
     weight: 19
     parent: product
   - identifier: api
@@ -457,10 +459,14 @@ main:
     url: getting_started/incident_management/
     parent: getting_started
     weight: 13
+  - name: Database Monitoring
+    url: getting_started/database_monitoring/
+    parent: getting_started
+    weight: 14
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 14
+    weight: 15
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -855,15 +861,10 @@ main:
     url: events/guides/email/
     parent: events_guides
     weight: 302
-  - name: Email
-    url: events/guides/email/
-    parent: events_guides
-    weight: 303
-    weight: 1
   - name: API
     url: api/latest/events/#post-an-event
     parent: events_guides
-    weight: 304
+    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
@@ -950,46 +951,42 @@ main:
     url: dashboards/widgets/monitor_summary/
     parent: dashboards_widgets
     weight: 25
-  - name: Network
-    url: dashboards/widgets/network/
-    parent: dashboards_widgets
-    weight: 26
   - name: Notes and Links
     url: dashboards/widgets/note/
     parent: dashboards_widgets
-    weight: 27
+    weight: 26
   - name: Query Value
     url: dashboards/widgets/query_value/
     parent: dashboards_widgets
-    weight: 28
+    weight: 27
   - name: Scatter Plot
     url: dashboards/widgets/scatter_plot/
     parent: dashboards_widgets
-    weight: 29
+    weight: 28
   - name: SLO Summary
     url: dashboards/widgets/slo/
     parent: dashboards_widgets
-    weight: 30
+    weight: 29
   - name: Service Map
     url: dashboards/widgets/service_map/
     parent: dashboards_widgets
-    weight: 31
+    weight: 30
   - name: Service Summary
     url: dashboards/widgets/service_summary/
     parent: dashboards_widgets
-    weight: 32
+    weight: 31
   - name: Table
     url: dashboards/widgets/table/
     parent: dashboards_widgets
-    weight: 33
+    weight: 32
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 34
+    weight: 33
   - name: Top List
     url: dashboards/widgets/top_list/
     parent: dashboards_widgets
-    weight: 35
+    weight: 34
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
@@ -1104,10 +1101,6 @@ main:
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 101
-  - name: Generate Process Metrics
-    url: infrastructure/process/generate_process_metrics/
-    parent: infrastructure
-    weight: 6
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
@@ -1311,7 +1304,7 @@ main:
     weight: 120000
   - name: Alerting
     url: monitors/
-    pre: alert
+    pre: monitor
     identifier: alerting
     weight: 130000
   - name: Create Monitors
