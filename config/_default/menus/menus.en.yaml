@@ -935,6 +935,7 @@ main:
     url: dashboards/widgets/hostmap/
     parent: dashboards_widgets
     weight: 21
+    identifier: widgets_host_map
   - name: Iframe
     url: dashboards/widgets/iframe/
     parent: dashboards_widgets
@@ -1083,28 +1084,29 @@ main:
   - name: Infrastructure List
     url: infrastructure/list/
     parent: infrastructure
-    weight: 2
+    weight: 1
   - name: Host Map
     url: infrastructure/hostmap/
     parent: infrastructure
-    weight: 3
+    weight: 2
+    identifier: infrastructure_host_map
   - name: Container Map
     url: infrastructure/containermap/
     parent: infrastructure
-    weight: 4
+    weight: 3
   - name: Live Processes
     url: infrastructure/process/
     parent: infrastructure
     identifier: infrastructure_process
-    weight: 5
+    weight: 4
   - name: Increase Process Retention
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
-    weight: 101
+    weight: 401
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
-    weight: 7
+    weight: 5
   - name: Serverless
     url: serverless
     pre: serverless
