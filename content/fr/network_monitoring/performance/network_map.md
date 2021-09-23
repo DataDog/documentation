@@ -5,7 +5,7 @@ description: Cartographier vos données réseau sur l'ensemble de vos tags.
 aliases:
   - /fr/network_performance_monitoring/network_map/
 further_reading:
-  - link: https://www.datadoghq.com/blog/network-performance-monitoring
+  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
     tag: Blog
     text: Network Performance Monitoring
   - link: /network_monitoring/devices

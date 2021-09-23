@@ -4,13 +4,13 @@ categories:
 ddtype: check
 dependencies: []
 description: Surveiller les métriques de Docker avec Datadog
-doc_link: https://docs.datadoghq.com/integrations/docker/
+doc_link: 'https://docs.datadoghq.com/integrations/docker/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-kubernetes-docker/
+  - link: 'https://www.datadoghq.com/blog/monitor-kubernetes-docker/'
     tag: Blog
     text: Comment surveiller Kubernetes et Docker avec Datadog
-  - link: https://www.datadoghq.com/blog/docker-logging/
+  - link: 'https://www.datadoghq.com/blog/docker-logging/'
     tag: Blog
     text: Meilleures pratiques de journalisation pour Docker
 git_integration_title: docker
