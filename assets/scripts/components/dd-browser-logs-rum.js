@@ -7,8 +7,6 @@ const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
 const ciCommitShortSha = CI_COMMIT_SHORT_SHA;
 
-console.log(`ci commit short sha = ${ciCommitShortSha}`);
-
 function getConfig() {
     if (env === 'live') {
         return configDocs['live'];
@@ -20,6 +18,8 @@ function getConfig() {
 }
 
 const Config = getConfig();
+
+console.log(`env = ${env}`);
 
 if (datadogRum) {
     if (env === 'preview' || env === 'live') {
@@ -41,6 +41,7 @@ if (datadogRum) {
 
 if (datadogLogs) {
     if (env === 'preview' || env === 'live') {
+        console.log('DD logs init.');
         datadogLogs.init({
             clientToken: Config.ddClientToken,
             forwardErrorsToLogs: true,
