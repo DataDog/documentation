@@ -8,9 +8,9 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Datadog exposes AWS PrivateLink endpoints in <b>us-east-1</b>.
-</div>
+{{< /alert >}}
 
 {{< site-region region="gov" >}}
 {{< alert >}}Datadog PrivateLink does not support the Datadog for Government site.{{< /alert >}}

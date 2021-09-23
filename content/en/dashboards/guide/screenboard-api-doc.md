@@ -6,9 +6,9 @@ aliases:
   - /graphing/guide/screenboard-api-doc
 ---
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/">new Dashboard endpoint</a> instead.
-</div>
+{{< /alert >}}
 
 The `Screenboard` endpoint allows you to programmatically create, update, delete, and query screenboards. [Read more about screenboards][1].
 

@@ -6,9 +6,9 @@ aliases:
   - /agent/faq/agent-5-autodiscovery
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Autodiscovery was previously called Service Discovery. It's still called Service Discovery throughout the Agent's code and in some configuration options.
-</div>
+{{< /alert >}}
 
 Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Dockerized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 

@@ -24,11 +24,11 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
 <br>
 Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
-</div>
+{{< /alert >}}
 
 ## Trace sampling
 

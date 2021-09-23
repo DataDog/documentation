@@ -14,9 +14,9 @@ Interagissez avec vos listes de dashboards via l'API pour faciliter l'organisati
 
 ## Récupérer les éléments d'une liste de dashboards
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Cet endpoint est obsolète. Utilisez plutôt la <a href="https://docs.datadoghq.com/api#recuperer-les-elements-d-une-liste-de-dashboards">version 2 de cet endpoint</a>.
-</div>
+{{< /alert >}}
 
 ### Signature
 
@@ -374,9 +374,9 @@ curl -X GET \
 
 ## Ajouter des éléments à une liste de dashboards
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Cet endpoint est obsolète. Utilisez plutôt la <a href="https://docs.datadoghq.com/api#ajouter-des-elements-a-une-liste-de-dashboards">version 2 de cet endpoint</a>.
-</div>
+{{< /alert >}}
 
 ### Signature
 
@@ -625,9 +625,9 @@ curl -X ADD -H "Content-type: application/json" \
 
 ## Mettre à jour les éléments d'une liste de dashboards
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Cet endpoint est obsolète. Utilisez plutôt la<a href="https://docs.datadoghq.com/api#mettre-a-jour-les-elements-d-une-liste-de-dashboards">version 2 de cet endpoint</a>.
-</div>
+{{< /alert >}}
 
 ### Signature
 
@@ -878,9 +878,9 @@ curl -X UPDATE -H "Content-type: application/json" \
 
 ## Supprimer des éléments d'une liste de dashboards
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Cet endpoint est obsolète. Utilisez plutôt la <a href="https://docs.datadoghq.com/api#supprimer-des-elements-d-une-liste-de-dashboards">version 2 de cet endpoint</a>.
-</div>
+{{< /alert >}}
 
 ### Signature
 

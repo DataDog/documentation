@@ -6,12 +6,12 @@ aliases:
   - /ja/tracing/trace_search_and_analytics/
   - /ja/tracing/advanced_usage/
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 2020 年 10 月 20 日、App Analytics は Tracing without Limits に移行しました。このページに掲載されているレガシー版 App Analytics のコンフィギュレーション情報は非推奨となるため、トラブルシューティングまたは古い設定の修正のみに利用してください。今後は、Tracing without Limits™ を利用して、<a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">データの取り込みとトレースの保存</a>をサンプリングなしで管理することができます。
 <br>
 この新機能を利用するには、<a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion</a> への移行が必要です。
 
-</div>
+{{< /alert >}}
 
 [App Analytics][1] を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで Indexed Span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
 

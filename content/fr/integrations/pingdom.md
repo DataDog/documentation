@@ -28,9 +28,9 @@ Datadog surveille la métrique `response_time` pour tous les sites que vous conf
 
 Les événements de Pingdom peuvent être ajoutés en configurant le [monitor de statut d'intégration][1] adéquat.
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Les métriques peuvent uniquement être importées pour les clients Pingdom de niveau Starter ou supérieur.
-</div>
+{{< /alert >}}
 
 ## Configuration
 

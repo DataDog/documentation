@@ -9,9 +9,9 @@ further_reading:
     tag: ラーニングセンター
     text: サービスレベル目標 (SLO) について
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 このページの PDF 版は<a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">こちら</a>よりご覧いただけます。
-</div>
+{{< /alert >}}
 
 ## はじめに
 

@@ -12,9 +12,9 @@ further_reading:
     tag: Documentation
     text: サービス、リソース、トレースの詳細
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 セットアップ手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ セットアップ手順</a>からご覧ください。
-</div>
+{{< /alert >}}
 
 ## タグを追加
 

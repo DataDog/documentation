@@ -37,9 +37,9 @@ Aucune étape d'installation requise.
 
 Créez un token d'API avec un accès en lecture seule sur la page de gestion des tokens de Fastly. Obtenez votre Service ID depuis le dashboard et saisissez-le dans le [carré d'intégration Fastly][1].
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Le Service ID est un code alphanumérique, comme <code>5VqE6MOOy1QFJbgmCK41pY</code> (cet exemple provient de la <a href="https://docs.fastly.com/api/auth">documentation Fastly</a>, disponible en anglais).
-</div>
+{{< /alert >}}
 
 Si vous utilisez plusieurs Service ID provenant d'un compte unique, saisissez un token d'API sur chaque ligne.
 

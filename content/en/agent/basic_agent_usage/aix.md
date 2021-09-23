@@ -7,9 +7,9 @@ further_reading:
   text: "Monitor AIX with the Datadog Unix Agent"
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 The Datadog Unix Agent is being developed for specific system architectures, and is not the same as Agents 5 and 6.
-</div>
+{{< /alert >}}
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 

@@ -13,7 +13,7 @@ further_reading:
 kind: documentation
 title: iOS Trace Collection
 ---
-<div class="alert alert-info">The iOS Trace collection is in public beta. If you have any questions, contact our <a href="https://docs.datadoghq.com/help/" target="_blank">support team</a>.</div>
+{{< alert type="info" >}}The iOS Trace collection is in public beta. If you have any questions, contact our <a href="https://docs.datadoghq.com/help/" target="_blank">support team</a>.{{< /alert >}}
 
 Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side tracing library][2] and leverage the following features:
 

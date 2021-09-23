@@ -26,7 +26,7 @@ Datadog Python、Node.js、Ruby、Go、Java トレースライブラリは、AWS
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Datadog で AWS Lambda をトレースするためのアーキテクチャ図" >}}
 
-<div class="alert alert-info"> サーバーレスモニタリングは初めてですか？<a href="/serverless/installation/">こちら</a>のインストール手順に従って開始します。</div>
+{{< alert type="info" >}} サーバーレスモニタリングは初めてですか？<a href="/serverless/installation/">こちら</a>のインストール手順に従って開始します。{{< /alert >}}
 
 サーバーレスアプリケーションで Datadog APM の使用を開始するには、Lambda ランタイムと個々の要件に基づいて Datadog のトレースライブラリ (`dd-trace`) または AWS X-Ray トレースライブラリをインストールするかを選択できます。ライブ検索ビューで Datadog のすべてのトレースをリアルタイムで表示するには、Datadog のトレースライブラリを使用する必要があります。
 

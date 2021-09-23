@@ -6,7 +6,7 @@ further_reading:
     tag: Documentation
     text: Datadog に送信されるデータの主要カテゴリを確認する
 ---
-<div class="alert alert-info">このページは Datadog のセキュリティに関するものです。セキュリティ監視製品をお探しの場合は、<a href="/security_monitoring" target="_blank">セキュリティ監視セクション</a>をご覧ください。</div>
+{{< alert type="info" >}}このページは Datadog のセキュリティに関するものです。セキュリティ監視製品をお探しの場合は、<a href="/security_monitoring" target="_blank">セキュリティ監視セクション</a>をご覧ください。{{< /alert >}}
 
 この記事は、[データセキュリティに関するドキュメントシリーズ][1]の一部です。
 

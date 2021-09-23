@@ -123,10 +123,10 @@ Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -Fir
 
 コマンドの出力にリストされる値を `win32_event_log.d/conf.yaml` で設定して、同種のイベントをキャプチャできます。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 <code>Get-EventLog</code> PowerShell コマンドまたは Windows イベントビューア GUI から提供される情報が、<code>Get-WmiObject</code> から提供される情報とは多少異なる場合があります。<br>
 設定したイベントがインテグレーションによってキャプチャされない場合は、<code>Get-WmiObject</code> を使用してフィルターの値をダブルチェックしてください。
-</div>
+{{< /alert >}}
 
 1. イベントログに 1 つ以上のフィルターを構成します。フィルターを使用すると、Datadog に取り込むログイベントを選択できます。
 

@@ -21,9 +21,9 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/php/">PHP Setup Instructions</a>.
-</div>
+{{< /alert >}}
 
 Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
@@ -31,7 +31,7 @@ Even if Datadog does not officially support your web framework, you may not need
 
 To manually instrument code to [trace][2] specific custom methods in your application or add tags to your spans, use `DDTrace\trace_function()` or `DDTrace\trace_method()`.
 
-<div class="alert alert-info">If you are using a version of ddtrace prior to 0.47.0, use <code>dd_trace_function()</code> instead of <code>DDTrace\trace_function()</code> and <code>dd_trace_method()</code> instead of <code>DDTrace\trace_method()</code> or upgrade to the latest tracer version.</div>
+{{< alert type="info" >}}If you are using a version of ddtrace prior to 0.47.0, use <code>dd_trace_function()</code> instead of <code>DDTrace\trace_function()</code> and <code>dd_trace_method()</code> instead of <code>DDTrace\trace_method()</code> or upgrade to the latest tracer version.{{< /alert >}}
 
 ### Trace a custom function or method
 

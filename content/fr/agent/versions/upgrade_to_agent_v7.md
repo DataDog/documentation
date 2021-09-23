@@ -6,9 +6,9 @@ further_reading:
     tag: Documentation
     text: "Migrer vos checks custom de Python\_2 vers Python\_3"
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 L'Agent v7 prend uniquement en charge les checks custom écrits en Python 3. <a href="/agent/guide/python-3">Vérifiez si vos checks custom sont compatibles avec Python 3</a> avant de passer à l'Agent v7.
-</div>
+{{< /alert >}}
 
 ## Passer de l'Agent v6 à l'Agent v7
 

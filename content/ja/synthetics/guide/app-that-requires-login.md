@@ -19,7 +19,7 @@ further_reading:
 
 [セキュリティ保護されたグローバル変数を使用](#account-security)することで、認証情報をアプリケーション全体で確実に難読化し安全に保存することもできます。
 
-<div class="alert alert-info">MFA の背後にあるアプリケーションのテストに興味がありますか？<a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">以下のセクション</a>から<a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">フィードバックを送信</a>して、チームにとって最も重要なシステムの構築についてご意見をお聞かせください。</div>
+{{< alert type="info" >}}MFA の背後にあるアプリケーションのテストに興味がありますか？<a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">以下のセクション</a>から<a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">フィードバックを送信</a>して、チームにとって最も重要なシステムの構築についてご意見をお聞かせください。{{< /alert >}}
 
 ## 記録にログイン手順を含める
 
@@ -53,7 +53,7 @@ SSO を使用してログインするウェブサイトの場合は、ブラウ�
 MFA プロセスに、音声およびテキストメッセージの送信やモバイルアプリケーションを開くなど、ブラウザ外で実行される手順が含まれる場合も、[Synthetic ブラウザテストからのリクエストの検出][3]時（特定の認証情報、Synthetic テスト固有のヘッダーなど）には、テストの目的のため MFA 設定の変更または MFA の無効化が可能かどうか、MFA プロバイダーにお問い合わせください。
 アプリケーションにより利用される MFA のタイプによっては、[JavaScript 手順][4]が有効な場合があります。
 
-<div class="alert alert-info">テストシナリオをより簡単に記録できるよう、常に機能が追加されています。<a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">フィードバックを送信</a>して、最も重要な MFA システムについてご意見をお聞かせください。</div>
+{{< alert type="info" >}}テストシナリオをより簡単に記録できるよう、常に機能が追加されています。<a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">フィードバックを送信</a>して、最も重要な MFA システムについてご意見をお聞かせください。{{< /alert >}}
 
 ## ブラウザテストのコンフィギュレーションオプションを活用する
 

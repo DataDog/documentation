@@ -16,9 +16,9 @@ further_reading:
     tag: Documentation
     text: サービス、リソース、トレースの詳細
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/php/">PHP セットアップ手順</a>からご覧ください。
-</div>
+{{< /alert >}}
 
 Datadog が公式にはサポートしていない Web フレームワークでも、手動インスツルメンテーションが必要ない場合もあります。詳細は、[自動インスツルメンテーション][1]をご覧ください。
 
@@ -26,7 +26,7 @@ Datadog が公式にはサポートしていない Web フレームワークで�
 
 アプリケーションの特定のカスタムメソッドを[トレース][2]するコードを手動でインスツルメントしたり、スパンにタグを追加したりするには、`DDTrace\trace_function()` または `DDTrace\trace_method()` を使用します。
 
-<div class="alert alert-info">0.47.0 より前のバージョンの ddtrace を使用している場合は、<code>DDTrace\trace_function()</code> の代わりに <code>dd_trace_function()</code> を、<code>DDTrace\trace_method()</code> の代わりに <code>DDTrace\trace_function()</code> を使用するか、または最新のトレーサーバージョンにアップグレードします。</div>
+{{< alert type="info" >}}0.47.0 より前のバージョンの ddtrace を使用している場合は、<code>DDTrace\trace_function()</code> の代わりに <code>dd_trace_function()</code> を、<code>DDTrace\trace_method()</code> の代わりに <code>DDTrace\trace_function()</code> を使用するか、または最新のトレーサーバージョンにアップグレードします。{{< /alert >}}
 
 ### カスタム関数またはメソッドのトレース
 
@@ -280,7 +280,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 ?>
 ```
 
-<div class="alert alert-info">ddtrace のバージョン 0.46.0 以前では、OpenTracing に互換性のあるトレーサーが <code>OpenTracing\GlobalTracer::get()</code> から自動で返されます。グローバルトレーサーの手動設定は不要です。</div>
+{{< alert type="info" >}}ddtrace のバージョン 0.46.0 以前では、OpenTracing に互換性のあるトレーサーが <code>OpenTracing\GlobalTracer::get()</code> から自動で返されます。グローバルトレーサーの手動設定は不要です。{{< /alert >}}
 
 ## API リファレンス
 

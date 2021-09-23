@@ -66,7 +66,7 @@ Une fois le build de votre application créé, les bundlers génèrent un réper
         javascript.464388.js.map
 ```
 
-<div class="alert alert-info">Par exemple, si la taille totale des fichiers <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <i>la limite de 50 Mo</i>, réduisez-la en configurant votre bundler de façon à diviser le code source en plusieurs blocs de plus petite taille (<a href="https://webpack.js.org/guides/code-splitting/">découvrez comment y parvenir avec WebpackJS</a>).</div>
+{{< alert type="info" >}}Par exemple, si la taille totale des fichiers <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <i>la limite de 50 Mo</i>, réduisez-la en configurant votre bundler de façon à diviser le code source en plusieurs blocs de plus petite taille (<a href="https://webpack.js.org/guides/code-splitting/">découvrez comment y parvenir avec WebpackJS</a>).{{< /alert >}}
 
 ## Importer vos source maps
 
@@ -112,7 +112,7 @@ Lorsque cette commande est exécutée sur le répertoire `dist` obtenu dans notr
 
 **Remarque** : seules les source maps avec l'extension `.js.map` peuvent déminifier des stack traces dans l'interface de suivi des erreurs. Les sources maps ayant une autre extension (comme `.mjs.map`) sont acceptées, mais ne peuvent pas déminifier de stack traces.
 
-<div class="alert alert-info">Un fichier source JavaScript donné peut être envoyé à partir de différents sous-domaines, selon l'environnement (par exemple, staging ou production). Vous pouvez importer une seule fois la source map associée, puis l'utiliser pour plusieurs sous-domaines. Pour ce faire, utilisez le chemin de préfixe absolu à la place de l'URL complète (indiquez <code>/static/js</code> au lieu de <code>https://hostname.com/static/js</code>).</div>
+{{< alert type="info" >}}Un fichier source JavaScript donné peut être envoyé à partir de différents sous-domaines, selon l'environnement (par exemple, staging ou production). Vous pouvez importer une seule fois la source map associée, puis l'utiliser pour plusieurs sous-domaines. Pour ce faire, utilisez le chemin de préfixe absolu à la place de l'URL complète (indiquez <code>/static/js</code> au lieu de <code>https://hostname.com/static/js</code>).{{< /alert >}}
 
 ## Dépanner les erreurs plus facilement
 

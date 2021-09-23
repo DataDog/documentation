@@ -222,7 +222,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-info">更新したコードをデプロイしてから新しいタグが Datadog の UI に表示されるまで、数分かかることがあります。</div>
+{{< alert type="info" >}}更新したコードをデプロイしてから新しいタグが Datadog の UI に表示されるまで、数分かかることがあります。{{< /alert >}}
 
 ## Datadog UI を活用してカスタムスパンタグを検索する
 
@@ -240,7 +240,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 ビューの下部にはトレースや選択したスパンの付加情報が表示されます。デフォルトタグや手作業で追加したタグのすべてをここで確認できます。さらに、ビューを切り替えて関連するホストとログの情報を表示することもできます。
 
-<div class="alert alert-info">このビューでログを有効化するためには、ログの収集を有効にした後、<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>ログとトレースを紐付ける</a>必要があります。</div>
+{{< alert type="info" >}}このビューでログを有効化するためには、ログの収集を有効にした後、<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>ログとトレースを紐付ける</a>必要があります。{{< /alert >}}
 
 ## カスタムスパンタグを Analytics で活用する
 

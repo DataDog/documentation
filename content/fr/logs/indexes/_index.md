@@ -33,9 +33,9 @@ Par défaut, chaque compte possède un seul index représentant un ensemble mono
 
 Le Log Explorer prend en charge l'envoi de [requêtes sur plusieurs index][7].
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 <a href="/help">Contactez l'assistance Datadog</a> pour activer l'utilisation de plusieurs index pour votre compte.
-</div>
+{{< /alert >}}
 
 ### Ajouter des index
 

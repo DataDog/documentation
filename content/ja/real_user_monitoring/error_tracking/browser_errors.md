@@ -27,7 +27,7 @@ Error Tracking は、RUM SDK によってブラウザから収集されたエラ
 
 {{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.gif" alt="スタックフレームからソースコードへのリンク"  >}}
 
-<div class="alert alert-info">スタックフレームからソースコードへのリンクは <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> のバージョン <code>0.12.0</code>以降でサポートされています。</div>
+{{< alert type="info" >}}スタックフレームからソースコードへのリンクは <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> のバージョン <code>0.12.0</code>以降でサポートされています。{{< /alert >}}
 
 ## その他の参考資料
 

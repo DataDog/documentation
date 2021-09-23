@@ -18,7 +18,7 @@ further_reading:
 ---
 Vous pouvez configurer votre bibliothèque de logging et le tracing .NET de façon à injecter vos ID de trace et de span dans vos logs d'application. Vos données de surveillance des performances de votre application seront ainsi mises en corrélation avec vos données de log.
 
-<div class="alert alert-info"><strong>Remarque :</strong> l'injection automatique fonctionne uniquement avec les logs au format JSON. Pour les autres formats, utilisez l'injection manuelle.</div>
+{{< alert type="info" >}}<strong>Remarque :</strong> l'injection automatique fonctionne uniquement avec les logs au format JSON. Pour les autres formats, utilisez l'injection manuelle.{{< /alert >}}
 
 Configurez le traceur .NET avec le [tagging de service unifié][1] pour profiter d'une expérience optimale et d'informations de contexte utiles lorsque vous mettez en corrélation vos traces d'application et vos logs.
 

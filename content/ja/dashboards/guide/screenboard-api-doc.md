@@ -5,9 +5,9 @@ aliases:
   - /ja/graphing/faq/screenboard-api-doc
   - /ja/graphing/guide/screenboard-api-doc
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 このエンドポイントは旧バージョンです。代わりに、 <a href="https://docs.datadoghq.com/api/v1/dashboards/">新しいダッシュボードエンドポイント</a>を使用してください。
-</div>
+{{< /alert >}}
 
 `Screenboard` エンドポイントを使用すると、スクリーンボードをプログラムで作成、更新、削除、およびクエリできます。[スクリーンボードの詳細は、こちらを参照してください][1]。
 

@@ -16,9 +16,9 @@ further_reading:
     tag: Documentation
     text: サービス、リソース、トレースの詳細
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 .NET トレーサーのセットアップおよび自動インスツルメンテーションの手順は、<a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET セットアップ手順</a>からご覧ください。
-</div>
+{{< /alert >}}
 
 **注:** カスタムと自動両方のインスツルメンテーションを使用する場合、MSI インストーラーと NuGet パッケージのバージョンの同期を保つ必要があります。
 

@@ -37,9 +37,9 @@ Fastly に接続して、Fastly のキーメトリクス (キャッシュカバ�
 
 Fastly のトークン管理ページで読み取り専用アクセス API トークンを作成し、ダッシュボードからサービス ID を取得して、それらを [Fastly インテグレーションタイル][1]に入力します。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</code>（<a href="https://docs.fastly.com/api/auth">Fastly ドキュメント</a>からの例）。
-</div>
+{{< /alert >}}
 
 1 つのアカウントで複数のサービス ID を使用している場合は、各行に API トークンを入力してください。
 

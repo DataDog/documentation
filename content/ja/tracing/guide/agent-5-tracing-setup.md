@@ -15,9 +15,9 @@ Agent は、[Datadog Agent コンフィギュレーションファイル][3]に�
 apm_enabled: true
 ```
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 APM は、Datadog Agent 5.13 以降 (Linux および Docker の場合) ではデフォルトで有効化されていますが、Datadog Agent コンフィギュレーションファイルにパラメーター <code>apm_enabled: no</code> を追加することで無効化できます。
-</div>
+{{< /alert >}}
 
 ### Agent のインストール
 

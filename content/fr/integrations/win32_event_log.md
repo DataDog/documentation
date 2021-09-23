@@ -121,10 +121,10 @@ Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -Fir
 
 Les valeurs énumérées dans la sortie de commande peuvent être définies dans `win32_event_log.d/conf.yaml` pour capturer le même type d'événement.
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Les informations données par la commande PowerShell <code> Get-EventLog</code> ou l'observateur d'événements Windows peuvent être légèrement différentes de <code>Get-WmiObject</code>.<br>
 Vérifiez les valeurs de vos filtres en les comparant avec <code>Get-WmiObject</code> si l'intégration ne capture pas les événements que vous avez définis.
-</div>
+{{< /alert >}}
 
 1. Configurez un ou plusieurs filtres pour le journal d'événements. Un filtre vous permet de choisir les événements de log que vous souhaitez envoyer à Datadog.
 

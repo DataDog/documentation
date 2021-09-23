@@ -81,7 +81,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
     * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 
 **Note:** Analytics monitors can only be created based on [Indexed Spans][4].
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+{{< alert type="info" >}}<strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.{{< /alert >}}
 
 ### Select alert conditions
 

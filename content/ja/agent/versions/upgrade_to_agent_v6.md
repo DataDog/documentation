@@ -5,9 +5,9 @@ aliases:
   - /ja/agent/faq/upgrade-to-agent-v6
   - /ja/agent/guide/upgrade-to-agent-v6
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Agent v7 が利用可能です。 <a href="/agent/versions/upgrade_to_agent_v7">最新バージョンにアップグレードすると</a>新しい機能を利用できます。
-</div>
+{{< /alert >}}
 
 ## Agent 6 へのアップグレード
 

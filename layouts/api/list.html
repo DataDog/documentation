@@ -126,9 +126,9 @@
                     <!-- if this is deprecated and we have a higher version link to that -->
                     {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}}}
                       {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
-                      <div class="alert alert-danger">
+                      {{< alert type="danger" >}}
                         <p class="alert-warning">This endpoint is deprecated use the latest endpoint here <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
-                      </div>
+                      {{< /alert >}}
                     {{ end }}
 
                     <!-- If this is a v1 visible endpoint and v2 is unstable, notify user of the unstable version -->

@@ -19,9 +19,9 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 See the <a href="/getting_started/agent/autodiscovery">Autodiscovery Getting Started documentation</a> to discover the concepts behind this feature.
-</div>
+{{< /alert >}}
 
 This page covers how to configure Autodiscovery for integrations with Docker. If you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
 

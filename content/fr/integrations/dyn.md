@@ -53,9 +53,9 @@ Une fois votre utilisateur Datadog en lecture seule créé :
 
 Les métriques de requêtes par seconde de DYN sont recueillies par défaut pour toutes les zones.
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Les listes de contrôle d'accès (ACL) en fonction des adresses IP doivent être désactivées pour l'intégration Dyn.
-</div>
+{{< /alert >}}
 
 ## Données collectées
 

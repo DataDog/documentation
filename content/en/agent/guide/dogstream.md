@@ -6,11 +6,11 @@ aliases:
   - /agent/faq/dogstream
 ---
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 This is a deprecated feature of Agent 5. New feature releases are discontinued.
 <br>
 Agent v6 is available! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Upgrade to the newest version</a> to benefit from the new functionality.
-</div>
+{{< /alert >}}
 
 Log files contain tons of valuable application and business data.
 Unfortunately, this value is oftentimes never realized because log files go

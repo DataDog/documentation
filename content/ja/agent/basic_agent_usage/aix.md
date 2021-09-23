@@ -7,9 +7,9 @@ further_reading:
   text: Datadog Unix Agent を使用した AIX の監視
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発されており、Agents 5 および 6 とは異なります。
-</div>
+{{< /alert >}}
 
 このページでは、AIX 用 Datadog UNIX Agent のインストールと構成について説明します。
 

@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Si vous n'avez pas encore lu les instructions sur l'instrumentation automatique et la configuration, commencez par lire la section <a href="https://docs.datadoghq.com/tracing/setup/nodejs/">Tracer des applications Python</a>.
-</div>
+{{< /alert >}}
 
 SI vous n'utilisez pas une instrumentation de bibliothèque compatible (voir la [compatibilité des bibliothèques][1]), vous pouvez choisir d'instrumenter manuellement votre code.
 

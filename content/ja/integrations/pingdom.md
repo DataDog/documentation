@@ -28,9 +28,9 @@ Datadog は、Pingdom Web サイトで構成されているすべてのサイト
 
 [インテグレーションステータスモニター][1]を構成することで、Pingdom イベントを追加できます。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 メトリクスのインポートは、Starter レベル以上の Pingdom ユーザーで行うことができます。
-</div>
+{{< /alert >}}
 
 ## セットアップ
 

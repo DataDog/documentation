@@ -13,7 +13,7 @@ further_reading:
 kind: documentation
 title: Collecte de traces iOS
 ---
-<div class="alert alert-info">La collecte de traces iOS est en bêta publique. Si vous avez des questions, contactez notre <a href="https://docs.datadoghq.com/help/" target="_blank">équipe d'assistance</a>.</div>
+{{< alert type="info" >}}La collecte de traces iOS est en bêta publique. Si vous avez des questions, contactez notre <a href="https://docs.datadoghq.com/help/" target="_blank">équipe d'assistance</a>.{{< /alert >}}
 
 Envoyez des [traces][1] à Datadog à partir de vos applications iOS avec la [bibliothèque de tracing côté client `dd-sdk-ios` de Datadog][2]. Vous pourrez notamment :
 

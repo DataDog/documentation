@@ -13,7 +13,7 @@ further_reading:
       text: 'Agent v6 Changes'
 ---
 
-<div class="alert alert-info"><p>
+{{< alert type="info" >}}<p>
 Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
 Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization will depend on your infrastructure and your configuration management practices, but aim for monthly.</p>
@@ -21,7 +21,7 @@ Upgrading to a major Datadog Agent version and keeping it updated is the only su
 To update the Datadog Agent core between two minor versions on a given host, run <a href="https://app.datadoghq.com/account/settings#agent">the corresponding install command for your platform</a>.</p>
 <p>
 Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a> rules.</p>
-</div>
+{{< /alert >}}
 
 ## Changes between major Agent versions
 

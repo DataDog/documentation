@@ -12,7 +12,7 @@ further_reading:
     tag: よくあるご質問
     text: Agent v6 の変更点
 ---
-<div class="alert alert-info"><p>
+{{< alert type="info" >}}<p>
 Datadog は、Datadog Agent をマイナーリリースとパッチリリースごとに、または少なくとも毎月更新することをお勧めします。</p>
 <p>
 Datadog Agent のメジャーバージョンにアップグレードして最新の状態に保つことが、最新の Agent 機能と修正を入手するためにサポートされている唯一の方法です。ただし、Agent は頻繁にアップデートをリリースしており、エンタープライズ規模でアップデートを管理することは困難な場合があります。これは、メジャーリリースまで更新を待つべきであるあるという意味ではありません。組織に適した更新の頻度は、インフラストラクチャーと構成管理の方法によって異なりますが、毎月が目標です。</p>
@@ -20,7 +20,7 @@ Datadog Agent のメジャーバージョンにアップグレードして最新
 特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="https://app.datadoghq.com/account/settings#agent">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
 <p>
 Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a> の規則に従います。</p>
-</div>
+{{< /alert >}}
 
 ## メジャー Agent バージョン間の変更点
 

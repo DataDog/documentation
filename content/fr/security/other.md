@@ -6,7 +6,7 @@ further_reading:
     tag: Documentation
     text: Consulter les principales catégories de données envoyées à Datadog
 ---
-<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring, consultez la section <a href="/security_monitoring" target="_blank">Security Monitoring</a>.</div>
+{{< alert type="info" >}}Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring, consultez la section <a href="/security_monitoring" target="_blank">Security Monitoring</a>.{{< /alert >}}
 
 Cet article fait partie d'une [série d'articles sur la sécurité des données][1].
 

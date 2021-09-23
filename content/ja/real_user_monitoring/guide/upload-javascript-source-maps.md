@@ -66,7 +66,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
         javascript.464388.js.map
 ```
 
-<div class="alert alert-info">例えば、<code>javascript.364758.min.js</code>と<code>javascript.364758.js.map</code>のファイルサイズの合計が <i>50MB の制限値</i>を超えた場合は、バンドラーでソースコードを複数の小さなブロックに分割するよう構成してファイルサイズを縮小してください (<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS での操作方法はこちらを参照してください</a>)。</div>
+{{< alert type="info" >}}例えば、<code>javascript.364758.min.js</code>と<code>javascript.364758.js.map</code>のファイルサイズの合計が <i>50MB の制限値</i>を超えた場合は、バンドラーでソースコードを複数の小さなブロックに分割するよう構成してファイルサイズを縮小してください (<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS での操作方法はこちらを参照してください</a>)。{{< /alert >}}
 
 ## ソースマップのアップロード
 
@@ -112,7 +112,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 
 **注**: エラー追跡 UI でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
 
-<div class="alert alert-info"> JavaScript ソースファイルは、環境 (たとえばステージングまたは本番) に基づき異なるサブドメインから利用できます。関連するソースマップをアップロードしたら、完全な URL の代わりに絶対的なプレフィックスパスを使用する (<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定) ことで複数のサブドメインに機能させることが可能です。</div>
+{{< alert type="info" >}} JavaScript ソースファイルは、環境 (たとえばステージングまたは本番) に基づき異なるサブドメインから利用できます。関連するソースマップをアップロードしたら、完全な URL の代わりに絶対的なプレフィックスパスを使用する (<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定) ことで複数のサブドメインに機能させることが可能です。{{< /alert >}}
 
 ## エラーを簡単にトラブルシューティング
 

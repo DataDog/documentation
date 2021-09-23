@@ -50,7 +50,7 @@ datadogRum.init({
 
 **注**: `allowedTracingOrigins` は、`<scheme> "://" <hostname> [ ":" <port> ]` と定義された、ブラウザアプリケーションにより呼び出された呼び出し元と一致する Javascript 文字列および正規表現を受け入れます。
 
-<div class="alert alert-info">ブラウザ SDK の初期化後に生成されたリクエストには、エンドツーエンドのトレーシングを利用できます。初めの HTML 文書のエンドツーエンドトレースおよび始めのブラウザリクエストはサポートされません。</div>
+{{< alert type="info" >}}ブラウザ SDK の初期化後に生成されたリクエストには、エンドツーエンドのトレーシングを利用できます。初めの HTML 文書のエンドツーエンドトレースおよび始めのブラウザリクエストはサポートされません。{{< /alert >}}
 
 [1]: /ja/real_user_monitoring/browser/
 {{% /tab %}}

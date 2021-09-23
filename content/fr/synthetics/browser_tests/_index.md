@@ -23,7 +23,7 @@ further_reading:
 
 Les tests Browser sont des scénarios exécutés par Datadog sur vos applications Web. Ils s'exécutent à des intervalles personnalisables, à partir de différents emplacements dans le monde entier et depuis plusieurs navigateurs et appareils. Ces tests vérifient que vos applications fonctionnent et répondent aux requêtes, et que les conditions définies dans vos scénarios sont satisfaites.
 
-<div class="alert alert-info">Vous souhaitez tester les applications qui nécessitent une authentification multifacteur ? Consultez <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">notre guide dédié</a> et <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">donnez-nous votre avis</a> pour nous aider à prendre en charge les systèmes qui comptent le plus pour vos équipes.</div>
+{{< alert type="info" >}}Vous souhaitez tester les applications qui nécessitent une authentification multifacteur ? Consultez <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">notre guide dédié</a> et <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">donnez-nous votre avis</a> pour nous aider à prendre en charge les systèmes qui comptent le plus pour vos équipes.{{< /alert >}}
 
 ## Configuration du test
 

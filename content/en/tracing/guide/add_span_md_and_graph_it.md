@@ -223,7 +223,7 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-info">You might have to wait a few minutes between deploying your updated code and seeing the new tags in the Datadog UI</div>
+{{< alert type="info" >}}You might have to wait a few minutes between deploying your updated code and seeing the new tags in the Datadog UI{{< /alert >}}
 
 ## Leverage the Datadog UI to search for your custom span tags
 
@@ -241,7 +241,7 @@ In this view you can see the **flame graph** on top and the additional informati
 
 The bottom part of the view includes additional information about the trace or any selected span. Here you can see all default tags as well as the ones you manually include. In addition to these, you can also switch to view associated Host and Log information.
 
-<div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>connect Logs and Traces</a></div>
+{{< alert type="info" >}}In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>connect Logs and Traces</a>{{< /alert >}}
 
 ## Leverage your custom span tags with Analytics
 

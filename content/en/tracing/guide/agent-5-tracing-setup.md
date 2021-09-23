@@ -16,9 +16,9 @@ The Agent can be enabled by including the following in your [Datadog Agent confi
 apm_enabled: true
 ```
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), but can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog Agent configuration file.
-</div>
+{{< /alert >}}
 
 ### Installing the Agent
 

@@ -51,7 +51,7 @@ For example, if your monitor triggers for each `env`, then the variable `{{env.n
 
 For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message will render a comma-separated string of all values, in the lexicographic order.
 
-<div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.</div>
+{{< alert type="info" >}}<strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.{{< /alert >}}
 
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 

@@ -6,9 +6,9 @@ further_reading:
     tag: ドキュメント
     text: Python 2  から Python 3 へカスタムチェックを移行する
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Agent v7 は Python 3 のカスタムチェックにのみ対応しています。Agent 7 に移行する前に、<a href="/agent/guide/python-3">ご利用のカスタムチェックと Python 3 に互換性があることをご確認ください。</a>
-</div>
+{{< /alert >}}
 
 ## Agent v6 から Agent v7 へ
 

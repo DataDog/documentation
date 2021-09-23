@@ -9,9 +9,9 @@ further_reading:
     tag: ドキュメント
     text: AWS サービスからログを収集する
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Datadog は <b>us-east-1</b>で AWS PrivateLink エンドポイントを公開しています。
-</div>
+{{< /alert >}}
 
 {{< site-region region="gov" >}}
 {{< alert >}}Datadog PrivateLink は、政府関係のサイトに対する Datadog の使用をサポートしていません。{{< /alert >}}

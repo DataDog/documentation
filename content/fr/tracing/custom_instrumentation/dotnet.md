@@ -16,9 +16,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Pour découvrir comment configurer le traceur .NET et activer l'instrumentation automatique, consultez les <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">instructions de configuration pour .NET</a>.
-</div>
+{{< /alert >}}
 
 **Remarque :** lorsque vous utilisez à la fois l'instrumentation personnalisée et l'instrumentation automatique, il est essentiel de veiller à ce que les versions du package NuGet et du programme d'installation MSI correspondent.
 

@@ -13,7 +13,7 @@ further_reading:
 kind: ドキュメント
 title: iOSトレースの収集
 ---
-<div class="alert alert-info">iOS トレースの収集は公開ベータ版です。ご質問がございましたら、<a href="https://docs.datadoghq.com/help/" target="_blank">サポートチーム</a>までお問い合わせください。</div>
+{{< alert type="info" >}}iOS トレースの収集は公開ベータ版です。ご質問がございましたら、<a href="https://docs.datadoghq.com/help/" target="_blank">サポートチーム</a>までお問い合わせください。{{< /alert >}}
 
 [Datadog の `dd-sdk-ios` クライアント側トレーシングライブラリ][2]を使用すると、iOS アプリケーションから Datadog へ[トレース][1]を送信すると共に、次の機能を利用できます。
 

@@ -27,7 +27,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 ?>
 ```
 
-<div class="alert alert-info">ddtrace のバージョン 0.46.0 以前では、OpenTracing に互換性のあるトレーサーが <code>OpenTracing\GlobalTracer::get()</code> から自動で返されます。グローバルトレーサーの手動設定は不要です。</div>
+{{< alert type="info" >}}ddtrace のバージョン 0.46.0 以前では、OpenTracing に互換性のあるトレーサーが <code>OpenTracing\GlobalTracer::get()</code> から自動で返されます。グローバルトレーサーの手動設定は不要です。{{< /alert >}}
 
 
 [1]: https://github.com/opentracing/opentracing-php

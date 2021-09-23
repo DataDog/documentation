@@ -9,9 +9,9 @@ further_reading:
     tag: Documentation
     text: Collecter les logs de vos services AWS
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Datadog expose les endpoints AWS PrivateLink sur <b>us-east-1</b>.
-</div>
+{{< /alert >}}
 
 {{< site-region region="gov" >}}
 {{< alert >}}Datadog via PrivateLink ne prend pas en charge le site gouvernemental de Datadog.{{< /alert >}}

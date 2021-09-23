@@ -5,9 +5,9 @@ aliases:
   - /fr/graphing/faq/timeboard-api-doc
   - /fr/graphing/guide/timeboard-api-doc
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
-</div>
+{{< /alert >}}
 
 L'endpoint `Timeboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de timeboards. [En savoir plus sur les timeboards][1].
 

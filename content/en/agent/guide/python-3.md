@@ -10,9 +10,9 @@ further_reading:
   text: "Use Python 3 with Datadog Agent v6"
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Only Agent v7+ supports running Python 3 custom checks by default. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the latest Agent version</a> to run your Python 3 custom checks natively. Or <a href="/agent/guide/agent-v6-python-3">enable the Python 3 runtime</a> for your Agent v6.14+ if you would like to test your custom checks migration without upgrading your Agent.
-</div>
+{{< /alert >}}
 
 ## Overview
 

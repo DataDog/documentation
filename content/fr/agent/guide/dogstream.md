@@ -5,11 +5,11 @@ private: true
 aliases:
   - /fr/agent/faq/dogstream
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Dogstream est une fonctionnalité de l'Agent 5 dorénavant obsolète. Elle ne fera l'objet d'aucune mise à jour.
 <br>
 L'Agent v6 est maintenant disponible ! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Passez à la nouvelle version</a> pour bénéficier des nouvelles fonctionnalités.
-</div>
+{{< /alert >}}
 
 Les fichiers de log contiennent une multitude de données précieuses sur vos applications et vos opérations.
 Malheureusement, ces fichiers de log étant bien souvent laissés à l'abandon, l'utilité des données qu'ils contiennent n'est que rarement reconnue. Grâce à sa fonctionnalité de parsing des métriques et des événements en provenance des logs, l'Agent Datadog peut vous aider à remédier à ce problème en représentant graphiquement les données en temps réel et en continu.

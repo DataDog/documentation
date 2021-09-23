@@ -7,9 +7,9 @@ further_reading:
   text: Surveiller AIX avec l'Agent Datadog Unix
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 L'Agent Datadog Unix est développé pour des architectures système spécifiques et diffère de l'Agent versions 5 et 6.
-</div>
+{{< /alert >}}
 
 Cette page décrit les processus d'installation et de configuration de l'Agent Datadog UNIX pour AIX.
 

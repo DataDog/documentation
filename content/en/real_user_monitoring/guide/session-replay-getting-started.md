@@ -11,8 +11,8 @@ further_reading:
       text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-<div class="alert alert-info"><p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
-</div>
+{{< alert type="info" >}}<p>Session Replay is in beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available only on <a href="/getting_started/site/">the US1 Datadog site</a>.</p>
+{{< /alert >}}
 
 ## What is Session Replay?
 
@@ -72,9 +72,9 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 
 ### Sensitive & personal data obfuscation
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 The Privacy by Default feature changes how the SDK manages privacy.
-</div>
+{{< /alert >}}
 
 By default, the SDK protects end-user privacy and sensitive organizational information from being recorded by automatically masking form fields such as password inputs and text areas.
 

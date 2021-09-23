@@ -10,9 +10,9 @@ further_reading:
   text: Datadog Agent v6 で Python 3 を使用する
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Python 3 カスタムチェックの実行をデフォルトでサポートするのは、Agent v7 以降のみです。Python 3 カスタムチェックをネイティブで実行するには、<a href="/agent/versions/upgrade_to_agent_v7">最新バージョンの Agent にアップグレード</a>してください。Agent をアップグレードせずにカスタムチェックの移行をテストする場合は、Agent v6.14 以降の <a href="/agent/guide/agent-v6-python-3">Python 3 ランタイムを有効化</a>します。
-</div>
+{{< /alert >}}
 
 ## 概要
 

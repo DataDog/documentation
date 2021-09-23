@@ -9,9 +9,9 @@ further_reading:
     tag: Centre d'apprentissage
     text: Présentation des Service Level Objectives (SLO)
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Cliquez <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">ici</a> pour télécharger une version PDF de cette page.
-</div>
+{{< /alert >}}
 
 ## Prise en main
 

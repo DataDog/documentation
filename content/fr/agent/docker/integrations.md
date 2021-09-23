@@ -18,9 +18,9 @@ further_reading:
     tag: Documentation
     text: Attribuer des tags à toutes les données émises par un conteneur
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 <a href="/getting_started/agent/autodiscovery">Consultez la documentation Débuter avec Autodiscovery pour découvrir les concepts sous-jacents de cette fonctionnalité</a>.
-</div>
+{{< /alert >}}
 
 Cette page traite de la configuration des intégrations Autodiscovery avec Docker. Si vous utilisez Kubernetes, consultez la [documentation relative aux intégrations Autodiscovery avec Kubernetes][1]. 
 

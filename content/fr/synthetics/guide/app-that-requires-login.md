@@ -19,7 +19,7 @@ Il se peut que vous cherchiez à surveiller les parcours utilisateur qui nécess
 
 Vous pouvez également vous assurer que vos identifiants sont stockés et obfusqués de façon sécurisée dans l'application [à l'aide de variables globales sécurisées](#sécurite-du-compte).
 
-<div class="alert alert-info">Vous souhaitez tester les applications qui nécessitent une authentification multifacteur ? Consultez la <a href="/synthetics/guide/app-that-requires-login/#authentification-multifacteur" target="_blank">section ci-dessous</a> et <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">donnez-nous votre avis</a> pour nous aider à prendre en charge les systèmes qui comptent le plus pour vos équipes.</div>
+{{< alert type="info" >}}Vous souhaitez tester les applications qui nécessitent une authentification multifacteur ? Consultez la <a href="/synthetics/guide/app-that-requires-login/#authentification-multifacteur" target="_blank">section ci-dessous</a> et <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">donnez-nous votre avis</a> pour nous aider à prendre en charge les systèmes qui comptent le plus pour vos équipes.{{< /alert >}}
 
 ## Ajouter les étapes de connexion à votre enregistrement
 
@@ -53,7 +53,7 @@ Les tests Browser peuvent reproduire les actions qu'un utilisateur normal peut e
 Si votre processus d'authentification multifacteur implique de réaliser des étapes en dehors du navigateur, par exemple de recevoir un message vocal ou un SMS ou encore d'ouvrir une application mobile, contactez votre fournisseur d'authentification multifacteur. Demandez-lui s'il est possible de modifier vos réglages ou de désactiver l'authentification multifacteur lors de l'[identification des requêtes provenant des tests Browser Synthetic][3] (par exemple, pour un ensemble d'identifiants ou d'en-têtes de tests Synthetic spécifiques, ou autres) afin que vous puissiez réaliser vos tests.
 Selon le type d'authentification multifacteur utilisé par votre application, des [étapes JavaScript][4] peuvent vous permettre de contourner ce problème.
 
-<div class="alert alert-info">Nous développons constamment de nouvelles fonctionnalités pour vous aider à enregistrer vos scénarios de test plus facilement. Aidez-nous à prendre en charge les systèmes à authentification multifacteur qui comptent le plus pour vous en nous <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">donnant votre avis</a>.</div>
+{{< alert type="info" >}}Nous développons constamment de nouvelles fonctionnalités pour vous aider à enregistrer vos scénarios de test plus facilement. Aidez-nous à prendre en charge les systèmes à authentification multifacteur qui comptent le plus pour vous en nous <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">donnant votre avis</a>.{{< /alert >}}
 
 ## Tirer parti des options de configuration des tests Browser
 

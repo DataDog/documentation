@@ -62,9 +62,9 @@ All services can be found in the [Service List][4] and visually represented on t
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Don’t see the HTTP endpoints you were expecting on the Service page? In APM, endpoints are connected to a service by more than the service name. It is also done with the `span.name` of the entry-point span of the trace. For example, on the web-store service above, `web.request` is the entry-point span. More info on this <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">here</a>.
-</div>
+{{< /alert >}}
 
 ## Resources
 
@@ -126,9 +126,9 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 Indexed Spans represent spans indexed by a [retention filter](#retention-filters) stored in Datadog for 15 days that can be used to search, query, and monitor in [Trace Search and Analytics][14] by the [tags](#span-tags) included on the span.
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> after ingestion allows you to control and visualize exactly how many spans are being indexed per service.
-</div>
+{{< /alert >}}
 
 ## Span tags
 

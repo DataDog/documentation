@@ -85,9 +85,9 @@ Lorsque Datadog reçoit des logs, il leur attribue un timestamp à l'aide des va
 
 Si la date de vos logs est spécifiée dans un attribut ne figurant pas dans cette liste, utilisez le processeur de remappage de dates de logs pour définir leur attribut date comme timestamp officiel pour ces logs :
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a> et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
-</div>
+{{< /alert >}}
 
 
 **Remarques** :

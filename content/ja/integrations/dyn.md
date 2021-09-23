@@ -52,9 +52,9 @@ Datadog 読み取り専用ユーザーを作成し、次の手順を行います
 
 デフォルトでは、すべてのゾーンの Dyn 「QPS」メトリクスが収集されます。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Dyn インテグレーションでは、IP ACL を無効にする必要があります。
-</div>
+{{< /alert >}}
 
 ## 収集データ
 

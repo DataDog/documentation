@@ -88,9 +88,9 @@ instances:
       - [IDProcess, Win32_Process, Handle, CommandLine]
 ```
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 デフォルトの構成は、フィルター節を使用して、プルされるメトリクスを制限しています。フィルターに有効な値を設定するか、上のようにフィルターを削除して、メトリクスを収集してください。
-</div>
+{{< /alert >}}
 
 メトリクス定義は、次の 3 つの要素からなります。
 

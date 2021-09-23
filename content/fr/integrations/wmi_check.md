@@ -84,9 +84,9 @@ instances:
       - [IDProcess, Win32_Process, Handle, CommandLine]
 ```
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 La configuration par défaut utilise la clause de filtre pour limiter les métriques récupérées. Définissez les filtres sur des valeurs valides ou supprimez-les comme illustré ci-dessus pour recueillir les métriques.
-</div>
+{{< /alert >}}
 
 Les définitions de métriques comprennent trois composants :
 

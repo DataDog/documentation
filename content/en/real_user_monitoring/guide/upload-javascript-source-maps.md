@@ -14,7 +14,7 @@ further_reading:
 
 If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces. For a given error, you will then get access to the file path, the line number, as well as a code snippet for each frame of the related stack trace.
 
-<div class="alert alert-info"><strong>Note</strong>: Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified and processed by <a href="/real_user_monitoring/error_tracking/">Error Tracking</a>.</div>
+{{< alert type="info" >}}<strong>Note</strong>: Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> can be unminified and processed by <a href="/real_user_monitoring/error_tracking/">Error Tracking</a>.{{< /alert >}}
 
 ## Instrument your code
 You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute. In addition, ensure that the size of each source map augmented with the size of the related minified file does not exceed __our limit of 50MB__. Check below for some configurations for popular Javascript bundlers.
@@ -68,7 +68,7 @@ After building your application, bundlers generate a directory, most of the time
         javascript.464388.js.map
 ```
 
-<div class="alert alert-info">If, for example, the sum of the file size of <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds <i>the 50MB limit</i>, reduce it by configuring your bundler to split the source code into multiple smaller chunks (<a href="https://webpack.js.org/guides/code-splitting/">See how to do this with WebpackJS</a>).</div>
+{{< alert type="info" >}}If, for example, the sum of the file size of <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds <i>the 50MB limit</i>, reduce it by configuring your bundler to split the source code into multiple smaller chunks (<a href="https://webpack.js.org/guides/code-splitting/">See how to do this with WebpackJS</a>).{{< /alert >}}
 
 ## Upload your source maps
 
@@ -114,7 +114,7 @@ By running this command against our example `dist` directory (see previous secti
 
 **Note**: Only source maps with the `.js.map` extension work to correctly unminify stack traces in the error tracking UI. Source maps with other extensions, such as `.mjs.map`, are accepted but do not unminify stack traces.
 
-<div class="alert alert-info">A given JavaScript source file can be served from different subdomains depending on the environment (for example, staging or production). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full url (specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).</div>
+{{< alert type="info" >}}A given JavaScript source file can be served from different subdomains depending on the environment (for example, staging or production). You can upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full url (specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>).{{< /alert >}}
 
 ## Troubleshoot errors with ease
 

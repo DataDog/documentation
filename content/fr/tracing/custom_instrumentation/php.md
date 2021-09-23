@@ -16,9 +16,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Si vous n'avez pas encore lu les instructions sur l'instrumentation automatique et la configuration, commencez par lire les <a href="https://docs.datadoghq.com/tracing/setup/php/">Instructions de configuration PHP</a>.
-</div>
+{{< /alert >}}
 
 Même si Datadog ne prend pas officiellement en charge votre framework Web, une instrumentation manuelle n'est pas forcément nécessaire. Consultez la section [Instrumentation automatique][1] pour en savoir plus.
 
@@ -26,7 +26,7 @@ Même si Datadog ne prend pas officiellement en charge votre framework Web, une 
 
 Pour instrumenter manuellement du code afin de [tracer][2] des méthodes personnalisées spécifiques dans votre application ou d'ajouter des tags à vos spans, utilisez `DDTrace\trace_function()` ou `DDTrace\trace_method()`.
 
-<div class="alert alert-info">Si vous utilisez une version de ddtrace antérieure à la version 0.47.0, utilisez <code>dd_trace_function()</code> au lieu de <code>DDTrace\trace_function()</code> et <code>dd_trace_method()</code> au lieu de <code>DDTrace\trace_method()</code>, ou passez à la dernière version du traceur.</div>
+{{< alert type="info" >}}Si vous utilisez une version de ddtrace antérieure à la version 0.47.0, utilisez <code>dd_trace_function()</code> au lieu de <code>DDTrace\trace_function()</code> et <code>dd_trace_method()</code> au lieu de <code>DDTrace\trace_method()</code>, ou passez à la dernière version du traceur.{{< /alert >}}
 
 ### Tracer une méthode ou une fonction personnalisée
 
@@ -280,7 +280,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 ?>
 ```
 
-<div class="alert alert-info">Avant ddtrace version 0.46.0, un traceur compatible avec OpenTracing était automatiquement renvoyé par <code>OpenTracing\GlobalTracer::get()</code> sans avoir à configurer le traceur global manuellement.</div>
+{{< alert type="info" >}}Avant ddtrace version 0.46.0, un traceur compatible avec OpenTracing était automatiquement renvoyé par <code>OpenTracing\GlobalTracer::get()</code> sans avoir à configurer le traceur global manuellement.{{< /alert >}}
 
 ## Références sur les API
 

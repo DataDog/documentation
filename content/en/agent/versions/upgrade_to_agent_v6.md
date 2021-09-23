@@ -6,9 +6,9 @@ aliases:
   - /agent/guide/upgrade-to-agent-v6
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
-</div>
+{{< /alert >}}
 
 ## Upgrade to Agent 6
 

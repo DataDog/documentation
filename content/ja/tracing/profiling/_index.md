@@ -15,9 +15,9 @@ further_reading:
     tags: ブログ
     text: Datadog に常時接続型の本番環境プロファイリングが登場。
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Datadog Profiling はベータ版です。問題が発生したりフィードバックを共有したりする場合は、<a href="/help/">Datadog のサポートチーム</a>にお問い合わせください。
-</div>
+{{< /alert >}}
 
 {{< img src="tracing/profiling/profiling_flamegraph.gif" alt="プロファイリングのフレームグラフ">}}
 

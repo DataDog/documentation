@@ -23,9 +23,9 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 <a href="/getting_started/agent/autodiscovery">Consult the Autodiscovery Getting Started documentation to discover the concepts behind this feature</a>.
-</div>
+{{< /alert >}}
 
 This page covers how to configure integrations Autodiscovery with Kubernetes. If you are using Docker or Amazon ECS, see the [Docker Integrations Autodiscovery documentation][1]. The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 

@@ -27,7 +27,7 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 ?>
 ```
 
-<div class="alert alert-info">Avant ddtrace version 0.46.0, un traceur compatible avec OpenTracing était automatiquement renvoyé par <code>OpenTracing\GlobalTracer::get()</code> sans avoir à configurer le traceur global manuellement.</div>
+{{< alert type="info" >}}Avant ddtrace version 0.46.0, un traceur compatible avec OpenTracing était automatiquement renvoyé par <code>OpenTracing\GlobalTracer::get()</code> sans avoir à configurer le traceur global manuellement.{{< /alert >}}
 
 
 [1]: https://github.com/opentracing/opentracing-php

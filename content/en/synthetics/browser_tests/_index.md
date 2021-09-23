@@ -27,7 +27,7 @@ further_reading:
 
 Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, from multiple browsers, and devices. These tests verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
-<div class="alert alert-info">Are you interested in testing applications that sit behind MFA? Read <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">our dedicated guide </a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.</div>
+{{< alert type="info" >}}Are you interested in testing applications that sit behind MFA? Read <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">our dedicated guide </a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.{{< /alert >}}
 
 ## Permissions
 

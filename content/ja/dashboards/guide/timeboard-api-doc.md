@@ -5,9 +5,9 @@ aliases:
   - /ja/graphing/faq/timeboard-api-doc
   - /ja/graphing/guide/timeboard-api-doc
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api/v1/dashboards/">新しいダッシュボードエンドポイント</a>を使用してください。
-</div>
+{{< /alert >}}
 
 `Timeboard` エンドポイントを使用すると、タイムボードをプログラムで作成、更新、削除、およびクエリできます。[タイムボードの詳細については、こちらを参照してください][1]。
 

@@ -3,11 +3,11 @@ title: Estimate and Control APM Usage
 kind: documentation
 ---
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
 <br>
 Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
-</div>
+{{< /alert >}}
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
 Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.

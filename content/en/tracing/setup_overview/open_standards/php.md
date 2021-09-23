@@ -35,7 +35,7 @@ $scope->close();
 ?>
 ```
 
-<div class="alert alert-info">Before ddtrace version 0.46.0, an OpenTracing compatible tracer was automatically returned from <code>OpenTracing\GlobalTracer::get()</code> without the need to set the global tracer manually.</div>
+{{< alert type="info" >}}Before ddtrace version 0.46.0, an OpenTracing compatible tracer was automatically returned from <code>OpenTracing\GlobalTracer::get()</code> without the need to set the global tracer manually.{{< /alert >}}
 
 
 [1]: https://github.com/opentracing/opentracing-php

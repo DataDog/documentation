@@ -25,9 +25,9 @@ aliases:
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Agent v7 is available. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the newest version</a> to benefit from all new functionality.
-</div>
+{{< /alert >}}
 
 ## Overview
 
@@ -41,7 +41,7 @@ Packages are also available for 64-bit x86 and Arm v8 architectures. For other a
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
-<div class="alert alert-info"><p>
+{{< alert type="info" >}}<p>
 Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
 Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization depends on your infrastructure and your configuration management practices, but aim for monthly.</p>
@@ -49,7 +49,7 @@ Upgrading to a major Datadog Agent version and keeping it updated is the only su
 To update the Datadog Agent core between two minor versions on a given host, run <a href="https://app.datadoghq.com/account/settings#agent">the corresponding install command for your platform</a>.</p>
 <p>
 Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a> rules.</p>
-</div>
+{{< /alert >}}
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/agent/basic_agent_usage">}}<u>Basic Agent Usage</u>: Find out more about the Datadog Agent, including architecture details, CLI, overhead, and configuration management tools.{{< /nextlink >}}

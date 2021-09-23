@@ -5,9 +5,9 @@ aliases:
   - /fr/agent/faq/upgrade-to-agent-v6
   - /fr/agent/guide/upgrade-to-agent-v6
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 L'Agent v7 est disponible. <a href="/agent/versions/upgrade_to_agent_v7">Passez à la dernière version</a> pour profiter des nouvelles fonctionnalités.
-</div>
+{{< /alert >}}
 
 ## Upgrade vers l'Agent 6
 

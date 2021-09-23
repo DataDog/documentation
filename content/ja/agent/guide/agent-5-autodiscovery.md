@@ -5,9 +5,9 @@ private: true
 aliases:
   - /ja/agent/faq/agent-5-autodiscovery
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 オートディスカバリーは、これまでのサービスディスカバリーのことです。Agent のコード内や一部の構成オプションでは、引き続きサービスディスカバリーと呼びます。
-</div>
+{{< /alert >}}
 
 Docker は[急速に導入が進んでいます][1]。Docker Swarm、Kubernetes、Amazon ECS などのオーケストレーションプラットフォームは、複数のホスト間のオーケストレーションとレプリケーションを管理することで、Docker 化されたサービスの実行を容易にし、回復性を高めます。しかし、監視はより困難になっています。ホスト間を予測不可能に移動するサービスを、どうすれば高い信頼性で監視できるでしょうか。
 

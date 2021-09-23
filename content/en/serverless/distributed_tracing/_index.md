@@ -30,7 +30,7 @@ The Datadog Python, Node.js, Ruby, Go and Java tracing libraries support distrib
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
-<div class="alert alert-info"> New to serverless monitoring? Follow the installation steps <a href="/serverless/installation/">here</a> to get started.</div>
+{{< alert type="info" >}} New to serverless monitoring? Follow the installation steps <a href="/serverless/installation/">here</a> to get started.{{< /alert >}}
 
 To start using Datadog APM with your serverless application, you can choose between installing Datadog's tracing libraries (`dd-trace`) or AWS X-Ray tracing libraries based on your Lambda runtime and individual requirements. To see all of your traces in Datadog in real-time in the Live Search view, you need to use Datadog's tracing libraries.
 

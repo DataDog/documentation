@@ -6,11 +6,11 @@ aliases:
   - /fr/tracing/trace_search_and_analytics/
   - /fr/tracing/advanced_usage/
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Le 20 octobre 2020,  App Analytics a été remplacé par Tracing without Limits. Cette page est obsolète et contient des informations de configuration relatives à l'ancienne version, App Analytics, pouvant s'avérer utiles pour dépanner ou modifier des configurations antérieures. Utilisez désormais Tracing without Limits™ pour profiter d'un contrôle total sur votre <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">ingestion de données et de votre rétention de traces</a>, et ce sans aucun échantillonnage.
 <br>
 Adoptez <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">la rétention et l'ingestion des traces</a> pour utiliser les nouvelles fonctionnalités.
-</div>
+{{< /alert >}}
 
 La fonction [App Analytics][1] sert à filtrer les spans indexées avec des tags définis par l'utilisateur, comme `customer_id`, `error_type` ou `app_name`, vous permettant ainsi de dépanner et filtrer vos requêtes. Elle peut être activée de deux façons :
 

@@ -62,9 +62,9 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="サービス詳細画面" >}}
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 サービス詳細画面に期待していた HTTP エンドポイントが表示されませんか？APM では、エンドポイントはサービス名以上でサービスに接続されます。また、トレースのエントリポイントスパンの `span.name` を使用して行われます。たとえば、上記のウェブストアサービスでは、`web.request` がエントリポイントスパンです。詳細については<a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">こちら</a>をご覧ください。
-</div>
+{{< /alert >}}
 
 ## リソース
 
@@ -126,9 +126,9 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 Indexed Span は、Datadog に 15 日間保管された [Retention Filter](#Retention Filters) でインデックスされたスパンを表し、スパンに含まれる[タグ](#スパンタグ)による[トレース検索および Analytics][14] での検索、クエリ、監視に使用することができます。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 取り込み後に<a href="https://app.datadoghq.com/apm/traces/retention-filters">タグベースの Retention Filter</a> を作成して、サービスごとにインデックス化されたスパンの正確な数を制御および可視化することができます。
-</div>
+{{< /alert >}}
 
 ## スパンタグ
 

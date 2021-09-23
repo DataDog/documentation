@@ -7,9 +7,9 @@ further_reading:
   text: "Migrate your Custom Checks from python 2 to python 3"
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Agent v7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">Check if your custom checks are Python 3 compatible</a> before upgrading to Agent 7.
-</div>
+{{< /alert >}}
 
 ## From Agent v6 to Agent v7
 

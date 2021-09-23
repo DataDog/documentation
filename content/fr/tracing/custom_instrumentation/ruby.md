@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Si vous n'avez pas encore lu les instructions sur l'instrumentation automatique et la configuration, commencez par lire la section <a href="https://docs.datadoghq.com/tracing/setup/ruby/">Instructions de configuration Ruby</a>.
-</div>
+{{< /alert >}}
 
 Cette page revient en détail sur les méthodes courantes d'ajout et de personnalisation de la visibilité avec Datadog APM.
 

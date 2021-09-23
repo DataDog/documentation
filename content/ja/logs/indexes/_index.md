@@ -33,9 +33,9 @@ further_reading:
 
 Log Explorer は、[複数のインデックスにわたるクエリ][7]をサポートしています。
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 <a href="/help">アカウントで複数のインデックスを有効にするには、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
-</div>
+{{< /alert >}}
 
 ### インデックスを追加
 

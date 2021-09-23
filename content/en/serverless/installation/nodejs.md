@@ -263,7 +263,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.</div>
+{{< alert type="info" >}}If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.{{< /alert >}}
 
 ### Install the Datadog Lambda library
 

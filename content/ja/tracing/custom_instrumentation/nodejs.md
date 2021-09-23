@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: サービス、リソース、トレースの詳細
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/nodejs/">NodeJS セットアップ手順</a>からご覧ください。
-</div>
+{{< /alert >}}
 
 対応するライブラリインスツルメンテーションを使用しない場合（ [ライブラリの互換性][1]参照）、手動でコードをインスツルメントする必要があります。
 

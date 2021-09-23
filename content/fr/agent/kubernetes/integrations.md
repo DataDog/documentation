@@ -22,9 +22,9 @@ further_reading:
     tag: Documentation
     text: Attribuer des tags à toutes les données émises par un conteneur
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 <a href="/getting_started/agent/autodiscovery">Consultez la documentation Débuter avec Autodiscovery pour découvrir les concepts sous-jacents de cette fonctionnalité</a>.
-</div>
+{{< /alert >}}
 
 Cette page traite de la configuration des intégrations Autodiscovery avec Kubernetes. Si vous utilisez Docker ou Amazon ECS, consultez la [documentation relative aux intégrations Autodiscovery avec Docker][1]. Autodiscovery vous permet d'appliquer une configuration d'intégration Datadog lors de l'exécution d'un check de l'Agent sur un conteneur donné. Pour obtenir davantage de contexte sur cette logique, découvrez comment [configurer les intégrations de l'Agent][2] lorsque l'Agent est exécuté sur un host.
 

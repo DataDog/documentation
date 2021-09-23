@@ -5,9 +5,9 @@ private: true
 aliases:
   - /fr/agent/faq/agent-5-autodiscovery
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Autodiscovery était autrefois appelé Service Discovery. Il est toujours appelé Service Discovery dans l'ensemble du code de l'Agent et dans certaines options de configuration.
-</div>
+{{< /alert >}}
 
 Docker connait une [adoption rapide][1]. Les plateformes d'orchestration comme Docker Swarm, Kubernetes et Amazon ECS facilitent l'exécution de services Dockerisés et les rendent plus robustes en gérant l'orchestration et la réplication entre les hosts. L'utilisation de ces plateformes rend toutefois la surveillance plus difficile. Comment surveiller pleinement un service qui passe d'un host à un autre sans prévenir ?
 

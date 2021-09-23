@@ -113,9 +113,9 @@ Datadog Profiler には Python 2.7 以降が必要です。メモリプロファ
 | `DD_VERSION`                                     | 文字列        | アプリケーションのバージョン                             |
 | `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api,team:intake`）。   |
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 高度な使用方法にのみ推奨されます。
-</div>
+{{< /alert >}}
 
 - プロセスが `os.fork` を使用してフォークすると、プロファイラは子プロセスで停止します。
 

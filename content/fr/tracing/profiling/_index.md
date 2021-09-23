@@ -15,9 +15,9 @@ further_reading:
     tags: Blog
     text: Présentation du profiling continu en production dans Datadog
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 La fonctionnalité de profiling de Datadog est en version bêta. Contactez <a href="/help/">l'assistance Datadog</a> si vous avez des problèmes ou des commentaires dont vous souhaitez nous faire part.
-</div>
+{{< /alert >}}
 
 {{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Explorer le flamegraph de profiling">}}
 

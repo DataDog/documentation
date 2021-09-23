@@ -52,7 +52,7 @@ OpenTelemetry Collector の構成は、[パイプライン][8]を `otel-collecto
 
 エクスポーターは、`datadog` エクスポーターが使用され、以下で構成された[バッチプロセッサー][10]が含まれることを前提とします。
   - `timeout` の必須設定である `10s` (10 秒)。10秒間のトレースを表すバッチは、トレース関連の統計に対する Datadog の API 取り込みの制約となります。
-  <div class="alert alert-info"><strong>重要！</strong> この<code>timeout</code> 設定をしない場合、<code>.hits</code>、<code>.errors</code>、<code>.duration</code> など、他のサービスおよびサービスリソースの一定期間のトレース関連メトリクスが不正確になります。</div>
+  {{< alert type="info" >}}<strong>重要！</strong> この<code>timeout</code> 設定をしない場合、<code>.hits</code>、<code>.errors</code>、<code>.duration</code> など、他のサービスおよびサービスリソースの一定期間のトレース関連メトリクスが不正確になります。{{< /alert >}}
 
 {{< alert >}}
 OpenTelemetry Collector 用 Datadog エクスポーターは、現在ベータ版です。CPU およびメモリリソースの使用量が高くなることがあります。特にパイプラインおよびバッチプロセッサーを構成する場合は、本番環境に即した正確なメトリクスで応答するまでに反復処理が必要となります。適切に動作しない場合は、<a href="https://docs.datadoghq.com/help/">サポートまでお問い合わせ</a>ください。

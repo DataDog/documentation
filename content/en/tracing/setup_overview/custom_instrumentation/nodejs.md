@@ -18,9 +18,9 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/nodejs/">NodeJS Setup Instructions</a>.
-</div>
+{{< /alert >}}
 
 If you aren’t using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 

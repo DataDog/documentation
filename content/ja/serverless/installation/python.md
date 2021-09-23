@@ -354,7 +354,7 @@ COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-<div class="alert alert-info">Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、お使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli#configuration">Datadog CLI</a> でインスツルメントすることを推奨します。</div>
+{{< alert type="info" >}}Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、お使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli#configuration">Datadog CLI</a> でインスツルメントすることを推奨します。{{< /alert >}}
 
 ### Datadog Lambda ライブラリのインストール
 

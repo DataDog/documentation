@@ -62,10 +62,10 @@ La page [Service List][4] affiche la liste de tous vos services, tandis que la [
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="page service" >}}
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Vous ne voyez pas les endpoints HTTP attendus sur la page Service ? Dans l'APM, le nom du service n'est pas le seul paramètre pris en compte pour connecter des endpoints à un service : le `span.name` de la span de point d'entrée de la trace est également utilisé. Par exemple, dans le service web-store ci-dessus, la span de point d'entrée est `web.request`.
  Vous trouverez plus d'informations à ce sujet <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">en cliquant ici</a>.
-</div>
+{{< /alert >}}
 
 ## Ressources
 
@@ -128,9 +128,9 @@ Les métriques de trace sont idéales pour la surveillance. Il est possible de d
 
 Les spans indexées représentent les spans indexées par un [filtre de rétention](#filtres-de-retention) et stockées dans Datadog pendant 15 jours. Elles peuvent être utilisées pour rechercher, interroger et surveiller vos données via la fonctionnalité [Analyse et recherche de traces][14] en fonction des [tags](#tags-de-span) inclus dans la span.
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Après l'ingestion, vous pouvez contrôler et visualiser le nombre précis de spans indexées par service en créant des <a href="https://app.datadoghq.com/apm/traces/retention-filters">filtres de rétention basés sur des tags</a>.
-</div>
+{{< /alert >}}
 
 ## Tags de span
 

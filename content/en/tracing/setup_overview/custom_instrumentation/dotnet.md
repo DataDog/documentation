@@ -23,9 +23,9 @@ further_reading:
       tag: 'GitHub'
       text: '.NET code samples'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET setup instructions</a>.
-</div>
+{{< /alert >}}
 
 **Note:** When using both custom and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 

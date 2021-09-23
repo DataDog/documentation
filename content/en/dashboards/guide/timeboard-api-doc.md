@@ -6,9 +6,9 @@ aliases:
   - /graphing/guide/timeboard-api-doc
 ---
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/"> new Dashboard endpoint</a> instead.
-</div>
+{{< /alert >}}
 
 The `Timeboard` endpoint allows you to programmatically create, update delete and query timeboards. [Find more about timeboards][1].
 

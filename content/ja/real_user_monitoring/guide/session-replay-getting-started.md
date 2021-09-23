@@ -11,9 +11,9 @@ further_reading:
     tag: ブログ
     text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示
 ---
-<div class="alert alert-info"><p>セッションリプレイは非公開ベータ版です。この期間中のセッションリプレイに対する請求への影響はありません。プライベートベータに追加する場合は、<a href="mailto:support@datadoghq.com">support@datadoghq.com</a> にメールして登録してください。</p><p>現時点では、セッションリプレイは <a href="/getting_started/site/">US1 Datadog サイト</a>でのみ利用できます。</p>
+{{< alert type="info" >}}<p>セッションリプレイは非公開ベータ版です。この期間中のセッションリプレイに対する請求への影響はありません。プライベートベータに追加する場合は、<a href="mailto:support@datadoghq.com">support@datadoghq.com</a> にメールして登録してください。</p><p>現時点では、セッションリプレイは <a href="/getting_started/site/">US1 Datadog サイト</a>でのみ利用できます。</p>
 <p>注: セッションリプレイは、<a href="https://www.datadoghq.com/legal/hipaa-eligible-services/">HIPAA 適格サービス</a>ではありません。ご不明な点がございましたら、<a href="mailto:support@datadoghq.com">support@datadoghq.com</a> までメールでお問い合わせください。</p>
-</div>
+{{< /alert >}}
 
 ## セッションリプレイとは
 

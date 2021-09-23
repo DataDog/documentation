@@ -10,9 +10,9 @@ further_reading:
       text: 'Introduction to Service Level Objectives (SLOs)'
 ---
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> to find a PDF version of this page.
-</div>
+{{< /alert >}}
 
 ## Getting started
 

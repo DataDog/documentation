@@ -4,9 +4,9 @@ kind: faq
 private: true
 ---
 
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 This version of the SNMP check works with Agent versions < 6.15. For the latest version, see the <a href="/integrations/snmp">SNMP integration documentation</a>.
-</div>
+{{< /alert >}}
 
 ## Overview
 

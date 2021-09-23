@@ -152,7 +152,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 
 Java Lambda 関数ログとトレースを自動接続する方法については、[Java ログとトレースの接続][12]を参照してください。
 
-<div class="alert alert-info">正しい Java ランタイムを使用しないと、"Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" (zip ファイルを開くときのエラーまたは JAR マニフェストがありません : /opt/java/lib/dd-java-agent.jar) などのエラーが発生する可能性があります。上記のとおり、ランタイムとして java8.al2 または java11 を使用してください。</div>
+{{< alert type="info" >}}正しい Java ランタイムを使用しないと、"Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar" (zip ファイルを開くときのエラーまたは JAR マニフェストがありません : /opt/java/lib/dd-java-agent.jar) などのエラーが発生する可能性があります。上記のとおり、ランタイムとして java8.al2 または java11 を使用してください。{{< /alert >}}
 
 ## その他の参考資料
 

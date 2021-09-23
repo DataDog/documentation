@@ -61,7 +61,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 [オーバーライドテンプレートの使用方法はこちら。](#creating-and-using-a-jfr-template-override-file)
 
 ## ヒーププロファイラーの有効化
-<div class="alert alert-info">Java ヒーププロファイラー機能はベータ版です。</div>
+{{< alert type="info" >}}Java ヒーププロファイラー機能はベータ版です。{{< /alert >}}
 ヒーププロファイラーを有効にするには、`-Ddd.profiling.heap.enabled=true` JVM 設定または `DD_PROFILING_HEAP_ENABLED=true` 環境変数を使用してアプリケーションを起動します。
 
 または、`jfp` [オーバーライドテンプレートファイル](#creating-and-using-a-jfr-template-override-file)で次のイベントを有効にすることもできます。

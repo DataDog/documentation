@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Si vous n'avez pas encore lu les instructions d'instrumentation automatique et de configuration, veuillez commencer par les <a href="https://docs.datadoghq.com/tracing/setup/java/">Instructions de configuration Java</a>.
-</div>
+{{< /alert >}}
 
 Cette page revient en détail sur les méthodes courantes d'ajout et de personnalisation de la visibilité avec Datadog APM.
 

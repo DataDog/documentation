@@ -4,9 +4,9 @@ aliases:
   - /logs/faq/how-to-set-up-only-logs
 kind: documentation
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 Pour configurer la collecte de logs et/ou de traces sans métriques, vous devez désactiver certaines charges utiles. Cette opération pour entraîner la perte de métadonnées et de tags pour les logs et traces que vous recueillez. Nous vous déconseillons d'appliquer cette configuration. Pour en savoir plus sur ses répercussions, contactez <a href="/help/">l'assistance Datadog</a>.
-</div>
+{{< /alert >}}
 
 Pour désactiver des charges utiles, vous devez exécuter la version 6.4 de l'Agent ou une version ultérieure. Les étapes suivantes vous permettent de désactiver l'envoi de données des métriques afin de ne plus afficher les hosts dans Datadog :
 

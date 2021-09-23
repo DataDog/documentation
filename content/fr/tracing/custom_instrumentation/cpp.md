@@ -12,9 +12,9 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Si vous n'avez pas encore lu les instructions de configuration, commencez par les <a href="https://docs.datadoghq.com/tracing/setup/cpp/">Instructions de configuration pour C++</a>.
-</div>
+{{< /alert >}}
 
 ## Ajouter des tags
 

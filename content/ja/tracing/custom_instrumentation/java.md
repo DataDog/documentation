@@ -13,9 +13,9 @@ further_reading:
     tag: Documentation
     text: サービス、リソース、トレースの詳細
 ---
-<div class="alert alert-info">
+{{< alert type="info" >}}
 自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/java/">Java セットアップ手順</a>からご覧ください。
-</div>
+{{< /alert >}}
 
 このページでは、Datadog APM を使用して可観測性を追加およびカスタマイズする一般的な使用例について説明します。
 

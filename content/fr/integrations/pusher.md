@@ -42,9 +42,9 @@ Afin de surveiller vos métriques depuis Pusher :
 
 4. Si vous revenez sur le dashboard Datadog, vous verrez que les métriques commencer à s'ajouter au dashboard Pusher par défaut.
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Les métriques sont ajoutées en temps réel. Par conséquent, les données historiques commencent à s'ajouter lorsque votre intégration est terminée.
-</div>
+{{< /alert >}}
 
 ## Données collectées
 

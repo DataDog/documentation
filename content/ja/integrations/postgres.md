@@ -57,7 +57,7 @@ supported_os:
 ---
 ![PostgreSQL Graph][1]
 
-<div class="alert alert-info">このページでは、Postgres エージェントのインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
+{{< alert type="info" >}}このページでは、Postgres エージェントのインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。{{< /alert >}}
 
 ## 概要
 

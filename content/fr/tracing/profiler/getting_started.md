@@ -114,9 +114,9 @@ Le profileur Datadog nécessite Python 2.7 ou une version ultérieure. Le profi
 | `DD_VERSION`                                     | Chaîne        | La version de votre application.                             |
 | `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de paires `<key>:<value>` séparées par des virgules, par exemple : `layer:api,team:intake`.   |
 
-<div class="alert alert-info">
+{{< alert type="info" >}}
 Conseillé pour une utilisation avancée uniquement.
-</div>
+{{< /alert >}}
 
 - Lorsque votre processus est dupliqué via `os.fork`, le profileur est arrêté dans le processus enfant.
 

@@ -23,7 +23,7 @@ You might need to monitor journeys located behind a login. There are two ways to
 
 You can also ensure your credentials are securely stored and obfuscated across the application [using secured global variables](#account-security).
 
-<div class="alert alert-info"> Are you interested in testing applications sitting behind MFA? Visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">below section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.</div>
+{{< alert type="info" >}} Are you interested in testing applications sitting behind MFA? Visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">below section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.{{< /alert >}}
 
 ## Include the login steps in your recording
 
@@ -61,7 +61,7 @@ Some MFA providers may detect Datadog's browser tests as bots and prevent them f
 If your MFA process involves steps performed outside of the browser (such as voice, text message, or opening a mobile application that does not leverage TOTP), consider reaching out to your MFA provider to ask if your MFA settings can be modified or if MFA can be turned off when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][5] can help to work around that.
 
-<div class="alert alert-info">We are constantly adding features to help you record test scenarios more easily. Help us work on the MFA systems that matter the most to you by <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">sending us feedback</a>.</div>
+{{< alert type="info" >}}We are constantly adding features to help you record test scenarios more easily. Help us work on the MFA systems that matter the most to you by <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">sending us feedback</a>.{{< /alert >}}
 
 ## Leverage browser test configuration options
 

@@ -13,7 +13,7 @@ further_reading:
   text: "Docker Logging Best Practices"
 ---
 
-<div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs.</div>
+{{< alert type="info" >}}Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs.{{< /alert >}}
 
 ## Overview
 

@@ -5,11 +5,11 @@ private: true
 aliases:
   - /ja/agent/faq/dogstream
 ---
-<div class="alert alert-danger">
+{{< alert type="danger" >}}
 これは、Agent 5 の非推奨の機能です。新機能のリリースは中止されました。
 <br>
 Agent v6 が利用可能です。<a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">最新バージョンにアップグレードすると、</a>新しい機能を利用できます。
-</div>
+{{< /alert >}}
 
 ログファイルには、膨大な量の貴重なアプリケーションデータとビジネスデータが含まれています。
 しかし残念なことに、その価値はまったく認識されておらず、活用されていないことがほとんどです。
