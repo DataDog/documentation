@@ -10,7 +10,6 @@ PY3=$(shell if [ `which pyenv` ]; then \
 			else printf "false"; \
 			fi)
 IMAGE_VERSION="latest"
-ASSETS_VENDOR_DIR := assets/scripts/vendor/
 
 # config
 CONFIG_FILE := Makefile.config

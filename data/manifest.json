@@ -1,4 +1,0 @@
-{
-  "@babel/polyfill.js": "static/@babel/polyfill.js",
-  "vendor.js": "static/vendor.js"
-}
