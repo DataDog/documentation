@@ -141,9 +141,10 @@ If you set streaming up with <a href="https://docs.datadoghq.com/integrations/gu
   1. Delete the stack that was created during the setup
 
 If you set streaming up through the <a href="https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=awsconsole#installation">AWS Console</a>:
-  1. Delete the Kinesis Data Firehose delivery stream that delivered metrics to Datadog
-  2. Delete the CloudWatch Metric Stream linked to your delivery stream
-  3. Delete the IAM roles associated with the stream and all other resources that were created while setting up the stream 
+  1. Delete the CloudWatch Metric Stream linked to your delivery stream
+  2. Delete the Kinesis Data Firehose delivery stream that delivered metrics to Datadog
+  3. Delete the backup S3 bucket for failed messages linked to the Firehose 
+  4. Delete the IAM roles associated with the stream and all other resources that were created while setting up the stream 
 
 Once the resources are deleted, wait for 5 minutes and verify if the region and namespace are disabled under the “CloudWatch Metric Streams” tab for the specified AWS account in Datadog.
 
