@@ -14,9 +14,6 @@ further_reading:
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
-    - link: '/dashboards/widgets/network'
-      tag: 'Documentation'
-      text: 'Network Widget'
 ---
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
