@@ -113,7 +113,7 @@ main_left:
     parent: product
   - identifier: alerts
     name: Alerts
-    pre: <i class="icon-alert align-middle"></i>
+    pre: <i class="icon-monitor align-middle"></i>
     url: 'https://www.datadoghq.com/product/alerts/'
     weight: 19
     parent: product
@@ -1308,7 +1308,7 @@ main:
     weight: 120000
   - name: Alerting
     url: monitors/
-    pre: alert
+    pre: monitor
     identifier: alerting
     weight: 130000
   - name: Create Monitors
