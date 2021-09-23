@@ -8,10 +8,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS MQ のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_mq/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_mq/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog
+  - link: 'https://www.datadoghq.com/blog/monitor-amazonmq-metrics-with-datadog'
     tag: ブログ
     text: Datadog で Amazon MQ のメトリクスを監視
 git_integration_title: amazon_mq

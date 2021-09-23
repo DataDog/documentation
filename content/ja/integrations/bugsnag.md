@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 複数のアプリケーションのエラー率の変化を一元的に追跡。
-doc_link: https://docs.datadoghq.com/integrations/bugsnag/
+doc_link: 'https://docs.datadoghq.com/integrations/bugsnag/'
 draft: false
 git_integration_title: bugsnag
 has_logo: true
