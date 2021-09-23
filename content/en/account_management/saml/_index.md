@@ -54,9 +54,9 @@ An Identity Provider-initiated (IdP) login incurs that you are using your IdP to
 
 4. After you upload the IdP metadata and configured your IdP, enable SAML in Datadog by clicking the **Enable** button.
 
-    {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
+    {{< img src="account_management/saml/saml_enable.png" alt="saml enable" style="width:80%;">}}
 
-6. (Optional) Enable the Identity Provider (IdP Initiated Login) option under Additional Features in the Configure SAML tab.
+5. (Optional) Enable the Identity Provider (IdP Initiated Login) option under Additional Features in the Configure SAML tab.
 
     When the Datadog URL is loaded, the browser is redirected to the IdP where you can enter your credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
 
@@ -64,9 +64,9 @@ An Identity Provider-initiated (IdP) login incurs that you are using your IdP to
 
     If you do not use the updated SP Metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
-5. Once SAML is configured in Datadog and through your IdP, you can select Datadog from your IdP's dashboard, use the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][6], or select your IdP's log in button on the Datadog login page (for example, **Sign in with Google**).
+6. Once SAML is configured in Datadog and through your IdP, you can select Datadog from your IdP's dashboard, use the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][6], or select your IdP's log in button on the Datadog login page (for example, **Sign in with Google**).
 
-    {{< img src="account_management/saml/sso.png" alt="Sign in with Google"  >}}
+    {{< img src="account_management/saml/sso.png" alt="Sign in with Google" style="width:80%;">}}
 
 **Note**: If you want to configure SAML for a multi-org, see the [Managing Multiple-Organization Accounts documentation][7].
 
@@ -100,11 +100,9 @@ To begin SP-initiated SAML setup:
 
 5. After you upload the IdP metadata and configured your IdP, enable SAML in Datadog by clicking the **Enable** button.
 
-    {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
+    {{< img src="account_management/saml/saml_enable.png" alt="SAML enabled" >}}
 
 5. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, you can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][2]. The **Single Sign-on URL** is also displayed on the [Team page][3]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account.
-
-    {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
 **Note**: If you want to configure SAML for a multi-org, see the [Managing Multiple-Organization Accounts documentation][4].
 
