@@ -63,7 +63,7 @@ The configuration files and folders for the Agent are located in `/etc/datadog-a
 
 A sample configuration file can be found in `/etc/datadog-agent/datadog.yaml.example`.
 
-A basic configuration typically requires your Datadog API key. To submit your metrics to a different site (eg: the EU instance), the `site` configuration option is available.
+A basic configuration typically requires your Datadog API key. To submit your metrics to a different site (for example, the EU instance), the `site` configuration option is available.
 
 Occasionally a proxy configuration must be specified depending on your network setup.
 
@@ -87,7 +87,7 @@ Additionally, the following integrations can be enabled to collect further metri
 
 * process
 * lparstats
-* [ibm_was (Websphere Application Server)](https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md)
+* [ibm_was (Websphere Application Server)][3]
 
 Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
 
@@ -129,3 +129,4 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 
 [1]: https://app.datadoghq.com/account/settings#agent/aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md
