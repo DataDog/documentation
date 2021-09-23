@@ -144,7 +144,16 @@ Failed to connect to localhost port 8126: Connection refused
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
-tbd
+
+#### Application logs
+
+When the application cannot reach the Datadog Agent, these log messages are emitted to where your application sends logs:
+
+```
+Error sending traces to agent: Couldn't connect to server
+Failed to connect to localhost port 8126: Connection refused
+```
+
 
 {{< /programming-lang >}}
 
