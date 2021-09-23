@@ -31,7 +31,7 @@ If you have access to the [custom role feature][5], add your user to a custom ro
 
 ## Configuration
 
-After choosing to create an [`ICMP` test][6], define your test's request.
+After choosing to create an `ICMP` test, define your test's request.
 
 ### Define request
 
@@ -41,7 +41,7 @@ After choosing to create an [`ICMP` test][6], define your test's request.
 2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
+5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
 6. Select the **Locations** to run your ICMP test from. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
@@ -88,7 +88,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][8].
+Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][7].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -96,9 +96,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define what messages to send to your teams and how to send them.
 
-1. [Similar to monitors][9], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][10] and supports the following [conditional variables][11]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][9] and supports the following [conditional variables][10]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -139,7 +139,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][12] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -160,10 +160,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [3]: /synthetics/cicd_testing
 [4]: /account_management/rbac/
 [5]: /account_management/rbac#custom-roles
-[6]: /synthetics/api_tests/icmp_tests
-[7]: /synthetics/search/#search
-[8]: /api/v1/synthetics/#create-a-test
-[9]: /monitors/notifications/?tab=is_alert#notification
-[10]: https://www.markdownguide.org/basic-syntax/
-[11]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[12]: /synthetics/settings/#global-variables
+[6]: /synthetics/search/#search
+[7]: /api/v1/synthetics/#create-a-test
+[8]: /monitors/notifications/?tab=is_alert#notification
+[9]: https://www.markdownguide.org/basic-syntax/
+[10]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[11]: /synthetics/settings/#global-variables

@@ -33,7 +33,7 @@ If you have access to the [custom role feature][5], add your user to a custom ro
 
 ## Configuration
 
-After choosing to create an [`HTTP` test][6], define your test's request.
+After choosing to create an `HTTP` test, define your test's request.
 
 ### Define request
 
@@ -90,7 +90,7 @@ After choosing to create an [`HTTP` test][6], define your test's request.
   {{< /tabs >}}
 
 3. **Name** your HTTP test.
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
 6. Select the **Locations** to run your HTTP test from: HTTP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor your endpoints from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
@@ -112,8 +112,8 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][7], [`xpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][9]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -136,7 +136,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][11].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][10].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -144,9 +144,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -187,7 +187,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -207,7 +207,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -223,14 +223,13 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [3]: /synthetics/cicd_testing
 [4]: /account_management/rbac/
 [5]: /account_management/rbac#custom-roles
-[6]: /synthetics/api_tests/http_tests
-[7]: /synthetics/search/#search
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /api/v1/synthetics/#create-a-test
-[12]: /monitors/notifications/?tab=is_alert#notification
-[13]: https://www.markdownguide.org/basic-syntax/
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[15]: /synthetics/settings/#global-variables
-[16]: /synthetics/api_tests/errors/#ssl-errors
+[6]: /synthetics/search/#search
+[7]: https://restfulapi.net/json-jsonpath/
+[8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[10]: /api/v1/synthetics/#create-a-test
+[11]: /monitors/notifications/?tab=is_alert#notification
+[12]: https://www.markdownguide.org/basic-syntax/
+[13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /synthetics/settings/#global-variables
+[15]: /synthetics/api_tests/errors/#ssl-errors
