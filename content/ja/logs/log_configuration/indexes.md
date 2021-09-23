@@ -6,7 +6,7 @@ aliases:
   - /ja/logs/dynamic_volume_control
   - /ja/logs/indexes/
 further_reading:
-  - link: /logs/explorer/#visualize
+  - link: '/logs/explorer/#visualize'
     tag: ドキュメント
     text: ログ分析の実行
   - link: /logs/log_configuration/processors
@@ -15,7 +15,7 @@ further_reading:
   - link: /logs/log_configuration/parsing
     tag: ドキュメント
     text: パースの詳細
-  - link: https://www.datadoghq.com/blog/logging-without-limits/
+  - link: 'https://www.datadoghq.com/blog/logging-without-limits/'
     tag: ブログ
     text: Logging without Limits*
 ---
