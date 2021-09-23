@@ -22,13 +22,6 @@ include $(CONFIG_FILE)
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-build-js:
-	@echo "bundling JS vendor dependencies..."
-	mkdir -p $(ASSETS_VENDOR_DIR)
-	cp node_modules/jquery/dist/jquery.min.js $(ASSETS_VENDOR_DIR)
-	cp node_modules/popper.js/dist/umd/popper.min.js $(ASSETS_VENDOR_DIR)
-	cp node_modules/bootstrap/dist/js/bootstrap.min.js $(ASSETS_VENDOR_DIR) 
-
 clean: stop  ## Clean all make installs.
 	@echo "cleaning up..."
 	make clean-build
