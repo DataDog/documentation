@@ -38,7 +38,7 @@ If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version 2.10.0 or above
   **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
-- Make sure to have enabled the Process Agent. You can do this by modifying your `datadog-values.yaml` file to include:
+- Make sure the Process Agent is enabled. You can do this by modifying your `datadog-values.yaml` file to include:
 
     ```yaml
     datadog:
