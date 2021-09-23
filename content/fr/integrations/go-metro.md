@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md
 display_name: Go-Metro
 draft: false
 git_integration_title: go-metro

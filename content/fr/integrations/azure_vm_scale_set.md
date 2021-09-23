@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques sur vos groupes de machines virtuelles\_: octets entrants/sortants, opérations de disque, charge CPU, et plus encore."
-doc_link: 'https://docs.datadoghq.com/integrations/azure_vm_scale_set/'
+doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
 draft: false
 git_integration_title: azure_vm_scale_set
 has_logo: true

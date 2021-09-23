@@ -4,8 +4,8 @@ categories:
   - issue tracking
 ddtype: crawler
 dependencies: []
-description: 'Observez et discutez des cas nouveaux, ouverts, en attente et résolus dans votre flux d''événements.'
-doc_link: 'https://docs.datadoghq.com/integrations/desk/'
+description: Observez et discutez des cas nouveaux, ouverts, en attente et résolus dans votre flux d'événements.
+doc_link: https://docs.datadoghq.com/integrations/desk/
 draft: false
 git_integration_title: desk
 has_logo: true
@@ -16,7 +16,7 @@ kind: integration
 manifest_version: '1.0'
 name: desk
 public_title: Intégration Datadog/Desk
-short_description: 'Observez et discutez des cas nouveaux, ouverts, en attente et résolus dans votre flux d''événements.'
+short_description: Observez et discutez des cas nouveaux, ouverts, en attente et résolus dans votre flux d'événements.
 version: '1.0'
 ---
 ## Présentation
