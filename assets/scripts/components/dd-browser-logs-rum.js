@@ -7,6 +7,8 @@ const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
 const ciCommitShortSha = CI_COMMIT_SHORT_SHA;
 
+console.log(`ci commit short sha = ${ciCommitShortSha}`);
+
 function getConfig() {
     if (env === 'live') {
         return configDocs['live'];
