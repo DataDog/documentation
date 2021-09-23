@@ -188,7 +188,7 @@ If you cannot isolate the root cause, [contact Datadog Support][4] with:
 
 #### Check network configuration
 
-In containerized setups, submitting traces to `localhost` or `127.0.0.1` is often incorrect since the Datadog Agent is also containerized and located elsewhere. **Note**: AWS ECS on Fargate is an exception to this rule.
+In containerized setups, submitting traces to `localhost` or `127.0.0.1` is often incorrect since the Datadog Agent is also containerized and located elsewhere. **Note**: AWS ECS on Fargate and AWS EKS on Fargate are exceptions to this rule.
 
 Determine if the networking between the application and the Datadog Agent matches what is needed for that configuration. 
 
