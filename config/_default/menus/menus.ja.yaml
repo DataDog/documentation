@@ -1111,7 +1111,7 @@ main:
     weight: 120000
   - name: アラート設定
     url: monitors/
-    pre: alert
+    pre: monitor
     identifier: アラート設定
     weight: 130000
   - name: モニター

@@ -1073,7 +1073,7 @@ main:
     weight: 120000
   - name: Alertes
     url: monitors/
-    pre: alert
+    pre: monitor
     identifier: alerting
     weight: 130000
   - name: Monitors
