@@ -16,7 +16,7 @@ Metric units are displayed in places such as on timeseries graphs, query value w
 
 {{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units"  style="width:100%;">}}
 
-On timeseries graphs, you can hover your cursor over any graph to see the relevant units. Units must be specified manually, but if no unit is set, order-of-magnitude notation such as K, M, and G for thousands, millions and billions is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. YUnits must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
 
 For example, if you have a data point that is 3,000,000,000:
 
