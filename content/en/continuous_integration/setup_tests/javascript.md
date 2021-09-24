@@ -136,7 +136,7 @@ DD_ENV=ci npm test
 }
 {{< /code-block >}}
 
-If you've already defined a `pluginsFile`, you can still initialise the instrumentation with:
+If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
   // your previous code is before this line
