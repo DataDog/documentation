@@ -82,7 +82,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][7].
+Your test can trigger retries in case of failed test result. Configuration is available to better suit your alerting sensibility.
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -172,7 +172,6 @@ If you have access to the [custom role feature][13], add your user to any custom
 [4]: /synthetics/search/#search
 [5]: /synthetics/cicd_testing
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /api/latest/synthetics/#edit-an-api-test
 [8]: /monitors/notifications/?tab=is_alert#notification
 [9]: https://www.markdownguide.org/basic-syntax/
 [10]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
