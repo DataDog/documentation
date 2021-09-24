@@ -88,7 +88,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][8].
+Your test can trigger retries in case of failed test result. Configuration is available to better suit your alerting sensibility.
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -162,7 +162,6 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [5]: /account_management/rbac#custom-roles
 [6]: /synthetics/api_tests/icmp_tests
 [7]: /synthetics/search/#search
-[8]: /api/v1/synthetics/#create-a-test
 [9]: /monitors/notifications/?tab=is_alert#notification
 [10]: https://www.markdownguide.org/basic-syntax/
 [11]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
