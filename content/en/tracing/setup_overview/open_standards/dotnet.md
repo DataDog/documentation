@@ -35,10 +35,14 @@ public void ConfigureServices(IServiceCollection services)
 Use OpenTracing to create a span.
 
 ```csharp
-using (var scope =
-       Tracer.Instance.StartActive("manual.sortorders"))
+// Initialize the Datadog tracer for OpenTracing
+var otTracer = OpenTracingTracerFactory.CreateTracer(); // Requires 'using Datadog.Trace.OpenTracing;' in the file
+GlobalTracer.Register(otTracer);
+
+
+using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
 {
-    scope.Span.ResourceName = "<RESOURCE NAME>";
+    scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
     SortOrders();
 }
 ```
@@ -50,10 +54,9 @@ To trace code running in an asynchronous task, create a new scope within the bac
  Task.Run(
      () =>
      {
-         using (var scope =
-                Tracer.Instance.StartActive("manual.sortorders.async"))
+         using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
          {
-             scope.Span.ResourceName = "<RESOURCE NAME>";
+             scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
              SortOrders();
          }
      });
