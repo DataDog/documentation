@@ -35,11 +35,6 @@ public void ConfigureServices(IServiceCollection services)
 Use OpenTracing to create a span.
 
 ```csharp
-// Initialize the Datadog tracer for OpenTracing
-var otTracer = OpenTracingTracerFactory.CreateTracer(); // Requires 'using Datadog.Trace.OpenTracing;' in the file
-GlobalTracer.Register(otTracer);
-
-
 using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
 {
     scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
