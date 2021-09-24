@@ -19,6 +19,8 @@ Supported test frameworks:
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
 * Cucumber-js >= 7.0.0
+* Cypress >= 6.7.0
+  * From `dd-trace>=1.4.0`
 
 ## Prerequisites
 
@@ -137,14 +139,14 @@ DD_ENV=ci npm test
 If you've already defined a `pluginsFile`, you can still initialise the instrumentation with:
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
-  // your previous code goes here
+  // your previous code is before this line
   require('dd-trace/cypress/plugin')(on, config)
 }
 {{< /code-block >}}
 
 2. Add the following line to the [`supportFile`][3]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// your previous code goes here
+// your previous code is before this line
 require('dd-trace/cypress/support')
 {{< /code-block >}}
 
