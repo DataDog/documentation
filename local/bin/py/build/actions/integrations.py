@@ -766,13 +766,13 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 fm = yaml.safe_dump(
-                    item, width=150, default_style='"', default_flow_style=False, allow_unicode=True
+                    item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
                 # simple bool cleanups with replace
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=150, default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content

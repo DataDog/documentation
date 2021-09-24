@@ -8,12 +8,12 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog Unix Agent is being developed for specific system architectures, and is not the same as Agents 5 and 6.
+The Datadog Unix Agent is being developed for specific system architectures, and is not the same as the Windows, Linux and MacOS Agents.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
 
-**Note:** The Datadog Unix Agent supports the following versions of AIX:
+**Note:** The Datadog Unix Agent supports PowerPC 8 or greater and the following versions of AIX:
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
@@ -37,14 +37,14 @@ Alternatively, download links for the latest releases can be found on [this page
 The installer may be executed as follows (as root):
 
 {{< code-block lang="bash" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<VERSION>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
 This installs the Agent in `/opt/datadog-agent`.
 
 ### Installation log files
 
-You can find the Agent installation log in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the installation command.
+You can find the Agent installation log in the `dd-aix-install.log` file. To disable this logging, remove the `-e dd-aix-install.log` parameter in the installation command.
 
 ## Commands
 
@@ -59,19 +59,11 @@ You can find the Agent installation log in the `dd-aix-install.log` file. To dis
 
 ## Configuration
 
-The configuration files and folders for the Agent are located in:
-`/etc/datadog-agent/datadog.yaml`
-That said, configuration files are searched in this order (with the first match being taken):
+The configuration files and folders for the Agent are located in `/etc/datadog-agent/datadog.yaml`
 
-* `/etc/datadog-agent/datadog.yaml`
-* `./etc/datadog-agent/datadog.yaml`
-* `./datadog.yaml`
+A sample configuration file can be found in `/etc/datadog-agent/datadog.yaml.example`.
 
-A sample configuration file can be found in `/etc/datadog-agent`.
-
-A basic configuration typically requires your Datadog API key. To submit your metrics to the EU instance, the `site` configuration option is available.
-
-You can also override `dd_url` manually, but that should not be required.
+A basic configuration typically requires your Datadog API key. To submit your metrics to a different site (for example, the EU instance), the `site` configuration option is available.
 
 Occasionally a proxy configuration must be specified depending on your network setup.
 
@@ -80,14 +72,26 @@ Occasionally a proxy configuration must be specified depending on your network s
 
 ## Integrations
 
-Additional integrations available:
-
-* process
-* lparstats
+The Unix Agent collects system metrics for:
+  
+* cpu
+* filesystem
+* iostat
+* load
+* memory
+* uptime
 * disk
 * network
 
-Enable the above integrations by copying and editing the sample configuration files provided. These are expected to be found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration.
+Additionally, the following integrations can be enabled to collect further metrics:
+
+* process
+* lparstats
+* [ibm_was (Websphere Application Server)][3]
+
+Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
+
+Note: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available.
 
 ## Running DogStatsD
 
@@ -125,3 +129,4 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 
 [1]: https://app.datadoghq.com/account/settings#agent/aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

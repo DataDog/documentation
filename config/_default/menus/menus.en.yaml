@@ -113,7 +113,7 @@ main_left:
     parent: product
   - identifier: alerts
     name: Alerts
-    pre: <i class="icon-alert align-middle"></i>
+    pre: <i class="icon-monitor align-middle"></i>
     url: 'https://www.datadoghq.com/product/alerts/'
     weight: 19
     parent: product
@@ -935,6 +935,7 @@ main:
     url: dashboards/widgets/hostmap/
     parent: dashboards_widgets
     weight: 21
+    identifier: widgets_host_map
   - name: Iframe
     url: dashboards/widgets/iframe/
     parent: dashboards_widgets
@@ -951,46 +952,42 @@ main:
     url: dashboards/widgets/monitor_summary/
     parent: dashboards_widgets
     weight: 25
-  - name: Network
-    url: dashboards/widgets/network/
-    parent: dashboards_widgets
-    weight: 26
   - name: Notes and Links
     url: dashboards/widgets/note/
     parent: dashboards_widgets
-    weight: 27
+    weight: 26
   - name: Query Value
     url: dashboards/widgets/query_value/
     parent: dashboards_widgets
-    weight: 28
+    weight: 27
   - name: Scatter Plot
     url: dashboards/widgets/scatter_plot/
     parent: dashboards_widgets
-    weight: 29
+    weight: 28
   - name: SLO Summary
     url: dashboards/widgets/slo/
     parent: dashboards_widgets
-    weight: 30
+    weight: 29
   - name: Service Map
     url: dashboards/widgets/service_map/
     parent: dashboards_widgets
-    weight: 31
+    weight: 30
   - name: Service Summary
     url: dashboards/widgets/service_summary/
     parent: dashboards_widgets
-    weight: 32
+    weight: 31
   - name: Table
     url: dashboards/widgets/table/
     parent: dashboards_widgets
-    weight: 33
+    weight: 32
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 34
+    weight: 33
   - name: Top List
     url: dashboards/widgets/top_list/
     parent: dashboards_widgets
-    weight: 35
+    weight: 34
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
@@ -1087,28 +1084,29 @@ main:
   - name: Infrastructure List
     url: infrastructure/list/
     parent: infrastructure
-    weight: 2
+    weight: 1
   - name: Host Map
     url: infrastructure/hostmap/
     parent: infrastructure
-    weight: 3
+    weight: 2
+    identifier: infrastructure_host_map
   - name: Container Map
     url: infrastructure/containermap/
     parent: infrastructure
-    weight: 4
+    weight: 3
   - name: Live Processes
     url: infrastructure/process/
     parent: infrastructure
     identifier: infrastructure_process
-    weight: 5
+    weight: 4
   - name: Increase Process Retention
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
-    weight: 101
+    weight: 401
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
-    weight: 7
+    weight: 5
   - name: Serverless
     url: serverless
     pre: serverless
@@ -1308,7 +1306,7 @@ main:
     weight: 120000
   - name: Alerting
     url: monitors/
-    pre: alert
+    pre: monitor
     identifier: alerting
     weight: 130000
   - name: Create Monitors

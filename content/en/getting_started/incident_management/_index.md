@@ -20,6 +20,9 @@ further_reading:
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
       tag: 'Documentation'
       text: 'Slack integration with incidents'
+    - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
+      tag: 'Blog'
+      text: 'Best practices for writing incident postmortems'
 ---
 
 {{< site-region region="gov" >}}

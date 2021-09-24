@@ -40,7 +40,7 @@ Choose the type of variable you want to create:
 4. Enter the **Value** you want to assign to your variable.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
 
-{{< img src="synthetics/settings/variable_value.png" alt="Global Variable Specify Value"  style="width:100%;">}}
+{{< img src="synthetics/settings/variable_value_2.png" alt="Global Variable Specify Value" style="width:100%;">}}
 
 {{% /tab %}}
 
@@ -54,10 +54,10 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 4. Pick the **[HTTP test][1]** you want to extract your variable from.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
 6. Decide whether to extract your variable from the response headers or from the response body.
-    * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [regex][2].
-    * Extract the value from **Response Body**: parse the response body of the request with a [regex][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
+    * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [`regex`][2].
+    * Extract the value from **Response Body**: parse the response body of the request with a [`regex`][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Variable from http"  style="width:100%;">}}
+{{< img src="synthetics/settings/variable_fromhttp_3.png" alt="Variable from HTTP Test" style="width:80%;">}}
 
 **Note:** Variable values are updated whenever the test they are extracted from runs.
 
@@ -93,7 +93,7 @@ Once created, global variables can be used in all Synthetic tests by typing `{{`
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
 
 #### Restrict access
 
@@ -102,7 +102,7 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict-access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict-access2.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
@@ -120,7 +120,7 @@ Define which endpoints should be sent the APM headers by adding a URL into this 
 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
-If the endpoint is being traced and allowed, your browser test results are automatically tied to its corresponding trace.
+If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
 ### Tag enforcement
 
@@ -138,9 +138,9 @@ For more information, see [Usage Attribution][13].
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][11]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][12], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Further Reading
 
@@ -157,5 +157,5 @@ If you have access to the [custom role feature][12], add your user to a custom r
 [9]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
 [10]: /synthetics/browser_tests/actions#using-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[12]: /account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /account_management/billing/usage_attribution

@@ -25,7 +25,7 @@ You can:
 
 * Execute HTTP requests on API endpoints requiring authentication (for example, through a token)
 * Monitor key business transactions at the API level
-* Simulate end-to-end mobile applications journeys
+* Simulate end-to-end mobile application journeys
 
 {{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
 
@@ -35,22 +35,16 @@ Multistep API tests can run from Datadog [managed locations][4] and [private loc
 
 **Note**: Multistep API tests allow you to link several HTTP requests in a single test. If you want to perform single requests to your services, you can leverage [API tests][6].
 
-## Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of these two [default roles][7].
-
-If you have access to the [custom role feature][8], add your user to a custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
-
 ## Configuration
 
 ### Name and tag your test
 
 1. Name your Multistep API test.
-2. Add `env` tags and other tags to your Multistep API test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
+2. Add `env` and other tags to your Multistep API test. You can use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
 
 ### Select locations
 
-Select the **Locations** to run your Multistep API test from. Multistep API tests can run from both [managed][4] and [private locations][5] depending on whether you are willing to run the test from outside or inside your network.
+Select the **Locations** for your Multistep API test. Multistep API tests can run from both [managed][4] and [private locations][5] depending on your preference for running the test from outside or inside your network.
 
 ### Define steps
 
@@ -58,11 +52,9 @@ To create an HTTP request step, click **Create Your First Step**.
 
 {{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
 
-**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase it.
+**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase the limit.
 
 #### Define the request
-
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 1. **Name** your step.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
@@ -102,15 +94,16 @@ To create an HTTP request step, click **Create Your First Step**.
   
   {{% tab "Privacy" %}}
 
-  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as this can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
-  
+  * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
 
 [1]: /security/synthetics
   {{% /tab %}}
 
   {{< /tabs >}}
 
-Click **Test URL** to try out the request configuration. A response preview appears.
+Click on **Test URL** to try out the request configuration. A response preview appears.
+
+{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
@@ -118,16 +111,16 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][10], [`xpath`][18] | _String_ <br> _[Regex][11]_ <br> _String_, _[Regex][11]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][11]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 **Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
 #### Add execution parameters
 
@@ -146,10 +139,10 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [regex][11].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [regex][11], [JSONPath][10], or [XPath][18].
+    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
+    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][11].
 
-{{< img src="synthetics/api_tests/ms_extract_variable2.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 
@@ -159,7 +152,7 @@ Multistep API tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your Multistep API test.
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
 * [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your teams.
@@ -177,7 +170,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured with the [API][12].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][11].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -185,9 +178,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][13], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][14] and supports the following [conditional variables][15]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -229,7 +222,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][16] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -249,12 +242,18 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][17].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
+
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][17].
+
+If you have access to the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ## Further Reading
 
@@ -266,15 +265,15 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [4]: /api/v1/synthetics/#get-all-locations-public-and-private
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/
-[7]: /account_management/rbac/
-[8]: /account_management/rbac#custom-roles
-[9]: /synthetics/search/#search
-[10]: https://restfulapi.net/json-jsonpath/
-[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[12]: /api/v1/synthetics/#create-a-test
-[13]: /monitors/notifications/?tab=is_alert#notification
-[14]: http://daringfireball.net/projects/markdown/syntax
-[15]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[16]: /synthetics/settings/#global-variables
-[17]: /synthetics/api_tests/errors/#ssl-errors
-[18]: https://www.w3schools.com/xml/xpath_syntax.asp
+[7]: /synthetics/search/#search
+[8]: https://restfulapi.net/json-jsonpath/
+[9]: https://www.w3schools.com/xml/xpath_syntax.asp
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[11]: /api/latest/synthetics/#edit-an-api-test
+[12]: /monitors/notifications/?tab=is_alert#notification
+[13]: http://daringfireball.net/projects/markdown/syntax
+[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[15]: /synthetics/settings/#global-variables
+[16]: /synthetics/api_tests/errors/#ssl-errors
+[17]: /account_management/rbac/
+[18]: /account_management/rbac#custom-roles
