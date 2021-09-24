@@ -5,7 +5,7 @@ description: ネットワークデータを、すべてのタグを基にマッ�
 aliases:
   - /ja/network_performance_monitoring/network_map/
 further_reading:
-  - link: https://www.datadoghq.com/blog/network-performance-monitoring
+  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
     tag: ブログ
     text: ネットワークパフォーマンスモニタリング
   - link: /network_monitoring/devices
