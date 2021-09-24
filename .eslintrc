@@ -98,22 +98,7 @@
         "react": {
             "pragma": "React",
             "version": "15.6.1"
-        },
-        // "import/resolver": {
-        //     "webpack": {
-        //         "config": {
-        //             "resolve": {
-        //                 "modules": [
-        //                 ],
-        //                 "mainFields": ["browser", "main", "module"],
-        //                 "extensions": [".json", ".ts", ".tsx", ".jsx", ".js"]
-        //             }
-        //         }
-        //     },
-        //     "node": {
-        //         "paths": ["src"]
-        //       }
-        // }
+        }
     },
     "env": {
         "browser": true,

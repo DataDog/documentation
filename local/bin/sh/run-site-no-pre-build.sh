@@ -1,10 +1,11 @@
 #!/bin/bash
 
 RUN_SERVER=${RUN_SERVER:=false}
-# RUN_WEBPACK=${RUN_WEBPACK:=true}
 RENDER_SITE_TO_DISK=${RENDER_SITE_TO_DISK:=false}
 
 if [ ${RUN_SERVER} = true ]; then
+  yarn run start
+  
   # Building the documentation
   # if [ ${RUN_WEBPACK} = true ]; then
   #   printf "checking that node modules are installed and up-to-date"

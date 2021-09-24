@@ -7,7 +7,6 @@ PULL_RBAC_PERMISSIONS := true
 DD_API_KEY := ${datadog_api_key}
 DD_APP_KEY := ${datadog_application_key}
 RUN_SERVER := true
-RUN_WEBPACK := true
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 LOCAL := True
