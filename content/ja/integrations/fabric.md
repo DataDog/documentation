@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Datadog イベントストリームで Fabric タスクを参照および検索。
-doc_link: 'https://docs.datadoghq.com/integrations/fabric/'
+doc_link: https://docs.datadoghq.com/integrations/fabric/
 draft: false
 git_integration_title: fabric
 has_logo: true

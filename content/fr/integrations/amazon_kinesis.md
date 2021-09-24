@@ -10,11 +10,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Kinesis.
-doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
 draft: false
 git_integration_title: amazon_kinesis
 has_logo: true
-integration_id: amazon-kinesis
 integration_title: Amazon Kinesis
 is_public: true
 kind: integration
@@ -63,10 +62,10 @@ Vous pouvez configurer un stream Kinesis Firehose Delivery dans la console AWS F
 Toutefois, si vous envoyez vos logs vers un compartiment S3, utilisez la fonction AWS Lambda. Assurez-vous que `amazon_kinesis` est défini en tant que _Target prefix_.
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Kinesis dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Kinesis dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][9]
-    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][10]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][10]
 
 ## Données collectées
 
