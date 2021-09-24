@@ -109,10 +109,12 @@ Customize your observability by programmatically creating spans around any block
 using (var parentScope =
        Tracer.Instance.StartActive("manual.sortorders"))
 {
+    parentScope.Span.ResourceName = "<RESOURCE NAME>";
     using (var childScope =
            Tracer.Instance.StartActive("manual.sortorders.child"))
     {
         // Nest using statements around the code to trace
+        childScope.Span.ResourceName = "<RESOURCE NAME>";
         SortOrders();
     }
 }
