@@ -5,8 +5,8 @@ categories:
   - exceptions
 ddtype: crawler
 dependencies: []
-description: Envoyez les exceptions, erreurs et déploiements de code vers votre flux d'événements Datadog.
-doc_link: https://docs.datadoghq.com/integrations/rollbar/
+description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog.'
+doc_link: 'https://docs.datadoghq.com/integrations/rollbar/'
 draft: false
 git_integration_title: rollbar
 has_logo: true
@@ -17,7 +17,7 @@ kind: integration
 manifest_version: '1.0'
 name: rollbar
 public_title: Intégration Datadog/Rollbar
-short_description: Envoyez les exceptions, erreurs et déploiements de code vers votre flux d'événements Datadog.
+short_description: 'Envoyez les exceptions, erreurs et déploiements de code vers votre flux d''événements Datadog.'
 version: '1.0'
 ---
 {{< img src="integrations/rollbar/rollbar_error.png" alt="Événement d'erreur Rollbar" popup="true">}}

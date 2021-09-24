@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/getting_started/application/monitors
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
+  - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
     tag: ブログ
     text: モニター入門 重要事項をアラート
   - link: /monitors/monitor_types/metric/
@@ -76,14 +76,14 @@ Steps to free up disk space:
 
 電子メール、Slack、PagerDuty などを使用してチームに通知を送信するには、このセクションを使用してください。ドロップダウンボックスから、チームメンバーおよび接続済みアカウントを検索できます。このボックスに `@notification` が追加されている場合、通知は自動的にメッセージボックスに追加されます。
 
-{{< img src="getting_started/application/message_notify.png" alt="メッセージと通知"  style="width:70%;" >}}
+{{< img src="getting_started/application/message_notify.png" alt="メッセージと通知" style="width:70%;" >}}
 
 片方のセクションから `@notification` を削除すると、両方のセクションから削除されます。
 
 ### アクセス制限
 
 <div class="alert alert-warning">
-RBAC のモニターへのアクセス制限は、現在ベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
+RBAC のモニターアクセス制限はベータ版です。アクセスをリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。</div>
 
 このセクションを使用して、あなた、あなたのロールを持つ組織内の全員、または組織の特定のロールへのアクセスを制限します。ロールに関する詳細は、[RBAC][9] ドキュメントを参照してください。
 

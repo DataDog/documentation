@@ -21,7 +21,7 @@ Pipelines ページには、選択した時間枠での各パイプラインの�
 
 特定のパイプラインをクリックすると、_Pipeline Details_ ページが表示されます。このページには、指定した時間枠で選択したパイプラインのデータのビューが表示され、デフォルト以外のブランチを表示できます。
 
-{{< img src="ci/ci-single-pipeline.png" alt="単一パイプラインの詳細" style="width:100%;">}}
+{{< img src="ci/ci-single-pipeline.png" alt="単一パイプラインの詳細"  style="width:100%;">}}
 
 時間の経過に伴う実行の合計と失敗、ビルド期間のパーセンタイル、ステージごとの内訳に費やされた合計時間など、選択したパイプラインに関する情報を取得します。ステージとジョブの要約テーブルもあるため、期間、全体的な実行時間の割合、または失敗率の観点からそれらをすばやく並べ替えることができます。
 
@@ -33,7 +33,7 @@ Pipelines ページには、選択した時間枠での各パイプラインの�
 
 CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > documentation`) をクリックして、パイプライン、ステージ、またはジョブの Resource、Service、または Analytics ページにドリルダウンします。また、完全なタグ情報と、関連するログイベントおよびネットワーク監視イベントへのリンクもあります。
 
-{{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行のトレース情報" style="width:100%;">}}
+{{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行のトレース情報"  style="width:100%;">}}
 
 ## パイプライン実行の詳細とトレース
 
@@ -43,7 +43,7 @@ CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > doc
 
 または、[Analytics][3] ボタンをクリックして、パイプライン実行データをインタラクティブに分類すれば、質問への回答やダッシュボードでの共有に使用することができます。
 
-{{< img src="ci/ci-pipelines-execution.png" alt="パイプライン実行の分析" style="width:100%;">}}
+{{< img src="ci/ci-pipelines-execution.png" alt="パイプライン実行の分析"  style="width:100%;">}}
 
 ## CI パイプラインデータについて伝達する
 

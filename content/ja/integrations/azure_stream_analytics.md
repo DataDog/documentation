@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Stream Analytics のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_stream_analytics/'
 draft: false
 git_integration_title: azure_stream_analytics
 has_logo: true

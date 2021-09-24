@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md'
 display_name: Auth0
 draft: false
 git_integration_title: auth0
