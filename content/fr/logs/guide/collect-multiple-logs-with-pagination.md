@@ -2,10 +2,10 @@
 title: Collecter plusieurs logs avec Pagination
 kind: guide
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Découvrir comment traiter vos logs
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/live_tail/
