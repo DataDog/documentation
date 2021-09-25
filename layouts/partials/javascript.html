@@ -12,9 +12,13 @@
 {{ $jQuery := resources.Get "scripts/vendor/jquery.min.js" }}
 {{ $popperJS := resources.Get "scripts/vendor/popper.min.js" }}
 {{ $bootstrapJS := resources.Get "scripts/vendor/bootstrap.min.js" | js.Build $options }}
+{{ $ddLibs := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
 {{ $vendor := slice $jQuery $popperJS $bootstrapJS | resources.Concat "scripts/vendor/vendor.js" }}
 
 <script src="{{ $vendor.RelPermalink }}" {{- if ne $isLocalServer true -}}integrity="{{ $vendor.Data.Integrity }}"{{- end -}}></script>
+
+<!-- Because the version property we provide to DD config is a commit hash, we dont use fingerprinting when building Logs and RUM.  Fingerprint would change with each deploy, causing all the HTML to deploy every build, which slows down the pipeline quite a bit. -->
+<script src="{{ $ddLibs.RelPermalink }}"></script>
 
 <!-- The docsearch.js lib requires this -->
 <script>global = globalThis;</script>

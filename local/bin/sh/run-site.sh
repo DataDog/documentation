@@ -35,18 +35,13 @@ if [ ${RUN_SERVER} = true ]; then
 		placehold_translations.py -c "config/_default/languages.yaml"
 	fi
 
-	# webpack
-	# if [ ${RUN_WEBPACK} = true ]; then
-	# 	echo "Checking that node modules are installed and up-to-date."
-  #   npm --global install yarn && \
-  #   npm cache clean --force && yarn install --frozen-lockfile
-  #   echo "Starting webpack and hugo build."
-	
-	yarn run start
+	printf "checking that node modules are installed and up-to-date"
+  npm --global install yarn && \
+  npm cache clean --force && yarn install --frozen-lockfile
+  printf "Starting Hugo build"
+  yarn run start
 
-    sleep 5
-	fi
-
+  sleep 5
 else
 	exit 0
 fi
