@@ -106,7 +106,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 {"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].
+**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][5]. More information can be found in the [Why can’t I see my correlated logs in the Trace ID panel?][4] FAQ.
 
 [See the Python logging documentation][3] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
@@ -118,3 +118,4 @@ Once the logger is configured, executing a traced function that logs an event yi
 [2]: /tracing/visualization/#trace
 [3]: /logs/log_collection/python/#configure-the-datadog-agent
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[5]: /logs/log_configuration/processors/#trace-remapper
