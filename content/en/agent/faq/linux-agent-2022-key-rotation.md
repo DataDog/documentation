@@ -3,7 +3,7 @@ title: 2022 Linux Agent Key Rotation
 kind: faq
 ---
 
-As a common best practice, Datadog periodically rotates the keys and certificates used to sign our Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
+As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
 
 - The RPM signing key with hash [`A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`][1] will be rotated in April 4th 2022 and will be replaced by the key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][2]
 - The DEB signing key with hash [`A2923DFF56EDA6E76E55E492D3A80E30382E94DE`][3] will be rotated in April 18th 2022 and will be replaced by the key with hash `D75CEA17048B9ACBF186794B32637D44F14F620E`[4]
@@ -11,7 +11,7 @@ As a common best practice, Datadog periodically rotates the keys and certificate
 Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems in order to install or upgrade the Agent after the rotation takes place.
 
 <div class="alert alert-info">
-Note that this DOES NOT affect the functionality of already running Agents, and only limits the ability to install or upgrade to a newer version of the Agent. This also doesn't affect Windows or MacOS Agents, nor Dockerized Linux Agents.
+**Note**: This DOES NOT affect the functionality of already running Agents, and only limits the ability to install or upgrade to a newer version of the Agent. This also doesn't affect Windows or MacOS Agents, nor Dockerized Linux Agents.
 </div>
 
 If you're using one of the following install methods, your hosts trust the key automatically and no further action is needed:
@@ -24,13 +24,13 @@ If you're using one of the following install methods, your hosts trust the key a
 * [Elastic Beanstalk][10] config templates updated as of Mar 29, 2021 (should contain `DATADOG_RPM_KEY_FD4BF915.public` under `gpgkey`)
 * Containerized Agents (Docker/Kubernetes): No action needed on any version
 
-Additionally, if you are using the DEB version of the Agent version 7.31.0 or greater, your hosts should also trust the new key autmatically.
+Additionally, if you are using the DEB version of the Agent version 7.31.0 or greater, your hosts should have installed the `datadog-signing-keys` package that automatically trusts the new key.
 
-If unsure, refer to the steps in [Check if a host trusts the new GPG key](#check-if-a-host-trusts-the-new-gpg-key).
+If unsure, read the steps in [Check if a host trusts the new GPG key](#check-if-a-host-trusts-the-new-gpg-key).
 
-Trying to install or upgrade the Agent package without trusting the new key will result in `NOKEY` errors when installing the RPM package and `NO_PUBKEY` errors when installing the DEB package.
+Trying to install or upgrade the Agent package without trusting the new key results in `NOKEY` errors when installing the RPM package and `NO_PUBKEY` errors when installing the DEB package.
 
-For hosts running older versions of the install methods listed above or older versions of the DEB package, we recommend you update your install method to the last available version. Alternatively, for Debian/Ubuntu users, update the Agent to version 7.31.0 or greater. Otherwise, you can also add the new keys manually following these instructions:
+For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively, Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the keys can be manually updated on host by following these instructions:
 
 ### Manual update
 
@@ -46,7 +46,7 @@ $ wget -qO - https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo a
 {{% /tab %}}
 {{% tab "RedHat/CentOS" %}}
 
-Edit the `/etc/yum.repos.d/datadog.repo` and make sure it includes both the old and new keys in the `gpgkey` section:
+Edit the `/etc/yum.repos.d/datadog.repo` and make sure it includes the following list of keys in the `gpgkey` section:
 
 ```
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
@@ -58,7 +58,7 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 {{% /tab %}}
 {{% tab "SUSE" %}}
 
-Edit the `/etc/zypp/repos.d/datadog.repo` and make sure it includes both the old and new keys in the `gpgkey` section:
+Edit the `/etc/zypp/repos.d/datadog.repo` and make sure it includes the following list of keys in the `gpgkey` section:
 
 ```
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
