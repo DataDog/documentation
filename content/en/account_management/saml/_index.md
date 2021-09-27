@@ -25,7 +25,7 @@ Here's a two-minute video walkthrough:
 ## Setup
 
 {{< tabs >}}
-{{% tab "IdP initiated login" %}}
+{{% tab "IdP-initiated login" %}}
 
 An Identity Provider-initiated (IdP) login incurs that you are using your IdP to log into Datadog, whether that is from the Datadog login landing page (for example, Google SSO) or logging in directly to your IdP and selecting Datadog from their service, which then routes you to Datadog.
 
@@ -75,7 +75,7 @@ An Identity Provider-initiated (IdP) login incurs that you are using your IdP to
 [7]: /account_management/multi_organization/#setting-up-saml
 {{% /tab %}}
 
-{{% tab "SP login" %}}
+{{% tab "SP-initiated login" %}}
 
 Service Provider-initiated (SP) login incurs that you're using Datadog to issue a SAML request to your IdP. Datadog then redirects your browser to your IdP for authentication.
 
