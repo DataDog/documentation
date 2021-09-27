@@ -47,19 +47,19 @@ An Identity Provider-initiated (IdP) login incurs that you are using your IdP to
     - Attributes to pass through
       - Required attributes: Handle, Name ID
 
-4. After you upload the IdP metadata and configured your IdP, enable SAML in Datadog by clicking the **Enable** button.
+4. After you upload the IdP metadata and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
 
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable" style="width:80%;">}}
 
-5. (Optional) Enable the Identity Provider (IdP Initiated Login) option under Additional Features in the Configure SAML tab.
+5. (Optional) Under Additional Features in the Configure SAML tab, enable the Identity Provider (IdP-initiated Login) option.
 
-    When the Datadog URL is loaded, the browser is redirected to the IdP where you can enter your credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
+    With this option, the browser redirects to your selected IdP. Once you enter your credentials, the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP-initiated Login).
 
-    After enabling the IdP Initiated Login feature (and waiting for caches to clear), you need to retrieve a new version of the SP Metadata. Your new SP Metadata contains a different, organization-specific AssertionConsumerService endpoint to send assertions to.
+    After enabling the IdP-initiated Login feature (and waiting for caches to clear), you need to retrieve a new version of your IdP metadata. Your new metadata contains a different, organization-specific `AssertionConsumerService` endpoint to send assertions to.
 
-    If you do not use the updated SP Metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
+    If you do not use the updated metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the `InResponseTo` attribute.
 
-6. Once SAML is configured in Datadog and through your IdP, you can select Datadog from your IdP's dashboard, use the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][6], or select your IdP's log in button on the Datadog login page (for example, **Sign in with Google**).
+6. Once SAML is configured in Datadog and through your IdP, select Datadog from your IdP's dashboard, use the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][6], or select your IdP's log in button on the Datadog login page (for example, **Sign in with Google**).
 
     {{< img src="account_management/saml/sso.png" alt="Sign in with Google" style="width:80%;">}}
 
@@ -100,7 +100,6 @@ To begin SP-initiated SAML setup:
 5. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, you can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][2]. The **Single Sign-on URL** is also displayed on the [Team page][3]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account.
 
 **Note**: If you want to configure SAML for a multi-org, see the [Managing Multiple-Organization Accounts documentation][4].
-
 
 [1]: https://app.datadoghq.com/account/saml/metadata.xml
 [2]: https://app.datadoghq.com/saml/saml_setup
