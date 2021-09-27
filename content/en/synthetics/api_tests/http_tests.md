@@ -43,7 +43,13 @@ After choosing to create an [`HTTP` test][4], define your test's request.
   * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+
+  {{% /tab %}}
+
+  {{% tab "Authentication" %}}
+
   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+  * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog will generate the signature for your request.
 
   {{% /tab %}}
 
