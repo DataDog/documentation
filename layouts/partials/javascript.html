@@ -4,7 +4,7 @@
 
 {{ $isLocalServer := site.IsServer }}
 {{ $jsInput := "scripts/main.js" }}
-{{ $compiledJS := "" }}
+{{ $compiledMainJS := "" }}
 
 {{ $devOptions := dict "defines" $defines "sourceMap" "inline" }}
 {{ $productionOptions := dict "defines" $defines "sourceMap" "inline" "minify" true }}
@@ -24,14 +24,21 @@
 <script>global = globalThis;</script>
 
 {{ if $isLocalServer }}
-  {{ $compiledJS = resources.Get $jsInput | js.Build $options }}
+  {{ $compiledMainJS = resources.Get $jsInput | js.Build $options }}
 {{ else }}
-  {{ $compiledJS = resources.Get $jsInput | js.Build $options | resources.Fingerprint "sha512" }}
+  {{ $compiledMainJS = resources.Get $jsInput | js.Build $options | resources.Fingerprint "sha512" }}
 {{ end }}
 
-<script src="{{ $compiledJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledJS.Data.Integrity }}"{{ end }}></script>
+<script src="{{ $compiledMainJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledMainJS.Data.Integrity }}"{{ end }}></script>
 
 {{ if eq .File.BaseFileName "search" }}
-    {{ $searchJS := resources.Get "scripts/components/search.js" | js.Build $options }}
-    <script src="{{ $searchJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $searchJS.Data.Integrity }}"{{ end }}></script>
+  {{ $compiledSearchJS := "" }}
+
+  {{ if $isLocalServer }}
+    {{ $compiledSearchJS = resources.Get "scripts/components/search.js" | js.Build $options }}
+  {{ else }}
+    {{ $compiledSearchJS = resources.Get "scripts/components/search.js" | js.Build $options | resources.Fingerprint "sha512" }}
+  {{ end }}
+
+  <script src="{{ $compiledSearchJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledSearchJS.Data.Integrity }}"{{ end }}></script>
 {{ end }}
