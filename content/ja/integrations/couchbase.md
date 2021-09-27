@@ -17,7 +17,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
 display_name: Couchbase
 draft: false
 git_integration_title: couchbase

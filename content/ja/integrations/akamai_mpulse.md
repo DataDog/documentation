@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Akamai mPulse と Datadog を統合
-doc_link: 'https://docs.datadoghq.com/integrations/akamai_mpulse/'
+doc_link: https://docs.datadoghq.com/integrations/akamai_mpulse/
 draft: false
 git_integration_title: akamai_mpulse
 has_logo: true
@@ -32,7 +32,11 @@ Datadog の [Akamai mPulse インテグレーションタイル][1]を使用し�
 
 Akamai mPulse インテグレーションを構成するには、`apiKey` と `apiToken` が必要です。
 
-`apiKey` は、mPulse ポータルにあるユーザーサイトのデータ (ビーコン) を一意に識別するために自動生成される値です。
+`apiKey` は、mPulse ポータルで見つかったサイトのデータ (ビーコン) を一意に識別する自動生成された値です。"Central" ページに移動し、左側のパネルの "Apps" をクリックすると、`apiKey` を見つけることができます。最後に、監視するアプリ名をダブルクリックして、`apiKey` を含むコンフィギュレーションページを表示します。
+
+<div class="alert alert-warning">
+注: "Apps" メニューオプションと `apiKey` 属性は、アプリ管理者にのみ表示されます。
+</div>
 
 #### API トークンの生成
 

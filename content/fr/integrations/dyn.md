@@ -4,8 +4,8 @@ categories:
   - web
 ddtype: crawler
 dependencies: []
-description: Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.
-doc_link: https://docs.datadoghq.com/integrations/dyn/
+description: 'Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.'
+doc_link: 'https://docs.datadoghq.com/integrations/dyn/'
 draft: false
 git_integration_title: dyn
 has_logo: true
@@ -16,7 +16,7 @@ kind: integration
 manifest_version: '1.0'
 name: dyn
 public_title: Intégration Datadog/Dyn
-short_description: Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.
+short_description: 'Surveillez les changements de zone et mesurez le nombre de requêtes par seconde, selon une zone ou un enregistrement.'
 version: '1.0'
 ---
 {{< img src="integrations/dyn/dyn_overview.png" alt="Présentation Dyn" popup="true">}}

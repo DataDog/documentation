@@ -10,7 +10,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS アカウントの支払実績と支払予測を監視
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_billing/
 draft: false
 git_integration_title: amazon_billing
 has_logo: true

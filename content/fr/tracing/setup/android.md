@@ -1,15 +1,15 @@
 ---
 beta: true
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
+  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md'
 description: Recueillez des traces à partir de vos applications Android.
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
+  - link: 'https://github.com/DataDog/dd-sdk-android'
     tag: Github
     text: Code source dd-sdk-android
   - link: tracing/visualization/
     tag: Documentation
-    text: Explorer vos services, ressources et traces
+    text: 'Explorer vos services, ressources et traces'
 kind: documentation
 title: Collecte de traces Android
 ---
