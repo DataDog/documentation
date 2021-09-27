@@ -23,6 +23,8 @@ If you're using one of the following install methods, your hosts trust the key a
 * [SaltStack formula][9] v3.4 (released Aug 12, 2021)
 * [Elastic Beanstalk][10] config templates updated as of Mar 29, 2021 (should contain `DATADOG_RPM_KEY_FD4BF915.public` under `gpgkey`)
 * Containerized Agents (Docker/Kubernetes): No action needed on any version
+* Heroku: No action needed on any version.
+* Windows/MacOS Agents: No action needed on any version.
 
 Additionally, if you are using the DEB version of the Agent version 7.31.0 or greater, your hosts should have installed the `datadog-signing-keys` package that automatically trusts the new key.
 
