@@ -48,6 +48,10 @@ Select services and team members to notify. For example, alert your on-call Comp
 
 You can also select if you want to notify a service or team when an alert is modified with the `Do Not Notify` dropdown option.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/monitors/create/audit
 [2]: /logs/explorer/search_syntax/
 [3]: /getting_started/monitors/#say-whats-happening

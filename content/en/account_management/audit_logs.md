@@ -65,7 +65,7 @@ Note: Audit Logs are priced as retained logs, and there is not a cost for ingest
 
 To explore an audit log, navigate to the [Audit Logs][1] section, also accessible from your [Organizational Settings][2] in the Datadog app.
 
-{{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Logs in the Organization Settings menu" style="width:30%;">}}
+{{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Logs in the Organization Settings menu" style="width:50%;">}}
 
 Audit Logs have the same functionality as logs within the Datadog [Logs Explorer][4]:
 
@@ -86,10 +86,14 @@ Give more visual context to your audit logs with Dashboards. To create an Audit 
 1. Create a [New Dashboard][6] in Datadog.
 2. Select your visualization: an Audit Logs source can be queried for [Top Lists][7], [Time Series][8], and [Log Stream][9].
 3. [Graph your data][10]: Under edit, select Audit Logs as the data source, and create a query. Audit Logs are filtered by count, and can be grouped by the different facets. Select a facet and limit.
-{{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:80%;">}}
+{{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Logs dashboard" style="width:70%;">}}
+{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Logs dashboard" style="width:100%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit/logs
 [2]: https://app.datadoghq.com/organization-settings/
