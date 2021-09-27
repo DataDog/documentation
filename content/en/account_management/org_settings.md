@@ -11,9 +11,9 @@ Organization Settings allow you to manage users, groups, RBAC, keys, and tokens.
 
 Read the [user management][2] documentation to add, edit, and disable users.
 
-#### Service Accounts
+#### Service accounts
 
-Service Accounts are non-human users that can have roles and own Application Keys. You can use Service Accounts to access Datadog API's without having your application or script be associated with a particular user. Service Account Application Keys are one-time-view only, and will not be retrievable after they've been created.
+Service accounts are non-human users that can have roles and own application keys. You can use service accounts to access Datadog APIs without having your application or script be associated with a particular person. Service account application keys are one-time-view only, and are not retrievable after they've been created.
 
 ### Groups
 
@@ -56,9 +56,9 @@ If your application does not have an existing Datadog integration, and you donâ€
 
 The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
 
-#### Login Methods
+#### Login methods
 
-The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login you should disable the other login method types. You can also allow per-user overrides in the new User Management tab to allow users the ability to login with another login method if they needed.
+The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
 #### Audit Logs
 

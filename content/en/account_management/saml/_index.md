@@ -51,12 +51,12 @@ Here's a two-minute video walkthrough:
 
 6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
-- If using SP-initiated login (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-Initiated Login.
+   - If using SP-initiated login (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-Initiated Login.
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
-- If using IdP-initiated login (Identity Provider, or login initiated from your app portal): By clicking on the App Icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
+   - If using IdP-initiated login (Identity Provider, or login initiated from your app portal): By clicking on the App Icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
 
-**Note**: If you want to configure SAML for a multi-org, see the [Managing Multiple-Organization Accounts documentation][20].
+**Note**: If you want to configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][20].
 
 ## Assertions and attributes
 
@@ -113,7 +113,7 @@ It’s important to understand what is sent in an assertion before turning on ma
 
     {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
 
-   Note: Every identity provider is different, some allow you to set your attribute key or label, others provide one by default. Datadog recommends you use an assertion inspector on your login to view the details of your particular assertion to understand how your Identity Provider is sending your group membership.
+   **Note**: Every identity provider is different. Some allow you to set your attribute key or label. Others provide one by default. Datadog recommends you use an assertion inspector on your login to view the details of your particular assertion to understand how your Identity Provider is sending your group membership.
 
 5. If you have not already done so, enable mappings by clicking **Enable Mappings**.
 
@@ -153,11 +153,11 @@ If you do not use the updated SP Metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-Organizations can become SAML Strict by disabling other Login Method types in the the **Login Methods** UI. When configured all users must by default log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org Administrators can set per-user overrides to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org administrators can set per-user overrides to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP Metadata
 
-Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull the latest SAML Service Provider metadata from Datadog. Once you've configured SAML in Datadog you can get the metadata URL for your organization from the SAML Configuration page and use that with your Identity Provider to get the latest SP Metadata whenever we publish changes.
+Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull the latest SAML service provider metadata from Datadog. After you configure SAML in Datadog, you can get the metadata URL for your organization from the SAML Configuration page and use that with your Identity Provider to get the latest service provider metadata whenever we publish changes.
 
 {{< img src="account_management/saml/saml_metadata_url.png" alt="SAML Metadata URL" style="width:50%;" >}}
 
