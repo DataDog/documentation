@@ -6,6 +6,6 @@ const scriptsDir = './assets/scripts';
 esBuildModule.build({
   entryPoints: [`${scriptsDir}/main.js`, `${scriptsDir}/components/search.js`, `${scriptsDir}/components/dd-browser-logs-rum.js`],
   sourcemap: true,
-  outdir: scriptsDir,
+  outdir: 'public/scripts',
   allowOverwrite: true
 })
