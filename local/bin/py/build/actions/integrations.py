@@ -825,11 +825,15 @@ class Integrations:
             # v2 or above
             manifest_json["integration_id"] = manifest_json.get("app_id", "")
             categories = []
+            supported_os = []
             for tag in manifest_json.get("classifier_tags", []):
                 key, value = tag.split("::")
                 if key.lower() == "category":
                     categories.append(value.lower())
+                if key.lower() == "supported os":
+                    supported_os.append(value.lower())
             manifest_json["categories"] = categories
+            manifest_json["supported_os"] = supported_os
             manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
             manifest_json["is_public"] = manifest_json.get("display_on_public_website", False)
             manifest_json["short_description"] = manifest_json.get("tile", {}).get("description", '')
