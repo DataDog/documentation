@@ -1,12 +1,10 @@
 ---
-title: Single Sign On With SAML
+title: Audit Logs
 kind: documentation
-aliases:
-  - /guides/saml
 further_reading:
-- link: "/account_management/multi_organization/"
+- link: "/account_management/org_settings/"
   tag: "Documentation"
-  text: "Configuring Teams & Organizations with Multiple Accounts"
+  text: "Learn more about organization settings"
 ---
 
 <div class="alert alert-warning">This feature is in public beta. Contact <a href="https://www.datadoghq.com/support/">Datadog support</a> for more information.</div>
