@@ -40,7 +40,7 @@ Here's a two-minute video walkthrough:
     * [Okta][15]
     * [SafeNet][16]
 
-2. If you're a [Datadog Administrator][9], you can access the **SAML Single Sign On Configuration** page. Hover over your username at the bottom of the left-side navigation menu and click **Configure SAML**.
+2. If you're a [Datadog Administrator][9], you can access the **Login Methods** page and the **SAML Configuration** page. Hover over your username at the bottom of the left-side navigation menu and click **Organization Settings**.
 
 3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
@@ -49,9 +49,12 @@ Here's a two-minute video walkthrough:
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
 
-6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account.
+6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
+- If using SP-initiated login (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-Initiated Login.
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
+
+- If using IdP-initiated login (Identity Provider, or login initiated from your app portal): By clicking on the App Icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
 
 **Note**: If you want to configure SAML for a multi-org, see the [Managing Multiple-Organization Accounts documentation][20].
 
@@ -110,12 +113,14 @@ It’s important to understand what is sent in an assertion before turning on ma
 
     {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
 
+   Note: Every identity provider is different, some allow you to set your attribute key or label, others provide one by default. Datadog recommends you use an assertion inspector on your login to view the details of your particular assertion to understand how your Identity Provider is sending your group membership.
+
 5. If you have not already done so, enable mappings by clicking **Enable Mappings**.
 
 When a user logs in who has the specified identity provider attribute, they are automatically assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they lose access to the role (unless another mapping adds it).
 
 <div class="alert alert-warning">
-  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions.
+  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions and inspect your own assertions before enabling Mappings to prevent any scenarios where your users are unable to login.
 </div>
 
 You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
@@ -142,13 +147,13 @@ Administrators can set the default role for new JIT users. The default role is *
 
 When the Datadog URL is loaded, the browser is redirected to the customer IdP where the user enters their credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
 
-After enabling the IdP Initiated Login feature (and waiting for caches to clear), you need to get a new version of the SP Metadata. Your new SP Metadata contains a different, organization-specific AssertionConsumerService endpoint to send assertions to.
+After enabling the IdP Initiated Login feature and saving your configurate you can grab the latest version of the SP Metadata for your Identity Provider. Your new SP Metadata contains a different, organization-specific AssertionConsumerService endpoint to send assertions to.
 
 If you do not use the updated SP Metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
 ### SAML strict
 
-With SAML strict mode enabled, all users must log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account.
+Organizations can become SAML Strict by disabling other Login Method types in the the **Login Methods** UI. When configured all users must by default log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org Administrators can set per-user overrides to allow certain users to be SAML Strict exempt.
 
 ## Further Reading
 
