@@ -17,7 +17,7 @@
         "build:hugo:preview": "yarn run build:hugo -- -D -F --environment preview",
         "build:hugo:live": "yarn run build:hugo -- -D -F --environment live",
         "build:live": "run-s build:hugo:live",
-        "build:sourcemaps:preview": "esbuild ./assets/scripts/main.js --sourcemap --outdir=public/scripts/",
+        "build:sourcemaps:preview": "node ./local/bin/js/build-source-maps.js",
         "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes 0 --log --verbose",
         "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --maxDeletes -1 --invalidateCDN --log --verbose",
         "deploy:liveAssets": "./node_modules/.bin/hugo deploy --target liveAssets -e live --maxDeletes 0 --log --verbose --debug",
