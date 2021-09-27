@@ -104,20 +104,20 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on the home screen.
+- Long press on your home screen.
 - Tap the “+” button on the top left corner of the screen.
 - Search for "Datadog" widgets.
 - Select your prefered size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
-- Place the widget in your desired, onscreen location.
+- Drag the widget to your desired, on-screen location.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Open the Android Widget Picker.
-- Either long press your home screen, or long press the Datadog app icon.
-- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the SLOs widget on your home screen.
+- Long press on your home screen.
+- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Drag the widget to your desired, on-screen home screen.
+- Resize the widget to fit your preference; it will always shows one SLO. If you size the widget to take up the width of your mobile home screen, it will display the selected SLO along with a visualized timeframe of its health.
 
 
 {{% /tab %}}
@@ -143,7 +143,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Tap on the "Selected SLO" section to choose an SLO to track.
 - Tap on the "Selected Time Window" section to choose the SLO timeframe.
 - Tap on the "Dashboard to open" section to choose a dashboard that opens when the SLOs widget is tapped
-- Tap "Apply" to validate your selection and exit the configuration screen.
+- Tap the "Save" or "Apply" button to validate your selection and exit the configuration screen.
 - Long press and resize the widget to fit your preference.
 
 
@@ -166,8 +166,8 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 - Tap on the widget title to configure.
 - From the configuration screen, tap on "Organization".
 - Select a new organization (you might need to sign in).
-- Edit the widget to your preference.
-- Tap "Apply". The widget is now configured with an SLO from a different organization.
+- Edit the widget to fit your preference.
+- Tap the "Save" or "Apply" button. The widget is now configured with an SLO from a different organization.
 
 
 {{% /tab %}}
@@ -184,7 +184,7 @@ Delete a widget pressing the "-" button at the top left of the widget when editi
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
+Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
 
 
 {{% /tab %}}
@@ -213,10 +213,10 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Open the Android Widget Picker.
-- Either long press your home screen, or long press the Datadog app icon.
-- Tap on "Widgets". If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the Monitor Saved Views widget on your home screen.
+- Long press on your home screen.
+- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Drag the widget to your desired, on-screen home screen.
+- Resize the widget to fit your preference. To show more saved views, increase the length of the widget on your mobile home screen.
 
 
 {{% /tab %}}
@@ -238,11 +238,11 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 {{% tab "Android" %}}
 
 - Tap on the widget title to configure.
-- Tap on "Saved views".
+- Tap on "Saved Views".
 - Tap on the individual saved view cell to select and deselect.
 - Reorder the views by dragging and dropping each cell.
-- Tap "Save" to validate your selection and exit the configuration screen.
-- Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
+- Tap the "Save" or "Apply" button to validate your selection and exit the configuration screen.
+- Scroll inside the widget to see more saved views. Long press and resize the widget to fit your preference.
 
 
 {{% /tab %}}
@@ -261,10 +261,11 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 {{% /tab %}}
 {{% tab "Android" %}}
 
+- Tap on the widget title to configure.
 - From the configuration screen, tap on "Organization".
 - Select a new organization (you might need to sign in).
-- Tap "Saved Views". Select saved views to display or leave it as is.
-- Tap "Save". The widget is now configured with saved views from a different organization.
+- Edit the widget to fit your preference.
+- Tap the "Save" or "Apply" button. The widget is now configured with saved views from a different organization.
 
 
 {{% /tab %}}
