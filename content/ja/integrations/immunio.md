@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Immunio からデータを収集して攻撃パターンを可視化および監視。
-doc_link: 'https://docs.datadoghq.com/integrations/immunio/'
+doc_link: https://docs.datadoghq.com/integrations/immunio/
 draft: false
 git_integration_title: immunio
 has_logo: true

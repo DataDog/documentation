@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon AppStream のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_appstream/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_appstream/'
 draft: false
 git_integration_title: amazon_appstream
 has_logo: true

@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
 display_name: Go-Expvar
 draft: false
 git_integration_title: go_expvar
@@ -77,7 +77,7 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [6]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}

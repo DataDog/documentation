@@ -2,10 +2,10 @@
 title: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 kind: ガイド
 further_reading:
-  - link: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
+  - link: 'https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html'
     tag: Documentation
     text: メトリクスストリーム - Amazon CloudWatch
-  - link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
+  - link: 'https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/'
     tag: ブログ
     text: メトリクススストリームを使用して Amazon CloudWatch メトリクスを収集する
 ---

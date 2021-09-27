@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_sqs/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_sqs/'
 draft: false
 git_integration_title: amazon_sqs
 has_logo: true

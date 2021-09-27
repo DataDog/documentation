@@ -34,9 +34,9 @@ further_reading:
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
 [ログ][4] & [HIPAA ログ][5]
-: TCP: `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-HTTP: `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
-その他: [ログのエンドポイント][6]を参照してください
+: TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
+HTTP: `{{< region-param key="http_endpoint" code="true" >}}`<br>
+その他: [ログのエンドポイント][6]を参照
 
 [HIPAA ログ (レガシー)][5]
 : `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
