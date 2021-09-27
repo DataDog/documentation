@@ -2011,7 +2011,7 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 204
-  - name: Custom spans
+  - name: Custom Spans
     url: continuous_integration/setup_pipelines/custom_spans/
     parent: setup_pipelines
     identifier: ci_custom_spans

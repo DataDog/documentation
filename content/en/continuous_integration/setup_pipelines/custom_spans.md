@@ -1,5 +1,5 @@
 ---
-title: Adding custom spans to Pipeline Traces
+title: Adding Custom Spans to Pipeline Traces
 kind: documentation
 further_reading:
     - link: "/continuous_integration/setup_pipelines/custom_spans/"
@@ -29,7 +29,7 @@ npm install -g @datadog/datadog-ci
 
 ## Tracing a command
 
-To trace a command, run the following:
+To trace a command, run:
 
 {{< code-block lang="bash" >}}
 datadog-ci trace [--name <name>] -- <command>
@@ -56,7 +56,7 @@ DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci trace \
 
 ## Configuration settings
 
-This is the full list of options available when using the `datadog-ci trace` command:
+These options are available for the `datadog-ci trace` command:
 
 `--name`
 : Display name of the custom span.<br/>
@@ -99,5 +99,5 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [2]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 {{< site-region region="us3,gov" >}}
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) does not support this feature.
 {{< /site-region >}}
