@@ -12238,11 +12238,11 @@ components:
           description: The network host usage by tag(s).
           format: double
           type: number
-        profiled_containers_percentage:
+        profiled_container_percentage:
           description: The percentage of profiled containers usage by tag(s).
           format: double
           type: number
-        profiled_containers_usage:
+        profiled_container_usage:
           description: The profiled container usage by tag(s).
           format: double
           type: number
