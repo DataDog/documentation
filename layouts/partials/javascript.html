@@ -12,7 +12,7 @@
 {{ $options := cond $isLocalServer $devOptions $productionOptions }}
 {{ $jQuery := resources.Get "scripts/vendor/jquery.min.js" }}
 {{ $popperJS := resources.Get "scripts/vendor/popper.min.js" }}
-{{ $bootstrapJS := resources.Get "scripts/vendor/bootstrap.min.js" | js.Build $options }}
+{{ $bootstrapJS := resources.Get "scripts/vendor/bootstrap.min.js" }}
 {{ $ddLibs := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
 {{ $vendor := slice $jQuery $popperJS $bootstrapJS | resources.Concat "scripts/vendor/vendor.js" }}
 
