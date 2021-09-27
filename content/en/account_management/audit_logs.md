@@ -26,7 +26,7 @@ There are two types of events that can occur within an audit log:
 
 Audit Logs is self-service enabled. To enable, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Click the **Enable** button.
 
-[Image TK]
+{{< img src="account_management/audit_logs/setup.png" alt="Audit Logs setup in Datadog" style="width:80%;">}}
 
 ## Configuration
 
@@ -55,7 +55,7 @@ Retaining logs is an optional feature for Audit Logs. To enable, navigate to you
 
 The default retention period for an audit log is 7 days. You can set a retention period between 3 and 90 days.
 
-[Image TK]
+{{< img src="account_management/audit_logs/retention.png" alt="Audit Logs Retention setup in Datadog" style="width:80%;">}}
 
 Note: Audit Logs are priced as retained logs, and there is not a cost for ingestion or archiving. See the [Log Management pricing page][3] for more information.
 
@@ -63,7 +63,7 @@ Note: Audit Logs are priced as retained logs, and there is not a cost for ingest
 
 To explore an audit log, navigate to the [Audit Logs][1] section, also accessible from your[Organizational Settings][2] in the Datadog app.
 
-[Image TK]
+{{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Logs in the Organization Settings menu" style="width:80%;">}}
 
 Audit Logs have the same functionality as logs within the Datadog [Logs Explorer][4]:
 
@@ -71,33 +71,31 @@ Audit Logs have the same functionality as logs within the Datadog [Logs Explorer
 - For compliance audits, filter by `event_name` and select `authentication only` to see compliance-related events.
 - Drill down into related audit logs by selecting a log and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, etc.
 
-[Image TK]
+{{< img src="account_management/audit_logs/attributes.png" alt="Audit Logs in the Organization Settings menu" style="width:80%;">}}
 
 ## Create a Monitor
 
-To create a monitor on a type of audit log or by specific log attributes, see the [Audit Logs Monitor documentation][11].
+To create a monitor on a type of audit log or by specific log attributes, see the [Audit Logs Monitor documentation][5].
 
 ## Create a Dashboard
 
 Give more visual context to your audit logs with Dashboards. To create an Audit Logs dashboard:
 
-1. Create a [New Dashboard][5] in Datadog.
-2. Select your visualization: an Audit Logs source can be queried for [Top Lists][6], [Time Series][7], and [Log Stream][8].
-
-[Image TK]
-
-3. [Graph your data][9]: Under edit, select Audit Logs as the data source, and create a query. Audit Logs are filtered by count, and can be grouped by the different facets. Select a facet and limit.
+1. Create a [New Dashboard][6] in Datadog.
+2. Select your visualization: an Audit Logs source can be queried for [Top Lists][7], [Time Series][8], and [Log Stream][9].
+3. [Graph your data][10]: Under edit, select Audit Logs as the data source, and create a query. Audit Logs are filtered by count, and can be grouped by the different facets. Select a facet and limit.
+{{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:80%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-[Image TK]
+{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Logs dashboard" style="width:80%;">}}
 
-[11]:
 [1]: https://app.datadoghq.com/audit/logs
 [2]: https://app.datadoghq.com/organization-settings/
 [3]: https://www.datadoghq.com/pricing/
-[4]: https://docs.datadoghq.com/logs/explorer/
-[5]: https://docs.datadoghq.com/dashboards/#overview
-[6]: https://docs.datadoghq.com/dashboards/widgets/top_list/
-[7]: https://docs.datadoghq.com/dashboards/widgets/timeseries/
-[8]: https://docs.datadoghq.com/dashboards/widgets/log_stream/
-[9]: https://docs.datadoghq.com/dashboards/querying/#choose-the-metric-to-graph
+[4]: /logs/explorer/
+[5]: /monitors/create/types/audit_logs/
+[6]: /dashboards/
+[7]: /dashboards/widgets/top_list/
+[8]: /dashboards/widgets/timeseries/
+[9]: /dashboards/widgets/log_stream/
+[10]: /dashboards/querying/#choose-the-metric-to-graph/
