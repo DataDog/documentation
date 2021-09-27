@@ -819,7 +819,7 @@ class Integrations:
 
     def process_manifest(self, manifest_json, name):
         """ Takes manifest and converts v2 and above to v1 expected formats for now """
-        manifest_version = manifest_json.get("manifest_version", '1.0.0').split('.')
+        manifest_version = (manifest_json.get("manifest_version", '1.0.0') or '1.0.0').split('.')
         split_version = manifest_version[0] if len(manifest_version) > 1 else '1'
         if split_version != '1':
             # v2 or above
@@ -827,11 +827,13 @@ class Integrations:
             categories = []
             supported_os = []
             for tag in manifest_json.get("classifier_tags", []):
-                key, value = tag.split("::")
-                if key.lower() == "category":
-                    categories.append(value.lower())
-                if key.lower() == "supported os":
-                    supported_os.append(value.lower())
+                # in some cases tag was null/None
+                if tag:
+                    key, value = tag.split("::")
+                    if key.lower() == "category":
+                        categories.append(value.lower())
+                    if key.lower() == "supported os":
+                        supported_os.append(value.lower())
             manifest_json["categories"] = categories
             manifest_json["supported_os"] = supported_os
             manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
