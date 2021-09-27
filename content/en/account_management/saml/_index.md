@@ -51,10 +51,10 @@ Here's a two-minute video walkthrough:
 
 6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
-   - If using SP-initiated login (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-Initiated Login.
+   - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][18]. The **Single Sign-on URL** is also displayed on the [Team page][19]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
     {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
 
-   - If using IdP-initiated login (Identity Provider, or login initiated from your app portal): By clicking on the App Icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
+   - **If using IdP-initiated login** (Identity Provider, or login initiated from your app portal): By clicking on the app icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
 
 **Note**: If you want to configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][20].
 
@@ -147,7 +147,7 @@ Administrators can set the default role for new JIT users. The default role is *
 
 When the Datadog URL is loaded, the browser is redirected to the customer IdP where the user enters their credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
 
-After enabling the IdP Initiated Login feature and saving your configurate you can grab the latest version of the SP Metadata for your Identity Provider. Your new SP Metadata contains a different, organization-specific AssertionConsumerService endpoint to send assertions to.
+After enabling the IdP-initiated login feature and saving your configuration, you can download the latest version of the SP Metadata for your Identity Provider. Your new SP metadata contains a different, organization-specific `AssertionConsumerService` endpoint to send assertions to.
 
 If you do not use the updated SP Metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
