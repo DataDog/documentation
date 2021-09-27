@@ -155,6 +155,12 @@ If you do not use the updated SP Metadata, Datadog is not able to associate the 
 
 Organizations can become SAML Strict by disabling other Login Method types in the the **Login Methods** UI. When configured all users must by default log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org Administrators can set per-user overrides to allow certain users to be SAML Strict exempt.
 
+### Self-updating Datadog SP Metadata
+
+Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull the latest SAML Service Provider metadata from Datadog. Once you've configured SAML in Datadog you can get the metadata URL for your organization from the SAML Configuration page and use that with your Identity Provider to get the latest SP Metadata whenever we publish changes.
+
+{{< img src="account_management/saml/saml_metadata_url.png" alt="SAML Metadata URL" style="width:50%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
