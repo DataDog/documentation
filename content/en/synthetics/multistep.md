@@ -276,9 +276,9 @@ If you have access to the [custom role feature][18], add your user to any custom
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [11]: /api/latest/synthetics/#edit-an-api-test
-[12]: /monitors/notifications/?tab=is_alert#notification
+[12]: /monitors/notify/?tab=is_alert#notification
 [13]: http://daringfireball.net/projects/markdown/syntax
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors
 [17]: /account_management/rbac/

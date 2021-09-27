@@ -3,18 +3,18 @@ title: APM Monitor
 kind: documentation
 description: "Compare an APM metric to a user defined threshold"
 aliases:
-  - /monitors/monitor_types/app_analytics
-  - /monitors/monitor_types/trace_search
+  - /monitors/create/types/app_analytics
+  - /monitors/create/types/trace_search
   - /tracing/guide/resource_monitor/
-  - /monitors/monitor_types/apm
+  - /monitors/create/types/apm
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -112,8 +112,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric/
+[1]: /monitors/create/types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
-[3]: /monitors/notifications/
+[3]: /monitors/notify/
 [4]: https://app.datadoghq.com/apm/services
 [5]: https://app.datadoghq.com/apm/map

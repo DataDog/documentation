@@ -2,10 +2,10 @@
 title: Why am I getting so many "No Data" Alerts for my Metric Monitor
 kind: faq
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---
@@ -29,7 +29,7 @@ Contact [us][4] should you experience any issues.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric/
+[1]: /monitors/create/types/metric/
 [2]: /integrations/amazon_web_services/
 [3]: /monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter/
 [4]: /help/

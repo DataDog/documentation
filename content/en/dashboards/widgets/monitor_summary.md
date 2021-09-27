@@ -74,7 +74,7 @@ The dedicated [widget JSON schema definition][4] for the monitor summary widget 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/manage_monitor/
-[2]: /monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
+[1]: /monitors/manage/
+[2]: /monitors/manage/#manage-triggered-monitors-with-group-level-granularity
 [3]: /api/v1/dashboards/
 [4]: /dashboards/graphing_json/widget_json/
