@@ -22,17 +22,12 @@ Here's a two-minute video walkthrough:
 
 {{< wistia 2qe33x8h3v >}}
 
-**Notes**:
-
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
-- SAML configuration requires [Datadog Administrator][9] access.
-
 ## Setup
 
 {{< tabs >}}
 {{% tab "IdP initiated login" %}}
 
-An Identity Provider-initiated (IdP) login incurs that you are using your IdP to log into Datadog, whether that be from the Datadog login landing page (for example, Google SSO) or logging in directly to your IdP and selecting Datadog from their service, which will then route you to Datadog.
+An Identity Provider-initiated (IdP) login incurs that you are using your IdP to log into Datadog, whether that is from the Datadog login landing page (for example, Google SSO) or logging in directly to your IdP and selecting Datadog from their service, which then routes you to Datadog.
 
 1. To begin IdP-initiated SAML setup, see your IdP's documentation:
 
@@ -125,7 +120,7 @@ Some important notes on assertions:
 * Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the format of the **NameIDPolicy** in assertion requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Reference [Datadog's SP Metadata][10] for more information.
+* Reference [Datadog's SP Metadata][3] for more information.
 
 Attributes may be included in a SAML Assertion. Datadog looks for three attributes in an `AttributeStatement`:
 
@@ -155,9 +150,9 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 With Datadog, you can map attributes in your IdP's response to Datadog roles. Users with the Access Management permission can assign or remove Datadog roles based on a user's SAML-assigned attributes.
 
-It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][11]. Datadog recommends cross-referencing with [built-in browser tooling][12] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][13] **before** creating mappings.
+It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][4]. Datadog recommends cross-referencing with [built-in browser tooling][5] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][6] **before** creating mappings.
 
-1. [Cross-reference][12] and [validate][13] your SAML assertion to understand your IdP's attributes.
+1. [Cross-reference][5] and [validate][6] your SAML assertion to understand your IdP's attributes.
 
 2. Go to Teams and click the **Mappings** tab.
 
@@ -179,11 +174,11 @@ When a user logs in who has the specified identity provider attribute, they are 
 
 You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
 
-Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][14].
+Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][7].
 
 ## Additional features
 
-The following features can be enabled through the [SAML Configuration dialog][15]:
+The following features can be enabled through the [SAML Configuration dialog][8]:
 
 **Note:** You must have Admin permissions to see the SAML Configuration dialog.
 
@@ -207,16 +202,9 @@ With SAML strict mode enabled, all users must log in with SAML. An existing user
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
 [2]: /help/
-[3]: https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/auth-saml
-[4]: https://auth0.com/docs/protocols/saml-protocol
-[5]: https://cloud.google.com/architecture/identity/single-sign-on
-[6]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
-[7]: https://developer.okta.com/docs/concepts/saml/
-[8]: https://help.safenetid.com/operator/Content/STA/Apps/Apps_SAML.htm
-[9]: /account_management/users/default_roles/
-[10]: https://app.datadoghq.com/account/saml/metadata.xml
-[11]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
-[12]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
-[13]: https://www.samltool.com/validate_response.php
-[14]: /account_management/authn_mapping/
-[15]: https://app.datadoghq.com/saml/saml_setup
+[3]: https://app.datadoghq.com/account/saml/metadata.xml
+[4]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm
+[5]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
+[6]: https://www.samltool.com/validate_response.php
+[7]: /account_management/authn_mapping/
+[8]: https://app.datadoghq.com/saml/saml_setup
