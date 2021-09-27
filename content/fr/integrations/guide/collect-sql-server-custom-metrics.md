@@ -4,7 +4,7 @@ kind: guide
 aliases:
   - /fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/sql-server-metrics/#creer-une-procedure-stockee-pour-generer-et-recueillir-des-metriques'
+  - link: https://www.datadoghq.com/blog/sql-server-metrics/#creer-une-procedure-stockee-pour-generer-et-recueillir-des-metriques
     tag: Blog
     text: Créer une procédure stockée pour générer et recueillir des métriques
   - link: /integrations/mysql/
