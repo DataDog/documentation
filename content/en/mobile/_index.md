@@ -140,11 +140,11 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{% tab "Android" %}}
 
 - Tap on the widget title to configure.
-- Tap on "Saved views".
-- Tap on the individual saved view cell to select and deselect.
-- Reorder the views by dragging and dropping each cell.
-- Tap "Save" to validate your selection and exit the configuration screen.
-- Scroll the widget to see more saved views. Long press and resize the widget to fit your preference.
+- Tap on the "Selected SLO" section to choose an SLO to track.
+- Tap on the "Selected Time Window" section to choose the SLO timeframe.
+- Tap on the "Dashboard to open" section to choose a dashboard that opens when the SLOs widget is tapped
+- Tap "Apply" to validate your selection and exit the configuration screen.
+- Long press and resize the widget to fit your preference.
 
 
 {{% /tab %}}
@@ -163,10 +163,11 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 {{% /tab %}}
 {{% tab "Android" %}}
 
+- Tap on the widget title to configure.
 - From the configuration screen, tap on "Organization".
 - Select a new organization (you might need to sign in).
-- Tap "Saved Views". Select saved views to display or leave it as is.
-- Tap "Save". The widget is now configured with saved views from a different organization.
+- Edit the widget to your preference.
+- Tap "Apply". The widget is now configured with an SLO from a different organization.
 
 
 {{% /tab %}}
