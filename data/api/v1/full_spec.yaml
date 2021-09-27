@@ -10956,6 +10956,8 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
         locations:
           description: Array of locations used to run the test.
           items:
