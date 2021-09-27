@@ -50,7 +50,7 @@ Datadog integrates with AWS GuardDuty through a Lambda function that ships Guard
 
     {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" style="width:75%;">}}
 
-3. Once done, see your [Datadog Log section][2] to start exploring your logs!
+3. Once done, see the [Datadog Log section][2] to start exploring your logs!
 
 [1]: /integrations/amazon_web_services/#create-a-new-lambda-function
 [2]: https://app.datadoghq.com/logs
