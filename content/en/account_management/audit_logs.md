@@ -26,7 +26,7 @@ There are two types of events that can occur within an audit log:
 
 Audit Logs is self-service enabled. To enable, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Click the **Enable** button.
 
-{{< img src="account_management/audit_logs/setup.png" alt="Audit Logs setup in Datadog" style="width:80%;">}}
+{{< img src="account_management/audit_logs/setup.png" alt="Audit Logs setup in Datadog" style="width:100%;">}}
 
 ## Configuration
 
@@ -42,6 +42,8 @@ Audit Logs is configurable by event type. Enabled events are specific to actions
 - Notebooks: Additions, deletions, and changes to notebook resources
 - Request: All web requests
 - Security Monitoring: Additions, deletions, and changes to security monitoring resources
+
+{{< img src="account_management/audit_logs/event-types.png" alt="Audit Logs event types setup in Datadog" style="width:70%;">}}
 
 ### Archiving
 
@@ -61,9 +63,9 @@ Note: Audit Logs are priced as retained logs, and there is not a cost for ingest
 
 ## Explore Audit Logs
 
-To explore an audit log, navigate to the [Audit Logs][1] section, also accessible from your[Organizational Settings][2] in the Datadog app.
+To explore an audit log, navigate to the [Audit Logs][1] section, also accessible from your [Organizational Settings][2] in the Datadog app.
 
-{{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Logs in the Organization Settings menu" style="width:80%;">}}
+{{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Logs in the Organization Settings menu" style="width:30%;">}}
 
 Audit Logs have the same functionality as logs within the Datadog [Logs Explorer][4]:
 
@@ -71,7 +73,7 @@ Audit Logs have the same functionality as logs within the Datadog [Logs Explorer
 - For compliance audits, filter by `event_name` and select `authentication only` to see compliance-related events.
 - Drill down into related audit logs by selecting a log and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, etc.
 
-{{< img src="account_management/audit_logs/attributes.png" alt="Audit Logs in the Organization Settings menu" style="width:80%;">}}
+{{< img src="account_management/audit_logs/attributes.png" alt="Audit Logs in the Organization Settings menu" style="width:50%;">}}
 
 ## Create a Monitor
 
@@ -87,7 +89,7 @@ Give more visual context to your audit logs with Dashboards. To create an Audit 
 {{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:80%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Logs dashboard" style="width:80%;">}}
+{{< img src="account_management/audit_logs/dashboard.png" alt="An Audit Logs dashboard" style="width:70%;">}}
 
 [1]: https://app.datadoghq.com/audit/logs
 [2]: https://app.datadoghq.com/organization-settings/
