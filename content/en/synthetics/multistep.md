@@ -73,7 +73,7 @@ To create an HTTP request step, click **Create Your First Step**.
   {{% tab "Authentication" %}}
 
   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-  * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog will generate the signature for your request.
+  * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
 
   {{% /tab %}}
 
