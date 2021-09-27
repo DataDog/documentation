@@ -2357,16 +2357,21 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 303
+  - name: CWS Event Documentation
+    url: security_platform/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
+    weight: 304
   - name: OOTB Rules
     url: security_platform/default_rules#cat-workload-security
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
-    weight: 304
+    weight: 305
   - name: Signals Explorer
     url: security_platform/explorer
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
-    weight: 305
+    weight: 306
   - name: Security Rules
     url: security_platform/detection_rules/
     parent: security_platform
