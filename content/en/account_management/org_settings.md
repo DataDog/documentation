@@ -11,12 +11,16 @@ Organization Settings allow you to manage users, groups, RBAC, keys, and tokens.
 
 Read the [user management][2] documentation to add, edit, and disable users.
 
+#### Service accounts
+
+Service accounts are non-human users that can have roles and own application keys. You can use service accounts to access Datadog APIs without having your application or script be associated with a particular person. Service account application keys are one-time-view only, and are not retrievable after they've been created.
 
 ### Groups
 
 #### Roles
 
 To learn about default and custom roles in Datadog, read the [Role Based Access Control documentation][3].
+
 #### SAML Group Mappings
 
 When enabled, users logging in with SAML to your Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider and the mappings you've created.
@@ -27,6 +31,7 @@ To learn how to create and set mappings, read the [Mapping SAML attributes docum
 ##### SAML settings
 
 For more information about configuring SAML, reference the [Single sign on with SAML documentation][5].
+
 ### Access
 
 #### API Keys
@@ -42,6 +47,7 @@ You can filter application keys by name, ID, or owner, or click the **Only My Ke
 Client tokens are used to send events and logs from your user’s web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create them][7] is similar to API and Application Keys.
 
 #### Events API Emails
+
 If your application does not have an existing Datadog integration, and you don’t want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][8].
 
 ### Security
@@ -50,9 +56,9 @@ If your application does not have an existing Datadog integration, and you don�
 
 The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
 
-#### Authentication
+#### Login methods
 
-The **Authentication** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns.
+The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
 #### Audit Logs
 
