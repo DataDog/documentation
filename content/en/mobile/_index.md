@@ -241,7 +241,7 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 - Tap on "Saved Views".
 - Tap on the individual saved view cell to select and deselect.
 - Reorder the views by dragging and dropping each cell.
-- Tap the "Save" or "Apply" button to validate your selection and exit the configuration screen.
+- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
 - Scroll inside the widget to see more saved views. Long press and resize the widget to fit your preference.
 
 
