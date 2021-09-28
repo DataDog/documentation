@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: L'intégration Segment permet de recueillir des métriques de diffusion d'événements pour les destinations de votre espace de travail.
-doc_link: 'https://docs.datadoghq.com/integrations/segment/'
+doc_link: https://docs.datadoghq.com/integrations/segment/
 draft: false
 git_integration_title: segment
 has_logo: true

@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS Polly のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_polly/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_polly/
 draft: false
 git_integration_title: amazon_polly
 has_logo: true

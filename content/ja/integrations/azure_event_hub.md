@@ -8,10 +8,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Event Hub のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_event_hub/'
+doc_link: https://docs.datadoghq.com/integrations/azure_event_hub/
 draft: false
 git_integration_title: azure_event_hub
 has_logo: true
+integration_id: azure-event-hub
 integration_title: Microsoft Azure Event Hub
 is_public: true
 kind: インテグレーション

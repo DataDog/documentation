@@ -7,14 +7,13 @@ ddtype: crawler
 description: Rassemblez vos logs d'audit de HSM au sein de votre organisation Datadog.
 has_logo: true
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md'
 integration_title: "AWS\_CloudHSM"
 is_public: true
 kind: integration
 name: amazon_cloudhsm
 public_title: "Intégration Datadog/AWS\_CloudHSM"
 short_description: Rassemblez vos logs d'audit de HSM au sein de votre organisation Datadog.
-integration_id: amazon-cloudhsm
 ---
 ## Présentation
 
@@ -26,7 +25,7 @@ Datadog s'intègre à AWS CloudHSM via une fonction Lambda qui transmet les log
 
 ### Collecte de logs
 
-#### Activer les logs
+#### Activer les logs CloudHSM
 
 Les logs d'audit sont activés par défaut pour CloudHSM.
 
