@@ -265,7 +265,7 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 - From the configuration screen, tap on "Organization".
 - Select a new organization (you might need to sign in).
 - Edit the widget to fit your preference.
-- Tap the "Save" or "Apply" button. The widget is now configured with saved views from a different organization.
+- Tap "Save" or "Apply". 
 
 
 {{% /tab %}}
