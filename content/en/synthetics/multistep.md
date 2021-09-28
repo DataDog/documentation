@@ -74,8 +74,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
-   This option uses the basic implementation of SigV4.
-   Known limitations: AWS S3 specific signature is not implemented.
+   This option uses the basic implementation of SigV4. The AWS S3 specific signature is not implemented.
 
    {{% /tab %}}
 
