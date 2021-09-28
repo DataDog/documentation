@@ -27,7 +27,7 @@ On the [Synthetic Monitoring Settings page][1], you can adjust the following set
 
 ## Global variables
 
-Global variables can be used in [single][3] and [multistep API tests][4] as well as [browser tests][5] of your test suite. To create a global variable, go to the [Global Variables][6] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
+Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][3] and [multistep API tests][4] as well as [browser tests][5] of your test suite. To create a global variable, go to the [Global Variables][6] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
 
 Choose the type of variable you want to create:
 
@@ -40,7 +40,7 @@ Choose the type of variable you want to create:
 4. Enter the **Value** you want to assign to your variable.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
 
-{{< img src="synthetics/settings/variable_value.png" alt="Global Variable Specify Value"  style="width:100%;">}}
+{{< img src="synthetics/settings/variable_value_2.png" alt="Global Variable Specify Value" style="width:100%;">}}
 
 {{% /tab %}}
 
@@ -54,14 +54,14 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 4. Pick the **[HTTP test][1]** you want to extract your variable from.
 5. Enable obfuscation of your variable to hide its value on test results (optional).
 6. Decide whether to extract your variable from the response headers or from the response body.
-    * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [regex][2].
-    * Extract the value from **Response Body**: parse the response body of the request with a [regex][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
+    * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [`regex`][2].
+    * Extract the value from **Response Body**: parse the response body of the request with a [`regex`][2], a [`jsonpath`][3], an [`xpath`][4], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Variable from http"  style="width:100%;">}}
+{{< img src="synthetics/settings/variable_fromhttp_3.png" alt="Variable from HTTP Test" style="width:80%;">}}
 
 **Note:** Variable values are updated whenever the test they are extracted from runs.
 
-[1]: /synthetics/api_tests/?tab=httptest
+[1]: /synthetics/api_tests/http_tests/
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
 [4]: https://www.w3schools.com/xml/xpath_syntax.asp
@@ -87,11 +87,13 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< /tabs >}}
 
+Once created, global variables can be used in all Synthetic tests by typing `{{` in the field of interest and selecting your global variable. For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
+
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of these two [default roles][8]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions for global variables. 
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
 
 #### Restrict access
 
@@ -100,13 +102,15 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict-access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict-access2.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
 ### Default locations
 
-Choose the default locations for your [API test][10], [multistep API test ][11], or [browser test][4] details. Options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+Choose the default locations for your [API test][3], [multistep API test][4], or [browser test][5] details. 
+
+Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
 ### APM integration for browser tests
 
@@ -116,13 +120,27 @@ Define which endpoints should be sent the APM headers by adding a URL into this 
 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
-If the endpoint is being traced and allowed, your browser test results are automatically tied to its corresponding trace.
+If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
+
+### Tag enforcement
+
+<div class="alert alert-warning">
+Tag enforcement is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
+
+Allows you to enforce selected tags on Synthetics tests. You can break down cost and usage by services, applications, or teams.
+
+To enable tag enforcement, click **Enforce tags for usage attributions on all tests**.  
+
+{{< img src="synthetics/settings/tag_enforcement.png" alt="Enforce tags for usage attributions on all tests" style="width:100%;">}}
+
+For more information, see [Usage Attribution][13].
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of these two [default roles][8]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you have access to the [custom role feature][9], add your user to a custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions for default settings. 
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Further Reading
 
@@ -130,12 +148,14 @@ If you have access to the [custom role feature][9], add your user to a custom ro
 
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations/
-[3]: /synthetics/api_tests/#use-global-variables
-[4]: /synthetics/multistep#variables
-[5]: /synthetics/browser_tests/#use-global-variables
+[3]: /synthetics/api_tests/
+[4]: /synthetics/multistep/
+[5]: /synthetics/browser_tests/
 [6]: https://app.datadoghq.com/synthetics/settings/variables
-[7]: /account_management/users/default_roles/
-[8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[9]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[10]: /synthetics/multistep/
-[11]: /synthetics/browser_tests
+[7]: /synthetics/api_tests/http_tests?tab=requestoptions#use-variables
+[8]: /synthetics/multistep?tab=requestoptions#use-variables
+[9]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
+[10]: /synthetics/browser_tests/actions#using-variables
+[11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[12]: /account_management/rbac/?tab=datadogapplication#custom-role
+[13]: /account_management/billing/usage_attribution

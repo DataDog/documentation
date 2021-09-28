@@ -29,7 +29,7 @@ If no user account is specified on the command line, the installer attempts to c
 
 If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
 
-To specify the optional username and password on the command line pass the following properties to the `msiexec` command:
+To specify the optional USERNAME and PASSWORD on the command line pass the following properties to the `msiexec` command (Remove the bracket `<>` characters from the username and password placeholders):
 
 ```shell
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>

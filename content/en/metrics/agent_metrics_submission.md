@@ -2,7 +2,7 @@
 title: "Metric Submission: Custom Agent Check"
 kind: documentation
 aliases:
-  - /metrics/agent_metrics_submission/
+  - /developers/metrics/agent_metrics_submission/
 further_reading:
 - link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"

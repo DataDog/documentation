@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Agent 6+ collects logs from containers. The recommended way to collect logs from ECS containers is to enable containerized logging within your `datadog-agent-ecs.json` or `datadog-agent-ecs1.json` file. However, if your application emits logs to files in any capacity (logs that are not written to `stdout`/`stderr`), you need to [deploy the Datadog Agent on your host](#custom-log-collection) and use custom log collection to tail files.
+Datadog Agent 6+ collects logs from containers. The recommended way to collect logs from ECS containers is to enable containerized logging within your `datadog-agent-ecs.json` or `datadog-agent-ecs1.json` file. However, if your application emits logs to files in any capacity (logs that are not written to `stdout`/`stderr`), you need to use [autodiscovery][2] with [container labels](#container-label) (available for Agent v7.25.0+/6.25.0+) or [deploy the Datadog Agent on your host](#custom-log-collection) and use custom log collection to tail files.
 
 ## Installation
 
@@ -160,7 +160,7 @@ To collect all logs written by running applications in your ECS containers and s
 
 If your container writes any logs to files, follow the [Custom Log Collection documentation][1] to tail files for logs.
 
-To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][2] with the following content:
+To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][6] with the following content:
 
 ```yaml
 logs:
@@ -187,7 +187,8 @@ The `source` attribute is used to identify the integration to use for each conta
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/?tab=tailfiles#custom-log-collection
-[2]: /agent/logs/#custom-log-collection
+[2]: /agent/docker/log/?tab=containerinstallation#log-integrations
 [3]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
 [4]: /agent/docker/log/?tab=logcollectionfromfile#examples
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html
+[6]: /agent/logs/#custom-log-collection

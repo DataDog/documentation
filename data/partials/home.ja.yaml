@@ -38,7 +38,7 @@ nav_sections:
             desc: メトリクスを調べてディストリビューションを作成する
           - title: アラート設定
             link: monitors/
-            icon: alert
+            icon: monitor
             desc: モニターおよび通知の作成と管理
           - title: APM & Continuous Profiler
             link: tracing/
@@ -97,7 +97,7 @@ nav_sections:
             desc: Datadog のデータ保護方法について
           - title: 開発者
             link: developers/
-            icon: wrench
+            icon: dev-code
             desc: Datadog プラットフォームの開発
 popular_searches:
   - title: API ドキュメント

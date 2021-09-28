@@ -14,9 +14,6 @@ further_reading:
     - link: '/network_monitoring/performance/setup'
       tag: 'Documentation'
       text: 'Collect your Network Data with the Datadog Agent.'
-    - link: '/dashboards/widgets/network'
-      tag: 'Documentation'
-      text: 'Network Widget'
 ---
 
 ## Overview
