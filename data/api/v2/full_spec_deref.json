@@ -28649,6 +28649,9 @@
               "dashboards_read": "The ability to view dashboards.",
               "dashboards_write": "The ability to create and change dashboards.",
               "events_read": "The ability to read events data.",
+              "incident_read": "The ability to view incidents in Datadog.",
+              "incident_settings_write": "The ability to configure incident settings.",
+              "incident_write": "The ability to create, view, and manage incidents in Datadog.",
               "metrics_read": "The ability to view custom metrics.",
               "security_monitoring_rules_read": "The ability to read Detection rules.",
               "security_monitoring_rules_write": "The ability to create and edit Detection rules.",
@@ -36953,6 +36956,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_read"
+            ]
+          }
+        ],
         "summary": "Get a list of incidents",
         "tags": [
           "Incidents"
@@ -38036,6 +38050,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_write"
+            ]
+          }
+        ],
         "summary": "Create an incident",
         "tags": [
           "Incidents"
@@ -38185,6 +38210,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_write"
+            ]
+          }
+        ],
         "summary": "Delete an existing incident",
         "tags": [
           "Incidents"
@@ -39044,6 +39080,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_read"
+            ]
+          }
+        ],
         "summary": "Get the details of an incident",
         "tags": [
           "Incidents"
@@ -40299,6 +40346,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_write"
+            ]
+          }
+        ],
         "summary": "Update an existing incident",
         "tags": [
           "Incidents"
@@ -61018,6 +61076,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_read"
+            ]
+          }
+        ],
         "summary": "Get a list of all incident services",
         "tags": [
           "Incident Services"
@@ -61650,6 +61719,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_settings_write"
+            ]
+          }
+        ],
         "summary": "Create a new incident service",
         "tags": [
           "Incident Services"
@@ -61799,6 +61879,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_settings_write"
+            ]
+          }
+        ],
         "summary": "Delete an existing incident service",
         "tags": [
           "Incident Services"
@@ -62327,6 +62418,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_read"
+            ]
+          }
+        ],
         "summary": "Get details of an incident service",
         "tags": [
           "Incident Services"
@@ -62975,6 +63077,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_settings_write"
+            ]
+          }
+        ],
         "summary": "Update an existing incident service",
         "tags": [
           "Incident Services"
@@ -63571,6 +63684,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_read"
+            ]
+          }
+        ],
         "summary": "Get a list of all incident teams",
         "tags": [
           "Incident Teams"
@@ -64199,6 +64323,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_settings_write"
+            ]
+          }
+        ],
         "summary": "Create a new incident team",
         "tags": [
           "Incident Teams"
@@ -64348,6 +64483,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_settings_write"
+            ]
+          }
+        ],
         "summary": "Delete an existing incident team",
         "tags": [
           "Incident Teams"
@@ -64872,6 +65018,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_read"
+            ]
+          }
+        ],
         "summary": "Get details of an incident team",
         "tags": [
           "Incident Teams"
@@ -65516,6 +65673,17 @@
             "description": "Not Found"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "incident_settings_write"
+            ]
+          }
+        ],
         "summary": "Update an existing incident team",
         "tags": [
           "Incident Teams"
