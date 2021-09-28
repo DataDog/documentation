@@ -129,8 +129,8 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{% tab "iOS" %}}
 
 - Long press on the widget to configure.
-- Tap on "Edit Widget".
-- Tap on the "Choose" button next to the "SLO" label to choose an SLO to track.
+- Tap "Edit Widget."
+- Tap "Choose" next to the SLO label to choose an SLO to track.
 - Depending on the SLO chosen, a "Timeframe" label may appear; tap on the "Choose" button next to the "Timeframe" label to choose the SLO timeframe. 
 - Tap on the "Choose" button next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped. 
 - Tap out of the widget to validate your selection and exit the configuration screen.
