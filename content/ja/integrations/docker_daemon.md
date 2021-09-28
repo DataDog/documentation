@@ -13,7 +13,7 @@ categories:
 creates_events: true
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md'
 display_name: Docker
 draft: false
 git_integration_title: docker_daemon

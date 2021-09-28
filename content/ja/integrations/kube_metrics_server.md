@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_name: Kube メトリクスサーバー
 draft: false
 git_integration_title: kube_metrics_server
@@ -101,12 +101,12 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 kube_metrics_server には、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "kube_metrics_server" >}}
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][5] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 
@@ -114,5 +114,4 @@ kube_metrics_server には、イベントは含まれません。
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/assets/service_checks.json
-[6]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/help/

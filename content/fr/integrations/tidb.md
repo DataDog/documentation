@@ -18,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md'
 display_name: TiDB
 draft: false
 git_integration_title: tidb

@@ -5,7 +5,7 @@ kind: インテグレーション
 description: Kubernetes クラスター内で起きるすべてのことを追跡
 short_description: Kubernetes クラスターの内部を追跡
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
 categories:
   - ログの収集
   - コンテナ
@@ -25,7 +25,7 @@ further_reading:
   - link: logs/
     tag: ドキュメント
     text: ログ管理
-  - link: 'https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/'
+  - link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
     tag: ブログ
     text: クラスターセキュリティを監視するための主要な Kubernetes 監査ログ
 integration_id: kubernetes-audit-logs
