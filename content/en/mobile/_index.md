@@ -163,11 +163,11 @@ All organizations you’ve logged into are displayed in the configuration screen
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap on the widget title to configure.
-- From the configuration screen, tap on "Organization".
-- Select a new organization (you might need to sign in).
-- Edit the widget to fit your preference.
-- Tap the "Save" or "Apply" button. The widget is now configured with an SLO from a different organization.
+- Tap the widget title to configure.
+- From the configuration screen, tap "Organization".
+- Select a new organization (You might need to sign in).
+- Size the widget to fit your preference.
+- Tap "Save" or "Apply". 
 
 
 {{% /tab %}}
