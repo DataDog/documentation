@@ -15,9 +15,9 @@ further_reading:
   text: "Kubernetes Prometheus and OpenMetrics metrics collection"
 ---
 
-If you are using Datadog's Prometheus or OpenMetrics checks, you may be interested in how these metrics map to existing Datadog metrics types. 
+If you are using Datadog's Prometheus or OpenMetrics checks, you may be interested in how these metrics map to existing Datadog metrics types.
 
-See the [Prometheus and OpenMetrics metrics collection documentation][1] for more information.
+See [Kubernetes Prometheus and OpenMetrics Metrics Collection][1] for more information.
 
 ## Prometheus and OpenMetrics metric types
 
@@ -28,7 +28,7 @@ See the [Prometheus and OpenMetrics metrics collection documentation][1] for mor
 
 ## How Prometheus/OpenMetrics metrics map to Datadog metrics
 
-For more information about Datadog metric types, see the [Datadog Metric Types documentation][2].
+For more information, see [Datadog Metric Types][2].
 
 ### Counter
 

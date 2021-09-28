@@ -14,7 +14,7 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 `custom_queries` has the following options:
 
 * **`metric_prefix`**: Each metric starts with the chosen prefix.
-* **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. Note that The Agent only supports `count`, `find`, and `aggregates` queries.
+* **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. **Note**: The Agent only supports `count`, `find`, and `aggregates` queries.
 * **`fields`**: Ignored for `count` queries. This is a list representing each field with no specific order. Ignores unspecified and missing fields. There are three required pieces of data for each `fields`:
   * `field_name`: This is the name of the field from which to fetch the data.
   * `name`: This is the suffix to append to the metric_prefix to form the full metric name. If `type` is `tag`, this column is treated as a tag and applied to every metric collected by this particular query.
@@ -56,7 +56,7 @@ custom_queries:
 
 This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
-**Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
+**Note**: The [metric type][2] defined is `gauge`.
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /metrics/types/
@@ -66,7 +66,7 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 To monitor the age per user, your [Mongo find command][1] would be:
 
 ```text
-db.runCommand( {find: user_colleciton, filter: {active:true} )
+db.runCommand( {find: user_collection, filter: {active:true} )
 ```
 
 Which would correspond to the following `custom_queries` YAML configuration inside your `mongo.d/conf.yaml` file:
@@ -74,7 +74,7 @@ Which would correspond to the following `custom_queries` YAML configuration insi
 ```yaml
 custom_queries:
   - metric_prefix: mongo.example2
-    query: {"find": "user_colleciton", "filter": {"active":"true"}}
+    query: {"find": "user_collection", "filter": {"active":"true"}}
     fields:
       - field_name: name
         name: name
@@ -87,7 +87,7 @@ custom_queries:
 
 This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `name:foo` and `name:foobar`
 
-**Note**: The metric type defined is `gauge`. See the [metric type documentation][2] to learn more.
+**Note**: The [metric type][2] defined is `gauge`.
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
 [2]: /metrics/types/
