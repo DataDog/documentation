@@ -178,7 +178,7 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
+Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
 
 
 {{% /tab %}}
