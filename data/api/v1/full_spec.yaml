@@ -1696,7 +1696,7 @@ components:
             **Note**: Attributes specifying the duration in `RRULE` are not supported
             (for example, `DTSTART`, `DTEND`, `DURATION`).
 
-            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/supress-alert-with-downtimes/?tab=api)'
+            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api)'
           example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
           type: string
         type:
@@ -5746,7 +5746,7 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
 
@@ -14112,7 +14112,7 @@ components:
 
             Learn more on how to use it in
 
-            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
           example: WEBHOOK_NAME
           type: string
         payload:
@@ -14230,7 +14230,7 @@ components:
 
             Learn more on how to use it in
 
-            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
           example: WEBHOOK_NAME
           type: string
         payload:
@@ -16598,7 +16598,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - monitors_read
       summary: Get all downtimes
       tags:
       - Downtimes
@@ -16769,7 +16770,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - monitors_read
       summary: Get a downtime
       tags:
       - Downtimes
@@ -20253,7 +20255,7 @@ paths:
 
         - `change_aggr` change, pct_change
 
-        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)
+        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)
 
         - `time_window` last\_#m (between 1 and 2880 depending on the monitor type),
         last\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or
@@ -20591,7 +20593,7 @@ paths:
 
           [1]: https://app.datadoghq.com/monitors/manage
 
-          [2]: /monitors/manage_monitor/#find-the-monitors'
+          [2]: /monitors/manage/#find-the-monitors'
         in: query
         name: query
         required: false
@@ -20678,7 +20680,7 @@ paths:
 
           [1]: https://app.datadoghq.com/monitors/manage
 
-          [2]: /monitors/manage_monitor/#find-the-monitors'
+          [2]: /monitors/manage/#find-the-monitors'
         in: query
         name: query
         required: false
@@ -26301,7 +26303,8 @@ tags:
 
     find, and share all of your dashboards with your team and organization.'
   name: Dashboards
-- description: '[Downtiming](https://docs.datadoghq.com/monitors/downtimes) gives
+- description: '[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes)
+    gives
 
     you greater control over monitor notifications by allowing you to globally exclude
 
@@ -26380,10 +26383,10 @@ tags:
     notifies your team when a defined threshold has exceeded.
 
 
-    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/).'
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).'
   externalDocs:
     description: Find out more at
-    url: https://docs.datadoghq.com/monitors/monitor_types/
+    url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
 - description: 'Interact with your notebooks through the API to make it easier to
     organize, find, and
@@ -26441,13 +26444,13 @@ tags:
     - [Read more about Service Check and status codes.][5]
 
 
-    [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
+    [1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert
 
-    [2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert
+    [2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
 
-    [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
+    [3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+    [4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert
 
     [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks
