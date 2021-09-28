@@ -846,8 +846,8 @@ components:
       - deflate
       type: string
       x-enum-varnames:
-      - gzip
-      - deflate
+      - GZIP
+      - DEFLATE
     Creator:
       description: Object describing the creator of the shared element.
       properties:
