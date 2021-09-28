@@ -139,11 +139,11 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap on the widget title to configure.
-- Tap on the "Selected SLO" section to choose an SLO to track.
-- Tap on the "Selected Time Window" section to choose the SLO timeframe.
-- Tap on the "Dashboard to open" section to choose a dashboard that opens when the SLOs widget is tapped
-- Tap the "Save" or "Apply" button to validate your selection and exit the configuration screen.
+- Tap the widget title to configure.
+- Tap "Selected SLO" to choose an SLO to track.
+- Tap "Selected Time Window" to choose the SLO timeframe.
+- Tap "Dashboard to open" to choose a dashboard that opens when the SLOs widget is tapped.
+- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
 - Long press and resize the widget to fit your preference.
 
 
