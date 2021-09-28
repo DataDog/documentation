@@ -2559,15 +2559,15 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
-  - name: Crash Reporting & Error Tracking
-    url: real_user_monitoring/ios/crash_reporting/
-    parent: rum_ios
-    identifier: rum_ios_crash_reporting
-    weight: 301
   - name: Data Collected
     url: real_user_monitoring/ios/data_collected/
     parent: rum_ios
     identifier: rum_ios_data_collected
+    weight: 301
+  - name: Crash Reporting
+    url: real_user_monitoring/ios/crash_reporting/
+    parent: rum_ios
+    identifier: rum_ios_crash_reporting
     weight: 302
   - name: Advanced Configuration
     url: real_user_monitoring/ios/advanced_configuration/
