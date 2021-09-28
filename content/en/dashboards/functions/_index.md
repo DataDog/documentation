@@ -51,5 +51,5 @@ Here is an example of how to apply a timeshift function on your error logs to co
 {{< /whatsnext >}}
 
 
-[1]: /metrics/introduction/#time-aggregation
-[2]: /metrics/introduction/#space-aggregation
+[1]: /metrics/#time-aggregation
+[2]: /metrics/#space-aggregation
