@@ -3,7 +3,7 @@ title: Outlier Monitor
 kind: documentation
 aliases:
     - /guides/outliers
-    - /monitors/create/types/outlier
+    - /monitors/monitor_types/outlier
 description: "Alert on members of a group behaving differently than the others"
 further_reading:
 - link: "/monitors/notify/"

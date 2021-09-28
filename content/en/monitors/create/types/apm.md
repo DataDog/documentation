@@ -3,10 +3,10 @@ title: APM Monitor
 kind: documentation
 description: "Compare an APM metric to a user defined threshold"
 aliases:
-  - /monitors/create/types/app_analytics
-  - /monitors/create/types/trace_search
+  - /monitors/monitor_types/app_analytics
+  - /monitors/monitor_types/trace_search
   - /tracing/guide/resource_monitor/
-  - /monitors/create/types/apm
+  - /monitors/monitor_types/apm
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

@@ -3,7 +3,7 @@ title: Host Monitor
 kind: documentation
 description: "Check if one or more hosts are reporting to Datadog"
 aliases:
-    - /monitors/create/types/host
+    - /monitors/monitor_types/host
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

@@ -3,7 +3,7 @@ title: Forecasts Monitor
 kind: documentation
 aliases:
 - /guides/forecasts/
-- /monitors/create/types/forecasts
+- /monitors/monitor_types/forecasts
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

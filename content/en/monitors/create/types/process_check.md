@@ -3,7 +3,7 @@ title: Process Check Monitor
 kind: documentation
 description: "Check if a process is running on a host"
 aliases:
-- /monitors/create/types/process_check
+- /monitors/monitor_types/process_check
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

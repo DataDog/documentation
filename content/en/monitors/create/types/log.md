@@ -2,7 +2,7 @@
 title: Logs Monitor
 kind: documentation
 aliases:
-- /monitors/create/types/log
+- /monitors/monitor_types/log
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

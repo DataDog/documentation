@@ -3,7 +3,7 @@ title: Live Process Monitor
 kind: documentation
 description: "Check if a process is running on a host"
 aliases:
-- /monitors/create/types/process
+- /monitors/monitor_types/process
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

@@ -3,7 +3,7 @@ title: Network Monitor
 kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
 aliases:
-- /monitors/create/types/network
+- /monitors/monitor_types/network
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

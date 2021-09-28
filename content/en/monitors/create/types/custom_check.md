@@ -3,7 +3,7 @@ title: Custom Check Monitor
 kind: documentation
 description: "Monitor status of arbitrary custom checks."
 aliases :
-    - /monitors/create/types/custom_check
+    - /monitors/monitor_types/custom_check
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

@@ -3,7 +3,7 @@ title: Metric Monitor
 kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 aliases:
-- /monitors/create/types/metric
+- /monitors/monitor_types/metric
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

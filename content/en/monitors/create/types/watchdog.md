@@ -3,7 +3,7 @@ title: Watchdog Monitor
 kind: documentation
 description: "Algorithmically detects application and infrastructure issues."
 aliases:
-- /monitors/create/types/watchdog
+- /monitors/monitor_types/watchdog
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

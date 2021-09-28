@@ -3,7 +3,7 @@ title: Integration Monitor
 kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 aliases:
-- /monitors/create/types/integration
+- /monitors/monitor_types/integration
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
