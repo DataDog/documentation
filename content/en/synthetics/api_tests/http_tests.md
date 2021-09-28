@@ -50,6 +50,8 @@ After choosing to create an [`HTTP` test][4], define your test's request.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
+   This option uses the basic implementation of SigV4.
+   Known limitations: AWS S3 specific signature is not implemented.
 
    {{% /tab %}}
 
