@@ -377,6 +377,7 @@ class Integrations:
         with open(file_name) as f:
             try:
                 data = json.load(f)
+                data = self.process_manifest(data, basename(dirname(file_name)))
                 data_name = data.get("name", "").lower()
                 if data_name in [
                     k
@@ -585,6 +586,7 @@ class Integrations:
         if exists(manifest):
             try:
                 manifest_json = json.load(open(manifest))
+                manifest_json = self.process_manifest(manifest_json, basename(dirname(file_name)))
             except JSONDecodeError:
                 no_integration_issue = False
                 manifest_json = {}
@@ -814,3 +816,28 @@ class Integrations:
             )
 
         return dependencies
+
+    def process_manifest(self, manifest_json, name):
+        """ Takes manifest and converts v2 and above to v1 expected formats for now """
+        manifest_version = (manifest_json.get("manifest_version", '1.0.0') or '1.0.0').split('.')
+        split_version = manifest_version[0] if len(manifest_version) > 1 else '1'
+        if split_version != '1':
+            # v2 or above
+            manifest_json["integration_id"] = manifest_json.get("app_id", "")
+            categories = []
+            supported_os = []
+            for tag in manifest_json.get("classifier_tags", []):
+                # in some cases tag was null/None
+                if tag:
+                    key, value = tag.split("::")
+                    if key.lower() == "category":
+                        categories.append(value.lower())
+                    if key.lower() == "supported os":
+                        supported_os.append(value.lower())
+            manifest_json["categories"] = categories
+            manifest_json["supported_os"] = supported_os
+            manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
+            manifest_json["is_public"] = manifest_json.get("display_on_public_website", False)
+            manifest_json["short_description"] = manifest_json.get("tile", {}).get("description", '')
+            manifest_json["name"] = manifest_json.get("name", name)
+        return manifest_json
