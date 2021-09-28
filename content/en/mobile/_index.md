@@ -117,7 +117,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Long press on your home screen.
 - Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
 - Drag the widget to your desired, on-screen home screen.
-- Resize the widget to fit your preference; it will always shows one SLO. If you size the widget to take up the width of your mobile home screen, it will display the selected SLO along with a visualized timeframe of its health.
+- Resize the widget to fit your preference. It always shows one SLO. If you size the widget to take up the width of your mobile home screen, it displays the selected SLO along with a visualized timeframe of its health.
 
 
 {{% /tab %}}
