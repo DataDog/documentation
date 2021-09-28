@@ -30,9 +30,10 @@ Start by [logging into Postman][4]. Datadog recommends [downloading the Postman 
 
 </br>
 <div class="postman-run-button"
-data-postman-action="collection/import"
-data-postman-var-1="b82586cb783eb6f7cf6d"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoidGV4dCJ9LHsia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InRleHQifV0="></div>
+data-postman-action="collection/fork"
+data-postman-var-1="7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189"
+data-postman-collection-url="entityId=7274195-66ef21d8-e159-4d7d-8ded-c511e1abe189&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
