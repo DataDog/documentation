@@ -40,7 +40,7 @@ In Alcide, select the _Integrations_ tab and go to the _Detections Integrations 
 
 5. Under _Detection Confidence_, select your desired levels of confidence. Datadog recommends selecting at least _high_ and _medium_.
 
-6. Optionally, you can create whitelist and blacklist filters on entities using the _Entities Matching_ and _Entities Not Matching_ boxes.
+6. Optionally, you can create inclusion and exclusion filters on entities using the _Entities Matching_ and _Entities Not Matching_ boxes.
 
 Then, go to the _Selected Audit Entries Integration Configuration_ section, located underneath the previous section. This section is used to configure integrations for audit logs.
 
