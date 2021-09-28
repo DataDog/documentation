@@ -967,6 +967,7 @@ components:
         value:
           description: The single value selected for this field.
           example: SEV-1
+          nullable: true
           type: string
       type: object
     IncidentFieldAttributesSingleValueType:
@@ -5105,6 +5106,7 @@ components:
           type: string
         name:
           description: Name of the user.
+          nullable: true
           type: string
         service_account:
           description: Whether the user is a service account.
@@ -5114,6 +5116,7 @@ components:
           type: string
         title:
           description: Title of the user.
+          nullable: true
           type: string
         verified:
           description: Whether the user is verified.

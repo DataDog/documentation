@@ -990,6 +990,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -1002,6 +1003,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -1232,6 +1234,7 @@
                   },
                   "name": {
                     "description": "Name of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "service_account": {
@@ -1244,6 +1247,7 @@
                   },
                   "title": {
                     "description": "Title of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "verified": {
@@ -1716,6 +1720,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -1728,6 +1733,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -2231,6 +2237,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -2243,6 +2250,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -2564,6 +2572,7 @@
                   },
                   "name": {
                     "description": "Name of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "service_account": {
@@ -2576,6 +2585,7 @@
                   },
                   "title": {
                     "description": "Title of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "verified": {
@@ -3918,6 +3928,7 @@
                     "value": {
                       "description": "The single value selected for this field.",
                       "example": "SEV-1",
+                      "nullable": true,
                       "type": "string"
                     }
                   },
@@ -4092,6 +4103,7 @@
                         "value": {
                           "description": "The single value selected for this field.",
                           "example": "SEV-1",
+                          "nullable": true,
                           "type": "string"
                         }
                       },
@@ -4378,6 +4390,7 @@
                             "value": {
                               "description": "The single value selected for this field.",
                               "example": "SEV-1",
+                              "nullable": true,
                               "type": "string"
                             }
                           },
@@ -4610,6 +4623,7 @@
               "value": {
                 "description": "The single value selected for this field.",
                 "example": "SEV-1",
+                "nullable": true,
                 "type": "string"
               }
             },
@@ -4715,6 +4729,7 @@
           "value": {
             "description": "The single value selected for this field.",
             "example": "SEV-1",
+            "nullable": true,
             "type": "string"
           }
         },
@@ -4876,6 +4891,7 @@
                             "value": {
                               "description": "The single value selected for this field.",
                               "example": "SEV-1",
+                              "nullable": true,
                               "type": "string"
                             }
                           },
@@ -5300,6 +5316,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -5312,6 +5329,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -5577,6 +5595,7 @@
                     "value": {
                       "description": "The single value selected for this field.",
                       "example": "SEV-1",
+                      "nullable": true,
                       "type": "string"
                     }
                   },
@@ -5783,6 +5802,7 @@
                         "value": {
                           "description": "The single value selected for this field.",
                           "example": "SEV-1",
+                          "nullable": true,
                           "type": "string"
                         }
                       },
@@ -6205,6 +6225,7 @@
                   },
                   "name": {
                     "description": "Name of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "service_account": {
@@ -6217,6 +6238,7 @@
                   },
                   "title": {
                     "description": "Title of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "verified": {
@@ -6919,6 +6941,7 @@
                   },
                   "name": {
                     "description": "Name of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "service_account": {
@@ -6931,6 +6954,7 @@
                   },
                   "title": {
                     "description": "Title of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "verified": {
@@ -7369,6 +7393,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -7381,6 +7406,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -8184,6 +8210,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -8196,6 +8223,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -8712,6 +8740,7 @@
                   },
                   "name": {
                     "description": "Name of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "service_account": {
@@ -8724,6 +8753,7 @@
                   },
                   "title": {
                     "description": "Title of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "verified": {
@@ -9158,6 +9188,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -9170,6 +9201,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -9968,6 +10000,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -9980,6 +10013,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -10373,6 +10407,7 @@
                     "value": {
                       "description": "The single value selected for this field.",
                       "example": "SEV-1",
+                      "nullable": true,
                       "type": "string"
                     }
                   },
@@ -10522,6 +10557,7 @@
                         "value": {
                           "description": "The single value selected for this field.",
                           "example": "SEV-1",
+                          "nullable": true,
                           "type": "string"
                         }
                       },
@@ -11150,6 +11186,7 @@
                             "value": {
                               "description": "The single value selected for this field.",
                               "example": "SEV-1",
+                              "nullable": true,
                               "type": "string"
                             }
                           },
@@ -11699,6 +11736,7 @@
                               "value": {
                                 "description": "The single value selected for this field.",
                                 "example": "SEV-1",
+                                "nullable": true,
                                 "type": "string"
                               }
                             },
@@ -12125,6 +12163,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -12137,6 +12176,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -12500,6 +12540,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -12512,6 +12553,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -19608,6 +19650,7 @@
                         },
                         "name": {
                           "description": "Name of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "service_account": {
@@ -19620,6 +19663,7 @@
                         },
                         "title": {
                           "description": "Title of the user.",
+                          "nullable": true,
                           "type": "string"
                         },
                         "verified": {
@@ -26306,6 +26350,7 @@
               },
               "name": {
                 "description": "Name of the user.",
+                "nullable": true,
                 "type": "string"
               },
               "service_account": {
@@ -26318,6 +26363,7 @@
               },
               "title": {
                 "description": "Title of the user.",
+                "nullable": true,
                 "type": "string"
               },
               "verified": {
@@ -26534,6 +26580,7 @@
           },
           "name": {
             "description": "Name of the user.",
+            "nullable": true,
             "type": "string"
           },
           "service_account": {
@@ -26546,6 +26593,7 @@
           },
           "title": {
             "description": "Title of the user.",
+            "nullable": true,
             "type": "string"
           },
           "verified": {
@@ -27211,6 +27259,7 @@
                   },
                   "name": {
                     "description": "Name of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "service_account": {
@@ -27223,6 +27272,7 @@
                   },
                   "title": {
                     "description": "Title of the user.",
+                    "nullable": true,
                     "type": "string"
                   },
                   "verified": {
@@ -28174,6 +28224,7 @@
                     },
                     "name": {
                       "description": "Name of the user.",
+                      "nullable": true,
                       "type": "string"
                     },
                     "service_account": {
@@ -28186,6 +28237,7 @@
                     },
                     "title": {
                       "description": "Title of the user.",
+                      "nullable": true,
                       "type": "string"
                     },
                     "verified": {
@@ -28993,6 +29045,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -29005,6 +29058,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -29498,6 +29552,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -29510,6 +29565,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -30070,6 +30126,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -30082,6 +30139,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -30592,6 +30650,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -30604,6 +30663,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -31112,6 +31172,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -31124,6 +31185,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -31740,6 +31802,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -31752,6 +31815,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -32336,6 +32400,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -32348,6 +32413,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -32947,6 +33013,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -32959,6 +33026,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -33526,6 +33594,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -33538,6 +33607,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -34137,6 +34207,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -34149,6 +34220,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -34708,6 +34780,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -34720,6 +34793,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -36185,6 +36259,7 @@
                                         "value": {
                                           "description": "The single value selected for this field.",
                                           "example": "SEV-1",
+                                          "nullable": true,
                                           "type": "string"
                                         }
                                       },
@@ -36611,6 +36686,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -36623,6 +36699,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -37020,6 +37097,7 @@
                                     "value": {
                                       "description": "The single value selected for this field.",
                                       "example": "SEV-1",
+                                      "nullable": true,
                                       "type": "string"
                                     }
                                   },
@@ -37312,6 +37390,7 @@
                                       "value": {
                                         "description": "The single value selected for this field.",
                                         "example": "SEV-1",
+                                        "nullable": true,
                                         "type": "string"
                                       }
                                     },
@@ -37736,6 +37815,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -37748,6 +37828,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -38342,6 +38423,7 @@
                                       "value": {
                                         "description": "The single value selected for this field.",
                                         "example": "SEV-1",
+                                        "nullable": true,
                                         "type": "string"
                                       }
                                     },
@@ -38766,6 +38848,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -38778,6 +38861,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -39178,6 +39262,7 @@
                                     "value": {
                                       "description": "The single value selected for this field.",
                                       "example": "SEV-1",
+                                      "nullable": true,
                                       "type": "string"
                                     }
                                   },
@@ -39608,6 +39693,7 @@
                                       "value": {
                                         "description": "The single value selected for this field.",
                                         "example": "SEV-1",
+                                        "nullable": true,
                                         "type": "string"
                                       }
                                     },
@@ -40032,6 +40118,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -40044,6 +40131,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -51062,6 +51150,7 @@
                               },
                               "name": {
                                 "description": "Name of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "service_account": {
@@ -51074,6 +51163,7 @@
                               },
                               "title": {
                                 "description": "Title of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "verified": {
@@ -51714,6 +51804,7 @@
                               },
                               "name": {
                                 "description": "Name of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "service_account": {
@@ -51726,6 +51817,7 @@
                               },
                               "title": {
                                 "description": "Title of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "verified": {
@@ -52338,6 +52430,7 @@
                               },
                               "name": {
                                 "description": "Name of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "service_account": {
@@ -52350,6 +52443,7 @@
                               },
                               "title": {
                                 "description": "Title of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "verified": {
@@ -57555,6 +57649,7 @@
                             },
                             "name": {
                               "description": "Name of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "service_account": {
@@ -57567,6 +57662,7 @@
                             },
                             "title": {
                               "description": "Title of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "verified": {
@@ -58300,6 +58396,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -58312,6 +58409,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -58891,6 +58989,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -58903,6 +59002,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -59526,6 +59626,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -59538,6 +59639,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -60103,6 +60205,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -60115,6 +60218,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -60731,6 +60835,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -60743,6 +60848,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -61405,6 +61511,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -61417,6 +61524,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -62104,6 +62212,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -62116,6 +62225,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -62763,6 +62873,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -62775,6 +62886,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -63339,6 +63451,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -63351,6 +63464,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -64009,6 +64123,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -64021,6 +64136,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -64704,6 +64820,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -64716,6 +64833,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -65359,6 +65477,7 @@
                                   },
                                   "name": {
                                     "description": "Name of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "service_account": {
@@ -65371,6 +65490,7 @@
                                   },
                                   "title": {
                                     "description": "Title of the user.",
+                                    "nullable": true,
                                     "type": "string"
                                   },
                                   "verified": {
@@ -66207,6 +66327,7 @@
                               },
                               "name": {
                                 "description": "Name of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "service_account": {
@@ -66219,6 +66340,7 @@
                               },
                               "title": {
                                 "description": "Title of the user.",
+                                "nullable": true,
                                 "type": "string"
                               },
                               "verified": {
@@ -66875,6 +66997,7 @@
                             },
                             "name": {
                               "description": "Name of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "service_account": {
@@ -66887,6 +67010,7 @@
                             },
                             "title": {
                               "description": "Title of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "verified": {
@@ -67544,6 +67668,7 @@
                             },
                             "name": {
                               "description": "Name of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "service_account": {
@@ -67556,6 +67681,7 @@
                             },
                             "title": {
                               "description": "Title of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "verified": {
@@ -68162,6 +68288,7 @@
                             },
                             "name": {
                               "description": "Name of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "service_account": {
@@ -68174,6 +68301,7 @@
                             },
                             "title": {
                               "description": "Title of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "verified": {
@@ -68772,6 +68900,7 @@
                             },
                             "name": {
                               "description": "Name of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "service_account": {
@@ -68784,6 +68913,7 @@
                             },
                             "title": {
                               "description": "Title of the user.",
+                              "nullable": true,
                               "type": "string"
                             },
                             "verified": {
