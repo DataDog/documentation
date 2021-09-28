@@ -25,7 +25,7 @@ IgnoreDirs:
   - fr
   - ja
 IgnoreURLs:
-  - /api/[v1|v2]
+  - "/?api/(v1|v2)/*"
   - play.google.com
   - "[linkedin|twitter|instagram].com"
   - github.com
@@ -33,6 +33,5 @@ IgnoreURLs:
   - "127.0.0.1"
   - "https://trello.com/app-key"
   - "https://docs.perimeterx.com"
-
 # StripQueryExcludes:
-#   - 
+#   -
