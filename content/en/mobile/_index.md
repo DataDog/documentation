@@ -262,7 +262,7 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 {{% tab "Android" %}}
 
 - Tap on the widget title to configure.
-- From the configuration screen, tap on "Organization".
+- From the configuration screen, tap "Organization".
 - Select a new organization (you might need to sign in).
 - Edit the widget to fit your preference.
 - Tap "Save" or "Apply". 
