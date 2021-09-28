@@ -157,7 +157,7 @@ You can display SLOs from multiple organizations on your mobile home screen.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
+All organizations you’ve logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
 
 
 {{% /tab %}}
