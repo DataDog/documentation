@@ -214,7 +214,7 @@ View your [monitors][14] from your home screen with Datadog widgets. Tap on any 
 {{% tab "Android" %}}
 
 - Long press on your home screen.
-- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
+- Tap "Widgets" on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
 - Drag the widget to your desired, on-screen home screen.
 - Resize the widget to fit your preference. To show more saved views, increase the length of the widget on your mobile home screen.
 
