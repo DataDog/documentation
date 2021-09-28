@@ -47,7 +47,7 @@ Audit Logs is configurable by event type. Enabled events are specific to actions
 
 ### Archiving
 
-Archiving is an optional feature for Audit Logs. You can use archiving to write to an S3 bucket and have your SIEM system read events from it. Archiving is a double-write feature that has variable write times, but on average all events are written to the S3 bucket within 15 minutes of generation.
+Archiving is an optional feature for Audit Logs. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. Archiving is a double-write feature that has variable write times, but on average all events are written within 15 minutes of generation.
 
 To enable archiving for Audit Logs, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Scroll down to Archiving and click the Store logs toggle to enable.
 
