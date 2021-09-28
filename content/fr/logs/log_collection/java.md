@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /fr/logs/languages/java
 further_reading:
-  - link: /logs/processing/
+  - link: /logs/log_configuration/processors
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/processing/parsing/
+  - link: /logs/log_configuration/parsing
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: '/logs/explorer/#visualiser-les-donnees'
+  - link: /logs/explorer/#visualiser-les-donnees
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /tracing/connect_logs_and_traces/java/
@@ -22,9 +22,9 @@ further_reading:
   - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
-  - link: 'https://www.datadoghq.com/blog/java-logging-guide/'
+  - link: https://www.datadoghq.com/blog/java-logging-guide/
     tag: Blog
-    text: 'Comment recueillir, personnaliser et standardiser des logs Java'
+    text: Comment recueillir, personnaliser et standardiser des logs Java
 ---
 Les stack traces liées aux logs Java types sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine :
 
@@ -517,8 +517,8 @@ Pour générer ce JSON :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /fr/logs/processing/parsing/
+[2]: /fr/logs/log_configuration/parsing
 [3]: /fr/tracing/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[6]: /fr/logs/processing/parsing/#key-value-or-logfmt
+[6]: /fr/logs/log_configuration/parsing/#key-value-or-logfmt

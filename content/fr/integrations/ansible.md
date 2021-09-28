@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez les tâches ayant échoué et consultez les exécutions de playbook dans votre flux d'événements.
-doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
+doc_link: https://docs.datadoghq.com/integrations/ansible/
 draft: false
 git_integration_title: ansible
 has_logo: true
