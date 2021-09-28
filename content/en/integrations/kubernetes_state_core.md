@@ -121,7 +121,7 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 : A new metric with persistentvolume name granularity. It replaces `kubernetes_state.persistentvolumes.by_phase`.
 
 `kubernetes_state.pod.status_phase`
-: The metric is tagged with pod level tags now, like `pod_name`.
+: The metric is tagged with pod level tags, like `pod_name`.
 
 
 {{< tabs >}}
@@ -131,7 +131,7 @@ Enabling `kubeStateMetricsCore` in your Helm `values.yaml` configures the Agent 
 
 If you still want to enable both checks simultaneously for the migration phase, disable the `ignoreLegacyKSMCheck` field in your `values.yaml`.
 
-Note that `ignoreLegacyKSMCheck` will make the Agent only ignore the auto configuration for the legacy `kubernetes_state` check. Custom `kubernetes_state` configurations need to be removed manually.
+**Note**: `ignoreLegacyKSMCheck` makes the Agent only ignore the auto configuration for the legacy `kubernetes_state` check. Custom `kubernetes_state` configurations need to be removed manually.
 
 The Kubernetes State Metrics Core check does not require deploying `kube-state-metrics` in your cluster anymore, you can disable deploying `kube-state-metrics` as part of the Datadog Helm Chart. To do this, add the following in your Helm `values.yaml`:
 
@@ -255,7 +255,7 @@ datadog:
 : The time in seconds since the creation of the node. Tags:`node`.
 
 `kubernetes_state.container.terminated`
-: Describes whether the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.cpu_limit`
 : The value of CPU limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
@@ -276,22 +276,22 @@ datadog:
 : The number of container restarts per container. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.running`
-: Describes whether the container is currently in running state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is in a running state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.waiting`
-: Describes whether the container is currently in waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is currently in waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is currently in waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.ready`
 : Describes whether the pod is ready to serve requests. Tags:`kube_namespace` `pod_name` `condition` (`env` `service` `version` from standard labels).
@@ -315,7 +315,7 @@ datadog:
 : The time in seconds since the pod has been scheduled and acknowledged by the Kubelet. Tags:`kube_namespace` `pod_name` `phase` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.persistentvolumeclaim.status`
-: The phase the persistent volume claim is currently in. Tags:`kube_namespace` `persistentvolumeclaim` `phase` `storageclass`.
+: The phase the persistent volume claim is in. Tags:`kube_namespace` `persistentvolumeclaim` `phase` `storageclass`.
 
 `kubernetes_state.persistentvolumeclaim.access_mode`
 : The access mode(s) specified by the persistent volume claim. Tags:`kube_namespace` `persistentvolumeclaim` `access_mode` `storageclass`.
@@ -336,7 +336,7 @@ datadog:
 : Minimum desired number of healthy pods. Tags:`kube_namespace` `poddisruptionbudget`.
 
 `kubernetes_state.pdb.disruptions_allowed`
-: Number of pod disruptions that are currently allowed. Tags:`kube_namespace` `poddisruptionbudget`.
+: Number of pod disruptions that are allowed. Tags:`kube_namespace` `poddisruptionbudget`.
 
 `kubernetes_state.pdb.pods_total`
 : Total number of pods counted by this disruption budget. Tags:`kube_namespace` `poddisruptionbudget`.

@@ -25,7 +25,7 @@
   },
   "downtimes": {
     "name": "Downtimes",
-    "description": "[Downtiming](https://docs.datadoghq.com/monitors/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+    "description": "[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
   "embeddable-graphs": {
     "name": "Embeddable Graphs",
@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "Monitors",
-    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/)."
+    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/)."
   },
   "notebooks": {
     "name": "Notebooks",
@@ -89,7 +89,7 @@
   },
   "service-checks": {
     "name": "Service Checks",
-    "description": "The service check endpoint allows you to post check statuses for use with monitors.\nService check messages are limited to 500 characters. If a check is posted with a message\ncontaining more than 500 characters, only the first 500 characters are displayed. Messages\nare limited for checks with a Critical or Warning status, they are dropped for checks with\nan OK status.\n\n- [Read more about Service Check monitors.][1]\n- [Read more about Process Check monitors.][2]\n- [Read more about Network Check monitors.][3]\n- [Read more about Custom Check monitors.][4]\n- [Read more about Service Check and status codes.][5]\n\n[1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
+    "description": "The service check endpoint allows you to post check statuses for use with monitors.\nService check messages are limited to 500 characters. If a check is posted with a message\ncontaining more than 500 characters, only the first 500 characters are displayed. Messages\nare limited for checks with a Critical or Warning status, they are dropped for checks with\nan OK status.\n\n- [Read more about Service Check monitors.][1]\n- [Read more about Process Check monitors.][2]\n- [Read more about Network Check monitors.][3]\n- [Read more about Custom Check monitors.][4]\n- [Read more about Service Check and status codes.][5]\n\n[1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
   },
   "service-dependencies": {
     "name": "Service Dependencies",
