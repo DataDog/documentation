@@ -64,7 +64,7 @@ All system metrics are automatically tagged with `host:<HOST_NAME>`. Additionall
 
 ## System Core
 
-This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).
+This check collects the number of CPU cores on a host and CPU times, such as system, user, idle, etc.
 
 ### Setup
 
@@ -96,7 +96,7 @@ The system core check is included in the [Datadog Agent][4] package. No addition
 
 {{< get-metrics-from-git "system_core" >}}
 
-Depending on the platform, the check may collect other CPU time metrics, e.g. `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
+Depending on the platform, the check may collect other CPU time metrics, such as `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
 
 #### Events
 

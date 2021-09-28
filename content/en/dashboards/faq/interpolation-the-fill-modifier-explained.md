@@ -74,5 +74,5 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 
 Null prevents graphs from displaying interpolated values 5 min after the last real value.
 
-[1]: /developers/metrics/types/
+[1]: /metrics/types/
 [2]: /dashboards/faq/i-see-unexpected-drops-to-zero-on-my-graph-why/

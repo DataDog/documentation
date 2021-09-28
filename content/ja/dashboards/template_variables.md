@@ -6,10 +6,10 @@ aliases:
   - /ja/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
   - /ja/graphing/dashboards/template_variables/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/template-variable-associated-values/'
+  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
     tag: ブログ
     text: 関連するテンプレート変数を使用してダッシュボードを調整
-  - link: 'https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/'
+  - link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
     tag: ブログ
     text: 動的テンプレート変数構文でダッシュボードのワークフローを高速化
   - link: /dashboards/
@@ -39,7 +39,7 @@ further_reading:
 
 テンプレート変数を作成後、その変数を使用しているソースの数がDatadog に表示されます。下の例では、2 つのグラフの内の 1 つでテンプレート変数が使用されています。
 
-{{< img src="dashboards/template_variables/stats_tv.png" alt="テンプレート変数の統計"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/stats_tv.png" alt="統計的 TV" style="width:85%;">}}
 
 個々のウィジェットで[テンプレート変数を使用](#use) するか、**Add to All** オプションをクリックします。すべてのウィジェットからテンプレート変数を削除するには、**Remove From All** オプションをクリックします。
 
@@ -54,7 +54,7 @@ further_reading:
 
 #### 作成
 
-{{< img src="dashboards/template_variables/default_view.png" alt="デフォルトの保存済みビュー"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/default_view.png" alt="デフォルトの保存済みビュー" style="width:85%;">}}
 
 ダッシュボードでは、テンプレート変数画面の左側に *(Default Value)* というドロップダウンリストが表示されています。テンプレート変数の値を変更しても、その値はビューに自動保存されません。
 ビューでテンプレート変数の現在値を保存するには、ドロップダウンメニューをクリックし、*Save selections as view* をクリックします。次の画面でビューに一意の名前を入力し、保存するとそのビューがドロップダウンメニューに表示されます。過去に保存したテンプレート変数の値を復元する場合は、ここから該当するビューをクリックします。
@@ -63,7 +63,7 @@ further_reading:
 
 ビューを削除するには、保存済みビューのドロップダウンをクリックし、*Manage views...* を選択します。それぞれのビューの横に、保存されているビューのポップアップがごみ箱アイコンとともに表示されます。ビューを削除するには、該当するごみ箱アイコンをクリックして下さい。
 
-{{< img src="dashboards/template_variables/manage_views.png" alt="「Manage Views」ポップアップ"  style="width:75%;">}}
+{{< img src="dashboards/template_variables/manage_views.png" alt="「Manage Views」ポップアップ" style="width:75%;">}}
 
 #### 変更
 
@@ -79,14 +79,14 @@ further_reading:
 
 ウィジェットが保存されると、テンプレート変数の値はダッシュボードの上から選択されたものとなります。
 
-{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="テンプレート変数を選択"  style="width:75%;">}}
+{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="テンプレート変数を選択" style="width:75%;">}}
 
 テンプレート変数の値を変更する場合、ダッシュボード URL はそのテンプレート変数の値を反映するよう、`&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>` というフォーマットで更新されます。たとえば、テンプレート変数が `$env` のダッシュボードで値が `prod` に変更された場合、URL のパラメーターは `&tpl_var_env=prod` となります。
 
 #### 関連するテンプレート変数
 テンプレート変数の値を選択するときに、**Associated Values** および **Other Values** セクションが表示されます。Associated Values はページで選択されたその他のテンプレート変数の値を考慮して計算され、コンフィギュレーションなしで関連する値をシームレスに示します。
 
-{{< img src="dashboards/template_variables/associated_template_variables.png" alt="関連するテンプレート変数"  style="width:75%;">}}
+{{< img src="dashboards/template_variables/associated_template_variables.png" alt="関連するテンプレート変数" style="width:75%;">}}
 
 #### テキスト
 
@@ -113,7 +113,7 @@ tags:<TAG_KEY>:$<TEMPLATE_VARIABLE_NAME>.value
 
 例えば、`tags:region:$region.value` を、`region` テンプレート変数についての `us-east1` の値で検索すると、`region:us-east1` でタグ付けされたイベントが表示されます。さらに、イベントのタイミングがグラフ上にピンクのバーで示されます。
 
-{{< img src="dashboards/template_variables/search_dashboard.png" alt="検索ダッシュボード"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/search_dashboard.png" alt="検索ダッシュボード" style="width:85%;">}}
 
 複数のテンプレート変数で検索するには、コンマを入れます（例: `tags:role:$role.value,env:$env.value`）
 
@@ -129,7 +129,7 @@ tags:$<TEMPLATE_VARIABLE_NAME>
 
 例えば、イベントオーバーレイ検索ボックスに `tags:$region` と入力して、`region` テンプレート変数ドロップダウンにある値のイベントを検索します。
 
-{{< img src="dashboards/template_variables/search_widget.png" alt="検索ウィジェット"  style="width:85%;">}}
+{{< img src="dashboards/template_variables/search_widget.png" alt="検索ウィジェット" style="width:85%;">}}
 
 ## その他の参考資料
 

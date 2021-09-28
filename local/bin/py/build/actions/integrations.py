@@ -237,7 +237,7 @@ class Integrations:
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
 
-            elif file_name.endswith("defaults.go"):
+            elif file_name.endswith(".go"):
                 self.process_npm_integrations(file_name)
 
     def merge_integrations(self):
@@ -377,6 +377,7 @@ class Integrations:
         with open(file_name) as f:
             try:
                 data = json.load(f)
+                data = self.process_manifest(data, basename(dirname(file_name)))
                 data_name = data.get("name", "").lower()
                 if data_name in [
                     k
@@ -434,25 +435,43 @@ class Integrations:
         """
 
         dict_npm = {}
-        with open(file_name) as fh:
+        new_file_name = ""
 
-            line_list = filter(None, fh.read().splitlines())
+        if file_name.endswith("defaults.go"):
 
-            for line in line_list:
-                if line.endswith("service{"):
-                    integration = line.split('"')[1]
-                    dict_npm[integration] = {"name": integration}
+            with open(file_name) as fh:
 
-        new_file_name = "{}aws.json".format(self.data_npm_dir)
+                line_list = filter(None, fh.read().splitlines())
 
-        with open(
-                file=new_file_name,
-                mode="w",
-                encoding="utf-8",
-            ) as f:
-                json.dump(
-                    dict_npm, f, indent = 2, sort_keys = True
-                )
+                for line in line_list:
+                    if line.endswith("service{"):
+                        integration = line.split('"')[1]
+                        dict_npm[integration] = {"name": integration}
+
+            new_file_name = "{}aws.json".format(self.data_npm_dir)
+
+        elif file_name.endswith("gcp_services.go"):
+
+            with open(file_name) as fh:
+
+                line_list = filter(None, fh.read().splitlines())
+
+                for line in line_list:
+                    if line.endswith(","):
+                        integration = line.split('"')[3]
+                        dict_npm[integration] = {"name": integration}
+
+            new_file_name = "{}gcp.json".format(self.data_npm_dir)
+
+        if new_file_name != "":
+            with open(
+                    file=new_file_name,
+                    mode="w",
+                    encoding="utf-8",
+                ) as f:
+                    json.dump(
+                        dict_npm, f, indent = 2, sort_keys = True
+                    )
 
     # file_name should be an extracted image file
     # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
@@ -567,6 +586,7 @@ class Integrations:
         if exists(manifest):
             try:
                 manifest_json = json.load(open(manifest))
+                manifest_json = self.process_manifest(manifest_json, basename(dirname(file_name)))
             except JSONDecodeError:
                 no_integration_issue = False
                 manifest_json = {}
@@ -748,13 +768,13 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 fm = yaml.safe_dump(
-                    item, width=150, default_style='"', default_flow_style=False, allow_unicode=True
+                    item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
                 # simple bool cleanups with replace
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=150, default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
@@ -796,3 +816,28 @@ class Integrations:
             )
 
         return dependencies
+
+    def process_manifest(self, manifest_json, name):
+        """ Takes manifest and converts v2 and above to v1 expected formats for now """
+        manifest_version = (manifest_json.get("manifest_version", '1.0.0') or '1.0.0').split('.')
+        split_version = manifest_version[0] if len(manifest_version) > 1 else '1'
+        if split_version != '1':
+            # v2 or above
+            manifest_json["integration_id"] = manifest_json.get("app_id", "")
+            categories = []
+            supported_os = []
+            for tag in manifest_json.get("classifier_tags", []):
+                # in some cases tag was null/None
+                if tag:
+                    key, value = tag.split("::")
+                    if key.lower() == "category":
+                        categories.append(value.lower())
+                    if key.lower() == "supported os":
+                        supported_os.append(value.lower())
+            manifest_json["categories"] = categories
+            manifest_json["supported_os"] = supported_os
+            manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
+            manifest_json["is_public"] = manifest_json.get("display_on_public_website", False)
+            manifest_json["short_description"] = manifest_json.get("tile", {}).get("description", '')
+            manifest_json["name"] = manifest_json.get("name", name)
+        return manifest_json

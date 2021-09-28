@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-The Agent is lightweight software installed on your hosts. It reports metrics and events from your host to Datadog via [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6].
+The Agent is lightweight software installed on your hosts. It reports metrics and events from your host to Datadog using [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6].
 
 ## Setup
 
@@ -41,7 +41,7 @@ Run the Agent's [status command][13] to verify installation.
 
 ### Commands
 
-Refer to the [Agent Commands][14] page to [Start][15], [Stop][16] or [Restart][17] your Agent.
+See [Agent Commands][14] to [Start][15], [Stop][16] or [Restart][17] your Agent.
 
 ## Data Collected
 
@@ -53,8 +53,8 @@ The metrics below are available with Agent v6. For Agent v5, see the [Agent Metr
 
 | Metric                           | Description                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **datadog.agent.python.version** | Shows a value of `1` if the Agent is currently reporting to Datadog. The metric is tagged with the `python_version`. |
-| **datadog.agent.running**        | Shows a value of `1` if the Agent is currently reporting to Datadog.                                                 |
+| **datadog.agent.python.version** | Shows a value of `1` if the Agent is reporting to Datadog. The metric is tagged with the `python_version`. |
+| **datadog.agent.running**        | Shows a value of `1` if the Agent is reporting to Datadog.                                                 |
 | **datadog.agent.started**        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
 
 #### Checks
@@ -93,7 +93,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 For help troubleshooting the Agent:
 
-- Visit the [Agent Troubleshooting][25] page.
+- See [Agent Troubleshooting][25]
 - View the [Agent Log Files][26]
 - Contact [Datadog support][27]
 
@@ -111,7 +111,7 @@ For help troubleshooting the Agent:
 {{< /whatsnext >}}
 
 [1]: /integrations/
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: /api/
 [4]: /infrastructure/process/
 [5]: /logs/

@@ -14,7 +14,7 @@ The goal of this guide is to explain how to monitor your log usage with estimate
 
 * Alert on unexpected traffic spikes
 * Alert when you are getting close to a budget threshold on your indexed logs
-* Import the out of the box Log Management usage dashboard
+* Import the out-of-the-box Log Management usage dashboard
 
 ## Alert on unexpected spikes
 

@@ -2,7 +2,7 @@
 title: Modificateurs de type de métriques
 kind: documentation
 aliases:
-  - /fr/developers/metrics/metric_type_modifiers
+  - /fr/metrics/metric_type_modifiers
   - /fr/graphing/faq/as_count_validation
 further_reading:
   - link: /developers/dogstatsd/
@@ -77,7 +77,7 @@ Le type de métrique `GAUGE` représente la valeur finale et absolue d'une métr
 
 Bien que cette opération ne soit généralement pas requise, vous pouvez modifier le type d'une métrique dans la [page de résumé des métriques][4] :
 
-{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="Type de métrique"  style="width:70%;">}}
+{{< img src="metrics/type_modifiers/metric_type.png" alt="Type de métrique"  style="width:70%;">}}
 
 Exemple de scénario :
 
@@ -95,7 +95,7 @@ Si vous ne souhaitez pas perdre les données historiques envoyées en tant que t
 
 **Remarque** : pour le check de l'Agent, `self.increment` ne calcule pas le delta pour un accroissement uniforme de counter, mais signale la valeur transmise lors du check. Pour envoyer la valeur delta pour un accroissement uniforme de counter, utilisez `self.monotonic_count`. 
 
-[1]: /fr/developers/metrics/types/
+[1]: /fr/metrics/types/
 [2]: /fr/metrics/introduction/#time-aggregation
 [3]: /fr/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [4]: https://app.datadoghq.com/metric/summary

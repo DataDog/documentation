@@ -446,7 +446,7 @@ monolog:
 ### Laravel
 
 <div class="alert alert-warning">
-Note that the function <code>\DDTrace\trace_id()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.53.0">0.53.0</a>.
+Note that the function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
 </div>
 
 ```php
@@ -482,16 +482,17 @@ class AppServiceProvider extends ServiceProvider
 
         // Inject the trace and span ID to connect the log entry with the APM trace
         $monolog->pushProcessor(function ($record) use ($useJson) {
+            $context = \DDTrace\current_context();
             if ($useJson === true) {
                 $record['dd'] = [
-                    'trace_id' => \DDTrace\trace_id(),
-                    'span_id'  => \dd_trace_peek_span_id(),
+                    'trace_id' => $context['trace_id'],
+                    'span_id'  => $context['span_id'],
                 ];
             } else {
                 $record['message'] .= sprintf(
                     ' [dd.trace_id=%d dd.span_id=%d]',
-                    \DDTrace\trace_id(),
-                    \dd_trace_peek_span_id()
+                    $context['trace_id'],
+                    $context['span_id']
                 );
             }
             return $record;

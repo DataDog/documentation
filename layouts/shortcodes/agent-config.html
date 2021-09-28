@@ -1,0 +1,35 @@
+{{ if not (.Get "type") }}
+  {{ errorf "Agent Config shortcode error: Missing value for param 'type': %s" .Position }}
+{{ end }}
+
+{{ $agent_config_data := $.Site.Data.agent_config }}
+{{ $type := (.Get ("type")) | lower }}
+{{ $filename := .Get "filename" | default "Code example" }}
+{{ $collapsible := .Get "collapsible" }}
+{{ $disable_copy := .Get "disable_copy" }}
+{{ $config_data := index $agent_config_data $type }}
+{{ $config_data_string := trim $config_data "\n" }}
+
+{{ if eq $config_data nil }}
+  {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template.  Check agent_config_types_list.txt for list of available configuration types." }}
+{{ end }}
+
+<div class="code-snippet-wrapper">
+  <div class="code-filename-wrapper d-flex justify-content-between {{ if $collapsible }}collapsible{{ end }}">
+    <p class="code-filename my-0">{{ $filename }}</p>
+    {{ if $collapsible }}
+      <div class="js-code-block-visibility-toggle">
+        <div class="chevron chevron-down d-none"></div>
+        <div class="chevron chevron-up"></div>
+      </div>
+    {{ end }}
+  </div>
+  <div class="code-snippet">
+    {{ if ne $disable_copy "true" }}
+      <div class="code-button-wrapper position-absolute">
+        <button class="btn text-primary js-copy-button">Copy</button>
+      </div>
+    {{ end }}
+    {{ highlight $config_data_string "yaml" "" }}
+  </div>
+</div>

@@ -9,7 +9,7 @@
 "draft": false
 "git_integration_title": "pingdom"
 "has_logo": true
-"integration_id": "pingdom"
+"integration_id": ""
 "integration_title": "Pingdom"
 "is_public": true
 "kind": "インテグレーション"

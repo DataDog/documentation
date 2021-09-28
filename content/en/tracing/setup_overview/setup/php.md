@@ -244,15 +244,15 @@ The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; 
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **Default**: `false`<br>
-Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace long-running processes
+Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TRACE_CLI_ENABLED`
 : **Default**: `false`<br>
-Enable tracing of PHP scripts from the CLI
+Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
-Enable [debug mode](#custom-url-to-resource-mapping) for the tracer
+Enable debug mode. When `true`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
@@ -260,7 +260,7 @@ Enable the tracer globally
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **Default**: `true`<br>
-Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes
+Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TAGS`
 : **Default**: `null`<br>
@@ -417,6 +417,168 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 When [`open_basedir`][12] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
+## Tracing CLI scripts
+
+### Sort-running CLI scripts
+
+A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
+
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+
+```
+$ export DD_TRACE_CLI_ENABLED=true
+
+# Optionally, set the agent host and port if different from localhost and 8126, respectively
+$ export DD_AGENT_HOST=agent
+$ export DD_TRACE_AGENT_PORT=8126
+```
+
+For example, assume the following `script.php` runs a Curl request:
+
+```
+<?php
+
+sleep(1);
+
+$ch = curl_init('https://httpbin.org/delay/1');
+curl_exec($ch);
+
+sleep(1);
+
+```
+
+Run the script:
+
+```
+$ php script.php
+```
+
+Once run, the trace is generated and sent to the Datadog backend when the script terminates.
+
+{{< img src="tracing/setup/php/short-running-cli.jpg" alt="Trace for a short running PHP CLI script" >}}
+
+### Long-running CLI scripts
+
+A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
+
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `true`.
+
+```
+$ export DD_TRACE_CLI_ENABLED=true
+# With this pair of settings, traces for each "unit of work" is sent as soon as the method execution terminates.
+$ export DD_TRACE_GENERATE_ROOT_SPAN=false
+$ export DD_TRACE_AUTO_FLUSH_ENABLED=true
+
+# Optionally, set service name, env, etc...
+$ export DD_SERVICE=my_service
+
+# Optionally, set the agent host and port if different from localhost and 8126, respectively
+$ export DD_AGENT_HOST=agent
+$ export DD_TRACE_AGENT_PORT=8126
+```
+
+For example, assume the following `long_running.php` script:
+
+```
+<?php
+
+
+/* Datadog specific code. It can be in a separate files and required in this script */
+use function DDTrace\trace_method;
+use function DDTrace\trace_function;
+use DDTrace\SpanData;
+
+trace_function('processMessage', function(SpanData $span, $args) {
+    // Access method arguments and change resource name
+    $span->resource =  'message:' . $args[0]->id;
+    $span->meta['message.content'] = $args[0]->content;
+    $span->service = 'my_service';
+});
+
+trace_method('ProcessingStage1', 'process', function (SpanData $span, $args) {
+    $span->service = 'my_service';
+    // Resource name defaults to the fully qualified method name.
+});
+
+trace_method('ProcessingStage2', 'process', function (SpanData $span, $args) {
+    $span->service = 'my_service';
+    $span->resource = 'message:' . $args[0]->id;
+});
+/* Enf of Datadog code */
+
+/** Represents a message to be received and processed */
+class Message
+{
+    public $id;
+    public $content;
+
+    public function __construct($id, $content)
+    {
+        $this->id   = $id;
+        $this->content = $content;
+    }
+}
+
+/** One of possibly many processing stages, each of which should have a Span */
+class ProcessingStage1
+{
+    public function process(Message $message)
+    {
+        sleep(1);
+        $ch = curl_init('https://httpbin.org/delay/1');
+        curl_exec($ch);
+    }
+}
+
+/** One of possibly many processing stages, each of which should have a Span */
+class ProcessingStage2
+{
+    public function process(Message $message)
+    {
+        sleep(1);
+    }
+}
+
+/** In a real world application, this will read new messages from a source, for example a queue */
+function waitForNewMessages()
+{
+    return [
+        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
+        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
+        new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
+    ];
+}
+
+/** This function is the "unit of work", each execution of it will generate one single trace */
+function processMessage(Message $m, array $processors)
+{
+    foreach ($processors as $processor) {
+        $processor->process($m);
+        usleep(100000);
+    }
+}
+
+$processors = [new ProcessingStage1(), new ProcessingStage2()];
+
+/** A loop that runs forever waiting for new messages */
+while (true) {
+    $messages = waitForNewMessages();
+    foreach ($messages as $message) {
+        processMessage($message, $processors);
+    }
+}
+```
+
+Run the script:
+
+```
+$ php long_running.php
+```
+
+Once run, one trace is generated and sent to the Datadog backend every time a new message is processed.
+
+{{< img src="tracing/setup/php/long-running-cli.jpg" alt="Trace for a long running PHP CLI script" >}}
+
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
@@ -438,6 +600,212 @@ To remove the PHP tracer:
 ## Troubleshooting an application crash
 
 In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump or a Valgrind trace and contact Datadog support.
+
+### Install debug symbols
+
+For the core dumps to be readable, debug symbols for the PHP binaries have to be installed on the system that runs PHP.
+
+To check if debug symbols are installed for PHP or PHP-FPM, use `gdb`.
+
+Install `gdb`:
+
+```
+apt|yum install -y gdb
+```
+
+Run `gdb` with the binary of interest. For example for PHP-FPM:
+
+```
+gdb php-fpm
+```
+
+If the `gdb` output contains a line similar to the text below, then debug symbols are already installed.
+
+```
+...
+Reading symbols from php-fpm...Reading symbols from /usr/lib/debug/path/to/some/file.debug...done.
+...
+```
+
+If the `gdb` output contains a line similar to the text below, then debug symbols need to be installed:
+
+```
+...
+Reading symbols from php-fpm...(no debugging symbols found)...done.
+...
+```
+
+
+#### Centos
+
+Install package `yum-utils` that provides the program `debuginfo-install`:
+
+```
+yum install -y yum-utils
+```
+
+Find the package name for your PHP binaries, it can vary depending on the PHP installation method:
+
+```
+yum list installed | grep php
+```
+
+Install debug symbols. For example for package `php-fpm`:
+
+```
+debuginfo-install -y php-fpm
+```
+
+**Note**: If the repository that provides the PHP binaries is not enabled by default, it can be enabled when running the `debuginfo-install` command. For example:
+
+```
+debuginfo-install --enablerepo=remi-php74 -y php-fpm
+```
+
+#### Debian
+
+##### PHP installed from the Sury Debian DPA
+
+If PHP was installed from the [Sury Debian DPA][13], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+
+```
+apt update
+apt install -y php7.2-fpm-dbgsym
+```
+
+##### PHP installed from a different package
+
+The Debian project maintains a wiki page with [instructions to install debug symbols][14].
+
+Edit the file `/etc/apt/sources.list`:
+
+```
+# ... leave here all the pre-existing packages
+
+# add a `deb` deb http://deb.debian.org/debian-debug/ $RELEASE-debug main
+# For example for buster
+deb http://deb.debian.org/debian-debug/ buster-debug main
+```
+
+Update `apt`:
+
+```
+apt update
+```
+
+Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+If debug symbols cannot be found, use the utility tool `find-dbgsym-packages`. Install the binary:
+
+```
+apt install -y debian-goodies
+```
+
+Attempt finding debug symbols from either the full path to the binary or the process id of a running process:
+
+```
+find-dbgsym-packages /usr/sbin/php-fpm7.2
+```
+
+Install the resulting package name, if found:
+
+```
+apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
+```
+
+#### Ubuntu
+
+##### PHP installed from `ppa:ondrej/php`
+
+If PHP was installed from the [`ppa:ondrej/php`][15], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+
+Before:
+
+```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main```
+
+After:
+
+```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
+
+Update and install the debug symbols. For example, for PHP-FPM 7.2:
+
+```
+apt update
+apt install -y php7.2-fpm-dbgsym
+```
+##### PHP installed from a different package
+
+Find the package name for your PHP binaries, it can vary depending on the PHP installation method:
+
+```
+apt list --installed | grep php
+```
+
+**Note**: In some cases `php-fpm` can be a metapackage that refers to the real package, for example `php7.2-fpm` in case of PHP-FPM 7.2. In this case the package name is the latter.
+
+Try canonical package names for debug symbols, first. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][16] from the `ddebs` can be found in the Ubuntu documentation.
+
+For example, for Ubuntu 18.04+, enable the `ddebs` repo:
+
+```
+echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
+
+echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
+```
+
+Import the signing key (make sure the [signing key is correct][17]):
+
+```
+apt install ubuntu-dbgsym-keyring
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNTU DOCUMENTATION>
+apt update
+```
+
+Try againg the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
+
+```
+apt install -y php7.2-fpm-dbgsym
+
+# if the above does not work
+
+apt install -y php7.2-fpm-dbg
+```
+
+In case debug symbols cannot be found, use the utility tool `find-dbgsym-packages`. Install the binary:
+
+```
+apt install -y debian-goodies
+```
+
+Attempt finding debug symbols from either the full path to the binary or the process id of a running process:
+
+```
+find-dbgsym-packages /usr/sbin/php-fpm7.2
+```
+
+Install the resulting package name, if found:
+
+```
+apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
+```
 
 ### Obtaining a core dump
 
@@ -480,6 +848,47 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][18] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+
+```
+==322== Conditional jump or move depends on uninitialised value(s)
+==322==    at 0x41EE82: zend_string_equal_val (zend_string.c:403)
+==322==    ...
+==322==    ...
+==322==
+==322== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==322==    at 0x73C8657: kill (syscall-template.S:81)
+==322==    by 0x1145D0F2: zif_posix_kill (posix.c:468)
+==322==    by 0x478BFE: ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER (zend_vm_execute.h:1269)
+==322==    by 0x478BFE: execute_ex (zend_vm_execute.h:53869)
+==322==    by 0x47D9B0: zend_execute (zend_vm_execute.h:57989)
+==322==    by 0x3F6782: zend_execute_scripts (zend.c:1679)
+==322==    by 0x394F0F: php_execute_script (main.c:2658)
+==322==    by 0x1FFE18: main (fpm_main.c:1939)
+==322==
+==322== Process terminating with default action of signal 11 (SIGSEGV)
+==322==    ...
+==322==    ...
+==322==
+==322== HEAP SUMMARY:
+==322==     in use at exit: 3,411,619 bytes in 22,428 blocks
+==322==   total heap usage: 65,090 allocs, 42,662 frees, 23,123,409 bytes allocated
+==322==
+==322== LEAK SUMMARY:
+==322==    definitely lost: 216 bytes in 3 blocks
+==322==    indirectly lost: 951 bytes in 32 blocks
+==322==      possibly lost: 2,001,304 bytes in 16,840 blocks
+==322==    still reachable: 1,409,148 bytes in 5,553 blocks
+==322==                       of which reachable via heuristic:
+==322==                         stdstring          : 384 bytes in 6 blocks
+==322==         suppressed: 0 bytes in 0 blocks
+==322== Rerun with --leak-check=full to see details of leaked memory
+==322==
+==322== Use --track-origins=yes to see where uninitialised values come from
+==322== For lists of detected and suppressed errors, rerun with: -s
+==322== ERROR SUMMARY: 18868 errors from 102 contexts (suppressed: 0 from 0)
+```
+
 ### Obtaining a strace
 
 Some issues are caused by external factors, so it can be valuable to have a `strace`.
@@ -521,3 +930,9 @@ For Apache, run:
 [10]: /tracing/setup/nginx/#nginx-and-fastcgi
 [11]: https://github.com/mind04/mod-ruid2
 [12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[13]: https://packages.sury.org/php/
+[14]: https://wiki.debian.org/HowToGetABacktrace
+[15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

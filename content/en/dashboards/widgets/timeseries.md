@@ -4,6 +4,7 @@ kind: documentation
 description: "Display the evolution of one or more metrics, log events, Indexed Spans, or process metrics over time."
 aliases:
     - /graphing/widgets/timeseries/
+    - /dashboards/widgets/network/
 further_reading:
 - link: "/dashboards/timeboards/"
   tag: "Documentation"
@@ -30,7 +31,7 @@ The timeseries visualization allows you to display the evolution of one or more 
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See the documentation [querying][3] to configure a metric query.
+    * Metric: See the [Querying documentation][3] to configure a metric query.
     * Indexed Spans: See the [Trace search documentation][4] to configure an Indexed Span query.
     * Log Events: See the [Log search documentation][5] to configure a log event query.
 

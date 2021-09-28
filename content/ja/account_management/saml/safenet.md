@@ -1,5 +1,5 @@
 ---
-title: SafeNet を SAML IdP として構成する方法
+title: SafeNet SAML IdP
 kind: documentation
 further_reading:
   - link: /account_management/saml/

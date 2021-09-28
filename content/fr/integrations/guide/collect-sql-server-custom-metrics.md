@@ -196,5 +196,5 @@ Si vos métriques custom n'apparaissent pas dans Datadog, vérifiez le fichier d
 
 [1]: /fr/integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
-[3]: /fr/developers/metrics/#metric-types
-[4]: /fr/developers/metrics/histograms/
+[3]: /fr/metrics/#metric-types
+[4]: /fr/metrics/histograms/

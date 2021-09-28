@@ -27,12 +27,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
+  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
     tag: "GitHub"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
+  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+    tag: "Blog"
+    text: "Deploy ASP.NET Core applications to Azure App Service"
 ---
 
 ## Compatibility requirements
@@ -185,7 +188,7 @@ Name                       | Value
 
 The following environment variables are required to enable automatic instrumentation:
 
-  <div class="alert alert-info">
+  <div class="alert alert-warning">
       <strong>Note:</strong> If the .NET Tracer is installed into a path other than the default <code>/opt/datadog</code> path, ensure the paths are changed to match.
   </div>
 
@@ -298,7 +301,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
     `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-    See [configure the tracer](#configure-the-tracer) for more information on how to set these variables.
+    See [Configuration](#configuration) for more information on how to set these variables.
 {{< site-region region="us3,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
@@ -367,8 +370,6 @@ To configure the tracer using environment variables, set the variables before la
 
 #### Windows
 
-**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry, as described above.
-
 ```cmd
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
@@ -379,6 +380,13 @@ SET DD_VERSION=abc123
 rem Launch application
 example.exe
 ```
+
+<div class="alert alert-warning">
+<strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above. 
+<br />
+<br />
+Because IIS runs all applications under one Windows Service, Datadog recommends you use another configuration option (Code, web.config, or JSON file) for application-specific settings such as <code>DD_SERVICE</code>.
+</div>
 
 #### Linux
 
@@ -444,7 +452,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ### Configuration settings
 
-<div class="alert alert-info">
+<div class="alert alert-warning">
   <strong>Note:</strong> On Linux, the names of environment variables are case-sensitive.
 </div>
 
@@ -486,6 +494,10 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs.
+
+`DD_MAX_TRACES_PER_SECOND`
+: **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
+The number of traces allowed to be submitted per second.
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>

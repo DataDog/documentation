@@ -77,7 +77,7 @@ In case of any redirection, the download time only corresponds to the last reque
 
 The `*.response.time` metrics measure the total time between the moment Synthetics starts and the moment Synthetic finishes the request. The response time is the sum of all network timings. 
 
-For example, the total response time for an HTTP test with no redirections on an HTTPS endpoint:  `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time+synthetics.http.ssl.time + synthetics.http.download.time`.
+For example, the total response time for an HTTP test with no redirections on an HTTPS endpoint:  `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time + synthetics.http.ssl.time + synthetics.http.firstbyte.time + synthetics.http.download.time`.
 
 ## Timing variations
  

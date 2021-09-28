@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md
 display_name: Snmpwalk
 draft: false
 git_integration_title: snmpwalk

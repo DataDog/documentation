@@ -38,7 +38,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/"
     tag: "Blog"
     text: "Monitor containerized ASP.NET Core applications on AWS Fargate"
-  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
+  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
     tag: "GitHub"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"

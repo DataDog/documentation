@@ -211,7 +211,7 @@ span.finish()
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][2] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][2] page or in [Ignoring Unwanted Resources][3].
 
 ## Further Reading
 
@@ -219,3 +219,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 [1]: /tracing/compatibility_requirements/python
 [2]: /tracing/security
+[3]: /tracing/guide/ignoring_apm_resources/

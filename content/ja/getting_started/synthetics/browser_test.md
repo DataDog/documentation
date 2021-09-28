@@ -8,96 +8,126 @@ further_reading:
   - link: /synthetics/browser_tests
     tag: ドキュメント
     text: ブラウザテストについて
-  - link: '/synthetics/browser_tests/#subtests'
+  - link: /getting_started/synthetics/private_location
     tag: ドキュメント
-    text: ブラウザサブセットを作成
-  - link: /synthetics/settings/
+    text: プライベートロケーションの詳細
+  - link: /synthetics/ci
     tag: Documentation
-    text: 高度な Synthetic モニタリング設定を構成する
+    text: CI/CD パイプラインから Synthetic テストをトリガーする方法を学ぶ
+  - link: /synthetics/identify_synthetics_bots
+    tag: ドキュメント
+    text: API テスト用の Synthetic ボットを特定する方法を学ぶ
 ---
 ## ブラウザテストを作成
 
-[ブラウザテスト][1]は、Datadog が Web アプリケーション上で実行するシナリオです。世界中の複数の場所からさまざまなデバイスを使用して実行され、テスト間隔は自由に設定できます。これらのテストは、**アプリケーションが稼働してリクエストに応答していること**、主要な事業取引が想定通りに実行されていることを確認します。
+[ブラウザテスト][1]は、Datadog が Web アプリケーションで実行するシナリオです。定期的な間隔を構成して、複数の場所、デバイス、およびブラウザからテストを実行したり、CI/CD パイプラインからテストを実行したりできます。これらのテストは、ユーザーがアプリケーションで主要なビジネストランザクションを実行できること、およびユーザーが最新のコード変更によって悪影響を受けていないことを確認します。
 
-ここでは、ユーザーが商品をカートに追加して会計するまでの行程をマップするように、ブラウザテストを構成しています。実行された各テストは **Test Result** として Datadog に記録されます。
+以下の例は、カートにアイテムを追加してから正常にチェックアウトするまでのユーザーのジャーニーをマップするブラウザテストの作成を示しています。
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="ブラウザテスト"  style="width:90%;" >}}
+{{< img src="getting_started/synthetics/browser-test.png" alt="ブラウザテスト"  style="width:100%;" >}}
 
-## テストの設定
+### テストの詳細を構成する
 
-1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][2]** にカーソルを合わせ、**Synthetic Test** を選択します。
+1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][2]** にカーソルを合わせ、**[Synthetic Tests][2]** を選択します。
 2. 右上の **New Test** ボタンをクリックします。
 3. **Browser Test**を選択します。
-4. ブラウザテストの構成を定義します。
+4. ブラウザテストを定義します。
 
-    - **Starting URL**: 監視したいウェブサイトの URL を追加します。どこから始めるか分からない場合は、テスト用の Web アプリケーションとして `https://www.shopist.io/` を使用することができます。
-    - **Name**: テストの名称です。
-    - **Tags**: テストで `env:prod` や `app:shopist` のようなタグを設定できます。タグは整理をしたり、興味のあるテストをホームページで見つける場合などに役立ちます。
-    - **Browsers & Devices**: テストするデバイスと場所を選択します。この例では、**Chrome** および **Large Laptops** でのみテストが実行されます。
-    - **Locations**: **Managed Locations** のうち、テストを実行する 場所をひとつ選択します。この例では **Americas and Europe** のみでテストが実行されます。
-    - **Specify a test frequency**: テストを実行したい頻度を選択します。
-    - **Alert Conditions**: アラート条件で、テストが通知アラートを送信する状況を設定します。
+    - 監視する Web サイトの URL を追加します。追加する URL がない場合は、テスト用の Web アプリケーションである `https://www.shopist.io` を使用してください。
+    - カスタムリクエストヘッダー、認証資格情報、cookie を使用するには、**Advanced Options** を選択します。
+    - テストに名前を付け、`env:prod` や `app:shopist` などのタグを設定します。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
+    - テストするブラウザとデバイスを選択します。
 
-        - 特定の場所で起こる可能性のあるネットワーク障害に関するアラートを避けるには、テストを次のように構成します。
+#### ロケーションを選択する
 
-        ```text
-        An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations
-        ```
+テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。
 
-        - テストランが2度失敗して初めてテストの失敗と見なされるよう、失敗と見なされるまでに再実行する回数を指定します。
+管理ロケーションでは、公開されているアプリケーションをテストすることができます。内部アプリケーションをテストしたり、個別の地理的領域でユーザーの行動をシミュレートしたりするには、代わりに **Private Locations** を 1 つ選択します。
 
-        ```text
-        Retry 1 time before location is marked as failed
-        ```
+プライベートロケーションの設定方法の詳細については、[プライベートロケーション入門][3]を参照してください。
 
-         **注**: デフォルトでは、失敗したテストを再試行するまでに 300ms の待機時間があります。この時間は、[API][3] を使用して構成することができます。
+#### テストの頻度を指定する
 
-    - **Notify**: アラートメッセージを作成し、アラートがトリガーされる際に通知されるメールアドレスを指定します。Datadog からアラートメールを受け取るために追加の設定をする必要はありません。また、Slack、PagerDuty、Webhook などの[インテグレーション][4]を使用して通知を受信することもできます。
-    - **Save & Edit Recording** をクリックします。
+テストを実行する頻度を選択します。
 
-{{< img src="getting_started/synthetics/configured-browser-test.gif" alt="ブラウザテストを構成"  style="width:90%;">}}
+スケジュールに従って Synthetic テストを実行することに加えて、CI/CD パイプラインから手動または直接トリガーすることができます。詳細については、[Synthetic CI/CD テスト][4]を参照してください。
 
-## テスト手順を記録
 
-テスト構成を保存すると、[Datadog test recorder][5] 拡張機能をダウンロードするように促されます。ブラウザテストを記録できるのは **[Google Chrome][6]** だけです。拡張機能をダウンロードしてインストールします。
+#### アラート条件を定義する
 
-この拡張機能をインストールしたら、**Start Recording** ボタンをクリックしてテスト手順を記録し始めます。記録オプションの右側にある iframe でページを操作します。div、画像、またはページの任意の場所を選択すると、手順は記録されブラウザテスト内で手順を作成するのに使用されます。手順の詳細は、[ブラウザテストの手順に関するドキュメント][7]を参照してください。
+アラート条件を定義して、散発的なネットワークブリップなどのテストがトリガーされないようにすることができます。これにより、アプリケーションに実際の問題が発生した場合にのみアラートが送信されます。
 
-たとえば、ユーザーが商品をカートに追加して会計するまでの行程をマップするテスト手順を記録するには、
+ロケーションが失敗したと見なす前に発生する必要がある連続した失敗の数を指定できます。
 
-1. 家具のセクションに移動し、たとえば、**Chairs** そして **Add to cart** と進みます。
+```text
+Retry test 2 times after 300 ms in case of failure
+```
+
+アプリケーションが特定の時間とロケーションの数だけダウンしたときにのみ通知をトリガーするようにテストを構成することもできます。次の例では、2 つの異なるロケーションでテストが 3 分間失敗した場合に、アラートルールが通知を送信するように設定されています。
+
+```text
+An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
+```
+
+#### チームへの通知
+
+**Monitor Name** フィールドにアラート名を追加し、アラートのメッセージを書き込みます。Slack、PagerDuty、Microsoft Teams、Webhook などの[インテグレーション][5]を使用して、アラートを特定のサービスやチームにルーティングできます。
+
+アラートが解決されていない再通知するようにアラート通知を設定し、**P5 (Info)** から **P1 (Critical)** の範囲でアラートの優先度を定義できます。
+
+{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="ブラウザテストのコンフィギュレーション例" video="true"  >}}
+
+テストを記録する準備ができたら **Save Details & Record Test** をクリックします。
+
+### 記録を作成する
+
+テストコンフィギュレーションが保存されると、Datadog は Chrome 拡張機能の [Datadog テストレコーダー][6]をダウンロードしてインストールするように要求します。
+
+拡張機能をインストールしたら、**Start Recording** をクリックしてテストステップの記録を開始します。
+
+レコーダーページの右側にある iframe のページを操作します。div、画像、またはページの任意の領域を選択すると、Datadog はブラウザテストで関連するステップを記録および作成します。
+
+テストステップの記録を終了するには、**Stop Recording** をクリックします。
+
+以下の例は、カートに商品を追加してから `https://www.shopist.io` で正常にチェックアウトするまでのユーザージャーニーをマッピングする方法を示しています。
+
+1. サンプル Web サイトの **Chairs** などの家具セクションの 1 つに移動し、**Add to cart** を選択します。
 2. **Cart** そして **Checkout** をクリックします。
-3. **Assertion** “Test text is present on the active page” を手動で追加し、“Thank you” の文字がページに表示されるようにします。
+3. **Add New** で **Assertion** を選択し、**“Test that some text is present on the active page”** (アクティブなページにテキストが存在することをテストする) をクリックします。
+4. チェックアウト後に “Thank you!” という言葉が表示されることを確認するには、**Value** フィールドに `Thank you!` と入力します。
+5. **Save & Quit** を押します。
 
-   **注**: ブラウザテストの最終手順は **assertion** でなければなりません。これにより、テストが意図されたページで終了し、想定された要素が検出されたことを確認できます。
+定義されたユーザージャーニーの後にアプリケーションが期待される状態になることを確認するために、**アサーション**でブラウザテストを終了することが重要です。
 
-4. テストを保存します。
+{{< img src="getting_started/synthetics/record-test.mp4" alt="テストステップを記録する"  video="true"  >}}
 
-{{< img src="getting_started/synthetics/record-test.gif" alt="テスト手順を記録"  style="width:90%;">}}
-
-**注**: この例で使用されるウェブサイトは、定期的にエラーをスローし意図的に失敗が起きるようになっています。メッセージボックスにメールアドレスを設定している場合、テストで失敗が起きた際に通知メールを受け取ることとなります。
+**注**: サンプル Web サイトは定期的にエラーをスローし、意図的に失敗を引き起こします。**Notify your team** フィールドにメールアドレスを含めると、テストが失敗して回復したときにメール通知が届きます。
 
 ## テスト結果
 
-ブラウザテストの詳細ページには、対象のテストのコンフィギュレーション、テストのアップタイム、応答時間と最初のページ操作からの応答時間を示す履歴グラフ、成功・失敗した場合のサンプル結果、選択したタイムフレームに対応するテスト結果の一覧が表示されます。個々のテスト結果には、各ステップのスクリーンショット、主要な Web バイタル、潜在的なエラー、リソース、およびトレースが含まれます。
+ブラウザテストの詳細ページには、テストコンフィギュレーションの概要、グローバルおよびロケーションごとのアップタイム、対話までの時間とテスト期間に関するグラフ、成功したテスト結果と失敗したテスト結果のサンプル、すべてのテスト結果のリストが表示されます。テストの長さによっては、最初のテスト結果が表示されるまで数分待つ必要がある場合があります。
 
-テストがいくつかのテスト結果を生成するまで待つか、`Run test now` を押してより迅速にトリガーします。次に、**Test Results** またはメールボックスで失敗したテスト結果を探します。スクリーンショットを確認して失敗した箇所を把握し、トラブルシューティングを始めます。失敗したステップの前に発生したステップには不具合の根本原因が含まれることが多いため、直前のステップのスクリーンショットを必ず確認するようにしてください。
+[失敗したテスト][7]のトラブルシューティングを行うには、失敗したテスト結果を選択し、失敗したステップに至るまでのスクリーンショットを確認します。潜在的な**[エラーと警告][8]**、**[リソース][9]**、および**[コア Web バイタル][10]**を確認して、問題を診断することもできます。
 
-**Errors & Warnings** タブでは、Javascript やネットワークエラーが一覧表示されます。**Resources** タブでは、このステータスをもたらすリソースが表示されます。**Traces** タブではリクエスト全体が数秒でマッピングされます。このテストは、サーバータイムアウトのため失敗に終わりました。リソース、`https://api.shopist.io/checkout.json` はステータスと、問題の対象となるソースが会計にリンクされたコントローラであることを投稿します。これで問題の原因を見つけたことになります。
+以下の例では、サーバーのタイムアウトの結果としてテストが失敗しました。
 
-{{< img src="getting_started/synthetics/browser-test-failure.png" alt="ブラウザテストの失敗"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="ブラウザテストの失敗"  video="true"  >}}
 
-**Traces** タブには、Datadog の [Synthetic モニタリングとの APM インテグレーション][8]でアクセスできます。構成が完了すると、失敗したテストランから生成されたトレースを見ることで、テストランが失敗した問題の根本原因を探ることができます。ブラウザテストの結果を APM とリンクさせるには、APM インテグレーションのヘッダーを追加する URL をホワイトリスト化します。ワイルドカードには `*` を使用します（例: `https://*.datadoghq.com/*`）。
+Datadog の [APM と Synthetic Monitoring のインテグレーション][11]を使用して、**Traces** タブからのテスト実行によってバックエンドから生成されたトレースを表示します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /ja/synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /ja/api/v1/synthetics/#create-or-clone-a-test
-[4]: /ja/integrations/
-[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[6]: https://www.google.com/chrome/
-[7]: /ja/synthetics/browser_tests/#actions
-[8]: /ja/synthetics/apm/
+[3]: /ja/getting_started/synthetics/private_location
+[4]: /ja/synthetics/ci
+[5]: /ja/integrations/#cat-notification
+[6]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[7]: /ja/synthetics/browser_tests/test_results#test-failure
+[8]: /ja/synthetics/browser_tests/test_results#errors
+[9]: /ja/synthetics/browser_tests/test_results#resources
+[10]: /ja/synthetics/browser_tests/test_results#page-performance
+[11]: /ja/synthetics/apm/

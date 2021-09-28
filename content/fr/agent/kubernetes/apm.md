@@ -88,7 +88,7 @@ Mettez à jour votre manifeste `datadog-agent.yaml` comme suit :
 ```
 agent:
   image:
-    name: "datadog/agent:latest"
+    name: "gcr.io/datadoghq/agent:latest"
   apm:
     enabled: true
 ```

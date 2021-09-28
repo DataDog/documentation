@@ -3,7 +3,7 @@ title: Unix ドメインソケット上の DogStatsD
 kind: documentation
 description: Unix ドメインソケット上の DogStatsD の使用ガイド
 aliases:
-  - /ja/developers/metrics/unix_socket/
+  - /ja/metrics/unix_socket/
 further_reading:
   - link: developers/dogstatsd
     tag: Documentation
@@ -11,7 +11,7 @@ further_reading:
   - link: developers/libraries
     tag: Documentation
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
     tag: GitHub
     text: DogStatsD ソースコード
 ---
@@ -107,7 +107,7 @@ Agent DogStatsD UDS を有効にするには
 
 ### netcat でテスト
 
-シェルスクリプトからメトリクスを送信したり、DogStatsD がソケットでリスニングしているかをテストする場合は、`netcat` を使用できます。`netcat` のほとんどの実装 (Debian の `netcat-openbsd`、RHEL の `nmap-ncat` など) は、`-U` フラグによって Unix ソケットトラフィックをサポートしています。
+シェルスクリプトからメトリクスを送信したり、DogStatsD がソケットでリスニングしているかをテストする場合は、`netcat` を使用します。`netcat` のほとんどの実装 (Debian の `netcat-openbsd`、RHEL の `nmap-ncat` など) は、`-U` フラグで Unix ソケットトラフィックをサポートしています。
 
 ```shell
 echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
@@ -164,7 +164,7 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 
 2. 任意 - 発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][5]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト)、`orchestrator`、または `high` を使用します。
 
-DogStatsD がコンテナ内で実行されている場合、発信点検出を高い信頼性で行うには、DogStatsD をホストの PID ネームスペースで実行する必要があります。そのため、`--pid=host` フラグを用いて Docker で有効にします。**注**: これは、コンテナのタスク定義内の `"pidMode": "host"` パラメーターを使用して、ECS によってサポートされます。このオプションは、Fargate ではサポートされません。詳細については、[AWS のドキュメント][2]を参照してください。
+DogStatsD がコンテナ内で実行されている場合、発信点検出を高い信頼性で行うには、DogStatsD をホストの PID ネームスペースで実行する必要があります。そのため、`--pid=host` フラグを用いて Docker で有効にします。**注**: これは、コンテナのタスク定義内の `"pidMode": "host"` パラメーターを使用して、ECS によってサポートされます。このオプションは、Fargate ではサポートされません。詳細については、[PID モード][2]で AWS のドキュメントを参照してください。
 
 
 [1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
@@ -222,14 +222,14 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-追加の実装オプションの作成に関するガイドラインについては、[datadog-agent github wiki][9] を参照してください。
+追加の実装オプションの作成に関するガイドラインについては、[datadog-agent GitHub wiki][9] を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[2]: /ja/developers/metrics/custom_metrics/
+[1]: /ja/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

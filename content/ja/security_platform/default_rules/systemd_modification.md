@@ -3,15 +3,12 @@ aliases:
   - /ja/cz4-vmk-ju2
   - /ja/security_monitoring/default_rules/cz4-vmk-ju2
   - /ja/security_monitoring/default_rules/systemd_modification
-control: ''
 disable_edit: true
-framework: ''
+fim: 'true'
 integration_id: ファイル整合性モニタリング
 kind: documentation
 rule_category:
   - ワークロードセキュリティ
-scope: ''
-security: コンプライアンス
 source: ファイル整合性モニタリング
 title: Systemd の修正
 type: security_rules

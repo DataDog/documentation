@@ -48,9 +48,9 @@ Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd/
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[3]: /ja/developers/metrics/types/?tab=count#metric-types
-[4]: /ja/developers/metrics/types/
-[5]: /ja/developers/metrics/types/?tab=gauge#metric-types
-[6]: /ja/developers/metrics/types/?tab=histogram#metric-types
-[7]: /ja/developers/metrics/types/?tab=distribution#metric-types
+[2]: /ja/metrics/dogstatsd_metrics_submission/
+[3]: /ja/metrics/types/?tab=count#metric-types
+[4]: /ja/metrics/types/
+[5]: /ja/metrics/types/?tab=gauge#metric-types
+[6]: /ja/metrics/types/?tab=histogram#metric-types
+[7]: /ja/metrics/types/?tab=distribution#metric-types

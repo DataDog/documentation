@@ -36,7 +36,7 @@ further_reading:
 ### 種類
 
 {{< whatsnext desc="Learn about the types of data you can submit to Datadog:" >}}
-    {{< nextlink href="/developers/metrics" >}}<u>カスタムメトリクス</u>: Datadog のカスタムメトリクスについて掘り下げて説明します。メトリクスのタイプや、それぞれのタイプが表すもの、送信方法、および Datadog 全体でどのように使用されるかを、このセクションで説明します。{{< /nextlink >}}
+    {{< nextlink href="/metrics" >}}<u>カスタムメトリクス</u>: Datadog のカスタムメトリクスについて掘り下げて説明します。メトリクスのタイプや、それぞれのタイプが表すもの、送信方法、および Datadog 全体でどのように使用されるかを、このセクションで説明します。{{< /nextlink >}}
     {{< nextlink href="/developers/events" >}}<u>イベント</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にイベントを送信する方法について説明します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>サービスチェック</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にサービスチェックを送信する方法について説明します。{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -139,6 +139,11 @@ Classic:
       authors: Apache
       notes: Publishes metrics from NiFi to Datadog.
   - Node.js:
+    - name: datadog-api-client
+      link: https://github.com/DataDog/datadog-api-client-typescript
+      official: true
+      api: true
+      authors: Datadog
     - name: hot-shots
       link: https://github.com/brightcove/hot-shots
       dogstatsd: true

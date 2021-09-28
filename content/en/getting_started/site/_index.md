@@ -14,7 +14,7 @@ Datadog offers different sites throughout the world. Each site is completely ind
 
 ## How do I tell which Datadog site I am on?
 
-You can identify which site you are on by matching your Datadog application URL to the site URL in the table above.
+You can identify which site you are on by matching your Datadog website URL to the site URL in the table above.
 
 {{< img src="getting_started/site/site.png" alt="Image of the site URL in your browser"  >}}
 

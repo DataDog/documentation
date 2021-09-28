@@ -18,16 +18,15 @@ aliases:
 
 ## Overview
 
-This page dives into the `OpenMetricsBaseCheck` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kube DNS][1]. For information on configuring a basic OpenMetrics check, see the [Agent Documentation][2].
+This page dives into the `OpenMetricsBaseCheck` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kube DNS][1]. For details on configuring a basic OpenMetrics check, see [Kubernetes Prometheus and OpenMetrics metrics collection][2].
 
 ## Advanced usage: OpenMetrics check interface
 
-If you have more advanced needs than the generic check (for example, metrics preprocessing), you can write a custom `OpenMetricsBaseCheck`. It's [the base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. The minimal configuration for checks based on this class include:
+If you have more advanced needs than the generic check, such as metrics preprocessing, you can write a custom `OpenMetricsBaseCheck`. It's the [base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed with Prometheus. The minimal configuration for checks based on this class include:
 
 - Creating a default instance with `namespace` and `metrics` mapping.
-- Implementing the `check()` method
-AND/OR
-- Create a method named after the OpenMetric metric they will handle (see `self.prometheus_metric_name`)
+- Implementing the `check()` method AND/OR:
+- Creating a method named after the OpenMetric metric handled (see `self.prometheus_metric_name`).
 
 ## Writing a custom Prometheus check
 
@@ -92,8 +91,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 A default instance is the basic configuration used for the check. The default instance should override `namespace`, `metrics`, and `prometheus_url`.
 
-
-Note that we also override the default values for some config options in the `OpenMetricsBaseCheck`, so there is increased metric behavior correlation between [Prometheus and Datadog metric types][6]. 
+**Note**: The default values for some config options in the `OpenMetricsBaseCheck` are overwritten, so there is increased metric behavior correlation between [Prometheus and Datadog metric types][6]. 
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck
@@ -232,7 +230,7 @@ You can improve your OpenMetrics check by including default values for additiona
 : If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` use the corresponding value as tag name when sending the gauges.
 
 `exclude_labels`
-: `exclude_labels` is an array of labels to exclude. Those labels will not be added as tags when submitting the metric.
+: `exclude_labels` is an array of labels to exclude. Those labels are not added as tags when submitting the metric.
 
 `type_overrides`
 : `type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names, and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.

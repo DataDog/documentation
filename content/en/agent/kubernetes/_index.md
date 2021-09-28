@@ -156,22 +156,22 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-    | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Linux                   | Windows                 |
-    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | [Manifest template][3]  | [Manifest template][4]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
-    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           | [Manifest template][9]  | [Manifest template][10] |
-    |                           |                           |                           |                           | <i class="icon-tick"></i> | [Manifest template][11] | no template             |
-    | <i class="icon-tick"></i> |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
+    | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
+    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> | [Manifest template][3]  | [Manifest template][4] (no security)  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][5]  | [Manifest template][6]  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           |                           | [Manifest template][7]  | [Manifest template][8]  |
+    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           |                           | [Manifest template][9]  | [Manifest template][10] |
+    |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [Manifest template][11] | no template             |
+    | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [Manifest template][12] | [Manifest template][13] |
 
-     To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18], and [Security][19] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
 4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
     
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][19] to see documentation appropriate for the site you're using.
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadog.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -192,7 +192,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][20] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][21]:
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][21] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][22]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -230,9 +230,10 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [16]: /agent/kubernetes/apm/
 [17]: /infrastructure/process/?tab=kubernetes#installation
 [18]: /network_monitoring/performance/setup/
-[19]: /getting_started/site/
-[20]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[21]: /agent/kubernetes/data_collected/#kube-state-metrics
+[19]: /security/agent/
+[20]: /getting_started/site/
+[21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[22]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 

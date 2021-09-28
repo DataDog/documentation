@@ -11,7 +11,7 @@ further_reading:
 kind: documentation
 title: RUM Android モニタリング
 ---
-Datadog *Real User Monitoring (RUM)* を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
+Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
 ## セットアップ
 

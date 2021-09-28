@@ -17,14 +17,15 @@ aliases:
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Advanced Guides" >}}
-    {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex Score by Service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
+    {{< nextlink href="tracing/guide/ignoring_apm_resources" >}}Discard Health Checks and Other Unwanted Spans by Ignoring Resources{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/ddsketch_trace_metrics/" >}}DDSketch based Metrics in APM{{< /nextlink >}}
-    {{< nextlink href="/api/v1/tracing/" >}}Trace API{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/ddsketch_trace_metrics/" >}}DDSketch Based Metrics in APM{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/send_traces_to_agent_by_api/" >}}Send Traces to the Agent by the Tracing API{{< /nextlink >}}
     {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide when to use Datadog APM and AWS X-Ray {{< /nextlink >}}
+    {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/send_traces_to_agent_by_api/" >}}Send Traces to the Agent by the Tracing API{{< /nextlink >}}
+
 {{< /whatsnext >}}

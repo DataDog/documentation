@@ -95,7 +95,7 @@ hostname: mymachine.mydomain
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-configuration-files/
 [3]: /ja/getting_started/tagging/#defining-tags
-[4]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -137,7 +137,7 @@ hostname: mymachine.mydomain
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-configuration-files/
 [3]: /ja/getting_started/tagging/#defining-tags
-[4]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -297,7 +297,7 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="モニタータグを作成"  style="width:80%;">}}
 
 [1]: /ja/metrics/distributions/
-[2]: /ja/developers/metrics/custom_metrics/
+[2]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
@@ -340,7 +340,7 @@ SLO を作成する場合は、ステップ 3 *Add name and tags* でタグを�
 [6]: /ja/api/v1/monitors/#edit-a-monitor
 [7]: /ja/api/v1/tags/#add-tags-to-a-host
 [8]: /ja/api/v1/tags/#update-host-tags
-[9]: /ja/api/v1/tracing/
+[9]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [10]: /ja/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /ja/api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
@@ -407,4 +407,4 @@ def algorithm_two():
 [7]: /ja/tracing/setup/
 [8]: /ja/developers/dogstatsd/
 [9]: /ja/developers/community/libraries/
-[10]: /ja/developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[10]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key

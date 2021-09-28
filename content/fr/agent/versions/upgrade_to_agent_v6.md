@@ -173,7 +173,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 3. Mettez à jour votre cache APT local et installez l'Agent :
     ```
     sudo apt-get update
-    sudo apt-get install datadog-agent
+    sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
 4. Copiez l'exemple de configuration à l'emplacement adéquat et spécifiez votre clé d'API :
@@ -292,7 +292,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 3. Mettez à jour votre cache APT local et installez l'Agent :
     ```
     sudo apt-get update
-    sudo apt-get install datadog-agent
+    sudo apt-get install datadog-agent datadog-signing-keys
     ```
 
 4. Copiez l'exemple de configuration à l'emplacement adéquat et spécifiez votre clé d'API :

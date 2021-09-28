@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md
 display_name: Vespa
 draft: false
 git_integration_title: vespa

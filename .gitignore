@@ -4,6 +4,10 @@ data/service_checks/
 data/npm
 integrations_data
 
+# htmltest tmp files
+bin/htmltest
+tmp
+
 # Ignore generated examples
 /examples
 content/en/api/**/*.go
@@ -62,6 +66,8 @@ static/images/marketplace
 # security rules
 content/en/security_platform/default_rules/*.md
 !content/en/security_platform/default_rules/_index.md
+content/en/security_platform/cloud_workload_security/agent_expressions.md
+content/en/security_platform/cloud_workload_security/backend.md
 
 # compliance rules
 content/en/compliance_monitoring/default_rules/*.md
@@ -168,10 +174,14 @@ __pycache__/
 
 /DataDog-dogweb-*/
 Makefile.config
+
+# data
 data/permissions.json
+data/agent_config.json
+
+agent_config_types_list.txt
 
 static/images/integrations_logos/2020w2.pdf
 
 # Generated resources from Hugo Pipes
 resources/_gen/
-

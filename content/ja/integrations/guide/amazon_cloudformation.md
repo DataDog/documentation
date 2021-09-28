@@ -6,9 +6,15 @@ dependencies:
 kind: documentation
 title: Datadog-Amazon CloudFormation
 ---
-[AWS CloudFormation][1] では、環境内のすべての AWS リソースを一度に記述、構成、プロビジョニングするためのテンプレートが提供されます。Datadog-AWS CloudFormation リソースを使用すると、サポートされている Datadog リソースとのやり取りが可能です。
+<div class="alert alert-warning">
+  Datadog-Amazon CloudFormation リソースは、us-east-1 リージョンのCloudFormation パブリックレジストリでのみ利用可能です。その他のリージョンでリソースを非公開で登録するには、提供されているパッケージを使用してください。
+</div>
 
-AWS マネジメントコンソール (UI) または AWS CLI のいずれかを使用して、これらのリソースを使用できます。
+
+
+[AWS CloudFormation][1] は、環境内のすべての AWS リソースを一度に記述、構成、プロビジョニングするためのテンプレートを提供します。Datadog-AWS CloudFormation リソースでは、サポートされている Datadog リソースとのやりとり、任意の Datadog データセンターへのリソースの送信、任意のリージョンにおける Datadog リソースを使用した拡張機能の非公開登録を行うことができます。
+
+これらのリソースにアクセスするには、AWS マネジメントコンソール (UI)  または AWS コマンドラインインターフェイス (CLI) を使用します。
 
 ## AWS マネジメントコンソール
 
@@ -24,7 +30,7 @@ AWS マネジメントコンソール (UI) または AWS CLI のいずれかを�
 
 4. 目的のリソース名を選択してそのスキーマに関する詳細情報を表示し、**Activate** をクリックします。
 
-5. 拡張機能の詳細ページで、次のように指定します。
+5. **Extension details** ページで、次のように指定します。
   - 拡張機能名
   - 実行ロール ARN
   - マイナーバージョンリリースの自動更新
@@ -32,7 +38,7 @@ AWS マネジメントコンソール (UI) または AWS CLI のいずれかを�
 
 6. リソースコンフィギュレーションについては、**クリアテキストの代わりに [AWS Secrets Manager][17] または同様のサービスを使用して Datadog API とアプリケーションキーを保存することを強くお勧めします**。
 
-  AWS Secrets Manager を使用している場合は、設定で API キーとアプリケーションキーを動的に参照できます。詳細については、[AWS ドキュメント][18]を参照してください。
+  AWS Secrets Manager を使用している場合は、コンフィギュレーションで API キーとアプリケーションキーを動的に参照できます。詳細については、[AWS ドキュメント][18]を参照してください。
 
   例:
 
@@ -45,7 +51,7 @@ AWS マネジメントコンソール (UI) または AWS CLI のいずれかを�
   }
   ```
 
-4. リソースを構成したら、アクティブ化された Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
+7. リソースを構成したら、アクティブ化された Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
 
 使用可能なコマンドとワークフローの詳細については、公式の [AWS ドキュメント][4]を参照してください。
 
@@ -90,7 +96,16 @@ AWS マネジメントコンソール (UI) または AWS CLI のいずれかを�
       * [利用可能なリソース]セクション(#利用可能なリソース)を参照してください。サポート中の S3 リンクの最新例がリンクされています。
     * `VERSION_ID`: ステップ `2` のコマンドによって返されるリソースの基本バージョン。
 
-4. AWS アカウントで、登録済みの Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
+4. ターミナルで以下を実行して、この新しく登録されたリソースコンフィギュレーションを設定します。
+
+    ```shell
+    aws cloudformation set-type-configuration \
+        --type-name "<DATADOG_RESOURCE_NAME>" \
+        --type RESOURCE \
+        --configuration '{"DatadogCredentials": {"ApiKey": "{{resolve:secretsmanager:MySecret:SecretString:SecretAPIKey}}", "ApplicationKey": "{{resolve:secretsmanager:MySecret:SecretString:SecretAppKey}}"}}'
+    ```
+
+5. AWS アカウントで、登録済みの Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
 
 使用可能なコマンドとワークフローの詳細については、公式の [AWS ドキュメント][4]を参照してください。
 
@@ -102,10 +117,10 @@ AWS マネジメントコンソール (UI) または AWS CLI のいずれかを�
 |-------------------------|-----------------------------------|---------------------------------------------------------|---------------------------------|-------------------------------|
 | ダッシュボード                | `Datadog::Dashboards::Dashboard`  | [Datadog ダッシュボードの作成、更新および削除][5]。      | `datadog-dashboards-dashboard`  | [スキーマハンドラーのバージョン][6]  |
 | Datadog AWSインテグレーション | `Datadog::Integrations::AWS`      | [Datadog と Amazon Web Service のインテグレーションを管理][7] | `datadog-integrations-aws`      | [スキーマハンドラーのバージョン][8]  |
-| モニター                | `Datadog::Monitors::Monitor`      | [Datadog モニターの作成、更新および削除][9]。       | `datadog-monitors-monitor`      | [スキーマハンドラーのバージョン][10] |
-| ダウンタイム               | `Datadog::Monitors::Downtime`     | [モニターのダウンタイムを有効化/無効化][11]。    | `datadog-monitors-downtime`     | [スキーマハンドラーのバージョン][12] |
-| ユーザー                    | `Datadog::IAM::User`              | [Datadog ユーザーの作成と管理][13]。                 | `datadog-iam-user`              | [スキーマハンドラーのバージョン][14] |
-| SLO                    | `Datadog::SLOs::SLO`              | [Datadog SLO を作成および管理します][19]。                 | `datadog-slos-slo`              | [スキーマハンドラーのバージョン][20] |
+| モニター                | `Datadog::Monitors::Monitor`      | [Datadog モニターの作成、更新および削除][9]        | `datadog-monitors-monitor`      | [スキーマハンドラーのバージョン][10] |
+| ダウンタイム               | `Datadog::Monitors::Downtime`     | [モニターのダウンタイムを有効化/無効化][11]     | `datadog-monitors-downtime`     | [スキーマハンドラーのバージョン][12] |
+| ユーザー                    | `Datadog::IAM::User`              | [Datadog ユーザーの作成と管理][13]                  | `datadog-iam-user`              | [スキーマハンドラーのバージョン][14] |
+| SLO                    | `Datadog::SLOs::SLO`              | [Datadog SLO の作成および管理][19]                   | `datadog-slos-slo`              | [スキーマハンドラーのバージョン][20] |
 
 ## トラブルシューティング
 

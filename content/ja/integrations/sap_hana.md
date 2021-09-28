@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_name: SAP HANA
 draft: false
 git_integration_title: sap_hana

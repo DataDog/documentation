@@ -47,6 +47,7 @@ exceptions:
   - DaemonSet
   - Data Collected
   - Datadog
+  - DatadogMetric
   - Datadog Agent Manager
   - Datadog for Government
   - Datadog Forwarder
@@ -185,6 +186,7 @@ exceptions:
   - Ruby
   - RumMonitor
   - SafeNet
+  - SaltStack
   - Security Monitoring
   - Security Signal
   - Security Signals

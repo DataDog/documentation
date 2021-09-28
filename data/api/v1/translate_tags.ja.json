@@ -123,10 +123,6 @@
     "name": "タイムボード",
     "description": "このエンドポイントは旧バージョンです。代わりに、[新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/#dashboards)を使用してください。"
   },
-  "tracing": {
-    "name": "トレーシング",
-    "description": "[Datadog を使用したトレース](https://docs.datadoghq.com/tracing)および [APM 用語](https://docs.datadoghq.com/tracing/visualization/services_list)の詳細をご覧ください。\n\nトレーシング API は、サービス側の API というよりはむしろ Agent の API です。\nトレースをローカルエンドポイント `http://localhost:8126/v0.3/traces` に送信して、それを Agent が Datadog に転送できるようにします。"
-  },
   "usage-metering": {
     "name": "使用料のメータリング",
     "description": "使用量計測 API を使用すると、Datadog の複数のファセットで 1 時間ごと、1 日ごと、および 1 か月ごとの使用量を取得できます。\nこの API は、すべての Pro および Enterprise のお客様が利用できます。\n使用量にアクセスできるのは[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)のみです。\n\n**注**: 使用量データは、発生してから最大 72 時間遅れます。\n過去 15 か月分が保持されます。"

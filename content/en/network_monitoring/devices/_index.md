@@ -27,7 +27,7 @@ Network Device Monitoring is designed to give you visibility into your on-premis
 
 1. Install the Datadog Agent.
 2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. View metrics collected on Datadog's out of the box dashboards:
+3. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][3]
     - [Across the performance on all interfaces][4]
 4. Catch issues before they arise with proactive monitoring on any [SNMP metric][5].
@@ -36,7 +36,7 @@ Network Device Monitoring is designed to give you visibility into your on-premis
 
 ### Generic profile
 
-The generic profile collects metrics for all devices not supported by a vendor profile. Metrics include TCP, UDP, IP, and interface metrics such as bandwidth utilization, volume sent/received, etc. 
+The generic profile collects metrics for all devices not supported by a vendor profile. Metrics include TCP, UDP, IP, and interface metrics such as bandwidth utilization, volume sent/received, etc.
 
 ### Vendor profiles
 
@@ -48,14 +48,14 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 - Cisco ISR 4431
 - Cisco Nexus
 - Cisco ICM
-- Cisco UC Virtual Machines 
+- Cisco UC Virtual Machines
 - Arista
 - Aruba
 - Checkpoint Firewall
 - Chatsworth PDU
 - APC UPS
 - F5 Big IP
-- Fortinet FortiGate 
+- Fortinet FortiGate
 - HP iLO
 - HP Proliant
 - Dell iDRAC

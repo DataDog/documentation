@@ -1,5 +1,5 @@
 ---
-title: Auth0 を SAML IdP として構成する方法
+title: Auth0 SAML IdP
 kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/

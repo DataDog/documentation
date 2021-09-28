@@ -108,7 +108,7 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous ass
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/getting_started/tagging/using_tags/
-[2]: /fr/developers/metrics/
+[2]: /fr/metrics/
 [3]: /fr/getting_started/tagging/assigning_tags/
 [4]: /fr/getting_started/tagging/assigning_tags/#configuration-files
 [5]: /fr/getting_started/tagging/assigning_tags/#ui

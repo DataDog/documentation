@@ -27,9 +27,9 @@ This section specifies the raw datagram format for metrics, events, and service 
 | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][1].                                    |
 | `<VALUE>`                           | Yes      | An integer or float.                                                                                                                             |
-| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET, `d` for DISTRIBUTION. See the [metric type documentation][2].      |
+| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET, `d` for DISTRIBUTION. See [Metric Types][2] for more details.         |
 | `<SAMPLE_RATE>`                     | No       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, and TIMER metrics. The default is `1`, which samples 100% of the time. |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). See the [tagging documentation][3] for guidance on defining tags. |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). For guidance on defining tags, see [Getting Started with Tags][3]. |
 
 Here are some example datagrams:
 
@@ -41,8 +41,8 @@ Here are some example datagrams:
 - `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
 
 
-[1]: /developers/metrics/#naming-metrics
-[2]: /developers/metrics/types/
+[1]: /metrics/#naming-metrics
+[2]: /metrics/types/
 [3]: /getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}
@@ -54,8 +54,8 @@ Here are some example datagrams:
 | `_e`                                 | Yes      | The datagram must begin with `_e`.                                                                                     |
 | `<TITLE>`                            | Yes      | The event title.                                                                                                       |
 | `<TEXT>`                             | Yes      | The event text. Insert line breaks with: `\\n`.                                                                        |
-| `<TITLE_UTF8_LENGTH>`                | Yes      | The length of the UTF-8-encoded `<TITLE>`                                                                              |
-| `<TEXT_UTF8_LENGTH>`                 | Yes      | The length of the UTF-8-encoded `<TEXT>`                                                                               |
+| `<TITLE_UTF8_LENGTH>`                | Yes      | The length (in bytes) of the UTF-8-encoded `<TITLE>`                                                                              |
+| `<TEXT_UTF8_LENGTH>`                 | Yes      | The length (in bytes) of the UTF-8-encoded `<TEXT>`                                                                               |
 | `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
 | `h:<HOSTNAME>`                       | No       | Add a hostname to the event. No default.                                                                               |
 | `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
@@ -103,7 +103,7 @@ _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 
 For Linux and other Unix-like OS, use Bash. For Windows, use PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits).
 
-DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is `127.0.0.1` and the collector port over UDP is `8125`. Refer to the [main DogStatsD documentation][3] to learn how to configure the Agent.
+DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is `127.0.0.1` and the collector port over UDP is `8125`. See [DogStatsD][3] for details on configuring the Agent.
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
@@ -207,7 +207,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or service checks on containerized environments, refer to the [DogStatsD on Kubernetes][3] documentation, in conjunction with the instructions for [configuring APM on Kubernetes][4], depending on your installation. The [Docker APM][5] documentation may also be helpful.
+To send metrics, events, or service checks on containerized environments, see [DogStatsD on Kubernetes][3], in conjunction with [configuring APM on Kubernetes][4], depending on your installation. The [Docker APM][5] documentation may also be helpful.
 
 ## Further Reading
 

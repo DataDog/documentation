@@ -196,5 +196,5 @@ GO
 
 [1]: /ja/integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
-[3]: /ja/developers/metrics/#metric-types
-[4]: /ja/developers/metrics/histograms/
+[3]: /ja/metrics/#metric-types
+[4]: /ja/metrics/histograms/

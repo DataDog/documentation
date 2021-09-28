@@ -17,9 +17,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ## Client tokens
 
-To manage your client tokens, go to your [Datadog API configuration page][1] in the `Client Tokens` section as shown here:
-
-{{< img src="account_management/api_app_keys/client_tokens.png" style="width:80%;" alt="Client tokens"  >}}
+To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
 
 Client tokens are unique to your organization. A client token is required by the [web browser log collector][3] to submit logs to Datadog, and is required by the [Real User Monitoring][4] to submit events and logs to Datadog.
 
@@ -27,34 +25,30 @@ For security reasons, API keys cannot be used to send data from a browser, as th
 
 ## Add an API key or client token
 
-To add a Datadog API key or client token, navigate to [Integration -> APIs][1], enter a name for your key or token, and click **Create API key** or **Create Client Token**.
+To add a Datadog API key or client token:
+1. Navigate to Organization settings, then click the **API keys** or **Client Tokens** tab.
+3. Click the **New Key** or **New Client Token** button, depending on which you're creating.
+4. Enter a name for your key or token.
+4. Click **Create API key** or **Create Client Token**.
 
-**Note**:
+**Notes:**
 
 * Your org must have at least one API key and at most 50 API keys.
-* Key names must be unique across your org.
+* Key names must be unique across your organization.
 
 ## Remove API keys or client tokens
 
-To remove a Datadog API key or client token, navigate to [Integration -> APIs][1] and click **Revoke** next to the key or token you want to remove:
-
-{{< img src="account_management/api_app_keys/api_keys_revoke.png" alt="Revoke API Keys"  >}}
+To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **trash can** icon with **Revoke** next to the key or token you want to remove.
 
 ## Add application keys
 
-To add a Datadog application key, navigate to [Teams -> Application Keys][2]. If you have the [permission][5] to create application keys you can click **New Key**:
+To add a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create application keys, click **New Key**.
 
-{{< img src="account_management/api_app_keys/application_keys_new_key.png" alt="Create new Application Keys"  >}}
-
-**Note**:
-
-* Application key names cannot be blank.
+**Note:** Application key names cannot be blank.
 
 ## Remove application keys
 
-To remove a Datadog application key, navigate to [Teams -> Application Keys][2]. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and then click **Revoke** next to it:
-
-{{< img src="account_management/api_app_keys/application_keys_revoke.png" alt="Revoke Application Keys"  >}}
+To remove a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
 
 ## Using multiple API keys
 
@@ -66,7 +60,7 @@ If your organization needs more than the built-in limit of 50 API keys, contact 
 
 ## Disabling a user account
 
-If a user's account is disabled, any application keys that the user created are deleted. Any API keys that were created by the disabled account are not deleted, and are still valid.
+If a user's account is disabled, any application keys that the user created are revoked. Any API keys that were created by the disabled account are not deleted, and are still valid.
 
 ## Transferring keys
 

@@ -301,7 +301,7 @@ echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.y
 ```text
  "containerDefinitions": [    {
       "name": "dd-agent",
-      "image": "datadog/agent:latest",
+      "image": "public.ecr.aws/datadog/agent:latest",
       "environment": [
           {
               "name": "DD_API_KEY",

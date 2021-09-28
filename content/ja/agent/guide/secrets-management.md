@@ -253,6 +253,14 @@ DD_SECRET_BACKEND_COMMAND=/readsecret.py
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 
+**注**: Datadog Cluster Agent は Datadog Agent とは異なるコマンドを使用します:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+```
+Datadog Cluster Agent はまた、シークレットヘルパーのコマンドも異なるものを使用します。Node Agent で使用する `agent secret` の代わりに、Cluster Agent では `cluster-agent secret-helper` が用いられます。
+
 この例のようにリンクさせると、パスワードフィールドが `/etc/secret-volume/password` ファイルに格納され、`ENC[password]` トークンを介してアクセス可能になります。
 
 **注**: `/var/run/secrets` ではなく、専用のフォルダを使用することをお勧めします。そうすれば、すべてのサブフォルダに（機密性の高い `/var/run/secrets/kubernetes.io/serviceaccount/token` ファイルを含む）スクリプトからアクセスできます。

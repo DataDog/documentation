@@ -11,9 +11,29 @@ further_reading:
 ---
 ## Présentation
 
-Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles via Docker Hub et GCR peuvent être utilisées dans votre environnement :
+Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles via GCR et Docker Hub peuvent être utilisées dans votre environnement :
 
 {{< tabs >}}
+{{% tab "GCR" %}}
+
+| Produit Datadog                          | GCR                                      | Commande Pull GCR                                                  |
+|------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
+| [Agent Docker][1]                        | [Agent Docker (v6+)][2]                  | `docker pull gcr.io/datadoghq/agent`                              |
+| Agent Docker (v5)                       | [Agent Docker (v5)][2]                   | `docker pull gcr.io/datadoghq/docker-dd-agent`                    |
+| [DogStatsD][3]                           | [DogStatsD][4]                           | `docker pull gcr.io/datadoghq/dogstatsd`                          |
+| [Agent de cluster Datadog][5]               | [Agent de Cluster][6]                       | `docker pull gcr.io/datadoghq/cluster-agent`                      |
+| [Worker d'emplacement privé Synthetic][7]  | [Worker d'emplacement privé Synthetic][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
+
+[1]: /fr/agent/docker/
+[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[3]: /fr/developers/dogstatsd/
+[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[5]: /fr/agent/cluster_agent/
+[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
+[7]: /fr/getting_started/synthetics/private_location/
+[8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
+
+{{% /tab %}}
 {{% tab "Docker Hub" %}}
 
 | Produit Datadog                         | Docker Hub                               | Commande Pull Docker                              |
@@ -33,26 +53,6 @@ Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles 
 [7]: https://hub.docker.com/r/datadog/cluster-agent
 [8]: /fr/getting_started/synthetics/private_location.md
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
-
-{{% /tab %}}
-{{% tab "GCR" %}}
-
-| Produit Datadog                          | GCR                                      | Commande Pull GCR                                                  |
-|------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
-| [Agent Docker][1]                        | [Agent Docker (v6+)][2]                  | `docker pull gcr.io/datadoghq/agent`                              |
-| Agent Docker (v5)                       | [Agent Docker (v5)][2]                   | `docker pull gcr.io/datadoghq/docker-dd-agent`                    |
-| [DogStatsD][3]                           | [DogStatsD][4]                           | `docker pull gcr.io/datadoghq/dogstatsd`                          |
-| [Agent de cluster Datadog][5]               | [Agent de Cluster][6]                       | `docker pull gcr.io/datadoghq/cluster-agent`                      |
-| [Worker d'emplacement privé Synthetic][7]  | [Worker d'emplacement privé Synthetic][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
-
-[1]: /fr/agent/docker/
-[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
-[3]: /fr/developers/dogstatsd/
-[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
-[5]: /fr/agent/cluster_agent/
-[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
-[7]: /fr/getting_started/synthetics/private_location/
-[8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
 
 {{% /tab %}}
 {{< /tabs >}}

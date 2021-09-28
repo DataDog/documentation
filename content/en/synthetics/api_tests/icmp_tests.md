@@ -17,16 +17,15 @@ further_reading:
   text: "Run ICMP pings on internal endpoints"
 ---
 
-
 ## Overview
 
 ICMP tests allow you to easily monitor the availability of your hosts and diagnose network communication issues. By asserting on the values received from one or more ICMP pings to your endpoint, Datadog can help detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration. The tests can also track the number of network hops (TTL) required to connect to your host and view traceroute results to discover details on each network hop along the path.
 
-ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand, or from within your [CI/CD pipelines][3].
+ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand, or from within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`TCP`][6], [`DNS`][7], or [`ICMP` test][8]), you can define your test's request.
+After choosing to create an [`ICMP` test][4], define your test's request.
 
 ### Define request
 
@@ -36,11 +35,10 @@ After choosing the type of test you want to create ([`HTTP`][4], [`SSL`][5], [`T
 2. Select or deselect **Track number of network hops (TTL)**. When selected, this option turns on a "traceroute" probe to discover all gateways along the path to the host destination.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
-5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][9].
-6. Select the **Locations** to run your ICMP test from. ICMP tests can run from [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
+5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
+6. Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
-
 
 ### Specify test frequency
 
@@ -52,7 +50,6 @@ ICMP tests can run:
 
 * [**Within your CI/CD pipelines**][3].
 * **On-demand** to run your tests whenever makes the most sense for your teams.
-
 
 ### Define assertions
 
@@ -69,7 +66,6 @@ You can create up to 20 assertions per API test by selecting **New Assertion** o
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
 
-
 ### Define alert conditions
 
 You can set alert conditions to determine the circumstances under which a test should fail and trigger an alert.
@@ -83,7 +79,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in the case of failed test results. By default, the retries are performed 300 milliseconds after the first failed test result. You can configure this interval through the [API][10].
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][6].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -91,9 +87,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 Your test sends a notification based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define what messages to send to your teams and how to send them.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -134,7 +130,8 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
+You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL and assertions of your ICMP tests.
+
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -144,7 +141,13 @@ To display your list of variables, type `{{` in your desired field:
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without being able to test the assertions against the endpoint. These reasons include:
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
+
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic ICMP tests. To get create, edit, and delete access to Synthetic ICMP tests, upgrade your user to one of those two [default roles][11].
+
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -152,14 +155,13 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /api/v1/synthetics/#create-a-test
-[4]: /synthetics/api_tests/http_tests
-[5]: /synthetics/api_tests/ssl_tests
-[6]: /synthetics/api_tests/tcp_tests
-[7]: /synthetics/api_tests/dns_tests
-[8]: /synthetics/api_tests/icmp_tests
-[9]: /synthetics/ci
-[10]: /monitors/notifications/?tab=is_alert#notification
-[11]: https://www.markdownguide.org/basic-syntax/
-[12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[13]: /synthetics/settings/#global-variables
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/api_tests/icmp_tests
+[5]: /synthetics/search/#search
+[6]: /api/latest/synthetics/#edit-an-api-test
+[7]: /monitors/notifications/?tab=is_alert#notification
+[8]: https://www.markdownguide.org/basic-syntax/
+[9]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /synthetics/settings/#global-variables
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles

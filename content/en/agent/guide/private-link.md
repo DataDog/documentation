@@ -57,8 +57,8 @@ dd_url: https://agent.datadoghq.com
 
 | Forwarder | Datadog Logs Service Name |
 | --------- | ------------------------- |
-| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
-| Lambda or custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
+| Datadog Agent or Lambda Extension | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
+| Lambda forwarder or custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -105,7 +105,7 @@ dd_url: https://agent.datadoghq.com
 10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
-    Once it shows _Available_, the AWS PrivateLink is ready to be used. 
+    Once it shows _Available_, the AWS PrivateLink is ready to be used.
 11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If it's not already there, add the following to the [Agent `datadog.yaml` configuration file][2]:
 
     ```yaml
@@ -126,7 +126,7 @@ dd_url: https://agent.datadoghq.com
 
 ### Inter-region peering
 
-To route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6]. 
+To route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][6].
 
 Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
 

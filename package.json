@@ -26,8 +26,7 @@
         "build:apiPages": "node -e 'require(\"./src/scripts/build-api-pages.js\").init()'",
         "dereference": "node ./src/scripts/dereference.js",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
-        "test": "./node_modules/.bin/jest",
-        "check-links": "node node_modules/link-checker/dd-link-checker.js"
+        "test": "./node_modules/.bin/jest"
     },
     "repository": {
         "type": "git",
@@ -61,7 +60,6 @@
         "jshint-stylish": "2.2.1",
         "json2csv": "^4.5.2",
         "lazypipe": "1.0.2",
-        "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/link-checker-v1.0.74.tgz",
         "lodash": "^4.17.20",
         "marked": "^1.2.7",
         "merge-stream": "2.0.0",
@@ -74,7 +72,6 @@
         "safe-json-stringify": "^1.2.0",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",
-        "translate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.37.tgz",
         "traverse": "0.6.6",
         "webpack": "^4.42.1",
         "yaml-lint": "^1.2.4"
