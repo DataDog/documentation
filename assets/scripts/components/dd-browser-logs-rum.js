@@ -34,6 +34,8 @@ if (datadogRum) {
         if (branch) {
             datadogRum.addRumGlobalContext('branch', branch);
         }
+
+        datadogRum.startSessionReplayRecording();
     }
 }
 
