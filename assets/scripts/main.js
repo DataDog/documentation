@@ -11,3 +11,5 @@ import './components/api';
 import './components/code-languages';
 import './components/language-select';
 import './components/bootstrap-dropdown-custom';
+
+console.error('test');
