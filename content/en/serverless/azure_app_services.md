@@ -210,22 +210,26 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 ## Troubleshooting
 
-1. If you are missing metrics and metadata in the APM trace panel and service page:
+### If you are missing metrics and metadata in the APM trace panel and service page
 
 It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs in the Datadog platform, as well as to avoid broken or empty screens. To fix this:
 
-a. Ensure you have installed the [Azure integration][9] for the Azure subscription where your application is running.
-b. Ensure that any App Service Plan filtering rules you may have applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
+1. Ensure you have installed the [Azure integration][9] for the Azure subscription where your application is running.
+
+2. Ensure that any App Service Plan filtering rules you may have applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
 
 
-2. If APM traces are not appearing in Datadog, try these steps:
+### If APM traces are not appearing in Datadog
 
-   a. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
-   b. Do a full stop and start of your application.
-   c. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
-   d. Still need help? Contact [Datadog support][24].
+1. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
+
+2. Do a full stop and start of your application.
+
+3. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
+
+Still need help? Contact [Datadog support][24].
 
 ### Further Reading
 
