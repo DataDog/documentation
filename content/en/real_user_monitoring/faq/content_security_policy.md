@@ -48,6 +48,14 @@ connect-src https://*.browser-intake-ddog-gov.com
 
 {{< /site-region >}}
 
+## Session Replay worker
+
+If you are using Session Replay, make sure to allow Workers with `blob:` URI schemes by adding the following `worker-src` entry:
+
+```txt
+worker-src: blob:;
+```
+
 ## CDN bundle URL
 
 If you are using the CDN async or CDN sync setup for [Real User Monitoring][4] or [browser log collection][5], you should also add the following `script-src` entry:

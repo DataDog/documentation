@@ -313,7 +313,7 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][6]. To configure the check, add the following annotations to the `default/kubernetes` service:
+On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][1]. To configure the check, add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
@@ -332,9 +332,9 @@ On OpenShift 4, all control plane components can be monitored using endpoint che
 
 ### Prerequisites
 
-1. Enable the Datadog [Cluster Agent][7]
-1. Enable [Cluster checks][8]
-1. Enable [Endpoint checks][9]
+1. Enable the Datadog [Cluster Agent][6]
+1. Enable [Cluster checks][7]
+1. Enable [Endpoint checks][8]
 1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
 ### API server
@@ -472,9 +472,9 @@ On OpenShift 3, all control plane components can be monitored using endpoint che
 
 ### Prerequisites
 
-1. Enable the Datadog [Cluster Agent][7]
-1. Enable [Cluster checks][8]
-1. Enable [Endpoint checks][9]
+1. Enable the Datadog [Cluster Agent][6]
+1. Enable [Cluster checks][7]
+1. Enable [Endpoint checks][8]
 1. Ensure that you are logged in with sufficient permissions to create and edit services.
 
 ### API server
@@ -776,9 +776,6 @@ spec:
 [3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
 [4]: https://docs.datadoghq.com/integrations/kube_scheduler/
 [5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane.html#monitor-control-plane-metrics
-[6]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
-[7]: https://docs.datadoghq.com/agent/cluster_agent/setup
-[8]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
-[9]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[10]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/how-monitoring-works/#4-2-pushprox
-[11]: https://rancher.com/docs/rancher/v2.5/en/monitoring-alerting/
+[6]: https://docs.datadoghq.com/agent/cluster_agent/setup
+[7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
+[8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/

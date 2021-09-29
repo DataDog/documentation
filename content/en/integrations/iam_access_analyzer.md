@@ -46,7 +46,7 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 5. Save your rule.
 
-6. Visit your [Log Explorer][2] to start exploring your logs.
+6. See the [Log Explorer][2] to start exploring your logs.
 
 [1]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [2]: https://app.datadoghq.com/logs

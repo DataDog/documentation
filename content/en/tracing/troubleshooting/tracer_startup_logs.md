@@ -250,20 +250,23 @@ Look for `DIAGNOSTICS` error output that says the tracer is unable to send trace
 
 If you have these errors, check that your tracer is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your Tracer & Agent configuration.
 
+See [Connection Errors][6] for information about errors indicating that your instrumented application cannot communicate with the Datadog Agent.
+
 ## Configuration settings
 
-If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][6] section of the documentation to confirm these integrations are supported.
+If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
 
 If an integration you are using is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration.
 
 ## Disabling startup logs
 
-For each language, you can disable startup logs by setting the environment variable `DD_TRACE_STARTUP_LOGS=false`, but do this only if the logs emitted are posing a problem. If later you are sending [debug][7] logs, remember to enable startup logs and send all relevant logs together to speed up your support case triage.
+For each language, you can disable startup logs by setting the environment variable `DD_TRACE_STARTUP_LOGS=false`, but do this only if the logs emitted are posing a problem. If later you are sending [debug][8] logs, remember to enable startup logs and send all relevant logs together to speed up your support case triage.
 
 [1]: /integrations/amazon_ecs/?tab=java#trace-collection
 [2]: /agent/kubernetes/?tab=helm
 [3]: /agent/docker/apm/?tab=java
 [4]: /tracing/send_traces/
 [5]: /help/
-[6]: /tracing/compatibility_requirements/
-[7]: /tracing/troubleshooting/tracer_debug_logs/
+[6]: /tracing/troubleshooting/connection_errors/
+[7]: /tracing/compatibility_requirements/
+[8]: /tracing/troubleshooting/tracer_debug_logs/

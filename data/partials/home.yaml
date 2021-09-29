@@ -36,13 +36,17 @@ nav_sections:
         link: infrastructure/
         icon: host-map
         desc: Track your hosts, containers, processes, and serverless functions
+      - title: Events
+        link: events/
+        icon: events
+        desc: Track notable changes and alerts across applications and infrastructure
       - title: Metrics
         link: metrics/
         icon: metric
         desc: Explore your metrics and create distributions
       - title: Alerting
         link: monitors/
-        icon: alert
+        icon: monitor
         desc: Create & manage monitors & notifications
       - title: APM & Continuous Profiler
         link: tracing/
@@ -76,7 +80,7 @@ nav_sections:
         link: mobile/
         icon: mobile
         desc: View Datadog alerts and dashboards on your mobile device
-      - title: Watchdog
+      - title: Datadog Watchdog
         link: watchdog/
         icon: watchdog
         desc: Automatically see trends in your applications & infrastructure metrics
@@ -105,7 +109,7 @@ nav_sections:
         desc: Learn how Datadog protects your data
       - title: Developers
         link: developers/
-        icon: wrench
+        icon: dev-code
         desc: Develop for the Datadog platform
 
 popular_searches:

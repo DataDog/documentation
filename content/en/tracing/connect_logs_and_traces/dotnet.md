@@ -120,10 +120,10 @@ For NLog version 4.5:
 For additional examples, see the automatic trace ID injection projects using [NLog 4.0][1], [NLog 4.5][2], or [NLog 4.6][3] on GitHub.
 
 
+
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
-
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
 To automatically inject correlation identifiers into your log messages:
@@ -155,12 +155,12 @@ If there is an active trace when the log is being written, trace and span IDs ar
 
 For additional examples, see [the Microsoft.Extensions.Logging automatic trace id injection project][5] on GitHub.
 
+
 [1]: https://docs.datadoghq.com/tracing/setup_overview/setup/dotnet-core/
 [2]: https://docs.microsoft.com/aspnet/core/fundamentals/logging/#log-scopes-1
 [3]: https://github.com/serilog/serilog-extensions-hosting
 [4]: https://github.com/serilog/serilog-extensions-logging
 [5]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/MicrosoftExtensionsExample/Program.cs
-
 {{% /tab %}}
 {{< /tabs >}}
 

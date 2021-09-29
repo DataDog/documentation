@@ -846,8 +846,8 @@ components:
       - deflate
       type: string
       x-enum-varnames:
-      - gzip
-      - deflate
+      - GZIP
+      - DEFLATE
     Creator:
       description: Object describing the creator of the shared element.
       properties:
@@ -859,6 +859,7 @@ components:
           type: string
         name:
           description: Name of the creator.
+          nullable: true
           type: string
       readOnly: true
       type: object
@@ -1172,6 +1173,7 @@ components:
           type: string
         description:
           description: Description of the dashboard.
+          nullable: true
           type: string
         id:
           description: Dashboard identifier.
@@ -1696,7 +1698,7 @@ components:
             **Note**: Attributes specifying the duration in `RRULE` are not supported
             (for example, `DTSTART`, `DTEND`, `DURATION`).
 
-            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/supress-alert-with-downtimes/?tab=api)'
+            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api)'
           example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
           type: string
         type:
@@ -2292,6 +2294,7 @@ components:
       - operation_name
       - resource_name
       - service
+      - name
       type: object
     FormulaAndFunctionApmResourceStatName:
       description: APM resource stat name.
@@ -2668,6 +2671,116 @@ components:
       type: string
       x-enum-varnames:
       - FREE_TEXT
+    FunnelQuery:
+      description: Updated funnel widget.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FunnelSource'
+        query_string:
+          description: The widget query.
+          example: '@browser.name:Chrome'
+          type: string
+        steps:
+          $ref: '#/components/schemas/FunnelSteps'
+      required:
+      - query_string
+      - data_source
+      - steps
+      type: object
+    FunnelRequestType:
+      description: Widget request type.
+      enum:
+      - funnel
+      example: funnel
+      type: string
+      x-enum-varnames:
+      - FUNNEL
+    FunnelSource:
+      default: rum
+      description: Source from which to query items to display in the funnel.
+      enum:
+      - rum
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+    FunnelSteps:
+      description: List of funnel steps.
+      items:
+        description: The funnel step.
+        properties:
+          facet:
+            description: The facet of the step.
+            example: '@view.name'
+            type: string
+          value:
+            description: The value of the step.
+            example: /apm/home
+            type: string
+        required:
+        - facet
+        - value
+        type: object
+      type: array
+    FunnelWidgetDefinition:
+      description: 'The funnel visualization displays a funnel of user sessions that
+        maps a sequence of view navigation and user interaction in your application.
+
+        '
+      properties:
+        requests:
+          description: Request payload used to query items.
+          example:
+          - request_type: funnel
+          - query:
+              data_source: rum
+              query_string: '@browser.name:Chrome'
+              steps:
+              - facet: '@view.name'
+                value: /logs
+              - facet: '@view.name'
+                value: /apm/home
+          items:
+            $ref: '#/components/schemas/FunnelWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: The title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: The size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/FunnelWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    FunnelWidgetDefinitionType:
+      default: funnel
+      description: Type of funnel widget.
+      enum:
+      - funnel
+      example: funnel
+      type: string
+      x-enum-varnames:
+      - FUNNEL
+    FunnelWidgetRequest:
+      description: Updated funnel widget.
+      properties:
+        query:
+          $ref: '#/components/schemas/FunnelQuery'
+        request_type:
+          $ref: '#/components/schemas/FunnelRequestType'
+      required:
+      - query
+      - request_type
+      type: object
     GCPAccount:
       description: Your Google Cloud Platform Account.
       properties:
@@ -5262,6 +5375,7 @@ components:
         aggr:
           description: Aggregation type.
           example: avg
+          nullable: true
           readOnly: true
           type: string
         display_name:
@@ -5635,7 +5749,7 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
 
@@ -6332,12 +6446,14 @@ components:
           type: string
         name:
           description: Name of the user.
+          nullable: true
           type: string
         status:
           description: Status of the user.
           type: string
         title:
           description: Title of the user.
+          nullable: true
           type: string
         verified:
           description: Whether the user is verified.
@@ -10845,6 +10961,8 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
         locations:
           description: Array of locations used to run the test.
           items:
@@ -12127,11 +12245,11 @@ components:
           description: The network host usage by tag(s).
           format: double
           type: number
-        profiled_containers_percentage:
+        profiled_container_percentage:
           description: The percentage of profiled containers usage by tag(s).
           format: double
           type: number
-        profiled_containers_usage:
+        profiled_container_usage:
           description: The profiled container usage by tag(s).
           format: double
           type: number
@@ -13999,7 +14117,7 @@ components:
 
             Learn more on how to use it in
 
-            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
           example: WEBHOOK_NAME
           type: string
         payload:
@@ -14117,7 +14235,7 @@ components:
 
             Learn more on how to use it in
 
-            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
           example: WEBHOOK_NAME
           type: string
         payload:
@@ -14331,6 +14449,7 @@ components:
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
+      - $ref: '#/components/schemas/FunnelWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
@@ -15389,31 +15508,31 @@ paths:
       responses:
         '202':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/IntakePayloadAccepted'
           description: Payload accepted
         '400':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
         '408':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Request timeout
         '413':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
@@ -16484,7 +16603,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - monitors_read
       summary: Get all downtimes
       tags:
       - Downtimes
@@ -16655,7 +16775,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - monitors_read
       summary: Get a downtime
       tags:
       - Downtimes
@@ -20139,7 +20260,7 @@ paths:
 
         - `change_aggr` change, pct_change
 
-        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)
+        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)
 
         - `time_window` last\_#m (between 1 and 2880 depending on the monitor type),
         last\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or
@@ -20477,7 +20598,7 @@ paths:
 
           [1]: https://app.datadoghq.com/monitors/manage
 
-          [2]: /monitors/manage_monitor/#find-the-monitors'
+          [2]: /monitors/manage/#find-the-monitors'
         in: query
         name: query
         required: false
@@ -20564,7 +20685,7 @@ paths:
 
           [1]: https://app.datadoghq.com/monitors/manage
 
-          [2]: /monitors/manage_monitor/#find-the-monitors'
+          [2]: /monitors/manage/#find-the-monitors'
         in: query
         name: query
         required: false
@@ -21796,7 +21917,7 @@ paths:
       operationId: SubmitMetrics
       requestBody:
         content:
-          application/json:
+          text/json:
             examples:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
@@ -21816,31 +21937,31 @@ paths:
       responses:
         '202':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/IntakePayloadAccepted'
           description: Payload accepted
         '400':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
         '408':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Request timeout
         '413':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
@@ -26187,7 +26308,8 @@ tags:
 
     find, and share all of your dashboards with your team and organization.'
   name: Dashboards
-- description: '[Downtiming](https://docs.datadoghq.com/monitors/downtimes) gives
+- description: '[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes)
+    gives
 
     you greater control over monitor notifications by allowing you to globally exclude
 
@@ -26266,10 +26388,10 @@ tags:
     notifies your team when a defined threshold has exceeded.
 
 
-    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/).'
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).'
   externalDocs:
     description: Find out more at
-    url: https://docs.datadoghq.com/monitors/monitor_types/
+    url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
 - description: 'Interact with your notebooks through the API to make it easier to
     organize, find, and
@@ -26327,13 +26449,13 @@ tags:
     - [Read more about Service Check and status codes.][5]
 
 
-    [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
+    [1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert
 
-    [2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert
+    [2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
 
-    [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
+    [3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+    [4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert
 
     [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks

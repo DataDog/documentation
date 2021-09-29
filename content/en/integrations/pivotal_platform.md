@@ -37,9 +37,9 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## PKS
 
-PKS environments can utilize the Datadog [Cluster Monitoring tile][1] and the [pivotal_pks][3] integration together to monitor your cluster.
+PKS environments can use the Datadog [Cluster Monitoring tile][1] and the [pivotal_pks][3] integration together to monitor your cluster.
 
-For kubelet cluster based workloads, utilize the [pivotal_pks integration][3] to install the Datadog Agent with your workers.
+For kubelet cluster based workloads, use the [pivotal_pks integration][3] to install the Datadog Agent with your workers.
 
 Use the [Cluster Monitoring Tile][1] to install the Datadog Agent on each non worker VM in your PKS environment. In environments without PAS installed, select the `Resource Config` section of the tile and set `instances` of the `datadog-firehose-nozzle` to `0`.
 
@@ -51,7 +51,7 @@ Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform 
 
 #### Pivotal Platform < 1.12
 
-Our buildpack uses the Pivotal Platform [multi-buildpack][6] feature that was introduced in version `1.12`.
+The Datadog buildpack uses the Pivotal Platform [multi-buildpack][6] feature that was introduced in version `1.12`.
 
 For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][7]. You must install and configure this backport in order to use Datadog's buildpack:
 
@@ -76,7 +76,7 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
 
       Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more refer to  [Pivotal Platform documentation][9] about buildpacks.
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][9].
 
 3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
@@ -99,7 +99,7 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more refer to [Pivotal Platform documentation][9] about buildpacks.
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][9].
 
 #### Meta-Buildpack **(deprecated)**
 
@@ -189,7 +189,7 @@ To build this buildpack, edit the relevant files and run the `./build` script. T
 
 ### DogStatsD
 
-See [the DogStatsD documentation][5] for more information. There is [a list of DogStatsD libraries][14] compatible with a wide range of applications.
+See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
 
 ## Monitor your Pivotal Platform cluster
 
@@ -224,7 +224,7 @@ If you'd like to create your own release, see the [Datadog Agent BOSH Release re
 
 #### Configure the Agent as an addon in your BOSH Director
 
-Add the following to your BOSH Director's runtime configuration file (e.g. `runtime.yml`):
+Add the following to your BOSH Director's runtime configuration file (`runtime.yml`):
 
 ```text
 ---
@@ -354,7 +354,7 @@ Redeploy the deployment to add the user.
 
 #### Add Firehose Nozzle jobs
 
-Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (e.g. cf-manifest.yml):
+Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (`cf-manifest.yml`):
 
 ```yaml
 jobs:

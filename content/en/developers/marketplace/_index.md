@@ -261,7 +261,7 @@ Email techpartners@datadoghq.com if you have any questions.
 [13]: /developers/custom_checks/prometheus/
 [14]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
 [15]: /developers/dogstatsd/?tab=hostagent
-[16]: /api/
+[16]: /api/latest/logs/
 [17]: /api/latest/metrics/
 [18]: /api/latest/events/
 [19]: /api/latest/service-checks/

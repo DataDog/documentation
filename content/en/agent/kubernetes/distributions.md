@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This section aims to document specificites and to provide good base configuration for all major Kubernetes distributions.
+This section aims to document specifics and to provide good base configuration for all major Kubernetes distributions.
 These configuration can then be customized to add any Datadog feature.
 
 * [AWS Elastic Kubernetes Service (EKS)](#EKS)
