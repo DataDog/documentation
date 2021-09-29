@@ -11,7 +11,7 @@ further_reading:
   - link: /synthetics/browser_tests
     tag: ドキュメント
     text: ブラウザテストを作成する
-  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
 ---

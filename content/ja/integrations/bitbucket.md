@@ -6,10 +6,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
-doc_link: https://docs.datadoghq.com/integrations/bitbucket/
+doc_link: 'https://docs.datadoghq.com/integrations/bitbucket/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
+  - link: 'https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/'
     tag: ブログ
     text: 'Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法'
 git_integration_title: bitbucket

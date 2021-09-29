@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/directory/README.md'
 display_name: Directory
 draft: false
 git_integration_title: directory

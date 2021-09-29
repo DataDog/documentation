@@ -4,7 +4,7 @@ kind: ガイド
 aliases:
   - /ja/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-  - link: https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics
+  - link: 'https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics'
     tag: ブログ
     text: メトリクスを生成、収集するストアドプロシージャを作成する
   - link: /integrations/mysql/
