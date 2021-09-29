@@ -145,7 +145,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 ENV DD_TRACE_VERSION 0.65.1
 
-# clone dd-tr   ace-php repo (https://github.com/DataDog/dd-trace-php)
+# clone dd-trace-php repo (https://github.com/DataDog/dd-trace-php)
 WORKDIR /tmp
 RUN git clone --single-branch --branch=${DD_TRACE_VERSION} --depth 1 https://github.com/DataDog/dd-trace-php.git
 WORKDIR /tmp/dd-trace-php
