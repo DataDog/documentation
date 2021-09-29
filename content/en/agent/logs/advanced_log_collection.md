@@ -443,6 +443,37 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
+### Automatic Multi-line aggregation
+With agent 7.31+ `auto_multi_line_detection` can be enabled which allows the agent to detect common multi line patterns automatically.
+
+`auto_multi_line_detection` can be enabled globally in the `datadog.yaml`
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+```
+
+It can also be enabled or disabled (overriding the global config) per log configuration:
+
+```yaml
+logs:
+  auto_multi_line_detection: true
+```
+
+Automatic mutli-line detection uses a list of common regular expressions to attempt to match logs. If the built in list is not sufficient, you can also add custom patterns in the `datadog.yaml
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+```
+
+With this feature enabled, when a new log file is opened the agent will try to detect a pattern. During this process the logs are sent as single lines. Once the detection threshold is met all future logs for that source will be aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
+
+**Note**: If your log files rotate periodically, it is recommended to only use this feature when the rotated file replaces the previously active file with the same name. The agent will reuse a previously detected pattern on the newly rotated file to avoid re-running detection. 
+
 ## Commonly used log processing rules
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][2] to see a list of examples.
