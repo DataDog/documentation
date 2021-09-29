@@ -638,7 +638,7 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
     weight: 308
-  - name: Kubernetes Cluster Agent
+  - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
