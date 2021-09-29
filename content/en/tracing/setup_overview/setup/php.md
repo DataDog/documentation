@@ -121,6 +121,8 @@ Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoi
 
 If you can't find your distribution, you can [manually install][8] the PHP extension.
 
+If you are required to build our extension, for example to support arm64 architecture, follow instructions for [manually build][9] the PHP extension.
+
 ## Automatic instrumentation
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
@@ -155,7 +157,7 @@ env[DD_AGENT_HOST] = $SOME_ENV
 env[DD_SERVICE] = my-app
 ```
 
-Alternatively, you can use [`SetEnv`][9] from the server config, virtual host, directory, or `.htaccess` file.
+Alternatively, you can use [`SetEnv`][10] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
 SetEnv DD_TRACE_DEBUG true
@@ -174,7 +176,7 @@ env[DD_AGENT_HOST] = $SOME_ENV
 env[DD_SERVICE] = my-app
 ```
 
-**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][10] for more details.
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][11] for more details.
 
 ### PHP CLI server
 
@@ -304,7 +306,7 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **Default**: `false`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][11] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][12] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.
 
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
@@ -330,27 +332,27 @@ The table below specifies the default service names for each integration. Change
 
 Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
-| Integration       | Service Name      |
-|-------------------|-------------------|
-| CakePHP           | `cakephp`         |
-| CodeIgniter       | `codeigniter`     |
-| cURL              | `curl`            |
-| ElasticSearch     | `elasticsearch`   |
-| Eloquent          | `eloquent`        |
-| Guzzle            | `guzzle`          |
-| Laravel           | `laravel`         |
-| Lumen             | `lumen`           |
-| Memcached         | `memcached`       |
-| Mongo             | `mongo`           |
-| Mysqli            | `mysqli`          |
-| PDO               | `pdo`             |
-| PhpRedis          | `phpredis`        |
-| Predis            | `predis`          |
-| Slim              | `slim`            |
-| Symfony           | `symfony`         |
-| WordPress         | `wordpress`       |
-| Yii               | `yii`             |
-| ZendFramework     | `zendframework`   |
+| Integration   | Service Name    |
+| ------------- | --------------- |
+| CakePHP       | `cakephp`       |
+| CodeIgniter   | `codeigniter`   |
+| cURL          | `curl`          |
+| ElasticSearch | `elasticsearch` |
+| Eloquent      | `eloquent`      |
+| Guzzle        | `guzzle`        |
+| Laravel       | `laravel`       |
+| Lumen         | `lumen`         |
+| Memcached     | `memcached`     |
+| Mongo         | `mongo`         |
+| Mysqli        | `mysqli`        |
+| PDO           | `pdo`           |
+| PhpRedis      | `phpredis`      |
+| Predis        | `predis`        |
+| Slim          | `slim`          |
+| Symfony       | `symfony`       |
+| WordPress     | `wordpress`     |
+| Yii           | `yii`           |
+| ZendFramework | `zendframework` |
 
 #### Map resource names to normalized URI
 
@@ -363,14 +365,14 @@ Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REG
 For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
-|:-----------------------------------|:--------------|
+| :--------------------------------- | :------------ |
 | **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
 | **POST** request to `/bar?foo=bar` | `POST /bar`   |
 
 Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
 
 | URL (GET request)                              | Resource Name      |
-|:-----------------------------------------------|:-------------------|
+| :--------------------------------------------- | :----------------- |
 | `/user/123/show`                               | `GET /user/?/show` |
 | `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
@@ -383,8 +385,8 @@ You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLE
 There are a few cases that are not covered by the automatic normalization that is applied.
 
 | URL (GET request)                | Expected Resource Name        |
-|:---------------------------------|:------------------------------|
-| `/using/prefix/id123/for/id`    | `GET /using/prefix/?/for/id`  |
+| :------------------------------- | :---------------------------- |
+| `/using/prefix/id123/for/id`     | `GET /using/prefix/?/for/id`  |
 | `/articles/slug-of-title`        | `GET /articles/?`             |
 | `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
 | `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
@@ -399,7 +401,7 @@ There are two classes of scenarios that are not covered by automatic normalizati
 This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
 | URL                          | regex     | Expected Resource Name       |
-|:-----------------------------|:----------|:-----------------------------|
+| :--------------------------- | :-------- | :--------------------------- |
 | `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
 
 Note that because the format of this variable is a CSV, the comma character `,` is not escaped and cannot be used in your regular expressions.
@@ -414,7 +416,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][12] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][13] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Tracing CLI scripts
@@ -666,7 +668,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### PHP installed from the Sury Debian DPA
 
-If PHP was installed from the [Sury Debian DPA][13], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][14], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -675,7 +677,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][14].
+The Debian project maintains a wiki page with [instructions to install debug symbols][15].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -725,7 +727,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][15], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][16], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -761,7 +763,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][16] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][17] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -771,7 +773,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][17]):
+Import the signing key (make sure the [signing key is correct][18]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -848,7 +850,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][18] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][19] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -926,13 +928,14 @@ For Apache, run:
 [6]: https://app.datadoghq.com/apm/services
 [7]: /tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
 [8]: /tracing/faq/php-tracer-manual-installation
-[9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[10]: /tracing/setup/nginx/#nginx-and-fastcgi
-[11]: https://github.com/mind04/mod-ruid2
-[12]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[13]: https://packages.sury.org/php/
-[14]: https://wiki.debian.org/HowToGetABacktrace
-[15]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[16]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[18]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[9]: /tracing/faq/php-tracer-manual-installation/#install-from-source
+[10]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[11]: /tracing/setup/nginx/#nginx-and-fastcgi
+[12]: https://github.com/mind04/mod-ruid2
+[13]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[14]: https://packages.sury.org/php/
+[15]: https://wiki.debian.org/HowToGetABacktrace
+[16]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[17]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[18]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[19]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

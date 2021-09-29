@@ -62,7 +62,7 @@ ddtrace.request_init_hook=/opt/datadog-php/dd-trace-sources/bridge/dd_wrap_autol
 The correct value for `PHP_EXTENSION_VERSION` depends on the PHP version.
 
 | PHP Version | PHP_EXTENSION_VERSION |
-|-------------|-----------------------|
+| ----------- | --------------------- |
 | `5.4`       | `20100412`            |
 | `5.5`       | `20121113`            |
 | `5.6`       | `20131106`            |
@@ -75,43 +75,109 @@ The correct value for `PHP_EXTENSION_VERSION` depends on the PHP version.
 
 ### Install from source
 
-[Download the source code `tar.gz` or `.zip` file][3] from the releases page and unzip the file. Then compile and install the extension with the commands below.
+Installation from source is only recommended if the provided installers do not work in a specific platform. For example on arm64 machines.
 
-```bash
-$ cd /path/to/dd-trace-php
-$ phpize
-$ ./configure --enable-ddtrace
-$ make
-$ sudo make install
+#### Centos example
+
+Follow the instructions below to build the PHP extension in a Centos container. Paths might vary depending on the PHP installation method, but the `Dockerfile` below should be easily adaptable to any environment.
+
+```
+FROM centos:8
+
+# required dependencies
+RUN yum install -y php php-fpm php-devel php-json git gcc make which curl-devel
+
+
+# install composer (https://getcomposer.org/download/)
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php --install-dir=/usr/bin --filename=composer
+
+ENV DD_TRACE_VERSION 0.65.1
+
+# clone dd-trace-php repo (https://github.com/DataDog/dd-trace-php)
+WORKDIR /tmp
+RUN git clone --single-branch --branch=${DD_TRACE_VERSION} --depth 1 https://github.com/DataDog/dd-trace-php.git
+WORKDIR /tmp/dd-trace-php
+
+# build
+RUN make all CFLAGS="-std=gnu11 -O2 -g -Wall -Wextra" ECHO_ARG="-e"
+RUN make generate
+
+# install
+# 1) copy the bridge folder to some location
+RUN mkdir -p /opt/datadog/dd-trace-php && \
+    cp -r bridge/ /opt/datadog/dd-trace-php/
+
+# 2) copy ./tmp/build_extension/modules/ddtrace.so to your extension directory.
+#    You can find your extension directory running:
+#       - for `php` --> `php -i | grep -i extension_dir`
+#       - for `php-fpm` --> `php-fpm -i | grep -i extension_dir`
+#    in this specific example it results to be /usr/lib64/php/modules/
+RUN cp ./tmp/build_extension/modules/ddtrace.so /usr/lib64/php/modules/
+
+# 3) add the following lines to 98-ddtrace.ini in your ini settings directory.
+#    You can find your ini settings directory running:
+#       - for `php` --> `php -i | grep -i 'Scan this dir for additional .ini files'`
+#       - for `php-fpm` --> `php-fpm -i | grep -i 'Scan this dir for additional .ini files'`
+#    in this specific example it results to be /etc/php.d
+RUN echo "extension=ddtrace.so" >> /etc/php.d/98-ddtrace.ini
+RUN echo "datadog.trace.request_init_hook=/opt/datadog/dd-trace-php/bridge/dd_wrap_autoloader.php" >> /etc/php.d/98-ddtrace.ini
 ```
 
-#### Modify the INI file
+#### Ubuntu example
 
-Modify the `php.ini` configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
+Follow the instructions below to build the PHP extension in a Ubuntu container. Paths might vary depending on the PHP installation method, but the `Dockerfile` below should be easily adaptable to any environment.
 
-```bash
-$ php --ini
+```
+FROM ubuntu:20.04
 
-Configuration File (php.ini) Path: /usr/local/etc/php/7.2
-Loaded Configuration File:         /usr/local/etc/php/7.2/php.ini
-...
+ENV DEBIAN_FRONTEND=noninteractive
+
+# required dependencies
+RUN apt update; \
+    apt install -y build-essential git libcurl4-openssl-dev php7.4-cli php7.4-fpm php7.4-dev
+
+# install composer (https://getcomposer.org/download/)
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php --install-dir=/usr/bin --filename=composer
+
+ENV DD_TRACE_VERSION 0.65.1
+
+# clone dd-tr   ace-php repo (https://github.com/DataDog/dd-trace-php)
+WORKDIR /tmp
+RUN git clone --single-branch --branch=${DD_TRACE_VERSION} --depth 1 https://github.com/DataDog/dd-trace-php.git
+WORKDIR /tmp/dd-trace-php
+
+# build
+RUN make all CFLAGS="-std=gnu11 -O2 -g -Wall -Wextra" ECHO_ARG="-e"
+RUN make generate
+
+# install
+# 1) copy the bridge folder to some location
+RUN mkdir -p /opt/datadog/dd-trace-php && \
+    cp -r bridge/ /opt/datadog/dd-trace-php/
+
+# 2) copy ./tmp/build_extension/modules/ddtrace.so to your extension directory.
+#    You can find your extension directory running:
+#       - for `php` --> `php -i | grep -i extension_dir`
+#       - for `php-fpm` --> `php-fpm7.4 -i | grep -i extension_dir`
+#    in this specific example it results to be /usr/lib/php/20190902
+RUN cp ./tmp/build_extension/modules/ddtrace.so /usr/lib/php/20190902/
+
+# 3) add the following lines to 98-ddtrace.ini in your ini settings directory.
+#    You can find your ini settings directory running:
+#       - for `php` --> `php -i | grep -i 'Scan this dir for additional .ini files'`
+#       - for `php-fpm` --> `php-fpm7.4 -i | grep -i 'Scan this dir for additional .ini files'`
+#    in this specific example it results to be /etc/php/7.4/cli/conf.d and /etc/php/7.4/fpm/conf.d respectively
+RUN echo "extension=ddtrace.so" >> /etc/php/7.4/cli/conf.d/98-ddtrace.ini
+RUN echo "datadog.trace.request_init_hook=/opt/datadog/dd-trace-php/bridge/dd_wrap_autoloader.php" >> /etc/php/7.4/cli/conf.d/98-ddtrace.ini
+RUN echo "extension=ddtrace.so" >> /etc/php/7.4/fpm/conf.d/98-ddtrace.ini
+RUN echo "datadog.trace.request_init_hook=/opt/datadog/dd-trace-php/bridge/dd_wrap_autoloader.php" >> /etc/php/7.4/fpm/conf.d/98-ddtrace.ini
 ```
 
-Add the following line to the `php.ini` file.
-
-```ini
-extension=ddtrace.so
-```
-
-Depending on how you manually installed the PHP tracer, you also need to add this line to the `php.ini` file.
-
-```ini
-# If you installed from .tar.gz
-ddtrace.request_init_hook=<PATH_TO_EXTRACTED_TAR_GZ>/dd-trace-sources/bridge/dd_wrap_autoloader.php
-
-# If you installed from source
-ddtrace.request_init_hook=<PATH_TO_SOURCES>/bridge/dd_wrap_autoloader.php
-```
+#### Final steps
 
 After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
 
@@ -124,12 +190,11 @@ Datadog PHP tracer extension
 ...
 ```
 
-Visit a tracing-enabled endpoint of your application and view the [APM UI][4] to see the [traces][5].
+Visit a tracing-enabled endpoint of your application and view the [APM UI][3] to see the [traces][4].
 
 **Note**: It might take a few minutes before traces appear in the UI.
 
 [1]: /tracing/setup/php/#install-the-extension
 [2]: https://github.com/DataDog/dd-trace-php/releases
-[3]: https://github.com/DataDog/dd-trace-php/releases/latest
-[4]: https://app.datadoghq.com/apm/services
-[5]: /tracing/visualization/#trace
+[3]: https://app.datadoghq.com/apm/services
+[4]: /tracing/visualization/#trace
