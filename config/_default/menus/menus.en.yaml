@@ -2395,12 +2395,12 @@ main:
     url: synthetics/api_tests/ssl_tests
     parent: api_tests
     weight: 102
-  - name: TCP
-    url: synthetics/api_tests/tcp_tests
-    parent: api_tests
-    weight: 103
   - name: DNS
     url: synthetics/api_tests/dns_tests
+    parent: api_tests
+    weight: 103
+  - name: TCP
+    url: synthetics/api_tests/tcp_tests
     parent: api_tests
     weight: 104
   - name: UDP
