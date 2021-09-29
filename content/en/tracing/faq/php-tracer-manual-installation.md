@@ -179,7 +179,7 @@ RUN echo "datadog.trace.request_init_hook=/opt/datadog/dd-trace-php/bridge/dd_wr
 
 #### Final steps
 
-After restarting the web server/PHP SAPI (e.g., `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
+After restarting the web server/PHP SAPI (for example, `$ sudo apachectl restart`, `$ sudo service php-fpm restart`, etc.) the extension is enabled. To confirm that the extension is loaded, run:
 
 ```bash
 $ php --ri=ddtrace
