@@ -6,10 +6,10 @@ aliases:
   - /ja/monitors/monitor_uptime_widget/
   - /ja/monitors/slos/
 further_reading:
-  - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
+  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
     tag: ブログ
     text: Datadog で SLO のステータスとエラーバジェットを追跡する
-  - link: https://learn.datadoghq.com/course/view.php?id=34
+  - link: 'https://learn.datadoghq.com/course/view.php?id=34'
     tag: ラーニングセンター
     text: サービスレベル目標 (SLO) について
 ---
@@ -46,21 +46,14 @@ Datadog の[サービスレベル目標ステータスページ][1]を使用し�
 3. 最大 3 つの SLO ターゲットをセットアップします。それぞれのターゲットはターゲット割合とローリングタイムウィンドウから成ります。利用可能なタイムウィンドウは、7 日、30 日、90 日です。SLO のターゲット割合を SLA で指定するターゲット割合より厳し目に設定することが推奨されます。
 4. 最後に、SLO にタイトルを付け詳細を入力するか、説明にリンクを足しタグを追加して保存します。
 
-SLO を設定したら、[サービスレベル目標リストビュー][1]から SLO を選択して、詳細サイドパネルを開きます。サイドパネルには、SLO の各ターゲットの全体的なステータスのパーセンテージと残りのエラーバジェット、および SLI の履歴のステータスバー (モニターベースの SLO) または棒グラフ (メトリクスベースの SLO) が表示されます。1 つの[マルチアラートモニター][5]を使用してグループ化されたモニターベースの SLO を作成した場合、または [`sum by` 句][6]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータスのパーセンテージと残りのエラーバジェットに加えて、個々のグループのステータスのパーセンテージと残りのエラーバジェットが表示されます。
-
-**例:** アベイラビリティーゾーンごとにレイテンシを追跡するためにモニターベースの SLO 作成すると、全体的な SLO と SLO が追跡している個々のアベイラビリティーゾーンのステータス割合とエラーバジェットの残量が表示されます。
-
-### SLO ターゲットの設定
-
-エラーバジェットとエラーバジェットアラートの利点を活用するには、SLO ターゲット値を 100% 未満に厳密に設定する必要があります。
-
-100% の目標を設定するということは、エラーバジェットが 100% に等しいため、エラーバジェットが 0% になることを意味します (SLO ターゲット)。許容可能なリスクを表すエラーバジェットがないと、顧客対応の信頼性を維持するという相反する優先順位と機能開発への投資との間の整合性を見つけることが困難になります さらに、目標値が 100% の SLO は、SLO アラート評価でゼロ除算エラーにつながります。
-
 **注:** SLO で指定できる小数の桁数は、SLO の種類と選択するタイムウィンドウに応じて異なります。それぞれの SLO の種類について、詳しくは次のリンクを参照してください。
 
-[モニターベースの SLO][7]: 7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位まで。
+[モニターベースの SLO][5]: 7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位まで。
+[メトリクスベースの SLO][6]: すべての目標について小数第 3 位まで。
 
-[メトリクスベースの SLO][8]: すべての目標について小数第 3 位まで。
+SLO を設定したら、[サービスレベル目標ステータスページ][1]でリストビューから SLO を選択し、詳細なサイドパネルを開くことができます。サイドパネルには、その SLO 目標それぞれの全体的なステータス割合とエラーバジェットの残量が表示されます。また、SLI の履歴のステータスバー（モニターベースの SLO）と棒グラフ（メトリクスベースの SLO）も表示されます。[マルチアラートモニター][7]を 1 つ使用してグループ化されたモニターベースの SLO を作成するか、[`sum by` 節][8]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータス割合および残りのエラーバジェットに加え、それぞれ個々のグループに関するステータス割合およびエラーバジェットの残量も同じく表示されます。
+
+**例:** アベイラビリティーゾーンごとにレイテンシを追跡するためにモニターベースの SLO 作成すると、全体的な SLO と SLO が追跡している個々のアベイラビリティーゾーンのステータス割合とエラーバジェットの残量が表示されます。
 
 ## SLO の変更
 
@@ -160,28 +153,6 @@ SLO のコンフィギュレーションをプロアクティブに管理する�
 
 SLO を作成した後に、SLO サマリーダッシュボードウィジェットを使用して、SLO のステータスをダッシュボードメトリクス、ログ、APM データと合わせて表示することが可能です。SLO ウィジェットについて詳しくは、[SLO ウィジェットのドキュメント][2]ページを参照してください。
 
-## SLO ステータスの修正
-
-ステータス修正により、SLO がステータスおよびエラーバジェットの計算から除外する計画保守などの期間を指定できます。
-
-SLO の修正ウィンドウを作成すると、指定した期間が SLO の計算から削除されます。
-- モニターベースの SLO の場合、修正ウィンドウの時間はカウントされません。
-- メトリクスベースの SLO の場合、修正ウィンドウ内のすべての良好イベントと不良イベントはカウントされません。
-
-ステータス修正は、[SLO ステータス修正 API][12]、[Terraform][13]、UI 経由の公開ベータ版です。
-
-#### UI でのアクセス
-
-UI で SLO ステータス修正にアクセスするには
-
-1. 新しい SLO を作成するか、既存の SLO をクリックします。
-2. SLO の詳細サイドパネルビューに移動します。
-3. 歯車アイコンの下で、**Correct Status** を選択して、**Status Corrections** 作成モーダルにアクセスします。
-4. **Time Correction Window**、**Correction Type** を選択し、**Notes** を追加します。
-5. **Apply Correction** をクリックします。
-
-既存のステータス修正を表示、編集、削除するには、SLO の詳細サイドパネルビューの上部にある **Corrections** タブをクリックします。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -190,12 +161,10 @@ UI で SLO ステータス修正にアクセスするには
 [2]: /ja/dashboards/widgets/slo/
 [3]: /ja/monitors/service_level_objectives/metric/
 [4]: /ja/monitors/service_level_objectives/monitor/
-[5]: /ja/monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[6]: /ja/monitors/service_level_objectives/metric/#define-queries
-[7]: /ja/monitors/service_level_objectives/monitor/#set-your-slo-targets
-[8]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
+[5]: /ja/monitors/service_level_objectives/monitor/#set-your-slo-targets
+[6]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
+[7]: /ja/monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[8]: /ja/monitors/service_level_objectives/metric/#define-queries
 [9]: /ja/monitors/service_level_objectives/#saved-views
 [10]: /ja/api/v1/events/#query-the-event-stream
 [11]: /ja/monitors/monitor_types/event/
-[12]: /ja/api/latest/service-level-objective-corrections/
-[13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

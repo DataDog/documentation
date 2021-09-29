@@ -2,7 +2,7 @@
 title: ページのパフォーマンスの監視
 kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
     tag: ブログ
     text: リアルユーザーモニタリング
   - link: /real_user_monitoring/explorer/
@@ -14,7 +14,7 @@ further_reading:
   - link: /real_user_monitoring/dashboards/
     tag: Documentation
     text: RUM ダッシュボード
-  - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
+  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/'
     tag: ブログ
     text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
 ---
@@ -42,9 +42,7 @@ RUM ビューイベントでは、すべてのページビューのパフォー�
 | [First Input Delay][6]        | インタラクティブなアクティビティ    | ユーザーがページを最初に操作してからブラウザが応答するまでの経過時間。             | 100ms以下      |
 | [Cumulative Layout Shift][7]  | ビジュアルの安定性 | 動的に読み込まれるコンテンツ (サードパーティの広告など) による予期しないページ移動を定量化します。0 はシフトが発生しないことを意味します。 | 0.1以下        |
 
-**注**:
-- バックグラウンドで開かれたページの First Input Delay および Largest Contentful Paint は収集されません（たとえば、新規タブや焦点のないウィンドウ）。
-- 実際のユーザーページビューから収集されたメトリクスは、 [Synthetics ブラウザテスト][8]など固定環境で読み込まれたページ用に計算されたメトリクスと異なる場合があります。
+**注**: 実際のユーザーページビューから収集されたメトリクスは、 [Synthetics ブラウザテスト][8]など固定環境で読み込まれたページ用に計算されたメトリクスと異なる場合があります。
 
 ### すべてのパフォーマンスメトリクス
 

@@ -8,7 +8,6 @@ aliases:
 {{< whatsnext desc="全般ガイド:" >}}
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Datadog のパーセンタイルグラフ作成{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/query-to-the-graph" >}}クエリからグラフまで{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/quick-graphs" >}}クイックグラフ{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="非推奨の API:" >}}
