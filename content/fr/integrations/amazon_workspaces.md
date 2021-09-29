@@ -7,18 +7,19 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
+description: Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/
 draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
+integration_id: amazon-workspaces
 integration_title: AWS Workspaces
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_workspaces
 public_title: "Intégration Datadog/AWS\_Workspaces"
-short_description: 'Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.'
+short_description: Surveillez les connexions ayant échoué, la latence de session, les espaces de travail qui ne sont pas sains et plus encore.
 version: '1.0'
 ---
 ## Présentation
@@ -42,17 +43,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon WorkSpaces de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon WorkSpaces de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_workspace` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon WorkSpaces dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon WorkSpaces dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
 
 ## Données collectées
 
