@@ -113,8 +113,8 @@ The alert conditions vary slightly based on the chosen detection method.
 The evaluation frequency changes based on the evaluation time frame you select:
 
 * `timeframe < 24h`: evaluation performs every 1 minute.
-* `24h < timeframe < 48h`: evaluation performs every 10 minutes.
-* `timeframe > 48h`: evaluation performs every 30 minutes.
+* `24h <= timeframe < 48h`: evaluation performs every 10 minutes.
+* `timeframe >= 48h`: evaluation performs every 30 minutes.
 
 **Definitions**:
 
