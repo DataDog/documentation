@@ -61,11 +61,11 @@ For a given 10 minute interval, Datadog accepts the following combinations. To a
 
 ## APM rate limits
 
-Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][8].  If you have questions, before you change the limits, consult with our [support team][1].
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][8]. If you have questions, before you change the limits, consult with the Datadog [support team][1].
 
 ## Modifying, discarding, or obfuscating spans
 
-There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see the [Security and Agent Customization][9] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1] and provide us with details of your desired outcome.
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see [Security and Agent Customization][9]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
 
 ## Troubleshooting data requested by Datadog Support
 
