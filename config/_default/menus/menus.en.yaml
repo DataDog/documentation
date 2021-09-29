@@ -2649,6 +2649,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
     weight: 803
+  - name: Track iOS Errors
+    url: real_user_monitoring/error_tracking/ios
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_ios
+    weight: 804
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
