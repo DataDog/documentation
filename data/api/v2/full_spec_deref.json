@@ -3916,13 +3916,15 @@
                       "description": "Type of the single value field definitions.",
                       "enum": [
                         "dropdown",
-                        "textbox"
+                        "textbox",
+                        "autocomplete"
                       ],
                       "example": "dropdown",
                       "type": "string",
                       "x-enum-varnames": [
                         "DROPDOWN",
-                        "TEXTBOX"
+                        "TEXTBOX",
+                        "AUTOCOMPLETE"
                       ]
                     },
                     "value": {
@@ -4091,13 +4093,15 @@
                           "description": "Type of the single value field definitions.",
                           "enum": [
                             "dropdown",
-                            "textbox"
+                            "textbox",
+                            "autocomplete"
                           ],
                           "example": "dropdown",
                           "type": "string",
                           "x-enum-varnames": [
                             "DROPDOWN",
-                            "TEXTBOX"
+                            "TEXTBOX",
+                            "AUTOCOMPLETE"
                           ]
                         },
                         "value": {
@@ -4378,13 +4382,15 @@
                               "description": "Type of the single value field definitions.",
                               "enum": [
                                 "dropdown",
-                                "textbox"
+                                "textbox",
+                                "autocomplete"
                               ],
                               "example": "dropdown",
                               "type": "string",
                               "x-enum-varnames": [
                                 "DROPDOWN",
-                                "TEXTBOX"
+                                "TEXTBOX",
+                                "AUTOCOMPLETE"
                               ]
                             },
                             "value": {
@@ -4611,13 +4617,15 @@
                 "description": "Type of the single value field definitions.",
                 "enum": [
                   "dropdown",
-                  "textbox"
+                  "textbox",
+                  "autocomplete"
                 ],
                 "example": "dropdown",
                 "type": "string",
                 "x-enum-varnames": [
                   "DROPDOWN",
-                  "TEXTBOX"
+                  "TEXTBOX",
+                  "AUTOCOMPLETE"
                 ]
               },
               "value": {
@@ -4717,13 +4725,15 @@
             "description": "Type of the single value field definitions.",
             "enum": [
               "dropdown",
-              "textbox"
+              "textbox",
+              "autocomplete"
             ],
             "example": "dropdown",
             "type": "string",
             "x-enum-varnames": [
               "DROPDOWN",
-              "TEXTBOX"
+              "TEXTBOX",
+              "AUTOCOMPLETE"
             ]
           },
           "value": {
@@ -4740,13 +4750,15 @@
         "description": "Type of the single value field definitions.",
         "enum": [
           "dropdown",
-          "textbox"
+          "textbox",
+          "autocomplete"
         ],
         "example": "dropdown",
         "type": "string",
         "x-enum-varnames": [
           "DROPDOWN",
-          "TEXTBOX"
+          "TEXTBOX",
+          "AUTOCOMPLETE"
         ]
       },
       "IncidentFieldAttributesValueType": {
@@ -4879,13 +4891,15 @@
                               "description": "Type of the single value field definitions.",
                               "enum": [
                                 "dropdown",
-                                "textbox"
+                                "textbox",
+                                "autocomplete"
                               ],
                               "example": "dropdown",
                               "type": "string",
                               "x-enum-varnames": [
                                 "DROPDOWN",
-                                "TEXTBOX"
+                                "TEXTBOX",
+                                "AUTOCOMPLETE"
                               ]
                             },
                             "value": {
@@ -4973,6 +4987,7 @@
                       },
                       "type": "object"
                     },
+                    "nullable": true,
                     "type": "array"
                   },
                   "postmortem_id": {
@@ -5583,13 +5598,15 @@
                       "description": "Type of the single value field definitions.",
                       "enum": [
                         "dropdown",
-                        "textbox"
+                        "textbox",
+                        "autocomplete"
                       ],
                       "example": "dropdown",
                       "type": "string",
                       "x-enum-varnames": [
                         "DROPDOWN",
-                        "TEXTBOX"
+                        "TEXTBOX",
+                        "AUTOCOMPLETE"
                       ]
                     },
                     "value": {
@@ -5677,6 +5694,7 @@
               },
               "type": "object"
             },
+            "nullable": true,
             "type": "array"
           },
           "postmortem_id": {
@@ -5790,13 +5808,15 @@
                           "description": "Type of the single value field definitions.",
                           "enum": [
                             "dropdown",
-                            "textbox"
+                            "textbox",
+                            "autocomplete"
                           ],
                           "example": "dropdown",
                           "type": "string",
                           "x-enum-varnames": [
                             "DROPDOWN",
-                            "TEXTBOX"
+                            "TEXTBOX",
+                            "AUTOCOMPLETE"
                           ]
                         },
                         "value": {
@@ -5884,6 +5904,7 @@
                   },
                   "type": "object"
                 },
+                "nullable": true,
                 "type": "array"
               },
               "postmortem_id": {
@@ -10395,13 +10416,15 @@
                       "description": "Type of the single value field definitions.",
                       "enum": [
                         "dropdown",
-                        "textbox"
+                        "textbox",
+                        "autocomplete"
                       ],
                       "example": "dropdown",
                       "type": "string",
                       "x-enum-varnames": [
                         "DROPDOWN",
-                        "TEXTBOX"
+                        "TEXTBOX",
+                        "AUTOCOMPLETE"
                       ]
                     },
                     "value": {
@@ -10545,13 +10568,15 @@
                           "description": "Type of the single value field definitions.",
                           "enum": [
                             "dropdown",
-                            "textbox"
+                            "textbox",
+                            "autocomplete"
                           ],
                           "example": "dropdown",
                           "type": "string",
                           "x-enum-varnames": [
                             "DROPDOWN",
-                            "TEXTBOX"
+                            "TEXTBOX",
+                            "AUTOCOMPLETE"
                           ]
                         },
                         "value": {
@@ -11174,13 +11199,15 @@
                               "description": "Type of the single value field definitions.",
                               "enum": [
                                 "dropdown",
-                                "textbox"
+                                "textbox",
+                                "autocomplete"
                               ],
                               "example": "dropdown",
                               "type": "string",
                               "x-enum-varnames": [
                                 "DROPDOWN",
-                                "TEXTBOX"
+                                "TEXTBOX",
+                                "AUTOCOMPLETE"
                               ]
                             },
                             "value": {
@@ -11724,13 +11751,15 @@
                                 "description": "Type of the single value field definitions.",
                                 "enum": [
                                   "dropdown",
-                                  "textbox"
+                                  "textbox",
+                                  "autocomplete"
                                 ],
                                 "example": "dropdown",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "DROPDOWN",
-                                  "TEXTBOX"
+                                  "TEXTBOX",
+                                  "AUTOCOMPLETE"
                                 ]
                               },
                               "value": {
@@ -11818,6 +11847,7 @@
                         },
                         "type": "object"
                       },
+                      "nullable": true,
                       "type": "array"
                     },
                     "postmortem_id": {
@@ -36247,13 +36277,15 @@
                                           "description": "Type of the single value field definitions.",
                                           "enum": [
                                             "dropdown",
-                                            "textbox"
+                                            "textbox",
+                                            "autocomplete"
                                           ],
                                           "example": "dropdown",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "DROPDOWN",
-                                            "TEXTBOX"
+                                            "TEXTBOX",
+                                            "AUTOCOMPLETE"
                                           ]
                                         },
                                         "value": {
@@ -36341,6 +36373,7 @@
                                   },
                                   "type": "object"
                                 },
+                                "nullable": true,
                                 "type": "array"
                               },
                               "postmortem_id": {
@@ -37085,13 +37118,15 @@
                                       "description": "Type of the single value field definitions.",
                                       "enum": [
                                         "dropdown",
-                                        "textbox"
+                                        "textbox",
+                                        "autocomplete"
                                       ],
                                       "example": "dropdown",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "DROPDOWN",
-                                        "TEXTBOX"
+                                        "TEXTBOX",
+                                        "AUTOCOMPLETE"
                                       ]
                                     },
                                     "value": {
@@ -37378,13 +37413,15 @@
                                         "description": "Type of the single value field definitions.",
                                         "enum": [
                                           "dropdown",
-                                          "textbox"
+                                          "textbox",
+                                          "autocomplete"
                                         ],
                                         "example": "dropdown",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "DROPDOWN",
-                                          "TEXTBOX"
+                                          "TEXTBOX",
+                                          "AUTOCOMPLETE"
                                         ]
                                       },
                                       "value": {
@@ -37472,6 +37509,7 @@
                                 },
                                 "type": "object"
                               },
+                              "nullable": true,
                               "type": "array"
                             },
                             "postmortem_id": {
@@ -38411,13 +38449,15 @@
                                         "description": "Type of the single value field definitions.",
                                         "enum": [
                                           "dropdown",
-                                          "textbox"
+                                          "textbox",
+                                          "autocomplete"
                                         ],
                                         "example": "dropdown",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "DROPDOWN",
-                                          "TEXTBOX"
+                                          "TEXTBOX",
+                                          "AUTOCOMPLETE"
                                         ]
                                       },
                                       "value": {
@@ -38505,6 +38545,7 @@
                                 },
                                 "type": "object"
                               },
+                              "nullable": true,
                               "type": "array"
                             },
                             "postmortem_id": {
@@ -39250,13 +39291,15 @@
                                       "description": "Type of the single value field definitions.",
                                       "enum": [
                                         "dropdown",
-                                        "textbox"
+                                        "textbox",
+                                        "autocomplete"
                                       ],
                                       "example": "dropdown",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "DROPDOWN",
-                                        "TEXTBOX"
+                                        "TEXTBOX",
+                                        "AUTOCOMPLETE"
                                       ]
                                     },
                                     "value": {
@@ -39681,13 +39724,15 @@
                                         "description": "Type of the single value field definitions.",
                                         "enum": [
                                           "dropdown",
-                                          "textbox"
+                                          "textbox",
+                                          "autocomplete"
                                         ],
                                         "example": "dropdown",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "DROPDOWN",
-                                          "TEXTBOX"
+                                          "TEXTBOX",
+                                          "AUTOCOMPLETE"
                                         ]
                                       },
                                       "value": {
@@ -39775,6 +39820,7 @@
                                 },
                                 "type": "object"
                               },
+                              "nullable": true,
                               "type": "array"
                             },
                             "postmortem_id": {

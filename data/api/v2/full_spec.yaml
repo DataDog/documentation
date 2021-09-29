@@ -976,11 +976,13 @@ components:
       enum:
       - dropdown
       - textbox
+      - autocomplete
       example: dropdown
       type: string
       x-enum-varnames:
       - DROPDOWN
       - TEXTBOX
+      - AUTOCOMPLETE
     IncidentFieldAttributesValueType:
       default: multiselect
       description: Type of the single value field definitions.
@@ -1105,6 +1107,7 @@ components:
             during update.
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
+          nullable: true
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.

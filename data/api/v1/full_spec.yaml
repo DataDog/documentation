@@ -8573,13 +8573,12 @@ components:
             y:
               q: system.mem.used
           properties:
+            table:
+              $ref: '#/components/schemas/ScatterplotTableRequest'
             x:
               $ref: '#/components/schemas/ScatterPlotRequest'
             y:
               $ref: '#/components/schemas/ScatterPlotRequest'
-          required:
-          - x
-          - y
           type: object
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -8610,6 +8609,38 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    ScatterplotDimension:
+      description: Dimension of the Scatterplot.
+      enum:
+      - x
+      - y
+      - radius
+      - color
+      example: radius
+      type: string
+      x-enum-varnames:
+      - X
+      - Y
+      - RADIUS
+      - COLOR
+    ScatterplotTableRequest:
+      description: Scatterplot request containing formulas and functions.
+      properties:
+        formulas:
+          description: List of Scatterplot formulas that operate on queries. **This
+            feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/ScatterplotWidgetFormula'
+          type: array
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+      type: object
     ScatterplotWidgetAggregator:
       description: Aggregator used for the request.
       enum:
@@ -8625,6 +8656,23 @@ components:
       - MAXIMUM
       - MINIMUM
       - SUM
+    ScatterplotWidgetFormula:
+      description: Formula to be used in a Scatterplot widget query.
+      properties:
+        alias:
+          description: Expression alias.
+          example: my-query
+          type: string
+        dimension:
+          $ref: '#/components/schemas/ScatterplotDimension'
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: func(a) + b
+          type: string
+      required:
+      - formula
+      - dimension
+      type: object
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -13489,8 +13537,8 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
-        dbm_queries_agg_sum:
-          description: Shows the sum of all distinct Database Monitoring normalized
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring normalized
             queries over all hours in the current month for all organizations.
           format: int64
           type: integer
@@ -13723,8 +13771,8 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
-        dbm_queries_agg_sum:
-          description: Shows the sum of all distinct Database Monitoring Normalized
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring Normalized
             Queries over all hours in the current month for all organizations.
           format: int64
           type: integer
