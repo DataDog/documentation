@@ -3966,6 +3966,7 @@
                         "example": "1.1",
                         "type": "string"
                       },
+                      "nullable": true,
                       "type": "array"
                     }
                   },
@@ -4141,6 +4142,7 @@
                             "example": "1.1",
                             "type": "string"
                           },
+                          "nullable": true,
                           "type": "array"
                         }
                       },
@@ -4428,6 +4430,7 @@
                                 "example": "1.1",
                                 "type": "string"
                               },
+                              "nullable": true,
                               "type": "array"
                             }
                           },
@@ -4661,6 +4664,7 @@
                   "example": "1.1",
                   "type": "string"
                 },
+                "nullable": true,
                 "type": "array"
               }
             },
@@ -4704,6 +4708,7 @@
               "example": "1.1",
               "type": "string"
             },
+            "nullable": true,
             "type": "array"
           }
         },
@@ -4929,6 +4934,7 @@
                                 "example": "1.1",
                                 "type": "string"
                               },
+                              "nullable": true,
                               "type": "array"
                             }
                           },
@@ -4973,6 +4979,7 @@
                       },
                       "type": "object"
                     },
+                    "nullable": true,
                     "type": "array"
                   },
                   "postmortem_id": {
@@ -5633,6 +5640,7 @@
                         "example": "1.1",
                         "type": "string"
                       },
+                      "nullable": true,
                       "type": "array"
                     }
                   },
@@ -5677,6 +5685,7 @@
               },
               "type": "object"
             },
+            "nullable": true,
             "type": "array"
           },
           "postmortem_id": {
@@ -5840,6 +5849,7 @@
                             "example": "1.1",
                             "type": "string"
                           },
+                          "nullable": true,
                           "type": "array"
                         }
                       },
@@ -5884,6 +5894,7 @@
                   },
                   "type": "object"
                 },
+                "nullable": true,
                 "type": "array"
               },
               "postmortem_id": {
@@ -10445,6 +10456,7 @@
                         "example": "1.1",
                         "type": "string"
                       },
+                      "nullable": true,
                       "type": "array"
                     }
                   },
@@ -10595,6 +10607,7 @@
                             "example": "1.1",
                             "type": "string"
                           },
+                          "nullable": true,
                           "type": "array"
                         }
                       },
@@ -11224,6 +11237,7 @@
                                 "example": "1.1",
                                 "type": "string"
                               },
+                              "nullable": true,
                               "type": "array"
                             }
                           },
@@ -11774,6 +11788,7 @@
                                   "example": "1.1",
                                   "type": "string"
                                 },
+                                "nullable": true,
                                 "type": "array"
                               }
                             },
@@ -11818,6 +11833,7 @@
                         },
                         "type": "object"
                       },
+                      "nullable": true,
                       "type": "array"
                     },
                     "postmortem_id": {
@@ -36297,6 +36313,7 @@
                                             "example": "1.1",
                                             "type": "string"
                                           },
+                                          "nullable": true,
                                           "type": "array"
                                         }
                                       },
@@ -36341,6 +36358,7 @@
                                   },
                                   "type": "object"
                                 },
+                                "nullable": true,
                                 "type": "array"
                               },
                               "postmortem_id": {
@@ -37135,6 +37153,7 @@
                                         "example": "1.1",
                                         "type": "string"
                                       },
+                                      "nullable": true,
                                       "type": "array"
                                     }
                                   },
@@ -37428,6 +37447,7 @@
                                           "example": "1.1",
                                           "type": "string"
                                         },
+                                        "nullable": true,
                                         "type": "array"
                                       }
                                     },
@@ -37472,6 +37492,7 @@
                                 },
                                 "type": "object"
                               },
+                              "nullable": true,
                               "type": "array"
                             },
                             "postmortem_id": {
@@ -38461,6 +38482,7 @@
                                           "example": "1.1",
                                           "type": "string"
                                         },
+                                        "nullable": true,
                                         "type": "array"
                                       }
                                     },
@@ -38505,6 +38527,7 @@
                                 },
                                 "type": "object"
                               },
+                              "nullable": true,
                               "type": "array"
                             },
                             "postmortem_id": {
@@ -39300,6 +39323,7 @@
                                         "example": "1.1",
                                         "type": "string"
                                       },
+                                      "nullable": true,
                                       "type": "array"
                                     }
                                   },
@@ -39731,6 +39755,7 @@
                                           "example": "1.1",
                                           "type": "string"
                                         },
+                                        "nullable": true,
                                         "type": "array"
                                       }
                                     },
@@ -39775,6 +39800,7 @@
                                 },
                                 "type": "object"
                               },
+                              "nullable": true,
                               "type": "array"
                             },
                             "postmortem_id": {

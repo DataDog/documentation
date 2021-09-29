@@ -957,6 +957,7 @@ components:
             description: A value which has been selected for the parent field.
             example: '1.1'
             type: string
+          nullable: true
           type: array
       type: object
     IncidentFieldAttributesSingleValue:
@@ -1105,6 +1106,7 @@ components:
             during update.
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
+          nullable: true
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.
