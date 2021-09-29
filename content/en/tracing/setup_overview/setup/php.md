@@ -121,7 +121,7 @@ Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoi
 
 If you can't find your distribution, you can [manually install][8] the PHP extension.
 
-If you are required to build our extension, for example to support arm64 architecture, follow instructions for [manually build][9] the PHP extension.
+If you are required to build the PHP extension, for example to support arm64 architecture, follow instructions for [manually build][9] the PHP extension.
 
 ## Automatic instrumentation
 
