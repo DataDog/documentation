@@ -60,7 +60,7 @@ For additional examples, see [the Serilog automatic trace ID injection project][
 {{% tab "log4net" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net library requires the application to be instrumented with automatic instrumentation.
+  <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
 To automatically inject correlation identifiers into your log messages:
