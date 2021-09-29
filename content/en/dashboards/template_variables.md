@@ -84,6 +84,8 @@ After the widget is saved, the value of the template variable is the one selecte
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
+To include just the value in the query, use the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env`, use `environment:$env.value`.
+
 #### Associated template variables
 When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into consideration the other template variable values selected on the page, and seamlessly identifies the related values without any configuration.
 
@@ -91,9 +93,11 @@ When selecting a template variable value, the **Associated Values** and **Other 
 
 #### Text
 
-For text based widgets, you can display a template variable name and value with `$<TEMPLATE_VARIABLE_NAME>` or display just the value with `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env` and a selected value of `dev`:
+For text based widgets, you can display a template variable's tag/attribute and value with `$<TEMPLATE_VARIABLE_NAME>`, just its key with `$<TEMPLATE_VARIABLE_NAME>.key`, or just its value with `$<TEMPLATE_VARIABLE_NAME>.value`. This can come after any non-alphanumeric character, and can be followed by whitespace or any of the following characters: `#`, `$`, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, and `?`.
 
-* `$env` displays `env:dev`
+For example, with a template variable named `env`, with tag/attribute `environment`, and with a selected value of `dev`:
+* `$env` displays `environment:dev`
+* `$env.key` displays `environment`
 * `$env.value` displays `dev`
 
 ### Events overlay
