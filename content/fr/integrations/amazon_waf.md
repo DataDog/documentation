@@ -9,11 +9,10 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez le nombre de requêtes autorisées ou bloquées.
-doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'
 draft: false
 git_integration_title: amazon_waf
 has_logo: true
-integration_id: amazon-waf
 integration_title: Amazon Web Application Firewall
 is_public: true
 kind: integration
@@ -43,9 +42,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de logs
 
-#### Logs d'audit
+#### Activer les logs d'audit Web Application Firewall
 
-Activez les logs d'audit Web Application Firewall pour obtenir des informations détaillées sur le trafic lié à vos contrôles d'accès Web (ACL Web) :
+Activez la journalisation pour obtenir des informations détaillées sur le trafic lié à vos contrôles d'accès Web (ACL Web) :
 
 1. Créez un `Amazon Kinesis Data Firehose` dont le nom commence par `aws-waf-logs-`.
 2. Dans la destination du `Amazon Kinesis Data Firehose`, choisissez `Amazon S3` et ajoutez le préfixe `waf`.

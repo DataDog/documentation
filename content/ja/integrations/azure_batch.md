@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Batch Service のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_batch/'
+doc_link: https://docs.datadoghq.com/integrations/azure_batch/
 draft: false
 git_integration_title: azure_batch
 has_logo: true

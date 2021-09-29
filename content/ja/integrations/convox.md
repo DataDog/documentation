@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/convox/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
 display_name: Convox
 draft: false
 git_integration_title: convox

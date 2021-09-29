@@ -6,10 +6,10 @@ aliases:
   - /ja/tracing/setup/docker/
   - /ja/agent/apm/docker
 further_reading:
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/trace'
+  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/trace
     tag: Github
     text: ソースコード
-  - link: '/integrations/amazon_ecs/#トレースの収集'
+  - link: /integrations/amazon_ecs/#トレースの収集
     tag: Documentation
     text: ECS アプリケーションをトレースする
   - link: /agent/docker/log/
@@ -104,14 +104,12 @@ Docker Agent 内のトレースに利用可能なすべての環境変数をリ�
 | `DD_APM_RECEIVER_SOCKET`   | 設定した場合、Unix Domain Sockets からトレースを収集し、ホスト名とポートコンフィギュレーションよりも優先します。デフォルトでは設定されていません。設定する場合は、有効な sock ファイルを指定する必要があります。                                                                                                                                                                       |
 | `DD_BIND_HOST`             | StatsD とレシーバーのホスト名を設定します。                                                                                                                                                                                                                                                                                                                  |
 | `DD_LOG_LEVEL`             | ログレベルを設定します。(`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                                                      |
-| `DD_APM_ENABLED`           | `true` に設定すると、Datadog Agent はトレースメトリクスを受け付けます。                                                                                                                                                                                                                                                                                         |
+| `DD_APM_ENABLED`           | `true` に設定すると、Datadog Agent はトレースとトレースメトリクスを受け付けます。                                                                                                                                                                                                                                                                                         |
 | `DD_APM_CONNECTION_LIMIT`  | 30 秒のタイムウィンドウに対する最大接続数の上限を設定します。デフォルトの上限は 2000 です。                                                                                                                                                                                                                                                    |
 | `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイントを設定します: `https://trace.agent.{{< region-param key="dd_site" >}}`。デフォルトは `https://trace.agent.datadoghq.com` 。                                                                                                                                                                                                                            |
 | `DD_APM_RECEIVER_PORT`     | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                                                                                                                                                                                                                    |
 | `DD_APM_NON_LOCAL_TRAFFIC` | [他のコンテナからのトレース](#tracing-from-other-containers)時に、非ローカルトラフィックを許可します。                                                                                                                                                                                                                                                        |
-| `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。例: <code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                                       |
-| `DD_APM_ANALYZED_SPANS`    | トランザクションを分析するスパンを構成します。書式はカンマ区切りのインスタンス <code>\<サービス名>\|;\<オペレーション名>=1</code>、たとえば、<code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code> となります。トレーシングクライアントでコンフィギュレーションパラメーターを使用して[自動的に有効化][3]することもできます。 |
-| `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Indexed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                                                        |
+| `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。例: <code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                                |                                                                                                                                                                                                                                                                                        
 
 ## 他のコンテナからのトレース
 
@@ -335,4 +333,3 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /ja/tracing/guide/security/#replace-rules
-[3]: /ja/tracing/app_analytics/#automatic-configuration

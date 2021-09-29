@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_codedeploy/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
 draft: false
 git_integration_title: amazon_codedeploy
 has_logo: true

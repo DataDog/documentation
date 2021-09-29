@@ -3,9 +3,9 @@ categories:
   - profiling
   - security
 description: Profil et signalement des vulnérabilités avec Snyk
-doc_link: 'https://docs.datadoghq.com/integrations/snyk/'
+doc_link: https://docs.datadoghq.com/integrations/snyk/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/snyk.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/snyk.md
 has_logo: true
 integration_title: Snyk
 is_public: true
@@ -16,7 +16,7 @@ short_description: Profil et signalement des vulnérabilités avec Snyk
 version: '1.0'
 integration_id: snyk
 further_reading:
-  - link: 'https://www.datadoghq.com/partner/snyk/'
+  - link: https://www.datadoghq.com/partner/snyk/
     tag: Page des partenaires
     text: Surveillance Snyk avec Datadog
 ---
