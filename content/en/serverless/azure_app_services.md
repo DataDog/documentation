@@ -132,7 +132,7 @@ Learn more about [custom metrics][17].
 
 ## Extension management with Powershell
 
-Datadog provides automatic scripts with which you can update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and to [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
+Datadog provides scripts with which you can update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and to [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
 
 ### Prerequisites
 
@@ -188,7 +188,7 @@ The update script applies to an entire resource group. This script updates every
 
 The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
 
-#### Update a single instance
+#### Install specific version on a single resource
 
 To install a specific version on a single instance, follow the [instructions for installing the extension for the first time](#powershell-first-time) and add the `-ExtensionVersion` parameter to the installation command.
 
@@ -198,7 +198,7 @@ To install a specific version on a single instance, follow the [instructions for
 
 Replace `<EXTENSION_VERSION>` with the version of the extension you wish to install. For instance, `1.4.0`.
 
-#### Updating an entire resource group
+#### Install specific version on an entire resource group
 
 To install a specific version for a resource group, follow the [instructions for updating the extension for a resource group](#powershell-resource-group) and add the `-ExtensionVersion` parameter to the installation command.
 
@@ -220,10 +220,10 @@ b. Ensure that any App Service Plan filtering rules you may have applied include
 
 2. If APM traces are not appearing in Datadog, try these steps:
 
-a. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
-b. Do a full stop and start of your application.
-c. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
-d. Still need help? Contact [Datadog support][24].
+   a. Verify you've set `DD_SITE` and `DD_API_KEY` correctly.
+   b. Do a full stop and start of your application.
+   c. If not resolved, try uninstalling the extension and re-installing (this also ensures you are running the latest version).
+   d. Still need help? Contact [Datadog support][24].
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
