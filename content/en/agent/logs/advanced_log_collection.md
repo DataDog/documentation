@@ -444,7 +444,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic Multi-line aggregation
-With agent 7.31+ `auto_multi_line_detection` can be enabled which allows the agent to detect common multi line patterns automatically.
+With agent 7.32+ `auto_multi_line_detection` can be enabled which allows the agent to detect common multi-line patterns automatically.
 
 `auto_multi_line_detection` can be enabled globally in the `datadog.yaml`
 
