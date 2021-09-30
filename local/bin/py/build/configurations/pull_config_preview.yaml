@@ -536,7 +536,7 @@
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
 
     - action: pull-and-push-folder
-      branch: master
+      branch: priyanshi/ios_crash_reporting
       globs:
         - docs/error_tracking/*
       options:
