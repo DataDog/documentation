@@ -1,6 +1,7 @@
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
-{{ $CI_COMMIT_SHORT_SHA := getenv "CI_COMMIT_SHORT_SHA" | default `""` }}
-{{ $defines := dict "CI_COMMIT_SHORT_SHA" $CI_COMMIT_SHORT_SHA "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
+{{ $CI_COMMIT_SHORT_SHA := getenv "CI_COMMIT_SHORT_SHA" | default "" }}
+
+{{ $defines := dict "CI_COMMIT_SHORT_SHA" `$CI_COMMIT_SHORT_SHA` "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 
 {{ $isLocalServer := site.IsServer }}
 {{ $jsInput := "scripts/main.js" }}
