@@ -153,6 +153,9 @@ link_checks_preview:
     GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
@@ -306,6 +309,9 @@ test_live_link_checks:
     GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
