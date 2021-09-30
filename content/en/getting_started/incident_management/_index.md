@@ -11,7 +11,7 @@ further_reading:
     - link: '/monitors/incident_management'
       tag: 'Documentation'
       text: 'Incident Management'
-    - link: '/blog/incident-response-with-datadog/'
+    - link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
       tag: 'Blog'
       text: 'Incident Management with Datadog'
     - link: '/monitors/incident_management/notification_rules'
@@ -268,7 +268,7 @@ You can also set up notification rules to automatically notify specific people o
 
 To customize Incident Management, go to the [incident settings page][9]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top right corner, click **Settings**.
 
-{{< img src="getting_started/incident_management/im_settings_button.png" alt="Settings" responsive="true" style="width:100%;">}} 
+{{< img src="getting_started/incident_management/im_settings_button.png" alt="Settings" responsive="true" style="width:100%;">}}
 
 ## Further Reading
 
