@@ -28721,6 +28721,8 @@
               "incident_settings_write": "The ability to configure incident settings.",
               "incident_write": "The ability to create, view, and manage incidents in Datadog.",
               "metrics_read": "The ability to view custom metrics.",
+              "security_monitoring_filters_read": "The ability to read Security Filters.",
+              "security_monitoring_filters_write": "The ability to create, edit and delete Security Filters.",
               "security_monitoring_rules_read": "The ability to read Detection rules.",
               "security_monitoring_rules_write": "The ability to create and edit Detection rules.",
               "security_monitoring_signals_read": "The ability to view Security signals.",
@@ -53260,6 +53262,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_filters_read"
+            ]
+          }
+        ],
         "summary": "Get all security filters",
         "tags": [
           "Security Monitoring"
@@ -53596,6 +53609,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_filters_write"
+            ]
+          }
+        ],
         "summary": "Create a security filter",
         "tags": [
           "Security Monitoring"
@@ -53719,6 +53743,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_filters_write"
+            ]
+          }
+        ],
         "summary": "Delete a security filter",
         "tags": [
           "Security Monitoring"
@@ -53929,6 +53964,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_filters_read"
+            ]
+          }
+        ],
         "summary": "Get a security filter",
         "tags": [
           "Security Monitoring"
@@ -54296,6 +54342,17 @@
             "description": "Too many requests"
           }
         },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_filters_write"
+            ]
+          }
+        ],
         "summary": "Update a security filter",
         "tags": [
           "Security Monitoring"

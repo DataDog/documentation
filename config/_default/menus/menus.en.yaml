@@ -597,7 +597,6 @@ main:
     parent: agent
     identifier: agent_kubernetes
     weight: 3
-
   - name: APM
     url: agent/kubernetes/apm/
     parent: agent_kubernetes

@@ -6770,6 +6770,7 @@ components:
       description: Relative timeframe.
       example:
         live_span: 1h
+      nullable: true
       properties:
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
