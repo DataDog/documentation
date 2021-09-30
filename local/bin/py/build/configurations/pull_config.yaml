@@ -478,7 +478,7 @@
               text: "dd-sdk-android Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
   - repo_name: dd-sdk-ios
     contents:
@@ -522,7 +522,7 @@
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
       branch: master
@@ -533,6 +533,16 @@
         path_to_remove: 'docs/rum_collection/'
         front_matters:
           dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+
+    - action: pull-and-push-folder
+      branch: priyanshi/ios_crash_reporting
+      globs:
+        - docs/error_tracking/*
+      options:
+        dest_dir: '/real_user_monitoring/error_tracking/'
+        path_to_remove: 'docs/error_tracking/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
