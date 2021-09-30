@@ -543,7 +543,7 @@
         dest_dir: '/real_user_monitoring/error_tracking/'
         path_to_remove: 'docs/error_tracking/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/priyanshi/ios_crash_reporting/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
