@@ -2362,7 +2362,7 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 303
-  - name: CWS Event Documentation
+  - name: Workload Security Events
     url: security_platform/cloud_workload_security/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
