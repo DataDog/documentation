@@ -7,16 +7,7 @@ import configDocs from '../config/config-docs';
 const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
 
-function getConfig() {
-    if (env === 'live') {
-        return configDocs['live'];
-    } else if (env === 'preview') {
-        return configDocs['preview'];
-    } else {
-        return configDocs['development'];
-    }
-}
-
+const getConfig = () => configDocs[env];
 const Config = getConfig();
 
 if (datadogRum) {
