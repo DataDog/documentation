@@ -12,4 +12,4 @@ import './components/code-languages';
 import './components/language-select';
 import './components/bootstrap-dropdown-custom';
 
-console.error('test');
+throw Error('Test rum error tracking');
