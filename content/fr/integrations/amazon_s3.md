@@ -9,18 +9,19 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
+description: Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/amazon_s3/
 draft: false
 git_integration_title: amazon_s3
 has_logo: true
+integration_id: amazon-s3
 integration_title: Amazon S3
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_s3
 public_title: "Intégration Datadog/Amazon\_S3"
-short_description: 'Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.'
+short_description: Surveillez la latence des requêtes, le nombre de requêtes par type, la taille des compartiments et plus encore.
 version: '1.0'
 ---
 {{< img src="integrations/amazon_s3/s3_db_screenshot.png" alt="Dashboard S3" popup="true">}}
@@ -102,7 +103,7 @@ L'intégration AWS S3 n'inclut aucun check de service.
 
 ### Log chiffré CloudTrail
 
-Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS S3, autorisez le rôle Datadog à déchiffrer les données de logs Cloudtrail avec la stratégie suivante : `kms:Decrypt`. [En savoir plus sur votre stratégie de chiffrement/déchiffrement KMS][13].
+Si vos données de logs AWS CloudTrail sont chiffrées par KMS dans votre AWS S3, autorisez le rôle Datadog à déchiffrer les données de logs CloudTrail avec la stratégie suivante : `kms:Decrypt`. [En savoir plus sur votre stratégie de chiffrement/déchiffrement KMS][13].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services

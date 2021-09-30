@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez les crashs d'applications et recueillez des métriques détaillées sur les performances d'exécution.
-doc_link: 'https://docs.datadoghq.com/integrations/mparticle/'
+doc_link: https://docs.datadoghq.com/integrations/mparticle/
 draft: false
 git_integration_title: mparticle
 has_logo: true

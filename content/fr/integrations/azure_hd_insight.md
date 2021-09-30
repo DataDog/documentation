@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure HDInsight.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_hd_insight/'
+doc_link: https://docs.datadoghq.com/integrations/azure_hd_insight/
 draft: false
 git_integration_title: azure_hd_insight
 has_logo: true
