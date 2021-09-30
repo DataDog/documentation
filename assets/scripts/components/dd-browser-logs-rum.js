@@ -17,8 +17,6 @@ function getConfig() {
     }
 }
 
-console.log(`CI_COMMIT_SHORT_SHA = ${params.CI_COMMIT_SHORT_SHA}`);
-
 const Config = getConfig();
 
 if (datadogRum) {
