@@ -5,19 +5,19 @@ further_reading:
   - link: /serverless/libraries_integrations/extension/
     tag: ドキュメント
     text: Datadog Lambda 拡張機能
-  - link: 'https://github.com/DataDog/datadog-lambda-python/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-python/blob/master/README.md
     tag: Github
     text: Datadog Lambda Library for Python
-  - link: 'https://github.com/DataDog/datadog-lambda-js/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-js/blob/master/README.md
     tag: Github
     text: Datadog Lambda Library for Node.js
-  - link: 'https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md
     tag: Github
     text: Ruby 向け Datadog Lambda ライブラリ
-  - link: 'https://github.com/DataDog/datadog-lambda-go/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-go/blob/master/README.md
     tag: Github
     text: Go 向け Datadog Lambda ライブラリ
-  - link: 'https://github.com/DataDog/datadog-lambda-java/blob/master/README.md'
+  - link: https://github.com/DataDog/datadog-lambda-java/blob/master/README.md
     tag: Github
     text: Datadog Lambda Library for Java
 aliases:

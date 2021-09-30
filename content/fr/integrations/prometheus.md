@@ -10,7 +10,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md'
 display_name: Prometheus
 draft: false
 git_integration_title: prometheus
@@ -39,7 +39,7 @@ Connectez-vous à Prometheus pour :
 **Remarque :** nous vous conseillons d'utiliser le [check OpenMetrics][1] du fait de son efficacité accrue et de sa prise en charge complète du format texte Prometheus. N'utilisez le check Prometheus que lorsque l'endpoint de métriques ne prend pas en charge un format texte.
 
 <div class="alert alert-warning">
-Toutes les métriques récupérées par cette intégration sont considérées comme étant des <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métriques custom</a>.
+Toutes les métriques récupérées par cette intégration sont considérées comme étant des <a href="https://docs.datadoghq.com/metrics/custom_metrics">métriques custom</a>.
 </div>
 
 **Consultez la section [Collecte de métriques Prometheus[2] pour découvrir comment configurer un check Prometheus.**

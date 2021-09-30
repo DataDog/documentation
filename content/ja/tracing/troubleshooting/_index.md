@@ -1,6 +1,8 @@
 ---
 title: APM トラブルシューティング
 kind: documentation
+aliases:
+  - /ja/tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
   - link: /tracing/troubleshooting/tracer_startup_logs/
     tag: Documentation

@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md
 display_name: Linux proc extras
 draft: false
 git_integration_title: linux_proc_extras
