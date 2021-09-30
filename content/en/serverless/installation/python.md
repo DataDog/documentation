@@ -345,7 +345,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:7
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
   {{< site-region region="us,us3,eu" >}}
-  ```
+  ```hcl
   variable "dd_api_key" {
     type        = string
     description = "Datadog API key"
@@ -370,7 +370,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:7
   ```
   {{< /site-region >}}
   {{< site-region region="gov" >}}
-  ```
+  ```hcl
   variable "dd_api_key" {
     type        = string
     description = "Datadog API key"

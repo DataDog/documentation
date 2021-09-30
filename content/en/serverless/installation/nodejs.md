@@ -268,7 +268,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
   {{< site-region region="us,us3,eu" >}}
-  ```
+  ```hcl
   variable "dd_api_key" {
     type        = string
     description = "Datadog API key"
@@ -293,7 +293,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
   ```
   {{< /site-region >}}
   {{< site-region region="gov" >}}
-  ```
+  ```hcl
   variable "dd_api_key" {
     type        = string
     description = "Datadog API key"
