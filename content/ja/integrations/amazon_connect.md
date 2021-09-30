@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Connect のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_connect/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_connect/
 draft: false
 git_integration_title: amazon_connect
 has_logo: true

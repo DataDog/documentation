@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Cognitive Services のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_cognitive_services/'
+doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
 draft: false
 git_integration_title: azure_cognitive_services
 has_logo: true

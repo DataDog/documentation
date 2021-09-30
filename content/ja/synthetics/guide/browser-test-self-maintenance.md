@@ -8,7 +8,7 @@ further_reading:
   - link: /synthetics/browser_tests/actions
     tag: ドキュメント
     text: ブラウザテストの手順を作成
-  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
 ---
