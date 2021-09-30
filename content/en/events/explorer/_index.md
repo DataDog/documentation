@@ -152,4 +152,4 @@ Use the query to control what’s displayed in your Events Analytics:
 
 [1]: /logs/explorer/search_syntax/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[3]: /monitors/notifications
+[3]: /monitors/notify/

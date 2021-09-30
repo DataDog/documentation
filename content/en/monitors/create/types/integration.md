@@ -5,13 +5,13 @@ description: "Monitor metric values or health status from a specific integration
 aliases:
 - /monitors/monitor_types/integration
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -106,10 +106,10 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: /integrations/
 [2]: https://app.datadoghq.com/monitors#create/integration
-[3]: /monitors/monitor_types/metric/
+[3]: /monitors/create/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /monitors/create/configuration/#advanced-alert-conditions
 [6]: /monitors/create/configuration/#no-data
 [7]: /monitors/create/configuration/#auto-resolve
 [8]: /monitors/create/configuration/#new-group-delay
-[9]: /monitors/notifications/
+[9]: /monitors/notify/

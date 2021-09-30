@@ -346,9 +346,9 @@ For help with troubleshooting, [contact Datadog support][18]. You can also send 
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
 [5]: /account_management/saml/mobile-idp-login/
-[6]: /monitors/manage_monitor/#search
+[6]: /monitors/manage/#search
 [7]: https://app.datadoghq.com/monitors
-[8]: /monitors/monitor_types/
+[8]: /monitors/create/types/
 [9]: /dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/

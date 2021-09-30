@@ -159,9 +159,9 @@ If you have access to the [custom role feature][12], add your user to any custom
 [4]: /synthetics/api_tests/icmp_tests
 [5]: /synthetics/search/#search
 [6]: /api/latest/synthetics/#edit-an-api-test
-[7]: /monitors/notifications/?tab=is_alert#notification
+[7]: /monitors/notify/?tab=is_alert#notification
 [8]: https://www.markdownguide.org/basic-syntax/
-[9]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/settings/#global-variables
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles

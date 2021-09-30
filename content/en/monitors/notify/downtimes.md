@@ -34,7 +34,7 @@ Search or use the drop-down to choose monitors to silence. If the field is left 
 
 Schedule a downtime based on one or more [monitor tags][1]. You must select at least one tag with a limit of 32 tags. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
-[1]: /monitors/manage_monitor/#monitor-tags
+[1]: /monitors/manage/#monitor-tags
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -188,7 +188,7 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 [1]: https://app.datadoghq.com/monitors#/downtime
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
-[4]: /monitors/monitor_status/
+[4]: /monitors/manage/status/
 [5]: /events/#event-stream
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences

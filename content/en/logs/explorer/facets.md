@@ -257,7 +257,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [1]: /logs/search_syntax/
 [2]: /logs/explorer/patterns/
 [3]: /logs/explorer/analytics/
-[4]: /monitors/monitor_types/log/
+[4]: /monitors/create/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
 [15]: /logs/log_configuration/rehydrating
