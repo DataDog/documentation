@@ -94,9 +94,19 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-Click the settings modal for the whole dashboard, and select *Permissions*. Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org. Creators will always be able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role to the ACL so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][13].
+Click the settings modal for the whole dashboard, and select *Permissions*. 
 
-Users who used the now deprecated "read only" check box will find that the access control list will be prepopulated with a list of Admin roles with the "Privileged Access" permission.
+{{< img src="dashboards/dashboard-menu-permissions.png" alt="Dashboard R" style="width:50%;">}}
+
+Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org.
+
+{{< img src="dashboards/dashboard-menu-permissions.png" alt="Copy dashboard" style="width:90%;">}}
+
+Creators will always be able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role to the ACL so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][13].
+
+Users who used the now deprecated "read only" check box will find that the access control list will be prepopulated with a list of Admin roles with the "Privileged Access" permission. 
+
+If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information you can review the [Terraform Dashboard role restriction guide][14]
 
 #### Clone dashboard
 
@@ -200,3 +210,4 @@ An organization's most popular dashboard displays five popularity bars. All othe
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: /help/
 [13]: /account_management/rbac/
+[14]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
