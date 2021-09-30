@@ -8,18 +8,19 @@ categories:
   - log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_dynamodb/'
+description: Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
 draft: false
 git_integration_title: amazon_dynamodb
 has_logo: true
+integration_id: amazon-dynamodb
 integration_title: Amazon DynamoDB
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_dynamodb
 public_title: "Intégration Datadog/Amazon\_DynamoDB"
-short_description: 'Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.'
+short_description: Surveillez la taille des tables, la capacité de lecture/écriture, la latence des requêtes, et plus encore.
 version: '1.0'
 ---
 {{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="Dashboard par défaut DynamoDB" popup="true">}}
@@ -51,11 +52,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de logs
 
-#### Activer la journalisation DynamoDB
+#### Activer le logging
 
-Lorsque vous définissez vos pistes, sélectionnez un compartiment s3 dans lequel rédiger les logs :
+Lorsque vous définissez vos journaux de suivi, sélectionnez un compartiment S3 dans lequel écrire les logs :
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation Cloudtrail" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation CloudTrail" popup="true" style="width:70%;">}}
 
 #### Envoyer des logs à Datadog
 
