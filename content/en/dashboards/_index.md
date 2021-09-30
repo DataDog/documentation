@@ -96,11 +96,11 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 Click the settings modal for the whole dashboard, and select *Permissions*. 
 
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="Dashboard Menu" style="width:50%;">}}
+{{< img src="/images/dashboards/dashboard-menu-permissions.png" alt="Dashboard Menu" style="width:50%;">}}
 
 Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org.
 
-{{< img src="dashboards/dashboard-role-restrictions.png" alt="Role restrictions" style="width:90%;">}}
+{{< img src="/images/dashboards/dashboard-role-restrictions.png" alt="Role restrictions" style="width:90%;">}}
 
 Creators will always be able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role to the ACL so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][13].
 
