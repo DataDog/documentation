@@ -460,7 +460,7 @@ logs:
   auto_multi_line_detection: true
 ```
 
-Automatic mutli-line detection uses a list of common regular expressions to attempt to match logs. If the built in list is not sufficient, you can also add custom patterns in the `datadog.yaml
+Automatic mutli-line detection uses a list of common regular expressions to attempt to match logs. If the built in list is not sufficient, you can also add custom patterns in the `datadog.yaml`
 
 ```yaml
 logs_config:
