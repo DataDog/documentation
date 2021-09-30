@@ -1,12 +1,13 @@
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
+{{ $defines := dict "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
 {{ $CI_COMMIT_SHORT_SHA := getenv "CI_COMMIT_SHORT_SHA" | default "" }}
-
-{{ $defines := dict "CI_COMMIT_SHORT_SHA" `$CI_COMMIT_SHORT_SHA` "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" `10` }}
-
 {{ $isLocalServer := site.IsServer }}
 {{ $jsInput := "scripts/main.js" }}
 {{ $compiledMainJS := "" }}
 {{ $compiledVendorJS := "" }}
+
+<!-- Currently used in dd-browser-logs-rum.  Provides params that can be imported directly by JS files.  Info: https://gohugo.io/hugo-pipes/js/#options -->
+{{ $jsParamsDict := (dict "params" (dict "CI_COMMIT_SHORT_SHA" $CI_COMMIT_SHORT_SHA)) }}
 
 {{ $devOptions := dict "defines" $defines "sourceMap" "inline" }}
 {{ $productionOptions := dict "defines" $defines "sourceMap" "inline" "minify" true }}
@@ -14,7 +15,7 @@
 {{ $jQuery := resources.Get "scripts/vendor/jquery.min.js" }}
 {{ $popperJS := resources.Get "scripts/vendor/popper.min.js" }}
 {{ $bootstrapJS := resources.Get "scripts/vendor/bootstrap.min.js" }}
-{{ $ddLibs := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $options }}
+{{ $ddLibs := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build (merge $options $jsParamsDict) }}
 {{ $vendor := slice $jQuery $popperJS $bootstrapJS | resources.Concat "scripts/vendor/vendor.js" }}
 
 <script src="{{ $vendor.RelPermalink }}"></script>

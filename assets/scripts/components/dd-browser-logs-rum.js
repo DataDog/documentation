@@ -1,4 +1,5 @@
 /* eslint import/no-unresolved: 0 */
+import * as params from '@params';
 import { datadogRum } from '@datadog/browser-rum';
 import { datadogLogs } from '@datadog/browser-logs';
 import configDocs from '../config/config-docs';
@@ -16,8 +17,7 @@ function getConfig() {
     }
 }
 
-console.log('Test')
-console.log(CI_COMMIT_SHORT_SHA);
+console.log(`CI_COMMIT_SHORT_SHA = ${params.CI_COMMIT_SHORT_SHA}`);
 
 const Config = getConfig();
 
@@ -28,7 +28,7 @@ if (datadogRum) {
             clientToken: Config.ddClientToken,
             env,
             service: 'docs',
-            version: CI_COMMIT_SHORT_SHA,
+            version: params.CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
             allowedTracingOrigins: [window.location.origin]
         });
@@ -48,7 +48,7 @@ if (datadogLogs) {
             forwardErrorsToLogs: true,
             env,
             service: 'docs',
-            version: CI_COMMIT_SHORT_SHA
+            version: params.CI_COMMIT_SHORT_SHA
         });
     
         // global context
