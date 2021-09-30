@@ -132,7 +132,7 @@ Learn more about [custom metrics][17].
 
 ## Extension management with Powershell
 
-Datadog provides scripts with which you can update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and to [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
+Datadog provides scripts to update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programmatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
 
 ### Prerequisites
 
@@ -150,7 +150,7 @@ The install script adds the latest version of the extension to an Azure Web App 
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/datadog-aas-extension/master/management-scripts/extension/install-latest-extension.ps1" -OutFile "install-latest-extension.ps1"
     ```
 
-3. Run the following command, passing in required arguments and any others as needed.
+3. Run the following command, passing in required and optional arguments as needed.
 
     ```
     .\install-latest-extension.ps1 -Username <USERNAME> -Password <PASSWORD> -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -SiteName <SITE_NAME> -DDApiKey <DATADOG_API_KEY> -DDSite <DATADOG_SITE> -DDEnv <DATADOG_ENV> -DDService <DATADOG_SERVICE> -DDVersion <DATADOG_VERSION>
@@ -212,11 +212,11 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 
 ### If you are missing metrics and metadata in the APM trace panel and service page
 
-It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs in the Datadog platform, as well as to avoid broken or empty screens. To fix this:
+It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs on the Datadog site, as well as to avoid broken or empty screens. To fix this:
 
 1. Ensure you have installed the [Azure integration][9] for the Azure subscription where your application is running.
 
-2. Ensure that any App Service Plan filtering rules you may have applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
+2. Ensure that any App Service Plan filtering rules you applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
 
 
 ### If APM traces are not appearing in Datadog
