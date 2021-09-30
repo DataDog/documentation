@@ -1,5 +1,5 @@
 <!-- Similar to webpack defines plugin, perform string replacements at build time to provide global variables. -->
-{{ $CI_COMMIT_SHORT_SHA := getenv `"CI_COMMIT_SHORT_SHA"` | default `""` }}
+{{ $CI_COMMIT_SHORT_SHA := getenv "CI_COMMIT_SHORT_SHA" | default `""` }}
 <script>
   console.log(`In JS.html, ci short sha = `)
   console.log({{ $CI_COMMIT_SHORT_SHA }});
