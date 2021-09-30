@@ -444,7 +444,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic Multi-line aggregation
-With agent 7.32+ `auto_multi_line_detection` can be enabled which allows the agent to detect common multi-line patterns automatically.
+With agent 7.32+ `auto_multi_line_detection` can be enabled which allows the agent to detect common multi-line patterns automatically. This feature is currently in beta. 
 
 `auto_multi_line_detection` can be enabled globally in the `datadog.yaml`
 
@@ -455,10 +455,65 @@ logs_config:
 
 It can also be enabled or disabled (overriding the global config) per log configuration:
 
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 ```yaml
 logs:
-  auto_multi_line_detection: true
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    auto_multi_line_detection: true
 ```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "auto_multi_line_detection": true
+      }]
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "auto_multi_line_detection": true
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Automatic mutli-line detection uses a list of common regular expressions to attempt to match logs. If the built in list is not sufficient, you can also add custom patterns in the `datadog.yaml
 
@@ -472,7 +527,7 @@ logs_config:
 
 With this feature enabled, when a new log file is opened the agent will try to detect a pattern. During this process the logs are sent as single lines. Once the detection threshold is met all future logs for that source will be aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
-**Note**: If your log files rotate periodically, it is recommended to only use this feature when the rotated file replaces the previously active file with the same name. The agent will reuse a previously detected pattern on the newly rotated file to avoid re-running detection. 
+**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The agent will reuse a previously detected pattern on the newly rotated file to avoid re-running detection. 
 
 ## Commonly used log processing rules
 
