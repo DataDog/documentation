@@ -6,6 +6,8 @@ import configDocs from '../config/config-docs';
 const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
 const ciCommitShortSha = CI_COMMIT_SHORT_SHA;
+console.log(`CI_COMMIT_SHORT_SHA = ${ciCommitShortSha}`);
+console.log(CI_COMMIT_SHORT_SHA)
 
 function getConfig() {
     if (env === 'live') {
