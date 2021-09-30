@@ -1,5 +1,3 @@
-// "build:sourcemaps:preview": "esbuild ./assets/scripts/main.js --sourcemap --outdir=public/scripts/",  <- cli
-
 const esBuildModule = require('esbuild');
 const scriptsDir = './assets/scripts';
 

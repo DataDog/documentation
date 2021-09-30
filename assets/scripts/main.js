@@ -12,4 +12,4 @@ import './components/code-languages';
 import './components/language-select';
 import './components/bootstrap-dropdown-custom';
 
-throw Error('Testing RUM error tracking + source maps.');
+throw Error('Testing RUM error tracking + source maps again.');
