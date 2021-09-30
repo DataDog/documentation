@@ -184,7 +184,7 @@ The update script applies to an entire resource group. This script updates every
     .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
     ```
 
-### Installing a specific version of the extension {#powershell-specific-version}
+### Install a specific version of the extension {#powershell-specific-version}
 
 The Azure App Service UI does not support the ability to install a specific version of an extension. You may do this with the install or update script.
 
