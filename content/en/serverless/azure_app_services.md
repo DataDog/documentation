@@ -208,6 +208,10 @@ To install a specific version for a resource group, follow the [instructions for
 
 Replace `<EXTENSION_VERSION>` with the version of the extension you wish to install. For instance, `1.4.0`.
 
+### ARM template
+
+Many organizations use [Azure Resource Management (ARM) templates][24] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][25] into your deployments to add the extension and configure it alongside your App Service resources.
+
 ## Troubleshooting
 
 ### If you are missing metrics and metadata in the APM trace panel and service page
@@ -229,7 +233,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
-Still need help? Contact [Datadog support][24].
+Still need help? Contact [Datadog support][26].
 
 ### Further Reading
 
@@ -259,4 +263,6 @@ Still need help? Contact [Datadog support][24].
 [21]: https://portal.azure.com/
 [22]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
 [23]: /getting_started/site/
-[24]: /help
+[24]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
+[25]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
+[26]: /help
