@@ -60,7 +60,6 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 * 値が null または空欄のプロパティは表示されません。
 * Agent で許可されている正規表現構文の全リストは、able in the [RE2 repo][1] でご確認いただけます。
 * 正規表現マッチャーは、文字列の先頭に一致するように暗黙の `^` を適用し、文字列の末尾に一致するように `$` を適用します。
-* 特定のログは、空白の大きなギャップを生成する可能性があります。改行と空白を表すには、`\n` と `\s+` を使用します。
 
 ### マッチャーとフィルター
 
@@ -629,9 +628,6 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 
-### ASCII 制御文字
-
-ログに ASCII 制御文字が含まれている場合、それは取り込み時にシリアル化されます。これは、grok パーサー内でシリアル化された値を明示的にエスケープすることで処理できます。
 
 ## その他の参考資料
 

@@ -1,21 +1,20 @@
 ---
 title: OpenTelemetry と OpenTracing
 kind: documentation
-description: アプリケーションのトレース生成にオープン標準を使用する
+description: 'アプリケーションのトレース生成にオープン標準を使用する'
 further_reading:
-  - link: https://opentelemetry.io/docs/collector/
-    tag: OpenTelemetry
-    text: Collectorドキュメント
-  - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
-    tag: ブログ
-    text: Datadog と OpenTelemetry のパートナーシップ
-  - link: /tracing/connect_logs_and_traces/opentelemetry
-    tag: Documentation
-    text: OpenTelemetry トレースとログに接続
-  - link: https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/
-    tag: ブログ
-    text: OpenTelemetry 用 AWS マネージド Lambda レイヤーについて
-aliases: null
+- link: "https://opentelemetry.io/docs/collector/"
+  tag: OpenTelemetry
+  text: Collectorドキュメント
+- link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
+  tag: ブログ
+  text: Datadog と OpenTelemetry のパートナーシップ
+- link: /tracing/connect_logs_and_traces/opentelemetry
+  tag: Documentation
+  text: OpenTelemetry トレースとログに接続
+- link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
+  tag: ブログ
+  text: OpenTelemetry 用 AWS マネージド Lambda レイヤーについて
 ---
 Datadog は [OpenTelemetry][1] および [OpenTracing][2] のような、さまざまなオープン標準をサポートしています。
 
@@ -320,8 +319,8 @@ Datadog は OpenTelemetry Collector Datadog エクスポーターを OpenTelemet
 [14]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-an-agent
 [15]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#running-as-a-standalone-collector
 [16]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/images/opentelemetry-service-deployment-models.png
-[17]: /ja/tracing/connect_logs_and_traces/opentelemetry
-[18]: /ja/tracing/setup_overview/open_standards/java
-[19]: /ja/tracing/setup_overview/open_standards/python#opentelemetry
-[20]: /ja/tracing/setup_overview/open_standards/ruby#opentelemetry
-[21]: /ja/tracing/setup_overview/open_standards/nodejs#opentelemetry
+[17]: /tracing/connect_logs_and_traces/opentelemetry
+[18]: /tracing/setup_overview/open_standards/java
+[19]: /tracing/setup_overview/open_standards/python#opentelemetry
+[20]: /tracing/setup_overview/open_standards/ruby#opentelemetry
+[21]: /tracing/setup_overview/open_standards/nodejs#opentelemetry

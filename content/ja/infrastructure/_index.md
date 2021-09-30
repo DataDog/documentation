@@ -12,5 +12,5 @@ aliases:
     {{< nextlink href="/infrastructure/process" >}}<u>ライブプロセス</u> - 細分化された要素をリアルタイムに表示して、デプロイメントのプロセスを監視。{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/generate_process_metrics" >}}<u>プロセスメトリクスの生成</u> - プロセスからグローバルおよびパーセンタイル分布メトリクスを生成。{{< /nextlink >}} 
    {{< nextlink href="/infrastructure/livecontainers" >}}<u>ライブコンテナ</u> - 環境全体のコンテナをリアルタイム表示で監視。{{< /nextlink >}}
-    {{< nextlink href="/serverless" >}}<u>サーバーレス</u> - サーバーレスアプリケーションを実行して、AWS Lambda 関数のメトリクス、トレース、ログを 1 つの画面に総合的に表示。{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/serverless" >}}<u>サーバーレス</u> - サーバーレスアプリケーションを実行して、AWS Lambda 関数のメトリクス、トレース、ログを 1 つの画面に総合的に表示。{{< /nextlink >}}
 {{< /whatsnext >}}
