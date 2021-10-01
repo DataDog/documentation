@@ -444,7 +444,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
 
 ### Automatic Multi-line aggregation
-With agent 7.32+ `auto_multi_line_detection` can be enabled which allows the agent to detect [common multi-line patterns](https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195) automatically. This feature is currently in beta. 
+With Agent 7.32+ `auto_multi_line_detection` can be enabled which allows the Agent to detect [common multi-line patterns](https://github.com/DataDog/datadog-agent/blob/main/pkg/logs/decoder/auto_multiline_handler.go#L195) automatically. This feature is currently in beta. 
 
 `auto_multi_line_detection` can be enabled globally in the `datadog.yaml`
 
@@ -462,7 +462,7 @@ It can also be enabled or disabled (overriding the global config) per log config
 logs:
   - type: file
     path: /my/test/file.log
-    service: cardpayment
+    service: testApp
     source: java
     auto_multi_line_detection: true
 ```
@@ -477,7 +477,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
     com.datadoghq.ad.logs: >-
       [{
         "source": "java",
-        "service": "cardpayment",
+        "service": "testApp",
         "auto_multi_line_detection": true
       }]
 ```
@@ -489,27 +489,27 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: cardpayment
+  name: testApp
 spec:
   selector:
     matchLabels:
-      app: cardpayment
+      app: testApp
   template:
     metadata:
       annotations:
         ad.datadoghq.com/cardpayment.logs: >-
           [{
             "source": "java",
-            "service": "cardpayment",
+            "service": "testApp",
             "auto_multi_line_detection": true
           }]
       labels:
-        app: cardpayment
-      name: cardpayment
+        app: testApp
+      name: testApp
     spec:
       containers:
-        - name: cardpayment
-          image: cardpayment:latest
+        - name: testApp
+          image: testApp:latest
 ```
 
 {{% /tab %}}
@@ -525,9 +525,9 @@ logs_config:
    - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
 ```
 
-With this feature enabled, when a new log file is opened the agent will try to detect a pattern. During this process the logs are sent as single lines. Once the detection threshold is met all future logs for that source will be aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
+With this feature enabled, when a new log file is opened the Agent will try to detect a pattern. During this process the logs are sent as single lines. Once the detection threshold is met all future logs for that source will be aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
-**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The agent will reuse a previously detected pattern on the newly rotated file to avoid re-running detection. 
+**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent will reuse a previously detected pattern on the newly rotated file to avoid re-running detection. 
 
 ## Commonly used log processing rules
 
