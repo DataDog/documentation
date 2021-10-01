@@ -11,9 +11,8 @@ jobs:
     steps:
       # Get latest layer version for each layer
       - name: Hello world
-      - run: |-
-        echo "Hello World"
-
+        run: |-
+          echo "Hello World"
       # Generate layers file
       # Push layers file to branch
       # Open pull request
