@@ -60,4 +60,4 @@ To install the Datadog Lambda library and instrument your serverless application
 [6]: /serverless/forwarder/
 [7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [8]: /serverless/installation/
-[9]: /extension/
+[9]: /serverless/libraries_integrations/extension/
