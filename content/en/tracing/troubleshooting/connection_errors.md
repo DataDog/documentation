@@ -214,7 +214,7 @@ See the table below for example setups. Some require setting up additional netwo
 | [Datadog Agent and Application Docker Containers][16] | Datadog Agent container |
 
 
-**Note about web servers**: If the `DD_AGENT_HOST` environment variable that you’re passing in is not picked up by the tracing library correctly, review how environment variables are cascaded for that specific server. For example, in PHP, there’s an additional setting to ensure that [Apache][17] or [Nginx][18] pick up the `DD_AGENT_HOST` environment variables correctly.
+**Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there’s an additional setting to ensure that [Apache][17] or [Nginx][18] pick up the `DD_AGENT_HOST` environment variable correctly.
 
 If your tracing library is sending traces correctly based on your setup, then proceed to the next step.
 
