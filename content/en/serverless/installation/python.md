@@ -344,52 +344,52 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:7
 
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
-    {{< site-region region="us,us3,eu" >}}
-    ```hcl
-    variable "dd_api_key" {
-      type        = string
-      description = "Datadog API key"
+{{< site-region region="us,us3,eu" >}}
+```hcl
+variable "dd_api_key" {
+  type        = string
+  description = "Datadog API key"
+}
+resource "aws_lambda_function" "my_func" {
+  function_name = "my_func"
+  handler = "datadog_lambda.handler.handler"
+  layers = [
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>",
+  ]
+  environment {
+    variables = {
+      DD_LAMBDA_HANDLER = "my_func.handler"
+      DD_TRACE_ENABLED = true
+      DD_API_KEY = var.dd_api_key
     }
-    resource "aws_lambda_function" "my_func" {
-      function_name = "my_func"
-      handler = "datadog_lambda.handler.handler"
-      layers = [
-          "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
-          "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>",
-      ]
-      environment {
-        variables = {
-          DD_LAMBDA_HANDLER = "my_func.handler"
-          DD_TRACE_ENABLED = true
-          DD_API_KEY = var.dd_api_key
-        }
-      }
+  }
+}
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```hcl
+variable "dd_api_key" {
+  type        = string
+  description = "Datadog API key"
+}
+resource "aws_lambda_function" "my_func" {
+  function_name = "my_func"
+  handler = "datadog_lambda.handler.handler"
+  layers = [
+      "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
+      "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>",
+  ]
+  environment {
+    variables = {
+      DD_LAMBDA_HANDLER = "my_func.handler"
+      DD_TRACE_ENABLED = true
+      DD_API_KEY = var.dd_api_key
     }
-    ```
-    {{< /site-region >}}
-    {{< site-region region="gov" >}}
-    ```hcl
-    variable "dd_api_key" {
-      type        = string
-      description = "Datadog API key"
-    }
-    resource "aws_lambda_function" "my_func" {
-      function_name = "my_func"
-      handler = "datadog_lambda.handler.handler"
-      layers = [
-          "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
-          "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>",
-      ]
-      environment {
-        variables = {
-          DD_LAMBDA_HANDLER = "my_func.handler"
-          DD_TRACE_ENABLED = true
-          DD_API_KEY = var.dd_api_key
-        }
-      }
-    }
-    ```
-    {{< /site-region >}}
+  }
+}
+```
+{{< /site-region >}}
 
 2. Replace the following placeholders with appropriate values:
 
