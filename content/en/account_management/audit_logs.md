@@ -18,9 +18,8 @@ There are two types of events that can occur within an audit log:
 1. Request events, which translate all requests made to Datadog’s API into customer records.
 2. Product-specific events, such as:
     - Changes within your organization or account. For example, if a user changes a dashboard, you are able to see who made the last change and at what time.
-    - User access of information within your environment. For example, for a compliance audit, you can see who accessed or viewed certain information and at what time.
+    - User access of information within your environment. For example, for a compliance audit, you can see who accessed or viewed certain information and at what time or if a user receives a policy denied warning.
     - Breaking events. In these cases, you can see what API calls led up to the event.
-    - An audit trail of information relating to user access. For example, if a user receives a policy denied warning.
 
 ## Setup
 
