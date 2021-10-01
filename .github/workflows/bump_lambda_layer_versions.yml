@@ -1,0 +1,18 @@
+on: push
+  # TODO: disable push & enable schedule once testing is complete
+  # schedule:
+    # At 08:00 on every day-of-week from Monday through Friday.
+    # - cron: '0 8 * * 1-5'
+
+jobs:
+  update-lambda-layer-versions:
+    runs-on: ubuntu-latest
+    steps:
+      # Get latest layer version for each layer
+      - name: Hello world
+      - run: |-
+        echo "Hello World"
+
+      # Generate layers file
+      # Push layers file to branch
+      # Open pull request
