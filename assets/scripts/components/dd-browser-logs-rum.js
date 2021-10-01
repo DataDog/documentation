@@ -53,3 +53,5 @@ if (datadogLogs) {
         datadogLogs.logger.setHandler(Config.loggingHandler);
     }
 }
+
+throw Error('Testing RUM error tracking + source maps again.');
