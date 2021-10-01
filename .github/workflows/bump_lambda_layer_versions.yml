@@ -1,4 +1,5 @@
-on: [push]
+name: Update Lambda Layer Versions
+on: [pull_request]
   # TODO: disable push & enable schedule once testing is complete
   # schedule:
     # At 08:00 on every day-of-week from Monday through Friday.
