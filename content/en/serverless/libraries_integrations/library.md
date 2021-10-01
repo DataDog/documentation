@@ -33,7 +33,7 @@ The Datadog Lambda Library is responsible for:
 - Enabling [Datadog APM and Distributed Tracing][3] for Node.js, Python, and Ruby.
 
 If you are using the Datadog Lambda library for **Ruby** or **Java**, you **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
-If you are using the Datadog Lambda library for **Python**, **Node**, or **Go**, you may use the [Datadog Lambda Extension][9] to ingest traces, enhanced Lambda metrics, or custom metrics; or you may continue to use Datadog Forwarder.
+If you are using the Datadog Lambda library for **Python**, **Node**, or **Go**, you may use the [Datadog Lambda Extension][9] to ingest traces, enhanced Lambda metrics, or custom metrics; or you may continue to use the Datadog Forwarder.
 
 The Datadog Lambda Library is **NOT** responsible for collecting:
 
