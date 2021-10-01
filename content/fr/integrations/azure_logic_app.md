@@ -6,8 +6,8 @@ categories:
   - azure
 ddtype: crawler
 dependencies: []
-description: Surveillez les workflows de déclenchement, la latence des actions, les actions échouées, et plus encore.
-doc_link: https://docs.datadoghq.com/integrations/azure_logic_app/
+description: 'Surveillez les workflows de déclenchement, la latence des actions, les actions échouées, et plus encore.'
+doc_link: 'https://docs.datadoghq.com/integrations/azure_logic_app/'
 draft: false
 git_integration_title: azure_logic_app
 has_logo: true
@@ -18,7 +18,7 @@ kind: integration
 manifest_version: '1.0'
 name: azure_logic_app
 public_title: Intégration Datadog/Microsoft Azure Logic App
-short_description: Surveillez les workflows de déclenchement, la latence des actions, les actions échouées, et plus encore.
+short_description: 'Surveillez les workflows de déclenchement, la latence des actions, les actions échouées, et plus encore.'
 version: '1.0'
 ---
 ## Présentation
