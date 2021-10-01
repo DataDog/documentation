@@ -39,4 +39,4 @@ In the *Notification Rules* section of your [Incident Settings][1], you can perf
 {{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /monitors/notifications/?tab=is_alert#notify-your-team
+[2]: /monitors/notify/?tab=is_alert#notify-your-team

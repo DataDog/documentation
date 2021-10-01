@@ -72,7 +72,7 @@ nav_sections:
             link: mobile/
             icon: mobile
             desc: Consultez les alertes et les dashboards Datadog sur votre appareil mobile
-          - title: Watchdog
+          - title: Datadog Watchdog
             link: watchdog/
             icon: watchdog
             desc: Identifiez automatiquement les tendances de vos métriques d'application et d'infrastructure

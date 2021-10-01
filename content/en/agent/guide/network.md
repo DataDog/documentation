@@ -31,30 +31,34 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
 
-[Live Containers][2] & [Live Process][3]
+[Database Monitoring][2]
+: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
+
+[Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Logs][4] & [HIPAA logs][5]
+[Logs][5] & [HIPAA logs][6]
 : TCP: `{{< region-param key="tcp_endpoint" code="true" >}}`<br>
 HTTP: `{{< region-param key="http_endpoint" code="true" >}}`<br>
-Other: See [logs endpoints][6]
+Other: See [logs endpoints][7]
 
-[HIPAA logs legacy][5]
+[HIPAA logs legacy][6]
 : `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
 `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
 `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}<br>
 `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
 
-[Orchestrator][7]
+[Orchestrator][8]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
 
-[Real User Monitoring (RUM)][8]
+[Real User Monitoring (RUM)][9]
 : `rum-http-intake.logs.`{{< region-param key="dd_site" code="true" >}}
 
-[Profiling][9]
+[Profiling][10]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
 
-[Synthetics private location][10]
+[Synthetics private location][11]
 : Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -190,7 +194,7 @@ Used for Agent services communicating with each other locally within the host on
 
 ## Using proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][11].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][12].
 
 ## Data buffering
 
@@ -208,13 +212,14 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/
-[2]: /infrastructure/livecontainers/
-[3]: /infrastructure/process/
-[4]: /logs/
-[5]: /security/logs/#hipaa-enabled-customers
-[6]: /logs/log_collection/#datadog-logs-endpoints
-[7]: /infrastructure/livecontainers/#kubernetes-resources-1
-[8]: /real_user_monitoring/
-[9]: /tracing/profiler/
-[10]: /synthetics/private_locations
-[11]: /agent/proxy/
+[2]: /database_monitoring/
+[3]: /infrastructure/livecontainers/
+[4]: /infrastructure/process/
+[5]: /logs/
+[6]: /security/logs/#hipaa-enabled-customers
+[7]: /logs/log_collection/#datadog-logs-endpoints
+[8]: /infrastructure/livecontainers/#kubernetes-resources-1
+[9]: /real_user_monitoring/
+[10]: /tracing/profiler/
+[11]: /synthetics/private_locations
+[12]: /agent/proxy/

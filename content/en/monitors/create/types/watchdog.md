@@ -5,7 +5,7 @@ description: "Algorithmically detects application and infrastructure issues."
 aliases:
 - /monitors/monitor_types/watchdog
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 - link: "/watchdog/"
@@ -79,4 +79,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: /watchdog/
 [2]: https://app.datadoghq.com/monitors#create/watchdog
-[3]: /monitors/notifications/
+[3]: /monitors/notify/

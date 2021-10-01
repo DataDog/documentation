@@ -5,13 +5,13 @@ description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -51,7 +51,7 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-[1]: /monitors/monitor_types/anomaly/
+[1]: /monitors/create/types/anomaly/
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
@@ -61,7 +61,7 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
-[1]: /monitors/monitor_types/outlier/
+[1]: /monitors/create/types/outlier/
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
@@ -71,7 +71,7 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 
 For more detailed information, see the [Forecast Monitor][1] page.
 
-[1]: /monitors/monitor_types/forecasts/
+[1]: /monitors/create/types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -113,8 +113,8 @@ The alert conditions vary slightly based on the chosen detection method.
 The evaluation frequency changes based on the evaluation time frame you select:
 
 * `timeframe < 24h`: evaluation performs every 1 minute.
-* `24h < timeframe < 48h`: evaluation performs every 10 minutes.
-* `timeframe > 48h`: evaluation performs every 30 minutes.
+* `24h <= timeframe < 48h`: evaluation performs every 10 minutes.
+* `timeframe >= 48h`: evaluation performs every 30 minutes.
 
 **Definitions**:
 
@@ -191,7 +191,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /getting_started/tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
-[4]: /monitors/notifications/?tab=is_alert#tag-variables
+[4]: /monitors/notify/?tab=is_alert#tag-variables
 [5]: /monitors/faq/what-are-recovery-thresholds/
 [6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /monitors/notifications/
+[7]: /monitors/notify/

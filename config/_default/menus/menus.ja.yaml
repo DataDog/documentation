@@ -2447,7 +2447,7 @@ footer_product_two:
     weight: 127
   - name: インシデント管理
     url: "https://www.datadoghq.com/ja/product/incident-management/"
-    weight: 128  
+    weight: 128
   - name: サーバーレス
     url: "https://www.datadoghq.com/ja/product/serverless-monitoring/"
     weight: 129

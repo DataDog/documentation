@@ -50,7 +50,7 @@ After choosing to create an [`HTTP` test][4], define your test's request.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
-   This option uses the basic implementation of SigV4. The AWS S3 specific signature is not implemented.
+   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
 
    {{% /tab %}}
 
@@ -238,9 +238,9 @@ If you have access to the [custom role feature][16], add your user to any custom
 [7]: https://www.w3schools.com/xml/xpath_syntax.asp
 [8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [9]: /api/latest/synthetics/#edit-an-api-test
-[10]: /monitors/notifications/?tab=is_alert#notification
+[10]: /monitors/notify/?tab=is_alert#notification
 [11]: https://www.markdownguide.org/basic-syntax/
-[12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[12]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [13]: /synthetics/settings/#global-variables
 [14]: /synthetics/api_tests/errors/#ssl-errors
 [15]: /account_management/rbac/

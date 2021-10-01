@@ -957,6 +957,7 @@ components:
             description: A value which has been selected for the parent field.
             example: '1.1'
             type: string
+          nullable: true
           type: array
       type: object
     IncidentFieldAttributesSingleValue:
@@ -967,6 +968,7 @@ components:
         value:
           description: The single value selected for this field.
           example: SEV-1
+          nullable: true
           type: string
       type: object
     IncidentFieldAttributesSingleValueType:
@@ -1104,6 +1106,7 @@ components:
             during update.
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
+          nullable: true
           type: array
         postmortem_id:
           description: The UUID of the postmortem object attached to the incident.
@@ -5105,6 +5108,7 @@ components:
           type: string
         name:
           description: Name of the user.
+          nullable: true
           type: string
         service_account:
           description: Whether the user is a service account.
@@ -5114,6 +5118,7 @@ components:
           type: string
         title:
           description: Title of the user.
+          nullable: true
           type: string
         verified:
           description: Whether the user is verified.
@@ -5354,6 +5359,9 @@ components:
             incident_settings_write: The ability to configure incident settings.
             incident_write: The ability to create, view, and manage incidents in Datadog.
             metrics_read: The ability to view custom metrics.
+            security_monitoring_filters_read: The ability to read Security Filters.
+            security_monitoring_filters_write: The ability to create, edit and delete
+              Security Filters.
             security_monitoring_rules_read: The ability to read Detection rules.
             security_monitoring_rules_write: The ability to create and edit Detection
               rules.
@@ -8473,6 +8481,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
       summary: Get all security filters
       tags:
       - Security Monitoring
@@ -8508,6 +8521,11 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
       summary: Create a security filter
       tags:
       - Security Monitoring
@@ -8544,6 +8562,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
       summary: Delete a security filter
       tags:
       - Security Monitoring
@@ -8572,6 +8595,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_read
       summary: Get a security filter
       tags:
       - Security Monitoring
@@ -8608,6 +8636,11 @@ paths:
           $ref: '#/components/responses/ConcurrentModificationResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_filters_write
       summary: Update a security filter
       tags:
       - Security Monitoring

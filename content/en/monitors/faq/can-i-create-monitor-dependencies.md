@@ -2,13 +2,13 @@
 title: Can I create monitor dependencies?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---
@@ -62,7 +62,7 @@ That's alot of missing data - check first to see if there is an AWS outage?
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/composite/
+[1]: /monitors/create/types/composite/
 [2]: /api/v1/downtimes/
 [3]: /api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

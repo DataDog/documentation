@@ -133,7 +133,7 @@ If you have access to the [custom role feature][15], add your user to any custom
 [5]: /synthetics/settings/#global-variables
 [6]: /api/v1/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
-[8]: /monitors/notifications/?tab=is_alert#integrations
+[8]: /monitors/notify/?tab=is_alert#integrations
 [9]: /integrations/#cat-notification
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa

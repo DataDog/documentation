@@ -74,7 +74,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
-   This option uses the basic implementation of SigV4. The AWS S3 specific signature is not implemented.
+   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
 
    {{% /tab %}}
 
@@ -277,9 +277,9 @@ If you have access to the [custom role feature][18], add your user to any custom
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [11]: /api/latest/synthetics/#edit-an-api-test
-[12]: /monitors/notifications/?tab=is_alert#notification
+[12]: /monitors/notify/?tab=is_alert#notification
 [13]: http://daringfireball.net/projects/markdown/syntax
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors
 [17]: /account_management/rbac/

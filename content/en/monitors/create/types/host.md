@@ -5,13 +5,13 @@ description: "Check if one or more hosts are reporting to Datadog"
 aliases:
     - /monitors/monitor_types/host
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -81,4 +81,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: https://app.datadoghq.com/monitors#create/host
 [2]: /monitors/create/configuration/#advanced-alert-conditions
-[3]: /monitors/notifications/
+[3]: /monitors/notify/

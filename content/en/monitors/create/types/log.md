@@ -4,13 +4,13 @@ kind: documentation
 aliases:
 - /monitors/monitor_types/log
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -105,4 +105,4 @@ Include a sample of 10 logs in the alert notification:
 [3]: /logs/explorer/search/
 [4]: /logs/explorer/facets/
 [5]: /monitors/create/configuration/#advanced-alert-conditions
-[6]: /monitors/notifications/
+[6]: /monitors/notify/

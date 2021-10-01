@@ -859,6 +859,7 @@ components:
           type: string
         name:
           description: Name of the creator.
+          nullable: true
           type: string
       readOnly: true
       type: object
@@ -1172,6 +1173,7 @@ components:
           type: string
         description:
           description: Description of the dashboard.
+          nullable: true
           type: string
         id:
           description: Dashboard identifier.
@@ -5373,6 +5375,7 @@ components:
         aggr:
           description: Aggregation type.
           example: avg
+          nullable: true
           readOnly: true
           type: string
         display_name:
@@ -6443,12 +6446,14 @@ components:
           type: string
         name:
           description: Name of the user.
+          nullable: true
           type: string
         status:
           description: Status of the user.
           type: string
         title:
           description: Title of the user.
+          nullable: true
           type: string
         verified:
           description: Whether the user is verified.
@@ -6765,6 +6770,7 @@ components:
       description: Relative timeframe.
       example:
         live_span: 1h
+      nullable: true
       properties:
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
@@ -8568,13 +8574,12 @@ components:
             y:
               q: system.mem.used
           properties:
+            table:
+              $ref: '#/components/schemas/ScatterplotTableRequest'
             x:
               $ref: '#/components/schemas/ScatterPlotRequest'
             y:
               $ref: '#/components/schemas/ScatterPlotRequest'
-          required:
-          - x
-          - y
           type: object
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -8605,6 +8610,38 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    ScatterplotDimension:
+      description: Dimension of the Scatterplot.
+      enum:
+      - x
+      - y
+      - radius
+      - color
+      example: radius
+      type: string
+      x-enum-varnames:
+      - X
+      - Y
+      - RADIUS
+      - COLOR
+    ScatterplotTableRequest:
+      description: Scatterplot request containing formulas and functions.
+      properties:
+        formulas:
+          description: List of Scatterplot formulas that operate on queries. **This
+            feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/ScatterplotWidgetFormula'
+          type: array
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+      type: object
     ScatterplotWidgetAggregator:
       description: Aggregator used for the request.
       enum:
@@ -8620,6 +8657,23 @@ components:
       - MAXIMUM
       - MINIMUM
       - SUM
+    ScatterplotWidgetFormula:
+      description: Formula to be used in a Scatterplot widget query.
+      properties:
+        alias:
+          description: Expression alias.
+          example: my-query
+          type: string
+        dimension:
+          $ref: '#/components/schemas/ScatterplotDimension'
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: func(a) + b
+          type: string
+      required:
+      - formula
+      - dimension
+      type: object
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -13484,8 +13538,8 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
-        dbm_queries_agg_sum:
-          description: Shows the sum of all distinct Database Monitoring normalized
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring normalized
             queries over all hours in the current month for all organizations.
           format: int64
           type: integer
@@ -13718,8 +13772,8 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
-        dbm_queries_agg_sum:
-          description: Shows the sum of all distinct Database Monitoring Normalized
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring Normalized
             Queries over all hours in the current month for all organizations.
           format: int64
           type: integer
@@ -15503,31 +15557,31 @@ paths:
       responses:
         '202':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/IntakePayloadAccepted'
           description: Payload accepted
         '400':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
         '408':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Request timeout
         '413':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
@@ -21912,7 +21966,7 @@ paths:
       operationId: SubmitMetrics
       requestBody:
         content:
-          application/json:
+          text/json:
             examples:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
@@ -21932,31 +21986,31 @@ paths:
       responses:
         '202':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/IntakePayloadAccepted'
           description: Payload accepted
         '400':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
         '408':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Request timeout
         '413':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large

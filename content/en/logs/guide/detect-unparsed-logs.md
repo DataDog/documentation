@@ -69,5 +69,5 @@ To monitor the volume of unparsed logs:
 [5]: /logs/archives/?tab=awss3
 [6]: /logs/logs_to_metrics/
 [7]: /logs/indexes#set-daily-quota
-[8]: /monitors/monitor_types/metric/?tab=threshold#overview
-[9]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
+[8]: /monitors/create/types/metric/?tab=threshold#overview
+[9]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
