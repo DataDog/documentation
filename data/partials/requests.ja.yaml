@@ -16,7 +16,7 @@ requests:
     link: /logs
     image: int_logs.png
   - name: APM
-    description: Datadog APM & Continuous Profiler 製品は、リクエスト、エラー、レイテンシーを監視するために、Web サービス、キュー、データベース用のすぐに使用可能なパフォーマンスダッシュボードを提供します。
+    description: Datadog APM & Distributed Tracing 製品は、リクエスト、エラー、レイテンシーを監視するために、Web サービス、キュー、データベース用のすぐに使用可能なパフォーマンスダッシュボードを提供します。
     link: /tracing
     image: int_apm.png
   - name: カスタムメトリクス
@@ -45,5 +45,5 @@ requests:
     image: int_files.png
   - name: クラウドプロバイダー
     description: すべての主要なクラウドプロバイダー (AWS、GCP、Azure、Alibaba) は、API を介してメトリクスを発行します。アカウントの Datadog インテグレーションタイルを使用して、Datadog サーバーを使用してメトリクスをクロールおよび保存するこれらのインテグレーションを構成します。
-    link: /integrations/#cat-cloud
+    link: '/integrations/#cat-cloud'
     image: int_cloud.png

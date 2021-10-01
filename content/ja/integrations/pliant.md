@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md'
 display_name: Pliant
 draft: false
 git_integration_title: pliant
