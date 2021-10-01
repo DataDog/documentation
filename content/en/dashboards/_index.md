@@ -94,19 +94,19 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-Click the settings modal for the whole dashboard, and select *Permissions*.
+At the top of the dashboard, click on settings and select *Permissions*.
 
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="Dashboard Menu" style="width:50%;">}}
+{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
 
-Use the pop up to restrict access to you, everyone in your org with your role, or to specific roles in your org.
+Use the pop up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
 
-{{< img src="dashboards/dashboard-role-restrictions.png" alt="Role restrictions" style="width:70%;">}}
+{{< img src="dashboards/dashboard-role-restrictions.png" alt="Role restrictions in settings" style="width:70%;">}}
 
-Creators will always be able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role to the ACL so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][13].
+Creators are always able to edit the dashboard, but other users who are allowed to edit the dashboard can add or remove any role from the access control list (ACL) so long as the final ACL includes one of their roles. For more information about roles, see the [RBAC documentation][10].
 
-Users who used the now deprecated "read only" check box will find that the access control list will be prepopulated with a list of Admin roles with the "Privileged Access" permission. 
+If you used the now deprecated "read only" check box, the access control list is pre-populated with a list of Admin roles with the "Privileged Access" permission.
 
-If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information you can review the [Terraform Dashboard role restriction guide][14]
+If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][11].
 
 #### Clone dashboard
 
@@ -136,7 +136,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][11] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][12].
+Search, view, or create dashboards and lists on the [Dashboard List][12] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][13].
 
 {{< img src="dashboards/dashboard_list2.png" alt="Dashboard List page"  >}}
 
@@ -206,8 +206,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 [7]: /dashboards/guide/custom_time_frames/
 [8]: /dashboards/sharing/#dashboards
 [9]: /events/
-[10]: /account_management/users/default_roles/
-[11]: https://app.datadoghq.com/dashboard/lists
-[12]: /help/
-[13]: /account_management/rbac/
-[14]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[10]: /account_management/rbac/
+[11]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[12]: https://app.datadoghq.com/dashboard/lists
+[13]: /help/
