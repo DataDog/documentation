@@ -3,7 +3,7 @@ title: 開発者
 kind: documentation
 description: 構成やコードのサンプルなど、Datadog 向けの開発のための参考資料
 aliases:
-  - /ja/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog'
+  - /ja/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 further_reading:
   - link: /api
     tag: Documentation
