@@ -840,7 +840,7 @@ components:
       x-enum-varnames:
       - CHECK_STATUS
     ContentEncoding:
-      description: HTTP header used to compress the media-type
+      description: HTTP header used to compress the media-type.
       enum:
       - gzip
       - deflate
@@ -5293,6 +5293,13 @@ components:
       type: string
       x-enum-varnames:
       - USER_AGENT_PARSER
+    MetricContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
     MetricMetadata:
       description: Object with all metric related metadata.
       properties:
@@ -11269,6 +11276,14 @@ components:
         query:
           description: Query to use for the test.
           type: object
+        servername:
+          description: 'For SSL tests, it specifies on which server you want to initiate
+            the TLS handshake,
+
+            allowing the server to present one of multiple possible certificates on
+
+            the same IP address and TCP port number.'
+          type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
             the path to the host destination.
@@ -21964,6 +21979,13 @@ paths:
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."
       operationId: SubmitMetrics
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/MetricContentEncoding'
       requestBody:
         content:
           text/json:
