@@ -120,7 +120,7 @@ For help troubleshooting the Agent:
 [8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [10]: https://app.datadoghq.com/account/settings#api
-[11]: /getting_started/agent/configuration/
+[11]: /getting_started/agent/#configuration
 [12]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [13]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
 [14]: /agent/guide/agent-commands/#agent-status-and-information

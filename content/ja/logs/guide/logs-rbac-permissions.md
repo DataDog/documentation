@@ -76,7 +76,7 @@ further_reading:
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="ログ書き込み除外フィルター"  style="width:75%;" >}}
 
 
-[1]: /ja/logs/pipelines/indexes
+[1]: /ja/logs/log_configuration/indexes/
 {{% /tab %}}
 {{% tab "API" %}}
 
