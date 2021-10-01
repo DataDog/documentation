@@ -47,5 +47,5 @@ Les histogrammes sont calculés toutes les 10 secondes sur un host par l'Agent D
 [1]: /fr/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [3]: /fr/developers/community/libraries/
-[4]: /fr/metrics/histograms/
+[4]: /fr/metrics/types/?tab=histogram#metric-types
 [5]: /fr/developers/faq/characteristics-of-datadog-histograms/

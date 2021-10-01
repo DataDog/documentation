@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
-- link: "/tracing/troubleshooting/connection-errors/"
+- link: "/tracing/troubleshooting/connection_errors"
   tag: "Documentation"
   text: "Connection Errors"
 - link: "/tracing/troubleshooting/tracer_startup_logs/"
