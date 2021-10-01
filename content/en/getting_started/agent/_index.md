@@ -28,7 +28,7 @@ The Agent can be installed on many different platforms either directly on the ho
 
 ### Configuration
 
-The Agent's [main configuration file][9] is `datadog.yaml`. The required parameters are your [Datadog API key][10] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [Datadog Agent configuration guide][11] or [sample config_template.yaml][12] for all available configuration options.
+The Agent's [main configuration file][9] is `datadog.yaml`. The required parameters are your [Datadog API key][10] which is used to associate your Agent's data with your organization and the Datadog site ({{< region-param key="dd_site" code="true" >}}). See the [Getting Started with the Datadog Agent guide][11] or [sample config_template.yaml][12] for all available configuration options.
 
 For the [container Agent][8], `datadog.yaml` configuration options are passed in with [environment variables][13], for example:
 
