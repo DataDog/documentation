@@ -33,15 +33,6 @@ To enable Audit Logs, navigate to your [Organization Settings][2] and select *Au
 
 Audit Logs is configurable by event type. Enabled events are specific to actions that take place in Datadog. The following event types are supported for Audit Logs:
 
-- Access Management: Manage access, such as roles and users
-- Authentication: Successful and failed login attempts
-- Dashboard: Additions, deletions, and changes to dashboard resources
-- Log Management: Additions, deletions, and changes to log management resources
-- Monitor: Additions, deletions, and changes to monitor resources
-- Notebooks: Additions, deletions, and changes to notebook resources
-- Request: All web requests
-- Security Monitoring: Additions, deletions, and changes to security monitoring resources
-
 {{< img src="account_management/audit_logs/event-types.png" alt="Audit Logs event types setup in Datadog" style="width:70%;">}}
 
 ### Archiving
