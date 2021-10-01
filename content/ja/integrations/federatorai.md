@@ -17,7 +17,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md'
 display_name: Federator.ai
 draft: false
 git_integration_title: federatorai

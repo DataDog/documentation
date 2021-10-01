@@ -154,7 +154,7 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 [7]: /ja/integrations/
 [8]: /ja/integrations/amazon_ec2/
 [9]: /ja/logs/logs_to_metrics/
-[10]: /ja/metrics/
+[10]: /ja/metrics/custom_metrics/
 [11]: /ja/agent/
 [12]: /ja/metrics/dogstatsd_metrics_submission/
 [13]: /ja/api/

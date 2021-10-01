@@ -4,7 +4,7 @@ categories:
   - exceptions
 dependencies: []
 description: イベントストリームで Airbrake の例外を表示、検索、議論。
-doc_link: https://docs.datadoghq.com/integrations/airbrake/
+doc_link: 'https://docs.datadoghq.com/integrations/airbrake/'
 draft: false
 git_integration_title: airbrake
 has_logo: true

@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Simple Workflow Service のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_swf/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_swf/'
 draft: false
 git_integration_title: amazon_swf
 has_logo: true

@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Event Grid のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_event_grid/'
 draft: false
 git_integration_title: azure_event_grid
 has_logo: true

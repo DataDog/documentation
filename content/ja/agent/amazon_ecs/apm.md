@@ -125,6 +125,7 @@ tracer.configure(hostname=get_aws_ip())
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
 
+
 [1]: https://docs.datadoghq.com/ja/tracing/setup/python/#change-agent-hostname
 {{< /programming-lang >}}
 
@@ -140,7 +141,7 @@ const axios = require('axios');
 })();
 ```
 
-他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更][1]を参照してください。
+他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
 
 [1]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/#change-agent-hostname
@@ -195,7 +196,7 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 ]
 ```
 
-他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更][1]を参照してください。
+他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
 
 [1]: https://docs.datadoghq.com/ja/tracing/setup/java/#change-agent-hostname
