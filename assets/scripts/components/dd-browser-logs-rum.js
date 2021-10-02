@@ -54,4 +54,4 @@ if (datadogLogs) {
     }
 }
 
-throw Error('Testing RUM error tracking + source maps again.');
+throw Error('Custom error in dd libs init');
