@@ -162,18 +162,18 @@ Override the address of the trace Agent host that the default tracer attempts to
 Override the port that the default tracer submit traces to.
 
 `DD_TRACE_AGENT_URL`
-: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the configuration `apm_config.receiver_socket` in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS.
+: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS.
 
 `DD_DOGSTATSD_URL`
-: The URL used to connect to the Datadog agent for Dogstatsd metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the configuration `dogstatsd_socket` in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS.
+: The URL used to connect to the Datadog Agent for DogStatsD metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `dogstatsd_socket` configuration in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog Agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS.
 
 `DD_DOGSTATSD_HOST`
 : **Default**: `localhost`<br>
-Override the address of the trace Agent host that the default tracer attempts to submit Dogstatsd metrics to. Is overidden by `DD_AGENT_HOST`.
+Override the address of the trace Agent host that the default tracer attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8126`<br>
-Override the port that the default tracer submit Dogstatsd metrics to.
+Override the port that the default tracer submits DogStatsD metrics to.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>
