@@ -84,13 +84,13 @@ $ rpm -q gpg-pubkey-fd4bf915
 If the key is trusted, the command has a 0 exit code and outputs:
 
 ```
-gpg-pubkey-e09422b3-57744e9e
+gpg-pubkey-fd4bf915-5f573efe
 ```
 
 Otherwise, the command returns a non-0 exit code and the following output:
 
 ```
-package gpg-pubkey-e09422b3 is not installed
+package gpg-pubkey-fd4bf915 is not installed
 ```
 
 {{% /tab %}}
