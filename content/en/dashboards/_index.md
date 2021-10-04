@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
   tag: "Blog"
   text: "The new Datadog dashboards experience"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Developer docs"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
