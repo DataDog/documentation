@@ -298,7 +298,9 @@ The .NET Tracer has configuration settings which you can set by any of these met
 
 {{% tab "Environment variables" %}}
 
-To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see Configuring process environment variables.
+To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
+
+[1]: #configuring-process-environment-variables
 
 {{% /tab %}}
 
