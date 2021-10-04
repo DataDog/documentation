@@ -62,8 +62,12 @@ If you encounter an error coming from your IdP such as Google, Active Directory,
 
 - If you encounter an issue in Google's Admin Console, see [SAML app error messages][7].
 - If you encounter an issue in Active Directory, see [Debug SAML-based single sign-on to applications in Azure Active Directory][8].
-- If you encounter an issue in Azure, see [An app page shows an error message after the user signs in][9].
-- If you encounter an issue in LastPass, see the [Datadog App Integration][10].
+- If you encounter an issue in AuthO, see [Troubleshoot SAML Configurations][9].
+- If you encounter an issue in Azure, see [An app page shows an error message after the user signs in][10].
+- If you encounter an issue in Google, see [Datadog cloud application][11].
+- If you encounter an issue in LastPass, see the [Datadog App Integration][12].
+- If you encounter an issue in Okta, see [Receiving 404 error when attempting to sign into application][13].
+- If you encounter an issue in SafeNet, see [SafeNet Trusted Access for Datadog][14].
 
 ### Identity provider certificates
 
@@ -78,9 +82,9 @@ Some questions to ask yourself that can help narrow down whether you have a cert
 
 ## Support
 
-If you are still having trouble logging into Datadog, contact [Datadog support][11]. 
+If you are still having trouble logging into Datadog, contact [Datadog support][15]. 
 
-In your message, provide a screen recording of your login process and include answers to these questions: 
+In your message, provide a screen recording of your login process and include responses to the following questions: 
 
 - Are you the only account that is unable to login or are all users unable to login?
 - Which organization are you trying to login to and how are you trying to login?
@@ -97,6 +101,10 @@ In your message, provide a screen recording of your login process and include an
 [6]: https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-about-attribute-mappings.htm
 [7]: https://support.google.com/a/answer/6301076
 [8]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/debug-saml-sso-issues
-[9]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/application-sign-in-problem-application-error
-[10]: https://support.logmeininc.com/lastpass/help/datadog-app-integration
-[11]: https://www.datadoghq.com/support/
+[9]: https://auth0.com/docs/troubleshoot/troubleshoot-authentication/troubleshoot-saml-configurations
+[10]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/application-sign-in-problem-application-error
+[11]: https://support.google.com/a/answer/7553768
+[12]: https://support.logmeininc.com/lastpass/help/datadog-app-integration
+[13]: https://support.okta.com/help/s/article/Receiving-404-error-when-attempting-to-sign-into-application?language=en_US
+[14]: https://resources.safenetid.com/help/Datadog/Index.htm
+[15]: https://www.datadoghq.com/support/
