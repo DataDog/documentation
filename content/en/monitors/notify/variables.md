@@ -108,6 +108,8 @@ The message will render the `error.message` attribute of a chosen log matching t
 
 <div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable will render empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
 
+##### Top level attributes
+
 Logs, spans and RUM events also have some first level attributes, that you can use in variables following the following syntax :
 
 | Monitor type    | Variable syntax                       | First level attributes |
@@ -115,6 +117,8 @@ Logs, spans and RUM events also have some first level attributes, that you can u
 | RUM             | `{{rum.key}}`                         | `service`, `status`, `timestamp` |
 | Trace Analytics | `{{span.key}}`                        | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
 | Log             | `{{log.key}}`                         | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
+
+##### Explorer link
 
 ### Check monitor variables
 
