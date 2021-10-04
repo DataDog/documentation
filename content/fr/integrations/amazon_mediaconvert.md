@@ -6,10 +6,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elemental\_MediaConvert."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediaconvert/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_mediaconvert/
 draft: false
 git_integration_title: amazon_mediaconvert
 has_logo: true
+integration_id: amazon-mediaconvert
 integration_title: "Amazon\_Elemental\_MediaConvert"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Amazon Elemental MediaConvert est un service de transcodage et de compression 
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'Elemental MediaConvert.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -40,17 +41,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon Elemental MediaConvert de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon Elemental MediaConvert de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_mediaconvert` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Elemental MediaConvert dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Elemental MediaConvert dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][6]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
 
 ## Données collectées
 

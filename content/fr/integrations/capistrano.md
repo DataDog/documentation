@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Enregistrez et recherchez des déploiements pour les superposer sur des graphiques de métriques clés.
-doc_link: 'https://docs.datadoghq.com/integrations/capistrano/'
+doc_link: https://docs.datadoghq.com/integrations/capistrano/
 draft: false
 git_integration_title: capistrano
 has_logo: true
