@@ -4537,10 +4537,10 @@ https-proxy-agent@^3.0.0:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
-hugo-bin@0.67.1:
-  version "0.67.1"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.67.1.tgz#110e7200a895a4094083d5954c17c563a836bd19"
-  integrity sha512-9PRyXRu+yZ7LCnx7s2TOVwtvIXxphEtYtQkPiLtQc/5CVu5g34JZslgCqtvrmFsjWE2OonG1YUFPZf4/p6ewPA==
+hugo-bin@^0.76.1:
+  version "0.76.1"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.76.1.tgz#32f98e775468b1abe78fbd8f8cd08c2f1290b127"
+  integrity sha512-uDp8covsy0NBdavzDSaHETobArUxJHR27EORxqzIy+dUMV5cliPlX8F07A6dL+tcTj2gbPdQ+f3O76ecWmladQ==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
