@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Envoyez des métriques depuis Pusher vers Datadog pour consulter et surveiller l'engagement d'une app.
-doc_link: https://docs.datadoghq.com/integrations/pusher/
+doc_link: 'https://docs.datadoghq.com/integrations/pusher/'
 draft: false
 git_integration_title: pusher
 has_logo: true

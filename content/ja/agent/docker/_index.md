@@ -33,14 +33,14 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| Docker Hub                                             | GCR                                                             |ECR-Public                                                            |
-|--------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
+| Docker Hub     | GCR          |ECR-Public         |
+|----------------|--------------|-----------|
+| [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
 | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
 
 ## セットアップ
 
-Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][6]を参照してください。[サポートされるバージョン][7]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<ご使用の_DATADOG_API_キー>` を [Datadog API キー][8]と置き換えてください。
+Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<ご使用の_DATADOG_API_キー>` を [Datadog API キー][10]と置き換えてください。
 
 {{< tabs >}}
 {{% tab "標準" %}}
@@ -115,15 +115,15 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: Docker Compose については、[Compose と Datadog Agent][9] を参照してください。
+**注**: Docker Compose については、[Compose と Datadog Agent][11] を参照してください。
 
 ## 統合
 
-クラスター内で Agent を起動し、実行したら、[Datadog のオートディスカバリー機能][10]を使ってアプリケーションコンテナからメトリクスとログを自動的に収集します。
+クラスター内で Agent を起動し、実行したら、[Datadog のオートディスカバリー機能][12]を使ってアプリケーションコンテナからメトリクスとログを自動的に収集します。
 
 ## 環境変数
 
-Agent の [メインコンフィギュレーションファイル][11]は `datadog.yaml` です。Docker Agent の場合、`datadog.yaml` コンフィギュレーションオプションは環境変数で渡されます。
+Agent の [メインコンフィギュレーションファイル][13]は `datadog.yaml` です。Docker Agent の場合、`datadog.yaml` コンフィギュレーションオプションは環境変数で渡されます。
 
 ### グローバルオプション
 
@@ -147,7 +147,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_PROXY_HTTPS`    | `https` リクエスト用のプロキシとして使用する HTTPS URL です。              |
 | `DD_PROXY_NO_PROXY` | プロキシを使用すべきではない場合に必要となる、URL をスペースで区切ったリストです。 |
 
-プロキシ設定の詳細については、[Agent v6 プロキシのドキュメント][12]を参照してください。
+プロキシ設定の詳細については、[Agent v6 プロキシのドキュメント][14]を参照してください。
 
 ### オプションの収集 Agent
 
@@ -155,13 +155,13 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 
 | 環境変数               | 説明                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | トレース Agent による [トレースの収集][13]を有効にします。                                                                                                                                                                                                              |
-| `DD_LOGS_ENABLED`          | ログ Agent による[ログの収集][14]を有効にします。                                                                                                                                                                                                                 |
-| `DD_PROCESS_AGENT_ENABLED` | プロセス Agent による[ライブプロセスの収集][15]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][16]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][15]と[ライブコンテナービュー][16]が無効になります。 |
+| `DD_APM_ENABLED`           | トレース Agent による [トレースの収集][15]を有効にします。                                                                                                                                                                                                              |
+| `DD_LOGS_ENABLED`          | ログ Agent による[ログの収集][16]を有効にします。                                                                                                                                                                                                                 |
+| `DD_PROCESS_AGENT_ENABLED` | プロセス Agent による[ライブプロセスの収集][17]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][18]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][17]と[ライブコンテナービュー][18]が無効になります。 |
 
 ### DogStatsD (カスタムメトリクス)
 
-カスタムメトリクスを [StatsD プロトコル][17]で送信します。
+カスタムメトリクスを [StatsD プロトコル][19]で送信します。
 
 | 環境変数                     | 説明                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -172,13 +172,13 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `"env:golden group:retrievers"` のように追加します。 |
 | `DD_DOGSTATSD_DISABLE`           | DogStatsD ライブラリからのカスタムメトリクス送信を無効化                                                                                                |
-詳しくは、[Unix ドメインソケット上の DogStatsD][18] を参照してください。
+詳しくは、[Unix ドメインソケット上の DogStatsD][20] を参照してください。
 
 ### タグ付け
 
-ベストプラクティスとして、Datadog はタグを割り当てるときに[統合サービスタグ付け][19]を使用することをお勧めします。
+ベストプラクティスとして、Datadog はタグを割り当てるときに[統合サービスタグ付け][21]を使用することをお勧めします。
 
-Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad、Rancher][20] からの一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+Datadog は [Docker][22]、[Kubernetes][23]、[ECS][24]、[Swarm、Mesos、Nomad、Rancher][22] からの一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
 | 環境変数               | 説明                                               |
 |----------------------------|-----------------------------------------------------------|
@@ -186,11 +186,11 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 | `DD_DOCKER_ENV_AS_TAGS`    | Docker コンテナ環境変数を抽出します            |
 | `DD_COLLECT_EC2_TAGS`      | AWS インテグレーションを使用せずに、カスタム EC2 タグを抽出します |
 
-詳細については、[Docker タグの抽出][23]ドキュメントを参照してください。
+詳細については、[Docker タグの抽出][25]ドキュメントを参照してください。
 
 ### シークレットファイルの使用
 
-インテグレーションの資格情報を Docker や Kubernetes のシークレットに格納し、オートディスカバリーテンプレートで使用できます。詳細については、[シークレット管理のドキュメント][24]を参照してください。
+インテグレーションの資格情報を Docker や Kubernetes のシークレットに格納し、オートディスカバリーテンプレートで使用できます。詳細については、[シークレット管理のドキュメント][26]を参照してください。
 
 ### コンテナの無視
 
@@ -207,7 +207,7 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 | `DD_AC_INCLUDE`                | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`                                                                                                                                                     |
 | `DD_AC_EXCLUDE`                | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*`                                                                                        |
 
-その他の例は[コンテナのディスカバリー管理][25]ページでご確認いただけます。
+その他の例は[コンテナのディスカバリー管理][27]ページでご確認いただけます。
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。なお、これらはコンテナの課金に影響しません。
 
@@ -222,7 +222,7 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 
 ## コマンド
 
-すべての Docker Agent コマンドは [Agent コマンドガイド][26]でご確認いただけます。
+すべての Docker Agent コマンドは [Agent コマンドガイド][28]でご確認いただけます。
 
 ## 収集データ
 
@@ -232,16 +232,16 @@ Datadog は [Docker][20]、[Kubernetes][21]、[ECS][22]、[Swarm、Mesos、Nomad
 
 | チェック       | メトリクス       |
 |-------------|---------------|
-| CPU         | [System][27]  |
-| ディスク        | [Disk][28]    |
-| Docker      | [Docker][29]  |
-| ファイル処理 | [System][27]  |
-| IO          | [System][27]  |
-| ロード        | [System][27]  |
-| メモリ      | [System][27]  |
-| ネットワーク     | [Network][30] |
-| NTP         | [NTP][31]     |
-| アップタイム      | [System][27]  |
+| CPU         | [System][29]  |
+| ディスク        | [Disk][30]    |
+| Docker      | [Docker][31]  |
+| ファイル処理 | [System][29]  |
+| IO          | [System][29]  |
+| ロード        | [System][29]  |
+| メモリ      | [System][29]  |
+| ネットワーク     | [Network][32] |
+| NTP         | [NTP][33]     |
+| アップタイム      | [System][29]  |
 
 ### イベント
 
@@ -263,32 +263,32 @@ Agent チェックが Datadog にメトリクスを送信できない場合は�
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 [4]: https://gallery.ecr.aws/datadog/agent
-[4]: https://hub.docker.com/r/datadog/docker-dd-agent
-[5]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
-[6]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[6]: https://app.datadoghq.com/account/settings#agent/docker
-[7]: /ja/agent/basic_agent_usage/#supported-os-versions
-[8]: https://app.datadoghq.com/account/settings#api
-[9]: /ja/integrations/faq/compose-and-the-datadog-agent/
-[10]: /ja/agent/docker/integrations/
-[11]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /ja/agent/proxy/#agent-v6
-[13]: /ja/agent/docker/apm/
-[14]: /ja/agent/docker/log/
-[15]: /ja/infrastructure/process/
-[16]: /ja/infrastructure/livecontainers/
-[17]: /ja/developers/dogstatsd/
-[18]: /ja/developers/dogstatsd/unix_socket/
-[19]: /ja/getting_started/tagging/unified_service_tagging/
-[20]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[22]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[23]: /ja/agent/docker/tag/
-[24]: /ja/agent/guide/secrets-management/?tab=linux
-[25]: /ja/agent/guide/autodiscovery-management/
-[26]: /ja/agent/guide/agent-commands/
-[27]: /ja/integrations/system/#metrics
-[28]: /ja/integrations/disk/#metrics
-[29]: /ja/agent/docker/data_collected/#metrics
-[30]: /ja/integrations/network/#metrics
-[31]: /ja/integrations/ntp/#metrics
+[5]: https://hub.docker.com/r/datadog/docker-dd-agent
+[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
+[7]: https://gallery.ecr.aws/datadog/docker-dd-agent
+[8]: https://app.datadoghq.com/account/settings#agent/docker
+[9]: /ja/agent/basic_agent_usage/#supported-os-versions
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: /ja/integrations/faq/compose-and-the-datadog-agent/
+[12]: /ja/agent/docker/integrations/
+[13]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[14]: /ja/agent/proxy/#agent-v6
+[15]: /ja/agent/docker/apm/
+[16]: /ja/agent/docker/log/
+[17]: /ja/infrastructure/process/
+[18]: /ja/infrastructure/livecontainers/
+[19]: /ja/developers/dogstatsd/
+[20]: /ja/developers/dogstatsd/unix_socket/
+[21]: /ja/getting_started/tagging/unified_service_tagging/
+[22]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[24]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[25]: /ja/agent/docker/tag/
+[26]: /ja/agent/guide/secrets-management/?tab=linux
+[27]: /ja/agent/guide/autodiscovery-management/
+[28]: /ja/agent/guide/agent-commands/
+[29]: /ja/integrations/system/#metrics
+[30]: /ja/integrations/disk/#metrics
+[31]: /ja/agent/docker/data_collected/#metrics
+[32]: /ja/integrations/network/#metrics
+[33]: /ja/integrations/ntp/#metrics

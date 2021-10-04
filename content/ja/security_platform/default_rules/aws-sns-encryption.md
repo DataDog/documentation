@@ -33,12 +33,12 @@ AWS の Simple Notification Service (SNS) サーバーでサーバーサイド�
 
 [SNS トピックの ARN][2] および [KmsMasterKeyId][3] で `set-topic-attributes` を実行します。
 
-{{< code-block lang="bash" filename="set-topic-attributes.sh" >}}
-aws sns set-topic-attributes
-  --topic-arn arn:aws:sns:region:123456789012:YourTopic
-  --attribute-name KmsMasterKeyId
-  --attribute-value YourTopicDisplayName
-{{< /code-block >}}
+    {{< code-block lang="bash" filename="set-topic-attributes.sh" >}}
+    aws sns set-topic-attributes
+    --topic-arn arn:aws:sns:region:123456789012:YourTopic
+    --attribute-name KmsMasterKeyId
+    --attribute-value YourTopicDisplayName
+    {{< /code-block >}}
 
 [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-enable-encryption-for-topic.html
 [2]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sns/set-topic-attributes.html#set-topic-attributes

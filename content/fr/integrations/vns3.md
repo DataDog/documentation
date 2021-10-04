@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md'
 display_name: VNS3
 draft: false
 git_integration_title: vns3

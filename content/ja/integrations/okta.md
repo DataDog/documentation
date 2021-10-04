@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Okta セキュリティイベントログを Datadog に統合します。
-doc_link: 'https://docs.datadoghq.com/integrations/okta/'
+doc_link: https://docs.datadoghq.com/integrations/okta/
 draft: false
 git_integration_title: okta
 has_logo: true
