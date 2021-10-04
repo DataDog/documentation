@@ -84,9 +84,9 @@ If your facet has periods, use brackets around the facet, for example:
 {{ [@network.client.ip].name }}
 ```
 
-### Attributes and Tag variables
+### Attribute and Tag variables
 
-_Available for Log monitor, Trace Analytics monitor (APM) and RUM monitor_
+_Available for [Log monitor][3], [Trace Analytics monitor][4] (APM) and [RUM monitor][5]_
 
 To include **any** attribute or tag from an event matching the monitor query, use the following variables :
 
@@ -96,9 +96,9 @@ To include **any** attribute or tag from an event matching the monitor query, us
 | Trace Analytics |  `{{span.attributes.key}}` / `{{span.tags.key}}`        |
 | Log             |  `{{log.attributes.key}}` / `{{log.tags.key}}`          |
 
-For any `key:value` pair, the variable `{{log.attributes.key}}` renders `value` in the alert message.
+For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
-**Example**: if a log monitor is grouped by `@error_code`, to include the error message in the notification message, use the variable :
+**Example**: if a log monitor is grouped by `@error.code`, to include the error message in the notification message, use the variable :
 
 ```text
 {{ log.attributes.[error.message] }}
@@ -108,9 +108,9 @@ The message will render the `error.message` attribute of a chosen log matching t
 
 <div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable will render empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
 
-##### Top level attributes
+#### First level attributes
 
-Logs, spans and RUM events also have some first level attributes, that you can use in variables following the following syntax :
+Logs, spans and RUM events have generic first level attributes, that you can also use in variables following the following syntax :
 
 | Monitor type    | Variable syntax                       | First level attributes |
 |-----------------|---------------------------------------|------------------------|
@@ -118,7 +118,11 @@ Logs, spans and RUM events also have some first level attributes, that you can u
 | Trace Analytics | `{{span.key}}`                        | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
 | Log             | `{{log.key}}`                         | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
 
-##### Explorer link
+If the matching event does not contain the attribute in its definition, the variable is rendered empty.
+
+#### Explorer link
+
+Use `{{log.link}}`, `{{rum.link}}` and `{{span.link}}` to enrich the notification with a link to the log, rum or trace explorer, scoped on the events matching the query.
 
 ### Check monitor variables
 
@@ -436,3 +440,6 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 [1]: /monitors/guide/template-variable-evaluation/
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[3]: /monitors/create/types/log/
+[4]: /monitors/create/types/apm/?tab=analytics
+[5]: /monitors/create/types/real_uscaer_monitoring/
