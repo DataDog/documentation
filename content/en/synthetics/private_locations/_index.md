@@ -595,17 +595,23 @@ Read more about [dimensioning private locations](#dimension-your-private-locatio
 
 ## Monitor your private locations
 
-Although it's important to initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to monitor your containers. 
+Although it's important to initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor it. 
 
-Private locations come with a set of out of the box [metrics][LINK] allowing you to keep track of your private location health. At your first private location creation, three monitors are also created on your account:
+### Out of the box monitoring
 
-* `[Synthetic Private Locations] {{location_id.name}} is down`
-* `[Synthetic Private Locations] {{location_id.name}} is underprovisioned`
-* `[Synthetic Private Locations] {{location_id.name}} uses an outdated image version`
+Private locations come with a set of out of the box [metrics][LINK] allowing you to keep track of your private location health at a high level. You can visualize these metrics in the side panel of each private location listed on your [Settings][LINK] page or graph these metrics in [dashboards][LINK], like any other Datadog metric.
+
+At your first private location creation, three monitors are also created on your account:
+
+* `[Synthetic Private Locations] {{location_id.name}} stopped reporting`: This monitor triggers a `NO DATA` alert whenever the `synthetics.pl.worker.running` metric stops reporting data for one of your private locations. This indicates your private location containers might have been killed or stopped running.
+* `[Synthetic Private Locations] {{location_id.name}} is underprovisioned`: [TODO]
+* `[Synthetic Private Locations] {{location_id.name}} uses an outdated image version`: This monitor triggers an `ALERT` whenever the `synthetics.pl.worker.outdated` metric starts reporting 1 for one of your private locations. This indicates that at least one of your private location containers is running an outdated version of the private location image. You can check what the latest version of the image is by looking at the [Google Container Registry][LINK] and upgrade workers to that version of the image by pulling the `datadog/synthetics-private-location-worker` image with the `latest` tag.
 
 By default, no handle is set in these monitors. If you want to be alerted in case one of your monitors starts failing, you should make sure to add a handle in your monitors' notification sections.
 
-In addition to the out of the box private location metrics, we strongly recommend installing the [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] provides you with metrics about the health of your containers (memory usage and limits, CPU, disk, etc.), which you can then use to graph and be alerted on low resources.
+### Datadog Agent monitoring
+
+In addition to the out of the box private location metrics, we strongly recommend installing the [Datadog Agent][16] alongside your private location. The [Datadog Agent][16] allows to get in-depth visibility on your private locations by providing you with metrics about the health of the underlying containers (memory usage and limits, CPU, disk, etc.), which you can then use to graph and be alerted on low resources.
 
 ## Further Reading
 
