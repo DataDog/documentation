@@ -21,8 +21,6 @@ To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu an
 
 Select a [monitor type][5] from the list.
 
-{{< img src="/monitors/create/choose_monitor_type.gif" alt="Choose monitor type" style="width:90%;">}}
-
 {{< whatsnext desc="Choose your monitor type:">}}
 {{< nextlink href="/monitors/create/types/host" >}}<u>Host</u>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/create/types/metric" >}}<u>Metric</u>: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}

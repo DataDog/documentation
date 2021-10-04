@@ -261,6 +261,74 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
+{{% tab "Terraform" %}}
+
+### Update configurations
+
+1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
+
+{{< site-region region="us,us3,eu" >}}
+```hcl
+variable "dd_api_key" {
+  type        = string
+  description = "Datadog API key"
+}
+resource "aws_lambda_function" "my_func" {
+  function_name = "my_func"
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+  layers = [
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
+      "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>",
+  ]
+  environment {
+    variables = {
+      DD_LAMBDA_HANDLER = "my_func.handler"
+      DD_TRACE_ENABLED = true
+      DD_API_KEY = var.dd_api_key
+    }
+  }
+}
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```hcl
+variable "dd_api_key" {
+  type        = string
+  description = "Datadog API key"
+}
+resource "aws_lambda_function" "my_func" {
+  function_name = "my_func"
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+  layers = [
+      "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<LIBRARY_VERSION>",
+      "arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>",
+  ]
+  environment {
+    variables = {
+      DD_LAMBDA_HANDLER = "my_func.handler"
+      DD_TRACE_ENABLED = true
+      DD_API_KEY = var.dd_api_key
+    }
+  }
+}
+```
+{{< /site-region >}}
+
+2. Replace the following placeholders with appropriate values:
+
+    - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
+    - Replace `<RUNTIME>` with the appropriate Node.js runtime. The available `RUNTIME` options are `Node10-x`, `Node12-x`, and `Node14-x`.
+    - Replace `<LIBRARY_VERSION>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="node" >}}`.
+    - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+
+3. Apply the Terraform configuration with your Datadog API key that can be found on the [API Management page][1]:
+
+    ```bash
+    terraform apply -var "dd_api_key=<DD_API_KEY>"
+    ```
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, we strongly encourage you instrument your serverless applications with the <a href="./?tab=datadogcli#configuration">Datadog CLI</a>.</div>

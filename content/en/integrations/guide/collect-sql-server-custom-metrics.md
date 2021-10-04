@@ -198,4 +198,4 @@ If your custom metrics are not appearing in Datadog, check the Agent log file. I
 [1]: /integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
 [3]: /metrics/#metric-types
-[4]: /metrics/histograms/
+[4]: /metrics/types/?tab=histogram#metric-types

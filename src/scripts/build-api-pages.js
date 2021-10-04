@@ -198,7 +198,7 @@ const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
   contentTypeKeys.forEach((key) => {
-    if(key.startsWith("application/json")) {
+    if(key.startsWith("application/json") || key.startsWith("text/json")) {
       return content[key].schema;
     }
   });
@@ -895,6 +895,8 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
           item['request_description'] = action.requestBody.description || '';
           if (action.requestBody.content && action.requestBody.content["application/json"]) {
             item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
+          } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
+            item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
           }
         }
         /*

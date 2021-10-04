@@ -93,7 +93,7 @@ We are working to support more processors types. For more details, [contact Supp
 [16]: /events/explorer/#event-analytics
 [17]: /logs/explorer/search_syntax/
 [18]: /dashboards/widgets/alert_graph/
-[19]: /dash/integration/30532/monitor-notifications-overview
+[19]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [20]: /getting_started/tagging/unified_service_tagging/
 [21]: /logs/guide/enrichment-tables/
 [22]: /help/
