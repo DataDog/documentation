@@ -51,11 +51,9 @@ For example, if your monitor triggers for each `env`, then the variable `{{env.n
 
 For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message will render a comma-separated string of all values, in the lexicographic order.
 
-<div class="alert alert-info"><strong>Note</strong>: Tag variables on single alert monitors are not supported. If you want to know the specific tag value that caused the alert, use a multi-alert monitor instead.</div>
-
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
-### Multi-alert group by host
+#### Multi-alert group by host
 
 If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
 To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
@@ -66,25 +64,9 @@ Some specific host metadata are available as well:
 - Platform      : {{host.metadata_platform}}
 - Processor     : {{host.metadata_processor}}
 
+### Facet variables
 
-### Tag key with period
-
-If your tag's key has a period in it, include brackets around the full key when using a tag variable.
-For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
-
-```text
-{{[dot.key.test].name}}
-```
-
-If the tag is on an event and you're using an event monitor, use:
-
-```text
-{{ event.tags.[dot.key.test] }}
-```
-
-### Log facet variables
-
-Log monitors can use facets as variables if the monitor is grouped by the facets.
+Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by the facets.
 For example, if your log monitor is grouped by the `facet`, the variable is:
 
 ```text
@@ -95,13 +77,46 @@ For example, if your log monitor is grouped by the `facet`, the variable is:
 ```text
 This alert was triggered on {{ @machine_id.name }}
 ```
+
 If your facet has periods, use brackets around the facet, for example:
 
 ```text
 {{ [@network.client.ip].name }}
 ```
 
-#### Check monitor variables
+### Attributes and Tag variables
+
+_Available for Log monitor, Trace Analytics monitor (APM) and RUM monitor_
+
+To include **any** attribute or tag from an event matching the monitor query, use the following variables :
+
+| Monitor type    | Variable syntax                                         |
+|-----------------|---------------------------------------------------------|
+| RUM             |  `{{rum.attributes.key}}` / `{{rum.tags.key}}`          |
+| Trace Analytics |  `{{span.attributes.key}}` / `{{span.tags.key}}`        |
+| Log             |  `{{log.attributes.key}}` / `{{log.tags.key}}`          |
+
+For any `key:value` pair, the variable `{{log.attributes.key}}` renders `value` in the alert message.
+
+**Example**: if a log monitor is grouped by `@error_code`, to include the error message in the notification message, use the variable :
+
+```text
+{{ log.attributes.[error.message] }}
+```
+
+The message will render the `error.message` attribute of a chosen log matching the query, **if the attribute exists**
+
+<div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable will render empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
+
+Logs, spans and RUM events also have some first level attributes, that you can use in variables following the following syntax :
+
+| Monitor type    | Variable syntax                       | First level attributes |
+|-----------------|---------------------------------------|------------------------|
+| RUM             | `{{rum.key}}`                         | `service`, `status`, `timestamp` |
+| Trace Analytics | `{{span.key}}`                        | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
+| Log             | `{{log.key}}`                         | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
+
+### Check monitor variables
 
 For check monitor variables (custom check and integration check), the variable `{{check_message}}` is available and renders the message specified in the custom check or the integration check.
 
@@ -116,6 +131,21 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 ```
 
 Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
+
+#### Tag key with period
+
+If your tag's key has a period in it, include brackets around the full key when using a tag variable.
+For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
+
+```text
+{{[dot.key.test].name}}
+```
+
+If the tag is on an event and you're using an event monitor, use:
+
+```text
+{{ event.tags.[dot.key.test] }}
+```
 
 ## Conditional variables
 
