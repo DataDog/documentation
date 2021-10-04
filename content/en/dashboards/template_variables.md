@@ -34,13 +34,13 @@ A template variable is defined by:
 * **Tag or Attribute**:
     * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
     * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
-* **Name**: A unique name for the template variable. Template variables are automatically named after the selected tag or attribute. This name is how the variable will appear in queries on the dashboard.
+* **Name**: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
-* **Available Values**: The tag or attribute values available for selection in the dropdown. Defaults to `(all)`. The list of available values will always include `*`, which queries all values of the tag or attribute.
+* **Available Values**: The tag or attribute values available for selection in the dropdown. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
 After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
 
-{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="template variable modal with several variables set" style="width:90%;">}}
+{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
 
 [Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
