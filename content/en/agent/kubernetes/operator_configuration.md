@@ -28,7 +28,7 @@ spec:
 : `AdditionalAnnotations` provide annotations that will be added to the Agent Pods.
 
 `agent.additionalLabels`
-: `AdditionalLabels` provide labels that will be added to the cluster checks runner pods.
+: `AdditionalLabels` provide labels that are added to the cluster checks runner pods.
 
 `agent.apm.enabled`
 : Enable this to enable APM and tracing on port 8126. See the [Datadog Docker documentation][1].
@@ -94,7 +94,7 @@ spec:
 : Describes the minimum amount of compute resources required. If `requests` is omitted for a container, it defaults to `limits` if that is explicitly specified. Otherwise, it defaults to an implementation-defined value. [See the Kubernetes documentation][3].
 
 `agent.config.securityContext.allowPrivilegeEscalation`
-: Controls whether a process can gain more privileges than its parent process. This Boolean directly controls if the `no_new_privs` flag will be set on the container process. `AllowPrivilegeEscalation` is true always when the container is both run as `Privileged`, and has `CAP_SYS_ADMIN`.
+: Controls whether a process can gain more privileges than its parent process. This boolean determines whether or not the `no_new_privs` flag is set on the container process. `AllowPrivilegeEscalation` is always true when the container is run as both `Privileged` and has `CAP_SYS_ADMIN`.
 
 `agent.config.securityContext.capabilities.add`
 : Added capabilities.
@@ -115,7 +115,7 @@ spec:
 : The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
 
 `agent.config.securityContext.runAsNonRoot`
-: Indicates that the container must run as a non-root user. If true, the Kubelet validates the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
+: Indicates that the container must run as a non-root user. If true, the Kubelet validates the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation is performed. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
 
 `agent.config.securityContext.runAsUser`
 : The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
@@ -199,7 +199,7 @@ spec:
 : A list of DNS name server IP addresses. This are appended to the base nameservers generated from `dnsPolicy`. Duplicated nameservers are removed.
 
 `agent.dnsConfig.options`
-: A list of DNS resolver options. These are merged with the base options generated from `dnsPolicy`. Duplicated entries will be removed. Resolution options given in `options` override those that appear in the base `dnsPolicy`.
+: A list of DNS resolver options. These are merged with the base options generated from `dnsPolicy`. Duplicated entries are removed. Resolution options given in `options` override those that appear in the base `dnsPolicy`.
 
 `agent.dnsConfig.searches`
 : A list of DNS search domains for host-name lookup. This are appended to the base search paths generated from `dnsPolicy`. Duplicated search paths are removed.
@@ -211,7 +211,7 @@ spec:
 : Environment variables for all Datadog Agents. [See the Docker environment variables documentation][2].
 
 `agent.hostNetwork`
-: Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that will be used must be specified. Defaults to `false`.
+: Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that are used must be specified. Defaults to `false`.
 
 `agent.hostPID`
 : Use the host's PID namespace. Optional: Defaults to `false`.
@@ -247,7 +247,7 @@ spec:
 : This path (always mounted from the host) is used by the Datadog Agent to store information about processed log files. If the Datadog Agent is restarted, it allows you to start tailing the log files from the right offset. Defaults to `/var/lib/datadog-agent/logs`.
 
 `agent.priorityClassName`
-: If specified, indicates the pod's priority. `system-node-critical` and `system-cluster-critical` are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a `PriorityClass` object with that name. If not specified, the pod priority will be default or zero if there is no default.
+: If specified, indicates the pod's priority. `system-node-critical` and `system-cluster-critical` are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a `PriorityClass` object with that name. If not specified, the pod priority is set to default or zero if there is no default.
 
 `agent.process.enabled`
 : Enable this to activate live process monitoring. Note: `/etc/passwd` is automatically mounted to allow username resolution. [See the Process documentation][12].
@@ -301,7 +301,7 @@ spec:
 : Specify the seccomp profile root directory.
 
 `agent.systemProbe.securityContext.allowPrivilegeEscalation`
-: Controls whether a process can gain more privileges than its parent process. This Boolean directly controls if the `no_new_privs` flag will be set on the container process. `AllowPrivilegeEscalation` is true always when the container is: 1) run as `Privileged` 2) has `CAP_SYS_ADMIN`.
+: Controls whether a process can gain more privileges than its parent process. This boolean determines whether or not the `no_new_privs` flag is set on the container process. `AllowPrivilegeEscalation` is true always when the container is: 1) run as `Privileged` 2) has `CAP_SYS_ADMIN`.
 
 `agent.systemProbe.securityContext.capabilities.add`
 : Added capabilities.
@@ -322,7 +322,7 @@ spec:
 : The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
 
 `agent.systemProbe.securityContext.runAsNonRoot`
-: Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
+: Indicates that the container must run as a non-root user. If true, the Kubelet validates the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation is performed. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
 
 `agent.systemProbe.securityContext.runAsUser`
 : The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in `PodSecurityContext`. If set in both `SecurityContext` and `PodSecurityContext`, the value specified in `SecurityContext` takes precedence.
@@ -358,22 +358,22 @@ spec:
 : `AdditionalLabels` provide labels that are added to the cluster checks runner Pods.
 
 `clusterAgent.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. That is, for each node that meets all of the scheduling requirements (resource request, `requiredDuringScheduling` affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node matches the corresponding `matchExpressions`; the node(s) with the highest sum are the most preferred.
+: The scheduler prefers to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. For each node that meets all of the scheduling requirements (resource request and `requiredDuringScheduling` affinity expressions), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node matches the corresponding `matchExpressions`; the node(s) with the highest sum are the most preferred.
 
 `clusterAgent.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms`
 : Required. A list of node selector terms. The terms are `OR`ed.
 
 `clusterAgent.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, `requiredDuringScheduling` affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
+: The scheduler prefers to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. For each node that meets all of the scheduling requirements (such as resource request and `requiredDuringScheduling` affinity expressions), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`. The node(s) with the highest sum are the most preferred.
 
 `clusterAgent.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: If the affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each `podAffinityTerm` are intersected, i.e. all terms must be satisfied.
+: If the affinity requirements specified by this field are not met at scheduling time, the pod is not scheduled onto the node. If the affinity requirements specified by this field cease to be met at some point during pod execution (for example, due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each `podAffinityTerm` are intersected; all terms must be satisfied.
 
 `clusterAgent.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: The scheduler will prefer to schedule pods to nodes that satisfy the anti-affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, `requiredDuringScheduling` anti-affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
+: The scheduler prefers to schedule pods to nodes that satisfy the anti-affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. For each node that meets all of the scheduling requirements (resource request and `requiredDuringScheduling` anti-affinity expressions), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
 
 `clusterAgent.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: If the anti-affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the anti-affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each podAffinityTerm are intersected, i.e. all terms must be satisfied.
+: If the anti-affinity requirements specified by this field are not met at scheduling time, the pod is not scheduled onto the node. If the anti-affinity requirements specified by this field cease to be met at some point during pod execution (for example, due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each podAffinityTerm are intersected; all terms must be satisfied.
 
 `clusterAgent.config.admissionController.enabled`
 : Enable the admission controller to be able to inject APM/DogStatsD config and standard tags (env, service, version) automatically into your pods.
@@ -442,7 +442,7 @@ spec:
 : Selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. See the [Kubernetes documentation][15].
 
 `clusterAgent.priorityClassName`
-: If specified, indicates the pod's priority. `system-node-critical` and `system-cluster-critical` are two special keywords that indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a `PriorityClass` object with that name. If not specified, the pod priority will be default or zero if there is no default.
+: If specified, indicates the pod's priority. `system-node-critical` and `system-cluster-critical` are two special keywords that indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a `PriorityClass` object with that name. If not specified, the pod priority is set to default or zero if there is no default.
 
 `clusterAgent.rbac.create`
 : Used to configure RBAC resources creation.
@@ -463,22 +463,22 @@ spec:
 : Provide labels that will be added to the cluster checks runner Pods.
 
 `clusterChecksRunner.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, `requiredDuringScheduling` affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node matches the corresponding matchExpressions; the node(s) with the highest sum are the most preferred.
+: The scheduler prefers to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. For each node that meets all of the scheduling requirements (resource request and `requiredDuringScheduling` affinity expressions), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node matches the corresponding matchExpressions; the node(s) with the highest sum are the most preferred.
 
 `clusterChecksRunner.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms`
 : Required. A list of node selector terms. The terms are `OR`ed.
 
 `clusterChecksRunner.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, `requiredDuringScheduling` affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
+: The scheduler prefers to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. For each node that meets all of the scheduling requirements (resource request and `requiredDuringScheduling` affinity expressions), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
 
 `clusterChecksRunner.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: If the affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each `podAffinityTerm` are intersected, i.e. all terms must be satisfied.
+: If the affinity requirements specified by this field are not met at scheduling time, the pod is not scheduled onto the node. If the affinity requirements specified by this field cease to be met at some point during pod execution (for example, due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each `podAffinityTerm` are intersected; all terms must be satisfied.
 
 `clusterChecksRunner.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution`
-: The scheduler will prefer to schedule pods to nodes that satisfy the anti-affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, `requiredDuringScheduling` anti-affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
+: The scheduler prefers to schedule pods to nodes that satisfy the anti-affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights. For each node that meets all of the scheduling requirements (resource request and `requiredDuringScheduling` anti-affinity expressions), compute a sum by iterating through the elements of this field and adding "weight" to the sum if the node has pods which matches the corresponding `podAffinityTerm`; the node(s) with the highest sum are the most preferred.
 
 `clusterChecksRunner.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution`
-: If the anti-affinity requirements specified by this field are not met at scheduling time, the pod will not be scheduled onto the node. If the anti-affinity requirements specified by this field cease to be met at some point during pod execution (e.g. due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each podAffinityTerm are intersected, i.e. all terms must be satisfied.
+: If the anti-affinity requirements specified by this field are not met at scheduling time, the pod is not scheduled onto the node. If the anti-affinity requirements specified by this field cease to be met at some point during pod execution (for example, due to a pod label update), the system may or may not try to eventually evict the pod from its node. When there are multiple elements, the lists of nodes corresponding to each podAffinityTerm are intersected; all terms must be satisfied.
 
 `clusterChecksRunner.config.env`
 : The Datadog Agent supports many [environment variables][2].
@@ -523,7 +523,7 @@ spec:
 : Selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. See the [Kubernetes documentation][15].
 
 `clusterChecksRunner.priorityClassName`
-: If specified, indicates the pod's priority. `system-node-critical` and `system-cluster-critical` are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a `PriorityClass` object with that name. If not specified, the pod priority will be default or zero if there is no default.
+: If specified, indicates the pod's priority. `system-node-critical` and `system-cluster-critical` are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a `PriorityClass` object with that name. If not specified, the pod priority is set to default or zero if there is no default.
 
 `clusterChecksRunner.rbac.create`
 : Used to configure RBAC resources creation.
@@ -568,7 +568,7 @@ spec:
 : A preshared key between the Node Agents and the Cluster Agent. This needs to be at least 32 characters a-zA-z.
 
 `credentials.useSecretBackend`
-: Use the Agent secret backend feature for retreiving all credentials needed by the different components: Agent, Cluster, Cluster Checks. If `useSecretBackend:true`, other credential parameters will be ignored. Default value is false.
+: Use the Agent secret backend feature for retrieving all credentials needed by the different components: Agent, Cluster, Cluster Checks. If `useSecretBackend:true`, other credential parameters are ignored. Default value is false.
 
 `site`
 : Set the site of the Datadog intake for Agent data:  {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.

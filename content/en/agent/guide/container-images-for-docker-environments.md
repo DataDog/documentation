@@ -66,8 +66,8 @@ If you are using Docker, there are several container images available through GC
 | [Datadog Cluster Agent][6]              | [Cluster Agent][7]                       | `DOCKER_CONTENT_TRUST=1 docker pull datadog/cluster-agent` |
 | [Synthetics Private Location Worker][8] | [Synthetics Private Location Worker][9]  | `docker pull synthetics-private-location-worker`           |
 
-Docker Hub supports [content trust][10] for the `agent`, `cluster-agent` and `dogstatsd` images.
-Enabling docker content trust for those images by setting `DOCKER_CONTENT_TRUST=1` provides extra guarantee that the images haven’t been tampered.
+Docker Hub supports [content trust][10] for the `agent`, `cluster-agent`, and `dogstatsd` images.
+To ensure that the images are not tampered with, enable content trust by setting `DOCKER_CONTENT_TRUST=1`.
 
 [1]: /agent/docker/
 [2]: https://hub.docker.com/r/datadog/agent
