@@ -318,13 +318,13 @@ To extract a given environment variable `<ENV_VAR>` and transform it as a tag ke
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+For example:
 
 ```shell
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 ```
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][1] for more details.
 
 [1]: /account_management/billing/custom_metrics
 {{% /tab %}}
@@ -337,7 +337,7 @@ container_env_as_tags:
   <ENV_VAR>: <TAG_KEY>
 ```
 
-For example, you could set up:
+For example:
 
 ```yaml
 container_env_as_tags:
