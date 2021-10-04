@@ -54,11 +54,9 @@ instances:
 
 ## Raising the sampling rate
 
-If you have queries that are relatively infrequent or execute very quickly, raising the sampling rate can help get
-samples collected. 
+If you have queries that are relatively infrequent or execute very quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently. 
 
-Set the `collection_interval` in your database instance configuration in the Datadog Agent. Note that the default value is 1
-and raising the sampling rate requires _lowering_ this value to a smaller interval:
+Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1. Lower the value to a smaller interval:
 
 ```yaml
 instances:
