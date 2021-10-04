@@ -48,9 +48,7 @@ $ wget -qO - https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo a
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
 
-Edit the `/etc/yum.repos.d/datadog.repo` and make sure it includes the following list of keys in the `gpgkey` section:
-
-{{% tab "" %}}
+Run the following commands on the host:
 
 ```
 $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
