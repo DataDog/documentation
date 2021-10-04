@@ -80,6 +80,12 @@ class Integrations:
         self.regex_tab_end = re.compile(
             r" xxx -->", re.MULTILINE
         )
+        self.regex_partial_open = re.compile(
+            r"<!-- partial", re.MULTILINE
+        )
+        self.regex_partial_close = re.compile(
+            r"partial -->", re.MULTILINE
+        )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
             re.DOTALL,
@@ -668,6 +674,12 @@ class Integrations:
             )
             result = re.sub(
                 self.regex_tab_end, " %}}", result, 0
+            )
+            result = re.sub(
+                self.regex_partial_open, "", result, 0
+            )
+            result = re.sub(
+                self.regex_partial_close, "", result, 0
             )
 
         if metrics_exist:
