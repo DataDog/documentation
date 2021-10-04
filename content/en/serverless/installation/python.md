@@ -411,12 +411,20 @@ The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Pyt
 
 {{< site-region region="us,us3,eu" >}}
 ```
+// If using x86 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+
+// If using arm64 architecture
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37-ARM:{{< latest-lambda-layer-version layer="python" >}}
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+// If using x86 architecture
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+// If using arm64 architecture
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37-ARM:{{< latest-lambda-layer-version layer="python" >}}
+
 ```
 {{< /site-region >}}
 
