@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md'
 display_name: NS1
 draft: false
 git_integration_title: ns1
@@ -47,7 +47,7 @@ supported_os:
 [Datadog Agent][3] をインストールし、以下の手順に従って、このインテグレーションをインストールし、ホストで実行中の Agent に対して構成します。
 
 
-### インストール
+## インストール
 
 NS1 インテグレーションをアドオンとしてインストールするには、特定のステップについて Datadog の[コミュニティインテグレーションのインストール][4]ページを参照します（パッケージ化されて Datadog Agent に含まれていないため）。
 
@@ -56,11 +56,12 @@ NS1 インテグレーションをアドオンとしてインストールする�
 インストールプロセスを実行する際は、NS1 インテグレーションに特化した以下の変数を使用してください。
 
 
-* <INTEGRATION_NAME>:  ns1
-* <INTEGRATION_VERSION>:  0.0.4
+* <INTEGRATION_NAME>:  NS1
+* <INTEGRATION_VERSION>:  0.0.3
 
 
-### コンフィギュレーション
+
+## コンフィギュレーション
 
 NS1 インテグレーションを構成しアクティブ化するには、[インテグレーションの開始][5]情報ページで Agent インテグレーションの構成をご確認ください。
 
@@ -74,11 +75,11 @@ Agent とインテグレーションのコンフィギュレーションを検�
 
 ## 収集データ
 
-### メトリクス
-{{< get-metrics-from-git "ns1" >}}
+## メトリクス
 
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][8] を参照してください。
 
-### イベント
+## イベント
 
 NS1 インテグレーションには、イベントは含まれません。
 

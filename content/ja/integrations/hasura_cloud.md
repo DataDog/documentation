@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md'
 display_name: Hasura Cloud
 draft: false
 git_integration_title: hasura_cloud

@@ -123,7 +123,7 @@ supported_os:
 
 プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][9]を参照してください。
 
-[1]: https://docs.datadoghq.com/ja/monitors/create/types/process_check/?tab=checkalert
+[1]: https://docs.datadoghq.com/ja/monitoring/#process
 [2]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

@@ -19,7 +19,7 @@ Datadog では、DogStatsD からヒストグラムメトリクスとしてデ�
 
 ### 追加のパーセンタイル
 
-Agent の構成ファイルの「histogram_percentiles」行を使用して、以下のような追加のパーセンタイルを取得できます。
+Agent の構成ファイルの「histogram_percentiles」行を次のように使用して、追加のパーセンタイルを取得できます。
 
 * histogram_percentiles: 0.95, 0.75
 
@@ -47,5 +47,5 @@ Agent の構成ファイルの「histogram_percentiles」行を使用して、�
 [1]: /ja/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [3]: /ja/developers/community/libraries/
-[4]: /ja/metrics/histograms/
+[4]: /ja/metrics/types/?tab=histogram#metric-types
 [5]: /ja/developers/faq/characteristics-of-datadog-histograms/

@@ -1,4 +1,0 @@
----
-title: サービスアカウント
-headless: true
----

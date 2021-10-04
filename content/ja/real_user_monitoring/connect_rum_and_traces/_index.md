@@ -2,13 +2,13 @@
 title: RUM とトレースの接続
 kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
     tag: ブログ
     text: Real User Monitoring
   - link: /tracing/
     tag: Documentation
     text: APM と分散型トレーシング
-  - link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
+  - link: 'https://www.datadoghq.com/blog/modern-frontend-monitoring/'
     tag: ブログ
     text: シングルページアプリケーションの監視を開始する
   - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/

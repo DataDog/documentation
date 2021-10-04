@@ -19,7 +19,7 @@ further_reading:
 
 [ダッシュボードレイアウト][1]からタイムボードレイアウトに切り替えるには、歯車メニューの `Pick Layout` を使用して `Automatic` を選択します。
 
-{{< img src="dashboards/auto-layout.png" alt="ダッシュボードの自動レイアウトオプション"  style="width:70%;">}}
+{{< img src="dashboards/auto-layout.png" alt="ダッシュボードの自動レイアウトオプション" style="width:70%;">}}
 
 ## 検索
 
@@ -27,7 +27,7 @@ further_reading:
 
 左上の **Search...** リンクをクリックしてイベントのオーバーレイを設定し、**Events** を選択、検索ボックスに[クエリ][2]を入力します。これにより、設計時に追加されたイベントのオーバーレイと置き換わり、タイムボードの全グラフに適用されます。イベントの発生状況がオーバーレイで時系列グラフ上に表示され、右側にはイベントの一覧が表示されます。
 
-{{< img src="dashboards/timeboard/events_overlay.png" alt="イベントのオーバーレイ"  style="width:75%;">}}
+{{< img src="dashboards/timeboard/events_overlay.png" alt="イベントのオーバーレイ" style="width:75%;">}}
 
 ### ログ
 
