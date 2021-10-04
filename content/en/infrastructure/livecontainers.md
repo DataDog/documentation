@@ -344,9 +344,9 @@ Container environments are dynamic and can be hard to follow. The following scre
 
 You could pivot by ECS `ecs_task_name` and `ecs_task_version` to understand changes to resource utilization between updates.
 
-{{< img src="infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/tasksxversion2.png" alt="Tasks x version" style="width:80%;">}}
 
-For Kubernetes resources, select Datadog tags such as `environment`, `service`, or `pod_phase` to filter by. You can also use the container facets on the left to filter a specific Kubernetes resource. Group pods by Datadog tags to get an aggregated view which allows you to find information quicker.
+For Kubernetes resources, select Datadog tags such as `environment`, `service`, or `pod_phase` to filter by. You can also use the container facets on the left to filter a specific Kubernetes resource. Group pods by Datadog tags to get an aggregated view which allows you to find information quicker. You can search Kubernetes labels, but they are not available in the cluster map.
 
 ## Tagging
 
