@@ -34,7 +34,7 @@
 
 <script src="{{ $compiledMainJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledMainJS.Data.Integrity }}"{{ end }}></script>
 
-{{ if eq .File.BaseFileName "search" }}
+{{/* if eq .File.BaseFileName "search" }}
   {{ $compiledSearchJS := "" }}
 
   {{ if $isLocalServer }}
@@ -44,4 +44,4 @@
   {{ end }}
 
   <script src="{{ $compiledSearchJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledSearchJS.Data.Integrity }}"{{ end }}></script>
-{{ end }}
+{{ end */}}
