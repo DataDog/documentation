@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
-doc_link: 'https://docs.datadoghq.com/integrations/desk/'
+doc_link: https://docs.datadoghq.com/integrations/desk/
 draft: false
 git_integration_title: desk
 has_logo: true

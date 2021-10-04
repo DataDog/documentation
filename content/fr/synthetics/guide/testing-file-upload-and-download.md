@@ -2,7 +2,7 @@
 title: Tester le chargement et le téléchargement de fichiers
 kind: guide
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
     tag: Blog
     text: Présentation de la surveillance Synthetic Datadog
   - link: synthetics/

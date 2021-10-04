@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS のサービス健全性イベントをほぼリアルタイムに監視。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_health'
+doc_link: https://docs.datadoghq.com/integrations/amazon_health
 draft: false
 git_integration_title: amazon_health
 has_logo: true

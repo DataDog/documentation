@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS AppSync のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_appsync/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_appsync/
 draft: false
 git_integration_title: amazon_appsync
 has_logo: true
