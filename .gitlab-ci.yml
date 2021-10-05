@@ -235,7 +235,7 @@ sourcemaps_preview:
     policy: pull
   environment: "preview"
   script:
-    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/scripts/--service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/scripts/" --release-version "${CI_COMMIT_SHORT_SHA}"
+    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/scripts/ --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/scripts/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
