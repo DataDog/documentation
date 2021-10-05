@@ -49,25 +49,25 @@ For a full list of supported libraries and processor architectures, see [Compati
 ## Installation and getting started
 
 <div class="alert alert-warning">
-  <strong>Notes:</strong><br><ul><li>Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.</li></ul>
+  <strong>Note:</strong> Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 ### Installation overview
 
-1. [Install the tracer][8]
-2. [Enable the tracer for your service][9]
-3. [Configure the Datadog Agent for APM][10]
-4. [View your live data][11]
+1. [Install the tracer](#install-the-tracer)
+2. [Enable the tracer for your service](#enable-the-tracer-for-your-service)
+3. [Configure the Datadog Agent for APM](#configure-the-datadog-agent-for-apm)
+4. [View your live data](#view-your-live-data)
 
 ### Install the tracer
 
-The Datadog .NET Tracer can be installed machine-wide to allow services across an entire machine to be instrumented, or it can be installed on a per-application-basis to allow developers to manage the instrumentation via the application’s dependencies. To see machine-wide installation options, view the Windows or Linux tab. To see per-application installation options, see the NuGet tab.
+You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application’s dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-To install the .NET Tracer:
+To install the .NET Tracer machine-wide:
 
 1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
@@ -79,29 +79,23 @@ To install the .NET Tracer:
 
 {{% tab "Linux" %}}
 
-To install the .NET Tracer:
+To install the .NET Tracer machine-wide:
 
 1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
 
-2. Once downloaded, install the package with one of the commands below:
+2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
+   
+   Debian or Ubuntu
+   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
-```bash
-# For Debian or Ubuntu, install the DEB package
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh
+   CentOS or Fedora
+   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
-# For CentOS or Fedora, install the RPM package
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh
+   Alpine or other musl-based distributions
+   : `sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
-# For Alpine or other musl-based distributions, install the MUSL tar archive
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh
-
-# For other distributions, install the tar archive
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh
-```
+   Other distributions
+   : `sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -110,10 +104,10 @@ sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/
 {{% tab "NuGet" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong><br><ul><li>This installation is not supported for instrumenting applications running in IIS. To instrument applications running in IIS, follow the Windows installation process.</li></ul>
+  <strong>Note:</strong> This installation will not instrument applications running in IIS. To instrument applications running in IIS, follow the Windows machine-wide installation process.
 </div>
 
-To install the .NET Tracer:
+To install the .NET Tracer per-application:
 
 1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
 
@@ -125,10 +119,7 @@ To install the .NET Tracer:
 
 ### Enable the tracer for your service
 
-To enable the .NET Tracer for your service, you must:
-
-1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][12].
-2. Restart the application
+Enabling the .NET Tracer for your service involves setting the required environment variables, and restarting the application. For information about different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
 
 {{< tabs >}}
 
@@ -136,80 +127,71 @@ To enable the .NET Tracer for your service, you must:
 
 #### Internet Information Services (IIS)
 
-##### Required environment variables
+1. The .NET Tracer MSI installer adds all of the required environment variables, so there are no environment variables to configure.
 
-The .NET Tracer MSI installer adds all of the required environment variables, so there are no environment variables to configure.
+2. To automatically instrument applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
 
-##### Application restart
-To automatically instrument applications hosted in IIS, completely stop IIS and then start it by running the following commands as an administrator:
+   ```cmd
+   net stop /y was
+   net start w3svc
+   ```
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> You must use a stop and start command. A reset or restart command will not always work.
-</div>
+   <div class="alert alert-warning">
+     <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart will not always work.
+   </div>
 
-```cmd
-net stop /y was
-net start w3svc
-```
 
 #### Services not in IIS
 
-##### Required environment variables
+1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
-```
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-```
-
-##### Application restart
-
-For standalone applications and Windows services, manually restart the application as you normally would.
+   ```
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   ```
+2. For standalone applications and Windows services, manually restart the application as you normally would.
 
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-##### Required environment variables
+1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
-```
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-DD_INTEGRATIONS=/opt/datadog/integrations.json
-DD_DOTNET_TRACER_HOME=/opt/datadog
-```
+   ```
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+   DD_INTEGRATIONS=/opt/datadog/integrations.json
+   DD_DOTNET_TRACER_HOME=/opt/datadog
+   ```
 
-##### Application restart
-
-For standalone applications, manually restart the application as you normally would.
+2. For standalone applications, manually restart the application as you normally would.
 
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
 
-##### Required environment variables
+1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
-```
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-CORECLR_PROFILER_PATH=<System-dependent path>
-DD_INTEGRATIONS=<APP_DIRECTORY>/datadog/integrations.json
-DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
-```
+   ```
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   CORECLR_PROFILER_PATH=<System-dependent path>
+   DD_INTEGRATIONS=<APP_DIRECTORY>/datadog/integrations.json
+   DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
+   ```
 
-The value for the `CORECLR_PROFILER_PATH` environment variable will vary based on the system where the application is running. See the following table for the appropriate path:
+   The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
 
-Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
-------------------------------------------|----------------------------
-Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
-Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
-Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
-Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
-Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
+   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
+   ------------------------------------------|----------------------------
+   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
-##### Application restart
-
-For standalone applications, manually restart the application as you normally would.
+2. For standalone applications, manually restart the application as you normally would.
 
 
 {{% /tab %}}
@@ -218,7 +200,7 @@ For standalone applications, manually restart the application as you normally wo
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection in the Datadog Agent.
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized, serverless, and cloud environments:
 
 {{< tabs >}}
 
@@ -231,11 +213,8 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. See [Configuration](#configuration) for more information on how to set these variables.
 
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
-
-    See [Configuration](#configuration) for more information on how to set these variables.
 {{< site-region region="us3,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
@@ -266,7 +245,7 @@ To set up Datadog APM in Azure App Service, see the [Tracing Azure App Service E
 
 Tracing is available for a number of other environments, such as [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
-For other environments, please refer to the [Integrations][4] documentation for that environment and [contact support][5] if you are encountering any setup issues.
+For other environments, see the [Integrations][4] documentation for that environment and [contact support][5] if you are encountering setup issues.
 
 
 [1]: /agent/basic_agent_usage/heroku/#installation
@@ -286,21 +265,20 @@ After enabling the .NET Tracer for your service:
 
 2. Create application load.
 
-3. Visit [APM Live Traces][6].
+3. Visit [APM Live Traces][3].
 
 ## Configuration
 
 {{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
 
-The .NET Tracer has configuration settings which you can set by any of these methods:
+The .NET Tracer has configuration settings that you can set by any of these methods:
 
 {{< tabs >}}
 
 {{% tab "Environment variables" %}}
 
-To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
+To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables](#configuring-process-environment-variables).
 
-[1]: #configuring-process-environment-variables
 
 {{% /tab %}}
 
@@ -489,7 +467,7 @@ The following configuration variables are for features that are available for us
 
 ## Custom instrumentation
 
-Getting started with custom instrumentation depends on which installation option was used to install automatic instrumentation.
+Setting up to do custom instrumentation depends first setting up automatic instrumentation, and then these additional steps, depending on which method you used:
 
 {{< tabs >}}
 
@@ -530,11 +508,11 @@ To use custom instrumentation in your .NET application:
 
 {{< /tabs >}}
 
-For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation documentation][3].
+For additional details on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][6].
 
 ## Configuring process environment variables
 
-For automatic instrumentation to attach to your service, you must set required the environment variables before starting the application. Refer back to the [Enable the tracer for your service][9] section to identify which environment variables must be set according to your .NET Tracer installation method, and follow the examples below to correctly set the environment variables based on the environment of the instrumented service.
+For automatic instrumentation to attach to your service, you must set required the environment variables before starting the application. Refer back to the [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables must be set according to your .NET Tracer installation method, and follow the examples below to correctly set the environment variables based on the environment of the instrumented service.
 
 ### Windows
 
@@ -654,14 +632,9 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 
 [1]: /tracing/setup_overview/compatibility_requirements/dotnet-core
-[2]: https://www.nuget.org/packages/Datadog.Trace
-[3]: /tracing/setup_overview/custom_instrumentation/dotnet/
+[2]: /agent/
+[3]: https://app.datadoghq.com/apm/traces
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/setup_overview/compatibility_requirements/dotnet-core#integrations
-[6]: https://app.datadoghq.com/apm/traces
+[6]: /tracing/setup_overview/custom_instrumentation/dotnet/
 [7]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
-[8]: #install-the-tracer
-[9]: #enable-the-tracer-for-your-service
-[10]: #configure-the-datadog-agent-for-apm
-[11]: #view-your-live-data
-[12]: #configuring-process-environment-variables
