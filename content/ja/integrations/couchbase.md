@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     couchbase: assets/dashboards/couchbase_dashboard.json
-  logs: {}
+  logs:
+    source: couchdb
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
@@ -17,7 +18,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
 display_name: Couchbase
 draft: false
 git_integration_title: couchbase

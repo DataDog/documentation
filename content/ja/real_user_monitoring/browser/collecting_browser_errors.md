@@ -5,7 +5,7 @@ further_reading:
   - link: /real_user_monitoring/error_tracking/
     tag: Documentation
     text: Error Tracking
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: ブログ
     text: リアルユーザーの監視
   - link: /real_user_monitoring/explorer/
@@ -23,42 +23,24 @@ further_reading:
 ## エラーの原因
 フロントエンドのエラーは、それぞれの `error.origin` により 4 つのカテゴリーに分類されます。
 
-- **network**: AJAX リクエストが原因の XHR または Fetch エラー。ネットワークエラーの特定の属性は[ネットワークエラーのドキュメント][1]を参照してください。
 - **source**: 未処理の例外または未処理の約束拒否（ソースコード関連）。
 - **console**: `console.error()` API 呼び出し。
-- **custom**: [RUM `addError` API](#collect-errors-manually) (デフォルトは `custom`) と共に送信されるエラー。
+- **custom**: [RUM `addError` API](#collect-errors-manually) と共に送信されるエラー。
 
 ## エラー属性
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][2]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][3]をご覧ください。
+すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][1]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][2]をご覧ください。
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | 文字列 | エラーの発生元 (`console`、`network` など)。     |
-| `error.type`    | 文字列 | エラーのタイプ (場合によってはエラーコード)。                   |
+| `error.source`  | 文字列 | エラーの発生元 (`console` など)。         |
+| `error.type`    | 文字列 | エラーのタイプ (場合によってはエラーコード)。                     |
 | `error.message` | 文字列 | イベントについて簡潔にわかりやすく説明する 1 行メッセージ。 |
 | `error.stack`   | 文字列 | スタックトレースまたはエラーに関する補足情報。     |
 
-### ネットワークエラー
-
-ネットワークエラーには失敗した HTTP リクエストに関する情報が含まれます。次のファセットが収集されます。
-
-| 属性                      | タイプ   | 説明                                                                             |
-|--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `error.resource.status_code`             | 数値 | 応答ステータスコード。                                                               |
-| `error.resource.method`                | 文字列 | HTTP メソッド (`POST`、`GET` など)。           |
-| `error.resource.url`                     | 文字列 | リソースの URL。                                                                       |
-| `error.resource.url_host`        | 文字列 | URL のホスト部分。                                                          |
-| `error.resource.url_path`        | 文字列 | URL のパス部分。                                                          |
-| `error.resource.url_query` | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL のクエリ文字列部分。 |
-| `error.resource.url_scheme`      | 文字列 | URL のプロトコル名 (HTTP または HTTPS)。                                            |
-| `error.resource.provider.name`      | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                            |
-| `error.resource.provider.domain`      | 文字列 | リソースプロバイダーのドメイン。                                            |
-| `error.resource.provider.type`      | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、`analytics` など)。                                            |
-
 ### ソースエラー
 
-ソースエラーには、エラーに関するコードレベルの情報が含まれます。エラーの種類に関する詳細は、 [MDN ドキュメント][4]を参照してください。
+ソースエラーには、エラーに関するコードレベルの情報が含まれます。エラーの種類に関する詳細は、 [MDN ドキュメント][3]を参照してください。
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -71,12 +53,11 @@ further_reading:
 {{< code-block lang="javascript" >}}
 addError(
     error: unknown,
-    context?: Context,
-    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
+    context?: Context
 );
 {{< /code-block >}}
 
-**注**: [エラー追跡][5]機能では、`custom` または `source` に設定されたソースに送信され、スタックトレースを含むエラーが処理します。その他のソース（`console` など）で送信されたエラーは、エラー追跡で処理されません。
+**注**: [エラー追跡][4]機能では、`custom` または `source` に設定されたソースに送信され、スタックトレースを含むエラーが処理します。その他のソース（`console` など）で送信されたエラーは、エラー追跡で処理されません。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -93,14 +74,14 @@ datadogRum.addError(error, {
 
 // ネットワークエラーを送信
 fetch('<SOME_URL>').catch(function(error) {
-    datadogRum.addError(error, undefined, 'network');
+    datadogRum.addError(error);
 })
 
 // 処理済みの例外エラーを送信
 try {
-    //Some code logic
+    //コードロジック
 } catch (error) {
-    datadogRum.addError(error, undefined, 'source');
+    datadogRum.addError(error);
 }
 ```
 {{% /tab %}}
@@ -119,16 +100,16 @@ DD_RUM.onReady(function() {
 // ネットワークエラーを送信
 fetch('<SOME_URL>').catch(function(error) {
     DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'network');
+        DD_RUM.addError(error);
     });
 })
 
 // 処理済みの例外エラーを送信
 try {
-    //Some code logic
+    //コードロジック
 } catch (error) {
     DD_RUM.onReady(function() {
-        DD_RUM.addError(error, undefined, 'source');
+        DD_RUM.addError(error);
     })
 }
 ```
@@ -145,14 +126,14 @@ window.DD_RUM && DD_RUM.addError(error, {
 
 // ネットワークエラーを送信
 fetch('<SOME_URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'network');
+    window.DD_RUM && DD_RUM.addError(error);
 })
 
 // 処理済みの例外エラーを送信
 try {
     //コードロジック
 } catch (error) {
-    window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
+    window.DD_RUM && DD_RUM.addError(error);
 }
 ```
 {{% /tab %}}
@@ -166,7 +147,7 @@ try {
 
 {{< img src="real_user_monitoring/browser/script-error.png" alt="リアルユーザーモニタリングでのスクリプトエラーの例" style="width:75%;" >}}
 
-クロスオリジンスクリプトについての詳細と、詳細が表示されない理由については [CORS][6] および [グローバルイベントハンドラーについてのこちらの注釈][7]を参照してください。このエラーが発生する原因としては以下のようなものがあります。
+クロスオリジンスクリプトについての詳細と、詳細が表示されない理由については [CORS][5] および [グローバルイベントハンドラーについてのこちらの注釈][6]を参照してください。このエラーが発生する原因としては以下のようなものがあります。
 - JavaScript ファイルが異なるホスト名 (例: `example.com` に `static.example.com` からのアセットが含まれるなど) でホスティングされている。
 - ウェブサイトに CDN 上でホストされる JavaScript ライブラリが含まれている。
 - ウェブサイトに、プロバイダーのサーバー上でホストされるサードパーティの JavaScript ライブラリが含まれている。
@@ -185,10 +166,9 @@ try {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/real_user_monitoring/data_collected/error/#network-errors
-[2]: /ja/real_user_monitoring/browser/data_collected/
-[3]: /ja/real_user_monitoring/browser/modifying_data_and_context/
-[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[5]: /ja/real_user_monitoring/error_tracking
-[6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-[7]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
+[1]: /ja/real_user_monitoring/browser/data_collected/
+[2]: /ja/real_user_monitoring/browser/modifying_data_and_context/
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[4]: /ja/real_user_monitoring/error_tracking
+[5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes

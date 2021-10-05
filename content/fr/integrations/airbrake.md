@@ -3,8 +3,8 @@ categories:
   - monitoring
   - exceptions
 dependencies: []
-description: Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d'événements.
-doc_link: https://docs.datadoghq.com/integrations/airbrake/
+description: 'Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d''événements.'
+doc_link: 'https://docs.datadoghq.com/integrations/airbrake/'
 draft: false
 git_integration_title: airbrake
 has_logo: true
@@ -15,7 +15,7 @@ kind: integration
 manifest_version: '1.0'
 name: airbrake
 public_title: Intégration Datadog/Airbrake
-short_description: Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d'événements.
+short_description: 'Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d''événements.'
 version: '1.0'
 ---
 {{< img src="integrations/airbrake/airbrakeevent.png" alt="événement airbrake" popup="true">}}

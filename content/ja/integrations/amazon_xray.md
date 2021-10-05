@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS サービス間で交わされるリクエストをトレース
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_xray/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_xray/
 draft: false
 git_integration_title: amazon_xray
 has_logo: true
@@ -68,6 +68,26 @@ AWS X-Ray インテグレーションを最大限に活用するには、これ�
 **注:** Datadog Lambda レイヤーとクライアントライブラリには依存関係として X-Ray SDK が含まれているため、プロジェクトに明示的にインストールする必要はありません。
 
 最後に、[X-Ray クライアントライブラリをインストールして Lambda 関数にインポートします](#X-Ray クライアントライブラリのインストール)。
+
+### Datadog の Lambda ライブラリで X-Ray セグメントを強化する (オプション ) {#enriching-xray-segments-with-datadog-libraries}
+
+**注**: この機能は、Node.js または Python ランタイムで記述された AWS Lambda 関数に限定されます。
+
+Datadog の Lambda ライブラリは、X-Ray セグメントを追加のメタデータでリッチ化し、APM トレースと[サーバーレスビュー][9]の両方で利用できるようにします。Datadog Lambda ライブラリで Lambda 関数をインスツルメントするには、[ランタイムとデプロイメントツール別の手順詳細][10]または以下のカスタムインストール手順を参照してください。
+
+#### Python Lambda 関数
+
+- Datadog Lambda ライブラリをレイヤーまたはパッケージとしてインポートします。[詳細な手順][11]を参照してください。
+- 関数のハンドラーを `datadog_lambda.handler.handler` に設定します。
+- 元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+- (オプション) [トレースのマージ][12]を使用していない場合は、環境変数 `DD_TRACE_ENABLED` を `false` に設定します。
+
+#### Node Lambda 関数
+
+- Datadog Lambda ライブラリをレイヤーまたはパッケージとしてインポートします。[詳細な手順][13]を参照してください。
+- 関数のハンドラーを、レイヤーを使用する場合は `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` に、パッケージを使用する場合は `node_modules/datadog-lambda-js/dist/handler.handler` に設定します。
+- 元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+- (オプション) [トレースのマージ][12]を使用していない場合は、環境変数 `DD_TRACE_ENABLED` を `false` に設定します。
 
 ### X-Ray クライアントライブラリをインストールする
 
@@ -197,3 +217,8 @@ AWS X-Ray インテグレーションは、AWS からトレースデータを取
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
 [7]: https://www.datadoghq.com/blog/serverless-framework-plugin
 [8]: https://console.aws.amazon.com/apigateway/
+[9]: https://docs.datadoghq.com/ja/serverless/troubleshooting/connect_invoking_resources
+[10]: https://docs.datadoghq.com/ja/serverless/installation
+[11]: https://docs.datadoghq.com/ja/serverless/installation/python/?tab=custom
+[12]: https://docs.datadoghq.com/ja/serverless/distributed_tracing/serverless_trace_merging
+[13]: https://docs.datadoghq.com/ja/serverless/installation/nodejs/?tab=custom

@@ -36,6 +36,7 @@ Lancez l'Agent Docker à côté de vos autres conteneurs en remplaçant `<CLÉ_A
 {{% tab "Standard" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -48,6 +49,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% tab "Amazon Linux version <2" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
@@ -61,6 +63,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% tab "Windows" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_SITE="<VOTRE_SITE_DATADOG>" \
               gcr.io/datadoghq/agent:latest
@@ -138,6 +141,7 @@ Pour commencer à recueillir des métriques exposées par un déploiement Promet
     {{% tab "Configuration standard" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -148,6 +152,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
     {{% tab "Windows" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               gcr.io/datadoghq/agent:latest \
               -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
