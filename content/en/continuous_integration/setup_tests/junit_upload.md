@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass/fail status, duration, and sometimes error logs. Although it was introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
 As an alternative to instrumenting your tests natively using Datadog tracers, which is the recommended option as it provides the most comprehensive test results, you can also upload JUnit XML test reports.
@@ -47,6 +47,13 @@ DD_ENV=ci DATADOG_API_KEY=<api_key> datadog-ci junit upload \
 DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci junit upload \
   --service my-api-service \
   unit-tests/junit-reports e2e-tests/single-report.xml
+{{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="bash" >}}
+DD_ENV=ci DATADOG_API_KEY=<api_key> DATADOG_SITE=us3.datadoghq.com datadog-ci junit upload \
+--service my-api-service \
+unit-tests/junit-reports e2e-tests/single-report.xml
 {{< /code-block >}}
 {{< /site-region >}}
 
@@ -89,7 +96,7 @@ The following environment variables are supported:
 **Default**: (none)
 
 
-{{< site-region region="eu" >}}
+{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
@@ -114,6 +121,6 @@ The Datadog CI CLI tries to extract git repository and commit metadata from CI p
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://git-scm.com/downloads
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

@@ -117,7 +117,7 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-{{< site-region region="eu" >}}
+{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
@@ -196,6 +196,15 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
 {{< site-region region="eu" >}}
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
+{{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="bash" >}}
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=us3.datadoghq.com xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
   -destination "platform=macOS,arch=x86_64" \
@@ -542,6 +551,6 @@ Additional Git configuration for physical device testing:
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
 
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

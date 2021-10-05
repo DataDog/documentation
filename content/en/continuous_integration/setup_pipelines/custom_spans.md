@@ -7,7 +7,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 Custom spans provide a way to trace individual commands in your CI pipelines, allowing you to measure the time your command takes without taking into account any setup or teardown actions that the job might have (for example, downloading Docker images or waiting for an available node in a Kubernetes-based infrastructure). These spans appear as part of the pipeline's trace:
 
 {{< img src="ci/ci-custom-spans.png" alt="Details for a single pipeline with custom spans" style="width:100%;">}}
@@ -51,6 +51,14 @@ DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci trace \
   --name "Greet" \
   -- \
   echo "Hello World"
+{{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="bash" >}}
+DATADOG_API_KEY=<api_key> DATADOG_SITE=us3.datadoghq.com datadog-ci trace \
+--name "Greet" \
+-- \
+echo "Hello World"
 {{< /code-block >}}
 {{< /site-region >}}
 
@@ -98,6 +106,6 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) does not support this feature.
 {{< /site-region >}}

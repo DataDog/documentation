@@ -11,7 +11,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 To report test results to Datadog, the [Datadog Agent][1] is required.
 
 There are two ways to set up the Agent in a CI environment:
@@ -48,7 +48,7 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 **Required value**: `none`
 
 
-{{< site-region region="eu" >}}
+{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
@@ -161,6 +161,22 @@ test:
     - make test
 {{< /code-block >}}
 {{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
+variables:
+  DD_API_KEY: $DD_API_KEY
+  DD_INSIDE_CI: "true"
+  DD_HOSTNAME: "none"
+  DD_AGENT_HOST: "datadog-agent"
+  DD_SITE: "us3.datadoghq.com"
+
+test:
+  services:
+    - name: gcr.io/datadoghq/agent:latest
+  script:
+    - make test
+{{< /code-block >}}
+{{< /site-region >}}
 
 Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
 
@@ -204,6 +220,24 @@ jobs:
           DD_INSIDE_CI: "true"
           DD_HOSTNAME: "none"
           DD_SITE: "datadoghq.eu"
+    steps:
+      - run: make test
+{{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="yaml" >}}
+jobs:
+  test:
+    services:
+      datadog-agent:
+        image: gcr.io/datadoghq/agent:latest
+        ports:
+          - 8126:8126
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_INSIDE_CI: "true"
+          DD_HOSTNAME: "none"
+          DD_SITE: "us3.datadoghq.com"
     steps:
       - run: make test
 {{< /code-block >}}
@@ -270,6 +304,31 @@ workflows:
       - test
 {{< /code-block >}}
 {{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="yaml" filename=".circleci/config.yml" >}}
+version: 2.1
+
+orbs:
+  datadog-agent: datadog/agent@0
+
+jobs:
+  test:
+    docker:
+      - image: circleci/<language>:<version_tag>
+    environment:
+      DD_SITE: "us3.datadoghq.com"
+    steps:
+      - checkout
+      - datadog-agent/setup
+      - run: make test
+      - datadog-agent/stop
+
+workflows:
+  test:
+    jobs:
+      - test
+{{< /code-block >}}
+{{< /site-region >}}
 
 Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
 
@@ -323,6 +382,26 @@ services:
       - DD_AGENT_HOST=datadog-agent
 {{< /code-block >}}
 {{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="yaml" filename="docker-compose.yml" >}}
+version: '3'
+services:
+  datadog-agent:
+    image: "gcr.io/datadoghq/agent:latest"
+    environment:
+      - DD_API_KEY
+      - DD_INSIDE_CI=true
+      - DD_HOSTNAME=none
+      - DD_SITE=us3.datadoghq.com
+    ports:
+      - 8126/tcp
+
+  tests:
+    build: .
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+{{< /code-block >}}
+{{< /site-region >}}
 
 Alternatively, share the same network namespace between the Agent container and the tests container:
 
@@ -359,6 +438,23 @@ services:
     network_mode: "service:datadog-agent"
 {{< /code-block >}}
 {{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="yaml" filename="docker-compose.yml" >}}
+version: '3'
+services:
+  datadog-agent:
+    image: "gcr.io/datadoghq/agent:latest"
+    environment:
+      - DD_API_KEY
+      - DD_INSIDE_CI=true
+      - DD_HOSTNAME=none
+      - DD_SITE=us3.datadoghq.com
+
+  tests:
+    build: .
+    network_mode: "service:datadog-agent"
+{{< /code-block >}}
+{{< /site-region >}}
 
 In this case, `DD_AGENT_HOST` is not required because it is `localhost` by default.
 
@@ -383,6 +479,6 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 [5]: https://docs.docker.com/compose/
 [6]: /continuous_integration/setup_tests/containers/
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}
