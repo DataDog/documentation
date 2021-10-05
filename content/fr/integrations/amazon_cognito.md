@@ -6,10 +6,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Cognito."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_cognito/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
 draft: false
 git_integration_title: amazon_cognito
 has_logo: true
+integration_id: amazon-cognito
 integration_title: "Amazon\_Cognito"
 is_public: true
 kind: integration
@@ -25,7 +26,7 @@ Amazon Cognito est un service qui vous permet  de créer des identités uniques
 
 Activez cette intégration pour visualiser dans Datadog vos métriques de sécurité avancée Cognito.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -42,7 +43,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez Amazon Cognito de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez Amazon Cognito de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : seuls les logs du groupe d'utilisateurs peuvent être envoyés. Amazon ne prend pas en charge l'envoi d'autres logs Cognito.
 
@@ -51,10 +52,10 @@ Configurez Amazon Cognito de façon à ce que ses logs soient envoyés vers un c
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs Amazon Cognito dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon Cognito dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][6]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][7]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][7]
 
 ## Données collectées
 

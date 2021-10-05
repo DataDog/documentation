@@ -10,10 +10,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez les dépenses réelles et estimées sur votre compte AWS.
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_billing/
 draft: false
 git_integration_title: amazon_billing
 has_logo: true
+integration_id: amazon-billing
 integration_title: AWS Billing
 is_public: true
 kind: integration
@@ -54,17 +55,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Configurez AWS Billing de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
+Configurez AWS Billing de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_billing` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs AWS Billing dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs AWS Billing dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][9]
-    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][10]
+    - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][10]
 
 ## Surveiller l'utilisation de CloudWatch
 

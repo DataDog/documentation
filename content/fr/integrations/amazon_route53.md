@@ -10,10 +10,11 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques de Route\_53 et des checks de santé."
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_route53/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
 draft: false
 git_integration_title: amazon_route53
 has_logo: true
+integration_id: amazon-route-53
 integration_title: Amazon Route 53
 is_public: true
 kind: integration
@@ -67,7 +68,7 @@ Configurez Amazon Route 53 pour enregistrer des informations sur les requêtes 
 Accédez à votre console AWS Route 53 et sélectionnez la zone hébergée pour laquelle vous souhaitez configurer la journalisation. Cliquez sur la case d'option et sélectionnez Configure query logging.
 {{< img src="integrations/amazon_route53/amazon_route_53_log_enable.png" alt="activer la journalisation route 53" popup="true" style="width:70%;">}}
 
-Sélectionnez ensuite le groupe de logs Cloudwatch ou créez-en un pour y envoyer les logs. Vérifiez que le nom du groupe de logs contient « route53 ».
+Sélectionnez ensuite le groupe de logs CloudWatch ou créez-en un pour y envoyer les logs. Vérifiez que le nom du groupe de logs contient « route53 ».
 
 #### Activer la journalisation des requêtes du résolveur Route 53
 
