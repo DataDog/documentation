@@ -52,6 +52,11 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 
 {{< dashboards-widgets-api >}}
 
+## Formulas and Functions
+
+Table widgets can be used with Formulas and Functions for different data sources. In the following example, `Average` column is calculated as a ratio of two other columns for the `cart_value` in log events.
+{{< img src="dashboards/widgets/table/table_formulas_functions.png" alt="Table setup" style="width:80%;">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
