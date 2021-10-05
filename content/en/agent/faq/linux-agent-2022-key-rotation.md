@@ -14,6 +14,8 @@ Customers using Datadog's RPM or DEB packages might require a manual action to i
 <strong>Note</strong>: This DOES NOT affect the functionality of already running Agents, and only limits the ability to install or upgrade to a newer version of the Agent. This also doesn't affect Windows or MacOS Agents, nor Dockerized Linux Agents.
 </div>
 
+## Install methods that automatically trust the new GPG key
+
 If you're using one of the following install methods, your hosts trust the key automatically and no further action is needed:
 
 * [Agent install script][5] v1.6.0 or later (released Jul 26, 2021)
@@ -28,13 +30,13 @@ If you're using one of the following install methods, your hosts trust the key a
 
 Additionally, if you are using the DEB version of the Agent version 7.31.0 or greater, your hosts should have the `datadog-signing-keys` package installed, which will make APT recognize the signature by the new key on the Datadog APT repository.
 
-If unsure, read the steps in [Check if a host trusts the new GPG key](#check-if-a-host-trusts-the-new-gpg-key).
+If you're unsure if a host trusts the new signing key, you can [check](#check-if-a-host-trusts-the-new-gpg-key).
 
 Trying to install or upgrade the Agent package without trusting the new key results in `NOKEY` errors when installing the RPM package and `NO_PUBKEY` errors when installing the DEB package.
 
-For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the keys can be manually updated on host by following these instructions:
+For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.31.0 or greater. Otherwise, the keys can be manually updated:
 
-### Manual update
+## Manual update
 
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
