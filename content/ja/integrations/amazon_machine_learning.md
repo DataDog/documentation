@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_machine_learning/'
 draft: false
 git_integration_title: amazon_machine_learning
 has_logo: true

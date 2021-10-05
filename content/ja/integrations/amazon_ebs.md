@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_ebs/'
 draft: false
 git_integration_title: amazon_ebs
 has_logo: true

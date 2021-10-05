@@ -5,18 +5,18 @@ categories:
 ddtype: library
 dependencies: []
 description: Envoyez des métriques custom à partir de vos applications Ruby grâce aux bibliothèques client de Datadog.
-doc_link: https://docs.datadoghq.com/integrations/ruby/
+doc_link: 'https://docs.datadoghq.com/integrations/ruby/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitoring-rails-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/monitoring-rails-with-datadog/'
     tag: Blog
     text: Surveillance des applications Rails avec Datadog
-  - link: https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/'
     tag: Blog
     text: Collecte et surveillance des logs Rails avec Datadog
-  - link: https://www.datadoghq.com/blog/managing-rails-application-logs/
+  - link: 'https://www.datadoghq.com/blog/managing-rails-application-logs/'
     tag: Blog
-    text: Comment recueillir, personnaliser et gérer les logs d'applications Rails
+    text: 'Comment recueillir, personnaliser et gérer les logs d''applications Rails'
 git_integration_title: ruby
 has_logo: true
 integration_id: ruby

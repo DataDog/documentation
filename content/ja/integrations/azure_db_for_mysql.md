@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_mysql/'
 draft: false
 git_integration_title: azure_db_for_mysql
 has_logo: true

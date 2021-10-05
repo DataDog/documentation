@@ -36,6 +36,7 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 {{% tab "標準" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -48,6 +49,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% tab "Amazon Linux バージョン <2" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
@@ -61,6 +63,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% tab "Windows" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_SITE="<YOUR_DATADOG_SITE>" \
               gcr.io/datadoghq/agent:latest
@@ -138,6 +141,7 @@ labels:
     {{% tab "Standard" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -148,6 +152,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
     {{% tab "Windows" %}}
 
 ```shell
+DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
               gcr.io/datadoghq/agent:latest \
               -v \\.\pipe\docker_engine:\\.\pipe\docker_engine

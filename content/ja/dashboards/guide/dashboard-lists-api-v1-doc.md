@@ -1,5 +1,5 @@
 ---
-title: ダッシュボードリスト API (v1)
+title: ダッシュボードリスト API ドキュメント (v1)
 kind: ガイド
 aliases:
   - /ja/graphing/faq/dashboard-lists-api-doc

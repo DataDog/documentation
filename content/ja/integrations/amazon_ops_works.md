@@ -9,7 +9,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS OpsWorks のリソース使用状況を追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_ops_works/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_ops_works/'
 draft: false
 git_integration_title: amazon_ops_works
 has_logo: true

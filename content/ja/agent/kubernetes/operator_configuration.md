@@ -81,10 +81,10 @@ spec:
 : ロギングの詳細度を設定します。有効なログレベルは、`trace`、`debug`、`info`、`warn`、`error`、`critical`、`off` です。
 
 `agent.config.podAnnotationsAsTags`
-: Kubernetes アノテーションの Datadog タグへのマッピングを提供します。`<KUBERNETES_ANNOTATIONS>: <DATADOG_TAG_KEY>`
+: Kubernetes アノテーションの Datadog タグへのマッピングを提供します。`<KUBERNETES_ANNOTATIONS>: <DATADOG_TAG_KEY>`  
 
 `agent.config.podLabelsAsTags`
-: Kubernetes ラベルの Datadog タグへのマッピングを提供します。`<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>`
+: Kubernetes ラベルの Datadog タグへのマッピングを提供します。`<KUBERNETES_LABEL>: <DATADOG_TAG_KEY>`      
 
 `agent.config.resources.limits`
 : 許可されるコンピューティングリソースの最大量を表します。[Kubernetes のドキュメントを参照してください][3]。
@@ -138,7 +138,7 @@ spec:
 : `GMSACredentialSpecName` は、使用する GMSA 資格情報仕様の名前です。このフィールドはアルファレベルで、WindowsGMSA 機能フラグを有効にするサーバーによってのみ尊重されます。
 
 `agent.config.securityContext.windowsOptions.runAsUserName`
-: コンテナプロセスのエントリポイントを実行するための Windows の `UserName`。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。
+: コンテナプロセスのエントリポイントを実行するための Windows の `UserName`。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。     
 
 `agent.config.tags`
 : この Agent により収集されるすべてのメトリクス、イベント、サービスチェックにアタッチされるタグのリスト。[タグ付けドキュメント][8]を参照してください。
@@ -165,13 +165,13 @@ spec:
 : 作成または移行元の DaemonSet の名前。
 
 `agent.deploymentStrategy.canary.duration`
-:
+: 
 
 `agent.deploymentStrategy.canary.paused`
-:
+: 
 
 `agent.deploymentStrategy.canary.replicas`
-:
+: 
 
 `agent.deploymentStrategy.reconcileFrequency`
 : ExtendDaemonSet の調整頻度。
@@ -216,7 +216,7 @@ spec:
 : ホストの PID ネームスペースを使用します。オプション: デフォルトは `false` です。
 
 `agent.image.name`
-: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD に `gcr.io/datadoghq/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
+: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD に `datadog/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
 
 `agent.image.pullPolicy`
 : Kubernetes プルポリシー。`Always`、`Never`、または `IfNotPresent` を使用します。
@@ -345,7 +345,7 @@ spec:
 : `GMSACredentialSpecName` は、使用する GMSA 資格情報仕様の名前です。このフィールドはアルファレベルで、WindowsGMSA 機能フラグを有効にするサーバーによってのみ尊重されます。
 
 `agent.systemProbe.securityContext.windowsOptions.runAsUserName`
-: Windows の `UserName` を使用して、コンテナプロセスのエントリポイントを実行します。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。
+: Windows の `UserName` を使用して、コンテナプロセスのエントリポイントを実行します。指定されていない場合、デフォルトは画像メタデータで指定されたユーザーです。`PodSecurityContext` で設定することもできます。`SecurityContext` と `PodSecurityContext` の両方に設定されている場合、`SecurityContext` で指定された値が優先されます。このフィールドはベータレベルで、`WindowsRunAsUserName` 機能フラグで無効にできます。     
 
 `agent.useExtendedDaemonset`
 : Agent のデプロイには ExtendedDaemonset を使用します。デフォルト値は false です。
@@ -429,7 +429,7 @@ spec:
 : 作成または移行元の Cluster Agent デプロイの名前。
 
 `clusterAgent.image.name`
-: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `gcr.io/datadoghq/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
+: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `datadog/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
 
 `clusterAgent.image.pullPolicy`
 : Kubernetes プルポリシー。`Always`、`Never`、または `IfNotPresent` を使用します。
@@ -510,7 +510,7 @@ spec:
 : 作成または移行元のクラスターチェックデプロイの名前。
 
 `clusterChecksRunner.image.name`
-: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `gcr.io/datadoghq/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
+: 使用するイメージを定義します。Datadog Agent 6 には `gcr.io/datadoghq/agent:latest` を使用します。スタンドアロンの Datadog Agent DogStatsD には `datadog/dogstatsd:latest` を使用します。Datadog Cluster Agent には `gcr.io/datadoghq/cluster-agent:latest` を使用します。
 
 `clusterChecksRunner.image.pullPolicy`
 : Kubernetes プルポリシー。`Always`、`Never`、または `IfNotPresent` を使用します。

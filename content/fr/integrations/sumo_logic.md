@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Envoyez des logs Sumo\_Logic à Datadog et des notifications Datadog à Sumo\_Logic."
-doc_link: https://docs.datadoghq.com/integrations/sumologic/
+doc_link: 'https://docs.datadoghq.com/integrations/sumologic/'
 draft: false
 git_integration_title: sumo_logic
 has_logo: true

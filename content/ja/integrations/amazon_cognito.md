@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Cognito のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_cognito/'
 draft: false
 git_integration_title: amazon_cognito
 has_logo: true
