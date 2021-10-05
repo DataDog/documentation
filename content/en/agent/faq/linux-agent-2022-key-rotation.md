@@ -44,7 +44,8 @@ For hosts running older versions of the install methods listed above or older ve
 Run the following commands on the host:
 
 ```bash
-$ wget -qO - https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo apt-key add -
+$ curl -o /tmp/DATADOG_APT_KEY_F14F620E.public https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
+$ sudo apt-key add /tmp/DATADOG_APT_KEY_F14F620E.public
 ```
 
 {{% /tab %}}
