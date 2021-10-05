@@ -81,7 +81,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Hit the _verify_ button. If it does not return _Service name found_, reach out to the [Datadog support team][2].
+4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][2].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
 6. Make sure that for **Enable DNS name** the _Enable for this endpoint_ is checked:
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:60%;" >}}
@@ -96,7 +96,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
     Once it shows _Available_, the AWS PrivateLink is ready to be used.
-11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If it's not already there, add the following to the [Agent `datadog.yaml` configuration file][3]:
+11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][3]:
 
     ```yaml
     logs_config:
@@ -109,7 +109,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent. See [Agent log collection][4] for more details. This is not required for the Lambda Extension.
+    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. See [Agent log collection][4] for more details.
 12. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
 
 ## Advanced usage
