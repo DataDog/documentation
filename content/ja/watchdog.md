@@ -160,7 +160,7 @@ Watchdog RCA は、アプリケーションの異常を検出すると、スト�
 [10]: /ja/monitors/
 [11]: https://app.datadoghq.com/watchdog
 [12]: /ja/getting_started/tagging/unified_service_tagging
-[13]: /ja/monitors/monitor_types/watchdog/
+[13]: /ja/monitors/create/types/watchdog/
 [14]: /ja/tracing/send_traces/#configure-your-environment
 [15]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [16]: /ja/tracing/visualization/#services

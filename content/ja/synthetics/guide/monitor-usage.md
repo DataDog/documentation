@@ -11,7 +11,7 @@ further_reading:
   - link: /synthetics/browser_tests
     tag: ドキュメント
     text: ブラウザテストを作成する
-  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: ブログ
     text: エンドツーエンドテスト作成のベストプラクティス
 ---
@@ -39,5 +39,5 @@ Synthetics の使用量を視覚化または警告するには、次のクエリ
 [2]: /ja/synthetics/api_tests
 [3]: /ja/synthetics/multistep
 [4]: /ja/synthetics/browser_tests
-[5]: /ja/monitors/create/types/anomaly/
-[6]: /ja/monitors/create/types/forecasts
+[5]: /ja/monitors/monitor_types/anomaly/
+[6]: /ja/monitors/monitor_types/forecasts

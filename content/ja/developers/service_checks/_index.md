@@ -83,10 +83,10 @@ _Monitors_ タブ > _new monitor_ に移動し、**Custom Check** セクショ�
 
 {{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Haproxy サービスチェック" video="true"  >}}
 
-インテグレーションの書き方について、詳しくは [Agent ベースのインテグレーション入門][5]をご参照ください。
+インテグレーションの書き方については、[インテグレーション開発者用ドキュメント][5]を参照してください。
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
-[4]: /ja/monitors/notify/
+[4]: /ja/monitors/notifications/
 [5]: /ja/developers/integrations/

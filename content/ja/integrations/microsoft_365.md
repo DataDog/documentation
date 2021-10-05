@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Microsoft 365 に接続して組織の監査ログを Datadog のログにプル転送。
-doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
+doc_link: 'https://docs.datadoghq.com/integrations/microsoft_365/'
 draft: false
 git_integration_title: microsoft_365
 has_logo: true

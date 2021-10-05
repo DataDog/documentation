@@ -2,10 +2,10 @@
 title: Cluster Agentのドキュメント
 kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
+  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
     tag: ブログ
     text: Datadog Cluster Agent のご紹介
-  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
+  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: ブログ
     text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
   - link: /agent/cluster_agent/clusterchecks/
@@ -50,7 +50,7 @@ Helm で Cluster Agent コレクションを有効にするには、[datadog-val
 
 Datadog Cluster Agent を実行するには、適切な RBAC が必要です。
 
-1. [Datadog Cluster Agent RBAC フォルダー][1]にあるマニフェストを確認します。**注**: Cluster Agentを使用する場合、Kubernetes API サーバーと通信できるのは Cluster Agent だけで、Node Agent ではないことにご注意ください。
+1. [Datadog Cluster Agent RBAC フォルダー][1]にあるマニフェストを確認します。Cluster Agentを使用する場合、Kubernetes API サーバーと通信できるのは Cluster Agent だけで、Node Agent ではないことにご注意ください。
 
 2. Cluster Agent に対する RBAC アクセス許可を構成するには、以下のマニフェストを適用します。（[Node Agent デーモンセット][2]を設定する際に、すでに行っている可能性があります。）
 
@@ -100,7 +100,7 @@ Cluster Agent に提供されているデフォルトの `cluster-agent-deployme
     echo -n '<Your API key>' | base64
     ```
 3. `secrets-application-key.yaml` マニフェストで、`PUT_YOUR_BASE64_ENCODED_APP_KEY_HERE` を base64 でエンコードされた [Datadog アプリケーションキー][11]に置き換えます。
-4. デフォルトでは、`cluster-agent-deployment.yaml` マニフェストは、以前に `Secret` `datadog-cluster-agent` で作成されたトークンを参照します。このトークンを代替の方法で保存する場合は、それに応じて `DD_CLUSTER_AGENT_AUTH_TOKEN` 環境変数を構成します。
+4. `cluster-agent-deployment.yaml` マニフェストは、以前に `Secret` `datadog-cluster-agent` で*デフォルト*で作成されたトークンを参照します。このトークンを*代替*の方法で保存する場合は、それに応じて `DD_CLUSTER_AGENT_AUTH_TOKEN` 環境変数を構成します。
 5. Cluster Agent Deployment が使用するために、これらのリソースをデプロイします。
     ```shell
     kubectl apply -f agent-services.yaml

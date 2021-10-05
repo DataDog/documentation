@@ -14,7 +14,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md
 display_name: Windows Service
 draft: false
 git_integration_title: windows_service
@@ -45,50 +45,11 @@ Windows Service チェックは [Datadog Agent][1] パッケージに含まれ�
 
 ### コンフィギュレーション
 
-[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `windows_service.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル windows_service.d/conf.yaml][3] を参照してください。サンプルコンフィギュレーションは以下の通りです。
+1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `windows_service.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル windows_service.d/conf.yaml][3] を参照してください。
 
-```yaml
-init_config:
+2. サービス名は、表示名**ではなく**、`services.msc` プロパティフィールドに表示されているものを入力してください。スペースを含む名前の場合は、`"Windows Service"` のように名前全体を二重引用符で囲みます。**注**: Datadog では、スペースはアンダースコアに置き換えられます。
 
-instances:
-
-    ## @param services  - 文字列のリスト - 必須
-    ## Dnscache、wmiApSrv など、監視するサービスのリスト。
-    ##
-    ## いずれかのサービスが `ALL` に設定されると、SCM に登録されたすべてのサービスが監視されます。
-    ##
-    ## これは、service.* が設定された場合と同様に、service で始まるすべてのサービスに一致します。
-    ## 完全一致には、^service$ を使用します。
-    #
-    # - services:
-    #    - <SERVICE_NAME_1>
-    #    - <SERVICE_NAME_2>
-  - services:
-      - wmiApSrv
-      - SNMPTRAP
-
-    ## @param disable_legacy_service_tag - boolean - optional - default: false
-    ## 名前が変更されたタグ `service` の `windows_service` への送信を停止して
-    ## 関連する非推奨の警告を無効化するかどうかを選択します。
-    #
-    # disable_legacy_service_tag: false
-    disable_legacy_service_tag: true
-
-    ## @param tags - key:value 要素のリスト - オプション
-    ## このインテグレーションによって送信されるすべてのサービスチェックにアタッチされるタグのリスト。
-    ##
-    ## タグ付けの詳細は、https://docs.datadoghq.com/tagging を参照してください
-    #
-    # tags:
-    #   - <KEY_1>:<VALUE_1>
-    #   - <KEY_2>:<VALUE_2>
-    tags:
-      - provider:amazon
-```
-
-サービス名は、表示名 (例: `WMI Performance Adapter`) **ではなく**、`services.msc` プロパティフィールドに表示される名前 (例: `wmiApSrv`) を指定してください。スペースを含む名前の場合は、名前全体を二重引用符で囲みます (例: "Bonjour Service")。**注**: Datadog では、スペースはアンダースコアに置き換えられます。
-
-[Agent を再起動][4]すると、サービスの監視と、Datadog へのサービスチェックの送信が開始されます。
+3. [Agent を再起動します][4]。
 
 #### メトリクスの収集
 
@@ -126,7 +87,7 @@ Windows Service チェックには、イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/windows_service/datadog_checks/windows_service/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [6]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/windows_service/assets/service_checks.json

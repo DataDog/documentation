@@ -38,4 +38,4 @@ description: インシデントの自動通知を構成
 {{< img src="monitors/incidents/notification_rules_list.jpeg" alt="通知ルールリスト"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /ja/monitors/notify/?tab=is_alert#notify-your-team
+[2]: /ja/monitors/notifications/?tab=is_alert#notify-your-team

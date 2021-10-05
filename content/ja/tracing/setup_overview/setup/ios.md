@@ -1,10 +1,10 @@
 ---
 beta: true
 dependencies:
-  - https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md
+  - 'https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md'
 description: iOS アプリケーションからトレースを収集する。
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-ios
+  - link: 'https://github.com/DataDog/dd-sdk-ios'
     tag: Github
     text: dd-sdk-ios ソースコード
   - link: tracing/visualization/

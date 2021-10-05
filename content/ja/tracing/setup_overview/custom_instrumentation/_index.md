@@ -23,7 +23,7 @@ further_reading:
     text: アプリケーション全体に OpenTracing を実装します。
   - link: tracing/visualization/
     text: サービス、リソース、トレースの詳細
-  - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
+  - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
     text: Datadog および OpenTelemetry のイニシアティブのイニシアティブについて
 ---
 カスタムインスツルメンテーションにより、Datadog へ送信するトレースをプログラムで作成、変更、削除できます。これは、自動インスツルメンテーションでキャプチャできない社内コードのトレースや、不要なスパンのトレースからの削除、そして希望する[スパンタグ][1]の追加などスパンのより詳細な可視化とコンテキストの提供に役立ちます。

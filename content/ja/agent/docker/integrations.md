@@ -19,7 +19,7 @@ further_reading:
     text: コンテナから送信された全データにタグを割り当て
 ---
 <div class="alert alert-info">
-この機能の背後にある概念については、<a href="/getting_started/agent/autodiscovery">オートディスカバリーの概要ドキュメント</a>を参照してください。
+<a href="/getting_started/agent/autodiscovery">この機能の背後にある概念については、オートディスカバリーの概要ドキュメントを参照してください</a>。
 </div>
 
 このページでは、インテグレーションオートディスカバリーと Docker を構成する方法について説明します。Kubernetes を使用する場合は、[Kubernetes インテグレーションオートディスカバリーのドキュメント][1]を参照してください。

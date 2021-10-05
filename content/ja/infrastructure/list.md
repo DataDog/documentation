@@ -58,7 +58,7 @@ Datadog Agent
 
 ### ホスト名
 
-Datadog Agent は、複数のソースから潜在的なホスト名を収集します。詳細については、[Datadog が Agent ホスト名を決定する方法][1]を参照してください。
+Datadog Agent は、さまざまなソースから潜在的なホスト名を収集します。詳細については、[Datadog が Agent ホスト名を決定する方法][1]を参照してください。
 
 **注**: ホスト名は、Datadog アカウント内で一意である必要があります。そうでない場合、ホストのグラフに不整合が生じる可能性があります。
 
@@ -66,13 +66,13 @@ Datadog Agent は、複数のソースから潜在的なホスト名を収集し
 
 任意のホストをクリックして、[エイリアス](#aliases)、[タグ][2]、[メトリクス][3]、[コンテナ][4]、[ログ][5] (有効化されている場合) などの詳細を表示します:
 
-{{< img src="infrastructure/index/Infra-List.png" alt="インフラストラクチャーリストのホストの詳細" style="width:90%;">}}
+{{< img src="infrastructure/index/Infra-List.png" alt="インフラストラクチャーリストのホストの詳細"  style="width:90%;">}}
 
 #### エイリアス
 
 Datadog は、1 つのホストに一意に識別可能な名前が複数ある場合、ホスト名のエイリアスを作成します。Agent によって収集されたこれらの名前は、選択された正規名のエイリアスとして追加されます。あたとえば、EC2 で実行している単一のホストは、インスタンス ID (`i-abcd1234`)、ホストの IP アドレスに基づいて EC2 が提供する汎用ホスト名 (`ip-192-0-0-1`)、および内部 DNS サーバーまたは config で管理されるホストファイルが提供するわかりやすいホスト名 (`myhost.mydomain`) を持つ可能性があります。
 
-{{< img src="infrastructure/index/Infra-List-Alias.png" alt="ホストエイリアス" style="width:90%;">}}
+{{< img src="infrastructure/index/Infra-List-Alias.png" alt="ホストエイリアス"  style="width:90%;">}}
 
 ### エクスポート
 
