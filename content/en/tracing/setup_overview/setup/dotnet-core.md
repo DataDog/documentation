@@ -77,7 +77,7 @@ To install the .NET Tracer:
 
 To enable the .NET Tracer for your service, you must:
 
-1. Set the required environment variables for automatic instrumentation to attach to your application
+1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][2].
 2. Restart the application
 
 #### Internet Information Services (IIS)
@@ -113,6 +113,7 @@ For standalone applications and Windows services, manually restart the applicati
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: #configuring-process-environment-variables
 {{% /tab %}}
 
 {{% tab "Linux" %}}
@@ -147,7 +148,7 @@ sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/
 
 To enable the .NET Tracer for your service, you must:
 
-1. Set the required environment variables for automatic instrumentation to attach to your application
+1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][2].
 2. Restart the application
 
 ##### Required environment variables
@@ -166,6 +167,7 @@ For standalone applications, manually restart the application as you normally wo
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: #configuring-process-environment-variables
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
@@ -184,7 +186,7 @@ To install the .NET Tracer:
 
 To enable the .NET Tracer for your service, you must:
 
-1. Set the required environment variables for automatic instrumentation to attach to your application
+1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][2].
 2. Restart the application
 
 ##### Required environment variables
@@ -213,6 +215,7 @@ For standalone applications, manually restart the application as you normally wo
 
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
+[2]: #configuring-process-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
