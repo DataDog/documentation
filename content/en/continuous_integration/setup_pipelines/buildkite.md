@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Configure the Datadog integration
 
 The Datadog integration for [Buildkite][2] works by using [webhooks][1] to send pipeline data to Datadog.
