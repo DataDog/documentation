@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Compatibility
 
 Supported GitLab versions:
@@ -103,7 +103,7 @@ Fill in the integration configuration settings:
 
 You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up.
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Integrating through webhooks
 
 As an alternative to using the native Datadog integration, you can use [webhooks][1] to send pipeline data to Datadog.
