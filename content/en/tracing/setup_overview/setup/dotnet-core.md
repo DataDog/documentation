@@ -54,18 +54,18 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ### Installation overview
 
-The Datadog .NET Tracer can be installed machine-wide to allow services across an entire machine to be instrumented, or it can be installed on a per-application-basis to allow developers to manage the instrumentation via the application’s dependencies. To see machine-wide installation options, view the Windows or Linux tab. To see per-application installation options, see the NuGet tab.
-
 1. [Install the tracer][8]
 2. [Enable the tracer for your service][9]
 3. [Configure the Datadog Agent for APM][10]
 4. [View your live data][11]
 
+### Install the tracer
+
+The Datadog .NET Tracer can be installed machine-wide to allow services across an entire machine to be instrumented, or it can be installed on a per-application-basis to allow developers to manage the instrumentation via the application’s dependencies. To see machine-wide installation options, view the Windows or Linux tab. To see per-application installation options, see the NuGet tab.
+
 {{< tabs >}}
 
 {{% tab "Windows" %}}
-
-### Install the tracer
 
 To install the .NET Tracer:
 
@@ -73,12 +73,66 @@ To install the .NET Tracer:
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
+
+{{% tab "Linux" %}}
+
+To install the .NET Tracer:
+
+1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
+
+2. Once downloaded, install the package with one of the commands below:
+
+```bash
+# For Debian or Ubuntu, install the DEB package
+# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
+sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh
+
+# For CentOS or Fedora, install the RPM package
+# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
+sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh
+
+# For Alpine or other musl-based distributions, install the MUSL tar archive
+# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
+sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh
+
+# For other distributions, install the tar archive
+# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
+sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh
+```
+
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
+
+{{% tab "NuGet" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong><br><ul><li>This installation is not supported for instrumenting applications running in IIS. To instrument applications running in IIS, follow the Windows installation process.</li></ul>
+</div>
+
+To install the .NET Tracer:
+
+1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
+
+
+[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ### Enable the tracer for your service
 
 To enable the .NET Tracer for your service, you must:
 
-1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][2].
+1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][12].
 2. Restart the application
+
+{{< tabs >}}
+
+{{% tab "Windows" %}}
 
 #### Internet Information Services (IIS)
 
@@ -111,45 +165,9 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 For standalone applications and Windows services, manually restart the application as you normally would.
 
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: #configuring-process-environment-variables
 {{% /tab %}}
 
 {{% tab "Linux" %}}
-
-### Install the tracer
-
-To install the .NET Tracer:
-
-1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
-
-2. Once downloaded, install the package with one of the commands below:
-
-```bash
-# For Debian or Ubuntu, install the DEB package
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh
-
-# For CentOS or Fedora, install the RPM package
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh
-
-# For Alpine or other musl-based distributions, install the MUSL tar archive
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh
-
-# For other distributions, install the tar archive
-# and create the .NET Tracer log directory with the appropriate permissions at /var/log/datadog/dotnet
-sudo tar -xzf -C /opt/datadog datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh
-```
-
-### Enable the tracer for your service
-
-To enable the .NET Tracer for your service, you must:
-
-1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][2].
-2. Restart the application
 
 ##### Required environment variables
 
@@ -165,29 +183,9 @@ DD_DOTNET_TRACER_HOME=/opt/datadog
 
 For standalone applications, manually restart the application as you normally would.
 
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-[2]: #configuring-process-environment-variables
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
-
-### Install the tracer
-
-<div class="alert alert-warning">
-  <strong>Note:</strong><br><ul><li>This installation is not supported for instrumenting applications running in IIS. To instrument applications running in IIS, follow the Windows installation process.</li></ul>
-</div>
-
-To install the .NET Tracer:
-
-1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
-
-### Enable the tracer for your service
-
-To enable the .NET Tracer for your service, you must:
-
-1. Set the required environment variables for automatic instrumentation to attach to your application. To learn how to set environment variables in different environments, see [Configuring process environment variables][2].
-2. Restart the application
 
 ##### Required environment variables
 
@@ -214,8 +212,6 @@ Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Na
 For standalone applications, manually restart the application as you normally would.
 
 
-[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
-[2]: #configuring-process-environment-variables
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -668,3 +664,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [9]: #enable-the-tracer-for-your-service
 [10]: #configure-the-datadog-agent-for-apm
 [11]: #view-your-live-data
+[12]: #configuring-process-environment-variables
