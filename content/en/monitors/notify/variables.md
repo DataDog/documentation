@@ -14,146 +14,7 @@ further_reading:
   text: "Manage monitors"
 ---
 
-## Template variables
-
-Use template variables to customize your monitor notifications. The built-in variables are:
-
-| Variable                      | Description                                                                  |
-|-------------------------------|------------------------------------------------------------------------------|
-| `{{value}}`                   | The value that breached the alert for metric based query monitors.           |
-| `{{threshold}}`               | The value of the alert threshold set in the monitor's alert conditions.      |
-| `{{warn_threshold}}`          | The value of the warning threshold set in the monitor's alert conditions.    |
-| `{{ok_threshold}}`            | The value that recovered the monitor.                                        |
-| `{{comparator}}`              | The relational value set in the monitor's alert conditions.                  |
-| `{{last_triggered_at}}`       | The UTC date and time when the monitor last triggered.                       |
-| `{{last_triggered_at_epoch}}` | The UTC date and time when the monitor last triggered in epoch milliseconds. |
-
-### Evaluation
-
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][1].
-
-### Local time
-
-Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
-For example, to add the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
-
-```
-{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
-```
-
-The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-Refer to the [list of tz database time zones][2], particularly the TZ database name column, to see the list of available time zone values.
-
-## Tag variables
-
-Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
-For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
-
-For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message will render a comma-separated string of all values, in the lexicographic order.
-
-Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
-
-#### Multi-alert group by host
-
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
-To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
-Some specific host metadata are available as well:
-
-- Agent Version : {{host.metadata_agent_version}}
-- Machine       : {{host.metadata_machine}}
-- Platform      : {{host.metadata_platform}}
-- Processor     : {{host.metadata_processor}}
-
-### Facet variables
-
-Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by the facets.
-For example, if your log monitor is grouped by the `facet`, the variable is:
-
-```text
-{{ @facet.name }}
-```
-**Example**: To include the information in a multi alert log monitor group by `@machine_id`:
-
-```text
-This alert was triggered on {{ @machine_id.name }}
-```
-
-If your facet has periods, use brackets around the facet, for example:
-
-```text
-{{ [@network.client.ip].name }}
-```
-
-### Attribute and Tag variables
-
-_Available for [Log monitor][3], [Trace Analytics monitor][4] (APM) and [RUM monitor][5]_
-
-To include **any** attribute or tag from an event matching the monitor query, use the following variables :
-
-| Monitor type    | Variable syntax                                         |
-|-----------------|---------------------------------------------------------|
-| RUM             |  `{{rum.attributes.key}}` / `{{rum.tags.key}}`          |
-| Trace Analytics |  `{{span.attributes.key}}` / `{{span.tags.key}}`        |
-| Log             |  `{{log.attributes.key}}` / `{{log.tags.key}}`          |
-
-For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
-
-**Example**: if a log monitor is grouped by `@error.code`, to include the error message in the notification message, use the variable :
-
-```text
-{{ log.attributes.[error.message] }}
-```
-
-The message will render the `error.message` attribute of a chosen log matching the query, **if the attribute exists**
-
-<div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable will render empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
-
-#### First level attributes
-
-Logs, spans and RUM events have generic first level attributes, that you can also use in variables following the following syntax :
-
-| Monitor type    | Variable syntax                       | First level attributes |
-|-----------------|---------------------------------------|------------------------|
-| RUM             | `{{rum.key}}`                         | `service`, `status`, `timestamp` |
-| Trace Analytics | `{{span.key}}`                        | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
-| Log             | `{{log.key}}`                         | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
-
-If the matching event does not contain the attribute in its definition, the variable is rendered empty.
-
-#### Explorer link
-
-Use `{{log.link}}`, `{{rum.link}}` and `{{span.link}}` to enrich the notification with a link to the log, rum or trace explorer, scoped on the events matching the query.
-
-### Check monitor variables
-
-For check monitor variables (custom check and integration check), the variable `{{check_message}}` is available and renders the message specified in the custom check or the integration check.
-
-### Composite monitor variables
-
-Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
-
-For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
-
-```text
-{{ a.value }}
-```
-
-Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
-
-#### Tag key with period
-
-If your tag's key has a period in it, include brackets around the full key when using a tag variable.
-For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
-
-```text
-{{[dot.key.test].name}}
-```
-
-If the tag is on an event and you're using an event monitor, use:
-
-```text
-{{ event.tags.[dot.key.test] }}
-```
+Use variables in notification message to display conditional messaging and route notification to different teams using [conditional variables](#conditional-variables), or to enrich its content by using [attribute and tag variables](#attribute-and-tag-variables) and [template variables](#template-variables).
 
 ## Conditional variables
 
@@ -341,6 +202,153 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## Notification message enrichment
+
+### Attribute and tag variables
+
+#### Multi-alert tag variables
+
+Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
+For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
+
+For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message will render a comma-separated string of all values, in the lexicographic order.
+
+Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+
+##### Query group by host
+
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
+To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
+Some specific host metadata are available as well:
+
+- Agent Version : {{host.metadata_agent_version}}
+- Machine       : {{host.metadata_machine}}
+- Platform      : {{host.metadata_platform}}
+- Processor     : {{host.metadata_processor}}
+
+##### Query group by a facet
+
+Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by the facets.
+For example, if your log monitor is grouped by the `facet`, the variable is:
+
+```text
+{{ @facet.name }}
+```
+**Example**: To include the information in a multi alert log monitor group by `@machine_id`:
+
+```text
+This alert was triggered on {{ @machine_id.name }}
+```
+
+If your facet has periods, use brackets around the facet, for example:
+
+```text
+{{ [@network.client.ip].name }}
+```
+
+#### Matching attribute/tag variables
+
+_Available for [Log monitor][1], [Trace Analytics monitor][2] (APM) and [RUM monitor][3]_
+
+To include **any** attribute or tag from an event matching the monitor query, use the following variables :
+
+| Monitor type    | Variable syntax                                         |
+|-----------------|---------------------------------------------------------|
+| RUM             |  `{{rum.attributes.key}}` / `{{rum.tags.key}}`          |
+| Trace Analytics |  `{{span.attributes.key}}` / `{{span.tags.key}}`        |
+| Log             |  `{{log.attributes.key}}` / `{{log.tags.key}}`          |
+
+For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
+
+**Example**: if a log monitor is grouped by `@error.code`, to include the error message in the notification message, use the variable :
+
+```text
+{{ log.attributes.[error.message] }}
+```
+
+The message will render the `error.message` attribute of a chosen log matching the query, **if the attribute exists**
+
+<div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable will render empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
+
+##### First level attributes
+
+Logs, spans and RUM events have generic first level attributes, that you can also use in variables following the following syntax :
+
+| Monitor type    | Variable syntax                       | First level attributes |
+|-----------------|---------------------------------------|------------------------|
+| RUM             | `{{rum.key}}`                         | `service`, `status`, `timestamp` |
+| Trace Analytics | `{{span.key}}`                        | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
+| Log             | `{{log.key}}`                         | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
+
+If the matching event does not contain the attribute in its definition, the variable is rendered empty.
+
+##### Explorer link
+
+Use `{{log.link}}`, `{{rum.link}}` and `{{span.link}}` to enrich the notification with a link to the log, rum or trace explorer, scoped on the events matching the query.
+
+#### Check monitor variables
+
+For check monitor variables (custom check and integration check), the variable `{{check_message}}` is available and renders the message specified in the custom check or the integration check.
+
+#### Composite monitor variables
+
+Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
+
+For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
+
+```text
+{{ a.value }}
+```
+
+Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
+
+##### Tag key with period
+
+If your tag's key has a period in it, include brackets around the full key when using a tag variable.
+For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
+
+```text
+{{[dot.key.test].name}}
+```
+
+If the tag is on an event and you're using an event monitor, use:
+
+```text
+{{ event.tags.[dot.key.test] }}
+```
+
+
+### Template variables
+
+Use template variables to customize your monitor notifications. The built-in variables are:
+
+| Variable                      | Description                                                                  |
+|-------------------------------|------------------------------------------------------------------------------|
+| `{{value}}`                   | The value that breached the alert for metric based query monitors.           |
+| `{{threshold}}`               | The value of the alert threshold set in the monitor's alert conditions.      |
+| `{{warn_threshold}}`          | The value of the warning threshold set in the monitor's alert conditions.    |
+| `{{ok_threshold}}`            | The value that recovered the monitor.                                        |
+| `{{comparator}}`              | The relational value set in the monitor's alert conditions.                  |
+| `{{last_triggered_at}}`       | The UTC date and time when the monitor last triggered.                       |
+| `{{last_triggered_at_epoch}}` | The UTC date and time when the monitor last triggered in epoch milliseconds. |
+
+#### Evaluation
+
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][4].
+
+#### Local time
+
+Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
+For example, to add the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
+
+```
+{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+```
+
+The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
+Refer to the [list of tz database time zones][5], particularly the TZ database name column, to see the list of available time zone values.
+
 ## Advanced
 
 ### Dynamic links
@@ -437,9 +445,8 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 {{ .matched }} the host name
 ```
 
-
-[1]: /monitors/guide/template-variable-evaluation/
-[2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /monitors/create/types/log/
-[4]: /monitors/create/types/apm/?tab=analytics
-[5]: /monitors/create/types/real_uscaer_monitoring/
+[1]: /monitors/create/types/log/
+[2]: /monitors/create/types/apm/?tab=analytics
+[3]: /monitors/create/types/real_uscaer_monitoring/
+[4]: /monitors/guide/template-variable-evaluation/
+[5]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
