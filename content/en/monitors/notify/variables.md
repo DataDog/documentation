@@ -212,7 +212,7 @@ This is the escalation message @dev-team@company.com
 Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
 For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message will render a comma-separated string of all values, in the lexicographic order.
+For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message renders a comma-separated string of all values, in the lexicographic order.
 
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
@@ -223,9 +223,9 @@ To see a list of tag variables based on your tag selection, click **Use message 
 Some specific host metadata are available as well:
 
 - Agent Version : {{host.metadata_agent_version}}
-- Machine       : {{host.metadata_machine}}
-- Platform      : {{host.metadata_platform}}
-- Processor     : {{host.metadata_processor}}
+- Machine : {{host.metadata_machine}}
+- Platform : {{host.metadata_platform}}
+- Processor : {{host.metadata_processor}}
 
 ##### Query group by a facet
 
@@ -267,9 +267,9 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 {{ log.attributes.[error.message] }}
 ```
 
-The message will render the `error.message` attribute of a chosen log matching the query, **if the attribute exists**
+The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
-<div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable will render empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
+<div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
 
 ##### First level attributes
 
@@ -301,7 +301,7 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 {{ a.value }}
 ```
 
-Composite monitors can also utilize tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
+Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
 
 ##### Tag key with period
 
@@ -347,7 +347,7 @@ For example, to add the last triggered time of the monitor in the Tokyo time zon
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-Refer to the [list of tz database time zones][5], particularly the TZ database name column, to see the list of available time zone values.
+See the [list of tz database time zones][5], particularly the TZ database name column, to see the list of available time zone values.
 
 ## Advanced
 
