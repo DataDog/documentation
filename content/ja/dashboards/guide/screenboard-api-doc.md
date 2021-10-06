@@ -1,5 +1,5 @@
 ---
-title: スクリーンボード API
+title: スクリーンボード API ガイド
 kind: ガイド
 aliases:
   - /ja/graphing/faq/screenboard-api-doc

@@ -6,13 +6,13 @@ description: ルーター、スイッチ、サーバー、ファイアウォー�
 aliases:
   - /ja/network_performance_monitoring/devices/
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
     tag: ブログ
     text: Datadog での SNMP モニタリング
-  - link: https://www.datadoghq.com/blog/monitor-meraki/
+  - link: 'https://www.datadoghq.com/blog/monitor-meraki/'
     tag: ブログ
     text: Datadog で Cisco Meraki を監視する
-  - link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
+  - link: 'https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/'
     tag: ブログ
     text: Datadog でデータセンターおよびネットワークデバイスを監視
 ---
@@ -47,14 +47,14 @@ further_reading:
 - Cisco ISR 4431
 - Cisco Nexus
 - Cisco ICM
-- Cisco UC Virtual Machines
+- Cisco UC Virtual Machines 
 - Arista
 - Aruba
 - Checkpoint Firewall
 - Chatsworth PDU
 - APC UPS
 - F5 Big IP
-- Fortinet FortiGate
+- Fortinet FortiGate 
 - HP iLO
 - HP Proliant
 - Dell iDRAC
@@ -76,5 +76,5 @@ further_reading:
 [2]: /ja/network_monitoring/devices/setup/#autodiscovery
 [3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /ja/monitors/create/types/metric/
+[5]: /ja/monitors/monitor_types/metric/
 [6]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

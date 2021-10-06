@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/ntp/README.md'
 display_name: NTP
 draft: false
 git_integration_title: ntp
@@ -75,12 +75,13 @@ Agent はデフォルトで  NTP チェックを有効にしますが、チェ�
 NTP チェックには、イベントは含まれません。
 
 ### サービスのチェック
-{{< get-service-checks-from-git "ntp" >}}
 
+**ntp.in_sync**:<br>
+NTP オフセットが `ntp.yaml` で指定されているしきい値より大きい場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -88,5 +89,4 @@ NTP チェックには、イベントは含まれません。
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/ntp/metadata.csv
-[7]: https://github.com/DataDog/integrations-core/blob/master/ntp/assets/service_checks.json
-[8]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/help/
