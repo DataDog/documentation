@@ -56,10 +56,10 @@
     {{ partial "badge.html" (dict "context" . "text" "marketplace") }}
 {{ end }}
 
-{{ if .Params.integration_version }}
+{{ with .Params.integration_version }}
 <div class="row integration-labels">
     <div class="integration-version col-12">
-        <span>{{ i18n "integration_version" }}</span><span>v{{ .Params.integration_version }}</span>
+        <span>{{ i18n "integration_version" }}</span><span>v{{ . }}</span>
     </div>
 
 </div>

@@ -711,8 +711,7 @@ class Integrations:
 
         # if __about__.py exists lets grab the integration version
         integration_version = manifest_json.get("integration_version", "") or ""
-        file_list = file_name.split(sep)
-        integration_name = file_list[len(file_list)-2]
+        integration_name = basename(dirname(file_name))
         aboutpy = "{0}{1}{2}{3}{4}{5}{6}".format(dirname(file_name), sep, "datadog_checks", sep, integration_name, sep, "__about__.py")
 
         if exists(aboutpy):
