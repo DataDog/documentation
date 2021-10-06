@@ -225,7 +225,7 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 **Example**: if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
@@ -285,7 +285,7 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 {{ log.attributes.error.message }}
 ```
 
-{{< img src="monitors/notifications/matching_attribute_variable.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/matching_attribute_variable.png" alt="Matching attribute variable syntax" style="width:90%;">}}
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
