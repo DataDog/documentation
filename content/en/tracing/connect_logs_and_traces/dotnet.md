@@ -58,6 +58,11 @@ For additional examples, see [the Serilog automatic trace ID injection project][
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
 {{% /tab %}}
 {{% tab "log4net" %}}
+
+<div class="alert alert-warning">
+  <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
+</div>
+
 To automatically inject correlation identifiers into your log messages:
 
 1. Configure the .NET Tracer with the following tracer settings:
@@ -65,7 +70,9 @@ To automatically inject correlation identifiers into your log messages:
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Enable mapped diagnostic context (MDC), as shown in the following example code:
+2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
+
+3. Enable mapped diagnostic context (MDC), as shown in the following example code:
 
 ```xml
   <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
@@ -81,10 +88,11 @@ To automatically inject correlation identifiers into your log messages:
     <member value='properties'/>
   </layout>
 ```
-For additional examples, see [the log4net automatic trace ID injection project][1] on GitHub.
+For additional examples, see [the log4net automatic trace ID injection project][2] on GitHub.
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
+[1]: https://docs.datadoghq.com/tracing/setup_overview/setup/dotnet-core/
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
 {{% /tab %}}
 {{% tab "NLog" %}}
 To automatically inject correlation identifiers into your log messages:
