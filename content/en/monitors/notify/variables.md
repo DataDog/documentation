@@ -209,12 +209,13 @@ This is the escalation message @dev-team@company.com
 
 #### Multi-alert variables
 
-Multi-alert variables can be used in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box.
-Enrich notification to dynamically include the value associated with the group by dimension in each alert.
+Configure multi-alert variables in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box.
+Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
 
-##### Query group by tag
+{{< tabs >}}
+{{% tab "Group by tag" %}}
 
-If a metric is tagged with any tag following the `key:value` syntax, and the monitor query is grouped by this tag, use the variable:
+If a metric is tagged with any tag following the `key:value` syntax and the monitor query is grouped by this tag, use the variable:
 
 ```text
 {{ key.name }}
@@ -223,6 +224,8 @@ If a metric is tagged with any tag following the `key:value` syntax, and the mon
 This renders the `value` associated with the `key` in each alert notification. If a group is tagged with multiple `values` associated with the same `key`, the alert message renders a comma-separated string of all values, in the lexicographic order.
 
 **Example**: if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
+
+{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax"  style="width:90%;">}}
 
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
@@ -237,7 +240,9 @@ Some specific host metadata are available as well:
 - Platform : {{host.metadata_platform}}
 - Processor : {{host.metadata_processor}}
 
-##### Query group by a facet
+{{% /tab %}}
+
+{{% tab "Group by facet" %}}
 
 Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by facet. If a log monitor is grouped by `@facet_key`, use the variable:
 
@@ -256,6 +261,9 @@ If your facet has periods, use brackets around the facet, for example:
 ```text
 {{ [@network.client.ip].name }}
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Matching attribute/tag variables
 
@@ -277,9 +285,10 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 {{ log.attributes.error.message }}
 ```
 
+{{< img src="monitors/notifications/matching_attribute_variable.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
+
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
-{{< img src="monitors/notifications/matching_attribute_variable.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
 
 <div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
 
