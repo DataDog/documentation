@@ -11,7 +11,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
 display_name: PerimeterX
 draft: false
 git_integration_title: perimeterx
