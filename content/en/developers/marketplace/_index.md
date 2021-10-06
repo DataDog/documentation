@@ -23,12 +23,15 @@ Follow these steps to develop and publish your Integrations page or Marketplace 
 
 All Technology Partners can request a dedicated sandbox Datadog account to aid in their development. To request a sandbox:
 
-1. Create a free Datadog [trial account][4] using the same email address as your Technology Partner application
-2. Log into the [Datadog Partner Portal][5]
-3. On your personal homepage, click on the "Learn More" button under "Sandbox Access"
-4. Select "Request Sandbox Upgrade"
+1. Log into the [Datadog Partner Portal][4]
+2. On your personal homepage, click on the "Learn More" button under "Sandbox Access"
+3. Select "Request Sandbox Upgrade"
 
-Converting an account to a developer sandbox may take up to one or two business days. Contact [Datadog Support][6] with any questions.
+Creating a developer sandbox may take up to one or two business days. Contact [Datadog Support][5] with any questions.
+
+Please note: if you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox, following the instructions on [switching between orgs][6].
+
+Finally, once your sandbox is created, you can [invite new members][30] from your organization that you'd like to collaborate with!
 
 ## Develop your integration or create a Marketplace tile only listing
 
@@ -249,9 +252,9 @@ Email techpartners@datadoghq.com if you have any questions.
 [1]: https://www.datadoghq.com/partner/
 [2]: https://app.datadoghq.com/account/settings
 [3]: https://app.datadoghq.com/marketplace
-[4]: https://www.datadoghq.com/free-datadog-trial/
-[5]: https://partners.datadoghq.com/English/
-[6]: /help/
+[4]: https://partners.datadoghq.com/English/ 
+[5]: /help/
+[6]: /account_management/org_switching/
 [7]: https://learn.datadoghq.com/course/view.php?id=38
 [8]: https://learn.datadoghq.com/
 [9]: https://github.com/DataDog/marketplace
@@ -275,3 +278,4 @@ Email techpartners@datadoghq.com if you have any questions.
 [27]: https://datadoghq.dev/integrations-core/guidelines/dashboards/
 [28]: https://help.github.com/articles/about-codeowners/
 [29]: https://www.datadoghq.com/blog/
+[30]: /account_management/users/#add-new-members-and-manage-invites
