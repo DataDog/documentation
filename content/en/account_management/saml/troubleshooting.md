@@ -17,7 +17,7 @@ This page provides troubleshooting instructions for common errors during Securit
 
 If you come across an error message such as `Arf. Unknown User`, `There are No Authn Mappings for this User`, `Assertion could not be validated`, `SAML NO HANDLE ERROR`, or `No active account for a user`, there may be an issue with your mappings configuration in Datadog and your configuration in your identity provider (IdP).  
 
-- **There are No Authn Mappings for this User**: There is a mismatch with your mappings configuration in Datadog and your configuration in your IdP. 
+- **There are No Authn Mappings for this User**: There is a mismatch with your mappings configuration in Datadog and your configuration in your IdP. See [Roles errors](#roles-errors) below.
 - **Assertion could not be validated**: After enabling IdP initiated login in Datadog, the ACS URLs in your IdP configuration may be incorrect. Alternatively, your assertions may be unsigned. For more information, see [Assertions and attributes][1]. 
 - **SAML NO HANDLE ERROR**: Your assertion may be missing the required `eduPersonPrincipalName` attribute. Confirm that this attribute is set in your configuration. 
 - **No active account for a user**: Enabling JIT provisioning may result in the following `There is no active account for` errors.
