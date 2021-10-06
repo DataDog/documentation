@@ -20,7 +20,11 @@ If you come across an error message such as `Arf. Unknown User`, `There are No A
 - **There are No Authn Mappings for this User**: There is a mismatch with your mappings configuration in Datadog and your configuration in your IdP. 
 - **Assertion could not be validated**: After enabling IdP initiated login in Datadog, the ACS URLs in your IdP configuration may be incorrect. Alternatively, your assertions may be unsigned. For more information, see [Assertions and attributes][1]. 
 - **SAML NO HANDLE ERROR**: Your assertion may be missing the required `eduPersonPrincipalName` attribute. Confirm that this attribute is set in your configuration. 
-- **No active account for a user**: 
+- **No active account for a user**: Enabling JIT provisioning may result in the following `There is no active account for` errors.
+  - When a user tries to log into a Datadog organization without JIT provisioning enabled or an email invitation, the `There is no active account for` error appears. 
+  - When you send a new user an email invitation to join a Datadog organization with JIT provisioning enabled and they try to login through the IdP, the `There is no active account for` error appears. 
+  - When you disable a user in a Datadog organization with JIT provisioning enabled and they try to login again through SAML, the `There is no active account for` error appears.
+  - If you have not verified your email address with the verification email sent from Datadog, the `There is no active account for` error appears.
 
 ## IdP metadata file errors
 
@@ -36,9 +40,11 @@ To validate your metadata file:
 
 When mappings are enabled, users logging in with SAML to a Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider, and the mappings set within Mappings settings.
 
-Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and will not be allowed to log in.
+Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and are not allowed to log in.
 
-If you have group mappings set and are not able to see your roles, you group mappings in the Datadog application may appear differently in your IdP. To verify:
+{{< img src="account_management/saml/unknown_user_error.png" alt="No AuthNMappings for this user" style="width:80%;">}}
+
+If you have group mappings set and are not able to see your roles, your group mappings in the Datadog application may appear differently in your IdP. To verify:
 
 1. Retrieve your IdP's SAML assertion for your account. Use browser tooling, such as [extensions][3], to retrieve your SAML assertion.
 2. Navigate to the Team page in the bottom left corner of Datadog.
