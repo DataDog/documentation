@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Utilisez xMatters comme canal de notification pour les alertes et les événements Datadog.
-doc_link: https://docs.datadoghq.com/integrations/xmatters/
+doc_link: 'https://docs.datadoghq.com/integrations/xmatters/'
 draft: false
 git_integration_title: xmatters
 has_logo: true

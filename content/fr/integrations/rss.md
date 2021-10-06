@@ -6,12 +6,12 @@ doclevel: basic
 description: "Consultez des flux RSS depuis votre flux d'événements Datadog."
 is_public: true
 public_title: Intégration Datadog/RSS
-short_description: "Enregistrez les flux RSS de votre flux d'événements Datadog"
+short_description: "Intégrez n'importe quel flux RSS à votre flux d'événements Datadog"
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:
-    - notification
-    - web
+  - notification
+  - web
 ddtype: crawler
 integration_id: "feed"
 ---

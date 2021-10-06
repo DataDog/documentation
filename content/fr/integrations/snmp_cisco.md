@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md'
 display_name: Cisco
 draft: false
 git_integration_title: snmp_cisco

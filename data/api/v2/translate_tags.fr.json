@@ -1,11 +1,51 @@
 {
-  "cloud-workload-security": {
-    "name": "Cloud Workload Security",
-    "description": "Surveillez les activités des fichiers et processus dans les charges de travail à l'aide des signaux de sécurité générés."
+  "aws-integration": {
+    "name": "Intégration AWS",
+    "description": "[Voir la version 1 de l'API](/api/v1/aws-integration/)."
+  },
+  "aws-logs-integration": {
+    "name": "Intégration Logs AWS",
+    "description": "[Voir la version 1 de l'API](/api/v1/aws-logs-integration/)."
+  },
+  "authentication": {
+    "name": "Authentification",
+    "description": "Toutes les requêtes à destination de l'API Datadog doivent être authentifiées.\nLes requêtes qui écrivent des données nécessitent un accès au reporting ainsi qu'une `API key`.\nLes requêtes qui lisent des données nécessitent un accès complet ainsi qu'une `application key`.\n\n**Remarque :** par défaut, tous les clients de l'API Datadog utilisent les API du site américain de Datadog.\nSi vous utilisez le site européen de Datadog, définissez la variable d'environnement `DATADOG_HOST` sur `https://api.datadoghq.eu` ou remplacez directement cette valeur lors de la création de votre client.\n\n[Gérer les clés d'application et d'API de votre compte](https://app.datadoghq.com/account/settings#api).\n\n## Valider une clé d'API\n\n[Voir la version 1 de l'API](/api/v1/authentication/#valider-une-cle-d-api)."
+  },
+  "azure-integration": {
+    "name": "Intégration Azure",
+    "description": "[Voir la version 1 de l'API](/api/v1/azure-integration/)."
   },
   "dashboard-lists": {
     "name": "Listes de dashboards",
-    "description": "Interagissez avec vos listes de dashboards via l'API pour\n faciliter l'organisation, la recherche et le partage de tous vos dashboards\n avec votre équipe et votre organisation."
+    "description": "Interagissez avec vos listes de dashboards via l'API pour faciliter l'organisation, la recherche et le partage de tous vos dashboards avec votre équipe et votre organisation. Notez que vous pouvez ajouter des dashboards de l'API v1 aux listes de dashboards créées avec l'API v2."
+  },
+  "dashboards": {
+    "name": "Dashboards",
+    "description": "[Voir la version 1 de l'API](/api/v1/dashboards/)."
+  },
+  "downtimes": {
+    "name": "Downtimes",
+    "description": "[Voir la version 1 de l'API](/api/v1/downtimes/)."
+  },
+  "embeddable-graphs": {
+    "name": "Graphiques intégrables",
+    "description": "[Voir la version 1 de l'API](/api/v1/embeddable-graphs/)."
+  },
+  "events": {
+    "name": "Événements",
+    "description": "[Voir la version 1 de l'API](/api/v1/events/)."
+  },
+  "gcp-integration": {
+    "name": "Intégration GCP",
+    "description": "[Voir la version 1 de l'API](/api/v1/gcp-integration/)."
+  },
+  "hosts": {
+    "name": "Hosts",
+    "description": "[Voir la version 1 de l'API](/api/v1/hosts/)."
+  },
+  "ip-ranges": {
+    "name": "Plages d'IP",
+    "description": "[Voir la version 1 de l'API](/api/v1/ip-ranges/)."
   },
   "incident-services": {
     "name": "Services liés à un incident",
@@ -15,25 +55,25 @@
     "name": "Équipes liées à un incident",
     "description": "Créez, mettez à jour, supprimez et récupérez des équipes pouvant être associées à des incidents."
   },
-  "incidents": {
-    "name": "Incidents",
-    "description": "Gérez la résolution des incidents."
-  },
   "key-management": {
     "name": "Gestion des clés",
-    "description": "Gérez vos clés d'application et d'API Datadog. Vous aurez besoin d'une clé d'API et d'une clé d'application, ainsi que des autorisations requises, pour interagir avec ces endpoints. La liste complète des clés d'API et d'application est disponible sur votre [page API Datadog](https://app.datadoghq.com/account/settings#api)."
+    "description": "[Voir la version 1 de l'API](/api/v1/key-management/)."
   },
   "logs": {
     "name": "Logs",
-    "description": "Effectuez des recherches parmi vos logs et envoyez-les à votre plateforme Datadog via HTTP."
+    "description": "Recherchez vos logs sur la plateforme Datadog via HTTP.\n\n[Voir la version 1 de l'API](/api/v1/logs/) pour envoyer des logs."
   },
   "logs-archives": {
     "name": "Archives de logs",
     "description": "Les archives permettent de transférer tous les logs ingérés vers un système de stockage sur le cloud.\n\nConsultez la [page Archives](https://app.datadoghq.com/logs/pipelines/archives) pour obtenir la liste des archives actuellement configurées dans notre interface utilisateur."
   },
-  "logs-metrics": {
-    "name": "Métriques de logs",
-    "description": "Gérez la configuration des [métriques basées sur des logs](https://app.datadoghq.com/logs/pipelines/generate-metrics) pour votre organisation."
+  "logs-indexes": {
+    "name": "Index de logs",
+    "description": "[Voir la version 1 de l'API](/api/v1/logs-indexes/)."
+  },
+  "logs-pipelines": {
+    "name": "Pipelines de logs",
+    "description": "[Voir la version 1 de l'API](/api/v1/logs-pipelines/)."
   },
   "logs-restriction-queries": {
     "name": "Requêtes de restriction de logs",
@@ -41,26 +81,78 @@
   },
   "metrics": {
     "name": "Métriques",
-    "description": "Les endpoints de métriques vous permettent :\n\n- D'envoyer des données de métriques afin de les représenter graphiquement sur les dashboards de Datadog\n- D'interroger vos métriques sur l'intervalle de votre choix\n- De modifier les configurations de tags pour les métriques\n- De visualiser les tags et les volumes pour les métriques\n\n**Remarque** : un graphique ne peut contenir qu'un nombre défini de points. Lorsque l'intervalle d'affichage d'une métrique augmente, les points sont agrégés afin de ne pas dépasser ce nombre.\n\Les méthodes Post, Patch et Delete de l'API `manage_tags` peuvent uniquement être utilisées par un utilisateur qui dispose de l'autorisation `Manage Tags for Metrics`."
+    "description": "[Voir la version 1 de l'API1](/api/v1/metrics/)."
   },
-  "processes": {
-    "name": "Processus",
-    "description": "L'API de processus vous permet d'interroger les données de processus pour votre organisation."
+  "monitors": {
+    "name": "Monitors",
+    "description": "[Voir la version 1 de l'API](/api/v1/monitors/)."
+  },
+  "organizations": {
+    "name": "Organisations",
+    "description": "[Voir la version 1 de l'API](/api/v1/organizations/)."
+  },
+  "pagerduty-integration": {
+    "name": "Intégration PagerDuty",
+    "description": "[Voir la version 1 de l'API](/api/v1/pagerduty-integration/)."
   },
   "roles": {
     "name": "Rôles",
     "description": "L'API Roles est utilisée pour créer et gérer des rôles Datadog, les [autorisation globales](https://docs.datadoghq.com/account_management/rbac/) qu'ils octroient ainsi que les utilisateurs associés.\n\nL'accès à certaines ressources de compte spécifiques peut être accordé à des rôles depuis l'application Datadog sans passer par cette API. Par exemple, l'accès en lecture à un index de log spécifique peut être accordé à un rôle Datadog depuis la [page Pipelines](https://app.datadoghq.com/logs/pipelines)."
   },
+  "screenboards": {
+    "name": "Screenboards",
+    "description": "[Voir la version 1 de l'API](/api/v1/screenboards/)."
+  },
   "security-monitoring": {
     "name": "Security Monitoring",
     "description": "Règles de détection pour générer des signaux et énumérer les signaux générés."
   },
-  "service-accounts": {
-    "name": "Comptes de service",
-    "description": "Créez, modifiez et désactivez des comptes de service."
+  "service-checks": {
+    "name": "Checks de service",
+    "description": "[Voir la version 1 de l'API](/api/v1/service-checks/)."
+  },
+  "service-dependencies": {
+    "name": "Dépendances de service",
+    "description": "[Voir la version 1 de l'API](/api/v1/service-dependencies/)."
+  },
+  "service-level-objectives": {
+    "name": "Service Level Objectives",
+    "description": "[Voir la version 1 de l'API](/api/v1/service-level-objectives/)."
+  },
+  "slack-integration": {
+    "name": "Intégration Slack",
+    "description": "[Voir la version 1 de l'API](/api/v1/slack-integration/)."
+  },
+  "snapshots": {
+    "name": "Snapshots",
+    "description": "[Voir la version 1 de l'API](/api/v1/snapshots/)."
+  },
+  "synthetics": {
+    "name": "Synthetics",
+    "description": "[Voir la version 1 de l'API](/api/v1/synthetics/)."
+  },
+  "tags": {
+    "name": "Tags",
+    "description": "[Voir la version 1 de l'API](/api/v1/tags/)."
+  },
+  "timeboards": {
+    "name": "Timeboards",
+    "description": "[Voir la version 1 de l'API](/api/v1/timeboards/)."
+  },
+  "tracing": {
+    "name": "Tracing",
+    "description": "[Voir la version 1 de l'API](/api/v1/tracing/)."
+  },
+  "usage-metering": {
+    "name": "Mesure de l'utilisation",
+    "description": "[Voir la version 1 de l'API](/api/v1/usage-metering/)."
   },
   "users": {
     "name": "Utilisateurs",
     "description": "Créez, modifiez et désactivez des utilisateurs."
+  },
+  "webhooks-integration": {
+    "name": "Intégration Webhooks",
+    "description": "[Voir la version 1 de l'API](/api/v1/webhooks-integration/)."
   }
 }

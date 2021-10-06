@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure パブリック IP アドレスのキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_public_ip_address/'
 draft: false
 git_integration_title: azure_public_ip_address
 has_logo: true

@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md'
 display_name: Rookout
 draft: false
 git_integration_title: rookout
@@ -22,7 +22,7 @@ maintainer: support@rookout.com
 manifest_version: 1.0.0
 name: rookout
 public_title: Intégration Datadog/Rookout
-short_description: Alertes, logging et debugging de production
+short_description: 'Alertes, logging et debugging de production'
 support: contrib
 supported_os:
   - linux
