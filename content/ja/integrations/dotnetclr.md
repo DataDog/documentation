@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md
 display_name: .NET CLR
 draft: false
 git_integration_title: dotnetclr

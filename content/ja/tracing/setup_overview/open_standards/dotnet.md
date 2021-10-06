@@ -35,9 +35,9 @@ public void ConfigureServices(IServiceCollection services)
 OpenTracing を使用してスパンを作成します。
 
 ```csharp
-using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
+using (var scope =
+       Tracer.Instance.StartActive("manual.sortorders"))
 {
-    scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
     SortOrders();
 }
 ```
@@ -49,9 +49,9 @@ using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").Start
  Task.Run(
      () =>
      {
-         using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
+         using (var scope =
+                Tracer.Instance.StartActive("manual.sortorders.async"))
          {
-             scope.Span.SetTag("resource.name", "<RESOURCE NAME>");
              SortOrders();
          }
      });

@@ -4,7 +4,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Recueillez des données d'Immunio pour visualiser et surveiller les schémas d'attaque.
-doc_link: https://docs.datadoghq.com/integrations/immunio/
+doc_link: 'https://docs.datadoghq.com/integrations/immunio/'
 draft: false
 git_integration_title: immunio
 has_logo: true

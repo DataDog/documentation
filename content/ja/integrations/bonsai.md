@@ -9,7 +9,7 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_name: Bonsai
 draft: false
 git_integration_title: bonsai

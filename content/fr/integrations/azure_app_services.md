@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure App Services.
-doc_link: https://docs.datadoghq.com/integrations/azure_app_services/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_app_services/'
 draft: false
 git_integration_title: azure_app_services
 has_logo: true
