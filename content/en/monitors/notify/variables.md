@@ -271,13 +271,15 @@ To include **any** attribute or tag from a log, a span or a RUM event matching t
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
-**Example**: if a log monitor is grouped by `@error.code`, to include the error message in the notification message, use the variable :
+**Example**: if a log monitor is grouped by `@statusCode`, to include the error message in the notification message, use the variable :
 
 ```text
-{{ log.attributes.[error.message] }}
+{{ log.attributes.error.message }}
 ```
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
+
+{{< img src="monitors/notifications/matching_attribute_variable.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
 
 <div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
 
