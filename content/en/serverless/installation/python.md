@@ -252,19 +252,28 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
 - Replace `<LIBRARY_VERSION>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 - Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][1].
+- If the lambda is using the arm64 architecture, add -ARM to the layer name.
 
 For example:
 
 {{< site-region region="us,us3,eu" >}}
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38:36
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:7
+// For x86 architecture
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+// For arm64 architecture
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38-ARM:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
-arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python38:36
-arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:7
+// For x86 architecture
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python38:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+// For arm64 architecture
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python38-ARM:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
 {{< /site-region >}}
 
@@ -318,6 +327,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension:7
 - Replace `<DATADOG_API_KEY>` with your Datadog API key on the [API Management page][2].
 - Replace `<AWS_REGION>` with the AWS region to which your Lambda functions are deployed.
 - Replace `<EXTENSION_VERSION>` with the desired version of the Datadog Lambda Extension. The latest version is `{{< latest-lambda-layer-version layer="extension" >}}`.
+- If the lambda is using the arm64 architecture, add -ARM to the layer name.
 
 3. Add `datadog_lambda` to your `requirements.txt`.
 4. Register `datadog_lambda_wrapper` as a [middleware][3] in your `app.py`:
@@ -469,12 +479,20 @@ The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Pyt
 
 {{< site-region region="us,us3,eu" >}}
 ```
+// If using x86 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+
+// If using arm64 architecture
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37-ARM:{{< latest-lambda-layer-version layer="python" >}}
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+// If using x86 architecture
 arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+// If using arm64 architecture
+arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37-ARM:{{< latest-lambda-layer-version layer="python" >}}
+
 ```
 {{< /site-region >}}
 
@@ -494,12 +512,18 @@ See the [latest release][5].
 
 {{< site-region region="us,us3,eu" >}}
 ```
+// For x86 architecture
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 architecture
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+// For x86 architecture
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 architecture
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 

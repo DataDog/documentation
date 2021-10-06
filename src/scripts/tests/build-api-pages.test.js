@@ -1468,6 +1468,102 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   })
 
+  it('should work when example {}', () => {
+    const mockSchema = {
+      "description": "The steps used in a Synthetics multistep API test.",
+      "properties": {
+        "extractedValues": {
+          "description": "Array of values to parse and save as variables from the response.",
+          "items": {
+            "description": "Parsing options for variables to extract.",
+            "example": {},
+            "properties": {
+              "field": {
+                "description": "When type is `http_header`, name of the header to use to extract the value.",
+                "example": "content-type",
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the variable to extract.",
+                "type": "string"
+              },
+              "parser": {
+                "description": "Details of the parser to use for the global variable.",
+                "example": {
+                  "type": "regex",
+                  "value": ".*"
+                },
+                "properties": {
+                  "type": {
+                    "description": "Type of parser for a Synthetics global variable from a synthetics test.",
+                    "enum": [
+                      "raw",
+                      "json_path",
+                      "regex",
+                      "x_path"
+                    ],
+                    "example": "raw",
+                    "type": "string",
+                    "x-enum-varnames": [
+                      "RAW",
+                      "JSON_PATH",
+                      "REGEX",
+                      "X_PATH"
+                    ]
+                  },
+                  "value": {
+                    "description": "Regex or JSON path used for the parser. Not used with type `raw`.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "description": "Property of the Synthetics Test Response to use for a Synthetics global variable.",
+                "enum": [
+                  "http_body",
+                  "http_header"
+                ],
+                "example": "http_body",
+                "type": "string",
+                "x-enum-varnames": [
+                  "HTTP_BODY",
+                  "HTTP_HEADER"
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of the step.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "extractedValues": [
+        {
+          "field": "content-type",
+          "name": "string",
+          "parser": {
+            "type": "raw",
+            "value": "string"
+          },
+          "type": "http_body"
+        }
+      ],
+      "name": "string"
+    };
+    expect(actual).toEqual(expected);
+  });
+
 });
 
 describe(`isReadOnlyRow`, () => {

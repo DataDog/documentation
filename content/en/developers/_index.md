@@ -8,6 +8,9 @@ further_reading:
 - link: "/api"
   tag: "Documentation"
   text: "Datadog API"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Best Practices"
+  text: "Create great integration dashboards"
 ---
 
 ## Overview
