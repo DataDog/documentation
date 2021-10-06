@@ -207,12 +207,22 @@ This is the escalation message @dev-team@company.com
 
 ### Attribute and tag variables
 
-#### Multi-alert tag variables
+#### Multi-alert variables
 
-Tag variables can be used in multi-alert monitors based on the tags selected in the multi-alert group box. This works for any tag following the `key:value` syntax.
-For example, if your monitor triggers for each `env`, then the variable `{{env.name}}` is available in your notification message.
+Multi-alert variables can be used in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box.
+Enrich notification to dynamically include the value associated with the group by dimension in each alert.
 
-For any `key:value` tag, the variable `{{key.name}}` renders `value` in the alert message. If a group is tagged with multiple `values` associated with the same `key`, the alert message renders a comma-separated string of all values, in the lexicographic order.
+##### Query group by tag
+
+If a metric is tagged with any tag following the `key:value` syntax, and the monitor query is grouped by this tag, use the variable:
+
+```text
+{{ key.name }}
+```
+
+This renders the `value` associated with the `key` in each alert notification. If a group is tagged with multiple `values` associated with the same `key`, the alert message renders a comma-separated string of all values, in the lexicographic order.
+
+**Example**: if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
@@ -229,13 +239,13 @@ Some specific host metadata are available as well:
 
 ##### Query group by a facet
 
-Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by the facets.
-For example, if your log monitor is grouped by the `facet`, the variable is:
+Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by facet. If a log monitor is grouped by `@facet_key`, use the variable:
 
 ```text
-{{ @facet.name }}
+{{ @facet_key.name }}
 ```
-**Example**: To include the information in a multi alert log monitor group by `@machine_id`:
+
+**Example**: To include group-specific information in a multi alert log monitor group by `@machine_id`:
 
 ```text
 This alert was triggered on {{ @machine_id.name }}
@@ -249,7 +259,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Matching attribute/tag variables
 
-_Available for [Log monitor][1], [Trace Analytics monitor][2] (APM) and [RUM monitor][3]_
+_Available for [Log monitor][2], [Trace Analytics monitor][3] (APM) and [RUM monitor][4]_
 
 To include **any** attribute or tag from an event matching the monitor query, use the following variables :
 
@@ -335,7 +345,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 #### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][4].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][5].
 
 #### Local time
 
@@ -347,7 +357,7 @@ For example, to add the last triggered time of the monitor in the Tokyo time zon
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-See the [list of tz database time zones][5], particularly the TZ database name column, to see the list of available time zone values.
+See the [list of tz database time zones][6], particularly the TZ database name column, to see the list of available time zone values.
 
 ## Advanced
 
@@ -402,7 +412,7 @@ The monitors link is customizable with additional parameters. The most common ar
 |-----------|----------------|---------------------------------------------------------------------------------|
 | `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO DATA`, and `OK`)   |
 | `muted`   | `muted: true`  | Muted monitors (use `false` for non-muted monitors)                             |
-| `type`    | `type:log`     | Log monitors (see other [monitor types][3])                                     |
+| `type`    | `type:log`     | Log monitors (see other [monitor types][7])                                     |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -445,8 +455,9 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 {{ .matched }} the host name
 ```
 
-[1]: /monitors/create/types/log/
-[2]: /monitors/create/types/apm/?tab=analytics
-[3]: /monitors/create/types/real_uscaer_monitoring/
-[4]: /monitors/guide/template-variable-evaluation/
-[5]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[1]: /monitors/create/configuration/#alert-grouping
+[2]: /monitors/create/types/log/
+[3]: /monitors/create/types/apm/?tab=analytics
+[4]: /monitors/create/types/real_user_monitoring/
+[5]: /monitors/guide/template-variable-evaluation/
+[6]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
