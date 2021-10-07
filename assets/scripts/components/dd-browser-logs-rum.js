@@ -53,5 +53,3 @@ if (datadogLogs) {
         datadogLogs.logger.setHandler(Config.loggingHandler);
     }
 }
-
-throw Error('Custom error in dd libs init');

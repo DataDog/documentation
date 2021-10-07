@@ -11,5 +11,3 @@ import './components/api';
 import './components/code-languages';
 import './components/language-select';
 import './components/bootstrap-dropdown-custom';
-
-throw Error('Custom error in main js');

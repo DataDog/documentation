@@ -6,12 +6,6 @@
   {{- partial "preload.html" . -}}
 
   <title>
-    {{/* if isset .Params "integration_title" }}
-      {{ .Params.integration_title }}
-    {{ else }}
-      {{ .Title }}
-    {{ end */}}
-
     {{- cond (isset .Params "integration_title") .Params.integration_title .Title -}}
   </title>
 
