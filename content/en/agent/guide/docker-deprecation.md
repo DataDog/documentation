@@ -9,7 +9,7 @@ Kubernetes is deprecating Docker as a runtime starting after version 1.20, and s
 
 - GKE 1.19 [deprecated Docker and uses containerd by default, on new nodes][2].
 
-- EKS 1.22 [will deprecate Docker and use containerd by default][3].
+- EKS 1.22 [deprecates Docker and uses containerd by default][3].
 
 If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][4]. This means that you must enable either the [containerd][5] or the [CRI-O][6] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
 
