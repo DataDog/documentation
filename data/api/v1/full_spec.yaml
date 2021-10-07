@@ -5874,6 +5874,19 @@ components:
           format: int64
           nullable: true
           type: integer
+        renotify_occurrences:
+          description: The number of times re-notification messages should be sent
+            on the current status at the provided re-notification interval.
+          format: int64
+          nullable: true
+          type: integer
+        renotify_statuses:
+          description: The types of monitor statuses for which re-notification messages
+            are sent.
+          items:
+            $ref: '#/components/schemas/MonitorRenotifyStatusType'
+          nullable: true
+          type: array
         require_full_window:
           description: "A Boolean indicating whether this monitor needs a full window
             of data before it\u2019s evaluated.\nWe highly recommend you set this
@@ -5926,6 +5939,17 @@ components:
       - SKIPPED
       - UNKNOWN
       - WARN
+    MonitorRenotifyStatusType:
+      description: The different statuses for which renotification is supported.
+      enum:
+      - alert
+      - warn
+      - no data
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - WARN
+      - NO_DATA
     MonitorSearchCount:
       description: Search facets.
       items:
