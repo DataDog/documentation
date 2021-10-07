@@ -15,21 +15,21 @@ To help you quickly identify and troubleshoot Lambda function failures, you can 
 
 ## Configuration
 
-To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1]. AWS Lambda payload ingestion requires [APM to be configured on your functions][4] and is currently available for the following Lambda runtimes, with support in additional runtimes coming soon:
+To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1]. AWS Lambda payload ingestion requires [APM to be configured on your functions][4] and is available for the following Lambda runtimes, with support in additional runtimes coming soon:
 - Python ([v49+][2])
 - Node.js ([v64+][3])
 
 Set the `DD_CAPTURE_LAMBDA_PAYLOAD` environment variable to `true` on each of your functions to opt-in to sending Lambda request & response payloads to Datadog.
 
-Request and response payloads are available as added metadata on AWS Lambda traces, and searchable in APM Trace Search. Learn how to use Lambda payloads for faster troubleshooting [here][6].
+Request and response payloads are available as added metadata on AWS Lambda traces, and searchable in APM Trace Search. Using APM and Lambda payloads, you can more quickly [identify and resolve errors or increased latency in your functions][6].
 
 (Optional) This functionality is also compatible with AWS X-Ray. Follow [these steps][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
 
 ## Obfuscating Payload Contents
 
-To prevent any sensitive data within either request or response JSON objects from being sent to Datadog (like account IDs or addresses), you will often want to scrub specific parameters from being sent to Datadog.
+To prevent any sensitive data within either request or response JSON objects from being sent to Datadog (like account IDs or addresses), you often want to scrub specific parameters from being sent to Datadog.
 
-To do this, add a new file `datadog.yaml` in the same folder as your Lambda function code. Obfuscation of fields in the Lambda payload is then available via [the replace_tags block][7] within apm_config settings in datadog.yaml:
+To do this, add a new file `datadog.yaml` in the same folder as your Lambda function code. Obfuscation of fields in the Lambda payload is then available through [the replace_tags block][7] within apm_config settings in datadog.yaml:
 
 ```yaml
 apm_config:
