@@ -227,8 +227,6 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax"  style="width:90%;">}}
 
-Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
-
 ##### Query group by host
 
 If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
@@ -239,6 +237,21 @@ Some specific host metadata are available as well:
 - Machine : {{host.metadata_machine}}
 - Platform : {{host.metadata_platform}}
 - Processor : {{host.metadata_processor}}
+
+##### Tag key with period
+
+If your tag's key has a period in it, include brackets around the full key when using a tag variable.
+For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
+
+```text
+{{[dot.key.test].name}}
+```
+
+If the tag is on an event and you're using an event monitor, use:
+
+```text
+{{ event.tags.[dot.key.test] }}
+```
 
 {{% /tab %}}
 
@@ -279,22 +292,24 @@ To include **any** attribute or tag from a log, a span or a RUM event matching t
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
-**Example**: if a log monitor is grouped by `@statusCode`, to include the error message in the notification message, use the variable :
+**Example**: if a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables :
 
 ```text
 {{ log.attributes.error.message }}
+{{ log.tags.env }}
+...
 ```
 
-{{< img src="monitors/notifications/matching_attribute_variable.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
 
 <div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
 
-##### First level attributes
+##### Reserved attributes
 
-Logs, spans and RUM events have generic first level attributes, that you can also use in variables following the following syntax :
+Logs, spans and RUM events have generic reserved attributes, that you can also use in variables following the following syntax :
 
 | Monitor type    | Variable syntax                       | First level attributes |
 |-----------------|---------------------------------------|------------------------|
@@ -324,21 +339,9 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 
 Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
 
-##### Tag key with period
+##### Character excape
 
-If your tag's key has a period in it, include brackets around the full key when using a tag variable.
-For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
-
-```text
-{{[dot.key.test].name}}
-```
-
-If the tag is on an event and you're using an event monitor, use:
-
-```text
-{{ event.tags.[dot.key.test] }}
-```
-
+Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
 ### Template variables
 
