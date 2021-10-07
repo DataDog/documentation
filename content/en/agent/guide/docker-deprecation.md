@@ -9,17 +9,20 @@ Kubernetes is deprecating Docker as a runtime starting after version 1.20, and s
 
 - GKE 1.19 [deprecated Docker and uses containerd by default, on new nodes][2].
 
-If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][3]. This means that you must enable either the [containerd][4] or the [CRI-O][5] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
+- EKS 1.22 [will deprecate Docker and use containerd by default][3].
+
+
+If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][4]. This means that you must enable either the [containerd][5] or the [CRI-O][6] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
 
 With version 7.27+ of the Datadog Agent, the Agent automatically detects the environment you are running, and you do not need to make any configuration changes.
 
-**If you are using Agent < v7.26, you must specify your container runtime socket path:**
+**If you are using Agent < v7.27, you must specify your container runtime socket path:**
 
 **Note**: You may need to update your existing monitors, dashboards, and SLOs because metrics names change—for example, from `docker.*` to `containerd.*`.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-Set the path to your container runtime socket with the `criSocketPath` parameter in the [Helm chart][1].
+Set the path to your container runtime socket with the `datadog.criSocketPath` parameter in the [Helm chart][1].
 
 For example:
 
@@ -64,6 +67,7 @@ volumes:
 
 [1]: https://github.com/Azure/AKS/releases/tag/2020-11-16
 [2]: https://cloud.google.com/kubernetes-engine/docs/release-notes#December_08_2020
-[3]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim
-[4]: /integrations/containerd/
-[5]: /integrations/crio/
+[3]: https://aws.amazon.com/blogs/containers/amazon-eks-1-21-released/
+[4]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim
+[5]: /integrations/containerd/
+[6]: /integrations/crio/
