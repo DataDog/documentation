@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-To help you quickly identify and troubleshoot Lambda function failures, you can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you deeper insight into your serverless applications and helping troubleshoot problems.
+To help you quickly identify and troubleshoot Lambda function failures, you can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you [deeper insight into your serverless applications and helping troubleshoot problems][6].
 
 ## Configuration
 
@@ -21,9 +21,7 @@ To instrument your Lambda functions for the first time, follow the [serverless i
 
 Set the `DD_CAPTURE_LAMBDA_PAYLOAD` environment variable to `true` on each of your functions to opt-in to sending Lambda request & response payloads to Datadog.
 
-Request and response payloads are available as added metadata on AWS Lambda traces, and searchable in APM Trace Search. Using APM and Lambda payloads, you can more quickly [identify and resolve errors or increased latency in your functions][6].
-
-(Optional) This functionality is also compatible with AWS X-Ray. Follow [these steps][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
+[Optional] This functionality is also compatible with AWS X-Ray. Follow [these steps][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
 
 ## Obfuscating Payload Contents
 
