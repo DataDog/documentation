@@ -34,17 +34,18 @@ To do this, add a new file `datadog.yaml` in the same folder as your Lambda func
 ```yaml
 apm_config:
   replace_tags:
-    # Replace all characters starting at the `token/` string in the tag "http.url" with "?":
-    - name: "http.url"
-      pattern: "token/(.*)"
-      repl: "?"
-    # Replace all the occurrences of "foo" in any tag with "bar":
+    # Replace all the occurrences of "foobar" in any tag with "REDACTED":
     - name: "*"
-      pattern: "foo"
-      repl: "bar"
-    # Remove all "error.stack" tag's value.
-    - name: "error.stack"
+      pattern: "foobar"
+      repl: "REDACTED"
+    # Remove all headers with key "auth" and replace with an empty string
+    - name: "function.request.headers.auth"
       pattern: "(?s).*"
+      repl: ""
+    # Remove "apiToken" from any response payload, and replace with "****"
+    - name: "function.response.apiToken"
+      pattern: "(?s).*"
+      repl: "****"
 ```
 
 You can instead populate the `DD_APM_REPLACE_TAGS` environment variable on your Lambda function to obfuscate specific fields:
@@ -52,18 +53,19 @@ You can instead populate the `DD_APM_REPLACE_TAGS` environment variable on your 
 ```yaml
 DD_APM_REPLACE_TAGS=[
       {
-        "name": "http.url",
-        "pattern": "token/(.*)",
-        "repl": "?"
-      },
-      {
         "name": "*",
-        "pattern": "foo",
-        "repl": "bar"
+        "pattern": "foobar",
+        "repl": "REDACTED"
       },
       {
-        "name": "error.stack",
+        "name": "function.request.headers.auth",
+        "pattern": "(?s).*",
+        "repl": ""
+      },
+      {
+        "name": "function.response.apiToken",
         "pattern": "(?s).*"
+        "repl": "****"
       }
 ]
 ```
