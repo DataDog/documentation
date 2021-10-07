@@ -37,7 +37,7 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 | 2018-03-13 11:04:40 | 10    |
 ```
 
-### 2 ways to calculate
+### 3 ways to calculate
 
 Refer to this query as **`classic_eval_path`**:
 
@@ -51,14 +51,21 @@ and this query as **`as_count_eval_path`**:
 sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()
 ```
 
+and this query as **`at_least_eval_path`**:
+
+```text
+min(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
+```
+
 Compare the result of the evaluation depending on the path:
 
-| Path                     | Behavior                                       | Expanded expression                    | Result  |
-|:-------------------------|:-----------------------------------------------|:---------------------------------------|:--------|
-| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/10 + 2/10 + 3/10 + 4/10 + 5/10)** | **1.5** |
-| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+3+4+5) / (10+10+10+10+10)**     | **0.3** |
+| Path                     | Behavior                                       | Expanded expression                      | Result  |
+|:-------------------------|:-----------------------------------------------|:-----------------------------------------|:--------|
+| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/10 + 2/10 + 3/10 + 4/10 + 5/10)**   | **1.5** |
+| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+3+4+5) / (10+10+10+10+10)**       | **0.3** |
+| **`at_least_eval_path`** | Aggregation function applied _before_ division | **min(1,2,3,4,5) / min(10,10,10,10,10)** | **0.1** |
 
-_Note that both evaluations above are mathematically correct. Choose a method that suits your intentions._
+_Note that all evaluations above are mathematically correct. Choose a method that suits your intentions._
 
 It may be helpful visualize the **`classic_eval_path`** as:
 
@@ -66,7 +73,7 @@ It may be helpful visualize the **`classic_eval_path`** as:
 sum(last_5m):error/total
 ```
 
-and the **`as_count_eval_path`** as:
+the **`as_count_eval_path`** as:
 
 ```text
 sum(last_5m):error
@@ -74,7 +81,15 @@ sum(last_5m):error
 sum(last_5m):total
 ```
 
-In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but **`sum`** aggregation with **`.as_count()`** is recommended for error rates. Aggregation methods other than **`sum`** (shown as _in total_ in-app) do not make sense to use with **`.as_count()`**.
+and the **`at_least_eval_path`** as:
+
+```text
+min(last_5m):error
+-----------------
+min(last_5m):total
+```
+
+In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but **`sum`** aggregation with **`.as_count()`** is recommended for error rates. If you are alerting when your threshold is above a certain rate for a period of time **`min`** could be suitable. Aggregation methods other than **`sum`** (shown as _in total_ in-app) do not make sense to use with **`.as_count()`**.
 
 **Note**: Aggregation methods other than sum (shown as in total in-app) cannot be used with `.as_count()`.
 
