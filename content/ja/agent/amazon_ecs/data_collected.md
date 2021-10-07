@@ -8,7 +8,7 @@ further_reading:
   - link: /agent/amazon_ecs/apm/
     tag: Documentation
     text: アプリケーショントレースの収集
-  - link: /agent/amazon_ecs/data_collected/#metrics
+  - link: '/agent/amazon_ecs/data_collected/#metrics'
     tag: Documentation
     text: ECS リソースの収集
 ---
