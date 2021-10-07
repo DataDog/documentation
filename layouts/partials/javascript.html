@@ -4,7 +4,6 @@
 {{ $isLocalServer := site.IsServer }}
 {{ $jsInput := "scripts/main.js" }}
 {{ $compiledMainJS := "" }}
-{{ $compiledVendorJS := "" }}
 
 <!-- Currently used in dd-browser-logs-rum.  Provides params that can be imported directly by JS files.  Info: https://gohugo.io/hugo-pipes/js/#options -->
 {{ $jsParamsDict := (dict "params" (dict "CI_COMMIT_SHORT_SHA" $CI_COMMIT_SHORT_SHA)) }}
@@ -12,7 +11,6 @@
 {{ $devOptions := dict "defines" $defines "sourceMap" "external" }}
 {{ $productionOptions := dict "defines" $defines "sourceMap" "external" "minify" true }}
 {{ $options := cond $isLocalServer $devOptions $productionOptions }}
-{{ $babelOptions := dict "sourceMap" "external" }}
 {{ $jQuery := resources.Get "scripts/vendor/jquery.min.js" }}
 {{ $popperJS := resources.Get "scripts/vendor/popper.min.js" }}
 {{ $bootstrapJS := resources.Get "scripts/vendor/bootstrap.min.js" }}
