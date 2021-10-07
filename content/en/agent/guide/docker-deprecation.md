@@ -11,7 +11,6 @@ Kubernetes is deprecating Docker as a runtime starting after version 1.20, and s
 
 - EKS 1.22 [will deprecate Docker and use containerd by default][3].
 
-
 If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][4]. This means that you must enable either the [containerd][5] or the [CRI-O][6] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
 
 With version 7.27+ of the Datadog Agent, the Agent automatically detects the environment you are running, and you do not need to make any configuration changes.
