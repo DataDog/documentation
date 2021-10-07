@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Customer Insights のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_customer_insights/'
+doc_link: https://docs.datadoghq.com/integrations/azure_customer_insights/
 draft: false
 git_integration_title: azure_customer_insights
 has_logo: true
