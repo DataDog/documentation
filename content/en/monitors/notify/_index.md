@@ -64,7 +64,7 @@ The escalation message can be added in the following ways:
 * In the *Renotification message* field in the `Say what's happening` section.
 * With the `escalation_message` attribute in the API.
 
-If you use the `{{#is_renotify}}` block, note that the original notification message is also included in the renotification, so:
+If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
 
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
