@@ -52,7 +52,7 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 
   {{< img src="monitors/notifications/renotify_options.png" alt="Enable renotify" style="width:90%;" >}}
 
-Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data` and `warn`) and optionally set a limit to the number of renotification messages sent.
+Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
 For instance, configure the monitor to `stop renotifying after 1 occurrence` if you wish to receive a single escalation message after the main alert.
 
