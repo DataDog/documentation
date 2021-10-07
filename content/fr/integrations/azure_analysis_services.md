@@ -7,7 +7,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Analysis Services.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_analysis_services/'
+doc_link: https://docs.datadoghq.com/integrations/azure_analysis_services/
 draft: false
 git_integration_title: azure_analysis_services
 has_logo: true
