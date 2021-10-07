@@ -1185,7 +1185,7 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 3
-  - name: Collecting Lambda Payloads
+  - name: Collect Lambda Payloads
     url: serverless/distributed_tracing/collect_lambda_payloads
     parent: serverless_distributed_tracing
     weight: 301
