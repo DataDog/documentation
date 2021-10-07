@@ -11,23 +11,23 @@ further_reading:
 
 ## Overview
 
-To help you quickly identify and troubleshoot Lambda function failures, you can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you [deeper insight into your serverless applications and helping troubleshoot problems][6].
+You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you [deeper insight into your serverless applications and helping troubleshoot Lambda function failures][6].
 
 ## Configuration
 
-To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1]. AWS Lambda payload ingestion requires [APM to be configured on your functions][4] and is available for the following Lambda runtimes, with support in additional runtimes coming soon:
+To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1]. AWS Lambda payload ingestion requires [APM to be configured on your functions][4] and is available for the following Lambda runtimes:
 - Python ([v49+][2])
 - Node.js ([v64+][3])
 
-Set the `DD_CAPTURE_LAMBDA_PAYLOAD` environment variable to `true` on each of your functions to opt-in to sending Lambda request & response payloads to Datadog.
+Set the `DD_CAPTURE_LAMBDA_PAYLOAD` environment variable to `true` on each of your functions send Lambda request and response payloads to Datadog.
 
-[Optional] This functionality is also compatible with AWS X-Ray. Follow [these steps][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
+This functionality is also compatible with AWS X-Ray. Follow the steps in the [Datadog-AWS X-Ray integration][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
 
-## Obfuscating Payload Contents
+## Obfuscating payload contents
 
-To prevent any sensitive data within either request or response JSON objects from being sent to Datadog (like account IDs or addresses), you often want to scrub specific parameters from being sent to Datadog.
+To prevent any sensitive data within request or response JSON objects from being sent to Datadog (like account IDs or addresses), you can to scrub specific parameters from being sent to Datadog.
 
-To do this, add a new file `datadog.yaml` in the same folder as your Lambda function code. Obfuscation of fields in the Lambda payload is then available through [the replace_tags block][7] within apm_config settings in datadog.yaml:
+To do this, add a new file `datadog.yaml` in the same folder as your Lambda function code. Obfuscation of fields in the Lambda payload is then available through [the replace_tags block][7] within `apm_config` settings in `datadog.yaml`:
 
 ```yaml
 apm_config:
@@ -46,7 +46,7 @@ apm_config:
       repl: "****"
 ```
 
-You can instead populate the `DD_APM_REPLACE_TAGS` environment variable on your Lambda function to obfuscate specific fields:
+As an alternative, you can also populate the `DD_APM_REPLACE_TAGS` environment variable on your Lambda function to obfuscate specific fields:
 
 ```yaml
 DD_APM_REPLACE_TAGS=[
