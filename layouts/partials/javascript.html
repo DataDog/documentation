@@ -10,7 +10,7 @@
 {{ $jsParamsDict := (dict "params" (dict "CI_COMMIT_SHORT_SHA" $CI_COMMIT_SHORT_SHA)) }}
 
 {{ $devOptions := dict "defines" $defines "sourceMap" "external" }}
-{{ $productionOptions := dict "defines" $defines "minify" true }}
+{{ $productionOptions := dict "defines" $defines "sourceMap" "external" "minify" true }}
 {{ $options := cond $isLocalServer $devOptions $productionOptions }}
 {{ $babelOptions := dict "sourceMap" "external" }}
 {{ $jQuery := resources.Get "scripts/vendor/jquery.min.js" }}
@@ -30,7 +30,7 @@
 {{ if $isLocalServer }}
   {{ $compiledMainJS = resources.Get $jsInput | js.Build $options }}
 {{ else }}
-  {{ $compiledMainJS = resources.Get $jsInput | js.Build $options | resources.Fingerprint "sha512" | babel $babelOptions }}
+  {{ $compiledMainJS = resources.Get $jsInput | js.Build $options | resources.Fingerprint "sha512" }}
 {{ end }}
 
 <script src="{{ $compiledMainJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledMainJS.Data.Integrity }}"{{ end }}></script>
@@ -41,7 +41,7 @@
   {{ if $isLocalServer }}
     {{ $compiledSearchJS = resources.Get "scripts/components/search.js" | js.Build $options }}
   {{ else }}
-    {{ $compiledSearchJS = resources.Get "scripts/components/search.js" | js.Build $options | resources.Fingerprint "sha512" | babel $babelOptions }}
+    {{ $compiledSearchJS = resources.Get "scripts/components/search.js" | js.Build $options | resources.Fingerprint "sha512" }}
   {{ end }}
 
   <script src="{{ $compiledSearchJS.RelPermalink }}" defer {{ if ne $isLocalServer true }}integrity="{{ $compiledSearchJS.Data.Integrity }}"{{ end }}></script>

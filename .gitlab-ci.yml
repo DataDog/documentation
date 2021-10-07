@@ -239,6 +239,8 @@ sourcemaps_preview:
     # - ls -la ./public/scripts
     # - npx esbuild ./public/scripts/**.js --sourcemap --allow-overwrite --outdir=public/scripts
 
+    # Rename any js.map files to include SHA if correlating JS file is fingerprinted.  Hugo's asset build system seems to lose the fingerprint value when generating source maps.
+    - find ./public -type f -name "*.*.js" -exec sh -c 'x={}; hash=$(basename $x | cut -d '.' -f 2); map=${x/$hash./}.map; mv $map ${map/js/$hash.js}' \; 
     - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/scripts --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/scripts/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
