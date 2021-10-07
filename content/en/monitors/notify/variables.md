@@ -225,7 +225,7 @@ This renders the `value` associated with the `key` in each alert notification. I
 
 **Example**: if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
 
 ##### Query group by host
 
