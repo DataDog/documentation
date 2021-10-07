@@ -1186,7 +1186,7 @@ main:
     parent: serverless
     weight: 3
   - name: Collecting Lambda Payloads
-    url: serverless/distributed_tracing/collecting_lambda_payloads
+    url: serverless/distributed_tracing/collect_lambda_payloads
     parent: serverless_distributed_tracing
     weight: 301
   - name: Trace Merging (Advanced)

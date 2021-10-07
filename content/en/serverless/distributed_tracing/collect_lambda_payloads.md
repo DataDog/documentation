@@ -1,0 +1,81 @@
+---
+title: Collect AWS Lambda Payloads
+kind: documentation
+description: 'Resolve AWS Lambda function failures faster by monitoring invocation payloads'
+further_reading:
+    - link: 'serverless'
+      text: 'Serverless Monitoring with Datadog'
+---
+
+{{< img src="serverless/serverless_collect_lambda_payloads.png" alt="Collect AWS Lambda Payloads"  style="width:100%;" >}}
+
+## Overview
+
+To help you quickly identify and troubleshoot Lambda function failures, you can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions, giving you deeper insight into your serverless applications and helping troubleshoot problems.
+
+## Configuration
+
+To instrument your Lambda functions for the first time, follow the [serverless installation instructions][1]. AWS Lambda payload ingestion requires [APM to be configured on your functions][4] and is currently available for the following Lambda runtimes, with support in additional runtimes coming soon:
+- Python ([v49+][2])
+- Node.js ([v64+][3])
+
+Set the `DD_CAPTURE_LAMBDA_PAYLOAD` environment variable to `true` on each of your functions to opt-in to sending Lambda request & response payloads to Datadog.
+
+Request and response payloads are available as added metadata on AWS Lambda traces, and searchable in APM Trace Search. Learn how to use Lambda payloads for faster troubleshooting [here][6].
+
+(Optional) This functionality is also compatible with AWS X-Ray. Follow [these steps][5] to enrich AWS Lambda function X-Ray segments with Datadog's Lambda Libraries.
+
+## Obfuscating Payload Contents
+
+To prevent any sensitive data within either request or response JSON objects from being sent to Datadog (like account IDs or addresses), you will often want to scrub specific parameters from being sent to Datadog.
+
+To do this, add a new file `datadog.yaml` in the same folder as your Lambda function code. Obfuscation of fields in the Lambda payload is then available via [the replace_tags block][7] within apm_config settings in datadog.yaml:
+
+```yaml
+apm_config:
+  replace_tags:
+    # Replace all characters starting at the `token/` string in the tag "http.url" with "?":
+    - name: "http.url"
+      pattern: "token/(.*)"
+      repl: "?"
+    # Replace all the occurrences of "foo" in any tag with "bar":
+    - name: "*"
+      pattern: "foo"
+      repl: "bar"
+    # Remove all "error.stack" tag's value.
+    - name: "error.stack"
+      pattern: "(?s).*"
+```
+
+You can instead populate the `DD_APM_REPLACE_TAGS` environment variable on your Lambda function to obfuscate specific fields:
+
+```yaml
+DD_APM_REPLACE_TAGS=[
+      {
+        "name": "http.url",
+        "pattern": "token/(.*)",
+        "repl": "?"
+      },
+      {
+        "name": "*",
+        "pattern": "foo",
+        "repl": "bar"
+      },
+      {
+        "name": "error.stack",
+        "pattern": "(?s).*"
+      }
+]
+```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /serverless/installation
+[2]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v49
+[3]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v4.64.0
+[4]: /serverless/distributed_tracing
+[5]: https://docs.datadoghq.com/integrations/amazon_xray/?tab=nodejs#enriching-xray-segments-with-datadog-libraries
+[6]: https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads
+[7]: /tracing/setup_overview/configure_data_security/?tab=mongodb#replace-rules-for-tag-filtering
