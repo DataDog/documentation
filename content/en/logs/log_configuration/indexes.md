@@ -149,7 +149,7 @@ Follow our [Log Usage guide][20] to see how to monitor and alert on your usage.
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
 [5]: /logs/explorer/analytics/#dashboard
-[6]: /monitors/monitor_types/log/
+[6]: /monitors/create/types/log/
 [7]: /logs/explorer/facets/#the-index-facet
 [8]: /logs/live_tail/
 [9]: /logs/logs_to_metrics/

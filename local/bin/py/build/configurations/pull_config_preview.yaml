@@ -86,6 +86,8 @@
       options:
         dest_dir: '/developers/integrations/'
         path_to_remove: 'docs/dev/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
 
   - repo_name: integrations-extras
     contents:
@@ -521,7 +523,7 @@
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
       branch: master
@@ -530,6 +532,18 @@
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+
+    - action: pull-and-push-folder
+      branch: master
+      globs:
+        - docs/error_tracking/*
+      options:
+        dest_dir: '/real_user_monitoring/error_tracking/'
+        path_to_remove: 'docs/error_tracking/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
@@ -580,3 +594,21 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_platform/default_rules/'
+
+  - repo_name: datadog-agent
+    contents:
+    - action: pull-and-push-file
+      branch: main
+      globs:
+        - "pkg/config/config_template.yaml"
+      options:
+        file_name: 'agent_config.yaml'
+        output_content: false
+    - action: pull-and-push-folder
+      branch: main
+      globs:
+      - 'docs/cloud-workload-security/agent_expressions.md'
+      - 'docs/cloud-workload-security/backend.md'
+      options:
+        dest_dir: '/security_platform/cloud_workload_security/'
+        path_to_remove: 'docs/cloud-workload-security/'

@@ -48,7 +48,7 @@ Le fournisseur Datadog pour Terraform est disponible via le [registre Terraform]
 1. [Installer Terraform][2]
 2. Créez un répertoire destiné à stocker les fichiers de configuration de Terraform, par exemple : `terraform_config/`
 3. Créez un fichier `main.tf` dans le répertoire `terraform_config/` avec le contenu suivant :
-    ```
+    ```hcl
     terraform {
       required_providers {
         datadog = {
@@ -67,7 +67,7 @@ Le fournisseur Datadog pour Terraform est disponible via le [registre Terraform]
 4. Exécutez `terraform init`. Cette commande permet d'initialiser le répertoire pour l'utiliser avec Terraform et de récupérer le fournisseur Datadog.
 5. Créez n'importe quel fichier `.tf` dans le répertoire `terraform_config/`, puis commencez à créer des ressources Datadog. par exemple :
 
-    ```
+    ```hcl
     # monitor.tf
     resource "datadog_monitor" "process_alert_example" {
       name    = "Process Alert Monitor"

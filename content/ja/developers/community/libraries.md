@@ -168,7 +168,7 @@ Winston Datadog [転送][62]。
 
 Datadog ライブラリを作成し、このページに追加する場合は、[opensource@datadoghq.com][65] にメールを送信してください。
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[1]: /ja/metrics/dogstatsd_metrics_submission/
 [2]: /ja/tracing/
 [3]: /ja/serverless/
 [4]: /ja/api/
@@ -213,7 +213,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [43]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [44]: https://github.com/brigade/logstash-output-dogstatsd
 [45]: https://docs.moogsoft.com/AIOps.6.2.0/Datadog-Solution-Pak_13737047.html
-[46]: /ja/developers/metrics/custom_metrics/
+[46]: /ja/metrics/custom_metrics/
 [47]: https://github.com/simplifi/ngx_lua_datadog
 [48]: https://github.com/dailymotion/lua-resty-dogstatsd
 [49]: http://www.mediba.jp

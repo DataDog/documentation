@@ -166,6 +166,12 @@ RUM アプリケーションの ID。
 **種類**: 文字列<br/>
 アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)。
 
+`trackViewsManually`
+: オプション<br/>
+**タイプ**: Boolean<br/>
+**デフォルト**: `false` <br/>
+RUM ビューの作成を制御します。[デフォルトの RUM ビュー名をオーバーライドする][10]を参照してください。
+
 `trackInteractions`
 : 任意<br/>
 **種類**: Boolean<br/>
@@ -250,3 +256,4 @@ init(configuration: {
 [7]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions#declaring-a-name-for-click-actions
+[10]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names

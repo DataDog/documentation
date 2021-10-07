@@ -66,7 +66,7 @@ Both of these should return the same image.
   {{- range $manifestBasename := $integrationLogosList -}}
     {{- if eq (print "amazon-" $basename) $manifestBasename -}}
       {{- $imageExists = true -}}
-      {{- $basename = (print "amazon-" $basename) }}
+      {{- $basename = (print "amazon-" $basename) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -76,7 +76,7 @@ Both of these should return the same image.
   {{- range $manifestBasename := $integrationLogosList -}}
     {{- if eq (print "aws-" $basename) $manifestBasename -}}
       {{- $imageExists = true -}}
-      {{- $basename = (print "aws-" $basename) }}
+      {{- $basename = (print "aws-" $basename) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -86,10 +86,24 @@ Both of these should return the same image.
   {{- range $manifestBasename := $integrationLogosList -}}
     {{- if eq (replace $basename "_" "-") $manifestBasename -}}
       {{- $imageExists = true -}}
-      {{- $basename = (replace $basename "_" "-") }}
+      {{- $basename = (replace $basename "_" "-") -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+<!--{{/* if contains . lets try first part */}}-->
+{{- if not $imageExists -}}
+  {{- if in $basename "." -}}
+    {{- $basenameSplit := (index (split $basename ".") 0) -}}
+    {{- range $manifestBasename := $integrationLogosList -}}
+      {{- if eq $basenameSplit $manifestBasename -}}
+        {{- $imageExists = true -}}
+        {{- $basename = $basenameSplit -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 
 <!--{{/* Build the image path and return it or return empty string */}}-->
 {{- if $imageExists -}}

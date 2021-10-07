@@ -38,7 +38,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function's log g
 
 ### Tag
 
-Although it's optional, Datadog highly recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
+Although it's optional, Datadog highly recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][6].
 
 ### Collect logs from AWS serverless resources
 

@@ -2,7 +2,7 @@
 title: How do I reduce alert flapping / noise?
 kind: faq
 further_reading:
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---
@@ -36,5 +36,5 @@ If the issue is alert routing, template variables and the separation of **warnin
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
-[2]: /monitors/monitor_types/anomaly/
-[3]: /monitors/monitor_types/outlier/
+[2]: /monitors/create/types/anomaly/
+[3]: /monitors/create/types/outlier/

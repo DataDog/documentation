@@ -21,7 +21,7 @@ Achieve financial and operational excellence with Cloudability's True Cost&trade
 
 ## Setup
 
-To bind your Datadog application to your Cloudability account:
+To bind your Datadog account to your Cloudability account:
 
 - Login to Cloudability >> Settings >> Vendor Credentials.
 - Add your [Datadog API and application keys][1].

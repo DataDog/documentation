@@ -10,13 +10,13 @@ further_reading:
   text: "Expand your monitoring reach with the Datadog Marketplace"
 ---
 
-The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their integrations, software, and services to Datadog users. 
+The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their integrations, software, and services to Datadog users.
 
-Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration and create a tile listing that includes your offering. 
+Before joining the Datadog Marketplace, you first need to join the [Datadog Partner Network][1] Technology Track. As a Datadog Technology Partner, you can develop an integration and create a tile listing that includes your offering.
 
-Datadog customers can then access your tile through the Datadog site either through the [Integrations][2] page or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services. 
+Datadog customers can then access your tile through the Datadog site either through the [Integrations][2] page or through the [Datadog Marketplace][3]. While the Integrations page includes integrations built by Datadog and Technology Partners at no cost, the Marketplace is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including integrations, software, and services.
 
-Follow these steps to develop and publish your Marketplace offering: 
+Follow these steps to develop and publish your Marketplace offering:
 
 ## Apply for a sandbox account
 
@@ -44,7 +44,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 
 1. [Choose the type of Marketplace offering you would like to list](#choose-an-integration-type)
 2. [Build a bi-directional integration](#build-a-bi-directional-integration)
-3. [Clone the Marketplace repository or fork the Integrations Extras repository](#clone-either-the-marketplace-or-the-integrations-extras-repository)
+3. [Clone the Marketplace repository or fork the Integrations Extras repository](#clone-the-marketplace-repository-or-fork-the-integrations-extras-repository)
 4. [Install the Datadog Development Toolkit](#install-and-run-the-datadog-development-toolkit)
 5. [Populate the tile scaffolding with metadata and out-of-the-box assets (like dashboards and monitors)](#populate-the-tile-scaffolding)
 6. [Submit a pull-request](#submit-a-pull-request)
@@ -52,7 +52,7 @@ In addition to this documentation, you can learn more about developing Datadog i
 
 ### Choose an integration type
 
-There are a few different ways to integrate with Datadog. Depending on the use case and type of integration, choose the approach that makes the most sense for your offering. 
+There are a few different ways to integrate with Datadog. Depending on the use case and type of integration, choose the approach that makes the most sense for your offering.
 
 #### [Datadog Agent-based integration][12]
 
@@ -74,7 +74,7 @@ There are a few different ways to integrate with Datadog. Depending on the use c
 
 #### [Datadog REST API integration][16]
 
-An API integration fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform. 
+An API integration fits well for enriching and submitting data from your backend, or pulling data directly out of Datadog. API integrations also work well for building a connector between Datadog and another SaaS platform.
 
 **Note**: A Datadog API key is required to submit data to a Datadog API endpoint, while an application key is required for querying data from Datadog, or creating resources within the Datadog site.
 
@@ -84,7 +84,7 @@ For Marketplace offerings that include a standalone SaaS or services offering, w
 
 ### Build a bi-directional integration
 
-While pulling information from Datadog may also be useful, to be listed on the Datadog Integrations page or the Marketplace, the integration must be bi-directional. That is, it must also push data into Datadog. 
+While pulling information from Datadog may also be useful, to be listed on the Datadog Integrations page or the Marketplace, the integration must be bi-directional. That is, it must also push data into Datadog.
 
 Integrations can send the following data to Datadog:
 
@@ -108,9 +108,9 @@ Technology Partners can request access to the private Marketplace repository by 
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are first developing your integration, by spinning up a skeleton of all the assets and metadata for your tile.
 
-Ensure that [Python 3.8 or higher][23] is installed.	
+Ensure that [Python 3.8 or higher][23] is installed.
 
-To avoid potential environment conflicts, in the directory where you cloned the repository, create a virtual environment by running: 
+To avoid potential environment conflicts, in the directory where you cloned the repository, create a virtual environment by running:
 
 ```
 python3 -m pip install virtualenv --user
@@ -122,11 +122,11 @@ Install the latest released version of the Datadog Development Toolkit from [PyP
 python -m pip install --upgrade "datadog-checks-dev[cli]"
 ```
 
-**Note:** If you are using Z shell, you may need to use escape characters: 
+**Note:** If you are using Z shell, you may need to use escape characters:
 
 ```
 python -m pip install --upgrade datadog-checks-dev\[cli\]
-``` 
+```
 
 Set the location of to the cloned repository:
 
@@ -146,9 +146,9 @@ ddev config set repo extras
 
 #### Tile only listing
 
-For standalone software and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command. 
+For standalone software and services--or if your integration is using the Datadog API and does not contain any Python code--the Development Toolkit supports a tile-only command.
 
-In the `marketplace` or `integrations-extras` directory you specified above, run: 
+In the `marketplace` or `integrations-extras` directory you specified above, run:
 
 ```
 ddev create -t tile "<Offering Name>"
@@ -156,7 +156,7 @@ ddev create -t tile "<Offering Name>"
 
 #### Full integration
 
-To generate a complete integration scaffolding, from the `marketplace` or `integrations-extras` directory specified above, run: 
+To generate a complete integration scaffolding, from the `marketplace` or `integrations-extras` directory specified above, run:
 
 ```
 ddev create "<Offering Name>"
@@ -171,11 +171,11 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 * Include “Overview,” “Setup,” and “Support” sections with H2 headings (## in Markdown).
 * The “Overview" heading should clearly describe the value your offering provides users, as well as how it can be used together with Datadog for more comprehensive observability. Datadog recommends adding images of your software or dashboards in action. This section displays in the “Overview” tab of your tile.
 * The “Setup” heading should provide straightforward configuration steps for users to install or use your offering. This section displays in the “Configuration” tab of your tile.
-* The “Support” heading should identify a contact for support, and possibly an option to submit product feedback. This section displays in the “Support” tab of your tile. 
+* The “Support” heading should identify a contact for support, and possibly an option to submit product feedback. This section displays in the “Support” tab of your tile.
 
 #### Images
 
-* Store all images used in your `README.md` file in the `images` folder. 
+* Store all images used in your `README.md` file in the `images` folder.
 * **Note:** Don't include spaces in the name of image files.
 
 #### Manifest
@@ -186,20 +186,20 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 #### Metadata
 
-* Contains a list of the out-of-the-box metrics included in an integration, such as the metric name, type, interval, and unit. 
+* Contains a list of the out-of-the-box metrics included in an integration, such as the metric name, type, interval, and unit.
 * More information about `metadata.csv` fields can be found in the [Integrations Assets Reference][25].
-* **Note:** All Marketplace metrics count as custom metrics. 
+* **Note:** All Marketplace metrics count as custom metrics.
 
 #### Dashboards and monitors
 
-* Contain the out-of-the-box dashboards and monitors (alerts) for your integration. 
-* You can create dashboards and monitors directly in your sandbox account and export them as JSON files. 
+* Contain the out-of-the-box dashboards and monitors (alerts) for your integration.
+* You can create dashboards and monitors directly in your sandbox account and export them as JSON files.
 * See [Dashboarding Best Practices][27] for details.
 
 #### Logos
 
 * Consists of at least one SVG, which the Datadog DesignOps team implements throughout the Datadog site for both light and dark modes. Logo SVG files can be added to the `assets` directory, or you can place them in a `logos` sub-directory under `assets`.
-* **Note:** Technology Partners are responsible for the licensing of the logos they submit.  
+* **Note:** Technology Partners are responsible for the licensing of the logos they submit.
 
 #### Changelog
 
@@ -215,7 +215,7 @@ The ddev commands in the previous section generate a skeleton of folders and fil
 
 ### Submit a pull request
 
-Submit a pull request containing your integration assets either to the [Marketplace repository][9], or to [Integrations Extras repository][10]. 
+Submit a pull request containing your integration assets either to the [Marketplace repository][9], or to [Integrations Extras repository][10].
 
 Each repository runs automatic tests to verify that your pull request is in good shape. You can run these same tests locally with the command `ddev validate all`. Once the PR is passing all checks, the Datadog engineering team reviews and identifies blockers to release, and makes suggestions around best practices.
 

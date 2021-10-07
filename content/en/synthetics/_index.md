@@ -66,14 +66,14 @@ See [Getting Started with Synthetic Monitoring][12] for instructions on creating
 
 [1]: /synthetics/api_tests/
 [2]: /synthetics/multistep
-[3]: /synthetics/api_test/http_tests
+[3]: /synthetics/api_tests/http_tests
 [4]: /synthetics/api_tests/tcp_tests
 [5]: /synthetics/api_tests/ssl_tests
 [6]: /synthetics/api_tests/dns_tests
 [7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/browser_tests
 [9]: /synthetics/private_locations
-[10]: /synthetics/ci/
+[10]: /synthetics/cicd_testing
 [11]: /synthetics/apm/
 [12]: /getting_started/synthetics
 [13]: /getting_started/synthetics/private_location

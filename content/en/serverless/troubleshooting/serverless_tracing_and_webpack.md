@@ -2,15 +2,17 @@
 title: Node.js Lambda Tracing and Webpack Compatibility 
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
+- link: '/serverless/installation/nodejs'
+  tag: 'Documentation'
+  text: 'Instrumenting Node.js Applications'
 ---
 
 # Compatibility
 
-Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [webpack][1] due to the use of conditional imports and other issues. If using webpack and tracing your Node.js serverless functions:
+Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [webpack][1] due to the use of conditional imports and other issues. While webpack cannot build `dd-trace`, your application can still use the `dd-trace` and `datadog-lambda-js` libraries provided by the prebuilt Datadog Lambda layer. Follow the instructions below:
 
-1. Mark `datadog-lambda-js` and `dd-trace` as [externals][2] for webpack, so webpack knows these dependencies will be available in the Lambda runtime.
+1. Follow the [installation instructions for Node.js][2] and ensure the Datadog Lambda layer is added to your Lambda function. 
+2. Mark `datadog-lambda-js` and `dd-trace` as [externals][3] for webpack. This tells webpack to skip building them as dependencies, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
 
     **webpack.config.js**
 
@@ -24,8 +26,8 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [we
     };
     ```
 
-2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process. Instead, ensure you're importing these packages via [Lambda Layers][3].
-3. If you are using `serverless-webpack` and the Serverless Framework, exclude `datadog-lambda-js` and `dd-trace` from your `serverless.yml`.
+3. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process.
+4. If you are using `serverless-webpack` and the Serverless Framework, exclude `datadog-lambda-js` and `dd-trace` from your `serverless.yml`.
 
     **serverless.yml**
 
@@ -38,7 +40,10 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with [we
             - datadog-lambda-js
     ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://webpack.js.org
-[2]: https://webpack.js.org/configuration/externals/
-[3]: https://github.com/DataDog/datadog-lambda-js/releases
+[2]: /serverless/installation/nodejs
+[3]: https://webpack.js.org/configuration/externals/

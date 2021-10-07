@@ -78,6 +78,6 @@ Create a new [Synthetic API test][3] upon `http://example.com/`:
 [2]: /dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://dd-corpsite.datadoghq.com/synthetics/create
-[5]: /monitors/notifications/
+[5]: /monitors/notify/
 [6]: https://app.datadoghq.com/slo/new
 [7]: https://app.datadoghq.com/dashboard/lists

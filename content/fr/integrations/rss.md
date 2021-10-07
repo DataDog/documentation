@@ -6,11 +6,14 @@ doclevel: basic
 description: "Consultez des flux RSS depuis votre flux d'événements Datadog."
 is_public: true
 public_title: Intégration Datadog/RSS
-short_description: "Enregistrez les flux RSS de votre flux d'événements Datadog"
+short_description: "Intégrez n'importe quel flux RSS à votre flux d'événements Datadog"
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:
-- notification
-- web
+  - notification
+  - web
 ddtype: crawler
+integration_id: "feed"
 ---
 
 {{< img src="integrations/rss/rss.png" alt="Événement RSS"  >}}
@@ -19,19 +22,18 @@ ddtype: crawler
 
 Enregistrez des activités de flux RSS dans Datadog pour :
 
-* Ajoutez des événements à votre flux d'événements depuis des sources personnalisées .
-* Discuter des flux d'événements avec votre équipe.
+- Ajouter des événements à votre flux d'événements depuis des sources personnalisées.
+- Discuter des flux d'événements avec votre équipe.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
 La configuration nécessite :
 
-* Une URL complète vers un flux RSS ou ATOM.
-* Au moins un tag personnalisé par flux.
+- Une URL complète vers un flux RSS ou ATOM.
+- Au moins un tag personnalisé par flux.
 
 **Facultatif** : saisissez un nom d'utilisateur et un mot de passe pour accéder au flux RSS.
 
 {{< img src="integrations/rss/rss_setup.png" alt="Configuration RSS"  >}}
-

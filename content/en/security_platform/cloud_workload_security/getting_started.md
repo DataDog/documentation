@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
   tag: "Blog"
   text: "Learn more about Datadog Cloud Runtime Security"
+- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
+  tag: "Blog"
+  text: "How to detect security threats in your systems' Linux processes"
 ---
 
 ## Overview
@@ -60,8 +63,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 
 {{< code-block lang="bash" filename="docker-runtime-security.sh" >}}
 
-DOCKER_CONTENT_TRUST=1 \
-  docker run -d --name dd-agent \
+docker run -d --name dd-agent \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \
@@ -75,10 +77,12 @@ DOCKER_CONTENT_TRUST=1 \
   -v /etc/group:/etc/group:ro \
   -v /:/host/root:ro \
   -v /sys/kernel/debug:/sys/kernel/debug \
+  -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_SYSTEM_PROBE_ENABLED=true \
   -e HOST_ROOT=/host/root \
-  -e DD_API_KEY=<API KEY> datadog/agent:7-jmx
+  -e DD_API_KEY=<API KEY> \
+  gcr.io/datadoghq/agent:7
 
 {{< /code-block >}}
 

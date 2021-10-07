@@ -23,13 +23,13 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 1. **Choose the time period** for which you wish to rehydrate log events.
 
-2. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
+2. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
-3. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
+3. (Optional) **Estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
 
-4. (Optional) **estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
+4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
-5. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
+5. **Input the query**. The query syntax is the same as that of the [log explorer search][4]. Make sure your logs are [archived with their tags][5] if you use tags (such as `env:prod` or `version:x.y.z`) in the rehydration query.
 
 6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**.
 

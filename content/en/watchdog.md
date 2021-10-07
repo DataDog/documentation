@@ -161,7 +161,7 @@ Need help? Contact [Datadog support][18].
 [10]: /monitors/
 [11]: https://app.datadoghq.com/watchdog
 [12]: /getting_started/tagging/unified_service_tagging
-[13]: /monitors/monitor_types/watchdog/
+[13]: /monitors/create/types/watchdog/
 [14]: /tracing/send_traces/#configure-your-environment
 [15]: /tracing/guide/setting_primary_tags_to_scope/
 [16]: /tracing/visualization/#services

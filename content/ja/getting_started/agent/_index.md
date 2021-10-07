@@ -110,7 +110,7 @@ Agent のトラブルシューティングに関するヘルプ
 {{< /whatsnext >}}
 
 [1]: /ja/integrations/
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/dogstatsd_metrics_submission/
 [3]: /ja/api/
 [4]: /ja/infrastructure/process/
 [5]: /ja/logs/

@@ -98,7 +98,7 @@ _Exemple : 99 % des requêtes doivent se terminer en moins de 250 ms sur une 
 
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/monitors#create/metric
-[3]: /fr/developers/metrics
+[3]: /fr/metrics
 [4]: /fr/integrations
 [5]: /fr/tracing/generate_metrics/
 [6]: /fr/logs/logs_to_metrics/

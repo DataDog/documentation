@@ -60,7 +60,7 @@ To automatically profile your code, set the `DD_PROFILING_ENABLED` environment v
     DD_VERSION=1.0.3 \
     ddtrace-run python app.py
 
-It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to slice and dice your profiles across these dimensions. See [Configuration] below.
+It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to slice and dice your profiles across these dimensions. See [Configuration](#configuration) below.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][4].
 

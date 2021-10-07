@@ -46,7 +46,7 @@ Datadog fournit non seulement ces métriques sur votre page Service de l'APM, ma
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
-[3]: /fr/developers/metrics/dogstatsd_metrics_submission/#setup
+[3]: /fr/metrics/dogstatsd_metrics_submission/#setup
 [4]: /fr/agent/docker/#dogstatsd-custom-metrics
 [5]: /fr/developers/dogstatsd/?tab=kubernetes#agent
 [6]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task

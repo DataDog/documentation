@@ -165,7 +165,7 @@ The active spans for a given time, for a given trace, are all of the leaf spans 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/apm/
+[1]: /monitors/create/types/apm/
 [2]: /developers/faq/data-collection-resolution-retention/
 [3]: /tracing/setup/
 [4]: /tracing/visualization/services_list/

@@ -77,7 +77,7 @@ _Agent v6.0 以上で使用可能_
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/brightcove/hot-shots
-[2]: https://docs.datadoghq.com/ja/developers/metrics/
+[2]: https://docs.datadoghq.com/ja/metrics/
 [3]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
 [4]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
 [5]: https://docs.datadoghq.com/ja/help/

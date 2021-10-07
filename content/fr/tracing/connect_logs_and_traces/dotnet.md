@@ -56,7 +56,7 @@ var log = new LoggerConfiguration()
 Pour obtenir d'autres exemples, consultez le [projet d'injection automatique des ID de trace Serilog][1] sur GitHub.
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
 {{% /tab %}}
 {{% tab "log4net" %}}
 Pour injecter les ID de trace et de span dans les logs d'application, vous devez activer les MDC (contextes de diagnostics mappés), comme illustré dans l'exemple de code suivant :
@@ -78,7 +78,7 @@ Pour injecter les ID de trace et de span dans les logs d'application, vous devez
 Pour obtenir d'autres exemples, consultez le [projet d'injection automatique des ID de trace log4net][1] sur GitHub.
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
 {{% /tab %}}
 {{% tab "NLog" %}}
 
@@ -108,9 +108,9 @@ Pour la version 4.5 de NLog :
 Pour obtenir d'autres exemples, consultez les projets d'injection automatique des ID de trace avec [NLog 4.0][1], [NLog 4.5][2] ou [NLog 4.6][3] sur GitHub.
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
-[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
-[3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
+[3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -14,7 +14,7 @@ categories:
   - 構成 & デプロイ
   - ログの収集
 creates_events: false
-ddtype: check
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md'
 display_name: Altostra

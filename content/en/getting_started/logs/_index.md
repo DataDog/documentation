@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use Datadog Log Management to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
+Use Datadog Log Management, also called logs, to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
 This page shows you how to get started with Log Management in Datadog. If you haven't already, create a [Datadog account][1].
 
@@ -44,13 +44,15 @@ To begin collecting logs from a server:
 
     **Note**: Log collection requires Datadog Agent v6+.
 
-2. Collecting logs is disabled by default in the Datadog Agent. To enable log collection, set `logs_enabled` to `true` in your `datadog.yaml` file.
+2. Collecting logs is **not enabled** by default in the Datadog Agent. To enable log collection, set `logs_enabled` to `true` in your `datadog.yaml` file.
+
+    {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 
 3. Restart the [Datadog Agent][7].
 
-4. Follow the integration [activation steps][8] or the custom files log collection steps in the Datadog app.
+4. Follow the integration [activation steps][8] or the custom files log collection steps on the Datadog site.
 
-    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see the [Custom log collection documentation][9].
+    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see [Custom log collection][9].
 
 ### Container
 
@@ -78,7 +80,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 ### Other
 
-If you're using existing logging services or utilities such as rsyslog, flutend, or logstash, Datadog offers plugins and log forwarding options.
+If you're using existing logging services or utilities such as rsyslog, Fluentd, or Logstash, Datadog offers plugins and log forwarding options.
 
 If you don't see your integration, you can type it in the *other integrations* box and get notifications for when the integration is available.
 
@@ -88,7 +90,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
-For example, if you have logs flowing in from a service that you wish to drill down into, filter by `Service:your-service-name`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
+For example, if you have logs flowing in from a service that you wish to drill down into, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
 
 {{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
 

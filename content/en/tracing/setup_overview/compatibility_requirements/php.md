@@ -20,14 +20,14 @@ PHP APM supports the following PHP versions:
 
 | Version    | Support type                          |
 |:-----------|:--------------------------------------|
-| 8.0.x      | Fully Supported (as of `0.52.0`)      |
+| 8.0.x      | Fully Supported (tracer `0.52.0+`)    |
 | 7.4.x      | Fully Supported                       |
 | 7.3.x      | Fully Supported                       |
 | 7.2.x      | Fully Supported                       |
 | 7.1.x      | Fully Supported                       |
 | 7.0.x      | Fully Supported                       |
 | 5.6.x      | Fully Supported                       |
-| 5.5.x      | Fully Supported (as of `0.49.0`)      |
+| 5.5.x      | Fully Supported (tracer `0.49.0+`)    |
 | 5.4.x      | Fully Supported                       |
 
 PHP APM supports the following SAPI's:
@@ -60,11 +60,11 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CodeIgniter    | 2.x                  | PHP 7+                     | Framework-level instrumentation |
 | CodeIgniter    | 3.x                  | PHP 7+                     | Generic web tracing             |
 | Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-level instrumentation |
-| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions | Framework-level instrumentation |
+| Laravel 8      | 8.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
 | Lumen          | 5.2+                 | All supported PHP versions | Framework-level instrumentation |
 | Symfony 3      | 3.3, 3.4             | All supported PHP versions | Framework-level instrumentation |
 | Symfony 4      | 4.x                  | All supported PHP versions | Framework-level instrumentation |
-| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions | Framework-level instrumentation |
+| Symfony 5      | 5.x (tracer `0.50.0+`) | All supported PHP versions | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |
 | Zend Framework | 1.12                 | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                  | All supported PHP versions | Generic web tracing             |

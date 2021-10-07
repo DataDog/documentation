@@ -31,7 +31,7 @@ If you are using a Kubernetes executor, Datadog recommends using the [Admission 
 
 If you are using a SaaS CI provider with no access to the underlying worker nodes, run the Datadog Agent in a container as a build service. This method is also available for an on-premises CI provider that uses a container-based executor if [installing the Datadog Agent on each worker node](#installing-the-agent-on-each-ci-worker-node) is not an option.
 
-To run the Datadog Agent as a container acting as a simple results forwarder, use the Docker image `datadog/agent:latest` and the following environment variables:
+To run the Datadog Agent as a container acting as a simple results forwarder, use the Docker image `gcr.io/datadoghq/agent:latest` and the following environment variables:
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][4] used to upload the test results.<br/>
@@ -76,7 +76,7 @@ variables:
 resources:
   containers:
     - container: dd_agent
-      image: datadog/agent:latest
+      image: gcr.io/datadoghq/agent:latest
       ports:
         - 8126:8126
       env:
@@ -100,7 +100,7 @@ variables:
 resources:
   containers:
     - container: dd_agent
-      image: datadog/agent:latest
+      image: gcr.io/datadoghq/agent:latest
       ports:
         - 8126:8126
       env:
@@ -140,7 +140,7 @@ variables:
 
 test:
   services:
-    - name: datadog/agent:latest
+    - name: gcr.io/datadoghq/agent:latest
   script:
     - make test
 {{< /code-block >}}
@@ -156,7 +156,7 @@ variables:
 
 test:
   services:
-    - name: datadog/agent:latest
+    - name: gcr.io/datadoghq/agent:latest
   script:
     - make test
 {{< /code-block >}}
@@ -179,7 +179,7 @@ jobs:
   test:
     services:
       datadog-agent:
-        image: datadog/agent:latest
+        image: gcr.io/datadoghq/agent:latest
         ports:
           - 8126:8126
         env:
@@ -196,7 +196,7 @@ jobs:
   test:
     services:
       datadog-agent:
-        image: datadog/agent:latest
+        image: gcr.io/datadoghq/agent:latest
         ports:
           - 8126:8126
         env:
@@ -289,7 +289,7 @@ Regardless of which CI provider you use, if tests are run using [Docker Compose]
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -308,7 +308,7 @@ services:
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -331,7 +331,7 @@ Alternatively, share the same network namespace between the Agent container and 
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true
@@ -347,7 +347,7 @@ services:
 version: '3'
 services:
   datadog-agent:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
       - DD_API_KEY
       - DD_INSIDE_CI=true

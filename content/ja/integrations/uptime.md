@@ -9,7 +9,7 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
 display_name: Uptime
 draft: false
 git_integration_title: uptime

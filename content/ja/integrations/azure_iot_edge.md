@@ -90,7 +90,7 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
 
 3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
     - モジュール名を設定します。(例: `datadog-agent`)
-    - Agent のイメージ URI を設定します。(例: `datadog/agent:7`)
+    - Agent のイメージ URI を設定します。(例: `gcr.io/datadoghq/agent:7`)
     - "Environment Variables" で `DD_API_KEY` を構成します。ここで、追加の Agent コンフィギュレーションを設定することも可能です ([Agent の環境変数][6]参照)。
     - "Container Create Options" で、デバイスの OS に基づき以下のコンフィギュレーションを入力します。**注**: `NetworkId` は、デバイスの `config.yaml` ファイルに設定されたネットワーク名と一致する必要があります。
 

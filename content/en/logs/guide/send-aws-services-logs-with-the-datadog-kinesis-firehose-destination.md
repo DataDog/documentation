@@ -12,13 +12,17 @@ further_reading:
   tag: "Documentation"
   text: "Learn how to process your logs"
 ---
-​
+
+## Overview
+
 AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. It is possible to subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.
 ​
 AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain any additional infrastructure or forwarding configurations for streaming logs.
 ​
 You can set up a Kinesis Firehose Delivery Stream in the AWS Firehose console, or automatically set up the destination using a CloudFormation template:
-​
+
+## Setup
+
 {{< tabs >}}
 {{% tab "Kinesis Firehose Delivery stream" %}}
 ​
@@ -84,9 +88,18 @@ See the full [Kinesis CloudFormation template][1].
 3. Check the `Subscriptions` column in the [log groups index page][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 ​
 If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
-​
+
+## Search for AWS Kinesis logs in Datadog
+
+Once you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
+
+To populate all logs by ARN:
+
+1. Navigate to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
+2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
 
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
 [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample
+[5]: /logs/explorer/

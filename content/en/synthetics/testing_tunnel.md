@@ -22,19 +22,21 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in public beta.
+This feature is in public beta.
 </div>
 
 The Synthetic testing tunnel creates short lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
+
 Datadog recommends using the testing tunnel if you are willing to launch Synthetics tests from your CI/CD pipeline or against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can also prove helpful if you are looking at triggering tests on ephemeral cloud environments.
 
 ## What is the testing tunnel?
 
-The testing tunnel is a functionality that comes with the **[@datadog/datadog-ci][2] NPM package** which is one of the methods Datadog <span class="x x-first x-last">provides </span>to include your Synthetic tests as part of your CI/CD pipelines. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog, meaning that any test requests sent <span class="x x-first x-last">through</span> the CLI are automatically routed through the `datadog-ci` client<span class="x x-first x-last">. This allows</span> Datadog to access and test your internal applications. 
+The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][2] NPM package which is one of the methods Datadog <span class="x x-first x-last">provides </span>to include your Synthetic tests as part of your CI/CD pipelines. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog, meaning that any test requests sent <span class="x x-first x-last">through</span> the CLI are automatically routed through the `datadog-ci` client<span class="x x-first x-last">. This allows</span> Datadog to access and test your internal applications. 
 
 {{< img src="synthetics/tunnel_diagram.png" alt="Synthetic testing tunnel diagram"  style="width:100%;">}}
 
 `datadog-ci` first gets a presigned URL from Datadog for authentication. It then opens a WebSocket Secure connection (wss) to Datadog's managed locations using the presigned URL. Using SSH connections through the websocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations.  
+
 Because DNS resolution is performed through the tunnel, you can test applications with internal domains or even on the `localhost` of the machine running `datadog-ci`.
 
 **Note:** When using the testing tunnel, your tests' locations are overriden by a location that depends on your Datadog account region.
@@ -90,4 +92,4 @@ datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
-[4]: /synthetics/ci/#cli-usage
+[4]: /synthetics/cicd_testing/#cli-usage

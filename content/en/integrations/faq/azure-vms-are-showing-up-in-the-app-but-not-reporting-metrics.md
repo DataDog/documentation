@@ -18,6 +18,6 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
     {{< img src="integrations/faq/arm_deployed_vm.png" alt="arm_deployed_vm"  >}}
 
 3. Make sure the Virtual machine is running.
-    Our integration do not collect performance metrics for stopped/deallocated machines. However, the `azure.vm.status metric` returns 1 if the machine is running OR stopped (which results in stopped VMs showing up in the infrastructure list). The associated status tag allows you to differentiate between running and not_running hosts. Make sure the host in question has status:running (and is running in the Azure portal!)
+    The integration does not collect performance metrics for stopped/deallocated machines. However, the `azure.vm.status metric` returns 1 if the machine is running OR stopped (which results in stopped VMs showing up in the infrastructure list). The associated status tag allows you to differentiate between running and not_running hosts. Make sure the host in question has status:running (and is running in the Azure portal!)
     {{< img src="integrations/faq/azure_vm_running.png" alt="azure_vm_running"  >}}
 

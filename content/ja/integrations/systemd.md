@@ -11,7 +11,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/systemd/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
 display_name: Systemd
 draft: false
 git_integration_title: systemd
@@ -65,7 +65,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup/:ro \
               -v /run/systemd/:/host/run/systemd/:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 ### コンフィギュレーション

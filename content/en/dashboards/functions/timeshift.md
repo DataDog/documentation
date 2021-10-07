@@ -17,7 +17,7 @@ Here is a set of functions of the pattern `<TIMEPERIOD>_before()`. These functio
 |:--------------|:-----------------------------------------------------------------------------------------------|:-------------------------------------------------|
 | `timeshift()` | Graph values from an arbitrary `<TIME_IN_SECOND>` before the current timestamp for the metric. | `timeshift(<METRIC_NAME>{*}, -<TIME_IN_SECOND>)` |
 
-For example, if you wanted to use this to compare current system load with load from 2 weeks ago (60*60*24*14 = 1209600), your query would be:
+For example, if you wanted to use this to compare current system load with load from 2 weeks ago (60\*60\*24\*14 = 1209600), your query would be:
 
 ```text
 timeshift(avg:system.load.1{*}, -1209600)

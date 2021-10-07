@@ -14,7 +14,7 @@ further_reading:
   - link: /tracing/
     tag: Documentation
     text: トレースの収集
-  - link: 'https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/'
+  - link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
     tag: ブログ
     text: Watchdog RCA による自動化された根本原因分析
 ---
@@ -160,7 +160,7 @@ Watchdog RCA は、アプリケーションの異常を検出すると、スト�
 [10]: /ja/monitors/
 [11]: https://app.datadoghq.com/watchdog
 [12]: /ja/getting_started/tagging/unified_service_tagging
-[13]: /ja/monitors/monitor_types/watchdog/
+[13]: /ja/monitors/create/types/watchdog/
 [14]: /ja/tracing/send_traces/#configure-your-environment
 [15]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [16]: /ja/tracing/visualization/#services

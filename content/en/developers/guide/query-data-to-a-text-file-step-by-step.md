@@ -5,9 +5,9 @@ aliases:
   - /developers/faq/query-data-to-a-text-file-step-by-step
 ---
 
-This article explains how to set up an environment to make the most of the Datadog API. At the end, you will be able to pull or push events, metrics, and monitors from [Datadog's public API][1] to a local file.
+This article explains how to set up an environment to make the most of the Datadog API and includes how to pull or push events, metrics, and monitors from [Datadog's public API][1] to a local file.
 
-Prerequisite: Python and `pip` installed on your localhost. If you are on Windows, see the [Python documentation][2].
+Prerequisite: Python and `pip` installed on your localhost. Windows users see [Installing Python 2 on Windows][2].
 
 1. Open a terminal.
 2. Verify the directory: `pwd` on macOS, `dir` on Windows.
@@ -17,9 +17,9 @@ Prerequisite: Python and `pip` installed on your localhost. If you are on Window
 
     a. Replace `<YOUR_DD_API_KEY>` and `<YOUR_DD_APP_KEY>` with your [Datadog API and app keys][4].
 
-    b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary page][5].
+    b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary][5].
 
-    c. Optionally, replace `*` with a host to filter the data. A list of your hosts is displayed in the [Datadog Infrastructure List page][6].
+    c. Optionally, replace `*` with a host to filter the data. A list of your hosts is displayed in the [Datadog Infrastructure List][6].
 
     d. Optionally, change the time period to collect the data. The current setting is 3600 seconds (one hour). **Note**: If you run this too aggressively, you may hit the [Datadog API limits][7].
 
@@ -33,9 +33,9 @@ Once the above is complete:
 4. Run `pip install datadog` to install the [Datadog API package][9]. This enables the Python file to interact with the Datadog API.
 5. In the terminal, run the script: `python api_query_data.py`.
 
-If successful, you will see data in the terminal and a file created in your folder named `out.txt`.
+If successful, your data displays in the terminal and a file is created in your folder named `out.txt`.
 
-To see additional examples, see our [API documentation][1].
+See additional examples in the [Datadog API documentation][1].
 
 [1]: /api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win

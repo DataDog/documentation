@@ -12,7 +12,7 @@ further_reading:
     - link: 'logs/explorer/#list-of-logs'
       tag: 'Documentation'
       text: 'The list view of logs'
-      
+
 ---
 
 ## Overview
@@ -23,25 +23,25 @@ Datadog Log Management offers Watchdog Insights to help you navigate to the root
 Watchdog Insights for the Log Explorer is in beta. Access to this feature is provisioned to customers using Log Management. If you have feedback, contact <a href="https://docs.datadoghq.com/help">Datadog support</a>.
 </div>
 
-In this example, Watchog Insights identifies that the containerized Ruby application's `version:2.9.7` caused most of the errors observed in a given time range. 
+In this example, Watchog Insights identifies that the containerized Ruby application's `version:2.9.7` caused most of the errors observed in a given time range.
 
 {{< img src="logs/explorer/watchdog_insights/overview.png" alt="Watchdog Insights" style="width:100%;" >}}
 
 ## Navigation
 
 The Watchdog Insights banner appears in the **Log Explorer results** page and displays insights about the current query:
- 
+
 {{< img src="logs/explorer/watchdog_insights/banner_collapsed.png" alt="Watchdog Insights banner (collapsed)" style="width:100%;" >}}
 
 To see an overview of all insights, expand the Watchdog Insight banner:
 
 {{< img src="logs/explorer/watchdog_insights/banner_expanded.png" alt="Watchdog Insights banner (expanded)" style="width:100%;" >}}
 
-To access the full Watchdog Insights side panel, click **View all**: 
+To access the full Watchdog Insights side panel, click **View all**:
 
 {{< img src="logs/explorer/watchdog_insights/side_panel.png" alt="Watchdog Insights side panel" style="width:100%;" >}}
 
-Every insight comes with embedded interactions and a side panel with troubleshooting information. The insight interactions and side panel vary based on the [Watchdog Insight type](#watchdog-insights-collections).
+Every insight comes with embedded interactions and a side panel with troubleshooting information. The insight interactions and side panel vary based on the Watchdog Insight type.
 
 ## Collections
 

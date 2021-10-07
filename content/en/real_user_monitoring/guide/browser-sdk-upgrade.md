@@ -12,12 +12,12 @@ further_reading:
 
 ## Overview
 
-RUM Browser SDK v3 introduces [Session Replay][1]. With this major version update, several breaking changes were made to the Browser SDK.
+Browser SDK v3 introduces [Session Replay][1]. With this major version update, several breaking changes were made to RUM and logs Browser SDKs.
 
 ## Changes
 ### RUM errors
 
-The Browser SDK no longer issues [RUM errors][2] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][3], which contain the status code attribute.
+The RUM Browser SDK no longer issues [RUM errors][2] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][3], which contain the status code attribute.
 
 
 To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][4], checking the `status_code` property, and manually sending an error with the [addError API][5].
@@ -30,17 +30,16 @@ beforeSend: (event) => {
 }
 ```
 
-### Source attribute
+### RUM error source attribute
 
-The Browser SDK no longer lets you specify the source of an error collected with the [addError API][5]. All errors collected with this API have their source attribute set to `custom`. The [addError API][5] accepts a context object as its second parameter, which should be used to pass extra context about the error.
+The RUM Browser SDK no longer lets you specify the source of an error collected with the [addError API][5]. All errors collected with this API have their source attribute set to `custom`. The [addError API][5] accepts a context object as its second parameter, which should be used to pass extra context about the error.
 
-## Deprecated
-### TypeScript types
+## Removals
+### RUM API
 
-| Old types                    | New types                    |
-| ---------------------------- | ---------------------------- |
-| RumUserConfiguration         | RumInitConfiguration         |
-| RumRecorderUserConfiguration | RumRecorderInitConfiguration |
+| Old API       | New API   |
+| ------------- | --------- |
+| addUserAction | addAction |
 
 ### Initialization options
 
@@ -50,11 +49,13 @@ The Browser SDK no longer lets you specify the source of an error collected with
 | datacenter         | site        |
 | resourceSampleRate | NONE        |
 
-### API
+### TypeScript types
 
-| Old API       | New API   |
-| ------------- | --------- |
-| addUserAction | addAction |
+| Old types                    | New types                    |
+| ---------------------------- | ---------------------------- |
+| RumUserConfiguration         | RumInitConfiguration         |
+| RumRecorderUserConfiguration | RumRecorderInitConfiguration |
+| LogsUserConfiguration        | LogsInitConfiguration        |
 
 ## Further Reading
 

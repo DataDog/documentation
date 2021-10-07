@@ -2,13 +2,13 @@
 title: Why did I get a recovery event from a Monitor that was in a Downtime when it alerted?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Learn more about downtimes"
 ---
@@ -20,4 +20,4 @@ An option is to resolve the monitor prior to cancelling the downtime to suppress
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/downtimes/
+[1]: /monitors/notify/downtimes/

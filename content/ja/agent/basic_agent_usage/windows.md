@@ -173,11 +173,11 @@ Agent の実行は、Windows サービスコントロールマネージャーに
 
 (スタートメニューにある) Datadog Agent Manager を使用します。
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="Windows のスタートメニュー"  style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="Windows のスタートメニュー" style="width:75%;">}}
 
 Datadog Agent Manager で `start`、`stop`、および `restart` コマンドを使用します。
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager のスナップショット"  style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager のスナップショット" style="width:75%;">}}
 
 Windows Powershell で、次のコマンドを使用することもできます。
 `[start|stop|restart]-service datadogagent`
@@ -246,7 +246,7 @@ Agent が実行されていることを確認するには、サービスパネ�
 Agent v5.2+ では、Agent の状態に関する情報は、
 Datadog Agent Manager -> Settings -> Agent Status で確認できます。
 
-{{< img src="agent/faq/windows_status.png" alt="Windows ステータス"  style="width:50%;" >}}
+{{< img src="agent/faq/windows_status.png" alt="Windows ステータス" style="width:50%;" >}}
 
 Agent v3.9.1 ～ v5.1 のステータスを確認する場合は、`http://localhost:17125/status` に移動します。
 
@@ -319,7 +319,7 @@ cmd.exe では、次のようにします。
 "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
 ```
 
-{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Agent 6 を使用した Windows フレア"  style="width:75%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Agent 6 を使用した Windows フレア" style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
 {{% /tab %}}
@@ -337,7 +337,7 @@ Datadog のサポートチームに Windows のログと構成のコピーを送
 
 * Datadog へのログインに使用するメールアドレスを入力します。
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Windows フレア"  style="width:70%;">}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows フレア" style="width:70%;">}}
 
 Powershell では、次の flare コマンドを使用できます。
 
@@ -377,7 +377,7 @@ print tempfile.gettempdir()
 
 例:
 
-{{< img src="agent/faq/flare_fail.png" alt="フレア失敗"  style="width:70%;">}}
+{{< img src="agent/faq/flare_fail.png" alt="フレア失敗" style="width:70%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -390,11 +390,11 @@ print tempfile.gettempdir()
 
 サービスの名前を確認するために、`services.msc` を開き、目的のサービスを見つけます。ターゲットとして DHCP を選択すると、次のように、サービスのプロパティウィンドウの上部にサービス名が表示されます。
 
-{{< img src="agent/faq/DHCP.png" alt="DHCP"  style="width:75%;">}}
+{{< img src="agent/faq/DHCP.png" alt="DHCP" style="width:75%;">}}
 
 独自のサービスを追加する場合は、次に示す書式に厳密に従ってください。書式が正しくないと、インテグレーションが失敗します。**注**: サービス名の特殊文字はエスケープする必要があります。たとえば、`MSSQL$BILLING` という名前の場合、`MSSQL\$BILLING` のように特殊文字を追加します。
 
-{{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP サービス"  style="width:75%;">}}
+{{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP サービス" style="width:75%;">}}
 
 また、インテグレーションを変更するたびに、Datadog サービスを再起動する必要があります。これは、services.msc または UI のサイドバーから行うことができます。
 

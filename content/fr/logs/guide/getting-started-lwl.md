@@ -42,7 +42,7 @@ Votre service avec la plus forte journalisation comporte de nombreux logs, qui n
 
 Maintenant que vous savez lequel de vos statut de service génère le plus de logs, passez à la [vue Patterns][4], située en regard du graphique, à haut à gauche du Log Explorer. Vous pourrez ainsi visualiser automatiquement vos patterns de log pour le contexte sélectionné.
 
-Un contexte est constitué d'un intervalle et d'une requête de recherche. Les principales caractéristiques de chaque pattern sont détaillées, afin de comprendre rapidement ses particularités. Un petit graphique représente le volume de ses logs au sein d'un calendrier approximatif. Cette visualisation vous permet d'identifier ce qui distingue votre pattern des autres patterns. Les éléments de logs qui varient au sein du pattern sont mis en évidence pour identifier facilement les différences entre chaque ligne de log. 
+Un contexte est constitué d'un intervalle et d'une requête de recherche. Les principales caractéristiques de chaque pattern sont détaillées, afin de comprendre rapidement ses particularités. Un petit graphique représente le volume de ses logs au sein d'un calendrier approximatif. Cette visualisation vous permet d'identifier ce qui distingue votre pattern des autres patterns. Les éléments de logs qui varient au sein du pattern sont mis en évidence pour identifier facilement les différences entre chaque ligne de log.
 
 Cliquez sur le pattern de log à exclure pour afficher un échantillon de logs sous-jacents.
 
@@ -68,7 +68,7 @@ Le volet de contexte des patterns répertorie toutes les instances (tous les év
 
 {{< img src="logs/guide/getting-started-lwl/exclusion_filter.gif" alt="Filtre d'exclusion" style="width:100%;">}}
 
-**Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion. 
+**Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion.
 
 Dans cet exemple, le pattern `Updating recommendations with customer_id=* & url=shops/*/*` du statut de service `INFO` est exclus à l'aide d'un filtre d'exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pouvez parcourir vos données et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de la vue Log Explorer. Ils sont toujours ingérés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
 
@@ -111,7 +111,7 @@ Lorsqu'une anomalie est détectée, toutes les personnes concernées reçoivent 
 
 Vous savez désormais comment utiliser la fonctionnalité Logging without Limits™ pour :
 
-1. [Identifier le statut de service générant le plus de logs](#1-identify-your-most-logging-service-status)
+1. [Identifier le statut de service générant le plus de logs](#1-identify-your-most-logged-service-status)
 2. [Identifier les patterns de logs les plus volumineux](#2-identify-high-volume-logging-patterns)
 3. [Créer un filtre d'exclusion de pattern de log](#3-create-a-log-pattern-exclusion-filter)
 4. [Générer des métriques pour effectuer un suivi des logs exclus](#4-generate-metrics-to-track-excluded-logs)
@@ -130,7 +130,7 @@ Pour en savoir plus sur la fonctionnalité Logging without Limits™ et exploite
 [4]: https://app.datadoghq.com/logs/patterns
 [5]: /fr/logs/live_tail/
 [6]: /fr/logs/archives/
-[7]: /fr/developers/metrics/
+[7]: /fr/metrics/
 [8]: /fr/logs/logs_to_metrics/
 [9]: /fr/monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

@@ -295,10 +295,10 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                     # (...)
                     - name: system-probe
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       imagePullPolicy: Always
                       securityContext:
                           capabilities:
@@ -368,7 +368,7 @@ $ docker run -e DD_API_KEY="<CLÉ_API_DATADOG>" \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
 --cap-add=IPC_LOCK \
-datadog/agent:latest
+gcr.io/datadoghq/agent:latest
 ```
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
@@ -380,7 +380,7 @@ version: '3'
 services:
   ..
   datadog:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
        DD_SYSTEM_PROBE_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'

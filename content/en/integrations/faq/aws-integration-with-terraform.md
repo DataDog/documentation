@@ -12,7 +12,7 @@ If you use [Terraform][1], the script below creates the Datadog IAM policy insid
 * `YOUR_DD_EXTERNAL_ID`: A unique ID located in your [Datadog AWS Integration tile][2].
 * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][3] documentation.
 
-```text
+```hcl
 variable "datadog_aws_integration_external_id" {
   default = "<YOUR_DD_EXTERNAL_ID>"
   description = ""

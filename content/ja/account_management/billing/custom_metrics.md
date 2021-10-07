@@ -68,9 +68,9 @@ Florida の気温を入手するには、単に次のようにカスタムメト
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-[1]: /ja/developers/metrics/types/?tab=count#metric-types
-[2]: /ja/developers/metrics/types/?tab=rate#metric-types
-[3]: /ja/developers/metrics/types/?tab=gauge#metric-types
+[1]: /ja/metrics/types/?tab=count#metric-types
+[2]: /ja/metrics/types/?tab=rate#metric-types
+[3]: /ja/metrics/types/?tab=gauge#metric-types
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -91,8 +91,8 @@ Florida の気温を入手するには、単に次のようにカスタムメト
 - Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][3]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、パーセンタイル順位が 95 の `95percentile` だけが Datadog に送信されます。
 
 
-[1]: /ja/developers/metrics/types/?tab=histogram#metric-types
-[2]: /ja/developers/metrics/types/?tab=histogram#definition
+[1]: /ja/metrics/types/?tab=histogram#metric-types
+[2]: /ja/metrics/types/?tab=histogram#definition
 [3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
@@ -130,7 +130,7 @@ DISTRIBUTION メトリクスを集計する[タグの組み合わせ][2]をカ�
 
 [DISTRIBUTION メトリクス][1]のカスタムメトリクス数は、メトリクス名とタグ値の一意の組み合わせ数に 5 を掛けた数になります。タグをカスタマイズした結果として、`request.Latency` から報告される**カスタムメトリクス総数は 5×*3 = 15** になります。
 
-[1]: /ja/developers/metrics/types/?tab=distribution#definition
+[1]: /ja/metrics/types/?tab=distribution#definition
 [2]: /ja/metrics/distributions/#customize-tagging
 {{% /tab %}}
 {{< /tabs >}}
@@ -174,8 +174,8 @@ Datadog では、料金プランごとに一定数のカスタムメトリクス
 請求に関するご質問は、[カスタマーサクセス][9]マネージャーにお問い合わせください。
 
 [1]: /ja/integrations/
-[2]: /ja/developers/metrics/custom_metrics/
-[3]: /ja/developers/metrics/types/#metric-types
+[2]: /ja/metrics/custom_metrics/
+[3]: /ja/metrics/types/#metric-types
 [4]: /ja/account_management/users/default_roles/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /ja/account_management/billing/usage_details/
