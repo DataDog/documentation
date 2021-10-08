@@ -3,7 +3,7 @@ title: Datadog クリップボード
 kind: documentation
 description: インシデントの作成と管理
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-clipboard/
+  - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
     tag: ブログ
     text: Datadog クリップボードでデータを楽に検索
 ---

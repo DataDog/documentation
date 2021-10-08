@@ -12,15 +12,9 @@ private: true
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Synthetic テストのキャッシュの問題の回避{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="API テスト:" >}}
-    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングと各バリエーションのトラブルシューティングを理解する{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/or-logic-api-tests-assertions" >}}API テストのアサーションで OR ロジックを実行する{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< whatsnext desc="ブラウザテスト:" >}}
     {{< nextlink href="synthetics/guide/browser-test-self-maintenance/" >}}ブラウザテストが自己維持型である理由{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}認証が必要なアプリケーションを監視する{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}ブラウザテストにおける多要素認証 (MFA) 用 TOTP{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}ブラウザテストジャーニーのテストスイート全体の再利用{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation" >}}ブラウザテストによる電子メールの検証{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}テストファイルのアップロードとダウンロード{{< /nextlink >}}

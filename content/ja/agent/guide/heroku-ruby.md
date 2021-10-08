@@ -66,7 +66,7 @@ Datadog は、アカウントを API キーで認識します。[Datadog アカ�
 
 {{< img src="agent/guide/heroku_ruby/apikey.png" alt="Datadog API キーセクション" >}}
 
-次に、Datadog Agent をアプリケーションにデプロイします。このガイドでは、[Datadog Heroku ビルドパック][10]を使用します。[Heroku ビルドパック][11]について、詳しくは公式ドキュメントでご確認ください。
+Datadog Agent をアプリケーションにデプロイします。このガイドでは、[Datadog Heroku ビルドパック][10]を使用します。[Heroku ビルドパック][11]について、詳しくは公式ドキュメントでご確認ください。
 
 ```shell
 # Heroku Labs Dyno Metadata を有効にして HEROKU_APP_NAME 環境変数を自動的に設定
@@ -122,7 +122,7 @@ heroku-postgresql (postgresql-infinite-14462)  hobby-dev  free   created
 上記テーブルはアドオンと、現在のアプリ (ruby-heroku-datadog) または他のアプリへの添付を示します。
 ```
 
-このアプリケーション例ではすでにコード内のデータベースを使用していますが、まだテーブルを作成していません。以下を実行してください。
+このアプリケーション例ではすでにコード内のデータベースを使用していますが、まだテーブルを作成していません。作成してください。
 
 ```shell
 heroku run rake db:migrate -a $APPNAME
@@ -137,7 +137,7 @@ Migrating to CreateWidgets (20140707111715)
 == 20140707111715 CreateWidgets: migrated (0.0247s) ===========================
 ```
 
-これで、このデータベースを使用するアプリケーションの `/widgets` エンドポイントを確認できます。
+これで、このデータベースを使用するアプリケーションの `/widgets` エンドポイントにアクセスできます。
 
 Postgres Datadog インテグレーションを有効にします。
 
@@ -294,14 +294,14 @@ git commit -m "Enable distributed tracing"
 git push heroku main
 ```
 
-ビルド中、トレーサーが Datadog APM Agent エンドポイントに到達できないというエラーメッセージが表示されることがあります。ビルドプロセスの間は Datadog Agent がまだ起動していないため、これは正常の動作です。このようなメッセージは無視してください。
+ビルド中、トレーサーが Datadog APM Agent エンドポイントに到達できないというエラーメッセージを受信することがあります。ビルドプロセスの間は Datadog Agent がまだ起動していないため、これは正常の動作です。このようなメッセージは無視してください。
 
 ```
 remote:        Download Yarn at https://yarnpkg.com/en/docs/install
 remote:        E, [2021-05-14T10:21:27.664244 #478] ERROR -- ddtrace: [ddtrace] (/tmp/build_d5cedb1c/vendor/bundle/ruby/2.6.0/gems/ddtrace-0.48.0/lib/ddtrace/transport/http/client.rb:35:in `rescue in send_request') Internal error during HTTP transport request. Cause: Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126) Location: /tmp/build_d5cedb1c/vendor/ruby-2.6.6/lib/ruby/2.6.0/net/http.rb:949:in `rescue in block in connect'
 ```
 
-ビルドが完了したら、アプリケーションが Datadog へトレースを送信します。アプリケーションへのトラフィックの生成を開始（アプリケーションの /widgets ページにアクセスするなど）して、トレースの流れをよくすることができます。
+ビルドが完了したら、アプリケーションから Datadog へのトレースの送信が開始します。アプリケーションへのトラフィックの生成を開始（アプリケーションの /widgets ページにアクセスするなど）して、トレースの流れをよくすることができます。
 
 Datadog Agent のステータスを、[付録セクション](#appendix-getting-the-datadog-agent-status) で説明されているとおりに実行し、APM Agent が正しく動作しトレースを Datadog に送信していることを確認します。以下のセクションをご参照ください。
 
@@ -340,7 +340,7 @@ APM Agent
 
 この出力は、APM Agent が正しく動作しトレースを Datadog に送信していることを示しています。
 
-[APM traces セクション][16]へ移動し、トレースを確認します。
+[APM traces セクション][16]へ移動すると、送信されてくるトレースが表示されています。
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Datadog の Ruby アプリケーショントレース" >}}
 
@@ -353,7 +353,7 @@ APM Agent
 
 次に、ログを有効化します。アプリケーションから Datadog へログを送信する方法には、2 種類のオプション（Heroku ログドレインをセットアップまたは Datadog Log Agent ディレクトリを使用）があります。それぞれの方法に利点と欠点があるのですが、両方を設定することも可能です。
 
-ログドレインの難点はログをトレースに関連付けられないことですが、Datadog Agent を使用すれば可能です。
+ログドレインの難点は、現段階ではログをトレースに関連付けられないことですが、Datadog Agent を使用すれば可能です。
 
 Datadog Agent を通じてログを送信することの難点は、Heroku システムログおよびルーターログが送信されないことです（ログドレインを使用すれば、これらを送信できます）。
 
@@ -365,7 +365,7 @@ Heroku には、アプリケーションで実行しているすべての dynos 
 
 Datadog へログを送信する 1 つ目の方法は、Heroku ログドレインをセットアップし、Heroku で受信した同じログを別のプラットフォームへルーティングする方法です。
 
-ログドレインをセットアップする最大の利点は、Heroku システムログを Datadog で受信することができる点です（dyno の場合は直接受信できません）。難点は、ログとトレースを関連付けられないことです（Datadog Agent でログを送信する場合は可能）。
+ログドレインをセットアップする最大の利点は、Heroku システムログを Datadog へ送ることができる点です（dyno では直接送信できません）。難点は、ログとトレースを関連付けられないことです（Datadog Agent でログを送信する場合は可能）。
 
 Heroku ログドレインをセットアップすると、dyno システムメトリクス（CPU、メモリ）を Datadog へ送ることも可能になります。
 
@@ -433,7 +433,7 @@ Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリック�
 @heroku.memory.total
 ```
 
-それぞれの値の意味については、公式の [Heroku ドキュメント][20]でご確認ください。
+それぞれの値の意味については、[Heroku 公式ドキュメント][20]でご確認ください。
 
 前のセクションで説明したのと同じ手順を実行してメトリクスを生成し、各メジャーを 15 か月間できます。
 
@@ -611,7 +611,7 @@ git push heroku main
 
 このガイドでは、サンプル Rails アプリケーションを使用して Heroku にデプロイし、Datadog でインスツルメントしてメトリクス、dyno システムメトリクス、ログ、トレース、そしてインテグレーションの取得をセットアップしました。
 
-他の Datadog インテグレーションとアプリケーションをインスツルメントするには、公式の[インテグレーション用ドキュメント][23]内のコンフィギュレーションファイルを使用して、Postgres のインテグレーションに使用した手順を実行します。
+他の Datadog インテグレーションとアプリケーションをインスツルメントするには、[インテグレーション用公式ドキュメント][23]内のコンフィギュレーションファイルを使用して、Postgres のインテグレーションに使用した手順を実行します。
 
 ## 付録: Datadog Agent ステータスの取得
 

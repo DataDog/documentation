@@ -7,7 +7,7 @@ further_reading:
   - link: security_monitoring/default_rules
     tag: Documentation
     text: デフォルトのセキュリティルールについて
-  - link: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/'
     tag: ブログ
     text: Datadog でアプリケーションの悪用を検出
 ---

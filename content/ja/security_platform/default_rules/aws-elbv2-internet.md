@@ -33,12 +33,12 @@ type: security_rules
 
 [ロードバランサー名、スキーム、サブネット][2]を指定して、`create-load-balancer` を実行します。
 
-{{< code-block lang="bash" filename="create-load-balancer.sh" >}}
-aws elbv2 create-load-balancer
---name my-internal-load-balancer
---scheme internal
---subnets subnet-b7d581c0 subnet-8360a9e7
-{{< /code-block >}}
+    {{< code-block lang="bash" filename="create-load-balancer.sh" >}}
+    aws elbv2 create-load-balancer
+    --name my-internal-load-balancer
+    --scheme internal
+    --subnets subnet-b7d581c0 subnet-8360a9e7
+    {{< /code-block >}}
 
 ネットワークやゲートウェイのロードバランサーを作成するには、[create-load-balancer][2] AWS CLI ドキュメントを参照してください。
 
