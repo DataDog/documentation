@@ -48,7 +48,7 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 ### Renotify
 
-Enable monitor renotification (optional) to remind your team that a problem is not solved. For critical monitors, you might want to make sure that you will not miss or forget about the incident when it is triggered. Enabling renotification will send notifications for alert status periodically as long as the monitor has not recovered.
+Enable monitor renotification (optional) to remind your team that a problem is not solved. For critical monitors, you might want to make sure that you do not miss or forget about an incident when the monitor is triggered. When renotification is enabled, status notifications are sent periodically until the monitor recovers.
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
