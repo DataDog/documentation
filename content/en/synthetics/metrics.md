@@ -20,10 +20,15 @@ Metrics starting with:
 * `synthetics.dns.*` come from your API [DNS tests][4]
 * `synthetics.tcp.*` come from your API [TCP tests][5]
 * `synthetics.browser.*` come from your [browser tests][6]
-* `synthetics.test_runs.*` come from your [multistep API tests][7]
-* `datadog.estimated_usage.synthetics.*` come from your API and browser tests
+* `synthetics.*` come from all your Synthetic tests
 
-### General tests
+Metrics starting with:
+
+* `datadog.estimated_usage.synthetics.*` returns relevant usage data for all your Synthetic tests
+
+### General metrics
+
+{{< get-metrics-from-git "synthetics.test_runs" "datadog.estimated_usage.synthetics" >}}
 
 {{< get-metrics-from-git "synthetics" "synthetics.test_runs" >}}
 
