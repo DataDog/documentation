@@ -2,13 +2,13 @@
 title: Sending Datadog Events to your Moogsoft AIOps instance.
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---

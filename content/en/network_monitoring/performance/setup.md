@@ -14,9 +14,6 @@ further_reading:
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
-    - link: '/dashboards/widgets/network'
-      tag: 'Documentation'
-      text: 'Network Widget'
 ---
 
 Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -292,10 +289,10 @@ If you already have the [Agent running with a manifest][4]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                     # (...)
                     - name: system-probe
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       imagePullPolicy: Always
                       securityContext:
                           capabilities:
@@ -365,7 +362,7 @@ $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
 --cap-add=IPC_LOCK \
-datadog/agent:latest
+gcr.io/datadoghq/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
@@ -377,7 +374,7 @@ version: '3'
 services:
   ..
   datadog:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
        DD_SYSTEM_PROBE_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'

@@ -77,5 +77,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 [2]: /network_monitoring/devices/setup/#autodiscovery
 [3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /monitors/monitor_types/metric/
+[5]: /monitors/create/types/metric/
 [6]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

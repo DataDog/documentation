@@ -26,7 +26,7 @@ Configure Fluent Bit to collect, parse, and forward log data from several differ
 
 ## Setup
 
-Find below instructions to configure Fluent Bit on a host, if you want to configure it on AWS ECS, see the [ECS Fluent Bit and FireLens documentation][2].
+Find below instructions to configure Fluent Bit on a host, for AWS ECS, see [ECS Fluent Bit and FireLens][2].
 
 ### Log collection
 

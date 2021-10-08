@@ -126,9 +126,9 @@ For any particular tag key, you can:
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/
-[4]: /developers/metrics/custom_metrics/
+[4]: /metrics/custom_metrics/
 [5]: /getting_started/tagging/
 [6]: /api/v1/metrics/#edit-metric-metadata
-[7]: /developers/metrics/units/
-[8]: /developers/metrics/types/
+[7]: /metrics/units/
+[8]: /metrics/types/
 [9]: /integrations/

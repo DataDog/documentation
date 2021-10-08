@@ -158,10 +158,10 @@ See the [full Metrics Summary documentation][21] for more details.
 [9]: /logs/logs_to_metrics/
 [10]: /metrics/custom_metrics/
 [11]: /agent/
-[12]: /developers/metrics/dogstatsd_metrics_submission/
+[12]: /metrics/dogstatsd_metrics_submission/
 [13]: /api/
 [14]: https://docs.datadoghq.com/agent/basic_agent_usage/
-[15]: /developers/metrics/types/
+[15]: /metrics/types/
 [16]: /getting_started/tagging/using_tags/
 [17]: /dashboards/functions/
 [18]: /metrics/distributions/

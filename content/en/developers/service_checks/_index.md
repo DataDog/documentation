@@ -89,5 +89,5 @@ See [Introduction to Agent-based Integrations][5] to learn how to write an integ
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
-[4]: /monitors/notifications/
+[4]: /monitors/notify/
 [5]: /developers/integrations/

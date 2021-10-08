@@ -77,6 +77,6 @@ The token provides read/write access to all your boards and teams, so this is a 
 To avoid this, consider creating a specific Trello user that is only joined to the board you designate. Have that user receive the server token.
 
 [1]: /integrations/webhooks/
-[2]: /monitors/notifications/
+[2]: /monitors/notify/
 [3]: https://trello.com/app-key
 [4]: https://trello.com/guide

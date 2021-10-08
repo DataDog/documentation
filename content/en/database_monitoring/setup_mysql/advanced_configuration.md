@@ -52,5 +52,18 @@ instances:
     quantize_sql_tables: true
 ```
 
+## Raising the sampling rate
+
+If you have queries that are relatively infrequent or execute very quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently. 
+
+Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1. Lower the value to a smaller interval:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    query_samples:        
+        collection_interval: 0.1
+```
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-system-variables.html#sysvar_performance_schema_digests_size

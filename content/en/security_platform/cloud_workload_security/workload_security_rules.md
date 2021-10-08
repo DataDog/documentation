@@ -5,6 +5,9 @@ further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
   tag: "Blog"
   text: "Get Started with Cloud Runtime Security"
+- link: "/security_platform/cloud_workload_security/agent_expressions"
+  tag: "Documentation"
+  text: "Agent Expressions"
 ---
 
 ## Overview
@@ -72,7 +75,7 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 To receive the latest bundled CWS rules, [upgrade the Datadog Agent][3].
 
-To manually add or update rules, load a new `default.policy` file to the Agent. 
+To manually add or update rules, load a new `default.policy` file to the Agent.
 
 Follow the instructions below:
 
@@ -139,6 +142,10 @@ Complete the remaining steps based on your environment:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+
+## Further Reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_platform/cloud_workload_security/agent_expressions
 [2]: /security_platform/default_rules

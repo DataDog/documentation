@@ -40,8 +40,8 @@ further_reading:
 - `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
 
 
-[1]: /ja/developers/metrics/#naming-metrics
-[2]: /ja/developers/metrics/types/
+[1]: /ja/metrics/#naming-metrics
+[2]: /ja/metrics/types/
 [3]: /ja/getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}

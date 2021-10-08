@@ -110,7 +110,7 @@ Pour dépanner plus facilement l'Agent :
 {{< /whatsnext >}}
 
 [1]: /fr/integrations/
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[2]: /fr/metrics/dogstatsd_metrics_submission/
 [3]: /fr/api/
 [4]: /fr/infrastructure/process/
 [5]: /fr/logs/

@@ -166,7 +166,7 @@ To collect processes information for all your containers and send it to Datadog:
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
+1. Follow the [above instructions](#setup) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs.json][1] file ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux AMI) with the following configuration:
 
 ```json
@@ -218,7 +218,7 @@ To collect processes information for all your containers and send it to Datadog:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
+1. Follow the [above instructions](#setup) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs-win.json][1] file with the following configuration:
 
 ```json
@@ -246,8 +246,8 @@ To collect processes information for all your containers and send it to Datadog:
 
 **This feature is available for Linux only**
 
- 1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
-  - If you are installing for the first time, there is a `datadog-agent-ecs.json` file available, [datadog-agent-sysprobe-ecs.json][16] ([datadog-agent-sysprobe-ecs1.json][17] if you are using an original Amazon Linux AMI), for use with the [above instructions](#aws-cli). **Note**: Initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
+ 1. Follow the [above instructions](#setup) to install the Datadog Agent.
+  - If you are installing for the first time, there is a `datadog-agent-ecs.json` file available, [datadog-agent-sysprobe-ecs.json][16] ([datadog-agent-sysprobe-ecs1.json][17] if you are using an original Amazon Linux AMI), for use with the [above instructions](#setup). **Note**: Initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
  2. If you already have a task definition, update your [datadog-agent-ecs.json][18] file ([datadog-agent-ecs1.json][19] if you are using an original Amazon Linux AMI) with the following configuration:
 
  ```json
@@ -317,7 +317,7 @@ Need help? Contact [Datadog support][20].
 [2]: https://docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs/
 [3]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
 [4]: https://docs.datadoghq.com/integrations/ecs_fargate/
-[5]: https://hub.docker.com/r/datadog/agent
+[5]: https://gallery.ecr.aws/datadog/agent
 [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
 [7]: https://docs.datadoghq.com/agent/autodiscovery/
 [8]: /agent/amazon_ecs/apm/

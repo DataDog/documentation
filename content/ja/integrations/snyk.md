@@ -3,9 +3,9 @@ categories:
   - プロファイリング
   - セキュリティ
 description: Snyk による脆弱性プロファイルとレポート
-doc_link: 'https://docs.datadoghq.com/integrations/snyk/'
+doc_link: https://docs.datadoghq.com/integrations/snyk/
 dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/snyk.md'
+  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/snyk.md
 has_logo: true
 integration_title: Snyk
 is_public: true
@@ -16,7 +16,7 @@ short_description: Snyk による脆弱性プロファイルとレポート
 version: '1.0'
 integration_id: snyk
 further_reading:
-  - link: 'https://www.datadoghq.com/partner/snyk/'
+  - link: https://www.datadoghq.com/partner/snyk/
     tag: パートナーページ
     text: Datadog による Snyk モニタリング
 ---

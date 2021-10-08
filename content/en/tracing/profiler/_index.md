@@ -19,6 +19,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/'
       tags: 'Blog'
       text: 'Datadog GitHub Action for continuous vulnerability analysis.'
+    - link: 'https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/'
+      tags: 'Blog'
+      text: 'Compare and optimize your code with Datadog Profile Comparison.'
+    - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
+      tags: 'Blog'
+      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
 
 ---
 

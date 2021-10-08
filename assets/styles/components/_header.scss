@@ -169,10 +169,11 @@ body > header {
                 // product menu
                 &.product-menu {
                     column-count: 2;
-                    height: 415px;
+                    height: 455px;
                     column-fill: auto;
 
-                    img.menu-icon {
+                    i[class*='icon-'] {
+                        display: inline-block;
                         width: 18px;
                         margin-right: 12px;
                     }

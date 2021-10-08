@@ -149,7 +149,7 @@ When creating a [monitor][1], use metric tags in the:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags" style="width:80%;">}}
 
-[1]: /monitors/monitor_types/
+[1]: /monitors/create/types/
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -157,7 +157,7 @@ To filter [downtimes][1] by monitor tag, type the tag name in the search bar, fo
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
-[1]: /monitors/downtimes/
+[1]: /monitors/notify/downtimes/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -249,7 +249,7 @@ After [assigning tags][1], use the Service Map to jump to different areas of the
 
 [1]: /getting_started/tagging/assigning_tags/
 [2]: /tracing/app_analytics/search/
-[3]: /monitors/manage_monitor/
+[3]: /monitors/manage/
 [4]: /logs/explorer/search/
 [5]: /infrastructure/hostmap/
 {{% /tab %}}

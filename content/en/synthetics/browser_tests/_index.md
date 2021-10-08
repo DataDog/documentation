@@ -45,6 +45,7 @@ Define the configuration of your browser test.
   * **Cookies**: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
   * **Proxy URL**: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
   
+**Note:** These request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to be active to record following steps, you can manually apply these options on the page you are recording from and then create subsequent steps for your test.
 
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
   {{% /tab %}}
@@ -77,7 +78,7 @@ You can use the [global variables defined in the **Settings**][5] in the **Start
 You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
 
 * An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification.
-* Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][6].
+* Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][6].
 
 {{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule"  >}}
 
@@ -102,9 +103,9 @@ A notification is sent according to the set of alerting conditions. To configure
 
 ## Record your steps
 
-Tests can be only recorded from **[Google Chrome][10]**. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
+Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test2.png" alt="Browser test record test"  >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
@@ -114,6 +115,12 @@ Tests can be only recorded from **[Google Chrome][10]**. To record your test, do
 
     **Note**: You should always make sure to **end your browser test with an [assertion][13]** to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
+
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][14].
+
+If you have access to the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -126,9 +133,11 @@ Tests can be only recorded from **[Google Chrome][10]**. To record your test, do
 [5]: /synthetics/settings/#global-variables
 [6]: /api/v1/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
-[8]: /monitors/notifications/?tab=is_alert#integrations
+[8]: /monitors/notify/?tab=is_alert#integrations
 [9]: /integrations/#cat-notification
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [12]: /synthetics/browser_tests/actions/
 [13]: /synthetics/browser_tests/actions/#assertion
+[14]: /account_management/rbac/
+[15]: /account_management/rbac#custom-roles

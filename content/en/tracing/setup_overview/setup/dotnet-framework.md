@@ -48,7 +48,7 @@ further_reading:
 ## Compatibility requirements
 
 ### Supported .NET Framework runtimes
-The .NET Tracer supports instrumentation on .NET Framework 4.5 and above. 
+The .NET Tracer supports instrumentation on .NET Framework 4.5 and above.
 
 For a full list of supported libraries and processor architectures, see [Compatibility Requirements][1].
 
@@ -132,7 +132,12 @@ example.exe
 ```
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your [datadog.yaml][5] file under `apm_config` with `enabled: true` and listens for trace traffic at `receiver_port:8126`.
+
+{{< agent-config type="trace collection configuration" filename="config_template.yaml" collapsible="true">}}
+
+For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
+
 {{< site-region region="us3,eu,gov" >}}
 
 Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} so that the Agent sends data to the right Datadog location.
@@ -146,10 +151,10 @@ Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" 
 </div>
 
 To use custom instrumentation in your .NET application:
-1. Add the `Datadog.Trace` [NuGet package][5] to your application.
+1. Add the `Datadog.Trace` [NuGet package][6] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation documentation][6].
+For additional details on custom instrumentation and custom tagging, see the [.NET Custom Instrumentation documentation][7].
 
 ## Configuration
 
@@ -178,6 +183,9 @@ example.exe
 
 <div class="alert alert-warning">
 <strong>Note:</strong> To set environment variables for a Windows Service, use the multi-string key <code>HKLM\System\CurrentControlSet\Services\{service name}\Environment</code> in the Windows Registry, as described above.
+<br />
+<br />
+Because IIS runs all applications under one Windows Service, Datadog recommends you use another configuration option (Code, web.config, or JSON file) for application-specific settings such as <code>DD_SERVICE</code>.
 </div>
 
 {{% /tab %}}
@@ -252,7 +260,7 @@ Using the methods described above, customize your tracing configuration with the
 
 #### Unified Service Tagging
 
-To use [Unified Service Tagging][7], configure the following settings for your services:
+To use [Unified Service Tagging][8], configure the following settings for your services:
 
 `DD_ENV`
 : **TracerSettings property**: `Environment`<br>
@@ -351,11 +359,11 @@ The following table lists configuration variables that are available **only** wh
 
 `DD_DISABLED_INTEGRATIONS`
 : **TracerSettings property**: `DisabledIntegrationNames` <br>
-Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][8] section.
+Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations][9] section.
 
 `DD_TRACE_<INTEGRATION_NAME>_ENABLED`
 : **TracerSettings property**: `Integrations[<INTEGRATION_NAME>].Enabled` <br>
-Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][8] section.<br>
+Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][9] section.<br>
 **Default**: `true`
 
 #### Experimental features
@@ -378,7 +386,8 @@ The following configuration variables are for features that are available for us
 [2]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=gui
 [3]: https://github.com/datadog/dd-trace-dotnet/releases/latest
 [4]: https://app.datadoghq.com/apm/traces
-[5]: https://www.nuget.org/packages/Datadog.Trace
-[6]: /tracing/custom_instrumentation/dotnet/
-[7]: /getting_started/tagging/unified_service_tagging/
-[8]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations
+[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[6]: https://www.nuget.org/packages/Datadog.Trace
+[7]: /tracing/custom_instrumentation/dotnet/
+[8]: /getting_started/tagging/unified_service_tagging/
+[9]: /tracing/setup_overview/compatibility_requirements/dotnet-framework/#integrations

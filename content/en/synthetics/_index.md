@@ -73,7 +73,7 @@ See [Getting Started with Synthetic Monitoring][12] for instructions on creating
 [7]: /synthetics/api_tests/icmp_tests
 [8]: /synthetics/browser_tests
 [9]: /synthetics/private_locations
-[10]: /synthetics/ci/
+[10]: /synthetics/cicd_testing
 [11]: /synthetics/apm/
 [12]: /getting_started/synthetics
 [13]: /getting_started/synthetics/private_location

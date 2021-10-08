@@ -137,6 +137,12 @@ API テストの実行が設定されているエンドポイントに、プラ�
 
 {{< img src="synthetics/timeout.png" alt="プライベートロケーションがタイムアウトした API テスト" style="width:100%;" >}}
 
+## CI/CD テスト
+
+### CI Results Explorer に CI メタデータが表示されません
+
+API エンドポイントを使用して CI/CD テストの実行をトリガーしているかどうかを確認します。CI Results Explorer に CI メタデータを入力するには、[NPM パッケージ][14]を使用する必要があります。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -154,3 +160,4 @@ API テストの実行が設定されているエンドポイントに、プラ�
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
+[14]: /ja/synthetics/cicd_testing/?tab=apitest#cli-usage

@@ -3,7 +3,7 @@ title: Utiliser DogStatsD via un socket de domaine Unix
 kind: documentation
 description: Documentation relative à l'utilisation de DogStatsD via un socket de domaine Unix
 aliases:
-  - /fr/developers/metrics/unix_socket/
+  - /fr/metrics/unix_socket/
 further_reading:
   - link: developers/dogstatsd
     tag: Documentation
@@ -228,8 +228,8 @@ Pour découvrir comment créer des options d'implémentation supplémentaires, r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[2]: /fr/developers/metrics/custom_metrics/
+[1]: /fr/metrics/dogstatsd_metrics_submission/
+[2]: /fr/metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

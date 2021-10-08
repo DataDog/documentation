@@ -79,7 +79,7 @@ Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 
 [1]: /fr/tracing/trace_retention_and_ingestion
 [2]: /fr/account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/fr/developers/metrics/#overview
+[3]: https://docs.datadoghq.com/fr/metrics/#overview
 [4]: /fr/monitors/monitor_types/anomaly/#overview
 [5]: /fr/tracing/trace_search_and_analytics/
 [6]: /fr/tracing/trace_search_and_analytics/query_syntax/#analytics-query
@@ -87,4 +87,4 @@ Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /fr/tracing/trace_search_and_analytics/query_syntax/
-[11]: /fr/developers/metrics/#naming-metrics
+[11]: /fr/metrics/#naming-metrics

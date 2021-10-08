@@ -105,6 +105,6 @@ Pour toute question technique, contactez [l'assistance Datadog][3].
 Pour toute question concernant la facturation, contactez votre [chargé de compte][4].
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /fr/developers/metrics/custom_metrics/
+[2]: /fr/metrics/custom_metrics/
 [3]: /fr/help/
 [4]: mailto:success@datadoghq.com

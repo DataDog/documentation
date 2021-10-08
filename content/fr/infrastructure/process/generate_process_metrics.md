@@ -75,5 +75,5 @@ Une fois créées, vous pouvez utiliser les métriques de distribution agrégée
 [1]: https://forms.gle/Bo664kv8Y1Avmzmg6
 [2]: https://app.datadoghq.com/process?view=metrics
 [3]: https://app.datadoghq.com/process
-[4]: /fr/developers/metrics/custom_metrics/
+[4]: /fr/metrics/custom_metrics/
 [5]: /fr/dashboards/correlations/

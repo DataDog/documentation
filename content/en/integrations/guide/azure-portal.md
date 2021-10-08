@@ -2,7 +2,7 @@
 title: Datadog in the Azure Portal
 kind: guide
 further_reading:
-  - link: "integration/azure"
+  - link: "/integrations/azure/"
     tag: "Documentation"
     text: "Azure integration"
   - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"

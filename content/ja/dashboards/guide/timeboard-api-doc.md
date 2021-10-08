@@ -1,5 +1,5 @@
 ---
-title: タイムボード API ガイド
+title: タイムボード API
 kind: ガイド
 aliases:
   - /ja/graphing/faq/timeboard-api-doc

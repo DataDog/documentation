@@ -12,15 +12,20 @@ further_reading:
 
 ## Overview
 
-Metric units are displayed automatically in places such as on timeseries graphs, query value widgets, and top lists.
+Metric units are displayed in places such as on timeseries graphs, query value widgets, and top lists.
 
-{{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units"  style="width:100%;">}}
+{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis dash metric units"  style="width:100%;">}}
 
-On timeseries graphs, you can hover your cursor over any graph to see the relevant units. The raw data is automatically converted to readable display units such as fractions of a second (ms) and millions of bytes per second (MiB/s).
+On timeseries graphs, you can hover your cursor over any graph to see the relevant units. YUnits must be specified manually, but if no unit is set, order-of-magnitude notation (for example: K, M, and G for thousands, millions, and billions, respectively) is used. If a unit is set, the raw data is automatically converted to readable display units using their relevant orders of magnitude.
+
+For example, if you have a data point that is 3,000,000,000:
+
+* If you haven't specified a unit for this data point, "3G" is displayed.
+* If you specified this data point is in bytes, "3GB" is displayed.
 
 Units are also displayed at the bottom of timeboard graphs, and metric descriptions are available by selecting **Metrics Info** from the gear dropdown:
 
-{{< img src="developers/metrics/units/annotated_ops.png" alt="Annotated ops"  style="width:100%;">}}
+{{< img src="metrics/units/annotated_ops.png" alt="Annotated ops"  style="width:100%;">}}
 
 To change a metric unit, navigate to the [metric summary][1] page and select a metric. Click **Edit** under **Metadata** and select a unit, such as `bit` or `byte` from the dropdown menu.
 

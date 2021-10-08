@@ -172,7 +172,7 @@ Traditional backend and frontend monitoring are siloed and require separate work
 This section walks you through the steps to enable these types of correlations:
 
 * [Correlate RUM views with traces](#correlate-rum-views-with-traces)
-* [Leverage the trace correlation to troubleshoot Synthetic tests](#leverage-the-trace-correlation-to-troubleshoot-synthetic-tests).
+* [Leverage the trace correlation to troubleshoot Synthetic tests](#leverage-trace-correlation-to-troubleshoot-synthetic-tests).
 
 ### Correlate RUM views with traces
 

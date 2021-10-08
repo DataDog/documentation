@@ -58,8 +58,6 @@ get '/' do
 end
 ```
 
-More details are available in the [Rack recipes documentation][6].
-
 This logger uses the common Apache Access format and generates logs in the following format:
 
 ```text
@@ -77,7 +75,7 @@ _Available for Agent versions >6.0_
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `sinatra.d/conf.yaml` file at the root of your [Agent's configuration directory][7] to start collecting your Sinatra application logs:
+2. Add this configuration block to your `sinatra.d/conf.yaml` file at the root of your [Agent's configuration directory][6] to start collecting your Sinatra application logs:
 
     ```yaml
     logs:
@@ -89,13 +87,12 @@ _Available for Agent versions >6.0_
 
       Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Restart the Agent][8]
+3. [Restart the Agent][7]
 
 [1]: http://sinatrarb.com
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
-[6]: http://recipes.sinatrarb.com/p/middleware/rack_commonlogger
-[7]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: /agent/guide/agent-commands/#restart-the-agent
+[6]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /agent/guide/agent-commands/#restart-the-agent
