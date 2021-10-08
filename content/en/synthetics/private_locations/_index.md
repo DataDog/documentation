@@ -601,7 +601,7 @@ Although it's important to initially add resources that are consistent with the 
 
 Private locations come with a set of out of the box [metrics][LINK] allowing you to keep track of your private location health at a high level. You can visualize these metrics in the side panel of each private location listed on your [Settings][LINK] page or graph these metrics in [dashboards][LINK], like any other Datadog metric.
 
-[TODO] The table available on individual private location side panels lists all workers that are currently running as well as the version they're running. You can refer to that dashboard to get a sense of the number of containers that would need to pull the new version of the image.
+The table available on individual private location side panels lists all workers reporting as well as the version they're running. You can refer to that dashboard to get a sense of the number of containers that would need to pull the new version of the image.
 
 [ADD SCREENSHOT]
 
