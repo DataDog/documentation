@@ -497,7 +497,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/testApp.logs: >-
           [{
             "source": "java",
             "service": "testApp",
