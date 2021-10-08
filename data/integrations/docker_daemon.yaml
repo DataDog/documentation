@@ -1085,3 +1085,12 @@ docker_daemon:
   per_unit_name: ''
   short_name: thread.limit
   unit_name: thread
+- description: Time since the container was started
+  integration: docker
+  interval: ''
+  metric_name: docker.uptime
+  metric_type: gauge
+  orientation: '0'
+  per_unit_name: ''
+  short_name: uptime
+  unit_name: second
