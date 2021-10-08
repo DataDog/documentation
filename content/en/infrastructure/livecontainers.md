@@ -501,7 +501,7 @@ Container Scrubbing is a feature to srub sensitive words in container yaml file.
 * **credentials**
 * **stripetoken**
 
-The custom senstive words could be set as well by provide the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` a list of words. And it won't overwitre the default ones. 
+The custom senstive words could be set as well by providing the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` a list of words. And it won't overwitre the default ones. 
 
 ##### Usage
 
