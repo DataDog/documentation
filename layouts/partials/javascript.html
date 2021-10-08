@@ -9,8 +9,8 @@
 {{ $jsParamsDict := (dict "params" (dict "CI_COMMIT_SHORT_SHA" $CI_COMMIT_SHORT_SHA)) }}
 
 {{ $devOptions := dict "defines" $defines "sourceMap" "external" }}
-{{ $productionOptions := dict "defines" $defines "sourceMap" "external" "minify" true }}
-{{ $options := cond $isLocalServer $devOptions $productionOptions }}
+{{ $liveOptions := dict "defines" $defines "sourceMap" "external" "minify" true }}
+{{ $options := cond $isLocalServer $devOptions $liveOptions }}
 {{ $jQuery := resources.Get "scripts/vendor/jquery.min.js" }}
 {{ $popperJS := resources.Get "scripts/vendor/popper.min.js" }}
 {{ $bootstrapJS := resources.Get "scripts/vendor/bootstrap.min.js" }}
