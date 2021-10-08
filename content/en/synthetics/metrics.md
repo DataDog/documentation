@@ -32,7 +32,7 @@ Metrics starting with:
 
 ### General metrics
 
-{{< get-metrics-from-git "synthetics" "datadog.estimated_usage.synthetics synthetics.test_runs" >}}
+{{< get-metrics-from-git "synthetics" "synthetics.test_runs" >}}
 
 #### Estimated usage
 

@@ -186,3 +186,5 @@ static/images/integrations_logos/2020w2.pdf
 
 # Generated resources from Hugo Pipes
 resources/_gen/
+data/integrations/docker_daemon.yaml
+data/integrations/docker_daemon.yaml
