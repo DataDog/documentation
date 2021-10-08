@@ -487,6 +487,26 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [the Helm Chart repo][17] for more details.
 
+#### Container Scrubbing
+Container Scrubbing is a feature to srub sensitive words in container yaml file. This is enabled by default in Helm chart and some deault sensetive words have been predefined :
+* **password**
+* **passwd**
+* **mysql_pwd**
+* **access_token**
+* **auth_token**
+* **api_key**
+* **apikey**
+* **pwd**
+* **secret**
+* **credentials**
+* **stripetoken**
+
+The custom senstive words could be set as well by provide the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` a list of words. And it won't overwitre the default ones. 
+
+##### Usage
+
+For example, if there is **password** in container's yaml file, it will overwrite `password <password>` to `password ********`, `password=<password>` to `password=********`,`password: <password>` to `password: ********` or even `password::::== <password>` to `password::::== ********`, depending on different situtaions. But it won't scrub the path conatinning sensitive words. For example, it won't overwrite `/etc/vaultd/secret/haproxy-crt.pem` to `/etc/vaultd/secret/******` .
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
