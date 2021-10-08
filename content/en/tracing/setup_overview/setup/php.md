@@ -779,7 +779,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-Try againg the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
+Try adding the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
 
 ```
 apt install -y php7.2-fpm-dbgsym
