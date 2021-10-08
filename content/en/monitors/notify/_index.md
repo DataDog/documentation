@@ -48,13 +48,7 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 ### Renotify
 
-Enable monitor renotification (optional) to remind your team that a problem is not solved.
-
-  {{< img src="monitors/notifications/renotify_options.png" alt="Enable renotify" style="width:90%;" >}}
-
-Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
-
-For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
+Enable monitor renotification (optional) to remind your team that a problem is not solved. For critical monitors, you might want to make sure that you do not miss or forget about an incident when the monitor is triggered. When renotification is enabled, status notifications are sent periodically until the monitor recovers.
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
