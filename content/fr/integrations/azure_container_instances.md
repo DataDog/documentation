@@ -8,7 +8,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure\_Container\_Instances."
-doc_link: 'https://docs.datadoghq.com/integrations/azure_container_instances/'
+doc_link: https://docs.datadoghq.com/integrations/azure_container_instances/
 draft: false
 git_integration_title: azure_container_instances
 has_logo: true
