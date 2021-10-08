@@ -840,14 +840,14 @@ components:
       x-enum-varnames:
       - CHECK_STATUS
     ContentEncoding:
-      description: HTTP header used to compress the media-type
+      description: HTTP header used to compress the media-type.
       enum:
       - gzip
       - deflate
       type: string
       x-enum-varnames:
-      - gzip
-      - deflate
+      - GZIP
+      - DEFLATE
     Creator:
       description: Object describing the creator of the shared element.
       properties:
@@ -859,6 +859,7 @@ components:
           type: string
         name:
           description: Name of the creator.
+          nullable: true
           type: string
       readOnly: true
       type: object
@@ -1172,6 +1173,7 @@ components:
           type: string
         description:
           description: Description of the dashboard.
+          nullable: true
           type: string
         id:
           description: Dashboard identifier.
@@ -1696,7 +1698,7 @@ components:
             **Note**: Attributes specifying the duration in `RRULE` are not supported
             (for example, `DTSTART`, `DTEND`, `DURATION`).
 
-            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/supress-alert-with-downtimes/?tab=api)'
+            More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api)'
           example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
           type: string
         type:
@@ -5291,6 +5293,13 @@ components:
       type: string
       x-enum-varnames:
       - USER_AGENT_PARSER
+    MetricContentEncoding:
+      description: HTTP header used to compress the media-type.
+      enum:
+      - deflate
+      type: string
+      x-enum-varnames:
+      - DEFLATE
     MetricMetadata:
       description: Object with all metric related metadata.
       properties:
@@ -5373,6 +5382,7 @@ components:
         aggr:
           description: Aggregation type.
           example: avg
+          nullable: true
           readOnly: true
           type: string
         display_name:
@@ -5746,7 +5756,7 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notifications/?tab=is_alert#renotify),
+          description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
 
@@ -6443,12 +6453,14 @@ components:
           type: string
         name:
           description: Name of the user.
+          nullable: true
           type: string
         status:
           description: Status of the user.
           type: string
         title:
           description: Title of the user.
+          nullable: true
           type: string
         verified:
           description: Whether the user is verified.
@@ -6765,6 +6777,7 @@ components:
       description: Relative timeframe.
       example:
         live_span: 1h
+      nullable: true
       properties:
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
@@ -8568,13 +8581,12 @@ components:
             y:
               q: system.mem.used
           properties:
+            table:
+              $ref: '#/components/schemas/ScatterplotTableRequest'
             x:
               $ref: '#/components/schemas/ScatterPlotRequest'
             y:
               $ref: '#/components/schemas/ScatterPlotRequest'
-          required:
-          - x
-          - y
           type: object
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -8605,6 +8617,38 @@ components:
       type: string
       x-enum-varnames:
       - SCATTERPLOT
+    ScatterplotDimension:
+      description: Dimension of the Scatterplot.
+      enum:
+      - x
+      - y
+      - radius
+      - color
+      example: radius
+      type: string
+      x-enum-varnames:
+      - X
+      - Y
+      - RADIUS
+      - COLOR
+    ScatterplotTableRequest:
+      description: Scatterplot request containing formulas and functions.
+      properties:
+        formulas:
+          description: List of Scatterplot formulas that operate on queries. **This
+            feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/ScatterplotWidgetFormula'
+          type: array
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+            **This feature is currently in beta.**
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+      type: object
     ScatterplotWidgetAggregator:
       description: Aggregator used for the request.
       enum:
@@ -8620,6 +8664,23 @@ components:
       - MAXIMUM
       - MINIMUM
       - SUM
+    ScatterplotWidgetFormula:
+      description: Formula to be used in a Scatterplot widget query.
+      properties:
+        alias:
+          description: Expression alias.
+          example: my-query
+          type: string
+        dimension:
+          $ref: '#/components/schemas/ScatterplotDimension'
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: func(a) + b
+          type: string
+      required:
+      - formula
+      - dimension
+      type: object
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -10956,6 +11017,8 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
         locations:
           description: Array of locations used to run the test.
           items:
@@ -11213,6 +11276,14 @@ components:
         query:
           description: Query to use for the test.
           type: object
+        servername:
+          description: 'For SSL tests, it specifies on which server you want to initiate
+            the TLS handshake,
+
+            allowing the server to present one of multiple possible certificates on
+
+            the same IP address and TCP port number.'
+          type: string
         shouldTrackHops:
           description: Turns on a traceroute probe to discover all gateways along
             the path to the host destination.
@@ -12238,11 +12309,11 @@ components:
           description: The network host usage by tag(s).
           format: double
           type: number
-        profiled_containers_percentage:
+        profiled_container_percentage:
           description: The percentage of profiled containers usage by tag(s).
           format: double
           type: number
-        profiled_containers_usage:
+        profiled_container_usage:
           description: The profiled container usage by tag(s).
           format: double
           type: number
@@ -13482,8 +13553,8 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
-        dbm_queries_agg_sum:
-          description: Shows the sum of all distinct Database Monitoring normalized
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring normalized
             queries over all hours in the current month for all organizations.
           format: int64
           type: integer
@@ -13716,8 +13787,8 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
-        dbm_queries_agg_sum:
-          description: Shows the sum of all distinct Database Monitoring Normalized
+        dbm_queries_avg_sum:
+          description: Shows the average of all distinct Database Monitoring Normalized
             Queries over all hours in the current month for all organizations.
           format: int64
           type: integer
@@ -14110,7 +14181,7 @@ components:
 
             Learn more on how to use it in
 
-            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
           example: WEBHOOK_NAME
           type: string
         payload:
@@ -14228,7 +14299,7 @@ components:
 
             Learn more on how to use it in
 
-            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+            [monitor notifications](https://docs.datadoghq.com/monitors/notify).'
           example: WEBHOOK_NAME
           type: string
         payload:
@@ -15501,31 +15572,31 @@ paths:
       responses:
         '202':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/IntakePayloadAccepted'
           description: Payload accepted
         '400':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
         '408':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Request timeout
         '413':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
@@ -16596,7 +16667,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - monitors_read
       summary: Get all downtimes
       tags:
       - Downtimes
@@ -16767,7 +16839,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - monitors_read
       summary: Get a downtime
       tags:
       - Downtimes
@@ -20251,7 +20324,7 @@ paths:
 
         - `change_aggr` change, pct_change
 
-        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)
+        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)
 
         - `time_window` last\_#m (between 1 and 2880 depending on the monitor type),
         last\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or
@@ -20589,7 +20662,7 @@ paths:
 
           [1]: https://app.datadoghq.com/monitors/manage
 
-          [2]: /monitors/manage_monitor/#find-the-monitors'
+          [2]: /monitors/manage/#find-the-monitors'
         in: query
         name: query
         required: false
@@ -20676,7 +20749,7 @@ paths:
 
           [1]: https://app.datadoghq.com/monitors/manage
 
-          [2]: /monitors/manage_monitor/#find-the-monitors'
+          [2]: /monitors/manage/#find-the-monitors'
         in: query
         name: query
         required: false
@@ -21906,9 +21979,16 @@ paths:
         100 bytes. However, with the DogStatsD API,\ncompression is applied, which
         reduces the payload size."
       operationId: SubmitMetrics
+      parameters:
+      - description: HTTP header used to compress the media-type.
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/MetricContentEncoding'
       requestBody:
         content:
-          application/json:
+          text/json:
             examples:
               dynamic-points:
                 description: "Post time-series data that can be graphed on Datadog\u2019s
@@ -21928,31 +22008,31 @@ paths:
       responses:
         '202':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/IntakePayloadAccepted'
           description: Payload accepted
         '400':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
         '408':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Request timeout
         '413':
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
@@ -26299,7 +26379,8 @@ tags:
 
     find, and share all of your dashboards with your team and organization.'
   name: Dashboards
-- description: '[Downtiming](https://docs.datadoghq.com/monitors/downtimes) gives
+- description: '[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes)
+    gives
 
     you greater control over monitor notifications by allowing you to globally exclude
 
@@ -26378,10 +26459,10 @@ tags:
     notifies your team when a defined threshold has exceeded.
 
 
-    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/monitor_types/).'
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).'
   externalDocs:
     description: Find out more at
-    url: https://docs.datadoghq.com/monitors/monitor_types/
+    url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
 - description: 'Interact with your notebooks through the API to make it easier to
     organize, find, and
@@ -26439,13 +26520,13 @@ tags:
     - [Read more about Service Check and status codes.][5]
 
 
-    [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
+    [1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert
 
-    [2]: https://docs.datadoghq.com/monitors/monitor_types/process_check/?tab=checkalert
+    [2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
 
-    [3]: https://docs.datadoghq.com/monitors/monitor_types/network/?tab=checkalert
+    [3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert
 
-    [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert
+    [4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert
 
     [5]: https://docs.datadoghq.com/developers/service_checks/'
   name: Service Checks

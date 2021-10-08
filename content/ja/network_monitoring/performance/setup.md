@@ -191,7 +191,7 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```
 3. [Agent を再起動します][2]。
 
-   PowerShell (`powershell.exe`) の場合: 
+   PowerShell (`powershell.exe`) の場合:
     ```shell
     restart-service -f datadogagent
     ```
@@ -291,10 +291,10 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                     # (...)
                     - name: system-probe
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       imagePullPolicy: Always
                       securityContext:
                           capabilities:
@@ -364,7 +364,7 @@ $ docker run -e DD_API_KEY="<DATADOG_API_キー>" \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
 --cap-add=IPC_LOCK \
-datadog/agent:latest
+gcr.io/datadoghq/agent:latest
 ```
 
 `<API_キー>` を、ご使用の [Datadog API キー][1]に置き換えます。
@@ -376,7 +376,7 @@ version: '3'
 services:
   ..
   datadog:
-    image: "datadog/agent:latest"
+    image: "gcr.io/datadoghq/agent:latest"
     environment:
        DD_SYSTEM_PROBE_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'

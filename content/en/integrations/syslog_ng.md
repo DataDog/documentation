@@ -98,7 +98,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
         destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
-    More information about the TLS parameters and possibilities for syslog-ng available in the [official documentation][1].
+    More information about the TLS parameters and possibilities are available in the [syslog-ng Open Source Edition Administration Guide][1].
 
 5. (Optional) Set the source on your logs. To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
@@ -185,7 +185,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
         destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
         ```
 
-    More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][1].
+    More information about the TLS parameters and possibilities are available in the [syslog-ng Open Source Edition Administration Guide][1].
 
 5. Restart syslog-ng.
 

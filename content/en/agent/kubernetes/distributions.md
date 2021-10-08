@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This section aims to document specificites and to provide good base configuration for all major Kubernetes distributions.
+This section aims to document specifics and to provide good base configuration for all major Kubernetes distributions.
 These configuration can then be customized to add any Datadog feature.
 
 * [AWS Elastic Kubernetes Service (EKS)](#EKS)
@@ -184,7 +184,7 @@ GKE can be configured in two different mode of operation:
 - **Standard**: You manage the cluster's underlying infrastructure, giving you node configuration flexibility.
 - **Autopilot**: GKE provisions and manages the cluster's underlying infrastructure, including nodes and node pools, giving you an optimized cluster with a hands-off experience.
 
-Depending of your cluster the operation mode, the Datadog agent needs to be configured differently.
+Depending on the operation mode of your cluster, the Datadog Agent needs to be configured differently.
 
 ### Standard
 

@@ -23,7 +23,7 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 : Measures the number of times a function is invoked in response to an event or invocation API call.
 
 `aws.lambda.enhanced.errors`          
-: Measures the number of invocations that failed due to errors in the function (response code 4XX).
+: Measures the number of invocations that failed due to errors in the function.
 
 `aws.lambda.enhanced.max_memory_used` 
 : Measures the maximum amount of memory (mb) used by the function.

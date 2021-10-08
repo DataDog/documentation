@@ -160,7 +160,7 @@ If you have access to the [custom role feature][12], add your user to any custom
 [5]: /synthetics/search/#search
 [7]: /monitors/notifications/?tab=is_alert#notification
 [8]: https://www.markdownguide.org/basic-syntax/
-[9]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/settings/#global-variables
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles

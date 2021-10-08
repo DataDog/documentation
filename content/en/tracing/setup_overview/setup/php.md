@@ -330,27 +330,27 @@ The table below specifies the default service names for each integration. Change
 
 Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 
-| Integration       | Service Name      |
-|-------------------|-------------------|
-| CakePHP           | `cakephp`         |
-| CodeIgniter       | `codeigniter`     |
-| cURL              | `curl`            |
-| ElasticSearch     | `elasticsearch`   |
-| Eloquent          | `eloquent`        |
-| Guzzle            | `guzzle`          |
-| Laravel           | `laravel`         |
-| Lumen             | `lumen`           |
-| Memcached         | `memcached`       |
-| Mongo             | `mongo`           |
-| Mysqli            | `mysqli`          |
-| PDO               | `pdo`             |
-| PhpRedis          | `phpredis`        |
-| Predis            | `predis`          |
-| Slim              | `slim`            |
-| Symfony           | `symfony`         |
-| WordPress         | `wordpress`       |
-| Yii               | `yii`             |
-| ZendFramework     | `zendframework`   |
+| Integration   | Service Name    |
+| ------------- | --------------- |
+| CakePHP       | `cakephp`       |
+| CodeIgniter   | `codeigniter`   |
+| cURL          | `curl`          |
+| ElasticSearch | `elasticsearch` |
+| Eloquent      | `eloquent`      |
+| Guzzle        | `guzzle`        |
+| Laravel       | `laravel`       |
+| Lumen         | `lumen`         |
+| Memcached     | `memcached`     |
+| Mongo         | `mongo`         |
+| Mysqli        | `mysqli`        |
+| PDO           | `pdo`           |
+| PhpRedis      | `phpredis`      |
+| Predis        | `predis`        |
+| Slim          | `slim`          |
+| Symfony       | `symfony`       |
+| WordPress     | `wordpress`     |
+| Yii           | `yii`           |
+| ZendFramework | `zendframework` |
 
 #### Map resource names to normalized URI
 
@@ -363,14 +363,14 @@ Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REG
 For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
-|:-----------------------------------|:--------------|
+| :--------------------------------- | :------------ |
 | **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
 | **POST** request to `/bar?foo=bar` | `POST /bar`   |
 
 Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
 
 | URL (GET request)                              | Resource Name      |
-|:-----------------------------------------------|:-------------------|
+| :--------------------------------------------- | :----------------- |
 | `/user/123/show`                               | `GET /user/?/show` |
 | `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
@@ -383,8 +383,8 @@ You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLE
 There are a few cases that are not covered by the automatic normalization that is applied.
 
 | URL (GET request)                | Expected Resource Name        |
-|:---------------------------------|:------------------------------|
-| `/using/prefix/id123/for/id`    | `GET /using/prefix/?/for/id`  |
+| :------------------------------- | :---------------------------- |
+| `/using/prefix/id123/for/id`     | `GET /using/prefix/?/for/id`  |
 | `/articles/slug-of-title`        | `GET /articles/?`             |
 | `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
 | `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
@@ -399,7 +399,7 @@ There are two classes of scenarios that are not covered by automatic normalizati
 This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
 | URL                          | regex     | Expected Resource Name       |
-|:-----------------------------|:----------|:-----------------------------|
+| :--------------------------- | :-------- | :--------------------------- |
 | `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
 
 Note that because the format of this variable is a CSV, the comma character `,` is not escaped and cannot be used in your regular expressions.
@@ -419,7 +419,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ## Tracing CLI scripts
 
-### Sort-running CLI scripts
+### Short-running CLI scripts
 
 A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
 

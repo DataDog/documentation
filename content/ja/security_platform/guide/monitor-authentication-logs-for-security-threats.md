@@ -4,7 +4,7 @@ kind: ガイド
 aliases:
   - /ja/security_monitoring/guide/monitor-authentication-logs-for-security-threats/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/'
+  - link: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
     tag: ブログ
     text: モニター認証ログに関する詳細
 ---

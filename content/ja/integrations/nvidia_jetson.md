@@ -12,7 +12,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md
 display_name: Nvidia Jetson
 draft: false
 git_integration_title: nvidia_jetson

@@ -6,13 +6,13 @@ aliases:
     - /monitors/monitor_types/composite
 description: "Alert on an expression combining multiple monitors"
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -182,4 +182,4 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 
 [1]: https://app.datadoghq.com/monitors#create/composite
 [2]: /monitors/create/configuration/#advanced-alert-conditions
-[3]: /monitors/notifications/
+[3]: /monitors/notify/

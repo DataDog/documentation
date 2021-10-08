@@ -31,16 +31,16 @@ To create your first template variable in the dashboard, click **Add Template Va
 
 A template variable is defined by:
 
-* **Name**: A unique name for the template variable. This name is used to filter content on your dashboard.
 * **Tag or Attribute**:
     * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
     * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
-* **Default Value**:
-    The default value for your template variable tag or attribute.
+* **Name**: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
+* **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
+* **Available Values**: The tag or attribute values available for selection in the dropdown. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable is used in one out of two graphs:
+After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
 
-{{< img src="dashboards/template_variables/stats_tv.png" alt="statistic TV" style="width:85%;">}}
+{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
 
 [Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
@@ -84,6 +84,8 @@ After the widget is saved, the value of the template variable is the one selecte
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
+To include just the value in the query, use the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env`, use `environment:$env.value`.
+
 #### Associated template variables
 When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated by taking into consideration the other template variable values selected on the page, and seamlessly identifies the related values without any configuration.
 
@@ -91,9 +93,11 @@ When selecting a template variable value, the **Associated Values** and **Other 
 
 #### Text
 
-For text based widgets, you can display a template variable name and value with `$<TEMPLATE_VARIABLE_NAME>` or display just the value with `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env` and a selected value of `dev`:
+For text based widgets, you can display a template variable's tag/attribute and value with `$<TEMPLATE_VARIABLE_NAME>`, just its key with `$<TEMPLATE_VARIABLE_NAME>.key`, or just its value with `$<TEMPLATE_VARIABLE_NAME>.value`. This can come after any non-alphanumeric character, and can be followed by whitespace or any of the following characters: `#`, `$`, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, and `?`.
 
-* `$env` displays `env:dev`
+For example, with a template variable named `env`, with tag/attribute `environment`, and with a selected value of `dev`:
+* `$env` displays `environment:dev`
+* `$env.key` displays `environment`
 * `$env.value` displays `dev`
 
 ### Events overlay

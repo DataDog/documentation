@@ -8,7 +8,7 @@ further_reading:
     - link: '/database_monitoring/troubleshooting/'
       tag: 'Documentation'
       text: 'Troubleshooting'
-    - link: '/blog/database-performance-monitoring-datadog/'
+    - link: 'https://www.datadoghq.com/blog/database-performance-monitoring-datadog/'
       tag: 'Blog'
       text: 'Database performance monitoring with Datadog'
 ---

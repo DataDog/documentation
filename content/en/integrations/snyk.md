@@ -52,7 +52,7 @@ snyk auth ”$YOUR_SNYK_TOKEN”
 snyk test --print-deps --json > deps.json
 {{< /code-block >}}
 
-If you have a repo with multiple projects, add `--file=<package file>` to the Snyk command. For example, `--file=<pom.xml>`. See the [Snyk documentation][9] for more information.
+If you have a repo with multiple projects, add `--file=<package file>` to the Snyk command. For example, `--file=<pom.xml>`. See the [Snyk CLI reference][9] for more information.
 
 2. For the most accurate analysis, add version and service tags on your deployment. See [Unified Service Tagging][10] for more information.
 

@@ -5,6 +5,9 @@ further_reading:
     - link: 'serverless/custom_metrics'
       tag: 'Documentation'
       text: 'Submitting Custom Metrics from AWS Lambda'
+    - link: 'https://www.datadoghq.com/blog/aws-graviton2-lambda-monitoring/'
+      tag: 'Blog'
+      text: 'AWS Lambda Functions running on AWS Graviton2 processors'
 aliases:
     - /serverless/datadog_lambda_library/extension/
 ---

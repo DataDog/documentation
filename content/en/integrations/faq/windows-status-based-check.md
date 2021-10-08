@@ -34,5 +34,5 @@ If you are looking at configuring the Windows Event Log Integration, follow this
 
 [1]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings#integrations/windows_service
-[3]: /monitors/monitor_types/integration/
+[3]: /monitors/create/types/integration/
 [4]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs/

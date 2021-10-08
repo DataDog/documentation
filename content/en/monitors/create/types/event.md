@@ -5,13 +5,13 @@ description: "Monitor events gathered by Datadog"
 aliases :
     - /monitors/monitor_types/event
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -143,4 +143,4 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 [2]: /logs/explorer
 [3]: /help/
 [4]: /monitors/create/configuration/#advanced-alert-conditions
-[5]: /monitors/notifications/
+[5]: /monitors/notify/

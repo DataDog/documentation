@@ -5,13 +5,13 @@ description: "Check the status of TCP/HTTP endpoints."
 aliases:
 - /monitors/monitor_types/network
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor."
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -98,5 +98,5 @@ Create a network metric monitor by following the instructions in the [metric mon
 [5]: /monitors/create/configuration/#no-data
 [6]: /monitors/create/configuration/#auto-resolve
 [7]: /monitors/create/configuration/#new-group-delay
-[8]: /monitors/notifications/
+[8]: /monitors/notify/
 [9]: https://app.datadoghq.com/monitors/manage

@@ -113,8 +113,8 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 [5]: /logs/indexes#exclusion-filters
 [6]: /logs/archives
 [7]: /logs/logs_to_metrics/
-[8]: /monitors/monitor_types/log/
-[9]: /monitors/monitor_types/log/#notifications
+[8]: /monitors/create/types/log/
+[9]: /monitors/create/types/log/#notifications
 [10]: /logs/explorer/live_tail/
 [11]: /agent/
 [12]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs

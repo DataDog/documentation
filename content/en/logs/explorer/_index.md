@@ -210,5 +210,5 @@ At any moment, and depending on your current aggregation, **export** your explor
 [6]: /logs/logs_to_metrics
 [7]: /logs/log_configuration/processors/#grok-parser
 [8]: /dashboards/
-[9]: /monitors/monitor_types/log/
+[9]: /monitors/create/types/log/
 [10]: /integrations/#cat-notification

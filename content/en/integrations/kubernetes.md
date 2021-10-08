@@ -12,7 +12,7 @@ aliases:
   - /integrations/kube_proxy
   - /integrations/Kubernetes
 public_title: Datadog-Kubernetes Integration
-short_description: 'Capture Pod scheduling events, track the status of your Kublets, and more'
+short_description: 'Capture Pod scheduling events, track the status of your Kubelets, and more'
 dependencies:
   ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md']
 categories:
@@ -46,7 +46,7 @@ Get metrics and logs from kubernetes service in real time to:
 
 For Kubernetes, it's recommended to run the Agent as a container in your cluster.
 
-**[Refer to the dedicated Kubernetes documentation to deploy the Agent in your Kubernetes cluster][1]**
+**[See the dedicated Kubernetes documentation to deploy the Agent in your Kubernetes cluster][1]**.
 
 **Note**: You can also [run the Datadog Agent on your host][2] and configure it to gather your Kubernetes metrics.
 
