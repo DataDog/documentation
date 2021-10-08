@@ -487,8 +487,9 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [the Helm Chart repo][17] for more details.
 
-#### Container Scrubbing
-Container Scrubbing is a feature to srub sensitive words in container yaml file. This is enabled by default in Helm chart and some deault sensetive words have been predefined :
+#### Container scrubbing
+To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
+
 * **password**
 * **passwd**
 * **mysql_pwd**
@@ -501,11 +502,18 @@ Container Scrubbing is a feature to srub sensitive words in container yaml file.
 * **credentials**
 * **stripetoken**
 
-The custom senstive words could be set as well by providing the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` a list of words. And it won't overwitre the default ones. 
+You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. 
 
-##### Usage
+For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
-For example, if there is **password** in container's yaml file, it will overwrite `password <password>` to `password ********`, `password=<password>` to `password=********`,`password: <password>` to `password: ********` or even `password::::== <password>` to `password::::== ********`, depending on different situtaions. But it won't scrub the path conatinning sensitive words. For example, it won't overwrite `/etc/vaultd/secret/haproxy-crt.pem` to `/etc/vaultd/secret/******` .
+{{< code-block disable_copy="true" >}}
+password <MY_PASSWORD>
+password=<MY_PASSWORD>
+password: <MY_PASSWORD>
+password::::== <MY_PASSWORD>
+{{< /code-block >}}
+
+ However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/secret/******` even though `secret` is a sensitive word.
 
 ## Further reading
 
