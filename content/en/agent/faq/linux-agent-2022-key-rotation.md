@@ -44,8 +44,8 @@ For hosts running older versions of the install methods listed above or older ve
 Run the following commands on the host:
 
 ```bash
-$ curl -o /tmp/DATADOG_APT_KEY_F14F620E.public https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
-$ sudo apt-key add /tmp/DATADOG_APT_KEY_F14F620E.public
+$ curl -o /tmp/DATADOG_APT_KEY_F14F620E https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
+$ sudo apt-key add /tmp/DATADOG_APT_KEY_F14F620E
 ```
 
 {{% /tab %}}
@@ -54,8 +54,8 @@ $ sudo apt-key add /tmp/DATADOG_APT_KEY_F14F620E.public
 Run the following commands on the host:
 
 ```
-$ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
-$ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915.public
+$ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915 https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+$ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 ```
 
 {{% /tab %}}
