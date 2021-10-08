@@ -506,7 +506,7 @@ You can set additional sensitive words by providing a list of words to the envir
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
-{{< code-block disable_copy="true" >}}
+{{< code-block lang="text" disable_copy="true" >}}
 password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
