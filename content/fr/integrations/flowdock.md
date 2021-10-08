@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et graphiques Datadog sur les flux de votre équipe.
-doc_link: https://docs.datadoghq.com/integrations/flowdock/
+doc_link: 'https://docs.datadoghq.com/integrations/flowdock/'
 draft: false
 git_integration_title: flowdock
 has_logo: true

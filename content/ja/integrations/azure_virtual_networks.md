@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Virtual Network のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_virtual_networks/'
+doc_link: https://docs.datadoghq.com/integrations/azure_virtual_networks/
 draft: false
 git_integration_title: azure_virtual_networks
 has_logo: true
@@ -30,7 +30,12 @@ Azure Virtual Network からメトリクスを取得して、以下のことを�
 * 利用可能なアドレス数とサブネット内に割り当てられているアドレス数を追跡。
 * 肝心な時にアドレス空間が不足することを防止。
 
+**このインテグレーションによるメトリクスは、Azure Monitor からは利用できません**。Datadog は Azure のメタデータ API を照会し、応答を時系列データポイントに変換することで、これらを生成します。これらは、Azure インテグレーションからの標準メトリクスとして Datadog で提供されます。
+
 ## セットアップ
+
+**注**: ゲートウェイサブネットの使用量は Azure ではサポートされておらず、使用可能なアドレス空間と割り当てられたアドレス空間の双方について (-1) の値が返されます。ゲートウェイサブネットを含む仮想ネットワークの使用量を集計する場合は、この点を考慮するようにしてください。
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。

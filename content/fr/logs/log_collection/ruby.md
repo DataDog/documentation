@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /fr/logs/languages/ruby
 further_reading:
-  - link: https://github.com/roidrage/lograge
+  - link: 'https://github.com/roidrage/lograge'
     tag: Github
     text: Documentation Lograge
-  - link: /logs/log_configuration/processors
+  - link: logs/processing
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/faq/log-collection-troubleshooting-guide/
+  - link: /logs/faq/log-collection-troubleshooting-guide
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
@@ -106,9 +106,11 @@ Cette section décrit les étapes de configuration minimales requises pour trans
 
 ## Concepts avancés
 
-### Associer vos logs à vos traces
+### Ajouter des identifiants de trace à vos logs
 
-Si l'APM est activée pour cette application, vous pouvez améliorer la corrélation entre vos logs et vos traces d'application [en suivant les instructions de journalisation Ruby pour l'APM][7] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
+Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][7] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
+
+[Configurez ensuite l'Agent Datadog](#configurez-votre-agent-datadog) de façon à collecter les logs Ruby à partir du fichier.
 
 ### Conseils pour la journalisation dans votre application
 
@@ -137,7 +139,7 @@ Le hash sera converti au format JSON et vous pourrez alors analyser l'utilisateu
 }
 ```
 
-### Configuration de journalisation suggérée pour RocketPants
+### Configuration de journalisation suggérée de RocketPant
 
 Dans le fichier `config/initializers/lograge_rocketpants.rb` (variable selon votre projet) :
 
@@ -159,7 +161,7 @@ if app.config.lograge.enabled
 end
 ```
 
-### Configuration de journalisation suggérée pour Grape
+### Configuration de journalisation suggérée de Grape
 
 Ajoutez le GEM grape_logging :
 
@@ -191,9 +193,9 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[2]: /fr/logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
-[5]: /fr/agent/logs/
+[5]: /fr/agent/logs
 [6]: /fr/agent/guide/agent-commands/#restart-the-agent
-[7]: /fr/tracing/connect_logs_and_traces/ruby/
+[7]: /fr/tracing/connect_logs_and_traces/ruby
