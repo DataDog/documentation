@@ -1,10 +1,10 @@
 ---
 title: TCP Tests
 kind: documentation
-description: Simulate TCP connections on your hosts from specific connections
+description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test
-  - /synthetics/tcP_check
+  - /synthetics/tcp_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
