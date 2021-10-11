@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md'
 display_name: TCP
 draft: false
 git_integration_title: tcp_check
@@ -120,15 +120,13 @@ TCP チェックには、イベントは含まれません。
 {{< get-service-checks-from-git "tcp_check" >}}
 
 
-**注:** このサービスチェックにアラートを設定するには、[ネットワークモニター][4]を作成します。
-
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/help/
