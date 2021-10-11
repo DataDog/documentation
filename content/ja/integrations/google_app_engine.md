@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。
-doc_link: https://docs.datadoghq.com/integrations/google_app_engine/
+doc_link: 'https://docs.datadoghq.com/integrations/google_app_engine/'
 draft: false
 git_integration_title: google_app_engine
 has_logo: true
@@ -37,11 +37,11 @@ Datadog にカスタムメトリクスを送信することもできます。
 
 ### ログの収集
 
-Google App Engine のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google App Engine のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
 
-これが完了したら、Google App Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google App Engine のログを Stackdriver から Pub/Sub へエクスポートします。
 
-1. [Google Cloud Logging のページ][3]に移動し、Google App Engine のログを絞り込みます。
+1. [Stackdriver のページ][3]に移動し、Google App Engine のログを絞り込みます。
 2. **Create Export** をクリックし、シンクに名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。

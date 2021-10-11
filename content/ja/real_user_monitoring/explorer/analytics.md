@@ -6,7 +6,7 @@ aliases:
   - /ja/real_user_monitoring/rum_analytics
   - /ja/real_user_monitoring/analytics
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-geomaps/
+  - link: 'https://www.datadoghq.com/blog/datadog-geomaps/'
     tag: ブログ
     text: ジオマップを使用して、場所ごとにアプリデータを視覚化する
   - link: /real_user_monitoring/explorer/search/
