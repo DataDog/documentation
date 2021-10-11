@@ -13,6 +13,7 @@ further_reading:
 
 <div class="alert alert-warning">
 The Enrichment Tables feature is currently in public beta. There are no billing implications for defining and querying enrichment tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+During the beta, there is a limit of 100 enrichment tables per account.
 </div>
 
 ## Overview
@@ -29,6 +30,9 @@ Define new entities in Datadog like customer details, service names and informat
 Click **New Enrichment Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
 {{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
+
+**Note**: The manual CSV upload method supports files up to 5MB
+
 {{% /tab %}}
 
 {{% tab "AWS S3 upload" %}}
@@ -62,6 +66,8 @@ To update enrichment tables from S3, Datadog uses the IAM role in your AWS accou
 Click **New Enrichment Table +**, then add a name, select AWS S3, fill out all fields, click import, and define the primary key for lookups.
 
 {{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
+
+**Note**: The upload from a S3 bucket method supports files up to 3GB
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
