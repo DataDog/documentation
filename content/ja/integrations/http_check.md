@@ -15,7 +15,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/http_check/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
 display_name: HTTP
 draft: false
 git_integration_title: http_check
@@ -115,9 +115,11 @@ HTTP チェックにはイベントは含まれません。
 
 `http.ssl_cert` を無効にするには、`check_certificate_expiration` を false に設定します。
 
+**注:** これらのサービスチェックにアラートを設定するには、[ネットワークモニター][11]を作成します。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -129,4 +131,5 @@ HTTP チェックにはイベントは含まれません。
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/http_check/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/http_check/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
+[12]: https://docs.datadoghq.com/ja/help/

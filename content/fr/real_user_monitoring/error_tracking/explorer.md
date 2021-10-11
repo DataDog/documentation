@@ -56,4 +56,4 @@ Chaque événement généré reçoit automatiquement les tags de version, de ser
 
 
 [1]: /fr/events
-[2]: /fr/monitors/create/types/event/
+[2]: /fr/monitors/monitor_types/event/

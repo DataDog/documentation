@@ -9,7 +9,7 @@ further_reading:
   - link: /developers/community/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
+  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
     tag: GitHub
     text: DogStatsD ソースコード
 aliases:
@@ -173,7 +173,7 @@ $statsd->event('An error occurred.',
   );
 ```
 
-DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
+DogStatsD-PHP ライブラリを使用すると、イベントを TCP を通じて直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
 
 ```php
 <?php

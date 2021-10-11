@@ -5,7 +5,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Queue Storage のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/azure_queue_storage/'
+doc_link: https://docs.datadoghq.com/integrations/azure_queue_storage/
 draft: false
 git_integration_title: azure_queue_storage
 has_logo: true

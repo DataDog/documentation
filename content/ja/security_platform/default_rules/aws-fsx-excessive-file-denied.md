@@ -11,7 +11,7 @@ rule_category:
 scope: amazon-fsx
 security: attack
 source: amazon-fsx
-tactic: TA007-discovery
+tactic: TA0007-discovery
 technique: T1083-file-and-directory-discovery
 title: AWS FSx 過度のファイル拒否
 type: security_rules

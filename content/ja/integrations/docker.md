@@ -4,13 +4,13 @@ categories:
 ddtype: check
 dependencies: []
 description: Datadog を使用した Docker メトリクスの監視
-doc_link: 'https://docs.datadoghq.com/integrations/docker/'
+doc_link: https://docs.datadoghq.com/integrations/docker/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/monitor-kubernetes-docker/'
+  - link: https://www.datadoghq.com/blog/monitor-kubernetes-docker/
     tag: ブログ
     text: Datadog を使用した Kubernetes と Docker の監視方法
-  - link: 'https://www.datadoghq.com/blog/docker-logging/'
+  - link: https://www.datadoghq.com/blog/docker-logging/
     tag: ブログ
     text: Docker ロギングのベストプラクティス
 git_integration_title: docker

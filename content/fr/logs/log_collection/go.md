@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /fr/logs/languages/go
 further_reading:
-  - link: https://www.datadoghq.com/blog/go-logging/
+  - link: 'https://www.datadoghq.com/blog/go-logging/'
     tag: Blog
-    text: Comment recueillir, standardiser et centraliser des logs Golang
-  - link: /logs/log_configuration/processors
+    text: 'Comment recueillir, standardiser et centraliser des logs Golang'
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
   - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: /logs/explorer/#visualiser-les-donnees
+  - link: '/logs/explorer/#visualiser-les-donnees'
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -110,5 +110,5 @@ Voici quelques conseils pour tirer pleinement profit de votre collecte de logs G
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /fr/logs/log_configuration/parsing
+[2]: /fr/logs/processing/parsing/
 [3]: /fr/tracing/connect_logs_and_traces/go/

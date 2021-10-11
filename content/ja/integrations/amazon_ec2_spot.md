@@ -6,7 +6,7 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon EC2 スポットのキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ec2_spot/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ec2_spot/
 draft: false
 git_integration_title: amazon_ec2_spot
 has_logo: true
