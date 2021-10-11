@@ -322,11 +322,18 @@ To prevent the leaking of sensitive data, you can scrub sensitive words in conta
 * `credentials`
 * `stripetoken`
 
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. 
+You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. You need to setup this environment variable for both processes agent and cluster agent.
+
+```yaml
+env:
+    - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
+      value: "customword1 customword2 customword3"
+
+```
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
-```
+```shell
 password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
