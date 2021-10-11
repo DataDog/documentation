@@ -78,7 +78,14 @@ This enrichment table can now be used to add additional attributes to logs with 
 
 ## Modify an enrichment table
 
-To modify an existing enrichment table with new data, select a table then click **Update Data +** in the top right corner. The selected CSV is upserted into the table, meaning that all existing rows with the same primary key are updated, and all new rows are added. Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the updated rows to appear in affected logs.
+To modify an existing enrichment table with new data, select a table then click **Update Data +** in the top right corner.
+The selected CSV is upserted into the table, meaning that:
+
+* All existing rows with the same primary key are updated
+* All new rows are added
+* All old rows that are not in the new file are deleted
+ 
+Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete. 
 
 ## Further Reading
 
