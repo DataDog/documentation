@@ -76,7 +76,7 @@ The JavaScript has been configured to capture the essential flow variables as lo
 ```
 // Set the Datadog API URL here.
 // Note: If you are in the Datadog EU site (app.datadoghq.eu), the HTTP log endpoint is http-intake.logs.datadoghq.eu.
-var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddsource=apigee";
+var dd_api_url = "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
 
 // Debug
 // print(dd_api_url);

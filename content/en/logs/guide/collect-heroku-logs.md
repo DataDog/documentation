@@ -21,7 +21,7 @@ To send all these logs to Datadog:
 * Set up the HTTPS drain with the following command:
 
 ```text
-heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
+heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>' -a <APPLICATION_NAME>
 ```
 
 * Replace `<DD_API_KEY>` with your [Datadog API Key][2].
@@ -34,7 +34,7 @@ heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/v
 Add custom attributes to logs from your application by replacing the URL in the drain as follows:
 
 ```text
-https://http-intake.logs.{{< region-param key="dd_site" >}}/v1/input/<DD_API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
+https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<DD_API_KEY>&ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
