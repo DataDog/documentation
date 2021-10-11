@@ -8,7 +8,7 @@ further_reading:
   - link: /synthetics/browser_tests/actions
     tag: Documentation
     text: Créer des étapes de test Browser
-  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
     tag: Blog
     text: Pratiques recommandées pour la création de tests de bout en bout
 ---
