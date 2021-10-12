@@ -11,8 +11,9 @@ further_reading:
 
 ## Overview
 
-As an administrator or security team member, you can see who is using Datadog within your organization and the context in which they are using Datadog with [Audit Logs][1]. As an individual, you can see a stream of your own actions, too.
+As an administrator or security team member, you can use [Audit Logs][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
 
+<<<<<<< HEAD
 There are two types of events that can occur within an audit log: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
 
 For example, track **request events** such as breaking events so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit logs to track user events that change the state of your infrastructure.
@@ -30,10 +31,19 @@ For security admins or InfoSec teams, audit logs help with compliance checks and
 - Of anytime someone updates or deletes critical dashboard, monitors, and other Datadog resources.
 
 - For user logins, account, or role changes in your organization.
+=======
+There are two types of events that can occur within an audit log:
+
+1. Request events, which translate all requests made to Datadog’s API into customer records.
+2. Product-specific events, such as:
+    - Changes within your organization or account. For example, if a user changes a dashboard, you are able to see who made the last change and at what time.
+    - User access of information within your environment. For example, for a compliance audit, you can see who accessed or viewed certain information and at what time or if a user receives a policy denied warning.
+    - Breaking events. In these cases, you can see what API calls led up to the event.
+>>>>>>> c1ab9a1c21f8b7fc37ade41ce71de0f32ed540f6
 
 ## Setup
 
-Audit Logs is self-service enabled. To enable, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Click the **Enable** button.
+To enable Audit Logs, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Click the **Enable** button.
 
 {{< img src="account_management/audit_logs/setup.png" alt="Audit Logs setup in Datadog" style="width:100%;">}}
 
@@ -41,60 +51,51 @@ Audit Logs is self-service enabled. To enable, navigate to your [Organization Se
 
 ### Event types
 
-Audit Logs is configurable by event type. Enabled events are specific to actions that take place in the Datadog application. The following event types are supported for Audit Logs:
-
-- Access Management: Manage access, such as roles and users
-- Authentication: Successful and failed login attempts
-- Dashboard: Additions, deletions, and changes to dashboard resources
-- Log Management: Additions, deletions, and changes to log management resources
-- Monitor: Additions, deletions, and changes to monitor resources
-- Notebooks: Additions, deletions, and changes to notebook resources
-- Request: All web requests
-- Security Monitoring: Additions, deletions, and changes to security monitoring resources
+Event types are a collection of audit events. For example, the Authentication event type contains all logs related to authentication and the Dashboards event type contains all the logs related to interacting with the dashboards product. To enable an event type, navigate to the *Audit Logs Settings* section of your [Organization Settings][2] and toggle on event types that are relevant to you.
 
 {{< img src="account_management/audit_logs/event-types.png" alt="Audit Logs event types setup in Datadog" style="width:70%;">}}
 
 ### Archiving
 
-Archiving is an optional feature for Audit Logs. You can use archiving to write to an S3 bucket and have your SIEM system read events from it. Archiving is a double-write feature that has variable write times, but on average all events are written to the S3 bucket within 15 minutes of generation.
+Archiving is an optional feature for Audit Logs. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. Archiving is a double-write feature that has variable write times, but on average all events are written within 15 minutes of generation.
 
 To enable archiving for Audit Logs, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Scroll down to Archiving and click the Store logs toggle to enable.
 
 ### Retention
 
-Retaining logs is an optional feature for Audit Logs. To enable, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*.  Scroll down to Retention and click the Retain logs toggle to enable.
+Retaining logs is an optional feature for Audit Logs. To enable, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Scroll down to Retention and click the Retain logs toggle to enable.
 
-The default retention period for an audit log is 7 days. You can set a retention period between 3 and 90 days.
+The default retention period for an audit log is seven days. You can set a retention period between three and 90 days.
 
 {{< img src="account_management/audit_logs/retention.png" alt="Audit Logs Retention setup in Datadog" style="width:80%;">}}
 
-Note: Audit Logs are priced as retained logs, and there is not a cost for ingestion or archiving. See the [Log Management pricing page][3] for more information.
+Note: Audit Logs are priced as retained logs, and there is no cost for ingestion or archiving. See the [Log Management pricing page][3] for more information.
 
 ## Explore Audit Logs
 
-To explore an audit log, navigate to the [Audit Logs][1] section, also accessible from your [Organizational Settings][2] in the Datadog app.
+To explore an audit log, navigate to the [Audit Logs][1] section, also accessible from your [Organizational Settings][2] in Datadog.
 
 {{< img src="account_management/audit_logs/explore-audit-logs.png" alt="Audit Logs in the Organization Settings menu" style="width:50%;">}}
 
 Audit Logs have the same functionality as logs within the Datadog [Logs Explorer][4]:
 
-- Filter by facets to drill down into audit logs by `Status` (`Error`, `Warn`, `Inf`o) or `Method` (`POST`, `GET`, `DELETE`).
+- Filter by facets to drill down into audit logs by `Status` (`Error`, `Warn`, `Info`) or `Method` (`POST`, `GET`, `DELETE`).
 - For compliance audits, filter by `event_name` and select `authentication only` to see compliance-related events.
 - Drill down into related audit logs by selecting a log and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, etc.
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Logs in the Organization Settings menu" style="width:50%;">}}
 
-## Create a Monitor
+## Create a monitor
 
 To create a monitor on a type of audit log or by specific log attributes, see the [Audit Logs Monitor documentation][5].
 
-## Create a Dashboard
+## Create a dashboard
 
-Give more visual context to your audit logs with Dashboards. To create an Audit Logs dashboard:
+Give more visual context to your audit logs with dashboards. To create an Audit Logs dashboard:
 
 1. Create a [New Dashboard][6] in Datadog.
-2. Select your visualization: an Audit Logs source can be queried for [Top Lists][7], [Time Series][8], and [Log Stream][9].
-3. [Graph your data][10]: Under edit, select Audit Logs as the data source, and create a query. Audit Logs are filtered by count, and can be grouped by the different facets. Select a facet and limit.
+2. Select your visualization. You can query an Audit Logs source for [top lists][7], [timeseries][8], and [log streams][9].
+3. [Graph your data][10]: Under edit, select *Audit Logs* as the data source, and create a query. Audit logs are filtered by count and can be grouped by different facets. Select a facet and limit.
 {{< img src="account_management/audit_logs/graph-your-data.png" alt="Set Audit Logs as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
