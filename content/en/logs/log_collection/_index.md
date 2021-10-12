@@ -119,7 +119,7 @@ Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Lo
 
 `{{< region-param key="http_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="http_port" code="true" >}}`<br>
-Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][12].
+Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][8].
 
 `{{< region-param key="web_integrations_endpoint" code="true" >}}`
 : **Port**: `{{< region-param key="web_integrations_port" code="true" >}}`<br>
@@ -226,7 +226,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 {{< /site-region >}}
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 A TCP endpoint is not supported for this region.
 {{< /site-region >}}
 
@@ -247,7 +247,7 @@ Log events that do not comply with these limits might be transformed or truncate
 
 ### Attributes and tags
 
-Attributes prescribe [logs facets][8], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][9] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
+Attributes prescribe [logs facets][9], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][10] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
 
 #### Attributes for stack traces
 
@@ -267,11 +267,11 @@ To enable these functionalities use the following attribute names:
 
 **Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-For more information, see the complete [source code attributes documentation][10].
+For more information, see the complete [source code attributes documentation][11].
 
 ## Next steps
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][11] documentation to begin analyzing your log data, or see the additional log management documentation below.
+Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
 
@@ -288,8 +288,8 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [5]: /integrations/logstash/#log-collection
 [6]: /security/logs/#information-security
 [7]: /agent/logs/#send-logs-over-https
-[8]: /logs/explorer/facets/
-[9]: /logs/log_configuration/attributes_naming_convention
-[10]: /logs/log_configuration/attributes_naming_convention/#source-code
-[11]: /logs/explore/
-[12]: /api/v1/logs/#send-logs
+[8]: /api/v1/logs/#send-logs
+[9]: /logs/explorer/facets/
+[10]: /logs/log_configuration/attributes_naming_convention
+[11]: /logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /logs/explore/

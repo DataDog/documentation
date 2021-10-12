@@ -50,7 +50,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               gcr.io/datadoghq/agent:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -75,7 +75,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               gcr.io/datadoghq/agent:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -147,7 +147,7 @@ docker run -d --name app \
               company/app:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov" >}}
 
 ```bash
 # Datadog Agent
@@ -189,7 +189,7 @@ docker run -d --name app \
               company/app:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \

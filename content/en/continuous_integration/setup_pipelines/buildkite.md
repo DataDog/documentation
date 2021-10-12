@@ -63,6 +63,6 @@ The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after t
 [3]: /getting_started/tagging/unified_service_tagging
 {{< /site-region >}}
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 This feature is not supported for the selected Datadog site ({{< region-param key="dd_site_name" >}}).
 {{< /site-region >}}

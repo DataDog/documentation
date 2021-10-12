@@ -544,6 +544,6 @@ Additional Git configuration for physical device testing:
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
 
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}
