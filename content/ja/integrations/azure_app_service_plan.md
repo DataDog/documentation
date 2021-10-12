@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure App Service Plan のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_app_service_plan/'
 draft: false
 git_integration_title: azure_app_service_plan
 has_logo: true
 integration_id: azure-appserviceplan
 integration_title: Microsoft Azure App Service Plan
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

@@ -2,10 +2,10 @@
 title: Cluster Agent のコマンドとオプション
 kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
+  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
     tag: ブログ
     text: Datadog Cluster Agent のご紹介
-  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
+  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: ブログ
     text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
   - link: /agent/cluster_agent/clusterchecks/
@@ -26,7 +26,7 @@ Datadog Cluster Agent には次のコマンドがあります。
 : Agent のコンポーネントの概要と健全性を示します。
 
 `datadog-cluster-agent metamap <NODE_NAME>`
-: `NODE_NAME` 上に存在するポッドと、エンドポイントなど関連するクラスターレベルのメタデータのマッピングをローカルキャッシュに問い合わせます。`NODE_NAME` を指定しない場合は、クラスターのすべてのノードでマッパーが実行されます。
+`NODE_NAME` 上に存在するポッドと、関連するクラスターレベルのメタデータ (例: エンドポイント) のマッピングをローカルキャッシュに問い合わせます。`NODE_NAME` を指定しない場合は、クラスターのすべてのノードでマッパーが実行されます。
 
 `datadog-cluster-agent flare <CASE_ID>`
 ノードベース Agent と同様に、Cluster Agent は、ログや使用された構成を集計し、サポートチームにアーカイブを転送したり、圧縮してローカルで使用したりすることもできます。**注**: このコマンドは Cluster Agent ポッド内から実行されます。

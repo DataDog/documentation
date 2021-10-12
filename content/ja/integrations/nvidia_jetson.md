@@ -19,6 +19,7 @@ git_integration_title: nvidia_jetson
 guid: 72845bb7-c3a6-4017-96f6-c232171102f8
 integration_id: nvidia-jetson
 integration_title: Nvidia Jetson
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

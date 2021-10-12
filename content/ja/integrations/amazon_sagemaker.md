@@ -6,13 +6,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_sagemaker/'
 draft: false
 git_integration_title: amazon_sagemaker
 has_logo: true
 integration_id: amazon-sagemaker
 integration_title: Amazon SageMaker
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
