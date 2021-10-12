@@ -138,7 +138,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 For containerized environments, follow the in-app [Quickstart instructions][2] to enable trace collection within the Datadog Agent.
 
-{{< site-region region="us3,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov" >}}
 
 Ensure you set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} so that the Agent sends data to the right Datadog location.
 

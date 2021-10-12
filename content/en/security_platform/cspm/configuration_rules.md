@@ -6,7 +6,7 @@ disable_toc: true
 
 {{< site-region region="us3,gov,eu" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
+Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 

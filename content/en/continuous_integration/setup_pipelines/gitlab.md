@@ -148,6 +148,6 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

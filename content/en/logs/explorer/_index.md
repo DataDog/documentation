@@ -45,7 +45,7 @@ The search filter consists of a timerange and a search query mixing `key:value` 
 
 [Indexed Logs][4] support both full-text search and `key:value` search queries.
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 **Note**: `key:value` queries require that you [declare a facet][1] beforehand.
 
 [1]: /logs/explorer/facets/
@@ -135,7 +135,7 @@ With the **Options** button, control the **number of lines** displayed in the ta
 
 {{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][5] beforehand.
 {{< /site-region >}}
 
