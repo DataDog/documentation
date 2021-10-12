@@ -26,7 +26,7 @@ The Datadog extension submits custom metrics, enhanced metrics, traces, and logs
 
 ## Installation
 
-To install the Datadog Lambda Extension and instrument your AWS serverless applications, see the [serverless installation instructions][5].
+To install the Datadog Lambda Extension and instrument your AWS serverless applications as well as review supported runtimes, see the [serverless installation instructions][5].
 
 ## Log collection
 
