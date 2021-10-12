@@ -26,5 +26,6 @@ further_reading:
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
 {{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
+{{< nextlink href="/getting_started/sci" >}}<u>Source Code Integration</u>: Find the root cause faster by a tight integration between your source code and datadog telemetry{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Leverage everything Datadog has to offer by enrolling in instructor-led classes.{{< /nextlink >}}
 {{< /whatsnext >}}
