@@ -607,6 +607,8 @@ def get_message():
 
 For more information on custom metric submission, see [here][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
 
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][9] guide to ensure that the extension can reach Datadog API endpoints.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -619,3 +621,4 @@ For more information on custom metric submission, see [here][7]. For additional 
 [6]: /serverless/libraries_integrations/forwarder
 [7]: /serverless/custom_metrics?tab=python
 [8]: /tracing/custom_instrumentation/python/
+[9]: /serverless/guide/extension_private_link/
