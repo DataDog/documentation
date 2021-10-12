@@ -12,7 +12,7 @@ further_reading:
 
 <div class="alert alert-info"><p>CI Visibility is in beta. There are no billing implications for tracing pipelines and tests during this period.</p>
 </div>
-{{< site-region region="us3,us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-info"><p>CI Visibility is available only on the US1 and EU1 Datadog sites at this time.</p></div>
 {{< /site-region >}}
 
