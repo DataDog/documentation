@@ -10,14 +10,13 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md'
 display_name: "Signal\_Sciences"
 draft: false
 git_integration_title: sigsci
 guid: 0c92b7cd-0736-4f9d-82ed-16f1bba8c8d0
 integration_id: sigsci
 integration_title: "Signal\_Sciences"
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: info@signalsciences.com

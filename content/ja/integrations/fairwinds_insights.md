@@ -23,6 +23,7 @@
 "guid": "fd4bd190-d57d-449b-9880-76cbf8325a3e"
 "integration_id": "fairwinds-insights"
 "integration_title": "Fairwinds Insights"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "insights@fairwinds.com"

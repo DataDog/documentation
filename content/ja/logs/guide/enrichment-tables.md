@@ -11,7 +11,7 @@ further_reading:
     text: パースの詳細
 ---
 <div class="alert alert-warning">
-エンリッチメントテーブル機能は現在非公開ベータ版です。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
+エンリッチメントテーブル機能は現在公開ベータ版です。エンリッチメントテーブルを定義したりクエリを作成したりしても、請求内容には影響しません。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
 </div>
 
 ## 概要

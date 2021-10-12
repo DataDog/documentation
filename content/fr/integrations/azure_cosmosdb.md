@@ -5,13 +5,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure\_Cosmos\_DB."
-doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'
 draft: false
 git_integration_title: azure_cosmosdb
 has_logo: true
 integration_id: azure-cosmosdb
 integration_title: "Microsoft\_Azure\_Cosmos\_DB"
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

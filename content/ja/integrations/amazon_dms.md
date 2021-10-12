@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon DMS のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_dms/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_dms/
 draft: false
 git_integration_title: amazon_dms
 has_logo: true
 integration_id: amazon-dms
 integration_title: Amazon DMS
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

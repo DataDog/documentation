@@ -20,8 +20,8 @@ Attention : la fusion des traces peut entraîner une augmentation de vos coûts
 
 Voici des instructions de configuration pour les deux scénarios évoqués ci-dessus :
 
-- [Fusion de traces dans un environnement principalement sans serveur](#fusion-de-traces-dans-un-environnement-aws-sans-serveur)
-- [Fusion de traces entre des fonctions Lambda AWS et des hosts](#configurer-le-tracing-de-fonctions-aws-lambda-et-de-hosts)
+- [Fusion de traces dans un environnement principalement sans serveur](#trace-merging-in-a-serverless-first-environment)
+- [Fusion de traces entre des fonctions Lambda AWS et des hosts](#trace-merging-across-aws-lambda-and-hosts)
 
 ### Fusion de traces dans un environnement AWS sans serveur
 

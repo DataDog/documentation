@@ -24,7 +24,6 @@
 "guid": "53c7733b-f9b1-43e0-8b34-305e3a4c2c03"
 "integration_id": "rapdev-syntheticemail"
 "integration_title": "Synthetic Email"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

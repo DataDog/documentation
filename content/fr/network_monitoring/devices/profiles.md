@@ -7,7 +7,7 @@ further_reading:
   - link: /network_monitoring/devices/data
     tag: Documentation
     text: Données collectées avec la fonctionnalité Network Device Monitoring
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
     tag: Blog
     text: Surveiller des périphériques SNMP avec Datadog
 ---
