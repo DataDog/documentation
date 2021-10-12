@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: true
 ---
 
-{{< site-region region="us3,gov,eu" >}}
+{{< site-region region="us3,us5,gov,eu" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is not currently available in this site.
 </div>
