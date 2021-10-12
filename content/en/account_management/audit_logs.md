@@ -13,7 +13,6 @@ further_reading:
 
 As an administrator or security team member, you can use [Audit Logs][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
 
-<<<<<<< HEAD
 There are two types of events that can occur within an audit log: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
 
 For example, track **request events** such as breaking events so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit logs to track user events that change the state of your infrastructure.
@@ -31,15 +30,6 @@ For security admins or InfoSec teams, audit logs help with compliance checks and
 - Of anytime someone updates or deletes critical dashboard, monitors, and other Datadog resources.
 
 - For user logins, account, or role changes in your organization.
-=======
-There are two types of events that can occur within an audit log:
-
-1. Request events, which translate all requests made to Datadog’s API into customer records.
-2. Product-specific events, such as:
-    - Changes within your organization or account. For example, if a user changes a dashboard, you are able to see who made the last change and at what time.
-    - User access of information within your environment. For example, for a compliance audit, you can see who accessed or viewed certain information and at what time or if a user receives a policy denied warning.
-    - Breaking events. In these cases, you can see what API calls led up to the event.
->>>>>>> c1ab9a1c21f8b7fc37ade41ce71de0f32ed540f6
 
 ## Setup
 
@@ -57,7 +47,7 @@ Event types are a collection of audit events. For example, the Authentication ev
 
 ### Archiving
 
-Archiving is an optional feature for Audit Logs. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. Archiving is a double-write feature that has variable write times, but on average all events are written within 15 minutes of generation.
+Archiving is an optional feature for Audit Logs. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. After creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so check back on your storage bucket in 15 minutes to make sure the archives are successfully being uploaded from your Datadog account.
 
 To enable archiving for Audit Logs, navigate to your [Organization Settings][2] and select *Audit Logs Settings* under *Security*. Scroll down to Archiving and click the Store logs toggle to enable.
 
@@ -79,15 +69,15 @@ To explore an audit log, navigate to the [Audit Logs][1] section, also accessibl
 
 Audit Logs have the same functionality as logs within the Datadog [Logs Explorer][4]:
 
-- Filter by facets to drill down into audit logs by `Status` (`Error`, `Warn`, `Info`) or `Method` (`POST`, `GET`, `DELETE`).
-- For compliance audits, filter by `event_name` and select `authentication only` to see compliance-related events.
+- Filter to drill down into audit logs by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
+
 - Drill down into related audit logs by selecting a log and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, etc.
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Logs in the Organization Settings menu" style="width:50%;">}}
 
 ## Create a monitor
 
-To create a monitor on a type of audit log or by specific log attributes, see the [Audit Logs Monitor documentation][5].
+To create a monitor on a type of audit log or by specific log attributes, see the [Audit Logs Monitor documentation][5]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
 ## Create a dashboard
 
