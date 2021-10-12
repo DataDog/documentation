@@ -65,9 +65,8 @@ Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param 
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
 All other Agent data
-: **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}<br>
-**Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
-This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
+: `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):<br>
 **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}<br>
 **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
