@@ -7,12 +7,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Database pour MySQL.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_mysql/'
+doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
 draft: false
 git_integration_title: azure_db_for_mysql
 has_logo: true
 integration_id: azure-db-for-mysql
 integration_title: Microsoft Azure Database pour MySQL
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

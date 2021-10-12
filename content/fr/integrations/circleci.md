@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Visualisez le nombre de builds terminés ou la durée moyenne des builds.
-doc_link: 'https://docs.datadoghq.com/integrations/circleci/'
+doc_link: https://docs.datadoghq.com/integrations/circleci/
 draft: false
 git_integration_title: circleci
 has_logo: true
 integration_id: ''
 integration_title: CircleCI
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
