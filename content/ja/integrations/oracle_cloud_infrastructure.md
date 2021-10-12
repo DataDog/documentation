@@ -13,6 +13,7 @@ git_integration_title: oracle_cloud_infrastructure
 has_logo: true
 integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

@@ -12,6 +12,7 @@
 "has_logo": true
 "integration_id": ""
 "integration_title": "SolarWinds"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
