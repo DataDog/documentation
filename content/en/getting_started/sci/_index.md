@@ -7,7 +7,7 @@ kind: documentation
 
 Datadog source code integration allows you to find the root cause of the surfaced problems.
 
-By setting up the source code integration datadog is able to:
+By setting up the source code integration Datadog is able to:
 
 * augment stack traces with your code
 * directly link to your git repositories
