@@ -11,6 +11,7 @@ git_integration_title: microsoft_365
 has_logo: true
 integration_id: ''
 integration_title: Microsoft 365
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

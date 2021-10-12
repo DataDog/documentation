@@ -11,6 +11,7 @@ git_integration_title: microsoft_teams
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Teams
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
