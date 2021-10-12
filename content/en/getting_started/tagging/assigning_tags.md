@@ -288,7 +288,7 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" style="width:80%;">}}
 
-[1]: /monitors/manage_monitor/
+[1]: /monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 

@@ -36,52 +36,61 @@ After choosing to create an [`HTTP` test][4], define your test's request.
 1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 2. Enrich your HTTP request with **Advanced Options** (optional):
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "Request Options" %}}
+   {{% tab "Request Options" %}}
 
-  * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
-  * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-  * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-  * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
+   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Request Body" %}}
+   {{% tab "Authentication" %}}
 
-  * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
-  * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
+   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Certificate" %}}
+   {{% tab "Request Body" %}}
 
-  * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-  * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
+   * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
 
-  ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-  ```
+   {{% /tab %}}
 
-  {{% /tab %}}
+   {{% tab "Certificate" %}}
 
-  {{% tab "Proxy" %}}
+   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
-  * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-  * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+     ```
+     openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+     openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+     ```
 
-  {{% /tab %}}
-  
-  {{% tab "Privacy" %}}
+   {{% /tab %}}
 
-  * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
-  
+   {{% tab "Proxy" %}}
+
+   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+
+   {{% /tab %}}
+
+   {{% tab "Privacy" %}}
+
+   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
+
 
 [1]: /security/synthetics
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{< /tabs >}}
+   {{< /tabs >}}
+
+<br/>
 
 3. **Name** your HTTP test.
 
@@ -229,9 +238,9 @@ If you have access to the [custom role feature][16], add your user to any custom
 [7]: https://www.w3schools.com/xml/xpath_syntax.asp
 [8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [9]: /api/latest/synthetics/#edit-an-api-test
-[10]: /monitors/notifications/?tab=is_alert#notification
+[10]: /monitors/notify/?tab=is_alert#notification
 [11]: https://www.markdownguide.org/basic-syntax/
-[12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[12]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [13]: /synthetics/settings/#global-variables
 [14]: /synthetics/api_tests/errors/#ssl-errors
 [15]: /account_management/rbac/

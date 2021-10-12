@@ -2,7 +2,7 @@
 title: Manage Monitors
 kind: documentation
 aliases:
-    - monitors/manage_monitor/
+    - /monitors/manage_monitor/
 description: "Send notifications to your teams when monitors trigger alerts"
 further_reading:
 - link: "/monitors/create/"

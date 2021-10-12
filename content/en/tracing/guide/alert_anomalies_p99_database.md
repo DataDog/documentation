@@ -77,12 +77,12 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/anomaly/
+[1]: /monitors/create/types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#services
-[6]: /monitors/monitor_types/anomaly/#faq
-[7]: /monitors/notifications/?tab=is_alertis_warning
+[6]: /monitors/create/types/anomaly/#faq
+[7]: /monitors/notify/?tab=is_alertis_warning
 [8]: https://app.datadoghq.com/apm/services
 [9]: https://app.datadoghq.com/service/map

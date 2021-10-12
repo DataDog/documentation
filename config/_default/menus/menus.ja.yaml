@@ -113,7 +113,7 @@ main_left:
     parent: 'product'
   - identifier: alerts
     name: アラート
-    pre: '<i class="icon-alert align-middle"></i>'
+    pre: '<i class="icon-monitor align-middle"></i>'
     url: 'product/alerts/'
     weight: 19
     parent: 'product'
@@ -1111,7 +1111,7 @@ main:
     weight: 120000
   - name: アラート設定
     url: monitors/
-    pre: alert
+    pre: monitor
     identifier: アラート設定
     weight: 130000
   - name: モニター
@@ -2447,7 +2447,7 @@ footer_product_two:
     weight: 127
   - name: インシデント管理
     url: "https://www.datadoghq.com/ja/product/incident-management/"
-    weight: 128  
+    weight: 128
   - name: サーバーレス
     url: "https://www.datadoghq.com/ja/product/serverless-monitoring/"
     weight: 129

@@ -5,13 +5,13 @@ description: "Check if a process is running on a host"
 aliases:
 - /monitors/monitor_types/process_check
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -89,4 +89,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [4]: /monitors/create/configuration/#no-data
 [5]: /monitors/create/configuration/#auto-resolve
 [6]: /monitors/create/configuration/#new-group-delay
-[7]: /monitors/notifications/
+[7]: /monitors/notify/

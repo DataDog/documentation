@@ -173,9 +173,9 @@ If you have access to the [custom role feature][13], add your user to any custom
 [5]: /synthetics/cicd_testing
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /api/latest/synthetics/#edit-an-api-test
-[8]: /monitors/notifications/?tab=is_alert#notification
+[8]: /monitors/notify/?tab=is_alert#notification
 [9]: https://www.markdownguide.org/basic-syntax/
-[10]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [11]: /synthetics/settings/#global-variables
 [12]: /account_management/rbac/
 [13]: /account_management/rbac#custom-roles

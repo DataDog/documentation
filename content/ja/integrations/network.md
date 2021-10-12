@@ -13,7 +13,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/network/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_name: Network
 draft: false
 git_integration_title: ネットワーク
@@ -62,27 +62,6 @@ sudo modprobe nf_conntrack_ipv6
 ### コンフィギュレーション
 
 1. Agent はデフォルトでネットワークチェックを有効にしますが、チェックを自分で構成する場合は、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `network.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル network.d/conf.yaml][4] を参照してください。
-
-   ```yaml
-   init_config:
-
-   instances:
-     ## @param collect_connection_state - boolean - required
-     ## Set to true to collect connection states for your interfaces
-     ## Note: this will require either the command `ss` from system package `iproute2` or
-     ## the command `netstat` from the system package `net-tools` to be installed
-     #
-     - collect_connection_state: false
-
-     ## @param collect_connection_queues - boolean - optional
-     ## Set to true to enable connection queues collection
-     ## Note: connection queues collections require both
-     ## `collect_connection_state` and `collect_connection_queues` to be true
-     ## because it also requires the command `ss` from system package `iproute2` or
-     ## the command `netstat` from the system package `net-tools` to be installed
-     #
-     - collect_connection_queues: false
-   ```
 
 2. [Agent を再起動][5]すると、構成の変更が有効になります。
 

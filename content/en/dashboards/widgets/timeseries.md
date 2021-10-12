@@ -4,6 +4,8 @@ kind: documentation
 description: "Display the evolution of one or more metrics, log events, Indexed Spans, or process metrics over time."
 aliases:
     - /graphing/widgets/timeseries/
+    - /dashboards/widgets/network/
+    - /graphing/widgets/network/
 further_reading:
 - link: "/dashboards/timeboards/"
   tag: "Documentation"

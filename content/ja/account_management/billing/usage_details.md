@@ -29,7 +29,7 @@ Usage ページには、製品カテゴリー別にグループ化された使�
 上記の月内の使用量は "All" (すべて) の使用量であり、製品の試用などの請求対象外の使用量が含まれます。ほとんどのアカウントは、"Billable" (請求対象) の使用量を表示することができます。これは、最終的な請求に寄与する使用量のみを表示します。"Billable" ビューは、コミットメントと割り当てを超えるオンデマンドの使用量を示します。
 
 {{< img src="account_management/billing/usage-details-v2-07.png" alt="使用量の詳細 - 請求対象" >}}
-API ユーザーの場合、エンドポイントを使用して ["All"][8] (すべて) の使用量と ["Billable"][9] (請求対象) の使用量にアクセスできます。
+API ユーザーの場合、エンドポイントを使用して ["All"][2] (すべて) の使用量と ["Billable"][3] (請求対象) の使用量にアクセスできます。
 
 各製品の月内の使用量は、次のように計算されます。
 
@@ -40,7 +40,7 @@ API ユーザーの場合、エンドポイントを使用して ["All"][8] (す
 | APM ホスト                | 当月全時間のすべての個別 APM ホストの 99 パーセンタイル値を表示します。                                    |
 | Profiled Hosts           | 当月全時間のすべての個別プロファイル済みホストの 99 パーセンタイル値を表示します。                               |
 | Profiled Containers      | 当月全時間のすべての個別プロファイル済みコンテナの平均値を表示します。                                  |
-| カスタムメトリクス           | 当月全時間の個別[カスタムメトリクス][2]の平均数を表示します。                               |
+| カスタムメトリクス           | 当月全時間の個別[カスタムメトリクス][4]の平均数を表示します。                               |
 | Ingested Custom Metrics  | 当月全時間の個別収集済みカスタムメトリクスの平均数を表示します。                           |
 | 収集されたログ            | 当月全時間のすべての収集ログバイト数の合計を表示します。                                                |
 | インデックス化されたログ             | 当月全時間のすべてのインデックス化ログイベント数の合計を表示します。                                                |
@@ -90,16 +90,16 @@ Custom Metrics タブの Top Custom Metrics テーブルには、当月内使用
 * 1 時間ごと平均カスタムメトリクス数
 * 1 時間ごと最大カスタムメトリクス数
 * すべてのカスタムメトリクス内のメトリクスを検索します
-* このデータは、最大 300,000 のカスタムメトリクスを CSV ファイルとしてダウンロードできます。[API エンドポイント][7]を使用すれば、300,000 を超えるカスタムメトリクスをダウンロードできます。
+* このデータは、最大 300,000 のカスタムメトリクスを CSV ファイルとしてダウンロードできます。[API エンドポイント][5]を使用すれば、300,000 を超えるカスタムメトリクスをダウンロードできます。
 
 
-メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、[Metrics Summary][3] に移動します。
+メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、[Metrics Summary][6] に移動します。
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="上位カスタムメトリクスの概要テーブル" >}}
 
 ## インデックス別ログ使用量
 
-Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][4]の内訳も示しています。以下の情報が提供されます。
+Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][7]の内訳も示しています。以下の情報が提供されます。
 
 * インデックス名
 * 保持期間（日数）
@@ -112,16 +112,17 @@ Log Management タブにあるこの表には、インデックス名および�
 
 ## トラブルシューティング
 
-技術的な質問については、[Datadog のサポートチーム][5]にお問い合わせください。
+技術的な質問については、[Datadog のサポートチーム][8]にお問い合わせください。
 
-課金に関するご質問は、[カスタマーサクセス][6]マネージャーにお問い合わせください。
+請求に関するご質問は、[カスタマーサクセス][9]マネージャーにお問い合わせください。
+
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /ja/developers/metrics/custom_metrics/
-[3]: https://docs.datadoghq.com/ja/metrics/summary/#overview
-[4]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
-[5]: /ja/help/
-[6]: mailto:success@datadoghq.com
-[7]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[8]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-usage-across-your-multi-org-account
-[9]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-billable-usage-across-your-account
+[2]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-usage-across-your-multi-org-account
+[3]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-billable-usage-across-your-account
+[4]: /ja/metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[6]: https://docs.datadoghq.com/ja/metrics/summary/#overview
+[7]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
+[8]: /ja/help/
+[9]: mailto:success@datadoghq.com

@@ -2,7 +2,7 @@
   {{ errorf "Agent Config shortcode error: Missing value for param 'type': %s" .Position }}
 {{ end }}
 
-{{ $agent_config_data := $.Site.Data.agent_config }}
+{{ $agent_config_data := $.Site.Data.agent_config | default (dict) }}
 {{ $type := (.Get ("type")) | lower }}
 {{ $filename := .Get "filename" | default "Code example" }}
 {{ $collapsible := .Get "collapsible" }}
@@ -11,7 +11,11 @@
 {{ $config_data_string := trim $config_data "\n" }}
 
 {{ if eq $config_data nil }}
-  {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template.  Check agent_config_types_list.txt for list of available configuration types." }}
+  {{ if eq $.Site.Params.environment "development" }}
+    {{ warnf "Agent Config shortcode error: given 'type' param was not found in Agent config template.  Check agent_config_types_list.txt for list of available configuration types." }}
+  {{ else }}
+    {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template.  Check agent_config_types_list.txt for list of available configuration types." }}
+  {{ end }}
 {{ end }}
 
 <div class="code-snippet-wrapper">

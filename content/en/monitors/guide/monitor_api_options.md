@@ -64,10 +64,10 @@ _These options only apply to logs alerts._
 
 Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
-- **`aggregation`** a dictionary of `type`, `metric` and `groupeBy`:
-  - `type`  3 types are supported: `count`, `cardinality` and `avg`
+- **`aggregation`** A dictionary of `type`, `metric`, and `groupBy`.
+  - `type`: Three types are supported: `count`, `cardinality`, and `avg`.
   - `metric`:  For `cardinality`, use the name of the facet. For `avg`, use the name of the metric. For `count`, put `count` as metric.
-  - `groupeBy` name of the facet on which you want to group by.
+  - `groupBy`: Name of the facet on which you want to group by.
 
 Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
 

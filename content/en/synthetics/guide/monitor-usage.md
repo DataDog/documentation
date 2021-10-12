@@ -41,5 +41,5 @@ You can graph and monitor these metrics against static thresholds as well as use
 [2]: /synthetics/api_tests
 [3]: /synthetics/multistep
 [4]: /synthetics/browser_tests
-[5]: /monitors/monitor_types/anomaly/
-[6]: /monitors/monitor_types/forecasts
+[5]: /monitors/create/types/anomaly/
+[6]: /monitors/create/types/forecasts

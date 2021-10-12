@@ -60,46 +60,53 @@ To create an HTTP request step, click **Create Your First Step**.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 3. Enrich your HTTP request with **Advanced Options** (optional):
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "Request Options" %}}
+   {{% tab "Request Options" %}}
 
-  * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
-  * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-  * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-  * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
+   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Request Body" %}}
+   {{% tab "Authentication" %}}
 
-  * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
-  * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **AWS Signature V4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request.
+   This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Certificate" %}}
+   {{% tab "Request Body" %}}
 
-  * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-  * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
+   * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "Proxy" %}}
+   {{% tab "Certificate" %}}
 
-  * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-  * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
 
-  {{% /tab %}}
+   {{% /tab %}}
+
+   {{% tab "Proxy" %}}
+
+   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+
+   {{% /tab %}}
   
-  {{% tab "Privacy" %}}
+   {{% tab "Privacy" %}}
 
-  * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
 
 [1]: /security/synthetics
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{< /tabs >}}
+   {{< /tabs >}}
 
 Click on **Test URL** to try out the request configuration. A response preview appears.
 
@@ -270,9 +277,9 @@ If you have access to the [custom role feature][18], add your user to any custom
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [11]: /api/latest/synthetics/#edit-an-api-test
-[12]: /monitors/notifications/?tab=is_alert#notification
+[12]: /monitors/notify/?tab=is_alert#notification
 [13]: http://daringfireball.net/projects/markdown/syntax
-[14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[14]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors
 [17]: /account_management/rbac/

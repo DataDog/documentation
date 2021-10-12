@@ -38,7 +38,7 @@ nav_sections:
             desc: メトリクスを調べてディストリビューションを作成する
           - title: アラート設定
             link: monitors/
-            icon: alert
+            icon: monitor
             desc: モニターおよび通知の作成と管理
           - title: APM & Continuous Profiler
             link: tracing/
@@ -72,7 +72,7 @@ nav_sections:
             link: mobile/
             icon: mobile
             desc: Datadog アラートとダッシュボード をモバイル端末で表示
-          - title: Watchdog
+          - title: Datadog Watchdog
             link: watchdog/
             icon: watchdog
             desc: アプリケーションとインフラストラクチャーメトリクスの傾向を自動的に確認する

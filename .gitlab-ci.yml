@@ -153,6 +153,9 @@ link_checks_preview:
     GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
@@ -306,6 +309,9 @@ test_live_link_checks:
     GIT_STRATEGY: none
   script:
     - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
     - htmltest
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
@@ -394,7 +400,7 @@ manage_translations:on-schedule:
       if [[ $(date +%u) -lt 6 ]]; then
         nodenv shell 14.15.0
         [ -d ./node_modules ] && rm -rf ./node_modules
-        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.39.tgz
+        yarn add https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.41.tgz
         DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" manage_translations "${APIKEY}";
       fi
       chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')

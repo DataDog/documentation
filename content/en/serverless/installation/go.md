@@ -44,12 +44,18 @@ Add the Datadog Lambda Extension layer for your Lambda function using the ARN in
 
 {{< site-region region="us,us3,eu" >}}
 ```
+// For x86 lambdas
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```
+// For x86 lambdas
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 {{< /site-region >}}
 

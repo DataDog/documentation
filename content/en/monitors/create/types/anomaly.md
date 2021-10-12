@@ -6,13 +6,13 @@ aliases:
     - /monitors/monitor_types/anomaly
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/monitor_status/"
+- link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -222,7 +222,7 @@ A standard configuration of thresholds and threshold window looks like:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
-[2]: /monitors/monitor_types/metric/#define-the-metric
+[2]: /monitors/create/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
@@ -230,9 +230,9 @@ A standard configuration of thresholds and threshold window looks like:
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
 [8]: /monitors/create/configuration/#advanced-alert-conditions
 [9]: /monitors/create/types/metric/#data-window
-[10]: /monitors/notifications/
+[10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
-[12]: /monitors/monitor_status/#settings
+[12]: /monitors/manage/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
 [15]: /monitors/faq/anomaly-monitor/

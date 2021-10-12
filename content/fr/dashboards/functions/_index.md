@@ -39,5 +39,5 @@ Vous pouvez appliquer des fonctions à vos requêtes à l'aide de la zone `Formu
 {{< /whatsnext >}}
 
 
-[1]: /fr/metrics/introduction/#time-aggregation
-[2]: /fr/metrics/introduction/#space-aggregation
+[1]: /fr/metrics/introduction/#agrégation-temporelle
+[2]: /fr/metrics/introduction/#agrégation-spatiale
