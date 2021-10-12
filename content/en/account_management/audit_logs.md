@@ -13,14 +13,23 @@ further_reading:
 
 As an administrator or security team member, you can see who is using Datadog within your organization and the context in which they are using Datadog with [Audit Logs][1]. As an individual, you can see a stream of your own actions, too.
 
-There are two types of events that can occur within an audit log:
+There are two types of events that can occur within an audit log: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
 
-1. Request events, which translate all requests made to Datadog’s API into a customer record
-2. Product-specific events, such as:
-    - What has changed within your organization or account. For example, if a user changes a dashboard, you are able to see who made the last change and at what time.
-    - Who accessed and viewed certain information within your environment, for compliance audits.
-    - A breaking event, such as seeing what API calls led up to the event.
-    - An audit trail of information relating to user access. For example, if a user receives a policy denied warning.
+For example, track **request events** such as breaking events so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit logs to track user events that change the state of your infrastructure.
+
+In this circumstance, audit logs are helpful when you want to know product-specific events such as:
+
+  -  When someone changed the retention of an index because the log volume changed and, therefore, the monthly bill has changed.
+
+  - Who modified processors or pipelines, and when they were modified, as a dashboard or monitor is now broken and needs to be fixed.
+
+  - Who modified an exclusion filter because the indexing volume has increased or decreased and logs are unable to be found or your bill went up.
+
+For security admins or InfoSec teams, audit logs help with compliance checks and maintaining audit trails of who did what, and when, for your Datadog resources. For example, maintaining an audit trail:
+
+- Of anytime someone updates or deletes critical dashboard, monitors, and other Datadog resources.
+
+- For user logins, account, or role changes in your organization.
 
 ## Setup
 
