@@ -166,6 +166,8 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 
 For more information, see the [Custom Metrics documentation][8].
 
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][9] guide to ensure that the extension can reach Datadog API endpoints.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -178,3 +180,4 @@ For more information, see the [Custom Metrics documentation][8].
 [6]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [7]: https://app.datadoghq.com/functions
 [8]: /serverless/custom_metrics?tab=go
+[9]: /serverless/guide/extension_private_link/
