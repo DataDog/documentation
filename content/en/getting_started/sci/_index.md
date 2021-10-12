@@ -13,7 +13,7 @@ By setting up the source code integration Datadog is able to:
 * directly link to your git repositories
 * pre-load context wherever a git hash or git link is used
 
-Work through this guide to Setup the full capabilities of source code integration with datadog.
+Work through this guide to setup the full capabilities of source code integration with datadog.
 
 To be able to map telemetry data to your source code we need to collect some metadata that needs to be configured to be transferred to Datadog in your CI pipeline.
 
@@ -25,19 +25,19 @@ To be able to map telemetry data to your source code we need to collect some met
     1. By running [datadog-ci commit upload](https://github.com/DataDog/datadog-ci/tree/master/src/commands/commit)
 3. Install Github App
 
-By having these two data points Datadog is able to correlate through the SHA all places where we can link to your git repository directly.
+By having these two data points Datadog is able to correlate all places where we can link to your git repository directly.
 
-For Github SaaS users we are having an additional feature, by installing our Github App (link) we can directly inline codesnipets from your github repository and help you find the problematic pieces faster.
+For Github SaaS users we are having an additional feature, by installing our [Github App](https://app.datadoghq.com/account/settings#integrations/github-apps) we can directly inline codesnipets from your github repository and help you find the problematic pieces faster.
 
 Currently the source code integration is in public beta and available for JVM languages and Go.
 
 ## How to tag your builds
 
-To get direct links from your stacktrace to your git repo you need to tag all your telemetry with a new tag git.commit.sha. Depending on your environment there are several ways to do that
+To get direct links from your stacktrace to your git repo you need to tag all your telemetry with a new tag git.commit.sha. Depending on your environment there are several ways to do that.
 
 ### Containerized environments
 
-With containerized environments it’s easy to tag all your telemetry with the git.commit.sha (traces, profiles, logs…)
+With containerized environments it’s easy to tag all your telemetry with the git.commit.sha (traces, profiles, logs…).
 
 #### Docker runtime
 
@@ -46,7 +46,7 @@ If your containers are running on Docker, git.commit.sha can be directly extract
 ##### Tag your images
 
 ```
-docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD) .
+docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
 ```
 
 ##### Configure the agent to collect git.commit.sha
@@ -63,7 +63,7 @@ If you use kubernetes with another container runtime (like containerd), you need
 annotations:
 
 ```
-  ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>"}'
+ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>"}'
 ```
 
 #### Other containers setup
