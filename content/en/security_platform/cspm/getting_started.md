@@ -13,9 +13,9 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED or US3.
+Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 

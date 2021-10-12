@@ -383,6 +383,6 @@ DD_API_KEY=<YOUR_DD_API_KEY> docker-compose up \
 [5]: https://docs.docker.com/compose/
 [6]: /continuous_integration/setup_tests/containers/
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

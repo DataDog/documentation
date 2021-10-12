@@ -98,6 +98,6 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) does not support this feature.
 {{< /site-region >}}
