@@ -73,7 +73,7 @@ To see a complete list of metrics collected, see the integration Data Collected 
 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
-- **Postrgres**: `postgresql.queries.*`
+- **Postgres**: `postgresql.queries.*`
 
 
 ## Query details page
