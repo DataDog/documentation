@@ -50,7 +50,7 @@ Pour réaliser une configuration avancée de votre plug-in, utilisez les paramè
 | `injectLogContext`     | Lorsque ce paramètre est défini, la couche Lambda corrige automatiquement console.log avec les ID de tracing de Datadog. Valeur par défaut : `true`.                                                                                                                                                                                                                                                                                                     |
 | `exclude`              | Lorsque ce paramètre est défini, le plug-in ignore toutes les fonctions spécifiées. Utilisez ce paramètre pour exclure des fonctions de votre déploiement Datadog. Valeur par défaut : `[]`.                                                                                                                                                                                                                                            |
 | `enabled`              | Lorsque ce paramètre est défini sur false, le plug-in Datadog reste inactif. Valeur par défaut : `true`. Vous pouvez contrôler cette option à l'aide d'une variable d'environnement (p. ex., `enabled: ${strToBool(${env:DD_PLUGIN_ENABLED, true})}`, afin d'activer ou de désactiver le plug-in lors du déploiement. Il est également possible d'utiliser la valeur transmise avec `--stage` pour contrôler cette option. Pour en savoir plus, consultez [cet exemple](#desactiver-le-plug-in-pour-un-environnement-specifique).
-| `monitors`             | Lorsque ce paramètre est défini, le plug-in Datadog configure des monitors pour la fonction déployée. Vous devez également définir `monitorsApiKey` et `monitorsAppKey`. Pour découvrir comment définir des monitors, consultez la rubrique [Activer et configurer un monitor sans serveur recommandé](#activer-et-configurer-un-monitor-sans-serveur-recommande).  |                                                                                          
+| `monitors`             | Lorsque ce paramètre est défini, le plug-in Datadog configure des monitors pour la fonction déployée. Vous devez également définir `monitorsApiKey` et `monitorsAppKey`. Pour découvrir comment définir des monitors, consultez la rubrique [Activer et configurer un monitor sans serveur recommandé](#activer-et-configurer-un-monitor-sans-serveur-recommande).  |
 
 Pour utiliser n'importe lequel de ces paramètres, ajoutez une section `custom` > `datadog` dans votre fichier `serverless.yml` qui est semblable à l'exemple ci-dessous :
 
@@ -63,11 +63,11 @@ custom:
     monitorsApiKey: "{Clé_API_Datadog}"
     monitorsAppKey: "{Clé_application_Datadog}"
     addLayers: true
+    addExtension: true
     logLevel: "info"
     enableXrayTracing: false
     enableDDTracing: true
     enableAPIGatewayLogs: true
-    forwarderArn: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
     enableTags: true
     injectLogContext: true
     exclude:
@@ -165,7 +165,7 @@ Il existe sept monitors recommandés avec des valeurs par défaut prédéfinies.
 
 Pour créer un monitor sans serveur recommandé, vous devez utiliser son ID. Attention : vous devez également définir les paramètres `monitorApiKey` et `monitorAppKey`.
 
-Si vous souhaitez configurer davantage de paramètres pour un monitor recommandé, définissez leur valeur sous l'ID du monitor. Les paramètres qui ne sont pas spécifiés à cet endroit seront définis sur la valeur recommandée par défaut. Le paramètre `query` pour les monitors recommandés ne peut pas être modifié directement. Il prend donc la valeur par défaut, comme les autres paramètres non spécifiés. Toutefois, vous pouvez modifier la valeur seuil de `query` en la redéfinissant dans le paramètre `options`. Pour supprimer un monitor, retirez-le du modèle `serverless.yml`. Pour en savoir plus sur la définition des paramètres de monitor, consultez la documentation relative aux [API Monitors de Datadog](https://docs.datadoghq.com/api/latest/monitors/#creer-un-monitor). 
+Si vous souhaitez configurer davantage de paramètres pour un monitor recommandé, définissez leur valeur sous l'ID du monitor. Les paramètres qui ne sont pas spécifiés à cet endroit seront définis sur la valeur recommandée par défaut. Le paramètre `query` pour les monitors recommandés ne peut pas être modifié directement. Il prend donc la valeur par défaut, comme les autres paramètres non spécifiés. Toutefois, vous pouvez modifier la valeur seuil de `query` en la redéfinissant dans le paramètre `options`. Pour supprimer un monitor, retirez-le du modèle `serverless.yml`. Pour en savoir plus sur la définition des paramètres de monitor, consultez la documentation relative aux [API Monitors de Datadog](https://docs.datadoghq.com/api/latest/monitors/#creer-un-monitor).
 
 La création du monitor a lieu après le déploiement de la fonction. Si jamais elle échoue, le déploiement de la fonction n'est donc pas perturbé.
 
