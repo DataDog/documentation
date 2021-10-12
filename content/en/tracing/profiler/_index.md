@@ -42,7 +42,7 @@ Continuous profiler is designed to run in production across all services by leve
 
 {{< site-region region="us5" >}}
 <div class="alert alert-warning">
-  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}} site.
+  The Continuous Profiler is not available for the Datadog {{< region-param key="dd_site_name" >}}  site.
 </div>
 {{< /site-region >}}
 
