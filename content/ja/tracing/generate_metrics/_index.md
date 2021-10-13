@@ -80,10 +80,10 @@ Tracing without Limits™ を使用すると、[保持フィルター][1]でイ�
 [1]: /ja/tracing/trace_retention_and_ingestion
 [2]: /ja/account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/ja/metrics/#overview
-[4]: /ja/monitors/create/types/anomaly/#overview
+[4]: /ja/monitors/monitor_types/anomaly/#overview
 [5]: /ja/tracing/trace_search_and_analytics/
 [6]: /ja/tracing/trace_search_and_analytics/query_syntax/#analytics-query
-[7]: /ja/monitors/create/types/forecasts/
+[7]: /ja/monitors/monitor_types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /ja/tracing/trace_search_and_analytics/query_syntax/

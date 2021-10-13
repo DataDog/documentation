@@ -12,11 +12,11 @@ aliases:
 
 変換するのは、この正弦波時系列 `sin{*}` です。 
 
-{{< img src="dashboards/functions/arithmetic/sinus.png" alt="Sinus 関数" style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/sinus.png" alt="Sinus 関数"  style="width:80%;">}}
 
 次の `abs(sin{*})` に変換します。
 
-{{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="abs を使用した Sinus 関数" style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="abs を使用した  Sinus 関数"  style="width:80%;">}}
 
 ## 対数
 
@@ -30,7 +30,7 @@ aliases:
 
 データポイントごとに 1 ずつ増えるメトリクス `x{*}` があるとすると、`log2(x{*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/arithmetic/log2.png" alt=" log2 関数" style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/log2.png" alt=" log2 関数"  style="width:80%;">}}
 
 ### ログベース 10
 
@@ -42,7 +42,7 @@ aliases:
 
 データポイントごとに 1 ずつ増えるメトリクス `x{*}` があるとすると、`log10(x{*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/arithmetic/log10.png" alt="log10 関数" style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/log10.png" alt="log10 関数"  style="width:80%;">}}
 
 ## 累積合計
 
@@ -54,7 +54,7 @@ aliases:
 
 値 `1` の定数であるメトリクス `const_1{*}` があるとすると、`cumsum(const_1{*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/arithmetic/cumsum.png" alt="abs を使用した累計関数" style="width:80%;">}}
+{{< img src="dashboards/functions/arithmetic/cumsum.png" alt="abs を使用した累計関数"  style="width:80%;">}}
 
 ## Integral
 

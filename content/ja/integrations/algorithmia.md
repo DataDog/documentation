@@ -20,7 +20,6 @@
 "guid": "bb9defff-03ae-4a22-93a7-6db498d37cd7"
 "integration_id": "algorithmia"
 "integration_title": "Algorithmia"
-"integration_version": ""
 "is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@algorithmia.io"

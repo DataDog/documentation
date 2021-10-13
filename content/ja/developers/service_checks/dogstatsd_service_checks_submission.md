@@ -9,7 +9,7 @@ further_reading:
   - link: /developers/community/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
+  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
     tag: GitHub
     text: DogStatsD ソースコード
 ---
@@ -170,4 +170,4 @@ $statsd->service_check('Service.check.name', 0);
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd/
-[2]: /ja/monitors/create/types/custom_check/
+[2]: /ja/monitors/monitor_types/custom_check/

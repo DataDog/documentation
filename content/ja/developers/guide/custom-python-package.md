@@ -20,7 +20,7 @@ further_reading:
 
 Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
 
-Python パッケージは、埋め込み `pip` でインストールできます。
+Python パッケージは、埋め込み `pip` からインストールできます。
 
 ```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
@@ -31,7 +31,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 
 Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
 
-Python パッケージは、埋め込み `pip` でインストールできます。
+Python パッケージは、埋め込み `pip` からインストールできます。
 
 ```shell
 sudo dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>

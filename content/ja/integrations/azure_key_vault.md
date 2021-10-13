@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Key Vault のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_key_vault/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_key_vault/'
 draft: false
 git_integration_title: azure_key_vault
 has_logo: true
 integration_id: azure-keyvault
 integration_title: Microsoft Azure Key Vault
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
