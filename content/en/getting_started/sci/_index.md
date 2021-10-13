@@ -22,7 +22,7 @@ To be able to map telemetry data to your source code we need to collect some met
     2. K8s label or annotation
     3. Setting or extending the DD_TAGS environment variable
 2. Upload git metadata (including commit SHAs) and the git repository url
-    1. By running [datadog-ci commit upload](https://github.com/DataDog/datadog-ci/tree/master/src/commands/commit)
+    1. By running [datadog-ci git-metadata upload](https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata)
 3. Install Github App
 
 By having these two data points Datadog is able to correlate all places where we can link to your git repository directly.
@@ -81,10 +81,10 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
 
 ## Datadog-ci
 
-To link your telemetry to your source code, we need to regularly collect some information from your git repository, for every commit sha reported to Datadog. The command [datadog-ci commit upload](https://github.com/DataDog/datadog-ci/tree/master/src/commands/commit) allows us to collect that data. Every time you run this command within a git repository, the following information is reported to Datadog:
+To link your telemetry to your source code, we need to regularly collect some information from your git repository, for every commit sha reported to Datadog. The command [datadog-ci git-metadata upload](https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata) allows us to collect that data. Every time you run this command within a git repository, the following information is reported to Datadog:
 1. Repository URL
 2. Commit sha of the current branch
 3. List of tracked files paths within the repository
 
-A good way to ensure the required data is collected is to run datadog-ci commit upload as part of your CI pipeline.
+A good way to ensure the required data is collected is to run datadog-ci git-metadata upload as part of your CI pipeline.
 
