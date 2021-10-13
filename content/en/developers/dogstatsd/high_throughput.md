@@ -66,19 +66,20 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-By using Datadog's official Python library [datadogpy][1], the example below uses a buffered DogStatsD client that sends metrics in a minimal number of packets. In client versions v0.43.0 and higher, buffering is enabled by default and automatic flushing is performed at packet size limit and every 300ms (configurable).
+By using Datadog's official Python library [datadogpy][1], the example below uses a buffered DogStatsD client that sends metrics in a minimal number of packets. With buffering automatic flushing is performed at packet size limit and every 300ms (configurable).
 
 ```python
 from datadog import DogStatsd
 
-dsd = DogStatsd(host="127.0.0.1", port=8125)
 
-# If using client v0.43.0+, buffering is enabled by default with automatic flushing every 300ms.
+# If using client v0.43.0+
+dsd = DogStatsd(host="127.0.0.1", port=8125, disable_buffering=False)
 dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
 dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 dsd.flush()  # Optional manual flush
 
 # If using client before v0.43.0, context manager is needed to use buffering
+dsd = DogStatsd(host="127.0.0.1", port=8125)
 with dsd:
     dsd.gauge('example_metric.gauge_1', 123, tags=["environment:dev"])
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])

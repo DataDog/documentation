@@ -57,9 +57,6 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
-
-# Optional manual flush (only available in client versions >= 0.43.0)
-statsd.flush()
 ```
 {{< /programming-lang >}}
 
