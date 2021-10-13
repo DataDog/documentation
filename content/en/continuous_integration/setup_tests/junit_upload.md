@@ -121,6 +121,6 @@ The Datadog CI CLI tries to extract git repository and commit metadata from CI p
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://git-scm.com/downloads
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

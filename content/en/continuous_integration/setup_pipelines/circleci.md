@@ -87,6 +87,6 @@ The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after t
 [2]: https://circleci.com/docs/2.0/webhooks
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="us5,gov" >}}
 This feature is not supported for the selected Datadog site ({{< region-param key="dd_site_name" >}}).
 {{< /site-region >}}

@@ -3,15 +3,15 @@ title: Cloud Security Posture Management
 kind: documentation
 ---
 
-{{< site-region region="us" >}}
+{{< site-region region="us,eu" >}}
 <div class="alert alert-warning">
 Cloud Security Posture Management is <a href="https://app.datadoghq.com/security/configuration">Generally Available</a>.
 </div>
 {{< /site-region >}}
 
-{{< site-region region="us3,gov,eu" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED, US3, or EU.
+Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 

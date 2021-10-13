@@ -267,7 +267,7 @@ Replace `<TAG>` with either a specific version number (for example, `{{< latest-
 
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```hcl
 variable "dd_api_key" {
   type        = string
@@ -343,7 +343,7 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
@@ -359,7 +359,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 
 The available `RUNTIME` options are `Node10-x` and `Node12-x`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="node" >}}`. For example:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
@@ -395,17 +395,24 @@ See the [latest release][2].
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 ```
+// For x86 lambdas
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
+
 ```
 
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 
 ```
+// For x86 lambdas
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:<EXTENSION_VERSION>
+// For arm64 lambdas
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:<EXTENSION_VERSION>
 ```
 
 {{< /site-region >}}
@@ -498,6 +505,8 @@ exports.handler = async (event) => {
 
 For more information on custom metric submission, see [here][6]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][7].
 
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][8] guide to ensure that the extension can reach Datadog API endpoints.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -509,3 +518,4 @@ For more information on custom metric submission, see [here][6]. For additional 
 [5]: /serverless/libraries_integrations/forwarder
 [6]: /serverless/custom_metrics?tab=nodejs
 [7]: /tracing/custom_instrumentation/nodejs/
+[8]: /serverless/guide/extension_private_link/

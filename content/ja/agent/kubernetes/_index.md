@@ -155,22 +155,22 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
 3. **Datadog Agent マニフェストを作成**。以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します。
 
-    |メトリクス                   |ログ                      | APM                       |プロセス                   | NPM                       | Linux                   | Windows                 |
-    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
-    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
-    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
-    |                           |                           |                           |                           | <i class="icon-tick"></i> | [マニフェストテンプレート][11] |テンプレートなし             |
-    | <i class="icon-tick"></i> |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
+    | メトリクス                   | ログ                      | APM                       | Process                   | NPM                       | セキュリティ                       | Linux                   | Windows                 |
+    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> | [マニフェストテンプレート][3]  | [マニフェストテンプレート][4] (セキュリティなし)  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][5]  | [マニフェストテンプレート][6]  |
+    | <i class="icon-tick"></i> | <i class="icon-tick"></i> |                           |                           |                           |                           | [マニフェストテンプレート][7]  | [マニフェストテンプレート][8]  |
+    | <i class="icon-tick"></i> |                           | <i class="icon-tick"></i> |                           |                           |                           | [マニフェストテンプレート][9]  | [マニフェストテンプレート][10] |
+    |                           |                           |                           |                           | <i class="icon-tick"></i> | <i class="icon-tick"></i> | [マニフェストテンプレート][11] | テンプレートなし             |
+    | <i class="icon-tick"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
 
-   トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][14]。それぞれの機能を個別に有効にする方法については、[ログ][15]、[APM][16]、[プロセス][17]、[ネットワークパフォーマンスモニタリング][18]に関するドキュメントページを参照してください。
+   トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][14]。それぞれの機能を個別に有効にする方法については、[ログ][15]、[APM][16]、[プロセス][17]、[ネットワークパフォーマンスモニタリング][18]、[セキュリティ][19]に関するドキュメントページを参照してください。
 
     **注**: これらのマニフェストは、デフォルトで `default` ネームスペースに設定されています。カスタムネームスペースを使用している場合、適用する前に `metadata.namespace` パラメーターを更新します。
 
 4. `datadog-agent.yaml` マニフェストで、`DD_SITE` 環境変数を使用して **Datadog サイト**を {{< region-param key="dd_site" code="true" >}} に設定します。
 
-    **注**: `DD_SITE` 環境変数が明示的に設定されていない場合、値はデフォルトで `US` サイトの `datadog.com` に設定されます。その他のサイト (`EU`、`US3`、または `US1-FED`) のいずれかを使用している場合は、API キーのメッセージが無効になります。[ドキュメントのサイト選択ドロップダウン][19]を使用して、使用中のサイトに適したドキュメントを確認してください。
+    **注**: `DD_SITE` 環境変数が明示的に設定されていない場合、値はデフォルトで `US` サイトの `datadog.com` に設定されます。その他のサイト (`EU`、`US3`、または `US1-FED`) のいずれかを使用している場合は、API キーのメッセージが無効になります。[ドキュメントのサイト選択ドロップダウン][20]を使用して、使用中のサイトに適したドキュメントを確認してください。
 
 5. 次のコマンドで **DaemonSet をデプロイ**します。
 
@@ -191,7 +191,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. 任意 - **Kubernetes State メトリクスの設定**: [Kube-State マニフェストフォルダー][20]をダウンロードし、それを Kubernetes クラスターに適用して [kube-state メトリクス][21]を自動収集します:
+7. 任意 - **Kubernetes State メトリクスの設定**: [Kube-State マニフェストフォルダー][21]をダウンロードし、それを Kubernetes クラスターに適用して [kube-state メトリクス][22]を自動収集します:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -229,9 +229,10 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 [16]: /ja/agent/kubernetes/apm/
 [17]: /ja/infrastructure/process/?tab=kubernetes#installation
 [18]: /ja/network_monitoring/performance/setup/
-[19]: /ja/getting_started/site/
-[20]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[21]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
+[19]: /ja/security/agent/
+[20]: /ja/getting_started/site/
+[21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[22]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 

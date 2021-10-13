@@ -71,6 +71,8 @@ end
 
 3. If you run UITests, also link the app running the tests with this library.
 
+<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
@@ -551,6 +553,6 @@ Additional Git configuration for physical device testing:
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
 
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

@@ -709,6 +709,18 @@ class Integrations:
                 if matches:
                     integration_id = matches.group(1)
 
+        # if __about__.py exists lets grab the integration version
+        integration_version = manifest_json.get("integration_version", "") or ""
+        integration_name = basename(dirname(file_name))
+        aboutpy = "{0}{1}{2}{3}{4}{5}{6}".format(dirname(file_name), sep, "datadog_checks", sep, integration_name, sep, "__about__.py")
+
+        if exists(aboutpy):
+            with open(aboutpy) as f:
+                # look for version = "integration-version" and extract
+                matches = re.search("^__version__\s*=\s*(?:\'|\")([0-9.]+)(?:\'|\")$", f.read(), re.MULTILINE)
+                if matches:
+                    integration_version = matches.group(1)
+
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
@@ -724,11 +736,11 @@ class Integrations:
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, f_name))
                     result = self.add_integration_frontmatter(
-                        f_name, result, dependencies, integration_id, manifest_json
+                        f_name, result, dependencies, integration_id, integration_version, manifest_json
                     )
                 else:
                     result = self.add_integration_frontmatter(
-                        new_file_name, result, dependencies, integration_id
+                        new_file_name, result, dependencies, integration_id, integration_version
                     )
 
                 with open(out_name, "w", ) as out:
@@ -741,7 +753,7 @@ class Integrations:
                         final_file.write(final_text)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id="", manifest_json=None
+        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -779,6 +791,7 @@ class Integrations:
                 item["dependencies"] = dependencies
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
+                item["integration_version"] = item.get("integration_version", integration_version)
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
