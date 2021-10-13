@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés Azure Data Lake Store.
-doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_data_lake_store/'
 draft: false
 git_integration_title: azure_data_lake_store
 has_logo: true
 integration_id: azure-datalakestore
 integration_title: Microsoft Azure Data Lake Store
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
