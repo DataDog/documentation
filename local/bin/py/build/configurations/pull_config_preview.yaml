@@ -226,13 +226,6 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'forwarder.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
-          title: Datadog Forwarder
-          kind: documentation
-          aliases:
-            - /serverless/troubleshooting/installing_the_forwarder/
-            - /serverless/forwarder/
 
   - repo_name: serverless-plugin-datadog
     contents:
