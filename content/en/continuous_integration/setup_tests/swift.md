@@ -132,12 +132,11 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ### Collecting Git metadata
 
-Git information is required for the proper visualization of test results, and used to group them by repository, branch, and commit. It is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-If running tests in non-supported CI providers or with no `.git` folder, Git information can be set manually using environment variables. These environment variables take precedence over any autodetected information.
-The supported environment variables for providing Git information are the following:
+If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
 `DD_GIT_REPOSITORY_URL`
 : URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
@@ -161,11 +160,11 @@ The supported environment variables for providing Git information are the follow
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
 : Commit author name.<br/>
-**Example**: `John Doe`
+**Example**: `John Smith`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
 : Commit author email.<br/>
-**Example**: `john@doe.com`
+**Example**: `john@example.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
 : Commit author date in ISO 8601 format.<br/>
@@ -173,11 +172,11 @@ The supported environment variables for providing Git information are the follow
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
 : Commit committer name.<br/>
-**Example**: `Jane Doe`
+**Example**: `Jane Smith`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
 : Commit committer email.<br/>
-**Example**: `jane@doe.com`
+**Example**: `jane@example.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
 : Commit committer date in ISO 8601 format.<br/>
