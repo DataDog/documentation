@@ -1107,6 +1107,10 @@ main:
     url: infrastructure/livecontainers/
     parent: infrastructure
     weight: 5
+  - name: Configuration
+    url: infrastructure/livecontainers/configuration
+    parent: infrastructure
+    weight: 501
   - name: Serverless
     url: serverless
     pre: serverless
