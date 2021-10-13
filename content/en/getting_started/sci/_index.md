@@ -41,7 +41,7 @@ With containerized environments it’s easy to tag all your telemetry with the g
 
 #### Docker runtime
 
-If your containers are running on Docker, git.commit.sha can be directly extracted from your docker images and comply with the [opencontainers standard](https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys). You can simply tag your containers during build time, and configure the agent to collect this tag as `git.commit.sha`.
+If your containers are running on Docker, git.commit.sha can be directly extracted from your docker images that comply with the [opencontainers standard](https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys). You can simply tag your containers during build time, and configure the agent to collect this tag as `git.commit.sha`.
 
 ##### Tag your images
 
