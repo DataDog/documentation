@@ -32,6 +32,7 @@
 "guid": "4ae15fc5-ff5b-4cc4-a3cf-a7b5d164c538"
 "integration_id": "rapdev-nutanix"
 "integration_title": "Nutanix par RapDev"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

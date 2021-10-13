@@ -23,6 +23,7 @@
 "guid": "fd4bd190-d57d-449b-9880-76cbf8325a3e"
 "integration_id": "fairwinds-insights"
 "integration_title": "Fairwinds Insights"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "insights@fairwinds.com"
@@ -139,5 +140,5 @@ Fairwinds Insights offre des intégrations pour un large éventail d'outils open
 
 Politique d'annulation et de remboursement d'Insights :
 
-Fairwinds Insights est proposé sous forme d'abonnement mensuel que vous, le client, pouvez interrompre à tout moment par les moyens mis à votre disposition via votre compte DataDog Marketplace. Si vous choisissez de mettre fin à votre abonnement, seul le reste de la période de facturation mensuelle en cours vous sera facturé. Insights n'émettra aucun remboursement pour les frais déjà payés.
+Fairwinds Insights est proposé sous forme d'abonnement mensuel que vous, le client, pouvez interrompre à tout moment par les moyens mis à votre disposition via votre compte Marketplace Datadog. Si vous choisissez de mettre fin à votre abonnement, seul le reste de la période de facturation mensuelle en cours vous sera facturé. Insights n'émettra aucun remboursement pour les frais déjà payés.
 
