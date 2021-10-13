@@ -10,6 +10,8 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+<div class="alert alert-info"><p>Ruby test instrumentation is in beta. There are no billing implications for instrumenting Ruby tests during this period.</p>
+
 ## Compatibility
 
 Supported Ruby interpreters:
