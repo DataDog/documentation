@@ -56,6 +56,29 @@ This automatically updates the necessary RBAC configurations as well as sets up 
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+To enable the external metrics server with your Cluster Agent managed by the Datadog operator, you first need to [setup the datadog operator][1]. Then, you set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
+
+  ```yaml
+  apiVersion: datadoghq.com/v1alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  clusterAgent:
+    config:
+      externalMetrics:
+        enabled: true
+    replicas: 2
+  ```
+
+The operator will automatically update the necessary RBAC configurations as well as setup the corresponding `Service` and `APIService` for Kubernetes to use.
+
+[1]: /agent/guide/operator-advanced
+{{% /tab %}}
 {{% tab "Daemonset" %}}
 
 #### Custom metrics server
@@ -166,7 +189,7 @@ For autoscaling to work correctly, custom queries must follow these rules:
 ### Setup
 #### Datadog Cluster Agent
 
-Set up the Datadog Cluster Agent to use `DatadogMetric` using Helm or Daemonset:
+Set up the Datadog Cluster Agent to use `DatadogMetric` using Helm, the Datadog operator or Daemonset:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -189,6 +212,29 @@ This automatically updates the necessary RBAC files and directs the Cluster Agen
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `clusterAgent.config.externalMetrics.useDatadogMetrics` to `true`.
+
+  ```yaml
+  apiVersion: datadoghq.com/v1alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  clusterAgent:
+    config:
+      externalMetrics:
+        enabled: true
+        useDatadogMetrics: true
+    replicas: 2
+  ```
+
+The operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+
+{{< /tab %}}
 {{% tab "Daemonset" %}}
 To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
