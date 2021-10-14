@@ -16035,6 +16035,12 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-given:
+        dashboard_list:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\"\n}"
+          step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteDashboardList
@@ -16778,10 +16784,22 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-given:
+        downtime:
+          parameters:
+          - name: body
+            value: "{\n  \"message\": \"{{ unique }}\",\n  \"start\": {{ timestamp(\"now\")
+              }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"test:{{ unique_lower_alnum
+              }}\"],\n  \"recurrence\": {\n    \"type\": \"weeks\",\n    \"period\":
+              1,\n    \"week_days\": [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n
+              \   \"until_date\": {{ timestamp(\"now + 21d\")}}\n  }\n}"
+          step: there is a valid "downtime" in the system
       x-menu-order: 2
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: CancelDowntime
+        parameters:
+        - name: downtime_id
+          source: id
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
@@ -19208,12 +19226,12 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-given:
-        webhook-custom-variable:
+        webhook_custom_variable:
           parameters:
           - name: body
             value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
               \ \"is_secret\": false\n}"
-          step: there is a valid "webhook-custom-variable" in the system
+          step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
@@ -20650,6 +20668,12 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-given:
+        monitor:
+          parameters:
+          - file: monitor_payload.json
+            name: body
+          step: there is a valid "monitor" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteMonitor
@@ -20663,6 +20687,7 @@ paths:
       operationId: CheckCanDeleteMonitor
       parameters:
       - description: The IDs of the monitor to check.
+        explode: false
         in: query
         name: monitor_ids
         required: true
@@ -20671,6 +20696,7 @@ paths:
             format: int64
             type: integer
           type: array
+        style: form
       responses:
         '200':
           content:
@@ -23234,6 +23260,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_api_test:
+          parameters:
+          - file: synthetics_api_test_payload.json
+            name: body
+          step: there is a valid "synthetics_api_test" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteTests
