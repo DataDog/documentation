@@ -313,15 +313,23 @@ Some or all queries may not have plans available. This can be due to unsupported
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-This is likely due to the missing `postgresql-contrib` package that includes the `pg_stat_statements` extension. The installation
-of the missing package will vary depending on the host's distribution and your postgres version. As an example, installing the contrib package on Ubuntu for Postgres 10 would be `sudo apt-get install postgresql-contrib-10`. 
-
 Example error output from `create extension pg_stat_statements`: 
 ```
 create extension pg_stat_statements;
 ERROR:  could not open extension control file "<path>/share/postgresql/extension/pg_stat_statements.control": No such file or directory
 SQL State: 58P01
 ```
+
+This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run: 
+
+```
+sudo apt-get install postgresql-contrib-10
+```
+
+See the appropriate version of the [Postgres `contrib` documentation][1] for more information.
+
+
+[1]: https://www.postgresql.org/docs/12/contrib.html
 {{% /tab %}}
 {{< /tabs >}}
 
