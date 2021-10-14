@@ -23,7 +23,6 @@
 "guid": "a13605e1-cba6-4019-a475-93ca20d36cde"
 "integration_id": "bigpanda-bigpanda"
 "integration_title": "BigPanda SaaS プラットフォーム"
-"integration_version": ""
 "is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@bigpanda.io"

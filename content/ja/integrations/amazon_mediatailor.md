@@ -6,13 +6,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elemental MediaTailor のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_mediatailor/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediatailor/'
 draft: false
 git_integration_title: amazon_mediatailor
 has_logo: true
 integration_id: amazon-mediatailor
 integration_title: Amazon Elemental MediaTailor
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

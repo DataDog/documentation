@@ -12,8 +12,8 @@ aliases:
 イベントをメールで送信するには、Datadog 専用のメールアドレスを取得する必要があります。
 
 1. [Datadog アカウント][3]にログインします。
-2. 左下の **Account** メニューで **Organization Settings** を選択します。
-3. **Events API emails** タブをクリックします。
+2. **Integrations** メニューに移動し、**APIs** を選択します。
+3. **Events API emails** を展開します。
 4. **Format** ドロップダウンからメッセージのフォーマット (`Plain text` または `JSON`) を選択します。
 5. **Create API email** ボタンをクリックします。
 

@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure HDInsight のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_hd_insight/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_hd_insight/'
 draft: false
 git_integration_title: azure_hd_insight
 has_logo: true
 integration_id: azure-hdinsight
 integration_title: Microsoft Azure HDInsight
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
