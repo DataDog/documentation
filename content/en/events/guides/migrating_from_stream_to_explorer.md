@@ -30,10 +30,6 @@ This guide describes how to migrate your organization’s event monitors and das
 
 4. **Contact Support to enable the new query syntax.** After all your dashboard and monitor configurations are migrated, [ask Support][3] to switch your organization to the new query syntax. When this switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error.
 
-<!-- Previous: 
-When you have successfully migrated your monitors and dashboards, Datadog automatically stops writing events to the previous intake, so it's good to have a plan in place to sunset your legacy events in favor of the new events. The Event Stream continues to be accessible for viewing your event history.
--->
-
 5. **If you have SLOs based on event monitors**, update their definitions to point to the new monitors.
 
 ## Details of the changes
@@ -106,7 +102,7 @@ This means you can use complex queries in event monitors with all the added capa
 
 #### Event monitors API syntax examples before and after
 
-The [Event monitors API][6] has a new monitor query syntax, with Average and Cardinality rollup methods and fewer required attributes.
+The [Event monitors API][6] has a new monitor query syntax (See "Event V2 Alert Query" section), with Average and Cardinality rollup methods and fewer required attributes. 
 
 No Slack events in the past 24 hours
 : Legacy syntax </br>
@@ -161,4 +157,4 @@ If you are using these features, [contact Support][3] to get help finding an alt
 [3]: /help/
 [4]: https://github.com/DataDog/events-v2-migration-script
 [5]: /api/latest/events/#query-the-event-stream
-[6]: /api/latest/events
+[6]: /api/latest/monitors/#create-a-monitor
