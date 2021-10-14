@@ -26,6 +26,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
+Pre-requisites
+:
+* Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of the `postgresql-contrib` package.
+
 Supported Agent versions
 : 7.30.0+
 
