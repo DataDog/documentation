@@ -209,7 +209,7 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
 
 1. Add the following settings to your `zappa_settings.json`:
 
-  {{< site-region region="us,us3,eu" >}}
+  {{< site-region region="us,us3,us5,eu" >}}
   ```json
   {
     "dev": {
@@ -256,7 +256,7 @@ More information and additional parameters can be found on the [Datadog CDK NPM 
 
 For example:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```
 // For x86 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python38:{{< latest-lambda-layer-version layer="python" >}}
@@ -284,7 +284,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
 ### Update the project
 
 1. Add the [Datadog Lambda Extension][1] and the following environment variables in your `config.json`:
-  {{< site-region region="us,us3,eu" >}}
+  {{< site-region region="us,us3,us5,eu" >}}
   ```json
   {
     "version": "2.0",
@@ -354,7 +354,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Extension-ARM:{{<
 
 1. Add the following configurations to the `aws_lambda_function` resources in your .tf files:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```hcl
 variable "dd_api_key" {
   type        = string
@@ -464,7 +464,7 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
@@ -477,7 +477,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 
 The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```
 // If using x86 architecture
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
@@ -510,7 +510,7 @@ See the [latest release][5].
 
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
-{{< site-region region="us,us3,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 ```
 // For x86 architecture
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:<EXTENSION_VERSION>
@@ -607,6 +607,8 @@ def get_message():
 
 For more information on custom metric submission, see [here][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
 
+If your Lambda function is running in a VPC, follow the [Datadog Lambda Extension AWS PrivateLink Setup][9] guide to ensure that the extension can reach Datadog API endpoints.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -619,3 +621,4 @@ For more information on custom metric submission, see [here][7]. For additional 
 [6]: /serverless/libraries_integrations/forwarder
 [7]: /serverless/custom_metrics?tab=python
 [8]: /tracing/custom_instrumentation/python/
+[9]: /serverless/guide/extension_private_link/

@@ -1,10 +1,11 @@
+---
 # Source: datadog/templates/cluster-agent-rbac.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
     app: "datadog-agent"
-    chart: "datadog-2.19.8"
+    chart: "datadog-2.22.15"
     heritage: "Helm"
     release: "datadog-agent"
   name: datadog-agent-cluster-agent
@@ -144,6 +145,7 @@ rules:
       - deployments
       - replicasets
       - daemonsets
+      - statefulsets
     verbs:
       - list
       - get
@@ -226,7 +228,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -329,8 +331,77 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
+        - name: trace-agent
+          image: "gcr.io/datadoghq/agent:7.31.1"
+          imagePullPolicy: IfNotPresent
+          command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
+          resources: {}
+          ports:
+            - containerPort: 8126
+              hostPort: 8126
+              name: traceport
+              protocol: TCP
+          env:
+            # Needs to be removed when Agent N-2 is built with Golang 1.17
+            - name: GODEBUG
+              value: x509ignoreCN=0
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog-agent"
+                  key: api-key
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_CLUSTER_AGENT_ENABLED
+              value: "true"
+            - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
+              value: datadog-agent-cluster-agent
+            - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: datadog-agent-cluster-agent
+                  key: token
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_APM_ENABLED
+              value: "true"
+            - name: DD_APM_NON_LOCAL_TRAFFIC
+              value: "true"
+            - name: DD_APM_RECEIVER_PORT
+              value: "8126"
+            - name: DD_APM_RECEIVER_SOCKET
+              value: "/var/run/datadog/apm.socket"
+            - name: DD_DOGSTATSD_SOCKET
+              value: "/var/run/datadog/dsd.socket"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/datadog-agent
+            - name: logdatadog
+              mountPath: /var/log/datadog
+            - name: tmpdir
+              mountPath: /tmp
+              readOnly: false
+            - name: dsdsocket
+              mountPath: /var/run/datadog
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
+              readOnly: true
+            - mountPath: /etc/kubernetes/certs/
+              name: kubeletserver
+              readOnly: true
+          livenessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            tcpSocket:
+              port: 8126
+            timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -397,7 +468,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -407,7 +478,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.29.1"
+          image: "gcr.io/datadoghq/agent:7.31.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -460,8 +531,14 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
-        - emptyDir: {}
+        - hostPath:
+            path: /var/run/datadog/
+            type: DirectoryOrCreate
           name: dsdsocket
+        - hostPath:
+            path: /var/run/datadog/
+            type: DirectoryOrCreate
+          name: apmsocket
         - name: s6-run
           emptyDir: {}
         - hostPath:
@@ -502,25 +579,12 @@ spec:
       labels:
         app: datadog-agent-cluster-agent
       name: datadog-agent-cluster-agent
-      annotations:
-        ad.datadoghq.com/cluster-agent.check_names: '["prometheus"]'
-        ad.datadoghq.com/cluster-agent.init_configs: '[{}]'
-        ad.datadoghq.com/cluster-agent.instances: |
-          [{
-            "prometheus_url": "http://%%host%%:5000/metrics",
-            "namespace": "datadog.cluster_agent",
-            "metrics": [
-              "go_goroutines", "go_memstats_*", "process_*",
-              "api_requests",
-              "datadog_requests", "external_metrics", "rate_limit_queries_*",
-              "cluster_checks_*"
-            ]
-          }]
+      annotations: {}
     spec:
       serviceAccountName: datadog-agent-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.13.1"
+          image: "gcr.io/datadoghq/cluster-agent:1.15.1"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -592,5 +656,14 @@ spec:
         - name: installinfo
           configMap:
             name: datadog-agent-installinfo
+      affinity:
+        # Force scheduling the cluster agents on different nodes
+        # to guarantee that the standby instance can immediately take the lead from a leader running of a faulty node.
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: datadog-agent-cluster-agent
+              topologyKey: kubernetes.io/hostname
       nodeSelector:
         kubernetes.io/os: linux

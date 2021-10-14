@@ -78,6 +78,19 @@ $ddpurple: #632ca6;
 
     .code-snippet-wrapper {
         margin-right: 0;
+        /*height: 475px;
+
+        @include media-breakpoint-up(md) {
+            height: 435px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            height: 420px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            height: 400px;
+        }*/
     }
 
     .table-request .isReadOnly {
