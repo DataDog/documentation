@@ -12,15 +12,17 @@ aliases:
     - /developers/events/
 ---
 
-## Send your custom events to Datadog
-
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). 
 
-{{< whatsnext desc="Use these guides to programmatically send events:">}}
+{{< whatsnext desc="Send your custom events to Datadog:">}}
     {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
     {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/events/guides/email/" >}}Email{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Other guides:">}}
+    {{< nextlink href="/events/guides/migrating_from_stream_to_explorer/" >}}Migrating from the Event Stream to the Events Explore{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
