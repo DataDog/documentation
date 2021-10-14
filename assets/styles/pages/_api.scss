@@ -76,21 +76,24 @@ $ddpurple: #632ca6;
         }
     }
 
-    .code-snippet-wrapper {
-        margin-right: 0;
-        height: 475px;
+    .programming-lang-wrapper:not(.api-reference) {
+        min-height: 500px;
 
         @include media-breakpoint-up(md) {
-            height: 435px;
+            height: 550px;
         }
 
         @include media-breakpoint-up(lg) {
-            height: 420px;
+            height: 600px;
         }
 
         @include media-breakpoint-up(xl) {
-            height: 400px;
+            height: 300px;
         }
+    }
+
+    .code-snippet-wrapper {
+        margin-right: 0;
     }
 
     .table-request .isReadOnly {
