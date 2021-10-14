@@ -356,12 +356,12 @@ If you want to collect events from your Kubernetes cluster set the environment v
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Set `agent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
+Set `clusterAgent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
 
 For example:
 
 ```
-agent:
+clusterAgent:
   config:
     collectEvents: true
 ```
