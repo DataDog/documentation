@@ -28,7 +28,7 @@ Supported PostgreSQL versions
 
 Pre-requisites
 :
-* Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of the `postgresql-contrib` package.
+Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of the `postgresql-contrib` package.
 
 Supported Agent versions
 : 7.30.0+
