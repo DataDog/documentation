@@ -17,7 +17,7 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 author:
-  homepage: 'https://www.rapdev.io'
+  homepage: https://www.rapdev.io
   name: RapDev.io
 categories:
   - marketplace
@@ -34,6 +34,7 @@ git_integration_title: rapdev_zoom
 guid: a0a0380a-42b7-4977-92fc-a65c8d904b8d
 integration_id: rapdev-zoom
 integration_title: Zoom par RapDev
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: integrations@rapdev.io

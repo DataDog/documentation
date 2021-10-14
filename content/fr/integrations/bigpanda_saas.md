@@ -23,6 +23,7 @@
 "guid": "a13605e1-cba6-4019-a475-93ca20d36cde"
 "integration_id": "bigpanda-bigpanda"
 "integration_title": "Plate-forme SaaS BigPanda"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@bigpanda.io"
@@ -57,7 +58,7 @@ BigPanda propose par défaut des intégrations avec l'ensemble des produits de s
 
 Résultat : les équipes IT Ops, NOC, DevOps et SRE peuvent obtenir rapidement une vue d'ensemble de leurs alertes et comprendre les raisons derrière une application, un système ou un service lent. De plus, BigPanda réduit le volume d'alertes envoyées dans les environnements des utilisateurs ainsi que le temps moyen de réparation (MTTR).
 
-Cette solution du marketplace Datadog vous permet d'accéder à la plate-forme BigPanda. Si vous avez déjà souscrit à BigPanda et que vous souhaitez connecter votre instance à Datadog, [cliquez ici](/account/settings#intégrations/bigpanda) pour configurer l'intégration.
+Cette solution du Marketplace Datadog vous permet d'accéder à la plate-forme BigPanda. Si vous avez déjà souscrit à BigPanda et que vous souhaitez connecter votre instance à Datadog, [cliquez ici](/account/settings#intégrations/bigpanda) pour configurer l'intégration.
 
 {{< img src="marketplace/bigpanda_saas/images/bigpanda_dd_before.png" alt="Avant BigPanda et DD" >}}
 
