@@ -11,14 +11,13 @@ categories:
 creates_events: true
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md'
 display_name: Flagsmith
 draft: false
 git_integration_title: flagsmith
 guid: cb56fcff-3c76-4522-9672-1c3d285728f5
 integration_id: flagsmith
 integration_title: Flagsmith
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: support@flagsmith.com
