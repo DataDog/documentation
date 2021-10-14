@@ -10,13 +10,13 @@ further_reading:
   text: "Understand what is going on at any level of your system"
 ---
 
-## Configuration
+
 
 ### Kubernetes resources
 
-The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][5]. This feature allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
+The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][1]. This feature allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
-Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][6] and [Cluster Agent version >= 1.11.0][7] prior to the configurations below.
+Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][2] and [Cluster Agent version >= 1.11.0][3] prior to the configurations below.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -139,7 +139,7 @@ The following table presents the list of collected resources and the minimal Age
 
 ### Instructions for previous Agent and Cluster Agent versions.
 
-The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
+The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][2] and [Cluster Agent version >= 1.9.0][3] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -293,3 +293,11 @@ container_include: ["name:frontend.*"]
 ```
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /infrastructure/livecontainers/configuration
+[2]: /tagging/assigning_tags?tab=agentv6v7#host-tags
+[3]: /getting_started/tagging/

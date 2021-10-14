@@ -177,6 +177,20 @@ Kubernetes Resources views have a few additional tabs:
 
 For a detailed dashboard of this resource, click the **View Dashboard** in the top right corner of this panel.
 
+#### Resource utilization
+
+The **Resource Utilization** tab is to the right of to the **Cluster Map** tab. 
+
+{{< img src="infrastructure/livecontainers/resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
+
+This tab displays your CPU and memory usage over time. This information helps you better understand the resource utilization of your current workload, detect where resources may be over-provisioned or under-provisioned, and better allocate and manage your resources.
+
+Click on any row in the table to view informatiion about a specific resource in a side panel.
+
+{{< img src="infrastructure/livecontainers/resource_utilization_panel.png" alt="Container Resource Utilization Side Panel Details" style="width:80%;">}}
+
+In the above screenshot, pods are grouped by cluster name. The side panel is opened for pods within a particular cluster. Average CPU and memory usage for these pods is displayed.
+
 ### Container logs
 
 View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [live tail][13] or indexed logs for any time in the past.
