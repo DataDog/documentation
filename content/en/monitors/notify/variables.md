@@ -203,14 +203,13 @@ This is the escalation message @dev-team@company.com
 {{< /tabs >}}
 
 
-## Notification message enrichment
+## Attribute and tag variables
 
-### Attribute and tag variables
+Use attribute and tag variables to render alert messages that are customized, informative, and specific to help people quickly understand the nature of the alert.
 
-#### Multi-alert variables
+### Multi-alert variables
 
-Configure multi-alert variables in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box.
-Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
+Configure multi-alert variables in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
 
 {{< tabs >}}
 {{% tab "Group by tag" %}}
@@ -223,22 +222,22 @@ If a metric is tagged with any tag following the `key:value` syntax and the moni
 
 This renders the `value` associated with the `key` in each alert notification. If a group is tagged with multiple `values` associated with the same `key`, the alert message renders a comma-separated string of all values, in the lexicographic order.
 
-**Example**: if your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
+**Example**: If your monitor triggers an alert for each `env`, then the variable `{{env.name}}` is available in your notification message.
 
-{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi alert variable syntax" style="width:90%;">}}
+{{< img src="monitors/notifications/multi_alert_variable.png" alt="Multi-alert variable syntax" style="width:90%;">}}
 
-##### Query group by host
+#### Query group by host
 
-If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host.
-To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
-Some specific host metadata are available as well:
+If your monitor triggers an alert for each `host`, then the tag variables `{{host.name}}` and `{{host.ip}}` are available as well as any host tag that is available on this host. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Say what's happening** section.
 
-- Agent Version : {{host.metadata_agent_version}}
-- Machine : {{host.metadata_machine}}
-- Platform : {{host.metadata_platform}}
-- Processor : {{host.metadata_processor}}
+Some specific host metadata variables are available:
 
-##### Tag key with period
+- Agent Version: `{{host.metadata_agent_version}}`
+- Machine: `{{host.metadata_machine}}`
+- Platform: `{{host.metadata_platform}}`
+- Processor: `{{host.metadata_processor}}`
+
+#### Tag key with period
 
 If your tag's key has a period in it, include brackets around the full key when using a tag variable.
 For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
@@ -263,7 +262,7 @@ Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use 
 {{ @facet_key.name }}
 ```
 
-**Example**: To include group-specific information in a multi alert log monitor group by `@machine_id`:
+**Example**: To include group-specific information in a multi-alert log monitor group by `@machine_id`:
 
 ```text
 This alert was triggered on {{ @machine_id.name }}
@@ -278,21 +277,21 @@ If your facet has periods, use brackets around the facet, for example:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Matching attribute/tag variables
+### Matching attribute/tag variables
 
-_Available for [Log monitor][2], [Trace Analytics monitor][3] (APM) and [RUM monitor][4]_
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM) and [RUM monitors][4]_
 
-To include **any** attribute or tag from a log, a span or a RUM event matching the monitor query, use the following variables :
+To include **any** attribute or tag from a log, a trace span, or a RUM event matching the monitor query, use the following variables:
 
 | Monitor type    | Variable syntax                                         |
 |-----------------|---------------------------------------------------------|
-| RUM             |  `{{rum.attributes.key}}` / `{{rum.tags.key}}`          |
-| Trace Analytics |  `{{span.attributes.key}}` / `{{span.tags.key}}`        |
-| Log             |  `{{log.attributes.key}}` / `{{log.tags.key}}`          |
+| Log             |  `{{log.attributes.key}}` or `{{log.tags.key}}`          |
+| Trace Analytics |  `{{span.attributes.key}}` or `{{span.tags.key}}`        |
+| RUM             |  `{{rum.attributes.key}}` or `{{rum.tags.key}}`          |
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
-**Example**: if a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables :
+**Example**: If a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables:
 
 ```text
 {{ log.attributes.error.message }}
@@ -304,30 +303,29 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
+<div class="alert alert-info"><strong>Note</strong>: If the selected event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, use these variables for routing notification with <code>{{#is_match}}</code> handles.</div>
 
-<div class="alert alert-info"><strong>Note</strong>: If the picked event does not contain the attribute or the tag key, the variable renders empty in the notification message. To avoid missing notifications, using these variables for routing notification with {{#is_match}} handles is not recommended.</div>
+#### Reserved attributes
 
-##### Reserved attributes
+Logs, spans, and RUM events have generic reserved attributes, which you can use in variables with the following syntax:
 
-Logs, spans and RUM events have generic reserved attributes, that you can also use in variables following the following syntax :
-
-| Monitor type    | Variable syntax                       | First level attributes |
-|-----------------|---------------------------------------|------------------------|
-| RUM             | `{{rum.key}}`                         | `service`, `status`, `timestamp` |
-| Trace Analytics | `{{span.key}}`                        | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
-| Log             | `{{log.key}}`                         | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
+| Monitor type    | Variable syntax   | First level attributes |
+|-----------------|-------------------|------------------------|
+| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
+| Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
+| RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp` |
 
 If the matching event does not contain the attribute in its definition, the variable is rendered empty.
 
-##### Explorer link
+#### Explorer link
 
-Use `{{log.link}}`, `{{rum.link}}` and `{{span.link}}` to enrich the notification with a link to the log, rum or trace explorer, scoped on the events matching the query.
+Use `{{log.link}}`, `{{span.link}}`, and `{{rum.link}}` to enrich the notification with a link to the Log Explore, Trace Explorer, or RUM Explorer, scoped on the events matching the query.
 
-#### Check monitor variables
+### Check monitor variables
 
 For check monitor variables (custom check and integration check), the variable `{{check_message}}` is available and renders the message specified in the custom check or the integration check.
 
-#### Composite monitor variables
+### Composite monitor variables
 
 Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
 
@@ -337,13 +335,13 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 {{ a.value }}
 ```
 
-Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors bearing in mind that the underlying monitors must all be grouped by the same tag/facet.
+Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet.
 
-##### Character excape
+### Character escape
 
 Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
 
-### Template variables
+## Template variables
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
@@ -357,11 +355,11 @@ Use template variables to customize your monitor notifications. The built-in var
 | `{{last_triggered_at}}`       | The UTC date and time when the monitor last triggered.                       |
 | `{{last_triggered_at_epoch}}` | The UTC date and time when the monitor last triggered in epoch milliseconds. |
 
-#### Evaluation
+### Evaluation
 
 Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][5].
 
-#### Local time
+### Local time
 
 Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`.
 For example, to add the last triggered time of the monitor in the Tokyo time zone in your notification, include the following in the notification message:
@@ -377,18 +375,18 @@ See the [list of tz database time zones][6], particularly the TZ database name c
 
 ### Dynamic links
 
-Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
+Use [tag variables](#attribute-and-tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
 
 {{< tabs >}}
 {{% tab "Dashboards" %}}
 
-Use the `{{host.name}}` [tag variable](#tag-variables) to provide a link to a system dashboard:
+Use the `{{host.name}}` [tag variable](#attribute-and-tag-variables) to provide a link to a system dashboard:
 
 ```text
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
-Use the `{{host.name}}` [tag variable](#tag-variables) and an `<INTEGRATION_NAME>` to provide a link to an integration dashboard:
+Use the `{{host.name}}` [tag variable](#attribute-and-tag-variables) and an `<INTEGRATION_NAME>` to provide a link to an integration dashboard:
 
 ```text
 https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
@@ -397,7 +395,7 @@ https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host
 {{% /tab %}}
 {{% tab "Host map" %}}
 
-Use a [tag variable](#tag-variables) such as `{{service.name}}` to provide a link to the host map:
+Use a [tag variable](#attribute-and-tag-variables) such as `{{service.name}}` to provide a link to the host map:
 
 ```text
 https://app.datadoghq.com/infrastructure/map?filter=service:{{service.name}}
@@ -414,7 +412,7 @@ The host map link is customizable with additional parameters. The most common ar
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-Use the `{{host.name}}` [tag variable](#tag-variables) to provide a link to all monitors related to a specific host:
+Use the `{{host.name}}` [tag variable](#attribute-and-tag-variables) to provide a link to all monitors related to a specific host:
 
 ```text
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
@@ -426,8 +424,10 @@ The monitors link is customizable with additional parameters. The most common ar
 |-----------|----------------|---------------------------------------------------------------------------------|
 | `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO DATA`, and `OK`)   |
 | `muted`   | `muted: true`  | Muted monitors (use `false` for non-muted monitors)                             |
-| `type`    | `type:log`     | Log monitors (see other [monitor types][7])                                     |
+| `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
+
+[1]: /monitors/create/types/
 {{% /tab %}}
 {{< /tabs >}}
 
