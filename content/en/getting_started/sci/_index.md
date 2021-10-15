@@ -64,7 +64,10 @@ Configure the Datadog Agent to collect `org.opencontainers.image.revision` as `g
 ```
 DD_DOCKER_LABELS_AS_TAGS='{"org.opencontainers.image.revision": "git.commit.sha"}'
 ```
+[1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
+[2]: https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
 
+{{% /tab %}}
 #### Other container runtimes on Kubernetes
 
 If you use kubernetes with another container runtime (like containerd), you need to tag your deployed pod with a pod annotation using [tag autodiscovery](https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery):
