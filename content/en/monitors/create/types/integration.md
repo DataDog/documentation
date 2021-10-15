@@ -71,7 +71,7 @@ Set up the check alert:
 
 3. (if the integration check reports `UNKNOWN` status) Choose `Do not notify` or `Notify` for Unknown status.
 
-    If enabled, state transitions to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
+    If enabled, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
 
 4. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
