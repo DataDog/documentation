@@ -22,7 +22,6 @@
 "guid": "5f778314-2ff5-4601-ac36-aa2955c0b4d4"
 "integration_id": "nerdvision"
 "integration_title": "NerdVision"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@nerd.vision"

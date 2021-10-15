@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés du service Gestion des API Azure.
-doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_api_management/'
 draft: false
 git_integration_title: azure_api_management
 has_logo: true
 integration_id: azure-apimanagement
 integration_title: Gestion des API de Microsoft Azure
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
