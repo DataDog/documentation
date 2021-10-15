@@ -44,19 +44,19 @@
   },
 
   "help_sentence": {
-    "other": "Our friendly, knowledgeable solutions engineers are here to help"
+    "other": "Our friendly, knowledgeable solutions engineers are here to help!"
   },
 
   "email_support_sentence": {
-    "other": "Contact the Datadog support team by email at <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a> (all sites)"
+    "other": "Contact the Datadog support team by email at <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a> (all sites)."
   },
 
   "live_chat_support_sentence": {
-    "other": "Chat with our support team Mon-Fri from 10:00 to 19:00 ET through in-app chat or <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a> (US and EU)"
+    "other": "Chat with the Datadog support team Mon-Fri from 10:00 to 19:00 ET through in-app chat (US and EU)."
   },
 
   "event_stream_support_sentence": {
-    "other": "Messages in the Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">event stream</a> containing <code>@support-datadog</code> create a ticket for our support team. This is a convenient way to reference a graph snapshot. (US and EU)"
+    "other": "Contact Datadog team members or chat with our community on <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog's public Slack</a>."
   },
 
   "agent_started_sentence": {
@@ -217,15 +217,15 @@
   },
 
   "email": {
-    "other": "Email"
+    "other": "email our<br>support team"
   },
 
   "live_chat": {
-    "other": "Live Chat"
+    "other": "live chat with<br>our support team"
   },
 
   "event_stream_messaging": {
-    "other": "In-app Event Stream Messaging"
+    "other": "contact us<br>on slack"
   },
 
   "questions": {
@@ -310,6 +310,9 @@
   },
   "footer_blurb_desc": {
     "other": "Our friendly, knowledgeable solutions engineers are here to help!"
+  },
+  "integration_version": {
+    "other": "Integration"
   }
-  
+
 }

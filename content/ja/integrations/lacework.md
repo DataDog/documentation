@@ -10,13 +10,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
 display_name: Lacework
 draft: false
 git_integration_title: lacework
 guid: 545f8c45-038b-41e5-ae13-8550c0ee563f
 integration_id: lacework
 integration_title: Lacework
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

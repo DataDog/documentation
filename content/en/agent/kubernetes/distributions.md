@@ -49,6 +49,9 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   criSocketPath: /run/dockershim.sock
+  env:
+  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+    value: "containerd"
 ```
 
 {{% /tab %}}
@@ -175,7 +178,7 @@ spec:
 
 **Note**: In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS.
 This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes.
-In this case, using `tlsVerify: false` is required.
+In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is required.
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -184,7 +187,7 @@ GKE can be configured in two different mode of operation:
 - **Standard**: You manage the cluster's underlying infrastructure, giving you node configuration flexibility.
 - **Autopilot**: GKE provisions and manages the cluster's underlying infrastructure, including nodes and node pools, giving you an optimized cluster with a hands-off experience.
 
-Depending of your cluster the operation mode, the Datadog agent needs to be configured differently.
+Depending on the operation mode of your cluster, the Datadog Agent needs to be configured differently.
 
 ### Standard
 

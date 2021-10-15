@@ -228,7 +228,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
@@ -243,7 +243,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 `Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
-FROM datadog/agent:7.30.0
+FROM gcr.io/datadoghq/agent:7.30.0
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

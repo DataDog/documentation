@@ -340,7 +340,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
         let chosenExample = parentExample;
         if (typeof value.example !== 'undefined') {
           chosenExample = value.example;
-        } else if (value.items && typeof value.items.example !== 'undefined') {
+        } else if (value.items && typeof value.items.example !== 'undefined' && Object.keys(value.items.example).length !== 0) {
           chosenExample = value.items.example;
           prefixType = '[';
           suffixType = ']';

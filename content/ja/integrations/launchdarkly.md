@@ -16,6 +16,7 @@
 "guid": "a1441ba8-be33-4123-8808-5a87cd696b64"
 "integration_id": "launchdarkly"
 "integration_title": "LaunchDarkly"
+"integration_version": ""
 "is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@launchdarkly"
