@@ -498,7 +498,7 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37-ARM:{{< 
 
 #### Using the package
 
-If you cannot use the prebuilt Datadog Lambda layer for some reason, alternatively you can install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`. 
+If you cannot use the prebuilt Datadog Lambda layer for some reason, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`. 
 
 ```sh
 pip install datadog-lambda -t ./
