@@ -1014,6 +1014,10 @@
     "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.",
     "summary": "Get hourly usage for RUM Sessions"
   },
+  "GetUsageSDS": {
+    "description": "Get hourly usage for Sensitive Data Scanner.",
+    "summary": "Get hourly usage for Sensitive Data Scanner"
+  },
   "GetUsageSNMP": {
     "description": "Get hourly usage for SNMP devices.",
     "summary": "Get hourly usage for SNMP devices"

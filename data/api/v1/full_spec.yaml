@@ -13268,6 +13268,37 @@ components:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
       type: object
+    UsageSDSHour:
+      description: Sensitive Data Scanner usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        logs_scanned_bytes:
+          description: "The total number of bytes scanned of logs usage by the Sensitive
+            Data Scanner from the start of the given hour\u2019s month until the given
+            hour."
+          format: int64
+          type: integer
+        total_scanned_bytes:
+          description: "The total number of bytes scanned across all usage types by
+            the Sensitive Data Scanner from the start of the given hour\u2019s month
+            until the given hour."
+          format: int64
+          type: integer
+      type: object
+    UsageSDSResponse:
+      description: Response containing the Sensitive Data Scanner usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Sensitive Data Scanner.
+          items:
+            $ref: '#/components/schemas/UsageSDSHour'
+          type: array
+      type: object
     UsageSNMPHour:
       description: The number of SNMP devices for each hour for a given organization.
       properties:
@@ -13578,6 +13609,17 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -13807,6 +13849,17 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for the given org.
@@ -13834,7 +13887,8 @@ components:
           type: integer
       type: object
     UsageSummaryResponse:
-      description: Response with hourly report of all data billed by Datadog all organizations.
+      description: Response summarizing all usage aggregated across the months in
+        the request for all organizations, and broken down by month and by organization.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
@@ -14072,6 +14126,17 @@ components:
         rum_total_session_count_agg_sum:
           description: Shows the sum of RUM Sessions (browser and mobile) over all
             hours in the current months for all organizations.
+          format: int64
+          type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
           format: int64
           type: integer
         start_date:
@@ -24928,7 +24993,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -24976,7 +25041,7 @@ paths:
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -25661,6 +25726,54 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-undo:
+        type: safe
+  /api/v1/usage/sds:
+    get:
+      description: Get hourly usage for Sensitive Data Scanner.
+      operationId: GetUsageSDS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSDSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Sensitive Data Scanner
+      tags:
+      - Usage Metering
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/snmp:
