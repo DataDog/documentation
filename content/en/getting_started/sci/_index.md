@@ -57,7 +57,7 @@ To tag your images, run:
 docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
 ```
 
-##### Configure the agent to collect git.commit.sha
+#### Configure the Agent
 
 Configure the agent to collect org.opencontainers.image.revision as git.commit.sha using [DD_DOCKER_LABELS_AS_TAGS](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables) in the agent configuration:
 
