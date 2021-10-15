@@ -80,10 +80,9 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
 
 ## Datadog-ci
 
-To link your telemetry to your source code, we need to regularly collect some information from your git repository, for every commit sha reported to Datadog. The command [datadog-ci git-metadata upload](https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata) allows us to collect that data. Every time you run this command within a git repository, the following information is reported to Datadog:
-1. Repository URL
-2. Commit sha of the current branch
-3. List of tracked files paths within the repository
+In order to link your telemetry to your source code, Datadog collects information for every `commit sha` from your git repository with the [`datadog-ci git-metadata upload`][1] command. 
+
+When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the `commit sha` of the current branch, and a list of tracked file paths.
 
 A good way to ensure the required data is collected is to run datadog-ci git-metadata upload as part of your CI pipeline.
 
