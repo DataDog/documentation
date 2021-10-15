@@ -335,7 +335,7 @@ resource "aws_lambda_function" "my_func" {
 
 ### Install the Datadog Lambda library
 
-The Datadog Lambda Library can be imported either as a layer _OR_ as a JavaScript package.
+The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a JavaScript package.
 
 The minor version of the `datadog-lambda-js` package always matches the layer version. E.g., datadog-lambda-js v0.5.0 matches the content of layer version 5.
 
@@ -376,16 +376,18 @@ arn:aws-us-gov:lambda:us-gov-east-1:002406178527::layer:Datadog-Node12-x:{{< lat
 
 #### Using the package
 
+If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
+
 **NPM**:
 
 ```
-npm install --save datadog-lambda-js
+npm install --save datadog-lambda-js dd-trace
 ```
 
 **Yarn**:
 
 ```
-yarn add datadog-lambda-js
+yarn add datadog-lambda-js dd-trace
 ```
 
 See the [latest release][2].
