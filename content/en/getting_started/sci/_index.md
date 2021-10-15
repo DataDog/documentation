@@ -25,7 +25,7 @@ To be able to map telemetry data to your source code we need to collect some met
 2. Upload your git metadata including the commit SHAs and your git repository URL by running [`datadog-ci git-metadata upload`][1].
 3. [Install GitHub Apps][2].
 
-By having these two data points Datadog is able to correlate all places where we can link to your git repository directly.
+Datadog correlates the places where you can link directly to your git repository.
 
 For Github SaaS users we are having an additional feature, by installing our [Github App](https://app.datadoghq.com/account/settings#integrations/github-apps) we can directly inline codesnipets from your github repository and help you find the problematic pieces faster.
 
