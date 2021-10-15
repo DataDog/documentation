@@ -777,7 +777,7 @@ Install the Datadog Agent with the [rancher-monitoring chart][9].
 
 The control plane components run on Docker outside of Kubernetes. Within Kubernetes, the `kubernetes` service in the `default` namespace targets the control plane node IP(s). (This can be confirmed with `$ kubectl describe endpoints kubernetes`.)
 
-This service can be annotated with endpoint checks, managed by the Datadog Cluster Agent, to monitor the API Server, Controller Manager, and Scheduler, as follows:
+This service can be annotated with endpoint checks, managed by the Datadog Cluster Agent, to monitor the API Server, Controller Manager, and Scheduler:
 
 ```shell
 kubectl edit service kubernetes
@@ -800,7 +800,7 @@ Etcd is run in Docker outside of Kubernetes, and certificates are required to co
 
 1. SSH to the control plane node according to the [Rancher documentation][10]. Confirm that Etcd is running in a Docker container with `$ docker ps`, and then use `$ docker inspect etcd` to find the location of the certificates used in the run command (`"Cmd"`), as well as the host path of the mounts.
 
-The three flags in the `"Cmd"` to look for are:
+The three flags in the command to look for are:
 
 ```shell
 --trusted-ca-file
@@ -886,7 +886,7 @@ spec:
 {{< /tabs >}}
 
 
-3. Set up a "dummy" Daemonset to run the Etcd check on the nodes running Etcd. This daemonset will run on the host network so that it can access the Etcd process running outside of Kubernetes. It also has the check configuration and the tolerations needed to run on the control plane node(s). Make sure that the mounted certificate file paths match what you set up on your instance, and replace the `<...>` portion accordingly.
+3. Set up a daemonset with a pause container to run the Etcd check on the nodes running Etcd. This daemonset will run on the host network so that it can access the Etcd service. It also has the check configuration and the tolerations needed to run on the control plane node(s). Make sure that the mounted certificate file paths match what you set up on your instance, and replace the `<...>` portion accordingly.
 
 ```yaml
 apiVersion: apps/v1
@@ -928,7 +928,7 @@ spec:
         operator: Exists
 ```
 
-To deploy the Daemonset and the check configuration, run
+To deploy the daemonset and the check configuration, run
 
 ```shell
 kubectl apply -f <filename>
