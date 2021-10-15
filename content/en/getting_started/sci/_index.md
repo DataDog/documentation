@@ -44,9 +44,12 @@ To get direct links from your stacktrace to your git repo, tag all your telemetr
 
 With containerized environments it’s easy to tag all your telemetry with the git.commit.sha (traces, profiles, logs…).
 
+{{% /tab %}}
+{{% tab "Docker" %}}
+
 #### Docker runtime
 
-If your containers are running on Docker, git.commit.sha can be directly extracted from your docker images that comply with the [opencontainers standard](https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys). You can simply tag your containers during build time, and configure the agent to collect this tag as `git.commit.sha`.
+If your containers are running on Docker, directly extract `git.commit.sha` from your Docker images that comply with the [Open Containers standard][1]. During build time, tag your containers and configure the Datadog Agent to collect the tag as `git.commit.sha`.
 
 ##### Tag your images
 
