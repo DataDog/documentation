@@ -51,7 +51,7 @@ With containerized environments it’s easy to tag all your telemetry with the g
 
 If your containers are running on Docker, directly extract `git.commit.sha` from your Docker images that comply with the [Open Containers standard][1]. During build time, tag your containers and configure the Datadog Agent to collect the tag as `git.commit.sha`.
 
-##### Tag your images
+To tag your images, run:
 
 ```
 docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
