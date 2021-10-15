@@ -5592,6 +5592,18 @@ api:
         - ListLocations
       unstable: []
       order: 23
+  - name: Get details of batch
+    url: '#get-details-of-batch'
+    identifier: get-details-of-batch
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsCIBatch
+      unstable: []
+      order: 26
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
