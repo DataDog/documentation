@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Data Factory のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_data_factory/'
 draft: false
 git_integration_title: azure_data_factory
 has_logo: true
 integration_id: azure-datafactory
 integration_title: Microsoft Azure Data Factory
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

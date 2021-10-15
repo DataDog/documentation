@@ -24,7 +24,7 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 
 ## 例
 
-定期的に 1 つのサービスチェックのみを送信するダミーの Agent チェックの例を次に示します。詳細については、[カスタム Agent チェックの書き方][1]を参照してください。
+定期的に 1 つのサービスチェックのみを送信するダミーの Agent チェックの例を次に示します。詳細については、専用の[カスタム Agent チェックの書き方][1]のドキュメントを参照してください。
 
 1. Agent の [`conf.d/` フォルダー][2]に新しいディレクトリ `service_check_example.d/` を作成します。
 
@@ -73,9 +73,9 @@ class MyClass(AgentCheck):
         (...)
     ```
 
-7. 最後に、[Datadog サービスチェック内容のサマリー][5]を参照して、サービスチェックレポートを確認します。
+7. 最後に、[Datadog サービスチェック内容のサマリーページ][5]に移動して、サービスチェックレポートを確認します。
 
-{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="サービスチェック" style="width:80%;">}}
+{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="サービスチェック"  style="width:80%;">}}
 
 ## その他の参考資料
 

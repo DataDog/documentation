@@ -8,13 +8,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: 行われているデプロイを表示し、その所要時間を追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_codebuild/'
 draft: false
 git_integration_title: amazon_codebuild
 has_logo: true
 integration_id: amazon-codebuild
 integration_title: AWS CodeBuild
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

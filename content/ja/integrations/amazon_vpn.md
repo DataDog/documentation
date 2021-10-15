@@ -6,13 +6,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon VPN のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpn/'
 draft: false
 git_integration_title: amazon_vpn
 has_logo: true
 integration_id: amazon-vpn
 integration_title: Amazon VPN
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
