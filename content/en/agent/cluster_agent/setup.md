@@ -26,7 +26,7 @@ To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these ste
 
 The Cluster Agent is enabeld by default since Helm Chart `2.7.0`.
 
-To activate it on older versions or if you use a custom [datadog-values.yaml][1] overrding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
+To activate it on older versions or if you use a custom [datadog-values.yaml][1] overriding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
 
   ```yaml
   clusterAgent:
@@ -44,9 +44,9 @@ When set manually this token must be 32 alphanumeric characters.
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-The Cluster Agent is enabeld by default since Datadog Operator version `0.7.0`.
+The Cluster Agent is enabeld by default since Datadog Operator `v0.7.0`.
 
-To activate explictly, update your `DatadogAgent` object with the following configuration:
+To activate it explicitly, update your `DatadogAgent` object with the following configuration:
 
   ```yaml
 spec:
@@ -55,7 +55,7 @@ spec:
     enabled: true
   ```
 
-The Operator will then create the necessary RBACs, deploy the Cluster Agent and modify the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). You can manually specify this token by setting the `credentials.token` field.
+The Operator then creates the necessary RBACs, deploys the Cluster Agent and modifies the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). You can manually specify this token by setting the `credentials.token` field.
 
 When set manually this token must be 32 alphanumeric characters.
 
