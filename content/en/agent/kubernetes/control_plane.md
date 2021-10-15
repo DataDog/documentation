@@ -32,8 +32,9 @@ With Datadog integrations for the [API server][1], [Etcd][2], [Controller Manage
 * [Kubernetes on Amazon EKS](#EKS)
 * [Kubernetes on OpenShift 4](#OpenShift4)
 * [Kubernetes on OpenShift 3](#OpenShift3)
-* [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
 * [Kubernetes on Rancher Kubernetes Engine (v2.5+)](#RKE)
+* [Kubernetes on Rancher Kubernetes Engine (\<v2.5)](#RKEBefore2.5)
+* [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
 
 ## Kubernetes with Kubeadm {#Kubeadm}
 
@@ -595,9 +596,6 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
-## Kubernetes on managed services (AKS, GKE) {#ManagedServices}
-
-On other managed services, such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
 
 ## Kubernetes on Rancher Kubernetes Engine (v2.5+) {#RKE}
 
@@ -605,7 +603,7 @@ Rancher v2.5 relies on [PushProx][10] to expose control plane metric endpoints, 
 
 ### Prerequisites
 
-1. Install the [rancher-monitoring chart][11].
+1. Install the Datadog Agent with the [rancher-monitoring chart][9].
 2. The `pushprox` daemonsets are deployed with `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
 
 ### API server
@@ -771,6 +769,175 @@ spec:
 {{< /tabs >}}
 
 
+## Kubernetes on Rancher Kubernetes Engine (\<v2.5) {#RKEBefore2.5}
+
+### API Server, Controller Manager, and Scheduler
+
+Install the Datadog Agent with the [rancher-monitoring chart][9].
+
+The control plane components run on Docker outside of Kubernetes. Within Kubernetes, the `kubernetes` service in the `default` namespace targets the control plane node IP(s). (This can be confirmed with `kubectl describe endpoints kubernetes`.) This service can thus be annotated with endpoint checks (managed by the Datadog Cluster Agent) to monitor the API Server, Controller Manager, and Scheduler, as follows:
+
+```bash
+kubectl edit service kubernetes
+
+```
+
+
+```yaml
+metadata:
+  annotations:
+    ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics", "kube_controller_manager", "kube_scheduler"]'
+    ad.datadoghq.com/endpoints.init_configs: '[{},{},{}]'
+    ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" },
+      {"prometheus_url": "http://%%host%%:10252/metrics"},
+      {"prometheus_url": "http://%%host%%:10251/metrics"}]'
+```
+
+### Etcd
+
+Etcd is run in Docker outside of Kubernetes, and certificate files present on the host are required for access. The recommended steps to set up Etcd monitoring require SSH access to the control plane node running Etcd.
+
+1. SSH to the control plane node according to the [Rancher documentation][10]. Confirm that Etcd is running in a Docker container with `docker ps`, and then use `docker inspect etcd` to find the location of the certificates used in the run command (`"Cmd"`), as well as the host path of the mounts.
+
+The three flags in the `"Cmd"` to look for are:
+
+```bash
+--trusted-ca-file
+--cert-file
+--key-file
+```
+
+2. Using the mount information available in the `docker inspect etcd` output, set `volumes` and `volumeMounts` in the Datadog Agent. In addition, include tolerations so that the Datadog Agent can run on the control plane nodes. The following are examples of how to configure the Datadog Agent with Helm and the Datadog Operator:
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/controlplane
+    operator: Exists
+  - effect: NoExecute
+    key: node-role.kubernetes.io/etcd
+    operator: Exists
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  agent:
+    config:
+      kubelet:
+        tlsVerify: false
+      volumes:
+        - hostPath:
+            path: /opt/rke/etc/kubernetes/ssl
+          name: etcd-certs
+      volumeMounts:
+        - name: etcd-certs
+          mountPath: /host/opt/rke/etc/kubernetes/ssl
+          readOnly: true
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/controlplane
+          operator: Exists
+        - effect: NoExecute
+          key: node-role.kubernetes.io/etcd
+          operator: Exists
+  clusterAgent:
+    config:
+      clusterChecksEnabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+3. Set up a "dummy" daemonset to run the Etcd check on the nodes running Etcd. This daemonset will run on the host network so that it can access the Etcd process running outside of Kubernetes. It also has the check configuration and the tolerations needed to run on the control plane node(s). Make sure that the mounted certificate file paths match what you see on your instance.
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: etcd-pause
+spec:
+  selector:
+    matchLabels:
+      app: etcd-pause
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/pause.check_names: '["etcd"]'
+        ad.datadoghq.com/pause.init_configs: '[{}]'
+        ad.datadoghq.com/pause.instances: |
+          [{
+            "prometheus_url": "https://%%host%%:2379/metrics",
+            "tls_ca_cert": "/host/etc/kubernetes/ssl/kube-ca.pem",
+            "tls_cert": "/host/etc/kubernetes/ssl/kube-etcd-(...).pem",
+            "tls_private_key": "/host/etc/kubernetes/ssl/kube-etcd-(...)-key.pem"
+          }]
+      labels:
+        app: etcd-pause
+      name: etcd-pause
+    spec:
+      hostNetwork: true
+      containers:
+      - name: pause
+        image: k8s.gcr.io/pause:3.0
+      tolerations:
+      - effect: NoExecute
+        key: node-role.kubernetes.io/etcd
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/controlplane
+        operator: Exists
+```
+
+Apply this configuration with
+
+```bash
+kubectl apply -f <filename>
+
+```
+
+
+## Kubernetes on managed services (AKS, GKE) {#ManagedServices}
+
+On other managed services, such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, and `etcd` checks in these environments.
+
+
 [1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
 [2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
 [3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
@@ -779,3 +946,5 @@ spec:
 [6]: https://docs.datadoghq.com/agent/cluster_agent/setup
 [7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
+[9]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
+[10]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
