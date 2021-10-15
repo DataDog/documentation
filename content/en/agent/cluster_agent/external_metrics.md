@@ -58,7 +58,7 @@ This automatically updates the necessary RBAC configurations as well as sets up 
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-To enable the external metrics server with your Cluster Agent managed by the Datadog operator, you first need to [setup the datadog operator][1]. Then, you set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
+To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, [setup the Datadog Operator][1]. Then, you set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
 
   ```yaml
   apiVersion: datadoghq.com/v1alpha1
@@ -75,7 +75,7 @@ To enable the external metrics server with your Cluster Agent managed by the Dat
     replicas: 2
   ```
 
-The operator will automatically update the necessary RBAC configurations as well as setup the corresponding `Service` and `APIService` for Kubernetes to use.
+The Operator automatically updates the necessary RBAC configurations and sets the corresponding `Service` and `APIService` for Kubernetes to use.
 
 [1]: /agent/guide/operator-advanced
 {{% /tab %}}
@@ -189,7 +189,7 @@ For autoscaling to work correctly, custom queries must follow these rules:
 ### Setup
 #### Datadog Cluster Agent
 
-Set up the Datadog Cluster Agent to use `DatadogMetric` using Helm, the Datadog operator or Daemonset:
+Set up the Datadog Cluster Agent to use `DatadogMetric` using Helm, the Datadog Operator or Daemonset:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -232,7 +232,7 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
     replicas: 2
   ```
 
-The operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
 {{< /tab %}}
 {{% tab "Daemonset" %}}
