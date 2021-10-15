@@ -37,6 +37,9 @@ The GitHub Apps source code integration is in public beta and is available for a
 
 To get direct links from your stacktrace to your git repo, tag all your telemetry with a `git.commit.sha` tag.
 
+{{< tabs >}}
+{{% tab "Containers" %}}
+
 ### Containerized environments
 
 With containerized environments it’s easy to tag all your telemetry with the git.commit.sha (traces, profiles, logs…).
