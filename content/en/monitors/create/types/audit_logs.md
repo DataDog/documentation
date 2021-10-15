@@ -3,7 +3,7 @@ title: Audit Logs Monitor
 kind: documentation
 description: "Alert when a specified type of audit log exceeds a threshold."
 further_reading:
-- link: "/account_settings/audit_logs/"
+- link: "/account_management/audit_logs/"
   tag: "Documentation"
   text: "Learn more about Audit Logs"
 - link: "/monitors/notifications/"
