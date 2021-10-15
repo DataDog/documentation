@@ -35,7 +35,7 @@ The GitHub Apps source code integration is in public beta and is available for a
 
 ## Tag your builds
 
-To get direct links from your stacktrace to your git repo you need to tag all your telemetry with a new tag git.commit.sha. Depending on your environment there are several ways to do that.
+To get direct links from your stacktrace to your git repo, tag all your telemetry with a `git.commit.sha` tag.
 
 ### Containerized environments
 
