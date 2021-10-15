@@ -236,7 +236,7 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
 
 The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
-{{< /tab %}}
+{{<% /tab %}}
 {{% tab "Daemonset" %}}
 To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
