@@ -33,7 +33,7 @@ For Github SaaS users we are having an additional feature, by installing our [Gi
 The GitHub Apps source code integration is in public beta and is available for all JVM languages and Go.
 </div>
 
-## How to tag your builds
+## Tag your builds
 
 To get direct links from your stacktrace to your git repo you need to tag all your telemetry with a new tag git.commit.sha. Depending on your environment there are several ways to do that.
 
