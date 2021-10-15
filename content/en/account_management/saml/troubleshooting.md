@@ -15,18 +15,30 @@ This page provides troubleshooting instructions for common errors during Securit
 
 ## Common errors
 
-If you come across an error message such as `Arf. Unknown User`, `There are No Authn Mappings for this User`, `Assertion could not be validated`, `SAML NO HANDLE ERROR`, or `No active account for a user`, there may be an issue with your mappings configuration in Datadog and your configuration in your identity provider (IdP).
+If you come across an error message such as `Arf. Unknown User`, `There are No Authn Mappings for this User`, `Assertion could not be validated`, `SAML NO HANDLE ERROR`, or `No active account for a user`, there may be an issue with your mappings configuration in Datadog or in your identity provider (IdP) configuration. See the error below to resolve.
 
-- **There are No Authn Mappings for this User**: There is a mismatch with your mappings configuration in Datadog and your configuration in your IdP. See [Roles errors](#roles-errors).
-- **Assertion could not be validated**: After enabling IdP initiated login in Datadog, the [Assertion Consumer Service (ACS) URLs][1] in your IdP configuration may be incorrect. Alternatively, your assertions may be unsigned. For more information, see [Assertions and attributes][2].
-- **SAML NO HANDLE ERROR**: Your assertion may be missing the required `eduPersonPrincipalName` attribute. Confirm that this attribute is set in your configuration. For more information, see [Assertions and attributes][2].
-- **No active account for a user**: Enabling JIT provisioning may result in the `There is no active account for` error if a user has not received an email invitation or if their account is disabled in [User settings][3]. To resolve, follow the steps below based on scenario:
+### There are no authn mappings for this user
+
+There is a mismatch with your mappings configuration in Datadog and your configuration in your IdP. See [Roles errors](#roles-errors).
+
+### Assertion could not be validated
+
+After enabling IdP initiated login in Datadog, the [Assertion Consumer Service (ACS) URLs][1] in your IdP configuration may be incorrect. Alternatively, your assertions may be unsigned. For more information, see [Assertions and attributes][2].
+
+### SAML no handle error
+
+Your assertion may be missing the required `eduPersonPrincipalName` attribute. Confirm that this attribute is set in your configuration. For more information, see [Assertions and attributes][2].
+
+### No active account for a user
+
+Enabling JIT provisioning may result in the `There is no active account for` error if a user has not received an email invitation or if their account is disabled in [User settings][3]. To resolve, follow the steps below based on your scenario:
+
   - If a new Datadog user tries to log into a Datadog org without an email invitation and the `There is no active account for error` occurs, send the user an email invitation and check if JIT provisioning is enabled for your org. The user **must** accept the invitation to enable JIT provisioning. Once the invitation is sent, the user exists in the system and cannot use JIT provisioning until the invite is accepted. If a user needs to verify their email or the invitation is expired, have the admin send a new invitation.
   - If a user is no longer enabled in a Datadog organization that has JIT provisioning enabled and they try to login again through SAML and the `There is no active account for error` occurs, re-enable the user in [User settings][3].
 
 ## IdP metadata file errors
 
-If you are having trouble with updating your IdP metadata file, verify that the metadata file you are trying to upload is valid.
+If you are having trouble updating your IdP metadata file, verify that the metadata file you are trying to upload is valid.
 
 To validate your metadata file:
 
@@ -75,7 +87,7 @@ If you are having trouble logging in because of a role-based error, contact your
 
 - When you disable Mappings, users are allowed to login with SAML and have the same roles they are assigned to—even if the group membership changed in your IdP.
 
-## Identity provider errors
+## Identity provider (IdP) errors
 
 If you encounter an error coming from your IdP such as Google, Active Directory, Azure, LastPass, Okta, and more:
 
