@@ -29,7 +29,9 @@ Datadog correlates the places where you can link directly to your git repository
 
 For Github SaaS users we are having an additional feature, by installing our [Github App](https://app.datadoghq.com/account/settings#integrations/github-apps) we can directly inline codesnipets from your github repository and help you find the problematic pieces faster.
 
-Currently the source code integration is in public beta and available for JVM languages and Go.
+<div class="alert alert-warning">
+The GitHub Apps source code integration is in public beta and is available for all JVM languages and Go.
+</div>
 
 ## How to tag your builds
 
