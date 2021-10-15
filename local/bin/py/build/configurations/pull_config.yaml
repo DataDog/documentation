@@ -591,6 +591,29 @@
       options:
         dest_path: '/security_platform/default_rules/'
 
+  - repo_name: apps
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+        - "docs/en/getting-started.md"
+      options:
+        dest_path: "/developers/"
+        file_name: "datadog_apps.md"
+        front_matters:
+          title: Datadog Apps
+          kind: documentation
+          beta: true
+          description: "Extend Datadog's native functionality with Datadog Apps."
+          dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/apps/blob/master/docs/en/design-guidelines.md"
+              tag: "Github"
+              text: "Design Guidelines"
+            - link: "https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md "
+              tag: "Github"
+              text: "Programming Model"
+
   - repo_name: datadog-agent
     contents:
     - action: pull-and-push-file
