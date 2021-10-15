@@ -1,6 +1,8 @@
 ---
 title: Custom Metrics Server
 kind: documentation
+aliases:
+- /agent/guide/cluster-agent-custom-metrics-server
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
