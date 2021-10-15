@@ -13834,7 +13834,8 @@ components:
           type: integer
       type: object
     UsageSummaryResponse:
-      description: Response with hourly report of all data billed by Datadog all organizations.
+      description: Response summarizing all usage aggregated across the months in
+        the request for all organizations, and broken down by month and by organization.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
