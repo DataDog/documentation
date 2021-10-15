@@ -76,6 +76,22 @@ $ddpurple: #632ca6;
         }
     }
 
+    .programming-lang-wrapper:not(.api-reference) {
+        min-height: 500px;
+
+        @include media-breakpoint-up(md) {
+            height: 550px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            height: 600px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            height: 300px;
+        }
+    }
+
     .code-snippet-wrapper {
         margin-right: 0;
         /*height: 475px;
