@@ -19,6 +19,7 @@
 "guid": "d7478feb-3dc6-4e97-bb55-5c51462d0691"
 "integration_id": "rapdev-reporter"
 "integration_title": "Reporter"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"
