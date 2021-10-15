@@ -59,7 +59,7 @@ docker build -t my-application --label org.opencontainers.image.revision=$(git r
 
 #### Configure the Agent
 
-Configure the agent to collect org.opencontainers.image.revision as git.commit.sha using [DD_DOCKER_LABELS_AS_TAGS](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables) in the agent configuration:
+Configure the Datadog Agent to collect `org.opencontainers.image.revision` as `git.commit.sha` by using [`DD_DOCKER_LABELS_AS_TAGS`][2] in the Agent configuration:
 
 ```
 DD_DOCKER_LABELS_AS_TAGS='{"org.opencontainers.image.revision": "git.commit.sha"}'
