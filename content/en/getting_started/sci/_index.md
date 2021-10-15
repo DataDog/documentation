@@ -89,7 +89,9 @@ In non-containerized environments you need to manually tag your traces and profi
 export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
 ./my-application start
 ```
+[1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 
+{{% /tab %}}
 ## Datadog-ci
 
 In order to link your telemetry to your source code, Datadog collects information for every `commit sha` from your git repository with the [`datadog-ci git-metadata upload`][1] command. 
