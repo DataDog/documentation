@@ -72,8 +72,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"org.opencontainers.image.revision": "git.commit.sha"
 
 #### Other container runtimes on Kubernetes
 
-If you use kubernetes with another container runtime (like containerd), you need to tag your deployed pod with a pod annotation using [tag autodiscovery](https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery):
-annotations:
+If you use Kubernetes with another container runtime such as containerd, tag your deployed pod with a pod annotation using [Datadog's Tag Autodiscovery][1]:
 
 ```
 ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>"}'
