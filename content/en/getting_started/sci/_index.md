@@ -84,7 +84,9 @@ For now they are not supported, you need to default to the non-containerized env
 
 ### Non-containerized environments
 
-In non-containerized environments you need to manually tag your traces and profiles with the git commit sha. The easiest way to achieve this is to tag all your spans and profiles with git.commit.sha by configuring the tracer with DD_TAGS environment variable.
+For non-containerized environments, manually tag your traces, spans, and profiles with the `git commit sha`.
+
+ To tag your traces, spans, and profiles with `git.commit.sha`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
 export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
