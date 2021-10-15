@@ -24,7 +24,9 @@ To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these ste
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To enable the Cluster Agent collection with Helm, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
+The Cluster Agent is enabeld by default since Helm Chart `2.7.0`.
+
+To activate it on older versions or if you use a custom [datadog-values.yaml][1] overriding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
 
   ```yaml
   clusterAgent:
@@ -35,6 +37,25 @@ To enable the Cluster Agent collection with Helm, update your [datadog-values.ya
 This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
 
 This also automatically generates a random token in a `Secret` shared between both the Cluster Agent and the Datadog Agent. You can manually set this by specifying a token in the `clusterAgent.token` configuration. You can also manually set this by specifying an existing `Secret` name containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+
+When set manually this token must be 32 alphanumeric characters.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+The Cluster Agent is enabeld by default since Datadog Operator `v0.7.0`.
+
+To activate it explicitly, update your `DatadogAgent` object with the following configuration:
+
+  ```yaml
+spec:
+  clusterAgent:
+    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
+    enabled: true
+  ```
+
+The Operator then creates the necessary RBACs, deploys the Cluster Agent and modifies the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). You can manually specify this token by setting the `credentials.token` field.
 
 When set manually this token must be 32 alphanumeric characters.
 
