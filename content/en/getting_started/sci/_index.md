@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Source Code Integration
+title: Setting up Incline Source Code and Links to Git with Datadog
 kind: documentation
 beta: true
 
