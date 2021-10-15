@@ -1,6 +1,7 @@
 ---
 title: Getting Started with Source Code Integration
 kind: documentation
+beta: true
 
 ---
 ## Overview
