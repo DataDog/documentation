@@ -55,7 +55,7 @@ If you have the Datadog AWS integration enabled, any AWS resource tag applied to
 
 ## VPC
 
-Datadog Lambda Extension needs access to public internet for sending data to Datadog. If your Lambda functions are deployed in a VPC private subnet without access to public internet, see your options below.
+The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in a VPC private subnet without access to public internet, see the options below.
 
 ### Using AWS PrivateLink
 
@@ -69,7 +69,7 @@ If you are sending data to a Datadog site that is _NOT_ hosted on AWS, such as E
 
 The Datadog Lambda Extension introduces a small amount of overhead to your Lambda function's cold starts (that is, the higher init duration), as the Extension needs to initialize. Datadog is continuously optimizing the Lambda extension performance and recommend always using the latest release.
 
-You may also notice increase of your Lambda function's reported duration, and this is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the Extension flushing data is reported as part of the duration, it's done *after* AWS returning your function's response back to the client. In other words, the added duration does not slow down your Lambda function. Additional technical details can be found from this [AWS blog post][13].
+You may notice an increase of your Lambda function's reported duration. This is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the extension flushing data is reported as part of the duration, it's done *after* AWS returns your function's response back to the client. In other words, the added duration does not slow down your Lambda function. See this [AWS blog post][13] for more technical information.
 
 By default, the Extension sends data back to Datadog at the end of each invocation. This avoids delays of data arrival for sporadic invocations from low-traffic applications, cron jobs, and manual tests. Once the Extension detects a steady and frequent invocation pattern (more than once per minute), it batches data from multiple invocations and flushes periodically at the beginning of the invocation when it's due. This means that *the busier your function is, the lower the average duration overhead per invocation*. 
 
