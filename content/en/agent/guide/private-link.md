@@ -28,14 +28,6 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 ## Setup
 
-### Datadog Agent
-
-Update the `dd_url` parameter in your [datadog.yaml][2]:
-
-```yaml
-dd_url: https://agent.datadoghq.com
-```
-
 ### AWS VPC endpoint
 
 1. Connect to the AWS console to region **us-east-1** and create a new VPC endpoint:

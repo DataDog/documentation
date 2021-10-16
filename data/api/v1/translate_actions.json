@@ -768,6 +768,10 @@
     "description": "Get a specific SLO’s history, regardless of its SLO type.\n\nThe detailed history data is structured according to the source data type.\nFor example, metric data is included for event SLOs that use\nthe metric source, and monitor SLO types include the monitor transition history.\n\n**Note:** There are different response formats for event based and time based SLOs.\nExamples of both are shown.",
     "summary": "Get an SLO's history"
   },
+  "GetSyntheticsCIBatch": {
+    "description": "Get a batch's updated details.",
+    "summary": "Get details of batch"
+  },
   "ListLocations": {
     "description": "Get the list of public and private locations available for Synthetic\ntests. No arguments required.",
     "summary": "Get all locations (public and private)"

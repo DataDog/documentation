@@ -17,7 +17,7 @@ further_reading:
 
 _Events_ are records of notable changes relevant for managing and troubleshooting IT operations, such as code deployments, service health, configuration changes, or monitoring alerts.
 
-[Datadog Events][1] gives you a consolidated interface to search, analyze, and filter events from any source in one place.
+Datadog Events gives you a consolidated interface to search, analyze, and filter events from any source in one place.
 
 Without any additional setup, Datadog Events automatically gathers events that are collected by the Agent and installed integrations.
 
@@ -75,7 +75,6 @@ We are working to support more processors types. For more details, [contact Supp
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: http://app.datadoghq.com/event/explorer
 [2]: /agent/kubernetes/#event-collection
 [3]: /agent/docker/#events
 [4]: /integrations/jenkins/#events

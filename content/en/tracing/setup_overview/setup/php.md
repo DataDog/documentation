@@ -61,7 +61,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
     See [environment variable configuration](#environment-variable-configuration) for more information on how to set these variables.
-{{< site-region region="us3,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -779,7 +779,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-Try againg the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
+Try adding the canonical package names for debug symbols. For example, if the package name is `php7.2-fpm` try:
 
 ```
 apt install -y php7.2-fpm-dbgsym

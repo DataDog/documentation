@@ -5,7 +5,7 @@ aliases:
   - /ja/real_user_monitoring/installation/advanced_configuration/
   - /ja/real_user_monitoring/browser/advanced_configuration/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
     tag: ブログ
     text: Real User Monitoring
   - link: /real_user_monitoring/browser/data_collected/
@@ -28,6 +28,74 @@ RUM によって[収集されたデータ][1]を変更して、次のニーズ�
 - データをサンプリングすることにより、収集する RUM データの量を削減します。
 - データの送信元について、デフォルトの属性が提供するものよりも多くのコンテキストを提供します。
 
+## デフォルトの RUM ビュー名をオーバーライドする
+
+RUM SDK は、ユーザーが新しいページにアクセスするたびに、またはページの URL が変更されたときに (シングルページアプリケーションの場合)、[ビューイベント][2]を自動的に生成します。ビュー名は現在のページの URL から計算され、可変英数字 ID は自動的に削除されます。たとえば、"/dashboard/1234" は "/dashboard/?" になります。
+
+[バージョン 2.17.0][3] 以降、`trackViewsManually` オプションを使用してビューイベントを手動で追跡することにより、独自のビュー名を指定できます。
+
+1. RUM を初期化するときに `trackViewsManually` を true に設定します。
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    trackViewsManually: true,
+    ...
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+    });
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+2. 新しいページまたはルートの変更ごとにビューを開始する**必要があります** (シングルページアプリケーションの場合)。オプションで、関連付けられたビュー名を定義できます。デフォルトでは、ページの URL パスになります。ビューが開始されるまで、RUM データは収集されません。
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.startView('checkout')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.startView('checkout')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.startView('checkout')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**注**: React、Angular、Vue、またはその他のフロントエンドフレームワークを使用している場合、Datadog はフレームワークルーターレベルで `startView` ロジックを実装することをお勧めします。
+
 ## RUM データを強化および制御する
 
 RUM SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。RUM イベントをインターセプトすると、次のことが可能になります。
@@ -36,7 +104,7 @@ RUM SDK は RUM イベントをキャプチャし、それらの主な属性を�
 - RUM イベントを変更して、コンテンツを変更したり、機密性の高いシーケンスを編集したりします ([編集可能なプロパティのリスト](#modify-the-content-of-a-rum-event)を参照してください)
 - 選択した RUM イベントを破棄する
 
-[バージョン 2.13.0][2] 以降、`beforeSend` は 2 つの引数を取ります。RUM SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
+[バージョン 2.13.0][4] 以降、`beforeSend` は 2 つの引数を取ります。RUM SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
 
 ```javascript
 function beforeSend(event, context)
@@ -46,15 +114,15 @@ function beforeSend(event, context)
 
 | RUM イベントタイプ   | コンテキスト                   |
 |------------------|---------------------------|
-| ビュー             | [場所][3]                  |
-| アクション           | [イベント][4]                     |
-| リソース (XHR)   | [XMLHttpRequest][5] と [PerformanceResourceTiming][6]            |
-| リソース (フェッチ) | [リクエスト][7]、[リソース][8]、[PerformanceResourceTiming][6]      |
-| リソース (その他) | [PerformanceResourceTiming][6] |
-| エラー            | [エラー][9]                     |
-| ロングタスク        | [PerformanceLongTaskTiming][10] |
+| ビュー             | [場所][5]                  |
+| アクション           | [イベント][6]                     |
+| リソース (XHR)   | [XMLHttpRequest][7] と [PerformanceResourceTiming][8]            |
+| リソース (フェッチ) | [リクエスト][9]、[リソース][10]、[PerformanceResourceTiming][8]      |
+| リソース (その他) | [PerformanceResourceTiming][8] |
+| エラー            | [エラー][11]                     |
+| ロングタスク        | [PerformanceLongTaskTiming][12] |
 
-詳細については、[RUM データの強化と制御ガイド][11]を参照してください。
+詳細については、[RUM データの強化と制御ガイド][13]を参照してください。
 
 ### RUM イベントを強化する
 
@@ -70,7 +138,7 @@ datadogRum.init({
     ...,
     beforeSend: (event, context) => {
         // RUM リソースの応答ヘッダーを収集します
-        if (event.type = 'resource' && event.resource.type === 'fetch') {
+        if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context = {...event.context, responseHeaders: context.response.headers}
         }
     },
@@ -85,7 +153,7 @@ DD_RUM.onReady(function() {
         ...,
         beforeSend: (event, context) => {
             // RUM リソースの応答ヘッダーを収集します
-            if (event.type = 'resource' && event.resource.type === 'fetch') {
+            if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -101,7 +169,7 @@ window.DD_RUM &&
         ...,
         beforeSend: (event, context) => {
             // RUM リソースの応答ヘッダーを収集します
-            if (event.type = 'resource' && event.resource.type === 'fetch') {
+            if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context = {...event.context, responseHeaders: context.response.headers}
             }
         },
@@ -180,7 +248,7 @@ window.DD_RUM &&
 |   `resource.url`        |   文字列  |   リソースの URL。                                                                                 |
 |   `context`        |   オブジェクト  |   [グローバルコンテキスト API](#global-context) を介して、またはイベントを手動で生成するときに追加される属性 (例: `addError` および `addAction`)。RUM ビューイベント `context` は読み取り専用です。                                                                                 |
 
-**注**: RUM SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。すべてのイベントプロパティについては、[Browser SDK リポジトリ][12]を参照してください。
+**注**: RUM SDK は、上記にリストされていないイベントプロパティに加えられた変更を無視します。すべてのイベントプロパティについては、[Browser SDK リポジトリ][14]を参照してください。
 
 ### RUM イベントを破棄
 
@@ -436,7 +504,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][13]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
 
 ### グローバルコンテキストを置換
 
@@ -487,7 +555,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][13]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][15]に従ってください。
 
 ### グローバルコンテキストを読み取る
 
@@ -527,15 +595,17 @@ var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 
 
 [1]: /ja/real_user_monitoring/browser/data_collected/
-[2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
-[3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
-[4]: https://developer.mozilla.org/en-US/docs/Web/API/Event
-[5]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[7]: https://developer.mozilla.org/en-US/docs/Web/API/Request
-[8]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[11]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data
-[12]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
-[13]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/
+[3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
+[4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
+[5]: https://developer.mozilla.org/en-US/docs/Web/API/Location
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/Request
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/Response
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
+[13]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data
+[14]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
+[15]: /ja/logs/log_configuration/attributes_naming_convention/#user-related-attributes

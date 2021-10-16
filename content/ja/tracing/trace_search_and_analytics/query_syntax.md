@@ -309,7 +309,7 @@ Analyticsをエクスポート
 [8]: /ja/tracing/trace_search_and_analytics/query_syntax/#facets
 [9]: /ja/tracing/trace_search_and_analytics/query_syntax/#measures
 [10]: /ja/tracing/visualization/#trace
-[11]: /ja/monitors/monitor_types/apm/
+[11]: /ja/monitors/create/types/apm/
 [12]: /ja/dashboards/timeboard/
 [13]: /ja/help/
 [14]: /ja/tracing/visualization/#indexed-span

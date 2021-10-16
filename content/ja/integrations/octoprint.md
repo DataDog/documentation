@@ -16,7 +16,7 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_name: OctoPrint
 draft: false
 git_integration_title: octoprint

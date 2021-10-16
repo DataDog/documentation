@@ -21,6 +21,7 @@ git_integration_title: snmp_juniper
 guid: 62f074dc-8b6b-466d-bca2-175194221546
 integration_id: snmp-juniper
 integration_title: Juniper Networks
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

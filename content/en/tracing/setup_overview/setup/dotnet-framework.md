@@ -178,7 +178,7 @@ Enabling the .NET Tracer for your service involves setting the required environm
 
 3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. See [Configuration](#configuration) for more information on how to set these variables.
 
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

@@ -597,46 +597,51 @@ main:
     parent: agent
     identifier: agent_kubernetes
     weight: 3
+  - name: Kubernetes distributions
+    url: agent/kubernetes/distributions
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_distributions
+    weight: 301
   - name: APM
     url: agent/kubernetes/apm/
     parent: agent_kubernetes
     identifier: agent_kubernetes_apm
-    weight: 301
+    weight: 302
   - name: Log collection
     url: agent/kubernetes/log/
     parent: agent_kubernetes
     identifier: agent_kubernetes_log
-    weight: 302
+    weight: 303
   - name: Tag extraction
     url: agent/kubernetes/tag/
     parent: agent_kubernetes
     identifier: agent_kubernetes_tag
-    weight: 303
+    weight: 304
   - name: Autodiscovery
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
     identifier: agent_kubernetes_integrations
-    weight: 304
+    weight: 305
   - name: Prometheus
     url: agent/kubernetes/prometheus/
     parent: agent_kubernetes
     identifier: agent_kubernetes_prometheus
-    weight: 305
+    weight: 306
   - name: Data collected
     url: agent/kubernetes/data_collected/
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
-    weight: 306
+    weight: 307
   - name: Control plane monitoring
     url: agent/kubernetes/control_plane/
     parent: agent_kubernetes
     identifier: agent_kubernetes_control_plane
-    weight: 307
+    weight: 308
   - name: Operator configuration
     url: agent/kubernetes/operator_configuration
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
-    weight: 308
+    weight: 309
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
@@ -1185,14 +1190,18 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 3
+  - name: Collect Lambda Payloads
+    url: serverless/distributed_tracing/collect_lambda_payloads
+    parent: serverless_distributed_tracing
+    weight: 301
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 301
+    weight: 302
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 302
+    weight: 303
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
@@ -2856,20 +2865,24 @@ main:
     pre: cog
     identifier: account_management
     weight: 230000
-  - name: Switching between orgs
+  - name: Switching Between Orgs
     url: account_management/org_switching/
     parent: account_management
     weight: 1
-  - name: Organization settings
+  - name: Organization Settings
     url: account_management/org_settings/
     parent: account_management
     identifier: organization_settings
     weight: 2
-  - name: User management
+  - name: User Management
     url: account_management/users/
     parent: organization_settings
     identifier: account_management_users
     weight: 201
+  - name: Audit Logs
+    url: account_management/audit_logs
+    parent: organization_settings
+    weight: 202
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -2925,7 +2938,7 @@ main:
     url: account_management/billing/
     parent: account_management
     weight: 7
-  - name: Multi-org accounts
+  - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
     weight: 8
@@ -5579,6 +5592,18 @@ api:
         - ListLocations
       unstable: []
       order: 23
+  - name: Get details of batch
+    url: '#get-details-of-batch'
+    identifier: get-details-of-batch
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsCIBatch
+      unstable: []
+      order: 26
   - name: Tags
     url: /api/latest/tags/
     identifier: tags

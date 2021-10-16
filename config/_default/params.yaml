@@ -105,8 +105,12 @@ allowedRegions:
     domain: datadoghq.com
   - name: US3
     value: us3
-    weight: 15
+    weight: 13
     domain: us3.datadoghq.com
+  - name: US5
+    value: us5
+    weight: 15
+    domain: us5.datadoghq.com
   - name: EU
     value: eu
     weight: 20

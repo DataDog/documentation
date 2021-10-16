@@ -1902,10 +1902,8 @@ components:
           maxLength: 4000
           type: string
         title:
-          description: The event title. Limited to 100 characters. Use `msg_title`
-            with the Datadog Ruby library.
+          description: The event title.
           example: Did you hear the news today?
-          maxLength: 100
           type: string
         url:
           description: URL of the event.
@@ -5874,6 +5872,19 @@ components:
           format: int64
           nullable: true
           type: integer
+        renotify_occurrences:
+          description: The number of times re-notification messages should be sent
+            on the current status at the provided re-notification interval.
+          format: int64
+          nullable: true
+          type: integer
+        renotify_statuses:
+          description: The types of monitor statuses for which re-notification messages
+            are sent.
+          items:
+            $ref: '#/components/schemas/MonitorRenotifyStatusType'
+          nullable: true
+          type: array
         require_full_window:
           description: "A Boolean indicating whether this monitor needs a full window
             of data before it\u2019s evaluated.\nWe highly recommend you set this
@@ -5926,6 +5937,17 @@ components:
       - SKIPPED
       - UNKNOWN
       - WARN
+    MonitorRenotifyStatusType:
+      description: The different statuses for which renotification is supported.
+      enum:
+      - alert
+      - warn
+      - no data
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - WARN
+      - NO_DATA
     MonitorSearchCount:
       description: Search facets.
       items:
@@ -6656,6 +6678,8 @@ components:
           items:
             $ref: '#/components/schemas/NotebookCellCreateRequest'
           type: array
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
         name:
           description: The name of the notebook.
           example: Example Notebook
@@ -6773,6 +6797,41 @@ components:
       type: string
       x-enum-varnames:
       - MARKDOWN
+    NotebookMetadata:
+      description: Metadata associated with the notebook.
+      properties:
+        is_template:
+          default: false
+          description: Whether or not the notebook is a template.
+          example: false
+          type: boolean
+        take_snapshots:
+          default: false
+          description: Whether or not the notebook takes snapshot image backups of
+            the notebook's fixed-time graphs.
+          example: false
+          type: boolean
+        type:
+          $ref: '#/components/schemas/NotebookMetadataType'
+      type: object
+    NotebookMetadataType:
+      default: null
+      description: Metadata type of the notebook.
+      enum:
+      - postmortem
+      - runbook
+      - investigation
+      - documentation
+      - report
+      example: investigation
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM
+      - RUNBOOK
+      - INVESTIGATION
+      - DOCUMENTATION
+      - REPORT
     NotebookRelativeTime:
       description: Relative timeframe.
       example:
@@ -6871,6 +6930,8 @@ components:
           format: date-time
           readOnly: true
           type: string
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
         modified:
           description: UTC time stamp for when the notebook was last modified.
           example: '2021-02-24T23:15:23.274966+00:00'
@@ -7020,6 +7081,8 @@ components:
           items:
             $ref: '#/components/schemas/NotebookUpdateCell'
           type: array
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
         name:
           description: The name of the notebook.
           example: Example Notebook
@@ -7052,7 +7115,7 @@ components:
             $ref: '#/components/schemas/NotebooksResponseData'
           type: array
         meta:
-          description: Metadata returned by the API.
+          description: Searches metadata returned by the API.
           properties:
             page:
               $ref: '#/components/schemas/NotebooksResponsePage'
@@ -7092,6 +7155,8 @@ components:
           format: date-time
           readOnly: true
           type: string
+        metadata:
+          $ref: '#/components/schemas/NotebookMetadata'
         modified:
           description: UTC time stamp for when the notebook was last modified.
           example: '2021-02-24T23:15:23.274966+00:00'
@@ -9913,6 +9978,57 @@ components:
       - password
       - username
       type: object
+    SyntheticsBatchDetails:
+      description: Details about a batch response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsBatchDetailsData'
+      type: object
+    SyntheticsBatchDetailsData:
+      description: Wrapper object that contains the details of a batch.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
+        results:
+          description: List of results for the batch.
+          items:
+            $ref: '#/components/schemas/SyntheticsBatchResult'
+          type: array
+        status:
+          $ref: '#/components/schemas/SyntheticsStatus'
+      type: object
+    SyntheticsBatchResult:
+      description: Object with the results of a Synthetics batch.
+      properties:
+        device:
+          $ref: '#/components/schemas/SyntheticsDeviceID'
+        duration:
+          description: Total duration in millisecond of the test.
+          format: double
+          type: number
+        execution_rule:
+          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+        location:
+          description: Name of the location.
+          type: string
+        result_id:
+          description: The ID of the result to get.
+          type: string
+        retries:
+          description: Total duration in millisecond of the test.
+          format: double
+          type: number
+        status:
+          $ref: '#/components/schemas/SyntheticsStatus'
+        test_name:
+          description: Name of the test.
+          type: string
+        test_public_id:
+          description: The public ID of the Synthetic test.
+          type: string
+        test_type:
+          $ref: '#/components/schemas/SyntheticsTestDetailsType'
+      type: object
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -10187,6 +10303,34 @@ components:
       - GLOBAL
       - JAVASCRIPT
       - TEXT
+    SyntheticsCIBatchMetadata:
+      description: Metadata for the Synthetics tests run.
+      properties:
+        ci:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataCI'
+        git:
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadataGit'
+      type: object
+    SyntheticsCIBatchMetadataCI:
+      description: Description of the CI provider.
+      properties:
+        pipeline:
+          description: Name of the pipeline.
+          type: string
+        provider:
+          description: Name of the CI provider.
+          type: string
+      type: object
+    SyntheticsCIBatchMetadataGit:
+      description: Git information.
+      properties:
+        branch:
+          description: The branch name.
+          type: string
+        commit_sha:
+          description: The commit SHA.
+          type: string
+      type: object
     SyntheticsCITest:
       description: Test configuration for Synthetics CI
       properties:
@@ -10222,29 +10366,7 @@ components:
             type: string
           type: array
         metadata:
-          description: Metadata for the Synthetics tests run
-          properties:
-            ci:
-              description: Describe CI provider.
-              properties:
-                pipeline:
-                  description: Name of the pipeline.
-                  type: string
-                provider:
-                  description: Name of the CI provider.
-                  type: string
-              type: object
-            git:
-              description: Git information.
-              properties:
-                branch:
-                  description: Branch name.
-                  type: string
-                commit_sha:
-                  description: Commit SHA.
-                  type: string
-              type: object
-          type: object
+          $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
         public_id:
           description: The public ID of the Synthetics test to trigger.
           example: aaa-aaa-aaa
@@ -10836,6 +10958,18 @@ components:
           format: date-time
           type: string
       type: object
+    SyntheticsStatus:
+      description: Determines whether or not the batch has passed, failed, or is in
+        progress.
+      enum:
+      - passed
+      - skipped
+      - failed
+      type: string
+      x-enum-varnames:
+      - PASSED
+      - skipped
+      - failed
     SyntheticsStep:
       description: The steps used in a Synthetics browser test.
       properties:
@@ -11088,6 +11222,17 @@ components:
       x-enum-varnames:
       - API
       - BROWSER
+    SyntheticsTestExecutionRule:
+      description: Execution rule for a Synthetics test.
+      enum:
+      - blocking
+      - non_blocking
+      - skipped
+      type: string
+      x-enum-varnames:
+      - BLOCKING
+      - NON_BLOCKING
+      - SKIPPED
     SyntheticsTestHeaders:
       additionalProperties:
         description: A single Header.
@@ -13689,7 +13834,8 @@ components:
           type: integer
       type: object
     UsageSummaryResponse:
-      description: Response with hourly report of all data billed by Datadog all organizations.
+      description: Response summarizing all usage aggregated across the months in
+        the request for all organizations, and broken down by month and by organization.
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
@@ -15970,6 +16116,12 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-given:
+        dashboard_list:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}\"\n}"
+          step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteDashboardList
@@ -16713,10 +16865,22 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-given:
+        downtime:
+          parameters:
+          - name: body
+            value: "{\n  \"message\": \"{{ unique }}\",\n  \"start\": {{ timestamp(\"now\")
+              }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"test:{{ unique_lower_alnum
+              }}\"],\n  \"recurrence\": {\n    \"type\": \"weeks\",\n    \"period\":
+              1,\n    \"week_days\": [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n
+              \   \"until_date\": {{ timestamp(\"now + 21d\")}}\n  }\n}"
+          step: there is a valid "downtime" in the system
       x-menu-order: 2
       x-undo:
-        operationId: TODO
-        parameters: []
+        operationId: CancelDowntime
+        parameters:
+        - name: downtime_id
+          source: id
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
@@ -19143,12 +19307,12 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-given:
-        webhook-custom-variable:
+        webhook_custom_variable:
           parameters:
           - name: body
             value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
               \ \"is_secret\": false\n}"
-          step: there is a valid "webhook-custom-variable" in the system
+          step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
@@ -20585,6 +20749,12 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-given:
+        monitor:
+          parameters:
+          - file: monitor_payload.json
+            name: body
+          step: there is a valid "monitor" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteMonitor
@@ -20598,6 +20768,7 @@ paths:
       operationId: CheckCanDeleteMonitor
       parameters:
       - description: The IDs of the monitor to check.
+        explode: false
         in: query
         name: monitor_ids
         required: true
@@ -20606,6 +20777,7 @@ paths:
             format: int64
             type: integer
           type: array
+        style: form
       responses:
         '200':
           content:
@@ -21341,7 +21513,7 @@ paths:
           format: int64
           type: integer
         style: form
-      - description: Sort by field `modified` or `name`.
+      - description: Sort by field `modified`, `name`, or `created`.
         in: query
         name: sort_field
         required: false
@@ -21377,6 +21549,25 @@ paths:
           default: true
           example: false
           type: boolean
+        style: form
+      - description: True value returns only template notebooks. Default is false
+          (returns only non-template notebooks).
+        in: query
+        name: is_template
+        required: false
+        schema:
+          default: false
+          example: false
+          type: boolean
+        style: form
+      - description: If type is provided, returns only notebooks with that metadata
+          type. Default does not have type filtering.
+        in: query
+        name: type
+        required: false
+        schema:
+          example: investigation
+          type: string
         style: form
       responses:
         '200':
@@ -22852,6 +23043,36 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/synthetics/ci/batch/{batch_id}:
+    get:
+      description: Get a batch's updated details.
+      operationId: GetSyntheticsCIBatch
+      parameters:
+      - description: The ID of the batch.
+        in: path
+        name: batch_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsBatchDetails'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Batch does not exist.
+      summary: Get details of batch
+      tags:
+      - Synthetics
+      x-menu-order: 26
+      x-undo:
+        type: safe
   /api/v1/synthetics/locations:
     get:
       description: 'Get the list of public and private locations available for Synthetic
@@ -23150,6 +23371,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_api_test:
+          parameters:
+          - file: synthetics_api_test_payload.json
+            name: body
+          step: there is a valid "synthetics_api_test" in the system
       x-menu-order: 1
       x-undo:
         operationId: DeleteTests

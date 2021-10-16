@@ -77,6 +77,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
       branch: master
@@ -98,6 +99,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
   - repo_name: marketplace
     contents:
@@ -223,13 +225,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'forwarder.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
-          title: Datadog Forwarder
-          kind: documentation
-          aliases:
-            - /serverless/troubleshooting/installing_the_forwarder/
-            - /serverless/forwarder/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
 
   - repo_name: serverless-plugin-datadog
     contents:
