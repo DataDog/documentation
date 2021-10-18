@@ -294,7 +294,7 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 **Example**: If a log monitor is grouped by `@http.status_code`, to include the error message or infrastructure tags in the notification message, use the variables:
 
 ```text
-{{ log.attributes.error.message }}
+{{ log.attributes.[error.message] }}
 {{ log.tags.env }}
 ...
 ```
