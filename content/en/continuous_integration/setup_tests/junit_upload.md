@@ -158,6 +158,41 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Providing metadata through `<property>` elements
+
+In addition to the `--tags` CLI parameter and `DD_TAGS` environment variable which apply custom tags globally to all tests included the uploaded XML report, it is possible to provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. These tags are either stored in the test span that corresponds to the `<testcase>` element where it's added, or in all test spans within the same test suite when defined inside a `<testsuite>` element.
+
+Only `<property>` elements with a `name` attribute with the format `dd_tags[key]` where `key` is the name of the custom tag to be added, are processed. Other properties are ignored.
+
+Example for `<testcase>`
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000">
+      <properties>
+        <property name="dd_tags[custom_tag]" value="some value"></property>
+        <property name="dd_tags[runtime.name]" value="CPython"></property>
+      </properties>
+    </testcase>
+  </testsuite>
+</testsuites>
+```
+
+Example for `<testsuite>`
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <properties>
+      <property name="dd_tags[custom_tag]" value="some value"></property>
+      <property name="dd_tags[runtime.name]" value="CPython"></property>
+    </properties>
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.010000"></testcase>
+  </testsuite>
+</testsuites>
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
