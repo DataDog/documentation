@@ -9,7 +9,12 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 
-Your monthly billable volume for custom metrics (reflected on the Usage page) represents the average number of distinct custom metrics over all hours in the current month.
+Your monthly billable volume for _ingested_ and _indexed_ custom metrics (reflected on the Usage page) are both calculated from the average number of distinct custom metrics over all hours in the current month. 
+
+- Ingested Custom Metrics: All custom metrics originally submitted via code to Datadog. Only Metrics without Limits\* configured metrics contribute to this ingested custom metrics volume. 
+- Indexed Custom Metrics: Custom metrics that are queryable throughout the platform after configuration with Metrics without Limits\*. 
+
+Learn more about ingested and indexed custom metrics and [Metrics without Limits][25]. 
 
 ## Counting custom metrics
 
@@ -27,7 +32,7 @@ Assume that in your data, `endpoint:X` is supported by both hosts, but fails onl
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
 
-The number of custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated with the same logic.
+The number of ingested custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated with the same logic.
 
 The number of unique tag value combinations submitted for a GAUGE metric with this tagging scheme is **four**:
 
@@ -36,7 +41,7 @@ The number of unique tag value combinations submitted for a GAUGE metric with th
 - `host:B`, `endpoint:X`, `status:400`
 - `host:B`, `endpoint:Y`, `status:200`
 
-This results in `request.Latency` reporting **four distinct custom metrics**.
+This results in `request.Latency` reporting **four indexed custom metrics**. If no configur
 
 ### Effect of adding tags
 
@@ -220,3 +225,4 @@ For billing questions, contact your [Customer Success][9] Manager.
 [22]: /integrations/sqlserver/
 [23]: /integrations/amazon_web_services/
 [24]: /help/
+[25]: /metrics/metrics-without-limits
