@@ -5760,6 +5760,18 @@ api:
         - GetUsageSNMP
       unstable: []
       order: 18
+  - name: Get hourly usage for Sensitive Data Scanner
+    url: '#get-hourly-usage-for-sensitive-data-scanner'
+    identifier: get-hourly-usage-for-sensitive-data-scanner
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetUsageSDS
+      unstable: []
+      order: 34
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -5927,7 +5939,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 32
+      order: 33
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -5939,7 +5951,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 31
+      order: 32
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm
