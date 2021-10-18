@@ -5,13 +5,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure SQL Managed Instance のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_sql_managed_instance/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_managed_instance/'
 draft: false
 git_integration_title: azure_sql_managed_instance
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Azure SQL Managed Instance
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

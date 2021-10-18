@@ -4,9 +4,9 @@ categories:
   - セキュリティ
 ddtype: crawler
 description: Carbon Black Defense ログを収集する
-doc_link: https://docs.datadoghq.com/integrations/carbon_black/
+doc_link: 'https://docs.datadoghq.com/integrations/carbon_black/'
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md'
 has_logo: true
 integration_title: Carbon Black
 is_public: true
@@ -15,45 +15,81 @@ name: carbon_black
 public_title: Datadog-Carbon Black インテグレーション
 short_description: Carbon Black Defense ログを収集する
 version: '1.0'
-integration_id: carbonblack
 ---
 ## 概要
 
-Datadog-Carbon Black インテグレーションを使用して、Carbon Black EDR のイベントとアラートを Datadog ログとして転送します。
-
+Carbon Black Defense ログを Datadog に転送するには、Datadog-Carbon Black インテグレーションを使用します。
 
 ## セットアップ
 
 ### インストール
 
-Datadog は、Carbon Black のイベントフォワーダーと Datadog の Lambda フォワーダーを使用して、S3 バケットから Carbon Black のイベントとアラートを収集します。
+まず、[Carbon Black Defense ログシッパー][1]をインストールしてセットアップします。
 
-Carbon Black は、Carbon Black イベントフォワーダーの作成に使用する API の [Postman コレクション][10]を提供します。
+### コンフィギュレーション
 
-#### コンフィギュレーション
+以下の構成ファイルにより、Carbon Black Defense シッパーはログを Datadog に転送できるようになります。
 
-1. [Datadog Forwarder][1] をインストールします。
-2. [AWS Management Console にバケットを作成][2]して、イベントを転送します。
-3. [Carbon Black フォワーダーがデータを書き込めるように S3 バケットを構成します][3]。
-   - **重要**: S3 バケットには、CB イベントが発生するキーワード `carbon-black` のプレフィックスが必要です。これにより、Datadog はログのソースを正しく認識できます。
-5. [Carbon Black Cloud コンソールでアクセスレベルを作成します][4]。
-6. [Carbon Black Cloud コンソールで API キーを作成します][5]。
-7. 上記で作成したキーを使用して次の Postman 環境変数の値を更新することにより、[Postman で API を構成します][6]: `cb_url`、`cb_org_key`、`cb_custom_id`、`cb_custom_key`
-8. Carbon Black アラート (`"type": "alert"`) とエンドポイントイベント (`"type": "endpoint.event"`) の名前が異なる [2 つの Carbon Black イベントフォワーダーを作成][7]します。
-9. [S3 バケットでトリガーするように Datadog Forwarder をセットアップします][8]。
+{{< tabs >}}
+{{% tab "Datadog US Site" %}}
 
+```conf
+[general]
+
+template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
+policy_action_severity = 4
+output_format=json
+output_type=http
+http_out=https://http-intake.logs.datadoghq.com/v1/input/<DATADOG_API_キー>?ddsource=cbdefense
+http_headers={"content-type": "application/json"}
+https_ssl_verify=True
+
+[cbdefense1]
+server_url = <CB_DEFENSE_サーバー_URL>
+siem_connector_id=<CB_DEFENSE_API_ID>
+siem_api_key=<CB_DEFENSE_API_シークレットキー>
+```
+
+{{% /tab %}}
+{{% tab "Datadog EU Site" %}}
+
+```conf
+[general]
+
+template = {{source}}|{{version}}|{{vendor}}|{{product}}|{{dev_version}}|{{signature}}|{{name}}|{{severity}}|{{extension}}
+policy_action_severity = 4
+output_format=json
+output_type=http
+http_out=https://http-intake.logs.datadoghq.eu/v1/input/<DATADOG_API_キー>?ddsource=cbdefense
+http_headers={"content-type": "application/json"}
+https_ssl_verify=True
+
+[cbdefense1]
+server_url = <CB_DEFENSE_サーバー_URL>
+siem_connector_id=<CB_DEFENSE_API_ID>
+siem_api_key=<CB_DEFENSE_API_シークレットキー>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+`<DATADOG_API_キー>`、`<CB_DEFENSE_API_シークレットキー>`、`<CB_DEFENSE_API_ID>`、`<CB_DEFENSE_サーバー_URL>` プレースホルダーを置き換えて構成を完成させます。
+
+最初に、`<DATADOG_API_キー>` を [Datadog API キー][2]ページにある Datadog API キーに置き換えます。
+
+次に、Carbon Black Defense API キーと API ID を取得するために、Carbon Black 内からこれらを生成します。
+
+1. _Settings_ -> _API KEYS_ -> _Add API Key_ に移動します。
+2. キーの名前を入力します。
+3. キーに対して **SIEM** アクセスレベルを選択します。
+4. キーが作成されたら、新しい API キーと API ID を使用して、Carbon Black Defense ログシッパー構成ファイルのプレースホルダー `<CB_DEFENSE_API_シークレットキー>` と `<CB_DEFENSE_API_ID>` を置き換えます。
+
+Carbon Black Defense サーバーの URL は、Carbon Black ダッシュボード内で確認できます。_Settings_ -> _API KEYS_ -> _Download_ に移動して、この URL とそのアクセスレベルの説明を確認します。この値を使用して、`<CB_DEFENSE_サーバー_URL>` プレースホルダーを置き換えます。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: /ja/serverless/libraries_integrations/forwarder/
-[2]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
-[3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
-[4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level
-[5]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-api-key
-[6]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-api-in-postman
-[7]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-new-forwarder
-[8]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[9]: /ja/help/
-[10]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest
+[1]: https://github.com/carbonblack/cb-defense-syslog-tls
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: /ja/help/

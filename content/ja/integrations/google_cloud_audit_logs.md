@@ -12,7 +12,6 @@ git_integration_title: google_cloud_audit_logs
 has_logo: true
 integration_id: google-cloud-audit-logs
 integration_title: Datadog Google 監査ログダッシュボード
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
