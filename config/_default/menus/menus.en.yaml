@@ -2025,6 +2025,11 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 204
+  - name: GitHub
+    url: continuous_integration/setup_pipelines/github/
+    parent: setup_pipelines
+    identifier: ci_github
+    weight: 205
   - name: Custom Spans
     url: continuous_integration/setup_pipelines/custom_spans/
     parent: setup_pipelines
