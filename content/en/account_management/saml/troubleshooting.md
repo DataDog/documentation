@@ -75,7 +75,7 @@ If you have group mappings set and are not able to see your roles, your group ma
 
   {{< img src="account_management/saml/saml_mappings_example.png" alt="SAML mappings in Datadog" style="width:80%;">}}
 
-5. Resolve any discrepancies in either the Datadog Mappings settings, or within your IdP settings. For example, if `memberOf` is a set attribute in Datadog, and it's `member_of` in your SAML assertion, resolve accordingly.
+5. Resolve any discrepancies in either the Datadog Mappings settings, or within your IdP settings. For example, if `memberof` is a set attribute in Datadog, and it's `member_Of` in your SAML assertion, resolve accordingly.
 
 Discrepancies may occur when there is no match or a mismatch between the attribute key and value. For example, if you see a key value pair of `memberOf` and `name_of_your_group_goes_here` in **Mappings**, you run into an issue because this pair is not included in the assertion sent over from your IdP.
 
@@ -111,7 +111,7 @@ Some questions to ask yourself that can help narrow down whether you have a cert
 - If your users are using multiple IdPs, are you seeing issues persists across multiple IdPs, or only one?
 - Did you recently enable [Mappings](#roles-errors)?
 
-To resolve, ensure IdP certificates are up-to-date within your IdP's settings.
+To resolve, ensure IdP certificates are up-to-date within your IdP's settings and that you have uploaded the most recent metadata file from your IdP in Datadog.
 
 ## Support
 
@@ -121,6 +121,7 @@ In your message, provide a screen recording of your login process and include re
 
 - Are you the only account that is unable to login or are all users unable to login?
 - Which organization are you trying to login to and how are you trying to login?
+Contact your Administrator before reaching out to Datadog support. You may need to also reach out your identity provider to resolve login issues.
 
 ## Further Reading
 
