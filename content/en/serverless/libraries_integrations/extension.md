@@ -53,11 +53,23 @@ When using the Extension, Datadog recommends you apply tags by adding the follow
 
 If you have the Datadog AWS integration enabled, any AWS resource tag applied to your AWS Lambda function also gets applied in Datadog automatically.
 
+## VPC
+
+The Datadog Lambda Extension needs access to public internet to send data to Datadog. If your Lambda functions are deployed in a VPC private subnet without access to public internet, see the options below.
+
+### Using AWS PrivateLink
+
+If you are sending data to a Datadog site that is hosted on AWS, such as US1, then you can [send data over AWS PrivateLink][10]. See [Datadog Sites][11] or contact support@datadoghq.com if you are unsure about your Datadog site.
+
+### Using a proxy
+
+If you are sending data to a Datadog site that is _NOT_ hosted on AWS, such as EU1, then you need to [send data over a proxy][12].
+
 ## Overhead
 
 The Datadog Lambda Extension introduces a small amount of overhead to your Lambda function's cold starts (that is, the higher init duration), as the Extension needs to initialize. Datadog is continuously optimizing the Lambda extension performance and recommend always using the latest release.
 
-You may also notice increase of your Lambda function's reported duration, and this is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the Extension flushing data is reported as part of the duration, it's done *after* AWS returning your function's response back to the client. In other words, the added duration does not slow down your Lambda function. Additional technical details can be found from this [AWS blog post][10].
+You may notice an increase of your Lambda function's reported duration. This is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the extension flushing data is reported as part of the duration, it's done *after* AWS returns your function's response back to the client. In other words, the added duration does not slow down your Lambda function. See this [AWS blog post][13] for more technical information.
 
 By default, the Extension sends data back to Datadog at the end of each invocation. This avoids delays of data arrival for sporadic invocations from low-traffic applications, cron jobs, and manual tests. Once the Extension detects a steady and frequent invocation pattern (more than once per minute), it batches data from multiple invocations and flushes periodically at the beginning of the invocation when it's due. This means that *the busier your function is, the lower the average duration overhead per invocation*. 
 
@@ -77,4 +89,7 @@ For Lambda functions deployed in a region that is far from the Datadog site, for
 [7]: /tracing/guide/ignoring_apm_resources/
 [8]: /tracing/setup_overview/configure_data_security/
 [9]: /tracing/deployment_tracking/
-[10]: https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/
+[10]: /serverless/guide/extension_private_link/
+[11]: /getting_started/site/
+[12]: /agent/proxy/
+[13]: https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/
