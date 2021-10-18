@@ -59,6 +59,13 @@ components:
             auto_scaling: false
             opswork: false
           type: object
+        cspm_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects cloud security posture management
+            resources from your AWS account. This includes additional resources not
+            covered under the general `resource_collection`.
+          example: true
+          type: boolean
         excluded_regions:
           description: An array of AWS regions to exclude from metrics collection.
           example:
@@ -99,6 +106,17 @@ components:
             description: The list of the the host_tags.
             type: string
           type: array
+        metrics_collection_enabled:
+          default: true
+          description: Whether Datadog collects metrics for this AWS account.
+          example: false
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects a standard set of resources from your
+            AWS account.
+          example: true
+          type: boolean
         role_name:
           description: Your Datadog role delegation name.
           example: DatadogAWSIntegrationRole
@@ -5583,6 +5601,7 @@ components:
           format: int64
           maximum: 5
           minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -5594,6 +5613,7 @@ components:
           items:
             description: A role UUID.
             type: string
+          nullable: true
           type: array
         state:
           $ref: '#/components/schemas/MonitorState'
@@ -13268,6 +13288,37 @@ components:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
       type: object
+    UsageSDSHour:
+      description: Sensitive Data Scanner usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        logs_scanned_bytes:
+          description: "The total number of bytes scanned of logs usage by the Sensitive
+            Data Scanner from the start of the given hour\u2019s month until the given
+            hour."
+          format: int64
+          type: integer
+        total_scanned_bytes:
+          description: "The total number of bytes scanned across all usage types by
+            the Sensitive Data Scanner from the start of the given hour\u2019s month
+            until the given hour."
+          format: int64
+          type: integer
+      type: object
+    UsageSDSResponse:
+      description: Response containing the Sensitive Data Scanner usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for Sensitive Data Scanner.
+          items:
+            $ref: '#/components/schemas/UsageSDSHour'
+          type: array
+      type: object
     UsageSNMPHour:
       description: The number of SNMP devices for each hour for a given organization.
       properties:
@@ -13578,6 +13629,17 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -13805,6 +13867,17 @@ components:
         rum_total_session_count_sum:
           description: Shows the sum of RUM Sessions (browser and mobile) over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -14075,6 +14148,17 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        sds_logs_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned of logs usage by the Sensitive
+            Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_total_scanned_bytes_sum:
+          description: Shows the sum of all bytes scanned across all usage types by
+            the Sensitive Data Scanner over all hours in the current month for all
+            organizations.
+          format: int64
+          type: integer
         start_date:
           description: Shows the first date of usage in the current months for all
             organizations.
@@ -14197,7 +14281,8 @@ components:
           format: int64
           type: integer
         num_custom_timeseries:
-          description: Contains the number of non-aggregation custom metrics.
+          description: Contains sum of non-aggregation custom metrics and custom metrics
+            that are outputs for aggregations.
           format: int64
           type: integer
       type: object
@@ -15297,6 +15382,7 @@ paths:
             enum:
             - datadoghq.com
             - us3.datadoghq.com
+            - us5.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -20586,7 +20672,8 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED, US3, and in closed beta on EU and US1.
+        **NOTE** Only available on US1-FED, US3, US5 and in closed beta on EU and
+        US1.
 
 
         **Process Alert Query**
@@ -20699,7 +20786,8 @@ paths:
         - **`#`** an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on EU, US3, and US1.'
+        **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
+        US5.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -24929,7 +25017,7 @@ paths:
       summary: Get hourly usage for Cloud Workload Security
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -24977,7 +25065,7 @@ paths:
       summary: Get hourly usage for Database Monitoring
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -25662,6 +25750,54 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-undo:
+        type: safe
+  /api/v1/usage/sds:
+    get:
+      description: Get hourly usage for Sensitive Data Scanner.
+      operationId: GetUsageSDS
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSDSResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Sensitive Data Scanner
+      tags:
+      - Usage Metering
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -26446,6 +26582,7 @@ paths:
             enum:
             - datadoghq.com
             - us3.datadoghq.com
+            - us5.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -26545,6 +26682,7 @@ servers:
       enum:
       - datadoghq.com
       - us3.datadoghq.com
+      - us5.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:
