@@ -121,7 +121,8 @@ In your message, provide a screen recording of your login process and include re
 
 - Are you the only account that is unable to login or are all users unable to login?
 - Which organization are you trying to login to and how are you trying to login?
-Contact your Administrator before reaching out to Datadog support. You may need to also reach out your identity provider to resolve login issues.
+
+Before reaching out to Datadog support, contact your Administrator. You may need to also reach out your identity provider to resolve login issues.
 
 ## Further Reading
 
