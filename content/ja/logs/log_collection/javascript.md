@@ -556,7 +556,7 @@ window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 
 デフォルトでは、Datadog ブラウザログ SDK が作成したロガーは、ログを Datadog に送信します。Datadog ブラウザログ SDK が初期化されると、ロガーを構成して以下のようにすることもできます。
 
-- `console` と Datadog にログを送信する (`http`)
+- Datadog にのみログを送信する (`http`)
 - `console` にのみログを送信する
 - ログをまったく送信しない (`silent`)
 

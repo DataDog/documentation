@@ -556,6 +556,10 @@ window.DD_LOGS && DD_LOGS.logger.setLevel('<NIVEAU>')
 
 Par défaut, les loggers créés par le SDK Browser Datadog envoient les logs à Datadog. Une fois le SDK lancé, il est possible de configurer le logger de façon à ce que les logs soient envoyés à la `console` ou qu'ils ne soient pas envoyés du tout (`silent`) avec l'API :
 
+- envoyer les logs vers le Datadog (`http`) seulement
+- envoyer les logs uniquement à la console `console`
+- ne pas envoyer de logs du tout (`silent`)
+
 ```
 setHandler (handler?: 'http' | 'console' | 'silent')
 ```
