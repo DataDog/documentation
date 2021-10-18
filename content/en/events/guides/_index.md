@@ -22,7 +22,7 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Other guides:">}}
-    {{< nextlink href="/events/guides/migrating_from_stream_to_explorer/" >}}Migrating from the Event Stream to the Events Explore{{< /nextlink >}}
+    {{< nextlink href="/events/guides/migrating_to_new_events_features/" >}}Migrating to the New Events Features{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
