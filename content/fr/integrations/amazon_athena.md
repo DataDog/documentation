@@ -6,13 +6,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Athena."
-doc_link: https://docs.datadoghq.com/integrations/amazon_athena/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_athena/'
 draft: false
 git_integration_title: amazon_athena
 has_logo: true
 integration_id: amazon-athena
 integration_title: "Amazon\_Athena"
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

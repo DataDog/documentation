@@ -1,5 +1,5 @@
 ---
-title: API Dashboard Lists (v1)
+title: Documentation relative à l'API des listes de dashboards (v1)
 kind: guide
 aliases:
   - /fr/graphing/faq/dashboard-lists-api-doc
@@ -7,10 +7,10 @@ aliases:
 ---
 Interagissez avec vos listes de dashboards via l'API pour faciliter l'organisation, la recherche et le partage de tous vos dashboards avec votre équipe et votre organisation.
 
-- [Récupérer les éléments d'une liste de dashboards](#recuperer-les-elements-d-une-liste-de-dashboards)
-- [Ajouter des éléments à une liste de dashboards](#ajouter-des-elements-a-une-liste-de-dashboards)
-- [Mettre à jour les éléments d'une liste de dashboards](#mettre-a-jour-les-elements-d-une-liste-de-dashboards)
-- [Supprimer des éléments d'une liste de dashboards](#supprimer-des-elements-d-une-liste-de-dashboards)
+- [Récupérer les éléments d'une liste de dashboards](#get-items-of-a-dashboard-list)
+- [Ajouter des éléments à une liste de dashboards](#add-items-to-a-dashboard-list)
+- [Mettre à jour les éléments d'une liste de dashboards](#update-items-of-a-dashboard-list)
+- [Supprimer des éléments d'une liste de dashboards](#delete-items-from-a-dashboard-list)
 
 ## Récupérer les éléments d'une liste de dashboards
 

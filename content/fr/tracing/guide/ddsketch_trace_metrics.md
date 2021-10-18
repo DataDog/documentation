@@ -4,13 +4,13 @@ kind: guide
 aliases:
   - /fr/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-  - link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+  - link: 'https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/'
     tag: Blog
     text: Calcul précis de centiles avec DDSketch
-  - link: https://docs.datadoghq.com/metrics/distributions/
+  - link: 'https://docs.datadoghq.com/metrics/distributions/'
     tag: Documentation
     text: En savoir plus sur les distributions
-  - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
+  - link: 'https://docs.datadoghq.com/tracing/guide/metrics_namespace/'
     tag: Documentation
     text: En savoir plus sur les métriques de trace
 ---

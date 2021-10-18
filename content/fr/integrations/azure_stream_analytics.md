@@ -7,13 +7,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure\_Stream\_Analytics."
-doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_stream_analytics/'
 draft: false
 git_integration_title: azure_stream_analytics
 has_logo: true
 integration_id: azure-streamanalytics
 integration_title: Microsoft Azure Stream Analytics
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
