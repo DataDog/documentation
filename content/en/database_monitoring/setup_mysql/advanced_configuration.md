@@ -4,7 +4,7 @@ kind: documentation
 description: Advanced Configuration for MySQL Database Monitoring
 
 ---
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 

@@ -12,6 +12,7 @@ git_integration_title: segment
 has_logo: true
 integration_id: ''
 integration_title: Segment
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

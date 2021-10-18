@@ -20,6 +20,7 @@ git_integration_title: Squadcast
 guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: Squadcast
 integration_title: Squadcast
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: it@squadcast.com

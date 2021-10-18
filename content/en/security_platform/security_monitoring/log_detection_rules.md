@@ -240,7 +240,7 @@ This JSON object is an example of event attributes which may be associated with 
 You could use the following in the “say what’s happening” section:
 
 ```
-{{@usr.id}} just logged in without MFA from {@network.client.ip}.
+{{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
 ```
 
 And this would be rendered as the following:
