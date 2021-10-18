@@ -138,24 +138,24 @@ The number of custom metrics from a [DISTRIBUTION metric][1] is five times the u
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
+Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics  on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
 
-For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It's listed as `Currently reporting # distinct metrics...` as shown below:
+For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.png" alt="Metrics Summary sidepanel" style="width:80%;">}}
 
-{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" >}}
 
 ## Allocation
 
-You are allocated a certain number of custom metrics based on your Datadog pricing plan:
+You are allocated a certain number of **ingested** and **indexed** custom metrics based on your Datadog pricing plan:
 
-- Pro: 100 custom metrics per host.
-- Enterprise: 200 custom metrics per host.
+- Pro: 100 ingested custom metrics per host and 100 indexed custom metrics per host
+- Enterprise: 200 ingested custom metrics per host and 200 indexed custom metrics per host
 
-These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
+These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 indexed custom metrics are allocated. The 300 indexed custom metrics can be divided equally across each host, or all 300 indexed metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics"  >}}
 
-The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][8] or your [Customer Success][9] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits\* to configure your metric.  Contact [Sales][8] or your [Customer Success][9] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
