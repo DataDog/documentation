@@ -69,9 +69,29 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
+#### Configure tags and aggregations with Metrics without Limits\*
+
+Custom metrics volumes can be impacted by configuring tags and aggregations using Metrics without Limits\*. You can specify an allowlist of tags you'd want to remain queryable in the Datadog platform -- only custom metrics that contain those tags will be counted towards your indexed custom metrics volumes. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
+
+- `endpoint:X`, `status:200`
+- `endpoint:X`, `status:400`
+- `endpoint:Y`, `status:200`
+
+As a result of the tag configuration, `request.Latency` reporting a total of **3** custom metrics. 
+
+By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+
+- Configured counts/rates will be queryable with time/space aggregations of `SUM`
+- Configured gauges will be queryable in time/space aggregations of `AVG`
+
+You can opt-in to more aggregations should they be valuable for your queries, but your number of indexed custom metrics will scale with the number of enabled aggregations. 
+
+Learn more about [Metrics without Limits][4].
+
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=rate#metric-types
 [3]: /metrics/types/?tab=gauge#metric-types
+[4]: /metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -121,9 +141,8 @@ This table summarizes the effect of adding percentile aggregations to any distri
 | Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99)  | `5*(tag value combinations)`      |
 | Total                                                                                      | `2*5(tag value combinations)`     |
 
-##### Customization of tagging
-
-You can customize [which tag combination][2] aggregations are created for any DISTRIBUTION metric. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
+#### Configure tags with Metrics without Limits\*
+Distributions' custom metric volumes can be impacted by configuring tags using Metrics without Limits\*. You can specify an allowlist of tags you'd want to remain queryable in the Datadog platform -- only custom metrics that contain those tags will be counted towards your indexed custom metrics volumes. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
 
 - `endpoint:X`, `status:200`
 - `endpoint:X`, `status:400`
@@ -131,8 +150,11 @@ You can customize [which tag combination][2] aggregations are created for any DI
 
 The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 custom metrics**
 
+Learn more about [Metrics without Limits][3].
+
 [1]: /metrics/types/?tab=distribution#definition
 [2]: /metrics/distributions/#customize-tagging
+[3]: /metrics/metrics-without-limits
 {{% /tab %}}
 {{< /tabs >}}
 
