@@ -7,7 +7,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/setup_pipelines/custom_commands/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by tracing inidivual commands"
+      text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
