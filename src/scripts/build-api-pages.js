@@ -335,35 +335,38 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
           }
         }
 
-        // choose the example to use
-        // parent -> current level -> one deep
-        let chosenExample = parentExample;
-        if (typeof value.example !== 'undefined') {
-          chosenExample = value.example;
-        } else if (value.items && typeof value.items.example !== 'undefined' && Object.keys(value.items.example).length !== 0) {
-          chosenExample = value.items.example;
-          prefixType = '[';
-          suffixType = ']';
-        }
-
         if (childData) {
           const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys, (level + 1));
           iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
-          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+          if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
             // skip output
           } else {
             jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
           }
         } else {
+          // choose the example to use
+          // parent -> current level -> one deep
           let ex = '';
+          if (typeof value.example !== 'undefined') {
+            if (value.example instanceof Array) {
+              ex = outputExample(value.example, key);
+            } else {
+              ex = safeJsonStringify(value.example, null, 2);
+            }
+          } else if (value.items && typeof value.items.example !== 'undefined' && Object.keys(value.items.example).length !== 0) {
+            ex = outputExample(value.items.example, key);
+            prefixType = '[';
+            suffixType = ']';
+          } else {
+            ex = outputExample(parentExample, key);
+          }
           // bool causes us to not go in here so check for it
-          ex = outputExample(chosenExample, key);
-          if(actionType === 'curl') {
+          if (actionType === 'curl') {
             ex = ex || null;
           } else {
             ex = ex || outputValueType(value.type, value.format);
           }
-          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+          if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
 
           } else {
             jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
