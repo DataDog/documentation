@@ -34,7 +34,7 @@ For a list of individual logs, choose which information of interest to display a
 - The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
 - The **facet panel** on the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-With the **Options** button, control the **number of lines** displayed in the table per log event.
+With the **Options** button, control the **number of lines** displayed in the table per log.
 
 {{< img src="logs/explorer/table_controls.gif" alt="Configuring the display table" style="width:80%;">}}
 

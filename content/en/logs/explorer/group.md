@@ -51,7 +51,7 @@ Select or deselect queries to display in the current visualization by clicking o
 
 By default, when a new query is added, it is automatically selected to be displayed in the chosen visualization.
 
-Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][6]. Only the selected query are updated with the chosen facets.
+Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][6]. Only the selected query is updated with the chosen facets.
 
 {{< img src="logs/explorer/group/query_selector.jpg" alt="Log Live Tail" style="width:100%;" >}}
 
@@ -79,7 +79,7 @@ Here is an example of how to apply an [Exclusion function][13] to exclude certai
 
 ### Formulas
 
-Apply a formula on one or multiple queries by clicking on the `+ Add` button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in log events for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
+Apply a formula on one or multiple queries by clicking on the `+ Add` button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in logs for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
 
 {{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="Log Livetail" style="width:100%;" >}}
 
@@ -107,7 +107,7 @@ Patterns support the [List Aggregates](#list-aggregates-of-logs) visualization. 
 
 ## Transactions
 
-Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups log events across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
+Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
 
 {{< img src="logs/explorer/aggregations_transactions.png" alt="Log Livetail" style="width:80%;" >}}
 
@@ -115,7 +115,7 @@ Transactions aggregate indexed logs according to instances of a **sequence** of 
 
 - **Duration**: The difference of timestamps for the last and first log in the transaction. _This measure is automatically added_.
 - **Maximum Severity** found in logs in the transaction. _This measure is automatically added_.
-- **Finding key items:** For any `facet` with string values, calculate specific log event information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
+- **Finding key items:** For any `facet` with string values, calculate specific log information using the operations `count unique`, `latest`, `earliest` and `most frequent`.
 - **Getting Statistics:** For any `measure`, calculate statistical information using the operations `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99`.
 
 Transactions support the [List Aggregates](#list-aggregates-of-logs) visualization. Clicking a pattern in the list opens the pattern side panel from which you can:
