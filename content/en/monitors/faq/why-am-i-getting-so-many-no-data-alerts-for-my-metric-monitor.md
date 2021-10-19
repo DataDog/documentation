@@ -31,5 +31,5 @@ Contact [us][4] should you experience any issues.
 
 [1]: /monitors/create/types/metric/
 [2]: /integrations/amazon_web_services/
-[3]: /monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter/
+[3]: /monitors/create/types/metric/?tab=threshold#advanced-alert-conditions
 [4]: /help/

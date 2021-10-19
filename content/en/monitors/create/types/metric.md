@@ -4,6 +4,7 @@ kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric
+- /monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
