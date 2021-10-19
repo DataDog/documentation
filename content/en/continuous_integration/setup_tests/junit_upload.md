@@ -158,6 +158,48 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Defining metadata for testing configurations
+
+Datadog defines some tags to identify runs of the same tests across different settings, such as runtimes or operative systems. They are used to detect outliers in tests runs and provide insights. These tags are automatically provided when using test instrumentation with tracers, but they can also be provided to the junit upload command via `--tags` or `DD_TAGS`.
+
+All of the tags are optional, all, none or only some can be provided depending on user needs:
+
+`os.platform`
+: Name of the operative system.<br/>
+**Examples**: `windows`, `linux`, `darwin`
+
+`os.version`
+: Version of the operative system.<br/>
+**Examples**: `10.15.4`, `14.3.2`, `95`
+
+`os.architecture`
+: Architecture of the operative system.<br/>
+**Examples**: `x64`, `x86`, `arm64`
+
+`runtime.name`
+: Name of the language interpreter or programming runtime.<br/>
+**Examples**: `.NET`, `.NET Core`, `AdoptOpenJDK`, `Oracle Corporation`, `CPython`
+
+`runtime.version`
+: Version of the runtime.<br/>
+**Examples**: `5.0.0`, `3.1.7`
+
+`runtime.vendor`
+: Name of the vendor for cases where multiple are available for the same runtime.<br/>
+**Example**: `OpenJDK`, `Oracle`
+
+`runtime.architecture`
+: Architecture of the runtime.<br/>
+**Example**: `x64`, `x86`, `arm64`
+
+`device.model`
+: For mobile apps (Swift, Android) the model being tested.<br/>
+**Example**: `iPhone`, `appleTV`
+
+`device.name`
+: For mobile apps (Swift, Android) the name of the device being tested.<br/>
+**Example**: `iPhone 12 Pro`, `apple TV 4K`
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
