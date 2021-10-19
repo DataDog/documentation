@@ -203,7 +203,7 @@ For mobile apps (Swift, Android):
 **Examples**: `iPhone 12 Pro`, `apple TV 4K`
 
 `test.bundle`
-: Sometimes used to create separate groups of tests.<br/>
+: Used to execute groups of test suites separately.<br/>
 **Examples**: `ApplicationUITests`, `ModelTests`
 
 ## Further reading
