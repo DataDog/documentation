@@ -186,19 +186,25 @@ All of the tags are optional, all, none or only some can be provided depending o
 
 `runtime.vendor`
 : Name of the vendor for cases where multiple are available for the same runtime.<br/>
-**Example**: `OpenJDK`, `Oracle`
+**Examples**: `OpenJDK`, `Oracle`
 
 `runtime.architecture`
 : Architecture of the runtime.<br/>
-**Example**: `x64`, `x86`, `arm64`
+**Examples**: `x64`, `x86`, `arm64`
+
+For mobile apps (Swift, Android):
 
 `device.model`
-: For mobile apps (Swift, Android) the model being tested.<br/>
-**Example**: `iPhone`, `appleTV`
+: The model of the device being tested.<br/>
+**Examples**: `iPhone`, `appleTV`
 
 `device.name`
-: For mobile apps (Swift, Android) the name of the device being tested.<br/>
-**Example**: `iPhone 12 Pro`, `apple TV 4K`
+: The name of the device being tested.<br/>
+**Examples**: `iPhone 12 Pro`, `apple TV 4K`
+
+`test.bundle`
+: Sometimes used to create separate groups of tests.<br/>
+**Examples**: `ApplicationUITests`, `ModelTests`
 
 ## Further reading
 
