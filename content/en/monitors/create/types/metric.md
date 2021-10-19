@@ -172,9 +172,33 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 This setting allows you to change when the alerting engine considers a monitor as a candidate for evaluation.
 
-**Require** (default) - A monitor is not evaluated until the evaluation window is filled with data. For example, if a new host is provisioned it may have high CPU for a minute or two. You don't want alerts to trigger if the CPU drops shortly after.
+**Do not require** (default)- A monitor is evaluated as soon as it is recognized. Consider using this value if your data points might be sparse. With this configuration, the monitor evaluates even if there is a single data point in the evaluation timeframe. 
 
-**Do not require** - A monitor is evaluated as soon as it is recognized. Consider using this value if your data points are very sparse. Otherwise, the monitor may not be evaluated because the window is never considered "full".
+**Require**  - A monitor is not evaluated until the evaluation window is considered as `filled` with data. Use this option only if you want to be notified if there is data over the entire evaluation timeframe.
+To define if the evaluation timeframe is `filled` with data, the timeframe is split into smaller buckets. 
+The logic to determine the bucket size is as follows:
+
+* Evaluation timeframe in minutes: bucket is 1 min
+* Evaluation timeframe in hours: bucket is 10 minutes
+* Evaluation timeframe in days: bucket is 1h
+* Evaluation timeframe in month: bucket is 4h
+
+To be considered as a "full window", there must be both:
+
+1. At least one data point in the first bucket
+2. At most 3 buckets in total with no data points (including the first one)
+
+If the condition are met, the monitor is evaluated. Otherwise, the evaluation is canceled and the monitor state unchanged.
+
+**Example**: A monitor that evaluates over the last `2h` is split in 12 buckets of 10 minutes. It is considered full if the first bucket has data and at most 3 buckets in total are empty.
+
+| data   | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9 | B10 | B11 | Full window?|
+|--------|----|----|----|----|----|----|----|----|----|----|-----|-----|-------------|
+| case 1 | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |
+| case 2 | x  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | No          |      
+| case 3 | 1  | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |     
+| case 4 | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | x  | x  | 1   | 1   | No          |    
+| case 5 | x  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | No          |     
 
 #### Other options
 
