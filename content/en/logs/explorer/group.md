@@ -72,8 +72,6 @@ All functions available for logs in the graphing editor in Dashboards can be app
 - [Smoothing][11]
 - [Rollup][12]
 - [Exclusion][13]
-- [Rounding][14]
-- [Beta][15]
 
 Here is an example of how to apply an [Exclusion function][13] to exclude certain values of your logs:
 
@@ -142,5 +140,3 @@ Transactions support the [List Aggregates](#list-aggregates-of-logs) visualizati
 [11]: /dashboards/functions/smoothing
 [12]: /dashboards/functions/rollup
 [13]: /dashboards/functions/exclusion
-[14]: /dashboards/functions/rounding
-[15]: /dashboards/functions/beta
