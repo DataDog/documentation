@@ -28,9 +28,9 @@ further_reading:
 The [**Log Explorer**][1] is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][2], or land here from any other context like monitor notifications or dashboard widgets, the Log Explorer is designed to iteratively:
 
 
-### Filter
+### Search and Filter
 
-**Filter** logs to narrow down, broaden, or shift your focus on a subset of logs tailored to your current interest.
+**Search** and **Filter** on logs to narrow down, broaden, or shift your focus on a subset of logs tailored to your current interest.
 
   - To learn more about searching for logs in Log Explorer, see the [Search Logs documentation][3].
   - To start creating queries and using facets in Log Explorer, read the [Log Search Syntax documentation][4].
