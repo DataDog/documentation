@@ -43,7 +43,7 @@ For example, to filter on logs produced by a specific service, with a specific s
 
 ### Search syntax
 
-To begin searching for logs in Log Explorer, see the [Log Search Syntax documentation][1] and read the [timerange][2] documentation for more details on advanced timerage use cases.
+To begin searching for logs in Log Explorer, see the [Log Search Syntax documentation][1] and read the [timerange documentation][2] for more details on advanced timerange use cases.
 
 ## Further Reading
 
