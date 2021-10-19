@@ -29,7 +29,7 @@ Assume that in your data, `endpoint:X` is supported by both hosts, but fails onl
 {{< tabs >}}
 {{% tab "Count, Rate"%}}
 
-The number of custom metrics from [COUNT][1], [RATE][2], is calculated with the same logic.
+The number of custom metrics from [COUNT][1] and [RATE][2] is calculated with the same logic.
 
 The number of unique tag value combinations submitted for a RATE metric with this tagging scheme is **four**:
 
@@ -153,7 +153,7 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
-- Configured gauges will be queryable in time/space aggregations of `AVG/AVG`
+- Configured gauges will be queryable in time/space aggregations of `AVG/AVG` 
 
 You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations.
 
