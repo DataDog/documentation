@@ -2257,26 +2257,38 @@ main:
     url: logs/explorer/live_tail/
     parent: log_explorer
     weight: 501
-  - name: Log Side Panel
-    url: logs/explorer/side_panel/
+  - name: Search
+    url: logs/explorer/search/
     parent: log_explorer
     weight: 502
-  - name: Saved Views
-    url: logs/explorer/saved_views/
+  - name: Search Syntax
+    url: logs/explorer/search_syntax/
     parent: log_explorer
     weight: 503
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 504
-  - name: Watchdog Insights
-    url: logs/explorer/watchdog_insights/
+  - name: Group
+    url: logs/explorer/group/
     parent: log_explorer
     weight: 505
-  - name: Search Syntax
-    url: logs/explorer/search_syntax/
+  - name: Visualize
+    url: logs/explorer/visualize/
     parent: log_explorer
     weight: 506
+  - name: Log Side Panel
+    url: logs/explorer/side_panel/
+    parent: log_explorer
+    weight: 507
+  - name: Export
+    url: logs/explorer/export/
+    parent: log_explorer
+    weight: 508
+  - name: Saved Views
+    url: logs/explorer/saved_views/
+    parent: log_explorer
+    weight: 509
   - name: Guides
     url: logs/guide/
     parent: log_management
