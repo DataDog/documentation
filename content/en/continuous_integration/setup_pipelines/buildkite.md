@@ -13,36 +13,47 @@ further_reading:
 {{< site-region region="us,eu,us3" >}}
 ## Configure the Datadog integration
 
-The Datadog integration for [Buildkite][2] works by using [webhooks][1] to send pipeline data to Datadog.
+The steps to activate the Datadog integration for [Buildkite][1] are:
 
 {{< site-region region="us" >}}
-1. Go to **Settings > Notification Services** in Buildkite and add a new webhook:
-   * **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
-   * **Events**: Select `job.finished` and `build.finished`.
+1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration:
+2. Fill the form with the following:
+   * **Description**: A description to help identify the integration in the future. (e.g Datadog CI Visibility integration)
+   * **API key**: [your Datadog API Key][1].
+   * **Datadog site**: datadoghq.com
    * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
+   * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
+3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
-1. Go to **Settings > Notification Services** in Buildkite and add a new webhook:
-   * **Webhook URL**: `https://webhook-intake.datadoghq.eu/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
-   * **Events**: Select `job.finished` and `build.finished`.
+1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration:
+2. Fill the form with the following:
+   * **Description**: A description to help identify the integration in the future. (e.g Datadog CI Visibility integration)
+   * **API key**: [your Datadog API Key][1].
+   * **Datadog site**: datadoghq.eu
    * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
+   * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
+3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
 
 [1]: https://app.datadoghq.eu/organization-settings/api-keys
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
-1. Go to **Settings > Notification Services** in Buildkite and add a new webhook:
-  * **Webhook URL**: `https://webhook-intake.us3.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
-  * **Events**: Select `job.finished` and `build.finished`.
-  * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
+1. Go to **Settings > Notification Services** in Buildkite and click add a **Datadog Pipeline Visibility** integration:
+2. Fill the form with the following:
+   * **Description**: A description to help identify the integration in the future. (e.g Datadog CI Visibility integration)
+   * **API key**: [your Datadog API Key][1].
+   * **Datadog site**: us3.datadoghq.com
+   * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
+   * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
+3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
 
 [1]: https://us3.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-2. Click **Add Webhook Notification** to save the new webhook.
 
 ## Visualize pipeline data in Datadog
 
@@ -75,9 +86,7 @@ The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://buildkite.com/docs/apis/webhooks
-[2]: https://buildkite.com
-[3]: /getting_started/tagging/unified_service_tagging
+[1]: https://buildkite.com
 {{< /site-region >}}
 
 {{< site-region region="us5,gov" >}}
