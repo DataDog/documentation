@@ -17,14 +17,13 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md'
 display_name: Federator.ai
 draft: false
 git_integration_title: federatorai
 guid: ec0fd93a-ee4c-4652-9996-cc68cb5a4d45
 integration_id: federatorai
 integration_title: Federator.ai
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: support@prophetstor.com

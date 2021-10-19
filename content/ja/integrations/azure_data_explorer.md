@@ -5,13 +5,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Data Explorer のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_data_explorer/'
 draft: false
 git_integration_title: azure_data_explorer
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Azure Data Explorer
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

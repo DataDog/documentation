@@ -14,14 +14,13 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md'
 display_name: Hasura Cloud
 draft: false
 git_integration_title: hasura_cloud
 guid: fa26fe8b-6dbf-43fc-9597-a7dd1b56abaa
 integration_id: hasura-cloud
 integration_title: Hasura Cloud
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: support@hasura.io

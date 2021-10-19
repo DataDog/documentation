@@ -10,14 +10,13 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md'
 display_name: botprise
 draft: false
 git_integration_title: botprise
 guid: bbc51521-f87c-44c1-ba57-9c4e5dc23214
 integration_id: botprise
 integration_title: Botprise
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

@@ -7,17 +7,16 @@ categories:
 ddtype: crawler
 dependencies: []
 description: AWS DocumentDB のメトリクスとログを監視
-doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_documentdb/'
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-documentdb-with-datadog/
+  - link: 'https://www.datadoghq.com/blog/monitor-documentdb-with-datadog/'
     tag: ブログ
     text: Amazon DocumentDB のメトリクスとログを Datadog で収集
 git_integration_title: amazon_documentdb
 has_logo: true
 integration_id: amazon-documentdb
 integration_title: Amazon DocumentDB
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
