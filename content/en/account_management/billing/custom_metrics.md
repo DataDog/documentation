@@ -9,12 +9,9 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 
-Your monthly billable volume for _ingested_ and _indexed_ custom metrics (reflected on the Usage page) are both calculated from the average number of distinct custom metrics over all hours in the current month. 
+Your monthly billable volume for custom metrics (reflected on the Usage page) is calculated from the average number of distinct custom metrics over all hours in the current month.
 
-- Ingested Custom Metrics: All custom metrics originally submitted via code to Datadog. Only Metrics without Limits\* configured metrics contribute to this ingested custom metrics volume. 
-- Indexed Custom Metrics: Custom metrics that are queryable throughout the platform after configuration with Metrics without Limits\*. 
-
-Learn more about ingested and indexed custom metrics and [Metrics without Limits][25]. 
+Metrics without Limits users will see monthly billable volumes for _ingested_ and _indexed_ custom metrics on their Usage page. Learn more about ingested and indexed custom metrics and Metrics without Limits [here][25]. 
 
 ## Counting custom metrics
 
@@ -30,18 +27,18 @@ Assume that in your data, `endpoint:X` is supported by both hosts, but fails onl
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" style="width:80%;">}}
 
 {{< tabs >}}
-{{% tab "Count, Rate, Gauge" %}}
+{{% tab "Count, Rate"%}}
 
-The number of ingested custom metrics from [COUNT][1], [RATE][2], and [GAUGE][3] metric types is calculated with the same logic.
+The number of custom metrics from [COUNT][1], [RATE][2], is calculated with the same logic.
 
-The number of unique tag value combinations submitted for a GAUGE metric with this tagging scheme is **four**:
+The number of unique tag value combinations submitted for a RATE metric with this tagging scheme is **four**:
 
 - `host:A`, `endpoint:X`, `status:200`
 - `host:B`, `endpoint:X`, `status:200`
 - `host:B`, `endpoint:X`, `status:400`
 - `host:B`, `endpoint:Y`, `status:200`
 
-This results in `request.Latency` reporting **four indexed custom metrics**. If no configur
+This results in `request.Latency` reporting **four custom metrics**. 
 
 ### Effect of adding tags
 
@@ -76,20 +73,26 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 
 #### Configure tags and aggregations with Metrics without Limits\*
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using Metrics without Limits\*. You can specify an allowlist of tags you'd want to remain queryable in the Datadog platform -- only custom metrics that contain those tags will be counted towards your indexed custom metrics volumes. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+ 
+- **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
+
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+
+Suppose you wanted to use Metrics without Limits to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
 - `endpoint:X`, `status:200`
 - `endpoint:X`, `status:400`
 - `endpoint:Y`, `status:200`
 
-As a result of the tag configuration, `request.Latency` reporting a total of **3** custom metrics. 
+As a result of the tag configuration, `request.Latency` reporting a total of **3 indexed custom metrics** . Based on the original tags sent on this metric, the original **ingested** custom metrics volume of `request.Latency` is **4 ingested custom metrics**.
 
-By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query.
 
 - Configured counts/rates will be queryable with time/space aggregations of `SUM`
-- Configured gauges will be queryable in time/space aggregations of `AVG`
 
-You can opt-in to more aggregations should they be valuable for your queries, but your number of indexed custom metrics will scale with the number of enabled aggregations. 
+You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations. 
 
 Learn more about [Metrics without Limits][4].
 
@@ -97,6 +100,66 @@ Learn more about [Metrics without Limits][4].
 [2]: /metrics/types/?tab=rate#metric-types
 [3]: /metrics/types/?tab=gauge#metric-types
 [4]: /metrics/metrics-without-limits
+{{% /tab %}}
+{{% tab "Gauge" %}}
+The number of unique tag value combinations submitted for a GAUGE metric with this tagging scheme is **four**:
+
+- `host:A`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:200`
+- `host:B`, `endpoint:X`, `status:400`
+- `host:B`, `endpoint:Y`, `status:200`
+
+This results in `request.Latency` reporting **four custom metrics**. 
+
+### Effect of adding tags
+
+Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular or detailed tag. Suppose you are measuring temperature in the US, and you have tagged your `temperature` metric by country and region. You submit the following to Datadog:
+
+| Metric Name   | Tag Values                         |
+|---------------|------------------------------------|
+| `temperature` | `country:USA`, `region: Northeast` |
+| `temperature` | `country:USA`, `region: Southeast` |
+
+Suppose you wanted to add the tag `city` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
+
+| Metric Name   | Tag Values                                          |
+|---------------|-----------------------------------------------------|
+| `temperature` | `country:USA`, `region: Northeast`, `city: NYC`     |
+| `temperature` | `country:USA`, `region: Southeast`, `city: Orlando` |
+| `temperature` | `country:USA`, `region: Southeast`, `city: Miami`   |
+
+The count of custom metrics reporting from `temperature` scales with the most granular tag, `city`.
+
+Suppose you also wanted to tag your temperature metric by `state` (which has two values: `NY` and `Florida`). This means you are tagging temperature by the tags: `country`, `region`, `state`, and `city`. Adding the state tag doesn't increase the level of granularity already present in your dataset provided by the city tag.
+
+To obtain the temperature in Florida, you can simply recombine the custom metrics of:
+
+- `temperature{country:USA, state:Florida, city:Orlando}`
+- `temperature{country:USA, state:Florida, city:Miami}`
+
+**Note**: Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
+
+- `temperature{country:USA, state:Florida, city:Miami}`
+- `temperature{state:Florida, city:Miami, country:USA}`
+
+#### Configure tags and aggregations with Metrics without Limits\*
+
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][1]. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+ 
+- **Ingested Custom Metrics**: The original volume of custom metrics you're sending via code with all original tags
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
+
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+
+By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+
+- Configured gauges will be queryable in time/space aggregations of `AVG/AVG`
+
+You can opt-in to more aggregations should they be valuable for your queries - your number of indexed custom metrics scales with the number of enabled aggregations.
+
+Learn more about [Metrics without Limits][1].
+
+[1]: /metrics/metrics-without-limits
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -153,7 +216,7 @@ Distributions' custom metric volumes can be impacted by configuring tags using M
 - `endpoint:X`, `status:400`
 - `endpoint:Y`, `status:200`
 
-The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 custom metrics**
+The number of custom metrics from a [DISTRIBUTION metric][1] is five times the unique combination of metric name and tag values. As a result of the tag customization, `request.Latency` reporting a total of **5\*3 = 15 indexed custom metrics**. Based on the original tags sent on this metric, the original **ingested** custom metrics volume of `request.Latency` is **20 ingested custom metrics**.
 
 Learn more about [Metrics without Limits][3].
 
