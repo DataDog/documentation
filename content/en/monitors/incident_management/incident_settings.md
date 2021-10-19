@@ -1,44 +1,138 @@
 ---
-title: Notification Rules
+title: Incident Settings
 kind: documentation
-description: Configure automatic notifications for incidents
+description: Configure and customize your Incident Management experience
 ---
-
-<div class="alert alert-warning">
-This feature is in open beta. Email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
-
-TODO: Content for the rest of settings
 
 # Overview
 
-Notification Rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use Notification Rules to ensure key stakeholders are always made aware of high priority incidents or to notify external systems whenever a new incident is declared or updated.
+The [Incident Settings][1] are where you can go to customize aspects of the Incident Management product's experience for your entire organization. The individual settings are categorized and divided into different sub-sections. The main categories of settings are: General, Notifications, and Remediation.
 
-## Configuration
+# General
 
-To configure a new Notification Rule:
+## Information
 
-1. Go to the *Notification Rules* section of your [Incident Settings][1]
-2. Click **New Rule**
-3. Pick your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][2].
-4. Pick the Incident severities you want notifications to be sent for. By default, a rule will notify your recipients on any incident severity.
-5. Choose whether you want recipients to be renotified when an incident changes its status.
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+The Information subsection of the Incident Settings is where you go to define your organization's Severity Levels, Status Levels, and Declare Incident Helper text.
+
+For the Severity Levels settings, you are able to:
+
+1. Decide whether your Severity Levels start at `SEV-0` or `SEV-1` as your most critical Severity (**Default:** `SEV-1`)
+2. Customize the sub-labels of your severities (**Defaults:** Critical, High, Moderate, Low, Minor)
+3. Customize the descriptions of your severities
+4. Add or delete severities from the bottom of your list, with a minimum of 3 and a maximum of 10. 
+
+**Note:** If you attempt to delete a Severity that is referenced in a Notification Rule, you will be prompted to confirm your decision. Choosing to proceed will disable the impacted Notification Rules as they are no longer valid. Deleting a severity or changing the starting severity will not automatically update any [Incident Management Analytics][2] queries.
+
+For the Status Levels settings, you are able to:
+
+1. Customize the descriptions of the statuses
+2. Choose whether to enable the optional `Completed` status
+
+**Note:** Deleting the `Completed` status will not automatically update any incidents that are already in the `Completed` status, nor will it automatically update any [Incident Management Analytics][2] queries that explicitly reference it. Any Notification Rule that references the `Completed` status will also be disabled as they are no longer valid.
+
+For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the Severity and Status Level descriptions in the [Incident Creation Modal][3]. The helper text has Markdown support to allow you to include indented lists, text formatting and hyperlinks to other instruction resources for incident responders.
+
+## Property Fields
+
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+Property Fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents in the [Homepage][4] as well as for making more robust queries in [Incident Management Analytics][2]. There are 4 default property fields:
+
+1. `Root Cause`
+2. `Services`
+3. `Teams`
+4. `Detection Method`
+
+If you have [Datadog APM][5] configured, the `Services` Property Field will automatically leverage your APM Service names. To edit the values of `Services` or `Teams`, upload a CSV of the values you wish to associate with each field. Your CSV file must start with your field's name in the top row, with the desired values listed immediately below it.
+
+You can add additional Property Fields to your settings by selecting one of your existing key:value pair [metric tags][6]. When you do this the key of your Property Field will be the start case of your metric tag's key (each word is capitalized and separated by spaces) and the values for the Property Field will be equal to the values reported by the metric tag.
+
+## Integrations
+
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+The Integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][7]. There are two settings to configure:
+
+1. Enabling automatic Slack channel creation for every new incident
+2. Enabling the Incident Updates channel 
+
+Both of these settings can be configured to use any Slack Workspace you have configured in your organization's [Slack Integration Tile][8].
+
+The Incident Updates channel will send a message whenever an incident gets declared or changes Status, Severity, or Incident Commander.
+
+# Notifications
+
+## Message Templates
+
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+Message Templates are dynamic, reusable messages that can be used in [manual incident notifications][9], or automated Notification Rules. Message Templates leverage template variables (e.g. `{{incident.severity}}`) to dynamically inject the corresponding value from the incident that the notification is being sent for. Message Templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks as desired. To better organize a large number of Message Templates, each template requires a category during its creation process.
+
+To create a Message Template:
+
+1. Click the **+ New Message Template** button
+2. Give the template a name
+3. Assign it a new or existing category
+4. Give the template a subject line (for emails)
+5. Write the template's message
 6. Click **Save**
+
+**Note:** Template variables are supported in both the message's title and body.
+
+## Rules
+
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+Notification Rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use Notification Rules to ensure key stakeholders are always made aware of high priority incidents, to notify external systems whenever a new incident is declared or updated, or to notify specific responders when a particular service or team experiences an incident.
 
 **Example:** Set a Notification Rule to automatically notify executives whenever a SEV-1 incident is declared and when that incident moves through different states of progression.
 
-{{< img src="monitors/incidents/notification_rules_config.jpeg" alt="Notification Rules Config"  style="width:80%;">}}
+To configure a new Notification Rule:
 
-## Management
+1. Click **New Rule**
+2. Select the incident Property Field key:value pairs you want notifications to be sent for. By default, a rule will notify your recipients on any incident.
+3. Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10].
+4. Select the desired Message Template you want the Notification Rule to use.
+5. Choose whether you want recipients to be renotified when an incident changes its status.
+6. Click **Save**
 
-In the *Notification Rules* section of your [Incident Settings][1], you can perform the following operations to manage your Notification Rules.
+**Note:** Notification Rules will send messages only if an incident changes status (including when it is first declared) and has been tagged with the Property Fields values that match the filter of the Notification Rules.
+
+You can perform the following operations to manage your Notification Rules.
 
 - *Search* - Filter your list of Notification Rules by their recipients
 - *Toggle* - Enable or disable any individual Notification Rule by switching the toggle in that Rule's row in the list
 - *Copy* - Hover over any individual Notification Rule and click the **Copy** icon button next to the Rule's toggle
 - *Delete* - Hover over any individual Notification Rule and click the **Delete** icon button next to the Rule's toggle
 
-{{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List"  style="width:80%;">}}
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+# Remediation
+
+## Postmortem Templates
+
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+Postmortem Templates are dynamic, reusable templates that can be used to create a [Datadog Notebook][11] that is automatically populated with incident information after an incident has been resolved. Postmortem Templates leverage template variables (e.g. `{{incident.severity}}`) to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem Templates have Markdown support so that the resulting Notebook includes text formatting, tables, indented lists, and hyperlinks as desired.
+
+To create a Postmortem Template:
+
+1. Click the **+ New Postmortem Template** button
+2. Give the template a name
+3. Write the template's content (available template variables are listed to the right of the textbox)
+4. (Optional) Set the template as the default 
+5. Click **Save**
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /monitors/notifications/?tab=is_alert#notify-your-team
+[2]: Placeholder
+[3]: /monitors/incident_management/#from-the-incidents-page
+[4]: https://app.datadoghq.com/incidents
+[5]: /tracing/
+[6]: /getting_started/tagging/using_tags/?tab=assignment#metrics
+[7]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+[8]: https://app.datadoghq.com/account/settings#integrations/slack
+[9]: Placeholder
+[10]: /monitors/notifications/?tab=is_alert#notify-your-team
+[11]: /notebooks/

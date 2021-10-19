@@ -189,7 +189,7 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [3]: /mobile
 [4]: https://apps.apple.com/app/datadog/id1391380318
 [5]: https://play.google.com/store/apps/details?id=com.datadog.app
-[6]: https://app.datadoghq.com/incidents/settings#Information
+[6]: Placeholder
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: /integrations/slack/
 [9]: https://app.datadoghq.com/incidents/ddslackapp
