@@ -752,7 +752,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
-              newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
+              newRequiredFields = (value.items.required) ? value.items.required : [];
             }
             // for items -> oneOf
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
@@ -769,7 +769,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
-          newRequiredFields = (value.required) ? value.required : newRequiredFields;
+          newRequiredFields = (value.required) ? value.required : [];
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
