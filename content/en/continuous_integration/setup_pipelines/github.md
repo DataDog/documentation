@@ -19,14 +19,14 @@ GitHub enterprise is not yet supported.
 
 ## Configuring the Datadog integration
 
-The GitHub Actions Datadog integration works via a private GitHub App to enable it do the following:
+The GitHub Actions Datadog integration works through a private GitHub App to enable it do the following:
 
 {{< site-region region="us" >}}
 1. Go to the [GitHub App Integration tile][1].
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
 4. In `Edit Permissions`, grant `read` permissions to the `Actions` permissions.
-5. Click `Create App in GitHub` which will take you to GitHub to configure the app.
+5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
 6. Give the app a name.
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
 
@@ -38,7 +38,7 @@ The GitHub Actions Datadog integration works via a private GitHub App to enable 
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
 4. In `Edit Permissions`, grant `read` permissions to the `Actions` permissions.
-5. Click `Create App in GitHub` which will take you to GitHub to configure the app.
+5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
 6. Give the app a name,
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
 
@@ -50,14 +50,14 @@ The GitHub Actions Datadog integration works via a private GitHub App to enable 
 2. Click the `Link GitHub Account` button.
 3. Follow the instructions to configure for a personal or organization account.
 4. In `Edit Permissions`, grant `read` permissions to the `Actions` permissions.
-5. Click `Create App in GitHub` which will take you to GitHub to configure the app.
+5. Click `Create App in GitHub` which takes you to GitHub to configure the app.
 6. Give the app a name.
 7. Click the `Install GitHub App` and follow the instructions on GitHub.
 
 [1]: https://us3.datadoghq.com/account/settings#integrations/github-apps
 {{< /site-region >}}
 
-Once completed DataDog should immediately start tracing GitHub Workflows
+Once completed Datadog should immediately start tracing GitHub Workflows
 
 ## Visualize pipeline data in Datadog
 
