@@ -22,6 +22,8 @@ further_reading:
   text: "Automatically configure your Log Explorer"
 ---
 
+## Overview
+
 A query filter is composed of terms and operators.
 
 There are two types of terms:

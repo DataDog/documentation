@@ -17,6 +17,8 @@ further_reading:
       text: 'Export Log Explorer views'
 ---
 
+## Overview
+
 Visualizations define how the outcome of filter and aggregates are displayed.
 
 ## Lists
