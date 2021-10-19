@@ -15,7 +15,7 @@ further_reading:
     - link: 'logs/explorer/live_tail'
       tag: 'Documentation'
       text: 'Preview your logs in Live Tail'
-    - link: 'logs/explorer/saved'
+    - link: 'logs/explorer/saved_views/'
       tag: 'Documentation'
       text: 'Automatically configure your Log Explorer'
     - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
