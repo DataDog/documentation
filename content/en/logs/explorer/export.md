@@ -28,6 +28,8 @@ At any moment, and depending on your current aggregation, **export** your log ex
 
 {{< img src="logs/explorer/export.png" alt="Search Filter" style="width:100%;" >}}
 
+You can also export your Log Explorer view to reuse later or in different contexts. For example, download a List view in a CSV file to do offline processing of your logs or share the results of your query with your teammates.
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/saved_views/
