@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Azure Cognitive Search の主要メトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/azure_search/'
+doc_link: https://docs.datadoghq.com/integrations/azure_search/
 draft: false
 git_integration_title: azure_search
 has_logo: true
 integration_id: azure-search
 integration_title: Microsoft Azure Cognitive Search
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

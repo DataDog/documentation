@@ -6,12 +6,13 @@ categories:
 ddtype: check
 dependencies: []
 description: Amazon Managed Streaming for Apache Kafka (MSK) のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_msk/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
 draft: false
 git_integration_title: amazon_msk
 has_logo: true
 integration_id: amazon-msk
 integration_title: Amazon Managed Streaming for Apache Kafka
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -26,7 +27,7 @@ Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用し�
 
 このインテグレーションからメトリクスを収集する方法は、[Datadog Agent](#agent-check) を使用する方法と、[クローラー](#crawler)を使用して CloudWatch からメトリクスを収集する方法の 2 通りあります。
 
-## Agentチェック
+## Agent チェック
 
 Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming for Apache Kafka ([Amazon MSK][1]) を監視します。
 

@@ -5,13 +5,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Functions.
-doc_link: https://docs.datadoghq.com/integrations/azure_functions/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_functions/'
 draft: false
 git_integration_title: azure_functions
 has_logo: true
 integration_id: ''
 integration_title: Microsoft Azure Functions
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

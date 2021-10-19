@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Elemental MediaConnect のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediaconnect/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_mediaconnect/
 draft: false
 git_integration_title: amazon_mediaconnect
 has_logo: true
 integration_id: amazon-mediaconnect
 integration_title: Amazon Elemental MediaConnect
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

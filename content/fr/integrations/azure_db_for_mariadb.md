@@ -5,13 +5,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure\_Database pour MariaDB."
-doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
+doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_mariadb/'
 draft: false
 git_integration_title: azure_db_pour_mariadb
 has_logo: true
 integration_id: azure-dbformariadb
 integration_title: "Microsoft\_Azure\_Database pour MariaDB"
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
