@@ -8,31 +8,52 @@ further_reading:
   text: "Incident Management Analytics"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
-{{< /site-region >}}
+## Overview
 
-TODO: Content
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+
+Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][1] and [Notebooks][2] in order to analyze the history of your incident response over time. To give you a starting point, Datadog provides you with an Incident Management Overview [Dashboard template][3] and [Notebook template][4] that you can clone and customize as necessary.
+
+The following widgets support Incident Management Analytics:
+
+* Timeseries
+* Top List 
+* Query Value 
+
+### Graph configuration
+
+To configure your graph using Incident Management Analytics data, follow these steps:
+
+1. [Select your visualization][5].
+2. Select `Incidents` from the data source dropdown menu.
+3. Select a measure from the yellow dropdown menu.
+     - **Default Statistic:** Counts the number of incidents.
+4. Select an aggregation for the measure.
+5. (Optional) Select a rollup for the measure.
+6. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents.
+7. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display .
+8. [Title the graph][6].
+9. Save your widget.
+
+**Example:** Weekly Outage Customer Impact Duration by Service
+
+1. Widget: Timeseries Line Graph
+2. Datasource: `Incidents`
+3. Measure: `Customer Impact Duration`
+4. Aggregation: `avg`
+5. Rollup: `1w`
+6. Filter: `severity:(“SEV-1” OR “SEV-2”)`
+7. Group: `Services`, limit to top 5
+
+{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/incidents
-[2]: https://app.datadoghq.com/incidents/settings
-[3]: /mobile
-[4]: https://apps.apple.com/app/datadog/id1391380318
-[5]: https://play.google.com/store/apps/details?id=com.datadog.app
-[6]: https://app.datadoghq.com/incidents/settings#Information
-[7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[8]: /integrations/slack/
-[9]: https://app.datadoghq.com/incidents/ddslackapp
-[10]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[11]: /tracing/#2-instrument-your-application
-[12]: https://app.datadoghq.com/incidents/settings#Property-Fields
-[13]: /dashboards/querying/#incident-management-analytics
-[14]: /integrations/pagerduty/
-[15]: /integrations/jira/
-[16]: /integrations/webhooks/
-[17]: /integrations/webhooks/#sending-sms-through-twilio
-[18]: /getting_started/incident_management
+[1]: /dashboards/
+[2]: /notebooks/
+[3]: https://app.datadoghq.com/dash/integration/30523/incident-management-overview?from_ts=1632093826308&to_ts=1634685826308&live=true
+[4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
+[5]: /dashboards/querying/#select-your-visualization
+[6]: /dashboards/querying/#create-a-title
