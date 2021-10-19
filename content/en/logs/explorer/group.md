@@ -1,5 +1,5 @@
 ---
-title: Group logs
+title: Group Logs
 kind: documentation
 description: 'Group queried logs into higher-level entities in order to derive or consolidate information.'
 aliases:
@@ -17,7 +17,9 @@ further_reading:
       text: 'Export Log Explorer views'
 ---
 
-Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, group your logs by [fields](#fields), identify [patterns](#patterns), and aggregate your logs into [transactions](#transactions).
+## Overview
+
+Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, group your logs by [fields](#fields), identify [patterns](#patterns), or aggregate your logs into [transactions](#transactions).
 
 Add [multiple queries](#multiple-queries) to simultaneously analyze different sets of logs, and apply [formulas](#formulas) and [functions](#functions) to your queries for in-depth analysis.
 
@@ -25,58 +27,59 @@ Add [multiple queries](#multiple-queries) to simultaneously analyze different se
 
 **Note**: Aggregations are supported for **indexed logs only**. If you need to perform aggregation on non-indexed logs, consider [temporarily disabling exclusion filters][1], using [logs to metrics][2] and/or running a [rehydration][3] on your archives.
 
-### Fields
+## Fields
 
-With fields aggregation, all logs matching the query filter are aggregated into groups based on the value of one or multiple log facets. On top of these aggregates, you can extract the following measures:
+When aggregating by Fields, all logs matching your query filter are aggregated into groups based on the value of one or multiple log facets. On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
 - **unique count** of coded values for a facet per group
 - **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group
 
-**Note**: Individual logs having multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
+**Note**: Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log having the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-Fields aggregation supports one dimension for the [Toplist](#toplist) visualization, and up to three dimensions for the [Timeseries](#timeseries) and [Table](#nested-tables) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+The Fields aggregation supports one dimension for the [Top list][4] visualization, and up to three dimensions for the [Timeseries][5] and [Table](#nested-tables) visualizations. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
-#### Multiple Queries
+### Multiple queries
 
-Multiple queries are supported in [Timeseries](#timeseries) and [Toplist](#toplist) visualizations. Add multiple queries by clicking on the `+ Add` button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
+Multiple queries are supported in [Timeseries][5] and [Top list][4] visualizations. Add multiple queries by clicking on the `+ Add` button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
 
 {{< img src="logs/explorer/group/add_multiple_queries.gif" alt="Log Live Tail" style="width:100%;" >}}
 
-Select or deselect queries to be displayed in the chosen visualization by clicking on their letters in the query editor:
+Select or deselect queries to display in the current visualization by clicking on their letters in the query editor:
 
 {{< img src="logs/explorer/group/select_multiple_queries.jpg" alt="Log Live Tail" style="width:100%;" >}}
 
 By default, when a new query is added, it is automatically selected to be displayed in the chosen visualization.
 
-Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][4]. Only the selected query will be updated with the chosen facets.
+Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][6]. Only the selected query are updated with the chosen facets.
 
 {{< img src="logs/explorer/group/query_selector.jpg" alt="Log Live Tail" style="width:100%;" >}}
 
-#### Functions
+### Functions
+
+**Note**: Functions are only supported in [Timeseries][5] and [Top list][4] visualizations.
 
 Apply functions to your logs by clicking on the `Fields` aggregation in the query editor. Optionally select a faceted field to apply the function to, then click on the `Σ` icon next to that measure. Select or search for a function to apply to the selected log field.
 
 {{< img src="logs/explorer/group/add_function.gif" alt="Log Live Tail" style="width:100%;" >}}
 
-All functions available for logs in the graphing editor in Dashboards can be applied to logs in the Log Explorer. Consult the following available functions:
-- [Arithmetic][5]
-- [Interpolation][6]
-- [Timeshift][7]
-- [Rate][8]
-- [Smoothing][9]
-- [Rollup][10]
-- [Exclusion][11]
-- [Rounding][12]
-- [Beta][13]
+All functions available for logs in the graphing editor in Dashboards can be applied to logs in the Log Explorer:
 
-**Note**: Functions are only supported in [Timeseries](#timeseries) and [Toplist](#toplist) visualizations.
+- [Arithmetic][7]
+- [Interpolation][8]
+- [Timeshift][9]
+- [Rate][10]
+- [Smoothing][11]
+- [Rollup][12]
+- [Exclusion][13]
+- [Rounding][14]
+- [Beta][15]
 
-Here is an example of how to apply an [Exclusion function][11] to exclude certain values of your logs:
+Here is an example of how to apply an [Exclusion function][13] to exclude certain values of your logs:
 
 {{< img src="logs/explorer/group/exclusion_function_logs.jpg" alt="Log Livetail" style="width:100%;" >}}
 
-#### Formulas
+### Formulas
 
 Apply a formula on one or multiple queries by clicking on the `+ Add` button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in log events for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
 
@@ -84,11 +87,11 @@ Apply a formula on one or multiple queries by clicking on the `+ Add` button nex
 
 **Note**: To apply formulas with multiple queries, all queries must be grouped by the same facet. In the example above, both queries are grouped by `Webstore Store Name`.
 
-You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][7] on the proportion of error logs in all logs to compare current data with data from one week before:
+You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][9] on the proportion of error logs in all logs to compare current data with data from one week before:
 
 {{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="Log Livetail" style="width:100%;" >}}
 
-### Patterns
+## Patterns
 
 With pattern aggregation, logs that have a `message` with similar structures, belong to the same `service` and have the same `status` are grouped altogether. The patterns view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues:
 
@@ -104,7 +107,7 @@ Patterns support the [List Aggregates](#list-aggregates-of-logs) visualization. 
 
 {{< img src="logs/explorer/patterns_side_panel.png" alt="Log Livetail" style="width:80%;" >}}
 
-### Transactions
+## Transactions
 
 Transactions aggregate indexed logs according to instances of a **sequence** of events, such as a user session or a request processed across multiple micro-services. For example, an e-commerce website groups log events across various user actions, such as catalog search, add to cart, and checkout, to build a transaction view using a common attribute such as `requestId` or `orderId`.
 
@@ -129,13 +132,15 @@ Transactions support the [List Aggregates](#list-aggregates-of-logs) visualizati
 [1]: /dashboards/guide/custom_time_frames
 [2]: /logs/logs_to_metrics
 [3]: /logs/log_configuration/processors/#grok-parser
-[4]: /logs/explorer/facets/#facet-panel
-[5]: /dashboards/functions/arithmetic
-[6]: /dashboards/functions/interpolation
-[7]: /dashboards/functions/timeshift
-[8]: /dashboards/functions/rate
-[9]: /dashboards/functions/smoothing
-[10]: /dashboards/functions/rollup
-[11]: /dashboards/functions/exclusion
-[12]: /dashboards/functions/rounding
-[13]: /dashboards/functions/beta
+[4]: /logs/explorer/visualize/#top-list
+[5]: /logs/explorer/visualize/#timeseries
+[6]: /logs/explorer/facets/#facet-panel
+[7]: /dashboards/functions/arithmetic
+[8]: /dashboards/functions/interpolation
+[9]: /dashboards/functions/timeshift
+[10]: /dashboards/functions/rate
+[11]: /dashboards/functions/smoothing
+[12]: /dashboards/functions/rollup
+[13]: /dashboards/functions/exclusion
+[14]: /dashboards/functions/rounding
+[15]: /dashboards/functions/beta

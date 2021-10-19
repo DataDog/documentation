@@ -1,5 +1,5 @@
 ---
-title: Create Visualizations
+title: Log Visualizations
 kind: documentation
 description: 'Visualize the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information.'
 aliases:
@@ -34,14 +34,18 @@ For a list of individual logs, choose which information of interest to display a
 
 With the **Options** button, control the **number of lines** displayed in the table per log event.
 
-{{< img src="logs/explorer/table_controls.gif" alt="configure display table"  style="width:80%;">}}
+{{< img src="logs/explorer/table_controls.gif" alt="Configuring the display table" style="width:80%;">}}
 
 {{< site-region region="gov,us3,us5" >}}
-The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
+
+**Note**: Sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
 {{< /site-region >}}
 
 {{< site-region region="us,eu" >}}
-The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet. Note that, although any attributes or tags can be added as a column, sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
+The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
+
+**Note**: Although any attributes or tags can be added as a column, sorting your table according to a specific field requires that you [declare a facet][1] beforehand.
 {{< /site-region >}}
 
 The configuration of the log table is stored alongside other elements of your troubleshooting context in [Saved Views][2].
@@ -61,17 +65,17 @@ Visualize the evolution of a single [measure][3] (or a [facet][3] unique count o
 
 The following Timeseries log analytics shows the evolution of the **top 50 URL Paths** according to the 95th percentile of **duration** over the last 15 minutes.
 
-{{< img src="logs/explorer/timeseries.png" alt="timeserie example"  style="width:90%;">}}
+{{< img src="logs/explorer/timeseries.png" alt="Timeseries example" style="width:90%;">}}
 
 Choose additional display options for timeseries: the **roll-up interval**, whether you **display** results as **bars** (recommended for counts and unique counts), **lines** (recommended for statistical aggregations) or **areas**, and the **colorset**.
 
-## Toplist
+## Top list
 
 Visualize the top values from a [facet][3] according to the chosen [measure][3].
 
-For example, the following Toplist shows the **top 15 Customers** on a merchant website according to the number of **unique sessions** they had over the last day.
+For example, the following top list shows the **top 15 Customers** on a merchant website according to the number of **unique sessions** they had over the last day.
 
-{{< img src="logs/explorer/toplists.png" alt="top list example"  style="width:90%;">}}
+{{< img src="logs/explorer/toplists.png" alt="Top list example" style="width:90%;">}}
 
 ## Nested tables
 
@@ -84,7 +88,7 @@ Visualize the top values from up to three [facets][3] according to a chosen [mea
 
 The following table log analytics show the evolution of the **Top 10 Availability zones**, and for each Availability Zone the **Top 10 Versions** according to their **number or error logs**, along with the number of unique count of **Hosts** and **Container ID** for each.
 
-{{< img src="logs/explorer/nested_tables.png" alt="table example"  style="width:90%;">}}
+{{< img src="logs/explorer/nested_tables.png" alt="Table example" style="width:90%;">}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
