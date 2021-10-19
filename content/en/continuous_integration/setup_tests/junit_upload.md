@@ -160,9 +160,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ## Defining metadata for testing configurations
 
-Datadog defines some tags to identify runs of the same tests across different settings, such as runtimes or operative systems. They are used to detect outliers in tests runs and provide insights. These tags are automatically provided when using test instrumentation with tracers, but they can also be provided to the junit upload command via `--tags` or `DD_TAGS`.
+Datadog defines some tags to identify runs of the same tests across different settings, such as runtimes or operative systems. They are used to detect outliers in tests runs and provide insights. These tags are automatically provided when using test instrumentation with tracers, but they can also be provided to the junit upload command with `--tags` or `DD_TAGS`.
 
-All of the tags are optional, all, none or only some can be provided depending on user needs:
+All of the tags are optional: all, none or just some can be provided depending on user needs.
 
 `os.platform`
 : Name of the operative system.<br/>
