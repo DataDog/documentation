@@ -265,8 +265,10 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
 
         if (value.example) {
           if (typeof value.example === 'object') {
-            prefixType = '[';
-            suffixType = ']';
+            if (value.type === 'array') {
+              prefixType = '[';
+              suffixType = ']';
+            }
           }
         }
 

@@ -1564,6 +1564,188 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should show oneOf examples with object', () => {
+    const mockSchema = {
+      "description": "The description of a notebook update request.",
+      "properties": {
+        "data": {
+          "description": "The data for a notebook update request.",
+          "properties": {
+            "attributes": {
+              "description": "The data attributes of a notebook.",
+              "properties": {
+                "cells": {
+                  "description": "List of cells to display in the notebook.",
+                  "example": [
+                    {
+                      "attributes": {
+                        "definition": {
+                          "text": "## Some test markdown\n\n```js\nvar x, y;\nx = 5;\ny = 6;\n```",
+                          "type": "markdown"
+                        }
+                      },
+                      "id": "bzbycoya",
+                      "type": "notebook_cells"
+                    },
+                    {
+                      "attributes": {
+                        "definition": {
+                          "requests": [
+                            {
+                              "display_type": "line",
+                              "q": "avg:system.load.1{*}",
+                              "style": {
+                                "line_type": "solid",
+                                "line_width": "normal",
+                                "palette": "dog_classic"
+                              }
+                            }
+                          ],
+                          "show_legend": true,
+                          "type": "timeseries",
+                          "yaxis": {
+                            "scale": "linear"
+                          }
+                        },
+                        "graph_size": "m",
+                        "split_by": {
+                          "keys": [],
+                          "tags": []
+                        },
+                        "time": null
+                      },
+                      "id": "9k6bc6xc",
+                      "type": "notebook_cells"
+                    }
+                  ],
+                  "items": {
+                    "description": "Updating a notebook can either insert new cell(s) or update existing cell(s) by including the cell `id`.\nTo delete existing cell(s), simply omit it from the list of cells.",
+                    "oneOf": [
+                      {
+                        "description": "The description of a notebook cell create request.",
+                        "properties": {
+                          "attributes": {
+                            "description": "The attributes of a notebook cell in create cell request. Valid cell types are `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,\n`log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)",
+                            "example": {
+                              "definition": {
+                                "requests": [
+                                  {
+                                    "display_type": "line",
+                                    "q": "avg:system.load.1{*}",
+                                    "style": {
+                                      "line_type": "solid",
+                                      "line_width": "normal",
+                                      "palette": "dog_classic"
+                                    }
+                                  }
+                                ],
+                                "show_legend": true,
+                                "type": "timeseries",
+                                "yaxis": {
+                                  "scale": "linear"
+                                }
+                              },
+                              "graph_size": "m",
+                              "split_by": {
+                                "keys": [],
+                                "tags": []
+                              },
+                              "time": null
+                            },
+                            "oneOf": [
+                              {
+                                "description": "The attributes of a notebook `markdown` cell.",
+                                "properties": {
+                                  "definition": {
+                                    "description": "Text in a notebook is formatted with [Markdown](https://daringfireball.net/projects/markdown/), which enables the use of headings, subheadings, links, images, lists, and code blocks.",
+                                    "properties": {
+                                      "text": {
+                                        "description": "The markdown content.",
+                                        "example": "# Example Header \nexample content",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "markdown",
+                                        "description": "Type of the markdown cell.",
+                                        "enum": [
+                                          "markdown"
+                                        ],
+                                        "example": "markdown",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "MARKDOWN"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "type",
+                                      "text"
+                                    ],
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "definition"
+                                ],
+                                "type": "object"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "data": {
+        "attributes": {
+          "cells": [
+            {
+              "attributes": {
+                "definition": {
+                  "requests": [
+                    {
+                      "display_type": "line",
+                      "q": "avg:system.load.1{*}",
+                      "style": {
+                        "line_type": "solid",
+                        "line_width": "normal",
+                        "palette": "dog_classic"
+                      }
+                    }
+                  ],
+                  "show_legend": true,
+                  "type": "timeseries",
+                  "yaxis": {
+                    "scale": "linear"
+                  }
+                },
+                "graph_size": "m",
+                "split_by": {
+                  "keys": [],
+                  "tags": []
+                },
+                "time": null
+              }
+            }
+          ]
+        }
+      }
+    };
+    expect(actual).toEqual(expected);
+  });
+
 });
 
 describe(`isReadOnlyRow`, () => {
