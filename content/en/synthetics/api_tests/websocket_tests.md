@@ -27,11 +27,35 @@ After choosing to create an `WebSocket` test, define your test's request.
 
 {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **URL** to run your test on.
 2. Enter the string you want to send in your test. 
-3. Specify the amount of time in seconds before the test times out.
+3. Enrich your HTTP request with **Advanced Options** (optional):
+
+   {{< tabs >}}
+
+   {{% tab "Request Options" %}}
+
+   * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+
+   {{% /tab %}}
+
+   {{% tab "Authentication" %}}
+
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+
+   {{% /tab %}}
+
+   {{< /tabs >}}
+
+<br/>
+
 4. **Name** your WebSocket test.
-5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+
+### Select locations
+
+Select the **Locations** to run your UDP test from. UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network.
 
 ### Specify test frequency
 
@@ -50,8 +74,8 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 
 | Type            | Operator                                                                         | Value Type                        |
 |-----------------|----------------------------------------------------------------------------------|-----------------------------------|
-| response time   | `is less than`                                                                   | *Integer (ms)*                    |
-| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | *String*                          |
+| response time   | `is less than`                                                                   | _Integer (ms)_                    |
+| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_                          |
 | header          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][8]_        |
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
@@ -81,9 +105,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][4], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -125,7 +149,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][7] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][8] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -145,7 +169,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][8].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][9].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -154,9 +178,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][9].
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][10].
 
-If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -165,10 +189,11 @@ If you have access to the [custom role feature][10], add your user to any custom
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_testing
-[4]: /monitors/notifications/?tab=is_alert#notification
-[5]: https://www.markdownguide.org/basic-syntax/
-[6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[7]: /synthetics/settings/#global-variables
-[8]: /synthetics/api_tests/errors/#ssl-errors
-[9]: /account_management/rbac/
-[10]: /account_management/rbac#custom-roles
+[4]: /synthetics/search/#search
+[5]: /monitors/notifications/?tab=is_alert#notification
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /synthetics/settings/#global-variables
+[9]: /synthetics/api_tests/errors/#ssl-errors
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
