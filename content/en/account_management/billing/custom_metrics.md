@@ -71,7 +71,7 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-#### Configure tags and aggregations with Metrics without Limits\*
+### Configure tags and aggregations with Metrics without Limits\*
 
 Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
@@ -79,6 +79,15 @@ Custom metrics volumes can be impacted by configuring tags and aggregations usin
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+
+#### When will you be charged for ingested vs indexed custom metrics?
+If a metric is not configured with Metrics without Limits, you're only charged for indexed custom metrics.
+
+{{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed CMs only" style="width:80%;">}}
+
+If a metric is configured with Metrics without Limits (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+
+{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed CMs costs" style="width:80%;">}}
 
 Suppose you wanted to use Metrics without Limits to reduce the size of your `request.Latency` metric by keeping only the `endpoint` and `status` tags. This results in the following three unique tag combinations:
 
@@ -142,14 +151,23 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-#### Configure tags and aggregations with Metrics without Limits\*
+### Configure tags and aggregations with Metrics without Limits\*
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][1]. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
-- **Ingested Custom Metrics**: The original volume of custom metrics you're sending via code with all original tags
+- **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+
+#### When will you be charged for ingested vs indexed custom metrics?
+If a metric is not configured with Metrics without Limits, you're only charged for indexed custom metrics.
+
+{{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed CMs only" style="width:80%;">}}
+
+If a metric is configured with Metrics without Limits (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+
+{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed CMs costs" style="width:80%;">}}
 
 By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
@@ -209,8 +227,25 @@ This table summarizes the effect of adding percentile aggregations to any distri
 | Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99)  | `5*(tag value combinations)`      |
 | Total                                                                                      | `2*5(tag value combinations)`     |
 
-#### Configure tags with Metrics without Limits\*
-Distributions' custom metric volumes can be impacted by configuring tags using Metrics without Limits\*. You can specify an allowlist of tags you'd want to remain queryable in the Datadog platform -- only custom metrics that contain those tags will be counted towards your indexed custom metrics volumes. Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
+### Configure tags with Metrics without Limits\*
+
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits\*][4]. Metrics without Limits decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+ 
+- **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits\* configurations) 
+
+**Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits\*, you're only charged for its indexed custom metrics volume.
+
+#### When will you be charged for ingested vs indexed custom metrics?
+If a metric is not configured with Metrics without Limits, you're only charged for indexed custom metrics.
+
+{{< img src="account_management/billing/custom_metrics/mwl-unconfigured-pricing.jpg" alt="Unconfigured Metrics have indexed CMs only" style="width:80%;">}}
+
+If a metric is configured with Metrics without Limits (tags/aggregations are configured), you pay for ingested custom metrics and indexed custom metrics.
+
+{{< img src="account_management/billing/custom_metrics/mwl-pricing-configured.jpg" alt="Configured Metrics have ingested and indexed CMs costs" style="width:80%;">}}
+
+Suppose you want to keep only the `endpoint` and `status` tags associated with the `request.Latency` metric. This results in the following three unique tag combinations:
 
 - `endpoint:X`, `status:200`
 - `endpoint:X`, `status:400`
