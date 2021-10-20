@@ -55,7 +55,7 @@ For a full list of supported libraries and processor architectures, see [Compati
 ## Installation and getting started
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example: APM). To ensure maximum visibility, run one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example: APM). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 ### Installation
@@ -67,7 +67,7 @@ For a full list of supported libraries and processor architectures, see [Compati
 
 ### Install the tracer
 
-You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis so developers are able to manage the instrumentation through the application’s dependencies. 
+You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis so developers are able to manage the instrumentation through the application’s dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
 
 {{< tabs >}}
 
@@ -226,7 +226,7 @@ After enabling the .NET Tracer for your service:
 
 1. Restart your service.
 
-2. Create an application load.
+2. Create application load.
 
 3. In Datadog, navigate to [**APM** > **APM Traces**][3].
 
@@ -451,7 +451,7 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 {{% tab "Windows" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, keep the package versions (for example: MSI and NuGet) in sync.
+  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you need to keep the package versions (for example: MSI and NuGet) in sync.
 </div>
 
 To use custom instrumentation in your .NET application:
@@ -475,7 +475,7 @@ To use custom instrumentation in your .NET application:
 
 For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][6].
 
-## Configure process environment variables
+## Configuring process environment variables
 
 In order to attach automatic instrumentation to your service, you need to set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables you need to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
