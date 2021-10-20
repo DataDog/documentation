@@ -16,13 +16,13 @@ Every incident in Datadog has its own Incident Details page where you can manage
 
 ## Global Header
 
-{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_global_header.jpeg" alt="Incident Global Header"  style="width:80%;">}}
 
 The Global Header gives you quick access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the Resolved status, an option will appear in the header for you to generate a Postmortem Notebook using a [Postmortem Template][4]. Postmortem Templates can be configured in your Incident Settings to predefine the structure and content of your postmortems so that you can create meaningful postmortems in a matter of seconds.
 
 ## Overview Section
 
-{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_overview.jpeg" alt="Incident Overview Section"  style="width:80%;">}}
 
 The Overview Section is where you specify an incident's Properties and define its customer impact. 
 
@@ -44,7 +44,7 @@ If your incident is customer-facing, you can specify the details of the impact b
 
 ## Timeline Section
 
-{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_timeline.jpeg" alt="Incident Timeline"  style="width:80%;">}}
 
 The Incident Timeline is the primary source of truth for the history of work done during an incident. As actions are performed, new cells will be added to the Timeline in chronological order to capture what changes were made, who they were made by and when they were made. 
 
@@ -67,7 +67,7 @@ By default, Timeline cells will be sorted in `Oldest First` order, but this can 
 
 ## Remediation Section
 
-{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section"  style="width:80%;">}}
 
 The Remediation Section is where you can store any documents or resources that were relevant to the remediation process of an incident, as well as an area to track key tasks for the remediation process. 
 
@@ -101,7 +101,7 @@ The Responders List also saves the date and time when an individual was original
 
 ## Notifications Section
 
-{{< img src="monitors/incidents/placeholder" alt="Placeholder"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_notifications.jpeg" alt="Incident Notifications"  style="width:80%;">}}
 
 The Notifications Section is where all stakeholder notifications for an incident are consolidated. Manually sent notifications can be created, saved as drafts and sent directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question will also be listed in this section.
 
