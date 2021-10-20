@@ -18,7 +18,7 @@ further_reading:
 
 UDP tests allow you to easily monitor that low-level UDP connections can be established on the ports of given hosts, ensuring availability of any services living on UDP ports. With built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
 
-UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. UDP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][12].
+UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. UDP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
@@ -30,7 +30,7 @@ After choosing to create an `UDP` Test, define your test's request.
 2. Enter the string you want to send in your test. 
 3. Specify the amount of time in seconds before the test times out.
 4. **Name** your UDP test.
-5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
 (move all screenshots for Define request down here).
 
@@ -61,7 +61,7 @@ Select the **Locations** to run your UDP test from. UDP tests can run from both 
 UDP tests can run:
 
 - **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency with which you want Datadog to run your UDP test. (Remove this Specify test frequency screenshot)
-- [**Within your CI/CD pipelines**][4].
+- [**Within your CI/CD pipelines**][5].
 - **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
@@ -100,8 +100,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Email notifications include the message defined in this section as well as a summary of failed assertions.
-Notifications example:
+Email notifications include the message defined in this section as well as a summary of failed assertions. For example:
 
 {{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications" style="width:90%;" >}}
 
@@ -170,12 +169,12 @@ If you have access to the [custom role feature][11], add your user to any custom
 
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations/
-[3]: /synthetics/search/#search
-[4]: /synthetics/cicd_testing/
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/search/#search
+[5]: /synthetics/cicd_testing/
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [9]: /synthetics/settings/#global-variables
 [10]: /account_management/rbac/
 [11]: /account_management/rbac#custom-roles
-[12]: /synthetics/cicd_testing
