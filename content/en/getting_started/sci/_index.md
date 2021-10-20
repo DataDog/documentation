@@ -16,18 +16,19 @@ By setting up the source code integration Datadog is able to:
 
 Work through this guide to setup the full capabilities of source code integration with datadog.
 
-To be able to map telemetry data to your source code we need to collect some metadata that needs to be configured to be transferred to Datadog in your CI pipeline.
+## Configuration
 
-1. Tag your process with the commit SHA
-    1. Container label
-    2. K8s label or annotation
-    3. Setting or extending the DD_TAGS environment variable
+In order to map telemetry data with your source code, you need to send metadata to Datadog from your CI pipeline.
+
+To tag your process with the commit SHA, you need a container label, Kubernetes label, or annotation.
+
+1. Set or extend the `DD_TAGS` environment variable.
 2. Upload your git metadata including the commit SHAs and your git repository URL by running [`datadog-ci git-metadata upload`][1].
 3. [Install GitHub Apps][2].
 
 Datadog correlates the places where you can link directly to your git repository.
 
-For Github SaaS users we are having an additional feature, by installing our [Github App](https://app.datadoghq.com/account/settings#integrations/github-apps) we can directly inline codesnipets from your github repository and help you find the problematic pieces faster.
+If you are a GitHub SaaS user, you can install Datadog's [GitHub Apps][2] to find problems faster by directly inlining code snippets from your GitHub repository.
 
 <div class="alert alert-warning">
 The GitHub Apps source code integration is in public beta and is available for all JVM languages and Go.
@@ -42,7 +43,7 @@ To get direct links from your stacktrace to your git repo, tag all your telemetr
 
 ### Containerized environments
 
-With containerized environments it’s easy to tag all your telemetry with the git.commit.sha (traces, profiles, logs…).
+For containerized environments, set the `git.commit.sha` container tag for all your telemetry including traces, profiles, and logs downstream.
 
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -95,7 +96,7 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 
 {{% /tab %}}
-## Datadog-ci
+## `datadog-ci`
 
 In order to link your telemetry to your source code, Datadog collects information for every `commit sha` from your git repository with the [`datadog-ci git-metadata upload`][1] command. 
 
@@ -103,3 +104,13 @@ When you run `datadog-ci git-metadata upload` within a git repository, Datadog r
 
 A good way to ensure the required data is collected is to run datadog-ci git-metadata upload as part of your CI pipeline.
 
+## Link to Git
+
+Screenshots + intro
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
