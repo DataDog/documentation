@@ -24,17 +24,17 @@ Rule expressions define behavior based on activity in your hosts and containers.
 
 `passwd` is a Unix utility, whose file is `/usr/bin/passwd` (assumed for a first implementation). Execution events include `exec`, `execve`, `fork`, and other system calls. In the Cloud Workload Security environment, all of these events are identified by the `exec` symbol.
 
-Putting it all together, the rule expression is: `exec.filename == "/usr/bin/passwd"`
+Putting it all together, the rule expression is: `exec.file.path == "/usr/bin/passwd"`
 
 This example is an actual default rule that is present in the default Cloud Workload Security policy. However, rule expressions can also be more advanced. For instance, you can define rules that match on process ancestors or use wildcards for broader detections.
 
 For example, if you want to detect the following behavior: “when a php or nginx process launches bash”, there are a few attributes to note.
 
-`bash` is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). Like in the previous example, to detect execution, include in your rule: `exec.filename == "/usr/bin/bash"`. This ensures the rule isn't only accounting for the execution of the bash, but also bash as a child process of PHP or Nginx.
+`bash` is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). Like in the previous example, to detect execution, include in your rule: `exec.file.path == "/usr/bin/bash"`. This ensures the rule isn't only accounting for the execution of the bash, but also bash as a child process of PHP or Nginx.
 
-A process ancestor’s filename in Cloud Workload Security is an attribute with symbol `process.ancestors.name`. To check if the ancestor is Nginx, add `process.ancestors.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.name =~ "php*"`. **Note**: Use the tilde when using wildcards.
+A process ancestor’s filename in Cloud Workload Security is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. **Note**: Use the tilde when using wildcards.
 
-Putting it all together, the rule expression is: `exec.filename == “/usr/bin/bash”  && (process.ancestors.name == “nginx” || process.ancestors.name =~ "php*")`
+Putting it all together, the rule expression is: `exec.file.path == “/usr/bin/bash”  && (process.ancestors.file.name == “nginx” || process.ancestors.file.name =~ "php*")`
 
 This is one part of a default rule present when using Cloud Workload Security out-of-the-box, which checks a variety of shells, shell utilities, web servers, and language engines using lists. The right side of an equality can be a list of the form `[“a”, “b”, “c”, ...]`.
 
@@ -44,20 +44,15 @@ When writing your own rules, there are a few strategies you can use to optimize 
 
 To ensure that your policy is evaluated in-kernel for maximum efficiency, always use one of the following attributes for rules on process or file activity:
 
-- `Agent Version 7.25`
 - `Agent Version >= 7.27`
-- `process.basename`
 - `process.file.name`
-- `process.filename`
 - `process.file.path`
-- `[event_type].basename`
 - `[event_type].file.name`
-- `[event_type].filename`
 - `[event_type].file.path`
 
 `[event_type]` can be open or exec, for example.
 
-Use wildcards (`*`) carefully. For example, never use `open.filename == “*/myfile”`. If you must use wildcards prefixing directories, at least two levels are required: `open.filename == “*/mydir/myfile”)`.
+Use wildcards (`*`) carefully. For example, never use `open.file.path =~ "*/myfile"`. If you must use wildcards prefixing directories, at least two levels are required: `open.file.path =~ "*/mydir/myfile")`.
 
 ## Rule concepts
 
@@ -67,7 +62,7 @@ Approvers act as an allow-list at the kernel level in the Datadog Agent. For exa
 
 Approvers and discarders are generated based on your entire policy. Because of this, if a single rule does not make use of approvers for a given event (open, exec, etc.), approvers cannot be used for that event for the entire policy, making every rule that uses that event less efficient.
 
-For example, if you used explicit filenames to evaluate open events (for example, `open.filename == "/etc/shadow”`) for every rule but one, and used a wildcard in that one event (for example, `open.filename == "/etc/*”`), the open event would NOT generate an approver, but may generate discarders during runtime.
+For example, if you used explicit filenames to evaluate open events (for example, `open.file.path == "/etc/shadow”`) for every rule but one, and used a wildcard in that one event (for example, `open.file.path == "/etc/*”`), the open event would NOT generate an approver, but may generate discarders during runtime.
 
 Approvers are generally more powerful and preferred. Using approvers, the Agent can process only what it needs to see rather than dynamically learning what to filter out.
 

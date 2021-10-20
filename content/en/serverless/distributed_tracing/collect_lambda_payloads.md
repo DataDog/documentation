@@ -5,6 +5,9 @@ description: 'Resolve AWS Lambda function failures faster by monitoring invocati
 further_reading:
     - link: 'serverless'
       text: 'Serverless Monitoring with Datadog'
+    - link: 'https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads/'
+      text: 'Resolve AWS Lambda function failures faster by monitoring invocation payloads'
+      tag: 'Blog'
 ---
 
 {{< img src="serverless/serverless_collect_lambda_payloads.png" alt="Collect AWS Lambda Payloads"  style="width:100%;" >}}
