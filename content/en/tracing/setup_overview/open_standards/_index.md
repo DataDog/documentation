@@ -236,7 +236,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
       # ...
     ```
 
-3. For OpenTelemetry Collectors in standalone collector mode, which receive traces from downstream collectors and export to Datadog's backend, include a `batch` processor configured with a `timeout` of `10s` as well as the `k8sattributes` enabled. These should be included along with the `datadog` exporter and added to the `traces` pipeline.
+3. For OpenTelemetry Collectors in standalone collector mode, which receive traces from downstream collectors and export to Datadog's backend, include a `batch` processor configured with a `timeout` of `10s`, and `k8sattributes` enabled. These should be included along with the `datadog` exporter and added to the `traces` pipeline.
 
     In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `processors` section:
 
@@ -265,6 +265,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
       exporters: [datadog]
       # ...
     ```
+<div class="alert alert-warning">If you get the error <code>unknown processors type "k8sattributes" for k8sattributes</code>, upgrade to the latest OpenTelemetry Collector (v0.37.0 or greater).</div>
 
 ##### Example Kubernetes OpenTelemetry application configuration
 
