@@ -1,5 +1,5 @@
 ---
-title: Create an API test via the API
+title: Create an API test with the API
 kind: faq
 further_reading:
 - link: "/synthetics/"
@@ -7,10 +7,14 @@ further_reading:
   text: "Manage your checks"
 ---
 
-Small examples of JSON configuration to create API tests
+## Overview
 
-## JSON Configuration file
+To create API tests with the API, see the following examples for your JSON configuration.
+You will also find an example to create a HTTP tests with the Python client.
+
+## JSON Configuration
 ### HTTP test
+
 ```json
 {
     "status": "live",
@@ -66,6 +70,7 @@ Small examples of JSON configuration to create API tests
 ``` 
 
 ### SSL test
+
 ```json
 {
     "status": "live",
@@ -120,6 +125,7 @@ Small examples of JSON configuration to create API tests
 ```
 
 ### DNS test
+
 ```json
 {
     "status": "live",
@@ -173,7 +179,9 @@ Small examples of JSON configuration to create API tests
     }
 }
 ```
+
 ### TCP test
+
 ```json
 {
     "status": "live",
@@ -216,7 +224,9 @@ Small examples of JSON configuration to create API tests
     }
 }
 ```
+
 ### ICMP test
+
 ```json
 {
     "status": "live",
@@ -272,7 +282,9 @@ Small examples of JSON configuration to create API tests
 ```
 
 ## Python client
+
 ### HTTP test
+
 ```python
 import os
 from dateutil.parser import parse as dateutil_parser
