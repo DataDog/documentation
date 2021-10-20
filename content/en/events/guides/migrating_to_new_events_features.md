@@ -10,11 +10,11 @@ The Event Stream is one of Datadog’s oldest features. The introduction of the 
 
 ## What this means for your organization
 
-* New events (from October 2021 onwards) are visible only in the [Events Explorer][2] or dashboard widgets and event overlays.
+* New events (after migration) are visible only in the [Events Explorer][2] or dashboard widgets and event overlays.
 
-* Older events (before October 2021) continue to be visible in the [Event Stream][2] for the remainder of their retention period (13 months).
+* Older events (before migration) continue to be visible in the [Event Stream][2] for the remainder of their retention period (13 months).
 
-This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features, and so that you're ready when the legacy event stream and storage are sunset in fourth quarter 2021. It also provides [a detailed description of what's changed](#details-of-the-changes).
+This guide describes how to migrate your organization’s event monitors and dashboard widgets so that you benefit from the new Events features, and so that you're ready when the legacy event stream and storage are sunset. It also provides [a detailed description of what's changed](#details-of-the-changes).
 
 ## Migration process
 
@@ -22,20 +22,22 @@ This guide describes how to migrate your organization’s event monitors and das
 
    {{< img src="events/guides/navigation.png" alt="Events navigation" style="width:100%;" >}}
 
-   <div class="alert alert-warning">Don't stop here! To create event monitors and dashboard widgets for Events using the new query syntax, you must migrate your existing event monitors and dashboard widgets to the new syntax, and Datadog support must enable the new query syntax for your organization, as described in the following steps.</div>
+   <div class="alert alert-warning">Don't stop here! To create event monitors and dashboard widgets for Events using the new query syntax, Datadog support must enable the new feature for your organization, and you must migrate your existing event monitors and dashboard widgets to the new syntax, as described in the following steps.</div>
 
-2. **Migrate data stored in Datadog servers.** Because the new events have a new query syntax and different monitor features (see below for detailed changes), event monitors and event dashboard widgets definitions that contain event queries must be updated. Use this [open source migration script][4] that connects to your account using your API key, and converts the data. [Contact Support][3] if you prefer we run it for you.
+2. **Contact Support to enable the new Events feature.** [Ask Support][3] to switch your organization to the new query syntax. Datadog automatically routes queries to the correct backend: unmigrated to the old backend, migrated to the new backend, so you can migrate safely. When the switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error.
 
-3. **Migrate data configured externally (Terraform, API).** If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise the old query syntax will be applied again at next deployment and overwrite updated queries. Review the syntax changes described below and use the [migration script][4] to see what converted queries look like. [Contact Support][3] for assistance at this stage.
+3. **Migrate data stored in Datadog servers.** Because the new events have a new query syntax and different monitor features (see below for detailed changes), event monitors and event dashboard widgets definitions that contain event queries must be updated. Use this [open source migration script][4] that connects to your account using your API key, and converts the data. [Contact Support][3] if you prefer we run it for you.
 
-4. **Contact Support to enable the new query syntax.** After all your dashboard and monitor configurations are migrated, [ask Support][3] to switch your organization to the new query syntax. When this switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error.
+4. **Migrate data configured externally (Terraform, API).** If you manage your Datadog configuration with external, API-based scripts or tools such as Terraform, update your dashboard and monitor definitions in your configuration file. Otherwise the old query syntax is applied again at next deployment and overwrites updated queries. Review the syntax changes described below and use the [migration script][4] to see what converted queries look like. [Contact Support][3] for assistance at this stage.
 
 5. **If you have SLOs based on event monitors**, update their definitions to point to the new monitors.
 
+6. **Contact Support to disable old pipeline.** [Let Support know][3] that you have finished migrating, and the old pipeline will be turned off. After that, all queries are routed to the new backend, and old-style queries return errors.
+
 ## Details of the changes
 
-### Event API: No changes
-The [API endpoint to query events][5] does not use any query syntax. It instead uses parameters to include or exclude tags or sources. So, you don't have to change anything in your scripts that use it.
+### Event API
+The [API endpoint to query events][5] does not use any query syntax. It instead uses parameters to include or exclude tags or sources. So, you don't have to change anything in your scripts that use it, unless they refer to status values, which have changed. See [Status remapping](#status-remapping).
 
 ### Event query syntax
 The new events query uses the same search query syntax as other products (Logs, RUM), providing a standardized experience across products. The updated search query syntax provides support for more advanced querying through Boolean operators and wildcards. So, the query syntax of your existing event monitors and dashboard widgets must be modified.
@@ -137,7 +139,7 @@ Legacy Event Monitors do not support cardinality rollup.
   2. Select the tag that you wish to add as a facet. 
   3. Click **Add**.
 
-* **You can group by up to 4 facets.** (Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, If a monitor triggers more times than the facet limit, it will sort by top group and show only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`).
+* **You can group by up to 4 facets.** (Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`).
   * One facet results in a limit of 1000 top values. 
   * Two facets results in a limit of 30 top values per facet (at most 900 groups)
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
