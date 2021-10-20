@@ -132,7 +132,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your DNS tests.
 
 To display your list of variables, type `{{` in your desired field:
 
