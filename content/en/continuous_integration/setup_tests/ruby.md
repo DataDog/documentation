@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-<div class="alert alert-info"><p>Ruby test instrumentation is in beta. There are no billing implications for instrumenting Ruby tests during this period.</p>
+<div class="alert alert-info">Ruby test instrumentation is in beta. There are no billing implications for instrumenting Ruby tests during this period.
 </div>
 ## Compatibility
 
