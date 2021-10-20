@@ -1,7 +1,7 @@
 ---
-title: Incident Management
+title: Incident Details Page
 kind: documentation
-description: Create and manage incidents
+description: Manage the context and work for an incident
 further_reading:
 - link: "dashboards/querying/#incident-management-analytics"
   tag: "Documentation"
