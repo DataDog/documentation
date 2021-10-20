@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure\_Automation."
-doc_link: 'https://docs.datadoghq.com/integrations/azure_automation/'
+doc_link: https://docs.datadoghq.com/integrations/azure_automation/
 draft: false
 git_integration_title: azure_automation
 has_logo: true
 integration_id: azure-automation
 integration_title: "Microsoft\_Azure\_Automation"
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
