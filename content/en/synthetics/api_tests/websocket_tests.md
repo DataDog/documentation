@@ -46,16 +46,13 @@ Websocket tests can run:
 
 ### Define assertions
 
-Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time`, `string response`, and `UDP connection` are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time`, `string response`, and `Websocket connection` are added. You must define at least one assertion for your test to monitor.
 
-(update this table)
-
-| Type          | Operator                                                                                               | Value type                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ <br> _String_, _[Regex][6]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][6]_                                      |
-| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
+| Type            | Operator       | Value Type                        |
+|-----------------|----------------|-----------------------------------|
+| response time   | `is less than` | *Integer (ms)*                    |
+| string response | `is`           | *String*                          |
+| headers  | `is`           | `established`, `timeout`, `refused` |
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per Websocket test.
 
@@ -84,9 +81,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][4], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -128,7 +125,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][7] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -148,7 +145,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][8].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -157,9 +154,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][12].
+By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -168,13 +165,10 @@ If you have access to the [custom role feature][13], add your user to any custom
 [1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_testing
-[4]: https://restfulapi.net/json-jsonpath/
-[5]: https://www.w3schools.com/xml/xpath_syntax.asp
-[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /monitors/notifications/?tab=is_alert#notification
-[8]: https://www.markdownguide.org/basic-syntax/
-[9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[10]: /synthetics/settings/#global-variables
-[11]: /synthetics/api_tests/errors/#ssl-errors
-[12]: /account_management/rbac/
-[13]: /account_management/rbac#custom-roles
+[4]: /monitors/notifications/?tab=is_alert#notification
+[5]: https://www.markdownguide.org/basic-syntax/
+[6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[7]: /synthetics/settings/#global-variables
+[8]: /synthetics/api_tests/errors/#ssl-errors
+[9]: /account_management/rbac/
+[10]: /account_management/rbac#custom-roles
