@@ -1,7 +1,7 @@
 ---
-title: Websocket Tests
+title: WebSocket Tests
 kind: documentation
-description: Simulate Websocket requests to monitor public and internal API endpoints
+description: Simulate WebSocket requests to monitor public and internal API endpoints
 aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
@@ -13,13 +13,13 @@ further_reading:
 ---
 ## Overview
 
-Websocket tests allow you to send Websocket requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content.
+WebSocket tests allow you to proactively open WebSocket connections on your endpoints to verify responses and defined conditions, such as overall response time or expected header.
 
-Websocket tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. Websocket tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+WebSocket tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. WebSocket tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing to create an `Websocket` test, define your test's request.
+After choosing to create an `WebSocket` test, define your test's request.
 
 ### Define request
 
@@ -30,14 +30,14 @@ After choosing to create an `Websocket` test, define your test's request.
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
 2. Enter the string you want to send in your test. 
 3. Specify the amount of time in seconds before the test times out.
-4. **Name** your Websocket test.
-5. Add `env` **Tags** as well as any other tag to your Websocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+4. **Name** your WebSocket test.
+5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
 
 ### Specify test frequency
 
-Websocket tests can run:
+WebSocket tests can run:
 
-* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your Websocket test.
+* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your WebSocket test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
@@ -46,15 +46,15 @@ Websocket tests can run:
 
 ### Define assertions
 
-Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time`, `string response`, and `Websocket connection` are added. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time` and `string response` are added. You must define at least one assertion for your test to monitor.
 
-| Type            | Operator       | Value Type                        |
-|-----------------|----------------|-----------------------------------|
-| response time   | `is less than` | *Integer (ms)*                    |
-| string response | `is`           | *String*                          |
-| headers  | `is`           | `established`, `timeout`, `refused` |
+| Type            | Operator                                                                         | Value Type                        |
+|-----------------|----------------------------------------------------------------------------------|-----------------------------------|
+| response time   | `is less than`                                                                   | *Integer (ms)*                    |
+| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | *String*                          |
+| header          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][8]_        |
 
-Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per Websocket test.
+Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
 
 (websocket assertions)
 
