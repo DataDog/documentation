@@ -204,9 +204,10 @@ For mobile apps (Swift, Android):
 : The name of the device being tested.<br/>
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
+<!-- TODO: uncomment once added in backend
 `test.bundle`
 : Used to execute groups of test suites separately.<br/>
-**Examples**: `ApplicationUITests`, `ModelTests`
+**Examples**: `ApplicationUITests`, `ModelTests` -->
 
 ## Further reading
 
