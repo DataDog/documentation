@@ -181,7 +181,7 @@ Enabling the .NET Tracer for your service involves setting the required environm
    DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
    ```
 
-   The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+   The value for the `<APP_DIRECTORY>` placeholder is the path to the directory containing the application's `.dll` files. The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
 
    Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
    ------------------------------------------|----------------------------
