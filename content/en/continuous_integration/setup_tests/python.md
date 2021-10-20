@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-info"><p>Python test instrumentation is in beta. There are no billing implications for instrumenting Python tests during this period.</p>
-
+</div>
 ## Compatibility
 
 Supported Python interpreters:

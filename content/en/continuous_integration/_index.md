@@ -10,7 +10,6 @@ further_reading:
       text: "Start exploring tests data to find and fix problem tests"
 ---
 
-</div>
 {{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-info"><p>CI Visibility is available only on the US1 and EU1 Datadog sites at this time.</p></div>
 {{< /site-region >}}

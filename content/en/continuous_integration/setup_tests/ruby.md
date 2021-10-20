@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-info"><p>Ruby test instrumentation is in beta. There are no billing implications for instrumenting Ruby tests during this period.</p>
-
+</div>
 ## Compatibility
 
 Supported Ruby interpreters:
