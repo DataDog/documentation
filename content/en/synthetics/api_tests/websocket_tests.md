@@ -29,7 +29,7 @@ After choosing to create an `WebSocket` test, define your test's request.
 
 1. Specify the **URL** to run your test on.
 2. Enter the string you want to send in your test. 
-3. Enrich your HTTP request with **Advanced Options** (optional):
+2. Add **Advanced Options** (optional) to your test:
 
    {{< tabs >}}
 
@@ -149,7 +149,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][8] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][8] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your WebSocket tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -178,7 +178,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][10].
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic WebSocket tests. To get create, edit, and delete access to Synthetic WebSocket tests, upgrade your user to one of those two [default roles][10].
 
 If you have access to the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
