@@ -161,7 +161,7 @@ snmp_listener:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discover. A discovered device is an IP that responds successfully when being polled using SNMP.
+**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
 ## Validation
 
