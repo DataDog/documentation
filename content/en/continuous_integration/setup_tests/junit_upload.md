@@ -158,22 +158,24 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
-## Defining metadata for testing configurations
+## Collecting environment configuration metadata
 
-Datadog defines some tags to identify runs of the same tests across different settings, such as runtimes or operative systems. They are used to detect outliers in tests runs and provide insights. These tags are automatically provided when using test instrumentation with tracers, but they can also be provided to the junit upload command with `--tags` or `DD_TAGS`.
+There are some special tags that are used to identify the configuration of the environment where tests run, which include OS, runtime and device information (where applicable). When the same test for the same commit runs in more than one configuration (for example, in both Windows and Linux machines), they are treated as two different tests when it comes to failure and flakiness detection.
 
-All of the tags are optional: all, none or just some can be provided depending on user needs.
+This information is automatically collected by the tracer when instrumenting tests natively. However, when uploading JUnit XML reports, you can also specify them using the `--tags` parameter, or by using the `DD_TAGS` environment variable.
+
+All tags are optional, and only the provided ones will be used to differentiate between environment configurations.
 
 `os.platform`
-: Name of the operative system.<br/>
+: Name of the operating system.<br/>
 **Examples**: `windows`, `linux`, `darwin`
 
 `os.version`
-: Version of the operative system.<br/>
+: Version of the operating system.<br/>
 **Examples**: `10.15.4`, `14.3.2`, `95`
 
 `os.architecture`
-: Architecture of the operative system.<br/>
+: Architecture of the operating system.<br/>
 **Examples**: `x64`, `x86`, `arm64`
 
 `runtime.name`
@@ -185,7 +187,7 @@ All of the tags are optional: all, none or just some can be provided depending o
 **Examples**: `5.0.0`, `3.1.7`
 
 `runtime.vendor`
-: Name of the vendor for cases where multiple are available for the same runtime.<br/>
+: Name of the runtime vendor where applicable. For example, when using a Java runtime.<br/>
 **Examples**: `OpenJDK`, `Oracle`
 
 `runtime.architecture`
@@ -196,11 +198,11 @@ For mobile apps (Swift, Android):
 
 `device.model`
 : The model of the device being tested.<br/>
-**Examples**: `iPhone`, `appleTV`
+**Examples**: `iPhone11,4`, `AppleTV5,3`
 
 `device.name`
 : The name of the device being tested.<br/>
-**Examples**: `iPhone 12 Pro`, `apple TV 4K`
+**Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
 `test.bundle`
 : Used to execute groups of test suites separately.<br/>
