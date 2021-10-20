@@ -127,7 +127,7 @@ The Sent List will also display whether a notification was manually sent, or aut
 
 ## Ready to try it out?
 
-Work through an example workflow in the [Getting Started with Incident Management][18] guide.
+Work through an example workflow in the [Getting Started with Incident Management][13] guide.
 
 ## Further Reading
 
@@ -136,13 +136,13 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [1]: /monitors/incident_management/#creating-an-incident
 [2]: /monitors/incident_management/#describing-the-incident
 [3]: /monitors/incident_management/#integrations
-[4]: Placeholder
+[4]: /monitors/incident_management/incident_settings#postmortem-templates
 [5]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [6]: https://app.datadoghq.com/incidents
-[7]: Placeholder
+[7]: /monitors/incident_management/incident_management_analytics
 [8]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [9]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [10]: /integrations/slack/?tab=slackapplicationus#manage-incident-tasks
-[11]: Placeholder
-[12]: Placeholder
-[18]: /getting_started/incident_management
+[11]: /monitors/incident_management/incident_settings#rules
+[12]: /monitors/incident_management/incident_settings#message-templates
+[13]: /getting_started/incident_management

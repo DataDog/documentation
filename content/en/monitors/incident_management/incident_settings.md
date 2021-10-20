@@ -126,13 +126,13 @@ To create a Postmortem Template:
 5. Click **Save**
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: Placeholder
+[2]: /monitors/incident_management/incident_management_analytics
 [3]: /monitors/incident_management/#from-the-incidents-page
 [4]: https://app.datadoghq.com/incidents
 [5]: /tracing/
 [6]: /getting_started/tagging/using_tags/?tab=assignment#metrics
 [7]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [8]: https://app.datadoghq.com/account/settings#integrations/slack
-[9]: Placeholder
+[9]: /monitors/incident_management/incident_details/#notifications-section
 [10]: /monitors/notifications/?tab=is_alert#notify-your-team
 [11]: /notebooks/
