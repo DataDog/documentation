@@ -189,7 +189,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
 
 1. The example demonstrates deploying the OpenTelemetry Collectors in [agent mode via daemonset][14], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in [standalone collector mode][15]. This OpenTelemetry Collector in standalone collector mode then exports to the Datadog backend. See [this diagram of this deployment model][16].
 
-2. For OpenTelemetry Collectors deployed as agent via daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8sattributes` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
+2. For OpenTelemetry Collectors deployed as agent by daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8sattributes` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
 
     In the daemonset's `spec.containers.env` section:
 
