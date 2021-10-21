@@ -13,7 +13,9 @@
                 "host": "i-0123",
                 "message": "Host connected to remote",
                 "service": "agent",
-                "tags": "team:A",
+                "tags": [
+                  "team:A"
+                ],
                 "timestamp": "2020-05-26T13:36:14Z"
               },
               "id": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA"

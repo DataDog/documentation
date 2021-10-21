@@ -484,8 +484,8 @@ const outputExample = (chosenExample, inputkey) => {
             ex = ex.slice(0, -1);
           }
         });
-      } else if (Object.keys(chosenExample).length !== 0 && inputkey !== "<any-key>") {
-        ex = safeJsonStringify(chosenExample, null, 2);
+      } else if (Object.keys(chosenExample).length !== 0 && !inputkey) {
+          ex = safeJsonStringify(chosenExample, null, 2);
       }
     } else {
       ex = outputValue(chosenExample);
