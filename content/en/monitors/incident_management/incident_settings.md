@@ -4,13 +4,13 @@ kind: documentation
 description: Configure and customize your Incident Management experience
 ---
 
-# Overview
+## Overview
 
 The [Incident Settings][1] are where you can go to customize aspects of the Incident Management product's experience for your entire organization. The individual settings are categorized and divided into different sub-sections. The main categories of settings are: General, Notifications, and Remediation.
 
-# General
+## General
 
-## Information
+### Information
 
 The Information subsection of the Incident Settings is where you go to define your organization's Severity Levels, Status Levels, and Declare Incident Helper text.
 
@@ -38,7 +38,7 @@ For the Status Levels settings, you are able to:
 
 For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the Severity and Status Level descriptions in the [Incident Creation Modal][3]. The helper text has Markdown support to allow you to include indented lists, text formatting and hyperlinks to other instruction resources for incident responders.
 
-## Property Fields
+### Property Fields
 
 {{< img src="monitors/incidents/property_field_settings.jpeg" alt="Property Field Settings"  style="width:80%;">}}
 
@@ -53,7 +53,7 @@ If you have [Datadog APM][5] configured, the `Services` Property Field will auto
 
 You can add additional Property Fields to your settings by selecting one of your existing key:value pair [metric tags][6]. When you do this the key of your Property Field will be the start case of your metric tag's key (each word is capitalized and separated by spaces) and the values for the Property Field will be equal to the values reported by the metric tag.
 
-## Integrations
+### Integrations
 
 {{< img src="monitors/incidents/integration_settings.jpeg" alt="Integration Settings"  style="width:80%;">}}
 
@@ -66,9 +66,9 @@ Both of these settings can be configured to use any Slack Workspace you have con
 
 The Incident Updates channel will send a message whenever an incident gets declared or changes Status, Severity, or Incident Commander.
 
-# Notifications
+## Notifications
 
-## Message Templates
+### Message Templates
 
 {{< img src="monitors/incidents/message_templates_settings.jpeg" alt="Message Template Settings"  style="width:80%;">}}
 
@@ -85,7 +85,7 @@ To create a Message Template:
 
 **Note:** Template variables are supported in both the message's title and body.
 
-## Rules
+### Rules
 
 {{< img src="monitors/incidents/notification_rules_example.jpeg" alt="Notification Rules Example"  style="width:80%;">}}
 
@@ -113,9 +113,9 @@ You can perform the following operations to manage your Notification Rules.
 
 {{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List"  style="width:80%;">}}
 
-# Remediation
+## Remediation
 
-## Postmortem Templates
+### Postmortem Templates
 
 {{< img src="monitors/incidents/postmortem_template_settings.jpeg" alt="Postmortem Template Settings"  style="width:80%;">}}
 
