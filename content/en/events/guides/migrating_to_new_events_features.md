@@ -142,8 +142,7 @@ The [Event monitors API][6] has a new monitor query syntax (See "Event V2 Alert 
 
 **No events received in a datacenter for service `datadog-agent`**
 <table><tbody><tr>
-<td>Legacy syntax</br>
-Legacy Event Monitors do not support cardinality rollup.</td>
+<td>Legacy Event Monitors do not support cardinality rollup.</td>
 <td>New syntax </br>
 <code>events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1</code></td>
 </tr></tbody></table>
