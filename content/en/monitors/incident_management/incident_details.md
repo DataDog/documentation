@@ -67,7 +67,7 @@ For graph cells specifically, graph definitions are stored using share URLs for 
 
 By default, timeline cells are sorted in `oldest first` order, but this can be changed to `newest first` using the button at the top of the timeline.
 
-## Remediation Section
+## Remediation section
 
 {{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section"  style="width:80%;">}}
 
