@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Session Replay
+title: Session Replay
 kind: documentation
 description: Guide for enabling Session Replay and how to set privacy options
 aliases:
