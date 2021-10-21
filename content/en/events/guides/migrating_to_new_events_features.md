@@ -116,29 +116,38 @@ This means you can use complex queries in event monitors with all the added capa
 
 The [Event monitors API][6] has a new monitor query syntax (See "Event V2 Alert Query" section), with Average and Cardinality rollup methods and fewer required attributes. 
 
-No Slack events in the past 24 hours
-: Legacy syntax </br>
-`events('priority:all sources:slack').rollup('count').last('1d') < 1`
-: New syntax </br>
-`events("source:slack").rollup("count").last("1d") < 1`
+**No Slack events in the past 24 hours**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>events('priority:all sources:slack').rollup('count').last('1d') < 1</code></td>
+<td>New syntax </br>
+<code>events("source:slack").rollup("count").last("1d") < 1</code></td>
+</tr></tbody></table>
 
-EC2 Instance marked for maintenance
-: Legacy syntax </br>
-`events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
-: New syntax </br>
-`events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1`
+**EC2 Instance marked for maintenance**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1</code></td>
+<td>New syntax </br>
+<code>events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1</code></td>
+</tr></tbody></table>
 
-Zabbix or Prometheus has triggered an alert for a service today
-: Legacy syntax </br>
-`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
-: New syntax </br>
-`events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0`
+**Zabbix or Prometheus has triggered an alert for a service today**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0</code></td>
+<td>New syntax </br>
+<code>events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0</code></td>
+</tr></tbody></table>
 
-No events received in a datacenter for service `datadog-agent`
-: Legacy syntax </br>
-Legacy Event Monitors do not support cardinality rollup.
-: New syntax </br>
-`events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
+**No events received in a datacenter for service `datadog-agent`**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+Legacy Event Monitors do not support cardinality rollup.</td>
+<td>New syntax </br>
+<code>events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1</code></td>
+</tr></tbody></table>
+
 
 #### Other event monitor changes
 
