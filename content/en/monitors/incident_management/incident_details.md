@@ -42,7 +42,7 @@ If your incident is customer-facing, specify the details of the impact below the
 3. Specify an end date and time for the impact or `Active` if the impact is still ongoing.
 4. Describe the nature of the impact on customers in `Scope of impact`.
 
-## Timeline Section
+## Timeline section
 
 {{< img src="monitors/incidents/incident_timeline.jpeg" alt="Incident Timeline"  style="width:80%;">}}
 
