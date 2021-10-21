@@ -55,46 +55,36 @@ Some status values have changed:
 
 #### Event query syntax examples before and after 
 
-**Show events from GitHub or Chef**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>sources:github,chef</code></td>
-<td>New syntax </br>
-<code>source:(github OR chef)</code></td>
-</tr></tbody></table>
+Show events from GitHub or Chef
+: Legacy syntax</br>
+`sources:github,chef`
+: New syntax </br>
+`source:(github OR chef)`
 
-**Show events tagged with `env-prod`**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>tags:env-prod</code></td>
-<td>New syntax </br>
-<code>tags:env-prod</code></td>
-</tr></tbody></table>
+Show events tagged with `env-prod`
+: Legacy syntax</br>
+`tags:env-prod`
+: New syntax </br>
+`tags:env-prod`
 
-**Show events tagged with `#env-prod` or `#db`**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>tags:env-prod,db</code>, <code>tags:env-prod OR db</code></td>
-<td>New syntax </br>
-<code>tags:(env-prod OR db)</code></td>
-</tr></tbody></table>
+Show events tagged with `#env-prod` or `#db`
+: Legacy syntax</br>
+`tags:env-prod,db`, `tags:env-prod OR db`
+: New syntax </br>
+`tags:(env-prod OR db)`
 
-**Show events tagged with `#security-group:sg-123` and `#role:common-node`**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>tags:security-group:sg-123 AND role:common-node</code></td>
-<td>New syntax </br>
-<code>tags:(security-group:sg-123 AND role:common-node)</code></td>
-</tr></tbody></table>
+Show events tagged with `#security-group:sg-123` and `#role:common-node`
+: Legacy syntax</br>
+`tags:security-group:sg-123 AND role:common-node`
+: New syntax </br>
+`tags:(security-group:sg-123 AND role:common-node)`
 
-**Use wildcards to search for prefixes and suffixes**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-Not available</td>
-<td>New syntax </br>
-<code>*web</code> matches all event messages ending with <code>web</code></br>
-<code>source:amazon*</code> matches all events that source starts with <code>amazon</code></td>
-</tr></tbody></table>
+Use wildcards to search for prefixes and suffixes
+: Legacy syntax</br>
+Not available
+: New syntax </br>
+`*web` matches all event messages ending with `web`</br>
+`source:amazon*` matches all events that source starts with `amazon` 
 
 
 ### Event monitors
@@ -116,36 +106,29 @@ This means you can use complex queries in event monitors with all the added capa
 
 The [Event monitors API][6] has a new monitor query syntax (See "Event V2 Alert Query" section), with Average and Cardinality rollup methods and fewer required attributes. 
 
-**No Slack events in the past 24 hours**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>events('priority:all sources:slack').rollup('count').last('1d') < 1</code></td>
-<td>New syntax </br>
-<code>events("source:slack").rollup("count").last("1d") < 1</code></td>
-</tr></tbody></table>
+No Slack events in the past 24 hours
+: Legacy syntax </br>
+`events('priority:all sources:slack').rollup('count').last('1d') < 1`
+: New syntax </br>
+`events("source:slack").rollup("count").last("1d") < 1`
 
-**EC2 Instance marked for maintenance**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1</code></td>
-<td>New syntax </br>
-<code>events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1</code></td>
-</tr></tbody></table>
+EC2 Instance marked for maintenance
+: Legacy syntax </br>
+`events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
+: New syntax </br>
+`events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1`
 
-**Zabbix or Prometheus has triggered an alert for a service today**
-<table><tbody><tr>
-<td>Legacy syntax</br>
-<code>events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0</code></td>
-<td>New syntax </br>
-<code>events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0</code></td>
-</tr></tbody></table>
+Zabbix or Prometheus has triggered an alert for a service today
+: Legacy syntax </br>
+`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
+: New syntax </br>
+`events("source:(prometheus OR zabbix) status:error").rollup("count").by("service").last("1d") > 0`
 
-**No events received in a datacenter for service `datadog-agent`**
-<table><tbody><tr>
-<td>Legacy Event Monitors do not support cardinality rollup.</td>
-<td>New syntax </br>
-<code>events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1</code></td>
-</tr></tbody></table>
+No events received in a datacenter for service `datadog-agent`
+: Legacy syntax </br>
+Legacy Event Monitors do not support cardinality rollup.
+: New syntax </br>
+`events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
 
 #### Other event monitor changes
