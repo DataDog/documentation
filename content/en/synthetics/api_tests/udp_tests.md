@@ -36,7 +36,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 {{< img src="synthetics/api_tests/udp_test_config.png" alt="Define UDP request" style="width:90%;" >}}
 
-Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen. (Let's make this sentence uniform across all test type pages).
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 

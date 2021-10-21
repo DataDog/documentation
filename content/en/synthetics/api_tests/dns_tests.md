@@ -39,21 +39,8 @@ After choosing to create a `DNS` test, define your test's request.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. **Name** your DNS test.
 5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
-6. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
 
-Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
-
-### Specify test frequency
-
-DNS tests can run:
-
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your DNS test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][5].
-
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -68,6 +55,22 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+
+### Specify test frequency
+
+DNS tests can run:
+
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your DNS test.
+
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
+
+* [**Within your CI/CD pipelines**][5].
+
+* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
 

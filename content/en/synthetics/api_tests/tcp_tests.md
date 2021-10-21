@@ -35,21 +35,8 @@ After choosing to create a `TCP` test, define your test's request.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
 3. **Name** your TCP test.
 4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
-5. Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
 
-Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
-
-### Specify test frequency
-
-TCP tests can run:
-
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your TCP test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][5].
-
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -62,6 +49,22 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your TCP test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
+
+### Specify test frequency
+
+TCP tests can run:
+
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your TCP test.
+
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
+
+* [**Within your CI/CD pipelines**][5].
+
+* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
 

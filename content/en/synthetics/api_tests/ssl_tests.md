@@ -44,21 +44,8 @@ After choosing to create a `SSL` test, define your test's request.
 
 3. **Name** your SSL test.
 4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
-5. Select the **Locations** to run your SSL test from. SSL tests can run from both [managed][1] and [private locations][2] depending on whether you want to monitor certificates from outside or inside your network.
 
-Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
-
-### Specify test frequency
-
-SSL tests can run:
-
-* **On a schedule** to ensure your SSL/TLS certificates are always valid and that a secure connections is ensured to the users of your key services. Select the frequency you want Datadog to run your SSL test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][5].
-
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -75,6 +62,22 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your SSL test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your SSL test from. SSL tests can run from both [managed][1] and [private locations][2] depending on whether you want to monitor certificates from outside or inside your network.
+
+### Specify test frequency
+
+SSL tests can run:
+
+* **On a schedule** to ensure your SSL/TLS certificates are always valid and that a secure connections is ensured to the users of your key services. Select the frequency you want Datadog to run your SSL test.
+
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
+
+* [**Within your CI/CD pipelines**][5].
+
+* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
 

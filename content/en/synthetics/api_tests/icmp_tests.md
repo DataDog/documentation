@@ -36,20 +36,8 @@ After choosing to create an `ICMP` test, define your test's request.
 3. Select the **Number of Pings** to trigger per test session. By default, the number of pings is set to four. You can choose to decrease this number or increase it up to ten.
 4. **Name** your ICMP test.
 5. Add `env` **Tags** as well as any other tags to your ICMP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
-6. Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
-
-### Specify test frequency
-
-ICMP tests can run:
-
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency with which you want Datadog to run your ICMP test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][3].
-* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
 
@@ -65,6 +53,21 @@ Assertions define what an expected test result is. When hitting `Test URL`, basi
 You can create up to 20 assertions per API test by selecting **New Assertion** or by selecting the response preview directly:
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Define assertions for your ICMP test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
+
+### Specify test frequency
+
+ICMP tests can run:
+
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency with which you want Datadog to run your ICMP test.
+
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
+
+* [**Within your CI/CD pipelines**][3].
+* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
 
