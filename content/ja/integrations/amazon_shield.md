@@ -6,12 +6,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Amazon Shield のキーメトリクスを追跡
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_shield/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_shield/
 draft: false
 git_integration_title: amazon_shield
 has_logo: true
 integration_id: amazon-shield
 integration_title: Amazon Shield
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
