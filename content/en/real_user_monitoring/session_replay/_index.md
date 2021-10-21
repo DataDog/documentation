@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Session Replay
-kind: guide
+kind: documentation
 description: Guide for enabling Session Replay and how to set privacy options
 further_reading:
     - link: '/real_user_monitoring/explorer'
@@ -14,7 +14,7 @@ further_reading:
 <div class="alert alert-info"><p>Session Replay is in open beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available on <a href="/getting_started/site/">US1 and EU Datadog sites</a>.</p>
 </div>
 
-## What is Session Replay?
+## Overview
 
 Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users.
 
@@ -54,9 +54,9 @@ datadogRum.startSessionReplayRecording();
 
 Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
-*Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
+The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
 
-#### Configuration
+### Configuration
 
 The usual [RUM initialization parameters][4] are all supported.
 
@@ -182,6 +182,10 @@ Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will
 ### How long is a Session Replay available?
 
 Session Replay follows the same 30 days retention policy as normal RUM sessions.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#setup
 [2]: https://www.npmjs.com/package/@datadog/browser-rum

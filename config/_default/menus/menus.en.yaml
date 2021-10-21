@@ -2620,11 +2620,15 @@ main:
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Session Replay
+    url: real_user_monitoring/session_replay/
+    parent: rum
+    weight: 5
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 5
+    weight: 6
   - name: Performance Overview
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
@@ -2644,7 +2648,7 @@ main:
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 6
+    weight: 7
   - name: Search
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
@@ -2664,12 +2668,12 @@ main:
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 7
+    weight: 8
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 8
+    weight: 9
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
@@ -2694,7 +2698,7 @@ main:
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 9
+    weight: 10
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
