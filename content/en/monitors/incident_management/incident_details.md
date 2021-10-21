@@ -14,7 +14,7 @@ further_reading:
 
 Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you've [created a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs in order to group related incident data together. The first of these sections is the Overview.
 
-## Global Header
+## Global header
 
 {{< img src="monitors/incidents/incident_global_header.jpeg" alt="Incident Global Header"  style="width:80%;">}}
 
