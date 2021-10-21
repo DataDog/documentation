@@ -584,76 +584,76 @@ Tests are created in a suite, use `suite.testStart()`to report the start of a te
 
 {{< code-block lang="swift" >}}
 class DDTestSession {
-    /// Starts the session
-    /// - Parameters:
-    ///   - bundleName: name of the module or bundle to test.
-    ///   - startTime: Optional, the time where the session started
-		static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
+    // Starts the session
+    // - Parameters:
+    //   - bundleName: name of the module or bundle to test.
+    //   - startTime: Optional, the time where the session started
+    static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
   
-    /// Ends the session
-    /// - Parameters:
-    ///   - endTime: Optional, the time where the session ended
-		func end(endTime: Date? = nil)
+    // Ends the session
+    // - Parameters:
+    //   - endTime: Optional, the time where the session ended
+    func end(endTime: Date? = nil)
   
-    /// Starts a suite in this session
-    /// - Parameters:
-    ///   - name: name of the suite
-    ///   - startTime: Optional, the time where the suite started
-		func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
+    // Starts a suite in this session
+    // - Parameters:
+    //   - name: name of the suite
+    //   - startTime: Optional, the time where the suite started
+    func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
 }
 
 public class DDTestSuite : NSObject {
-    /// Ends the test suite
-    /// - Parameters:
-    ///   - endTime: Optional, the time where the suite ended
+    // Ends the test suite
+    // - Parameters:
+    //   - endTime: Optional, the time where the suite ended
 		func end(endTime: Date? = nil)
   
-    /// Starts a test in this suite
-    /// - Parameters:
-    ///   - name: name of the suite
-    ///   - startTime: Optional, the time where the test started
+    // Starts a test in this suite
+    // - Parameters:
+    //   - name: name of the suite
+    //   - startTime: Optional, the time where the test started
     func testStart(name: String, startTime: Date: Date? = nil) -> DDTest
 }
 
 public class DDTest : NSObject {
-    /// Adds a extra atribute or tag to the test, any number of attributes can be reported
-    /// - Parameters:
-    ///   - key: The name of the attribute, if an atrtribute exists with the name it will be
-    ///     replaced with the new value
-    ///   - value: The value of the attibute, can be a number or a string.
+    // Adds a extra atribute or tag to the test, any number of attributes can be reported
+    // - Parameters:
+    //   - key: The name of the attribute, if an atrtribute exists with the name it will be
+    //     replaced with the new value
+    //   - value: The value of the attibute, can be a number or a string.
     func setAttribute(key: String, value: Any)
   
-    /// Adds error information to the test, only one erros info can  be reported by a test
-    /// - Parameters:
-    ///   - type: The type of error to be reported
-    ///   - message: The message associated with the error
-    ///   - callstack: (Optional) The callstack associated with the error
+    // Adds error information to the test, only one erros info can  be reported by a test
+    // - Parameters:
+    //   - type: The type of error to be reported
+    //   - message: The message associated with the error
+    //   - callstack: (Optional) The callstack associated with the error
     func setErrorInfo(type: String, message: String, callstack: String? = nil)
   
-  	/// Adds benchmark information to the test, it also changes the test to be of type 
-  	/// benchmark 
-    /// - Parameters:
-    ///   - name: Name of the measure benchmarked
-		///   - samples: Array for values sampled for the measure
-		///   - info: (Optional) Extra information about the benchmark
+  	// Adds benchmark information to the test, it also changes the test to be of type 
+  	// benchmark 
+    // - Parameters:
+    //   - name: Name of the measure benchmarked
+    //   - samples: Array for values sampled for the measure
+    //   - info: (Optional) Extra information about the benchmark
     func addBenchmark(name: String, samples: [Double], info: String?)
   
-    /// Ends the test
-    /// - Parameters:
-    ///   - status: the status reported for this test
-    ///   - endTime: Optional, the time where the test ended
-		func end(status: DDTestStatus, endTime: Date: Date? = nil)
+    // Ends the test
+    // - Parameters:
+    //   - status: the status reported for this test
+    //   - endTime: Optional, the time where the test ended
+    func end(status: DDTestStatus, endTime: Date: Date? = nil)
 }
 
-/// Possible status reported by a test
+// Possible status reported by a test
 enum DDTestStatus {
-  /// The test passed
+  // The test passed
   case pass 
 
-  ///Test test failed
+  //Test test failed
   case fail
   
-  ///The test was skipped
+  //The test was skipped
   case skip
 }
 {{< /code-block >}}
@@ -680,9 +680,9 @@ test2.end(test: test2, status: .fail)
 suite1.end()
 
 let suite2 = session.suiteStart(name: "ManualSuite 2") 
-...
+..
 
-...
+..
 session.end() //Always call it at the end so all the test info is flushed to the Datadog
 {{< /code-block >}}
 
