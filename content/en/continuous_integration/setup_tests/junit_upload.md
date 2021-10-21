@@ -160,7 +160,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ## Providing metadata through `<property>` elements
 
-In addition to the `--tags` CLI parameter and `DD_TAGS` environment variable which apply custom tags globally to all tests included the uploaded XML report, it is possible to provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. These tags are either stored in the test span that corresponds to the `<testcase>` element where it's added, or in all test spans within the same test suite when defined inside a `<testsuite>` element.
+In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable which apply custom tags globally to all tests included the uploaded XML report, it is possible to provide additional tags to specific tests by including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. These tags are either stored in the test span that corresponds to the `<testcase>` element where it's added, or in all test spans within the same test suite when defined inside a `<testsuite>` element.
 
 Only `<property>` elements with a `name` attribute with the format `dd_tags[key]` where `key` is the name of the custom tag to be added, are processed. Other properties are ignored.
 
