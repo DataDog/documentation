@@ -38,7 +38,7 @@ Additional property fields can be configured in your [Incident Settings][5] by u
 If your incident is customer-facing, specify the details of the impact below the Properties section under the Impact heading:
 
 1. Select *Yes* for `Customer Impact`.
-2. Specifying a start date and time for the impact
+2. Specify a start date and time for the impact.
 3. Specifying an end date and time for the impact or `Active` if the impact is still ongoing
 4. Describing the nature of the impact on customers in `Scope of impact` 
 
