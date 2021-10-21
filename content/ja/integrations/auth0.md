@@ -11,13 +11,14 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - 'https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md'
+  - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
 display_name: Auth0
 draft: false
 git_integration_title: auth0
 guid: 9308a35c-219e-4d24-ac11-af2511e5041a
 integration_id: auth0
 integration_title: Auth0
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

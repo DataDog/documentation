@@ -5,12 +5,13 @@ categories:
 ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Relay.
-doc_link: 'https://docs.datadoghq.com/integrations/azure_relay/'
+doc_link: https://docs.datadoghq.com/integrations/azure_relay/
 draft: false
 git_integration_title: azure_relay
 has_logo: true
 integration_id: azure-relay
 integration_title: Microsoft Azure Relay
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

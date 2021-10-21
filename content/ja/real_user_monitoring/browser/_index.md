@@ -2,7 +2,7 @@
 aliases:
   - /ja/real_user_monitoring/setup
 dependencies:
-  - 'https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md'
+  - https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
@@ -195,10 +195,10 @@ RUM ビューの作成を制御します。[デフォルトの RUM ビュー名�
 **デフォルト**: `false`<br/>
 Datadog の RUM がページ上ですでに初期化されている場合、初期化が暗黙に失敗します。
 
-`proxyHost`
+`proxyUrl`
 : 任意<br/>
 **種類**: 文字列<br/>
-オプションのプロキシホスト (例: www.proxy.com)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
+オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][7]を参照してください。
 
 `allowedTracingOrigins`
 : 任意<br/>
