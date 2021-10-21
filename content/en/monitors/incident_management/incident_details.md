@@ -24,7 +24,7 @@ The global header provides access to the [Status and Severity][2] selectors, and
 
 {{< img src="monitors/incidents/incident_overview.jpeg" alt="Incident Overview Section"  style="width:80%;">}}
 
-The Overview Section is where you specify an incident's Properties and define its customer impact. 
+Use the Overview section to specify an incident's properties and define customer impact. 
 
 By default, all incidents will have the following four Properties:
 
