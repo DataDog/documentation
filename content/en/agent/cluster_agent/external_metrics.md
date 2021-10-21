@@ -60,7 +60,7 @@ This automatically updates the necessary RBAC configurations as well as sets up 
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, [setup the Datadog Operator][1]. Then, you set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
+To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, [setup the Datadog Operator][1]. Then, set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
 
   ```yaml
   apiVersion: datadoghq.com/v1alpha1
