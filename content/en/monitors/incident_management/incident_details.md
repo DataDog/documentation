@@ -48,7 +48,9 @@ If your incident is customer-facing, specify the details of the impact below the
 
 The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
 
-Each cell has its own Content Type that indicates what kind of information the cell contains. The Content Types are:
+### Content types
+
+Each cell has its own content type that indicates the kind of information the cell contains:
 
 1. *Responder Note* - A note that was manually written by an incident responder. Responder Notes have the following sub-types:
    *  *Graph* - The Responder Note contains one or more Datadog Graphs
