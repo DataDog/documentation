@@ -265,7 +265,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
 
         if (value.example) {
           if (typeof value.example === 'object') {
-            if (value.type === 'array') {
+            if (value.type === 'array' || value.example instanceof Array) {
               prefixType = '[';
               suffixType = ']';
             }
@@ -465,8 +465,8 @@ const outputExample = (chosenExample, inputkey) => {
           ex = `[${outputExample(item, inputkey)}]`;
         } else if(typeof item === 'object') {
           // output 1 level of example array
-          if(inputkey && item !== null && inputkey in item) {
-            if(item[inputkey] instanceof Array) {
+          if (inputkey && item !== null && inputkey in item) {
+            if (item[inputkey] instanceof Array) {
               ex = `[${outputExample(item[inputkey])}]`;
             } else {
               ex = `${outputExample(item[inputkey])}`;
@@ -484,6 +484,8 @@ const outputExample = (chosenExample, inputkey) => {
             ex = ex.slice(0, -1);
           }
         });
+      } else if (Object.keys(chosenExample).length !== 0 && inputkey !== "<any-key>") {
+        ex = safeJsonStringify(chosenExample, null, 2);
       }
     } else {
       ex = outputValue(chosenExample);
