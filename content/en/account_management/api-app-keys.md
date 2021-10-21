@@ -17,15 +17,15 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ## Scopes for application keys 
 
-To better protect and secure your applications, you can specify scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access permissions. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data. 
+To better protect and secure your applications, you can specify scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data. 
 
 The recommended best practice for creating scoped application keys is to grant your keys the minimal privileges and least permissions necessary for the application to function as intended. You can modify the scopes of an application key anytime after creation. 
 
 **Notes:** 
-- Users or service accounts with [permissions][5] to create or edit application keys can also specify scopes for application keys.
-- While users can scope application keys to permissions that they do not have, they will still be unable to authorize the application if they are missing any of the required permissions.
-- If a user’s permissions change, specified scopes for application keys created by that user will remain unchanged.
-- When modifying scopes of your application keys, consider how those changes may impact the functionality or access of your application.
+- Users or service accounts with [permissions][5] to create or edit application keys can specify scopes for application keys.
+- Application owners cannot authorize an application if they are missing any required permissions, even if they create an application key with scopes that they do not have.
+- If a user’s role or permissions change, scopes specified for their application keys remain unchanged.
+- When modifying scopes of your application keys, consider how those changes may impact the existing functionality or access of your application.
 
 ## Client tokens
 
@@ -56,9 +56,11 @@ To remove a Datadog API key or client token, navigate to the list of keys or tok
 
 To add a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create application keys, click **New Key**.
 
-**Note:** Application key names cannot be blank.
+To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key with the `scopes` attribute. Scopes can be specified for application keys owned by [the current user][7] or a [service account][8]. If this field is unspecified, application keys by de fault have all the same scopes as the user who created them. 
 
-To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key with the optional `scoped_permissions` parameter. If this field is unspecified, application keys by default have all the same scopes as the user who created them. 
+**Notes:** 
+* Application key names cannot be blank.
+* Scope names are case-sensitive. 
 
 ## Remove application keys
 
@@ -93,3 +95,4 @@ Need help? Contact [Datadog support][6].
 [5]: /account_management/rbac/permissions/
 [6]: /help/
 [7]: /api/latest/key-management/
+[8]: /api/latest/service-accounts/
