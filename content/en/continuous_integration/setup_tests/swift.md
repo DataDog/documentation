@@ -292,8 +292,13 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 Datadog Swift testing framework uses [OpenTelemetry][2] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
-let tracer = DDInstrumentationControl.openTelemetryTracer
-tracer?.activeSpan?.setAttribute(key: "OTelTag", value: "OTelValue")
+import DatadogSDKTesting
+import OpenTelemetryApi
+
+let tracer = DDInstrumentationControl.openTelemetryTracer as? Tracer
+let span = tracer?.spanBuilder(spanName: "ChildSpan").startSpan()
+span?.setAttribute(key: "OTTag2", value: "OTValue2")
+span?.end()
 {{< /code-block >}}
 
 The test target needs to link explicitly with `opentelemetry-swift`.
@@ -545,6 +550,142 @@ Additional Git configuration for physical device testing:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Manual testing API
+
+### Introduction
+If you use XCTests with your swift projects, DatadogSDKTesting framework automatically instruments them and send the results to the Datadog backend. But it also provides a Swift/Objective-C API that allows you to report test results to the backend if you dont use XCTest for your tests. 
+
+The API is based around three concepts: **Test Session**, **Test Suite** and **Test**.
+
+#### Test Session
+
+The Test Session includes the whole process of running the tests, since the user launches the testing process until the last test ends and results are reported. It also includes starting the environment and process where the tests are going to run.
+
+To start a test session just call `DDTestSession.start()` and pass the name of the module or bundle you are going to test
+
+When all your tests have finished just call its `session.end()` method, this will force the library to send all the remaining tests results to the backend.
+
+#### Test Suite 
+
+A Test Suite comprises a set of tests that share common functionality, they can share a common initialization and teardown, and can also share some common variables.
+
+Test suites are created in the test session, just use `session.suiteStart()` with the name you want for your test suite
+
+Also call `suite.end()` when all the related tests in the suites have finished their execution.
+
+#### Test
+
+The Test itself, it always runs inside a suite and must always end if one of these three statuses: pass, fail, or skip. It can optionally have extra information like extra attributes or extra error information
+
+Tests are created in a suite, use `suite.testStart()`to report the start of a test. When a test ends call test one of the predefined status must be set
+
+### API Interface
+
+{{< code-block lang="swift" >}}
+class DDTestSession {
+    /// Starts the session
+    /// - Parameters:
+    ///   - bundleName: name of the module or bundle to test.
+    ///   - startTime: Optional, the time where the session started
+		static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
+  
+    /// Ends the session
+    /// - Parameters:
+    ///   - endTime: Optional, the time where the session ended
+		func end(endTime: Date? = nil)
+  
+    /// Starts a suite in this session
+    /// - Parameters:
+    ///   - name: name of the suite
+    ///   - startTime: Optional, the time where the suite started
+		func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
+}
+
+public class DDTestSuite : NSObject {
+    /// Ends the test suite
+    /// - Parameters:
+    ///   - endTime: Optional, the time where the suite ended
+		func end(endTime: Date? = nil)
+  
+    /// Starts a test in this suite
+    /// - Parameters:
+    ///   - name: name of the suite
+    ///   - startTime: Optional, the time where the test started
+    func testStart(name: String, startTime: Date: Date? = nil) -> DDTest
+}
+
+public class DDTest : NSObject {
+    /// Adds a extra atribute or tag to the test, any number of attributes can be reported
+    /// - Parameters:
+    ///   - key: The name of the attribute, if an atrtribute exists with the name it will be
+    ///     replaced with the new value
+    ///   - value: The value of the attibute, can be a number or a string.
+    func setAttribute(key: String, value: Any)
+  
+    /// Adds error information to the test, only one erros info can  be reported by a test
+    /// - Parameters:
+    ///   - type: The type of error to be reported
+    ///   - message: The message associated with the error
+    ///   - callstack: (Optional) The callstack associated with the error
+    func setErrorInfo(type: String, message: String, callstack: String? = nil)
+  
+  	/// Adds benchmark information to the test, it also changes the test to be of type 
+  	/// benchmark 
+    /// - Parameters:
+    ///   - name: Name of the measure benchmarked
+		///   - samples: Array for values sampled for the measure
+		///   - info: (Optional) Extra information about the benchmark
+    func addBenchmark(name: String, samples: [Double], info: String?)
+  
+    /// Ends the test
+    /// - Parameters:
+    ///   - status: the status reported for this test
+    ///   - endTime: Optional, the time where the test ended
+		func end(status: DDTestStatus, endTime: Date: Date? = nil)
+}
+
+/// Possible status reported by a test
+enum DDTestStatus {
+  /// The test passed
+  case pass 
+
+  ///Test test failed
+  case fail
+  
+  ///The test was skipped
+  case skip
+}
+{{< /code-block >}}
+
+### Code Sample
+
+The following code represents a simple usage of the API:
+
+{{< code-block lang="swift" >}}
+import DatadogSDKTesting
+
+let session = DDTestSession.start(bundleName: "ManualSession")
+
+let suite1 = session.suiteStart(name: "ManualSuite 1") 
+
+let test1 = suite1.testStart(name: "Test 1")
+test1.setAttribute(key: "key", value: "value")
+test1.end(status: .pass)
+
+let test2 = suite1.testStart(name: "Test 2")
+test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
+test2.end(test: test2, status: .fail)
+
+suite1.end()
+
+let suite2 = session.suiteStart(name: "ManualSuite 2") 
+...
+
+...
+session.end() //Always call it at the end so all the test info is flushed to the Datadog
+{{< /code-block >}}
+
 
 ## Further reading
 
