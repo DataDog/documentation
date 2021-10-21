@@ -180,7 +180,7 @@ All tags are optional, and only the provided ones will be used to differentiate 
 
 `runtime.name`
 : Name of the language interpreter or programming runtime.<br/>
-**Examples**: `.NET`, `.NET Core`, `AdoptOpenJDK`, `Oracle Corporation`, `CPython`
+**Examples**: `.NET`, `.NET Core`, `OpenJDK Runtime Environment`, `Java(TM) SE Runtime Environment`, `CPython`
 
 `runtime.version`
 : Version of the runtime.<br/>
@@ -188,7 +188,7 @@ All tags are optional, and only the provided ones will be used to differentiate 
 
 `runtime.vendor`
 : Name of the runtime vendor where applicable. For example, when using a Java runtime.<br/>
-**Examples**: `OpenJDK`, `Oracle`
+**Examples**: `AdoptOpenJDK`, `Oracle Corporation`
 
 `runtime.architecture`
 : Architecture of the runtime.<br/>
