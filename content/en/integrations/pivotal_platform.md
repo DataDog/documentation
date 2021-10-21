@@ -132,7 +132,7 @@ Log collection is not supported for this site.
 
 {{< /site-region >}}
 
-{{< site-region region="us,eu,gov" >}}
+{{< site-region region="us,us5,eu,gov" >}}
 
 ##### Enable
 

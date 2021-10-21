@@ -1,10 +1,10 @@
 ---
 title: TCP Tests
 kind: documentation
-description: Simulate TCP connections on your hosts from specific connections
+description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test
-  - /synthetics/tcP_check
+  - /synthetics/tcp_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -21,7 +21,7 @@ further_reading:
 
 TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
+TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
@@ -62,7 +62,7 @@ TCP tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][5].
+* [**Within your CI/CD pipelines**][3].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -87,9 +87,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -130,7 +130,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][8] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your TCP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -156,9 +156,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][9].
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -166,12 +166,11 @@ If you have access to the [custom role feature][12], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/tcp_tests
+[3]: /synthetics/cicd_testing
 [4]: /synthetics/search/#search
-[5]: /synthetics/cicd_testing
-[7]: /monitors/notifications/?tab=is_alert#notification
-[8]: https://www.markdownguide.org/basic-syntax/
-[9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[10]: /synthetics/settings/#global-variables
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
+[5]: /monitors/notifications/?tab=is_alert#notification
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /synthetics/settings/#global-variables
+[9]: /account_management/rbac/
+[10]: /account_management/rbac#custom-roles

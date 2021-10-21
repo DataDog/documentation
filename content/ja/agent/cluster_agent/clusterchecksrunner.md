@@ -2,10 +2,10 @@
 title: クラスターチェックランナー
 kind: ドキュメント
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
+  - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
     tag: ブログ
     text: Datadog Cluster Agent のご紹介
-  - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
+  - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
     tag: ブログ
     text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
   - link: /agent/cluster_agent/clusterchecks/
@@ -17,7 +17,7 @@ further_reading:
   - link: /agent/kubernetes/integrations/
     tag: Documentation
     text: カスタムインテグレーション
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'
+  - link: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting
     tag: Github
     text: Datadog Cluster Agent のトラブルシューティング
 ---
@@ -42,7 +42,7 @@ Operator を使用することで、[この例][1]にあるような単一のマ
 kubectl apply -f datadog-agent-with-dca-clusterchecksrunner.yaml
 ```
 
-コンフィギュレーションが正常に適用された場合は以下のような結果が表示されます。
+以下のような結果が表示された場合、コンフィギュレーションは正常に適用されています。
 
 ```
 datadogagent.datadoghq.com/datadog created

@@ -6,7 +6,7 @@ aliases:
   - /ja/logs/dynamic_volume_control
   - /ja/logs/indexes/
 further_reading:
-  - link: '/logs/explorer/#visualize'
+  - link: /logs/explorer/#visualize
     tag: ドキュメント
     text: ログ分析の実行
   - link: /logs/log_configuration/processors
@@ -15,7 +15,7 @@ further_reading:
   - link: /logs/log_configuration/parsing
     tag: ドキュメント
     text: パースの詳細
-  - link: 'https://www.datadoghq.com/blog/logging-without-limits/'
+  - link: https://www.datadoghq.com/blog/logging-without-limits/
     tag: ブログ
     text: Logging without Limits*
 ---
@@ -148,7 +148,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 [3]: /ja/logs/explorer/patterns/
 [4]: /ja/logs/explorer/analytics/
 [5]: /ja/logs/explorer/analytics/#dashboard
-[6]: /ja/monitors/monitor_types/log/
+[6]: /ja/monitors/create/types/log/
 [7]: /ja/logs/explorer/facets/#the-index-facet
 [8]: /ja/logs/live_tail/
 [9]: /ja/logs/logs_to_metrics/

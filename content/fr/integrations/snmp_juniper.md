@@ -14,13 +14,14 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/snmp_juniper/README.md'
+  - https://github.com/DataDog/integrations-core/blob/master/snmp_juniper/README.md
 display_name: Juniper Networks
 draft: false
 git_integration_title: snmp_juniper
 guid: 62f074dc-8b6b-466d-bca2-175194221546
 integration_id: snmp-juniper
 integration_title: Juniper Networks
+integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

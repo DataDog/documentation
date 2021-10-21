@@ -214,13 +214,15 @@ Many organizations use [Azure Resource Management (ARM) templates][24] to implem
 
 ## Troubleshooting
 
-### If you are missing metrics and metadata in the APM trace panel and service page
+### If your apps are identified as being misconfigured in the Serverless View and/or you are missing corresponding metrics for your traces
 
-It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs on the Datadog site, as well as to avoid broken or empty screens. To fix this:
+It is likely that you do not have the Azure integration configured to monitor your application. Proper configuration improves your ability to correlate metrics, traces, and logs in the Datadog platform. Without the Azure integration configured, you are missing critical context for your traces. To fix this:
 
-1. Ensure you have installed the [Azure integration][9] for the Azure subscription where your application is running.
+1. Go to the Azure integration tile.
 
-2. Ensure that any App Service Plan filtering rules you applied include the App Service Plan where the app is running. Tags on the app itself are not used for filtering.
+2. Ensure you have installed the [Azure integration][9] for the Azure subscription where your application is running.
+
+3. Ensure that any App Service plan filtering rules you have applied include the App Service plan where the app is running. If an App Service plan is not included, all apps and functions hosted on it are also not included. Tags on the app itself are not used for filtering by Datadog.
 
 
 ### If APM traces are not appearing in Datadog
