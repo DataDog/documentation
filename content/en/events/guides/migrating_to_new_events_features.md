@@ -32,7 +32,7 @@ This guide describes how to migrate your organization’s event monitors and das
 
 5. **If you have SLOs based on event monitors**, update their definitions to point to the new monitors.
 
-6. **Contact Support to disable old pipeline.** [Let Support know][3] that you have finished migrating, and the old pipeline will be turned off. After that, all queries are routed to the new backend, and old-style queries return errors.
+6. **Contact Support to disable the old pipeline.** [Let Support know][3] that you have finished migrating, and the old pipeline will be turned off. After that, all queries are routed to the new backend, and old-style queries return errors.
 
 ## Details of the changes
 
@@ -55,36 +55,46 @@ Some status values have changed:
 
 #### Event query syntax examples before and after 
 
-Show events from GitHub or Chef
-: Legacy syntax</br>
-`sources:github,chef`
-: New syntax </br>
-`source:(github OR chef)`
+**Show events from GitHub or Chef**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>sources:github,chef</code></td>
+<td>New syntax </br>
+<code>source:(github OR chef)</code></td>
+</tr></tbody></table>
 
-Show events tagged with `env-prod`
-: Legacy syntax</br>
-`tags:env-prod`
-: New syntax </br>
-`tags:env-prod`
+**Show events tagged with `env-prod`**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>tags:env-prod</code></td>
+<td>New syntax </br>
+<code>tags:env-prod</code></td>
+</tr></tbody></table>
 
-Show events tagged with `#env-prod` or `#db`
-: Legacy syntax</br>
-`tags:env-prod,db`, `tags:env-prod OR db`
-: New syntax </br>
-`tags:(env-prod OR db)`
+**Show events tagged with `#env-prod` or `#db`**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>tags:env-prod,db</code>, <code>tags:env-prod OR db</code></td>
+<td>New syntax </br>
+<code>tags:(env-prod OR db)</code></td>
+</tr></tbody></table>
 
-Show events tagged with `#security-group:sg-123` and `#role:common-node`
-: Legacy syntax</br>
-`tags:security-group:sg-123 AND role:common-node`
-: New syntax </br>
-`tags:(security-group:sg-123 AND role:common-node)`
+**Show events tagged with `#security-group:sg-123` and `#role:common-node`**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+<code>tags:security-group:sg-123 AND role:common-node</code></td>
+<td>New syntax </br>
+<code>tags:(security-group:sg-123 AND role:common-node)</code></td>
+</tr></tbody></table>
 
-Use wildcards to search for prefixes and suffixes
-: Legacy syntax</br>
-Not available
-: New syntax </br>
-`*web` matches all event messages ending with `web`</br>
-`source:amazon*` matches all events that source starts with `amazon`
+**Use wildcards to search for prefixes and suffixes**
+<table><tbody><tr>
+<td>Legacy syntax</br>
+Not available</td>
+<td>New syntax </br>
+<code>*web</code> matches all event messages ending with <code>web</code></br>
+<code>source:amazon*</code> matches all events that source starts with <code>amazon</code></td>
+</tr></tbody></table>
 
 
 ### Event monitors
@@ -116,7 +126,7 @@ EC2 Instance marked for maintenance
 : Legacy syntax </br>
 `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
 : New syntax </br>
-`events("Upcoming AWS maintenance").rollup("count").last("1d") < 1`
+`events("Upcoming AWS maintenance event").rollup("count").last("2d") >= 1`
 
 Zabbix or Prometheus has triggered an alert for a service today
 : Legacy syntax </br>
@@ -139,7 +149,7 @@ Legacy Event Monitors do not support cardinality rollup.
   2. Select the tag that you wish to add as a facet. 
   3. Click **Add**.
 
-* **You can group by up to 4 facets.** (Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`).
+* **You can group by up to 4 facets.** (Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`.
   * One facet results in a limit of 1000 top values. 
   * Two facets results in a limit of 30 top values per facet (at most 900 groups)
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
