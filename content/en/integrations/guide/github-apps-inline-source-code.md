@@ -6,6 +6,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/integrations/github-apps/"
   tag: "Integration"
   text: "GitHub Apps Integration"
+- link: "https://docs.datadoghq.com/integrations/guide/github-apps-links-to-git/"
+  tag: "Guide"
+  text: "Setting Up Links to Git in Datadog"
 ---
 
 ## Overview
@@ -24,12 +27,15 @@ If you are a GitHub SaaS user, install Datadog's [GitHub Apps][1] to directly in
 
 #### Error Tracking 
 
-In [Error Tracking][2], you can access the repository containing the error to resolve issues more quickly.
+In [Error Tracking][2], you can authorize your GitHub App to access the repository containing the error and display an inline code snippet.
 
 1. Navigate to **APM** > **Error Tracking**.
 2. Click on an issue. The **Issue Details** panel appears to the right.
 3. Under **Latest available errors**, hover over a frame. The **View** button appears to the right. 
 4. Click on a frame to expand the code snippet containing lines of your source code. 
+5. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error. 
+
+{{< img src="integrations/guide/github_apps/inline-code-snippet.png" alt="Inline code snippet" style="width:90%;">}}
 
 ## Configuration
 
