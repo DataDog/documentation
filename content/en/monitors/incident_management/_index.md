@@ -120,7 +120,7 @@ Click on “Declare Incident” to finish creating your incident.
 
 An incident’s status can be updated directly on the indicdent's Overview page or from Slack within the dedicated incident channel. To update an incident from its Slack channel, use this slash command to open the update modal: `/datadog incident update`
 
-You can also update the impact section to specify if there was customer impact, the start/end times of the impact, and whether or not it’s still active. This section also requires a description of the scope of impact to be completed.
+Update the impact section to specify customer impact, the start and end times of the impact, and whether or not the incident is still active. This section also requires a description of the scope of impact to be completed.
 
 In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels (if not using the Datadog Slack App, video conferencing, and attached postmortem (if one has been added).
 
