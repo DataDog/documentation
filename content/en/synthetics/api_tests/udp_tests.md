@@ -2,10 +2,6 @@
 title: UDP Tests
 kind: documentation
 description: Simulate UDP connections on your hosts
-aliases:
-  - /synthetics/udp_test
-  - /synthetics/udp_check
-  - /synthetics/udp_checks
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
