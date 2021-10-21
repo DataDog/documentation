@@ -2,6 +2,8 @@
 title: Getting Started with Session Replay
 kind: documentation
 description: Guide for enabling Session Replay and how to set privacy options
+aliases:
+  - /real_user_monitoring/guide/session-replay-getting-started
 further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
