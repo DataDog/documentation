@@ -2426,7 +2426,7 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 106
-  - name: Websocket
+  - name: WebSocket
     url: synthetics/api_tests/websocket_tests
     parent: api_tests
     weight: 107

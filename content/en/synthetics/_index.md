@@ -22,13 +22,13 @@ further_reading:
 
 <br/>
 
-Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `TCP`, `DNS`, `UDP`, `ICMP`, and `Websocket`) in a controlled and stable way, alerting you about faulty behavior such as regression, broken feature(s), high response time, and unexpected status code. 
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `TCP`, `DNS`, `UDP`, `ICMP`, and `WebSocket`) in a controlled and stable way, alerting you about faulty behavior such as regression, broken feature(s), high response time, and unexpected status code. 
 
 With **end-to-end testing in production and CI environments**, your development teams can proactively ensure that no defective code makes it to production. **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [TCP test][5], [DNS test][6], [UDP test][7], [ICMP test][8], and [Websocket test][9]. 
+API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [TCP test][5], [DNS test][6], [UDP test][7], [ICMP test][8], and [WebSocket test][9]. 
 
 {{< img src="synthetics/api_test.png" alt="API tests" style="width:100%;">}}
 
