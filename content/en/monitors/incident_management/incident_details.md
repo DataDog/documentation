@@ -35,7 +35,7 @@ By default, all incidents have the following properties:
 
 Additional property fields can be configured in your [Incident Settings][5] by using the `<KEY>:<VALUE>` pairs reporting in your Datadog metric tags. Assigning values to an incident's properties makes it easier to search for subsets of incidents on the [Incident Homepage][6] and to form queries when using [Incident Management Analytics][7].
 
-If your incident is customer-facing, you can specify the details of the impact below your Properties under the Impact heading by:
+If your incident is customer-facing, specify the details of the impact below the Properties section under the Impact heading:
 
 1. Selecting *Yes* for `Customer Impact`
 2. Specifying a start date and time for the impact
