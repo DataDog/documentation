@@ -46,7 +46,7 @@ If your incident is customer-facing, specify the details of the impact below the
 
 {{< img src="monitors/incidents/incident_timeline.jpeg" alt="Incident Timeline"  style="width:80%;">}}
 
-The Incident Timeline is the primary source of truth for the history of work done during an incident. As actions are performed, new cells will be added to the Timeline in chronological order to capture what changes were made, who they were made by and when they were made. 
+The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
 
 Each cell has its own Content Type that indicates what kind of information the cell contains. The Content Types are:
 
