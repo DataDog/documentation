@@ -162,7 +162,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 There are some special tags that are used to identify the configuration of the environment where tests run, which include OS, runtime and device information (where applicable). When the same test for the same commit runs in more than one configuration (for example, in both Windows and Linux machines), they are treated as two different tests when it comes to failure and flakiness detection.
 
-This information is automatically collected by the tracer when instrumenting tests natively. However, when uploading JUnit XML reports, you can also specify them using the `--tags` parameter, or by using the `DD_TAGS` environment variable.
+You can specify these special tags using the `--tags` parameter when calling `datadog-ci junit upload`, or by setting the `DD_TAGS` environment variable.
 
 All tags are optional, and only the provided ones will be used to differentiate between environment configurations.
 
