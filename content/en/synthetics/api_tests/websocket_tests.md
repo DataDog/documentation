@@ -53,20 +53,7 @@ After choosing to create an `WebSocket` test, define your test's request.
 4. **Name** your WebSocket test.
 5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
-### Select locations
-
-Select the **Locations** to run your UDP test from. UDP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network.
-
-### Specify test frequency
-
-WebSocket tests can run:
-
-* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your WebSocket test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -83,6 +70,21 @@ Select the response preview directly or click **New Assertion** to create an ass
 (websocket assertions)
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your WebSocket test from. WebSocket tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network.
+
+### Specify test frequency
+
+WebSocket tests can run:
+
+* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your WebSocket test.
+
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
+
+* [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
+* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
 
