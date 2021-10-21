@@ -52,5 +52,5 @@ Then, go to the _Selected Audit Entries Integration Configuration_ section, loca
 
 Need help? Contact [Datadog support][2].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /help/
