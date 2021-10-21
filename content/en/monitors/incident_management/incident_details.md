@@ -26,7 +26,7 @@ The global header provides access to the [Status and Severity][2] selectors, and
 
 Use the Overview section to specify an incident's properties and define customer impact. 
 
-By default, all incidents will have the following four Properties:
+By default, all incidents have the following properties:
 
 * Root Cause
 * Services
