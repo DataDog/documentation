@@ -65,7 +65,7 @@ Add responder notes directly to the timeline using the text box just underneath 
 
 For graph cells specifically, graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][8]. When a graph cell is added to the timeline, it has full interactive hover states as found in Dashboards, Notebooks, and other pages. After 24 hours of being added to the timeline, the graphs are replaced with static images capturing what the graph was displaying. This is to ensure that graphs that are displaying short retention data have backup images captured even after the live data in the graphs has expired.
 
-By default, Timeline cells will be sorted in `Oldest First` order, but this can be changed to `Newest First` using the button at the top of the Timeline.
+By default, timeline cells are sorted in `oldest first` order, but this can be changed to `newest first` using the button at the top of the timeline.
 
 ## Remediation Section
 
