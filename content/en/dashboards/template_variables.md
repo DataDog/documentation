@@ -52,6 +52,8 @@ After creating a template variable, Datadog displays the number of sources using
 Template variables work with log, APM, and RUM widgets because metrics, logs, APM, and RUM share the same tags.
 Additionally, you can define log, APM, and RUM template variables based on [log][2], APM, or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
 
+On log, APM, and RUM widgets, you can use wildcards in the middle of a value (for example, `eng*@example.com`) or use multiple wildcards in a value (for example, `*prod*`).
+
 **Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM, and RUM widgets.
 
 ### Saved views
@@ -84,6 +86,8 @@ When creating or editing a widget, existing template variables display as option
 After the widget is saved, the value of the template variable is the one selected from the top of your dashboard:
 
 {{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" style="width:75%;">}}
+
+To query based on just a prefix or suffix, use a wildcard character (`*`) at the beginning or end of the template variable value. For example, find all regions that begin with `us` using `us*`, or all emails under the `example.com` domain with `*@example.com`.
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 

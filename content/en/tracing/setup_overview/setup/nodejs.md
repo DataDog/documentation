@@ -131,7 +131,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
     DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
     ```
 
-{{< site-region region="us3,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

@@ -1,20 +1,20 @@
 ---
-title: Adding Custom Spans to Pipeline Traces
+title: Adding Custom Commands to Pipeline Traces
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/setup_pipelines/custom_spans/"
+    - link: "/continuous_integration/setup_pipelines/custom_commands/"
       tag: "Documentation"
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
-Custom spans provide a way to trace individual commands in your CI pipelines, allowing you to measure the time your command takes without taking into account any setup or teardown actions that the job might have (for example, downloading Docker images or waiting for an available node in a Kubernetes-based infrastructure). These spans appear as part of the pipeline's trace:
+{{< site-region region="us,eu,us3" >}}
+Custom commands provide a way to trace individual commands in your CI pipelines, allowing you to measure the time your command takes without taking into account any setup or teardown actions that the job might have (for example, downloading Docker images or waiting for an available node in a Kubernetes-based infrastructure). These spans appear as part of the pipeline's trace:
 
-{{< img src="ci/ci-custom-spans.png" alt="Details for a single pipeline with custom spans" style="width:100%;">}}
+{{< img src="ci/ci-custom-spans.png" alt="Details for a single pipeline with custom commands" style="width:100%;">}}
 
 ## Compatibility
 
-Custom spans work with the following CI providers:
+Custom commands work with the following CI providers:
 
 - Jenkins with Datadog plugin >= v3.2.0
 - CircleCI
@@ -53,18 +53,26 @@ DATADOG_API_KEY=<api_key> DATADOG_SITE=datadoghq.eu datadog-ci trace \
   echo "Hello World"
 {{< /code-block >}}
 {{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="bash" >}}
+DATADOG_API_KEY=<api_key> DATADOG_SITE=us3.datadoghq.com datadog-ci trace \
+--name "Greet" \
+-- \
+echo "Hello World"
+{{< /code-block >}}
+{{< /site-region >}}
 
 ## Configuration settings
 
 These options are available for the `datadog-ci trace` command:
 
 `--name`
-: Display name of the custom span.<br/>
+: Display name of the custom command.<br/>
 **Default**: same value as `<command>`<br/>
 **Example**: `Wait for DB to be reachable`
 
 `--tags`
-: Key-value pairs in the form `key:value` to be attached to the custom span (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
+: Key-value pairs in the form `key:value` to be attached to the custom command (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
 **Environment variable**: `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `team:backend`<br/>
@@ -98,6 +106,6 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us5,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) does not support this feature.
 {{< /site-region >}}
