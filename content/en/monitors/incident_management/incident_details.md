@@ -18,7 +18,7 @@ Every incident in Datadog has its own Incident Details page where you can manage
 
 {{< img src="monitors/incidents/incident_global_header.jpeg" alt="Incident Global Header"  style="width:80%;">}}
 
-The Global Header gives you quick access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the Resolved status, an option will appear in the header for you to generate a Postmortem Notebook using a [Postmortem Template][4]. Postmortem Templates can be configured in your Incident Settings to predefine the structure and content of your postmortems so that you can create meaningful postmortems in a matter of seconds.
+The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][4]. Configure your postmortem templates in Incident Settings to predefine the structure and content of your postmortems.
 
 ## Overview Section
 
