@@ -56,7 +56,9 @@ To remove a Datadog API key or client token, navigate to the list of keys or tok
 
 To add a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][5] to create application keys, click **New Key**.
 
-To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key with the `scopes` attribute. Scopes can be specified for application keys owned by [the current user][7] or a [service account][8]. If this field is unspecified, application keys by de fault have all the same scopes as the user who created them. 
+<div class="alert alert-info"> Specifying scopes for application keys is a feature currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> to enable support for scoped application keys for your organization. </div>
+
+To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key. Scopes can be specified for application keys owned by [the current user][7] or a [service account][8]. If this field is unspecified, application keys by default have all the same scopes as the user who created them. 
 
 **Notes:** 
 * Application key names cannot be blank.
