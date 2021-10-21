@@ -18,4 +18,5 @@ Integration Guides:
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag="SQL Server" >}}Collect SQL Server Custom Metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/github-apps-inline-source-code" tag="GitHub Apps" >}}Setting Up Inline Source Code and Links to Git in Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
