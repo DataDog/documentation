@@ -19,5 +19,4 @@ Integration Guides:
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Freshservice Tickets using Webhooks{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Monitoring HCP Consul with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/github-apps-inline-source-code" tag="GitHub Apps" >}}Setting Up Inline Source Code in Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/github-apps-links-to-git" tag="GitHub Apps" >}}Setting Up Links to Git in Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
