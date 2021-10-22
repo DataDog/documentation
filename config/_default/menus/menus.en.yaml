@@ -1469,9 +1469,9 @@ main:
     identifier: incidents_settings
     weight: 802
   - name: Incident Management Analytics
-    url: monitors/incident_management/incident_management_analytics
+    url: monitors/incident_management/analytics
     parent: incidents
-    identifier: incidents_management_analytics
+    identifier: analytics
     weight: 803
   - name: Datadog Clipboard
     url: monitors/incident_management/datadog_clipboard
