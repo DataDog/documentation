@@ -105,7 +105,7 @@ log = structlog.get_logger()
 {"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
-**注**: [Datadog ログインテグレーション][3]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確実にする必要があります。詳しくは、[このトピックの FAQ][4] を参照してください。
+**注**: [Datadog ログインテグレーション][3]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされ、[トレースリマッパー][4]を使って再マップされていることを確実にする必要があります。詳細については、[トレース ID パネルに相関ログが表示されないのはなぜですか？][5]を参照してください。
 
 [Python ロギングのドキュメントを参照][3]して Python ログインテグレーションを適切に構成し、Python ログが自動的にパースされるようにしてください。
 
@@ -116,4 +116,5 @@ log = structlog.get_logger()
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: /ja/tracing/visualization/#trace
 [3]: /ja/logs/log_collection/python/#configure-the-datadog-agent
-[4]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[4]: /ja/logs/log_configuration/processors/#trace-remapper
+[5]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
