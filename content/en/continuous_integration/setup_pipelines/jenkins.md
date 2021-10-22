@@ -264,6 +264,58 @@ pipeline {
 }
 {{< /code-block >}}
 
+## Set Git information manually
+
+The Jenkins plugin uses environment variables to determine the git information. However, these environment variables are not always set
+automatically due to depends on the Git plugin that is being used in the pipeline.
+
+If the Git information is not detected automatically, you can set the following environment variables manually.
+
+| Environment Variable            | Description                                                              | Example                                    |
+|---------------------------------|--------------------------------------------------------------------------|--------------------------------------------|
+| `DD_GIT_REPOSITORY_URL`         | The Git repository URL of your service                                   | `https://github.com/my-org/my-repo.git`    |
+| `DD_GIT_BRANCH`                 | The Git branch name.                                                     | `main`                                     |
+| `DD_GIT_TAG`                    | The Git tag of the commit (if any).                                      | `0.1.0`                                    |
+| `DD_GIT_COMMIT_SHA`             | The Git commit in the hex 40 chars length form                           | `faaca5c59512cdfba9402c6e67d81b4f5701d43c` |
+| `DD_GIT_COMMIT_MESSAGE`         | The Git commit message.                                                  | `Initial commit message`                   |
+| `DD_GIT_COMMIT_AUTHOR_NAME`     | The name of the author of the Git commit.                                | `John Doe`                                 |
+| `DD_GIT_COMMIT_AUTHOR_EMAIL`    | The email of the author of the Git commit.                               | `john@doe.com`                             |
+| `DD_GIT_COMMIT_AUTHOR_DATE`     | The date when the author submitted the Git commit in ISO 8601 format.    | `2021-08-16T15:41:45.000Z`                 |
+| `DD_GIT_COMMIT_COMMITTER_NAME`  | The name of the committer of the Git commit.                             | `Jane Doe`                                 |
+| `DD_GIT_COMMIT_COMMITTER_EMAIL` | The email of the committer of the Git commit.                            | `jane@doe.com`                             |
+| `DD_GIT_COMMIT_COMMITTER_DATE`  | The date when the committer submitted the Git commit in ISO 8601 format. | `2021-08-16T15:41:45.000Z`                 |
+
+**Note:** These variables are optional, but if they are set, they take precedence over the same Git information set by other Jenkins plugins.
+
+If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
+
+An example of usage:
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        script {
+          def gitVars = git url:'https://github.com/my-org/my-repo.git', branch:'some/feature-branch'
+
+          // Setting Git information manually via environment variables.
+          env.DD_GIT_REPOSITORY_URL=gitVars.GIT_URL
+          env.DD_GIT_BRANCH=gitVars.GIT_BRANCH
+          env.DD_GIT_COMMIT_SHA=gitVars.GIT_COMMIT
+        }
+      }
+    }
+    stage('Test') {
+      steps {
+        // Execute the rest of the pipeline.
+      }
+    }
+  }
+}
+{{< /code-block >}}
+
 ## Customization
 
 ### Setting custom tags for your pipelines
