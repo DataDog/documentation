@@ -14,7 +14,7 @@ Use [Incident Settings][1] to customize aspects of the Incident Management exper
 
 ### Information
 
-The Information subsection of the Incident Settings is where you go to define your organization's Severity Levels, Status Levels, and Declare Incident Helper text.
+The Information subsection of Incident Settings is used to define your organization's severity levels, status levels, and declare incident helper text.
 
 {{< img src="monitors/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings" style="width:80%;">}}
 
