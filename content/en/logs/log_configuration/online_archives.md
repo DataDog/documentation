@@ -12,11 +12,11 @@ further_reading:
   text: "Exclusion Filters"
 ---
 <div class="alert alert-warning">
-  Online Archives is in private beta. To request access, contact <a href="/help/">Datadog Support</a>.</div>
+  Online Archives is in limited availibility. To request access, contact <a href="/help/">Datadog Support</a>.</div>
 
-Online Archives is an observability warehousing solution that provides 15 months of storage, live query, and analytics capabilities for your logs in Datadog.
+Online Archives is an log warehousing solution that provides 15 months of storage, live query, and analytics capabilities for your logs in Datadog.
 
-Security, Compliance, and Engineering teams often require access to data over an extended time. For example, it can be weeks, if not months, for a security breach to be detected, and legal compliance reviews and audit processes may require log information stretching back more than a year. Engineering teams conducting post-mortem analysis or troubleshooting support issues regarding a breach may need to look back at log data from many months before the incident itself. 
+Security, Compliance, and Engineering teams ofen need to query logs over large time windows. Security breaches are often detected after weeks if not months of the incident and legal compliance reviews and audit processes may require logs stretching back more than a year. Engineering teams conducting high cardinality YoY long term analysis on millions of users are better served with logs over straight metrics. 
 
 Online Archives allows you to retain and search all of your log data for 15 months. Security, Compliance, and Engineering teams can address use cases requiring historical investigation and analysis, like security audits, or analyze extra high-cardinality trends over long periods and correlate system forensics from metrics with application and user behavior from log data.
 
@@ -34,17 +34,21 @@ Configure Online Archives in the [Logs Index Configuration][3] page:
 
 {{< img src="logs/log_configuration/online_archives/enabling.png" alt="How to enable logs archives" style="width:100%;">}}
 
-## Searching and Analytics in Online Archives
+## Searching in Online Archives
 
 Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker.
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}
 
-[Search][4] by typing in queries or switch to Analytics by either selecting **Group into Fields** or **Visualize as Timeseries/Top List/Table**. Setting the storage type to **Online Archives** lets you query Online Archives instead of indexes. You can switch back to **indexes** at any time.
+[Search][4] by typing in queries in the search bar. 
 
-**Note:** Patterns and Transactions are not available in Online Archives.
+## Analytics in Online Archives
 
-## Selectively send logs to Online Archives and indexes
+Switch to Analytics by either selecting **Group into Fields** or **Visualize as Timeseries/Top List/Table**. 
+
+Setting the storage type to **Online Archives** lets you query Online Archives instead of indexes. You can switch back to **Indexes** at any time.
+
+## Selectively send logs to Online Archives and Indexes
 
 You can configure the setup to send certain logs to Online Archives while others go to an index based on log attributes and tags. Mix and match logs between storage types depending upon your logging use cases and retention strategy.
 
@@ -52,7 +56,7 @@ To configure storage types, use index filters that apply to Online Archives, and
 
 Here are examples of different log retention strategies and how to implement them:
 
-### Retain all logs tagged with `team:security` in Online Archives but not in indexes
+### Security team wants to retain thier logs in only Online Archives and none in Indexes
 
 1. Create an index for security logs with filter `team:security`.
 2. Enable Online Archives for this index.
@@ -62,13 +66,16 @@ Here are examples of different log retention strategies and how to implement the
 
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes. 
 
-### Retain all logs in Online Archives and indexes except debug logs sampled at a percentage
+### Engineering team wants to sample Debug logs in Indexes while retaining all logs in Online Archives
 
 1. Create an index for all logs with filter `*`.
 2. Enable Online Archives for this index.
 3. Add an exclusion filter on the index `status:Debug` with an exclusion percentage set at 90%. This exclusion filter only applies to the index.
 
 {{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from your online archive" style="width:100%;">}}
+
+**Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives yet.
+**Note:** Online Archives is only available in Datadog US1 region atthe moment.
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
