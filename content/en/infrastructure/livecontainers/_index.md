@@ -183,7 +183,7 @@ The **Resource Utilization** tab is to the right of to the **Cluster Map** tab.
 
 {{< img src="infrastructure/livecontainers/resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
-This tab displays your CPU and memory usage over time. This information helps you better understand the resource utilization of your current workload, detect where resources may be over-provisioned or under-provisioned, and better allocate and manage your resources.
+This tab displays your CPU and memory usage over time. This information helps you detect where resources may be over- or under-provisioned.
 
 Click on any row in the table to view informatiion about a specific resource in a side panel.
 
