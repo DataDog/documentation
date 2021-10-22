@@ -70,7 +70,7 @@ By default, timeline cells are sorted in `oldest first` order, but this can be c
 
 {{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section" style="width:80%;">}}
 
-The Remediation Section is where you can store any documents or resources that were relevant to the remediation process of an incident, as well as an area to track key tasks for the remediation process. 
+The Remediation section is place to store any documents or resources that are relevant to the remediation process of an incident, as well as an area to track key tasks for the remediation process. 
 
 Documents can be added by pasting the document URL and giving the link a human-readable name for quick access.
 
