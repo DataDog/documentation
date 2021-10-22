@@ -97,7 +97,7 @@ To create a manual notification:
 
 The Notifications section is separated into lists: Drafts and Sent.
 
-Both lists will display: 
+Both lists display:
 
 1. The (intended) recipients of a notification 
 2. The contents of the notification's message (as well as any renotification messages that were sent)
