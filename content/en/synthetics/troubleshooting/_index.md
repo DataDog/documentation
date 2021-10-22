@@ -138,6 +138,10 @@ This might mean your private location is unable to reach the endpoint your API t
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:100%;" >}}
 
+### I’m seeing `invalid mount config for type "bind": source path must be a directory` when attempting to run a private location.
+
+This occurs when a user attempts to mount a single file in a Windows-based container, which is [currently not supported][15]. Make sure that the source of the bind mount is a local directory instead.
+
 ## CI/CD Testing
 
 ### I'm not seeing any CI metadata in my CI Results Explorer
@@ -162,3 +166,4 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
 [14]: /synthetics/cicd_testing/?tab=apitest#cli-usage
+[15]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
