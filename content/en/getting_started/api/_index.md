@@ -112,7 +112,7 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 - All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
 
 [1]: https://www.postman.com/
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/

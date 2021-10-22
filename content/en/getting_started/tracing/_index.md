@@ -199,7 +199,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: https://app.datadoghq.com/account/settings#api
+[7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://app.datadoghq.com/apm/docs
