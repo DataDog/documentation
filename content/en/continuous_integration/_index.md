@@ -8,6 +8,9 @@ further_reading:
     - link: "/continuous_integration/explore_tests/"
       tag: "Documentation"
       text: "Start exploring tests data to find and fix problem tests"
+    - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
+      tag: "Blog"
+      text: "Monitor your CircleCI environment with Datadog"
 ---
 
 <div class="alert alert-info"><p>CI Visibility is in beta. There are no billing implications for tracing pipelines and tests during this period.</p>
