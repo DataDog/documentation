@@ -76,7 +76,7 @@ Documents can be added by pasting the document URL and giving the link a human-r
 
 Incident tasks are created directly in the Remediation section, as well as through Datadog's [Slack integration][10]. 
 
-From the Remediation Section, type in the description of your task in the creation textbox. To assign a task to a Datadog user, type `@` in the description textbox or by assigning it in the `Assignees` column after the task has been created. An Incident Task can have more than one assignee. After a task has been created, it can also be assigned a due date. 
+From the Remediation section, type in the description of your task in the creation text box. To assign a task to a Datadog user, type `@` in the description text box or by assigning it in the `Assignees` column after the task has been created. An incident task can have more than one assignee. After a task has been created, it can also be assigned a due date. 
 
 As work for different tasks is finished, individual tasks can be marked as completed by clicking the checkbox to the left of the task's description. If you have a large number of tasks, you can filter them down by searching for key words or by hiding completed tasks from view.
 
