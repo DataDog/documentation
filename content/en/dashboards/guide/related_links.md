@@ -3,6 +3,7 @@ title: Make dashboards widgets an entry point of your workflows with related lin
 kind: guide
 aliases:
   - /logs/guide/custom-links
+  - /logs/guide/custom_links
 further_reading:
   - link: /dashboards/widgets/
     tag: Documentation
@@ -13,15 +14,14 @@ further_reading:
 ## Overview
 
 Whether they are part of your [runbooks][1], attached to a [monitor notification][2] or simply a [screenboard][3] you always keep an eye on, 
-you likely consider some of your Dashboards as a homebase for troubleshooting.
+some of your Dashboards are likely a homebase for troubleshooting.
 
 Dashboards are designed to perform first assessment across multiple datasources that your consider relevant for a specific context. 
 
 *insert a screenshot of basic dashboards interactions (brush to zoom in, click to filter template variables)*
 
 However some investigations require a deeper dive into specialised pages in the Datadog application, 
-where built-in features would make a difference to spot the root cause of a problem or the core answer to a specific question.
-
+where built-in features would make a difference to spot the root cause of a problem or the core answer to a specific question. 
 It's as well possible that the next action to take in your workflow is somewhere in a third-party application.
 
 
@@ -37,16 +37,36 @@ In this guide, you'll learn:
 ## Basics of the Feature
 
 
+
 ## Creating links to third-part applications
 
-### Linking to your AWS Console
+### Linking your host Dashboard to your EC2 instance summary in AWS Console
 
-### Linking to your Customer Profile page in your CRM
 
+EC2 instance summaries links follow that pattern
+`https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`
+
+
+`https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`
+
+{{< img src="dashboards/guide/related_links/ec2_query.png" alt="EC2 Query" style="width:80%;" >}}
+
+{{< img src="dashboards/guide/related_links/ec2-interaction.png" alt="Link Interaction" style="width:80%;" >}}
+
+
+### Linking to your Customer Support Center
+
+
+`https://acme.zendesk.com/agent/search/1?type=user&q=shane%40doe.com`
+
+https://acme.zendesk.com/agent/search/1?type=user&q={{@usr.email.value}}
 
 ## Overriding native links
 
 ### Jump to the log explorer in the context of a specific saved view
+
+https://app.datadoghq.com/logs?saved_view=305130&query=@usr.name:Bruce.Brown
+
 
 ### Reinterprete a value from another context 
 
