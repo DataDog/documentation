@@ -93,7 +93,7 @@ To create a manual notification:
 3. Select a [Message Template][12].
 4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`. 
    - Template variables are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.
-5. Send your notification or save it as a draft 
+5. Send your notification or save it as a draft.
 
 The Notifications Sections is separated into lists: Drafts and Sent.
 
