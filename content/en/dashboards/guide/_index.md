@@ -11,7 +11,7 @@ aliases:
     {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom Time Frames{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/custom_links" >}}Custom Links{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/related_links" >}}Custom Links{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
