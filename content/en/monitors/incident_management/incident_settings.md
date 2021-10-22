@@ -34,7 +34,7 @@ Use status level settings to:
 1. Customize the descriptions of the statuses.
 2. Choose whether to enable the optional `Completed` status.
 
-**Note:** Deleting the `Completed` status will not automatically update any incidents that are already in the `Completed` status, nor will it automatically update any [Incident Management Analytics][2] queries that explicitly reference it. Any Notification Rule that references the `Completed` status will also be disabled as they are no longer valid.
+**Note**: Deleting the `Completed` status does not automatically update any incidents that are already in the `Completed` status, nor does it automatically update any [Incident Management Analytics][2] queries that explicitly reference it. Any notification rule that references the `Completed` status is disabled as they are no longer valid.
 
 {{< img src="monitors/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings" style="width:80%;">}}
 
