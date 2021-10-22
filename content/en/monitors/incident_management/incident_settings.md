@@ -29,7 +29,7 @@ Use severity level settings to:
 
 {{< img src="monitors/incidents/status_settings.jpeg" alt="Incident Status Level Settings" style="width:80%;">}}
 
-For the Status Levels settings, you are able to:
+Use status level settings to:
 
 1. Customize the descriptions of the statuses
 2. Choose whether to enable the optional `Completed` status
