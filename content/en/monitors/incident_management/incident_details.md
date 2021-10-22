@@ -95,7 +95,7 @@ To create a manual notification:
    - Template variables are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.
 5. Send your notification or save it as a draft.
 
-The Notifications Sections is separated into lists: Drafts and Sent.
+The Notifications section is separated into lists: Drafts and Sent.
 
 Both lists will display: 
 
