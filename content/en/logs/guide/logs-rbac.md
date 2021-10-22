@@ -394,7 +394,7 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 [6]: /account_management/rbac/permissions?tab=ui#logs_write_archives
 [7]: /account_management/rbac/permissions?tab=ui#logs_public_config_api
 [8]: https://app.datadoghq.com/access/users
-[9]: https://app.datadoghq.com/account/settings#api
+[9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /account_management/api-app-keys/
 [11]: /api/v2/roles/#list-permissions
 [12]: /account_management/rbac/permissions?tab=ui#logs_read_data

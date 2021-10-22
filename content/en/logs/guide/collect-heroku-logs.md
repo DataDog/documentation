@@ -38,6 +38,6 @@ https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-
 ```
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /getting_started/tagging/#introduction
 [4]: /agent/basic_agent_usage/heroku/#hostname

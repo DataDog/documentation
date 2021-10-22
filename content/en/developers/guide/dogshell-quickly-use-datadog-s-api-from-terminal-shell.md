@@ -29,13 +29,13 @@ If your `.dogrc` file has not yet been created (i.e, the dogshell has not yet be
 Submit "Y". It then responds:
 
 ```text
-What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api)
+What is your api key? (Get it here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 You can paste your API key, and then:
 
 ```text
-What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
+What is your application key? (Generate one here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 You can paste your application key. It finishes with:

@@ -190,7 +190,7 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 [7]: https://raw.githubusercontent.com/DataDog/datadog-agent/main/Dockerfiles/manifests/cluster-agent/secret-application-key.yaml
 [8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
 [9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
-[10]: https://app.datadoghq.com/account/settings#api
+[10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/access/application-keys
 [12]: /agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
 [13]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml

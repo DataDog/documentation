@@ -92,7 +92,7 @@ Once the stack has been successfully created, wait five minutes for Datadog to r
  
  
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /getting_started/site/
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
 {{% /tab %}}
@@ -132,7 +132,7 @@ Once you see the Metric Stream resource has been successfully created, wait five
 **Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog’s crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
  
  
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 {{% /tab %}}

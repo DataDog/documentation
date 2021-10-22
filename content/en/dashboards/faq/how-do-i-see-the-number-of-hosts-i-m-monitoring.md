@@ -23,4 +23,4 @@ For setup:
 If you're a customer and need detailed billing information, reach directly to your Customer Success Manager or email `success@datadog.com`.
 
 [1]: /resources/sh/agentcountscreenboard.sh
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
