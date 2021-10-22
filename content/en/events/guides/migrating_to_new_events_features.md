@@ -1,6 +1,8 @@
 ---
 title: Migrating to the New Events Features
 kind: documentation
+aliases:
+  /events/guides/migrating_from_stream_to_explorer
 ---
 
 <div class="alert alert-warning">
@@ -24,7 +26,7 @@ This guide describes how to migrate your organization’s event monitors and das
 
    <div class="alert alert-warning">Don't stop here! To create event monitors and dashboard widgets for Events using the new query syntax, Datadog support must enable the new feature for your organization, and you must migrate your existing event monitors and dashboard widgets to the new syntax, as described in the following steps.</div>
 
-2. **Contact Support to enable the new Events feature.** [Ask Support][3] to switch your organization to the new query syntax. Datadog automatically routes queries to the correct backend: unmigrated to the old backend, migrated to the new backend, so you can migrate safely. When the switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error.
+2. **Contact Support to enable the new Events feature.** [Ask Support][3] to switch your organization to the new query syntax. Datadog automatically routes queries to the correct backend. Old queries continue to go to the old backend, and migrated queries go to the new backend, so you can migrate safely. When the switch is enabled, you can no longer create monitors or dashboard widgets with the legacy query syntax, so calls to the legacy API fail with an error, but your existing monitors and dashboards remain reporting.
 
 3. **Migrate data stored in Datadog servers.** Because the new events have a new query syntax and different monitor features (see below for detailed changes), event monitors and event dashboard widgets definitions that contain event queries must be updated. Use this [open source migration script][4] that connects to your account using your API key, and converts the data. [Contact Support][3] if you prefer we run it for you.
 
