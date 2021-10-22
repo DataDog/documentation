@@ -266,8 +266,8 @@ pipeline {
 
 ## Set Git information manually
 
-The Jenkins plugin uses environment variables to determine the git information. However, these environment variables are not always set
-automatically due to depends on the Git plugin that is being used in the pipeline.
+The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set
+automatically due to dependencies on the Git plugin that is being used in the pipeline.
 
 If the Git information is not detected automatically, you can set the following environment variables manually.
 
@@ -285,7 +285,7 @@ If the Git information is not detected automatically, you can set the following 
 | `DD_GIT_COMMIT_COMMITTER_EMAIL` | The email of the committer of the Git commit.                            | `jane@doe.com`                             |
 | `DD_GIT_COMMIT_COMMITTER_DATE`  | The date when the committer submitted the Git commit in ISO 8601 format. | `2021-08-16T15:41:45.000Z`                 |
 
-**Note:** These variables are optional, but if they are set, they take precedence over the same Git information set by other Jenkins plugins.
+**Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
 
 If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
 
