@@ -23,7 +23,6 @@ git_integration_title: snmp_cisco
 guid: 4109f288-7460-4ed2-b0c3-04e708fbd5bd
 integration_id: snmp-cisco
 integration_title: Cisco
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com

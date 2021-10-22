@@ -5,19 +5,18 @@ kind: documentation
 
 Datadog offers different sites throughout the world. Each site is completely independent, and you cannot share data across sites. Each site gives you benefits (for example, government security regulations) or allows you to store your data in specific locations around the world.
 
-| Site    | Site URL                    | Location |
-|---------|-----------------------------|----------|
-| US1     | `https://app.datadoghq.com` | US       |
-| US3     | `https://us3.datadoghq.com` | US       |
-| US5     | `https://us5.datadoghq.com` | US       |
-| EU1     | `https://app.datadoghq.eu`  | EU       |
-| US1-FED | `https://app.ddog-gov.com`  | US       |
+| Site    | Site URL                   | Location |
+|---------|----------------------------|----------|
+| US1     | `https://app.datadoghq.com`| US       |
+| US3     | `https://us3.datadoghq.com`| US       |
+| EU1     | `https://app.datadoghq.eu` | EU       |
+| US1-FED | `https://app.ddog-gov.com` | US       |
 
 ## How do I tell which Datadog site I am on?
 
 You can identify which site you are on by matching your Datadog website URL to the site URL in the table above.
 
-{{< img src="getting_started/site/site.png" alt="Image of the site URL in your browser" >}}
+{{< img src="getting_started/site/site.png" alt="Image of the site URL in your browser"  >}}
 
 Since the Datadog sites may support different Datadog functionalities depending on that instance's security requirements, this documentation website allows you to select which site you need information for by using the dropdown site selector that is on the right side of all of the documentation pages.
 

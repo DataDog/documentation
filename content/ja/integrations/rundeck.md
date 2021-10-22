@@ -18,7 +18,6 @@ git_integration_title: rundeck
 guid: 2e3492d3-14fd-409d-b339-fb1bc14d7db9
 integration_id: rundeck
 integration_title: Rundeck
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: forrest@rundeck.com

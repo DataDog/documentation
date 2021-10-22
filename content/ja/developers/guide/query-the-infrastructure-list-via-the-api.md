@@ -1,5 +1,5 @@
 ---
-title: API を使ったインフラストラクチャーリストのクエリ
+title: API からのインフラストラクチャーリストのクエリ
 kind: ガイド
 aliases:
   - /ja/developers/faq/query-the-infrastructure-list-via-the-api

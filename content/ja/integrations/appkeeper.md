@@ -13,14 +13,13 @@ categories:
 creates_events: false
 ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
+  - 'https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md'
 display_name: AppKeeper
 draft: false
 git_integration_title: appkeeper
 guid: 3cde5eb5-eadb-4065-8235-fb035abc34be
 integration_id: appkeeper
 integration_title: AppKeeper
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: rd-pd-1@sios.com

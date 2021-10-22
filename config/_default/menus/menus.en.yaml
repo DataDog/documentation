@@ -597,51 +597,46 @@ main:
     parent: agent
     identifier: agent_kubernetes
     weight: 3
-  - name: Kubernetes distributions
-    url: agent/kubernetes/distributions
-    parent: agent_kubernetes
-    identifier: agent_kubernetes_distributions
-    weight: 301
   - name: APM
     url: agent/kubernetes/apm/
     parent: agent_kubernetes
     identifier: agent_kubernetes_apm
-    weight: 302
+    weight: 301
   - name: Log collection
     url: agent/kubernetes/log/
     parent: agent_kubernetes
     identifier: agent_kubernetes_log
-    weight: 303
+    weight: 302
   - name: Tag extraction
     url: agent/kubernetes/tag/
     parent: agent_kubernetes
     identifier: agent_kubernetes_tag
-    weight: 304
+    weight: 303
   - name: Autodiscovery
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
     identifier: agent_kubernetes_integrations
-    weight: 305
+    weight: 304
   - name: Prometheus
     url: agent/kubernetes/prometheus/
     parent: agent_kubernetes
     identifier: agent_kubernetes_prometheus
-    weight: 306
+    weight: 305
   - name: Data collected
     url: agent/kubernetes/data_collected/
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
-    weight: 307
+    weight: 306
   - name: Control plane monitoring
     url: agent/kubernetes/control_plane/
     parent: agent_kubernetes
     identifier: agent_kubernetes_control_plane
-    weight: 308
+    weight: 307
   - name: Operator configuration
     url: agent/kubernetes/operator_configuration
     parent: agent_kubernetes
     identifier: agent_kubernetes_operator_configuration
-    weight: 309
+    weight: 308
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
@@ -1190,18 +1185,14 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 3
-  - name: Collect Lambda Payloads
-    url: serverless/distributed_tracing/collect_lambda_payloads
-    parent: serverless_distributed_tracing
-    weight: 301
   - name: Trace Merging (Advanced)
     url: serverless/distributed_tracing/serverless_trace_merging
     parent: serverless_distributed_tracing
-    weight: 302
+    weight: 301
   - name: Trace Propagation (Advanced)
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
-    weight: 303
+    weight: 302
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
@@ -2025,10 +2016,10 @@ main:
     parent: setup_pipelines
     identifier: ci_circleci
     weight: 204
-  - name: Custom Commands
-    url: continuous_integration/setup_pipelines/custom_commands/
+  - name: Custom Spans
+    url: continuous_integration/setup_pipelines/custom_spans/
     parent: setup_pipelines
-    identifier: ci_custom_commands
+    identifier: ci_custom_spans
     weight: 210
   - name: Exploring Tests
     url: continuous_integration/explore_tests/
@@ -2257,38 +2248,26 @@ main:
     url: logs/explorer/live_tail/
     parent: log_explorer
     weight: 501
-  - name: Search
-    url: logs/explorer/search/
+  - name: Log Side Panel
+    url: logs/explorer/side_panel/
     parent: log_explorer
     weight: 502
-  - name: Search Syntax
-    url: logs/explorer/search_syntax/
+  - name: Saved Views
+    url: logs/explorer/saved_views/
     parent: log_explorer
     weight: 503
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
     weight: 504
-  - name: Group
-    url: logs/explorer/group/
+  - name: Watchdog Insights
+    url: logs/explorer/watchdog_insights/
     parent: log_explorer
     weight: 505
-  - name: Visualize
-    url: logs/explorer/visualize/
+  - name: Search Syntax
+    url: logs/explorer/search_syntax/
     parent: log_explorer
     weight: 506
-  - name: Log Side Panel
-    url: logs/explorer/side_panel/
-    parent: log_explorer
-    weight: 507
-  - name: Export
-    url: logs/explorer/export/
-    parent: log_explorer
-    weight: 508
-  - name: Saved Views
-    url: logs/explorer/saved_views/
-    parent: log_explorer
-    weight: 509
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -2885,24 +2864,20 @@ main:
     pre: cog
     identifier: account_management
     weight: 230000
-  - name: Switching Between Orgs
+  - name: Switching between orgs
     url: account_management/org_switching/
     parent: account_management
     weight: 1
-  - name: Organization Settings
+  - name: Organization settings
     url: account_management/org_settings/
     parent: account_management
     identifier: organization_settings
     weight: 2
-  - name: User Management
+  - name: User management
     url: account_management/users/
     parent: organization_settings
     identifier: account_management_users
     weight: 201
-  - name: Audit Logs
-    url: account_management/audit_logs
-    parent: organization_settings
-    weight: 202
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -2958,7 +2933,7 @@ main:
     url: account_management/billing/
     parent: account_management
     weight: 7
-  - name: Multi-org Accounts
+  - name: Multi-org accounts
     url: account_management/multi_organization/
     parent: account_management
     weight: 8
@@ -5612,18 +5587,6 @@ api:
         - ListLocations
       unstable: []
       order: 23
-  - name: Get details of batch
-    url: '#get-details-of-batch'
-    identifier: get-details-of-batch
-    parent: synthetics
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetSyntheticsCIBatch
-      unstable: []
-      order: 26
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
@@ -5780,18 +5743,6 @@ api:
         - GetUsageSNMP
       unstable: []
       order: 18
-  - name: Get hourly usage for Sensitive Data Scanner
-    url: '#get-hourly-usage-for-sensitive-data-scanner'
-    identifier: get-hourly-usage-for-sensitive-data-scanner
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetUsageSDS
-      unstable: []
-      order: 34
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -5959,7 +5910,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 33
+      order: 32
   - name: Get hourly usage for Cloud Workload Security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: get-hourly-usage-for-cloud-workload-security
@@ -5971,7 +5922,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 32
+      order: 31
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: get-hourly-usage-for-cspm

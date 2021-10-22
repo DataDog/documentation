@@ -79,7 +79,7 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
 
-* The **JSON API permalink** at the top of the infrastructure list.
+* The **JSON API permalink** at the bottom of the infrastructure list.
 * The [search hosts API endpoint][6] - see the [developer guide][7] for an example.
 
 #### Agent version

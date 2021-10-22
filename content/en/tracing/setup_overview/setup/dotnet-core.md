@@ -181,7 +181,7 @@ Enabling the .NET Tracer for your service involves setting the required environm
    DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
    ```
 
-   The value for the `<APP_DIRECTORY>` placeholder is the path to the directory containing the application's `.dll` files. The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+   The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
 
    Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
    ------------------------------------------|----------------------------
@@ -215,7 +215,7 @@ Enabling the .NET Tracer for your service involves setting the required environm
 
 3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. See [Configuration](#configuration) for more information on how to set these variables.
 
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

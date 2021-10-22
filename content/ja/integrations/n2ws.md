@@ -26,7 +26,6 @@ guid: 315aa71c-cc41-4f8c-b0f3-37882c1fa766
 has_logo: true
 integration_id: n2ws
 integration_title: N2WS
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: eliad.eini@n2ws.com

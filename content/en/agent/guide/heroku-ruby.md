@@ -373,7 +373,7 @@ Setting up the Heroku log drain also opens the door to get dyno system metrics (
 To set up the Heroku log drain from a terminal, run the following:
 
 ```shell
-heroku drains:add "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=$DD_API_KEY&ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
+heroku drains:add "https://http-intake.logs.datadoghq.com/v1/input/$DD_API_KEY?ddsource=heroku&service=$APPNAME&host=$APPNAME" -a $APPNAME
 ```
 
 To get system metrics from your dynos, apart from enabling the log drain, enable [log-runtime-metrics][18] as well:

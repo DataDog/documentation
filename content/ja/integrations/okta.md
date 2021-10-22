@@ -11,7 +11,6 @@ git_integration_title: okta
 has_logo: true
 integration_id: okta
 integration_title: Okta
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

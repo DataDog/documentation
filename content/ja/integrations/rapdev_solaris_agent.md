@@ -18,7 +18,6 @@
 "guid": "3717994a-49c4-4693-902a-85c8123b699c"
 "integration_id": "rapdev-solaris-agent"
 "integration_title": "RapDev Solaris Agent"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

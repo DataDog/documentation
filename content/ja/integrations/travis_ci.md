@@ -11,7 +11,6 @@ git_integration_title: travis_ci
 has_logo: true
 integration_id: ''
 integration_title: Travis CI
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'

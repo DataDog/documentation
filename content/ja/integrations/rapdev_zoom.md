@@ -34,7 +34,6 @@ git_integration_title: rapdev_zoom
 guid: a0a0380a-42b7-4977-92fc-a65c8d904b8d
 integration_id: rapdev-zoom
 integration_title: RapDev Zoom
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: integrations@rapdev.io

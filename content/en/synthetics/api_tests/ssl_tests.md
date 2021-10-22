@@ -21,7 +21,7 @@ further_reading:
 
 SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-SSL tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. SSL tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+SSL tests can run from both [managed][1] and [private locations][2] depending on whether you want to monitor certificates of public or internal hosts.
 
 ## Configuration
 
@@ -54,7 +54,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | Type                  | Operator                                                                               | Value type                 |
 |-----------------------|----------------------------------------------------------------------------------------|----------------------------|
 | certificate           | `expires in more than`, `expires in less than`                                         | _Integer (number of days)_ |
-| property              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][5]_ |
+| property              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][6]_ |
 | response time         | `is less than`                                                                         | _Integer (ms)_             |
 | maximum TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 | minimum TLS version   | `is more than`, `is more than or equal`                                                | _Decimal_                  |
@@ -75,7 +75,7 @@ SSL tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][3].
+* [**Within your CI/CD pipelines**][5].
 
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
@@ -100,9 +100,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][9] and supports the following [conditional variables][10]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -143,7 +143,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][9] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your SSL tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -163,7 +163,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][10].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -172,9 +172,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic SSL tests. To get create, edit, and delete access to Synthetic SSL tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic SSL tests. To get create, edit, and delete access to Synthetic SSL tests, upgrade your user to one of those two [default roles][13].
 
-If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -182,13 +182,14 @@ If you have access to the [custom role feature][12], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_testing
+[3]: /synthetics/api_tests/ssl_tests
 [4]: /synthetics/search/#search
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[6]: /monitors/notifications/?tab=is_alert#notification
-[7]: https://www.markdownguide.org/basic-syntax/
-[8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/settings/#global-variables
-[10]: /synthetics/api_tests/errors/#ssl-errors
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
+[5]: /synthetics/cicd_testing
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[8]: /monitors/notifications/?tab=is_alert#notification
+[9]: https://www.markdownguide.org/basic-syntax/
+[10]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[11]: /synthetics/settings/#global-variables
+[12]: /synthetics/api_tests/errors/#ssl-errors
+[13]: /account_management/rbac/
+[14]: /account_management/rbac#custom-roles

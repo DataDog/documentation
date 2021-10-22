@@ -19,7 +19,6 @@
 "guid": "c678faae-1fc2-420b-83af-e973441b99de"
 "integration_id": "postman"
 "integration_title": "Postman"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations-partnerships@postman.com"

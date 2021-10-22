@@ -1,8 +1,6 @@
 ---
 title: APM Connection Errors
 kind: Documentation
-aliases:
-  - /tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
 ---
 
 If the application with the tracing library cannot reach the Datadog Agent, look for connection errors in the [tracer startup logs][1] or [tracer debug logs][2], which can be found with your application logs. 

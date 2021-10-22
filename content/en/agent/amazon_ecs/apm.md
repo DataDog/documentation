@@ -34,7 +34,7 @@ containerDefinitions": [
     ...
   {{< /code-block >}}
 
-    {{< site-region region="us3,us5,eu,gov" >}} 
+    {{< site-region region="us3,eu,gov" >}} 
   To ensure the Agent sends data to the right Datadog location, set the following environment variable, where `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}}:
 
   ```json

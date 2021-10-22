@@ -48,8 +48,6 @@ If you have any questions about how the Log Management Service satisfies the app
 
 **Note:**
 
-Logs can be viewed through various pages in the Datadog platform. All manifestations of logs in the Datadog platform, including pages such as Traces are part of the log management product.
-
 Previously, HIPAA-enabled customers needed to use specific endpoints to submit logs in order to enforce specific encryptions. This is no longer necessary. The encryptions are enabled on all log submission endpoints.
 
 These legacy endpoints are still supported:

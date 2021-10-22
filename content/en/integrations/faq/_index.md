@@ -142,7 +142,8 @@ aliases:
 * [How to add event log files to the `Win32_NTLogEvent` WMI class][55]
 * [Collect Custom Windows Performance Counters over WMI][56]
 * [Windows Status Based Check][57]
-* [How to retrieve WMI metrics][58]
+* [How to monitor events from the Windows Event Logs][58]
+* [How to retrieve WMI metrics][59]
 
 [1]: /integrations/faq/aws-integration-and-cloudwatch-faq/
 [2]: /integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration/
@@ -201,4 +202,5 @@ aliases:
 [55]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
 [56]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
 [57]: /integrations/faq/windows-status-based-check/
-[58]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[58]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs/
+[59]: /integrations/faq/how-to-retrieve-wmi-metrics/

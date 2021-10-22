@@ -5,7 +5,6 @@ disable_sidebar: true
 aliases:
     - /integrations/verisign_openhybrid/
     - /integrations/tcp_queue_length/
-    - /integrations/snyk/
 description: Gather data from all of your systems, apps, & services
 ---
 

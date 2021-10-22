@@ -19,7 +19,6 @@ git_integration_title: retool
 guid: c058f7b5-c3b3-46c4-910f-a5eba256a152
 integration_id: retool
 integration_title: Retool
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: support@retool.com

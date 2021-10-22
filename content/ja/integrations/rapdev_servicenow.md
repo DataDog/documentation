@@ -26,7 +26,6 @@
 "guid": "45f54528-b04b-4741-8207-7bfb16c128ae"
 "integration_id": "rapdev-servicenow"
 "integration_title": "RapDev ServiceNow"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

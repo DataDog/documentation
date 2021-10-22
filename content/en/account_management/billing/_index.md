@@ -53,7 +53,7 @@ To change your payment method, contact your [Customer Success][12] Manager.
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Biling history][13] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Plan][13] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
@@ -102,4 +102,4 @@ You can set specific email addresses to receive invoices on the [Biling history]
 [10]: mailto:billing@datadoghq.com
 [11]: /account_management/billing/credit_card/
 [12]: mailto:success@datadoghq.com
-[13]: https://app.datadoghq.com/billing/history
+[13]: https://app.datadoghq.com/account/billing

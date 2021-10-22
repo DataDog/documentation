@@ -28,7 +28,6 @@
 "guid": "b002557b-f27c-47ad-8db7-a93c75b81707"
 "integration_id": "rapdev-maxdb"
 "integration_title": "MaxDB"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

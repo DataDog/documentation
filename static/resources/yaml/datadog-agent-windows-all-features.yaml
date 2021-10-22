@@ -1,4 +1,3 @@
----
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
@@ -46,7 +45,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.29.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -125,7 +124,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.29.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -173,7 +172,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.29.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -211,7 +210,7 @@ spec:
               mountPath: \\.\pipe\docker_engine
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.29.1"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -225,7 +224,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.31.1"
+          image: "gcr.io/datadoghq/agent:7.29.1"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:

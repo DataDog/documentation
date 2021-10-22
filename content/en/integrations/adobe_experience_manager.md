@@ -44,7 +44,7 @@ Log collection is not supported for this site.
 
 {{< /site-region >}}
 
-{{< site-region region="us,us5,eu,gov" >}}
+{{< site-region region="us,eu,gov" >}}
 
 _Available for Agent version >6.0_
 

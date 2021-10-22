@@ -49,9 +49,6 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   criSocketPath: /run/dockershim.sock
-  env:
-  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-    value: "containerd"
 ```
 
 {{% /tab %}}
@@ -178,7 +175,7 @@ spec:
 
 **Note**: In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS.
 This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes.
-In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is required.
+In this case, using `tlsVerify: false` is required.
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 

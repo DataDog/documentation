@@ -50,7 +50,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `injectLogContext`     | 設定すると、lambda レイヤーは自動的に console.log に Datadog のトレース ID をパッチします。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                     |
 | `exclude`              | 設定後、このプラグインは指定されたすべての機能を無視します。Datadog の機能に含まれてはならない機能がある場合は、このパラメーターを使用します。デフォルトは `[]` です。                                                                                                                                                                                                                                            |
 | `enabled`              | false に設定すると、Datadog プラグインが非アクティブ状態になります。デフォルトは `true` です。`enabled: ${strToBool(${env:DD_PLUGIN_ENABLED, true})}` などの環境変数を使用してこのオプションを制御し、デプロイ時にプラグインを有効化 / 無効化することができます。また、`--stage` を通じて渡された値を使用してこのオプションを制御することもできます。[こちらの例](#disable-plugin-for-particular-environment)をご覧ください。
-| `monitors`             | 定義すると、Datadog プラグインはデプロイされた関数のモニターを構成します。また、`monitorsApiKey` と `monitorsAppKey` を定義する必要があります。モニターの定義方法については、[推奨されるサーバーレスモニターを有効にして構成するには](#to-enable-and-configure-a-recommended-serverless-monitor)を参照してください。  |
+| `monitors`             | 定義すると、Datadog プラグインはデプロイされた関数のモニターを構成します。また、`monitorsApiKey` と `monitorsAppKey` を定義する必要があります。モニターの定義方法については、[推奨されるサーバーレスモニターを有効にして構成するには](#to-enable-and-configure-a-recommended-serverless-monitor)を参照してください。  |                                                                                          
 
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 
@@ -63,11 +63,11 @@ custom:
     monitorsApiKey: "{Datadog_API_Key}"
     monitorsAppKey: "{Datadog_Application_Key}"
     addLayers: true
-    addExtension: true
     logLevel: "info"
     enableXrayTracing: false
     enableDDTracing: true
     enableAPIGatewayLogs: true
+    forwarderArn: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
     enableTags: true
     injectLogContext: true
     exclude:

@@ -115,11 +115,11 @@ You can include percentile aggregations (`p50`, `p75`, `p90`, `p95`, and `p99`) 
 
 This table summarizes the effect of adding percentile aggregations to any distribution metric. 
 
-| Metrics                                                                                   | Number of Billable Custom Metrics |
-|-------------------------------------------------------------------------------------------|-----------------------------------|
-| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)         | `5*(tag value combinations)`      |
-| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99) | `5*(tag value combinations)`      |
-| Total                                                                                     | `2*5(tag value combinations)`     |
+| Metrics                                                                                    | Number of Billable Custom Metrics |
+|--------------------------------------------------------------------------------------------|-----------------------------------|
+| Number of custom metrics from a baseline distribution (count, sum, min, max, avg)          | `5*(tag value combinations)`      |
+| Number of custom metrics from including percentile aggregations (p50, p75, p90, p95, p99)  | `5*(tag value combinations)`      |
+| Total                                                                                      | `2*5(tag value combinations)`     |
 
 ##### Customization of tagging
 
@@ -161,16 +161,16 @@ The billable number of custom metrics is based on the average number of custom m
 
 The following standard integrations can potentially emit custom metrics.
 
-| Type of integrations                           | Integrations                                                                       |
-|------------------------------------------------|------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                              |
-| No default limit on custom metrics collection. | [Nagios][13] /[PDH Check][14] /[Prometheus][15] /[Windows Services][16] /[WMI][17] |
-| Can be configured to collect custom metrics.   | [MySQL][18] /[Oracle][19] /[Postgres][20] /[SQL Server][21]                        |
-| Custom metrics sent from cloud integrations    | [AWS][22]                                                                          |
+| Type of integrations                           | Integrations                                                                                   |
+|------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Limited to 350 custom metrics by default.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                          |
+| No default limit on custom metrics collection. | [Nagios][13] /[PDH Check][14] /[Prometheus][15] /[SNMP][16] /[Windows Services][17] /[WMI][18] |
+| Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                                    |
+| Custom metrics sent from cloud integrations    | [AWS][23]                                                                                      |
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][23].
+For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][9] Manager.
 
@@ -189,11 +189,12 @@ For billing questions, contact your [Customer Success][9] Manager.
 [13]: /integrations/nagios/
 [14]: /integrations/pdh_check/
 [15]: /integrations/prometheus/
-[16]: /integrations/windows_service/
-[17]: /integrations/wmi_check/
-[18]: /integrations/mysql/
-[19]: /integrations/oracle/
-[20]: /integrations/postgres/
-[21]: /integrations/sqlserver/
-[22]: /integrations/amazon_web_services/
-[23]: /help/
+[16]: /integrations/snmp/
+[17]: /integrations/windows_service/
+[18]: /integrations/wmi_check/
+[19]: /integrations/mysql/
+[20]: /integrations/oracle/
+[21]: /integrations/postgres/
+[22]: /integrations/sqlserver/
+[23]: /integrations/amazon_web_services/
+[24]: /help/

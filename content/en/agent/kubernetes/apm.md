@@ -47,7 +47,7 @@ To enable trace collection with your Agent, follow the instructions below:
 
  - Set your operating system. Add `targetSystem: linux` or `targetSystem: windows` to the top of your `values.yaml`.
  - Set the API key: `apiKey: <DATADOG_API_KEY>`
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}} 
  - Set your site so that the Agent sends data to the right Datadog location: `site: `{{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
@@ -72,7 +72,7 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
      # (...)
     ```
 
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}} 
 - Ensure the Agent sends data to the correct Datadog location by setting `site: `{{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
@@ -103,7 +103,7 @@ agent:
     hostPort: 8126
 ```
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu,gov" >}} 
+{{< site-region region="us3,eu,gov" >}} 
 ```
 agent:
   image:

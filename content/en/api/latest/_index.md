@@ -28,7 +28,7 @@ To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collect
 
 By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][6] languages in each endpoint to see code examples from that library. To install each library:
 
-{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" >}}
 
 {{< programming-lang lang="java" >}}
 #### Installation

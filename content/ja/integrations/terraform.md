@@ -18,7 +18,6 @@ git_integration_title: terraform
 guid: d743cca9-e03e-481a-86d1-3ea15aa915cf
 integration_id: terraform
 integration_title: terraform
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

@@ -31,13 +31,17 @@ Add Datadog's Private Link endpoints to your VPC, as described in the [PrivateLi
 By default, the Extension uses different API endpoints than the Datadog Agent. Override the endpoints by setting the following environment variables on the Lambda function.
 
 ```
+DD_URL="https://agent.datadoghq.com"
+DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_LOGS_DD_URL="agent-http-intake.logs.datadoghq.com:443"
 ```
 
 Alternatively, you can configure the Extension by adding a [`datadog.yaml`][5] file in the same folder as the Lambda handler code.
 
 ```
+dd_url: https://agent.datadoghq.com
 logs_config:
+    use_http: true
     logs_dd_url: agent-http-intake.logs.datadoghq.com:443
 ```
 

@@ -74,7 +74,6 @@
 "guid": "d6a64068-821a-4e71-b724-b3a395389609"
 "integration_id": "rapdev-snmp-profiles"
 "integration_title": "RapDev SNMP プロファイル"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

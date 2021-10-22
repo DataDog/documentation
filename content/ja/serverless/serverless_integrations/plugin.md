@@ -53,13 +53,13 @@ custom:
     apiKey: "{Datadog_API_Key}"
     apiKMSKey: "{Encrypted_Datadog_API_Key}"
     addLayers: true
-    addExtension: true
     logLevel: "info"
     enableXrayTracing: false
     enableDDTracing: true
+    forwarderArn: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
     enableTags: true
     injectLogContext: true
-    exclude:
+    exclude: 
       - dd-excluded-function
 ```
 

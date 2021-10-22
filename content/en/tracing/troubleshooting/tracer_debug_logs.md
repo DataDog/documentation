@@ -1,10 +1,6 @@
 ---
 title: Tracer Debug Logs
 kind: Documentation
-further_reading:
-- link: "/tracing/troubleshooting/connection_errors/"
-  tag: "Documentation"
-  text: "Troubleshooting APM Connection Errors"
 ---
 
 ## Enable debug mode
@@ -37,7 +33,13 @@ To enable debug mode for the Datadog Python Tracer, set the environment variable
 
 {{< programming-lang lang="ruby" >}}
 
-To enable debug mode for the Datadog Ruby Tracer, set the environment variable `DD_TRACE_DEBUG=true`.
+To enable debug mode for the Datadog Ruby Tracer, set the `debug` option to `true` in the tracer initialization configuration:
+
+```ruby
+Datadog.configure do |c|
+  c.tracer debug: true
+end
+```
 
 **Application Logs**
 
@@ -405,10 +407,6 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare

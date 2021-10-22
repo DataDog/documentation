@@ -20,7 +20,6 @@ git_integration_title: pliant
 guid: 3beeb950-4020-4e0e-914e-35281dad9719
 integration_id: pliant
 integration_title: Pliant
-integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: hello@pliant.io

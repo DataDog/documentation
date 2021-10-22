@@ -28,7 +28,11 @@ This guide outlines the workflow for creating a status based check on Windows.
 
 You should now have a monitor based on your Windows Service Integration.
 
+If you are looking at configuring the Windows Event Log Integration, follow this article:
+
+[How to monitor events from the Windows Event Logs][4]
 
 [1]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings#integrations/windows_service
 [3]: /monitors/create/types/integration/
+[4]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs/

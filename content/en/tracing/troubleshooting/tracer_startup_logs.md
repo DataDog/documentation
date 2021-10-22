@@ -1,10 +1,6 @@
 ---
 title: Tracer Startup Logs
 kind: Documentation
-further_reading:
-- link: "/tracing/troubleshooting/connection_errors/"
-  tag: "Documentation"
-  text: "Troubleshooting APM Connection Errors"
 ---
 ## Startup logs
 
@@ -265,10 +261,6 @@ If an integration you are using is not supported, or you want a fresh pair of ey
 ## Disabling startup logs
 
 For each language, you can disable startup logs by setting the environment variable `DD_TRACE_STARTUP_LOGS=false`, but do this only if the logs emitted are posing a problem. If later you are sending [debug][8] logs, remember to enable startup logs and send all relevant logs together to speed up your support case triage.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_ecs/?tab=java#trace-collection
 [2]: /agent/kubernetes/?tab=helm

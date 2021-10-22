@@ -20,7 +20,6 @@
 "guid": "d9535bd9-569e-4da9-ba3c-47f4dd262007"
 "integration_id": "statsig-statsig"
 "integration_title": "Statsig"
-"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "support@statsig.com"

@@ -18,7 +18,6 @@ git_integration_title: perimeterx
 guid: 6e3a9bc2-6766-4b24-9edf-12811d821d41
 integration_id: perimeterx
 integration_title: PerimeterX
-integration_version: ''
 is_beta: false
 is_public: true
 kind: integration

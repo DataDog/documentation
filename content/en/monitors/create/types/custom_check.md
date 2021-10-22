@@ -56,14 +56,10 @@ Set up the check alert:
 
 3. Choose `Do not notify` or `Notify` for Unknown status.
 
-    If enabled, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
-
 4. Resolve the alert after selected consecutive successes: `<NUMBER>`.
 
     Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` OK statuses.
 
-
-[1]: /monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 

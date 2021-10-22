@@ -14,14 +14,13 @@ categories:
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
+  - 'https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md'
 display_name: JMeter
 draft: false
 git_integration_title: jmeter
 guid: 73e25799-9bc1-413b-a5f3-989a7c5bd554
 integration_id: jmeter
 integration_title: JMeter
-integration_version: ''
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

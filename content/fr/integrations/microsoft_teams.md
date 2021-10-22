@@ -5,13 +5,12 @@ categories:
 ddtype: crawler
 dependencies: []
 description: "Soyez informé des événements et des alertes Datadog dans Microsoft\_Teams."
-doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
+doc_link: 'https://docs.datadoghq.com/integrations/microsoft_teams/'
 draft: false
 git_integration_title: microsoft_teams
 has_logo: true
 integration_id: ''
 integration_title: "Microsoft\_Teams"
-integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'

@@ -29,7 +29,6 @@
     <div class="row integration-os">
         <div class="agent col-12">
             <p class="mb-3">
-                <strong class="supported-os-text">Supported OS</strong>
                 {{ range .Params.supported_os }}
                     {{ if eq . "linux" }}
                         <span>
@@ -47,6 +46,7 @@
                         </span>
                     {{ end }}
                 {{ end }}
+                <strong class="supported-os-text">OS Supported</strong>
             </p>
         </div>
     </div>
@@ -54,15 +54,6 @@
 
 {{ if in .Params.categories "marketplace" }}
     {{ partial "badge.html" (dict "context" . "text" "marketplace") }}
-{{ end }}
-
-{{ with .Params.integration_version }}
-<div class="row integration-labels">
-    <div class="integration-version col-12">
-        <span>{{ i18n "integration_version" }}</span><span>v{{ . }}</span>
-    </div>
-
-</div>
 {{ end }}
 
 <div class="mb-2"></div>

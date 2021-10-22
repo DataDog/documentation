@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu,us3" >}}
+{{< site-region region="us,eu" >}}
 ## Compatibility
 
 Supported languages:
@@ -119,7 +119,7 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-{{< site-region region="eu,us3" >}}
+{{< site-region region="eu" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
@@ -130,28 +130,28 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [1]: /getting_started/site/
 {{< /site-region >}}
 
-### Collecting Git metadata
+### Collecting Git and build metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
+Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#ci-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
+The user can also provide Git information by using custom environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
+: URL of the repository where the code is stored.<br/>
 **Example**: `git@github.com:MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.<br/>
+: Branch where this commit belongs.<br/>
 **Example**: `develop`
 
 `DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
+: Tag of the commit, if it has one.<br/>
 **Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
-: Full commit hash.<br/>
+: Commit SHA.<br/>
 **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
@@ -159,27 +159,27 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 **Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.<br/>
-**Example**: `John Smith`
+: Author name.<br/>
+**Example**: `John Doe`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.<br/>
-**Example**: `john@example.com`
+: Author email.<br/>
+**Example**: `john@doe.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.<br/>
+: Author date. ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.<br/>
-**Example**: `Jane Smith`
+: Committer name.<br/>
+**Example**: `Jane Doe`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.<br/>
-**Example**: `jane@example.com`
+: Committer email.<br/>
+**Example**: `jane@doe.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.<br/>
+: Committer date. ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 ### Running tests
@@ -198,15 +198,6 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
 {{< site-region region="eu" >}}
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
-  -project "MyProject.xcodeproj" \
-  -scheme "MyScheme" \
-  -destination "platform=macOS,arch=x86_64" \
-  test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-{{< code-block lang="bash" >}}
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=us3.datadoghq.com xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
   -destination "platform=macOS,arch=x86_64" \
@@ -553,6 +544,6 @@ Additional Git configuration for physical device testing:
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
 
 {{< /site-region >}}
-{{< site-region region="us5,gov" >}}
+{{< site-region region="us3,gov" >}}
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
 {{< /site-region >}}

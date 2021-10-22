@@ -22,7 +22,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us3,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -73,7 +73,7 @@ To see a complete list of metrics collected, see the integration Data Collected 
 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
-- **Postgres**: `postgresql.queries.*`
+- **Postrgres**: `postgresql.queries.*`
 
 
 ## Query details page

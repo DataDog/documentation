@@ -32,7 +32,19 @@ org_id,hour,source_type_name,alert_type,priority,event_object,host_name,device_n
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5" >}}
+{{< site-region region="eu" >}}
+
+This feature is not supported.
+
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+
+This feature is not supported.
+
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
 
 This feature is not supported.
 
