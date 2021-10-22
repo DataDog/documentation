@@ -12,6 +12,4 @@ private: true
 
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Session Replay:" >}}
 
-{{< /whatsnext >}}
