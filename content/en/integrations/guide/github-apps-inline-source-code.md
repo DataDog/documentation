@@ -17,25 +17,36 @@ further_reading:
 The source code integration is in public beta and is available for all JVM languages and Go.
 </div>
 
-By installing the Datadog-GitHub Apps integration, you can enrich your GitHub issues and pull requests in Datadog. With the source code integration, you can link your telemetry (such as stack traces) and source code. 
+By installing the Datadog-GitHub Apps integration, you can enrich your GitHub issues and pull requests in Datadog. With the source code integration, you can link your telemetry (such as stack traces) and source code.
 
 The GitHub Apps source code integration allows you to see code snippets in your errors and preview additional details about your issues and pull requests on GitHub.
 
-### Inline Source Code
+### Links to Git
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps][1] to directly inline code snippets from your GitHub repository in your stack traces. 
+#### Error Tracking
 
-#### Error Tracking 
-
-In [Error Tracking][2], you can authorize your GitHub App to access the repository containing the error and display an inline code snippet.
+In [Error Tracking][2], you can see links directly from your stack traces to the repository
 
 1. Navigate to **APM** > **Error Tracking**.
 2. Click on an issue. The **Issue Details** panel appears to the right.
-3. Under **Latest available errors**, hover over a frame. The **View** button appears to the right. 
-4. Click on a frame to expand the code snippet containing lines of your source code. 
-5. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error. 
+3. Under **Latest available errors**, hover over a frame. The **View** button appears to the right and redirects you to GitHub
+
+##### Inline Source Code
+
+If you are a GitHub SaaS user, install Datadog's [GitHub Apps][1] to directly inline code snippets from your GitHub repository in your stack traces.
+
+1. Click on a frame to expand the code snippet containing lines of your source code.
+2. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
 
 {{< img src="integrations/guide/github_apps/inline-code-snippet.png" alt="Inline code snippet" style="width:90%;">}}
+
+#### Continuous Profiler
+
+In the [Continuous Profiler][1], you can directly access traces in the source repository on GitHub.
+
+1. Navigate to **APM** > **Profile Search**.
+2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears to the right.
+3. Click **More actions** > **View in repo** to open the source code repository.
 
 ## Configuration
 
@@ -124,13 +135,13 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
 
 ### Upload your git metadata
 
-In order to link your telemetry to your source code, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][3] command. 
+In order to link your telemetry to your source code, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][3] command.
 
 When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
 ### Validation
 
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline. 
+To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
 
 You can expect to see the following return:
 
