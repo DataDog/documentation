@@ -22,7 +22,7 @@ Use severity level settings to:
 
 1. Define your most critical severity as `SEV-0` or `SEV-1` (defaults to `SEV-1`).
 2. Customize the sub-labels of your severities (**Defaults:** Critical, High, Moderate, Low, Minor)
-3. Customize the descriptions of your severities
+3. Customize the descriptions of your severities.
 4. Add or delete severities from the bottom of your list, with a minimum of 3 and a maximum of 10. 
 
 **Note:** If you attempt to delete a Severity that is referenced in a Notification Rule, you will be prompted to confirm your decision. Choosing to proceed will disable the impacted Notification Rules as they are no longer valid. Deleting a severity or changing the starting severity will not automatically update any [Incident Management Analytics][2] queries.
