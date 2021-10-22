@@ -6582,6 +6582,24 @@ components:
         `markdown`, `timeseries`, `toplist`, `heatmap`, `distribution`,
 
         `log_stream`. [More information on each graph visualization type.](https://docs.datadoghq.com/dashboards/widgets/)'
+      example:
+        definition:
+          requests:
+          - display_type: line
+            q: avg:system.load.1{*}
+            style:
+              line_type: solid
+              line_width: normal
+              palette: dog_classic
+          show_legend: true
+          type: timeseries
+          yaxis:
+            scale: linear
+        graph_size: m
+        split_by:
+          keys: []
+          tags: []
+        time: null
       oneOf:
       - $ref: '#/components/schemas/NotebookMarkdownCellAttributes'
       - $ref: '#/components/schemas/NotebookTimeseriesCellAttributes'
