@@ -90,7 +90,7 @@ To create a manual notification:
 
 1. Click the **+ New Notification** button in the top right of the section.
 2. Enter your desired recipients. These can be any notification handle supported by Datadog including emails, Slack channels, PagerDuty handles, Webhooks, etc.
-3. Select a [Message Template][12]
+3. Select a [Message Template][12].
 4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`. 
    * Template Variables are based on the properties of an incident. Before a message is sent, all template variables will be replaced by the corresponding value of the referenced property that is available to the message when it was sent.
 5. Send your notification or save it as a draft 
