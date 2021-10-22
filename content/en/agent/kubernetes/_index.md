@@ -118,7 +118,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
@@ -213,7 +213,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /resources/yaml/datadog-agent-all-features.yaml
 [4]: /resources/yaml/datadog-agent-windows-all-features.yaml
 [5]: /resources/yaml/datadog-agent-logs-apm.yaml
@@ -326,7 +326,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 {{% /tab %}}

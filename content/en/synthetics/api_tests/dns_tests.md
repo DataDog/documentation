@@ -24,7 +24,7 @@ further_reading:
 
 DNS tests allow you to proactively monitor the resolvability and lookup times of your DNS records using any nameserver. If resolution is unexpectedly slow or a DNS server answers with unexpected A, AAAA, CNAME, TXT, or MX entries, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-DNS tests can run from [managed][1] and [private locations][2], allowing you to run tests on public domains as well as internal services that might be using internal DNS.
+DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][14].
 
 ## Configuration
 
@@ -178,3 +178,4 @@ If you have access to the [custom role feature][13], add your user to any custom
 [11]: /synthetics/settings/#global-variables
 [12]: /account_management/rbac/
 [13]: /account_management/rbac#custom-roles
+[14]: /synthetics/cicd_testing

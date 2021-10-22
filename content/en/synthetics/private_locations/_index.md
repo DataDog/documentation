@@ -78,6 +78,16 @@ To pull test configurations and push test results, the private location worker n
 
 {{< /site-region >}}
 
+{{< site-region region="us5" >}}
+
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.us5.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |

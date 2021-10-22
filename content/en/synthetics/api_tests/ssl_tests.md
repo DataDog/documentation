@@ -21,7 +21,7 @@ further_reading:
 
 SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-SSL tests can run from both [managed][1] and [private locations][2] depending on whether you want to monitor certificates of public or internal hosts.
+SSL tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. SSL tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][15].
 
 ## Configuration
 
@@ -140,7 +140,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your SSL tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -190,3 +190,4 @@ If you have access to the [custom role feature][14], add your user to any custom
 [12]: /synthetics/api_tests/errors/#ssl-errors
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
+[15]: /synthetics/cicd_testing

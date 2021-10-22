@@ -33,12 +33,12 @@ AWS Elastic Load Balancers (ELBs) にロギングを設定し、セキュリテ�
 
 1. `create-bucket` を実行して ELB ログファイルを保存する [S3 バケットを作成][2]します。
 
-**注**: このバケットは、ELB と同じリージョンで作成される必要があります。
+    **注**: このバケットは、ELB と同じリージョンで作成される必要があります。
 
     {{< code-block lang="bash" filename="create-bucket.sh" >}}
     aws s3api create-bucket
-    --region us-west-1
-    --bucket your-elb-logging-bucket
+        --region us-west-1
+        --bucket your-elb-logging-bucket
     {{< /code-block >}}
 
 2. [AWS Policy Generator][3] を使用して新しいポリシーを作成します。

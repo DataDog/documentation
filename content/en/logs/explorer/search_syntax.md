@@ -1,5 +1,5 @@
 ---
-title: Search Syntax
+title: Log Search Syntax
 kind: documentation
 description: "Search through all of your logs."
 aliases:
@@ -21,6 +21,8 @@ further_reading:
   tag: "Documentation"
   text: "Automatically configure your Log Explorer"
 ---
+
+## Overview
 
 A query filter is composed of terms and operators.
 
@@ -63,7 +65,7 @@ user\=JaneDoe
 
 ### Attributes search
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
 For instance, if your attribute name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter:
@@ -123,7 +125,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
 <p> </p>
 {{< /site-region >}}
@@ -148,7 +150,7 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 ### Search wildcard
 
-{{< site-region region="gov,us3" >}}
+{{< site-region region="gov,us3,us5" >}}
 When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
 <p> </p>
 {{< /site-region >}}
@@ -201,7 +203,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`.
 
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
- 
+
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects"  style="width:80%;">}}
 <p> </p>
 {{< /site-region >}}

@@ -1,10 +1,10 @@
 ---
 title: TCP Tests
 kind: documentation
-description: Simulate TCP connections on your hosts from specific connections
+description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test
-  - /synthetics/tcP_check
+  - /synthetics/tcp_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -21,7 +21,7 @@ further_reading:
 
 TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from outside or inside your network.
+TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][13].
 
 ## Configuration
 
@@ -127,7 +127,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your TCP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -172,3 +172,4 @@ If you have access to the [custom role feature][12], add your user to any custom
 [10]: /synthetics/settings/#global-variables
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles
+[13]: /synthetics/cicd_testing

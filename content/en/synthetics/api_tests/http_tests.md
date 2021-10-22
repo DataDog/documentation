@@ -56,7 +56,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlendcoded`, or `None`) you want to add to your HTTP request.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. **Note**: The request body is limited to a maximum size of 50 kilobytes.
 
    {{% /tab %}}

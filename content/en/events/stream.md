@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Add an Event Stream widget to a dashboard"
 ---
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">
   The Event Stream is only available in US1 and EU1. If you use US3 or the Datadog for Government site, see the <a href="/events/explorer/">Events Explorer documentation</a>.
 </div>
