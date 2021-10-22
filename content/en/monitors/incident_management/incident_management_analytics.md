@@ -12,7 +12,7 @@ further_reading:
 
 {{< img src="monitors/incidents/incident_analytics.gif" alt="Incident Management Analytics" style="width:80%;">}}
 
-Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][1] and [Notebooks][2] in order to analyze the history of your incident response over time. To give you a starting point, Datadog provides you with an Incident Management Overview [Dashboard template][3] and [Notebook template][4] that you can clone and customize as necessary.
+Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][1] and [Notebooks][2] to analyze the history of your incident response over time. To give you a starting point, Datadog provides an Incident Management Overview [Dashboard template][3] and [Notebook template][4] that you can clone and customize as necessary.
 
 The following widgets support Incident Management Analytics:
 
