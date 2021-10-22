@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-The [Incident Settings][1] are where you can go to customize aspects of the Incident Management product's experience for your entire organization. The individual settings are categorized and divided into different sub-sections. The main categories of settings are: General, Notifications, and Remediation.
+Use [Incident Settings][1] to customize aspects of the Incident Management experience for your entire organization. The individual settings are categorized and divided into different sub-sections. The main categories are: General, Notifications, and Remediation.
 
 ## General
 
