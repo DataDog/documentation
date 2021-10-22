@@ -31,7 +31,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 4. Select an aggregation for the measure.
 5. (Optional) Select a rollup for the measure.
 6. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents.
-7. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display .
+7. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display.
 8. [Title the graph][6].
 9. Save your widget.
 
