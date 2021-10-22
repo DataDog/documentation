@@ -70,7 +70,7 @@ export AWS_SECRET_ACCESS_KEY="<ACCESS KEY>"
 
 ### Instrument
 
-**Note**: Please instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+**Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
 To instrument your Lambda functions, run the following command:
 
