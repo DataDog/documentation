@@ -1,7 +1,7 @@
 ---
-title: Setting Up Inline Source Code in Datadog
+title: Setting Up the Source Code Integration in Datadog
 kind: guide
-description: "Set up inline source code and rich previews of issues and pull requests with Datadog."
+description: "Set up links to a Git repository and inline source code with Datadog."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/github-apps/"
   tag: "Integration"
@@ -12,11 +12,13 @@ further_reading:
 
 <div class="alert alert-warning">
 The source code integration is in public beta and is available for all JVM languages and Go.
+
+The source code integration generates links from your telemetry to your source code in your repository. Links to third-party libraries and standard libraries are not supported.
 </div>
 
 The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) and your source code.
 
-By installing the Datadog-GitHub Apps integration, you can directly access source code repositories from your stack traces and enrich your GitHub issues and pull requests with previews. 
+By installing the Datadog-GitHub Apps integration, you can directly access source code repositories from your stack traces and enrich your GitHub issues and pull requests with previews.
 
 With the source code integration and GitHub Apps integration, you can also see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
@@ -26,9 +28,9 @@ In order to map telemetry data with your source code, you need to send metadata 
 
 To tag your process with the commit SHA, you need a container label, Kubernetes label, or annotation.
 
-1. Set or extend the `DD_TAGS` environment variable.
+1. Set a container tag or extend the `DD_TAGS` environment variable.
 2. Upload your git metadata including the commit SHAs and your git repository URL by running [`datadog-ci git-metadata upload`][1].
-3. [Install GitHub Apps][2].
+3. Optionally, [install GitHub Apps][2].
 
 Datadog correlates the places where you can link directly to your git repository.
 
@@ -39,21 +41,20 @@ To get direct links from your stacktrace to your git repository, tag your teleme
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}
 
-#### Docker runtime
+If your containers are running on Docker, Datadog can extract the commit SHA directly from your images' Docker labels.
 
-(Loic to add copy)
+1. During build time, follow the [Open Containers standard][1] to add the git commit SHA as a Docker label.
+2. Configure the Datadog Agent to collect the label as `git.commit.sha`.
 
-If your containers are running on Docker, directly extract `git.commit.sha` from your Docker images that comply with the [Open Containers standard][1]. During build time, tag your containers and configure the Datadog Agent to collect the tag as `git.commit.sha`.
+#### Tag your images
 
-### Tag your images
-
-To tag your images, run:
+To add the Docker label to your images, update the `docker build` command:
 
 ```
 docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
 ```
 
-### Configure the Agent
+#### Configure the Agent
 
 Configure the Datadog Agent to collect `org.opencontainers.image.revision` as `git.commit.sha` by using [`DD_DOCKER_LABELS_AS_TAGS`][2] in the Agent configuration:
 
@@ -67,25 +68,21 @@ DD_DOCKER_LABELS_AS_TAGS='{"org.opencontainers.image.revision": "git.commit.sha"
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Container runtime
-
-(Loic to add copy)
-
-#### Other container runtimes on Kubernetes
-
-If you use Kubernetes with another container runtime such as containerd, tag your deployed pod with a pod annotation using [Datadog's Tag Autodiscovery][1]:
+If you use Kubernetes, tag your deployed pod with a pod annotation using [Datadog's Tag Autodiscovery][1]:
 
 ```
 ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>"}'
 ```
 
+The git commit SHA is added to your telemetry.
+
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 {{% /tab %}}
 {{% tab "Other Setups" %}}
 
-#### Containerized environments
+#### Other container setups
 
-For containerized environments, set the git.commit.sha container tag for all your telemetry including traces, profiles, and logs downstream.
+<div class="alert alert-info">Container setups such as <code>containerd</code> and <code>CRI-O</code> running on Mesos or Swarm are not supported. Default to the non-containerized environment setup below.</div>
 
 #### Non-containerized environments
 
@@ -98,10 +95,6 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
 ./my-application start
 ```
 
-#### Other container setups
-
-<div class="alert alert-info">Container setups such as <code>containerd</code> and <code>CRI-O</code> running on Mesos or Swarm are not supported. Default to the non-containerized environment setup.</div>
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -111,7 +104,7 @@ In order to link your telemetry to your source code, Datadog collects informatio
 
 When you run `datadog-ci git-metadata upload` within a git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
-### Validation
+#### Validation
 
 To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
 
@@ -133,6 +126,8 @@ In [Error Tracking][3], you can directly access links to repositories from your 
 2. Click on an issue. The **Issue Details** panel appears to the right.
 3. Under **Latest available errors**, hover over a frame. The **View** button appears to the right and directs you to GitHub.
 
+{{< img src="integrations/guide/github_apps/stacktrace-link-to-git.png" alt="Inline code snippet" style="width:90%;">}}
+
 ##### Inline Source Code
 
 If you are a GitHub SaaS user, install Datadog's [GitHub Apps][2] to directly inline code snippets from your GitHub repository in your stack traces.
@@ -149,6 +144,8 @@ In the [Continuous Profiler][2], you can directly access traces in the source re
 1. Navigate to **APM** > **Profile Search**.
 2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears to the right.
 3. Click **More actions** > **View in repo** to open the source code repository.
+
+{{< img src="integrations/guide/github_apps/profiler-link-to-git.png" alt="Link to git from profiler" style="width:90%;">}}
 
 ## Further Reading
 
