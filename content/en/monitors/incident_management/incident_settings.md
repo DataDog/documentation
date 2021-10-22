@@ -20,7 +20,7 @@ The Information subsection of Incident Settings is used to define your organizat
 
 Use severity level settings to:
 
-1. Decide whether your Severity Levels start at `SEV-0` or `SEV-1` as your most critical Severity (**Default:** `SEV-1`)
+1. Define your most critical severity as `SEV-0` or `SEV-1` (defaults to `SEV-1`).
 2. Customize the sub-labels of your severities (**Defaults:** Critical, High, Moderate, Low, Minor)
 3. Customize the descriptions of your severities
 4. Add or delete severities from the bottom of your list, with a minimum of 3 and a maximum of 10. 
