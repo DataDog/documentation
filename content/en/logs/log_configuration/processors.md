@@ -92,6 +92,10 @@ If your logs put their dates in an attribute not in this list, use the log date 
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
+If your logs don't have a timestamp that conforms to the formats listed above, use the grok processor to extract the epoch time from the timestamp to a new attribute. The date remapper uses the newly defined attribute. 
+
+To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][3].
+
 **Note**:
 
 * **Log events can be submitted up to 18h in the past and 2h in the future**.
@@ -143,7 +147,7 @@ Into this log:
 
 Each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards][3]
+* Integers from 0 to 7 map to the [Syslog severity standards][4]
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
@@ -278,7 +282,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [attributes and tags documentation][4]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
 If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`)
 
@@ -417,7 +421,7 @@ Use categories to create groups for an analytical view (for example, URL groups,
 
 **Note**:
 
-* The syntax of the query is the one of [Logs Explorer][5] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one of [Logs Explorer][6] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
 * Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper](#log-status-remapper).
@@ -657,7 +661,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 
 ## Lookup processor
 
-Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][6] or the processors mapping table.
+Use the lookup processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][7] or the processors mapping table.
 For example, you can use the lookup processor to map an internal service ID into a human readable service name.
 Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
@@ -712,7 +716,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][7] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][8] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -758,8 +762,9 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 
 [1]: /logs/log_configuration/pipelines/
 [2]: /logs/log_configuration/parsing/
-[3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[4]: /logs/log_collection/?tab=host#attributes-and-tags
-[5]: /logs/search_syntax/
-[6]: /logs/guide/enrichment-tables/
-[7]: /tracing/connect_logs_and_traces/
+[3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[5]: /logs/log_collection/?tab=host#attributes-and-tags
+[6]: /logs/search_syntax/
+[7]: /logs/guide/enrichment-tables/
+[8]: /tracing/connect_logs_and_traces/

@@ -80,7 +80,7 @@ Les instructions ci-dessous vous expliquent comment configurer la tâche à l'ai
 6. Choisissez une valeur pour **Task memory** et **Task CPU** en fonction de vos besoins.
 7. Cliquez sur le bouton **Add container**.
 8. Pour **Container name**, saisissez `datadog-agent`.
-9. Pour **Image**, saisissez `datadog/agent:latest`.
+9. Pour **Image**, saisissez `public.ecr.aws/datadog/agent:latest`.
 10. Pour le champ **Memory Limits**, saisissez `256` comme limite logicielle.
 11. Faites défiler jusqu'à atteindre la section **Advanced container configuration**, puis saisissez `10` pour **CPU units**.
 12. Pour le champ **Env Variables**, ajoutez la **clé** `DD_API_KEY` et saisissez votre [clé d'API Datadog][5] en tant que valeur. _Si vous préférez stocker vos secrets dans S3, consultez le [guide de configuration d'ECS][6]._

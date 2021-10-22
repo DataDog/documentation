@@ -92,7 +92,7 @@ Here is an example of what the notification would look like in Slack:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/logs_to_metrics/#recommended-usage-metrics
-[2]: /monitors/monitor_types/anomaly/
+[2]: /monitors/create/types/anomaly/
 [3]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [4]: https://app.datadoghq.com/monitors#create/anomaly
 [5]: /resources/json/estimated_log_usage_dashboard_configuration.json

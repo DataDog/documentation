@@ -198,7 +198,7 @@ const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
   contentTypeKeys.forEach((key) => {
-    if(key.startsWith("application/json")) {
+    if(key.startsWith("application/json") || key.startsWith("text/json")) {
       return content[key].schema;
     }
   });
@@ -335,35 +335,38 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
           }
         }
 
-        // choose the example to use
-        // parent -> current level -> one deep
-        let chosenExample = parentExample;
-        if (typeof value.example !== 'undefined') {
-          chosenExample = value.example;
-        } else if (value.items && typeof value.items.example !== 'undefined') {
-          chosenExample = value.items.example;
-          prefixType = '[';
-          suffixType = ']';
-        }
-
         if (childData) {
           const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys, (level + 1));
           iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
-          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+          if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
             // skip output
           } else {
             jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
           }
         } else {
+          // choose the example to use
+          // parent -> current level -> one deep
           let ex = '';
+          if (typeof value.example !== 'undefined') {
+            if (value.example instanceof Array) {
+              ex = outputExample(value.example, key);
+            } else {
+              ex = safeJsonStringify(value.example, null, 2);
+            }
+          } else if (value.items && typeof value.items.example !== 'undefined' && Object.keys(value.items.example).length !== 0) {
+            ex = outputExample(value.items.example, key);
+            prefixType = '[';
+            suffixType = ']';
+          } else {
+            ex = outputExample(parentExample, key);
+          }
           // bool causes us to not go in here so check for it
-          ex = outputExample(chosenExample, key);
-          if(actionType === 'curl') {
+          if (actionType === 'curl') {
             ex = ex || null;
           } else {
             ex = ex || outputValueType(value.type, value.format);
           }
-          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+          if (actionType === "curl" && !iterationHasRequiredKeyMatches) {
 
           } else {
             jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
@@ -752,7 +755,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
-              newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
+              newRequiredFields = (value.items.required) ? value.items.required : [];
             }
             // for items -> oneOf
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
@@ -769,7 +772,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
-          newRequiredFields = (value.required) ? value.required : newRequiredFields;
+          newRequiredFields = (value.required) ? value.required : [];
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
@@ -895,6 +898,8 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
           item['request_description'] = action.requestBody.description || '';
           if (action.requestBody.content && action.requestBody.content["application/json"]) {
             item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
+          } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
+            item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
           }
         }
         /*

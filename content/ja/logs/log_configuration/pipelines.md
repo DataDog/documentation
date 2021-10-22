@@ -14,7 +14,7 @@ further_reading:
   - link: /logs/explorer/
     tag: ドキュメント
     text: ログの調査方法
-  - link: 'https://learn.datadoghq.com/course/view.php?id=10'
+  - link: https://learn.datadoghq.com/course/view.php?id=10
     tag: ラーニングセンター
     text: ログを極める パース
 ---
@@ -209,9 +209,9 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="ネストされたパイプライン" style="width:80%;">}}
 
-あるパイプラインを別のパイプラインにドラッグアンドドロップして、ネストされたパイプラインに変換することができます。
+あるパイプラインを別のパイプラインに移動して、ネストされたパイプラインに変換することができます。
 
-{{< img src="logs/processing/pipelines/nested_pipeline_drag_drop.mp4" alt="ネストされたパイプラインをドラッグアンドドロップ" video="true"  width="80%" >}}
+{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="ネストされたパイプラインをドラッグアンドドロップ" video="true"  width="80%" >}}
 
 ## その他の参考資料
 

@@ -18,6 +18,7 @@
 "guid": "34529abf8-de7a-461e-83ef-0272a07d1ab8"
 "integration_id": "rapdev-hpux-agent"
 "integration_title": "RapDev Solaris Agent"
+"integration_version": ""
 "is_public": true
 "kind": "integration"
 "maintainer": "integrations@rapdev.io"

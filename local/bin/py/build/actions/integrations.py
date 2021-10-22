@@ -80,6 +80,12 @@ class Integrations:
         self.regex_tab_end = re.compile(
             r" xxx -->", re.MULTILINE
         )
+        self.regex_partial_open = re.compile(
+            r"<!-- partial", re.MULTILINE
+        )
+        self.regex_partial_close = re.compile(
+            r"partial -->", re.MULTILINE
+        )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
             re.DOTALL,
@@ -377,6 +383,7 @@ class Integrations:
         with open(file_name) as f:
             try:
                 data = json.load(f)
+                data = self.process_manifest(data, basename(dirname(file_name)))
                 data_name = data.get("name", "").lower()
                 if data_name in [
                     k
@@ -585,6 +592,7 @@ class Integrations:
         if exists(manifest):
             try:
                 manifest_json = json.load(open(manifest))
+                manifest_json = self.process_manifest(manifest_json, basename(dirname(file_name)))
             except JSONDecodeError:
                 no_integration_issue = False
                 manifest_json = {}
@@ -667,6 +675,12 @@ class Integrations:
             result = re.sub(
                 self.regex_tab_end, " %}}", result, 0
             )
+            result = re.sub(
+                self.regex_partial_open, "", result, 0
+            )
+            result = re.sub(
+                self.regex_partial_close, "", result, 0
+            )
 
         if metrics_exist:
             result = re.sub(
@@ -695,10 +709,28 @@ class Integrations:
                 if matches:
                     integration_id = matches.group(1)
 
+        # if __about__.py exists lets grab the integration version
+        integration_version = manifest_json.get("integration_version", "") or ""
+        integration_name = basename(dirname(file_name))
+        aboutpy = "{0}{1}{2}{3}{4}{5}{6}".format(dirname(file_name), sep, "datadog_checks", sep, integration_name, sep, "__about__.py")
+
+        if exists(aboutpy):
+            with open(aboutpy) as f:
+                # look for version = "integration-version" and extract
+                matches = re.search("^__version__\s*=\s*(?:\'|\")([0-9.]+)(?:\'|\")$", f.read(), re.MULTILINE)
+                if matches:
+                    integration_version = matches.group(1)
+
         if not exist_already and no_integration_issue:
             # lets only write out file.md if its going to be public
             if manifest_json.get("is_public", False):
                 out_name = self.content_integrations_dir + new_file_name
+
+                # lets make relative app links to integrations tile absolute
+                regex = r"(?<!https://app.datadoghq.com)(/account/settings#integrations[^.)\s]*)"
+                regex_result = re.sub(regex, "https://app.datadoghq.com\\1", result, 0, re.MULTILINE)
+                if regex_result:
+                    result = regex_result
 
                 # if the same integration exists in multiple locations try name md file differently
                 # integration_id.md -> name.md -> original_collision_name.md
@@ -710,11 +742,11 @@ class Integrations:
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, f_name))
                     result = self.add_integration_frontmatter(
-                        f_name, result, dependencies, integration_id, manifest_json
+                        f_name, result, dependencies, integration_id, integration_version, manifest_json
                     )
                 else:
                     result = self.add_integration_frontmatter(
-                        new_file_name, result, dependencies, integration_id
+                        new_file_name, result, dependencies, integration_id, integration_version
                     )
 
                 with open(out_name, "w", ) as out:
@@ -727,7 +759,7 @@ class Integrations:
                         final_file.write(final_text)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id="", manifest_json=None
+        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -765,14 +797,15 @@ class Integrations:
                 item["dependencies"] = dependencies
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
+                item["integration_version"] = item.get("integration_version", integration_version)
                 fm = yaml.safe_dump(
-                    item, width=150, default_style='"', default_flow_style=False, allow_unicode=True
+                    item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
                 # simple bool cleanups with replace
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=150, default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
@@ -814,3 +847,28 @@ class Integrations:
             )
 
         return dependencies
+
+    def process_manifest(self, manifest_json, name):
+        """ Takes manifest and converts v2 and above to v1 expected formats for now """
+        manifest_version = (manifest_json.get("manifest_version", '1.0.0') or '1.0.0').split('.')
+        split_version = manifest_version[0] if len(manifest_version) > 1 else '1'
+        if split_version != '1':
+            # v2 or above
+            manifest_json["integration_id"] = manifest_json.get("app_id", "")
+            categories = []
+            supported_os = []
+            for tag in manifest_json.get("classifier_tags", []):
+                # in some cases tag was null/None
+                if tag:
+                    key, value = tag.split("::")
+                    if key.lower() == "category":
+                        categories.append(value.lower())
+                    if key.lower() == "supported os":
+                        supported_os.append(value.lower())
+            manifest_json["categories"] = categories
+            manifest_json["supported_os"] = supported_os
+            manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
+            manifest_json["is_public"] = manifest_json.get("display_on_public_website", False)
+            manifest_json["short_description"] = manifest_json.get("tile", {}).get("description", '')
+            manifest_json["name"] = manifest_json.get("name", name)
+        return manifest_json

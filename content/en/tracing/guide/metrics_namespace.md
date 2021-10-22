@@ -162,27 +162,35 @@ With the following definitions:
 
 ### Apdex
 
+`trace.<SPAN_NAME>.apdex`
+: **Prerequisite:** This metric exists for any HTTP/WEB APM service.<br>
+**Description:** Measures the [Apdex][9] score for each web service.<br>
+**Metric type:** [GAUGE][6].<br>
+**Tags:** `env`, `service`, `resource` / `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
+
+**The following legacy apdex metrics are deprecated.**
+
 `trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`
 : **Prerequisite:** This metric exists for any HTTP/WEB APM service.<br>
-**Description:** Represent the [Apdex][9] score for all combination of resources, [2nd primary tag][4]s and services.<br>
+**Description:** Represents the [Apdex][9] score for all combination of resources, [2nd primary tag][4]s and services.<br>
 **Metric type:** [GAUGE][6].<br>
-**Tags:** `env`, `service`, `resource`, and [the second primary tag][4].
+**Tags:** `env`, `service`, `resource` / `resource_name`, and [the second primary tag][4].
 
 `trace.<SPAN_NAME>.apdex.by.resource_service`
 : **Prerequisite:** This metric exists for any HTTP/WEB APM service.<br>
-**Description:** Measure the [Apdex][9] score for each combination of resources and web services.<br>
+**Description:** Measures the [Apdex][9] score for each combination of resources and web services.<br>
 **Metric type:** [GAUGE][6].<br>
-**Tags:** `env`, `service`, and `resource`
+**Tags:** `env`, `service`, and `resource` / `resource_name`.
 
 `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`
 : **Prerequisite:** This metric exists for any HTTP/WEB APM service.<br>
-**Description:** Measure the [Apdex][9] score for each combination of [2nd primary tag][4] and web services.<br>
+**Description:** Measures the [Apdex][9] score for each combination of [2nd primary tag][4] and web services.<br>
 **Metric type:** [GAUGE][6].<br>
 **Tags:** `env`, `service`, and [the second primary tag][4].
 
 `trace.<SPAN_NAME>.apdex.by.service`
 : **Prerequisite:** This metric exists for any HTTP/WEB APM service.<br>
-**Description:** Measure the [Apdex][9] score for each web services.<br>
+**Description:** Measures the [Apdex][9] score for each web service.<br>
 **Metric type:** [GAUGE][6].<br>
 **Tags:** `env` and `service`.
 
@@ -194,8 +202,8 @@ With the following definitions:
 [2]: /tracing/setup/
 [3]: /tracing/visualization/#trace-metrics
 [4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /developers/metrics/types/?tab=count#metric-types
-[6]: /developers/metrics/types/?tab=gauge#metric-types
+[5]: /metrics/types/?tab=count#metric-types
+[6]: /metrics/types/?tab=gauge#metric-types
 [7]: /tracing/visualization/services_list/#services-types
 [8]: /tracing/visualization/#services
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

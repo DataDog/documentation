@@ -2,10 +2,10 @@
 title: How can I setup an alert for when a specific tag stops reporting?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types/"
+- link: "/monitors/create/types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "/monitors/notifications/"
+- link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 ---
@@ -23,4 +23,4 @@ You should then be notified when the tag stops to be sent along with the chosen 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/
-[2]: /monitors/monitor_types/metric/
+[2]: /monitors/create/types/metric/

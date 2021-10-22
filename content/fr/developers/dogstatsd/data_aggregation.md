@@ -48,9 +48,9 @@ Parmi toutes les valeurs reçues pendant un même intervalle de transmission, la
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/dogstatsd/
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[3]: /fr/developers/metrics/types/?tab=count#metric-types
-[4]: /fr/developers/metrics/types/
-[5]: /fr/developers/metrics/types/?tab=gauge#metric-types
-[6]: /fr/developers/metrics/types/?tab=histogram#metric-types
-[7]: /fr/developers/metrics/types/?tab=distribution#metric-types
+[2]: /fr/metrics/dogstatsd_metrics_submission/
+[3]: /fr/metrics/types/?tab=count#metric-types
+[4]: /fr/metrics/types/
+[5]: /fr/metrics/types/?tab=gauge#metric-types
+[6]: /fr/metrics/types/?tab=histogram#metric-types
+[7]: /fr/metrics/types/?tab=distribution#metric-types

@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Compatibility
 
 Supported languages:
@@ -18,9 +18,9 @@ Supported languages:
 * Objective-C >= 2.0
 
 Supported platforms:
-* iOS >= 12.0
+* iOS >= 11.0
 * macOS >= 10.13
-* tvOS >= 12.0
+* tvOS >= 11.0
 
 ## Installing the Swift testing SDK
 
@@ -71,6 +71,8 @@ end
 
 3. If you run UITests, also link the app running the tests with this library.
 
+<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
@@ -117,7 +119,7 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
-{{< site-region region="eu" >}}
+{{< site-region region="eu,us3" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
@@ -128,28 +130,28 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [1]: /getting_started/site/
 {{< /site-region >}}
 
-### Collecting Git and build metadata
+### Collecting Git metadata
 
-Git metadata and build information is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#ci-provider-environment-variables) below for a full list).
+Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected using CI provider environment variables, that must be forwarded to the test application (see the section [CI provider environment variables](#CI-provider-environment-variables) below for a full list).
 
 When running tests in a simulator, full Git metadata is collected using the local `.git` folder. In this case, Git-related environment variables don't have to be forwarded.
 
-The user can also provide Git information by using custom environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). This is useful for adding Git information for non-supported CI providers, or for .git folders that are not available from the running process. Custom environment variables are also useful for overwriting existing Git information. If these environment variables are set, they take precedence over those coming from the CI or from the .git folder. The list of supported environment variables for Git information includes the following:
+If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
 
 `DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored.<br/>
+: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
 **Example**: `git@github.com:MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Branch where this commit belongs.<br/>
+: Git branch being tested. Leave empty if providing tag information instead.<br/>
 **Example**: `develop`
 
 `DD_GIT_TAG`
-: Tag of the commit, if it has one.<br/>
+: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
 **Example**: `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
-: Commit SHA.<br/>
+: Full commit hash.<br/>
 **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
 `DD_GIT_COMMIT_MESSAGE`
@@ -157,27 +159,27 @@ The user can also provide Git information by using custom environment variables 
 **Example**: `Set release number`
 
 `DD_GIT_COMMIT_AUTHOR_NAME`
-: Author name.<br/>
-**Example**: `John Doe`
+: Commit author name.<br/>
+**Example**: `John Smith`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Author email.<br/>
-**Example**: `john@doe.com`
+: Commit author email.<br/>
+**Example**: `john@example.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE`
-: Author date. ISO 8601 format.<br/>
+: Commit author date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 `DD_GIT_COMMIT_COMMITTER_NAME`
-: Committer name.<br/>
-**Example**: `Jane Doe`
+: Commit committer name.<br/>
+**Example**: `Jane Smith`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Committer email.<br/>
-**Example**: `jane@doe.com`
+: Commit committer email.<br/>
+**Example**: `jane@example.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE`
-: Committer date. ISO 8601 format.<br/>
+: Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
 ### Running tests
@@ -196,6 +198,15 @@ DD_TEST_RUNNER=1 DD_ENV=ci xcodebuild \
 {{< site-region region="eu" >}}
 {{< code-block lang="bash" >}}
 DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=datadoghq.eu xcodebuild \
+  -project "MyProject.xcodeproj" \
+  -scheme "MyScheme" \
+  -destination "platform=macOS,arch=x86_64" \
+  test
+{{< /code-block >}}
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+{{< code-block lang="bash" >}}
+DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE=us3.datadoghq.com xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
   -destination "platform=macOS,arch=x86_64" \
@@ -540,3 +551,8 @@ Additional Git configuration for physical device testing:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/client-tokens
+
+{{< /site-region >}}
+{{< site-region region="us5,gov" >}}
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported at this time.
+{{< /site-region >}}

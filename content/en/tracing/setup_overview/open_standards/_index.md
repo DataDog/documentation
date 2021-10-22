@@ -189,14 +189,14 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
 
 1. The example demonstrates deploying the OpenTelemetry Collectors in [agent mode via daemonset][14], which collect relevant k8s node and pod specific metadata, and then forward telemetry data to an OpenTelemetry Collector in [standalone collector mode][15]. This OpenTelemetry Collector in standalone collector mode then exports to the Datadog backend. See [this diagram of this deployment model][16].
 
-2. For OpenTelemetry Collectors deployed as agent via daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8s_tagger` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
+2. For OpenTelemetry Collectors deployed as agent by daemonset, in the daemonset, `spec.containers.env` should use the downward API to capture `status.podIP` and add it as part of the `OTEL_RESOURCE` environment variable. This is used by the OpenTelemetry Collector's `resourcedetection` and `k8sattributes` processors, which should be included along with a `batch` processor and added to the `traces` pipeline.
 
     In the daemonset's `spec.containers.env` section:
 
     ```yaml
       # ...
       env:
-         # Get pod ip so that k8s_tagger can tag resources
+         # Get pod ip so that k8sattributes can tag resources
         - name: POD_IP
           valueFrom:
             fieldRef:
@@ -212,16 +212,16 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
     ```yaml
       # ...
       # The resource detector injects the pod IP
-      # to every metric so that the k8s_tagger can
+      # to every metric so that k8sattributes can
       # fetch information afterwards.
       resourcedetection:
         detectors: [env]
         timeout: 5s
         override: false
-      # The k8s_tagger in the Agent is in passthrough mode
+      # The k8sattributes processor in the Agent is in passthrough mode
       # so that it only tags with the minimal info for the
-      # collector k8s_tagger to complete
-      k8s_tagger:
+      # collector k8sattributes to complete
+      k8sattributes:
         passthrough: true
       batch:
       # ...
@@ -231,12 +231,12 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
 
     ```yaml
       # ...
-      # resourcedetection must come before k8s_tagger
-      processors: [resourcedetection, k8s_tagger, batch]
+      # resourcedetection must come before k8sattributes
+      processors: [resourcedetection, k8sattributes, batch]
       # ...
     ```
 
-3. For OpenTelemetry Collectors in standalone collector mode, which receive traces from downstream collectors and export to Datadog's backend, include a `batch` processor configured with a `timeout` of `10s` as well as the `k8s_tagger` enabled. These should be included along with the `datadog` exporter and added to the `traces` pipeline.
+3. For OpenTelemetry Collectors in standalone collector mode, which receive traces from downstream collectors and export to Datadog's backend, include a `batch` processor configured with a `timeout` of `10s`, and `k8sattributes` enabled. These should be included along with the `datadog` exporter and added to the `traces` pipeline.
 
     In the `otel-collector-conf` ConfigMap's `data.otel-collector-config` `processors` section:
 
@@ -244,7 +244,7 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
       # ...
       batch:
         timeout: 10s
-      k8s_tagger:
+      k8sattributes:
       # ...
     ```
 
@@ -261,10 +261,11 @@ A full example Kubernetes manifest for deploying the OpenTelemetry Collector as 
 
     ```yaml
       # ...
-      processors: [k8s_tagger, batch]
+      processors: [k8sattributes, batch]
       exporters: [datadog]
       # ...
     ```
+<div class="alert alert-warning">If you get the error <code>unknown processors type "k8sattributes" for k8sattributes</code>, upgrade to the latest OpenTelemetry Collector (v0.37.0 or greater).</div>
 
 ##### Example Kubernetes OpenTelemetry application configuration
 

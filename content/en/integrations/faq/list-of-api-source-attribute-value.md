@@ -185,7 +185,7 @@ private: true
 | Google Cloud Interconnect     | GCPINTERCONNECT            |
 | Google Cloud Iot              | GCPIOT                     |
 | Google Cloud Loadbalancing    | GCPLOADBALANCING           |
-| Google Stackdriver Logging    | GCPLOGGING                 |
+| Google Cloud Logging          | GCPLOGGING                 |
 | Google Cloud Ml               | GCPML                      |
 | Google Cloud Platform         | GCP                        |
 | Google Cloud Pubsub           | GCPPUBSUB                  |

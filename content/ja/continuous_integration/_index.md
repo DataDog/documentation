@@ -9,8 +9,11 @@ further_reading:
     tag: ドキュメント
     text: 問題のあるテストを見つけて修正するために、テストデータの調査を開始します
 ---
-<div class="alert alert-info"><p>CI Visibility はプライベートベータ版です。この期間中のパイプラインとテストのトレースに課金の影響はありません。プライベートベータに追加する場合は、<a href="https://app.datadoghq.com/ci/getting-started">CI Visibility アプリ内の Getting Started にサインアップ</a>してください。</p><p>CI Visibility は、現時点では <a href="/getting_started/site/">US1 Datadog サイト</a>でのみ利用できます。</p>
+<div class="alert alert-info"><p>CI Visibility はベータ版です。この期間中にパイプラインやテストをトレースしても、請求内容には影響しません。</p>
 </div>
+{{< site-region region="us3,gov" >}}
+<div class="alert alert-info"><p>CI Visibility は、現時点では US1 および EU1 の Datadog サイトでのみ利用可能です。</p></div>
+{{< /site-region >}}
 
 Datadog Continuous Integration (CI) Visibility は、CI テストとパイプラインの結果に関する情報に加えて、CI のパフォーマンス、傾向、信頼性に関するデータをすべて 1 か所にまとめます。開発者が、テストまたはパイプラインの失敗の理由を掘り下げたり、テストスイートの実行時間の傾向を監視したり、特定のコミットがパイプラインに与える影響を確認したりできるだけでなく、ビルドエンジニアが、組織間の CI の状態とパイプラインパフォーマンスの経時的な傾向を視認することもできます。
 

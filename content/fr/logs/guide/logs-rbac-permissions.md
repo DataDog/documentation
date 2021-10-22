@@ -76,7 +76,7 @@ Cette autorisation peut être globale ou limitée à un sous-ensemble d'index.
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
 
 
-[1]: /fr/logs/pipelines/indexes
+[1]: /fr/logs/log_configuration/indexes/
 {{% /tab %}}
 {{% tab "API" %}}
 

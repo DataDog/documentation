@@ -78,6 +78,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
       branch: master
@@ -86,6 +87,8 @@
       options:
         dest_dir: '/developers/integrations/'
         path_to_remove: 'docs/dev/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
 
   - repo_name: integrations-extras
     contents:
@@ -97,6 +100,7 @@
       - "*/manifest.json"
       - "*/assets/service_checks.json"
       - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
 
   - repo_name: marketplace
     contents:
@@ -222,13 +226,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'forwarder.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
-          title: Datadog Forwarder
-          kind: documentation
-          aliases:
-            - /serverless/troubleshooting/installing_the_forwarder/
-            - /serverless/forwarder/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
 
   - repo_name: serverless-plugin-datadog
     contents:
@@ -239,12 +238,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'plugin.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
-          title: Datadog Serverless Plugin
-          kind: documentation
-          aliases:
-            - /serverless/serverless_integrations/plugin/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
 
   - repo_name: datadog-cloudformation-macro
     contents:
@@ -521,7 +516,7 @@
               text: "dd-sdk-ios Source code"
             - link: "tracing/visualization/"
               tag: "Documentation"
-              text: "Explore your services, resources and traces"
+              text: "Explore your services, resources, and traces"
 
     - action: pull-and-push-folder
       branch: master
@@ -530,6 +525,18 @@
       options:
         dest_dir: '/real_user_monitoring/ios/'
         path_to_remove: 'docs/rum_collection/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/" ]
+
+    - action: pull-and-push-folder
+      branch: master
+      globs:
+        - docs/error_tracking/*
+      options:
+        dest_dir: '/real_user_monitoring/error_tracking/'
+        path_to_remove: 'docs/error_tracking/'
+        front_matters:
+          dependencies: [ "https://github.com/DataDog/dd-sdk-ios/blob/master/docs/error_tracking/" ]
 
   - repo_name: dd-sdk-reactnative
     contents:
@@ -590,3 +597,11 @@
       options:
         file_name: 'agent_config.yaml'
         output_content: false
+    - action: pull-and-push-folder
+      branch: main
+      globs:
+      - 'docs/cloud-workload-security/agent_expressions.md'
+      - 'docs/cloud-workload-security/backend.md'
+      options:
+        dest_dir: '/security_platform/cloud_workload_security/'
+        path_to_remove: 'docs/cloud-workload-security/'

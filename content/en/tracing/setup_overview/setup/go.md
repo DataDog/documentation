@@ -31,7 +31,7 @@ The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full lis
 
 ## Installation and getting started
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][2]. For manual instrumentation, use the [integrations section](#integrations) below for Go libraries and frameworks supporting automatic instrumentation.
+For configuration instructions and details about using the API, see the Datadog [API documentation][2].
 
 For a description of the terminology used in APM, see the [Getting started with APM section][3]. For details about contributing, check the official repository [README.md][4].
 
@@ -124,7 +124,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
         defer tracer.Stop()
     }
     ```
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

@@ -50,7 +50,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               gcr.io/datadoghq/agent:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -75,7 +75,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               gcr.io/datadoghq/agent:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -100,7 +100,7 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_FILTER_TAGS_REQUIRE`      | Defines required tags that traces must have in order to be sent to Datadog.                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_FILTER_TAGS_REJECT`      | Defines rejection tags. The Agent drops traces that have these tags.       |
-| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                                                        |
+| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                                                        |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                                              |
 | `DD_APM_RECEIVER_SOCKET`   | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                                                       |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                                                  |
@@ -147,7 +147,7 @@ docker run -d --name app \
               company/app:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov" >}}
 
 ```bash
 # Datadog Agent
@@ -189,7 +189,7 @@ docker run -d --name app \
               company/app:latest
 ```
 {{< /site-region >}}
-{{< site-region region="us3,eu,gov" >}} 
+{{< site-region region="us3,us5,eu,gov" >}} 
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \

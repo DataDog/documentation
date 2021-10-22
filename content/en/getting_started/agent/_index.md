@@ -111,7 +111,7 @@ For help troubleshooting the Agent:
 {{< /whatsnext >}}
 
 [1]: /integrations/
-[2]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /metrics/dogstatsd_metrics_submission/
 [3]: /api/
 [4]: /infrastructure/process/
 [5]: /logs/

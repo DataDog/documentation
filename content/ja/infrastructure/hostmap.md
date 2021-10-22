@@ -40,7 +40,7 @@ further_reading:
 
 [タグ][1]は、[Datadog インテグレーション][2]によって自動的に適用することも、手動で適用することもできます。タグを使用してホストをフィルタリングできます。
 
-たとえば、一部のホストが AWS 上で動作している場合、以下の AWS 固有のタグをすぐに利用できます。
+たとえば、一部のホストが AWS 上で動作している場合、以下の AWS 固有のタグを利用できます。
 
 * `availability-zone`
 * `region`
@@ -63,7 +63,7 @@ Datadog Agent では、ホストメタデータおよびアプリケーション
 
 インテグレーションの名前をクリックすると、そのインテグレーションのメトリクスがコンパクトなダッシュボードに表示されます。下のスクリーンショットでは「system」がクリックされ、CPU 使用率、メモリ使用量、ディスクのレイテンシーなどのシステムメトリクスが取得されています。
 
-{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog ホストマップ - ズームイン"  style="width:75%;" >}}
+{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog ホストマップ - ズームイン" style="width:75%;" >}}
 
 ### 図形と色
 
@@ -73,7 +73,7 @@ Datadog Agent では、ホストメタデータおよびアプリケーション
 
 下のスクリーンショットでは、六角形のサイズが 15 分間の平均負荷を示します。この値は、コア数が違ってもマシンの作業負荷を比較できるように正規化されています。
 
-{{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="色および大きさで区別された Datadog ホストマップ"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="色および大きさで区別された Datadog ホストマップ" style="width:80%;">}}
 
 **注**: 「% CPU utilized」メトリクスは、Datadog Agent からレポートされているか、AWS または vSphere から直接レポートされているかにかかわらず、最も信頼性が高い最新の CPU 使用率の計測値を使用します。
 
@@ -83,7 +83,7 @@ Datadog Agent では、ホストメタデータおよびアプリケーション
 
 選択されたメトリクスをレポートしていないホストをホストマップに表示することもできます。それには、マップの右上にある歯車アイコンを選択し、Host Map 設定の「Show hosts with no metrics」を有効にします。
 
-{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="Agent なしのホスト"  style="width:50%;">}}
+{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="Agent なしのホスト" style="width:50%;">}}
 
 ### データの鮮度と意味
 
@@ -98,11 +98,11 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 以下は、Datadog のインフラストラクチャーの一部です。**c3.2xlarge** インスタンスに大きな負荷がかかっていることがわかります。
 
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="ホストマップ - パート 1"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="ホストマップ - パート 1" style="width:80%;">}}
 
 以下に示すように、この c3.2xlarge グループをクリックして役割でサブグループ化すると、一部の役割にのみ負荷がかかり、他の役割はほぼアイドル状態であることがわかります。この 7 つの緑色のノードを c3.xlarge にダウングレードすれば、年間 $13,000 ドル近くの節約になります。(ホスト 1 台につき 1 時間で $0.21 の節約 x 24 時間/日 * 365 日/年 * 7 ホスト = $12,877.20 / 年)
 
-{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Datadog ホストマップ - インスタンス-ロール別グループ"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="Datadog ホストマップ - インスタンス-ロール別グループ" style="width:80%;">}}
 
 ### アベイラビリティーゾーンの配置
 
@@ -110,7 +110,7 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 以下の例では、`role:daniels` を持つホストがいくつかのアベイラビリティーゾーンに不均等に分布しています。(Daniels は内部アプリケーションの名前です。)
 
-{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Datadog ホストマップ - AZ バランス"  style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Datadog ホストマップ - AZ バランス" style="width:80%;" >}}
 
 ### 問題の調査
 
@@ -119,9 +119,9 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 以下は、最近 Datadog で発生した問題のスクリーンショットです。一部のホストでは、同じクラスターに属しているにもかかわらず、他のホストより使用可能なメモリが少なくなっています。マシンイメージごとにグループ化することで、使用されているイメージが 2 種類あり、その 1 つが過負荷であることがわかりました。
 
-{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog ホストマップ - 2 メモリの使用帯域)"  style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog ホストマップ - 2 メモリの使用帯域" style="width:80%;" >}}
 
-{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog ホストマップ - 2 つのイメージグループ"  style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog ホストマップ - 2 つのイメージグループ" style="width:80%;">}}
 
 ## その他の参考資料
 

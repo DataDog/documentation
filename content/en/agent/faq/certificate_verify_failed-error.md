@@ -40,7 +40,7 @@ sudo rm -f /opt/datadog-agent/agent/datadog-cert.pem && sudo /etc/init.d/datadog
 
 #### Windows
 
-If your Agent is configured to use a proxy, follow the [dedicated section below](#windows-agent-5-x-configured-to-use-a-proxy-or-the-curl-http-client) instead.
+If your Agent is configured to use a proxy, follow the [dedicated section below](#windows-agent-5x-configured-to-use-a-proxy-or-the-curl-http-client) instead.
 
 *Using the CLI*
 

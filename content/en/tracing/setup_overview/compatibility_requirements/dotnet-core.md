@@ -11,7 +11,7 @@ further_reading:
     - link: 'tracing/setup/dotnet-core'
       tag: 'Documentation'
       text: 'Instrument Your Application'
-    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/samples'
+    - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
       tag: 'GitHub'
       text: 'Examples of Custom Instrumentation'
 ---
@@ -51,10 +51,12 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
 | ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                                     | `AdoNet`             |
+| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                   | `AspNetCore`         |
 | AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0                                                     | `CosmosDb`           |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
+| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                    | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |

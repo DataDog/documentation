@@ -216,6 +216,6 @@ tagging
 [38]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [39]: https://app.datadoghq.com/event/stream
 [40]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[41]: /developers/metrics/
-[42]: /developers/metrics/custom_metrics/
+[41]: /metrics/
+[42]: /metrics/custom_metrics/
 [43]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/

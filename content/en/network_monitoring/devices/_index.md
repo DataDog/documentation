@@ -6,6 +6,9 @@ description: Gain visibility into your network-connected devices, such as router
 aliases:
     - /network_performance_monitoring/devices/
 further_reading:
+- link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
+  tag: "Knowledge Center"
+  text: "SNMP Monitoring Overview"
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
@@ -77,5 +80,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 [2]: /network_monitoring/devices/setup/#autodiscovery
 [3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /monitors/monitor_types/metric/
+[5]: /monitors/create/types/metric/
 [6]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

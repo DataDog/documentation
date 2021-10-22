@@ -162,10 +162,10 @@ Documentation about [StatsD/DogStatsD][10].
 [1]: /dashboards/timeboard/
 [2]: /dashboards/screenboard/
 [3]: /agent/
-[4]: /developers/metrics/custom_metrics/
+[4]: /metrics/custom_metrics/
 [5]: /dashboards/faq/how-is-data-aggregated-in-graphs/
 [6]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /dashboards/functions/rollup/
 [8]: /dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[10]: /developers/metrics/dogstatsd_metrics_submission/
+[10]: /metrics/dogstatsd_metrics_submission/

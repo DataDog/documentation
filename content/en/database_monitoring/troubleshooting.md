@@ -4,7 +4,7 @@ kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
-{{< site-region region="us3,gov" >}}
+{{< site-region region="us3,us5,gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -200,7 +200,7 @@ If you have data from some queries, but are expecting to see a particular query 
 
 [1]: /database_monitoring/data_collected/#which-queries-are-tracked
 [2]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[3]: /database_monitoring/setup_postgres/advanced_configuration/TODO
+[3]: /database_monitoring/setup_postgres/advanced_configuration/
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -279,20 +279,19 @@ Some or all queries may not have plans available. This can be due to unsupported
 | The Agent is running an unsupported version. | Ensure that the Agent is running version 7.30.0 or greater. We recommend regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
 | The Agent is not able to execute a required function in the `datadog` schema of the database. | The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
 | Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
-| The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][2] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, clients such as the Go client [sqlx][3] and Python client [asyncpg][4] use the extended query protocol. To work around this limitation, you can modify your application to send the raw SQL queries including bind parameters. |
-| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][5]. |
+| The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][2] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][3] and the Go client [pgx][4] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][5] or set `PreferSimpleProtocol` on the [pgx][4] connection config. |
+| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases will not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][6]. |
 | The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][6] to capture the query. |
-
-
+| The query is relatively infrequent or executes very quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
 
 
 [1]: /database_monitoring/setup_postgres/
 [2]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
-[3]: https://pkg.go.dev/github.com/jmoiron/sqlx
-[4]: https://github.com/MagicStack/asyncpg
-[5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[6]: /database_monitoring/setup_postgres/advanced_configuration
+[3]: https://github.com/MagicStack/asyncpg
+[4]: https://github.com/jackc/pgx
+[5]: https://jdbc.postgresql.org/documentation/head/connect.html
+[6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[7]: /database_monitoring/setup_postgres/advanced_configuration
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -309,6 +308,30 @@ Some or all queries may not have plans available. This can be due to unsupported
 {{% /tab %}}
 {{< /tabs >}}
 
+### Setup fails on `create extension pg_stat_statements`
+
+{{< tabs >}}
+{{% tab "Postgres" %}}
+
+Example error output from `create extension pg_stat_statements`: 
+```
+create extension pg_stat_statements;
+ERROR:  could not open extension control file "<path>/share/postgresql/extension/pg_stat_statements.control": No such file or directory
+SQL State: 58P01
+```
+
+This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run: 
+
+```
+sudo apt-get install postgresql-contrib-10
+```
+
+See the appropriate version of the [Postgres `contrib` documentation][1] for more information.
+
+
+[1]: https://www.postgresql.org/docs/12/contrib.html
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Need more help?
 

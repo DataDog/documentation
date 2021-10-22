@@ -62,12 +62,12 @@ Agent フォワーダーは、メトリクスを HTTPS 経由で Datadog に送�
 
 v6 の DogStatsD は、[Etsy の StatsD][5] メトリクス集計デーモンの Go 言語実装です。UDP または Unix ソケット経由で任意のメトリクスを受信してロールアップするために使用され、構成要素の一部としてカスタムコードを組み込んでもレイテンシーが発生しません。DogStatsD についての詳細は[こちら][6]でご確認いただけます。
 
-[1]: /ja/developers/metrics/dogstatsd_metrics_submission/#metrics
+[1]: /ja/metrics/dogstatsd_metrics_submission/#metrics
 [2]: /ja/tracing/guide/terminology/
 [3]: /ja/agent/guide/network/#open-ports
 [4]: /ja/developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[6]: /ja/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -84,7 +84,7 @@ Agent v5 は、以下に示す主な 4 つのコンポーネントで構成さ�
 
 ### 監督、特権、ネットワークポート
 
-SupervisorD マスタープロセスは、`dd-agent` ユーザーとして実行され、分岐したすべてのサブプロセスは同じユーザーとして実行されます。これは、Datadog Agent によって開始されたシステムコール (`iostat`/`netstat`) にも適用されます。Agent 構成は、`/etc/dd-agent/datadog.conf` と `/etc/dd-agent/conf.d` にあります。すべての構成は、`dd-agent` によって読み取り可能である必要があります。構成ファイルには API キーとメトリクスにアクセスするために必要な他の証明書が含まれるので、推奨されるアクセス許可は 0600 です。
+SupervisorD プライマリプロセスは、`dd-agent` ユーザーとして実行され、分岐したすべてのサブプロセスは同じユーザーとして実行されます。これは、Datadog Agent によって開始されたシステムコール (`iostat`/`netstat`) にも適用されます。Agent 構成は、`/etc/dd-agent/datadog.conf` と `/etc/dd-agent/conf.d` にあります。すべての構成は、`dd-agent` によって読み取り可能である必要があります。構成ファイルには API キーとメトリクスにアクセスするために必要な他の証明書が含まれるので、推奨されるアクセス許可は 0600 です。
 
 操作のために次の[ポート][3]が開かれています。
 
@@ -96,7 +96,7 @@ SupervisorD マスタープロセスは、`dd-agent` ユーザーとして実行
 
 v3.4.1 以上の Agent では、すべてのリスニングプロセスはデフォルトで `127.0.0.1` と `::1` にバインドされます。以前のバージョンでは、`0.0.0.0` (すべてのインターフェイス) にバインドされます。プロキシから Agent を実行する詳細については、[Agent のプロキシ構成][4]を参照してください。許可される IP 範囲の詳細については、[ネットワークトラフィック][5]を参照してください。
 
-ファイルディスクリプタを開く数は 1024 までにすることをお勧めします。この値は、コマンド `ulimit -a` で確認できます。Shell Fork Bomb Protection など、ハードウェアの制限でこの推奨値を下回る場合、たとえば `superisord.conf` に次の内容を追加することが一解決方法として考えられます。
+ファイルディスクリプタを開く数は 1024 までにすることをお勧めします。この値は、コマンド `ulimit -a` で確認できます。Shell Fork Bomb Protection など、ハードウェアの制限でこの推奨値を下回る場合、たとえば `supervisord.conf` に次の内容を追加することが一解決方法として考えられます。
 
 ```conf
 [supervisord]
@@ -104,7 +104,7 @@ minfds = 100 # ハードウェア制限
 ```
 
 [1]: /ja/integrations/
-[2]: /ja/developers/metrics/custom_metrics/
+[2]: /ja/metrics/custom_metrics/
 [3]: /ja/agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /ja/agent/proxy/?tab=agentv5
 [5]: /ja/agent/faq/network/
@@ -329,7 +329,7 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 
 ### 構成ファイル
 
-[Agent 構成ファイルガイドを参照してください][9]。
+[Agent コンフィギュレーションファイルに関するドキュメント][9]を参照してください。
 
 ### Datadog サイト
 
@@ -341,7 +341,7 @@ site: {{< region-param key="dd_site" >}}
 
 ### ログの場所
 
-[Agent ログファイルに関するドキュメントを参照してください][11]
+[Agent ログファイルに関するドキュメント][11]を参照してください。
 
 ## その他の参考資料
 

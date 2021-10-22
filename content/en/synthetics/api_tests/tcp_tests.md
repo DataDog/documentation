@@ -1,10 +1,10 @@
 ---
 title: TCP Tests
 kind: documentation
-description: Simulate TCP connections on your hosts from specific connections
+description: Simulate TCP connections on your hosts
 aliases:
   - /synthetics/tcp_test
-  - /synthetics/tcP_check
+  - /synthetics/tcp_check
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -19,12 +19,13 @@ further_reading:
 
 ## Overview
 
-TCP tests allow you to easily **monitor that low-level TCP connections can be established on the ports of given hosts**, ensuring availability of a variety of key services: e.g., `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. Thanks to built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
-TCP tests can run from [managed][1] and [private locations][2] depending on whether you want to launch your TCP connections from **outside or inside your network**.
+TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
+
+TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`TCP`][5], [`DNS`][6], or [`ICMP` test][7]), you can define your test's request.
+After choosing to create a [`TCP` test][4], define your test's request.
 
 ### Define request
 
@@ -33,8 +34,8 @@ After choosing the type of test you want to create ([`HTTP`][3], [`SSL`][4], [`T
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results. 
 3. **Name** your TCP test.
-4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
-5. Select the **Locations** to run your TCP test from: TCP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to launch the connection from outside or inside your network.
+4. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
+5. Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
 
 Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
@@ -46,7 +47,8 @@ TCP tests can run:
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
-* [**Within your CI/CD pipelines**][9].
+* [**Within your CI/CD pipelines**][3].
+
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
@@ -69,13 +71,12 @@ Set alert conditions to determine the circumstances under which you want a test 
 
 When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
 
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes;
+* At least one location was in failure (at least one assertion failed) during the last *X* minutes.
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
-
+Your test can trigger retries in case of a failed test result. By default, the retries are performed 300 ms after the first failed test result. The retry interval can be configured with the [API][6].
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
@@ -83,9 +84,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -126,7 +127,8 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][10] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your TCP tests.
+
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
@@ -135,13 +137,11 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-
-
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
 
 `DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL, wrong configuration of your DNS entries, etc.
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
@@ -151,21 +151,25 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
   - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level.
   - `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions).
 
+## Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][11].
+
+If you have access to the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/http_tests
-[4]: /synthetics/api_tests/ssl_tests
-[5]: /synthetics/api_tests/tcp_tests
-[6]: /synthetics/api_tests/dns_tests
-[7]: /synthetics/api_tests/icmp_tests
-[8]: /synthetics/search/#search
-[9]: /synthetics/ci
-[10]: /api/v1/synthetics/#create-a-test
-[11]: /monitors/notifications/?tab=is_alert#notification
-[12]: https://www.markdownguide.org/basic-syntax/
-[13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
-[14]: /synthetics/settings/#global-variables
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/api_tests/tcp_tests
+[5]: /synthetics/search/#search
+[6]: /api/latest/synthetics/#edit-an-api-test
+[7]: /monitors/notify/?tab=is_alert#notification
+[8]: https://www.markdownguide.org/basic-syntax/
+[9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /synthetics/settings/#global-variables
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles

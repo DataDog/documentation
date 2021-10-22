@@ -139,6 +139,6 @@ Le fichier `service_checks.json` contient les attributs obligatoires suivants :
 [3]: http://yaml-online-parser.appspot.com/
 [4]: https://docs.datadoghq.com/fr/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/fr/developers/metrics/metrics_type/
-[7]: https://docs.datadoghq.com/fr/developers/metrics/metrics_units/
+[6]: https://docs.datadoghq.com/fr/metrics/metrics_type/
+[7]: https://docs.datadoghq.com/fr/metrics/metrics_units/
 [8]: https://docs.datadoghq.com/fr/getting_started/tagging/
