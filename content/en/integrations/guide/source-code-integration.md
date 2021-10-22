@@ -11,7 +11,10 @@ further_reading:
 ## Overview
 
 <div class="alert alert-warning">
-The source code integration is in public beta and is available for all JVM languages and Go.
+The source code integration is in public beta. It generates links from your telemetry
+to your source code in your repository.
+
+It is currently available for all JVM languages and Go. Link to third-party libraries and standard libraries are not supported.
 </div>
 
 The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) and your source code.
