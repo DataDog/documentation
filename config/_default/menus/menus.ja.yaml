@@ -71,7 +71,7 @@ main_left:
     parent: product
   - identifier: security-monitoring
     name: セキュリティモニタリング
-    pre: '<i class="icon-security align-middle"></i>'
+    pre: '<i class="icon-siem align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/security-platform/security-monitoring/"
     weight: 12
     parent: product
