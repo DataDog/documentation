@@ -126,7 +126,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **StatefulSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
