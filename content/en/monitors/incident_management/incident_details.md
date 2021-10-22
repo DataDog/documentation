@@ -16,13 +16,13 @@ Every incident in Datadog has its own Incident Details page where you can manage
 
 ## Global header
 
-{{< img src="monitors/incidents/incident_global_header.jpeg" alt="Incident Global Header"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_global_header.jpeg" alt="Incident Global Header" style="width:80%;">}}
 
 The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][4]. Configure your postmortem templates in Incident Settings to predefine the structure and content of your postmortems.
 
 ## Overview section
 
-{{< img src="monitors/incidents/incident_overview.jpeg" alt="Incident Overview Section"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_overview.jpeg" alt="Incident Overview Section" style="width:80%;">}}
 
 Use the Overview section to specify an incident's properties and define customer impact. 
 
@@ -44,7 +44,7 @@ If your incident is customer-facing, specify the details of the impact below the
 
 ## Timeline section
 
-{{< img src="monitors/incidents/incident_timeline.jpeg" alt="Incident Timeline"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_timeline.jpeg" alt="Incident Timeline" style="width:80%;">}}
 
 The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
 
@@ -52,24 +52,23 @@ The Incident Timeline is the primary source of information for the work done dur
 
 Each cell has its own content type that indicates the kind of information the cell contains:
 
-1. *Responder Note* - A note that was manually written by an incident responder. Responder Notes have the following sub-types:
-   *  *Graph* - The Responder Note contains one or more Datadog Graphs
-   *  *Link* - The Responder Note contains a hyperlink
-   *  *Code* - The Responder Note contains text wrapped in the ``` Markdown syntax for code blocks
-2. *Incident Update* - Any changes made to an incident's Properties (including Status and Severity) or its Impact
-3. *Integration Update* - Any changes made through the Incident Management product's [integrations][3]
-4. *Task* - Any changes made to Incident Tasks in the Remediation Section of the Incident Details Page
-5. *Notification Sent* - An update when a manual notification is sent by an Incident Responder
+|  Content type      | Description                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------ |
+| Responder note     | A note manually written by an incident responder. Responder notes have the following sub-types:<br>- *Graph*: The responder note contains one or more Datadog graphs<br>- *Link*: The responder note contains a hyperlink<br>- *Code*: The responder note contains text wrapped in Markdown syntax for code blocks
+| Incident update    | Any changes made to an incident's properties (including status and severity) or its impact.
+| Integration update | Any changes made through the Incident Management product's [integrations][3].
+| Task               | Any changes made to incident tasks in the Remediation section of the Incident Details page.
+| Notification sent  | An update when a manual notification is sent by an incident responder.
 
-Add responder notes directly to the timeline using the text box just underneath the tabs for switching between the different sections of the Incident Details page. Customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. For responder notes you've authored, you can edit the content or timestamp, or delete the note entirely. You can also copy a link to a specific cell to share with teammates. Responder notes can be [added to the timeline from Slack][9].
+Add responder notes directly to the timeline using the text box just underneath the tabs for switching between the different sections of the Incident Details page. Customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. For responder notes you've authored, you can edit the content or timestamp, or delete the note entirely. You can also copy a link to a specific cell to share with teammates. Responder notes can be [added to the timeline from Slack][8].
 
-For graph cells specifically, graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][8]. When a graph cell is added to the timeline, it has full interactive hover states as found in Dashboards, Notebooks, and other pages. After 24 hours of being added to the timeline, the graphs are replaced with static images capturing what the graph was displaying. This is to ensure that graphs that are displaying short retention data have backup images captured even after the live data in the graphs has expired.
+For graph cells specifically, graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][9]. When a graph cell is added to the timeline, it has full interactive hover states as found in Dashboards, Notebooks, and other pages. After 24 hours of being added to the timeline, the graphs are replaced with static images capturing what the graph was displaying. This is to ensure that graphs that are displaying short retention data have backup images captured even after the live data in the graphs has expired.
 
 By default, timeline cells are sorted in `oldest first` order, but this can be changed to `newest first` using the button at the top of the timeline.
 
 ## Remediation section
 
-{{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section" style="width:80%;">}}
 
 The Remediation Section is where you can store any documents or resources that were relevant to the remediation process of an incident, as well as an area to track key tasks for the remediation process. 
 
@@ -81,9 +80,9 @@ From the Remediation Section, type in the description of your task in the creati
 
 As work for different tasks is finished, individual tasks can be marked as completed by clicking the checkbox to the left of the task's description. If you have a large number of tasks, you can filter them down by searching for key words or by hiding completed tasks from view.
 
-## Notifications Section
+## Notifications section
 
-{{< img src="monitors/incidents/incident_notifications.jpeg" alt="Incident Notifications"  style="width:80%;">}}
+{{< img src="monitors/incidents/incident_notifications.jpeg" alt="Incident Notifications" style="width:80%;">}}
 
 The Notifications Section is where all stakeholder notifications for an incident are consolidated. Manually sent notifications can be created, saved as drafts and sent directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question will also be listed in this section.
 
@@ -122,8 +121,8 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [5]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [6]: https://app.datadoghq.com/incidents
 [7]: /monitors/incident_management/incident_management_analytics
-[8]: https://app.datadoghq.com/organization-settings/public-sharing/settings
-[9]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+[8]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
+[9]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [10]: /integrations/slack/?tab=slackapplicationus#manage-incident-tasks
 [11]: /monitors/incident_management/incident_settings#rules
 [12]: /monitors/incident_management/incident_settings#message-templates
