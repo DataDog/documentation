@@ -27,9 +27,9 @@ Search your metrics by name or tag using the **Metric** or **Tag** search fields
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
 * **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
 * **Metric Type** : Quickly identify distributions vs non-distributions (counts, gauges, rates)
-* **Distribution Metric Origin**: Quickly identify which product the distribution metrics have originated from (i.e. Generate Metrics from Logs, Generate Metrics from Spans etc.) 
+* **Distribution Metric Origin**: Quickly identify which product the distribution metrics have originated from (for example, Generate Metrics from Logs, Generate Metrics from Spans, etc.) 
 
-{{< img src="metrics/summary/facets2.jpg" alt="Metrics Facet Panel"  style="width:75%;">}}
+{{< img src="metrics/summary/facets2.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
 
 
 ## Configuration of multiple metrics 
