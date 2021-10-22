@@ -104,7 +104,7 @@ Both lists display:
 3. When the notification was last updated 
 4. The original author of the notification
 
-The Sent List will also display whether a notification was manually sent, or automatically sent by a Notification Rule. If the notification was automated, the rule that triggered the notification will be displayed.
+The Sent list also displays if a notification was manually or automatically sent by a notification rule. If the notification was automated, the rule that triggered the notification is displayed.
 
 ## Ready to try it out?
 
