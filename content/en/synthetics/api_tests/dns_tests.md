@@ -24,11 +24,11 @@ further_reading:
 
 DNS tests allow you to proactively monitor the resolvability and lookup times of your DNS records using any nameserver. If resolution is unexpectedly slow or a DNS server answers with unexpected A, AAAA, CNAME, TXT, or MX entries, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][14].
+DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
-After choosing to create a [`DNS` test][3], define your test's request.
+After choosing to create a [`DNS` test][4], define your test's request.
 
 ### Define request
 
@@ -38,22 +38,9 @@ After choosing to create a [`DNS` test][3], define your test's request.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. **Name** your DNS test.
-5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
-6. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][5].
 
-Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
-
-### Specify test frequency
-
-DNS tests can run:
-
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your DNS test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][5].
-
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
@@ -68,6 +55,22 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+
+### Specify test frequency
+
+DNS tests can run:
+
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your DNS test.
+
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
+
+* [**Within your CI/CD pipelines**][3].
+
+* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define alert conditions
 
@@ -168,9 +171,9 @@ If you have access to the [custom role feature][13], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/dns_test
-[4]: /synthetics/search/#search
-[5]: /synthetics/cicd_testing
+[3]: /synthetics/cicd_testing
+[4]: /synthetics/api_tests/dns_test
+[5]: /synthetics/search/#search
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /api/latest/synthetics/#edit-an-api-test
 [8]: /monitors/notify/?tab=is_alert#notification
@@ -179,4 +182,3 @@ If you have access to the [custom role feature][13], add your user to any custom
 [11]: /synthetics/settings/#global-variables
 [12]: /account_management/rbac/
 [13]: /account_management/rbac#custom-roles
-[14]: /synthetics/cicd_testing
