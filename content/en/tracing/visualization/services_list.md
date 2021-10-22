@@ -38,7 +38,7 @@ Filter the services list by:
 
 ### Facets
 
-You can filter and search the services list using the _facets_ to the left side of the list. Facets are tags that Datadog automatically attaches to your services. Filtering and searching by facets helps you to scope down the view to show the services most relevant to you.
+You can filter and search the services list using the facets on the left side of the list. Facets are tags that Datadog automatically attaches to your services. Filtering and searching by facets helps you to scope down the view to show the services most relevant to you.
 
 Types of facets:
 
@@ -64,7 +64,7 @@ The type of the service can be one of:
 
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 
-### Changing service color
+## Changing service color
 
 Service color is used in [trace visualizations][9]. Select your service color to change it:
 
