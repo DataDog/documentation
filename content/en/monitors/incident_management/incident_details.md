@@ -100,7 +100,7 @@ The Notifications section is separated into lists: Drafts and Sent.
 Both lists display:
 
 1. The (intended) recipients of a notification 
-2. The contents of the notification's message (as well as any renotification messages that were sent)
+2. The contents of the notification's message and any renotification messages that were sent
 3. When the notification was last updated 
 4. The original author of the notification
 
