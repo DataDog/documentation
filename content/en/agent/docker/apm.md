@@ -332,5 +332,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /tracing/guide/security/#replace-rules

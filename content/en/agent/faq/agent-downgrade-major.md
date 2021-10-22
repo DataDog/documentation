@@ -39,7 +39,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 
 [1]: /agent/faq/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}

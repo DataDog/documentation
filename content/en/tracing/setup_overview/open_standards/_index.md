@@ -312,7 +312,7 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter in conju
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [5]: https://opentelemetry.io/docs/collector/configuration/
-[6]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/example/config.yaml
 [8]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/design.md#pipelines
 [9]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/examples
