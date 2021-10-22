@@ -14,7 +14,7 @@ The [Incident Settings][1] are where you can go to customize aspects of the Inci
 
 The Information subsection of the Incident Settings is where you go to define your organization's Severity Levels, Status Levels, and Declare Incident Helper text.
 
-{{< img src="monitors/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings" style="width:80%;">}}
 
 For the Severity Levels settings, you are able to:
 
@@ -25,7 +25,7 @@ For the Severity Levels settings, you are able to:
 
 **Note:** If you attempt to delete a Severity that is referenced in a Notification Rule, you will be prompted to confirm your decision. Choosing to proceed will disable the impacted Notification Rules as they are no longer valid. Deleting a severity or changing the starting severity will not automatically update any [Incident Management Analytics][2] queries.
 
-{{< img src="monitors/incidents/status_settings.jpeg" alt="Incident Status Level Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/status_settings.jpeg" alt="Incident Status Level Settings" style="width:80%;">}}
 
 For the Status Levels settings, you are able to:
 
@@ -34,13 +34,13 @@ For the Status Levels settings, you are able to:
 
 **Note:** Deleting the `Completed` status will not automatically update any incidents that are already in the `Completed` status, nor will it automatically update any [Incident Management Analytics][2] queries that explicitly reference it. Any Notification Rule that references the `Completed` status will also be disabled as they are no longer valid.
 
-{{< img src="monitors/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings" style="width:80%;">}}
 
 For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the Severity and Status Level descriptions in the [Incident Creation Modal][3]. The helper text has Markdown support to allow you to include indented lists, text formatting and hyperlinks to other instruction resources for incident responders.
 
 ### Property Fields
 
-{{< img src="monitors/incidents/property_field_settings.jpeg" alt="Property Field Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/property_field_settings.jpeg" alt="Property Field Settings" style="width:80%;">}}
 
 Property Fields are key pieces of metadata you can tag your incidents with. This makes it easier to search for specific subsets of incidents in the [Homepage][4] as well as for making more robust queries in [Incident Management Analytics][2]. There are 4 default property fields:
 
@@ -55,7 +55,7 @@ You can add additional Property Fields to your settings by selecting one of your
 
 ### Integrations
 
-{{< img src="monitors/incidents/integration_settings.jpeg" alt="Integration Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/integration_settings.jpeg" alt="Integration Settings" style="width:80%;">}}
 
 The Integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][7]. There are two settings to configure:
 
@@ -70,7 +70,7 @@ The Incident Updates channel will send a message whenever an incident gets decla
 
 ### Message Templates
 
-{{< img src="monitors/incidents/message_templates_settings.jpeg" alt="Message Template Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/message_templates_settings.jpeg" alt="Message Template Settings" style="width:80%;">}}
 
 Message Templates are dynamic, reusable messages that can be used in [manual incident notifications][9], or automated Notification Rules. Message Templates leverage template variables (e.g. `{{incident.severity}}`) to dynamically inject the corresponding value from the incident that the notification is being sent for. Message Templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks as desired. To better organize a large number of Message Templates, each template requires a category during its creation process.
 
@@ -87,7 +87,7 @@ To create a Message Template:
 
 ### Rules
 
-{{< img src="monitors/incidents/notification_rules_example.jpeg" alt="Notification Rules Example"  style="width:80%;">}}
+{{< img src="monitors/incidents/notification_rules_example.jpeg" alt="Notification Rules Example" style="width:80%;">}}
 
 Notification Rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use Notification Rules to ensure key stakeholders are always made aware of high priority incidents, to notify external systems whenever a new incident is declared or updated, or to notify specific responders when a particular service or team experiences an incident.
 
@@ -111,13 +111,13 @@ You can perform the following operations to manage your Notification Rules.
 - *Copy* - Hover over any individual Notification Rule and click the **Copy** icon button next to the Rule's toggle
 - *Delete* - Hover over any individual Notification Rule and click the **Delete** icon button next to the Rule's toggle
 
-{{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List"  style="width:80%;">}}
+{{< img src="monitors/incidents/notification_rules_list.jpeg" alt="Notification Rules List" style="width:80%;">}}
 
 ## Remediation
 
 ### Postmortem Templates
 
-{{< img src="monitors/incidents/postmortem_template_settings.jpeg" alt="Postmortem Template Settings"  style="width:80%;">}}
+{{< img src="monitors/incidents/postmortem_template_settings.jpeg" alt="Postmortem Template Settings" style="width:80%;">}}
 
 Postmortem Templates are dynamic, reusable templates that can be used to create a [Datadog Notebook][11] that is automatically populated with incident information after an incident has been resolved. Postmortem Templates leverage template variables (e.g. `{{incident.severity}}`) to dynamically inject the corresponding value from the incident that the postmortem is being created for. Postmortem Templates have Markdown support so that the resulting Notebook includes text formatting, tables, indented lists, and hyperlinks as desired.
 
