@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< site-region region="us,eu" >}}
+{{< site-region region="us,eu,us3" >}}
 ## Configure the Datadog integration
 
 The Datadog integration for [Buildkite][2] works by using [webhooks][1] to send pipeline data to Datadog.
@@ -33,6 +33,15 @@ The Datadog integration for [Buildkite][2] works by using [webhooks][1] to send 
 [1]: https://app.datadoghq.eu/organization-settings/api-keys
 {{< /site-region >}}
 
+{{< site-region region="us3" >}}
+1. Go to **Settings > Notification Services** in Buildkite and add a new webhook:
+  * **Webhook URL**: `https://webhook-intake.us3.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is [your Datadog API key][1].
+  * **Events**: Select `job.finished` and `build.finished`.
+  * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
+
+[1]: https://us3.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
 2. Click **Add Webhook Notification** to save the new webhook.
 
 ## Visualize pipeline data in Datadog
@@ -52,6 +61,14 @@ The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after t
 [2]: https://app.datadoghq.eu/ci/pipeline-executions
 {{< /site-region >}}
 
+{{< site-region region="us3" >}}
+
+The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after the pipelines finish.
+
+[1]: https://us3.datadoghq.com/ci/pipelines
+[2]: https://us3.datadoghq.com/ci/pipeline-executions
+{{< /site-region >}}
+
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
 ## Further reading
@@ -63,6 +80,6 @@ The [Pipelines][1] and [Pipeline Executions][2] pages populate with data after t
 [3]: /getting_started/tagging/unified_service_tagging
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us5,gov" >}}
 This feature is not supported for the selected Datadog site ({{< region-param key="dd_site_name" >}}).
 {{< /site-region >}}

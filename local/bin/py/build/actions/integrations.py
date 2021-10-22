@@ -726,6 +726,12 @@ class Integrations:
             if manifest_json.get("is_public", False):
                 out_name = self.content_integrations_dir + new_file_name
 
+                # lets make relative app links to integrations tile absolute
+                regex = r"(?<!https://app.datadoghq.com)(/account/settings#integrations[^.)\s]*)"
+                regex_result = re.sub(regex, "https://app.datadoghq.com\\1", result, 0, re.MULTILINE)
+                if regex_result:
+                    result = regex_result
+
                 # if the same integration exists in multiple locations try name md file differently
                 # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:

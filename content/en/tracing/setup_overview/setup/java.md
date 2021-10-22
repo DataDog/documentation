@@ -329,7 +329,7 @@ A list of method annotations to treat as `@Trace`.
 `dd.trace.methods`
 : **Environment Variable**: `DD_TRACE_METHODS`<br>
 **Default**: `null`<br>
-**Example**: `"package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]"`<br>
+**Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
 List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
 
 `dd.trace.classes.exclude`
