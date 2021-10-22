@@ -25,7 +25,7 @@ Use severity level settings to:
 3. Customize the descriptions of your severities.
 4. Add or delete severities from the bottom of your list, with a minimum of 3 and a maximum of 10. 
 
-**Note:** If you attempt to delete a Severity that is referenced in a Notification Rule, you will be prompted to confirm your decision. Choosing to proceed will disable the impacted Notification Rules as they are no longer valid. Deleting a severity or changing the starting severity will not automatically update any [Incident Management Analytics][2] queries.
+**Note**: If you attempt to delete a severity that is referenced in a notification rule, you are prompted to confirm your decision. Choosing to proceed disables the impacted notification rules as they are no longer valid. Deleting a severity or changing the starting severity does not automatically update any [Incident Management Analytics][2] queries.
 
 {{< img src="monitors/incidents/status_settings.jpeg" alt="Incident Status Level Settings" style="width:80%;">}}
 
