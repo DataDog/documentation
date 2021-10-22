@@ -84,7 +84,7 @@ As work for different tasks is finished, individual tasks can be marked as compl
 
 {{< img src="monitors/incidents/incident_notifications.jpeg" alt="Incident Notifications" style="width:80%;">}}
 
-The Notifications Section is where all stakeholder notifications for an incident are consolidated. Manually sent notifications can be created, saved as drafts and sent directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question will also be listed in this section.
+The Notifications section is where all stakeholder notifications for an incident are consolidated. Manually sent notifications can be created, saved as drafts, and sent directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question are also listed in this section.
 
 To create a manual notification: 
 
