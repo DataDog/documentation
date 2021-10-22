@@ -2527,6 +2527,16 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 401
+  - name: Dimensioning
+    url: synthetics/private_locations/dimensioning
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_dimensioning
+    weight: 402
+  - name: Monitoring
+    url: synthetics/private_locations/private_location_monitoring
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_monitoring
+    weight: 403
   - name: CI/CD Testing
     url: /synthetics/cicd_testing
     parent: synthetics
