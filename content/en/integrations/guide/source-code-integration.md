@@ -1,7 +1,7 @@
 ---
-title: Setting Up Source Code Integration in Datadog
+title: Setting Up the Source Code Integration in Datadog
 kind: guide
-description: "Set up link to the repository and inline source code with Datadog."
+description: "Set up links to a Git repository and inline source code with Datadog."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/github-apps/"
   tag: "Integration"
@@ -11,10 +11,9 @@ further_reading:
 ## Overview
 
 <div class="alert alert-warning">
-The source code integration is in public beta. It generates links from your telemetry
-to your source code in your repository.
+The source code integration is in public beta and is available for all JVM languages and Go.
 
-It is currently available for all JVM languages and Go. Link to third-party libraries and standard libraries are not supported.
+The source code integration generates links from your telemetry to your source code in your repository. Links to third-party libraries and standard libraries are not supported.
 </div>
 
 The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) and your source code.
@@ -31,7 +30,7 @@ To tag your process with the commit SHA, you need a container label, Kubernetes 
 
 1. Set a container tag or extend the `DD_TAGS` environment variable.
 2. Upload your git metadata including the commit SHAs and your git repository URL by running [`datadog-ci git-metadata upload`][1].
-3. [Install GitHub Apps][2] (optional).
+3. Optionally, [install GitHub Apps][2].
 
 Datadog correlates the places where you can link directly to your git repository.
 
@@ -42,14 +41,14 @@ To get direct links from your stacktrace to your git repository, tag your teleme
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}
 
-If your containers are running on Docker, Datadog can extract the commit sha directly from your images Docker labels.
+If your containers are running on Docker, Datadog can extract the commit SHA directly from your images' Docker labels.
 
-1. During build time, add the git commit sha as a Docker label, following the [Open Containers standard][1]
+1. During build time, follow the [Open Containers standard][1] to add the git commit SHA as a Docker label.
 2. Configure the Datadog Agent to collect the label as `git.commit.sha`.
 
 #### Tag your images
 
-To add the Docker label to your images, update your docker build command:
+To add the Docker label to your images, update the `docker build` command:
 
 ```
 docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
@@ -75,7 +74,7 @@ If you use Kubernetes, tag your deployed pod with a pod annotation using [Datado
 ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>"}'
 ```
 
-The git commit sha will be added to all your telemetry.
+The git commit SHA is added to your telemetry.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 {{% /tab %}}
