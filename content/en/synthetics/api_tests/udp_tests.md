@@ -136,7 +136,7 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
 These reasons include the following:
 
