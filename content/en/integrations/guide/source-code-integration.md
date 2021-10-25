@@ -18,8 +18,6 @@ The source code integration generates links from your telemetry to your source c
 
 The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) and source code.
 
-Install the Datadog-GitHub Apps integration to directly access source code repositories from your stack traces and enrich your GitHub issues and pull requests with previews.
-
 With the source code and GitHub Apps integrations, you can also see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
 ## Configuration
@@ -128,7 +126,13 @@ In [Error Tracking][3], you can directly access links to repositories from your 
 
 ##### Inline source code
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] to directly inline code snippets from your GitHub repository in your stack traces.
+If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] to directly inline code snippets from your GitHub repository in your stack traces. 
+
+When specifying your permissions in the integration tile, enable Datadog read permissions to **Contents**.
+
+To install a GitHub App for your organization, you need to be an organization owner or have admin permissions in a repository. You can also install a GitHub App on your personal repository.
+
+For more information, see [GitHub Apps & OAuth Apps][4].
 
 1. Click on a frame to expand the code snippet containing lines of your source code.
 2. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
