@@ -34,7 +34,7 @@ Filter the services list by:
 * A query (basic text filtering)
 
 
-{{< img src="tracing/visualization/services_filtering_2.mp4" alt="Services filtering" video="true"  width="100%" >}}
+{{< img src="tracing/visualization/services_filtering_2.mp4" alt="Services filtering" video="true" width="100%" >}}
 
 ### Facets
 
@@ -81,7 +81,7 @@ Click the cog menu to choose what to display in your services list:
 * **Apdex**: Apdex score of the service. [Learn more about Apdex][10].
 * **Monitor status**: [Status of monitors][11] attached to a service
 
-{{< img src="tracing/visualization/services_columns_2.png" alt="Services columns"  style="width:40%;">}}
+{{< img src="tracing/visualization/services_columns_2.png" alt="Services columns" style="width:40%;">}}
 
 ## Further Reading
 
