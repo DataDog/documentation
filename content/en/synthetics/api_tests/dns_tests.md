@@ -24,7 +24,7 @@ further_reading:
 
 DNS tests allow you to proactively monitor the resolvability and lookup times of your DNS records using any nameserver. If resolution is unexpectedly slow or a DNS server answers with unexpected A, AAAA, CNAME, TXT, or MX entries, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
 
-DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][14].
+DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. DNS tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
 ## Configuration
 
@@ -32,28 +32,15 @@ After choosing to create a `DNS` test, define your test's request.
 
 ### Define request
 
-{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
-
 1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
 2. Specify the **DNS Server** to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. **Name** your DNS test.
 5. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
-6. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+
+{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 
 Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
-
-### Specify test frequency
-
-DNS tests can run:
-
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your DNS test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][5].
-
-* **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
 
@@ -62,12 +49,24 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | Type                | Record type                                                     | Operator                                           | Value type                 |
 |---------------------|-----------------------------------------------------------------|----------------------------------------------------|----------------------------|
 | response time       |                                                                 | `is less than`                                     | _Integer (ms)_             |
-| every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][6]_ |
-| at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][6]_ |
+| every record        | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
+| at least one record | of type A, of type AAAA, of type MX, of type TXT, of type CNAME | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][5]_ |
 
 You can create up to 20 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your DNS test" style="width:90%;" >}}
+
+### Select locations
+
+Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+
+### Specify test frequency
+
+DNS tests can run:
+
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your DNS test.
+* [**Within your CI/CD pipelines**][3].
+* **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
 
@@ -90,9 +89,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][9] and supports the following [conditional variables][10]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -103,7 +102,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Email notifications include the message defined in this section as well as a summary of failed assertions. Notifications example:
+Email notifications include the message defined in this section as well as a summary of failed assertions. For example:
 
 {{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications" style="width:90%;" >}}
 
@@ -132,7 +131,7 @@ You can create local variables by clicking on **Create Local Variable** at the t
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][9] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -140,10 +139,12 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+
+These reasons include the following:
 
 `CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
+: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
@@ -158,9 +159,9 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][12].
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic DNS tests. To get create, edit, and delete access to Synthetic DNS tests, upgrade your user to one of those two [default roles][10].
 
-If you have access to the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you have access to the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ## Further Reading
 
@@ -168,14 +169,12 @@ If you have access to the [custom role feature][13], add your user to any custom
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/api_tests/dns_test
+[3]: /synthetics/cicd_testing
 [4]: /synthetics/search/#search
-[5]: /synthetics/cicd_testing
-[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[8]: /monitors/notifications/?tab=is_alert#notification
-[9]: https://www.markdownguide.org/basic-syntax/
-[10]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[11]: /synthetics/settings/#global-variables
-[12]: /account_management/rbac/
-[13]: /account_management/rbac#custom-roles
-[14]: /synthetics/cicd_testing
+[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[6]: /monitors/notify/#notify-your-team
+[7]: https://www.markdownguide.org/basic-syntax/
+[8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[9]: /synthetics/settings/#global-variables
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
