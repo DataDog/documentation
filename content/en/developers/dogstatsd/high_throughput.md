@@ -212,11 +212,11 @@ For more information and code examples, see [DogStatsD "Sample Rate" Parameter E
 
 UDS is an inter-process communication protocol used to [transport DogStatsD payloads][2]. It has very little overhead when compared to UDP and lowers the general footprint of DogStatsD on your system.
 
-### Client side aggregation
+### Client-side aggregation
 
-Client side aggregation is only available in the Go client starting with v5.0.0.
+Client-side aggregation is only available in the Go client starting with v5.0.0.
 
-See [Client side aggregation][7] for more information.
+See [Client-side aggregation][7] for more information.
 
 
 ## Operating system kernel buffers
@@ -353,7 +353,7 @@ While running in this mode, the DogStatsD server runs a burst detection mechanis
 A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
 ```
 
-## Client side telemetry
+## Client-side telemetry
 
 DogStatsD clients send telemetry metrics by default to the Agent. This allows you to better troubleshoot where bottlenecks exist. Each metric is tagged with the client language and the client version. These metrics are not counted as custom metrics.
 
@@ -521,7 +521,7 @@ client. This metric is reported only when the aggregation is enabled (which is t
 
 `datadog.dogstatsd.client.aggregated_context_by_type`
 : **Metric type**: count<br>
-The total number of contexts flushed by the client, when client side aggregation is enabled, tagged by metric type
+The total number of contexts flushed by the client, when client-side aggregation is enabled, tagged by metric type
 (`gauge`, `set`, `count`, `timing`, `histogram`, or `distribution`). Starting v5.0.0 of the Go client. This metric is
 reported only when the aggregation is enabled (which is the default).
 
