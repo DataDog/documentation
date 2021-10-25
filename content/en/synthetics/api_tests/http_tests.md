@@ -124,12 +124,8 @@ Select the **Locations** to run your HTTP test from. HTTP tests can run from bot
 HTTP tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your HTTP test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
 * [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
-
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+* **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
 

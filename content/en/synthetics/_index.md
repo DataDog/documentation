@@ -22,13 +22,13 @@ further_reading:
 
 <br/>
 
-Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `TCP`, `SSL`, `DNS`, `ICMP`, and `WebSocket`) in a controlled and stable way, alerting you in case of faulty behavior (regression, broken feature, high response time, unexpected status code, etc.). 
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `TCP`, `UDP`, `ICMP`, and `WebSocket`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
 
 With **end-to-end testing in production and CI environments**, your development teams can proactively ensure that no defective code makes it to production. **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [TCP test][5], [DNS test][6], [ICMP test][7], and [WebSocket test][8]. 
+API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: [HTTP test][3], [SSL test][4], [DNS test][6], [TCP test][5], [UDP test][15], [ICMP test][7], and [WebSocket test][8]. 
 
 {{< img src="synthetics/api_test.png" alt="API tests"  style="width:100%;">}}
 
@@ -78,3 +78,4 @@ See [Getting Started with Synthetic Monitoring][13] for instructions on creating
 [12]: /synthetics/apm/
 [13]: /getting_started/synthetics
 [14]: /getting_started/synthetics/private_location
+[15]: /synthetics/api_tests/websocket_tests
