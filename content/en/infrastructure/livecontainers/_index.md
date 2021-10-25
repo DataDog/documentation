@@ -9,10 +9,10 @@ further_reading:
   tag: "Documentation"
   text: "Configure Live Containers"
 - link: "/infrastructure/hostmap/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "See all of your hosts together on one screen with the hostmap"
 - link: "/infrastructure/process/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "Understand what is going on at any level of your system"
 ---
 

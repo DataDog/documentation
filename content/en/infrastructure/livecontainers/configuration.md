@@ -3,10 +3,10 @@ title: Live Containers Configuration
 kind: documentation
 further_reading:
 - link: "/infrastructure/hostmap/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "See all of your hosts together on one screen with the hostmap"
 - link: "/infrastructure/process/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "Understand what is going on at any level of your system"
 ---
 
