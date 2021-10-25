@@ -41,7 +41,7 @@
   },
   "metrics": {
     "name": "Métriques",
-    "description": "Les endpoints de métriques vous permettent :\n\n- D'envoyer des données de métriques afin de les représenter graphiquement sur les dashboards de Datadog\n- D'interroger vos métriques sur l'intervalle de votre choix\n- De modifier les configurations de tags pour les métriques\n- De visualiser les tags et les volumes pour les métriques\n\n**Remarque** : un graphique ne peut contenir qu'un nombre défini de points. Lorsque l'intervalle d'affichage d'une métrique augmente, les points sont agrégés afin de ne pas dépasser ce nombre.\n\nLes méthodes Post, Patch et Delete de l'API `manage_tags` peuvent uniquement être utilisées par un utilisateur qui dispose de l'autorisation `Manage Tags for Metrics`."
+    "description": "Les endpoints de métriques vous permettent :\n\n- D'envoyer des données de métriques afin de les représenter graphiquement sur les dashboards de Datadog\n- D'interroger vos métriques sur l'intervalle de votre choix\n- De modifier les configurations de tags pour les métriques\n- De visualiser les tags et les volumes pour les métriques\n\n**Remarque** : un graphique ne peut contenir qu'un nombre défini de points. Lorsque l'intervalle d'affichage d'une métrique augmente, les points sont agrégés afin de ne pas dépasser ce nombre.\nLes méthodes Post, Patch et Delete de l'API `manage_tags` peuvent uniquement être utilisées par un utilisateur qui dispose de l'autorisation `Manage Tags for Metrics`."
   },
   "processes": {
     "name": "Processus",
