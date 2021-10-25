@@ -15,13 +15,14 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 [Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions and scopes of the user who created them.
 
-## Scopes for application keys 
+## Scopes for application keys
 
-To better protect and secure your applications, you can specify scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data. 
+To better protect and secure your applications, you can specify scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization’s data.
 
-The recommended best practice for creating scoped application keys is to grant your keys the minimal privileges and least permissions necessary for the application to function as intended. You can modify the scopes of an application key anytime after creation. 
+The recommended best practice for creating scoped application keys is to grant your keys the minimal privileges and least permissions necessary for the application to function as intended. You can modify the scopes of an application key anytime after creation.
 
-**Notes:** 
+**Notes:**
+
 - Users or service accounts with [permissions][5] to create or edit application keys can specify scopes for application keys.
 - Application owners cannot authorize an application if they are missing any required permissions, even if they create an application key with scopes that they do not have.
 - If a user’s role or permissions change, scopes specified for their application keys remain unchanged.
@@ -38,15 +39,16 @@ For security reasons, API keys cannot be used to send data from a browser, as th
 ## Add an API key or client token
 
 To add a Datadog API key or client token:
+
 1. Navigate to Organization settings, then click the **API keys** or **Client Tokens** tab.
-3. Click the **New Key** or **New Client Token** button, depending on which you're creating.
-4. Enter a name for your key or token.
+2. Click the **New Key** or **New Client Token** button, depending on which you're creating.
+3. Enter a name for your key or token.
 4. Click **Create API key** or **Create Client Token**.
 
 **Notes:**
 
-* Your org must have at least one API key and at most 50 API keys.
-* Key names must be unique across your organization.
+- Your org must have at least one API key and at most 50 API keys.
+- Key names must be unique across your organization.
 
 ## Remove API keys or client tokens
 
@@ -58,11 +60,12 @@ To add a Datadog application key, navigate to **Organization Settings** > **Appl
 
 <div class="alert alert-info"> Specifying scopes for application keys is a feature currently in private beta. Contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> to enable support for scoped application keys for your organization. </div>
 
-To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key. Scopes can be specified for application keys owned by [the current user][7] or a [service account][8]. If this field is unspecified, application keys by default have all the same scopes as the user who created them. 
+To specify scopes for application keys, make a request to the [Datadog API][7] to create or edit an application key. Scopes can be specified for application keys owned by [the current user][7] or a [service account][8]. If this field is unspecified, application keys by default have all the same scopes as the user who created them.
 
-**Notes:** 
-* Application key names cannot be blank.
-* Scope names are case-sensitive. 
+**Notes:**
+
+- Application key names cannot be blank.
+- Scope names are case-sensitive.
 
 ## Remove application keys
 
@@ -72,7 +75,7 @@ To remove a Datadog application key, navigate to **Organization Settings** > **A
 
 Consider setting up multiple API keys for your organization. For example, use different API keys for each of your various deployment methods: one for deploying an Agent on Kubernetes in AWS, one for deploying it on prem with Chef, one for Terraform scripts that automate your dashboards or monitors, and one for developers deploying locally.
 
-Using multiple API keys lets you rotate keys as part of your security practice, or revoke a specific key if it's inadvertently exposed or if you want to stop using the service it's associated with. 
+Using multiple API keys lets you rotate keys as part of your security practice, or revoke a specific key if it's inadvertently exposed or if you want to stop using the service it's associated with.
 
 If your organization needs more than the built-in limit of 50 API keys, contact [Support][6] to ask about increasing your limit.
 
