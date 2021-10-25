@@ -11,12 +11,22 @@ further_reading:
   tag: "Documentation"
   text: "Exclusion Filters"
 ---
+{{< site-region region="us3,us5,eu,gov" >}}
+
+Online Archives is only available on the US1 Datadog [site][1].
+
+[1]: https://docs.datadoghq.com/getting_started/site/
+
+{{< /site-region >}}
+
+{{< site-region region="us" >}}
+
 <div class="alert alert-warning">
   Online Archives is in limited availibility. To request access, contact <a href="/help/">Datadog Support</a>.</div>
 
 Online Archives is an log warehousing solution that provides 15 months of storage, live query, and analytics capabilities for your logs in Datadog.
 
-Security, Compliance, and Engineering teams ofen need to query logs over large time windows. Security breaches are often detected after weeks if not months of the incident and legal compliance reviews and audit processes may require logs stretching back more than a year. Engineering teams conducting high cardinality YoY long term analysis on millions of users are better served with logs over straight metrics. 
+Security, Compliance, and Engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of users are better served with logs over straight metrics. 
 
 Online Archives allows you to retain and search all of your log data for 15 months. Security, Compliance, and Engineering teams can address use cases requiring historical investigation and analysis, like security audits, or analyze extra high-cardinality trends over long periods and correlate system forensics from metrics with application and user behavior from log data.
 
@@ -74,8 +84,8 @@ Here are examples of different log retention strategies and how to implement the
 
 {{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from your online archive" style="width:100%;">}}
 
-**Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives yet.
-**Note:** Online Archives is only available in Datadog US1 region atthe moment.
+**Note:** Dashboards, Log Monitors, Patterns and Transactions are not available in Online Archives.
+{{< /site-region >}}
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters
