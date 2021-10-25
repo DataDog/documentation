@@ -2301,7 +2301,7 @@ main:
     weight: 7
   - name: Security Platform
     url: security_platform/
-    pre: security
+    pre: security-platform
     identifier: security_platform
     weight: 180000
   - name: Security Monitoring
