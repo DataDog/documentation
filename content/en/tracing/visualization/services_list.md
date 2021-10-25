@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview 
 
-After you [instrument your application][1], your reporting [services][2] appear on [the APM services page][3]. The services list is a high level view of all [services][4] reporting from your infrastructure.
+After you [instrument your application][1], your reporting [services][2] appear on [the APM services page][3]. The services list is a high-level view of all [services][4] reporting from your infrastructure.
 Select an individual service to view detailed performance insights. [Read the dedicated service documentation to learn more][4].
 
 ## Filtering the service list
@@ -38,21 +38,21 @@ Filter the services list by:
 
 ### Facets
 
-You can filter and search the services list using the facets on the left side of the list. Facets are tags that Datadog automatically attaches to your services. Filtering and searching by facets helps you to scope down the view to show the services most relevant to you.
+You can filter and search the services list using the facets on the left side of the list. Facets are tags that Datadog automatically attaches to your services. Filtering and searching by facets helps you scope down the view to show the most relevant services.
 
 Types of facets:
 
 * [**Service type**](#services-types)
-* **Last deploy**: Time of last deployment for a service
+* **Last deploy**: Time of the last deployment for a service
 * **Watchdog**: Whether the service has [Watchdog insights][7]
 * **Monitor status**: Current active status of monitors
 * **Infra type**: Type of infrastructure
 
 ### Services types
 
-Every service monitored by your application is associated with a type. This type is automatically determined by Datadog based on the `span.type` attribute attached to your [spans][8]. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
+Every service monitored by your application is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to your [spans][8]. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
 
-For example, if you use the official Flask Integration, the Type is set to "Web". If you are monitoring a custom application, the Type appears as "Custom".
+For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
 
 The type of the service can be one of:
 
@@ -74,7 +74,7 @@ Service color is used in [trace visualizations][9]. Select your service color to
 
 Click the cog menu to choose what to display in your services list:
 
-* **Last Deploy**: Time of last deployment for a service
+* **Last Deploy**: Time of the last deployment for a service
 * **Requests**: Total amount of requests traced (per seconds)
 * **Avg/p75/p90/p95/p99/Max Latency**: Avg/p75/p90/p95/p99/Max latency of your traced requests
 * **Error Rate**: Amount of requests traced (per seconds) that ended with an error
