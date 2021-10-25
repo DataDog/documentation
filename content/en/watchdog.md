@@ -103,10 +103,11 @@ Additionally, Watchdog suggests one or more monitors that are configured to trig
 
 ## RUM Impact Analysis
 
-Whenever Watchdog finds a new APM anomaly, it simultaneously automatically analyzes a variety of latency and error metrics that are submitted from the RUM SDKs to evaluate if this anomaly is adversely impacting any web or mobile pages visited by your customers. 
+Whenever Watchdog finds a new APM anomaly, it simultaneously analyzes a variety of latency and error metrics that are submitted from the RUM SDKs to evaluate if the anomaly is adversely impacting any web or mobile pages visited by your users. 
 
-If Watchdog determines that the end-user experience is impacted, it provides a summary of the impacts in the Watchdog APM Alert. This includes:
-- A list of impacted RUM Views
+If Watchdog determines that the end-user experience is impacted, it provides a summary of the impacts in Watchdog APM Alert. This includes:
+
+- A list of impacted RUM views
 - An estimated number of impacted users
 - A link to the list of impacted users, so that you can reach out to them, if needed. 
 
