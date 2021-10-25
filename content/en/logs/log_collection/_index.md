@@ -231,7 +231,7 @@ A TCP endpoint is not supported for this region.
 {{< /site-region >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
 {{% /tab %}}
 {{< /tabs >}}

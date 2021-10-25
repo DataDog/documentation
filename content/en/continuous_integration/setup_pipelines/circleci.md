@@ -26,7 +26,7 @@ The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send d
    * **Events**: Select `Workflow Completed` and `Job Completed`.
    * **Certificate verifications**: Enable this check.
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
