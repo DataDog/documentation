@@ -271,21 +271,51 @@ automatically due to dependencies on the Git plugin that is being used in the pi
 
 If the Git information is not detected automatically, you can set the following environment variables manually.
 
-| Environment Variable            | Description                                                          | Example                                    |
-|---------------------------------|----------------------------------------------------------------------|--------------------------------------------|
-| `DD_GIT_REPOSITORY_URL`         | The repository URL of your service                                   | `https://github.com/my-org/my-repo.git`    |
-| `DD_GIT_BRANCH`                 | The branch name.                                                     | `main`                                     |
-| `DD_GIT_TAG`                    | The tag of the commit (if any).                                      | `0.1.0`                                    |
-| `DD_GIT_COMMIT_SHA`             | The commit in the hex 40 chars length form                           | `faaca5c59512cdfba9402c6e67d81b4f5701d43c` |
-| `DD_GIT_COMMIT_MESSAGE`         | The commit message.                                                  | `Initial commit message`                   |
-| `DD_GIT_COMMIT_AUTHOR_NAME`     | The name of the author of the commit.                                | `John Doe`                                 |
-| `DD_GIT_COMMIT_AUTHOR_EMAIL`    | The email of the author of the commit.                               | `john@doe.com`                             |
-| `DD_GIT_COMMIT_AUTHOR_DATE`     | The date when the author submitted the commit in ISO 8601 format.    | `2021-08-16T15:41:45.000Z`                 |
-| `DD_GIT_COMMIT_COMMITTER_NAME`  | The name of the committer of the commit.                             | `Jane Doe`                                 |
-| `DD_GIT_COMMIT_COMMITTER_EMAIL` | The email of the committer of the commit.                            | `jane@doe.com`                             |
-| `DD_GIT_COMMIT_COMMITTER_DATE`  | The date when the committer submitted the commit in ISO 8601 format. | `2021-08-16T15:41:45.000Z`                 |
-
 **Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
+
+`DD_GIT_REPOSITORY` (Optional)
+: The repository URL of your service.<br/>
+**Example**: `https://github.com/my-org/my-repo.git`
+
+`DD_GIT_BRANCH` (Optional)
+: The branch name.<br/>
+**Example**: `main`
+
+`DD_GIT_TAG` (Optional)
+: The tag of the commit (if any).<br/>
+**Example**: `0.1.0`
+
+`DD_GIT_COMMIT_SHA` (Optional)
+: The commit expressed in the hex 40 chars length form.<br/>
+**Example**: `faaca5c59512cdfba9402c6e67d81b4f5701d43c`
+
+`DD_GIT_COMMIT_MESSAGE` (Optional)
+: The commit message.<br/>
+**Example**: `Initial commit message`
+
+`DD_GIT_COMMIT_AUTHOR_NAME` (Optional)
+: The name of the author of the commit.<br/>
+**Example**: `John Doe`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL` (Optional)
+: The email of the author of the commit.<br/>
+**Example**: `john@doe.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE` (Optional)
+: The date when the author submitted the commit expressed in ISO 8601 format.<br/>
+**Example**: `2021-08-16T15:41:45.000Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME` (Optional)
+: The name of the committer of the commit.<br/>
+**Example**: `Jane Doe`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL` (Optional)
+: The email of the committer of the commit.<br/>
+**Example**: `jane@doe.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE` (Optional)
+: The date when the committer submitted the commit expressed in ISO 8601 format.<br/>
+**Example**: `2021-08-16T15:41:45.000Z`
 
 If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
 
