@@ -2446,7 +2446,7 @@ main:
   - name: WebSocket
     url: synthetics/api_tests/websocket_tests
     parent: api_tests
-    weight: 106
+    weight: 107
   - name: Multistep API Tests
     url: synthetics/multistep
     parent: synthetics
