@@ -1,6 +1,6 @@
 {{ $dot := . }}
 <div class="logs-containers network-layers">
-    <div class="container cards-dd col-num-5">
+    <div class="container cards-dd col-num-7">
         <div class="card-deck">
             <a class="card" href="/synthetics/api_tests/http_tests">
                 <div class="card-body text-center py-2 px-1">
@@ -12,9 +12,9 @@
                     {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/ssl-test1.png" "class" "img-fluid" "alt" "SSL" "width" "400") }}
                 </div>
             </a>
-            <a class="card" href="/synthetics/api_tests/tcp_tests">
+            <a class="card" href="/synthetics/api_tests/websocket_tests">
                 <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/tcp-test1.png" "class" "img-fluid" "alt" "TCP" "width" "400") }}
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/websocket-test1.png" "class" "img-fluid" "alt" "WebSocket" "width" "400") }}
                 </div>
             </a>
             <a class="card" href="/synthetics/api_tests/dns_tests">
@@ -22,14 +22,14 @@
                     {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/dns-test1.png" "class" "img-fluid" "alt" "DNS" "width" "400") }}
                 </div>
             </a>
+            <a class="card" href="/synthetics/api_tests/tcp_tests">
+                <div class="card-body text-center py-2 px-1">
+                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/tcp-test1.png" "class" "img-fluid" "alt" "TCP" "width" "400") }}
+                </div>
+            </a>
             <a class="card" href="/synthetics/api_tests/icmp_tests">
                 <div class="card-body text-center py-2 px-1">
                     {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test2.png" "class" "img-fluid" "alt" "ICMP" "width" "400") }}
-                </div>
-            </a>
-            <a class="card" href="/synthetics/api_tests/websocket_tests">
-                <div class="card-body text-center py-2 px-1">
-                    {{ partial "img.html" (dict "root" . "src" "synthetics/api_tests/icmp-test2.png" "class" "img-fluid" "alt" "WebSocket" "width" "400") }}
                 </div>
             </a>
         </div>
