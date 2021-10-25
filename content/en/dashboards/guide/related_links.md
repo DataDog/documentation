@@ -13,35 +13,29 @@ further_reading:
 
 ## Overview
 
-Whether they are part of your [runbooks][1], attached to a [monitor notification][2] or simply a [screenboard][3] you always keep an eye on, 
-some of your Dashboards are likely a homebase for troubleshooting.
+Dashboards are a **homebase for troubleshooting**. Whether they are part of your [runbooks][1], attached to a [monitor notification][2] or simply a [screenboard][3] you always keep an eye on, dashboards are designed to perform first assessment across multiple datasources that your consider relevant for a specific context.
 
-Dashboards are designed to perform first assessment across multiple datasources that your consider relevant for a specific context. 
+However some investigations require a **deeper dive into specialised pages**: 
+* in the Datadog application, where built-in features would make a difference to spot the root cause of a problem or the core answer to a specific question,
+* in a third-party application, to access external data or perform specific follow-up actions.
 
-*insert a screenshot of basic dashboards interactions (brush to zoom in, click to filter template variables)*
+{{< img src="dashboards/guide/related_links/overview.gif" alt="Dashboards Assessment" style="width:80%;" >}}
 
-However some investigations require a deeper dive into specialised pages in the Datadog application, 
-where built-in features would make a difference to spot the root cause of a problem or the core answer to a specific question. 
-It's as well possible that the next action to take in your workflow is somewhere in a third-party application.
-
-
-Dashboards widgets comes with interactive related links. For [generic widgets][4], those links are customisable
-for you to point towards external applications, or override default behaviour to fine-tune the context of the landing page.
+Dashboards widgets come with **default links** to other relevant datadog pages, contextualised with the current scope (timerange, underlying queries and when applicable series identified on a graph). For [generic widgets][4], those links are **customisable** for you to point towards external applications, or override default behaviour to fine-tune the context of the landing page.
 
 In this guide, you'll learn:
 * The basics of the feature: how to configure which links appear, create new links and override existing ones
 * Examples for creating external links
-* Examples for overriding native links
+* Examples for overriding datadog links
 
 
 ## Basics of the Feature
-
-
 
 ## Creating links to third-part applications
 
 ### Linking your host Dashboard to your EC2 instance summary in AWS Console
 
+Dashboards give
 
 EC2 instance summaries links follow that pattern
 `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`
