@@ -23,7 +23,7 @@ After choosing to create an `WebSocket` test, define your test's request.
 
 ### Define request
 
-[Screenshot 1: WebSocket Flow]
+{{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request"  style="width:90%;" >}}
 
 1. Specify the **URL** to run your test on.
 2. Enter the string you want to send in your test. 
@@ -65,7 +65,7 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
 
-[Screenshot 2: WebSocket Assertions]
+{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test" style="width:90%;" >}}
 
 ### Select locations
 
