@@ -101,7 +101,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 ### Notify your team
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
 
 1. [Similar to monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -138,10 +138,10 @@ You can create local variables by clicking on **Create Local Variable** at the t
 : Generates an alphanumeric string with `n` characters.
 
 `{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+: Generates a date in one of the accepted formats with a value of the date the test is initiated + `n` days.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of the accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
 
 ### Use variables
 
@@ -153,7 +153,7 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
+A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. Reasons for this include:
 
 `CONNRESET`
 : The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
