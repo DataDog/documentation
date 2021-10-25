@@ -9,8 +9,9 @@ further_reading:
 
 ## Overview
 
-To create API tests with the API, see the following examples for your JSON configuration.
-You will also find an example to create a HTTP tests with the Python client.
+To create API tests with the API, see the following examples for your [JSON configuration](#json-configuration). 
+
+To create a HTTP test with the Python client, see the example for your [Python client](#python-client).
 
 ## JSON Configuration
 ### HTTP test
