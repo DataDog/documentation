@@ -1,9 +1,9 @@
 ---
-title: Setting Up the Source Code Integration in Datadog
+title: Datadog Source Code Integration
 kind: guide
 description: "Set up links to a Git repository and inline source code with Datadog."
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/github-apps/"
+- link: "https://docs.datadoghq.com/integrations/github_apps/"
   tag: "Integration"
   text: "GitHub Apps Integration"
 ---
@@ -12,19 +12,19 @@ further_reading:
 
 <div class="alert alert-warning">
 The source code integration is in public beta and is available for all JVM languages and Go.
-
+<br><br>
 The source code integration generates links from your telemetry to your source code in your repository. Links to third-party libraries and standard libraries are not supported.
 </div>
 
-The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) and your source code.
+The source code integration is an integration with Git that allows you to link your telemetry (such as stack traces) and source code.
 
-By installing the Datadog-GitHub Apps integration, you can directly access source code repositories from your stack traces and enrich your GitHub issues and pull requests with previews.
+Install the Datadog-GitHub Apps integration to directly access source code repositories from your stack traces and enrich your GitHub issues and pull requests with previews.
 
-With the source code integration and GitHub Apps integration, you can also see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
+With the source code and GitHub Apps integrations, you can also see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
 ## Configuration
 
-In order to map telemetry data with your source code, you need to send metadata to Datadog from your CI pipeline.
+To map telemetry data with your source code, you need to send metadata to Datadog from your CI pipeline.
 
 To tag your process with the commit SHA, you need a container label, Kubernetes label, or annotation.
 
@@ -43,12 +43,10 @@ To get direct links from your stacktrace to your git repository, tag your teleme
 
 If your containers are running on Docker, Datadog can extract the commit SHA directly from your images' Docker labels.
 
-1. During build time, follow the [Open Containers standard][1] to add the git commit SHA as a Docker label.
-2. Configure the Datadog Agent to collect the label as `git.commit.sha`.
 
 #### Tag your images
 
-To add the Docker label to your images, update the `docker build` command:
+During build time, follow the [Open Containers standard][1] to add the git commit SHA as a Docker label:
 
 ```
 docker build -t my-application --label org.opencontainers.image.revision=$(git rev-parse HEAD)
@@ -78,7 +76,7 @@ The git commit SHA is added to your telemetry.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 {{% /tab %}}
-{{% tab "Other Setups" %}}
+{{% tab "Other" %}}
 
 #### Other container setups
 
@@ -88,7 +86,7 @@ The git commit SHA is added to your telemetry.
 
 For non-containerized environments, manually tag your traces, spans, and profiles with the git commit SHA.
 
- To tag your traces, spans, and profiles with `git.commit.sha`, configure the tracer with the `DD_TAGS` environment variable:
+To tag your traces, spans, and profiles with `git.commit.sha`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
 export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>"
@@ -108,12 +106,12 @@ When you run `datadog-ci git-metadata upload` within a git repository, Datadog r
 
 To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
 
-You can expect to see the following return:
+You can expect to see the following output:
 
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:DataDog/datadog-ci.git.
 180 tracked file paths will be reported.
-✅ [DRYRUN] Handled in 0.077 seconds.
+✅  Handled in 0.077 seconds.
 ```
 
 ## Links to Git
@@ -128,9 +126,9 @@ In [Error Tracking][3], you can directly access links to repositories from your 
 
 {{< img src="integrations/guide/github_apps/stacktrace-link-to-git.png" alt="Inline code snippet" style="width:90%;">}}
 
-##### Inline Source Code
+##### Inline source code
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps][2] to directly inline code snippets from your GitHub repository in your stack traces.
+If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] to directly inline code snippets from your GitHub repository in your stack traces.
 
 1. Click on a frame to expand the code snippet containing lines of your source code.
 2. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
@@ -154,3 +152,4 @@ In the [Continuous Profiler][2], you can directly access traces in the source re
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 [3]: https://app.datadoghq.com/apm/error-tracking
+[4]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
