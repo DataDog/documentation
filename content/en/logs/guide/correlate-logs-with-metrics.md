@@ -41,8 +41,6 @@ To correlate logs and metrics in a [Dashboard][5]:
 4. If your widget contains **metrics that you wish to correlate with logs**:
     1. Select **View related logs**.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/dashboards.gif" alt="Correlate logs with metrics in a dashboard"  >}}
-
 ## Metrics Explorer
 
 To correlate logs and metrics on the [Metrics Explorer][7] page:
@@ -50,9 +48,6 @@ To correlate logs and metrics on the [Metrics Explorer][7] page:
 1. Select a metric to graph.
 2. Click on any point within the graph to populate the graph menu.
 3. Select **View related logs**.
-
-{{< img src="logs/guide/correlate-logs-with-metrics/metrics-explorer.png" alt="Metrics Explorer - View Related Logs"  >}}
-
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

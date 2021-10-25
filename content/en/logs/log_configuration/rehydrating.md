@@ -69,9 +69,9 @@ After selecting “Rehydrate from Archive,” the historical view is marked as �
 
 Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer.
 
-#### From the log explorer
+#### From the Log Explorer
 
-Alternatively, teams can find the historical view from the Log Explorer directly from the index selector.
+Alternatively, find the historical view from the Log Explorer directly from the index selector.
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
