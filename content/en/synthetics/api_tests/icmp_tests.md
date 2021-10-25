@@ -62,7 +62,7 @@ Select the **Locations** to run your ICMP test from. ICMP tests can run from bot
 
 ICMP tests can run:
 
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency with which you want Datadog to run your ICMP test.
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your ICMP test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 

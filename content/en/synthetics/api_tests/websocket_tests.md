@@ -75,7 +75,7 @@ Select the **Locations** to run your WebSocket test from. WebSocket tests can ru
 
 WebSocket tests can run:
 
-* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your WebSocket test.
+* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your WebSocket test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 

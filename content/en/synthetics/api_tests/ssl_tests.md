@@ -71,7 +71,7 @@ Select the **Locations** to run your SSL test from. SSL tests can run from both 
 
 SSL tests can run:
 
-* **On a schedule** to ensure your SSL/TLS certificates are always valid and that a secure connections is ensured to the users of your key services. Select the frequency you want Datadog to run your SSL test.
+* **On a schedule** to ensure your SSL/TLS certificates are always valid and that a secure connections is ensured to the users of your key services. Select the frequency at which you want Datadog to run your SSL test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 

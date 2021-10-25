@@ -64,7 +64,7 @@ Select the **Locations** to run your DNS test from: DNS tests can run from [mana
 
 DNS tests can run:
 
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your DNS test.
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your DNS test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 

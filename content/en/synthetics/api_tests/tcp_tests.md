@@ -58,7 +58,7 @@ Select the **Locations** to run your TCP test from: TCP tests can run from both 
 
 TCP tests can run:
 
-* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your TCP test.
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your TCP test.
 
 {{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
 
