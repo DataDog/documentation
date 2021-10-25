@@ -23,7 +23,7 @@ Datadog-CloudCheckr インテグレーションを使用し、現在と過去の
 
 ## セットアップ
 
-Datadog アプリケーションを CloudCheckr アカウントにバインド手順は、以下のとおりです。
+Datadog アカウントを CloudCheckr アカウントにバインドする手順は、以下のとおりです。
 
 - CloudCheckr 拡張機能をクリックします。
 - [Datadog API キーとアプリケーションキー][1]を追加します。
