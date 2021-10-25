@@ -48,7 +48,7 @@ Leverage the pillars of observability with metrics and traces:
 
 Start exploring your ingested logs:
 
-{{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
+{{< img src="/logs/explore.jpg" alt="Explore your ingested logs" style="width:80%;">}}
 
 - [Log Explorer][6]: Discover the Log Explorer view, and how to add Facets and Measures.
 - [Search][7]: Search through all of your logs.

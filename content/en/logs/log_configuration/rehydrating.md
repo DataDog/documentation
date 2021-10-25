@@ -71,7 +71,7 @@ Once the content is rehydrated, the historical view is marked as active, and the
 
 #### From the log explorer
 
-Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
+Alternatively, teams can find the historical view from the Log Explorer directly from the index selector.
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
