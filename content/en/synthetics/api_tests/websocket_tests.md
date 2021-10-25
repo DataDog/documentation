@@ -13,7 +13,7 @@ further_reading:
 ---
 ## Overview
 
-WebSocket tests allow you to proactively open WebSocket connections on your endpoints to verify responses and defined conditions, such as overall response time or expected header.
+WebSocket tests allow you to proactively open WebSocket connections on your endpoints to verify responses and defined conditions, such as overall response times or expected headers.
 
 WebSocket tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. WebSocket tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
@@ -76,11 +76,8 @@ Select the **Locations** to run your WebSocket test from. WebSocket tests can ru
 WebSocket tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your WebSocket test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
 * [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
-* **On-demand** to run your tests whenever makes the most sense for your teams.
+* **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
 
@@ -103,7 +100,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
 
-1. [Similar to monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `�@notification`�to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
@@ -153,10 +150,12 @@ To display your list of variables, type `{{` in your desired field:
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or several assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. Reasons for this include:
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+
+These reasons include the following:
 
 `CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
+: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
@@ -187,7 +186,7 @@ If you have access to the [custom role feature][11], add your user to any custom
 [3]: /synthetics/cicd_testing
 [4]: /synthetics/search/#search
 [5]: /synthetics/settings/#global-variables
-[6]: /monitors/notifications/?tab=is_alert#notification
+[6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [9]: /synthetics/api_tests/errors/#ssl-errors
