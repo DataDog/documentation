@@ -295,11 +295,11 @@ If the Git information is not detected automatically, you can set the following 
 
 `DD_GIT_COMMIT_AUTHOR_NAME` (Optional)
 : The name of the author of the commit.<br/>
-**Example**: `John Doe`
+**Example**: `John Smith`
 
 `DD_GIT_COMMIT_AUTHOR_EMAIL` (Optional)
 : The email of the author of the commit.<br/>
-**Example**: `john@doe.com`
+**Example**: `john@example.com`
 
 `DD_GIT_COMMIT_AUTHOR_DATE` (Optional)
 : The date when the author submitted the commit expressed in ISO 8601 format.<br/>
@@ -307,11 +307,11 @@ If the Git information is not detected automatically, you can set the following 
 
 `DD_GIT_COMMIT_COMMITTER_NAME` (Optional)
 : The name of the committer of the commit.<br/>
-**Example**: `Jane Doe`
+**Example**: `Jane Smith`
 
 `DD_GIT_COMMIT_COMMITTER_EMAIL` (Optional)
 : The email of the committer of the commit.<br/>
-**Example**: `jane@doe.com`
+**Example**: `jane@example.com`
 
 `DD_GIT_COMMIT_COMMITTER_DATE` (Optional)
 : The date when the committer submitted the commit expressed in ISO 8601 format.<br/>
