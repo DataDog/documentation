@@ -97,7 +97,34 @@
               },
               "cells": [
                 {
-                  "attributes": {},
+                  "attributes": [
+                    {
+                      "definition": {
+                        "requests": [
+                          {
+                            "display_type": "line",
+                            "q": "avg:system.load.1{*}",
+                            "style": {
+                              "line_type": "solid",
+                              "line_width": "normal",
+                              "palette": "dog_classic"
+                            }
+                          }
+                        ],
+                        "show_legend": true,
+                        "type": "timeseries",
+                        "yaxis": {
+                          "scale": "linear"
+                        }
+                      },
+                      "graph_size": "m",
+                      "split_by": {
+                        "keys": [],
+                        "tags": []
+                      },
+                      "time": null
+                    }
+                  ],
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -286,7 +313,34 @@
               },
               "cells": [
                 {
-                  "attributes": {},
+                  "attributes": [
+                    {
+                      "definition": {
+                        "requests": [
+                          {
+                            "display_type": "line",
+                            "q": "avg:system.load.1{*}",
+                            "style": {
+                              "line_type": "solid",
+                              "line_width": "normal",
+                              "palette": "dog_classic"
+                            }
+                          }
+                        ],
+                        "show_legend": true,
+                        "type": "timeseries",
+                        "yaxis": {
+                          "scale": "linear"
+                        }
+                      },
+                      "graph_size": "m",
+                      "split_by": {
+                        "keys": [],
+                        "tags": []
+                      },
+                      "time": null
+                    }
+                  ],
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }
@@ -360,7 +414,34 @@
               },
               "cells": [
                 {
-                  "attributes": {},
+                  "attributes": [
+                    {
+                      "definition": {
+                        "requests": [
+                          {
+                            "display_type": "line",
+                            "q": "avg:system.load.1{*}",
+                            "style": {
+                              "line_type": "solid",
+                              "line_width": "normal",
+                              "palette": "dog_classic"
+                            }
+                          }
+                        ],
+                        "show_legend": true,
+                        "type": "timeseries",
+                        "yaxis": {
+                          "scale": "linear"
+                        }
+                      },
+                      "graph_size": "m",
+                      "split_by": {
+                        "keys": [],
+                        "tags": []
+                      },
+                      "time": null
+                    }
+                  ],
                   "id": "abcd1234",
                   "type": "notebook_cells"
                 }

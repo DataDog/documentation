@@ -237,12 +237,8 @@
       options:
         dest_path: '/serverless/libraries_integrations/'
         file_name: 'plugin.md'
-        front_matters:
-          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
-          title: Datadog Serverless Plugin
-          kind: documentation
-          aliases:
-            - /serverless/serverless_integrations/plugin/
+        # front_matters:
+        #   dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
 
   - repo_name: datadog-cloudformation-macro
     contents:

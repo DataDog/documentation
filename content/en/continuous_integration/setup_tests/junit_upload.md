@@ -164,7 +164,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 [1]: https://junit.org/junit5/
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://git-scm.com/downloads
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}

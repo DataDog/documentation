@@ -26,4 +26,4 @@ To bind your Datadog account to your Cloudability account:
 - Login to Cloudability >> Settings >> Vendor Credentials.
 - Add your [Datadog API and application keys][1].
 
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/organization-settings/api-keys

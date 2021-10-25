@@ -104,7 +104,7 @@ self.event(
 
 7. 最後に、[Datadog のイベントストリーム][5]に移動して、イベントを確認します。
 
-{{< img src="developers/events/agent_check/event_stream_example.png" alt="イベントストリームの例"  style="width:80%;">}}
+{{< img src="developers/events/agent_check/event_stream_example.png" alt="イベントストリームの例" style="width:80%;">}}
 
 ## その他の参考資料
 
