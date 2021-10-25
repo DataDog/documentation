@@ -21,7 +21,7 @@ further_reading:
 
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. In order to expose this information, group your logs by [fields](#fields), identify [patterns](#patterns), or aggregate your logs into [transactions](#transactions).
 
-Switch between different aggregations of your queried logs with the logs query editor. The fields you select to group, aggregate, and measure your logs will be saved as you switch between different visualizations and aggregation types.
+Switch between different aggregations of your queried logs with the logs query editor. The fields you select to group, aggregate, and measure your logs are saved as you switch between different visualizations and aggregation types.
 
 {{< img src="logs/explorer/aggregations.jpg" alt="Log Livetail" style="width:100%;" >}}
 
