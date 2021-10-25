@@ -23,8 +23,6 @@ After choosing to create an `WebSocket` test, define your test's request.
 
 ### Define request
 
-{{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request"  style="width:90%;" >}}
-
 1. Specify the **URL** to run your test on.
 2. Enter the string you want to send in your test. 
 2. Add **Advanced Options** (optional) to your test:
@@ -50,6 +48,8 @@ After choosing to create an `WebSocket` test, define your test's request.
 
 4. **Name** your WebSocket test.
 5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+
+{{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
@@ -100,7 +100,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
 
-1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `�@notification`�to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
