@@ -65,7 +65,7 @@ main_left:
     parent: product
   - identifier: security-platform
     name: Security Platform
-    pre: '<i class="icon-security align-middle"></i>'
+    pre: '<i class="icon-security-platform align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/security-platform/"
     weight: 11
     parent: product
@@ -77,7 +77,7 @@ main_left:
     parent: product
   - identifier: cloud-security-posture-management
     name: CSPM
-    pre: '<i class="icon-security align-middle"></i>'
+    pre: '<i class="icon-security-platform align-middle"></i>'
     url: "https://www.datadoghq.com/ja/product/security-platform/cloud-security-posture-management/"
     weight: 13
     parent: product
