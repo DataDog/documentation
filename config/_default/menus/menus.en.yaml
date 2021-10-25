@@ -65,13 +65,13 @@ main_left:
     parent: product
   - identifier: security-platform
     name: Security Platform
-    pre: <i class="icon-security align-middle"></i>
+    pre: <i class="icon-security-platform align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/'
     weight: 11
     parent: product
   - identifier: security-monitoring
     name: Security Monitoring
-    pre: <i class="icon-security align-middle"></i>
+    pre: <i class="icon-siem align-middle"></i>
     url: 'https://www.datadoghq.com/product/security-platform/security-monitoring/'
     weight: 12
     parent: product
@@ -2301,7 +2301,7 @@ main:
     weight: 7
   - name: Security Platform
     url: security_platform/
-    pre: security
+    pre: security-platform
     identifier: security_platform
     weight: 180000
   - name: Security Monitoring
