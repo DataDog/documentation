@@ -25,7 +25,7 @@ Log Explorer search consists of a timerange and a search query, mixing `key:valu
 
 For example, to filter on logs produced by a specific service, with a specific status, over the past five minutes, you can create a custom query such as `service:payment status:error rejected` and set the timerange to the `Past 5 minutes`:
 
-{{< img src="logs/explorer/search_filter.png" alt="Search Filter" style="width:100%;" >}}
+{{< img src="logs/explorer/search_filter.jpg" alt="Search Filter" style="width:100%;" >}}
 
 [Indexed Logs][3] support both full-text search and `key:value` search queries.
 
