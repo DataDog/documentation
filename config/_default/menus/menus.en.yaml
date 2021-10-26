@@ -2829,6 +2829,10 @@ main:
     parent: dev_tools
     identifier: marketplace
     weight: 4
+  - name: Datadog Apps
+    url: developers/datadog_apps
+    parent: dev_tools
+    weight: 5
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
