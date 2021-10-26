@@ -179,6 +179,15 @@ Override the port that the default tracer submits DogStatsD metrics to.
 : **Default**: `false`<br>
 Enable [connecting logs and trace injection][9].
 
+`DD_PROPAGATION_STYLE_INJECT`
+: **Default**: `Datadog`<br>
+Propagation styles to use when injecting tracing headers. For example, use `DD_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
+
+
+`DD_PROPAGATION_STYLE_EXTRACT`
+: **Default**: Value of `DD_PROPAGATION_STYLE_INJECT` (`Datadog`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is static and unrelated to the order of values given. For example: `DD_PROPAGATION_STYLE_EXTRACT=B3,Datadog` will produce the same behavior as `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
