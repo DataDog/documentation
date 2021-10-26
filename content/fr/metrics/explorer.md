@@ -58,7 +58,7 @@ Utilisez les boutons en bas à gauche pour exporter tous vos graphiques vers un 
 
 ### Snapshot
 
-Pour créer un snapshot d'un graphique spécifique, cliquez sur l'icône en forme d'appareil photo en haut à droite de celui-ci.
+Pour créer un snapshot d'un graphique spécifique, cliquez sur l'icône de partage en haut à droite de celui-ci pour afficher un menu déroulant, puis sélectionnez l'option **Send snapshot…**
 
 ## Pour aller plus loin
 

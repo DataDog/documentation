@@ -408,7 +408,7 @@ using (var log = new LoggerConfiguration()
 ```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
