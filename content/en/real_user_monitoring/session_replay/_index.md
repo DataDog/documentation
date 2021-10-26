@@ -1,7 +1,9 @@
 ---
-title: Getting Started with Session Replay
-kind: guide
+title: Session Replay
+kind: documentation
 description: Guide for enabling Session Replay and how to set privacy options
+aliases:
+  - /real_user_monitoring/guide/session-replay-getting-started
 further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
@@ -11,10 +13,7 @@ further_reading:
       text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-<div class="alert alert-info"><p>Session Replay is in open beta. There are no billing implications for the Session Replays during this period. If you have any questions, email <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p><p>Session Replay is available on <a href="/getting_started/site/">US1 and EU Datadog sites</a>.</p>
-</div>
-
-## What is Session Replay?
+## Overview
 
 Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users.
 
@@ -54,9 +53,9 @@ datadogRum.startSessionReplayRecording();
 
 Replace the Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v3.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
 
-*Supported browsers*: The Session Replay recorder supports all the browsers supported by the RUM Browser SDK with the exception of IE11. See the [browser support table][3].
+The Session Replay recorder supports all browsers supported by the RUM Browser SDK with the exception of IE11. For more information, see the [browser support table][3].
 
-#### Configuration
+### Configuration
 
 The usual [RUM initialization parameters][4] are all supported.
 
@@ -72,9 +71,6 @@ The Session Replay recording can be stopped by calling `stopSessionReplayRecordi
 
 ### Sensitive & personal data obfuscation
 
-<div class="alert alert-info">
-The Privacy by Default feature changes how the SDK manages privacy.
-</div>
 
 By default, the SDK protects end-user privacy and sensitive organizational information from being recorded by automatically masking form fields such as password inputs and text areas.
 
@@ -182,6 +178,10 @@ Expected Network bandwidth impact is less than 100Kb/min. Refined estimates will
 ### How long is a Session Replay available?
 
 Session Replay follows the same 30 days retention policy as normal RUM sessions.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#setup
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
